@@ -1,14 +1,14 @@
 # einhq.github.io
 
-EiN's presentation page, in five chapters that are the top bar's links. Core is EiN itself, naming
-no module: nodes and the core's node types, the tree, the shell, the web interface, pipelines and
-modules. Assistant is the chat and what it does on any installation, ending where it has a real
-purpose, the Archive. Archive is the first module, with the screenshots from the demo archive, its
-media types and pipelines, asking the assistant about the family, and the media service.
-Screenshots is a gallery of almost every page, and Getting started holds the system requirements,
-how to install and the source. Core opens on the hero, whose field wears the interface's mixed
-pattern as its home page does; each other chapter opens on a band of hats in the colour of the
-interface's pages it is about.
+EiN's presentation page, in five chapters that are the top bar's links. It opens on the hero, whose
+field wears the interface's mixed pattern as its home page does, and how to install comes right
+under it. Core is EiN itself, naming no module: nodes and the core's node types, the tree, the
+shell, the web interface, pipelines and modules. Assistant is the chat and what it does on any
+installation, ending where it has a real purpose, the Archive. Archive is the first module, with the
+screenshots from the demo archive, its media types and pipelines, asking the assistant about the
+family, and the media service. Screenshots is a gallery of almost every page, and the system
+requirements and the source close the page, Getting started's like the install. Each chapter opens
+on a band of hats in the colour of the interface's pages it is about.
 It is the GitHub Pages site of the [einhq](https://github.com/einhq) organisation, served at
 <https://einhq.eu> (`CNAME`).
 

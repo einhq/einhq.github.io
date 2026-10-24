@@ -3,25 +3,25 @@
     "file": "person-01.avif",
     "kind": "person",
     "name": "Helen Okafor",
-    "detail": "35 pictures"
+    "detail": "37 pictures"
   },
   {
     "file": "person-02.avif",
     "kind": "person",
     "name": "David Okafor",
-    "detail": "30 pictures"
+    "detail": "33 pictures"
   },
   {
     "file": "person-03.avif",
     "kind": "person",
     "name": "Ruby Wrenfield",
-    "detail": "12 pictures"
+    "detail": "13 pictures"
   },
   {
     "file": "person-04.avif",
     "kind": "person",
     "name": "Peggy Wrenfield",
-    "detail": "5 pictures"
+    "detail": "6 pictures"
   },
   {
     "file": "person-05.avif",
@@ -33,7 +33,7 @@
     "file": "person-06.avif",
     "kind": "person",
     "name": "Isla Price",
-    "detail": "6 pictures"
+    "detail": "7 pictures"
   },
   {
     "file": "person-07.avif",
@@ -57,7 +57,37 @@
     "file": "person-10.avif",
     "kind": "person",
     "name": "Freya Wrenfield",
-    "detail": "15 pictures"
+    "detail": "16 pictures"
+  },
+  {
+    "file": "person-11.avif",
+    "kind": "person",
+    "name": "Erik Wrenfield",
+    "detail": "23 pictures"
+  },
+  {
+    "file": "person-12.avif",
+    "kind": "person",
+    "name": "Grace Price",
+    "detail": "6 pictures"
+  },
+  {
+    "file": "person-13.avif",
+    "kind": "person",
+    "name": "Jon Wrenfield",
+    "detail": "14 pictures"
+  },
+  {
+    "file": "person-14.avif",
+    "kind": "person",
+    "name": "Kiri Wrenfield",
+    "detail": "11 pictures"
+  },
+  {
+    "file": "person-15.avif",
+    "kind": "person",
+    "name": "Leo Wrenfield",
+    "detail": "7 pictures"
   },
   {
     "file": "album-01.avif",
@@ -132,6 +162,30 @@
     "detail": "25 Dec 1975"
   },
   {
+    "file": "album-13.avif",
+    "kind": "album",
+    "name": "Leo comes home",
+    "detail": "May 2003"
+  },
+  {
+    "file": "album-14.avif",
+    "kind": "album",
+    "name": "A lockdown walk",
+    "detail": "4 Apr 2020 – 5 Apr 2020"
+  },
+  {
+    "file": "album-15.avif",
+    "kind": "album",
+    "name": "Jon's Wellington",
+    "detail": "29 Nov 2012 – 2 Jun 2019"
+  },
+  {
+    "file": "album-16.avif",
+    "kind": "album",
+    "name": "David's London",
+    "detail": "22 Mar 2015 – 17 Feb 2017"
+  },
+  {
     "file": "device-01.avif",
     "kind": "device",
     "name": "Erik's iPhone",
@@ -160,5 +214,17 @@
     "kind": "device",
     "name": "Helen's Coolpix",
     "detail": "NIKON COOLPIX S570"
+  },
+  {
+    "file": "device-06.avif",
+    "kind": "device",
+    "name": "Jon's X-Pro1",
+    "detail": "FUJIFILM X-Pro1"
+  },
+  {
+    "file": "device-07.avif",
+    "kind": "device",
+    "name": "Ruby's iPhone",
+    "detail": "Apple iPhone 15"
   }
 ]

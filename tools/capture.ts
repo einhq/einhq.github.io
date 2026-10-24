@@ -291,6 +291,11 @@ const HERO: Record<string, string[]> = {
     'Noah Price',
     'Arthur Wrenfield',
     'Freya Wrenfield',
+    'Erik Wrenfield',
+    'Grace Price',
+    'Jon Wrenfield',
+    'Kiri Wrenfield',
+    'Leo Wrenfield',
   ],
   album: [
     'Isla turns seven',
@@ -305,8 +310,12 @@ const HERO: Record<string, string[]> = {
     'Christmas at the cottage',
     "Helen and David's wedding",
     'Christmas 1975',
+    'Leo comes home',
+    'A lockdown walk',
+    "Jon's Wellington",
+    "David's London",
   ],
-  device: ["Erik's iPhone", "Peggy's Lumix", "David's 7D", "Grace's N95", "Helen's Coolpix"],
+  device: ["Erik's iPhone", "Peggy's Lumix", "David's 7D", "Grace's N95", "Helen's Coolpix", "Jon's X-Pro1", "Ruby's iPhone"],
 };
 
 /**

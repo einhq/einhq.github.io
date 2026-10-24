@@ -402,9 +402,10 @@ const GLYPHS = {
 
 /**
  * Lays the hats over `host`: the faces of the demo's people, the covers of its albums and cameras and
- * the drawn nodes spread over the whole field, dimmed where the copy stands over them, and every other
- * tile tinted in EiN's mixed pattern, brighter on the open side: right of the copy on a wide screen,
- * above the headline on a narrow one. A pictured tile's outline takes the pattern's colour where it lies.
+ * the drawn nodes spread over the whole field, dimmed where the copy stands over them and fading out
+ * towards its edges, and every other tile tinted in EiN's mixed pattern, brighter on the open side:
+ * right of the copy on a wide screen, above the headline on a narrow one. A pictured tile's outline
+ * takes the pattern's colour where it lies.
  */
 function layField(host, pictures, entering) {
   const width = host.clientWidth;
@@ -416,7 +417,7 @@ function layField(host, pictures, entering) {
   const headline = host.parentElement.querySelector('h1');
   const copyTop = headline ? headline.getBoundingClientRect().top - origin.top : height * 0.4;
   // The copy's box, around the lines of the headline and the lede and the buttons (a headline's
-  // own box is wider than its words), and where the key under it starts.
+  // own box is wider than its words).
   const lines = (selector) => {
     const range = document.createRange();
     const el = host.parentElement.querySelector(selector);
@@ -433,8 +434,6 @@ function layField(host, pictures, entering) {
       bottom: Math.max(...parts.map((r) => r.bottom)) - origin.top,
     }
     : null;
-  const key = host.parentElement.querySelector('.field-key');
-  const foot = key ? key.getBoundingClientRect().top - origin.top - 8 : height;
   const hatPx = width < 720 ? 60 : Math.min(112, Math.max(76, width / 14));
   const tiles = hatsIn(width, height, CUT, hatPx / HAT_WIDTH);
 
@@ -442,14 +441,18 @@ function layField(host, pictures, entering) {
   // brighter.
   const openness = (t) =>
     stacked ? 1 - smooth(copyTop * 0.5, copyTop * 0.92, t.cy) : smooth(width * 0.38, width * 0.8, t.cx) * (1 - smooth(height * 0.66, height * 0.92, t.cy));
-  // A picture behind the copy is dimmed, so the text over it stays easy to read.
+  // A picture behind the copy is dimmed, so the text over it stays easy to read, and one towards the
+  // field's edges fades out, as one cut by an edge runs on past it.
   const margin = hatPx * 0.3;
   const behindCopy = (t) => copy && t.cx > copy.x - margin && t.cx < copy.right + margin && t.cy > copy.y - margin && t.cy < copy.bottom + margin;
-  const whole = (t) => t.box.x >= 0 && t.box.y >= barBottom() && t.box.right <= width && t.box.bottom <= foot;
-  // Pictures go to whole tiles over the whole field, spread evenly: the most open tile first, then
-  // each time the tile farthest from those chosen, until every picture has a tile or no tile is a
-  // spacing clear of the others and touches none of them.
-  const free = tiles.filter(whole);
+  const top = barBottom();
+  const toEdge = (t) => Math.min(t.cx, width - t.cx, t.cy - top, height - t.cy);
+  const shown = (t) => (behindCopy(t) ? 0.4 : 1) * (0.2 + 0.8 * smooth(0, hatPx * 1.6, toEdge(t)));
+  // Pictures go to tiles over the whole field, edges and all, spread evenly: the most open tile
+  // first, then each time the tile farthest from those chosen, until every picture has a tile or no
+  // tile is a spacing clear of the others and touches none of them. A tile whose middle is off the
+  // field or under the top bar takes none.
+  const free = tiles.filter((t) => toEdge(t) >= 0);
   const chosen = [];
   while (chosen.length < pictures.length && free.length) {
     let best;
@@ -494,7 +497,7 @@ function layField(host, pictures, entering) {
       const accent = mixedAt(tile.cx / width);
       const group = svg('g', {
         class: 'tile tile-picture',
-        style: `--delay: ${delay.toFixed(0)}ms; --accent: ${accent}${behindCopy(tile) ? '; opacity: 0.4' : ''}`,
+        style: `--delay: ${delay.toFixed(0)}ms; --accent: ${accent}; opacity: ${shown(tile).toFixed(2)}`,
       });
       const clip = `hat-${tile.index}`;
       const clipPath = svg('clipPath', { id: clip });
@@ -781,7 +784,8 @@ function barBottom() {
 
 /**
  * The top bar: an edge once the page has scrolled, and its link to the chapter in view marked
- * (`aria-current`), the chapter being the last whose start has passed a third of the way down. On a
+ * (`aria-current`): the chapter (`ch-` class) of the last section whose start has passed a third of
+ * the way down, the hero's being the first link's. Getting started comes both first and last. On a
  * phone its links are a menu (site.css), which a chapter's link, Escape, a tap outside it or a wider
  * window closes again.
  */
@@ -789,12 +793,15 @@ function bar() {
   const header = document.querySelector('.bar');
   if (!header) return;
   const links = [...header.querySelectorAll('nav a')];
-  const starts = links.map((link) => document.querySelector(link.hash));
+  const sections = [...document.querySelectorAll('main > section')];
+  const chapterOf = (el) => [...el.classList].find((name) => name.startsWith('ch-'));
+  const linkOf = (section) => links.find((link) => chapterOf(link) === chapterOf(section)) ?? links[0];
   const update = () => {
     header.toggleAttribute('data-scrolled', scrollY > 8);
     const line = innerHeight / 3;
-    const at = starts.findLastIndex((start) => start && start.getBoundingClientRect().top <= line);
-    links.forEach((link, i) => i === at ? link.setAttribute('aria-current', 'true') : link.removeAttribute('aria-current'));
+    const section = sections.findLast((el) => el.getBoundingClientRect().top <= line);
+    const at = section && linkOf(section);
+    for (const link of links) link === at ? link.setAttribute('aria-current', 'true') : link.removeAttribute('aria-current');
   };
   addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update, { passive: true });

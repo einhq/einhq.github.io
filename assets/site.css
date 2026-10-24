@@ -569,7 +569,7 @@ kbd {
   display: grid;
   align-content: end;
   min-height: min(94vh, 900px);
-  padding: calc(120px + var(--notice-h)) var(--gutter) 40px;
+  padding: calc(120px + var(--notice-h)) var(--gutter) clamp(56px, 7vw, 104px);
   overflow: hidden;
   isolation: isolate;
 }
@@ -583,7 +583,8 @@ kbd {
   width: 100%;
   height: 100%;
 }
-/* The copy stands on a quieter left and foot of the field; the scrim paints above the tiles. */
+/* The copy stands on a quieter left and foot of the field, whose foot runs into the deep ground of
+ * Getting started under it; the scrim paints above the tiles. */
 .hero::before {
   content: '';
   position: absolute;
@@ -591,7 +592,7 @@ kbd {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(to top, var(--ink) 0%, rgb(18 21 28 / 0.55) 7%, transparent 13%),
+    linear-gradient(to top, var(--ink-deep) 0%, rgb(18 21 28 / 0.55) 7%, transparent 13%),
     linear-gradient(to right, rgb(18 21 28 / 0.72) 0%, rgb(18 21 28 / 0.5) 30%, transparent 46%);
 }
 .hero-copy {
@@ -666,12 +667,16 @@ kbd {
 .button-start:hover::before {
   transform: rotate(60deg);
 }
-
-.field-key {
-  width: min(100%, var(--wrap));
-  margin: 72px auto 0;
-  color: var(--muted);
-  font-size: var(--t-small);
+/* On a phone the way in takes the row, and the other two share the one under it. */
+@media (max-width: 780px) {
+  .actions .button {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding-inline: 16px;
+  }
+  .actions .button-start {
+    flex-basis: 100%;
+  }
 }
 
 /* The field's tiles (drawn by site.js, which paints them). */
@@ -865,10 +870,10 @@ kbd {
   color: var(--muted);
 }
 
-/* Stacked: the copy spans the width, so the field shows above it (site.js puts the pictures there). */
+/* Stacked: the copy spans the width, so the field shows above it. */
 @media (max-width: 999px) {
   .hero::before {
-    background: linear-gradient(to top, var(--ink) 0%, rgb(18 21 28 / 0.92) 50%, transparent 64%);
+    background: linear-gradient(to top, var(--ink-deep) 0%, rgb(18 21 28 / 0.92) 50%, transparent 64%);
   }
 }
 @media (max-width: 720px) {
@@ -877,10 +882,7 @@ kbd {
     padding-top: 46vh;
   }
   .hero::before {
-    background: linear-gradient(to top, var(--ink) 0%, var(--ink) 50%, rgb(18 21 28 / 0.7) 57%, transparent 63%);
-  }
-  .field-key {
-    margin-top: 48px;
+    background: linear-gradient(to top, var(--ink-deep) 0%, var(--ink) 50%, rgb(18 21 28 / 0.7) 57%, transparent 63%);
   }
 }
 
