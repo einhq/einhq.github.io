@@ -25,7 +25,7 @@ assets/nodes/       the faces and album covers the hero's tiles show, and their 
 assets/fonts/       Familjen Grotesk, Fragment Mono and Mochiy Pop One, the wordmark's and the headings', served from here
 assets/og.jpg       the link preview: the page's own hero at 1200 × 630, screenshotted from `make serve`
 assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.svg
-install.sh          what the page's install command fetches: for now a check of the machine only
+install.sh          what the page's install command fetches: it checks the machine, then fetches ein/deploy into ~/ein and runs its setup.sh
 ATTRIBUTION.md      who took each real photo in the demo, and under which licence: test-content's, copied
 tools/capture.ts    takes the screenshots and the node pictures from a running demo instance
 ```

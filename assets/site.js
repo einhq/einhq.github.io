@@ -642,7 +642,7 @@ function tabs() {
 }
 
 /**
- * The install command's copy button: copies the command as the page shows it, and where the
+ * The install commands' copy buttons: each copies its command as the page shows it, and where the
  * clipboard is refused, selects it for the visitor to copy. A status beside it says which.
  */
 function copyButtons() {

@@ -43,7 +43,7 @@
 
     <p class="notice">
       <strong>Work in progress</strong>
-      <span class="notice-long">EiN runs, but nothing is released yet: there is no version to install, and what this page shows may change.</span>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what this page shows may change.</span>
       <span class="notice-short">Nothing is released yet.</span>
       <a href="#install">How to try it</a>
     </p>
@@ -1457,7 +1457,7 @@ options:
             <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Getting started</p>
             <h2 id="requirements-title">System requirements</h2>
             <p>
-              EiN runs as four containers on one Linux machine. A graphics card is optional: without one every feature still works, more slowly. The recommended machine is the one EiN
+              EiN runs in containers on one Linux machine: EiN and its database always, the media service and the language model when you add them. A graphics card is optional: without one every feature still works, more slowly. The recommended machine is the one EiN
               is tuned and measured on; the minimum is an estimate that has not yet been run end to end.
             </p>
           </div>
@@ -1473,7 +1473,7 @@ options:
               <tbody>
                 <tr>
                   <th scope="row">System</th>
-                  <td colspan="2">Linux on x86-64, with rootless podman</td>
+                  <td colspan="2">Linux on x86-64, with rootless podman or Docker, and compose</td>
                 </tr>
                 <tr>
                   <th scope="row">Processor</th>
@@ -1492,7 +1492,7 @@ options:
                 </tr>
                 <tr>
                   <th scope="row">Storage</th>
-                  <td>About 100 GB free on an SSD for the images and the database, plus your files</td>
+                  <td>About 100 GB free on an SSD for the images and the database with the media service, 10 GB without, plus your files</td>
                   <td>The database on an SSD, your originals on a large disk or a NAS</td>
                 </tr>
                 <tr>
@@ -1517,11 +1517,11 @@ options:
               <dd>Every node, link, permission, vector, track and log, with TimescaleDB, pgvector and PostGIS. About 150 KB per original file.</dd>
             </div>
             <div>
-              <dt>Media service</dt>
-              <dd>Every model and media tool. An image of about 30 GB with the models built in, so nothing is downloaded at run time. Runs on an NVIDIA card or the CPU.</dd>
+              <dt>Media service <span class="chip">Option</span></dt>
+              <dd>Every model and media tool, which the Archive needs. An image of about 30 GB with the models built in, so nothing is downloaded at run time. Runs on an NVIDIA card or the CPU.</dd>
             </div>
             <div>
-              <dt>Language model <span class="chip">Optional</span></dt>
+              <dt>Language model <span class="chip">Option</span></dt>
               <dd>Qwen3.5-4B in llama.cpp for the assistant, 5.6 GB on the card or in memory. Or a hosted provider, or none.</dd>
             </div>
           </dl>
@@ -1541,8 +1541,8 @@ options:
           <div class="intro">
             <h2 id="install-title">Install</h2>
             <p>
-              <span class="chip">In progress</span> There is no installer yet, and no published container images. Today EiN is built from source on the machine it runs on. The
-              installer will be one command:
+              <span class="chip">In progress</span> Nothing is released yet and there are no published images, so the installer builds EiN from source on the machine it runs on and
+              starts it with podman compose or docker compose. One command:
             </p>
           </div>
           <div class="install">
@@ -1551,31 +1551,28 @@ options:
             <span class="sr-only" role="status"></span>
           </div>
           <p class="install-note">
-            For now the script only checks your machine against the requirements above and says what is missing. It installs nothing. <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">Read it first</a>.
+            It checks the machine against the requirements above and stops if something is missing. Then it fetches <a href="https://github.com/einhq/deploy">deploy</a> into
+            <code>~/ein</code>, builds and starts EiN and its database, and prints the admin password to sign in with. <a
+              href="https://github.com/einhq/einhq.github.io/blob/main/install.sh"
+            >Read it first</a>.
           </p>
 
-          <h3 class="sub">Until then: build it from source</h3>
+          <h3 class="sub">Adding to it</h3>
           <ol class="steps">
-            <li>Start the database with <code>db/run.sh</code>: PostgreSQL 18 with TimescaleDB and pgvector. Change its fixed password before the machine faces a network.</li>
             <li>
-              Make the storage folders: your originals, the thumbnails and copies, scratch space, and an empty folder for <code>OLD_PATH</code>, which both containers mount.
+              The media service, which the Archive needs: <code>--ems</code>. An image of about 30 GB with every model in it, built once, and the graphics card if there is one.
             </li>
-            <li>
-              Build the media service with <code>make build</code> (about 30 GB, every model downloaded once), then <code>make run</code> with a random key, <code>GPU=1</code> if you
-              have a card, and those folders.
-            </li>
-            <li>Optionally start the assistant's model with <code>llm/run.sh</code>, or point the assistant at a hosted provider.</li>
-            <li>
-              In EiN's repository, clone the modules it runs into <code>modules/</code> (<code>module-archive</code>, <code>module-ems</code>, <code>module-assistant</code>), write the media
-              service's address and key to a settings file, then run <code>deno task bundle-ui</code>, <code>make container-build</code> and <code>make container-run</code> with that
-              file as <code>ENV_FILE</code>, the database address and the same folders.
-            </li>
-            <li>Read the admin password from the log (<code>Admin password set to: …</code>), sign in at port 8080, and change it.</li>
+            <li>The assistant's language model: <code>--llm</code>. Or a hosted provider, set in <code>~/ein/.env</code>.</li>
+            <li>A module: <code>--module archive</code>, which brings the modules it needs with it.</li>
+            <li>Updates: <code>~/ein/setup.sh</code> again fetches the newest sources, rebuilds and restarts, keeping every option chosen before.</li>
           </ol>
-          <p class="install-note">
-            To see it work before your own files go in, load the invented family's 48-file sample from <code>test-content</code>. The repositories are being prepared for publishing
-            under <a href="https://github.com/einhq">einhq</a>.
-          </p>
+          <p class="install-note">The options go to the installer, or to <code>~/ein/setup.sh</code> any time after. The whole Archive, with every option:</p>
+          <div class="install">
+            <pre class="term" tabindex="0"><code><span class="p">$</span> curl -fsSL https://einhq.github.io/install.sh | bash -s -- --ems --llm --module archive</code></pre>
+            <button class="copy" type="button" data-copy hidden>Copy</button>
+            <span class="sr-only" role="status"></span>
+          </div>
+          <p class="install-note">To see it work before your own files go in, load the invented family's 48-file sample from <code>test-content</code>.</p>
         </div>
       </section>
 
@@ -1583,7 +1580,7 @@ options:
         <div class="wrap">
           <div class="intro">
             <h2 id="source-title">Open source</h2>
-            <p>EiN and the libraries it is built on. The three libraries are on JSR already; the rest are on their way to GitHub.</p>
+            <p>EiN and the libraries it is built on, on GitHub under <a href="https://github.com/einhq">einhq</a>. The three libraries are on JSR too.</p>
           </div>
           <ul class="repos">
             <li><strong>core</strong><span>EiN itself: the node tree, the shell, the pipelines, the web interface, SSH and SFTP. TypeScript on Deno. MIT.</span></li>
@@ -1591,6 +1588,7 @@ options:
             <li><strong>module-assistant</strong><span>The chat that answers questions about the archive. MIT.</span></li>
             <li><strong>module-ems</strong><span>EiN's client for the media service. MIT.</span></li>
             <li><strong>ems</strong><span>The media service: every media tool and model behind one HTTP API. Python.</span></li>
+            <li><strong>deploy</strong><span>EiN on one machine with podman compose or docker compose: what the installer fetches and runs. MIT.</span></li>
             <li><strong>db</strong><span>The PostgreSQL 18 image and its run script.</span></li>
             <li><strong>llm</strong><span>The assistant's local language model: llama.cpp's server and its run script.</span></li>
             <li><strong>bash-parser</strong><span>Parses bash 5.2 syntax into a syntax tree. <code>@ein/bash-parser</code> on JSR. MIT.</span></li>
