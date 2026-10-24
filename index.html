@@ -1,0 +1,1624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EiN – Everything is a Node</title>
+    <meta
+      name="description"
+      content="EiN is a system you host yourself in which everything is a node in one tree: files, accounts, logs, queues and its own commands. A web interface, a bash-compatible shell and pipelines work on that tree, and modules decide what it is for, starting with an archive for a family's photos, videos, recordings and letters."
+    >
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.github.io/">
+    <meta property="og:title" content="EiN – Everything is a Node">
+    <meta property="og:description"
+      content="One tree of nodes, a real shell, a web interface and pipelines, on your own machine. Its first module keeps a family's photos, videos, recordings and letters.">
+    <meta property="og:image" content="https://einhq.github.io/assets/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Everything is a Node: EiN's headline beside a field of hat-shaped tiles holding the faces of an invented family">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.github.io/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icon-180.png">
+    <link rel="preload" href="assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/site.css">
+    <link rel="modulepreload" href="assets/hat-tiling.js">
+    <script type="module" src="assets/site.js"></script>
+  </head>
+  <body>
+    <svg width="0" height="0" class="defs" aria-hidden="true">
+      <defs>
+        <!-- EiN's tile, the einstein hat, scaled to a 7 × 7 box. -->
+        <symbol id="hat" viewBox="-2 -2.567 7 7">
+          <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="#top" aria-label="EiN, to the top">
+        <img src="assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav aria-label="Chapters">
+        <a class="ch-core" href="#top">Core</a>
+        <a class="ch-assistant" href="#assistant">Assistant</a>
+        <a class="ch-archive" href="#archive">Archive</a>
+        <a class="ch-screenshots" href="#screenshots">Screenshots</a>
+        <a class="ch-start" href="#start">Getting started</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">GitHub</a>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="field" data-field aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p
+            class="wip"><span class="chip">Work in progress</span>EiN runs, but nothing is released yet: there is no version to install, and what this page shows may change.</p>
+          <h1 id="hero-title">Everything is a Node.</h1>
+          <p class="lede">
+            EiN is a system you host yourself, built on one idea: files, accounts, logs, queues and even its own commands are nodes in one tree, each with an owner and permissions.
+            You work on the tree from a web interface or a real bash shell, pipelines act on every change, and modules decide what it is for.
+          </p>
+          <div class="actions">
+            <a class="button button-primary" href="#nodes">See how it works</a>
+            <a class="button" href="#archive">Meet the Archive</a>
+          </div>
+        </div>
+        <p class="field-key">Each tile is a node: the Archive demo's people and albums, beside shells, logs, pipelines, recordings, places and letters.</p>
+      </section>
+
+      <section class="nodes ch-core" id="nodes" aria-labelledby="nodes-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="nodes-title">One tree of nodes</h2>
+            <p>
+              A node has a type, the attributes that type needs, an owner, a group and permission bits, and a name in a folder. It can have names in several folders at once, as a
+              hard link does, so one thing is never copied to be in two places. Each part of the tree is kept by a store, and a node looks the same whichever store holds it.
+            </p>
+          </div>
+          <div class="node-grid">
+            <figure class="node-card" aria-labelledby="node-card-caption">
+              <dl>
+                <div>
+                  <dt>id</dt>
+                  <dd><code>01JZ8Q4T2MXK6V3B9C7D5E1F0G</code>, a ULID that never changes, whatever the node is renamed or moved to</dd>
+                </div>
+                <div>
+                  <dt>type</dt>
+                  <dd><code>file</code>, <code>user</code>, <code>queue</code>, or a type a module adds</dd>
+                </div>
+                <div>
+                  <dt>props</dt>
+                  <dd>Owner, group and mode, with an optional access list; who created it, last changed it and last wrote it, and when; how many folders hold it</dd>
+                </div>
+                <div>
+                  <dt>attrs</dt>
+                  <dd>JSON shaped by the type: a file's mimetype, size and SHA-256, a log's retention, a position's shape on the map</dd>
+                </div>
+              </dl>
+              <figcaption id="node-card-caption">What every node is made of.</figcaption>
+            </figure>
+            <div class="types">
+              <h3>The core's 17 node types</h3>
+              <div class="type-groups">
+                <section>
+                  <h4>Content</h4>
+                  <p><code>directory</code> <code>file</code> <code>softlink</code></p>
+                </section>
+                <section>
+                  <h4>Space and similarity</h4>
+                  <p><code>position</code> <code>track</code> <code>embedding</code></p>
+                </section>
+                <section>
+                  <h4>People and access</h4>
+                  <p><code>user</code> <code>group</code> <code>session</code> <code>tty</code> <code>share-link</code></p>
+                </section>
+                <section>
+                  <h4>The machinery</h4>
+                  <p><code>command</code> <code>log</code> <code>queue</code> <code>pool</code> <code>router</code> <code>null</code></p>
+                </section>
+              </div>
+              <p class="types-note">
+                A track is a timed GPS route, an embedding a vector for searching by likeness. A pool holds background jobs that workers claim, a router broadcasts live events.
+                Modules add types of their own, and the documentation lists every type with the module that adds it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tree deep ch-core" id="tree" aria-labelledby="tree-title">
+        <div class="wrap split">
+          <div class="intro">
+            <h2 id="tree-title">A file system for everything</h2>
+            <p>
+              The nodes form one virtual file system with a familiar layout. The commands are nodes under <code>/usr/bin</code>, every account is a node under
+              <code>/etc/users</code>, and a service is a folder with a start script. Parts of the tree can be mounted from elsewhere: memory for <code>/tmp</code>, a folder on the
+              host, or another machine over SFTP.
+            </p>
+            <ul class="points">
+              <li>Permissions work as in Unix, with owner, group and other bits, plus access lists that only grant. One check applies in the browser, the shell, SSH and SFTP.</li>
+              <li>Every change is written to an audit trail in the same transaction: who, from which session or pipeline, and the values before and after.</li>
+              <li>A deleted node waits 30 days in its owner's trash, and restoring it puts back the same nodes, links and all.</li>
+              <li>Every change is an event that pipelines and commands can wait for: <code>tail -f</code> follows a log as it is written, and <code>cat</code> on a router node prints events as they arrive.</li>
+            </ul>
+          </div>
+          <pre class="term tree-map" tabindex="0" aria-label="The top of EiN's tree"><code><span class="p">/</span>
+├── archive      <span class="p">what the modules keep</span>
+├── home/helen   <span class="p">an account's own files and trash</span>
+├── etc          <span class="p">users, groups, services, settings</span>
+├── var          <span class="p">logs, sessions, queues, pools,</span>
+│                <span class="p">pipeline runs</span>
+├── usr
+│   ├── bin      <span class="p">every command, as a node</span>
+│   ├── modules  <span class="p">the installed modules</span>
+│   └── docs     <span class="p">the documentation</span>
+├── dev          <span class="p">null, and the live events</span>
+└── tmp          <span class="p">in memory, swept after a day</span></code></pre>
+        </div>
+      </section>
+
+      <section class="shell ch-core" id="shell" aria-labelledby="shell-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="shell-title">A real shell on the tree</h2>
+            <p>
+              EiN comes with a bash-compatible shell and more than 200 commands of its own, from <code>ls</code>, <code>find</code> and <code>awk</code> to managing users,
+              services and pipelines. Modules add theirs beside them. The shell runs inside EiN, so a command works on nodes, as the person who runs it, with that person's
+              permissions.
+            </p>
+          </div>
+          <div class="shell-grid">
+            <div class="shell-doors">
+              <h3>Through every door</h3>
+              <p>Press <kbd>Alt</kbd>+<kbd>T</kbd> on any page for a terminal, or log in with SSH. The same server speaks SFTP, so the tree mounts as a folder.</p>
+              <pre class="term" tabindex="0"><code><span class="p">$</span> ssh -p 2222 helen@ein.example
+<span class="p">helen@:~$</span> ls /etc/services
+<span class="p">helen@:~$</span> tail -f /var/logs/system
+<span class="p">helen@:~$</span> JSON_OUTPUT=1 ls ~
+<span class="p">helen@:~$</span> nohup ./reindex.sh &amp;
+<span class="p">$</span> sshfs -p 2222 helen@ein.example:/ ~/ein -o transform_symlinks</code></pre>
+            </div>
+            <ul class="points shell-points">
+              <li>
+                The parser and the executor are libraries of their own, <code>@ein/bash-parser</code> and <code>@ein/bash-executor</code>, and their bash compatibility is
+                measured with GNU bash's own test suite.
+              </li>
+              <li>With <code>JSON_OUTPUT=1</code>, commands answer in JSON; text tools such as <code>grep</code> stay text.</li>
+              <li>A bash script that declares its arguments becomes a command, with <code>--help</code> and Tab completion.</li>
+              <li>Jobs, pipes and signals work as in bash. A job started with <code>nohup</code> keeps running after the tab or the SSH session closes.</li>
+              <li>Every command declares whether it reads or writes, and some are for administrators only, so a whole command line can be judged before it runs.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="interface deep ch-core" id="interface" aria-labelledby="interface-title">
+        <div class="wrap split">
+          <div class="intro">
+            <h2 id="interface-title">A web interface that runs the same commands</h2>
+            <p>
+              The browser keeps one connection open to the server and gets each page's data by running shell commands as you, reading their answers in JSON. Anything you can
+              click you can script, and what you may not see in the shell you cannot see in the browser either.
+            </p>
+            <p>
+              The core brings the frame and the pages every installation needs: a home page, search, a finder on <kbd>Ctrl</kbd>+<kbd>K</kbd> that also runs commands, the
+              terminal, a node explorer, the system dashboard, accounts, groups and permissions, a trash, and documentation for every command, setting and node type. A module adds
+              entries to the sidebar and the top bar and the pages they open, as a page, a dialog, a drawer or full screen.
+            </p>
+          </div>
+          <ol class="layers" aria-label="How a request reaches the tree">
+            <li>
+              <strong>The doors</strong>
+              <span>The web interface, its terminal, SSH and SFTP</span>
+            </li>
+            <li>
+              <strong>The shell</strong>
+              <span>A command line, run as the person who sent it</span>
+            </li>
+            <li>
+              <strong>One permission check</strong>
+              <span>The same for every door, down to each node and its folders</span>
+            </li>
+            <li>
+              <strong>The tree</strong>
+              <span>Nodes, links and events, in whichever store holds them</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="pipelines ch-core" id="pipelines" aria-labelledby="pipelines-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="pipelines-title">Pipelines act on every change</h2>
+            <p>
+              A pipeline is a short YAML file: what starts it, a change to the tree or a fact a module announces, and the commands to run, as steps that may depend on each other.
+              Work waits in durable queues, so nothing is lost when the server restarts, and a node waits once for a pipeline however many times it changes.
+            </p>
+          </div>
+          <div class="shell-grid">
+            <div>
+              <pre class="term" tabindex="0" aria-label="A whole pipeline: unpacking a zip dropped in an inbox"><code>name: inbox-unzip
+description: Unpack a zip dropped in an inbox, then remove it
+
+trigger:
+  event: updated
+  nodeType: file
+  match:
+    nodePath: '/home/*/inbox/**'
+    mimetype: application/zip
+  <span class="c"># once the upload has ended: its checksum is written last</span>
+  filter: JSON_OUTPUT=1 attrs "$NODE_PATH" | jq -e .sha256 &gt; /dev/null
+
+steps:
+  expand:
+    command: unzip -n -d "$(dirname $NODE_PATH)" $NODE_PATH
+  remove:
+    command: rm $NODE_PATH
+    dependsOn: [expand]
+
+options:
+  maxAttempts: 2</code></pre>
+              <p class="term-caption">
+                A whole pipeline: when a zip has finished arriving in someone's inbox folder, unpack it beside itself and remove it. <code>pipeline define</code> registers it.
+              </p>
+            </div>
+            <ul class="points">
+              <li>A step can ask for a pool of workers and the resources it needs, such as room on the graphics card, and runs when they are free.</li>
+              <li>A step that meets a busy service hands its job back and waits, without counting it as a failure. Bad input fails at once and is not retried.</li>
+              <li>A failed run is tried again after an hour, six hours and a day, then marked as needing a person.</li>
+              <li>Bulk work, such as reprocessing everything a module keeps, gives way to what was just added.</li>
+              <li>Services, from the web server to the pipeline engine, are supervised and restarted by their own policy, each with its own log.</li>
+            </ul>
+          </div>
+
+          <div class="split keeping-up">
+            <div class="intro">
+              <h3>It tells you whether it is keeping up</h3>
+              <p>
+                The system dashboard opens on one word, Healthy, Catching up, Stuck or Needs a person, with the reasons for it. Its tabs show the machine's load, how long the disks
+                will last, every pipeline with its backlog and when it will be done, the services and a live log.
+              </p>
+            </div>
+            <div class="shot">
+              <img
+                src="assets/shots/dashboard.webp"
+                srcset="assets/shots/dashboard.webp 1200w, assets/shots/dashboard@2x.webp 2400w"
+                sizes="(min-width: 1240px) 635px, (min-width: 961px) 52vw, 92vw"
+                width="1200"
+                height="650"
+                loading="lazy"
+                alt="The system dashboard saying Healthy, nothing waiting, with CPU, memory, GPU and video memory gauges, the work done per hour, and the free space on each disk"
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="modules deep ch-core" id="modules" aria-labelledby="modules-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="modules-title">Everything else is a module</h2>
+            <p>
+              The core is the tree, the shell, the pipelines, accounts and sharing, and the web interface's frame. What EiN is for comes from modules. A module is a folder with a
+              manifest, and what it adds is what its folders hold.
+            </p>
+          </div>
+          <div class="shell-grid">
+            <pre class="term" tabindex="0" aria-label="The folders of a module"><code>my-module/
+├── mod.json     <span class="p">name, version, the core API it needs,</span>
+│                <span class="p">other modules, settings, node types</span>
+├── bin/         <span class="p">its commands</span>
+├── pipelines/   <span class="p">its pipelines</span>
+├── services/    <span class="p">what runs in the background</span>
+├── types/       <span class="p">the attributes of its node types</span>
+├── ui/          <span class="p">its menu entries and pages</span>
+├── docs/        <span class="p">its pages in the documentation</span>
+└── etc/         <span class="p">its own settings, and what it</span>
+                 <span class="p">gives other modules</span></code></pre>
+            <ul class="points">
+              <li>A module declares the version of the core's API it is written for, and the modules it builds on.</li>
+              <li>Its settings and node types appear in the documentation from the manifest alone.</li>
+              <li>
+                Names join a module to the core's pages: a command called <code>search-…</code> adds results to search, and one called <code>news-…</code> adds a section to
+                the home page.
+              </li>
+              <li>
+                Modules meet without naming each other: what one keeps in its <code>etc/&lt;name&gt;.d/</code> is linked into <code>/etc/&lt;name&gt;.d/</code>, for whichever
+                module reads that folder.
+              </li>
+            </ul>
+          </div>
+          <p class="next">
+            <span class="chip">Planned</span> Modules installed from a URL: each is already a repository of its own under <code>einhq</code>.
+          </p>
+        </div>
+      </section>
+
+      <section class="chapter opener ch-assistant" id="assistant" aria-labelledby="assistant-title">
+        <div class="band" data-band="mixed" aria-hidden="true"></div>
+        <div class="wrap">
+          <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Assistant</p>
+          <h2 id="assistant-title">Ask EiN in your own words</h2>
+          <div class="chapter-body">
+            <p class="chapter-lede">
+              The Assistant is a module that adds a chat beside every page, and a page of earlier conversations. It answers by running EiN's own commands, as you, with your
+              permissions, and shows each command it ran.
+            </p>
+            <p>
+              It is one more door onto the same layers as the browser and the shell, so what you may not see there it cannot see either. On its own it knows the system; each
+              module installed beside it teaches it that module's part.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="turns ch-assistant" aria-labelledby="turns-title">
+        <div class="wrap split">
+          <div class="intro">
+            <h2 id="turns-title">The commands are its tools</h2>
+            <p>
+              A small language model cannot keep hundreds of commands in mind, so the assistant offers it the few used most and a way to find the rest. It searches every
+              command on your path by what it does, by meaning and by words, reads that command's own <code>--help</code>, and runs a line of bash in EiN's shell. A new command
+              is offered the moment it describes itself.
+            </p>
+            <ul class="points">
+              <li>A line that only reads runs at once. A line that changes anything is shown to you to run or decline, and the assistant goes on from how it went.</li>
+              <li>It knows the page you have open: its title, what it shows and the node it is about.</li>
+              <li>Each line gets a minute. When lines run too long, it answers from what it has and says what was slow.</li>
+            </ul>
+          </div>
+          <ol class="layers" aria-label="One question, step by step">
+            <li>
+              <strong>Your question</strong>
+              <span>"Is a pipeline stuck?", and the page you are on</span>
+            </li>
+            <li>
+              <strong><code>find_commands</code></strong>
+              <span>Every command, searched by what it does</span>
+            </li>
+            <li>
+              <strong><code>command_help</code></strong>
+              <span>The command's arguments and flags, and an example</span>
+            </li>
+            <li>
+              <strong><code>run_command</code></strong>
+              <span><code>pipeline-overview</code>, run in the shell as you</span>
+            </li>
+            <li>
+              <strong>The answer</strong>
+              <span>Text with links, and a table, a chart or a card when it helps</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="ask deep ch-assistant" aria-labelledby="ask-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="ask-title">It knows the system, and shows its work</h2>
+            <p>
+              Without any other module, the assistant knows what the core keeps: files and folders, logs, services, pipelines, accounts and storage. Ask it as you would ask
+              whoever runs the machine.
+            </p>
+          </div>
+          <div class="shell-grid">
+            <ul class="asks" aria-label="Questions, each with a command the assistant may run to answer it">
+              <li><q>What is in my home folder?</q><code>ls -l ~</code></li>
+              <li><q>Which services are running?</q><code>service-list --detail</code></li>
+              <li><q>How much disk is left?</q><code>df</code></li>
+              <li><q>Which users are there?</q><code>user-list</code></li>
+              <li><q>Put "Hello" in a file called hello.txt</q><span><code>echo "Hello" &gt; ~/hello.txt</code><span class="chip">Run</span></span></li>
+            </ul>
+            <ul class="points shell-points">
+              <li>Unfold "Ran 2 commands" under an answer to see each command line and what it printed.</li>
+              <li>A link in an answer is kept only when the node exists and you may see it; a path the model made up becomes plain words.</li>
+              <li>A table or a chart of a log is read from the command's output, not copied out by the model, so no value moves to the wrong row.</li>
+              <li>It replies in the language you asked in.</li>
+              <li>Every conversation is a log in your own home, private to you.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="teach ch-assistant" aria-labelledby="teach-title">
+        <div class="wrap">
+          <div class="shell-grid">
+            <div class="intro">
+              <h2 id="teach-title">Modules teach it their part</h2>
+              <p>
+                The assistant names no module. A module that has something for it keeps a folder for it, which EiN links into <code>/etc/assistant.d/</code>: the commands it
+                offers as tools, a page on what it keeps and where, and the cards it can draw under an answer. The assistant brings its own: <code>ls</code>,
+                <code>stat</code>, <code>find</code> and <code>cat</code> for the tree, and a chart.
+              </p>
+            </div>
+            <pre class="term" tabindex="0" aria-label="What a module gives the assistant"><code>/etc/assistant.d/
+└── &lt;module&gt;/
+    ├── tools        <span class="p">the commands it offers, one a line</span>
+    ├── prompt.md    <span class="p">what it keeps, and where</span>
+    └── cards.json   <span class="p">what it can draw under an answer</span></code></pre>
+          </div>
+
+          <div class="split keeping-up">
+            <div class="intro">
+              <h3>Your model, on your machine</h3>
+              <p>
+                By default the model is Qwen3.5-4B in llama.cpp, on your own graphics card or processor. Any server that speaks OpenAI's chat API can take its place: vLLM,
+                Ollama, LM Studio, or a hosted provider such as OpenAI, OpenRouter, Mistral or Groq. With a hosted provider named, the chat tells everyone that their questions,
+                and what the assistant reads to answer them, are sent there.
+              </p>
+            </div>
+            <ul class="points">
+              <li>Its instructions are a file, <code>/etc/assistant-prompt.md</code>, that the administrator can change without a new release.</li>
+              <li>Sharing the graphics card with batch work, the model answers more slowly while that runs, and the chat says so.</li>
+              <li>While the model is starting, the chat says it is waiting, and gives up after three minutes.</li>
+            </ul>
+          </div>
+
+          <aside class="handover ch-archive" aria-labelledby="handover-title">
+            <div class="band" data-band="album" aria-hidden="true"></div>
+            <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Where it has a real purpose</p>
+            <h3 id="handover-title">Beside the Archive, it has a family to ask about</h3>
+            <p>
+              The Archive gives it 22 commands of its own, a family tree and a map to draw, and a page on where people, albums and places are kept. Then it can say who is in
+              the picture you have open and how old they were, how two people are related, or find the pictures of someone from one summer.
+            </p>
+            <a class="button" href="#archive-ask">See it in the Archive</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="chapter opener ch-archive" id="archive" aria-labelledby="archive-title">
+        <div class="band" data-band="album" aria-hidden="true"></div>
+        <div class="wrap">
+          <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Archive</p>
+          <h2 id="archive-title">A family's whole life, kept at home</h2>
+          <div class="chapter-body">
+            <p class="chapter-lede">
+              EiN Archive, the first module, keeps a family's photos, home videos, recordings and letters. It dates every file, puts what has GPS on the map, recognises the
+              faces and voices, transcribes speech and reads handwriting.
+            </p>
+            <p>
+              It is built from the core's pieces. People, albums, places and devices are node types it adds; its pages are routes in the core's frame; its 130 commands work in
+              the shell like any other; and 26 pipelines, run by the core's engine, process every file as it arrives. The screenshots are from the demo: one invented family,
+              616 files from 1956 to 2026.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="picture ch-archive" aria-labelledby="picture-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="picture-title">One picture, and everything around it</h2>
+            <p>
+              Open a photo and EiN shows which phone took it and whose phone it was, who is in it and how old each of them was that day, and where it was taken, down to the street.
+              Each of those is a node of its own, linked to the picture: the phone, the three people and the place all have pages and timelines of their own.
+            </p>
+          </div>
+          <figure class="annotated">
+            <div class="shot">
+              <img
+                src="assets/shots/lightbox.webp"
+                srcset="assets/shots/lightbox.webp 1440w, assets/shots/lightbox@2x.webp 2880w"
+                sizes="(min-width: 1240px) 1160px, 92vw"
+                width="1440"
+                height="900"
+                alt="EiN's photo viewer showing three people on a coastal lookout near Wellington, with a side panel listing the phone that took it, the album, the three people with their ages, the address and a small map, and similar pictures"
+              >
+              <ol class="callouts" aria-label="What the panel shows">
+                <li class="c-device" style="--x: 72.3%; --y: 11.6%">
+                  <span>The phone that took it, and who owned it then</span>
+                </li>
+                <li class="c-album" style="--x: 72.3%; --y: 19.8%"><span>The album it is in</span></li>
+                <li class="c-person" style="--x: 72.3%; --y: 30%"><span>Who is in it, and how old each was that day</span></li>
+                <li class="c-place" style="--x: 72.3%; --y: 47%"><span>Where, from the GPS in the file</span></li>
+                <li class="c-media" style="--x: 72.3%; --y: 76%"><span>Pictures that look alike</span></li>
+              </ol>
+            </div>
+            <figcaption>Christmas in Wellington, 2025: Ruby with her aunt Helen and Helen's husband David. From the demo archive of the invented Wrenfield family.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="tour ch-archive" id="tour" aria-labelledby="tour-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="tour-title">The Archive, page by page</h2>
+            <p>
+              The Archive module is where a family's collection lives: albums, a full-screen viewer, people and their family tree, places, devices, a map and a year view. These
+              screenshots are from the demo: one invented family, 616 files from 1956 to 2026.
+            </p>
+          </div>
+          <div class="tabs" data-tabs>
+            <div class="tablist" role="tablist" aria-label="Archive pages">
+              <button role="tab" class="t-album" aria-controls="tab-albums" id="tab-albums-btn" aria-selected="true">Albums</button>
+              <button role="tab" class="t-album" aria-controls="tab-album" id="tab-album-btn">An album</button>
+              <button role="tab" class="t-person" aria-controls="tab-faces" id="tab-faces-btn">Faces</button>
+              <button role="tab" class="t-person" aria-controls="tab-family" id="tab-family-btn">Family tree</button>
+              <button role="tab" class="t-person" aria-controls="tab-person" id="tab-person-btn">A life</button>
+              <button role="tab" class="t-place" aria-controls="tab-place" id="tab-place-btn">Places</button>
+              <button role="tab" class="t-track" aria-controls="tab-map" id="tab-map-btn">Map and tracks</button>
+              <button role="tab" class="t-media" aria-controls="tab-year" id="tab-year-btn">Year</button>
+              <button role="tab" class="t-device" aria-controls="tab-devices" id="tab-devices-btn">Devices</button>
+              <button role="tab" class="t-media" aria-controls="tab-scan" id="tab-scan-btn">Old prints</button>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-albums" aria-labelledby="tab-albums-btn">
+              <div class="shot">
+                <img
+                  src="assets/shots/albums.webp"
+                  srcset="assets/shots/albums.webp 1440w, assets/shots/albums@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The Albums page: a grid of album covers with titles and date ranges"
+                >
+              </div>
+              <div class="caption">
+                <h3>Albums across the decades</h3>
+                <p>
+                  Every album is a cover with its dates and how much it holds. Sort by date, name or size, filter by title, or jump across decades on the time rail. One picture can sit
+                  in several albums without being copied.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-album" aria-labelledby="tab-album-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/album.webp"
+                  srcset="assets/shots/album.webp 1440w, assets/shots/album@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The album Sailing in the archipelago: photos laid out day by day under a header"
+                >
+              </div>
+              <div class="caption">
+                <h3>An album, day by day</h3>
+                <p>
+                  Pictures in a justified grid, a section for each day. Bursts taken seconds apart stack behind one photo. The Map tab shows where they were taken beside the GPS
+                  tracks of those days.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-faces" aria-labelledby="tab-faces-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/faces.webp"
+                  srcset="assets/shots/faces.webp 1440w, assets/shots/faces@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="Helen Okafor's Faces tab: dozens of face crops of one woman, from a child to her sixties"
+                >
+              </div>
+              <div class="caption">
+                <h3>Faces become people</h3>
+                <p>
+                  The same face across thousands of photos becomes one person, ready to be named. Name a group once and every face in it follows. Here is Helen, in pictures from
+                  1968 to 2025.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-family" aria-labelledby="tab-family-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/family.webp"
+                  srcset="assets/shots/family.webp 1440w, assets/shots/family@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="Peggy Wrenfield's family tree: her husband, their children and partners, and the grandchildren"
+                >
+              </div>
+              <div class="caption">
+                <h3>A family tree that grows where you open it</h3>
+                <p>
+                  Ancestors above, descendants below, couples side by side. Adoptive parents and dated partnerships are supported, and a wedding's date lands on both people's
+                  timelines.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-person" aria-labelledby="tab-person-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/person.webp"
+                  srcset="assets/shots/person.webp 1440w, assets/shots/person@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="Peggy Wrenfield's page: her timeline with the albums she is in, the homes she left and her death in 2021"
+                >
+              </div>
+              <div class="caption">
+                <h3>A page for every person</h3>
+                <p>
+                  A timeline of births, weddings, moves and albums, the recordings they are heard in, the homes they lived in and their family. Peggy's runs from her birth in 1934,
+                  through her 1956 wedding, to her death in 2021.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-place" aria-labelledby="tab-place-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/place.webp"
+                  srcset="assets/shots/place.webp 1440w, assets/shots/place@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The place The cottage at Malpas: a circle on the map, and its current resident"
+                >
+              </div>
+              <div class="caption">
+                <h3>Places that know who lived there</h3>
+                <p>
+                  Draw a place as a point, a circle or an outline, and the photos whose GPS falls inside it are linked to it. Each place keeps a timeline of who lived there and what was
+                  taken there.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-map" aria-labelledby="tab-map-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/map.webp"
+                  srcset="assets/shots/map.webp 1440w, assets/shots/map@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The map over the Stockholm archipelago, with GPS tracks drawn as lines and clusters of photos along them"
+                >
+              </div>
+              <div class="caption">
+                <h3>A map of everything, with GPS tracks</h3>
+                <p>
+                  Every geotagged picture, every place and every GPX track on one map. Narrow it to a span of years, a person, a place or a label. Here: a corner of the Stockholm
+                  archipelago, with a year of one phone's photos and the tracks it recorded, three sailing days among them.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-year" aria-labelledby="tab-year-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/year.webp"
+                  srcset="assets/shots/year.webp 1440w, assets/shots/year@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The Year page for 2025, with a histogram of every year from 1931 to 2026 and the albums of 2025"
+                >
+              </div>
+              <div class="caption">
+                <h3>A year at a time</h3>
+                <p>
+                  The albums with pictures from one year, and the people born or died in it, under a bar for every year, so you can see at a glance where a family's pictures gather and
+                  where they thin out.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-devices" aria-labelledby="tab-devices-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/devices.webp"
+                  srcset="assets/shots/devices.webp 1440w, assets/shots/devices@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="The Devices page: cameras, phones, a camcorder and a scanner, each with its owner and time zone"
+                >
+              </div>
+              <div class="caption">
+                <h3>The camera behind every photo</h3>
+                <p>
+                  Files are matched to the cameras, phones, camcorders and scanners you have registered, by serial number or by make and model, and EiN suggests the ones it has seen.
+                  A device page shows what it took, who owned it when, its time zone and its GPS track.
+                </p>
+              </div>
+            </div>
+
+            <div class="tabpanel" role="tabpanel" tabindex="0" id="tab-scan" aria-labelledby="tab-scan-btn" hidden>
+              <div class="shot">
+                <img
+                  src="assets/shots/scan.webp"
+                  srcset="assets/shots/scan.webp 1440w, assets/shots/scan@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 1160px, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="A black-and-white wedding photo from 1956 in the viewer, dated Saturday 16 June 1956, scanned with Helen's scanner"
+                >
+              </div>
+              <div class="caption">
+                <h3>Old prints stay in their decade</h3>
+                <p>
+                  Put a box of scans in a scans category, or register the scanner, and the prints are not dated to the day they went through it; they wait for a date someone knows.
+                  This one was scanned in 2012. The archive says 16 June 1956.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="kinds deep ch-archive" id="media" aria-labelledby="kinds-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="kinds-title">Every kind of file a family keeps</h2>
+            <p>
+              Drop in a phone's camera roll, a box of scans or a Google Takeout. Each file is recognised by its bytes, not its name, and gets what its kind needs: a picture to show
+              in the browser, a copy that plays, its text and its date.
+            </p>
+          </div>
+          <dl class="facts">
+            <div>
+              <dt>Photos</dt>
+              <dd>JPEG, PNG, HEIC, AVIF and the other common formats. Every picture is shown from AVIF copies made at the sizes the pages need.</dd>
+            </div>
+            <div>
+              <dt>Camera RAW</dt>
+              <dd>22 RAW formats, from Canon's CR2 and CR3, Nikon's NEF and Sony's ARW to DNG, Fujifilm's RAF and Olympus's ORF, developed with LibRaw.</dd>
+            </div>
+            <div>
+              <dt>Home videos</dt>
+              <dd>Phone videos and camcorder files, MPEG transport streams included, played from AV1 copies. Their stills are searched like photos, and what is said is transcribed.</dd>
+            </div>
+            <div>
+              <dt>Recordings</dt>
+              <dd>Audio gets a waveform for its picture, a transcript that follows the player, and its speakers told apart and recognised.</dd>
+            </div>
+            <div>
+              <dt>Letters and documents</dt>
+              <dd>PDF, Word, OpenDocument and plain text are read and searchable, and so is the text in pictures: signs, prints and handwriting.</dd>
+            </div>
+            <div>
+              <dt>Sidecars and tracks</dt>
+              <dd>Google Takeout's JSON and XMP sidecars give their dates and places to the files they describe, and GPX tracks join the devices that recorded them.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="finds ch-archive" id="finds" aria-labelledby="finds-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="finds-title">What the Archive works out by itself</h2>
+            <p>
+              Every file goes through a series of small steps, each a pipeline of its own, and the pages fill in as they run: <code>media-ingest</code> reads the file's metadata,
+              <code>media-faces</code> finds the faces, <code>media-transcribe</code> listens, <code>media-ocr</code> reads, <code>media-geocode</code> finds the street and
+              <code>media-fingerprint</code> finds the copies. The analysis goes to the media service on your own machine.
+            </p>
+          </div>
+          <div class="find-groups">
+            <section class="find k-media">
+              <h3><svg class="hat" aria-hidden="true" focusable="false"><use href="#hat" /></svg>When</h3>
+              <ul>
+                <li>Each file is dated from its most trustworthy clock: a date someone typed, a sidecar file, GPS, the camera or the file name. EiN shows which one it used.</li>
+                <li>Time zones come from GPS or the device's own history, so a trip's photos sort into the right moment.</li>
+                <li>Vague dates stay vague: a print can be just "1975".</li>
+              </ul>
+            </section>
+            <section class="find k-place">
+              <h3><svg class="hat" aria-hidden="true" focusable="false"><use href="#hat" /></svg>Where</h3>
+              <ul>
+                <li>Photos with GPS go on the map, with their street address.</li>
+                <li>A photo taken inside a place you have drawn is linked to it.</li>
+                <li>A GPX file joins the device it names, and its track shows on the albums' maps.</li>
+              </ul>
+            </section>
+            <section class="find k-person">
+              <h3><svg class="hat" aria-hidden="true" focusable="false"><use href="#hat" /></svg>Who</h3>
+              <ul>
+                <li>Faces are found and grouped into people. Name a group once.</li>
+                <li>A photo shows how old each person in it was that day.</li>
+                <li>Recordings are split by speaker, and voices are recognised across recordings, as faces are.</li>
+              </ul>
+            </section>
+            <section class="find k-label">
+              <h3><svg class="hat" aria-hidden="true" focusable="false"><use href="#hat" /></svg>What</h3>
+              <ul>
+                <li>Search for "birthday cake with candles" and find every one, with nothing tagged.</li>
+                <li>Text in pictures is read and searchable, handwriting in English, Swedish and Finnish included. Press <kbd>t</kbd> to lay it over the picture.</li>
+                <li>Speech is transcribed, and the player follows along in the transcript.</li>
+              </ul>
+            </section>
+            <section class="find">
+              <h3><svg class="hat" aria-hidden="true" focusable="false"><use href="#hat" /></svg>Copies</h3>
+              <ul>
+                <li>Exact copies, and the same picture saved smaller, re-encoded or cropped, are found and lined up.</li>
+                <li>Bursts taken seconds apart are stacked behind one photo.</li>
+                <li>A new file you already have is shown beside the original, so you keep the best one.</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="pair">
+            <figure>
+              <div class="shot">
+                <img
+                  src="assets/shots/recording.webp"
+                  srcset="assets/shots/recording.webp 1140w, assets/shots/recording@2x.webp 2280w"
+                  sizes="(min-width: 1240px) 566px, (min-width: 861px) 46vw, 92vw"
+                  width="1140"
+                  height="640"
+                  loading="lazy"
+                  alt="A recording in the viewer: a waveform with the playhead, and beside it the transcript with a timestamp on every line and a speaker label"
+                >
+              </div>
+              <figcaption>A granddaughter asks her grandmother about her wedding. Every word is transcribed, and clicking a line plays it.</figcaption>
+            </figure>
+            <figure>
+              <div class="shot">
+                <img
+                  src="assets/shots/postcard.webp"
+                  srcset="assets/shots/postcard.webp 1440w, assets/shots/postcard@2x.webp 2880w"
+                  sizes="(min-width: 1240px) 566px, (min-width: 861px) 46vw, 92vw"
+                  width="1440"
+                  height="900"
+                  loading="lazy"
+                  alt="A handwritten postcard from 1968 in the viewer, with the text EiN read from the handwriting laid over it"
+                >
+              </div>
+              <figcaption>A postcard from 1968. The words read from the handwriting can be laid over it, corrected and searched.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="search ch-archive" aria-labelledby="search-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="search-title">One search box for pictures, speech and letters</h2>
+            <p>
+              Type "Christmas tree" and get the family's Christmases, from a black-and-white print of 1962 to phone photos of 2019, and the moments in home videos that show one,
+              with nothing tagged. The same box finds a word on a sign, in a handwritten letter or in something said on a home video, and a hit in a recording opens it at the
+              minute the word is said.
+            </p>
+            <p>Write a sentence, such as "videos of Helen and David from 1998": the people and years become filters you can remove, and the kind of file sets the type.</p>
+          </div>
+          <div class="shot">
+            <img
+              src="assets/shots/search.webp"
+              srcset="assets/shots/search.webp 1200w, assets/shots/search@2x.webp 2400w"
+              sizes="(min-width: 1240px) 1160px, 92vw"
+              width="1200"
+              height="644"
+              loading="lazy"
+              alt="The Media page searched for Christmas tree: a black-and-white print of two children by a tree, then family Christmases in colour and two video moments, each with its match in percent"
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="archive-ask deep ch-archive" id="archive-ask" aria-labelledby="archive-ask-title">
+        <div class="wrap split split-reverse">
+          <div class="intro">
+            <h2 id="archive-ask-title">Ask about the family</h2>
+            <p>
+              Beside the Archive, the <a href="#assistant">Assistant</a> is at its most useful. It gets the Archive's commands as tools: search, the people and how they are
+              related, the timelines of people, places and devices, and what a picture shows. It knows which picture you have open, and it can draw a family tree or a map under
+              its answer.
+            </p>
+            <ul class="points">
+              <li>A plain request for pictures, such as "show photos of Helen from 1998", is answered straight from the search when the search is sure what it asks for, in a fraction of the time.</li>
+              <li>It can set someone's parent or partner, add an event to a life or write a picture's description, each shown as a command that runs only when you press Run.</li>
+              <li>The model runs on your own machine by default. With a hosted provider, the chat tells everyone that their questions, and what it reads in the archive, leave the server.</li>
+            </ul>
+          </div>
+          <div class="shot">
+            <img
+              src="assets/shots/chat.webp"
+              srcset="assets/shots/chat.webp 860w, assets/shots/chat@2x.webp 1720w"
+              sizes="(min-width: 1240px) 635px, (min-width: 961px) 52vw, 92vw"
+              width="860"
+              height="900"
+              loading="lazy"
+              alt="The chat drawer beside the photo's details, answering who is in the picture: David Okafor, 69, Helen Okafor, 67, and Ruby Wrenfield, 26"
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="archive-shell ch-archive" aria-labelledby="archive-shell-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="archive-shell-title">The archive in the shell</h2>
+            <p>
+              Every photo, person and album is a path in the tree, so the shell reaches all of them. The Archive's 130 commands sit beside the core's, from <code>person</code> to
+              <code>person-merge</code>, and the terminal shows pictures inline.
+            </p>
+          </div>
+          <div class="shell-grid">
+            <div class="shot">
+              <img
+                src="assets/shots/terminal.webp"
+                srcset="assets/shots/terminal.webp 840w, assets/shots/terminal@2x.webp 1680w"
+                sizes="(min-width: 1240px) 548px, (min-width: 961px) 44vw, 92vw"
+                width="840"
+                height="780"
+                loading="lazy"
+                alt="The terminal pane, maximized: the archive's top folders, a count of the family's 19 people, Peggy Wrenfield's relations, homes and events, and a photo shown inline"
+              >
+            </div>
+            <div class="shell-doors">
+              <h3>Copy a box of scans in</h3>
+              <p>Uploads, SFTP copies and zips land in your own staging area first, outside the shared library.</p>
+              <pre class="term" tabindex="0"><code><span class="p">$</span> ssh -p 2222 helen@ein.example
+<span class="p">helen@:~$</span> find /archive/people -maxdepth 1 -type person | wc -l
+19
+<span class="p">$</span> scp -P 2222 -r scans/ \
+    helen@ein.example:/home/helen/staging/files/inbox/</code></pre>
+              <ul class="points">
+                <li>EiN recognises a Google Takeout, a scanner's output or a phone's camera folder.</li>
+                <li>It groups an import into events and trips, and proposes the album each group belongs in. Nothing is filed without you.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ems deep ch-archive" id="media-service" aria-labelledby="ems-title">
+        <div class="wrap">
+          <div class="ems-body">
+            <div class="intro">
+              <h2 id="ems-title">The media service does the looking</h2>
+              <p>
+                The Archive's pipelines hand every picture, video and recording to EMS, the media service: every media tool and model EiN uses, in one container behind one HTTP
+                API, reached through a small module of its own. No photo, face or voice leaves your machine to be analysed.
+              </p>
+              <p>
+                With an NVIDIA card, each model family runs on it when it fits and on the CPU when it does not; without one, everything runs on the CPU. The models stand on the open
+                tools below, all inside the same container.
+              </p>
+            </div>
+            <table class="models">
+              <caption>The models it runs, and their licences</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Faces</th>
+                  <td><span class="model"><a href="https://github.com/deepinsight/insightface/tree/master/python-package">InsightFace buffalo_l</a> <span class="licence licence-nc">Non-commercial research</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Speech</th>
+                  <td><span class="model"><a href="https://huggingface.co/Systran/faster-whisper-large-v3">faster-whisper large-v3</a> <span class="licence">MIT</span></span><span class="model"><a href="https://github.com/snakers4/silero-vad">Silero VAD</a> <span class="licence">MIT</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Who speaks when</th>
+                  <td><span class="model"><a href="https://huggingface.co/nvidia/diar_sortformer_4spk-v1">NVIDIA Sortformer</a> <span class="licence licence-nc">CC BY-NC 4.0</span></span><span class="model"><a href="https://huggingface.co/nvidia/speakerverification_en_titanet_large">NVIDIA TitaNet</a> <span class="licence">CC BY 4.0</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">The talking face</th>
+                  <td><span class="model"><a href="https://github.com/Junhua-Liao/LR-ASD">LR-ASD</a> <span class="licence">MIT</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Picture search</th>
+                  <td><span class="model"><a href="https://huggingface.co/google/siglip2-so400m-patch16-384">SigLIP2 So400m</a> <span class="licence">Apache-2.0</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Text search</th>
+                  <td><span class="model"><a href="https://huggingface.co/jinaai/jina-embeddings-v5-text-small">jina-embeddings-v5-text-small</a> <span class="licence licence-nc">CC BY-NC 4.0</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Printed text</th>
+                  <td><span class="model"><a href="https://github.com/PaddlePaddle/PaddleOCR">PP-OCRv6</a> <span class="licence">Apache-2.0</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Handwriting</th>
+                  <td><span class="model"><a href="https://huggingface.co/Kansallisarkisto/multicentury-ppocrv6-medium">Multicentury PP-OCRv6, National Archives of Finland</a> <span class="licence">Apache-2.0</span></span><span class="model"><a href="https://huggingface.co/Kansallisarkisto/multicentury-htr-model">Multicentury TrOCR, National Archives of Finland</a> <span class="licence">Apache-2.0, built on Microsoft's TrOCR</span></span><span class="model"><a href="https://huggingface.co/microsoft/trocr-large-handwritten">Microsoft TrOCR large handwritten</a> <span class="licence licence-nc">None stated; trained on IAM, research only</span></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Copies</th>
+                  <td><span class="model"><a href="https://github.com/facebookresearch/sscd-copy-detection">Meta SSCD</a> <span class="licence">MIT</span></span><span class="model"><a href="https://acoustid.org/chromaprint">Chromaprint</a> <span class="licence">LGPL-2.1</span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tools">
+            <h3>The tools it runs, and their licences</h3>
+            <ul class="repos tool-list">
+              <li><a href="https://ffmpeg.org">FFmpeg</a> <span class="licence">GPL-3.0, as built</span><span>Video and audio: reading streams, AV1 copies on the graphics card's encoder or the CPU, stills and waveforms</span></li>
+              <li><a href="https://imagemagick.org">ImageMagick</a> <span class="licence">ImageMagick License</span><span>Pictures: turning, resizing and the AVIF copies every page shows</span></li>
+              <li><a href="https://github.com/strukturag/libheif">libheif</a> <span class="licence">LGPL-3.0</span><span>HEIC and AVIF for ImageMagick, encoding with aom (BSD-2-Clause)</span></li>
+              <li><a href="https://exiftool.org">ExifTool</a> <span class="licence">Perl's terms: Artistic or GPL</span><span>The metadata in every file: dates, GPS, the camera and its serial number</span></li>
+              <li><a href="https://www.libraw.org">LibRaw</a> <span class="licence">LGPL-2.1 or CDDL-1.0</span><span>Camera RAW files, through rawpy (MIT)</span></li>
+              <li><a href="https://acoustid.org/chromaprint">Chromaprint</a> <span class="licence">LGPL-2.1</span><span>Fingerprints of sound, to find the same recording twice</span></li>
+              <li><a href="https://python-pillow.org">Pillow</a> <span class="licence">MIT-CMU</span><span>Pictures for the models, HEIC included through pillow-heif (GPL-2.0 wheels)</span></li>
+              <li><a href="https://opencv.org">OpenCV</a> <span class="licence">Apache-2.0</span><span>Pictures and video frames for the face and talking-face models</span></li>
+              <li><a href="https://github.com/RapidAI/RapidOCR">RapidOCR</a> <span class="licence">Apache-2.0</span><span>Runs the PP-OCR models that find and read printed text</span></li>
+              <li><a href="https://pymupdf.readthedocs.io">PyMuPDF</a> <span class="licence">AGPL-3.0</span><span>Text and pages of PDF files</span></li>
+              <li><a href="https://python-docx.readthedocs.io">python-docx</a> <span class="licence">MIT</span><span>Text of Word files</span></li>
+              <li><a href="https://github.com/eea/odfpy">odfpy</a> <span class="licence">GPL-2.0 or Apache-2.0</span><span>Text of OpenDocument files</span></li>
+              <li><a href="https://github.com/pemistahl/lingua-py">Lingua</a> <span class="licence">Apache-2.0</span><span>Which language a text is written in</span></li>
+              <li><a href="https://pytorch.org">PyTorch</a> <span class="licence">BSD-3-Clause</span><span>Runs most of the models, on CUDA or the CPU</span></li>
+              <li><a href="https://onnxruntime.ai">ONNX Runtime</a> <span class="licence">MIT</span><span>Runs the face models</span></li>
+              <li><a href="https://github.com/OpenNMT/CTranslate2">CTranslate2</a> <span class="licence">MIT</span><span>Runs Whisper, through faster-whisper (MIT)</span></li>
+              <li><a href="https://github.com/NVIDIA/NeMo">NVIDIA NeMo</a> <span class="licence">Apache-2.0</span><span>Runs the speaker models</span></li>
+              <li><a href="https://huggingface.co/docs/transformers">Hugging Face Transformers</a> <span class="licence">Apache-2.0</span><span>Loads the search and handwriting models, with Sentence Transformers (Apache-2.0)</span></li>
+              <li><a href="https://fastapi.tiangolo.com">FastAPI</a> <span class="licence">MIT</span><span>The HTTP API EiN talks to, served by uvicorn (BSD-3-Clause)</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="private ch-archive" aria-labelledby="private-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="private-title">Shared on your terms</h2>
+            <p>
+              Every node has an owner and permissions, and the same check applies in the browser, the shell, SSH and SFTP. By default the accounts on your server see each other's
+              albums, and nobody without an account sees anything. What someone may not open is not listed anywhere: not in folders, search, the map or the home page.
+            </p>
+          </div>
+          <dl class="facts">
+            <div>
+              <dt>Sharing in plain words</dt>
+              <dd>The Share dialog lists who can view and who can edit. A few photos can stay private inside a shared album.</dd>
+            </div>
+            <div>
+              <dt>A link for one album</dt>
+              <dd>Open one album to someone without an account, for a day, a month, a year or for good, and revoke it when you like.</dd>
+            </div>
+            <div>
+              <dt>Visitors only if you say so</dt>
+              <dd>Turn on "Visitors may browse" and people who are not signed in see what you shared with visitors, and nothing else. They can never change anything.</dd>
+            </div>
+            <div>
+              <dt>Undo, and a record</dt>
+              <dd>What you delete on an album, photo or person page waits 30 days in a trash that can restore it. Changes to the archive, accounts and settings are kept in an audit trail.</dd>
+            </div>
+            <div>
+              <dt>Analysis stays at home</dt>
+              <dd>
+                No photo, face or voice leaves the machine to be analysed. GPS positions and place names go to OpenStreetMap's address service, which you can swap for your own, and the
+                browser loads map tiles from OpenStreetMap and Esri.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="phone deep ch-archive" aria-labelledby="phone-title">
+        <div class="wrap split">
+          <div class="intro">
+            <h2 id="phone-title">At home on a phone</h2>
+            <p>
+              Below tablet width EiN switches to a phone layout: swipe to open the menu, pinch to show two to five pictures a row, swipe up in the viewer for everything about a
+              picture. Served over HTTPS, it can be added to the home screen and opens full screen, like an app.
+            </p>
+          </div>
+          <div class="phones" tabindex="0" role="region" aria-label="Phone screenshots">
+            <div class="shot shot-phone">
+              <img
+                src="assets/shots/phone-home.webp"
+                srcset="assets/shots/phone-home.webp 390w, assets/shots/phone-home@2x.webp 780w"
+                sizes="260px"
+                width="390"
+                height="844"
+                loading="lazy"
+                alt="EiN's home page on a phone: a feed of recently added albums, each with its first pictures"
+              >
+            </div>
+            <div class="shot shot-phone">
+              <img
+                src="assets/shots/phone-lightbox.webp"
+                srcset="assets/shots/phone-lightbox.webp 390w, assets/shots/phone-lightbox@2x.webp 780w"
+                sizes="260px"
+                width="390"
+                height="844"
+                loading="lazy"
+                alt="The Wellington photo of Ruby, Helen and David in the viewer on a phone, with the phone that took it, the album and the people's ages below it"
+              >
+            </div>
+            <div class="shot shot-phone">
+              <img
+                src="assets/shots/phone-person.webp"
+                srcset="assets/shots/phone-person.webp 390w, assets/shots/phone-person@2x.webp 780w"
+                sizes="260px"
+                width="390"
+                height="844"
+                loading="lazy"
+                alt="Helen Okafor's page on a phone: her portrait and a timeline of the albums she is in"
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery chapter ch-screenshots" id="screenshots" aria-labelledby="screenshots-title">
+        <div class="band" data-band="media" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="intro">
+            <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Screenshots</p>
+            <h2 id="screenshots-title">Almost every page</h2>
+            <p>From the demo archive of the invented Wrenfield family. Open one to see it large; the arrow keys step through them.</p>
+          </div>
+          <div class="gallery-group ch-core">
+            <h3><span class="mark" aria-hidden="true"></span>The core<span>The pages every installation has, whatever modules it runs.</span></h3>
+            <ul class="gallery-list">
+              <li>
+                <a href="assets/shots/home@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/home.webp" width="640" height="400" loading="lazy"
+                    alt="The home page: a news feed of albums added, each with its first pictures, and a birthday coming up">
+                </a>
+                <h4>Home</h4>
+                <p>What is new, what is coming up and this day in years past. The core lays the page out; modules fill it, here with the Archive&#x27;s albums and a birthday.</p>
+              </li>
+              <li>
+                <a href="assets/shots/finder@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/finder.webp" width="640" height="400" loading="lazy"
+                    alt="The finder open over the home page, listing commands that begin with person and what each one does">
+                </a>
+                <h4>The finder</h4>
+                <p>Ctrl+K searches everything from any page. Start with &gt; and it searches the commands instead, each with what it does.</p>
+              </li>
+              <li>
+                <a href="assets/shots/terminal@2x.webp" data-shot data-width="1680" data-height="1560">
+                  <img src="assets/shots/thumbs/terminal.webp" width="640" height="594" loading="lazy"
+                    alt="The terminal pane listing the archive, counting its people, showing one person&#x27;s relations and a photo inline">
+                </a>
+                <h4>The terminal</h4>
+                <p>Alt+T opens a bash shell beside any page, as you, with your permissions. It shows pictures inline.</p>
+              </li>
+              <li>
+                <a href="assets/shots/nodes@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/nodes.webp" width="640" height="400" loading="lazy"
+                    alt="The node explorer showing a person&#x27;s folder: children, devices, events, homes and partners, with a preview of the person">
+                </a>
+                <h4>Nodes</h4>
+                <p>The tree itself: any folder, each node with its type, size, mode, owner and group, and a preview of the one selected.</p>
+              </li>
+              <li>
+                <a href="assets/shots/dashboard@2x.webp" data-shot data-width="2400" data-height="1300">
+                  <img src="assets/shots/thumbs/dashboard.webp" width="640" height="347" loading="lazy"
+                    alt="The system dashboard saying Healthy, with CPU, memory, GPU and video memory gauges">
+                </a>
+                <h4>System dashboard</h4>
+                <p>One word on whether it is keeping up, with the machine&#x27;s load and how long the disks will last.</p>
+              </li>
+              <li>
+                <a href="assets/shots/system-work@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/system-work.webp" width="640" height="400" loading="lazy"
+                    alt="The Work tab: a table of pipelines with bars for their workload and counts of waiting, running, failed and completed jobs">
+                </a>
+                <h4>Work</h4>
+                <p>Every pipeline, with what waits, runs, failed and is done, and how fast.</p>
+              </li>
+              <li>
+                <a href="assets/shots/system-log@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/system-log.webp" width="640" height="400" loading="lazy"
+                    alt="The Log tab: no recent problems, and a live log of HTTP connections">
+                </a>
+                <h4>Log</h4>
+                <p>Recent problems, and the system log as it is written.</p>
+              </li>
+              <li>
+                <a href="assets/shots/settings@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/settings.webp" width="640" height="400" loading="lazy"
+                    alt="The Settings page on the Albums category, with stack similarity and stack time gap">
+                </a>
+                <h4>Settings</h4>
+                <p>Every setting by category, the core&#x27;s and each module&#x27;s, with its default and what it does.</p>
+              </li>
+              <li>
+                <a href="assets/shots/settings-users@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/settings-users.webp" width="640" height="400" loading="lazy"
+                    alt="The Users tab with the administrator and the guest, and the administrator&#x27;s profile and groups">
+                </a>
+                <h4>Users</h4>
+                <p>Accounts, their profiles and the groups they are in.</p>
+              </li>
+              <li>
+                <a href="assets/shots/settings-permissions@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/settings-permissions.webp" width="640" height="400" loading="lazy"
+                    alt="The Permissions tab: new users, visitors, sharing defaults and sign-in sessions">
+                </a>
+                <h4>Permissions</h4>
+                <p>What a new user joins, who sees what is shared, whether visitors may browse, and how long a sign-in lasts.</p>
+              </li>
+              <li>
+                <a href="assets/shots/docs@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/docs.webp" width="640" height="400" loading="lazy"
+                    alt="The documentation&#x27;s overview page with its guide and reference sections">
+                </a>
+                <h4>Documentation</h4>
+                <p>A guide, and reference pages read from the installation as it is: every command, setting, variable and node type.</p>
+              </li>
+              <li>
+                <a href="assets/shots/docs-node-types@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/docs-node-types.webp" width="640" height="400" loading="lazy"
+                    alt="The node types page: file, region, EXIF and person, each with what it holds and how many are in the tree">
+                </a>
+                <h4>Node types</h4>
+                <p>Every node type, which module adds it and how many there are.</p>
+              </li>
+              <li>
+                <a href="assets/shots/stats@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/stats.webp" width="640" height="400" loading="lazy"
+                    alt="The Statistics page with bar charts of births, engagements, marriages and deaths by month">
+                </a>
+                <h4>Statistics</h4>
+                <p>Charts over what is kept. Modules add their own, here the Archive&#x27;s births, weddings and deaths by month.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="gallery-group ch-assistant">
+            <h3><span class="mark" aria-hidden="true"></span>The Assistant<span>A chat that answers by running EiN&#x27;s commands as you.</span></h3>
+            <ul class="gallery-list">
+              <li>
+                <a href="assets/shots/chat@2x.webp" data-shot data-width="1720" data-height="1800">
+                  <img src="assets/shots/thumbs/chat.webp" width="640" height="670" loading="lazy"
+                    alt="The chat drawer beside a photo, answering who is in it and how old each was">
+                </a>
+                <h4>The chat drawer</h4>
+                <p>Beside any page, knowing which picture is open.</p>
+              </li>
+              <li>
+                <a href="assets/shots/chat-page@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/chat-page.webp" width="640" height="400" loading="lazy"
+                    alt="The Chat page: a list of conversations and an answer naming three people and their ages">
+                </a>
+                <h4>Chats</h4>
+                <p>Earlier conversations, and each answer with the commands it ran.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="gallery-group ch-archive">
+            <h3><span class="mark" aria-hidden="true"></span>The Archive<span>A family&#x27;s photos, videos, recordings and letters.</span></h3>
+            <ul class="gallery-list">
+              <li>
+                <a href="assets/shots/albums@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/albums.webp" width="640" height="400" loading="lazy" alt="The Albums page: a grid of album covers with titles and date ranges">
+                </a>
+                <h4>Albums</h4>
+                <p>Every album as a cover with its dates and size, across the decades.</p>
+              </li>
+              <li>
+                <a href="assets/shots/album@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/album.webp" width="640" height="400" loading="lazy" alt="The album Sailing in the archipelago: photos laid out day by day">
+                </a>
+                <h4>An album</h4>
+                <p>Pictures day by day, bursts stacked behind one photo.</p>
+              </li>
+              <li>
+                <a href="assets/shots/lightbox@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/lightbox.webp" width="640" height="400" loading="lazy"
+                    alt="A photo of three people near Wellington, with the device, album, people with their ages, address and a small map beside it">
+                </a>
+                <h4>The viewer</h4>
+                <p>A picture with the phone that took it, the album, who is in it and their ages, and where.</p>
+              </li>
+              <li>
+                <a href="assets/shots/media@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/media.webp" width="640" height="400" loading="lazy"
+                    alt="The Media page: pictures grouped by date, with filters for images, video, audio and documents">
+                </a>
+                <h4>Media</h4>
+                <p>Every photo, video, recording and document, by day or month, or by kind.</p>
+              </li>
+              <li>
+                <a href="assets/shots/search@2x.webp" data-shot data-width="2400" data-height="1288">
+                  <img src="assets/shots/thumbs/search.webp" width="640" height="343" loading="lazy"
+                    alt="The Media page searched for Christmas tree, with prints, photos and video moments">
+                </a>
+                <h4>Search</h4>
+                <p>Search by what is in a picture, with nothing tagged; video moments included.</p>
+              </li>
+              <li>
+                <a href="assets/shots/people@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/people.webp" width="640" height="400" loading="lazy"
+                    alt="The People page: portraits of the family with their names and picture counts">
+                </a>
+                <h4>People</h4>
+                <p>Everyone in the archive, with how many pictures each is in.</p>
+              </li>
+              <li>
+                <a href="assets/shots/people-unknown@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/people-unknown.webp" width="640" height="400" loading="lazy"
+                    alt="A grid of unnamed people, each with a face and the number of faces found">
+                </a>
+                <h4>Unidentified people</h4>
+                <p>Faces and voices found to be one person, waiting for a name.</p>
+              </li>
+              <li>
+                <a href="assets/shots/faces@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/faces.webp" width="640" height="400" loading="lazy" alt="Helen Okafor&#x27;s faces from a child to her sixties">
+                </a>
+                <h4>Faces</h4>
+                <p>Every face of one person, from childhood on.</p>
+              </li>
+              <li>
+                <a href="assets/shots/person@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/person.webp" width="640" height="400" loading="lazy" alt="Peggy Wrenfield&#x27;s page with her timeline">
+                </a>
+                <h4>A life</h4>
+                <p>A timeline of births, weddings, moves and albums.</p>
+              </li>
+              <li>
+                <a href="assets/shots/family@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/family.webp" width="640" height="400" loading="lazy" alt="Peggy Wrenfield&#x27;s family tree">
+                </a>
+                <h4>Family tree</h4>
+                <p>Ancestors above, descendants below, couples side by side.</p>
+              </li>
+              <li>
+                <a href="assets/shots/locations@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/locations.webp" width="640" height="400" loading="lazy"
+                    alt="The Locations page: a grid of map tiles, each with a place&#x27;s name">
+                </a>
+                <h4>Locations</h4>
+                <p>Every place, as a point, a circle or an outline on its map.</p>
+              </li>
+              <li>
+                <a href="assets/shots/place@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/place.webp" width="640" height="400" loading="lazy" alt="The cottage at Malpas: a circle on the map and its resident">
+                </a>
+                <h4>A place</h4>
+                <p>Who lived there and what was taken there.</p>
+              </li>
+              <li>
+                <a href="assets/shots/map@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/map.webp" width="640" height="400" loading="lazy"
+                    alt="A map of the Stockholm archipelago with GPS tracks and clusters of photos">
+                </a>
+                <h4>Map</h4>
+                <p>Every geotagged picture, place and GPS track on one map.</p>
+              </li>
+              <li>
+                <a href="assets/shots/year@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/year.webp" width="640" height="400" loading="lazy" alt="The Year page for 2025 with a histogram of every year">
+                </a>
+                <h4>Year</h4>
+                <p>The albums of one year, under a bar for every year.</p>
+              </li>
+              <li>
+                <a href="assets/shots/devices@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/devices.webp" width="640" height="400" loading="lazy"
+                    alt="The Devices page listing cameras, phones, a camcorder and a scanner">
+                </a>
+                <h4>Devices</h4>
+                <p>Cameras, phones, camcorders and scanners, with owners and time zones.</p>
+              </li>
+              <li>
+                <a href="assets/shots/device@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/device.webp" width="640" height="400" loading="lazy" alt="Ruby&#x27;s iPhone: make, model, time zone and current owner">
+                </a>
+                <h4>A device</h4>
+                <p>One phone: its owner, time zone, timeline, media and GPS track.</p>
+              </li>
+              <li>
+                <a href="assets/shots/recording@2x.webp" data-shot data-width="2280" data-height="1280">
+                  <img src="assets/shots/thumbs/recording.webp" width="640" height="359" loading="lazy" alt="A recording with a waveform and a timed transcript">
+                </a>
+                <h4>A recording</h4>
+                <p>A transcript that follows the player, line by line.</p>
+              </li>
+              <li>
+                <a href="assets/shots/scan@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/scan.webp" width="640" height="400" loading="lazy" alt="A black-and-white wedding photo from 1956 in the viewer">
+                </a>
+                <h4>An old print</h4>
+                <p>A scan dated to its day in 1956, not the day it was scanned.</p>
+              </li>
+              <li>
+                <a href="assets/shots/postcard@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/postcard.webp" width="640" height="400" loading="lazy" alt="A handwritten postcard from 1968 with its text laid over it">
+                </a>
+                <h4>Handwriting</h4>
+                <p>The words read from a postcard laid over it.</p>
+              </li>
+              <li>
+                <a href="assets/shots/import@2x.webp" data-shot data-width="2880" data-height="1800">
+                  <img src="assets/shots/thumbs/import.webp" width="640" height="400" loading="lazy"
+                    alt="The Import media dialog: choose files or a folder, or copy them over SFTP">
+                </a>
+                <h4>Import</h4>
+                <p>New files go to your own staging area first; big imports go over SFTP.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="requirements deep chapter ch-start" id="start" aria-labelledby="requirements-title">
+        <div class="band" data-band="docs" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="intro">
+            <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Getting started</p>
+            <h2 id="requirements-title">System requirements</h2>
+            <p>
+              EiN runs as four containers on one Linux machine. A graphics card is optional: without one every feature still works, more slowly. The recommended machine is the one EiN
+              is tuned and measured on; the minimum is an estimate that has not yet been run end to end.
+            </p>
+          </div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="System requirements">
+            <table class="spec">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="sr-only">Part</span></th>
+                  <th scope="col">Minimum</th>
+                  <th scope="col">Recommended</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">System</th>
+                  <td colspan="2">Linux on x86-64, with rootless podman</td>
+                </tr>
+                <tr>
+                  <th scope="row">Processor</th>
+                  <td>4 cores</td>
+                  <td>6 cores or more</td>
+                </tr>
+                <tr>
+                  <th scope="row">Memory</th>
+                  <td>16 GB, with the assistant off or on a hosted model, and smaller memory caps</td>
+                  <td>32 GB</td>
+                </tr>
+                <tr>
+                  <th scope="row">Graphics card</th>
+                  <td>None. Transcribing takes about twice the length of the audio.</td>
+                  <td>NVIDIA with 16 GB, room for the media models and the assistant side by side. 8 and 12 GB cards work, with less room for the assistant.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Storage</th>
+                  <td>About 100 GB free on an SSD for the images and the database, plus your files</td>
+                  <td>The database on an SSD, your originals on a large disk or a NAS</td>
+                </tr>
+                <tr>
+                  <th scope="row">Browser</th>
+                  <td colspan="2">
+                    A current browser that shows AVIF and plays AV1 video: Chrome, Edge or Firefox, or Safari 17 and newer on an Apple device that decodes AV1 (M3, A17 Pro or
+                    later). Other Apple devices show a video's poster but cannot play it.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="sub">What runs</h3>
+          <dl class="components">
+            <div>
+              <dt>EiN</dt>
+              <dd>The web interface, the shell, SSH and SFTP, sharing, and the pipelines that process every file. Deno, no graphics card, about 0.7 GB in use under load.</dd>
+            </div>
+            <div>
+              <dt>PostgreSQL 18</dt>
+              <dd>Every node, link, permission, vector, track and log, with TimescaleDB, pgvector and PostGIS. About 150 KB per original file.</dd>
+            </div>
+            <div>
+              <dt>Media service</dt>
+              <dd>Every model and media tool. An image of about 30 GB with the models built in, so nothing is downloaded at run time. Runs on an NVIDIA card or the CPU.</dd>
+            </div>
+            <div>
+              <dt>Language model <span class="chip">Optional</span></dt>
+              <dd>Qwen3.5-4B in llama.cpp for the assistant, 5.6 GB on the card or in memory. Or a hosted provider, or none.</dd>
+            </div>
+          </dl>
+          <ul class="notes">
+            <li>Ports: 8080 for the web, 2222 for SSH and SFTP. Put an HTTPS proxy in front of EiN, and keep the database and media service behind a firewall.</li>
+            <li>
+              Three of the default models, for faces, text search and speaker turns, are licensed by their makers for non-commercial use only, and the English handwriting model,
+              which the Finnish one builds on, was trained on research-only data. That is fine for a family at home; using EiN commercially means replacing or licensing them.
+            </li>
+            <li>Graphics cards must be NVIDIA, with driver 610 or newer. There is no AMD, Intel or Apple path yet.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="start ch-start" id="install" aria-labelledby="install-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="install-title">Install</h2>
+            <p>
+              <span class="chip">In progress</span> There is no installer yet, and no published container images. Today EiN is built from source on the machine it runs on. The
+              installer will be one command:
+            </p>
+          </div>
+          <div class="install">
+            <pre class="term term-large" tabindex="0"><code><span class="p">$</span> curl -fsSL https://einhq.github.io/install.sh | bash</code></pre>
+            <button class="copy" type="button" data-copy hidden>Copy</button>
+            <span class="sr-only" role="status"></span>
+          </div>
+          <p class="install-note">
+            For now the script only checks your machine against the requirements above and says what is missing. It installs nothing. <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">Read it first</a>.
+          </p>
+
+          <h3 class="sub">Until then: build it from source</h3>
+          <ol class="steps">
+            <li>Start the database with <code>db/run.sh</code>: PostgreSQL 18 with TimescaleDB and pgvector. Change its fixed password before the machine faces a network.</li>
+            <li>
+              Make the storage folders: your originals, the thumbnails and copies, scratch space, and an empty folder for <code>OLD_PATH</code>, which both containers mount.
+            </li>
+            <li>
+              Build the media service with <code>make build</code> (about 30 GB, every model downloaded once), then <code>make run</code> with a random key, <code>GPU=1</code> if you
+              have a card, and those folders.
+            </li>
+            <li>Optionally start the assistant's model with <code>llm/run.sh</code>, or point the assistant at a hosted provider.</li>
+            <li>In EiN's repository, run <code>deno task bundle-ui</code>, <code>make container-build</code> and <code>make container-run</code> with the database address, the media service's key and the same folders.</li>
+            <li>Read the admin password from the log (<code>Admin password set to: …</code>), sign in at port 8080, and change it.</li>
+          </ol>
+          <p class="install-note">
+            To see it work before your own files go in, load the invented family's 48-file sample from <code>test-content</code>. The repositories are being prepared for publishing
+            under <a href="https://github.com/einhq">einhq</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="source deep ch-start" id="source" aria-labelledby="source-title">
+        <div class="wrap">
+          <div class="intro">
+            <h2 id="source-title">Open source</h2>
+            <p>EiN and the libraries it is built on. The three libraries are on JSR already; the rest are on their way to GitHub.</p>
+          </div>
+          <ul class="repos">
+            <li><strong>core</strong><span>EiN itself: the node tree, the shell, the pipelines, the web interface, SSH and SFTP, and the Archive, Assistant and media service modules. TypeScript on Deno. MIT.</span></li>
+            <li><strong>ems</strong><span>The media service: every media tool and model behind one HTTP API. Python.</span></li>
+            <li><strong>db</strong><span>The PostgreSQL 18 image and its run script.</span></li>
+            <li><strong>llm</strong><span>The assistant's local language model: llama.cpp's server and its run script.</span></li>
+            <li><strong>bash-parser</strong><span>Parses bash 5.2 syntax into a syntax tree. <code>@ein/bash-parser</code> on JSR. MIT.</span></li>
+            <li><strong>bash-executor</strong><span>Runs it: expansions, control flow, builtins, line editing and completion. <code>@ein/bash-executor</code> on JSR. MIT.</span></li>
+            <li><strong>ssh2</strong><span>An SSH client and server in TypeScript, with no native bindings. <code>@ein/ssh2-ts</code> on JSR. MIT.</span></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="viewer" aria-label="Screenshot">
+      <figure>
+        <img alt="">
+        <figcaption><strong></strong><span></span></figcaption>
+      </figure>
+      <button class="viewer-close" type="button" aria-label="Close">×</button>
+      <button class="viewer-step viewer-prev" type="button" aria-label="Previous screenshot">‹</button>
+      <button class="viewer-step viewer-next" type="button" aria-label="Next screenshot">›</button>
+    </dialog>
+
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-brand">
+          <img src="assets/favicon.svg" alt="" width="32" height="32">
+          <p><strong>EiN</strong>, Everything is a Node.</p>
+        </div>
+        <div class="foot-notice">
+          <h2>About the people in these pictures</h2>
+          <p>
+            Nobody in the demo exists. The Wrenfields, 19 people over four generations, are invented, and nothing comes from a real family's archive. Every picture with the family
+            in it was generated whole, settings included, with the open FLUX.2 [klein] 4B model, and says so inside the file. Their voices are synthetic, and no real person's voice
+            was cloned. The photos without people are real: freely licensed photos from Wikimedia Commons and camera RAW samples from raw.pixls.us, each credited by author and
+            licence in <a href="https://github.com/einhq/einhq.github.io/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a>. Among them, the covers of Freya's
+            Pentax and Freya's phone are photos by Mutney, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Map data © OpenStreetMap contributors.
+          </p>
+        </div>
+        <p class="foot-small">
+          This site is MIT licensed. Its typefaces are Familjen Grotesk, Fragment Mono and, for the wordmark and the headings, Mochiy Pop One, under the SIL Open Font License.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

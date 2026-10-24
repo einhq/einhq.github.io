@@ -1,0 +1,1868 @@
+/*
+ * EiN's presentation page. The ground is the web interface's own (#101217 under the mark's facets),
+ * so the screenshots sit in it as windows; colour is reserved for node types and pages, as in the
+ * interface, where each kind of page wears its accent: people violet, albums blue, places teal,
+ * devices orange, tracks cyan, labels pink, media indigo, the system lime, the documentation lilac,
+ * and the home page all of them in turn (`--mixed`). Each chapter of the page wears the accent of
+ * the interface's pages it is about; the first opens on the hero, the others on a band of hats in
+ * their accent, as those pages do.
+ */
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/familjen-grotesk-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Familjen Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/familjen-grotesk-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Fragment Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/fragment-mono-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fragment Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/fragment-mono-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4,
+    U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* Mochiy Pop One: the wordmark, as EiN's web interface draws it beside the mark, and every heading. */
+@font-face {
+  font-family: 'Mochiy Pop One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/mochiy-pop-one-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122;
+}
+
+:root {
+  color-scheme: dark;
+
+  --ink: #12151c;
+  --ink-deep: #0d1015;
+  --raised: #1a1e27;
+  --line: rgb(255 255 255 / 0.09);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --text: #eceff4;
+  --muted: #a2abbb;
+  --faint: #7d8697;
+
+  /* Node types, the interface's own accents (src/builtin/ui HatField.tsx ACCENTS). */
+  --person: #da77f2;
+  --album: #339af0;
+  --place: #38d9a9;
+  --track: #22b8cf;
+  --device: #ffa94d;
+  --label: #f06595;
+  --media: #748ffc;
+  --system: #a9e34b;
+  --docs: #b197fc;
+  /* The grey of the hats under a dialog's buttons. */
+  --neutral: #9ba3b0;
+  /* The interface's `mixed` pattern, as a paint for the hats drawn in CSS. */
+  --mixed: linear-gradient(90deg, var(--album) 5%, var(--person) 25%, var(--place) 45%, var(--track) 62%, var(--device) 80%, var(--label) 98%);
+
+  --sans: 'Familjen Grotesk', ui-sans-serif, system-ui, sans-serif;
+  /* The wordmark's face, at the weight the interface draws it in, for the wordmark and every heading. */
+  --display: 'Mochiy Pop One', var(--sans);
+  --mono: 'Fragment Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Type scale: a perfect fourth (4:3) from an 18 px body. */
+  --t-small: 0.875rem;
+  --t-body: 1.125rem;
+  --t-h3: 1.375rem;
+  --t-h2: clamp(2rem, 1.2rem + 2.6vw, 3.2rem);
+  --t-h1: clamp(2.8rem, 1.4rem + 5vw, 5.6rem);
+
+  /* The hat, for masks. */
+  --hat-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2.567 7 7'%3E%3Cpolygon points='0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732'/%3E%3C/svg%3E");
+
+  --wrap: 1240px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(64px, 8vw, 120px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  font-feature-settings: 'kern', 'liga';
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--album);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  text-wrap: balance;
+}
+h2 {
+  font-size: var(--t-h2);
+  line-height: 1.12;
+}
+h3 {
+  font-size: var(--t-h3);
+  line-height: 1.3;
+}
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+code {
+  padding: 0.08em 0.32em;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.06);
+}
+kbd {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.02em 0.4em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.defs {
+  position: absolute;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--ink);
+}
+.skip:focus {
+  top: 12px;
+}
+
+.wrap {
+  width: min(100%, var(--wrap));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* --- the hat glyph: a node type's mark --- */
+
+.hat {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  fill: currentColor;
+}
+.k-person,
+.t-person,
+.c-person {
+  --accent: var(--person);
+}
+.t-album,
+.c-album {
+  --accent: var(--album);
+}
+.k-place,
+.t-place,
+.c-place {
+  --accent: var(--place);
+}
+.t-device,
+.c-device {
+  --accent: var(--device);
+}
+.t-track {
+  --accent: var(--track);
+}
+.k-label {
+  --accent: var(--label);
+}
+.k-media,
+.t-media,
+.c-media {
+  --accent: var(--media);
+}
+
+/* The chapters, each in the accent of the interface's pages it is about; `--paint` is what its hats
+ * are drawn with, the accent itself (`initial`) unless the pattern is a gradient. */
+.ch-core {
+  --accent: var(--system);
+  --paint: initial;
+}
+.ch-assistant {
+  --accent: var(--person);
+  --paint: var(--mixed);
+}
+.ch-archive {
+  --accent: var(--album);
+  --paint: initial;
+}
+.ch-screenshots {
+  --accent: var(--media);
+  --paint: initial;
+}
+.ch-start {
+  --accent: var(--docs);
+  --paint: initial;
+}
+
+/* A hat drawn in CSS, in its chapter's paint: the chapter's mark, and a list's bullets. */
+.mark {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  background: var(--paint, var(--accent, var(--faint)));
+  -webkit-mask: var(--hat-mask) center / contain no-repeat;
+  mask: var(--hat-mask) center / contain no-repeat;
+}
+
+/* --- top bar --- */
+
+.bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 60px;
+  padding-inline: var(--gutter);
+  background: rgb(18 21 28 / 0.88);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+/* The grey hats EiN lays under a dialog's buttons and its terminal's tabs, upside down: they hang
+ * from the top edge and are gone by the bar's foot. */
+.bar-hats {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%);
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+}
+.bar-hats svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(-1);
+}
+.bar[data-scrolled] {
+  border-bottom-color: var(--line);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+.bar nav {
+  display: flex;
+  gap: 24px;
+  margin-inline-start: auto;
+  font-size: 0.95rem;
+}
+/* Each chapter's link carries its hat, faint until the chapter is in view (site.js). */
+.bar nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.bar nav a::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  background: var(--paint, var(--accent));
+  opacity: 0.4;
+  -webkit-mask: var(--hat-mask) center / contain no-repeat;
+  mask: var(--hat-mask) center / contain no-repeat;
+  transition: opacity 0.2s, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.bar nav a:hover,
+.bar nav a[aria-current] {
+  color: var(--text);
+}
+.bar nav a:hover::before {
+  opacity: 0.8;
+}
+.bar nav a[aria-current]::before {
+  opacity: 1;
+  transform: rotate(60deg);
+}
+.bar-source {
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.bar-source:hover {
+  border-color: var(--muted);
+}
+@media (max-width: 780px) {
+  .bar nav {
+    display: none;
+  }
+  .bar-source {
+    margin-inline-start: auto;
+  }
+}
+
+/* --- hero: the hat field --- */
+
+.hero {
+  position: relative;
+  display: grid;
+  align-content: end;
+  min-height: min(94vh, 900px);
+  padding: 120px var(--gutter) 40px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.field svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* The copy stands on a quieter left and foot of the field; the scrim paints above the tiles. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--ink) 0%, rgb(18 21 28 / 0.55) 7%, transparent 13%),
+    linear-gradient(to right, rgb(18 21 28 / 0.72) 0%, rgb(18 21 28 / 0.5) 30%, transparent 46%);
+}
+.hero-copy {
+  width: min(100%, var(--wrap));
+  margin-inline: auto;
+  pointer-events: none;
+}
+.hero-copy > * {
+  max-width: 40rem;
+  pointer-events: auto;
+}
+.wip {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.hero h1 {
+  max-width: 11ch;
+  font-size: var(--t-h1);
+  line-height: 1.08;
+}
+.lede {
+  margin-top: 28px;
+  color: #cfd5df;
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: rgb(18 21 28 / 0.6);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.button:hover {
+  border-color: var(--muted);
+}
+.button-primary {
+  border-color: transparent;
+  background: var(--text);
+  color: var(--ink);
+}
+.button-primary:hover {
+  background: #fff;
+}
+
+.field-key {
+  width: min(100%, var(--wrap));
+  margin: 72px auto 0;
+  color: var(--muted);
+  font-size: var(--t-small);
+}
+
+/* The field's tiles (drawn by site.js, which paints them). */
+.tile {
+  stroke-width: 1;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.tile-picture {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-opacity: 0.85;
+}
+/* A tile that shows a node other than a picture, as EiN shows it: a shell, a recording, a track.
+ * Its content takes no outline from the tile; what is drawn in lines sets its own. */
+.g {
+  stroke: none;
+}
+.g-screen {
+  fill: #151922;
+}
+.g-text {
+  fill: #d6dbe4;
+  font-family: var(--mono);
+}
+.g-sans {
+  font-family: var(--sans);
+}
+.g-strong {
+  fill: #fff;
+  font-weight: 600;
+}
+.g-muted {
+  fill: #8a93a5;
+}
+.g-faint {
+  fill: #5f687a;
+}
+.g-accent,
+.g-fill {
+  fill: var(--accent);
+}
+.g-ok {
+  fill: var(--place);
+}
+.g-warn {
+  fill: var(--device);
+}
+.g-light {
+  fill: #fff;
+}
+.g-bar {
+  fill: #474f60;
+}
+.g-bubble {
+  fill: #1f4280;
+}
+.g-dot {
+  stroke-width: 1.5;
+}
+.g-dot-done {
+  fill: var(--accent);
+}
+.g-dot-running {
+  fill: #151922;
+  stroke: var(--accent);
+  stroke-dasharray: 2 1.5;
+}
+.g-dot-waiting {
+  fill: #151922;
+  stroke: #5f687a;
+}
+/* A street map, as the interface's maps are drawn: light. */
+.g-land {
+  fill: #e2ded4;
+}
+.g-water {
+  fill: #a9c9e2;
+}
+.g-park {
+  fill: #cbe0b9;
+}
+.g-road-case,
+.g-road {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.g-road-case {
+  stroke: #c8c1b2;
+}
+.g-road {
+  stroke: #fbfaf7;
+}
+.g-route {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 70%, #000);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.g-route-end {
+  fill: #fff;
+  stroke: color-mix(in srgb, var(--accent) 70%, #000);
+  stroke-width: 2;
+}
+.g-place {
+  fill: color-mix(in srgb, var(--accent) 28%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 70%, #000);
+}
+.g-pin {
+  fill: color-mix(in srgb, var(--accent) 70%, #000);
+}
+/* A letter: handwriting in ink on paper, with a stamp. */
+.g-paper {
+  fill: #ebe3d0;
+}
+.g-ink {
+  fill: none;
+  stroke: #2b4174;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.g-stamp {
+  fill: color-mix(in srgb, var(--accent) 55%, #ebe3d0);
+  stroke: #fff;
+  stroke-width: 1.5;
+  stroke-dasharray: 2 1.5;
+}
+/* A home video: its still, a play button, a subtitle and how far it has played. */
+.g-dim {
+  fill: rgb(0 0 0 / 0.25);
+}
+.g-play {
+  fill: rgb(0 0 0 / 0.45);
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+.g-caption {
+  fill: #fff;
+  font-family: var(--sans);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: rgb(0 0 0 / 0.75);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.g-track {
+  fill: rgb(255 255 255 / 0.4);
+}
+.tile-picture image {
+  transition: filter 0.2s;
+}
+.tile-picture:hover image {
+  filter: brightness(1.12);
+}
+.field [data-entering] .tile {
+  animation: tile-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay);
+}
+@keyframes tile-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-30deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .field [data-entering] .tile {
+    animation: none;
+  }
+}
+.tip {
+  position: absolute;
+  z-index: 2;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: rgb(13 16 21 / 0.94);
+  font-size: var(--t-small);
+  line-height: 1.35;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  white-space: nowrap;
+}
+.tip strong {
+  display: block;
+  font-weight: 600;
+}
+.tip span {
+  color: var(--muted);
+}
+
+/* Stacked: the copy spans the width, so the field shows above it (site.js puts the pictures there). */
+@media (max-width: 999px) {
+  .hero::before {
+    background: linear-gradient(to top, var(--ink) 0%, rgb(18 21 28 / 0.92) 50%, transparent 64%);
+  }
+}
+@media (max-width: 720px) {
+  .hero {
+    min-height: auto;
+    padding-top: 46vh;
+  }
+  .hero::before {
+    background: linear-gradient(to top, var(--ink) 0%, var(--ink) 50%, rgb(18 21 28 / 0.7) 57%, transparent 63%);
+  }
+  .field-key {
+    margin-top: 48px;
+  }
+}
+
+/* --- sections --- */
+
+main > section {
+  padding-block: var(--section);
+}
+.deep {
+  background: var(--ink-deep);
+}
+/* A terminal inside a deep section stands on the page's own ground. */
+.deep .term {
+  background: var(--ink);
+}
+.source h2 {
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
+}
+.intro {
+  max-width: 44rem;
+}
+.intro > p {
+  margin-top: 20px;
+  color: var(--muted);
+}
+.intro > p + p {
+  margin-top: 14px;
+}
+.sub {
+  margin-top: 72px;
+}
+
+/* A screenshot: a window into the interface. */
+.shot {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--ink-deep);
+  box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.75), 0 0 0 6px rgb(255 255 255 / 0.02);
+}
+.shot img {
+  width: 100%;
+}
+.shot-phone {
+  border-radius: 12px;
+  border-width: 1.5px;
+}
+figure {
+  margin: 0;
+}
+figcaption {
+  max-width: 44rem;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- one picture, annotated --- */
+
+.annotated {
+  margin-top: 56px;
+}
+.callouts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.callouts li {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translate(calc(-100% + 5px), -50%);
+}
+.callouts li::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border: 2px solid var(--ink-deep);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.callouts span {
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 8px;
+  background: rgb(13 16 21 / 0.9);
+  font-size: 0.85rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .callouts {
+    display: grid;
+    gap: 8px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--line);
+  }
+  .callouts li {
+    position: static;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    transform: none;
+  }
+  .callouts span {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    white-space: normal;
+  }
+}
+
+/* --- tour: tabs over screenshots --- */
+
+.tabs {
+  margin-top: 48px;
+}
+.tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.tablist button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.tablist button::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  opacity: 0.55;
+  -webkit-mask: var(--hat-mask) center / contain no-repeat;
+  mask: var(--hat-mask) center / contain no-repeat;
+}
+.tablist button:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+.tablist button[aria-selected='true'] {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--text);
+}
+.tablist button[aria-selected='true']::before {
+  opacity: 1;
+}
+.tabpanel {
+  display: grid;
+  gap: 24px;
+}
+.tabpanel[hidden] {
+  display: none;
+}
+.caption {
+  display: grid;
+  grid-template-columns: 20rem minmax(0, 44rem);
+  gap: 8px 40px;
+  align-items: baseline;
+}
+.caption p {
+  color: var(--muted);
+}
+/* Without script every panel shows, one after another. */
+@media (scripting: none) {
+  .tablist {
+    display: none;
+  }
+  .tabpanel[hidden] {
+    display: grid;
+    margin-top: 56px;
+  }
+}
+@media (max-width: 720px) {
+  .tablist {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 4px;
+    scrollbar-width: none;
+  }
+  .tablist button {
+    flex: none;
+  }
+}
+@media (max-width: 1000px) {
+  .caption {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- what it finds --- */
+
+.find-groups {
+  margin-top: 48px;
+  border-bottom: 1px solid var(--line);
+}
+.find {
+  display: grid;
+  grid-template-columns: 20rem minmax(0, 44rem);
+  column-gap: 40px;
+  padding-block: 24px;
+  border-top: 1px solid var(--line);
+}
+.find h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: start;
+}
+.find .hat {
+  color: var(--accent, var(--muted));
+}
+.find ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 1000px) {
+  .find {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+}
+.find li {
+  color: var(--muted);
+  font-size: 1rem;
+}
+.find li + li {
+  margin-top: 12px;
+}
+.search .shot {
+  margin-top: 48px;
+}
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 80px;
+}
+@media (max-width: 860px) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- split sections: text beside a screenshot --- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.split-reverse {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+.split-reverse > .intro {
+  order: 2;
+}
+@media (max-width: 960px) {
+  .split,
+  .split-reverse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .split-reverse > .intro {
+    order: 0;
+  }
+}
+.points {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.points li {
+  position: relative;
+  padding-left: 24px;
+  color: var(--muted);
+}
+.points li + li {
+  margin-top: 10px;
+}
+/* A bullet is a small hat in the chapter's colour. */
+.points li::before,
+.notes li::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 0.45em;
+  width: 10px;
+  height: 10px;
+  background: var(--paint, var(--accent, var(--faint)));
+  opacity: 0.7;
+  -webkit-mask: var(--hat-mask) center / contain no-repeat;
+  mask: var(--hat-mask) center / contain no-repeat;
+}
+
+/* --- shell --- */
+
+.shell-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: 56px;
+}
+.shell-doors > p {
+  margin-top: 12px;
+  color: var(--muted);
+}
+@media (max-width: 960px) {
+  .shell-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.term {
+  margin: 20px 0 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--ink-deep);
+  color: #d6dbe4;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  tab-size: 2;
+}
+.term code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+.term .p {
+  color: var(--muted);
+  user-select: none;
+}
+.term .c {
+  color: var(--muted);
+}
+
+/* --- nodes: what a node is, and the core's types --- */
+
+.node-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: start;
+  margin-top: 56px;
+}
+@media (max-width: 960px) {
+  .node-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.node-card dl {
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--raised);
+}
+.node-card dl > div {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 20px;
+}
+.node-card dl > div + div {
+  border-top: 1px solid var(--line);
+}
+.node-card dt {
+  color: var(--accent, var(--media));
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+.node-card dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.node-card dd code {
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+.type-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 32px;
+  margin-top: 20px;
+}
+@media (max-width: 560px) {
+  .type-groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.type-groups section {
+  padding-top: 14px;
+  border-top: 1px solid var(--line-strong);
+}
+.type-groups h4 {
+  margin: 0;
+  color: var(--faint);
+  font-size: var(--t-small);
+  font-weight: 500;
+}
+.type-groups p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.types-note {
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* --- the tree, and the layers a request passes --- */
+
+.tree-map {
+  margin: 0;
+  font-size: 0.85rem;
+}
+.layers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: layer;
+}
+.layers li {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 18px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--raised);
+}
+.layers li + li {
+  margin-top: 30px;
+}
+/* The arrow down to the next layer. */
+.layers li + li::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -24px;
+  width: 2px;
+  height: 18px;
+  background: var(--faint);
+}
+.layers li + li::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 5px);
+  top: -9px;
+  border: 6px solid transparent;
+  border-top-color: var(--faint);
+  border-bottom-width: 0;
+}
+.layers li:last-child {
+  border-color: color-mix(in srgb, var(--accent, var(--media)) 55%, transparent);
+}
+.layers span {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- pipelines --- */
+
+.term-caption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.pipelines .term {
+  margin-top: 0;
+}
+.keeping-up {
+  margin-top: 96px;
+}
+.keeping-up .intro > p {
+  margin-top: 14px;
+}
+.shell-points {
+  margin-top: 0;
+}
+
+/* --- a chapter's start: a band of hats in its accent, as a page of the interface opens --- */
+
+.chapter {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid var(--line);
+}
+.band {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: clamp(200px, 22vw, 300px);
+  pointer-events: none;
+  /* The band runs out into the section's own ground rather than ending at an edge. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent);
+}
+.band svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.chapter-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chapter-mark .mark {
+  width: 1.2em;
+  height: 1.2em;
+}
+.ch-assistant .chapter-mark {
+  color: var(--text);
+}
+/* The three chapters the page is about open on a title of their own and two paragraphs. */
+.opener h2 {
+  max-width: 18ch;
+  font-size: clamp(2.4rem, 1.3rem + 3.6vw, 4.4rem);
+  line-height: 1.1;
+}
+.opener {
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+.opener .band {
+  height: clamp(240px, 26vw, 360px);
+}
+.chapter-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 56px;
+  margin-top: 36px;
+}
+@media (max-width: 860px) {
+  .chapter-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.chapter-lede {
+  color: #cfd5df;
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
+}
+.chapter-body p + p {
+  color: var(--muted);
+}
+/* A chapter's first section follows its opening without a second gap. */
+.opener + section {
+  padding-top: 0;
+}
+
+/* --- the assistant --- */
+
+/* Questions as the chat shows them, each over a command it may run to answer. */
+.asks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.asks li {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+.asks li + li {
+  margin-top: 18px;
+}
+.asks q {
+  padding: 8px 15px;
+  border-radius: 16px 16px 16px 4px;
+  background: color-mix(in srgb, var(--album) 30%, var(--ink));
+  color: var(--text);
+  font-size: 1rem;
+  quotes: none;
+}
+.asks code {
+  margin-left: 15px;
+  padding: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.asks code::before {
+  content: '$ ';
+  color: var(--faint);
+}
+.asks .chip {
+  margin: 0 0 0 10px;
+  font-family: var(--sans);
+}
+
+/* The hand-over to the Archive: a card whose right runs into a band of the Archive's hats. */
+.handover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: 88px;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 14px;
+  background: var(--ink-deep);
+}
+.handover .band {
+  inset: 0;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to left, #000 5%, transparent 70%);
+  mask-image: linear-gradient(to left, #000 5%, transparent 70%);
+}
+.handover .chapter-mark {
+  color: var(--accent);
+}
+.handover h3 {
+  max-width: 24ch;
+}
+.handover p {
+  max-width: 40rem;
+  margin-top: 14px;
+  color: var(--muted);
+}
+.handover .button {
+  margin-top: 24px;
+}
+
+/* --- the media service's models and tools, with their licences --- */
+
+.models .model {
+  display: block;
+}
+.models .model + .model {
+  margin-top: 6px;
+}
+.models a {
+  color: var(--text);
+}
+.licence {
+  color: var(--faint);
+  font-size: var(--t-small);
+  white-space: nowrap;
+}
+.licence-nc {
+  color: var(--device);
+}
+.tool-list .licence {
+  display: inline;
+  margin: 0 0 0 8px;
+  color: var(--faint);
+  font-size: var(--t-small);
+}
+
+.tools {
+  margin-top: 72px;
+}
+.tool-list {
+  margin-top: 20px;
+}
+.tool-list a {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+/* --- private --- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 36px 32px;
+  margin: 56px 0 0;
+}
+.facts div {
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
+}
+.facts dt {
+  font-weight: 600;
+}
+.facts dd {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* --- the media service --- */
+
+.ems-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 64px;
+  align-content: start;
+}
+.ems-body > * {
+  grid-column: 1;
+}
+.ems-body .models {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+  margin-top: 0;
+}
+.models {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.models caption {
+  padding-bottom: 6px;
+  color: var(--faint);
+  font-size: var(--t-small);
+  text-align: left;
+}
+.models th,
+.models td {
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.models th {
+  width: 40%;
+  padding-right: 12px;
+  font-weight: 500;
+}
+.models td {
+  color: var(--muted);
+}
+@media (max-width: 1060px) {
+  .ems-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ems-body .models {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 18px;
+  }
+}
+.next {
+  margin-top: 48px;
+  color: var(--muted);
+}
+.chip {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 9px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  vertical-align: 0.12em;
+}
+
+/* --- phone --- */
+
+.phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  align-items: start;
+}
+.phones .shot:nth-child(2) {
+  margin-top: 48px;
+}
+@media (max-width: 520px) {
+  .phones {
+    grid-template-columns: repeat(3, 62vw);
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+  }
+  .phones .shot {
+    scroll-snap-align: start;
+  }
+  .phones .shot:nth-child(2) {
+    margin-top: 0;
+  }
+}
+
+/* --- screenshots: a gallery of every page, and a viewer for one --- */
+
+.gallery-group {
+  margin-top: 64px;
+}
+.gallery-group h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.gallery-group h3 span {
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.gallery-group h3 .mark {
+  align-self: center;
+  margin-right: -4px;
+  font-size: 1.1rem;
+}
+.gallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 36px 28px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.gallery-list a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--ink-deep);
+  transition: border-color 0.15s;
+}
+.gallery-list a:hover {
+  border-color: var(--muted);
+}
+.gallery-list img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 0.25s;
+}
+.gallery-list a:hover img {
+  transform: scale(1.02);
+}
+.gallery-list h4 {
+  margin: 14px 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.gallery-list p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.viewer {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(9 11 15 / 0.96);
+  color: var(--text);
+}
+.viewer::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+.viewer figure {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  gap: 16px;
+  height: 100%;
+  padding: 56px clamp(16px, 6vw, 88px) 24px;
+}
+.viewer img {
+  max-width: 100%;
+  max-height: 100%;
+  align-self: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  object-fit: contain;
+}
+.viewer figcaption {
+  max-width: 48rem;
+  margin: 0;
+  text-align: center;
+}
+.viewer figcaption strong {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+.viewer figcaption span {
+  color: var(--muted);
+}
+.viewer button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgb(18 21 28 / 0.8);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.viewer button:hover {
+  border-color: var(--muted);
+}
+.viewer-close {
+  top: 12px;
+  right: 12px;
+}
+.viewer-step {
+  top: calc(50% - 22px);
+}
+.viewer-prev {
+  left: 12px;
+}
+.viewer-next {
+  right: 12px;
+}
+@media (max-width: 640px) {
+  .viewer-step {
+    top: auto;
+    bottom: 12px;
+  }
+}
+
+/* --- requirements --- */
+
+.table-scroll {
+  margin-top: 48px;
+  overflow-x: auto;
+}
+.spec {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.spec th,
+.spec td {
+  padding: 16px 20px 16px 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.spec thead th {
+  padding-top: 0;
+  border-top: 0;
+  color: var(--muted);
+  font-size: var(--t-small);
+  font-weight: 500;
+}
+.spec tbody th {
+  width: 18%;
+  font-weight: 600;
+}
+.spec td {
+  width: 41%;
+  color: #cfd5df;
+}
+.components {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 28px 36px;
+  margin: 28px 0 0;
+}
+.components dt {
+  font-weight: 600;
+}
+.components dd {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.notes {
+  margin: 48px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+  list-style: none;
+}
+.notes li {
+  position: relative;
+  max-width: 64rem;
+  padding-left: 24px;
+}
+.notes li + li {
+  margin-top: 8px;
+}
+
+/* --- get started --- */
+
+.install {
+  position: relative;
+  max-width: 52rem;
+  margin-top: 36px;
+}
+.term-large {
+  margin: 0;
+  padding: 22px 96px 22px 24px;
+  font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem);
+  white-space: pre;
+}
+.copy {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  padding: 6px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--raised);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.copy:hover {
+  border-color: var(--muted);
+}
+.install-note {
+  max-width: 44rem;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.steps {
+  max-width: 48rem;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+.steps li {
+  position: relative;
+  padding: 14px 0 14px 48px;
+  border-top: 1px solid var(--line);
+  color: #cfd5df;
+  font-size: 1rem;
+  counter-increment: step;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 13px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 26px;
+  text-align: center;
+}
+
+/* --- open source --- */
+
+.repos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 0 40px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.repos li {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.repos strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+.repos span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- footer --- */
+
+.foot {
+  padding-block: 64px 48px;
+  border-top: 1px solid var(--line);
+  background: var(--ink-deep);
+}
+.foot .wrap {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  gap: 24px 64px;
+}
+.foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  align-self: start;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.foot-brand strong {
+  color: var(--text);
+  font-family: var(--display);
+}
+.foot-notice h2 {
+  font-size: 1.05rem;
+}
+.foot-notice p {
+  max-width: 48rem;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.foot-small {
+  grid-column: 2;
+  color: var(--faint);
+  font-size: var(--t-small);
+}
+@media (max-width: 760px) {
+  .foot .wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .foot-small {
+    grid-column: auto;
+  }
+}
+
+/* On a phone the install command wraps, and the copy button goes under it. */
+@media (max-width: 640px) {
+  .term-large {
+    padding-right: 24px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .copy {
+    position: static;
+    margin-top: 10px;
+    transform: none;
+  }
+}

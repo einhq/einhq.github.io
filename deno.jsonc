@@ -1,0 +1,23 @@
+{
+  // Same formatting as every EiN repository (checked by wow's hooks/pre-commit).
+  "fmt": {
+    "lineWidth": 175,
+    "indentWidth": 2,
+    "singleQuote": true,
+    "proseWrap": "preserve"
+  },
+  // The capture tool's page callbacks run in the browser, so they are typed against the DOM.
+  "compilerOptions": {
+    "lib": ["deno.window", "dom"]
+  },
+  "imports": {
+    "@std/cli": "jsr:@std/cli@^1.0.24",
+    // The browser comes from ~/.cache/ms-playwright (`npx playwright install chromium`) and is passed as an
+    // explicit executablePath, so this version need not match an installed browser revision.
+    "playwright": "npm:playwright@1.49.1"
+  },
+  "tasks": {
+    "capture": "deno run -A --node-modules-dir=auto tools/capture.ts",
+    "serve": "deno run --allow-net --allow-read jsr:@std/http@^1/file-server --port 4507 ."
+  }
+}

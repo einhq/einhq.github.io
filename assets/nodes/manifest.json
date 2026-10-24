@@ -1,0 +1,164 @@
+[
+  {
+    "file": "person-01.avif",
+    "kind": "person",
+    "name": "Helen Okafor",
+    "detail": "35 pictures"
+  },
+  {
+    "file": "person-02.avif",
+    "kind": "person",
+    "name": "David Okafor",
+    "detail": "30 pictures"
+  },
+  {
+    "file": "person-03.avif",
+    "kind": "person",
+    "name": "Erik Wrenfield",
+    "detail": "21 pictures"
+  },
+  {
+    "file": "person-04.avif",
+    "kind": "person",
+    "name": "Freya Wrenfield",
+    "detail": "15 pictures"
+  },
+  {
+    "file": "person-05.avif",
+    "kind": "person",
+    "name": "Jon Wrenfield",
+    "detail": "13 pictures"
+  },
+  {
+    "file": "person-06.avif",
+    "kind": "person",
+    "name": "Ruby Wrenfield",
+    "detail": "12 pictures"
+  },
+  {
+    "file": "person-07.avif",
+    "kind": "person",
+    "name": "Kiri Wrenfield",
+    "detail": "10 pictures"
+  },
+  {
+    "file": "person-08.avif",
+    "kind": "person",
+    "name": "Samuel Okafor",
+    "detail": "8 pictures"
+  },
+  {
+    "file": "person-09.avif",
+    "kind": "person",
+    "name": "Arthur Wrenfield",
+    "detail": "7 pictures"
+  },
+  {
+    "file": "person-10.avif",
+    "kind": "person",
+    "name": "Isla Price",
+    "detail": "6 pictures"
+  },
+  {
+    "file": "person-11.avif",
+    "kind": "person",
+    "name": "Leo Wrenfield",
+    "detail": "6 pictures"
+  },
+  {
+    "file": "person-12.avif",
+    "kind": "person",
+    "name": "Grace Price",
+    "detail": "5 pictures"
+  },
+  {
+    "file": "person-13.avif",
+    "kind": "person",
+    "name": "Noah Price",
+    "detail": "5 pictures"
+  },
+  {
+    "file": "person-14.avif",
+    "kind": "person",
+    "name": "Peggy Wrenfield",
+    "detail": "5 pictures"
+  },
+  {
+    "file": "person-15.avif",
+    "kind": "person",
+    "name": "Thomas Wrenfield",
+    "detail": "5 pictures"
+  },
+  {
+    "file": "album-02.avif",
+    "kind": "album",
+    "name": "Christmas in Wellington",
+    "detail": "19 Dec 2025 \u2013 27 Dec 2025"
+  },
+  {
+    "file": "album-03.avif",
+    "kind": "album",
+    "name": "Ruby's Wellington",
+    "detail": "4 Dec 2025 \u2013 1 May 2026"
+  },
+  {
+    "file": "album-04.avif",
+    "kind": "album",
+    "name": "Sailing in the archipelago",
+    "detail": "4 Aug 2025 \u2013 10 Aug 2025"
+  },
+  {
+    "file": "album-05.avif",
+    "kind": "album",
+    "name": "Erik's archipelago",
+    "detail": "1 Apr 2025 \u2013 29 Jun 2026"
+  },
+  {
+    "file": "album-07.avif",
+    "kind": "album",
+    "name": "Isla turns seven",
+    "detail": "2 Jun 2023"
+  },
+  {
+    "file": "album-08.avif",
+    "kind": "album",
+    "name": "Freya's Truro",
+    "detail": "22 Apr 2023 \u2013 20 Aug 2025"
+  },
+  {
+    "file": "album-09.avif",
+    "kind": "album",
+    "name": "A lockdown walk",
+    "detail": "4 Apr 2020 \u2013 5 Apr 2020"
+  },
+  {
+    "file": "album-10.avif",
+    "kind": "album",
+    "name": "Isla",
+    "detail": "2 Jun 2016 \u2013 25 Jun 2016"
+  },
+  {
+    "file": "album-11.avif",
+    "kind": "album",
+    "name": "David's London",
+    "detail": "22 Mar 2015 \u2013 17 Feb 2017"
+  },
+  {
+    "file": "album-12.avif",
+    "kind": "album",
+    "name": "Grace and Daniel's wedding",
+    "detail": "23 Aug 2014"
+  },
+  {
+    "file": "album-13.avif",
+    "kind": "album",
+    "name": "Jon's Wellington",
+    "detail": "29 Nov 2012 \u2013 2 Jun 2019"
+  },
+  {
+    "file": "album-14.avif",
+    "kind": "album",
+    "name": "Samuel moves to Boston",
+    "detail": "17 Jun 2011 \u2013 18 Jun 2011"
+  }
+]
