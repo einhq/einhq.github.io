@@ -1759,22 +1759,61 @@ figcaption {
 
 /* --- get started --- */
 
-.install {
-  position: relative;
-  max-width: 52rem;
+/* The two install commands side by side, EiN alone and the whole Archive, so the choice is one look;
+ * stacked on a narrow screen. */
+.installs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
   margin-top: 36px;
 }
-.term-large {
-  margin: 0;
-  padding: 22px 96px 22px 24px;
-  font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem);
-  white-space: pre;
+@media (max-width: 860px) {
+  .installs {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
+.install-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2.4vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ink);
+}
+.install-choice h3 {
+  padding-right: 80px;
+  font-size: 1.25rem;
+}
+.install-choice p {
+  flex: 1;
+  margin-top: 8px;
+  color: var(--muted);
+}
+.install {
+  margin-top: 20px;
+}
+/* A command wraps at its spaces rather than scrolling, and is copied whole. */
+.term-command {
+  margin: 0;
+  padding: 18px 20px;
+  font-size: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
+  white-space: pre-wrap;
+}
+/* Its parts, each short enough for a phone's line, which it breaks between and never inside: `bash -s`
+ * would break at the hyphen. */
+.term-command .w {
+  white-space: nowrap;
+}
+/* The section is deep and the card stands on the page's ground, so the command goes deep again. */
+.deep .install-choice .term {
+  background: var(--ink-deep);
+}
+/* Beside the card's title, leaving the command the card's whole width. */
 .copy {
   position: absolute;
-  top: 50%;
-  right: 14px;
-  transform: translateY(-50%);
+  top: clamp(18px, 2.2vw, 26px);
+  right: clamp(20px, 2.4vw, 28px);
   padding: 6px 12px;
   border: 1px solid var(--line-strong);
   border-radius: 7px;
@@ -1894,19 +1933,5 @@ figcaption {
   }
   .foot-small {
     grid-column: auto;
-  }
-}
-
-/* On a phone the install command wraps, and the copy button goes under it. */
-@media (max-width: 640px) {
-  .term-large {
-    padding-right: 24px;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-  }
-  .copy {
-    position: static;
-    margin-top: 10px;
-    transform: none;
   }
 }

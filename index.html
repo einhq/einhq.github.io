@@ -10,17 +10,17 @@
     >
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
-    <link rel="canonical" href="https://einhq.github.io/">
+    <link rel="canonical" href="https://einhq.eu/">
     <meta property="og:title" content="EiN – Everything is a Node">
     <meta property="og:description"
       content="One tree of nodes, a real shell, a web interface and pipelines, on your own machine. Its first module keeps a family's photos, videos, recordings and letters.">
-    <meta property="og:image" content="https://einhq.github.io/assets/og.jpg">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Everything is a Node: EiN's headline beside a field of hat-shaped tiles holding the faces of an invented family">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="EiN">
-    <meta property="og:url" content="https://einhq.github.io/">
+    <meta property="og:url" content="https://einhq.eu/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/icon-180.png">
@@ -45,7 +45,7 @@
       <strong>Work in progress</strong>
       <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what this page shows may change.</span>
       <span class="notice-short">Nothing is released yet.</span>
-      <a href="#install">How to try it</a>
+      <a href="#start">How to try it</a>
     </p>
 
     <header class="bar">
@@ -1450,11 +1450,63 @@ options:
         </div>
       </section>
 
-      <section class="requirements deep chapter ch-start" id="start" aria-labelledby="requirements-title">
+      <section class="start deep chapter ch-start" id="start" aria-labelledby="install-title">
         <div class="band" data-band="docs" aria-hidden="true"></div>
         <div class="wrap">
           <div class="intro">
             <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Getting started</p>
+            <h2 id="install-title">Install</h2>
+            <p>
+              <span class="chip">In progress</span> Nothing is released yet and there are no published images, so the installer builds EiN from source on the machine it runs on and
+              starts it with podman compose or docker compose. One command, for EiN alone or for the whole Archive:
+            </p>
+          </div>
+          <div class="installs">
+            <div class="install-choice">
+              <h3>EiN</h3>
+              <p>The node tree, the shell, the web interface and SSH, with its database. Add the media service, the model and modules when you want them.</p>
+              <div class="install">
+                <pre class="term term-command"
+                  tabindex="0"><code><span class="p">$</span> <span class="w">curl -fsSL</span> <span class="w">https://einhq.eu/install.sh</span> <span class="w">| bash</span></code></pre>
+                <button class="copy" type="button" data-copy hidden>Copy</button>
+                <span class="sr-only" role="status"></span>
+              </div>
+            </div>
+            <div class="install-choice">
+              <h3>The Archive</h3>
+              <p>All of the above, with the media service (an image of about 30 GB), the assistant's language model and the Archive module.</p>
+              <div class="install">
+                <pre class="term term-command"
+                  tabindex="0"><code><span class="p">$</span> <span class="w">curl -fsSL</span> <span class="w">https://einhq.eu/install.sh</span> <span class="w">| bash -s --</span> <span class="w">--ems</span> <span class="w">--llm</span> <span class="w">--module archive</span></code></pre>
+                <button class="copy" type="button" data-copy hidden>Copy</button>
+                <span class="sr-only" role="status"></span>
+              </div>
+            </div>
+          </div>
+          <p class="install-note">
+            Either checks the machine against the <a href="#requirements">system requirements</a> below and stops if something is missing. Then it fetches
+            <a href="https://github.com/einhq/deploy">deploy</a> into <code>~/ein</code>, builds and starts, and prints the admin password to sign in with. <a
+              href="https://github.com/einhq/einhq.github.io/blob/main/install.sh"
+            >Read it first</a>.
+          </p>
+
+          <h3 class="sub">Adding to it later</h3>
+          <ol class="steps">
+            <li>
+              The media service, which the Archive needs: <code>~/ein/setup.sh --ems</code>. An image of about 30 GB with every model in it, built once, and the graphics card if there
+              is one.
+            </li>
+            <li>The assistant's language model: <code>--llm</code>. Or a hosted provider, set in <code>~/ein/.env</code>.</li>
+            <li>A module: <code>--module archive</code>, which brings the modules it needs with it.</li>
+            <li>Updates: <code>~/ein/setup.sh</code> again fetches the newest sources, rebuilds and restarts, keeping every option chosen before.</li>
+          </ol>
+          <p class="install-note">To see it work before your own files go in, load the invented family's 48-file sample from <code>test-content</code>.</p>
+        </div>
+      </section>
+
+      <section class="requirements ch-start" id="requirements" aria-labelledby="requirements-title">
+        <div class="wrap">
+          <div class="intro">
             <h2 id="requirements-title">System requirements</h2>
             <p>
               EiN runs in containers on one Linux machine: EiN and its database always, the media service and the language model when you add them. A graphics card is optional: without one every feature still works, more slowly. The recommended machine is the one EiN
@@ -1533,46 +1585,6 @@ options:
             </li>
             <li>Graphics cards must be NVIDIA, with driver 610 or newer. There is no AMD, Intel or Apple path yet.</li>
           </ul>
-        </div>
-      </section>
-
-      <section class="start ch-start" id="install" aria-labelledby="install-title">
-        <div class="wrap">
-          <div class="intro">
-            <h2 id="install-title">Install</h2>
-            <p>
-              <span class="chip">In progress</span> Nothing is released yet and there are no published images, so the installer builds EiN from source on the machine it runs on and
-              starts it with podman compose or docker compose. One command:
-            </p>
-          </div>
-          <div class="install">
-            <pre class="term term-large" tabindex="0"><code><span class="p">$</span> curl -fsSL https://einhq.github.io/install.sh | bash</code></pre>
-            <button class="copy" type="button" data-copy hidden>Copy</button>
-            <span class="sr-only" role="status"></span>
-          </div>
-          <p class="install-note">
-            It checks the machine against the requirements above and stops if something is missing. Then it fetches <a href="https://github.com/einhq/deploy">deploy</a> into
-            <code>~/ein</code>, builds and starts EiN and its database, and prints the admin password to sign in with. <a
-              href="https://github.com/einhq/einhq.github.io/blob/main/install.sh"
-            >Read it first</a>.
-          </p>
-
-          <h3 class="sub">Adding to it</h3>
-          <ol class="steps">
-            <li>
-              The media service, which the Archive needs: <code>--ems</code>. An image of about 30 GB with every model in it, built once, and the graphics card if there is one.
-            </li>
-            <li>The assistant's language model: <code>--llm</code>. Or a hosted provider, set in <code>~/ein/.env</code>.</li>
-            <li>A module: <code>--module archive</code>, which brings the modules it needs with it.</li>
-            <li>Updates: <code>~/ein/setup.sh</code> again fetches the newest sources, rebuilds and restarts, keeping every option chosen before.</li>
-          </ol>
-          <p class="install-note">The options go to the installer, or to <code>~/ein/setup.sh</code> any time after. The whole Archive, with every option:</p>
-          <div class="install">
-            <pre class="term" tabindex="0"><code><span class="p">$</span> curl -fsSL https://einhq.github.io/install.sh | bash -s -- --ems --llm --module archive</code></pre>
-            <button class="copy" type="button" data-copy hidden>Copy</button>
-            <span class="sr-only" role="status"></span>
-          </div>
-          <p class="install-note">To see it work before your own files go in, load the invented family's 48-file sample from <code>test-content</code>.</p>
         </div>
       </section>
 

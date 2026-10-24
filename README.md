@@ -9,9 +9,8 @@ Screenshots is a gallery of almost every page, and Getting started holds the sys
 how to install and the source. Core opens on the hero, whose field wears the interface's mixed
 pattern as its home page does; each other chapter opens on a band of hats in the colour of the
 interface's pages it is about.
-It becomes the GitHub Pages site of the
-[einhq](https://github.com/einhq) organisation, at
-<https://einhq.github.io>, once this repository is pushed there under the same name.
+It is the GitHub Pages site of the [einhq](https://github.com/einhq) organisation, served at
+<https://einhq.eu> (`CNAME`).
 
 It is a static page with no build step: what is in the repository is what is served.
 
@@ -59,6 +58,9 @@ changes, copy test-content's `ATTRIBUTION.md` here again.
 Create `einhq/einhq.github.io` on GitHub, push `main` to it, and in the
 repository's Settings → Pages choose "Deploy from a branch", `main`, `/ (root)`. `.nojekyll` makes
 GitHub serve the files as they are. A push mirror from Forgejo keeps it in step afterwards.
+
+The custom domain, einhq.eu, is set in the same settings, which commit it as `CNAME`. Keep that file:
+the mirror's push makes GitHub's `main` this repository's, and a `main` without it unsets the domain.
 
 ## Formatting
 

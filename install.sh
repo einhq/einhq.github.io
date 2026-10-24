@@ -3,9 +3,9 @@
 # into ~/ein and runs its setup.sh, which builds EiN from source and starts it with podman compose or
 # docker compose. It needs no root.
 #
-#   curl -fsSL https://einhq.github.io/install.sh | bash                    EiN and its database
-#   curl -fsSL https://einhq.github.io/install.sh | bash -s -- --ems --llm  with the media service and the assistant's model
-#   curl -fsSL https://einhq.github.io/install.sh | bash -s -- --module archive
+#   curl -fsSL https://einhq.eu/install.sh | bash                    EiN and its database
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm  with the media service and the assistant's model
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --module archive
 #
 # The options are setup.sh's, passed on as they are (`--help` lists them). The checks follow them:
 # the media service needs the most of the machine, the card only matters with it or the model.
