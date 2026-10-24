@@ -1560,7 +1560,11 @@ options:
               have a card, and those folders.
             </li>
             <li>Optionally start the assistant's model with <code>llm/run.sh</code>, or point the assistant at a hosted provider.</li>
-            <li>In EiN's repository, run <code>deno task bundle-ui</code>, <code>make container-build</code> and <code>make container-run</code> with the database address, the media service's key and the same folders.</li>
+            <li>
+              In EiN's repository, clone the modules it runs into <code>modules/</code> (<code>module-archive</code>, <code>module-ems</code>, <code>module-assistant</code>), write the media
+              service's address and key to a settings file, then run <code>deno task bundle-ui</code>, <code>make container-build</code> and <code>make container-run</code> with that
+              file as <code>ENV_FILE</code>, the database address and the same folders.
+            </li>
             <li>Read the admin password from the log (<code>Admin password set to: …</code>), sign in at port 8080, and change it.</li>
           </ol>
           <p class="install-note">
@@ -1577,7 +1581,10 @@ options:
             <p>EiN and the libraries it is built on. The three libraries are on JSR already; the rest are on their way to GitHub.</p>
           </div>
           <ul class="repos">
-            <li><strong>core</strong><span>EiN itself: the node tree, the shell, the pipelines, the web interface, SSH and SFTP, and the Archive, Assistant and media service modules. TypeScript on Deno. MIT.</span></li>
+            <li><strong>core</strong><span>EiN itself: the node tree, the shell, the pipelines, the web interface, SSH and SFTP. TypeScript on Deno. MIT.</span></li>
+            <li><strong>module-archive</strong><span>The Archive: people and their family tree, photos and videos, places, staging. MIT.</span></li>
+            <li><strong>module-assistant</strong><span>The chat that answers questions about the archive. MIT.</span></li>
+            <li><strong>module-ems</strong><span>EiN's client for the media service. MIT.</span></li>
             <li><strong>ems</strong><span>The media service: every media tool and model behind one HTTP API. Python.</span></li>
             <li><strong>db</strong><span>The PostgreSQL 18 image and its run script.</span></li>
             <li><strong>llm</strong><span>The assistant's local language model: llama.cpp's server and its run script.</span></li>
