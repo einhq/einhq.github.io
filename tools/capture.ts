@@ -1,7 +1,7 @@
 #!/usr/bin/env -S deno run -A --node-modules-dir=auto
 /**
  * Takes the site's screenshots, and the node pictures the hero is laid with, from a running EiN
- * instance that holds ein/test-content's demo tier (the invented Wrenfield family).
+ * instance that holds the demo archive (the invented Wrenfield family).
  *
  *   deno task capture --url http://demo.example:8080                 every shot, then the node pictures
  *   deno task capture --url … --only lightbox,family                  just those shots (no node pictures)
@@ -161,8 +161,8 @@ const SHOTS: Shot[] = [
     clip: { x: 580, y: 0, width: 860, height: 900 },
     run: async (page) => {
       await viewer(page, 'wellington-christmas-2025', 'IMG_0660.HEIC');
-      // The viewer has a chat button of its own, over the page's.
-      await page.getByRole('dialog').getByRole('button', { name: 'Toggle chat sidebar' }).click();
+      // The viewer has a chat button of its own, over the page's: the top bar's drawer entry.
+      await page.getByRole('dialog').getByRole('button', { name: 'Chat', exact: true }).click();
       await settle(page, 1500);
       await ask(page, 'Who is in this picture, and how old was each of them that day?');
     },
@@ -193,7 +193,8 @@ const SHOTS: Shot[] = [
       await page.keyboard.press('Control+k');
       await settle(page, 800);
       await page.keyboard.type('>person', { delay: 30 });
-      await page.getByText('Looking…').waitFor({ state: 'detached', timeout: 20000 }).catch(() => {});
+      // A busy instance can take a while to look through every node.
+      await page.getByText('Looking…').waitFor({ state: 'detached', timeout: 90000 });
       await settle(page, 1500);
     },
   },
@@ -273,15 +274,44 @@ async function newPage(browser: Browser, shot: Pick<Shot, 'phone'>): Promise<Pag
 }
 
 /**
- * Albums whose covers stay out of the hero: the recordings' cover is a waveform, and Freya's Pentax
- * opens on a real shop front with its sign. Every other cover shows the family, so it is one of their
- * generated pictures (no sourced photo shows a person).
+ * The pictures the hero is laid with, by the name each has on its page: faces of every age, and
+ * album and device covers from seven decades that show the family doing something rather than one
+ * face close up, so the field is not a wall of faces. "Isla turns seven" is the still of the hero's
+ * video tile. No cover in it is a sourced photo of a real place with a sign in it.
  */
-const NOT_IN_HERO = new Set(['Recordings', "Freya's Pentax"]);
+const HERO: Record<string, string[]> = {
+  person: [
+    'Helen Okafor',
+    'David Okafor',
+    'Ruby Wrenfield',
+    'Peggy Wrenfield',
+    'Samuel Okafor',
+    'Isla Price',
+    'Thomas Wrenfield',
+    'Noah Price',
+    'Arthur Wrenfield',
+    'Freya Wrenfield',
+  ],
+  album: [
+    'Isla turns seven',
+    'Sailing in the archipelago',
+    'The children',
+    'Samuel moves to Boston',
+    'Cornwall, summer 1968',
+    'A week in London',
+    'Christmas 1998',
+    "Peggy's Falmouth",
+    'Grace and Samuel',
+    'Christmas at the cottage',
+    "Helen and David's wedding",
+    'Christmas 1975',
+  ],
+  device: ["Erik's iPhone", "Peggy's Lumix", "David's 7D", "Grace's N95", "Helen's Coolpix"],
+};
 
 /**
- * The pictures the hero's tiles are filled with: each person's face crop, and the albums' covers.
- * Taken from the pages that show them, so they are what the instance itself chose. Replaces every
+ * The pictures the hero's tiles are filled with: the faces and covers HERO names, taken from the
+ * pages that show them, so they are what the instance itself chose, in HERO's order. Replaces every
  * earlier picture in build/nodes, so none is left over that the manifest does not name.
  */
 async function nodePictures(browser: Browser) {
@@ -295,31 +325,41 @@ async function nodePictures(browser: Browser) {
   const grab = async (route: string, kind: string) => {
     await open(page, route, 5000);
     // Each picture with its card's first two lines of text that are not a bare count: a name, and
-    // a count of pictures or a date range.
-    const cards = await page.locator('main img:not(.mrx-entity-header-background)').evaluateAll((els) =>
-      els.map((e) => {
-        let el: HTMLElement = e as HTMLElement;
-        for (let i = 0; i < 8 && el.parentElement; i++) {
-          el = el.parentElement;
-          const lines = el.innerText.split('\n').map((s) => s.trim()).filter((s) => s && !/^\d+$/.test(s));
-          if (lines.length) return { src: e.getAttribute('src') ?? '', name: lines[0], detail: lines[1] ?? '' };
-        }
-        return { src: e.getAttribute('src') ?? '', name: '', detail: '' };
-      })
-    );
+    // a count of pictures, a date range or a camera's model. A grid loads a card's picture once it
+    // nears the screen, so the cards are read at every step of a scroll to the end.
+    const cards: { src: string; name: string; detail: string }[] = [];
+    await page.mouse.move(800, 600);
+    for (let i = 0; i < 12; i++) {
+      const seen = await page.locator('main img:not(.mrx-entity-header-background)').evaluateAll((els) =>
+        els.map((e) => {
+          let el: HTMLElement = e as HTMLElement;
+          for (let i = 0; i < 8 && el.parentElement; i++) {
+            el = el.parentElement;
+            const lines = el.innerText.split('\n').map((s) => s.trim()).filter((s) => s && !/^\d+$/.test(s));
+            if (lines.length) return { src: e.getAttribute('src') ?? '', name: lines[0], detail: lines[1] ?? '' };
+          }
+          return { src: e.getAttribute('src') ?? '', name: '', detail: '' };
+        })
+      );
+      cards.push(...seen.filter((c) => c.src.startsWith('/file/') && !cards.some((k) => k.name === c.name)));
+      await page.mouse.wheel(0, 700);
+      await settle(page, 900);
+    }
     let n = 0;
-    for (const card of cards) {
-      if (!card.src.startsWith('/file/') || !card.name || NOT_IN_HERO.has(card.name) || manifest.some((m) => m.kind === kind && m.name === card.name)) continue;
-      const response = await page.request.get(BASE + card.src);
-      if (!response.ok()) continue;
+    for (const name of HERO[kind]) {
+      const card = cards.find((c) => c.name === name);
+      const response = card && await page.request.get(BASE + card.src);
+      if (!card || !response?.ok()) throw new Error(`${kind} "${name}": no picture on ${route}`);
       const file = `${kind}-${String(++n).padStart(2, '0')}.avif`;
       await Deno.writeFile(`${dir}/${file}`, new Uint8Array(await response.body()));
-      manifest.push({ file, kind, name: card.name, detail: card.detail });
+      // A camera's make comes twice when its model repeats it: "Canon Canon EOS 7D".
+      manifest.push({ file, kind, name, detail: card.detail.replace(/^(\S+) (?=\1 )/i, '') });
     }
     console.log(`nodes: ${n} ${kind} pictures`);
   };
   await grab('/people', 'person');
   await grab('/albums', 'album');
+  await grab('/devices', 'device');
   await Deno.writeTextFile(`${dir}/manifest.json`, JSON.stringify(manifest, null, 2) + '\n');
   await page.context().close();
 }

@@ -12,7 +12,7 @@ import { COVERED, HAT_WIDTH, hats } from './hat-tiling.js';
  */
 const MIXED = [[0.05, 'album'], [0.25, 'person'], [0.45, 'place'], [0.62, 'track'], [0.8, 'device'], [0.98, 'label']];
 
-const NAMES = { person: 'Person', album: 'Album' };
+const NAMES = { person: 'Person', album: 'Album', device: 'Device' };
 
 /**
  * Tiles that show a node other than a picture, so the field says EiN keeps more than photos: each
@@ -29,8 +29,15 @@ const OTHERS = [
   { glyph: 'pin', name: 'A place', detail: 'A point, a circle or an outline on the map' },
   { glyph: 'video', name: 'A home video', detail: 'Played as AV1, every word transcribed', still: 'Isla turns seven' },
 ];
-/** Where in the field's list of pictures the other tiles go: among the first, so they are always laid. */
-const OTHER_AT = [1, 3, 6, 8, 11, 13, 16, 19, 22];
+
+/**
+ * What a tile shows, for spreading them: a face, a picture of the family doing something, or a
+ * drawn node. Neighbours of one role would read as one patch, so the field mixes them.
+ */
+const role = (picture) => picture.glyph ? 'drawn' : picture.kind === 'person' ? 'face' : 'scene';
+
+/** How far apart, in hats, the middles of two filled tiles are at least, besides never touching. */
+const SPACING = 0.9;
 
 /** Where on the patch the field is cut, in patch units: fixed, so the page always shows the same hats. */
 const CUT = { x: COVERED.x + 58, y: COVERED.y + 36 };
@@ -112,6 +119,19 @@ function inside(corners, x, y) {
     if ((y0 > y) !== (y1 > y) && x < x0 + ((y - y0) * (x1 - x0)) / (y1 - y0)) within = !within;
   });
   return within;
+}
+
+/** Whether hats `a` and `b` touch: a corner of one lies on the other's outline. */
+function touches(a, b) {
+  if (a.box.x > b.box.right + 2 || b.box.x > a.box.right + 2 || a.box.y > b.box.bottom + 2 || b.box.y > a.box.bottom + 2) return false;
+  const onOutline = ([px, py], corners) =>
+    corners.some(([x0, y0], i) => {
+      const [x1, y1] = corners[(i + 1) % corners.length];
+      const [dx, dy] = [x1 - x0, y1 - y0];
+      const t = Math.max(0, Math.min(1, ((px - x0) * dx + (py - y0) * dy) / (dx * dx + dy * dy)));
+      return Math.hypot(x0 + t * dx - px, y0 + t * dy - py) < 1.5;
+    });
+  return a.corners.some((p) => onOutline(p, b.corners)) || b.corners.some((p) => onOutline(p, a.corners));
 }
 
 /**
@@ -381,10 +401,10 @@ const GLYPHS = {
 };
 
 /**
- * Lays the hats over `host`: the faces of the demo's people and the covers of its albums in the
- * tiles on the open side, every other tile tinted in EiN's mixed pattern, brighter on the open side.
- * On a wide screen the pictures gather to the right of the copy; on a narrow one, above the headline.
- * A pictured tile's outline takes the pattern's colour where it lies.
+ * Lays the hats over `host`: the faces of the demo's people, the covers of its albums and cameras and
+ * the drawn nodes spread over the whole field, dimmed where the copy stands over them, and every other
+ * tile tinted in EiN's mixed pattern, brighter on the open side: right of the copy on a wide screen,
+ * above the headline on a narrow one. A pictured tile's outline takes the pattern's colour where it lies.
  */
 function layField(host, pictures, entering) {
   const width = host.clientWidth;
@@ -394,35 +414,69 @@ function layField(host, pictures, entering) {
   const stacked = width < 1000;
   const origin = host.getBoundingClientRect();
   const headline = host.parentElement.querySelector('h1');
-  const lede = host.parentElement.querySelector('.lede');
   const copyTop = headline ? headline.getBoundingClientRect().top - origin.top : height * 0.4;
-  const copyRight = lede ? lede.getBoundingClientRect().right - origin.left : width * 0.4;
+  // The copy's box, around the lines of the headline and the lede and the buttons (a headline's
+  // own box is wider than its words), and where the key under it starts.
+  const lines = (selector) => {
+    const range = document.createRange();
+    const el = host.parentElement.querySelector(selector);
+    if (!el) return [];
+    range.selectNodeContents(el);
+    return [...range.getClientRects()];
+  };
+  const parts = [...lines('h1'), ...lines('.lede'), ...[...host.parentElement.querySelectorAll('.actions > *')].map((el) => el.getBoundingClientRect())];
+  const copy = parts.length
+    ? {
+      x: Math.min(...parts.map((r) => r.left)) - origin.left,
+      y: Math.min(...parts.map((r) => r.top)) - origin.top,
+      right: Math.max(...parts.map((r) => r.right)) - origin.left,
+      bottom: Math.max(...parts.map((r) => r.bottom)) - origin.top,
+    }
+    : null;
+  const key = host.parentElement.querySelector('.field-key');
+  const foot = key ? key.getBoundingClientRect().top - origin.top - 8 : height;
   const hatPx = width < 720 ? 60 : Math.min(112, Math.max(76, width / 14));
   const tiles = hatsIn(width, height, CUT, hatPx / HAT_WIDTH);
 
-  // The open side: right of the copy, or above the headline when stacked. Pictures go to whole tiles
-  // there, more of them further from the copy, and never two side by side, so tinted hats run between them.
+  // The open side, right of the copy or above the headline when stacked, where the tinted hats are
+  // brighter.
   const openness = (t) =>
     stacked ? 1 - smooth(copyTop * 0.5, copyTop * 0.92, t.cy) : smooth(width * 0.38, width * 0.8, t.cx) * (1 - smooth(height * 0.66, height * 0.92, t.cy));
-  const clearOfCopy = (t) => stacked || t.box.x > copyRight + hatPx * 0.3;
-  const whole = (t) => t.box.x >= 0 && t.box.y >= barBottom() && t.box.right <= width && t.box.bottom <= height;
-  const ranked = tiles.filter((t) => whole(t) && clearOfCopy(t) && openness(t) > 0.25)
-    .map((t) => ({ t, key: noise(t.index, 1) - openness(t) * 0.45 }))
-    .sort((a, b) => a.key - b.key);
+  // A picture behind the copy is dimmed, so the text over it stays easy to read.
+  const margin = hatPx * 0.3;
+  const behindCopy = (t) => copy && t.cx > copy.x - margin && t.cx < copy.right + margin && t.cy > copy.y - margin && t.cy < copy.bottom + margin;
+  const whole = (t) => t.box.x >= 0 && t.box.y >= barBottom() && t.box.right <= width && t.box.bottom <= foot;
+  // Pictures go to whole tiles over the whole field, spread evenly: the most open tile first, then
+  // each time the tile farthest from those chosen, until every picture has a tile or no tile is a
+  // spacing clear of the others and touches none of them.
+  const free = tiles.filter(whole);
   const chosen = [];
-  for (const { t } of ranked) {
-    if (chosen.length === pictures.length) break;
-    if (chosen.every((c) => Math.hypot(c.cx - t.cx, c.cy - t.cy) > hatPx * 0.78)) chosen.push(t);
+  while (chosen.length < pictures.length && free.length) {
+    let best;
+    for (const [i, t] of free.entries()) {
+      const near = Math.min(Infinity, ...chosen.map((c) => Math.hypot(c.cx - t.cx, c.cy - t.cy)));
+      if (near <= hatPx * SPACING || chosen.some((c) => touches(c, t))) continue;
+      const score = (chosen.length ? near : openness(t) * hatPx) + noise(t.index, 1);
+      if (!best || score > best.score) best = { i, score };
+    }
+    if (!best) break;
+    chosen.push(...free.splice(best.i, 1));
   }
-  // Pictures go to the chosen tiles in turn; a drawn tile takes the next one clear of the other drawn
-  // tiles, so two never touch and run together.
+  // Each chosen tile, in the order chosen, takes the next picture of the role its neighbours show least,
+  // and of those the role with the most still to lay, so the roles mix evenly wherever the field ends.
+  const queues = new Map();
+  for (const picture of pictures) queues.set(role(picture), [...(queues.get(role(picture)) ?? []), picture]);
   const pictured = new Map();
-  const drawn = [];
-  for (const picture of pictures.slice(0, chosen.length)) {
-    const clear = picture.glyph ? chosen.findIndex((t) => drawn.every((d) => Math.hypot(d.cx - t.cx, d.cy - t.cy) > hatPx * 1.3)) : 0;
-    const [tile] = chosen.splice(Math.max(0, clear), 1);
-    if (picture.glyph) drawn.push(tile);
-    pictured.set(tile, picture);
+  for (const tile of chosen) {
+    const near = [...pictured].filter(([t]) => Math.hypot(t.cx - tile.cx, t.cy - tile.cy) < hatPx * 2.6).map(([, p]) => role(p));
+    const left = [...queues.values()].reduce((sum, queue) => sum + queue.length, 0);
+    let best;
+    for (const [name, queue] of queues) {
+      if (!queue.length) continue;
+      const score = near.filter((r) => r === name).length - queue.length / left;
+      if (!best || score < best.score) best = { queue, score };
+    }
+    pictured.set(tile, best.queue.shift());
   }
 
   const root = svg('svg', { viewBox: `0 0 ${width} ${height}`, preserveAspectRatio: 'xMidYMid slice' });
@@ -438,7 +492,10 @@ function layField(host, pictures, entering) {
     const delay = (Math.hypot(tile.cx - focus[0], tile.cy - focus[1]) / reach) * 1100 + noise(tile.index, 4) * 160;
     if (picture) {
       const accent = mixedAt(tile.cx / width);
-      const group = svg('g', { class: 'tile tile-picture', style: `--delay: ${delay.toFixed(0)}ms; --accent: ${accent}` });
+      const group = svg('g', {
+        class: 'tile tile-picture',
+        style: `--delay: ${delay.toFixed(0)}ms; --accent: ${accent}${behindCopy(tile) ? '; opacity: 0.4' : ''}`,
+      });
       const clip = `hat-${tile.index}`;
       const clipPath = svg('clipPath', { id: clip });
       clipPath.append(svg('path', { d: tile.d }));
@@ -450,13 +507,18 @@ function layField(host, pictures, entering) {
         content.append(...GLYPHS[picture.glyph](box, solid(tile.corners, box, 1.25), tile.index, picture.frame));
         group.append(content, svg('path', { d: tile.d, fill: 'none' }));
       } else {
+        // Centred halfway from the box's middle to the hat's solid part, so a face is cut less by the
+        // hat's corners, and as large as it must be to still fill the whole box from there.
+        const solidPart = solid(tile.corners, { x, y, w, h }, 1);
+        const [cx, cy] = [(x + w / 2 + solidPart.cx) / 2, (y + h / 2 + solidPart.cy) / 2];
+        const half = Math.max(cx - x, x + w - cx, cy - y, y + h - cy);
         group.append(
           svg('image', {
             href: `assets/nodes/${picture.file.replace(/\.avif$/, '.webp')}`,
-            x: x.toFixed(1),
-            y: y.toFixed(1),
-            width: w.toFixed(1),
-            height: h.toFixed(1),
+            x: (cx - half).toFixed(1),
+            y: (cy - half).toFixed(1),
+            width: (half * 2).toFixed(1),
+            height: (half * 2).toFixed(1),
             preserveAspectRatio: 'xMidYMid slice',
             'clip-path': `url(#${clip})`,
           }),
@@ -537,12 +599,8 @@ async function field() {
     const still = pictures.find((p) => p.kind === 'album' && p.name === other.still);
     return still ? { ...other, frame: `assets/nodes/${still.file.replace(/\.avif$/, '.webp')}` } : other;
   });
-  // People and albums alternate, so neither gathers in one corner.
-  const people = pictures.filter((p) => p.kind === 'person');
-  const albums = pictures.filter((p) => p.kind === 'album' && !OTHERS.some((other) => other.still === p.name));
-  const mixed = [];
-  for (let i = 0; i < Math.max(people.length, albums.length); i++) mixed.push(...[people[i], albums[i]].filter(Boolean));
-  OTHER_AT.forEach((at, i) => mixed.splice(Math.min(at, mixed.length), 0, others[i]));
+  // Every picture and every drawn tile, which layField spreads and mixes.
+  const mixed = [...pictures.filter((p) => !OTHERS.some((other) => other.still === p.name)), ...others];
 
   layField(host, mixed, true);
   tooltips(host);
@@ -723,7 +781,9 @@ function barBottom() {
 
 /**
  * The top bar: an edge once the page has scrolled, and its link to the chapter in view marked
- * (`aria-current`), the chapter being the last whose start has passed a third of the way down.
+ * (`aria-current`), the chapter being the last whose start has passed a third of the way down. On a
+ * phone its links are a menu (site.css), which a chapter's link, Escape, a tap outside it or a wider
+ * window closes again.
  */
 function bar() {
   const header = document.querySelector('.bar');
@@ -739,6 +799,25 @@ function bar() {
   addEventListener('scroll', update, { passive: true });
   addEventListener('resize', update, { passive: true });
   update();
+
+  const menu = header.querySelector('.bar-menu');
+  if (!menu) return;
+  const open = (opened) => {
+    header.toggleAttribute('data-open', opened);
+    menu.setAttribute('aria-expanded', String(opened));
+  };
+  menu.hidden = false;
+  menu.addEventListener('click', () => open(!header.hasAttribute('data-open')));
+  for (const link of links) link.addEventListener('click', () => open(false));
+  addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !header.hasAttribute('data-open')) return;
+    open(false);
+    menu.focus();
+  });
+  document.addEventListener('click', (event) => {
+    if (!header.contains(event.target)) open(false);
+  });
+  matchMedia('(max-width: 780px)').addEventListener('change', () => open(false));
 }
 
 // Each part on its own, so one that fails leaves the others working.

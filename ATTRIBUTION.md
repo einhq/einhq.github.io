@@ -5,8 +5,6 @@ licences given, and used in this content as the photos of invented devices. They
 re-encoded or converted to another format; nothing else in them is changed. Everything else here is
 invented or generated for this content, and dedicated to the public domain (CC0 1.0).
 
-Written by `build/attribution.ts` from `sources/`.
-
 ## david-7d
 
 23 photos, for the device `david-7d`.

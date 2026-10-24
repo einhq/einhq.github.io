@@ -431,7 +431,10 @@ kbd {
   transform: rotate(60deg);
 }
 .bar-source {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 12px;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   font-size: 0.95rem;
@@ -440,12 +443,122 @@ kbd {
 .bar-source:hover {
   border-color: var(--muted);
 }
+.bar-menu {
+  display: none;
+}
+/* On a phone the chapters are a menu that drops from the bar (site.js opens it), and GitHub is its
+ * mark alone. Without script the menu stays closed and its button hidden. */
 @media (max-width: 780px) {
-  .bar nav {
-    display: none;
+  .bar {
+    gap: 10px;
+  }
+  .bar-source,
+  .bar-menu:not([hidden]) {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
   }
   .bar-source {
     margin-inline-start: auto;
+  }
+  .bar-source svg {
+    width: 20px;
+    height: 20px;
+  }
+  .bar-source-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .bar-menu {
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .bar-menu:hover {
+    border-color: var(--muted);
+  }
+  /* Three lines, which turn into a cross while the menu is open. */
+  .bar-menu span,
+  .bar-menu span::before,
+  .bar-menu span::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  .bar-menu span {
+    position: relative;
+  }
+  .bar-menu span::before,
+  .bar-menu span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .bar-menu span::before {
+    transform: translateY(-6px);
+  }
+  .bar-menu span::after {
+    transform: translateY(6px);
+  }
+  .bar[data-open] .bar-menu span {
+    background-color: transparent;
+  }
+  .bar[data-open] .bar-menu span::before {
+    transform: rotate(45deg);
+  }
+  .bar[data-open] .bar-menu span::after {
+    transform: rotate(-45deg);
+  }
+  .bar nav {
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px var(--gutter) 12px;
+    border-bottom: 1px solid var(--line);
+    background: rgb(18 21 28 / 0.97);
+    box-shadow: 0 18px 32px rgb(0 0 0 / 0.4);
+    font-size: 1.05rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.18s, transform 0.18s, visibility 0s 0.18s;
+  }
+  .bar[data-open] nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity 0.18s, transform 0.18s;
+  }
+  .bar nav a {
+    gap: 12px;
+    padding: 14px 0;
+  }
+  .bar nav a + a {
+    border-top: 1px solid var(--line);
+  }
+  .bar nav a::before {
+    width: 14px;
+    height: 14px;
+  }
+}
+@media (max-width: 780px) and (prefers-reduced-motion: reduce) {
+  .bar nav,
+  .bar[data-open] nav {
+    transform: none;
+    transition: none;
   }
 }
 
@@ -528,6 +641,30 @@ kbd {
 }
 .button-primary:hover {
   background: #fff;
+}
+/* The way in, in the lime green of the system's pages, which stands out from the field's own greens
+ * and from the other two buttons; its hat turns as the top bar's do. */
+.button-start {
+  gap: 9px;
+  border-color: transparent;
+  background: var(--system);
+  color: var(--ink);
+}
+.button-start::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  -webkit-mask: var(--hat-mask) center / contain no-repeat;
+  mask: var(--hat-mask) center / contain no-repeat;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.button-start:hover {
+  border-color: transparent;
+  filter: brightness(1.1);
+}
+.button-start:hover::before {
+  transform: rotate(60deg);
 }
 
 .field-key {

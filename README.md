@@ -17,15 +17,15 @@ It is a static page with no build step: what is in the repository is what is ser
 ```
 index.html          the page
 assets/site.css     its styles
-assets/site.js      the hero's field, the bands of hats in the chapters and the top bar, the top bar's links, the tour's tabs, the screenshots' viewer, the copy button
+assets/site.js      the hero's field, the bands of hats in the chapters and the top bar, the top bar's links and a phone's menu of them, the tour's tabs, the screenshots' viewer, the copy button
 assets/hat-tiling.js  the einstein hat and a patch of its tiling, as EiN's web interface lays them
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
-assets/nodes/       the faces and album covers the hero's tiles show, and their names (manifest.json)
+assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
 assets/fonts/       Familjen Grotesk, Fragment Mono and Mochiy Pop One, the wordmark's and the headings', served from here
 assets/og.jpg       the link preview: the page's own hero at 1200 × 630, screenshotted from `make serve`
 assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.svg
 install.sh          what the page's install command fetches: it checks the machine, then fetches ein/deploy into ~/ein and runs its setup.sh
-ATTRIBUTION.md      who took each real photo in the demo, and under which licence: test-content's, copied
+ATTRIBUTION.md      who took each real photo in the demo, and under which licence: the demo archive's own, copied
 tools/capture.ts    takes the screenshots and the node pictures from a running demo instance
 ```
 
@@ -37,8 +37,7 @@ tools/capture.ts    takes the screenshots and the node pictures from a running d
 
 ## Taking the screenshots again
 
-The screenshots come from an EiN instance holding the demo tier of
-[test-content](https://github.com/einhq/test-content): an invented family, so nothing
+The screenshots come from an EiN instance holding the demo archive: an invented family, so nothing
 on the page is a real person's. With Playwright's chromium installed (`npx playwright install chromium`):
 
 ```bash
@@ -50,8 +49,9 @@ make images                                                       # build/ into 
 The instance must be fully processed for every shot to show what the page says. `search` and
 `postcard` need its media service answering, `chat` needs the assistant's language model, and
 `dashboard` says Healthy only once nothing waits. Look at each shot before committing it.
-`make capture NODES=1` takes the node pictures alone (`ONLY` takes none). When the demo's content
-changes, copy test-content's `ATTRIBUTION.md` here again.
+`make capture NODES=1` takes the node pictures alone (`ONLY` takes none): the faces and covers
+`HERO` in `tools/capture.ts` names. When the demo's content changes, copy its `ATTRIBUTION.md` here
+again.
 
 ## Publishing on GitHub
 
@@ -73,6 +73,6 @@ also type-checks the capture tool.
 - The hat tiling comes from ein/core (MIT), which builds it as isohedral/hatviz (BSD-3-Clause) does.
 - Familjen Grotesk, Fragment Mono and Mochiy Pop One (the wordmark, as EiN's web interface draws it, and the headings): SIL Open
   Font License 1.1 (`assets/fonts/OFL-*.txt`).
-- The screenshots and node pictures show test-content's demo archive. Its story and generated
-  media are CC0; the real photos in it keep their own licences, credited one by one in
-  test-content's `ATTRIBUTION.md`. Map data © OpenStreetMap contributors.
+- The screenshots and node pictures show the demo archive. Its story and generated media are CC0;
+  the real photos in it keep their own licences, credited one by one in `ATTRIBUTION.md`. Map data
+  © OpenStreetMap contributors.
