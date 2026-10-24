@@ -405,7 +405,7 @@ function layField(host, pictures, entering) {
   const openness = (t) =>
     stacked ? 1 - smooth(copyTop * 0.5, copyTop * 0.92, t.cy) : smooth(width * 0.38, width * 0.8, t.cx) * (1 - smooth(height * 0.66, height * 0.92, t.cy));
   const clearOfCopy = (t) => stacked || t.box.x > copyRight + hatPx * 0.3;
-  const whole = (t) => t.box.x >= 0 && t.box.y >= 60 && t.box.right <= width && t.box.bottom <= height;
+  const whole = (t) => t.box.x >= 0 && t.box.y >= barBottom() && t.box.right <= width && t.box.bottom <= height;
   const ranked = tiles.filter((t) => whole(t) && clearOfCopy(t) && openness(t) > 0.25)
     .map((t) => ({ t, key: noise(t.index, 1) - openness(t) * 0.45 }))
     .sort((a, b) => a.key - b.key);
@@ -511,7 +511,7 @@ function tooltips(host) {
     const tile = group.getBoundingClientRect();
     const box = hero.getBoundingClientRect();
     const size = tip.getBoundingClientRect();
-    const below = tile.top - size.height - 12 < 64;
+    const below = tile.top - size.height - 12 < barBottom() + 4;
     tip.style.transform = below ? 'translate(-50%, 12px)' : '';
     tip.style.top = `${(below ? tile.bottom : tile.top) - box.top}px`;
     const x = tile.left + tile.width / 2 - box.left;
@@ -714,6 +714,11 @@ function viewer() {
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog || event.target.tagName === 'FIGURE') dialog.close();
   });
+}
+
+/** Where the banner and the top bar over the page end; both are fixed, so this does not change on a scroll. */
+function barBottom() {
+  return document.querySelector('.bar')?.getBoundingClientRect().bottom ?? 60;
 }
 
 /**
