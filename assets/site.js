@@ -722,8 +722,11 @@ function copyButtons() {
         await navigator.clipboard.writeText(command());
         say('Copied');
       } catch {
+        // The command after the prompt, its last word included.
         const range = document.createRange();
-        range.selectNodeContents(code.lastChild);
+        range.selectNodeContents(code);
+        const prompt = code.querySelector('.p');
+        if (prompt) range.setStartAfter(prompt);
         getSelection().removeAllRanges();
         getSelection().addRange(range);
         say('Press Ctrl+C');
