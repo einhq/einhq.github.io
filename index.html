@@ -1458,13 +1458,13 @@ options:
             <h2 id="install-title">Install</h2>
             <p>
               <span class="chip">In progress</span> Nothing is released yet and there are no published images, so the installer builds EiN from source on the machine it runs on and
-              starts it with podman compose or docker compose. One command, for EiN alone or for the whole Archive:
+              starts it with podman compose or docker compose. One command, for EiN Core or EiN Archive:
             </p>
           </div>
           <div class="installs">
             <div class="install-choice">
-              <h3>EiN</h3>
-              <p>The node tree, the shell, the web interface and SSH, with its database. Add the media service, the model and modules when you want them.</p>
+              <h3>EiN Core</h3>
+              <p>The bare bones EiN installation: add to it when you want.</p>
               <div class="install">
                 <pre class="term term-command"
                   tabindex="0"><code><span class="p">$</span> <span class="w">curl -fsSL</span> <span class="w">https://einhq.eu/install.sh</span> <span class="w">| bash</span></code></pre>
@@ -1473,11 +1473,11 @@ options:
               </div>
             </div>
             <div class="install-choice">
-              <h3>The Archive</h3>
-              <p>All of the above, with the media service (an image of about 30 GB), the assistant's language model and the Archive module.</p>
+              <h3>EiN Archive</h3>
+              <p>The full Archive installation, with the media service and the chat.</p>
               <div class="install">
                 <pre class="term term-command"
-                  tabindex="0"><code><span class="p">$</span> <span class="w">curl -fsSL</span> <span class="w">https://einhq.eu/install.sh</span> <span class="w">| bash -s --</span> <span class="w">--ems</span> <span class="w">--llm</span> <span class="w">--module archive</span></code></pre>
+                  tabindex="0"><code><span class="p">$</span> <span class="w">curl -fsSL</span> <span class="w">https://einhq.eu/install.sh</span> <span class="w">| bash -s --</span> <span class="w">--ems</span> <span class="w">--llm</span> <span class="w">--module archive</span> <span class="w">--module assistant</span></code></pre>
                 <button class="copy" type="button" data-copy hidden>Copy</button>
                 <span class="sr-only" role="status"></span>
               </div>
