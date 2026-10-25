@@ -120,29 +120,69 @@
             </div>
           </div>
           <p class="install-note">
-            Either checks the machine against the <a href="#requirements">system requirements</a> below and stops if something is missing. Then it fetches
-            <a href="https://github.com/einhq/deploy">deploy</a> into <code>~/ein</code>, builds and starts, and prints the admin password to sign in with. <a
-              href="https://github.com/einhq/einhq.github.io/blob/main/install.sh"
-            >Read it first</a>.
+            The installation checks system requirements. Then it fetches <a href="https://github.com/einhq/deploy">deploy</a> into <code>~/ein</code>, builds and starts,
+            and prints the admin password to sign in with. It needs no root. <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">Read it first</a>.
           </p>
 
-          <h3 class="sub">Details</h3>
-          <ol class="steps">
-            <li>
-              The media service, which the Archive needs: <code>~/ein/setup.sh --ems</code>. An image of about 30 GB with every model in it, built once, and the graphics card if there
-              is one.
-            </li>
-            <li>The assistant's language model: <code>--llm</code>. Or a hosted provider, set in <code>~/ein/.env</code>.</li>
-            <li>
-              The Archive module: <code>--module archive</code>, which EiN installs at its next start with the modules it needs. Settings → Modules adds, updates and removes
-              modules too.
-            </li>
-            <li>The assistant module: <code>--module assistant</code>, the chat, which answers with the language model.</li>
-            <li>
-              Updates: <code>~/ein/setup.sh</code> again fetches the newest sources of EiN and its services, rebuilds and restarts, keeping every option chosen before and the installed
-              modules, which Settings → Modules updates.
-            </li>
-          </ol>
+          <h3 class="sub">What it needs</h3>
+          <ul class="needs">
+            <li><strong>Linux</strong> on x86-64</li>
+            <li><strong>podman</strong>, rootless, or <strong>Docker</strong>, with compose</li>
+            <li><strong>git</strong>, <strong>curl</strong> and <strong>openssl</strong></li>
+            <li><strong>10 GB</strong> free disk, 100 GB with the media service, plus your files</li>
+            <li><strong>4 GB</strong> memory, 16 GB with the media service</li>
+            <li>An <strong>NVIDIA</strong> card is optional</li>
+          </ul>
+          <p class="install-note">The <a href="#requirements">system requirements</a> below have the details.</p>
+
+          <h3 class="sub">Options</h3>
+          <p class="install-note">
+            The installer passes its options to <code>~/ein/setup.sh</code>, which is EiN's own setup once it is installed. An option chosen once is kept, so it is given only
+            when adding something.
+          </p>
+          <dl class="options">
+            <div>
+              <dt><code>--ems</code></dt>
+              <dd>The media service, which the Archive needs: every model and media tool in an image of about 30 GB, built once. It uses the graphics card if there is one.</dd>
+            </div>
+            <div>
+              <dt><code>--llm</code></dt>
+              <dd>The language model the assistant answers with. Or a hosted provider instead, set in <code>~/ein/.env</code>.</dd>
+            </div>
+            <div>
+              <dt><code>--module <var>name</var></code></dt>
+              <dd>
+                A module, such as <code>archive</code> or <code>assistant</code>, installed at EiN's next start with the modules it needs. Settings → Modules adds, updates and
+                removes modules too.
+              </dd>
+            </div>
+            <div>
+              <dt><code>--no-ems</code> <code>--no-llm</code></dt>
+              <dd>Leave the media service or the model out again. Its data stays.</dd>
+            </div>
+          </dl>
+
+          <div class="installs installs-later">
+            <div class="install-choice install-update">
+              <h3><span class="mark" aria-hidden="true"></span>Update</h3>
+              <p>Fetches the newest EiN and its services, rebuilds and restarts, keeping the options and modules chosen before.</p>
+              <div class="install">
+                <pre class="term term-command" tabindex="0"><code><span class="p">$</span> <span class="w t-cmd">~/ein/setup.sh</span></code></pre>
+                <button class="copy" type="button" data-copy hidden>Copy</button>
+                <span class="sr-only" role="status"></span>
+              </div>
+            </div>
+            <div class="install-choice install-add">
+              <h3><span class="mark" aria-hidden="true"></span>Add later</h3>
+              <p>An option or a module on an EiN already installed, here the media service.</p>
+              <div class="install">
+                <pre class="term term-command"
+                  tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">~/ein/setup.sh</span> <span class="t-flag">--ems</span></span></code></pre>
+                <button class="copy" type="button" data-copy hidden>Copy</button>
+                <span class="sr-only" role="status"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
