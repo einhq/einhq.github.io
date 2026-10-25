@@ -9,24 +9,41 @@
 #
 # The options are setup.sh's, passed on as they are (`--help` lists them). The checks follow them:
 # the media service needs the most of the machine, the card only matters with it or the model.
+# --source names the organisation the sources come from instead of GitHub's einhq, such as a Forgejo
+# or a Gitea with EiN's repositories under the same names, deploy among them; with private ones, the
+# token that reads them is EIN_SOURCE_KEY, and this script is fetched from there with it too:
 #
-#   EIN_HOME   where EiN goes (default: ~/ein); run its ./setup.sh to update or add an option later
-#   EIN_DATA   the folder for your files, the first time (default: $EIN_HOME/data)
-#   EIN_CHECK  1: check the machine and stop
+#   curl -fsSL -H "Authorization: token $K" 'http://forge.example:3000/api/v1/repos/ein/einhq.github.io/raw/install.sh?ref=main' \
+#     | EIN_SOURCE_KEY=$K bash -s -- --source http://forge.example:3000/ein --ems --module archive
+#
+#   EIN_HOME        where EiN goes (default: ~/ein); run its ./setup.sh to update or add an option later
+#   EIN_DATA        the folder for your files, the first time (default: $EIN_HOME/data)
+#   EIN_SOURCE_KEY  the token for --source's repositories, when they are private
+#   EIN_CHECK       1: check the machine and stop
 set -uo pipefail
 
 # Everything runs from main, called on the last line, so a download cut short runs nothing.
 main() {
-  local home=${EIN_HOME:-$HOME/ein} git=${EIN_GIT:-https://github.com/einhq} arg
+  local home=${EIN_HOME:-$HOME/ein} source= installed= arg next=
+  key=${EIN_SOURCE_KEY:-}
   ems=0 llm=0
   for arg in "$@"; do
-    case $arg in --ems) ems=1 ;; --llm) llm=1 ;; esac
+    if [ "$next" = source ]; then
+      source=${arg%/}
+      next=
+      continue
+    fi
+    case $arg in --ems) ems=1 ;; --llm) llm=1 ;; --source) next=source ;; esac
   done
-  # A machine installed before keeps its options: they are in its .env.
+  # A machine installed before keeps its options, its source and the source's token: they are in
+  # its .env.
   if [ -f "$home/.env" ]; then
     grep -qx 'EIN_EMS=1' "$home/.env" && ems=1
     grep -qx 'EIN_LLM=1' "$home/.env" && llm=1
+    installed=$(sed -n 's/^EIN_SOURCE=//p' "$home/.env")
+    [ -n "$key" ] || key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
   fi
+  source=${source:-${installed:-https://github.com/einhq}}
   local data=${EIN_DATA:-$home/data}
   failed=0
   warned=0
@@ -109,13 +126,24 @@ main() {
 
   echo
   if [ -d "$home/.git" ]; then
-    echo "Updating $home"
-    git -C "$home" pull --ff-only --quiet || return 1
+    echo "Updating $home from $source/deploy"
+    git -C "$home" remote set-url origin "$source/deploy.git" &&
+      git_source -C "$home" pull --ff-only --quiet || return 1
   else
-    echo "Fetching ein/deploy into $home"
-    git clone --quiet "$git/deploy.git" "$home" || return 1
+    echo "Fetching $source/deploy into $home"
+    git_source clone --quiet "$source/deploy.git" "$home" || return 1
   fi
-  EIN_DATA=$data EIN_GIT=$git exec "$home/setup.sh" "$@"
+  EIN_DATA=$data EIN_SOURCE_KEY=$key exec "$home/setup.sh" "$@"
+}
+
+# git with the source's token as a header, given in the environment of this call alone: it is not
+# written into .git/config, nor shown on a command line.
+git_source() {
+  if [ -n "$key" ]; then
+    GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.extraHeader GIT_CONFIG_VALUE_0="Authorization: token $key" git "$@"
+  else
+    git "$@"
+  fi
 }
 
 # --- the container engine: rootless podman, or Docker, each with its compose ---

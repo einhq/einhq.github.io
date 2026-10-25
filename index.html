@@ -168,6 +168,21 @@
               <dt><code>--no-ems</code> <code>--no-llm</code></dt>
               <dd>Leave the media service or the model out again. Its data stays.</dd>
             </div>
+            <div>
+              <dt><code>--db-dir <var>folder</var></code></dt>
+              <dd>The database in a folder of its own, at the install: on the SSD, when the files go on a larger, slower disk.</dd>
+            </div>
+            <div>
+              <dt><code>--source <var>address</var></code></dt>
+              <dd>
+                Fetch EiN and its modules from another organisation with the same repositories, such as your own Forgejo or Gitea, instead of GitHub. The token for private
+                ones is <code>EIN_SOURCE_KEY</code>.
+              </dd>
+            </div>
+            <div>
+              <dt><code>--only <var>service</var></code></dt>
+              <dd>Update one of <code>ein</code>, <code>ems</code>, <code>db</code> and <code>llm</code>, and restart only it.</dd>
+            </div>
           </dl>
 
           <div class="installs installs-later">
