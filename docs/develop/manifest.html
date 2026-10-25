@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The module manifest – EiN documentation</title>
+    <meta name="description" content="Every module has a mod.json at its root: who the module is, what it shares with other modules, and what it adds to what core already has. This page is the reference for each field, for the developer writing a module. Writing a module explains how a module is put together; this page is what to look up while you write its manifest.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/develop/manifest.html">
+    <meta property="og:title" content="The module manifest – EiN documentation">
+    <meta property="og:description" content="Every module has a mod.json at its root: who the module is, what it shares with other modules, and what it adds to what core already has. This page is the reference for each field, for the developer writing a module. Writing a module explains how a module is put together; this page is what to look up while you write its manifest.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/develop/manifest.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section class="here"><h2>Developing</h2><ul><li><a href="modules.html">Writing a module</a></li><li><a href="manifest.html" aria-current="page">The module manifest</a></li><li><a href="assistant.html">Teaching the assistant</a></li><li><a href="source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Developing</p>
+          <h1>The module manifest</h1>
+        </header>
+        <article class="prose">
+<p>Every module has a <code>mod.json</code> at its root: who the module is, what it shares with other modules, and what it adds to what core already has. This page is the reference for each field, for the developer writing a module. <a href="modules.html">Writing a module</a> explains how a module is put together; this page is what to look up while you write its manifest.</p>
+<p>Nothing in a manifest is code. What a module does lives in its folders (<code>bin/</code>, <code>services/</code>, <code>pipelines/</code>, <code>ui/</code>, <code>docs/</code>), and <code>mod setup</code> finds those by where they are. The manifest names the module, lists its settings and node types, and declares what core should create or register for it.</p>
+<h2 id="a-small-manifest">A small manifest<a class="anchor" href="#a-small-manifest" aria-label="Link to this section"></a></h2>
+<p>A module that adds a few commands, one setting and one page needs little more than this:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;letters&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Letters: scanned letters, who wrote them and to whom&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;archive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.1.0&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;exports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;./api&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/api.ts&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;imports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;@letters/parse&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/parse.ts&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;@std/path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jsr:@std/path@^1.1.3&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CFG_LETTERS_OCR_LANGUAGE&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;system&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;select&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;choices&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;en&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sv&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;en&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Letter language&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The language a scanned letter is read in.&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Letters&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/letters&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/pages/letters.tsx&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p><code>letters</code> is an invented module, shown for the shape. The Importer&#39;s manifest is a real one of about the same size: a name, a version, a description, <code>coreApi</code>, one export, its imports and a dependency on <code>archive</code>.</p>
+<h2 id="the-fields-at-a-glance">The fields at a glance<a class="anchor" href="#the-fields-at-a-glance" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+<th>When it matters</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>the module&#39;s name, its directory and its alias prefix</td>
+<td>always</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>its semver version, checked against dependents&#39; ranges</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>one sentence shown wherever the module is listed</td>
+<td>display</td>
+</tr>
+<tr>
+<td><code>author</code>, <code>license</code></td>
+<td>free text</td>
+<td>display</td>
+</tr>
+<tr>
+<td><code>coreApi</code></td>
+<td>the range of core&#39;s module contract it is written against</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>exports</code></td>
+<td>the files other modules may import</td>
+<td>loading, type checks</td>
+</tr>
+<tr>
+<td><code>imports</code></td>
+<td>its own private aliases and external packages</td>
+<td>loading, type checks</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td>the modules it needs, with version ranges</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>config.options</code></td>
+<td>the settings it owns</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>environment variables it reads that are not settings</td>
+<td>documentation</td>
+</tr>
+<tr>
+<td><code>nodeTypes</code></td>
+<td>the node types it defines; with a <code>root</code>, what <code>@</code> completes to</td>
+<td>documentation, runtime</td>
+</tr>
+<tr>
+<td><code>roots</code></td>
+<td>folders directly under <code>/archive</code> its content lives in</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>indexes</code></td>
+<td>database indexes on node attrs its queries need</td>
+<td><code>mod setup</code></td>
+</tr>
+<tr>
+<td><code>ui.routes</code></td>
+<td>its pages, by route</td>
+<td><code>ui-build</code></td>
+</tr>
+<tr>
+<td><code>ui.open</code></td>
+<td>which route opens a node of a type</td>
+<td><code>ui-build</code>, browser</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN runs <code>mod setup --all</code> at every start, for every installed module in dependency order, so a field read by <code>mod setup</code> takes effect the next time EiN starts or the next time you run <code>mod setup &lt;name&gt;</code>. &quot;Loading, type checks&quot; means the field is read when the module&#39;s TypeScript is loaded, and by <code>deno task check</code> through the module&#39;s generated <code>deno.jsonc</code>. <code>ui-build</code> bundles the modules&#39; pages; <code>mod setup</code> runs it after it has set modules up.</p>
+<h2 id="identity">Identity<a class="anchor" href="#identity" aria-label="Link to this section"></a></h2>
+<h3 id="name"><code>name</code><a class="anchor" href="#name" aria-label="Link to this section"></a></h3>
+<p>The module&#39;s name. It must be the name of the directory the module is installed in, <code>/usr/modules/&lt;name&gt;</code>, because dependencies and import aliases are both found by directory name. Use lower case letters, digits and hyphens: only such a name can be imported as <code>@&lt;name&gt;/…</code>.</p>
+<p>The name is also the owner shown beside the module&#39;s settings, node types and commands, the prefix of its aliases (everything <code>archive</code> shares is imported as <code>@archive/…</code>), and the name its navigation, settings and documentation are linked under.</p>
+<h3 id="version"><code>version</code><a class="anchor" href="#version" aria-label="Link to this section"></a></h3>
+<p>The module&#39;s version, in semver: <code>&quot;0.1.0&quot;</code>. A module that depends on this one names a range, and <code>mod setup</code> refuses the dependent when the installed version is outside it. Raise the minor when you add something a dependent may start to rely on, and the major when something a dependent uses changes.</p>
+<h3 id="description-author-license"><code>description</code>, <code>author</code>, <code>license</code><a class="anchor" href="#description-author-license" aria-label="Link to this section"></a></h3>
+<p>Free text. <code>description</code> is shown by <code>mod list</code> and <code>mod info</code>, on <strong>Settings → Modules</strong> and on the documentation&#39;s modules page. Write it as what the module is, for a reader: the Assistant&#39;s is &quot;Assistant: answers questions by running EiN&#39;s commands for the user, with what the installed modules offer it&quot;.</p>
+<h3 id="coreapi"><code>coreApi</code><a class="anchor" href="#coreapi" aria-label="Link to this section"></a></h3>
+<p>The range of core&#39;s module contract the module is written against, as a semver range: <code>&quot;^0.2.0&quot;</code>. Core&#39;s side of it is <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code>, at present <code>0.2.1</code>.</p>
+<p>The contract is what a module may use from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the web interface&#39;s kit, <code>@ein/ui/*</code>. Core&#39;s <code>src/client/contract.snapshot</code> lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: <code>^0.2.0</code> accepts 0.2.x and nothing else.</p>
+<p><code>mod setup</code> checks the range:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Manifest</th>
+<th>What <code>mod setup</code> says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>no <code>coreApi</code></td>
+<td><code>letters: no coreApi declared, assuming 0.2.1</code>, and it goes on</td>
+</tr>
+<tr>
+<td>a range that does not parse</td>
+<td><code>letters: coreApi is not a valid semver range: …</code>, and it refuses</td>
+</tr>
+<tr>
+<td>a range core does not satisfy</td>
+<td><code>letters: needs @ein/client ^0.3.0, this core provides 0.2.1</code>, and it refuses</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="what-a-module-shares-and-uses">What a module shares and uses<a class="anchor" href="#what-a-module-shares-and-uses" aria-label="Link to this section"></a></h2>
+<p><code>exports</code>, <code>imports</code> and <code>dependencies</code> decide what the module&#39;s TypeScript may import and which other modules&#39; commands it may run. One function in core, <code>src/modules/resolve.ts</code>, applies the rule for the loader that runs <code>#!ts</code> commands, for <code>deno task sync:modules</code> and for the boundary test, so what type-checks, what runs and what the test allows are the same.</p>
+<p>A bare specifier in a module&#39;s source is looked up in this order:</p>
+<ol>
+<li>the module&#39;s own <code>imports</code>, longest key first, the way an import map resolves;</li>
+<li>the module&#39;s own <code>exports</code>, under <code>@&lt;name&gt;/…</code>;</li>
+<li>the <code>exports</code> of a module listed in <code>dependencies</code>, under <code>@&lt;dependency&gt;/…</code>;</li>
+<li>core&#39;s own map: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and <code>@ein/testing</code>, which no manifest restates.</li>
+</ol>
+<p>In a core checkout, each module is a Deno workspace member with a <code>deno.jsonc</code> that <code>deno task sync:modules</code> writes from its <code>mod.json</code>. Never edit that file: change <code>mod.json</code> and run the task again. <a href="source.html">Building from source</a> covers the checkout.</p>
+<h3 id="exports"><code>exports</code><a class="anchor" href="#exports" aria-label="Link to this section"></a></h3>
+<p>The module&#39;s public interface, <code>&quot;./&lt;name&gt;&quot;: &quot;./&lt;file&gt;&quot;</code>. Another module imports the file as <code>@&lt;module&gt;/&lt;name&gt;</code>, and only when it lists this module in its <code>dependencies</code>. Nothing else in the module can be reached from outside it. An export is also usable inside the module under the same alias.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;exports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;./people/api&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/people/api.ts&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;./people/genealogy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/people/genealogy.ts&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;./paths&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/paths.ts&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A key is <code>./&lt;name&gt;</code>, or <code>./&lt;area&gt;/&lt;name&gt;</code> in a module made of several areas as the Archive is, in lower case with hyphens. The target is a path inside the module, starting with <code>./</code>, and the file must exist: <code>mod setup</code> refuses <code>export &#39;./api&#39; points at a missing file: ./lib/api.ts</code>.</p>
+<p>Exports the modules use by convention:</p>
+<ul>
+<li><code>./api</code>, or <code>./&lt;area&gt;/api</code> in a module with areas: the types of what the module&#39;s commands answer under <code>JSON_OUTPUT=1</code>, for its own pages and for other modules. These files import only other API files, so a page can import them without type-checking the whole module.</li>
+<li><code>./testing</code>: a stand-in other modules&#39; tests may use. The media service client exports its fake media service this way.</li>
+</ul>
+<h3 id="imports"><code>imports</code><a class="anchor" href="#imports" aria-label="Link to this section"></a></h3>
+<p>What the module&#39;s own code uses: private aliases into its own files, and external packages.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;imports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;@importer/legacy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/legacy.ts&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;@std/path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jsr:@std/path@^1.1.3&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;bson&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npm:bson@^6.10.4&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>Name a private alias after the module, <code>@&lt;name&gt;/…</code>, as you would an export; it is private because it is not in <code>exports</code>. A target is a path inside the module starting with <code>./</code>, or a package: <code>jsr:</code>, <code>npm:</code>, <code>node:</code>, <code>http:</code>, <code>https:</code> or <code>data:</code>. It is never a path into another module; that is what <code>dependencies</code> and the other module&#39;s <code>exports</code> are for.</p>
+<p>An alias reaches below itself only when its key ends in <code>/</code> or it maps to a <code>jsr:</code> or <code>npm:</code> package. <code>@archive/timeline</code> mapped to a file says nothing about <code>@archive/timeline/facets</code>, which needs an entry of its own. Deno applies the same rule.</p>
+<h3 id="dependencies"><code>dependencies</code><a class="anchor" href="#dependencies" aria-label="Link to this section"></a></h3>
+<p>The other modules this one needs, as name and semver range: <code>&quot;dependencies&quot;: { &quot;ems&quot;: &quot;^0.1.0&quot; }</code>. A dependency is:</p>
+<ul>
+<li>checked by <code>mod setup</code>: it must be installed, at a version in the range;</li>
+<li>set up first, since modules are set up in dependency order; a cycle is reported as <code>mod setup: dependency cycle, skipping: a -&gt; b -&gt; a</code> and none of its modules is set up;</li>
+<li>the only way to import another module&#39;s <code>exports</code>;</li>
+<li>required to run another module&#39;s commands. Core&#39;s boundary test reads command names from <code>execute(…)</code> calls, pipeline <code>command:</code> lines and shell scripts, and fails on a call into a module that is not listed.</li>
+</ul>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What <code>mod setup</code> says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>the module is not installed</td>
+<td><code>letters: requires module &#39;archive&#39; (^0.1.0), which is not installed</code></td>
+</tr>
+<tr>
+<td>the range does not parse</td>
+<td><code>letters: dependency &#39;archive&#39; has an invalid semver range: …</code></td>
+</tr>
+<tr>
+<td>the installed version is outside it</td>
+<td><code>letters: requires &#39;archive&#39; ^0.2.0, but 0.1.0 is installed</code></td>
+</tr>
+<tr>
+<td>the dependency&#39;s own version is not semver</td>
+<td>a warning, <code>… has an unparseable version &#39;…&#39;, not checked</code>, and it goes on</td>
+</tr>
+</tbody></table>
+</div>
+<p>An import of another module&#39;s file gets a message of its own when the module runs or is checked: <code>… imports &#39;@archive/paths&#39; but does not list &#39;archive&#39; in its dependencies</code>, or <code>… &#39;@archive/x&#39; is not exported by &#39;archive&#39; (exports: …)</code>, which lists what it does export.</p>
+<h2 id="settings">Settings<a class="anchor" href="#settings" aria-label="Link to this section"></a></h2>
+<h3 id="configoptions"><code>config.options</code><a class="anchor" href="#configoptions" aria-label="Link to this section"></a></h3>
+<p>The settings the module owns. <code>mod setup</code> adds them to EiN&#39;s table of settings and <code>mod remove</code> takes them out, so they appear on <strong>Settings → System</strong>, under <strong>Profile → Preferences</strong> for personal ones, and in <code>config list</code>, without core knowing them. <a href="../admin/configuration.html">Configuration</a> describes how an administrator sees and changes them.</p>
+<p>The values are never in the manifest. They live in <code>/etc/config</code> for system settings and in each person&#39;s <code>~/.config</code> for personal ones, and every shell sees them as environment variables.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CFG_MODEL_SLOTS&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;system&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Model requests in flight&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;How many model-bound media steps (faces, picture vectors, text in pictures, text vectors, transcripts, voices) EiN keeps in flight against the media service at once. …&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Processing&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;restarts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;models&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>key</code></td>
+<td>the environment variable: <code>CFG_…</code> for a system setting, <code>CFG_USER_…</code> for a personal one</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td><code>system</code> (one value, set by an administrator) or <code>user</code> (each person their own)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code>, <code>number</code>, <code>boolean</code>, <code>select</code>, <code>mode</code>, <code>user</code>, <code>group</code> or <code>secret</code>: the control, and what <code>config set</code> accepts</td>
+</tr>
+<tr>
+<td><code>choices</code></td>
+<td>the allowed values, required for <code>select</code></td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>what applies when nothing is set; always a string, never written to a file</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>the setting&#39;s name on the Settings page</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>what the setting does, for the person reading the Settings page; say what changes, not how it is implemented</td>
+</tr>
+<tr>
+<td><code>group</code></td>
+<td>the category it is listed under on the Settings page</td>
+</tr>
+<tr>
+<td><code>restarts</code></td>
+<td>the services that read it when they start, restarted when it changes</td>
+</tr>
+<tr>
+<td><code>restartNote</code></td>
+<td>shown instead of restarting, for a service that cannot be restarted from a page</td>
+</tr>
+<tr>
+<td><code>emptyMeans</code></td>
+<td>what an empty value means, when empty is a choice rather than &quot;not set&quot;</td>
+</tr>
+</tbody></table>
+</div>
+<p>The example is the Archive&#39;s <a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a>. <a href="../reference/settings.html">Settings</a> lists every setting the installed modules declare, with its default.</p>
+<p>The names and the scope must agree:</p>
+<ul>
+<li>a <code>user</code> setting is named <code>CFG_USER_…</code> (the one exception is <code>HISTSIZE</code>, which bash owns), and a <code>system</code> setting is not;</li>
+<li>a <code>secret</code> is a key to another service. It is named <code>CFG_…_KEY</code>, a name only a secret may have, it is a <code>system</code> setting, and its <code>default</code> is <code>&quot;&quot;</code>. No shell sees it, and the Settings page says only whether it is set. The Assistant&#39;s <code>CFG_LLM_KEY</code> is one.</li>
+</ul>
+<p>A malformed setting does not stop the module. <code>mod setup</code> prints a warning such as <code>letters: option &#39;CFG_LETTERS_X&#39;: type &#39;select&#39; needs choices</code> and leaves that setting out. A key that core or another module already registered is also left out, and the first owner keeps it.</p>
+<h3 id="a-modules-own-choice-of-values">A module&#39;s own choice of values<a class="anchor" href="#a-modules-own-choice-of-values" aria-label="Link to this section"></a></h3>
+<p>A module that wants a setting, its own or core&#39;s, to have a value of its choosing writes it in <code>etc/config</code>, a shell file of <code>export KEY=&#39;value&#39;</code> lines. <code>mod setup</code> links it as <code>/etc/config.d/&lt;name&gt;</code> and <code>mod remove</code> removes the link. The Archive&#39;s is:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># Read what is typed into the search box as filters: people, locations, years, kinds.</span>
+<span class="hljs-built_in">export</span> CFG_SEARCH_PARSER=<span class="hljs-string">&#x27;archive-parse&#x27;</span></code></pre></div>
+<p>The file is read before the administrator&#39;s <code>/etc/config</code>, so a value set on the Settings page wins, and the Settings page shows a value that came from the file as the module&#39;s.</p>
+<h2 id="reference">Reference<a class="anchor" href="#reference" aria-label="Link to this section"></a></h2>
+<p>These two fields describe; they do not change what EiN does, apart from <code>root</code> below. <code>mod setup</code> warns about an entry it cannot use and leaves it out of the documentation.</p>
+<h3 id="environment"><code>environment</code><a class="anchor" href="#environment" aria-label="Link to this section"></a></h3>
+<p>Environment variables the module reads that are not its settings, documented for <code>docs env</code> and the <a href="../reference/environment.html">Environment variables</a> page:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;NOMINATIM_SEARCH_URL&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;option&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://nominatim.openstreetmap.org/search&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one&#x27;s rate limit.&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p><code>key</code> and <code>description</code> are required, <code>default</code> is what the reader falls back to when the variable is not set, and <code>kind</code> says how the variable reaches whatever reads it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>kind</code></th>
+<th>How it is set</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>option</code></td>
+<td>nobody sets it for you; export it in a shell to change how a command behaves</td>
+</tr>
+<tr>
+<td><code>deployment</code></td>
+<td>the EiN process&#39;s own environment, read once at start</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>set for every shell by the server that opened it</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>the tree&#39;s layout, exported at start</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td>the rest of what EiN exports at start for scripts</td>
+</tr>
+<tr>
+<td><code>pipeline</code></td>
+<td>set for a pipeline step by the event that started it</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module almost always means <code>option</code>.</p>
+<h3 id="nodetypes"><code>nodeTypes</code><a class="anchor" href="#nodetypes" aria-label="Link to this section"></a></h3>
+<p>The node types the module defines, described for <code>docs node-types</code> and the <a href="../reference/node-types.html">Node types</a> page. A node type exists as soon as a node carries it; one that is used but described nowhere is still listed, with its count and no description.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;album&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Album&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;content&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/archive/albums&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A collection of photos and videos that behaves as a directory. …&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p><code>type</code>, <code>label</code> and <code>description</code> are required. <code>category</code> is <code>content</code> (what the archive holds), <code>structure</code> (what organises it) or <code>system</code>.</p>
+<p>A type whose nodes live directly under one folder names that folder as <code>root</code>, and that makes it something an <code>@</code> in the search box completes to. Typing <code>@hel</code> lists the names, matching what you typed, of the nodes of every such type directly under its root, so Helen Okafor&#39;s person node comes up. <code>mod setup</code> registers the types with a root and <code>mod remove</code> drops them. When two modules give the same type a root, the first one set up keeps it.</p>
+<h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section"></a></h2>
+<h3 id="roots"><code>roots</code><a class="anchor" href="#roots" aria-label="Link to this section"></a></h3>
+<p>The folders directly under <code>/archive</code> that the module&#39;s content lives in. The Archive&#39;s are:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;roots&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;/archive/people&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/locations&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/albums&quot;</span><span class="hljs-punctuation">]</span></code></pre></div>
+<p>Each must be <code>/archive/</code> followed by one name of lower case letters, digits, <code>_</code> and <code>-</code>, starting with a letter. <code>mod setup</code> creates a missing one, owned by the administrator and the users group, with mode 775. Nothing removes one, so removing a module does not delete its content. Name the roots in your module&#39;s own code too, so its dependents can use them: the Archive exports them as <code>@archive/paths</code>.</p>
+<h3 id="indexes"><code>indexes</code><a class="anchor" href="#indexes" aria-label="Link to this section"></a></h3>
+<p>Database indexes on node attributes, for the queries the module&#39;s data is asked. <code>mod setup</code> creates each one that is missing.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;indexes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;device_taken_utc&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;on&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;devicePath&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;takenAtUtc&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;partial&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;devicePath&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;spoken_text&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;on&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;partial&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;using&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;trigram&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;duplicate_deferred&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;on&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;duplicate.deferred&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;using&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;statistics&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>lower case letters, digits and <code>_</code>, starting with a letter; the index is named <code>&lt;attrs table&gt;_&lt;name&gt;_idx</code></td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td>the attributes, in order; a dotted path reaches into a nested attribute (<code>relation.from</code>)</td>
+</tr>
+<tr>
+<td><code>partial</code></td>
+<td>index only the nodes where this attribute is set: small and cheap for an attribute few nodes have</td>
+</tr>
+<tr>
+<td><code>collation</code></td>
+<td><code>bytes</code> (the default), <code>en</code> or <code>sv</code>: the order the values are kept in, which must be the order a query asks for to use the index</td>
+</tr>
+<tr>
+<td><code>using</code></td>
+<td><code>trigram</code> or <code>statistics</code>, below</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>using: &quot;trigram&quot;</code> makes a trigram index over one attribute&#39;s text instead. It serves a search for a substring anywhere in the text, and no order, so it takes one attribute in <code>on</code> and no <code>collation</code>. <code>using: &quot;statistics&quot;</code> makes no index at all, only the database&#39;s statistics on one attribute, for a condition no index serves that the planner would otherwise misjudge, such as asking for nodes that lack an attribute few nodes have. It takes one attribute and neither <code>collation</code> nor <code>partial</code>.</p>
+<p>If any of <code>nodeTypes</code>&#39; roots, <code>roots</code> or <code>indexes</code> is malformed, <code>mod setup</code> warns, for example <code>letters: index &#39;Taken&#39;: invalid name &#39;Taken&#39; (lower case, digits, _)</code>, and none of the three is used: no root is created, no index is made and no type completes after <code>@</code>.</p>
+<h2 id="pages">Pages<a class="anchor" href="#pages" aria-label="Link to this section"></a></h2>
+<h3 id="uiroutes"><code>ui.routes</code><a class="anchor" href="#uiroutes" aria-label="Link to this section"></a></h3>
+<p>The module&#39;s pages: each route with the file that draws it, relative to the module&#39;s root.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;/devices&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/device/pages/devices.tsx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;/devices/:id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/device/pages/device.tsx&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A route is a path below <code>/</code> made of literal and <code>:param</code> segments; <code>/</code> itself is the home page, which belongs to the web interface. The page is a <code>.tsx</code> file inside the module, and its default export is the page&#39;s component. If <code>ui.routes</code> is present it must hold at least one route.</p>
+<p><code>ui-build</code> bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module&#39;s bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and <code>ui-build</code> reports <code>/devices is archive&#39;s route already</code>. A route at the exact path of one of the web interface&#39;s own pages is never reached, since the interface&#39;s own is matched first.</p>
+<p>How a route is shown, as a page, in a dialog, in the side drawer or full screen, is decided by the entry that opens it in the module&#39;s <code>ui/nav.json</code>, not by the route. <a href="modules.html">Writing a module</a> covers navigation entries.</p>
+<h3 id="uiopen"><code>ui.open</code><a class="anchor" href="#uiopen" aria-label="Link to this section"></a></h3>
+<p>Which route opens a node of a type, so the web interface can link nodes it finds but does not know: search results, completions in the header, and <strong>Open</strong> in the node explorer.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;person&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/{name}&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;album&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/albums/{path}&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;track&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/devices/{parent}?tab=track&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Replaced by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{name}</code></td>
+<td>the node&#39;s last path segment</td>
+</tr>
+<tr>
+<td><code>{parent}</code></td>
+<td>the segment before it</td>
+</tr>
+<tr>
+<td><code>{path}</code></td>
+<td>the node&#39;s whole path</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each is URI-encoded. A route must start with <code>/</code> and use no other placeholder. A type that no installed module names is shown without a link.</p>
+<h2 id="what-mod-setup-finds-without-a-field">What <code>mod setup</code> finds without a field<a class="anchor" href="#what-mod-setup-finds-without-a-field" aria-label="Link to this section"></a></h2>
+<p>Some of what a module brings is found by where it is in the module, not by a field in <code>mod.json</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>In the module</th>
+<th>What <code>mod setup</code> does with it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bin/</code></td>
+<td>adds it to every shell&#39;s <code>PATH</code>; each file is a command, a shell script or <code>#!ts</code> TypeScript</td>
+</tr>
+<tr>
+<td><code>services/&lt;name&gt;/</code></td>
+<td>registers and enables a service from its <code>start.sh</code>; a service the module no longer ships is retired</td>
+</tr>
+<tr>
+<td><code>pipelines/*.yaml</code></td>
+<td>defines each pipeline; one the module no longer ships is undefined</td>
+</tr>
+<tr>
+<td><code>ui/nav.json</code></td>
+<td>links it as <code>/etc/ui/nav.d/&lt;name&gt;.json</code>: its sidebar, top-bar and panel entries, each opening a route</td>
+</tr>
+<tr>
+<td><code>ui/index.html</code></td>
+<td>links <code>ui/</code> as a site under <code>/var/www/&lt;name&gt;</code></td>
+</tr>
+<tr>
+<td><code>etc/config</code></td>
+<td>links it as <code>/etc/config.d/&lt;name&gt;</code>: the module&#39;s own choice of setting values</td>
+</tr>
+<tr>
+<td><code>etc/&lt;x&gt;.d/</code></td>
+<td>links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for whichever module reads <code>/etc/&lt;x&gt;.d/*</code> (<code>assistant.d</code>)</td>
+</tr>
+<tr>
+<td>the rest of <code>etc/</code></td>
+<td>copies each entry into <code>/etc</code> when it is not already there; never overwrites</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>links it as <code>/usr/docs/modules/&lt;name&gt;</code>: the module&#39;s own guide</td>
+</tr>
+<tr>
+<td><code>lib/</code>, <code>types/</code>, <code>test/</code></td>
+<td>ordinary source, reached through <code>imports</code> and <code>exports</code></td>
+</tr>
+<tr>
+<td><code>deno.jsonc</code></td>
+<td>generated from <code>mod.json</code> by <code>deno task sync:modules</code>; never edited</td>
+</tr>
+</tbody></table>
+</div>
+<p>Commands are also found by name. Core runs a module&#39;s command when it is named after a role: <code>members-&lt;type&gt;</code> for what a node of that type holds, <code>subject-&lt;kind&gt;</code> for <code>search --subject</code>, <code>search-*</code> providers for the search box, and <code>news-&lt;x&gt;</code>, <code>events-&lt;x&gt;</code> and <code>onthisday-&lt;x&gt;</code> for the home page&#39;s sections. <a href="modules.html">Writing a module</a> gives each role&#39;s arguments and answer. <a href="assistant.html">Teaching the assistant</a> covers what a module gives the assistant through <code>etc/assistant.d</code>.</p>
+<h2 id="check-a-manifest">Check a manifest<a class="anchor" href="#check-a-manifest" aria-label="Link to this section"></a></h2>
+<p><code>mod setup</code> checks the manifest before it changes anything, since the commands, services and pipelines it registers are live the moment they land.</p>
+<ol>
+<li><p>Put the module in place, or change its <code>mod.json</code>.</p>
+</li>
+<li><p>In EiN&#39;s terminal, as an administrator, set it up again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mod setup letters</code></pre></div>
+</li>
+<li><p>Read what it prints. On success it lists what it did and ends with <code>Module &#39;letters&#39; setup complete</code>.</p>
+</li>
+</ol>
+<p>What goes wrong falls in two kinds:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What it covers</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Error</td>
+<td>the directory name, <code>coreApi</code>, <code>dependencies</code>, <code>exports</code>, <code>imports</code>, <code>ui</code>, and a field of the wrong shape (<code>config.options</code>, <code>nodeTypes</code>, <code>environment</code>, <code>indexes</code> or <code>roots</code> that is not a list)</td>
+<td>the module is not set up at all; each problem is printed as <code>mod setup: letters: …</code></td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>a missing <code>coreApi</code>, a malformed setting, node type, environment variable, index or root</td>
+<td>the module is set up without the entry; the warning is printed</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module installed under another directory name is refused with <code>letters: must be installed as /usr/modules/letters, the directory named after it</code>. When a later step fails, for example a service that cannot be added, <code>mod setup</code> ends with <code>mod setup: module &#39;letters&#39; setup incomplete</code>.</p>
+<p><code>mod list</code> shows afterwards how each module&#39;s last setup went, and <strong>Settings → Modules</strong> shows the same for each module. <a href="../admin/modules.html">Modules</a> describes both, and <a href="../reference/commands-core.html#mod-setup"><code>mod-setup</code></a> and <a href="../reference/commands-core.html#mod-info"><code>mod-info</code></a> the commands.</p>
+<p>In a core checkout, <code>deno task check</code> type-checks the modules against their manifests, and core&#39;s tests include the boundary test and a check that each <code>deno.jsonc</code> matches its <code>mod.json</code>.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="modules.html" rel="prev"><span>Previous</span>Writing a module</a><a class="next" href="assistant.html" rel="next"><span>Next</span>Teaching the assistant</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/manifest.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-small-manifest">A small manifest</a></li><li><a href="#the-fields-at-a-glance">The fields at a glance</a></li><li><a href="#identity">Identity</a></li><li class="nested"><a href="#name">name</a></li><li class="nested"><a href="#version">version</a></li><li class="nested"><a href="#description-author-license">description, author, license</a></li><li class="nested"><a href="#coreapi">coreApi</a></li><li><a href="#what-a-module-shares-and-uses">What a module shares and uses</a></li><li class="nested"><a href="#exports">exports</a></li><li class="nested"><a href="#imports">imports</a></li><li class="nested"><a href="#dependencies">dependencies</a></li><li><a href="#settings">Settings</a></li><li class="nested"><a href="#configoptions">config.options</a></li><li class="nested"><a href="#a-modules-own-choice-of-values">A module's own choice of values</a></li><li><a href="#reference">Reference</a></li><li class="nested"><a href="#environment">environment</a></li><li class="nested"><a href="#nodetypes">nodeTypes</a></li><li><a href="#the-archive">The archive</a></li><li class="nested"><a href="#roots">roots</a></li><li class="nested"><a href="#indexes">indexes</a></li><li><a href="#pages">Pages</a></li><li class="nested"><a href="#uiroutes">ui.routes</a></li><li class="nested"><a href="#uiopen">ui.open</a></li><li><a href="#what-mod-setup-finds-without-a-field">What mod setup finds without a field</a></li><li><a href="#check-a-manifest">Check a manifest</a></li></ul></aside>
+    </div>
+  </body>
+</html>

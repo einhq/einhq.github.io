@@ -33,6 +33,8 @@ type Shot = {
   phone?: boolean;
   /** The part of the window to keep, in CSS pixels, for a shot the page shows at half width. */
   clip?: { x: number; y: number; width: number; height: number };
+  /** Taken without signing in, as a visitor sees it. */
+  signedOut?: boolean;
   run: (page: Page) => Promise<void>;
 };
 
@@ -216,6 +218,80 @@ const SHOTS: Shot[] = [
   { id: 'chat-page', run: (page) => open(page, '/chat', 4000) },
   { id: 'phone-home', phone: true, run: (page) => open(page, '/', 5000) },
   { id: 'phone-person', phone: true, run: (page) => open(page, '/people/Helen_Okafor', 5000) },
+  // The documentation's (docs/): the dialogs, menus and pages its guides walk through.
+  {
+    id: 'share',
+    clip: { x: 350, y: 100, width: 740, height: 700 },
+    run: async (page) => {
+      await open(page, album('sailing-2025'));
+      await page.getByRole('button', { name: 'Share', exact: true }).first().click();
+      await settle(page, 1500);
+    },
+  },
+  {
+    id: 'selection',
+    run: async (page) => {
+      await open(page, album('sailing-2025'), 5000);
+      await page.getByRole('button', { name: /^Select everything from/ }).first().click();
+      await settle(page, 1500);
+    },
+  },
+  { id: 'album-info', run: (page) => open(page, `${album('sailing-2025')}?tab=info`, 5000) },
+  { id: 'album-map', run: (page) => open(page, `${album('sailing-2025')}?tab=map`, 6000) },
+  {
+    id: 'create-menu',
+    clip: { x: 840, y: 0, width: 600, height: 400 },
+    run: async (page) => {
+      await open(page, '/', 3000);
+      await page.getByRole('button', { name: 'Create', exact: true }).click();
+      await settle(page, 1000);
+    },
+  },
+  {
+    id: 'account-menu',
+    clip: { x: 940, y: 0, width: 500, height: 440 },
+    run: async (page) => {
+      await open(page, '/', 3000);
+      await page.getByRole('button', { name: 'Administrator', exact: true }).click();
+      await settle(page, 1000);
+    },
+  },
+  {
+    id: 'shortcuts',
+    run: async (page) => {
+      await open(page, '/', 3000);
+      await page.keyboard.press('Shift+Slash');
+      await settle(page, 1200);
+    },
+  },
+  { id: 'search-page', run: (page) => open(page, '/search', 5000) },
+  { id: 'preferences', run: (page) => open(page, '/profile?tab=preferences', 4000) },
+  { id: 'security', run: (page) => open(page, '/profile?tab=security', 4000) },
+  { id: 'settings-groups', run: (page) => open(page, '/settings?tab=groups', 4000) },
+  { id: 'settings-modules', run: (page) => open(page, '/settings?tab=modules&module=archive', 5000) },
+  { id: 'modules-published', run: (page) => open(page, '/settings?tab=modules&published=1', 8000) },
+  { id: 'system-services', run: (page) => open(page, '/system?tab=services', 5000) },
+  {
+    id: 'login',
+    signedOut: true,
+    run: async (page) => {
+      await page.goto(`${BASE}/login`, { waitUntil: 'domcontentloaded' });
+      await page.waitForSelector('input[type=password]', { timeout: 20000 });
+      await settle(page, 2500);
+    },
+  },
+  {
+    id: 'terminal-top',
+    clip: { x: 0, y: 0, width: 1440, height: 780 },
+    run: async (page) => {
+      await open(page, '/', 3000);
+      await page.keyboard.press('Alt+t');
+      await settle(page, 2500);
+      await page.keyboard.press('Alt+m');
+      await settle(page, 1000);
+      await terminalLine(page, 'top', 6000);
+    },
+  },
   {
     id: 'phone-lightbox',
     phone: true,
@@ -262,14 +338,14 @@ async function signIn(page: Page) {
   });
 }
 
-async function newPage(browser: Browser, shot: Pick<Shot, 'phone'>): Promise<Page> {
+async function newPage(browser: Browser, shot: Pick<Shot, 'phone' | 'signedOut'>): Promise<Page> {
   const context = await browser.newContext(
     shot.phone
       ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true }
       : { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 },
   );
   const page = await context.newPage();
-  await signIn(page);
+  if (!shot.signedOut) await signIn(page);
   return page;
 }
 

@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Processing and pipelines – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator. It covers the work EiN does on what people upload: which pipelines the modules bring, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings that decide how much runs at once.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/processing.html">
+    <meta property="og:title" content="Processing and pipelines – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator. It covers the work EiN does on what people upload: which pipelines the modules bring, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings that decide how much runs at once.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/processing.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html" aria-current="page">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Processing and pipelines</h1>
+        </header>
+        <article class="prose">
+<p>This page is for the administrator. It covers the work EiN does on what people upload: which
+pipelines the modules bring, how to watch them on the <strong>Dashboard</strong> and in the terminal, what to do
+when work fails or stops moving, how to run work again on purpose, and the settings that decide
+how much runs at once.</p>
+<h2 id="what-runs-after-an-upload">What runs after an upload<a class="anchor" href="#what-runs-after-an-upload" aria-label="Link to this section"></a></h2>
+<p>A pipeline waits for one kind of change and then runs its steps, each a command, on the node that
+changed. <a href="../concepts/pipelines.html">Changes and pipelines</a> explains the idea; this page is about
+running it. Core brings the pipeline engine and no pipelines. The Archive brings all of the
+pipelines below, so with only core installed nothing is processed.</p>
+<p>Work is done in three places:</p>
+<ul>
+<li><strong>The pipeline engine</strong> (the <code>pipeline-engine</code> service) matches changes to pipelines, creates an
+<strong>instance</strong> for each pipeline and node, and runs the short steps itself.</li>
+<li><strong>Pool workers</strong> run the long steps. The engine puts each one as a job in a pool, and a worker
+takes it when it has room. The Archive brings two: <code>cpu</code>, for work done on this machine, such as
+reading metadata, making thumbnails and transcoding video, and <code>models</code>, for work done by a model
+in the <a href="media-service.html">media service</a>, such as finding faces or transcribing speech.</li>
+<li><strong>Background services</strong> of the Archive: <code>archive-bridge</code> turns changes into the events the media
+pipelines wait for, and <code>media-heal</code> finds files that are missing something and announces them
+again (see <a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>).</li>
+</ul>
+<p>Every pipeline runs at most once per node at a time: a file announced ten times while it waits is
+worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.</p>
+<h3 id="the-archives-pipelines">The Archive&#39;s pipelines<a class="anchor" href="#the-archives-pipelines" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Pipeline</th>
+<th>What it does</th>
+<th>Kind of work</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>media-ingest</code></td>
+<td>Reads a photo&#39;s, video&#39;s or recording&#39;s metadata. Every other media pipeline waits on it.</td>
+<td><code>ingest</code></td>
+</tr>
+<tr>
+<td><code>media-reindex</code></td>
+<td>Reads the metadata again for a file whose bytes changed</td>
+<td><code>ingest</code></td>
+</tr>
+<tr>
+<td><code>media-stills</code></td>
+<td>A photo&#39;s display sizes and face crops, a video&#39;s poster frames, a recording&#39;s waveform</td>
+<td><code>stills</code></td>
+</tr>
+<tr>
+<td><code>media-transcode</code></td>
+<td>Video and audio the browser can play, a video&#39;s hover clip, storyboard and chapters</td>
+<td><code>transcode</code>, <code>stills</code>, <code>shots</code></td>
+</tr>
+<tr>
+<td><code>media-fingerprint</code></td>
+<td>The fingerprints that find duplicates and photo stacks</td>
+<td><code>fingerprint</code></td>
+</tr>
+<tr>
+<td><code>media-faces</code></td>
+<td>Finds the faces in a photo and crops each one</td>
+<td><code>faces</code></td>
+</tr>
+<tr>
+<td><code>media-video-faces</code></td>
+<td>Finds the faces in a video and when each is on screen</td>
+<td><code>faces</code></td>
+</tr>
+<tr>
+<td><code>media-face-assign</code></td>
+<td>Matches a found face to a person</td>
+<td><code>face-assign</code></td>
+</tr>
+<tr>
+<td><code>media-face-transfer</code></td>
+<td>Moves face tags from an older archive onto the faces EiN found</td>
+<td><code>face-transfer</code></td>
+</tr>
+<tr>
+<td><code>media-embed-picture</code></td>
+<td>A picture vector, for searching by what is in the picture</td>
+<td><code>embed-picture</code></td>
+</tr>
+<tr>
+<td><code>media-ocr</code></td>
+<td>Reads the text written in a picture</td>
+<td><code>ocr</code></td>
+</tr>
+<tr>
+<td><code>media-embed-text</code></td>
+<td>Text vectors of a file&#39;s stored texts</td>
+<td><code>embed-text</code></td>
+</tr>
+<tr>
+<td><code>media-transcribe</code></td>
+<td>A transcript of what is said in a video or recording</td>
+<td><code>transcribe</code></td>
+</tr>
+<tr>
+<td><code>media-voiceprint</code></td>
+<td>Who speaks when in a recording, with a voiceprint per voice</td>
+<td><code>diarize</code></td>
+</tr>
+<tr>
+<td><code>media-speaker-assign</code></td>
+<td>Decides which person each voice is</td>
+<td><code>speaker-assign</code></td>
+</tr>
+<tr>
+<td><code>media-device</code></td>
+<td>Links a file to the camera or phone that took it</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>media-geocode</code></td>
+<td>Looks up the address of a file&#39;s GPS position</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>media-album</code></td>
+<td>An album&#39;s stacks, time span, missing cover and profile, when its members change</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>media-duplicates</code></td>
+<td>Decides again the duplicate findings of a staged file</td>
+<td><code>dedupe</code></td>
+</tr>
+<tr>
+<td><code>location-link-point</code></td>
+<td>Links a photo to the location that contains its GPS point</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>location-upkeep</code></td>
+<td>Redraws a location and relinks the photos inside it when it or its photos change</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>document-index</code></td>
+<td>Extracts the text of a document and makes it searchable</td>
+<td>run by the engine</td>
+</tr>
+<tr>
+<td><code>staging-unzip</code></td>
+<td>Expands a zip that lands in a staging category, then removes the zip</td>
+<td><code>unzip</code></td>
+</tr>
+<tr>
+<td><code>staging-sidecars</code></td>
+<td>Pairs Takeout and XMP sidecars with their files</td>
+<td><code>sidecars</code></td>
+</tr>
+<tr>
+<td><code>staging-organize</code></td>
+<td>Plans a staging category&#39;s suggested groups again</td>
+<td><code>organize</code></td>
+</tr>
+<tr>
+<td><code>staging-retime</code></td>
+<td>Dates staged files again by the rules of the category they were moved into</td>
+<td><code>retime</code></td>
+</tr>
+<tr>
+<td><code>track-stage</code></td>
+<td>Makes a GPX file dropped in staging into its device&#39;s route</td>
+<td>run by the engine</td>
+</tr>
+</tbody></table>
+</div>
+<p>The <code>cpu</code> worker takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>face-transfer</code>,
+<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>. The
+<code>models</code> worker takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
+<code>shots</code>. <code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
+<h2 id="watch-the-work-on-the-dashboard">Watch the work on the Dashboard<a class="anchor" href="#watch-the-work-on-the-dashboard" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Sign in as an administrator and choose <strong>Dashboard</strong> in the sidebar, under <strong>System</strong>.</li>
+<li>Read the badge above the title <strong>System dashboard</strong>: <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or
+<strong>Needs a person</strong>. <a href="monitoring.html">Health and the dashboard</a> explains each word and the
+<strong>Overview</strong> tab.</li>
+<li>Choose the <strong>Work</strong> tab.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done.</figcaption></figure>
+<p>The table has a row for every defined pipeline, also one that has never run, and a total row
+<strong>All pipelines</strong> at the foot. The bar draws the same counts as the columns.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Column</th>
+<th>What it counts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Waiting</strong></td>
+<td>Nodes the pipeline has matched but not yet started on: no instance yet</td>
+</tr>
+<tr>
+<td><strong>Queued</strong></td>
+<td>Instances that are started and waiting for a worker or for an earlier step</td>
+</tr>
+<tr>
+<td><strong>Running</strong></td>
+<td>Instances with a step running this moment</td>
+</tr>
+<tr>
+<td><strong>Failed</strong></td>
+<td>Instances that failed</td>
+</tr>
+<tr>
+<td><strong>Completed</strong></td>
+<td>Instances that finished. Older ones are pruned, so this is not a count of every file ever processed.</td>
+</tr>
+<tr>
+<td><strong>Cancelled</strong></td>
+<td>Instances stopped on purpose</td>
+</tr>
+<tr>
+<td><strong>In</strong></td>
+<td>Jobs that arrived per hour, over the last hour</td>
+</tr>
+<tr>
+<td><strong>Out</strong></td>
+<td>Instances completed in the last hour, the rate the ETA divides by</td>
+</tr>
+<tr>
+<td><strong>ETA</strong></td>
+<td>When what is waiting will be done at that rate; <strong>no rate</strong> when nothing completed recently</td>
+</tr>
+</tbody></table>
+</div>
+<p>Hover over the lightning sign beside a pipeline&#39;s name to see what starts it. Choose a row to open
+the pipeline&#39;s page.</p>
+<p>Below the table, <strong>Kinds of work</strong> lists what the pools hold, a row per kind of job: <strong>Left</strong>,
+<strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. This is where the slow steps are. A
+kind may carry a badge:</p>
+<ul>
+<li><strong>waiting for EMS</strong>: the media service could not run this kind yet, because it was busy, loading
+a model, restarting or unreachable. The jobs are not failed. The kind rests for 30 seconds, then
+twice as long each time it is refused again, up to 10 minutes; hover over the badge for the next
+try.</li>
+<li><strong>no worker</strong>: no running worker takes this kind, so the jobs will never run.</li>
+</ul>
+<p><strong>Ongoing</strong> lists the instances with a step running, with the target file and how long it has run.
+A step that has written nothing for 30 minutes is listed above it as quiet, with &quot;Still running;
+nothing stops a step for taking long.&quot; No step is stopped for taking long; a quiet step is for you
+to look at, not a fault in itself.</p>
+<p>Two warnings can appear above the tabs or the table:</p>
+<ul>
+<li><strong>Work that nothing will run</strong> names each kind that has jobs and no worker, and the pipelines
+that queue it. See <a href="#work-that-nothing-will-run">Work that nothing will run</a>.</li>
+<li><strong>N dropped</strong>, above the table, counts events that failed every delivery attempt. See
+<a href="#dropped-events">Dropped events</a>.</li>
+</ul>
+<h2 id="watch-the-work-in-the-terminal">Watch the work in the terminal<a class="anchor" href="#watch-the-work-in-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Everything on the <strong>Work</strong> tab comes from ordinary commands, which you can run in
+<a href="../shell/terminal.html">the terminal</a> or over SSH:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+health                          <span class="hljs-comment"># the verdict in one line, and each check that decides it</span>
+pipeline-overview               <span class="hljs-comment"># instances by pipeline, unfinished steps, queues, completions in the last hour</span>
+pool-stat                       <span class="hljs-comment"># each pool and kind: what is left, how fast, workers and what they take</span>
+pipeline-instances -s failed    <span class="hljs-comment"># the failed instances, newest first</span>
+top                             <span class="hljs-comment"># all of it live, with CPU, memory and services; q quits</span></code></pre></div>
+<p><code>pipeline-instances</code> lists 100 at a time and prints <code>(more: --after …)</code> when there are more; pass
+that to <code>--after</code> for the next page. Give it pipeline names to narrow it:
+<code>pipeline-instances -s failed media-faces media-ocr</code>.</p>
+<h2 id="look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances<a class="anchor" href="#look-at-one-pipeline-and-its-instances" aria-label="Link to this section"></a></h2>
+<p>A pipeline&#39;s page, opened from the <strong>Work</strong> table, shows its description, its <strong>Trigger</strong>, its
+<strong>Steps</strong> and its <strong>Priority</strong>, and below them its <strong>Instances</strong>: <strong>Status</strong>, <strong>Target</strong>,
+<strong>Started</strong> and <strong>Duration</strong>. The tabs <strong>All</strong>, <strong>Running</strong>, <strong>Completed</strong>, <strong>Failed</strong> and
+<strong>Cancelled</strong> narrow the list, and <strong>Load more</strong> fetches the next page.</p>
+<p>Choose an instance to open it. Its page shows the status, the target node and the steps:
+<strong>Step</strong>, <strong>Status</strong>, <strong>Depends on</strong>, <strong>Command</strong> and <strong>Duration</strong>. A step&#39;s status is one of these:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code></td>
+<td>Waits for the steps it depends on</td>
+</tr>
+<tr>
+<td><code>queued</code></td>
+<td>Waits for a free place in the engine</td>
+</tr>
+<tr>
+<td><code>waiting</code></td>
+<td>Waits in a pool for a worker; the pool and kind are shown beside it, and &quot;retrying&quot; if it ran before</td>
+</tr>
+<tr>
+<td><code>running</code></td>
+<td>Runs now; &quot;last output … ago&quot; says when it last wrote anything</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>Finished</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Failed on its last attempt</td>
+</tr>
+<tr>
+<td><code>skipped</code></td>
+<td>Not run: its condition said no, or the instance was cancelled</td>
+</tr>
+</tbody></table>
+</div>
+<p>Choose a step to see its <strong>Exit code</strong>, its <strong>Attempts</strong>, its pool and its condition, and for a
+failed step the <strong>Error</strong> it wrote. In the terminal, <code>pipeline-status</code> prints the same:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-status media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
+<p>An instance is named after the node it works on, so one file has the same id in every pipeline
+that ran on it. Give the id as <code>&lt;pipeline&gt;/&lt;id&gt;</code>, as <code>pipeline-instances</code> and the pages show it; a
+bare id that more than one pipeline uses is refused with the pipelines it could mean.</p>
+<h2 id="when-work-fails">When work fails<a class="anchor" href="#when-work-fails" aria-label="Link to this section"></a></h2>
+<p>A failed step is tried again up to its limit of attempts, three unless the pipeline says
+otherwise, before the instance fails. Two kinds of failure are treated differently:</p>
+<ul>
+<li><strong>The media service could not do it yet.</strong> The step goes back to wait with its attempt given
+back, and its kind rests, as <strong>waiting for EMS</strong> shows. Nothing fails however long the media
+service is away.</li>
+<li><strong>The file itself cannot be processed</strong>, such as bytes no decoder can open. The step fails at
+once, whatever attempts are left, and the file is not tried again. <code>health</code> counts these under
+<code>input</code> and treats them as settled.</li>
+</ul>
+<h3 id="failed-work-is-run-again-on-its-own">Failed work is run again on its own<a class="anchor" href="#failed-work-is-run-again-on-its-own" aria-label="Link to this section"></a></h3>
+<p>The <code>pipeline-pruner</code> service runs <code>pipeline-heal --apply</code> every hour (<code>CFG_PIPELINE_PRUNE_INTERVAL</code>,
+3600 seconds). It runs each failed instance again 1 hour after it failed, then 6 hours after the
+next failure, then 24 hours after that. An instance that fails all three times is marked as needing
+a person and left alone, and <code>health</code> then reads <strong>Needs a person</strong>. Instances that failed on their
+input, and instances of pipelines no longer defined, are never run again.</p>
+<p><code>pipeline-heal</code> without <code>--apply</code> only says what it would do:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-heal</code></pre></div>
+<div class="code"><pre tabindex="0"><code>would rerun 3, would mark 0 for a person; 12 waiting, 1 failed on their input</code></pre></div>
+<p>When you know the cause has passed, for example after the media service was fixed, run them all
+now. <code>--now</code> skips the waits, and the run does not count as one of the three:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-heal --apply --now</code></pre></div>
+<p><a href="../guide/customizing.html">Your sidebar and top bar</a> shows how to give administrators a button that
+runs <code>pipeline-heal --apply</code>.</p>
+<h3 id="work-that-needs-a-person">Work that needs a person<a class="anchor" href="#work-that-needs-a-person" aria-label="Link to this section"></a></h3>
+<ol>
+<li><p>List the failed instances: <code>pipeline-instances -s failed</code>, or the <strong>Failed</strong> tab of the
+pipeline&#39;s page.</p>
+</li>
+<li><p>Open one and choose the failed step to read its <strong>Error</strong>.</p>
+</li>
+<li><p>Fix the cause: start the media service, free disk space, or replace the file.</p>
+</li>
+<li><p>Run the instance again with <strong>Rerun</strong> on its page, or with <code>pipeline-rerun</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
+</li>
+</ol>
+<p>To act on many at once, tick them on the pipeline&#39;s page and choose <strong>Rerun</strong>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To</th>
+<th>On the pages</th>
+<th>In the terminal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Run an instance afresh from the pipeline&#39;s current steps</td>
+<td><strong>Rerun</strong></td>
+<td><code>pipeline-rerun &lt;pipeline&gt;/&lt;id&gt; …</code></td>
+</tr>
+<tr>
+<td>Run only the failed steps again</td>
+<td>none</td>
+<td><code>pipeline-restart &lt;pipeline&gt;/&lt;id&gt;</code></td>
+</tr>
+<tr>
+<td>Run one failed or skipped step again</td>
+<td><strong>Retry</strong> on the step</td>
+<td><code>pipeline-step-restart &lt;pipeline&gt;/&lt;id&gt; &lt;step&gt;</code></td>
+</tr>
+<tr>
+<td>Stop a running instance</td>
+<td><strong>Cancel</strong></td>
+<td><code>pipeline-cancel &lt;pipeline&gt;/&lt;id&gt;</code></td>
+</tr>
+<tr>
+<td>Delete instances, cancelling running ones first</td>
+<td><strong>Remove</strong></td>
+<td><code>pipeline-remove &lt;pipeline&gt;/&lt;id&gt; …</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Only an administrator sees these buttons, and only an administrator can run these commands.</p>
+<h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
+<p>A kind with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Dashboard</strong>
+and <code>health</code> (as a failed check <code>kind &lt;name&gt;</code>) both say so. The usual cause is that the worker
+service is stopped:</p>
+<ol>
+<li>Open the <strong>Services</strong> tab of the <strong>Dashboard</strong>, or run <code>service-list</code>, and look at <code>cpu</code> and
+<code>models</code>.</li>
+<li>Start the one that is stopped, or read its log if it keeps stopping.
+<a href="services-logs.html">Services and logs</a> shows how.</li>
+</ol>
+<p>When no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was
+removed. The warning then gives the command that cancels them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pool-cancel /var/pools/media --kind &lt;kind&gt;</code></pre></div>
+<h3 id="dropped-events">Dropped events<a class="anchor" href="#dropped-events" aria-label="Link to this section"></a></h3>
+<p>An event that fails ten delivery attempts, for example because its node no longer exists, is set
+aside rather than tried forever. The <strong>Work</strong> table then shows <strong>N dropped</strong>, and <code>health</code> fails
+its <code>queue …</code> check until you deal with them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+queue-dead /var/queues/archive-bridge           <span class="hljs-comment"># list what was set aside</span>
+queue-dead --retry /var/queues/archive-bridge   <span class="hljs-comment"># put them back in line</span>
+queue-dead --drop /var/queues/archive-bridge    <span class="hljs-comment"># delete them</span></code></pre></div>
+<p>The engine&#39;s own queue is <code>/var/queues/pipeline-engine</code>. <code>--id</code> limits <code>--retry</code> or <code>--drop</code> to
+one entry.</p>
+<h3 id="steps-waiting-for-the-media-service">Steps waiting for the media service<a class="anchor" href="#steps-waiting-for-the-media-service" aria-label="Link to this section"></a></h3>
+<p>When <strong>waiting for EMS</strong> stays on a kind, the media service is the place to look:
+<a href="media-service.html">The media service</a> shows how to check it. Once it answers again, the kind tries
+on its own at its next try. To try at once:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pool-wake               <span class="hljs-comment"># every resting kind</span>
+pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre></div>
+<h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want to</th>
+<th>Run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Run one pipeline on one file or folder</td>
+<td><code>pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg</code></td>
+</tr>
+<tr>
+<td>Transcode a video again although it has renditions</td>
+<td><code>pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
+</tr>
+<tr>
+<td>Make the display sizes again under a folder</td>
+<td><code>regenerate --force /archive/albums/christmas-2019</code></td>
+</tr>
+<tr>
+<td>Announce files the Archive never saw, or that are missing work</td>
+<td><code>media-scan /archive/albums</code></td>
+</tr>
+</tbody></table>
+</div>
+<p><code>pipeline-start</code> starts the run at once, in the normal lane, and skips the checks a trigger makes.
+<code>--var</code> sets a variable the pipeline declares; <code>media-transcode</code>, <code>media-transcribe</code>,
+<code>media-embed-picture</code> and <code>media-ocr</code> declare <code>FORCE</code>, which <code>-f</code> makes them redo work already done.
+A pipeline that reads its starting event has nothing to read when started by hand, and
+<code>pipeline-start</code> warns about it.</p>
+<h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
+<p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
+something a pipeline should have given it: a fingerprint, display sizes, faces, renditions, or a
+transcript made with other settings than the media service runs now. Each pipeline then skips
+what is already done.</p>
+<p>The <code>media-heal</code> service runs it for you, but only when nothing is waiting in the pools, so a scan
+never repeats what is already on its way. It looks every <code>CFG_MEDIA_HEAL_INTERVAL</code> seconds (900),
+and after a pass through the whole archive it rests for <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six
+hours).</p>
+<p>Run it by hand after installing the Archive on files that were already there, or to look at one
+folder:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+media-scan -n /archive/albums/christmas-2019    <span class="hljs-comment"># only report what it would announce</span>
+media-scan /archive/albums/christmas-2019</code></pre></div>
+<p>A run examines up to 20000 files (<code>--scan-limit</code>) and announces up to 1000 (<code>--limit</code>), and
+remembers where it stopped, so the next run goes on from there; <code>--restart</code> starts from the top. It
+announces nothing while more than 500 ingest runs and triggers are waiting (<code>--max-active</code>).</p>
+<p><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code> set to <code>off</code> stops transcripts from being made again when the
+media service&#39;s speech settings change. On a large archive such a change otherwise means hours of
+background work.</p>
+<h2 id="large-imports-and-the-bulk-lane">Large imports and the bulk lane<a class="anchor" href="#large-imports-and-the-bulk-lane" aria-label="Link to this section"></a></h2>
+<p>Work on a staging category of the <strong>Google Photos export</strong> or <strong>Scans</strong> kind runs in the bulk lane,
+below all other work, so what people upload in the meantime is processed first. Bulk work is put
+behind, never stopped: it runs whenever nothing else that could run is waiting. Any category can be
+put in that lane with <code>staging category &lt;name&gt; --lane bulk</code>, which applies to work announced from
+then on. <a href="staging.html">Staging and importing for administrators</a> covers categories.</p>
+<p><code>pipeline-rerun</code> and <code>pipeline-start</code> always run in the normal lane; <code>pipeline-heal</code> keeps the
+lane an instance had.</p>
+<h2 id="how-much-runs-at-once">How much runs at once<a class="anchor" href="#how-much-runs-at-once" aria-label="Link to this section"></a></h2>
+<p>These settings are in the <strong>Processing</strong> category of <strong>Settings → System</strong>, or set with
+<code>config set</code>. Saving one restarts the service that reads it, and work in progress is picked up
+again; <a href="configuration.html">Configuration</a> explains how.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it decides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../reference/settings.html#cfg_cpu_slots"><code>CFG_CPU_SLOTS</code></a></td>
+<td><code>2</code></td>
+<td>How much CPU work the <code>cpu</code> worker runs at once. A transcode takes two slots, other kinds one.</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code></a></td>
+<td><code>1</code></td>
+<td>Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits.</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_cpu_workers"><code>CFG_CPU_WORKERS</code></a></td>
+<td><code>4</code></td>
+<td>The most CPU jobs in flight; the slots are the real limit</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
+<td><code>2</code></td>
+<td>Requests the <code>models</code> worker keeps in flight against the media service. Size it to what the media service runs at once.</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_model_kind_quantum_ms"><code>CFG_MODEL_KIND_QUANTUM_MS</code></a></td>
+<td><code>900000</code></td>
+<td>How long the <code>models</code> worker stays on one kind before turning to the next, so faces do not starve the rest</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_pipeline_max_concurrent"><code>CFG_PIPELINE_MAX_CONCURRENT</code></a></td>
+<td><code>4</code></td>
+<td>Steps the engine itself runs at once</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a></td>
+<td><code>1800000</code></td>
+<td>How long a running step may be silent before it is listed as quiet</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_pipeline_prune_interval"><code>CFG_PIPELINE_PRUNE_INTERVAL</code></a></td>
+<td><code>3600</code></td>
+<td>Seconds between the pruner&#39;s rounds, which also run <code>pipeline-heal</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The engine has more settings, for how many triggers and instances it holds; their defaults suit a
+machine of any size, and <a href="../reference/settings.html#processing">Settings</a> lists them all.
+<a href="performance.html">Performance and sizing</a> says what to set on a small or a large machine.</p>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>More <code>CFG_MODEL_SLOTS</code> than the media service runs at once only moves the wait into its queue,
+and past its depth into <strong>waiting for EMS</strong>.</p>
+</aside>
+<h2 id="old-instances-are-pruned">Old instances are pruned<a class="anchor" href="#old-instances-are-pruned" aria-label="Link to this section"></a></h2>
+<p>Instances are nodes under <code>/var/pipelines/instances/&lt;pipeline&gt;/</code>. Every hour the <code>pipeline-pruner</code>
+service deletes pool jobs that finished more than 24 hours ago, runs <code>pipeline-heal --apply</code>, and
+then keeps the 2000 most recently completed instances of each pipeline and deletes the rest. It
+leaves failed and running instances alone. A pipeline that is no longer defined, because its module
+was removed or it was renamed, loses all its instances once its definition has been gone for 10
+minutes.</p>
+<p>To delete by hand, use <strong>Prune</strong> on a pipeline&#39;s page, which removes its finished instances, or
+only those of the tab you are on, or <code>pipeline-prune</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-prune -s failed media-faces       <span class="hljs-comment"># the failed instances of one pipeline</span>
+pipeline-prune --older-than 30d            <span class="hljs-comment"># completed more than 30 days ago, every pipeline</span></code></pre></div>
+<h2 id="pipelines-come-with-modules">Pipelines come with modules<a class="anchor" href="#pipelines-come-with-modules" aria-label="Link to this section"></a></h2>
+<p>A module&#39;s pipelines are defined when it is set up and removed when it is removed;
+<a href="modules.html">Modules</a> covers both. Removing a pipeline cancels its running instances. To write a
+pipeline of your own, see <a href="../develop/modules.html">Writing a module</a>.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../concepts/pipelines.html">Changes and pipelines</a>: how a change becomes finished work.</li>
+<li><a href="monitoring.html">Health and the dashboard</a>: the four words and the <strong>Overview</strong> tab.</li>
+<li><a href="media-service.html">The media service</a>: where the model work and much of the media work runs.</li>
+<li><a href="performance.html">Performance and sizing</a>: what the slots should be on your machine.</li>
+<li><a href="services-logs.html">Services and logs</a>: starting, stopping and reading the workers.</li>
+<li><a href="troubleshooting.html">Troubleshooting</a>: when photos do not get thumbnails, faces or dates.</li>
+<li><a href="../reference/commands-core.html#pipeline">Core commands</a>: every <code>pipeline-</code> and <code>pool-</code> command.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="monitoring.html" rel="prev"><span>Previous</span>Health and the dashboard</a><a class="next" href="services-logs.html" rel="next"><span>Next</span>Services and logs</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li class="nested"><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#watch-the-work-on-the-dashboard">Watch the work on the Dashboard</a></li><li><a href="#watch-the-work-in-the-terminal">Watch the work in the terminal</a></li><li><a href="#look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances</a></li><li><a href="#when-work-fails">When work fails</a></li><li class="nested"><a href="#failed-work-is-run-again-on-its-own">Failed work is run again on its own</a></li><li class="nested"><a href="#work-that-needs-a-person">Work that needs a person</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li class="nested"><a href="#dropped-events">Dropped events</a></li><li class="nested"><a href="#steps-waiting-for-the-media-service">Steps waiting for the media service</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#old-instances-are-pruned">Old instances are pruned</a></li><li><a href="#pipelines-come-with-modules">Pipelines come with modules</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

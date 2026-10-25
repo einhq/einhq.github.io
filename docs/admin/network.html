@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ports, HTTPS and remote access – EiN documentation</title>
+    <meta name="description" content="This page is for whoever runs EiN: which ports it listens on and how to change them, how to put it behind an HTTPS proxy, and how to reach it from outside your home safely. It assumes an installation made with the installer, in ~/ein; Installing in detail explains that folder.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/network.html">
+    <meta property="og:title" content="Ports, HTTPS and remote access – EiN documentation">
+    <meta property="og:description" content="This page is for whoever runs EiN: which ports it listens on and how to change them, how to put it behind an HTTPS proxy, and how to reach it from outside your home safely. It assumes an installation made with the installer, in ~/ein; Installing in detail explains that folder.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/network.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html" aria-current="page">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Ports, HTTPS and remote access</h1>
+        </header>
+        <article class="prose">
+<p>This page is for whoever runs EiN: which ports it listens on and how to change them, how to put it behind an HTTPS proxy, and how to reach it from outside your home safely. It assumes an installation made with the installer, in <code>~/ein</code>; <a href="install.html">Installing in detail</a> explains that folder.</p>
+<h2 id="what-ein-listens-on">What EiN listens on<a class="anchor" href="#what-ein-listens-on" aria-label="Link to this section"></a></h2>
+<p>EiN publishes two ports, on every address of the machine it runs on:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Port</th>
+<th>What answers</th>
+<th>Protocol</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>8080</code></td>
+<td>the web interface, its files and its WebSocket</td>
+<td>plain HTTP</td>
+</tr>
+<tr>
+<td><code>2222</code></td>
+<td>the SSH and SFTP server</td>
+<td>SSH</td>
+</tr>
+</tbody></table>
+</div>
+<p>Nothing else is reachable from outside. The database, the media service and the language model answer only EiN, on the containers&#39; own network: no port of theirs is published on the machine.</p>
+<p>EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in <a href="#put-ein-behind-https">Put EiN behind HTTPS</a>.</p>
+<h2 id="change-the-ports-or-the-address">Change the ports or the address<a class="anchor" href="#change-the-ports-or-the-address" aria-label="Link to this section"></a></h2>
+<p>Which ports the machine publishes, and on which address, are three lines in <code>~/ein/.env</code>, written at the install:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">EIN_BIND</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
+<span class="hljs-attr">EIN_HTTP_PORT</span>=<span class="hljs-number">8080</span>
+<span class="hljs-attr">EIN_SSH_PORT</span>=<span class="hljs-number">2222</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it decides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EIN_BIND</code></td>
+<td>The address of the machine the two ports are published on. <code>0.0.0.0</code> is every address; <code>127.0.0.1</code> keeps them to the machine itself.</td>
+</tr>
+<tr>
+<td><code>EIN_HTTP_PORT</code></td>
+<td>The port of the machine that reaches the web interface.</td>
+</tr>
+<tr>
+<td><code>EIN_SSH_PORT</code></td>
+<td>The port of the machine that reaches SSH and SFTP.</td>
+</tr>
+</tbody></table>
+</div>
+<p>To change one:</p>
+<ol>
+<li><p>Open <code>~/ein/.env</code> in an editor and change the value.</p>
+</li>
+<li><p>Apply it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
+<p>Running <code>./setup.sh</code> applies it too, and also updates EiN.</p>
+</li>
+<li><p>Open EiN at the new address, such as <code>http://ein.local:8443/</code> after <code>EIN_HTTP_PORT=8443</code>.</p>
+</li>
+</ol>
+<p>Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Leave the settings <strong>HTTP port</strong> and <strong>SSH port</strong> (<code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>) on <strong>Settings → System</strong>, in the <strong>Network</strong> group, as they are. They set the ports EiN listens on inside its container, and the machine forwards only 8080 and 2222 to it: a change there makes the web interface or SSH unreachable at the next start. Change <code>.env</code> instead.</p>
+</aside>
+<p>A few things to know:</p>
+<ul>
+<li><strong>Ports below 1024</strong>, such as 80 or 443, cannot be published by rootless podman unless the machine allows it (the kernel setting <code>net.ipv4.ip_unprivileged_port_start</code>). Use a port above 1024, or let an HTTPS proxy take 443.</li>
+<li><strong><code>EIN_BIND</code> takes one address.</strong> With an address other than <code>0.0.0.0</code> or <code>127.0.0.1</code>, such as the machine&#39;s LAN address, EiN runs normally, but <code>setup.sh</code> waits for it at <code>127.0.0.1</code>, does not find it, and ends with &quot;EiN did not answer&quot; after ten minutes.</li>
+<li><strong>The built-in guide</strong> shows SSH commands with port 2222 even when <code>EIN_SSH_PORT</code> maps another port, since that is the port EiN listens on. Tell your family the port you chose.</li>
+</ul>
+<h2 id="open-the-ports-in-the-firewall">Open the ports in the firewall<a class="anchor" href="#open-the-ports-in-the-firewall" aria-label="Link to this section"></a></h2>
+<p>When another computer on the network cannot open EiN while the machine itself can, the machine&#39;s firewall is the usual cause. Open the two ports there:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, with ufw (Ubuntu, Debian)</span>
+<span class="hljs-built_in">sudo</span> ufw allow 8080/tcp
+<span class="hljs-built_in">sudo</span> ufw allow 2222/tcp</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, with firewalld (Fedora, RHEL)</span>
+<span class="hljs-built_in">sudo</span> firewall-cmd --permanent --add-port=8080/tcp --add-port=2222/tcp
+<span class="hljs-built_in">sudo</span> firewall-cmd --reload</code></pre></div>
+<p>Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy&#39;s port (443) instead, and not 8080.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>Docker opens the ports it publishes in the machine&#39;s packet filter itself, past rules set with ufw. A closed port in ufw does not keep EiN&#39;s ports off the network under Docker; <code>EIN_BIND=127.0.0.1</code> does.</p>
+</aside>
+<h2 id="put-ein-behind-https">Put EiN behind HTTPS<a class="anchor" href="#put-ein-behind-https" aria-label="Link to this section"></a></h2>
+<p>An HTTPS proxy is a web server that holds the certificate, answers browsers over HTTPS, and passes each request on to EiN over plain HTTP. You need one when:</p>
+<ul>
+<li>EiN is reached from outside your home, so that passwords and pictures do not cross the internet unencrypted;</li>
+<li>a phone should add EiN to its home screen as an app, which needs an address beginning with <code>https://</code> (see <a href="../guide/phone.html#put-ein-on-your-home-screen">EiN on a phone</a>);</li>
+<li>you want the browser&#39;s clipboard to work everywhere: over plain HTTP, copying a share link falls back to selecting the text.</li>
+</ul>
+<h3 id="what-ein-needs-from-the-proxy">What EiN needs from the proxy<a class="anchor" href="#what-ein-needs-from-the-proxy" aria-label="Link to this section"></a></h3>
+<p>Any proxy works, such as Caddy, nginx or Traefik, when it does the following:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Serves EiN at the root of its own host name</td>
+<td>The interface asks for <code>/file/…</code>, <code>/s/…</code> and <code>/__shell</code> from the root. EiN cannot be served under a path such as <code>https://example.org/ein/</code>.</td>
+</tr>
+<tr>
+<td>Passes WebSocket connections</td>
+<td>The whole interface talks to EiN over a WebSocket at <code>/__shell</code>, not only the terminal. Without it, pages do not load their contents.</td>
+</tr>
+<tr>
+<td>Sends <code>X-Forwarded-Proto: https</code> (or <code>Forwarded: proto=https</code>)</td>
+<td>EiN then marks its sign-in cookie <code>Secure</code>, so the browser sends it only over HTTPS. Over plain HTTP the cookie is not marked, so the same EiN keeps working on the home network.</td>
+</tr>
+<tr>
+<td>Has no limit on the size of a request</td>
+<td>A file is uploaded in one request, whole: a long video is several gigabytes.</td>
+</tr>
+<tr>
+<td>Allows long requests and idle connections</td>
+<td>Uploads and downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The proxy keeps the <code>Host</code> header as the browser sent it; EiN uses whatever address the browser shows.</p>
+<h3 id="caddy">Caddy<a class="anchor" href="#caddy" aria-label="Link to this section"></a></h3>
+<p>Caddy gets a certificate from Let&#39;s Encrypt by itself and does everything in the table without further settings. For a host name that points at your home, such as <code>ein.wrenfield.example</code>:</p>
+<div class="code"><pre tabindex="0"><code># /etc/caddy/Caddyfile, on the machine EiN runs on
+ein.wrenfield.example {
+	reverse_proxy 127.0.0.1:8080
+}</code></pre></div>
+<p>Then reload Caddy (<code>sudo systemctl reload caddy</code>). For the certificate, Caddy must be reachable on ports 80 and 443 from the internet under that name.</p>
+<p>For HTTPS on the home network only, such as for <code>ein.local</code>, Caddy can sign its own certificate with <code>tls internal</code>. Browsers warn about it until Caddy&#39;s root certificate is installed on each device:</p>
+<div class="code"><pre tabindex="0"><code># /etc/caddy/Caddyfile, on the machine EiN runs on
+ein.local {
+	tls internal
+	reverse_proxy 127.0.0.1:8080
+}</code></pre></div>
+<h3 id="nginx">nginx<a class="anchor" href="#nginx" aria-label="Link to this section"></a></h3>
+<p>nginx needs the WebSocket, the size limit and the timeouts set explicitly. With a certificate you have already obtained, for example with certbot:</p>
+<div class="code"><pre tabindex="0"><code># /etc/nginx/conf.d/ein.conf, on the machine EiN runs on
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 443 ssl;
+    server_name ein.wrenfield.example;
+    ssl_certificate     /etc/letsencrypt/live/ein.wrenfield.example/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ein.wrenfield.example/privkey.pem;
+
+    client_max_body_size 0;
+    proxy_request_buffering off;
+    proxy_buffering off;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 1h;
+        proxy_send_timeout 1h;
+    }
+}</code></pre></div>
+<p>Check it with <code>sudo nginx -t</code> and reload with <code>sudo systemctl reload nginx</code>.</p>
+<h3 id="keep-eins-own-port-to-the-machine">Keep EiN&#39;s own port to the machine<a class="anchor" href="#keep-eins-own-port-to-the-machine" aria-label="Link to this section"></a></h3>
+<p>With the proxy on the same machine, nothing else needs to reach port 8080. Close it to the network:</p>
+<ol>
+<li>In <code>~/ein/.env</code>, set <code>EIN_BIND=127.0.0.1</code>.</li>
+<li>Apply it with <code>podman compose up -d</code> (or <code>docker compose up -d</code>) in <code>~/ein</code>.</li>
+<li>Open <code>https://ein.wrenfield.example/</code> and sign in.</li>
+</ol>
+<p>This closes port 2222 to the network as well, since <code>EIN_BIND</code> applies to both. To keep SSH and SFTP reachable from other machines, leave <code>EIN_BIND=0.0.0.0</code> and close 8080 in the firewall instead (under Docker, see the note in <a href="#open-the-ports-in-the-firewall">Open the ports in the firewall</a>).</p>
+<p>To check that the proxy passes everything, sign in, open a few pages, upload a photo, and open the terminal with <kbd>Alt</kbd>+<kbd>T</kbd> (see <a href="../shell/terminal.html">The terminal</a>): each of these uses a different part of the table above.</p>
+<h2 id="reach-ein-from-outside-your-home">Reach EiN from outside your home<a class="anchor" href="#reach-ein-from-outside-your-home" aria-label="Link to this section"></a></h2>
+<p>There are three ways, from the least exposed to the most:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Way</th>
+<th>What you set up</th>
+<th>Who can reach EiN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A VPN, such as WireGuard or Tailscale</td>
+<td>The VPN on the machine and on each device. EiN needs no change: devices open its usual address over the VPN.</td>
+<td>Only devices on the VPN.</td>
+</tr>
+<tr>
+<td>An SSH tunnel through the machine</td>
+<td>The machine&#39;s own SSH server (not EiN&#39;s), reachable from outside. On the laptop: <code>ssh -L 8080:127.0.0.1:8080 you@your-home</code>, then open <code>http://localhost:8080/</code>.</td>
+<td>Only people with an account on the machine.</td>
+</tr>
+<tr>
+<td>A public HTTPS proxy</td>
+<td>A host name pointing at your home, ports 80 and 443 forwarded by your router to the proxy, and the proxy in front of EiN as above.</td>
+<td>Anyone on the internet can reach the sign-in page.</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN&#39;s own SSH server does not forward ports, so the tunnel goes through the machine&#39;s SSH server, not through port 2222.</p>
+<p>Only the public proxy makes <a href="../guide/sharing.html#share-an-album-with-a-link">share links</a> work for people outside the family: a share link begins with the address the person who made it had open, so it reaches whoever can reach that address. Make links while EiN is open at its public address, not at <code>http://ein.local:8080</code>.</p>
+<h3 id="before-you-open-ein-to-the-internet">Before you open EiN to the internet<a class="anchor" href="#before-you-open-ein-to-the-internet" aria-label="Link to this section"></a></h3>
+<ul>
+<li><strong>Change the admin password</strong> if you have not: <a href="../start/install.html#change-the-admin-password-straight-away">Install EiN</a> shows how. Give every account a password of its own; <a href="accounts.html">Accounts and groups</a> covers them.</li>
+<li><strong>Leave visitors out.</strong> The setting <strong>Visitors may browse</strong> (<code>CFG_GUEST_BROWSING</code>, under <strong>Settings → System</strong>) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.</li>
+<li><strong>Publish HTTPS only.</strong> Forward only the proxy&#39;s ports, never 8080, which is plain HTTP.</li>
+<li><strong>Decide about SSH.</strong> Port 2222 is not needed for the web interface. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</li>
+</ul>
+<h3 id="how-ein-slows-down-password-guessing">How EiN slows down password guessing<a class="anchor" href="#how-ein-slows-down-password-guessing" aria-label="Link to this section"></a></h3>
+<p>EiN counts failed sign-ins, in the web interface and over SSH alike, per client address and per account:</p>
+<ul>
+<li>After five failures from one address, that address is refused without its password being checked, with &quot;too many failed sign-ins; try again in&quot; and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.</li>
+<li>After five failures at one account, each attempt at it waits, up to 10 seconds, but the account is never locked: someone guessing a password cannot lock its owner out.</li>
+<li>A failed attempt is answered no sooner than a second after it was made.</li>
+<li>Failures are forgotten an hour after the last one.</li>
+</ul>
+<p>Repeated failures are logged as &quot;repeated failed sign-ins&quot;, with the address or account; <a href="services-logs.html">Services and logs</a> shows where to read them.</p>
+<p>EiN believes <code>X-Forwarded-For</code> and <code>Forwarded</code> only from a proxy whose connections reach it from the loopback address. When the proxy&#39;s connections reach EiN from another address, as can happen with the container&#39;s network in between, EiN sees every visitor as the proxy: <code>who</code> in EiN&#39;s terminal then shows the proxy&#39;s address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run <code>who</code> once after setting up the proxy to see which you have.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+<span class="hljs-built_in">who</span></code></pre></div>
+<h2 id="ssh-and-sftp-from-another-network">SSH and SFTP from another network<a class="anchor" href="#ssh-and-sftp-from-another-network" aria-label="Link to this section"></a></h2>
+<p>SSH does not go through an HTTPS proxy. To reach EiN&#39;s SSH server from outside, forward a TCP port on your router to the machine&#39;s <code>EIN_SSH_PORT</code>, or connect over a VPN. Then connect with the host name and the port:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.wrenfield.example
+sftp -P 2222 helen@ein.wrenfield.example</code></pre></div>
+<p>The server&#39;s host key is made at EiN&#39;s first start and kept in the tree as <code>/etc/ssh_host_key</code>, with its public half in <code>/etc/ssh_host_key.pub</code>, so it stays the same across updates and new containers. A client warns about a changed host key only when EiN was installed afresh. <a href="../shell/ssh-sftp.html">SSH and SFTP</a> covers keys, clients and file managers.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EiN opens on the machine itself but not from another computer</td>
+<td>Open the ports in the machine&#39;s firewall, and check that <code>EIN_BIND</code> is <code>0.0.0.0</code>. Try the machine&#39;s IP address instead of a name ending in <code>.local</code>.</td>
+</tr>
+<tr>
+<td><code>compose up</code> fails because the address or port is already in use</td>
+<td>Another program has the port. Choose another <code>EIN_HTTP_PORT</code> or <code>EIN_SSH_PORT</code> in <code>.env</code>, or stop that program.</td>
+</tr>
+<tr>
+<td>Behind the proxy, the page frame loads but stays empty, and the terminal does not connect</td>
+<td>The proxy does not pass WebSocket connections. Add the <code>Upgrade</code> and <code>Connection</code> headers (nginx) or check the proxy&#39;s WebSocket support.</td>
+</tr>
+<tr>
+<td>Uploads of large files fail behind the proxy, often with 413</td>
+<td>The proxy limits the size of a request. In nginx, set <code>client_max_body_size 0;</code>.</td>
+</tr>
+<tr>
+<td>The terminal or the interface reconnects every minute behind the proxy</td>
+<td>The proxy closes idle connections. Raise its read timeout, such as <code>proxy_read_timeout 1h;</code> in nginx.</td>
+</tr>
+<tr>
+<td>Signing in works, but the next page asks you to sign in again</td>
+<td>The browser uses plain <code>http://</code> while something in front of EiN sends <code>X-Forwarded-Proto: https</code>, so the cookie is marked <code>Secure</code> and the browser does not send it back. Open the <code>https://</code> address, or have the proxy send the scheme the browser used.</td>
+</tr>
+<tr>
+<td>Signing in says &quot;too many failed sign-ins&quot;</td>
+<td>Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see <a href="#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a>.</td>
+</tr>
+<tr>
+<td>After a change to <strong>HTTP port</strong> or <strong>SSH port</strong> on <strong>Settings → System</strong>, the web interface or SSH does not answer</td>
+<td>Reset the setting through the one that still answers: on the <strong>System</strong> tab, or with <code>config unset CFG_HTTP_PORT</code> (or <code>CFG_SSH_PORT</code>) in EiN&#39;s terminal or over SSH. Then restart EiN with <code>podman compose restart ein</code> in <code>~/ein</code>.</td>
+</tr>
+<tr>
+<td>A share link does not open for the person you sent it to</td>
+<td>It begins with the address you had open. Open EiN at its public address and make the link again; see <a href="../guide/sharing.html">Sharing</a>.</td>
+</tr>
+<tr>
+<td><code>setup.sh</code> ends with &quot;EiN did not answer at <a href="http://127.0.0.1:…">http://127.0.0.1:…</a>&quot;</td>
+<td>When <code>EIN_BIND</code> is an address other than <code>0.0.0.0</code> or <code>127.0.0.1</code>, this is expected and EiN is running: open it at that address. Otherwise read <code>podman compose logs ein</code>; see <a href="troubleshooting.html">Troubleshooting</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="install.html">Installing in detail</a>: the <code>~/ein</code> folder, <code>.env</code> and <code>setup.sh</code>.</li>
+<li><a href="configuration.html">Configuration</a>: settings, <code>.env</code> and where each is kept.</li>
+<li><a href="../shell/ssh-sftp.html">SSH and SFTP</a>: signing in with keys, file managers and <code>scp</code>.</li>
+<li><a href="../guide/phone.html">EiN on a phone</a>: what HTTPS gives a phone.</li>
+<li><a href="../guide/sharing.html">Sharing</a>: share links and who can open them.</li>
+<li><a href="../reference/settings.html#cfg_http_port">Settings</a>: the reference entries for the ports and every other setting.</li>
+<li><a href="troubleshooting.html">Troubleshooting</a>: when EiN does not start or answer at all.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="gpu.html" rel="prev"><span>Previous</span>The graphics card</a><a class="next" href="configuration.html" rel="next"><span>Next</span>Configuration</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/network.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-listens-on">What EiN listens on</a></li><li><a href="#change-the-ports-or-the-address">Change the ports or the address</a></li><li><a href="#open-the-ports-in-the-firewall">Open the ports in the firewall</a></li><li><a href="#put-ein-behind-https">Put EiN behind HTTPS</a></li><li class="nested"><a href="#what-ein-needs-from-the-proxy">What EiN needs from the proxy</a></li><li class="nested"><a href="#caddy">Caddy</a></li><li class="nested"><a href="#nginx">nginx</a></li><li class="nested"><a href="#keep-eins-own-port-to-the-machine">Keep EiN's own port to the machine</a></li><li><a href="#reach-ein-from-outside-your-home">Reach EiN from outside your home</a></li><li class="nested"><a href="#before-you-open-ein-to-the-internet">Before you open EiN to the internet</a></li><li class="nested"><a href="#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a></li><li><a href="#ssh-and-sftp-from-another-network">SSH and SFTP from another network</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

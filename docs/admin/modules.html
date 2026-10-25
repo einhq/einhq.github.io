@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modules – EiN documentation</title>
+    <meta name="description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to see whether each one works, and what to do when one does not.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/modules.html">
+    <meta property="og:title" content="Modules – EiN documentation">
+    <meta property="og:description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to see whether each one works, and what to do when one does not.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/modules.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html" aria-current="page">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Modules</h1>
+        </header>
+        <article class="prose">
+<p>Modules decide what your EiN is for: the Archive, the assistant and the client for the media
+service are each a module. This page is for the administrator: which modules there are and what
+they need, how to install, update and remove them on <strong>Settings → Modules</strong> or in the terminal, how
+to see whether each one works, and what to do when one does not.</p>
+<h2 id="the-modules-there-are">The modules there are<a class="anchor" href="#the-modules-there-are" aria-label="Link to this section"></a></h2>
+<p>EiN without modules is the tree, the shell, accounts and the frame of the web interface. Every
+page for photos, people and places, the chat, and the work done on what you upload comes from a
+module. <a href="../start/how-ein-works.html#modules-decide-what-ein-is-for">How EiN works</a> explains what a
+module is made of.</p>
+<p>The published modules are the repositories named <code>module-&lt;name&gt;</code> in the einhq organisation on
+GitHub:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it gives you</th>
+<th>What it needs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td>The Archive: albums, media, people and the family tree, locations, devices and tracks, staging, and the search that finds things among them</td>
+<td>The <code>ems</code> module, installed along with it, and the <a href="media-service.html">media service</a> to do its work</td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td><strong>Chat</strong>: the assistant that answers questions by running EiN&#39;s commands for you</td>
+<td>A <a href="language-model.html">language model</a>, either the installer&#39;s <code>--llm</code> or a hosted one</td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td>EiN&#39;s side of the media service: the client the Archive reaches it through, its health and the graphics card&#39;s readings on the <strong>Dashboard</strong></td>
+<td>The <a href="media-service.html">media service</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>A module needs only what its manifest names as dependencies; EiN installs those with it. A service
+that runs beside EiN, such as the media service or the language model, is no module: the installer
+adds it (see <a href="install.html">Installing in detail</a>). Installing <code>archive</code> without the media service
+gives no error, but nothing you upload gets thumbnails, dates, faces or searchable text until the
+media service is there.</p>
+<p>A fourth module, <code>importer</code>, moves one particular older archive into EiN. It is not published.</p>
+<h2 id="see-what-is-installed">See what is installed<a class="anchor" href="#see-what-is-installed" aria-label="Link to this section"></a></h2>
+<p>Open <strong>Settings</strong> in the sidebar and choose the <strong>Modules</strong> tab. Everyone who is signed in has this
+tab; for anyone but an administrator it is the only one, and it shows the modules without the
+buttons that change them.</p>
+<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="The Modules tab of Settings: archive, assistant, ems and importer listed at the left with version 0.1.0 each, and archive open at the right, Active, with its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and its guide's introduction below" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module, whether it works, and everything it brings, in one place.</figcaption></figure>
+<p>The list at the left holds every installed module with its description. A module that works shows
+its version at the right; one that does not shows a badge instead and is listed first:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Active</strong></td>
+<td>Set up since EiN started: its commands are on the path, its services are registered and its pages are built.</td>
+</tr>
+<tr>
+<td><strong>Setup failed</strong></td>
+<td>EiN tried to set it up and refused or failed; the module&#39;s panel says why.</td>
+</tr>
+<tr>
+<td><strong>Not set up</strong></td>
+<td>Installed, but not set up since EiN started: its commands are not on the path and its services are not running.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
+the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
+<p>Choose a module to open its panel. At the top it shows the module&#39;s name, its version and the core
+API it is written for (<code>version 0.1.0 · core API ^0.2.0</code>), where it is installed
+(<code>/usr/modules/archive</code>), when it was set up, and its state. <strong>Reference and guide</strong> opens the
+module&#39;s own page in <strong>Documentation</strong>, with its guide and every command, setting and node type it
+brings. Below are tabs, each with a count; a tab the module has nothing for is left out:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>About</strong></td>
+<td>The introduction from the module&#39;s guide, or &quot;It has no guide.&quot;</td>
+</tr>
+<tr>
+<td><strong>Dependencies</strong></td>
+<td>The modules it needs (<strong>It needs</strong>) and the modules that need it (<strong>Needs it</strong>), with the versions accepted, the version installed and each one&#39;s state, or <strong>Not installed</strong></td>
+</tr>
+<tr>
+<td><strong>Services</strong></td>
+<td>Its background services, their state now and how long they have been up. They are started and stopped on the <strong>Dashboard</strong>&#39;s services tab.</td>
+</tr>
+<tr>
+<td><strong>Pages</strong></td>
+<td>The addresses of the pages it adds; one without a parameter is a link to the page</td>
+</tr>
+<tr>
+<td><strong>Commands</strong></td>
+<td>Its commands; each opens to its help</td>
+</tr>
+<tr>
+<td><strong>Settings</strong></td>
+<td>Its settings with their values, each marked <strong>personal</strong> or <strong>system</strong>; a row opens to the setting&#39;s description and, if you may change it, its control</td>
+</tr>
+<tr>
+<td><strong>Node types</strong></td>
+<td>The kinds of node it defines, with how many of each exist</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module&#39;s settings are the same ones the <strong>System</strong> tab lists, and they save the same way:
+<a href="configuration.html">Configuration</a> explains where a value comes from and what a change restarts.</p>
+<p>The <strong>About EiN</strong> dialog, in the menu under your picture, also lists the installed modules, with a
+<strong>setup failed</strong> badge on any that did not set up.</p>
+<p>In the terminal, <code>mod list</code> gives the same list:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mod list</code></pre></div>
+<div class="code"><pre tabindex="0"><code>archive (0.1.0)
+assistant (0.1.0)
+ems (0.1.0)</code></pre></div>
+<p>A module that does not work has <code>[setup failed]</code> or <code>[not set up]</code> after its version.
+<code>mod list --long</code> adds each one&#39;s description, the problems its setup ran into, its path, the
+repository and commit it was installed from, and its commands and services. <code>mod info archive</code>
+shows one module&#39;s manifest: its version, core API, the modules it requires and whether they are
+installed, what it exports, and the modules that use it.</p>
+<h2 id="install-a-module">Install a module<a class="anchor" href="#install-a-module" aria-label="Link to this section"></a></h2>
+<p>You need to be an administrator: signed in as <code>admin</code>, or in
+<a href="../guide/interface.html#admin-mode">admin mode</a>. EiN needs to reach GitHub, or whichever forge holds
+the module.</p>
+<ol>
+<li>Open <strong>Settings → Modules</strong>.</li>
+<li>Choose the <strong>Published modules</strong> button beside the filter box, the box with an arrow. The panel
+at the right lists the published modules, each with its version, its description and its
+repository.</li>
+<li>Choose <strong>Install</strong> on the module you want.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Published modules panel on Settings → Modules: archive, assistant and ems from github.com/einhq, each 0.1.0 and marked The deployment's, with a Refresh button at the top right" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.</figcaption></figure>
+<p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
+and starts their services. Under the module it then says &quot;Installed. Its pages appear when this
+page is reloaded.&quot;, or, when it brought dependencies along, for example &quot;Installed, with ems. Its
+pages appear when this page is reloaded.&quot; Reload the page to see the new entries in the sidebar.</p>
+<p>Each published module carries a badge for what is installed of it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>Not installed; the button reads <strong>Install</strong>.</td>
+</tr>
+<tr>
+<td><strong>Installed</strong></td>
+<td>Installed from this repository, at the commit its default branch has now.</td>
+</tr>
+<tr>
+<td><strong>Update available</strong></td>
+<td>Installed from this repository, and its default branch has moved on; the button reads <strong>Update</strong>. Hold the pointer over the badge to see both commits.</td>
+</tr>
+<tr>
+<td><strong>Installed from elsewhere</strong></td>
+<td>A module of this name is installed from another repository.</td>
+</tr>
+<tr>
+<td><strong>The deployment&#39;s</strong></td>
+<td>The module comes with the deployment itself (see <a href="#modules-the-deployment-provides">Modules the deployment provides</a>) and cannot be installed over.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module written for a different core API says &quot;Needs core API ^0.3.0, which this EiN does not
+provide.&quot; (with its own range), and its button is greyed out. <strong>Refresh</strong> asks the sources again.</p>
+<p>In the terminal, <code>mod search</code> lists the same, and <code>mod install</code> installs:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod search</code></pre></div>
+<div class="code"><pre tabindex="0"><code>archive 0.1.0
+  EiN module: the family archive, with people, media, places and staging
+  https://github.com/einhq/module-archive
+assistant 0.1.0 [installed]
+  EiN module: the chat that answers questions about the archive
+  https://github.com/einhq/module-assistant
+ems 0.1.0
+  EiN module: the client for EMS, the media service
+  https://github.com/einhq/module-ems</code></pre></div>
+<p>Words after <code>mod search</code> narrow the list to modules whose name or description holds them all.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod install archive</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/module-archive at main (5e1c07a42)...
+archive needs ems ^0.1.0, which is not installed
+Fetching https://github.com/einhq/module-ems at main (b83d2f610)...
+Installed ems 0.1.0 from https://github.com/einhq/module-ems at b83d2f610
+Installed archive 0.1.0 from https://github.com/einhq/module-archive at 5e1c07a42
+Setting up module 'ems'...</code></pre></div>
+<p>A line follows for each step of each setup, ending in <code>Module &#39;archive&#39; setup complete</code> and the
+services it started. <code>mod install</code> takes several modules at once, and each can be named in three
+ways:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You write</th>
+<th>What is installed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td><code>module-archive</code> from the first module source that has it, at its default branch</td>
+</tr>
+<tr>
+<td><code>https://github.com/einhq/module-archive</code></td>
+<td>That repository, at its default branch</td>
+</tr>
+<tr>
+<td><code>archive@v0.1.0</code>, <code>…/module-archive@5e1c07a42</code></td>
+<td>That branch, tag or commit</td>
+</tr>
+</tbody></table>
+</div>
+<p>The <a href="../reference/commands-core.html#mod-install">reference</a> lists its options.</p>
+<h3 id="install-modules-with-the-installer">Install modules with the installer<a class="anchor" href="#install-modules-with-the-installer" aria-label="Link to this section"></a></h3>
+<p>The installer&#39;s <code>--module</code> option names a module for EiN to install at its start, with the
+modules it needs:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh --module assistant</code></pre></div>
+<p><code>setup.sh</code> adds the name to <code>EIN_MODULES</code> in <code>~/ein/.env</code> and restarts EiN, which installs every
+module named there that is missing. One installed already is left as it is, at whatever version,
+without asking GitHub, so a restart never updates a module. If EiN cannot download one at its
+start, its log says <code>some of INSTALL_MODULES could not be installed; continuing boot</code> and EiN
+starts without it; install it from <strong>Settings → Modules</strong> once EiN is up.
+<a href="install.html">Installing in detail</a> has the other options.</p>
+<h2 id="update-a-module">Update a module<a class="anchor" href="#update-a-module" aria-label="Link to this section"></a></h2>
+<p>Updating EiN with <code>setup.sh</code> does not update its modules. Update them here instead.</p>
+<ul>
+<li>On <strong>Settings → Modules</strong>, open <strong>Published modules</strong> and choose <strong>Update</strong> on a module marked
+<strong>Update available</strong>.</li>
+<li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
+from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
+and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest commit of the branch it was installed from,
+or the same tag or commit again for one installed at a tag or commit. It answers <strong>Updated</strong>, or
+<strong>Up to date</strong> when there was nothing newer.</li>
+<li>In the terminal, <code>mod install archive</code> updates an installed module. The same commit again is
+left alone: <code>archive is installed at 5e1c07a42 (main) already</code>.</li>
+</ul>
+<p>An update installs what the new version needs and is missing. It is refused when an installed
+module depends on this one and does not accept the new version; the message names them, for
+example <code>importer needs archive ^0.1.0, and this is archive 0.2.0: --force installs it all the same</code>. <code>mod install --force</code> updates anyway, and also fetches again a commit that is installed
+already.</p>
+<p>After the update EiN sets the module up again and restarts its services. Every module that depends
+on it, directly or through another, is set up again too, and its running services restarted, so
+nothing keeps running the code that was replaced. The new version takes the old one&#39;s place in a
+single step: the module&#39;s folder always holds one whole version.</p>
+<p>To pin a module to a version, install it at a tag or commit, such as <code>mod install archive@v0.1.0</code>;
+its panel&#39;s <strong>Update</strong> then keeps it there. The published modules always compare with the default
+branch, so they may offer <strong>Update</strong> for it, which installs the default branch.</p>
+<h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Open <strong>Settings → Modules</strong> and choose the module.</li>
+<li>In <strong>Installed from its repository</strong>, choose <strong>Remove</strong>.</li>
+<li>EiN says what goes: &quot;Removing assistant stops its services and takes its commands, pages and
+files away. What it made in the archive stays.&quot; When other modules need it, it adds which ones
+and that they will not work without it. Choose <strong>Remove assistant</strong> to go ahead, or <strong>Cancel</strong>.</li>
+</ol>
+<p>In the terminal, <code>mod remove</code> asks first, and <code>--force</code> skips the question:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod remove assistant</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Remove module 'assistant' (0.1.0)? (y/N) y</code></pre></div>
+<p>Removing stops and unregisters the module&#39;s services, takes its commands off the path, retires its
+pipelines, its sidebar entries and its documentation, rebuilds the pages and deletes its folder.
+Some things stay, so that installing it again finds them as they were:</p>
+<ul>
+<li>What it made in the tree: albums, people, labels and the folders under <code>/archive</code> that hold them.</li>
+<li>Values set for its settings. They no longer appear on the <strong>System</strong> tab, but come back with the
+module.</li>
+<li>The database indexes it asked for.</li>
+</ul>
+<p>EiN does not stop you removing a module that others need. Those modules then fail to set up at the
+next start, with <code>requires module &#39;ems&#39; (^0.1.0), which is not installed</code>; install it again to
+bring them back.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>A module named in <code>EIN_MODULES</code> in <code>~/ein/.env</code> comes back at EiN&#39;s next start, because EiN
+installs every module named there that is missing. To keep it removed, delete its name from that
+line as well.</p>
+</aside>
+<h2 id="modules-from-other-places">Modules from other places<a class="anchor" href="#modules-from-other-places" aria-label="Link to this section"></a></h2>
+<p><strong>Module sources</strong>, <code>CFG_MODULE_SOURCES</code>, lists where published modules are looked for:
+organisations on GitHub, Forgejo or Gitea, as their addresses separated by spaces. It is
+<code>https://github.com/einhq</code> by default. Each repository named <code>module-&lt;name&gt;</code> in a source is a
+module; <code>mod install &lt;name&gt;</code> takes the first source that has it, and a module&#39;s dependencies come
+from its own organisation first. Change it on <strong>Settings → System</strong>, in its <strong>Modules</strong> group, or
+in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+config <span class="hljs-built_in">set</span> CFG_MODULE_SOURCES <span class="hljs-string">&quot;https://github.com/einhq https://forge.example:3000/wrenfield&quot;</span></code></pre></div>
+<p>A source that is not public needs an access token. <strong>Tokens for module sources</strong>,
+<code>CFG_MODULE_SOURCES_KEY</code>, takes one per host, as <code>host=token</code> separated by spaces, such as
+<code>forge.example:3000=…</code>. Like every key, nobody can read it back once set, and EiN sends each token
+only to its own host. <a href="../reference/settings.html#cfg_module_sources">The settings reference</a> has
+both.</p>
+<p>A source that does not answer is named above the published modules, as &quot;<a href="https://forge.example:3000/wrenfield">https://forge.example:3000/wrenfield</a>
+did not answer&quot; with the reason, and the other sources are still listed.</p>
+<p>A module that is in no source can still be installed from its repository&#39;s address:
+<code>mod install https://forge.example:3000/wrenfield/module-recipes</code>. EiN fetches modules over plain
+HTTPS, so the forge must answer git&#39;s HTTP protocol and serve an archive of a commit, as GitHub,
+Forgejo and Gitea do. <a href="../develop/modules.html">Writing a module</a> is for making one of your own.</p>
+<h2 id="where-modules-are-kept">Where modules are kept<a class="anchor" href="#where-modules-are-kept" aria-label="Link to this section"></a></h2>
+<p>A module installed from its repository is kept in a folder of its own outside EiN&#39;s container, so
+it stays when EiN is updated or its container is made again. With the standard installation that
+folder is <code>modules/</code> in the data folder, <code>~/ein/data/modules</code> unless you chose another <code>EIN_DATA</code>.
+Inside EiN it is <code>/var/lib/modules</code>, and each module is linked as <code>/usr/modules/&lt;name&gt;</code>. Each
+module&#39;s <code>.install.json</code> records the repository, the branch or tag, the commit and when it was
+installed.</p>
+<p>At every start EiN links each module in the folder and sets them all up, in the order of their
+dependencies. A module whose setup fails is logged and the others carry on.</p>
+<h3 id="modules-the-deployment-provides">Modules the deployment provides<a class="anchor" href="#modules-the-deployment-provides" aria-label="Link to this section"></a></h3>
+<p>A deployment can also mount a folder of module checkouts of its own, named by <code>DEV_MODULES_PATH</code>
+(see <a href="../reference/environment.html#set-by-the-deployment">Environment variables</a>). The standard
+installation does not; it is for running EiN from its source. A module the deployment provides
+runs from there: the published modules mark it <strong>The deployment&#39;s</strong>, <code>mod install</code> refuses it with
+<code>&#39;archive&#39; is one of the deployment&#39;s modules (…), which runs instead</code>, and it has no <strong>Update</strong> or
+<strong>Remove</strong> in its panel. <code>mod remove</code> takes away only its link, which the next start puts back. It
+is updated with the deployment.</p>
+<h2 id="when-a-module-does-not-work">When a module does not work<a class="anchor" href="#when-a-module-does-not-work" aria-label="Link to this section"></a></h2>
+<p>Open <strong>Settings → Modules</strong>: a module that does not work is at the top of the list with its badge.</p>
+<p><strong>Setup failed.</strong> Its panel shows &quot;Its setup failed&quot; with each problem, as <code>mod list --long</code>
+does. The usual ones:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive: requires module &#39;ems&#39; (^0.1.0), which is not installed</code></td>
+<td>Install the missing module: <code>mod install ems</code>, or <strong>Install</strong> in <strong>Published modules</strong>.</td>
+</tr>
+<tr>
+<td><code>archive: requires &#39;ems&#39; ^0.2.0, but 0.1.0 is installed</code></td>
+<td>Update the module it needs.</td>
+</tr>
+<tr>
+<td><code>archive: needs @ein/client ^0.2.0, this core provides 0.3.0</code></td>
+<td>The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one.</td>
+</tr>
+</tbody></table>
+</div>
+<p>After fixing the cause, set the module up again with <code>mod setup archive</code>, or every module with
+<code>mod setup --all</code>, which is what EiN runs at each start. Restarting EiN does the same.</p>
+<p><strong>Not set up.</strong> EiN has not set the module up since it started, for example because it was put in
+place without setup. <code>mod setup &lt;name&gt;</code> sets it up.</p>
+<p><strong>Active, but something is missing.</strong> Check its <strong>Services</strong> tab: a service that shows
+<code>failed</code> or <code>disabled</code> can be started again on the <strong>Dashboard</strong>&#39;s services tab, and
+<a href="services-logs.html">Services and logs</a> explains how to read its log. New pages appear only once the
+page is reloaded.</p>
+<p><strong>Install or update refused.</strong> The message says why, in words like these:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>no module source has &#39;recipes&#39;: …</code></td>
+<td>None of the module sources has <code>module-recipes</code>, or none answered; the reasons follow.</td>
+</tr>
+<tr>
+<td><code>https://github.com/einhq/module-archive has no branch or tag &#39;v9&#39;</code></td>
+<td>The ref after <code>@</code> does not exist.</td>
+</tr>
+<tr>
+<td><code>… has no mod.json at its top: not a module</code></td>
+<td>The repository is not a module.</td>
+</tr>
+<tr>
+<td><code>/usr/modules/archive is a module mod install did not put there; mod remove archive first</code></td>
+<td>Something else holds the name.</td>
+</tr>
+<tr>
+<td><code>no module sources to find &#39;archive&#39; in: CFG_MODULE_SOURCES is empty; name its repository instead</code></td>
+<td><strong>Module sources</strong> is empty.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="troubleshooting.html">Troubleshooting</a> covers problems beyond modules.</p>
+<h2 id="commands">Commands<a class="anchor" href="#commands" aria-label="Link to this section"></a></h2>
+<p>Every command here runs in EiN&#39;s <a href="../shell/terminal.html">terminal</a> or over SSH. Those that change
+something are for administrators only.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mod list [--long]</code></td>
+<td>The installed modules and whether each works</td>
+</tr>
+<tr>
+<td><code>mod info &lt;name&gt;</code></td>
+<td>One module&#39;s manifest, what it requires and what uses it</td>
+</tr>
+<tr>
+<td><code>mod search [words]</code></td>
+<td>The published modules of the module sources, and what is installed of them</td>
+</tr>
+<tr>
+<td><code>mod install &lt;module&gt;...</code></td>
+<td>Install or update modules with what they need, and set them up</td>
+</tr>
+<tr>
+<td><code>mod remove [--force] &lt;name&gt;</code></td>
+<td>Stop and remove a module</td>
+</tr>
+<tr>
+<td><code>mod setup &lt;name&gt;</code>, <code>mod setup --all</code></td>
+<td>Set up one module, or every module in the order of their dependencies</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../reference/commands-core.html#mod">The core commands reference</a> has each one&#39;s options, and
+<a href="updating.html">Updating</a> covers updating EiN itself.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="configuration.html" rel="prev"><span>Previous</span>Configuration</a><a class="next" href="accounts.html" rel="next"><span>Next</span>Accounts and groups</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
+    </div>
+  </body>
+</html>

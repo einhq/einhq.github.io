@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SSH and SFTP – EiN documentation</title>
+    <meta name="description" content="EiN runs its own SSH server, so you can reach it from your own computer: log in to the same shell as the terminal in the web interface, run one command from a script, and copy files in and out with SFTP, scp or a graphical file manager. This page is for anyone with an EiN account who wants to work from their own machine; going the other way, from EiN out to a NAS or another server, is on Reaching other machines.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/ssh-sftp.html">
+    <meta property="og:title" content="SSH and SFTP – EiN documentation">
+    <meta property="og:description" content="EiN runs its own SSH server, so you can reach it from your own computer: log in to the same shell as the terminal in the web interface, run one command from a script, and copy files in and out with SFTP, scp or a graphical file manager. This page is for anyone with an EiN account who wants to work from their own machine; going the other way, from EiN out to a NAS or another server, is on Reaching other machines.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/ssh-sftp.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html" aria-current="page">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>SSH and SFTP</h1>
+        </header>
+        <article class="prose">
+<p>EiN runs its own SSH server, so you can reach it from your own computer: log in to the same shell as
+the terminal in the web interface, run one command from a script, and copy files in and out with SFTP,
+<code>scp</code> or a graphical file manager. This page is for anyone with an EiN account who wants to work from
+their own machine; going the other way, from EiN out to a NAS or another server, is on
+<a href="remote.html">Reaching other machines</a>.</p>
+<h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Example</th>
+<th>Where it comes from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The host</td>
+<td><code>ein.local</code></td>
+<td>The name or address of the machine EiN runs on, the same one you open in the browser.</td>
+</tr>
+<tr>
+<td>The SSH port</td>
+<td><code>2222</code></td>
+<td><code>2222</code> unless your administrator chose another.</td>
+</tr>
+<tr>
+<td>Your account</td>
+<td><code>helen</code></td>
+<td>Your EiN username. Your e-mail address works too, where your account has one.</td>
+</tr>
+<tr>
+<td>Your secret</td>
+<td>your password</td>
+<td>The password you sign in to the web interface with, or a key once you have added one.</td>
+</tr>
+</tbody></table>
+</div>
+<p>SSH and SFTP share the one port. With the standard install it is set by <code>EIN_SSH_PORT</code> in <code>.env</code> on
+the machine EiN runs on; <a href="../admin/network.html">Ports, HTTPS and remote access</a> explains how to change
+it and how to reach EiN from outside your home network. The setting
+<a href="../reference/settings.html#cfg_ssh_port"><code>CFG_SSH_PORT</code></a> (<strong>SSH port</strong> in <strong>Settings</strong>) is the port
+EiN listens on, and takes effect the next time EiN starts.</p>
+<p>The examples below use Helen Okafor&#39;s account <code>helen</code> on <code>ein.local</code>, port <code>2222</code>. Use your own.</p>
+<h2 id="log-in-with-a-shell">Log in with a shell<a class="anchor" href="#log-in-with-a-shell" aria-label="Link to this section"></a></h2>
+<ol>
+<li><p>On your own computer, open a terminal (on Windows, PowerShell has <code>ssh</code> built in) and run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.local</code></pre></div>
+</li>
+<li><p>The first time, <code>ssh</code> shows the key EiN&#39;s server identifies itself with and asks whether to trust it:</p>
+<div class="code"><pre tabindex="0"><code>The authenticity of host '[ein.local]:2222 ([192.168.1.20]:2222)' can't be established.
+ED25519 key fingerprint is SHA256:…
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre></div>
+<p>Type <code>yes</code>. Your computer remembers the key and does not ask again. To be sure it is your EiN
+answering, ask your administrator to compare the fingerprint; they see it in EiN&#39;s terminal with
+<code>ssh-keygen -l -f /etc/ssh_host_key.pub</code>.</p>
+</li>
+<li><p>Enter your EiN password.</p>
+</li>
+</ol>
+<p>You land in your home folder, <code>/home/helen</code>, at the same prompt as in a terminal tab. Everything on
+<a href="terminal.html">The terminal</a> holds here too: your history, your <code>~/.bashrc</code>, Tab completion and the
+same keys, and every command on <a href="commands.html">Commands by task</a>. The editor works as well
+(<a href="editor.html">The editor</a>). Two things belong to the browser alone: pictures drawn by <code>cat</code>, which
+over SSH prints lines starting <code>__IMG:</code> instead, and dropping files to upload them.</p>
+<p>To log out, type <code>exit</code>. Closing the window or losing the connection ends the shell too, and stops
+whatever command was running in it.</p>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>If your username is an e-mail address, give it with <code>-l</code> so the two <code>@</code> do not get mixed up:
+<code>ssh -p 2222 -l helen@example.com ein.local</code>.</p>
+</aside>
+<h2 id="sign-in-with-a-key">Sign in with a key<a class="anchor" href="#sign-in-with-a-key" aria-label="Link to this section"></a></h2>
+<p>With a key you are no longer asked for your password. If you have no key yet, make one on your own
+computer with <code>ssh-keygen</code> and accept the defaults.</p>
+<ol>
+<li><p>Give EiN the public half of your key, once:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh-copy-id -s -p 2222 helen@ein.local</code></pre></div>
+<p>It asks for your EiN password this one time. The <code>-s</code> matters: it makes <code>ssh-copy-id</code> copy the
+key over SFTP. Without it, <code>ssh-copy-id</code> sends a script of Unix shell commands, which EiN&#39;s shell
+does not run.</p>
+</li>
+<li><p>Log in as before. <code>ssh</code> and <code>sftp</code> now use the key and do not ask for the password.</p>
+</li>
+</ol>
+<p>The key lives in <code>~/.ssh/authorized_keys</code> in your EiN home, one key per line, as on any Linux server.
+You can add and remove lines there yourself. EiN reads lines starting with a key type such as
+<code>ssh-ed25519</code>, <code>ssh-rsa</code> or <code>ecdsa-sha2-nistp256</code>, and skips empty lines and lines starting with <code>#</code>.
+A line with options in front of the key (<code>command=&quot;…&quot;</code>, <code>from=&quot;…&quot;</code>, <code>no-pty</code> and the like) is
+skipped entirely.</p>
+<p>EiN trusts the file only while nobody but you can change it, since anyone who could write to it could
+sign in as you. Your home, <code>~/.ssh</code> and <code>authorized_keys</code> must each be owned by you, writable by
+neither group nor others, and none of them may be a link. <code>ssh-copy-id -s</code> sets the modes for you.</p>
+<h3 id="add-a-key-without-ssh-copy-id">Add a key without ssh-copy-id<a class="anchor" href="#add-a-key-without-ssh-copy-id" aria-label="Link to this section"></a></h3>
+<p>Where <code>ssh-copy-id</code> is missing, as on Windows, add the key from EiN&#39;s terminal. Copy the contents of
+your public key file (<code>id_ed25519.pub</code> in the <code>.ssh</code> folder of your home on your own computer), then:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">mkdir</span> -p ~/.ssh
+<span class="hljs-built_in">chmod</span> 700 ~/.ssh
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;ssh-ed25519 AAAA… helen@laptop&#x27;</span> &gt;&gt; ~/.ssh/authorized_keys
+<span class="hljs-built_in">chmod</span> 600 ~/.ssh/authorized_keys</code></pre></div>
+<p>The two <code>chmod</code> lines are what make EiN trust the file. If key sign-in still asks for a password,
+check the modes with <code>ls -la ~/.ssh</code>: the folder should show <code>rwx------</code> and the file <code>rw-------</code>.</p>
+<h2 id="run-one-command-at-a-time">Run one command at a time<a class="anchor" href="#run-one-command-at-a-time" aria-label="Link to this section"></a></h2>
+<p>Give <code>ssh</code> a command after the host and it runs just that one, prints the answer and exits with the
+command&#39;s exit status. That is what a script on your own computer wants:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;ls /archive/albums&#x27;</span>
+ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPUT=1 ls -l /archive/albums/cornwall-1968&#x27;</span> | jq .</code></pre></div>
+<ul>
+<li>With <code>JSON_OUTPUT=1</code> commands answer in JSON instead of text (see
+<a href="../reference/environment.html">Environment variables</a>).</li>
+<li>Each command gets a shell of its own, so <code>cd</code> does not carry over to the next <code>ssh</code>. Chain steps
+that belong together in one line: <code>&#39;cd /archive/albums &amp;&amp; ls&#39;</code>.</li>
+<li>The command runs without a terminal, so <code>edit</code> and anything else that needs one stops; log in with a
+shell for those. Commands sent this way are not added to your history.</li>
+<li>Errors arrive on the same stream as the output, so <code>2&gt;/dev/null</code> on your side does not separate them.
+Use the exit status to tell success from failure.</li>
+</ul>
+<h2 id="copy-files-with-sftp">Copy files with SFTP<a class="anchor" href="#copy-files-with-sftp" aria-label="Link to this section"></a></h2>
+<p>Any SFTP client works: the <code>sftp</code> command, a graphical client such as FileZilla or Cyberduck, or your
+file manager&#39;s &quot;connect to server&quot;. Give it the protocol SFTP, the host, the port and your username,
+with your password or key.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+sftp -P 2222 helen@ein.local</code></pre></div>
+<p>Note the capital <code>-P</code> for the port in <code>sftp</code> and <code>scp</code>, where <code>ssh</code> takes a lowercase <code>-p</code>. You start
+in your home folder. Then move around and copy as on any server:</p>
+<div class="code"><pre tabindex="0"><code>sftp&gt; cd /archive/albums/cornwall-1968
+sftp&gt; get beach.jpg
+sftp&gt; put harbour.jpg
+sftp&gt; bye</code></pre></div>
+<p><code>scp</code> works the same way, one command at a time:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+scp -P 2222 harbour.jpg helen@ein.local:/home/helen/
+scp -P 2222 -r helen@ein.local:/archive/albums/cornwall-1968 .</code></pre></div>
+<p><code>scp</code> from OpenSSH 9.0 and later copies over SFTP, which EiN serves. An older <code>scp</code> uses a different
+protocol that EiN does not speak; with OpenSSH 8.7 or 8.8 add <code>-s</code>, and with anything older use <code>sftp</code>.</p>
+<p>What you may see and change is decided by the same <a href="../admin/permissions.html">permissions</a> as in the web
+interface: a folder you cannot open in the browser cannot be opened over SFTP either.</p>
+<h3 id="bring-in-a-large-batch-of-photos">Bring in a large batch of photos<a class="anchor" href="#bring-in-a-large-batch-of-photos" aria-label="Link to this section"></a></h3>
+<p>For an export or a scanned box of tens of thousands of files, copy them over SFTP into your staging
+area rather than uploading them in the browser. The <strong>Import media</strong> dialog on the <strong>Staging</strong> page
+shows the folder to copy into, with a button that copies the path and a <strong>How</strong> link to this page.</p>
+<figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog: Inbox chosen as the category, the Choose files and Choose a folder buttons, and under them &quot;Over about 10,000 files? Copy them over SFTP instead, folders and all, into /home/admin/staging/files/inbox/&quot; with a copy button and a How link" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The dialog gives the exact folder to copy a large batch into over SFTP.</figcaption></figure>
+<p>Copy whole folders into a category&#39;s folder under <code>/home/&lt;you&gt;/staging/files/</code>, keeping their names,
+since folder names help EiN group what belongs together:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+scp -P 2222 -r <span class="hljs-string">&quot;Cornwall 1968&quot;</span> helen@ein.local:/home/helen/staging/files/inbox/</code></pre></div>
+<p>A zip needs no unpacking: copy it in as it is, and EiN expands it where it lands once the upload has
+ended. What you copy into staging waits there, seen only by you, until you sort it;
+<a href="../guide/staging.html">Sorting in staging</a> takes it from there, and
+<a href="../guide/importing.html">Getting your photos in</a> compares the ways in.</p>
+<p>A photo, video or recording copied anywhere else you may write, such as into an album, is taken in
+straight away, exactly as an upload in the web interface is: EiN makes its thumbnails and reads its
+date, place and faces in the background. EiN decides what a file is by its contents, not only by its
+name.</p>
+<h2 id="what-the-tree-looks-like-over-sftp">What the tree looks like over SFTP<a class="anchor" href="#what-the-tree-looks-like-over-sftp" aria-label="Link to this section"></a></h2>
+<p>EiN&#39;s tree holds more than an ordinary file system can show, so a few things look different.</p>
+<p><strong>What belongs to a photo.</strong> A photo keeps things of its own: its EXIF data, the faces found in it, its
+thumbnails. Those live in a hidden folder named after the photo with <code>_</code> added: what belongs to
+<code>beach.jpg</code> is in <code>beach.jpg_</code>. It is not listed, so copying an album with <code>scp -r</code> or <code>get -r</code> copies
+the photos without it. You can still go in by typing its name (<code>cd beach.jpg_</code>), look around and
+download at any depth. Nothing in it can be changed over SFTP, and removing the photo removes it too.</p>
+<p><strong>Modification times.</strong> A file&#39;s modification time is when its content last changed, not when EiN last
+added something about it. Backup tools therefore see a photo as unchanged while its faces or
+description are being worked out. <code>put -p</code>, <code>scp -p</code> and <code>cp -p</code> on a mount keep the time they set.</p>
+<p><strong>Sizes.</strong> A file can be emptied by setting its size to 0. Any other change of size without writing
+the content is refused.</p>
+<p><strong>Links.</strong> An album&#39;s cover, a picture added to an album and a person tagged in a photo appear as
+symbolic links, and following one takes you to what it points to. A recursive copy therefore copies
+the link, not what lies behind it. <code>ln -s</code> in <code>sftp</code> makes a new link, and removing a link removes only
+the link, never what it points to. <a href="../concepts/links.html">Links</a> explains what they are for.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Removing a file over SFTP deletes it for good, with everything that belongs to it. It does not go to
+your trash, as deleting in the web interface does. Removing a folder works only once it is empty.</p>
+</aside>
+<h2 id="mount-ein-as-a-folder">Mount EiN as a folder<a class="anchor" href="#mount-ein-as-a-folder" aria-label="Link to this section"></a></h2>
+<p>With <code>sshfs</code> on Linux or macOS you can mount EiN&#39;s tree as a folder on your own computer and use any
+program on it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+<span class="hljs-built_in">mkdir</span> -p ~/ein
+sshfs -p 2222 -o transform_symlinks helen@ein.local:/ ~/ein</code></pre></div>
+<p><code>-o transform_symlinks</code> matters: a link&#39;s target is a path in EiN, such as
+<code>/archive/people/peggy-wrenfield</code>, and the option makes it point inside the mount rather than to the
+same path on your computer. <code>fusermount -u ~/ein</code> (on macOS <code>umount ~/ein</code>) unmounts it.</p>
+<p><code>rsync</code> works against such a mount. Over SSH directly, <code>rsync helen@ein.local:…</code> does not, because
+it needs an <code>rsync</code> program on EiN&#39;s side, and EiN&#39;s shell has none.</p>
+<h2 id="who-can-sign-in">Who can sign in<a class="anchor" href="#who-can-sign-in" aria-label="Link to this section"></a></h2>
+<ul>
+<li>Every account with a password can sign in over SSH and SFTP; no group membership is needed. Being in
+the group <code>ssh</code> is about reaching other machines from EiN, not about reaching EiN (see
+<a href="remote.html">Reaching other machines</a>).</li>
+<li>An account that must choose a new password cannot sign in over SSH, with a key or with a password,
+until it has. Sign in to the web interface once and set one there.</li>
+<li>A disabled account cannot sign in at all, and disabling an account, or deleting it, ends the SSH and
+SFTP connections it already has open. <a href="../admin/accounts.html">Accounts and groups</a> covers both.</li>
+<li>After five wrong passwords from one address, that address is refused for a while, starting at a second
+and doubling with each further failure up to 15 minutes; failures are forgotten an hour after the
+last one. Your <code>ssh</code> shows the same <code>Permission denied</code> as for a wrong password, so wait before trying
+again.</li>
+</ul>
+<p>EiN&#39;s SSH server offers logins, single commands and SFTP. It does not forward ports, X11 or your SSH
+agent.</p>
+<h2 id="when-something-goes-wrong">When something goes wrong<a class="anchor" href="#when-something-goes-wrong" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Connection refused</code> or a time-out</td>
+<td>Wrong port or host, or EiN is not running, or the port is not reachable from where you are.</td>
+<td>Check the port with your administrator; from outside your home network see <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
+<tr>
+<td><code>Permission denied (publickey,password)</code> with the right password</td>
+<td>The account must choose a new password, is disabled, or your address is held back after failed attempts.</td>
+<td>Sign in to the web interface to set a new password, ask your administrator, or wait and try again.</td>
+</tr>
+<tr>
+<td>The key is not used and you are asked for the password</td>
+<td><code>authorized_keys</code> is missing, the key line has options in front, or the modes let others write.</td>
+<td>Check with <code>ls -la ~/.ssh</code> in EiN&#39;s terminal and fix with <code>chmod 700 ~/.ssh</code> and <code>chmod 600 ~/.ssh/authorized_keys</code>.</td>
+</tr>
+<tr>
+<td><code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></td>
+<td>EiN&#39;s server key is not the one your computer remembers, as after EiN was installed again from scratch.</td>
+<td>Ask your administrator whether that happened. If so, forget the old key with <code>ssh-keygen -R &quot;[ein.local]:2222&quot;</code> and connect again.</td>
+</tr>
+<tr>
+<td><code>ssh-copy-id</code> fails without <code>-s</code></td>
+<td>Without <code>-s</code> it runs Unix shell commands on EiN&#39;s side.</td>
+<td>Run it with <code>-s</code>.</td>
+</tr>
+<tr>
+<td><code>scp</code> fails right away</td>
+<td>An <code>scp</code> older than OpenSSH 9.0 uses a protocol EiN does not speak.</td>
+<td>Add <code>-s</code> (OpenSSH 8.7 or 8.8), or use <code>sftp</code>.</td>
+</tr>
+<tr>
+<td><code>edit: not a terminal</code></td>
+<td>The command was sent along on the <code>ssh</code> line, without a shell.</td>
+<td>Log in with <code>ssh -p 2222 helen@ein.local</code> and run it there.</td>
+</tr>
+<tr>
+<td>A copied folder lacks faces, EXIF and thumbnails</td>
+<td>What belongs to a photo is in its hidden <code>_</code> folder, which recursive copies skip.</td>
+<td>Go into <code>beach.jpg_</code> by name to fetch it; the photos themselves are complete.</td>
+</tr>
+<tr>
+<td>Writing in a folder is refused</td>
+<td>You may not change that folder, or it lies inside a photo&#39;s <code>_</code> folder.</td>
+<td>See <a href="../admin/permissions.html">Permissions in depth</a>, or copy into your home or staging area instead.</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="editor.html" rel="prev"><span>Previous</span>The editor</a><a class="next" href="remote.html" rel="next"><span>Next</span>Reaching other machines</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/ssh-sftp.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-you-need">What you need</a></li><li><a href="#log-in-with-a-shell">Log in with a shell</a></li><li><a href="#sign-in-with-a-key">Sign in with a key</a></li><li class="nested"><a href="#add-a-key-without-ssh-copy-id">Add a key without ssh-copy-id</a></li><li><a href="#run-one-command-at-a-time">Run one command at a time</a></li><li><a href="#copy-files-with-sftp">Copy files with SFTP</a></li><li class="nested"><a href="#bring-in-a-large-batch-of-photos">Bring in a large batch of photos</a></li><li><a href="#what-the-tree-looks-like-over-sftp">What the tree looks like over SFTP</a></li><li><a href="#mount-ein-as-a-folder">Mount EiN as a folder</a></li><li><a href="#who-can-sign-in">Who can sign in</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li></ul></aside>
+    </div>
+  </body>
+</html>

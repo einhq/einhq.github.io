@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How EiN works – EiN documentation</title>
+    <meta name="description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/start/how-ein-works.html">
+    <meta property="og:title" content="How EiN works – EiN documentation">
+    <meta property="og:description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/start/how-ein-works.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section class="here"><h2>Getting started</h2><ul><li><a href="how-ein-works.html" aria-current="page">How EiN works</a></li><li><a href="install.html">Install EiN</a></li><li><a href="first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Getting started</p>
+          <h1>How EiN works</h1>
+        </header>
+        <article class="prose">
+<p>This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works
+on it from every door, pipelines that act on every change, and modules that decide what it is for.
+Read it first, whether you are going to use EiN, run it or build on it.</p>
+<h2 id="everything-is-a-node">Everything is a node<a class="anchor" href="#everything-is-a-node" aria-label="Link to this section"></a></h2>
+<p>EiN keeps everything in one tree, the way a computer keeps files in folders. A photo is a node, and
+so are the album that holds it, a person in the family tree, a place on the map, an account, the
+system log, a queue of work waiting to be done, each of EiN&#39;s own commands and the file that holds
+the system&#39;s settings. Each has a path from <code>/</code>, as a file does:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Path</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A photo</td>
+<td><code>/archive/albums/christmas-2019/20191225_155434.jpg</code></td>
+<td><code>file</code></td>
+</tr>
+<tr>
+<td>The album it is in</td>
+<td><code>/archive/albums/christmas-2019</code></td>
+<td><code>album</code></td>
+</tr>
+<tr>
+<td>A person</td>
+<td><code>/archive/people/Peggy_Wrenfield</code></td>
+<td><code>person</code></td>
+</tr>
+<tr>
+<td>A place she lived</td>
+<td><code>/archive/locations/Highbury</code></td>
+<td><code>location</code></td>
+</tr>
+<tr>
+<td>An account</td>
+<td><code>/etc/users/admin</code></td>
+<td><code>user</code></td>
+</tr>
+<tr>
+<td>The group everyone who signs in belongs to</td>
+<td><code>/etc/groups/users</code></td>
+<td><code>group</code></td>
+</tr>
+<tr>
+<td>The system&#39;s settings</td>
+<td><code>/etc/config</code></td>
+<td><code>file</code></td>
+</tr>
+<tr>
+<td>The system log</td>
+<td><code>/var/logs/system</code></td>
+<td><code>log</code></td>
+</tr>
+<tr>
+<td>The pipeline engine&#39;s queue</td>
+<td><code>/var/queues/pipeline-engine</code></td>
+<td><code>queue</code></td>
+</tr>
+<tr>
+<td>A command</td>
+<td><code>/usr/bin/ls</code></td>
+<td><code>command</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A node has a type, a name in its folder, an owner, a group and permission bits, and the attributes
+its type needs: a photo&#39;s name, size, checksum and the time it was taken; a person&#39;s names and
+dates. Some types hold content as well: a file its bytes, a log its lines, a queue its messages.</p>
+<p>Any node can have children, a file included. A photo keeps what EiN works out about it beneath
+itself: its EXIF in <code>metadata/exif</code>, its thumbnails in <code>thumbnails/</code>, the faces found on it in
+<code>regions/</code>. Delete the photo and they go with it.</p>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other. The Nodes page, in an administrator&#39;s sidebar, browses the whole tree.</figcaption></figure>
+<p>The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
+theirs, such as the archive&#39;s <code>album</code>, <code>person</code> and <code>location</code>. <a href="../concepts/nodes.html">Nodes and node types</a>
+describes a node part by part, and <a href="../reference/node-types.html">Node types</a> lists every type.</p>
+<p>The top of the tree is divided by what each part is for. <a href="../concepts/tree.html">The tree</a> has every
+standard path.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/archive</code></td>
+<td>What the archive is for: albums, people, locations, devices and labels</td>
+</tr>
+<tr>
+<td><code>/home/&lt;you&gt;</code></td>
+<td>Your own space: your settings, shell history, favourites and trash, and with the Archive the uploads waiting for you to sort them</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>Accounts and groups, settings, and the services EiN runs</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>What the system writes as it runs: logs, sessions, queues, pools and pipeline runs</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>Commands, modules and the built-in guide</td>
+</tr>
+<tr>
+<td><code>/dev</code>, <code>/tmp</code></td>
+<td>Event channels and scratch space</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="owners-and-permissions-as-with-files">Owners and permissions, as with files<a class="anchor" href="#owners-and-permissions-as-with-files" aria-label="Link to this section"></a></h2>
+<p>Every node has an owner, a group and permission bits that say who may read it, change it, and go
+into it or run it, written the way <code>chmod</code> writes them: <code>0750</code>, or <code>rwxr-x---</code>. A node may also give
+access to more users or groups through an access list. A node belongs to whoever made it and
+takes its group from the folder it is made in. The administrator passes every check.</p>
+<p>Two things work differently from a computer&#39;s files:</p>
+<ul>
+<li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not on the map,
+not in <code>ls</code>. Two people can see the same album differently, and an album can look emptier to you
+than to its owner.</li>
+<li><strong>You do not need the numbers.</strong> <strong>Share</strong>, on an album, a person, a location or a device, sets the same
+permissions in words: who can see it, who can change it, and links that open it without an
+account.</li>
+</ul>
+<p>Someone who has not signed in is the guest. The guest can sign in or open a share link and nothing
+more, unless an administrator turns on <strong>Visitors may browse</strong>, and the guest never changes
+anything. <a href="../guide/sharing.html">Sharing</a> shows the dialog, and <a href="../admin/permissions.html">Permissions in depth</a>
+has the exact rules.</p>
+<h2 id="links-put-one-thing-in-many-places">Links put one thing in many places<a class="anchor" href="#links-put-one-thing-in-many-places" aria-label="Link to this section"></a></h2>
+<p>A <strong>softlink</strong> is a node that points at another node by its path; opening it opens what it points
+at. EiN uses softlinks wherever one thing belongs in several places:</p>
+<ul>
+<li>an album&#39;s cover is a link to one of its pictures;</li>
+<li>a picture added to an album from somewhere else is a link to where it lives;</li>
+<li>a label is a folder under <code>/archive/tags/</code> holding a link to everything that carries it;</li>
+<li>your favourites are links in <code>/home/&lt;you&gt;/stars</code>;</li>
+<li>how two people are related is a pair of links, one on each person;</li>
+<li>being in a group is a link under <code>/etc/groups/&lt;group&gt;/users/</code>.</li>
+</ul>
+<p>Moving or renaming a node re-points every softlink to it, so an album can change its name without
+losing its cover or its labels. A <strong>hard link</strong> is the other kind: the same node under a second name
+in another folder, as on Unix. <a href="../concepts/links.html">Links</a> covers both, and what deleting and the
+trash do to them.</p>
+<h2 id="one-set-of-commands-behind-every-door">One set of commands behind every door<a class="anchor" href="#one-set-of-commands-behind-every-door" aria-label="Link to this section"></a></h2>
+<p>EiN has a shell: bash syntax, run inside EiN, where the files and folders are the nodes of the
+tree. Core brings more than 200 commands, and each module adds its own. Every way in runs these
+commands as you, except SFTP, which moves files and nothing else:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Door</th>
+<th>How you get there</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The web interface</td>
+<td>A browser at <code>http://ein.local:8080</code></td>
+<td>Each page runs commands as you and shows what they answer</td>
+</tr>
+<tr>
+<td>The terminal panel</td>
+<td>The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in</td>
+<td>A shell of your own in each tab</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td><code>ssh -p 2222 helen@ein.local</code> from your own computer, with your EiN username and password</td>
+<td>The same shell, or one command at a time</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td><code>sftp -P 2222 helen@ein.local</code>, sshfs, or a file manager that speaks SFTP</td>
+<td>Files and folders without a shell, with the same permissions</td>
+</tr>
+<tr>
+<td>The assistant</td>
+<td><strong>Chat</strong> in the sidebar, with the assistant module</td>
+<td>It runs commands as tools, as you; one that would change something waits for you to press <strong>Run</strong></td>
+</tr>
+</tbody></table>
+</div>
+
+<p>The web interface is no exception. Each page gets what it shows by running commands over one
+connection to the server, as you, with <code>JSON_OUTPUT=1</code> so that they answer in JSON; renaming a
+folder on the Nodes page runs <code>mv</code>. Only the bytes of files, uploaded or downloaded, take a way of
+their own, through the same permission check. You can run the same commands yourself:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ls</span> /archive/albums
+JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l /archive/albums | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
+<p>Because every door acts as the same person under the same check, the rules are the same everywhere.
+What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
+either, and a command only an administrator may run is refused to anyone else whichever door they
+use.</p>
+<figure class="shot"><a href="../../assets/shots/terminal@2x.webp"><img src="../../assets/shots/terminal.webp" srcset="../../assets/shots/terminal.webp 1x, ../../assets/shots/terminal@2x.webp 2x" alt="The terminal panel filling the window: ls /archive, a find that counts the people, person-info printing Peggy Wrenfield's relations, homes and events, and cat drawing a photo from the christmas-2019 album" width="840" height="780" loading="lazy" decoding="async"></a><figcaption>The terminal works on the tree the pages show: people, albums and photos are paths.</figcaption></figure>
+<p><a href="../shell/terminal.html">The terminal</a>, <a href="../shell/ssh-sftp.html">SSH and SFTP</a> and
+<a href="../guide/assistant.html">Chatting with the assistant</a> describe each door, and
+<a href="../reference/commands.html">Commands</a> lists every command.</p>
+<h2 id="changes-start-pipelines">Changes start pipelines<a class="anchor" href="#changes-start-pipelines" aria-label="Link to this section"></a></h2>
+<p>Every change to the tree, a node made, changed, moved or deleted, is announced as an event once it
+is saved. <strong>Pipelines</strong> act on these events: a pipeline is a definition of the change it waits for
+and the steps, each a command, that it then runs on the node that changed. A module brings its
+pipelines with it. Core brings none, so without a module EiN keeps what you give it and works
+nothing out.</p>
+<p>With the Archive installed, uploading a photo sets off a chain:</p>
+<ol>
+<li>The Archive notices the uploaded photo, video or recording and announces it.</li>
+<li><code>media-ingest</code> reads the file&#39;s metadata, such as the camera, the time it was taken and where,
+through the media service.</li>
+<li>Its result starts the rest, each a pipeline of its own: thumbnails and display sizes, video and
+audio the browser can play, the faces on it, a picture vector for searching by meaning, text read
+from the picture, a transcript of what is said in a video or recording, a fingerprint that finds
+copies, the address of its GPS position, and a link to the location that contains it.</li>
+<li>What these write are changes too, and they start what depends on them, such as matching the
+faces to the people they show.</li>
+</ol>
+<p>Work waits in queues and pools, which are nodes like everything else, so nothing is lost when EiN
+restarts, and a node that changes ten times while it waits is worked on once. When the media service is busy or
+down, its steps wait for it rather than fail. Work that fails anyway is tried again after an hour,
+six hours and a day, and then marked as needing a person.</p>
+<p>The <strong>Dashboard</strong>, an administrator&#39;s page, sums all this up in one word: <strong>Healthy</strong>,
+<strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. After a large upload it reads Catching up for a
+while, which is expected. <a href="../concepts/pipelines.html">Changes and pipelines</a> follows a change from
+event to finished work, <a href="../admin/processing.html">Processing and pipelines</a> is the administrator&#39;s
+side, and <a href="../admin/monitoring.html">Health and the dashboard</a> explains the four words.</p>
+<h2 id="modules-decide-what-ein-is-for">Modules decide what EiN is for<a class="anchor" href="#modules-decide-what-ein-is-for" aria-label="Link to this section"></a></h2>
+<p>Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the
+frame of the web interface. On its own, its sidebar holds <strong>Home</strong>, <strong>Search</strong>, <strong>Settings</strong>,
+<strong>Statistics</strong> and <strong>Documentation</strong>, and for an administrator <strong>Nodes</strong> and <strong>Dashboard</strong>.
+Everything else comes from modules.</p>
+<p>A module is a folder with a manifest, <code>mod.json</code>, kept in a repository of its own. What it adds is
+what its folders hold: commands, services that run in the background, pipelines, pages and sidebar
+entries, settings, node types and its own documentation. It also joins core features by the names
+of its commands: every command whose name starts with <code>search-</code> is asked when you search.</p>
+<p>The published modules are in the einhq organisation on GitHub, each named <code>module-&lt;name&gt;</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it is for</th>
+<th>What it needs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td>The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted</td>
+<td>The <code>ems</code> module, installed along with it, and the media service</td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td>The chat that answers questions about EiN by running its commands for you</td>
+<td>A language model</td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td>EiN&#39;s side of the media service: the client the Archive calls it through, the media service&#39;s health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares</td>
+<td>The media service</td>
+</tr>
+</tbody></table>
+</div>
+<p>A fourth module, <code>importer</code>, moves one particular older archive into EiN. It is not published and
+is not a general importer; photos from anywhere else come in through staging, as
+<a href="../guide/importing.html">Getting your photos in</a> describes.</p>
+<p>An administrator installs, updates and removes modules on <strong>Settings → Modules</strong>, with
+<code>mod install</code>, or with the installer&#39;s <code>--module</code> option. <a href="../admin/modules.html">Modules</a> explains all
+three.</p>
+<h2 id="what-runs-beside-ein">What runs beside EiN<a class="anchor" href="#what-runs-beside-ein" aria-label="Link to this section"></a></h2>
+<p>EiN itself is one process: the web interface, the shell, SSH and SFTP, the pipelines and the
+modules&#39; services all run in it. The installer sets it up on one machine with podman or Docker and
+compose, each part in a container of its own: EiN, PostgreSQL and, if you choose them, the media
+service and the language model.</p>
+
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Container</th>
+<th>What it is</th>
+<th>When you need it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ein</code></td>
+<td>EiN itself, the only container with ports open to other machines</td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>db</code></td>
+<td>PostgreSQL 18 with TimescaleDB, pgvector and PostGIS. It holds every node, link and permission, the logs, the vectors that search by meaning compares, the shapes on the map and GPS tracks.</td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td>The media service: every media tool and model, for thumbnails and video renditions, faces, voices, text in pictures, transcripts, search vectors and fingerprints. It keeps no data of its own and knows nothing of the tree: it reads the files EiN stores and answers EiN. It uses an NVIDIA graphics card when there is one, and the CPU otherwise.</td>
+<td>With the Archive: the installer&#39;s <code>--ems</code></td>
+</tr>
+<tr>
+<td><code>llm</code></td>
+<td>The language model the assistant asks: Qwen3.5-4B in llama.cpp, on the graphics card or the CPU. A hosted provider with an OpenAI-compatible API can take its place.</td>
+<td>With the assistant: the installer&#39;s <code>--llm</code>, unless you use a provider</td>
+</tr>
+</tbody></table>
+</div>
+<p>Only EiN is reachable from other machines: port 8080 for the web interface and 2222 for SSH and
+SFTP. The database, the media service and the language model answer only EiN, on the network
+compose makes for them.</p>
+<p>Your files are on the machine&#39;s disk, in the data folder (<code>~/ein/data</code> unless you chose another):
+the originals in <code>files</code>, the thumbnails and renditions EiN makes from them in <code>files-volatile</code>. The
+database is the container engine&#39;s volume <code>ein_db</code>. The two belong together, as
+<a href="../concepts/files.html">Files and storage</a> and <a href="../admin/data.html">Your data</a> explain.</p>
+<p>Without the media service, EiN still takes in, keeps and shares what you upload, but the files you add get
+no metadata, thumbnails, faces or transcripts: that work waits until the media service answers.
+Without a language model, everything except the chat works. <a href="../admin/media-service.html">The media service</a>
+and <a href="../admin/language-model.html">The language model</a> say more about each.</p>
+<h2 id="where-to-read-on">Where to read on<a class="anchor" href="#where-to-read-on" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="install.html">Install EiN</a> puts EiN on a machine of your own, and <a href="first-steps.html">First steps</a>
+takes you from the first sign-in to a family using it.</li>
+<li><a href="../guide/interface.html">Finding your way around</a> is a tour of the web interface.</li>
+<li>The Concepts pages take each idea above further: <a href="../concepts/nodes.html">Nodes and node types</a>,
+<a href="../concepts/tree.html">The tree</a>, <a href="../concepts/links.html">Links</a>,
+<a href="../concepts/files.html">Files and storage</a> and <a href="../concepts/pipelines.html">Changes and pipelines</a>.</li>
+<li><a href="../shell/terminal.html">The terminal</a> is the place to start with the shell.</li>
+<li><a href="../develop/modules.html">Writing a module</a> is for building a module of your own.</li>
+<li><a href="../reference/glossary.html">Glossary</a> defines the words these pages use.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../index.html" rel="prev"><span>Previous</span>EiN documentation</a><a class="next" href="install.html" rel="next"><span>Next</span>Install EiN</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/start/how-ein-works.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#everything-is-a-node">Everything is a node</a></li><li><a href="#owners-and-permissions-as-with-files">Owners and permissions, as with files</a></li><li><a href="#links-put-one-thing-in-many-places">Links put one thing in many places</a></li><li><a href="#one-set-of-commands-behind-every-door">One set of commands behind every door</a></li><li><a href="#changes-start-pipelines">Changes start pipelines</a></li><li><a href="#modules-decide-what-ein-is-for">Modules decide what EiN is for</a></li><li><a href="#what-runs-beside-ein">What runs beside EiN</a></li><li><a href="#where-to-read-on">Where to read on</a></li></ul></aside>
+    </div>
+  </body>
+</html>

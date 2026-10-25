@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accounts and groups – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator who gives people accounts in EiN and puts them in groups. It covers the Users, Groups and Permissions tabs of Settings, the built-in accounts and groups, how to let a second person administer, and the same work in the terminal.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/accounts.html">
+    <meta property="og:title" content="Accounts and groups – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator who gives people accounts in EiN and puts them in groups. It covers the Users, Groups and Permissions tabs of Settings, the built-in accounts and groups, how to let a second person administer, and the same work in the terminal.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/accounts.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html" aria-current="page">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Accounts and groups</h1>
+        </header>
+        <article class="prose">
+<p>This page is for the administrator who gives people accounts in EiN and puts them in groups. It
+covers the <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong> tabs of <strong>Settings</strong>, the built-in accounts
+and groups, how to let a second person administer, and the same work in the terminal.</p>
+<p>What a group may see and change is decided by the sharing of each album and folder, not here.
+<a href="../guide/sharing.html">Sharing</a> shows how to share with a group, and
+<a href="permissions.html">Permissions in depth</a> explains owners, groups and modes.</p>
+<h2 id="where-accounts-are-managed">Where accounts are managed<a class="anchor" href="#where-accounts-are-managed" aria-label="Link to this section"></a></h2>
+<p>Choose <strong>Settings</strong> under <strong>System</strong> in the sidebar. The <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong>
+tabs are there only while you act as the administrator; anyone else sees <strong>Modules</strong> alone.</p>
+<p>On <strong>Users</strong> and <strong>Groups</strong>, nothing opens over the page. The list is on the left; pick an entry
+and its panel opens beside it, where each change is made as you make it. The button beside the
+list&#39;s filter makes a new entry: <strong>New user</strong> on Users, <strong>New group</strong> on Groups. On a wide screen
+the list and the panel fill the window side by side and each scrolls on its own. On a phone or in a
+narrow window they take turns: the panel has <strong>All users</strong> or <strong>All groups</strong> above it, and the
+browser&#39;s Back button returns to the list too.</p>
+<p>The open entry is part of the address, such as <code>/settings?tab=users&amp;user=helen</code>, so you can
+bookmark an account or send the link to another administrator.</p>
+<h2 id="the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with<a class="anchor" href="#the-accounts-and-groups-ein-starts-with" aria-label="Link to this section"></a></h2>
+<p>EiN makes these at its first start. Each is marked <strong>Built in</strong> in its panel, and none can be
+deleted.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Title</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>admin</code></td>
+<td>Administrator</td>
+<td>The administrator. It cannot be disabled or deleted. Its first password is printed once at the end of the install; <a href="../start/first-steps.html#sign-in-and-change-the-admin-password">First steps</a> shows how to change it.</td>
+</tr>
+<tr>
+<td><code>guest</code></td>
+<td>Guest</td>
+<td>Who a visitor browses as when <strong>Visitors may browse</strong> is on. It has no password, cannot be given one, and its groups give it nothing.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Title</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>admin</code></td>
+<td>Administrators</td>
+<td>The <code>admin</code> account&#39;s own group, as <code>root</code>&#39;s is on Linux. Being in it does not make anyone an administrator and gives no write to the system&#39;s own folders and settings.</td>
+</tr>
+<tr>
+<td><code>users</code></td>
+<td>Users</td>
+<td>Every account that signs in belongs to it, without being added. Sharing with <code>users</code> shares with everyone who has an account.</td>
+</tr>
+<tr>
+<td><code>ssh</code></td>
+<td>SSH users</td>
+<td>Its members may use <code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code> to reach other machines from EiN. See <a href="../shell/remote.html">Reaching other machines</a>.</td>
+</tr>
+<tr>
+<td><code>sudo</code></td>
+<td>Administrators on request</td>
+<td>Its members may act as the administrator for one sign-in, after entering their own password again. See <a href="#let-a-second-person-administer">Let a second person administer</a>.</td>
+</tr>
+<tr>
+<td><code>guest</code></td>
+<td>Guests</td>
+<td>The <code>guest</code> account&#39;s own group. What this group may see, visitors may see.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Besides these, every account made on the Users tab or with <code>user-create</code> gets a group of its own,
+named like the account: Helen Okafor&#39;s account <code>helen</code> has the group <code>helen</code>. These are its
+personal group.</p>
+<h2 id="create-an-account">Create an account<a class="anchor" href="#create-an-account" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Open <strong>Settings → Users</strong> and choose the <strong>New user</strong> button beside the filter.</li>
+<li>Type the person&#39;s <strong>Name</strong>, such as Helen Okafor.</li>
+<li><strong>E-mail</strong> is optional. With one, the person can sign in with it instead of the username. No
+two accounts can have the same address, and EiN sends no e-mail to it.</li>
+<li>Check <strong>Username</strong>. It is suggested from the name (<code>helen</code>) until you type one. It is lower
+case, holds only letters, digits and <code>.</code> <code>_</code> <code>-</code>, starts with a letter or <code>_</code>, and cannot be
+changed later. It cannot be the name of an existing account or group.</li>
+<li>Type a <strong>Password</strong> and <strong>Repeat</strong> it, or leave both empty to set the password later. An
+account without a password cannot sign in.</li>
+<li>Under <strong>Groups</strong>, <strong>Users</strong> is ticked and greyed: everyone who signs in is in it. The groups
+set as the default for new users are ticked already (see
+<a href="#what-new-accounts-start-with">What new accounts start with</a>). Tick or untick the others.</li>
+<li>Choose <strong>Create user</strong>.</li>
+</ol>
+<p>EiN says &quot;Created helen.&quot; and opens the new account. The account has a home folder,
+<code>/home/helen</code>, which holds the person&#39;s own things, such as what they upload to staging, and a
+personal group <code>helen</code>.</p>
+<p>While something is missing, <strong>Create user</strong> says why under it: &quot;Choose a username&quot;, &quot;Already
+taken&quot;, &quot;Repeat the password&quot; or &quot;The passwords do not match&quot;. If the account was made but its
+password could not be set, the account opens with the reason in its <strong>Password</strong> section; set the
+password there.</p>
+<figure class="shot"><a href="../../assets/shots/settings-users@2x.webp"><img src="../../assets/shots/settings-users.webp" srcset="../../assets/shots/settings-users.webp 1x, ../../assets/shots/settings-users@2x.webp 2x" alt="Settings → Users with the Administrator account open: its Profile, and Groups with Administrators and Users ticked and greyed" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each account opens in a panel beside the list, where every change is made in place</figcaption></figure>
+<h2 id="change-an-account">Change an account<a class="anchor" href="#change-an-account" aria-label="Link to this section"></a></h2>
+<p>Pick the account in the list. Its panel shows its picture, display name, username and uid, and
+badges for its state: <strong>Administrator</strong>, <strong>Guest</strong>, <strong>Disabled</strong>, <strong>Needs a password</strong> or
+<strong>Signed in now</strong>. Below are four sections, each saved on its own.</p>
+<h3 id="profile">Profile<a class="anchor" href="#profile" aria-label="Link to this section"></a></h3>
+<p><strong>Display name</strong>, <strong>E-mail</strong> and <strong>Description</strong>, saved with <strong>Save profile</strong>. The display name is
+how the account is named to others; the person can change their own name and description too, on
+their profile (see <a href="../guide/profile.html#change-your-name-and-description">Your profile</a>). Only an
+administrator sets the e-mail address. Empty the field and save to remove it.</p>
+<p>The account&#39;s picture is not set here: it is the cover photo of the person in the archive that the
+account is linked to. <a href="../guide/profile.html#your-picture-and-the-person-you-are">Your picture and the person you are</a>
+shows how to make that link in the terminal.</p>
+<h3 id="groups">Groups<a class="anchor" href="#groups" aria-label="Link to this section"></a></h3>
+<p>A box per group: tick to put the person in, untick to take them out. Each box saves as you click
+it. Some boxes are ticked and greyed, with the reason beside them:</p>
+<ul>
+<li><strong>everyone who signs in</strong>: the <code>users</code> group.</li>
+<li><strong>primary group</strong>, or <strong>their own group, primary</strong>: the account&#39;s primary group, which it
+leaves only when its primary group is changed.</li>
+</ul>
+<p>Other people&#39;s personal groups are listed only while this account is in one.</p>
+<p><strong>Primary group</strong> is the group that files the person creates belong to, unless they are created as
+shared. It starts as the personal group. You can pick any shared group instead.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>Group changes apply the next time the person signs in. Until then they keep the groups they
+signed in with, and the section says so when they are signed in now. To make a change apply at
+once, sign them out everywhere with <strong>Disable sign-in</strong> and then <strong>Enable sign-in</strong>.</p>
+</aside>
+<h3 id="password">Password<a class="anchor" href="#password" aria-label="Link to this section"></a></h3>
+<p>Type a <strong>New password</strong>, <strong>Repeat</strong> it, and choose <strong>Set password</strong>. <strong>Password set</strong> appears
+beside it. Their current password stops working at once, in the browser and over SSH and SFTP,
+but browsers and terminals where they are signed in stay signed in.</p>
+<p>EiN has no rules for passwords: it takes any password that is not empty. It has no &quot;forgot
+password&quot; by e-mail and cannot make someone choose a new password at their next sign-in. When
+someone has forgotten theirs, set a new one here and ask them to change it on their profile&#39;s
+<strong>Security</strong> tab (see <a href="../guide/profile.html#change-your-password">Change your password</a>).</p>
+<p>An account brought over from an older archive by the importer has no usable password. It shows
+<strong>Needs a password</strong>, and cannot sign in until you set one here.</p>
+<h3 id="sign-in-and-removal">Sign-in and removal<a class="anchor" href="#sign-in-and-removal" aria-label="Link to this section"></a></h3>
+<p><strong>Signed in now</strong> lists where the person is signed in: <strong>In the browser</strong>, <strong>Over SSH</strong> or <strong>In a
+terminal</strong>, each with the address it comes from and since when.</p>
+<p><strong>Disable sign-in</strong> signs them out everywhere at once, ends what they have running, and keeps them
+out of the browser, SSH and SFTP alike. Nothing they own is changed. The button then reads
+<strong>Enable sign-in</strong>, which lets them sign in again with their password. A disabled account is
+hidden from the Users list until you switch on <strong>Show disabled users</strong> at the foot of the list,
+which is there only while some account is disabled.</p>
+<p>The <code>admin</code> account has neither button: &quot;The administrator can&#39;t be disabled or deleted.&quot; The
+<code>guest</code> account&#39;s panel shows only what it is for.</p>
+<h2 id="delete-an-account">Delete an account<a class="anchor" href="#delete-an-account" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Open the account and choose <strong>Delete account…</strong> under <strong>Sign-in and removal</strong>.</li>
+<li>Read what will happen. Deleting the account removes its home folder and everything in it: the
+person&#39;s staging, their preferences and anything else they kept there.</li>
+<li>Pick who takes over everything they own elsewhere, such as albums and pictures in the archive.
+The administrator is picked to start with.</li>
+<li>Choose <strong>Delete</strong> followed by the username, such as <strong>Delete helen</strong>.</li>
+</ol>
+<p>EiN ends the person&#39;s sessions, says how many items passed to whom, and returns to the list. Their
+personal group goes too, unless someone else is in it; then it stays, and EiN says so.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>There is no undo, and deleted home folders do not go to the trash. If you only want to keep
+someone out, use <strong>Disable sign-in</strong> instead. EiN has no backup command; see
+<a href="data.html">Your data</a> before you delete an account whose staging holds anything still unsorted.</p>
+</aside>
+<h2 id="create-and-change-groups">Create and change groups<a class="anchor" href="#create-and-change-groups" aria-label="Link to this section"></a></h2>
+<p>A group is a set of accounts to share with. If everyone with an account is family, the built-in
+<code>users</code> group covers them and you need no other. Make a group when only some accounts should see
+something, such as a <code>family</code> group when friends also have accounts.</p>
+<ol>
+<li>Open <strong>Settings → Groups</strong> and choose the <strong>New group</strong> button beside the filter.</li>
+<li>Type a <strong>Name</strong>, such as <code>family</code>. It is how commands and settings name the group, follows the
+same rules as a username, and cannot be changed later.</li>
+<li>Type a <strong>Title</strong>, such as Family, and a <strong>Description</strong> if you like. The title is what people
+see where things are shared with the group.</li>
+<li>Tick the <strong>Members</strong>. This is optional; you can add anyone later, here or on their own page.</li>
+<li>Choose <strong>Create group</strong>. EiN says &quot;Created family.&quot; and opens it.</li>
+</ol>
+<p>The Groups list shows each group&#39;s title and name, and up to four of its members&#39; faces with a
+count of the rest. <code>users</code> reads <strong>Everyone</strong>. Personal groups are hidden until you switch on
+<strong>Show personal groups</strong> at the foot of the list, which is there only when there are some.</p>
+<p>In a group&#39;s panel:</p>
+<ul>
+<li><strong>Profile</strong> changes its <strong>Title</strong> and <strong>Description</strong>, saved with <strong>Save profile</strong>.</li>
+<li><strong>Members</strong> has a box per account: tick to add, untick to remove. Someone whose primary group it
+is stays ticked and greyed; the panel links to their page, where their primary group is changed.
+An account that no longer exists but is still linked shows as <strong>no longer an account</strong>, ready to
+untick. <code>users</code> has no list, since everyone who signs in is in it.</li>
+<li>Built-in groups say what they are for at the top, and &quot;Built-in groups can&#39;t be deleted.&quot;</li>
+</ul>
+<figure class="shot"><a href="../../assets/shots/settings-groups@2x.webp"><img src="../../assets/shots/settings-groups.webp" srcset="../../assets/shots/settings-groups.webp 1x, ../../assets/shots/settings-groups@2x.webp 2x" alt="Settings → Groups with Administrators open: the built-in groups in the list, the Built in badge, the group's Profile and its Members" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Built-in groups say what they are for; the Users group shows Everyone instead of faces</figcaption></figure>
+<h3 id="delete-a-group">Delete a group<a class="anchor" href="#delete-a-group" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Open the group and choose <strong>Delete group…</strong> under <strong>Delete</strong>.</li>
+<li>Pick the group that takes over what this one owns. <strong>Administrators</strong> is picked to start with.</li>
+<li>Choose <strong>Delete</strong> followed by the group&#39;s name, such as <strong>Delete family</strong>.</li>
+</ol>
+<p>Nobody loses their account. Accounts whose primary group it was go back to their own groups, and
+grants that named the group on albums and folders are dropped, so its members lose what they could
+see only through it.</p>
+<h2 id="what-new-accounts-start-with">What new accounts start with<a class="anchor" href="#what-new-accounts-start-with" aria-label="Link to this section"></a></h2>
+<p>The <strong>Permissions</strong> tab has four cards. Each says in a sentence what its saved values come to, and
+each setting on it is saved on its own with <strong>Save change</strong>, as on the <strong>System</strong> tab. A value
+changed here is marked <strong>Set here</strong>, and <strong>Restore inherited value</strong> clears it again.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Setting</th>
+<th>What it decides</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>New users</strong></td>
+<td><strong>Groups</strong> (<a href="../reference/settings.html#cfg_default_user_groups"><code>CFG_DEFAULT_USER_GROUPS</code></a>)</td>
+<td>The groups ticked on the New user form, besides the account&#39;s own. Empty means none.</td>
+<td><code>users</code></td>
+</tr>
+<tr>
+<td><strong>Visitors</strong></td>
+<td><strong>Visitors may browse</strong> (<a href="../reference/settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>)</td>
+<td>Whether someone who has not signed in browses as <code>guest</code>, seeing what is shared with visitors, instead of being asked to sign in.</td>
+<td>off</td>
+</tr>
+<tr>
+<td><strong>Sharing</strong></td>
+<td><strong>Owner</strong>, <strong>Group</strong>, <strong>Permissions</strong></td>
+<td>Who owns anything created as shared, such as a new album, which group it is shared with, and what the owner, the group and everyone else may do with it.</td>
+<td>creator, <code>users</code>, <code>0750</code></td>
+</tr>
+<tr>
+<td><strong>Sign-in sessions</strong></td>
+<td><strong>Browser sign-in</strong> (<a href="../reference/settings.html#cfg_session_max_age_sec"><code>CFG_SESSION_MAX_AGE_SEC</code></a>)</td>
+<td>How long a browser stays signed in after its last visit.</td>
+<td>1 day</td>
+</tr>
+<tr>
+<td><strong>Sign-in sessions</strong></td>
+<td><strong>Idle session</strong> (<a href="../reference/settings.html#cfg_session_expires_sec"><code>CFG_SESSION_EXPIRES_SEC</code></a>)</td>
+<td>How long a session lasts unused. A change applies to new sign-ins.</td>
+<td>12 hours</td>
+</tr>
+</tbody></table>
+</div>
+<p>Leave <strong>Visitors may browse</strong> off for a family&#39;s own archive. With it off, someone who is not
+signed in can only sign in or open a share link. <a href="../guide/sharing.html#visitors-who-are-not-signed-in">Sharing</a>
+explains what visitors see when it is on.</p>
+<p>The <strong>Sharing</strong> card&#39;s settings are
+<a href="../reference/settings.html#cfg_default_share_owner"><code>CFG_DEFAULT_SHARE_OWNER</code></a>,
+<a href="../reference/settings.html#cfg_default_share_group"><code>CFG_DEFAULT_SHARE_GROUP</code></a> and
+<a href="../reference/settings.html#cfg_default_share_mode"><code>CFG_DEFAULT_SHARE_MODE</code></a>. They apply to what is
+created after you change them; <a href="../start/first-steps.html#decide-who-sees-what">First steps</a> suggests
+values for common households, and <a href="../guide/sharing.html#how-new-albums-start-out">How new albums start out</a>
+shows how each person can narrow them.</p>
+<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="The Permissions tab: the New users, Visitors, Sharing and Sign-in sessions cards, each with a sentence saying what its values come to" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each card says in plain words what new accounts, visitors and new albums get</figcaption></figure>
+<h2 id="let-a-second-person-administer">Let a second person administer<a class="anchor" href="#let-a-second-person-administer" aria-label="Link to this section"></a></h2>
+<p>Being in the <code>admin</code> group does not make anyone an administrator. To let someone you trust act as
+the administrator, or to keep an everyday account for yourself, put that account in <strong>Administrators
+on request</strong> (<code>sudo</code>):</p>
+<ol>
+<li>Open their account in <strong>Settings → Users</strong>.</li>
+<li>Under <strong>Groups</strong>, tick <strong>Administrators on request</strong>.</li>
+<li>Ask them to sign out and in again, since group changes apply at the next sign-in.</li>
+</ol>
+<p>They then have <strong>Administer…</strong> in the account menu under their picture. It asks for their own
+password again: &quot;Enter your password again to act as the administrator until you sign out or leave
+admin mode.&quot; After <strong>Administer</strong>, the page reloads with the administrator&#39;s tabs and pages, an
+orange ring and a shield on their picture, and <strong>Leave admin mode</strong> in the account menu in place of
+<strong>Administer…</strong>. A wrong password answers &quot;That is not your password.&quot;</p>
+<p>In a terminal, <code>admin</code> does the same for that terminal alone, and <code>admin --off</code> ends it.
+<code>user-elevate --session</code> acts for the whole sign-in, every page and terminal of it.</p>
+<p>Taking someone out of <code>sudo</code> ends their admin mode at once, in every page and terminal. Such a
+person can also set a new password for <code>admin</code> if it is lost, so keep at least one account you
+trust in <code>sudo</code>.</p>
+<h2 id="signing-in-and-why-it-fails">Signing in and why it fails<a class="anchor" href="#signing-in-and-why-it-fails" aria-label="Link to this section"></a></h2>
+<p>People sign in with their username or their e-mail address, in the browser under <strong>Username or
+e-mail</strong>, and over SSH and SFTP (see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>). Their groups are read
+at that moment.</p>
+<p>A wrong password, an unknown username and an account without a password all fail the same way, so
+the answer does not tell anyone which accounts exist. Only with the right password does EiN say
+that an account is disabled.</p>
+<p>After five failed attempts from one address, that address is held back for a while that doubles
+with each further failure, up to 15 minutes, and the answer says how many seconds to wait. Failed
+attempts at one account only slow it down; they never lock its owner out. Failures are forgotten
+an hour after the last one.</p>
+<h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Every change on these tabs is a command, and the tabs run the same commands. They are for the
+administrator, apart from reading lists and changing your own name and password.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+user-create helen --title=<span class="hljs-string">&#x27;Helen Okafor&#x27;</span> --email=helen@example.com --<span class="hljs-built_in">groups</span>=<span class="hljs-built_in">users</span>,family
+user-passwd helen                    <span class="hljs-comment"># asks for the new password after Password:</span>
+user-update helen --name=<span class="hljs-string">&#x27;Helen Okafor&#x27;</span> --description=<span class="hljs-string">&#x27;Scans the family letters&#x27;</span>
+user-set-primary-group helen family
+user-disable helen                   <span class="hljs-comment"># signs her out everywhere and keeps her out</span>
+user-enable helen
+user-delete helen --to=peggy         <span class="hljs-comment"># what she owned passes to peggy</span>
+
+group-create family --title=Family
+group-add-member family helen
+group-remove-member family helen
+group-update family --description=<span class="hljs-string">&#x27;The Wrenfield household&#x27;</span>
+group-delete family --to=<span class="hljs-built_in">users</span>       <span class="hljs-comment"># --force when it is someone&#x27;s primary group</span></code></pre></div>
+<p>To see who there is and who is signed in:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+user-list                <span class="hljs-comment"># every account, with uid and title; --inactive for the disabled ones</span>
+user-info helen
+user-groups helen
+group-list --members     <span class="hljs-comment"># every group, and who is linked into it</span>
+<span class="hljs-built_in">who</span>                      <span class="hljs-comment"># who is signed in, from where, and what they run</span></code></pre></div>
+<p><code>user-create</code> without <code>--groups</code> uses <a href="../reference/settings.html#cfg_default_user_groups"><code>CFG_DEFAULT_USER_GROUPS</code></a>;
+<code>--groups=</code> with nothing after it adds the account to no group but its own. <code>user-delete</code> and
+<code>group-delete</code> without <code>--to</code> hand what was owned to <code>admin</code>.
+<a href="../shell/commands.html">Commands by task</a> and the <a href="../reference/commands-core.html#user-create">core command reference</a>
+list every option.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Needs a password</strong> on an account</td>
+<td>It was made without a password, or came from the importer.</td>
+<td>Set one under <strong>Password</strong>.</td>
+</tr>
+<tr>
+<td>Someone does not see an album shared with a group you just put them in</td>
+<td>Group changes apply at the next sign-in.</td>
+<td>Ask them to sign out and in, or choose <strong>Disable sign-in</strong> and <strong>Enable sign-in</strong>.</td>
+</tr>
+<tr>
+<td><strong>Create user</strong> says &quot;Already taken&quot;</td>
+<td>An account or a group has that name. Each account&#39;s personal group is named like it.</td>
+<td>Choose another username.</td>
+</tr>
+<tr>
+<td>&quot;Another account has this address&quot; under <strong>E-mail</strong></td>
+<td>Two accounts cannot share an address.</td>
+<td>Use another address, or remove it from the other account.</td>
+</tr>
+<tr>
+<td><code>user create: &#39;&lt;name&gt;&#39; is the name of a built-in group</code></td>
+<td>Names such as <code>ssh</code> and <code>sudo</code> belong to built-in groups.</td>
+<td>Choose another username.</td>
+</tr>
+<tr>
+<td><code>group delete: cannot delete the built-in group &#39;&lt;name&gt;&#39;</code></td>
+<td>Built-in groups stay.</td>
+<td>Nothing to do.</td>
+</tr>
+<tr>
+<td><code>user passwd: the guest account cannot have a password</code></td>
+<td><code>guest</code> never signs in.</td>
+<td>Turn <strong>Visitors may browse</strong> on or off instead.</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;: permission denied: only an administrator may run it</code></td>
+<td>The command is the administrator&#39;s.</td>
+<td>Choose <strong>Administer…</strong>, or type <code>admin</code> in that terminal, if you are in <code>sudo</code>.</td>
+</tr>
+<tr>
+<td>The <code>admin</code> password is lost</td>
+<td>Nothing else keeps it.</td>
+<td>A member of <code>sudo</code> sets a new one with <code>user-passwd admin</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../start/first-steps.html">First steps</a>: accounts for a family, in order</li>
+<li><a href="../guide/sharing.html">Sharing</a>: sharing albums with groups, people and links</li>
+<li><a href="permissions.html">Permissions in depth</a>: owners, groups, modes and grants</li>
+<li><a href="../guide/profile.html">Your profile, favourites and trash</a>: what each person changes themselves</li>
+<li><a href="../shell/ssh-sftp.html">SSH and SFTP</a>: signing in from other machines with a password or key</li>
+<li><a href="configuration.html">Configuration</a>: every other system setting</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="modules.html" rel="prev"><span>Previous</span>Modules</a><a class="next" href="permissions.html" rel="next"><span>Next</span>Permissions in depth</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/accounts.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-accounts-are-managed">Where accounts are managed</a></li><li><a href="#the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with</a></li><li><a href="#create-an-account">Create an account</a></li><li><a href="#change-an-account">Change an account</a></li><li class="nested"><a href="#profile">Profile</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#password">Password</a></li><li class="nested"><a href="#sign-in-and-removal">Sign-in and removal</a></li><li><a href="#delete-an-account">Delete an account</a></li><li><a href="#create-and-change-groups">Create and change groups</a></li><li class="nested"><a href="#delete-a-group">Delete a group</a></li><li><a href="#what-new-accounts-start-with">What new accounts start with</a></li><li><a href="#let-a-second-person-administer">Let a second person administer</a></li><li><a href="#signing-in-and-why-it-fails">Signing in and why it fails</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

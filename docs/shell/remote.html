@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reaching other machines – EiN documentation</title>
+    <meta name="description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP. This page is for members of the group ssh and for the administrator who lets them in.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/remote.html">
+    <meta property="og:title" content="Reaching other machines – EiN documentation">
+    <meta property="og:description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP. This page is for members of the group ssh and for the administrator who lets them in.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/remote.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html" aria-current="page">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>Reaching other machines</h1>
+        </header>
+        <article class="prose">
+<p>From EiN&#39;s shell you can log in to another machine, run a command there, copy files in and out, and
+put your key on it, with <code>ssh</code>, <code>scp</code>, <code>ssh-copy-id</code> and <code>ssh-keygen</code>. An administrator can also
+mount a folder of another machine into the tree over SFTP. This page is for members of the group
+<code>ssh</code> and for the administrator who lets them in.</p>
+<p>Everything here goes out from EiN to another machine. To come in to EiN from your own computer, see
+<a href="ssh-sftp.html">SSH and SFTP</a>.</p>
+<h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
+<ul>
+<li><p><strong>Membership of the group <code>ssh</code></strong>, or the administrator account. <code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code>
+refuse everyone else:</p>
+<div class="code"><pre tabindex="0"><code>ssh: permission denied, you must be a member of group 'ssh'</code></pre></div>
+<p><code>ssh-keygen</code> works for everyone, since it only touches your own <code>~/.ssh</code>.</p>
+</li>
+<li><p><strong>An account on the other machine</strong>, and that machine running an SSH server.</p>
+</li>
+<li><p><strong>A network path from the machine EiN runs on.</strong> The connection starts there, not on the computer
+your browser runs on. A host you can reach from your laptop is not always one EiN can reach.</p>
+</li>
+</ul>
+<p>The commands work the way OpenSSH&#39;s do, and read and write the same files, but those files live in
+your home folder in EiN&#39;s tree (<code>/home/&lt;you&gt;/.ssh</code>), not on the machine EiN runs on. You can look at
+them with <code>ls -la ~/.ssh</code> and open them with <a href="editor.html"><code>edit</code></a>.</p>
+<h2 id="let-someone-use-ssh">Let someone use ssh<a class="anchor" href="#let-someone-use-ssh" aria-label="Link to this section"></a></h2>
+<p>The group <code>ssh</code> is made when EiN starts for the first time, with the title <strong>SSH users</strong>. It is
+empty until the administrator adds people.</p>
+<ol>
+<li>Open <strong>Settings → Groups</strong> and choose <strong>SSH users</strong>. The page says what the group is for: &quot;Its
+members may use ssh, scp and ssh-copy-id to reach other machines.&quot;</li>
+<li>Under <strong>Members</strong>, tick the people who may use them.</li>
+<li>Ask them to sign out and in again. As the section says, changes apply the next time each person
+signs in.</li>
+</ol>
+<p>The same from the terminal, as the administrator:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+group-add-member ssh helen</code></pre></div>
+<p>Take someone out again by unticking them, or with <code>group-remove-member ssh helen</code>.
+<a href="../admin/accounts.html">Accounts and groups</a> covers groups in general.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>A member of <code>ssh</code> can copy anything they may read in EiN to any machine they can log in to, and
+run commands on those machines from the machine EiN runs on. Add only people you would give that.</p>
+</aside>
+<h2 id="log-in-to-another-machine">Log in to another machine<a class="anchor" href="#log-in-to-another-machine" aria-label="Link to this section"></a></h2>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ssh anna@nas.local</code></pre></div>
+<p>The first time, <code>ssh</code> does not know the machine and asks:</p>
+<div class="code"><pre tabindex="0"><code>The authenticity of host 'nas.local' can't be established.
+ED25519 key fingerprint is SHA256:Xb7k2Qy9mWv0Tz4hJc1pLr8sNe5uGa3dFo6iKq2YwBM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre></div>
+<p>Compare the fingerprint with the one the other machine shows for its own key (on a Linux machine,
+<code>ssh-keygen -l -f /etc/ssh/ssh_host_ed25519_key.pub</code> there). Type <code>yes</code>, or paste the fingerprint,
+to go on; anything else is asked again, and <code>no</code> stops. The key is then written to
+<code>~/.ssh/known_hosts</code>:</p>
+<div class="code"><pre tabindex="0"><code>Warning: Permanently added 'nas.local' (ED25519) to the list of known hosts.</code></pre></div>
+<p>Next, <code>ssh</code> offers your keys. When none is accepted it asks for the password:</p>
+<div class="code"><pre tabindex="0"><code>anna@nas.local's password:</code></pre></div>
+<p>You are then in the other machine&#39;s shell, in the same terminal tab. Everything you type goes to it,
+<kbd>Ctrl</kbd>+<kbd>C</kbd> included, and full-screen programs such as <code>top</code> or an editor draw as
+they would anywhere. Resizing the panel resizes the remote terminal.</p>
+<p>To leave, type <code>exit</code> or press <kbd>Ctrl</kbd>+<kbd>D</kbd>. If the other side stops answering,
+type <kbd>~</kbd> and <kbd>.</kbd> at the start of a line (after <kbd>Enter</kbd>): that cuts the
+connection, and <code>ssh</code> prints <code>Connection to anna@nas.local closed.</code></p>
+<p>Who you log in as:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You type</th>
+<th>Remote user</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ssh anna@nas.local</code></td>
+<td><code>anna</code></td>
+</tr>
+<tr>
+<td><code>ssh -l anna nas.local</code></td>
+<td><code>anna</code></td>
+</tr>
+<tr>
+<td><code>ssh nas.local</code></td>
+<td>a <code>User</code> from <code>~/.ssh/config</code>, else your EiN username</td>
+</tr>
+</tbody></table>
+</div>
+<p>The port is 22 unless you give another with <code>-p</code>: <code>ssh -p 2222 backup.example.com</code>. A host followed
+by <code>:port</code> is not understood; use <code>-p</code>. An IPv6 address may be bracketed: <code>ssh anna@[fe80::1]</code>.</p>
+<h2 id="run-one-command-on-another-machine">Run one command on another machine<a class="anchor" href="#run-one-command-on-another-machine" aria-label="Link to this section"></a></h2>
+<p>Put the command after the host. Everything after the host goes to the other machine, flags included:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ssh nas.local <span class="hljs-string">&#x27;df -h&#x27;</span>
+ssh anna@nas.local <span class="hljs-built_in">ls</span> -la photos</code></pre></div>
+<p>The output comes back to your terminal, and <code>ssh</code> ends with the remote command&#39;s exit status, so it
+works in scripts and with <code>&amp;&amp;</code>. When the connection itself fails, the status is <code>255</code>.</p>
+<p>A single command runs without a terminal on the other side. Add <code>-t</code> for one that needs a terminal,
+such as <code>top</code>; <code>-tt</code> asks for one even when <code>ssh</code> itself runs without a terminal. <code>-T</code> never asks for
+one.</p>
+<p>Input is passed along, so pipes work in both directions:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> ~/notes.md | ssh anna@nas.local <span class="hljs-string">&#x27;cat &gt; notes-from-ein.md&#x27;</span>
+ssh anna@nas.local <span class="hljs-string">&#x27;cat photos/list.txt&#x27;</span> | <span class="hljs-built_in">wc</span> -l</code></pre></div>
+<p>A plain <code>ssh nas.local</code> without a terminal (in a script, or with input from a pipe) warns
+<code>Pseudo-terminal will not be allocated because stdin is not a terminal.</code> and runs the remote shell
+on your input. <code>-q</code> leaves out that warning and the <code>Connection to … closed.</code> line.</p>
+<h2 id="log-in-with-a-key-instead-of-a-password">Log in with a key instead of a password<a class="anchor" href="#log-in-with-a-key-instead-of-a-password" aria-label="Link to this section"></a></h2>
+<p>A key saves you typing the password, and is required for a <a href="#mount-a-folder-of-another-machine">mount</a>.</p>
+<ol>
+<li><p>Make a key pair:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ssh-keygen</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/helen/.ssh/id_ed25519
+Your public key has been saved in /home/helen/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:4fJq0Vw2nRb8tYc6LmZ1xKd9sPe3uHa7gTo5iNy2QwE helen@ein</code></pre></div>
+<p>A passphrase protects the private key; <code>ssh</code> and <code>scp</code> then ask for it when they use the key. Leave
+it empty for a key that scripts and mounts can use without anyone at the keyboard.</p>
+</li>
+<li><p>Put the public key on the other machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ssh-copy-id anna@nas.local</code></pre></div>
+<div class="code"><pre tabindex="0"><code>ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/home/helen/.ssh/id_ed25519.pub&quot;
+anna@nas.local's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh 'anna@nas.local'&quot;
+and check to make sure that only the key(s) you wanted were added.</code></pre></div>
+<p>It logs in once with the password, adds the key to <code>~/.ssh/authorized_keys</code> there (making the
+folder and file when they are missing), and adds nothing when the key is already in the file.</p>
+</li>
+<li><p>Run <code>ssh anna@nas.local</code>. It logs in without asking for the password.</p>
+</li>
+</ol>
+<p>When you do not name a key, <code>ssh</code> and <code>scp</code> offer every key they find of <code>~/.ssh/id_ed25519</code>,
+<code>~/.ssh/id_ecdsa</code> and <code>~/.ssh/id_rsa</code>, in that order; <code>ssh-copy-id</code> installs the first public key it
+finds of the same three. Name another with <code>-i</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>An RSA key, for an old server</td>
+<td><code>ssh-keygen -t rsa -b 4096 -C &quot;backup key&quot;</code></td>
+</tr>
+<tr>
+<td>A key in a file of its own</td>
+<td><code>ssh-keygen -f ~/.ssh/nas -N &#39;&#39;</code></td>
+</tr>
+<tr>
+<td>Show a key&#39;s fingerprint</td>
+<td><code>ssh-keygen -l -f ~/.ssh/id_ed25519.pub</code></td>
+</tr>
+<tr>
+<td>Print the public key of a private key file</td>
+<td><code>ssh-keygen -y -f ~/.ssh/nas</code></td>
+</tr>
+<tr>
+<td>Show what <code>ssh-copy-id</code> would add</td>
+<td><code>ssh-copy-id -n anna@nas.local</code></td>
+</tr>
+<tr>
+<td>Install a named key on another port</td>
+<td><code>ssh-copy-id -i ~/.ssh/nas.pub -p 2222 anna@backup.example.com</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Key types are <code>ed25519</code> (the default), <code>ecdsa</code> (256, 384 or 521 bits) and <code>rsa</code> (3072 bits unless
+you give at least 2048 with <code>-b</code>). The comment is <code>&lt;your username&gt;@ein</code> unless you give one with
+<code>-C</code>. A key named with <code>-f</code> goes into a folder that must exist already: plain <code>ssh-keygen</code>, or
+accepting a first host key, makes <code>~/.ssh</code> for you. When the file exists, <code>ssh-keygen</code> asks <code>Overwrite (y/n)?</code>; without a terminal it stops
+instead. See <a href="../reference/commands-core.html#ssh-keygen">ssh-keygen</a> and
+<a href="../reference/commands-core.html#ssh-copy-id">ssh-copy-id</a> for every option.</p>
+<h2 id="copy-files-in-and-out">Copy files in and out<a class="anchor" href="#copy-files-in-and-out" aria-label="Link to this section"></a></h2>
+<p><code>scp</code> copies between EiN&#39;s tree and one other machine. A path is remote when it has <code>host:</code> before
+any <code>/</code>, as in OpenSSH: <code>anna@nas.local:photos/1968</code>. A remote path without a leading <code>/</code> starts in
+the remote user&#39;s home folder; <code>anna@nas.local:</code> alone is that home folder.</p>
+<p>Copy in from another machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+scp anna@nas.local:photos/sailboat.jpg /home/helen/staging/files/inbox/
+scp -r anna@nas.local:photos/1968 /home/helen/staging/files/inbox/
+scp <span class="hljs-string">&quot;anna@nas.local:photos/*.jpg&quot;</span> /home/helen/staging/files/inbox/</code></pre></div>
+<p>Quote a remote pattern so EiN&#39;s shell leaves it alone; the other machine&#39;s files are matched against
+it (<code>*</code>, <code>?</code> and <code>[…]</code>, and a name starting with a dot only by a pattern that starts with one). When
+nothing matches, <code>scp</code> says <code>No match</code>.</p>
+<p>A file copied in is recorded the way an upload is: its size, checksum and type are worked out, and
+EiN&#39;s processing takes it in from there. Copying into your staging folder is a way to bring a
+machine&#39;s photos into the archive: see <a href="../guide/staging.html">Sorting in staging</a>.</p>
+<p>Copy out to another machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+scp -r /archive/albums/christmas-2019 anna@nas.local:backup/</code></pre></div>
+<p>Copying a folder out carries its files and folders only. What EiN keeps beside a photo (its
+thumbnails, the metadata read from it, its links to people and places) stays behind.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-r</code></td>
+<td>Copy folders and everything in them. Without it a folder is refused with <code>not a regular file</code>.</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Keep modes and modification times.</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>No progress meter. The meter shows only in a terminal.</td>
+</tr>
+<tr>
+<td><code>-B</code></td>
+<td>Never ask for a password or passphrase.</td>
+</tr>
+<tr>
+<td><code>-P</code></td>
+<td>The port (capital P, unlike <code>ssh</code>).</td>
+</tr>
+<tr>
+<td><code>-i</code>, <code>-F</code>, <code>-o</code></td>
+<td>A key, a config file, an option: as for <code>ssh</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>scp</code> ends with <code>0</code> when every file was copied and <code>1</code> when any failed; each failure is printed with
+the path. It does not copy between two remote machines (<code>copying between two remote hosts is not supported; copy into EiN first</code>), nor between two EiN paths (use <code>cp</code>). All remote sources in one
+command must be on the same machine. See <a href="../reference/commands-core.html#scp">scp</a>.</p>
+<h2 id="keep-settings-per-machine-in-sshconfig">Keep settings per machine in ~/.ssh/config<a class="anchor" href="#keep-settings-per-machine-in-sshconfig" aria-label="Link to this section"></a></h2>
+<p>Settings you would otherwise type every time go in <code>~/.ssh/config</code>, in OpenSSH&#39;s format:</p>
+<div class="code"><pre tabindex="0"><code># ~/.ssh/config in your EiN home
+Host nas
+    HostName 192.168.1.20
+    User anna
+    IdentityFile ~/.ssh/nas
+
+Host backup
+    HostName backup.example.com
+    Port 2222
+    StrictHostKeyChecking accept-new</code></pre></div>
+<p>Then <code>ssh nas</code>, <code>scp -r nas:photos/1968 .</code> and <code>ssh-copy-id nas</code> use them. Open the file with
+<code>edit ~/.ssh/config</code>.</p>
+<p>EiN acts on these keywords, from the file or from <code>-o Keyword=value</code> on the command line:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>What it sets</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HostName</code></td>
+<td>The machine to reach, when the name you type is an alias.</td>
+</tr>
+<tr>
+<td><code>Port</code></td>
+<td>The port.</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>The remote user.</td>
+</tr>
+<tr>
+<td><code>IdentityFile</code></td>
+<td>The key to use. <code>~/</code> is your EiN home.</td>
+</tr>
+<tr>
+<td><code>StrictHostKeyChecking</code></td>
+<td>What to do about an unknown host key: see the next section.</td>
+</tr>
+<tr>
+<td><code>BatchMode</code></td>
+<td><code>yes</code>: never ask for anything.</td>
+</tr>
+<tr>
+<td><code>ConnectTimeout</code></td>
+<td>Seconds to connect and log in (15 unless set).</td>
+</tr>
+<tr>
+<td><code>ServerAliveInterval</code></td>
+<td>Seconds between keepalives (none unless set).</td>
+</tr>
+<tr>
+<td><code>PasswordAuthentication</code></td>
+<td><code>no</code>: do not fall back to a password.</td>
+</tr>
+</tbody></table>
+</div>
+<p>As in OpenSSH, the first value found for a keyword wins, so put the specific <code>Host</code> blocks before a
+<code>Host *</code> block. <code>Match</code> with <code>all</code>, <code>host</code>, <code>originalhost</code>, <code>user</code> and <code>localuser</code> works, and so does
+<code>Include</code>. Other keywords in the file are skipped without a word; on the command line, <code>-o</code> with a
+keyword not in the table stops with <code>unsupported option</code>. <code>-F &lt;file&gt;</code> reads another file instead,
+and <code>-F none</code> reads none.</p>
+<h2 id="host-keys">Host keys<a class="anchor" href="#host-keys" aria-label="Link to this section"></a></h2>
+<p><code>~/.ssh/known_hosts</code> holds the key of each machine you have accepted, filed under its name, or under
+<code>[name]:port</code> for a port other than 22. Each EiN account has its own.</p>
+<p>What happens with a machine whose key is not in the file is up to <code>StrictHostKeyChecking</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Unknown host</th>
+<th>Changed key</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ask</code> (default)</td>
+<td>Asks you; refuses when there is no terminal</td>
+<td>Refuses</td>
+</tr>
+<tr>
+<td><code>yes</code></td>
+<td>Refuses</td>
+<td>Refuses</td>
+</tr>
+<tr>
+<td><code>accept-new</code></td>
+<td>Adds the key without asking</td>
+<td>Refuses</td>
+</tr>
+<tr>
+<td><code>no</code></td>
+<td>Adds the key without asking</td>
+<td>Warns, then connects</td>
+</tr>
+</tbody></table>
+</div>
+<p>In a script, <code>-o StrictHostKeyChecking=accept-new</code> saves the first question while still catching a
+key that changes later.</p>
+<p>When a machine&#39;s key has changed, <code>ssh</code> stops with a warning that starts
+<code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code>, prints the new fingerprint and the line numbers
+of the old entry, and ends with <code>Host key verification failed.</code> Either someone is between you and
+the machine, or the machine was reinstalled and has a new key. When you know it is the second, forget
+the old key and connect again to accept the new one:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ssh-keygen -R nas.local
+ssh-keygen -R <span class="hljs-string">&#x27;[backup.example.com]:2222&#x27;</span></code></pre></div>
+<p><code>known_hosts</code> lines written by OpenSSH work as they are, hashed names and <code>@revoked</code> included.
+<code>@cert-authority</code> lines are skipped: EiN does not check host certificates.</p>
+<h2 id="mount-a-folder-of-another-machine">Mount a folder of another machine<a class="anchor" href="#mount-a-folder-of-another-machine" aria-label="Link to this section"></a></h2>
+<p>The administrator can mount a folder of another machine into the tree over SFTP. Its files then show
+under the mount point and stay on the other machine.</p>
+<ol>
+<li><p>As the administrator, make a key without a passphrase and put it on the other machine. A mount
+logs in with a key only, since it reconnects on its own when nobody is there to type a password.
+If <code>~/.ssh</code> does not exist yet, run <code>ssh-keygen</code> once without <code>-f</code> first, or <code>mkdir ~/.ssh</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+ssh-keygen -f ~/.ssh/nas -N <span class="hljs-string">&#x27;&#x27;</span>
+ssh-copy-id -i ~/.ssh/nas.pub anna@nas.local</code></pre></div>
+</li>
+<li><p>Mount the folder:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mount --save /mnt/nas sftp <span class="hljs-string">&quot;host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas&quot;</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>mounted sftp at '/mnt/nas' (saved in /etc/fstab)</code></pre></div>
+<p>The first mount from a terminal asks about an unknown host key as <code>ssh</code> does. <code>--save</code> writes the
+mount to <code>/etc/fstab</code>, so it is made again every time EiN starts.</p>
+</li>
+<li><p>Run <code>ls /mnt/nas</code> to see the files, and <code>mount</code> alone to list every mount.</p>
+</li>
+</ol>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>host</code></td>
+<td>The machine. Required.</td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>The port; 22 unless set.</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The remote user; the administrator&#39;s EiN username unless set.</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>The remote folder to mount. A relative one starts in the remote user&#39;s home.</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>The key file in EiN&#39;s tree. Without it, the default keys in <code>~/.ssh</code> are tried.</td>
+</tr>
+<tr>
+<td><code>hostkey</code></td>
+<td>The host key&#39;s fingerprint (<code>SHA256:…</code>) to accept, instead of <code>known_hosts</code>.</td>
+</tr>
+<tr>
+<td><code>uid</code>, <code>gid</code></td>
+<td>The EiN user and group that own every file in the mount; the administrator&#39;s unless set.</td>
+</tr>
+<tr>
+<td><code>readonly</code></td>
+<td>Nothing in the mount can be changed from EiN.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Options are <code>key=value</code> pairs separated by commas; values cannot hold a comma or <code>=</code>.</p>
+<p>How a mount behaves:</p>
+<ul>
+<li><strong>Ownership comes from the mount, permissions from the other machine.</strong> Every file belongs to the
+mount&#39;s <code>uid</code> and <code>gid</code>, whoever owns it there; the permission bits are the other machine&#39;s. To let
+a group read the files, give the mount that <code>gid</code> and make the files group-readable there.</li>
+<li><strong>Nothing is processed.</strong> The mount is a mirror: EiN makes no thumbnails, reads no dates and finds
+no faces in it. To bring photos into the archive, copy them into
+staging.</li>
+<li><strong>It reconnects on its own.</strong> When the other machine goes away, commands on the mount fail with
+the reason and the time of the next attempt (<code>next attempt in 8s</code>); the wait grows to at most a
+minute between attempts.</li>
+<li><strong>At start-up it does not wait.</strong> EiN mounts the saved entries without waiting for the other
+machine, and connects once it answers. It asks nobody about host keys then, so a host must already
+be in <code>known_hosts</code> or be pinned with <code>hostkey=</code>. Pinning the fingerprint is the safer choice for a
+saved mount.</li>
+</ul>
+<p>To take a mount away, and out of <code>/etc/fstab</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+unmount --save /mnt/nas</code></pre></div>
+<p><code>mount -a</code> makes every <code>/etc/fstab</code> entry that is not mounted yet. Only the administrator can mount
+and unmount; everyone can list mounts with <code>mount</code>. See
+<a href="../reference/commands-core.html#mount">mount</a> and <a href="../reference/commands-core.html#unmount">unmount</a>.</p>
+<h2 id="what-is-not-there">What is not there<a class="anchor" href="#what-is-not-there" aria-label="Link to this section"></a></h2>
+<p>The commands cover logging in, running commands, copying and keys. There is no port forwarding
+(<code>-L</code>, <code>-R</code>, <code>-D</code>), no agent and no agent forwarding, no jump hosts, and no <code>sftp</code> or <code>rsync</code>
+command; use <code>scp</code>, or a mount. <code>ssh</code> refuses flags it does not have with <code>unknown option</code>.</p>
+<h2 id="when-something-goes-wrong">When something goes wrong<a class="anchor" href="#when-something-goes-wrong" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What it means and what to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>permission denied, you must be a member of group &#39;ssh&#39;</code></td>
+<td>Ask the administrator to add you to <strong>SSH users</strong>, then sign out and in.</td>
+</tr>
+<tr>
+<td><code>Could not resolve hostname nas.local: Name or service not known</code></td>
+<td>The machine EiN runs on does not know that name. Names ending in <code>.local</code> may not resolve where EiN runs; use the IP address, or set it as <code>HostName</code> in <code>~/.ssh/config</code>.</td>
+</tr>
+<tr>
+<td><code>connect to host nas.local port 22: Connection refused</code></td>
+<td>Nothing listens on that port: the SSH server is off, or on another port (<code>-p</code>).</td>
+</tr>
+<tr>
+<td><code>connect to host nas.local port 22: Connection timed out</code></td>
+<td>No answer within 15 seconds: the machine is off, or a firewall is between it and EiN.</td>
+</tr>
+<tr>
+<td><code>anna@nas.local: Permission denied.</code></td>
+<td>The keys were refused and the password was wrong or not asked for. In a script there is nobody to ask, so only keys are tried: install one with <code>ssh-copy-id</code>.</td>
+</tr>
+<tr>
+<td><code>No ED25519 host key is known for nas.local.</code> … <code>Connect once from an interactive shell to accept it.</code></td>
+<td>The host is unknown and there was nobody to ask (a script, <code>BatchMode</code>, or <code>StrictHostKeyChecking yes</code>). Connect once from the terminal, or use <code>-o StrictHostKeyChecking=accept-new</code>.</td>
+</tr>
+<tr>
+<td><code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></td>
+<td>See <a href="#host-keys">Host keys</a>.</td>
+</tr>
+<tr>
+<td><code>Warning: Identity file /home/helen/.ssh/nas not accessible: No such file or directory.</code></td>
+<td>The key named with <code>-i</code> or <code>IdentityFile</code> is not there. Check the path with <code>ls ~/.ssh</code>.</td>
+</tr>
+<tr>
+<td><code>Load key &quot;/home/helen/.ssh/id_rsa&quot;: encrypted, and no one to ask for its passphrase</code></td>
+<td>A key with a passphrase, used where nobody can type it. Use a key without a passphrase for scripts and mounts.</td>
+</tr>
+<tr>
+<td><code>ssh-copy-id: no public key found in ~/.ssh; make one with ssh-keygen</code></td>
+<td>Run <code>ssh-keygen</code> first.</td>
+</tr>
+<tr>
+<td><code>ssh-copy-id: WARNING: All keys were skipped because they already exist on the remote system.</code></td>
+<td>Nothing to do: the key is installed. <code>-f</code> adds it again.</td>
+</tr>
+<tr>
+<td><code>mount: permission denied, only admin is allowed to mount</code></td>
+<td>Mounting is for the administrator.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="ssh-sftp.html">SSH and SFTP</a>: reaching EiN from your own computer.</li>
+<li><a href="terminal.html">The terminal</a>: where these commands run.</li>
+<li><a href="commands.html">Commands by task</a>: the other commands, grouped by what they do.</li>
+<li><a href="../admin/accounts.html">Accounts and groups</a>: groups and how membership works.</li>
+<li><a href="../admin/network.html">Ports, HTTPS and remote access</a>: the network around the machine EiN runs on.</li>
+<li><a href="../concepts/files.html">Files and storage</a>: where file contents are kept.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="ssh-sftp.html" rel="prev"><span>Previous</span>SSH and SFTP</a><a class="next" href="../admin/install.html" rel="next"><span>Next</span>Installing in detail</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/remote.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-you-need">What you need</a></li><li><a href="#let-someone-use-ssh">Let someone use ssh</a></li><li><a href="#log-in-to-another-machine">Log in to another machine</a></li><li><a href="#run-one-command-on-another-machine">Run one command on another machine</a></li><li><a href="#log-in-with-a-key-instead-of-a-password">Log in with a key instead of a password</a></li><li><a href="#copy-files-in-and-out">Copy files in and out</a></li><li><a href="#keep-settings-per-machine-in-sshconfig">Keep settings per machine in ~/.ssh/config</a></li><li><a href="#host-keys">Host keys</a></li><li><a href="#mount-a-folder-of-another-machine">Mount a folder of another machine</a></li><li><a href="#what-is-not-there">What is not there</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

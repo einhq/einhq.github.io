@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Finding your way around – EiN documentation</title>
+    <meta name="description" content="This page shows the parts of EiN's web interface and what each one does: the top bar, the sidebar, the headers of pages, and the dialogs and side panel that pages open in. It also covers signing in and out. It is for everyone who uses EiN in a browser.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/interface.html">
+    <meta property="og:title" content="Finding your way around – EiN documentation">
+    <meta property="og:description" content="This page shows the parts of EiN's web interface and what each one does: the top bar, the sidebar, the headers of pages, and the dialogs and side panel that pages open in. It also covers signing in and out. It is for everyone who uses EiN in a browser.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/interface.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html" aria-current="page">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Home, memories and statistics</a></li><li><a href="assistant.html">Chatting with the assistant</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Using EiN</p>
+          <h1>Finding your way around</h1>
+        </header>
+        <article class="prose">
+<p>This page shows the parts of EiN&#39;s web interface and what each one does: the top bar, the sidebar,
+the headers of pages, and the dialogs and side panel that pages open in. It also covers signing in
+and out. It is for everyone who uses EiN in a browser.</p>
+<h2 id="sign-in">Sign in<a class="anchor" href="#sign-in" aria-label="Link to this section"></a></h2>
+<p>Open the address your administrator gave you, for example <code>http://ein.local:8080</code>, in a current
+browser. EiN shows its sign-in page.</p>
+<figure class="shot"><a href="../../assets/shots/login@2x.webp"><img src="../../assets/shots/login.webp" srcset="../../assets/shots/login.webp 1x, ../../assets/shots/login@2x.webp 2x" alt="The sign-in page: the EiN mark, the Username or e-mail and Password fields, the Sign in button and Browse without signing in" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The sign-in page. Browse without signing in is there only where the administrator lets visitors browse.</figcaption></figure>
+<ol>
+<li>In <strong>Username or e-mail</strong>, type your username, or the e-mail address of your account.</li>
+<li>In <strong>Password</strong>, type your password. The eye at the right of the field shows what you typed.</li>
+<li>Choose <strong>Sign in</strong>, or press <kbd>Enter</kbd>.</li>
+</ol>
+<p>EiN loads afresh and opens <strong>Home</strong>. If you followed a link to a particular page while signed out,
+you land on the sign-in page first and go on to that page once you are in.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>A fresh installation has one account, <code>admin</code>, whose password the installer prints once.
+<a href="../start/install.html">Install EiN</a> and <a href="../start/first-steps.html">First steps</a> take it from there.</p>
+</aside>
+<h3 id="if-you-cannot-sign-in">If you cannot sign in<a class="anchor" href="#if-you-cannot-sign-in" aria-label="Link to this section"></a></h3>
+<p>The sign-in page says what went wrong in a red box above the fields:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Username or e-mail is required</code></td>
+<td>The first field is empty.</td>
+<td>Fill it in.</td>
+</tr>
+<tr>
+<td><code>login: authentication failed</code></td>
+<td>The username or e-mail, or the password, is wrong. EiN does not say which, so that nobody can find out which accounts exist.</td>
+<td>Check both and try again. If you have forgotten your password, ask an administrator to set another one.</td>
+</tr>
+<tr>
+<td><code>login: account disabled</code></td>
+<td>Your password is right, but an administrator has turned off sign-in for your account.</td>
+<td>Ask an administrator.</td>
+</tr>
+<tr>
+<td><code>login: password reset required</code></td>
+<td>Your password is right, but your account is waiting for an administrator to set a password.</td>
+<td>Ask an administrator to set one.</td>
+</tr>
+<tr>
+<td><code>login: too many failed sign-ins; try again in N s</code></td>
+<td>There have been too many wrong passwords from your network address.</td>
+<td>Wait the number of seconds it gives, then try again.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A wrong password takes about a second to be answered. After five failed sign-ins from one network
+address, EiN makes that address wait before it checks another password: one second at first,
+doubling with each further failure, up to 15 minutes. After five failures on one account, each
+attempt on that account is slowed by up to 10 seconds, but the account is never locked, so someone
+guessing at your password cannot lock you out. Failures are forgotten an hour after the last one.
+Administrators find the rest in <a href="../admin/accounts.html">Accounts and groups</a>.</p>
+<h2 id="browse-without-signing-in">Browse without signing in<a class="anchor" href="#browse-without-signing-in" aria-label="Link to this section"></a></h2>
+<p>An administrator can let people look around without an account, with <strong>Visitors may browse</strong> under
+<strong>Settings → Permissions</strong> (the setting
+<a href="../reference/settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>). It is off by default, and
+then anyone who has not signed in is sent to the sign-in page.</p>
+<p>Where it is on, opening EiN takes you straight to <strong>Home</strong>, and the sign-in page offers <strong>Browse
+without signing in</strong>. As a visitor:</p>
+<ul>
+<li>you see only what has been shared with visitors, and you cannot change anything;</li>
+<li>the top bar has a <strong>Sign in</strong> button where the terminal button and your picture would be, and no
+<strong>Create</strong> menu;</li>
+<li>the sidebar leaves out <strong>Staging</strong> and <strong>Settings</strong>;</li>
+<li>a page that belongs to an account, such as <strong>Profile</strong>, <strong>Trash</strong>, <strong>Favourites</strong>, <strong>About EiN</strong>
+or a form that creates something, sends you to sign in, and back to that page afterwards.</li>
+</ul>
+<p>Someone can also send you a share link, an address with <code>/s/</code> in it. It opens what was shared
+without an account, even where visitors may not browse. There, you see only the pages of what the
+link opens: no sidebar and no search box, and the EiN mark leads back to what was shared.
+<a href="sharing.html">Sharing</a> covers share links, including the page that says <strong>This link no longer
+works</strong>.</p>
+<h2 id="sign-out">Sign out<a class="anchor" href="#sign-out" aria-label="Link to this section"></a></h2>
+<p>Choose your picture at the right end of the top bar, then <strong>Logout</strong>. EiN signs this browser out,
+ends your terminal sessions and shows the sign-in page.</p>
+<p>Your sign-in also ends by itself. By default a browser stays signed in for 1 day after its last
+visit, and a session unused for 12 hours ends; an administrator can change both under <strong>Settings →
+Permissions</strong>. When your sign-in ends, or an administrator disables your account, the page reloads
+and shows the sign-in page.</p>
+<h2 id="the-parts-of-the-screen">The parts of the screen<a class="anchor" href="#the-parts-of-the-screen" aria-label="Link to this section"></a></h2>
+<p>Every page sits in the same frame: the top bar across the top, the sidebar down the left, the page
+itself in the middle, and the side drawer at the right when something is open in it.</p>
+
+<figure class="shot"><a href="../../assets/shots/home@2x.webp"><img src="../../assets/shots/home.webp" srcset="../../assets/shots/home.webp 1x, ../../assets/shots/home@2x.webp 2x" alt="The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Home, signed in as the administrator, with the archive and assistant modules installed.</figcaption></figure>
+<p>What you see depends on the modules installed on your EiN. EiN itself gives the frame, Home,
+Search, Settings, Statistics, Documentation and the administrator&#39;s pages. The archive module adds
+the pages for photos, albums, people and places, and the assistant adds the chat. This page
+describes EiN with both installed; on yours, some entries may be missing.</p>
+<p>The browser tab is titled with the page&#39;s name followed by <code>· EiN</code>, for example <code>Albums · EiN</code>;
+on Home it says <code>EiN</code> alone. The interface is in English and always dark: there is no light theme
+and no other language.</p>
+<h2 id="the-top-bar">The top bar<a class="anchor" href="#the-top-bar" aria-label="Link to this section"></a></h2>
+<p>From left to right:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The EiN mark and name</td>
+<td>Go to <strong>Home</strong>. On a phone the mark opens and closes the menu instead.</td>
+</tr>
+<tr>
+<td>The search box, <strong>Search for anything</strong></td>
+<td>Finds pages, albums, people and places as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. <a href="search.html">Search and the finder</a> explains it.</td>
+</tr>
+<tr>
+<td><strong>Random album</strong> (two crossing arrows)</td>
+<td>Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the archive.</td>
+</tr>
+<tr>
+<td><strong>Disconnected</strong> (with a red dot)</td>
+<td>Shown only while the connection to EiN is lost. EiN tries again every 2 seconds by itself.</td>
+</tr>
+<tr>
+<td><strong>Uploads</strong></td>
+<td>Appears once you upload something. While files are going up it is a ring, with &quot;Uploading N of M&quot; in its tooltip; choose it for the files, <strong>Cancel</strong>, <strong>Retry failed</strong> and <strong>Clear</strong>. See <a href="importing.html">Getting your photos in</a>.</td>
+</tr>
+<tr>
+<td><strong>Chat</strong> (a speech bubble)</td>
+<td>Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see <a href="assistant.html">Chatting with the assistant</a>.</td>
+</tr>
+<tr>
+<td><strong>Create</strong> (a plus)</td>
+<td>The <strong>Create New</strong> menu, below. Signed in only.</td>
+</tr>
+<tr>
+<td><strong>Toggle Terminal (Alt+T)</strong></td>
+<td>Opens and closes the terminal, which drops down over the page. Signed in only, and not on a phone. See <a href="../shell/terminal.html">The terminal</a>.</td>
+</tr>
+<tr>
+<td>Your picture</td>
+<td>The account menu, below. Its tooltip is your name.</td>
+</tr>
+<tr>
+<td><strong>Sign in</strong></td>
+<td>For visitors only, in place of the terminal button and your picture.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A button that opens a page in the side drawer is lit while the drawer shows it, and it is left out
+on that page itself: on the <strong>Chat</strong> page there is no chat button.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Uploads run in the open browser tab. Closing or reloading the tab while files are still going up
+stops them, and EiN does not warn you first.</p>
+</aside>
+<h3 id="the-create-menu">The Create menu<a class="anchor" href="#the-create-menu" aria-label="Link to this section"></a></h3>
+<p>Choose the plus to make something. Each row opens a form in a dialog over the page you are on.</p>
+<figure class="shot"><a href="../../assets/shots/create-menu@2x.webp"><img src="../../assets/shots/create-menu.webp" srcset="../../assets/shots/create-menu.webp 1x, ../../assets/shots/create-menu@2x.webp 2x" alt="The Create New menu open under the plus: Import media, Album, Person, Location and Device" width="600" height="400" loading="lazy" decoding="async"></a><figcaption>The Create menu&#39;s rows come from the modules; these are the archive&#39;s.</figcaption></figure>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Opens</th>
+<th>More</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Import media</strong></td>
+<td><strong>Import media</strong>: choose a category in staging and the files or folders to bring in.</td>
+<td><a href="importing.html">Getting your photos in</a></td>
+</tr>
+<tr>
+<td><strong>Album</strong></td>
+<td><strong>Create Album</strong></td>
+<td><a href="albums.html">Albums</a></td>
+</tr>
+<tr>
+<td><strong>Person</strong></td>
+<td><strong>Create Person</strong></td>
+<td><a href="people.html">People and faces</a></td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td><strong>Create Location</strong></td>
+<td><a href="places.html">Locations and the map</a></td>
+</tr>
+<tr>
+<td><strong>Device</strong></td>
+<td><strong>Register Device</strong></td>
+<td><a href="devices.html">Devices and GPS tracks</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
+plus in the top bar.</p>
+<h3 id="the-account-menu">The account menu<a class="anchor" href="#the-account-menu" aria-label="Link to this section"></a></h3>
+<p>Choose your picture at the right end of the top bar. The menu is headed <strong>Account</strong>.</p>
+<figure class="shot"><a href="../../assets/shots/account-menu@2x.webp"><img src="../../assets/shots/account-menu.webp" srcset="../../assets/shots/account-menu.webp 1x, ../../assets/shots/account-menu@2x.webp 2x" alt="The account menu open under the picture: Favourites, Profile, Trash, Shortcuts with the ? key, About EiN and Logout" width="500" height="440" loading="lazy" decoding="async"></a><figcaption>The account menu holds your own pages and signing out.</figcaption></figure>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Shown</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Me</strong></td>
+<td>When your account is linked to a person in the archive</td>
+<td>Opens that person&#39;s page.</td>
+</tr>
+<tr>
+<td><strong>Favourites</strong></td>
+<td>With the archive</td>
+<td>The pictures you have marked with a heart.</td>
+</tr>
+<tr>
+<td><strong>Profile</strong></td>
+<td>Always</td>
+<td>Your name, description, preferences and password.</td>
+</tr>
+<tr>
+<td><strong>Trash</strong></td>
+<td>Always</td>
+<td>What you have deleted, to restore or remove for good.</td>
+</tr>
+<tr>
+<td><strong>Shortcuts</strong> <kbd>?</kbd></td>
+<td>Always</td>
+<td>Opens the list of keyboard shortcuts.</td>
+</tr>
+<tr>
+<td><strong>About EiN</strong></td>
+<td>Always</td>
+<td>A dialog with EiN&#39;s version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on.</td>
+</tr>
+<tr>
+<td><strong>Administer…</strong></td>
+<td>For members of the <code>sudo</code> group, outside admin mode</td>
+<td>Admin mode, below.</td>
+</tr>
+<tr>
+<td><strong>Leave admin mode</strong></td>
+<td>In admin mode</td>
+<td>Back to your own rights.</td>
+</tr>
+<tr>
+<td><strong>Logout</strong></td>
+<td>Always</td>
+<td>Signs you out.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="profile.html">Your profile, favourites and trash</a> covers <strong>Me</strong>, <strong>Favourites</strong>, <strong>Profile</strong> and
+<strong>Trash</strong>.</p>
+<p>Your picture is the cover photo of the person your account is linked to. Without a linked person it
+shows the first letters of your username, as an image drawn by the outside service
+<code>ui-avatars.com</code>; without a connection to the internet, the first letter of your name shows
+instead.</p>
+<h3 id="admin-mode">Admin mode<a class="anchor" href="#admin-mode" aria-label="Link to this section"></a></h3>
+<p>A member of the <code>sudo</code> group can act as the administrator for a while, the way <code>sudo</code> works on
+other systems, without signing in as <code>admin</code>:</p>
+<ol>
+<li>Choose your picture, then <strong>Administer…</strong>.</li>
+<li>In the <strong>Administer</strong> dialog, &quot;Enter your password again to act as the administrator until you
+sign out or leave admin mode.&quot;, type your own password in <strong>Password</strong>.</li>
+<li>Choose <strong>Administer</strong>.</li>
+</ol>
+<p>The page reloads with the administrator&#39;s rights. While they last, your picture has an orange ring
+and a small orange shield at its lower left, and its tooltip ends in &quot;(administrator)&quot;. A wrong
+password shows &quot;That is not your password.&quot;</p>
+<p>Choose <strong>Leave admin mode</strong> in the same menu to go back to your own rights; signing out ends admin
+mode as well. <a href="../admin/accounts.html">Accounts and groups</a> explains who is in <code>sudo</code> and the <code>admin</code>
+command that does the same in the terminal.</p>
+<h2 id="the-sidebar">The sidebar<a class="anchor" href="#the-sidebar" aria-label="Link to this section"></a></h2>
+<p>The sidebar lists the pages, in four sections. The first has no heading.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Entry</th>
+<th>Opens</th>
+<th>Shown to</th>
+<th>Added by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>Home</strong></td>
+<td>On this day, News and Events: <a href="home.html">Home, memories and statistics</a></td>
+<td>everyone</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Chat</strong></td>
+<td>Conversations with the assistant: <a href="assistant.html">Chatting with the assistant</a></td>
+<td>everyone</td>
+<td>assistant</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Media</strong></td>
+<td>Every photo, video, recording and document: <a href="media.html">Media, Year and labels</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Staging</strong></td>
+<td>Your uploads waiting to be sorted: <a href="staging.html">Sorting in staging</a></td>
+<td>signed in</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Explore</td>
+<td><strong>Search</strong></td>
+<td>Albums, people, locations, devices and tracks by name: <a href="search.html">Search and the finder</a></td>
+<td>everyone</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td>Explore</td>
+<td><strong>Year</strong></td>
+<td>One year&#39;s pictures: <a href="media.html">Media, Year and labels</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Explore</td>
+<td><strong>Map</strong></td>
+<td>Pictures and tracks on a map: <a href="places.html">Locations and the map</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Browse</td>
+<td><strong>Albums</strong></td>
+<td><a href="albums.html">Albums</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Browse</td>
+<td><strong>People</strong></td>
+<td><a href="people.html">People and faces</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Browse</td>
+<td><strong>Locations</strong></td>
+<td><a href="places.html">Locations and the map</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>Browse</td>
+<td><strong>Devices</strong></td>
+<td>Cameras, phones, scanners and trackers: <a href="devices.html">Devices and GPS tracks</a></td>
+<td>everyone</td>
+<td>archive</td>
+</tr>
+<tr>
+<td>System</td>
+<td><strong>Nodes</strong></td>
+<td>A file manager over the whole <a href="../concepts/tree.html">tree</a></td>
+<td>administrators</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td>System</td>
+<td><strong>Dashboard</strong></td>
+<td>How EiN is doing: <a href="../admin/monitoring.html">Health and the dashboard</a></td>
+<td>administrators</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td>System</td>
+<td><strong>Settings</strong></td>
+<td>How this installation is set up: <a href="../admin/configuration.html">Configuration</a></td>
+<td>signed in</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td>System</td>
+<td><strong>Statistics</strong></td>
+<td>How the archive has grown: <a href="home.html">Home, memories and statistics</a></td>
+<td>everyone</td>
+<td>EiN</td>
+</tr>
+<tr>
+<td>System</td>
+<td><strong>Documentation</strong></td>
+<td>EiN&#39;s own guide, and the commands, settings and modules installed on your EiN</td>
+<td>everyone</td>
+<td>EiN</td>
+</tr>
+</tbody></table>
+</div>
+<p>&quot;Administrators&quot; means the <code>admin</code> account, or someone in admin mode. For anyone else <strong>Settings</strong>
+opens on its <strong>Modules</strong> tab, the only one they get. A section left with no entries is not shown.</p>
+<ul>
+<li><strong>Where you are.</strong> The entry of the page you are on is lit, with a bar in the accent colour at
+its left.</li>
+<li><strong>Fold a section.</strong> Click its heading (<strong>Explore</strong>, <strong>Browse</strong> or <strong>System</strong>) to fold it away, and
+again to unfold it. A folded section still shows the entry of the page you are on. This browser
+remembers which sections you folded.</li>
+<li><strong>Collapse to icons.</strong> The button at the foot of the sidebar, <strong>Collapse to icons</strong>, narrows it to
+a column of icons; hold the pointer over an icon to see its name. The same button, then called
+<strong>Show labels</strong>, brings the names back. This browser remembers the choice.</li>
+</ul>
+<p>You and your administrator can rename, reorder, hide and add entries: see
+<a href="customizing.html">Your sidebar and top bar</a>. On a phone the sidebar is out of sight until you
+choose the EiN mark or swipe right: see <a href="phone.html">EiN on a phone</a>.</p>
+<h2 id="page-headers">Page headers<a class="anchor" href="#page-headers" aria-label="Link to this section"></a></h2>
+<p>Most pages open with a header: a band in EiN&#39;s coloured pattern with the page&#39;s title, a line
+under it, and often counts.</p>
+<ul>
+<li><strong>Actions</strong> stand at the header&#39;s right: <strong>Upload</strong>, <strong>Share</strong> and <strong>Edit</strong> as buttons, in that
+order, on the pages that offer them, then <kbd>⋮</kbd> (<strong>More actions</strong>) with the page&#39;s other
+actions and <strong>Move to trash</strong> last. Where the header is narrow the buttons fold into
+<kbd>⋮</kbd> too. Actions that change something are offered only on what you may change.</li>
+<li><strong>Tabs</strong> sit along the header&#39;s foot, such as <strong>Media</strong>, <strong>Map</strong> and <strong>Info</strong> on an album. The
+chosen tab is part of the page&#39;s address (<code>?tab=</code>), so a link can open a given tab; see
+<a href="../reference/routes.html">Addresses in the web interface</a>.</li>
+<li><strong>Scrolled down</strong>, the header&#39;s last row, its tabs or filters, stays in view under the top bar,
+with <kbd>⋮</kbd> holding every action of the page. On a wide screen the page&#39;s name appears at
+that row&#39;s left.</li>
+</ul>
+<p>Pages that are tools rather than things to look at, such as <strong>Nodes</strong>, <strong>Trash</strong> and <strong>Chat</strong>, have
+a header one line high instead, with the title at the left and the page&#39;s controls at the right.
+The <strong>Map</strong> page has no header; the map fills the page.</p>
+<p><strong>Move to trash</strong> puts the thing in your trash and leaves its page. A message at the foot of the
+screen says it was moved, with <strong>Undo</strong> to put it back.</p>
+<h2 id="pages-dialogs-the-side-drawer-and-full-screen">Pages, dialogs, the side drawer and full screen<a class="anchor" href="#pages-dialogs-the-side-drawer-and-full-screen" aria-label="Link to this section"></a></h2>
+<p>The same page can open in four ways. Which one you get depends on where you open it from.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Opens as</th>
+<th>What you see</th>
+<th>Examples</th>
+<th>To close it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A page</td>
+<td>The page in the middle of the frame; the address in the browser changes.</td>
+<td>Anything in the sidebar</td>
+<td>The browser&#39;s <strong>Back</strong></td>
+</tr>
+<tr>
+<td>A dialog</td>
+<td>A box over the dimmed page, with a coloured header band, an icon and a title. On a phone it fills the screen, except a question that only asks you to confirm.</td>
+<td>The <strong>Create</strong> forms, <strong>About EiN</strong>, <strong>Keyboard shortcuts</strong></td>
+<td>The <strong>×</strong> at the top right, <kbd>Esc</kbd>, or a click outside the box. On a phone, <strong>Back</strong> too.</td>
+</tr>
+<tr>
+<td>The side drawer</td>
+<td>A panel at the right. On a wide screen it sits beside the page, which makes room for it; on a narrower one it covers the page.</td>
+<td>The chat, from the top bar&#39;s chat button</td>
+<td>Its top-bar button again. Where it covers the page, <strong>Back</strong> closes it too.</td>
+</tr>
+<tr>
+<td>Full screen</td>
+<td>Over everything, the top bar included.</td>
+<td>The viewer for photos, videos and recordings</td>
+<td><strong>Back</strong> or <kbd>Esc</kbd></td>
+</tr>
+</tbody></table>
+</div>
+<p>A few things to know about each:</p>
+<ul>
+<li><strong>A dialog</strong> is not part of the address, so reloading the page closes it. A link inside a dialog
+opens its page in the frame and closes the dialog.</li>
+<li><strong>The side drawer</strong> keeps the width you give it. Drag its left edge, or click the edge and press
+<kbd>←</kbd> or <kbd>→</kbd> to make it 20 pixels wider or narrower, between 360 and 960 pixels
+(460 at first). This browser remembers the width. On the drawer&#39;s own page, such as <strong>Chat</strong>,
+the drawer steps aside, because the page shows the same thing at full size. On a phone the chat
+button opens the chat as a dialog instead.</li>
+<li><strong>Full screen</strong> is part of the address (<code>?fullscreen=</code>), so a reload, or a link you send someone,
+opens it again. On a wide screen an open side drawer stays beside the viewer, so you can read the
+chat next to a photo; see <a href="viewer.html">Viewing photos, videos and recordings</a>.</li>
+</ul>
+<h2 id="keyboard-shortcuts">Keyboard shortcuts<a class="anchor" href="#keyboard-shortcuts" aria-label="Link to this section"></a></h2>
+<p>Press <kbd>?</kbd> anywhere outside a text field, or choose <strong>Shortcuts</strong> in the account menu, to see
+the <strong>Keyboard shortcuts</strong> dialog. It lists the keys that work anywhere, and a group for each part
+of the screen that has keys of its own, such as the viewer or the <strong>Nodes</strong> explorer, while that
+part is on screen.</p>
+<figure class="shot"><a href="../../assets/shots/shortcuts@2x.webp"><img src="../../assets/shots/shortcuts.webp" srcset="../../assets/shots/shortcuts.webp 1x, ../../assets/shots/shortcuts@2x.webp 2x" alt="The Keyboard shortcuts dialog over the Home page, listing the Anywhere group" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Press ? on any page to see the keys that work there.</figcaption></figure>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac)</td>
+<td>Search, or go to a page, person or album; &gt; for commands</td>
+</tr>
+<tr>
+<td><kbd>?</kbd></td>
+<td>These shortcuts</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>T</kbd></td>
+<td>Show or hide the terminal</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>N</kbd></td>
+<td>New terminal tab</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>R</kbd></td>
+<td>Random album (with the archive)</td>
+</tr>
+</tbody></table>
+</div>
+<p>On a Mac the list shows <kbd>Alt</kbd> as <kbd>⌥</kbd>. Where a dialog or the viewer covers the
+search box, <kbd>Ctrl</kbd>+<kbd>K</kbd> opens the same search as a dialog of its own. Every key EiN
+knows, by area, is in <a href="../reference/shortcuts.html">Keyboard shortcuts</a>.</p>
+<h2 id="messages-and-other-things-you-will-see">Messages and other things you will see<a class="anchor" href="#messages-and-other-things-you-will-see" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>Messages at the foot of the screen</strong> say what has happened, often with <strong>Undo</strong>. They leave
+by themselves after 4 seconds, or 8 seconds when they offer an action. EiN has no list of past
+messages.</li>
+<li><strong>Back to top</strong>, a round button at the lower right, appears once you have scrolled a screen&#39;s
+height down a page.</li>
+</ul>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Disconnected</strong> in the top bar</td>
+<td>The connection to EiN dropped: your network, or EiN restarting.</td>
+<td>Wait; EiN reconnects by itself every 2 seconds. If it stays, ask your administrator whether EiN is running.</td>
+</tr>
+<tr>
+<td>The sign-in page appears while you were working</td>
+<td>Your sign-in ended, or an administrator disabled your account.</td>
+<td>Sign in again.</td>
+</tr>
+<tr>
+<td><strong>Nothing here</strong>: &quot;There is no page at … The link may be mistyped, or what it led to has moved.&quot;</td>
+<td>The address leads to no page.</td>
+<td><strong>Go back</strong> or <strong>Go home</strong>.</td>
+</tr>
+<tr>
+<td><strong>This page did not load</strong></td>
+<td>Its code could not be fetched, usually because EiN was updated while the tab was open.</td>
+<td><strong>Reload</strong>.</td>
+</tr>
+<tr>
+<td><strong>Something broke on this page</strong>: &quot;The rest of EiN still works.&quot;</td>
+<td>An error while drawing the page; the error text is shown under it.</td>
+<td><strong>Reload</strong>. If it keeps happening, send the error text to your administrator.</td>
+</tr>
+<tr>
+<td>An entry you expect is not in the sidebar</td>
+<td>It is for administrators, its module is not installed, or someone hid it.</td>
+<td>See the sidebar table above, <a href="../admin/modules.html">Modules</a> and <a href="customizing.html">Your sidebar and top bar</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="where-to-go-next">Where to go next<a class="anchor" href="#where-to-go-next" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="search.html">Search and the finder</a>: everything the search box and the <strong>Search</strong> page can find.</li>
+<li><a href="../shell/terminal.html">The terminal</a>: the command line behind <kbd>Alt</kbd>+<kbd>T</kbd>.</li>
+<li><a href="../reference/shortcuts.html">Keyboard shortcuts</a>: every key, by area.</li>
+<li><a href="customizing.html">Your sidebar and top bar</a>: rename, hide and add entries.</li>
+<li><a href="phone.html">EiN on a phone</a>: the menu behind the mark, swiping and adding EiN to the home screen.</li>
+<li><a href="profile.html">Your profile, favourites and trash</a>: your own pages from the account menu.</li>
+<li><a href="../reference/routes.html">Addresses in the web interface</a>: every page&#39;s address, for links.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../start/first-steps.html" rel="prev"><span>Previous</span>First steps</a><a class="next" href="search.html" rel="next"><span>Next</span>Search and the finder</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/interface.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in">Sign in</a></li><li class="nested"><a href="#if-you-cannot-sign-in">If you cannot sign in</a></li><li><a href="#browse-without-signing-in">Browse without signing in</a></li><li><a href="#sign-out">Sign out</a></li><li><a href="#the-parts-of-the-screen">The parts of the screen</a></li><li><a href="#the-top-bar">The top bar</a></li><li class="nested"><a href="#the-create-menu">The Create menu</a></li><li class="nested"><a href="#the-account-menu">The account menu</a></li><li class="nested"><a href="#admin-mode">Admin mode</a></li><li><a href="#the-sidebar">The sidebar</a></li><li><a href="#page-headers">Page headers</a></li><li><a href="#pages-dialogs-the-side-drawer-and-full-screen">Pages, dialogs, the side drawer and full screen</a></li><li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li><li><a href="#messages-and-other-things-you-will-see">Messages and other things you will see</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+    </div>
+  </body>
+</html>

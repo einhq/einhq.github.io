@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your profile, favourites and trash – EiN documentation</title>
+    <meta name="description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/profile.html">
+    <meta property="og:title" content="Your profile, favourites and trash – EiN documentation">
+    <meta property="og:description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/profile.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Home, memories and statistics</a></li><li><a href="assistant.html">Chatting with the assistant</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html" aria-current="page">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Using EiN</p>
+          <h1>Your profile, favourites and trash</h1>
+        </header>
+        <article class="prose">
+<p>This page covers the pages that belong to your account alone: your profile, where you change your
+name, your preferences and your password; your favourites; and your trash, where what you delete
+waits before it is removed for good. It is for everyone who has an account on EiN.</p>
+<p>All three open from the account menu. Choose your picture at the right end of the top bar:</p>
+<figure class="shot"><a href="../../assets/shots/account-menu@2x.webp"><img src="../../assets/shots/account-menu.webp" srcset="../../assets/shots/account-menu.webp 1x, ../../assets/shots/account-menu@2x.webp 2x" alt="The account menu open under the picture in the top bar: Favourites, Profile and Trash, then Shortcuts with the ? key and About EiN, then Logout" width="500" height="440" loading="lazy" decoding="async"></a><figcaption>Favourites, Profile and Trash are the pages of your own account.</figcaption></figure>
+<p>They need you to be signed in. A visitor who opens one of them is asked to sign in first, and lands
+on the page afterwards. <a href="interface.html">Finding your way around</a> describes the rest of the account
+menu.</p>
+<h2 id="open-your-profile">Open your profile<a class="anchor" href="#open-your-profile" aria-label="Link to this section"></a></h2>
+<p>Choose your picture, then <strong>Profile</strong>. The page&#39;s header shows your display name, your username
+after an <code>@</code>, and the description you gave yourself. Its picture is the cover photo of the person
+your account is linked to; without one it shows the first letter of your name.</p>
+<p>The profile has three tabs: <strong>Account</strong>, <strong>Preferences</strong> and <strong>Security</strong>. The tab you are on is in
+the page&#39;s address, so <code>/profile?tab=preferences</code> opens your preferences and
+<code>/profile?tab=security</code> the password form directly.</p>
+<h2 id="change-your-name-and-description">Change your name and description<a class="anchor" href="#change-your-name-and-description" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Choose your picture, then <strong>Profile</strong>. It opens on the <strong>Account</strong> tab.</li>
+<li>In <strong>Display name</strong>, &quot;Your name as it appears to others&quot;, type your name the way you want
+others to see it, for example <code>Helen Okafor</code>.</li>
+<li>In <strong>Description</strong>, &quot;A line about you, shown under your name&quot;, type a line about yourself, such
+as <code>Peggy&#39;s daughter, in Wellington</code>, or leave it empty.</li>
+<li>Choose <strong>Save changes</strong>. <strong>Saved</strong> appears beside the button.</li>
+</ol>
+<p><strong>Save changes</strong> stays greyed out while <strong>Display name</strong> is empty: every account has a name.
+Your picture&#39;s tooltip and the profile&#39;s header show the new name at once.</p>
+<p>Three things about your account are not on this tab:</p>
+<ul>
+<li><strong>Your username</strong>, the name after the <code>@</code>. Nobody can change it once the account exists, an
+administrator included.</li>
+<li><strong>Your e-mail address.</strong> Only an administrator sets it, in your account under <strong>Settings →
+Users</strong>; see <a href="../admin/accounts.html">Accounts and groups</a>. When your account has one, you can type
+it instead of your username when you sign in. The profile does not show it; <code>user-info</code> in the
+terminal does, under <a href="#from-the-terminal">From the terminal</a>.</li>
+<li><strong>Your picture</strong>, which comes from the person your account is linked to, below.</li>
+</ul>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>Your display name, description and e-mail address are not private. Anyone who is signed in can
+read them, for example with <code>user-info</code> in the terminal.</p>
+</aside>
+<h3 id="your-picture-and-the-person-you-are">Your picture and the person you are<a class="anchor" href="#your-picture-and-the-person-you-are" aria-label="Link to this section"></a></h3>
+<p>EiN has no way to upload a picture for an account. Your picture is the person in the archive that
+your account is linked to. Helen Okafor&#39;s account, for example, can be linked to her page among the
+<strong>People</strong>, and then:</p>
+<ul>
+<li>your picture in the top bar and on your profile is her cover photo;</li>
+<li>the account menu has <strong>Me</strong> above <strong>Favourites</strong>, which opens her page;</li>
+<li><strong>News</strong> on <strong>Home</strong> shows her picture beside the albums you add;</li>
+<li>an event or note you add to an album starts with her under <strong>Written by</strong>;</li>
+<li>staging uses her homes to tell a trip from days at home when it suggests albums; see
+<a href="staging.html">Sorting in staging</a>.</li>
+</ul>
+<p>Without a link, your picture is an image of your username&#39;s first letters, which the browser
+fetches from the outside service <code>ui-avatars.com</code>. Where the browser cannot reach the internet, the
+first letter of your name shows instead.</p>
+<p>There is no button to link an account to a person. An administrator makes the link in the terminal:
+it is a softlink named <code>person</code> in the account&#39;s folder under <code>/etc/users</code>. For the account <code>helen</code>
+and the person whose page is at <code>/people/Helen_Okafor</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<span class="hljs-built_in">ln</span> -s /archive/people/Helen_Okafor /etc/users/helen/person</code></pre></div>
+<p>Helen sees her picture and <strong>Me</strong> the next time her page loads. <code>rm /etc/users/helen/person</code> takes
+the link away again; removing a link never removes the person it points at.</p>
+<h2 id="set-your-preferences">Set your preferences<a class="anchor" href="#set-your-preferences" aria-label="Link to this section"></a></h2>
+<p>Choose your picture, then <strong>Profile</strong>, then the <strong>Preferences</strong> tab. It says: &quot;These apply to you
+alone. They are stored in your home directory and follow you to the terminal as well.&quot; Your
+preferences belong to your account, so they follow you to every browser and device you sign in on.</p>
+<figure class="shot"><a href="../../assets/shots/preferences@2x.webp"><img src="../../assets/shots/preferences.webp" srcset="../../assets/shots/preferences.webp 1x, ../../assets/shots/preferences@2x.webp 2x" alt="The Preferences tab of the profile: the text saying they apply to you alone, the Find a setting box, the Overrides only button, the categories Appearance, Playback, Sharing and Shell, and the Header entrance setting set to drawn with the Default badge" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Preferences are grouped in categories; the badge under each says whether the value is the default or your own.</figcaption></figure>
+<p>The tab is laid out like the administrator&#39;s settings page:</p>
+<ul>
+<li><strong>Find a setting</strong> searches names, descriptions, modules and keys, across every category.</li>
+<li><strong>Categories</strong>, at the left, shows one category at a time. On a phone a <strong>Category</strong> list above
+the settings does the same.</li>
+<li><strong>Overrides only</strong> shows only the settings you have changed; the button gives their number in
+brackets once there are some.</li>
+<li>A badge under each setting says where its value comes from: <strong>Default</strong> when nobody has changed
+it, <strong>Your setting</strong> when you have, and <strong>From deployment</strong> when the administrator gave everyone a
+starting value when setting up EiN. Your own value wins over the other two. A setting a module
+adds also carries the module&#39;s name, such as <code>archive</code>.</li>
+</ul>
+<p>To change a setting:</p>
+<ol>
+<li>Change the value in its control: pick from the list, type a number, or flip the switch between
+<strong>On</strong> and <strong>Off</strong>.</li>
+<li><strong>Cancel</strong> and <strong>Save change</strong> appear under the control. Choose <strong>Save change</strong>; <strong>Cancel</strong> puts
+the value back as it was.</li>
+<li>The badge turns to <strong>Your setting</strong>.</li>
+</ol>
+<p>To undo your choice later, choose <strong>Restore inherited value</strong> under a setting marked <strong>Your
+setting</strong>. It removes your own value, and the setting falls back to the deployment&#39;s value or to
+the default. If a save fails, the reason shows in a red box under the setting.</p>
+<h3 id="the-settings">The settings<a class="anchor" href="#the-settings" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Setting</th>
+<th>Default</th>
+<th>What it changes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Appearance</td>
+<td><strong>Header entrance</strong></td>
+<td><code>drawn</code></td>
+<td>How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.</td>
+</tr>
+<tr>
+<td>Appearance</td>
+<td><strong>Header entrance time</strong></td>
+<td><code>450</code></td>
+<td>How many milliseconds that entrance takes, from the first tile starting to the last one in place. <code>0</code> shows the header as it is, without an entrance.</td>
+</tr>
+<tr>
+<td>Appearance</td>
+<td><strong>Header over a cover</strong></td>
+<td><code>split</code></td>
+<td>How the tiles meet a page&#39;s cover photo, such as an album&#39;s or a person&#39;s: <code>split</code> gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; <code>lines</code> lays only their outlines over the photo.</td>
+</tr>
+<tr>
+<td>Playback</td>
+<td><strong>Seconds per slide</strong></td>
+<td><code>3</code></td>
+<td>How long each photo is shown in a slideshow.</td>
+</tr>
+<tr>
+<td>Playback</td>
+<td><strong>Ken Burns effect</strong></td>
+<td><strong>On</strong></td>
+<td>Slowly pan and zoom each photo during a slideshow.</td>
+</tr>
+<tr>
+<td>Sharing</td>
+<td><strong>How widely what you create is shared</strong></td>
+<td><code>default</code></td>
+<td>Where an album you create starts out; see below.</td>
+</tr>
+<tr>
+<td>Shell</td>
+<td><strong>Shell history length</strong></td>
+<td><code>1000</code></td>
+<td>How many commands the terminal remembers between sessions, in <code>~/.bash_history</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
+the archive module, and only an EiN with the archive has them. <a href="viewer.html">Viewing photos, videos and recordings</a> shows a slideshow, and <a href="../reference/settings.html">the settings reference</a>
+lists each with its key, such as
+<a href="../reference/settings.html#cfg_user_slideshow_seconds"><code>CFG_USER_SLIDESHOW_SECONDS</code></a>.</p>
+<p>The choices for <strong>Header entrance</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>The tiles are</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>drawn</code></td>
+<td>drawn as if by pen, and filled from the bottom up</td>
+</tr>
+<tr>
+<td><code>falling</code></td>
+<td>falling into place</td>
+</tr>
+<tr>
+<td><code>sliding</code></td>
+<td>sliding in from the right</td>
+</tr>
+<tr>
+<td><code>sweep</code></td>
+<td>swept in from left to right</td>
+</tr>
+<tr>
+<td><code>growing</code></td>
+<td>growing from the bottom edge</td>
+</tr>
+<tr>
+<td><code>ripple</code></td>
+<td>rippling out from the title</td>
+</tr>
+<tr>
+<td><code>puzzle</code></td>
+<td>snapping in like puzzle pieces</td>
+</tr>
+<tr>
+<td><code>wave</code></td>
+<td>crossed by a wave of light</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="how-widely-what-you-create-is-shared">How widely what you create is shared<a class="anchor" href="#how-widely-what-you-create-is-shared" aria-label="Link to this section"></a></h3>
+<p>This preference decides how an album you create starts out: one made with <strong>Create → Album</strong>, with
+<strong>New album “…”</strong> in <strong>Add to an album</strong>, or with <strong>New album</strong> in staging. It does not change albums
+that exist already; to change who sees one of those, use its <strong>Share</strong> button.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>A new album starts out</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>default</code></td>
+<td>As the administrator&#39;s default sharing says, under <strong>Settings → Permissions</strong>. Unless the administrator has changed it, everyone with an account can see the album.</td>
+</tr>
+<tr>
+<td><code>private</code></td>
+<td>Seen only by you.</td>
+</tr>
+<tr>
+<td><code>shared</code></td>
+<td>Seen by the members of the default group the administrator chose. Unless the administrator has changed it, that group is everyone with an account.</td>
+</tr>
+<tr>
+<td><code>everyone</code></td>
+<td>Seen by everyone with an account, even where the administrator&#39;s default group is a smaller one.</td>
+</tr>
+</tbody></table>
+</div>
+<p>None of them shows an album to visitors who are not signed in; you grant that yourself in the
+<strong>Share</strong> dialog. An administrator can see every album, whatever you choose. <strong>New private album</strong> in staging is always private, whatever you choose here.
+<a href="sharing.html">Sharing</a> explains the default sharing and the <strong>Share</strong> dialog.</p>
+<h3 id="when-a-change-takes-effect">When a change takes effect<a class="anchor" href="#when-a-change-takes-effect" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Takes effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Appearance and Playback</td>
+<td>At once, in the browser tab where you saved it. Other open tabs, and your other devices, when their page loads again.</td>
+</tr>
+<tr>
+<td><strong>How widely what you create is shared</strong></td>
+<td>At once, for the next album you create.</td>
+</tr>
+<tr>
+<td><strong>Shell history length</strong></td>
+<td>In the next terminal you open.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="your-preferences-in-the-terminal">Your preferences in the terminal<a class="anchor" href="#your-preferences-in-the-terminal" aria-label="Link to this section"></a></h3>
+<p>EiN keeps your preferences in the file <code>.config</code> in your home folder, <code>/home/&lt;your username&gt;/.config</code>,
+which only you can read. Every shell you open reads it, in the web terminal and over SSH, so a
+preference is also a variable there:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$CFG_USER_SLIDESHOW_SECONDS</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>5</code></pre></div>
+<p>It prints an empty line for a setting you have never changed: defaults are not written into the
+file. A terminal that was already open when you saved a change keeps the old value; open a new
+terminal tab, or run <code>source ~/.config</code> in it, to pick up the change.</p>
+<p>The <code>config</code> command lists and changes your preferences:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+config list --scope user                  <span class="hljs-comment"># your preferences, and where each value comes from</span>
+config <span class="hljs-built_in">set</span> CFG_USER_SLIDESHOW_SECONDS 5   <span class="hljs-comment"># the same as Save change</span>
+config <span class="hljs-built_in">unset</span> CFG_USER_SLIDESHOW_SECONDS   <span class="hljs-comment"># the same as Restore inherited value</span></code></pre></div>
+<p><code>config list --scope user</code> prints each setting and its value, followed by <code>(user)</code> for your own
+value or <code>(environment)</code> for the deployment&#39;s; a default has no mark:</p>
+<div class="code"><pre tabindex="0"><code>CFG_USER_HEADER_ENTRANCE	drawn
+CFG_USER_HEADER_ENTRANCE_TIME	450
+CFG_USER_HEADER_COVER	split
+CFG_USER_KEN_BURNS	true
+CFG_USER_SLIDESHOW_SECONDS	5 (user)
+CFG_USER_DEFAULT_SHARE	default
+HISTSIZE	1000</code></pre></div>
+<p><code>config set</code> answers <code>CFG_USER_SLIDESHOW_SECONDS = 5</code>, and <code>config unset</code> answers
+<code>CFG_USER_SLIDESHOW_SECONDS reset to 3 (default)</code>. A value of the wrong kind is refused, for example
+<code>config set: CFG_USER_SLIDESHOW_SECONDS: expected a number, got &#39;five&#39;</code>.</p>
+<p>The file holds one line per setting, such as <code>export CFG_USER_SLIDESHOW_SECONDS=&#39;5&#39;</code>, and you can
+edit it with <code>edit ~/.config</code>; nothing then checks the values you type. <a href="../admin/configuration.html">Configuration</a>
+explains how settings work for the whole installation, and <a href="../reference/config-files.html">Configuration files</a>
+lists the files.</p>
+<h2 id="change-your-password">Change your password<a class="anchor" href="#change-your-password" aria-label="Link to this section"></a></h2>
+<figure class="shot"><a href="../../assets/shots/security@2x.webp"><img src="../../assets/shots/security.webp" srcset="../../assets/shots/security.webp 1x, ../../assets/shots/security@2x.webp 2x" alt="The Security tab of the profile: the fields Current password, New password and Confirm new password, each with an eye button, and the Update password button greyed out" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Update password stays greyed out until all three fields are filled in and the two new ones match.</figcaption></figure>
+<ol>
+<li>Choose your picture, then <strong>Profile</strong>, then the <strong>Security</strong> tab.</li>
+<li>In <strong>Current password</strong>, type the password you sign in with.</li>
+<li>In <strong>New password</strong>, type the new one.</li>
+<li>In <strong>Confirm new password</strong>, type the new one again. If the two differ, the field says &quot;Does not
+match the new password&quot;.</li>
+<li>Choose <strong>Update password</strong>. It can be chosen once all three fields are filled in and the two new
+ones match. <strong>Password updated</strong> appears beside it, and the fields empty.</li>
+</ol>
+<p>The eye at the right of each field shows what you typed. EiN has no rules for passwords: it takes
+any password that is not empty, so how strong yours is is up to you.</p>
+<p>The new password is the one you sign in with from then on, in the browser and over SSH and SFTP. A
+key you added for SSH keeps working; see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</p>
+<p>Changing your password does not sign out the browsers and terminals where you are signed in
+already. If you change it because someone else may know it, ask an administrator to choose
+<strong>Disable sign-in</strong> for your account and then <strong>Enable sign-in</strong>: that signs your account out
+everywhere.</p>
+<p>If the password is not changed, the reason shows in a red box above the fields:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>user passwd: authentication failed</code></td>
+<td><strong>Current password</strong> is not your password.</td>
+<td>Type it again. If you have forgotten it, see the next section.</td>
+</tr>
+<tr>
+<td><code>user passwd: no existing password found, contact admin</code></td>
+<td>Your account has no password to check against.</td>
+<td>Ask an administrator to set one.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="if-you-have-forgotten-your-password">If you have forgotten your password<a class="anchor" href="#if-you-have-forgotten-your-password" aria-label="Link to this section"></a></h3>
+<p>EiN sends no e-mail and has no link for a forgotten password. Ask an administrator to set a new one
+for you: they do it in your account under <strong>Settings → Users</strong>, in its <strong>Password</strong> section, with
+<strong>Set password</strong>. Your old password stops working at once. Sign in with the one they give you, then
+change it on the <strong>Security</strong> tab to one that only you know.</p>
+<p>An administrator cannot make you choose a new password at your next sign-in; EiN has no such
+switch. An account that an administrator made without a password, and an account brought over from
+an older archive by the importer, cannot sign in at all until an administrator sets a password for
+it. <a href="../admin/accounts.html">Accounts and groups</a> covers this from the administrator&#39;s side.</p>
+<h2 id="favourites">Favourites<a class="anchor" href="#favourites" aria-label="Link to this section"></a></h2>
+<p>Your favourites are the pictures you have marked with a heart, from any album, gathered on one page.
+Only someone signed in has favourites; visitors have none.</p>
+<p>A favourite is a link to the picture where it lives, kept in the folder <code>stars</code> in your home
+folder. Hearting a picture never copies or moves it, and taking it out of your favourites never
+deletes it. <a href="../concepts/links.html">Links</a> explains how one picture can be in many places.</p>
+<h3 id="heart-a-picture">Heart a picture<a class="anchor" href="#heart-a-picture" aria-label="Link to this section"></a></h3>
+<ul>
+<li><strong>In the viewer</strong>, press the heart in the bar under the picture, whose tooltip says <strong>Favourite
+(s)</strong>, or press <kbd>s</kbd>. The heart fills in. On a phone it is <strong>Favourite</strong> in ⋮ at the top
+right.</li>
+<li><strong>In a grid</strong>, such as an album or the <strong>Media</strong> page, select pictures and choose <strong>Favourite</strong> in
+the selection bar. EiN says, for example, <strong>12 files added to favourites</strong>, with <strong>Undo</strong>.</li>
+</ul>
+<p>A small heart on a tile marks a picture in your favourites. A picture marked as a favourite in a
+Google Photos export becomes one of your favourites when you import it; see
+<a href="importing.html">Getting your photos in</a>.</p>
+<h3 id="open-your-favourites">Open your favourites<a class="anchor" href="#open-your-favourites" aria-label="Link to this section"></a></h3>
+<p>Choose your picture, then <strong>Favourites</strong>. The page, &quot;The pictures you have hearted&quot;, shows them in
+day sections, the way an album shows its pictures. Click one to open it in the viewer, which then
+steps through your favourites; <strong>Start slideshow</strong> there shows them all.</p>
+<p>With nothing hearted yet, the page says <strong>No favourites yet</strong>, &quot;Select pictures and choose
+Favourite, or press the heart in the lightbox.&quot;, with a button <strong>Open Media</strong>.</p>
+<h3 id="take-a-picture-out-of-your-favourites">Take a picture out of your favourites<a class="anchor" href="#take-a-picture-out-of-your-favourites" aria-label="Link to this section"></a></h3>
+<ul>
+<li>In the viewer, press the filled heart, <strong>Unfavourite (s)</strong>, or press <kbd>s</kbd> again.</li>
+<li>In a grid, select pictures that are all favourites already. The selection bar&#39;s button reads
+<strong>Unfavourite</strong>; choose it, and EiN says, for example, <strong>3 files taken out of favourites</strong>, with
+<strong>Undo</strong>.</li>
+</ul>
+<h2 id="the-trash">The trash<a class="anchor" href="#the-trash" aria-label="Link to this section"></a></h2>
+<p>When you delete pictures, albums, people and the like in the web interface, they go to your trash
+first. You can restore them from there for 30 days, unless your administrator chose another
+number; the few ways of deleting that skip the trash are listed below. Only you see your trash,
+apart from an administrator, who can see everyone&#39;s.</p>
+<h3 id="what-goes-to-the-trash">What goes to the trash<a class="anchor" href="#what-goes-to-the-trash" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you do</th>
+<th>What goes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Delete</strong> in the selection bar</td>
+<td>The selected pictures that live where you are; see <a href="albums.html#delete-or-remove-pictures">Albums</a>.</td>
+</tr>
+<tr>
+<td><strong>Move to trash</strong> under ⋮ on an album, person, location or device</td>
+<td>That album, person, location or device, with everything that lives in it.</td>
+</tr>
+<tr>
+<td><strong>Delete</strong> in <strong>Edit event</strong></td>
+<td>That event or note.</td>
+</tr>
+<tr>
+<td><strong>Discard</strong> in staging</td>
+<td>The files, kept together as one entry; see <a href="staging.html">Sorting in staging</a>.</td>
+</tr>
+<tr>
+<td>Removing copies in staging&#39;s <strong>Duplicates</strong></td>
+<td>The copies, kept together as one entry; see <a href="duplicates.html">Duplicates</a>.</td>
+</tr>
+<tr>
+<td><code>trash put</code> in the terminal</td>
+<td>What you name, if you may change it.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each of these says what it did in a message at the foot of the screen, with <strong>Undo</strong>. <strong>Undo</strong> is
+the quickest way back; the Trash page is for later.</p>
+<p>What you delete goes to <em>your</em> trash, also when it belongs to someone else who lets you change it.
+If a picture disappears from an album of yours, the person who deleted it has it in their trash.</p>
+<p>While something is in the trash, it is gone for everyone: from albums, search, the map and every
+other list. It keeps what EiN worked out about it, such as faces and a transcript, and comes back
+with all of it when you restore it.</p>
+<h3 id="what-is-deleted-for-good-at-once">What is deleted for good at once<a class="anchor" href="#what-is-deleted-for-good-at-once" aria-label="Link to this section"></a></h3>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>These do not use the trash. What they delete is gone at once, with no <strong>Undo</strong>:</p>
+<ul>
+<li><strong>Delete</strong> in the <strong>Nodes</strong> explorer, which runs <code>rm</code>;</li>
+<li><code>rm</code> in the terminal;</li>
+<li>deleting a file over SFTP, which takes its thumbnails and faces with it; see
+<a href="../shell/ssh-sftp.html">SSH and SFTP</a>;</li>
+<li><strong>Delete for good</strong> and <strong>Empty trash</strong> on the Trash page.</li>
+</ul>
+<p>To delete something in the terminal that you may want back, use <code>trash put</code> instead of <code>rm</code>.</p>
+</aside>
+<h3 id="restore-something-from-the-trash">Restore something from the trash<a class="anchor" href="#restore-something-from-the-trash" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Choose your picture, then <strong>Trash</strong>.</li>
+<li>The list shows what you deleted, newest first. Each row is named by the place it came from, such
+as <code>/archive/albums/Sailing in the archipelago/IMG_0412.jpg</code>. Things deleted together, such as a
+group discarded in staging, are one row with a name and a count, such as
+<code>Discarded from Inbox: “Boat trip” · 86 items</code>.</li>
+<li>Select a row. The pane beside the list, or under it on a phone, shows its name, <strong>From</strong> where it
+came, when it was <strong>Deleted</strong>, and a preview. Hold <kbd>Ctrl</kbd> (<kbd>⌘</kbd> on a Mac) while
+you click to add a row to the selection, or <kbd>Shift</kbd> to select a range.</li>
+<li>Choose <strong>Restore</strong>, or <strong>Restore 3</strong> with three rows selected. EiN says <strong>Restored to</strong> and the
+path, or how many it restored.</li>
+</ol>
+<p>A restored thing goes back where it came from, and the links to it work again: a restored picture is
+back in the albums it was added to, and in your favourites if it was one. If something else has
+taken its name there in the meantime, it comes back beside it with a number, such as
+<code>IMG_0412 (2).jpg</code>.</p>
+<p>A row that holds several things opens with <kbd>Enter</kbd>, or the arrow at its left. In a row of
+things deleted together, you can select one of them and restore it alone. Something inside a
+deleted album or folder cannot come back without the rest: the pane says &quot;Inside what was deleted;
+restoring puts back all of it.&quot;</p>
+<p><strong>Restore all</strong>, in the bar at the top of the page, puts back everything in the trash at once,
+without asking.</p>
+<h3 id="delete-something-for-good">Delete something for good<a class="anchor" href="#delete-something-for-good" aria-label="Link to this section"></a></h3>
+<ol>
+<li>On the Trash page, select one or more rows.</li>
+<li>Choose <strong>Delete for good</strong>, or press <kbd>Delete</kbd>.</li>
+<li>The dialog <strong>Delete for good?</strong> says, for one row: &quot;This item and everything derived from it is
+removed for good. This cannot be undone.&quot; Choose <strong>Delete for good</strong>, or <strong>Cancel</strong>.</li>
+</ol>
+<p><strong>Empty trash</strong>, in the bar at the top, does the same for everything in the trash, and its dialog&#39;s
+button reads <strong>Empty trash</strong>. &quot;Everything derived from it&quot; is what EiN made from a file: its
+thumbnails, faces, transcript and the rest.</p>
+<p>Something in the trash still takes up its space on disk, so removing it for good frees that space.</p>
+<h3 id="how-long-things-stay-in-the-trash">How long things stay in the trash<a class="anchor" href="#how-long-things-stay-in-the-trash" aria-label="Link to this section"></a></h3>
+<p>Things stay for the number of days set by <strong>Days in the trash</strong>,
+<a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>: 30 unless the
+administrator changed it, under <strong>Settings → System</strong>, in the category <strong>Trash</strong>. An empty Trash
+page gives the number: <strong>The trash is empty</strong>, &quot;What you delete waits here for 30 days, in case you
+want it back.&quot;</p>
+<p>The days count from when you deleted it; for things deleted together, from the last time something
+was added to that row. EiN clears out what is older when it starts and every 12 hours after that,
+so something can stay up to half a day past its time. Once it is cleared, nothing in EiN brings it
+back: EiN has no backup of its own; see <a href="../admin/data.html">Your data: backup, moving and removing</a>.</p>
+<h3 id="the-trash-in-the-terminal">The trash in the terminal<a class="anchor" href="#the-trash-in-the-terminal" aria-label="Link to this section"></a></h3>
+<p>The <a href="../reference/commands-core.html#trash"><code>trash</code></a> command works on the same trash as the page:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+trash put <span class="hljs-string">&quot;/archive/albums/Sailing in the archipelago/IMG_0412.jpg&quot;</span>
+trash list
+trash restore 01J9Z8Q4R7XKD3V5B2N6M0PA1C
+trash empty --older-than 7</code></pre></div>
+<p><code>trash list</code> prints one line per row: its id, when it was deleted and where it came from.</p>
+<div class="code"><pre tabindex="0"><code>01J9Z8Q4R7XKD3V5B2N6M0PA1C  2026-10-22T09:14:03.120Z  /archive/albums/Sailing in the archipelago/IMG_0412.jpg</code></pre></div>
+<p><code>trash restore</code> takes that id and answers <code>Restored</code> and the path. <code>trash empty --older-than 7</code>
+removes for good what was deleted more than 7 days ago; <code>trash empty</code> with no id and no
+<code>--older-than</code> empties your whole trash, for good.</p>
+<h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Besides <code>config</code> and <code>trash</code> above, these commands do in the terminal what this page does in the
+browser:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../reference/commands-core.html#user-info"><code>user-info</code></a> <code>&lt;username&gt;</code></td>
+<td>Shows an account&#39;s display name, numbers, e-mail address and description.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#user-update"><code>user-update</code></a> <code>&lt;username&gt; --name=… --description=…</code></td>
+<td>Changes your display name and description, as <strong>Save changes</strong> does.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#user-passwd"><code>user-passwd</code></a> <code>&lt;username&gt; --old-password=…</code></td>
+<td>Changes your password; it asks for the new one with <code>Password:</code>. A password typed on the command line can end up in your shell history, so the <strong>Security</strong> tab is the better way.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#star"><code>star</code></a> <code>&lt;path&gt;</code>, <code>star -d &lt;path&gt;</code>, <code>star list</code></td>
+<td>Hearts a picture, takes the heart away, or lists your favourites.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+user-info helen
+user-update helen --name=<span class="hljs-string">&#x27;Helen Okafor&#x27;</span> --description=<span class="hljs-string">&quot;Peggy&#x27;s daughter, in Wellington&quot;</span>
+star <span class="hljs-string">&quot;/archive/albums/Sailing in the archipelago/IMG_0412.jpg&quot;</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>User: Helen Okafor
+UID: 1003
+GID: 1003
+E-mail: helen@example.com
+Description: Peggy's daughter, in Wellington
+User 'helen' updated
+Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg</code></pre></div>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>There is no <strong>Me</strong> in the account menu, and your picture is letters</td>
+<td>Your account is not linked to a person in the archive.</td>
+<td>Ask an administrator to link it, as under <a href="#your-picture-and-the-person-you-are">Your picture and the person you are</a>.</td>
+</tr>
+<tr>
+<td><strong>Update password</strong> stays greyed out</td>
+<td>A field is empty, or the two new passwords differ.</td>
+<td>Fill in all three, and type the new password the same way twice.</td>
+</tr>
+<tr>
+<td>A preference you saved does not show in another tab</td>
+<td>That tab loaded your preferences before you saved.</td>
+<td>Reload the tab.</td>
+</tr>
+<tr>
+<td><code>echo $CFG_USER_…</code> prints an empty line</td>
+<td>You never changed that setting, or the terminal was open before you did.</td>
+<td>Open a new terminal tab; <code>config list --scope user</code> shows every value, defaults included.</td>
+</tr>
+<tr>
+<td>There is no heart in the viewer and no <strong>Favourite</strong> button</td>
+<td>You are not signed in.</td>
+<td>Sign in.</td>
+</tr>
+<tr>
+<td>Something you deleted is not in your trash</td>
+<td>Someone else deleted it, and it is in their trash; or it was deleted for good; or its days ran out.</td>
+<td>Ask the person who deleted it. Nothing brings back what was deleted for good.</td>
+</tr>
+<tr>
+<td>Restoring fails with a message that ends in <code>is gone</code></td>
+<td>The folder or album it came from is no longer there.</td>
+<td>Restore that album or folder first, if it is in the trash, then restore the picture.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="interface.html">Finding your way around</a>: the account menu, signing in and out, and admin mode.</li>
+<li><a href="sharing.html">Sharing</a>: who sees what you create, the <strong>Share</strong> dialog and share links.</li>
+<li><a href="viewer.html">Viewing photos, videos and recordings</a>: the heart and slideshows in the viewer.</li>
+<li><a href="albums.html">Albums</a>: <strong>Delete</strong> and <strong>Remove</strong>, and moving an album to the trash.</li>
+<li><a href="../admin/configuration.html">Configuration</a>: how settings work for the whole installation.</li>
+<li><a href="../reference/settings.html">Settings</a>: every setting with its key and default.</li>
+<li><a href="../admin/accounts.html">Accounts and groups</a>: passwords, e-mail addresses and accounts, for
+administrators.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="sharing.html" rel="prev"><span>Previous</span>Sharing</a><a class="next" href="customizing.html" rel="next"><span>Next</span>Your sidebar and top bar</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/profile.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-your-profile">Open your profile</a></li><li><a href="#change-your-name-and-description">Change your name and description</a></li><li class="nested"><a href="#your-picture-and-the-person-you-are">Your picture and the person you are</a></li><li><a href="#set-your-preferences">Set your preferences</a></li><li class="nested"><a href="#the-settings">The settings</a></li><li class="nested"><a href="#how-widely-what-you-create-is-shared">How widely what you create is shared</a></li><li class="nested"><a href="#when-a-change-takes-effect">When a change takes effect</a></li><li class="nested"><a href="#your-preferences-in-the-terminal">Your preferences in the terminal</a></li><li><a href="#change-your-password">Change your password</a></li><li class="nested"><a href="#if-you-have-forgotten-your-password">If you have forgotten your password</a></li><li><a href="#favourites">Favourites</a></li><li class="nested"><a href="#heart-a-picture">Heart a picture</a></li><li class="nested"><a href="#open-your-favourites">Open your favourites</a></li><li class="nested"><a href="#take-a-picture-out-of-your-favourites">Take a picture out of your favourites</a></li><li><a href="#the-trash">The trash</a></li><li class="nested"><a href="#what-goes-to-the-trash">What goes to the trash</a></li><li class="nested"><a href="#what-is-deleted-for-good-at-once">What is deleted for good at once</a></li><li class="nested"><a href="#restore-something-from-the-trash">Restore something from the trash</a></li><li class="nested"><a href="#delete-something-for-good">Delete something for good</a></li><li class="nested"><a href="#how-long-things-stay-in-the-trash">How long things stay in the trash</a></li><li class="nested"><a href="#the-trash-in-the-terminal">The trash in the terminal</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

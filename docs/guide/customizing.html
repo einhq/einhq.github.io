@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your sidebar and top bar – EiN documentation</title>
+    <meta name="description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/customizing.html">
+    <meta property="og:title" content="Your sidebar and top bar – EiN documentation">
+    <meta property="og:description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/customizing.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Home, memories and statistics</a></li><li><a href="assistant.html">Chatting with the assistant</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html" aria-current="page">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Using EiN</p>
+          <h1>Your sidebar and top bar</h1>
+        </header>
+        <article class="prose">
+<p>You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add
+pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it
+for yourself and, if you are an administrator, for everyone on your EiN.</p>
+<p>There is no page in <strong>Settings</strong> for this: the files on this page are the only way. You need to be
+signed in and able to edit a few lines of JSON, usually in the <a href="../shell/terminal.html">terminal</a>.</p>
+<h2 id="how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together<a class="anchor" href="#how-the-sidebar-and-top-bar-are-put-together" aria-label="Link to this section"></a></h2>
+<p>The sidebar and the top bar are laid together from three layers, read in this order:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>File</th>
+<th>Written by</th>
+<th>Applies to</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The modules&#39; entries</td>
+<td><code>/etc/ui/nav.d/&lt;module&gt;.json</code>, one for each module; EiN&#39;s own is <code>/etc/ui/nav.d/ui.json</code></td>
+<td>each module, when it is set up</td>
+<td>everyone</td>
+</tr>
+<tr>
+<td>Changes for everyone</td>
+<td><code>/etc/ui/nav.json</code></td>
+<td>an administrator</td>
+<td>everyone</td>
+</tr>
+<tr>
+<td>Your changes</td>
+<td><code>~/.ui/nav.json</code>, which is <code>/home/&lt;your username&gt;/.ui/nav.json</code></td>
+<td>you</td>
+<td>you only</td>
+</tr>
+</tbody></table>
+</div>
+
+<p>Every entry has an id, such as <code>archive.albums</code> for <strong>Albums</strong>. A later layer works on the earlier
+ones by id:</p>
+<ul>
+<li><strong>Same id: change fields.</strong> Naming an id that an earlier layer gives changes only the fields you
+write. The entry keeps all the others.</li>
+<li><strong>Another id: add.</strong> An id that no earlier layer gives adds an entry of your own.</li>
+<li><strong><code>hide</code>: remove.</strong> The ids listed under <code>&quot;hide&quot;</code> are left out.</li>
+</ul>
+<p>So your file holds only what you want different, and when a module is updated, its changes still
+reach everything you left alone.</p>
+<p>A few things follow from this:</p>
+<ul>
+<li>Neither <code>/etc/ui/nav.json</code> nor <code>~/.ui/nav.json</code> exists until someone writes it.</li>
+<li>What one layer hides stays hidden. There is no way to unhide, so you cannot bring back an entry
+your administrator hid.</li>
+<li>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; own files, and an update replaces them.
+Leave them alone and put changes in <code>/etc/ui/nav.json</code> instead.</li>
+<li>EiN reads the navigation once, when a page loads. After you change a file, reload the page in
+your browser. Your terminal sessions come back after the reload.</li>
+</ul>
+<h2 id="see-what-you-have">See what you have<a class="anchor" href="#see-what-you-have" aria-label="Link to this section"></a></h2>
+<p>Run <code>ui-nav</code> in the terminal. It prints the sidebar and the top bar as they are for you, with every
+entry&#39;s id:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ui-nav</code></pre></div>
+<p>For someone signed in who is not an administrator, on an EiN with the archive, the assistant and
+the media service modules, it prints:</p>
+<div class="code"><pre tabindex="0"><code>(main)
+  Home             /                ui.home
+  Chat             /chat            assistant.chat
+  Media            /media           archive.media
+  Staging          /staging         archive.staging
+Explore
+  Search           /search          ui.search
+  Year             /year            archive.year
+  Map              /map             archive.map
+Browse
+  Albums           /albums          archive.albums
+  People           /people          archive.people
+  Locations        /locations       archive.locations
+  Devices          /devices         archive.devices
+System
+  Settings         /settings        ui.settings
+  Statistics       /stats           ui.stats
+  Documentation    /docs            ui.docs
+top bar
+  Chat             assistant.chat
+  Create           ui.create
+    Import media   archive.import
+    Album          archive.create-album
+    Person         archive.create-person
+    Location       archive.create-location
+    Device         archive.create-device
+  Random album     archive.random-album (alt+R)
+  Account          ui.account
+    Favourites     archive.favourites
+panels
+  search.explore   People           /explore/people          archive.explore-people
+  search.explore   Locations        /explore/locations       archive.explore-locations
+  search.explore   Years            /explore/years           archive.explore-years
+  search.explore   Labels           /explore/labels          archive.explore-labels
+  nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
+  stats.sections   Events           /stats/life-events       archive.life-events
+  home.start       Import media     /start/upload            archive.start-upload
+  search.label     Looks like       /looks-like?path={path}  archive.looks-like
+  about.services   Language model   /about/language-model    assistant.about
+  system.overview  GPU              /system/gpu              ems.gpu
+  system.tabs      Media service    /system/media-service    ems.media-service
+  about.services   Media service    /about/media-service     ems.about</code></pre></div>
+<ul>
+<li><strong>The sidebar</strong> comes first, a section at a time. Each section starts with its heading; the
+first section has none, so its id shows in brackets, <code>(main)</code>. Under it, each entry&#39;s label, its
+address and its id.</li>
+<li><strong><code>top bar</code></strong> lists the buttons with their titles and ids, and a key in brackets where one is
+set. A dropdown&#39;s rows are indented under it: <code>Create</code> is the plus, and <code>Account</code> is the menu
+under your picture.</li>
+<li><strong><code>panels</code></strong> are parts that modules draw inside other pages; see
+<a href="#change-the-panels-inside-pages">Change the panels inside pages</a>.</li>
+</ul>
+<p>An administrator also gets <strong>Nodes</strong> and <strong>Dashboard</strong> under <strong>System</strong>. The
+<a href="interface.html#the-sidebar">sidebar</a> and <a href="interface.html#the-top-bar">top bar</a> sections of
+<a href="interface.html">Finding your way around</a> say what each entry is.</p>
+<p>When something in a file cannot be used, <code>ui-nav</code> says so after the list, on lines that start with
+<code>ui-nav:</code>; <a href="#when-something-goes-differently">When something goes differently</a> explains each one.
+The browser&#39;s console shows the same lines.</p>
+<p>To read every field a module gives its entries, print its file, for example
+<code>cat /etc/ui/nav.d/archive.json</code>. <code>JSON_OUTPUT=1 ui-nav</code> gives the result as JSON, the form the web
+interface reads.</p>
+<h2 id="create-or-edit-your-file">Create or edit your file<a class="anchor" href="#create-or-edit-your-file" aria-label="Link to this section"></a></h2>
+<h3 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h3>
+<ol>
+<li><p>Open the terminal with the <strong>Toggle Terminal (Alt+T)</strong> button in the top bar, or press
+<kbd>Alt</kbd>+<kbd>T</kbd>.</p>
+</li>
+<li><p>Make the folder and open the file in the editor:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">mkdir</span> -p ~/.ui
+edit ~/.ui/nav.json</code></pre></div>
+<p>When the file does not exist, the editor starts empty and creates the file when you save.</p>
+</li>
+<li><p>Type or paste the JSON. The editor checks it as you type and marks a mistake with ✗.</p>
+</li>
+<li><p>Press <kbd>Ctrl</kbd>+<kbd>S</kbd> to save, then <kbd>Ctrl</kbd>+<kbd>Q</kbd> to quit. If the
+JSON has a mistake, saving first asks <code>Save with errors? (y/N)</code> and shows the problem.</p>
+</li>
+<li><p>Run <code>ui-nav</code> to check the result, then reload the page.</p>
+</li>
+</ol>
+<p><a href="../shell/editor.html">The editor</a> lists all of the editor&#39;s keys. You can do the same over
+<a href="../shell/ssh-sftp.html">SSH</a> from your own computer, or put the file at
+<code>/home/&lt;your username&gt;/.ui/nav.json</code> with an SFTP client. A phone has no terminal button; use a
+computer for this.</p>
+<h3 id="in-the-nodes-explorers-code-editor">In the Nodes explorer&#39;s code editor<a class="anchor" href="#in-the-nodes-explorers-code-editor" aria-label="Link to this section"></a></h3>
+<p>The <strong>Nodes</strong> explorer opens an existing file in a code editor, but it cannot create a file. Make
+the file in the terminal first; after that you can edit it here:</p>
+<ol>
+<li>Open <strong>Nodes</strong>. Administrators have it under <strong>System</strong> in the sidebar; anyone signed in can open
+it at the address <code>/system/nodes</code>. The first time, it opens at your home folder.</li>
+<li>Names that start with a dot are hidden. Press <kbd>Ctrl</kbd>+<kbd>H</kbd>, or choose the eye
+button, <strong>Show names starting with a dot (Ctrl+H)</strong>.</li>
+<li>Double-click the <code>.ui</code> folder, then right-click <code>nav.json</code> and choose <strong>Open</strong>.</li>
+<li>Make your changes, then choose <strong>Save</strong> or press <kbd>Ctrl</kbd>+<kbd>S</kbd>. While a change
+is not saved, the editor shows <strong>unsaved</strong>, and <strong>Close</strong> asks <strong>Discard unsaved changes?</strong> with
+<strong>Keep editing</strong> and <strong>Discard</strong>.</li>
+</ol>
+<p>This editor does not check the JSON. Run <code>ui-nav</code> afterwards, or reload the page and look.</p>
+<h2 id="rename-move-and-hide-entries">Rename, move and hide entries<a class="anchor" href="#rename-move-and-hide-entries" aria-label="Link to this section"></a></h2>
+<p>To rename <strong>Albums</strong> to <strong>Photo albums</strong>, move it up beside <strong>Home</strong>, and hide <strong>Map</strong>, write this in
+<code>~/.ui/nav.json</code>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.albums&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Photo albums&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.map&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>Save, reload the page, and the first section reads <strong>Home</strong>, <strong>Photo albums</strong>, <strong>Chat</strong>, <strong>Media</strong>,
+<strong>Staging</strong>; <strong>Explore</strong> has no <strong>Map</strong>. <code>ui-nav</code> shows the same:</p>
+<div class="code"><pre tabindex="0"><code>(main)
+  Home             /                ui.home
+  Photo albums     /albums          archive.albums
+  Chat             /chat            assistant.chat
+  Media            /media           archive.media
+  Staging          /staging         archive.staging
+Explore
+  Search           /search          ui.search
+  Year             /year            archive.year
+Browse
+  People           /people          archive.people
+  ...</code></pre></div>
+<ul>
+<li><strong><code>order</code></strong> places an entry within its section, lowest first. The shipped entries count in tens
+(<strong>Home</strong> 10, <strong>Chat</strong> 20, <strong>Media</strong> 30), so 15 lands between <strong>Home</strong> and <strong>Chat</strong>. An entry
+without <code>order</code> goes to the end of its section.</li>
+<li><strong><code>section</code></strong> moves the entry to another section: <code>main</code>, <code>explore</code>, <code>browse</code>, <code>system</code>, or one
+of your own.</li>
+<li><strong><code>hide</code></strong> takes away anything by id: an entry, a top-bar button, a panel or a whole section. A
+hidden section takes its entries with it.</li>
+</ul>
+<p>One id can name both a sidebar entry and a top-bar button: <code>assistant.chat</code> is the sidebar&#39;s
+<strong>Chat</strong> and the top bar&#39;s chat button, so hiding it removes both.</p>
+<p>Sections can be changed the same way. This gives the first section the heading <strong>Start</strong> and
+renames <strong>Browse</strong>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sections&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Start&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;browse&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Collections&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<h2 id="add-a-page-of-your-own">Add a page of your own<a class="anchor" href="#add-a-page-of-your-own" aria-label="Link to this section"></a></h2>
+<p>An entry of your own needs an id that nothing else uses, and four fields: <code>section</code>, <code>label</code>,
+<code>icon</code> and <code>to</code>. This adds a section <strong>Family</strong> with two people&#39;s pages, and puts a saved search
+for Cornwall in <strong>Explore</strong> after <strong>Search</strong>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sections&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;family&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Family&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.peggy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;family&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Grandma Peggy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/Peggy_Wrenfield&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.ruby&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;family&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ruby&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/Ruby_Wrenfield&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.cornwall&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;explore&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Cornwall&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;beach&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/media?q=Cornwall&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>With <code>&quot;order&quot;: 25</code>, <strong>Family</strong> stands between <strong>Explore</strong> (20) and <strong>Browse</strong> (30). Your entries
+also appear in the search box&#39;s list under <strong>Go to</strong>, like every sidebar entry.</p>
+<ul>
+<li><strong><code>to</code></strong> is an address inside EiN, starting with <code>/</code>. The easiest way to get one is to open the
+page and copy what your browser&#39;s address bar shows after the host, such as
+<code>/people/Peggy_Wrenfield</code>. Filters you set on a page are part of its address, which is how
+<code>/media?q=Cornwall</code> opens <strong>Media</strong> already searching for Cornwall.
+<a href="../reference/routes.html">Addresses in the web interface</a> lists them all. A sidebar entry cannot
+lead to another website.</li>
+<li><strong><code>icon</code></strong> is the name of any icon at <a href="https://tabler.io/icons">tabler.io/icons</a>, written as it
+is there: <code>map-pin</code>, <code>beach</code>, <code>heart</code>. Add <code>-filled</code> for the filled form, <code>heart-filled</code>. It can
+also be the path of an SVG file in EiN that you may read, which is drawn in the colour of the
+text.</li>
+<li><strong><code>id</code></strong> can be anything no one else uses. The shipped ones are <code>&lt;module&gt;.&lt;name&gt;</code>; starting yours
+with <code>me.</code> keeps them apart.</li>
+</ul>
+<p>The sidebar lights the entry whose address is the page&#39;s, or the start of it, so <strong>Albums</strong> is lit
+on an album too. When several match, the longest address wins: on <code>/system/nodes</code> only <strong>Nodes</strong> is
+lit, not <strong>Dashboard</strong> at <code>/system</code>. An entry whose address has a <code>?</code> in it, like the saved search
+above, is never lit.</p>
+<h2 id="add-buttons-to-the-top-bar">Add buttons to the top bar<a class="anchor" href="#add-buttons-to-the-top-bar" aria-label="Link to this section"></a></h2>
+<p>A top-bar button is an entry under <code>&quot;topbar&quot;</code> with an <code>id</code>, a <code>title</code> (its tooltip), an <code>icon</code> and
+an <code>action</code> that says what choosing it does:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>What choosing the button does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{ &quot;navigate&quot;: &quot;/albums&quot; }</code></td>
+<td>Opens the address as the page.</td>
+</tr>
+<tr>
+<td><code>{ &quot;dialog&quot;: &quot;/albums/new&quot; }</code></td>
+<td>Opens it in a dialog over the page you are on.</td>
+</tr>
+<tr>
+<td><code>{ &quot;drawer&quot;: &quot;/favourites&quot; }</code></td>
+<td>Opens it in the side drawer at the right, or closes the drawer when it shows that address. The button is lit while the drawer is open, and left out on that address&#39;s own page. On a phone it opens a dialog instead.</td>
+</tr>
+<tr>
+<td><code>{ &quot;fullscreen&quot;: &quot;/map&quot; }</code></td>
+<td>Opens it over everything, the top bar too, until <kbd>Esc</kbd> or <strong>Back</strong>.</td>
+</tr>
+<tr>
+<td><code>{ &quot;run&quot;: &quot;&lt;command line&gt;&quot; }</code></td>
+<td>Runs the command line as you, as if you typed it in the terminal.</td>
+</tr>
+<tr>
+<td><code>{ &quot;run&quot;: &quot;album-random&quot;, &quot;navigate&quot;: &quot;/albums/{path}&quot; }</code></td>
+<td>Runs the command, then opens an address filled in from its answer.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="interface.html#pages-dialogs-the-side-drawer-and-full-screen">Finding your way around</a> shows what a
+dialog, the side drawer and full screen look like.</p>
+<p>This adds four buttons:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.peggy-button&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Grandma Peggy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;navigate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/Peggy_Wrenfield&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.new-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;New album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;photo-plus&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;dialog&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/albums/new&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.favourites&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Favourites&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;heart&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;drawer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/favourites&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;fullscreen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/map&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>They stand between <strong>Create</strong> and the terminal button, in the order you wrote them; hold the
+pointer over one to see its title. They also appear in the search box&#39;s list under <strong>Do</strong>.</p>
+<p>About <code>run</code>:</p>
+<ul>
+<li>The command&#39;s output is not shown anywhere. The button turns into a spinner while the command
+takes more than a moment. If the command fails, the page shows nothing; the browser&#39;s console
+has the error.</li>
+<li>With <code>navigate</code> as well, EiN reads the command&#39;s answer as JSON and replaces each <code>{key}</code> in the
+address with the answer&#39;s field of that name, or with nothing when there is none. The archive&#39;s
+<strong>Random album</strong> is made this way: <a href="../reference/commands-archive.html#album-random"><code>album-random</code></a>
+answers with an album&#39;s <code>path</code>, and the button opens <code>/albums/{path}</code>.</li>
+</ul>
+<p>Three more fields change a button:</p>
+<ul>
+<li><strong><code>&quot;place&quot;: &quot;search&quot;</code></strong> stands the button beside the search box, as <strong>Random album</strong> does,
+instead of with the others at the right.</li>
+<li><strong><code>&quot;phone&quot;: false</code></strong> leaves the button out on a phone. Its key, if it has one, still works.</li>
+<li><strong><code>&quot;color&quot;</code></strong> colours its icon: <code>blue</code>, <code>cyan</code>, <code>grape</code>, <code>green</code>, <code>indigo</code>, <code>lime</code>, <code>orange</code>,
+<code>pink</code>, <code>red</code>, <code>teal</code>, <code>violet</code> or <code>yellow</code>.</li>
+</ul>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.year&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;This year&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;calendar&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;teal&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;search&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;navigate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/year&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<h2 id="make-a-dropdown-menu">Make a dropdown menu<a class="anchor" href="#make-a-dropdown-menu" aria-label="Link to this section"></a></h2>
+<p>A top-bar entry with no <code>action</code> becomes a dropdown when other entries name it as their <code>parent</code>.
+Each of those is a row of the menu and needs an <code>action</code> of its own:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.family-menu&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Family&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Family pages&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;users&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.family-peggy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.family-menu&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Grandma Peggy&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;navigate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/Peggy_Wrenfield&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.family-ruby&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.family-menu&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ruby&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;user&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;navigate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/people/Ruby_Wrenfield&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>The dropdown&#39;s <code>title</code> is its button&#39;s tooltip, and its <code>label</code> is the heading at the top of the
+open menu. With <code>&quot;order&quot;: 15</code> the button stands between <strong>Chat</strong> (10) and <strong>Create</strong> (20). A row&#39;s
+<code>title</code> is its text, and <code>order</code> places it in the menu.</p>
+<p>Rows can go into the menus EiN has as well:</p>
+<ul>
+<li><strong><code>&quot;parent&quot;: &quot;ui.create&quot;</code></strong> adds a row to the <strong>Create New</strong> menu under the plus. The archive&#39;s
+rows are <strong>Import media</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Device</strong>
+(40).</li>
+<li><strong><code>&quot;parent&quot;: &quot;ui.account&quot;</code></strong> adds a row to the menu under your picture, after <strong>Me</strong> and before
+<strong>Profile</strong>, where the archive puts <strong>Favourites</strong>. The menu&#39;s other rows are EiN&#39;s own and cannot
+be changed.</li>
+</ul>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.new-category&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.create&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Staging category&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;folder-plus&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cyan&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">50</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;dialog&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/staging/categories/new&quot;</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.docs&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.account&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Documentation&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;book&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;navigate&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/docs&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A dropdown with no rows left, because they were all hidden or none were given, is not shown. A row
+goes where its dropdown goes: hide the dropdown, or keep it from someone, and its rows go too. In
+the search box&#39;s list a row reads with its menu&#39;s title, as <code>Create: Staging category</code>.</p>
+<h2 id="give-an-entry-a-key">Give an entry a key<a class="anchor" href="#give-an-entry-a-key" aria-label="Link to this section"></a></h2>
+<p>A top-bar button or a dropdown&#39;s row can have a key that does what choosing it does, from anywhere
+outside a text field:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.create-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+A&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+P&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;fullscreen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/map&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.random-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>This gives <strong>Create</strong> › <strong>Album</strong> the key <kbd>Alt</kbd>+<kbd>A</kbd>, gives your <strong>Map</strong> button
+<kbd>Alt</kbd>+<kbd>P</kbd>, and takes <kbd>Alt</kbd>+<kbd>R</kbd> away from <strong>Random album</strong>.</p>
+<ul>
+<li>A key is modifiers and one key, joined by <code>+</code>. The modifiers are <code>alt</code>, <code>ctrl</code>, <code>shift</code>, <code>meta</code>,
+and <code>mod</code>, which is <kbd>Ctrl</kbd>, or <kbd>⌘</kbd> on a Mac. Letter case does not matter:
+<code>alt+R</code> and <code>Alt+r</code> are the same key.</li>
+<li><code>null</code> takes a key away, which is how you remove a module&#39;s key.</li>
+<li>The key shows in the button&#39;s tooltip, such as <strong>Map (Alt+P)</strong>, beside the row in its menu, and
+in the <strong>Keyboard shortcuts</strong> list that <kbd>?</kbd> opens, under <strong>Anywhere</strong>; a row is listed
+with its menu, as <strong>Create › Album</strong>. On a Mac, Alt shows as <kbd>⌥</kbd>.</li>
+<li>A dropdown itself cannot have a key; its rows can.</li>
+<li>A key is given once. When two entries ask for the same key, the one that comes first in the top
+bar&#39;s order keeps it: by <code>order</code>, lowest first, and a dropdown&#39;s rows where their dropdown stands.
+A button placed beside the search box counts by its <code>order</code> too.</li>
+<li>EiN keeps its own keys: <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd>), <kbd>?</kbd>,
+and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd> or an arrow key,
+which the terminal uses. An entry that asks for one of these does not get it.</li>
+</ul>
+<p>Some pages have keys of their own while they are on screen, such as the photo viewer. Press
+<kbd>?</kbd> on a page to see which keys it uses before you pick one;
+<a href="../reference/shortcuts.html">Keyboard shortcuts</a> lists every key EiN knows.</p>
+<h2 id="change-the-panels-inside-pages">Change the panels inside pages<a class="anchor" href="#change-the-panels-inside-pages" aria-label="Link to this section"></a></h2>
+<p>Panels are parts that modules draw inside EiN&#39;s own pages, such as the <strong>Media service</strong> tab on the
+<strong>Dashboard</strong> or the <strong>People</strong>, <strong>Locations</strong>, <strong>Years</strong> and <strong>Labels</strong> sections of the <strong>Search</strong>
+page. They are in the same files under <code>&quot;panels&quot;</code>, so you can reorder, rename or hide them by id
+like any entry. This puts <strong>Years</strong> first on the <strong>Search</strong> page and hides <strong>Labels</strong> there:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;panels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.explore-years&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.explore-labels&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>Each panel has a slot, the place in a page where it is drawn:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Slot</th>
+<th>Where it is drawn</th>
+<th>Panels the modules ship</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>search.explore</code></td>
+<td>A section of the <strong>Search</strong> page before you search</td>
+<td><code>archive.explore-people</code>, <code>-locations</code>, <code>-years</code>, <code>-labels</code></td>
+</tr>
+<tr>
+<td><code>search.label</code></td>
+<td>Above the <strong>Search</strong> page&#39;s results when it searches for one label</td>
+<td><code>archive.looks-like</code> (<strong>Looks like</strong>, signed in only)</td>
+</tr>
+<tr>
+<td><code>home.start</code></td>
+<td>Under <strong>News</strong> on <strong>Home</strong> while there is no news</td>
+<td><code>archive.start-upload</code> (<strong>Import media</strong>, signed in only)</td>
+</tr>
+<tr>
+<td><code>stats.sections</code></td>
+<td>A section of <strong>Statistics</strong></td>
+<td><code>archive.life-events</code> (<strong>Events</strong>)</td>
+</tr>
+<tr>
+<td><code>nodes.tools</code></td>
+<td>A tool in the <strong>Nodes</strong> explorer&#39;s tool pane</td>
+<td><code>archive.duplicates</code> (<strong>Duplicates</strong>)</td>
+</tr>
+<tr>
+<td><code>system.tabs</code></td>
+<td>A tab of the <strong>Dashboard</strong></td>
+<td><code>ems.media-service</code> (<strong>Media service</strong>)</td>
+</tr>
+<tr>
+<td><code>system.overview</code></td>
+<td>Gauges beside the computer&#39;s own on the <strong>Dashboard</strong>&#39;s overview</td>
+<td><code>ems.gpu</code> (<strong>GPU</strong>)</td>
+</tr>
+<tr>
+<td><code>about.services</code></td>
+<td>A tile in <strong>About EiN</strong></td>
+<td><code>assistant.about</code> (<strong>Language model</strong>), <code>ems.about</code> (<strong>Media service</strong>)</td>
+</tr>
+</tbody></table>
+</div>
+<p>A panel draws a page that a module made for that place. Adding panels of your own works the same
+way in principle, but it is a module&#39;s work; see <a href="../develop/modules.html">Writing a module</a>.</p>
+<h2 id="change-the-navigation-for-everyone">Change the navigation for everyone<a class="anchor" href="#change-the-navigation-for-everyone" aria-label="Link to this section"></a></h2>
+<p>As an administrator, signed in as <code>admin</code> or in <a href="interface.html#admin-mode">admin mode</a>, you write the
+same kind of file to <code>/etc/ui/nav.json</code>. It applies to every account and to visitors, and each
+person&#39;s own file is laid over it.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+edit /etc/ui/nav.json</code></pre></div>
+<p>Two fields show an entry to some people only. They work in any file, but the file for everyone is
+where they matter:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>The entry is shown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;admin&quot;: true</code></td>
+<td>Only to administrators: the <code>admin</code> account and anyone in admin mode. In your own file, it shows the entry only while you are in admin mode.</td>
+</tr>
+<tr>
+<td><code>&quot;signedIn&quot;: true</code></td>
+<td>Only to someone signed in, never to a visitor browsing without signing in, where <a href="../reference/settings.html#cfg_guest_browsing"><strong>Visitors may browse</strong></a> is on.</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN uses them itself: <strong>Nodes</strong> and <strong>Dashboard</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
+and the account menu are <code>signedIn</code>.</p>
+<p>This file, for a family with no cameras or GPS trackers to register, hides <strong>Devices</strong> in the
+sidebar and in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
+button that reruns failed work with
+<a href="../reference/commands-core.html#pipeline-heal"><code>pipeline-heal</code></a>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.stats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;signedIn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;site.retry&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Retry failed work&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;refresh&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;admin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pipeline-heal --apply&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;archive.create-device&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>Everyone gets the change the next time they load a page. People can still rename and move, in their
+own files, what you changed, but they cannot bring back what you hid. There is no file for a single
+group of accounts: <code>admin</code> and <code>signedIn</code> are the only ways to narrow an entry.
+<a href="../admin/processing.html">Processing and pipelines</a> explains what <code>pipeline-heal</code> reruns.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>hide</code>, <code>admin</code> and <code>signedIn</code> decide only what the sidebar and top bar show. A page still opens
+by its address for anyone whose permissions allow it, and anyone can add an entry of their own
+that leads to it. To keep people away from something, set its permissions; see
+<a href="../admin/permissions.html">Permissions in depth</a>.</p>
+</aside>
+<h2 id="field-reference">Field reference<a class="anchor" href="#field-reference" aria-label="Link to this section"></a></h2>
+<h3 id="the-file">The file<a class="anchor" href="#the-file" aria-label="Link to this section"></a></h3>
+<p>A file is one JSON object with any of these keys:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sections</code></td>
+<td>A list of the sidebar&#39;s sections.</td>
+</tr>
+<tr>
+<td><code>sidebar</code></td>
+<td>A list of sidebar entries.</td>
+</tr>
+<tr>
+<td><code>topbar</code></td>
+<td>A list of top-bar buttons, dropdowns and dropdown rows.</td>
+</tr>
+<tr>
+<td><code>panels</code></td>
+<td>A list of panels.</td>
+</tr>
+<tr>
+<td><code>hide</code></td>
+<td>A list of ids to leave out, of any kind. Hidden in one layer means hidden in all after it.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Every entry in the four lists needs an <code>id</code>. To change an entry, give its id and the fields to
+change. An entry of your own needs every field marked required below.</p>
+<h3 id="sections"><code>sections</code><a class="anchor" href="#sections" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td><code>main</code>, <code>explore</code>, <code>browse</code>, <code>system</code>, or one of your own.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>no</td>
+<td>The heading, shown in capitals; choosing it folds the section. Without one the section has no heading and cannot fold, as <code>main</code>.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>The section&#39;s place, lowest first: <code>main</code> 10, <code>explore</code> 20, <code>browse</code> 30, <code>system</code> 40. Without it, 1000.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A section with no entries left to show is not drawn.</p>
+<h3 id="sidebar"><code>sidebar</code><a class="anchor" href="#sidebar" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>The entry&#39;s id: <code>archive.albums</code>, or one of your own such as <code>me.peggy</code>.</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td>yes</td>
+<td>The id of the section it is in.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>The text.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>yes</td>
+<td>A <a href="https://tabler.io/icons">Tabler</a> icon name (<code>map-pin</code>, <code>heart-filled</code>), or the path of an SVG file in EiN.</td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td>yes</td>
+<td>The address it opens, inside EiN, starting with <code>/</code>. The entry is lit on this address and those below it, unless the address has a <code>?</code>.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>Its place in the section, lowest first. Without it, 1000; entries with the same number keep the order the files give them.</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>no</td>
+<td><code>true</code>: shown to administrators only.</td>
+</tr>
+<tr>
+<td><code>signedIn</code></td>
+<td>no</td>
+<td><code>true</code>: never shown to a visitor.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="topbar"><code>topbar</code><a class="anchor" href="#topbar" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>The entry&#39;s id. EiN&#39;s dropdowns are <code>ui.create</code> (the plus) and <code>ui.account</code> (the menu under your picture).</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>yes</td>
+<td>A button&#39;s tooltip, a row&#39;s text; also its name in the search box&#39;s list and the <strong>Keyboard shortcuts</strong> list.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>yes</td>
+<td>As for the sidebar.</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>see text</td>
+<td>What choosing it does; see <a href="#action"><code>action</code></a>. A button and a row need one. An entry with neither an action nor rows is left out, without a warning.</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>no</td>
+<td>The id of the dropdown this entry is a row of: <code>ui.create</code>, <code>ui.account</code> or one of your own.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>no</td>
+<td>A dropdown&#39;s heading in the open menu, such as <strong>Create New</strong>.</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>no</td>
+<td>The icon&#39;s colour: <code>blue</code>, <code>cyan</code>, <code>grape</code>, <code>green</code>, <code>indigo</code>, <code>lime</code>, <code>orange</code>, <code>pink</code>, <code>red</code>, <code>teal</code>, <code>violet</code> or <code>yellow</code>.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>Its place, lowest first: among the buttons (<strong>Chat</strong> 10, <strong>Create</strong> 20, <strong>Random album</strong> 30), or in its menu for a row. Without it, 1000.</td>
+</tr>
+<tr>
+<td><code>place</code></td>
+<td>no</td>
+<td><code>&quot;search&quot;</code>: the button stands beside the search box instead of at the right.</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>no</td>
+<td><code>false</code>: the button is left out on a phone; its key still works.</td>
+</tr>
+<tr>
+<td><code>shortcut</code></td>
+<td>no</td>
+<td>A key, such as <code>alt+R</code> or <code>mod+shift+K</code>; see <a href="#give-an-entry-a-key">Give an entry a key</a>. <code>null</code> takes a key away. Not on a dropdown.</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>no</td>
+<td><code>true</code>: shown to administrators only.</td>
+</tr>
+<tr>
+<td><code>signedIn</code></td>
+<td>no</td>
+<td><code>true</code>: never shown to a visitor.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The terminal button and your picture are EiN&#39;s own, always at the right end, and cannot be moved
+or hidden; neither can the search box.</p>
+<h3 id="action"><code>action</code><a class="anchor" href="#action" aria-label="Link to this section"></a></h3>
+<p>Give one of these:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{ &quot;navigate&quot;: &quot;&lt;address&gt;&quot; }</code></td>
+<td>Opens the address as the page.</td>
+</tr>
+<tr>
+<td><code>{ &quot;dialog&quot;: &quot;&lt;address&gt;&quot; }</code></td>
+<td>Opens it in a dialog over the page.</td>
+</tr>
+<tr>
+<td><code>{ &quot;drawer&quot;: &quot;&lt;address&gt;&quot; }</code></td>
+<td>Opens it in the side drawer, or closes the drawer when it shows it. A dialog on a phone.</td>
+</tr>
+<tr>
+<td><code>{ &quot;fullscreen&quot;: &quot;&lt;address&gt;&quot; }</code></td>
+<td>Opens it over everything until <kbd>Esc</kbd> or <strong>Back</strong>.</td>
+</tr>
+<tr>
+<td><code>{ &quot;run&quot;: &quot;&lt;command line&gt;&quot; }</code></td>
+<td>Runs the command line as you. Its output is not shown.</td>
+</tr>
+<tr>
+<td><code>{ &quot;run&quot;: &quot;&lt;command line&gt;&quot;, &quot;navigate&quot;: &quot;&lt;address&gt;&quot; }</code></td>
+<td>Runs it, then opens the address with each <code>{key}</code> replaced by that field of the command&#39;s JSON answer, URI-encoded; a missing field leaves nothing.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="panels"><code>panels</code><a class="anchor" href="#panels" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>The panel&#39;s id, such as <code>archive.explore-years</code>.</td>
+</tr>
+<tr>
+<td><code>slot</code></td>
+<td>yes</td>
+<td>Where it is drawn; see the slots in <a href="#change-the-panels-inside-pages">Change the panels inside pages</a>.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>The tab&#39;s or tool&#39;s label, or the section&#39;s heading.</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td>yes</td>
+<td>The address drawn there. In <code>nodes.tools</code> and <code>search.label</code>, <code>{path}</code> is replaced by a path in the tree.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>no</td>
+<td>An icon, as for the sidebar, for the slots that show one.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>Its place among the panels of its slot. Without it, 1000.</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>no</td>
+<td><code>true</code>: shown to administrators only.</td>
+</tr>
+<tr>
+<td><code>signedIn</code></td>
+<td>no</td>
+<td><code>true</code>: never shown to a visitor.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><code>ui-nav</code> prints a line for each thing it could not use, and leaves that thing out. The rest of the
+file still applies, except when the file is not valid JSON.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line after <code>ui-nav:</code></th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/home/anna/.ui/nav.json: Expected &#39;,&#39; or &#39;}&#39; after property value in JSON at position 71 (line 3 column 3)</code></td>
+<td>The file is not valid JSON, so none of it is used. The end says where the parser stopped.</td>
+<td>Look just before that line and column: often a missing comma, or a comma after the last item of a list.</td>
+</tr>
+<tr>
+<td><code>&lt;file&gt;: not a navigation object</code></td>
+<td>The file is valid JSON but not one object in <code>{ }</code>.</td>
+<td>Put everything inside one pair of braces.</td>
+</tr>
+<tr>
+<td><code>&lt;file&gt;: sidebar is not a list</code></td>
+<td><code>sidebar</code>, <code>sections</code>, <code>topbar</code> or <code>panels</code> holds something other than a list.</td>
+<td>Put the entries in <code>[ ]</code>, even a single one.</td>
+</tr>
+<tr>
+<td><code>&lt;file&gt;: a sidebar entry without an id</code></td>
+<td>An entry in that list has no <code>id</code>.</td>
+<td>Give it one.</td>
+</tr>
+<tr>
+<td><code>&lt;file&gt;: hide is not a list</code></td>
+<td><code>hide</code> holds a single id.</td>
+<td>Write <code>&quot;hide&quot;: [&quot;archive.map&quot;]</code>.</td>
+</tr>
+<tr>
+<td><code>me.cornwall: no icon, to</code></td>
+<td>An entry of your own lacks the required fields named.</td>
+<td>Add them. If you meant to change a module&#39;s entry, check the id: a misspelled id makes an entry of your own.</td>
+</tr>
+<tr>
+<td><code>me.peggy: no section family</code></td>
+<td>The section does not exist.</td>
+<td>Check the spelling, or add the section under <code>&quot;sections&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>me.family-peggy: no top-bar entry me.family-menu</code></td>
+<td>The <code>parent</code> names no top-bar entry.</td>
+<td>Check the spelling, or add the dropdown.</td>
+</tr>
+<tr>
+<td><code>me.map: action is none of navigate, dialog, drawer, fullscreen or run</code></td>
+<td>The <code>action</code> has none of those keys with text after it.</td>
+<td>Check the spelling and the quotes.</td>
+</tr>
+<tr>
+<td><code>me.map: shortcut &quot;alt+&quot; is not modifiers and one key joined by +</code></td>
+<td>The key is not written as modifiers and one key.</td>
+<td>Write it like <code>alt+P</code>.</td>
+</tr>
+<tr>
+<td><code>me.family-menu: a dropdown has no shortcut, its rows may</code></td>
+<td>A key was given to a dropdown.</td>
+<td>Give keys to its rows. The dropdown is still shown.</td>
+</tr>
+<tr>
+<td><code>me.map: shortcut alt+A is already archive.create-album&#39;s</code></td>
+<td>Another entry, earlier in the top bar&#39;s order, has the key.</td>
+<td>Choose another key, or take it from the other entry with <code>&quot;shortcut&quot;: null</code>.</td>
+</tr>
+<tr>
+<td><code>me.map: shortcut alt+T is already the shell&#39;s</code></td>
+<td>EiN keeps that key for itself.</td>
+<td>Choose another key.</td>
+</tr>
+<tr>
+<td><code>ui: archive.albums is already given by archive</code></td>
+<td>Two modules give the same id; the first by module name keeps it.</td>
+<td>Tell the authors of the module named first.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Other things that can go differently:</p>
+<ul>
+<li><p><strong>Nothing changes.</strong> Reload the page; EiN reads the navigation only when a page loads. Then check
+that the file is where EiN looks, with <code>cat ~/.ui/nav.json</code>.</p>
+</li>
+<li><p><strong>A button you added is missing, and <code>ui-nav</code> says nothing.</strong> It has no <code>action</code> and no rows; or
+it is a dropdown whose rows are all hidden; or it has <code>&quot;phone&quot;: false</code> and you are on a phone; or
+it opens the side drawer and you are on that address&#39;s own page.</p>
+</li>
+<li><p><strong>An empty space where an icon should be.</strong> The name is not one of Tabler&#39;s. <code>ui-icons</code> checks
+names: it prints the size of each icon it has and <code>none</code> for a name it does not know.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ui-icons beach beech</code></pre></div>
+<div class="code"><pre tabindex="0"><code>beach: 807 bytes
+beech: none</code></pre></div>
+</li>
+<li><p><strong>An entry of yours is never lit.</strong> Its address has a <code>?</code> in it, so it cannot match the page.</p>
+</li>
+<li><p><strong>A key does nothing.</strong> Keys do not work while the cursor is in a text field. Press <kbd>?</kbd>
+to see whether the key is listed; if it is not, run <code>ui-nav</code> for the reason.</p>
+</li>
+<li><p><strong>An entry you want back was hidden by your administrator.</strong> You cannot unhide it. Ask your
+administrator.</p>
+</li>
+</ul>
+<h2 id="where-to-go-next">Where to go next<a class="anchor" href="#where-to-go-next" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="interface.html">Finding your way around</a>: every part of the sidebar and the top bar.</li>
+<li><a href="../shell/editor.html">The editor</a>: editing files in the terminal and in the Nodes explorer.</li>
+<li><a href="../reference/config-files.html">Configuration files</a>: <code>/etc/ui/nav.json</code>, <code>~/.ui/nav.json</code> and
+the other files you can edit.</li>
+<li><a href="../develop/modules.html">Writing a module</a>: how a module gives its own entries, routes and panels.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="profile.html" rel="prev"><span>Previous</span>Your profile, favourites and trash</a><a class="next" href="phone.html" rel="next"><span>Next</span>EiN on a phone</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/customizing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+    </div>
+  </body>
+</html>

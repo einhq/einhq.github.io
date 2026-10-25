@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Files and storage – EiN documentation</title>
+    <meta name="description" content="This page explains how EiN keeps the content of files: what a file node records about its bytes, where the bytes are kept on the machine, and what copying, moving and deleting do to them. It is for anyone who wants to know where their photos are, and for the administrator who looks after the disk.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/concepts/files.html">
+    <meta property="og:title" content="Files and storage – EiN documentation">
+    <meta property="og:description" content="This page explains how EiN keeps the content of files: what a file node records about its bytes, where the bytes are kept on the machine, and what copying, moving and deleting do to them. It is for anyone who wants to know where their photos are, and for the administrator who looks after the disk.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/concepts/files.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html" aria-current="page">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Concepts</p>
+          <h1>Files and storage</h1>
+        </header>
+        <article class="prose">
+<p>This page explains how EiN keeps the content of files: what a file node records about its bytes,
+where the bytes are kept on the machine, and what copying, moving and deleting do to them. It is for
+anyone who wants to know where their photos are, and for the administrator who looks after the disk.</p>
+<h2 id="a-file-is-a-node-with-bytes">A file is a node with bytes<a class="anchor" href="#a-file-is-a-node-with-bytes" aria-label="Link to this section"></a></h2>
+<p>A photo, a video, a recording, a scanned letter and a text you write in the editor are all nodes of
+type <code>file</code>. Like every node, a file has a name in its folder, an owner, a group, permissions and an
+id. What sets it apart is that it holds bytes, and its attributes describe them:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>The file&#39;s name.</td>
+</tr>
+<tr>
+<td><code>mimetype</code></td>
+<td>What kind of file it is, such as <code>image/jpeg</code> or <code>video/mp4</code>. <a href="../guide/file-types.html#how-ein-tells-what-a-file-is">Supported files</a> explains how EiN tells.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>The size of the content in bytes.</td>
+</tr>
+<tr>
+<td><code>sha256</code></td>
+<td>The SHA-256 checksum of the content.</td>
+</tr>
+<tr>
+<td><code>writtenAt</code></td>
+<td>When the content last changed.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>A description, when someone wrote one.</td>
+</tr>
+<tr>
+<td><code>sourceId</code></td>
+<td>On a file EiN made from another one, such as a thumbnail, the id of the file it was made from.</td>
+</tr>
+<tr>
+<td><code>frozen</code></td>
+<td>When <code>true</code>, the content cannot be written.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A media file carries more once the Archive has read it, such as the time it was taken and its
+orientation; <a href="nodes.html">Nodes and node types</a> describes a node part by part.</p>
+<p>The bytes are kept apart from the node and are found by the node&#39;s id, not by its name or path.
+Renaming a file or moving it to another album changes the tree and leaves the bytes where they are,
+however large the file is.</p>
+<p>To see a file&#39;s attributes, ask for the node in JSON and pick them out:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+JSON_OUTPUT=1 <span class="hljs-built_in">stat</span> /archive/albums/christmas-2019/20191225_155434.jpg | jq <span class="hljs-string">&#x27;.attrs | {name, mimetype, size, sha256, writtenAt}&#x27;</span></code></pre></div>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;20191225_155434.jpg&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;mimetype&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;image/jpeg&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4182311</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sha256&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;9f2c41d07a6e3b58c1d4e2f09a7b36c5d18e4f20b9a63c7d5e1f08a2b4c69d3e&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;writtenAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2025-12-27T18:04:11.402Z&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<h2 id="what-a-file-keeps-beneath-it">What a file keeps beneath it<a class="anchor" href="#what-a-file-keeps-beneath-it" aria-label="Link to this section"></a></h2>
+<p>Any node can have children, and a file uses this to keep what EiN works out about it. With the
+Archive, a photo holds:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Child</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>metadata/</code></td>
+<td>What was read from the file, such as its EXIF in <code>metadata/exif</code> and the text read from it</td>
+</tr>
+<tr>
+<td><code>thumbnails/</code></td>
+<td>The sizes the web interface shows, and for a video or recording the versions a browser plays</td>
+</tr>
+<tr>
+<td><code>regions/</code></td>
+<td>The faces found on it and the boxes people drew</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>Where it was taken, when that is known</td>
+</tr>
+<tr>
+<td><code>comments/</code></td>
+<td>The comments people wrote on it</td>
+</tr>
+</tbody></table>
+</div>
+<p>These are nodes like any other, and many of them are files with bytes of their own. The original&#39;s
+bytes are never changed: when you turn a picture or correct its date, EiN changes what it keeps
+beside the file, not the file. Deleting the file deletes everything beneath it.</p>
+<p>Over SFTP these children are in a hidden folder named after the file with <code>_</code> added, as
+<a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SSH and SFTP</a> describes.</p>
+<h2 id="where-the-bytes-are-kept">Where the bytes are kept<a class="anchor" href="#where-the-bytes-are-kept" aria-label="Link to this section"></a></h2>
+<p>EiN keeps the bytes of files in three places, called tiers. Each file&#39;s bytes are on exactly one:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>What goes there</th>
+<th>Where it is in a standard install</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>disk</code></td>
+<td>Your originals: every file you upload or write, unless it belongs to another tier</td>
+<td><code>files</code> in the data folder</td>
+</tr>
+<tr>
+<td><code>volatile</code></td>
+<td>What EiN makes from another file and can make again: thumbnails, playable videos and recordings, face crops</td>
+<td><code>files-volatile</code> in the data folder</td>
+</tr>
+<tr>
+<td><code>db</code></td>
+<td>Small content that belongs with the database: the settings file, comments, SSH keys and <code>known_hosts</code>, the host keys of EiN&#39;s SSH server, password hashes, <code>/etc/fstab</code>, the text read from pictures and documents, and staging&#39;s record of what you sorted</td>
+<td>Large objects in PostgreSQL, in the volume <code>ein_db</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN decides the tier when the file is made:</p>
+<ul>
+<li>A file that names the file it was made from in <code>sourceId</code> goes on <code>volatile</code>, unless it is frozen.</li>
+<li>Everything else goes on <code>disk</code>.</li>
+<li>Content that belongs with the database is put on <code>db</code> by the command that writes it.</li>
+</ul>
+<p>The tier is fixed once the file exists, because the bytes stay where they were first written.
+Trying to change it fails with <code>storage tier is set once at creation and cannot be changed</code>. To make
+a file on a tier of your choosing, give it when you make the file:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mknode -t file /home/anna/notes/recipes.txt --as mimetype=text/plain --tier db</code></pre></div>
+<p><code>--tier</code> takes <code>disk</code>, <code>volatile</code> or <code>db</code>; see <a href="../reference/commands-core.html#mknode">mknode</a>.</p>
+<p>Because the volatile tier holds only what EiN can make again, it can sit on a faster or cheaper disk
+than your originals. The deployment sets the two places with <code>FILE_ROOT_PATH</code> and
+<code>VOLATILE_FILE_ROOT_PATH</code>; when the second is not set, both tiers share the first.
+<a href="../reference/environment.html">Environment variables</a> lists both.</p>
+<h2 id="on-the-machines-disk">On the machine&#39;s disk<a class="anchor" href="#on-the-machines-disk" aria-label="Link to this section"></a></h2>
+<p>In a standard install, the data folder is <code>~/ein/data</code> unless you chose another place at the
+install. EiN sees its folders at fixed paths inside its container:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Folder in the data folder</th>
+<th>Path inside EiN</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>files</code></td>
+<td><code>/files</code></td>
+<td>the <code>disk</code> tier: your originals</td>
+</tr>
+<tr>
+<td><code>files-volatile</code></td>
+<td><code>/files-volatile</code></td>
+<td>the <code>volatile</code> tier: thumbnails and other renditions</td>
+</tr>
+<tr>
+<td><code>files-tmp</code></td>
+<td><code>/files-tmp</code></td>
+<td>scratch space, such as copies of <code>db</code>-tier content handed to the media service</td>
+</tr>
+<tr>
+<td><code>old</code></td>
+<td><code>/old</code></td>
+<td>the files of an older installation that the importer module reads and links to; empty unless you put files there</td>
+</tr>
+</tbody></table>
+</div>
+<p>The media service mounts the same folders at the same paths, so a path EiN hands it is the file it
+opens, and the files on the <code>disk</code> and <code>volatile</code> tiers are never copied between them. It may read your originals but never write them.
+<a href="../admin/install.html#the-data-folder">Installing in detail</a> has the whole layout, and
+<a href="../admin/media-service.html">The media service</a> how the two share it.</p>
+<p>Inside <code>files</code> and <code>files-volatile</code>, each file&#39;s bytes are stored under its node id, in a folder named
+after the id&#39;s last two characters:</p>
+<div class="code"><pre tabindex="0"><code>files/
+├── 1C/
+│   └── 01JFX7Q2M8K4T6V9B3N5R0WD1C
+├── 7H/
+│   ├── 01JFX7Q3A2P9S4D8F6G1J5K07H
+│   └── 01JG2B8E5C7X1Z3V6N9M4Q2R7H
+…</code></pre></div>
+<p>There are no file names, albums or folders here; they are in the database. To find where one file&#39;s
+bytes are, ask <code>file-stat</code> for its path:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+JSON_OUTPUT=1 file-stat /archive/albums/christmas-2019/20191225_155434.jpg | jq -r .path</code></pre></div>
+<div class="code"><pre tabindex="0"><code>/files/1C/01JFX7Q2M8K4T6V9B3N5R0WD1C</code></pre></div>
+<p>The path is the one inside EiN&#39;s container; on the machine it is the same file under the data
+folder, here <code>~/ein/data/files/1C/01JFX7Q2M8K4T6V9B3N5R0WD1C</code>. A file on the <code>db</code> tier has no path.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Leave the folders in the data folder to EiN. A file changed there by hand no longer matches the
+size and checksum its node records, and a file deleted there leaves a node whose content is
+gone. Copy files in through the web interface, SFTP or the terminal instead.</p>
+</aside>
+<p>The data folder and the database belong together: the folders hold bytes named by ids, and only
+the database knows which id is which photo, in which album, owned by whom. Neither is any use
+without the other. <a href="../admin/data.html">Your data</a> says what to back up and how to move EiN to another
+machine.</p>
+<h2 id="size-checksum-and-when-the-content-changed">Size, checksum and when the content changed<a class="anchor" href="#size-checksum-and-when-the-content-changed" aria-label="Link to this section"></a></h2>
+<p>EiN keeps a file&#39;s <code>size</code>, <code>sha256</code> and <code>writtenAt</code> up to date as the bytes are written, whichever
+way they come in: an upload, SFTP, the editor or a shell redirect such as <code>&gt;</code>. You never run anything
+to bring them up to date.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>What depends on it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>size</code></td>
+<td>Listings, <code>du</code>, and a download&#39;s length</td>
+</tr>
+<tr>
+<td><code>sha256</code></td>
+<td>Finding exact copies of a file (<a href="../guide/duplicates.html">Duplicates</a>), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file&#39;s content changed so it reads it again</td>
+</tr>
+<tr>
+<td><code>writtenAt</code></td>
+<td>The modification time SFTP reports, so a backup tool or <code>rsync</code> sees a photo as unchanged while EiN is still working out its faces and description</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>writtenAt</code> is when the bytes last changed. A node also has a modification time of its own, which
+moves whenever any attribute changes; that is why SFTP reports <code>writtenAt</code> instead. A client that
+sets the time, such as <code>put -p</code> in <code>sftp</code> or <code>rsync -t</code>, sets <code>writtenAt</code>.</p>
+<p>While content is being written somewhere other than from the start in order, the checksum is
+cleared, and EiN reads the finished file back once to measure it. A file whose writing stopped
+part-way has no checksum rather than a wrong one.</p>
+<p>Two commands look at the bytes themselves rather than at what the node records:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>file-stat &lt;path&gt;</code></td>
+<td>The size, times, permissions and path of the bytes as they are stored. <code>-f</code> also measures the checksum and the type, which reads the whole file.</td>
+</tr>
+<tr>
+<td><code>file-sync &lt;path&gt;</code></td>
+<td>Measures the size, checksum and type of the bytes and writes them onto the node. For a file whose bytes changed without EiN seeing it.</td>
+</tr>
+<tr>
+<td><code>mime &lt;path&gt;</code></td>
+<td>The type the node records, the type its name suggests and the type its first bytes say.</td>
+</tr>
+</tbody></table>
+</div>
+<p>See <a href="../reference/commands-core.html#file-stat">file-stat</a>, <a href="../reference/commands-core.html#file-sync">file-sync</a>
+and <a href="../reference/commands-core.html#mime">mime</a>.</p>
+<h2 id="how-bytes-come-in-and-go-out">How bytes come in and go out<a class="anchor" href="#how-bytes-come-in-and-go-out" aria-label="Link to this section"></a></h2>
+<p>Every way in writes through the same place, so each one records size, checksum and time, and checks
+your permissions the same way.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Way</th>
+<th>What happens to the bytes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>An upload in the web interface</td>
+<td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. <a href="../guide/importing.html">Getting your photos in</a> has the ways to upload.</td>
+</tr>
+<tr>
+<td>Saving in the editor</td>
+<td>Replaces the content of the file you opened. See <a href="../shell/editor.html">The editor</a>.</td>
+</tr>
+<tr>
+<td>SFTP, <code>scp</code> and sshfs</td>
+<td>Written as on any SFTP server. See <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</td>
+</tr>
+<tr>
+<td>A shell redirect, <code>cp</code>, <code>unzip</code></td>
+<td>Written by the command, in EiN&#39;s terminal or over SSH. <code>unzip</code> refuses an archive whose files would not leave a tenth of their size free.</td>
+</tr>
+<tr>
+<td><strong>Download</strong> in the web interface</td>
+<td>The original&#39;s bytes, exactly as they were uploaded.</td>
+</tr>
+<tr>
+<td>Downloading several files at once</td>
+<td>One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="copying-moving-linking-and-deleting">Copying, moving, linking and deleting<a class="anchor" href="#copying-moving-linking-and-deleting" aria-label="Link to this section"></a></h2>
+<p>What happens to the bytes depends on the command:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you do</th>
+<th>What happens to the bytes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rename or move a file, <code>mv</code></td>
+<td>Nothing. The node keeps its id, and its bytes stay where they are.</td>
+</tr>
+<tr>
+<td>Move a file into or out of a mount (see below)</td>
+<td>The file is copied to the other side and then removed, so it gets a new id and its bytes are written again.</td>
+</tr>
+<tr>
+<td>Copy a file, <code>cp</code></td>
+<td>A new node with a copy of the bytes. The copy takes as much space again, and has the same checksum.</td>
+</tr>
+<tr>
+<td>Make a hard link, <code>ln</code></td>
+<td>The same node under a second name. There is one copy of the bytes.</td>
+</tr>
+<tr>
+<td>Make a softlink, <code>ln -s</code>, or add a picture to an album from elsewhere</td>
+<td>A link that points at the file by its path. It has no bytes of its own.</td>
+</tr>
+<tr>
+<td>Put a file in the trash</td>
+<td>The file moves into your trash with its bytes, and comes back whole when you restore it.</td>
+</tr>
+<tr>
+<td>Delete a file, <code>rm</code>, or empty the trash</td>
+<td>The node goes, with everything beneath it. Its bytes are removed once the last name the node has is gone.</td>
+</tr>
+</tbody></table>
+</div>
+<p>What is in your trash keeps its room on the disk. It is removed for good once it has been there
+longer than <strong>Days in the trash</strong>,
+<a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>, 30 days unless the
+administrator changes it. <code>rm</code>, a file removed over SFTP and <strong>Empty trash</strong> do not wait; what they
+delete is gone at once. <a href="links.html#deleting-the-trash-and-links">Links</a> explains what deleting does to
+the links to a file, and <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> shows the
+trash in the web interface.</p>
+<h2 id="mounts-parts-of-the-tree-kept-elsewhere">Mounts: parts of the tree kept elsewhere<a class="anchor" href="#mounts-parts-of-the-tree-kept-elsewhere" aria-label="Link to this section"></a></h2>
+<p>Most of the tree is stored in PostgreSQL, with its files&#39; bytes on the tiers above. A few parts of
+it are kept elsewhere, each mounted at a path the way a disk is mounted on Linux. <code>mount</code> with no
+arguments lists them, with <code>rw</code> or <code>r</code> for whether they can be written:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mount</code></pre></div>
+<p>The mounts every EiN makes at its start:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Kind</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/</code></td>
+<td><code>pg</code></td>
+<td>The tree itself, in PostgreSQL, with the three tiers</td>
+</tr>
+<tr>
+<td><code>/usr/bin</code></td>
+<td><code>command</code></td>
+<td>EiN&#39;s built-in commands, one node each</td>
+</tr>
+<tr>
+<td><code>/usr/lib</code></td>
+<td><code>filesystem</code></td>
+<td>Core&#39;s own files, read-only</td>
+</tr>
+<tr>
+<td><code>/etc/files</code></td>
+<td><code>filesystem</code></td>
+<td>The scripts EiN runs at its start, read-only</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td><code>memory</code></td>
+<td>Scratch space, held in memory. It is empty again after every restart.</td>
+</tr>
+<tr>
+<td><code>/tmp/dev-modules</code></td>
+<td><code>filesystem</code></td>
+<td>Modules that come with the deployment itself, read-only</td>
+</tr>
+<tr>
+<td><code>/var/lib/modules</code></td>
+<td><code>filesystem</code></td>
+<td>The modules installed with <code>mod install</code>, in the data folder&#39;s <code>modules</code> folder</td>
+</tr>
+<tr>
+<td><code>/usr/docs/guide</code></td>
+<td><code>filesystem</code></td>
+<td>The built-in guide, read-only</td>
+</tr>
+</tbody></table>
+</div>
+<p>A <code>filesystem</code> mount shows a folder of the machine, and an <code>sftp</code> mount shows a folder of another
+machine. Both are mirrors: their files are the other side&#39;s files, nothing is stored about them in
+EiN, and changes there start no pipelines, so EiN makes no thumbnails, reads no dates and finds no
+faces in them. A file in a mirror cannot have children. To bring files from a mount into the
+archive, copy them into staging.</p>
+<p>Only the administrator mounts and unmounts. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Reaching other machines</a>
+shows how to mount a folder of another machine and keep the mount across restarts, and
+<a href="tree.html">The tree</a> describes every standard path.</p>
+<h2 id="see-how-much-space-is-used">See how much space is used<a class="anchor" href="#see-how-much-space-is-used" aria-label="Link to this section"></a></h2>
+<p><code>df</code> shows how full the disk under each tier is, how fast it is filling and when it will be full,
+and the size of the database:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">df</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>tier    disk       12% used  801 GB free  full in ~912d
+tier    volatile   12% used  801 GB free  full in ~912d
+tier    tmp        12% used  801 GB free  full in ~912d
+database  3.4 GB</code></pre></div>
+<p><code>tmp</code> is the scratch folder, measured because a full one stops EiN too. In a standard install the
+three folders are on one disk, so they show the same figures, and <code>full in</code> appears once EiN has measured the disk long enough to see it fill. The <strong>Storage</strong> card on the <strong>Dashboard</strong> shows the same;
+see <a href="../admin/monitoring.html">Health and the dashboard</a>.</p>
+<p><code>du</code> adds up the sizes of the files under a path, including what each file keeps beneath it, such
+as its thumbnails. It counts a file reached by two names once and does not follow softlinks, so a
+picture added to an album from elsewhere is counted where it lives. It counts only what you may
+read.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">du</span> -sh /archive/albums/christmas-2019</code></pre></div>
+<div class="code"><pre tabindex="0"><code>1.8 GB	/archive/albums/christmas-2019</code></pre></div>
+<p><a href="../admin/data.html#see-what-takes-room">Your data</a> shows how to measure the data folder from the
+machine itself, and <a href="../admin/data.html#delete-things-and-free-space">Delete things and free space</a>
+how to make room.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A picture&#39;s thumbnail is missing although the picture was read long ago</td>
+<td>Its rendition was never finished, or its bytes on the <code>volatile</code> tier are gone.</td>
+<td>Run <code>regenerate --force</code> on the picture or its album. See <a href="../reference/commands-archive.html#regenerate">regenerate</a>.</td>
+</tr>
+<tr>
+<td>A file&#39;s size or checksum is wrong after it was changed outside EiN</td>
+<td>The bytes changed without passing through EiN, so the node was not told.</td>
+<td>Run <code>file-sync</code> on the file.</td>
+</tr>
+<tr>
+<td><code>File is frozen and cannot be modified</code></td>
+<td>The file is marked <code>frozen</code>, as the importer marks the originals it links to in <code>old</code>.</td>
+<td>Leave its content as it is. Someone who may change the file can lift the mark with <code>attrs -d frozen &lt;file&gt;</code>; a copy made with <code>cp</code> is frozen too.</td>
+</tr>
+<tr>
+<td><code>storage tier is set once at creation and cannot be changed</code></td>
+<td>A command tried to move a file to another tier.</td>
+<td>Copy the content into a new file made with <code>--tier</code>, then remove the old one.</td>
+</tr>
+<tr>
+<td><code>a filesystem is mounted at /mnt/nas</code> when removing or moving a folder</td>
+<td>A mount stands on that folder or below it.</td>
+<td>Unmount it first with <code>unmount</code>, or <code>unmount --save</code> to keep it from coming back at the next start.</td>
+</tr>
+<tr>
+<td><code>mount: permission denied, only admin is allowed to mount</code></td>
+<td>Only the administrator mounts.</td>
+<td>Ask the administrator.</td>
+</tr>
+<tr>
+<td><code>df</code> says <code>no disk sample yet — is metrics-sampler running?</code></td>
+<td>The service that measures the disk has not taken a sample yet, or is not running.</td>
+<td>Wait a quarter of an hour after a start. If it stays, see <a href="../admin/services-logs.html">Services and logs</a>.</td>
+</tr>
+<tr>
+<td><code>unzip</code> says <code>not enough space</code></td>
+<td>The files in the zip would not leave a tenth of their size free.</td>
+<td>Free space on the disk, or expand the zip on a machine with room and copy the files in.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../admin/troubleshooting.html">Troubleshooting</a> covers a disk that has filled up and other problems
+of the whole installation.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="nodes.html">Nodes and node types</a>: what a node is, part by part.</li>
+<li><a href="links.html">Links</a>: hard links, softlinks, and what deleting and the trash do.</li>
+<li><a href="../guide/file-types.html">Supported files</a>: which files EiN works with and what it makes from them.</li>
+<li><a href="../admin/install.html#the-data-folder">Installing in detail</a>: the data folder and the database volume.</li>
+<li><a href="../admin/data.html">Your data: backup, moving and removing</a>: what to back up, and why the files and the database go together.</li>
+<li><a href="../shell/remote.html">Reaching other machines</a>: mounting a folder of another machine.</li>
+<li><a href="../reference/environment.html">Environment variables</a>: <code>FILE_ROOT_PATH</code>, <code>VOLATILE_FILE_ROOT_PATH</code> and <code>FILE_TMP_PATH</code>.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="links.html" rel="prev"><span>Previous</span>Links</a><a class="next" href="pipelines.html" rel="next"><span>Next</span>Changes and pipelines</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/files.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-file-is-a-node-with-bytes">A file is a node with bytes</a></li><li><a href="#what-a-file-keeps-beneath-it">What a file keeps beneath it</a></li><li><a href="#where-the-bytes-are-kept">Where the bytes are kept</a></li><li><a href="#on-the-machines-disk">On the machine's disk</a></li><li><a href="#size-checksum-and-when-the-content-changed">Size, checksum and when the content changed</a></li><li><a href="#how-bytes-come-in-and-go-out">How bytes come in and go out</a></li><li><a href="#copying-moving-linking-and-deleting">Copying, moving, linking and deleting</a></li><li><a href="#mounts-parts-of-the-tree-kept-elsewhere">Mounts: parts of the tree kept elsewhere</a></li><li><a href="#see-how-much-space-is-used">See how much space is used</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

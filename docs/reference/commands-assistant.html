@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assistant commands – EiN documentation</title>
+    <meta name="description" content="The commands the assistant module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/commands-assistant.html">
+    <meta property="og:title" content="Assistant commands – EiN documentation">
+    <meta property="og:description" content="The commands the assistant module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/commands-assistant.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html" aria-current="page">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Assistant commands</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
+
+<p>The commands the assistant module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with <code>--help</code>; <a href="commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#agent-eval">agent-eval</a> · <a href="#assistant-ask">assistant-ask</a> · <a href="#assistant-chat">assistant-chat</a> · <a href="#assistant-commands">assistant-commands</a> · <a href="#llm-chat">llm-chat</a> · <a href="#llm-status">llm-status</a></p>
+<h2 id="a">A<a class="anchor" href="#a" aria-label="Link to this section"></a></h2>
+<h3 id="agent-eval"><code>agent-eval</code><a class="anchor" href="#agent-eval" aria-label="Link to this section"></a></h3>
+<p>Ask the chat&#39;s loop the modules&#39; questions against the real archive, and score what happens.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>agent-eval [--fixtures=&lt;path&gt;] [--bucket=&lt;string&gt;] [--ids=&lt;string&gt;] [--limit=&lt;number&gt;] [--verbose] [--prompt=&lt;path&gt;] [--print-prompt] [--user=&lt;path&gt;] [--out=&lt;path&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--fixtures=&lt;path&gt;</code></td>
+<td>a file of questions to ask (default: every module&#39;s, in its drop-in&#39;s eval.json)</td>
+</tr>
+<tr>
+<td><code>--bucket=&lt;string&gt;</code></td>
+<td>only questions from this bucket.</td>
+</tr>
+<tr>
+<td><code>--ids=&lt;string&gt;</code></td>
+<td>only these questions, by id, comma-separated.</td>
+</tr>
+<tr>
+<td><code>--limit=&lt;number&gt;</code></td>
+<td>stop after this many questions.</td>
+</tr>
+<tr>
+<td><code>--verbose</code></td>
+<td>a line per question as it finishes.</td>
+</tr>
+<tr>
+<td><code>--prompt=&lt;path&gt;</code></td>
+<td>the prompt file to use (default /etc/assistant-prompt.md)</td>
+</tr>
+<tr>
+<td><code>--print-prompt</code></td>
+<td>print the system prompt and the tool schemas the model is given, and stop.</td>
+</tr>
+<tr>
+<td><code>--user=&lt;path&gt;</code></td>
+<td>the person to ask as, by path (default: the person linked to the account running it)</td>
+</tr>
+<tr>
+<td><code>--out=&lt;path&gt;</code></td>
+<td>write the results here after every question, so a dropped session loses nothing.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>agent-eval --<span class="hljs-built_in">limit</span> 5 --verbose
+agent-eval --bucket kin
+<span class="hljs-built_in">nohup</span> agent-eval --user /archive/people/Anna_Exempel --out /tmp/agent-eval.json</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: a summary — the model that answered, how often the right command was reached, how many lines ran, how many questions were answered — and the turns of each question.</p>
+<h3 id="assistant-ask"><code>assistant-ask</code><a class="anchor" href="#assistant-ask" aria-label="Link to this section"></a></h3>
+<p>Answer a question about EiN by running its commands (the chat drawer&#39;s backend)</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>assistant-ask [--think] [--resume] [--chat=&lt;string&gt;] [--history=&lt;string&gt;] [--context=&lt;string&gt;] [--max-steps=&lt;string&gt;] [--progress=&lt;string&gt;] &lt;message&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;message&gt;</code></td>
+<td>what the user wrote; none with --resume.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--think</code></td>
+<td>think before every model call: slower, fewer malformed commands.</td>
+</tr>
+<tr>
+<td><code>--resume</code></td>
+<td>go on with the chat&#39;s last turn after the user ran or declined its proposal.</td>
+</tr>
+<tr>
+<td><code>--chat=&lt;string&gt;</code></td>
+<td>durable chat id; loads and appends history in $HOME/.chats.</td>
+</tr>
+<tr>
+<td><code>--history=&lt;string&gt;</code></td>
+<td>earlier turns as a JSON array of {role: user|assistant, content}.</td>
+</tr>
+<tr>
+<td><code>--context=&lt;string&gt;</code></td>
+<td>what the UI shows, as JSON {route?, section?, title?, about?, node?, lightbox?, shown?: [paths already shown]}.</td>
+</tr>
+<tr>
+<td><code>--max-steps=&lt;string&gt;</code></td>
+<td>tool calls allowed before the model must answer (default 12)</td>
+</tr>
+<tr>
+<td><code>--progress=&lt;string&gt;</code></td>
+<td>ephemeral turn id whose waiting/thinking phase may be read while this command runs.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="assistant-chat"><code>assistant-chat</code><a class="anchor" href="#assistant-chat" aria-label="Link to this section"></a></h3>
+<p>List, create, read, or delete durable assistant chats; read a turn in flight; record how a proposal ended; the questions the modules suggest.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>assistant-chat [--error=&lt;string&gt;] [--results=&lt;string&gt;] [--script=&lt;string&gt;] &lt;action&gt; [&lt;id&gt;] [&lt;message&gt;] [&lt;status&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;action&gt;</code></td>
+<td>list, create, read, delete, progress, examples, or outcome.</td>
+</tr>
+<tr>
+<td><code>[&lt;id&gt;]</code></td>
+<td>chat id for read/delete/outcome.</td>
+</tr>
+<tr>
+<td><code>[&lt;message&gt;]</code></td>
+<td>outcome: id of the message carrying the proposal.</td>
+</tr>
+<tr>
+<td><code>[&lt;status&gt;]</code></td>
+<td>outcome: ran, failed, or dismissed.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--error=&lt;string&gt;</code></td>
+<td>outcome: what the failed command said.</td>
+</tr>
+<tr>
+<td><code>--results=&lt;string&gt;</code></td>
+<td>outcome: JSON array of {command, ok, exitCode?, output}, what each command said.</td>
+</tr>
+<tr>
+<td><code>--script=&lt;string&gt;</code></td>
+<td>outcome: the block as run, when the user edited it first.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="assistant-commands"><code>assistant-commands</code><a class="anchor" href="#assistant-commands" aria-label="Link to this section"></a></h3>
+<p>Find a command by what it is for, judge whether a line changes anything, or rebuild the assistant&#39;s command index.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>assistant-commands [--limit=&lt;number&gt;] &lt;action&gt; &lt;text&gt;...</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;action&gt;</code></td>
+<td>find, judge or reindex.</td>
+</tr>
+<tr>
+<td><code>&lt;text&gt;...</code></td>
+<td>find: what the command should do; judge: the shell line.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--limit=&lt;number&gt;</code></td>
+<td>find: how many commands (default 8)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>assistant-commands find <span class="hljs-string">&#x27;list running services&#x27;</span>
+assistant-commands judge <span class="hljs-string">&#x27;service restart pipeline-pruner&#x27;</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: find: the best commands with name, description, effect and score; judge: read or write with the reasons; reindex: how many commands were indexed.</p>
+<h2 id="l">L<a class="anchor" href="#l" aria-label="Link to this section"></a></h2>
+<h3 id="llm-chat"><code>llm-chat</code><a class="anchor" href="#llm-chat" aria-label="Link to this section"></a></h3>
+<p>Ask the assistant&#39;s language model one thing, and print what it answers.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>llm-chat [--system=&lt;string&gt;] [--history=&lt;string&gt;] [--max-tokens=&lt;number&gt;] [--timeout=&lt;number&gt;] [--think] &lt;message&gt;...</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;message&gt;...</code></td>
+<td>what to ask.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--system=&lt;string&gt;</code></td>
+<td>the system text: what the model is and how to answer.</td>
+</tr>
+<tr>
+<td><code>--history=&lt;string&gt;</code></td>
+<td>earlier turns, as JSON: [{&quot;role&quot;:&quot;user&quot;|&quot;assistant&quot;,&quot;content&quot;:&quot;…&quot;}].</td>
+</tr>
+<tr>
+<td><code>--max-tokens=&lt;number&gt;</code></td>
+<td>the most the answer may be (default 768)</td>
+</tr>
+<tr>
+<td><code>--timeout=&lt;number&gt;</code></td>
+<td>seconds to wait for the answer (default 180)</td>
+</tr>
+<tr>
+<td><code>--think</code></td>
+<td>let the model think before it answers.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>llm-chat <span class="hljs-string">&#x27;Vad är huvudstaden i Norge?&#x27;</span>
+llm-chat --system <span class="hljs-string">&#x27;Answer in one word.&#x27;</span> <span class="hljs-string">&#x27;The colour of the sky?&#x27;</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: content, the answer, and model, the model that wrote it.</p>
+<h3 id="llm-status"><code>llm-status</code><a class="anchor" href="#llm-status" aria-label="Link to this section"></a></h3>
+<p>Whose the assistant&#39;s language model is, where it runs, and (with --checks) whether it answers.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>llm-status [--checks] [--brief]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--checks</code></td>
+<td>The checks health reads: whether it answers, where it is, whether its model has been tried.</td>
+</tr>
+<tr>
+<td><code>--brief</code></td>
+<td>The checks in one line (used by service-list --detail)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>llm-status
+llm-status --checks</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: url, model, kind (ours or external), provider for an external one, card (card or cpu) for ours. With --checks, health&#39;s checks.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="commands-archive.html" rel="prev"><span>Previous</span>Archive commands</a><a class="next" href="commands-ems.html" rel="next"><span>Next</span>Media service commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/commands-assistant.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a">A</a></li><li class="nested"><a href="#agent-eval">agent-eval</a></li><li class="nested"><a href="#assistant-ask">assistant-ask</a></li><li class="nested"><a href="#assistant-chat">assistant-chat</a></li><li class="nested"><a href="#assistant-commands">assistant-commands</a></li><li><a href="#l">L</a></li><li class="nested"><a href="#llm-chat">llm-chat</a></li><li class="nested"><a href="#llm-status">llm-status</a></li></ul></aside>
+    </div>
+  </body>
+</html>

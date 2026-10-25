@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>First steps – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/start/first-steps.html">
+    <meta property="og:title" content="First steps – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/start/first-steps.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section class="here"><h2>Getting started</h2><ul><li><a href="how-ein-works.html">How EiN works</a></li><li><a href="install.html">Install EiN</a></li><li><a href="first-steps.html" aria-current="page">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Getting started</p>
+          <h1>First steps</h1>
+        </header>
+        <article class="prose">
+<p>This page is for the administrator who has just <a href="install.html">installed EiN</a> and is setting it up
+for a family. It goes from the first sign-in to the family using it, one short step at a time, and
+links each step to the page that covers it in full.</p>
+<p>Take the steps in order. Some of them depend on an earlier one: the sharing defaults in step 4, for
+example, apply to albums made after you set them, so set them before the first import.</p>
+<ol>
+<li><a href="#sign-in-and-change-the-admin-password">Sign in and change the admin password</a></li>
+<li><a href="#check-the-dashboard">Check the dashboard</a></li>
+<li><a href="#install-the-modules-you-want">Install the modules you want</a></li>
+<li><a href="#decide-who-sees-what">Decide who sees what</a></li>
+<li><a href="#create-accounts-for-the-family">Create accounts for the family</a></li>
+<li><a href="#import-the-first-photos">Import the first photos</a></li>
+<li><a href="#share-an-album">Share an album</a></li>
+<li><a href="#let-the-family-sign-in">Let the family sign in</a></li>
+<li><a href="#keep-ein-running">Keep EiN running</a></li>
+</ol>
+<p>Commands on this page are written for podman. With Docker, write <code>docker compose</code> where the page
+says <code>podman compose</code>.</p>
+<h2 id="sign-in-and-change-the-admin-password">Sign in and change the admin password<a class="anchor" href="#sign-in-and-change-the-admin-password" aria-label="Link to this section"></a></h2>
+<p>At its end the install printed the address and the administrator&#39;s password:</p>
+<div class="code"><pre tabindex="0"><code>EiN is up at http://ein.local:8080/
+Sign in as admin with the password 0b6f2c1e-8d4a-4c7e-9a51-2e7d3f6b9c40, and change it: it is shown this once.</code></pre></div>
+<ol>
+<li>Open the address in a browser. If your computer cannot find that name, use the machine&#39;s IP
+address instead, such as <code>http://192.168.1.20:8080/</code>.</li>
+<li>Enter <code>admin</code> under <strong>Username or e-mail</strong>, the printed password under <strong>Password</strong>, and choose
+<strong>Sign in</strong>. EiN opens on Home, titled <strong>Welcome</strong>.</li>
+<li>Open the account menu under your picture at the top right, choose <strong>Profile</strong>, then the
+<strong>Security</strong> tab.</li>
+<li>Fill in <strong>Current password</strong>, <strong>New password</strong> and <strong>Confirm new password</strong>, and choose
+<strong>Update password</strong>. EiN answers <strong>Password updated</strong>.</li>
+</ol>
+<p><a href="install.html#change-the-admin-password-straight-away">Install EiN</a> shows the form.</p>
+<p>You can change it in EiN&#39;s terminal instead. Open the terminal with the top bar&#39;s terminal button
+or <kbd>Alt</kbd>+<kbd>T</kbd>, and run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+user passwd admin</code></pre></div>
+<p>It asks for the new password after <code>Password:</code>. The <a href="../reference/commands-core.html#user-passwd">reference</a>
+lists its options.</p>
+<p>If the install&#39;s output is gone, the password is still in the container&#39;s log:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose logs ein | grep <span class="hljs-string">&#x27;Admin password set to&#x27;</span></code></pre></div>
+<p>That copy lasts only as long as the container. Every later run of <code>./setup.sh</code> makes the
+containers anew, and the line goes with them, so change the password before you update or add a
+part.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Nothing else keeps the admin password, and EiN sends no e-mail, so there is no &quot;forgot password&quot;.
+Keep the new one in a password manager. If it is lost, only someone who can act as the
+administrator can set a new one. Step 5 shows how to give a second person that right.</p>
+</aside>
+<h2 id="check-the-dashboard">Check the dashboard<a class="anchor" href="#check-the-dashboard" aria-label="Link to this section"></a></h2>
+<p>Choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. Only administrators have it. The page,
+<strong>System dashboard</strong>, shows one word above its title for how things stand:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Healthy</strong></td>
+<td>Nothing is waiting to be done.</td>
+<td>Nothing.</td>
+</tr>
+<tr>
+<td><strong>Catching up</strong></td>
+<td>Work is waiting, and some was done in the last hour, as after an import.</td>
+<td>Wait. It turns to <strong>Healthy</strong> when the work is done.</td>
+</tr>
+<tr>
+<td><strong>Stuck</strong></td>
+<td>Work is waiting, and none was done in the last hour.</td>
+<td>Look at the <strong>Work</strong> tab, and read <a href="../admin/monitoring.html">Health and the dashboard</a>.</td>
+</tr>
+<tr>
+<td><strong>Needs a person</strong></td>
+<td>A check failed.</td>
+<td>Read the failed check on the <strong>Overview</strong> tab, and see <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, and the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>Healthy means nothing is waiting: a fresh install should read so within a minute or two</figcaption></figure>
+<p>For the first minute after EiN starts, the dashboard may show <strong>warming up</strong> while it takes its
+first readings.</p>
+<p>Below the badges, the <strong>Overview</strong> tab lists every check that is not fine. Warnings do not stop
+<strong>Healthy</strong>, and two are expected on an install without the optional parts:</p>
+<ul>
+<li>with the archive but without the media service, <code>ems</code> says
+<code>http://ems:8181 is not answering; work that needs it waits</code>;</li>
+<li>with the assistant but without a language model, <code>llm</code> says
+<code>http://llm:8190 is not answering; the chat cannot answer until it does</code>.</li>
+</ul>
+<p>With the parts installed, the same warnings show for a while after a start, as the media service
+loads its models and the language model downloads its own the first time; they clear by
+themselves. Step 3 says how to add either part.</p>
+<h2 id="install-the-modules-you-want">Install the modules you want<a class="anchor" href="#install-the-modules-you-want" aria-label="Link to this section"></a></h2>
+<p>What EiN is for comes from its modules. Without any, the sidebar holds only <strong>Home</strong>, <strong>Search</strong>
+and the pages under <strong>System</strong>. These modules are published:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it adds</th>
+<th>What it needs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td><strong>Media</strong>, <strong>Staging</strong>, <strong>Year</strong>, <strong>Map</strong>, <strong>Albums</strong>, <strong>People</strong>, <strong>Locations</strong> and <strong>Devices</strong> in the sidebar, and <strong>Import media</strong> in the <strong>Create</strong> menu</td>
+<td>the <code>ems</code> module, installed with it, and the media service</td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td><strong>Chat</strong>, in the sidebar and as a top-bar button</td>
+<td>a language model, your own or a hosted one</td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td>the client for the media service, and the <strong>Media service</strong> tab on the dashboard</td>
+<td>the media service</td>
+</tr>
+</tbody></table>
+</div>
+<p>If you installed with the Archive command from einhq.eu, the three are installed already. Open
+<strong>Settings → Modules</strong>, choose each module, and check that its panel says <strong>Active</strong>, not
+<strong>Not set up</strong> or <strong>Setup failed</strong>.</p>
+<p>To install a module:</p>
+<ol>
+<li>Open <strong>Settings → Modules</strong>.</li>
+<li>Choose the <strong>Published modules</strong> button beside the filter.</li>
+<li>Choose <strong>Install</strong> beside the module. EiN installs the modules it needs as well, and says
+so: &quot;Installed, with ems&quot;.</li>
+<li>Reload the page to see the module&#39;s pages.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="Settings → Modules with the archive module's panel open: its version, its Active badge, and the About, Dependencies, Services, Pages, Commands and Settings tabs" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module has a panel that says whether it is set up and what it adds</figcaption></figure>
+<p>In EiN&#39;s terminal, <a href="../reference/commands-core.html#mod-install"><code>mod install</code></a> does the same:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mod install archive</code></pre></div>
+<p>The archive&#39;s photos, videos and recordings need the <strong>media service</strong>, a separate container that
+reads dates and places, makes the previews, and finds faces, text and speech. Installing the module
+does not install the service. If you left it out at the install, add it on the machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh --ems</code></pre></div>
+<p>It builds the media service&#39;s image, about 30 GB, on the machine, and starts EiN again. Without
+it, uploads arrive but wait in staging as <strong>being prepared</strong>. The assistant needs a language
+model the same way: <code>~/ein/setup.sh --llm</code> runs one on this machine, and a hosted provider is set
+in <code>~/ein/.env</code>. <a href="../admin/modules.html">Modules</a>, <a href="../admin/media-service.html">The media service</a> and
+<a href="../admin/language-model.html">The language model</a> have the details.</p>
+<h2 id="decide-who-sees-what">Decide who sees what<a class="anchor" href="#decide-who-sees-what" aria-label="Link to this section"></a></h2>
+<p>Open <strong>Settings → Permissions</strong>. Its four cards each say in a sentence what their settings come to.</p>
+<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The demo shown here lets visitors browse; a family&#39;s own EiN keeps that off</figcaption></figure>
+<p><strong>Visitors.</strong> <strong>Visitors may browse</strong> is <strong>Off</strong> on a new install, and the setting itself advises
+keeping it off for a family&#39;s own archive. Off, anyone who has not signed in is asked to sign in.
+A share link still opens what it was made for (step 7). Turn it on only for an archive meant to be
+public. The setting is <a href="../reference/settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>.</p>
+<p><strong>Sharing</strong> sets what anything created as shared starts with: an album made with <strong>Create →
+Album</strong>, and a group filed from staging into a new album. Its rows:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>New install</th>
+<th>What it decides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Owner</strong></td>
+<td>empty: whoever creates it</td>
+<td>who owns a new album</td>
+</tr>
+<tr>
+<td><strong>Group</strong></td>
+<td>Users, which is everyone with an account</td>
+<td>the group a new album is shared with</td>
+</tr>
+<tr>
+<td><strong>Permissions</strong></td>
+<td><strong>Owner</strong> Edit, <strong>Group “users”</strong> View, <strong>Everyone else</strong> None (<code>as 0750</code>)</td>
+<td>what the owner, the group and anyone else may do with it</td>
+</tr>
+</tbody></table>
+</div>
+<p>So on a new install the card reads: &quot;Shared with Users: the owner can change it, members can see
+it, anyone else can&#39;t see it.&quot; Some common choices:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want</th>
+<th>Set</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Everyone with an account sees every album, and only its owner changes it</td>
+<td>nothing: the defaults do this</td>
+</tr>
+<tr>
+<td>The family adds to and changes each other&#39;s albums</td>
+<td><strong>Group “users”</strong> to <strong>Edit</strong></td>
+</tr>
+<tr>
+<td>Some accounts are not family, such as friends you share a single album with</td>
+<td>a family group as <strong>Group</strong> (see step 5), with <strong>Everyone else</strong> at <strong>None</strong></td>
+</tr>
+</tbody></table>
+</div>
+<p>Each row is saved on its own with <strong>Save change</strong>. A change applies to what is created afterwards;
+albums that exist keep their sharing, which you change with <strong>Share</strong> (step 7). Each person can
+also narrow what they create, under <strong>Profile → Preferences → How widely what you create is
+shared</strong>.</p>
+<p><strong>Sign-in sessions.</strong> A browser stays signed in for <strong>1 day</strong> after its last visit
+(<strong>Browser sign-in</strong>), and a session unused for <strong>12 hours</strong> ends (<strong>Idle session</strong>). Lengthen both
+if the family should stay signed in longer on their own devices.</p>
+<p><a href="../guide/sharing.html">Sharing</a> and <a href="../admin/permissions.html">Permissions in depth</a> explain what each
+choice does.</p>
+<h2 id="create-accounts-for-the-family">Create accounts for the family<a class="anchor" href="#create-accounts-for-the-family" aria-label="Link to this section"></a></h2>
+<p>Give each person an account of their own. What they upload waits in their own staging area, which
+only they see, until they file it into an album.</p>
+<ol>
+<li>Open <strong>Settings → Users</strong> and choose the <strong>New user</strong> button beside the filter.</li>
+<li>Type the person&#39;s <strong>Name</strong>, such as Helen Okafor. <strong>Username</strong> is suggested from it (<code>helen</code>).
+It is lower case and cannot be changed later.</li>
+<li><strong>E-mail</strong> is optional: with one, they can sign in with it instead of the username. EiN sends
+no e-mail to it.</li>
+<li>Type a <strong>Password</strong> and <strong>Repeat</strong> it. You can leave both empty and set the password later, but
+they cannot sign in until you do.</li>
+<li>Under <strong>Groups</strong>, <strong>Users</strong> is ticked and greyed: everyone who signs in belongs to it. Tick any
+other group the person should be in.</li>
+<li>Choose <strong>Create user</strong>. EiN says &quot;Created helen.&quot; and opens the account.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/settings-users@2x.webp"><img src="../../assets/shots/settings-users.webp" srcset="../../assets/shots/settings-users.webp 1x, ../../assets/shots/settings-users@2x.webp 2x" alt="Settings → Users with the Administrator account open: Profile, Groups with Users ticked and greyed, and the New user button beside the filter" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Users tab lists every account; the button beside the filter makes a new one</figcaption></figure>
+<p>If everyone with an account is family, the <strong>Users</strong> group already covers them, and you need no
+other group. If some accounts are not family, make a group for the family:</p>
+<ol>
+<li>Open <strong>Settings → Groups</strong> and choose the <strong>New group</strong> button beside the filter.</li>
+<li>Type a <strong>Name</strong>, such as <code>family</code> (it cannot be changed later), a <strong>Title</strong>, such as Family, and
+tick the <strong>Members</strong>.</li>
+<li>Choose <strong>Create group</strong>.</li>
+<li>On <strong>Settings → Permissions</strong>, choose the group as <strong>Group</strong> on the <strong>Sharing</strong> card, and add it
+under <strong>Groups</strong> on the <strong>New users</strong> card, so the New user form ticks it for each new account.</li>
+</ol>
+<p>Group changes reach a person the next time they sign in.</p>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>Tick <strong>Administrators on request</strong> for a second person you trust, or for an everyday account of
+your own. They can then choose <strong>Administer…</strong> in the account menu and enter their own password
+again to act as the administrator, until they sign out or choose <strong>Leave admin mode</strong>. Such a
+person can also set a new admin password if it is lost. Ticking <strong>Administrators</strong> does not do
+this: it is only the administrator account&#39;s own group.</p>
+</aside>
+<p>When someone forgets their password, open their account in <strong>Settings → Users</strong>, type a
+<strong>New password</strong> and <strong>Repeat</strong> it under <strong>Password</strong>, and choose <strong>Set password</strong>.
+<a href="../admin/accounts.html">Accounts and groups</a> covers the rest: disabling and deleting accounts,
+groups, and the commands.</p>
+<h2 id="import-the-first-photos">Import the first photos<a class="anchor" href="#import-the-first-photos" aria-label="Link to this section"></a></h2>
+<p>Everything you import lands in your own staging area first, outside the shared library. There EiN
+reads each file and suggests albums for it, and you decide where it goes.</p>
+<ol>
+<li>In the top bar, open <strong>Create</strong> (the plus) and choose <strong>Import media</strong>.</li>
+<li>Under <strong>Into which category?</strong>, choose <strong>Inbox</strong>, or <strong>New category</strong> for one source kept
+together. For a new category, choose <strong>What it holds</strong>, such as <strong>Scans</strong> for a box of scanned
+prints or <strong>Google Photos export</strong>, and type what it is <strong>Called</strong>.</li>
+<li>Click <strong>Choose files</strong> or <strong>Choose a folder</strong>, and pick what to upload.</li>
+<li>Click <strong>Upload</strong>.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog with the Inbox category chosen, the Choose files and Choose a folder buttons, and the SFTP path for large imports" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Import media puts files into a category of your staging area, never straight into the library</figcaption></figure>
+<p>The category&#39;s page opens on its <strong>Files</strong> tab, and the strip above the tabs shows how far the
+files are: &quot;N of M arriving&quot;, &quot;N being prepared&quot;, &quot;N being grouped&quot;. The upload runs in the browser
+tab, so keep the tab open until the <strong>Uploads</strong> button in the top bar says it is done. Meanwhile
+the dashboard reads <strong>Catching up</strong>. For more than about 10,000 files, copy them over SFTP into
+the category&#39;s folder instead, such as <code>/home/admin/staging/files/inbox/</code>; see
+<a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</p>
+<p>A few minutes after the files are prepared, suggested albums appear on the <strong>Sort</strong> tab. To file
+one:</p>
+<ol>
+<li>Open <strong>Staging</strong> in the sidebar, then the category, then <strong>Sort</strong>.</li>
+<li>Each group shows its proposal, such as <strong>New album “…”</strong> or <strong>Add to “…”</strong>, which
+<kbd>Enter</kbd> accepts on a computer. Where there is none, choose <strong>New album…</strong> in the
+group&#39;s ⋯ menu, or press <kbd>N</kbd>.</li>
+<li>In the <strong>New album</strong> dialog, check the <strong>Name</strong> and choose <strong>Create album</strong>. The photos leave
+staging for the new album, shared as the <strong>Sharing</strong> card says.</li>
+</ol>
+<p>The album is now under <strong>Albums</strong> in the sidebar. Every decision can be undone, from the message
+it leaves or from the <strong>Done</strong> tab. <a href="../guide/importing.html">Getting your photos in</a> and
+<a href="../guide/staging.html">Sorting in staging</a> go through every way in and every choice on the Sort
+tab.</p>
+<h2 id="share-an-album">Share an album<a class="anchor" href="#share-an-album" aria-label="Link to this section"></a></h2>
+<p>With the defaults, an album you file is already visible to everyone with an account. Use
+<strong>Share</strong> to change that for one album, or to send a link to someone who has no account.</p>
+<ol>
+<li>Open <strong>Albums</strong> in the sidebar, then the album, and choose <strong>Share</strong> in its header.</li>
+<li>Under <strong>Who can see it</strong>, <strong>Default</strong> lets everyone with an account see it, and <strong>Private</strong>
+only its owner.</li>
+<li>Under <strong>People with access</strong>, find someone in <strong>Add people or groups</strong>, then choose
+<strong>Can view</strong> or <strong>Can edit</strong> on their row, or <strong>Remove access</strong>.</li>
+<li>Choose <strong>Save</strong>.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/share@2x.webp"><img src="../../assets/shots/share.webp" srcset="../../assets/shots/share.webp 1x, ../../assets/shots/share@2x.webp 2x" alt="The Share dialog of an album: Who can see it with Default and Private, People with access with the owner, Administrators, Everyone with an account and Visitors who are not signed in, and Share with a link" width="740" height="700" loading="lazy" decoding="async"></a><figcaption>One dialog decides who sees an album, and makes the link for someone without an account</figcaption></figure>
+<p>For someone without an account, choose <strong>Create link</strong> under <strong>Share with a link</strong>. Click the
+address to copy it. The link stops working after 30 days unless you choose another time under
+<strong>Works for</strong>, from <strong>1 day</strong> to <strong>No end date</strong>, and <strong>Delete link</strong> turns it off at once. A link
+is made and changed straight away, without <strong>Save</strong>. Whoever opens it sees that album without
+signing in. <a href="../guide/sharing.html">Sharing</a> has the rest, including keeping some photos of a shared
+album private.</p>
+<h2 id="let-the-family-sign-in">Let the family sign in<a class="anchor" href="#let-the-family-sign-in" aria-label="Link to this section"></a></h2>
+<p>Give each person:</p>
+<ul>
+<li>the address you opened in step 1, such as <code>http://ein.local:8080/</code>, or the machine&#39;s IP address
+if their device cannot find the name;</li>
+<li>their username, or the e-mail address you gave the account, and their password.</li>
+</ul>
+<p>They sign in on the sign-in page with <strong>Username or e-mail</strong>, <strong>Password</strong> and <strong>Sign in</strong>. Ask
+them to change their password at once, under <strong>Profile → Security</strong>.
+<a href="../guide/interface.html">Finding your way around</a> and <a href="../guide/importing.html">Getting your photos in</a>
+are good pages to send them.</p>
+<p>EiN answers on your home network. Reaching it from elsewhere takes an HTTPS proxy of your own in
+front of it; <a href="../admin/network.html">Ports, HTTPS and remote access</a> explains what EiN needs from
+one.</p>
+<p>On a phone, EiN runs in the browser; there is no app to install from a store. The page fits the
+screen: the EiN mark at the top left opens the menu. From the browser&#39;s menu, a phone can add EiN
+to its home screen, where it opens full screen, like an app, when EiN is served over HTTPS. EiN
+does not work offline. <a href="../guide/phone.html">EiN on a phone</a> shows what differs.</p>
+<h2 id="keep-ein-running">Keep EiN running<a class="anchor" href="#keep-ein-running" aria-label="Link to this section"></a></h2>
+<p><strong>Look at the dashboard now and then.</strong> EiN sends no alerts, by e-mail or otherwise: what goes
+wrong shows on the dashboard and in the logs. Its <strong>Storage</strong> card shows how much room each part
+of the data folder has left, and says &quot;full in ~N days&quot; in red when a part fills within two weeks.
+EiN does not stop work for you when the disk fills.</p>
+<p><strong>Update</strong> by running the installer again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
+<p>It updates <code>~/ein</code>, then fetches the newest code of EiN and its services, builds it and starts it
+again, keeping your options in <code>~/ein/.env</code>, your data and the installed modules. <code>~/ein/setup.sh</code>
+alone does the same but leaves the files in <code>~/ein</code> as they are. There are no releases: an update
+takes the newest code, and there is no going back to the previous one. Modules are updated
+separately, with <strong>Update</strong> in <strong>Settings → Modules → Published modules</strong>.
+<a href="../admin/updating.html">Updating</a> explains what an update touches.</p>
+<p><strong>After the machine restarts</strong>, check that EiN came back. Nothing the installer sets up starts it
+when the machine boots: Docker starts the containers again by itself, but under rootless podman
+you may have to start EiN yourself:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose ps
+podman compose up -d</code></pre></div>
+<p><strong>Back up.</strong> EiN has no backup command; you copy its data yourself, with your own tools. A backup
+needs three things, taken together:</p>
+<ul>
+<li><code>~/ein/.env</code>, which holds your options and the passwords made at the install, and nothing else
+keeps them;</li>
+<li>the data folder, <code>~/ein/data</code> unless you chose another at the install, and above all its
+<code>files</code> folder, which holds your originals;</li>
+<li>the database, which is the container engine&#39;s volume <code>ein_db</code>, not part of the data folder.</li>
+</ul>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>The database holds every name, album, person and setting, and the <code>files</code> folder holds the
+files themselves, stored by an id rather than by name. Neither is any use without the other, so
+copy them at the same time, and back up before each update.</p>
+</aside>
+<p><a href="../admin/data.html">Your data: backup, moving and removing</a> gives a procedure, and
+<a href="../admin/troubleshooting.html">Troubleshooting</a> helps when something goes differently.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="install.html" rel="prev"><span>Previous</span>Install EiN</a><a class="next" href="../guide/interface.html" rel="next"><span>Next</span>Finding your way around</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/start/first-steps.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in-and-change-the-admin-password">Sign in and change the admin password</a></li><li><a href="#check-the-dashboard">Check the dashboard</a></li><li><a href="#install-the-modules-you-want">Install the modules you want</a></li><li><a href="#decide-who-sees-what">Decide who sees what</a></li><li><a href="#create-accounts-for-the-family">Create accounts for the family</a></li><li><a href="#import-the-first-photos">Import the first photos</a></li><li><a href="#share-an-album">Share an album</a></li><li><a href="#let-the-family-sign-in">Let the family sign in</a></li><li><a href="#keep-ein-running">Keep EiN running</a></li></ul></aside>
+    </div>
+  </body>
+</html>

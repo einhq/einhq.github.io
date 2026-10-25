@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Installing in detail – EiN documentation</title>
+    <meta name="description" content="This page is for whoever installs and runs EiN on a machine: every option and variable the installer takes, what its checks measure, podman and Docker, what runs where once EiN is up, and how to run it day to day. Install EiN is the short path; read it first if you have not installed EiN yet.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/install.html">
+    <meta property="og:title" content="Installing in detail – EiN documentation">
+    <meta property="og:description" content="This page is for whoever installs and runs EiN on a machine: every option and variable the installer takes, what its checks measure, podman and Docker, what runs where once EiN is up, and how to run it day to day. Install EiN is the short path; read it first if you have not installed EiN yet.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/install.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html" aria-current="page">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Installing in detail</h1>
+        </header>
+        <article class="prose">
+<p>This page is for whoever installs and runs EiN on a machine: every option and variable the installer takes, what its checks measure, podman and Docker, what runs where once EiN is up, and how to run it day to day. <a href="../start/install.html">Install EiN</a> is the short path; read it first if you have not installed EiN yet.</p>
+<h2 id="two-scripts-do-the-install">Two scripts do the install<a class="anchor" href="#two-scripts-do-the-install" aria-label="Link to this section"></a></h2>
+<p>The install is two scripts, run one after the other:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Where it is</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>install.sh</code></td>
+<td><a href="https://einhq.eu/install.sh">einhq.eu/install.sh</a>, from the <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">einhq.github.io</a> repository</td>
+<td>Checks the machine. When nothing is missing, clones <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it there with <code>git pull --ff-only</code>, and runs <code>~/ein/setup.sh</code> with your options.</td>
+</tr>
+<tr>
+<td><code>setup.sh</code></td>
+<td><code>~/ein/setup.sh</code>, from ein/deploy</td>
+<td>Writes <code>~/ein/.env</code> the first time, fetches the sources into <code>~/ein/src</code>, builds the images, starts them with compose and waits for EiN to answer. Run again, it updates.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Both run as your own user and need no root. Every option you give the installer after <code>bash -s --</code> is passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code> and <code>--llm</code> itself, to choose which checks to run.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code></pre></div>
+<p>The installer&#39;s code runs from a function called on its last line, so a download cut short runs nothing.</p>
+<h2 id="the-options">The options<a class="anchor" href="#the-options" aria-label="Link to this section"></a></h2>
+<p>These are <code>setup.sh</code>&#39;s options, and so the installer&#39;s too. <code>~/ein/setup.sh --help</code> lists them.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--ems</code></td>
+<td>Adds the media service: every media tool and model, in an image of about 30 GB. Sets <code>EIN_EMS=1</code> in <code>.env</code>.</td>
+</tr>
+<tr>
+<td><code>--no-ems</code></td>
+<td>Takes the media service out again: its container stops and is removed. Sets <code>EIN_EMS=0</code>. Its data stays.</td>
+</tr>
+<tr>
+<td><code>--llm</code></td>
+<td>Adds the assistant&#39;s language model, Qwen3.5-4B in llama.cpp. Sets <code>EIN_LLM=1</code>.</td>
+</tr>
+<tr>
+<td><code>--no-llm</code></td>
+<td>Takes the language model out again. Sets <code>EIN_LLM=0</code>. The downloaded model stays in the data folder.</td>
+</tr>
+<tr>
+<td><code>--module &lt;name&gt;</code></td>
+<td>Adds a module&#39;s name to <code>EIN_MODULES</code> in <code>.env</code>. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.</td>
+</tr>
+<tr>
+<td><code>-h</code>, <code>--help</code></td>
+<td>Prints the help and stops.</td>
+</tr>
+</tbody></table>
+</div>
+<p>An option is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
+<p><code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
+<h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
+<p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
+curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- --ems</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Read by</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EIN_HOME</code></td>
+<td><code>install.sh</code></td>
+<td><code>~/ein</code></td>
+<td>The folder EiN is installed in. Later, run <code>setup.sh</code> from there.</td>
+</tr>
+<tr>
+<td><code>EIN_DATA</code></td>
+<td>both, the first time</td>
+<td><code>~/ein/data</code></td>
+<td>The folder for your files: originals, renditions, scratch space, the language model and the installed modules. Read only when <code>.env</code> is written; later runs keep the folder <code>.env</code> names.</td>
+</tr>
+<tr>
+<td><code>EIN_CHECK</code></td>
+<td><code>install.sh</code></td>
+<td>unset</td>
+<td><code>1</code> runs the checks for the options given and stops, installing nothing.</td>
+</tr>
+<tr>
+<td><code>EIN_ENGINE</code></td>
+<td><code>setup.sh</code></td>
+<td>podman when installed, else Docker</td>
+<td><code>docker</code> uses Docker even when podman is installed. Not remembered: give it on every run.</td>
+</tr>
+<tr>
+<td><code>EIN_GIT</code></td>
+<td>both</td>
+<td><code>https://github.com/einhq</code></td>
+<td>Where <code>deploy</code>, <code>core</code>, <code>db</code>, <code>ems</code> and <code>llm</code> are cloned from. Written into <code>.env</code> the first time, and read from there after.</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>EIN_DATA</code> is made into an absolute path when <code>.env</code> is written, so a relative folder is taken from where <code>setup.sh</code> runs, which is <code>~/ein</code>.</p>
+<p><code>EIN_GIT</code> names an organisation, not a repository: it must hold <code>deploy.git</code>, <code>core.git</code>, <code>db.git</code>, and <code>ems.git</code> and <code>llm.git</code> when you use those options. The modules do not come from there. EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it.</p>
+<h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
+<p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install; the same goes for <code>--llm</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th><code>ok</code></th>
+<th><code>low</code></th>
+<th><code>missing</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>system</code></td>
+<td>Linux on x86-64</td>
+<td></td>
+<td>anything else; the installer stops at once</td>
+</tr>
+<tr>
+<td><code>podman</code></td>
+<td>podman installed and rootless</td>
+<td>podman run as root, or <code>podman info</code> fails</td>
+<td>neither podman nor Docker installed</td>
+</tr>
+<tr>
+<td><code>docker</code></td>
+<td>Docker installed, when podman is not</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>compose</code></td>
+<td><code>podman compose version</code> or <code>docker compose version</code> runs</td>
+<td></td>
+<td>it does not</td>
+</tr>
+<tr>
+<td><code>git</code>, <code>curl</code>, <code>openssl</code></td>
+<td>installed</td>
+<td></td>
+<td>not installed</td>
+</tr>
+<tr>
+<td><code>processor</code></td>
+<td>2 physical cores; with <code>--ems</code>, 6</td>
+<td>with <code>--ems</code>, 4 or 5</td>
+<td>fewer than 2; with <code>--ems</code>, fewer than 4</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>4 GB; with <code>--ems</code>, 30 GB</td>
+<td>with <code>--ems</code>, 15 to 29 GB</td>
+<td>less than 4 GB; with <code>--ems</code>, less than 15 GB</td>
+</tr>
+<tr>
+<td><code>disk</code></td>
+<td>10 GB free; with <code>--ems</code>, 100 GB</td>
+<td></td>
+<td>less</td>
+</tr>
+<tr>
+<td><code>graphics</code></td>
+<td>an NVIDIA card with driver 610 or newer</td>
+<td>no NVIDIA card, <code>nvidia-smi</code> cannot reach the driver, or an older driver</td>
+<td></td>
+</tr>
+<tr>
+<td><code>card memory</code></td>
+<td>15000 MB or more; the line is left out then</td>
+<td>less</td>
+<td></td>
+</tr>
+<tr>
+<td><code>container GPU</code></td>
+<td>nvidia-container-toolkit 1.18 or newer, with its spec in <code>/var/run/cdi/nvidia.yaml</code></td>
+<td>no toolkit, an older one, no spec, or a spec made by hand in <code>/etc/cdi</code></td>
+<td></td>
+</tr>
+</tbody></table>
+</div>
+<p>The last three appear only with <code>--ems</code> or <code>--llm</code>, and none of them can stop the install: without a usable card the media service and the model run on the processor. With several cards, the line names the one with the most memory. <a href="gpu.html">The graphics card</a> explains what each <code>low</code> line asks of you.</p>
+<p>A few details of how the checks count:</p>
+<ul>
+<li><strong>Cores</strong> are physical cores, counted with <code>lscpu</code> across every socket, not threads. When <code>lscpu</code> gives nothing, the thread count stands in.</li>
+<li><strong>Memory</strong> is the machine&#39;s total, rounded to whole GB. That is why the full threshold is 30 GB: a machine sold with 32 GB reports a little less.</li>
+<li><strong>Disk</strong> is measured where your files go, <code>EIN_DATA</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
+<li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you set <code>EIN_ENGINE=docker</code>, which only <code>setup.sh</code> reads.</li>
+</ul>
+<p>The images, the build&#39;s scratch files and the database live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
+<p>To run only the checks:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
+curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
+<h2 id="install-without-the-installer">Install without the installer<a class="anchor" href="#install-without-the-installer" aria-label="Link to this section"></a></h2>
+<p>You can do what the installer does yourself, for example to read <code>setup.sh</code> before it runs or to put EiN in another folder. This skips the machine checks.</p>
+<ol>
+<li><p>Clone ein/deploy into the folder EiN should live in:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/deploy.git ~/ein</code></pre></div>
+</li>
+<li><p>Run <code>setup.sh</code> from it with your options, and any variables in front:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
+EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assistant</code></pre></div>
+</li>
+</ol>
+<p><code>setup.sh</code> changes to its own folder first, so you can run it from anywhere. Later, update the folder with <code>git -C ~/ein pull --ff-only</code>, or run the installer with <code>EIN_HOME</code> set to the folder: it finds the clone there and updates it.</p>
+<h2 id="podman-or-docker">Podman or Docker<a class="anchor" href="#podman-or-docker" aria-label="Link to this section"></a></h2>
+<p>EiN runs under either. <code>setup.sh</code> takes podman when the <code>podman</code> command exists, Docker when only <code>docker</code> does, and Docker when <code>EIN_ENGINE=docker</code> is set. It then needs <code>podman compose</code> or <code>docker compose</code> to run, or stops with <code>setup.sh: &#39;podman compose&#39; does not run: install podman-compose (or docker-compose) for podman, or the compose plugin for Docker</code>.</p>
+<p>The compose files are plain Compose Spec, so both read them alike. What differs:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th>Rootless podman</th>
+<th>Docker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who runs the containers</td>
+<td>your user</td>
+<td>the Docker daemon; your user needs access to it, usually by being in the <code>docker</code> group, which nothing checks</td>
+</tr>
+<tr>
+<td>Who owns what EiN writes in <code>EIN_DATA</code></td>
+<td>your user</td>
+<td>root, unless Docker itself runs rootless</td>
+</tr>
+<tr>
+<td>Where images and the database are</td>
+<td><code>~/.local/share/containers</code>, usually</td>
+<td><code>/var/lib/docker</code>, usually</td>
+</tr>
+<tr>
+<td>The graphics card</td>
+<td>through the CDI spec, in every version; podman 4.9.3 needs a fix first, see <a href="gpu.html">The graphics card</a></td>
+<td>through the CDI spec, from Docker Engine 28.2</td>
+</tr>
+<tr>
+<td>After the machine restarts</td>
+<td>nothing starts EiN; see <a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></td>
+<td>Docker starts the containers again with its daemon, unless you stopped them</td>
+</tr>
+<tr>
+<td>The build&#39;s scratch files</td>
+<td><code>setup.sh</code> puts them in a <code>tmp</code> folder in podman&#39;s storage, as <code>/tmp</code> is often too small for the media service</td>
+<td>in Docker&#39;s own storage</td>
+</tr>
+</tbody></table>
+</div>
+<p>All data folders are mounted with <code>z</code>, which labels them for sharing between containers under SELinux and is ignored where SELinux is not on.</p>
+<h3 id="keep-to-one-engine">Keep to one engine<a class="anchor" href="#keep-to-one-engine" aria-label="Link to this section"></a></h3>
+<p>Each engine has its own images, containers and volumes, and so its own database. Install with one and keep to it.</p>
+<p>The engine is not remembered between runs. On a machine with both installed, an EiN installed with <code>EIN_ENGINE=docker</code> and then updated with a plain <code>~/ein/setup.sh</code> is built again under podman, with podman&#39;s own empty database volume. While Docker&#39;s containers run, podman&#39;s cannot take ports 8080 and 2222 and fail to start; with Docker&#39;s stopped, an empty EiN starts with a new admin password, on your data folder.</p>
+<p>If that has happened, remove podman&#39;s containers and run <code>setup.sh</code> again with the engine you installed with:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose down
+EIN_ENGINE=docker ./setup.sh</code></pre></div>
+<p><code>podman compose down</code> keeps podman&#39;s volumes. The empty database volume it made is <code>ein_db</code> in podman&#39;s storage; remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
+<h2 id="what-runs-where">What runs where<a class="anchor" href="#what-runs-where" aria-label="Link to this section"></a></h2>
+<p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>ein</code> is reached from other machines.</p>
+
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Image</th>
+<th>Reached at</th>
+<th>Memory limit</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ein</code></td>
+<td><code>localhost/ein</code>, built on <code>localhost/ein-core</code> from the core sources</td>
+<td>ports 8080 (web) and 2222 (SSH and SFTP) on the machine</td>
+<td><code>EIN_MEMORY</code>, <code>6g</code></td>
+<td>always</td>
+</tr>
+<tr>
+<td><code>db</code></td>
+<td><code>localhost/ein-db</code>, PostgreSQL with TimescaleDB, built from the db sources</td>
+<td><code>db:5432</code>, on the compose network only</td>
+<td>none</td>
+<td>always</td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td><code>localhost/ein-ems</code>, built from the ems sources</td>
+<td><code>ems:8181</code>, on the compose network only</td>
+<td><code>EMS_MEMORY</code>, <code>16g</code></td>
+<td>with <code>--ems</code></td>
+</tr>
+<tr>
+<td><code>llm</code></td>
+<td>llama.cpp&#39;s server, downloaded ready-made from <code>ghcr.io</code></td>
+<td><code>llm:8190</code>, on the compose network only</td>
+<td><code>LLM_MEMORY</code>, <code>10g</code></td>
+<td>with <code>--llm</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Every service restarts by itself if it stops on its own (<code>restart: unless-stopped</code>). EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. <a href="../start/how-ein-works.html#what-runs-beside-ein">How EiN works</a> says what each part is for; <a href="media-service.html">The media service</a> and <a href="language-model.html">The language model</a> cover the two optional ones.</p>
+<h3 id="the-files-in-ein">The files in <code>~/ein</code><a class="anchor" href="#the-files-in-ein" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it is</th>
+<th>From</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>setup.sh</code></td>
+<td>the install and update script</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
+<td><code>compose.yaml</code></td>
+<td>EiN and its database: what every install runs</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
+<td><code>compose.ems.yaml</code></td>
+<td>the media service</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
+<td><code>compose.llm.yaml</code></td>
+<td>the language model</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
+<td><code>ein.Containerfile</code></td>
+<td>EiN&#39;s image: core&#39;s own image with the web interface built in</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>your options, settings and the passwords made at the install</td>
+<td>made by <code>setup.sh</code></td>
+</tr>
+<tr>
+<td><code>compose.override.yaml</code></td>
+<td>the options in <code>.env</code> as services</td>
+<td>made by <code>setup.sh</code></td>
+</tr>
+<tr>
+<td><code>src/</code></td>
+<td>the sources that are built: <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> with their options</td>
+<td>made by <code>setup.sh</code></td>
+</tr>
+<tr>
+<td><code>data/</code></td>
+<td>the data folder, when <code>EIN_DATA</code> was left at its default</td>
+<td>made by <code>setup.sh</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Leave the files from ein/deploy as they are: an update runs <code>git pull --ff-only</code> on the folder and stops when a file you changed is in its way. What you want to change goes in <code>.env</code>, which git ignores.</p>
+<h3 id="the-data-folder">The data folder<a class="anchor" href="#the-data-folder" aria-label="Link to this section"></a></h3>
+<p><code>setup.sh</code> makes these folders in <code>EIN_DATA</code> on every run. Both EiN and the media service mount the first four at the same paths, so a path EiN hands the media service is the path it opens.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Mounted at</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>files</code></td>
+<td><code>/files</code>; read-only for the media service</td>
+<td>your originals</td>
+</tr>
+<tr>
+<td><code>old</code></td>
+<td><code>/old</code>; read-only for the media service</td>
+<td>older originals</td>
+</tr>
+<tr>
+<td><code>files-volatile</code></td>
+<td><code>/files-volatile</code></td>
+<td>thumbnails and other renditions, which EiN can make again</td>
+</tr>
+<tr>
+<td><code>files-tmp</code></td>
+<td><code>/files-tmp</code></td>
+<td>scratch space</td>
+</tr>
+<tr>
+<td><code>llm</code></td>
+<td><code>/models</code> in the language model</td>
+<td>the model, downloaded at its first start</td>
+</tr>
+<tr>
+<td><code>modules</code></td>
+<td><code>/modules-installed</code> in EiN</td>
+<td>the installed modules, so they stay when EiN is updated or its container made again</td>
+</tr>
+</tbody></table>
+</div>
+<p>The database is not in the data folder. It is the volume <code>ein_db</code> in the container engine&#39;s storage, which compose made, so that the database&#39;s own user owns it; a folder mounted from your home would not be under rootless podman. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
+<h3 id="env"><code>.env</code><a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
+<p><code>setup.sh</code> writes <code>~/ein/.env</code> the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN and the media service get every line of it as their environment, and <code>setup.sh</code> keeps your options in it. A fresh one looks like this:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, as setup.sh writes it (the comments it writes are shortened here)</span>
+<span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">1</span>
+<span class="hljs-attr">EIN_MODULES</span>=<span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-attr">EIN_DATA</span>=/home/anna/ein/data
+<span class="hljs-attr">POSTGRES_PASSWORD</span>=<span class="hljs-number">5</span>c0d2e7a91f84b36a0e9c4d17b2f6385e1a9c07d4b2e8f13
+<span class="hljs-attr">EMS_KEY</span>=a83f19c26d0e47b5928c1f6e3d7a04b9c5e2f18d6a3b7c90
+<span class="hljs-attr">TZ</span>=Europe/Stockholm
+<span class="hljs-attr">EIN_BIND</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
+<span class="hljs-attr">EIN_HTTP_PORT</span>=<span class="hljs-number">8080</span>
+<span class="hljs-attr">EIN_SSH_PORT</span>=<span class="hljs-number">2222</span>
+<span class="hljs-comment"># CFG_LLM_URL=https://api.openai.com</span>
+<span class="hljs-comment"># CFG_LLM_KEY=</span>
+<span class="hljs-comment"># CFG_LLM_PROVIDER=OpenAI</span>
+<span class="hljs-comment"># CFG_LLM_MODEL=</span>
+<span class="hljs-attr">EIN_GIT</span>=https://github.com/einhq</code></pre></div>
+<p>The options you gave come next: <code>setup.sh</code> sets <code>EIN_EMS</code>, <code>EIN_LLM</code> and <code>EIN_MODULES</code> after writing the file.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EIN_EMS</code>, <code>EIN_LLM</code></td>
+<td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
+</tr>
+<tr>
+<td><code>EIN_GPU</code></td>
+<td><code>1</code> when the first run found an NVIDIA card that <code>nvidia-smi</code> reaches, with a CDI spec in <code>/var/run/cdi/nvidia.yaml</code> or <code>/etc/cdi</code>. Set only then; see <a href="gpu.html">The graphics card</a> for a card added later</td>
+</tr>
+<tr>
+<td><code>EIN_MODULES</code></td>
+<td>the modules EiN installs at its start when they are missing, separated by spaces</td>
+</tr>
+<tr>
+<td><code>EIN_DATA</code></td>
+<td>the data folder</td>
+</tr>
+<tr>
+<td><code>POSTGRES_PASSWORD</code></td>
+<td>the database&#39;s password, random, made here</td>
+</tr>
+<tr>
+<td><code>EMS_KEY</code></td>
+<td>the key EiN and the media service share, random, made here</td>
+</tr>
+<tr>
+<td><code>TZ</code></td>
+<td>the machine&#39;s time zone, from <code>timedatectl</code>, <code>/etc/timezone</code> or <code>UTC</code></td>
+</tr>
+<tr>
+<td><code>EIN_BIND</code></td>
+<td>the address the ports listen on: <code>0.0.0.0</code> for every address of the machine, <code>127.0.0.1</code> for the machine alone</td>
+</tr>
+<tr>
+<td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
+<td>the ports on the machine for the web interface and for SSH and SFTP</td>
+</tr>
+<tr>
+<td><code>CFG_LLM_…</code></td>
+<td>a hosted language model instead of <code>--llm</code>; see <a href="language-model.html">The language model</a></td>
+</tr>
+<tr>
+<td><code>EIN_GIT</code></td>
+<td>where the sources are cloned from</td>
+</tr>
+</tbody></table>
+</div>
+<p>The two passwords are kept nowhere else. Without them the database cannot be reached, so copy <code>.env</code> with every backup. <a href="../reference/config-files.html">Configuration files</a> has every file EiN reads.</p>
+<h3 id="composeoverrideyaml"><code>compose.override.yaml</code><a class="anchor" href="#composeoverrideyaml" aria-label="Link to this section"></a></h3>
+<p>Every <code>compose</code> command reads <code>compose.override.yaml</code> beside <code>compose.yaml</code> by itself, so a plain <code>podman compose up -d</code> starts the same services <code>setup.sh</code> does. <code>setup.sh</code> writes it from <code>.env</code> on every run; do not edit it, as the next run writes over it. With the media service, the model and a card it reads:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/compose.override.yaml</span>
+<span class="hljs-comment"># Written by setup.sh from the options in .env; edit those and run setup.sh again.</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">ems:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">llm:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
+<p><a href="../reference/settings.html#cfg_llm_card"><code>CFG_LLM_CARD</code></a> tells EiN whether the model runs on the card (<code>card</code>) or the processor (<code>cpu</code>).</p>
+<h2 id="change-the-installation-afterwards">Change the installation afterwards<a class="anchor" href="#change-the-installation-afterwards" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To change</th>
+<th>Do this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Add or remove the media service or the language model</td>
+<td><code>~/ein/setup.sh --ems</code>, <code>--no-ems</code>, <code>--llm</code> or <code>--no-llm</code>. This is also an update: see <a href="updating.html">Updating</a>.</td>
+</tr>
+<tr>
+<td>Add a module EiN installs at its start</td>
+<td><code>~/ein/setup.sh --module &lt;name&gt;</code>, or install it at once in <strong>Settings → Modules</strong>; see <a href="modules.html">Modules</a>.</td>
+</tr>
+<tr>
+<td>A setting of EiN (<code>CFG_…</code>) or of the media service (<code>EMS_…</code>)</td>
+<td>Add the line to <code>~/ein/.env</code>, then run <code>podman compose up -d</code> in <code>~/ein</code>. Most settings can instead be changed while EiN runs; see <a href="configuration.html">Configuration</a>.</td>
+</tr>
+<tr>
+<td>The ports, or keep EiN to the machine</td>
+<td>Change <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>EIN_BIND</code> in <code>.env</code>, then <code>podman compose up -d</code>; see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
+<tr>
+<td>A container&#39;s memory limit</td>
+<td>Add <code>EIN_MEMORY=8g</code>, <code>EMS_MEMORY=20g</code> or <code>LLM_MEMORY=12g</code> to <code>.env</code>, then <code>podman compose up -d</code>; see <a href="performance.html">Performance and sizing</a>.</td>
+</tr>
+<tr>
+<td>The language model&#39;s model or image</td>
+<td><code>LLM_GGUF_REPO</code>, <code>LLM_GGUF_FILE</code>, <code>LLM_IMAGE</code> and <code>LLM_CARD_RESERVE_MB</code> in <code>.env</code>; see <a href="language-model.html">The language model</a>.</td>
+</tr>
+<tr>
+<td>The data folder</td>
+<td><code>EIN_DATA</code> in <code>.env</code> names it, but changing the line does not move your files; see <a href="data.html">Your data</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>When a change does not take, <code>podman compose up -d --force-recreate</code> makes every container again. With Docker, write <code>docker compose</code> for <code>podman compose</code>.</p>
+<p>Some of EiN&#39;s environment is set by <code>compose.yaml</code> and wins over a line in <code>.env</code>: <code>POSTGRES_URL</code>, <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code> (always 8080 and 2222 inside the container), <code>CFG_EMS_URL</code>, <code>CFG_EMS_KEY</code> (from <code>EMS_KEY</code>), and the folder paths. For the media service, <code>EMS_PORT</code>, <code>EMS_KEY</code> and <code>EMS_ROOTS</code> are set the same way.</p>
+<h2 id="run-ein-day-to-day">Run EiN day to day<a class="anchor" href="#run-ein-day-to-day" aria-label="Link to this section"></a></h2>
+<p>Run compose from <code>~/ein</code>, where it finds the project and its <code>.env</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose ps                <span class="hljs-comment"># what runs, and whether db and ems are healthy</span>
+podman compose logs -f ein       <span class="hljs-comment"># follow EiN&#x27;s log; ems, llm or db for the others</span>
+podman compose restart ein       <span class="hljs-comment"># restart EiN alone</span>
+podman compose stop              <span class="hljs-comment"># stop everything, keeping the containers</span>
+podman compose start             <span class="hljs-comment"># start them again</span>
+podman compose down              <span class="hljs-comment"># stop everything and remove the containers</span>
+podman compose up -d             <span class="hljs-comment"># make the containers and start them</span></code></pre></div>
+<p>With Docker, write <code>docker compose</code> instead. <code>down</code> keeps the database and the data folder; the containers are made again by the next <code>up -d</code>. It does remove the log, and with it the admin password a new EiN printed there.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>podman compose down -v</code> also deletes the volumes, and the volume <code>ein_db</code> is your database: every name, album, person, setting and account. Never add <code>-v</code> unless you mean to start from nothing.</p>
+</aside>
+<p>EiN is down while it restarts, and a restart takes longer when there is a module to install. <a href="services-logs.html">Services and logs</a> covers EiN&#39;s own logs and services, the ones inside the container, and <a href="monitoring.html">Health and the dashboard</a> what to watch.</p>
+<h3 id="start-ein-when-the-machine-boots">Start EiN when the machine boots<a class="anchor" href="#start-ein-when-the-machine-boots" aria-label="Link to this section"></a></h3>
+<p>Under Docker the containers come back with the Docker daemon, which starts with the machine on most systems, as long as you did not stop them yourself.</p>
+<p>Under rootless podman, nothing in the install starts EiN when the machine boots. podman&#39;s own <code>podman-restart.service</code> starts only containers whose restart policy is <code>always</code>, and EiN&#39;s are <code>unless-stopped</code>. One way is a systemd service of your user&#39;s that runs compose:</p>
+<ol>
+<li><p>Write the service:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/.config/systemd/user/ein.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=EiN
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
+<span class="hljs-attr">RemainAfterExit</span>=<span class="hljs-literal">yes</span>
+<span class="hljs-attr">WorkingDirectory</span>=%h/ein
+<span class="hljs-attr">ExecStart</span>=/usr/bin/podman compose up -d
+<span class="hljs-attr">ExecStop</span>=/usr/bin/podman compose stop
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=default.target</code></pre></div>
+</li>
+<li><p>Turn it on, and let your user&#39;s services run without you being signed in:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
+systemctl --user daemon-reload
+systemctl --user <span class="hljs-built_in">enable</span> --now ein.service
+<span class="hljs-built_in">sudo</span> loginctl enable-linger <span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span></code></pre></div>
+</li>
+</ol>
+<p>After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
+<h2 id="update-and-remove">Update and remove<a class="anchor" href="#update-and-remove" aria-label="Link to this section"></a></h2>
+<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: the newest sources of everything installed, built and started again, with <code>--force-recreate</code> so every container is made from the new images, and <code>--remove-orphans</code> so a service you left out stops. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
+<p>There is no uninstall script. <a href="data.html">Your data</a> says how to move EiN to another machine and how to remove it with its data.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p>The commands are written for podman; with Docker, write <code>docker compose</code>. <a href="../start/install.html#when-something-goes-differently">Install EiN</a> covers the messages of a first install, and <a href="troubleshooting.html">Troubleshooting</a> everything after.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fatal: destination path &#39;/home/anna/ein&#39; already exists and is not an empty directory.</code></td>
+<td><code>~/ein</code> exists but is not a clone of ein/deploy. Move it away, or install elsewhere with <code>EIN_HOME</code>.</td>
+</tr>
+<tr>
+<td><code>git pull</code> stops with a message about local changes, and nothing is installed</td>
+<td>A file from ein/deploy in <code>~/ein</code> was changed. See what with <code>git -C ~/ein status</code>, put back the original with <code>git -C ~/ein checkout -- &lt;file&gt;</code>, and move the change into <code>.env</code>.</td>
+</tr>
+<tr>
+<td><code>setup.sh: neither podman nor Docker is installed</code></td>
+<td>Install one, with its compose.</td>
+</tr>
+<tr>
+<td><code>setup.sh: --module takes a module&#39;s name, such as archive: &lt;name&gt;</code></td>
+<td>A module is given by its name, such as <code>archive</code>, in lower case. A repository address goes to <code>mod install</code> in EiN&#39;s terminal instead.</td>
+</tr>
+<tr>
+<td><code>setup.sh: --module needs a name, such as archive</code></td>
+<td><code>--module</code> was the last word of the command. Give the name after it.</td>
+</tr>
+<tr>
+<td>The build stops with no space left on the device</td>
+<td>The container engine&#39;s storage is full, not necessarily your data folder. <code>podman system df</code> shows what takes the room there.</td>
+</tr>
+<tr>
+<td><code>podman compose up</code> says a port is already in use</td>
+<td>Something else listens on 8080 or 2222, perhaps an EiN under the other engine (see <a href="#keep-to-one-engine">Keep to one engine</a>). Stop it, or choose other ports in <code>.env</code>.</td>
+</tr>
+<tr>
+<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
+<td>Read the log it names. <code>podman compose ps</code> shows whether <code>db</code> became healthy; EiN does not start before it.</td>
+</tr>
+<tr>
+<td>EiN is up, but a new <code>CFG_</code> line in <code>.env</code> has no effect</td>
+<td>Run <code>podman compose up -d --force-recreate</code> to make EiN&#39;s container again with it, and check that <code>compose.yaml</code> does not set the same variable itself (see <a href="#change-the-installation-afterwards">Change the installation afterwards</a>).</td>
+</tr>
+<tr>
+<td>After an update, a module is still the old version</td>
+<td><code>setup.sh</code> does not update modules. Use <strong>Update</strong> in <strong>Settings → Modules</strong>; see <a href="modules.html">Modules</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../start/install.html">Install EiN</a>: the short path, and what to do first after it.</li>
+<li><a href="gpu.html">The graphics card</a>: the NVIDIA driver, the container toolkit and the CDI spec.</li>
+<li><a href="network.html">Ports, HTTPS and remote access</a>: reaching EiN from outside, behind a proxy.</li>
+<li><a href="configuration.html">Configuration</a> and <a href="../reference/environment.html">Environment variables</a>: every setting and where it is set.</li>
+<li><a href="updating.html">Updating</a> and <a href="data.html">Your data</a>: keeping EiN current, backing it up, moving and removing it.</li>
+<li><a href="services-logs.html">Services and logs</a> and <a href="troubleshooting.html">Troubleshooting</a>: when something is wrong.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../shell/remote.html" rel="prev"><span>Previous</span>Reaching other machines</a><a class="next" href="gpu.html" rel="next"><span>Next</span>The graphics card</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/install.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-scripts-do-the-install">Two scripts do the install</a></li><li><a href="#the-options">The options</a></li><li><a href="#the-variables">The variables</a></li><li><a href="#what-the-checks-measure">What the checks measure</a></li><li><a href="#install-without-the-installer">Install without the installer</a></li><li><a href="#podman-or-docker">Podman or Docker</a></li><li class="nested"><a href="#keep-to-one-engine">Keep to one engine</a></li><li><a href="#what-runs-where">What runs where</a></li><li class="nested"><a href="#the-files-in-ein">The files in ~/ein</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li><a href="#change-the-installation-afterwards">Change the installation afterwards</a></li><li><a href="#run-ein-day-to-day">Run EiN day to day</a></li><li class="nested"><a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></li><li><a href="#update-and-remove">Update and remove</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

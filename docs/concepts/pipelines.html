@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Changes and pipelines – EiN documentation</title>
+    <meta name="description" content="This page follows a change through EiN, from the moment a node is saved to the finished work it sets off: the events every change announces, the facts a module derives from them, the pipelines that act on those facts, and the audit trail that leads back from each result to the change that caused it. It is for administrators who want to understand what the Dashboard shows, and for anyone writing a module or a pipeline of their own.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/concepts/pipelines.html">
+    <meta property="og:title" content="Changes and pipelines – EiN documentation">
+    <meta property="og:description" content="This page follows a change through EiN, from the moment a node is saved to the finished work it sets off: the events every change announces, the facts a module derives from them, the pipelines that act on those facts, and the audit trail that leads back from each result to the change that caused it. It is for administrators who want to understand what the Dashboard shows, and for anyone writing a module or a pipeline of their own.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/concepts/pipelines.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html" aria-current="page">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Concepts</p>
+          <h1>Changes and pipelines</h1>
+        </header>
+        <article class="prose">
+<p>This page follows a change through EiN, from the moment a node is saved to the finished work it
+sets off: the events every change announces, the facts a module derives from them, the pipelines
+that act on those facts, and the audit trail that leads back from each result to the change that
+caused it. It is for administrators who want to understand what the <strong>Dashboard</strong> shows, and for
+anyone writing a module or a pipeline of their own.</p>
+<h2 id="every-change-is-announced">Every change is announced<a class="anchor" href="#every-change-is-announced" aria-label="Link to this section"></a></h2>
+<p>When EiN saves a change to the tree, it announces it as an event. Six kinds exist:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Event</th>
+<th>What happened</th>
+<th>The event names</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>created</code></td>
+<td>A node was made</td>
+<td>the node</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>A node&#39;s attributes, bytes or permissions changed</td>
+<td>the node</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td>A node&#39;s last name went, and the node with it</td>
+<td>the node</td>
+</tr>
+<tr>
+<td><code>moved</code></td>
+<td>A node was moved or renamed</td>
+<td>the node</td>
+</tr>
+<tr>
+<td><code>child-attached</code></td>
+<td>Something was put into a folder, by making, linking or moving it</td>
+<td>the folder</td>
+</tr>
+<tr>
+<td><code>child-detached</code></td>
+<td>Something left a folder, by removing, unlinking or moving it</td>
+<td>the folder</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each event goes out under a key made of the node&#39;s type and the event,
+<code>system.vfs.&lt;nodeType&gt;.&lt;eventType&gt;</code>: a photo&#39;s new size is <code>system.vfs.file.updated</code>, a photo added
+to an album <code>system.vfs.album.child-attached</code>. Whoever listens binds only the keys it cares about,
+so a listener for files never hears about the thousands of small writes a busy system makes
+elsewhere. The event is sent only after the change is saved: nothing reacts to a change that did
+not happen.</p>
+<p>The same write also leaves a record in the audit trail, in the same transaction, so a record
+exists exactly when the change does. <a href="#trace-a-result-back-to-its-cause">Trace a result back to its cause</a>
+shows how to read it.</p>
+<h2 id="modules-turn-changes-into-facts">Modules turn changes into facts<a class="anchor" href="#modules-turn-changes-into-facts" aria-label="Link to this section"></a></h2>
+<p>A raw event says that a node changed. Most work needs to know something more specific: that a new
+photo has arrived and has not been read yet, or that its metadata is now there. Modules state this
+as <strong>facts</strong>, named like <code>media.file.discovered</code> or <code>media.metadata.extracted</code>, each about one node,
+its subject.</p>
+<p>The Archive module runs one service for this, <code>archive-bridge</code>. It listens for the raw events its
+rules need, reads the node as it is now, and writes the facts that follow to <code>/dev/events</code>. Because
+the bridge reads the node rather than trusting the event, a fact always describes the tree as it
+is, whatever order the events arrive in. And because pipeline steps only write to the tree and the
+bridge derives the facts from what they wrote, the facts cannot disagree with what is stored.</p>
+<p>Some of the facts the Archive announces:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Announced when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>media.file.discovered</code></td>
+<td>A photo, video or recording has its bytes and no metadata yet</td>
+</tr>
+<tr>
+<td><code>media.file.content-changed</code></td>
+<td>The bytes of a file already read have changed</td>
+</tr>
+<tr>
+<td><code>media.metadata.extracted</code></td>
+<td>A file&#39;s metadata has been read</td>
+</tr>
+<tr>
+<td><code>media.face.detected</code></td>
+<td>A face has been found on a picture (one fact per face)</td>
+</tr>
+<tr>
+<td><code>media.faces.completed</code></td>
+<td>Face detection is done for a picture, also when it found none</td>
+</tr>
+<tr>
+<td><code>media.transcript.generated</code></td>
+<td>A video or recording has its transcript</td>
+</tr>
+<tr>
+<td><code>media.position.available</code></td>
+<td>A file has a GPS position</td>
+</tr>
+<tr>
+<td><code>media.album.members-changed</code></td>
+<td>An album&#39;s photos changed</td>
+</tr>
+<tr>
+<td><code>location.changed</code></td>
+<td>A location was made, its shape drawn, or a photo linked to it by hand</td>
+</tr>
+<tr>
+<td><code>staging.category.changed</code></td>
+<td>The files in a staging category changed</td>
+</tr>
+</tbody></table>
+</div>
+<p>A fact is a line of JSON. Announcing one is writing that line to <code>/dev/events</code>; there is no
+separate command for it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;{&quot;id&quot;:&quot;e1&quot;,&quot;type&quot;:&quot;media.file.discovered&quot;,&quot;subject&quot;:&quot;/archive/albums/wrenfield-summer-1987/IMG_0042.jpg&quot;,&quot;time&quot;:1790000000000,&quot;data&quot;:{&quot;mimetype&quot;:&quot;image/jpeg&quot;}}&#x27;</span> &gt; /dev/events</code></pre></div>
+<p><code>subject</code> is the node the fact is about, and <code>data</code> carries whatever a pipeline needs to decide
+whether it applies, such as the file&#39;s type. Core announces no facts of its own; without a module
+the only events are the raw ones.</p>
+<h2 id="a-pipeline-says-what-to-do-with-a-change">A pipeline says what to do with a change<a class="anchor" href="#a-pipeline-says-what-to-do-with-a-change" aria-label="Link to this section"></a></h2>
+<p>A <strong>pipeline</strong> is a YAML definition with three parts: the trigger it waits for, the steps it then
+runs on the subject, each step a shell command, and options for how it is scheduled. This is the
+Archive&#39;s <code>media-fingerprint</code>, which computes the fingerprints that duplicate detection compares:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">name:</span> <span class="hljs-string">media-fingerprint</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Compute</span> <span class="hljs-string">the</span> <span class="hljs-string">fingerprints</span> <span class="hljs-string">duplicate</span> <span class="hljs-string">detection</span> <span class="hljs-string">and</span> <span class="hljs-string">photo</span> <span class="hljs-string">stacks</span> <span class="hljs-string">compare</span>
+
+<span class="hljs-attr">trigger:</span>
+  <span class="hljs-attr">on:</span> <span class="hljs-string">media.metadata.extracted</span>
+  <span class="hljs-attr">skipIfAttr:</span> <span class="hljs-string">undecodable</span>
+
+<span class="hljs-attr">steps:</span>
+  <span class="hljs-attr">fingerprint:</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">compute-fingerprint</span> <span class="hljs-string">$NODE_PATH</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">SSCD</span> <span class="hljs-string">for</span> <span class="hljs-string">image</span> <span class="hljs-string">/</span> <span class="hljs-string">video</span> <span class="hljs-string">keyframes,</span> <span class="hljs-string">chromaprint</span> <span class="hljs-string">for</span> <span class="hljs-string">audio</span>
+    <span class="hljs-attr">pool:</span> <span class="hljs-string">media</span>
+    <span class="hljs-attr">kind:</span> <span class="hljs-string">fingerprint</span>
+    <span class="hljs-attr">priority:</span> <span class="hljs-number">30</span>
+    <span class="hljs-attr">requires:</span>
+      <span class="hljs-attr">cpu:</span> <span class="hljs-number">1</span>
+
+<span class="hljs-attr">options:</span>
+  <span class="hljs-attr">maxAttempts:</span> <span class="hljs-number">3</span>
+  <span class="hljs-attr">priority:</span> <span class="hljs-number">10</span></code></pre></div>
+<p>It reads: when a file&#39;s metadata has been read, and the file is not marked as one nothing can
+decode, run <code>compute-fingerprint</code> on it, in the <code>media</code> pool, as a job of kind <code>fingerprint</code> that
+needs one CPU slot.</p>
+<p>A module ships its pipelines in its <code>pipelines/</code> folder, and <code>mod setup</code> registers each one when
+the module is set up, at every start of EiN. A registered pipeline is a link in
+<code>/var/pipelines/definitions/&lt;name&gt;</code> to its YAML file. The engine reloads the definitions whenever
+anything there changes, so a new or changed pipeline takes effect without a restart. Core ships no
+pipelines. <a href="../admin/modules.html">Modules</a> covers installing and removing the modules that bring
+them.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal: the pipelines this EiN has</span>
+pipeline list</code></pre></div>
+<h3 id="the-trigger">The trigger<a class="anchor" href="#the-trigger" aria-label="Link to this section"></a></h3>
+<p>A trigger takes one of two forms, never both:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Keys</th>
+<th>Starts on</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A fact</td>
+<td><code>on: &lt;fact&gt;</code> or a list of facts</td>
+<td>a fact on <code>/dev/events</code>; the preferred form</td>
+</tr>
+<tr>
+<td>A raw change</td>
+<td><code>event: &lt;event&gt;</code>, <code>nodeType: &lt;type&gt;</code></td>
+<td>a raw event, such as <code>event: updated</code> with <code>nodeType: file</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A definition with several ways to start writes <code>triggers:</code> with a list instead of <code>trigger:</code>. Each
+alternative has its own guards, and the first that matches starts the pipeline.</p>
+<p>The guards decide whether a matching event starts anything. The engine tests them cheapest first,
+so most events are turned away without starting a process:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Starts the pipeline only when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>match</code></td>
+<td>every named field matches its glob, or one of a list of globs: <code>mimetype: &#39;image/*&#39;</code></td>
+</tr>
+<tr>
+<td><code>unless</code></td>
+<td>not every named field matches: <code>nodePath: &#39;/var/**&#39;</code> leaves a whole subtree alone</td>
+</tr>
+<tr>
+<td><code>allowDerived</code></td>
+<td><code>true</code> lets a derived file, such as a thumbnail or a face crop, start it; without it derived files never do</td>
+</tr>
+<tr>
+<td><code>skipIfExists</code></td>
+<td>the path does not exist: <code>$NODE_PATH/metadata/exif</code></td>
+</tr>
+<tr>
+<td><code>skipIfAttr</code></td>
+<td>the subject does not already have this attribute set: <code>skipIfAttr: textIndexedAt</code></td>
+</tr>
+<tr>
+<td><code>filter</code></td>
+<td>this shell script exits 0</td>
+</tr>
+<tr>
+<td><code>skipIf</code></td>
+<td>this shell script does not exit 0</td>
+</tr>
+</tbody></table>
+</div>
+<p>In <code>match</code> and <code>unless</code>, a field names a value the event carries: <code>mimetype</code>, <code>nodePath</code>, or any
+key of a fact&#39;s <code>data</code>. In a path field, <code>*</code> matches within one name and <code>**</code> crosses <code>/</code>, so
+<code>/home/*/staging/**</code> is each person&#39;s staging folder and nothing deeper. A trigger may also set
+<code>priority</code> and <code>vars</code> for the runs it starts.</p>
+<h3 id="the-steps">The steps<a class="anchor" href="#the-steps" aria-label="Link to this section"></a></h3>
+<p>Each step is a command with a name. Steps without <code>dependsOn</code> start together; a step with
+<code>dependsOn: [other]</code> waits for those steps to complete. A step&#39;s <code>condition</code> is a shell test that
+decides, when the step&#39;s turn comes, whether it runs or is skipped.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>command</code></td>
+<td>The command to run. Required</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>What the step does, shown on the pipeline&#39;s page</td>
+</tr>
+<tr>
+<td><code>dependsOn</code></td>
+<td>The steps that must complete first</td>
+</tr>
+<tr>
+<td><code>condition</code></td>
+<td>A shell test; the step is skipped when it fails</td>
+</tr>
+<tr>
+<td><code>pool</code></td>
+<td>Hand the step to a pool of workers, such as <code>media</code>, instead of running it in the engine</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>The kind of job in the pool, which decides which worker takes it. Defaults to the step&#39;s name</td>
+</tr>
+<tr>
+<td><code>requires</code></td>
+<td>What the job needs of a worker&#39;s capacity: <code>cpu: 1</code>, <code>models: 1</code></td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>The job&#39;s priority in the pool, higher first. Overrides the pipeline&#39;s</td>
+</tr>
+<tr>
+<td><code>exclusive</code></td>
+<td>A name; at most one job with it runs in the whole pool at a time</td>
+</tr>
+</tbody></table>
+</div>
+<p>A command and its tests see the subject&#39;s path as <code>$NODE_PATH</code>. A run started by a fact also has
+<code>$EVENT_TYPE</code>, <code>$EVENT_ID</code>, <code>$EVENT_SOURCE</code>, the whole <code>data</code> as JSON in <code>$EVENT_DATA</code>, and each
+key of <code>data</code> as <code>$EVENT_&lt;NAME&gt;</code> in capitals: <code>data.mimetype</code> is <code>$EVENT_MIMETYPE</code>. A run started by
+a raw event has <code>$MIMETYPE</code>, <code>$NODE_TYPE</code> and <code>$EVENT_TYPE</code>. The name is <code>$NODE_PATH</code> and not
+<code>$PATH</code>, which the shell needs for finding commands.</p>
+<p>In a <code>command</code>, write <code>$NODE_PATH</code> bare: EiN substitutes the path already quoted, so a name with
+spaces is safe. In <code>filter</code>, <code>skipIf</code> and <code>condition</code> the path is an ordinary shell variable, so
+quote it yourself: <code>info &quot;$NODE_PATH/exif&quot;</code>.</p>
+<h3 id="the-options">The options<a class="anchor" href="#the-options" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>maxAttempts</code></td>
+<td>How many times a step is run before the run fails</td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>The pipeline&#39;s place in line, higher first, among steps waiting to run</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>coalesce</code></td>
+<td>What a trigger for a subject whose run is still going does: <code>drop</code> it, or <code>rerun</code> once the run ends</td>
+<td><code>drop</code></td>
+</tr>
+<tr>
+<td><code>debounceMs</code></td>
+<td>How long a trigger waits before it becomes a run, so a burst of changes to one subject is one run</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>entryPoint</code></td>
+<td>Marks the pipeline every other one waits on, so the <strong>Dashboard</strong> can say how far an import has got</td>
+<td>none</td>
+</tr>
+</tbody></table>
+</div>
+<p>A definition can also declare <code>vars:</code> with a default for each, which its commands use like
+<code>$NODE_PATH</code>. <code>pipeline start &lt;name&gt; &lt;path&gt; --var NAME=VALUE</code> changes one for a single run, and the
+values a run started with are kept on it.</p>
+<h2 id="from-a-change-to-a-run">From a change to a run<a class="anchor" href="#from-a-change-to-a-run" aria-label="Link to this section"></a></h2>
+<p>Between a fact and the work it starts, EiN keeps everything it has not done yet as nodes, so
+nothing is lost when it restarts:</p>
+<ol>
+<li><strong>The queue.</strong> The pipeline engine reads the facts, and the raw events its definitions ask for,
+from a durable queue, <code>/var/queues/pipeline-engine</code>. A change that arrives while the engine is
+stopped waits there.</li>
+<li><strong>The trigger pool.</strong> For each pipeline whose trigger and guards match, the engine adds a job to
+<code>/var/pools/triggers</code>, keyed by the pipeline and the subject. A subject announced ten times
+while it waits is still one job, and one run.</li>
+<li><strong>The run.</strong> The engine claims those jobs and turns each into an <strong>instance</strong>, a run of the
+pipeline on that subject, at <code>/var/pipelines/instances/&lt;pipeline&gt;/&lt;id&gt;</code>. The id is the
+subject&#39;s node id, so a node has at most one instance of each pipeline: a later run replaces the
+earlier one. The engine takes turns between pipelines, so a long queue of one kind of work
+does not hold back the others.</li>
+<li><strong>The steps.</strong> The engine starts each step whose dependencies are met. A step without <code>pool</code>
+runs inside the engine, at most <a href="../reference/settings.html#cfg_pipeline_max_concurrent"><code>CFG_PIPELINE_MAX_CONCURRENT</code></a>
+at a time. A step with <code>pool</code> becomes a job in that pool, such as <code>/var/pools/media</code>, and a
+worker that has room for it runs it.</li>
+</ol>
+<p>Pipeline steps change the tree, and those changes are events too. A step that writes to its own
+subject would start its own pipeline again; the engine recognises this and drops a trigger for a
+subject whose run of that pipeline is still going, or ended less than five seconds ago. A change
+after that starts a fresh run. A pipeline whose subject collects many changes, such as an album
+whose photos keep arriving, sets <code>coalesce: rerun</code> instead: every trigger during a run then adds up
+to one more run when it ends.</p>
+<p>A file a step makes from another file, such as a thumbnail, a face crop or a video rendition,
+records where it came from. Such a derived file starts no pipeline unless the trigger says
+<code>allowDerived: true</code>, so a face crop is never searched for faces of its own.</p>
+<p>If the subject is deleted while its run is going, the run is cancelled: its remaining steps are
+skipped and their pool jobs dropped.</p>
+<h3 id="what-a-runs-state-means">What a run&#39;s state means<a class="anchor" href="#what-a-runs-state-means" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>queued</code></td>
+<td>Unfinished, with nothing executing: its steps wait in a pool or on other steps</td>
+</tr>
+<tr>
+<td><code>running</code></td>
+<td>At least one of its steps is executing right now</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>Every step completed or was skipped</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>A step ran out of attempts, or failed on its input</td>
+</tr>
+<tr>
+<td><code>cancelled</code></td>
+<td>Stopped by an administrator, or because its subject was deleted</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pending</code></td>
+<td>Waiting for the steps it depends on</td>
+</tr>
+<tr>
+<td><code>queued</code></td>
+<td>Ready, waiting for a place in the engine</td>
+</tr>
+<tr>
+<td><code>waiting</code></td>
+<td>Handed to a pool, waiting for a worker to take it</td>
+</tr>
+<tr>
+<td><code>running</code></td>
+<td>Executing now</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>Finished with exit status 0</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Out of attempts, or failed on its input</td>
+</tr>
+<tr>
+<td><code>skipped</code></td>
+<td>Its <code>condition</code> said no, or its run was cancelled</td>
+</tr>
+</tbody></table>
+</div>
+<p>After a large upload most instances read <code>queued</code>: the pools work through them a few at a time.</p>
+<h2 id="pools-and-workers">Pools and workers<a class="anchor" href="#pools-and-workers" aria-label="Link to this section"></a></h2>
+<p>The steps that take real time, reading metadata, making thumbnails, finding faces, transcribing,
+go to a pool rather than running in the engine. A pool is a node holding jobs, each with a kind, a
+priority and what it requires. Workers, each a service, offer the pool their free capacity and take
+the best job that fits: the highest priority first, the oldest among equals.</p>
+<p>The Archive runs two workers on <code>/var/pools/media</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>What it runs</th>
+<th>Paced by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cpu</code></td>
+<td>Work on the processor: reading metadata, thumbnails, renditions, fingerprints, zips, matching faces</td>
+<td><strong>CPU budget for media work</strong>, <a href="../reference/settings.html#cfg_cpu_slots"><code>CFG_CPU_SLOTS</code></a></td>
+</tr>
+<tr>
+<td><code>models</code></td>
+<td>Requests to the media service&#39;s models: faces, picture and text vectors, text in pictures, transcripts, voices</td>
+<td><strong>Model requests in flight</strong>, <a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
+</tr>
+</tbody></table>
+</div>
+<p>Most of these steps are calls into the <a href="../admin/media-service.html">media service</a>, which does
+the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
+job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
+<a href="../admin/processing.html">Processing and pipelines</a> explains how to size the workers.</p>
+<h2 id="one-upload-start-to-finish">One upload, start to finish<a class="anchor" href="#one-upload-start-to-finish" aria-label="Link to this section"></a></h2>
+<p>With the Archive installed, an upload sets off this chain. Each arrow is a fact, and each fact
+starts its own pipelines:</p>
+<ol>
+<li>You upload <code>IMG_0042.jpg</code> to an album. When its last byte is written, EiN records its size,
+checksum and type, an <code>updated</code> event.</li>
+<li><code>archive-bridge</code> sees a photo with bytes and no metadata and announces <code>media.file.discovered</code>.</li>
+<li><code>media-ingest</code> runs <code>exif-extract</code>, which reads the camera, the time and the place and writes
+them under the photo as <code>metadata/exif</code>.</li>
+<li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes),
+<code>media-fingerprint</code>, <code>media-faces</code>, <code>media-embed-picture</code> (search by what is in the picture),
+<code>media-ocr</code> (text in the picture) and <code>media-device</code>; for a video or recording also
+<code>media-transcode</code> and <code>media-transcribe</code>. They run side by side.</li>
+<li><code>media-faces</code> writes each face it finds under the photo, which becomes <code>media.face.detected</code>
+and starts <code>media-face-assign</code>, matching the face to a person.</li>
+<li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
+address, and <code>location.point.changed</code>, which links the photo to the location that contains it.</li>
+</ol>
+
+<p>Nothing in the chain waits for &quot;the previous step&quot;. Each stage waits for a fact, so each can be run
+again, put first or given its own workers without touching the others. <a href="../guide/importing.html">Getting your photos in</a>
+describes what you see in the interface while this happens.</p>
+<p>The Archive&#39;s pipelines and what starts them:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Pipeline</th>
+<th>Starts on</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>media-ingest</code></td>
+<td><code>media.file.discovered</code></td>
+<td>Reads a file&#39;s metadata; every other media pipeline waits on it</td>
+</tr>
+<tr>
+<td><code>media-reindex</code></td>
+<td><code>media.file.content-changed</code></td>
+<td>Reads the metadata again when a file&#39;s bytes changed</td>
+</tr>
+<tr>
+<td><code>media-stills</code></td>
+<td><code>media.metadata.extracted</code></td>
+<td>A photo&#39;s sizes, a video&#39;s poster frames, a recording&#39;s waveform</td>
+</tr>
+<tr>
+<td><code>media-transcode</code></td>
+<td><code>media.metadata.extracted</code>, <code>media.file.turned</code></td>
+<td>Video and audio the browser can play, a video&#39;s storyboard and chapters</td>
+</tr>
+<tr>
+<td><code>media-fingerprint</code></td>
+<td><code>media.metadata.extracted</code></td>
+<td>The fingerprints duplicate detection and photo stacks compare</td>
+</tr>
+<tr>
+<td><code>media-faces</code></td>
+<td><code>media.metadata.extracted</code></td>
+<td>Finds the faces in a picture and crops each one</td>
+</tr>
+<tr>
+<td><code>media-video-faces</code></td>
+<td><code>media.metadata.extracted</code></td>
+<td>Finds the faces a video shows, and when</td>
+</tr>
+<tr>
+<td><code>media-face-assign</code></td>
+<td><code>media.face.detected</code></td>
+<td>Attaches a found face to a person</td>
+</tr>
+<tr>
+<td><code>media-face-transfer</code></td>
+<td><code>media.faces.completed</code></td>
+<td>Moves older hand-made face tags onto found faces</td>
+</tr>
+<tr>
+<td><code>media-embed-picture</code></td>
+<td><code>media.metadata.extracted</code>, <code>media.picture.stale</code></td>
+<td>A picture vector, for search by what is in the picture</td>
+</tr>
+<tr>
+<td><code>media-embed-text</code></td>
+<td><code>media.text-embedding.stale</code></td>
+<td>Text vectors for a file&#39;s stored texts</td>
+</tr>
+<tr>
+<td><code>media-ocr</code></td>
+<td><code>media.metadata.extracted</code> and others</td>
+<td>Reads the text written in a picture</td>
+</tr>
+<tr>
+<td><code>media-transcribe</code></td>
+<td><code>media.metadata.extracted</code>, <code>media.transcript.stale</code></td>
+<td>Transcribes a video or recording</td>
+</tr>
+<tr>
+<td><code>media-voiceprint</code></td>
+<td><code>media.transcript.generated</code>, <code>media.speakers.missing</code></td>
+<td>Finds who speaks when, with a voiceprint per voice</td>
+</tr>
+<tr>
+<td><code>media-speaker-assign</code></td>
+<td><code>media.speakers.detected</code></td>
+<td>Decides which person each voice is</td>
+</tr>
+<tr>
+<td><code>media-device</code></td>
+<td><code>media.metadata.extracted</code></td>
+<td>Links a file to the device that made it</td>
+</tr>
+<tr>
+<td><code>media-geocode</code></td>
+<td><code>media.position.available</code></td>
+<td>The address of a file&#39;s GPS position</td>
+</tr>
+<tr>
+<td><code>location-link-point</code></td>
+<td><code>location.point.changed</code></td>
+<td>Links a photo to the location containing its position</td>
+</tr>
+<tr>
+<td><code>location-upkeep</code></td>
+<td><code>location.changed</code></td>
+<td>Redraws a location and links the photos inside it again</td>
+</tr>
+<tr>
+<td><code>media-album</code></td>
+<td><code>media.album.members-changed</code></td>
+<td>An album&#39;s stacks, time span, cover and matching profile</td>
+</tr>
+<tr>
+<td><code>media-duplicates</code></td>
+<td><code>media.duplicates.stale</code></td>
+<td>Decides a staged file&#39;s duplicate findings again</td>
+</tr>
+<tr>
+<td><code>document-index</code></td>
+<td>a file <code>updated</code> or <code>moved</code>, <code>media.text.missing</code></td>
+<td>Extracts the text of PDFs, text and word-processor files for search</td>
+</tr>
+<tr>
+<td><code>staging-unzip</code></td>
+<td>a file <code>updated</code> in a staging category</td>
+<td>Expands a zip beside itself and removes it</td>
+</tr>
+<tr>
+<td><code>staging-sidecars</code></td>
+<td><code>staging.sidecars.arrived</code></td>
+<td>Pairs sidecar files with their files</td>
+</tr>
+<tr>
+<td><code>staging-organize</code></td>
+<td><code>staging.category.changed</code></td>
+<td>Suggests groups for a staging category again</td>
+</tr>
+<tr>
+<td><code>staging-retime</code></td>
+<td><code>staging.retime.requested</code></td>
+<td>Dates staged files by their category&#39;s time rules</td>
+</tr>
+<tr>
+<td><code>track-stage</code></td>
+<td>a file <code>updated</code> in staging</td>
+<td>Turns a GPX file into its device&#39;s route</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../admin/staging.html">Staging and importing for administrators</a> explains the staging pipelines in
+detail.</p>
+<h2 id="when-a-step-fails">When a step fails<a class="anchor" href="#when-a-step-fails" aria-label="Link to this section"></a></h2>
+<p>A step fails when its command exits with a status other than 0. What happens next depends on the
+status:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Exit status</th>
+<th>Means</th>
+<th>What EiN does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>75</code></td>
+<td>A service the step needs cannot do it now: the media service is busy, loading a model, restarting or unreachable</td>
+<td>The step goes back to wait without spending an attempt. Its kind of job rests 30 seconds, doubling up to 10 minutes, until one succeeds</td>
+</tr>
+<tr>
+<td><code>65</code></td>
+<td>The input is the problem, such as bytes no decoder can open</td>
+<td>The step fails at once, whatever attempts are left, and is never run again by itself</td>
+</tr>
+<tr>
+<td>any other</td>
+<td>The step itself failed</td>
+<td>One attempt is spent; the step runs again until <code>maxAttempts</code> is used up, and then the instance fails</td>
+</tr>
+</tbody></table>
+</div>
+<p>So a media service that is down for an hour fails nothing: its work waits and starts again when it
+answers.</p>
+<p>A failed instance is not the end either. Once an hour, or as often as
+<a href="../reference/settings.html#cfg_pipeline_prune_interval"><code>CFG_PIPELINE_PRUNE_INTERVAL</code></a> says, the <code>pipeline-pruner</code> service runs
+<code>pipeline heal --apply</code>, which runs each failed instance again an hour after it failed, then after
+six hours, then after a day. One that still fails is marked as needing a person and left alone; one
+that failed on its input is never run again. The same service removes finished instances, keeping
+the newest 2000 of each pipeline, and leaves failed ones for you to look at.</p>
+<p>No step is stopped for taking long: a long step is working, and stopping it would throw the work
+away. A running step that has written nothing for 30 minutes
+(<a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a>) is listed as
+quiet, and you decide whether it is stuck.</p>
+<p>Some gaps no change announces: a file whose pipeline never ran, work an outage lost, vectors from
+a model the media service no longer runs. The Archive&#39;s <code>media-heal</code> service looks for these when
+nothing else is waiting, and announces each as a fact for the pipeline that fills it.</p>
+<h2 id="watch-and-steer-the-work">Watch and steer the work<a class="anchor" href="#watch-and-steer-the-work" aria-label="Link to this section"></a></h2>
+<p>The <strong>Dashboard</strong> in an administrator&#39;s sidebar shows the state of all this in one word at the top:
+<strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Its <strong>Work</strong> tab lists every pipeline
+with how many of its instances are queued, running, failed, completed and cancelled, how much work
+arrives and finishes per hour, and what is executing now. <a href="../admin/monitoring.html">Health and the dashboard</a>
+explains the words and the figures.</p>
+<p>Choose a pipeline in the list to open its page. It shows the pipeline&#39;s trigger, its steps and its
+priority, and its instances, with tabs <strong>All</strong>, <strong>Running</strong>, <strong>Completed</strong>, <strong>Failed</strong> and
+<strong>Cancelled</strong>. An administrator can select instances and choose <strong>Rerun</strong>, <strong>Cancel</strong> or
+<strong>Remove</strong>, or remove finished ones with <strong>Prune</strong>. Choose an instance to see each step, its status,
+how long it took and, for a failed step, its error; <strong>Retry</strong> runs a failed or skipped step again.</p>
+<p>The same is in the terminal. The commands that only read can be run by anyone; those that change something are for
+administrators:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline overview                          <span class="hljs-comment"># counts, queues and what is running</span>
+pipeline instances -s failed media-faces   <span class="hljs-comment"># failed runs of one pipeline, newest first</span>
+pipeline status media-faces/&lt;<span class="hljs-built_in">id</span>&gt;           <span class="hljs-comment"># one run: its subject, its steps and their state</span></code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+pipeline start media-faces /archive/albums/wrenfield-summer-1987/IMG_0042.jpg
+pipeline rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;            <span class="hljs-comment"># a fresh run from the current definition</span>
+pipeline restart media-faces/&lt;<span class="hljs-built_in">id</span>&gt;          <span class="hljs-comment"># run only the failed steps again</span>
+pipeline cancel media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
+<p>An instance id is the subject&#39;s node id; <code>pipeline instances</code> lists them. Write it as
+<code>&lt;pipeline&gt;/&lt;id&gt;</code> to say which pipeline&#39;s run you mean. <code>pipeline start</code> starts a run directly,
+without the trigger&#39;s guards, so it works on a file the guards would turn away. A run started that
+way has no fact behind it, so a step that reads <code>$EVENT_*</code> gets nothing; <code>pipeline start</code> warns
+when a step of the pipeline needs one.</p>
+<p><a href="../admin/processing.html">Processing and pipelines</a> is the administrator&#39;s guide to all of this,
+and <a href="../reference/commands-core.html#pipeline">Commands</a> lists every <code>pipeline</code> and <code>pool</code> command
+with its options.</p>
+<h2 id="add-a-pipeline-of-your-own">Add a pipeline of your own<a class="anchor" href="#add-a-pipeline-of-your-own" aria-label="Link to this section"></a></h2>
+<p>A pipeline of your own is a YAML file anywhere in the tree, registered with <code>pipeline define</code>. This
+one marks every photo that arrives in the Wrenfield albums as not yet reviewed:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">name:</span> <span class="hljs-string">mark-unreviewed</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Mark</span> <span class="hljs-string">each</span> <span class="hljs-string">new</span> <span class="hljs-string">photo</span> <span class="hljs-string">in</span> <span class="hljs-string">the</span> <span class="hljs-string">Wrenfield</span> <span class="hljs-string">albums</span> <span class="hljs-string">as</span> <span class="hljs-string">not</span> <span class="hljs-string">reviewed</span>
+
+<span class="hljs-attr">trigger:</span>
+  <span class="hljs-attr">on:</span> <span class="hljs-string">media.metadata.extracted</span>
+  <span class="hljs-attr">match:</span>
+    <span class="hljs-attr">nodePath:</span> <span class="hljs-string">&#x27;/archive/albums/wrenfield-*/**&#x27;</span>
+    <span class="hljs-attr">mimetype:</span> <span class="hljs-string">&#x27;image/*&#x27;</span>
+  <span class="hljs-attr">skipIfAttr:</span> <span class="hljs-string">reviewed</span>
+
+<span class="hljs-attr">steps:</span>
+  <span class="hljs-attr">mark:</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">attrs</span> <span class="hljs-string">-s</span> <span class="hljs-string">reviewed=no</span> <span class="hljs-string">$NODE_PATH</span></code></pre></div>
+<ol>
+<li><p>Save it, for example as <code>/home/helen/pipelines/mark-unreviewed.yaml</code>, with the
+<a href="../shell/editor.html">editor</a> or over <a href="../shell/ssh-sftp.html">SFTP</a>.</p>
+</li>
+<li><p>Register it as an administrator:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+pipeline define /home/helen/pipelines/mark-unreviewed.yaml</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Defined pipeline 'mark-unreviewed'</code></pre></div>
+<p>A definition EiN cannot read gives <code>pipeline-define: invalid pipeline: …</code> with the reason, such
+as <code>missing steps</code> or <code>step &#39;mark&#39; depends on unknown step &#39;read&#39;</code>.</p>
+</li>
+<li><p>Upload a photo to one of the albums. The pipeline appears on the <strong>Work</strong> tab of the
+<strong>Dashboard</strong> once it has run.</p>
+</li>
+</ol>
+<p>Running <code>pipeline define</code> again with the same name replaces the definition; new runs use it, and
+<code>pipeline rerun</code> brings an existing run up to it. <code>pipeline undefine mark-unreviewed</code> removes it and
+cancels its running instances. A step can run any command on the path, a module&#39;s included; keep
+steps safe to run twice, since a step that is interrupted runs again. <a href="../develop/modules.html">Writing a module</a>
+shows how to ship pipelines with a module.</p>
+<h2 id="trace-a-result-back-to-its-cause">Trace a result back to its cause<a class="anchor" href="#trace-a-result-back-to-its-cause" aria-label="Link to this section"></a></h2>
+<p>Every write a run makes is recorded in the audit trail with the run it came from and the write that
+started it. So from any thumbnail, face or transcript you can find the change that caused it, and
+from a change everything it set off. Reading the trail is for administrators:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator: what changed under a photo, with details</span>
+audit -v /archive/albums/wrenfield-summer-1987/IMG_0042.jpg</code></pre></div>
+<p>With <code>-v</code>, each record shows its id, the session or pipeline run it came from (<code>sid pipeline:media-faces/&lt;id&gt;</code>), its <code>cause</code>, and each value it changed as <code>from → to</code>. Pass a record&#39;s
+id to <code>audit --cause=&lt;id&gt;</code> to list every write its pipelines made. Writes under <code>/var</code>, where
+instances, queues and pools live, are not recorded, nor are session and terminal writes.</p>
+<p>What a run makes belongs to whoever made the subject, so a thumbnail of Helen Okafor&#39;s photo is
+hers. The <a href="../reference/commands-core.html#audit">audit command</a> lists every filter.</p>
+<h2 id="what-pipelines-do-not-do">What pipelines do not do<a class="anchor" href="#what-pipelines-do-not-do" aria-label="Link to this section"></a></h2>
+<ul>
+<li>Core brings no pipelines. Without a module, EiN keeps what you give it and works nothing out.</li>
+<li>A change made while a module&#39;s pipeline is not defined is not caught up when it is defined:
+pipelines act on changes as they happen. The Archive&#39;s <code>media-heal</code> finds most such gaps for
+media; for anything else, start the runs with <code>pipeline start</code>.</li>
+<li>A step is not stopped for running long, and there is no time limit to set.</li>
+</ul>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../start/how-ein-works.html">How EiN works</a>: the short version of this page</li>
+<li><a href="nodes.html">Nodes and node types</a> and <a href="tree.html">The tree</a>: what a change changes</li>
+<li><a href="../admin/processing.html">Processing and pipelines</a>: the administrator&#39;s side of the engine and its workers</li>
+<li><a href="../admin/monitoring.html">Health and the dashboard</a>: the four words and the <strong>Work</strong> tab</li>
+<li><a href="../admin/media-service.html">The media service</a>: where most steps do their work</li>
+<li><a href="../develop/modules.html">Writing a module</a>: shipping pipelines with a module</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="files.html" rel="prev"><span>Previous</span>Files and storage</a><a class="next" href="../reference/commands.html" rel="next"><span>Next</span>Commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/pipelines.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#every-change-is-announced">Every change is announced</a></li><li><a href="#modules-turn-changes-into-facts">Modules turn changes into facts</a></li><li><a href="#a-pipeline-says-what-to-do-with-a-change">A pipeline says what to do with a change</a></li><li class="nested"><a href="#the-trigger">The trigger</a></li><li class="nested"><a href="#the-steps">The steps</a></li><li class="nested"><a href="#the-options">The options</a></li><li><a href="#from-a-change-to-a-run">From a change to a run</a></li><li class="nested"><a href="#what-a-runs-state-means">What a run's state means</a></li><li><a href="#pools-and-workers">Pools and workers</a></li><li><a href="#one-upload-start-to-finish">One upload, start to finish</a></li><li><a href="#when-a-step-fails">When a step fails</a></li><li><a href="#watch-and-steer-the-work">Watch and steer the work</a></li><li><a href="#add-a-pipeline-of-your-own">Add a pipeline of your own</a></li><li><a href="#trace-a-result-back-to-its-cause">Trace a result back to its cause</a></li><li><a href="#what-pipelines-do-not-do">What pipelines do not do</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

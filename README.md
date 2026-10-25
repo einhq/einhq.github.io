@@ -12,7 +12,9 @@ on a band of hats in the colour of the interface's pages it is about.
 It is the GitHub Pages site of the [einhq](https://github.com/einhq) organisation, served at
 <https://einhq.eu> (`CNAME`).
 
-It is a static page with no build step: what is in the repository is what is served.
+It is static: what is in the repository is what is served. The documentation under `docs/`, at
+<https://einhq.eu/docs/>, is written in Markdown and its HTML is made from it with `make docs` and
+committed beside it ([The documentation](#the-documentation)).
 
 ```
 index.html          the page
@@ -20,6 +22,11 @@ assets/site.css     its styles
 assets/site.js      the hero's field, the tour's tabs, the screenshots' viewer, the copy button
 assets/page.js      what every page has: the top bar, its links and a phone's menu of them, and the bands of hats
 assets/hat-tiling.js  the einstein hat and a patch of its tiling, as EiN's web interface lays them
+assets/docs.css     the documentation's pages, over site.css
+assets/docs.js      the documentation's search, its pages' drawer on a phone, the code blocks' copy buttons
+docs/               the documentation: Markdown, and the HTML and search.json made from it
+docs/diagrams/      the documentation's diagrams, SVG
+docs/SUMMARY.md     the documentation's pages, in the order of its sidebar
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
 assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
 assets/fonts/       Familjen Grotesk, Fragment Mono and Mochiy Pop One, the wordmark's and the headings', served from here
@@ -28,6 +35,8 @@ assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.
 install.sh          what the page's install command fetches: it checks the machine, then fetches ein/deploy into ~/ein and runs its setup.sh
 ATTRIBUTION.md      who took each real photo in the demo, and under which licence: the demo archive's own, copied
 tools/capture.ts    takes the screenshots and the node pictures from a running demo instance
+tools/docs.ts       makes the documentation's HTML pages and search index from its Markdown, and checks its links
+tools/reference.ts  writes the reference pages (commands, settings, environment, node types) from a running EiN
 ```
 
 `make help` lists the targets.
@@ -35,6 +44,36 @@ tools/capture.ts    takes the screenshots and the node pictures from a running d
 ## Previewing
 
 `make serve` serves the site on <http://localhost:4507>.
+
+## The documentation
+
+Each page is a Markdown file under `docs/`, listed in `docs/SUMMARY.md`, whose `##` headings are the
+sidebar's sections. `make docs` writes an HTML file beside each, in the page's frame, and
+`docs/search.json`, which the search box reads; commit both with the Markdown. It fails on a link to
+a page, file or heading that is not there, and on a page `SUMMARY.md` leaves out. `make check` fails
+when the HTML is not what the Markdown makes.
+
+The Markdown reads the same on a forge: link a page by its `.md` file (`[Modules](../admin/modules.md#updating)`),
+put a diagram in `docs/diagrams/` as an SVG (`![What a node is made of](../diagrams/node.svg "Caption")`),
+which the HTML draws inline so it takes the page's fonts, and write a callout as GitHub does (`> [!NOTE]`, `TIP`,
+`IMPORTANT`, `WARNING`, `CAUTION`). Screenshots are the site's own, `../assets/shots/<id>.webp`, with
+their 2x file used where there is one. Examples use invented people and places, never real ones.
+
+A diagram is drawn for the dark page: the ground `#1a1e27` with a `#12151c` frame, text in
+`Familjen Grotesk` (`#eceff4`, `#a2abbb` for the quieter), lines in `rgb(255 255 255 / .16)`, and
+colour only for node types and pages, as `site.css` names them (person `#da77f2`, album `#339af0`,
+place `#38d9a9`, track `#22b8cf`, device `#ffa94d`, label `#f06595`, media `#748ffc`, system
+`#a9e34b`, documentation `#b197fc`).
+
+The pages under `docs/reference/` that list commands, settings, environment variables and node types
+are written by `make reference` from a running EiN that has every module, over its SSH:
+
+```bash
+make reference SSH='ssh -p 2222 admin@ein.local'
+```
+
+It keeps what describes EiN (a setting's default, never its value there). Run it when a command, a
+setting, a variable or a node type changes, and commit what it writes; never edit those pages by hand.
 
 ## Taking the screenshots again
 

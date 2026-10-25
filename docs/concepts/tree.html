@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The tree – EiN documentation</title>
+    <meta name="description" content="Everything EiN holds has a path in one tree, from / down. This page walks through the standard paths: what lies where, who owns each part, which parts modules add, and which parts are stored somewhere else. Read it when you browse in the terminal, over SFTP or on the Nodes page and want to know what you are looking at.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/concepts/tree.html">
+    <meta property="og:title" content="The tree – EiN documentation">
+    <meta property="og:description" content="Everything EiN holds has a path in one tree, from / down. This page walks through the standard paths: what lies where, who owns each part, which parts modules add, and which parts are stored somewhere else. Read it when you browse in the terminal, over SFTP or on the Nodes page and want to know what you are looking at.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/concepts/tree.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html" aria-current="page">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Concepts</p>
+          <h1>The tree</h1>
+        </header>
+        <article class="prose">
+<p>Everything EiN holds has a path in one tree, from <code>/</code> down. This page walks through the standard
+paths: what lies where, who owns each part, which parts modules add, and which parts are stored
+somewhere else. Read it when you browse in the terminal, over SFTP or on the <strong>Nodes</strong> page and want
+to know what you are looking at.</p>
+<h2 id="the-top-of-the-tree">The top of the tree<a class="anchor" href="#the-top-of-the-tree" aria-label="Link to this section"></a></h2>
+<p>A fresh installation has seven folders at the top:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ls</span> /</code></pre></div>
+<div class="code"><pre tabindex="0"><code>archive  dev  etc  home  tmp  usr  var</code></pre></div>
+<p>Each holds one kind of thing, and the kind is the reason a path sits where it does:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>What it holds</th>
+<th>Who writes there</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/archive</code></td>
+<td>What EiN is for: albums, people, locations, devices and labels</td>
+<td>Everyone with an account, as each folder&#39;s sharing allows</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging</td>
+<td>Each account in its own folder</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>Accounts and groups, the system&#39;s settings, the services EiN runs and the navigation of the web interface</td>
+<td>The administrator, and commands such as <code>config set</code></td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs</td>
+<td>EiN itself</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>Code and read-only files: the commands, the modules and the built-in guide</td>
+<td>Nobody by hand; an update or <code>mod install</code> replaces it</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>The channels changes are announced on, and <code>/dev/null</code></td>
+<td>EiN itself</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>Scratch space that does not outlast a restart</td>
+<td>Everyone</td>
+</tr>
+</tbody></table>
+</div>
+<p>The administrator owns <code>/</code> and the system folders, most of them with the mode <code>0755</code>: every account
+may read and pass through them, and only the administrator changes them. Your own data lives in <code>/archive</code> and
+in your home. <a href="../admin/permissions.html#the-other-bits-are-the-systems">Permissions in depth</a> lists
+the owner and mode of each standard folder.</p>
+<h2 id="archive-the-content">/archive: the content<a class="anchor" href="#archive-the-content" aria-label="Link to this section"></a></h2>
+<p><code>/archive</code> holds what someone would be upset to lose. Core makes <code>/archive</code> and the label tree;
+every other folder in it comes from a module. Each module names the folders its content lives in,
+and setting the module up creates the ones that are missing. Removing a module never removes them,
+since they hold the content.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What is there</th>
+<th>From</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/archive/albums</code></td>
+<td>Albums, and the photos, videos, recordings and documents in them</td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>/archive/people</code></td>
+<td>People, each with folders such as children, partners, homes, events and devices</td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>/archive/people/unknown</code></td>
+<td>People face recognition found but nobody has named yet; naming one moves it up into <code>/archive/people</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>/archive/locations</code></td>
+<td>Locations, each with its outline on the map as a child <code>position</code> node</td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>/archive/devices</code></td>
+<td>Cameras, phones and GPS trackers, each with the route it recorded as a child <code>track</code> node</td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>/archive/tags</code></td>
+<td>Labels: one folder per label, holding a link to everything that carries it</td>
+<td>Core</td>
+</tr>
+</tbody></table>
+</div>
+<p>So an instance without the Archive has <code>/archive/tags</code> and nothing else under <code>/archive</code>. A folder
+that already exists is left as it is, whoever owns it.</p>
+<p><code>/archive</code> itself has the mode <code>0771</code>: everyone may pass through, but only the <code>users</code> group, which
+every account belongs to, may list it. The folders a module makes are <code>0775</code>, owned by <code>admin</code> with
+the group <code>users</code>, so everyone with an account may add content there. What each album, person or
+location then shows to whom is its own sharing; see <a href="../guide/sharing.html">Sharing</a>.</p>
+<p>A photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
+thumbnails and the faces found on it, is kept beneath the photo and goes with it when it is moved
+or deleted. <a href="nodes.html">Nodes and node types</a> describes what a node holds.</p>
+<h2 id="home-your-own-folder">/home: your own folder<a class="anchor" href="#home-your-own-folder" aria-label="Link to this section"></a></h2>
+<p>Every account has a home, <code>/home/&lt;username&gt;</code>, made with the account. Helen Okafor&#39;s account <code>helen</code>
+has <code>/home/helen</code>. In the terminal <code>~</code> stands for it, and <code>cd</code> alone goes there. You land in it when
+you log in over SSH or SFTP.</p>
+<p>Your home is yours, in your own group, with the mode <code>0751</code>: others may pass through to something
+inside it you have shared, and can list nothing. What is made in it takes that from it, so nothing
+there is shared with others until you share it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path in your home</th>
+<th>What it is</th>
+<th>From</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.config</code></td>
+<td>Your preferences, as <code>CFG_USER_…</code> settings; see <a href="../guide/profile.html#your-preferences-in-the-terminal">Your profile</a></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.bashrc</code></td>
+<td>Your own shell settings, read by every shell you open; see <a href="../shell/bash.html#keep-your-settings-in-bashrc">The shell language</a></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.bash_history</code></td>
+<td>The commands you have typed</td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>stars/</code></td>
+<td>Your favourites, as links to what you hearted</td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.trash/</code></td>
+<td>Your trash: each entry holds the node you moved there until you restore it or it is emptied</td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.ui/nav.json</code></td>
+<td>Your changes to the sidebar and top bar; see <a href="../guide/customizing.html">Your sidebar and top bar</a></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.ssh/</code></td>
+<td>Your SSH keys: <code>authorized_keys</code> for signing in, and the keys and <code>known_hosts</code> the <code>ssh</code> command uses</td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>.chats/</code></td>
+<td>Your conversations with the assistant, private to you</td>
+<td>Assistant</td>
+</tr>
+<tr>
+<td><code>staging/</code></td>
+<td>Uploads waiting for you to sort them; see <a href="../guide/staging.html">Sorting in staging</a></td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<p>Most of these appear only once something needs them. Names starting
+with a dot are left out by <code>ls</code>; <code>ls -A</code>, or its alias <code>la</code>, shows them.</p>
+<p>Your staging folder has the mode <code>0700</code>, and its files stay out of everyone else&#39;s view, search
+included. It has four folders of its own:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path in <code>staging/</code></th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>files/&lt;category&gt;/</code></td>
+<td>The files to sort, by category; uploads go to <code>files/inbox/</code></td>
+</tr>
+<tr>
+<td><code>albums/&lt;category&gt;/</code></td>
+<td>The groups staging suggests for each category</td>
+</tr>
+<tr>
+<td><code>journal/</code></td>
+<td>What you decided in staging</td>
+</tr>
+<tr>
+<td><code>routes/</code></td>
+<td>GPX files waiting for the device that recorded them</td>
+</tr>
+</tbody></table>
+</div>
+<p>Neither your staging nor your trash is part of the library: search, the Media and Year pages, the
+map and <strong>On this day</strong> leave out everything in them.</p>
+<h2 id="etc-accounts-and-settings">/etc: accounts and settings<a class="anchor" href="#etc-accounts-and-settings" aria-label="Link to this section"></a></h2>
+<p><code>/etc</code> holds what a person declares: the accounts, the settings and what runs. The administrator
+owns it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/users/&lt;name&gt;</code></td>
+<td>An account, as a <code>user</code> node holding its password and the link to the person it is</td>
+</tr>
+<tr>
+<td><code>/etc/groups/&lt;group&gt;</code></td>
+<td>A group; its members are links in <code>users/</code> beneath it</td>
+</tr>
+<tr>
+<td><code>/etc/config</code></td>
+<td>The system&#39;s settings, as <code>CFG_…</code> lines, written by <strong>Settings</strong> and <code>config set</code></td>
+</tr>
+<tr>
+<td><code>/etc/keys</code></td>
+<td>The secret settings, such as API keys, readable by the administrator alone</td>
+</tr>
+<tr>
+<td><code>/etc/config.d/&lt;module&gt;</code></td>
+<td>A module&#39;s own settings file, linked in from the module</td>
+</tr>
+<tr>
+<td><code>/etc/environment</code></td>
+<td>The settings the deployment started EiN with, written again at every start</td>
+</tr>
+<tr>
+<td><code>/etc/bashrc</code></td>
+<td>Read by every shell: aliases, the history size, and the lines that read the settings files</td>
+</tr>
+<tr>
+<td><code>/etc/layout</code></td>
+<td>The folder variables, such as <code>LOGS_PATH</code>, written at every start and read by <code>/etc/bashrc</code></td>
+</tr>
+<tr>
+<td><code>/etc/services</code></td>
+<td>The services EiN can run (<code>available/</code>) and those it starts (<code>enabled/</code>)</td>
+</tr>
+<tr>
+<td><code>/etc/ui/nav.d/&lt;module&gt;.json</code></td>
+<td>Each module&#39;s sidebar and top-bar entries</td>
+</tr>
+<tr>
+<td><code>/etc/ui/nav.json</code></td>
+<td>The administrator&#39;s changes to the navigation, laid over every module&#39;s</td>
+</tr>
+<tr>
+<td><code>/etc/fstab</code></td>
+<td>Mounts recorded with <code>mount --save</code>, mounted again at every start</td>
+</tr>
+<tr>
+<td><code>/etc/ssh_host_key</code></td>
+<td>The SSH server&#39;s host key</td>
+</tr>
+<tr>
+<td><code>/etc/init</code>, <code>/etc/files</code></td>
+<td>The scripts EiN runs as it starts</td>
+</tr>
+</tbody></table>
+</div>
+<p>With the assistant installed, <code>/etc/assistant-prompt.md</code> holds the instructions the assistant is
+given, and <code>/etc/assistant.d/&lt;module&gt;</code> what each module tells it. <a href="../admin/configuration.html">Configuration</a>
+explains how the settings files combine, and <a href="../admin/accounts.html">Accounts and groups</a> the
+accounts.</p>
+<h2 id="var-what-the-system-writes">/var: what the system writes<a class="anchor" href="#var-what-the-system-writes" aria-label="Link to this section"></a></h2>
+<p><code>/var</code> is the machine&#39;s own state, written by EiN as it runs. Every folder in it is made at start,
+so <code>ls /var</code> reads the same on a fresh instance as on one that has run for a year.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/var/logs/system</code></td>
+<td>The system log</td>
+</tr>
+<tr>
+<td><code>/var/logs/metrics</code></td>
+<td>Measurements of the machine and of EiN over time, for the Dashboard</td>
+</tr>
+<tr>
+<td><code>/var/logs/services/&lt;name&gt;</code></td>
+<td>Each service&#39;s output</td>
+</tr>
+<tr>
+<td><code>/var/logs/jobs/&lt;pid&gt;</code></td>
+<td>The output of a job started with <code>nohup</code></td>
+</tr>
+<tr>
+<td><code>/var/sessions</code></td>
+<td>The open sessions: one node per session, from a browser or over SSH</td>
+</tr>
+<tr>
+<td><code>/var/links</code></td>
+<td>Share links: one node per link that opens something without an account</td>
+</tr>
+<tr>
+<td><code>/var/queues</code></td>
+<td>Queues of events waiting to be handled, the pipeline engine&#39;s in <code>pipeline-engine</code></td>
+</tr>
+<tr>
+<td><code>/var/pools</code></td>
+<td>Pools of jobs waiting for a worker, such as those for the media service</td>
+</tr>
+<tr>
+<td><code>/var/pipelines/definitions</code></td>
+<td>The pipelines the modules define</td>
+</tr>
+<tr>
+<td><code>/var/pipelines/instances</code></td>
+<td>The pipeline runs, finished and in progress</td>
+</tr>
+<tr>
+<td><code>/var/www</code></td>
+<td>The sites the web server serves, as links to the web interface</td>
+</tr>
+<tr>
+<td><code>/var/lib/modules</code></td>
+<td>The modules <code>mod install</code> installed, one folder each</td>
+</tr>
+</tbody></table>
+</div>
+<p>Changes under <code>/var</code> are left out of the audit trail. <a href="pipelines.html">Changes and pipelines</a> follows
+work through the queues and pools, and <a href="../admin/services-logs.html">Services and logs</a> shows how to read
+the logs.</p>
+<h2 id="usr-commands-modules-and-the-guide">/usr: commands, modules and the guide<a class="anchor" href="#usr-commands-modules-and-the-guide" aria-label="Link to this section"></a></h2>
+<p><code>/usr</code> holds code and files nobody edits. An update of EiN replaces what core brings, and <code>mod install</code>
+what a module brings.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/usr/bin</code></td>
+<td>Core&#39;s commands, one <code>command</code> node each: <code>/usr/bin/ls</code> is the <code>ls</code> command</td>
+</tr>
+<tr>
+<td><code>/usr/lib</code></td>
+<td>Core&#39;s other files: its bash commands in <code>core/bin</code>, its services, and the web interface</td>
+</tr>
+<tr>
+<td><code>/usr/modules/&lt;name&gt;</code></td>
+<td>Each installed module, a link to its folder in <code>/var/lib/modules</code></td>
+</tr>
+<tr>
+<td><code>/usr/docs/guide</code></td>
+<td>The guide built into EiN, which <strong>Documentation</strong> in the sidebar shows</td>
+</tr>
+<tr>
+<td><code>/usr/docs/modules/&lt;name&gt;</code></td>
+<td>Each module&#39;s own guide</td>
+</tr>
+</tbody></table>
+</div>
+<p>Your <code>PATH</code> holds <code>/usr/bin</code>, <code>/usr/lib/core/bin</code> and each module&#39;s <code>bin</code> folder, so a module&#39;s commands
+run by name as soon as it is set up. <a href="../admin/modules.html#where-modules-are-kept">Modules</a> explains where
+installed modules are kept.</p>
+<h2 id="dev-and-tmp">/dev and /tmp<a class="anchor" href="#dev-and-tmp" aria-label="Link to this section"></a></h2>
+<p><code>/dev/events</code> and <code>/dev/pipeline-events</code> are <code>router</code> nodes: every change to the tree is announced
+on <code>/dev/events</code> once it is saved, and the pipeline engine announces its own progress on
+<code>/dev/pipeline-events</code>. <code>/dev/null</code> works as on Linux: reading it gives nothing, and what is written
+to it is thrown away.</p>
+<p><code>/tmp</code> is open to everyone, with the mode <code>0777</code>, and is kept in memory: what you put there is gone
+when EiN restarts. Use it for files you need only for a moment.</p>
+<h2 id="find-a-folder-by-its-variable">Find a folder by its variable<a class="anchor" href="#find-a-folder-by-its-variable" aria-label="Link to this section"></a></h2>
+<p>Every shell has a variable for each standard folder, so a script does not have to spell the path
+out:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$LOGS_PATH</span>
+<span class="hljs-built_in">ls</span> <span class="hljs-variable">$ARCHIVE_PATH</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>/home/helen</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ARCHIVE_PATH</code></td>
+<td><code>/archive</code></td>
+</tr>
+<tr>
+<td><code>TAGS_PATH</code></td>
+<td><code>/archive/tags</code></td>
+</tr>
+<tr>
+<td><code>HOMES_PATH</code></td>
+<td><code>/home</code></td>
+</tr>
+<tr>
+<td><code>HOME</code></td>
+<td>your own home</td>
+</tr>
+<tr>
+<td><code>ETC_PATH</code></td>
+<td><code>/etc</code></td>
+</tr>
+<tr>
+<td><code>USERS_PATH</code></td>
+<td><code>/etc/users</code></td>
+</tr>
+<tr>
+<td><code>GROUPS_PATH</code></td>
+<td><code>/etc/groups</code></td>
+</tr>
+<tr>
+<td><code>SERVICES_PATH</code></td>
+<td><code>/etc/services</code></td>
+</tr>
+<tr>
+<td><code>VAR_PATH</code></td>
+<td><code>/var</code></td>
+</tr>
+<tr>
+<td><code>LOGS_PATH</code></td>
+<td><code>/var/logs</code></td>
+</tr>
+<tr>
+<td><code>SESSIONS_PATH</code></td>
+<td><code>/var/sessions</code></td>
+</tr>
+<tr>
+<td><code>LINKS_PATH</code></td>
+<td><code>/var/links</code></td>
+</tr>
+<tr>
+<td><code>QUEUES_PATH</code></td>
+<td><code>/var/queues</code></td>
+</tr>
+<tr>
+<td><code>POOLS_PATH</code></td>
+<td><code>/var/pools</code></td>
+</tr>
+<tr>
+<td><code>PIPELINES_PATH</code></td>
+<td><code>/var/pipelines</code></td>
+</tr>
+<tr>
+<td><code>WWW_PATH</code></td>
+<td><code>/var/www</code></td>
+</tr>
+<tr>
+<td><code>MOD_INSTALL_PATH</code></td>
+<td><code>/var/lib/modules</code></td>
+</tr>
+<tr>
+<td><code>USR_PATH</code></td>
+<td><code>/usr</code></td>
+</tr>
+<tr>
+<td><code>BIN_PATH</code></td>
+<td><code>/usr/bin</code></td>
+</tr>
+<tr>
+<td><code>LIB_PATH</code></td>
+<td><code>/usr/lib</code></td>
+</tr>
+<tr>
+<td><code>MOD_PATH</code></td>
+<td><code>/usr/modules</code></td>
+</tr>
+<tr>
+<td><code>DOCS_PATH</code></td>
+<td><code>/usr/docs</code></td>
+</tr>
+<tr>
+<td><code>TEMP_PATH</code></td>
+<td><code>/tmp</code></td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../reference/environment.html#folders-in-the-tree">Environment variables</a> lists them all with the rest of
+the shell&#39;s environment.</p>
+<h2 id="parts-of-the-tree-that-live-elsewhere">Parts of the tree that live elsewhere<a class="anchor" href="#parts-of-the-tree-that-live-elsewhere" aria-label="Link to this section"></a></h2>
+<p>Most of the tree is kept in PostgreSQL, but a folder can be a <strong>mount</strong>: its contents come from
+somewhere else, and its path looks like any other. <code>mount</code> without arguments lists them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mount</code></pre></div>
+<div class="code"><pre tabindex="0"><code>/                pg         rw 3 Oct 2026 09:14:02
+/etc/files       filesystem r  3 Oct 2026 09:14:02
+/tmp             memory     rw 3 Oct 2026 09:14:02
+/usr/bin         command    r  3 Oct 2026 09:14:02
+/usr/docs/guide  filesystem r  3 Oct 2026 09:14:04
+/usr/lib         filesystem r  3 Oct 2026 09:14:02
+/var/lib/modules filesystem rw 3 Oct 2026 09:14:02</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Where its contents are</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>pg</code></td>
+<td>The database: the root, and everything not mounted elsewhere</td>
+</tr>
+<tr>
+<td><code>filesystem</code></td>
+<td>A folder on the machine&#39;s disk, such as the built-in guide or the installed modules</td>
+</tr>
+<tr>
+<td><code>command</code></td>
+<td>EiN&#39;s own commands, as nodes</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>EiN&#39;s memory, gone at a restart</td>
+</tr>
+<tr>
+<td><code>sftp</code></td>
+<td>A folder on another machine, reached over SFTP</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>r</code> marks a mount nobody can write to, whatever the modes say. Only the administrator mounts and
+unmounts. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Reaching other machines</a> shows how to
+mount a folder of another machine, and <a href="files.html">Files and storage</a> where the bytes of the files in
+the database&#39;s part of the tree are kept.</p>
+<h2 id="browse-the-tree">Browse the tree<a class="anchor" href="#browse-the-tree" aria-label="Link to this section"></a></h2>
+<p>The tree looks the same through every door, and each shows you only what you may read.</p>
+<p><strong>In the terminal</strong>, <code>cd</code> moves around, <code>ls</code> lists a folder, <code>ls -l</code> adds each node&#39;s type, mode,
+owner, group, size and time, and <code>find</code> searches under a path:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cd</span> /archive/people
+<span class="hljs-built_in">ls</span> -l
+find /archive/people -maxdepth 1 -<span class="hljs-built_in">type</span> person | <span class="hljs-built_in">wc</span> -l
+<span class="hljs-built_in">du</span> -chs /archive/albums/christmas-2019</code></pre></div>
+<p><a href="../shell/terminal.html">The terminal</a> has more commands for getting around, and <a href="../shell/bash.html">The shell language</a>
+how paths with spaces and wildcards work.</p>
+<p><strong>On the Nodes page</strong>, a file manager over the whole tree. Administrators find it as <strong>Nodes</strong> under
+<strong>System</strong> in the sidebar; its address is <code>/system/nodes</code>, and <code>/system/nodes?path=/archive/albums</code>
+opens it at a given folder.</p>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Nodes page shows the tree as it is, with each node&#39;s type, mode, owner and group.</figcaption></figure>
+<ol>
+<li>Click a segment of the path above the list to go up to it, or click beside the segments to type a
+path and press <kbd>Enter</kbd>. <strong>Up</strong> and <strong>Home</strong> beside it go to the folder above and to your home.</li>
+<li>Double-click a folder, or press <kbd>Enter</kbd>, to go into it.</li>
+<li>Right-click a node for <strong>Open</strong>, <strong>Cut</strong>, <strong>Copy</strong>, <strong>Paste</strong>, <strong>Rename</strong>, <strong>Delete</strong>,
+<strong>New directory</strong>, <strong>Properties</strong> and <strong>Open terminal here</strong>.</li>
+<li><strong>Tools</strong> at the top right opens a pane with the selected node&#39;s <strong>Preview</strong>, <strong>Attributes</strong> and
+<strong>Sharing</strong>; <strong>Split</strong> opens a second list beside the first.</li>
+</ol>
+<p><strong>Properties</strong> (<kbd>Alt</kbd>+<kbd>Enter</kbd>) shows and changes a node&#39;s owner, group and mode;
+<a href="../admin/permissions.html#see-a-nodes-permissions">Permissions in depth</a> describes it.</p>
+<p><strong>Over SFTP</strong>, the tree is a set of folders and files you can open in a file manager or with <code>sftp</code>
+and <code>scp</code>, as <a href="../shell/ssh-sftp.html">SSH and SFTP</a> describes.</p>
+<h2 id="what-you-see-is-yours-to-see">What you see is yours to see<a class="anchor" href="#what-you-see-is-yours-to-see" aria-label="Link to this section"></a></h2>
+<p>A folder lists only what you may read. Something private to someone else is not listed to you at
+all, so two people can see the same album differently, and a folder can look empty to you and not be.
+An administrator sees everything. <a href="../admin/permissions.html">Permissions in depth</a> has the rules, and
+<a href="links.html">Links</a> explains the links that put one node in several folders, such as a label&#39;s or a
+favourite&#39;s.</p>
+<h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><strong><code>ls /archive</code> shows only <code>tags</code>.</strong> The Archive module is not installed. An administrator installs it on
+<strong>Settings → Modules</strong>; see <a href="../admin/modules.html">Modules</a>.</p>
+<p><strong>A file I put in <code>/tmp</code> is gone.</strong> <code>/tmp</code> is kept in memory and emptied when EiN restarts. Keep what
+you need in your home or in an album.</p>
+<p><strong><code>mount: permission denied, only admin is allowed to mount</code>.</strong> Mounting is for the administrator.</p>
+<p><strong>A folder holds more than I see, or will not be deleted.</strong> Something in it is hidden from you. Ask its
+owner or an administrator; <a href="../guide/sharing.html">Sharing</a> explains why.</p>
+<p><strong>I cannot find something I deleted.</strong> If you moved it to the trash, it is under <strong>Trash</strong> in your
+account menu and in <code>~/.trash</code>, and no list or search shows it until you restore it; see
+<a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a>. What <code>rm</code> deleted is gone.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="nodes.html">Nodes and node types</a>: what a node is and holds.</li>
+<li><a href="links.html">Links</a>: softlinks and hard links, which put one node in several places.</li>
+<li><a href="files.html">Files and storage</a>: where the bytes of files are kept on disk.</li>
+<li><a href="pipelines.html">Changes and pipelines</a>: what happens when something in the tree changes.</li>
+<li><a href="../admin/permissions.html">Permissions in depth</a>: owners, groups, modes and access lists.</li>
+<li><a href="../reference/node-types.html">Node types</a>: every type of node.</li>
+<li><a href="../reference/environment.html">Environment variables</a>: every variable, the folder variables among them.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="nodes.html" rel="prev"><span>Previous</span>Nodes and node types</a><a class="next" href="links.html" rel="next"><span>Next</span>Links</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/tree.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-top-of-the-tree">The top of the tree</a></li><li><a href="#archive-the-content">/archive: the content</a></li><li><a href="#home-your-own-folder">/home: your own folder</a></li><li><a href="#etc-accounts-and-settings">/etc: accounts and settings</a></li><li><a href="#var-what-the-system-writes">/var: what the system writes</a></li><li><a href="#usr-commands-modules-and-the-guide">/usr: commands, modules and the guide</a></li><li><a href="#dev-and-tmp">/dev and /tmp</a></li><li><a href="#find-a-folder-by-its-variable">Find a folder by its variable</a></li><li><a href="#parts-of-the-tree-that-live-elsewhere">Parts of the tree that live elsewhere</a></li><li><a href="#browse-the-tree">Browse the tree</a></li><li><a href="#what-you-see-is-yours-to-see">What you see is yours to see</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viewing photos, videos and recordings – EiN documentation</title>
+    <meta name="description" content="The viewer shows one photo, video or recording at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts and slideshows.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/viewer.html">
+    <meta property="og:title" content="Viewing photos, videos and recordings – EiN documentation">
+    <meta property="og:description" content="The viewer shows one photo, video or recording at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts and slideshows.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/viewer.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html" aria-current="page">Viewing photos, videos and recordings</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Home, memories and statistics</a></li><li><a href="assistant.html">Chatting with the assistant</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Using EiN</p>
+          <h1>Viewing photos, videos and recordings</h1>
+        </header>
+        <article class="prose">
+<p>The viewer shows one photo, video or recording at a time, large, with what EiN knows about it
+beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how
+to open the viewer and move through files, what the details panel tells you, and how to work with
+faces, text in pictures, playback, transcripts and slideshows.</p>
+<h2 id="open-the-viewer">Open the viewer<a class="anchor" href="#open-the-viewer" aria-label="Link to this section"></a></h2>
+<p>Click any picture in a grid: an album, the <strong>Media</strong> page, a person&#39;s <strong>Media</strong> tab, your
+<strong>Favourites</strong>, a search result. The picture grows out of its tile and fills the screen over the
+page. With the keyboard, move to a tile with <kbd>Tab</kbd> and press <kbd>Enter</kbd> or
+<kbd>Space</kbd>. While you are selecting pictures, a click ticks a tile instead of opening it;
+<a href="albums.html">Albums</a> explains selecting.</p>
+<p>The viewer walks the list you opened it from, in that list&#39;s order. A search hit on something said
+in a video or a recording opens it at the moment the words are spoken; see
+<a href="search.html">Search and the finder</a>.</p>
+<p>Each file in the viewer has its own address: <code>/media/</code> followed by the file&#39;s path. You can copy it
+from the browser&#39;s address bar and send it to someone who may see the file. Stepping to another
+file replaces the address instead of adding to the browser&#39;s history, so one press of the browser&#39;s
+Back button closes the viewer and returns you to the page underneath.</p>
+<h2 id="what-the-viewer-shows">What the viewer shows<a class="anchor" href="#what-the-viewer-shows" aria-label="Link to this section"></a></h2>
+<figure class="shot"><a href="../../assets/shots/lightbox@2x.webp"><img src="../../assets/shots/lightbox.webp" srcset="../../assets/shots/lightbox.webp 1x, ../../assets/shots/lightbox@2x.webp 2x" alt="The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right listing the camera, the album, the three people with their ages, the place with a map, and similar pictures" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.</figcaption></figure>
+<p>On a computer:</p>
+<ul>
+<li><strong>Top left</strong>: the close button (×).</li>
+<li><strong>Top right</strong>: the details button (ⓘ, tooltip <strong>Details (i)</strong>), which shows or hides the
+<a href="#the-details-panel">details panel</a>, and beside it <strong>Chat</strong>, where the assistant module is
+installed, which opens the assistant in a drawer beside the picture. You can ask it about the
+picture you are looking at; see <a href="assistant.html">Chatting with the assistant</a>.</li>
+<li><strong>Left and right edges</strong>: arrows to the previous and the next file.</li>
+<li><strong>The bar under the picture</strong>, from left to right:<ul>
+<li>where you are in the list, such as <strong>24 of 26</strong>. The <strong>Media</strong> page leaves this out, because it
+loads its feed a part at a time and does not know the whole count;</li>
+<li>the date and time the picture was taken, such as <strong>Saturday, 27 December 2025, 13:16:18</strong>;</li>
+<li>the place: the name of the location the picture is linked to, or else the street address read
+from its GPS position;</li>
+<li>the heart, <strong>Favourite (s)</strong>, when you are signed in;</li>
+<li><strong>Start slideshow</strong>;</li>
+<li><strong>More</strong> (⋮).</li>
+</ul>
+</li>
+</ul>
+<h3 id="the-date-under-the-picture">The date under the picture<a class="anchor" href="#the-date-under-the-picture" aria-label="Link to this section"></a></h3>
+<p>The date is shown as precisely as it is known, and no more. A picture known only to the year shows
+<strong>1975</strong>, one known to the month shows <strong>March 2004</strong>, and neither is given an invented day or hour.</p>
+<p>Point at the date to see where it came from: <strong>from the camera clock</strong>, <strong>from GPS</strong>, <strong>entered by
+hand</strong>, <strong>from Google Photos or a sidecar</strong> or <strong>from the file name</strong>. A scan adds <strong>a scan: its
+scanner’s clocks are not when it was taken</strong>. A picture taken in another time zone is shown at the
+time on the photographer&#39;s clock, and the tooltip adds the same moment in your own time, such as
+<strong>27 Dec 2025, 01:16 your time</strong>. <a href="dates-places.html">Dates and places of pictures</a> explains which
+date a picture gets and how to change it.</p>
+<h3 id="the-more-menu">The More menu<a class="anchor" href="#the-more-menu" aria-label="Link to this section"></a></h3>
+<p><strong>More</strong> (⋮) at the right end of the bar holds what you do to the view rather than to the file:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Pin faces</strong> / <strong>Unpin faces</strong> (<kbd>f</kbd>)</td>
+<td>Shows every face box with its name, or hides them again. It reads <strong>No faces</strong>, greyed out, when none were found. For photos and videos.</td>
+</tr>
+<tr>
+<td><strong>Show text</strong> / <strong>Hide text</strong> (<kbd>t</kbd>)</td>
+<td>Lays the text read from the photo over it. Shown only when text was read.</td>
+</tr>
+<tr>
+<td><strong>Edit text</strong> / <strong>Add text</strong></td>
+<td>Opens the text for writing by hand. Shown on photos you may change.</td>
+</tr>
+<tr>
+<td><strong>Fullscreen</strong> / <strong>Exit fullscreen</strong></td>
+<td>Gives the viewer the whole screen.</td>
+</tr>
+<tr>
+<td><strong>Download</strong></td>
+<td>Saves the original file to your device.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The file name at the top of the details panel downloads the original too. To download several files
+at once, select them in the grid and use <strong>Download</strong> in the selection bar.</p>
+<h2 id="move-between-files-and-close-the-viewer">Move between files and close the viewer<a class="anchor" href="#move-between-files-and-close-the-viewer" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>Next file</strong>: <kbd>→</kbd>, the arrow at the right edge, or swipe left on a touch screen.</li>
+<li><strong>Previous file</strong>: <kbd>←</kbd>, the arrow at the left edge, or swipe right.</li>
+</ul>
+<p>The list goes round: after the last file comes the first again, and before the first comes the
+last.</p>
+<p>To close the viewer, press × at the top left, press <kbd>Esc</kbd>, use the browser&#39;s Back button,
+or on a phone swipe down on the picture. The picture shrinks back into its tile, so you see where
+you were in the grid.</p>
+<p><kbd>Esc</kbd> first closes whatever lies over the picture: the enlarged map, the text dialog or
+<strong>Edit faces</strong>. During a slideshow it stops the slideshow. Only then does it close the viewer.</p>
+<h2 id="zoom-in-on-a-photo">Zoom in on a photo<a class="anchor" href="#zoom-in-on-a-photo" aria-label="Link to this section"></a></h2>
+<p>Photos zoom; videos and recordings do not, and neither does a photo during a slideshow.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To</th>
+<th>With a mouse and keyboard</th>
+<th>On a touch screen</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zoom in or out at a spot</td>
+<td>Turn the mouse wheel over the spot</td>
+<td>Pinch</td>
+</tr>
+<tr>
+<td>Zoom in on a spot, or back out</td>
+<td>Double-click</td>
+<td>Double-tap</td>
+</tr>
+<tr>
+<td>Zoom in a step</td>
+<td><kbd>+</kbd> or <kbd>=</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>Zoom out a step</td>
+<td><kbd>-</kbd></td>
+<td></td>
+</tr>
+<tr>
+<td>Fit the whole picture again</td>
+<td><kbd>0</kbd></td>
+<td>Double-tap</td>
+</tr>
+<tr>
+<td>Look around a zoomed picture</td>
+<td>Drag it</td>
+<td>Drag with one finger</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each file opens fitted to the screen. On a touch screen, swiping to the next file waits until the
+picture is back at its fitted size; until then a one-finger drag moves around the picture. Over
+text laid on the picture, the mouse wheel scrolls the text; hold <kbd>Ctrl</kbd> to zoom instead.</p>
+<h2 id="keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer<a class="anchor" href="#keyboard-shortcuts-in-the-viewer" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>←</kbd> / <kbd>→</kbd></td>
+<td>Previous / next file</td>
+</tr>
+<tr>
+<td><kbd>i</kbd></td>
+<td>Show or hide the details</td>
+</tr>
+<tr>
+<td><kbd>f</kbd></td>
+<td>Show or hide the faces</td>
+</tr>
+<tr>
+<td><kbd>t</kbd></td>
+<td>Show or hide the text in the picture</td>
+</tr>
+<tr>
+<td><kbd>s</kbd></td>
+<td>Favourite or unfavourite</td>
+</tr>
+<tr>
+<td><kbd>+</kbd> or <kbd>=</kbd></td>
+<td>Zoom in</td>
+</tr>
+<tr>
+<td><kbd>-</kbd></td>
+<td>Zoom out</td>
+</tr>
+<tr>
+<td><kbd>0</kbd></td>
+<td>Fit the picture</td>
+</tr>
+<tr>
+<td><kbd>Esc</kbd></td>
+<td>Close: first a layer over the picture or a slideshow, then the viewer</td>
+</tr>
+</tbody></table>
+</div>
+<p>Videos and recordings have keys of their own; see <a href="#play-a-video">Play a video</a>. Press
+<kbd>?</kbd> to see the shortcuts that work where you are, and see
+<a href="../reference/shortcuts.html">Keyboard shortcuts</a> for every key in EiN.</p>
+<h2 id="on-a-phone-or-tablet">On a phone or tablet<a class="anchor" href="#on-a-phone-or-tablet" aria-label="Link to this section"></a></h2>
+<p>The viewer takes its phone layout on any touch screen, and in any browser window narrower than 768
+pixels.</p>
+<figure class="shot"><a href="../../assets/shots/phone-lightbox@2x.webp"><img src="../../assets/shots/phone-lightbox.webp" srcset="../../assets/shots/phone-lightbox.webp 1x, ../../assets/shots/phone-lightbox@2x.webp 2x" alt="The viewer on a phone held upright: the date in a dark pill over the top of the picture, the position and the place under it, and the details sheet pulled up over the bottom half with the camera, the album and three people with their ages" width="390" height="844" loading="lazy" decoding="async"></a><figcaption>On a phone the details are a sheet you pull up from under the picture with a swipe.</figcaption></figure>
+<ul>
+<li>The date sits in a dark pill centred over the top of the picture, with the time beneath it.</li>
+<li>The bar under the picture keeps only the position in the list and the place.</li>
+<li>⋮ in the top right corner holds <strong>Favourite</strong>, <strong>Start slideshow</strong>, the rows of the
+<a href="#the-more-menu">More menu</a> and <strong>Chat</strong>.</li>
+<li>The details panel is closed when the viewer opens. Held upright, swipe up on the picture to pull
+up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
+the details open as a panel on the right: press <strong>Show details</strong> beside ⋮, or swipe up, and swipe
+the panel to the right to close it.</li>
+<li><strong>Edit faces</strong> is not offered on a phone.</li>
+</ul>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Gesture</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Swipe left / right</td>
+<td>Next / previous file</td>
+</tr>
+<tr>
+<td>Swipe up</td>
+<td>Open the details</td>
+</tr>
+<tr>
+<td>Swipe down</td>
+<td>Close the details; with the details closed, close the viewer</td>
+</tr>
+<tr>
+<td>Pinch, or double-tap</td>
+<td>Zoom a photo</td>
+</tr>
+<tr>
+<td>Drag with one finger on a zoomed photo</td>
+<td>Look around it</td>
+</tr>
+<tr>
+<td>Tap a face</td>
+<td>Open the person&#39;s page, or name an unnamed person; pin the faces to see the boxes</td>
+</tr>
+</tbody></table>
+</div>
+<p>A swipe that starts at the very edge of the screen is left to the phone itself, so its own Back
+gesture closes the viewer.</p>
+<p>Turning the phone sideways makes the viewer fullscreen, and turning it upright again leaves
+fullscreen. An iPhone has no fullscreen for web pages, so there the viewer stays as it is.
+<a href="phone.html">EiN on a phone</a> covers the rest of the interface on a small screen.</p>
+<h2 id="the-details-panel">The details panel<a class="anchor" href="#the-details-panel" aria-label="Link to this section"></a></h2>
+<p>On a computer the details panel opens on the right each time you open the viewer. Press the
+details button (ⓘ) or <kbd>i</kbd> to close it while you look; it stays closed until you close the
+viewer. On a phone you pull it up, as described above.</p>
+<p>Each part of the panel is a row with an icon at its left. A row appears only when it has something
+to show. From the top:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The file</td>
+<td>The file name, which downloads the original, and its size. Under it a line of facts: <code>3200 × 2400 · 7.7 MP · ISO 100 · 1/250 s</code>; a video adds its length and frame rate, and a recording its length, kbps, kHz and <code>mono</code> or <code>stereo</code>. Then the sharing chip, which says who can see the file (<a href="sharing.html">Sharing</a>), and the file&#39;s labels; a label opens a search for it (<a href="media.html">Media, Year and labels</a>). The pencil at the right opens the <a href="#change-a-file-from-the-pencil-menu">pencil menu</a>.</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>What someone wrote about the file.</td>
+</tr>
+<tr>
+<td>Copies in staging</td>
+<td>Only for a file of yours still in your staging area: its exact copies and look-alikes. See <a href="duplicates.html">Duplicates</a>.</td>
+</tr>
+<tr>
+<td>Transcript</td>
+<td>For videos and recordings with speech: what is said, line by line. See <a href="#read-along-with-a-transcript">Read along with a transcript</a>.</td>
+</tr>
+<tr>
+<td>Camera</td>
+<td>The device that took it, linking to its page; <strong>Owned by</strong> whoever owned it then, with the years; <strong>Shot by</strong> the photographer, when someone has said who. Without a registered device, the make and model the file names. See <a href="devices.html">Devices and GPS tracks</a>.</td>
+</tr>
+<tr>
+<td>Albums</td>
+<td>Every album the file is in, with its cover. A file can be in several albums without being copied.</td>
+</tr>
+<tr>
+<td>People</td>
+<td>Everyone recognised or tagged in the picture, with their age that day. See <a href="#people-in-the-picture">People in the picture</a>.</td>
+</tr>
+<tr>
+<td>Place</td>
+<td>The location the file is linked to, as a link, the street address, and a small map. <strong>Enlarge map</strong> opens a large map of the spot.</td>
+</tr>
+<tr>
+<td>Stack</td>
+<td>For a photo stacked with others in this album: <strong>N stacked photos</strong>, or <strong>Kept separate</strong>, with a thumbnail of each and <strong>Front</strong> on the one the album shows. Click a thumbnail to see it in the viewer. <strong>Make front</strong>, <strong>Keep separate</strong> and <strong>Allow stacking</strong> are there when you may change the album and every photo in the stack. See <a href="albums.html">Albums</a>.</td>
+</tr>
+<tr>
+<td>Similar</td>
+<td>Up to 12 pictures that look most like this one, nearest first, leaving out the picture itself and the rest of its stack. Click one to walk these pictures in the viewer. <strong>Show all</strong> opens the <strong>Media</strong> page with every picture like it. Not shown for recordings.</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Comments on the file, with who wrote them and when. Everyone who can see the file reads them. If you may change the file, write one in <strong>Add a comment…</strong> and press <strong>Comment</strong>. The bin beside a comment of your own (<strong>Delete comment</strong>) removes it.</td>
+</tr>
+<tr>
+<td>Details</td>
+<td>A folded section for the machine-written facts. See <a href="#the-details-section">The Details section</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="people-in-the-picture">People in the picture<a class="anchor" href="#people-in-the-picture" aria-label="Link to this section"></a></h3>
+<p>Each person has a badge with their age on the day the picture was taken: <strong>69 years</strong>, or
+<strong>8 months</strong> for a child under one. A <strong>~</strong> in front, as in <strong>~44 years</strong>, marks an age that is
+approximate because only the year or month of the person&#39;s birth is known. There is no age when the
+picture has no date or the person has no birth date.</p>
+<p>Pointing at a name lights up that person&#39;s face box on the picture, and pointing at a box lights up
+the name. Click a name to open the person&#39;s page.</p>
+<p>Faces that recognition has grouped as one person but nobody has named yet are listed with a crop of
+the face and a placeholder name, such as <strong>Unknown 8F3C81</strong>. Click one to open the review over the
+viewer, where you name them or say they are someone you already have. <a href="people.html">People and faces</a>
+describes the review and how recognition works.</p>
+<figure class="shot"><a href="../../assets/shots/scan@2x.webp"><img src="../../assets/shots/scan.webp" srcset="../../assets/shots/scan.webp 1x, ../../assets/shots/scan@2x.webp 2x" alt="The viewer on a black-and-white scanned print of a bride and groom on church steps, dated Saturday, 16 June 1956; the details panel names Helen's scanner as the camera, the album Arthur and Peggy's wedding, and two faces listed as Unknown 8F3C81 and Unknown P8A00J" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A scanned print. The camera row names the scanner it was digitized on, and the two faces nobody has named yet wait under placeholder names; clicking one opens the review where you say who it is.</figcaption></figure>
+<h3 id="the-details-section">The Details section<a class="anchor" href="#the-details-section" aria-label="Link to this section"></a></h3>
+<p><strong>Details</strong>, at the bottom of the panel, unfolds the facts a reader seldom needs. Whether it is open
+is remembered in this browser, for the next picture and the next visit.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Path</strong></td>
+<td>Where the file is in EiN&#39;s tree, such as <code>/archive/albums/cornwall-1968/img20120303_133900582.jpg</code>. Click it to open a terminal tab at the file (<a href="../shell/terminal.html">The terminal</a>). Visitors who are not signed in see the path as text.</td>
+</tr>
+<tr>
+<td><strong>Text in image</strong></td>
+<td>The text read from the picture.</td>
+</tr>
+<tr>
+<td><strong>Text language</strong></td>
+<td>The language the text was read in, and how sure the reading was. If you may change the file, a menu to choose another; see <a href="#read-the-text-in-a-picture">Read the text in a picture</a>.</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>The kind of file, such as <code>image/heic</code>.</td>
+</tr>
+<tr>
+<td><strong>Taken at</strong></td>
+<td>The capture time exactly as stored, such as <code>2025-12-27T13:16:18+13:00</code>.</td>
+</tr>
+<tr>
+<td><strong>Taken at (UTC)</strong></td>
+<td>The same moment in UTC.</td>
+</tr>
+<tr>
+<td><strong>Time source</strong></td>
+<td>Where the date came from, in words, and any note left with it.</td>
+</tr>
+<tr>
+<td><strong>Created</strong>, <strong>Modified</strong></td>
+<td>The file&#39;s created and modified times.</td>
+</tr>
+<tr>
+<td>Hashes</td>
+<td>Fingerprints of the file&#39;s bytes, such as <code>sha256</code>.</td>
+</tr>
+<tr>
+<td>EXIF tags</td>
+<td>Every tag the file carries, one per row, or <strong>No EXIF recorded</strong>.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="change-a-file-from-the-pencil-menu">Change a file from the pencil menu<a class="anchor" href="#change-a-file-from-the-pencil-menu" aria-label="Link to this section"></a></h2>
+<p>The pencil at the top right of the details panel (<strong>Edit media</strong>) opens a menu. It is there when you
+may change the file, and for any signed-in reader for <strong>Add to album</strong>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Who sees it</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Edit</strong></td>
+<td>Readers who may change the file</td>
+<td>Opens <strong>Edit file</strong>: description, labels and location. See below.</td>
+</tr>
+<tr>
+<td><strong>Share</strong></td>
+<td>Readers who may change the file</td>
+<td>Opens the Share dialog for this file. See <a href="sharing.html">Sharing</a>.</td>
+</tr>
+<tr>
+<td><strong>Add to album</strong></td>
+<td>Signed-in readers</td>
+<td>Opens <strong>Add to an album</strong>. Type part of an album&#39;s name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as <strong>1 added to Christmas in Wellington</strong> offers <strong>Undo</strong>.</td>
+</tr>
+<tr>
+<td><strong>Edit faces</strong></td>
+<td>Readers who may change the file, on photos, on a computer</td>
+<td>Draw, move or remove face boxes. See <a href="#draw-or-correct-a-face-box">Draw or correct a face box</a>.</td>
+</tr>
+<tr>
+<td><strong>Rotate left</strong>, <strong>Rotate right</strong></td>
+<td>Readers who may change the file, on photos and videos</td>
+<td>Turns the file a quarter turn.</td>
+</tr>
+<tr>
+<td><strong>Mirror horizontally</strong></td>
+<td>Readers who may change the file, on photos and videos</td>
+<td>Flips the file left to right. A tick shows while it is mirrored.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A turn or a flip is kept on the file, for everyone who sees it. EiN moves the face boxes with the
+picture and makes the smaller versions it shows again. A video is re-encoded by the media service,
+which takes a while; until it is done the video plays the old way round. To undo a turn, turn it
+back. The rotate and mirror rows are not offered for a file that cannot be decoded. There is no
+cropping and no colour editing in EiN.</p>
+<h3 id="change-the-description-labels-or-location">Change the description, labels or location<a class="anchor" href="#change-the-description-labels-or-location" aria-label="Link to this section"></a></h3>
+<ol>
+<li>In the pencil menu, choose <strong>Edit</strong>. The <strong>Edit file</strong> dialog opens, with the file name under its
+title.</li>
+<li>In <strong>Description</strong>, write what the picture shows or what you know about it. Formatting such as
+bold and lists is kept.</li>
+<li>In <strong>Labels</strong>, pick a label in use or type one. A space starts the next label.</li>
+<li>To set where it was taken, pick a place in <strong>A known location</strong>, or click the spot in
+<strong>On the map</strong>, or type its coordinates there. The dialog warns: &quot;The new location replaces the
+position the file carries, for the map and for searching by location.&quot;</li>
+<li>To take the location away, press <strong>Clear location</strong>. The dialog warns: &quot;The file will have no
+location, for the map or for searching by location.&quot;</li>
+<li>Press <strong>Save</strong>. It stays greyed out until you have changed something; <strong>Cancel</strong> closes the
+dialog without saving.</li>
+</ol>
+<p>The date is not changed here. To change when pictures were taken, select them in the grid and use
+<strong>Set time</strong> in the selection bar; see <a href="dates-places.html">Dates and places of pictures</a>.</p>
+<h2 id="faces-in-the-viewer">Faces in the viewer<a class="anchor" href="#faces-in-the-viewer" aria-label="Link to this section"></a></h2>
+<p>Face boxes stay hidden until you point at a face; then that face&#39;s box and name appear.</p>
+<ul>
+<li><strong>Pin faces</strong> in the More menu, or <kbd>f</kbd>, shows every box with its name. They stay pinned as
+you move from file to file, until you unpin them or reload the page. On a touch screen, where
+nothing can be pointed at, pinning is the way to see the boxes.</li>
+<li>Click a named box to open that person&#39;s page.</li>
+<li>Click the box of an unnamed person to open a small field, <strong>Who is this?</strong>. Type a name and press
+<kbd>Enter</kbd> or the tick. This gives them a name as a person of their own. If they are someone
+already in the archive, click their placeholder name in the details panel instead and choose the
+person in the review.</li>
+<li>A face that belongs to nobody reads <strong>Unassigned</strong>.</li>
+<li>A dashed box is a tag: &quot;Tag: a box with a name, not used to recognise faces&quot;. It says who is
+there without helping to recognise them in other pictures. A box drawn by hand is a tag, and so
+is a found face whose box someone has moved or resized.</li>
+</ul>
+<h3 id="draw-or-correct-a-face-box">Draw or correct a face box<a class="anchor" href="#draw-or-correct-a-face-box" aria-label="Link to this section"></a></h3>
+<p>Use <strong>Edit faces</strong> when recognition missed a face, drew the box in the wrong place, or matched the
+wrong person. It is offered on photos you may change, on a computer.</p>
+<ol>
+<li>In the pencil menu, choose <strong>Edit faces</strong>. The bar under the picture reads <strong>Draw a new box or
+select a face</strong>, and every box shows.</li>
+<li>To add a face, drag a box over it. To change a face, click its box.</li>
+<li>Drag the box to move it, or drag one of the round handles on its edges and corners to resize it.
+The bar reads <strong>Adjust the box, change who it is, or remove it</strong>.</li>
+<li>Under the box, choose:<ul>
+<li><strong>Done</strong> to save the box;</li>
+<li><strong>Cancel</strong> to drop your changes to it;</li>
+<li>the person&#39;s name (tooltip <strong>Change who this is</strong>) to say who the face is, in the dialog
+described below;</li>
+<li><strong>Remove</strong>, then <strong>Confirm remove</strong>, to take the face away.</li>
+</ul>
+</li>
+</ol>
+<p>A box you drew is given an unidentified person of its own, and the review opens so you can name
+them or say they are someone already in the archive. A found face whose box you move or resize
+keeps its person, but becomes a tag and no longer helps recognition. To leave <strong>Edit faces</strong>, choose
+it again in the pencil menu, press × in the bar under the picture, or press <kbd>Esc</kbd>.</p>
+<p>The dialog for a face&#39;s name is <strong>Who is this?</strong>, with <strong>Now marked as Helen Okafor</strong> or
+<strong>Not marked as anyone</strong> under the title:</p>
+<ul>
+<li><strong>Someone I know</strong>: pick the person in <strong>Who it is</strong>, then press <strong>Move</strong>.</li>
+<li><strong>Someone new</strong>: &quot;the face becomes a new unidentified person, for you to name now or later&quot;.
+Press <strong>Move</strong>.</li>
+<li><strong>Let recognition decide</strong>: the face is matched again against everyone else. Press
+<strong>Match again</strong>. The bar then says what happened, such as <strong>Recognition matched the face to Ruby
+Wrenfield.</strong>, <strong>Recognition made the face a new unidentified person.</strong> or <strong>Recognition left the
+face unassigned: too small or unclear to start a new person.</strong> This choice is not there for a
+tag, which recognition cannot match.</li>
+</ul>
+<p>Changes you make to faces are decisions by a person, and later recognition runs leave them alone;
+see <a href="people.html">People and faces</a>.</p>
+<h2 id="read-the-text-in-a-picture">Read the text in a picture<a class="anchor" href="#read-the-text-in-a-picture" aria-label="Link to this section"></a></h2>
+<p>EiN reads the text in photos: letters, postcards, signs, printed pages, and handwriting in English,
+Swedish and Finnish. The media service does the reading in the background. A picture still in your
+staging area is read once it is filed into an album.</p>
+<figure class="shot"><a href="../../assets/shots/postcard@2x.webp"><img src="../../assets/shots/postcard.webp" srcset="../../assets/shots/postcard.webp 1x, ../../assets/shots/postcard@2x.webp 2x" alt="The viewer on a handwritten postcard from 1968, with the text read from it laid over a darkened copy in a typewriter face: Dear Joan, the cottage is ours! The boys are in the river all day and Helen has read every book in the house. Arthur is on the roof with a bucket of tar, singing. Back on the 30th. Love, Peggy" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Show text lays the words read from Peggy&#39;s postcard over the picture. The pencil at its top right opens the text for correcting.</figcaption></figure>
+<ul>
+<li><strong>Show text</strong>, in the More menu, or <kbd>t</kbd>, darkens the picture and lays the text over it in
+a typewriter face. Long text scrolls. The row is there only when text was read.</li>
+<li>The text stays shown as you move from picture to picture, until you close the viewer, so you can
+page through a scanned letter. It is hidden during a slideshow.</li>
+<li><strong>Hide text</strong>, or <kbd>t</kbd> again, takes it away.</li>
+</ul>
+<p>The text is also under <strong>Text in image</strong> in the <a href="#the-details-section">Details section</a>, and
+search finds pictures by it; see <a href="search.html">Search and the finder</a>.</p>
+<h3 id="correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand<a class="anchor" href="#correct-the-text-or-add-it-by-hand" aria-label="Link to this section"></a></h3>
+<ol>
+<li>In the More menu, choose <strong>Edit text</strong>, or <strong>Add text</strong> when nothing was read. With the text
+shown, the pencil at its top right does the same.</li>
+<li>The dialog <strong>Text in the picture</strong> opens: the picture on the left, which you can zoom to read
+closely, and a text box on the right.</li>
+<li>Type or correct the text.</li>
+<li>Press <strong>Save</strong>, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. Saving empty text removes it.</li>
+</ol>
+<p>What you write replaces what was read. It is offered on photos you may change.</p>
+<h3 id="read-the-text-again-in-another-language">Read the text again in another language<a class="anchor" href="#read-the-text-again-in-another-language" aria-label="Link to this section"></a></h3>
+<p>When the reading came out wrong because EiN took the text for another language, choose the language
+yourself:</p>
+<ol>
+<li>Open <strong>Details</strong> at the bottom of the details panel.</li>
+<li>In <strong>Text language</strong>, choose the language. The menu starts at <strong>Automatic</strong>, which shows what was
+detected, such as <strong>Automatic: English (93%)</strong>, and offers Swedish, Finnish, English, Danish,
+Norwegian, German and French.</li>
+</ol>
+<p>EiN reads the picture again in that language, and the text follows after a while. Choose
+<strong>Automatic</strong> to let EiN tell the language again. Readers who may not change the file see the
+language without the menu.</p>
+<h2 id="play-a-video">Play a video<a class="anchor" href="#play-a-video" aria-label="Link to this section"></a></h2>
+<p>A video starts playing when it opens. If your browser blocks that, press play.</p>
+<p>On a computer, click the picture to pause or play, and double-click it to go fullscreen. A large
+play button sits in the middle while the video is paused. The controls fade while the video plays
+and come back when you move the mouse.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Play / Pause</td>
+<td><kbd>Space</kbd> or <kbd>k</kbd></td>
+<td>Plays or pauses.</td>
+</tr>
+<tr>
+<td><strong>Back 10 s</strong></td>
+<td><kbd>j</kbd></td>
+<td>Goes back ten seconds.</td>
+</tr>
+<tr>
+<td><strong>Forward 10 s</strong></td>
+<td><kbd>l</kbd></td>
+<td>Goes forward ten seconds.</td>
+</tr>
+<tr>
+<td><strong>Previous chapter</strong>, <strong>Next chapter</strong></td>
+<td><kbd>Shift</kbd>+<kbd>←</kbd>, <kbd>Shift</kbd>+<kbd>→</kbd></td>
+<td>Jumps between chapters, when the video has them.</td>
+</tr>
+<tr>
+<td><strong>Mute</strong> / <strong>Unmute</strong></td>
+<td><kbd>m</kbd></td>
+<td>Turns the sound off or on. The slider beside it sets the volume, where the browser lets a page do that.</td>
+</tr>
+<tr>
+<td>The clock</td>
+<td></td>
+<td>Where you are and how long the video is, such as <code>0:42 / 2:11</code>, and <strong>Chapter 2 of 5</strong> when it has chapters.</td>
+</tr>
+<tr>
+<td><strong>Subtitles</strong> (CC)</td>
+<td><kbd>c</kbd></td>
+<td>Shows or hides subtitles, when the video has a transcript. The tooltip names the language: <strong>Subtitles: English (c)</strong>.</td>
+</tr>
+<tr>
+<td>Speed, such as <code>1×</code></td>
+<td><kbd><</kbd> / <kbd>></kbd></td>
+<td>Opens <strong>Speed</strong>: 0.5×, 0.75×, <strong>Normal</strong>, 1.25×, 1.5× and 2×. The keys step slower or faster.</td>
+</tr>
+<tr>
+<td><strong>Picture-in-picture</strong></td>
+<td><kbd>p</kbd></td>
+<td>Plays the video in a small window that stays on top, where the browser offers it.</td>
+</tr>
+<tr>
+<td><strong>Cast to a screen</strong></td>
+<td></td>
+<td>Sends the video to a television or other screen, while your browser finds one.</td>
+</tr>
+<tr>
+<td><strong>Fullscreen</strong></td>
+<td></td>
+<td>Gives the video the whole screen.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The volume you set is remembered in this browser for the next video. The speed belongs to the video
+you set it on.</p>
+<p>On a phone, tap the picture to show or hide the controls. Three buttons sit over the middle of the
+picture: back ten seconds, play or pause, and forward ten seconds, or previous and next chapter
+when the video has chapters. <strong>Playback settings</strong> (the gear) holds the speed, <strong>Picture-in-picture</strong>
+and <strong>Cast to a screen…</strong>. There is no mute button: use the phone&#39;s own volume buttons. On an
+iPhone, <strong>Fullscreen</strong> opens Safari&#39;s own player, which shows the subtitles when you have turned
+them on. Elsewhere, a wide video put fullscreen with the player&#39;s button turns the screen sideways
+where the browser allows it.</p>
+<h3 id="the-timeline-and-chapters">The timeline and chapters<a class="anchor" href="#the-timeline-and-chapters" aria-label="Link to this section"></a></h3>
+<p>Click or drag on the timeline to jump. Pointing at it shows the time there and, once the media
+service has made the video&#39;s storyboard, a small frame from that moment.</p>
+<p>The media service finds the cuts in a video and makes each scene a chapter. Chapters show as pieces
+of the timeline with gaps between them; a video with too many to fit gets a small tick at each start
+instead. Pointing at the timeline shows the chapter too, such as <code>1:24 · Chapter 3</code>. <strong>Previous
+chapter</strong> more than two seconds into a chapter goes back to its start, and otherwise to the chapter
+before.</p>
+<p>Move to the timeline with <kbd>Tab</kbd> to use the keyboard on it: <kbd>←</kbd> and
+<kbd>→</kbd> go back and forward five seconds, <kbd>Page Down</kbd> and <kbd>Page Up</kbd> go to the
+previous and next chapter (or a tenth of the video, without chapters), and <kbd>Home</kbd> and
+<kbd>End</kbd> go to the start and the end.</p>
+<h3 id="subtitles">Subtitles<a class="anchor" href="#subtitles" aria-label="Link to this section"></a></h3>
+<p>A video with a transcript has the CC button. Subtitles start off; once you turn them on, they stay
+on for the next video in this browser. When two or more people speak, each line starts with the
+speaker&#39;s name, in a colour of their own. A voice nobody has named is called <strong>Speaker 1</strong>,
+<strong>Speaker 2</strong> and so on.</p>
+<h3 id="faces-in-a-video">Faces in a video<a class="anchor" href="#faces-in-a-video" aria-label="Link to this section"></a></h3>
+<p>The face boxes follow the faces as the video plays, and <strong>Pin faces</strong> works as it does on a photo.
+In the details panel, a button beside each person shows them: its tooltip reads, for example,
+<strong>Show Ruby Wrenfield at 0:42 · on screen 0:00–0:39, 0:42–1:28</strong>. Pressing it pauses the video on
+the frame where the face is seen most clearly and keeps a box on the face from there. Press it again
+(<strong>Stop following Ruby Wrenfield</strong>) to let go.</p>
+<h2 id="listen-to-a-recording">Listen to a recording<a class="anchor" href="#listen-to-a-recording" aria-label="Link to this section"></a></h2>
+<figure class="shot"><a href="../../assets/shots/recording@2x.webp"><img src="../../assets/shots/recording.webp" srcset="../../assets/shots/recording.webp 1x, ../../assets/shots/recording@2x.webp 2x" alt="The viewer on a recording called Voice 001.m4a: a waveform with the playhead line near the start, buttons to go back and forward ten seconds around a pause button, the clock 0:42 / 2:11, and the details panel with the speaker chip Speaker 1 · 1:38 above the transcript, the current line in bold" width="1140" height="640" loading="lazy" decoding="async"></a><figcaption>A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.</figcaption></figure>
+<p>A recording starts playing when it opens. Its picture is the waveform of the sound, and the waveform
+is the timeline: the part already played is brighter, a line marks where you are, and a click or a
+drag on it jumps there. Under it are <strong>Back 10s</strong>, play or pause (<strong>Play (space)</strong>, <strong>Pause
+(space)</strong>) and <strong>Forward 10s</strong>, then the clock and the file name.</p>
+<p><kbd>Space</kbd> or <kbd>k</kbd> plays and pauses. Move to the waveform with <kbd>Tab</kbd> to use
+the same keys as on a video&#39;s timeline.</p>
+<h2 id="read-along-with-a-transcript">Read along with a transcript<a class="anchor" href="#read-along-with-a-transcript" aria-label="Link to this section"></a></h2>
+<p>The media service writes down what is said in videos and recordings, and works out who speaks when.
+The transcript appears near the top of the details panel, under the file.</p>
+<ul>
+<li>Each line starts with its time. The line being said is in bold and is kept in view as it plays.</li>
+<li>Click a line to jump to that moment.</li>
+<li>Where the voice changes, the line carries the speaker&#39;s name.</li>
+</ul>
+<p>Above the lines is a chip for each voice, such as <strong>Speaker 1 · 1:38</strong>: who it is and how long they
+speak in the file.</p>
+<ul>
+<li>The small play button on a chip (<strong>Hear Speaker 1</strong>) plays that voice&#39;s longest turn.</li>
+<li>Click a chip to say who it is. A named voice opens the person&#39;s page. An unnamed one opens the
+review, where you name them or say they are someone already in the archive. A voice that belongs
+to nobody yet becomes an unidentified person of its own first; this needs permission to change
+the file.</li>
+</ul>
+<p>You cannot correct a transcript&#39;s words in EiN; you can name its speakers. A transcript can also
+read <strong>No speech was detected.</strong>, or <strong>Transcript unavailable.</strong> when it could not be loaded.</p>
+<p>For a recording or video you reach from a search for words that are said in it, the viewer opens at
+the moment they are said.</p>
+<h2 id="watch-a-slideshow">Watch a slideshow<a class="anchor" href="#watch-a-slideshow" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Open the picture to start from, in the album or list you want to show.</li>
+<li>Press <strong>Start slideshow</strong> (the play button in the bar). On a phone it is in ⋮. It is greyed out
+when the list holds only one file.</li>
+<li>The browser goes fullscreen, if it allows that; if not, the slideshow runs in the window. The
+close button, the arrows, the details panel and the face boxes go away, and the bar lies over the
+bottom of the picture. Pinned face names stay on and follow the picture.</li>
+<li>Each photo stays on screen for <strong>Seconds per slide</strong>, 3 unless you change it, and fades into the
+next. With <strong>Ken Burns effect</strong> on, as it is unless you turn it off, each photo slowly pans and
+zooms. Videos and recordings play to their end before the next file. One that will not play is
+skipped after one slide&#39;s time.</li>
+</ol>
+<p>The slideshow follows the list&#39;s order and goes round from the last file to the first, until you
+stop it. There is no shuffle. <kbd>←</kbd> and <kbd>→</kbd> still step back and forward. While it
+runs, the screen is kept from going to sleep.</p>
+<p>To stop the slideshow, click the picture, press <kbd>Esc</kbd>, or leave fullscreen.</p>
+<p>To change the timing or turn the pan and zoom off, open your picture at the top right, choose
+<strong>Profile</strong>, then the <strong>Preferences</strong> tab, and look under <strong>Playback</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Seconds per slide</strong></td>
+<td>How long each photo is shown in a slideshow.</td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><strong>Ken Burns effect</strong></td>
+<td>Slowly pan and zoom each photo during a slideshow.</td>
+<td>on</td>
+</tr>
+</tbody></table>
+</div>
+<p>They are yours alone and do not change anyone else&#39;s slideshows. See
+<a href="profile.html">Your profile, favourites and trash</a>, and in the settings reference
+<a href="../reference/settings.html#cfg_user_slideshow_seconds"><code>CFG_USER_SLIDESHOW_SECONDS</code></a> and
+<a href="../reference/settings.html#cfg_user_ken_burns"><code>CFG_USER_KEN_BURNS</code></a>.</p>
+<h2 id="mark-a-favourite">Mark a favourite<a class="anchor" href="#mark-a-favourite" aria-label="Link to this section"></a></h2>
+<p>Press the heart in the bar, or <kbd>s</kbd>; on a phone choose <strong>Favourite</strong> in ⋮. The heart turns
+red. Press it again (<strong>Unfavourite</strong>) to take the picture out of your favourites.</p>
+<p>Your favourites are your own: open your picture at the top right and choose <strong>Favourites</strong> to see
+them all, by day. To heart many pictures at once, select them in the grid and use <strong>Favourite</strong> in
+the selection bar. Visitors who are not signed in have no favourites and see no heart. See
+<a href="profile.html">Your profile, favourites and trash</a>.</p>
+<h2 id="what-you-see-depends-on-who-you-are">What you see depends on who you are<a class="anchor" href="#what-you-see-depends-on-who-you-are" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You are</th>
+<th>What differs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Signed in, and may change the file</td>
+<td>Everything on this page.</td>
+</tr>
+<tr>
+<td>Signed in, and may only see the file</td>
+<td>The pencil menu holds only <strong>Add to album</strong>. You read comments but cannot write them, and see the text language without the menu. No <strong>Edit text</strong>, <strong>Edit faces</strong>, rotate or mirror.</td>
+</tr>
+<tr>
+<td>A visitor who is not signed in</td>
+<td>No heart, no pencil menu and no sharing chip. <strong>Path</strong> is plain text.</td>
+</tr>
+<tr>
+<td>Someone who opened a share link</td>
+<td>The pictures without the details panel; the details button and <kbd>i</kbd> are not there.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="sharing.html">Sharing</a> explains who can see what.</p>
+<h2 id="when-something-is-not-as-expected">When something is not as expected<a class="anchor" href="#when-something-is-not-as-expected" aria-label="Link to this section"></a></h2>
+<p><strong>A picture you added a moment ago has no thumbnail, faces, text or transcript yet.</strong>
+The media service works through added files in the background, and the viewer fills in as each step
+finishes. Until it is done, an administrator sees the <strong>Dashboard</strong> read <strong>Catching up</strong>. Text in
+pictures waits until the file leaves staging. See <a href="importing.html">Getting your photos in</a>.</p>
+<p><strong>&quot;This rendition could not be played. It may still be transcoding.&quot;</strong>
+The version of the video or recording that the browser plays has not been made yet, or failed. Wait
+a while and open it again.</p>
+<p><strong>&quot;This browser or device cannot play AV1, the format this video is in.&quot;</strong>
+EiN makes its playable videos in the AV1 format, and this browser or device cannot decode it. Use a
+current browser on another device, or <strong>Download</strong> the original.</p>
+<p><strong>&quot;This file cannot be played&quot;</strong>, with &quot;The original is damaged, so no preview or playable version
+could be made from it.&quot;
+The uploaded file itself cannot be read; the reason is under the message. <strong>Download</strong> it to check
+the file on your own device.</p>
+<p><strong>A PDF or a Word file shows nothing.</strong>
+The viewer has no reader for documents. Use <strong>Download</strong> in the More menu to open the file on your
+device. Its text can still be found with search; see <a href="file-types.html">Supported files</a>.</p>
+<p><strong>Show text is not in the More menu.</strong>
+No text was read from this picture, or it is a video or a recording. Add the text yourself with
+<strong>Add text</strong>, if you may change the file.</p>
+<p><strong>Start slideshow is greyed out.</strong>
+The list holds only one file. Open the viewer from an album or a longer list.</p>
+<p><strong>The date or the place is wrong.</strong>
+See <a href="dates-places.html">Dates and places of pictures</a>.</p>
+<h2 id="from-the-shell">From the shell<a class="anchor" href="#from-the-shell" aria-label="Link to this section"></a></h2>
+<p>What the viewer shows and changes can also be done in <a href="../shell/terminal.html">EiN&#39;s terminal</a>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../reference/commands-archive.html#media-details"><code>media-details</code></a> <code>&lt;file&gt;</code></td>
+<td>Everything the details panel shows about a file.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#file-set-description"><code>file-set-description</code></a> <code>--text &#39;…&#39; &lt;file&gt;</code></td>
+<td>Sets or clears the description.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#file-set-text"><code>file-set-text</code></a> <code>--text &#39;…&#39; &lt;file&gt;</code></td>
+<td>Writes the text in a picture by hand.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#file-set-text-language"><code>file-set-text-language</code></a> <code>&lt;file&gt; &lt;code|auto&gt;</code></td>
+<td>Reads the text again in a language.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#file-set-orientation"><code>file-set-orientation</code></a> <code>--rotate cw &lt;file&gt;</code></td>
+<td>Turns a file; <code>ccw</code> and <code>180</code> too, and <code>--toggle-mirror</code> flips it.</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#star"><code>star</code></a> <code>&lt;path&gt;</code>, <code>star -d &lt;path&gt;</code></td>
+<td>Marks a favourite, or takes it away.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+media-details /archive/albums/cornwall-1968/img20120303_133900582.jpg
+file-set-text-language /archive/albums/cornwall-1968/img20120303_133900582.jpg en</code></pre></div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="albums.html" rel="prev"><span>Previous</span>Albums</a><a class="next" href="importing.html" rel="next"><span>Next</span>Getting your photos in</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/viewer.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-viewer">Open the viewer</a></li><li><a href="#what-the-viewer-shows">What the viewer shows</a></li><li class="nested"><a href="#the-date-under-the-picture">The date under the picture</a></li><li class="nested"><a href="#the-more-menu">The More menu</a></li><li><a href="#move-between-files-and-close-the-viewer">Move between files and close the viewer</a></li><li><a href="#zoom-in-on-a-photo">Zoom in on a photo</a></li><li><a href="#keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer</a></li><li><a href="#on-a-phone-or-tablet">On a phone or tablet</a></li><li><a href="#the-details-panel">The details panel</a></li><li class="nested"><a href="#people-in-the-picture">People in the picture</a></li><li class="nested"><a href="#the-details-section">The Details section</a></li><li><a href="#change-a-file-from-the-pencil-menu">Change a file from the pencil menu</a></li><li class="nested"><a href="#change-the-description-labels-or-location">Change the description, labels or location</a></li><li><a href="#faces-in-the-viewer">Faces in the viewer</a></li><li class="nested"><a href="#draw-or-correct-a-face-box">Draw or correct a face box</a></li><li><a href="#read-the-text-in-a-picture">Read the text in a picture</a></li><li class="nested"><a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a></li><li class="nested"><a href="#read-the-text-again-in-another-language">Read the text again in another language</a></li><li><a href="#play-a-video">Play a video</a></li><li class="nested"><a href="#the-timeline-and-chapters">The timeline and chapters</a></li><li class="nested"><a href="#subtitles">Subtitles</a></li><li class="nested"><a href="#faces-in-a-video">Faces in a video</a></li><li><a href="#listen-to-a-recording">Listen to a recording</a></li><li><a href="#read-along-with-a-transcript">Read along with a transcript</a></li><li><a href="#watch-a-slideshow">Watch a slideshow</a></li><li><a href="#mark-a-favourite">Mark a favourite</a></li><li><a href="#what-you-see-depends-on-who-you-are">What you see depends on who you are</a></li><li><a href="#when-something-is-not-as-expected">When something is not as expected</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
+    </div>
+  </body>
+</html>

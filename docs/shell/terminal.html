@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The terminal – EiN documentation</title>
+    <meta name="description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of albums, people and files that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/terminal.html">
+    <meta property="og:title" content="The terminal – EiN documentation">
+    <meta property="og:description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of albums, people and files that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/terminal.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html" aria-current="page">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>The terminal</h1>
+        </header>
+        <article class="prose">
+<p>The terminal is a command line inside EiN&#39;s web interface: a shell that works on the same tree of
+albums, people and files that the pages show, with the same commands and the same permissions. This
+page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with
+the keyboard, find earlier commands, get help, and find the command you need.</p>
+<h2 id="open-the-terminal">Open the terminal<a class="anchor" href="#open-the-terminal" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Sign in. Visitors browsing without an account have no terminal.</li>
+<li>Choose the terminal button in the top bar (tooltip <strong>Toggle Terminal (Alt+T)</strong>), or press
+<kbd>Alt</kbd>+<kbd>T</kbd> wherever you are.</li>
+</ol>
+<p>The terminal drops down from the top of the window over the page, half the window high, with the
+cursor ready at the prompt. Try a first command:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ls</span> /archive</code></pre></div>
+<div class="code"><pre tabindex="0"><code>albums  devices  locations  people  tags  tracks</code></pre></div>
+<p>To hide it again, press <kbd>Alt</kbd>+<kbd>T</kbd>, choose the chevron at the right end of the tab
+bar (<strong>Hide terminal (Alt+T)</strong>), or click anywhere outside it. Hiding the terminal does not stop it:
+the shells keep running, a command you started goes on, and the terminal is as you left it when you
+open it again.</p>
+<p>On a phone-sized screen the top bar has no terminal button; <kbd>Alt</kbd>+<kbd>T</kbd> still works
+with a keyboard attached. From your own computer you can also reach the same shell over SSH (see
+<a href="#use-the-same-shell-over-ssh">Use the same shell over SSH</a>).</p>
+<p>Administrators have one more way in: in the <strong>Nodes</strong> explorer, right-click a folder and choose
+<strong>Open terminal here</strong>. EiN opens a new tab and types <code>cd</code> to that folder for you.</p>
+<figure class="shot"><a href="../../assets/shots/terminal@2x.webp"><img src="../../assets/shots/terminal.webp" srcset="../../assets/shots/terminal.webp 1x, ../../assets/shots/terminal@2x.webp 2x" alt="The terminal filling the window: ls /archive lists albums, devices, locations, people, tags and tracks; a find counts 19 people; person-info prints Peggy Wrenfield's names, dates, relations, homes and events; and cat draws a photo from the christmas-2019 album" width="840" height="780" loading="lazy" decoding="async"></a><figcaption>The terminal works on the same tree the pages show: people, albums and photos are paths you can list, read and open.</figcaption></figure>
+<h3 id="read-the-prompt">Read the prompt<a class="anchor" href="#read-the-prompt" aria-label="Link to this section"></a></h3>
+<p>The prompt says who you are and where you are:</p>
+<div class="code"><pre tabindex="0"><code>helen@:~$</code></pre></div>
+<ul>
+<li><code>helen</code> is your username, in green, or in red for an administrator.</li>
+<li>Between <code>@</code> and <code>:</code> stands the host name, which is empty unless you set one, for example with
+<code>export HOSTNAME=ein</code> in your <code>~/.bashrc</code>.</li>
+<li><code>~</code> is the folder you are in. <code>~</code> stands for your home folder, <code>/home/helen</code>; elsewhere you see the
+path, such as <code>/archive/albums/christmas-2019</code>.</li>
+<li><code>$</code> becomes <code>#</code> when the shell acts as an administrator.</li>
+</ul>
+<p>Folders and files are nodes of EiN&#39;s tree: paths start at <code>/</code>, <code>..</code> is the folder above, and <code>cd</code>
+moves you around. <a href="../concepts/tree.html">The tree</a> shows what lies where.</p>
+<h2 id="work-in-several-tabs">Work in several tabs<a class="anchor" href="#work-in-several-tabs" aria-label="Link to this section"></a></h2>
+<p>The tab bar runs along the foot of the terminal. Each tab is a shell of its own, with its own current
+folder, its own variables and whatever is running in it; switching tabs does not stop the others.</p>
+<ul>
+<li><strong>Add a tab</strong>: choose <strong>+</strong> (<strong>New session (Alt+N)</strong>) or press <kbd>Alt</kbd>+<kbd>N</kbd>. The
+first tab is called <strong>Session 1</strong>, the next <strong>Session 2</strong>, and so on. If the terminal is hidden,
+<kbd>Alt</kbd>+<kbd>N</kbd> adds the tab without showing it.</li>
+<li><strong>Know which is which</strong>: once a tab&#39;s shell has reported its folder, the tab shows that path
+instead of its name, such as <code>/home/helen</code> or <code>/archive/albums/christmas-2019</code>.</li>
+<li><strong>Switch</strong>: click a tab, or press <kbd>Alt</kbd>+<kbd>←</kbd> and <kbd>Alt</kbd>+<kbd>→</kbd>.</li>
+<li><strong>Close a tab</strong>: choose its <strong>×</strong>, or press <kbd>Alt</kbd>+<kbd>W</kbd> while you are typing in it.
+Closing a tab ends its shell and everything running in it. The last tab has no <strong>×</strong> and cannot be
+closed.</li>
+<li><strong>End a shell from inside</strong>: type <code>exit</code>, or press <kbd>Ctrl</kbd>+<kbd>D</kbd> on an empty line.
+The tab goes away; if it was the only one, a fresh shell takes its place.</li>
+</ul>
+<h2 id="make-the-terminal-taller-or-shorter">Make the terminal taller or shorter<a class="anchor" href="#make-the-terminal-taller-or-shorter" aria-label="Link to this section"></a></h2>
+<p>The terminal starts at half the window&#39;s height.</p>
+<ul>
+<li><strong>Maximize (Alt+M)</strong>, the button at the right of the tab bar, makes it fill the window. Pressed
+again, as <strong>Restore (Alt+M)</strong>, it returns to half the window.</li>
+<li><kbd>Alt</kbd>+<kbd>↓</kbd> makes it a tenth of the window taller, <kbd>Alt</kbd>+<kbd>↑</kbd> a
+tenth shorter, between a tenth and the whole window.</li>
+</ul>
+<p>The browser remembers the height for the next time, on that computer and in that browser.</p>
+<h2 id="the-terminals-own-keys">The terminal&#39;s own keys<a class="anchor" href="#the-terminals-own-keys" aria-label="Link to this section"></a></h2>
+<p>The <strong>?</strong> button at the right of the tab bar (<strong>Terminal shortcuts</strong>) lists the keys of the terminal
+itself. They work whether you are typing in the terminal or not, and only with <kbd>Alt</kbd> alone,
+without <kbd>Ctrl</kbd>, <kbd>Shift</kbd> or <kbd>⌘</kbd>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>In the <strong>?</strong> list</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Alt</kbd>+<kbd>T</kbd></td>
+<td>Toggle terminal</td>
+<td>Shows or hides the terminal</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>N</kbd></td>
+<td>New tab</td>
+<td>Adds a tab with a new shell</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>W</kbd></td>
+<td>Close tab</td>
+<td>Closes the tab you are typing in; never the last one</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>M</kbd></td>
+<td>Maximize</td>
+<td>Fills the window, or returns to half the window</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>←</kbd></td>
+<td>Previous tab</td>
+<td>Moves to the tab on the left, from the first to the last</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>→</kbd></td>
+<td>Next tab</td>
+<td>Moves to the tab on the right, from the last to the first</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>↑</kbd></td>
+<td>Shrink height</td>
+<td>A tenth of the window shorter</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>↓</kbd></td>
+<td>Grow height</td>
+<td>A tenth of the window taller</td>
+</tr>
+</tbody></table>
+</div>
+<p>The <strong>Keyboard shortcuts</strong> dialog that <kbd>?</kbd> opens anywhere in EiN lists only the first two,
+under <strong>Anywhere</strong>. <a href="../reference/shortcuts.html">Keyboard shortcuts</a> has every key in EiN.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>On a Mac, ⌥ with a letter types a character of its own (⌥T types †), while the terminal looks for
+the letter itself, so ⌥T, ⌥N, ⌥W and ⌥M may not reach it. The top-bar button and the buttons in
+the tab bar do the same. ⌥ with the arrow keys is not affected.</p>
+</aside>
+<h2 id="come-back-to-a-running-shell">Come back to a running shell<a class="anchor" href="#come-back-to-a-running-shell" aria-label="Link to this section"></a></h2>
+<p>Reload the page, or lose the connection for a moment, and the terminal comes back as you left it:
+the same tabs, open or hidden as before, and in each tab the same shell, in the same folder, with up
+to 1000 lines of what scrolled past drawn again. A command that was running carries on while the
+page is away.</p>
+<ul>
+<li><strong>How long EiN waits.</strong> EiN keeps a shell without a page for five minutes. The administrator sets
+this with <strong>Terminal reconnect grace</strong>
+(<a href="../reference/settings.html#cfg_terminal_reconnect_grace_sec"><code>CFG_TERMINAL_RECONNECT_GRACE_SEC</code></a>,
+<code>300</code> seconds; <code>0</code> ends a shell as soon as its page goes). After that the shell ends, with
+whatever runs in it, and the tab starts a fresh one when you come back. To keep a long job going
+after you leave, see <a href="bash.html">The shell language</a>.</li>
+<li><strong>One browser tab, one set of terminals.</strong> The tabs belong to the browser tab they were opened
+in. EiN in a second browser tab gets terminals of its own, starting again at <strong>Session 1</strong>, and
+closing a browser tab leaves its shells to end after the five minutes.</li>
+<li><strong>Signing out</strong> ends every terminal of that sign-in and starts the tabs over, so the next person
+who signs in on that browser finds none of your shells.</li>
+<li><strong>When EiN restarts</strong>, for example for an update, every shell ends. The tabs stay, and each
+starts a fresh shell once EiN answers again.</li>
+<li><strong>While the connection is down</strong>, the top bar shows a red <strong>Disconnected</strong> badge. The terminal
+reconnects by itself; there is nothing to press.</li>
+</ul>
+<p>Your command history is kept through all of this (see
+<a href="#find-an-earlier-command">Find an earlier command</a>).</p>
+<h2 id="upload-files-by-dropping-them">Upload files by dropping them<a class="anchor" href="#upload-files-by-dropping-them" aria-label="Link to this section"></a></h2>
+<p>Drag files from your computer onto the terminal and let go. EiN uploads them into the folder the
+tab is in, the path the tab shows. The <strong>Uploads</strong> button in the top bar follows them, as for any
+upload, and a file whose name is taken in that folder is stored under a numbered name beside it.</p>
+<p>Where you drop decides what happens next. To have the archive take new pictures in, go to a staging
+category or an album first:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cd</span> ~/staging/files/inbox</code></pre></div>
+<p>Then drop the files. <a href="../guide/importing.html">Getting your photos in</a> explains staging, albums and
+what happens after an upload. You need permission to write in the folder; an upload into a folder
+you may only read fails and is listed under <strong>Uploads</strong>.</p>
+<h2 id="show-a-picture-with-cat">Show a picture with cat<a class="anchor" href="#show-a-picture-with-cat" aria-label="Link to this section"></a></h2>
+<p><code>cat</code> on a picture or a video draws it right in the terminal, 20 lines tall:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cd</span> /archive/albums/christmas-2019 &amp;&amp; <span class="hljs-built_in">cat</span> 20191225_155434.jpg</code></pre></div>
+<ul>
+<li><code>cat -s</code> draws it half as tall, <code>cat -l</code> twice as tall.</li>
+<li><code>export MEDIA_LINES=30</code> changes the height for the rest of the session (see
+<a href="../reference/environment.html#options-you-set">Environment variables</a>).</li>
+<li>A video plays at once, with its controls under it. A recording gets a player two lines tall and
+starts playing.</li>
+<li>A text file is printed with colours for its language, such as JSON, YAML, bash or Markdown.</li>
+</ul>
+<p>Only the terminal in the browser draws pictures. Over SSH, <code>cat</code> prints marker lines starting
+<code>__IMG:</code> instead.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>A picture whose path holds a space, such as one in <code>/archive/albums/Summer 2020</code>, is not drawn:
+the terminal shows its <code>__IMG:</code> lines instead. Open it in the web interface.</p>
+</aside>
+<h2 id="edit-the-command-line">Edit the command line<a class="anchor" href="#edit-the-command-line" aria-label="Link to this section"></a></h2>
+<p>The line you type is edited with the keys of bash on Linux, in its default (emacs) mode. The ones
+used most:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Tab</kbd></td>
+<td>Complete what you are typing (see <a href="#let-tab-complete">Let Tab complete</a>)</td>
+</tr>
+<tr>
+<td><kbd>↑</kbd> <kbd>↓</kbd></td>
+<td>The previous and the next command from your history</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>R</kbd></td>
+<td>Search your history as you type</td>
+</tr>
+<tr>
+<td><kbd>Home</kbd> <kbd>End</kbd>, or <kbd>Ctrl</kbd>+<kbd>A</kbd> <kbd>Ctrl</kbd>+<kbd>E</kbd></td>
+<td>Start and end of the line</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd></td>
+<td>A word left or right</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd></td>
+<td>Cut from the cursor to the end / to the start of the line</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+<td>Paste what you cut last</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>.</kbd></td>
+<td>Insert the last word of the previous command (not with ⌥ on a Mac)</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>At the prompt: drop the line (<code>^C</code> is printed). While a command runs: stop it</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>D</kbd></td>
+<td>On an empty line: end the shell and its tab</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>L</kbd></td>
+<td>Clear the screen, as the command <code>clear</code> does</td>
+</tr>
+</tbody></table>
+</div>
+<p>Some keys mean something else in the browser:</p>
+<ul>
+<li><kbd>Alt</kbd>+<kbd>←</kbd>, <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>↑</kbd> and
+<kbd>Alt</kbd>+<kbd>↓</kbd> are the terminal&#39;s own keys for tabs and height; move by word with
+<kbd>Ctrl</kbd>+<kbd>←</kbd> and <kbd>Ctrl</kbd>+<kbd>→</kbd>.</li>
+<li><kbd>Ctrl</kbd>+<kbd>R</kbd> searches your history instead of reloading the page. To reload,
+press <kbd>F5</kbd>.</li>
+<li>The browser keeps some keys for itself before the terminal sees them. In most browsers
+<kbd>Ctrl</kbd>+<kbd>W</kbd> closes the browser tab rather than cutting a word; use
+<kbd>Alt</kbd>+<kbd>W</kbd> to close a terminal tab.</li>
+</ul>
+<p><kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a running command. Start a long one in the background
+with <code>&amp;</code> instead; <a href="bash.html">The shell language</a> covers jobs.</p>
+<h2 id="find-an-earlier-command">Find an earlier command<a class="anchor" href="#find-an-earlier-command" aria-label="Link to this section"></a></h2>
+<p>Press <kbd>↑</kbd> to step back through the commands you ran, <kbd>↓</kbd> to step forward again.</p>
+<p>To find one by a word in it, press <kbd>Ctrl</kbd>+<kbd>R</kbd> and type part of it. The prompt
+turns into the search and shows the newest command that matches:</p>
+<div class="code"><pre tabindex="0"><code>(reverse-i-search)`peg': person-info /archive/people/Peggy_Wrenfield</code></pre></div>
+<ul>
+<li><kbd>Ctrl</kbd>+<kbd>R</kbd> again finds the next older match.</li>
+<li><kbd>Enter</kbd> runs the command found.</li>
+<li><kbd>Esc</kbd> leaves it on the line for you to change first.</li>
+<li><kbd>Ctrl</kbd>+<kbd>G</kbd> gives up and brings back what you had typed.</li>
+</ul>
+<p>bash&#39;s history commands work too: <code>history</code> lists what you ran, <code>!!</code> runs the last command again,
+<code>!42</code> runs number 42 of the list, and <code>^old^new</code> runs the last command with <code>old</code> replaced by
+<code>new</code>.</p>
+<p>What EiN keeps:</p>
+<ul>
+<li>Your history is the file <code>~/.bash_history</code>. Every terminal tab and every SSH login of yours adds
+to it as each command runs, so a command typed in one tab can be found from another.</li>
+<li>A command typed with a space in front, or the same as the one before it, is not kept.</li>
+<li>It keeps the last 1000 commands. Change this under <strong>Profile → Preferences</strong>, <strong>Shell history
+length</strong> (<a href="../reference/settings.html#histsize"><code>HISTSIZE</code></a>); a tab you open afterwards uses the new
+length. <a href="../guide/profile.html">Your profile, favourites and trash</a> shows where.</li>
+<li>Commands the web pages run for you, and commands sent with <code>ssh host &#39;command&#39;</code>, are not kept.</li>
+</ul>
+<h2 id="let-tab-complete">Let Tab complete<a class="anchor" href="#let-tab-complete" aria-label="Link to this section"></a></h2>
+<p>Press <kbd>Tab</kbd> while you type a command name, a path, an option, a user or a group. When only
+one thing fits, EiN fills it in, with <code>/</code> after a folder and a space after anything else, and quotes
+it if it holds spaces. When several fit, it fills in as much as they share; press <kbd>Tab</kbd>
+again to list them all.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You type</th>
+<th><kbd>Tab</kbd> gives</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cd /archive/al</code></td>
+<td><code>cd /archive/albums/</code></td>
+</tr>
+<tr>
+<td><code>person-info /archive/people/Peg</code></td>
+<td><code>person-info /archive/people/Peggy_Wrenfield</code></td>
+</tr>
+<tr>
+<td><code>search --ki</code></td>
+<td><code>search --kind=</code>, ready for the value</td>
+</tr>
+<tr>
+<td><code>user-info he</code></td>
+<td><code>user-info helen</code></td>
+</tr>
+<tr>
+<td><code>pipeline</code>, a space, <kbd>Tab</kbd> twice</td>
+<td>the list of <code>pipeline</code>&#39;s subcommands</td>
+</tr>
+</tbody></table>
+</div>
+<p>Completion reads each command&#39;s own description of its arguments and options, so it knows a
+command&#39;s options without being told. A command of a family, such as <code>pipeline status</code>, is
+completed as two words. Scripts of your own can take part; see <a href="bash.html">The shell language</a>.</p>
+<h2 id="get-help-on-a-command">Get help on a command<a class="anchor" href="#get-help-on-a-command" aria-label="Link to this section"></a></h2>
+<p>Put <code>--help</code> (or <code>-h</code>) straight after a command&#39;s name. The command does not run; it says how to
+use it instead:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+onthisday --<span class="hljs-built_in">help</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>Usage: onthisday [OPTIONS] &lt;day&gt;
+
+What the archive has from a calendar day (MM-DD, default today) in earlier years, from every onthisday-* command on PATH
+
+Arguments:
+  &lt;day&gt;    day as MM-DD (default today, UTC)
+
+Options:
+  --limit &lt;number&gt;  entries returned across all providers (default 8)
+  -h, --help        Show this help message
+
+Returns:
+  the entries of every onthisday-* provider, newest year first: the year, what, the node it is about, which provider, and the route that draws it.
+
+Examples:
+  onthisday
+  onthisday 06-21 --limit 20</code></pre></div>
+<ul>
+<li><strong>A family of commands</strong>, such as <code>config</code>, <code>docs</code>, <code>group</code>, <code>mod</code>, <code>pipeline</code>, <code>pool</code>,
+<code>service</code> and <code>user</code>, lists its members with <code>--help</code>: <code>service --help</code>. Each member answers for
+itself: <code>service status --help</code>. The two words are another way of typing the member&#39;s name:
+<code>service status</code> runs <code>service-status</code>.</li>
+<li><strong>bash&#39;s own commands</strong>, such as <code>cd</code>, <code>export</code> and <code>history</code>, are described by <code>help</code>:
+<code>help cd</code>.</li>
+<li><strong><code>-h</code> first always means help</strong>, even for a command whose own <code>-h</code> means something else: <code>du -h</code>
+shows the help of <code>du</code>. Put another option first, as in <code>du -sh</code>.</li>
+</ul>
+<p>There is no <code>man</code> and no pager. Long output scrolls past; scroll back with the mouse wheel or the
+scrollbar.</p>
+<p>The same descriptions are in <strong>Documentation</strong> in the sidebar, under <strong>Commands</strong>, for every
+command installed on your EiN, and on this site in the <a href="../reference/commands.html">command reference</a>.</p>
+<h2 id="find-the-command-you-need">Find the command you need<a class="anchor" href="#find-the-command-you-need" aria-label="Link to this section"></a></h2>
+<p>When you know what you want done but not which command does it, ask by what it does.</p>
+<p><strong>In the finder.</strong> Press <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) and type
+<code>&gt;</code> followed by what the command should do, or part of its name. Up to six commands appear under
+<strong>Commands</strong>; choosing one opens its description in <strong>Documentation</strong>. It does not run the command:
+you run it in the terminal. <a href="../guide/search.html#find-a-command-with-">Search and the finder</a> has the
+details.</p>
+<figure class="shot"><a href="../../assets/shots/finder@2x.webp"><img src="../../assets/shots/finder.webp" srcset="../../assets/shots/finder.webp 1x, ../../assets/shots/finder@2x.webp 2x" alt="The finder with &quot;&gt;person&quot; typed, listing person-add-event, person-check, person-children, person-cover, person-create and person-detach under Commands, each with its description" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Starting with &gt; in the finder searches EiN&#39;s commands rather than the archive.</figcaption></figure>
+<p><strong>In the terminal.</strong> <code>docs find</code> lists the best commands, best first, each with a score, its name and
+its description:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+docs find restart a service</code></pre></div>
+<p>With the assistant module installed there is also <code>assistant-commands find</code>, which adds whether
+each command only reads or also changes something, and <code>assistant-commands judge</code> tells you which a
+whole command line would do:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+assistant-commands find <span class="hljs-string">&#x27;list running services&#x27;</span>
+assistant-commands judge <span class="hljs-string">&#x27;service restart pipeline-pruner&#x27;</span></code></pre></div>
+<p>How well this works depends on what is installed:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Installed</th>
+<th>How commands are found</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Core alone</td>
+<td>Your words are matched against the commands&#39; names and descriptions; a word in the name counts double</td>
+</tr>
+<tr>
+<td>The assistant module</td>
+<td>The assistant answers for <code>docs find</code> and the finder, and still matches words</td>
+</tr>
+<tr>
+<td>The assistant module and the media service</td>
+<td>Commands are found by meaning, so one can turn up even when its description uses other words than yours</td>
+</tr>
+</tbody></table>
+</div>
+<p>The settings behind this are <strong>Command finder</strong>
+(<a href="../reference/settings.html#cfg_command_finder"><code>CFG_COMMAND_FINDER</code></a>) and <strong>Text embedder</strong>
+(<a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>); the assistant module and the
+media service set them when they are installed.</p>
+<h2 id="use-the-same-shell-over-ssh">Use the same shell over SSH<a class="anchor" href="#use-the-same-shell-over-ssh" aria-label="Link to this section"></a></h2>
+<p>The terminal is one of several doors into the same shell. From your own computer you can log in
+over SSH with your EiN username and password, on port 2222 unless your administrator chose another:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.local</code></pre></div>
+<p>You get the same shell as in a terminal tab: the same prompt, your history, your <code>~/.bashrc</code>, Tab
+completion and the same keys. Two things belong to the browser alone: pictures drawn by <code>cat</code>, and
+dropping files to upload them. Over SSH, copy files with SFTP or <code>scp</code> instead.</p>
+
+<p>The web pages run these same commands for you, and so does the assistant, always as the person
+signed in. A command you may not run in the terminal is refused through every other door too.
+<a href="ssh-sftp.html">SSH and SFTP</a> covers keys, running one command at a time, and copying files.</p>
+<h2 id="commands-worth-knowing">Commands worth knowing<a class="anchor" href="#commands-worth-knowing" aria-label="Link to this section"></a></h2>
+<p>Commands marked <em>archive</em> come with the archive module and exist only where it is installed.
+<a href="commands.html">Commands by task</a> has many more, grouped by what you want to do.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../reference/commands-core.html#ls"><code>ls</code></a></td>
+<td>Lists what is in a folder; <code>ls -l</code> with details</td>
+</tr>
+<tr>
+<td><code>cd</code></td>
+<td>Moves into a folder; <code>cd</code> alone goes home, <code>cd -</code> back to where you were</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#cat"><code>cat</code></a></td>
+<td>Prints a text file, or draws a picture</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#edit"><code>edit</code></a></td>
+<td>Edits a text file in the terminal; see <a href="editor.html">The editor</a></td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#cp"><code>cp</code></a></td>
+<td>Copies; <code>cp -r</code> for a folder and what is in it</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#mv"><code>mv</code></a></td>
+<td>Moves or renames, and keeps the links to what it moves pointing at the new place</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#rm"><code>rm</code></a></td>
+<td>Deletes for good; <code>rm -r</code> for anything that has children, a processed photo included</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#trash"><code>trash</code></a></td>
+<td><code>trash put &lt;path&gt;</code> moves into your trash, from which you can restore it</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#mkdir"><code>mkdir</code></a></td>
+<td>Makes a folder; <code>mkdir -p</code> makes the folders above it too</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#mkfile"><code>mkfile</code></a></td>
+<td>Makes an empty text file, what <code>touch</code> does elsewhere</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#du"><code>du</code></a></td>
+<td>Adds up sizes; <code>du -chs *</code> gives readable sizes and a total</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#find"><code>find</code></a></td>
+<td>Finds nodes under a path, as GNU find does: <code>find /archive/people -maxdepth 1 -type person</code></td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#search"><code>search</code></a></td>
+<td>Searches the archive&#39;s content: <code>search christmas --kind photo</code></td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#stat"><code>stat</code></a></td>
+<td>Shows a node&#39;s details: type, owner, times</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#ln"><code>ln</code></a></td>
+<td><code>ln -s</code> makes a softlink, one thing in a second place</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#news"><code>news</code></a></td>
+<td>What has been added lately, newest first</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#events"><code>events</code></a></td>
+<td>What falls on the days around today, such as birthdays and anniversaries</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#onthisday"><code>onthisday</code></a></td>
+<td>What the archive has from this day in earlier years</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#timeline"><code>timeline</code></a></td>
+<td><em>archive</em>: albums, life events, birthdays and tracks, newest first</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-archive.html#person-info"><code>person-info</code></a></td>
+<td><em>archive</em>: a person&#39;s details, relations, homes and events</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#top"><code>top</code></a></td>
+<td>Watches the system live; <kbd>q</kbd> quits</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#ps"><code>ps</code></a>, <a href="../reference/commands-core.html#who"><code>who</code></a></td>
+<td>What is running now, and who is connected; your own, or everyone&#39;s for an administrator</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#health"><code>health</code></a></td>
+<td>One line on how the system is doing, and the checks behind it</td>
+</tr>
+<tr>
+<td><a href="../reference/commands-core.html#docs"><code>docs</code></a></td>
+<td><code>docs find &lt;words&gt;</code> finds a command by what it does</td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td>Prints your username</td>
+</tr>
+</tbody></table>
+</div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>rm</code> deletes at once and for good: it does not use the trash, and nothing brings the node back.
+Use <code>trash put</code> for anything you may want again; it then shows under <strong>Trash</strong> in your account
+menu (see <a href="../guide/profile.html">Your profile, favourites and trash</a>).</p>
+</aside>
+<p><code>top</code> fills the terminal with what EiN is doing and keeps it up to date. Press <kbd>Alt</kbd>+<kbd>M</kbd>
+first to give it the whole window. <a href="../admin/monitoring.html">Health and the dashboard</a> explains what
+it shows and all its keys.</p>
+<figure class="shot"><a href="../../assets/shots/terminal-top@2x.webp"><img src="../../assets/shots/terminal-top.webp" srcset="../../assets/shots/terminal-top.webp 1x, ../../assets/shots/terminal-top@2x.webp 2x" alt="The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services" width="1440" height="780" loading="lazy" decoding="async"></a><figcaption>top shows on one screen what the Dashboard spreads over several tabs.</figcaption></figure>
+<p>Steps that belong together can be joined with <code>&amp;&amp;</code>, and paths with spaces go in quotes, as in bash:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> &amp;&amp; <span class="hljs-built_in">ls</span> -l</code></pre></div>
+<p><a href="bash.html">The shell language</a> covers what else bash syntax can do in EiN, and how it differs from
+bash on Linux.</p>
+<h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><strong>There is no terminal button.</strong> You are not signed in, or the window is phone-sized. Sign in; on a
+small screen press <kbd>Alt</kbd>+<kbd>T</kbd> with a keyboard, or use SSH from a computer.</p>
+<p><strong>The terminal closed while I was clicking on the page.</strong> A click outside the terminal hides it. Its
+shells keep running; press <kbd>Alt</kbd>+<kbd>T</kbd> to bring it back.</p>
+<p><strong>The top bar says Disconnected.</strong> EiN cannot be reached from the browser just now. The terminal
+reconnects by itself and finds its shell again if the connection is back within five minutes.</p>
+<p><strong>The screen was cleared and a fresh prompt waits.</strong> The shell ended: you were away longer than five
+minutes, EiN restarted, or you signed out. Your history is still there; <kbd>↑</kbd> and
+<kbd>Ctrl</kbd>+<kbd>R</kbd> find your commands.</p>
+<p><strong><code>error: command &#39;albm&#39; not found</code>.</strong> No command of that name is on your path. Check the spelling
+with <kbd>Tab</kbd>, or look for it with <code>docs find</code>. Commands such as <code>timeline</code> and <code>person-info</code>
+exist only where their module is installed.</p>
+<p><strong><code>service-restart: permission denied: only an administrator may run it</code>.</strong> The command is for
+administrators. Through every door it is refused the same way; ask your administrator.</p>
+<p><strong><code>du -h</code> shows help instead of sizes.</strong> <code>-h</code> straight after a command&#39;s name always asks for help.
+Write <code>du -sh</code> or <code>du -ch</code>.</p>
+<p><strong><code>cat</code> prints lines starting <code>__IMG:</code> instead of the picture.</strong> You are connected over SSH, or the
+picture&#39;s path holds a space. Open the picture in the web interface.</p>
+<p><strong>Dropped files landed in the wrong folder.</strong> They go into the folder the tab is in, the path on the
+tab. <code>cd</code> to where they belong and drop them again, or move them with <code>mv</code>.</p>
+<p><strong>The browser tab closed when I pressed Ctrl+W.</strong> The browser keeps that key for itself. Open EiN
+again: you get new terminals, and the old shells end after five minutes.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="bash.html">The shell language</a>: the bash syntax EiN understands, scripts, jobs and <code>JSON_OUTPUT=1</code>.</li>
+<li><a href="commands.html">Commands by task</a>: which command does what, grouped by task.</li>
+<li><a href="editor.html">The editor</a>: <code>edit</code> and its keys.</li>
+<li><a href="ssh-sftp.html">SSH and SFTP</a>: the same shell from your own computer, and copying files.</li>
+<li><a href="../reference/commands.html">Commands</a>: every command, with all its options.</li>
+<li><a href="../reference/shortcuts.html">Keyboard shortcuts</a>: every key in EiN.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../guide/file-types.html" rel="prev"><span>Previous</span>Supported files</a><a class="next" href="bash.html" rel="next"><span>Next</span>The shell language</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/terminal.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-terminal">Open the terminal</a></li><li class="nested"><a href="#read-the-prompt">Read the prompt</a></li><li><a href="#work-in-several-tabs">Work in several tabs</a></li><li><a href="#make-the-terminal-taller-or-shorter">Make the terminal taller or shorter</a></li><li><a href="#the-terminals-own-keys">The terminal's own keys</a></li><li><a href="#come-back-to-a-running-shell">Come back to a running shell</a></li><li><a href="#upload-files-by-dropping-them">Upload files by dropping them</a></li><li><a href="#show-a-picture-with-cat">Show a picture with cat</a></li><li><a href="#edit-the-command-line">Edit the command line</a></li><li><a href="#find-an-earlier-command">Find an earlier command</a></li><li><a href="#let-tab-complete">Let Tab complete</a></li><li><a href="#get-help-on-a-command">Get help on a command</a></li><li><a href="#find-the-command-you-need">Find the command you need</a></li><li><a href="#use-the-same-shell-over-ssh">Use the same shell over SSH</a></li><li><a href="#commands-worth-knowing">Commands worth knowing</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

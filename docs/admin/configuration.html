@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Configuration – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on Settings.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/configuration.html">
+    <meta property="og:title" content="Configuration – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on Settings.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/configuration.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html" aria-current="page">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Configuration</h1>
+        </header>
+        <article class="prose">
+<p>This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation&#39;s <code>.env</code>, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on <a href="../reference/settings.html">Settings</a>.</p>
+<h2 id="two-kinds-of-settings">Two kinds of settings<a class="anchor" href="#two-kinds-of-settings" aria-label="Link to this section"></a></h2>
+<p>EiN has a single table of settings. Each one is an environment variable, such as <code>CFG_TRASH_RETENTION_DAYS</code>, with a plain name, a description, a kind of value and a default. Core declares some, and each module declares its own when it is installed, so the table grows and shrinks with the modules.</p>
+<p>Each setting belongs to one of two scopes:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Who changes it</th>
+<th>Where</th>
+<th>Named</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>System</td>
+<td>An administrator, for everyone</td>
+<td><strong>Settings → System</strong>, or <code>config set</code></td>
+<td><code>CFG_…</code></td>
+</tr>
+<tr>
+<td>Personal</td>
+<td>Each person, for themselves</td>
+<td><strong>Profile → Preferences</strong>, or <code>config set</code></td>
+<td><code>CFG_USER_…</code>, and <code>HISTSIZE</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>This page is about the system settings. Personal ones, such as <strong>Seconds per slide</strong> or <strong>Shell history length</strong>, are described in <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
+<p>Apart from the settings, the installation has its own environment in <code>.env</code>, in the folder EiN was installed in (<code>~/ein</code> with the installer). It holds what is fixed before EiN starts: where your files are, which ports the machine publishes, the database password. It can also give a setting its starting value. <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a> explains how the two meet.</p>
+<h2 id="change-a-setting-on-the-settings-page">Change a setting on the Settings page<a class="anchor" href="#change-a-setting-on-the-settings-page" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Sign in as an administrator. <a href="accounts.html">Accounts and groups</a> explains who that is.</li>
+<li>Choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>. The page opens on the <strong>System</strong> tab.</li>
+<li>Pick a category in the <strong>Categories</strong> list on the left, or type in <strong>Find a setting</strong> to search names, descriptions, modules and keys across every category.</li>
+<li>Change the value in the setting&#39;s field. <strong>Save change</strong> and <strong>Cancel</strong> appear under it.</li>
+<li>Choose <strong>Save change</strong>. A line under the setting says what was restarted, for example &quot;Restarted trash-purger.&quot;, or why nothing could be.</li>
+</ol>
+<figure class="shot"><a href="../../assets/shots/settings@2x.webp"><img src="../../assets/shots/settings.webp" srcset="../../assets/shots/settings.webp 1x, ../../assets/shots/settings@2x.webp 2x" alt="The System tab of Settings: the Find a setting box with the Overrides only button, a list of categories from Albums to Transcription, and the Albums category open with Stack similarity and Stack time gap, each marked Default and Archive" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Settings are browsed by category, and each says where its value comes from and which module it belongs to.</figcaption></figure>
+<p>Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: <a href="accounts.html">Accounts and groups</a> covers <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong>, and <a href="modules.html">Modules</a> covers <strong>Modules</strong>. The <strong>Permissions</strong> tab shows some of the same settings as <strong>System</strong>, such as the default sharing, and a change made on either shows on both.</p>
+<p>The control depends on the kind of value: a switch shows <strong>On</strong> or <strong>Off</strong>, a choice is a list, a number has arrows, a person or a group is picked by name, and a permission mode is a choice of None, View or Edit for the owner, the group and everyone else. On a narrow screen the categories are a <strong>Category</strong> list above the settings instead.</p>
+<h3 id="read-where-a-value-comes-from">Read where a value comes from<a class="anchor" href="#read-where-a-value-comes-from" aria-label="Link to this section"></a></h3>
+<p>Under each setting&#39;s description, a badge says where the value in force comes from. A second badge names the module the setting belongs to, and settings that restart a service say which, as in &quot;Restarts trash-purger&quot;.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Default</strong></td>
+<td>Nobody has set it: the setting&#39;s own default is in force.</td>
+</tr>
+<tr>
+<td><strong>From deployment</strong></td>
+<td>The installation&#39;s environment sets it, usually <code>.env</code>.</td>
+</tr>
+<tr>
+<td><strong>From</strong> <em>module</em>, such as <strong>From archive</strong></td>
+<td>An installed module chose the value, such as the Archive naming its search parser.</td>
+</tr>
+<tr>
+<td><strong>Set here</strong></td>
+<td>An administrator saved it on this page or with <code>config set</code>.</td>
+</tr>
+<tr>
+<td><strong>Not set</strong></td>
+<td>A key to another service that nobody has given.</td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Default</strong>, <strong>From deployment</strong> and <strong>From</strong> <em>module</em> can all be overridden: save a value and the badge becomes <strong>Set here</strong>. A setting that is set here shows <strong>Restore inherited value</strong> instead of <strong>Save change</strong>. Choose it to remove your value, and the setting falls back to what it would be without it: the module&#39;s choice, the deployment&#39;s value or the default, in that order.</p>
+<p><strong>Overrides only</strong> limits the page to the settings set here, with their number on the button. It is the quickest way to see what has been changed on this installation. When nothing matches a search, <strong>Clear filters</strong> empties the search and turns <strong>Overrides only</strong> off.</p>
+<p>Some settings mean something when they are empty. For those, the description ends with what an empty value does, such as &quot;Currently: the person who creates it.&quot;, and an empty text field says what it means, such as &quot;Empty means no model&quot;.</p>
+<h3 id="give-a-key-to-another-service">Give a key to another service<a class="anchor" href="#give-a-key-to-another-service" aria-label="Link to this section"></a></h3>
+<p>A few settings are keys that EiN sends to another service: the media service&#39;s key, a hosted language model&#39;s key, and the access tokens for private module sources. Their names end in <code>_KEY</code>, and they are kept apart from every other setting:</p>
+<ul>
+<li>Nobody can read a key back, administrators included. The field is empty, with &quot;Not set&quot; or &quot;Set — type a new one to replace it&quot; in it, and the badge says whether the key comes from the deployment or was set here.</li>
+<li>To replace a key, type the new one and choose <strong>Save change</strong>. The field empties again once it is saved.</li>
+<li>A key is in no shell&#39;s environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key.</li>
+</ul>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>The media service&#39;s key, <code>CFG_EMS_KEY</code>, must be one the media service accepts. The installer gives both sides the same key from <code>.env</code>. A different key saved here leaves EiN unable to reach the media service; <strong>Restore inherited value</strong> brings back the deployment&#39;s. <a href="media-service.html">The media service</a> explains the keys.</p>
+</aside>
+<h2 id="what-a-change-restarts">What a change restarts<a class="anchor" href="#what-a-change-restarts" aria-label="Link to this section"></a></h2>
+<p>A setting that a service reads when it starts restarts that service when you save it, so the change takes effect without restarting EiN. The setting&#39;s card lists the services before you save, and the line under it confirms what was restarted afterwards. Work already running is not lost: it is picked up again when the service is back.</p>
+<ul>
+<li>Only services that are running are restarted. A service you stopped stays stopped, and reads the new value when you start it. <a href="services-logs.html">Services and logs</a> shows how.</li>
+<li>If a restart fails, the value is still saved, and a red message says &quot;Could not restart&quot; with the service&#39;s name and the reason. The service keeps running on the old value until it starts again.</li>
+<li>The ports, <strong>HTTP port</strong> and <strong>SSH port</strong>, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.</li>
+<li><strong>Worker backlog rotation (ms)</strong> is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.</li>
+<li>Settings that are policy, such as the default sharing or <strong>Visitors may browse</strong>, are read each time they are applied, so they take effect at once and restart nothing.</li>
+</ul>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>With the installer&#39;s setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing <strong>HTTP port</strong> or <strong>SSH port</strong> on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in <code>.env</code> instead, as <a href="network.html">Ports, HTTPS and remote access</a> describes.</p>
+</aside>
+<p>A terminal that was already open when a setting changed keeps the value it started with in its environment. Open a new terminal tab, or run <code>source /etc/bashrc</code>, to see the new one with <code>echo</code>.</p>
+<h2 id="change-settings-from-the-terminal">Change settings from the terminal<a class="anchor" href="#change-settings-from-the-terminal" aria-label="Link to this section"></a></h2>
+<p>The <code>config</code> command does everything the Settings page does. Everyone signed in can list and read settings, and change their own; only an administrator can change a system setting.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+config list                          <span class="hljs-comment"># every setting, with where its value comes from</span>
+config list --scope system           <span class="hljs-comment"># the system settings only; --scope user for your own</span>
+config get CFG_TRASH_RETENTION_DAYS  <span class="hljs-comment"># the value in force</span>
+config <span class="hljs-built_in">set</span> CFG_TRASH_RETENTION_DAYS 14
+config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS</code></pre></div>
+<p><code>config list</code> prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows <code>(set)</code> in place of its value, or nothing when it is not set:</p>
+<div class="code"><pre tabindex="0"><code>CFG_COMMAND_FINDER	assistant-commands (module assistant)
+CFG_LANGUAGE_MODEL	llm-chat (module assistant)
+CFG_SEARCH_PARSER	archive-parse (module archive)
+CFG_TEXT_EMBEDDER	ems-text-embed (module ems)
+CFG_SESSION_REAP_INTERVAL	3600
+CFG_HTTP_PORT	8080 (environment)
+CFG_EMS_KEY	(set) (environment)
+CFG_TRASH_RETENTION_DAYS	14 (system)</code></pre></div>
+<p>The marks match the badges on the Settings page: <code>(system)</code> is <strong>Set here</strong>, <code>(environment)</code> is <strong>From deployment</strong>, <code>(module archive)</code> is <strong>From archive</strong>, and <code>(user)</code> is a person&#39;s own value.</p>
+<p><code>config set</code> answers with the new value and what it restarted, and <code>config unset</code> with the value it falls back to and where that comes from:</p>
+<div class="code"><pre tabindex="0"><code>$ config set CFG_TRASH_RETENTION_DAYS 14
+CFG_TRASH_RETENTION_DAYS = 14
+Restarted: trash-purger
+$ config unset CFG_TRASH_RETENTION_DAYS
+CFG_TRASH_RETENTION_DAYS reset to 30 (default)
+Restarted: trash-purger</code></pre></div>
+<p>For a port, the answer ends with the note that it takes effect the next time the server starts. For a key, <code>config set</code> answers only <code>CFG_MODULE_SOURCES_KEY set</code>, without the value. The command line you typed is kept in your shell history like any other; start it with a space to leave it out.</p>
+<p>A value of the wrong kind is refused before anything is written:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What <code>config set</code> accepts</th>
+<th>Refused, for example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>number</td>
+<td>digits, with an optional minus and decimals</td>
+<td><code>config set: CFG_CPU_SLOTS: expected a number, got &#39;four&#39;</code></td>
+</tr>
+<tr>
+<td>on or off</td>
+<td><code>true</code> or <code>false</code></td>
+<td><code>expected &#39;true&#39; or &#39;false&#39;, got &#39;yes&#39;</code></td>
+</tr>
+<tr>
+<td>choice</td>
+<td>one of the setting&#39;s choices</td>
+<td><code>expected one of en, sv, got &#39;english&#39;</code></td>
+</tr>
+<tr>
+<td>permission mode</td>
+<td>an octal mode such as <code>0750</code></td>
+<td><code>expected an octal mode such as 0750, got &#39;rwxr-x---&#39;</code></td>
+</tr>
+<tr>
+<td>person or group</td>
+<td>a name of letters, digits, <code>.</code>, <code>_</code> and <code>-</code></td>
+<td><code>&#39;Anna Andersson&#39; is not a valid user name</code></td>
+</tr>
+<tr>
+<td>text or key</td>
+<td>anything</td>
+<td></td>
+</tr>
+</tbody></table>
+</div>
+<p>An empty value is refused too, with <code>value must not be empty</code>, except for the settings where empty means something. To return a setting to its inherited value, use <code>config unset</code>, not an empty <code>config set</code>.</p>
+<p>Other refusals:</p>
+<ul>
+<li><code>config set: unknown setting &#39;CFG_TRASH_DAYS&#39;</code>: no installed part of EiN declares that name. <code>config list</code> shows the names there are; a module&#39;s settings exist only while the module is installed.</li>
+<li><code>config set: &#39;CFG_CPU_SLOTS&#39; is a system setting and needs administrator rights</code>: you are signed in as someone else. <a href="accounts.html">Accounts and groups</a> explains how a member of the <code>sudo</code> group becomes the administrator in a terminal with <code>admin</code>.</li>
+</ul>
+<p>A value with spaces, such as two module sources, is best quoted: <code>config set CFG_MODULE_SOURCES &#39;https://github.com/einhq https://forge.example:3000/family&#39;</code>. With <code>JSON_OUTPUT=1</code> in front, <code>config list</code>, <code>config get</code>, <code>config set</code> and <code>config unset</code> answer in JSON, with the setting&#39;s label, description, value and source. <a href="../reference/commands-core.html#config-set">Core commands</a> has the full entries.</p>
+<h2 id="set-a-value-in-the-deployment">Set a value in the deployment<a class="anchor" href="#set-a-value-in-the-deployment" aria-label="Link to this section"></a></h2>
+<p><code>.env</code> is EiN&#39;s environment. Every <code>CFG_…</code> line in it reaches EiN when its container starts, and appears on the Settings page as <strong>From deployment</strong>. Use it for a value that belongs with the installation rather than with the running system, such as a hosted language model&#39;s address and key.</p>
+<ol>
+<li><p>On the machine EiN runs on, open <code>.env</code> in the folder EiN was installed in.</p>
+</li>
+<li><p>Add or change the line:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, on the machine EiN runs on</span>
+<span class="hljs-attr">CFG_TRASH_RETENTION_DAYS</span>=<span class="hljs-number">14</span></code></pre></div>
+</li>
+<li><p>Apply it. This makes EiN&#39;s container again with the new environment:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
+</li>
+<li><p>Reload the Settings page. The setting shows the value with <strong>From deployment</strong>.</p>
+</li>
+</ol>
+<p>Running <code>./setup.sh</code> applies <code>.env</code> too, but it also fetches and builds the newest sources: it is an update. <a href="updating.html">Updating</a> explains it.</p>
+<p>A value in <code>.env</code> does not always win:</p>
+<ul>
+<li><strong>A value set here wins over it.</strong> If the setting shows <strong>Set here</strong>, the line in <code>.env</code> has no visible effect. Choose <strong>Restore inherited value</strong>, or run <code>config unset</code>, to let it through.</li>
+<li><strong>A module&#39;s choice wins over it.</strong> The Archive, the assistant and the media service each name a command for one of the <strong>Search</strong> settings, such as <code>CFG_SEARCH_PARSER</code>. To use another one, set it on the Settings page.</li>
+<li><strong>Some settings are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>, <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
+<li><strong>An empty line sets nothing.</strong> <code>CFG_LANGUAGE_MODEL=</code> in <code>.env</code> is the same as leaving the line out.</li>
+</ul>
+<p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. A media service setting is an <code>EMS_…</code> line in the same file; <a href="media-service.html">The media service</a> describes them.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p><code>.env</code> holds the database password and the media service&#39;s key, and nothing else keeps them. Keep a copy of it with your backups; <a href="data.html">Your data: backup, moving and removing</a> says what else to keep.</p>
+</aside>
+<h2 id="how-the-layers-combine">How the layers combine<a class="anchor" href="#how-the-layers-combine" aria-label="Link to this section"></a></h2>
+<p>A setting can be given a value in up to four places. The narrowest wins:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Layer</th>
+<th>File in EiN&#39;s tree</th>
+<th>Badge</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1, wins</td>
+<td>A person&#39;s own value, for personal settings</td>
+<td><code>~/.config</code></td>
+<td><strong>Your setting</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>The administrator&#39;s value</td>
+<td><code>/etc/config</code></td>
+<td><strong>Set here</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>A module&#39;s choice</td>
+<td><code>/etc/config.d/&lt;module&gt;</code></td>
+<td><strong>From</strong> <em>module</em></td>
+</tr>
+<tr>
+<td>4</td>
+<td>The deployment&#39;s environment</td>
+<td><code>/etc/environment</code></td>
+<td><strong>From deployment</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>The setting&#39;s default</td>
+<td>none</td>
+<td><strong>Default</strong></td>
+</tr>
+</tbody></table>
+</div>
+<p>A personal setting comes from <code>~/.config</code>, the deployment or its default: neither a module nor <code>/etc/config</code> sets it. A system setting is never read from anyone&#39;s <code>~/.config</code>.</p>
+<p>Every shell in EiN, the services&#39; shells included, sources these files at its start, <code>/etc/environment</code> first and <code>~/.config</code> last, so each is exported over the one before. That is why every setting is an ordinary environment variable in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$CFG_TRASH_RETENTION_DAYS</span>
+<span class="hljs-built_in">cat</span> /etc/config</code></pre></div>
+<p>The files are ordinary shell files in EiN&#39;s tree, kept in the database, so they survive a restart. Each line is an assignment such as <code>export CFG_TRASH_RETENTION_DAYS=&#39;14&#39;</code>:</p>
+<ul>
+<li><code>/etc/environment</code> is written again at every start, from the <code>CFG_…</code> variables EiN&#39;s container was started with. A value the deployment stops passing is gone from it. It never holds a key.</li>
+<li><code>/etc/config.d/&lt;module&gt;</code> is a module&#39;s <code>etc/config</code>, linked there when the module is set up and gone when it is removed.</li>
+<li><code>/etc/config</code> is what <strong>Save change</strong> and <code>config set</code> write for a system setting. Everyone can read it.</li>
+<li><code>/etc/keys</code> holds the keys saved here. Only the administrator can read it, and no shell sources it. A key from the deployment stays in EiN&#39;s own process and is never written to a file.</li>
+</ul>
+<p><a href="../reference/config-files.html">Configuration files</a> lists these and EiN&#39;s other files.</p>
+<h2 id="edit-the-settings-file-by-hand">Edit the settings file by hand<a class="anchor" href="#edit-the-settings-file-by-hand" aria-label="Link to this section"></a></h2>
+<p>An administrator can open <code>/etc/config</code> in the editor, <code>edit /etc/config</code>, and add, change or remove <code>export</code> lines. Two things differ from the Settings page:</p>
+<ul>
+<li>Nothing checks the values. A number written as <code>four</code> reaches the service that reads it as it is.</li>
+<li>Nothing is restarted. Policy settings apply at once; a setting a service reads at its start applies when that service restarts, from <a href="services-logs.html">Services and logs</a> or the next time EiN starts.</li>
+</ul>
+<p>A line for a name no part of EiN declares is exported into every shell but shows nowhere. Prefer the Settings page or <code>config set</code> for anything listed there.</p>
+<h2 id="when-a-change-does-not-take-effect">When a change does not take effect<a class="anchor" href="#when-a-change-does-not-take-effect" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>The value in <code>.env</code> does not show.</strong> The setting is <strong>Set here</strong> or chosen by a module, both of which win; or it is one of the values <code>compose.yaml</code> fixes; or EiN&#39;s container was not made again. See <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a>.</li>
+<li><strong>The page says the value is saved, but the service behaves as before.</strong> Look for a red &quot;Could not restart&quot; message under the setting, or check the service on <a href="services-logs.html">Services and logs</a>. A stopped service reads the value when it starts.</li>
+<li><strong>The terminal shows the old value.</strong> The terminal was open before the change. Open a new tab.</li>
+<li><strong>A port change did nothing.</strong> Ports take effect when EiN starts again, and with the installer&#39;s setup they should be changed in <code>.env</code>, not here. See <a href="network.html">Ports, HTTPS and remote access</a>.</li>
+<li><strong>A module&#39;s settings are missing.</strong> They exist only while the module is installed and working; check it on <strong>Settings → Modules</strong>, as <a href="modules.html">Modules</a> describes.</li>
+<li><strong>Something else is wrong.</strong> <a href="troubleshooting.html">Troubleshooting</a> goes through the common problems.</li>
+</ul>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../reference/settings.html">Settings</a>: every setting, with its default, kind and what it restarts.</li>
+<li><a href="../reference/environment.html">Environment variables</a>: the variables EiN reads that are not settings.</li>
+<li><a href="../guide/profile.html">Your profile, favourites and trash</a>: personal preferences.</li>
+<li><a href="accounts.html">Accounts and groups</a>: the <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong> tabs, and the default sharing.</li>
+<li><a href="modules.html">Modules</a>: the <strong>Modules</strong> tab, module sources and their tokens.</li>
+<li><a href="processing.html">Processing and pipelines</a> and <a href="performance.html">Performance and sizing</a>: what the <strong>Processing</strong> settings do in practice.</li>
+<li><a href="media-service.html">The media service</a> and <a href="language-model.html">The language model</a>: their addresses and keys.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="network.html" rel="prev"><span>Previous</span>Ports, HTTPS and remote access</a><a class="next" href="modules.html" rel="next"><span>Next</span>Modules</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/configuration.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-settings">Two kinds of settings</a></li><li><a href="#change-a-setting-on-the-settings-page">Change a setting on the Settings page</a></li><li class="nested"><a href="#read-where-a-value-comes-from">Read where a value comes from</a></li><li class="nested"><a href="#give-a-key-to-another-service">Give a key to another service</a></li><li><a href="#what-a-change-restarts">What a change restarts</a></li><li><a href="#change-settings-from-the-terminal">Change settings from the terminal</a></li><li><a href="#set-a-value-in-the-deployment">Set a value in the deployment</a></li><li><a href="#how-the-layers-combine">How the layers combine</a></li><li><a href="#edit-the-settings-file-by-hand">Edit the settings file by hand</a></li><li><a href="#when-a-change-does-not-take-effect">When a change does not take effect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

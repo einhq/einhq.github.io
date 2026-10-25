@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The editor – EiN documentation</title>
+    <meta name="description" content="EiN has two places to change a text file: edit in the terminal, which colours the text and checks JSON, YAML and bash as you type, and the code editor on the Nodes page of the web interface. This page is for anyone who edits a script, a note or a configuration file in EiN.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/editor.html">
+    <meta property="og:title" content="The editor – EiN documentation">
+    <meta property="og:description" content="EiN has two places to change a text file: edit in the terminal, which colours the text and checks JSON, YAML and bash as you type, and the code editor on the Nodes page of the web interface. This page is for anyone who edits a script, a note or a configuration file in EiN.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/editor.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html" aria-current="page">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>The editor</h1>
+        </header>
+        <article class="prose">
+<p>EiN has two places to change a text file: <code>edit</code> in the terminal, which colours the text and checks
+JSON, YAML and bash as you type, and the code editor on the <strong>Nodes</strong> page of the web interface.
+This page is for anyone who edits a script, a note or a configuration file in EiN.</p>
+<h2 id="open-a-file-with-edit">Open a file with edit<a class="anchor" href="#open-a-file-with-edit" aria-label="Link to this section"></a></h2>
+<p><code>edit</code> runs in a terminal: the <a href="terminal.html">terminal panel</a> in the browser, or an
+<a href="ssh-sftp.html">SSH login</a> from your own computer.</p>
+<ol>
+<li><p>Open the terminal with the terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>.</p>
+</li>
+<li><p>Type <code>edit</code> and the path of the file, and press <kbd>Enter</kbd>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+edit ~/notes.md</code></pre></div>
+</li>
+<li><p>The editor fills the terminal. Change the text, press <kbd>Ctrl</kbd>+<kbd>S</kbd> to save and
+<kbd>Ctrl</kbd>+<kbd>Q</kbd> to leave. The shell&#39;s screen comes back as you left it.</p>
+</li>
+</ol>
+<p>A path is read from the directory you are in, so <code>edit tidy.sh</code> opens <code>tidy.sh</code> there. Tab
+completes paths after <code>edit</code> as it does after any command.</p>
+<p>What the editor shows, here on a <code>nav.json</code> with a missing comma:</p>
+<div class="code"><pre tabindex="0"><code> 1 {
+✗2   &quot;hide&quot;: [&quot;archive.map&quot; &quot;archive.devices&quot;]
+ 3 }
+~
+~
+ nav.json   ✗ 2:26 expected ',' or ']' after array element         JSON ✗   L 1:1
+^S Save  ^Q Quit  ^F Find  ^G Line  ^Z Undo  ^Y Redo  ^K Cut  ^U Paste</code></pre></div>
+<ul>
+<li><strong>The text</strong>, with line numbers at the left. The cursor&#39;s line number is bright, the others
+grey. Rows after the end of the file show <code>~</code>.</li>
+<li><strong>The status bar</strong>, the second row from the bottom. At the left: the file&#39;s name, <code>[New]</code> for a
+file not saved yet, <code>[Modified]</code> while there are unsaved changes, then a message or the syntax
+error described under <a href="#checks-as-you-type">Checks as you type</a>. At the right: the language, a
+check mark or cross where the language is checked, and the cursor&#39;s position as <code>L line:column</code>.</li>
+<li><strong>The bottom row</strong> lists the main keys, <code>^S</code> meaning <kbd>Ctrl</kbd>+<kbd>S</kbd>. While the
+editor asks you something, such as <code>Find:</code>, the question takes this row.</li>
+</ul>
+<h3 id="start-a-new-file">Start a new file<a class="anchor" href="#start-a-new-file" aria-label="Link to this section"></a></h3>
+<p>Give <code>edit</code> a path that does not exist yet. The editor opens empty with <code>[New]</code> in the status bar.
+Nothing is created until you save; leaving without saving leaves nothing behind.</p>
+<p>The first save creates the file in the folder the path names, and decides its type:</p>
+<ul>
+<li>from the name&#39;s extension: <code>notes.md</code> becomes Markdown, <code>nav.json</code> JSON, <code>tidy.sh</code> a shell
+script;</li>
+<li>for a name without a known extension, from a first line starting with <code>#!</code>: <code>#!bash</code> makes a
+script, <code>#!/usr/bin/env python3</code> a Python file;</li>
+<li>otherwise plain text.</li>
+</ul>
+<p>Typing a <code>#!bash</code> line into a new file colours and checks it as bash at once.</p>
+<p>The folder must exist. To start a file in a folder that is not there yet, make the folder first:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">mkdir</span> -p ~/.ui &amp;&amp; edit ~/.ui/nav.json</code></pre></div>
+<p>A script you write with <code>edit</code> needs execute permission before it runs as a command:
+<code>chmod 755 tidy.sh</code>. <a href="bash.html">The shell language</a> covers scripts.</p>
+<h3 id="when-edit-will-not-open-a-file">When edit will not open a file<a class="anchor" href="#when-edit-will-not-open-a-file" aria-label="Link to this section"></a></h3>
+<p><code>edit</code> prints one line and goes back to the prompt:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>edit: missing file operand</code></td>
+<td>You gave no path.</td>
+<td>Name the file: <code>edit notes.md</code>.</td>
+</tr>
+<tr>
+<td><code>edit: not a terminal</code></td>
+<td>The command did not run in a terminal: one command sent with <code>ssh … &#39;edit notes.md&#39;</code>, or a script started without one. The assistant never runs <code>edit</code>.</td>
+<td>Use the terminal panel, or sign in over SSH with a shell of your own (<code>ssh -p 2222 anna@ein.local</code>) and run <code>edit</code> there.</td>
+</tr>
+<tr>
+<td><code>edit: /home/anna/staging: not a file (directory)</code></td>
+<td>The path is a folder, or another kind of node such as an album or a person. The type is in brackets.</td>
+<td>Name a file. <code>ls -l</code> shows what a folder holds.</td>
+</tr>
+<tr>
+<td><code>edit: /home/anna/beach.jpg: not a text file (mimetype: image/jpeg)</code></td>
+<td>The file is a picture, a video, a PDF or another file that is not text.</td>
+<td>Nothing to edit here. A picture opens in the viewer.</td>
+</tr>
+<tr>
+<td><code>edit: /home/anna/old.txt: not UTF-8 text</code></td>
+<td>The file is text in another encoding, such as Latin-1, or holds bytes that are not text.</td>
+<td>Convert it to UTF-8 on your own computer and upload it again.</td>
+</tr>
+<tr>
+<td><code>edit: /etc/keys: Access denied …</code></td>
+<td>You may not read the file.</td>
+<td>Ask its owner or an administrator. <a href="../admin/permissions.html">Permissions in depth</a> explains who may read what.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The full entry for the command is <a href="../reference/commands-core.html#edit"><code>edit</code></a> in the reference.</p>
+<h2 id="save-and-leave">Save and leave<a class="anchor" href="#save-and-leave" aria-label="Link to this section"></a></h2>
+<p>Press <kbd>Ctrl</kbd>+<kbd>S</kbd>. The status bar says <code>Saved</code> and <code>[Modified]</code> goes away.</p>
+<p>If the text has a syntax error, the editor asks first, on the bottom row, with the first error
+after the question:</p>
+<div class="code"><pre tabindex="0"><code>Save with errors? (y/N)  ✗ 2:26 expected ',' or ']' after array element</code></pre></div>
+<p>Press <kbd>y</kbd> to save anyway. <kbd>n</kbd>, <kbd>Enter</kbd> or any other letter leaves the
+file as it was and the status bar says <code>Not saved</code>; <kbd>Esc</kbd> takes the question away.</p>
+<p>To leave, press <kbd>Ctrl</kbd>+<kbd>Q</kbd>. With nothing unsaved the editor closes at once.
+Otherwise it asks:</p>
+<div class="code"><pre tabindex="0"><code>Save changes? (y/n, Esc cancels)</code></pre></div>
+<ul>
+<li><kbd>y</kbd> saves and leaves. If the text has an error, <code>Save with errors? (y/N)</code> comes first.</li>
+<li><kbd>n</kbd> leaves without saving.</li>
+<li><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd> goes back to the text.</li>
+</ul>
+<p><kbd>Ctrl</kbd>+<kbd>C</kbd> does not leave the editor: on its own it only shows <code>^Q quits</code>.</p>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>If your browser or terminal program keeps <kbd>Ctrl</kbd>+<kbd>S</kbd> or
+<kbd>Ctrl</kbd>+<kbd>Q</kbd> for itself, <kbd>Ctrl</kbd>+<kbd>O</kbd> saves and
+<kbd>Ctrl</kbd>+<kbd>X</kbd> quits.</p>
+</aside>
+<p>Saving keeps the file&#39;s line endings: a file written with Windows line endings (CRLF) keeps them,
+and a file that ended without a final newline still does. A new file ends with a newline.</p>
+<h3 id="if-saving-fails">If saving fails<a class="anchor" href="#if-saving-fails" aria-label="Link to this section"></a></h3>
+<p>The status bar shows <code>Not saved:</code> and the reason in red, and your text stays in the editor. The
+usual reasons are a folder that does not exist and a file you may read but not change
+(<code>Access denied</code>).</p>
+<p>In the terminal panel you can put it right without losing the text:</p>
+<ol>
+<li>Press <kbd>Alt</kbd>+<kbd>N</kbd> for a new terminal tab.</li>
+<li>Make the folder there with <code>mkdir -p</code>, or ask for access to the file.</li>
+<li>Go back to the editor&#39;s tab with <kbd>Alt</kbd>+<kbd>←</kbd> and press <kbd>Ctrl</kbd>+<kbd>S</kbd>
+again.</li>
+</ol>
+<p>Over SSH, open a second SSH login for the same purpose.</p>
+<p><code>edit</code> does not notice when someone else changes the file while you have it open: saving writes
+your text over theirs.</p>
+<h2 id="keys">Keys<a class="anchor" href="#keys" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd></td>
+<td>Save. With a syntax error in the text, asks first.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd></td>
+<td>Leave. With unsaved changes, asks first.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>F</kbd></td>
+<td>Find. The question starts with the last search; <kbd>Enter</kbd> goes to the next match.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>G</kbd></td>
+<td>Go to a line, or to <code>line:column</code>.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+<td>Undo / redo.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>K</kbd></td>
+<td>Cut the cursor&#39;s line. Lines cut one after another collect into one cut.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>U</kbd></td>
+<td>Paste what was cut, at the cursor.</td>
+</tr>
+<tr>
+<td><kbd>←</kbd> <kbd>→</kbd></td>
+<td>One character left or right, on to the next or previous line at a line&#39;s end.</td>
+</tr>
+<tr>
+<td><kbd>↑</kbd> <kbd>↓</kbd></td>
+<td>One row up or down, keeping to the column you started from.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>←</kbd> <kbd>Alt</kbd>+<kbd>→</kbd></td>
+<td>One word left or right. In the terminal panel only the <kbd>Ctrl</kbd> keys reach the editor.</td>
+</tr>
+<tr>
+<td><kbd>Home</kbd> or <kbd>Ctrl</kbd>+<kbd>A</kbd></td>
+<td>To the first character of the line that is not a space; pressed again, to the very start. On a wrapped row, to the start of that row.</td>
+</tr>
+<tr>
+<td><kbd>End</kbd> or <kbd>Ctrl</kbd>+<kbd>E</kbd></td>
+<td>To the end of the line. On a wrapped row, to the end of that row.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Home</kbd> / <kbd>Ctrl</kbd>+<kbd>End</kbd></td>
+<td>To the start / end of the file.</td>
+</tr>
+<tr>
+<td><kbd>PgUp</kbd> / <kbd>PgDn</kbd></td>
+<td>A screen up / down.</td>
+</tr>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>A new line, indented as the line it came from.</td>
+</tr>
+<tr>
+<td><kbd>Tab</kbd></td>
+<td>Indent. See <a href="#indentation">Indentation</a>.</td>
+</tr>
+<tr>
+<td><kbd>Backspace</kbd> / <kbd>Delete</kbd></td>
+<td>Delete the character before / after the cursor. At the start or end of a line, join it with the line before or after.</td>
+</tr>
+<tr>
+<td><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>Cancel a question: find, go to a line, save with errors, save changes.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>C</kbd> with no question open</td>
+<td>Shows <code>^Q quits</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>On a Mac, too, the keys are <kbd>Ctrl</kbd>, not <kbd>⌘</kbd>.</p>
+<h3 id="find-text-and-go-to-a-line">Find text and go to a line<a class="anchor" href="#find-text-and-go-to-a-line" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Press <kbd>Ctrl</kbd>+<kbd>F</kbd>. The bottom row shows <code>Find:</code>, with your last search already
+typed.</li>
+<li>Type what you are looking for and press <kbd>Enter</kbd>.</li>
+</ol>
+<p>The cursor moves to the next match after it. Case does not matter. When the search runs past the end
+of the file it goes on from the top and the status bar says <code>Search wrapped</code>; with no match at all
+it says <code>Not found</code>. To go on to the next match, press <kbd>Ctrl</kbd>+<kbd>F</kbd> and
+<kbd>Enter</kbd> again.</p>
+<p><kbd>Ctrl</kbd>+<kbd>G</kbd> shows <code>Go to line[:column]:</code>. Type <code>40</code> for line 40, or <code>40:12</code> for its
+twelfth column, and press <kbd>Enter</kbd>. A number past the end goes to the last line; anything
+that is not a number shows <code>Not a line number</code>.</p>
+<h3 id="undo-cut-and-paste">Undo, cut and paste<a class="anchor" href="#undo-cut-and-paste" aria-label="Link to this section"></a></h3>
+<p><kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes up to 200 steps, and <kbd>Ctrl</kbd>+<kbd>Y</kbd> redoes them.
+A word typed in one go is one step, and so is a run of deletions or a paste; a pause of half a second
+starts a new step. With nothing left, the status bar says <code>Nothing to undo</code> or <code>Nothing to redo</code>.</p>
+<p><kbd>Ctrl</kbd>+<kbd>K</kbd> and <kbd>Ctrl</kbd>+<kbd>U</kbd> use the editor&#39;s own clipboard, not
+your computer&#39;s: press <kbd>Ctrl</kbd>+<kbd>K</kbd> three times to cut three lines, move, and press
+<kbd>Ctrl</kbd>+<kbd>U</kbd> to put them back there. Text pasted from your computer goes in exactly
+as it is, without being indented again, and undoes in one step.</p>
+<h3 id="indentation">Indentation<a class="anchor" href="#indentation" aria-label="Link to this section"></a></h3>
+<p><kbd>Enter</kbd> starts the new line with the indent of the one before. A line left holding only
+spaces is emptied.</p>
+<p><kbd>Tab</kbd> inserts one step of the file&#39;s own indent:</p>
+<ul>
+<li>a tab, when the file indents mostly with tabs, and always in a Makefile;</li>
+<li>otherwise as many spaces as the smallest indent of two or more spaces the file has, at most 8;</li>
+<li>two spaces in a file with no indent yet.</li>
+</ul>
+<p><kbd>Shift</kbd>+<kbd>Tab</kbd> does nothing; take an indent away with <kbd>Backspace</kbd>. Tabs
+in the text reach the next stop of four columns, and other control characters as <code>^</code> and a letter.</p>
+<h2 id="colours-and-line-wrapping">Colours and line wrapping<a class="anchor" href="#colours-and-line-wrapping" aria-label="Link to this section"></a></h2>
+<p><code>edit</code> works out the language of a file in this order, and colours the text by it:</p>
+<ol>
+<li>the name: its extension, or the names <code>Makefile</code> and <code>GNUmakefile</code>;</li>
+<li>the file&#39;s type, as EiN recorded it when the file came in;</li>
+<li>a first line starting with <code>#!</code>, when the type says no more than that the file is text.</li>
+</ol>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Files</th>
+<th>Checked as you type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON</td>
+<td><code>.json</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JSONC</td>
+<td><code>.jsonc</code>: JSON in which comments are allowed</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>YAML</td>
+<td><code>.yaml</code>, <code>.yml</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>bash</td>
+<td><code>.sh</code>, <code>.bash</code>; a shell-script type; a <code>#!</code> line naming bash, sh or any other interpreter not below</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Markdown</td>
+<td><code>.md</code>, <code>.markdown</code></td>
+<td>Its code blocks</td>
+</tr>
+<tr>
+<td>TypeScript</td>
+<td><code>.ts</code>, <code>.mts</code>, <code>.tsx</code>; <code>#!ts</code> or <code>#!deno</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><code>.js</code>, <code>.mjs</code>, <code>.cjs</code>, <code>.jsx</code>; <code>#!node</code> or <code>#!js</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Python</td>
+<td><code>.py</code>; <code>#!python</code> or <code>#!python3</code>, also through <code>#!/usr/bin/env</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>XML</td>
+<td><code>.xml</code>, <code>.html</code>, <code>.htm</code>, <code>.svg</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td><code>.css</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Makefile</td>
+<td><code>Makefile</code>, <code>GNUmakefile</code>, <code>.mk</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Others</td>
+<td><code>.scss</code>; <code>.ini</code>, <code>.conf</code> and <code>.toml</code> (as ini); <code>.sql</code>; <code>.diff</code>, <code>.patch</code>; <code>.go</code>; <code>.rs</code> (rust); <code>.lua</code></td>
+<td>No</td>
+</tr>
+</tbody></table>
+</div>
+<p>The status bar names the language at its right; a file that matches none is <code>text</code>. A file without
+an extension, such as <code>~/.bashrc</code>, is plain text unless its first line starts with <code>#!</code>. In a
+Markdown file, each fenced code block is coloured in the language its fence names. A text longer
+than 256 KB is shown without colours.</p>
+<p>Plain text and Markdown wrap at the edge of the window, at the last space that fits; a row that
+continues a line has no line number in front of it, and <kbd>↑</kbd> and <kbd>↓</kbd> move by
+rows on the screen. Code does not wrap: a long line scrolls sideways to keep the cursor in view, and
+<kbd>Home</kbd> brings the indent back into view.</p>
+<p><code>cat</code> colours a text file in the terminal the same way, without opening it.</p>
+<h2 id="checks-as-you-type">Checks as you type<a class="anchor" href="#checks-as-you-type" aria-label="Link to this section"></a></h2>
+<p><code>edit</code> checks a JSON, JSONC, YAML or bash file after each change. In a Markdown file it checks
+every fenced code block whose fence names one of those languages: <code>json</code>, <code>jsonc</code> or <code>json5</code>,
+<code>yaml</code> or <code>yml</code>, and <code>bash</code>, <code>sh</code>, <code>shell</code>, <code>zsh</code> or <code>console</code>, fenced with <code>```</code> or <code>~~~</code>.
+An error in a block is shown at its line in the whole document.</p>
+<div class="code" data-lang="markdown"><pre tabindex="0"><code>Hide the map for everyone:
+
+```json
+{ &quot;hide&quot;: [&quot;archive.map&quot;] }
+```</code></pre></div>
+<p>An error shows in three places:</p>
+<ul>
+<li><strong>A red <code>✗</code></strong> in front of the line number of the line it is on.</li>
+<li><strong>The character</strong> where the parser stopped, underlined in red. When the error is at the end of
+the line, a red block stands after its last character.</li>
+<li><strong>The status bar</strong>: at the left, <code>✗</code>, the line and column, and what is wrong, such as
+<code>✗ 2:26 expected &#39;,&#39; or &#39;]&#39; after array element</code>, followed by <code>(+2 more)</code> when there are more.
+It shows the error on the cursor&#39;s line when there is one, otherwise the first. At the right, the
+language with <code>✓</code> when the text is correct, <code>✗</code> when it has an error, and <code>…</code> while a check is
+still to come.</li>
+</ul>
+<p>Fix the error and the marks go away as you type. An empty JSON file is not an error: it is one
+you are starting.</p>
+<p>For bash the messages are those of EiN&#39;s shell, among them <code>unexpected token &#39;fi&#39;</code>,
+<code>unexpected end of file</code>, and <code>here-document not closed (wanted &#39;EOF&#39;)</code> for a here-document that is
+never ended.</p>
+<p>A check that takes longer than 50 milliseconds waits until you stop typing for half a second, and
+the status bar shows <code>…</code> meanwhile, so a long file stays quick to type in. A text longer than
+1,000,000 characters is not checked. Saving always checks the text as it is at that moment.</p>
+<p>The checks say whether a file can be read, not whether it does what you mean. For the file of your
+sidebar, <code>ui-nav</code> also checks the fields in it; see <a href="../guide/customizing.html">Your sidebar and top bar</a>.</p>
+<h2 id="edit-in-the-terminal-panel-and-over-ssh">Edit in the terminal panel and over SSH<a class="anchor" href="#edit-in-the-terminal-panel-and-over-ssh" aria-label="Link to this section"></a></h2>
+<p>In the terminal panel:</p>
+<ul>
+<li><kbd>Alt</kbd>+<kbd>M</kbd> gives the terminal the full height of the window, and the editor
+redraws to fill it. The editor also follows any other change of size.</li>
+<li><kbd>Alt</kbd>+<kbd>←</kbd> and <kbd>Alt</kbd>+<kbd>→</kbd> switch between terminal tabs, and
+<kbd>Alt</kbd>+<kbd>↑</kbd> and <kbd>Alt</kbd>+<kbd>↓</kbd> change the panel&#39;s height, so they
+never reach the editor. Move by word with <kbd>Ctrl</kbd>+<kbd>←</kbd> and
+<kbd>Ctrl</kbd>+<kbd>→</kbd>.</li>
+<li>Hiding the panel, with <kbd>Alt</kbd>+<kbd>T</kbd> or a click outside it, leaves the editor open
+in its tab, unsaved changes and all.</li>
+</ul>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Closing the editor&#39;s terminal tab, with its × or <kbd>Alt</kbd>+<kbd>W</kbd>, ends the editor
+without saving and without asking. So does closing an SSH connection.</p>
+</aside>
+<p>Over SSH, <code>edit</code> needs the shell you get by signing in: <code>ssh -p 2222 anna@ein.local</code>, then
+<code>edit notes.md</code>. A command sent along on the <code>ssh</code> line, even with <code>ssh -t</code>, runs without a terminal
+and stops with <code>edit: not a terminal</code>. <a href="ssh-sftp.html">SSH and SFTP</a> has the rest.</p>
+<h2 id="edit-a-file-in-the-web-interface">Edit a file in the web interface<a class="anchor" href="#edit-a-file-in-the-web-interface" aria-label="Link to this section"></a></h2>
+<p>The <strong>Nodes</strong> page has a code editor for those who would rather stay in the browser. <strong>Nodes</strong> is
+under <strong>System</strong> in an administrator&#39;s sidebar. Other people do not have it in their sidebar, but
+anyone signed in can open it at <code>/system/nodes</code> (for example <code>http://ein.local:8080/system/nodes</code>),
+and sees there what they may read.</p>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/Peggy_Wrenfield: the address bar, her children, devices, events, homes and partners folders with their type, size, mode, owner and group, and the Preview pane beside them" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Nodes page browses the whole tree. Right-click a text file here and choose Open to edit it.</figcaption></figure>
+<ol>
+<li>Open <strong>Nodes</strong>. It starts in your home folder, <code>/home/&lt;you&gt;</code>.</li>
+<li>Go to the folder that holds the file. Names that start with a dot, such as <code>.bashrc</code>, <code>.config</code>
+and <code>.ui</code>, are hidden: press <kbd>Ctrl</kbd>+<kbd>H</kbd>, or the eye button at the end of the
+address bar (&quot;Show names starting with a dot (Ctrl+H)&quot;), to show them.</li>
+<li>Right-click the file and choose <strong>Open</strong>. Double-clicking or <kbd>Enter</kbd> goes <em>into</em> the
+file instead, to the nodes it holds.</li>
+<li>The code editor opens in a dialog, titled with the file&#39;s name and with its path under it.
+Beside the title, badges name the language (such as <strong>JSON</strong>, <strong>SHELL</strong> or <strong>TEXT</strong>), say
+<strong>READ-ONLY</strong> when you may not change the file, and <strong>UNSAVED</strong> once you have changed it.</li>
+<li>Make your change and choose <strong>Save</strong>, or press <kbd>Ctrl</kbd>+<kbd>S</kbd>
+(<kbd>⌘</kbd>+<kbd>S</kbd> on a Mac). <strong>Save</strong> is greyed until there is something to save.</li>
+<li>Choose <strong>Close</strong> when you are done.</li>
+</ol>
+<p>If you close with unsaved changes, the dialog asks &quot;Discard unsaved changes?&quot;: <strong>Keep editing</strong>
+takes you back, <strong>Discard</strong> closes without saving. <kbd>Esc</kbd> closes the dialog only when there
+is nothing unsaved. <strong>Raw</strong>, at the left under the editor, opens the file itself in a new browser
+tab.</p>
+<p>The code editor has line numbers, <kbd>Ctrl</kbd>+<kbd>F</kbd> to find, <kbd>Ctrl</kbd>+<kbd>Z</kbd>
+to undo and <kbd>Tab</kbd> to indent. It colours JSON, JavaScript, TypeScript, YAML, Markdown,
+HTML, CSS, XML and shell scripts, by the file&#39;s type first and then its extension.</p>
+<p>What <strong>Open</strong> does depends on the file: a text file opens in the code editor, a picture, video or
+recording in the viewer, and any other file in a new browser tab. The <strong>Preview</strong> in the tool pane
+beside the list shows the first 64 KB of a text file without opening it.</p>
+<p>Where the code editor stops:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see or want</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&quot;Too large to edit here (N KB). Open the raw file instead.&quot;</td>
+<td>The file is larger than 2 MB. Use the link to read it, or <code>edit</code> in the terminal to change it.</td>
+</tr>
+<tr>
+<td>A new file</td>
+<td>The Nodes page makes folders (<strong>New directory</strong>) but not files. Start the file with <code>edit</code>, or upload it.</td>
+</tr>
+<tr>
+<td>A check of your JSON or YAML</td>
+<td>The code editor colours but does not check. Open the file with <code>edit</code> to see errors as you type.</td>
+</tr>
+<tr>
+<td>A red box under the editor: &quot;could not write …&quot;</td>
+<td>The file was not saved: usually you may read it but not change it. Your text is still in the editor; copy it before you discard it.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="which-to-use">Which to use<a class="anchor" href="#which-to-use" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th><code>edit</code> in the terminal</th>
+<th>Code editor on the Nodes page</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Where</td>
+<td>Terminal panel, SSH login</td>
+<td>Browser, <strong>Nodes</strong> page</td>
+</tr>
+<tr>
+<td>New files</td>
+<td>Yes, on the first save</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Checks JSON, YAML and bash</td>
+<td>Yes, as you type, and before saving</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Colours</td>
+<td>By name, type or <code>#!</code> line</td>
+<td>By type, then name</td>
+</tr>
+<tr>
+<td>Largest file</td>
+<td>Any; no checks over 1,000,000 characters</td>
+<td>2 MB</td>
+</tr>
+<tr>
+<td>Keys</td>
+<td><a href="#keys">Its own</a>, <kbd>Ctrl</kbd> on a Mac too</td>
+<td>A browser editor&#39;s, <kbd>⌘</kbd> on a Mac</td>
+</tr>
+</tbody></table>
+</div>
+<p>Files people often edit are <code>~/.bashrc</code> (<a href="bash.html">The shell language</a>), <code>~/.ui/nav.json</code>
+(<a href="../guide/customizing.html">Your sidebar and top bar</a>) and the files listed in
+<a href="../reference/config-files.html">Configuration files</a>. Every key in EiN is gathered in
+<a href="../reference/shortcuts.html">Keyboard shortcuts</a>.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="commands.html" rel="prev"><span>Previous</span>Commands by task</a><a class="next" href="ssh-sftp.html" rel="next"><span>Next</span>SSH and SFTP</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/editor.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-a-file-with-edit">Open a file with edit</a></li><li class="nested"><a href="#start-a-new-file">Start a new file</a></li><li class="nested"><a href="#when-edit-will-not-open-a-file">When edit will not open a file</a></li><li><a href="#save-and-leave">Save and leave</a></li><li class="nested"><a href="#if-saving-fails">If saving fails</a></li><li><a href="#keys">Keys</a></li><li class="nested"><a href="#find-text-and-go-to-a-line">Find text and go to a line</a></li><li class="nested"><a href="#undo-cut-and-paste">Undo, cut and paste</a></li><li class="nested"><a href="#indentation">Indentation</a></li><li><a href="#colours-and-line-wrapping">Colours and line wrapping</a></li><li><a href="#checks-as-you-type">Checks as you type</a></li><li><a href="#edit-in-the-terminal-panel-and-over-ssh">Edit in the terminal panel and over SSH</a></li><li><a href="#edit-a-file-in-the-web-interface">Edit a file in the web interface</a></li><li><a href="#which-to-use">Which to use</a></li></ul></aside>
+    </div>
+  </body>
+</html>

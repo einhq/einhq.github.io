@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Building from source – EiN documentation</title>
+    <meta name="description" content="This page is for developers who want to run EiN from its source: which repositories make it up, how to start core on your own machine with a database beside it, how to work on a module against it, and how to test, check and build the image. To install EiN for use, follow Install EiN instead; the installer builds from the same source.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/develop/source.html">
+    <meta property="og:title" content="Building from source – EiN documentation">
+    <meta property="og:description" content="This page is for developers who want to run EiN from its source: which repositories make it up, how to start core on your own machine with a database beside it, how to work on a module against it, and how to test, check and build the image. To install EiN for use, follow Install EiN instead; the installer builds from the same source.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/develop/source.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section class="here"><h2>Developing</h2><ul><li><a href="modules.html">Writing a module</a></li><li><a href="manifest.html">The module manifest</a></li><li><a href="assistant.html">Teaching the assistant</a></li><li><a href="source.html" aria-current="page">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Developing</p>
+          <h1>Building from source</h1>
+        </header>
+        <article class="prose">
+<p>This page is for developers who want to run EiN from its source: which repositories make it up, how to start core on your own machine with a database beside it, how to work on a module against it, and how to test, check and build the image. To install EiN for use, follow <a href="../start/install.html">Install EiN</a> instead; the installer builds from the same source.</p>
+<h2 id="the-repositories">The repositories<a class="anchor" href="#the-repositories" aria-label="Link to this section"></a></h2>
+<p>EiN is several repositories in the <a href="https://github.com/einhq">einhq</a> organisation on GitHub, all under the MIT licence. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Repository</th>
+<th>What it is</th>
+<th>Language</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/einhq/core">core</a></td>
+<td>EiN itself: the node tree, the shell, pipelines, the SSH server and the web interface</td>
+<td>TypeScript on Deno, React in the browser</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/module-archive">module-archive</a></td>
+<td>The Archive module: people, media, places, staging</td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/module-assistant">module-assistant</a></td>
+<td>The chat that answers questions about the archive</td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/module-ems">module-ems</a></td>
+<td>EiN&#39;s client for the media service</td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/ems">ems</a></td>
+<td>The media service: every media tool and model behind one HTTP API</td>
+<td>Python</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/db">db</a></td>
+<td>The PostgreSQL image (TimescaleDB, pgvector, PostGIS, pg_trgm) and its run script</td>
+<td>Containerfile, bash</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/llm">llm</a></td>
+<td>The assistant&#39;s local language model: llama.cpp&#39;s server in a container</td>
+<td>bash</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/deploy">deploy</a></td>
+<td>EiN on one machine with compose: what the installer runs</td>
+<td>bash, compose</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/bash-parser">bash-parser</a>, <a href="https://github.com/einhq/bash-executor">bash-executor</a></td>
+<td>The parser and the executor EiN&#39;s shell is built on, published on JSR as <code>@ein/bash-parser</code> and <code>@ein/bash-executor</code></td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/ssh2">ssh2</a></td>
+<td>The SSH and SFTP library, published on JSR as <code>@ein/ssh2-ts</code></td>
+<td>TypeScript</td>
+</tr>
+<tr>
+<td><a href="https://github.com/einhq/einhq.github.io">einhq.github.io</a></td>
+<td>The site at einhq.eu and this documentation</td>
+<td>HTML, Markdown</td>
+</tr>
+</tbody></table>
+</div>
+<p>Core takes the shell and SSH libraries from JSR, not from a checkout: its <code>deno.jsonc</code> imports <code>jsr:@ein/bash-executor@^3.0.0</code> and <code>jsr:@ein/ssh2-ts@1.1.1</code>. A change in one of them reaches core once it is published there.</p>
+<h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>Deno 2.9.</strong> Core&#39;s image is built on <code>denoland/deno:debian-2.9.6</code>, so that version is the one EiN is known to run on.</li>
+<li><strong>podman</strong>, run as your own user. The database, the media service and the language model run in containers, and core&#39;s <code>Makefile</code> builds and runs its image with podman.</li>
+<li><strong>git</strong>, to clone the repositories.</li>
+<li>Linux on x86-64, as for an installation. <a href="../start/install.html#what-you-need">Install EiN</a> lists the memory and disk the media service needs.</li>
+</ul>
+<p>Core itself needs no other program on the machine: its shell commands, <code>jq</code> and <code>awk</code> included, are its own.</p>
+<h2 id="get-the-source">Get the source<a class="anchor" href="#get-the-source" aria-label="Link to this section"></a></h2>
+<p>Clone core:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine</span>
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/core.git ein-core
+<span class="hljs-built_in">cd</span> ein-core
+make <span class="hljs-built_in">help</span></code></pre></div>
+<p><code>make help</code> lists every target of core&#39;s <code>Makefile</code>. The <code>deno task</code> names in <code>deno.jsonc</code> are the other half; the sections below use both.</p>
+<h2 id="start-the-database">Start the database<a class="anchor" href="#start-the-database" aria-label="Link to this section"></a></h2>
+<p>EiN keeps the whole tree in PostgreSQL, which runs as a container of its own from the db repository:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine</span>
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/db.git ein-db
+bash ein-db/run.sh</code></pre></div>
+<p><code>run.sh</code> builds the image, starts a container named <code>postgres</code> on the host&#39;s network and waits until it answers. Its last line is the connection string:</p>
+<div class="code"><pre tabindex="0"><code>postgres://ein:ein@localhost:5432/ein</code></pre></div>
+<p>That is what EiN connects to when <code>POSTGRES_URL</code> is unset, so a database started this way needs no setting. The data lives in <code>~/services/postgres</code> and stays when you run <code>run.sh</code> again, which rebuilds on the newest base image and restarts the container. Set <code>PGDATA_HOST_PATH</code>, <code>PGPORT</code>, <code>PG_CONTAINER_NAME</code>, <code>POSTGRES_USER</code>, <code>POSTGRES_PASSWORD</code> or <code>POSTGRES_DB</code> in front of <code>bash</code> to change them; the db repository&#39;s README has the table.</p>
+<p>EiN creates the extensions it uses in its database, and updates them after a new image, at every start. You never run SQL to set it up.</p>
+<h2 id="run-core">Run core<a class="anchor" href="#run-core" aria-label="Link to this section"></a></h2>
+<ol>
+<li><p>Build the web interface once:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine, in the core checkout</span>
+deno task bundle-ui</code></pre></div>
+<p>This bundles the browser shell into <code>src/builtin/ui/ui/</code>, which git ignores. Without it EiN still starts, but it serves the terminal page instead of the web interface.</p>
+</li>
+<li><p>Start EiN:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine, in the core checkout</span>
+deno task dev</code></pre></div>
+</li>
+<li><p>Read the administrator&#39;s password in the output. A new instance makes a random one and prints it once:</p>
+<div class="code"><pre tabindex="0"><code>Admin password set to: 4f6c2a1e-…</code></pre></div>
+<p>Nothing keeps it. If you miss it, stop EiN, drop the database&#39;s data and start again, or set a new password with <code>user-passwd admin</code> from a shell that is already signed in.</p>
+</li>
+<li><p>Open <code>http://localhost:8080</code> and sign in as <code>admin</code> with that password. SSH and SFTP answer on port 2222:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine</span>
+ssh -p 2222 admin@localhost</code></pre></div>
+</li>
+</ol>
+<p><code>deno task dev-w</code> runs the same with Deno&#39;s <code>--watch</code>, restarting EiN when a source file changes. <code>deno task bundle-ui-w</code> keeps the bundler watching the web interface&#39;s sources and rebuilds it on every change; reload the page to see it.</p>
+<p>A bare <code>deno task dev</code> keeps its files beside the checkout, and reads every other setting from its environment:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>POSTGRES_URL</code></td>
+<td><code>postgres://ein:ein@127.0.0.1:5432/ein</code></td>
+<td>The database.</td>
+</tr>
+<tr>
+<td><code>FILE_ROOT_PATH</code></td>
+<td><code>./files</code></td>
+<td>Where file content is kept.</td>
+</tr>
+<tr>
+<td><code>VOLATILE_FILE_ROOT_PATH</code></td>
+<td><code>FILE_ROOT_PATH</code></td>
+<td>Where thumbnails, crops and transcodes are kept.</td>
+</tr>
+<tr>
+<td><code>FILE_TMP_PATH</code></td>
+<td><code>/tmp</code></td>
+<td>Scratch space while content is written.</td>
+</tr>
+<tr>
+<td><code>DEV_MODULES_PATH</code></td>
+<td><code>./modules</code></td>
+<td>The module checkouts EiN runs, read-only.</td>
+</tr>
+<tr>
+<td><code>MODULE_INSTALL_PATH</code></td>
+<td><code>./modules-installed</code></td>
+<td>Where <code>mod install</code> puts the modules it fetches.</td>
+</tr>
+<tr>
+<td><code>DOCS_PATH</code></td>
+<td><code>./docs/user</code></td>
+<td>The guide shown at <code>/usr/docs/guide</code> in the tree.</td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code></td>
+<td><code>INFO</code></td>
+<td><code>DEBUG</code>, <code>INFO</code>, <code>WARN</code> or <code>ERROR</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Any <code>CFG_…</code> variable in the environment is a setting, so <code>CFG_HTTP_PORT=8090 deno task dev</code> moves the web interface to port 8090. <a href="../reference/environment.html#set-by-the-deployment">Environment variables</a> has every variable, and <a href="../reference/settings.html">Settings</a> every setting.</p>
+<h2 id="work-on-a-module">Work on a module<a class="anchor" href="#work-on-a-module" aria-label="Link to this section"></a></h2>
+<p>Modules are repositories of their own. To develop one against core, clone it into <code>modules/&lt;name&gt;</code> in the core checkout, under the module&#39;s name:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine, in the core checkout</span>
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/module-ems.git modules/ems
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/module-archive.git modules/archive</code></pre></div>
+<p>The Archive depends on the <code>ems</code> module, so clone both. At its next start EiN links every folder under <code>modules/</code> that has a <code>mod.json</code> into <code>/usr/modules</code> in the tree and sets them up in dependency order. A module there wins over an installed module of the same name; the boot log then says <code>module &#39;archive&#39; is installed and among the deployment&#39;s modules: the deployment&#39;s runs</code>.</p>
+<p>What you change takes effect at different times:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You change</th>
+<th>It takes effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A command in the module&#39;s <code>bin/</code></td>
+<td>The next time the command runs.</td>
+</tr>
+<tr>
+<td>A file in the module&#39;s <code>lib/</code>, or its <code>mod.json</code></td>
+<td>When a command that reaches it is next loaded: after the command itself changes, after <code>mod setup &lt;name&gt;</code>, or when EiN restarts.</td>
+</tr>
+<tr>
+<td>The module&#39;s pages under <code>ui/</code></td>
+<td>After <code>ui-build &lt;name&gt;</code> in EiN&#39;s terminal, which bundles them again; reload the page.</td>
+</tr>
+<tr>
+<td>The <code>imports</code> in its <code>mod.json</code></td>
+<td>Run <code>deno task sync:modules</code> in the core checkout, which writes the module&#39;s <code>deno.jsonc</code> from its <code>mod.json</code>. The tests fail while the two differ.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each module is a Deno workspace member of core, so your editor and <code>deno check</code> resolve a module&#39;s imports exactly as EiN does when it runs them. <a href="modules.html">Writing a module</a> explains how a module is put together, and <a href="manifest.html">The module manifest</a> every field of <code>mod.json</code>. <a href="../reference/commands-core.html#mod-setup"><code>mod-setup</code></a> and <a href="../reference/commands-core.html#ui-build"><code>ui-build</code></a> are in the command reference.</p>
+<p>To try a module without a checkout, install it from its repository in EiN&#39;s terminal instead, with a branch, tag or commit after <code>@</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mod install https://github.com/einhq/module-archive@main</code></pre></div>
+<p><a href="../admin/modules.html">Modules</a> covers installing, updating and removing modules.</p>
+<h2 id="add-the-media-service-and-the-language-model">Add the media service and the language model<a class="anchor" href="#add-the-media-service-and-the-language-model" aria-label="Link to this section"></a></h2>
+<p>Core and the Assistant run without anything more. The Archive needs the media service to make thumbnails, read metadata, find faces and make pictures searchable; without it, files arrive but nothing is analysed. <a href="../admin/media-service.html">The media service</a> explains what it does.</p>
+<p>The media service reads files by path, not by upload: EiN sends it an absolute path such as <code>/files/…</code>, and the service must see the same file at the same path. The simplest way to arrange that on one machine is to run core in its container too, as in <a href="#build-and-run-the-image">Build and run the image</a>, and give both containers the same folders:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine</span>
+git <span class="hljs-built_in">clone</span> https://github.com/einhq/ems.git ein-ems
+<span class="hljs-built_in">cd</span> ein-ems
+make build
+make run FILES_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files OLD_PATH=<span class="hljs-variable">$HOME</span>/ein-core/old \
+  VOLATILE_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files-volatile TMP_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files-tmp
+make health</code></pre></div>
+<p><code>make build</code> makes an image of tens of gigabytes, since the models are baked in. Add <code>GPU=1</code> to <code>make run</code> to give it an NVIDIA card; <a href="../admin/gpu.html">The graphics card</a> has what the machine needs first. The service listens on port 8181 with the key <code>let-me-in</code> unless you set <code>EMS_PORT</code> and <code>EMS_KEY</code>.</p>
+<p>EiN looks for it at <code>http://127.0.0.1:8181</code>, the default of <a href="../reference/settings.html#cfg_ems_url"><code>CFG_EMS_URL</code></a>. Give EiN the key with <a href="../reference/settings.html#cfg_ems_key"><code>CFG_EMS_KEY</code></a>, in the settings file you pass to <code>make container-run</code> as <code>ENV_FILE</code>:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ems.env, in the core checkout</span>
+<span class="hljs-attr">CFG_EMS_KEY</span>=let-me-in</code></pre></div>
+<p>For the assistant&#39;s model, clone <a href="https://github.com/einhq/llm">llm</a> and run <code>bash run.sh</code> in it. It fetches the model on first use and answers at <code>http://127.0.0.1:8190</code>, the default of <a href="../reference/settings.html#cfg_llm_url"><code>CFG_LLM_URL</code></a>, so EiN finds it without a setting. A hosted provider works as well; <a href="../admin/language-model.html">The language model</a> explains both.</p>
+<h2 id="test-check-and-lint">Test, check and lint<a class="anchor" href="#test-check-and-lint" aria-label="Link to this section"></a></h2>
+<p>Run these in the core checkout before you send a change:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>deno task test</code></td>
+<td>The fast tier: every test under <code>src/</code> and <code>modules/</code>, against an in-memory tree. Needs no database and no module; with module checkouts in <code>modules/</code>, their tests run too.</td>
+</tr>
+<tr>
+<td><code>make test-pg</code></td>
+<td>The same tests, plus the PostgreSQL tier, against the database at <code>POSTGRES_URL</code>. Those tests keep their tables under a prefix of their own.</td>
+</tr>
+<tr>
+<td><code>make container-test</code></td>
+<td>Every module&#39;s end-to-end tests (<code>*.e2e.test.ts</code>) inside core&#39;s image, against the services the <code>ENV_FILE</code> points at. Build the image first.</td>
+</tr>
+<tr>
+<td><code>deno task test:one &lt;file&gt;</code></td>
+<td>One test file.</td>
+</tr>
+<tr>
+<td><code>deno task check</code></td>
+<td>Type-checks core, the module contract, the modules&#39; commands and the web interface&#39;s pages.</td>
+</tr>
+<tr>
+<td><code>deno task lint</code></td>
+<td><code>deno lint</code> over <code>src/</code> and <code>modules/</code>.</td>
+</tr>
+<tr>
+<td><code>deno fmt</code></td>
+<td>Formats the code as <code>deno.jsonc</code> says: 175 columns, two spaces, single quotes. <code>deno fmt --check</code> reports what it would change.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The module contract is what modules may import from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the web interface&#39;s kit, <code>@ein/ui/*</code>. Its surface is kept as a snapshot in <code>src/client/contract.snapshot</code>, and a test fails when the surface changes. After a deliberate change, raise <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code> and run <code>deno task contract:snapshot</code> to write the snapshot again.</p>
+<p>The commit history follows Conventional Commits, such as <code>fix(shell): …</code> or <code>feat(archive): …</code>. Write yours the same way.</p>
+<h2 id="build-and-run-the-image">Build and run the image<a class="anchor" href="#build-and-run-the-image" aria-label="Link to this section"></a></h2>
+<p>Core&#39;s image holds Deno, core and its documentation, and nothing else: no module, no media tool and no model. Build it with:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine, in the core checkout</span>
+make container-build</code></pre></div>
+<p>and run it with:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your machine, in the core checkout</span>
+deno task bundle-ui
+<span class="hljs-built_in">mkdir</span> -p old
+make container-run ENV_FILE=ems.env
+make container-logs</code></pre></div>
+<p><code>make container-run</code> mounts the web interface from the checkout&#39;s <code>src/builtin/ui/ui/</code>, so bundle it first, and the checkout&#39;s <code>old/</code> at <code>/old</code>, so that folder must exist. It runs the container on the host&#39;s network, with these variables:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it sets</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ENV_FILE</code></td>
+<td>none</td>
+<td>A file of <code>KEY=value</code> lines: every <code>CFG_…</code> setting beyond the ports.</td>
+</tr>
+<tr>
+<td><code>HTTP_PORT</code>, <code>SSH_PORT</code></td>
+<td><code>8080</code>, <code>2222</code></td>
+<td>The ports, passed in as <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code>.</td>
+</tr>
+<tr>
+<td><code>POSTGRES_URL</code></td>
+<td><code>postgres://ein:ein@localhost:5432/ein</code></td>
+<td>The database.</td>
+</tr>
+<tr>
+<td><code>FILE_ROOT_PATH</code>, <code>VOLATILE_FILE_ROOT_PATH</code>, <code>FILE_TMP_PATH</code></td>
+<td><code>./files</code>, <code>./files-volatile</code>, <code>./files-tmp</code></td>
+<td>The host folders mounted at <code>/files</code>, <code>/files-volatile</code> and <code>/files-tmp</code>.</td>
+</tr>
+<tr>
+<td><code>MODULES_PATH</code></td>
+<td><code>./modules</code></td>
+<td>The module checkouts, mounted read-only.</td>
+</tr>
+<tr>
+<td><code>MODULE_INSTALL_PATH</code></td>
+<td><code>./modules-installed</code></td>
+<td>Where <code>mod install</code> puts modules, kept when the container is replaced.</td>
+</tr>
+<tr>
+<td><code>INSTALL_MODULES</code></td>
+<td>none</td>
+<td>Modules to install at boot when they are missing, such as <code>&#39;archive assistant&#39;</code>.</td>
+</tr>
+<tr>
+<td><code>CONTAINER_MEMORY</code></td>
+<td><code>6g</code></td>
+<td>The container&#39;s memory, with no swap.</td>
+</tr>
+<tr>
+<td><code>IMAGE_NAME</code>, <code>CONTAINER_NAME</code></td>
+<td><code>ein</code>, <code>ein</code></td>
+<td>The image and the container.</td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code>, <code>LOG_MODULES</code></td>
+<td>none</td>
+<td>The log level, and levels per component such as <code>ssh-server:DEBUG</code>.</td>
+</tr>
+<tr>
+<td><code>DENO_ARGS</code></td>
+<td>none</td>
+<td>Extra flags for <code>deno run</code>, such as <code>--inspect=127.0.0.1:9229</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The administrator&#39;s password is in <code>make container-logs</code> on the first start. <code>make container-stop</code> stops the container and <code>make container-shell</code> opens bash inside it.</p>
+<h2 id="run-your-own-build-in-an-installation">Run your own build in an installation<a class="anchor" href="#run-your-own-build-in-an-installation" aria-label="Link to this section"></a></h2>
+<p>An installation made with the installer builds from the repositories that <code>EIN_GIT</code> names, <code>https://github.com/einhq</code> unless you set it. To run your own changes there, push them to an organisation of your own that holds <code>deploy</code>, <code>core</code> and <code>db</code> (and <code>ems</code> and <code>llm</code> when you use those options), and set <code>EIN_GIT</code> to it when you install. <a href="../admin/install.html#the-variables">Installing in detail</a> explains the variable, and <a href="../admin/updating.html">Updating</a> how <code>setup.sh</code> fetches the newest commits and rebuilds.</p>
+<p><code>setup.sh</code> builds core&#39;s image from <code>src/core/src/Containerfile</code> and then deploy&#39;s <code>ein.Containerfile</code> on top of it, which runs <code>deno task bundle-ui</code>. Modules do not come from <code>EIN_GIT</code>: EiN installs them from the places <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong><code>deno task dev</code> stops at <code>Connecting to database...</code>.</strong> PostgreSQL is not answering at <code>POSTGRES_URL</code>. Check that the container runs with <code>podman ps</code>, and run <code>bash ein-db/run.sh</code> again; it reports <code>postgres did not answer on port 5432</code> when the server does not come up.</li>
+<li><strong>The browser shows a terminal instead of the web interface.</strong> The web interface was not bundled when EiN started. Run <code>deno task bundle-ui</code> and restart EiN.</li>
+<li><strong><code>make container-run</code> fails on a missing folder.</strong> Create <code>old/</code> in the checkout, or set <code>OLD_PATH</code> to a folder that exists.</li>
+<li><strong>A module&#39;s page shows the old version.</strong> Run <code>ui-build &lt;name&gt;</code> in EiN&#39;s terminal, then reload the page.</li>
+<li><strong>A test fails in <code>module-boundary.test.ts</code> after you edited a manifest.</strong> The module&#39;s <code>deno.jsonc</code> no longer matches its <code>mod.json</code>. Run <code>deno task sync:modules</code>.</li>
+<li><strong>Files arrive but get no thumbnails.</strong> The media service is not reached, or sees other paths than EiN. <a href="../admin/media-service.html#when-something-goes-differently">The media service</a> has the checks.</li>
+</ul>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="modules.html">Writing a module</a></li>
+<li><a href="manifest.html">The module manifest</a></li>
+<li><a href="assistant.html">Teaching the assistant</a></li>
+<li><a href="../admin/install.html">Installing in detail</a></li>
+<li><a href="../admin/media-service.html">The media service</a></li>
+<li><a href="../reference/environment.html">Environment variables</a></li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="assistant.html" rel="prev"><span>Previous</span>Teaching the assistant</a><span></span></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/source.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-repositories">The repositories</a></li><li><a href="#what-you-need">What you need</a></li><li><a href="#get-the-source">Get the source</a></li><li><a href="#start-the-database">Start the database</a></li><li><a href="#run-core">Run core</a></li><li><a href="#work-on-a-module">Work on a module</a></li><li><a href="#add-the-media-service-and-the-language-model">Add the media service and the language model</a></li><li><a href="#test-check-and-lint">Test, check and lint</a></li><li><a href="#build-and-run-the-image">Build and run the image</a></li><li><a href="#run-your-own-build-in-an-installation">Run your own build in an installation</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

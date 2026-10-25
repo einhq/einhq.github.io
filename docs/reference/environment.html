@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Environment variables – EiN documentation</title>
+    <meta name="description" content="The variables EiN reads or sets, apart from its settings (CFG_…), which are on Settings. In the shell, docs env lists them with their values there.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/environment.html">
+    <meta property="og:title" content="Environment variables – EiN documentation">
+    <meta property="og:description" content="The variables EiN reads or sets, apart from its settings (CFG_…), which are on Settings. In the shell, docs env lists them with their values there.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/environment.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html" aria-current="page">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Environment variables</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `docs env` on a running EiN: make reference, never by hand. -->
+
+<p>The variables EiN reads or sets, apart from its settings (<code>CFG_…</code>), which are on <a href="settings.html">Settings</a>. In the shell, <code>docs env</code> lists them with their values there.</p>
+<h2 id="set-by-the-deployment">Set by the deployment<a class="anchor" href="#set-by-the-deployment" aria-label="Link to this section"></a></h2>
+<p>Read once, from EiN&#39;s own environment, when it starts: <code>.env</code> in an installation made with the installer. No shell has them, and none is shown back, since <code>POSTGRES_URL</code> carries the database&#39;s password.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>POSTGRES_URL</code></td>
+<td><code>postgres://ein:ein@127.0.0.1:5432/ein</code></td>
+<td>The PostgreSQL database holding the whole tree.</td>
+</tr>
+<tr>
+<td><code>POSTGRES_POOL_MAX</code></td>
+<td><code>20</code></td>
+<td>Database connections the process may hold at once. Parallel work queues on this long before PostgreSQL itself is the limit.</td>
+</tr>
+<tr>
+<td><code>POSTGRES_POOL_RESERVED</code></td>
+<td><code>4</code></td>
+<td>Of those, connections background work may never take, so an interactive command never waits behind a crawl. 0 is first come, first served.</td>
+</tr>
+<tr>
+<td><code>POSTGRES_LISTEN_POOL_MAX</code></td>
+<td><code>4</code></td>
+<td>Connections kept apart for change notifications, which hold theirs for good.</td>
+</tr>
+<tr>
+<td><code>FILE_ROOT_PATH</code></td>
+<td><code>./files</code></td>
+<td>Host directory where file content is stored.</td>
+</tr>
+<tr>
+<td><code>VOLATILE_FILE_ROOT_PATH</code></td>
+<td><code>FILE_ROOT_PATH</code></td>
+<td>Host directory for content that can be made again — thumbnails, crops, transcodes — so it can live on a faster or cheaper disk.</td>
+</tr>
+<tr>
+<td><code>FILE_TMP_PATH</code></td>
+<td><code>/tmp</code></td>
+<td>Host directory for temporary files while content is written.</td>
+</tr>
+<tr>
+<td><code>DOCS_PATH</code></td>
+<td><code>./docs/user</code></td>
+<td>Host directory mounted as the guide at /usr/docs/guide. In a shell the same name is the tree path /usr/docs.</td>
+</tr>
+<tr>
+<td><code>DEV_MODULES_PATH</code></td>
+<td><code>./modules</code></td>
+<td>The deployment&#39;s modules: a folder of module checkouts mounted read-only at /tmp/dev-modules and linked into /usr/modules. A name here wins over an installed module of the same name. In a shell the same name is that tree path.</td>
+</tr>
+<tr>
+<td><code>MODULE_INSTALL_PATH</code></td>
+<td><code>./modules-installed</code></td>
+<td>Host directory <code>mod install</code> puts modules in, mounted read-write at /var/lib/modules. A folder of the host mounted into the container keeps the installed modules when the container is replaced.</td>
+</tr>
+<tr>
+<td><code>INSTALL_MODULES</code></td>
+<td></td>
+<td>Modules boot installs with <code>mod install</code> when they are not installed: names or repository addresses, separated by spaces. One installed already is left as it is; <code>mod install</code> and the settings page update it.</td>
+</tr>
+<tr>
+<td><code>TZ</code></td>
+<td><code>the host&#39;s zone</code></td>
+<td>Time zone for log lines, &quot;today&quot;, and which year a date late on New Year&#39;s Eve belongs to.</td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code></td>
+<td><code>INFO</code></td>
+<td>How much the process logs: DEBUG, INFO, WARN or ERROR.</td>
+</tr>
+<tr>
+<td><code>LOG_MODULES</code></td>
+<td></td>
+<td>Per-component log levels over LOG_LEVEL, such as ssh-server:DEBUG,pipeline:WARN.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_COMMANDS_CONFIG</code></td>
+<td><code>external-commands.json</code></td>
+<td>File listing the host programs shell commands may run.</td>
+</tr>
+<tr>
+<td><code>COMMAND_LOOKUP_TTL_MS</code></td>
+<td><code>5000</code></td>
+<td>How long a command name found on PATH is remembered before it is looked up again.</td>
+</tr>
+<tr>
+<td><code>DEBUG_LOCKS</code></td>
+<td></td>
+<td>Set to 1 to record who holds each lock and warn about one held for more than five seconds.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="folders-in-the-tree">Folders in the tree<a class="anchor" href="#folders-in-the-tree" aria-label="Link to this section"></a></h2>
+<p>Where the tree keeps each kind of thing, exported for every shell, so <code>cd $LOGS_PATH</code> works wherever the folder lives.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ARCHIVE_PATH</code></td>
+<td></td>
+<td>The archive: everything people put in and look at.</td>
+</tr>
+<tr>
+<td><code>TAGS_PATH</code></td>
+<td></td>
+<td>Labels, one directory per label holding links to what carries it.</td>
+</tr>
+<tr>
+<td><code>HOMES_PATH</code></td>
+<td></td>
+<td>One home directory per user, owned by the user.</td>
+</tr>
+<tr>
+<td><code>ETC_PATH</code></td>
+<td></td>
+<td>System configuration: settings, groups, services, boot scripts.</td>
+</tr>
+<tr>
+<td><code>USERS_PATH</code></td>
+<td></td>
+<td>The accounts: one user node per account, the administrator&#39;s.</td>
+</tr>
+<tr>
+<td><code>GROUPS_PATH</code></td>
+<td></td>
+<td>Groups.</td>
+</tr>
+<tr>
+<td><code>SERVICES_PATH</code></td>
+<td></td>
+<td>Service definitions.</td>
+</tr>
+<tr>
+<td><code>INIT_FILES_PATH</code></td>
+<td></td>
+<td>Files installed into the tree at boot.</td>
+</tr>
+<tr>
+<td><code>INIT_PATH</code></td>
+<td></td>
+<td>Boot scripts.</td>
+</tr>
+<tr>
+<td><code>VAR_PATH</code></td>
+<td></td>
+<td>What the system writes as it runs.</td>
+</tr>
+<tr>
+<td><code>LOGS_PATH</code></td>
+<td></td>
+<td>Logs and metrics.</td>
+</tr>
+<tr>
+<td><code>SESSIONS_PATH</code></td>
+<td></td>
+<td>Open sessions.</td>
+</tr>
+<tr>
+<td><code>LINKS_PATH</code></td>
+<td></td>
+<td>Share links: one node per link that opens an album without signing in.</td>
+</tr>
+<tr>
+<td><code>QUEUES_PATH</code></td>
+<td></td>
+<td>Queues.</td>
+</tr>
+<tr>
+<td><code>PIPELINE_QUEUE_PATH</code></td>
+<td></td>
+<td>The queue the pipeline engine works from.</td>
+</tr>
+<tr>
+<td><code>POOLS_PATH</code></td>
+<td></td>
+<td>Job pools.</td>
+</tr>
+<tr>
+<td><code>PIPELINES_PATH</code></td>
+<td></td>
+<td>Pipeline definitions and running instances.</td>
+</tr>
+<tr>
+<td><code>WWW_PATH</code></td>
+<td></td>
+<td>Web pages served over HTTP.</td>
+</tr>
+<tr>
+<td><code>MOD_INSTALL_PATH</code></td>
+<td></td>
+<td>The modules <code>mod install</code> installed, each linked into /usr/modules.</td>
+</tr>
+<tr>
+<td><code>USR_PATH</code></td>
+<td></td>
+<td>Code and read-only payload.</td>
+</tr>
+<tr>
+<td><code>BIN_PATH</code></td>
+<td></td>
+<td>Built-in commands.</td>
+</tr>
+<tr>
+<td><code>LIB_PATH</code></td>
+<td></td>
+<td>Core&#39;s other files: its shell commands, its services and the web interface.</td>
+</tr>
+<tr>
+<td><code>MOD_PATH</code></td>
+<td></td>
+<td>Installed modules.</td>
+</tr>
+<tr>
+<td><code>DOCS_PATH</code></td>
+<td></td>
+<td>This documentation.</td>
+</tr>
+<tr>
+<td><code>TEMP_PATH</code></td>
+<td></td>
+<td>Temporary nodes.</td>
+</tr>
+<tr>
+<td><code>DEV_MODULES_PATH</code></td>
+<td></td>
+<td>The deployment&#39;s modules, mounted read-only.</td>
+</tr>
+<tr>
+<td><code>VAR_DIRS</code></td>
+<td></td>
+<td>The directories under /var, as names separated by spaces, for boot scripts to loop over.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="set-by-the-system">Set by the system<a class="anchor" href="#set-by-the-system" aria-label="Link to this section"></a></h2>
+<p>What EiN exports for every shell at its start besides the folders: the built-in accounts and the host folders its storage is on.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INSTANCE_MODE</code></td>
+<td></td>
+<td>What this process was started as: primary, or test.</td>
+</tr>
+<tr>
+<td><code>ADMIN_USERNAME</code></td>
+<td></td>
+<td>The built-in administrator account.</td>
+</tr>
+<tr>
+<td><code>ADMIN_GROUPNAME</code></td>
+<td></td>
+<td>Its group.</td>
+</tr>
+<tr>
+<td><code>ADMIN_UID</code></td>
+<td></td>
+<td>Its user id.</td>
+</tr>
+<tr>
+<td><code>ADMIN_GID</code></td>
+<td></td>
+<td>Its group&#39;s id.</td>
+</tr>
+<tr>
+<td><code>GUEST_USERNAME</code></td>
+<td></td>
+<td>The account a visitor who has not signed in acts as.</td>
+</tr>
+<tr>
+<td><code>GUEST_GROUPNAME</code></td>
+<td></td>
+<td>Its group.</td>
+</tr>
+<tr>
+<td><code>GUEST_UID</code></td>
+<td></td>
+<td>Its user id.</td>
+</tr>
+<tr>
+<td><code>GUEST_GID</code></td>
+<td></td>
+<td>Its group&#39;s id.</td>
+</tr>
+<tr>
+<td><code>USERS_GROUPNAME</code></td>
+<td></td>
+<td>The group every account belongs to: what &quot;everyone&quot; means when sharing.</td>
+</tr>
+<tr>
+<td><code>USERS_GID</code></td>
+<td></td>
+<td>Its id.</td>
+</tr>
+<tr>
+<td><code>EIN_PATH_EXPORTS</code></td>
+<td></td>
+<td>The layout variables as export lines, written into /etc/layout at boot.</td>
+</tr>
+<tr>
+<td><code>EIN_FILE_ROOT_PATH</code></td>
+<td></td>
+<td>Where file content is stored on the host, as FILE_ROOT_PATH gave it: what the dashboard reports disk use for.</td>
+</tr>
+<tr>
+<td><code>EIN_VOLATILE_FILE_ROOT_PATH</code></td>
+<td></td>
+<td>The same for content that can be made again.</td>
+</tr>
+<tr>
+<td><code>EIN_FILE_TMP_PATH</code></td>
+<td></td>
+<td>The same for temporary files.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_FILE_ROOT_PATH</code></td>
+<td></td>
+<td>FILE_ROOT_PATH as boot received it, for the init scripts.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_VOLATILE_FILE_ROOT_PATH</code></td>
+<td></td>
+<td>VOLATILE_FILE_ROOT_PATH as boot received it.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_FILE_TMP_PATH</code></td>
+<td></td>
+<td>FILE_TMP_PATH as boot received it.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_DOCS_PATH</code></td>
+<td></td>
+<td>DOCS_PATH as boot received it: what is mounted at /usr/docs/guide.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_DEV_MODULES_PATH</code></td>
+<td></td>
+<td>DEV_MODULES_PATH as boot received it.</td>
+</tr>
+<tr>
+<td><code>EXTERNAL_MODULE_INSTALL_PATH</code></td>
+<td></td>
+<td>MODULE_INSTALL_PATH as boot received it.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="set-for-each-shell">Set for each shell<a class="anchor" href="#set-for-each-shell" aria-label="Link to this section"></a></h2>
+<p>Set by the server that opened the shell: the web interface, the terminal panel or SSH.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>USER</code></td>
+<td></td>
+<td>Your user name.</td>
+</tr>
+<tr>
+<td><code>HOME</code></td>
+<td></td>
+<td>Your home directory, holding your settings (.config) and shell history.</td>
+</tr>
+<tr>
+<td><code>PATH</code></td>
+<td></td>
+<td>Where commands are looked up, first directory first: core&#39;s commands, then each installed module&#39;s bin directory.</td>
+</tr>
+<tr>
+<td><code>TMPDIR</code></td>
+<td></td>
+<td>Where commands put temporary nodes.</td>
+</tr>
+<tr>
+<td><code>PWD</code></td>
+<td></td>
+<td>The directory you are in.</td>
+</tr>
+<tr>
+<td><code>OLDPWD</code></td>
+<td></td>
+<td>The directory you were in before, where <code>cd -</code> goes.</td>
+</tr>
+<tr>
+<td><code>UID</code></td>
+<td></td>
+<td>Your user id.</td>
+</tr>
+<tr>
+<td><code>GID</code></td>
+<td></td>
+<td>Your primary group&#39;s id.</td>
+</tr>
+<tr>
+<td><code>SID</code></td>
+<td></td>
+<td>The session this shell belongs to.</td>
+</tr>
+<tr>
+<td><code>PID</code></td>
+<td></td>
+<td>The running command&#39;s own id, its name and a unique suffix.</td>
+</tr>
+<tr>
+<td><code>TTY_NAME</code></td>
+<td></td>
+<td>The terminal this shell is attached to, when it has one.</td>
+</tr>
+<tr>
+<td><code>TERM</code></td>
+<td></td>
+<td>The terminal type an interactive shell reports to programs.</td>
+</tr>
+<tr>
+<td><code>HOSTNAME</code></td>
+<td></td>
+<td>The host name shown in the prompt.</td>
+</tr>
+<tr>
+<td><code>COOKIE_NAME</code></td>
+<td></td>
+<td>The browser cookie that carries a web session.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="options-you-set">Options you set<a class="anchor" href="#options-you-set" aria-label="Link to this section"></a></h2>
+<p>Nobody sets these for you. Export one in a shell, or put it in front of a command, to change how commands behave there: <code>JSON_OUTPUT=1 ls</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>JSON_OUTPUT</code></td>
+<td></td>
+<td>Set to 1 and commands answer in JSON instead of text. The web interface runs every command this way.</td>
+</tr>
+<tr>
+<td><code>MEDIA_LINES</code></td>
+<td><code>20</code></td>
+<td>How many text lines tall <code>cat</code> draws a picture in a terminal.</td>
+</tr>
+<tr>
+<td><code>SEARCH_TRACE</code></td>
+<td></td>
+<td>Set to 1 and <code>search</code> reports how long each of its sources took.</td>
+</tr>
+<tr>
+<td><code>CFG_PASSWORD_HASH_LOGN</code></td>
+<td><code>16</code></td>
+<td>The scrypt work factor for new password hashes, as a power of two. Lowered by the test tier, where the passwords protect nothing; leave it unset anywhere else.</td>
+</tr>
+<tr>
+<td><code>NOMINATIM_SEARCH_URL</code></td>
+<td><code>https://nominatim.openstreetmap.org/search</code></td>
+<td>Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one&#39;s rate limit. From the archive module.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="set-for-a-pipeline-step">Set for a pipeline step<a class="anchor" href="#set-for-a-pipeline-step" aria-label="Link to this section"></a></h2>
+<p>Set for each step of a pipeline by the change that started it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NODE_PATH</code></td>
+<td></td>
+<td>The node the event is about.</td>
+</tr>
+<tr>
+<td><code>EVENT_TYPE</code></td>
+<td></td>
+<td>What happened, as a dotted name such as media.metadata.extracted.</td>
+</tr>
+<tr>
+<td><code>EVENT_ID</code></td>
+<td></td>
+<td>The event&#39;s id.</td>
+</tr>
+<tr>
+<td><code>EVENT_SOURCE</code></td>
+<td></td>
+<td>What raised the event, such as archive-bridge.</td>
+</tr>
+<tr>
+<td><code>EVENT_DATA</code></td>
+<td></td>
+<td>The event&#39;s details as JSON. Each field is also its own variable: mimetype becomes EVENT_MIMETYPE, deviceSerial EVENT_DEVICE_SERIAL.</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="settings.html" rel="prev"><span>Previous</span>Settings</a><a class="next" href="node-types.html" rel="next"><span>Next</span>Node types</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/environment.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#set-by-the-deployment">Set by the deployment</a></li><li><a href="#folders-in-the-tree">Folders in the tree</a></li><li><a href="#set-by-the-system">Set by the system</a></li><li><a href="#set-for-each-shell">Set for each shell</a></li><li><a href="#options-you-set">Options you set</a></li><li><a href="#set-for-a-pipeline-step">Set for a pipeline step</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Configuration files – EiN documentation</title>
+    <meta name="description" content="Every file that configures EiN, where it lives, what writes it and what reads it: the installation's files on the machine EiN runs on, and the files in EiN's own tree. This page is for administrators, and for anyone who wants to know which file a setting or a habit of the shell comes from.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/config-files.html">
+    <meta property="og:title" content="Configuration files – EiN documentation">
+    <meta property="og:description" content="Every file that configures EiN, where it lives, what writes it and what reads it: the installation's files on the machine EiN runs on, and the files in EiN's own tree. This page is for administrators, and for anyone who wants to know which file a setting or a habit of the shell comes from.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/config-files.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html" aria-current="page">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Configuration files</h1>
+        </header>
+        <article class="prose">
+<p>Every file that configures EiN, where it lives, what writes it and what reads it: the installation&#39;s files on the machine EiN runs on, and the files in EiN&#39;s own tree. This page is for administrators, and for anyone who wants to know which file a setting or a habit of the shell comes from.</p>
+<p>There are two places to look:</p>
+<ul>
+<li><strong>On the machine EiN runs on</strong>, in the folder EiN was installed in (<code>~/ein</code> with the installer): <code>.env</code>, the compose files and <code>setup.sh</code>. They decide what runs and with which environment, and change only when you edit them or run <code>setup.sh</code>.</li>
+<li><strong>In EiN&#39;s tree</strong>, under <code>/etc</code> and in each home: ordinary files kept in the database, which you read with <code>cat</code> and change with <code>edit</code> in EiN&#39;s terminal. They survive a restart and an update like the rest of the tree.</li>
+</ul>
+<p>How the settings in these files combine, and how to change a setting without touching a file, is on <a href="../admin/configuration.html">Configuration</a>. Every setting is listed on <a href="settings.html">Settings</a>, and every other variable on <a href="environment.html">Environment variables</a>.</p>
+<h2 id="the-installation-folder">The installation folder<a class="anchor" href="#the-installation-folder" aria-label="Link to this section"></a></h2>
+<p>The installer fetches the deployment into <code>~/ein</code> and runs <code>setup.sh</code> there. After the first run the folder holds:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Made by</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.env</code></td>
+<td><code>setup.sh</code>, the first run</td>
+<td>The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit.</td>
+</tr>
+<tr>
+<td><code>compose.yaml</code></td>
+<td>the deployment</td>
+<td>EiN and its database, the base of every installation.</td>
+</tr>
+<tr>
+<td><code>compose.ems.yaml</code></td>
+<td>the deployment</td>
+<td>The media service, added with <code>--ems</code>.</td>
+</tr>
+<tr>
+<td><code>compose.llm.yaml</code></td>
+<td>the deployment</td>
+<td>The assistant&#39;s language model, added with <code>--llm</code>.</td>
+</tr>
+<tr>
+<td><code>compose.override.yaml</code></td>
+<td><code>setup.sh</code>, every run</td>
+<td>The options chosen in <code>.env</code>, as compose services. Written again on every run; do not edit it.</td>
+</tr>
+<tr>
+<td><code>ein.Containerfile</code></td>
+<td>the deployment</td>
+<td>EiN&#39;s image: core&#39;s image with the web interface built in.</td>
+</tr>
+<tr>
+<td><code>setup.sh</code></td>
+<td>the deployment</td>
+<td>Fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, builds the images and starts them.</td>
+</tr>
+<tr>
+<td><code>src/</code></td>
+<td><code>setup.sh</code></td>
+<td>The sources it builds: <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when those options are on.</td>
+</tr>
+<tr>
+<td><code>data/</code></td>
+<td><code>setup.sh</code></td>
+<td>Your files, unless <code>EIN_DATA</code> named another folder at the install. See <a href="#the-data-folder">The data folder</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The files from the deployment are replaced when <code>setup.sh</code> updates the sources, so changes belong in <code>.env</code>, not in <code>compose.yaml</code>. <code>setup.sh --help</code> lists its options, and <a href="../admin/install.html">Installing in detail</a> explains each.</p>
+<p>The database is not in the folder: it is the container engine&#39;s volume <code>ein_db</code>. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how to keep it.</p>
+<h3 id="env">.env<a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
+<p><code>.env</code> is read in two ways. Compose reads it to fill in <code>compose.yaml</code>, and EiN&#39;s and the media service&#39;s containers get every line of it as their environment. <code>setup.sh</code> writes it once, with mode <code>0600</code>, and from then on changes only the lines its options set: <code>EIN_EMS</code>, <code>EIN_LLM</code> and <code>EIN_MODULES</code>.</p>
+<p>The file the installer writes looks like this, with your own values:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, on the machine EiN runs on</span>
+<span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">0</span>
+
+<span class="hljs-attr">EIN_MODULES</span>=<span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-attr">EIN_DATA</span>=/home/helen/ein/data
+<span class="hljs-attr">POSTGRES_PASSWORD</span>=…
+<span class="hljs-attr">EMS_KEY</span>=…
+<span class="hljs-attr">TZ</span>=Europe/London
+
+<span class="hljs-attr">EIN_BIND</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
+<span class="hljs-attr">EIN_HTTP_PORT</span>=<span class="hljs-number">8080</span>
+<span class="hljs-attr">EIN_SSH_PORT</span>=<span class="hljs-number">2222</span>
+
+<span class="hljs-comment"># CFG_LLM_URL=https://api.openai.com</span>
+<span class="hljs-comment"># CFG_LLM_KEY=</span>
+<span class="hljs-comment"># CFG_LLM_PROVIDER=OpenAI</span>
+<span class="hljs-comment"># CFG_LLM_MODEL=</span>
+
+<span class="hljs-attr">EIN_GIT</span>=https://github.com/einhq</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it does</th>
+<th>Explained on</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EIN_EMS</code></td>
+<td><code>1</code> runs the media service. <code>--ems</code> and <code>--no-ems</code> set it.</td>
+<td><a href="../admin/media-service.html">The media service</a></td>
+</tr>
+<tr>
+<td><code>EIN_LLM</code></td>
+<td><code>1</code> runs the language model. <code>--llm</code> and <code>--no-llm</code> set it.</td>
+<td><a href="../admin/language-model.html">The language model</a></td>
+</tr>
+<tr>
+<td><code>EIN_GPU</code></td>
+<td><code>1</code> gives the graphics card to the media service and the language model. The first run sets it when it finds a card with its CDI file.</td>
+<td><a href="../admin/gpu.html">The graphics card</a></td>
+</tr>
+<tr>
+<td><code>EIN_MODULES</code></td>
+<td>The modules EiN installs at its start when they are missing, separated by spaces. <code>--module</code> adds a name.</td>
+<td><a href="../admin/modules.html">Modules</a></td>
+</tr>
+<tr>
+<td><code>EIN_DATA</code></td>
+<td>The data folder, as an absolute path.</td>
+<td><a href="../admin/install.html">Installing in detail</a></td>
+</tr>
+<tr>
+<td><code>POSTGRES_PASSWORD</code></td>
+<td>The database&#39;s password, made at the install.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>EMS_KEY</code></td>
+<td>The media service&#39;s key, made at the install. Both EiN and the media service get it.</td>
+<td><a href="../admin/media-service.html">The media service</a></td>
+</tr>
+<tr>
+<td><code>TZ</code></td>
+<td>The time zone, taken from the machine at the install.</td>
+<td><a href="environment.html#set-by-the-deployment">Environment variables</a></td>
+</tr>
+<tr>
+<td><code>EIN_BIND</code></td>
+<td>The address the ports are published on. <code>127.0.0.1</code> keeps them to the machine.</td>
+<td><a href="../admin/network.html">Ports, HTTPS and remote access</a></td>
+</tr>
+<tr>
+<td><code>EIN_HTTP_PORT</code></td>
+<td>The machine&#39;s port for the web interface.</td>
+<td><a href="../admin/network.html">Ports, HTTPS and remote access</a></td>
+</tr>
+<tr>
+<td><code>EIN_SSH_PORT</code></td>
+<td>The machine&#39;s port for SSH and SFTP.</td>
+<td><a href="../admin/network.html">Ports, HTTPS and remote access</a></td>
+</tr>
+<tr>
+<td><code>CFG_LLM_…</code></td>
+<td>A hosted language model in place of <code>--llm</code>, commented out until you use it.</td>
+<td><a href="../admin/language-model.html">The language model</a></td>
+</tr>
+<tr>
+<td><code>EIN_GIT</code></td>
+<td>Where the sources are cloned from.</td>
+<td><a href="../admin/install.html">Installing in detail</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>Lines you can add:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Read by</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CFG_…</code></td>
+<td>EiN</td>
+<td>Gives a setting its value, shown as <strong>From deployment</strong>. See the exceptions below.</td>
+</tr>
+<tr>
+<td><code>EMS_…</code></td>
+<td>the media service</td>
+<td>Configures the media service.</td>
+</tr>
+<tr>
+<td><code>EIN_MEMORY</code>, <code>EMS_MEMORY</code>, <code>LLM_MEMORY</code></td>
+<td>compose</td>
+<td>The most memory each container may use: <code>6g</code>, <code>16g</code> and <code>10g</code> unless set.</td>
+</tr>
+<tr>
+<td><code>LLM_GGUF_REPO</code>, <code>LLM_GGUF_FILE</code>, <code>LLM_IMAGE</code>, <code>LLM_CARD_RESERVE_MB</code></td>
+<td>compose</td>
+<td>The language model&#39;s file, image and share of the card.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Four settings are fixed by <code>compose.yaml</code>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code> (<code>8080</code>), <code>CFG_SSH_PORT</code> (<code>2222</code>), <code>CFG_EMS_URL</code> (<code>http://ems:8181</code>) and <code>CFG_EMS_KEY</code> (the value of <code>EMS_KEY</code>). A line for them in <code>.env</code> changes nothing. <code>CFG_LLM_URL</code> is read from <code>.env</code> and is <code>http://llm:8190</code> when the line is missing. With <code>--llm</code>, <code>compose.override.yaml</code> also sets <code>CFG_LLM_CARD</code> to <code>card</code> or <code>cpu</code> after <code>EIN_GPU</code>.</p>
+<p>To apply a change to <code>.env</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
+<p>Running <code>./setup.sh</code> applies it too, but also fetches and builds the newest sources; <a href="../admin/updating.html">Updating</a> explains it. Change <code>EIN_EMS</code>, <code>EIN_LLM</code> or <code>EIN_GPU</code> with <code>setup.sh</code>, since only it writes them into <code>compose.override.yaml</code>.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>.env</code> holds the database password and the media service&#39;s key, and no other file keeps them. Keep a copy of it with your backups.</p>
+</aside>
+<h3 id="composeoverrideyaml">compose.override.yaml<a class="anchor" href="#composeoverrideyaml" aria-label="Link to this section"></a></h3>
+<p><code>setup.sh</code> writes this file from <code>.env</code> on every run, and every compose reads it beside <code>compose.yaml</code> on its own, so <code>podman compose up -d</code> starts the same services as <code>setup.sh</code> does. With the media service, the language model and a card it reads:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># Written by setup.sh from the options in .env; edit those and run setup.sh again.</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">ems:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">llm:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
+<p>A change made by hand is gone at the next run of <code>setup.sh</code>.</p>
+<h3 id="the-data-folder">The data folder<a class="anchor" href="#the-data-folder" aria-label="Link to this section"></a></h3>
+<p><code>EIN_DATA</code> is the folder for what is yours outside the database. <code>setup.sh</code> makes its subfolders, and the containers mount them:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Mounted in EiN at</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>files</code></td>
+<td><code>/files</code></td>
+<td>The originals.</td>
+</tr>
+<tr>
+<td><code>old</code></td>
+<td><code>/old</code></td>
+<td>Older originals.</td>
+</tr>
+<tr>
+<td><code>files-volatile</code></td>
+<td><code>/files-volatile</code></td>
+<td>Renditions EiN can make again: thumbnails, crops, transcodes.</td>
+</tr>
+<tr>
+<td><code>files-tmp</code></td>
+<td><code>/files-tmp</code></td>
+<td>Scratch space while content is written.</td>
+</tr>
+<tr>
+<td><code>modules</code></td>
+<td><code>/modules-installed</code></td>
+<td>The modules EiN installed, which it sees in its tree at <code>/var/lib/modules</code>.</td>
+</tr>
+<tr>
+<td><code>llm</code></td>
+<td>not in EiN; the language model&#39;s <code>/models</code></td>
+<td>The downloaded model.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The media service mounts the same four file folders at the same paths, the originals read-only. <a href="../concepts/files.html">Files and storage</a> explains how the tree&#39;s files map to these folders.</p>
+<h2 id="files-in-eins-tree">Files in EiN&#39;s tree<a class="anchor" href="#files-in-eins-tree" aria-label="Link to this section"></a></h2>
+<p>These files are nodes in the tree, so they live in the database and survive a restart, an update and a new container. Read them in EiN&#39;s terminal with <code>cat</code>, and change them with <a href="../shell/editor.html"><code>edit</code></a> or the code editor on the <strong>Nodes</strong> page, as far as your rights allow.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Written by</th>
+<th>Read by</th>
+<th>Mode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/bashrc</code></td>
+<td>core at the first start, then the administrator</td>
+<td>every shell, when it opens</td>
+<td><code>0644</code></td>
+</tr>
+<tr>
+<td><code>/etc/layout</code></td>
+<td>boot, at every start</td>
+<td><code>/etc/bashrc</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/environment</code></td>
+<td>boot, at every start</td>
+<td><code>/etc/bashrc</code></td>
+<td><code>0644</code></td>
+</tr>
+<tr>
+<td><code>/etc/config.d/&lt;module&gt;</code></td>
+<td><code>mod setup</code>, as a link to the module&#39;s file</td>
+<td><code>/etc/bashrc</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/config</code></td>
+<td><strong>Settings → System</strong>, <code>config set</code></td>
+<td><code>/etc/bashrc</code></td>
+<td><code>0644</code></td>
+</tr>
+<tr>
+<td><code>/etc/keys</code></td>
+<td><strong>Settings → System</strong>, <code>config set</code>, for keys</td>
+<td>EiN itself, never a shell</td>
+<td><code>0600</code></td>
+</tr>
+<tr>
+<td><code>~/.config</code></td>
+<td><strong>Profile → Preferences</strong>, <code>config set</code></td>
+<td><code>/etc/bashrc</code></td>
+<td><code>0600</code></td>
+</tr>
+<tr>
+<td><code>~/.bashrc</code></td>
+<td>you</td>
+<td>your terminal and SSH logins</td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.bash_history</code></td>
+<td>your shell</td>
+<td>your shell</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/ui/nav.d/&lt;module&gt;.json</code></td>
+<td><code>mod setup</code>, as a link to the module&#39;s file</td>
+<td>the sidebar and top bar</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/ui/nav.json</code></td>
+<td>the administrator</td>
+<td>the sidebar and top bar</td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.ui/nav.json</code></td>
+<td>you</td>
+<td>your sidebar and top bar</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/fstab</code></td>
+<td><code>mount --save</code>, <code>unmount --save</code></td>
+<td>boot, with <code>mount -a</code></td>
+<td><code>0600</code></td>
+</tr>
+<tr>
+<td><code>/etc/ssh_host_key</code>, <code>.pub</code></td>
+<td>the SSH server, at the first start</td>
+<td>the SSH server</td>
+<td><code>0700</code></td>
+</tr>
+<tr>
+<td><code>~/.ssh/…</code></td>
+<td>you, <code>ssh-keygen</code>, <code>ssh</code></td>
+<td>the SSH server, <code>ssh</code>, <code>scp</code>, <code>mount</code></td>
+<td><code>0700</code></td>
+</tr>
+<tr>
+<td><code>/etc/users/</code>, <code>/etc/groups/</code></td>
+<td>the account and group commands</td>
+<td>every sign-in and access check</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/services/</code></td>
+<td><code>service add</code>, <code>service enable</code>, <code>mod setup</code></td>
+<td><code>service start-all</code> at boot</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/assistant-prompt.md</code></td>
+<td><code>mod setup</code>, once; then the administrator</td>
+<td>the assistant</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/</code></td>
+<td><code>mod setup</code>, as a link to the module&#39;s folder</td>
+<td>the assistant</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/files/</code>, <code>/etc/init/</code></td>
+<td>boot</td>
+<td>boot</td>
+<td></td>
+</tr>
+</tbody></table>
+</div>
+<p>A blank mode is the default the folder gives a new file. <code>~</code> is your home, <code>/home/&lt;your username&gt;</code>.</p>
+<h3 id="the-settings-files">The settings files<a class="anchor" href="#the-settings-files" aria-label="Link to this section"></a></h3>
+<p>Five files hold the values of settings, each an ordinary shell file of <code>export</code> lines:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># /etc/config</span>
+<span class="hljs-built_in">export</span> CFG_TRASH_RETENTION_DAYS=<span class="hljs-string">&#x27;14&#x27;</span>
+<span class="hljs-built_in">export</span> CFG_MODULE_SOURCES=<span class="hljs-string">&#x27;https://github.com/einhq https://forge.example:3000/family&#x27;</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/environment</code></td>
+<td>The <code>CFG_…</code> variables EiN&#39;s container was started with, written whole at every start. A value the deployment stops passing is gone from it. A key is never written here.</td>
+</tr>
+<tr>
+<td><code>/etc/config.d/&lt;module&gt;</code></td>
+<td>A module&#39;s own choice of values: a link to the module&#39;s <code>etc/config</code>, made by <code>mod setup</code> and removed with the module. The Archive&#39;s names <code>CFG_SEARCH_PARSER</code>, the assistant&#39;s <code>CFG_LANGUAGE_MODEL</code> and <code>CFG_COMMAND_FINDER</code>, the media service&#39;s <code>CFG_TEXT_EMBEDDER</code>.</td>
+</tr>
+<tr>
+<td><code>/etc/config</code></td>
+<td>The administrator&#39;s values for system settings. Made by the first <code>config set</code>; until then it does not exist.</td>
+</tr>
+<tr>
+<td><code>~/.config</code></td>
+<td>One person&#39;s values for personal settings, the <code>CFG_USER_…</code> ones and <code>HISTSIZE</code>. Made by the first <code>config set</code> of that person.</td>
+</tr>
+<tr>
+<td><code>/etc/keys</code></td>
+<td>The keys to other services saved on the Settings page or with <code>config set</code>: <code>CFG_EMS_KEY</code>, <code>CFG_LLM_KEY</code>, <code>CFG_MODULE_SOURCES_KEY</code>. Owned by <code>admin</code>, and sourced by no shell. A key from <code>.env</code> is never written to any file.</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>/etc/bashrc</code> sources the first four in that order, so the last one wins: a person&#39;s own value, then the administrator&#39;s, then a module&#39;s, then the deployment&#39;s. <a href="../admin/configuration.html#how-the-layers-combine">How the layers combine</a> shows the whole order with the badges of the Settings page.</p>
+<p><code>config set</code> rewrites a line in place and keeps the rest of the file as it was. When you edit <code>/etc/config</code> or <code>~/.config</code> by hand, nothing checks your values and nothing is restarted; <a href="../admin/configuration.html#edit-the-settings-file-by-hand">Edit the settings file by hand</a> says what that means.</p>
+<h3 id="etcbashrc-and-etclayout">/etc/bashrc and /etc/layout<a class="anchor" href="#etcbashrc-and-etclayout" aria-label="Link to this section"></a></h3>
+<p><code>/etc/bashrc</code> is sourced by every shell EiN opens: a terminal tab, an SSH login, a command sent over SSH, a service, a pipeline step. It is copied from core&#39;s own file at the first start, and from then on it is the administrator&#39;s: an update does not replace it. With the Archive installed it reads, in this order:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment">#!bash</span>
+
+<span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -A&#x27;</span>
+<span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -al&#x27;</span>
+<span class="hljs-built_in">alias</span> <span class="hljs-built_in">whoami</span>=<span class="hljs-string">&#x27;user whoami&#x27;</span>
+<span class="hljs-built_in">alias</span> <span class="hljs-built_in">id</span>=<span class="hljs-string">&#x27;user id&#x27;</span>
+
+<span class="hljs-built_in">export</span> HISTSIZE=1000
+
+<span class="hljs-comment"># Configuration layers: the deployment&#x27;s first, then the modules&#x27;, the system&#x27;s, and personal last,</span>
+<span class="hljs-comment"># so a personal setting wins. 10_config.sh adds these to an existing /etc/bashrc, which boot</span>
+<span class="hljs-comment"># never replaces.</span>
+<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;:<span class="hljs-variable">$PATH</span>:&quot;</span> <span class="hljs-keyword">in</span> *:/usr/modules/archive/bin:*) ;; *) <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/usr/modules/archive/bin&quot;</span>;; <span class="hljs-keyword">esac</span>
+[ -r /etc/layout ] &amp;&amp; <span class="hljs-built_in">source</span> /etc/layout
+[ -r /etc/environment ] &amp;&amp; <span class="hljs-built_in">source</span> /etc/environment
+<span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> /etc/config.d/*; <span class="hljs-keyword">do</span> [ -r <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> ] &amp;&amp; <span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>; <span class="hljs-keyword">done</span>
+[ -r /etc/config ] &amp;&amp; <span class="hljs-built_in">source</span> /etc/config
+[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>&quot;</span> ] &amp;&amp; [ -r <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.config&quot;</span> ] &amp;&amp; <span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.config&quot;</span></code></pre></div>
+<p>Each other module with a <code>bin/</code> folder, such as the media service, has a <code>PATH</code> line of its own beside the Archive&#39;s.</p>
+<p>Boot and <code>mod setup</code> keep some lines in it, whatever else you change:</p>
+<ul>
+<li><code>mod setup</code> adds a <code>PATH</code> line for each module that has a <code>bin/</code> folder, once.</li>
+<li>Boot adds the line that sources <code>/etc/layout</code>, once.</li>
+<li>At every start, boot moves the four lines that source the settings files to the end, so they come after anything you add.</li>
+</ul>
+<p><code>/etc/layout</code> exports where each folder of the tree is, such as <code>ETC_PATH</code> and <code>LOGS_PATH</code>, and where the data folders are on the machine (<code>EIN_FILE_ROOT_PATH</code>, <code>EIN_VOLATILE_FILE_ROOT_PATH</code>, <code>EIN_FILE_TMP_PATH</code>). Boot writes it whole at every start; leave it alone. <a href="environment.html#folders-in-the-tree">Folders in the tree</a> lists the variables.</p>
+<p>A change to <code>/etc/bashrc</code> reaches shells opened after it. In a tab that is already open, run <code>source /etc/bashrc</code>. Put aliases and settings of your own in <code>~/.bashrc</code> instead, which is yours alone.</p>
+<h3 id="your-shell-files">Your shell files<a class="anchor" href="#your-shell-files" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>~/.bashrc</code></td>
+<td>Your own aliases, functions and variables, read after <code>/etc/bashrc</code> by a terminal tab and an SSH login, not by a command sent with <code>ssh host &#39;command&#39;</code>. A line that fails does not stop the shell from opening.</td>
+</tr>
+<tr>
+<td><code>~/.bash_history</code></td>
+<td>Your command history, the file <code>HISTFILE</code> names. <code>HISTSIZE</code> sets how many commands are kept.</td>
+</tr>
+<tr>
+<td><code>~/.config</code></td>
+<td>Your personal settings; see <a href="#the-settings-files">The settings files</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN reads no <code>~/.bash_profile</code> or <code>~/.profile</code>. <a href="../shell/bash.html#keep-your-settings-in-bashrc">Keep your settings in ~/.bashrc</a> shows what to put in it.</p>
+<h3 id="the-navigation-files">The navigation files<a class="anchor" href="#the-navigation-files" aria-label="Link to this section"></a></h3>
+<p>The sidebar and the top bar are put together from three layers of JSON, each changing only what it names:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Who writes it</th>
+<th>Who it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/ui/nav.d/&lt;module&gt;.json</code></td>
+<td>each module, linked by <code>mod setup</code>; EiN&#39;s own is <code>/etc/ui/nav.d/ui.json</code></td>
+<td>everyone</td>
+</tr>
+<tr>
+<td><code>/etc/ui/nav.json</code></td>
+<td>an administrator</td>
+<td>everyone</td>
+</tr>
+<tr>
+<td><code>~/.ui/nav.json</code></td>
+<td>you</td>
+<td>you only</td>
+</tr>
+</tbody></table>
+</div>
+<p>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; files, and an update replaces them; put changes in <code>/etc/ui/nav.json</code> or <code>~/.ui/nav.json</code>, which exist only once someone writes them. <a href="../guide/customizing.html">Your sidebar and top bar</a> describes the format and its fields.</p>
+<h3 id="etcfstab">/etc/fstab<a class="anchor" href="#etcfstab" aria-label="Link to this section"></a></h3>
+<p><code>/etc/fstab</code> lists the mounts EiN makes again at every start, one per line: the mount point, the type and the options, separated by spaces. A field with a space in it is in double quotes, and a line starting with <code>#</code> is a comment.</p>
+<div class="code"><pre tabindex="0"><code>/mnt/nas sftp host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas</code></pre></div>
+<p><code>mount --save</code> adds or replaces the line for its mount point, and <code>unmount --save</code> removes it, keeping every other line and comment. The file is made with mode <code>0600</code>, since it names other machines and their users. When it is missing, boot mounts nothing. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Mount a folder of another machine</a> explains the options.</p>
+<h3 id="the-ssh-files">The SSH files<a class="anchor" href="#the-ssh-files" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/ssh_host_key</code>, <code>/etc/ssh_host_key.pub</code></td>
+<td>The SSH server&#39;s host key, an ed25519 pair made at the first start. Kept in the tree, so it stays the same across updates and new containers.</td>
+</tr>
+<tr>
+<td><code>~/.ssh/authorized_keys</code></td>
+<td>The public keys that may sign in as you over SSH and SFTP, one a line. <a href="../shell/ssh-sftp.html">SSH and SFTP</a> explains the modes it needs.</td>
+</tr>
+<tr>
+<td><code>~/.ssh/id_ed25519</code>, <code>id_ecdsa</code>, <code>id_rsa</code></td>
+<td>Your own keys, for <code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code> to other machines, made with <code>ssh-keygen</code>.</td>
+</tr>
+<tr>
+<td><code>~/.ssh/config</code></td>
+<td>Settings per machine for <code>ssh</code> and <code>scp</code>, in OpenSSH&#39;s format.</td>
+</tr>
+<tr>
+<td><code>~/.ssh/known_hosts</code></td>
+<td>The host keys of the machines you have accepted. Lines written by OpenSSH work as they are.</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>~/.ssh</code> is made with mode <code>0700</code> the first time a command needs it. <a href="../shell/remote.html">Reaching other machines</a> covers the client files.</p>
+<h3 id="accounts-groups-and-services">Accounts, groups and services<a class="anchor" href="#accounts-groups-and-services" aria-label="Link to this section"></a></h3>
+<p>These are kept by commands, not edited as text:</p>
+<ul>
+<li><code>/etc/users/&lt;name&gt;</code> is an account, with its password in <code>.password</code> and a link to the person it is. <code>/etc/groups/&lt;group&gt;</code> is a group, with links to its members in <code>users</code>. <a href="../admin/accounts.html">Accounts and groups</a> and the <code>user</code> and <code>group</code> commands change them; <a href="../admin/permissions.html">Permissions in depth</a> gives their modes.</li>
+<li><code>/etc/services/available/&lt;name&gt;</code> is a link to a service&#39;s folder, which holds its <code>start.sh</code>, and <code>/etc/services/enabled/&lt;name&gt;</code> marks it to start at boot. A module&#39;s service that is a single script gets a folder of its own in <code>/etc/service-scripts/&lt;name&gt;</code>. Each service writes its output to <code>/var/logs/services/&lt;name&gt;/stdout.log</code> and <code>stderr.log</code>. <a href="../admin/services-logs.html">Services and logs</a> explains the <code>service</code> commands.</li>
+</ul>
+<h3 id="the-assistants-files">The assistant&#39;s files<a class="anchor" href="#the-assistants-files" aria-label="Link to this section"></a></h3>
+<p>With the assistant module installed:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/assistant-prompt.md</code></td>
+<td>The instructions the language model is given at the start of every chat. Copied from the assistant module once and never replaced, so you can edit it.</td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/prompt.md</code></td>
+<td>What a module tells the model about its part.</td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/tools</code></td>
+<td>The commands the module offers the model as tools, one a line; <code>#</code> starts a comment.</td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/examples</code></td>
+<td>Questions the chat suggests asking, one a line.</td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/cards.json</code></td>
+<td>The cards an answer may carry under it, drawn from the module&#39;s own pages.</td>
+</tr>
+<tr>
+<td><code>/etc/assistant.d/&lt;module&gt;/eval.json</code></td>
+<td>The questions <code>agent-eval</code> asks to test the assistant.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each <code>/etc/assistant.d/&lt;module&gt;</code> is a link to the module&#39;s <code>etc/assistant.d</code>, so an update of the module replaces it; only <code>/etc/assistant-prompt.md</code> is yours to change. Because an update does not replace that file either, a new version of the assistant&#39;s own instructions does not reach an installation where it already exists. <a href="../develop/assistant.html">Teaching the assistant</a> describes these files for module authors.</p>
+<h3 id="boot-files">Boot files<a class="anchor" href="#boot-files" aria-label="Link to this section"></a></h3>
+<p><code>/etc/files</code> is the folder of boot scripts that ships with EiN, mounted read-only, and <code>/etc/init</code> holds a link to each script boot runs, in name order. They are EiN&#39;s own; to change what happens at start-up, use the settings, <code>/etc/fstab</code> or a service instead.</p>
+<h2 id="what-a-module-adds-to-etc">What a module adds to /etc<a class="anchor" href="#what-a-module-adds-to-etc" aria-label="Link to this section"></a></h2>
+<p>When a module is set up, at every start and after <code>mod install</code>, <code>mod setup</code> puts the module&#39;s files in place:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>From the module</th>
+<th>In the tree</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>etc/config</code></td>
+<td><code>/etc/config.d/&lt;module&gt;</code></td>
+<td>Linked, and removed with the module.</td>
+</tr>
+<tr>
+<td><code>etc/&lt;name&gt;.d</code></td>
+<td><code>/etc/&lt;name&gt;.d/&lt;module&gt;</code></td>
+<td>Linked, and removed with the module.</td>
+</tr>
+<tr>
+<td><code>ui/nav.json</code></td>
+<td><code>/etc/ui/nav.d/&lt;module&gt;.json</code></td>
+<td>Linked, and removed with the module.</td>
+</tr>
+<tr>
+<td>any other <code>etc/</code> file</td>
+<td><code>/etc/&lt;file&gt;</code></td>
+<td>Copied once. A file already there is left as it is.</td>
+</tr>
+<tr>
+<td><code>bin/</code></td>
+<td>a <code>PATH</code> line in <code>/etc/bashrc</code></td>
+<td>Added once.</td>
+</tr>
+<tr>
+<td><code>services/</code></td>
+<td><code>/etc/services/available</code>, <code>enabled</code></td>
+<td>Registered and enabled.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The linked files always show the module&#39;s current version. A copied file is yours after the first setup, which is why <code>mod setup</code> prints <code>etc/&lt;file&gt; already exists, skipping</code> for it later. <a href="../develop/manifest.html">The module manifest</a> and <a href="../develop/modules.html">Writing a module</a> describe a module&#39;s folders.</p>
+<h2 id="back-up-and-restore">Back up and restore<a class="anchor" href="#back-up-and-restore" aria-label="Link to this section"></a></h2>
+<p>The files in EiN&#39;s tree are in the database, so a backup of the database keeps them all: <code>/etc/config</code>, <code>/etc/fstab</code>, the host key, everyone&#39;s <code>~/.ssh</code> and <code>~/.bashrc</code>. On the machine, keep <code>.env</code> and the data folder besides. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how. EiN has no command that exports its configuration files on their own; copy one with <code>cat</code> or over SFTP when you want it apart.</p>
+<h2 id="when-a-file-does-not-do-what-you-expect">When a file does not do what you expect<a class="anchor" href="#when-a-file-does-not-do-what-you-expect" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why, and what to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A <code>CFG_…</code> line in <code>.env</code> has no effect</td>
+<td>The setting is set on the Settings page or chosen by a module, both of which win; it is one of the four <code>compose.yaml</code> fixes; or the container was not made again with <code>podman compose up -d</code>.</td>
+</tr>
+<tr>
+<td>A change to <code>compose.override.yaml</code> is gone</td>
+<td><code>setup.sh</code> writes it on every run. Change the options in <code>.env</code>, or with <code>setup.sh</code>, instead.</td>
+</tr>
+<tr>
+<td>A change to <code>/etc/config</code>, <code>~/.config</code> or <code>/etc/bashrc</code> does not show in the terminal</td>
+<td>The tab was open before the change. Open a new tab, or run <code>source /etc/bashrc</code>.</td>
+</tr>
+<tr>
+<td>A service still uses the old value after a hand edit</td>
+<td>A hand edit restarts nothing. Restart the service from <a href="../admin/services-logs.html">Services and logs</a>, or save the setting on the Settings page, which does.</td>
+</tr>
+<tr>
+<td><code>could not write …</code> when you save</td>
+<td>You may read the file but not change it. <code>/etc</code> is the administrator&#39;s; a member of the <code>sudo</code> group becomes the administrator with <code>admin</code>, as <a href="../admin/accounts.html">Accounts and groups</a> explains.</td>
+</tr>
+<tr>
+<td>A line you added to <code>/etc/environment</code> or <code>/etc/layout</code> is gone</td>
+<td>Boot writes both files whole at every start. Put the value in <code>/etc/config</code>, or the <code>CFG_…</code> line in <code>.env</code>.</td>
+</tr>
+<tr>
+<td>A saved mount is not there after a start</td>
+<td>Run <code>cat /etc/fstab</code> to check its line and <code>mount -a</code> to try again. An SFTP mount whose host key is neither in <code>known_hosts</code> nor pinned with <code>hostkey=</code> is not connected at start-up.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../admin/configuration.html">Configuration</a>: the Settings page, <code>config set</code> and how the layers combine.</li>
+<li><a href="settings.html">Settings</a> and <a href="environment.html">Environment variables</a>: every setting and variable.</li>
+<li><a href="../admin/install.html">Installing in detail</a>: <code>setup.sh</code>, its options and variables.</li>
+<li><a href="../shell/editor.html">The editor</a>: <code>edit</code>, for the files in the tree.</li>
+<li><a href="../guide/customizing.html">Your sidebar and top bar</a>: the navigation files.</li>
+<li><a href="../shell/remote.html">Reaching other machines</a> and <a href="../shell/ssh-sftp.html">SSH and SFTP</a>: the SSH files and <code>/etc/fstab</code>.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="node-types.html" rel="prev"><span>Previous</span>Node types</a><a class="next" href="shortcuts.html" rel="next"><span>Next</span>Keyboard shortcuts</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/config-files.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-installation-folder">The installation folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li><a href="#files-in-eins-tree">Files in EiN's tree</a></li><li class="nested"><a href="#the-settings-files">The settings files</a></li><li class="nested"><a href="#etcbashrc-and-etclayout">/etc/bashrc and /etc/layout</a></li><li class="nested"><a href="#your-shell-files">Your shell files</a></li><li class="nested"><a href="#the-navigation-files">The navigation files</a></li><li class="nested"><a href="#etcfstab">/etc/fstab</a></li><li class="nested"><a href="#the-ssh-files">The SSH files</a></li><li class="nested"><a href="#accounts-groups-and-services">Accounts, groups and services</a></li><li class="nested"><a href="#the-assistants-files">The assistant's files</a></li><li class="nested"><a href="#boot-files">Boot files</a></li><li><a href="#what-a-module-adds-to-etc">What a module adds to /etc</a></li><li><a href="#back-up-and-restore">Back up and restore</a></li><li><a href="#when-a-file-does-not-do-what-you-expect">When a file does not do what you expect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

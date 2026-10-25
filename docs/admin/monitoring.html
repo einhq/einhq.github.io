@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health and the dashboard – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator who keeps EiN running: how to tell at a glance whether it is well and keeping up, what each part of the System dashboard shows, how to ask the same questions in the terminal or from another computer, and what to do when the answer is not Healthy.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/monitoring.html">
+    <meta property="og:title" content="Health and the dashboard – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator who keeps EiN running: how to tell at a glance whether it is well and keeping up, what each part of the System dashboard shows, how to ask the same questions in the terminal or from another computer, and what to do when the answer is not Healthy.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/monitoring.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html" aria-current="page">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>Health and the dashboard</h1>
+        </header>
+        <article class="prose">
+<p>This page is for the administrator who keeps EiN running: how to tell at a glance whether it is well and keeping up, what each part of the <strong>System dashboard</strong> shows, how to ask the same questions in the terminal or from another computer, and what to do when the answer is not <strong>Healthy</strong>.</p>
+<h2 id="open-the-dashboard">Open the dashboard<a class="anchor" href="#open-the-dashboard" aria-label="Link to this section"></a></h2>
+<p>Choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. The sidebar shows it only to administrators; the page is at <code>/system</code>, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.</p>
+<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The badge above the title answers the first question: is anything wrong</figcaption></figure>
+<p>The page, <strong>System dashboard</strong>, has up to three badges above its title and five tabs below it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Badge</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong></td>
+<td>How things stand. Hover it for the sentence behind it, such as <code>1,240 jobs waiting, the slowest kind done in 25m00s</code>.</td>
+</tr>
+<tr>
+<td><strong>offline</strong></td>
+<td>The browser has lost its connection to EiN and is reconnecting; the figures are from the last update.</td>
+</tr>
+<tr>
+<td><strong>warming up</strong></td>
+<td>The sampler that records CPU, memory and disk has not written anything yet. The charts fill in within a minute of a start.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Overview</strong></td>
+<td>The checks that are not fine, the machine&#39;s CPU and memory, the work done, storage and the instance</td>
+</tr>
+<tr>
+<td><strong>Work</strong></td>
+<td>Every pipeline and every kind of job: what is waiting, how fast it goes, when it will be done</td>
+</tr>
+<tr>
+<td><strong>Media service</strong></td>
+<td>The media service&#39;s own state, from the <code>ems</code> module; see <a href="media-service.html">The media service</a></td>
+</tr>
+<tr>
+<td><strong>Services</strong></td>
+<td>Which services run, with start, stop and restart for the administrator</td>
+</tr>
+<tr>
+<td><strong>Log</strong></td>
+<td>The last problems logged, and the system log as it is written</td>
+</tr>
+</tbody></table>
+</div>
+<p>The tab you choose goes into the address (<code>/system?tab=work</code>), so a link opens the same view. Each card asks EiN for its own figures every 10 seconds, and only while its tab is open; the badges and the alarm above the tabs are kept current on every tab. Nothing is fetched while the browser tab is hidden, and the numbers refresh as soon as you come back.</p>
+<h2 id="what-the-verdict-means">What the verdict means<a class="anchor" href="#what-the-verdict-means" aria-label="Link to this section"></a></h2>
+<p>The badge is the first line of the <a href="../reference/commands-core.html#health"><code>health</code></a> command. It is decided in this order: a failed check first, then whether anything is waiting, then whether the waiting work moves.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Verdict</th>
+<th>When</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Healthy</strong></td>
+<td>No check failed and nothing is waiting.</td>
+<td>Nothing.</td>
+</tr>
+<tr>
+<td><strong>Catching up</strong></td>
+<td>Work is waiting, and some kind of it was done in the last hour.</td>
+<td>Wait. After an import this can last hours; it turns to <strong>Healthy</strong> when the work is done.</td>
+</tr>
+<tr>
+<td><strong>Stuck</strong></td>
+<td>Work is waiting, and none of it was done in the last hour.</td>
+<td>Look at the checks on <strong>Overview</strong> and the <strong>Kinds of work</strong> table on <strong>Work</strong>; see below.</td>
+</tr>
+<tr>
+<td><strong>Needs a person</strong></td>
+<td>At least one check failed.</td>
+<td>Read the failed check on <strong>Overview</strong>: each one says what is wrong and, often, the command that fixes it.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Warnings never change the verdict on their own. An install without the media service or without a language model reads <strong>Healthy</strong> with a warning about each, and the same warnings show for a while after every start while the services load their models.</p>
+<h2 id="read-the-checks">Read the checks<a class="anchor" href="#read-the-checks" aria-label="Link to this section"></a></h2>
+<p>On <strong>Overview</strong>, a card above the tiles lists every check that is not fine, failed ones first, each with its reason; a red edge marks a failed check, a yellow one a warning. When every check is fine the card is not there. <code>health</code> in the terminal lists them all, the fine ones too.</p>
+<p>These are the checks EiN makes about its own work:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>State</th>
+<th>Reason, as it reads</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>intake</code></td>
+<td>ok</td>
+<td><code>12 matched triggers waiting to start pipeline work</code></td>
+<td>Nothing: new work about to start.</td>
+</tr>
+<tr>
+<td><code>kind &lt;name&gt;</code></td>
+<td>ok</td>
+<td><code>340 left, 120/h  eta 2.8h</code>, or <code>340 waiting, the oldest for 4m10s</code></td>
+<td>Nothing: a kind of job that is being done, or has just arrived.</td>
+</tr>
+<tr>
+<td><code>kind &lt;name&gt;</code></td>
+<td>warn</td>
+<td><code>340 waiting for EMS, which could not run it yet; next try in 1m30s</code></td>
+<td>The media service could not take the jobs; they are tried again on their own. See <a href="media-service.html">The media service</a> if it lasts.</td>
+</tr>
+<tr>
+<td><code>kind &lt;name&gt;</code></td>
+<td>warn</td>
+<td><code>340 waiting, the oldest for 2h05m, none done in the last hour</code></td>
+<td>The worker for this kind is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab.</td>
+</tr>
+<tr>
+<td><code>kind &lt;name&gt;</code></td>
+<td>fail</td>
+<td><code>340 waiting, and no worker offers this kind, the oldest for 12m30s</code></td>
+<td>See <a href="#work-that-nothing-will-run">Work that nothing will run</a>.</td>
+</tr>
+<tr>
+<td><code>failed work</code></td>
+<td>warn</td>
+<td><code>3 failed instances, run again on their own after 1 h, 6 h and 24 h</code></td>
+<td>Nothing yet: failed work is run again on its own.</td>
+</tr>
+<tr>
+<td><code>failed work</code></td>
+<td>fail</td>
+<td><code>2 instances failed again after three more runs and need a person (pipeline-instances --status failed)</code></td>
+<td>List them with <code>pipeline-instances -s failed</code> and see <a href="processing.html">Processing and pipelines</a>.</td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>ok</td>
+<td><code>5 steps met input nothing can process, and will not be run again</code></td>
+<td>Nothing: a damaged or unreadable file. Running it again would give the same result.</td>
+</tr>
+<tr>
+<td><code>quiet steps</code></td>
+<td>warn</td>
+<td><code>1 running step silent for 30m00s or more: media-ingest/transcode</code></td>
+<td>A step has written nothing for a long while. It keeps running; nothing stops a step for taking long.</td>
+</tr>
+<tr>
+<td><code>queue &lt;name&gt;</code></td>
+<td>fail</td>
+<td><code>4 entries dropped after their delivery attempts (queue-dead /var/queues/archive-bridge: --retry or --drop)</code></td>
+<td>Look at them with <code>queue-dead &lt;path&gt;</code>, then put them back with <code>--retry</code> or delete them with <code>--drop</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>How long a step may stay silent before it counts as quiet is the setting <a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a>, 30 minutes by default.</p>
+<p>Modules add checks of their own, through the services they run. Each is asked only while its service runs:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>From</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ems</code> and <code>ems …</code></td>
+<td>the <code>ems-link</code> service (<code>ems-status --checks</code>)</td>
+<td>Whether the media service answers, its model worker, each degradation and the card; the table is in <a href="media-service.html#the-health-checks">The media service</a>. Only <code>ems gpu</code> can fail.</td>
+</tr>
+<tr>
+<td><code>llm</code> and <code>llm model</code></td>
+<td>the <code>llm-link</code> service (<code>llm-status --checks</code>)</td>
+<td>Whether the language model answers, whose it is and where it runs, and whether its model has been tried with the assistant. See <a href="language-model.html">The language model</a>.</td>
+</tr>
+<tr>
+<td>the service&#39;s name</td>
+<td>any service whose check does not answer</td>
+<td><code>its check did not answer</code>, as a warning.</td>
+</tr>
+</tbody></table>
+</div>
+<p>When a check names a hosted language model, its reason says so plainly, for example <code>…: questions, and what the assistant reads to answer them, leave this host</code>.</p>
+<h2 id="the-overview-tab">The Overview tab<a class="anchor" href="#the-overview-tab" aria-label="Link to this section"></a></h2>
+<p>Under the checks, <strong>Overview</strong> shows the machine and the work in five parts.</p>
+<ul>
+<li><strong>CPU</strong> and <strong>Memory</strong> tiles: the share of all processor cores EiN&#39;s container uses, with the number of cores and the load, and its memory against the container&#39;s limit, each with a small chart of the last six hours. A tile turns amber at 75% and red at 90%.</li>
+<li><strong>GPU</strong> and <strong>VRAM</strong> tiles, beside them, when the media service has a graphics card: how busy the card is and its temperature, and its memory in use. They come from the <code>ems</code> module and are not there without a card or without the media service; see <a href="gpu.html">The graphics card</a>.</li>
+<li><strong>Work</strong>: <strong>Completed per hour</strong>, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and <strong>Instances by state</strong>, a bar of <strong>Queued</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Completed</strong> and <strong>Cancelled</strong>.</li>
+<li><strong>Storage</strong>: each storage tier, its path, a bar of used and free space, <code>% used</code>, how much it grows per day and, when it grows, <code>full in ~N days</code>, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database&#39;s size is in the corner. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</li>
+<li>A line at the bottom naming the instance: <strong>host</strong>, <strong>uptime</strong>, <strong>deno</strong> and <strong>database</strong>. It tells you which EiN you are looking at when you run more than one.</li>
+</ul>
+<p>The storage projection is measured over the last seven days. A tier that is not growing has no &quot;full in&quot; figure, and a tier filling up fast is the one thing on this tab that needs action before it becomes a problem: <a href="data.html">Your data</a> covers moving the archive to a bigger disk.</p>
+<h2 id="the-work-tab">The Work tab<a class="anchor" href="#the-work-tab" aria-label="Link to this section"></a></h2>
+<p><strong>Work</strong> shows what the pipelines are doing; <a href="processing.html">Processing and pipelines</a> explains pipelines, how to rerun, cancel and retry work, and what each one does.</p>
+<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone</figcaption></figure>
+<ul>
+<li>The pipeline table has one row per defined pipeline, even one that has never run, with <strong>Workload</strong>, <strong>Waiting</strong>, <strong>Queued</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Completed</strong> and <strong>Cancelled</strong>. <strong>In</strong> is the work arriving for it per hour, <strong>Out</strong> what it finished in the last hour, and <strong>ETA</strong> the waiting work divided by <strong>Out</strong>; <code>—</code> when nothing finished recently. When queue entries were dropped after their delivery attempts, a red <strong>N dropped</strong> stands above the table. Choose a row to see that pipeline&#39;s instances.</li>
+<li><strong>Kinds of work</strong> lists each kind of job in the work pools that has something left or was done lately: <strong>Left</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. A red <strong>no worker</strong> badge marks a kind nothing runs; a yellow <strong>waiting for EMS</strong> badge a kind resting because the media service could not run it, with the next try in its tooltip.</li>
+<li><strong>Ongoing</strong> lists the instances running now, with how long each has run. Steps that have written nothing for the quiet time are listed above it in a yellow box.</li>
+</ul>
+<h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
+<p>When jobs of some kind are ready and no running worker offers that kind for more than five minutes, a red box, <strong>Work that nothing will run</strong>, stands above the tabs on every tab, and the <code>kind &lt;name&gt;</code> check fails. The box names the pool, how many jobs are ready and for how long, and the pipelines that queue that kind.</p>
+<ul>
+<li><p>When it names pipelines, the worker that should run the kind is not running. Open <strong>Services</strong> and start the stopped one, or read the <strong>Log</strong> tab for why it stopped.</p>
+</li>
+<li><p>When it says that no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was removed or renamed. Cancel them with the command the box gives:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+pool cancel /var/pools/media --kind gpu-describe</code></pre></div>
+<p>When the kind was renamed, the pipelines queue the jobs again under the name they use now.</p>
+</li>
+</ul>
+<h2 id="the-media-service-tab">The Media service tab<a class="anchor" href="#the-media-service-tab" aria-label="Link to this section"></a></h2>
+<p>The <code>ems</code> module adds this tab. It shows the media service&#39;s version, its models, what it runs now and what is on the graphics card; <a href="media-service.html#on-the-dashboard">The media service</a> describes it.</p>
+<h2 id="the-services-tab">The Services tab<a class="anchor" href="#the-services-tab" aria-label="Link to this section"></a></h2>
+<p><strong>Services</strong> lists the services inside EiN, the ones that are not running first. Each row has the service&#39;s name, its own status line or description, how long it has been up, how many times it has restarted (<code>×3</code>), and its state: <strong>running</strong>, <strong>starting</strong>, <strong>stopping</strong>, <strong>stopped</strong>, <strong>failed</strong> or <strong>disabled</strong>. The heading counts them, <code>20 healthy</code>, or in red <code>2 down</code>.</p>
+<figure class="shot"><a href="../../assets/shots/system-services@2x.webp"><img src="../../assets/shots/system-services.webp" srcset="../../assets/shots/system-services.webp 1x, ../../assets/shots/system-services@2x.webp 2x" alt="The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 8h 50m and running, with restart and stop buttons" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A service that has restarted many times, or is down while enabled, is the row to look at</figcaption></figure>
+<p>An administrator has <strong>Restart</strong> and <strong>Stop</strong> on a running service and <strong>Start</strong> on a stopped one. A disabled service has no buttons; enable it from the terminal first. <a href="services-logs.html">Services and logs</a> explains each service and the commands behind these buttons.</p>
+<h2 id="the-log-tab">The Log tab<a class="anchor" href="#the-log-tab" aria-label="Link to this section"></a></h2>
+<p><strong>Log</strong> has two cards. <strong>Recent problems</strong> shows the last 10 lines logged at WARN or ERROR, newest first, or <strong>Nothing logged at WARN or above</strong>. <strong>Live log</strong> follows the system log, <code>/var/logs/system</code>, as it is written: choose <strong>DEBUG</strong>, <strong>INFO</strong>, <strong>WARN</strong> or <strong>ERROR</strong> to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.</p>
+<figure class="shot"><a href="../../assets/shots/system-log@2x.webp"><img src="../../assets/shots/system-log.webp" srcset="../../assets/shots/system-log.webp 1x, ../../assets/shots/system-log@2x.webp 2x" alt="The Log tab: Recent problems with ten WARN lines from pool-worker, and below it the Live log of /var/logs/system with INFO lines from http" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Recent problems answers whether anything went wrong while you were not watching</figcaption></figure>
+<p>A warning such as <code>pooled step could not run yet, kind resting</code> means the media service was not ready for a job; the job is tried again on its own. <a href="services-logs.html">Services and logs</a> covers the logs and <code>dmesg</code>.</p>
+<h2 id="ask-in-the-terminal">Ask in the terminal<a class="anchor" href="#ask-in-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Every figure on the dashboard comes from an ordinary command, and you can run the same commands in EiN&#39;s terminal or over SSH. <code>health</code> gives the verdict and every check:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+health</code></pre></div>
+<div class="code"><pre tabindex="0"><code>catching up: 1,240 jobs waiting, the slowest kind done in 2h48m
+warn  kind transcribe  40 waiting for EMS, which could not run it yet; next try in 1m30s
+ok    ems              EMS 3f2a91c answering, up 2.1h
+ok    intake           12 matched triggers waiting to start pipeline work
+ok    kind faces       1,188 left, 420/h  eta 2.8h</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you want to know</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The verdict and the checks</td>
+<td><a href="../reference/commands-core.html#health"><code>health</code></a></td>
+</tr>
+<tr>
+<td>CPU, memory and event-loop lag, with history</td>
+<td><a href="../reference/commands-core.html#host-metrics"><code>host-metrics</code></a></td>
+</tr>
+<tr>
+<td>Free space per tier, when it fills, the database&#39;s size</td>
+<td><a href="../reference/commands-core.html#df"><code>df</code></a></td>
+</tr>
+<tr>
+<td>Which instance, its versions and uptime</td>
+<td><a href="../reference/commands-core.html#system-info"><code>system-info</code></a></td>
+</tr>
+<tr>
+<td>Each pool and kind of job: left, rates, oldest waiting</td>
+<td><a href="../reference/commands-core.html#pool-stat"><code>pool-stat</code></a></td>
+</tr>
+<tr>
+<td>Every pipeline&#39;s counts and rates</td>
+<td><a href="../reference/commands-core.html#pipeline-overview"><code>pipeline-overview</code></a></td>
+</tr>
+<tr>
+<td>The meters services add, such as the card&#39;s memory</td>
+<td><a href="../reference/commands-core.html#gauges"><code>gauges</code></a></td>
+</tr>
+<tr>
+<td>The services and their status lines</td>
+<td><a href="../reference/commands-core.html#service-list"><code>service-list --detail</code></a></td>
+</tr>
+<tr>
+<td>The last problems in the log</td>
+<td><a href="../reference/commands-core.html#dmesg"><code>dmesg --level warn -n 10</code></a></td>
+</tr>
+<tr>
+<td>What is running now, and who is connected</td>
+<td><a href="../reference/commands-core.html#ps"><code>ps</code></a>, <a href="../reference/commands-core.html#who"><code>who</code></a></td>
+</tr>
+</tbody></table>
+</div>
+<p><code>host-metrics</code> also shows the event loop&#39;s lag, <code>lag     p99 1.2 ms  max 8.4 ms</code>, which the dashboard does not: how long ready work waits for EiN&#39;s process. High lag with low CPU is the case where everything feels slow and nothing looks busy; <a href="performance.html">Performance and sizing</a> covers it.</p>
+<p>Put <code>JSON_OUTPUT=1</code> in front of any of them for the answer as JSON. The verdict is then one of <code>healthy</code>, <code>catching-up</code>, <code>stuck</code> and <code>needs-person</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+JSON_OUTPUT=1 health | jq -r .verdict</code></pre></div>
+<h2 id="watch-it-live-with-top">Watch it live with top<a class="anchor" href="#watch-it-live-with-top" aria-label="Link to this section"></a></h2>
+<p><code>top</code> draws on one screen what the dashboard spreads over its tabs: a CPU graph and the load, memory, the event loop and the services&#39; gauges, the disks, the verdict with every check that is not fine and the work done in the last hour, the running commands, the sessions, the services and the latest problems. It redraws every 2 seconds.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+top</code></pre></div>
+<figure class="shot"><a href="../../assets/shots/terminal-top@2x.webp"><img src="../../assets/shots/terminal-top.webp" srcset="../../assets/shots/terminal-top.webp 1x, ../../assets/shots/terminal-top@2x.webp 2x" alt="The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services" width="1440" height="780" loading="lazy" decoding="async"></a><figcaption>top fits the whole dashboard into one terminal, and works over SSH</figcaption></figure>
+<p>In the terminal panel, press <kbd>Alt</kbd>+<kbd>M</kbd> first to give it the whole window (<a href="../shell/terminal.html">The terminal</a>).</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>q</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>Quit</td>
+</tr>
+<tr>
+<td><kbd>↑</kbd> <kbd>↓</kbd>, <kbd>k</kbd> <kbd>j</kbd></td>
+<td>Scroll the list of commands</td>
+</tr>
+<tr>
+<td><kbd>PgUp</kbd> <kbd>PgDn</kbd>, <kbd>Home</kbd> <kbd>End</kbd></td>
+<td>Scroll a page, or to the top or bottom</td>
+</tr>
+<tr>
+<td><kbd>s</kbd></td>
+<td>Sort the commands: newest, oldest, by user or by command</td>
+</tr>
+<tr>
+<td><kbd>+</kbd> and <kbd>-</kbd></td>
+<td>Update less or more often, in steps from 0.5 to 60 seconds</td>
+</tr>
+<tr>
+<td><kbd>p</kbd></td>
+<td>Pause, so a list can be read; again to go on</td>
+</tr>
+<tr>
+<td><kbd>Space</kbd></td>
+<td>Update now</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>top -d 5</code> starts at 5 seconds between updates. <code>top -n 1</code> writes one frame and stops, which is what you want in a script or over <code>ssh</code> without a terminal.</p>
+<h2 id="check-from-another-computer">Check from another computer<a class="anchor" href="#check-from-another-computer" aria-label="Link to this section"></a></h2>
+<p>EiN sends no e-mail and raises no alert outside itself: the dashboard and <code>health</code> are where problems show. To look without opening the web interface, send <code>health</code> over SSH:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.local health</code></pre></div>
+<p><code>health</code> always ends with exit status 0, whatever the verdict, so a script that watches EiN has to read the verdict. The first word of the text is enough, or the JSON:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer, for example from cron</span>
+verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPUT=1 health&#x27;</span> | jq -r .verdict)
+[ <span class="hljs-string">&quot;<span class="hljs-variable">$verdict</span>&quot;</span> = needs-person ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;EiN needs a person&quot;</span> | mail -s <span class="hljs-string">&quot;EiN&quot;</span> helen@example.com</code></pre></div>
+<p><a href="../shell/ssh-sftp.html">SSH and SFTP</a> explains signing in with a key so a script needs no password.</p>
+<h2 id="where-the-figures-come-from">Where the figures come from<a class="anchor" href="#where-the-figures-come-from" aria-label="Link to this section"></a></h2>
+<p>The <code>metrics-sampler</code> service records the machine&#39;s and the work&#39;s figures, one log per series under <code>/var/logs/metrics</code>, and the dashboard, <code>top</code> and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Series</th>
+<th>What it holds</th>
+<th>How often</th>
+<th>Kept</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cpu</code></td>
+<td>Processor time used by EiN&#39;s container</td>
+<td>15 seconds</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>Memory in use against the container&#39;s limit</td>
+<td>15 seconds</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td><code>runtime</code></td>
+<td>Event-loop lag</td>
+<td>15 seconds</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td><code>pools</code></td>
+<td>Jobs per pool, by state</td>
+<td>15 seconds</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td><code>pipelines</code></td>
+<td>Instances completed per pipeline</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>disk</code></td>
+<td>Free and total space per storage tier</td>
+<td>15 minutes</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td><code>nodes</code></td>
+<td>How many nodes of each type</td>
+<td>15 minutes</td>
+<td>365 days</td>
+</tr>
+</tbody></table>
+</div>
+<p>The <code>ems</code> module adds a <code>gpu</code> series, sampled every 15 seconds by its <code>gpu-sampler</code> service, for the <strong>GPU</strong> and <strong>VRAM</strong> tiles. CPU and memory are EiN&#39;s container&#39;s own, read from its cgroup, not the whole machine&#39;s: the media service and the language model run in containers of their own and do not count here.</p>
+<p>How the archive has grown over the years is not on the dashboard: <strong>Statistics</strong>, under <strong>System</strong>, shows it, and anyone can open it (<a href="../guide/home.html">Home, memories and statistics</a>).</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>warming up</strong> stays, the tiles are empty, <code>host-metrics</code> says <code>no metrics sampled yet — is metrics-sampler running?</code></td>
+<td>The <code>metrics-sampler</code> service is not running.</td>
+<td>Start it on the <strong>Services</strong> tab, or <code>service start metrics-sampler</code>, and read the <strong>Log</strong> tab for why it stopped.</td>
+</tr>
+<tr>
+<td><strong>Storage</strong> says <strong>No tier data sampled yet</strong>, <code>df</code> says <code>no disk sample yet — is metrics-sampler running?</code></td>
+<td>The disk is sampled every 15 minutes; right after a start there is no sample yet.</td>
+<td>Wait 15 minutes. If it stays, check <code>metrics-sampler</code> as above.</td>
+</tr>
+<tr>
+<td><strong>offline</strong> next to the verdict</td>
+<td>The browser lost its connection to EiN, for example while EiN restarts.</td>
+<td>Wait; it reconnects by itself. If it stays, reload the page and see <a href="troubleshooting.html">Troubleshooting</a>.</td>
+</tr>
+<tr>
+<td><strong>Stuck</strong>, with <code>waiting for EMS</code> on the kinds</td>
+<td>The media service is down, restarting or busy loading models.</td>
+<td>See <a href="media-service.html">The media service</a>. The work goes on by itself once it answers.</td>
+</tr>
+<tr>
+<td><strong>Stuck</strong>, with <code>none done in the last hour</code> on a kind</td>
+<td>The worker for that kind is stopped or hangs.</td>
+<td>Look on <strong>Services</strong> for a stopped or often restarted worker, and on <strong>Log</strong> for its errors. <a href="services-logs.html">Services and logs</a>.</td>
+</tr>
+<tr>
+<td><strong>Needs a person</strong>, <code>kind &lt;name&gt;</code> failed</td>
+<td>Nothing runs that kind of job.</td>
+<td><a href="#work-that-nothing-will-run">Work that nothing will run</a>.</td>
+</tr>
+<tr>
+<td><strong>Needs a person</strong>, <code>ems gpu</code> failed</td>
+<td>The media service is meant to have a graphics card and sees none.</td>
+<td><a href="gpu.html#be-told-when-the-card-goes-missing">The graphics card</a>.</td>
+</tr>
+<tr>
+<td><strong>Needs a person</strong>, <code>failed work</code> or <code>queue &lt;name&gt;</code> failed</td>
+<td>Work failed for good, or queue entries were dropped.</td>
+<td>Follow the command in the check&#39;s reason, and see <a href="processing.html">Processing and pipelines</a>.</td>
+</tr>
+<tr>
+<td><code>full in ~N days</code> in red</td>
+<td>A storage tier will be full within two weeks at its present rate.</td>
+<td>Free space, or move the archive to a bigger disk: <a href="data.html">Your data</a>.</td>
+</tr>
+<tr>
+<td>The CPU or memory tile is red for long</td>
+<td>EiN&#39;s container uses 90% or more of what it has.</td>
+<td><a href="performance.html">Performance and sizing</a>.</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong> is not in the sidebar</td>
+<td>You are not an administrator.</td>
+<td>Ask an administrator, or open <code>/system</code> to read the figures; <code>health</code> works for everyone.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="processing.html">Processing and pipelines</a></li>
+<li><a href="services-logs.html">Services and logs</a></li>
+<li><a href="media-service.html">The media service</a></li>
+<li><a href="language-model.html">The language model</a></li>
+<li><a href="gpu.html">The graphics card</a></li>
+<li><a href="performance.html">Performance and sizing</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+<li><a href="../reference/commands-core.html">Core commands</a></li>
+<li><a href="../reference/settings.html">Settings</a></li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="language-model.html" rel="prev"><span>Previous</span>The language model</a><a class="next" href="processing.html" rel="next"><span>Next</span>Processing and pipelines</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/monitoring.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-dashboard">Open the dashboard</a></li><li><a href="#what-the-verdict-means">What the verdict means</a></li><li><a href="#read-the-checks">Read the checks</a></li><li><a href="#the-overview-tab">The Overview tab</a></li><li><a href="#the-work-tab">The Work tab</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li><a href="#the-media-service-tab">The Media service tab</a></li><li><a href="#the-services-tab">The Services tab</a></li><li><a href="#the-log-tab">The Log tab</a></li><li><a href="#ask-in-the-terminal">Ask in the terminal</a></li><li><a href="#watch-it-live-with-top">Watch it live with top</a></li><li><a href="#check-from-another-computer">Check from another computer</a></li><li><a href="#where-the-figures-come-from">Where the figures come from</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

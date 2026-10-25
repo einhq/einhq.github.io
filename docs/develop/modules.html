@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Writing a module – EiN documentation</title>
+    <meta name="description" content="A module is how EiN learns to do something new: its commands, pages, background services, settings and pipelines come in one folder that you can install on any EiN. This page is for developers. It walks through a small module from its first file to publishing it, and shows where each kind of part goes.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/develop/modules.html">
+    <meta property="og:title" content="Writing a module – EiN documentation">
+    <meta property="og:description" content="A module is how EiN learns to do something new: its commands, pages, background services, settings and pipelines come in one folder that you can install on any EiN. This page is for developers. It walks through a small module from its first file to publishing it, and shows where each kind of part goes.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/develop/modules.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section class="here"><h2>Developing</h2><ul><li><a href="modules.html" aria-current="page">Writing a module</a></li><li><a href="manifest.html">The module manifest</a></li><li><a href="assistant.html">Teaching the assistant</a></li><li><a href="source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Developing</p>
+          <h1>Writing a module</h1>
+        </header>
+        <article class="prose">
+<p>A module is how EiN learns to do something new: its commands, pages, background services, settings
+and pipelines come in one folder that you can install on any EiN. This page is for developers. It
+walks through a small module from its first file to publishing it, and shows where each kind of
+part goes.</p>
+<h2 id="what-a-module-is">What a module is<a class="anchor" href="#what-a-module-is" aria-label="Link to this section"></a></h2>
+<p>A module is a folder with a <code>mod.json</code> at its top, kept in a repository of its own named
+<code>module-&lt;name&gt;</code>. Core knows no module by name: the Archive, the assistant and the media service
+client are modules like the one you write, and you can read their repositories to see any part on
+this page at full size.</p>
+<p>When EiN sets a module up, it finds most of what the module brings by where it is in the folder.
+The manifest says who the module is, what it shares with other modules, and what it adds to
+machinery core already has. Nothing in the manifest is code.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>In the module</th>
+<th>What EiN does with it at setup</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mod.json</code></td>
+<td>Reads and checks it; refuses the module when it is wrong</td>
+</tr>
+<tr>
+<td><code>bin/</code></td>
+<td>Adds the folder to every shell&#39;s <code>PATH</code>; each file is a command, in bash or TypeScript</td>
+</tr>
+<tr>
+<td><code>services/&lt;name&gt;/</code></td>
+<td>Registers and enables a background service: <code>start.sh</code> with a <code>config.json</code></td>
+</tr>
+<tr>
+<td><code>pipelines/*.yaml</code></td>
+<td>Registers each pipeline definition</td>
+</tr>
+<tr>
+<td><code>ui/</code></td>
+<td>Bundles the pages <code>mod.json</code> names; links <code>ui/nav.json</code> as the module&#39;s sidebar and top-bar entries</td>
+</tr>
+<tr>
+<td><code>etc/config</code></td>
+<td>Links it as <code>/etc/config.d/&lt;name&gt;</code>: the module&#39;s own choice of settings</td>
+</tr>
+<tr>
+<td><code>etc/&lt;x&gt;.d/</code></td>
+<td>Links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for the module that reads that folder</td>
+</tr>
+<tr>
+<td><code>etc/</code> (anything else)</td>
+<td>Copies it into <code>/etc</code> when it is not there yet; never overwrites</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>Links it as <code>/usr/docs/modules/&lt;name&gt;</code>: the module&#39;s guide</td>
+</tr>
+<tr>
+<td><code>lib/</code>, <code>types/</code>, <code>test/</code></td>
+<td>Nothing; ordinary source, reached through the manifest&#39;s <code>imports</code> and <code>exports</code></td>
+</tr>
+<tr>
+<td><code>uninstall.sh</code></td>
+<td>Runs it when the module is removed</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="manifest.html">The module manifest</a> describes every field of <code>mod.json</code>. This page uses the few a
+first module needs.</p>
+<h2 id="before-you-start">Before you start<a class="anchor" href="#before-you-start" aria-label="Link to this section"></a></h2>
+<p>You need:</p>
+<ul>
+<li>An EiN you are the administrator of, to install the module on while you work. A test
+installation is better than the one holding your family&#39;s archive.</li>
+<li>A place for the module&#39;s files that you can edit, on the machine EiN runs on.</li>
+<li>For publishing, a repository on GitHub, Forgejo or Gitea.</li>
+</ul>
+<p>You do not need a copy of EiN&#39;s source to write a module: EiN bundles a module&#39;s pages and runs its
+TypeScript itself. To type-check a module and run its tests you work inside a checkout of core,
+which <a href="source.html">Building from source</a> sets up.</p>
+<p>There is no command that makes a new module for you. Start from the folder below, or copy a small
+published module such as <code>module-ems</code> and cut it down.</p>
+<h2 id="lay-out-the-module">Lay out the module<a class="anchor" href="#lay-out-the-module" aria-label="Link to this section"></a></h2>
+<p>This page builds <code>recipes</code>, a module that keeps the Wrenfield family&#39;s recipes as nodes under
+<code>/archive/recipes</code>, with a command to add one, a command to list them and a page that shows them:</p>
+<div class="code"><pre tabindex="0"><code>module-recipes/
+├── mod.json
+├── bin/
+│   ├── recipe-add          a command in bash
+│   └── recipe-list         a command in TypeScript
+├── ui/
+│   ├── nav.json            its sidebar entry
+│   └── pages/
+│       └── recipes.tsx     its page
+└── docs/
+    └── index.md            its guide</code></pre></div>
+<p>The module&#39;s name is lower case, digits and hyphens. It is the folder&#39;s name under
+<code>/usr/modules</code>, the owner EiN shows beside its commands and settings, and the prefix of its import
+aliases (<code>@recipes/…</code>).</p>
+<h2 id="write-the-manifest">Write the manifest<a class="anchor" href="#write-the-manifest" aria-label="Link to this section"></a></h2>
+<p>Start <code>mod.json</code> with who the module is and the core it is written for:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;recipes&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The family&#x27;s recipes: who cooked what, for how many&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ruby Wrenfield&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MIT&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;roots&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;/archive/recipes&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;nodeTypes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;recipe&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Recipe&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;content&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/archive/recipes&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;One dish: its title and how many it serves.&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/recipes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/pages/recipes.tsx&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does here</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>The module&#39;s name; it must match the folder it is installed in</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Its semver version, which other modules&#39; <code>dependencies</code> ranges are checked against</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>One sentence for <code>mod list</code>, <strong>Settings → Modules</strong> and the documentation</td>
+</tr>
+<tr>
+<td><code>coreApi</code></td>
+<td>The range of core&#39;s module API the module is written against; <code>mod setup</code> refuses it when this core does not satisfy it</td>
+</tr>
+<tr>
+<td><code>roots</code></td>
+<td>Folders under <code>/archive</code> the module&#39;s content lives in; setup creates a missing one and nothing ever removes one</td>
+</tr>
+<tr>
+<td><code>nodeTypes</code></td>
+<td>The node types it defines, for the documentation; one with a <code>root</code> is what an <code>@</code> in the search box completes to</td>
+</tr>
+<tr>
+<td><code>ui.routes</code></td>
+<td>Its pages, each route with the file that draws it</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>mod info</code> on any installed module shows the core API this EiN provides beside the range the module
+asks for. A module without <code>coreApi</code> still installs, with a warning.</p>
+<h2 id="add-a-command-in-bash">Add a command in bash<a class="anchor" href="#add-a-command-in-bash" aria-label="Link to this section"></a></h2>
+<p>A file in <code>bin/</code> that starts with <code>#!bash</code> is a command written in EiN&#39;s shell language. The <code>arg</code>
+builtin declares its arguments, which gives it <code>--help</code>, <kbd>Tab</kbd> completion and an entry in
+the command reference, the same as EiN&#39;s own commands. Write <code>bin/recipe-add</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment">#!bash</span>
+arg --desc <span class="hljs-string">&quot;Add a recipe&quot;</span>
+arg --effect write
+arg <span class="hljs-string">&#x27;&lt;title&gt;&#x27;</span> string <span class="hljs-string">&quot;The dish, as the family calls it&quot;</span>
+arg -s --serves number <span class="hljs-string">&quot;How many it serves&quot;</span>
+arg --example <span class="hljs-string">&quot;recipe-add &#x27;Apple cake&#x27; --serves 8&quot;</span>
+arg --returns <span class="hljs-string">&quot;nothing; the recipe node is created.&quot;</span>
+arg --<span class="hljs-built_in">export</span>
+
+name=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$TITLE</span>&quot;</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-string">&#x27;_&#x27;</span> | <span class="hljs-built_in">tr</span> -<span class="hljs-built_in">cd</span> <span class="hljs-string">&#x27;A-Za-z0-9_-&#x27;</span>)
+mknode -t recipe <span class="hljs-string">&quot;/archive/recipes/<span class="hljs-variable">$name</span>&quot;</span> --as <span class="hljs-string">&quot;title=<span class="hljs-variable">$TITLE</span>&quot;</span> --as <span class="hljs-string">&quot;serves=<span class="hljs-variable">$SERVES</span>&quot;</span> || <span class="hljs-built_in">exit</span> 1
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;added /archive/recipes/<span class="hljs-variable">$name</span>&quot;</span></code></pre></div>
+<p><code>arg --export</code> reads the arguments and sets <code>$TITLE</code> and <code>$SERVES</code>. A command run this way runs
+with the access of whoever runs it, like any script. <a href="../shell/bash.html#give-a-script-options-and-help-with-arg">The shell language</a>
+lists every form <code>arg</code> takes.</p>
+<p>Say what the command does to the system with <code>arg --effect read</code> or <code>write</code>. The assistant runs a
+<code>read</code> command at once and shows a <code>write</code> to the person first; a command that says nothing is
+treated as a write.</p>
+<h2 id="add-a-command-in-typescript">Add a command in TypeScript<a class="anchor" href="#add-a-command-in-typescript" aria-label="Link to this section"></a></h2>
+<p>A file in <code>bin/</code> that starts with <code>#!ts</code> is a TypeScript command. Its default export is a function
+that takes the command object and returns an exit code, and carries a <code>spec</code> that describes it.
+Write <code>bin/recipe-list</code>:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code>#!ts
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">CmdReturn</span>, <span class="hljs-title class_">Command</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/client&#x27;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">ROOT</span> = <span class="hljs-string">&#x27;/archive/recipes&#x27;</span>;
+
+<span class="hljs-keyword">const</span> recipeList = <span class="hljs-title function_">async</span> (<span class="hljs-attr">cmd</span>: <span class="hljs-title class_">Command</span>): <span class="hljs-function"><span class="hljs-params">CmdReturn</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> entries = <span class="hljs-keyword">await</span> cmd.<span class="hljs-property">sys</span>.<span class="hljs-property">vfs</span>.<span class="hljs-title function_">children</span>(cmd.<span class="hljs-property">access</span>, <span class="hljs-variable constant_">ROOT</span>).<span class="hljs-title function_">catch</span>(<span class="hljs-function">() =&gt;</span> []);
+  <span class="hljs-keyword">const</span> recipes = entries
+    .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> entry.<span class="hljs-property">node</span>.<span class="hljs-property">type</span> === <span class="hljs-string">&#x27;recipe&#x27;</span>)
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> ({
+      <span class="hljs-attr">path</span>: <span class="hljs-string">`<span class="hljs-subst">${ROOT}</span>/<span class="hljs-subst">${entry.name}</span>`</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-title class_">String</span>(entry.<span class="hljs-property">node</span>.<span class="hljs-property">attrs</span>.<span class="hljs-property">title</span> ?? entry.<span class="hljs-property">name</span>),
+      <span class="hljs-attr">serves</span>: <span class="hljs-title class_">String</span>(entry.<span class="hljs-property">node</span>.<span class="hljs-property">attrs</span>.<span class="hljs-property">serves</span> ?? <span class="hljs-string">&#x27;&#x27;</span>),
+    }));
+
+  <span class="hljs-keyword">if</span> (cmd.<span class="hljs-property">json</span>) <span class="hljs-keyword">await</span> cmd.<span class="hljs-title function_">writeJSON</span>(recipes);
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> recipe <span class="hljs-keyword">of</span> recipes) <span class="hljs-keyword">await</span> cmd.<span class="hljs-title function_">writeLn</span>(<span class="hljs-string">`<span class="hljs-subst">${recipe.title}</span>  (serves <span class="hljs-subst">${recipe.serves || <span class="hljs-string">&#x27;?&#x27;</span>}</span>)`</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+};
+
+recipeList.<span class="hljs-property">spec</span> = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;recipe-list&#x27;</span>,
+  <span class="hljs-attr">effect</span>: <span class="hljs-string">&#x27;read&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;List the recipes, with how many each serves&#x27;</span>,
+  <span class="hljs-attr">args</span>: [],
+  <span class="hljs-attr">flags</span>: [],
+  <span class="hljs-attr">examples</span>: [<span class="hljs-string">&#x27;recipe-list&#x27;</span>],
+  <span class="hljs-attr">returns</span>: <span class="hljs-string">&#x27;One entry per recipe: path, title and serves.&#x27;</span>,
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> recipeList;</code></pre></div>
+<p>A <code>#!ts</code> command runs inside EiN&#39;s own process, with all of its permissions. EiN therefore runs one
+only from a module under <code>/usr/modules</code>, where only the administrator can put files. The same file
+anywhere else, a home folder included, stops with
+<code>a #!ts command runs only from a module in /usr/modules</code> and status <code>126</code>. A person&#39;s own commands
+are bash scripts.</p>
+<p>Module code imports from core only <code>@ein/client</code>, the module API. What a command uses most:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cmd.args</code></td>
+<td>The words after the command&#39;s name; read flags from them with <code>parseArgs</code></td>
+</tr>
+<tr>
+<td><code>cmd.json</code></td>
+<td>True when the caller wants JSON, as the web interface and <code>JSON_OUTPUT=1</code> do</td>
+</tr>
+<tr>
+<td><code>cmd.writeLn</code>, <code>cmd.writeJSON</code>, <code>cmd.writeError</code></td>
+<td>Write a line, a JSON answer, or a line on stderr</td>
+</tr>
+<tr>
+<td><code>cmd.stdin</code></td>
+<td>Standard input: <code>for await (const line of cmd.stdin.lines())</code></td>
+</tr>
+<tr>
+<td><code>cmd.execute(script)</code></td>
+<td>Run a shell line and get its <code>code</code>, <code>stdout</code> and <code>stderr</code>; quote paths with <code>shq</code></td>
+</tr>
+<tr>
+<td><code>cmd.sys.vfs</code></td>
+<td>The tree, read and written with <code>cmd.access</code>, the caller&#39;s access</td>
+</tr>
+<tr>
+<td><code>cmd.env</code>, <code>cmd.cwd</code></td>
+<td>The caller&#39;s environment, settings included, and working folder</td>
+</tr>
+<tr>
+<td><code>cmd.interrupted</code>, <code>cmd.onInterrupt</code></td>
+<td>Whether the person pressed <kbd>Ctrl</kbd>+<kbd>C</kbd>, and a handler for it</td>
+</tr>
+</tbody></table>
+</div>
+<p>And the parts of <code>spec</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>The command&#39;s name, the same as the file&#39;s</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>What it is for, in one line, for <code>--help</code>, the command reference and the assistant</td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td>Each positional argument: <code>name</code>, <code>type</code> (<code>string</code>, <code>path</code>, <code>user</code>, <code>group</code>, <code>command</code>, <code>number</code>, <code>subcommand</code>) and <code>description</code></td>
+</tr>
+<tr>
+<td><code>flags</code></td>
+<td>Each flag: <code>name</code>, <code>type</code> (<code>bool</code> for a switch) and <code>description</code></td>
+</tr>
+<tr>
+<td><code>effect</code></td>
+<td><code>read</code> or <code>write</code>; a reading command marks the arguments or flags that make it a write with <code>writes</code></td>
+</tr>
+<tr>
+<td><code>examples</code></td>
+<td>One or two real command lines</td>
+</tr>
+<tr>
+<td><code>returns</code></td>
+<td>What it answers with under <code>JSON_OUTPUT=1</code>, in a sentence</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td><code>true</code> when only an administrator may run it; for anyone else it is left out of completion and the reference</td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td><code>false</code> for a command that writes text even when JSON is asked for</td>
+</tr>
+</tbody></table>
+</div>
+<p>A command may import packages through the manifest&#39;s <code>imports</code>, such as
+<code>&quot;@std/path&quot;: &quot;jsr:@std/path@^1.1.3&quot;</code>, and files of its own through aliases named after the module,
+such as <code>&quot;@recipes/store&quot;: &quot;./lib/store.ts&quot;</code>. A file outside the module is reached only through
+another module&#39;s exports (see <a href="#use-another-module">Use another module</a>).</p>
+<h2 id="try-the-module-on-your-ein">Try the module on your EiN<a class="anchor" href="#try-the-module-on-your-ein" aria-label="Link to this section"></a></h2>
+<p>With the standard installation, EiN keeps the modules it installs in <code>modules/</code> in its data folder,
+<code>~/ein/data/modules</code> unless you chose another <code>EIN_DATA</code>, which EiN sees as <code>/var/lib/modules</code>.</p>
+<ol>
+<li><p>Put the module&#39;s folder there under the module&#39;s name, and make its commands executable:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+<span class="hljs-built_in">cp</span> -r ~/src/module-recipes ~/ein/data/modules/recipes
+<span class="hljs-built_in">chmod</span> 755 ~/ein/data/modules/recipes/bin/*</code></pre></div>
+</li>
+<li><p>Link it among the installed modules and set it up:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<span class="hljs-built_in">ln</span> -s /var/lib/modules/recipes /usr/modules/recipes
+mod setup recipes</code></pre></div>
+<p>Setup says what it did, with lines like these:</p>
+<div class="code"><pre tabindex="0"><code>Setting up module 'recipes'...
+  roots: /archive/recipes
+  Added /usr/modules/recipes/bin to PATH
+  Linked docs at /usr/docs/modules/recipes
+Module 'recipes' setup complete
+  recipes: built, 3.1 KB in 820 ms</code></pre></div>
+<p>The last lines come from bundling every module&#39;s pages, one line per module.</p>
+</li>
+<li><p>Open a new terminal tab, so its shell reads the new <code>PATH</code>, and try the commands:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+recipe-add <span class="hljs-string">&quot;Peggy Wrenfield&#x27;s apple cake&quot;</span> --serves 8
+recipe-list
+recipe-list --<span class="hljs-built_in">help</span></code></pre></div>
+</li>
+<li><p>Reload the web page. <strong>Settings → Modules</strong> lists <code>recipes</code> as <strong>Active</strong>, and its panel shows
+what it brings.</p>
+</li>
+</ol>
+<p>Restarting EiN does step 2 for you: at every start EiN links each folder in <code>/var/lib/modules</code> that
+has a <code>mod.json</code> and sets every module up, in the order of their dependencies.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>mod remove recipes</code> deletes a module&#39;s folder in <code>/var/lib/modules</code> along with its link. Keep
+your working copy, and its git history, somewhere else and copy it in.</p>
+</aside>
+<h2 id="change-it-and-see-the-change">Change it and see the change<a class="anchor" href="#change-it-and-see-the-change" aria-label="Link to this section"></a></h2>
+<p>What you have to do after an edit depends on what you changed:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You changed</th>
+<th>To see it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A file in <code>bin/</code></td>
+<td>Nothing: the next run uses it</td>
+</tr>
+<tr>
+<td>A file in <code>lib/</code> that a <code>#!ts</code> command imports</td>
+<td><code>mod setup recipes</code>, which drops the commands EiN has loaded</td>
+</tr>
+<tr>
+<td><code>mod.json</code>: settings, node types, roots, indexes</td>
+<td><code>mod setup recipes</code></td>
+</tr>
+<tr>
+<td>A new file in <code>services/</code> or <code>pipelines/</code></td>
+<td><code>mod setup recipes</code>, then <code>service start &lt;name&gt;</code> for a new service</td>
+</tr>
+<tr>
+<td>A page, or anything it imports</td>
+<td><code>ui-build recipes</code>, then reload the web page</td>
+</tr>
+<tr>
+<td><code>ui/nav.json</code></td>
+<td>Reload the web page</td>
+</tr>
+<tr>
+<td><code>docs/</code></td>
+<td>Nothing: the guide is read when it is opened</td>
+</tr>
+</tbody></table>
+</div>
+<p>EiN keeps a loaded TypeScript command against its file alone, so an edited <code>lib/</code> file reaches a
+command when the command&#39;s own file changes, after <code>mod setup</code>, or after EiN restarts.</p>
+<h2 id="add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry<a class="anchor" href="#add-a-page-and-a-sidebar-entry" aria-label="Link to this section"></a></h2>
+<p>A module&#39;s pages are React components. EiN bundles them itself, from the module&#39;s files, whenever
+modules are set up; there is no build step on your side and nothing is fetched from the network.</p>
+<ol>
+<li><p>Name each route and the file that draws it in <code>mod.json</code>, as above:
+<code>&quot;ui&quot;: { &quot;routes&quot;: { &quot;/recipes&quot;: &quot;ui/pages/recipes.tsx&quot; } }</code>. A route is a path below <code>/</code>, of
+literal and <code>:param</code> segments, such as <code>/recipes/:name</code>.</p>
+</li>
+<li><p>Write the page. Its default export is the component:</p>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>import { Stack, Table, Title } from '@mantine/core';
+import { EmptyState, PageLoader } from '@ein/ui/components';
+import { useCommand } from '@ein/ui/hooks';
+
+type Recipe = { path: string; title: string; serves: string };
+
+export default function Recipes() {
+  const { data, loading, error } = useCommand&lt;Recipe[]&gt;('recipe-list');
+  if (loading) return &lt;PageLoader /&gt;;
+  if (error) return &lt;EmptyState title='Recipes could not be read'&gt;{error.message}&lt;/EmptyState&gt;;
+  if (!data?.length) return &lt;EmptyState title='No recipes yet'&gt;Add one with recipe-add.&lt;/EmptyState&gt;;
+  return (
+    &lt;Stack&gt;
+      &lt;Title order={2}&gt;Recipes&lt;/Title&gt;
+      &lt;Table&gt;
+        &lt;Table.Tbody&gt;
+          {data.map((recipe) =&gt; (
+            &lt;Table.Tr key={recipe.path}&gt;
+              &lt;Table.Td&gt;{recipe.title}&lt;/Table.Td&gt;
+              &lt;Table.Td&gt;{recipe.serves}&lt;/Table.Td&gt;
+            &lt;/Table.Tr&gt;
+          ))}
+        &lt;/Table.Tbody&gt;
+      &lt;/Table&gt;
+    &lt;/Stack&gt;
+  );
+}</code></pre></div>
+<p><code>useCommand</code> runs a command in the reader&#39;s own shell, as JSON, and keeps its answer. A page reads
+and changes the tree only through commands, which is why each part of a module that the web
+interface shows has a command behind it.</p>
+</li>
+<li><p>Give it a sidebar entry in <code>ui/nav.json</code>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;recipes.list&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;browse&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Recipes&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tools-kitchen-2&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/recipes&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">60</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+</li>
+<li><p>Run <code>ui-build recipes</code> and reload the web page. <strong>Recipes</strong> is in the sidebar&#39;s <strong>Browse</strong>
+section.</p>
+</li>
+</ol>
+<p>A page imports only what the web interface lends it, its own files, and anything at all with
+<code>import type</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Import</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>react</code>, <code>react-dom</code></td>
+<td>React, the one the web interface runs</td>
+</tr>
+<tr>
+<td><code>@mantine/core</code>, <code>@mantine/dates</code>, <code>@mantine/hooks</code></td>
+<td>The Mantine components the interface is built with</td>
+</tr>
+<tr>
+<td><code>react-router-dom</code></td>
+<td>Routing: <code>Link</code>, <code>useParams</code>, <code>useNavigate</code>, <code>useSearchParams</code> and the like</td>
+</tr>
+<tr>
+<td><code>@preact/signals-react</code>, <code>@hello-pangea/dnd</code></td>
+<td>Signals, and drag and drop</td>
+</tr>
+<tr>
+<td><code>@ein/ui/components</code>, <code>@ein/ui/hooks</code>, <code>@ein/ui/lib</code>, <code>@ein/ui/signals</code>, <code>@ein/ui/theme</code></td>
+<td>The interface&#39;s own parts</td>
+</tr>
+<tr>
+<td><code>@ein/paths</code></td>
+<td>Core&#39;s path names</td>
+</tr>
+<tr>
+<td>Your module&#39;s files, CSS and CSS modules included</td>
+<td>By relative path or through its <code>imports</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Anything else stops the build with a message naming the file and the import.</p>
+<h3 id="where-an-entry-opens-a-route">Where an entry opens a route<a class="anchor" href="#where-an-entry-opens-a-route" aria-label="Link to this section"></a></h3>
+<p>A module gives the web interface entries and routes, nothing more. Each entry says where its route
+opens:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Where it appears</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sidebar</code></td>
+<td>In a section of the sidebar (<code>main</code>, <code>explore</code>, <code>browse</code>, <code>system</code>); needs <code>section</code>, <code>label</code>, <code>icon</code> and <code>to</code></td>
+</tr>
+<tr>
+<td><code>topbar</code></td>
+<td>A button in the top bar, or a row of a dropdown it names as <code>parent</code>, such as <code>ui.create</code>, the <strong>Create</strong> menu</td>
+</tr>
+<tr>
+<td><code>panels</code></td>
+<td>Inside another page, at a <code>slot</code> it names, such as <code>system.tabs</code> (a tab of the <strong>Dashboard</strong>) or <code>nodes.tools</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A top-bar entry&#39;s <code>action</code> is <code>{ &quot;navigate&quot;: &quot;/recipes&quot; }</code> for the page, <code>{ &quot;dialog&quot;: &quot;/recipes/new&quot; }</code>
+for the dialog over it, <code>{ &quot;drawer&quot;: … }</code> for the side drawer and <code>{ &quot;fullscreen&quot;: … }</code> for over
+everything. Each entry&#39;s <code>id</code> is <code>&lt;module&gt;.&lt;name&gt;</code>. <code>icon</code> is a Tabler icon name. <code>admin: true</code> shows
+an entry to administrators only, <code>signedIn: true</code> to people who are signed in. <code>ui-nav</code> prints the
+navigation as the reader gets it, with a warning for each entry it left out and why.</p>
+<p>The administrator and each person can move, rename and hide a module&#39;s entries;
+<a href="../guide/customizing.html">Your sidebar and top bar</a> shows how.</p>
+<p>To make nodes of your type into links wherever EiN shows them, in search results, completions and
+the node explorer, name the route that opens one in <code>mod.json</code>:
+<code>&quot;ui&quot;: { &quot;open&quot;: { &quot;recipe&quot;: &quot;/recipes/{name}&quot; } }</code>. <code>{name}</code> is the node&#39;s last path segment,
+<code>{parent}</code> the one before it and <code>{path}</code> its whole path.</p>
+<h2 id="add-a-setting">Add a setting<a class="anchor" href="#add-a-setting" aria-label="Link to this section"></a></h2>
+<p>A module owns settings by listing them in <code>mod.json</code> under <code>config.options</code>. Setup adds them to
+<strong>Settings</strong> and <code>config</code>; the values live in <code>/etc/config</code> and each person&#39;s <code>~/.config</code>, and every
+shell sees them as environment variables.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CFG_RECIPES_DEFAULT_SERVES&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;system&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;number&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;4&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Servings when none is given&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;How many a recipe serves when it was added without saying.&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Recipes&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A command reads it as <code>$CFG_RECIPES_DEFAULT_SERVES</code>, or <code>cmd.env.CFG_RECIPES_DEFAULT_SERVES</code>. A
+<code>user</code> setting is named <code>CFG_USER_…</code>, and a key to another service is a <code>secret</code> named <code>CFG_…_KEY</code>,
+which no shell sees. <a href="manifest.html">The module manifest</a> lists every key of an option, and
+<a href="../admin/configuration.html">Configuration</a> explains how the values are layered.</p>
+<p>A module that wants a setting, its own or core&#39;s, to have a value of its choosing writes it in
+<code>etc/config</code>, as <code>export KEY=&#39;value&#39;</code> lines. Setup links the file as <code>/etc/config.d/&lt;name&gt;</code>; a value
+the administrator sets wins over it. The <code>ems</code> module&#39;s names its text embedder this way:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">export</span> CFG_TEXT_EMBEDDER=<span class="hljs-string">&#x27;ems-text-embed&#x27;</span></code></pre></div>
+<h2 id="run-something-in-the-background">Run something in the background<a class="anchor" href="#run-something-in-the-background" aria-label="Link to this section"></a></h2>
+<p>A service is a script EiN keeps running: a folder <code>services/&lt;name&gt;/</code> with a <code>start.sh</code> and a
+<code>config.json</code>. Setup registers and enables it; EiN starts the enabled services when it starts, and
+<code>service start &lt;name&gt;</code> starts one now.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Checks the recipes every hour&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;restartPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;on-failure&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># services/recipe-check/start.sh</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+  recipe-list &gt; /dev/null
+  <span class="hljs-built_in">sleep</span> 3600
+<span class="hljs-keyword">done</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>description</code></td>
+<td>One line for the <strong>Dashboard</strong>&#39;s services and <code>service list</code></td>
+</tr>
+<tr>
+<td><code>restartPolicy</code></td>
+<td><code>on-failure</code>, <code>always</code> or <code>never</code>; with a restart policy EiN starts a failed service again</td>
+</tr>
+<tr>
+<td><code>maxRestarts</code></td>
+<td>How many restarts within <code>restartWindow</code> before the service stays failed; 3 by default</td>
+</tr>
+<tr>
+<td><code>restartWindow</code></td>
+<td>That window, in milliseconds; 60000 by default</td>
+</tr>
+<tr>
+<td><code>stopTimeout</code></td>
+<td>How long a stopping script may take before it is closed, in milliseconds; 5000 by default</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Environment variables for the script</td>
+</tr>
+<tr>
+<td><code>statusCommand</code></td>
+<td>A command answering the service&#39;s health in one line, shown beside its status</td>
+</tr>
+<tr>
+<td><code>checkCommand</code></td>
+<td>A command answering checks for <code>health</code>, as JSON <code>[{ name, state, reason }]</code> with <code>ok</code>, <code>warn</code> or <code>fail</code></td>
+</tr>
+<tr>
+<td><code>gaugeCommand</code></td>
+<td>A command answering meters for <code>top</code> and the <strong>Dashboard</strong>, as JSON <code>[{ label, percent?, value }]</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Module services use <code>&quot;restartPolicy&quot;: &quot;on-failure&quot;</code>. A service whose name the module stops
+shipping is stopped and removed at the next setup. <a href="../admin/services-logs.html">Services and logs</a>
+shows where a service&#39;s output goes.</p>
+<h2 id="react-to-changes-with-pipelines">React to changes with pipelines<a class="anchor" href="#react-to-changes-with-pipelines" aria-label="Link to this section"></a></h2>
+<p>A pipeline runs commands when something happens in the tree, such as a photo&#39;s metadata being read.
+Each file in <code>pipelines/</code> defines one:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">name:</span> <span class="hljs-string">recipe-photo</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Link</span> <span class="hljs-string">a</span> <span class="hljs-string">photo</span> <span class="hljs-string">of</span> <span class="hljs-string">a</span> <span class="hljs-string">dish</span> <span class="hljs-string">to</span> <span class="hljs-string">its</span> <span class="hljs-string">recipe</span>
+
+<span class="hljs-attr">trigger:</span>
+  <span class="hljs-attr">on:</span> <span class="hljs-string">media.metadata.extracted</span>
+
+<span class="hljs-attr">steps:</span>
+  <span class="hljs-attr">link:</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">recipe-link</span> <span class="hljs-string">$NODE_PATH</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">Find</span> <span class="hljs-string">the</span> <span class="hljs-string">recipe</span> <span class="hljs-string">the</span> <span class="hljs-string">photo</span> <span class="hljs-string">shows</span>
+
+<span class="hljs-attr">options:</span>
+  <span class="hljs-attr">maxAttempts:</span> <span class="hljs-number">2</span>
+  <span class="hljs-attr">priority:</span> <span class="hljs-number">5</span></code></pre></div>
+<p>The events come from the modules that emit them: <code>media.metadata.extracted</code> is the Archive&#39;s, so
+this module would list <code>archive</code> in its <code>dependencies</code>. <a href="../concepts/pipelines.html">Changes and pipelines</a>
+explains triggers and steps, and <a href="../admin/processing.html">Processing and pipelines</a> how to watch them
+run. A definition the module stops shipping is removed at the next setup.</p>
+<h2 id="plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places<a class="anchor" href="#plug-into-search-the-home-page-and-other-places" aria-label="Link to this section"></a></h2>
+<p>Core asks for some things by a command&#39;s name, so a module provides them by naming a command in
+<code>bin/</code> after them. No manifest field is involved, and core never names your module:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command name</th>
+<th>What core does with it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>search-&lt;x&gt;</code></td>
+<td><code>search</code> asks it for hits; it answers <code>--kinds</code> with what it finds (<code>{ &quot;kinds&quot;: [&quot;recipe&quot;] }</code>)</td>
+</tr>
+<tr>
+<td><code>news-&lt;x&gt;</code></td>
+<td>The home page&#39;s news: what was added lately, <code>--limit N</code></td>
+</tr>
+<tr>
+<td><code>events-&lt;x&gt;</code></td>
+<td>The home page&#39;s coming events, <code>--today YYYY-MM-DD --days-ahead A --days-past P --limit N</code></td>
+</tr>
+<tr>
+<td><code>onthisday-&lt;x&gt;</code></td>
+<td>The home page&#39;s &quot;on this day&quot;, <code>MM-DD --limit N</code></td>
+</tr>
+<tr>
+<td><code>members-&lt;type&gt;</code></td>
+<td>How a node of that type lists its members, for <code>search --under</code> and <code>members</code></td>
+</tr>
+<tr>
+<td><code>subject-&lt;kind&gt;</code></td>
+<td>The media a subject has, for <code>search --subject &lt;kind&gt;:&lt;ref&gt;</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Each is run with <code>JSON_OUTPUT=1</code> and answers a shape that <code>@ein/api</code> or <code>@ein/client</code> declares.
+These prefixes are reserved: a command so named is asked, so do not use them for anything else.
+For the home page, each entry carries a <code>title</code>, the <code>route</code> of your own page that draws it, and the
+<code>path</code> of the node it is about.</p>
+<p>Other jobs only one command may do are chosen by a setting the module sets in its <code>etc/config</code>:
+<code>CFG_SEARCH_PARSER</code> reads the words typed in the search box, <code>CFG_COMMAND_FINDER</code> finds commands
+by what they do, and <code>CFG_LANGUAGE_MODEL</code> and <code>CFG_TEXT_EMBEDDER</code> name the commands a module runs
+for a language model or text vectors. The settings are in
+<a href="../reference/settings.html">the settings reference</a>.</p>
+<p>What the assistant knows about your module&#39;s commands, and how to give it more, is in
+<a href="assistant.html">Teaching the assistant</a>.</p>
+<h2 id="write-documentation-for-it">Write documentation for it<a class="anchor" href="#write-documentation-for-it" aria-label="Link to this section"></a></h2>
+<p><code>docs/index.md</code> is the module&#39;s guide. Its opening is the <strong>About</strong> tab of the module&#39;s panel in
+<strong>Settings → Modules</strong>, and the whole of <code>docs/</code> is on the module&#39;s own page in <strong>Documentation</strong>,
+together with every command, setting and node type the module brings. Write it for the people who
+will use the module, not for developers; the guides of <code>module-archive</code> are a model.</p>
+<p>The rest of a module&#39;s documentation comes from what it already declares: each command&#39;s <code>spec</code> or
+<code>arg</code> lines, each setting&#39;s <code>label</code> and <code>description</code>, and in <code>mod.json</code> its <code>nodeTypes</code> and the
+environment variables it reads other than its settings, under <code>environment</code>. <code>docs commands</code>,
+<code>docs node-types</code> and <code>docs env</code> read them from the installed modules, and so do the reference pages
+of this site.</p>
+<h2 id="use-another-module">Use another module<a class="anchor" href="#use-another-module" aria-label="Link to this section"></a></h2>
+<p>A module shares files by naming them in <code>exports</code>, and another module imports them only if it
+lists the first in <code>dependencies</code>:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;archive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.1.0&quot;</span> <span class="hljs-punctuation">}</span></code></pre></div>
+<p>With that, <code>recipes</code> may import what the Archive exports, as <code>@archive/&lt;name&gt;</code>, and run its
+commands. Nothing else of the Archive&#39;s is reachable. A dependency is checked at setup: it must be
+installed, at a version in the range, and it is set up first. <code>mod install</code> installs a missing
+dependency along with the module. <code>mod info archive</code> lists what the Archive exports and which
+installed modules depend on it.</p>
+<p>To share your own files, export them: <code>&quot;exports&quot;: { &quot;./api&quot;: &quot;./lib/api.ts&quot; }</code> is imported
+elsewhere as <code>@recipes/api</code>. By convention <code>./api</code> holds the types of what your commands answer as
+JSON, imports nothing but other such files, and is what your own pages import too.</p>
+<h2 id="test-it">Test it<a class="anchor" href="#test-it" aria-label="Link to this section"></a></h2>
+<p>A module&#39;s tests run inside a checkout of core, with the module in its <code>modules/</code> folder; see
+<a href="source.html">Building from source</a>. There, <code>deno task sync:modules</code> writes the module&#39;s
+<code>deno.jsonc</code> from its <code>mod.json</code> (never edit that file), <code>deno task check</code> type-checks it, and
+<code>deno task test:one modules/recipes/test/</code> runs its tests.</p>
+<p>A test imports <code>@ein/testing</code> and runs commands in an EiN with the module set up:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-keyword">import</span> { assertEquals } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@std/assert&#x27;</span>;
+<span class="hljs-keyword">import</span> { createTestContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/testing&#x27;</span>;
+
+<span class="hljs-keyword">const</span> testCtx = <span class="hljs-title function_">createTestContext</span>({ <span class="hljs-attr">modules</span>: [<span class="hljs-string">&#x27;recipes&#x27;</span>], <span class="hljs-attr">boot</span>: <span class="hljs-literal">true</span> });
+
+<span class="hljs-title class_">Deno</span>.<span class="hljs-title function_">test</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;recipes&#x27;</span>, <span class="hljs-attr">sanitizeResources</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">sanitizeOps</span>: <span class="hljs-literal">false</span> }, <span class="hljs-title function_">async</span> () =&gt; {
+  <span class="hljs-keyword">await</span> testCtx.<span class="hljs-title function_">setup</span>();
+  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">await</span> testCtx.<span class="hljs-property">server</span>.<span class="hljs-title function_">createShellClient</span>();
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">exec</span>(<span class="hljs-string">&quot;recipe-add &#x27;Apple cake&#x27; --serves 8&quot;</span>);
+  <span class="hljs-keyword">const</span> recipes = <span class="hljs-keyword">await</span> client.<span class="hljs-property">execJson</span>&lt;{ <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span> }[]&gt;(<span class="hljs-string">&#x27;recipe-list&#x27;</span>);
+  <span class="hljs-title function_">assertEquals</span>(recipes.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">recipe</span>) =&gt;</span> recipe.<span class="hljs-property">title</span>), [<span class="hljs-string">&#x27;Apple cake&#x27;</span>]);
+});</code></pre></div>
+<p>The tests in core check what every module must keep to: a module imports from core only
+<code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and, in pages, the interface&#39;s parts, and runs another
+module&#39;s commands only when it depends on it.</p>
+<h2 id="publish-it">Publish it<a class="anchor" href="#publish-it" aria-label="Link to this section"></a></h2>
+<ol>
+<li><p>Push the module to a repository named <code>module-recipes</code>, with <code>mod.json</code> at its top. Commit the
+commands with their execute bit (<code>git update-index --chmod=+x bin/*</code>): EiN installs each file
+with the mode the repository gives it.</p>
+</li>
+<li><p>Mark versions with tags, and raise <code>version</code> in <code>mod.json</code> with each: the minor when you add
+something another module may come to rely on, the major when something they use changes.</p>
+</li>
+<li><p>Install it on any EiN by its address, with a branch, tag or commit after <code>@</code> if you want one:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod install https://forge.example:3000/wrenfield/module-recipes@v0.1.0</code></pre></div>
+<p>EiN fetches the commit over HTTPS, checks the module as setup would, puts it in place, sets it
+up and starts its services.</p>
+</li>
+<li><p>To let administrators install it by name, they add your organisation to <strong>Module sources</strong>,
+<code>CFG_MODULE_SOURCES</code>. Then <code>mod install recipes</code> finds it, <code>mod search</code> lists it and
+<strong>Settings → Modules</strong> offers <strong>Install</strong> and <strong>Update</strong>. <a href="../admin/modules.html#modules-from-other-places">Modules</a>
+covers sources that need a token.</p>
+</li>
+</ol>
+<p>When EiN&#39;s module API changes in a way that breaks modules, a module whose <code>coreApi</code> range the new
+EiN does not satisfy is refused at setup with <code>needs @ein/client ^0.2.0, this core provides 0.3.0</code>.
+Publish a version written for the new API, with its <code>coreApi</code> raised.</p>
+<h2 id="remove-it">Remove it<a class="anchor" href="#remove-it" aria-label="Link to this section"></a></h2>
+<p><code>mod remove recipes</code> asks before it removes anything, runs the module&#39;s <code>uninstall.sh</code> if it has
+one, then takes back what setup did: its commands leave <code>PATH</code>, its services are stopped and
+removed, its pipelines, settings, navigation and guide are unlinked, and its pages are rebuilt
+without it. The module&#39;s content stays: its roots under <code>/archive</code>, and the values of its settings
+in <code>/etc/config</code>, which come back if the module is installed again.</p>
+<h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><code>mod setup</code> names each problem; <code>mod list --long</code> and the module&#39;s panel in <strong>Settings → Modules</strong>
+show them afterwards.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mod setup: module not found: /usr/modules/recipes</code></td>
+<td>The link in <code>/usr/modules</code> is missing; make it as in <a href="#try-the-module-on-your-ein">Try the module</a></td>
+</tr>
+<tr>
+<td><code>mod setup: no mod.json found in /usr/modules/recipes</code></td>
+<td><code>mod.json</code> must be at the folder&#39;s top</td>
+</tr>
+<tr>
+<td><code>recipes: needs @ein/client ^0.3.0, this core provides 0.2.1</code></td>
+<td><code>coreApi</code> asks for another version of the module API than this EiN has</td>
+</tr>
+<tr>
+<td><code>recipes: requires module &#39;archive&#39; (^0.1.0), which is not installed</code></td>
+<td>Install the dependency, or remove it from <code>dependencies</code></td>
+</tr>
+<tr>
+<td><code>recipes: export &#39;./api&#39; points at a missing file: ./lib/api.ts</code></td>
+<td>Fix the path in <code>exports</code></td>
+</tr>
+<tr>
+<td><code>recipes: ui.routes[&#39;/recipes&#39;] must be a .tsx page: ui/pages/recipes.ts</code></td>
+<td>A page is a <code>.tsx</code> file</td>
+</tr>
+<tr>
+<td><code>ui-build: recipes: …: &#39;…&#39; is neither lent by the shell nor the module&#39;s own</code></td>
+<td>The page imports a package the interface does not lend; see the table in <a href="#add-a-page-and-a-sidebar-entry">Add a page</a></td>
+</tr>
+<tr>
+<td><code>recipe-list: command not found</code></td>
+<td>Open a new terminal tab, so its shell reads the new <code>PATH</code></td>
+</tr>
+<tr>
+<td><code>Access denied</code> when someone else runs a command</td>
+<td>The file has no execute bit; <code>chmod 755</code> it, and commit the mode</td>
+</tr>
+<tr>
+<td>The sidebar entry does not appear</td>
+<td>Run <code>ui-nav</code> and read its warnings: a missing field or an unknown section leaves an entry out</td>
+</tr>
+<tr>
+<td>A page shows an error inside the frame</td>
+<td>Its bundle failed to load or the page threw; run <code>ui-build recipes</code> and read its output, then the browser&#39;s console</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../admin/troubleshooting.html">Troubleshooting</a> covers problems that are not the module&#39;s.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="manifest.html">The module manifest</a>: every field of <code>mod.json</code></li>
+<li><a href="assistant.html">Teaching the assistant</a>: making the assistant use your module&#39;s commands</li>
+<li><a href="source.html">Building from source</a>: a checkout of core to type-check and test modules in</li>
+<li><a href="../admin/modules.html">Modules</a>: installing, updating and removing modules as an administrator</li>
+<li><a href="../shell/bash.html">The shell language</a>: the language bash commands and services are written in</li>
+<li><a href="../concepts/pipelines.html">Changes and pipelines</a>: how work follows a change in the tree</li>
+<li><a href="../concepts/nodes.html">Nodes and node types</a>: what a node and its attributes are</li>
+<li><a href="../reference/commands-core.html#mod-setup">Core commands</a>: <code>mod setup</code> and the other <code>mod</code> commands</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../reference/glossary.html" rel="prev"><span>Previous</span>Glossary</a><a class="next" href="manifest.html" rel="next"><span>Next</span>The module manifest</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

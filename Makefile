@@ -2,6 +2,8 @@
 #
 #   make capture URL=http://demo.example:8080   screenshots and node pictures from a demo instance, into build/
 #   make images                                  build/ into the WebP files the page loads, under assets/
+#   make docs                                    the documentation's pages under docs/, from its Markdown
+#   make reference SSH='ssh -p 2222 admin@ein'   its reference pages, from a running EiN
 #   make serve                                   the site on http://localhost:4507
 #   make fmt                                     format with deno fmt, as the pre-commit hook checks
 
@@ -12,7 +14,7 @@ URL ?= http://localhost:8080
 # Quality of the screenshots' WebP files; the node pictures in the hero are small and take less.
 QUALITY ?= 80
 
-.PHONY: help capture images thumbs serve fmt check
+.PHONY: help capture images thumbs docs reference serve fmt check
 
 help: ## Show targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -52,12 +54,28 @@ thumbs: ## The gallery's thumbnails under assets/shots/thumbs/, from the shots' 
 	done
 	@du -sh assets/shots/thumbs
 
+docs: ## The documentation's HTML pages and search index under docs/, from its Markdown (docs/SUMMARY.md lists the pages)
+	deno task docs
+
+# What a running EiN says about itself, over SSH as its administrator, then the pages made from it.
+# SSH is the command that reaches its shell; with a password it asks for it once per command.
+SSH ?= ssh -p 2222 admin@localhost
+reference: ## The reference pages under docs/reference/ from a running EiN with every module (SSH='ssh -p 2222 admin@host')
+	@mkdir -p build/reference
+	$(SSH) 'JSON_OUTPUT=1 docs commands' > build/reference/commands.json
+	$(SSH) 'JSON_OUTPUT=1 config list' > build/reference/settings.json
+	$(SSH) 'JSON_OUTPUT=1 docs env' > build/reference/environment.json
+	$(SSH) 'JSON_OUTPUT=1 docs node-types' > build/reference/node-types.json
+	deno task reference
+	@$(MAKE) --no-print-directory docs
+
 serve: ## Serve the site on http://localhost:4507
 	deno task serve
 
 fmt: ## Format every file deno fmt knows
-	deno fmt index.html assets/*.css assets/*.js tools/*.ts README.md deno.jsonc
+	deno fmt index.html assets/*.css assets/*.js tools/*.ts docs/ README.md deno.jsonc
 
-check: ## Check formatting and the capture tool's types
-	deno fmt --check index.html assets/*.css assets/*.js tools/*.ts README.md deno.jsonc
-	deno check tools/capture.ts
+check: ## Check formatting, the tools' types, and that the documentation's pages are what its Markdown makes
+	deno fmt --check index.html assets/*.css assets/*.js tools/*.ts docs/ README.md deno.jsonc
+	deno check tools/*.ts
+	deno task docs --check

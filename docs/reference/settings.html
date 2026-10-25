@@ -1,0 +1,2295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings – EiN documentation</title>
+    <meta name="description" content="Every setting of an EiN with all its modules: 80 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/settings.html">
+    <meta property="og:title" content="Settings – EiN documentation">
+    <meta property="og:description" content="Every setting of an EiN with all its modules: 80 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/settings.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html" aria-current="page">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Settings</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. -->
+
+<p>Every setting of an EiN with all its modules: 80 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
+<ul>
+<li><strong>Who it is for</strong>: <em>everyone</em> is a system setting, which only an administrator changes, on Settings → System or with <code>config set</code>; <em>each person</em> is a preference everyone sets for themselves, on Profile → Preferences.</li>
+<li><strong>Default</strong>: the value until someone changes it. A deployment can set another in <code>.env</code>, and a module can choose one.</li>
+<li><strong>Restarts</strong>: the services a change restarts by itself. Work already running is picked up again when they are back.</li>
+</ul>
+<h2 id="albums">Albums<a class="anchor" href="#albums" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_album_stack_threshold"><code>CFG_ALBUM_STACK_THRESHOLD</code><a class="anchor" href="#cfg_album_stack_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Stack similarity</strong>. How alike two neighbouring photos in an album must look to be stacked as one burst. Higher stacks only near-identical shots.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.75</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_album_stack_max_gap_seconds"><code>CFG_ALBUM_STACK_MAX_GAP_SECONDS</code><a class="anchor" href="#cfg_album_stack_max_gap_seconds" aria-label="Link to this section"></a></h3>
+<p><strong>Stack time gap (seconds)</strong>. How far apart in capture time two neighbouring photos may be and still be stacked together.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="appearance">Appearance<a class="anchor" href="#appearance" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_user_header_entrance"><code>CFG_USER_HEADER_ENTRANCE</code><a class="anchor" href="#cfg_user_header_entrance" aria-label="Link to this section"></a></h3>
+<p><strong>Header entrance</strong>. How the tiles of a page&#39;s header arrive when the page opens: drawn as if by pen and filled from the bottom up, falling into place, sliding in from the right, swept in from left to right, growing from the bottom edge, rippling out from the title, snapping in like puzzle pieces, or a wave of light across them. A device set to reduce motion never animates it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>drawn</code></td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>drawn</code>, <code>falling</code>, <code>sliding</code>, <code>sweep</code>, <code>growing</code>, <code>ripple</code>, <code>puzzle</code>, <code>wave</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_user_header_entrance_time"><code>CFG_USER_HEADER_ENTRANCE_TIME</code><a class="anchor" href="#cfg_user_header_entrance_time" aria-label="Link to this section"></a></h3>
+<p><strong>Header entrance time</strong>. How many milliseconds the header&#39;s entrance takes, from the first tile starting to the last one in place. 0 shows the header as it is, without an entrance.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>450</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_user_header_cover"><code>CFG_USER_HEADER_COVER</code><a class="anchor" href="#cfg_user_header_cover" aria-label="Link to this section"></a></h3>
+<p><strong>Header over a cover</strong>. How the tiles of a page&#39;s header meet its cover photo: split gives the left of the header to the tiles, dissolving hat by hat into the photo along a slanted edge, with their outlines running on over it; lines lays only their outlines over the photo, fading out from the left.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>split</code></td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>split</code>, <code>lines</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_llm_max_tokens"><code>CFG_LLM_MAX_TOKENS</code><a class="anchor" href="#cfg_llm_max_tokens" aria-label="Link to this section"></a></h3>
+<p><strong>Answer length (tokens)</strong>. How many tokens the model may write in one call when thinking is not asked for. A thinking model writes its thought inside the same budget, so it may need more.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>2048</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_model"><code>CFG_LLM_MODEL</code><a class="anchor" href="#cfg_llm_model" aria-label="Link to this section"></a></h3>
+<p><strong>Language model</strong>. The model name sent with each request. A llama.cpp server answers with whichever model it loaded, whatever this says.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>qwen3.5-4b</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>llm-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_url"><code>CFG_LLM_URL</code><a class="anchor" href="#cfg_llm_url" aria-label="Link to this section"></a></h3>
+<p><strong>Language model address</strong>. The base of an OpenAI-compatible chat API, without /v1: ours (a llama.cpp server) or a provider&#39;s, which is then named under Language model provider.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>http://127.0.0.1:8190</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>llm-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_key"><code>CFG_LLM_KEY</code><a class="anchor" href="#cfg_llm_key" aria-label="Link to this section"></a></h3>
+<p><strong>Language model key</strong>. The bearer key the provider expects, sent only to the language model address above. Unset when the server needs none. No shell sees it, and nothing shows it once it is set.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>none: a key is set by you, and never shown again</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>a key: never readable, in no shell</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>llm-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_provider"><code>CFG_LLM_PROVIDER</code><a class="anchor" href="#cfg_llm_provider" aria-label="Link to this section"></a></h3>
+<p><strong>Language model provider</strong>. The provider&#39;s name when the language model is a service elsewhere (OpenAI, say). The chat names it and says that questions, and what the assistant reads in the archive to answer them, are sent there. Set by the host profile.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means ours, run on this host</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>llm-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_thinking"><code>CFG_LLM_THINKING</code><a class="anchor" href="#cfg_llm_thinking" aria-label="Link to this section"></a></h3>
+<p><strong>Think before answering</strong>. 1 asks the model to think before it answers, 0 asks it not to. Sent as llama.cpp&#39;s chat_template_kwargs, so only a server that reads them honours it. Empty sends nothing and the server decides.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the server decides</td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>1</code>, <code>0</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_wait"><code>CFG_LLM_WAIT</code><a class="anchor" href="#cfg_llm_wait" aria-label="Link to this section"></a></h3>
+<p><strong>Wait for the language model (seconds)</strong>. How long a question to the assistant waits for a language model that is not there, restarting or still loading its model, before the chat says the assistant is unavailable. The chat says it is waiting meanwhile. 0 gives up at once. The search box never waits; it reads the words without the model.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>180</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_llm_card"><code>CFG_LLM_CARD</code><a class="anchor" href="#cfg_llm_card" aria-label="Link to this section"></a></h3>
+<p><strong>Where our language model runs</strong>. card: on the graphics card, beside the share it leaves. cpu: on the processor. Set by the host profile; unused when a provider runs the model.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the host does not say</td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>card</code>, <code>cpu</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>llm-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Assistant</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="faces">Faces<a class="anchor" href="#faces" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_face_min_create_confidence"><code>CFG_FACE_MIN_CREATE_CONFIDENCE</code><a class="anchor" href="#cfg_face_min_create_confidence" aria-label="Link to this section"></a></h3>
+<p><strong>Confidence to start a new person from a face</strong>. How sure the detector must be of a face that matches nobody before it starts a new, unnamed person. Less certain faces stay unknown.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.7</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_attach_threshold"><code>CFG_FACE_ATTACH_THRESHOLD</code><a class="anchor" href="#cfg_face_attach_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Face match threshold</strong>. How similar two faces must be before one is attached to a known person. Higher is stricter and produces fewer wrong matches but more unknown faces.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.55</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_vote_threshold"><code>CFG_FACE_VOTE_THRESHOLD</code><a class="anchor" href="#cfg_face_vote_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Face neighbour similarity</strong>. How similar a known face must be to count as a vote for its person. Faces less alike than this are ignored when deciding who an unknown face is.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.5</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_k"><code>CFG_FACE_K</code><a class="anchor" href="#cfg_face_k" aria-label="Link to this section"></a></h3>
+<p><strong>Face neighbours compared</strong>. How many of the most similar known faces are compared with each unknown one.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>24</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_margin"><code>CFG_FACE_MARGIN</code><a class="anchor" href="#cfg_face_margin" aria-label="Link to this section"></a></h3>
+<p><strong>Face winner margin</strong>. How far the leading person&#39;s votes must outweigh the runner-up&#39;s before a face is attached. 1.2 means 20% more; higher leaves close calls unknown.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1.2</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_max_yaw"><code>CFG_FACE_MAX_YAW</code><a class="anchor" href="#cfg_face_max_yaw" aria-label="Link to this section"></a></h3>
+<p><strong>Maximum head turn (degrees)</strong>. How far a head may be turned away from the camera, estimated from the eyes, nose and mouth, and still be kept as a face. Full profiles beyond this match the wrong person far more often.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>80</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_min_confidence"><code>CFG_FACE_MIN_CONFIDENCE</code><a class="anchor" href="#cfg_face_min_confidence" aria-label="Link to this section"></a></h3>
+<p><strong>Minimum face confidence</strong>. How sure the detector must be before a box is kept as a face that takes part in recognition. Below 0.7 most detections are backs of heads, blur or things that are not faces, and they pull strangers toward the wrong person. Applies to new detections; a box below it is not stored unless someone tags it by hand.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.7</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_min_size"><code>CFG_FACE_MIN_SIZE</code><a class="anchor" href="#cfg_face_min_size" aria-label="Link to this section"></a></h3>
+<p><strong>Minimum face size (px)</strong>. The shorter side a face box must have, in pixels of the displayed photo, to be kept as a face.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>24</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_face_min_create_size"><code>CFG_FACE_MIN_CREATE_SIZE</code><a class="anchor" href="#cfg_face_min_create_size" aria-label="Link to this section"></a></h3>
+<p><strong>Size to start a new person from a face (px)</strong>. The shorter side, in pixels, a face that matches nobody must have before it starts a new, unnamed person. Small faces stay unknown rather than seeding people from blur.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>48</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="language">Language<a class="anchor" href="#language" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_language"><code>CFG_LANGUAGE</code><a class="anchor" href="#cfg_language" aria-label="Link to this section"></a></h3>
+<p><strong>Archive language</strong>. The language the archive is kept in: the order names are sorted in, the words it offers as labels, and how it describes how two people are related.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>en</code></td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>en</code>, <code>sv</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="media-service">Media service<a class="anchor" href="#media-service" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_ems_url"><code>CFG_EMS_URL</code><a class="anchor" href="#cfg_ems_url" aria-label="Link to this section"></a></h3>
+<p><strong>Media service address</strong>. Where EMS answers. Every model and media-tool request goes there; the models themselves are configured on the EMS side.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>http://127.0.0.1:8181</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>models</code>, <code>cpu</code>, <code>ems-link</code>, <code>metrics-sampler</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_ems_link_interval_seconds"><code>CFG_EMS_LINK_INTERVAL_SECONDS</code><a class="anchor" href="#cfg_ems_link_interval_seconds" aria-label="Link to this section"></a></h3>
+<p><strong>Media service check interval (seconds)</strong>. How often the ems-link service asks whether EMS answers, and logs when that changes.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>60</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>ems-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_ems_key"><code>CFG_EMS_KEY</code><a class="anchor" href="#cfg_ems_key" aria-label="Link to this section"></a></h3>
+<p><strong>Media service key</strong>. The bearer key EMS expects (one of the lines in its keys file), sent only to the media service address above. Unset when EMS runs without keys. No shell sees it, and nothing shows it once it is set.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>none: a key is set by you, and never shown again</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>a key: never readable, in no shell</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>ems-link</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_ems_connect_retry"><code>CFG_EMS_CONNECT_RETRY</code><a class="anchor" href="#cfg_ems_connect_retry" aria-label="Link to this section"></a></h3>
+<p><strong>Media service restart patience (seconds)</strong>. How long a batch request keeps retrying a refused connection before the step fails. EMS restarts refuse connections for tens of seconds; this is what keeps the steps in flight across one from failing for good. Interactive requests never wait.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>90</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>models</code>, <code>cpu</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="modules">Modules<a class="anchor" href="#modules" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_module_sources"><code>CFG_MODULE_SOURCES</code><a class="anchor" href="#cfg_module_sources" aria-label="Link to this section"></a></h3>
+<p><strong>Module sources</strong>. Where published modules are looked for: organisations on GitHub, Forgejo or Gitea, as their addresses separated by spaces, such as <a href="https://github.com/einhq">https://github.com/einhq</a>. Each repository named module-<name> in them is a module. A module installed by name comes from the first source that has it, and a module&#39;s dependencies from its own organisation first.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>https://github.com/einhq</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_module_sources_key"><code>CFG_MODULE_SOURCES_KEY</code><a class="anchor" href="#cfg_module_sources_key" aria-label="Link to this section"></a></h3>
+<p><strong>Tokens for module sources</strong>. Access tokens for module sources that are not public, as host=token separated by spaces, such as forge.example:3000=… github.com=…. Each token is sent to its own host only.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>none: a key is set by you, and never shown again</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>a key: never readable, in no shell</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="network">Network<a class="anchor" href="#network" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_http_port"><code>CFG_HTTP_PORT</code><a class="anchor" href="#cfg_http_port" aria-label="Link to this section"></a></h3>
+<p><strong>HTTP port</strong>. The port the web interface listens on.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>8080</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Takes effect</td>
+<td>Takes effect the next time the server starts — restarting it from here would drop this connection.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_ssh_port"><code>CFG_SSH_PORT</code><a class="anchor" href="#cfg_ssh_port" aria-label="Link to this section"></a></h3>
+<p><strong>SSH port</strong>. The port the SSH and SFTP server listens on.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>2222</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Takes effect</td>
+<td>Takes effect the next time the server starts.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="playback">Playback<a class="anchor" href="#playback" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_user_ken_burns"><code>CFG_USER_KEN_BURNS</code><a class="anchor" href="#cfg_user_ken_burns" aria-label="Link to this section"></a></h3>
+<p><strong>Ken Burns effect</strong>. Slowly pan and zoom each photo during a slideshow.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_user_slideshow_seconds"><code>CFG_USER_SLIDESHOW_SECONDS</code><a class="anchor" href="#cfg_user_slideshow_seconds" aria-label="Link to this section"></a></h3>
+<p><strong>Seconds per slide</strong>. How long each photo is shown in a slideshow.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="processing">Processing<a class="anchor" href="#processing" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_cpu_slots"><code>CFG_CPU_SLOTS</code><a class="anchor" href="#cfg_cpu_slots" aria-label="Link to this section"></a></h3>
+<p><strong>CPU budget for media work</strong>. How much CPU-bound media work runs at once. Each job declares what it costs, so one video transcode can exclude a face assignment on a small box.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>cpu</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code><a class="anchor" href="#cfg_cpu_non_entry_slots" aria-label="Link to this section"></a></h3>
+<p><strong>CPU slots for downstream media</strong>. Soft reservation for non-ingest CPU work. Ingest borrows unused slots, but ready downstream jobs get them first so a continuous ingest backlog cannot starve the rest of the pipeline.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>cpu</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_cpu_workers"><code>CFG_CPU_WORKERS</code><a class="anchor" href="#cfg_cpu_workers" aria-label="Link to this section"></a></h3>
+<p><strong>CPU worker slots</strong>. Upper bound on concurrent CPU media jobs. The budget above is the real limit; this only caps how many can be in flight.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>cpu</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_entry_admission_percent"><code>CFG_PIPELINE_ENTRY_ADMISSION_PERCENT</code><a class="anchor" href="#cfg_pipeline_entry_admission_percent" aria-label="Link to this section"></a></h3>
+<p><strong>Entry pipeline reservation (%)</strong>. Share of trigger claims that first try pipelines declaring options.entryPoint. Empty reserved claims fall back to the ordinary fair rotation.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_media_heal_interval"><code>CFG_MEDIA_HEAL_INTERVAL</code><a class="anchor" href="#cfg_media_heal_interval" aria-label="Link to this section"></a></h3>
+<p><strong>Gap check interval (seconds)</strong>. How often the background check looks for media missing something a pipeline should have given it, when nothing else is waiting to be processed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>900</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>media-heal</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_media_transcripts_current"><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code><a class="anchor" href="#cfg_media_transcripts_current" aria-label="Link to this section"></a></h3>
+<p><strong>Keep transcripts current</strong>. Videos and recordings transcribed with other speech-recognition settings than the media service runs now are transcribed again in the background, behind new media. Set to &quot;off&quot; to leave existing transcripts alone. On a large library a change of settings means hours of background work.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_model_kind_quantum_ms"><code>CFG_MODEL_KIND_QUANTUM_MS</code><a class="anchor" href="#cfg_model_kind_quantum_ms" aria-label="Link to this section"></a></h3>
+<p><strong>Model backlog rotation (ms)</strong>. How long the models worker stays on one backlog (faces, picture vectors, text in pictures, text vectors, transcripts, voices) before rotating to the next when work remains on more than one. Faces outrank the other backlogs and a crawl finds new ones continuously, so without this they would starve the rest outright.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>900000</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>models</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_model_slots"><code>CFG_MODEL_SLOTS</code><a class="anchor" href="#cfg_model_slots" aria-label="Link to this section"></a></h3>
+<p><strong>Model requests in flight</strong>. How many model-bound media steps (faces, picture vectors, text in pictures, text vectors, transcripts, voices) EiN keeps in flight against the media service at once. Whether each runs on the GPU or the CPU is the media service&#39;s decision; size this against its own model limit, since more slots than it runs at once only move the wait into its queue.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>models</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_prune_interval"><code>CFG_PIPELINE_PRUNE_INTERVAL</code><a class="anchor" href="#cfg_pipeline_prune_interval" aria-label="Link to this section"></a></h3>
+<p><strong>Pipeline cleanup interval (seconds)</strong>. How often finished pipeline instances are pruned.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>3600</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-pruner</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_max_open_instances"><code>CFG_PIPELINE_MAX_OPEN_INSTANCES</code><a class="anchor" href="#cfg_pipeline_max_open_instances" aria-label="Link to this section"></a></h3>
+<p><strong>Pipeline instances held open</strong>. How many pipeline instances the engine holds open at once, including those waiting on a worker pool. Every stuck sweep re-advances each open instance, so raise it together with the sweep interval.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>5000</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_max_concurrent"><code>CFG_PIPELINE_MAX_CONCURRENT</code><a class="anchor" href="#cfg_pipeline_max_concurrent" aria-label="Link to this section"></a></h3>
+<p><strong>Pipeline steps in parallel</strong>. How many inline pipeline steps the engine runs at once. Steps that are GPU- or CPU-heavy go to a worker pool instead and are bounded separately.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_consume_concurrency"><code>CFG_PIPELINE_CONSUME_CONCURRENCY</code><a class="anchor" href="#cfg_pipeline_consume_concurrency" aria-label="Link to this section"></a></h3>
+<p><strong>Queue consume concurrency</strong>. How many queue entries the engine consumes in parallel.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code><a class="anchor" href="#cfg_pipeline_step_quiet_ms" aria-label="Link to this section"></a></h3>
+<p><strong>Quiet step warning (ms)</strong>. How long a running pipeline step may go without writing any output before the pipeline overview flags it. A flagged step keeps running: no step is ever stopped for taking long.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1800000</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_media_heal_rest"><code>CFG_MEDIA_HEAL_REST</code><a class="anchor" href="#cfg_media_heal_rest" aria-label="Link to this section"></a></h3>
+<p><strong>Rest after a full gap check (seconds)</strong>. How long the background gap check waits after it has been through the whole archive before it starts over.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>21600</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>media-heal</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_max_admitted_steps"><code>CFG_PIPELINE_MAX_ADMITTED_STEPS</code><a class="anchor" href="#cfg_pipeline_max_admitted_steps" aria-label="Link to this section"></a></h3>
+<p><strong>Steps held in flight</strong>. How many dispatched steps the engine holds in memory before it stops claiming triggers. Work beyond it waits in the pool, where it costs nothing. Empty means 25 times the pipeline steps in parallel.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means 25 × pipeline steps in parallel</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_stuck_sweep_ms"><code>CFG_PIPELINE_STUCK_SWEEP_MS</code><a class="anchor" href="#cfg_pipeline_stuck_sweep_ms" aria-label="Link to this section"></a></h3>
+<p><strong>Stuck sweep interval (ms)</strong>. How often, at most, the engine re-advances its open instances to repair any that stopped without finishing, and how long it backs off while admission is full.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>60000</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_trigger_concurrency"><code>CFG_PIPELINE_TRIGGER_CONCURRENCY</code><a class="anchor" href="#cfg_pipeline_trigger_concurrency" aria-label="Link to this section"></a></h3>
+<p><strong>Trigger concurrency</strong>. How many pipeline triggers the engine evaluates at once against incoming VFS events.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>pipeline-engine</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_pipeline_kind_quantum_ms"><code>CFG_PIPELINE_KIND_QUANTUM_MS</code><a class="anchor" href="#cfg_pipeline_kind_quantum_ms" aria-label="Link to this section"></a></h3>
+<p><strong>Worker backlog rotation (ms)</strong>. How long a pipeline worker that serves several kinds of job stays on one before rotating to the next when work remains on both. 0 always takes the highest-priority kind. Applies to workers whose service does not set its own rotation.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Takes effect</td>
+<td>Read by each pipeline worker when it starts: restart the services that run one.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="search">Search<a class="anchor" href="#search" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_command_finder"><code>CFG_COMMAND_FINDER</code><a class="anchor" href="#cfg_command_finder" aria-label="Link to this section"></a></h3>
+<p><strong>Command finder</strong>. The command that finds shell commands by what they are for, in the documentation&#39;s command search. Empty matches the words against command names and descriptions. The assistant sets itself here when it is installed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means a match on names and descriptions</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_language_model"><code>CFG_LANGUAGE_MODEL</code><a class="anchor" href="#cfg_language_model" aria-label="Link to this section"></a></h3>
+<p><strong>Language model command</strong>. The command that asks a language model, for reading what a person writes as they write it — the search box&#39;s parser reads people, locations and words with it. Empty asks no model. The assistant sets itself here when it is installed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means no model</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_search_parser"><code>CFG_SEARCH_PARSER</code><a class="anchor" href="#cfg_search_parser" aria-label="Link to this section"></a></h3>
+<p><strong>Search parser</strong>. The command that reads what is typed into the search box as filters — people, locations, years, kinds. Empty searches the words as they are. Archive sets its parser here when it is installed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the words as they are</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code><a class="anchor" href="#cfg_text_embedder" aria-label="Link to this section"></a></h3>
+<p><strong>Text embedder</strong>. The command that turns texts into vectors, for finding by meaning — the command finder ranks commands with it. Empty finds by words alone. The media service sets itself here when it is installed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means by words alone</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="sessions">Sessions<a class="anchor" href="#sessions" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_session_reap_interval"><code>CFG_SESSION_REAP_INTERVAL</code><a class="anchor" href="#cfg_session_reap_interval" aria-label="Link to this section"></a></h3>
+<p><strong>Session cleanup interval (seconds)</strong>. How often expired sessions and stranded terminals are collected, and expired share links turned off.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>3600</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>session-reaper</code></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_session_max_age_sec"><code>CFG_SESSION_MAX_AGE_SEC</code><a class="anchor" href="#cfg_session_max_age_sec" aria-label="Link to this section"></a></h3>
+<p><strong>Session cookie lifetime</strong>. How long a browser keeps its session cookie. Refreshed on every navigation, so this bounds idleness rather than total session age.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>86400</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_session_expires_sec"><code>CFG_SESSION_EXPIRES_SEC</code><a class="anchor" href="#cfg_session_expires_sec" aria-label="Link to this section"></a></h3>
+<p><strong>Session expiry</strong>. How long after its last activity a session is collected by the reaper. A session keeps the value it was created with; one holding an open terminal is never collected, whatever this says.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>43200</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_terminal_reconnect_grace_sec"><code>CFG_TERMINAL_RECONNECT_GRACE_SEC</code><a class="anchor" href="#cfg_terminal_reconnect_grace_sec" aria-label="Link to this section"></a></h3>
+<p><strong>Terminal reconnect grace</strong>. How long an interactive terminal survives without a browser connection, allowing reloads and short network interruptions to reattach.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>300</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>http-server</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="sharing">Sharing<a class="anchor" href="#sharing" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_user_default_share"><code>CFG_USER_DEFAULT_SHARE</code><a class="anchor" href="#cfg_user_default_share" aria-label="Link to this section"></a></h3>
+<p><strong>How widely what you create is shared</strong>. Where anything you create as shared starts out: private, shared with its group, or with everyone who has an account. &quot;Default&quot; follows the system setting.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>default</code></td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>default</code>, <code>private</code>, <code>shared</code>, <code>everyone</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="shell">Shell<a class="anchor" href="#shell" aria-label="Link to this section"></a></h2>
+<h3 id="histsize"><code>HISTSIZE</code><a class="anchor" href="#histsize" aria-label="Link to this section"></a></h3>
+<p><strong>Shell history length</strong>. How many commands the terminal remembers between sessions.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1000</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="storage">Storage<a class="anchor" href="#storage" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_tmp_retention_hours"><code>CFG_TMP_RETENTION_HOURS</code><a class="anchor" href="#cfg_tmp_retention_hours" aria-label="Link to this section"></a></h3>
+<p><strong>Hours in /tmp</strong>. How long a file left in /tmp, such as a picture sent to search with, is kept before it is removed.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>24</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>tmp-sweeper</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="transcription">Transcription<a class="anchor" href="#transcription" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_whisper_vad_min_silence_ms"><code>CFG_WHISPER_VAD_MIN_SILENCE_MS</code><a class="anchor" href="#cfg_whisper_vad_min_silence_ms" aria-label="Link to this section"></a></h3>
+<p><strong>Silence that splits speech (ms)</strong>. How long a pause must be before transcription treats it as the end of a stretch of speech. Empty uses the media service&#39;s own setting.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the media service decides</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_whisper_language"><code>CFG_WHISPER_LANGUAGE</code><a class="anchor" href="#cfg_whisper_language" aria-label="Link to this section"></a></h3>
+<p><strong>Transcription language</strong>. The language spoken in recordings, as a code such as sv or en, sent with every transcription. Empty lets the media service detect it, or use its own default.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the media service decides</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_whisper_word_timestamps"><code>CFG_WHISPER_WORD_TIMESTAMPS</code><a class="anchor" href="#cfg_whisper_word_timestamps" aria-label="Link to this section"></a></h3>
+<p><strong>Word timings</strong>. 1 asks transcription for the time of every word, 0 for timings per segment only. Empty uses the media service&#39;s own setting.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the media service decides</td>
+</tr>
+<tr>
+<td>Choices</td>
+<td><code>1</code>, <code>0</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>select</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Media service</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="trash">Trash<a class="anchor" href="#trash" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code><a class="anchor" href="#cfg_trash_retention_days" aria-label="Link to this section"></a></h3>
+<p><strong>Days in the trash</strong>. How long a trashed file stays restorable before it is removed for good.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>30</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>trash-purger</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="users-and-sharing">Users and sharing<a class="anchor" href="#users-and-sharing" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_default_share_group"><code>CFG_DEFAULT_SHARE_GROUP</code><a class="anchor" href="#cfg_default_share_group" aria-label="Link to this section"></a></h3>
+<p><strong>Default group</strong>. The group anything created as shared belongs to. This is the grant that lets the rest of the household see it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>users</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>group</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_default_user_groups"><code>CFG_DEFAULT_USER_GROUPS</code><a class="anchor" href="#cfg_default_user_groups" aria-label="Link to this section"></a></h3>
+<p><strong>Default groups for new users</strong>. The groups a new account joins besides its own, as a comma-separated list of names. The New user form starts with them ticked, and user-create takes them unless --groups names others.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>users</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_default_share_owner"><code>CFG_DEFAULT_SHARE_OWNER</code><a class="anchor" href="#cfg_default_share_owner" aria-label="Link to this section"></a></h3>
+<p><strong>Default owner</strong>. Who owns anything created as shared. Leave empty to let whoever creates it own it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the person who creates it</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>user</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_default_share_mode"><code>CFG_DEFAULT_SHARE_MODE</code><a class="anchor" href="#cfg_default_share_mode" aria-label="Link to this section"></a></h3>
+<p><strong>Default permissions</strong>. Who may see and who may change anything created as shared: its owner, its group and everyone else, each with no access, view or edit. Everyone else is visitors who are not signed in, where they may browse, and anyone with an account outside the group. Kept as an octal mode, as in 0750.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0750</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>mode</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code><a class="anchor" href="#cfg_guest_browsing" aria-label="Link to this section"></a></h3>
+<p><strong>Visitors may browse</strong>. Whether someone who has not signed in may browse the archive as the guest, seeing what is shared with visitors, rather than being asked to sign in. Off, the guest can only sign in or open a share link, in the web interface and through the API alike. Only on does the assistant&#39;s language model answer them. Off for a family&#39;s own archive; on for a public demo.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>boolean</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="voices">Voices<a class="anchor" href="#voices" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_voice_asd_vote_weight"><code>CFG_VOICE_ASD_VOTE_WEIGHT</code><a class="anchor" href="#cfg_voice_asd_vote_weight" aria-label="Link to this section"></a></h3>
+<p><strong>Lip-sync vote weight</strong>. How much it counts, as a similarity, that a person&#39;s face is seen speaking in step with the voice. Only voices someone named or locked are weighed against it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.9</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_asd_min_score"><code>CFG_VOICE_ASD_MIN_SCORE</code><a class="anchor" href="#cfg_voice_asd_min_score" aria-label="Link to this section"></a></h3>
+<p><strong>Minimum lip-sync score</strong>. How clearly a face must be seen speaking in step with a voice before that counts as a vote at all.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.6</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_min_create_seconds"><code>CFG_VOICE_MIN_CREATE_SECONDS</code><a class="anchor" href="#cfg_voice_min_create_seconds" aria-label="Link to this section"></a></h3>
+<p><strong>Speech to start a new person (seconds)</strong>. How long a voice that matches nobody must have spoken in a recording, in all, before it starts a new, unnamed person. Voices heard for less stay unknown.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>10</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_person_threshold"><code>CFG_VOICE_PERSON_THRESHOLD</code><a class="anchor" href="#cfg_voice_person_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Voice likeness to the person</strong>. How similar a voice must be to the average of a person&#39;s voices before it joins them. Stops a person drifting from one speaker to the next through a chain of loosely similar voices.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.7</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_asd_person_threshold"><code>CFG_VOICE_ASD_PERSON_THRESHOLD</code><a class="anchor" href="#cfg_voice_asd_person_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Voice likeness to the person seen speaking</strong>. How similar a voice must be to the average of a person&#39;s voices before a face seen speaking with it may join them. Lower than the plain likeness bar, since the face is evidence too; it stops the camera operator&#39;s voice going to whoever is in frame.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.5</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_attach_threshold"><code>CFG_VOICE_ATTACH_THRESHOLD</code><a class="anchor" href="#cfg_voice_attach_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Voice match threshold</strong>. How similar a voice in a recording must be to a known voice before it is attached to that person. Higher is stricter and produces fewer wrong matches but more unknown speakers.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.55</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_vote_threshold"><code>CFG_VOICE_VOTE_THRESHOLD</code><a class="anchor" href="#cfg_voice_vote_threshold" aria-label="Link to this section"></a></h3>
+<p><strong>Voice neighbour similarity</strong>. How similar a known voice must be to count as a vote for its person. Voices less alike than this are ignored when deciding who is speaking.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>0.5</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_k"><code>CFG_VOICE_K</code><a class="anchor" href="#cfg_voice_k" aria-label="Link to this section"></a></h3>
+<p><strong>Voice neighbours compared</strong>. How many of the most similar known voices are compared with each unknown one.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>24</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_voice_margin"><code>CFG_VOICE_MARGIN</code><a class="anchor" href="#cfg_voice_margin" aria-label="Link to this section"></a></h3>
+<p><strong>Voice winner margin</strong>. How far the leading person&#39;s votes must outweigh the runner-up&#39;s before a voice is attached. 1.2 means 20% more; higher leaves close calls unknown.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1.2</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="commands-importer.html" rel="prev"><span>Previous</span>Importer commands</a><a class="next" href="environment.html" rel="next"><span>Next</span>Environment variables</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/settings.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#albums">Albums</a></li><li><a href="#appearance">Appearance</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#faces">Faces</a></li><li><a href="#language">Language</a></li><li><a href="#media-service">Media service</a></li><li><a href="#modules">Modules</a></li><li><a href="#network">Network</a></li><li><a href="#playback">Playback</a></li><li><a href="#processing">Processing</a></li><li><a href="#search">Search</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#shell">Shell</a></li><li><a href="#storage">Storage</a></li><li><a href="#transcription">Transcription</a></li><li><a href="#trash">Trash</a></li><li><a href="#users-and-sharing">Users and sharing</a></li><li><a href="#voices">Voices</a></li></ul></aside>
+    </div>
+  </body>
+</html>

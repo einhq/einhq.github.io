@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Node types – EiN documentation</title>
+    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 24 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/node-types.html">
+    <meta property="og:title" content="Node types – EiN documentation">
+    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 24 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/node-types.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html" aria-current="page">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Node types</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `docs node-types` on a running EiN: make reference, never by hand. -->
+
+<p>Every node has a type, which decides what it holds and how it behaves. These are the 24 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
+<h2 id="content">Content<a class="anchor" href="#content" aria-label="Link to this section"></a></h2>
+<p>What the archive is made of: what people add, and what EiN works out about it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+<th>Lives under</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>album</code> Album</td>
+<td>A collection of photos and videos that behaves as a directory. It holds its files, and links the ones added to it from elsewhere. It remembers its cover, the time span of its media, and the stacks of similar photos taken in a row.</td>
+<td><code>/archive/albums</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>album-profile</code> Album profile</td>
+<td>A summary of a library album&#39;s members — their times, days, places, people and a few pictures that stand for how it looks — kept beside it as its .profile child, which staging matches suggested groups against.</td>
+<td></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>device</code> Device</td>
+<td>A camera, phone or tracker, matched by make, model and serial number. Knows its time zone, so photos without one get their capture time right.</td>
+<td><code>/archive/devices</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>exif</code> EXIF</td>
+<td>The metadata read from a media file — camera, capture time, exposure, position — kept as a child of the file.</td>
+<td></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>file</code> File</td>
+<td>Stored bytes with a name, a mimetype, a size and a checksum: a photo, a video, a document, an event text. Media files carry what was read from them (capture time, orientation, faces) and hold their derived pieces — thumbnails, captions, EXIF — as children.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>location</code> Location</td>
+<td>A location under /archive/locations: its name, the address it was written down with and how that was geocoded, the people who lived there and the photos linked to it. Where it is on the map is its child named position, a point, circle or outline.</td>
+<td><code>/archive/locations</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>media-region</code> Region</td>
+<td>A box on a photo, kept under the photo&#39;s regions/ directory: a face the detector found, a box someone drew, or a tag imported from the old archive. It carries who is in it. A region that shows a usable face has the face&#39;s vector as a child named embedding, and only those take part in face recognition.</td>
+<td></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>person</code> Person</td>
+<td>Someone in the archive, with names, dates of birth and death, and contact details. Parents, children and partners are links between people; the photos they appear in are found by their faces.</td>
+<td><code>/archive/people</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>position</code> Position</td>
+<td>A point on the map with an optional radius or outline. A photo, a location or an event keeps where it is as a child named position.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>track</code> Track</td>
+<td>The route a device recorded, kept as the device&#39;s child named track: timestamped GPS points, live or from imported GPX files, summarised by their extent and time span.</td>
+<td></td>
+<td>Core</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="structure">Structure<a class="anchor" href="#structure" aria-label="Link to this section"></a></h2>
+<p>How the tree is arranged: folders, links, and what holds other nodes.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+<th>Lives under</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>directory</code> Directory</td>
+<td>A folder that holds other nodes. The archive roots — albums, people, locations, devices and labels — are directories.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>group</code> Group</td>
+<td>A set of users, under /etc/groups. A node&#39;s group, and any group in its ACL, decides who besides the owner may read or change it.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>softlink</code> Softlink</td>
+<td>A pointer to another node by path, followed transparently. Album covers, pictures added to an album, labels and the relations between people and locations are all softlinks.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>user</code> User</td>
+<td>An account that can sign in, under /home. Owns nodes, belongs to groups, and keeps its settings and shell history in its home directory.</td>
+<td></td>
+<td>Core</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="system">System<a class="anchor" href="#system" aria-label="Link to this section"></a></h2>
+<p>How EiN runs: its commands, logs, queues and the other parts of the system that are nodes too.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+<th>Lives under</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>command</code> Command</td>
+<td>A built-in shell command, carrying its own description, arguments and flags. Commands a module adds are files in the module&#39;s bin directory instead.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>embedding</code> Embedding</td>
+<td>A numeric fingerprint of an image, a face or a text, kept for similarity search: what finds photos by what they show and faces of the same person.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>log</code> Log</td>
+<td>An append-only record of lines kept for a retention period, such as the system log under /var/logs.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>null</code> Null</td>
+<td>/dev/null: reading it gives nothing and what is written to it is thrown away, for output nobody wants.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>pool</code> Pool</td>
+<td>Background jobs waiting for a worker with the right resources, under /var/pools. <code>pool stat</code> shows what is waiting.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>queue</code> Queue</td>
+<td>A durable first-in, first-out buffer; reading an entry removes it. The pipeline engine takes its work from one.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>router</code> Router</td>
+<td>A live broadcast channel: what is written reaches every current reader and nothing is kept. /dev/events is one.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>session</code> Session</td>
+<td>A signed-in connection — a browser, an SSH login, a service — under /var/sessions. Removed when it ends.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>share-link</code> Share link</td>
+<td>A link that opens an album, and what it holds, to whoever has it, without signing in; under /var/links, with when it expires and how often it was opened. <code>share-link</code> makes, lists and turns them off.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
+<td><code>tty</code> Terminal</td>
+<td>An interactive terminal belonging to a session, with its size and working directory.</td>
+<td></td>
+<td>Core</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="environment.html" rel="prev"><span>Previous</span>Environment variables</a><a class="next" href="config-files.html" rel="next"><span>Next</span>Configuration files</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/node-types.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#content">Content</a></li><li><a href="#structure">Structure</a></li><li><a href="#system">System</a></li></ul></aside>
+    </div>
+  </body>
+</html>

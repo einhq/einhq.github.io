@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commands by task – EiN documentation</title>
+    <meta name="description" content="This page is for power users and administrators who know what they want to do and need the command for it. Each table row gives a task, a command line that does it, and a link to that command's full entry in the reference.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/commands.html">
+    <meta property="og:title" content="Commands by task – EiN documentation">
+    <meta property="og:description" content="This page is for power users and administrators who know what they want to do and need the command for it. Each table row gives a task, a command line that does it, and a link to that command's full entry in the reference.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/commands.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html" aria-current="page">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>Commands by task</h1>
+        </header>
+        <article class="prose">
+<p>This page is for power users and administrators who know what they want to do and need the command for it. Each table row gives a task, a command line that does it, and a link to that command&#39;s full entry in the <a href="../reference/commands.html">reference</a>.</p>
+<h2 id="how-to-read-the-tables">How to read the tables<a class="anchor" href="#how-to-read-the-tables" aria-label="Link to this section"></a></h2>
+<ul>
+<li>Every command runs as you, with your permissions, in <a href="terminal.html">the terminal</a> or over <a href="ssh-sftp.html">SSH</a>. The examples use the demo archive&#39;s invented Wrenfield family: the album <code>/archive/albums/christmas-2019</code>, the person <code>/archive/people/Peggy_Wrenfield</code>, the account <code>helen</code>.</li>
+<li><em>administrators only</em> marks a command that anyone else is refused before it starts, with <code>&lt;name&gt;: permission denied: only an administrator may run it</code>. A member of the <code>sudo</code> group can type <code>admin</code> to act as the administrator in that terminal. <a href="../admin/accounts.html">Accounts and groups</a> explains who that is.</li>
+<li>The archive, assistant and media service commands come with their <a href="../admin/modules.html">modules</a>. Without the module, the shell answers <code>error: command &#39;&lt;name&gt;&#39; not found</code>. <code>mod list</code> shows what is installed.</li>
+<li>A command of a family can be typed as two words: <code>mod install</code> is <code>mod-install</code>, and <code>pipeline status</code> is <code>pipeline-status</code>. The families are <code>config</code>, <code>docs</code>, <code>group</code>, <code>mod</code>, <code>pipeline</code>, <code>pool</code>, <code>service</code>, <code>share</code> and <code>user</code>, and with the archive also <code>person</code> and <code>device</code>. <code>&lt;family&gt; --help</code>, such as <code>mod --help</code>, lists its subcommands; typing <code>mod</code> alone answers <code>mod: missing subcommand</code>.</li>
+<li><code>&lt;command&gt; --help</code> prints a command&#39;s arguments, options and examples without running it. <code>JSON_OUTPUT=1</code> in front of a command makes it answer in JSON; <a href="bash.html">The shell language</a> covers that and the rest of the syntax.</li>
+<li><code>cd</code>, <code>pwd</code>, <code>jobs</code>, <code>kill</code> and the other bash builtins have no reference entry. They are described in <a href="bash.html">The shell language</a>.</li>
+</ul>
+<h2 id="files-and-nodes">Files and nodes<a class="anchor" href="#files-and-nodes" aria-label="Link to this section"></a></h2>
+<p>The tree works like a file system: paths start at <code>/</code>, <code>..</code> is the parent, and <code>cd</code> moves you around. Any node can have children, so <code>cd</code> into a photo works and <code>ls</code> shows what EiN learnt about it, such as <code>exif</code>, <code>position</code>, <code>thumbnails</code> and <code>regions</code>. <a href="../concepts/tree.html">The tree</a> says what lives where.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>See where you are, move around</td>
+<td><code>pwd</code>, <code>cd /archive/albums</code>, <code>cd -</code></td>
+<td><a href="bash.html">bash builtins</a></td>
+</tr>
+<tr>
+<td>List a folder, with details</td>
+<td><code>ls -l /archive/albums</code> (<code>ll</code> for <code>ls -al</code>)</td>
+<td><a href="../reference/commands-core.html#ls">ls</a></td>
+</tr>
+<tr>
+<td>List one page of a large folder</td>
+<td><code>ls -l --limit 200 --after 20191224_141841.jpg .</code></td>
+<td><a href="../reference/commands-core.html#ls">ls</a></td>
+</tr>
+<tr>
+<td>Show a text file or a log</td>
+<td><code>cat notes.txt</code>, <code>cat -t /var/logs/system</code> (each entry&#39;s time first)</td>
+<td><a href="../reference/commands-core.html#cat">cat</a></td>
+</tr>
+<tr>
+<td>Look at a picture in the web terminal</td>
+<td><code>cat /archive/albums/christmas-2019/20191224_141841.jpg</code></td>
+<td><a href="../reference/commands-core.html#cat">cat</a></td>
+</tr>
+<tr>
+<td>The first or last lines of a file</td>
+<td><code>head -n 20 notes.txt</code>, <code>tail -n 50 notes.txt</code></td>
+<td><a href="../reference/commands-core.html#head">head</a>, <a href="../reference/commands-core.html#tail">tail</a></td>
+</tr>
+<tr>
+<td>Edit a text file, or start one</td>
+<td><code>edit ~/notes.md</code></td>
+<td><a href="../reference/commands-core.html#edit">edit</a></td>
+</tr>
+<tr>
+<td>Make an empty text file (what <code>touch</code> does elsewhere)</td>
+<td><code>mkfile ~/todo.txt</code></td>
+<td><a href="../reference/commands-core.html#mkfile">mkfile</a></td>
+</tr>
+<tr>
+<td>Make a folder, with its parents</td>
+<td><code>mkdir -p ~/drafts/2026</code></td>
+<td><a href="../reference/commands-core.html#mkdir">mkdir</a></td>
+</tr>
+<tr>
+<td>Copy a file or a folder</td>
+<td><code>cp notes.txt notes-old.txt</code>, <code>cp -r ~/drafts ~/drafts-copy</code></td>
+<td><a href="../reference/commands-core.html#cp">cp</a></td>
+</tr>
+<tr>
+<td>Move or rename</td>
+<td><code>mv ~/drafts/letter.txt ~/letters/</code></td>
+<td><a href="../reference/commands-core.html#mv">mv</a></td>
+</tr>
+<tr>
+<td>Move something to your trash</td>
+<td><code>trash put ~/drafts/old.txt</code></td>
+<td><a href="../reference/commands-core.html#trash">trash</a></td>
+</tr>
+<tr>
+<td>See your trash, restore from it</td>
+<td><code>trash list</code>, <code>trash restore &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#trash">trash</a></td>
+</tr>
+<tr>
+<td>Delete for good</td>
+<td><code>rm ~/todo.txt</code>, <code>rm -r ~/drafts-copy</code></td>
+<td><a href="../reference/commands-core.html#rm">rm</a></td>
+</tr>
+<tr>
+<td>Remove empty folders</td>
+<td><code>rmdir ~/drafts/2026</code></td>
+<td><a href="../reference/commands-core.html#rmdir">rmdir</a></td>
+</tr>
+<tr>
+<td>Make a softlink to a node</td>
+<td><code>ln -s /archive/albums/christmas-2019 ~/christmas</code></td>
+<td><a href="../reference/commands-core.html#ln">ln</a></td>
+</tr>
+<tr>
+<td>A node&#39;s type, owner and times</td>
+<td><code>stat &lt;path&gt;</code>, <code>info &lt;path&gt;</code>, <code>props &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#stat">stat</a>, <a href="../reference/commands-core.html#info">info</a>, <a href="../reference/commands-core.html#props">props</a></td>
+</tr>
+<tr>
+<td>A node&#39;s attributes</td>
+<td><code>attrs /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-core.html#attrs">attrs</a></td>
+</tr>
+<tr>
+<td>The path of a node id</td>
+<td><code>resolve-id &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#resolve-id">resolve-id</a></td>
+</tr>
+<tr>
+<td>A file&#39;s type: stored, by name and by content</td>
+<td><code>mime &lt;file&gt;</code></td>
+<td><a href="../reference/commands-core.html#mime">mime</a></td>
+</tr>
+<tr>
+<td>A file&#39;s bytes on disk, with its sha256</td>
+<td><code>file-stat -f &lt;file&gt;</code></td>
+<td><a href="../reference/commands-core.html#file-stat">file-stat</a></td>
+</tr>
+<tr>
+<td>How much a folder holds</td>
+<td><code>du -sh /archive/albums/christmas-2019</code>, <code>du -chs *</code></td>
+<td><a href="../reference/commands-core.html#du">du</a></td>
+</tr>
+<tr>
+<td>Unpack a zip file</td>
+<td><code>unzip -d ~/unpacked ~/takeout-001.zip</code></td>
+<td><a href="../reference/commands-core.html#unzip">unzip</a></td>
+</tr>
+<tr>
+<td>Bookmark a node, list bookmarks</td>
+<td><code>star &lt;path&gt;</code>, <code>star -d &lt;path&gt;</code>, <code>star list</code></td>
+<td><a href="../reference/commands-core.html#star">star</a></td>
+</tr>
+<tr>
+<td>Label something, see labels</td>
+<td><code>label add &lt;path&gt; sailing</code>, <code>label remove &lt;path&gt; sailing</code>, <code>labels</code></td>
+<td><a href="../reference/commands-core.html#label">label</a>, <a href="../reference/commands-core.html#labels">labels</a></td>
+</tr>
+<tr>
+<td>Comment on a node</td>
+<td><code>comment add &lt;path&gt; --body &#39;Taken at the cottage&#39;</code>, <code>comment list &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#comment">comment</a></td>
+</tr>
+</tbody></table>
+</div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>rm</code> deletes for good: it does not use the trash. Without <code>-r</code> it refuses any node that has children, with <code>rm: cannot remove &#39;&lt;path&gt;&#39;: Node not empty</code>, and a processed photo has children (its metadata, thumbnails and faces). Use <code>trash put</code> for anything you may want back. <a href="../concepts/links.html">Links</a> explains what deleting and moving do to links.</p>
+</aside>
+<h2 id="search-and-find">Search and find<a class="anchor" href="#search-and-find" aria-label="Link to this section"></a></h2>
+<p><code>search</code> looks through what EiN knows about your content: the words, what the pictures show, the people in them, dates and places. <code>find</code> walks the tree by name and type, as GNU find does. <a href="../guide/search.html">Search and the finder</a> covers searching in the web interface.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search everything by words</td>
+<td><code>search sailboat</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Only photos, or videos</td>
+<td><code>search sailboat --kind photo</code>, <code>--kind video,audio</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Find albums, people or places by name</td>
+<td><code>search christmas --kind album</code>, <code>search peggy --kind person</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Pictures of a person</td>
+<td><code>search --subject person:Peggy_Wrenfield --kind photo</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Pictures of two people together</td>
+<td><code>search --subject person:Peggy_Wrenfield --subject person:Helen_Okafor</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Pictures taken in a period</td>
+<td><code>search --from 1968 --to 1970 --kind photo</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Pictures from a town or an area</td>
+<td><code>search --bbox=$(location-region Truro --bbox-only)</code></td>
+<td><a href="../reference/commands-core.html#search">search</a>, <a href="../reference/commands-archive.html#location-region">location-region</a></td>
+</tr>
+<tr>
+<td>Pictures with a label</td>
+<td><code>search --tag sailing</code>, or <code>members /archive/tags/sailing</code></td>
+<td><a href="../reference/commands-core.html#search">search</a>, <a href="../reference/commands-core.html#members">members</a></td>
+</tr>
+<tr>
+<td>Pictures that look like one picture</td>
+<td><code>search --like /archive/albums/christmas-2019/20191224_141841.jpg</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Search inside one album</td>
+<td><code>search --under /archive/albums/christmas-2019 tree</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Search everything below a folder</td>
+<td><code>search --within ~/staging/files --undated</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Which albums hold the matches</td>
+<td><code>search --subject person:Peggy_Wrenfield --group-by album</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Count matches per year, month and kind</td>
+<td><code>search --subject person:Peggy_Wrenfield --facets</code></td>
+<td><a href="../reference/commands-core.html#search">search</a></td>
+</tr>
+<tr>
+<td>Find nodes by name</td>
+<td><code>find /archive/albums -iname &#39;*.heic&#39; -type f</code></td>
+<td><a href="../reference/commands-core.html#find">find</a></td>
+</tr>
+<tr>
+<td>Find nodes by type</td>
+<td><code>find /archive/people -mindepth 1 -maxdepth 1 -type person</code></td>
+<td><a href="../reference/commands-core.html#find">find</a></td>
+</tr>
+<tr>
+<td>Find large files</td>
+<td><code>find ~/staging -type f -size +10M -printf &#39;%s %p\n&#39;</code></td>
+<td><a href="../reference/commands-core.html#find">find</a></td>
+</tr>
+<tr>
+<td>Find what changed in the last hour</td>
+<td><code>find ~/staging -type f -mmin -60</code></td>
+<td><a href="../reference/commands-core.html#find">find</a></td>
+</tr>
+<tr>
+<td>Find lines in text files</td>
+<td><code>grep -n -i cottage ~/notes.md</code></td>
+<td><a href="../reference/commands-core.html#grep">grep</a></td>
+</tr>
+<tr>
+<td>Find a command by what it does</td>
+<td><code>docs find restart a service</code></td>
+<td><a href="../reference/commands-core.html#docs-find">docs-find</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The node types <code>find -type</code> takes are listed in <a href="../reference/node-types.html">Node types</a>.</p>
+<h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section"></a></h2>
+<p>These commands come with the archive module. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. <a href="../guide/albums.html">Albums</a>, <a href="../guide/people.html">People and faces</a> and the other guide pages show the same tasks in the web interface.</p>
+<h3 id="albums">Albums<a class="anchor" href="#albums" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List the albums</td>
+<td><code>album list /archive/albums</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>An album&#39;s name, description, cover and size</td>
+<td><code>album info /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Make an album</td>
+<td><code>album create /archive/albums/malpas-summer --name &#39;Summer at Malpas&#39;</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Make a private album</td>
+<td><code>album create /archive/albums/malpas-summer --name &#39;Summer at Malpas&#39; --share private</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Put pictures in an album</td>
+<td><code>album add /archive/albums/malpas-summer &lt;file&gt;...</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Rename an album, describe it</td>
+<td><code>album set /archive/albums/christmas-2019 name &#39;Christmas 2019&#39;</code>, <code>... description &#39;&lt;text&gt;&#39;</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Choose an album&#39;s cover</td>
+<td><code>album set /archive/albums/christmas-2019 cover &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Widen an album&#39;s span by hand</td>
+<td><code>album set /archive/albums/christmas-2019 spanStart 2019-12-20</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>Link albums as a series</td>
+<td><code>album set /archive/albums/christmas-2019 next /archive/albums/lockdown-2020</code></td>
+<td><a href="../reference/commands-archive.html#album">album</a></td>
+</tr>
+<tr>
+<td>List an album&#39;s pictures</td>
+<td><code>members-album /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-archive.html#members-album">members-album</a></td>
+</tr>
+<tr>
+<td>Who and what an album&#39;s pictures show</td>
+<td><code>subjects-in /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-archive.html#subjects-in">subjects-in</a></td>
+</tr>
+<tr>
+<td>One album at random</td>
+<td><code>album-random</code></td>
+<td><a href="../reference/commands-archive.html#album-random">album-random</a></td>
+</tr>
+<tr>
+<td>Give albums without a cover one of their pictures</td>
+<td><code>album-cover --all</code></td>
+<td><a href="../reference/commands-archive.html#album-cover">album-cover</a></td>
+</tr>
+<tr>
+<td>Write an album&#39;s span again</td>
+<td><code>album-span /archive/albums/christmas-2019</code>, <code>album-span --all --stale</code></td>
+<td><a href="../reference/commands-archive.html#album-span">album-span</a></td>
+</tr>
+<tr>
+<td>Find stacks of similar photos taken in a row</td>
+<td><code>album-stack refresh /archive/albums/christmas-2019 --dry-run --verbose</code></td>
+<td><a href="../reference/commands-archive.html#album-stack">album-stack</a></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="pictures-videos-and-recordings">Pictures, videos and recordings<a class="anchor" href="#pictures-videos-and-recordings" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Everything about one file</td>
+<td><code>media-details /archive/albums/christmas-2019/20191224_141841.jpg</code></td>
+<td><a href="../reference/commands-archive.html#media-details">media-details</a></td>
+</tr>
+<tr>
+<td>Its metadata as exiftool reads it</td>
+<td><code>exiftool &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#exiftool">exiftool</a></td>
+</tr>
+<tr>
+<td>Set when it was taken, as vaguely as you know</td>
+<td><code>file-set-time &lt;file&gt; 1968-07 --note &#39;Postmark on the back&#39;</code></td>
+<td><a href="../reference/commands-archive.html#file-set-time">file-set-time</a></td>
+</tr>
+<tr>
+<td>Undo a date set by hand</td>
+<td><code>file-set-time --clear &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#file-set-time">file-set-time</a></td>
+</tr>
+<tr>
+<td>Set where it was taken</td>
+<td><code>file-set-position &lt;file&gt; --lat=50.2632 --lng=-5.0510</code></td>
+<td><a href="../reference/commands-archive.html#file-set-position">file-set-position</a></td>
+</tr>
+<tr>
+<td>Rotate or mirror it for good</td>
+<td><code>file-set-orientation --rotate cw &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#file-set-orientation">file-set-orientation</a></td>
+</tr>
+<tr>
+<td>Write its description</td>
+<td><code>file-set-description --text &#39;Christmas morning&#39; &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#file-set-description">file-set-description</a></td>
+</tr>
+<tr>
+<td>Correct the text read from it</td>
+<td><code>file-set-text &lt;file&gt; --text &#39;Dear Peggy&#39;</code></td>
+<td><a href="../reference/commands-archive.html#file-set-text">file-set-text</a></td>
+</tr>
+<tr>
+<td>Read its text again in another language</td>
+<td><code>file-set-text-language &lt;file&gt; en</code></td>
+<td><a href="../reference/commands-archive.html#file-set-text-language">file-set-text-language</a></td>
+</tr>
+<tr>
+<td>Say who took it</td>
+<td><code>file-set-photographer &lt;file&gt; /archive/people/Helen_Okafor</code></td>
+<td><a href="../reference/commands-archive.html#file-set-photographer">file-set-photographer</a></td>
+</tr>
+<tr>
+<td>The latest pictures taken</td>
+<td><code>latest 20</code></td>
+<td><a href="../reference/commands-archive.html#latest">latest</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>A value that starts with a minus goes after an equals sign, as in <code>--lng=-5.0510</code>; on its own it would be read as another option. Only <code>file-set-time</code> can give a picture a vague date such as <code>1968</code> or <code>1968-07</code>; the web interface&#39;s dialog sets full dates. <a href="../guide/dates-places.html">Dates and places of pictures</a> explains which date a picture gets.</p>
+<p>To have EiN look at one file again, run the step with <code>-f</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read the text in a picture again</td>
+<td><code>read-text -f &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#read-text">read-text</a></td>
+</tr>
+<tr>
+<td>Find the faces again (boxes drawn by hand stay)</td>
+<td><code>detect-faces -f &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#detect-faces">detect-faces</a></td>
+</tr>
+<tr>
+<td>Transcribe a recording or video again</td>
+<td><code>transcribe-file -f &lt;file&gt;</code></td>
+<td><a href="../reference/commands-archive.html#transcribe-file">transcribe-file</a></td>
+</tr>
+<tr>
+<td>Make thumbnails and renditions again</td>
+<td><code>regenerate --force &lt;file or folder&gt;</code></td>
+<td><a href="../reference/commands-archive.html#regenerate">regenerate</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>All four ask the <a href="../admin/media-service.html">media service</a>, so they need it running. For many files at once, an administrator starts the pipelines instead: see <a href="../admin/processing.html">Processing and pipelines</a>.</p>
+<h3 id="people">People<a class="anchor" href="#people" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List the named people</td>
+<td><code>person-list --sort count</code></td>
+<td><a href="../reference/commands-archive.html#person-list">person-list</a></td>
+</tr>
+<tr>
+<td>A person&#39;s details, relations and events</td>
+<td><code>person-info /archive/people/Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-info">person-info</a></td>
+</tr>
+<tr>
+<td>Add a person</td>
+<td><code>person-create /archive/people/Ada_Wrenfield --name &#39;Ada Wrenfield&#39; --born 2026-03-02</code></td>
+<td><a href="../reference/commands-archive.html#person-create">person-create</a></td>
+</tr>
+<tr>
+<td>Change names, dates and details</td>
+<td><code>person-update /archive/people/Peggy_Wrenfield --born 1934-08-22</code></td>
+<td><a href="../reference/commands-archive.html#person-update">person-update</a></td>
+</tr>
+<tr>
+<td>People found in pictures but not named</td>
+<td><code>person-unknown --limit 20</code></td>
+<td><a href="../reference/commands-archive.html#person-unknown">person-unknown</a></td>
+</tr>
+<tr>
+<td>Name one of them</td>
+<td><code>person-name --name &#39;Mabel Cole&#39; /archive/people/unknown/&lt;id&gt;</code></td>
+<td><a href="../reference/commands-archive.html#person-name">person-name</a></td>
+</tr>
+<tr>
+<td>Merge two people who are one</td>
+<td><code>person-merge /archive/people/unknown/&lt;id&gt; /archive/people/Ruby_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-merge">person-merge</a></td>
+</tr>
+<tr>
+<td>Every face of a person</td>
+<td><code>person-faces --sort date /archive/people/Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-faces">person-faces</a></td>
+</tr>
+<tr>
+<td>Take a wrong face off a person</td>
+<td><code>person-detach --rematch &lt;file&gt;/regions/face-1</code></td>
+<td><a href="../reference/commands-archive.html#person-detach">person-detach</a></td>
+</tr>
+<tr>
+<td>Add a parent</td>
+<td><code>person-set-parent &lt;child&gt; &lt;parent&gt;</code>, <code>--kind adoptive</code></td>
+<td><a href="../reference/commands-archive.html#person-set-parent">person-set-parent</a></td>
+</tr>
+<tr>
+<td>Add a partner</td>
+<td><code>person-set-partner --kind married --from 1956-06-02 &lt;a&gt; &lt;b&gt;</code></td>
+<td><a href="../reference/commands-archive.html#person-set-partner">person-set-partner</a></td>
+</tr>
+<tr>
+<td>Remove a relation between two people</td>
+<td><code>person-remove &lt;a&gt; &lt;b&gt;</code></td>
+<td><a href="../reference/commands-archive.html#person-remove">person-remove</a></td>
+</tr>
+<tr>
+<td>Add an event to a person</td>
+<td><code>person-add-event --type death --date 2021-01-17 /archive/people/Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-add-event">person-add-event</a></td>
+</tr>
+<tr>
+<td>Record where someone lived</td>
+<td><code>person-set-home --from 1956 --to 1999 &lt;person&gt; /archive/locations/Highbury</code></td>
+<td><a href="../reference/commands-archive.html#person-set-home">person-set-home</a></td>
+</tr>
+<tr>
+<td>How two people are related</td>
+<td><code>person-how-related /archive/people/Ruby_Wrenfield /archive/people/Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-how-related">person-how-related</a></td>
+</tr>
+<tr>
+<td>Who a kin word reaches</td>
+<td><code>person-relatives Peggy_Wrenfield --relation daughter</code></td>
+<td><a href="../reference/commands-archive.html#person-relatives">person-relatives</a></td>
+</tr>
+<tr>
+<td>Ancestors and descendants</td>
+<td><code>person-family-tree --up 2 --down 2 /archive/people/Helen_Okafor</code></td>
+<td><a href="../reference/commands-archive.html#person-family-tree">person-family-tree</a></td>
+</tr>
+<tr>
+<td>A person&#39;s life in order</td>
+<td><code>person-timeline /archive/people/Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#person-timeline">person-timeline</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The family relations, events and homes are explained in <a href="../guide/family.html">Family tree, events and homes</a>.</p>
+<h3 id="locations-devices-and-tracks">Locations, devices and tracks<a class="anchor" href="#locations-devices-and-tracks" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List the locations</td>
+<td><code>location-list</code></td>
+<td><a href="../reference/commands-archive.html#location-list">location-list</a></td>
+</tr>
+<tr>
+<td>Change a location&#39;s name or description</td>
+<td><code>location-update /archive/locations/Highbury --description &#39;&lt;text&gt;&#39;</code></td>
+<td><a href="../reference/commands-archive.html#location-update">location-update</a></td>
+</tr>
+<tr>
+<td>What happened at a location</td>
+<td><code>location-timeline /archive/locations/Highbury</code></td>
+<td><a href="../reference/commands-archive.html#location-timeline">location-timeline</a></td>
+</tr>
+<tr>
+<td>List the devices</td>
+<td><code>device-list</code></td>
+<td><a href="../reference/commands-archive.html#device-list">device-list</a></td>
+</tr>
+<tr>
+<td>A device&#39;s details and owners</td>
+<td><code>device-info /archive/devices/peggy-lumix</code></td>
+<td><a href="../reference/commands-archive.html#device-info">device-info</a></td>
+</tr>
+<tr>
+<td>Devices seen in pictures but not registered</td>
+<td><code>device-scan</code></td>
+<td><a href="../reference/commands-archive.html#device-scan">device-scan</a></td>
+</tr>
+<tr>
+<td>Register a device</td>
+<td><code>device-create /archive/devices/ada-camera --name &quot;Ada&#39;s camera&quot; --make &lt;make&gt; --model &lt;model&gt;</code></td>
+<td><a href="../reference/commands-archive.html#device-create">device-create</a></td>
+</tr>
+<tr>
+<td>Say who owned a device, and when</td>
+<td><code>device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/Ruby_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#device-set-owner">device-set-owner</a></td>
+</tr>
+<tr>
+<td>A device&#39;s history</td>
+<td><code>device-timeline /archive/devices/ruby-iphone</code></td>
+<td><a href="../reference/commands-archive.html#device-timeline">device-timeline</a></td>
+</tr>
+<tr>
+<td>Devices with a GPS track</td>
+<td><code>track-list</code></td>
+<td><a href="../reference/commands-archive.html#track-list">track-list</a></td>
+</tr>
+<tr>
+<td>Add a GPX file to a device&#39;s track</td>
+<td><code>track-import /archive/devices/ruby-iphone &lt;file&gt;.gpx</code></td>
+<td><a href="../reference/commands-archive.html#track-import">track-import</a></td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day<a class="anchor" href="#feeds-timeline-news-events-and-on-this-day" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Everything that happened, newest first</td>
+<td><code>timeline</code></td>
+<td><a href="../reference/commands-archive.html#timeline">timeline</a></td>
+</tr>
+<tr>
+<td>One year, or one person&#39;s entries</td>
+<td><code>timeline --year 1968</code>, <code>timeline --person Peggy_Wrenfield</code></td>
+<td><a href="../reference/commands-archive.html#timeline">timeline</a></td>
+</tr>
+<tr>
+<td>What people added lately</td>
+<td><code>news</code>, <code>news --limit 20</code></td>
+<td><a href="../reference/commands-core.html#news">news</a></td>
+</tr>
+<tr>
+<td>Birthdays, memorials and anniversaries around a date</td>
+<td><code>events</code>, <code>events --today 2026-12-24 --days-ahead 7</code></td>
+<td><a href="../reference/commands-core.html#events">events</a></td>
+</tr>
+<tr>
+<td>What the archive has from this day in earlier years</td>
+<td><code>onthisday</code>, <code>onthisday 12-24</code></td>
+<td><a href="../reference/commands-core.html#onthisday">onthisday</a></td>
+</tr>
+<tr>
+<td>Pictures taken on a day in past years</td>
+<td><code>dayinhistory 12-24 --years 20</code></td>
+<td><a href="../reference/commands-archive.html#dayinhistory">dayinhistory</a></td>
+</tr>
+</tbody></table>
+</div>
+<p><code>news</code>, <code>events</code> and <code>onthisday</code> are core commands that gather what every installed module tells; without the archive they have little to say. <a href="../guide/home.html">Home, memories and statistics</a> shows the same feeds on the Home page.</p>
+<h3 id="duplicates-and-staging">Duplicates and staging<a class="anchor" href="#duplicates-and-staging" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Exact copies in an album or below a folder</td>
+<td><code>duplicates /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-archive.html#duplicates">duplicates</a></td>
+</tr>
+<tr>
+<td>Look-alikes: resized, cropped or rescanned copies</td>
+<td><code>duplicates --fuzzy /archive/albums</code></td>
+<td><a href="../reference/commands-archive.html#duplicates">duplicates</a></td>
+</tr>
+<tr>
+<td>Keep one copy and trash the others</td>
+<td><code>merge-duplicates --dry-run &lt;keep&gt; &lt;drop&gt;...</code></td>
+<td><a href="../reference/commands-archive.html#merge-duplicates">merge-duplicates</a></td>
+</tr>
+<tr>
+<td>The state of your staging area</td>
+<td><code>staging status</code></td>
+<td><a href="../reference/commands-archive.html#staging">staging</a></td>
+</tr>
+<tr>
+<td>Pair Google Photos and XMP sidecars with their files</td>
+<td><code>media-sidecars --dry-run ~/staging/files/google-photos/&lt;folder&gt;</code></td>
+<td><a href="../reference/commands-archive.html#media-sidecars">media-sidecars</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The <code>staging</code> command has many subcommands for sorting, filing and undoing; <a href="../guide/staging.html">Sorting in staging</a> and <a href="../admin/staging.html">Staging and importing for administrators</a> cover them. <a href="../guide/duplicates.html">Duplicates</a> explains how copies are found.</p>
+<h2 id="accounts-groups-and-sharing">Accounts, groups and sharing<a class="anchor" href="#accounts-groups-and-sharing" aria-label="Link to this section"></a></h2>
+<p><a href="../admin/accounts.html">Accounts and groups</a> explains the built-in accounts and groups, and <a href="../admin/permissions.html">Permissions in depth</a> the permission model these commands change.</p>
+<h3 id="accounts">Accounts<a class="anchor" href="#accounts" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who you are</td>
+<td><code>whoami</code>, <code>id</code></td>
+<td><a href="../reference/commands-core.html#user-whoami">user-whoami</a>, <a href="../reference/commands-core.html#user-id">user-id</a></td>
+</tr>
+<tr>
+<td>List the accounts</td>
+<td><code>user-list</code>, <code>user-list --inactive</code></td>
+<td><a href="../reference/commands-core.html#user-list">user-list</a></td>
+</tr>
+<tr>
+<td>One account&#39;s details</td>
+<td><code>user-info helen</code></td>
+<td><a href="../reference/commands-core.html#user-info">user-info</a></td>
+</tr>
+<tr>
+<td>The groups an account is in</td>
+<td><code>user-groups helen</code></td>
+<td><a href="../reference/commands-core.html#user-groups">user-groups</a></td>
+</tr>
+<tr>
+<td>Change your own password</td>
+<td><code>user-passwd helen --old-password=&lt;current&gt;</code> (asks for the new one)</td>
+<td><a href="../reference/commands-core.html#user-passwd">user-passwd</a></td>
+</tr>
+<tr>
+<td>Change your display name or description</td>
+<td><code>user-update helen --name &#39;Helen Okafor&#39;</code></td>
+<td><a href="../reference/commands-core.html#user-update">user-update</a></td>
+</tr>
+<tr>
+<td>Create an account, <em>administrators only</em></td>
+<td><code>user-create anna --title &#39;Anna Andersson&#39; --email anna@example.com</code></td>
+<td><a href="../reference/commands-core.html#user-create">user-create</a></td>
+</tr>
+<tr>
+<td>Set someone&#39;s password</td>
+<td><code>user-passwd anna</code> (asks <code>Password:</code>; others than your own: administrators)</td>
+<td><a href="../reference/commands-core.html#user-passwd">user-passwd</a></td>
+</tr>
+<tr>
+<td>Stop or allow someone signing in, <em>administrators only</em></td>
+<td><code>user-disable anna</code>, <code>user-enable anna</code></td>
+<td><a href="../reference/commands-core.html#user-disable">user-disable</a>, <a href="../reference/commands-core.html#user-enable">user-enable</a></td>
+</tr>
+<tr>
+<td>Delete an account, <em>administrators only</em></td>
+<td><code>user-delete anna --to helen</code></td>
+<td><a href="../reference/commands-core.html#user-delete">user-delete</a></td>
+</tr>
+<tr>
+<td>Change someone&#39;s primary group, <em>administrators only</em></td>
+<td><code>user-set-primary-group anna family</code></td>
+<td><a href="../reference/commands-core.html#user-set-primary-group">user-set-primary-group</a></td>
+</tr>
+<tr>
+<td>Act as the administrator, as a member of <code>sudo</code></td>
+<td><code>admin</code> (this terminal), <code>user-elevate --session</code>, <code>admin --off</code></td>
+<td><a href="../reference/commands-core.html#admin">admin</a>, <a href="../reference/commands-core.html#user-elevate">user-elevate</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>A new account has no password and cannot sign in until one is set. <code>whoami</code> and <code>id</code> are aliases for <code>user whoami</code> and <code>user id</code>, set in <code>/etc/bashrc</code>.</p>
+<h3 id="groups">Groups<a class="anchor" href="#groups" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List the groups and their members</td>
+<td><code>group-list --members</code></td>
+<td><a href="../reference/commands-core.html#group-list">group-list</a></td>
+</tr>
+<tr>
+<td>One group&#39;s details</td>
+<td><code>group-info family</code></td>
+<td><a href="../reference/commands-core.html#group-info">group-info</a></td>
+</tr>
+<tr>
+<td>Create a group, <em>administrators only</em></td>
+<td><code>group-create family --title &#39;Family&#39;</code></td>
+<td><a href="../reference/commands-core.html#group-create">group-create</a></td>
+</tr>
+<tr>
+<td>Add someone to a group, <em>administrators only</em></td>
+<td><code>group-add-member family anna</code></td>
+<td><a href="../reference/commands-core.html#group-add-member">group-add-member</a></td>
+</tr>
+<tr>
+<td>Take someone out of a group, <em>administrators only</em></td>
+<td><code>group-remove-member family anna</code></td>
+<td><a href="../reference/commands-core.html#group-remove-member">group-remove-member</a></td>
+</tr>
+<tr>
+<td>List a group&#39;s members, <em>administrators only</em></td>
+<td><code>group-members family</code></td>
+<td><a href="../reference/commands-core.html#group-members">group-members</a></td>
+</tr>
+<tr>
+<td>Rename a group&#39;s title, <em>administrators only</em></td>
+<td><code>group-update family --title &#39;The Wrenfields&#39;</code></td>
+<td><a href="../reference/commands-core.html#group-update">group-update</a></td>
+</tr>
+<tr>
+<td>Delete a group, <em>administrators only</em></td>
+<td><code>group-delete family --to users</code></td>
+<td><a href="../reference/commands-core.html#group-delete">group-delete</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>A change of groups applies the next time that person signs in. To let someone use <code>ssh</code> and <code>scp</code> from EiN, add them to the group <code>ssh</code>: see <a href="remote.html">Reaching other machines</a>.</p>
+<h3 id="permissions-and-sharing">Permissions and sharing<a class="anchor" href="#permissions-and-sharing" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who has access to a node, and through what</td>
+<td><code>share-info /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-core.html#share-info">share-info</a></td>
+</tr>
+<tr>
+<td>Give a group access to an album and what is in it</td>
+<td><code>share-set -m g:family:rx /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-core.html#share-set">share-set</a></td>
+</tr>
+<tr>
+<td>Set the mode of a node and everything below</td>
+<td><code>share-set --mode 0750 /archive/albums/malpas-summer</code></td>
+<td><a href="../reference/commands-core.html#share-set">share-set</a></td>
+</tr>
+<tr>
+<td>Keep a node&#39;s own access when its folder changes</td>
+<td><code>share-set --pin &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#share-set">share-set</a></td>
+</tr>
+<tr>
+<td>Make a link that opens an album without signing in</td>
+<td><code>share-link create /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-core.html#share-link">share-link</a></td>
+</tr>
+<tr>
+<td>A link that does not expire</td>
+<td><code>share-link create --never /archive/albums/christmas-2019</code></td>
+<td><a href="../reference/commands-core.html#share-link">share-link</a></td>
+</tr>
+<tr>
+<td>List your links, turn one off</td>
+<td><code>share-link list</code>, <code>share-link remove &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#share-link">share-link</a></td>
+</tr>
+<tr>
+<td>Change mode bits</td>
+<td><code>chmod 750 &lt;path&gt;</code>, <code>chmod -r g+rx &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#chmod">chmod</a></td>
+</tr>
+<tr>
+<td>Change owner or group</td>
+<td><code>chown helen:family &lt;path&gt;</code>, <code>chown :family &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#chown">chown</a></td>
+</tr>
+<tr>
+<td>Show a node&#39;s access list</td>
+<td><code>acl &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#acl">acl</a></td>
+</tr>
+<tr>
+<td>Add or remove an access list entry</td>
+<td><code>acl -m u:anna:rx &lt;path&gt;</code>, <code>acl -x u:anna &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#acl">acl</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The recursive flag of <code>chmod</code>, <code>chown</code> and <code>acl</code> is a lower-case <code>-r</code>. A share link made with <code>share-link create</code> lasts 30 days unless you give <code>--expires</code> or <code>--never</code>. <a href="../guide/sharing.html">Sharing</a> shows the Share dialog that does the same in the web interface.</p>
+<h2 id="settings-and-modules">Settings and modules<a class="anchor" href="#settings-and-modules" aria-label="Link to this section"></a></h2>
+<p><a href="../admin/configuration.html">Configuration</a> explains where a setting&#39;s value comes from, and <a href="../admin/modules.html">Modules</a> what installing a module does.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Every setting, with where its value comes from</td>
+<td><code>config list</code></td>
+<td><a href="../reference/commands-core.html#config-list">config-list</a></td>
+</tr>
+<tr>
+<td>Only your own settings</td>
+<td><code>config list --scope user</code></td>
+<td><a href="../reference/commands-core.html#config-list">config-list</a></td>
+</tr>
+<tr>
+<td>One setting&#39;s value</td>
+<td><code>config get CFG_TRASH_RETENTION_DAYS</code></td>
+<td><a href="../reference/commands-core.html#config-get">config-get</a></td>
+</tr>
+<tr>
+<td>Change one of your own settings</td>
+<td><code>config set CFG_USER_SLIDESHOW_SECONDS 5</code></td>
+<td><a href="../reference/commands-core.html#config-set">config-set</a></td>
+</tr>
+<tr>
+<td>Change a system setting (administrators)</td>
+<td><code>config set CFG_TRASH_RETENTION_DAYS 60</code></td>
+<td><a href="../reference/commands-core.html#config-set">config-set</a></td>
+</tr>
+<tr>
+<td>Put a setting back to its default</td>
+<td><code>config unset CFG_TRASH_RETENTION_DAYS</code></td>
+<td><a href="../reference/commands-core.html#config-unset">config-unset</a></td>
+</tr>
+<tr>
+<td>The installed modules</td>
+<td><code>mod list</code>, <code>mod list --long</code></td>
+<td><a href="../reference/commands-core.html#mod-list">mod-list</a></td>
+</tr>
+<tr>
+<td>One module&#39;s details</td>
+<td><code>mod info archive</code></td>
+<td><a href="../reference/commands-core.html#mod-info">mod-info</a></td>
+</tr>
+<tr>
+<td>The published modules</td>
+<td><code>mod search</code></td>
+<td><a href="../reference/commands-core.html#mod-search">mod-search</a></td>
+</tr>
+<tr>
+<td>Install or update a module, <em>administrators only</em></td>
+<td><code>mod install assistant</code></td>
+<td><a href="../reference/commands-core.html#mod-install">mod-install</a></td>
+</tr>
+<tr>
+<td>Remove a module, <em>administrators only</em></td>
+<td><code>mod remove assistant</code></td>
+<td><a href="../reference/commands-core.html#mod-remove">mod-remove</a></td>
+</tr>
+<tr>
+<td>Set up every module again, <em>administrators only</em></td>
+<td><code>mod setup --all</code></td>
+<td><a href="../reference/commands-core.html#mod-setup">mod-setup</a></td>
+</tr>
+<tr>
+<td>Your sidebar and top bar, and why an entry is left out</td>
+<td><code>ui-nav</code></td>
+<td><a href="../reference/commands-core.html#ui-nav">ui-nav</a></td>
+</tr>
+</tbody></table>
+</div>
+<p><code>config set</code> restarts the services that read the setting and says which. Every setting and its default is in <a href="../reference/settings.html">Settings</a>, for example <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>.</p>
+<h2 id="the-system">The system<a class="anchor" href="#the-system" aria-label="Link to this section"></a></h2>
+<p><a href="../admin/monitoring.html">Health and the dashboard</a>, <a href="../admin/processing.html">Processing and pipelines</a> and <a href="../admin/services-logs.html">Services and logs</a> explain what these commands report and what to do about it.</p>
+<h3 id="health-and-activity">Health and activity<a class="anchor" href="#health-and-activity" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Is everything fine and keeping up</td>
+<td><code>health</code></td>
+<td><a href="../reference/commands-core.html#health">health</a></td>
+</tr>
+<tr>
+<td>Watch the system live</td>
+<td><code>top</code>, <code>top -d 5</code> (<code>q</code> quits)</td>
+<td><a href="../reference/commands-core.html#top">top</a></td>
+</tr>
+<tr>
+<td>Commands running, yours or everyone&#39;s (administrator)</td>
+<td><code>ps</code>, <code>ps --user anna</code></td>
+<td><a href="../reference/commands-core.html#ps">ps</a></td>
+</tr>
+<tr>
+<td>Who is signed in, from where, doing what</td>
+<td><code>who</code></td>
+<td><a href="../reference/commands-core.html#who">who</a></td>
+</tr>
+<tr>
+<td>Free space per storage tier, and when it fills</td>
+<td><code>df</code></td>
+<td><a href="../reference/commands-core.html#df">df</a></td>
+</tr>
+<tr>
+<td>CPU, memory and lag over the last hours</td>
+<td><code>host-metrics</code>, <code>host-metrics --window 60</code></td>
+<td><a href="../reference/commands-core.html#host-metrics">host-metrics</a></td>
+</tr>
+<tr>
+<td>Meters the services add, such as the graphics card&#39;s memory</td>
+<td><code>gauges</code></td>
+<td><a href="../reference/commands-core.html#gauges">gauges</a></td>
+</tr>
+<tr>
+<td>Versions of EiN, its modules, PostgreSQL and Deno</td>
+<td><code>system-info</code></td>
+<td><a href="../reference/commands-core.html#system-info">system-info</a></td>
+</tr>
+<tr>
+<td>How the archive grew, by type, year and month</td>
+<td><code>stats-overview</code></td>
+<td><a href="../reference/commands-core.html#stats-overview">stats-overview</a></td>
+</tr>
+<tr>
+<td>The media service&#39;s state</td>
+<td><code>ems-status</code></td>
+<td><a href="../reference/commands-ems.html#ems-status">ems-status</a></td>
+</tr>
+<tr>
+<td>Whose the language model is, and whether it answers</td>
+<td><code>llm-status --checks</code></td>
+<td><a href="../reference/commands-assistant.html#llm-status">llm-status</a></td>
+</tr>
+</tbody></table>
+</div>
+<p><code>ps</code> and <code>who</code> show your own; an administrator sees everyone&#39;s.</p>
+<h3 id="jobs-and-processes">Jobs and processes<a class="anchor" href="#jobs-and-processes" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Run a command in the background</td>
+<td><code>&lt;command&gt; &amp;</code></td>
+<td><a href="bash.html">bash builtins</a></td>
+</tr>
+<tr>
+<td>Your shell&#39;s background jobs</td>
+<td><code>jobs</code></td>
+<td><a href="bash.html">bash builtins</a></td>
+</tr>
+<tr>
+<td>Stop a command</td>
+<td><code>kill &lt;pid&gt;</code>, with the pid from <code>ps</code></td>
+<td><a href="bash.html">bash builtins</a></td>
+</tr>
+<tr>
+<td>Start a command that keeps running after you close the terminal</td>
+<td><code>nohup album-span --all --stale</code></td>
+<td><a href="../reference/commands-core.html#nohup">nohup</a></td>
+</tr>
+<tr>
+<td>Keep a running job going after you leave</td>
+<td><code>detach %1</code></td>
+<td><a href="../reference/commands-core.html#detach">detach</a></td>
+</tr>
+<tr>
+<td>List the detached jobs and how they ended</td>
+<td><code>detach --list</code></td>
+<td><a href="../reference/commands-core.html#detach">detach</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>A detached job writes its output to <code>/var/logs/jobs/&lt;pid&gt;/stdout.log</code> and <code>stderr.log</code>. In EiN a pid is a name, such as <code>sleep-</code> followed by a unique id, not a number. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not suspend a command; start it with <code>&amp;</code> instead.</p>
+<h3 id="work-pipelines-and-services">Work, pipelines and services<a class="anchor" href="#work-pipelines-and-services" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>How much work is waiting, per kind, and how fast it goes</td>
+<td><code>pool stat</code></td>
+<td><a href="../reference/commands-core.html#pool-stat">pool-stat</a></td>
+</tr>
+<tr>
+<td>The jobs of a pool that failed</td>
+<td><code>pool list /var/pools/media --state failed</code></td>
+<td><a href="../reference/commands-core.html#pool-list">pool-list</a></td>
+</tr>
+<tr>
+<td>Try resting kinds of work again, <em>administrators only</em></td>
+<td><code>pool wake</code></td>
+<td><a href="../reference/commands-core.html#pool-wake">pool-wake</a></td>
+</tr>
+<tr>
+<td>Return failed jobs of a kind to the pool, <em>administrators only</em></td>
+<td><code>pool retry /var/pools/media --kind faces</code></td>
+<td><a href="../reference/commands-core.html#pool-retry">pool-retry</a></td>
+</tr>
+<tr>
+<td>Pipelines at a glance</td>
+<td><code>pipeline overview</code></td>
+<td><a href="../reference/commands-core.html#pipeline-overview">pipeline-overview</a></td>
+</tr>
+<tr>
+<td>The pipeline definitions</td>
+<td><code>pipeline list</code></td>
+<td><a href="../reference/commands-core.html#pipeline-list">pipeline-list</a></td>
+</tr>
+<tr>
+<td>Failed pipeline runs, newest first</td>
+<td><code>pipeline instances -s failed</code></td>
+<td><a href="../reference/commands-core.html#pipeline-instances">pipeline-instances</a></td>
+</tr>
+<tr>
+<td>One run&#39;s steps and what each did</td>
+<td><code>pipeline status &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#pipeline-status">pipeline-status</a></td>
+</tr>
+<tr>
+<td>Run a failed run&#39;s failed steps again, <em>administrators only</em></td>
+<td><code>pipeline restart &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#pipeline-restart">pipeline-restart</a></td>
+</tr>
+<tr>
+<td>Run a run again from the current definition, <em>administrators only</em></td>
+<td><code>pipeline rerun &lt;id&gt;</code></td>
+<td><a href="../reference/commands-core.html#pipeline-rerun">pipeline-rerun</a></td>
+</tr>
+<tr>
+<td>Rerun failed work that waited long enough, <em>administrators only</em></td>
+<td><code>pipeline heal</code> (says what it would do), <code>pipeline heal --apply</code></td>
+<td><a href="../reference/commands-core.html#pipeline-heal">pipeline-heal</a></td>
+</tr>
+<tr>
+<td>Process one file with a pipeline, forcing it, <em>administrators only</em></td>
+<td><code>pipeline start media-transcribe &lt;file&gt; --var FORCE=-f</code></td>
+<td><a href="../reference/commands-core.html#pipeline-start">pipeline-start</a></td>
+</tr>
+<tr>
+<td>The next entries of a queue, without taking them</td>
+<td><code>queue-peek /var/queues/archive-bridge</code></td>
+<td><a href="../reference/commands-core.html#queue-peek">queue-peek</a></td>
+</tr>
+<tr>
+<td>Entries a queue set aside after failing</td>
+<td><code>queue-dead /var/queues/archive-bridge</code></td>
+<td><a href="../reference/commands-core.html#queue-dead">queue-dead</a></td>
+</tr>
+<tr>
+<td>The services and how often each restarted</td>
+<td><code>service list</code>, <code>service list --detail</code></td>
+<td><a href="../reference/commands-core.html#service-list">service-list</a></td>
+</tr>
+<tr>
+<td>One service&#39;s state and where its log is</td>
+<td><code>service status cpu</code></td>
+<td><a href="../reference/commands-core.html#service-status">service-status</a></td>
+</tr>
+<tr>
+<td>Restart, stop or start a service, <em>administrators only</em></td>
+<td><code>service restart cpu</code>, <code>service stop cpu</code>, <code>service start cpu</code></td>
+<td><a href="../reference/commands-core.html#service-restart">service-restart</a>, <a href="../reference/commands-core.html#service-stop">service-stop</a>, <a href="../reference/commands-core.html#service-start">service-start</a></td>
+</tr>
+</tbody></table>
+</div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p><code>cat</code> on a queue takes the entries it prints out of the queue. Use <code>queue-peek</code> to look.</p>
+</aside>
+<h3 id="logs-and-the-audit-trail">Logs and the audit trail<a class="anchor" href="#logs-and-the-audit-trail" aria-label="Link to this section"></a></h3>
+<p>There is no <code>logs</code> command. The system log and each service&#39;s output are log nodes, read with <code>dmesg</code>, <code>tail</code> and <code>cat</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The system log</td>
+<td><code>dmesg -n 50</code></td>
+<td><a href="../reference/commands-core.html#dmesg">dmesg</a></td>
+</tr>
+<tr>
+<td>The last ten problems</td>
+<td><code>dmesg --level warn -n 10</code></td>
+<td><a href="../reference/commands-core.html#dmesg">dmesg</a></td>
+</tr>
+<tr>
+<td>Follow the system log as it grows</td>
+<td><code>tail -f /var/logs/system</code></td>
+<td><a href="../reference/commands-core.html#tail">tail</a></td>
+</tr>
+<tr>
+<td>A service&#39;s own output</td>
+<td><code>tail -f /var/logs/services/cpu/stdout.log</code>, and <code>stderr.log</code> beside it</td>
+<td><a href="../reference/commands-core.html#tail">tail</a></td>
+</tr>
+<tr>
+<td>Who changed, moved or removed what, <em>administrators only</em></td>
+<td><code>audit --user anna --since 2026-10-01 /archive/albums</code></td>
+<td><a href="../reference/commands-core.html#audit">audit</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The system log starts empty at every start of EiN, and a service&#39;s two log files start empty at every start of that service.</p>
+<h2 id="the-assistant">The assistant<a class="anchor" href="#the-assistant" aria-label="Link to this section"></a></h2>
+<p>These commands come with the assistant module. <a href="../guide/assistant.html">Chatting with the assistant</a> covers the chat in the web interface, and <a href="../admin/language-model.html">The language model</a> the model behind it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ask the assistant a question</td>
+<td><code>assistant-ask &#39;Which albums is Peggy Wrenfield in?&#39;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-ask">assistant-ask</a></td>
+</tr>
+<tr>
+<td>The same, thinking before each step</td>
+<td><code>assistant-ask --think &#39;&lt;question&gt;&#39;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-ask">assistant-ask</a></td>
+</tr>
+<tr>
+<td>Your saved chats</td>
+<td><code>assistant-chat list</code>, <code>assistant-chat read &lt;id&gt;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-chat">assistant-chat</a></td>
+</tr>
+<tr>
+<td>Delete a chat</td>
+<td><code>assistant-chat delete &lt;id&gt;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-chat">assistant-chat</a></td>
+</tr>
+<tr>
+<td>Find a command by meaning</td>
+<td><code>assistant-commands find &#39;list running services&#39;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-commands">assistant-commands</a></td>
+</tr>
+<tr>
+<td>Whether a command line changes anything</td>
+<td><code>assistant-commands judge &#39;service restart cpu&#39;</code></td>
+<td><a href="../reference/commands-assistant.html#assistant-commands">assistant-commands</a></td>
+</tr>
+<tr>
+<td>Ask the language model one thing, without tools</td>
+<td><code>llm-chat &#39;The colour of the sky?&#39;</code></td>
+<td><a href="../reference/commands-assistant.html#llm-chat">llm-chat</a></td>
+</tr>
+<tr>
+<td>Score the assistant against the modules&#39; questions</td>
+<td><code>agent-eval --limit 5 --verbose</code></td>
+<td><a href="../reference/commands-assistant.html#agent-eval">agent-eval</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>Asked from the terminal, <code>assistant-ask</code> runs nothing that changes things: a change comes back as a proposal, and without <code>--chat</code> nothing is saved.</p>
+<h2 id="other-machines">Other machines<a class="anchor" href="#other-machines" aria-label="Link to this section"></a></h2>
+<p><code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code> are for administrators and members of the group <code>ssh</code>. <a href="remote.html">Reaching other machines</a> covers them, with the host key prompts and <code>~/.ssh/config</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Make a key pair in <code>~/.ssh</code></td>
+<td><code>ssh-keygen</code></td>
+<td><a href="../reference/commands-core.html#ssh-keygen">ssh-keygen</a></td>
+</tr>
+<tr>
+<td>Put your public key on another machine</td>
+<td><code>ssh-copy-id anna@nas.local</code></td>
+<td><a href="../reference/commands-core.html#ssh-copy-id">ssh-copy-id</a></td>
+</tr>
+<tr>
+<td>Log in to another machine, or run one command there</td>
+<td><code>ssh anna@nas.local</code>, <code>ssh nas.local &#39;df -h&#39;</code></td>
+<td><a href="../reference/commands-core.html#ssh">ssh</a></td>
+</tr>
+<tr>
+<td>Copy files in from another machine</td>
+<td><code>scp -r anna@nas.local:photos/1968 /home/anna/staging/files/inbox/</code></td>
+<td><a href="../reference/commands-core.html#scp">scp</a></td>
+</tr>
+<tr>
+<td>List what is mounted</td>
+<td><code>mount</code></td>
+<td><a href="../reference/commands-core.html#mount">mount</a></td>
+</tr>
+<tr>
+<td>Mount a folder of another machine (administrators)</td>
+<td><code>mount --save /mnt/nas sftp &quot;host=nas.local,user=anna,path=/srv/photos&quot;</code></td>
+<td><a href="../reference/commands-core.html#mount">mount</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>Connecting to EiN from your own computer is described in <a href="ssh-sftp.html">SSH and SFTP</a>.</p>
+<h2 id="text-and-data-tools">Text and data tools<a class="anchor" href="#text-and-data-tools" aria-label="Link to this section"></a></h2>
+<p>These work on text files, logs and the output of other commands, as their GNU namesakes do. Run <code>&lt;command&gt; --help</code> for the options each has.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+<th>Reference</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pick fields from JSON</td>
+<td><code>JSON_OUTPUT=1 ls -l /archive/albums | jq -r &#39;.[].name&#39;</code></td>
+<td><a href="../reference/commands-core.html#jq">jq</a></td>
+</tr>
+<tr>
+<td>Find lines matching a pattern</td>
+<td><code>grep -i -c christmas ~/notes.md</code></td>
+<td><a href="../reference/commands-core.html#grep">grep</a></td>
+</tr>
+<tr>
+<td>Replace text in a stream</td>
+<td><code>sed &#39;s/Wrenfeld/Wrenfield/g&#39; ~/notes.md</code></td>
+<td><a href="../reference/commands-core.html#sed">sed</a></td>
+</tr>
+<tr>
+<td>Work with columns</td>
+<td><code>awk -F&#39;\t&#39; &#39;{ print $1 }&#39;</code>, <code>cut -f1</code></td>
+<td><a href="../reference/commands-core.html#awk">awk</a>, <a href="../reference/commands-core.html#cut">cut</a></td>
+</tr>
+<tr>
+<td>Sort, count and remove repeats</td>
+<td><code>sort</code>, <code>uniq -c</code>, <code>wc -l</code></td>
+<td><a href="../reference/commands-core.html#sort">sort</a>, <a href="../reference/commands-core.html#uniq">uniq</a>, <a href="../reference/commands-core.html#wc">wc</a></td>
+</tr>
+<tr>
+<td>Run a command for each line of input</td>
+<td><code>ls /archive/people | xargs -I {} info /archive/people/{}</code></td>
+<td><a href="../reference/commands-core.html#xargs">xargs</a></td>
+</tr>
+<tr>
+<td>Change or delete characters</td>
+<td><code>tr &#39;a-z&#39; &#39;A-Z&#39;</code></td>
+<td><a href="../reference/commands-core.html#tr">tr</a></td>
+</tr>
+<tr>
+<td>Dates, numbers, waiting</td>
+<td><code>date -I</code>, <code>seq 1 10</code>, <code>sleep 5</code></td>
+<td><a href="../reference/commands-core.html#date">date</a>, <a href="../reference/commands-core.html#seq">seq</a>, <a href="../reference/commands-core.html#sleep">sleep</a></td>
+</tr>
+<tr>
+<td>Parts of a path</td>
+<td><code>basename &lt;path&gt;</code>, <code>dirname &lt;path&gt;</code>, <code>abspath &lt;path&gt;</code></td>
+<td><a href="../reference/commands-core.html#basename">basename</a>, <a href="../reference/commands-core.html#dirname">dirname</a>, <a href="../reference/commands-core.html#abspath">abspath</a></td>
+</tr>
+<tr>
+<td>The environment of your shell</td>
+<td><code>env</code>, <code>docs env</code></td>
+<td><a href="../reference/commands-core.html#env">env</a>, <a href="../reference/commands-core.html#docs-env">docs-env</a></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="unix-commands-ein-does-not-have">Unix commands EiN does not have<a class="anchor" href="#unix-commands-ein-does-not-have" aria-label="Link to this section"></a></h2>
+<p>EiN&#39;s commands are its own, so some familiar names are missing. Use these instead.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You may type</th>
+<th>Use instead</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>touch</code></td>
+<td><code>mkfile</code></td>
+</tr>
+<tr>
+<td><code>vi</code>, <code>nano</code></td>
+<td><code>edit</code></td>
+</tr>
+<tr>
+<td><code>less</code>, <code>more</code>, <code>man</code></td>
+<td>the terminal&#39;s scrollback, <code>&lt;command&gt; --help</code>, and the <a href="../reference/commands.html">reference</a></td>
+</tr>
+<tr>
+<td><code>realpath</code></td>
+<td><code>abspath</code></td>
+</tr>
+<tr>
+<td><code>which</code></td>
+<td><code>type &lt;name&gt;</code> or <code>command -v &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td><code>passwd</code>, <code>useradd</code>, <code>usermod</code></td>
+<td><code>user-passwd</code>, <code>user-create</code>, <code>user-update</code></td>
+</tr>
+<tr>
+<td><code>chgrp</code></td>
+<td><code>chown :&lt;group&gt; &lt;path&gt;</code></td>
+</tr>
+<tr>
+<td><code>sudo</code>, <code>su</code></td>
+<td><code>admin</code> or <code>user-elevate</code>, for members of <code>sudo</code></td>
+</tr>
+<tr>
+<td><code>getfacl</code>, <code>setfacl</code></td>
+<td><code>acl</code></td>
+</tr>
+<tr>
+<td><code>tar</code>, <code>rsync</code>, <code>curl</code>, <code>wget</code>, <code>diff</code>, <code>tee</code></td>
+<td>none in EiN; <code>unzip</code> unpacks zip files, and <code>scp</code> copies over SSH</td>
+</tr>
+</tbody></table>
+</div>
+<p>There is also no <code>sh</code> or <code>bash</code> command: a script is run by its path, or with <code>source</code>. <a href="bash.html">The shell language</a> explains scripts.</p>
+<h2 id="when-a-command-is-refused-or-missing">When a command is refused or missing<a class="anchor" href="#when-a-command-is-refused-or-missing" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>error: command &#39;&lt;name&gt;&#39; not found</code></td>
+<td>No command of that name is on your <code>PATH</code>: a typing error, or a module that is not installed</td>
+<td>Check the name with <code>docs find &lt;words&gt;</code>; see <code>mod list</code></td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;: permission denied: only an administrator may run it</code></td>
+<td>The command is for administrators</td>
+<td>Ask an administrator, or type <code>admin</code> if you are in the <code>sudo</code> group</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;: permission denied, you must be a member of group &#39;ssh&#39;</code></td>
+<td><code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code> need the <code>ssh</code> group</td>
+<td>An administrator adds you with <code>group-add-member ssh &lt;you&gt;</code>; sign in again</td>
+</tr>
+<tr>
+<td><code>&lt;name&gt;: sign in first</code></td>
+<td>You are not signed in, and visitors may not browse</td>
+<td><code>login &lt;username&gt;</code></td>
+</tr>
+<tr>
+<td><code>rm: cannot remove &#39;&lt;path&gt;&#39;: Node not empty</code></td>
+<td>The node has children</td>
+<td><code>rm -r &lt;path&gt;</code> deletes it with them; <code>trash put &lt;path&gt;</code> keeps it recoverable</td>
+</tr>
+<tr>
+<td><code>edit: not a terminal</code></td>
+<td><code>edit</code> needs a terminal, which <code>ssh host &#39;command&#39;</code> does not give</td>
+<td>Log in with <code>ssh</code> first, or use the terminal panel</td>
+</tr>
+<tr>
+<td><code>mount: permission denied, only admin is allowed to mount</code></td>
+<td>Mounting is for administrators</td>
+<td>Ask an administrator</td>
+</tr>
+</tbody></table>
+</div>
+<p>For anything else, <a href="../admin/troubleshooting.html">Troubleshooting</a> goes through problems by area, and the <a href="../reference/commands.html">reference</a> has every command with all its options.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="bash.html" rel="prev"><span>Previous</span>The shell language</a><a class="next" href="editor.html" rel="next"><span>Next</span>The editor</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-to-read-the-tables">How to read the tables</a></li><li><a href="#files-and-nodes">Files and nodes</a></li><li><a href="#search-and-find">Search and find</a></li><li><a href="#the-archive">The archive</a></li><li class="nested"><a href="#albums">Albums</a></li><li class="nested"><a href="#pictures-videos-and-recordings">Pictures, videos and recordings</a></li><li class="nested"><a href="#people">People</a></li><li class="nested"><a href="#locations-devices-and-tracks">Locations, devices and tracks</a></li><li class="nested"><a href="#feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day</a></li><li class="nested"><a href="#duplicates-and-staging">Duplicates and staging</a></li><li><a href="#accounts-groups-and-sharing">Accounts, groups and sharing</a></li><li class="nested"><a href="#accounts">Accounts</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#permissions-and-sharing">Permissions and sharing</a></li><li><a href="#settings-and-modules">Settings and modules</a></li><li><a href="#the-system">The system</a></li><li class="nested"><a href="#health-and-activity">Health and activity</a></li><li class="nested"><a href="#jobs-and-processes">Jobs and processes</a></li><li class="nested"><a href="#work-pipelines-and-services">Work, pipelines and services</a></li><li class="nested"><a href="#logs-and-the-audit-trail">Logs and the audit trail</a></li><li><a href="#the-assistant">The assistant</a></li><li><a href="#other-machines">Other machines</a></li><li><a href="#text-and-data-tools">Text and data tools</a></li><li><a href="#unix-commands-ein-does-not-have">Unix commands EiN does not have</a></li><li><a href="#when-a-command-is-refused-or-missing">When a command is refused or missing</a></li></ul></aside>
+    </div>
+  </body>
+</html>

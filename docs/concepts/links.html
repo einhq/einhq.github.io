@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Links – EiN documentation</title>
+    <meta name="description" content="A link lets one node be in more than one place in EiN's tree. This page explains the two kinds, softlinks and hard links, where EiN makes them for you, and what moving, deleting and the trash do to them. It is for anyone who works in the terminal, over SFTP or in the Nodes explorer, and wants to know why things in the tree are where they are.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/concepts/links.html">
+    <meta property="og:title" content="Links – EiN documentation">
+    <meta property="og:description" content="A link lets one node be in more than one place in EiN's tree. This page explains the two kinds, softlinks and hard links, where EiN makes them for you, and what moving, deleting and the trash do to them. It is for anyone who works in the terminal, over SFTP or in the Nodes explorer, and wants to know why things in the tree are where they are.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/concepts/links.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html" aria-current="page">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Concepts</p>
+          <h1>Links</h1>
+        </header>
+        <article class="prose">
+<p>A link lets one node be in more than one place in EiN&#39;s tree. This page explains the two kinds,
+softlinks and hard links, where EiN makes them for you, and what moving, deleting and the trash do
+to them. It is for anyone who works in the <a href="../shell/terminal.html">terminal</a>, over
+<a href="../shell/ssh-sftp.html">SFTP</a> or in the <strong>Nodes</strong> explorer, and wants to know why things in the tree
+are where they are.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>A <em>share link</em>, the address you send to someone without an account, is a different thing.
+<a href="../guide/sharing.html#share-an-album-with-a-link">Sharing</a> covers it.</p>
+</aside>
+<h2 id="two-kinds-of-link">Two kinds of link<a class="anchor" href="#two-kinds-of-link" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th>Softlink</th>
+<th>Hard link</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>What it is</td>
+<td>A node of its own, of type <code>softlink</code>, that holds the path of another node</td>
+<td>The same node under a second name, in a second folder</td>
+</tr>
+<tr>
+<td>Made with</td>
+<td><code>ln -s &lt;target&gt; &lt;link_name&gt;</code>, <code>ln -s</code> over SFTP, and EiN itself</td>
+<td><code>ln &lt;target&gt; &lt;link_name&gt;</code></td>
+</tr>
+<tr>
+<td>Can point at nothing</td>
+<td>Yes: its target may be missing or gone</td>
+<td>No: it is the node</td>
+</tr>
+<tr>
+<td>Deleting it</td>
+<td>Removes the link, never its target</td>
+<td>Removes one name; the node goes with its last name</td>
+</tr>
+<tr>
+<td>Used by EiN</td>
+<td>Everywhere one thing belongs in several places</td>
+<td>Nowhere by itself</td>
+</tr>
+</tbody></table>
+</div>
+<p>Almost every link you meet in EiN is a softlink. When this documentation says &quot;link&quot; without more,
+it means a softlink.</p>
+<h2 id="softlinks">Softlinks<a class="anchor" href="#softlinks" aria-label="Link to this section"></a></h2>
+<p>A softlink stores a path, nothing else. Opening it opens the node at that path: <code>ls</code>, <code>cat</code>, <code>cd</code>
+and the web interface all go through to the target, as they do on Unix. If the target has links of
+its own on the way, those are followed too, up to 40 in a row; past that EiN stops with
+<code>too many levels of symbolic links</code>.</p>
+<p>The path is kept exactly as it was given:</p>
+<ul>
+<li>An <strong>absolute</strong> target, starting with <code>/</code>, means the same node wherever the link is.</li>
+<li>A <strong>relative</strong> target is read from the folder that holds the link. EiN uses one for enabled
+services: <code>/etc/services/enabled/&lt;name&gt;</code> points at <code>../available/&lt;name&gt;</code>.</li>
+</ul>
+<p>EiN does not check that the target exists when you make a softlink, so a link can point at nothing
+from the start.</p>
+<h3 id="where-ein-makes-softlinks-for-you">Where EiN makes softlinks for you<a class="anchor" href="#where-ein-makes-softlinks-for-you" aria-label="Link to this section"></a></h3>
+<p>You make most links without typing <code>ln</code>: a button in the web interface or a command writes them.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you do</th>
+<th>The link it makes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Add a picture to an album from elsewhere (<a href="../guide/albums.html#add-pictures-that-are-already-in-ein">Albums</a>)</td>
+<td>A link in the album, named after the picture, to where the picture lives</td>
+</tr>
+<tr>
+<td>Choose an album&#39;s, person&#39;s, location&#39;s or device&#39;s cover</td>
+<td><code>coverPhoto</code> in it, to the picture</td>
+</tr>
+<tr>
+<td>Set an album&#39;s <strong>Previous album</strong> or <strong>Next album</strong></td>
+<td><code>previous</code> and <code>next</code> in the album, and the matching one back in the other album</td>
+</tr>
+<tr>
+<td>Put a label on something (<a href="../guide/media.html#labels">Labels</a>)</td>
+<td>A link in <code>/archive/tags/&lt;label&gt;/</code> to what carries it</td>
+</tr>
+<tr>
+<td>Heart a picture (<a href="../guide/profile.html#favourites">Favourites</a>)</td>
+<td>A link in <code>/home/&lt;you&gt;/stars/</code> to the picture</td>
+</tr>
+<tr>
+<td>Add a parent, partner or child (<a href="../guide/family.html">Family tree</a>)</td>
+<td>A pair: one in <code>parents/</code>, <code>children/</code> or <code>partners/</code> of each person, pointing at the other</td>
+</tr>
+<tr>
+<td>Add a home or a resident</td>
+<td>A pair: one in the person&#39;s <code>homes/</code>, one in the location&#39;s <code>residents/</code></td>
+</tr>
+<tr>
+<td>Link a picture to a location (<a href="../guide/places.html#how-pictures-join-a-location">Locations</a>)</td>
+<td><code>location</code> in the picture, to the location</td>
+</tr>
+<tr>
+<td>Choose <strong>Written by</strong> on an event (<a href="../guide/albums.html#add-a-note-to-a-day">Albums</a>)</td>
+<td><code>writer</code> in the event, to the person</td>
+</tr>
+<tr>
+<td>Put someone in a group (<a href="../admin/accounts.html">Accounts and groups</a>)</td>
+<td>A link in <code>/etc/groups/&lt;group&gt;/users/</code>, named after the account, to <code>/etc/users/&lt;account&gt;</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The picture is never copied. One photo in five albums is one node with five links to it, so a date,
+a place, a face or a label given to it shows in all five.</p>
+
+<h3 id="pairs-of-links">Pairs of links<a class="anchor" href="#pairs-of-links" aria-label="Link to this section"></a></h3>
+<p>How two people are related, and who lived where, is kept as a pair of softlinks, one on each side.
+Each half knows where the other half is, so the two stay together:</p>
+<ul>
+<li>Removing a relation with the web interface, <code>person-remove</code> or <code>unrelate</code> removes both halves.</li>
+<li>When one side is deleted for good, the <code>relations-guard</code> service removes the other half.</li>
+<li>When a person is moved, or merged into another with <code>person-merge</code>, the pairs follow.</li>
+</ul>
+<p>You can make a pair of your own between any two nodes with <code>relate</code>. It puts the links in a
+<code>relations/</code> folder of each node, named <code>&lt;label&gt;-&lt;name of the other&gt;</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+relate /archive/people/Peggy_Wrenfield /archive/people/Helen_Okafor godmother --reverse goddaughter</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Created bidirectional relation: /archive/people/Peggy_Wrenfield &lt;-godmother/goddaughter-&gt; /archive/people/Helen_Okafor</code></pre></div>
+<p><code>unrelate /archive/people/Peggy_Wrenfield/relations/godmother-Helen_Okafor</code> removes both halves
+again. <code>relate</code> refuses a pair that is already there with <code>relate: relation already exists:</code>
+and the path.</p>
+<h2 id="hard-links">Hard links<a class="anchor" href="#hard-links" aria-label="Link to this section"></a></h2>
+<p>A hard link gives a node a second name. Both names are the same node: the same id, the same
+owner and mode, the same content and children. Nothing marks one name as the original.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ln</span> /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/IMG_0412.jpg</code></pre></div>
+<p>Each node counts its names. The count is the third column of <code>ls -l</code>, and <strong>Links</strong> in the
+<strong>Nodes</strong> explorer&#39;s <strong>Properties</strong>; a node with one name shows <code>1</code>. Removing a name with <code>rm</code>
+lowers the count, and the node itself is deleted only when its last name goes. <code>rm -r</code> on a folder
+that still has another name removes only that name and leaves everything in it.</p>
+<p>EiN makes no hard links of its own, and the web interface has no way to make one. <code>ln</code> refuses one
+between two different stores, for example into a <a href="../shell/remote.html">mounted</a> folder of another
+machine, with <code>cannot link across different VFS backends</code>, and SFTP has no hard links.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>A hard link can make a node visible where its other path is closed. A node with a name in an open
+folder can be reached through that name, whatever the folder of its other name allows.
+<a href="../admin/permissions.html#a-folder-governs-what-is-under-it">Permissions in depth</a> explains why.</p>
+</aside>
+<h2 id="see-links">See links<a class="anchor" href="#see-links" aria-label="Link to this section"></a></h2>
+<p><strong>In the terminal.</strong> <code>ls -l</code> ends a softlink&#39;s line with <code>-&gt;</code> and its target. <code>find -type l</code> lists
+the softlinks under a folder. Commands follow softlinks unless you ask them not to:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Without <code>-L</code></th>
+<th>With <code>-L</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ls</code></td>
+<td>Lists what the link points at</td>
+<td>Lists the link itself</td>
+</tr>
+<tr>
+<td><code>stat</code>, <code>info</code></td>
+<td>Show the target</td>
+<td>Show the link, its target in <code>softlink</code></td>
+</tr>
+<tr>
+<td><code>chmod</code>, <code>chown</code>, <code>acl</code>, <code>attrs</code>, <code>props</code></td>
+<td>Act on the target</td>
+<td>Act on the link</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>-L</code> means &quot;do not follow&quot; in EiN, which is the opposite of GNU <code>ls -L</code>.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ls</span> -l /archive/tags/sailing
+<span class="hljs-built_in">stat</span> -L /archive/albums/christmas-2019/coverPhoto</code></pre></div>
+<p>EiN has no <code>readlink</code> command, and nothing lists the links that point at a node.</p>
+<p><strong>In the Nodes explorer.</strong> A softlink shows a link icon, with <code>→</code> and its target after its name.
+Select it and choose <strong>Properties</strong> (<kbd>Alt</kbd>+<kbd>Enter</kbd>) to see <strong>Link to</strong> with the
+target and <strong>Links</strong> with the count of names.</p>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes explorer open at /archive/people/Peggy_Wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person&#39;s folder holds folders of relation links and a cover link; the arrow shows where the link points.</figcaption></figure>
+<p><strong>Over SFTP.</strong> Softlinks are symbolic links: <code>ls -l</code> in <code>sftp</code> shows them as links, following one
+takes you to the target, and <code>ln -s</code> makes one. A recursive copy copies the link, not what it points
+at. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SSH and SFTP</a> has the rest.</p>
+<h2 id="make-and-remove-links-in-the-terminal">Make and remove links in the terminal<a class="anchor" href="#make-and-remove-links-in-the-terminal" aria-label="Link to this section"></a></h2>
+<ol>
+<li><p>Make a softlink with <code>ln -s</code>, the target first:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">ln</span> -s /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/favourite.jpg</code></pre></div>
+</li>
+<li><p>Check it with <code>ls -l /home/helen</code>. The line for <code>favourite.jpg</code> ends with
+<code>-&gt; /archive/albums/christmas-2019/files/IMG_0412.jpg</code>.</p>
+</li>
+<li><p>Remove it with <code>rm /home/helen/favourite.jpg</code>. That removes the link only; the picture stays.</p>
+</li>
+</ol>
+<p>If the name is taken, <code>ln</code> stops with <code>ln: failed to create link &#39;&lt;name&gt;&#39;: File exists</code>. <code>ln -f</code>
+replaces what is there. Unlike GNU <code>ln</code>, an existing folder as the second argument is not a place
+to put the link in: name the link in full.</p>
+<p>For links that EiN keeps track of, use the command that owns them rather than <code>ln</code> and <code>rm</code>. A
+label lives on the node that carries it, and searches read it there, so the link in
+<code>/archive/tags/</code> alone does not label anything:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To change</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Labels</td>
+<td><code>label add</code>, <code>label remove</code></td>
+</tr>
+<tr>
+<td>Favourites</td>
+<td><code>star</code>, <code>star -d</code></td>
+</tr>
+<tr>
+<td>Relations between nodes</td>
+<td><code>relate</code>, <code>unrelate</code></td>
+</tr>
+<tr>
+<td>Family ties and homes</td>
+<td>the <code>person-…</code> commands in <a href="../guide/family.html#in-the-terminal">Family tree, events and homes</a></td>
+</tr>
+<tr>
+<td>An album&#39;s cover</td>
+<td><code>album-cover</code></td>
+</tr>
+<tr>
+<td>Group membership</td>
+<td><code>group-add-member</code>, <code>group-remove-member</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="moving-keeps-softlinks-pointing-right">Moving keeps softlinks pointing right<a class="anchor" href="#moving-keeps-softlinks-pointing-right" aria-label="Link to this section"></a></h2>
+<p>When a node moves, every softlink that points at it, or at anything under it, is re-pointed to the
+new path in the same step. An album can therefore be moved without losing its cover, its labels,
+its place in other albums or anyone&#39;s favourites. This holds for <code>mv</code>, for <strong>Rename</strong> and
+<strong>Paste</strong> in the <strong>Nodes</strong> explorer, for filing pictures from staging into an album, and for merging
+people or duplicates.</p>
+<p>Two kinds of softlink are not re-pointed:</p>
+<ul>
+<li>one with a <strong>relative</strong> target, which keeps its text as it was;</li>
+<li>any link when you move with <code>mv --no-relink</code>, which leaves them all on the old path.</li>
+</ul>
+<p>One <code>mv</code> re-points at most 100,000 links. A move that more links point into is refused with
+<code>more than 100000 links point into the moved paths; move fewer at a time</code>.</p>
+<p><code>mv</code> says nothing about the links on success. Run as <code>JSON_OUTPUT=1 mv …</code>, its answer counts them in <code>relinked</code>.</p>
+<p>Renaming an album in <strong>Edit album</strong> changes only its name on the page; its folder keeps its first
+name, so no link needs to change.</p>
+<h2 id="deleting-the-trash-and-links">Deleting, the trash and links<a class="anchor" href="#deleting-the-trash-and-links" aria-label="Link to this section"></a></h2>
+<p>What happens to links depends on how a node goes. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> lists which actions use the trash.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you do</th>
+<th>The link you act on</th>
+<th>Links pointing at the node</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Remove a picture from an album (<strong>Remove</strong>)</td>
+<td>That album&#39;s link goes</td>
+<td>Others are left alone; the picture stays where it lives</td>
+</tr>
+<tr>
+<td>Move a node to the trash</td>
+<td>—</td>
+<td>Left as they are. They point at nothing while it is in the trash, and work again when you restore it</td>
+</tr>
+<tr>
+<td>Delete for good, or empty the trash</td>
+<td>—</td>
+<td>Label links and the other half of every pair are removed by <code>relations-guard</code>. Covers, album links and favourites are left pointing at nothing</td>
+</tr>
+<tr>
+<td><code>rm</code> a softlink</td>
+<td>The link goes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>rm</code> a node with hard links</td>
+<td>One name goes</td>
+<td>—</td>
+</tr>
+</tbody></table>
+</div>
+<p>While something is in the trash it is gone for everyone, including through the links to it. A
+node with a hard link elsewhere is different: moving one of its names to the trash leaves it
+reachable by its other name.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Node not found:</code> and a path, when you open a link</td>
+<td>The link points at nothing: its target was deleted, is in someone&#39;s trash, or was moved with <code>--no-relink</code></td>
+<td>Restore the target from the trash, point the link again with <code>ln -sf</code>, or remove it with <code>rm</code></td>
+</tr>
+<tr>
+<td><code>too many levels of symbolic links</code></td>
+<td>Links point at each other in a loop, or a chain is longer than 40</td>
+<td>Look at the targets with <code>ls -l</code> and correct one</td>
+</tr>
+<tr>
+<td>A label is still listed with nothing behind it</td>
+<td>A link in <code>/archive/tags/&lt;label&gt;/</code> points at something gone</td>
+<td><code>label prune</code> removes every label link that points at nothing</td>
+</tr>
+<tr>
+<td>The other half of a family tie is missing</td>
+<td>One half was removed while <code>relations-guard</code> was not running</td>
+<td><code>person-check /archive/people</code> reports broken ties; remove the tie and add it again</td>
+</tr>
+<tr>
+<td>Labels or relation halves stay after something is deleted for good</td>
+<td>The <code>relations-guard</code> service is stopped</td>
+<td>An administrator checks it with <code>service-status</code>; see <a href="../admin/services-logs.html">Services and logs</a></td>
+</tr>
+<tr>
+<td><code>ln: failed to access &#39;&lt;target&gt;&#39;: No such file or directory</code></td>
+<td>A hard link needs an existing target</td>
+<td>Check the path, or make a softlink with <code>-s</code></td>
+</tr>
+<tr>
+<td><code>Access denied for operation</code> when you follow a link</td>
+<td>A softlink is not a way in: you need access along the target&#39;s own path</td>
+<td>Ask the target&#39;s owner to <a href="../guide/sharing.html">share</a> it</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="nodes.html">Nodes and node types</a>: what a node is, the <code>softlink</code> type among them</li>
+<li><a href="tree.html">The tree</a>: the folders the links live in and point into</li>
+<li><a href="files.html">Files and storage</a>: what a file node holds</li>
+<li><a href="../guide/albums.html">Albums</a>: adding, removing and deleting pictures</li>
+<li><a href="../admin/permissions.html">Permissions in depth</a>: why a softlink grants nothing and a hard link can</li>
+<li><a href="../reference/commands-core.html#ln">Commands: <code>ln</code></a>, <a href="../reference/commands-core.html#mv"><code>mv</code></a>,
+<a href="../reference/commands-core.html#relate"><code>relate</code></a>, <a href="../reference/commands-core.html#label"><code>label</code></a></li>
+<li><a href="../reference/node-types.html#structure">Node types</a>: the reference entry for <code>softlink</code></li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="tree.html" rel="prev"><span>Previous</span>The tree</a><a class="next" href="files.html" rel="next"><span>Next</span>Files and storage</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/links.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-link">Two kinds of link</a></li><li><a href="#softlinks">Softlinks</a></li><li class="nested"><a href="#where-ein-makes-softlinks-for-you">Where EiN makes softlinks for you</a></li><li class="nested"><a href="#pairs-of-links">Pairs of links</a></li><li><a href="#hard-links">Hard links</a></li><li><a href="#see-links">See links</a></li><li><a href="#make-and-remove-links-in-the-terminal">Make and remove links in the terminal</a></li><li><a href="#moving-keeps-softlinks-pointing-right">Moving keeps softlinks pointing right</a></li><li><a href="#deleting-the-trash-and-links">Deleting, the trash and links</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

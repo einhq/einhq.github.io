@@ -4,7 +4,17 @@
     "lineWidth": 175,
     "indentWidth": 2,
     "singleQuote": true,
-    "proseWrap": "preserve"
+    "proseWrap": "preserve",
+    // What make docs writes from the Markdown, which make check compares with what the Markdown makes, and
+    // the reference pages make reference writes from a running EiN.
+    "exclude": [
+      "docs/**/*.html",
+      "docs/search.json",
+      "docs/reference/commands*.md",
+      "docs/reference/settings.md",
+      "docs/reference/environment.md",
+      "docs/reference/node-types.md"
+    ]
   },
   // The capture tool's page callbacks run in the browser, so they are typed against the DOM.
   "compilerOptions": {
@@ -12,12 +22,18 @@
   },
   "imports": {
     "@std/cli": "jsr:@std/cli@^1.0.24",
+    "@std/path": "jsr:@std/path@^1.1.2",
+    // The documentation's Markdown, and its code blocks coloured as the page is built.
+    "marked": "npm:marked@^16.4.2",
+    "highlight.js/": "npm:/highlight.js@^11.11.1/",
     // The browser comes from ~/.cache/ms-playwright (`npx playwright install chromium`) and is passed as an
     // explicit executablePath, so this version need not match an installed browser revision.
     "playwright": "npm:playwright@1.49.1"
   },
   "tasks": {
     "capture": "deno run -A --node-modules-dir=auto tools/capture.ts",
+    "docs": "deno run --allow-read=. --allow-write=docs tools/docs.ts",
+    "reference": "deno run --allow-read=. --allow-write=docs/reference tools/reference.ts",
     "serve": "deno run --allow-net --allow-read jsr:@std/http@^1/file-server --port 4507 ."
   }
 }

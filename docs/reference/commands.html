@@ -1,0 +1,1604 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commands – EiN documentation</title>
+    <meta name="description" content="Every command an EiN with all its modules has: 360 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
+    <meta property="og:title" content="Commands – EiN documentation">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 360 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/reference/commands.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section class="here"><h2>Reference</h2><ul><li><a href="commands.html" aria-current="page">Commands</a></li><li class="nested"><a href="commands-core.html">Core</a></li><li class="nested"><a href="commands-archive.html">Archive</a></li><li class="nested"><a href="commands-assistant.html">Assistant</a></li><li class="nested"><a href="commands-ems.html">Media service</a></li><li class="nested"><a href="commands-importer.html">Importer</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the web interface</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Reference</p>
+          <h1>Commands</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
+
+<p>Every command an EiN with all its modules has: 360 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
+<p>Each command is shown with how it is typed:</p>
+<div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
+<ul>
+<li><code>&lt;target&gt;</code> is something you give, <code>[...]</code> may be left out, and <code>...</code> may be given more than once.</li>
+<li><code>--name=&lt;value&gt;</code> takes a value after an equals sign, which a value starting with a minus needs (<code>--lng=-3.7</code>); <code>-x</code> is a short option.</li>
+<li><em>administrators only</em> marks a command only the administrator may run; <em>visitors too</em>, one a visitor browsing without signing in may run.</li>
+<li><em>answers JSON</em> marks a command whose answer comes as JSON with <code>JSON_OUTPUT=1</code> in front of it, which is what the web interface reads.</li>
+</ul>
+<p>A command of a family, such as <code>mod-install</code> or <code>user-passwd</code>, can be typed as two words where the family has a command of its own: <code>mod install archive</code>. In the shell, <code>&lt;command&gt; --help</code> says the same as these pages, for what is installed there; the documentation page in the web interface has them too.</p>
+<h2 id="core">Core<a class="anchor" href="#core" aria-label="Link to this section"></a></h2>
+<p><a href="commands-core.html">All 206 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="commands-core.html#abspath">abspath</a></td>
+<td>Ensure path is abspath.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#acl">acl</a></td>
+<td>Display or modify a node access control list.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#admin">admin</a></td>
+<td>Become the administrator in this terminal, for a member of the sudo group (user-elevate)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#attrs">attrs</a></td>
+<td>Display or set node attributes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#audit">audit</a></td>
+<td>Show who created, changed, moved, linked or removed which node, and when (administrators only)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#awk">awk</a></td>
+<td>Pattern scanning and text processing language (fields, patterns, arrays, printf)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#basename">basename</a></td>
+<td>Strip directory and suffix from filenames.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#cat">cat</a></td>
+<td>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#chmod">chmod</a></td>
+<td>Change file mode bits.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#chown">chown</a></td>
+<td>Change file owner and group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#clear">clear</a></td>
+<td>Clear the terminal screen.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#comment">comment</a></td>
+<td>Manage comments on a node (list, add, remove)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion">completion</a></td>
+<td>Spec-driven completion helpers.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-arg">completion-arg</a></td>
+<td>Autocomplete a command argument.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-commands">completion-commands</a></td>
+<td>Autocomplete a command name, without the subcommands of groups.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-entity">completion-entity</a></td>
+<td>Complete a person, location, album, device or track by name.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-group">completion-group</a></td>
+<td>Autocomplete a group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-path">completion-path</a></td>
+<td>Autocomplete a path.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-subcommand">completion-subcommand</a></td>
+<td>Autocomplete a command.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#completion-user">completion-user</a></td>
+<td>Autocomplete a user.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config">config</a></td>
+<td>Read and change system and personal settings.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config-get">config-get</a></td>
+<td>Print the effective value of one setting; for a key, only whether it is set.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config-list">config-list</a></td>
+<td>List settings with their effective values.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config-publish">config-publish</a></td>
+<td>Copy settings from this process&#39;s environment into /etc/environment.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config-set">config-set</a></td>
+<td>Change a setting and restart whatever reads it.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#config-unset">config-unset</a></td>
+<td>Reset a setting to its default.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#cp">cp</a></td>
+<td>Copy files and directories.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#cut">cut</a></td>
+<td>Remove sections from each line of files.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#date">date</a></td>
+<td>Print or set the system date and time.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#detach">detach</a></td>
+<td>detach a job so it keeps running after the shell closes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#df">df</a></td>
+<td>Free space per storage tier, its growth per day and when it fills, and the database size.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#dirname">dirname</a></td>
+<td>Strip last component from file name.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#dmesg">dmesg</a></td>
+<td>Print system log.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#docs">docs</a></td>
+<td>Describe what this installation is made of: its commands, node types and environment variables.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#docs-commands">docs-commands</a></td>
+<td>List every command on your PATH with its full spec and the module it comes from.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#docs-env">docs-env</a></td>
+<td>List the environment variables EiN and its modules read, with their values in this shell.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#docs-find">docs-find</a></td>
+<td>Commands by what they do, best first: by the command CFG_COMMAND_FINDER names, else by their words.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#docs-node-types">docs-node-types</a></td>
+<td>List every node type, described or in use, with what it is for and how many exist.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#du">du</a></td>
+<td>Estimate file usage in node structures.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#edit">edit</a></td>
+<td>Edit a text file, with syntax highlighting and checks for JSON, YAML, bash and Markdown.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#env">env</a></td>
+<td>Print environment variables.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#events">events</a></td>
+<td>What falls on the days around a date, from every events-* command on PATH.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#facets">facets</a></td>
+<td>Bucket counts (per year, per kind) for sizing search filters.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#file-stat">file-stat</a></td>
+<td>Stat for on disk file.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#file-sync">file-sync</a></td>
+<td>Sync for on disk file.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#find">find</a></td>
+<td>Search for nodes under a path, as GNU find does: starting points, then an expression of tests (-name -iname -path -ipath GLOB, -regex -iregex RE on the whole path, -type f|d|l|<node type>, -empty, -size [+-]N[cwbkMG], -user -group NAME, -uid -gid N, -newer PATH, -mmin and -mtime [+-]N), operators (! -not -a -o and parentheses), options (-maxdepth -mindepth N, -depth) and actions (-print -print0 -printf FORMAT -prune -quit -delete, -exec CMD {} &#39;;&#39; and -exec CMD {} +); -printf knows %p %f %h %P %d %s %y %m %u %g %U %G %t %c and %Tk %Ck %Bk for k in @YymdHMSFTDab+; the flags below are the same tests.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#find-containing">find-containing</a></td>
+<td>Find positions whose shape contains a point.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#find-nearby">find-nearby</a></td>
+<td>Find positions near a position node, by distance.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#find-similar">find-similar</a></td>
+<td>Find similar nodes by embedding.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#fold">fold</a></td>
+<td>Wrap each input line to fit a width (fold -w1: one character per line)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#gauges">gauges</a></td>
+<td>List the gauges running services draw beside the host&#39;s (a card&#39;s memory, say)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#grep">grep</a></td>
+<td>Search for patterns in input.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group">group</a></td>
+<td>Manage groups.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-add-member">group-add-member</a></td>
+<td>Add a user to a group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-create">group-create</a></td>
+<td>Create a new group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-delete">group-delete</a></td>
+<td>Delete a group: what it owned goes to another group, and ACL entries naming it are dropped.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-exists">group-exists</a></td>
+<td>Check if a group exists.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-info">group-info</a></td>
+<td>Display group information.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-is-member">group-is-member</a></td>
+<td>Check if a user is a member of a group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-list">group-list</a></td>
+<td>List the groups; as JSON with each one&#39;s description and built-in role.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-members">group-members</a></td>
+<td>List members of a group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-remove-member">group-remove-member</a></td>
+<td>Remove a user from a group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-resolve">group-resolve</a></td>
+<td>Resolve group name to GID or vice versa.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#group-update">group-update</a></td>
+<td>Update a group&#39;s title or description; its gid is fixed when it is created.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#head">head</a></td>
+<td>Output the first part of files, logs, or stdin; on a queue, the next entries without consuming them.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#health">health</a></td>
+<td>Say whether the system is healthy, catching up, stuck or needs a person, and the checks that decide it.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#host-metrics">host-metrics</a></td>
+<td>CPU and memory use and event-loop lag now, with their recent history from metrics-sampler.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#http-server">http-server</a></td>
+<td>Start an HTTP server.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#info">info</a></td>
+<td>Display node ID and type.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#jq">jq</a></td>
+<td>Lightweight JSON processor.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#label">label</a></td>
+<td>Manage labels/tags (add, remove, list, prune)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#labels">labels</a></td>
+<td>List labels (all, or of a node); search --tag <label> finds what carries one.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ln">ln</a></td>
+<td>Create links between files.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#log-append">log-append</a></td>
+<td>Append a JSON entry to a log, optionally at an explicit (backdated) timestamp.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#login">login</a></td>
+<td>Authenticate as a user.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#logout">logout</a></td>
+<td>Log out of the current session.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ls">ls</a></td>
+<td>List directory contents.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#members">members</a></td>
+<td>Who is in a container: an album&#39;s members by its rules, or a directory&#39;s media.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#metrics-sampler">metrics-sampler</a></td>
+<td>Sample host, storage and workload metrics into /logs/metrics (long-running)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mime">mime</a></td>
+<td>Show stored, extension-based and content-sniffed mimetype of a node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkbuf">mkbuf</a></td>
+<td>Create a buffer node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkdir">mkdir</a></td>
+<td>Create a directory node (-p to create parents)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkfile">mkfile</a></td>
+<td>Create an empty text file node (what touch does elsewhere)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mklog">mklog</a></td>
+<td>Create a log node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mknode">mknode</a></td>
+<td>Create new or ensure node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkpool">mkpool</a></td>
+<td>Create a pool node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkqueue">mkqueue</a></td>
+<td>Create a queue node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mkrouter">mkrouter</a></td>
+<td>Create a router node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod">mod</a></td>
+<td>Module management.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-cache">mod-cache</a></td>
+<td>Pre-fetch a module&#39;s TypeScript command dependencies.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-info">mod-info</a></td>
+<td>Show module information.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-install">mod-install</a></td>
+<td>Install modules from their repositories, or update them, with the dependencies they lack, and set them up.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-list">mod-list</a></td>
+<td>List installed modules.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-remove">mod-remove</a></td>
+<td>Uninstall a module.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-search">mod-search</a></td>
+<td>The published modules: each module-* repository of the module sources (CFG_MODULE_SOURCES), with its version and whether it is installed.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-setup">mod-setup</a></td>
+<td>Set up a module already in the modules directory.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mount">mount</a></td>
+<td>Mount a filesystem.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mv">mv</a></td>
+<td>Move or rename files and directories, re-pointing the softlinks at each moved path or anywhere under it (and a relation link’s peerLink with them)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#news">news</a></td>
+<td>What has been added lately, newest first, from every news-* command on PATH.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#nohup">nohup</a></td>
+<td>run a command detached, immune to shell hang-up, logging to /var/logs/jobs.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#onthisday">onthisday</a></td>
+<td>What the archive has from a calendar day (MM-DD, default today) in earlier years, from every onthisday-* command on PATH.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#parse-search">parse-search</a></td>
+<td>A search&#39;s words read as filters — subjects, an area, years, kinds — by the command CFG_SEARCH_PARSER names, or as words when it names none.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline">pipeline</a></td>
+<td>Manage pipelines.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-cancel">pipeline-cancel</a></td>
+<td>Cancel a running pipeline.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-define">pipeline-define</a></td>
+<td>Register a pipeline definition from a YAML file.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-engine">pipeline-engine</a></td>
+<td>Run the pipeline engine (long-running)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-heal">pipeline-heal</a></td>
+<td>Rerun failed instances after a growing wait, and mark those that keep failing for a person.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-instances">pipeline-instances</a></td>
+<td>List pipeline instances — running, failed or completed — newest first.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-list">pipeline-list</a></td>
+<td>List pipeline definitions.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-overview">pipeline-overview</a></td>
+<td>Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-prune">pipeline-prune</a></td>
+<td>Remove terminal pipeline instances (completed/failed/cancelled)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-remove">pipeline-remove</a></td>
+<td>Remove pipeline instances (cancels running ones first)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-repair">pipeline-repair</a></td>
+<td>Return instances marked terminal while still holding unfinished steps to running.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-rerun">pipeline-rerun</a></td>
+<td>Rerun pipeline(s) from the current definition, replacing the old instance.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-restart">pipeline-restart</a></td>
+<td>Restart a failed pipeline (re-queue failed steps)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-start">pipeline-start</a></td>
+<td>Manually start a pipeline.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-status">pipeline-status</a></td>
+<td>Show pipeline instance status.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-step-restart">pipeline-step-restart</a></td>
+<td>Restart a single pipeline step.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-undefine">pipeline-undefine</a></td>
+<td>Remove a pipeline definition, and cancel its running instances.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pipeline-worker">pipeline-worker</a></td>
+<td>Run a pool worker (long-running)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool">pool</a></td>
+<td>Manage work pools.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-add">pool-add</a></td>
+<td>Add a job to a pool.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-cancel">pool-cancel</a></td>
+<td>Cancel pending or claimed jobs.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-claim">pool-claim</a></td>
+<td>Claim the best matching job from a pool under a lease.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-list">pool-list</a></td>
+<td>List jobs in a pool.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-purge">pool-purge</a></td>
+<td>Delete finished jobs so a pool does not grow without bound.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-retry">pool-retry</a></td>
+<td>Return failed or cancelled jobs to the pool with a clean attempt count.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-stat">pool-stat</a></td>
+<td>Show a pool backlog, job counts, policy and throughput per job kind; every pool without a path.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#pool-wake">pool-wake</a></td>
+<td>Try resting job kinds again now, every resting kind without a name.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#position-get">position-get</a></td>
+<td>Where nodes are: each path&#39;s name, type and the shape of its position (a location&#39;s, a picture&#39;s GPS)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#position-set">position-set</a></td>
+<td>Set the shape of a position node (point, circle or polygon), making the node when it is missing.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#props">props</a></td>
+<td>Display node properties.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ps">ps</a></td>
+<td>List the commands running now: pid, user, shell, how long, and the command line. Admin sees everyone&#39;s, anyone else their own.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#queue-dead">queue-dead</a></td>
+<td>List the entries a queue set aside after their delivery attempts, or retry or drop them.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#queue-peek">queue-peek</a></td>
+<td>List the next entries of a queue without consuming them.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#reach-check">reach-check</a></td>
+<td>Check stored reach against a walk of each path, for a sample of nodes and every account.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#relate">relate</a></td>
+<td>Create a bidirectional relation between two nodes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#relations-guard">relations-guard</a></td>
+<td>Remove reciprocal relation links when one side is deleted (long-running)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#resolve-id">resolve-id</a></td>
+<td>Resolve node ID to path.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#rev">rev</a></td>
+<td>Reverse lines character-wise.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#rm">rm</a></td>
+<td>Remove (delete) files or directories.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#rmdir">rmdir</a></td>
+<td>Remove empty directories.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#scp">scp</a></td>
+<td>Copy files between EiN and another machine over SSH (members of group ssh)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#search">search</a></td>
+<td>Faceted search over content: text, time, region, kind, tags, subjects (people, locations, devices) and containers.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#sed">sed</a></td>
+<td>Stream editor for filtering and transforming text.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#seq">seq</a></td>
+<td>Print a sequence of numbers.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service">service</a></td>
+<td>Manage system services.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-add">service-add</a></td>
+<td>Add a service by linking to a service script directory.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-disable">service-disable</a></td>
+<td>Disable a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-enable">service-enable</a></td>
+<td>Enable a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-list">service-list</a></td>
+<td>List services, with how often each has restarted.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-remove">service-remove</a></td>
+<td>Remove a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-restart">service-restart</a></td>
+<td>Restart a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-start">service-start</a></td>
+<td>Start a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-start-all">service-start-all</a></td>
+<td>Start all enabled services.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-status">service-status</a></td>
+<td>Show service status.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-stop">service-stop</a></td>
+<td>Stop a service.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#service-stop-all">service-stop-all</a></td>
+<td>Stop all running services.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#session-reap">session-reap</a></td>
+<td>Remove session and tty nodes left behind by dead shells.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#share">share</a></td>
+<td>Show and set who has access to a node.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#share-info">share-info</a></td>
+<td>Show who has access to a node, and through what.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#share-link">share-link</a></td>
+<td>Make, list, change and turn off links that open a node without signing in.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#share-set">share-set</a></td>
+<td>Set who has access to nodes and everything below them.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#sleep">sleep</a></td>
+<td>Delay for a specified amount of time.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#sort">sort</a></td>
+<td>Sort lines of text.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ssh">ssh</a></td>
+<td>Log in to another machine or run a command there (members of group ssh)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ssh-copy-id">ssh-copy-id</a></td>
+<td>Install your public key in another machine&#39;s authorized_keys (members of group ssh)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ssh-keygen">ssh-keygen</a></td>
+<td>Make an SSH key pair in ~/.ssh, show a fingerprint (-l) or forget a host key (-R)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ssh-server">ssh-server</a></td>
+<td>Start an SSH server.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#star">star</a></td>
+<td>Bookmark nodes as softlinks in $HOME/stars (star <path>..., star -d <path>..., star [list])</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#stat">stat</a></td>
+<td>Display file or node status.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#stats-overview">stats-overview</a></td>
+<td>Per-type archive growth: nodes and bytes added by year and month.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#system-info">system-info</a></td>
+<td>Which instance this is: host name, uptime, core&#39;s version and commit, the module API, each module&#39;s commit, and the PostgreSQL and Deno versions.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#tail">tail</a></td>
+<td>Output the last part of files, logs, or stdin (with -f to follow)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#top">top</a></td>
+<td>Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#tr">tr</a></td>
+<td>Translate or delete characters.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#trash">trash</a></td>
+<td>Move nodes into the reader&#39;s trash, alone or as one batch, list it, restore entries, or empty it.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#truncate">truncate</a></td>
+<td>Truncate an associated resource of a node if it has one.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ui-build">ui-build</a></td>
+<td>Bundle modules&#39; pages into /var/cache/ui for the web UI to load, unless unchanged since the last build.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ui-icons">ui-icons</a></td>
+<td>Tabler icons by name, as SVG markup, for the web UI.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ui-nav">ui-nav</a></td>
+<td>The web UI&#39;s sidebar, top bar and panels for the caller, from every module&#39;s entries and the administrator&#39;s and the user&#39;s changes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#uniq">uniq</a></td>
+<td>Report or omit repeated lines.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#unmount">unmount</a></td>
+<td>Unmount a filesystem.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#unrelate">unrelate</a></td>
+<td>Remove a bidirectional relation (both sides)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#unzip">unzip</a></td>
+<td>Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A file already there at its entry’s size is left as it is, so a run that stopped can be run again.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user">user</a></td>
+<td>Manage users.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-create">user-create</a></td>
+<td>Create a user account and its home with its own group (an existing group of its name when that group&#39;s gid is free as a uid) and link it into its own and its other groups.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-delete">user-delete</a></td>
+<td>Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-disable">user-disable</a></td>
+<td>Disable a user account and end its open sessions.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-elevate">user-elevate</a></td>
+<td>Make this sign-in an administrator&#39;s, for a member of the sudo group, after entering the password again.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-enable">user-enable</a></td>
+<td>Enable a disabled user account.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-exists">user-exists</a></td>
+<td>Check if a user account exists.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-groups">user-groups</a></td>
+<td>List groups a user belongs to.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-id">user-id</a></td>
+<td>Print user and group IDs.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-info">user-info</a></td>
+<td>Display user account information.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-list">user-list</a></td>
+<td>List the user accounts; as JSON with each one&#39;s primary group, e-mail address, description, person and built-in role, and for an administrator whether a password is set.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-passwd">user-passwd</a></td>
+<td>Change user password.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-resolve">user-resolve</a></td>
+<td>Resolve username to UID or vice versa.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-set-primary-group">user-set-primary-group</a></td>
+<td>Set a user&#39;s primary group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-update">user-update</a></td>
+<td>Update an account&#39;s display name, description and (an administrator only) e-mail address; anyone may update their own name and description.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#user-whoami">user-whoami</a></td>
+<td>Print the current username.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#uuid">uuid</a></td>
+<td>Generate a random UUID.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#wc">wc</a></td>
+<td>Print newline, word, and byte counts of files or stdin.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#who">who</a></td>
+<td>List who is signed in: each SSH login, terminal and web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone&#39;s, anyone else their own.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#www">www</a></td>
+<td>Manage active web UI.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#xargs">xargs</a></td>
+<td>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
+<p><a href="commands-archive.html">All 131 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="commands-archive.html#album">album</a></td>
+<td>Manage albums (create, info, list, set, add files)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#album-cover">album-cover</a></td>
+<td>Give an album without a cover a random one of its own pictures (coverPhoto softlink)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#album-profile">album-profile</a></td>
+<td>Build the profile staging matches suggested groups against, beside each library album as its .profile: its members&#39; times, days, places and people, and the pictures that stand for it.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#album-random">album-random</a></td>
+<td>The path of one album somebody made, at random.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#album-span">album-span</a></td>
+<td>Write an album&#39;s time span (timeStart/timeEnd/mediaCount) onto the album node: its media&#39;s, widened to the days set by hand (spanStart/spanEnd)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#album-stack">album-stack</a></td>
+<td>Reconcile album-local stacks of consecutive, perceptually similar photos.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#archive-bridge">archive-bridge</a></td>
+<td>Derive media and location domain events from VFS mutations (long-running)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#archive-parse">archive-parse</a></td>
+<td>Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#assign-faces">assign-faces</a></td>
+<td>Match an image&#39;s detected faces to existing people, creating unnamed people for the rest.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#assign-speakers">assign-speakers</a></td>
+<td>Match a recording&#39;s voices to existing people, creating unnamed people for the rest.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#auto-album-assign">auto-album-assign</a></td>
+<td>Weigh media against the library albums they may belong in, as staging weighs its suggested groups, and write nothing.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#auto-album-cluster">auto-album-cluster</a></td>
+<td>Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#cluster-faces">cluster-faces</a></td>
+<td>Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#cluster-voices">cluster-voices</a></td>
+<td>Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#compute-fingerprint">compute-fingerprint</a></td>
+<td>Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#dayinhistory">dayinhistory</a></td>
+<td>List media taken on a given day (MM-DD, default today) in past years.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#detect-chapters">detect-chapters</a></td>
+<td>Find a video&#39;s cuts and write them as its chapters (metadata/chapters)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#detect-faces">detect-faces</a></td>
+<td>Detect faces in an image or a video and keep the usable ones as face regions.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device">device</a></td>
+<td>Camera and recording device management.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-cover">device-cover</a></td>
+<td>Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-create">device-create</a></td>
+<td>Create a device node.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-info">device-info</a></td>
+<td>Show device details and owners.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-link">device-link</a></td>
+<td>Link a file to its capture device using extracted exif, or to a device named by hand.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-list">device-list</a></td>
+<td>List all devices.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-match">device-match</a></td>
+<td>Match a device by serial number or make/model.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-relink">device-relink</a></td>
+<td>Link existing media to a registered device by its fingerprint.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-remove-owner">device-remove-owner</a></td>
+<td>Unlink a person from a device (removes both halves)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-scan">device-scan</a></td>
+<td>Propose devices seen in media but not registered.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-set-owner">device-set-owner</a></td>
+<td>Link a person as owner of a device (dated relation pair)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-timeline">device-timeline</a></td>
+<td>One device&#39;s history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#device-update">device-update</a></td>
+<td>Change a device&#39;s settings.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#duplicates">duplicates</a></td>
+<td>Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#embed-picture">embed-picture</a></td>
+<td>Embed a photo or a video&#39;s keyframes for search by what is in the picture.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#events-anniversaries">events-anniversaries</a></td>
+<td>Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#exif-extract">exif-extract</a></td>
+<td>Extract EXIF metadata from file and create exif/position nodes; the file&#39;s paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category&#39;s time rules, and its exact copies among its inbox&#39;s files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#exiftool">exiftool</a></td>
+<td>Extract metadata from a file, as exiftool reads it (through the media service)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-add">face-add</a></td>
+<td>Add a human-drawn face box to an image as a new unidentified person.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-audit">face-audit</a></td>
+<td>Mark transferred faces whose nearest human-named face in another photo is somebody else.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-confirm">face-confirm</a></td>
+<td>Confirm that regions show the person they are assigned to.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-remove">face-remove</a></td>
+<td>Remove a face and its person when it was the person&#39;s only unidentified face.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-reset">face-reset</a></td>
+<td>Undo automatic face→person assignments by provenance, leaving manual ones intact.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#face-set-box">face-set-box</a></td>
+<td>Change a region&#39;s box and regenerate its preview crop; a moved face stops voting in recognition.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-description">file-set-description</a></td>
+<td>Set a file&#39;s hand-written description.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-orientation">file-set-orientation</a></td>
+<td>Rotate or mirror a file for good: writes angle/angleManual/mirror, remaps face boxes and regenerates renditions (a video re-encodes on the media pool)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-photographer">file-set-photographer</a></td>
+<td>Link the person who took a file (photographer softlink)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-position">file-set-position</a></td>
+<td>Set a manual location override (positionManual + child position node) on a file, or clear its location.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-text">file-set-text</a></td>
+<td>Write the text in a picture by hand, in place of what was read from it.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-text-language">file-set-text-language</a></td>
+<td>Set the language the text in a picture is written in (or auto), and read the picture again in it.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#file-set-time">file-set-time</a></td>
+<td>Set, annotate or clear a hand-typed capture time (whenManual) on one or more files.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#find-within">find-within</a></td>
+<td>Find positions inside a geographic bounding box: media points and locations.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#generate-derivatives">generate-derivatives</a></td>
+<td>Generate web derivatives (still pictures, transcoded renditions) for a media file.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#geocode-files">geocode-files</a></td>
+<td>Batch reverse geocode the position nodes of the files under a directory.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#geocode-location">geocode-location</a></td>
+<td>Resolve a location&#39;s written address to coordinates (Nominatim forward geocoding)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#geocode-position">geocode-position</a></td>
+<td>Reverse geocode a file&#39;s position node using Nominatim (OSM)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#hello">hello</a></td>
+<td>Say hello (example TypeScript module command)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#index-document">index-document</a></td>
+<td>Extract text content and generate embedding for a document file.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#label-model">label-model</a></td>
+<td>Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#latest">latest</a></td>
+<td>List the most recently captured media, newest first.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-link-media">location-link-media</a></td>
+<td>Link geotagged media files to the location whose shape contains them (<file>/location softlink)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-list">location-list</a></td>
+<td>List locations with their saved coordinates.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-locate">location-locate</a></td>
+<td>Give a location coordinates from its linked media, falling back to geocoding its address.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-region">location-region</a></td>
+<td>Turn a location name (a city, a country, an area) into the region search --bbox filters on.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-timeline">location-timeline</a></td>
+<td>What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#location-update">location-update</a></td>
+<td>Change a location&#39;s name, address, description, city or country.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#media-details">media-details</a></td>
+<td>Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#media-reembed">media-reembed</a></td>
+<td>Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#media-resolve-time">media-resolve-time</a></td>
+<td>Re-resolve media originals&#39; capture times from their stored exif and manual sources.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#media-scan">media-scan</a></td>
+<td>Emit media events for files the bridge never saw (backfill / gap recovery)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#media-sidecars">media-sidecars</a></td>
+<td>Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#members-album">members-album</a></td>
+<td>List an album&#39;s media by the album&#39;s own rules: an imported album&#39;s files/ folder, links followed, the cover left out, stacks of similar photos folded.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#merge-duplicates">merge-duplicates</a></td>
+<td>Keep one file of a set of duplicates, fill it in from the others, and move them to the trash as one batch.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#news-albums">news-albums</a></td>
+<td>Recently created albums, newest first, with who made them, as news entries (core news gathers them)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#onthisday-media">onthisday-media</a></td>
+<td>The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#parse-eval">parse-eval</a></td>
+<td>Score the search parse (archive-parse) against the filters each question means.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person">person</a></td>
+<td>People and family tree management.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-add-event">person-add-event</a></td>
+<td>Add an event (blob) to a person, album, location or device.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-check">person-check</a></td>
+<td>Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-children">person-children</a></td>
+<td>List a person&#39;s children (children/ dir)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-cover">person-cover</a></td>
+<td>Give a named person without a cover the crop of one of their own faces (coverPhoto softlink)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-create">person-create</a></td>
+<td>Create a person node.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-detach">person-detach</a></td>
+<td>Take faces off a person: to a new unnamed person, to an existing one, or off identity entirely.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-discard">person-discard</a></td>
+<td>Say unidentified people are not a person at all: unassign and lock everything they hold, and remove them.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-faces">person-faces</a></td>
+<td>Every face and tag assigned to a person, with the photo each came from.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-family-tree">person-family-tree</a></td>
+<td>Display ancestors and descendants of a person.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-fixup">person-fixup</a></td>
+<td>Repair family-tree links (recreate missing reciprocals, rewrite stale reciprocal paths, drop dangling)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-graph">person-graph</a></td>
+<td>Family graph around a person as nodes and edges, for drawing a tree.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-how-related">person-how-related</a></td>
+<td>Compute the kinship term between two persons (English/Swedish)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-info">person-info</a></td>
+<td>Show person details, relationships, and events.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-list">person-list</a></td>
+<td>List the named people, with how many faces and voice turns each has.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-merge">person-merge</a></td>
+<td>Merge people into another (faces, events, relations and links to them move; the sources are removed)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-name">person-name</a></td>
+<td>Name an unidentified person and move them into /people.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-relatives">person-relatives</a></td>
+<td>Who a kin phrase reaches from a person through the family tree: &#39;moster&#39;, &#39;mammas syster&#39;, &#39;barn&#39;, &#39;my father&#39;s brother&#39;.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-remove">person-remove</a></td>
+<td>Remove a relationship between two persons (both sides)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-remove-home">person-remove-home</a></td>
+<td>Remove a person↔location residence relation (both halves)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-set-home">person-set-home</a></td>
+<td>Record where a person lived, and when (dated relation pair)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-set-parent">person-set-parent</a></td>
+<td>Add a parent relationship (parents/ ↔ children/)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-set-partner">person-set-partner</a></td>
+<td>Add or update a partner relationship (partners/, both directions)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-stats">person-stats</a></td>
+<td>Count births, engagements, marriages and deaths by calendar month across all years.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-timeline">person-timeline</a></td>
+<td>One person&#39;s life as a chronological feed: events, homes, partnerships, children and albums.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-unknown">person-unknown</a></td>
+<td>List auto-created people nobody has named yet, with face counts and crops.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-update">person-update</a></td>
+<td>Change a person&#39;s profile: names, birth and death dates, gender, allergies, description, contact details. An empty value clears the field.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#person-voices">person-voices</a></td>
+<td>Every recording a person is heard in, with how long they speak and a moment to hear them.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#promote-exif-attrs">promote-exif-attrs</a></td>
+<td>Copy width/height/duration from a file&#39;s exif node onto the file node.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#raw">raw</a></td>
+<td>Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#read-text">read-text</a></td>
+<td>Read the text written in a picture and keep it for search.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#regenerate">regenerate</a></td>
+<td>Regenerate web derivatives for media files under a path.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#regenerate-face-crops">regenerate-face-crops</a></td>
+<td>Re-encode a bounded, resumable batch of existing face crops without re-detecting faces.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-album">search-album</a></td>
+<td>Search albums by name, description and what their pictures show.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-device">search-device</a></td>
+<td>Search devices by name, make, model or serial number.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-document">search-document</a></td>
+<td>Search documents (PDF, Word, text) by what their text is about, using semantic similarity.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-location">search-location</a></td>
+<td>Search locations by name.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-media">search-media</a></td>
+<td>Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-people">search-people</a></td>
+<td>Search people by partial name; every query word must match the same person.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#search-track">search-track</a></td>
+<td>Search tracks by the name of the device that recorded them, or their description.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#staging">staging</a></td>
+<td>Manage a user&#39;s private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#subcluster-faces">subcluster-faces</a></td>
+<td>Re-cluster one person&#39;s faces with average linkage, to find two people fused into one.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#subject-device">subject-device</a></td>
+<td>What <code>search --subject device:&lt;ref&gt;</code> asks: the media a device produced, as the attr equality the store answers.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#subject-location">subject-location</a></td>
+<td>What <code>search --subject location:&lt;ref&gt;</code> asks: the media linked to a location node.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#subject-person">subject-person</a></td>
+<td>What <code>search --subject person:&lt;ref&gt;</code> asks: the media a person is in: tagged with a box (a face or a drawn region) or without one.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#subjects-in">subjects-in</a></td>
+<td>Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#tag-transfer">tag-transfer</a></td>
+<td>Move legacy manual face tags onto the auto-detected face inside their box (recognition anchors)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#timeline">timeline</a></td>
+<td>Chronological feed of albums, life events, birthdays and tracks, newest first.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#timeline-facets">timeline-facets</a></td>
+<td>Per-day, per-month and per-year counts for the timeline scrubber.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-append">track-append</a></td>
+<td>Append coordinate points to a device&#39;s track.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-create">track-create</a></td>
+<td>Give a device a track for the coordinate points it recorded (the device&#39;s child track)</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-import">track-import</a></td>
+<td>Import GPX track points into a device&#39;s track.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-list">track-list</a></td>
+<td>List the devices that have a track, with its point count, span and extent.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-read">track-read</a></td>
+<td>Read a device&#39;s track as drawable segments ({segments, points, truncated})</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#track-stage">track-stage</a></td>
+<td>Import a staged GPX file into the track of the device it names, and remove the file; mark it pending when no single device matches, and keep it in its staging area&#39;s routes/.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#transcribe-file">transcribe-file</a></td>
+<td>Transcribe audio or video into a timed WebVTT node with chunk embeddings.</td>
+</tr>
+<tr>
+<td><a href="commands-archive.html#voiceprint-file">voiceprint-file</a></td>
+<td>Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h2>
+<p><a href="commands-assistant.html">All 6 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="commands-assistant.html#agent-eval">agent-eval</a></td>
+<td>Ask the chat&#39;s loop the modules&#39; questions against the real archive, and score what happens.</td>
+</tr>
+<tr>
+<td><a href="commands-assistant.html#assistant-ask">assistant-ask</a></td>
+<td>Answer a question about EiN by running its commands (the chat drawer&#39;s backend)</td>
+</tr>
+<tr>
+<td><a href="commands-assistant.html#assistant-chat">assistant-chat</a></td>
+<td>List, create, read, or delete durable assistant chats; read a turn in flight; record how a proposal ended; the questions the modules suggest.</td>
+</tr>
+<tr>
+<td><a href="commands-assistant.html#assistant-commands">assistant-commands</a></td>
+<td>Find a command by what it is for, judge whether a line changes anything, or rebuild the assistant&#39;s command index.</td>
+</tr>
+<tr>
+<td><a href="commands-assistant.html#llm-chat">llm-chat</a></td>
+<td>Ask the assistant&#39;s language model one thing, and print what it answers.</td>
+</tr>
+<tr>
+<td><a href="commands-assistant.html#llm-status">llm-status</a></td>
+<td>Whose the assistant&#39;s language model is, where it runs, and (with --checks) whether it answers.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="media-service">Media service<a class="anchor" href="#media-service" aria-label="Link to this section"></a></h2>
+<p><a href="commands-ems.html">All 4 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="commands-ems.html#ems-gpu">ems-gpu</a></td>
+<td>The media service&#39;s GPU now, with the last six hours of utilization and VRAM.</td>
+</tr>
+<tr>
+<td><a href="commands-ems.html#ems-gpu-sample">ems-gpu-sample</a></td>
+<td>One reading of the media service&#39;s GPU: utilization, VRAM and temperature.</td>
+</tr>
+<tr>
+<td><a href="commands-ems.html#ems-status">ems-status</a></td>
+<td>Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues.</td>
+</tr>
+<tr>
+<td><a href="commands-ems.html#ems-text-embed">ems-text-embed</a></td>
+<td>Texts as vectors, by EMS&#39;s current text model, to compare by meaning.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="importer">Importer<a class="anchor" href="#importer" aria-label="Link to this section"></a></h2>
+<p><a href="commands-importer.html">All 13 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="commands-importer.html#import-albums">import-albums</a></td>
+<td>Create /albums nodes from the legacy extractor output.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-check">import-check</a></td>
+<td>Check the extracted legacy data before an import, and with --vfs what landed after one.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-comments">import-comments</a></td>
+<td>Create markdown comments from the legacy comment nodes.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-covers">import-covers</a></td>
+<td>Recreate legacy profilePicture links as coverPhoto softlinks.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-devices">import-devices</a></td>
+<td>Create /devices nodes (+ configuration log + dated owners) from the legacy extractor output.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-files">import-files</a></td>
+<td>Create frozen file nodes (symlinked to old bytes) with overrides, faces, links and versions; user files go to /home/<username>/staging/files/inbox/legacy-import.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-homes">import-homes</a></td>
+<td>Wire person↔location residence relations from the legacy extractor output.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-measurements">import-measurements</a></td>
+<td>Create measurement logs (unit attr + backdated value points) from the legacy series.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-people">import-people</a></td>
+<td>Create /locations and /people nodes from the legacy extractor output.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-relations">import-relations</a></td>
+<td>Wire up parents/children/partners from the legacy extractor output.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-stories">import-stories</a></td>
+<td>Create blob events from the legacy text/story nodes.</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-tags">import-tags</a></td>
+<td>Port legacy /labels into the new tag system (label add per resolvable target)</td>
+</tr>
+<tr>
+<td><a href="commands-importer.html#import-users-groups">import-users-groups</a></td>
+<td>Create /groups and /users nodes from the legacy extractor output, each account with a new uid and a group of its own, each group with a new gid.</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../concepts/pipelines.html" rel="prev"><span>Previous</span>Changes and pipelines</a><a class="next" href="commands-core.html" rel="next"><span>Next</span>Core commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#media-service">Media service</a></li><li><a href="#importer">Importer</a></li></ul></aside>
+    </div>
+  </body>
+</html>

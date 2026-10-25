@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The graphics card – EiN documentation</title>
+    <meta name="description" content="This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/admin/gpu.html">
+    <meta property="og:title" content="The graphics card – EiN documentation">
+    <meta property="og:description" content="This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/admin/gpu.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="gpu.html" aria-current="page">The graphics card</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="media-service.html">The media service</a></li><li><a href="language-model.html">The language model</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="staging.html">Staging and importing for administrators</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">Administration</p>
+          <h1>The graphics card</h1>
+        </header>
+        <article class="prose">
+<p>This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.</p>
+<h2 id="what-the-card-is-used-for">What the card is used for<a class="anchor" href="#what-the-card-is-used-for" aria-label="Link to this section"></a></h2>
+<p>Two of EiN&#39;s optional services use the card. EiN itself and its database never do.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>What runs on the card</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The media service (<code>ems</code>, the <code>--ems</code> option)</td>
+<td>The models for faces, voices, transcripts, text in pictures and handwriting, picture and text vectors; AV1 video encoding</td>
+</tr>
+<tr>
+<td>The language model (<code>llm</code>, the <code>--llm</code> option)</td>
+<td>As many of the model&#39;s layers as fit in the part of the card left to it</td>
+</tr>
+</tbody></table>
+</div>
+<p>A card changes how fast the work is done, not what comes out of it, with one exception. Each model family is placed when the media service loads it: on the card when there is room, otherwise on the processor with the same weights. Transcripts are the exception: on a machine with a card, whisper always runs on the card and a transcription waits for room there rather than move to the processor; on a machine without one it runs on the processor, at about twice the length of the recording. The two give slightly different words, so a transcript never depends on what else happened to be on the card.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Transcripts</th>
+<th>Everything else</th>
+<th>Language model</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>16 GB</td>
+<td>on the card</td>
+<td>on the card</td>
+<td>on the card</td>
+</tr>
+<tr>
+<td>12 GB</td>
+<td>on the card</td>
+<td>on the card when there is room, or the processor</td>
+<td>partly on the card</td>
+</tr>
+<tr>
+<td>8 GB</td>
+<td>on the card</td>
+<td>on the card when there is room, or the processor</td>
+<td>on the processor</td>
+</tr>
+<tr>
+<td>none</td>
+<td>on the processor, about 2x the recording</td>
+<td>on the processor</td>
+<td>on the processor</td>
+</tr>
+</tbody></table>
+</div>
+<p>A smaller card only makes the work slower: every output is made on any card or none. Video renditions are AV1. The media service encodes them on the card when the card and its build offer the <code>av1_nvenc</code> encoder, and on the processor otherwise; on a card without an AV1 encoder the attempt on the card fails and the processor encodes the video instead. <code>EMS_VIDEO_ENCODER=libsvtav1</code> in <code>~/ein/.env</code> keeps video encoding on the processor.</p>
+<p>Search uses the card too, when the media service has no indexing work: after 10 minutes without any, it unloads its indexing models and moves the search models onto the card, as far as they fit, and gives the card back to indexing as soon as work arrives. The <strong>Media service</strong> tab on the dashboard shows which of the two has it, under <a href="#check-that-ein-uses-the-card">Check that EiN uses the card</a>.</p>
+<h2 id="what-card-you-need">What card you need<a class="anchor" href="#what-card-you-need" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>NVIDIA only.</strong> EiN uses no other make of card.</li>
+<li><strong>Driver 610 or newer.</strong> The media service&#39;s ffmpeg needs it to encode video on the card.</li>
+<li><strong>16 GB of card memory is recommended</strong>: room for the media models and the language model side by side. Cards of 8 and 12 GB work, as the table above shows. A transcription needs about 4 GB of the card free.</li>
+<li><strong>One card.</strong> When the machine has several, EiN hands all of them to both services; it is built and tried with one.</li>
+</ul>
+<p>The installer checks the card when you install with <code>--ems</code> or <code>--llm</code>. It reports the card with the most memory, and every graphics line is at most <code>low</code>, never <code>missing</code>: without a usable card the install goes on and the services run on the processor.</p>
+<div class="code"><pre tabindex="0"><code>graphics         ok       NVIDIA GeForce RTX 4070, 12282 MB, driver 610.31
+card memory      low      12282 MB: works; 16 GB is recommended, room for the media models and the assistant side by side
+container GPU    ok       nvidia-container-toolkit 1.18.1, CDI spec in /var/run/cdi</code></pre></div>
+<p>To run only the checks, without installing anything:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
+curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
+<h2 id="prepare-the-machine">Prepare the machine<a class="anchor" href="#prepare-the-machine" aria-label="Link to this section"></a></h2>
+<p>The containers reach the card through CDI, the Container Device Interface: a file that describes the card&#39;s devices and libraries, which the container engine reads when a container asks for <code>nvidia.com/gpu=all</code>. These steps need root, once per machine and again after reinstalling its operating system.</p>
+<ol>
+<li><p>Install NVIDIA&#39;s driver, 610 or newer, from your distribution or from NVIDIA. Check it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+nvidia-smi</code></pre></div>
+<p>It lists the card, its memory and the driver version. When it says it cannot reach the driver, fix that first: nothing below works without it.</p>
+</li>
+<li><p>Install <code>nvidia-container-toolkit</code> 1.18 or newer, from NVIDIA&#39;s package repository. 1.18 is the first that ships <code>nvidia-cdi-refresh.service</code>, which writes the CDI file <code>/var/run/cdi/nvidia.yaml</code> from the devices the machine actually has, at every boot and whenever the driver or the toolkit changes. Check the version:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+nvidia-ctk --version</code></pre></div>
+</li>
+<li><p>Turn the refresh on, and check that it wrote the file:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+<span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now nvidia-cdi-refresh.service
+<span class="hljs-built_in">ls</span> -l /var/run/cdi/nvidia.yaml</code></pre></div>
+</li>
+<li><p>Remove any CDI file made by hand. Do not run <code>nvidia-ctk cdi generate --output=/etc/cdi/…</code> yourself: such a file names the card numbers of the moment it was made, and podman falls back to it after a reboot has renumbered them. The installer warns about it with <code>with a hand-made spec in /etc/cdi</code>.</p>
+</li>
+<li><p>Check your container engine:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>What it needs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>podman</td>
+<td>Any version reads CDI. podman 4.9.3, the one in Ubuntu 24.04 and Linux Mint 22, needs the fix in the next section.</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>Docker Engine 28.2 or newer, where CDI is on by default.</td>
+</tr>
+</tbody></table>
+</div>
+</li>
+<li><p>Check that a container sees the card:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as the user EiN runs as</span>
+podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all docker.io/library/debian:trixie-slim nvidia-smi -L</code></pre></div>
+<p>With Docker, write <code>docker run --rm --device nvidia.com/gpu=all</code> instead. It prints one line per card. When it fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code>, the engine cannot read the CDI file: see the next section.</p>
+</li>
+</ol>
+<h3 id="fix-the-cdi-file-for-podman-493">Fix the CDI file for podman 4.9.3<a class="anchor" href="#fix-the-cdi-file-for-podman-493" aria-label="Link to this section"></a></h3>
+<p>podman 4.9.3 rejects the CDI file as <code>nvidia-ctk</code> 1.17 and newer writes it, with <code>unknown field &quot;additionalGids&quot;</code>, and a container asking for <code>nvidia.com/gpu=all</code> then finds no card. The media service&#39;s repository has a script that makes every regeneration of the file readable to podman 4.9.3, once per machine:</p>
+<ol>
+<li><p>Make sure the machine has Python&#39;s YAML library, which the fix uses. On Ubuntu and Mint:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+<span class="hljs-built_in">sudo</span> apt install python3-yaml</code></pre></div>
+</li>
+<li><p>Run the installer for the fix. After an install with <code>--ems</code>, the media service&#39;s sources are in <code>~/ein/src/ems</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+<span class="hljs-built_in">sudo</span> bash ~/ein/src/ems/deploy/install-cdi-refresh.sh</code></pre></div>
+<p>Without the media service, fetch its repository first with <code>git clone https://github.com/einhq/ems.git</code> and run <code>deploy/install-cdi-refresh.sh</code> from there.</p>
+</li>
+</ol>
+<p>The script copies the fix to <code>/usr/local/sbin/ems-fix-cdi</code>, adds it to <code>nvidia-cdi-refresh.service</code> as a step that runs after every regeneration, removes <code>/etc/cdi/nvidia.yaml</code> if there is one, and regenerates the file at once. It ends by printing the lines of <code>/var/run/cdi/nvidia.yaml</code> it changed: <code>cdiVersion: 0.6.0</code> and no <code>additionalGids</code>. It keeps working across reboots and toolkit upgrades, and running it again does no harm. Then try the check in step 6 again.</p>
+<h2 id="give-the-card-to-ein">Give the card to EiN<a class="anchor" href="#give-the-card-to-ein" aria-label="Link to this section"></a></h2>
+<p>The first <code>setup.sh</code>, the one the installer runs, looks for a card. When <code>nvidia-smi</code> works and a CDI file exists in <code>/var/run/cdi</code> or <code>/etc/cdi</code>, it writes <code>EIN_GPU=1</code> into <code>~/ein/.env</code>; otherwise <code>EIN_GPU=0</code>. From then on, every run of <code>setup.sh</code> gives the card to the media service and the language model, whichever of them you installed, by writing this into <code>~/ein/compose.override.yaml</code>:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">ems:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">llm:</span>
+    <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
+    <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
+<p><code>CFG_LLM_CARD</code> tells EiN where its own language model runs, <code>card</code> or <code>cpu</code>, so the chat and the health checks can say so (<a href="../reference/settings.html#cfg_llm_card">setting</a>).</p>
+<p><code>setup.sh</code> looks for the card only when it first writes <code>.env</code>. When you add a card, or prepare the machine, after EiN is installed, turn it on yourself:</p>
+<ol>
+<li><p>Open <code>~/ein/.env</code> and set:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">1</span></code></pre></div>
+</li>
+<li><p>Run <code>setup.sh</code>, which writes <code>compose.override.yaml</code> again and starts the services with the card:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh</code></pre></div>
+<p>It also fetches the newest sources and rebuilds, as on any update (<a href="updating.html">Updating</a>).</p>
+</li>
+</ol>
+<p><code>EIN_GPU=0</code> and <code>~/ein/setup.sh</code> take the card away again. Do not edit <code>compose.override.yaml</code> by hand: <code>setup.sh</code> writes it again from <code>.env</code> every time it runs.</p>
+<h2 id="check-that-ein-uses-the-card">Check that EiN uses the card<a class="anchor" href="#check-that-ein-uses-the-card" aria-label="Link to this section"></a></h2>
+<p>Open <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. The <strong>Overview</strong> tab has a <strong>GPU</strong> tile, with the card&#39;s use and temperature, and a <strong>VRAM</strong> tile, with the memory in use on it, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one.</p>
+<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab: tiles for CPU, memory, GPU and VRAM, above the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The GPU and VRAM tiles appear only when the media service sees a card</figcaption></figure>
+<p>The <strong>Media service</strong> tab shows more:</p>
+<ul>
+<li><strong>Media service</strong>, at the top, names the <strong>card</strong> and its <strong>driver</strong>.</li>
+<li><strong>Graphics card mode</strong> says who has the card now: <strong>busy</strong> while indexing has it and search runs on the processor, <strong>quiet</strong> when there is no indexing work and search runs on the card as far as it fits, <strong>switching</strong> while it is handed over. <strong>off</strong> means there is no card to share.</li>
+<li><strong>Graphics card memory</strong> splits the card&#39;s memory by process: the media service&#39;s batch, query and card workers, its other processes such as transcodes, and <strong>outside EMS</strong>, which is the language model when it shares the card.</li>
+<li>The list of models gives each copy its place, <strong>GPU</strong> or <strong>CPU</strong>, and whether it is loaded.</li>
+</ul>
+<p>The same is in EiN&#39;s terminal. <a href="../reference/commands-ems.html#ems-status"><code>ems-status</code></a> shows every model and the device it is on, <code>ems-status --checks</code> the checks health reads, and <a href="../reference/commands-ems.html#ems-gpu"><code>ems-gpu</code></a> the card&#39;s use and memory now:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ems-status --checks
+ems-gpu
+llm-status</code></pre></div>
+<p><code>llm-status</code> says whose the language model is and where it runs, such as <code>http://llm:8190: ours, on the card</code> (<a href="../reference/commands-assistant.html#llm-status">reference</a>). It repeats what <code>CFG_LLM_CARD</code> says; how many layers the model really holds on the card is in its log (<code>podman compose logs llm</code>).</p>
+<p>To prove that every model really computes on the card, run the media service&#39;s self-test inside its container. It loads each model in turn and prints the device it bound to, ending with <code>all GPU checks passed</code> or a list of failures. It needs most of the card, so run it while the archive is not busy:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_selftest.py</code></pre></div>
+<p><code>--only</code> with part of a check&#39;s name runs only the checks that match.</p>
+<h2 id="share-one-card-with-the-language-model">Share one card with the language model<a class="anchor" href="#share-one-card-with-the-language-model" aria-label="Link to this section"></a></h2>
+<p>With both <code>--ems</code> and <code>--llm</code> on one card, the two services split it by one number, set on both sides in <code>~/ein/.env</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Read by</th>
+<th>Default</th>
+<th>What it sets</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EMS_CARD_SHARE_MB</code></td>
+<td>the media service</td>
+<td><code>0</code></td>
+<td>The most of the card, in MB, the media service&#39;s processes hold. A model that would take it past this runs on the processor, even while the rest of the card is free. <code>0</code> is the whole card.</td>
+</tr>
+<tr>
+<td><code>LLM_CARD_RESERVE_MB</code></td>
+<td>the language model</td>
+<td><code>8800</code></td>
+<td>How much of the card the language model leaves free when it starts. It takes as many layers as fit in the rest, and runs the others on the processor.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Set the language model&#39;s reserve 400 MB above the media service&#39;s share: the language model counts the card as <code>nvidia-smi</code> does, and some 400 MB of that are never usable by the media service. Then neither loads into the other&#39;s part, whichever starts first. <code>setup.sh</code> sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.</p>
+<p>On a 16 GB card, the pair EiN&#39;s own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">9700</span>
+<span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">10100</span></code></pre></div>
+<p>Apply it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose up -d</code></pre></div>
+<p>On a smaller card the language model gets fewer layers and answers more slowly; on an 8 GB card it runs on the processor. A language model at a hosted provider has no part of the card, so leave <code>EMS_CARD_SHARE_MB</code> at <code>0</code> and the media service uses all of it. <a href="language-model.html">The language model</a> covers the model itself and the hosted alternative, and <a href="performance.html">Performance and sizing</a> how memory and processor are shared.</p>
+<h2 id="be-told-when-the-card-goes-missing">Be told when the card goes missing<a class="anchor" href="#be-told-when-the-card-goes-missing" aria-label="Link to this section"></a></h2>
+<p>After a reboot or a driver upgrade, a card can be lost to the containers: the media service then still runs, on the processor, and the work only gets slower. To have this show as a failure instead, tell the media service that the machine has a card:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">EMS_EXPECT_GPU</span>=<span class="hljs-number">1</span></code></pre></div>
+<p>Apply it with <code>podman compose up -d</code>. While the media service sees no card, the dashboard&#39;s health badge reads <strong>Needs a person</strong>, and <code>health</code> and <code>ems-status --checks</code> list:</p>
+<div class="code"><pre tabindex="0"><code>fail  ems gpu  this host is meant to have a card, and none is visible</code></pre></div>
+<p>The same check fails, with the error, when the card&#39;s CUDA context is lost while the media service runs. <a href="monitoring.html">Health and the dashboard</a> explains the badge and the checks.</p>
+<h2 id="run-without-a-card">Run without a card<a class="anchor" href="#run-without-a-card" aria-label="Link to this section"></a></h2>
+<p>Without a card, or with <code>EIN_GPU=0</code>, the media service and the language model run on the processor. Nothing else changes: every output is made, the same models are used, and transcripts are made on the processor at about twice the length of the recording. The media service then needs the processor and memory the installer asks for with <code>--ems</code>: 4 cores, 6 or more recommended, and 16 GB of memory, 32 GB recommended (<a href="../start/install.html#what-you-need">Install EiN</a>).</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p>The commands are written for podman. With Docker, write <code>docker compose</code> where they say <code>podman compose</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The installer says <code>no NVIDIA card: everything runs on the processor, more slowly</code></td>
+<td>The machine has no NVIDIA card, or the system does not list one. EiN works without it.</td>
+</tr>
+<tr>
+<td>The installer says <code>an NVIDIA card is present but nvidia-smi cannot reach its driver</code></td>
+<td>The driver is missing or not loaded. Run <code>nvidia-smi</code> to see why; a reboot after installing the driver is often needed.</td>
+</tr>
+<tr>
+<td>The installer says <code>610 or newer is needed to encode video on the card</code></td>
+<td>Install a newer driver. Until then the models still use the card where they can; video is encoded on the processor.</td>
+</tr>
+<tr>
+<td>The installer says <code>install nvidia-container-toolkit 1.18 or newer</code>, or <code>1.18 or newer is needed</code></td>
+<td>Install or upgrade the toolkit (<a href="#prepare-the-machine">Prepare the machine</a>, step 2).</td>
+</tr>
+<tr>
+<td>The installer says <code>but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service</code></td>
+<td>Run that command, then check that <code>/var/run/cdi/nvidia.yaml</code> exists.</td>
+</tr>
+<tr>
+<td>Starting fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code></td>
+<td>The engine cannot read the CDI file. On podman 4.9.3, apply the <a href="#fix-the-cdi-file-for-podman-493">fix</a>; otherwise check that <code>/var/run/cdi/nvidia.yaml</code> exists. With Docker, check that it is Engine 28.2 or newer.</td>
+</tr>
+<tr>
+<td>The card is there but the dashboard has no <strong>GPU</strong> tile</td>
+<td><code>EIN_GPU</code> in <code>~/ein/.env</code> is <code>0</code>, most likely because the card or the toolkit came after the install. <a href="#give-the-card-to-ein">Give the card to EiN</a>.</td>
+</tr>
+<tr>
+<td>After a reboot the media service does not start, or starts without the card</td>
+<td>A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: <code>podman compose up -d --force-recreate</code>.</td>
+</tr>
+<tr>
+<td>Models show <strong>CPU</strong> on the <strong>Media service</strong> tab while the card has room</td>
+<td>The card may be full at that moment, or held by the language model. Look at <strong>Graphics card memory</strong>, and set the <a href="#share-one-card-with-the-language-model">share</a> when the two use one card.</td>
+</tr>
+<tr>
+<td>The chat answers slowly on a machine with a card</td>
+<td>The language model got only some of its layers, or none. Its log, <code>podman compose logs llm</code>, says how many went to the card. Raise the part of the card it gets by lowering <code>LLM_CARD_RESERVE_MB</code> and <code>EMS_CARD_SHARE_MB</code> together.</td>
+</tr>
+<tr>
+<td>A transcription waits for a long time</td>
+<td>On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="troubleshooting.html">Troubleshooting</a> has more, and <a href="media-service.html">The media service</a> covers the media service beyond its card.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="install.html" rel="prev"><span>Previous</span>Installing in detail</a><a class="next" href="network.html" rel="next"><span>Next</span>Ports, HTTPS and remote access</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/gpu.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-card-is-used-for">What the card is used for</a></li><li><a href="#what-card-you-need">What card you need</a></li><li><a href="#prepare-the-machine">Prepare the machine</a></li><li class="nested"><a href="#fix-the-cdi-file-for-podman-493">Fix the CDI file for podman 4.9.3</a></li><li><a href="#give-the-card-to-ein">Give the card to EiN</a></li><li><a href="#check-that-ein-uses-the-card">Check that EiN uses the card</a></li><li><a href="#share-one-card-with-the-language-model">Share one card with the language model</a></li><li><a href="#be-told-when-the-card-goes-missing">Be told when the card goes missing</a></li><li><a href="#run-without-a-card">Run without a card</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+    </div>
+  </body>
+</html>

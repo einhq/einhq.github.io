@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The shell language – EiN documentation</title>
+    <meta name="description" content="EiN's shell speaks bash: the quoting, variables, loops, functions, pipes and redirections you know from bash on Linux work the same way on EiN's tree. This page is for anyone who writes more than one command at a time: what EiN's shell does like bash, where it differs, how to keep settings in ~/.bashrc, how to write scripts of your own, how to run long jobs in the background, and how to get answers as JSON.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/shell/bash.html">
+    <meta property="og:title" content="The shell language – EiN documentation">
+    <meta property="og:description" content="EiN's shell speaks bash: the quoting, variables, loops, functions, pipes and redirections you know from bash on Linux work the same way on EiN's tree. This page is for anyone who writes more than one command at a time: what EiN's shell does like bash, where it differs, how to keep settings in ~/.bashrc, how to write scripts of your own, how to run long jobs in the background, and how to get answers as JSON.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/shell/bash.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar">
+      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/albums.html">Albums</a></li><li><a href="../guide/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../guide/importing.html">Getting your photos in</a></li><li><a href="../guide/staging.html">Sorting in staging</a></li><li><a href="../guide/duplicates.html">Duplicates</a></li><li><a href="../guide/dates-places.html">Dates and places of pictures</a></li><li><a href="../guide/media.html">Media, Year and labels</a></li><li><a href="../guide/people.html">People and faces</a></li><li><a href="../guide/family.html">Family tree, events and homes</a></li><li><a href="../guide/places.html">Locations and the map</a></li><li><a href="../guide/devices.html">Devices and GPS tracks</a></li><li><a href="../guide/home.html">Home, memories and statistics</a></li><li><a href="../guide/assistant.html">Chatting with the assistant</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/file-types.html">Supported files</a></li></ul></section>
+<section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html">The terminal</a></li><li><a href="bash.html" aria-current="page">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/gpu.html">The graphics card</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/media-service.html">The media service</a></li><li><a href="../admin/language-model.html">The language model</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/staging.html">Staging and importing for administrators</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core</a></li><li class="nested"><a href="../reference/commands-archive.html">Archive</a></li><li class="nested"><a href="../reference/commands-assistant.html">Assistant</a></li><li class="nested"><a href="../reference/commands-ems.html">Media service</a></li><li class="nested"><a href="../reference/commands-importer.html">Importer</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/assistant.html">Teaching the assistant</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <header class="docs-head">
+          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+          <p class="crumb">The shell and SSH</p>
+          <h1>The shell language</h1>
+        </header>
+        <article class="prose">
+<p>EiN&#39;s shell speaks bash: the quoting, variables, loops, functions, pipes and redirections you know
+from bash on Linux work the same way on EiN&#39;s tree. This page is for anyone who writes more than one
+command at a time: what EiN&#39;s shell does like bash, where it differs, how to keep settings in
+<code>~/.bashrc</code>, how to write scripts of your own, how to run long jobs in the background, and how to
+get answers as JSON.</p>
+<p>The terminal itself, with its tabs, keys, history and <kbd>Tab</kbd> completion, has a page of its
+own: <a href="terminal.html">The terminal</a>. <a href="commands.html">Commands by task</a> tells you which command does what.</p>
+<h2 id="bash-on-a-tree-of-nodes">Bash, on a tree of nodes<a class="anchor" href="#bash-on-a-tree-of-nodes" aria-label="Link to this section"></a></h2>
+<p>The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Everything
+the language has is there:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pipes and lists</td>
+<td><code>find /archive/people -type person | wc -l</code>, <code>cd /archive &amp;&amp; ls</code>, <code>a || b</code></td>
+</tr>
+<tr>
+<td>Quoting</td>
+<td><code>ls &quot;/archive/albums/Summer 2020&quot;</code>, <code>echo &#39;no $expansion here&#39;</code></td>
+</tr>
+<tr>
+<td>Variables and parameters</td>
+<td><code>name=${file%.jpg}</code>, <code>${#name}</code>, <code>${name^^}</code>, <code>${dir:-/archive}</code></td>
+</tr>
+<tr>
+<td>Command substitution</td>
+<td><code>count=$(ls -1 /archive/people | wc -l)</code></td>
+</tr>
+<tr>
+<td>Arithmetic</td>
+<td><code>$(( 6 * 7 ))</code>, <code>(( n &gt;= 10 ))</code>, <code>let n++</code></td>
+</tr>
+<tr>
+<td>Brace expansion</td>
+<td><code>echo {2019..2023}</code></td>
+</tr>
+<tr>
+<td>Arrays</td>
+<td><code>people=(Peggy Ruby Jon)</code>, <code>&quot;${people[@]}&quot;</code>, <code>declare -A seen</code></td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><code>[[ $name == *.jpg ]]</code>, <code>[[ $line =~ ^([0-9]+) ]]</code>, <code>[ -e &quot;$path&quot; ]</code></td>
+</tr>
+<tr>
+<td>Control flow</td>
+<td><code>if</code>, <code>for</code>, <code>while</code>, <code>until</code>, <code>case</code>, <code>for (( i = 0; i &lt; 3; i++ ))</code></td>
+</tr>
+<tr>
+<td>Functions</td>
+<td><code>count() { ls -1 &quot;$1&quot; | wc -l; }</code></td>
+</tr>
+<tr>
+<td>Redirections</td>
+<td><code>&gt; out.txt</code>, <code>&gt;&gt; log.txt</code>, <code>2&gt;/dev/null</code>, <code>2&gt;&amp;1</code>, <code>&lt; in.txt</code></td>
+</tr>
+<tr>
+<td>Here-documents</td>
+<td><code>cat &gt; note.txt &lt;&lt;&#39;EOF&#39;</code> … <code>EOF</code>, and here-strings <code>&lt;&lt;&lt; &quot;$line&quot;</code></td>
+</tr>
+<tr>
+<td>Process substitution</td>
+<td><code>mapfile -t names &lt; &lt;(find /archive/people -type person)</code></td>
+</tr>
+<tr>
+<td>Jobs</td>
+<td><code>cmd &amp;</code>, <code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>wait</code>, <code>kill %1</code></td>
+</tr>
+<tr>
+<td>Options and traps</td>
+<td><code>set -euo pipefail</code>, <code>shopt -s globstar</code>, <code>trap &#39;echo bye&#39; EXIT</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The difference is what the words name. A path is a node of EiN&#39;s tree, not a file on a disk: <code>/</code>
+is the root of the tree, <code>~</code> is your home folder <code>/home/&lt;you&gt;</code>, and globs such as <code>*.jpg</code> match the
+names of nodes. Commands are EiN&#39;s own, not programs installed on a machine. <a href="../concepts/tree.html">The tree</a>
+shows what lies where, and <a href="../concepts/nodes.html">Nodes and node types</a> what a node is.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-keyword">for</span> person <span class="hljs-keyword">in</span> /archive/people/*_Wrenfield; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${person##*/}</span>&quot;</span>
+<span class="hljs-keyword">done</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>Arthur_Wrenfield
+Erik_Wrenfield
+Freya_Wrenfield
+Jon_Wrenfield
+Kiri_Wrenfield
+Leo_Wrenfield
+Peggy_Wrenfield
+Ruby_Wrenfield
+Thomas_Wrenfield</code></pre></div>
+<h2 id="what-happens-when-you-press-enter">What happens when you press Enter<a class="anchor" href="#what-happens-when-you-press-enter" aria-label="Link to this section"></a></h2>
+<p>The shell reads the line you typed. When it is not finished yet, because a quote is open, an <code>if</code>
+has no <code>fi</code> or a here-document has no end line, the prompt changes to <code>&gt;</code> and waits for the next
+line. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to give up on it.</p>
+<p>The first word is then looked up in this order, the first match wins:</p>
+<ol>
+<li>An alias, such as <code>ll</code> for <code>ls -al</code>.</li>
+<li>A function you defined.</li>
+<li>A builtin of the shell: <code>cd</code>, <code>echo</code>, <code>read</code>, <code>export</code>, <code>source</code> and the others in
+<a href="#builtins">Builtins</a>.</li>
+<li>One of EiN&#39;s own commands, such as <code>ls</code>, <code>cp</code> or <code>search</code>.</li>
+<li>A command found on <code>PATH</code>: core&#39;s other commands, then each installed module&#39;s. <code>echo $PATH</code>
+shows the folders: <code>/usr/bin</code> and <code>/usr/lib/core/bin</code> first, then <code>/usr/modules/&lt;module&gt;/bin</code>
+for each module.</li>
+</ol>
+<p>A word with a <code>/</code> in it, such as <code>./tidy.sh</code> or <code>~/bin/album-sizes</code>, runs that node instead.</p>
+<p><code>type &lt;name&gt;</code> says which of these a name is, and <code>command -v &lt;name&gt;</code> prints only where it is
+found. When nothing matches, you see:</p>
+<div class="code"><pre tabindex="0"><code>error: command 'albm' not found</code></pre></div>
+<p>and the status is <code>127</code>. Commands such as <code>person-info</code> exist only where their module is
+installed; <code>mod list</code> shows which modules are.</p>
+<p><kbd>Ctrl</kbd>+<kbd>C</kbd> stops the command that is running. A loop stops too, rather than going
+on with the next round.</p>
+<h2 id="how-eins-shell-differs-from-bash-on-linux">How EiN&#39;s shell differs from bash on Linux<a class="anchor" href="#how-eins-shell-differs-from-bash-on-linux" aria-label="Link to this section"></a></h2>
+<p>Most scripts written for bash run unchanged. These are the places where EiN behaves differently,
+because the tree is not a disk and the commands are not Linux programs.</p>
+<p><strong>Every node can hold others.</strong> A photo has children of its own, such as its EXIF data and the regions of its faces, so
+<code>[ -d &quot;$path&quot; ]</code> is true for every node that exists. Test with <code>[ -e &quot;$path&quot; ]</code> whether a node is
+there, and <code>[ -f &quot;$path&quot; ]</code> whether it is a file. <code>[ -s &quot;$path&quot; ]</code> is true only for a file with
+content. <code>[ -t 1 ]</code> is always false.</p>
+<p><strong>Plain variables reach commands.</strong> A command or script started from the shell sees all of the
+shell&#39;s variables, not only the exported ones. <code>JSON_OUTPUT=1</code> on a line of its own therefore
+changes every command after it until you <code>unset JSON_OUTPUT</code>. Put it in front of one command to
+change only that one.</p>
+<p><strong><code>ls</code> in the terminal writes columns into a pipe too.</strong> In the terminal panel and an SSH login,
+<code>ls</code> lays names out in columns even when its output goes to another command. Give <code>-1</code> when you
+count or loop over names: <code>ls -1 /archive/albums | wc -l</code>. <code>find</code> always writes one path per line.</p>
+<p><strong><code>-h</code> right after a command&#39;s name asks for help.</strong> <code>du -h</code> prints <code>du</code>&#39;s help instead of sizes;
+write <code>du -sh</code>. A value that starts with a minus goes after an equals sign, <code>--lng=-3.7</code>; on its
+own <code>-3.7</code> would be read as another option.</p>
+<p><strong>There is no <code>sh</code> or <code>bash</code> command.</strong> Run a script by its path, or read it into the shell you are
+in with <code>source</code>. See <a href="#write-a-script">Write a script</a>.</p>
+<p><strong><kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.</strong> Start a long one with <code>&amp;</code> instead; see
+<a href="#run-a-long-job-in-the-background">Run a long job in the background</a>.</p>
+<p><strong>Process substitution waits for the end.</strong> <code>&lt;(cmd)</code> writes the command&#39;s whole output to a
+temporary node under <code>/tmp</code> before the reading command opens it, so it is not streamed.</p>
+<p><strong>Many Unix programs are missing.</strong> <code>tar</code>, <code>curl</code>, <code>diff</code>, <code>less</code> and others have no EiN command.
+<a href="commands.html#unix-commands-ein-does-not-have">Commands by task</a> lists what to use instead.</p>
+<p><strong>Permissions are EiN&#39;s.</strong> A command you may not run is refused the same way in the shell, the web
+interface and over SSH. <a href="../admin/permissions.html">Permissions in depth</a> explains who may do what.</p>
+<h2 id="one-shell-per-terminal-tab">One shell per terminal tab<a class="anchor" href="#one-shell-per-terminal-tab" aria-label="Link to this section"></a></h2>
+<p>Each terminal tab, and each SSH login, is one shell that lasts until you close it. A <code>cd</code>, an
+<code>export</code>, an alias or a function you define stays for the next command in that tab, and survives a
+page reload (see <a href="terminal.html#come-back-to-a-running-shell">Come back to a running shell</a>). Other
+tabs have shells of their own and do not see it.</p>
+<p>A command sent with <code>ssh host &#39;command&#39;</code> from your own computer, and every command the web pages
+run for you, gets a fresh shell that ends with the command. Join what belongs together with <code>&amp;&amp;</code> in
+one line:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
+ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;cd /archive/albums &amp;&amp; ls -1 | wc -l&#x27;</span></code></pre></div>
+<p><a href="ssh-sftp.html">SSH and SFTP</a> covers logging in from your own computer.</p>
+<h2 id="keep-your-settings-in-bashrc">Keep your settings in ~/.bashrc<a class="anchor" href="#keep-your-settings-in-bashrc" aria-label="Link to this section"></a></h2>
+<p>When a terminal tab or an SSH login opens, the shell reads, in this order:</p>
+<ol>
+<li><code>/etc/bashrc</code>, the same for everyone. It defines the aliases <code>ll</code> (<code>ls -al</code>), <code>la</code> (<code>ls -A</code>),
+<code>whoami</code> and <code>id</code>, and reads the settings: the administrator&#39;s in <code>/etc/config</code>, then your own in
+<code>~/.config</code>.</li>
+<li><code>~/.bashrc</code>, your own file, if you have one.</li>
+</ol>
+<p>EiN reads no <code>~/.bash_profile</code> or <code>~/.profile</code>. A command sent with <code>ssh host &#39;command&#39;</code> reads
+<code>/etc/bashrc</code> but not <code>~/.bashrc</code>.</p>
+<p>To make a change that lasts:</p>
+<ol>
+<li><p>Open the file in the editor:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+edit ~/.bashrc</code></pre></div>
+</li>
+<li><p>Add what you want, for example:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># ~/.bashrc</span>
+<span class="hljs-built_in">export</span> HOSTNAME=ein
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/bin:<span class="hljs-variable">$PATH</span>&quot;</span>
+<span class="hljs-built_in">alias</span> albums=<span class="hljs-string">&#x27;cd /archive/albums &amp;&amp; ls&#x27;</span>
+<span class="hljs-function"><span class="hljs-title">people</span></span>() { find /archive/people -mindepth 1 -maxdepth 1 -<span class="hljs-built_in">type</span> person; }</code></pre></div>
+</li>
+<li><p>Save with <kbd>Ctrl</kbd>+<kbd>S</kbd> and leave with <kbd>Ctrl</kbd>+<kbd>Q</kbd>.
+<a href="editor.html">The editor</a> has its other keys.</p>
+</li>
+<li><p>Run <code>source ~/.bashrc</code> to use it in the tab you are in. New tabs read it when they open.</p>
+</li>
+</ol>
+<p>A <code>~/.bashrc</code> that fails does not stop the shell from opening: the lines before the error have run,
+and you get a prompt. Fix the file and <code>source</code> it again.</p>
+<p>Some things to put there:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>export HOSTNAME=ein</code></td>
+<td>Shows a host name in the prompt, <code>helen@ein:~$</code></td>
+</tr>
+<tr>
+<td><code>PS1=&#39;\u:\W\$ &#39;</code></td>
+<td>Changes the prompt; see below</td>
+</tr>
+<tr>
+<td><code>export PATH=&quot;$HOME/bin:$PATH&quot;</code></td>
+<td>Lets your own scripts in <code>~/bin</code> run by name</td>
+</tr>
+<tr>
+<td><code>export MEDIA_LINES=30</code></td>
+<td>Draws pictures with <code>cat</code> 30 lines tall</td>
+</tr>
+<tr>
+<td><code>export HISTSIZE=5000</code></td>
+<td>Keeps more history in this shell</td>
+</tr>
+<tr>
+<td><code>set -o ignoreeof</code></td>
+<td><kbd>Ctrl</kbd>+<kbd>D</kbd> on an empty line no longer ends the shell</td>
+</tr>
+<tr>
+<td><code>complete -F _my_func my-script</code></td>
+<td>Your own <kbd>Tab</kbd> completion for a command</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>PS1</code> understands <code>\u</code> (your username), <code>\h</code> (the host name), <code>\w</code> (the folder, with <code>~</code> for your
+home), <code>\W</code> (the last part of the folder), <code>\$</code> (<code>#</code> when the shell acts as an administrator, <code>$</code>
+otherwise), <code>\t</code> and <code>\T</code> (the time in 24- and 12-hour form), <code>\n</code> (a new line) and <code>\e</code> for colour
+codes. Unset <code>PS1</code> to get EiN&#39;s coloured prompt back.</p>
+<p>Settings such as the length of your history are better changed under <strong>Profile → Preferences</strong>,
+which writes them to <code>~/.config</code>; see <a href="../guide/profile.html">Your profile, favourites and trash</a>.
+<a href="../admin/configuration.html">Configuration</a> explains how the administrator&#39;s settings and yours are
+layered.</p>
+<h2 id="write-a-script">Write a script<a class="anchor" href="#write-a-script" aria-label="Link to this section"></a></h2>
+<p>A script is a text file of shell commands. EiN runs any text file you have execute permission on as
+a bash script.</p>
+<ol>
+<li><p>Make a folder for your scripts and open a new file in it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">mkdir</span> -p ~/bin
+edit ~/bin/album-sizes</code></pre></div>
+</li>
+<li><p>Write the script. Start it with <code>#!bash</code>, so the editor colours and checks it as bash:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment">#!bash</span>
+<span class="hljs-comment"># How much each album holds, largest first</span>
+<span class="hljs-keyword">for</span> album <span class="hljs-keyword">in</span> /archive/albums/*; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;%6d  %s\n&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(ls -1 <span class="hljs-string">&quot;<span class="hljs-variable">$album</span>&quot;</span> | wc -l)</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${album##*/}</span>&quot;</span>
+<span class="hljs-keyword">done</span> | <span class="hljs-built_in">sort</span> -rn</code></pre></div>
+</li>
+<li><p>Save it, and give yourself permission to run it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">chmod</span> 755 ~/bin/album-sizes</code></pre></div>
+</li>
+<li><p>Run it by its path:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+~/bin/album-sizes</code></pre></div>
+<p>With <code>~/bin</code> on your <code>PATH</code> (see <a href="#keep-your-settings-in-bashrc">Keep your settings in ~/.bashrc</a>),
+<code>album-sizes</code> alone is enough.</p>
+</li>
+</ol>
+<p>A script run like this is a process of its own: its <code>cd</code>, variables and functions end with it, and
+<code>exit</code> ends the script, not your shell. <code>$1</code>, <code>$2</code>, <code>$@</code> and <code>$#</code> are its arguments, and <code>$0</code> is its
+path. <code>source ~/bin/album-sizes</code> (or <code>. ~/bin/album-sizes</code>) runs the same lines in the shell you are
+in instead, so what they change stays; a sourced file needs no execute permission.</p>
+<p>Pick a name that is not already a command: a name such as <code>ls</code> or <code>cp</code> always runs EiN&#39;s own
+command, whatever is on your <code>PATH</code>. <code>type album-sizes</code> shows what a name runs.</p>
+<p>A file whose first line is <code>#!ts</code> is a TypeScript command, and EiN runs those only from a module
+installed under <code>/usr/modules</code>. <a href="../develop/modules.html">Writing a module</a> covers that.</p>
+<h3 id="give-a-script-options-and-help-with-arg">Give a script options and help with arg<a class="anchor" href="#give-a-script-options-and-help-with-arg" aria-label="Link to this section"></a></h3>
+<p>The builtin <code>arg</code> gives a script the options, help and <kbd>Tab</kbd> completion that EiN&#39;s own
+commands have. Declare what the script takes, then <code>arg --export</code> reads the arguments and sets one
+variable for each, named in capitals:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment">#!bash</span>
+arg --desc <span class="hljs-string">&quot;Count what each album holds&quot;</span>
+arg <span class="hljs-string">&#x27;[&lt;under&gt;]&#x27;</span> path = /archive/albums <span class="hljs-string">&quot;where the albums are&quot;</span>
+arg -m --min number = 0 <span class="hljs-string">&quot;leave out albums holding fewer&quot;</span>
+arg --example <span class="hljs-string">&quot;album-sizes --min 50&quot;</span>
+arg --<span class="hljs-built_in">export</span>
+
+<span class="hljs-keyword">for</span> album <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$UNDER</span>&quot;</span>/*; <span class="hljs-keyword">do</span>
+  n=$(<span class="hljs-built_in">ls</span> -1 <span class="hljs-string">&quot;<span class="hljs-variable">$album</span>&quot;</span> | <span class="hljs-built_in">wc</span> -l)
+  <span class="hljs-keyword">if</span> (( n &gt;= MIN )); <span class="hljs-keyword">then</span> <span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;%6d  %s\n&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$n</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${album##*/}</span>&quot;</span>; <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span></code></pre></div>
+<p><code>album-sizes --help</code> then prints:</p>
+<div class="code"><pre tabindex="0"><code>Usage: /home/helen/bin/album-sizes [OPTIONS] [&lt;under&gt;]
+
+Count what each album holds
+
+Arguments:
+  [&lt;under&gt;]            where the albums are [default: /archive/albums]
+
+Options:
+  -m, --min &lt;number&gt;       leave out albums holding fewer [default: 0]
+  -h, --help                 Show this help message
+
+Examples:
+  album-sizes --min 50</code></pre></div>
+<p>An option the script does not declare, a missing argument, or a word where a number belongs stops
+the script with a message such as <code>Unknown option: --bogus</code> and
+<code>Try &#39;/home/helen/bin/album-sizes --help&#39; for more information.</code>, status <code>1</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Declares</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>arg --desc &quot;text&quot;</code></td>
+<td>What the script does, shown by <code>--help</code></td>
+</tr>
+<tr>
+<td><code>arg &#39;&lt;name&gt;&#39; type &quot;text&quot;</code></td>
+<td>An argument that must be given; its value is in <code>$NAME</code></td>
+</tr>
+<tr>
+<td><code>arg &#39;[&lt;name&gt;]&#39; type = value &quot;text&quot;</code></td>
+<td>An argument that may be left out, with its default</td>
+</tr>
+<tr>
+<td><code>arg -s --long type &quot;text&quot;</code></td>
+<td>An option that takes a value, <code>$LONG</code>; <code>= value</code> gives it a default</td>
+</tr>
+<tr>
+<td><code>arg -s --long &quot;text&quot;</code></td>
+<td>An option without a value: <code>$LONG</code> is <code>1</code> when given, empty if not</td>
+</tr>
+<tr>
+<td><code>arg --rest</code></td>
+<td>Leaves the arguments it does not know in <code>$@</code> instead of refusing</td>
+</tr>
+<tr>
+<td><code>arg --example &quot;command line&quot;</code></td>
+<td>An example for <code>--help</code></td>
+</tr>
+<tr>
+<td><code>arg --returns &quot;text&quot;</code></td>
+<td>What the script answers with, in a sentence</td>
+</tr>
+<tr>
+<td><code>arg --effect read</code> or <code>write</code></td>
+<td>Whether running it changes anything</td>
+</tr>
+<tr>
+<td><code>arg --export</code></td>
+<td>Reads the arguments and sets the variables; put it last</td>
+</tr>
+</tbody></table>
+</div>
+<p>The types are <code>string</code>, <code>number</code>, <code>boolean</code>, <code>path</code>, <code>user</code>, <code>group</code> and <code>command</code>. A <code>-</code> in an
+option&#39;s name becomes <code>_</code> in its variable: <code>--max-count</code> is <code>$MAX_COUNT</code>.</p>
+<p>Because the script declares what it takes, <kbd>Tab</kbd> completes its options and, for a <code>path</code>,
+<code>user</code> or <code>group</code>, their values, once the script is on your <code>PATH</code>. A script without <code>arg</code>
+completes paths.</p>
+<h2 id="run-a-long-job-in-the-background">Run a long job in the background<a class="anchor" href="#run-a-long-job-in-the-background" aria-label="Link to this section"></a></h2>
+<p>End a command with <code>&amp;</code> and the prompt comes back at once while it runs:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+~/bin/album-sizes &gt; ~/album-sizes.txt &amp;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>[1] bg-01JBXK4T9Q2M8N5R7V3W6Y0Z1A</code></pre></div>
+<p><code>[1]</code> is the job&#39;s number in this shell, and the rest is its process id, which <code>ps</code> lists too.
+When the job ends, the shell says so before the next prompt, as <code>[1]+  Done</code> with the command.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>jobs</code></td>
+<td>Lists this shell&#39;s jobs and whether they still run</td>
+</tr>
+<tr>
+<td><code>fg %1</code></td>
+<td>Waits for job 1 in the foreground; <kbd>Ctrl</kbd>+<kbd>C</kbd> stops it</td>
+</tr>
+<tr>
+<td><code>wait</code></td>
+<td>Waits for all of this shell&#39;s jobs to end</td>
+</tr>
+<tr>
+<td><code>kill %1</code></td>
+<td>Stops job 1, everything it runs included</td>
+</tr>
+<tr>
+<td><code>kill &lt;pid&gt;</code></td>
+<td>Stops a process by its id from <code>ps</code>; your own, or anyone&#39;s for an administrator</td>
+</tr>
+<tr>
+<td><code>echo $!</code></td>
+<td>The process id of the last job you started</td>
+</tr>
+</tbody></table>
+</div>
+<p>A background job belongs to its shell. When the shell ends (you close the tab, sign out, or stay
+away longer than the five minutes the terminal waits), its jobs are stopped with it.</p>
+<h3 id="keep-a-job-running-after-you-leave">Keep a job running after you leave<a class="anchor" href="#keep-a-job-running-after-you-leave" aria-label="Link to this section"></a></h3>
+<p>To let a job go on after its shell has ended, detach it. Start it detached with <code>nohup</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">nohup</span> album-sizes --min 50</code></pre></div>
+<div class="code"><pre tabindex="0"><code>nohup: [1] bg-01JBXM2C6D8F0G3H5J7K9L1N4P -&gt; /var/logs/jobs/bg-01JBXM2C6D8F0G3H5J7K9L1N4P/</code></pre></div>
+<p>Or detach a job you already started with <code>&amp;</code>: <code>detach %1</code>, or <code>detach</code> alone for the latest. EiN
+answers <code>detached [1] &lt;pid&gt; &lt;command&gt;</code>.</p>
+<p>A detached job leaves the shell&#39;s <code>jobs</code> list and no longer writes to the terminal. Its output goes
+to <code>stdout.log</code> and <code>stderr.log</code> in <code>/var/logs/jobs/&lt;pid&gt;/</code>, beside a <code>status.json</code> that says
+whether it still runs and how it ended. <code>detach --list</code> lists the detached jobs, newest first, one line each with the process id, the
+state, when it started and the command, or <code>no detached jobs</code>.</p>
+<p><code>running</code> means it still goes, <code>exited</code> gives its status in brackets, and <code>abandoned</code> means EiN
+restarted while it ran. A detached job does not survive a restart of EiN.</p>
+<p><code>nohup</code> runs one command with its arguments. For several steps, or a pipe, put them in a script and
+detach that, or <code>nohup source ~/sweep.sh</code>. Stop a detached job with <code>kill &lt;pid&gt;</code>.</p>
+<p><a href="../reference/commands-core.html#detach"><code>detach</code></a> and <a href="../reference/commands-core.html#nohup"><code>nohup</code></a>
+are in the reference.</p>
+<h2 id="get-answers-as-json">Get answers as JSON<a class="anchor" href="#get-answers-as-json" aria-label="Link to this section"></a></h2>
+<p>Put <code>JSON_OUTPUT=1</code> in front of a command and it answers in JSON instead of text. This is how the
+web interface runs every command, so the JSON holds everything the pages show. Read it with <code>jq</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> /archive/people | jq -r <span class="hljs-string">&#x27;.[]&#x27;</span>
+JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l /archive/albums | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
+<p><code>ls</code> alone answers with a list of names; <code>ls -l</code> with a record for each node.</p>
+<ul>
+<li><code>JSON_OUTPUT=1 &lt;command&gt; --help</code> answers with the command&#39;s description of its arguments and
+options as JSON, a script&#39;s from its <code>arg</code> lines included.</li>
+<li>Text tools such as <code>grep</code>, <code>sort</code>, <code>head</code>, <code>cut</code>, <code>wc</code> and <code>cat</code> keep writing text, so they work
+in the same pipe.</li>
+<li>Set without a command in front, <code>JSON_OUTPUT=1</code> holds for every command after it in that shell,
+until <code>unset JSON_OUTPUT</code>.</li>
+</ul>
+<p><a href="../reference/commands-core.html#jq"><code>jq</code></a> is EiN&#39;s own, a lighter jq that knows filters such as
+<code>.field</code>, <code>.field.nested</code>, <code>.[]</code>, <code>.[] | .name</code> and <code>startswith(&quot;x&quot;)</code>, with <code>-r</code> for plain text and <code>-c</code> for one line per
+result.</p>
+<p><a href="../reference/environment.html#options-you-set">Environment variables</a> lists <code>JSON_OUTPUT</code> with the
+other variables that change how commands behave, and <code>docs env</code> prints them in the terminal.</p>
+<h2 id="builtins">Builtins<a class="anchor" href="#builtins" aria-label="Link to this section"></a></h2>
+<p>These are part of the shell itself, so they have no entry in the
+<a href="../reference/commands.html">commands reference</a>. <code>help &lt;name&gt;</code> prints a builtin&#39;s usage in the
+terminal.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Builtins</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cd</code>, <code>pwd</code>, <code>pushd</code>, <code>popd</code>, <code>dirs</code></td>
+<td>Moving around; <code>cd</code> alone goes home, <code>cd -</code> back</td>
+</tr>
+<tr>
+<td><code>echo</code>, <code>printf</code>, <code>read</code>, <code>mapfile</code>, <code>readarray</code></td>
+<td>Writing and reading lines</td>
+</tr>
+<tr>
+<td><code>export</code>, <code>unset</code>, <code>local</code>, <code>declare</code>, <code>typeset</code>, <code>readonly</code>, <code>let</code>, <code>shift</code></td>
+<td>Variables</td>
+</tr>
+<tr>
+<td><code>source</code>, <code>.</code>, <code>eval</code>, <code>exit</code>, <code>return</code>, <code>true</code>, <code>false</code>, <code>:</code></td>
+<td>Running and ending</td>
+</tr>
+<tr>
+<td><code>test</code>, <code>[</code></td>
+<td>Tests</td>
+</tr>
+<tr>
+<td><code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>wait</code>, <code>kill</code>, <code>disown</code></td>
+<td>Jobs</td>
+</tr>
+<tr>
+<td><code>set</code>, <code>shopt</code>, <code>trap</code>, <code>umask</code>, <code>ulimit</code></td>
+<td>Options and signals</td>
+</tr>
+<tr>
+<td><code>alias</code>, <code>unalias</code>, <code>type</code>, <code>command</code>, <code>builtin</code>, <code>hash</code>, <code>enable</code>, <code>help</code></td>
+<td>Names and lookup</td>
+</tr>
+<tr>
+<td><code>history</code>, <code>fc</code></td>
+<td>History; see <a href="terminal.html#find-an-earlier-command">Find an earlier command</a></td>
+</tr>
+<tr>
+<td><code>complete</code>, <code>compgen</code>, <code>compopt</code></td>
+<td><kbd>Tab</kbd> completion</td>
+</tr>
+<tr>
+<td><code>getopts</code>, <code>arg</code>, <code>caller</code>, <code>times</code></td>
+<td>Scripts</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>disown</code> takes a job out of the list and lets it outlive the shell, as <code>detach</code> does. <code>kill</code> takes
+the signals <code>HUP</code>, <code>INT</code>, <code>TERM</code>, <code>KILL</code>, <code>PIPE</code>, <code>TSTP</code> and <code>CONT</code> by name, <code>kill -TERM %1</code>.</p>
+<h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><strong>The prompt shows <code>&gt;</code> and nothing happens.</strong> The line is not finished: a quote or a bracket is
+open, or an <code>if</code>, <code>for</code> or here-document has no end. Type the rest, or press
+<kbd>Ctrl</kbd>+<kbd>C</kbd> to start again.</p>
+<p><strong><code>error: command &#39;album-sizes&#39; not found</code>.</strong> The script&#39;s folder is not on your <code>PATH</code>. Run it by
+its path, <code>~/bin/album-sizes</code>, or add <code>export PATH=&quot;$HOME/bin:$PATH&quot;</code> to <code>~/.bashrc</code> and
+<code>source ~/.bashrc</code>.</p>
+<p><strong>Running a script by its path is refused.</strong> You have no execute permission on it. Run
+<code>chmod 755 &lt;script&gt;</code>, or read it in with <code>source &lt;script&gt;</code>.</p>
+<p><strong><code>error: &lt;name&gt;: a #!ts command runs only from a module in /usr/modules</code>.</strong> A <code>#!ts</code> file runs
+only from an installed module. Write the script in bash, or make it part of a module.</p>
+<p><strong>A count from <code>ls | wc -l</code> is too small.</strong> <code>ls</code> wrote its names in columns. Use <code>ls -1</code>.</p>
+<p><strong>Every command answers in JSON.</strong> <code>JSON_OUTPUT=1</code> was set on its own line, or in <code>~/.bashrc</code>. Run
+<code>unset JSON_OUTPUT</code>.</p>
+<p><strong>An alias or function from <code>~/.bashrc</code> is missing.</strong> It is read when a tab opens: run
+<code>source ~/.bashrc</code> in tabs that were open before you changed it. A command sent with
+<code>ssh host &#39;command&#39;</code> does not read <code>~/.bashrc</code>.</p>
+<p><strong>A background job stopped when I closed the tab.</strong> Jobs end with their shell. Start it with
+<code>nohup</code>, or <code>detach</code> it before you leave.</p>
+<p><strong><code>nohup: &lt;command&gt;: nothing left to detach — it had already finished</code>.</strong> The command ended, or
+failed to start, before <code>nohup</code> could detach it. Run it without <code>nohup</code> to see what it says.</p>
+<p><strong><code>detach: no such job: %2</code>.</strong> This shell has no such job, or it has ended. <code>jobs</code> lists the ones
+there are.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="terminal.html">The terminal</a>: opening it, tabs, keys, history and <kbd>Tab</kbd> completion.</li>
+<li><a href="commands.html">Commands by task</a>: which command does what.</li>
+<li><a href="editor.html">The editor</a>: <code>edit</code>, for <code>~/.bashrc</code> and scripts.</li>
+<li><a href="ssh-sftp.html">SSH and SFTP</a>: the same shell from your own computer.</li>
+<li><a href="../reference/commands.html">Commands reference</a>: every command with all its options.</li>
+<li><a href="../reference/environment.html">Environment variables</a>: the variables every shell has.</li>
+<li><a href="../develop/modules.html">Writing a module</a>: commands that come with a module.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="terminal.html" rel="prev"><span>Previous</span>The terminal</a><a class="next" href="commands.html" rel="next"><span>Next</span>Commands by task</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/bash.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#bash-on-a-tree-of-nodes">Bash, on a tree of nodes</a></li><li><a href="#what-happens-when-you-press-enter">What happens when you press Enter</a></li><li><a href="#how-eins-shell-differs-from-bash-on-linux">How EiN's shell differs from bash on Linux</a></li><li><a href="#one-shell-per-terminal-tab">One shell per terminal tab</a></li><li><a href="#keep-your-settings-in-bashrc">Keep your settings in ~/.bashrc</a></li><li><a href="#write-a-script">Write a script</a></li><li class="nested"><a href="#give-a-script-options-and-help-with-arg">Give a script options and help with arg</a></li><li><a href="#run-a-long-job-in-the-background">Run a long job in the background</a></li><li class="nested"><a href="#keep-a-job-running-after-you-leave">Keep a job running after you leave</a></li><li><a href="#get-answers-as-json">Get answers as JSON</a></li><li><a href="#builtins">Builtins</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

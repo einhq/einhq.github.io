@@ -11,8 +11,11 @@
     "jsr:@std/internal@^1.0.14": "1.0.14",
     "jsr:@std/media-types@^1.1.0": "1.1.0",
     "jsr:@std/net@^1.0.7": "1.0.7",
+    "jsr:@std/path@^1.1.2": "1.1.6",
     "jsr:@std/path@^1.1.6": "1.1.6",
     "jsr:@std/streams@^1.2.0": "1.2.0",
+    "npm:highlight.js@^11.11.1": "11.12.0",
+    "npm:marked@^16.4.2": "16.4.2",
     "npm:playwright@1.49.1": "1.49.1"
   },
   "jsr": {
@@ -41,7 +44,7 @@
         "jsr:@std/html",
         "jsr:@std/media-types",
         "jsr:@std/net",
-        "jsr:@std/path",
+        "jsr:@std/path@^1.1.6",
         "jsr:@std/streams"
       ]
     },
@@ -70,6 +73,13 @@
       "os": ["darwin"],
       "scripts": true
     },
+    "highlight.js@11.12.0": {
+      "integrity": "sha512-nbfWpyRMcMrPMmDwJB+dhX/eiaPKtc2RB+0QZskqJ3WjRA/FDS0e9hZrx8EC/lbEv8gXy98FcDbNa/dspAaJMg=="
+    },
+    "marked@16.4.2": {
+      "integrity": "sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==",
+      "bin": true
+    },
     "playwright-core@1.49.1": {
       "integrity": "sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==",
       "bin": true
@@ -88,6 +98,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/cli@^1.0.24",
+      "jsr:@std/path@^1.1.2",
+      "npm:highlight.js@^11.11.1",
+      "npm:marked@^16.4.2",
       "npm:playwright@1.49.1"
     ]
   }
