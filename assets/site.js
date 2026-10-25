@@ -7,22 +7,20 @@
 import { COVERED, HAT_WIDTH } from './hat-tiling.js';
 import { bands, bar, barBottom, hatsIn, mixedAt, noise, OUTLINE, paintOf, smooth, svg, tint } from './page.js';
 
-const NAMES = { person: 'Person', album: 'Album', device: 'Device' };
-
 /**
  * Tiles that show a node other than a picture, so the field says EiN keeps more than photos: each
  * is drawn by a function of its own (GLYPHS).
  */
 const OTHERS = [
-  { glyph: 'terminal', name: 'A shell', detail: 'bash, on every node in the tree' },
-  { glyph: 'waveform', name: 'A recording', detail: 'Transcribed, its speakers told apart' },
-  { glyph: 'pipeline', name: 'A pipeline', detail: 'Steps that run on every change' },
-  { glyph: 'track', name: 'A GPS track', detail: "A day's route, on the map" },
-  { glyph: 'letter', name: 'A letter', detail: 'Handwriting, read and searchable' },
-  { glyph: 'log', name: 'A log', detail: 'Followed live with tail -f' },
-  { glyph: 'chat', name: 'A chat', detail: 'Answered by running commands as you' },
-  { glyph: 'pin', name: 'A place', detail: 'A point, a circle or an outline on the map' },
-  { glyph: 'video', name: 'A home video', detail: 'Played as AV1, every word transcribed', still: 'Isla turns seven' },
+  { glyph: 'terminal' },
+  { glyph: 'waveform' },
+  { glyph: 'pipeline' },
+  { glyph: 'track' },
+  { glyph: 'letter' },
+  { glyph: 'log' },
+  { glyph: 'chat' },
+  { glyph: 'pin' },
+  { glyph: 'video', still: 'Isla turns seven' },
 ];
 
 /**
@@ -446,8 +444,6 @@ function layField(host, pictures, entering) {
           svg('path', { d: tile.d, fill: 'none' }),
         );
       }
-      group.dataset.name = picture.name;
-      group.dataset.detail = picture.glyph ? picture.detail : [NAMES[picture.kind], picture.detail].filter(Boolean).join(', ');
       root.append(group);
     } else {
       root.append(
@@ -469,40 +465,39 @@ function layField(host, pictures, entering) {
     setTimeout(() => delete root.dataset.entering, 2600);
   }
   host.replaceChildren(root);
+  layBar(host, tiles, (tile) => HERO_TINT * tint(tile, openness(tile), 1));
 }
 
+/** How deep a strip of the hero the top bar is given: more than the bar is at either of its heights. */
+const BAR_DEPTH = 120;
+
 /**
- * A name and what it is, over a pictured tile while the pointer rests on it: above the tile, or
- * below it when the top bar would cover it, and kept inside the hero.
+ * The top bar's hats, for once the page has scrolled: the strip of the hero's field that lies under
+ * the bar at the top, its hats as large and tinted as the field's (`tintOf`) and none pictured, so
+ * the bar takes over from the hero without a seam. site.css fades them towards the bar's foot.
  */
-function tooltips(host) {
-  const hero = host.parentElement;
-  const tip = document.createElement('div');
-  tip.className = 'tip';
-  tip.hidden = true;
-  tip.setAttribute('aria-hidden', 'true');
-  hero.append(tip);
-  host.addEventListener('pointerover', (event) => {
-    const group = event.target.closest('.tile-picture');
-    if (!group) return;
-    tip.style.setProperty('--accent', group.style.getPropertyValue('--accent'));
-    tip.replaceChildren(
-      Object.assign(document.createElement('strong'), { textContent: group.dataset.name }),
-      Object.assign(document.createElement('span'), { textContent: group.dataset.detail }),
-    );
-    tip.hidden = false;
-    const tile = group.getBoundingClientRect();
-    const box = hero.getBoundingClientRect();
-    const size = tip.getBoundingClientRect();
-    const below = tile.top - size.height - 12 < barBottom() + 4;
-    tip.style.transform = below ? 'translate(-50%, 12px)' : '';
-    tip.style.top = `${(below ? tile.bottom : tile.top) - box.top}px`;
-    const x = tile.left + tile.width / 2 - box.left;
-    tip.style.left = `${Math.min(Math.max(x, size.width / 2 + 8), box.width - size.width / 2 - 8)}px`;
-  });
-  host.addEventListener('pointerout', (event) => {
-    if (!event.relatedTarget?.closest?.('.tile-picture')) tip.hidden = true;
-  });
+function layBar(host, tiles, tintOf) {
+  const strip = document.querySelector('.bar-hats');
+  if (!strip) return;
+  const width = host.clientWidth;
+  // Where the bar starts on the hero, as the page lies at its top: the bar is fixed, the hero is not.
+  const top = strip.getBoundingClientRect().top - (host.getBoundingClientRect().top + scrollY);
+  const root = svg('svg', { viewBox: `0 ${top} ${width} ${BAR_DEPTH}`, width, height: BAR_DEPTH });
+  const defs = svg('defs', {});
+  root.append(defs);
+  const paint = paintOf('mixed', defs, width, 'bar-paint');
+  for (const tile of tiles) {
+    if (tile.box.bottom < top || tile.box.y > top + BAR_DEPTH) continue;
+    root.append(svg('path', {
+      d: tile.d,
+      fill: paint,
+      'fill-opacity': tintOf(tile).toFixed(3),
+      stroke: paint,
+      'stroke-opacity': OUTLINE,
+      'stroke-linejoin': 'round',
+    }));
+  }
+  strip.replaceChildren(root);
 }
 
 async function field() {
@@ -524,7 +519,6 @@ async function field() {
   const mixed = [...pictures.filter((p) => !OTHERS.some((other) => other.still === p.name)), ...others];
 
   layField(host, mixed, true);
-  tooltips(host);
   // Laid again when the hero changes size by more than a little either way: under `slice` a
   // field laid for another size would be scaled and cropped.
   let laid = [host.clientWidth, host.clientHeight];

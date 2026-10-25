@@ -94,6 +94,11 @@ export function svg(name, attributes, text) {
  * darkening towards the foot, where the title stands. With `data-foot` it is the field under a
  * dialog's buttons instead: hats of the interface's 38 px, none darkened. Band `n` is cut from its own
  * part of the patch, so no two look alike.
+ *
+ * A band that opens a section below another starts on whole hats rather than on a straight line: a
+ * hat whose middle is in the section is drawn whole, reaching up into the section before on the
+ * section's own ground, and one whose middle is above it is painted in the ground of the section
+ * before, so the two meet along the hats' edges.
  */
 export function layBand(host, n) {
   const width = host.clientWidth;
@@ -104,12 +109,25 @@ export function layBand(host, n) {
   const scale = hatPx / HAT_WIDTH;
   const spare = { x: Math.max(0, COVERED.width - width / scale), y: Math.max(0, COVERED.height - height / scale) };
   const cut = { x: COVERED.x + noise(n, 11) * spare.x, y: COVERED.y + noise(n, 12) * spare.y };
+  const section = host.parentElement;
+  const before = !foot && section.matches('main > section') && section.firstElementChild === host ? section.previousElementSibling : null;
+  // A hat whose middle is in the section reaches above it by at most half its height, so the band
+  // starts that far up (its fade, a mask, would hide anything drawn outside it).
+  const rise = before ? Math.ceil(hatPx * 0.6) : 0;
+  host.style.top = rise ? `${-rise}px` : '';
 
-  const root = svg('svg', { viewBox: `0 0 ${width} ${height}` });
+  const root = svg('svg', { viewBox: `0 ${-rise} ${width} ${height}` });
   const defs = svg('defs', {});
   root.append(defs);
   const paint = paintOf(host.dataset.band, defs, width, `band-paint-${n}`);
-  for (const tile of hatsIn(width, height, cut, scale)) {
+  const tiles = hatsIn(width, height - rise, cut, scale);
+  // The grounds go first, so no outline is half covered by the ground of the hat beside it.
+  if (before) {
+    const [ground, groundBefore] = [groundOf(section), groundOf(before)];
+    for (const tile of tiles.filter((t) => t.box.y < 0)) root.append(svg('path', { d: tile.d, fill: tile.cy < 0 ? groundBefore : ground }));
+  }
+  for (const tile of tiles) {
+    if (before && tile.cy < 0) continue;
     const light = Math.max(0, 1 - Math.hypot((tile.cx - 0.86 * width) / (0.62 * width), (tile.cy + 0.3 * height) / (1.5 * height)));
     const shade = foot ? 1 : 1 - 0.75 * smooth(0.1, 1, tile.cy / height);
     root.append(svg('path', {
@@ -122,6 +140,12 @@ export function layBand(host, n) {
     }));
   }
   host.replaceChildren(root);
+}
+
+/** The colour an element stands on: its own background, or the page's where it has none. */
+function groundOf(el) {
+  const colour = getComputedStyle(el).backgroundColor;
+  return colour === 'rgba(0, 0, 0, 0)' ? getComputedStyle(document.body).backgroundColor : colour;
 }
 
 /** Every band on the page, laid again when its width changes; the top bar's is numbered last, after the chapters'. */

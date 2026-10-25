@@ -360,10 +360,10 @@ kbd {
   gap: 28px;
   height: 60px;
   padding-inline: var(--gutter);
-  background: rgb(18 21 28 / 0.88);
+  background-color: rgb(18 21 28 / 0.88);
   backdrop-filter: blur(14px) saturate(140%);
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, height 0.3s, background-color 0.3s, backdrop-filter 0.3s;
 }
 /* The grey hats EiN lays under a dialog's buttons and its terminal's tabs, upside down: they hang
  * from the top edge and are gone by the bar's foot. */
@@ -394,6 +394,40 @@ kbd {
   font-weight: 700;
   font-size: 1.125rem;
   text-decoration: none;
+  transform-origin: left center;
+  transition: transform 0.3s;
+}
+/* The presentation page's bar (`data-over`) lies on the hero while the page is at its top: no ground
+ * of its own, taller, and the mark larger. Scrolled, it shrinks to its usual height and lays the
+ * hero's own hats under itself (site.js), as large and tinted as the field's and fading towards its
+ * foot. Without script, which marks the scroll, it keeps its ground throughout. */
+.bar[data-over] .bar-hats {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.bar[data-over] .bar-hats svg {
+  height: auto;
+  transform: none;
+}
+@media (scripting: enabled) {
+  .bar[data-over]:not([data-scrolled], [data-open]) {
+    height: 88px;
+    background-color: transparent;
+    backdrop-filter: blur(0) saturate(100%);
+  }
+  .bar[data-over]:not([data-scrolled], [data-open]) .bar-hats {
+    opacity: 0;
+  }
+  .bar[data-over]:not([data-scrolled]) .brand {
+    transform: scale(1.6);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar,
+  .brand,
+  .bar-hats {
+    transition: none;
+  }
 }
 .bar nav {
   display: flex;
@@ -643,39 +677,143 @@ kbd {
 .button-primary:hover {
   background: #fff;
 }
-/* The way in, in the lime green of the system's pages, which stands out from the field's own greens
- * and from the other two buttons; its hat turns as the top bar's do. */
+/* The way in: a hat in the lime green of the system's pages, as wide as two of the field's, its words
+ * where the hat is widest and an arrow down in its foot. Only the hat takes the pointer. On hover its
+ * edge runs through the node types' colours, a light goes round it and the arrow nudges down; the
+ * buttons beside it stand level with its words. */
 .button-start {
-  gap: 9px;
-  border-color: transparent;
-  background: var(--system);
+  position: relative;
+  flex: none;
+  width: 200px;
+  aspect-ratio: 6.2 / 4.53;
   color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  pointer-events: none;
 }
-.button-start::before {
-  content: '';
-  width: 13px;
-  height: 13px;
-  background: currentColor;
-  -webkit-mask: var(--hat-mask) center / contain no-repeat;
-  mask: var(--hat-mask) center / contain no-repeat;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+.button-start svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
-.button-start:hover {
-  border-color: transparent;
-  filter: brightness(1.1);
+.button-start span {
+  position: absolute;
+  left: 54.8%;
+  top: 30.8%;
+  font-size: 1.0625rem;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
 }
-.button-start:hover::before {
-  transform: rotate(60deg);
+.hat-fill {
+  fill: var(--system);
+  pointer-events: visiblePainted;
+  transition: filter 0.15s;
+}
+.hat-edge,
+.hat-run {
+  fill: none;
+  stroke-linejoin: round;
+}
+.hat-edge {
+  stroke: color-mix(in srgb, var(--system) 55%, #000);
+  stroke-width: 0.09;
+  transition: stroke-width 0.2s;
+}
+.hat-run {
+  stroke: #fff;
+  stroke-width: 0.12;
+  stroke-dasharray: 14 86;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.hat-arrow {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.11;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.button-start:hover .hat-fill {
+  filter: brightness(1.08);
+}
+.button-start:hover .hat-edge {
+  stroke-width: 0.13;
+  animation: hat-edge 2.4s linear infinite;
+}
+.button-start:hover .hat-run {
+  opacity: 0.85;
+  animation: hat-run 1.6s linear infinite;
+}
+.button-start:hover .hat-arrow {
+  transform: translateY(0.22px);
+}
+.button-start:focus-visible {
+  outline: none;
+}
+.button-start:focus-visible .hat-edge {
+  stroke: var(--text);
+  stroke-width: 0.14;
+}
+@keyframes hat-edge {
+  0%,
+  100% {
+    stroke: var(--album);
+  }
+  17% {
+    stroke: var(--person);
+  }
+  33% {
+    stroke: var(--place);
+  }
+  50% {
+    stroke: var(--track);
+  }
+  67% {
+    stroke: var(--device);
+  }
+  83% {
+    stroke: var(--label);
+  }
+}
+@keyframes hat-run {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button-start:hover .hat-edge {
+    stroke: var(--text);
+    animation: none;
+  }
+  .button-start:hover .hat-run {
+    opacity: 0;
+    animation: none;
+  }
+}
+.actions:has(.button-start) {
+  align-items: flex-start;
+}
+/* Level with the hat's words: their middle (30.8% down a hat 200 px wide, so 45 px), less half a
+ * button's height. */
+.button-start ~ .button {
+  margin-top: calc(200px * 4.53 / 6.2 * 0.308 - 1.6em / 2 - 13px);
 }
 /* On a phone the way in takes the row, and the other two share the one under it. */
 @media (max-width: 780px) {
-  .actions .button {
-    flex: 1 1 auto;
-    justify-content: center;
-    padding-inline: 16px;
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .actions .button-start {
-    flex-basis: 100%;
+    grid-column: 1 / -1;
+  }
+  .actions .button {
+    justify-content: center;
+    margin-top: 0;
+    padding-inline: 16px;
   }
 }
 
@@ -847,27 +985,6 @@ kbd {
   .field [data-entering] .tile {
     animation: none;
   }
-}
-.tip {
-  position: absolute;
-  z-index: 2;
-  padding: 8px 12px;
-  border: 1px solid var(--line-strong);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px;
-  background: rgb(13 16 21 / 0.94);
-  font-size: var(--t-small);
-  line-height: 1.35;
-  pointer-events: none;
-  transform: translate(-50%, calc(-100% - 12px));
-  white-space: nowrap;
-}
-.tip strong {
-  display: block;
-  font-weight: 600;
-}
-.tip span {
-  color: var(--muted);
 }
 
 /* Stacked: the copy spans the width, so the field shows above it. */
@@ -1745,10 +1862,10 @@ figcaption {
 
 /* --- a chapter's start: a band of hats in its accent, as a page of the interface opens --- */
 
+/* No line at its top: its band's hats are the edge (page.js). */
 .chapter {
   position: relative;
   isolation: isolate;
-  border-top: 1px solid var(--line);
 }
 .band {
   position: absolute;
