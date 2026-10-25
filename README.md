@@ -17,7 +17,8 @@ It is a static page with no build step: what is in the repository is what is ser
 ```
 index.html          the page
 assets/site.css     its styles
-assets/site.js      the hero's field, the bands of hats in the chapters and the top bar, the top bar's links and a phone's menu of them, the tour's tabs, the screenshots' viewer, the copy button
+assets/site.js      the hero's field, the tour's tabs, the screenshots' viewer, the copy button
+assets/page.js      what every page has: the top bar, its links and a phone's menu of them, and the bands of hats
 assets/hat-tiling.js  the einstein hat and a patch of its tiling, as EiN's web interface lays them
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
 assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
