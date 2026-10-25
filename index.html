@@ -86,7 +86,7 @@
           </p>
           <div class="actions">
             <a class="button button-start" href="#start">Getting started</a>
-            <a class="button button-primary" href="#nodes">See how it works</a>
+            <a class="button button-primary" href="#architecture">See how it works</a>
             <a class="button" href="#archive">Meet the Archive</a>
           </div>
         </div>
@@ -186,11 +186,101 @@
         </div>
       </section>
 
-      <section class="nodes chapter ch-core" id="nodes" aria-labelledby="nodes-title">
+      <section class="architecture chapter ch-core" id="architecture" aria-labelledby="architecture-title">
         <div class="band" data-band="system" aria-hidden="true"></div>
         <div class="wrap">
           <div class="intro">
             <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Core</p>
+            <h2 id="architecture-title">How the core is put together</h2>
+            <p>
+              The core is one program, in TypeScript on Deno, with PostgreSQL beside it. People come in through a few doors, and what they do becomes shell commands. Every
+              command works on one tree of nodes, and stores underneath keep its parts: most of it in the database, some in memory, in a folder on the server or on another
+              machine.
+            </p>
+          </div>
+
+          <figure class="arch" aria-labelledby="arch-caption">
+            <div class="arch-grid">
+              <p class="arch-label a-lbg">In the background</p>
+              <p class="arch-label a-lpe">People</p>
+              <div class="arch-box a-svc"><strong>Services</strong><span>Started at boot and kept running</span></div>
+              <div class="arch-box a-pip"><strong>Pipelines</strong><span>Steps that run when the tree changes</span></div>
+              <div class="arch-box a-web"><strong>Web interface</strong><span>Pages and a terminal</span></div>
+              <div class="arch-box a-ssh"><strong>SSH</strong><span>A terminal</span></div>
+              <div class="arch-box a-sftp"><strong>SFTP</strong><span>Files</span></div>
+              <span class="arch-down a-d1" aria-hidden="true"></span>
+              <span class="arch-down a-d2" aria-hidden="true"></span>
+              <span class="arch-down a-d3" aria-hidden="true"></span>
+              <span class="arch-down a-d4" aria-hidden="true"></span>
+              <span class="arch-down a-d5" aria-hidden="true"></span>
+              <div class="arch-box arch-layer a-sh">
+                <strong>The shell</strong>
+                <span>Bash-compatible, with more than 200 commands. Each command runs as the person or service that sent it.</span>
+              </div>
+              <div class="arch-lane a-lane"><span>Files go straight to the tree</span></div>
+              <span class="arch-down a-d6" aria-hidden="true"></span>
+              <span class="arch-down a-d7" aria-hidden="true"></span>
+              <div class="arch-box arch-layer arch-tree a-vfs">
+                <strong>The tree</strong>
+                <span>One file system of nodes: paths, links, permissions and mounts, an audit trail of every change, and an event for each.</span>
+              </div>
+              <span class="arch-down a-e1" aria-hidden="true"></span>
+              <span class="arch-down a-e2" aria-hidden="true"></span>
+              <span class="arch-down a-e3" aria-hidden="true"></span>
+              <span class="arch-down a-e4" aria-hidden="true"></span>
+              <span class="arch-down a-e5" aria-hidden="true"></span>
+              <div
+                class="arch-box arch-store a-pg"><strong>PostgreSQL</strong><span>The tree itself, logs, queues, vectors and places; files' bytes on a disk or a NAS</span></div>
+              <div class="arch-box arch-store a-mem"><strong>Memory</strong><span><code>/tmp</code>, gone at a restart</span></div>
+              <div class="arch-box arch-store a-host"><strong>A folder</strong><span>On the server, read as it is</span></div>
+              <div class="arch-box arch-store a-rsftp"><strong>SFTP</strong><span>A folder on another machine</span></div>
+              <div class="arch-box arch-store a-cmd"><strong>Commands</strong><span><code>/usr/bin</code>, every command as a node</span></div>
+              <p class="arch-label a-lst">Stores, each mounted where its part of the tree belongs</p>
+            </div>
+            <figcaption id="arch-caption">
+              Every door leads to the shell, and every command to the tree. Files sent over SFTP, or up and down through the web interface, go to the tree directly, past the same
+              permission check. A node looks the same whichever store holds it.
+            </figcaption>
+          </figure>
+
+          <figure class="loop" aria-labelledby="loop-caption">
+            <h3 class="loop-title">A change sets work going</h3>
+            <ol class="loop-steps">
+              <li><strong>A command writes</strong><span>A person's, a service's or a pipeline step's</span></li>
+              <li><strong>The tree commits it</strong><span>With who made the change, in the audit trail</span></li>
+              <li><strong>An event goes out</strong><span>Or a module announces a fact about the node</span></li>
+              <li><strong>A queue keeps it</strong><span>In the database, so a restart loses nothing</span></li>
+              <li><strong>A pipeline starts</strong><span>And runs its steps, which are commands</span></li>
+            </ol>
+            <p class="loop-back"><span>What the steps write is a change too</span></p>
+            <figcaption id="loop-caption">
+              A thumbnail, a transcript or an unpacked zip comes from a pipeline that waited for the change it needs, and what its steps write can start the next one.
+            </figcaption>
+          </figure>
+
+          <div class="split arch-services">
+            <div class="intro">
+              <h3>Even the doors are services</h3>
+              <p>
+                At boot, scripts in <code>/etc/init</code> mount the stores, set up the accounts and install the modules. Then every service in <code>/etc/services</code> starts:
+                the web server, the SSH server, the pipeline engine and what the modules add. A service is a folder with a start script, run in the same shell as everything
+                else, restarted by its own policy, with its output in a log node.
+              </p>
+            </div>
+            <pre class="term" tabindex="0" aria-label="The web server's service"><code><span class="p">$</span> ls /etc/services
+http-server      pipeline-engine  relations-guard  ssh-server   trash-purger
+metrics-sampler  pipeline-pruner  session-reaper   tmp-sweeper
+<span class="p">$</span> cat /etc/services/http-server/start.sh
+www active || www reset
+http-server "$WWW_PATH" --port "${CFG_HTTP_PORT:-8080}"
+<span class="p">$</span> tail -f /var/logs/services/http-server/stdout.log</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="nodes deep ch-core" id="nodes" aria-labelledby="nodes-title">
+        <div class="wrap">
+          <div class="intro">
             <h2 id="nodes-title">One tree of nodes</h2>
             <p>
               A node has a type, the attributes that type needs, an owner, a group and permission bits, and a name in a folder. It can have names in several folders at once, as a
@@ -248,7 +338,7 @@
         </div>
       </section>
 
-      <section class="tree deep ch-core" id="tree" aria-labelledby="tree-title">
+      <section class="tree ch-core" id="tree" aria-labelledby="tree-title">
         <div class="wrap split">
           <div class="intro">
             <h2 id="tree-title">A file system for everything</h2>
@@ -279,7 +369,7 @@
         </div>
       </section>
 
-      <section class="shell ch-core" id="shell" aria-labelledby="shell-title">
+      <section class="shell deep ch-core" id="shell" aria-labelledby="shell-title">
         <div class="wrap">
           <div class="intro">
             <h2 id="shell-title">A real shell on the tree</h2>
@@ -314,7 +404,7 @@
         </div>
       </section>
 
-      <section class="interface deep ch-core" id="interface" aria-labelledby="interface-title">
+      <section class="interface ch-core" id="interface" aria-labelledby="interface-title">
         <div class="wrap split">
           <div class="intro">
             <h2 id="interface-title">A web interface that runs the same commands</h2>
@@ -349,7 +439,7 @@
         </div>
       </section>
 
-      <section class="pipelines ch-core" id="pipelines" aria-labelledby="pipelines-title">
+      <section class="pipelines deep ch-core" id="pipelines" aria-labelledby="pipelines-title">
         <div class="wrap">
           <div class="intro">
             <h2 id="pipelines-title">Pipelines act on every change</h2>
@@ -417,7 +507,7 @@ options:
         </div>
       </section>
 
-      <section class="modules deep ch-core" id="modules" aria-labelledby="modules-title">
+      <section class="modules ch-core" id="modules" aria-labelledby="modules-title">
         <div class="wrap">
           <div class="intro">
             <h2 id="modules-title">Everything else is a module</h2>

@@ -1239,6 +1239,363 @@ figcaption {
   color: var(--muted);
 }
 
+/* --- architecture: the core's layers, and what a change sets going --- */
+
+/* The doors and the background over the shell, the shell over the tree, the tree over its stores:
+ * one grid, so each arrow stands under the box it leaves. On a narrow screen the boxes pair up. */
+.arch {
+  margin: 56px 0 0;
+}
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-areas:
+    'lbg lbg lpe lpe lpe'
+    'svc pip web ssh sftp'
+    'd1 d2 d3 d4 d5'
+    'sh sh sh sh lane'
+    'd6 d6 d6 d6 d7'
+    'vfs vfs vfs vfs vfs'
+    'e1 e2 e3 e4 e5'
+    'pg mem host rsftp cmd'
+    'lst lst lst lst lst';
+  column-gap: 14px;
+}
+.a-lbg {
+  grid-area: lbg;
+}
+.a-lpe {
+  grid-area: lpe;
+}
+.a-svc {
+  grid-area: svc;
+}
+.a-pip {
+  grid-area: pip;
+}
+.a-web {
+  grid-area: web;
+}
+.a-ssh {
+  grid-area: ssh;
+}
+.a-sftp {
+  grid-area: sftp;
+}
+.a-d1 {
+  grid-area: d1;
+}
+.a-d2 {
+  grid-area: d2;
+}
+.a-d3 {
+  grid-area: d3;
+}
+.a-d4 {
+  grid-area: d4;
+}
+.a-d5 {
+  grid-area: d5;
+}
+.a-sh {
+  grid-area: sh;
+}
+.a-lane {
+  grid-area: lane;
+}
+.a-d6 {
+  grid-area: d6;
+}
+.a-d7 {
+  grid-area: d7;
+}
+.a-vfs {
+  grid-area: vfs;
+}
+.a-e1 {
+  grid-area: e1;
+}
+.a-e2 {
+  grid-area: e2;
+}
+.a-e3 {
+  grid-area: e3;
+}
+.a-e4 {
+  grid-area: e4;
+}
+.a-e5 {
+  grid-area: e5;
+}
+.a-pg {
+  grid-area: pg;
+}
+.a-mem {
+  grid-area: mem;
+}
+.a-host {
+  grid-area: host;
+}
+.a-rsftp {
+  grid-area: rsftp;
+}
+.a-cmd {
+  grid-area: cmd;
+}
+.a-lst {
+  grid-area: lst;
+}
+@media (max-width: 760px) {
+  .arch-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      'lbg lbg lbg lbg lbg lbg'
+      'svc svc svc pip pip pip'
+      'lpe lpe lpe lpe lpe lpe'
+      'web web ssh ssh sftp sftp'
+      'd3 d3 d4 d4 d5 d5'
+      'sh sh sh sh lane lane'
+      'd6 d6 d6 d6 d7 d7'
+      'vfs vfs vfs vfs vfs vfs'
+      'e1 e1 e1 e1 e1 e1'
+      'pg pg pg mem mem mem'
+      'host host host rsftp rsftp rsftp'
+      'cmd cmd cmd cmd cmd cmd'
+      'lst lst lst lst lst lst';
+    column-gap: 10px;
+  }
+  .a-d1,
+  .a-d2,
+  .a-e2,
+  .a-e3,
+  .a-e4,
+  .a-e5 {
+    display: none;
+  }
+  .a-lpe {
+    margin-top: 20px;
+  }
+  .arch-store {
+    margin-bottom: 10px;
+  }
+}
+.arch-label {
+  padding-bottom: 10px;
+  color: var(--faint);
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.a-lst {
+  padding: 12px 0 0;
+}
+.arch-box {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--raised);
+}
+.arch-box strong {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.arch-box span {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.arch-layer {
+  padding: 18px 22px;
+}
+.arch-layer strong {
+  font-family: var(--display);
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+.arch-tree {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: radial-gradient(80% 140% at 0% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%), var(--raised);
+}
+/* What skips the shell: a path, not a part. */
+.arch-lane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: center;
+}
+/* An arrow down, centred in its cell. */
+.arch-down {
+  position: relative;
+  height: 30px;
+}
+.arch-down::before {
+  content: '';
+  position: absolute;
+  left: calc(50% - 1px);
+  top: 4px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--faint);
+}
+.arch-down::after {
+  content: '';
+  position: absolute;
+  left: calc(50% - 6px);
+  bottom: 4px;
+  border: 6px solid transparent;
+  border-top-color: var(--faint);
+  border-bottom-width: 0;
+}
+.arch figcaption,
+.loop figcaption {
+  max-width: 48rem;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* A change round to the pipeline it starts: five steps in a row, and a line from the last back to
+ * the first; on a narrow screen the steps stand in a column. */
+.loop {
+  margin: 96px 0 0;
+}
+.loop-steps {
+  --gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: loop;
+}
+.loop-steps li {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--raised);
+  counter-increment: loop;
+}
+.loop-steps li::before {
+  content: counter(loop);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.loop-steps strong {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.loop-steps span {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+/* The arrow to the next step, in the gap. */
+.loop-steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 6px);
+  right: calc(-1 * var(--gap) + 9px);
+  width: calc(var(--gap) - 18px);
+  height: 12px;
+  background: var(--faint);
+  clip-path: polygon(0 42%, 62% 42%, 62% 0, 100% 50%, 62% 100%, 62% 58%, 0 58%);
+}
+/* From the middle of the last step back up into the middle of the first. */
+.loop-back {
+  position: relative;
+  height: 36px;
+  margin: 0 calc((100% - 4 * 40px) / 10);
+  border: 2px solid var(--faint);
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+}
+.loop-back::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: -2px;
+  border: 7px solid transparent;
+  border-bottom-color: var(--faint);
+  border-top-width: 0;
+}
+.loop-back span {
+  position: absolute;
+  left: 50%;
+  bottom: -0.8em;
+  padding: 0 14px;
+  background: var(--ink);
+  color: var(--muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.loop figcaption {
+  margin-top: 36px;
+}
+@media (max-width: 860px) {
+  .loop-steps {
+    --gap: 30px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .loop-steps li:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    left: calc(50% - 6px);
+    bottom: -24px;
+    width: 12px;
+    height: 18px;
+    clip-path: polygon(42% 0, 58% 0, 58% 55%, 100% 55%, 50% 100%, 0 55%, 42% 55%);
+  }
+  .loop-back {
+    height: auto;
+    margin: 14px 0 0;
+    border: 0;
+  }
+  .loop-back::before {
+    content: none;
+  }
+  .loop-back span {
+    position: static;
+    padding: 0;
+    background: none;
+    white-space: normal;
+    transform: none;
+  }
+  .loop-back span::before {
+    content: '↻ back to 1: ';
+  }
+  .loop figcaption {
+    margin-top: 16px;
+  }
+}
+
+.arch-services {
+  margin-top: 96px;
+}
+.arch-services .intro > p {
+  margin-top: 14px;
+}
+.arch-services .term {
+  margin: 0;
+}
+
 /* --- nodes: what a node is, and the core's types --- */
 
 .node-grid {
