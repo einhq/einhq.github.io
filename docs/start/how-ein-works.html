@@ -207,14 +207,12 @@ standard path.</p>
 <p>Every node has an owner, a group and permission bits that say who may read it, change it, and go
 into it or run it, written the way <code>chmod</code> writes them: <code>0750</code>, or <code>rwxr-x---</code>. A node may also give
 access to more users or groups through an access list. A node belongs to whoever made it and
-takes its group from the folder it is made in. The administrator passes every check.</p>
+takes its group from the folder it is made in. The administrator by-passes every check permission check.</p>
 <p>Two things work differently from a computer&#39;s files:</p>
 <ul>
-<li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not in <code>ls</code>, and
-with the Archive not on the map. Two people can see the same folder or album differently, and it
+<li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not in <code>ls</code>. Two people can see the same folder or album differently, and it
 can look emptier to you than to its owner.</li>
-<li><strong>You do not need the numbers.</strong> <strong>Share</strong> sets the same permissions in words: who can see a
-node and who can change it, and for an album, a link that opens it without an account. It works
+<li><strong>You can share anonymous links</strong>: A link can be created that opens it without an account. It works
 on any node from the <strong>Nodes</strong> explorer, and with the Archive installed its pages offer it on an
 album, a picture, a person, a location or a device.</li>
 </ul>
@@ -237,25 +235,24 @@ carries it, and how two people are related is a pair of links, one on each perso
 losing its cover or its labels. A <strong>hard link</strong> is the other kind: the same node under a second name
 in another folder, as on Unix. <a href="../concepts/links.html">Links</a> covers both, and what deleting and the
 trash do to them.</p>
-<h2 id="one-set-of-commands-behind-every-door">One set of commands behind every door<a class="anchor" href="#one-set-of-commands-behind-every-door" aria-label="Link to this section"></a></h2>
-<p>EiN has a shell: bash syntax, run inside EiN, where the files and folders are the nodes of the
-tree. Core brings more than 200 commands, and each module adds its own. Every way in runs these
-commands as you, except SFTP, which moves files and nothing else:</p>
+<h2 id="one-set-of-commands">One set of commands<a class="anchor" href="#one-set-of-commands" aria-label="Link to this section"></a></h2>
+<p>At the heart of EiN is a a shell implementing bash. Core brings more than 200 commands, and each module adds its own. All data access, web or SSH runs these
+commands, except SFTP, which moves files and nothing else:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
-<th>Door</th>
+<th>Interface</th>
 <th>How you get there</th>
 <th>What happens</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>The web interface</td>
+<td>The web UI</td>
 <td>A browser at <code>http://ein.local:8080</code></td>
 <td>Each page runs commands as you and shows what they answer</td>
 </tr>
 <tr>
-<td>The terminal panel</td>
+<td>The terminal</td>
 <td>The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in</td>
 <td>A shell of your own in each tab</td>
 </tr>
@@ -272,11 +269,11 @@ commands as you, except SFTP, which moves files and nothing else:</p>
 <tr>
 <td>The assistant</td>
 <td><strong>Chat</strong> in the sidebar, with the <a href="../assistant/index.html">assistant module</a></td>
-<td>It runs commands as tools, as you; one that would change something waits for you to press <strong>Run</strong></td>
+<td>It runs commands as tools, as you; commands that would change something waits for you to accept</td>
 </tr>
 </tbody></table>
 </div>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly">
   <title>One shell, several doors</title>
   <defs>
     <marker id="start-how-ein-works-md-1-doors-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -340,22 +337,22 @@ commands as you, except SFTP, which moves files and nothing else:</p>
   <text x="44" y="419" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The tree of nodes</text>
   <text x="756" y="419" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb"
     xml:space="preserve">/archive   /home   /etc   /var   /usr</text>
-</svg><figcaption>Every door meets the same permission check, and all but SFTP go through the same commands.</figcaption></figure>
+</svg><figcaption>Every interface upholds the same permission checks, and all but SFTP go through the same commands.</figcaption></figure>
 <p>The web interface is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with <code>JSON_OUTPUT=1</code> so that they answer in JSON; renaming a
 folder on the Nodes page runs <code>mv</code>. Only the bytes of files, uploaded or downloaded, take a way of
 their own, through the same permission check. You can run the same commands yourself; these two
-list the Archive&#39;s albums, so they need the Archive installed:</p>
+list the the root:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ls</span> /archive/albums
-JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l /archive/albums | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
+<span class="hljs-built_in">ls</span> /
+JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l / | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
 <p>Because every door acts as the same person under the same check, the rules are the same everywhere.
 What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
-either, and a command only an administrator may run is refused to anyone else whichever door they
+either, and a command only an administrator may run is refused to anyone else whichever interface they
 use.</p>
 <figure class="shot"><a href="../../assets/shots/terminal@2x.webp"><img src="../../assets/shots/terminal.webp" srcset="../../assets/shots/terminal.webp 1x, ../../assets/shots/terminal@2x.webp 2x" alt="The terminal panel filling the window: ls /archive, a find that counts the people, person-info printing Peggy Wrenfield's relations, homes and events, and cat drawing a photo from the christmas-2019 album" width="840" height="780" loading="lazy" decoding="async"></a><figcaption>The terminal works on the tree the pages show: people, albums and photos are paths.</figcaption></figure>
 <p><a href="../shell/terminal.html">The terminal</a>, <a href="../shell/ssh-sftp.html">SSH and SFTP</a> and
-<a href="../assistant/chat.html">Chatting with the assistant</a> describe each door, and
+<a href="../assistant/chat.html">Chatting with the assistant</a> describe each interface, and
 <a href="../reference/commands.html">Commands</a> lists every command.</p>
 <h2 id="changes-start-pipelines">Changes start pipelines<a class="anchor" href="#changes-start-pipelines" aria-label="Link to this section"></a></h2>
 <p>Every change to the tree, a node made, changed, moved or deleted, is announced as an event once it
@@ -589,7 +586,7 @@ section, for the modules installed on your EiN.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/start/how-ein-works.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#everything-is-a-node">Everything is a node</a></li><li><a href="#owners-and-permissions-as-with-files">Owners and permissions, as with files</a></li><li><a href="#links-put-one-thing-in-many-places">Links put one thing in many places</a></li><li><a href="#one-set-of-commands-behind-every-door">One set of commands behind every door</a></li><li><a href="#changes-start-pipelines">Changes start pipelines</a></li><li><a href="#modules-decide-what-ein-is-for">Modules decide what EiN is for</a></li><li><a href="#what-runs-beside-ein">What runs beside EiN</a></li><li><a href="#where-to-read-on">Where to read on</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#everything-is-a-node">Everything is a node</a></li><li><a href="#owners-and-permissions-as-with-files">Owners and permissions, as with files</a></li><li><a href="#links-put-one-thing-in-many-places">Links put one thing in many places</a></li><li><a href="#one-set-of-commands">One set of commands</a></li><li><a href="#changes-start-pipelines">Changes start pipelines</a></li><li><a href="#modules-decide-what-ein-is-for">Modules decide what EiN is for</a></li><li><a href="#what-runs-beside-ein">What runs beside EiN</a></li><li><a href="#where-to-read-on">Where to read on</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -59,15 +59,13 @@ standard path.
 Every node has an owner, a group and permission bits that say who may read it, change it, and go
 into it or run it, written the way `chmod` writes them: `0750`, or `rwxr-x---`. A node may also give
 access to more users or groups through an access list. A node belongs to whoever made it and
-takes its group from the folder it is made in. The administrator passes every check.
+takes its group from the folder it is made in. The administrator by-passes every check permission check.
 
 Two things work differently from a computer's files:
 
-- **What you may not read is not listed at all**: not in a folder, not in search, not in `ls`, and
-  with the Archive not on the map. Two people can see the same folder or album differently, and it
+- **What you may not read is not listed at all**: not in a folder, not in search, not in `ls`. Two people can see the same folder or album differently, and it
   can look emptier to you than to its owner.
-- **You do not need the numbers.** **Share** sets the same permissions in words: who can see a
-  node and who can change it, and for an album, a link that opens it without an account. It works
+- **You can share anonymous links**: A link can be created that opens it without an account. It works
   on any node from the **Nodes** explorer, and with the Archive installed its pages offer it on an
   album, a picture, a person, a location or a device.
 
@@ -93,43 +91,42 @@ losing its cover or its labels. A **hard link** is the other kind: the same node
 in another folder, as on Unix. [Links](../concepts/links.md) covers both, and what deleting and the
 trash do to them.
 
-## One set of commands behind every door
+## One set of commands
 
-EiN has a shell: bash syntax, run inside EiN, where the files and folders are the nodes of the
-tree. Core brings more than 200 commands, and each module adds its own. Every way in runs these
-commands as you, except SFTP, which moves files and nothing else:
+At the heart of EiN is a a shell implementing bash. Core brings more than 200 commands, and each module adds its own. All data access, web or SSH runs these
+commands, except SFTP, which moves files and nothing else:
 
-| Door               | How you get there                                                                          | What happens                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| The web interface  | A browser at `http://ein.local:8080`                                                       | Each page runs commands as you and shows what they answer                                         |
-| The terminal panel | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                   |
-| SSH                | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                          |
-| SFTP               | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                      |
-| The assistant      | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; one that would change something waits for you to press **Run** |
+| Interface     | How you get there                                                                          | What happens                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| The web UI    | A browser at `http://ein.local:8080`                                                       | Each page runs commands as you and shows what they answer                                       |
+| The terminal  | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                 |
+| SSH           | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                        |
+| SFTP          | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                    |
+| The assistant | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; commands that would change something waits for you to accept |
 
-![Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/doors.svg "Every door meets the same permission check, and all but SFTP go through the same commands.")
+![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/doors.svg "Every interface upholds the same permission checks, and all but SFTP go through the same commands.")
 
 The web interface is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with `JSON_OUTPUT=1` so that they answer in JSON; renaming a
 folder on the Nodes page runs `mv`. Only the bytes of files, uploaded or downloaded, take a way of
 their own, through the same permission check. You can run the same commands yourself; these two
-list the Archive's albums, so they need the Archive installed:
+list the the root:
 
 ```bash
 # in EiN's terminal
-ls /archive/albums
-JSON_OUTPUT=1 ls -l /archive/albums | jq '.[].name'
+ls /
+JSON_OUTPUT=1 ls -l / | jq '.[].name'
 ```
 
 Because every door acts as the same person under the same check, the rules are the same everywhere.
 What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
-either, and a command only an administrator may run is refused to anyone else whichever door they
+either, and a command only an administrator may run is refused to anyone else whichever interface they
 use.
 
 ![The terminal panel filling the window: ls /archive, a find that counts the people, person-info printing Peggy Wrenfield's relations, homes and events, and cat drawing a photo from the christmas-2019 album](../../assets/shots/terminal.webp "The terminal works on the tree the pages show: people, albums and photos are paths.")
 
 [The terminal](../shell/terminal.md), [SSH and SFTP](../shell/ssh-sftp.md) and
-[Chatting with the assistant](../assistant/chat.md) describe each door, and
+[Chatting with the assistant](../assistant/chat.md) describe each interface, and
 [Commands](../reference/commands.md) lists every command.
 
 ## Changes start pipelines
