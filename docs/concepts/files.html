@@ -90,6 +90,9 @@
 <p>This page explains how EiN keeps the content of files: what a file node records about its bytes,
 where the bytes are kept on the machine, and what copying, moving and deleting do to them. It is for
 anyone who wants to know where their photos are, and for the administrator who looks after the disk.</p>
+<p>Files and their storage are core&#39;s. The examples use a photo in an album,
+<code>/archive/albums/christmas-2019</code>, a path that exists with the <a href="../archive/index.html">Archive</a>
+installed, and what the Archive makes from a file is marked as such.</p>
 <h2 id="a-file-is-a-node-with-bytes">A file is a node with bytes<a class="anchor" href="#a-file-is-a-node-with-bytes" aria-label="Link to this section"></a></h2>
 <p>A photo, a video, a recording, a scanned letter and a text you write in the editor are all nodes of
 type <code>file</code>. Like every node, a file has a name in its folder, an owner, a group, permissions and an
@@ -138,7 +141,7 @@ id. What sets it apart is that it holds bytes, and its attributes describe them:
 <p>A media file carries more once the Archive has read it, such as the time it was taken and its
 orientation; <a href="nodes.html">Nodes and node types</a> describes a node part by part.</p>
 <p>The bytes are kept apart from the node and are found by the node&#39;s id, not by its name or path.
-Renaming a file or moving it to another album changes the tree and leaves the bytes where they are,
+Renaming a file or moving it to another folder changes the tree and leaves the bytes where they are,
 however large the file is.</p>
 <p>To see a file&#39;s attributes, ask for the node in JSON and pick them out:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -204,12 +207,12 @@ beside the file, not the file. Deleting the file deletes everything beneath it.<
 </tr>
 <tr>
 <td><code>volatile</code></td>
-<td>What EiN makes from another file and can make again: thumbnails, playable videos and recordings, face crops</td>
+<td>What EiN makes from another file and can make again: with the Archive, thumbnails, playable videos and recordings, face crops</td>
 <td><code>files-volatile</code> in the data folder</td>
 </tr>
 <tr>
 <td><code>db</code></td>
-<td>Small content that belongs with the database: the settings file, comments, SSH keys and <code>known_hosts</code>, the host keys of EiN&#39;s SSH server, password hashes, <code>/etc/fstab</code>, the events in a person&#39;s story, the text read from pictures and documents, and staging&#39;s record of what you sorted</td>
+<td>Small content that belongs with the database: the settings file, comments, SSH keys and <code>known_hosts</code>, the host keys of EiN&#39;s SSH server, password hashes, <code>/etc/fstab</code>, and with the Archive the events in a person&#39;s story, the text read from pictures and documents, and staging&#39;s record of what you sorted</td>
 <td>Large objects in PostgreSQL, in the volume <code>ein_db</code></td>
 </tr>
 </tbody></table>
@@ -259,11 +262,11 @@ install. EiN sees its folders at fixed paths inside its container:</p>
 <tr>
 <td><code>old</code></td>
 <td><code>/old</code></td>
-<td>the files of an older installation that the importer module reads and links to; empty unless you put files there</td>
+<td>the files of an older installation that the <a href="../importer/index.html">Importer</a> reads and links to; empty unless you put files there</td>
 </tr>
 </tbody></table>
 </div>
-<p>The media service mounts the same folders at the same paths, so a path EiN hands it is the file it
+<p>The media service, which the Archive needs, mounts the same folders at the same paths, so a path EiN hands it is the file it
 opens, and the files on the <code>disk</code> and <code>volatile</code> tiers are never copied between them. It may read your originals but never write them.
 <a href="../admin/install.html#the-data-folder">Installing in detail</a> has the whole layout, and
 <a href="../ems/index.html">The media service</a> how the two share it.</p>
@@ -309,7 +312,7 @@ to bring them up to date.</p>
 </tr>
 <tr>
 <td><code>sha256</code></td>
-<td>Finding exact copies of a file (<a href="../archive/duplicates.html">Duplicates</a>), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file&#39;s content changed so it reads it again</td>
+<td>With the Archive, finding exact copies of a file (<a href="../archive/duplicates.html">Duplicates</a>), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file&#39;s content changed so it reads it again</td>
 </tr>
 <tr>
 <td><code>writtenAt</code></td>
@@ -359,7 +362,7 @@ your permissions the same way.</p>
 </thead>
 <tbody><tr>
 <td>An upload in the web interface</td>
-<td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. <a href="../archive/importing.html">Getting your photos in</a> has the ways to upload.</td>
+<td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. With the Archive, <a href="../archive/importing.html">Getting your photos in</a> has the ways to upload.</td>
 </tr>
 <tr>
 <td>Saving in the editor</td>
@@ -409,7 +412,7 @@ your permissions the same way.</p>
 <td>The same node under a second name. There is one copy of the bytes.</td>
 </tr>
 <tr>
-<td>Make a softlink, <code>ln -s</code>, or add a picture to an album from elsewhere</td>
+<td>Make a softlink, <code>ln -s</code>, or, with the Archive, add a picture to an album from elsewhere</td>
 <td>A link that points at the file by its path. It has no bytes of its own.</td>
 </tr>
 <tr>
@@ -489,8 +492,8 @@ mount</code></pre></div>
 <p>A <code>filesystem</code> mount shows a folder of the machine, and an <code>sftp</code> mount shows a folder of another
 machine. Both are mirrors: their files are the other side&#39;s files, and nothing is stored about them
 in EiN. A file in a mirror cannot have children, so EiN makes no thumbnails, reads no dates and
-finds no faces in them, and changes in an <code>sftp</code> mount start no pipelines at all. To bring files
-from a mount into the archive, copy them into staging.</p>
+finds no faces in them, and changes in an <code>sftp</code> mount start no pipelines at all. With the Archive, to
+bring files from a mount into the archive, copy them into staging.</p>
 <p>Only the administrator mounts and unmounts. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Reaching other machines</a>
 shows how to mount a folder of another machine and keep the mount across restarts, and
 <a href="tree.html">The tree</a> describes every standard path.</p>
@@ -526,7 +529,7 @@ how to make room.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td>A picture&#39;s thumbnail is missing although the picture was read long ago</td>
+<td>With the Archive, a picture&#39;s thumbnail is missing although the picture was read long ago</td>
 <td>Its rendition was never finished, or its bytes on the <code>volatile</code> tier are gone.</td>
 <td>Run <code>regenerate --force</code> on the picture or its album. See <a href="../archive/commands.html#regenerate">regenerate</a>.</td>
 </tr>
@@ -537,7 +540,7 @@ how to make room.</p>
 </tr>
 <tr>
 <td><code>File is frozen and cannot be modified</code></td>
-<td>The file is marked <code>frozen</code>, as the importer marks the originals it links to in <code>old</code>.</td>
+<td>The file is marked <code>frozen</code>, as the Importer marks the originals it links to in <code>old</code>.</td>
 <td>Leave its content as it is. Someone who may change the file can lift the mark with <code>attrs -d frozen &lt;file&gt;</code>; a copy made with <code>cp</code> is frozen too.</td>
 </tr>
 <tr>

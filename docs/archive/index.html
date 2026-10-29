@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>stub – EiN documentation</title>
-    <meta name="description" content="This page is being written.">
+    <title>The Archive – EiN documentation</title>
+    <meta name="description" content="The Archive is the module that makes EiN a family archive: albums of photos, videos, recordings and documents, the people in them and the family tree, the places they were taken, and the devices that took them. This page is for anyone deciding whether to install it and for anyone starting to use it: what it needs, how to install it, what it adds to EiN, and where to begin. The pages in this section apply once the Archive is installed.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/archive/">
-    <meta property="og:title" content="stub – EiN documentation">
-    <meta property="og:description" content="This page is being written.">
+    <meta property="og:title" content="The Archive – EiN documentation">
+    <meta property="og:description" content="The Archive is the module that makes EiN a family archive: albums of photos, videos, recordings and documents, the people in them and the family tree, the places they were taken, and the devices that took them. This page is for anyone deciding whether to install it and for anyone starting to use it: what it needs, how to install it, what it adds to EiN, and where to begin. The pages in this section apply once the Archive is installed.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -81,13 +81,219 @@
       </aside>
 
       <main id="main" class="docs-main">
-        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">stub</span></button>
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">The Archive</span></button>
         <header class="docs-head">
           <p class="crumb">Archive</p>
-          <h1>stub</h1>
+          <h1>The Archive</h1>
         </header>
         <article class="prose">
-<p>This page is being written.</p>
+<p>The Archive is the module that makes EiN a family archive: albums of photos, videos, recordings and
+documents, the people in them and the family tree, the places they were taken, and the devices that
+took them. This page is for anyone deciding whether to install it and for anyone starting to use
+it: what it needs, how to install it, what it adds to EiN, and where to begin. The pages in this
+section apply once the Archive is installed.</p>
+<h2 id="what-it-is-for">What it is for<a class="anchor" href="#what-it-is-for" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it gives you</th>
+<th>Covered on</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Albums and media</td>
+<td>Albums that hold photos, videos, audio recordings and documents, the Media feed and the Year page, labels, and the viewer</td>
+<td><a href="albums.html">Albums</a>, <a href="media.html">Media, Year and labels</a>, <a href="viewer.html">Viewing photos, videos and recordings</a></td>
+</tr>
+<tr>
+<td>Staging</td>
+<td>A private place for each person, where uploads wait, get their dates and places read, and are grouped into suggested albums to file</td>
+<td><a href="importing.html">Getting your photos in</a>, <a href="staging.html">Sorting in staging</a></td>
+</tr>
+<tr>
+<td>People and the family</td>
+<td>People, the faces found in pictures, the family tree, events in their lives and the homes they lived in</td>
+<td><a href="people.html">People and faces</a>, <a href="family.html">Family tree, events and homes</a></td>
+</tr>
+<tr>
+<td>Locations and the map</td>
+<td>Named places with outlines on the map, and pictures placed by their GPS position</td>
+<td><a href="places.html">Locations and the map</a></td>
+</tr>
+<tr>
+<td>Devices and GPS tracks</td>
+<td>The cameras, phones and trackers that took pictures or recorded routes, their owners and clocks</td>
+<td><a href="devices.html">Devices and GPS tracks</a></td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Finding pictures by what they show, say and contain, and the albums, people, locations and devices they belong to</td>
+<td><a href="search.html">Searching your pictures</a></td>
+</tr>
+<tr>
+<td>Home</td>
+<td>On this day, News and Events on the Home page, and the life-event charts on the Statistics page</td>
+<td><a href="home.html">Memories, news and events on Home</a></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>The <code>ems</code> module.</strong> The Archive reaches the media service through it. EiN installs <code>ems</code> along
+with the Archive.</li>
+<li><strong>The media service</strong>, a separate container beside EiN that reads dates and places, makes the
+previews, and finds faces, text and speech. Installing the module does not install it: the
+installer&#39;s <code>--ems</code> option does. Without it, the Archive installs and uploads arrive, but nothing
+gets thumbnails, dates, faces or searchable text, and uploads wait in staging as <strong>being
+prepared</strong> until the service is there. <a href="../ems/index.html">The media service</a> covers it.</li>
+</ul>
+<p>A language model is optional. With the assistant module&#39;s model, the search box also reads people
+and places out of a sentence; see <a href="search.html#write-what-you-are-looking-for">Searching your pictures</a>.</p>
+<h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
+<p>Installing takes an administrator. Any of these installs the Archive with the <code>ems</code> module:</p>
+<ul>
+<li><p><strong>At the install</strong>, with the installer&#39;s <code>--module archive</code>, together with <code>--ems</code> for the media
+service:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code></pre></div>
+<p>On an EiN that is already installed, <code>~/ein/setup.sh --ems --module archive</code> does the same.
+Without <code>--ems</code>, the installer&#39;s <code>archive</code> line says <code>low</code> and reminds you that the Archive needs
+the media service.</p>
+</li>
+<li><p><strong>In the web interface</strong>: open <strong>Settings → Modules</strong>, choose the <strong>Published modules</strong> button
+beside the filter, and choose <strong>Install</strong> beside <code>archive</code>. When it brings <code>ems</code> along, EiN says
+&quot;Installed, with ems&quot;.</p>
+</li>
+<li><p><strong>In the terminal</strong>, as the administrator:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mod install archive</code></pre></div>
+</li>
+</ul>
+<p>Its pages appear in the sidebar without a reload. <a href="../admin/modules.html">Modules</a> covers installing,
+updating and removing modules, and <a href="../admin/install.html">Installing in detail</a> the installer&#39;s
+options.</p>
+<h2 id="what-it-adds-to-the-interface">What it adds to the interface<a class="anchor" href="#what-it-adds-to-the-interface" aria-label="Link to this section"></a></h2>
+<p>In the sidebar:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Entries</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(top)</td>
+<td><strong>Media</strong>, and <strong>Staging</strong> when you are signed in</td>
+</tr>
+<tr>
+<td><strong>Explore</strong></td>
+<td><strong>Year</strong> and <strong>Map</strong>, beside EiN&#39;s own <strong>Search</strong></td>
+</tr>
+<tr>
+<td><strong>Browse</strong></td>
+<td><strong>Albums</strong>, <strong>People</strong>, <strong>Locations</strong> and <strong>Devices</strong></td>
+</tr>
+</tbody></table>
+</div>
+<p>In the top bar:</p>
+<ul>
+<li>The <strong>Create</strong> menu gets <strong>Import media</strong> (when you are signed in), <strong>Album</strong>, <strong>Person</strong>,
+<strong>Location</strong> and <strong>Device</strong>.</li>
+<li>The account menu gets <strong>Favourites</strong>.</li>
+<li><strong>Random album</strong>, the button with two crossing arrows beside the search box, opens an album at
+random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same.</li>
+</ul>
+<p>In EiN&#39;s own pages:</p>
+<ul>
+<li><strong>Home</strong>: the Archive fills <strong>On this day</strong>, <strong>News</strong> and <strong>Events</strong>, and offers <strong>Import media</strong>
+under an empty News when you are signed in; see <a href="home.html">Memories, news and events on Home</a>.</li>
+<li><strong>Statistics</strong>: the <strong>Events</strong> section, with births, engagements, marriages and deaths by month.</li>
+<li><strong>Search</strong>: the <strong>People</strong>, <strong>Locations</strong>, <strong>Years</strong> and <strong>Labels</strong> rows before you search, and,
+when you are signed in, the pictures that look like a label in a search for that one label; see
+<a href="search.html">Searching your pictures</a>.</li>
+<li><strong>Nodes</strong>: a <strong>Duplicates</strong> tab among the page&#39;s tools, for the folder that is open.</li>
+<li><strong>The finder</strong> in the top bar finds albums, people, locations and devices by name, and offers
+<strong>Pictures of &quot;…&quot;</strong> to search the Media page.</li>
+</ul>
+<p><a href="../guide/interface.html">Finding your way around</a> shows where each of these sits.</p>
+<h2 id="where-its-content-lives">Where its content lives<a class="anchor" href="#where-its-content-lives" aria-label="Link to this section"></a></h2>
+<p>The Archive keeps its content in the tree: in folders under <code>/archive</code> that it makes when it is set
+up, and in a staging folder in each person&#39;s home:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What is there</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/archive/albums</code></td>
+<td>Albums, and the photos, videos, recordings and documents in them</td>
+</tr>
+<tr>
+<td><code>/archive/people</code></td>
+<td>People, with their family, homes, events and devices</td>
+</tr>
+<tr>
+<td><code>/archive/locations</code></td>
+<td>Locations, each with its outline on the map</td>
+</tr>
+<tr>
+<td><code>/archive/devices</code></td>
+<td>Cameras, phones and GPS trackers, each with the route it recorded</td>
+</tr>
+<tr>
+<td><code>~/staging</code></td>
+<td>In each person&#39;s home, such as <code>/home/helen/staging</code>: uploads waiting to be sorted, seen by nobody else</td>
+</tr>
+</tbody></table>
+</div>
+<p>Removing the module never removes the folders under <code>/archive</code>, since they hold the content.
+<a href="../concepts/tree.html#archive-the-content">The tree</a> describes them, and the labels in
+<code>/archive/tags</code>, which are EiN&#39;s own.</p>
+<h2 id="start-using-it">Start using it<a class="anchor" href="#start-using-it" aria-label="Link to this section"></a></h2>
+<ol>
+<li><strong>Upload.</strong> In the top bar, open <strong>Create</strong> (the plus) and choose <strong>Import media</strong>. Choose
+<strong>Inbox</strong> under <strong>Into which category?</strong>, click <strong>Choose files</strong> or <strong>Choose a folder</strong>, and
+click <strong>Upload</strong>. Keep the tab open until the <strong>Uploads</strong> button in the top bar says it is done.
+For more than about 10,000 files, copy them over SFTP instead. See
+<a href="importing.html">Getting your photos in</a>.</li>
+<li><strong>Sort in staging.</strong> A few minutes after the files are prepared, open <strong>Staging</strong> in the sidebar,
+then the category, then <strong>Sort</strong>. Each group shows its proposal, such as <strong>New album “…”</strong>,
+which <kbd>Enter</kbd> accepts on a computer; or choose <strong>New album…</strong> in the group&#39;s ⋯ menu,
+check the <strong>Name</strong> and choose <strong>Create album</strong>. The pictures leave staging for the album, which is now under <strong>Albums</strong>. Every
+decision can be undone. See <a href="staging.html">Sorting in staging</a>.</li>
+<li><strong>Share an album.</strong> Open the album and choose <strong>Share</strong> in its header. Under <strong>Who can see it</strong>,
+<strong>Default</strong> lets everyone with an account see it, and <strong>Private</strong> only its owner; for someone
+without an account, choose <strong>Create link</strong> under <strong>Share with a link</strong>. See
+<a href="../guide/sharing.html">Sharing</a>.</li>
+</ol>
+<p>Then name the people in your pictures (<a href="people.html">People and faces</a>), and find what you have
+(<a href="search.html">Searching your pictures</a>). An administrator setting EiN up for a family finds the
+whole order of steps on <a href="../start/first-steps.html">First steps</a>.</p>
+<h2 id="pages-in-this-section">Pages in this section<a class="anchor" href="#pages-in-this-section" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="importing.html">Getting your photos in</a>: Import media, dropping files, SFTP, zips and Google
+Takeout.</li>
+<li><a href="staging.html">Sorting in staging</a>: filing uploads into albums.</li>
+<li><a href="duplicates.html">Duplicates</a>: copies, look-alikes and bursts, and removing them.</li>
+<li><a href="dates-places.html">Dates and places of pictures</a>: when and where each picture was taken, and
+setting them right.</li>
+<li><a href="albums.html">Albums</a>: making, editing and arranging albums.</li>
+<li><a href="viewer.html">Viewing photos, videos and recordings</a>: the viewer, its details panel and slideshow.</li>
+<li><a href="media.html">Media, Year and labels</a>: the Media feed, the Year page and labels.</li>
+<li><a href="search.html">Searching your pictures</a>: finding pictures and what they belong to.</li>
+<li><a href="people.html">People and faces</a>: people, and naming the faces found in pictures.</li>
+<li><a href="family.html">Family tree, events and homes</a>: how people are related, and their lives.</li>
+<li><a href="places.html">Locations and the map</a>: places, their outlines and the map.</li>
+<li><a href="devices.html">Devices and GPS tracks</a>: cameras, phones and trackers, and their routes.</li>
+<li><a href="home.html">Memories, news and events on Home</a>: what the Archive shows on Home and Statistics.</li>
+<li><a href="file-types.html">Supported files</a>: the files the Archive reads.</li>
+<li><a href="processing.html">Processing pictures</a>: the work done on every file, for administrators.</li>
+<li><a href="staging-admin.html">Staging for administrators</a>: staging areas, large imports and repairs.</li>
+<li><a href="commands.html">Archive commands</a>: the Archive&#39;s commands in the terminal.</li>
+</ul>
 
         </article>
         <footer class="docs-foot">
@@ -95,7 +301,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-is-for">What it is for</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li><a href="#what-it-adds-to-the-interface">What it adds to the interface</a></li><li><a href="#where-its-content-lives">Where its content lives</a></li><li><a href="#start-using-it">Start using it</a></li><li><a href="#pages-in-this-section">Pages in this section</a></li></ul></aside>
     </div>
   </body>
 </html>

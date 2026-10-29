@@ -15,7 +15,7 @@ http://ein.local:8080/people/helen-okafor?tab=faces
 └──── where EiN is ──┘└────── path ──────┘└─ query ─┘
 ```
 
-- The path says which page: `/people/helen-okafor` is Helen Okafor's page.
+- The path says which page: `/people/helen-okafor` is Helen Okafor's page, one of the Archive's.
 - The query, after `?`, says how the page looks: `tab=faces` opens it on **Faces**. Several
   parameters are joined with `&`.
 - A part that holds a path in the tree, such as an album's, is URL-encoded: `/` becomes `%2F` and a
@@ -25,9 +25,11 @@ http://ein.local:8080/people/helen-okafor?tab=faces
 Copy the address from the browser's address bar to share or bookmark what you see. Someone who
 opens it sees the same page, as far as their own permissions let them.
 
-The pages come from EiN itself and from its [modules](../admin/modules.md). The lists below are
-those of an installation with the Archive, the Assistant and the media service. A module that is not
-installed brings none of its addresses, and opening one shows **Nothing here**.
+The pages come from EiN itself and from its [modules](../admin/modules.md). Core's addresses come
+first on this page; after them each module's addresses and parameters are grouped under it: the
+[Archive](#the-archives-pages), the [Assistant](#the-assistants-pages) and the
+[media service](#the-media-services-pages). A module that is not installed brings none of its
+addresses, and opening one shows **Nothing here**.
 
 ## Pages, dialogs, the side panel and full screen
 
@@ -40,13 +42,13 @@ The same address can be shown four ways. Which one depends on how you open it, n
 | The side panel beside the page | The top bar's **Chat** button                                                   | No                        |
 | Full screen                    | A picture, video or recording opened from a grid, a memory on the home page     | Yes, as `?fullscreen=`    |
 
-**Create New → Person** opens `/people/new` in a dialog; typing `/people/new` into the address bar
-opens the same form as a page. In the same way, `/chat` is the side panel from the top bar and a
-full page from the sidebar. On a phone, what would open in the side panel opens in a dialog
+Modules give the entries: with the Archive, **Create New → Person** opens `/people/new` in a dialog,
+and typing `/people/new` into the address bar opens the same form as a page. In the same way, with
+the Assistant, `/chat` is the side panel from the top bar and a full page from the sidebar. On a phone, what would open in the side panel opens in a dialog
 instead. [Finding your way around](../guide/interface.md) shows each of these.
 
-Full screen is the one kind that lives in the address. When you open a picture from an album, the
-address keeps the album and adds the picture:
+Full screen is the one kind that lives in the address. When you open a picture from one of the
+Archive's albums, the address keeps the album and adds the picture:
 
 ```text
 /albums/%2Farchive%2Falbums%2FMalpas%201979?fullscreen=%2Fmedia%2F%252Farchive%252F…
@@ -79,7 +81,147 @@ administrator turns on [`CFG_GUEST_BROWSING`](settings.md#cfg_guest_browsing). A
 in" always asks a visitor to sign in first. What each person then sees on a page follows the
 permissions on the nodes behind it; see [Permissions in depth](../admin/permissions.md).
 
+## Parameters
+
+A parameter that is missing, or holds a value the page does not know, is ignored: the page opens as
+it would without it. You never get an error for a mistyped parameter.
+
+### Tabs
+
+Pages with tabs keep the open tab in `tab`. An address without `tab` opens the first one.
+
+| Page        | Values of `tab` (default first)                                                                                                                          |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/profile`  | `account` (**Account**), `preferences` (**Preferences**), `security` (**Security**)                                                                      |
+| `/settings` | `system` (**System**), `users` (**Users**), `groups` (**Groups**), `permissions` (**Permissions**), `modules` (**Modules**)                              |
+| `/system`   | `overview` (**Overview**), `work` (**Work**), `ems.media-service` (**Media service**, with the `ems` module), `services` (**Services**), `log` (**Log**) |
+
+A module's pages keep their tabs the same way; their values are under the module below.
+
+On **Settings**, the first four tabs are for administrators. Anyone else who asks for one of them
+gets **Modules**, and an administrator who names no tab gets **System**.
+
+### Search
+
+**Search** keeps its whole search in the address, so a search can be linked to and survives a
+reload; the Archive's **Media** page takes the same parameters. The parameters are named after the flags of the
+[`search`](commands-core.md#search) command.
+
+| Parameter      | What it holds                                                                                                                    | Example                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `q`            | The words searched for                                                                                                           | `q=sailing`                          |
+| `kind`         | Kinds, separated by commas: `photo`, `video`, `audio`, `document`, `person`, `location`, `album`, `device`, `track`              | `kind=photo,video`                   |
+| `tag`          | Labels, separated by commas                                                                                                      | `tag=beach`                          |
+| `subject`      | A person, location or device that must be in it, as `<kind>:<name>` or a path; repeat it for several, all of which must be there | `subject=person:helen-okafor`        |
+| `subject-name` | Every subject of a kind whose name matches the words, as `<kind>:<words>`; repeatable                                            | `subject-name=person:Wrenfield`      |
+| `from`, `to`   | The first and last year, both included                                                                                           | `from=1975&to=1985`                  |
+| `bbox`         | A rectangle on the map: north, south, east, west                                                                                 | `bbox=50.3,50.2,-5.0,-5.1`           |
+| `circle`       | A circle on the map: latitude, longitude, radius in metres                                                                       | `circle=50.263,-5.051,2000`          |
+| `poly`         | A polygon: at least three `latitude,longitude` pairs separated by `;`                                                            | `poly=50.3,-5.1;50.3,-5.0;50.2,-5.0` |
+| `under`        | Only what one album or folder holds, by path                                                                                     | `under=/archive/albums/Malpas 1979`  |
+| `like`         | Pictures that look like this one, by path                                                                                        | `like=/archive/…/IMG_0412.jpg`       |
+| `sort`         | `score`, `time` (oldest first), `-time` (newest first) or `name`                                                                 | `sort=-time`                         |
+
+The kinds `person`, `location`, `album` and `device`, and a `subject`, find something only with the
+Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
+newest first:
+
+```text
+/media?kind=photo,video&subject=person:helen-okafor&from=1980&to=1989&sort=-time
+```
+
+Only one of `bbox`, `circle` and `poly` applies. **Search** with no parameters shows its landing
+page rather than searching for everything.
+
+### Other pages
+
+| Page                                 | Parameter     | What it does                                                                                               |
+| ------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------------- |
+| `/settings?tab=modules`              | `module`      | The module open, for example `module=archive`                                                              |
+| `/settings?tab=modules`              | `section`     | Its part: `dependencies`, `services`, `pages`, `commands`, `settings` or `types` (**About** when left out) |
+| `/settings?tab=modules`              | `published=1` | The modules published for installing                                                                       |
+| `/settings?tab=users`                | `user`        | The account open, by username                                                                              |
+| `/settings?tab=groups`               | `group`       | The group open, by name                                                                                    |
+| `/settings?tab=users`, `?tab=groups` | `new=1`       | The form for a new account or group                                                                        |
+| `/system/nodes`                      | `path`        | The path open in the explorer, for example `path=/archive`                                                 |
+| `/docs`                              | `find`        | The words in the documentation's search box                                                                |
+| `/login`                             | `next`        | Where to go after signing in                                                                               |
+
+## Links into the documentation
+
+The **Documentation** section has its own addresses. The reference pages are drawn from the
+installation you are on, so they list exactly what it has.
+
+| Address                | What it shows                                                               |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `/docs`                | The guide's overview                                                        |
+| `/docs/<path>`         | One guide page, by its URL-encoded path under `/usr/docs/guide`             |
+| `/docs/commands`       | Every command, see also [Commands](commands.md)                             |
+| `/docs/settings`       | Every setting with its current value, see also [Settings](settings.md)      |
+| `/docs/environment`    | The environment variables, see also [Environment variables](environment.md) |
+| `/docs/node-types`     | The node types, see also [Node types](node-types.md)                        |
+| `/docs/modules`        | What is installed                                                           |
+| `/docs/modules/<name>` | One installed module, for example `/docs/modules/archive`                   |
+
+The reference pages have an anchor for every entry, which scrolls to it and marks it for a moment:
+
+| Entry       | Address                                                                         |
+| ----------- | ------------------------------------------------------------------------------- |
+| A command   | `/docs/commands#cmd-<name>`, for example `/docs/commands#cmd-share-link`        |
+| A setting   | `/docs/settings#set-<KEY>`, for example `/docs/settings#set-CFG_GUEST_BROWSING` |
+| A node type | `/docs/node-types#type-<type>`                                                  |
+
+## Signing in and share links
+
+### The return after signing in
+
+A visitor who opens a page they must sign in for is sent to the sign-in page, with the address they
+asked for in `next`:
+
+```text
+/login?next=%2Fpeople%2Fhelen-okafor%3Ftab%3Dfaces
+```
+
+After signing in they land on that page. `next` only leads to a page on the same EiN; anything else
+leads to **Home**. Someone already signed in who opens `/login` goes straight on to `next`, or to
+**Home**.
+
+### Share links
+
+A share link has the form `/s/<token>`, for example `http://ein.local:8080/s/` followed by a long
+string of letters and digits. You make one with **Share** in the interface, see
+[Sharing](../guide/sharing.md), or with [`share-link create`](commands-core.md#share-link) in the
+terminal.
+
+Opening it shows **Opening what was shared with you…** and then the page of what was shared,
+such as the album's address. Where visitors may not browse, the visitor stays on what the link
+opens: other pages ask them to sign in. A link that has expired or been turned off shows **This link no longer works** with a
+**Sign in** button.
+
+## Other addresses the server answers
+
+Besides the pages, EiN's web server answers a few addresses that programs use rather than people.
+You meet them in links to files, in scripts, and in a reverse proxy's configuration
+([Ports, HTTPS and remote access](../admin/network.md)).
+
+| Address                          | Method        | What it does                                                                                                  |
+| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                    |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                          |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                       |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
+| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
+| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                          |
+| `/__shell`                       |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket                    |
+
+Any other path that is not a file of the web interface returns the interface itself, which then
+shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
+gets `sign in first` from `/file/` and `/archive/`.
+
 ## The Archive's pages
+
+These addresses exist with the [Archive](../archive/index.md) installed.
 
 Addresses with `<name>` take the name of the node in the tree. A person's or a place's is its name
 in lower case with hyphens: Helen Okafor is `/people/helen-okafor`. A device's keeps its capitals and
@@ -147,74 +289,23 @@ its own too, which is mostly useful for linking to it.
 | `/news/album`, `/onthisday/media`, `/events/anniversary`                     | Entries of the home page; the home page writes their parameters                       |
 | `/map/pins`                                                                  | Pins on a small map, under an answer in the chat                                      |
 
-## The Assistant's and the media service's pages
+### Parameters of the Archive's pages
 
-| Address                 | What it shows                                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------------------------- |
-| `/chat`                 | **Chat** with your latest conversation, see [Chatting with the assistant](../assistant/chat.md) |
-| `/chat/<id>`            | One conversation; the address follows when you switch conversations                             |
-| `/chart`                | A chart the chat draws under an answer; its parameters come from the chat                       |
-| `/about/language-model` | The language model, as **About EiN** shows it                                                   |
-| `/system/media-service` | The media service, the **Media service** tab of the **Dashboard**                               |
-| `/system/gpu`           | The graphics card, a part of the **Dashboard**'s overview                                       |
-| `/about/media-service`  | The media service, as **About EiN** shows it                                                    |
+The **Media** page takes the parameters of [Search](#search).
 
-## Parameters
-
-A parameter that is missing, or holds a value the page does not know, is ignored: the page opens as
-it would without it. You never get an error for a mistyped parameter.
-
-### Tabs
-
-Pages with tabs keep the open tab in `tab`. An address without `tab` opens the first one.
+#### Tabs
 
 | Page                | Values of `tab` (default first)                                                                                                                             |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/profile`          | `account` (**Account**), `preferences` (**Preferences**), `security` (**Security**)                                                                         |
-| `/settings`         | `system` (**System**), `users` (**Users**), `groups` (**Groups**), `permissions` (**Permissions**), `modules` (**Modules**)                                 |
-| `/system`           | `overview` (**Overview**), `work` (**Work**), `ems.media-service` (**Media service**), `services` (**Services**), `log` (**Log**)                           |
 | `/people/<name>`    | `timeline` (**Timeline**), `info` (**Info**), `media` (**Media**), `faces` (**Faces**), `voices` (**Heard in**), `family` (**Family**), `homes` (**Homes**) |
 | `/albums/<path>`    | `media` (**Media**), `map` (**Map**), `info` (**Info**)                                                                                                     |
 | `/locations/<name>` | `info` (**Info**), `timeline` (**Timeline**), `media` (**Media**), `residents` (**Residents**)                                                              |
 | `/devices/<name>`   | `info` (**Info**), `timeline` (**Timeline**), `media` (**Media**), `track` (**Track**), `owners` (**Owners**)                                               |
 | `/staging`          | `sort` (**Sort**), `duplicates` (**Duplicates**), `files` (**Files**), `done` (**Done**)                                                                    |
 
-On **Settings**, the first four tabs are for administrators. Anyone else who asks for one of them
-gets **Modules**, and an administrator who names no tab gets **System**.
+#### Map
 
-### Search and Media
-
-**Search** and **Media** keep their whole search in the address, so a search can be linked to and
-survives a reload. The parameters are named after the flags of the
-[`search`](commands-core.md#search) command.
-
-| Parameter      | What it holds                                                                                                                    | Example                              |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `q`            | The words searched for                                                                                                           | `q=sailing`                          |
-| `kind`         | Kinds, separated by commas: `photo`, `video`, `audio`, `document`, `person`, `location`, `album`, `device`, `track`              | `kind=photo,video`                   |
-| `tag`          | Labels, separated by commas                                                                                                      | `tag=beach`                          |
-| `subject`      | A person, location or device that must be in it, as `<kind>:<name>` or a path; repeat it for several, all of which must be there | `subject=person:helen-okafor`        |
-| `subject-name` | Every subject of a kind whose name matches the words, as `<kind>:<words>`; repeatable                                            | `subject-name=person:Wrenfield`      |
-| `from`, `to`   | The first and last year, both included                                                                                           | `from=1975&to=1985`                  |
-| `bbox`         | A rectangle on the map: north, south, east, west                                                                                 | `bbox=50.3,50.2,-5.0,-5.1`           |
-| `circle`       | A circle on the map: latitude, longitude, radius in metres                                                                       | `circle=50.263,-5.051,2000`          |
-| `poly`         | A polygon: at least three `latitude,longitude` pairs separated by `;`                                                            | `poly=50.3,-5.1;50.3,-5.0;50.2,-5.0` |
-| `under`        | Only what one album or folder holds, by path                                                                                     | `under=/archive/albums/Malpas 1979`  |
-| `like`         | Pictures that look like this one, by path                                                                                        | `like=/archive/…/IMG_0412.jpg`       |
-| `sort`         | `score`, `time` (oldest first), `-time` (newest first) or `name`                                                                 | `sort=-time`                         |
-
-For example, every picture and video of Helen Okafor from the 1980s, newest first:
-
-```text
-/media?kind=photo,video&subject=person:helen-okafor&from=1980&to=1989&sort=-time
-```
-
-Only one of `bbox`, `circle` and `poly` applies. **Search** with no parameters shows its landing
-page rather than searching for everything.
-
-### Map
-
-The map keeps where you look, the layers and the filters in the address. What is at its default is
+The **Map** page keeps where you look, the layers and the filters in the address. What is at its default is
 left out, so a plain `/map` stays plain.
 
 | Parameter                   | What it holds                                                                | Default   |
@@ -231,7 +322,7 @@ left out, so a plain `/map` stays plain.
 /map?c=50.26300,-5.05100&z=13&layers=media,tracks&from=1979&to=1979&base=Satellite
 ```
 
-### Other pages
+#### Other parameters
 
 | Page                                           | Parameter            | What it does                                                                                                                             |
 | ---------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -247,66 +338,27 @@ left out, so a plain `/map` stays plain.
 | `/staging`                                     | `g`                  | On **Sort**: the group open, for example `g=auto-2019-06-14`                                                                             |
 | `/staging`                                     | `dir`, `view=folder` | On **Files**: the folder open, and the folder view                                                                                       |
 | `/staging/categories/new`                      | `kind`, `move`       | The kind of the new category, and a staged folder to move into it                                                                        |
-| `/settings?tab=modules`                        | `module`             | The module open, for example `module=archive`                                                                                            |
-| `/settings?tab=modules`                        | `section`            | Its part: `dependencies`, `services`, `pages`, `commands`, `settings` or `types` (**About** when left out)                               |
-| `/settings?tab=modules`                        | `published=1`        | The modules published for installing                                                                                                     |
-| `/settings?tab=users`                          | `user`               | The account open, by username                                                                                                            |
-| `/settings?tab=groups`                         | `group`              | The group open, by name                                                                                                                  |
-| `/settings?tab=users`, `?tab=groups`           | `new=1`              | The form for a new account or group                                                                                                      |
-| `/system/nodes`                                | `path`               | The path open in the explorer, for example `path=/archive/albums`                                                                        |
-| `/docs`                                        | `find`               | The words in the documentation's search box                                                                                              |
-| `/login`                                       | `next`               | Where to go after signing in                                                                                                             |
 
-## Links into the documentation
+## The Assistant's pages
 
-The **Documentation** section has its own addresses. The reference pages are drawn from the
-installation you are on, so they list exactly what it has.
+These addresses exist with the [Assistant](../assistant/index.md) installed.
 
-| Address                | What it shows                                                               |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `/docs`                | The guide's overview                                                        |
-| `/docs/<path>`         | One guide page, by its URL-encoded path under `/usr/docs/guide`             |
-| `/docs/commands`       | Every command, see also [Commands](commands.md)                             |
-| `/docs/settings`       | Every setting with its current value, see also [Settings](settings.md)      |
-| `/docs/environment`    | The environment variables, see also [Environment variables](environment.md) |
-| `/docs/node-types`     | The node types, see also [Node types](node-types.md)                        |
-| `/docs/modules`        | What is installed                                                           |
-| `/docs/modules/<name>` | One installed module, for example `/docs/modules/archive`                   |
+| Address                 | What it shows                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `/chat`                 | **Chat** with your latest conversation, see [Chatting with the assistant](../assistant/chat.md) |
+| `/chat/<id>`            | One conversation; the address follows when you switch conversations                             |
+| `/chart`                | A chart the chat draws under an answer; its parameters come from the chat                       |
+| `/about/language-model` | The language model, as **About EiN** shows it                                                   |
 
-The reference pages have an anchor for every entry, which scrolls to it and marks it for a moment:
+## The media service's pages
 
-| Entry       | Address                                                                         |
-| ----------- | ------------------------------------------------------------------------------- |
-| A command   | `/docs/commands#cmd-<name>`, for example `/docs/commands#cmd-share-link`        |
-| A setting   | `/docs/settings#set-<KEY>`, for example `/docs/settings#set-CFG_GUEST_BROWSING` |
-| A node type | `/docs/node-types#type-<type>`                                                  |
+The `ems` module, which the Archive brings along, adds these; see [The media service](../ems/index.md).
 
-## Signing in and share links
-
-### The return after signing in
-
-A visitor who opens a page they must sign in for is sent to the sign-in page, with the address they
-asked for in `next`:
-
-```text
-/login?next=%2Fpeople%2Fhelen-okafor%3Ftab%3Dfaces
-```
-
-After signing in they land on that page. `next` only leads to a page on the same EiN; anything else
-leads to **Home**. Someone already signed in who opens `/login` goes straight on to `next`, or to
-**Home**.
-
-### Share links
-
-A share link has the form `/s/<token>`, for example `http://ein.local:8080/s/` followed by a long
-string of letters and digits. You make one with **Share** in the interface, see
-[Sharing](../guide/sharing.md), or with [`share-link create`](commands-core.md#share-link) in the
-terminal.
-
-Opening it shows **Opening what was shared with you…** and then the page of what was shared,
-such as the album's address. Where visitors may not browse, the visitor stays on what the link
-opens: other pages ask them to sign in. A link that has expired or been turned off shows **This link no longer works** with a
-**Sign in** button.
+| Address                 | What it shows                                                     |
+| ----------------------- | ----------------------------------------------------------------- |
+| `/system/media-service` | The media service, the **Media service** tab of the **Dashboard** |
+| `/system/gpu`           | The graphics card, a part of the **Dashboard**'s overview         |
+| `/about/media-service`  | The media service, as **About EiN** shows it                      |
 
 ## When an address does not open
 
@@ -325,27 +377,6 @@ After an administrator installs or updates a module, its pages reach the browser
 rebuilt them with [`ui-build`](commands-core.md#ui-build), which it does after `mod install`,
 `mod setup` and `mod remove`, and when it starts. An open tab
 picks them up when you reload it.
-
-## Other addresses the server answers
-
-Besides the pages, EiN's web server answers a few addresses that programs use rather than people.
-You meet them in links to files, in scripts, and in a reverse proxy's configuration
-([Ports, HTTPS and remote access](../admin/network.md)).
-
-| Address                          | Method        | What it does                                                                                                  |
-| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
-| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                    |
-| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                          |
-| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on |
-| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                       |
-| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
-| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
-| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                          |
-| `/__shell`                       |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket                    |
-
-Any other path that is not a file of the web interface returns the interface itself, which then
-shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
-gets `sign in first` from `/file/` and `/archive/`.
 
 ## Related pages
 

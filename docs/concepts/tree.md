@@ -5,6 +5,10 @@ paths: what lies where, who owns each part, which parts modules add, and which p
 somewhere else. Read it when you browse in the terminal, over SFTP or on the **Nodes** page and want
 to know what you are looking at.
 
+The examples use folders such as `/archive/albums` and `/archive/people`, which exist with the
+[Archive](../archive/index.md) installed; an EiN without modules has the rest of the tree as
+described.
+
 ## The top of the tree
 
 A fresh installation has seven folders at the top:
@@ -22,7 +26,7 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 
 | Folder     | What it holds                                                                                             | Who writes there                                          |
 | ---------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `/archive` | What EiN is for: albums, people, locations, devices and labels                                            | Everyone with an account, as each folder's sharing allows |
+| `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and devices                       | Everyone with an account, as each folder's sharing allows |
 | `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging | Each account in its own folder                            |
 | `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the web interface | The administrator, and commands such as `config set`      |
 | `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs           | EiN itself                                                |
@@ -61,7 +65,7 @@ every account belongs to, may list it. The folders a module makes are `0775`, ow
 the group `users`, so everyone with an account may add content there. What each album, person or
 location then shows to whom is its own sharing; see [Sharing](../guide/sharing.md).
 
-A photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
+With the Archive, a photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
 thumbnails and the faces found on it, is kept beneath the photo and goes with it when it is moved
 or deleted. [Nodes and node types](nodes.md) describes what a node holds.
 
@@ -90,7 +94,7 @@ there is shared with others until you share it.
 Most of these appear only once something needs them. Names starting
 with a dot are left out by `ls`; `ls -A`, or its alias `la`, shows them.
 
-Your staging folder has the mode `0700`, and its files stay out of everyone else's view, search
+With the Archive, your staging folder has the mode `0700`, and its files stay out of everyone else's view, search
 included. It has four folders of its own:
 
 | Path in `staging/`   | What it holds                                                |
@@ -100,8 +104,8 @@ included. It has four folders of its own:
 | `journal/`           | What you decided in staging                                  |
 | `routes/`            | GPX files waiting for the device that recorded them          |
 
-Neither your staging nor your trash is part of the library: search, the Media and Year pages, the
-map and **On this day** leave out everything in them.
+Neither your trash nor, with the Archive, your staging is part of the library: search, and the
+Archive's Media and Year pages, map and **On this day**, leave out everything in them.
 
 ## /etc: accounts and settings
 
@@ -144,7 +148,7 @@ so `ls /var` reads the same on a fresh instance as on one that has run for a yea
 | `/var/sessions`              | The open sessions: one node per session, from a browser or over SSH                |
 | `/var/links`                 | Share links: one node per link that opens something without an account             |
 | `/var/queues`                | Queues of events waiting to be handled, the pipeline engine's in `pipeline-engine` |
-| `/var/pools`                 | Pools of jobs waiting for a worker, such as those for the media service            |
+| `/var/pools`                 | Pools of jobs waiting for a worker, such as the Archive's for the media service    |
 | `/var/pipelines/definitions` | The pipelines the modules define                                                   |
 | `/var/pipelines/instances`   | The pipeline runs, finished and in progress                                        |
 | `/var/www`                   | The sites the web server serves, as links to the web interface                     |
@@ -186,7 +190,7 @@ moment.
 ## Find a folder by its variable
 
 Every shell has a variable for each standard folder, so a script does not have to spell the path
-out:
+out. On an EiN with the Archive installed:
 
 ```bash
 # in EiN's terminal
@@ -304,7 +308,7 @@ and `scp`, as [SSH and SFTP](../shell/ssh-sftp.md) describes.
 ## What you see is yours to see
 
 A folder lists only what you may read. Something private to someone else is not listed to you at
-all, so two people can see the same album differently, and a folder can look empty to you and not be.
+all, so two people can see the same folder differently, and a folder can look empty to you and not be.
 An administrator sees everything. [Permissions in depth](../admin/permissions.md) has the rules, and
 [Links](links.md) explains the links that put one node in several folders, such as a label's or a
 favourite's.
@@ -315,7 +319,7 @@ favourite's.
 **Settings → Modules**; see [Modules](../admin/modules.md).
 
 **A file I put in `/tmp` is gone.** `/tmp` is kept in memory and emptied when EiN restarts, and a
-file left directly in it is removed after a day. Keep what you need in your home or in an album.
+file left directly in it is removed after a day. Keep what you need in your home or, with the Archive, in an album.
 
 **`mount: permission denied, only admin is allowed to mount`.** Mounting is for the administrator.
 

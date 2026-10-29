@@ -9,6 +9,10 @@ The **Share** dialog sets all of this without numbers, and [Sharing](../guide/sh
 it for everyone in the family. Accounts and groups themselves are made on
 [Accounts and groups](accounts.md).
 
+The examples use albums such as `/archive/albums/Summer 1987`, which exist with the
+[Archive](../archive/index.md) installed. The commands and rules are core's, and work the same on
+any node, such as a folder under `/home`.
+
 ## The four parts of a node's access
 
 Like a file on Linux, every node carries:
@@ -28,8 +32,8 @@ What the three letters allow on a node:
 | `w` write   | Change it, its attributes, its mode and its access list. | Add to it and remove from it (with `x`).      |
 | `x` execute | —                                                        | Pass through it to what lies below.           |
 
-Any node can hold children here, so the folder column applies to albums, people, locations and
-files alike: a photo holds its thumbnails and metadata as children.
+Any node can hold children here, so the folder column applies to folders and files alike, and with
+the Archive to albums, people and locations: a photo holds its thumbnails and metadata as children.
 
 ### How EiN decides
 
@@ -48,7 +52,7 @@ takes anyone away; there is no entry that denies.
 
 > [!NOTE]
 > Write on a node is enough to change its mode and its access list. That is why **Can edit** in the
-> **Share** dialog also lets someone change who the album is shared with. Changing the owner is the
+> **Share** dialog also lets someone change who a node is shared with. Changing the owner is the
 > exception; see [Change the owner and the group](#change-the-owner-and-the-group).
 
 ## Who you are to EiN
@@ -221,19 +225,19 @@ share-set '/archive/albums/Summer 1987/IMG_0042.jpg' --mode 0700 -b --drop-links
 updated 214, kept own access 3, skipped 0, failed 0
 ```
 
-| Option               | What it does                                                                                                                                               |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--mode`             | The mode, octal or symbolic.                                                                                                                               |
-| `--owner`            | The owner, by name or uid. Administrators only.                                                                                                            |
-| `--group`            | The group, by name or gid: one you are in, unless you are an administrator.                                                                                |
-| `--default-owner`    | The configured default owner and group (see [What new albums start with](#what-new-albums-start-with)), applied by the server to every node you may write. |
-| `--reference <path>` | Share the node as another one is: its group, mode and access list. The owner stays.                                                                        |
-| `-m`, `-x`, `-b`     | Edit the access list, as `acl` does.                                                                                                                       |
-| `--drop-links`       | Remove share links' entries too, so no link opens the nodes.                                                                                               |
-| `--pin`, `--unpin`   | Hold the node against changes from further up, or let them reach it again.                                                                                 |
-| `--pinned-below`     | Change the pinned nodes below each path named, in place of the path itself.                                                                                |
-| `--no-recursive`     | Change only the node named.                                                                                                                                |
-| `--strict`           | Exit non-zero when any node below could not be changed.                                                                                                    |
+| Option               | What it does                                                                                                                                 |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--mode`             | The mode, octal or symbolic.                                                                                                                 |
+| `--owner`            | The owner, by name or uid. Administrators only.                                                                                              |
+| `--group`            | The group, by name or gid: one you are in, unless you are an administrator.                                                                  |
+| `--default-owner`    | The configured default owner and group (see [The default sharing](#the-default-sharing)), applied by the server to every node you may write. |
+| `--reference <path>` | Share the node as another one is: its group, mode and access list. The owner stays.                                                          |
+| `-m`, `-x`, `-b`     | Edit the access list, as `acl` does.                                                                                                         |
+| `--drop-links`       | Remove share links' entries too, so no link opens the nodes.                                                                                 |
+| `--pin`, `--unpin`   | Hold the node against changes from further up, or let them reach it again.                                                                   |
+| `--pinned-below`     | Change the pinned nodes below each path named, in place of the path itself.                                                                  |
+| `--no-recursive`     | Change only the node named.                                                                                                                  |
+| `--strict`           | Exit non-zero when any node below could not be changed.                                                                                      |
 
 `share-set` exits 0 when only some nodes below refused, and reports them in its counts and on
 standard error; it fails only when every path it was given refused. Every option is in the
@@ -242,8 +246,8 @@ standard error; it fails only when every path it was given refused. Every option
 ### Keep one photo's own sharing
 
 A pinned node keeps its access when a change comes from further up. A recursive change always
-writes the node it was aimed at, but passes over a pinned node and everything below it. This is what
-**Share** in an album's selection bar does when you give chosen photos sharing of their own, and how
+writes the node it was aimed at, but passes over a pinned node and everything below it. With the
+Archive, this is what **Share** in an album's selection bar does when you give chosen photos sharing of their own, and how
 one photo stays private in a shared album; see
 [Keep some photos private in a shared album](../guide/sharing.md#keep-some-photos-private-in-a-shared-album).
 
@@ -290,7 +294,7 @@ When a node is created and nothing names its access:
 | Mode        | Everything for the owner; read and pass-through for the group, plus write where the group could write the parent; for everyone else, only the read and pass-through the parent gives them. Others' write is never inherited. |
 | Access list | Its parent's, as a Linux default ACL carries down.                                                                                                                                                                           |
 
-So a family album's new uploads, and the thumbnails, faces and metadata processing adds under them,
+So, with the Archive, a family album's new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album's group and grants whoever created them: a person or group granted an album sees
 what is added to it later. What is made under `/home/<user>` stays in that user's group, and the
 system tree under `/` stays `0755`.
@@ -299,11 +303,13 @@ Moving a node with `mv` keeps its own access, as on Linux. Copying with `cp` is 
 destination: the copy takes the destination's group and keeps its source's mode, less group write
 where the new parent gives none and less everyone else's write.
 
-### What new albums start with
+### The default sharing
 
-A new album, made in the web interface or with `album create`, and what staging publishes start with the
-**default sharing**: an owner, a group and a mode, which an administrator sets under **Settings →
-Permissions**, on the **Sharing** card.
+The **default sharing** is an owner, a group and a mode for what is created as shared, which an
+administrator sets under **Settings → Permissions**, on the **Sharing** card. **Default** in the
+**Share** dialog and `share-set --default-owner` apply it to a node. With the Archive installed, a
+new album, made in the web interface or with `album create`, and what staging publishes start with
+it.
 
 ![The Permissions tab of Settings: the New users card with the Users group ticked, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty, Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750, and the Sign-in sessions card](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
 
@@ -313,13 +319,12 @@ Permissions**, on the **Sharing** card.
 | [`CFG_DEFAULT_SHARE_GROUP`](../reference/settings.md#cfg_default_share_group) | **Group**                                                                          | `users`                   |
 | [`CFG_DEFAULT_SHARE_MODE`](../reference/settings.md#cfg_default_share_mode)   | **Permissions**: **None**, **View** or **Edit** for owner, group and everyone else | `0750`                    |
 
-On a standard installation a new album is therefore owned by its creator, seen by everyone with an
+With the defaults, a new album is therefore owned by its creator, seen by everyone with an
 account and changed only by its owner. Each person narrows or widens that for what they create with
 **How widely what you create is shared** on their profile
 ([`CFG_USER_DEFAULT_SHARE`](../reference/settings.md#cfg_user_default_share)); see
-[Your profile](../guide/profile.md#how-widely-what-you-create-is-shared). **Default** in the
-**Share** dialog lets everyone with an account see a node, and `share-set --default-owner` gives it
-the configured default owner and group.
+[Your profile](../guide/profile.md#how-widely-what-you-create-is-shared). With the defaults,
+**Default** in the **Share** dialog lets everyone with an account see a node.
 
 The same settings in the terminal, in the octal form:
 
@@ -334,11 +339,11 @@ config set CFG_DEFAULT_SHARE_MODE 0750
 ## A folder governs what is under it
 
 Reaching a node by its path takes execute on every folder along the way, from `/` down. EiN applies
-the same rule wherever it finds a node without walking a path: search, the Media feed, the map, a
-person's faces, duplicates, links. A node shows up only when you may read it **and** at least one of
+the same rule wherever it finds a node without walking a path: search and links, and with the
+Archive the Media feed, the map, a person's faces and duplicates. A node shows up only when you may read it **and** at least one of
 its paths is open to you all the way down.
 
-This is what keeps staging private. `/home/<user>/staging` is `0700`, so the uploads inside it stay
+With the Archive, this is what keeps staging private. `/home/<user>/staging` is `0700`, so the uploads inside it stay
 out of everyone else's search and map, whatever their own modes say.
 
 - **A node linked in two places is reachable through either.** A hard link (`ln` without `-s`) into
@@ -377,7 +382,7 @@ share:
 | `/archive`                    | `admin`, `users`           | `0771` | Everyone may pass through; nobody but the group reads it.                |
 | `/archive/tags`               | `admin`, `users`           | `0771` | The same.                                                                |
 | `/home/<user>`                | the account, its own group | `0751` | Others may pass through to what the owner grants, and read nothing else. |
-| `/home/<user>/staging`        | the account                | `0700` | Nobody else, not even through search.                                    |
+| `/home/<user>/staging`        | the account                | `0700` | With the Archive. Nobody else, not even through search.                  |
 | `/etc/users/<name>`           | `admin`                    | `0755` | The account itself; only the administrator changes it.                   |
 | `/etc/users/<name>/.password` | `admin`                    | `0600` | Its user can neither read nor replace it.                                |
 | `/etc/groups/<group>/users`   | its creator, the group     | `0750` | Members may see who else is in the group, not add anyone.                |
@@ -418,8 +423,8 @@ How to make and send one is on [Sharing](../guide/sharing.md#share-an-album-with
 
 ## Administrators
 
-The administrator, uid `0`, passes every check, as root does on Linux: private albums and other
-people's homes and staging included. A member of the `sudo` group passes them too while their
+The administrator, uid `0`, passes every check, as root does on Linux: other people's homes and
+private albums included. A member of the `sudo` group passes them too while their
 sign-in is elevated, which they start with **Administer…** in the account menu (or `admin` in a
 terminal) and end with **Leave admin mode** (or `admin --off`). A terminal acting as the
 administrator ends its prompt in `#`. [Accounts and groups](accounts.md) covers who may do this.
@@ -454,16 +459,16 @@ ones the SFTP server reports.
 asked for: creating, removing or moving a node takes `w` and `x` on its folder, and moving it also
 takes `w` on the node itself. Check with `acl` on the node and on its folder.
 
-**Someone added to a group still cannot see the album.** Groups are read at sign-in. Ask them to
+**Someone added to a group still cannot see what is shared with it.** Groups are read at sign-in. Ask them to
 sign out and in again.
 
-**A folder's mode changed but a photo inside did not.** The photo is pinned, or you may not write
+**A folder's mode changed but a file inside did not.** The file is pinned, or you may not write
 it. The counts after `share-set` (`kept own access`, `failed`) and the lines on standard error say
 which. `share-info` on the folder lists the pinned nodes; `share-set <path> --unpin` lets changes
 reach a node again.
 
-**A photo is open to someone but they cannot find it in search or on the map.** A folder on every
-path to it is closed to them. Give them pass-through on that folder, or link the photo into a
+**A file is open to someone but they cannot find it in search, or on the Archive's map.** A folder
+on every path to it is closed to them. Give them pass-through on that folder, or link the file into a
 folder they can reach.
 
 **`chown` says `Access denied for operation 'change gid'`.** You are not in the group you named.
@@ -473,7 +478,7 @@ An administrator can make the change, or add you to the group.
 a share link. Who has access
 names people and groups, so it is shown only to someone signed in.
 
-**A visitor sees the sign-in page instead of a shared album.** **Visitors may browse** is off. Turn
+**A visitor sees the sign-in page instead of what was shared with visitors.** **Visitors may browse** is off. Turn
 it on under **Settings → Permissions**, or send them a [share link](../guide/sharing.md#share-an-album-with-a-link),
 which works either way.
 

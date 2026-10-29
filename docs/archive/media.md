@@ -18,7 +18,7 @@ The page works in two ways:
 - Each section is headed by its date, such as "29 June 2026", and the number of pictures in it. As you scroll, the date of the section you are in stays at the top of the page.
 - Click a date heading to select everything under it. Click it again to clear the selection.
 - A picture known only to a year, such as a scan dated 1975, sits under the year alone. Pictures with no date at all come last, under **Undated**. [Dates and places of pictures](dates-places.md) explains where dates come from.
-- Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today's date, marked "1 year ago", "12 years ago" and so on. A ring plays that year's pictures as a story. [Home, memories and statistics](../guide/home.md) describes it.
+- Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today's date, marked "1 year ago", "12 years ago" and so on. A ring plays that year's pictures as a story. [Memories, news and events on Home](home.md) describes it.
 - Once the feed holds more than 120 pictures, a time rail runs down the right edge of the page. Drag it to move through the years; the feed loads the pictures from the date you drag to.
 - Click a picture to open it in the viewer, where the arrows walk through the feed. The viewer's "N of M" counter is not shown here, because the feed loads part of the archive at a time. [Viewing photos, videos and recordings](viewer.md) covers the viewer.
 - On a phone, in the **Default** layout, pinch the grid to fit between 2 and 5 pictures across.
@@ -74,7 +74,7 @@ Type in the box, where it says "Filter the media — “Anna sailing 2011”, or
 
 The results are one grid, best matches first. Each tile shows its score as a percentage, measured against the best match, which is 100%. The search is kept in the page's address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.
 
-[Search and the finder](../guide/search.md) explains the rest: how the box reads a sentence, the **Interpreted filter** beside the box, what needs the media service and what a language model adds.
+[Search and the finder](search.md) explains the rest: how the box reads a sentence, the **Interpreted filter** beside the box, what needs the media service and what a language model adds.
 
 ### Act on pictures
 
@@ -114,7 +114,7 @@ There are three ways to move, and they work together:
 - **The histogram behind the header.** Each year that holds anything has a faint bar, taller the more it holds; the chosen year's bar is drawn in blue. The bars grow with the square root of the count, so a year with two albums is still visible beside one with a hundred.
 - **The slider along the foot of the header.** It has one step for each year that holds anything, plus the current year, so empty years take no room. A few of the years are written under it. Drag the handle and the year at the top follows.
 
-The year is kept in the page's address, so you can link to it, and a reload opens the same year. Visiting many years does not fill the browser's history: one press of Back leaves the Year page. The **Years** section of the [Search](../guide/search.md) page lists every year with something in it and opens it here.
+The year is kept in the page's address, so you can link to it, and a reload opens the same year. Visiting many years does not fill the browser's history: one press of Back leaves the Year page. The **Years** section of the [Search](search.md) page lists every year with something in it and opens it here.
 
 ### What a year shows
 
@@ -181,13 +181,13 @@ The edit dialogs are also the only place in the web interface where you take lab
 
 Where you look decides what you find:
 
-| Where                                                            | What it finds                                                                                                                                                     |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Click a label wherever it is shown                               | The [Search](../guide/search.md) page for that label: albums holding a picture that carries it, and any album, person, location or device that carries it itself. |
-| The Media page: pick the label with `@`, or click its label pill | The pictures that carry the label.                                                                                                                                |
-| The Year page: pick the label with `@`                           | The albums of that year holding pictures that carry it.                                                                                                           |
-| An album's **Info** tab, under **Labels**                        | The album's pictures that carry each label, with their count. See [Albums](albums.md).                                                                            |
-| The **Labels** section of the Search page, before you search     | Every label in use, most used first, each with its count.                                                                                                         |
+| Where                                                            | What it finds                                                                                                                                            |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Click a label wherever it is shown                               | The [Search](search.md) page for that label: albums holding a picture that carries it, and any album, person, location or device that carries it itself. |
+| The Media page: pick the label with `@`, or click its label pill | The pictures that carry the label.                                                                                                                       |
+| The Year page: pick the label with `@`                           | The albums of that year holding pictures that carry it.                                                                                                  |
+| An album's **Info** tab, under **Labels**                        | The album's pictures that carry each label, with their count. See [Albums](albums.md).                                                                   |
+| The **Labels** section of the Search page, before you search     | Every label in use, most used first, each with its count.                                                                                                |
 
 A label on an album finds the album on the Search page, but the Media and Year pages look at the pictures themselves: a picture carries a label only when it was put on the picture.
 

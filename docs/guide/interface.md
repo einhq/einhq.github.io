@@ -54,7 +54,7 @@ without signing in**. As a visitor:
 - you see only what has been shared with visitors, and you cannot change anything;
 - the top bar has a **Sign in** button where the terminal button and your picture would be, and no
   **Create** menu;
-- the sidebar leaves out **Staging** and **Settings**;
+- the sidebar leaves out **Settings**, and with the Archive **Staging**;
 - a page that belongs to an account, such as **Profile**, **Trash**, **Favourites**, **About EiN**
   or a form that creates something, sends you to sign in, and back to that page afterwards.
 
@@ -84,9 +84,12 @@ itself in the middle, and the side drawer at the right when something is open in
 ![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the archive and assistant modules installed.")
 
 What you see depends on the modules installed on your EiN. EiN itself gives the frame, Home,
-Search, Settings, Statistics, Documentation and the administrator's pages. The archive module adds
-the pages for photos, albums, people and places, and the assistant adds the chat. This page
-describes EiN with both installed; on yours, some entries may be missing.
+Search, Settings, Statistics, Documentation and the administrator's pages. The
+[Archive](../archive/index.md) adds the pages for photos, albums, people and places, and the
+[assistant](../assistant/index.md) adds the chat. This page describes the frame every EiN has and
+marks what each module adds; the screenshots show EiN with both installed. Without modules, the
+sidebar holds only EiN's own entries, and the top bar has no **Random album**, chat button or
+**Create** menu.
 
 The browser tab is titled with the page's name followed by `· EiN`, for example `Albums · EiN`;
 on Home it says `EiN` alone. The interface is in English and always dark: there is no light theme
@@ -96,18 +99,18 @@ and no other language.
 
 From left to right:
 
-| Part                                    | What it does                                                                                                                                                                                                                                     |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| The EiN mark and name                   | Go to **Home**. On a phone the mark opens and closes the menu instead.                                                                                                                                                                           |
-| The search box, **Search for anything** | Finds pages, albums, people and places as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. [Search and the finder](search.md) explains it. |
-| **Random album** (two crossing arrows)  | Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the archive.                                                                                                                                                |
-| **Disconnected** (with a red dot)       | Shown only while the page's connection to EiN is lost; on a phone it is a red crossed-out plug. EiN tries again by itself every second or two.                                                                                                   |
-| **Uploads**                             | Appears once you upload something. While files are going up it is a ring, with "Uploading N of M" in its tooltip; choose it for the files, **Cancel**, **Retry failed** and **Clear**. See [Getting your photos in](../archive/importing.md).    |
-| **Chat** (a speech bubble)              | Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see [Chatting with the assistant](../assistant/chat.md).                                                                                         |
-| **Create** (a plus)                     | The **Create New** menu, below. Signed in only.                                                                                                                                                                                                  |
-| **Toggle Terminal (Alt+T)**             | Opens and closes the terminal, which drops down over the page. Signed in only, and not on a phone. See [The terminal](../shell/terminal.md).                                                                                                     |
-| Your picture                            | The account menu, below. Its tooltip is your name.                                                                                                                                                                                               |
-| **Sign in**                             | For visitors only, in place of the terminal button and your picture.                                                                                                                                                                             |
+| Part                                    | What it does                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The EiN mark and name                   | Go to **Home**. On a phone the mark opens and closes the menu instead.                                                                                                                                                                                                                                                                                       |
+| The search box, **Search for anything** | Finds pages, and with the Archive albums, people and places, as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. [Search and the finder](search.md) explains it.                                                                                       |
+| **Random album** (two crossing arrows)  | Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the Archive.                                                                                                                                                                                                                                                            |
+| **Disconnected** (with a red dot)       | Shown only while the page's connection to EiN is lost; on a phone it is a red crossed-out plug. EiN tries again by itself every second or two.                                                                                                                                                                                                               |
+| **Uploads**                             | Appears once you upload something, such as files dropped on the [terminal](../shell/terminal.md#upload-files-by-dropping-them). While files are going up it is a ring, with "Uploading N of M" in its tooltip; choose it for the files, **Cancel**, **Retry failed** and **Clear**. With the Archive, see [Getting your photos in](../archive/importing.md). |
+| **Chat** (a speech bubble)              | Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see [Chatting with the assistant](../assistant/chat.md).                                                                                                                                                                                                     |
+| **Create** (a plus)                     | The **Create New** menu, below. Signed in only, and only where a module gives the menu rows.                                                                                                                                                                                                                                                                 |
+| **Toggle Terminal (Alt+T)**             | Opens and closes the terminal, which drops down over the page. Signed in only, and not on a phone. See [The terminal](../shell/terminal.md).                                                                                                                                                                                                                 |
+| Your picture                            | The account menu, below. Its tooltip is your name.                                                                                                                                                                                                                                                                                                           |
+| **Sign in**                             | For visitors only, in place of the terminal button and your picture.                                                                                                                                                                                                                                                                                         |
 
 A button that opens a page in the side drawer is lit while the drawer shows it, and it is left out
 on that page itself: on the **Chat** page there is no chat button.
@@ -119,6 +122,8 @@ on that page itself: on the **Chat** page there is no chat button.
 ### The Create menu
 
 Choose the plus to make something. Each row opens a form in a dialog over the page you are on.
+EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
+plus in the top bar. With the Archive installed, the menu has these rows:
 
 ![The Create New menu open under the plus: Import media, Album, Person, Location and Device](../../assets/shots/create-menu.webp "The Create menu's rows come from the modules; these are the archive's.")
 
@@ -130,33 +135,30 @@ Choose the plus to make something. Each row opens a form in a dialog over the pa
 | **Location**     | **Create Location**                                                                  | [Locations and the map](../archive/places.md)     |
 | **Device**       | **Register Device**                                                                  | [Devices and GPS tracks](../archive/devices.md)   |
 
-EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
-plus in the top bar.
-
 ### The account menu
 
 Choose your picture at the right end of the top bar. The menu is headed **Account**.
 
 ![The account menu open under the picture: Favourites, Profile, Trash, Shortcuts with the ? key, About EiN and Logout](../../assets/shots/account-menu.webp "The account menu holds your own pages and signing out.")
 
-| Row                        | Shown                                                  | What it does                                                                                                                                                                                                           |
-| -------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Me**                     | When your account is linked to a person in the archive | Opens that person's page.                                                                                                                                                                                              |
-| **Favourites**             | With the archive                                       | The pictures you have marked with a heart.                                                                                                                                                                             |
-| **Profile**                | Always                                                 | Your name, description, preferences and password.                                                                                                                                                                      |
-| **Trash**                  | Always                                                 | What you have deleted, to restore or remove for good.                                                                                                                                                                  |
-| **Shortcuts** <kbd>?</kbd> | Always                                                 | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
-| **About EiN**              | Always                                                 | A dialog with EiN's version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on. |
-| **Administer…**            | For members of the `sudo` group, outside admin mode    | Admin mode, below.                                                                                                                                                                                                     |
-| **Leave admin mode**       | In admin mode                                          | Back to your own rights.                                                                                                                                                                                               |
-| **Logout**                 | Always                                                 | Signs you out.                                                                                                                                                                                                         |
+| Row                        | Shown                                                     | What it does                                                                                                                                                                                                           |
+| -------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Me**                     | With the Archive, when your account is linked to a person | Opens that person's page.                                                                                                                                                                                              |
+| **Favourites**             | With the Archive                                          | The pictures you have marked with a heart.                                                                                                                                                                             |
+| **Profile**                | Always                                                    | Your name, description, preferences and password.                                                                                                                                                                      |
+| **Trash**                  | Always                                                    | What you have deleted, to restore or remove for good.                                                                                                                                                                  |
+| **Shortcuts** <kbd>?</kbd> | Always                                                    | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
+| **About EiN**              | Always                                                    | A dialog with EiN's version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on. |
+| **Administer…**            | For members of the `sudo` group, outside admin mode       | Admin mode, below.                                                                                                                                                                                                     |
+| **Leave admin mode**       | In admin mode                                             | Back to your own rights.                                                                                                                                                                                               |
+| **Logout**                 | Always                                                    | Signs you out.                                                                                                                                                                                                         |
 
 [Your profile, favourites and trash](profile.md) covers **Me**, **Favourites**, **Profile** and
 **Trash**.
 
-Your picture is the cover photo of the person your account is linked to. Without a linked person it
-shows the first letters of your username, as an image drawn by the outside service
-`ui-avatars.com`; without a connection to the internet, the first letter of your name shows
+With the Archive, your picture is the cover photo of the person your account is linked to. Without
+a linked person it shows the first letters of your username, as an image drawn by the outside
+service `ui-avatars.com`; without a connection to the internet, the first letter of your name shows
 instead.
 
 ### Admin mode
@@ -181,27 +183,29 @@ command that does the same in the terminal.
 
 The sidebar lists the pages, in four sections. The first has no heading.
 
-| Section | Entry             | Opens                                                                                                          | Shown to       | Added by  |
-| ------- | ----------------- | -------------------------------------------------------------------------------------------------------------- | -------------- | --------- |
-|         | **Home**          | On this day, News and Events: [Home, memories and statistics](home.md)                                         | everyone       | EiN       |
-|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](../assistant/chat.md)                          | everyone       | assistant |
-|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](../archive/media.md)                      | everyone       | archive   |
-|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](../archive/staging.md)                                 | signed in      | archive   |
-| Explore | **Search**        | Photos, videos, albums, people, places and more, by name, date or @mention: [Search and the finder](search.md) | everyone       | EiN       |
-| Explore | **Year**          | One year's pictures: [Media, Year and labels](../archive/media.md)                                             | everyone       | archive   |
-| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](../archive/places.md)                                    | everyone       | archive   |
-| Browse  | **Albums**        | [Albums](../archive/albums.md)                                                                                 | everyone       | archive   |
-| Browse  | **People**        | [People and faces](../archive/people.md)                                                                       | everyone       | archive   |
-| Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                  | everyone       | archive   |
-| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](../archive/devices.md)                        | everyone       | archive   |
-| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                      | administrators | EiN       |
-| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                           | administrators | EiN       |
-| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                    | signed in      | EiN       |
-| System  | **Statistics**    | How the archive has grown: [Home, memories and statistics](home.md)                                            | everyone       | EiN       |
-| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                  | everyone       | EiN       |
+| Section | Entry             | Opens                                                                                                                                                               | Shown to       | Added by  |
+| ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | --------- |
+|         | **Home**          | What the modules put there: [Home and statistics](home.md); with the Archive, On this day, News and Events: [Memories, news and events on Home](../archive/home.md) | everyone       | EiN       |
+|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](../assistant/chat.md)                                                                               | everyone       | assistant |
+|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](../archive/media.md)                                                                           | everyone       | archive   |
+|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](../archive/staging.md)                                                                                      | signed in      | archive   |
+| Explore | **Search**        | What the modules make searchable; with the Archive, photos, videos, albums, people and places, by name, date or @mention: [Search and the finder](search.md)        | everyone       | EiN       |
+| Explore | **Year**          | One year's pictures: [Media, Year and labels](../archive/media.md)                                                                                                  | everyone       | archive   |
+| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](../archive/places.md)                                                                                         | everyone       | archive   |
+| Browse  | **Albums**        | [Albums](../archive/albums.md)                                                                                                                                      | everyone       | archive   |
+| Browse  | **People**        | [People and faces](../archive/people.md)                                                                                                                            | everyone       | archive   |
+| Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                                                                       | everyone       | archive   |
+| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](../archive/devices.md)                                                                             | everyone       | archive   |
+| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                                                                           | administrators | EiN       |
+| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                                                                                | administrators | EiN       |
+| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                                                                         | signed in      | EiN       |
+| System  | **Statistics**    | How the archive has grown: [Home and statistics](home.md)                                                                                                           | everyone       | EiN       |
+| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                                                                       | everyone       | EiN       |
 
-"Administrators" means the `admin` account, or someone in admin mode. For anyone else **Settings**
-opens on its **Modules** tab, the only one they get. A section left with no entries is not shown.
+An entry added by a module is there once that module is installed; [The Archive](../archive/index.md)
+and [The Assistant](../assistant/index.md) describe what each brings. "Administrators" means the
+`admin` account, or someone in admin mode. For anyone else **Settings** opens on its **Modules**
+tab, the only one they get. A section left with no entries is not shown.
 
 - **Where you are.** The entry of the page you are on is lit, with a bar in the accent colour at
   its left.
@@ -225,9 +229,9 @@ under it, and often counts.
   order, on the pages that offer them, then <kbd>⋮</kbd> (**More actions**) with the page's other
   actions and **Move to trash** last. Where the header is narrow the buttons fold into
   <kbd>⋮</kbd> too. Actions that change something are offered only on what you may change.
-- **Tabs** sit along the header's foot, such as **Media**, **Map** and **Info** on an album. The
-  chosen tab is part of the page's address (`?tab=`), so a link can open a given tab; see
-  [Addresses in the web interface](../reference/routes.md).
+- **Tabs** sit along the header's foot, such as **Media**, **Map** and **Info** on the Archive's
+  album pages. The chosen tab is part of the page's address (`?tab=`), so a link can open a given
+  tab; see [Addresses in the web interface](../reference/routes.md).
 - **Scrolled down**, the header's last row, its tabs or filters, stays in view under the top bar,
   with <kbd>⋮</kbd> holding every action of the page. On a wide screen the page's name appears at
   that row's left.
@@ -247,8 +251,8 @@ The same page can open in four ways. Which one you get depends on where you open
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | A page          | The page in the middle of the frame; the address in the browser changes.                                                                                       | Anything in the sidebar                                     | The browser's **Back**                                                                            |
 | A dialog        | A box over the dimmed page, with a coloured header band, an icon and a title. On a phone it fills the screen, except a question that only asks you to confirm. | The **Create** forms, **About EiN**, **Keyboard shortcuts** | The **×** at the top right, <kbd>Esc</kbd>, or a click outside the box. On a phone, **Back** too. |
-| The side drawer | A panel at the right. On a wide screen it sits beside the page, which makes room for it; on a narrower one it covers the page.                                 | The chat, from the top bar's chat button                    | Its top-bar button again. Where it covers the page, **Back** closes it too.                       |
-| Full screen     | Over everything, the top bar included.                                                                                                                         | The viewer for photos, videos and recordings                | **Back** or <kbd>Esc</kbd>                                                                        |
+| The side drawer | A panel at the right. On a wide screen it sits beside the page, which makes room for it; on a narrower one it covers the page.                                 | The chat, from the assistant's chat button                  | Its top-bar button again. Where it covers the page, **Back** closes it too.                       |
+| Full screen     | Over everything, the top bar included.                                                                                                                         | The Archive's viewer for photos, videos and recordings      | **Back** or <kbd>Esc</kbd>                                                                        |
 
 A few things to know about each:
 

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EiN documentation</title>
-    <meta name="description" content="These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is and where to start, whoever you are.">
+    <meta name="description" content="These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is, where to start, whoever you are, and how the pages are divided between core and the modules.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/">
     <meta property="og:title" content="EiN documentation">
-    <meta property="og:description" content="These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is and where to start, whoever you are.">
+    <meta property="og:description" content="These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is, where to start, whoever you are, and how the pages are divided between core and the modules.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,9 +87,9 @@
           <h1>EiN documentation</h1>
         </header>
         <article class="prose">
-<p>These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is and where to start, whoever you are.</p>
-<p>EiN (<em>Everything is a Node</em>) is a system you host yourself, on your own Linux machine (x86-64). Everything it keeps is a node in one tree: photos and albums, people and places, accounts, logs, queues, even its own commands, each with an owner and permissions as a file has. The web interface, a bash-compatible shell in the browser or over SSH, and SFTP all work on that one tree, as you and under the same permissions. Modules decide what EiN is for, and bring the pipelines that do the work each change starts. The first is the Archive, for a family&#39;s photos, videos, recordings and letters: as files come in, its pipelines make thumbnails, find faces, read text, transcribe speech and prepare everything for search. The assistant module adds a chat that answers your questions by running EiN&#39;s commands for you.</p>
-<p>On your machine EiN runs as a few containers under podman or Docker. EiN itself serves the web interface on port 8080 and SSH and SFTP on port 2222 by default, and keeps every node in a PostgreSQL database beside it and the files themselves in a data folder. Two more services are optional: the media service, which does the work on pictures, video and sound and which the Archive needs, and a language model for the assistant. A graphics card makes both faster, but nothing needs one. <a href="start/how-ein-works.html">How EiN works</a> explains the whole model in one page.</p>
+<p>These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is, where to start, whoever you are, and how the pages are divided between core and the modules.</p>
+<p>EiN (<em>Everything is a Node</em>) is a system you host yourself, on your own Linux machine (x86-64). Everything it keeps is a node in one tree, with an owner and permissions as a file has: files and folders, accounts, logs, queues, even its own commands, and with the Archive installed, photos and albums, people and places. The web interface, a bash-compatible shell in the browser or over SSH, and SFTP all work on that one tree, as you and under the same permissions. Modules decide what EiN is for, and bring the pipelines that do the work each change starts. The first is <a href="archive/index.html">the Archive</a>, for a family&#39;s photos, videos, recordings and letters: as files come in, its pipelines make thumbnails, find faces, read text, transcribe speech and prepare everything for search. <a href="assistant/index.html">The assistant module</a> adds a chat that answers your questions by running EiN&#39;s commands for you.</p>
+<p>On your machine EiN runs as a few containers under podman or Docker. EiN itself serves the web interface on port 8080 and SSH and SFTP on port 2222 by default, and keeps every node in a PostgreSQL database beside it and the files themselves in a data folder. Two more services are optional: <a href="ems/index.html">the media service</a>, which does the work on pictures, video and sound and which the Archive needs, and a language model for the assistant. A graphics card makes both faster, but nothing needs one. <a href="start/how-ein-works.html">How EiN works</a> explains the whole model in one page.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="EiN's containers on one machine: ein, which a browser reaches on port 8080 and an SSH or SFTP client on port 2222, beside PostgreSQL, the optional media service and the optional language model, with the data folder they use below">
   <title>What runs where</title>
   <defs>
@@ -178,16 +178,47 @@
   <text x="618" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The database</text>
   <text x="618" y="484" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#a2abbb">volume ein_db</text>
 </svg><figcaption>Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.</figcaption></figure>
+<h2 id="core-and-modules">Core and modules<a class="anchor" href="#core-and-modules" aria-label="Link to this section"></a></h2>
+<p>These pages come in two parts, as EiN does:</p>
+<ul>
+<li><strong>Core</strong> holds for every EiN, whatever modules it has: installing it, the web interface, the shell and SSH, looking after it, the ideas it is built on, and the reference. Where a core page shows something a module adds, such as an entry the Archive puts in the sidebar, it says so and links to that module&#39;s pages.</li>
+<li><strong>Modules</strong> has a section for each module. Read a module&#39;s section once that module is installed on your EiN, and leave it aside otherwise. Each section opens with an overview of what the module adds and what it needs.</li>
+</ul>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>What it adds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="archive/index.html">The Archive</a></td>
+<td>Albums of photos, videos, recordings and documents, people and their family tree, locations, devices, and staging, where uploads wait to be sorted</td>
+</tr>
+<tr>
+<td><a href="assistant/index.html">The Assistant</a></td>
+<td>The chat that answers your questions by running EiN&#39;s commands for you, with a language model</td>
+</tr>
+<tr>
+<td><a href="ems/index.html">The media service</a></td>
+<td>EiN&#39;s side of the media service, the container that does the work on pictures, video and sound which the Archive needs</td>
+</tr>
+<tr>
+<td><a href="importer/index.html">The Importer</a></td>
+<td>Moving one particular older archive into EiN</td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="where-to-start">Where to start<a class="anchor" href="#where-to-start" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>You want to try EiN.</strong> <a href="start/install.html">Install EiN</a> puts it on a Linux machine with one command, and <a href="start/first-steps.html">First steps</a> takes you from the first sign-in to a family using it.</li>
-<li><strong>You use EiN day to day.</strong> <a href="guide/interface.html">Finding your way around</a> shows the web interface. <a href="archive/importing.html">Getting your photos in</a>, <a href="archive/albums.html">Albums</a>, <a href="guide/search.html">Search and the finder</a> and <a href="guide/sharing.html">Sharing</a> cover what you do most.</li>
+<li><strong>You use EiN day to day.</strong> <a href="guide/interface.html">Finding your way around</a> shows the web interface, and <a href="guide/search.html">Search and the finder</a> and <a href="guide/sharing.html">Sharing</a> cover what every EiN offers. With the Archive installed, <a href="archive/importing.html">Getting your photos in</a> and <a href="archive/albums.html">Albums</a> cover what you do most.</li>
 <li><strong>You run EiN for others.</strong> <a href="admin/install.html">Installing in detail</a> explains every part of the installation, <a href="admin/configuration.html">Configuration</a> and <a href="admin/modules.html">Modules</a> how to change what it does, <a href="admin/monitoring.html">Health and the dashboard</a> how to tell that it is keeping up, and <a href="admin/troubleshooting.html">Troubleshooting</a> what to do when something is wrong.</li>
 <li><strong>You work in the shell.</strong> <a href="shell/terminal.html">The terminal</a> opens EiN&#39;s shell in the browser, and <a href="shell/ssh-sftp.html">SSH and SFTP</a> connects to it from your own computer.</li>
 <li><strong>You build modules.</strong> <a href="develop/modules.html">Writing a module</a> shows a module&#39;s folder, what each part becomes and how EiN finds it.</li>
 </ul>
 <h2 id="how-the-documentation-is-organised">How the documentation is organised<a class="anchor" href="#how-the-documentation-is-organised" aria-label="Link to this section"></a></h2>
-<p>The sidebar groups the pages in sections:</p>
+<p>Under <strong>Core</strong>, the sidebar groups the pages in sections:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -221,10 +252,11 @@
 </tr>
 <tr>
 <td><strong>Developing</strong></td>
-<td>Writing a module, teaching the assistant, and building EiN from source.</td>
+<td>Writing a module, its manifest, and building EiN from source.</td>
 </tr>
 </tbody></table>
 </div>
+<p>Under <strong>Modules</strong>, each module&#39;s section holds its guide pages and a page of its commands.</p>
 <p>The <a href="reference/commands.html">Commands</a>, <a href="reference/settings.html">Settings</a>, <a href="reference/environment.html">Environment variables</a> and <a href="reference/node-types.html">Node types</a> pages are written from what a running EiN with all its modules says about itself; an installation with fewer modules has fewer of them. Words EiN uses in its own way, such as node, softlink or staging, are in the <a href="reference/glossary.html">Glossary</a>.</p>
 <p>Every installation also carries its own documentation: <strong>Documentation</strong>, under <strong>System</strong> in EiN&#39;s sidebar. Its guide pages fill in their examples with the host name you reached EiN at, the SSH port EiN listens on and your user name. Its reference (<strong>Commands</strong>, <strong>Settings</strong>, <strong>Environment</strong>, <strong>Node types</strong> and <strong>Modules</strong>) is read from that installation as you open it: the commands on your PATH, each setting with its current value, the modules installed there. In the shell, <code>&lt;command&gt; --help</code> describes a command.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
@@ -237,7 +269,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/index.md">This page's source</a> · <a href="../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-to-start">Where to start</a></li><li><a href="#how-the-documentation-is-organised">How the documentation is organised</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#core-and-modules">Core and modules</a></li><li><a href="#where-to-start">Where to start</a></li><li><a href="#how-the-documentation-is-organised">How the documentation is organised</a></li></ul></aside>
     </div>
   </body>
 </html>

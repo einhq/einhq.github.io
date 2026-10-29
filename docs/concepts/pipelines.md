@@ -6,6 +6,10 @@ that act on those facts, and the audit trail that leads back from each result to
 caused it. It is for administrators who want to understand what the **Dashboard** shows, and for
 anyone writing a module or a pipeline of their own.
 
+The machinery is core's: the events, the engine, the pools and the audit trail. Core ships no
+pipelines and announces no facts, so the examples come from the [Archive](../archive/index.md):
+its facts, pipelines, workers and paths such as `/archive/albums` exist with it installed.
+
 ## Every change is announced
 
 When EiN saves a change to the tree, it announces it as an event. Six kinds exist:
@@ -265,7 +269,7 @@ off until **Second models worker's slots**, `CFG_MODEL_SECOND_SLOTS`, is above 0
 Most of these steps are calls into the [media service](../ems/index.md), which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
-[Processing and pipelines](../admin/processing.md) explains how to size the workers.
+[Processing pictures](../archive/processing.md#how-much-runs-at-once) explains how to size the workers.
 
 ## One upload, start to finish
 
@@ -341,7 +345,7 @@ status:
 | `65`        | The input is the problem, such as bytes no decoder can open                                                      | The step fails at once, whatever attempts are left, and is never run again by itself                                                                                                                |
 | any other   | The step itself failed                                                                                           | One attempt is spent; the step runs again until `maxAttempts` is used up, and then the instance fails                                                                                               |
 
-So a media service that is down for an hour fails nothing: its work waits and starts again when it
+So, with the Archive, a media service that is down for an hour fails nothing: its work waits and starts again when it
 answers.
 
 A failed instance is not the end either. Once an hour, or as often as
@@ -422,6 +426,10 @@ steps:
   mark:
     command: attrs -s reviewed=no $NODE_PATH
 ```
+
+It waits for the Archive's fact `media.metadata.extracted`, so it needs the Archive; on an EiN
+without modules, a trigger waits for a raw change instead, such as `event: updated` with
+`nodeType: file`.
 
 1. Save it, for example as `/home/helen/pipelines/mark-unreviewed.yaml`, with the
    [editor](../shell/editor.md) or over [SFTP](../shell/ssh-sftp.md).

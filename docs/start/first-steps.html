@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>First steps – EiN documentation</title>
-    <meta name="description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full.">
+    <meta name="description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full. The steps hold for any EiN, whichever modules it has; each module's own pages take over from there.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/start/first-steps.html">
     <meta property="og:title" content="First steps – EiN documentation">
-    <meta property="og:description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full.">
+    <meta property="og:description" content="This page is for the administrator who has just installed EiN and is setting it up for a family. It goes from the first sign-in to the family using it, one short step at a time, and links each step to the page that covers it in full. The steps hold for any EiN, whichever modules it has; each module's own pages take over from there.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,17 +89,19 @@
         <article class="prose">
 <p>This page is for the administrator who has just <a href="install.html">installed EiN</a> and is setting it up
 for a family. It goes from the first sign-in to the family using it, one short step at a time, and
-links each step to the page that covers it in full.</p>
+links each step to the page that covers it in full. The steps hold for any EiN, whichever modules
+it has; each module&#39;s own pages take over from there.</p>
 <p>Take the steps in order. Some of them depend on an earlier one: the sharing defaults in step 4, for
-example, apply to albums made after you set them, so set them before the first import.</p>
+example, apply to what is created after you set them, so set them before the family starts adding
+things.</p>
 <ol>
 <li><a href="#sign-in-and-change-the-admin-password">Sign in and change the admin password</a></li>
 <li><a href="#check-the-dashboard">Check the dashboard</a></li>
 <li><a href="#install-the-modules-you-want">Install the modules you want</a></li>
 <li><a href="#decide-who-sees-what">Decide who sees what</a></li>
 <li><a href="#create-accounts-for-the-family">Create accounts for the family</a></li>
-<li><a href="#import-the-first-photos">Import the first photos</a></li>
-<li><a href="#share-an-album">Share an album</a></li>
+<li><a href="#try-the-terminal">Try the terminal</a></li>
+<li><a href="#start-with-the-modules">Start with the modules</a></li>
 <li><a href="#let-the-family-sign-in">Let the family sign in</a></li>
 <li><a href="#keep-ein-running">Keep EiN running</a></li>
 </ol>
@@ -213,6 +215,8 @@ and the pages under <strong>System</strong>. These modules are published:</p>
 </tr>
 </tbody></table>
 </div>
+<p>A fourth module, the <a href="../importer/index.html">Importer</a>, moves one particular older archive into EiN;
+it is not published.</p>
 <p>If you installed with the <strong>EiN Archive</strong> command from einhq.eu, the three are installed already. Open
 <strong>Settings → Modules</strong>, choose each module, and check that its panel says <strong>Active</strong>, not
 <strong>Not set up</strong> or <strong>Setup failed</strong>.</p>
@@ -239,14 +243,20 @@ model the same way: <code>~/ein/setup.sh --llm</code> runs one on this machine, 
 in <code>~/ein/.env</code>. <a href="../admin/modules.html">Modules</a>, <a href="../ems/index.html">The media service</a> and
 <a href="../assistant/language-model.html">The language model</a> have the details.</p>
 <h2 id="decide-who-sees-what">Decide who sees what<a class="anchor" href="#decide-who-sees-what" aria-label="Link to this section"></a></h2>
+<p><strong>Settings</strong>, under <strong>System</strong> in the sidebar, is where you set up EiN. Its tabs are <strong>System</strong>,
+with every system setting by category, <strong>Users</strong>, <strong>Groups</strong>, <strong>Permissions</strong> and <strong>Modules</strong>.
+Each setting says what it does and which module brought it, and is saved on its own with
+<strong>Save change</strong>. <a href="../admin/configuration.html">Configuration</a> explains the page and the same settings
+in the terminal. Start with who sees what.</p>
 <p>Open <strong>Settings → Permissions</strong>. Its four cards each say in a sentence what their settings come to.</p>
 <figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The demo shown here lets visitors browse; a family&#39;s own EiN keeps that off</figcaption></figure>
 <p><strong>Visitors.</strong> <strong>Visitors may browse</strong> is <strong>Off</strong> on a new install, and the setting itself advises
 keeping it off for a family&#39;s own archive. Off, anyone who has not signed in is asked to sign in.
-A share link still opens what it was made for (step 7). Turn it on only for an archive meant to be
-public. The setting is <a href="../reference/settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>.</p>
-<p><strong>Sharing</strong> sets what anything created as shared starts with: an album made with <strong>Create →
-Album</strong>, and a group filed from staging into a new album. Its rows:</p>
+A share link still opens what it was made for (see <a href="../guide/sharing.html">Sharing</a>). Turn it on only
+for an archive meant to be public. The setting is <a href="../reference/settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>.</p>
+<p><strong>Sharing</strong> sets what anything created as shared starts with. With the Archive installed, that is
+an album made with <strong>Create → Album</strong>, and a group filed from staging into a new album; the rest of
+this step speaks of albums for that reason. Its rows:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -258,12 +268,12 @@ Album</strong>, and a group filed from staging into a new album. Its rows:</p>
 <tbody><tr>
 <td><strong>Owner</strong></td>
 <td>empty: whoever creates it</td>
-<td>who owns a new album</td>
+<td>who owns what is created</td>
 </tr>
 <tr>
 <td><strong>Group</strong></td>
 <td>Users, which is everyone with an account</td>
-<td>the group a new album is shared with</td>
+<td>the group it is shared with</td>
 </tr>
 <tr>
 <td><strong>Permissions</strong></td>
@@ -296,7 +306,8 @@ it, anyone else can&#39;t see it.&quot; Some common choices:</p>
 </tbody></table>
 </div>
 <p>Each row is saved on its own with <strong>Save change</strong>. A change applies to what is created afterwards;
-albums that exist keep their sharing, which you change with <strong>Share</strong> (step 7). Each person can
+albums that exist keep their sharing, which you change with <strong>Share</strong>, as
+<a href="../guide/sharing.html">Sharing</a> shows. Each person can
 also narrow what they create, under <strong>Profile → Preferences → How widely what you create is
 shared</strong>.</p>
 <p><strong>Sign-in sessions.</strong> A browser stays signed in for <strong>1 day</strong> after its last visit
@@ -305,8 +316,8 @@ if the family should stay signed in longer on their own devices.</p>
 <p><a href="../guide/sharing.html">Sharing</a> and <a href="../admin/permissions.html">Permissions in depth</a> explain what each
 choice does.</p>
 <h2 id="create-accounts-for-the-family">Create accounts for the family<a class="anchor" href="#create-accounts-for-the-family" aria-label="Link to this section"></a></h2>
-<p>Give each person an account of their own. What they upload waits in their own staging area, which
-only they see, until they file it into an album.</p>
+<p>Give each person an account of their own. With the Archive installed, what they upload waits in
+their own staging area, which only they see, until they file it into an album.</p>
 <ol>
 <li>Open <strong>Settings → Users</strong> and choose the <strong>New user</strong> button beside the filter.</li>
 <li>Type the person&#39;s <strong>Name</strong>, such as Helen Okafor. <strong>Username</strong> is suggested from it (<code>helen</code>).
@@ -342,56 +353,26 @@ this: it is only the administrator account&#39;s own group.</p>
 <strong>New password</strong> and <strong>Repeat</strong> it under <strong>Password</strong>, and choose <strong>Set password</strong>.
 <a href="../admin/accounts.html">Accounts and groups</a> covers the rest: disabling and deleting accounts,
 groups, and the commands.</p>
-<h2 id="import-the-first-photos">Import the first photos<a class="anchor" href="#import-the-first-photos" aria-label="Link to this section"></a></h2>
-<p>Everything you import lands in your own staging area first, outside the shared library. There EiN
-reads each file and suggests albums for it, and you decide where it goes.</p>
-<ol>
-<li>In the top bar, open <strong>Create</strong> (the plus) and choose <strong>Import media</strong>.</li>
-<li>Under <strong>Into which category?</strong>, choose <strong>Inbox</strong>, or <strong>New category</strong> for one source kept
-together. For a new category, choose <strong>What it holds</strong>, such as <strong>Scans</strong> for a box of scanned
-prints or <strong>Google Photos export</strong>, and type what it is <strong>Called</strong>.</li>
-<li>Click <strong>Choose files</strong> or <strong>Choose a folder</strong>, and pick what to upload.</li>
-<li>Click <strong>Upload</strong>.</li>
-</ol>
-<figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog with the Inbox category chosen, the Choose files and Choose a folder buttons, and the SFTP path for large imports" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Import media puts files into a category of your staging area, never straight into the library</figcaption></figure>
-<p>The category&#39;s page opens on its <strong>Files</strong> tab, and the strip above the tabs shows how far the
-files are: &quot;N of M arriving&quot;, &quot;N being prepared&quot;, &quot;N being grouped&quot;. The upload runs in the browser
-tab, so keep the tab open until the <strong>Uploads</strong> button in the top bar says it is done. Meanwhile
-the dashboard reads <strong>Catching up</strong>. For more than about 10,000 files, copy them over SFTP into
-the category&#39;s folder instead, such as <code>/home/admin/staging/files/inbox/</code>; see
-<a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</p>
-<p>A few minutes after the files are prepared, suggested albums appear on the <strong>Sort</strong> tab. To file
-one:</p>
-<ol>
-<li>Open <strong>Staging</strong> in the sidebar, then the category, then <strong>Sort</strong>.</li>
-<li>Each group shows its proposal, such as <strong>New album “…”</strong> or <strong>Add to “…”</strong>, which
-<kbd>Enter</kbd> accepts on a computer. Where there is none, choose <strong>New album…</strong> in the
-group&#39;s ⋯ menu, or press <kbd>N</kbd>.</li>
-<li>In the <strong>New album</strong> dialog, check the <strong>Name</strong> and choose <strong>Create album</strong>. The photos leave
-staging for the new album, shared as the <strong>Sharing</strong> card says.</li>
-</ol>
-<p>The album is now under <strong>Albums</strong> in the sidebar. Every decision can be undone, from the message
-it leaves or from the <strong>Done</strong> tab. <a href="../archive/importing.html">Getting your photos in</a> and
-<a href="../archive/staging.html">Sorting in staging</a> go through every way in and every choice on the Sort
-tab.</p>
-<h2 id="share-an-album">Share an album<a class="anchor" href="#share-an-album" aria-label="Link to this section"></a></h2>
-<p>With the defaults, an album you file is already visible to everyone with an account. Use
-<strong>Share</strong> to change that for one album, or to send a link to someone who has no account.</p>
-<ol>
-<li>Open <strong>Albums</strong> in the sidebar, then the album, and choose <strong>Share</strong> in its header.</li>
-<li>Under <strong>Who can see it</strong>, <strong>Default</strong> lets everyone with an account see it, and <strong>Private</strong>
-only its owner.</li>
-<li>Under <strong>People with access</strong>, find someone in <strong>Add people or groups</strong>, then choose
-<strong>Can view</strong> or <strong>Can edit</strong> on their row, or <strong>Remove access</strong>.</li>
-<li>Choose <strong>Save</strong>.</li>
-</ol>
-<figure class="shot"><a href="../../assets/shots/share@2x.webp"><img src="../../assets/shots/share.webp" srcset="../../assets/shots/share.webp 1x, ../../assets/shots/share@2x.webp 2x" alt="The Share dialog of an album: Who can see it with Default and Private, People with access with the owner, Administrators, Everyone with an account and Visitors who are not signed in, and Share with a link" width="740" height="700" loading="lazy" decoding="async"></a><figcaption>One dialog decides who sees an album, and makes the link for someone without an account</figcaption></figure>
-<p>For someone without an account, choose <strong>Create link</strong> under <strong>Share with a link</strong>. Click the
-address to copy it. The link stops working after 30 days unless you choose another time under
-<strong>Works for</strong>, from <strong>1 day</strong> to <strong>No end date</strong>, and <strong>Delete link</strong> turns it off at once. A link
-is made and changed straight away, without <strong>Save</strong>. Whoever opens it sees that album without
-signing in. <a href="../guide/sharing.html">Sharing</a> has the rest, including keeping some photos of a shared
-album private.</p>
+<h2 id="try-the-terminal">Try the terminal<a class="anchor" href="#try-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Everything the pages do, and more, can be done with commands in EiN&#39;s terminal, a shell that works
+on the same tree as the pages, as the person signed in. Open it with the top bar&#39;s terminal button,
+or with <kbd>Alt</kbd>+<kbd>T</kbd> wherever you are, and try a first command:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+health</code></pre></div>
+<p>It says in one line how EiN is doing, the same verdict as the dashboard&#39;s badge, and lists the
+checks behind it. <code>--help</code> after a command&#39;s name says how to use it, and <code>docs find</code> followed by
+what you want done finds the command that does it. Press <kbd>Alt</kbd>+<kbd>T</kbd> again to hide
+the terminal; what runs in it goes on.</p>
+<p><a href="../shell/terminal.html">The terminal</a> shows the rest, and <a href="../shell/ssh-sftp.html">SSH and SFTP</a> how
+to reach the same shell from your own computer.</p>
+<h2 id="start-with-the-modules">Start with the modules<a class="anchor" href="#start-with-the-modules" aria-label="Link to this section"></a></h2>
+<p>What comes next depends on the modules you installed in step 3:</p>
+<ul>
+<li><strong>The Archive.</strong> <a href="../archive/index.html">The Archive</a> takes it from here: importing the first
+photos, sorting them in staging into albums, and sharing an album, with or without an account.</li>
+<li><strong>The Assistant.</strong> <a href="../assistant/index.html">The Assistant</a> says what it needs, what it adds, and
+where to start chatting.</li>
+</ul>
 <h2 id="let-the-family-sign-in">Let the family sign in<a class="anchor" href="#let-the-family-sign-in" aria-label="Link to this section"></a></h2>
 <p>Give each person:</p>
 <ul>
@@ -401,8 +382,8 @@ if their device cannot find the name;</li>
 </ul>
 <p>They sign in on the sign-in page with <strong>Username or e-mail</strong>, <strong>Password</strong> and <strong>Sign in</strong>. Ask
 them to change their password at once, under <strong>Profile → Security</strong>.
-<a href="../guide/interface.html">Finding your way around</a> and <a href="../archive/importing.html">Getting your photos in</a>
-are good pages to send them.</p>
+<a href="../guide/interface.html">Finding your way around</a> is a good page to send them, with the overview of
+each module you installed, such as <a href="../archive/index.html">The Archive</a>.</p>
 <p>EiN answers on your home network. Reaching it from elsewhere takes an HTTPS proxy of your own in
 front of it; <a href="../admin/network.html">Ports, HTTPS and remote access</a> explains what EiN needs from
 one.</p>
@@ -457,7 +438,7 @@ copy them at the same time, and back up before each update.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/start/first-steps.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in-and-change-the-admin-password">Sign in and change the admin password</a></li><li><a href="#check-the-dashboard">Check the dashboard</a></li><li><a href="#install-the-modules-you-want">Install the modules you want</a></li><li><a href="#decide-who-sees-what">Decide who sees what</a></li><li><a href="#create-accounts-for-the-family">Create accounts for the family</a></li><li><a href="#import-the-first-photos">Import the first photos</a></li><li><a href="#share-an-album">Share an album</a></li><li><a href="#let-the-family-sign-in">Let the family sign in</a></li><li><a href="#keep-ein-running">Keep EiN running</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in-and-change-the-admin-password">Sign in and change the admin password</a></li><li><a href="#check-the-dashboard">Check the dashboard</a></li><li><a href="#install-the-modules-you-want">Install the modules you want</a></li><li><a href="#decide-who-sees-what">Decide who sees what</a></li><li><a href="#create-accounts-for-the-family">Create accounts for the family</a></li><li><a href="#try-the-terminal">Try the terminal</a></li><li><a href="#start-with-the-modules">Start with the modules</a></li><li><a href="#let-the-family-sign-in">Let the family sign in</a></li><li><a href="#keep-ein-running">Keep EiN running</a></li></ul></aside>
     </div>
   </body>
 </html>

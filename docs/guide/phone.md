@@ -2,7 +2,9 @@
 
 This page covers what is different when you use EiN on a phone or a tablet: the menu behind the EiN
 mark, the gestures in grids and in the viewer, uploading from the phone, and putting EiN on your
-home screen. It is for everyone in the family who opens EiN away from a computer.
+home screen. It is for everyone in the family who opens EiN away from a computer. The grids, the
+viewer and the uploads are the [Archive](../archive/index.md)'s, and the sections on them apply once
+it is installed.
 
 ## Open EiN on your phone
 
@@ -26,15 +28,16 @@ screen.
 | 768 to 991 pixels: tablets, and some large phones held sideways | The computer's layout, with the sidebar beside the page and the terminal button. The chat's side drawer covers the page, and the browser's **Back** closes it. |
 | 992 pixels and wider                                            | The computer's layout, with the side drawer beside the page.                                                                                                   |
 
-On any touch screen, whatever its width, the viewer uses its touch layout and pressing and holding
-a picture selects it. So a tablet has the computer's frame with the phone's viewer.
+On any touch screen, whatever its width, the Archive's viewer uses its touch layout and pressing
+and holding a picture selects it. So a tablet has the computer's frame with the phone's viewer.
 
 ![Home on a phone: the EiN mark at the left of the top bar, the search box reading Search, the Random album, chat and plus buttons and the account picture, over the Welcome header and the News timeline](../../assets/shots/phone-home.webp "Home on a phone. The menu is out of sight until you tap the EiN mark or swipe right.")
 
 In the phone layout:
 
 - **The top bar** shows the EiN mark without the name, the search box (it reads **Search**), then
-  **Random album**, **Chat**, the plus of the **Create** menu and your picture. Its buttons are
+  the buttons the modules add, such as the Archive's **Random album**, the assistant's **Chat** and
+  the plus of the **Create** menu, and your picture. Its buttons are
   larger, to suit a finger. The **Uploads** button appears there while files are going up.
 - **The menu is hidden** until you ask for it: see [Open the menu](#open-the-menu).
 - **There is no terminal button.** When the connection drops, a red crossed-out plug stands in the
@@ -45,8 +48,8 @@ In the phone layout:
 - **Dialogs fill the screen**, with their buttons in a bar across the foot. Fields use larger text,
   so the phone does not zoom in while you type. A question that only asks you to confirm stays a
   small box. The phone's **Back** closes a dialog.
-- **The chat** opens as a dialog over the whole screen instead of in the side drawer; see
-  [Chatting with the assistant](../assistant/chat.md).
+- **The chat**, with the assistant installed, opens as a dialog over the whole screen instead of in
+  the side drawer; see [Chatting with the assistant](../assistant/chat.md).
 - **The create and account menus** are wider, with taller rows.
 
 ### Page headers on a phone
@@ -56,7 +59,8 @@ In the phone layout:
 - **Actions** such as **Upload**, **Share** and **Edit** fold into ⋮ at the header's top right,
   with the page's other actions.
 - **Tabs with icons** show only their icons, and the tab you are on keeps its name. On a person's
-  page the icons stand for **Info**, **Media**, **Faces**, **Heard in**, **Family** and **Homes**.
+  page, which the Archive adds, the icons stand for **Info**, **Media**, **Faces**, **Heard in**,
+  **Family** and **Homes**.
 - **Choices** such as **Show** and **Sort** become a button that shows the chosen option's icon;
   on some pages, such as **Year**, several fold into one button.
 - **Scrolled down**, the header goes away, and the page's filter box and choices float at the foot
@@ -94,7 +98,8 @@ is in the menu.
 
 ## Pinch, press and tap in a grid
 
-A grid of pictures, such as an album or the **Media** page, works by touch like this:
+With the Archive installed, a grid of pictures, such as an album or the **Media** page, works by
+touch like this:
 
 | To                           | Do this                                                                                                            |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -124,40 +129,17 @@ to rest on it.
 
 ## The viewer on a phone
 
-The viewer takes its touch layout on any touch screen, and in any browser window narrower than 768
-pixels.
-
-![The viewer on a phone: the date in a pill at the top, a photo of three people on a coastal road, the position 26 of 26 and the place Wellington under it, and the details sheet pulled up with the file name, the phone that took it, the album and the three people with their ages](../../assets/shots/phone-lightbox.webp "Swipe up on the picture to pull up the details sheet; swipe down to put it away.")
-
-- The date sits in a pill at the top of the picture, and the bar under it keeps the position in the
-  list and the place.
-- ⋮ at the top right holds **Favourite**, **Start slideshow**, the rows of the **More** menu and
-  **Chat**.
-- There is no close button: swipe down on the picture, or use the phone's Back.
-- The details are a sheet you pull up over the lower half of the screen. Held sideways, they open
-  as a panel at the right instead, with **Show details** beside ⋮.
-
-| Gesture                                | What it does                                                                               |
-| -------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Swipe left / right                     | Next / previous file. The picture follows your finger; a quick flick turns it.             |
-| Swipe up                               | Pull up the details                                                                        |
-| Swipe down                             | Put the details away; with the details closed, close the viewer                            |
-| Pinch, or double-tap                   | Zoom a photo                                                                               |
-| Drag with one finger on a zoomed photo | Look around it                                                                             |
-| Tap a face                             | Open the person's page, or name someone not yet named; pin the faces in ⋮ to see the boxes |
-
-Turning the phone sideways makes the viewer fullscreen, and turning it upright again leaves
-fullscreen; an iPhone gives web pages no fullscreen, so there the viewer stays as it is. **Edit
-faces** is not offered on a phone. [Viewing photos, videos and recordings](../archive/viewer.md#on-a-phone-or-tablet)
-covers the viewer in full.
-
-The story that **On this day** plays works by touch too: tap the left third of the screen to go
-back, anywhere else to go on, and press and hold to pause until you let go. See
-[Home, memories and statistics](home.md).
+With the Archive installed, its viewer takes a touch layout on any touch screen, and in any browser
+window narrower than 768 pixels. Swipe sideways between files, up for the details, and down to put
+them away or, with them closed, to close the viewer: the touch layout has no close button.
+[On a phone or tablet](../archive/viewer.md#on-a-phone-or-tablet) covers its layout and gestures,
+and [Watch the memories story](../archive/home.md#watch-the-memories-story) the story that
+**On this day** plays on Home, which works by touch too.
 
 ## Upload from your phone
 
-Bring the photos and videos on your phone into your staging area with **Import media**:
+With the Archive installed, bring the photos and videos on your phone into your staging area with
+**Import media**:
 
 1. Tap the plus in the top bar, then **Import media**. The dialog fills the screen.
 2. Under **Into which category?**, pick where the files go. The **Inbox** is chosen at first. To
@@ -189,7 +171,7 @@ from the phone. The **Import media** dialog itself suggests copying over SFTP fo
 10,000 files; see [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp).
 
 On the Media page, **Search with a picture** can take a photo with the camera and find what looks
-like it; see [Search with a picture](search.md#search-with-a-picture).
+like it; see [Search with a picture](../archive/search.md#search-with-a-picture).
 
 ## Put EiN on your home screen
 
@@ -236,8 +218,8 @@ seconds by itself. On a phone a red crossed-out plug in the top bar tells you, i
   <kbd>Alt</kbd>+<kbd>T</kbd> still opens it; see [The terminal](../shell/terminal.md).
 - **Keyboard shortcuts**, unless a keyboard is connected. **Shortcuts** in the account menu still
   lists them.
-- **Edit faces** in the viewer.
-- **Keys and the column beside the stream in staging's Sort tab**, and selecting several groups
+- **Edit faces** in the Archive's viewer while the phone is held upright; turn it sideways to draw face boxes.
+- **Keys and the column beside the stream in the Archive's staging Sort tab**, and selecting several groups
   there; see [Sorting in staging](../archive/staging.md#on-a-phone).
 
 ## When something goes differently

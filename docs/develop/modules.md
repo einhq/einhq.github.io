@@ -8,8 +8,9 @@ part goes.
 ## What a module is
 
 A module is a folder with a `mod.json` at its top, kept in a repository of its own named
-`module-<name>`. Core knows no module by name: the Archive, the assistant and the media service
-client are modules like the one you write, and you can read their repositories to see any part on
+`module-<name>`. Core knows no module by name: the [Archive](../archive/index.md), the
+[Assistant](../assistant/index.md) and the media service client, `ems`
+([The media service](../ems/index.md)), are modules like the one you write, and you can read their repositories to see any part on
 this page at full size.
 
 When EiN sets a module up, it finds most of what the module brings by where it is in the folder.
@@ -142,8 +143,8 @@ echo "added /archive/recipes/$name"
 with the access of whoever runs it, like any script. [The shell language](../shell/bash.md#give-a-script-options-and-help-with-arg)
 lists every form `arg` takes.
 
-Say what the command does to the system with `arg --effect read` or `write`. The assistant runs a
-`read` command at once and shows a `write` to the person first; a command that says nothing is
+Say what the command does to the system with `arg --effect read` or `write`. With the Assistant
+installed, the assistant runs a `read` command at once and shows a `write` to the person first; a command that says nothing is
 treated as a write.
 
 ## Add a command in TypeScript
@@ -519,8 +520,8 @@ by what they do, and `CFG_LANGUAGE_MODEL` and `CFG_TEXT_EMBEDDER` name the comma
 for a language model or text vectors. The settings are in
 [the settings reference](../reference/settings.md).
 
-What the assistant knows about your module's commands, and how to give it more, is in
-[Teaching the assistant](../assistant/teaching.md).
+With the Assistant installed, what the assistant knows about your module's commands, and how to
+give it more, is in [Teaching the assistant](../assistant/teaching.md).
 
 ## Write documentation for it
 

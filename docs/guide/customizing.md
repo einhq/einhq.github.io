@@ -111,6 +111,13 @@ An administrator also gets **Nodes** and **Dashboard** under **System**. The
 [sidebar](interface.md#the-sidebar) and [top bar](interface.md#the-top-bar) sections of
 [Finding your way around](interface.md) say what each entry is.
 
+The first part of an id says where the entry comes from: `ui.` is EiN's own, and `archive.`,
+`assistant.` and `ems.` are the [Archive](../archive/index.md)'s, the
+[assistant](../assistant/index.md)'s and the [media service module](../ems/index.md)'s, there once
+that module is installed. On an EiN with no modules, the sidebar holds only **Home**, **Search**,
+**Settings**, **Statistics** and **Documentation**, with **Nodes** and **Dashboard** for an
+administrator, and there are no panels.
+
 When something in a file cannot be used, `ui-nav` says so after the list, on lines that start with
 `ui-nav:`; [When something goes differently](#when-something-goes-differently) explains each one.
 The browser's console shows the same lines.
@@ -161,6 +168,10 @@ the file in the terminal first; after that you can edit it here:
 This editor does not check the JSON. Run `ui-nav` afterwards, or reload the page and look.
 
 ## Rename, move and hide entries
+
+The examples on this page change entries the Archive and the assistant add, and lead to their
+pages, such as `/albums` and `/people/Peggy_Wrenfield`. The same works for any entry, EiN's own
+included, and for any address on your EiN.
 
 To rename **Albums** to **Photo albums**, move it up beside **Home**, and hide **Map**, write this in
 `~/.ui/nav.json`:

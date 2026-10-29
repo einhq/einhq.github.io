@@ -1,6 +1,8 @@
 # The graphics card
 
-This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.
+This page is for whoever runs the media service or the assistant's language model on their own machine and wants them to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the two share one card. It applies once the [media service](index.md) or the [Assistant](../assistant/index.md)'s own [language model](../assistant/language-model.md) is installed: it is the media service's page for the card, and also the one for the language model's use of it.
+
+Nothing in EiN needs a card; without one everything runs on the processor, more slowly.
 
 ## What the card is used for
 
@@ -266,4 +268,4 @@ The commands are written for podman. With Docker, write `docker compose` where t
 | The chat answers slowly on a machine with a card                                                                                                    | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many went to the card. Raise the part of the card it gets by lowering `LLM_CARD_RESERVE_MB` and `EMS_CARD_SHARE_MB` together. |
 | A transcription waits for a long time                                                                                                               | On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.                                                                         |
 
-[Troubleshooting](../admin/troubleshooting.md) has more, and [The media service](index.md) covers the media service beyond its card.
+[Troubleshooting](../admin/troubleshooting.md) has more. [The media service](index.md) covers the media service beyond its card, and [The language model](../assistant/language-model.md) the model beyond its card.

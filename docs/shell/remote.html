@@ -276,8 +276,9 @@ scp <span class="hljs-string">&quot;anna@nas.local:photos/*.jpg&quot;</span> /ho
 it (<code>*</code>, <code>?</code> and <code>[…]</code>, and a name starting with a dot only by a pattern that starts with one). When
 nothing matches, <code>scp</code> says <code>No match</code>.</p>
 <p>A file copied in is recorded the way an upload is: its size, checksum and type are worked out, and
-EiN&#39;s processing takes it in from there. Copying into your staging folder is a way to bring a
-machine&#39;s photos into the archive: see <a href="../archive/staging.html">Sorting in staging</a>.</p>
+the installed modules&#39; pipelines take it in from there. The examples copy into a staging folder,
+which the <a href="../archive/index.html">Archive</a> gives you: with it installed, that is a way to bring a
+machine&#39;s photos into the archive; see <a href="../archive/staging.html">Sorting in staging</a>.</p>
 <p>Copy out to another machine:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 scp -r /archive/albums/christmas-2019 anna@nas.local:backup/</code></pre></div>
@@ -500,8 +501,8 @@ mount to <code>/etc/fstab</code>, so it is made again every time EiN starts.</p>
 mount&#39;s <code>uid</code> and <code>gid</code>, whoever owns it there; the permission bits are the other machine&#39;s. To let
 a group read the files, give the mount that <code>gid</code> and make the files group-readable there.</li>
 <li><strong>Nothing is processed.</strong> The mount is a mirror: EiN makes no thumbnails, reads no dates and finds
-no faces in it. To bring photos into the archive, copy them into
-staging.</li>
+no faces in it. With the Archive installed, copy photos into staging to bring them into the
+archive.</li>
 <li><strong>It reconnects on its own.</strong> When the other machine goes away, commands on the mount fail with
 the reason and the time of the next attempt (<code>next attempt in 8s</code>); the wait grows to at most a
 minute between attempts.</li>

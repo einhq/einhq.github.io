@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Processing and pipelines – EiN documentation</title>
-    <meta name="description" content="This page is for the administrator. It covers the work EiN does on what people upload: which pipelines the modules bring, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings that decide how much runs at once.">
+    <meta name="description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/processing.html">
     <meta property="og:title" content="Processing and pipelines – EiN documentation">
-    <meta property="og:description" content="This page is for the administrator. It covers the work EiN does on what people upload: which pipelines the modules bring, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings that decide how much runs at once.">
+    <meta property="og:description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,186 +87,33 @@
           <h1>Processing and pipelines</h1>
         </header>
         <article class="prose">
-<p>This page is for the administrator. It covers the work EiN does on what people upload: which
-pipelines the modules bring, how to watch them on the <strong>Dashboard</strong> and in the terminal, what to do
-when work fails or stops moving, how to run work again on purpose, and the settings that decide
-how much runs at once.</p>
-<h2 id="what-runs-after-an-upload">What runs after an upload<a class="anchor" href="#what-runs-after-an-upload" aria-label="Link to this section"></a></h2>
+<p>This page is for the administrator. It covers core&#39;s pipeline engine: how pipelines, steps, pools
+and workers run, how to watch them on the <strong>Dashboard</strong> and in the terminal, what to do when work
+fails or stops moving, how to run work again on purpose, and the settings the engine has.</p>
+<p>Core brings the engine and no pipelines of its own, so an EiN without modules runs none, and the
+<strong>Work</strong> tab of the <strong>Dashboard</strong> stays empty. Pipelines come with modules: of the published ones,
+the Archive brings them all, with the workers that run them. <a href="../archive/processing.html">Processing pictures</a>
+covers the Archive&#39;s pipelines, workers and settings. The examples on this page name the
+Archive&#39;s pipelines, such as <code>media-faces</code>, which exist only with the Archive installed.</p>
+<h2 id="how-work-is-run">How work is run<a class="anchor" href="#how-work-is-run" aria-label="Link to this section"></a></h2>
 <p>A pipeline waits for one kind of change and then runs its steps, each a command, on the node that
 changed. <a href="../concepts/pipelines.html">Changes and pipelines</a> explains the idea; this page is about
-running it. Core brings the pipeline engine and no pipelines. The Archive brings all of the
-pipelines below, so with only core installed nothing is processed.</p>
+running it.</p>
 <p>Work is done in three places:</p>
 <ul>
 <li><strong>The pipeline engine</strong> (the <code>pipeline-engine</code> service) matches changes to pipelines, creates an
 <strong>instance</strong> for each pipeline and node, and runs the short steps itself.</li>
-<li><strong>Pool workers</strong> run the long steps. The engine puts each one as a job in a pool, and a worker
-takes it when it has room. The Archive brings <code>cpu</code>, for work done on this machine, such as
-reading metadata, making thumbnails and transcoding video, and <code>models</code>, for work done by a model
-in the <a href="../ems/index.html">media service</a>, such as finding faces or transcribing speech. A second
-model worker, <code>models-second</code>, runs beside <code>models</code> when <code>CFG_MODEL_SECOND_SLOTS</code> is above <code>0</code>;
-it is off by default.</li>
-<li><strong>Background services</strong> of the Archive: <code>archive-bridge</code> turns changes into the events the media
-pipelines wait for, and <code>media-heal</code> finds files that are missing something and announces them
-again (see <a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>).</li>
+<li><strong>Pool workers</strong> run the long steps. A step that names a pool and a kind of job goes as a job into
+that pool, under <code>/var/pools/</code>, and a worker takes it when it has room. A worker is a service that
+runs <code>pipeline-worker</code>, which takes the kinds it names from one pool, as many at once as its
+capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
+workers.</li>
+<li><strong>Background services</strong> of the modules turn changes into the events their pipelines wait for,
+and may announce work again on their own.</li>
 </ul>
 <p>Every pipeline runs at most once per node at a time: a file announced ten times while it waits is
-worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.</p>
-<h3 id="the-archives-pipelines">The Archive&#39;s pipelines<a class="anchor" href="#the-archives-pipelines" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Pipeline</th>
-<th>What it does</th>
-<th>Kind of work</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>media-ingest</code></td>
-<td>Reads a photo&#39;s, video&#39;s or recording&#39;s metadata. Every other media pipeline waits on it.</td>
-<td><code>ingest</code></td>
-</tr>
-<tr>
-<td><code>media-reindex</code></td>
-<td>Reads the metadata again for a file whose bytes changed</td>
-<td><code>ingest</code></td>
-</tr>
-<tr>
-<td><code>media-stills</code></td>
-<td>A photo&#39;s display sizes and face crops, a video&#39;s poster frames, a recording&#39;s waveform</td>
-<td><code>stills</code></td>
-</tr>
-<tr>
-<td><code>media-transcode</code></td>
-<td>Video and audio the browser can play, a video&#39;s hover clip, storyboard and chapters</td>
-<td><code>transcode</code>, <code>stills</code>, <code>shots</code></td>
-</tr>
-<tr>
-<td><code>media-fingerprint</code></td>
-<td>The fingerprints that find duplicates and photo stacks</td>
-<td><code>fingerprint</code></td>
-</tr>
-<tr>
-<td><code>media-faces</code></td>
-<td>Finds the faces in a photo and crops each one</td>
-<td><code>faces</code></td>
-</tr>
-<tr>
-<td><code>media-video-faces</code></td>
-<td>Finds the faces in a video and when each is on screen</td>
-<td><code>faces</code></td>
-</tr>
-<tr>
-<td><code>media-face-assign</code></td>
-<td>Matches a found face to a person</td>
-<td><code>face-assign</code></td>
-</tr>
-<tr>
-<td><code>media-face-transfer</code></td>
-<td>Moves face tags from an older archive onto the faces EiN found</td>
-<td><code>face-transfer</code></td>
-</tr>
-<tr>
-<td><code>media-embed-picture</code></td>
-<td>A picture vector, for searching by what is in the picture</td>
-<td><code>embed-picture</code></td>
-</tr>
-<tr>
-<td><code>media-ocr</code></td>
-<td>Reads the text written in a picture</td>
-<td><code>ocr</code></td>
-</tr>
-<tr>
-<td><code>media-embed-text</code></td>
-<td>Text vectors of a file&#39;s stored texts</td>
-<td><code>embed-text</code></td>
-</tr>
-<tr>
-<td><code>media-transcribe</code></td>
-<td>A transcript of what is said in a video or recording</td>
-<td><code>transcribe</code></td>
-</tr>
-<tr>
-<td><code>media-voiceprint</code></td>
-<td>Who speaks when in a recording, with a voiceprint per voice</td>
-<td><code>diarize</code></td>
-</tr>
-<tr>
-<td><code>media-speaker-assign</code></td>
-<td>Decides which person each voice is</td>
-<td><code>speaker-assign</code></td>
-</tr>
-<tr>
-<td><code>media-speaker-faces</code></td>
-<td>Ties a video&#39;s voices to the faces seen speaking them, once its faces are found</td>
-<td><code>diarize</code>, <code>speaker-assign</code></td>
-</tr>
-<tr>
-<td><code>media-device</code></td>
-<td>Links a file to the camera or phone that took it</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>media-geocode</code></td>
-<td>Looks up the address of a file&#39;s GPS position</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>media-album</code></td>
-<td>An album&#39;s stacks, time span, missing cover and profile, when its members change</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>media-duplicates</code></td>
-<td>Decides again the duplicate findings of a staged file</td>
-<td><code>dedupe</code></td>
-</tr>
-<tr>
-<td><code>location-link-point</code></td>
-<td>Links a photo to the location that contains its GPS point</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>location-upkeep</code></td>
-<td>Redraws a location and relinks the photos inside it when it or its photos change</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>document-index</code></td>
-<td>Extracts the text of a document and makes it searchable</td>
-<td>run by the engine</td>
-</tr>
-<tr>
-<td><code>staging-unzip</code></td>
-<td>Expands a zip that lands in a staging category, then removes the zip</td>
-<td><code>unzip</code></td>
-</tr>
-<tr>
-<td><code>staging-sidecars</code></td>
-<td>Pairs Takeout and XMP sidecars with their files</td>
-<td><code>sidecars</code></td>
-</tr>
-<tr>
-<td><code>staging-organize</code></td>
-<td>Plans a staging category&#39;s suggested groups again</td>
-<td><code>organize</code></td>
-</tr>
-<tr>
-<td><code>staging-retime</code></td>
-<td>Dates staged files again by the rules of the category they were moved into</td>
-<td><code>retime</code></td>
-</tr>
-<tr>
-<td><code>track-stage</code></td>
-<td>Makes a GPX file dropped in staging into its device&#39;s route</td>
-<td>run by the engine</td>
-</tr>
-</tbody></table>
-</div>
-<p>The <code>cpu</code> worker takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>face-transfer</code>,
-<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>. The
-<code>models</code> worker takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
-<code>shots</code>, and <code>models-second</code> the same kinds in the reverse order. <code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
+worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.
+<code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
 <h2 id="watch-the-work-on-the-dashboard">Watch the work on the Dashboard<a class="anchor" href="#watch-the-work-on-the-dashboard" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Sign in as an administrator and choose <strong>Dashboard</strong> in the sidebar, under <strong>System</strong>.</li>
@@ -275,7 +122,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <strong>Overview</strong> tab.</li>
 <li>Choose the <strong>Work</strong> tab.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive&#39;s.</figcaption></figure>
 <p>The table has a row for every defined pipeline, also one that has never run, and a total row
 <strong>All pipelines</strong> at the foot. The bar draws the same counts as the columns.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -329,10 +176,10 @@ the pipeline&#39;s page.</p>
 <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. This is where the slow steps are. A
 kind may carry a badge:</p>
 <ul>
-<li><strong>waiting for EMS</strong>: the media service could not run this kind yet, because it was busy, loading
-a model, restarting or unreachable. The jobs are not failed. The kind rests for 30 seconds, then
-twice as long each time it is refused again, up to 10 minutes; hover over the badge for the next
-try.</li>
+<li><strong>waiting for EMS</strong>: a step of this kind could not run yet, because a service it needs was busy,
+loading a model, restarting or unreachable; for the Archive&#39;s steps that service is the media
+service. The jobs are not failed. The kind rests for 30 seconds, then twice as long each time it
+is refused again, up to 10 minutes; hover over the badge for the next try.</li>
 <li><strong>no worker</strong>: no running worker takes this kind, so the jobs will never run.</li>
 </ul>
 <p><strong>Ongoing</strong> lists the instances with a step running, with the target file and how long it has run.
@@ -413,13 +260,15 @@ bare id that more than one pipeline uses is refused with the pipelines it could 
 <p>A failed step is tried again up to its limit of attempts, three unless the pipeline says
 otherwise, before the instance fails. Two kinds of failure are treated differently:</p>
 <ul>
-<li><strong>The media service could not do it yet.</strong> The step goes back to wait with its attempt given
-back, and its kind rests, as <strong>waiting for EMS</strong> shows. Nothing fails however long the media
-service is away.</li>
+<li><strong>A service the step needs could not do it yet.</strong> The step goes back to wait with its attempt
+given back, and its kind rests, as <strong>waiting for EMS</strong> shows. Nothing fails however long the
+service is away. The Archive&#39;s steps fail this way while the media service is busy or away.</li>
 <li><strong>The file itself cannot be processed</strong>, such as bytes no decoder can open. The step fails at
 once, whatever attempts are left, and the file is not tried again. <code>health</code> counts these under
 <code>input</code> and treats them as settled.</li>
 </ul>
+<p>A step tells the two apart by its exit code; <a href="../concepts/pipelines.html#when-a-step-fails">Changes and pipelines</a>
+lists them.</p>
 <h3 id="failed-work-is-run-again-on-its-own">Failed work is run again on its own<a class="anchor" href="#failed-work-is-run-again-on-its-own" aria-label="Link to this section"></a></h3>
 <p>The <code>pipeline-pruner</code> service runs <code>pipeline-heal --apply</code> every hour (<code>CFG_PIPELINE_PRUNE_INTERVAL</code>,
 3600 seconds). It runs each failed instance again 1 hour after it failed, then 6 hours after the
@@ -443,7 +292,7 @@ pipeline&#39;s page.</p>
 </li>
 <li><p>Open one and choose the failed step to read its <strong>Error</strong>.</p>
 </li>
-<li><p>Fix the cause: start the media service, free disk space, or replace the file.</p>
+<li><p>Fix the cause: start the service the step needs, free disk space, or replace the file.</p>
 </li>
 <li><p>Run the instance again with <strong>Rerun</strong> on its page, or with <code>pipeline-rerun</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -492,93 +341,54 @@ pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code><
 and <code>health</code> (as a failed check <code>kind &lt;name&gt;</code>) both say so. The usual cause is that the worker
 service is stopped:</p>
 <ol>
-<li>Open the <strong>Services</strong> tab of the <strong>Dashboard</strong>, or run <code>service-list</code>, and look at <code>cpu</code> and
-<code>models</code>.</li>
+<li>Open the <strong>Services</strong> tab of the <strong>Dashboard</strong>, or run <code>service-list</code>, and look at the workers;
+with the Archive installed, they are <code>cpu</code> and <code>models</code>.</li>
 <li>Start the one that is stopped, or read its log if it keeps stopping.
 <a href="services-logs.html">Services and logs</a> shows how.</li>
 </ol>
 <p>When no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was
-removed. The warning then gives the command that cancels them:</p>
+removed. The warning then gives the command that cancels them, with the pool&#39;s path, such as the
+Archive&#39;s <code>/var/pools/media</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pool-cancel /var/pools/media --kind &lt;kind&gt;</code></pre></div>
 <h3 id="dropped-events">Dropped events<a class="anchor" href="#dropped-events" aria-label="Link to this section"></a></h3>
 <p>An event that fails ten delivery attempts, for example because its node no longer exists, is set
 aside rather than tried forever. The <strong>Work</strong> table then shows <strong>N dropped</strong>, and <code>health</code> fails
-its <code>queue …</code> check until you deal with them:</p>
+its <code>queue …</code> check until you deal with them. The engine&#39;s own queue is
+<code>/var/queues/pipeline-engine</code>; a module that turns changes into events has a queue of its own, such
+as the Archive&#39;s <code>/var/queues/archive-bridge</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-queue-dead /var/queues/archive-bridge           <span class="hljs-comment"># list what was set aside</span>
-queue-dead --retry /var/queues/archive-bridge   <span class="hljs-comment"># put them back in line</span>
-queue-dead --drop /var/queues/archive-bridge    <span class="hljs-comment"># delete them</span></code></pre></div>
-<p>The engine&#39;s own queue is <code>/var/queues/pipeline-engine</code>. <code>--id</code> limits <code>--retry</code> or <code>--drop</code> to
-one entry.</p>
-<h3 id="steps-waiting-for-the-media-service">Steps waiting for the media service<a class="anchor" href="#steps-waiting-for-the-media-service" aria-label="Link to this section"></a></h3>
-<p>When <strong>waiting for EMS</strong> stays on a kind, the media service is the place to look:
-<a href="../ems/index.html">The media service</a> shows how to check it. Once it answers again, the kind tries
-on its own at its next try. To try at once:</p>
+queue-dead /var/queues/pipeline-engine           <span class="hljs-comment"># list what was set aside</span>
+queue-dead --retry /var/queues/pipeline-engine   <span class="hljs-comment"># put them back in line</span>
+queue-dead --drop /var/queues/pipeline-engine    <span class="hljs-comment"># delete them</span></code></pre></div>
+<p><code>--id</code> limits <code>--retry</code> or <code>--drop</code> to one entry.</p>
+<h3 id="steps-waiting-for-a-service">Steps waiting for a service<a class="anchor" href="#steps-waiting-for-a-service" aria-label="Link to this section"></a></h3>
+<p>When <strong>waiting for EMS</strong> stays on a kind, the service its steps need is the place to look; for the
+Archive&#39;s steps it is the media service, and <a href="../ems/index.html">The media service</a> shows how to
+check it. Once it answers again, the kind tries on its own at its next try. To try at once:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pool-wake               <span class="hljs-comment"># every resting kind</span>
 pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre></div>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>You want to</th>
-<th>Run</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Run one pipeline on one file</td>
-<td><code>pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg</code></td>
-</tr>
-<tr>
-<td>Transcode a video again although it has renditions</td>
-<td><code>pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
-</tr>
-<tr>
-<td>Make the renditions again under a folder, without the pipelines</td>
-<td><code>regenerate --force /archive/albums/christmas-2019</code></td>
-</tr>
-<tr>
-<td>Announce files the Archive never saw, or that are missing work</td>
-<td><code>media-scan /archive/albums</code></td>
-</tr>
-</tbody></table>
-</div>
-<p><code>pipeline-start</code> starts the run at once, in the normal lane, and skips the checks a trigger makes.
-<code>--var</code> sets a variable the pipeline declares; <code>media-transcode</code>, <code>media-transcribe</code>,
-<code>media-embed-picture</code> and <code>media-ocr</code> declare <code>FORCE</code>, which <code>-f</code> makes them redo work already done.
-A pipeline that reads its starting event has nothing to read when started by hand, and
-<code>pipeline-start</code> warns about it.</p>
-<h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
-<p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, display sizes, faces, renditions, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips
-what is already done.</p>
-<p>The <code>media-heal</code> service runs it for you, but only when nothing is waiting in the pools, so a scan
-never repeats what is already on its way. It looks every <code>CFG_MEDIA_HEAL_INTERVAL</code> seconds (900),
-and after a pass through the whole archive it rests for <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six
-hours).</p>
-<p>Run it by hand after installing the Archive on files that were already there, or to look at one
-folder:</p>
+<p><code>pipeline-start</code> runs one pipeline on one node:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-media-scan -n /archive/albums/christmas-2019    <span class="hljs-comment"># only report what it would announce</span>
-media-scan /archive/albums/christmas-2019</code></pre></div>
-<p>A run examines up to 20000 files (<code>--scan-limit</code>) and announces up to 1000 (<code>--limit</code>), and
-remembers where it stopped, so the next run goes on from there; <code>--restart</code> starts from the top. It
-announces fewer as running <code>media-ingest</code> instances and waiting triggers add up, and nothing once they reach 500
-(<code>--max-active</code>).</p>
-<p><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code> set to <code>off</code> stops transcripts from being made again when the
-media service&#39;s speech settings change. On a large archive such a change otherwise means hours of
-background work.</p>
-<h2 id="large-imports-and-the-bulk-lane">Large imports and the bulk lane<a class="anchor" href="#large-imports-and-the-bulk-lane" aria-label="Link to this section"></a></h2>
-<p>Work on a staging category of the <strong>Google Photos export</strong> or <strong>Scans</strong> kind runs in the bulk lane,
-below all other work, so what people upload in the meantime is processed first. Bulk work is put
-behind, never stopped: it runs whenever nothing else that could run is waiting. Any category can be
-put in that lane with <code>staging category &lt;name&gt; --lane bulk</code>, which applies to work announced from
-then on. <a href="../archive/staging-admin.html">Staging and importing for administrators</a> covers categories.</p>
+pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg
+pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></pre></div>
+<p>It starts the run at once, in the normal lane, and skips the checks a trigger makes. <code>--var</code> sets a
+variable the pipeline declares; the second line makes the Archive&#39;s <code>media-transcode</code> redo a video
+that already has its renditions. A pipeline that reads its starting event has nothing to read when
+started by hand, and <code>pipeline-start</code> warns about it.</p>
+<p>A module may bring commands of its own for redoing its work over many files; the Archive&#39;s are
+<code>regenerate</code> and <code>media-scan</code>, described in <a href="../archive/processing.html#run-work-again-on-purpose">Processing pictures</a>.</p>
+<h2 id="the-bulk-lane">The bulk lane<a class="anchor" href="#the-bulk-lane" aria-label="Link to this section"></a></h2>
+<p>An event can put the work it starts in the bulk lane, below all other work, so that what people do
+in the meantime is processed first. Bulk work is put behind, never stopped: it runs whenever
+nothing else that could run is waiting. With the Archive installed, the work on a large import
+runs there; <a href="../archive/processing.html#large-imports-and-the-bulk-lane">Processing pictures</a> says
+which.</p>
 <p><code>pipeline-rerun</code> and <code>pipeline-start</code> always run in the normal lane; <code>pipeline-heal</code> keeps the
 lane an instance had.</p>
-<h2 id="how-much-runs-at-once">How much runs at once<a class="anchor" href="#how-much-runs-at-once" aria-label="Link to this section"></a></h2>
+<h2 id="the-engines-settings">The engine&#39;s settings<a class="anchor" href="#the-engines-settings" aria-label="Link to this section"></a></h2>
 <p>These settings are in the <strong>Processing</strong> category of <strong>Settings → System</strong>, or set with
 <code>config set</code>. Saving one restarts the service that reads it, when it is read by a service, and work
 in progress is picked up again; <code>CFG_PIPELINE_STEP_QUIET_MS</code> restarts nothing and counts from the
@@ -592,31 +402,6 @@ next look. <a href="configuration.html">Configuration</a> explains how.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="../reference/settings.html#cfg_cpu_slots"><code>CFG_CPU_SLOTS</code></a></td>
-<td><code>2</code></td>
-<td>How much CPU work the <code>cpu</code> worker runs at once. A transcode takes two slots, other kinds one.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code></a></td>
-<td><code>1</code></td>
-<td>Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_cpu_workers"><code>CFG_CPU_WORKERS</code></a></td>
-<td><code>4</code></td>
-<td>The most CPU jobs in flight; the slots are the real limit</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
-<td><code>2</code></td>
-<td>Requests the <code>models</code> worker keeps in flight against the media service. Size it to what the media service runs at once.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_model_kind_quantum_ms"><code>CFG_MODEL_KIND_QUANTUM_MS</code></a></td>
-<td><code>3600000</code></td>
-<td>How long the <code>models</code> worker stays on one kind before turning to the next, so faces do not starve the rest</td>
-</tr>
-<tr>
 <td><a href="../reference/settings.html#cfg_pipeline_max_concurrent"><code>CFG_PIPELINE_MAX_CONCURRENT</code></a></td>
 <td><code>4</code></td>
 <td>Steps the engine itself runs at once</td>
@@ -634,12 +419,10 @@ next look. <a href="configuration.html">Configuration</a> explains how.</p>
 </tbody></table>
 </div>
 <p>The engine has more settings, for how many triggers and instances it holds; their defaults suit a
-machine of any size, and <a href="../reference/settings.html#processing">Settings</a> lists them all.
-<a href="performance.html">Performance and sizing</a> says what to set on a small or a large machine.</p>
-<aside class="callout callout-tip"><p class="callout-title">Tip</p>
-<p>More <code>CFG_MODEL_SLOTS</code> than the media service runs at once only moves the wait into its queue,
-and past its depth into <strong>waiting for EMS</strong>.</p>
-</aside>
+machine of any size, and <a href="../reference/settings.html#processing">Settings</a> lists them all. The
+<strong>Processing</strong> category also holds the settings modules bring, such as how much work the Archive&#39;s
+workers run at once; <a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> covers
+those. <a href="performance.html">Performance and sizing</a> says what to set on a small or a large machine.</p>
 <h2 id="old-instances-are-pruned">Old instances are pruned<a class="anchor" href="#old-instances-are-pruned" aria-label="Link to this section"></a></h2>
 <p>Instances are nodes under <code>/var/pipelines/instances/&lt;pipeline&gt;/</code>. Every hour the <code>pipeline-pruner</code>
 service deletes pool jobs that finished more than 24 hours ago, runs <code>pipeline-heal --apply</code>, and
@@ -659,11 +442,11 @@ pipeline of your own, see <a href="../develop/modules.html">Writing a module</a>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="../concepts/pipelines.html">Changes and pipelines</a>: how a change becomes finished work.</li>
+<li><a href="../archive/processing.html">Processing pictures</a>: the Archive&#39;s pipelines, workers and settings.</li>
 <li><a href="monitoring.html">Health and the dashboard</a>: the four words and the <strong>Overview</strong> tab.</li>
-<li><a href="../ems/index.html">The media service</a>: where the model work and much of the media work runs.</li>
-<li><a href="performance.html">Performance and sizing</a>: what the slots should be on your machine.</li>
+<li><a href="performance.html">Performance and sizing</a>: what to set on your machine.</li>
 <li><a href="services-logs.html">Services and logs</a>: starting, stopping and reading the workers.</li>
-<li><a href="troubleshooting.html">Troubleshooting</a>: when photos do not get thumbnails, faces or dates.</li>
+<li><a href="troubleshooting.html">Troubleshooting</a>: when work does not get done.</li>
 <li><a href="../reference/commands-core.html#pipeline">Core commands</a>: every <code>pipeline-</code> and <code>pool-</code> command.</li>
 </ul>
 
@@ -673,7 +456,7 @@ pipeline of your own, see <a href="../develop/modules.html">Writing a module</a>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li class="nested"><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#watch-the-work-on-the-dashboard">Watch the work on the Dashboard</a></li><li><a href="#watch-the-work-in-the-terminal">Watch the work in the terminal</a></li><li><a href="#look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances</a></li><li><a href="#when-work-fails">When work fails</a></li><li class="nested"><a href="#failed-work-is-run-again-on-its-own">Failed work is run again on its own</a></li><li class="nested"><a href="#work-that-needs-a-person">Work that needs a person</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li class="nested"><a href="#dropped-events">Dropped events</a></li><li class="nested"><a href="#steps-waiting-for-the-media-service">Steps waiting for the media service</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#old-instances-are-pruned">Old instances are pruned</a></li><li><a href="#pipelines-come-with-modules">Pipelines come with modules</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-work-is-run">How work is run</a></li><li><a href="#watch-the-work-on-the-dashboard">Watch the work on the Dashboard</a></li><li><a href="#watch-the-work-in-the-terminal">Watch the work in the terminal</a></li><li><a href="#look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances</a></li><li><a href="#when-work-fails">When work fails</a></li><li class="nested"><a href="#failed-work-is-run-again-on-its-own">Failed work is run again on its own</a></li><li class="nested"><a href="#work-that-needs-a-person">Work that needs a person</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li class="nested"><a href="#dropped-events">Dropped events</a></li><li class="nested"><a href="#steps-waiting-for-a-service">Steps waiting for a service</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#the-engines-settings">The engine's settings</a></li><li><a href="#old-instances-are-pruned">Old instances are pruned</a></li><li><a href="#pipelines-come-with-modules">Pipelines come with modules</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

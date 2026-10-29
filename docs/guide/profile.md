@@ -1,10 +1,12 @@
 # Your profile, favourites and trash
 
 This page covers the pages that belong to your account alone: your profile, where you change your
-name, your preferences and your password; your favourites; and your trash, where what you delete
-waits before it is removed for good. It is for everyone who has an account on EiN.
+name, your preferences and your password; your favourites, which the
+[Archive](../archive/index.md) gathers on a page of their own; and your trash, where what you
+delete waits before it is removed for good. It is for everyone who has an account on EiN.
 
-All three open from the account menu. Choose your picture at the right end of the top bar:
+All three open from the account menu, **Favourites** once the Archive is installed. Choose your
+picture at the right end of the top bar:
 
 ![The account menu open under the picture in the top bar: Favourites, Profile and Trash, then Shortcuts with the ? key and About EiN, then Logout](../../assets/shots/account-menu.webp "Favourites, Profile and Trash are the pages of your own account.")
 
@@ -15,8 +17,8 @@ menu.
 ## Open your profile
 
 Choose your picture, then **Profile**. The page's header shows your display name, your username
-after an `@`, and the description you gave yourself. Its picture is the cover photo of the person
-your account is linked to; without one it shows the first letter of your name.
+after an `@`, and the description you gave yourself. With the Archive, its picture is the cover
+photo of the person your account is linked to; without one it shows the first letter of your name.
 
 The profile has three tabs: **Account**, **Preferences** and **Security**. The tab you are on is in
 the page's address, so `/profile?tab=preferences` opens your preferences and
@@ -42,7 +44,7 @@ Three things about your account are not on this tab:
   Users**; see [Accounts and groups](../admin/accounts.md). When your account has one, you can type
   it instead of your username when you sign in. The profile does not show it; `user-info` in the
   terminal does, under [From the terminal](#from-the-terminal).
-- **Your picture**, which comes from the person your account is linked to, below.
+- **Your picture**, which with the Archive comes from the person your account is linked to, below.
 
 > [!NOTE]
 > Your display name, description and e-mail address are not private. Anyone who is signed in can
@@ -50,9 +52,9 @@ Three things about your account are not on this tab:
 
 ### Your picture and the person you are
 
-EiN has no way to upload a picture for an account. Your picture is the person in the archive that
-your account is linked to. Helen Okafor's account, for example, can be linked to her page among the
-**People**, and then:
+EiN has no way to upload a picture for an account. With the Archive installed, your picture is the
+person in the archive that your account is linked to. Helen Okafor's account, for example, can be
+linked to her page among the **People**, and then:
 
 - your picture in the top bar and on your profile is her cover photo;
 - the account menu has **Me** above **Favourites**, which opens her page;
@@ -143,7 +145,8 @@ The choices for **Header entrance**:
 
 This preference decides how an album you create starts out: one made with **Create → Album**, with
 **New album “…”** in **Add to an album**, or with **New album** in staging. It does not change albums
-that exist already; to change who sees one of those, use its **Share** button.
+that exist already; to change who sees one of those, use its **Share** button. Albums come with the
+Archive; without it, nothing you create follows this preference.
 
 | Choice     | A new album starts out                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -260,8 +263,9 @@ it. [Accounts and groups](../admin/accounts.md) covers this from the administrat
 ## Favourites
 
 Your favourites are the pictures you have marked with a heart, from any album, gathered on one page.
-Only someone signed in has favourites; visitors have none. The Favourites page and its row in the
-account menu come with the Archive module.
+Only someone signed in has favourites; visitors have none. The heart, the Favourites page and its
+row in the account menu come with the [Archive](../archive/index.md); in any EiN, `star` in the
+terminal marks a node as a favourite (see [From the terminal](#from-the-terminal)).
 
 A favourite is a link to the picture where it lives, kept in the folder `stars` in your home
 folder. Hearting a picture never copies or moves it, and taking it out of your favourites never
@@ -297,12 +301,14 @@ Favourite, or press the heart in the lightbox.", with a button **Open Media**.
 
 ## The trash
 
-When you delete pictures, albums, people and the like in the web interface, they go to your trash
-first. You can restore them from there for 30 days, unless your administrator chose another
-number; the few ways of deleting that skip the trash are listed below. Only you see your trash,
-apart from an administrator, who can see everyone's.
+When you delete something in the web interface, such as with the Archive a picture, an album or a
+person, it goes to your trash first. You can restore it from there for 30 days, unless your
+administrator chose another number; the few ways of deleting that skip the trash are listed below.
+Only you see your trash, apart from an administrator, who can see everyone's.
 
 ### What goes to the trash
+
+Every row but the last is on the Archive's pages; `trash put` works in any EiN.
 
 | What you do                                                       | What goes                                                                                                    |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -319,9 +325,9 @@ the quickest way back; the Trash page is for later.
 What you delete goes to _your_ trash, also when it belongs to someone else who lets you change it.
 If a picture disappears from an album of yours, the person who deleted it has it in their trash.
 
-While something is in the trash, it is gone for everyone: from albums, search, the map and every
-other list. It keeps what EiN worked out about it, such as faces and a transcript, and comes back
-with all of it when you restore it.
+While something is in the trash, it is gone for everyone: from search, `ls` and every other list,
+and with the Archive from albums and the map. It keeps what EiN worked out about it, such as faces
+and a transcript, and comes back with all of it when you restore it.
 
 ### What is deleted for good at once
 
@@ -420,7 +426,7 @@ browser:
 | [`user-info`](../reference/commands-core.md#user-info) `<username>`                              | Shows an account's display name, numbers, e-mail address and description.                                                                                                          |
 | [`user-update`](../reference/commands-core.md#user-update) `<username> --name=… --description=…` | Changes your display name and description, as **Save changes** does.                                                                                                               |
 | [`user-passwd`](../reference/commands-core.md#user-passwd) `<username> --old-password=…`         | Changes your password; it asks for the new one with `Password:`. A password typed on the command line can end up in your shell history, so the **Security** tab is the better way. |
-| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`, `star list`             | Hearts a picture, takes the heart away, or lists your favourites.                                                                                                                  |
+| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`, `star list`             | Marks a node, such as a picture, as a favourite, takes the mark away, or lists your favourites.                                                                                    |
 
 ```bash
 # in EiN's terminal
@@ -443,11 +449,11 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg
 
 | What you see                                                        | Why                                                                                                 | What to do                                                                                                             |
 | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| There is no **Me** in the account menu, and your picture is letters | Your account is not linked to a person in the archive.                                              | Ask an administrator to link it, as under [Your picture and the person you are](#your-picture-and-the-person-you-are). |
+| There is no **Me** in the account menu, and your picture is letters | The Archive is not installed, or your account is not linked to a person in the archive.             | Ask an administrator to link it, as under [Your picture and the person you are](#your-picture-and-the-person-you-are). |
 | **Update password** stays greyed out                                | A field is empty, or the two new passwords differ.                                                  | Fill in all three, and type the new password the same way twice.                                                       |
 | A preference you saved does not show in another tab                 | That tab loaded your preferences before you saved.                                                  | Reload the tab.                                                                                                        |
 | `echo $CFG_USER_…` prints an empty line                             | You never changed that setting: defaults are not written into the file.                             | `config list --scope user` shows every value, defaults included.                                                       |
-| There is no heart in the viewer and no **Favourite** button         | You are not signed in.                                                                              | Sign in.                                                                                                               |
+| There is no heart in the viewer and no **Favourite** button         | You are not signed in. The viewer and the button come with the Archive.                             | Sign in.                                                                                                               |
 | Something you deleted is not in your trash                          | Someone else deleted it, and it is in their trash; or it was deleted for good; or its days ran out. | Ask the person who deleted it. Nothing brings back what was deleted for good.                                          |
 | Restoring fails with a message that ends in `is gone`               | The folder or album it came from is no longer there.                                                | Restore that album or folder first, if it is in the trash, then restore the picture.                                   |
 

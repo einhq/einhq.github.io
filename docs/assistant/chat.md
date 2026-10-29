@@ -2,7 +2,7 @@
 
 The assistant answers questions about what your family keeps in EiN, and about EiN itself, in your own words. It looks things up by running EiN's own commands as you, shows you every command it ran, and asks you before it changes anything. This page is for everyone who uses the chat.
 
-The chat comes with the assistant module. If you do not see **Chat** in the sidebar, the module is not installed; your administrator can add it (see [Modules](../admin/modules.md)).
+The chat comes with the [Assistant](index.md) module, and this page applies once it is installed. If you do not see **Chat** in the sidebar, the module is not installed; your administrator can add it (see [Modules](../admin/modules.md)). Pictures, people, albums and places come with the [Archive](../archive/index.md): where this page shows them, it assumes the Archive is installed too.
 
 ## Open the chat
 
@@ -89,7 +89,7 @@ Names in the answer are links: a picture opens in the viewer, a person, album or
 
 ### Show in search
 
-When the assistant searched, **Show in search** opens that search with its filters filled in: on the Media page for photos, videos and recordings, and on the Search page when it looked for albums, people, places, devices or tracks. Use it to see how the assistant understood your question, and to change the filters yourself. [Search and the finder](../guide/search.md) explains the filters.
+When the assistant searched, **Show in search** opens that search with its filters filled in: on the Media page for photos, videos and recordings, and on the Search page when it looked for albums, people, places, devices or tracks. Use it to see how the assistant understood your question, and to change the filters yourself. [Search and the finder](../archive/search.md) explains the filters.
 
 ### Tables
 
@@ -232,4 +232,4 @@ These work on the demo archive of the Wrenfield family; use the names in your ow
 | Which services are running?                                                    | A list or table of EiN's services and how they are doing                 |
 | How much disk space is used?                                                   | The space used and free, from the machine EiN runs on                    |
 
-For more about finding pictures without the chat, see [Search and the finder](../guide/search.md).
+For more about finding pictures without the chat, see [Search and the finder](../archive/search.md).

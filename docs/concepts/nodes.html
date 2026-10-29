@@ -91,6 +91,9 @@
 page takes one node apart, says what each part means and how to look at it in the web interface and
 the shell, and explains what a node&#39;s type decides. It is for anyone who wants to understand what
 they see in <code>ls -l</code>, in <strong>Nodes</strong> or in a node&#39;s <strong>Properties</strong>.</p>
+<p>The examples come from the Wrenfield family&#39;s archive. Its paths, such as <code>/archive/albums</code> and
+<code>/archive/people</code>, and the types <code>album</code> and <code>person</code> exist with the <a href="../archive/index.html">Archive</a>
+installed; what the page says about nodes is core&#39;s and holds for every type.</p>
 <h2 id="what-a-node-is-made-of">What a node is made of<a class="anchor" href="#what-a-node-is-made-of" aria-label="Link to this section"></a></h2>
 <p>Every node has the same five parts, whatever its type:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -252,7 +255,7 @@ not change them.</em></li>
 <li><strong>Sharing</strong> is the <strong>Share</strong> dialog&#39;s body; <a href="../admin/permissions.html">Permissions in depth</a>
 explains it.</li>
 </ul>
-<p>Everyone else meets nodes through the pages made for them: an album&#39;s page shows an <code>album</code> node
+<p>Everyone else meets nodes through the pages modules make for them: with the Archive, an album&#39;s page shows an <code>album</code> node
 and the files in it, a person&#39;s page a <code>person</code> node and what links to it.</p>
 <h3 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h3>
 <p>Five commands show a node, each a different amount of it. All of them take a path.</p>
@@ -409,8 +412,8 @@ type has its own:</p>
 <p>So <code>/archive/albums/christmas-2019</code> is the album&#39;s path, and <em>Christmas at the cottage</em>, the
 title on its page, is its <code>name</code> attribute.</p>
 <h3 id="change-an-attribute">Change an attribute<a class="anchor" href="#change-an-attribute" aria-label="Link to this section"></a></h3>
-<p>Change what a node means through the command or page made for it, when there is one: give Peggy a
-death date with <code>person-update --died=…</code> or on her page, describe a photo with
+<p>Change what a node means through the command or page made for it, when there is one: with the
+Archive, give Peggy a death date with <code>person-update --died=…</code> or on her page, describe a photo with
 <code>file-set-description</code>, and rename an album on its page. Those check the value and keep everything
 that depends on it in step.</p>
 <p>For anything else, <code>attrs</code> sets and removes attributes directly:</p>
@@ -471,7 +474,7 @@ for the type.</p>
 </tbody></table>
 </div>
 <p>A <code>directory</code>, <code>album</code> or <code>person</code> holds no content, only attributes and children.</p>
-<p>Children work the same for every type. A photo keeps what EiN works out about it beneath itself:</p>
+<p>Children work the same for every type. With the Archive, a photo keeps what EiN works out about it beneath itself:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -535,7 +538,7 @@ simply undescribed.</p>
 </thead>
 <tbody><tr>
 <td><strong>Content</strong></td>
-<td>What the archive is made of: files, albums, people, locations, devices, positions, tracks, faces.</td>
+<td>What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, devices and faces.</td>
 </tr>
 <tr>
 <td><strong>Structure</strong></td>

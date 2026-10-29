@@ -4,9 +4,9 @@ This page is for power users and administrators who know what they want to do an
 
 ## How to read the tables
 
-- Every command runs as you, with your permissions, in [the terminal](terminal.md) or over [SSH](ssh-sftp.md). The examples use the demo archive's invented Wrenfield family: the album `/archive/albums/christmas-2019`, the person `/archive/people/Peggy_Wrenfield`, the account `helen`.
+- Every command runs as you, with your permissions, in [the terminal](terminal.md) or over [SSH](ssh-sftp.md). The examples use the demo archive's invented Wrenfield family: the album `/archive/albums/christmas-2019`, the person `/archive/people/Peggy_Wrenfield`, the account `helen`. Albums and people come with the [Archive](../archive/index.md), so those paths are there once it is installed.
 - _administrators only_ marks a command that anyone else is refused before it starts, with `<name>: permission denied: only an administrator may run it`. A member of the `sudo` group can type `admin` to act as the administrator in that terminal. [Accounts and groups](../admin/accounts.md) explains who that is.
-- The archive, assistant and media service commands come with their [modules](../admin/modules.md). Without the module, the shell answers `error: command '<name>' not found`. `mod list` shows what is installed.
+- The [archive](../archive/index.md), [assistant](../assistant/index.md) and [media service](../ems/index.md) commands come with their [modules](../admin/modules.md). Without the module, the shell answers `error: command '<name>' not found`. `mod list` shows what is installed.
 - A command of a family can be typed as two words: `mod install` is `mod-install`, and `pipeline status` is `pipeline-status`. The families are `config`, `docs`, `group`, `mod`, `pipeline`, `pool`, `service`, `share` and `user`, and with the archive also `person` and `device`. `<family> --help`, such as `mod --help`, lists its subcommands; typing `mod` alone answers `mod: missing subcommand`.
 - `<command> --help` prints a command's arguments, options and examples without running it. `JSON_OUTPUT=1` in front of a command makes it answer in JSON; [The shell language](bash.md) covers that and the rest of the syntax.
 - `cd`, `pwd`, `jobs`, `kill` and the other bash builtins have no reference entry. They are described in [The shell language](bash.md).
@@ -49,7 +49,7 @@ The tree works like a file system: paths start at `/`, `..` is the parent, and `
 
 ## Search and find
 
-`search` looks through what EiN knows about your content: the words, what the pictures show, the people in them, dates and places. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the web interface.
+`search` looks through what EiN knows about your content. It asks each installed module's search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive, as in the examples below, the words, what the pictures show, the people in them, dates and places. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the web interface.
 
 | Task                                   | Command                                                                 | Reference                                                                                                 |
 | -------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -77,7 +77,7 @@ The node types `find -type` takes are listed in [Node types](../reference/node-t
 
 ## The archive
 
-These commands come with the archive module. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. [Albums](../archive/albums.md), [People and faces](../archive/people.md) and the other guide pages show the same tasks in the web interface.
+These commands come with the archive module and are there once it is installed; [The Archive](../archive/index.md) says what it adds. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. [Albums](../archive/albums.md), [People and faces](../archive/people.md) and the other guide pages show the same tasks in the web interface.
 
 ### Albums
 
@@ -180,7 +180,7 @@ The family relations, events and homes are explained in [Family tree, events and
 | What the archive has from this day in earlier years  | `onthisday`, `onthisday 12-24`                              | [onthisday](../reference/commands-core.md#onthisday) |
 | Pictures taken on a day in past years                | `dayinhistory 12-24 --years 20`                             | [dayinhistory](../archive/commands.md#dayinhistory)  |
 
-`news`, `events` and `onthisday` are core commands that gather what every installed module tells; without the archive they have little to say. [Home, memories and statistics](../guide/home.md) shows the same feeds on the Home page.
+`news`, `events` and `onthisday` are core commands that gather what every installed module tells; without the archive they have little to say. [Memories, news and events on Home](../archive/home.md) shows the same feeds on the Home page.
 
 ### Duplicates and staging
 
@@ -278,19 +278,19 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 
 ### Health and activity
 
-| Task                                                           | Command                                    | Reference                                                      |
-| -------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| Is everything fine and keeping up                              | `health`                                   | [health](../reference/commands-core.md#health)                 |
-| Watch the system live                                          | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
-| Commands running, yours or everyone's (administrator)          | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
-| Who is signed in, from where, doing what                       | `who`                                      | [who](../reference/commands-core.md#who)                       |
-| Free space per storage tier, and when it fills                 | `df`                                       | [df](../reference/commands-core.md#df)                         |
-| CPU, memory and lag over the last hours                        | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
-| Meters the services add, such as the graphics card's memory    | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
-| Versions of EiN, PostgreSQL and Deno, and each module's commit | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
-| How the archive grew, by type, year and month                  | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
-| The media service's state                                      | `ems-status`                               | [ems-status](../ems/commands.md#ems-status)                    |
-| Whose the language model is, and whether it answers            | `llm-status --checks`                      | [llm-status](../assistant/commands.md#llm-status)              |
+| Task                                                                    | Command                                    | Reference                                                      |
+| ----------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| Is everything fine and keeping up                                       | `health`                                   | [health](../reference/commands-core.md#health)                 |
+| Watch the system live                                                   | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
+| Commands running, yours or everyone's (administrator)                   | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
+| Who is signed in, from where, doing what                                | `who`                                      | [who](../reference/commands-core.md#who)                       |
+| Free space per storage tier, and when it fills                          | `df`                                       | [df](../reference/commands-core.md#df)                         |
+| CPU, memory and lag over the last hours                                 | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
+| Meters the services add, such as the graphics card's memory             | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
+| Versions of EiN, PostgreSQL and Deno, and each module's commit          | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
+| How the archive grew, by type, year and month                           | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
+| The media service's state, with its module                              | `ems-status`                               | [ems-status](../ems/commands.md#ems-status)                    |
+| Whose the language model is, and whether it answers, with the assistant | `llm-status --checks`                      | [llm-status](../assistant/commands.md#llm-status)              |
 
 `ps` and `who` show your own; an administrator sees everyone's.
 
@@ -348,7 +348,7 @@ The system log starts empty at every start of EiN, and a service's two log files
 
 ## The assistant
 
-These commands come with the assistant module. [Chatting with the assistant](../assistant/chat.md) covers the chat in the web interface, and [The language model](../assistant/language-model.md) the model behind it.
+These commands come with the assistant module and are there once it is installed; [The Assistant](../assistant/index.md) says what it adds. [Chatting with the assistant](../assistant/chat.md) covers the chat in the web interface, and [The language model](../assistant/language-model.md) the model behind it.
 
 | Task                                               | Command                                               | Reference                                                         |
 | -------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- |

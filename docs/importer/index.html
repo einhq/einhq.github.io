@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>stub – EiN documentation</title>
-    <meta name="description" content="This page is being written.">
+    <title>The Importer – EiN documentation</title>
+    <meta name="description" content="This page is for the administrator who moves one particular older archive into EiN with the importer module: what the module is, what it needs, how it is installed, and its commands. Its commands are there once it is installed.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/importer/">
-    <meta property="og:title" content="stub – EiN documentation">
-    <meta property="og:description" content="This page is being written.">
+    <meta property="og:title" content="The Importer – EiN documentation">
+    <meta property="og:description" content="This page is for the administrator who moves one particular older archive into EiN with the importer module: what the module is, what it needs, how it is installed, and its commands. Its commands are there once it is installed.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -81,13 +81,62 @@
       </aside>
 
       <main id="main" class="docs-main">
-        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">stub</span></button>
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">The Importer</span></button>
         <header class="docs-head">
           <p class="crumb">Importer</p>
-          <h1>stub</h1>
+          <h1>The Importer</h1>
         </header>
         <article class="prose">
-<p>This page is being written.</p>
+<p>This page is for the administrator who moves one particular older archive into EiN with the
+<code>importer</code> module: what the module is, what it needs, how it is installed, and its commands. Its
+commands are there once it is installed.</p>
+<h2 id="what-it-is">What it is<a class="anchor" href="#what-it-is" aria-label="Link to this section"></a></h2>
+<p>The <code>importer</code> module moves one particular older archive, kept as MongoDB dumps, into EiN: its
+users and groups, people and their relations, places and homes, devices, albums and files, covers,
+stories, comments, labels and measurements. It is not published, and it is not a general
+importer: it reads that one archive&#39;s records and nothing else. Photos and videos from anywhere
+else, such as a phone, a Google Photos export or a box of scans, come in through the Archive&#39;s
+staging; see <a href="../archive/importing.html">Getting your photos in</a>.</p>
+<p>What it brings over lands where the Archive keeps it: albums, people and places in the shared
+tree, and the files of a person&#39;s own area of the old archive in their staging Inbox, in
+<code>files/inbox/legacy-import</code>, where they sort them like any upload. The files are not copied: each
+one points at its original in the old archive&#39;s folder. Accounts brought over have no usable
+password until an administrator sets one; see <a href="../admin/accounts.html">Accounts and groups</a>.</p>
+<h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>The Archive.</strong> The module depends on <code>archive</code>, which is installed with it, and the Archive
+needs the <a href="../ems/index.html">media service</a> to process what arrives.</li>
+<li><strong>The extract.</strong> The import commands do not read the MongoDB dump itself. A script in the
+module, <code>scripts/extract-nodes.ts</code>, turns the dump&#39;s <code>nodes.bson</code> into one JSON file per kind of
+record, outside EiN, with Deno. The import commands read those files from the folder <code>--data</code>
+names, <code>/modules-dev/importer/data</code> unless you give another.</li>
+<li><strong>The old files.</strong> The originals stay where they are and are read from <code>/old/files</code> inside EiN
+(<code>--old-files</code>). With the standard installation that is the <code>old</code> folder of the data folder;
+see <a href="../admin/data.html">Your data: backup, moving and removing</a>.</li>
+</ul>
+<h2 id="installing-it">Installing it<a class="anchor" href="#installing-it" aria-label="Link to this section"></a></h2>
+<p>The module is not among the published modules, so <strong>Settings → Modules</strong> does not offer it and
+<code>mod install importer</code> does not find it in the default module source. Whoever has access to its
+repository installs it by its address, with a token if the forge is not public, as
+<a href="../admin/modules.html#modules-from-other-places">Modules from other places</a> describes.</p>
+<h2 id="its-commands">Its commands<a class="anchor" href="#its-commands" aria-label="Link to this section"></a></h2>
+<p>Each part of the old archive has a command of its own, <code>import-users-groups</code>, <code>import-files</code> and
+so on, and each of them takes <code>--dry-run</code> to report what it would create without writing anything.
+They run in order of what owns what: accounts and people first, then albums, files and covers, and
+last what attaches to them, the stories, comments and labels. A file whose album is not imported
+yet is skipped, and a file that is already there is skipped whole, so an interrupted
+<code>import-files</code> goes on where it stopped.</p>
+<p><code>import-check</code> checks the extract before an import and fails when a file is missing, a record
+lacks a field its command needs, or a path lies outside the Archive&#39;s folders. <code>import-check --vfs</code>
+afterwards reports each part that did not land in full.</p>
+<p><a href="commands.html">Importer commands</a> lists every command and its options.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../archive/importing.html">Getting your photos in</a>: photos from anywhere else.</li>
+<li><a href="../archive/staging-admin.html#import-an-older-archive">Staging for administrators</a>: where the
+imported files of a person&#39;s own area land.</li>
+<li><a href="../admin/modules.html">Modules</a>: installing, updating and removing modules.</li>
+</ul>
 
         </article>
         <footer class="docs-foot">
@@ -95,7 +144,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/importer/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-is">What it is</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#installing-it">Installing it</a></li><li><a href="#its-commands">Its commands</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

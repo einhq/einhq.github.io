@@ -213,8 +213,9 @@ it (`*`, `?` and `[…]`, and a name starting with a dot only by a pattern that 
 nothing matches, `scp` says `No match`.
 
 A file copied in is recorded the way an upload is: its size, checksum and type are worked out, and
-EiN's processing takes it in from there. Copying into your staging folder is a way to bring a
-machine's photos into the archive: see [Sorting in staging](../archive/staging.md).
+the installed modules' pipelines take it in from there. The examples copy into a staging folder,
+which the [Archive](../archive/index.md) gives you: with it installed, that is a way to bring a
+machine's photos into the archive; see [Sorting in staging](../archive/staging.md).
 
 Copy out to another machine:
 
@@ -362,8 +363,8 @@ How a mount behaves:
   mount's `uid` and `gid`, whoever owns it there; the permission bits are the other machine's. To let
   a group read the files, give the mount that `gid` and make the files group-readable there.
 - **Nothing is processed.** The mount is a mirror: EiN makes no thumbnails, reads no dates and finds
-  no faces in it. To bring photos into the archive, copy them into
-  staging.
+  no faces in it. With the Archive installed, copy photos into staging to bring them into the
+  archive.
 - **It reconnects on its own.** When the other machine goes away, commands on the mount fail with
   the reason and the time of the next attempt (`next attempt in 8s`); the wait grows to at most a
   minute between attempts.

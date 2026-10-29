@@ -8,7 +8,7 @@ Choose **Dashboard** under **System** in the sidebar. The sidebar shows it only 
 
 ![The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
 
-The page, **System dashboard**, has up to three badges above its title and five tabs below it:
+The page, **System dashboard**, has up to three badges above its title and four tabs below it, five with the `ems` module installed:
 
 | Badge                                                         | What it says                                                                                                               |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -20,7 +20,7 @@ The page, **System dashboard**, has up to three badges above its title and five 
 | ----------------- | --------------------------------------------------------------------------------------------------- |
 | **Overview**      | The checks that are not fine, the machine's CPU and memory, the work done, storage and the instance |
 | **Work**          | Every pipeline and every kind of job: what is waiting, how fast it goes, when it will be done       |
-| **Media service** | The media service's own state, from the `ems` module; see [The media service](../ems/index.md)      |
+| **Media service** | With the `ems` module: the media service's own state; see [The media service](../ems/index.md)      |
 | **Services**      | Which services run, with start, stop and restart for the administrator                              |
 | **Log**           | The last problems logged, and the system log as it is written                                       |
 
@@ -37,7 +37,7 @@ The badge is the first line of the [`health`](../reference/commands-core.md#heal
 | **Stuck**          | Work is waiting, and none of it was done and no instance finished in the last hour.                  | Look at the checks on **Overview** and the **Kinds of work** table on **Work**; see below.                |
 | **Needs a person** | At least one check failed.                                                                           | Read the failed check on **Overview**: each one says what is wrong and, often, the command that fixes it. |
 
-Warnings never change the verdict on their own. An install without the media service or without a language model reads **Healthy** with a warning about each, and the same warnings show for a while after every start while the services load their models.
+Warnings never change the verdict on their own. An install that has the `ems` module but no media service, or the Assistant but no language model, reads **Healthy** with a warning about each, and the same warnings show for a while after every start while the services load their models. An EiN with no modules has neither check.
 
 ![Above, a step that runs ends one of four ways: exit 0 completes it; exit 75, a busy service, leaves it waiting with its attempt given back while its kind rests 30 seconds, doubling up to 10 minutes; exit 65, bad input, fails it for good; any other exit retries it, 3 attempts in all, then the instance fails, pipeline heal runs it again after 1 h, 6 h and 24 h, and after that it needs a person and the failed work check fails; below, the four verdicts in the order they are decided: Needs a person in red when a check failed, Healthy in green when nothing is waiting, Catching up in blue when work is waiting and some was done in the last hour, and Stuck in orange when none was](../diagrams/health.svg "A busy service only makes work wait; a person is asked for only when work fails through every retry and heal, or a check fails.")
 
@@ -45,30 +45,30 @@ Warnings never change the verdict on their own. An install without the media ser
 
 On **Overview**, a card above the tiles lists every check that is not fine, failed ones first, each with its reason; a red edge marks a failed check, a yellow one a warning. When every check is fine the card is not there. `health` in the terminal lists them all, the fine ones too.
 
-These are the checks EiN makes about its own work:
+These are the checks core makes about EiN's own work, with or without modules:
 
-| Check          | State | Reason, as it reads                                                                                          | What to do                                                                                                                          |
-| -------------- | ----- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `intake`       | ok    | `12 matched triggers waiting to start pipeline work`                                                         | Nothing: new work about to start.                                                                                                   |
-| `kind <name>`  | ok    | `340 left, 120/h  eta 2.8h`, or `340 waiting, the oldest for 4m10s`                                          | Nothing: a kind of job that is being done, or has just arrived.                                                                     |
-| `kind <name>`  | warn  | `340 waiting for EMS, which could not run it yet; next try in 1m30s`                                         | The media service could not take the jobs; they are tried again on their own. See [The media service](../ems/index.md) if it lasts. |
-| `kind <name>`  | warn  | `340 waiting, the oldest for 2h05m, none done in the last hour`                                              | The worker for this kind is not getting through it. Check the **Services** tab and the **Log** tab.                                 |
-| `kind <name>`  | fail  | `340 waiting, and no worker offers this kind, the oldest for 12m30s`                                         | See [Work that nothing will run](#work-that-nothing-will-run).                                                                      |
-| `failed work`  | warn  | `3 failed instances, run again on their own after 1 h, 6 h and 24 h`                                         | Nothing yet: failed work is run again on its own.                                                                                   |
-| `failed work`  | fail  | `2 instances failed again after three more runs and need a person (pipeline-instances --status failed)`      | List them with `pipeline-instances -s failed` and see [Processing and pipelines](processing.md).                                    |
-| `input`        | ok    | `5 steps met input nothing can process, and will not be run again`                                           | Nothing: a damaged or unreadable file. Running it again would give the same result.                                                 |
-| `quiet steps`  | warn  | `1 running step silent for 30m00s or more: media-transcode/transcode`                                        | A step has written nothing for a long while. It keeps running; nothing stops a step for taking long.                                |
-| `queue <name>` | fail  | `4 entries dropped after their delivery attempts (queue-dead /var/queues/archive-bridge: --retry or --drop)` | Look at them with `queue-dead <path>`, then put them back with `--retry` or delete them with `--drop`.                              |
+| Check          | State | Reason, as it reads                                                                                          | What to do                                                                                                                                            |
+| -------------- | ----- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intake`       | ok    | `12 matched triggers waiting to start pipeline work`                                                         | Nothing: new work about to start.                                                                                                                     |
+| `kind <name>`  | ok    | `340 left, 120/h  eta 2.8h`, or `340 waiting, the oldest for 4m10s`                                          | Nothing: a kind of job that is being done, or has just arrived.                                                                                       |
+| `kind <name>`  | warn  | `340 waiting for EMS, which could not run it yet; next try in 1m30s`                                         | With the Archive: the media service could not take the jobs; they are tried again on their own. See [The media service](../ems/index.md) if it lasts. |
+| `kind <name>`  | warn  | `340 waiting, the oldest for 2h05m, none done in the last hour`                                              | The worker for this kind is not getting through it. Check the **Services** tab and the **Log** tab.                                                   |
+| `kind <name>`  | fail  | `340 waiting, and no worker offers this kind, the oldest for 12m30s`                                         | See [Work that nothing will run](#work-that-nothing-will-run).                                                                                        |
+| `failed work`  | warn  | `3 failed instances, run again on their own after 1 h, 6 h and 24 h`                                         | Nothing yet: failed work is run again on its own.                                                                                                     |
+| `failed work`  | fail  | `2 instances failed again after three more runs and need a person (pipeline-instances --status failed)`      | List them with `pipeline-instances -s failed` and see [Processing and pipelines](processing.md).                                                      |
+| `input`        | ok    | `5 steps met input nothing can process, and will not be run again`                                           | Nothing: a damaged or unreadable file. Running it again would give the same result.                                                                   |
+| `quiet steps`  | warn  | `1 running step silent for 30m00s or more: media-transcode/transcode`                                        | A step has written nothing for a long while. It keeps running; nothing stops a step for taking long.                                                  |
+| `queue <name>` | fail  | `4 entries dropped after their delivery attempts (queue-dead /var/queues/archive-bridge: --retry or --drop)` | Look at them with `queue-dead <path>`, then put them back with `--retry` or delete them with `--drop`.                                                |
 
 How long a step may stay silent before it counts as quiet is the setting [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms), 30 minutes by default.
 
-Modules add checks of their own, through the services they run. Each is asked only while its service runs:
+Modules add checks of their own, through the services they run. Each is there only with its module installed, and asked only while its service runs:
 
-| Check                 | From                                           | What it says                                                                                                                                                                          |
-| --------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ems` and `ems …`     | the `ems-link` service (`ems-status --checks`) | Whether the media service answers, its model worker, each degradation and the card; the table is in [The media service](../ems/index.md#the-health-checks). Only `ems gpu` can fail.  |
-| `llm` and `llm model` | the `llm-link` service (`llm-status --checks`) | Whether the language model answers, whose it is and where it runs, and whether its model has been tried with the assistant. See [The language model](../assistant/language-model.md). |
-| the service's name    | any service whose check does not answer        | `its check did not answer`, as a warning.                                                                                                                                             |
+| Check                 | From                                                          | What it says                                                                                                                                                                          |
+| --------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ems` and `ems …`     | the `ems` module's `ems-link` service (`ems-status --checks`) | Whether the media service answers, its model worker, each degradation and the card; the table is in [The media service](../ems/index.md#the-health-checks). Only `ems gpu` can fail.  |
+| `llm` and `llm model` | the Assistant's `llm-link` service (`llm-status --checks`)    | Whether the language model answers, whose it is and where it runs, and whether its model has been tried with the assistant. See [The language model](../assistant/language-model.md). |
+| the service's name    | any service whose check does not answer                       | `its check did not answer`, as a warning.                                                                                                                                             |
 
 When a check names a hosted language model, its reason says so plainly, for example `…: questions, and what the assistant reads to answer them, leave this host`.
 
@@ -77,7 +77,7 @@ When a check names a hosted language model, its reason says so plainly, for exam
 Under the checks, **Overview** shows the machine and the work in five parts.
 
 - **CPU** and **Memory** tiles: the share of all the machine's processor cores in use, with the number of cores, the load and EiN's own share, and EiN's container's memory against its limit, each with a small chart of the last six hours. A tile turns amber at 75% and red at 90%.
-- **GPU** and **VRAM** tiles, beside them, when the media service has a graphics card: how busy the card is and its temperature, and its memory in use. They come from the `ems` module and are not there without a card or without the media service; see [The graphics card](../ems/gpu.md).
+- **GPU** and **VRAM** tiles, beside them, with the `ems` module installed and a media service that has a graphics card: how busy the card is and its temperature, and its memory in use. They come from the `ems` module and are not there without it, without a card or without the media service; see [The graphics card](../ems/gpu.md).
 - **Work**: **Completed per hour**, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and **Instances by state**, a bar of **Queued**, **Running**, **Failed**, **Completed** and **Cancelled**.
 - **Storage**: each storage tier, its path, a bar of used and free space, `% used`, how much it grows per day and, when it grows, `full in ~N days`, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database's size is in the corner. [Files and storage](../concepts/files.md) explains the tiers.
 - A line at the bottom naming the instance: **host**, **uptime**, **deno** and **database**. It tells you which EiN you are looking at when you run more than one.
@@ -91,7 +91,7 @@ The storage projection is measured over the last seven days. A tier that is not 
 ![The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA](../../assets/shots/system-work.webp "One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone")
 
 - The pipeline table has one row per defined pipeline, even one that has never run, with **Workload**, **Waiting**, **Queued**, **Running**, **Failed**, **Completed** and **Cancelled**. **In** is the work arriving for it per hour, **Out** what it finished in the last hour, and **ETA** the waiting work divided by **Out**; **no rate** when nothing finished recently, `—` when nothing waits. When queue entries were dropped after their delivery attempts, a red **N dropped** stands above the table. Choose a row to see that pipeline's instances.
-- **Kinds of work** lists each kind of job in the work pools that has something left or was done lately: **Left**, **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. A red **no worker** badge marks a kind nothing runs; a yellow **waiting for EMS** badge a kind resting because the media service could not run it, with the next try in its tooltip.
+- **Kinds of work** lists each kind of job in the work pools that has something left or was done lately: **Left**, **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. A red **no worker** badge marks a kind nothing runs; with the Archive, a yellow **waiting for EMS** badge marks a kind resting because the media service could not run it, with the next try in its tooltip.
 - **Ongoing** lists the instances running now, with how long each has run. Steps that have written nothing for the quiet time are listed above it in a yellow box.
 
 ### Work that nothing will run
@@ -108,11 +108,11 @@ When jobs of some kind are ready and no running worker offers that kind for more
 
 ## The Media service tab
 
-The `ems` module adds this tab. It shows the media service's version, its models, what it runs now and what is on the graphics card; [The media service](../ems/index.md#on-the-dashboard) describes it.
+The `ems` module adds this tab, and it is there only while that module is installed. It shows the media service's version, its models, what it runs now and what is on the graphics card; [The media service](../ems/index.md#on-the-dashboard) describes it.
 
 ## The Services tab
 
-**Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down`; the stopped `models-second`, off while `CFG_MODEL_SECOND_SLOTS` is `0`, counts as down.
+**Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down`; with the Archive installed, its stopped `models-second`, off while `CFG_MODEL_SECOND_SLOTS` is `0`, counts as down.
 
 ![The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 8h 50m and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
 
@@ -124,7 +124,7 @@ An administrator has **Restart** and **Stop** on a running service and **Start**
 
 ![The Log tab: Recent problems with ten WARN lines from pool-worker, and below it the Live log of /var/logs/system with INFO lines from http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
 
-A warning such as `pooled step could not run yet, kind resting` means the media service was not ready for a job; the job is tried again on its own. [Services and logs](services-logs.md) covers the logs and `dmesg`.
+With the Archive, a warning such as `pooled step could not run yet, kind resting` means the media service was not ready for a job; the job is tried again on its own. [Services and logs](services-logs.md) covers the logs and `dmesg`.
 
 ## Ask in the terminal
 
@@ -134,6 +134,8 @@ Every figure on the dashboard comes from an ordinary command, and you can run th
 # in EiN's terminal
 health
 ```
+
+On an EiN with the Archive and the `ems` module, it reads like this:
 
 ```text
 catching up: 1,240 jobs waiting, the slowest kind done in 2h48m
@@ -223,25 +225,25 @@ The `metrics-sampler` service records the machine's and the work's figures, one 
 | `disk`      | Free and total space per storage tier                     | 15 minutes | 90 days  |
 | `nodes`     | How many nodes of each type                               | 15 minutes | 365 days |
 
-The `ems` module adds a `gpu` series, sampled every 15 seconds by its `gpu-sampler` service, for the **GPU** and **VRAM** tiles. Memory is EiN's container's own, read from its cgroup. CPU is read both ways: the whole machine's, since the media service and the language model load it from containers of their own, and EiN's container's share of it.
+With the `ems` module installed, it adds a `gpu` series, sampled every 15 seconds by its `gpu-sampler` service, for the **GPU** and **VRAM** tiles. Memory is EiN's container's own, read from its cgroup. CPU is read both ways: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's share of it.
 
-How the archive has grown over the years is not on the dashboard: **Statistics**, under **System**, shows it, and anyone can open it ([Home, memories and statistics](../guide/home.md)).
+How the tree has grown over the years is not on the dashboard: **Statistics**, under **System**, shows it, and anyone can open it ([Home and statistics](../guide/home.md)).
 
 ## When something goes differently
 
-| What you see                                                                                                          | Why                                                                               | What to do                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **warming up** stays, the tiles are empty, `host-metrics` says `no metrics sampled yet — is metrics-sampler running?` | The `metrics-sampler` service is not running.                                     | Start it on the **Services** tab, or `service start metrics-sampler`, and read the **Log** tab for why it stopped.                  |
-| **Storage** says **No tier data sampled yet**, `df` says `no disk sample yet — is metrics-sampler running?`           | The disk is sampled every 15 minutes; right after a start there is no sample yet. | Wait 15 minutes. If it stays, check `metrics-sampler` as above.                                                                     |
-| **offline** next to the verdict                                                                                       | The browser lost its connection to EiN, for example while EiN restarts.           | Wait; it reconnects by itself. If it stays, reload the page and see [Troubleshooting](troubleshooting.md).                          |
-| **Stuck**, with `waiting for EMS` on the kinds                                                                        | The media service is down, restarting or busy loading models.                     | See [The media service](../ems/index.md). The work goes on by itself once it answers.                                               |
-| **Stuck**, with `none done in the last hour` on a kind                                                                | The worker for that kind is stopped or hangs.                                     | Look on **Services** for a stopped or often restarted worker, and on **Log** for its errors. [Services and logs](services-logs.md). |
-| **Needs a person**, `kind <name>` failed                                                                              | Nothing runs that kind of job.                                                    | [Work that nothing will run](#work-that-nothing-will-run).                                                                          |
-| **Needs a person**, `ems gpu` failed                                                                                  | The media service is meant to have a graphics card and sees none.                 | [The graphics card](../ems/gpu.md#be-told-when-the-card-goes-missing).                                                              |
-| **Needs a person**, `failed work` or `queue <name>` failed                                                            | Work failed for good, or queue entries were dropped.                              | Follow the command in the check's reason, and see [Processing and pipelines](processing.md).                                        |
-| `full in ~N days` in red                                                                                              | A storage tier will be full within two weeks at its present rate.                 | Free space, or move the archive to a bigger disk: [Your data](data.md).                                                             |
-| The CPU or memory tile is red for long                                                                                | The machine's processors, or EiN's container's memory, are 90% or more in use.    | [Performance and sizing](performance.md).                                                                                           |
-| **Dashboard** is not in the sidebar                                                                                   | You are not an administrator.                                                     | Ask an administrator, or open `/system` to read the figures; `health` works for everyone.                                           |
+| What you see                                                                                                          | Why                                                                                      | What to do                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **warming up** stays, the tiles are empty, `host-metrics` says `no metrics sampled yet — is metrics-sampler running?` | The `metrics-sampler` service is not running.                                            | Start it on the **Services** tab, or `service start metrics-sampler`, and read the **Log** tab for why it stopped.                  |
+| **Storage** says **No tier data sampled yet**, `df` says `no disk sample yet — is metrics-sampler running?`           | The disk is sampled every 15 minutes; right after a start there is no sample yet.        | Wait 15 minutes. If it stays, check `metrics-sampler` as above.                                                                     |
+| **offline** next to the verdict                                                                                       | The browser lost its connection to EiN, for example while EiN restarts.                  | Wait; it reconnects by itself. If it stays, reload the page and see [Troubleshooting](troubleshooting.md).                          |
+| **Stuck**, with `waiting for EMS` on the kinds                                                                        | With the Archive: the media service is down, restarting or busy loading models.          | See [The media service](../ems/index.md). The work goes on by itself once it answers.                                               |
+| **Stuck**, with `none done in the last hour` on a kind                                                                | The worker for that kind is stopped or hangs.                                            | Look on **Services** for a stopped or often restarted worker, and on **Log** for its errors. [Services and logs](services-logs.md). |
+| **Needs a person**, `kind <name>` failed                                                                              | Nothing runs that kind of job.                                                           | [Work that nothing will run](#work-that-nothing-will-run).                                                                          |
+| **Needs a person**, `ems gpu` failed                                                                                  | With the `ems` module: the media service is meant to have a graphics card and sees none. | [The graphics card](../ems/gpu.md#be-told-when-the-card-goes-missing).                                                              |
+| **Needs a person**, `failed work` or `queue <name>` failed                                                            | Work failed for good, or queue entries were dropped.                                     | Follow the command in the check's reason, and see [Processing and pipelines](processing.md).                                        |
+| `full in ~N days` in red                                                                                              | A storage tier will be full within two weeks at its present rate.                        | Free space, or move the archive to a bigger disk: [Your data](data.md).                                                             |
+| The CPU or memory tile is red for long                                                                                | The machine's processors, or EiN's container's memory, are 90% or more in use.           | [Performance and sizing](performance.md).                                                                                           |
+| **Dashboard** is not in the sidebar                                                                                   | You are not an administrator.                                                            | Ask an administrator, or open `/system` to read the figures; `health` works for everyone.                                           |
 
 ## Related pages
 

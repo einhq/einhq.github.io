@@ -79,7 +79,7 @@ A script you write with `edit` needs execute permission before it runs as a comm
 | `edit: missing file operand`                                         | You gave no path.                                                                                                                                       | Name the file: `edit notes.md`.                                                                                           |
 | `edit: not a terminal`                                               | The command did not run in a terminal: one command sent with `ssh … 'edit notes.md'`, or a script started without one. The assistant never runs `edit`. | Use the terminal panel, or sign in over SSH with a shell of your own (`ssh -p 2222 anna@ein.local`) and run `edit` there. |
 | `edit: /home/anna/staging: not a file (directory)`                   | The path is a folder, or another kind of node such as an album or a person. The type is in brackets.                                                    | Name a file. `ls -l` shows what a folder holds.                                                                           |
-| `edit: /home/anna/beach.jpg: not a text file (mimetype: image/jpeg)` | The file is a picture, a video, a PDF or another file that is not text.                                                                                 | Nothing to edit here. A picture opens in the viewer.                                                                      |
+| `edit: /home/anna/beach.jpg: not a text file (mimetype: image/jpeg)` | The file is a picture, a video, a PDF or another file that is not text.                                                                                 | Nothing to edit here. With the Archive, a picture opens in its viewer.                                                    |
 | `edit: /home/anna/old.txt: not UTF-8 text`                           | The file is text in another encoding, such as Latin-1, or holds bytes that are not text.                                                                | Convert it to UTF-8 on your own computer and upload it again.                                                             |
 | `edit: /etc/keys: Access denied …`                                   | You may not read the file.                                                                                                                              | Ask its owner or an administrator. [Permissions in depth](../admin/permissions.md) explains who may read what.            |
 
@@ -332,8 +332,9 @@ to undo and <kbd>Tab</kbd> to indent. It colours JSON, JavaScript, TypeScript, Y
 HTML, CSS, XML and shell scripts, by the file's type first and then its extension.
 
 What **Open** does depends on the file: a text file opens in the code editor, a picture, video or
-recording in the viewer, and any other file in a new browser tab. The **Preview** in the tool pane
-beside the list shows the first 64 KB of a text file without opening it.
+recording in the viewer that the [Archive](../archive/index.md) adds, and any other file in a new
+browser tab. The **Preview** in the tool pane beside the list shows the first 64 KB of a text file
+without opening it.
 
 Where the code editor stops:
 

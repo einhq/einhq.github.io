@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Your profile, favourites and trash – EiN documentation</title>
-    <meta name="description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
+    <meta name="description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites, which the Archive gathers on a page of their own; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/guide/profile.html">
     <meta property="og:title" content="Your profile, favourites and trash – EiN documentation">
-    <meta property="og:description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
+    <meta property="og:description" content="This page covers the pages that belong to your account alone: your profile, where you change your name, your preferences and your password; your favourites, which the Archive gathers on a page of their own; and your trash, where what you delete waits before it is removed for good. It is for everyone who has an account on EiN.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -88,17 +88,19 @@
         </header>
         <article class="prose">
 <p>This page covers the pages that belong to your account alone: your profile, where you change your
-name, your preferences and your password; your favourites; and your trash, where what you delete
-waits before it is removed for good. It is for everyone who has an account on EiN.</p>
-<p>All three open from the account menu. Choose your picture at the right end of the top bar:</p>
+name, your preferences and your password; your favourites, which the
+<a href="../archive/index.html">Archive</a> gathers on a page of their own; and your trash, where what you
+delete waits before it is removed for good. It is for everyone who has an account on EiN.</p>
+<p>All three open from the account menu, <strong>Favourites</strong> once the Archive is installed. Choose your
+picture at the right end of the top bar:</p>
 <figure class="shot"><a href="../../assets/shots/account-menu@2x.webp"><img src="../../assets/shots/account-menu.webp" srcset="../../assets/shots/account-menu.webp 1x, ../../assets/shots/account-menu@2x.webp 2x" alt="The account menu open under the picture in the top bar: Favourites, Profile and Trash, then Shortcuts with the ? key and About EiN, then Logout" width="500" height="440" loading="lazy" decoding="async"></a><figcaption>Favourites, Profile and Trash are the pages of your own account.</figcaption></figure>
 <p>They need you to be signed in. A visitor who opens one of them is asked to sign in first, and lands
 on the page afterwards. <a href="interface.html">Finding your way around</a> describes the rest of the account
 menu.</p>
 <h2 id="open-your-profile">Open your profile<a class="anchor" href="#open-your-profile" aria-label="Link to this section"></a></h2>
 <p>Choose your picture, then <strong>Profile</strong>. The page&#39;s header shows your display name, your username
-after an <code>@</code>, and the description you gave yourself. Its picture is the cover photo of the person
-your account is linked to; without one it shows the first letter of your name.</p>
+after an <code>@</code>, and the description you gave yourself. With the Archive, its picture is the cover
+photo of the person your account is linked to; without one it shows the first letter of your name.</p>
 <p>The profile has three tabs: <strong>Account</strong>, <strong>Preferences</strong> and <strong>Security</strong>. The tab you are on is in
 the page&#39;s address, so <code>/profile?tab=preferences</code> opens your preferences and
 <code>/profile?tab=security</code> the password form directly.</p>
@@ -121,16 +123,16 @@ administrator included.</li>
 Users</strong>; see <a href="../admin/accounts.html">Accounts and groups</a>. When your account has one, you can type
 it instead of your username when you sign in. The profile does not show it; <code>user-info</code> in the
 terminal does, under <a href="#from-the-terminal">From the terminal</a>.</li>
-<li><strong>Your picture</strong>, which comes from the person your account is linked to, below.</li>
+<li><strong>Your picture</strong>, which with the Archive comes from the person your account is linked to, below.</li>
 </ul>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>Your display name, description and e-mail address are not private. Anyone who is signed in can
 read them, for example with <code>user-info</code> in the terminal.</p>
 </aside>
 <h3 id="your-picture-and-the-person-you-are">Your picture and the person you are<a class="anchor" href="#your-picture-and-the-person-you-are" aria-label="Link to this section"></a></h3>
-<p>EiN has no way to upload a picture for an account. Your picture is the person in the archive that
-your account is linked to. Helen Okafor&#39;s account, for example, can be linked to her page among the
-<strong>People</strong>, and then:</p>
+<p>EiN has no way to upload a picture for an account. With the Archive installed, your picture is the
+person in the archive that your account is linked to. Helen Okafor&#39;s account, for example, can be
+linked to her page among the <strong>People</strong>, and then:</p>
 <ul>
 <li>your picture in the top bar and on your profile is her cover photo;</li>
 <li>the account menu has <strong>Me</strong> above <strong>Favourites</strong>, which opens her page;</li>
@@ -280,7 +282,8 @@ lists each with its key, such as
 <h3 id="how-widely-what-you-create-is-shared">How widely what you create is shared<a class="anchor" href="#how-widely-what-you-create-is-shared" aria-label="Link to this section"></a></h3>
 <p>This preference decides how an album you create starts out: one made with <strong>Create → Album</strong>, with
 <strong>New album “…”</strong> in <strong>Add to an album</strong>, or with <strong>New album</strong> in staging. It does not change albums
-that exist already; to change who sees one of those, use its <strong>Share</strong> button.</p>
+that exist already; to change who sees one of those, use its <strong>Share</strong> button. Albums come with the
+Archive; without it, nothing you create follows this preference.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -414,8 +417,9 @@ an older archive by the importer, cannot sign in at all until an administrator s
 it. <a href="../admin/accounts.html">Accounts and groups</a> covers this from the administrator&#39;s side.</p>
 <h2 id="favourites">Favourites<a class="anchor" href="#favourites" aria-label="Link to this section"></a></h2>
 <p>Your favourites are the pictures you have marked with a heart, from any album, gathered on one page.
-Only someone signed in has favourites; visitors have none. The Favourites page and its row in the
-account menu come with the Archive module.</p>
+Only someone signed in has favourites; visitors have none. The heart, the Favourites page and its
+row in the account menu come with the <a href="../archive/index.html">Archive</a>; in any EiN, <code>star</code> in the
+terminal marks a node as a favourite (see <a href="#from-the-terminal">From the terminal</a>).</p>
 <p>A favourite is a link to the picture where it lives, kept in the folder <code>stars</code> in your home
 folder. Hearting a picture never copies or moves it, and taking it out of your favourites never
 deletes it. <a href="../concepts/links.html">Links</a> explains how one picture can be in many places.</p>
@@ -444,11 +448,12 @@ Favourite, or press the heart in the lightbox.&quot;, with a button <strong>Open
 <strong>Undo</strong>.</li>
 </ul>
 <h2 id="the-trash">The trash<a class="anchor" href="#the-trash" aria-label="Link to this section"></a></h2>
-<p>When you delete pictures, albums, people and the like in the web interface, they go to your trash
-first. You can restore them from there for 30 days, unless your administrator chose another
-number; the few ways of deleting that skip the trash are listed below. Only you see your trash,
-apart from an administrator, who can see everyone&#39;s.</p>
+<p>When you delete something in the web interface, such as with the Archive a picture, an album or a
+person, it goes to your trash first. You can restore it from there for 30 days, unless your
+administrator chose another number; the few ways of deleting that skip the trash are listed below.
+Only you see your trash, apart from an administrator, who can see everyone&#39;s.</p>
 <h3 id="what-goes-to-the-trash">What goes to the trash<a class="anchor" href="#what-goes-to-the-trash" aria-label="Link to this section"></a></h3>
+<p>Every row but the last is on the Archive&#39;s pages; <code>trash put</code> works in any EiN.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -486,9 +491,9 @@ apart from an administrator, who can see everyone&#39;s.</p>
 the quickest way back; the Trash page is for later.</p>
 <p>What you delete goes to <em>your</em> trash, also when it belongs to someone else who lets you change it.
 If a picture disappears from an album of yours, the person who deleted it has it in their trash.</p>
-<p>While something is in the trash, it is gone for everyone: from albums, search, the map and every
-other list. It keeps what EiN worked out about it, such as faces and a transcript, and comes back
-with all of it when you restore it.</p>
+<p>While something is in the trash, it is gone for everyone: from search, <code>ls</code> and every other list,
+and with the Archive from albums and the map. It keeps what EiN worked out about it, such as faces
+and a transcript, and comes back with all of it when you restore it.</p>
 <h3 id="what-is-deleted-for-good-at-once">What is deleted for good at once<a class="anchor" href="#what-is-deleted-for-good-at-once" aria-label="Link to this section"></a></h3>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>These do not use the trash. What they delete is gone at once, with no <strong>Undo</strong>:</p>
@@ -581,7 +586,7 @@ browser:</p>
 </tr>
 <tr>
 <td><a href="../reference/commands-core.html#star"><code>star</code></a> <code>&lt;path&gt;</code>, <code>star -d &lt;path&gt;</code>, <code>star list</code></td>
-<td>Hearts a picture, takes the heart away, or lists your favourites.</td>
+<td>Marks a node, such as a picture, as a favourite, takes the mark away, or lists your favourites.</td>
 </tr>
 </tbody></table>
 </div>
@@ -607,7 +612,7 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg</code></pre></di
 </thead>
 <tbody><tr>
 <td>There is no <strong>Me</strong> in the account menu, and your picture is letters</td>
-<td>Your account is not linked to a person in the archive.</td>
+<td>The Archive is not installed, or your account is not linked to a person in the archive.</td>
 <td>Ask an administrator to link it, as under <a href="#your-picture-and-the-person-you-are">Your picture and the person you are</a>.</td>
 </tr>
 <tr>
@@ -627,7 +632,7 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg</code></pre></di
 </tr>
 <tr>
 <td>There is no heart in the viewer and no <strong>Favourite</strong> button</td>
-<td>You are not signed in.</td>
+<td>You are not signed in. The viewer and the button come with the Archive.</td>
 <td>Sign in.</td>
 </tr>
 <tr>

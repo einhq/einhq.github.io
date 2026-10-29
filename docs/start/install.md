@@ -6,7 +6,7 @@ This page takes you from a Linux machine to an EiN you can sign in to: what the 
 
 EiN runs as a few containers on one Linux machine. The installer builds them from source on that machine: there are no ready-made releases. It needs no root, but the tools it uses must be installed first.
 
-What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which the Archive needs to make thumbnails, find faces, read text and make pictures searchable:
+What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which [the Archive](../archive/index.md) needs to make thumbnails, find faces, read text and make pictures searchable:
 
 |                  | EiN Core                                                                                          | With the media service (`--ems`)                      |
 | ---------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
@@ -49,7 +49,7 @@ There are two install commands. Both check the machine first and install nothing
 curl -fsSL https://einhq.eu/install.sh | bash
 ```
 
-**EiN Archive** is the full Archive installation: EiN with the media service, the assistant's language model, and the Archive and assistant modules.
+**EiN Archive** is the full Archive installation: EiN with the media service, the assistant's language model, and the [Archive](../archive/index.md) and [assistant](../assistant/index.md) modules.
 
 ```bash
 # on the machine that will run EiN, as your own user
@@ -202,7 +202,7 @@ Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) expla
 
 ![The EiN sign-in page: the fields Username or e-mail and Password, the Sign in button, and Browse without signing in below it](../../assets/shots/login.webp "The sign-in page. Browse without signing in appears only when visitors may browse, which is off after an install")
 
-You land on the home page, **Welcome**, which is empty until there is something in EiN. There is no setup wizard: [First steps](first-steps.md) walks you from here to a family using it.
+You land on the home page, **Welcome**. What it shows comes from the modules: with the Archive it fills as pictures come in, and on EiN Core alone it stays empty. There is no setup wizard: [First steps](first-steps.md) walks you from here to a family using it.
 
 EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read [Ports, HTTPS and remote access](../admin/network.md). When something else on the machine already uses 8080 or 2222, `setup.sh` gives EiN the next free port instead, says so (`Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)`), keeps it in `.env`, and prints the address with it.
 
@@ -291,3 +291,4 @@ cd ~/ein && podman compose logs ein | grep 'Admin password set to'
 - [Installing in detail](../admin/install.md): every option and variable, podman and Docker, what runs where, and running EiN day to day.
 - [The graphics card](../ems/gpu.md) and [Ports, HTTPS and remote access](../admin/network.md), when you want EiN faster or reachable from outside.
 - [Modules](../admin/modules.md): what each module brings and how to install, update and remove it.
+- [The Archive](../archive/index.md) and [The Assistant](../assistant/index.md): the sections for the modules the EiN Archive command installs.

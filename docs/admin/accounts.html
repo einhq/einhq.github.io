@@ -90,7 +90,7 @@
 <p>This page is for the administrator who gives people accounts in EiN and puts them in groups. It
 covers the <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong> tabs of <strong>Settings</strong>, the built-in accounts
 and groups, how to let a second person administer, and the same work in the terminal.</p>
-<p>What a group may see and change is decided by the sharing of each album and folder, not here.
+<p>What a group may see and change is decided by the sharing of each folder, and with the Archive of each album, not here.
 <a href="../guide/sharing.html">Sharing</a> shows how to share with a group, and
 <a href="permissions.html">Permissions in depth</a> explains owners, groups and modes.</p>
 <h2 id="where-accounts-are-managed">Where accounts are managed<a class="anchor" href="#where-accounts-are-managed" aria-label="Link to this section"></a></h2>
@@ -182,8 +182,8 @@ set as the default for new users are ticked already (see
 <li>Choose <strong>Create user</strong>.</li>
 </ol>
 <p>EiN says &quot;Created helen.&quot; and opens the new account. The account has a home folder,
-<code>/home/helen</code>, which holds the person&#39;s own things, such as what they upload to staging, and a
-personal group <code>helen</code>.</p>
+<code>/home/helen</code>, which holds the person&#39;s own things, such as their preferences and, with the Archive installed, what
+they upload to staging, and a personal group <code>helen</code>.</p>
 <p>While something is missing, <strong>Create user</strong> says why under it: &quot;Choose a username&quot;, &quot;Already
 taken&quot;, &quot;Repeat the password&quot; or &quot;The passwords do not match&quot;. If the account was made but its
 password could not be set, the account opens with the reason in its <strong>Password</strong> section; set the
@@ -198,8 +198,8 @@ badges for its state: <strong>Administrator</strong>, <strong>Guest</strong>, <s
 how the account is named to others; the person can change their own name and description too, on
 their profile (see <a href="../guide/profile.html#change-your-name-and-description">Your profile</a>). Only an
 administrator sets the e-mail address. Empty the field and save to remove it.</p>
-<p>The account&#39;s picture is not set here: it is the cover photo of the person in the archive that the
-account is linked to. <a href="../guide/profile.html#your-picture-and-the-person-you-are">Your picture and the person you are</a>
+<p>The account&#39;s picture is not set here: with the <a href="../archive/index.html">Archive</a> installed, it is the
+cover photo of the person in the archive that the account is linked to. <a href="../guide/profile.html#your-picture-and-the-person-you-are">Your picture and the person you are</a>
 shows how to make that link in the terminal.</p>
 <h3 id="groups">Groups<a class="anchor" href="#groups" aria-label="Link to this section"></a></h3>
 <p>A box per group: tick to put the person in, untick to take them out. Each box saves as you click
@@ -225,7 +225,7 @@ but browsers and terminals where they are signed in stay signed in.</p>
 password&quot; by e-mail and cannot make someone choose a new password at their next sign-in. When
 someone has forgotten theirs, set a new one here and ask them to change it on their profile&#39;s
 <strong>Security</strong> tab (see <a href="../guide/profile.html#change-your-password">Change your password</a>).</p>
-<p>An account brought over from an older archive by the importer has no usable password. It shows
+<p>An account brought over from an older archive by the <a href="../importer/index.html">Importer</a> has no usable password. It shows
 <strong>Needs a password</strong>, and cannot sign in until you set one here.</p>
 <h3 id="sign-in-and-removal">Sign-in and removal<a class="anchor" href="#sign-in-and-removal" aria-label="Link to this section"></a></h3>
 <p><strong>Signed in now</strong> lists where the person is signed in: <strong>In the browser</strong>, <strong>Over SSH</strong> or <strong>In a
@@ -241,8 +241,9 @@ which is there only while some account is disabled.</p>
 <ol>
 <li>Open the account and choose <strong>Delete account…</strong> under <strong>Sign-in and removal</strong>.</li>
 <li>Read what will happen. Deleting the account removes its home folder and everything in it: the
-person&#39;s staging, their preferences and anything else they kept there.</li>
-<li>Pick who takes over everything they own elsewhere, such as albums and pictures in the archive.
+person&#39;s preferences, their staging with the Archive, and anything else they kept there.</li>
+<li>Pick who takes over everything they own elsewhere, such as folders and files, and with the Archive
+albums and pictures.
 The administrator is picked to start with.</li>
 <li>Choose <strong>Delete</strong> followed by the username, such as <strong>Delete helen</strong>.</li>
 </ol>
@@ -251,7 +252,8 @@ personal group goes too, unless someone else is in it; then it stays, and EiN sa
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>There is no undo, and deleted home folders do not go to the trash. If you only want to keep
 someone out, use <strong>Disable sign-in</strong> instead. EiN has no backup command; see
-<a href="data.html">Your data</a> before you delete an account whose staging holds anything still unsorted.</p>
+<a href="data.html">Your data</a> before you delete an account whose home folder holds anything you want to
+keep, such as pictures still unsorted in the Archive&#39;s staging.</p>
 </aside>
 <h2 id="create-and-change-groups">Create and change groups<a class="anchor" href="#create-and-change-groups" aria-label="Link to this section"></a></h2>
 <p>A group is a set of accounts to share with. If everyone with an account is family, the built-in
@@ -286,7 +288,7 @@ untick. <code>users</code> has no list, since everyone who signs in is in it.</l
 <li>Choose <strong>Delete</strong> followed by the group&#39;s name, such as <strong>Delete family</strong>.</li>
 </ol>
 <p>Nobody loses their account. Accounts whose primary group it was go back to their own groups, and
-grants that named the group on albums and folders are dropped, so its members lose what they could
+grants that named the group on folders, or on albums with the Archive, are dropped, so its members lose what they could
 see only through it.</p>
 <h2 id="what-new-accounts-start-with">What new accounts start with<a class="anchor" href="#what-new-accounts-start-with" aria-label="Link to this section"></a></h2>
 <p>The <strong>Permissions</strong> tab has four cards. Each says in a sentence what its saved values come to, and
@@ -316,7 +318,7 @@ changed here is marked <strong>Set here</strong>, and <strong>Restore inherited 
 <tr>
 <td><strong>Sharing</strong></td>
 <td><strong>Owner</strong>, <strong>Group</strong>, <strong>Permissions</strong></td>
-<td>Who owns anything created as shared, such as a new album, which group it is shared with, and what the owner, the group and everyone else may do with it.</td>
+<td>Who owns anything created as shared, such as a new album with the Archive, which group it is shared with, and what the owner, the group and everyone else may do with it.</td>
 <td>creator, <code>users</code>, <code>0750</code></td>
 </tr>
 <tr>
@@ -414,11 +416,11 @@ list every option.</p>
 </thead>
 <tbody><tr>
 <td><strong>Needs a password</strong> on an account</td>
-<td>It was made without a password, or came from the importer.</td>
+<td>It was made without a password, or came from the Importer.</td>
 <td>Set one under <strong>Password</strong>.</td>
 </tr>
 <tr>
-<td>Someone does not see an album shared with a group you just put them in</td>
+<td>Someone does not see a folder or album shared with a group you just put them in</td>
 <td>Group changes apply at the next sign-in.</td>
 <td>Ask them to sign out and in, or choose <strong>Disable sign-in</strong> and <strong>Enable sign-in</strong>.</td>
 </tr>

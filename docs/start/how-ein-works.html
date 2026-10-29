@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How EiN works – EiN documentation</title>
-    <meta name="description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it.">
+    <meta name="description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/start/how-ein-works.html">
     <meta property="og:title" content="How EiN works – EiN documentation">
-    <meta property="og:description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it.">
+    <meta property="og:description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,7 +89,8 @@
         <article class="prose">
 <p>This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works
 on it from every door, pipelines that act on every change, and modules that decide what it is for.
-Read it first, whether you are going to use EiN, run it or build on it.</p>
+Read it first, whether you are going to use EiN, run it or build on it. It also says how these
+pages are divided: <strong>Core</strong> for what every EiN has, and a section under <strong>Modules</strong> for each module.</p>
 <h2 id="everything-is-a-node">Everything is a node<a class="anchor" href="#everything-is-a-node" aria-label="Link to this section"></a></h2>
 <p>EiN keeps everything in one tree, the way a computer keeps files in folders. A photo is a node, and
 so are the album that holds it, a person in the family tree, a place on the map, an account, the
@@ -155,11 +156,13 @@ the system&#39;s settings. Each has a path from <code>/</code>, as a file does:<
 </tr>
 </tbody></table>
 </div>
+<p>The photo, the album, the person and the place come with the <a href="../archive/index.html">Archive</a> and are
+there once it is installed; the rest is in every EiN.</p>
 <p>A node has a type, a name in its folder, an owner, a group and permission bits, and the attributes
 its type needs: a photo&#39;s name, size, checksum and the time it was taken; a person&#39;s names and
 dates. Some types hold content as well: a file its bytes, a log its lines, a queue its messages.</p>
-<p>Any node can have children, a file included. A photo keeps what EiN works out about it beneath
-itself: its EXIF in <code>metadata/exif</code>, its thumbnails in <code>thumbnails/</code>, the faces found on it in
+<p>Any node can have children, a file included. With the Archive, a photo keeps what EiN works out
+about it beneath itself: its EXIF in <code>metadata/exif</code>, its thumbnails in <code>thumbnails/</code>, the faces found on it in
 <code>regions/</code>. Delete the photo and they go with it.</p>
 <figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other. The Nodes page, in an administrator&#39;s sidebar, browses the whole tree.</figcaption></figure>
 <p>The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
@@ -176,7 +179,7 @@ standard path.</p>
 </thead>
 <tbody><tr>
 <td><code>/archive</code></td>
-<td>What the archive is for: albums, people, locations, devices and labels</td>
+<td>The content EiN is for: the labels folder <code>tags</code>, and with the Archive its albums, people, locations and devices</td>
 </tr>
 <tr>
 <td><code>/home/&lt;you&gt;</code></td>
@@ -207,12 +210,13 @@ access to more users or groups through an access list. A node belongs to whoever
 takes its group from the folder it is made in. The administrator passes every check.</p>
 <p>Two things work differently from a computer&#39;s files:</p>
 <ul>
-<li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not on the map,
-not in <code>ls</code>. Two people can see the same album differently, and an album can look emptier to you
-than to its owner.</li>
-<li><strong>You do not need the numbers.</strong> <strong>Share</strong>, on an album, a picture, a person, a location or a device, sets the same
-permissions in words: who can see it, who can change it, and links that open it without an
-account.</li>
+<li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not in <code>ls</code>, and
+with the Archive not on the map. Two people can see the same folder or album differently, and it
+can look emptier to you than to its owner.</li>
+<li><strong>You do not need the numbers.</strong> <strong>Share</strong> sets the same permissions in words: who can see a
+node and who can change it, and for an album, a link that opens it without an account. It works
+on any node from the <strong>Nodes</strong> explorer, and with the Archive installed its pages offer it on an
+album, a picture, a person, a location or a device.</li>
 </ul>
 <p>Someone who has not signed in is the guest. The guest can sign in or open a share link and nothing
 more, unless an administrator turns on <strong>Visitors may browse</strong>, and the guest never changes
@@ -222,12 +226,12 @@ has the exact rules.</p>
 <p>A <strong>softlink</strong> is a node that points at another node by its path; opening it opens what it points
 at. EiN uses softlinks wherever one thing belongs in several places:</p>
 <ul>
-<li>an album&#39;s cover is a link to one of its pictures;</li>
-<li>a picture added to an album from somewhere else is a link to where it lives;</li>
-<li>a label is a folder under <code>/archive/tags/</code> holding a link to everything that carries it;</li>
+<li>being in a group is a link under <code>/etc/groups/&lt;group&gt;/users/</code>;</li>
 <li>your favourites are links in <code>/home/&lt;you&gt;/stars</code>;</li>
-<li>how two people are related is a pair of links, one on each person;</li>
-<li>being in a group is a link under <code>/etc/groups/&lt;group&gt;/users/</code>.</li>
+<li>with the Archive, an album&#39;s cover is a link to one of its pictures, and a picture added to an
+album from somewhere else is a link to where it lives;</li>
+<li>with the Archive, a label is a folder under <code>/archive/tags/</code> holding a link to everything that
+carries it, and how two people are related is a pair of links, one on each person.</li>
 </ul>
 <p>Moving or renaming a node re-points every softlink to it, so an album can change its name without
 losing its cover or its labels. A <strong>hard link</strong> is the other kind: the same node under a second name
@@ -267,7 +271,7 @@ commands as you, except SFTP, which moves files and nothing else:</p>
 </tr>
 <tr>
 <td>The assistant</td>
-<td><strong>Chat</strong> in the sidebar, with the assistant module</td>
+<td><strong>Chat</strong> in the sidebar, with the <a href="../assistant/index.html">assistant module</a></td>
 <td>It runs commands as tools, as you; one that would change something waits for you to press <strong>Run</strong></td>
 </tr>
 </tbody></table>
@@ -340,7 +344,8 @@ commands as you, except SFTP, which moves files and nothing else:</p>
 <p>The web interface is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with <code>JSON_OUTPUT=1</code> so that they answer in JSON; renaming a
 folder on the Nodes page runs <code>mv</code>. Only the bytes of files, uploaded or downloaded, take a way of
-their own, through the same permission check. You can run the same commands yourself:</p>
+their own, through the same permission check. You can run the same commands yourself; these two
+list the Archive&#39;s albums, so they need the Archive installed:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">ls</span> /archive/albums
 JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l /archive/albums | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
@@ -358,7 +363,7 @@ is saved. <strong>Pipelines</strong> act on these events: a pipeline is a defini
 and the steps, each a command, that it then runs on the node that changed. A module brings its
 pipelines with it. Core brings none, so without a module EiN keeps what you give it and works
 nothing out.</p>
-<p>With the Archive installed, uploading a photo sets off a chain:</p>
+<p>With the <a href="../archive/index.html">Archive</a> installed, uploading a photo sets off a chain:</p>
 <ol>
 <li>The Archive notices the uploaded photo, video or recording and announces it.</li>
 <li><code>media-ingest</code> reads the file&#39;s metadata, such as the camera, the time it was taken and where,
@@ -399,28 +404,33 @@ of its commands: every command whose name starts with <code>search-</code> is as
 </tr>
 </thead>
 <tbody><tr>
-<td><code>archive</code></td>
+<td><a href="../archive/index.html"><code>archive</code></a></td>
 <td>The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted</td>
 <td>The <code>ems</code> module, installed along with it, and the media service</td>
 </tr>
 <tr>
-<td><code>assistant</code></td>
+<td><a href="../assistant/index.html"><code>assistant</code></a></td>
 <td>The chat that answers questions about EiN by running its commands for you</td>
 <td>A language model</td>
 </tr>
 <tr>
-<td><code>ems</code></td>
+<td><a href="../ems/index.html"><code>ems</code></a></td>
 <td>EiN&#39;s side of the media service: the client the Archive calls it through, the media service&#39;s health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares</td>
 <td>The media service</td>
 </tr>
 </tbody></table>
 </div>
-<p>A fourth module, <code>importer</code>, moves one particular older archive into EiN. It is not published and
-is not a general importer; photos from anywhere else come in through staging, as
-<a href="../archive/importing.html">Getting your photos in</a> describes.</p>
+<p>A fourth module, <a href="../importer/index.html"><code>importer</code></a>, moves one particular older archive into EiN.
+It is not published and is not a general importer; photos from anywhere else come in through the
+Archive&#39;s staging, as <a href="../archive/importing.html">Getting your photos in</a> describes.</p>
 <p>An administrator installs, updates and removes modules on <strong>Settings → Modules</strong>, with
 <code>mod install</code>, or with the installer&#39;s <code>--module</code> option. <a href="../admin/modules.html">Modules</a> explains all
 three.</p>
+<p>These pages are divided the same way. The <strong>Core</strong> part of the sidebar holds for every EiN, with or
+without modules; where a core page shows something a module adds, it says so and links to that
+module&#39;s pages. Under <strong>Modules</strong>, each module has a section of its own that opens with its overview,
+linked in the table above. Read a module&#39;s section once it is installed on your EiN, and leave it
+aside otherwise.</p>
 <h2 id="what-runs-beside-ein">What runs beside EiN<a class="anchor" href="#what-runs-beside-ein" aria-label="Link to this section"></a></h2>
 <p>EiN itself is one process: the web interface, the shell, SSH and SFTP, the pipelines and the
 modules&#39; services all run in it. The installer sets it up on one machine with podman or Docker and
@@ -562,6 +572,9 @@ and <a href="../assistant/language-model.html">The language model</a> say more a
 <li><a href="install.html">Install EiN</a> puts EiN on a machine of your own, and <a href="first-steps.html">First steps</a>
 takes you from the first sign-in to a family using it.</li>
 <li><a href="../guide/interface.html">Finding your way around</a> is a tour of the web interface.</li>
+<li><a href="../archive/index.html">The Archive</a>, <a href="../assistant/index.html">The Assistant</a>,
+<a href="../ems/index.html">The media service</a> and <a href="../importer/index.html">The Importer</a> open each module&#39;s
+section, for the modules installed on your EiN.</li>
 <li>The Concepts pages take each idea above further: <a href="../concepts/nodes.html">Nodes and node types</a>,
 <a href="../concepts/tree.html">The tree</a>, <a href="../concepts/links.html">Links</a>,
 <a href="../concepts/files.html">Files and storage</a> and <a href="../concepts/pipelines.html">Changes and pipelines</a>.</li>

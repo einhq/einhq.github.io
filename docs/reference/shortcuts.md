@@ -8,13 +8,13 @@ page that explains that part in full; this page is for looking a key up.
 Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu. The
 **Keyboard shortcuts** dialog opens, listing the keys that work anywhere under **Anywhere**, and a
 group for each part of the screen that has keys of its own while that part is on screen:
-**Pictures** for a grid of pictures, **Lightbox**, **Video** and **Audio** for the viewer, **Nodes**,
-**Staging** and **Memories**. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.
+**Pictures** for a grid of pictures and **Nodes**, and with the Archive installed **Lightbox**,
+**Video** and **Audio** for the viewer, **Staging** and **Memories**. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.
 
 ![The Keyboard shortcuts dialog over the Home page, listing the Anywhere group](../../assets/shots/shortcuts.webp "The ? dialog lists only the keys of what is on screen now.")
 
-Some pages also show their keys at the foot of the page while you work, such as the **Sort** tab in
-staging; each key there is a button too.
+Some pages also show their keys at the foot of the page while you work, such as the Archive's
+**Sort** tab in staging; each key there is a button too.
 
 How to read the keys on this page:
 
@@ -23,20 +23,21 @@ How to read the keys on this page:
 - <kbd>Alt</kbd> is <kbd>⌥</kbd> on a Mac. The terminal's command line and the editor in the
   terminal use <kbd>Ctrl</kbd> on a Mac too, never <kbd>⌘</kbd>.
 - A letter key works without <kbd>Shift</kbd> unless the table says <kbd>Shift</kbd>.
+- Core's keys come first on this page. The keys a module brings are grouped under the module after
+  them, [Archive](#archive) and [Assistant](#assistant); they work only with that module installed.
 - Keys typed into a text field are the field's. A page's single-letter keys, <kbd>?</kbd> and the
   top bar's keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
   terminal's <kbd>Alt</kbd> keys work there too.
 
 ## Anywhere
 
-| Keys                                                              | What they do                                                                                                                     |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) | Opens the finder: search, or go to a page, person or album; type `>` for commands. In its dialog form, pressed again, closes it. |
-| <kbd>?</kbd>                                                      | Opens or closes the **Keyboard shortcuts** dialog.                                                                               |
-| <kbd>Alt</kbd>+<kbd>T</kbd>                                       | Shows or hides the terminal.                                                                                                     |
-| <kbd>Alt</kbd>+<kbd>N</kbd>                                       | Adds a terminal tab.                                                                                                             |
-| <kbd>Alt</kbd>+<kbd>R</kbd>                                       | Opens an album at random (**Random album**, with the Archive module).                                                            |
-| <kbd>Esc</kbd>                                                    | Closes a dialog, or a page shown full screen, such as the viewer.                                                                |
+| Keys                                                              | What they do                                                                                                                                            |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) | Opens the finder: search, or go to a page or, with the Archive, a person or album; type `>` for commands. In its dialog form, pressed again, closes it. |
+| <kbd>?</kbd>                                                      | Opens or closes the **Keyboard shortcuts** dialog.                                                                                                      |
+| <kbd>Alt</kbd>+<kbd>T</kbd>                                       | Shows or hides the terminal.                                                                                                                            |
+| <kbd>Alt</kbd>+<kbd>N</kbd>                                       | Adds a terminal tab.                                                                                                                                    |
+| <kbd>Esc</kbd>                                                    | Closes a dialog, or a page shown full screen, such as the viewer.                                                                                       |
 
 Where a dialog or the viewer covers the search box, <kbd>Ctrl</kbd>+<kbd>K</kbd> opens the finder as
 a dialog of its own. [Finding your way around](../guide/interface.md#keyboard-shortcuts) shows the
@@ -45,7 +46,7 @@ dialog, and [Search and the finder](../guide/search.md#the-finder-in-the-top-bar
 ### Keys for top-bar buttons
 
 A top-bar button or a row of one of its menus can have a key, from a module or from your own
-navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for **Random album** is the only one EiN ships with.
+navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive's **Random album** is the only one a published module ships with.
 Each such key is listed under **Anywhere** in the **Keyboard shortcuts** dialog and shown in the
 button's tooltip, such as **Random album (Alt+R)**. [Your sidebar and top bar](../guide/customizing.md#give-an-entry-a-key)
 shows how to give an entry a key, change one, or take one away.
@@ -64,19 +65,19 @@ In the finder ([Search and the finder](../guide/search.md)):
 | <kbd>Enter</kbd>          | Opens the lit row. With words typed, the first row, the search, is lit from the start. |
 | <kbd>Esc</kbd>            | Closes the list.                                                                       |
 
-In the search box of the **Search** and **Media** pages:
+In the search box of the **Search** page, and of the Archive's **Media** page:
 
-| Keys                                           | What they do                                         |
-| ---------------------------------------------- | ---------------------------------------------------- |
-| <kbd>Enter</kbd>                               | Runs the search.                                     |
-| <kbd>↑</kbd> <kbd>↓</kbd> in the `@` list      | Light a person, place, album or other thing to pick. |
-| <kbd>Enter</kbd> or <kbd>Tab</kbd> in the list | Picks the lit row, which becomes a chip.             |
-| <kbd>Esc</kbd> in the list                     | Closes the list without picking.                     |
+| Keys                                           | What they do                                             |
+| ---------------------------------------------- | -------------------------------------------------------- |
+| <kbd>Enter</kbd>                               | Runs the search.                                         |
+| <kbd>↑</kbd> <kbd>↓</kbd> in the `@` list      | Light a thing to pick, such as a person, place or album. |
+| <kbd>Enter</kbd> or <kbd>Tab</kbd> in the list | Picks the lit row, which becomes a chip.                 |
+| <kbd>Esc</kbd> in the list                     | Closes the list without picking.                         |
 
 ## Pictures in a grid
 
-Wherever pictures stand in a grid: an album, **Media**, a person's pictures, search
-results. [Albums](../archive/albums.md#select-pictures) describes selecting in full.
+Wherever pictures stand in a grid: search results, and with the Archive an album, **Media** or a
+person's pictures. [Albums](../archive/albums.md#select-pictures) describes selecting in full.
 
 | Keys                                                              | What they do                                                           |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -86,12 +87,112 @@ results. [Albums](../archive/albums.md#select-pictures) describes selecting in f
 | <kbd>Esc</kbd>                                                    | Clears the selection. With the viewer open, closes the viewer instead. |
 | <kbd>Enter</kbd> or <kbd>Space</kbd>                              | Opens the picture that has the keyboard's focus.                       |
 
+## The Nodes explorer
+
+While a folder listing of the **Nodes** explorer has the keyboard. [The tree](../concepts/tree.md)
+says what the nodes are.
+
+| Keys                                                              | What they do                                                                                              |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| <kbd>↑</kbd> <kbd>↓</kbd>                                         | Move the selection to the row above or below.                                                             |
+| <kbd>Shift</kbd>+<kbd>↑</kbd> <kbd>Shift</kbd>+<kbd>↓</kbd>       | Extend the selection.                                                                                     |
+| <kbd>Ctrl</kbd>+<kbd>↑</kbd> <kbd>Ctrl</kbd>+<kbd>↓</kbd>         | Move without selecting, to pick rows one by one.                                                          |
+| <kbd>→</kbd> / <kbd>←</kbd>                                       | Open / close the row's folder in place. In the icons view the arrows move by the tiles on screen instead. |
+| <kbd>Space</kbd>                                                  | Opens or closes the row's folder in place.                                                                |
+| <kbd>Enter</kbd>                                                  | Go into the row.                                                                                          |
+| <kbd>Alt</kbd>+<kbd>Enter</kbd>                                   | **Properties**                                                                                            |
+| <kbd>Backspace</kbd>                                              | Up a level.                                                                                               |
+| <kbd>F2</kbd>                                                     | Rename. <kbd>Enter</kbd> keeps the new name, <kbd>Esc</kbd> gives it up.                                  |
+| <kbd>Delete</kbd>                                                 | Delete, after asking. Only where you may write.                                                           |
+| <kbd>F5</kbd>                                                     | Reload the listing.                                                                                       |
+| <kbd>Ctrl</kbd>+<kbd>H</kbd> (<kbd>⌘</kbd>+<kbd>H</kbd> on a Mac) | Show or hide names that start with a dot.                                                                 |
+| <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) | Select every row shown, open folders included.                                                            |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>⌘</kbd>+<kbd>C</kbd> on a Mac) | Copy.                                                                                                     |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd> (<kbd>⌘</kbd>+<kbd>X</kbd> on a Mac) | Cut. Only where you may write.                                                                            |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on a Mac) | Paste into the folder shown. Only where you may write.                                                    |
+| <kbd>Tab</kbd>                                                    | With two panes, moves the keyboard to the other pane.                                                     |
+
+In the address bar above a listing, <kbd>Enter</kbd> goes to the path typed and <kbd>Esc</kbd>
+puts back the path you were at.
+
+The explorer's code editor saves with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>⌘</kbd>+<kbd>S</kbd> on a
+Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. [The editor](../shell/editor.md#edit-a-file-in-the-web-interface)
+covers it.
+
+## The trash
+
+On the **Trash** page ([Your profile, favourites and trash](../guide/profile.md#the-trash)):
+
+| Keys                                                | What they do                                     |
+| --------------------------------------------------- | ------------------------------------------------ |
+| <kbd>↑</kbd> <kbd>↓</kbd>                           | Move the selection.                              |
+| <kbd>Ctrl</kbd>+click (<kbd>⌘</kbd>+click on a Mac) | Add a row to the selection.                      |
+| <kbd>Shift</kbd>+click                              | Select a range.                                  |
+| <kbd>Enter</kbd>                                    | Opens or closes a row that holds several things. |
+| <kbd>Delete</kbd>                                   | **Delete for good**, after asking.               |
+| <kbd>F5</kbd>                                       | Reload the list.                                 |
+
+## The terminal
+
+The terminal's own keys work whether you are typing in it or not, with <kbd>Alt</kbd> alone, without
+<kbd>Ctrl</kbd>, <kbd>Shift</kbd> or <kbd>⌘</kbd>. [The terminal](../shell/terminal.md#the-terminals-own-keys)
+explains them.
+
+| Keys                                                      | What they do                                        |
+| --------------------------------------------------------- | --------------------------------------------------- |
+| <kbd>Alt</kbd>+<kbd>T</kbd>                               | Show or hide the terminal                           |
+| <kbd>Alt</kbd>+<kbd>N</kbd>                               | New tab                                             |
+| <kbd>Alt</kbd>+<kbd>W</kbd>                               | Close the tab you are typing in; never the last one |
+| <kbd>Alt</kbd>+<kbd>M</kbd>                               | Fill the window, or go back to half of it           |
+| <kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>Alt</kbd>+<kbd>→</kbd> | Previous / next tab                                 |
+| <kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd> | A tenth of the window shorter / taller              |
+
+> [!NOTE]
+> On a Mac, ⌥ with a letter types a character of its own (⌥T types †), so ⌥T, ⌥N, ⌥W and ⌥M may
+> not reach the terminal. Use the terminal button in the top bar and the buttons in the tab bar
+> instead. ⌥ with an arrow key works.
+
+The command line is edited with bash's keys: <kbd>Tab</kbd> completes, <kbd>↑</kbd> and
+<kbd>↓</kbd> walk your history, <kbd>Ctrl</kbd>+<kbd>R</kbd> searches it (and does not reload the
+page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command and <kbd>Ctrl</kbd>+<kbd>D</kbd>
+on an empty line ends the shell. [Edit the command line](../shell/terminal.md#edit-the-command-line)
+has the full list. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.
+
+In an `ssh` session to another machine, <kbd>~</kbd> then <kbd>.</kbd> at the start of a line cuts
+the connection; see [Reaching other machines](../shell/remote.md).
+
+## The editor in the terminal
+
+`edit` opens a file in the terminal. Its keys are <kbd>Ctrl</kbd> on a Mac too.
+[The editor](../shell/editor.md#keys) has every key.
+
+| Keys                                                         | What they do                             |
+| ------------------------------------------------------------ | ---------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd> | Save                                     |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd> | Leave; asks first if anything is unsaved |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                                 | Find                                     |
+| <kbd>Ctrl</kbd>+<kbd>G</kbd>                                 | Go to a line, or `line:column`           |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>  | Undo / redo                              |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd>  | Cut the line / paste what was cut        |
+| <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel a question                        |
+
+## Archive
+
+These keys work with the [Archive](../archive/index.md) installed.
+
+### Anywhere with the Archive
+
+<kbd>Alt</kbd>+<kbd>R</kbd> opens an album at random, as **Random album** in the top bar does. It is a
+top-bar key, so it can be changed or taken away; see [Keys for top-bar buttons](#keys-for-top-bar-buttons).
+
+### The time scrubber
+
 The time scrubber at the right of a long list (**Scroll through time**), on the albums page, in a
 media timeline and in staging, takes keys once you move to it with <kbd>Tab</kbd>: <kbd>↑</kbd> and
 <kbd>↓</kbd> step to the time before or after, <kbd>Home</kbd> and <kbd>End</kbd> go to the first and
 the last.
 
-## The viewer
+### The viewer
 
 While a photo, video or recording is open. [Viewing photos, videos and recordings](../archive/viewer.md#keyboard-shortcuts-in-the-viewer)
 explains each.
@@ -112,7 +213,7 @@ In the **Who is this?** box of an unnamed face, <kbd>Enter</kbd> names it. In th
 picture** dialog, <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>⌘</kbd>+<kbd>Enter</kbd> on a Mac) saves.
 While a dialog lies over the viewer, the viewer's keys rest.
 
-### Videos and recordings
+#### Videos and recordings
 
 | Keys                                                          | What they do                                                  |
 | ------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -137,9 +238,9 @@ percent, <kbd>Home</kbd> silences it and <kbd>End</kbd> turns it full up. A clic
 or the slider leaves the keyboard where it was, so <kbd>←</kbd> and <kbd>→</kbd> still step between
 files.
 
-## The memories story
+### The memories story
 
-On **Home**, while **On this day** plays as a story ([Home, memories and statistics](../guide/home.md#watch-the-memories-story)):
+On **Home**, while **On this day** plays as a story ([Memories, news and events on Home](../archive/home.md#watch-the-memories-story)):
 
 | Keys             | What they do                                                              |
 | ---------------- | ------------------------------------------------------------------------- |
@@ -148,7 +249,7 @@ On **Home**, while **On this day** plays as a story ([Home, memories and statist
 | <kbd>Space</kbd> | Pauses or plays.                                                          |
 | <kbd>Esc</kbd>   | Closes the story.                                                         |
 
-## People
+### People
 
 [People and faces](../archive/people.md) explains each place.
 
@@ -163,7 +264,7 @@ On **Home**, while **On this day** plays as a story ([Home, memories and statist
 | **Split** a person               | <kbd>Esc</kbd>                                                    | Closes an open photo first, then the dialog.                                    |
 | A person's faces                 |                                                                   | The keys of [pictures in a grid](#pictures-in-a-grid).                          |
 
-## Staging: the Sort tab
+### Staging: the Sort tab
 
 On a computer, the line at the foot of the stream shows the keys for where you are; **hide** folds
 it to a **Keys** chip. The keys do nothing while you type in a field or a dialog is open, and there
@@ -225,7 +326,7 @@ In the dialogs these keys open:
 - **Move to a group**: <kbd>↑</kbd> and <kbd>↓</kbd> light a group, <kbd>Enter</kbd> takes it.
 - Renaming a group: <kbd>Enter</kbd> keeps the name, <kbd>Esc</kbd> gives it up.
 
-## Staging: duplicates
+### Staging: duplicates
 
 On the **Duplicates** tab and in its compare dialog ([Duplicates](../archive/duplicates.md#remove-the-copies-of-one-set)):
 
@@ -241,52 +342,11 @@ On the **Duplicates** tab and in its compare dialog ([Duplicates](../archive/dup
 |                    | <kbd>X</kbd>                | Not duplicates (look-alikes only)                  |
 |                    | <kbd>Esc</kbd>              | Close without changing anything                    |
 
-## The Nodes explorer
+## Assistant
 
-While a folder listing of the **Nodes** explorer has the keyboard. [The tree](../concepts/tree.md)
-says what the nodes are.
+These keys work with the [Assistant](../assistant/index.md) installed.
 
-| Keys                                                              | What they do                                                                                              |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| <kbd>↑</kbd> <kbd>↓</kbd>                                         | Move the selection to the row above or below.                                                             |
-| <kbd>Shift</kbd>+<kbd>↑</kbd> <kbd>Shift</kbd>+<kbd>↓</kbd>       | Extend the selection.                                                                                     |
-| <kbd>Ctrl</kbd>+<kbd>↑</kbd> <kbd>Ctrl</kbd>+<kbd>↓</kbd>         | Move without selecting, to pick rows one by one.                                                          |
-| <kbd>→</kbd> / <kbd>←</kbd>                                       | Open / close the row's folder in place. In the icons view the arrows move by the tiles on screen instead. |
-| <kbd>Space</kbd>                                                  | Opens or closes the row's folder in place.                                                                |
-| <kbd>Enter</kbd>                                                  | Go into the row.                                                                                          |
-| <kbd>Alt</kbd>+<kbd>Enter</kbd>                                   | **Properties**                                                                                            |
-| <kbd>Backspace</kbd>                                              | Up a level.                                                                                               |
-| <kbd>F2</kbd>                                                     | Rename. <kbd>Enter</kbd> keeps the new name, <kbd>Esc</kbd> gives it up.                                  |
-| <kbd>Delete</kbd>                                                 | Delete, after asking. Only where you may write.                                                           |
-| <kbd>F5</kbd>                                                     | Reload the listing.                                                                                       |
-| <kbd>Ctrl</kbd>+<kbd>H</kbd> (<kbd>⌘</kbd>+<kbd>H</kbd> on a Mac) | Show or hide names that start with a dot.                                                                 |
-| <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) | Select every row shown, open folders included.                                                            |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>⌘</kbd>+<kbd>C</kbd> on a Mac) | Copy.                                                                                                     |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd> (<kbd>⌘</kbd>+<kbd>X</kbd> on a Mac) | Cut. Only where you may write.                                                                            |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on a Mac) | Paste into the folder shown. Only where you may write.                                                    |
-| <kbd>Tab</kbd>                                                    | With two panes, moves the keyboard to the other pane.                                                     |
-
-In the address bar above a listing, <kbd>Enter</kbd> goes to the path typed and <kbd>Esc</kbd>
-puts back the path you were at.
-
-The explorer's code editor saves with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>⌘</kbd>+<kbd>S</kbd> on a
-Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. [The editor](../shell/editor.md#edit-a-file-in-the-web-interface)
-covers it.
-
-## The trash
-
-On the **Trash** page ([Your profile, favourites and trash](../guide/profile.md#the-trash)):
-
-| Keys                                                | What they do                                     |
-| --------------------------------------------------- | ------------------------------------------------ |
-| <kbd>↑</kbd> <kbd>↓</kbd>                           | Move the selection.                              |
-| <kbd>Ctrl</kbd>+click (<kbd>⌘</kbd>+click on a Mac) | Add a row to the selection.                      |
-| <kbd>Shift</kbd>+click                              | Select a range.                                  |
-| <kbd>Enter</kbd>                                    | Opens or closes a row that holds several things. |
-| <kbd>Delete</kbd>                                   | **Delete for good**, after asking.               |
-| <kbd>F5</kbd>                                       | Reload the list.                                 |
-
-## The assistant
+### The chat
 
 In the chat box ([Chatting with the assistant](../assistant/chat.md)), <kbd>Enter</kbd> sends the
 question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
@@ -294,50 +354,6 @@ question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
 The side drawer the chat opens in can be made wider or narrower from the keyboard: move to its edge
 (**Resize side panel**) with <kbd>Tab</kbd>, then <kbd>←</kbd> makes it 20 pixels wider and
 <kbd>→</kbd> 20 pixels narrower.
-
-## The terminal
-
-The terminal's own keys work whether you are typing in it or not, with <kbd>Alt</kbd> alone, without
-<kbd>Ctrl</kbd>, <kbd>Shift</kbd> or <kbd>⌘</kbd>. [The terminal](../shell/terminal.md#the-terminals-own-keys)
-explains them.
-
-| Keys                                                      | What they do                                        |
-| --------------------------------------------------------- | --------------------------------------------------- |
-| <kbd>Alt</kbd>+<kbd>T</kbd>                               | Show or hide the terminal                           |
-| <kbd>Alt</kbd>+<kbd>N</kbd>                               | New tab                                             |
-| <kbd>Alt</kbd>+<kbd>W</kbd>                               | Close the tab you are typing in; never the last one |
-| <kbd>Alt</kbd>+<kbd>M</kbd>                               | Fill the window, or go back to half of it           |
-| <kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>Alt</kbd>+<kbd>→</kbd> | Previous / next tab                                 |
-| <kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd> | A tenth of the window shorter / taller              |
-
-> [!NOTE]
-> On a Mac, ⌥ with a letter types a character of its own (⌥T types †), so ⌥T, ⌥N, ⌥W and ⌥M may
-> not reach the terminal. Use the terminal button in the top bar and the buttons in the tab bar
-> instead. ⌥ with an arrow key works.
-
-The command line is edited with bash's keys: <kbd>Tab</kbd> completes, <kbd>↑</kbd> and
-<kbd>↓</kbd> walk your history, <kbd>Ctrl</kbd>+<kbd>R</kbd> searches it (and does not reload the
-page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command and <kbd>Ctrl</kbd>+<kbd>D</kbd>
-on an empty line ends the shell. [Edit the command line](../shell/terminal.md#edit-the-command-line)
-has the full list. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.
-
-In an `ssh` session to another machine, <kbd>~</kbd> then <kbd>.</kbd> at the start of a line cuts
-the connection; see [Reaching other machines](../shell/remote.md).
-
-## The editor in the terminal
-
-`edit` opens a file in the terminal. Its keys are <kbd>Ctrl</kbd> on a Mac too.
-[The editor](../shell/editor.md#keys) has every key.
-
-| Keys                                                         | What they do                             |
-| ------------------------------------------------------------ | ---------------------------------------- |
-| <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd> | Save                                     |
-| <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd> | Leave; asks first if anything is unsaved |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                                 | Find                                     |
-| <kbd>Ctrl</kbd>+<kbd>G</kbd>                                 | Go to a line, or `line:column`           |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>  | Undo / redo                              |
-| <kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd>  | Cut the line / paste what was cut        |
-| <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>               | Cancel a question                        |
 
 ## When a key does nothing
 
@@ -352,8 +368,7 @@ the connection; see [Reaching other machines](../shell/remote.md).
 - **A top-bar key you set is missing.** A key two entries ask for goes to the first in the top bar's
   order, and EiN's own keys are never given away. [Your sidebar and top bar](../guide/customizing.md#when-something-goes-differently)
   helps find out why.
-- **On a phone or tablet** there is no keyboard to press; staging's keys and the others need a
-  computer. [EiN on a phone](../guide/phone.md) covers the gestures instead.
+- **On a phone or tablet** there is no keyboard to press; the keys need a computer. [EiN on a phone](../guide/phone.md) covers the gestures instead.
 
 ## Related pages
 

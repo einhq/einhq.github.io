@@ -1,16 +1,16 @@
 # The language model
 
-The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers.
+The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers. It applies once the [Assistant](index.md) module is installed.
 
 ## What the language model is for
 
 EiN asks the language model in three places:
 
 - **The chat.** Every answer in the chat comes from the model, which runs EiN's commands to look things up. [Chatting with the assistant](chat.md) shows it from the user's side.
-- **The search box.** When someone types a sentence, such as `photos of Ruby Wrenfield from 1987`, the Archive's search parser asks the model which words are people, places, years and kinds of media. When the model does not answer within 20 seconds, the parser reads the sentence with its own rules instead, so search keeps working without it.
+- **The search box.** With the [Archive](../archive/index.md) installed, when someone types a sentence, such as `photos of Ruby Wrenfield from 1987`, the Archive's search parser asks the model which words are people, places, years and kinds of media. When the model does not answer within 20 seconds, the parser reads the sentence with its own rules instead, so search keeps working without it.
 - **Plain picture requests in the chat**, such as "Show photos of Peggy Wrenfield from 1990", which go through the same search parser and are answered with one search.
 
-All three belong to the **assistant** module. Without it installed, EiN asks no language model at all. Install it like any module: `~/ein/setup.sh --module assistant`, **Settings → Modules**, or `mod install assistant` ([Modules](../admin/modules.md)).
+All three belong to the **assistant** module. Without it installed, EiN asks no language model at all; [The Assistant](index.md#install-it) shows how to install it.
 
 The language model does no media processing. Faces, picture descriptions, transcripts and the vectors that find things by meaning come from the [media service](../ems/index.md), which runs models of its own.
 

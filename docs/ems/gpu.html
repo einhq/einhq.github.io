@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The graphics card – EiN documentation</title>
-    <meta name="description" content="This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.">
+    <meta name="description" content="This page is for whoever runs the media service or the assistant's language model on their own machine and wants them to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the two share one card. It applies once the media service or the Assistant's own language model is installed: it is the media service's page for the card, and also the one for the language model's use of it.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/ems/gpu.html">
     <meta property="og:title" content="The graphics card – EiN documentation">
-    <meta property="og:description" content="This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.">
+    <meta property="og:description" content="This page is for whoever runs the media service or the assistant's language model on their own machine and wants them to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the two share one card. It applies once the media service or the Assistant's own language model is installed: it is the media service's page for the card, and also the one for the language model's use of it.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,7 +87,8 @@
           <h1>The graphics card</h1>
         </header>
         <article class="prose">
-<p>This page is for whoever runs EiN on their own machine and wants it to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the media service and the language model share one card. Nothing in EiN needs a card; without one everything runs on the processor, more slowly.</p>
+<p>This page is for whoever runs the media service or the assistant&#39;s language model on their own machine and wants them to use an NVIDIA graphics card: what the card speeds up, what the machine needs before EiN can reach it, how EiN is given the card, how to check that it uses it, and how the two share one card. It applies once the <a href="index.html">media service</a> or the <a href="../assistant/index.html">Assistant</a>&#39;s own <a href="../assistant/language-model.html">language model</a> is installed: it is the media service&#39;s page for the card, and also the one for the language model&#39;s use of it.</p>
+<p>Nothing in EiN needs a card; without one everything runs on the processor, more slowly.</p>
 <h2 id="what-the-card-is-used-for">What the card is used for<a class="anchor" href="#what-the-card-is-used-for" aria-label="Link to this section"></a></h2>
 <p>Two of EiN&#39;s optional services use the card. EiN itself and its database never do.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -378,7 +379,7 @@ podman compose up -d</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p><a href="../admin/troubleshooting.html">Troubleshooting</a> has more, and <a href="index.html">The media service</a> covers the media service beyond its card.</p>
+<p><a href="../admin/troubleshooting.html">Troubleshooting</a> has more. <a href="index.html">The media service</a> covers the media service beyond its card, and <a href="../assistant/language-model.html">The language model</a> the model beyond its card.</p>
 
         </article>
         <footer class="docs-foot">

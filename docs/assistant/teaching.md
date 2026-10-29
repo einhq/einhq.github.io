@@ -1,6 +1,6 @@
 # Teaching the assistant
 
-The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told.
+The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told. It applies once the [Assistant](index.md) module is installed.
 
 What the chat looks like to the people who use it is in [Chatting with the assistant](chat.md). Where the language model runs and how to point EiN at another one is in [The language model](language-model.md).
 

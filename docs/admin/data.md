@@ -10,23 +10,23 @@ The commands are written for podman, run in `~/ein`. With Docker, write `docker`
 
 An installation keeps its data in three places: the database, the data folder and `~/ein/.env`.
 
-| Part                            | Where                                                                                   | What it holds                                                                                                                                         | Back it up?                                                                                                                |
-| ------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| The database                    | the volume `ein_db` in the container engine's storage, or the folder `EIN_DB_DIR` names | every node of the tree: names, folders, albums, people, faces, links, permissions, accounts and settings, and small content such as comments and keys | Yes, as a dump                                                                                                             |
-| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another                           | your originals                                                                                                                                        | Yes                                                                                                                        |
-| `old`                           | the data folder                                                                         | the files of an older installation that the importer reads; empty unless you put files there                                                          | When it holds anything                                                                                                     |
-| `modules`                       | the data folder                                                                         | the installed modules                                                                                                                                 | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                       |
-| `files-volatile`                | the data folder                                                                         | thumbnails, video renditions, face crops and the other renditions EiN makes from the originals                                                        | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](../ems/index.md) |
-| `files-tmp`                     | the data folder                                                                         | scratch space while files are written                                                                                                                 | No                                                                                                                         |
-| `llm`                           | the data folder                                                                         | the language model, downloaded at its first start                                                                                                     | No; it is downloaded again                                                                                                 |
-| `~/ein/.env`                    | `~/ein`                                                                                 | your options, the lines you added, and the passwords made at the install                                                                              | Yes                                                                                                                        |
-| `src/`, `compose.override.yaml` | `~/ein`                                                                                 | the sources and the options as services                                                                                                               | No; `setup.sh` makes them again                                                                                            |
+| Part                            | Where                                                                                   | What it holds                                                                                                                                                               | Back it up?                                                                                                                |
+| ------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| The database                    | the volume `ein_db` in the container engine's storage, or the folder `EIN_DB_DIR` names | every node of the tree: names, folders, links, permissions, accounts and settings, the albums, people and faces of the Archive, and small content such as comments and keys | Yes, as a dump                                                                                                             |
+| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another                           | your originals                                                                                                                                                              | Yes                                                                                                                        |
+| `old`                           | the data folder                                                                         | the files of an older installation that the [Importer](../importer/index.md) reads; empty unless you put files there                                                        | When it holds anything                                                                                                     |
+| `modules`                       | the data folder                                                                         | the installed modules                                                                                                                                                       | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                       |
+| `files-volatile`                | the data folder                                                                         | with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals                                                         | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](../ems/index.md) |
+| `files-tmp`                     | the data folder                                                                         | scratch space while files are written                                                                                                                                       | No                                                                                                                         |
+| `llm`                           | the data folder                                                                         | with `--llm`, the language model, downloaded at its first start                                                                                                             | No; it is downloaded again                                                                                                 |
+| `~/ein/.env`                    | `~/ein`                                                                                 | your options, the lines you added, and the passwords made at the install                                                                                                    | Yes                                                                                                                        |
+| `src/`, `compose.override.yaml` | `~/ein`                                                                                 | the sources and the options as services                                                                                                                                     | No; `setup.sh` makes them again                                                                                            |
 
 [Installing in detail](install.md#the-data-folder) shows how the folders are mounted into the containers.
 
 ### Why the database and the files belong together
 
-The `files` folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as `files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K`. Which album a file is in, what it is called, who may see it and whose face is in it are all in the database.
+The `files` folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as `files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K`. What a file is called, who may see it and, with the Archive, which album it is in and whose face is in it are all in the database.
 
 Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. Take both while EiN is stopped, and restore both together.
 
@@ -137,7 +137,7 @@ A restore loads the dump into an empty database and puts the files back beside i
 
 7. Sign in with an account from your backup, and choose **Dashboard** under **System** in the sidebar: the **Storage** card shows the data folder and the database's size, and the badge above the title turns to **Healthy** once the work after the start is done. [Health and the dashboard](monitoring.md) explains what you see.
 
-If you left out `files-volatile`, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.
+With the Archive, if you left out `files-volatile`, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.
 
 ### Make the renditions again
 
@@ -196,7 +196,7 @@ The data folder can be moved on the same machine, such as to a larger disk mount
    podman compose up -d
    ```
 
-Check that pictures and thumbnails show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.
+Check that your files, and with the Archive their pictures and thumbnails, show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.
 
 The database is not in the data folder and does not move with it. It lives in the container engine's storage, under `~/.local/share/containers/storage` for rootless podman and `/var/lib/docker` for Docker, unless `EIN_DB_DIR` in `.env` names a folder for it. To put it on another disk, run `./setup.sh --db-dir /srv/ein-db` with an empty folder: while the database is still in the volume, `setup.sh` stops and prints the commands that copy it there first.
 
@@ -204,16 +204,18 @@ The database is not in the data folder and does not move with it. It lives in th
 
 The data folder holds your files under ids, not names, so copying it gives you nothing you can browse. To get files out with their names and folders, take them out through EiN:
 
-- **In the web interface**, select pictures in an album or the grid and choose **Download** in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See [Albums](../archive/albums.md#the-selection-bar).
+- **In the web interface**, with the [Archive](../archive/index.md) installed, select pictures in an album or the grid and choose **Download** in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See [Albums](../archive/albums.md#the-selection-bar).
 - **Over SFTP**, copy whole albums or the whole archive with `scp -r`, `sftp` or a graphical client, or mount EiN with `sshfs` and copy with `rsync` or a file manager. [SSH and SFTP](../shell/ssh-sftp.md#copy-files-with-sftp) shows how.
 - **From EiN's terminal**, [`scp -r`](../reference/commands-core.md#scp) copies a folder to another machine, such as a NAS, if you are in the group `ssh`. [Reaching other machines](../shell/remote.md) covers keys and addresses.
+
+This copies one of the Archive's albums:
 
 ```bash
 # on your own computer
 scp -P 2222 -r "helen@ein.local:/archive/albums/Summer 1987" ~/Pictures/
 ```
 
-Such a copy holds the original files, as they were added. What EiN worked out or was told about them, such as faces, people, places, descriptions and album membership, stays in EiN: an album's pictures are links to the files, and what belongs to a photo is in a hidden folder beside it, which a recursive copy leaves out. [What the tree looks like over SFTP](../shell/ssh-sftp.md#what-the-tree-looks-like-over-sftp) explains both. A copy like this is a way to take your pictures elsewhere, not a backup of EiN.
+Such a copy holds the original files, as they were added. What EiN worked out or was told about them, such as the Archive's faces, people, places, descriptions and album membership, stays in EiN: an album's pictures are links to the files, and what belongs to a photo is in a hidden folder beside it, which a recursive copy leaves out. [What the tree looks like over SFTP](../shell/ssh-sftp.md#what-the-tree-looks-like-over-sftp) explains both. A copy like this is a way to take your pictures elsewhere, not a backup of EiN.
 
 ## See what takes room
 
@@ -231,7 +233,7 @@ tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB
 ```
 
-`disk` is `files`, `volatile` is `files-volatile` and `tmp` is `files-tmp`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive/albums`.
+`disk` is `files`, `volatile` is `files-volatile` and `tmp` is `files-tmp`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive`.
 
 On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update builds new images and removes the ones they replaced; `podman image prune` removes other images without a name that nothing uses any more.
 
@@ -248,14 +250,14 @@ trash empty --all
 
 Add `--older-than 7` to empty only what was deleted more than seven days ago. Either way it cannot be undone.
 
-| To remove                               | Do this                                                                                                                                                                                                |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Pictures, albums, people and the like   | Delete them in the web interface, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                       |
-| An account                              | **Delete account…** removes its home folder at once, without the trash, and passes everything it owned elsewhere to another account; see [Accounts and groups](accounts.md#delete-an-account).         |
-| A module                                | **Remove** in **Settings → Modules**; see [Modules](modules.md#remove-a-module).                                                                                                                       |
-| The media service or the language model | `~/ein/setup.sh --no-ems` or `--no-llm` stops it and keeps its data. Then `podman image rm localhost/ein-ems` frees the media service's image of about 30 GB, and removing `~/ein/data/llm` the model. |
+| To remove                                                                  | Do this                                                                                                                                                                                                |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Files and folders, and the Archive's pictures, albums, people and the like | Delete them in the web interface, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                       |
+| An account                                                                 | **Delete account…** removes its home folder at once, without the trash, and passes everything it owned elsewhere to another account; see [Accounts and groups](accounts.md#delete-an-account).         |
+| A module                                                                   | **Remove** in **Settings → Modules**; see [Modules](modules.md#remove-a-module).                                                                                                                       |
+| The media service or the language model                                    | `~/ein/setup.sh --no-ems` or `--no-llm` stops it and keeps its data. Then `podman image rm localhost/ein-ems` frees the media service's image of about 30 GB, and removing `~/ein/data/llm` the model. |
 
-Deleting an account does not delete the pictures it owned in the archive: they pass to the account you choose. To remove them, delete them before or after.
+Deleting an account does not delete what it owned, such as pictures in the Archive: it passes to the account you choose. To remove them, delete them before or after.
 
 ## Remove EiN
 
@@ -308,7 +310,7 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `db=$(…)` is empty, and `podman exec` says it needs a container         | The database is not running. Start it with `podman compose up -d db`, and check `podman compose ps`. Under Docker, use `docker ps` in the `db=$(…)` line. |
 | `CREATE EXTENSION` says there is no installation script for the version | The database image does not carry the TimescaleDB version the dump was made with; see [Move EiN to another machine](#move-ein-to-another-machine).        |
-| After a restore, pictures show without thumbnails                       | The renditions were not restored. [Make the renditions again](#make-the-renditions-again).                                                                |
+| With the Archive, after a restore, pictures show without thumbnails     | The renditions were not restored. [Make the renditions again](#make-the-renditions-again).                                                                |
 | After a restore, some pictures open as a broken image                   | Their files are missing from the data folder: the files and the database came from different moments. Restore both from the same backup.                  |
 | A module is missing after a restore                                     | It was installed from **Settings → Modules** and its folder was not restored. Install it again there; see [Modules](modules.md).                          |
 | `rsync` says permission denied                                          | Under Docker the data folder belongs to root; run it with `sudo`.                                                                                         |

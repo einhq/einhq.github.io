@@ -53,7 +53,7 @@ field. It picks among the albums people made that you may open, never a staging 
 
 To find one particular album, start typing its name in the search box at the top
 (<kbd>Ctrl</kbd>+<kbd>K</kbd>, or <kbd>⌘</kbd>+<kbd>K</kbd> on a Mac).
-[Search and the finder](../guide/search.md) covers that, and the **Search** page, which also finds albums by
+[Search and the finder](search.md) covers that, and the **Search** page, which also finds albums by
 what their pictures show.
 
 ## Create an album

@@ -4,9 +4,9 @@ This page is for whoever runs EiN: the services that run inside EiN and keep it 
 
 ## What a service is
 
-Inside the `ein` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, the workers that process your media, and small loops that tidy up on a timer. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the media service (`ems`), the language model (`llm`) and the database (`db`) are containers beside EiN, and EiN watches the first two through services of its own, `ems-link` and `llm-link`.
+Inside the `ein` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive's workers that process your media. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (`db`), and the media service (`ems`) and the language model (`llm`) when they are installed, are containers beside EiN. The `ems` module and the Assistant watch the last two through services of their own, `ems-link` and `llm-link`.
 
-Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 21:
+Core brings nine services, the first nine below, and they are all an EiN without modules runs. Each module brings its own, listed after core's with the module they come from. With the [Archive](../archive/index.md), the `ems` module it brings along ([The media service](../ems/index.md)) and the [Assistant](../assistant/index.md) installed, there are 21:
 
 | Service             | From      | What it does                                                                                                                    |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -43,12 +43,12 @@ Every time EiN starts, it registers and enables core's services and those of eve
 
 The card lists every service, one row each, and asks again every 10 seconds while the tab is open:
 
-- The service's name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: `ems-link` shows what the media service holds, or `not answering`, and `llm-link` shows where the language model runs.
+- The service's name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: with their modules installed, `ems-link` shows what the media service holds, or `not answering`, and `llm-link` shows where the language model runs.
 - How long it has been up, such as `up 8h 50m`. Hover it for the time it started.
 - `×` and a number when EiN has restarted it since it was last started by hand. Hover it for "Restarted 2 time(s)".
 - A badge: **running**, **starting**, **stopping**, **stopped**, **failed**, or **disabled** for a service that is switched off.
 
-The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. While `CFG_MODEL_SECOND_SLOTS` is `0`, the stopped `models-second` is counted as down. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
+The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. With the Archive installed, its stopped `models-second` is counted as down while `CFG_MODEL_SECOND_SLOTS` is `0`. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
 
 **Settings → Modules** also shows a module's services and whether each runs, on the module's **Services** tab; the controls are here on the dashboard.
 
@@ -69,20 +69,20 @@ In the terminal the same actions are commands, which only an administrator may r
 
 ```bash
 # in EiN's terminal, as the administrator
-service-restart models
-service-stop label-models
-service-start label-models
+service-restart metrics-sampler
+service-stop trash-purger
+service-start trash-purger
 service-start-all      # every enabled service that is not running
 ```
 
-`service restart models`, with a space, is the same command. Each answers with one line, such as `Restarted service 'models'`.
+`service restart metrics-sampler`, with a space, is the same command. Each answers with one line, such as `Restarted service 'metrics-sampler'`.
 
 What happens when you stop a service:
 
 - EiN sends the command the script is running a stop signal and waits for the script to end: 5 seconds by default, and up to 16 minutes for `pipeline-engine`, which lets the steps it runs finish. A script that has not ended by then is closed.
-- Work the service would do waits. A media worker that is stopped leaves its jobs in the pool, and they run when it starts again; see [Processing and pipelines](processing.md).
+- Work the service would do waits. A worker that is stopped, such as one of the Archive's media workers, leaves its jobs in the pool, and they run when it starts again; see [Processing and pipelines](processing.md).
 - A stopped service stays stopped until you start it, or until EiN itself starts again, which starts every enabled service.
-- `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the dashboard's verdict rather than failing.
+- With their modules installed, `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the dashboard's verdict rather than failing.
 
 > [!WARNING]
 > Stopping `http-server` takes the web interface away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the dashboard drops the page's connection for a moment.
@@ -104,6 +104,8 @@ The count belongs to the run you started: **Restart**, or `service-restart`, sta
 service-list --detail
 ```
 
+On an EiN with the Archive and the `ems` module, it starts:
+
 ```text
 NAME                 STATUS      ENABLED  RESTARTS DESCRIPTION
 -------------------- ----------- -------- -------- -----------
@@ -117,7 +119,7 @@ ems-link             running     yes      0        Watches the media service and
 
 `--detail` asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without `--detail` the list is quicker. With `JSON_OUTPUT=1` it is JSON, with each service's start time.
 
-[`service-status`](../reference/commands-core.md#service-status) shows one service, and where its output goes:
+[`service-status`](../reference/commands-core.md#service-status) shows one service, and where its output goes, here the `ems` module's `ems-link`:
 
 ```bash
 # in EiN's terminal
@@ -187,7 +189,7 @@ dmesg --level error          # every error since EiN started
 
 `--level` filters before `-n` counts, so `--level warn -n 10` is the last ten problems, not the problems among the last ten lines. The levels are `debug`, `info`, `warn` and `error`. Pipe it on as with any command: `dmesg | grep ssh-server`.
 
-For a service's output, use [`tail`](../reference/commands-core.md#tail), which prints each line as the service wrote it:
+For a service's output, use [`tail`](../reference/commands-core.md#tail), which prints each line as the service wrote it. The examples are the `ems` module's `ems-link` and the Archive's `models`:
 
 ```bash
 # in EiN's terminal
@@ -210,12 +212,12 @@ The container's log is on the machine EiN runs on, and compose shows it:
 # on the machine EiN runs on, in ~/ein
 podman compose logs --tail 200 ein     # the last 200 lines
 podman compose logs -f ein             # follow; Ctrl+C ends it
-podman compose logs ems                # the media service: ems, llm or db for the others
+podman compose logs db                 # the database: ems or llm for the others, when installed
 ```
 
 With Docker, write `docker compose`. Each line reads `[2026-10-25 21:35:02] [INFO ] [service-registry] Service 'label-models' started`, followed by any details the message carries. This is the log to read when EiN does not start, since the tree's logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, `Admin password set to: …`, which is gone once the container is made again, as after `podman compose down`.
 
-The media service, the language model and the database write only to their containers' logs. [The media service](../ems/index.md#on-the-machine) covers reading its log.
+The database, and the media service and the language model when installed, write only to their containers' logs. [The media service](../ems/index.md#on-the-machine) covers reading its log.
 
 ## Log more, or less
 
@@ -315,7 +317,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **A restart of `pipeline-engine` takes minutes.** It waits for the steps it runs to finish, for up to 16 minutes, and its row shows a spinner meanwhile.
 
-**`ems-link` says `not answering`.** The media service's container is down or still starting; `ems-link` only reports it. [The media service](../ems/index.md#when-something-goes-differently) has what to do.
+**`ems-link` says `not answering`.** With the `ems` module installed, this means the media service's container is down or still starting; `ems-link` only reports it. [The media service](../ems/index.md#when-something-goes-differently) has what to do.
 
 **The system log starts only a little while ago.** It is emptied each time EiN starts. Older lines, as far back as the container's life, are in the container's log: `podman compose logs ein`.
 

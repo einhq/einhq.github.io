@@ -9,6 +9,10 @@ the tree or a dated note on a person, a **group** is a set of accounts or a sugg
 staging, and a **link** is a softlink, a hard link or a share link. Each meaning has an entry of its
 own.
 
+Most words are core's and hold on every EiN. A word that belongs to a module starts its entry with
+the module's name in italics, such as _Archive._, and means something only with that module
+installed.
+
 [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) ·
 [J](#j) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · [Q](#q) · [R](#r) · [S](#s) ·
 [T](#t) · [U](#u) · [V](#v) · [W](#w)
@@ -44,7 +48,7 @@ of the `sudo` group in admin mode passes them too. Some commands and pages, such
 
 ### Album
 
-A node of type `album` that gathers the photos, videos and recordings of one occasion. It holds the
+_Archive._ A node of type `album` that gathers the photos, videos and recordings of one occasion. It holds the
 files uploaded into it and links to pictures added from elsewhere, and keeps its cover, its time
 span and its stacks. Albums are under `/archive/albums`. See [Albums](../archive/albums.md).
 
@@ -53,14 +57,14 @@ span and its stacks. Albums are under `/archive/albums`. See [Albums](../archive
 The first module, `archive`, and what it adds: albums, people and their family tree, locations,
 devices and their tracks, labels, staging, and the pipelines that process media. Its parts of the
 tree are `/archive/albums`, `/archive/people`, `/archive/locations` and `/archive/devices`. Without it, EiN keeps what you give it and works nothing out. See
-[Modules](../admin/modules.md).
+[The Archive](../archive/index.md) and [Modules](../admin/modules.md).
 
 ### Assistant
 
 The chat that answers questions about what the archive holds and about EiN, by running EiN's
 commands as you. A command that would change something waits until you press **Run**. It comes
-with the `assistant` module and needs a language model. See
-[Chatting with the assistant](../assistant/chat.md).
+with the `assistant` module and needs a language model. See [The Assistant](../assistant/index.md)
+and [Chatting with the assistant](../assistant/chat.md).
 
 ### Attribute
 
@@ -78,21 +82,21 @@ and terminal sessions leave no record. See [Commands](commands-core.md#audit).
 
 ### Bulk lane
 
-The lowest place in the order of processing work. Work on a staging category of the
-**Google Photos export** or **Scans** kind runs there unless you change it, so what people upload in the meantime is
-processed first. See
-[Processing and pipelines](../admin/processing.md#large-imports-and-the-bulk-lane).
+The lowest place in the order of the pipeline engine's work. With the Archive, work on a staging
+category of the **Google Photos export** or **Scans** kind runs there unless you change it, so what
+people upload in the meantime is processed first. See
+[Processing and pipelines](../admin/processing.md#the-bulk-lane).
 
 ### Burst
 
-Several shots taken a moment apart. A burst is not a duplicate: EiN folds it into a stack and
+_Archive._ Several shots taken a moment apart. A burst is not a duplicate: EiN folds it into a stack and
 removes nothing. See [Duplicates](../archive/duplicates.md#copies-look-alikes-and-bursts).
 
 ## C
 
 ### Category
 
-A folder of your staging area that keeps one source together, such as a Google Photos export, a box
+_Archive._ A folder of your staging area that keeps one source together, such as a Google Photos export, a box
 of scanned prints or a phone. Its kind (**Inbox**, **Google Photos export**, **Scans**, **Phone**,
 **Camera**, **Messaging**, **Screenshots** or **Other**) decides how its files are grouped, dated
 and ordered for processing. See [Sorting in staging](../archive/staging.md#categories).
@@ -112,7 +116,7 @@ sharing, and the frame of the web interface. Core brings no pipelines of its own
 
 ### Cover
 
-The picture that stands for an album, a person, a location or a device on its card and in its
+_Archive._ The picture that stands for an album, a person, a location or a device on its card and in its
 header. A cover is a softlink to one of the pictures, for a person to one of their face crops. See [Albums](../archive/albums.md) and
 [People and faces](../archive/people.md#cover-pictures).
 
@@ -122,7 +126,7 @@ header. A cover is a softlink to one of the pictures, for a person to one of the
 
 The administrator's page that sums up the system's state in one verdict (**Healthy**,
 **Catching up**, **Stuck** or **Needs a person**) with tabs for the checks, the work waiting, the
-media service, the services and the log. See [Health and the dashboard](../admin/monitoring.md).
+services and the log, and with the `ems` module the media service. See [Health and the dashboard](../admin/monitoring.md).
 
 ### Data folder
 
@@ -133,24 +137,24 @@ The database is kept apart, in the container engine's volume `ein_db`. See
 
 ### Details panel
 
-The panel beside a photo, video or recording in the viewer, with its date, place, people, labels,
+_Archive._ The panel beside a photo, video or recording in the viewer, with its date, place, people, labels,
 camera and the text read from it. <kbd>i</kbd> opens and closes it. See
 [Viewing photos, videos and recordings](../archive/viewer.md#the-details-panel).
 
 ### Device
 
-A camera, phone or tracker, matched by its make, model and serial number. A registered device dates
+_Archive._ A camera, phone or tracker, matched by its make, model and serial number. A registered device dates
 the pictures it took in its own time zone and can keep a GPS track. Devices are under
 `/archive/devices`. See [Devices and GPS tracks](../archive/devices.md).
 
 ### Discard
 
-The staging decision that sends a group's files to your trash instead of filing them. It can be
+_Archive._ The staging decision that sends a group's files to your trash instead of filing them. It can be
 undone. See [Sorting in staging](../archive/staging.md).
 
 ### Duplicate
 
-A file that is the same picture as another. An exact copy is the same bytes and is kept once; a
+_Archive._ A file that is the same picture as another. An exact copy is the same bytes and is kept once; a
 look-alike is the same picture in other bytes, marked with how alike the two are, for you to
 decide. A burst is not a duplicate. See [Duplicates](../archive/duplicates.md).
 
@@ -165,7 +169,7 @@ all compare embeddings. The media service makes them. Also called a vector. See
 
 ### EMS
 
-The media service. The name is short for EiN Media Service.
+_Media service._ The media service. The name is short for EiN Media Service.
 
 ### Event, a change
 
@@ -174,13 +178,13 @@ Pipelines start from events. See [Changes and pipelines](../concepts/pipelines.m
 
 ### Event, on a timeline
 
-A dated note on a person, an album, a location or a device: a wedding, a move, a birth. A person's
+_Archive._ A dated note on a person, an album, a location or a device: a wedding, a move, a birth. A person's
 event has the type **Generic**, **Birth**, **Death**, **Marriage** or **Engagement**. See
 [Family tree, events and homes](../archive/family.md#record-an-event).
 
 ### EXIF
 
-The metadata a camera or phone writes into a picture: the camera, the time it was taken, the
+_Archive._ The metadata a camera or phone writes into a picture: the camera, the time it was taken, the
 exposure and often where. EiN reads it on arrival and keeps it under the file as
 `metadata/exif`. See [Dates and places of pictures](../archive/dates-places.md).
 
@@ -195,30 +199,30 @@ folder, so hearting a picture never copies or moves it. See
 ### File
 
 A node of type `file`: stored bytes with a name, a mimetype, a size and a checksum. A photo, a video,
-a recording and a document are files. A media file keeps what EiN works out about it as children:
+a recording and a document are files. With the Archive, a media file keeps what EiN works out about it as children:
 `metadata/`, `thumbnails/`, `regions/`. See [Files and storage](../concepts/files.md).
 
 ### Filing
 
-The staging decision that moves a group's files into the library, as a new album, a new private
+_Archive._ The staging decision that moves a group's files into the library, as a new album, a new private
 album or into an album that exists. Only filing makes your uploads visible to anyone else. See
 [Sorting in staging](../archive/staging.md).
 
 ### Finder
 
-The box in the middle of the top bar, **Search for anything**. It finds pages, albums, people and
-places as you type, and <kbd>Ctrl</kbd>+<kbd>K</kbd> puts the cursor in it from anywhere. See
+The box in the middle of the top bar, **Search for anything**. It finds pages, and with the Archive albums,
+people and places, as you type, and <kbd>Ctrl</kbd>+<kbd>K</kbd> puts the cursor in it from anywhere. See
 [Search and the finder](../guide/search.md#the-finder-in-the-top-bar).
 
 ### Fingerprint
 
-A short summary of a file's picture or sound that finds copies in other bytes, such as a smaller
+_Archive._ A short summary of a file's picture or sound that finds copies in other bytes, such as a smaller
 version or a re-encoded video. EiN makes one once a file's metadata is read and compares it to find
 look-alikes. See [Duplicates](../archive/duplicates.md).
 
 ### Front
 
-The photo a stack shows as its tile in an album's grid. **Make front** in the viewer chooses another.
+_Archive._ The photo a stack shows as its tile in an album's grid. **Make front** in the viewer chooses another.
 See [Albums](../archive/albums.md#stacks-of-similar-photos).
 
 ## G
@@ -231,7 +235,7 @@ a personal group. See [Accounts and groups](../admin/accounts.md).
 
 ### Group, in staging
 
-A suggested album: files in a staging category that the organizer put together because they belong
+_Archive._ A suggested album: files in a staging category that the organizer put together because they belong
 to one occasion, folder or year. You file, discard or put aside each group. See
 [Sorting in staging](../archive/staging.md).
 
@@ -265,12 +269,12 @@ your trash and, with the Archive, your staging area. See [The tree](../concepts/
 ### Importer
 
 The `importer` module, which moves one particular older archive into EiN. It is not published and is
-not a general importer: photos from anywhere else come in through staging. See
-[Getting your photos in](../archive/importing.md).
+not a general importer: photos from anywhere else come in through the Archive's staging. See
+[The Importer](../importer/index.md) and [Getting your photos in](../archive/importing.md).
 
 ### Inbox
 
-The staging category every account has, which cannot be removed. Uploads land in it unless you
+_Archive._ The staging category every account has, which cannot be removed. Uploads land in it unless you
 choose another category. See [Sorting in staging](../archive/staging.md#categories).
 
 ### Instance
@@ -283,7 +287,7 @@ See [Processing and pipelines](../admin/processing.md#look-at-one-pipeline-and-i
 
 ### Journal
 
-The record of every staging decision, in `staging/journal` in your home folder, each with the plan
+_Archive._ The record of every staging decision, in `staging/journal` in your home folder, each with the plan
 that undoes it. The **Done** tab and `staging undo` undo an entry. See
 [Staging and importing for administrators](../archive/staging-admin.md#what-a-staging-area-is).
 
@@ -297,19 +301,19 @@ to everything that carries it. See [Media, Year and labels](../archive/media.md#
 
 ### Lane
 
-A part of a staging category's stream of groups: **To sort**, **Everyday**, **Needs a date**,
+_Archive._ A part of a staging category's stream of groups: **To sort**, **Everyday**, **Needs a date**,
 **Clutter** and **Later**. Not to be confused with the bulk lane of processing. See
 [Sorting in staging](../archive/staging.md#the-lanes).
 
 ### Language model
 
-The model the assistant asks, either in the `llm` container on your machine or at a hosted provider
+_Assistant._ The model the assistant asks, either in the `llm` container on your machine or at a hosted provider
 with an OpenAI-compatible API. Everything except the chat works without one. See
 [The language model](../assistant/language-model.md).
 
 ### Location
 
-A named place, such as "Highbury", with an address, a description, labels, the people who lived
+_Archive._ A named place, such as "Highbury", with an address, a description, labels, the people who lived
 there, and a point, a circle or a polygon on the map. Pictures whose position falls inside a circle
 or polygon are linked to it. Locations are under `/archive/locations`. See
 [Locations and the map](../archive/places.md#what-a-location-is).
@@ -321,7 +325,7 @@ A node that keeps lines appended to it for a time, such as the system log `/var/
 
 ### Look-alike
 
-A file that shows the same picture as another in other bytes: a smaller version, a re-save in
+_Archive._ A file that shows the same picture as another in other bytes: a smaller version, a re-save in
 another format, a mild crop. EiN marks it with how alike the two are and suggests which to keep. See
 [Duplicates](../archive/duplicates.md#copies-look-alikes-and-bursts).
 
@@ -334,7 +338,7 @@ A module's `mod.json`, which names the module and says what it needs. See
 
 ### Media service
 
-The container, `ems`, that holds every media tool and model EiN uses: it reads metadata, makes
+_Media service._ The container, `ems`, that holds every media tool and model EiN uses: it reads metadata, makes
 thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes the
 embeddings search compares. It keeps no data of its own. The Archive needs it. See
 [The media service](../ems/index.md).
@@ -361,8 +365,8 @@ one with `mount`. See [Reaching other machines](../shell/remote.md#mount-a-folde
 
 ### News
 
-The timeline on **Home** of the albums people made lately. See
-[Home, memories and statistics](../guide/home.md#news).
+_Archive._ The timeline on **Home** of the albums people made lately. See
+[Memories, news and events on Home](../archive/home.md#news).
 
 ### Node
 
@@ -379,12 +383,12 @@ Core has types of its own and modules add theirs. See [Node types](node-types.md
 
 ### On this day
 
-The row on **Home** with a ring for each year that has pictures taken on today's date. A ring opens
-that day's memories story. See [Home, memories and statistics](../guide/home.md#on-this-day).
+_Archive._ The row on **Home** with a ring for each year that has pictures taken on today's date. A ring opens
+that day's memories story. See [Memories, news and events on Home](../archive/home.md#on-this-day).
 
 ### Organizer
 
-The part of the Archive that sorts the files in your staging area into groups, within a few minutes
+_Archive._ The part of the Archive that sorts the files in your staging area into groups, within a few minutes
 of their arrival. It leaves alone a group you have edited. The `staging-organize` pipeline runs it,
 and the `staging-organizer` service asks for a run of what it missed.
 See [Sorting in staging](../archive/staging.md).
@@ -403,7 +407,7 @@ Where a node is in the tree, from `/`, as a file has: `/archive/albums/christmas
 
 ### Person
 
-Someone in the archive, with names, dates and contact details, under `/archive/people`. Parents,
+_Archive._ Someone in the archive, with names, dates and contact details, under `/archive/people`. Parents,
 children and partners are links between people, and the photos a person is in are found by their
 faces. See [People and faces](../archive/people.md).
 
@@ -430,7 +434,7 @@ Archive's media steps wait in `/var/pools/media`, where its workers `cpu`, `mode
 
 ### Position
 
-Where a photo, a location or an event is on the map, kept as its child named `position`: a point,
+_Archive._ Where a photo, a location or an event is on the map, kept as its child named `position`: a point,
 with a radius or an outline for a location. See
 [Dates and places of pictures](../archive/dates-places.md).
 
@@ -446,13 +450,13 @@ engine takes its work from `/var/queues/pipeline-engine`. See
 
 ### Region
 
-A box on a photo, kept under the photo's `regions/`: a face the detector found or a box someone
+_Archive._ A box on a photo, kept under the photo's `regions/`: a face the detector found or a box someone
 drew. It says who is in it. In the viewer a face box no person is assigned to reads **Unassigned**.
 See [People and faces](../archive/people.md).
 
 ### Rendition
 
-A version of a file that EiN makes for showing it: a thumbnail, a display size, or a video or
+_Archive._ A version of a file that EiN makes for showing it: a thumbnail, a display size, or a video or
 recording the browser can play. Renditions are kept in `files-volatile` in the data folder and can
 be made again from the original. See [Files and storage](../concepts/files.md).
 
@@ -484,14 +488,16 @@ See [Configuration](../admin/configuration.md#two-kinds-of-settings) and [Settin
 
 ### Share link
 
-An address that opens one album, and what it holds, to anyone who has it, without an account. It
+An address that opens one node, such as an album, and what it holds, to anyone who has it, without
+an account. It
 expires after 30 days unless you choose another time, and **Delete link** stops it at once. Share
 links are kept under `/var/links`. See
 [Sharing](../guide/sharing.md#share-an-album-with-a-link).
 
 ### Sharing
 
-Who can see and change an album, a person, a location or a device, set in words with **Share**:
+Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location
+or a device, set in words with **Share**:
 **Can view** or **Can edit** for people and groups, and links for people without an account. It
 sets the same mode and access list as `chmod` and `acl`. See [Sharing](../guide/sharing.md).
 
@@ -514,19 +520,19 @@ modules add theirs. See
 
 ### Softlink
 
-A node that points at another node by its path; opening it opens what it points at. Album covers,
-pictures added to an album from elsewhere, labels, favourites and relations between people are
-softlinks. Moving a node re-points every softlink to it. See [Links](../concepts/links.md).
+A node that points at another node by its path; opening it opens what it points at. Labels and
+favourites are softlinks, and with the Archive so are album covers, pictures added to an album
+from elsewhere and relations between people. Moving a node re-points every softlink to it. See [Links](../concepts/links.md).
 
 ### Stack
 
-Similar photos taken in a row, folded behind one tile in an album's grid, with the count in its
+_Archive._ Similar photos taken in a row, folded behind one tile in an album's grid, with the count in its
 corner. No file moves, and a stack belongs to one album. See
 [Albums](../archive/albums.md#stacks-of-similar-photos).
 
 ### Staging area
 
-Your private inbox for uploads, `/home/<username>/staging`, where files wait, seen only by you,
+_Archive._ Your private inbox for uploads, `/home/<username>/staging`, where files wait, seen only by you,
 until you file them into an album or discard them. It comes with the Archive. See
 [Sorting in staging](../archive/staging.md).
 
@@ -550,7 +556,7 @@ account menu. See [Finding your way around](../guide/interface.md#the-top-bar).
 
 ### Track
 
-The route a device recorded: GPS points with times, kept as the device's child named `track`, from
+_Archive._ The route a device recorded: GPS points with times, kept as the device's child named `track`, from
 GPX files or sent live. See [Devices and GPS tracks](../archive/devices.md#a-devices-track).
 
 ### Trash
@@ -569,7 +575,7 @@ The one hierarchy of nodes that holds everything in EiN, from `/`: `/archive`, `
 
 ### Unidentified person
 
-A person recognition started for a face or a voice that matches nobody, with a placeholder name such as
+_Archive._ A person recognition started for a face or a voice that matches nobody, with a placeholder name such as
 `Unknown 4XK9QM`, waiting for someone to say who it is. See
 [People and faces](../archive/people.md#name-the-people-recognition-found).
 
@@ -577,12 +583,12 @@ A person recognition started for a face or a voice that matches nobody, with a p
 
 ### Viewer
 
-The full-screen view of one photo, video or recording, with the details panel beside it. See
+_Archive._ The full-screen view of one photo, video or recording, with the details panel beside it. See
 [Viewing photos, videos and recordings](../archive/viewer.md).
 
 ### Visibility chip
 
-The coloured word under an album's title that says how visible it is: _Public_, _Restricted_ or
+_Archive._ The coloured word under an album's title that says how visible it is: _Public_, _Restricted_ or
 _Private_. An album everyone with an account can see has none. See
 [Sharing](../guide/sharing.md#the-visibility-chip).
 
@@ -600,4 +606,5 @@ A service that takes long jobs from a pool when it has room. The Archive brings 
 `/var/pools/media`: `cpu`, for work
 done on this machine such as thumbnails and transcoding, and `models`, for work done by a model in
 the media service such as finding faces, with `models-second`, off unless
-`CFG_MODEL_SECOND_SLOTS` is set above 0, beside it. See [Processing and pipelines](../admin/processing.md).
+`CFG_MODEL_SECOND_SLOTS` is set above 0, beside it. See [Processing pictures](../archive/processing.md#the-workers),
+and [Processing and pipelines](../admin/processing.md) for workers in general.

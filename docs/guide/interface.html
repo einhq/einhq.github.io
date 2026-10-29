@@ -159,7 +159,7 @@ without signing in</strong>. As a visitor:</p>
 <li>you see only what has been shared with visitors, and you cannot change anything;</li>
 <li>the top bar has a <strong>Sign in</strong> button where the terminal button and your picture would be, and no
 <strong>Create</strong> menu;</li>
-<li>the sidebar leaves out <strong>Staging</strong> and <strong>Settings</strong>;</li>
+<li>the sidebar leaves out <strong>Settings</strong>, and with the Archive <strong>Staging</strong>;</li>
 <li>a page that belongs to an account, such as <strong>Profile</strong>, <strong>Trash</strong>, <strong>Favourites</strong>, <strong>About EiN</strong>
 or a form that creates something, sends you to sign in, and back to that page afterwards.</li>
 </ul>
@@ -294,9 +294,12 @@ itself in the middle, and the side drawer at the right when something is open in
 </svg><figcaption>The frame stays the same on every page; only the page in the middle changes.</figcaption></figure>
 <figure class="shot"><a href="../../assets/shots/home@2x.webp"><img src="../../assets/shots/home.webp" srcset="../../assets/shots/home.webp 1x, ../../assets/shots/home@2x.webp 2x" alt="The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Home, signed in as the administrator, with the archive and assistant modules installed.</figcaption></figure>
 <p>What you see depends on the modules installed on your EiN. EiN itself gives the frame, Home,
-Search, Settings, Statistics, Documentation and the administrator&#39;s pages. The archive module adds
-the pages for photos, albums, people and places, and the assistant adds the chat. This page
-describes EiN with both installed; on yours, some entries may be missing.</p>
+Search, Settings, Statistics, Documentation and the administrator&#39;s pages. The
+<a href="../archive/index.html">Archive</a> adds the pages for photos, albums, people and places, and the
+<a href="../assistant/index.html">assistant</a> adds the chat. This page describes the frame every EiN has and
+marks what each module adds; the screenshots show EiN with both installed. Without modules, the
+sidebar holds only EiN&#39;s own entries, and the top bar has no <strong>Random album</strong>, chat button or
+<strong>Create</strong> menu.</p>
 <p>The browser tab is titled with the page&#39;s name followed by <code>· EiN</code>, for example <code>Albums · EiN</code>;
 on Home it says <code>EiN</code> alone. The interface is in English and always dark: there is no light theme
 and no other language.</p>
@@ -315,11 +318,11 @@ and no other language.</p>
 </tr>
 <tr>
 <td>The search box, <strong>Search for anything</strong></td>
-<td>Finds pages, albums, people and places as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. <a href="search.html">Search and the finder</a> explains it.</td>
+<td>Finds pages, and with the Archive albums, people and places, as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. <a href="search.html">Search and the finder</a> explains it.</td>
 </tr>
 <tr>
 <td><strong>Random album</strong> (two crossing arrows)</td>
-<td>Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the archive.</td>
+<td>Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the Archive.</td>
 </tr>
 <tr>
 <td><strong>Disconnected</strong> (with a red dot)</td>
@@ -327,7 +330,7 @@ and no other language.</p>
 </tr>
 <tr>
 <td><strong>Uploads</strong></td>
-<td>Appears once you upload something. While files are going up it is a ring, with &quot;Uploading N of M&quot; in its tooltip; choose it for the files, <strong>Cancel</strong>, <strong>Retry failed</strong> and <strong>Clear</strong>. See <a href="../archive/importing.html">Getting your photos in</a>.</td>
+<td>Appears once you upload something, such as files dropped on the <a href="../shell/terminal.html#upload-files-by-dropping-them">terminal</a>. While files are going up it is a ring, with &quot;Uploading N of M&quot; in its tooltip; choose it for the files, <strong>Cancel</strong>, <strong>Retry failed</strong> and <strong>Clear</strong>. With the Archive, see <a href="../archive/importing.html">Getting your photos in</a>.</td>
 </tr>
 <tr>
 <td><strong>Chat</strong> (a speech bubble)</td>
@@ -335,7 +338,7 @@ and no other language.</p>
 </tr>
 <tr>
 <td><strong>Create</strong> (a plus)</td>
-<td>The <strong>Create New</strong> menu, below. Signed in only.</td>
+<td>The <strong>Create New</strong> menu, below. Signed in only, and only where a module gives the menu rows.</td>
 </tr>
 <tr>
 <td><strong>Toggle Terminal (Alt+T)</strong></td>
@@ -358,7 +361,9 @@ on that page itself: on the <strong>Chat</strong> page there is no chat button.<
 stops them, and EiN does not warn you first.</p>
 </aside>
 <h3 id="the-create-menu">The Create menu<a class="anchor" href="#the-create-menu" aria-label="Link to this section"></a></h3>
-<p>Choose the plus to make something. Each row opens a form in a dialog over the page you are on.</p>
+<p>Choose the plus to make something. Each row opens a form in a dialog over the page you are on.
+EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
+plus in the top bar. With the Archive installed, the menu has these rows:</p>
 <figure class="shot"><a href="../../assets/shots/create-menu@2x.webp"><img src="../../assets/shots/create-menu.webp" srcset="../../assets/shots/create-menu.webp 1x, ../../assets/shots/create-menu@2x.webp 2x" alt="The Create New menu open under the plus: Import media, Album, Person, Location and Device" width="600" height="400" loading="lazy" decoding="async"></a><figcaption>The Create menu&#39;s rows come from the modules; these are the archive&#39;s.</figcaption></figure>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -395,8 +400,6 @@ stops them, and EiN does not warn you first.</p>
 </tr>
 </tbody></table>
 </div>
-<p>EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
-plus in the top bar.</p>
 <h3 id="the-account-menu">The account menu<a class="anchor" href="#the-account-menu" aria-label="Link to this section"></a></h3>
 <p>Choose your picture at the right end of the top bar. The menu is headed <strong>Account</strong>.</p>
 <figure class="shot"><a href="../../assets/shots/account-menu@2x.webp"><img src="../../assets/shots/account-menu.webp" srcset="../../assets/shots/account-menu.webp 1x, ../../assets/shots/account-menu@2x.webp 2x" alt="The account menu open under the picture: Favourites, Profile, Trash, Shortcuts with the ? key, About EiN and Logout" width="500" height="440" loading="lazy" decoding="async"></a><figcaption>The account menu holds your own pages and signing out.</figcaption></figure>
@@ -410,12 +413,12 @@ plus in the top bar.</p>
 </thead>
 <tbody><tr>
 <td><strong>Me</strong></td>
-<td>When your account is linked to a person in the archive</td>
+<td>With the Archive, when your account is linked to a person</td>
 <td>Opens that person&#39;s page.</td>
 </tr>
 <tr>
 <td><strong>Favourites</strong></td>
-<td>With the archive</td>
+<td>With the Archive</td>
 <td>The pictures you have marked with a heart.</td>
 </tr>
 <tr>
@@ -457,9 +460,9 @@ plus in the top bar.</p>
 </div>
 <p><a href="profile.html">Your profile, favourites and trash</a> covers <strong>Me</strong>, <strong>Favourites</strong>, <strong>Profile</strong> and
 <strong>Trash</strong>.</p>
-<p>Your picture is the cover photo of the person your account is linked to. Without a linked person it
-shows the first letters of your username, as an image drawn by the outside service
-<code>ui-avatars.com</code>; without a connection to the internet, the first letter of your name shows
+<p>With the Archive, your picture is the cover photo of the person your account is linked to. Without
+a linked person it shows the first letters of your username, as an image drawn by the outside
+service <code>ui-avatars.com</code>; without a connection to the internet, the first letter of your name shows
 instead.</p>
 <h3 id="admin-mode">Admin mode<a class="anchor" href="#admin-mode" aria-label="Link to this section"></a></h3>
 <p>A member of the <code>sudo</code> group can act as the administrator for a while, the way <code>sudo</code> works on
@@ -491,7 +494,7 @@ command that does the same in the terminal.</p>
 <tbody><tr>
 <td></td>
 <td><strong>Home</strong></td>
-<td>On this day, News and Events: <a href="home.html">Home, memories and statistics</a></td>
+<td>What the modules put there: <a href="home.html">Home and statistics</a>; with the Archive, On this day, News and Events: <a href="../archive/home.html">Memories, news and events on Home</a></td>
 <td>everyone</td>
 <td>EiN</td>
 </tr>
@@ -519,7 +522,7 @@ command that does the same in the terminal.</p>
 <tr>
 <td>Explore</td>
 <td><strong>Search</strong></td>
-<td>Photos, videos, albums, people, places and more, by name, date or @mention: <a href="search.html">Search and the finder</a></td>
+<td>What the modules make searchable; with the Archive, photos, videos, albums, people and places, by name, date or @mention: <a href="search.html">Search and the finder</a></td>
 <td>everyone</td>
 <td>EiN</td>
 </tr>
@@ -589,7 +592,7 @@ command that does the same in the terminal.</p>
 <tr>
 <td>System</td>
 <td><strong>Statistics</strong></td>
-<td>How the archive has grown: <a href="home.html">Home, memories and statistics</a></td>
+<td>How the archive has grown: <a href="home.html">Home and statistics</a></td>
 <td>everyone</td>
 <td>EiN</td>
 </tr>
@@ -602,8 +605,10 @@ command that does the same in the terminal.</p>
 </tr>
 </tbody></table>
 </div>
-<p>&quot;Administrators&quot; means the <code>admin</code> account, or someone in admin mode. For anyone else <strong>Settings</strong>
-opens on its <strong>Modules</strong> tab, the only one they get. A section left with no entries is not shown.</p>
+<p>An entry added by a module is there once that module is installed; <a href="../archive/index.html">The Archive</a>
+and <a href="../assistant/index.html">The Assistant</a> describe what each brings. &quot;Administrators&quot; means the
+<code>admin</code> account, or someone in admin mode. For anyone else <strong>Settings</strong> opens on its <strong>Modules</strong>
+tab, the only one they get. A section left with no entries is not shown.</p>
 <ul>
 <li><strong>Where you are.</strong> The entry of the page you are on is lit, with a bar in the accent colour at
 its left.</li>
@@ -625,9 +630,9 @@ under it, and often counts.</p>
 order, on the pages that offer them, then <kbd>⋮</kbd> (<strong>More actions</strong>) with the page&#39;s other
 actions and <strong>Move to trash</strong> last. Where the header is narrow the buttons fold into
 <kbd>⋮</kbd> too. Actions that change something are offered only on what you may change.</li>
-<li><strong>Tabs</strong> sit along the header&#39;s foot, such as <strong>Media</strong>, <strong>Map</strong> and <strong>Info</strong> on an album. The
-chosen tab is part of the page&#39;s address (<code>?tab=</code>), so a link can open a given tab; see
-<a href="../reference/routes.html">Addresses in the web interface</a>.</li>
+<li><strong>Tabs</strong> sit along the header&#39;s foot, such as <strong>Media</strong>, <strong>Map</strong> and <strong>Info</strong> on the Archive&#39;s
+album pages. The chosen tab is part of the page&#39;s address (<code>?tab=</code>), so a link can open a given
+tab; see <a href="../reference/routes.html">Addresses in the web interface</a>.</li>
 <li><strong>Scrolled down</strong>, the header&#39;s last row, its tabs or filters, stays in view under the top bar,
 with <kbd>⋮</kbd> holding every action of the page. On a wide screen the page&#39;s name appears at
 that row&#39;s left.</li>
@@ -663,13 +668,13 @@ screen says it was moved, with <strong>Undo</strong> to put it back.</p>
 <tr>
 <td>The side drawer</td>
 <td>A panel at the right. On a wide screen it sits beside the page, which makes room for it; on a narrower one it covers the page.</td>
-<td>The chat, from the top bar&#39;s chat button</td>
+<td>The chat, from the assistant&#39;s chat button</td>
 <td>Its top-bar button again. Where it covers the page, <strong>Back</strong> closes it too.</td>
 </tr>
 <tr>
 <td>Full screen</td>
 <td>Over everything, the top bar included.</td>
-<td>The viewer for photos, videos and recordings</td>
+<td>The Archive&#39;s viewer for photos, videos and recordings</td>
 <td><strong>Back</strong> or <kbd>Esc</kbd></td>
 </tr>
 </tbody></table>

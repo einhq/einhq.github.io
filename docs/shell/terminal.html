@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The terminal – EiN documentation</title>
-    <meta name="description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of albums, people and files that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
+    <meta name="description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of nodes that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/shell/terminal.html">
     <meta property="og:title" content="The terminal – EiN documentation">
-    <meta property="og:description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of albums, people and files that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
+    <meta property="og:description" content="The terminal is a command line inside EiN's web interface: a shell that works on the same tree of nodes that the pages show, with the same commands and the same permissions. This page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with the keyboard, find earlier commands, get help, and find the command you need.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -88,7 +88,7 @@
         </header>
         <article class="prose">
 <p>The terminal is a command line inside EiN&#39;s web interface: a shell that works on the same tree of
-albums, people and files that the pages show, with the same commands and the same permissions. This
+nodes that the pages show, with the same commands and the same permissions. This
 page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with
 the keyboard, find earlier commands, get help, and find the command you need.</p>
 <h2 id="open-the-terminal">Open the terminal<a class="anchor" href="#open-the-terminal" aria-label="Link to this section"></a></h2>
@@ -102,6 +102,9 @@ cursor ready at the prompt. Try a first command:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">ls</span> /archive</code></pre></div>
 <div class="code"><pre tabindex="0"><code>albums  devices  locations  people  tags  tracks</code></pre></div>
+<p>That is an EiN with the <a href="../archive/index.html">Archive</a> installed, which makes every folder there but
+<code>tags</code>. Without it, <code>/archive</code> holds only <code>tags</code>, and <code>ls /</code> shows the rest of the
+<a href="../concepts/tree.html">tree</a>.</p>
 <p>To hide it again, press <kbd>Alt</kbd>+<kbd>T</kbd>, choose the chevron at the right end of the tab
 bar (<strong>Hide terminal (Alt+T)</strong>), or click anywhere outside it. Hiding the terminal does not stop it:
 the shells keep running, a command you started goes on, and the terminal is as you left it when you
@@ -240,15 +243,16 @@ terminal reconnects by itself; there is nothing to press.</li>
 <p>Drag files from your computer onto the terminal and let go. EiN uploads them into the folder the
 tab is in, the path the tab shows. The <strong>Uploads</strong> button in the top bar follows them, as for any
 upload, and a file whose name is taken in that folder is stored under a numbered name beside it.</p>
-<p>Where you drop decides what happens next. To have the archive take new pictures in, go to a staging
-category or an album first:</p>
+<p>Where you drop decides what happens next. With the Archive installed, go to a staging category or an
+album first to have it take new pictures in:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">cd</span> ~/staging/files/inbox</code></pre></div>
 <p>Then drop the files. <a href="../archive/importing.html">Getting your photos in</a> explains staging, albums and
 what happens after an upload. You need permission to write in the folder; an upload into a folder
 you may only read fails and is listed under <strong>Uploads</strong>.</p>
 <h2 id="show-a-picture-with-cat">Show a picture with cat<a class="anchor" href="#show-a-picture-with-cat" aria-label="Link to this section"></a></h2>
-<p><code>cat</code> on a picture or a video draws it right in the terminal, 20 lines tall:</p>
+<p><code>cat</code> on a picture or a video draws it right in the terminal, 20 lines tall, wherever the file is in
+the tree. Here it draws a photo in one of the Archive&#39;s albums:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">cd</span> /archive/albums/christmas-2019 &amp;&amp; <span class="hljs-built_in">cat</span> 20191225_155434.jpg</code></pre></div>
 <ul>
@@ -364,6 +368,7 @@ length. <a href="../guide/profile.html">Your profile, favourites and trash</a> s
 one thing fits, EiN fills it in, with <code>/</code> after a folder and a space after anything else, and quotes
 it if it holds spaces. When several fit, it fills in as much as they share; press <kbd>Tab</kbd>
 again to list them all.</p>
+<p>The first two rows are on an EiN with the Archive installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -553,7 +558,10 @@ completion and the same keys. Two things belong to the browser alone: pictures a
 signed in. A command you may not run in the terminal is refused through every other door too.
 <a href="ssh-sftp.html">SSH and SFTP</a> covers keys, running one command at a time, and copying files.</p>
 <h2 id="commands-worth-knowing">Commands worth knowing<a class="anchor" href="#commands-worth-knowing" aria-label="Link to this section"></a></h2>
-<p>Commands marked <em>archive</em> come with the archive module and exist only where it is installed.
+<p>Commands marked <em>archive</em> come with the <a href="../archive/index.html">Archive</a> and exist only where it is
+installed, as do the <code>/archive/albums</code> and <code>/archive/people</code> paths in the examples. <code>search</code>,
+<code>news</code>, <code>events</code> and <code>onthisday</code> are EiN&#39;s own, but answer with what the installed modules provide,
+so without a module they find nothing.
 <a href="commands.html">Commands by task</a> has many more, grouped by what you want to do.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -612,7 +620,7 @@ signed in. A command you may not run in the terminal is refused through every ot
 </tr>
 <tr>
 <td><a href="../reference/commands-core.html#search"><code>search</code></a></td>
-<td>Searches the archive&#39;s content: <code>search christmas --kind photo</code></td>
+<td>Searches what the modules make searchable: <code>search christmas --kind photo</code></td>
 </tr>
 <tr>
 <td><a href="../reference/commands-core.html#stat"><code>stat</code></a></td>
@@ -632,7 +640,7 @@ signed in. A command you may not run in the terminal is refused through every ot
 </tr>
 <tr>
 <td><a href="../reference/commands-core.html#onthisday"><code>onthisday</code></a></td>
-<td>What the archive has from this day in earlier years</td>
+<td>What the modules have from this day in earlier years</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#timeline"><code>timeline</code></a></td>

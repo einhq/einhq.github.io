@@ -97,7 +97,7 @@ EiN from elsewhere.</p>
 <div class="code"><pre tabindex="0"><code>http://ein.local:8080/people/helen-okafor?tab=faces
 └──── where EiN is ──┘└────── path ──────┘└─ query ─┘</code></pre></div>
 <ul>
-<li>The path says which page: <code>/people/helen-okafor</code> is Helen Okafor&#39;s page.</li>
+<li>The path says which page: <code>/people/helen-okafor</code> is Helen Okafor&#39;s page, one of the Archive&#39;s.</li>
 <li>The query, after <code>?</code>, says how the page looks: <code>tab=faces</code> opens it on <strong>Faces</strong>. Several
 parameters are joined with <code>&amp;</code>.</li>
 <li>A part that holds a path in the tree, such as an album&#39;s, is URL-encoded: <code>/</code> becomes <code>%2F</code> and a
@@ -106,9 +106,11 @@ when you type one by hand.</li>
 </ul>
 <p>Copy the address from the browser&#39;s address bar to share or bookmark what you see. Someone who
 opens it sees the same page, as far as their own permissions let them.</p>
-<p>The pages come from EiN itself and from its <a href="../admin/modules.html">modules</a>. The lists below are
-those of an installation with the Archive, the Assistant and the media service. A module that is not
-installed brings none of its addresses, and opening one shows <strong>Nothing here</strong>.</p>
+<p>The pages come from EiN itself and from its <a href="../admin/modules.html">modules</a>. Core&#39;s addresses come
+first on this page; after them each module&#39;s addresses and parameters are grouped under it: the
+<a href="#the-archives-pages">Archive</a>, the <a href="#the-assistants-pages">Assistant</a> and the
+<a href="#the-media-services-pages">media service</a>. A module that is not installed brings none of its
+addresses, and opening one shows <strong>Nothing here</strong>.</p>
 <h2 id="pages-dialogs-the-side-panel-and-full-screen">Pages, dialogs, the side panel and full screen<a class="anchor" href="#pages-dialogs-the-side-panel-and-full-screen" aria-label="Link to this section"></a></h2>
 <p>The same address can be shown four ways. Which one depends on how you open it, not on the address:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -141,12 +143,12 @@ installed brings none of its addresses, and opening one shows <strong>Nothing he
 </tr>
 </tbody></table>
 </div>
-<p><strong>Create New → Person</strong> opens <code>/people/new</code> in a dialog; typing <code>/people/new</code> into the address bar
-opens the same form as a page. In the same way, <code>/chat</code> is the side panel from the top bar and a
-full page from the sidebar. On a phone, what would open in the side panel opens in a dialog
+<p>Modules give the entries: with the Archive, <strong>Create New → Person</strong> opens <code>/people/new</code> in a dialog,
+and typing <code>/people/new</code> into the address bar opens the same form as a page. In the same way, with
+the Assistant, <code>/chat</code> is the side panel from the top bar and a full page from the sidebar. On a phone, what would open in the side panel opens in a dialog
 instead. <a href="../guide/interface.html">Finding your way around</a> shows each of these.</p>
-<p>Full screen is the one kind that lives in the address. When you open a picture from an album, the
-address keeps the album and adds the picture:</p>
+<p>Full screen is the one kind that lives in the address. When you open a picture from one of the
+Archive&#39;s albums, the address keeps the album and adds the picture:</p>
 <div class="code"><pre tabindex="0"><code>/albums/%2Farchive%2Falbums%2FMalpas%201979?fullscreen=%2Fmedia%2F%252Farchive%252F…</code></pre></div>
 <p>Back closes the picture and leaves you on the album, and a reload or a shared link opens the album
 with the picture over it. Opened by its own address, <code>/media/&lt;path&gt;</code>, the picture is the page.</p>
@@ -235,7 +237,313 @@ with the picture over it. Opened by its own address, <code>/media/&lt;path&gt;</
 administrator turns on <a href="settings.html#cfg_guest_browsing"><code>CFG_GUEST_BROWSING</code></a>. A page marked &quot;Signed
 in&quot; always asks a visitor to sign in first. What each person then sees on a page follows the
 permissions on the nodes behind it; see <a href="../admin/permissions.html">Permissions in depth</a>.</p>
+<h2 id="parameters">Parameters<a class="anchor" href="#parameters" aria-label="Link to this section"></a></h2>
+<p>A parameter that is missing, or holds a value the page does not know, is ignored: the page opens as
+it would without it. You never get an error for a mistyped parameter.</p>
+<h3 id="tabs">Tabs<a class="anchor" href="#tabs" aria-label="Link to this section"></a></h3>
+<p>Pages with tabs keep the open tab in <code>tab</code>. An address without <code>tab</code> opens the first one.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Values of <code>tab</code> (default first)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/profile</code></td>
+<td><code>account</code> (<strong>Account</strong>), <code>preferences</code> (<strong>Preferences</strong>), <code>security</code> (<strong>Security</strong>)</td>
+</tr>
+<tr>
+<td><code>/settings</code></td>
+<td><code>system</code> (<strong>System</strong>), <code>users</code> (<strong>Users</strong>), <code>groups</code> (<strong>Groups</strong>), <code>permissions</code> (<strong>Permissions</strong>), <code>modules</code> (<strong>Modules</strong>)</td>
+</tr>
+<tr>
+<td><code>/system</code></td>
+<td><code>overview</code> (<strong>Overview</strong>), <code>work</code> (<strong>Work</strong>), <code>ems.media-service</code> (<strong>Media service</strong>, with the <code>ems</code> module), <code>services</code> (<strong>Services</strong>), <code>log</code> (<strong>Log</strong>)</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module&#39;s pages keep their tabs the same way; their values are under the module below.</p>
+<p>On <strong>Settings</strong>, the first four tabs are for administrators. Anyone else who asks for one of them
+gets <strong>Modules</strong>, and an administrator who names no tab gets <strong>System</strong>.</p>
+<h3 id="search">Search<a class="anchor" href="#search" aria-label="Link to this section"></a></h3>
+<p><strong>Search</strong> keeps its whole search in the address, so a search can be linked to and survives a
+reload; the Archive&#39;s <strong>Media</strong> page takes the same parameters. The parameters are named after the flags of the
+<a href="commands-core.html#search"><code>search</code></a> command.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>What it holds</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>q</code></td>
+<td>The words searched for</td>
+<td><code>q=sailing</code></td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>Kinds, separated by commas: <code>photo</code>, <code>video</code>, <code>audio</code>, <code>document</code>, <code>person</code>, <code>location</code>, <code>album</code>, <code>device</code>, <code>track</code></td>
+<td><code>kind=photo,video</code></td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td>Labels, separated by commas</td>
+<td><code>tag=beach</code></td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>A person, location or device that must be in it, as <code>&lt;kind&gt;:&lt;name&gt;</code> or a path; repeat it for several, all of which must be there</td>
+<td><code>subject=person:helen-okafor</code></td>
+</tr>
+<tr>
+<td><code>subject-name</code></td>
+<td>Every subject of a kind whose name matches the words, as <code>&lt;kind&gt;:&lt;words&gt;</code>; repeatable</td>
+<td><code>subject-name=person:Wrenfield</code></td>
+</tr>
+<tr>
+<td><code>from</code>, <code>to</code></td>
+<td>The first and last year, both included</td>
+<td><code>from=1975&amp;to=1985</code></td>
+</tr>
+<tr>
+<td><code>bbox</code></td>
+<td>A rectangle on the map: north, south, east, west</td>
+<td><code>bbox=50.3,50.2,-5.0,-5.1</code></td>
+</tr>
+<tr>
+<td><code>circle</code></td>
+<td>A circle on the map: latitude, longitude, radius in metres</td>
+<td><code>circle=50.263,-5.051,2000</code></td>
+</tr>
+<tr>
+<td><code>poly</code></td>
+<td>A polygon: at least three <code>latitude,longitude</code> pairs separated by <code>;</code></td>
+<td><code>poly=50.3,-5.1;50.3,-5.0;50.2,-5.0</code></td>
+</tr>
+<tr>
+<td><code>under</code></td>
+<td>Only what one album or folder holds, by path</td>
+<td><code>under=/archive/albums/Malpas 1979</code></td>
+</tr>
+<tr>
+<td><code>like</code></td>
+<td>Pictures that look like this one, by path</td>
+<td><code>like=/archive/…/IMG_0412.jpg</code></td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td><code>score</code>, <code>time</code> (oldest first), <code>-time</code> (newest first) or <code>name</code></td>
+<td><code>sort=-time</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The kinds <code>person</code>, <code>location</code>, <code>album</code> and <code>device</code>, and a <code>subject</code>, find something only with the
+Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
+newest first:</p>
+<div class="code"><pre tabindex="0"><code>/media?kind=photo,video&amp;subject=person:helen-okafor&amp;from=1980&amp;to=1989&amp;sort=-time</code></pre></div>
+<p>Only one of <code>bbox</code>, <code>circle</code> and <code>poly</code> applies. <strong>Search</strong> with no parameters shows its landing
+page rather than searching for everything.</p>
+<h3 id="other-pages">Other pages<a class="anchor" href="#other-pages" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Parameter</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/settings?tab=modules</code></td>
+<td><code>module</code></td>
+<td>The module open, for example <code>module=archive</code></td>
+</tr>
+<tr>
+<td><code>/settings?tab=modules</code></td>
+<td><code>section</code></td>
+<td>Its part: <code>dependencies</code>, <code>services</code>, <code>pages</code>, <code>commands</code>, <code>settings</code> or <code>types</code> (<strong>About</strong> when left out)</td>
+</tr>
+<tr>
+<td><code>/settings?tab=modules</code></td>
+<td><code>published=1</code></td>
+<td>The modules published for installing</td>
+</tr>
+<tr>
+<td><code>/settings?tab=users</code></td>
+<td><code>user</code></td>
+<td>The account open, by username</td>
+</tr>
+<tr>
+<td><code>/settings?tab=groups</code></td>
+<td><code>group</code></td>
+<td>The group open, by name</td>
+</tr>
+<tr>
+<td><code>/settings?tab=users</code>, <code>?tab=groups</code></td>
+<td><code>new=1</code></td>
+<td>The form for a new account or group</td>
+</tr>
+<tr>
+<td><code>/system/nodes</code></td>
+<td><code>path</code></td>
+<td>The path open in the explorer, for example <code>path=/archive</code></td>
+</tr>
+<tr>
+<td><code>/docs</code></td>
+<td><code>find</code></td>
+<td>The words in the documentation&#39;s search box</td>
+</tr>
+<tr>
+<td><code>/login</code></td>
+<td><code>next</code></td>
+<td>Where to go after signing in</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="links-into-the-documentation">Links into the documentation<a class="anchor" href="#links-into-the-documentation" aria-label="Link to this section"></a></h2>
+<p>The <strong>Documentation</strong> section has its own addresses. The reference pages are drawn from the
+installation you are on, so they list exactly what it has.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Address</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/docs</code></td>
+<td>The guide&#39;s overview</td>
+</tr>
+<tr>
+<td><code>/docs/&lt;path&gt;</code></td>
+<td>One guide page, by its URL-encoded path under <code>/usr/docs/guide</code></td>
+</tr>
+<tr>
+<td><code>/docs/commands</code></td>
+<td>Every command, see also <a href="commands.html">Commands</a></td>
+</tr>
+<tr>
+<td><code>/docs/settings</code></td>
+<td>Every setting with its current value, see also <a href="settings.html">Settings</a></td>
+</tr>
+<tr>
+<td><code>/docs/environment</code></td>
+<td>The environment variables, see also <a href="environment.html">Environment variables</a></td>
+</tr>
+<tr>
+<td><code>/docs/node-types</code></td>
+<td>The node types, see also <a href="node-types.html">Node types</a></td>
+</tr>
+<tr>
+<td><code>/docs/modules</code></td>
+<td>What is installed</td>
+</tr>
+<tr>
+<td><code>/docs/modules/&lt;name&gt;</code></td>
+<td>One installed module, for example <code>/docs/modules/archive</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The reference pages have an anchor for every entry, which scrolls to it and marks it for a moment:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A command</td>
+<td><code>/docs/commands#cmd-&lt;name&gt;</code>, for example <code>/docs/commands#cmd-share-link</code></td>
+</tr>
+<tr>
+<td>A setting</td>
+<td><code>/docs/settings#set-&lt;KEY&gt;</code>, for example <code>/docs/settings#set-CFG_GUEST_BROWSING</code></td>
+</tr>
+<tr>
+<td>A node type</td>
+<td><code>/docs/node-types#type-&lt;type&gt;</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="signing-in-and-share-links">Signing in and share links<a class="anchor" href="#signing-in-and-share-links" aria-label="Link to this section"></a></h2>
+<h3 id="the-return-after-signing-in">The return after signing in<a class="anchor" href="#the-return-after-signing-in" aria-label="Link to this section"></a></h3>
+<p>A visitor who opens a page they must sign in for is sent to the sign-in page, with the address they
+asked for in <code>next</code>:</p>
+<div class="code"><pre tabindex="0"><code>/login?next=%2Fpeople%2Fhelen-okafor%3Ftab%3Dfaces</code></pre></div>
+<p>After signing in they land on that page. <code>next</code> only leads to a page on the same EiN; anything else
+leads to <strong>Home</strong>. Someone already signed in who opens <code>/login</code> goes straight on to <code>next</code>, or to
+<strong>Home</strong>.</p>
+<h3 id="share-links">Share links<a class="anchor" href="#share-links" aria-label="Link to this section"></a></h3>
+<p>A share link has the form <code>/s/&lt;token&gt;</code>, for example <code>http://ein.local:8080/s/</code> followed by a long
+string of letters and digits. You make one with <strong>Share</strong> in the interface, see
+<a href="../guide/sharing.html">Sharing</a>, or with <a href="commands-core.html#share-link"><code>share-link create</code></a> in the
+terminal.</p>
+<p>Opening it shows <strong>Opening what was shared with you…</strong> and then the page of what was shared,
+such as the album&#39;s address. Where visitors may not browse, the visitor stays on what the link
+opens: other pages ask them to sign in. A link that has expired or been turned off shows <strong>This link no longer works</strong> with a
+<strong>Sign in</strong> button.</p>
+<h2 id="other-addresses-the-server-answers">Other addresses the server answers<a class="anchor" href="#other-addresses-the-server-answers" aria-label="Link to this section"></a></h2>
+<p>Besides the pages, EiN&#39;s web server answers a few addresses that programs use rather than people.
+You meet them in links to files, in scripts, and in a reverse proxy&#39;s configuration
+(<a href="../admin/network.html">Ports, HTTPS and remote access</a>).</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Method</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/file/&lt;path&gt;</code></td>
+<td><code>GET</code>, <code>HEAD</code></td>
+<td>The bytes of a file in the tree, read with the permissions of whoever asks</td>
+</tr>
+<tr>
+<td><code>/file/&lt;path&gt;</code></td>
+<td><code>PUT</code></td>
+<td>Stores the body at exactly that path, creating or replacing the file</td>
+</tr>
+<tr>
+<td><code>/file/&lt;directory&gt;/?name=&lt;name&gt;</code></td>
+<td><code>POST</code></td>
+<td>Stores an upload under a name nothing in the directory has yet: <code>name</code>, else <code>name (2)</code>, <code>name (3)</code> and so on</td>
+</tr>
+<tr>
+<td><code>/archive</code></td>
+<td><code>POST</code></td>
+<td>Collects a selection of files for a download as one zip</td>
+</tr>
+<tr>
+<td><code>/archive/&lt;token&gt;</code></td>
+<td><code>GET</code></td>
+<td>Downloads that zip</td>
+</tr>
+<tr>
+<td><code>/log/&lt;path&gt;</code></td>
+<td><code>POST</code></td>
+<td>Adds JSON entries to a log node</td>
+</tr>
+<tr>
+<td><code>/track/&lt;path&gt;</code></td>
+<td><code>POST</code></td>
+<td>Adds GPS points to a track node, see <a href="../archive/devices.html">Devices and GPS tracks</a></td>
+</tr>
+<tr>
+<td><code>/__shell</code></td>
+<td></td>
+<td>The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket</td>
+</tr>
+</tbody></table>
+</div>
+<p>Any other path that is not a file of the web interface returns the interface itself, which then
+shows the page or <strong>Nothing here</strong>. A visitor who is not signed in where visitors may not browse
+gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</code>.</p>
 <h2 id="the-archives-pages">The Archive&#39;s pages<a class="anchor" href="#the-archives-pages" aria-label="Link to this section"></a></h2>
+<p>These addresses exist with the <a href="../archive/index.html">Archive</a> installed.</p>
 <p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree. A person&#39;s or a place&#39;s is its name
 in lower case with hyphens: Helen Okafor is <code>/people/helen-okafor</code>. A device&#39;s keeps its capitals and
 has <code>_</code> for spaces, such as <code>/devices/Canon_EOS_5D_Mark_III</code>. Addresses with
@@ -414,49 +722,9 @@ its own too, which is mostly useful for linking to it.</p>
 </tr>
 </tbody></table>
 </div>
-<h2 id="the-assistants-and-the-media-services-pages">The Assistant&#39;s and the media service&#39;s pages<a class="anchor" href="#the-assistants-and-the-media-services-pages" aria-label="Link to this section"></a></h2>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Address</th>
-<th>What it shows</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/chat</code></td>
-<td><strong>Chat</strong> with your latest conversation, see <a href="../assistant/chat.html">Chatting with the assistant</a></td>
-</tr>
-<tr>
-<td><code>/chat/&lt;id&gt;</code></td>
-<td>One conversation; the address follows when you switch conversations</td>
-</tr>
-<tr>
-<td><code>/chart</code></td>
-<td>A chart the chat draws under an answer; its parameters come from the chat</td>
-</tr>
-<tr>
-<td><code>/about/language-model</code></td>
-<td>The language model, as <strong>About EiN</strong> shows it</td>
-</tr>
-<tr>
-<td><code>/system/media-service</code></td>
-<td>The media service, the <strong>Media service</strong> tab of the <strong>Dashboard</strong></td>
-</tr>
-<tr>
-<td><code>/system/gpu</code></td>
-<td>The graphics card, a part of the <strong>Dashboard</strong>&#39;s overview</td>
-</tr>
-<tr>
-<td><code>/about/media-service</code></td>
-<td>The media service, as <strong>About EiN</strong> shows it</td>
-</tr>
-</tbody></table>
-</div>
-<h2 id="parameters">Parameters<a class="anchor" href="#parameters" aria-label="Link to this section"></a></h2>
-<p>A parameter that is missing, or holds a value the page does not know, is ignored: the page opens as
-it would without it. You never get an error for a mistyped parameter.</p>
-<h3 id="tabs">Tabs<a class="anchor" href="#tabs" aria-label="Link to this section"></a></h3>
-<p>Pages with tabs keep the open tab in <code>tab</code>. An address without <code>tab</code> opens the first one.</p>
+<h3 id="parameters-of-the-archives-pages">Parameters of the Archive&#39;s pages<a class="anchor" href="#parameters-of-the-archives-pages" aria-label="Link to this section"></a></h3>
+<p>The <strong>Media</strong> page takes the parameters of <a href="#search">Search</a>.</p>
+<h4 id="tabs-1">Tabs<a class="anchor" href="#tabs-1" aria-label="Link to this section"></a></h4>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -465,18 +733,6 @@ it would without it. You never get an error for a mistyped parameter.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>/profile</code></td>
-<td><code>account</code> (<strong>Account</strong>), <code>preferences</code> (<strong>Preferences</strong>), <code>security</code> (<strong>Security</strong>)</td>
-</tr>
-<tr>
-<td><code>/settings</code></td>
-<td><code>system</code> (<strong>System</strong>), <code>users</code> (<strong>Users</strong>), <code>groups</code> (<strong>Groups</strong>), <code>permissions</code> (<strong>Permissions</strong>), <code>modules</code> (<strong>Modules</strong>)</td>
-</tr>
-<tr>
-<td><code>/system</code></td>
-<td><code>overview</code> (<strong>Overview</strong>), <code>work</code> (<strong>Work</strong>), <code>ems.media-service</code> (<strong>Media service</strong>), <code>services</code> (<strong>Services</strong>), <code>log</code> (<strong>Log</strong>)</td>
-</tr>
-<tr>
 <td><code>/people/&lt;name&gt;</code></td>
 <td><code>timeline</code> (<strong>Timeline</strong>), <code>info</code> (<strong>Info</strong>), <code>media</code> (<strong>Media</strong>), <code>faces</code> (<strong>Faces</strong>), <code>voices</code> (<strong>Heard in</strong>), <code>family</code> (<strong>Family</strong>), <code>homes</code> (<strong>Homes</strong>)</td>
 </tr>
@@ -498,88 +754,8 @@ it would without it. You never get an error for a mistyped parameter.</p>
 </tr>
 </tbody></table>
 </div>
-<p>On <strong>Settings</strong>, the first four tabs are for administrators. Anyone else who asks for one of them
-gets <strong>Modules</strong>, and an administrator who names no tab gets <strong>System</strong>.</p>
-<h3 id="search-and-media">Search and Media<a class="anchor" href="#search-and-media" aria-label="Link to this section"></a></h3>
-<p><strong>Search</strong> and <strong>Media</strong> keep their whole search in the address, so a search can be linked to and
-survives a reload. The parameters are named after the flags of the
-<a href="commands-core.html#search"><code>search</code></a> command.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>What it holds</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>q</code></td>
-<td>The words searched for</td>
-<td><code>q=sailing</code></td>
-</tr>
-<tr>
-<td><code>kind</code></td>
-<td>Kinds, separated by commas: <code>photo</code>, <code>video</code>, <code>audio</code>, <code>document</code>, <code>person</code>, <code>location</code>, <code>album</code>, <code>device</code>, <code>track</code></td>
-<td><code>kind=photo,video</code></td>
-</tr>
-<tr>
-<td><code>tag</code></td>
-<td>Labels, separated by commas</td>
-<td><code>tag=beach</code></td>
-</tr>
-<tr>
-<td><code>subject</code></td>
-<td>A person, location or device that must be in it, as <code>&lt;kind&gt;:&lt;name&gt;</code> or a path; repeat it for several, all of which must be there</td>
-<td><code>subject=person:helen-okafor</code></td>
-</tr>
-<tr>
-<td><code>subject-name</code></td>
-<td>Every subject of a kind whose name matches the words, as <code>&lt;kind&gt;:&lt;words&gt;</code>; repeatable</td>
-<td><code>subject-name=person:Wrenfield</code></td>
-</tr>
-<tr>
-<td><code>from</code>, <code>to</code></td>
-<td>The first and last year, both included</td>
-<td><code>from=1975&amp;to=1985</code></td>
-</tr>
-<tr>
-<td><code>bbox</code></td>
-<td>A rectangle on the map: north, south, east, west</td>
-<td><code>bbox=50.3,50.2,-5.0,-5.1</code></td>
-</tr>
-<tr>
-<td><code>circle</code></td>
-<td>A circle on the map: latitude, longitude, radius in metres</td>
-<td><code>circle=50.263,-5.051,2000</code></td>
-</tr>
-<tr>
-<td><code>poly</code></td>
-<td>A polygon: at least three <code>latitude,longitude</code> pairs separated by <code>;</code></td>
-<td><code>poly=50.3,-5.1;50.3,-5.0;50.2,-5.0</code></td>
-</tr>
-<tr>
-<td><code>under</code></td>
-<td>Only what one album or folder holds, by path</td>
-<td><code>under=/archive/albums/Malpas 1979</code></td>
-</tr>
-<tr>
-<td><code>like</code></td>
-<td>Pictures that look like this one, by path</td>
-<td><code>like=/archive/…/IMG_0412.jpg</code></td>
-</tr>
-<tr>
-<td><code>sort</code></td>
-<td><code>score</code>, <code>time</code> (oldest first), <code>-time</code> (newest first) or <code>name</code></td>
-<td><code>sort=-time</code></td>
-</tr>
-</tbody></table>
-</div>
-<p>For example, every picture and video of Helen Okafor from the 1980s, newest first:</p>
-<div class="code"><pre tabindex="0"><code>/media?kind=photo,video&amp;subject=person:helen-okafor&amp;from=1980&amp;to=1989&amp;sort=-time</code></pre></div>
-<p>Only one of <code>bbox</code>, <code>circle</code> and <code>poly</code> applies. <strong>Search</strong> with no parameters shows its landing
-page rather than searching for everything.</p>
-<h3 id="map">Map<a class="anchor" href="#map" aria-label="Link to this section"></a></h3>
-<p>The map keeps where you look, the layers and the filters in the address. What is at its default is
+<h4 id="map">Map<a class="anchor" href="#map" aria-label="Link to this section"></a></h4>
+<p>The <strong>Map</strong> page keeps where you look, the layers and the filters in the address. What is at its default is
 left out, so a plain <code>/map</code> stays plain.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -627,7 +803,7 @@ left out, so a plain <code>/map</code> stays plain.</p>
 </tbody></table>
 </div>
 <div class="code"><pre tabindex="0"><code>/map?c=50.26300,-5.05100&amp;z=13&amp;layers=media,tracks&amp;from=1979&amp;to=1979&amp;base=Satellite</code></pre></div>
-<h3 id="other-pages">Other pages<a class="anchor" href="#other-pages" aria-label="Link to this section"></a></h3>
+<h4 id="other-parameters">Other parameters<a class="anchor" href="#other-parameters" aria-label="Link to this section"></a></h4>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -696,56 +872,10 @@ left out, so a plain <code>/map</code> stays plain.</p>
 <td><code>kind</code>, <code>move</code></td>
 <td>The kind of the new category, and a staged folder to move into it</td>
 </tr>
-<tr>
-<td><code>/settings?tab=modules</code></td>
-<td><code>module</code></td>
-<td>The module open, for example <code>module=archive</code></td>
-</tr>
-<tr>
-<td><code>/settings?tab=modules</code></td>
-<td><code>section</code></td>
-<td>Its part: <code>dependencies</code>, <code>services</code>, <code>pages</code>, <code>commands</code>, <code>settings</code> or <code>types</code> (<strong>About</strong> when left out)</td>
-</tr>
-<tr>
-<td><code>/settings?tab=modules</code></td>
-<td><code>published=1</code></td>
-<td>The modules published for installing</td>
-</tr>
-<tr>
-<td><code>/settings?tab=users</code></td>
-<td><code>user</code></td>
-<td>The account open, by username</td>
-</tr>
-<tr>
-<td><code>/settings?tab=groups</code></td>
-<td><code>group</code></td>
-<td>The group open, by name</td>
-</tr>
-<tr>
-<td><code>/settings?tab=users</code>, <code>?tab=groups</code></td>
-<td><code>new=1</code></td>
-<td>The form for a new account or group</td>
-</tr>
-<tr>
-<td><code>/system/nodes</code></td>
-<td><code>path</code></td>
-<td>The path open in the explorer, for example <code>path=/archive/albums</code></td>
-</tr>
-<tr>
-<td><code>/docs</code></td>
-<td><code>find</code></td>
-<td>The words in the documentation&#39;s search box</td>
-</tr>
-<tr>
-<td><code>/login</code></td>
-<td><code>next</code></td>
-<td>Where to go after signing in</td>
-</tr>
 </tbody></table>
 </div>
-<h2 id="links-into-the-documentation">Links into the documentation<a class="anchor" href="#links-into-the-documentation" aria-label="Link to this section"></a></h2>
-<p>The <strong>Documentation</strong> section has its own addresses. The reference pages are drawn from the
-installation you are on, so they list exactly what it has.</p>
+<h2 id="the-assistants-pages">The Assistant&#39;s pages<a class="anchor" href="#the-assistants-pages" aria-label="Link to this section"></a></h2>
+<p>These addresses exist with the <a href="../assistant/index.html">Assistant</a> installed.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -754,78 +884,46 @@ installation you are on, so they list exactly what it has.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>/docs</code></td>
-<td>The guide&#39;s overview</td>
+<td><code>/chat</code></td>
+<td><strong>Chat</strong> with your latest conversation, see <a href="../assistant/chat.html">Chatting with the assistant</a></td>
 </tr>
 <tr>
-<td><code>/docs/&lt;path&gt;</code></td>
-<td>One guide page, by its URL-encoded path under <code>/usr/docs/guide</code></td>
+<td><code>/chat/&lt;id&gt;</code></td>
+<td>One conversation; the address follows when you switch conversations</td>
 </tr>
 <tr>
-<td><code>/docs/commands</code></td>
-<td>Every command, see also <a href="commands.html">Commands</a></td>
+<td><code>/chart</code></td>
+<td>A chart the chat draws under an answer; its parameters come from the chat</td>
 </tr>
 <tr>
-<td><code>/docs/settings</code></td>
-<td>Every setting with its current value, see also <a href="settings.html">Settings</a></td>
-</tr>
-<tr>
-<td><code>/docs/environment</code></td>
-<td>The environment variables, see also <a href="environment.html">Environment variables</a></td>
-</tr>
-<tr>
-<td><code>/docs/node-types</code></td>
-<td>The node types, see also <a href="node-types.html">Node types</a></td>
-</tr>
-<tr>
-<td><code>/docs/modules</code></td>
-<td>What is installed</td>
-</tr>
-<tr>
-<td><code>/docs/modules/&lt;name&gt;</code></td>
-<td>One installed module, for example <code>/docs/modules/archive</code></td>
+<td><code>/about/language-model</code></td>
+<td>The language model, as <strong>About EiN</strong> shows it</td>
 </tr>
 </tbody></table>
 </div>
-<p>The reference pages have an anchor for every entry, which scrolls to it and marks it for a moment:</p>
+<h2 id="the-media-services-pages">The media service&#39;s pages<a class="anchor" href="#the-media-services-pages" aria-label="Link to this section"></a></h2>
+<p>The <code>ems</code> module, which the Archive brings along, adds these; see <a href="../ems/index.html">The media service</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
-<th>Entry</th>
 <th>Address</th>
+<th>What it shows</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>A command</td>
-<td><code>/docs/commands#cmd-&lt;name&gt;</code>, for example <code>/docs/commands#cmd-share-link</code></td>
+<td><code>/system/media-service</code></td>
+<td>The media service, the <strong>Media service</strong> tab of the <strong>Dashboard</strong></td>
 </tr>
 <tr>
-<td>A setting</td>
-<td><code>/docs/settings#set-&lt;KEY&gt;</code>, for example <code>/docs/settings#set-CFG_GUEST_BROWSING</code></td>
+<td><code>/system/gpu</code></td>
+<td>The graphics card, a part of the <strong>Dashboard</strong>&#39;s overview</td>
 </tr>
 <tr>
-<td>A node type</td>
-<td><code>/docs/node-types#type-&lt;type&gt;</code></td>
+<td><code>/about/media-service</code></td>
+<td>The media service, as <strong>About EiN</strong> shows it</td>
 </tr>
 </tbody></table>
 </div>
-<h2 id="signing-in-and-share-links">Signing in and share links<a class="anchor" href="#signing-in-and-share-links" aria-label="Link to this section"></a></h2>
-<h3 id="the-return-after-signing-in">The return after signing in<a class="anchor" href="#the-return-after-signing-in" aria-label="Link to this section"></a></h3>
-<p>A visitor who opens a page they must sign in for is sent to the sign-in page, with the address they
-asked for in <code>next</code>:</p>
-<div class="code"><pre tabindex="0"><code>/login?next=%2Fpeople%2Fhelen-okafor%3Ftab%3Dfaces</code></pre></div>
-<p>After signing in they land on that page. <code>next</code> only leads to a page on the same EiN; anything else
-leads to <strong>Home</strong>. Someone already signed in who opens <code>/login</code> goes straight on to <code>next</code>, or to
-<strong>Home</strong>.</p>
-<h3 id="share-links">Share links<a class="anchor" href="#share-links" aria-label="Link to this section"></a></h3>
-<p>A share link has the form <code>/s/&lt;token&gt;</code>, for example <code>http://ein.local:8080/s/</code> followed by a long
-string of letters and digits. You make one with <strong>Share</strong> in the interface, see
-<a href="../guide/sharing.html">Sharing</a>, or with <a href="commands-core.html#share-link"><code>share-link create</code></a> in the
-terminal.</p>
-<p>Opening it shows <strong>Opening what was shared with you…</strong> and then the page of what was shared,
-such as the album&#39;s address. Where visitors may not browse, the visitor stays on what the link
-opens: other pages ask them to sign in. A link that has expired or been turned off shows <strong>This link no longer works</strong> with a
-<strong>Sign in</strong> button.</p>
 <h2 id="when-an-address-does-not-open">When an address does not open<a class="anchor" href="#when-an-address-does-not-open" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -868,63 +966,6 @@ opens: other pages ask them to sign in. A link that has expired or been turned o
 rebuilt them with <a href="commands-core.html#ui-build"><code>ui-build</code></a>, which it does after <code>mod install</code>,
 <code>mod setup</code> and <code>mod remove</code>, and when it starts. An open tab
 picks them up when you reload it.</p>
-<h2 id="other-addresses-the-server-answers">Other addresses the server answers<a class="anchor" href="#other-addresses-the-server-answers" aria-label="Link to this section"></a></h2>
-<p>Besides the pages, EiN&#39;s web server answers a few addresses that programs use rather than people.
-You meet them in links to files, in scripts, and in a reverse proxy&#39;s configuration
-(<a href="../admin/network.html">Ports, HTTPS and remote access</a>).</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Address</th>
-<th>Method</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/file/&lt;path&gt;</code></td>
-<td><code>GET</code>, <code>HEAD</code></td>
-<td>The bytes of a file in the tree, read with the permissions of whoever asks</td>
-</tr>
-<tr>
-<td><code>/file/&lt;path&gt;</code></td>
-<td><code>PUT</code></td>
-<td>Stores the body at exactly that path, creating or replacing the file</td>
-</tr>
-<tr>
-<td><code>/file/&lt;directory&gt;/?name=&lt;name&gt;</code></td>
-<td><code>POST</code></td>
-<td>Stores an upload under a name nothing in the directory has yet: <code>name</code>, else <code>name (2)</code>, <code>name (3)</code> and so on</td>
-</tr>
-<tr>
-<td><code>/archive</code></td>
-<td><code>POST</code></td>
-<td>Collects a selection of files for a download as one zip</td>
-</tr>
-<tr>
-<td><code>/archive/&lt;token&gt;</code></td>
-<td><code>GET</code></td>
-<td>Downloads that zip</td>
-</tr>
-<tr>
-<td><code>/log/&lt;path&gt;</code></td>
-<td><code>POST</code></td>
-<td>Adds JSON entries to a log node</td>
-</tr>
-<tr>
-<td><code>/track/&lt;path&gt;</code></td>
-<td><code>POST</code></td>
-<td>Adds GPS points to a track node, see <a href="../archive/devices.html">Devices and GPS tracks</a></td>
-</tr>
-<tr>
-<td><code>/__shell</code></td>
-<td></td>
-<td>The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket</td>
-</tr>
-</tbody></table>
-</div>
-<p>Any other path that is not a file of the web interface returns the interface itself, which then
-shows the page or <strong>Nothing here</strong>. A visitor who is not signed in where visitors may not browse
-gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</code>.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="../guide/interface.html">Finding your way around</a>: the pages, dialogs and side panel these
@@ -942,7 +983,7 @@ addresses open.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/routes.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-an-address-is-made">How an address is made</a></li><li><a href="#pages-dialogs-the-side-panel-and-full-screen">Pages, dialogs, the side panel and full screen</a></li><li><a href="#eins-own-pages">EiN's own pages</a></li><li><a href="#the-archives-pages">The Archive's pages</a></li><li class="nested"><a href="#browsing">Browsing</a></li><li class="nested"><a href="#creating">Creating</a></li><li class="nested"><a href="#staging-and-importing">Staging and importing</a></li><li class="nested"><a href="#parts-of-other-pages">Parts of other pages</a></li><li><a href="#the-assistants-and-the-media-services-pages">The Assistant's and the media service's pages</a></li><li><a href="#parameters">Parameters</a></li><li class="nested"><a href="#tabs">Tabs</a></li><li class="nested"><a href="#search-and-media">Search and Media</a></li><li class="nested"><a href="#map">Map</a></li><li class="nested"><a href="#other-pages">Other pages</a></li><li><a href="#links-into-the-documentation">Links into the documentation</a></li><li><a href="#signing-in-and-share-links">Signing in and share links</a></li><li class="nested"><a href="#the-return-after-signing-in">The return after signing in</a></li><li class="nested"><a href="#share-links">Share links</a></li><li><a href="#when-an-address-does-not-open">When an address does not open</a></li><li><a href="#other-addresses-the-server-answers">Other addresses the server answers</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-an-address-is-made">How an address is made</a></li><li><a href="#pages-dialogs-the-side-panel-and-full-screen">Pages, dialogs, the side panel and full screen</a></li><li><a href="#eins-own-pages">EiN's own pages</a></li><li><a href="#parameters">Parameters</a></li><li class="nested"><a href="#tabs">Tabs</a></li><li class="nested"><a href="#search">Search</a></li><li class="nested"><a href="#other-pages">Other pages</a></li><li><a href="#links-into-the-documentation">Links into the documentation</a></li><li><a href="#signing-in-and-share-links">Signing in and share links</a></li><li class="nested"><a href="#the-return-after-signing-in">The return after signing in</a></li><li class="nested"><a href="#share-links">Share links</a></li><li><a href="#other-addresses-the-server-answers">Other addresses the server answers</a></li><li><a href="#the-archives-pages">The Archive's pages</a></li><li class="nested"><a href="#browsing">Browsing</a></li><li class="nested"><a href="#creating">Creating</a></li><li class="nested"><a href="#staging-and-importing">Staging and importing</a></li><li class="nested"><a href="#parts-of-other-pages">Parts of other pages</a></li><li class="nested"><a href="#parameters-of-the-archives-pages">Parameters of the Archive's pages</a></li><li><a href="#the-assistants-pages">The Assistant's pages</a></li><li><a href="#the-media-services-pages">The media service's pages</a></li><li><a href="#when-an-address-does-not-open">When an address does not open</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

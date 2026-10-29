@@ -91,6 +91,9 @@
 paths: what lies where, who owns each part, which parts modules add, and which parts are stored
 somewhere else. Read it when you browse in the terminal, over SFTP or on the <strong>Nodes</strong> page and want
 to know what you are looking at.</p>
+<p>The examples use folders such as <code>/archive/albums</code> and <code>/archive/people</code>, which exist with the
+<a href="../archive/index.html">Archive</a> installed; an EiN without modules has the rest of the tree as
+described.</p>
 <h2 id="the-top-of-the-tree">The top of the tree<a class="anchor" href="#the-top-of-the-tree" aria-label="Link to this section"></a></h2>
 <p>A fresh installation has seven folders at the top:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -107,7 +110,7 @@ to know what you are looking at.</p>
 </thead>
 <tbody><tr>
 <td><code>/archive</code></td>
-<td>What EiN is for: albums, people, locations, devices and labels</td>
+<td>What EiN is for: labels, and with the Archive albums, people, locations and devices</td>
 <td>Everyone with an account, as each folder&#39;s sharing allows</td>
 </tr>
 <tr>
@@ -322,7 +325,7 @@ that already exists is left as it is, whoever owns it.</p>
 every account belongs to, may list it. The folders a module makes are <code>0775</code>, owned by <code>admin</code> with
 the group <code>users</code>, so everyone with an account may add content there. What each album, person or
 location then shows to whom is its own sharing; see <a href="../guide/sharing.html">Sharing</a>.</p>
-<p>A photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
+<p>With the Archive, a photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
 thumbnails and the faces found on it, is kept beneath the photo and goes with it when it is moved
 or deleted. <a href="nodes.html">Nodes and node types</a> describes what a node holds.</p>
 <h2 id="home-your-own-folder">/home: your own folder<a class="anchor" href="#home-your-own-folder" aria-label="Link to this section"></a></h2>
@@ -389,7 +392,7 @@ there is shared with others until you share it.</p>
 </div>
 <p>Most of these appear only once something needs them. Names starting
 with a dot are left out by <code>ls</code>; <code>ls -A</code>, or its alias <code>la</code>, shows them.</p>
-<p>Your staging folder has the mode <code>0700</code>, and its files stay out of everyone else&#39;s view, search
+<p>With the Archive, your staging folder has the mode <code>0700</code>, and its files stay out of everyone else&#39;s view, search
 included. It has four folders of its own:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -416,8 +419,8 @@ included. It has four folders of its own:</p>
 </tr>
 </tbody></table>
 </div>
-<p>Neither your staging nor your trash is part of the library: search, the Media and Year pages, the
-map and <strong>On this day</strong> leave out everything in them.</p>
+<p>Neither your trash nor, with the Archive, your staging is part of the library: search, and the
+Archive&#39;s Media and Year pages, map and <strong>On this day</strong>, leave out everything in them.</p>
 <h2 id="etc-accounts-and-settings">/etc: accounts and settings<a class="anchor" href="#etc-accounts-and-settings" aria-label="Link to this section"></a></h2>
 <p><code>/etc</code> holds what a person declares: the accounts, the settings and what runs. The administrator
 owns it.</p>
@@ -530,7 +533,7 @@ so <code>ls /var</code> reads the same on a fresh instance as on one that has ru
 </tr>
 <tr>
 <td><code>/var/pools</code></td>
-<td>Pools of jobs waiting for a worker, such as those for the media service</td>
+<td>Pools of jobs waiting for a worker, such as the Archive&#39;s for the media service</td>
 </tr>
 <tr>
 <td><code>/var/pipelines/definitions</code></td>
@@ -599,7 +602,7 @@ when EiN restarts. A file directly in <code>/tmp</code> that has not changed for
 moment.</p>
 <h2 id="find-a-folder-by-its-variable">Find a folder by its variable<a class="anchor" href="#find-a-folder-by-its-variable" aria-label="Link to this section"></a></h2>
 <p>Every shell has a variable for each standard folder, so a script does not have to spell the path
-out:</p>
+out. On an EiN with the Archive installed:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">cd</span> <span class="hljs-variable">$LOGS_PATH</span>
 <span class="hljs-built_in">ls</span> <span class="hljs-variable">$ARCHIVE_PATH</span>
@@ -785,7 +788,7 @@ path and press <kbd>Enter</kbd>. <strong>Up</strong> and <strong>Home</strong> b
 and <code>scp</code>, as <a href="../shell/ssh-sftp.html">SSH and SFTP</a> describes.</p>
 <h2 id="what-you-see-is-yours-to-see">What you see is yours to see<a class="anchor" href="#what-you-see-is-yours-to-see" aria-label="Link to this section"></a></h2>
 <p>A folder lists only what you may read. Something private to someone else is not listed to you at
-all, so two people can see the same album differently, and a folder can look empty to you and not be.
+all, so two people can see the same folder differently, and a folder can look empty to you and not be.
 An administrator sees everything. <a href="../admin/permissions.html">Permissions in depth</a> has the rules, and
 <a href="links.html">Links</a> explains the links that put one node in several folders, such as a label&#39;s or a
 favourite&#39;s.</p>
@@ -793,7 +796,7 @@ favourite&#39;s.</p>
 <p><strong><code>ls /archive</code> shows only <code>tags</code>.</strong> The Archive module is not installed. An administrator installs it on
 <strong>Settings → Modules</strong>; see <a href="../admin/modules.html">Modules</a>.</p>
 <p><strong>A file I put in <code>/tmp</code> is gone.</strong> <code>/tmp</code> is kept in memory and emptied when EiN restarts, and a
-file left directly in it is removed after a day. Keep what you need in your home or in an album.</p>
+file left directly in it is removed after a day. Keep what you need in your home or, with the Archive, in an album.</p>
 <p><strong><code>mount: permission denied, only admin is allowed to mount</code>.</strong> Mounting is for the administrator.</p>
 <p><strong>A folder holds more than I see, or will not be deleted.</strong> Something in it is hidden from you. Ask its
 owner or an administrator; <a href="../guide/sharing.html">Sharing</a> explains why.</p>

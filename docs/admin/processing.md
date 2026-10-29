@@ -1,71 +1,36 @@
 # Processing and pipelines
 
-This page is for the administrator. It covers the work EiN does on what people upload: which
-pipelines the modules bring, how to watch them on the **Dashboard** and in the terminal, what to do
-when work fails or stops moving, how to run work again on purpose, and the settings that decide
-how much runs at once.
+This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools
+and workers run, how to watch them on the **Dashboard** and in the terminal, what to do when work
+fails or stops moving, how to run work again on purpose, and the settings the engine has.
 
-## What runs after an upload
+Core brings the engine and no pipelines of its own, so an EiN without modules runs none, and the
+**Work** tab of the **Dashboard** stays empty. Pipelines come with modules: of the published ones,
+the Archive brings them all, with the workers that run them. [Processing pictures](../archive/processing.md)
+covers the Archive's pipelines, workers and settings. The examples on this page name the
+Archive's pipelines, such as `media-faces`, which exist only with the Archive installed.
+
+## How work is run
 
 A pipeline waits for one kind of change and then runs its steps, each a command, on the node that
 changed. [Changes and pipelines](../concepts/pipelines.md) explains the idea; this page is about
-running it. Core brings the pipeline engine and no pipelines. The Archive brings all of the
-pipelines below, so with only core installed nothing is processed.
+running it.
 
 Work is done in three places:
 
 - **The pipeline engine** (the `pipeline-engine` service) matches changes to pipelines, creates an
   **instance** for each pipeline and node, and runs the short steps itself.
-- **Pool workers** run the long steps. The engine puts each one as a job in a pool, and a worker
-  takes it when it has room. The Archive brings `cpu`, for work done on this machine, such as
-  reading metadata, making thumbnails and transcoding video, and `models`, for work done by a model
-  in the [media service](../ems/index.md), such as finding faces or transcribing speech. A second
-  model worker, `models-second`, runs beside `models` when `CFG_MODEL_SECOND_SLOTS` is above `0`;
-  it is off by default.
-- **Background services** of the Archive: `archive-bridge` turns changes into the events the media
-  pipelines wait for, and `media-heal` finds files that are missing something and announces them
-  again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)).
+- **Pool workers** run the long steps. A step that names a pool and a kind of job goes as a job into
+  that pool, under `/var/pools/`, and a worker takes it when it has room. A worker is a service that
+  runs `pipeline-worker`, which takes the kinds it names from one pool, as many at once as its
+  capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
+  workers.
+- **Background services** of the modules turn changes into the events their pipelines wait for,
+  and may announce work again on their own.
 
 Every pipeline runs at most once per node at a time: a file announced ten times while it waits is
 worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.
-
-### The Archive's pipelines
-
-| Pipeline               | What it does                                                                              | Kind of work                   |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ------------------------------ |
-| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it. | `ingest`                       |
-| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                   | `ingest`                       |
-| `media-stills`         | A photo's display sizes and face crops, a video's poster frames, a recording's waveform   | `stills`                       |
-| `media-transcode`      | Video and audio the browser can play, a video's hover clip, storyboard and chapters       | `transcode`, `stills`, `shots` |
-| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                    | `fingerprint`                  |
-| `media-faces`          | Finds the faces in a photo and crops each one                                             | `faces`                        |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen                                     | `faces`                        |
-| `media-face-assign`    | Matches a found face to a person                                                          | `face-assign`                  |
-| `media-face-transfer`  | Moves face tags from an older archive onto the faces EiN found                            | `face-transfer`                |
-| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                 | `embed-picture`                |
-| `media-ocr`            | Reads the text written in a picture                                                       | `ocr`                          |
-| `media-embed-text`     | Text vectors of a file's stored texts                                                     | `embed-text`                   |
-| `media-transcribe`     | A transcript of what is said in a video or recording                                      | `transcribe`                   |
-| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                               | `diarize`                      |
-| `media-speaker-assign` | Decides which person each voice is                                                        | `speaker-assign`               |
-| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found           | `diarize`, `speaker-assign`    |
-| `media-device`         | Links a file to the camera or phone that took it                                          | run by the engine              |
-| `media-geocode`        | Looks up the address of a file's GPS position                                             | run by the engine              |
-| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change          | run by the engine              |
-| `media-duplicates`     | Decides again the duplicate findings of a staged file                                     | `dedupe`                       |
-| `location-link-point`  | Links a photo to the location that contains its GPS point                                 | run by the engine              |
-| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change          | run by the engine              |
-| `document-index`       | Extracts the text of a document and makes it searchable                                   | run by the engine              |
-| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                      | `unzip`                        |
-| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                           | `sidecars`                     |
-| `staging-organize`     | Plans a staging category's suggested groups again                                         | `organize`                     |
-| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                | `retime`                       |
-| `track-stage`          | Makes a GPX file dropped in staging into its device's route                               | run by the engine              |
-
-The `cpu` worker takes `unzip`, `ingest`, `stills`, `face-assign`, `face-transfer`,
-`speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`. The
-`models` worker takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and
-`shots`, and `models-second` the same kinds in the reverse order. `pipeline-list` prints every pipeline that is defined, with its trigger.
+`pipeline-list` prints every pipeline that is defined, with its trigger.
 
 ## Watch the work on the Dashboard
 
@@ -75,7 +40,7 @@ The `cpu` worker takes `unzip`, `ingest`, `stills`, `face-assign`, `face-transfe
    **Overview** tab.
 3. Choose the **Work** tab.
 
-![The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done.")
+![The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive's.")
 
 The table has a row for every defined pipeline, also one that has never run, and a total row
 **All pipelines** at the foot. The bar draws the same counts as the columns.
@@ -99,10 +64,10 @@ Below the table, **Kinds of work** lists what the pools hold, a row per kind of 
 **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. This is where the slow steps are. A
 kind may carry a badge:
 
-- **waiting for EMS**: the media service could not run this kind yet, because it was busy, loading
-  a model, restarting or unreachable. The jobs are not failed. The kind rests for 30 seconds, then
-  twice as long each time it is refused again, up to 10 minutes; hover over the badge for the next
-  try.
+- **waiting for EMS**: a step of this kind could not run yet, because a service it needs was busy,
+  loading a model, restarting or unreachable; for the Archive's steps that service is the media
+  service. The jobs are not failed. The kind rests for 30 seconds, then twice as long each time it
+  is refused again, up to 10 minutes; hover over the badge for the next try.
 - **no worker**: no running worker takes this kind, so the jobs will never run.
 
 **Ongoing** lists the instances with a step running, with the target file and how long it has run.
@@ -172,12 +137,15 @@ bare id that more than one pipeline uses is refused with the pipelines it could 
 A failed step is tried again up to its limit of attempts, three unless the pipeline says
 otherwise, before the instance fails. Two kinds of failure are treated differently:
 
-- **The media service could not do it yet.** The step goes back to wait with its attempt given
-  back, and its kind rests, as **waiting for EMS** shows. Nothing fails however long the media
-  service is away.
+- **A service the step needs could not do it yet.** The step goes back to wait with its attempt
+  given back, and its kind rests, as **waiting for EMS** shows. Nothing fails however long the
+  service is away. The Archive's steps fail this way while the media service is busy or away.
 - **The file itself cannot be processed**, such as bytes no decoder can open. The step fails at
   once, whatever attempts are left, and the file is not tried again. `health` counts these under
   `input` and treats them as settled.
+
+A step tells the two apart by its exit code; [Changes and pipelines](../concepts/pipelines.md#when-a-step-fails)
+lists them.
 
 ### Failed work is run again on its own
 
@@ -214,7 +182,7 @@ runs `pipeline-heal --apply`.
 1. List the failed instances: `pipeline-instances -s failed`, or the **Failed** tab of the
    pipeline's page.
 2. Open one and choose the failed step to read its **Error**.
-3. Fix the cause: start the media service, free disk space, or replace the file.
+3. Fix the cause: start the service the step needs, free disk space, or replace the file.
 4. Run the instance again with **Rerun** on its page, or with `pipeline-rerun`:
 
    ```bash
@@ -240,13 +208,14 @@ A kind with jobs and no worker never moves. **Work that nothing will run** on th
 and `health` (as a failed check `kind <name>`) both say so. The usual cause is that the worker
 service is stopped:
 
-1. Open the **Services** tab of the **Dashboard**, or run `service-list`, and look at `cpu` and
-   `models`.
+1. Open the **Services** tab of the **Dashboard**, or run `service-list`, and look at the workers;
+   with the Archive installed, they are `cpu` and `models`.
 2. Start the one that is stopped, or read its log if it keeps stopping.
    [Services and logs](services-logs.md) shows how.
 
 When no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was
-removed. The warning then gives the command that cancels them:
+removed. The warning then gives the command that cancels them, with the pool's path, such as the
+Archive's `/var/pools/media`:
 
 ```bash
 # in EiN's terminal
@@ -257,23 +226,24 @@ pool-cancel /var/pools/media --kind <kind>
 
 An event that fails ten delivery attempts, for example because its node no longer exists, is set
 aside rather than tried forever. The **Work** table then shows **N dropped**, and `health` fails
-its `queue …` check until you deal with them:
+its `queue …` check until you deal with them. The engine's own queue is
+`/var/queues/pipeline-engine`; a module that turns changes into events has a queue of its own, such
+as the Archive's `/var/queues/archive-bridge`:
 
 ```bash
 # in EiN's terminal
-queue-dead /var/queues/archive-bridge           # list what was set aside
-queue-dead --retry /var/queues/archive-bridge   # put them back in line
-queue-dead --drop /var/queues/archive-bridge    # delete them
+queue-dead /var/queues/pipeline-engine           # list what was set aside
+queue-dead --retry /var/queues/pipeline-engine   # put them back in line
+queue-dead --drop /var/queues/pipeline-engine    # delete them
 ```
 
-The engine's own queue is `/var/queues/pipeline-engine`. `--id` limits `--retry` or `--drop` to
-one entry.
+`--id` limits `--retry` or `--drop` to one entry.
 
-### Steps waiting for the media service
+### Steps waiting for a service
 
-When **waiting for EMS** stays on a kind, the media service is the place to look:
-[The media service](../ems/index.md) shows how to check it. Once it answers again, the kind tries
-on its own at its next try. To try at once:
+When **waiting for EMS** stays on a kind, the service its steps need is the place to look; for the
+Archive's steps it is the media service, and [The media service](../ems/index.md) shows how to
+check it. Once it answers again, the kind tries on its own at its next try. To try at once:
 
 ```bash
 # in EiN's terminal
@@ -283,85 +253,51 @@ pool-wake transcribe    # one kind
 
 ## Run work again on purpose
 
-| You want to                                                     | Run                                                                                         |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Run one pipeline on one file                                    | `pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg`                    |
-| Transcode a video again although it has renditions              | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
-| Make the renditions again under a folder, without the pipelines | `regenerate --force /archive/albums/christmas-2019`                                         |
-| Announce files the Archive never saw, or that are missing work  | `media-scan /archive/albums`                                                                |
-
-`pipeline-start` starts the run at once, in the normal lane, and skips the checks a trigger makes.
-`--var` sets a variable the pipeline declares; `media-transcode`, `media-transcribe`,
-`media-embed-picture` and `media-ocr` declare `FORCE`, which `-f` makes them redo work already done.
-A pipeline that reads its starting event has nothing to read when started by hand, and
-`pipeline-start` warns about it.
-
-### Close gaps the pipelines missed
-
-`media-scan` walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, display sizes, faces, renditions, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips
-what is already done.
-
-The `media-heal` service runs it for you, but only when nothing is waiting in the pools, so a scan
-never repeats what is already on its way. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds (900),
-and after a pass through the whole archive it rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six
-hours).
-
-Run it by hand after installing the Archive on files that were already there, or to look at one
-folder:
+`pipeline-start` runs one pipeline on one node:
 
 ```bash
 # in EiN's terminal
-media-scan -n /archive/albums/christmas-2019    # only report what it would announce
-media-scan /archive/albums/christmas-2019
+pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg
+pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4
 ```
 
-A run examines up to 20000 files (`--scan-limit`) and announces up to 1000 (`--limit`), and
-remembers where it stopped, so the next run goes on from there; `--restart` starts from the top. It
-announces fewer as running `media-ingest` instances and waiting triggers add up, and nothing once they reach 500
-(`--max-active`).
+It starts the run at once, in the normal lane, and skips the checks a trigger makes. `--var` sets a
+variable the pipeline declares; the second line makes the Archive's `media-transcode` redo a video
+that already has its renditions. A pipeline that reads its starting event has nothing to read when
+started by hand, and `pipeline-start` warns about it.
 
-`CFG_MEDIA_TRANSCRIPTS_CURRENT` set to `off` stops transcripts from being made again when the
-media service's speech settings change. On a large archive such a change otherwise means hours of
-background work.
+A module may bring commands of its own for redoing its work over many files; the Archive's are
+`regenerate` and `media-scan`, described in [Processing pictures](../archive/processing.md#run-work-again-on-purpose).
 
-## Large imports and the bulk lane
+## The bulk lane
 
-Work on a staging category of the **Google Photos export** or **Scans** kind runs in the bulk lane,
-below all other work, so what people upload in the meantime is processed first. Bulk work is put
-behind, never stopped: it runs whenever nothing else that could run is waiting. Any category can be
-put in that lane with `staging category <name> --lane bulk`, which applies to work announced from
-then on. [Staging and importing for administrators](../archive/staging-admin.md) covers categories.
+An event can put the work it starts in the bulk lane, below all other work, so that what people do
+in the meantime is processed first. Bulk work is put behind, never stopped: it runs whenever
+nothing else that could run is waiting. With the Archive installed, the work on a large import
+runs there; [Processing pictures](../archive/processing.md#large-imports-and-the-bulk-lane) says
+which.
 
 `pipeline-rerun` and `pipeline-start` always run in the normal lane; `pipeline-heal` keeps the
 lane an instance had.
 
-## How much runs at once
+## The engine's settings
 
 These settings are in the **Processing** category of **Settings → System**, or set with
 `config set`. Saving one restarts the service that reads it, when it is read by a service, and work
 in progress is picked up again; `CFG_PIPELINE_STEP_QUIET_MS` restarts nothing and counts from the
 next look. [Configuration](configuration.md) explains how.
 
-| Setting                                                                               | Default   | What it decides                                                                                                                                |
-| ------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)                             | `2`       | How much CPU work the `cpu` worker runs at once. A transcode takes two slots, other kinds one.                                                 |
-| [`CFG_CPU_NON_ENTRY_SLOTS`](../reference/settings.md#cfg_cpu_non_entry_slots)         | `1`       | Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits. |
-| [`CFG_CPU_WORKERS`](../reference/settings.md#cfg_cpu_workers)                         | `4`       | The most CPU jobs in flight; the slots are the real limit                                                                                      |
-| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                         | `2`       | Requests the `models` worker keeps in flight against the media service. Size it to what the media service runs at once.                        |
-| [`CFG_MODEL_KIND_QUANTUM_MS`](../reference/settings.md#cfg_model_kind_quantum_ms)     | `3600000` | How long the `models` worker stays on one kind before turning to the next, so faces do not starve the rest                                     |
-| [`CFG_PIPELINE_MAX_CONCURRENT`](../reference/settings.md#cfg_pipeline_max_concurrent) | `4`       | Steps the engine itself runs at once                                                                                                           |
-| [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)   | `1800000` | How long a running step may be silent before it is listed as quiet                                                                             |
-| [`CFG_PIPELINE_PRUNE_INTERVAL`](../reference/settings.md#cfg_pipeline_prune_interval) | `3600`    | Seconds between the pruner's rounds, which also run `pipeline-heal`                                                                            |
+| Setting                                                                               | Default   | What it decides                                                     |
+| ------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
+| [`CFG_PIPELINE_MAX_CONCURRENT`](../reference/settings.md#cfg_pipeline_max_concurrent) | `4`       | Steps the engine itself runs at once                                |
+| [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)   | `1800000` | How long a running step may be silent before it is listed as quiet  |
+| [`CFG_PIPELINE_PRUNE_INTERVAL`](../reference/settings.md#cfg_pipeline_prune_interval) | `3600`    | Seconds between the pruner's rounds, which also run `pipeline-heal` |
 
 The engine has more settings, for how many triggers and instances it holds; their defaults suit a
-machine of any size, and [Settings](../reference/settings.md#processing) lists them all.
-[Performance and sizing](performance.md) says what to set on a small or a large machine.
-
-> [!TIP]
-> More `CFG_MODEL_SLOTS` than the media service runs at once only moves the wait into its queue,
-> and past its depth into **waiting for EMS**.
+machine of any size, and [Settings](../reference/settings.md#processing) lists them all. The
+**Processing** category also holds the settings modules bring, such as how much work the Archive's
+workers run at once; [Processing pictures](../archive/processing.md#how-much-runs-at-once) covers
+those. [Performance and sizing](performance.md) says what to set on a small or a large machine.
 
 ## Old instances are pruned
 
@@ -390,9 +326,9 @@ pipeline of your own, see [Writing a module](../develop/modules.md).
 ## Related pages
 
 - [Changes and pipelines](../concepts/pipelines.md): how a change becomes finished work.
+- [Processing pictures](../archive/processing.md): the Archive's pipelines, workers and settings.
 - [Health and the dashboard](monitoring.md): the four words and the **Overview** tab.
-- [The media service](../ems/index.md): where the model work and much of the media work runs.
-- [Performance and sizing](performance.md): what the slots should be on your machine.
+- [Performance and sizing](performance.md): what to set on your machine.
 - [Services and logs](services-logs.md): starting, stopping and reading the workers.
-- [Troubleshooting](troubleshooting.md): when photos do not get thumbnails, faces or dates.
+- [Troubleshooting](troubleshooting.md): when work does not get done.
 - [Core commands](../reference/commands-core.md#pipeline): every `pipeline-` and `pool-` command.

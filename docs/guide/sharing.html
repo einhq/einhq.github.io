@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sharing – EiN documentation</title>
-    <meta name="description" content="Whoever may change an album decides who else sees it. This page is for everyone in the family who shares albums: the Share dialog, the chip that says how visible something is, links for people without an account, keeping a few photos private in a shared album, how new albums start out, and why you may not see everything that is there.">
+    <meta name="description" content="Whoever may change something in EiN decides who else sees it. This page is for everyone who shares what they keep in EiN: the Share dialog, the chip that says how visible something is, links for people without an account, keeping a few photos private in a shared album, how new albums start out, and why you may not see everything that is there.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/guide/sharing.html">
     <meta property="og:title" content="Sharing – EiN documentation">
-    <meta property="og:description" content="Whoever may change an album decides who else sees it. This page is for everyone in the family who shares albums: the Share dialog, the chip that says how visible something is, links for people without an account, keeping a few photos private in a shared album, how new albums start out, and why you may not see everything that is there.">
+    <meta property="og:description" content="Whoever may change something in EiN decides who else sees it. This page is for everyone who shares what they keep in EiN: the Share dialog, the chip that says how visible something is, links for people without an account, keeping a few photos private in a shared album, how new albums start out, and why you may not see everything that is there.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,10 +87,13 @@
           <h1>Sharing</h1>
         </header>
         <article class="prose">
-<p>Whoever may change an album decides who else sees it. This page is for everyone in the family
-who shares albums: the <strong>Share</strong> dialog, the chip that says how visible something is, links for
+<p>Whoever may change something in EiN decides who else sees it. This page is for everyone who shares
+what they keep in EiN: the <strong>Share</strong> dialog, the chip that says how visible something is, links for
 people without an account, keeping a few photos private in a shared album, how new albums start
 out, and why you may not see everything that is there.</p>
+<p>The <strong>Share</strong> dialog is EiN&#39;s own and works on any node. Most of what people share are albums,
+which come with the <a href="../archive/index.html">Archive</a>, so the examples here are albums, and the parts
+that only albums have say so.</p>
 <h2 id="who-can-see-an-album">Who can see an album<a class="anchor" href="#who-can-see-an-album" aria-label="Link to this section"></a></h2>
 <p>An album, and everything in it, can be seen by:</p>
 <ul>
@@ -112,6 +115,12 @@ album from the rest of the family, not from the administrator.</p>
 <h2 id="open-the-share-dialog">Open the Share dialog<a class="anchor" href="#open-the-share-dialog" aria-label="Link to this section"></a></h2>
 <p><strong>Share</strong> is offered only on things you may change:</p>
 <ul>
+<li><strong>Anything in the tree</strong>: open <strong>Nodes</strong>, pick the node and choose the <strong>Sharing</strong> tab. <strong>Nodes</strong>
+is under <strong>System</strong> in an administrator&#39;s sidebar; anyone signed in can open it at
+<code>/system/nodes</code>.</li>
+</ul>
+<p>With the Archive installed, its pages offer <strong>Share</strong> as well:</p>
+<ul>
 <li><strong>An album</strong>: <strong>Share</strong> in the album&#39;s header. On a phone the header&#39;s buttons are under <strong>⋮</strong>.</li>
 <li><strong>A person, a location or a device</strong>: <strong>Share</strong> in its header. Sharing a person shares their page,
 not the photos they are in.</li>
@@ -119,13 +128,11 @@ not the photos they are in.</li>
 of the details panel (see <a href="../archive/viewer.html#change-a-file-from-the-pencil-menu">Viewing photos, videos and recordings</a>).</li>
 <li><strong>Several photos of an album</strong>: select them and choose <strong>Share</strong> in the selection bar; see
 <a href="#keep-some-photos-private-in-a-shared-album">Keep some photos private in a shared album</a>.</li>
-<li><strong>Anything in the tree</strong>, for an administrator: open <strong>Nodes</strong> under <strong>System</strong> in the sidebar,
-pick the node and choose the <strong>Sharing</strong> tab.</li>
 </ul>
-<p>The chip under an album&#39;s title, and the one in the viewer&#39;s details panel, open the same dialog;
-see <a href="#the-visibility-chip">The visibility chip</a>. Opened by someone who may only look, the dialog
-shows who has access without letting them change it, and says &quot;Only Helen Okafor and people who can
-edit it can change who it is shared with.&quot;</p>
+<p>The chip under an album&#39;s title, and the one in the viewer&#39;s details panel, both the Archive&#39;s,
+open the same dialog; see <a href="#the-visibility-chip">The visibility chip</a>. Opened by someone who may
+only look, the dialog shows who has access without letting them change it, and says &quot;Only Helen
+Okafor and people who can edit it can change who it is shared with.&quot;</p>
 <figure class="shot"><a href="../../assets/shots/share@2x.webp"><img src="../../assets/shots/share.webp" srcset="../../assets/shots/share.webp 1x, ../../assets/shots/share@2x.webp 2x" alt="The Share dialog of the album &quot;Sailing in the archipelago&quot;: Who can see it with the Default and Private buttons; People with access listing the owner, the Administrators group, Everyone with an account and Visitors who are not signed in; Share with a link with a Create link button; Close and Save at the foot" width="740" height="700" loading="lazy" decoding="async"></a><figcaption>One dialog decides who sees an album and who may change it, and makes the link for someone without an account.</figcaption></figure>
 <p>The dialog is headed with what it shares, such as <strong>Share “Christmas at the cottage”</strong>, and has
 up to four parts: <strong>Who can see it</strong>, <strong>People with access</strong>, <strong>Share with a link</strong> (albums only)
@@ -258,7 +265,8 @@ added to the album from another album keeps the sharing of the album it lives in
 album does not change it, and someone who may see this album but not the other one cannot open
 it.</p>
 <h2 id="the-visibility-chip">The visibility chip<a class="anchor" href="#the-visibility-chip" aria-label="Link to this section"></a></h2>
-<p>Under an album&#39;s title, and in the viewer&#39;s details panel for a single file, a small coloured chip
+<p>With the Archive installed, under an album&#39;s title, and in the viewer&#39;s details panel for a single
+file, a small coloured chip
 says how widely it is shared. Resting the pointer on it shows the sentence from the table, and
 clicking it opens the Share dialog.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 512" role="img" aria-label="A decision flow for the chip: if a share link opens it, or visitors may see it and visitors may browse, the chip is Public in green; otherwise, if everyone with an account can see it, there is no chip; otherwise, if some people or groups can, it is Restricted in orange; otherwise it is Private in red, seen only by its owner">
@@ -376,8 +384,8 @@ clicking it opens the Share dialog.</p>
 <p>Most albums have no chip, because most are seen by everyone with an account. Visitors and people
 who opened a link never see the chip: they are not told who else can see something.</p>
 <h2 id="share-an-album-with-a-link">Share an album with a link<a class="anchor" href="#share-an-album-with-a-link" aria-label="Link to this section"></a></h2>
-<p>A link lets someone without an account see one album, without signing in. Links are made for
-albums only.</p>
+<p>A link lets someone without an account see one album, without signing in. The dialog makes links
+for albums only, so they come with the Archive.</p>
 <ol>
 <li>Open the album and choose <strong>Share</strong>.</li>
 <li>Under <strong>Share with a link</strong>, next to &quot;Send a link to someone without an account&quot;, choose
@@ -434,8 +442,8 @@ links, which it does every hour by default. While it is still listed, choose a n
 <strong>Works for</strong> menu to make the same address work again, or choose <strong>Delete link</strong> and then
 <strong>Create link</strong> for a new address.</p>
 <h2 id="keep-some-photos-private-in-a-shared-album">Keep some photos private in a shared album<a class="anchor" href="#keep-some-photos-private-in-a-shared-album" aria-label="Link to this section"></a></h2>
-<p>You can keep a few photos of a shared album to yourself, or show them to fewer people, without
-moving them out of the album.</p>
+<p>With the Archive installed, you can keep a few photos of a shared album to yourself, or show them
+to fewer people, without moving them out of the album.</p>
 <figure class="shot"><a href="../../assets/shots/selection@2x.webp"><img src="../../assets/shots/selection.webp" srcset="../../assets/shots/selection.webp 1x, ../../assets/shots/selection@2x.webp 2x" alt="An album with a day's photos selected and the selection bar at the bottom: 24 selected, then Favourite, Download, Add to album, Set time, Stack, Set as cover, Share, Set location, Label and Delete" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Share in the selection bar gives the chosen photos sharing of their own, apart from the album&#39;s.</figcaption></figure>
 <ol>
 <li>In the album, select the photos: tick the round box in a picture&#39;s top-left corner,
@@ -478,8 +486,9 @@ keeps its own sharing: changes to the album “Christmas at the cottage” do no
 <strong>Like the album</strong>, then <strong>Save</strong>.</li>
 </ul>
 <h2 id="how-new-albums-start-out">How new albums start out<a class="anchor" href="#how-new-albums-start-out" aria-label="Link to this section"></a></h2>
-<p><strong>Create → Album</strong> asks only for a name and a description. The new album gets the sharing your new
-albums start with, which comes from two places.</p>
+<p>Albums come with the Archive. <strong>Create → Album</strong> asks only for a name and a description. The new
+album gets the sharing your new albums start with, which comes from two places, both EiN&#39;s own
+settings.</p>
 <p><strong>The administrator&#39;s default sharing</strong>, under <strong>Settings → Permissions → Sharing</strong>, sets who may
 see and change anything created as shared, which group it is shared with, and, if they choose, an
 account that owns it instead of its creator. On a standard installation the group is <code>users</code>, so
@@ -521,12 +530,12 @@ location, or a picture you upload into an album, takes the sharing of where it i
 <p>Changing the preference changes no album you already have. To change one, use its <strong>Share</strong>
 dialog.</p>
 <h2 id="what-you-cannot-see">What you cannot see<a class="anchor" href="#what-you-cannot-see" aria-label="Link to this section"></a></h2>
-<p>EiN leaves out what you may not open. An album, photo or folder that is private to someone else is
-not listed to you at all: not on <strong>Albums</strong>, not in <strong>News</strong> or search, not on the map, not in <code>ls</code>
-or <code>find</code> in the terminal. Here EiN differs from the files on a computer, where you see every name
-in a folder you can open, only not what is inside. So two people can see the same album
-differently, and an album can look emptier to you than to its owner. The administrator sees all of
-it.</p>
+<p>EiN leaves out what you may not open. A folder, file or album that is private to someone else is not
+listed to you at all: not in search, not in <code>ls</code> or <code>find</code> in the terminal, and with the Archive not
+on <strong>Albums</strong>, in <strong>News</strong> or on the map. Here EiN differs from the files on a computer, where you
+see every name in a folder you can open, only not what is inside. So two people can see the same
+album differently, and an album can look emptier to you than to its owner. The administrator sees
+all of it.</p>
 <p>What is hidden is still there, and that explains some surprises:</p>
 <ul>
 <li><strong>Counts are your own.</strong> The number on an album&#39;s card counts only the pictures you can see, so
@@ -588,7 +597,8 @@ album create <span class="hljs-string">&#x27;/archive/albums/Christmas 1998&#x27
 <p><code>share-link create</code> prints the end of the address, what it opens and until when; put your EiN&#39;s
 address in front of it:</p>
 <div class="code"><pre tabindex="0"><code>/s/q7Rk2mWx9TbN4vLc8HsJ3d  opens /archive/albums/Christmas at the cottage until 2026-11-24T10:12:00.000Z</code></pre></div>
-<p>The reference has every option: <a href="../reference/commands-core.html#share-info"><code>share-info</code></a>,
+<p>The <code>share-</code> commands are EiN&#39;s own and work on any node; <code>album</code> comes with the Archive. The
+reference has every option: <a href="../reference/commands-core.html#share-info"><code>share-info</code></a>,
 <a href="../reference/commands-core.html#share-link"><code>share-link</code></a>,
 <a href="../reference/commands-core.html#share-set"><code>share-set</code></a> and
 <a href="../archive/commands.html#album"><code>album</code></a>. <a href="../admin/permissions.html">Permissions in depth</a>
@@ -596,7 +606,7 @@ explains <code>chmod</code>, <code>chown</code> and <code>acl</code>, which the 
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="home.html" rel="prev"><span>Previous</span>Home, memories and statistics</a><a class="next" href="profile.html" rel="next"><span>Next</span>Your profile, favourites and trash</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="home.html" rel="prev"><span>Previous</span>Home and statistics</a><a class="next" href="profile.html" rel="next"><span>Next</span>Your profile, favourites and trash</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/sharing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

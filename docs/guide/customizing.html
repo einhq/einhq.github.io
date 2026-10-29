@@ -272,6 +272,12 @@ under your picture.</li>
 <p>An administrator also gets <strong>Nodes</strong> and <strong>Dashboard</strong> under <strong>System</strong>. The
 <a href="interface.html#the-sidebar">sidebar</a> and <a href="interface.html#the-top-bar">top bar</a> sections of
 <a href="interface.html">Finding your way around</a> say what each entry is.</p>
+<p>The first part of an id says where the entry comes from: <code>ui.</code> is EiN&#39;s own, and <code>archive.</code>,
+<code>assistant.</code> and <code>ems.</code> are the <a href="../archive/index.html">Archive</a>&#39;s, the
+<a href="../assistant/index.html">assistant</a>&#39;s and the <a href="../ems/index.html">media service module</a>&#39;s, there once
+that module is installed. On an EiN with no modules, the sidebar holds only <strong>Home</strong>, <strong>Search</strong>,
+<strong>Settings</strong>, <strong>Statistics</strong> and <strong>Documentation</strong>, with <strong>Nodes</strong> and <strong>Dashboard</strong> for an
+administrator, and there are no panels.</p>
 <p>When something in a file cannot be used, <code>ui-nav</code> says so after the list, on lines that start with
 <code>ui-nav:</code>; <a href="#when-something-goes-differently">When something goes differently</a> explains each one.
 The browser&#39;s console shows the same lines.</p>
@@ -317,6 +323,9 @@ is not saved, the editor shows <strong>unsaved</strong>, and <strong>Close</stro
 </ol>
 <p>This editor does not check the JSON. Run <code>ui-nav</code> afterwards, or reload the page and look.</p>
 <h2 id="rename-move-and-hide-entries">Rename, move and hide entries<a class="anchor" href="#rename-move-and-hide-entries" aria-label="Link to this section"></a></h2>
+<p>The examples on this page change entries the Archive and the assistant add, and lead to their
+pages, such as <code>/albums</code> and <code>/people/Peggy_Wrenfield</code>. The same works for any entry, EiN&#39;s own
+included, and for any address on your EiN.</p>
 <p>To rename <strong>Albums</strong> to <strong>Photo albums</strong>, move it up beside <strong>Home</strong>, and hide <strong>Map</strong>, write this in
 <code>~/.ui/nav.json</code>:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>

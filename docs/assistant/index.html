@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>stub – EiN documentation</title>
-    <meta name="description" content="This page is being written.">
+    <title>The Assistant – EiN documentation</title>
+    <meta name="description" content="The Assistant is the module that adds a chat to EiN: you ask in your own words, and it answers by running EiN's commands as you. This page is for anyone deciding whether to install it and for the administrator who does: what it does, what it needs, how to install it and what it adds.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/assistant/">
-    <meta property="og:title" content="stub – EiN documentation">
-    <meta property="og:description" content="This page is being written.">
+    <meta property="og:title" content="The Assistant – EiN documentation">
+    <meta property="og:description" content="The Assistant is the module that adds a chat to EiN: you ask in your own words, and it answers by running EiN's commands as you. This page is for anyone deciding whether to install it and for the administrator who does: what it does, what it needs, how to install it and what it adds.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -81,13 +81,109 @@
       </aside>
 
       <main id="main" class="docs-main">
-        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">stub</span></button>
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">The Assistant</span></button>
         <header class="docs-head">
           <p class="crumb">Assistant</p>
-          <h1>stub</h1>
+          <h1>The Assistant</h1>
         </header>
         <article class="prose">
-<p>This page is being written.</p>
+<p>The Assistant is the module that adds a chat to EiN: you ask in your own words, and it answers by
+running EiN&#39;s commands as you. This page is for anyone deciding whether to install it and for the
+administrator who does: what it does, what it needs, how to install it and what it adds.</p>
+<h2 id="what-it-does">What it does<a class="anchor" href="#what-it-does" aria-label="Link to this section"></a></h2>
+<p>The assistant answers questions about what is kept in EiN, and about EiN itself. To find the
+answer it runs EiN&#39;s own commands as you, with your permissions, and shows you every command it
+ran. A command that only reads runs at once. One that would change something, such as writing a
+caption or moving a file, comes to you as a proposal card with the exact commands, which you run or
+decline: the assistant never changes anything on its own. <a href="chat.html">Chatting with the assistant</a>
+shows the chat from the user&#39;s side.</p>
+<p>The assistant knows no module by name. Each installed module tells it which of its commands to
+offer, what to know about its part, which cards to draw under an answer and which questions to
+suggest; <a href="teaching.html">Teaching the assistant</a> describes how.</p>
+<h2 id="with-or-without-the-archive">With or without the Archive<a class="anchor" href="#with-or-without-the-archive" aria-label="Link to this section"></a></h2>
+<p>The assistant works on an EiN with no other module. It then answers from core&#39;s commands and its
+own: what is in a folder or a file, which services are running, how much disk space is used, and
+charts of what it counted.</p>
+<p>With the <a href="../archive/index.html">Archive</a> installed, it also searches pictures, people, albums and
+places, answers questions about family, birthdays and events, proposes captions and events on
+someone&#39;s timeline, and can draw a family tree or a map under an answer. The Archive&#39;s search box
+then reads a sentence typed into it with the assistant&#39;s language model too
+(<a href="language-model.html#what-the-language-model-is-for">The language model</a>).</p>
+<h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
+<p>A language model that speaks the OpenAI chat API. The module brings none of its own:</p>
+<ul>
+<li><strong>The model EiN runs itself</strong>, which the installer adds with <code>--llm</code> as a container beside EiN,
+on the graphics card or the processor.</li>
+<li><strong>A hosted provider&#39;s model</strong>, such as OpenAI&#39;s, set with four settings in <code>~/ein/.env</code>. Your
+questions, and what the assistant reads to answer them, then leave your machine.</li>
+</ul>
+<p><a href="language-model.html">The language model</a> covers both, and how to check that the model answers.
+Without a model, the chat waits for one and then says <strong>Assistant unavailable</strong>.</p>
+<p>The assistant needs no other module. With the <a href="../ems/index.html">media service</a> and its <code>ems</code> module
+installed as well, its command search finds commands by meaning rather than by their words
+(<a href="../shell/terminal.html#find-the-command-you-need">Find the command you need</a>).</p>
+<h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
+<p>Install it like any module, in any of three ways:</p>
+<ul>
+<li><p><strong>With the installer</strong>, at the first install or any time after, together with the model:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --module assistant --llm</code></pre></div>
+<p>On a machine where EiN runs already, <code>~/ein/setup.sh --module assistant</code> does the same; add
+<code>--llm</code> for the model.</p>
+</li>
+<li><p><strong>On Settings → Modules</strong>: open <strong>Published modules</strong> and choose <strong>Install</strong> on <code>assistant</code>.</p>
+</li>
+<li><p><strong>In EiN&#39;s terminal</strong>, as the administrator: <code>mod install assistant</code>.</p>
+</li>
+</ul>
+<p><a href="../admin/modules.html">Modules</a> explains each way, and how to update and remove a module.</p>
+<h2 id="what-it-adds">What it adds<a class="anchor" href="#what-it-adds" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The sidebar</td>
+<td><strong>Chat</strong>, which opens the Chat page with your recent chats</td>
+</tr>
+<tr>
+<td>The top bar</td>
+<td>The <strong>Chat</strong> button, which opens the chat in the side drawer beside the page you are on</td>
+</tr>
+<tr>
+<td><strong>About EiN</strong>, in the account menu</td>
+<td>A <strong>Language model</strong> tile: the model&#39;s name, and &quot;on this host&quot; or the provider&#39;s name</td>
+</tr>
+<tr>
+<td><strong>Settings → System</strong></td>
+<td>The <strong>Assistant</strong> group: the model&#39;s address, key, provider and name, where it runs, whether it thinks, how much it may write and how long the chat waits for it (<a href="language-model.html#settings">settings</a>)</td>
+</tr>
+<tr>
+<td><strong>Dashboard → Services</strong></td>
+<td>The <code>llm-link</code> row, which says whether the model answers and where it runs</td>
+</tr>
+<tr>
+<td>EiN&#39;s terminal</td>
+<td>The commands <code>assistant-chat</code>, <code>assistant-commands</code>, <code>llm-chat</code>, <code>llm-status</code>, <code>agent-eval</code> and <code>assistant-ask</code> (<a href="commands.html">Assistant commands</a>)</td>
+</tr>
+</tbody></table>
+</div>
+<p>Your conversations are kept as logs in your home folder, under <code>~/.chats/</code>
+(<a href="chat.html#where-your-conversations-are-kept">Where your conversations are kept</a>).</p>
+<h2 id="the-pages-in-this-section">The pages in this section<a class="anchor" href="#the-pages-in-this-section" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="chat.html">Chatting with the assistant</a>: asking, reading an answer, running or declining a
+proposal, and your conversations.</li>
+<li><a href="language-model.html">The language model</a>: running the model on your machine or using a hosted
+one, and checking that it answers.</li>
+<li><a href="teaching.html">Teaching the assistant</a>: how a module offers the assistant its commands, cards and
+questions, and how to measure it with <code>agent-eval</code>.</li>
+<li><a href="commands.html">Assistant commands</a>: every command the module brings.</li>
+</ul>
+<p>The graphics card the model can run on is covered in <a href="../ems/gpu.html">The graphics card</a>.</p>
 
         </article>
         <footer class="docs-foot">
@@ -95,7 +191,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/assistant/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-does">What it does</a></li><li><a href="#with-or-without-the-archive">With or without the Archive</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li><a href="#what-it-adds">What it adds</a></li><li><a href="#the-pages-in-this-section">The pages in this section</a></li></ul></aside>
     </div>
   </body>
 </html>

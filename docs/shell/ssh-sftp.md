@@ -117,6 +117,9 @@ ssh -p 2222 helen@ein.local 'ls /archive/albums'
 ssh -p 2222 helen@ein.local 'JSON_OUTPUT=1 ls -l /archive/albums/cornwall-1968' | jq .
 ```
 
+The examples on this page use the [Archive](../archive/index.md)'s albums, which are there once it is
+installed; any folder you may read works the same way.
+
 - With `JSON_OUTPUT=1` commands answer in JSON instead of text (see
   [Environment variables](../reference/environment.md)).
 - Each command gets a shell of its own, so `cd` does not carry over to the next `ssh`. Chain steps
@@ -163,39 +166,22 @@ interface: a folder you cannot open in the browser cannot be opened over SFTP ei
 
 ### Bring in a large batch of photos
 
-For an export or a scanned box of tens of thousands of files, copy them over SFTP into your staging
-area rather than uploading them in the browser. The **Import media** dialog on the **Staging** page
-shows the folder to copy into, with a button that copies the path and a **How** link to this page.
-
-![The Import media dialog: Inbox chosen as the category, the Choose files and Choose a folder buttons, and under them "Over about 10,000 files? Copy them over SFTP instead, folders and all, into /home/admin/staging/files/inbox/" with a copy button and a How link](../../assets/shots/import.webp "The dialog gives the exact folder to copy a large batch into over SFTP.")
-
-Copy whole folders into a category's folder under `/home/<you>/staging/files/`, keeping their names,
-since folder names help EiN group what belongs together:
-
-```bash
-# on your own computer
-scp -P 2222 -r "Cornwall 1968" helen@ein.local:/home/helen/staging/files/inbox/
-```
-
-A zip needs no unpacking: copy it in as it is, and EiN expands it where it lands once the upload has
-ended. What you copy into staging waits there, seen only by you, until you sort it;
-[Sorting in staging](../archive/staging.md) takes it from there, and
-[Getting your photos in](../archive/importing.md) compares the ways in.
-
-A photo, video or recording copied anywhere else you may write, such as into an album, is taken in
-straight away, exactly as an upload in the web interface is: EiN makes its thumbnails and reads its
-date, place and faces in the background. EiN decides what a file is by its contents, not only by its
-name.
+With the Archive installed, an export or a scanned box of tens of thousands of files is better
+copied over SFTP into your staging area than uploaded in the browser, and a photo copied into an
+album is taken in as an upload is. [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp)
+gives the folder to copy into and how to keep folder names for the grouping, and
+[Zips](../archive/importing.md#zips) what happens to a zip you copy in.
 
 ## What the tree looks like over SFTP
 
 EiN's tree holds more than an ordinary file system can show, so a few things look different.
 
-**What belongs to a photo.** A photo keeps things of its own: its EXIF data, the faces found in it, its
-thumbnails. Those live in a hidden folder named after the photo with `_` added: what belongs to
-`beach.jpg` is in `beach.jpg_`. It is not listed, so copying an album with `scp -r` or `get -r` copies
-the photos without it. You can still go in by typing its name (`cd beach.jpg_`), look around and
-download at any depth. Nothing in it can be changed over SFTP, and removing the photo removes it too.
+**What belongs to a photo.** A file can hold nodes of its own: with the Archive, a photo keeps its
+EXIF data, the faces found in it and its thumbnails. Those live in a hidden folder named after the
+photo with `_` added: what belongs to `beach.jpg` is in `beach.jpg_`. It is not listed, so copying
+an album with `scp -r` or `get -r` copies the photos without it. You can still go in by typing its
+name (`cd beach.jpg_`), look around and download at any depth. Nothing in it can be changed over
+SFTP, and removing the photo removes it too.
 
 **Modification times.** A file's modification time is when its content last changed, not when EiN last
 added something about it. Backup tools therefore see a photo as unchanged while its faces or
@@ -204,10 +190,11 @@ description are being worked out. `put -p`, `scp -p` and `cp -p` on a mount keep
 **Sizes.** A file can be emptied by setting its size to 0. Any other change of size without writing
 the content is refused.
 
-**Links.** An album's cover, a picture added to an album and a person tagged in a photo appear as
-symbolic links, and following one takes you to what it points to. A recursive copy therefore copies
-the link, not what lies behind it. `ln -s` in `sftp` makes a new link, and removing a link removes only
-the link, never what it points to. [Links](../concepts/links.md) explains what they are for.
+**Links.** Softlinks, such as your favourites, or with the Archive an album's cover, a picture added
+to an album and a person tagged in a photo, appear as symbolic links, and following one takes you to
+what it points to. A recursive copy therefore copies the link, not what lies behind it. `ln -s` in
+`sftp` makes a new link, and removing a link removes only the link, never what it points to.
+[Links](../concepts/links.md) explains what they are for.
 
 > [!WARNING]
 > Removing a file over SFTP deletes it for good, with everything that belongs to it. It does not go to

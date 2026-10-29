@@ -2,18 +2,20 @@
 
 This page is for the administrator who has just [installed EiN](install.md) and is setting it up
 for a family. It goes from the first sign-in to the family using it, one short step at a time, and
-links each step to the page that covers it in full.
+links each step to the page that covers it in full. The steps hold for any EiN, whichever modules
+it has; each module's own pages take over from there.
 
 Take the steps in order. Some of them depend on an earlier one: the sharing defaults in step 4, for
-example, apply to albums made after you set them, so set them before the first import.
+example, apply to what is created after you set them, so set them before the family starts adding
+things.
 
 1. [Sign in and change the admin password](#sign-in-and-change-the-admin-password)
 2. [Check the dashboard](#check-the-dashboard)
 3. [Install the modules you want](#install-the-modules-you-want)
 4. [Decide who sees what](#decide-who-sees-what)
 5. [Create accounts for the family](#create-accounts-for-the-family)
-6. [Import the first photos](#import-the-first-photos)
-7. [Share an album](#share-an-album)
+6. [Try the terminal](#try-the-terminal)
+7. [Start with the modules](#start-with-the-modules)
 8. [Let the family sign in](#let-the-family-sign-in)
 9. [Keep EiN running](#keep-ein-running)
 
@@ -108,6 +110,9 @@ and the pages under **System**. These modules are published:
 | `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                 | a language model, your own or a hosted one                 |
 | `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                 | the media service                                          |
 
+A fourth module, the [Importer](../importer/index.md), moves one particular older archive into EiN;
+it is not published.
+
 If you installed with the **EiN Archive** command from einhq.eu, the three are installed already. Open
 **Settings → Modules**, choose each module, and check that its panel says **Active**, not
 **Not set up** or **Setup failed**.
@@ -146,22 +151,29 @@ in `~/ein/.env`. [Modules](../admin/modules.md), [The media service](../ems/inde
 
 ## Decide who sees what
 
+**Settings**, under **System** in the sidebar, is where you set up EiN. Its tabs are **System**,
+with every system setting by category, **Users**, **Groups**, **Permissions** and **Modules**.
+Each setting says what it does and which module brought it, and is saved on its own with
+**Save change**. [Configuration](../admin/configuration.md) explains the page and the same settings
+in the terminal. Start with who sees what.
+
 Open **Settings → Permissions**. Its four cards each say in a sentence what their settings come to.
 
 ![Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards](../../assets/shots/settings-permissions.webp "The demo shown here lets visitors browse; a family's own EiN keeps that off")
 
 **Visitors.** **Visitors may browse** is **Off** on a new install, and the setting itself advises
 keeping it off for a family's own archive. Off, anyone who has not signed in is asked to sign in.
-A share link still opens what it was made for (step 7). Turn it on only for an archive meant to be
-public. The setting is [`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing).
+A share link still opens what it was made for (see [Sharing](../guide/sharing.md)). Turn it on only
+for an archive meant to be public. The setting is [`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing).
 
-**Sharing** sets what anything created as shared starts with: an album made with **Create →
-Album**, and a group filed from staging into a new album. Its rows:
+**Sharing** sets what anything created as shared starts with. With the Archive installed, that is
+an album made with **Create → Album**, and a group filed from staging into a new album; the rest of
+this step speaks of albums for that reason. Its rows:
 
 | Row             | New install                                                                | What it decides                                          |
 | --------------- | -------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **Owner**       | empty: whoever creates it                                                  | who owns a new album                                     |
-| **Group**       | Users, which is everyone with an account                                   | the group a new album is shared with                     |
+| **Owner**       | empty: whoever creates it                                                  | who owns what is created                                 |
+| **Group**       | Users, which is everyone with an account                                   | the group it is shared with                              |
 | **Permissions** | **Owner** Edit, **Group “users”** View, **Everyone else** None (`as 0750`) | what the owner, the group and anyone else may do with it |
 
 So on a new install the card reads: "Shared with Users: the owner can change it, members can see
@@ -174,7 +186,8 @@ it, anyone else can't see it." Some common choices:
 | Some accounts are not family, such as friends you share a single album with | a family group as **Group** (see step 5), with **Everyone else** at **None** |
 
 Each row is saved on its own with **Save change**. A change applies to what is created afterwards;
-albums that exist keep their sharing, which you change with **Share** (step 7). Each person can
+albums that exist keep their sharing, which you change with **Share**, as
+[Sharing](../guide/sharing.md) shows. Each person can
 also narrow what they create, under **Profile → Preferences → How widely what you create is
 shared**.
 
@@ -187,8 +200,8 @@ choice does.
 
 ## Create accounts for the family
 
-Give each person an account of their own. What they upload waits in their own staging area, which
-only they see, until they file it into an album.
+Give each person an account of their own. With the Archive installed, what they upload waits in
+their own staging area, which only they see, until they file it into an album.
 
 1. Open **Settings → Users** and choose the **New user** button beside the filter.
 2. Type the person's **Name**, such as Helen Okafor. **Username** is suggested from it (`helen`).
@@ -227,62 +240,33 @@ When someone forgets their password, open their account in **Settings → Users*
 [Accounts and groups](../admin/accounts.md) covers the rest: disabling and deleting accounts,
 groups, and the commands.
 
-## Import the first photos
+## Try the terminal
 
-Everything you import lands in your own staging area first, outside the shared library. There EiN
-reads each file and suggests albums for it, and you decide where it goes.
+Everything the pages do, and more, can be done with commands in EiN's terminal, a shell that works
+on the same tree as the pages, as the person signed in. Open it with the top bar's terminal button,
+or with <kbd>Alt</kbd>+<kbd>T</kbd> wherever you are, and try a first command:
 
-1. In the top bar, open **Create** (the plus) and choose **Import media**.
-2. Under **Into which category?**, choose **Inbox**, or **New category** for one source kept
-   together. For a new category, choose **What it holds**, such as **Scans** for a box of scanned
-   prints or **Google Photos export**, and type what it is **Called**.
-3. Click **Choose files** or **Choose a folder**, and pick what to upload.
-4. Click **Upload**.
+```bash
+# in EiN's terminal
+health
+```
 
-![The Import media dialog with the Inbox category chosen, the Choose files and Choose a folder buttons, and the SFTP path for large imports](../../assets/shots/import.webp "Import media puts files into a category of your staging area, never straight into the library")
+It says in one line how EiN is doing, the same verdict as the dashboard's badge, and lists the
+checks behind it. `--help` after a command's name says how to use it, and `docs find` followed by
+what you want done finds the command that does it. Press <kbd>Alt</kbd>+<kbd>T</kbd> again to hide
+the terminal; what runs in it goes on.
 
-The category's page opens on its **Files** tab, and the strip above the tabs shows how far the
-files are: "N of M arriving", "N being prepared", "N being grouped". The upload runs in the browser
-tab, so keep the tab open until the **Uploads** button in the top bar says it is done. Meanwhile
-the dashboard reads **Catching up**. For more than about 10,000 files, copy them over SFTP into
-the category's folder instead, such as `/home/admin/staging/files/inbox/`; see
-[SSH and SFTP](../shell/ssh-sftp.md).
+[The terminal](../shell/terminal.md) shows the rest, and [SSH and SFTP](../shell/ssh-sftp.md) how
+to reach the same shell from your own computer.
 
-A few minutes after the files are prepared, suggested albums appear on the **Sort** tab. To file
-one:
+## Start with the modules
 
-1. Open **Staging** in the sidebar, then the category, then **Sort**.
-2. Each group shows its proposal, such as **New album “…”** or **Add to “…”**, which
-   <kbd>Enter</kbd> accepts on a computer. Where there is none, choose **New album…** in the
-   group's ⋯ menu, or press <kbd>N</kbd>.
-3. In the **New album** dialog, check the **Name** and choose **Create album**. The photos leave
-   staging for the new album, shared as the **Sharing** card says.
+What comes next depends on the modules you installed in step 3:
 
-The album is now under **Albums** in the sidebar. Every decision can be undone, from the message
-it leaves or from the **Done** tab. [Getting your photos in](../archive/importing.md) and
-[Sorting in staging](../archive/staging.md) go through every way in and every choice on the Sort
-tab.
-
-## Share an album
-
-With the defaults, an album you file is already visible to everyone with an account. Use
-**Share** to change that for one album, or to send a link to someone who has no account.
-
-1. Open **Albums** in the sidebar, then the album, and choose **Share** in its header.
-2. Under **Who can see it**, **Default** lets everyone with an account see it, and **Private**
-   only its owner.
-3. Under **People with access**, find someone in **Add people or groups**, then choose
-   **Can view** or **Can edit** on their row, or **Remove access**.
-4. Choose **Save**.
-
-![The Share dialog of an album: Who can see it with Default and Private, People with access with the owner, Administrators, Everyone with an account and Visitors who are not signed in, and Share with a link](../../assets/shots/share.webp "One dialog decides who sees an album, and makes the link for someone without an account")
-
-For someone without an account, choose **Create link** under **Share with a link**. Click the
-address to copy it. The link stops working after 30 days unless you choose another time under
-**Works for**, from **1 day** to **No end date**, and **Delete link** turns it off at once. A link
-is made and changed straight away, without **Save**. Whoever opens it sees that album without
-signing in. [Sharing](../guide/sharing.md) has the rest, including keeping some photos of a shared
-album private.
+- **The Archive.** [The Archive](../archive/index.md) takes it from here: importing the first
+  photos, sorting them in staging into albums, and sharing an album, with or without an account.
+- **The Assistant.** [The Assistant](../assistant/index.md) says what it needs, what it adds, and
+  where to start chatting.
 
 ## Let the family sign in
 
@@ -294,8 +278,8 @@ Give each person:
 
 They sign in on the sign-in page with **Username or e-mail**, **Password** and **Sign in**. Ask
 them to change their password at once, under **Profile → Security**.
-[Finding your way around](../guide/interface.md) and [Getting your photos in](../archive/importing.md)
-are good pages to send them.
+[Finding your way around](../guide/interface.md) is a good page to send them, with the overview of
+each module you installed, such as [The Archive](../archive/index.md).
 
 EiN answers on your home network. Reaching it from elsewhere takes an HTTPS proxy of your own in
 front of it; [Ports, HTTPS and remote access](../admin/network.md) explains what EiN needs from

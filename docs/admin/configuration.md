@@ -13,7 +13,7 @@ Each setting belongs to one of two scopes:
 | System   | An administrator, for everyone | **Settings → System**, or `config set`     | `CFG_…`                      |
 | Personal | Each person, for themselves    | **Profile → Preferences**, or `config set` | `CFG_USER_…`, and `HISTSIZE` |
 
-This page is about the system settings. Personal ones, such as **Seconds per slide** or **Shell history length**, are described in [Your profile, favourites and trash](../guide/profile.md).
+This page is about the system settings. Personal ones, such as **Shell history length**, or **Seconds per slide** with the Archive installed, are described in [Your profile, favourites and trash](../guide/profile.md).
 
 Apart from the settings, the installation has its own environment in `.env`, in the folder EiN was installed in (`~/ein` with the installer). It holds what is fixed before EiN starts: where your files are, which ports the machine publishes, the database password. It can also give a setting its starting value. [Set a value in the deployment](#set-a-value-in-the-deployment) explains how the two meet.
 
@@ -51,14 +51,14 @@ Some settings mean something when they are empty. For those, the description end
 
 ### Give a key to another service
 
-A few settings are keys that EiN sends to another service: the media service's key, a hosted language model's key, and the access tokens for private module sources. Their names end in `_KEY`, and they are kept apart from every other setting:
+A few settings are keys that EiN sends to another service: the access tokens for private module sources, and, with the modules that bring them, the media service's key and a hosted language model's key. Their names end in `_KEY`, and they are kept apart from every other setting:
 
 - Nobody can read a key back, administrators included. The field is empty, with "Not set" or "Set — type a new one to replace it" in it, and the badge says whether the key comes from the deployment or was set here.
 - To replace a key, type the new one and choose **Save change**. The field empties again once it is saved.
 - A key is in no shell's environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key.
 
 > [!WARNING]
-> The media service's key, `CFG_EMS_KEY`, must be one the media service accepts. The installer gives both sides the same key from `.env`. A different key saved here leaves EiN unable to reach the media service; **Restore inherited value** brings back the deployment's. [The media service](../ems/index.md) explains the keys.
+> With the `ems` module installed, the media service's key, `CFG_EMS_KEY`, must be one the media service accepts. The installer gives both sides the same key from `.env`. A different key saved here leaves EiN unable to reach the media service; **Restore inherited value** brings back the deployment's. [The media service](../ems/index.md) explains the keys.
 
 ## What a change restarts
 
@@ -69,7 +69,7 @@ A setting that names the services that read it when they start restarts them whe
 - The ports, **HTTP port** and **SSH port**, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.
 - **Worker backlog rotation (ms)** is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.
 - Settings that are policy, such as the default sharing or **Visitors may browse**, are read each time they are applied, so they take effect at once and restart nothing.
-- Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as **Face match threshold**. Nothing restarts for them: the service's shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.
+- Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as the Archive's **Face match threshold**. Nothing restarts for them: the service's shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.
 
 > [!WARNING]
 > With the installer's setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing **HTTP port** or **SSH port** on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in `.env` instead, as [Ports, HTTPS and remote access](network.md) describes.
@@ -89,7 +89,7 @@ config set CFG_TRASH_RETENTION_DAYS 14
 config unset CFG_TRASH_RETENTION_DAYS
 ```
 
-`config list` prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows `(set)` in place of its value, or nothing when it is not set:
+`config list` prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows `(set)` in place of its value, or nothing when it is not set. On an EiN with the Archive, the Assistant and the `ems` module installed, it starts like this:
 
 ```text
 CFG_EMS_KEY	(set) (environment)
@@ -119,21 +119,21 @@ For a port, the answer ends with the note that it takes effect the next time the
 
 A value of the wrong kind is refused before anything is written:
 
-| Kind            | What `config set` accepts                   | Refused, for example                                       |
-| --------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| number          | digits, with an optional minus and decimals | `config set: CFG_CPU_SLOTS: expected a number, got 'four'` |
-| on or off       | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                    |
-| choice          | one of the setting's choices                | `expected one of en, sv, got 'english'`                    |
-| permission mode | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`     |
-| person or group | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                |
-| text or key     | anything                                    |                                                            |
+| Kind            | What `config set` accepts                   | Refused, for example                                                  |
+| --------------- | ------------------------------------------- | --------------------------------------------------------------------- |
+| number          | digits, with an optional minus and decimals | `config set: CFG_TRASH_RETENTION_DAYS: expected a number, got 'four'` |
+| on or off       | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                               |
+| choice          | one of the setting's choices                | `expected one of en, sv, got 'english'`                               |
+| permission mode | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`                |
+| person or group | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                           |
+| text or key     | anything                                    |                                                                       |
 
 An empty value is refused too, with `value must not be empty`, except for the settings where empty means something. To return a setting to its inherited value, use `config unset`, not an empty `config set`.
 
 Other refusals:
 
 - `config set: unknown setting 'CFG_TRASH_DAYS'`: no installed part of EiN declares that name. `config list` shows the names there are; a module's settings exist only while the module is installed.
-- `config set: 'CFG_CPU_SLOTS' is a system setting and needs administrator rights`: you are signed in as someone else. [Accounts and groups](accounts.md) explains how a member of the `sudo` group becomes the administrator in a terminal with `admin`.
+- `config set: 'CFG_TRASH_RETENTION_DAYS' is a system setting and needs administrator rights`: you are signed in as someone else. [Accounts and groups](accounts.md) explains how a member of the `sudo` group becomes the administrator in a terminal with `admin`.
 
 A value with spaces, such as two module sources, is best quoted: `config set CFG_MODULE_SOURCES 'https://github.com/einhq https://forge.example:3000/family'`. With `JSON_OUTPUT=1` in front, `config list`, `config get`, `config set` and `config unset` answer in JSON: `config list` and `config get` with each setting's label, description, value and source, `config set` and `config unset` with the value and what was restarted. [Core commands](../reference/commands-core.md#config-set) has the full entries.
 
@@ -166,11 +166,11 @@ Running `./setup.sh` applies `.env` too, but it also fetches and builds the newe
 A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
-- **A module's choice wins over it.** The Archive, the assistant and the media service name commands for the **Search** settings, such as `CFG_SEARCH_PARSER`. To use another one, set it on the Settings page.
-- **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
+- **A module's choice wins over it.** An installed module may name commands for the **Search** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, and the `ems` module `CFG_TEXT_EMBEDDER`. To use another one, set it on the Settings page.
+- **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, and the `ems` module's `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
-The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](../ems/index.md) describes them.
+The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. With the media service installed, its settings are `EMS_…` lines in the same file; [The media service](../ems/index.md) describes them.
 
 > [!NOTE]
 > `.env` holds the database password and the media service's key, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.

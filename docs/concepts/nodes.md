@@ -5,6 +5,10 @@ page takes one node apart, says what each part means and how to look at it in th
 the shell, and explains what a node's type decides. It is for anyone who wants to understand what
 they see in `ls -l`, in **Nodes** or in a node's **Properties**.
 
+The examples come from the Wrenfield family's archive. Its paths, such as `/archive/albums` and
+`/archive/people`, and the types `album` and `person` exist with the [Archive](../archive/index.md)
+installed; what the page says about nodes is core's and holds for every type.
+
 ## What a node is made of
 
 Every node has the same five parts, whatever its type:
@@ -68,7 +72,7 @@ The properties dialog has three tabs:
 - **Sharing** is the **Share** dialog's body; [Permissions in depth](../admin/permissions.md)
   explains it.
 
-Everyone else meets nodes through the pages made for them: an album's page shows an `album` node
+Everyone else meets nodes through the pages modules make for them: with the Archive, an album's page shows an `album` node
 and the files in it, a person's page a `person` node and what links to it.
 
 ### In the terminal
@@ -166,8 +170,8 @@ title on its page, is its `name` attribute.
 
 ### Change an attribute
 
-Change what a node means through the command or page made for it, when there is one: give Peggy a
-death date with `person-update --died=…` or on her page, describe a photo with
+Change what a node means through the command or page made for it, when there is one: with the
+Archive, give Peggy a death date with `person-update --died=…` or on her page, describe a photo with
 `file-set-description`, and rename an album on its page. Those check the value and keep everything
 that depends on it in step.
 
@@ -209,7 +213,7 @@ A node's type decides whether it holds content, and of what kind. `cat` prints i
 
 A `directory`, `album` or `person` holds no content, only attributes and children.
 
-Children work the same for every type. A photo keeps what EiN works out about it beneath itself:
+Children work the same for every type. With the Archive, a photo keeps what EiN works out about it beneath itself:
 
 | Child           | What it holds                                           |
 | --------------- | ------------------------------------------------------- |
@@ -257,11 +261,11 @@ simply undescribed.
 
 The types fall into three groups:
 
-| Group         | What is in it                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------- |
-| **Content**   | What the archive is made of: files, albums, people, locations, devices, positions, tracks, faces.   |
-| **Structure** | How the tree is arranged: directories, links, accounts and groups.                                  |
-| **System**    | How EiN runs: commands, logs, queues, pools, routers, sessions, terminals, embeddings, share links. |
+| Group         | What is in it                                                                                                                |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Content**   | What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, devices and faces. |
+| **Structure** | How the tree is arranged: directories, links, accounts and groups.                                                           |
+| **System**    | How EiN runs: commands, logs, queues, pools, routers, sessions, terminals, embeddings, share links.                          |
 
 ### List every type
 

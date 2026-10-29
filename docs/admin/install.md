@@ -24,21 +24,21 @@ The installer's code runs from a function called on its last line, so a download
 
 These are `setup.sh`'s options, and so the installer's too. `~/ein/setup.sh --help` lists them.
 
-| Option               | What it does                                                                                                                                                                                                                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--ems`              | Adds the media service: every media tool and model, in an image of about 30 GB. Sets `EIN_EMS=1` in `.env`.                                                                                                                                |
-| `--no-ems`           | Takes the media service out again: its container stops and is removed. Sets `EIN_EMS=0`. Its data stays.                                                                                                                                   |
-| `--llm`              | Adds the assistant's language model, Qwen3.5-4B in llama.cpp. Sets `EIN_LLM=1`.                                                                                                                                                            |
-| `--no-llm`           | Takes the language model out again. Sets `EIN_LLM=0`. The downloaded model stays in the data folder.                                                                                                                                       |
-| `--module <name>`    | Adds a module's name to `EIN_MODULES` in `.env`. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.                          |
-| `--only <service>`   | Updates one service, `ein`, `ems`, `db` or `llm`: fetches its sources, builds it and restarts it alone, leaving the others running (`db` restarts EiN with it). It updates an installation, so it needs `.env`, and takes no other option. |
-| `--source <address>` | Fetches the sources from this organisation instead of `https://github.com/einhq`, such as `http://forge.example:3000/ein` on a Forgejo or a Gitea. Sets `EIN_SOURCE`. See [Where the sources come from](#where-the-sources-come-from).     |
-| `--db-dir <folder>`  | Keeps the database in this folder, an absolute path, instead of the volume `ein_db` in the container engine's storage, such as on a faster disk. Sets `EIN_DB_DIR`. The folder must be empty or hold a database.                           |
-| `-h`, `--help`       | Prints the help and stops.                                                                                                                                                                                                                 |
+| Option               | What it does                                                                                                                                                                                                                                        |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--ems`              | Adds the media service, which the [Archive](../archive/index.md) needs: every media tool and model, in an image of about 30 GB. Sets `EIN_EMS=1` in `.env`. See [The media service](../ems/index.md).                                               |
+| `--no-ems`           | Takes the media service out again: its container stops and is removed. Sets `EIN_EMS=0`. Its data stays.                                                                                                                                            |
+| `--llm`              | Adds the language model the [Assistant](../assistant/index.md) answers with, Qwen3.5-4B in llama.cpp. Sets `EIN_LLM=1`.                                                                                                                             |
+| `--no-llm`           | Takes the language model out again. Sets `EIN_LLM=0`. The downloaded model stays in the data folder.                                                                                                                                                |
+| `--module <name>`    | Adds a module's name to `EIN_MODULES` in `.env`, such as `archive` or `assistant`. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter. |
+| `--only <service>`   | Updates one service, `ein`, `ems`, `db` or `llm`: fetches its sources, builds it and restarts it alone, leaving the others running (`db` restarts EiN with it). It updates an installation, so it needs `.env`, and takes no other option.          |
+| `--source <address>` | Fetches the sources from this organisation instead of `https://github.com/einhq`, such as `http://forge.example:3000/ein` on a Forgejo or a Gitea. Sets `EIN_SOURCE`. See [Where the sources come from](#where-the-sources-come-from).              |
+| `--db-dir <folder>`  | Keeps the database in this folder, an absolute path, instead of the volume `ein_db` in the container engine's storage, such as on a faster disk. Sets `EIN_DB_DIR`. The folder must be empty or hold a database.                                    |
+| `-h`, `--help`       | Prints the help and stops.                                                                                                                                                                                                                          |
 
 An option other than `--only` is kept in `.env` once given, so a run without it keeps it: `~/ein/setup.sh` alone runs with the options you chose before. Anything else stops `setup.sh` with `setup.sh: unknown option <option> (--help lists them)`.
 
-`--module` only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from `EIN_MODULES` in `~/ein/.env`. [Modules](modules.md) explains installing, updating and removing modules, which EiN does itself, not `setup.sh`.
+With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the web interface. `--module` only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from `EIN_MODULES` in `~/ein/.env`. [Modules](modules.md) explains installing, updating and removing modules, which EiN does itself, not `setup.sh`.
 
 ## The variables
 
@@ -176,7 +176,7 @@ compose runs EiN as the project `ein`, from the files in `~/ein`. Each service i
 | `ems`   | `localhost/ein-ems`, built from the ems sources                            | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
 | `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                   | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
 
-Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](../ems/index.md) and [The language model](../assistant/language-model.md) cover the two optional ones.
+Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](../ems/index.md), which the Archive needs, and [The language model](../assistant/language-model.md), which the Assistant uses, cover the two optional ones.
 
 ### The files in `~/ein`
 
@@ -204,7 +204,7 @@ Leave the files from ein/deploy as they are: the installer and every run of `set
 | `old`            | `/old`; read-only for the media service   | older originals                                                                     |
 | `files-volatile` | `/files-volatile`                         | thumbnails and other renditions, which EiN can make again                           |
 | `files-tmp`      | `/files-tmp`                              | scratch space                                                                       |
-| `llm`            | `/models` in the language model           | the model, downloaded at its first start                                            |
+| `llm`            | `/models` in the language model           | the model, downloaded at its first start, with `--llm`                              |
 | `modules`        | `/modules-installed` in EiN               | the installed modules, so they stay when EiN is updated or its container made again |
 
 The database is not in the data folder. It is the volume `ein_db` in the container engine's storage, or the folder you gave `--db-dir`, which `setup.sh` gives to the database's own user before the database starts. [Your data](data.md) explains what to back up and why the database and the data folder belong together.
@@ -254,7 +254,7 @@ EIN_DB_DIR=
 | `INITIAL_ADMIN_PASSWORD`        | the `admin` account's first password, random, made here. EiN takes it at its first start, and changing it later does nothing; `setup.sh` prints it at the end of every run until you delete the line, which you do once you have changed the password |
 | `EIN_BIND`                      | the address the ports listen on: `0.0.0.0` for every address of the machine, `127.0.0.1` for the machine alone                                                                                                                                        |
 | `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the web interface and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                                                                      |
-| `CFG_LLM_…`                     | a hosted language model instead of `--llm`; see [The language model](../assistant/language-model.md)                                                                                                                                                  |
+| `CFG_LLM_…`                     | the Assistant's settings for a hosted language model instead of `--llm`; see [The language model](../assistant/language-model.md)                                                                                                                     |
 | `EIN_SOURCE`, `EIN_SOURCE_KEY`  | where the sources are cloned from, and the token that reads them when they are private; `--source` sets them                                                                                                                                          |
 | `EIN_DB_DIR`                    | the database's folder; empty keeps it in the volume `ein_db`. `--db-dir` sets it                                                                                                                                                                      |
 
@@ -287,25 +287,25 @@ services:
 
 Under Docker the `restart: always` lines are left out.
 
-[`CFG_LLM_CARD`](../reference/settings.md#cfg_llm_card) tells EiN whether the model runs on the card (`card`) or the processor (`cpu`).
+[`CFG_LLM_CARD`](../reference/settings.md#cfg_llm_card), the Assistant's setting, tells EiN whether the model runs on the card (`card`) or the processor (`cpu`).
 
 ## Change the installation afterwards
 
-| To change                                                    | Do this                                                                                                                                                               |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add or remove the media service or the language model        | `~/ein/setup.sh --ems`, `--no-ems`, `--llm` or `--no-llm`. This is also an update: see [Updating](updating.md).                                                       |
-| Add a module EiN installs at its start                       | `~/ein/setup.sh --module <name>`, or install it at once in **Settings → Modules**; see [Modules](modules.md).                                                         |
-| A setting of EiN (`CFG_…`) or of the media service (`EMS_…`) | Add the line to `~/ein/.env`, then run `podman compose up -d` in `~/ein`. Most settings can instead be changed while EiN runs; see [Configuration](configuration.md). |
-| The ports, or keep EiN to the machine                        | Change `EIN_HTTP_PORT`, `EIN_SSH_PORT` or `EIN_BIND` in `.env`, then `podman compose up -d`; see [Ports, HTTPS and remote access](network.md).                        |
-| A container's memory limit                                   | Add `EIN_MEMORY=8g`, `EMS_MEMORY=20g` or `LLM_MEMORY=12g` to `.env`, then `podman compose up -d`; see [Performance and sizing](performance.md).                       |
-| The language model's model or image                          | `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE` and `LLM_CARD_RESERVE_MB` in `.env`; see [The language model](../assistant/language-model.md).                          |
-| The data folder                                              | `EIN_DATA` in `.env` names it, but changing the line does not move your files; see [Your data](data.md).                                                              |
+| To change                                                                | Do this                                                                                                                                                               |
+| ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add or remove the media service or the language model                    | `~/ein/setup.sh --ems`, `--no-ems`, `--llm` or `--no-llm`. This is also an update: see [Updating](updating.md).                                                       |
+| Add a module EiN installs at its start                                   | `~/ein/setup.sh --module <name>`, or install it at once in **Settings → Modules**; see [Modules](modules.md).                                                         |
+| A setting of EiN or a module (`CFG_…`) or of the media service (`EMS_…`) | Add the line to `~/ein/.env`, then run `podman compose up -d` in `~/ein`. Most settings can instead be changed while EiN runs; see [Configuration](configuration.md). |
+| The ports, or keep EiN to the machine                                    | Change `EIN_HTTP_PORT`, `EIN_SSH_PORT` or `EIN_BIND` in `.env`, then `podman compose up -d`; see [Ports, HTTPS and remote access](network.md).                        |
+| A container's memory limit                                               | Add `EIN_MEMORY=8g`, `EMS_MEMORY=20g` or `LLM_MEMORY=12g` to `.env`, then `podman compose up -d`; see [Performance and sizing](performance.md).                       |
+| The language model's model or image                                      | `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE` and `LLM_CARD_RESERVE_MB` in `.env`; see [The language model](../assistant/language-model.md).                          |
+| The data folder                                                          | `EIN_DATA` in `.env` names it, but changing the line does not move your files; see [Your data](data.md).                                                              |
 
 When a change does not take, `podman compose up -d --force-recreate` makes every container again. With Docker, write `docker compose` for `podman compose`.
 
 Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, which `setup.sh` gives each one: the media service's idle models then go to swap, and a search waits for them. `~/ein/setup.sh` makes the containers again with it.
 
-Some of EiN's environment is set by `compose.yaml` and wins over a line in `.env`: `POSTGRES_URL`, `CFG_HTTP_PORT` and `CFG_SSH_PORT` (always 8080 and 2222 inside the container), `CFG_EMS_URL`, `CFG_EMS_KEY` (from `EMS_KEY`), and the folder paths. For the media service, `EMS_PORT`, `EMS_KEY` and `EMS_ROOTS` are set the same way.
+Some of EiN's environment is set by `compose.yaml` and wins over a line in `.env`: `POSTGRES_URL`, `CFG_HTTP_PORT` and `CFG_SSH_PORT` (always 8080 and 2222 inside the container), the `ems` module's `CFG_EMS_URL` and `CFG_EMS_KEY` (from `EMS_KEY`), and the folder paths. For the media service, `EMS_PORT`, `EMS_KEY` and `EMS_ROOTS` are set the same way.
 
 ## Run EiN day to day
 

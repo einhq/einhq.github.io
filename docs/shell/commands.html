@@ -90,9 +90,9 @@
 <p>This page is for power users and administrators who know what they want to do and need the command for it. Each table row gives a task, a command line that does it, and a link to that command&#39;s full entry in the <a href="../reference/commands.html">reference</a>.</p>
 <h2 id="how-to-read-the-tables">How to read the tables<a class="anchor" href="#how-to-read-the-tables" aria-label="Link to this section"></a></h2>
 <ul>
-<li>Every command runs as you, with your permissions, in <a href="terminal.html">the terminal</a> or over <a href="ssh-sftp.html">SSH</a>. The examples use the demo archive&#39;s invented Wrenfield family: the album <code>/archive/albums/christmas-2019</code>, the person <code>/archive/people/Peggy_Wrenfield</code>, the account <code>helen</code>.</li>
+<li>Every command runs as you, with your permissions, in <a href="terminal.html">the terminal</a> or over <a href="ssh-sftp.html">SSH</a>. The examples use the demo archive&#39;s invented Wrenfield family: the album <code>/archive/albums/christmas-2019</code>, the person <code>/archive/people/Peggy_Wrenfield</code>, the account <code>helen</code>. Albums and people come with the <a href="../archive/index.html">Archive</a>, so those paths are there once it is installed.</li>
 <li><em>administrators only</em> marks a command that anyone else is refused before it starts, with <code>&lt;name&gt;: permission denied: only an administrator may run it</code>. A member of the <code>sudo</code> group can type <code>admin</code> to act as the administrator in that terminal. <a href="../admin/accounts.html">Accounts and groups</a> explains who that is.</li>
-<li>The archive, assistant and media service commands come with their <a href="../admin/modules.html">modules</a>. Without the module, the shell answers <code>error: command &#39;&lt;name&gt;&#39; not found</code>. <code>mod list</code> shows what is installed.</li>
+<li>The <a href="../archive/index.html">archive</a>, <a href="../assistant/index.html">assistant</a> and <a href="../ems/index.html">media service</a> commands come with their <a href="../admin/modules.html">modules</a>. Without the module, the shell answers <code>error: command &#39;&lt;name&gt;&#39; not found</code>. <code>mod list</code> shows what is installed.</li>
 <li>A command of a family can be typed as two words: <code>mod install</code> is <code>mod-install</code>, and <code>pipeline status</code> is <code>pipeline-status</code>. The families are <code>config</code>, <code>docs</code>, <code>group</code>, <code>mod</code>, <code>pipeline</code>, <code>pool</code>, <code>service</code>, <code>share</code> and <code>user</code>, and with the archive also <code>person</code> and <code>device</code>. <code>&lt;family&gt; --help</code>, such as <code>mod --help</code>, lists its subcommands; typing <code>mod</code> alone answers <code>mod: missing subcommand</code>.</li>
 <li><code>&lt;command&gt; --help</code> prints a command&#39;s arguments, options and examples without running it. <code>JSON_OUTPUT=1</code> in front of a command makes it answer in JSON; <a href="bash.html">The shell language</a> covers that and the rest of the syntax.</li>
 <li><code>cd</code>, <code>pwd</code>, <code>jobs</code>, <code>kill</code> and the other bash builtins have no reference entry. They are described in <a href="bash.html">The shell language</a>.</li>
@@ -243,7 +243,7 @@
 <p><code>rm</code> deletes for good: it does not use the trash. Without <code>-r</code> it refuses any node that has children, with <code>rm: cannot remove &#39;&lt;path&gt;&#39;: Node not empty</code>, and a processed photo has children (its metadata, thumbnails and faces). Use <code>trash put</code> for anything you may want back. <a href="../concepts/links.html">Links</a> explains what deleting and moving do to links.</p>
 </aside>
 <h2 id="search-and-find">Search and find<a class="anchor" href="#search-and-find" aria-label="Link to this section"></a></h2>
-<p><code>search</code> looks through what EiN knows about your content: the words, what the pictures show, the people in them, dates and places. <code>find</code> walks the tree by name and type, as GNU find does. <a href="../guide/search.html">Search and the finder</a> covers searching in the web interface.</p>
+<p><code>search</code> looks through what EiN knows about your content. It asks each installed module&#39;s search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive, as in the examples below, the words, what the pictures show, the people in them, dates and places. <code>find</code> walks the tree by name and type, as GNU find does. <a href="../guide/search.html">Search and the finder</a> covers searching in the web interface.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -351,7 +351,7 @@
 </div>
 <p>The node types <code>find -type</code> takes are listed in <a href="../reference/node-types.html">Node types</a>.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section"></a></h2>
-<p>These commands come with the archive module. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. <a href="../archive/albums.html">Albums</a>, <a href="../archive/people.html">People and faces</a> and the other guide pages show the same tasks in the web interface.</p>
+<p>These commands come with the archive module and are there once it is installed; <a href="../archive/index.html">The Archive</a> says what it adds. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. <a href="../archive/albums.html">Albums</a>, <a href="../archive/people.html">People and faces</a> and the other guide pages show the same tasks in the web interface.</p>
 <h3 id="albums">Albums<a class="anchor" href="#albums" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -746,7 +746,7 @@
 </tr>
 </tbody></table>
 </div>
-<p><code>news</code>, <code>events</code> and <code>onthisday</code> are core commands that gather what every installed module tells; without the archive they have little to say. <a href="../guide/home.html">Home, memories and statistics</a> shows the same feeds on the Home page.</p>
+<p><code>news</code>, <code>events</code> and <code>onthisday</code> are core commands that gather what every installed module tells; without the archive they have little to say. <a href="../archive/home.html">Memories, news and events on Home</a> shows the same feeds on the Home page.</p>
 <h3 id="duplicates-and-staging">Duplicates and staging<a class="anchor" href="#duplicates-and-staging" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -1112,12 +1112,12 @@
 <td><a href="../reference/commands-core.html#stats-overview">stats-overview</a></td>
 </tr>
 <tr>
-<td>The media service&#39;s state</td>
+<td>The media service&#39;s state, with its module</td>
 <td><code>ems-status</code></td>
 <td><a href="../ems/commands.html#ems-status">ems-status</a></td>
 </tr>
 <tr>
-<td>Whose the language model is, and whether it answers</td>
+<td>Whose the language model is, and whether it answers, with the assistant</td>
 <td><code>llm-status --checks</code></td>
 <td><a href="../assistant/commands.html#llm-status">llm-status</a></td>
 </tr>
@@ -1304,7 +1304,7 @@
 </div>
 <p>The system log starts empty at every start of EiN, and a service&#39;s two log files start empty at every start of that service.</p>
 <h2 id="the-assistant">The assistant<a class="anchor" href="#the-assistant" aria-label="Link to this section"></a></h2>
-<p>These commands come with the assistant module. <a href="../assistant/chat.html">Chatting with the assistant</a> covers the chat in the web interface, and <a href="../assistant/language-model.html">The language model</a> the model behind it.</p>
+<p>These commands come with the assistant module and are there once it is installed; <a href="../assistant/index.html">The Assistant</a> says what it adds. <a href="../assistant/chat.html">Chatting with the assistant</a> covers the chat in the web interface, and <a href="../assistant/language-model.html">The language model</a> the model behind it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

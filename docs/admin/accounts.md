@@ -4,7 +4,7 @@ This page is for the administrator who gives people accounts in EiN and puts the
 covers the **Users**, **Groups** and **Permissions** tabs of **Settings**, the built-in accounts
 and groups, how to let a second person administer, and the same work in the terminal.
 
-What a group may see and change is decided by the sharing of each album and folder, not here.
+What a group may see and change is decided by the sharing of each folder, and with the Archive of each album, not here.
 [Sharing](../guide/sharing.md) shows how to share with a group, and
 [Permissions in depth](permissions.md) explains owners, groups and modes.
 
@@ -62,8 +62,8 @@ personal group.
 7. Choose **Create user**.
 
 EiN says "Created helen." and opens the new account. The account has a home folder,
-`/home/helen`, which holds the person's own things, such as what they upload to staging, and a
-personal group `helen`.
+`/home/helen`, which holds the person's own things, such as their preferences and, with the Archive installed, what
+they upload to staging, and a personal group `helen`.
 
 While something is missing, **Create user** says why under it: "Choose a username", "Already
 taken", "Repeat the password" or "The passwords do not match". If the account was made but its
@@ -85,8 +85,8 @@ how the account is named to others; the person can change their own name and des
 their profile (see [Your profile](../guide/profile.md#change-your-name-and-description)). Only an
 administrator sets the e-mail address. Empty the field and save to remove it.
 
-The account's picture is not set here: it is the cover photo of the person in the archive that the
-account is linked to. [Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)
+The account's picture is not set here: with the [Archive](../archive/index.md) installed, it is the
+cover photo of the person in the archive that the account is linked to. [Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)
 shows how to make that link in the terminal.
 
 ### Groups
@@ -119,7 +119,7 @@ password" by e-mail and cannot make someone choose a new password at their next 
 someone has forgotten theirs, set a new one here and ask them to change it on their profile's
 **Security** tab (see [Change your password](../guide/profile.md#change-your-password)).
 
-An account brought over from an older archive by the importer has no usable password. It shows
+An account brought over from an older archive by the [Importer](../importer/index.md) has no usable password. It shows
 **Needs a password**, and cannot sign in until you set one here.
 
 ### Sign-in and removal
@@ -140,8 +140,9 @@ The `admin` account has neither button: "The administrator can't be disabled or 
 
 1. Open the account and choose **Delete account…** under **Sign-in and removal**.
 2. Read what will happen. Deleting the account removes its home folder and everything in it: the
-   person's staging, their preferences and anything else they kept there.
-3. Pick who takes over everything they own elsewhere, such as albums and pictures in the archive.
+   person's preferences, their staging with the Archive, and anything else they kept there.
+3. Pick who takes over everything they own elsewhere, such as folders and files, and with the Archive
+   albums and pictures.
    The administrator is picked to start with.
 4. Choose **Delete** followed by the username, such as **Delete helen**.
 
@@ -151,7 +152,8 @@ personal group goes too, unless someone else is in it; then it stays, and EiN sa
 > [!WARNING]
 > There is no undo, and deleted home folders do not go to the trash. If you only want to keep
 > someone out, use **Disable sign-in** instead. EiN has no backup command; see
-> [Your data](data.md) before you delete an account whose staging holds anything still unsorted.
+> [Your data](data.md) before you delete an account whose home folder holds anything you want to
+> keep, such as pictures still unsorted in the Archive's staging.
 
 ## Create and change groups
 
@@ -189,7 +191,7 @@ In a group's panel:
 3. Choose **Delete** followed by the group's name, such as **Delete family**.
 
 Nobody loses their account. Accounts whose primary group it was go back to their own groups, and
-grants that named the group on albums and folders are dropped, so its members lose what they could
+grants that named the group on folders, or on albums with the Archive, are dropped, so its members lose what they could
 see only through it.
 
 ## What new accounts start with
@@ -198,13 +200,13 @@ The **Permissions** tab has four cards. Each says in a sentence what its saved v
 each setting on it is saved on its own with **Save change**, as on the **System** tab. A value
 changed here is marked **Set here**, and **Restore inherited value** clears it again.
 
-| Card                 | Setting                                                                                             | What it decides                                                                                                                                          | Default                  |
-| -------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **New users**        | **Groups** ([`CFG_DEFAULT_USER_GROUPS`](../reference/settings.md#cfg_default_user_groups))          | The groups ticked on the New user form, besides the account's own. Empty means none.                                                                     | `users`                  |
-| **Visitors**         | **Visitors may browse** ([`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing))       | Whether someone who has not signed in browses as `guest`, seeing what is shared with visitors, instead of being asked to sign in.                        | off                      |
-| **Sharing**          | **Owner**, **Group**, **Permissions**                                                               | Who owns anything created as shared, such as a new album, which group it is shared with, and what the owner, the group and everyone else may do with it. | creator, `users`, `0750` |
-| **Sign-in sessions** | **Browser sign-in** ([`CFG_SESSION_MAX_AGE_SEC`](../reference/settings.md#cfg_session_max_age_sec)) | How long a browser stays signed in after its last visit.                                                                                                 | 1 day                    |
-| **Sign-in sessions** | **Idle session** ([`CFG_SESSION_EXPIRES_SEC`](../reference/settings.md#cfg_session_expires_sec))    | How long a session lasts unused. A change applies to new sign-ins.                                                                                       | 12 hours                 |
+| Card                 | Setting                                                                                             | What it decides                                                                                                                                                           | Default                  |
+| -------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **New users**        | **Groups** ([`CFG_DEFAULT_USER_GROUPS`](../reference/settings.md#cfg_default_user_groups))          | The groups ticked on the New user form, besides the account's own. Empty means none.                                                                                      | `users`                  |
+| **Visitors**         | **Visitors may browse** ([`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing))       | Whether someone who has not signed in browses as `guest`, seeing what is shared with visitors, instead of being asked to sign in.                                         | off                      |
+| **Sharing**          | **Owner**, **Group**, **Permissions**                                                               | Who owns anything created as shared, such as a new album with the Archive, which group it is shared with, and what the owner, the group and everyone else may do with it. | creator, `users`, `0750` |
+| **Sign-in sessions** | **Browser sign-in** ([`CFG_SESSION_MAX_AGE_SEC`](../reference/settings.md#cfg_session_max_age_sec)) | How long a browser stays signed in after its last visit.                                                                                                                  | 1 day                    |
+| **Sign-in sessions** | **Idle session** ([`CFG_SESSION_EXPIRES_SEC`](../reference/settings.md#cfg_session_expires_sec))    | How long a session lasts unused. A change applies to new sign-ins.                                                                                                        | 12 hours                 |
 
 Leave **Visitors may browse** off for a family's own archive. With it off, someone who is not
 signed in can only sign in or open a share link. [Sharing](../guide/sharing.md#visitors-who-are-not-signed-in)
@@ -299,17 +301,17 @@ list every option.
 
 ## When something goes differently
 
-| What you see                                                           | What it means                                                                        | What to do                                                                         |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Needs a password** on an account                                     | It was made without a password, or came from the importer.                           | Set one under **Password**.                                                        |
-| Someone does not see an album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
-| **Create user** says "Already taken"                                   | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
-| "Another account has this address" under **E-mail**                    | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |
-| `user create: '<name>' is the name of a built-in group`                | The names `users` and `ssh` belong to built-in groups.                               | Choose another username.                                                           |
-| `group delete: cannot delete the built-in group '<name>'`              | Built-in groups stay.                                                                | Nothing to do.                                                                     |
-| `user passwd: the guest account cannot have a password`                | `guest` never signs in.                                                              | Turn **Visitors may browse** on or off instead.                                    |
-| `<name>: permission denied: only an administrator may run it`          | The command is the administrator's.                                                  | Choose **Administer…**, or type `admin` in that terminal, if you are in `sudo`.    |
-| The `admin` password is lost                                           | Nothing else keeps it.                                                               | A member of `sudo` sets a new one with `user-passwd admin`.                        |
+| What you see                                                                    | What it means                                                                        | What to do                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| **Needs a password** on an account                                              | It was made without a password, or came from the Importer.                           | Set one under **Password**.                                                        |
+| Someone does not see a folder or album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
+| **Create user** says "Already taken"                                            | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
+| "Another account has this address" under **E-mail**                             | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |
+| `user create: '<name>' is the name of a built-in group`                         | The names `users` and `ssh` belong to built-in groups.                               | Choose another username.                                                           |
+| `group delete: cannot delete the built-in group '<name>'`                       | Built-in groups stay.                                                                | Nothing to do.                                                                     |
+| `user passwd: the guest account cannot have a password`                         | `guest` never signs in.                                                              | Turn **Visitors may browse** on or off instead.                                    |
+| `<name>: permission denied: only an administrator may run it`                   | The command is the administrator's.                                                  | Choose **Administer…**, or type `admin` in that terminal, if you are in `sudo`.    |
+| The `admin` password is lost                                                    | Nothing else keeps it.                                                               | A member of `sudo` sets a new one with `user-passwd admin`.                        |
 
 ## Related pages
 

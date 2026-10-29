@@ -10,13 +10,13 @@ EiN has no releases and no version numbers to choose between. An update builds t
 each repository from source, on your machine, and starts it in place of what ran before. Which
 repositories it fetches depends on what is installed:
 
-| Repository | What it is                                       | Fetched when            |
-| ---------- | ------------------------------------------------ | ----------------------- |
-| deploy     | `~/ein` itself: `setup.sh` and the compose files | always, first           |
-| core       | EiN: the tree, the shell, the web interface      | always                  |
-| db         | PostgreSQL with TimescaleDB                      | always                  |
-| ems        | the media service                                | with the media service  |
-| llm        | the language model's chat template               | with the language model |
+| Repository | What it is                                            | Fetched when            |
+| ---------- | ----------------------------------------------------- | ----------------------- |
+| deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           |
+| core       | EiN: the tree, the shell, the web interface           | always                  |
+| db         | PostgreSQL with TimescaleDB                           | always                  |
+| ems        | the media service, which the Archive needs            | with the media service  |
+| llm        | the language model's chat template, for the Assistant | with the language model |
 
 The language model's server is not built: it is llama.cpp's ready-made image, named by a fixed
 digest in `compose.llm.yaml`. It changes only when that file does, which is when the deploy
@@ -141,9 +141,9 @@ and its pages and commands are missing until it is updated. [When a module does 
 In the web interface, open the profile menu at the top right and choose **About EiN**. The **Core**
 tile shows core's version, and below it the commit EiN was built from and that commit's date; hold
 the pointer over it for the full time. The **Module API** tile shows the version modules build on,
-and **Services** shows the media service's version and commit when it is installed.
+and **Services** shows what installed modules add, such as the media service's version and commit with the `ems` module and the media service installed.
 
-In the terminal, `system-info` prints the same, with each module's commit:
+In the terminal, `system-info` prints the same, with each module's commit, here on an EiN with every module installed:
 
 ```bash
 # in EiN's terminal
@@ -166,7 +166,7 @@ has the command.
 
 ## Check that all is well after an update
 
-1. In `~/ein`, `podman compose ps` shows every container up, and `db` and `ems` healthy.
+1. In `~/ein`, `podman compose ps` shows every container up, and `db`, and `ems` when it is installed, healthy.
 2. In EiN's terminal, `health` says whether the system is healthy or catching up;
    [Health and the dashboard](monitoring.md) explains its checks.
 3. Open **Settings → Modules** and look for a module with a badge instead of its version, and for
@@ -202,10 +202,10 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `fatal: Not possible to fast-forward, aborting.`, or a message about local changes, after a source line         | A repository under `~/ein/src` was changed or moved to another commit by hand. `git -C ~/ein/src/<name> status` shows what; `git -C ~/ein/src/<name> checkout -- .` and `git -C ~/ein/src/<name> switch main` put it back. |
 | The build stops with no space left on the device                                                                | The container engine's storage is full. Free the space old images take (above), or see `podman system df`.                                                                                                                 |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                 | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
-| EiN does not take your admin password and has none of your albums                                               | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
+| EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
 | A module is still the old version                                                                               | `setup.sh` does not update modules. Use **Update** on **Settings → Modules**.                                                                                                                                              |
 | A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN. Update it; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.                                                                                       |
-| The media service's tile in **About EiN** says **Not answering**                                                | The media service is still starting or failed to. `podman compose logs ems`; [The media service](../ems/index.md) helps further.                                                                                           |
+| With the `ems` module, the media service's tile in **About EiN** says **Not answering**                         | The media service is still starting or failed to. `podman compose logs ems`; [The media service](../ems/index.md) helps further.                                                                                           |
 
 If an update leaves EiN in a state you cannot fix, the way back is the backup you made before it:
 restore it as [Your data](data.md) describes.

@@ -1,7 +1,7 @@
 # The terminal
 
 The terminal is a command line inside EiN's web interface: a shell that works on the same tree of
-albums, people and files that the pages show, with the same commands and the same permissions. This
+nodes that the pages show, with the same commands and the same permissions. This
 page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with
 the keyboard, find earlier commands, get help, and find the command you need.
 
@@ -22,6 +22,10 @@ ls /archive
 ```text
 albums  devices  locations  people  tags  tracks
 ```
+
+That is an EiN with the [Archive](../archive/index.md) installed, which makes every folder there but
+`tags`. Without it, `/archive` holds only `tags`, and `ls /` shows the rest of the
+[tree](../concepts/tree.md).
 
 To hide it again, press <kbd>Alt</kbd>+<kbd>T</kbd>, choose the chevron at the right end of the tab
 bar (**Hide terminal (Alt+T)**), or click anywhere outside it. Hiding the terminal does not stop it:
@@ -141,8 +145,8 @@ Drag files from your computer onto the terminal and let go. EiN uploads them int
 tab is in, the path the tab shows. The **Uploads** button in the top bar follows them, as for any
 upload, and a file whose name is taken in that folder is stored under a numbered name beside it.
 
-Where you drop decides what happens next. To have the archive take new pictures in, go to a staging
-category or an album first:
+Where you drop decides what happens next. With the Archive installed, go to a staging category or an
+album first to have it take new pictures in:
 
 ```bash
 # in EiN's terminal
@@ -155,7 +159,8 @@ you may only read fails and is listed under **Uploads**.
 
 ## Show a picture with cat
 
-`cat` on a picture or a video draws it right in the terminal, 20 lines tall:
+`cat` on a picture or a video draws it right in the terminal, 20 lines tall, wherever the file is in
+the tree. Here it draws a photo in one of the Archive's albums:
 
 ```bash
 # in EiN's terminal
@@ -246,6 +251,8 @@ Press <kbd>Tab</kbd> while you type a command name, a path, an option, a user or
 one thing fits, EiN fills it in, with `/` after a folder and a space after anything else, and quotes
 it if it holds spaces. When several fit, it fills in as much as they share; press <kbd>Tab</kbd>
 again to list them all.
+
+The first two rows are on an EiN with the Archive installed:
 
 | You type                                  | <kbd>Tab</kbd> gives                          |
 | ----------------------------------------- | --------------------------------------------- |
@@ -369,7 +376,10 @@ signed in. A command you may not run in the terminal is refused through every ot
 
 ## Commands worth knowing
 
-Commands marked _archive_ come with the archive module and exist only where it is installed.
+Commands marked _archive_ come with the [Archive](../archive/index.md) and exist only where it is
+installed, as do the `/archive/albums` and `/archive/people` paths in the examples. `search`,
+`news`, `events` and `onthisday` are EiN's own, but answer with what the installed modules provide,
+so without a module they find nothing.
 [Commands by task](commands.md) has many more, grouped by what you want to do.
 
 | Command                                                                              | What it does                                                                                |
@@ -386,12 +396,12 @@ Commands marked _archive_ come with the archive module and exist only where it i
 | [`mkfile`](../reference/commands-core.md#mkfile)                                     | Makes an empty text file, what `touch` does elsewhere                                       |
 | [`du`](../reference/commands-core.md#du)                                             | Adds up sizes; `du -chs *` gives readable sizes and a total                                 |
 | [`find`](../reference/commands-core.md#find)                                         | Finds nodes under a path, as GNU find does: `find /archive/people -maxdepth 1 -type person` |
-| [`search`](../reference/commands-core.md#search)                                     | Searches the archive's content: `search christmas --kind photo`                             |
+| [`search`](../reference/commands-core.md#search)                                     | Searches what the modules make searchable: `search christmas --kind photo`                  |
 | [`stat`](../reference/commands-core.md#stat)                                         | Shows a node's details: type, owner, times                                                  |
 | [`ln`](../reference/commands-core.md#ln)                                             | `ln -s` makes a softlink, one thing in a second place                                       |
 | [`news`](../reference/commands-core.md#news)                                         | What has been added lately, newest first                                                    |
 | [`events`](../reference/commands-core.md#events)                                     | What falls on the days around today, such as birthdays and anniversaries                    |
-| [`onthisday`](../reference/commands-core.md#onthisday)                               | What the archive has from this day in earlier years                                         |
+| [`onthisday`](../reference/commands-core.md#onthisday)                               | What the modules have from this day in earlier years                                        |
 | [`timeline`](../archive/commands.md#timeline)                                        | _archive_: albums, life events, birthdays and tracks, newest first                          |
 | [`person-info`](../archive/commands.md#person-info)                                  | _archive_: a person's details, relations, homes and events                                  |
 | [`top`](../reference/commands-core.md#top)                                           | Watches the system live; <kbd>q</kbd> quits                                                 |

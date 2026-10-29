@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The media service – EiN documentation</title>
-    <meta name="description" content="The media service, EMS, is the container that holds every media tool and model EiN uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This page is for the administrator who installs it, watches it and tunes it.">
+    <meta name="description" content="The media service, EMS, holds every media tool and model the Archive uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This section applies once the Archive is installed, and this page is for the administrator who installs the media service, watches it and tunes it.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/ems/">
     <meta property="og:title" content="The media service – EiN documentation">
-    <meta property="og:description" content="The media service, EMS, is the container that holds every media tool and model EiN uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This page is for the administrator who installs it, watches it and tunes it.">
+    <meta property="og:description" content="The media service, EMS, holds every media tool and model the Archive uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This section applies once the Archive is installed, and this page is for the administrator who installs the media service, watches it and tunes it.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,10 +87,24 @@
           <h1>The media service</h1>
         </header>
         <article class="prose">
-<p>The media service, EMS, is the container that holds every media tool and model EiN uses: it reads
-metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and
-makes pictures searchable. This page is for the administrator who installs it, watches it and
-tunes it.</p>
+<p>The media service, EMS, holds every media tool and model the Archive uses: it reads metadata, makes
+thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures
+searchable. This section applies once the <a href="../archive/index.html">Archive</a> is installed, and this page
+is for the administrator who installs the media service, watches it and tunes it.</p>
+<h2 id="two-parts">Two parts<a class="anchor" href="#two-parts" aria-label="Link to this section"></a></h2>
+<p>The media service comes in two parts, installed in different ways:</p>
+<ul>
+<li><strong>The <code>ems</code> module</strong>, EiN&#39;s side of it: the client the Archive calls the media service through,
+its health on the <strong>Dashboard</strong>, with the <strong>Media service</strong> tab and the graphics card&#39;s readings,
+and <code>ems-text-embed</code>, which turns text into vectors so that things can be found by meaning.
+Installing the <code>archive</code> module installs the <code>ems</code> module with it (<a href="../admin/modules.html">Modules</a>).</li>
+<li><strong>The media service itself</strong>, the <code>ems</code> container that runs beside EiN. The installer&#39;s <code>--ems</code>
+adds it (<a href="#add-the-media-service">Add the media service</a>); the module does not.</li>
+</ul>
+<p>The Archive needs both: without them, nothing it takes in gets thumbnails, dates, faces or
+searchable text. Without the Archive they have nothing to do. The one other use of them is the
+assistant&#39;s command search, which with their text vectors finds commands by meaning
+(<a href="../shell/terminal.html#find-the-command-you-need">Find the command you need</a>).</p>
 <h2 id="what-the-media-service-does">What the media service does<a class="anchor" href="#what-the-media-service-does" aria-label="Link to this section"></a></h2>
 <p>EiN itself runs no media tool. Whenever a file needs looking at, EiN sends the media service a
 request naming the file, and the media service answers or writes the result where EiN asked. It
@@ -141,15 +155,11 @@ else.</p>
 </tr>
 </tbody></table>
 </div>
-<p>The <a href="../admin/modules.html">Archive</a> needs it: installing the <code>archive</code> module installs the <code>ems</code> module with
-it, which is EiN&#39;s side of the media service. The <code>ems</code> module is the client, the health checks,
-the <strong>Media service</strong> tab on the dashboard and the GPU readings; the media service itself is a
-separate container that the module does not install.</p>
 <p>The media service generates no text. The chat belongs to the assistant&#39;s
 <a href="../assistant/language-model.html">language model</a>, and no processing step depends on it.</p>
 <h2 id="what-happens-without-it">What happens without it<a class="anchor" href="#what-happens-without-it" aria-label="Link to this section"></a></h2>
-<p>Without the media service, EiN still takes in, keeps and shares what you upload, but nothing new is
-read:</p>
+<p>With the Archive installed and no media service, EiN still takes in, keeps and shares what you
+upload, but nothing new is read:</p>
 <ul>
 <li>Uploads wait in staging as <strong>being prepared</strong>.</li>
 <li>New files get no metadata, thumbnails, faces, transcripts or search vectors.</li>
@@ -164,6 +174,8 @@ retries, and runs once the media service answers again.</p>
 <li><p>On the machine EiN runs on, run:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 ./setup.sh --ems</code></pre></div>
+<p>With the Archive not installed yet, add it in the same run: <code>./setup.sh --ems --module archive</code>
+installs the media service, and the Archive with the <code>ems</code> module at EiN&#39;s start.</p>
 </li>
 <li><p>Wait for the build. The first time, <code>setup.sh</code> prints
 <code>== Building the images (the media service the first time: about 30 GB)</code>: the image carries
@@ -549,7 +561,7 @@ with <code>config set</code>:</p>
 </div>
 <p>For the languages of a family archive, prefer <code>EMS_WHISPER_LANGUAGES</code> in <code>.env</code> to
 <code>CFG_WHISPER_LANGUAGE</code>: the first biases detection, so a holiday clip in English is still
-transcribed as English; the second forces one language on everything. <a href="../admin/processing.html">Processing and pipelines</a> explains <code>CFG_MODEL_SLOTS</code> and the other slots.</p>
+transcribed as English; the second forces one language on everything. <a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> explains <code>CFG_MODEL_SLOTS</code> and the other slots.</p>
 <h2 id="when-the-media-service-restarts">When the media service restarts<a class="anchor" href="#when-the-media-service-restarts" aria-label="Link to this section"></a></h2>
 <p>A restart takes tens of seconds, longer when models load. Meanwhile:</p>
 <ul>
@@ -597,6 +609,7 @@ it in a folder beside its own storage, not in <code>/tmp</code>. Free space ther
 <p><a href="../admin/troubleshooting.html">Troubleshooting</a> covers problems that are not the media service&#39;s own.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
+<li><a href="../archive/index.html">The Archive</a></li>
 <li><a href="gpu.html">The graphics card</a></li>
 <li><a href="../admin/install.html">Installing in detail</a></li>
 <li><a href="../admin/configuration.html">Configuration</a></li>
@@ -613,7 +626,7 @@ it in a folder beside its own storage, not in <code>/tmp</code>. Free space ther
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

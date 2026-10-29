@@ -17,8 +17,8 @@ The installer fetches the deployment into `~/ein` and runs `setup.sh` there. Aft
 | ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `.env`                  | `setup.sh`, the first run | The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit.                 |
 | `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                                             |
-| `compose.ems.yaml`      | the deployment            | The media service, added with `--ems`.                                                                                            |
-| `compose.llm.yaml`      | the deployment            | The assistant's language model, added with `--llm`.                                                                               |
+| `compose.ems.yaml`      | the deployment            | The media service, which the Archive needs, added with `--ems`.                                                                   |
+| `compose.llm.yaml`      | the deployment            | The language model the Assistant uses, added with `--llm`.                                                                        |
 | `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                    |
 | `ein.Containerfile`     | the deployment            | EiN's image: core's image with the web interface built in.                                                                        |
 | `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, builds the images and starts them. |
@@ -84,7 +84,7 @@ EIN_DB_DIR=
 | `EIN_BIND`               | The address the ports are published on. `127.0.0.1` keeps them to the machine.                                                                                                                               | [Ports, HTTPS and remote access](../admin/network.md)                      |
 | `EIN_HTTP_PORT`          | The machine's port for the web interface.                                                                                                                                                                    | [Ports, HTTPS and remote access](../admin/network.md)                      |
 | `EIN_SSH_PORT`           | The machine's port for SSH and SFTP.                                                                                                                                                                         | [Ports, HTTPS and remote access](../admin/network.md)                      |
-| `CFG_LLM_…`              | A hosted language model in place of `--llm`, commented out until you use it.                                                                                                                                 | [The language model](../assistant/language-model.md)                       |
+| `CFG_LLM_…`              | The Assistant's settings for a hosted language model in place of `--llm`, commented out until you use it.                                                                                                    | [The language model](../assistant/language-model.md)                       |
 | `EIN_SOURCE`             | The organisation the sources are cloned from. `--source` sets it.                                                                                                                                            | [Installing in detail](../admin/install.md)                                |
 | `EIN_SOURCE_KEY`         | The token that reads the source's repositories when they are private.                                                                                                                                        | [Installing in detail](../admin/install.md)                                |
 | `EIN_DB_DIR`             | The database's folder; empty keeps it in the engine's volume `ein_db`. `--db-dir` sets it.                                                                                                                   | [Installing in detail](../admin/install.md)                                |
@@ -98,7 +98,7 @@ Lines you can add:
 | `EIN_MEMORY`, `EMS_MEMORY`, `LLM_MEMORY`                             | compose           | The most memory each container may use: `6g`, `16g` and `10g` unless set.          |
 | `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE`, `LLM_CARD_RESERVE_MB` | compose           | The language model's file, image and share of the card.                            |
 
-Four settings are fixed by `compose.yaml`, which wins over `.env`: `CFG_HTTP_PORT` (`8080`), `CFG_SSH_PORT` (`2222`), `CFG_EMS_URL` (`http://ems:8181`) and `CFG_EMS_KEY` (the value of `EMS_KEY`). A line for them in `.env` changes nothing. `CFG_LLM_URL` is read from `.env` and is `http://llm:8190` when the line is missing. With `--llm`, `compose.override.yaml` also sets `CFG_LLM_CARD` to `card` or `cpu` after `EIN_GPU`.
+Four settings are fixed by `compose.yaml`, which wins over `.env`: `CFG_HTTP_PORT` (`8080`), `CFG_SSH_PORT` (`2222`), and the `ems` module's `CFG_EMS_URL` (`http://ems:8181`) and `CFG_EMS_KEY` (the value of `EMS_KEY`). A line for them in `.env` changes nothing. The Assistant's `CFG_LLM_URL` is read from `.env` and is `http://llm:8190` when the line is missing. With `--llm`, `compose.override.yaml` also sets `CFG_LLM_CARD` to `card` or `cpu` after `EIN_GPU`.
 
 To apply a change to `.env`:
 
@@ -151,7 +151,7 @@ Under podman every service gets `restart: always`, the policy podman starts agai
 | `modules`        | `/modules-installed`                       | The modules EiN installed, which it sees in its tree at `/var/lib/modules`. |
 | `llm`            | not in EiN; the language model's `/models` | The downloaded model.                                                       |
 
-The media service mounts the same four file folders at the same paths, the originals read-only. [Files and storage](../concepts/files.md) explains how the tree's files map to these folders.
+The media service, when installed, mounts the same four file folders at the same paths, the originals read-only. [Files and storage](../concepts/files.md) explains how the tree's files map to these folders.
 
 ## Files in EiN's tree
 
@@ -176,9 +176,9 @@ These files are nodes in the tree, so they live in the database and survive a re
 | `~/.ssh/…`                    | you, `ssh-keygen`, `ssh`                        | the SSH server, `ssh`, `scp`, `mount` | `0700` |
 | `/etc/users/`, `/etc/groups/` | the account and group commands                  | every sign-in and access check        |        |
 | `/etc/services/`              | `service add`, `service enable`, `mod setup`    | `service start-all` at boot           |        |
-| `/etc/assistant-prompt.md`    | `mod setup`, once; then the administrator       | the assistant                         |        |
-| `/etc/assistant.d/<module>/`  | `mod setup`, as a link to the module's folder   | the assistant                         |        |
 | `/etc/files/`, `/etc/init/`   | boot                                            | boot                                  |        |
+| `/etc/assistant-prompt.md`    | `mod setup`, once; then the administrator       | the Assistant, when installed         |        |
+| `/etc/assistant.d/<module>/`  | `mod setup`, as a link to the module's folder   | the Assistant, when installed         |        |
 
 A blank mode is the default the folder gives a new file. `~` is your home, `/home/<your username>`.
 
@@ -198,7 +198,7 @@ export CFG_MODULE_SOURCES='https://github.com/einhq https://forge.example:3000/f
 | `/etc/config.d/<module>` | A module's own choice of values: a link to the module's `etc/config`, made by `mod setup` and removed with the module. The Archive's names `CFG_SEARCH_PARSER`, the assistant's `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, the media service's `CFG_TEXT_EMBEDDER`. |
 | `/etc/config`            | The administrator's values for system settings. Made by the first `config set`; until then it does not exist.                                                                                                                                                           |
 | `~/.config`              | One person's values for personal settings, the `CFG_USER_…` ones and `HISTSIZE`. Made by the first `config set` of that person.                                                                                                                                         |
-| `/etc/keys`              | The keys to other services saved on the Settings page or with `config set`: `CFG_EMS_KEY`, `CFG_LLM_KEY`, `CFG_MODULE_SOURCES_KEY`. Owned by `admin`, and sourced by no shell. A key from `.env` is never written to any file.                                          |
+| `/etc/keys`              | The keys to other services saved on the Settings page or with `config set`: `CFG_MODULE_SOURCES_KEY`, and with their modules `CFG_EMS_KEY` and `CFG_LLM_KEY`. Owned by `admin`, and sourced by no shell. A key from `.env` is never written to any file.                |
 
 `/etc/bashrc` sources the first four in that order, so the last one wins: a person's own value, then the administrator's, then a module's, then the deployment's. [How the layers combine](../admin/configuration.md#how-the-layers-combine) shows the whole order with the badges of the Settings page.
 
@@ -229,7 +229,7 @@ for f in /etc/config.d/*; do [ -r "$f" ] && source "$f"; done
 [ -n "$HOME" ] && [ -r "$HOME/.config" ] && source "$HOME/.config"
 ```
 
-Each other module with a `bin/` folder, such as the media service, has a `PATH` line of its own beside the Archive's.
+Each other module with a `bin/` folder, such as the `ems` module, has a `PATH` line of its own beside the Archive's.
 
 Boot and `mod setup` keep some lines in it, whatever else you change:
 
@@ -289,12 +289,16 @@ The files in `/etc/ui/nav.d` are links to the modules' files, and an update repl
 
 These are kept by commands, not edited as text:
 
-- `/etc/users/<name>` is an account, with its password in `.password` and a link to the person it is. `/etc/groups/<group>` is a group, with links to its members in `users`. [Accounts and groups](../admin/accounts.md) and the `user` and `group` commands change them; [Permissions in depth](../admin/permissions.md) gives their modes.
+- `/etc/users/<name>` is an account, with its password in `.password` and, with the Archive, a link to the person it is. `/etc/groups/<group>` is a group, with links to its members in `users`. [Accounts and groups](../admin/accounts.md) and the `user` and `group` commands change them; [Permissions in depth](../admin/permissions.md) gives their modes.
 - `/etc/services/available/<name>` is a link to a service's folder, which holds its `start.sh`, and `/etc/services/enabled/<name>` marks it to start at boot. A module's service that is a single script gets a folder of its own in `/etc/service-scripts/<name>`. Each service writes its output to `/var/logs/services/<name>/stdout.log` and `stderr.log`. [Services and logs](../admin/services-logs.md) explains the `service` commands.
+
+### Boot files
+
+`/etc/files` is the folder of boot scripts that ships with EiN, mounted read-only, and `/etc/init` holds a link to each script boot runs, in name order. They are EiN's own; to change what happens at start-up, use the settings, `/etc/fstab` or a service instead.
 
 ### The assistant's files
 
-With the assistant module installed:
+With the [Assistant](../assistant/index.md) installed:
 
 | File                                   | What it is                                                                                                                                             |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -306,10 +310,6 @@ With the assistant module installed:
 | `/etc/assistant.d/<module>/eval.json`  | The questions `agent-eval` asks to test the assistant.                                                                                                 |
 
 Each `/etc/assistant.d/<module>` is a link to the module's `etc/assistant.d`, so an update of the module replaces it; only `/etc/assistant-prompt.md` is yours to change. Because an update does not replace that file either, a new version of the assistant's own instructions does not reach an installation where it already exists. [Teaching the assistant](../assistant/teaching.md) describes these files for module authors.
-
-### Boot files
-
-`/etc/files` is the folder of boot scripts that ships with EiN, mounted read-only, and `/etc/init` holds a link to each script boot runs, in name order. They are EiN's own; to change what happens at start-up, use the settings, `/etc/fstab` or a service instead.
 
 ## What a module adds to /etc
 

@@ -390,7 +390,7 @@ of the **Until** date or of the first partner's death, and for 75 years at most.
 29 February appears only in leap years.
 
 Birthdays and memorials come from the people on the People page.
-[Home, memories and statistics](../guide/home.md) describes the panel itself, and the Statistics page with
+[Memories, news and events on Home](home.md) describes the panel itself, and the Statistics page with
 its charts of births, engagements, marriages and deaths by month.
 
 ## In the terminal

@@ -89,8 +89,8 @@
         <article class="prose">
 <p>This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the dashboard and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on <a href="install.html#run-ein-day-to-day">Installing in detail</a>.</p>
 <h2 id="what-a-service-is">What a service is<a class="anchor" href="#what-a-service-is" aria-label="Link to this section"></a></h2>
-<p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, the workers that process your media, and small loops that tidy up on a timer. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the media service (<code>ems</code>), the language model (<code>llm</code>) and the database (<code>db</code>) are containers beside EiN, and EiN watches the first two through services of its own, <code>ems-link</code> and <code>llm-link</code>.</p>
-<p>Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 21:</p>
+<p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive&#39;s workers that process your media. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (<code>db</code>), and the media service (<code>ems</code>) and the language model (<code>llm</code>) when they are installed, are containers beside EiN. The <code>ems</code> module and the Assistant watch the last two through services of their own, <code>ems-link</code> and <code>llm-link</code>.</p>
+<p>Core brings nine services, the first nine below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> module it brings along (<a href="../ems/index.html">The media service</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 21:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -215,12 +215,12 @@
 <figure class="shot"><a href="../../assets/shots/system-services@2x.webp"><img src="../../assets/shots/system-services.webp" srcset="../../assets/shots/system-services.webp 1x, ../../assets/shots/system-services@2x.webp 2x" alt="The System dashboard's Services tab: a card titled Services with &quot;20 healthy&quot; at its right, and one row per service with its name, its description, how long it has been up, a green RUNNING badge and buttons to restart and stop it" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per service, with the ones that need attention sorted to the top</figcaption></figure>
 <p>The card lists every service, one row each, and asks again every 10 seconds while the tab is open:</p>
 <ul>
-<li>The service&#39;s name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: <code>ems-link</code> shows what the media service holds, or <code>not answering</code>, and <code>llm-link</code> shows where the language model runs.</li>
+<li>The service&#39;s name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: with their modules installed, <code>ems-link</code> shows what the media service holds, or <code>not answering</code>, and <code>llm-link</code> shows where the language model runs.</li>
 <li>How long it has been up, such as <code>up 8h 50m</code>. Hover it for the time it started.</li>
 <li><code>×</code> and a number when EiN has restarted it since it was last started by hand. Hover it for &quot;Restarted 2 time(s)&quot;.</li>
 <li>A badge: <strong>running</strong>, <strong>starting</strong>, <strong>stopping</strong>, <strong>stopped</strong>, <strong>failed</strong>, or <strong>disabled</strong> for a service that is switched off.</li>
 </ul>
-<p>The heading counts them: <code>21 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. While <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code>, the stopped <code>models-second</code> is counted as down. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
+<p>The heading counts them: <code>21 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. With the Archive installed, its stopped <code>models-second</code> is counted as down while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code>. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
 <p><strong>Settings → Modules</strong> also shows a module&#39;s services and whether each runs, on the module&#39;s <strong>Services</strong> tab; the controls are here on the dashboard.</p>
 <h2 id="restart-stop-and-start-a-service">Restart, stop and start a service<a class="anchor" href="#restart-stop-and-start-a-service" aria-label="Link to this section"></a></h2>
 <p>On the <strong>Services</strong> tab, as the administrator or in <a href="../guide/interface.html#admin-mode">admin mode</a>, each row has buttons at its right:</p>
@@ -252,17 +252,17 @@
 <p>The row shows a spinner while the action runs and is read again as soon as it is done. If the action fails, a red line above the table names it and the reason, such as <code>stop cpu: …</code>.</p>
 <p>In the terminal the same actions are commands, which only an administrator may run:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-service-restart models
-service-stop label-models
-service-start label-models
+service-restart metrics-sampler
+service-stop trash-purger
+service-start trash-purger
 service-start-all      <span class="hljs-comment"># every enabled service that is not running</span></code></pre></div>
-<p><code>service restart models</code>, with a space, is the same command. Each answers with one line, such as <code>Restarted service &#39;models&#39;</code>.</p>
+<p><code>service restart metrics-sampler</code>, with a space, is the same command. Each answers with one line, such as <code>Restarted service &#39;metrics-sampler&#39;</code>.</p>
 <p>What happens when you stop a service:</p>
 <ul>
 <li>EiN sends the command the script is running a stop signal and waits for the script to end: 5 seconds by default, and up to 16 minutes for <code>pipeline-engine</code>, which lets the steps it runs finish. A script that has not ended by then is closed.</li>
-<li>Work the service would do waits. A media worker that is stopped leaves its jobs in the pool, and they run when it starts again; see <a href="processing.html">Processing and pipelines</a>.</li>
+<li>Work the service would do waits. A worker that is stopped, such as one of the Archive&#39;s media workers, leaves its jobs in the pool, and they run when it starts again; see <a href="processing.html">Processing and pipelines</a>.</li>
 <li>A stopped service stays stopped until you start it, or until EiN itself starts again, which starts every enabled service.</li>
-<li><code>ems-link</code> and <code>llm-link</code> add the media service&#39;s and the language model&#39;s checks to <a href="../reference/commands-core.html#health"><code>health</code></a>. While one is stopped, its checks are missing from the dashboard&#39;s verdict rather than failing.</li>
+<li>With their modules installed, <code>ems-link</code> and <code>llm-link</code> add the media service&#39;s and the language model&#39;s checks to <a href="../reference/commands-core.html#health"><code>health</code></a>. While one is stopped, its checks are missing from the dashboard&#39;s verdict rather than failing.</li>
 </ul>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>Stopping <code>http-server</code> takes the web interface away, the page you stopped it from included, and stopping <code>ssh-server</code> closes SSH and SFTP. Start them again from the other one (<code>service-start http-server</code> over SSH), or restart EiN&#39;s container: <code>podman compose restart ein</code> in <code>~/ein</code>. Restarting <code>http-server</code> from the dashboard drops the page&#39;s connection for a moment.</p>
@@ -275,6 +275,7 @@ service-start-all      <span class="hljs-comment"># every enabled service that i
 <p><a href="../reference/commands-core.html#service-list"><code>service-list</code></a> lists every service; anyone may run it.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 service-list --detail</code></pre></div>
+<p>On an EiN with the Archive and the <code>ems</code> module, it starts:</p>
 <div class="code"><pre tabindex="0"><code>NAME                 STATUS      ENABLED  RESTARTS DESCRIPTION
 -------------------- ----------- -------- -------- -----------
 album-metadata       running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
@@ -284,7 +285,7 @@ ems-link             running     yes      0        Watches the media service and
                      not answering
 …</code></pre></div>
 <p><code>--detail</code> asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without <code>--detail</code> the list is quicker. With <code>JSON_OUTPUT=1</code> it is JSON, with each service&#39;s start time.</p>
-<p><a href="../reference/commands-core.html#service-status"><code>service-status</code></a> shows one service, and where its output goes:</p>
+<p><a href="../reference/commands-core.html#service-status"><code>service-status</code></a> shows one service, and where its output goes, here the <code>ems</code> module&#39;s <code>ems-link</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 service-status ems-link</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Service: ems-link
@@ -368,7 +369,7 @@ dmesg --level error          <span class="hljs-comment"># every error since EiN 
 <div class="code"><pre tabindex="0"><code>2026-10-25 21:34:13 WARN  pool-worker      pooled step could not run yet, kind resting
 2026-10-25 21:35:02 INFO  service-registry Service 'label-models' started</code></pre></div>
 <p><code>--level</code> filters before <code>-n</code> counts, so <code>--level warn -n 10</code> is the last ten problems, not the problems among the last ten lines. The levels are <code>debug</code>, <code>info</code>, <code>warn</code> and <code>error</code>. Pipe it on as with any command: <code>dmesg | grep ssh-server</code>.</p>
-<p>For a service&#39;s output, use <a href="../reference/commands-core.html#tail"><code>tail</code></a>, which prints each line as the service wrote it:</p>
+<p>For a service&#39;s output, use <a href="../reference/commands-core.html#tail"><code>tail</code></a>, which prints each line as the service wrote it. The examples are the <code>ems</code> module&#39;s <code>ems-link</code> and the Archive&#39;s <code>models</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">tail</span> -n 50 /var/logs/services/ems-link/stdout.log
 <span class="hljs-built_in">tail</span> -f /var/logs/services/models/stderr.log      <span class="hljs-comment"># keep following; Ctrl+C ends it</span></code></pre></div>
@@ -380,9 +381,9 @@ ems-link: down — not answering</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose logs --<span class="hljs-built_in">tail</span> 200 ein     <span class="hljs-comment"># the last 200 lines</span>
 podman compose logs -f ein             <span class="hljs-comment"># follow; Ctrl+C ends it</span>
-podman compose logs ems                <span class="hljs-comment"># the media service: ems, llm or db for the others</span></code></pre></div>
+podman compose logs db                 <span class="hljs-comment"># the database: ems or llm for the others, when installed</span></code></pre></div>
 <p>With Docker, write <code>docker compose</code>. Each line reads <code>[2026-10-25 21:35:02] [INFO ] [service-registry] Service &#39;label-models&#39; started</code>, followed by any details the message carries. This is the log to read when EiN does not start, since the tree&#39;s logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, <code>Admin password set to: …</code>, which is gone once the container is made again, as after <code>podman compose down</code>.</p>
-<p>The media service, the language model and the database write only to their containers&#39; logs. <a href="../ems/index.html#on-the-machine">The media service</a> covers reading its log.</p>
+<p>The database, and the media service and the language model when installed, write only to their containers&#39; logs. <a href="../ems/index.html#on-the-machine">The media service</a> covers reading its log.</p>
 <h2 id="log-more-or-less">Log more, or less<a class="anchor" href="#log-more-or-less" aria-label="Link to this section"></a></h2>
 <p>How much EiN logs is set by two variables in <code>~/ein/.env</code>, read when the container starts:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -513,7 +514,7 @@ service-start disk-report</code></pre></div>
 <p><strong><code>service remove: &#39;x&#39; is running, stop it first</code></strong> or <strong><code>&#39;x&#39; is enabled, disable it first</code>.</strong> Stop it and disable it, then remove it.</p>
 <p><strong><code>service-restart: permission denied: only an administrator may run it</code>.</strong> Sign in as <code>admin</code>, or use <a href="../guide/interface.html#admin-mode">admin mode</a> (<code>admin</code> in the terminal). The dashboard shows the buttons only to the administrator.</p>
 <p><strong>A restart of <code>pipeline-engine</code> takes minutes.</strong> It waits for the steps it runs to finish, for up to 16 minutes, and its row shows a spinner meanwhile.</p>
-<p><strong><code>ems-link</code> says <code>not answering</code>.</strong> The media service&#39;s container is down or still starting; <code>ems-link</code> only reports it. <a href="../ems/index.html#when-something-goes-differently">The media service</a> has what to do.</p>
+<p><strong><code>ems-link</code> says <code>not answering</code>.</strong> With the <code>ems</code> module installed, this means the media service&#39;s container is down or still starting; <code>ems-link</code> only reports it. <a href="../ems/index.html#when-something-goes-differently">The media service</a> has what to do.</p>
 <p><strong>The system log starts only a little while ago.</strong> It is emptied each time EiN starts. Older lines, as far back as the container&#39;s life, are in the container&#39;s log: <code>podman compose logs ein</code>.</p>
 <p><strong>The Live log says &quot;Waiting for the stream&quot; or shows <code>connecting</code>.</strong> The page has lost its connection to EiN, for example while <code>http-server</code> restarts. It reconnects by itself; reload the page if it does not.</p>
 <p><strong>The web interface is gone after stopping <code>http-server</code>.</strong> Start it over SSH with <code>service-start http-server</code>, or restart the container with <code>podman compose restart ein</code>.</p>

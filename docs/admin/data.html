@@ -104,7 +104,7 @@
 <tbody><tr>
 <td>The database</td>
 <td>the volume <code>ein_db</code> in the container engine&#39;s storage, or the folder <code>EIN_DB_DIR</code> names</td>
-<td>every node of the tree: names, folders, albums, people, faces, links, permissions, accounts and settings, and small content such as comments and keys</td>
+<td>every node of the tree: names, folders, links, permissions, accounts and settings, the albums, people and faces of the Archive, and small content such as comments and keys</td>
 <td>Yes, as a dump</td>
 </tr>
 <tr>
@@ -116,7 +116,7 @@
 <tr>
 <td><code>old</code></td>
 <td>the data folder</td>
-<td>the files of an older installation that the importer reads; empty unless you put files there</td>
+<td>the files of an older installation that the <a href="../importer/index.html">Importer</a> reads; empty unless you put files there</td>
 <td>When it holds anything</td>
 </tr>
 <tr>
@@ -128,7 +128,7 @@
 <tr>
 <td><code>files-volatile</code></td>
 <td>the data folder</td>
-<td>thumbnails, video renditions, face crops and the other renditions EiN makes from the originals</td>
+<td>with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals</td>
 <td>Optional: EiN can make them again, but over a large archive that takes days and needs the <a href="../ems/index.html">media service</a></td>
 </tr>
 <tr>
@@ -140,7 +140,7 @@
 <tr>
 <td><code>llm</code></td>
 <td>the data folder</td>
-<td>the language model, downloaded at its first start</td>
+<td>with <code>--llm</code>, the language model, downloaded at its first start</td>
 <td>No; it is downloaded again</td>
 </tr>
 <tr>
@@ -159,7 +159,7 @@
 </div>
 <p><a href="install.html#the-data-folder">Installing in detail</a> shows how the folders are mounted into the containers.</p>
 <h3 id="why-the-database-and-the-files-belong-together">Why the database and the files belong together<a class="anchor" href="#why-the-database-and-the-files-belong-together" aria-label="Link to this section"></a></h3>
-<p>The <code>files</code> folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as <code>files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K</code>. Which album a file is in, what it is called, who may see it and whose face is in it are all in the database.</p>
+<p>The <code>files</code> folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as <code>files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K</code>. What a file is called, who may see it and, with the Archive, which album it is in and whose face is in it are all in the database.</p>
 <p>Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. Take both while EiN is stopped, and restore both together.</p>
 <p>The database password in <code>.env</code>, <code>POSTGRES_PASSWORD</code>, is kept nowhere else. The restore below does not need it, as it loads the dump into a fresh database, but containers made again from the existing <code>ein_db</code> volume cannot reach the database without it. Keep a copy of <code>.env</code> with every backup.</p>
 <h2 id="back-up-ein">Back up EiN<a class="anchor" href="#back-up-ein" aria-label="Link to this section"></a></h2>
@@ -232,7 +232,7 @@ podman compose up -d</code></pre></div>
 <li><p>Sign in with an account from your backup, and choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar: the <strong>Storage</strong> card shows the data folder and the database&#39;s size, and the badge above the title turns to <strong>Healthy</strong> once the work after the start is done. <a href="monitoring.html">Health and the dashboard</a> explains what you see.</p>
 </li>
 </ol>
-<p>If you left out <code>files-volatile</code>, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.</p>
+<p>With the Archive, if you left out <code>files-volatile</code>, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.</p>
 <h3 id="make-the-renditions-again">Make the renditions again<a class="anchor" href="#make-the-renditions-again" aria-label="Link to this section"></a></h3>
 <p>With the Archive installed, the <a href="../archive/commands.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, face crops included. After a restore without <code>files-volatile</code>, the database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
@@ -268,18 +268,19 @@ rsync -a ~/ein/data/ /srv/ein-data/</code></pre></div>
 podman compose up -d</code></pre></div>
 </li>
 </ol>
-<p>Check that pictures and thumbnails show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.</p>
+<p>Check that your files, and with the Archive their pictures and thumbnails, show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.</p>
 <p>The database is not in the data folder and does not move with it. It lives in the container engine&#39;s storage, under <code>~/.local/share/containers/storage</code> for rootless podman and <code>/var/lib/docker</code> for Docker, unless <code>EIN_DB_DIR</code> in <code>.env</code> names a folder for it. To put it on another disk, run <code>./setup.sh --db-dir /srv/ein-db</code> with an empty folder: while the database is still in the volume, <code>setup.sh</code> stops and prints the commands that copy it there first.</p>
 <h2 id="get-your-files-out-without-ein">Get your files out without EiN<a class="anchor" href="#get-your-files-out-without-ein" aria-label="Link to this section"></a></h2>
 <p>The data folder holds your files under ids, not names, so copying it gives you nothing you can browse. To get files out with their names and folders, take them out through EiN:</p>
 <ul>
-<li><strong>In the web interface</strong>, select pictures in an album or the grid and choose <strong>Download</strong> in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See <a href="../archive/albums.html#the-selection-bar">Albums</a>.</li>
+<li><strong>In the web interface</strong>, with the <a href="../archive/index.html">Archive</a> installed, select pictures in an album or the grid and choose <strong>Download</strong> in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See <a href="../archive/albums.html#the-selection-bar">Albums</a>.</li>
 <li><strong>Over SFTP</strong>, copy whole albums or the whole archive with <code>scp -r</code>, <code>sftp</code> or a graphical client, or mount EiN with <code>sshfs</code> and copy with <code>rsync</code> or a file manager. <a href="../shell/ssh-sftp.html#copy-files-with-sftp">SSH and SFTP</a> shows how.</li>
 <li><strong>From EiN&#39;s terminal</strong>, <a href="../reference/commands-core.html#scp"><code>scp -r</code></a> copies a folder to another machine, such as a NAS, if you are in the group <code>ssh</code>. <a href="../shell/remote.html">Reaching other machines</a> covers keys and addresses.</li>
 </ul>
+<p>This copies one of the Archive&#39;s albums:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 scp -P 2222 -r <span class="hljs-string">&quot;helen@ein.local:/archive/albums/Summer 1987&quot;</span> ~/Pictures/</code></pre></div>
-<p>Such a copy holds the original files, as they were added. What EiN worked out or was told about them, such as faces, people, places, descriptions and album membership, stays in EiN: an album&#39;s pictures are links to the files, and what belongs to a photo is in a hidden folder beside it, which a recursive copy leaves out. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">What the tree looks like over SFTP</a> explains both. A copy like this is a way to take your pictures elsewhere, not a backup of EiN.</p>
+<p>Such a copy holds the original files, as they were added. What EiN worked out or was told about them, such as the Archive&#39;s faces, people, places, descriptions and album membership, stays in EiN: an album&#39;s pictures are links to the files, and what belongs to a photo is in a hidden folder beside it, which a recursive copy leaves out. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">What the tree looks like over SFTP</a> explains both. A copy like this is a way to take your pictures elsewhere, not a backup of EiN.</p>
 <h2 id="see-what-takes-room">See what takes room<a class="anchor" href="#see-what-takes-room" aria-label="Link to this section"></a></h2>
 <p>In EiN&#39;s terminal, <a href="../reference/commands-core.html#df"><code>df</code></a> shows each part of the data folder, how full its disk is, how fast it grows and when it fills, and the database&#39;s size; the <strong>Storage</strong> card on the dashboard shows the same.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -288,7 +289,7 @@ scp -P 2222 -r <span class="hljs-string">&quot;helen@ein.local:/archive/albums/S
 tier    volatile   41% used  1.1 TB free  full in ~212d
 tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB</code></pre></div>
-<p><code>disk</code> is <code>files</code>, <code>volatile</code> is <code>files-volatile</code> and <code>tmp</code> is <code>files-tmp</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive/albums</code>.</p>
+<p><code>disk</code> is <code>files</code>, <code>volatile</code> is <code>files-volatile</code> and <code>tmp</code> is <code>files-tmp</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive</code>.</p>
 <p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update builds new images and removes the ones they replaced; <code>podman image prune</code> removes other images without a name that nothing uses any more.</p>
 <h2 id="delete-things-and-free-space">Delete things and free space<a class="anchor" href="#delete-things-and-free-space" aria-label="Link to this section"></a></h2>
 <p>What you delete in the web interface goes to the deleter&#39;s trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a> (<strong>Days in the trash</strong>, under <strong>Settings → System</strong>). Only then does EiN remove the files from the data folder. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> explains the trash, and which ways of deleting skip it.</p>
@@ -304,7 +305,7 @@ trash empty --all</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td>Pictures, albums, people and the like</td>
+<td>Files and folders, and the Archive&#39;s pictures, albums, people and the like</td>
 <td>Delete them in the web interface, then empty the trash; see <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a>.</td>
 </tr>
 <tr>
@@ -321,7 +322,7 @@ trash empty --all</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>Deleting an account does not delete the pictures it owned in the archive: they pass to the account you choose. To remove them, delete them before or after.</p>
+<p>Deleting an account does not delete what it owned, such as pictures in the Archive: it passes to the account you choose. To remove them, delete them before or after.</p>
 <h2 id="remove-ein">Remove EiN<a class="anchor" href="#remove-ein" aria-label="Link to this section"></a></h2>
 <p>There is no uninstall script. Removing EiN and everything in it takes these steps; back up first if there is anything you want to keep.</p>
 <ol>
@@ -369,7 +370,7 @@ loginctl disable-linger</code></pre></div>
 <td>The database image does not carry the TimescaleDB version the dump was made with; see <a href="#move-ein-to-another-machine">Move EiN to another machine</a>.</td>
 </tr>
 <tr>
-<td>After a restore, pictures show without thumbnails</td>
+<td>With the Archive, after a restore, pictures show without thumbnails</td>
 <td>The renditions were not restored. <a href="#make-the-renditions-again">Make the renditions again</a>.</td>
 </tr>
 <tr>

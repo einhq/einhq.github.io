@@ -1,9 +1,25 @@
 # The media service
 
-The media service, EMS, is the container that holds every media tool and model EiN uses: it reads
-metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and
-makes pictures searchable. This page is for the administrator who installs it, watches it and
-tunes it.
+The media service, EMS, holds every media tool and model the Archive uses: it reads metadata, makes
+thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures
+searchable. This section applies once the [Archive](../archive/index.md) is installed, and this page
+is for the administrator who installs the media service, watches it and tunes it.
+
+## Two parts
+
+The media service comes in two parts, installed in different ways:
+
+- **The `ems` module**, EiN's side of it: the client the Archive calls the media service through,
+  its health on the **Dashboard**, with the **Media service** tab and the graphics card's readings,
+  and `ems-text-embed`, which turns text into vectors so that things can be found by meaning.
+  Installing the `archive` module installs the `ems` module with it ([Modules](../admin/modules.md)).
+- **The media service itself**, the `ems` container that runs beside EiN. The installer's `--ems`
+  adds it ([Add the media service](#add-the-media-service)); the module does not.
+
+The Archive needs both: without them, nothing it takes in gets thumbnails, dates, faces or
+searchable text. Without the Archive they have nothing to do. The one other use of them is the
+assistant's command search, which with their text vectors finds commands by meaning
+([Find the command you need](../shell/terminal.md#find-the-command-you-need)).
 
 ## What the media service does
 
@@ -24,18 +40,13 @@ else.
 | Fingerprints and copy detection                     | [Duplicates](../archive/duplicates.md)                           |
 | Shot boundaries                                     | Chapters in a video                                              |
 
-The [Archive](../admin/modules.md) needs it: installing the `archive` module installs the `ems` module with
-it, which is EiN's side of the media service. The `ems` module is the client, the health checks,
-the **Media service** tab on the dashboard and the GPU readings; the media service itself is a
-separate container that the module does not install.
-
 The media service generates no text. The chat belongs to the assistant's
 [language model](../assistant/language-model.md), and no processing step depends on it.
 
 ## What happens without it
 
-Without the media service, EiN still takes in, keeps and shares what you upload, but nothing new is
-read:
+With the Archive installed and no media service, EiN still takes in, keeps and shares what you
+upload, but nothing new is read:
 
 - Uploads wait in staging as **being prepared**.
 - New files get no metadata, thumbnails, faces, transcripts or search vectors.
@@ -55,6 +66,9 @@ The installer adds it with `--ems`, at the first install or any time after:
    # on the machine EiN runs on, in ~/ein
    ./setup.sh --ems
    ```
+
+   With the Archive not installed yet, add it in the same run: `./setup.sh --ems --module archive`
+   installs the media service, and the Archive with the `ems` module at EiN's start.
 
 2. Wait for the build. The first time, `setup.sh` prints
    `== Building the images (the media service the first time: about 30 GB)`: the image carries
@@ -284,7 +298,7 @@ with `config set`:
 
 For the languages of a family archive, prefer `EMS_WHISPER_LANGUAGES` in `.env` to
 `CFG_WHISPER_LANGUAGE`: the first biases detection, so a holiday clip in English is still
-transcribed as English; the second forces one language on everything. [Processing and pipelines](../admin/processing.md) explains `CFG_MODEL_SLOTS` and the other slots.
+transcribed as English; the second forces one language on everything. [Processing pictures](../archive/processing.md#how-much-runs-at-once) explains `CFG_MODEL_SLOTS` and the other slots.
 
 ## When the media service restarts
 
@@ -347,6 +361,7 @@ it in a folder beside its own storage, not in `/tmp`. Free space there and run `
 
 ## Related pages
 
+- [The Archive](../archive/index.md)
 - [The graphics card](gpu.md)
 - [Installing in detail](../admin/install.md)
 - [Configuration](../admin/configuration.md)

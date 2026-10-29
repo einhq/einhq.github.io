@@ -35,7 +35,7 @@ The number on a card counts the faces and voices of that person in the library, 
 
 When nobody has been named yet, the page says **No people yet** and "Face recognition finds people in the pictures; name them under Unidentified, or add someone here." with a **New person** button.
 
-You can also find a person from the search box in the top bar, or with `@` and their name on the Search, Media, Year and Map pages; see [Search and the finder](../guide/search.md).
+You can also find a person from the search box in the top bar, or with `@` and their name on the Search, Media, Year and Map pages; see [Search and the finder](search.md).
 
 ## Name the people recognition found
 

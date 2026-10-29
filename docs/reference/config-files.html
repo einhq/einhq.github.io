@@ -117,12 +117,12 @@
 <tr>
 <td><code>compose.ems.yaml</code></td>
 <td>the deployment</td>
-<td>The media service, added with <code>--ems</code>.</td>
+<td>The media service, which the Archive needs, added with <code>--ems</code>.</td>
 </tr>
 <tr>
 <td><code>compose.llm.yaml</code></td>
 <td>the deployment</td>
-<td>The assistant&#39;s language model, added with <code>--llm</code>.</td>
+<td>The language model the Assistant uses, added with <code>--llm</code>.</td>
 </tr>
 <tr>
 <td><code>compose.override.yaml</code></td>
@@ -266,7 +266,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>
-<td>A hosted language model in place of <code>--llm</code>, commented out until you use it.</td>
+<td>The Assistant&#39;s settings for a hosted language model in place of <code>--llm</code>, commented out until you use it.</td>
 <td><a href="../assistant/language-model.html">The language model</a></td>
 </tr>
 <tr>
@@ -317,7 +317,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>Four settings are fixed by <code>compose.yaml</code>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code> (<code>8080</code>), <code>CFG_SSH_PORT</code> (<code>2222</code>), <code>CFG_EMS_URL</code> (<code>http://ems:8181</code>) and <code>CFG_EMS_KEY</code> (the value of <code>EMS_KEY</code>). A line for them in <code>.env</code> changes nothing. <code>CFG_LLM_URL</code> is read from <code>.env</code> and is <code>http://llm:8190</code> when the line is missing. With <code>--llm</code>, <code>compose.override.yaml</code> also sets <code>CFG_LLM_CARD</code> to <code>card</code> or <code>cpu</code> after <code>EIN_GPU</code>.</p>
+<p>Four settings are fixed by <code>compose.yaml</code>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code> (<code>8080</code>), <code>CFG_SSH_PORT</code> (<code>2222</code>), and the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> (<code>http://ems:8181</code>) and <code>CFG_EMS_KEY</code> (the value of <code>EMS_KEY</code>). A line for them in <code>.env</code> changes nothing. The Assistant&#39;s <code>CFG_LLM_URL</code> is read from <code>.env</code> and is <code>http://llm:8190</code> when the line is missing. With <code>--llm</code>, <code>compose.override.yaml</code> also sets <code>CFG_LLM_CARD</code> to <code>card</code> or <code>cpu</code> after <code>EIN_GPU</code>.</p>
 <p>To apply a change to <code>.env</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
@@ -387,7 +387,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tr>
 </tbody></table>
 </div>
-<p>The media service mounts the same four file folders at the same paths, the originals read-only. <a href="../concepts/files.html">Files and storage</a> explains how the tree&#39;s files map to these folders.</p>
+<p>The media service, when installed, mounts the same four file folders at the same paths, the originals read-only. <a href="../concepts/files.html">Files and storage</a> explains how the tree&#39;s files map to these folders.</p>
 <h2 id="files-in-eins-tree">Files in EiN&#39;s tree<a class="anchor" href="#files-in-eins-tree" aria-label="Link to this section"></a></h2>
 <p>These files are nodes in the tree, so they live in the database and survive a restart, an update and a new container. Read them in EiN&#39;s terminal with <code>cat</code>, and change them with <a href="../shell/editor.html"><code>edit</code></a> or the code editor on the <strong>Nodes</strong> page, as far as your rights allow.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -502,21 +502,21 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td></td>
 </tr>
 <tr>
+<td><code>/etc/files/</code>, <code>/etc/init/</code></td>
+<td>boot</td>
+<td>boot</td>
+<td></td>
+</tr>
+<tr>
 <td><code>/etc/assistant-prompt.md</code></td>
 <td><code>mod setup</code>, once; then the administrator</td>
-<td>the assistant</td>
+<td>the Assistant, when installed</td>
 <td></td>
 </tr>
 <tr>
 <td><code>/etc/assistant.d/&lt;module&gt;/</code></td>
 <td><code>mod setup</code>, as a link to the module&#39;s folder</td>
-<td>the assistant</td>
-<td></td>
-</tr>
-<tr>
-<td><code>/etc/files/</code>, <code>/etc/init/</code></td>
-<td>boot</td>
-<td>boot</td>
+<td>the Assistant, when installed</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -552,7 +552,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tr>
 <tr>
 <td><code>/etc/keys</code></td>
-<td>The keys to other services saved on the Settings page or with <code>config set</code>: <code>CFG_EMS_KEY</code>, <code>CFG_LLM_KEY</code>, <code>CFG_MODULE_SOURCES_KEY</code>. Owned by <code>admin</code>, and sourced by no shell. A key from <code>.env</code> is never written to any file.</td>
+<td>The keys to other services saved on the Settings page or with <code>config set</code>: <code>CFG_MODULE_SOURCES_KEY</code>, and with their modules <code>CFG_EMS_KEY</code> and <code>CFG_LLM_KEY</code>. Owned by <code>admin</code>, and sourced by no shell. A key from <code>.env</code> is never written to any file.</td>
 </tr>
 </tbody></table>
 </div>
@@ -578,7 +578,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> /etc/config.d/*; <span class="hljs-keyword">do</span> [ -r <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> ] &amp;&amp; <span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>; <span class="hljs-keyword">done</span>
 [ -r /etc/config ] &amp;&amp; <span class="hljs-built_in">source</span> /etc/config
 [ -n <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>&quot;</span> ] &amp;&amp; [ -r <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.config&quot;</span> ] &amp;&amp; <span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.config&quot;</span></code></pre></div>
-<p>Each other module with a <code>bin/</code> folder, such as the media service, has a <code>PATH</code> line of its own beside the Archive&#39;s.</p>
+<p>Each other module with a <code>bin/</code> folder, such as the <code>ems</code> module, has a <code>PATH</code> line of its own beside the Archive&#39;s.</p>
 <p>Boot and <code>mod setup</code> keep some lines in it, whatever else you change:</p>
 <ul>
 <li><code>mod setup</code> adds a <code>PATH</code> line for each module that has a <code>bin/</code> folder, once.</li>
@@ -676,11 +676,13 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <h3 id="accounts-groups-and-services">Accounts, groups and services<a class="anchor" href="#accounts-groups-and-services" aria-label="Link to this section"></a></h3>
 <p>These are kept by commands, not edited as text:</p>
 <ul>
-<li><code>/etc/users/&lt;name&gt;</code> is an account, with its password in <code>.password</code> and a link to the person it is. <code>/etc/groups/&lt;group&gt;</code> is a group, with links to its members in <code>users</code>. <a href="../admin/accounts.html">Accounts and groups</a> and the <code>user</code> and <code>group</code> commands change them; <a href="../admin/permissions.html">Permissions in depth</a> gives their modes.</li>
+<li><code>/etc/users/&lt;name&gt;</code> is an account, with its password in <code>.password</code> and, with the Archive, a link to the person it is. <code>/etc/groups/&lt;group&gt;</code> is a group, with links to its members in <code>users</code>. <a href="../admin/accounts.html">Accounts and groups</a> and the <code>user</code> and <code>group</code> commands change them; <a href="../admin/permissions.html">Permissions in depth</a> gives their modes.</li>
 <li><code>/etc/services/available/&lt;name&gt;</code> is a link to a service&#39;s folder, which holds its <code>start.sh</code>, and <code>/etc/services/enabled/&lt;name&gt;</code> marks it to start at boot. A module&#39;s service that is a single script gets a folder of its own in <code>/etc/service-scripts/&lt;name&gt;</code>. Each service writes its output to <code>/var/logs/services/&lt;name&gt;/stdout.log</code> and <code>stderr.log</code>. <a href="../admin/services-logs.html">Services and logs</a> explains the <code>service</code> commands.</li>
 </ul>
+<h3 id="boot-files">Boot files<a class="anchor" href="#boot-files" aria-label="Link to this section"></a></h3>
+<p><code>/etc/files</code> is the folder of boot scripts that ships with EiN, mounted read-only, and <code>/etc/init</code> holds a link to each script boot runs, in name order. They are EiN&#39;s own; to change what happens at start-up, use the settings, <code>/etc/fstab</code> or a service instead.</p>
 <h3 id="the-assistants-files">The assistant&#39;s files<a class="anchor" href="#the-assistants-files" aria-label="Link to this section"></a></h3>
-<p>With the assistant module installed:</p>
+<p>With the <a href="../assistant/index.html">Assistant</a> installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -715,8 +717,6 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tbody></table>
 </div>
 <p>Each <code>/etc/assistant.d/&lt;module&gt;</code> is a link to the module&#39;s <code>etc/assistant.d</code>, so an update of the module replaces it; only <code>/etc/assistant-prompt.md</code> is yours to change. Because an update does not replace that file either, a new version of the assistant&#39;s own instructions does not reach an installation where it already exists. <a href="../assistant/teaching.html">Teaching the assistant</a> describes these files for module authors.</p>
-<h3 id="boot-files">Boot files<a class="anchor" href="#boot-files" aria-label="Link to this section"></a></h3>
-<p><code>/etc/files</code> is the folder of boot scripts that ships with EiN, mounted read-only, and <code>/etc/init</code> holds a link to each script boot runs, in name order. They are EiN&#39;s own; to change what happens at start-up, use the settings, <code>/etc/fstab</code> or a service instead.</p>
 <h2 id="what-a-module-adds-to-etc">What a module adds to /etc<a class="anchor" href="#what-a-module-adds-to-etc" aria-label="Link to this section"></a></h2>
 <p>When a module is set up, at every start and after <code>mod install</code>, <code>mod setup</code> puts the module&#39;s files in place:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -816,7 +816,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/config-files.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-installation-folder">The installation folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li><a href="#files-in-eins-tree">Files in EiN's tree</a></li><li class="nested"><a href="#the-settings-files">The settings files</a></li><li class="nested"><a href="#etcbashrc-and-etclayout">/etc/bashrc and /etc/layout</a></li><li class="nested"><a href="#your-shell-files">Your shell files</a></li><li class="nested"><a href="#the-navigation-files">The navigation files</a></li><li class="nested"><a href="#etcfstab">/etc/fstab</a></li><li class="nested"><a href="#the-ssh-files">The SSH files</a></li><li class="nested"><a href="#accounts-groups-and-services">Accounts, groups and services</a></li><li class="nested"><a href="#the-assistants-files">The assistant's files</a></li><li class="nested"><a href="#boot-files">Boot files</a></li><li><a href="#what-a-module-adds-to-etc">What a module adds to /etc</a></li><li><a href="#back-up-and-restore">Back up and restore</a></li><li><a href="#when-a-file-does-not-do-what-you-expect">When a file does not do what you expect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-installation-folder">The installation folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li><a href="#files-in-eins-tree">Files in EiN's tree</a></li><li class="nested"><a href="#the-settings-files">The settings files</a></li><li class="nested"><a href="#etcbashrc-and-etclayout">/etc/bashrc and /etc/layout</a></li><li class="nested"><a href="#your-shell-files">Your shell files</a></li><li class="nested"><a href="#the-navigation-files">The navigation files</a></li><li class="nested"><a href="#etcfstab">/etc/fstab</a></li><li class="nested"><a href="#the-ssh-files">The SSH files</a></li><li class="nested"><a href="#accounts-groups-and-services">Accounts, groups and services</a></li><li class="nested"><a href="#boot-files">Boot files</a></li><li class="nested"><a href="#the-assistants-files">The assistant's files</a></li><li><a href="#what-a-module-adds-to-etc">What a module adds to /etc</a></li><li><a href="#back-up-and-restore">Back up and restore</a></li><li><a href="#when-a-file-does-not-do-what-you-expect">When a file does not do what you expect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

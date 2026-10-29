@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Teaching the assistant – EiN documentation</title>
-    <meta name="description" content="The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told.">
+    <meta name="description" content="The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told. It applies once the Assistant module is installed.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/assistant/teaching.html">
     <meta property="og:title" content="Teaching the assistant – EiN documentation">
-    <meta property="og:description" content="The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told.">
+    <meta property="og:description" content="The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told. It applies once the Assistant module is installed.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,7 +87,7 @@
           <h1>Teaching the assistant</h1>
         </header>
         <article class="prose">
-<p>The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told.</p>
+<p>The assistant knows no module by name: everything it can do with your module, it learns from a few files your module ships. This page is for module developers who want the chat to answer questions about their part, and for administrators who want to change what the assistant is told. It applies once the <a href="index.html">Assistant</a> module is installed.</p>
 <p>What the chat looks like to the people who use it is in <a href="chat.html">Chatting with the assistant</a>. Where the language model runs and how to point EiN at another one is in <a href="language-model.html">The language model</a>.</p>
 <h2 id="how-the-assistant-learns-about-a-module">How the assistant learns about a module<a class="anchor" href="#how-the-assistant-learns-about-a-module" aria-label="Link to this section"></a></h2>
 <p>Each turn of the chat is a short loop. The language model is given a system message and a list of tools, calls one tool at a time, reads what the command printed, and finally answers with a tool called <code>final_answer</code>. At most 12 tool calls are made before the model must answer.</p>

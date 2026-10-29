@@ -92,6 +92,9 @@ softlinks and hard links, where EiN makes them for you, and what moving, deletin
 to them. It is for anyone who works in the <a href="../shell/terminal.html">terminal</a>, over
 <a href="../shell/ssh-sftp.html">SFTP</a> or in the <strong>Nodes</strong> explorer, and wants to know why things in the tree
 are where they are.</p>
+<p>Links are core&#39;s. The examples use folders such as <code>/archive/albums</code> and <code>/archive/people</code>, which
+exist with the <a href="../archive/index.html">Archive</a> installed, and the Archive makes many of the links you
+meet.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>A <em>share link</em>, the address you send to someone without an account, is a different thing.
 <a href="../guide/sharing.html#share-an-album-with-a-link">Sharing</a> covers it.</p>
@@ -157,6 +160,28 @@ from the start.</p>
 </tr>
 </thead>
 <tbody><tr>
+<td>Put a label on something (<a href="../archive/media.html#labels">Labels</a>)</td>
+<td>A link in <code>/archive/tags/&lt;label&gt;/</code> to what carries it</td>
+</tr>
+<tr>
+<td>Heart a picture (<a href="../guide/profile.html#favourites">Favourites</a>)</td>
+<td>A link in <code>/home/&lt;you&gt;/stars/</code> to the picture</td>
+</tr>
+<tr>
+<td>Put someone in a group (<a href="../admin/accounts.html">Accounts and groups</a>)</td>
+<td>A link in <code>/etc/groups/&lt;group&gt;/users/</code>, named after the account, to <code>/etc/users/&lt;account&gt;</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>With the <a href="../archive/index.html">Archive</a> installed, its pages and commands make these too:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you do</th>
+<th>The link it makes</th>
+</tr>
+</thead>
+<tbody><tr>
 <td>Add a picture to an album from elsewhere (<a href="../archive/albums.html#add-pictures-that-are-already-in-ein">Albums</a>)</td>
 <td>A link in the album, named after the picture, to where the picture lives</td>
 </tr>
@@ -167,14 +192,6 @@ from the start.</p>
 <tr>
 <td>Set an album&#39;s <strong>Previous album</strong> or <strong>Next album</strong></td>
 <td><code>previous</code> and <code>next</code> in the album, and the matching one back in the other album</td>
-</tr>
-<tr>
-<td>Put a label on something (<a href="../archive/media.html#labels">Labels</a>)</td>
-<td>A link in <code>/archive/tags/&lt;label&gt;/</code> to what carries it</td>
-</tr>
-<tr>
-<td>Heart a picture (<a href="../guide/profile.html#favourites">Favourites</a>)</td>
-<td>A link in <code>/home/&lt;you&gt;/stars/</code> to the picture</td>
 </tr>
 <tr>
 <td>Add a parent, partner or child (<a href="../archive/family.html">Family tree</a>)</td>
@@ -192,13 +209,9 @@ from the start.</p>
 <td>Choose <strong>Written by</strong> on an event (<a href="../archive/albums.html#add-a-note-to-a-day">Albums</a>)</td>
 <td><code>writer</code> in the event, to the person</td>
 </tr>
-<tr>
-<td>Put someone in a group (<a href="../admin/accounts.html">Accounts and groups</a>)</td>
-<td>A link in <code>/etc/groups/&lt;group&gt;/users/</code>, named after the account, to <code>/etc/users/&lt;account&gt;</code></td>
-</tr>
 </tbody></table>
 </div>
-<p>The picture is never copied. One photo in five albums is one node with five links to it, so a date,
+<p>A linked picture is never copied. With the Archive, one photo in five albums is one node with five links to it, so a date,
 a place, a face or a label given to it shows in all five.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 488" role="img" aria-label="One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link">
   <title>One photo, many links</title>
@@ -264,12 +277,13 @@ a place, a face or a label given to it shows in all five.</p>
     fill="#7d8697">Dashed: a softlink, which holds only the photo's path</text>
 </svg><figcaption>One picture, many places: everything that points at it is a softlink, and the picture itself lives in one folder.</figcaption></figure>
 <h3 id="pairs-of-links">Pairs of links<a class="anchor" href="#pairs-of-links" aria-label="Link to this section"></a></h3>
-<p>How two people are related, and who lived where, is kept as a pair of softlinks, one on each side.
-Each half knows where the other half is, so the two stay together:</p>
+<p>A pair of softlinks, one on each side, ties two nodes together; with the Archive, that is how two
+people are related and who lived where. Each half knows where the other half is, so the two stay
+together:</p>
 <ul>
-<li>Removing a relation with the web interface, <code>person-remove</code> or <code>unrelate</code> removes both halves.</li>
+<li>Removing a relation with <code>unrelate</code>, or with the Archive&#39;s pages and <code>person-remove</code>, removes both halves.</li>
 <li>When one side is deleted for good, the <code>relations-guard</code> service removes the other half.</li>
-<li>When a person is moved, or merged into another with <code>person-merge</code>, the pairs follow.</li>
+<li>With the Archive, when a person is moved, or merged into another with <code>person-merge</code>, the pairs follow.</li>
 </ul>
 <p>You can make a pair of your own between any two nodes with <code>relate</code>. It puts the links in a
 <code>relations/</code> folder of each node, named <code>&lt;label&gt;-&lt;name of the other&gt;</code>:</p>
@@ -374,11 +388,11 @@ label lives on the node that carries it, and searches read it there, so the link
 <td><code>relate</code>, <code>unrelate</code></td>
 </tr>
 <tr>
-<td>Family ties and homes</td>
+<td>Family ties and homes, with the Archive</td>
 <td>the <code>person-…</code> commands in <a href="../archive/family.html#in-the-terminal">Family tree, events and homes</a></td>
 </tr>
 <tr>
-<td>An album&#39;s cover</td>
+<td>An album&#39;s cover, with the Archive</td>
 <td><code>album set &lt;album&gt; cover &lt;picture&gt;</code></td>
 </tr>
 <tr>
@@ -389,10 +403,10 @@ label lives on the node that carries it, and searches read it there, so the link
 </div>
 <h2 id="moving-keeps-softlinks-pointing-right">Moving keeps softlinks pointing right<a class="anchor" href="#moving-keeps-softlinks-pointing-right" aria-label="Link to this section"></a></h2>
 <p>When a node moves, every softlink that points at it, or at anything under it, is re-pointed to the
-new path in the same step. An album can therefore be moved without losing its cover, its labels,
+new path in the same step. With the Archive, an album can therefore be moved without losing its cover, its labels,
 its place in other albums or anyone&#39;s favourites. This holds for <code>mv</code>, for <strong>Rename</strong> and
-<strong>Paste</strong> in the <strong>Nodes</strong> explorer, and for filing pictures from staging into an album. Merging
-people or duplicates moves the links to the one that is kept.</p>
+<strong>Paste</strong> in the <strong>Nodes</strong> explorer, and, with the Archive, for filing pictures from staging into an
+album. Merging people or duplicates moves the links to the one that is kept.</p>
 <p>Two kinds of softlink are not re-pointed:</p>
 <ul>
 <li>one with a <strong>relative</strong> target, which keeps its text as it was;</li>
@@ -401,7 +415,7 @@ people or duplicates moves the links to the one that is kept.</p>
 <p>One <code>mv</code> re-points at most 100,000 links. A move that more links point into is refused with
 <code>more than 100000 links point into the moved paths; move fewer at a time</code>.</p>
 <p><code>mv</code> says nothing about the links on success. Run as <code>JSON_OUTPUT=1 mv …</code>, its answer counts them in <code>relinked</code>.</p>
-<p>Renaming an album in <strong>Edit album</strong> changes only its name on the page; its folder keeps its first
+<p>With the Archive, renaming an album in <strong>Edit album</strong> changes only its name on the page; its folder keeps its first
 name, so no link needs to change.</p>
 <h2 id="deleting-the-trash-and-links">Deleting, the trash and links<a class="anchor" href="#deleting-the-trash-and-links" aria-label="Link to this section"></a></h2>
 <p>What happens to links depends on how a node goes. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> lists which actions use the trash.</p>
@@ -414,7 +428,7 @@ name, so no link needs to change.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td>Remove a picture from an album (<strong>Remove</strong>)</td>
+<td>With the Archive, remove a picture from an album (<strong>Remove</strong>)</td>
 <td>That album&#39;s link goes</td>
 <td>Others are left alone; the picture stays where it lives</td>
 </tr>
@@ -470,7 +484,7 @@ reachable by its other name.</p>
 <tr>
 <td>The other half of a family tie is missing</td>
 <td>One half was removed while <code>relations-guard</code> was not running</td>
-<td><code>person-check /archive/people</code> reports broken ties; remove the tie and add it again</td>
+<td>With the Archive, <code>person-check /archive/people</code> reports broken ties; remove the tie and add it again</td>
 </tr>
 <tr>
 <td>Labels or relation halves stay after something is deleted for good</td>

@@ -6,6 +6,10 @@ to them. It is for anyone who works in the [terminal](../shell/terminal.md), ove
 [SFTP](../shell/ssh-sftp.md) or in the **Nodes** explorer, and wants to know why things in the tree
 are where they are.
 
+Links are core's. The examples use folders such as `/archive/albums` and `/archive/people`, which
+exist with the [Archive](../archive/index.md) installed, and the Archive makes many of the links you
+meet.
+
 > [!NOTE]
 > A _share link_, the address you send to someone without an account, is a different thing.
 > [Sharing](../guide/sharing.md#share-an-album-with-a-link) covers it.
@@ -43,32 +47,38 @@ from the start.
 
 You make most links without typing `ln`: a button in the web interface or a command writes them.
 
+| What you do                                                          | The link it makes                                                                          |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Put a label on something ([Labels](../archive/media.md#labels))      | A link in `/archive/tags/<label>/` to what carries it                                      |
+| Heart a picture ([Favourites](../guide/profile.md#favourites))       | A link in `/home/<you>/stars/` to the picture                                              |
+| Put someone in a group ([Accounts and groups](../admin/accounts.md)) | A link in `/etc/groups/<group>/users/`, named after the account, to `/etc/users/<account>` |
+
+With the [Archive](../archive/index.md) installed, its pages and commands make these too:
+
 | What you do                                                                                                    | The link it makes                                                                           |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Add a picture to an album from elsewhere ([Albums](../archive/albums.md#add-pictures-that-are-already-in-ein)) | A link in the album, named after the picture, to where the picture lives                    |
 | Choose an album's, person's, location's or device's cover                                                      | `coverPhoto` in it, to the picture                                                          |
 | Set an album's **Previous album** or **Next album**                                                            | `previous` and `next` in the album, and the matching one back in the other album            |
-| Put a label on something ([Labels](../archive/media.md#labels))                                                | A link in `/archive/tags/<label>/` to what carries it                                       |
-| Heart a picture ([Favourites](../guide/profile.md#favourites))                                                 | A link in `/home/<you>/stars/` to the picture                                               |
 | Add a parent, partner or child ([Family tree](../archive/family.md))                                           | A pair: one in `parents/`, `children/` or `partners/` of each person, pointing at the other |
 | Add a home or a resident                                                                                       | A pair: one in the person's `homes/`, one in the location's `residents/`                    |
 | Link a picture to a location ([Locations](../archive/places.md#how-pictures-join-a-location))                  | `location` in the picture, to the location                                                  |
 | Choose **Written by** on an event ([Albums](../archive/albums.md#add-a-note-to-a-day))                         | `writer` in the event, to the person                                                        |
-| Put someone in a group ([Accounts and groups](../admin/accounts.md))                                           | A link in `/etc/groups/<group>/users/`, named after the account, to `/etc/users/<account>`  |
 
-The picture is never copied. One photo in five albums is one node with five links to it, so a date,
+A linked picture is never copied. With the Archive, one photo in five albums is one node with five links to it, so a date,
 a place, a face or a label given to it shows in all five.
 
 ![One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link](../diagrams/links.svg "One picture, many places: everything that points at it is a softlink, and the picture itself lives in one folder.")
 
 ### Pairs of links
 
-How two people are related, and who lived where, is kept as a pair of softlinks, one on each side.
-Each half knows where the other half is, so the two stay together:
+A pair of softlinks, one on each side, ties two nodes together; with the Archive, that is how two
+people are related and who lived where. Each half knows where the other half is, so the two stay
+together:
 
-- Removing a relation with the web interface, `person-remove` or `unrelate` removes both halves.
+- Removing a relation with `unrelate`, or with the Archive's pages and `person-remove`, removes both halves.
 - When one side is deleted for good, the `relations-guard` service removes the other half.
-- When a person is moved, or merged into another with `person-merge`, the pairs follow.
+- With the Archive, when a person is moved, or merged into another with `person-merge`, the pairs follow.
 
 You can make a pair of your own between any two nodes with `relate`. It puts the links in a
 `relations/` folder of each node, named `<label>-<name of the other>`:
@@ -162,22 +172,22 @@ For links that EiN keeps track of, use the command that owns them rather than `l
 label lives on the node that carries it, and searches read it there, so the link in
 `/archive/tags/` alone does not label anything:
 
-| To change               | Use                                                                                              |
-| ----------------------- | ------------------------------------------------------------------------------------------------ |
-| Labels                  | `label add`, `label remove`                                                                      |
-| Favourites              | `star`, `star -d`                                                                                |
-| Relations between nodes | `relate`, `unrelate`                                                                             |
-| Family ties and homes   | the `person-…` commands in [Family tree, events and homes](../archive/family.md#in-the-terminal) |
-| An album's cover        | `album set <album> cover <picture>`                                                              |
-| Group membership        | `group-add-member`, `group-remove-member`                                                        |
+| To change                               | Use                                                                                              |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Labels                                  | `label add`, `label remove`                                                                      |
+| Favourites                              | `star`, `star -d`                                                                                |
+| Relations between nodes                 | `relate`, `unrelate`                                                                             |
+| Family ties and homes, with the Archive | the `person-…` commands in [Family tree, events and homes](../archive/family.md#in-the-terminal) |
+| An album's cover, with the Archive      | `album set <album> cover <picture>`                                                              |
+| Group membership                        | `group-add-member`, `group-remove-member`                                                        |
 
 ## Moving keeps softlinks pointing right
 
 When a node moves, every softlink that points at it, or at anything under it, is re-pointed to the
-new path in the same step. An album can therefore be moved without losing its cover, its labels,
+new path in the same step. With the Archive, an album can therefore be moved without losing its cover, its labels,
 its place in other albums or anyone's favourites. This holds for `mv`, for **Rename** and
-**Paste** in the **Nodes** explorer, and for filing pictures from staging into an album. Merging
-people or duplicates moves the links to the one that is kept.
+**Paste** in the **Nodes** explorer, and, with the Archive, for filing pictures from staging into an
+album. Merging people or duplicates moves the links to the one that is kept.
 
 Two kinds of softlink are not re-pointed:
 
@@ -189,20 +199,20 @@ One `mv` re-points at most 100,000 links. A move that more links point into is r
 
 `mv` says nothing about the links on success. Run as `JSON_OUTPUT=1 mv …`, its answer counts them in `relinked`.
 
-Renaming an album in **Edit album** changes only its name on the page; its folder keeps its first
+With the Archive, renaming an album in **Edit album** changes only its name on the page; its folder keeps its first
 name, so no link needs to change.
 
 ## Deleting, the trash and links
 
 What happens to links depends on how a node goes. [Your profile, favourites and trash](../guide/profile.md#the-trash) lists which actions use the trash.
 
-| What you do                                 | The link you act on    | Links pointing at the node                                                                                                                     |
-| ------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Remove a picture from an album (**Remove**) | That album's link goes | Others are left alone; the picture stays where it lives                                                                                        |
-| Move a node to the trash                    | —                      | Left as they are. They point at nothing while it is in the trash, and work again when you restore it                                           |
-| Delete for good, or empty the trash         | —                      | Label links and the other half of every pair are removed by `relations-guard`. Covers, album links and favourites are left pointing at nothing |
-| `rm` a softlink                             | The link goes          | —                                                                                                                                              |
-| `rm` a node with hard links                 | One name goes          | —                                                                                                                                              |
+| What you do                                                   | The link you act on    | Links pointing at the node                                                                                                                     |
+| ------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| With the Archive, remove a picture from an album (**Remove**) | That album's link goes | Others are left alone; the picture stays where it lives                                                                                        |
+| Move a node to the trash                                      | —                      | Left as they are. They point at nothing while it is in the trash, and work again when you restore it                                           |
+| Delete for good, or empty the trash                           | —                      | Label links and the other half of every pair are removed by `relations-guard`. Covers, album links and favourites are left pointing at nothing |
+| `rm` a softlink                                               | The link goes          | —                                                                                                                                              |
+| `rm` a node with hard links                                   | One name goes          | —                                                                                                                                              |
 
 While something is in the trash it is gone for everyone, including through the links to it. A
 node with a hard link elsewhere is different: moving one of its names to the trash leaves it
@@ -210,15 +220,15 @@ reachable by its other name.
 
 ## When something goes differently
 
-| What you see                                                       | What it means                                                                                              | What to do                                                                                           |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `Node not found:` and a path, when you open a link                 | The link points at nothing: its target was deleted, is in someone's trash, or was moved with `--no-relink` | Restore the target from the trash, point the link again with `ln -sf`, or remove it with `rm`        |
-| `too many levels of symbolic links`                                | Links point at each other in a loop, or a chain is longer than 40                                          | Look at the targets with `ls -l` and correct one                                                     |
-| A label is still listed with nothing behind it                     | A link in `/archive/tags/<label>/` points at something gone                                                | `label prune` removes every label link that points at nothing                                        |
-| The other half of a family tie is missing                          | One half was removed while `relations-guard` was not running                                               | `person-check /archive/people` reports broken ties; remove the tie and add it again                  |
-| Labels or relation halves stay after something is deleted for good | The `relations-guard` service is stopped                                                                   | An administrator checks it with `service-status`; see [Services and logs](../admin/services-logs.md) |
-| `ln: failed to access '<target>': No such file or directory`       | A hard link needs an existing target                                                                       | Check the path, or make a softlink with `-s`                                                         |
-| `Access denied for operation` when you follow a link               | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                            |
+| What you see                                                       | What it means                                                                                              | What to do                                                                                            |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Node not found:` and a path, when you open a link                 | The link points at nothing: its target was deleted, is in someone's trash, or was moved with `--no-relink` | Restore the target from the trash, point the link again with `ln -sf`, or remove it with `rm`         |
+| `too many levels of symbolic links`                                | Links point at each other in a loop, or a chain is longer than 40                                          | Look at the targets with `ls -l` and correct one                                                      |
+| A label is still listed with nothing behind it                     | A link in `/archive/tags/<label>/` points at something gone                                                | `label prune` removes every label link that points at nothing                                         |
+| The other half of a family tie is missing                          | One half was removed while `relations-guard` was not running                                               | With the Archive, `person-check /archive/people` reports broken ties; remove the tie and add it again |
+| Labels or relation halves stay after something is deleted for good | The `relations-guard` service is stopped                                                                   | An administrator checks it with `service-status`; see [Services and logs](../admin/services-logs.md)  |
+| `ln: failed to access '<target>': No such file or directory`       | A hard link needs an existing target                                                                       | Check the path, or make a softlink with `-s`                                                          |
+| `Access denied for operation` when you follow a link               | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                             |
 
 ## Related pages
 

@@ -90,7 +90,7 @@
 <p>This page takes you from a Linux machine to an EiN you can sign in to: what the machine needs, the one command that installs EiN, what you see while it runs, and what to do first once it is up. It is the quick path for trying EiN on your own machine. <a href="../admin/install.html">Installing in detail</a> covers everything else.</p>
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
 <p>EiN runs as a few containers on one Linux machine. The installer builds them from source on that machine: there are no ready-made releases. It needs no root, but the tools it uses must be installed first.</p>
-<p>What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which the Archive needs to make thumbnails, find faces, read text and make pictures searchable:</p>
+<p>What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which <a href="../archive/index.html">the Archive</a> needs to make thumbnails, find faces, read text and make pictures searchable:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -156,7 +156,7 @@
 <p><strong>EiN Core</strong> is EiN and its database: the tree, the web interface, the shell, SSH and SFTP. You add the rest when you want it.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
-<p><strong>EiN Archive</strong> is the full Archive installation: EiN with the media service, the assistant&#39;s language model, and the Archive and assistant modules.</p>
+<p><strong>EiN Archive</strong> is the full Archive installation: EiN with the media service, the assistant&#39;s language model, and the <a href="../archive/index.html">Archive</a> and <a href="../assistant/index.html">assistant</a> modules.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive --module assistant</code></pre></div>
 <p>Everything after <code>bash -s --</code> is passed on to <code>~/ein/setup.sh</code>, EiN&#39;s own setup script:</p>
@@ -431,7 +431,7 @@ EiN starts again when the machine does.</code></pre></div>
 <li>In <strong>Password</strong>, type or paste the password <code>setup.sh</code> printed, and click <strong>Sign in</strong>.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/login@2x.webp"><img src="../../assets/shots/login.webp" srcset="../../assets/shots/login.webp 1x, ../../assets/shots/login@2x.webp 2x" alt="The EiN sign-in page: the fields Username or e-mail and Password, the Sign in button, and Browse without signing in below it" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The sign-in page. Browse without signing in appears only when visitors may browse, which is off after an install</figcaption></figure>
-<p>You land on the home page, <strong>Welcome</strong>, which is empty until there is something in EiN. There is no setup wizard: <a href="first-steps.html">First steps</a> walks you from here to a family using it.</p>
+<p>You land on the home page, <strong>Welcome</strong>. What it shows comes from the modules: with the Archive it fills as pictures come in, and on EiN Core alone it stays empty. There is no setup wizard: <a href="first-steps.html">First steps</a> walks you from here to a family using it.</p>
 <p>EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read <a href="../admin/network.html">Ports, HTTPS and remote access</a>. When something else on the machine already uses 8080 or 2222, <code>setup.sh</code> gives EiN the next free port instead, says so (<code>Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)</code>), keeps it in <code>.env</code>, and prints the address with it.</p>
 <h2 id="change-the-admin-password-straight-away">Change the admin password straight away<a class="anchor" href="#change-the-admin-password-straight-away" aria-label="Link to this section"></a></h2>
 <p>Do this before anything else:</p>
@@ -538,6 +538,7 @@ user passwd admin</code></pre></div>
 <li><a href="../admin/install.html">Installing in detail</a>: every option and variable, podman and Docker, what runs where, and running EiN day to day.</li>
 <li><a href="../ems/gpu.html">The graphics card</a> and <a href="../admin/network.html">Ports, HTTPS and remote access</a>, when you want EiN faster or reachable from outside.</li>
 <li><a href="../admin/modules.html">Modules</a>: what each module brings and how to install, update and remove it.</li>
+<li><a href="../archive/index.html">The Archive</a> and <a href="../assistant/index.html">The Assistant</a>: the sections for the modules the EiN Archive command installs.</li>
 </ul>
 
         </article>

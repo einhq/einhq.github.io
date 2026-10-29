@@ -94,6 +94,9 @@ read and change it all from the terminal.</p>
 <p>The <strong>Share</strong> dialog sets all of this without numbers, and <a href="../guide/sharing.html">Sharing</a> explains
 it for everyone in the family. Accounts and groups themselves are made on
 <a href="accounts.html">Accounts and groups</a>.</p>
+<p>The examples use albums such as <code>/archive/albums/Summer 1987</code>, which exist with the
+<a href="../archive/index.html">Archive</a> installed. The commands and rules are core&#39;s, and work the same on
+any node, such as a folder under <code>/home</code>.</p>
 <h2 id="the-four-parts-of-a-nodes-access">The four parts of a node&#39;s access<a class="anchor" href="#the-four-parts-of-a-nodes-access" aria-label="Link to this section"></a></h2>
 <p>Like a file on Linux, every node carries:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -152,8 +155,8 @@ it for everyone in the family. Accounts and groups themselves are made on
 </tr>
 </tbody></table>
 </div>
-<p>Any node can hold children here, so the folder column applies to albums, people, locations and
-files alike: a photo holds its thumbnails and metadata as children.</p>
+<p>Any node can hold children here, so the folder column applies to folders and files alike, and with
+the Archive to albums, people and locations: a photo holds its thumbnails and metadata as children.</p>
 <h3 id="how-ein-decides">How EiN decides<a class="anchor" href="#how-ein-decides" aria-label="Link to this section"></a></h3>
 <p>EiN asks, in this order, and stops at the first yes:</p>
 <ol>
@@ -169,7 +172,7 @@ bits give: a node at <code>0074</code> still lets its owner read it. The access 
 takes anyone away; there is no entry that denies.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>Write on a node is enough to change its mode and its access list. That is why <strong>Can edit</strong> in the
-<strong>Share</strong> dialog also lets someone change who the album is shared with. Changing the owner is the
+<strong>Share</strong> dialog also lets someone change who a node is shared with. Changing the owner is the
 exception; see <a href="#change-the-owner-and-the-group">Change the owner and the group</a>.</p>
 </aside>
 <h2 id="who-you-are-to-ein">Who you are to EiN<a class="anchor" href="#who-you-are-to-ein" aria-label="Link to this section"></a></h2>
@@ -373,7 +376,7 @@ share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/IMG_0042.j
 </tr>
 <tr>
 <td><code>--default-owner</code></td>
-<td>The configured default owner and group (see <a href="#what-new-albums-start-with">What new albums start with</a>), applied by the server to every node you may write.</td>
+<td>The configured default owner and group (see <a href="#the-default-sharing">The default sharing</a>), applied by the server to every node you may write.</td>
 </tr>
 <tr>
 <td><code>--reference &lt;path&gt;</code></td>
@@ -410,8 +413,8 @@ standard error; it fails only when every path it was given refused. Every option
 <a href="../reference/commands-core.html#share-set">reference</a>.</p>
 <h3 id="keep-one-photos-own-sharing">Keep one photo&#39;s own sharing<a class="anchor" href="#keep-one-photos-own-sharing" aria-label="Link to this section"></a></h3>
 <p>A pinned node keeps its access when a change comes from further up. A recursive change always
-writes the node it was aimed at, but passes over a pinned node and everything below it. This is what
-<strong>Share</strong> in an album&#39;s selection bar does when you give chosen photos sharing of their own, and how
+writes the node it was aimed at, but passes over a pinned node and everything below it. With the
+Archive, this is what <strong>Share</strong> in an album&#39;s selection bar does when you give chosen photos sharing of their own, and how
 one photo stays private in a shared album; see
 <a href="../guide/sharing.html#keep-some-photos-private-in-a-shared-album">Keep some photos private in a shared album</a>.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -467,17 +470,19 @@ while on an album of thousands of photos.</p>
 </tr>
 </tbody></table>
 </div>
-<p>So a family album&#39;s new uploads, and the thumbnails, faces and metadata processing adds under them,
+<p>So, with the Archive, a family album&#39;s new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album&#39;s group and grants whoever created them: a person or group granted an album sees
 what is added to it later. What is made under <code>/home/&lt;user&gt;</code> stays in that user&#39;s group, and the
 system tree under <code>/</code> stays <code>0755</code>.</p>
 <p>Moving a node with <code>mv</code> keeps its own access, as on Linux. Copying with <code>cp</code> is a create in the
 destination: the copy takes the destination&#39;s group and keeps its source&#39;s mode, less group write
 where the new parent gives none and less everyone else&#39;s write.</p>
-<h3 id="what-new-albums-start-with">What new albums start with<a class="anchor" href="#what-new-albums-start-with" aria-label="Link to this section"></a></h3>
-<p>A new album, made in the web interface or with <code>album create</code>, and what staging publishes start with the
-<strong>default sharing</strong>: an owner, a group and a mode, which an administrator sets under <strong>Settings →
-Permissions</strong>, on the <strong>Sharing</strong> card.</p>
+<h3 id="the-default-sharing">The default sharing<a class="anchor" href="#the-default-sharing" aria-label="Link to this section"></a></h3>
+<p>The <strong>default sharing</strong> is an owner, a group and a mode for what is created as shared, which an
+administrator sets under <strong>Settings → Permissions</strong>, on the <strong>Sharing</strong> card. <strong>Default</strong> in the
+<strong>Share</strong> dialog and <code>share-set --default-owner</code> apply it to a node. With the Archive installed, a
+new album, made in the web interface or with <code>album create</code>, and what staging publishes start with
+it.</p>
 <figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="The Permissions tab of Settings: the New users card with the Users group ticked, the Visitors card with Visitors may browse on, the Sharing card saying &quot;Shared with Users: the owner can change it, members can see it, anyone else can't see it&quot;, with Owner empty, Group Users and Permissions Owner Edit, Group &quot;users&quot; View, Everyone else None, as 0750, and the Sign-in sessions card" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Sharing card sets what every new album starts with, and says in a sentence what that comes to.</figcaption></figure>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -504,13 +509,12 @@ Permissions</strong>, on the <strong>Sharing</strong> card.</p>
 </tr>
 </tbody></table>
 </div>
-<p>On a standard installation a new album is therefore owned by its creator, seen by everyone with an
+<p>With the defaults, a new album is therefore owned by its creator, seen by everyone with an
 account and changed only by its owner. Each person narrows or widens that for what they create with
 <strong>How widely what you create is shared</strong> on their profile
 (<a href="../reference/settings.html#cfg_user_default_share"><code>CFG_USER_DEFAULT_SHARE</code></a>); see
-<a href="../guide/profile.html#how-widely-what-you-create-is-shared">Your profile</a>. <strong>Default</strong> in the
-<strong>Share</strong> dialog lets everyone with an account see a node, and <code>share-set --default-owner</code> gives it
-the configured default owner and group.</p>
+<a href="../guide/profile.html#how-widely-what-you-create-is-shared">Your profile</a>. With the defaults,
+<strong>Default</strong> in the <strong>Share</strong> dialog lets everyone with an account see a node.</p>
 <p>The same settings in the terminal, in the octal form:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 config <span class="hljs-built_in">set</span> CFG_DEFAULT_SHARE_GROUP family
@@ -518,10 +522,10 @@ config <span class="hljs-built_in">set</span> CFG_DEFAULT_SHARE_MODE 0750</code>
 <p><a href="configuration.html">Configuration</a> explains where settings are kept.</p>
 <h2 id="a-folder-governs-what-is-under-it">A folder governs what is under it<a class="anchor" href="#a-folder-governs-what-is-under-it" aria-label="Link to this section"></a></h2>
 <p>Reaching a node by its path takes execute on every folder along the way, from <code>/</code> down. EiN applies
-the same rule wherever it finds a node without walking a path: search, the Media feed, the map, a
-person&#39;s faces, duplicates, links. A node shows up only when you may read it <strong>and</strong> at least one of
+the same rule wherever it finds a node without walking a path: search and links, and with the
+Archive the Media feed, the map, a person&#39;s faces and duplicates. A node shows up only when you may read it <strong>and</strong> at least one of
 its paths is open to you all the way down.</p>
-<p>This is what keeps staging private. <code>/home/&lt;user&gt;/staging</code> is <code>0700</code>, so the uploads inside it stay
+<p>With the Archive, this is what keeps staging private. <code>/home/&lt;user&gt;/staging</code> is <code>0700</code>, so the uploads inside it stay
 out of everyone else&#39;s search and map, whatever their own modes say.</p>
 <ul>
 <li><strong>A node linked in two places is reachable through either.</strong> A hard link (<code>ln</code> without <code>-s</code>) into
@@ -576,7 +580,7 @@ share:</p>
 <td><code>/home/&lt;user&gt;/staging</code></td>
 <td>the account</td>
 <td><code>0700</code></td>
-<td>Nobody else, not even through search.</td>
+<td>With the Archive. Nobody else, not even through search.</td>
 </tr>
 <tr>
 <td><code>/etc/users/&lt;name&gt;</code></td>
@@ -630,8 +634,8 @@ writes, and loses the access when the link expires. Turning a link off takes its
 node, wherever the node has moved since. Someone already signed in who opens a link stays themselves.
 How to make and send one is on <a href="../guide/sharing.html#share-an-album-with-a-link">Sharing</a>.</p>
 <h2 id="administrators">Administrators<a class="anchor" href="#administrators" aria-label="Link to this section"></a></h2>
-<p>The administrator, uid <code>0</code>, passes every check, as root does on Linux: private albums and other
-people&#39;s homes and staging included. A member of the <code>sudo</code> group passes them too while their
+<p>The administrator, uid <code>0</code>, passes every check, as root does on Linux: other people&#39;s homes and
+private albums included. A member of the <code>sudo</code> group passes them too while their
 sign-in is elevated, which they start with <strong>Administer…</strong> in the account menu (or <code>admin</code> in a
 terminal) and end with <strong>Leave admin mode</strong> (or <code>admin --off</code>). A terminal acting as the
 administrator ends its prompt in <code>#</code>. <a href="accounts.html">Accounts and groups</a> covers who may do this.</p>
@@ -655,21 +659,21 @@ ones the SFTP server reports.</p>
 <code>r</code>, <code>w</code> or <code>x</code>. The node named is the one that refused, which may be the folder above what you
 asked for: creating, removing or moving a node takes <code>w</code> and <code>x</code> on its folder, and moving it also
 takes <code>w</code> on the node itself. Check with <code>acl</code> on the node and on its folder.</p>
-<p><strong>Someone added to a group still cannot see the album.</strong> Groups are read at sign-in. Ask them to
+<p><strong>Someone added to a group still cannot see what is shared with it.</strong> Groups are read at sign-in. Ask them to
 sign out and in again.</p>
-<p><strong>A folder&#39;s mode changed but a photo inside did not.</strong> The photo is pinned, or you may not write
+<p><strong>A folder&#39;s mode changed but a file inside did not.</strong> The file is pinned, or you may not write
 it. The counts after <code>share-set</code> (<code>kept own access</code>, <code>failed</code>) and the lines on standard error say
 which. <code>share-info</code> on the folder lists the pinned nodes; <code>share-set &lt;path&gt; --unpin</code> lets changes
 reach a node again.</p>
-<p><strong>A photo is open to someone but they cannot find it in search or on the map.</strong> A folder on every
-path to it is closed to them. Give them pass-through on that folder, or link the photo into a
+<p><strong>A file is open to someone but they cannot find it in search, or on the Archive&#39;s map.</strong> A folder
+on every path to it is closed to them. Give them pass-through on that folder, or link the file into a
 folder they can reach.</p>
 <p><strong><code>chown</code> says <code>Access denied for operation &#39;change gid&#39;</code>.</strong> You are not in the group you named.
 An administrator can make the change, or add you to the group.</p>
 <p><strong><code>share-info</code> says <code>sign in to see who has access</code>.</strong> You have not signed in, or you came in through
 a share link. Who has access
 names people and groups, so it is shown only to someone signed in.</p>
-<p><strong>A visitor sees the sign-in page instead of a shared album.</strong> <strong>Visitors may browse</strong> is off. Turn
+<p><strong>A visitor sees the sign-in page instead of what was shared with visitors.</strong> <strong>Visitors may browse</strong> is off. Turn
 it on under <strong>Settings → Permissions</strong>, or send them a <a href="../guide/sharing.html#share-an-album-with-a-link">share link</a>,
 which works either way.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
@@ -692,7 +696,7 @@ soft links.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/permissions.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-four-parts-of-a-nodes-access">The four parts of a node's access</a></li><li class="nested"><a href="#how-ein-decides">How EiN decides</a></li><li><a href="#who-you-are-to-ein">Who you are to EiN</a></li><li><a href="#see-a-nodes-permissions">See a node's permissions</a></li><li class="nested"><a href="#in-the-web-interface">In the web interface</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li><a href="#change-the-mode">Change the mode</a></li><li><a href="#change-the-owner-and-the-group">Change the owner and the group</a></li><li><a href="#grant-more-people-with-an-access-list">Grant more people with an access list</a></li><li><a href="#set-it-all-at-once-with-share-set">Set it all at once with share-set</a></li><li class="nested"><a href="#keep-one-photos-own-sharing">Keep one photo's own sharing</a></li><li><a href="#what-a-recursive-change-does">What a recursive change does</a></li><li><a href="#what-a-new-node-starts-with">What a new node starts with</a></li><li class="nested"><a href="#what-new-albums-start-with">What new albums start with</a></li><li><a href="#a-folder-governs-what-is-under-it">A folder governs what is under it</a></li><li><a href="#the-other-bits-are-the-systems">The other bits are the system's</a></li><li><a href="#visitors-and-share-links">Visitors and share links</a></li><li><a href="#administrators">Administrators</a></li><li><a href="#over-ssh-sftp-and-the-web">Over SSH, SFTP and the web</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-four-parts-of-a-nodes-access">The four parts of a node's access</a></li><li class="nested"><a href="#how-ein-decides">How EiN decides</a></li><li><a href="#who-you-are-to-ein">Who you are to EiN</a></li><li><a href="#see-a-nodes-permissions">See a node's permissions</a></li><li class="nested"><a href="#in-the-web-interface">In the web interface</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li><a href="#change-the-mode">Change the mode</a></li><li><a href="#change-the-owner-and-the-group">Change the owner and the group</a></li><li><a href="#grant-more-people-with-an-access-list">Grant more people with an access list</a></li><li><a href="#set-it-all-at-once-with-share-set">Set it all at once with share-set</a></li><li class="nested"><a href="#keep-one-photos-own-sharing">Keep one photo's own sharing</a></li><li><a href="#what-a-recursive-change-does">What a recursive change does</a></li><li><a href="#what-a-new-node-starts-with">What a new node starts with</a></li><li class="nested"><a href="#the-default-sharing">The default sharing</a></li><li><a href="#a-folder-governs-what-is-under-it">A folder governs what is under it</a></li><li><a href="#the-other-bits-are-the-systems">The other bits are the system's</a></li><li><a href="#visitors-and-share-links">Visitors and share links</a></li><li><a href="#administrators">Administrators</a></li><li><a href="#over-ssh-sftp-and-the-web">Over SSH, SFTP and the web</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

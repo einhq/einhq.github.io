@@ -92,6 +92,9 @@ sets off: the events every change announces, the facts a module derives from the
 that act on those facts, and the audit trail that leads back from each result to the change that
 caused it. It is for administrators who want to understand what the <strong>Dashboard</strong> shows, and for
 anyone writing a module or a pipeline of their own.</p>
+<p>The machinery is core&#39;s: the events, the engine, the pools and the audit trail. Core ships no
+pipelines and announces no facts, so the examples come from the <a href="../archive/index.html">Archive</a>:
+its facts, pipelines, workers and paths such as <code>/archive/albums</code> exist with it installed.</p>
 <h2 id="every-change-is-announced">Every change is announced<a class="anchor" href="#every-change-is-announced" aria-label="Link to this section"></a></h2>
 <p>When EiN saves a change to the tree, it announces it as an event. Six kinds exist:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -539,7 +542,7 @@ off until <strong>Second models worker&#39;s slots</strong>, <code>CFG_MODEL_SEC
 <p>Most of these steps are calls into the <a href="../ems/index.html">media service</a>, which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
-<a href="../admin/processing.html">Processing and pipelines</a> explains how to size the workers.</p>
+<a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> explains how to size the workers.</p>
 <h2 id="one-upload-start-to-finish">One upload, start to finish<a class="anchor" href="#one-upload-start-to-finish" aria-label="Link to this section"></a></h2>
 <p>With the Archive installed, an upload sets off this chain. Each arrow is a fact, and each fact
 starts its own pipelines:</p>
@@ -847,7 +850,7 @@ status:</p>
 </tr>
 </tbody></table>
 </div>
-<p>So a media service that is down for an hour fails nothing: its work waits and starts again when it
+<p>So, with the Archive, a media service that is down for an hour fails nothing: its work waits and starts again when it
 answers.</p>
 <p>A failed instance is not the end either. Once an hour, or as often as
 <a href="../reference/settings.html#cfg_pipeline_prune_interval"><code>CFG_PIPELINE_PRUNE_INTERVAL</code></a> says, the <code>pipeline-pruner</code> service runs
@@ -908,6 +911,9 @@ one marks every photo that arrives in the Wrenfield albums as not yet reviewed:<
 <span class="hljs-attr">steps:</span>
   <span class="hljs-attr">mark:</span>
     <span class="hljs-attr">command:</span> <span class="hljs-string">attrs</span> <span class="hljs-string">-s</span> <span class="hljs-string">reviewed=no</span> <span class="hljs-string">$NODE_PATH</span></code></pre></div>
+<p>It waits for the Archive&#39;s fact <code>media.metadata.extracted</code>, so it needs the Archive; on an EiN
+without modules, a trigger waits for a raw change instead, such as <code>event: updated</code> with
+<code>nodeType: file</code>.</p>
 <ol>
 <li><p>Save it, for example as <code>/home/helen/pipelines/mark-unreviewed.yaml</code>, with the
 <a href="../shell/editor.html">editor</a> or over <a href="../shell/ssh-sftp.html">SFTP</a>.</p>

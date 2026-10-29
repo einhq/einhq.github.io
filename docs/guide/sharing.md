@@ -1,9 +1,13 @@
 # Sharing
 
-Whoever may change an album decides who else sees it. This page is for everyone in the family
-who shares albums: the **Share** dialog, the chip that says how visible something is, links for
+Whoever may change something in EiN decides who else sees it. This page is for everyone who shares
+what they keep in EiN: the **Share** dialog, the chip that says how visible something is, links for
 people without an account, keeping a few photos private in a shared album, how new albums start
 out, and why you may not see everything that is there.
+
+The **Share** dialog is EiN's own and works on any node. Most of what people share are albums,
+which come with the [Archive](../archive/index.md), so the examples here are albums, and the parts
+that only albums have say so.
 
 ## Who can see an album
 
@@ -30,6 +34,12 @@ You do not need to know how this is stored. The **Share** dialog says it in word
 
 **Share** is offered only on things you may change:
 
+- **Anything in the tree**: open **Nodes**, pick the node and choose the **Sharing** tab. **Nodes**
+  is under **System** in an administrator's sidebar; anyone signed in can open it at
+  `/system/nodes`.
+
+With the Archive installed, its pages offer **Share** as well:
+
 - **An album**: **Share** in the album's header. On a phone the header's buttons are under **⋮**.
 - **A person, a location or a device**: **Share** in its header. Sharing a person shares their page,
   not the photos they are in.
@@ -37,13 +47,11 @@ You do not need to know how this is stored. The **Share** dialog says it in word
   of the details panel (see [Viewing photos, videos and recordings](../archive/viewer.md#change-a-file-from-the-pencil-menu)).
 - **Several photos of an album**: select them and choose **Share** in the selection bar; see
   [Keep some photos private in a shared album](#keep-some-photos-private-in-a-shared-album).
-- **Anything in the tree**, for an administrator: open **Nodes** under **System** in the sidebar,
-  pick the node and choose the **Sharing** tab.
 
-The chip under an album's title, and the one in the viewer's details panel, open the same dialog;
-see [The visibility chip](#the-visibility-chip). Opened by someone who may only look, the dialog
-shows who has access without letting them change it, and says "Only Helen Okafor and people who can
-edit it can change who it is shared with."
+The chip under an album's title, and the one in the viewer's details panel, both the Archive's,
+open the same dialog; see [The visibility chip](#the-visibility-chip). Opened by someone who may
+only look, the dialog shows who has access without letting them change it, and says "Only Helen
+Okafor and people who can edit it can change who it is shared with."
 
 ![The Share dialog of the album "Sailing in the archipelago": Who can see it with the Default and Private buttons; People with access listing the owner, the Administrators group, Everyone with an account and Visitors who are not signed in; Share with a link with a Create link button; Close and Save at the foot](../../assets/shots/share.webp "One dialog decides who sees an album and who may change it, and makes the link for someone without an account.")
 
@@ -150,7 +158,8 @@ it.
 
 ## The visibility chip
 
-Under an album's title, and in the viewer's details panel for a single file, a small coloured chip
+With the Archive installed, under an album's title, and in the viewer's details panel for a single
+file, a small coloured chip
 says how widely it is shared. Resting the pointer on it shows the sentence from the table, and
 clicking it opens the Share dialog.
 
@@ -168,8 +177,8 @@ who opened a link never see the chip: they are not told who else can see somethi
 
 ## Share an album with a link
 
-A link lets someone without an account see one album, without signing in. Links are made for
-albums only.
+A link lets someone without an account see one album, without signing in. The dialog makes links
+for albums only, so they come with the Archive.
 
 1. Open the album and choose **Share**.
 2. Under **Share with a link**, next to "Send a link to someone without an account", choose
@@ -235,8 +244,8 @@ links, which it does every hour by default. While it is still listed, choose a n
 
 ## Keep some photos private in a shared album
 
-You can keep a few photos of a shared album to yourself, or show them to fewer people, without
-moving them out of the album.
+With the Archive installed, you can keep a few photos of a shared album to yourself, or show them
+to fewer people, without moving them out of the album.
 
 ![An album with a day's photos selected and the selection bar at the bottom: 24 selected, then Favourite, Download, Add to album, Set time, Stack, Set as cover, Share, Set location, Label and Delete](../../assets/shots/selection.webp "Share in the selection bar gives the chosen photos sharing of their own, apart from the album's.")
 
@@ -286,8 +295,9 @@ There are three ways:
 
 ## How new albums start out
 
-**Create → Album** asks only for a name and a description. The new album gets the sharing your new
-albums start with, which comes from two places.
+Albums come with the Archive. **Create → Album** asks only for a name and a description. The new
+album gets the sharing your new albums start with, which comes from two places, both EiN's own
+settings.
 
 **The administrator's default sharing**, under **Settings → Permissions → Sharing**, sets who may
 see and change anything created as shared, which group it is shared with, and, if they choose, an
@@ -318,12 +328,12 @@ dialog.
 
 ## What you cannot see
 
-EiN leaves out what you may not open. An album, photo or folder that is private to someone else is
-not listed to you at all: not on **Albums**, not in **News** or search, not on the map, not in `ls`
-or `find` in the terminal. Here EiN differs from the files on a computer, where you see every name
-in a folder you can open, only not what is inside. So two people can see the same album
-differently, and an album can look emptier to you than to its owner. The administrator sees all of
-it.
+EiN leaves out what you may not open. A folder, file or album that is private to someone else is not
+listed to you at all: not in search, not in `ls` or `find` in the terminal, and with the Archive not
+on **Albums**, in **News** or on the map. Here EiN differs from the files on a computer, where you
+see every name in a folder you can open, only not what is inside. So two people can see the same
+album differently, and an album can look emptier to you than to its owner. The administrator sees
+all of it.
 
 What is hidden is still there, and that explains some surprises:
 
@@ -408,7 +418,8 @@ address in front of it:
 /s/q7Rk2mWx9TbN4vLc8HsJ3d  opens /archive/albums/Christmas at the cottage until 2026-11-24T10:12:00.000Z
 ```
 
-The reference has every option: [`share-info`](../reference/commands-core.md#share-info),
+The `share-` commands are EiN's own and work on any node; `album` comes with the Archive. The
+reference has every option: [`share-info`](../reference/commands-core.md#share-info),
 [`share-link`](../reference/commands-core.md#share-link),
 [`share-set`](../reference/commands-core.md#share-set) and
 [`album`](../archive/commands.md#album). [Permissions in depth](../admin/permissions.md)

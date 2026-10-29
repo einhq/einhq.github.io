@@ -88,8 +88,9 @@
         </header>
         <article class="prose">
 <p>This page is for the administrator who runs EiN on their own machine: what each part of EiN uses of the processor, memory and disk, how big a machine to give it, how to set the containers&#39; memory limits, and which settings decide how much processing runs at once. The graphics card has a page of its own, <a href="../ems/gpu.html">The graphics card</a>.</p>
+<p>EiN without modules needs little. Most of what this page sizes and tunes comes with modules: the media service, which the <a href="../archive/index.html">Archive</a> needs, and the language model, which the <a href="../assistant/index.html">Assistant</a> answers with, are containers of their own, and the settings that pace media processing belong to the Archive. How big a machine they need is kept here, on this page alone.</p>
 <h2 id="what-uses-the-machine">What uses the machine<a class="anchor" href="#what-uses-the-machine" aria-label="Link to this section"></a></h2>
-<p>EiN runs as up to four containers. Each has its own appetite, and three of them have a memory limit that compose sets from <code>~/ein/.env</code>.</p>
+<p>EiN runs as two containers, <code>ein</code> and <code>db</code>, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from <code>~/ein/.env</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -101,7 +102,7 @@
 </thead>
 <tbody><tr>
 <td><code>ein</code></td>
-<td>The web interface, every shell and SSH session, the pipelines that decide what to do with each file, and the modules</td>
+<td>The web interface, every shell and SSH session, the pipelines that decide what to do with each file, and the modules&#39; services</td>
 <td><code>EIN_MEMORY</code>, default <code>6g</code></td>
 <td>not limited</td>
 </tr>
@@ -113,19 +114,19 @@
 </tr>
 <tr>
 <td><code>ems</code></td>
-<td>The media service, with <code>--ems</code>: thumbnails, video encoding, fingerprints, and the models for faces, voices, transcripts, text and vectors</td>
+<td>The media service, with <code>--ems</code>, for the Archive: thumbnails, video encoding, fingerprints, and the models for faces, voices, transcripts, text and vectors</td>
 <td><code>EMS_MEMORY</code>, default <code>16g</code></td>
 <td>not limited</td>
 </tr>
 <tr>
 <td><code>llm</code></td>
-<td>The assistant&#39;s language model, with <code>--llm</code>: about 5.6 GB of model, on the card or in memory</td>
+<td>The language model, with <code>--llm</code>, for the Assistant: about 5.6 GB of model, on the card or in memory</td>
 <td><code>LLM_MEMORY</code>, default <code>10g</code></td>
 <td>not limited</td>
 </tr>
 </tbody></table>
 </div>
-<p>Nothing limits how many cores a container uses. The heavy work is in the media service: most pipeline steps are calls into it, and EiN mostly decides what to ask for and stores the answers. A machine running EiN Core alone, without the media service, does little beyond serving the interface and the shell.</p>
+<p>Nothing limits how many cores a container uses. With the Archive, the heavy work is in the media service: most of the Archive&#39;s pipeline steps are calls into it, and EiN mostly decides what to ask for and stores the answers. A machine running EiN Core alone, without the media service, does little beyond serving the interface and the shell.</p>
 <h2 id="choose-a-machine">Choose a machine<a class="anchor" href="#choose-a-machine" aria-label="Link to this section"></a></h2>
 <p>The installer checks the machine against the first two rows of these figures before it installs anything (<a href="install.html#what-the-checks-measure">What the checks measure</a>); the language model&#39;s row is advice it does not check:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -144,23 +145,23 @@
 <td>10 GB, plus your files</td>
 </tr>
 <tr>
-<td>With the media service (<code>--ems</code>)</td>
+<td>With the media service (<code>--ems</code>), for the Archive</td>
 <td>4 cores; 6 or more recommended</td>
 <td>16 GB; 32 GB recommended</td>
 <td>about 100 GB, plus your files</td>
 </tr>
 <tr>
-<td>With the language model as well (<code>--llm</code>)</td>
+<td>With the language model as well (<code>--llm</code>), for the Assistant</td>
 <td>as above</td>
 <td>about 5.6 GB more, unless the model is on the card</td>
 <td>as above</td>
 </tr>
 </tbody></table>
 </div>
-<p>Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as <a href="../assistant/language-model.html">The language model</a> describes.</p>
+<p>Cores are physical cores, not threads. With both installed, the default limits of the three containers that have one add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as <a href="../assistant/language-model.html">The language model</a> describes.</p>
 <p>What the figures mean in practice:</p>
 <ul>
-<li><strong>More cores</strong> let more media work run side by side, once you raise the settings in <a href="#let-more-work-run-at-once">Let more work run at once</a>. The defaults are set for a small machine and use few cores.</li>
+<li><strong>More cores</strong> let more of the Archive&#39;s media work run side by side, once you raise the settings in <a href="#let-more-work-run-at-once">Let more work run at once</a>. The defaults are set for a small machine and use few cores.</li>
 <li><strong>More memory</strong> matters for the media service, which holds several models at once, and for long videos, which are decoded on the processor without a card.</li>
 <li><strong>A graphics card</strong> changes how fast the models run, not what they find. On a card a recording&#39;s transcript takes about a minute; without one it takes about twice the length of the recording. <a href="../ems/gpu.html">The graphics card</a> has the details.</li>
 <li><strong>Disk</strong> holds your originals once, plus the thumbnails and other renditions EiN makes of each, plus the images and the database in the container engine&#39;s storage. <a href="#watch-disk-space">Watch disk space</a> shows how to see how fast it grows.</li>
@@ -173,7 +174,7 @@
 <span class="hljs-attr">EIN_MEMORY</span>=<span class="hljs-number">8</span>g
 <span class="hljs-attr">EMS_MEMORY</span>=<span class="hljs-number">20</span>g
 <span class="hljs-attr">LLM_MEMORY</span>=<span class="hljs-number">12</span>g</code></pre></div>
-<p>The value is a number with a unit, <code>g</code> for gigabytes or <code>m</code> for megabytes. Leave out a line to keep its default.</p>
+<p>The value is a number with a unit, <code>g</code> for gigabytes or <code>m</code> for megabytes. Leave out a line to keep its default. <code>EMS_MEMORY</code> and <code>LLM_MEMORY</code> matter only while the media service or the language model is installed.</p>
 </li>
 <li><p>Make the containers again with the new limits:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
@@ -199,7 +200,7 @@ podman compose up -d</code></pre></div>
 <p>A line that names <code>Memory cgroup out of memory</code> is a container that reached its limit. Raise that container&#39;s limit, or lower the work that runs at once (<a href="#let-more-work-run-at-once">Let more work run at once</a> describes the settings, which work in both directions).</p>
 <p>The media service&#39;s model processes log a warning of their own when the models alone do not fit under their ceiling, ending in &quot;Raise CFG_MODEL_MAX_RSS if this is the real footprint.&quot; For the media service, set it as <code>EMS_MODEL_MAX_RSS</code> in <code>~/ein/.env</code>, such as <code>EMS_MODEL_MAX_RSS=12g</code>, or raise <code>EMS_MEMORY</code>, which raises the ceiling with it.</p>
 <h2 id="how-processing-is-paced">How processing is paced<a class="anchor" href="#how-processing-is-paced" aria-label="Link to this section"></a></h2>
-<p>New files go through pipelines, and the pipelines&#39; heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by settings in <strong>Settings → System</strong>, category <strong>Processing</strong>.</p>
+<p>This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines&#39; heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by the Archive&#39;s settings in <strong>Settings → System</strong>, category <strong>Processing</strong>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -221,6 +222,7 @@ podman compose up -d</code></pre></div>
 </tbody></table>
 </div>
 <p>The CPU budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
+<p><a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> lists every setting of the two workers.</p>
 <p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.</p>
 <p>The media service has its own limits on how much it runs at once, set in <code>~/ein/.env</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -260,7 +262,7 @@ podman compose up -d</code></pre></div>
 </div>
 <p>EiN&#39;s settings decide how much it asks for; the media service&#39;s decide how much it does. Asking for more than the media service runs at once only moves the wait into its queue.</p>
 <h2 id="let-more-work-run-at-once">Let more work run at once<a class="anchor" href="#let-more-work-run-at-once" aria-label="Link to this section"></a></h2>
-<p>On a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:</p>
+<p>With the Archive, on a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:</p>
 <ol>
 <li>Sign in as an administrator and choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>.</li>
 <li>Choose the category <strong>Processing</strong>.</li>
@@ -278,9 +280,9 @@ podman compose up -d</code></pre></div>
 config <span class="hljs-built_in">set</span> CFG_CPU_SLOTS 4
 config <span class="hljs-built_in">set</span> CFG_MODEL_SLOTS 4
 config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="hljs-comment"># back to the default</span></code></pre></div>
-<p>The other settings in <strong>Processing</strong> tune the pipeline engine itself: how many steps, queue entries and triggers it handles at once, and how often it cleans up. Their defaults suit any machine EiN runs on, and <a href="processing.html">Processing and pipelines</a> explains what they do. Every one is listed on <a href="../reference/settings.html#processing">Settings</a>.</p>
+<p>The other settings in <strong>Processing</strong> are core&#39;s and tune the pipeline engine itself: how many steps, queue entries and triggers it handles at once, and how often it cleans up. Their defaults suit any machine EiN runs on, and <a href="processing.html">Processing and pipelines</a> explains what they do. Every one is listed on <a href="../reference/settings.html#processing">Settings</a>.</p>
 <h2 id="keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work<a class="anchor" href="#keep-the-interface-quick-during-heavy-work" aria-label="Link to this section"></a></h2>
-<p>While the media service works through an import, people still search and browse. Several things keep their requests ahead of the processing without any setting:</p>
+<p>While the media service works through the Archive&#39;s import, people still search and browse. Several things keep their requests ahead of the processing without any setting:</p>
 <ul>
 <li>The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (<code>EMS_WORKER_NICE</code>, default <code>10</code>). When the card has been free of processing for 10 minutes (<code>EMS_CARD_QUIET_AFTER</code>, <code>600</code> seconds), searches move to the card.</li>
 <li>A search uses at most a few cores (<code>EMS_QUERY_WORKER_THREADS</code>, the machine&#39;s cores less two, at most 4), so it does not wait on threads the processing holds.</li>
@@ -288,7 +290,7 @@ config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="
 </ul>
 <p>If the interface still feels slow on a small machine during an import, lower <strong>CPU budget for media work</strong> back towards 2 and <strong>Model requests in flight</strong> towards 1 until the import is done. The work waits in its queue and costs nothing there.</p>
 <h2 id="watch-disk-space">Watch disk space<a class="anchor" href="#watch-disk-space" aria-label="Link to this section"></a></h2>
-<p>Your originals take the space they take. On top of them EiN keeps, in the data folder&#39;s <code>files-volatile</code>, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN&#39;s terminal, <code>df</code> shows each storage tier&#39;s free space, how fast it grows a day, and when it will be full at that rate, with the size of the database:</p>
+<p>Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder&#39;s <code>files-volatile</code>, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN&#39;s terminal, <code>df</code> shows each storage tier&#39;s free space, how fast it grows a day, and when it will be full at that rate, with the size of the database:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">df</span></code></pre></div>
 <p>The same figures are on the <strong>Dashboard</strong>, and <code>top</code>&#39;s <strong>Disk</strong> panel shows them live. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</p>
@@ -332,17 +334,17 @@ podman image prune</code></pre></div>
 </tr>
 <tr>
 <td><code>ems-status</code></td>
-<td>The media service&#39;s models, what it is running, its queues and the memory of its model processes</td>
+<td>With the <code>ems</code> module: the media service&#39;s models, what it is running, its queues and the memory of its model processes</td>
 </tr>
 </tbody></table>
 </div>
 <p><strong>Catching up</strong> after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a <strong>Work</strong> tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. <a href="monitoring.html">Health and the dashboard</a> explains the badge, the checks and the tabs.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
-<p><strong>The Dashboard reads Stuck.</strong> Nothing has finished in the last hour. Read the checks under the badge on the <strong>Overview</strong> tab: they name the kind of work that is not moving and why, often the media service not answering. <a href="troubleshooting.html">Troubleshooting</a> goes through the causes.</p>
-<p><strong>Videos never get their browser version.</strong> Check that <strong>CPU budget for media work</strong> is 2 or more, and on the <strong>Work</strong> tab whether <code>transcode</code> is waiting. Without a graphics card, a long video takes many minutes to encode.</p>
+<p><strong>The Dashboard reads Stuck.</strong> Nothing has finished in the last hour. Read the checks under the badge on the <strong>Overview</strong> tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. <a href="troubleshooting.html">Troubleshooting</a> goes through the causes.</p>
+<p><strong>Videos in the Archive never get their browser version.</strong> Check that <strong>CPU budget for media work</strong> is 2 or more, and on the <strong>Work</strong> tab whether <code>transcode</code> is waiting. Without a graphics card, a long video takes many minutes to encode.</p>
 <p><strong>A container restarts on its own.</strong> Look for <code>Memory cgroup out of memory</code> in the kernel log as in <a href="#when-a-container-reaches-its-limit">When a container reaches its limit</a>, and raise that container&#39;s limit.</p>
 <p><strong>The whole machine slows down or stops responding during an import.</strong> The containers together are using more memory than the machine has. Lower the limits so that they fit the machine, or leave out the language model, and lower the processing settings while the import runs.</p>
-<p><strong>Searches are slow while an import runs.</strong> Lower <strong>Model requests in flight</strong> and <strong>CPU budget for media work</strong> for the duration of the import, as in <a href="#keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work</a>.</p>
+<p><strong>Searches are slow while an Archive import runs.</strong> Lower <strong>Model requests in flight</strong> and <strong>CPU budget for media work</strong> for the duration of the import, as in <a href="#keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work</a>.</p>
 <p><strong>The disk fills up.</strong> Run <code>df</code> in EiN&#39;s terminal to see which tier grows, and <code>podman system df</code> on the machine to see what the container engine&#39;s storage takes. EiN has no command that moves the data folder; <a href="data.html">Your data: backup, moving and removing</a> explains how.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>

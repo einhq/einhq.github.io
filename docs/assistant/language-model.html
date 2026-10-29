@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The language model – EiN documentation</title>
-    <meta name="description" content="The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers.">
+    <meta name="description" content="The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers. It applies once the Assistant module is installed.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/assistant/language-model.html">
     <meta property="og:title" content="The language model – EiN documentation">
-    <meta property="og:description" content="The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers.">
+    <meta property="og:description" content="The assistant's chat, and the search box when you type a sentence, read people's words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers. It applies once the Assistant module is installed.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,15 +87,15 @@
           <h1>The language model</h1>
         </header>
         <article class="prose">
-<p>The assistant&#39;s chat, and the search box when you type a sentence, read people&#39;s words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers.</p>
+<p>The assistant&#39;s chat, and the search box when you type a sentence, read people&#39;s words with a language model. This page is for the administrator who sets that model up: on the machine EiN runs on, on its graphics card or processor, or at a hosted provider, and how to check that it answers. It applies once the <a href="index.html">Assistant</a> module is installed.</p>
 <h2 id="what-the-language-model-is-for">What the language model is for<a class="anchor" href="#what-the-language-model-is-for" aria-label="Link to this section"></a></h2>
 <p>EiN asks the language model in three places:</p>
 <ul>
 <li><strong>The chat.</strong> Every answer in the chat comes from the model, which runs EiN&#39;s commands to look things up. <a href="chat.html">Chatting with the assistant</a> shows it from the user&#39;s side.</li>
-<li><strong>The search box.</strong> When someone types a sentence, such as <code>photos of Ruby Wrenfield from 1987</code>, the Archive&#39;s search parser asks the model which words are people, places, years and kinds of media. When the model does not answer within 20 seconds, the parser reads the sentence with its own rules instead, so search keeps working without it.</li>
+<li><strong>The search box.</strong> With the <a href="../archive/index.html">Archive</a> installed, when someone types a sentence, such as <code>photos of Ruby Wrenfield from 1987</code>, the Archive&#39;s search parser asks the model which words are people, places, years and kinds of media. When the model does not answer within 20 seconds, the parser reads the sentence with its own rules instead, so search keeps working without it.</li>
 <li><strong>Plain picture requests in the chat</strong>, such as &quot;Show photos of Peggy Wrenfield from 1990&quot;, which go through the same search parser and are answered with one search.</li>
 </ul>
-<p>All three belong to the <strong>assistant</strong> module. Without it installed, EiN asks no language model at all. Install it like any module: <code>~/ein/setup.sh --module assistant</code>, <strong>Settings → Modules</strong>, or <code>mod install assistant</code> (<a href="../admin/modules.html">Modules</a>).</p>
+<p>All three belong to the <strong>assistant</strong> module. Without it installed, EiN asks no language model at all; <a href="index.html#install-it">The Assistant</a> shows how to install it.</p>
 <p>The language model does no media processing. Faces, picture descriptions, transcripts and the vectors that find things by meaning come from the <a href="../ems/index.html">media service</a>, which runs models of its own.</p>
 <h2 id="choose-where-the-model-runs">Choose where the model runs<a class="anchor" href="#choose-where-the-model-runs" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>

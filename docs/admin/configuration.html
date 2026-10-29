@@ -114,7 +114,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>This page is about the system settings. Personal ones, such as <strong>Seconds per slide</strong> or <strong>Shell history length</strong>, are described in <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
+<p>This page is about the system settings. Personal ones, such as <strong>Shell history length</strong>, or <strong>Seconds per slide</strong> with the Archive installed, are described in <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
 <p>Apart from the settings, the installation has its own environment in <code>.env</code>, in the folder EiN was installed in (<code>~/ein</code> with the installer). It holds what is fixed before EiN starts: where your files are, which ports the machine publishes, the database password. It can also give a setting its starting value. <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a> explains how the two meet.</p>
 <h2 id="change-a-setting-on-the-settings-page">Change a setting on the Settings page<a class="anchor" href="#change-a-setting-on-the-settings-page" aria-label="Link to this section"></a></h2>
 <ol>
@@ -162,14 +162,14 @@
 <p><strong>Overrides only</strong> limits the page to the settings set here, with their number on the button. It is the quickest way to see what has been changed on this installation. When nothing matches a search, <strong>Clear filters</strong> empties the search and turns <strong>Overrides only</strong> off.</p>
 <p>Some settings mean something when they are empty. For those, the description ends with what an empty value does, such as &quot;Currently: the person who creates it.&quot;, and an empty text field says what it means, such as &quot;Empty means no model&quot;.</p>
 <h3 id="give-a-key-to-another-service">Give a key to another service<a class="anchor" href="#give-a-key-to-another-service" aria-label="Link to this section"></a></h3>
-<p>A few settings are keys that EiN sends to another service: the media service&#39;s key, a hosted language model&#39;s key, and the access tokens for private module sources. Their names end in <code>_KEY</code>, and they are kept apart from every other setting:</p>
+<p>A few settings are keys that EiN sends to another service: the access tokens for private module sources, and, with the modules that bring them, the media service&#39;s key and a hosted language model&#39;s key. Their names end in <code>_KEY</code>, and they are kept apart from every other setting:</p>
 <ul>
 <li>Nobody can read a key back, administrators included. The field is empty, with &quot;Not set&quot; or &quot;Set — type a new one to replace it&quot; in it, and the badge says whether the key comes from the deployment or was set here.</li>
 <li>To replace a key, type the new one and choose <strong>Save change</strong>. The field empties again once it is saved.</li>
 <li>A key is in no shell&#39;s environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key.</li>
 </ul>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>The media service&#39;s key, <code>CFG_EMS_KEY</code>, must be one the media service accepts. The installer gives both sides the same key from <code>.env</code>. A different key saved here leaves EiN unable to reach the media service; <strong>Restore inherited value</strong> brings back the deployment&#39;s. <a href="../ems/index.html">The media service</a> explains the keys.</p>
+<p>With the <code>ems</code> module installed, the media service&#39;s key, <code>CFG_EMS_KEY</code>, must be one the media service accepts. The installer gives both sides the same key from <code>.env</code>. A different key saved here leaves EiN unable to reach the media service; <strong>Restore inherited value</strong> brings back the deployment&#39;s. <a href="../ems/index.html">The media service</a> explains the keys.</p>
 </aside>
 <h2 id="what-a-change-restarts">What a change restarts<a class="anchor" href="#what-a-change-restarts" aria-label="Link to this section"></a></h2>
 <p>A setting that names the services that read it when they start restarts them when you save it, so the change takes effect without restarting EiN. The setting&#39;s card lists those services before you save, and the line under it confirms what was restarted afterwards. A setting that names no service restarts nothing. Work already running is not lost: it is picked up again when the service is back.</p>
@@ -179,7 +179,7 @@
 <li>The ports, <strong>HTTP port</strong> and <strong>SSH port</strong>, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.</li>
 <li><strong>Worker backlog rotation (ms)</strong> is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.</li>
 <li>Settings that are policy, such as the default sharing or <strong>Visitors may browse</strong>, are read each time they are applied, so they take effect at once and restart nothing.</li>
-<li>Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as <strong>Face match threshold</strong>. Nothing restarts for them: the service&#39;s shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.</li>
+<li>Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as the Archive&#39;s <strong>Face match threshold</strong>. Nothing restarts for them: the service&#39;s shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.</li>
 </ul>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>With the installer&#39;s setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing <strong>HTTP port</strong> or <strong>SSH port</strong> on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in <code>.env</code> instead, as <a href="network.html">Ports, HTTPS and remote access</a> describes.</p>
@@ -193,7 +193,7 @@ config list --scope system           <span class="hljs-comment"># the system set
 config get CFG_TRASH_RETENTION_DAYS  <span class="hljs-comment"># the value in force</span>
 config <span class="hljs-built_in">set</span> CFG_TRASH_RETENTION_DAYS 14
 config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS</code></pre></div>
-<p><code>config list</code> prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows <code>(set)</code> in place of its value, or nothing when it is not set:</p>
+<p><code>config list</code> prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows <code>(set)</code> in place of its value, or nothing when it is not set. On an EiN with the Archive, the Assistant and the <code>ems</code> module installed, it starts like this:</p>
 <div class="code"><pre tabindex="0"><code>CFG_EMS_KEY	(set) (environment)
 CFG_HTTP_PORT	8080 (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
@@ -223,7 +223,7 @@ Restarted: trash-purger</code></pre></div>
 <tbody><tr>
 <td>number</td>
 <td>digits, with an optional minus and decimals</td>
-<td><code>config set: CFG_CPU_SLOTS: expected a number, got &#39;four&#39;</code></td>
+<td><code>config set: CFG_TRASH_RETENTION_DAYS: expected a number, got &#39;four&#39;</code></td>
 </tr>
 <tr>
 <td>on or off</td>
@@ -256,7 +256,7 @@ Restarted: trash-purger</code></pre></div>
 <p>Other refusals:</p>
 <ul>
 <li><code>config set: unknown setting &#39;CFG_TRASH_DAYS&#39;</code>: no installed part of EiN declares that name. <code>config list</code> shows the names there are; a module&#39;s settings exist only while the module is installed.</li>
-<li><code>config set: &#39;CFG_CPU_SLOTS&#39; is a system setting and needs administrator rights</code>: you are signed in as someone else. <a href="accounts.html">Accounts and groups</a> explains how a member of the <code>sudo</code> group becomes the administrator in a terminal with <code>admin</code>.</li>
+<li><code>config set: &#39;CFG_TRASH_RETENTION_DAYS&#39; is a system setting and needs administrator rights</code>: you are signed in as someone else. <a href="accounts.html">Accounts and groups</a> explains how a member of the <code>sudo</code> group becomes the administrator in a terminal with <code>admin</code>.</li>
 </ul>
 <p>A value with spaces, such as two module sources, is best quoted: <code>config set CFG_MODULE_SOURCES &#39;https://github.com/einhq https://forge.example:3000/family&#39;</code>. With <code>JSON_OUTPUT=1</code> in front, <code>config list</code>, <code>config get</code>, <code>config set</code> and <code>config unset</code> answer in JSON: <code>config list</code> and <code>config get</code> with each setting&#39;s label, description, value and source, <code>config set</code> and <code>config unset</code> with the value and what was restarted. <a href="../reference/commands-core.html#config-set">Core commands</a> has the full entries.</p>
 <h2 id="set-a-value-in-the-deployment">Set a value in the deployment<a class="anchor" href="#set-a-value-in-the-deployment" aria-label="Link to this section"></a></h2>
@@ -281,11 +281,11 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
 <p>A value in <code>.env</code> does not always win:</p>
 <ul>
 <li><strong>A value set here wins over it.</strong> If the setting shows <strong>Set here</strong>, the line in <code>.env</code> has no visible effect. Choose <strong>Restore inherited value</strong>, or run <code>config unset</code>, to let it through.</li>
-<li><strong>A module&#39;s choice wins over it.</strong> The Archive, the assistant and the media service name commands for the <strong>Search</strong> settings, such as <code>CFG_SEARCH_PARSER</code>. To use another one, set it on the Settings page.</li>
-<li><strong>Some settings are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>, <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
+<li><strong>A module&#39;s choice wins over it.</strong> An installed module may name commands for the <strong>Search</strong> settings: the Archive names <code>CFG_SEARCH_PARSER</code>, the Assistant <code>CFG_LANGUAGE_MODEL</code> and <code>CFG_COMMAND_FINDER</code>, and the <code>ems</code> module <code>CFG_TEXT_EMBEDDER</code>. To use another one, set it on the Settings page.</li>
+<li><strong>Some settings are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>, and the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. The Assistant&#39;s <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
 <li><strong>An empty line sets nothing.</strong> <code>CFG_LANGUAGE_MODEL=</code> in <code>.env</code> is the same as leaving the line out.</li>
 </ul>
-<p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_DB_DIR</code>, <code>EIN_ENGINE</code>, <code>COMPOSE_PROJECT_NAME</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. A media service setting is an <code>EMS_…</code> line in the same file; <a href="../ems/index.html">The media service</a> describes them.</p>
+<p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_DB_DIR</code>, <code>EIN_ENGINE</code>, <code>COMPOSE_PROJECT_NAME</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. With the media service installed, its settings are <code>EMS_…</code> lines in the same file; <a href="../ems/index.html">The media service</a> describes them.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p><code>.env</code> holds the database password and the media service&#39;s key, and nothing else keeps them. Keep a copy of it with your backups; <a href="data.html">Your data: backup, moving and removing</a> says what else to keep.</p>
 </aside>

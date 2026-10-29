@@ -95,7 +95,8 @@ to see whether each one works, and what to do when one does not.</p>
 <p>EiN without modules is the tree, the shell, accounts and the frame of the web interface. Every
 page for photos, people and places, the chat, and the work done on what you upload comes from a
 module. <a href="../start/how-ein-works.html#modules-decide-what-ein-is-for">How EiN works</a> explains what a
-module is made of.</p>
+module is made of. Each module has a section of its own in this documentation, under <strong>Modules</strong>;
+skip the sections of modules you have not installed.</p>
 <p>The published modules are the repositories named <code>module-&lt;name&gt;</code> in the einhq organisation on
 GitHub:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -107,17 +108,17 @@ GitHub:</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>archive</code></td>
+<td><a href="../archive/index.html"><code>archive</code></a></td>
 <td>The Archive: albums, media, people and the family tree, locations, devices and tracks, staging, and the search that finds things among them</td>
 <td>The <code>ems</code> module, installed along with it, and the <a href="../ems/index.html">media service</a> to do its work</td>
 </tr>
 <tr>
-<td><code>assistant</code></td>
+<td><a href="../assistant/index.html"><code>assistant</code></a></td>
 <td><strong>Chat</strong>: the assistant that answers questions by running EiN&#39;s commands for you</td>
 <td>A <a href="../assistant/language-model.html">language model</a>, either the installer&#39;s <code>--llm</code> or a hosted one</td>
 </tr>
 <tr>
-<td><code>ems</code></td>
+<td><a href="../ems/index.html"><code>ems</code></a></td>
 <td>EiN&#39;s side of the media service: the client the Archive reaches it through, its health and the graphics card&#39;s readings on the <strong>Dashboard</strong></td>
 <td>The <a href="../ems/index.html">media service</a></td>
 </tr>
@@ -129,7 +130,8 @@ adds it (see <a href="install.html">Installing in detail</a>). Installing <code>
 gives no error, only a reminder from the installer and <code>setup.sh</code> when <code>EIN_MODULES</code> names it, but
 nothing you upload gets thumbnails, dates, faces or searchable text until the media service is
 there.</p>
-<p>A fourth module, <code>importer</code>, moves one particular older archive into EiN. It is not published.</p>
+<p>A fourth module, <a href="../importer/index.html"><code>importer</code></a>, moves one particular older archive into EiN. It
+is not published.</p>
 <h2 id="see-what-is-installed">See what is installed<a class="anchor" href="#see-what-is-installed" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Settings</strong> in the sidebar and choose the <strong>Modules</strong> tab. Everyone who is signed in has this
 tab; for anyone but an administrator it is the only one, and it shows the modules without the

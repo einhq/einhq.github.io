@@ -125,7 +125,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </thead>
 <tbody><tr>
 <td><code>--ems</code></td>
-<td>Adds the media service: every media tool and model, in an image of about 30 GB. Sets <code>EIN_EMS=1</code> in <code>.env</code>.</td>
+<td>Adds the media service, which the <a href="../archive/index.html">Archive</a> needs: every media tool and model, in an image of about 30 GB. Sets <code>EIN_EMS=1</code> in <code>.env</code>. See <a href="../ems/index.html">The media service</a>.</td>
 </tr>
 <tr>
 <td><code>--no-ems</code></td>
@@ -133,7 +133,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tr>
 <tr>
 <td><code>--llm</code></td>
-<td>Adds the assistant&#39;s language model, Qwen3.5-4B in llama.cpp. Sets <code>EIN_LLM=1</code>.</td>
+<td>Adds the language model the <a href="../assistant/index.html">Assistant</a> answers with, Qwen3.5-4B in llama.cpp. Sets <code>EIN_LLM=1</code>.</td>
 </tr>
 <tr>
 <td><code>--no-llm</code></td>
@@ -141,7 +141,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tr>
 <tr>
 <td><code>--module &lt;name&gt;</code></td>
-<td>Adds a module&#39;s name to <code>EIN_MODULES</code> in <code>.env</code>. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.</td>
+<td>Adds a module&#39;s name to <code>EIN_MODULES</code> in <code>.env</code>, such as <code>archive</code> or <code>assistant</code>. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.</td>
 </tr>
 <tr>
 <td><code>--only &lt;service&gt;</code></td>
@@ -162,7 +162,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tbody></table>
 </div>
 <p>An option other than <code>--only</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
-<p><code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
+<p>With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the web interface. <code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
 <p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
@@ -518,7 +518,7 @@ podman compose down
 </tr>
 </tbody></table>
 </div>
-<p>Every service restarts by itself if it stops on its own: <code>compose.yaml</code> gives each <code>restart: unless-stopped</code>, and under podman <code>compose.override.yaml</code> makes it <code>always</code>, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. <a href="../start/how-ein-works.html#what-runs-beside-ein">How EiN works</a> says what each part is for; <a href="../ems/index.html">The media service</a> and <a href="../assistant/language-model.html">The language model</a> cover the two optional ones.</p>
+<p>Every service restarts by itself if it stops on its own: <code>compose.yaml</code> gives each <code>restart: unless-stopped</code>, and under podman <code>compose.override.yaml</code> makes it <code>always</code>, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. <a href="../start/how-ein-works.html#what-runs-beside-ein">How EiN works</a> says what each part is for; <a href="../ems/index.html">The media service</a>, which the Archive needs, and <a href="../assistant/language-model.html">The language model</a>, which the Assistant uses, cover the two optional ones.</p>
 <h3 id="the-files-in-ein">The files in <code>~/ein</code><a class="anchor" href="#the-files-in-ein" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -609,7 +609,7 @@ podman compose down
 <tr>
 <td><code>llm</code></td>
 <td><code>/models</code> in the language model</td>
-<td>the model, downloaded at its first start</td>
+<td>the model, downloaded at its first start, with <code>--llm</code></td>
 </tr>
 <tr>
 <td><code>modules</code></td>
@@ -701,7 +701,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>
-<td>a hosted language model instead of <code>--llm</code>; see <a href="../assistant/language-model.html">The language model</a></td>
+<td>the Assistant&#39;s settings for a hosted language model instead of <code>--llm</code>; see <a href="../assistant/language-model.html">The language model</a></td>
 </tr>
 <tr>
 <td><code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code></td>
@@ -735,7 +735,7 @@ EIN_DB_DIR=</code></pre></div>
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span></code></pre></div>
 <p>Under Docker the <code>restart: always</code> lines are left out.</p>
-<p><a href="../reference/settings.html#cfg_llm_card"><code>CFG_LLM_CARD</code></a> tells EiN whether the model runs on the card (<code>card</code>) or the processor (<code>cpu</code>).</p>
+<p><a href="../reference/settings.html#cfg_llm_card"><code>CFG_LLM_CARD</code></a>, the Assistant&#39;s setting, tells EiN whether the model runs on the card (<code>card</code>) or the processor (<code>cpu</code>).</p>
 <h2 id="change-the-installation-afterwards">Change the installation afterwards<a class="anchor" href="#change-the-installation-afterwards" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -753,7 +753,7 @@ EIN_DB_DIR=</code></pre></div>
 <td><code>~/ein/setup.sh --module &lt;name&gt;</code>, or install it at once in <strong>Settings → Modules</strong>; see <a href="modules.html">Modules</a>.</td>
 </tr>
 <tr>
-<td>A setting of EiN (<code>CFG_…</code>) or of the media service (<code>EMS_…</code>)</td>
+<td>A setting of EiN or a module (<code>CFG_…</code>) or of the media service (<code>EMS_…</code>)</td>
 <td>Add the line to <code>~/ein/.env</code>, then run <code>podman compose up -d</code> in <code>~/ein</code>. Most settings can instead be changed while EiN runs; see <a href="configuration.html">Configuration</a>.</td>
 </tr>
 <tr>
@@ -776,7 +776,7 @@ EIN_DB_DIR=</code></pre></div>
 </div>
 <p>When a change does not take, <code>podman compose up -d --force-recreate</code> makes every container again. With Docker, write <code>docker compose</code> for <code>podman compose</code>.</p>
 <p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, which <code>setup.sh</code> gives each one: the media service&#39;s idle models then go to swap, and a search waits for them. <code>~/ein/setup.sh</code> makes the containers again with it.</p>
-<p>Some of EiN&#39;s environment is set by <code>compose.yaml</code> and wins over a line in <code>.env</code>: <code>POSTGRES_URL</code>, <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code> (always 8080 and 2222 inside the container), <code>CFG_EMS_URL</code>, <code>CFG_EMS_KEY</code> (from <code>EMS_KEY</code>), and the folder paths. For the media service, <code>EMS_PORT</code>, <code>EMS_KEY</code> and <code>EMS_ROOTS</code> are set the same way.</p>
+<p>Some of EiN&#39;s environment is set by <code>compose.yaml</code> and wins over a line in <code>.env</code>: <code>POSTGRES_URL</code>, <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code> (always 8080 and 2222 inside the container), the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code> (from <code>EMS_KEY</code>), and the folder paths. For the media service, <code>EMS_PORT</code>, <code>EMS_KEY</code> and <code>EMS_ROOTS</code> are set the same way.</p>
 <h2 id="run-ein-day-to-day">Run EiN day to day<a class="anchor" href="#run-ein-day-to-day" aria-label="Link to this section"></a></h2>
 <p>Run compose from <code>~/ein</code>, where it finds the project and its <code>.env</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>

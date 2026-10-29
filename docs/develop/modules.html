@@ -93,8 +93,9 @@ walks through a small module from its first file to publishing it, and shows whe
 part goes.</p>
 <h2 id="what-a-module-is">What a module is<a class="anchor" href="#what-a-module-is" aria-label="Link to this section"></a></h2>
 <p>A module is a folder with a <code>mod.json</code> at its top, kept in a repository of its own named
-<code>module-&lt;name&gt;</code>. Core knows no module by name: the Archive, the assistant and the media service
-client are modules like the one you write, and you can read their repositories to see any part on
+<code>module-&lt;name&gt;</code>. Core knows no module by name: the <a href="../archive/index.html">Archive</a>, the
+<a href="../assistant/index.html">Assistant</a> and the media service client, <code>ems</code>
+(<a href="../ems/index.html">The media service</a>), are modules like the one you write, and you can read their repositories to see any part on
 this page at full size.</p>
 <p>When EiN sets a module up, it finds most of what the module brings by where it is in the folder.
 The manifest says who the module is, what it shares with other modules, and what it adds to
@@ -362,8 +363,8 @@ mknode -t recipe <span class="hljs-string">&quot;/archive/recipes/<span class="h
 <p><code>arg --export</code> reads the arguments and sets <code>$TITLE</code> and <code>$SERVES</code>. A command run this way runs
 with the access of whoever runs it, like any script. <a href="../shell/bash.html#give-a-script-options-and-help-with-arg">The shell language</a>
 lists every form <code>arg</code> takes.</p>
-<p>Say what the command does to the system with <code>arg --effect read</code> or <code>write</code>. The assistant runs a
-<code>read</code> command at once and shows a <code>write</code> to the person first; a command that says nothing is
+<p>Say what the command does to the system with <code>arg --effect read</code> or <code>write</code>. With the Assistant
+installed, the assistant runs a <code>read</code> command at once and shows a <code>write</code> to the person first; a command that says nothing is
 treated as a write.</p>
 <h2 id="add-a-command-in-typescript">Add a command in TypeScript<a class="anchor" href="#add-a-command-in-typescript" aria-label="Link to this section"></a></h2>
 <p>A file in <code>bin/</code> that starts with <code>#!ts</code> is a TypeScript command. Its default export is a function
@@ -860,8 +861,8 @@ For the home page, each entry carries a <code>title</code>, the <code>route</cod
 by what they do, and <code>CFG_LANGUAGE_MODEL</code> and <code>CFG_TEXT_EMBEDDER</code> name the commands a module runs
 for a language model or text vectors. The settings are in
 <a href="../reference/settings.html">the settings reference</a>.</p>
-<p>What the assistant knows about your module&#39;s commands, and how to give it more, is in
-<a href="../assistant/teaching.html">Teaching the assistant</a>.</p>
+<p>With the Assistant installed, what the assistant knows about your module&#39;s commands, and how to
+give it more, is in <a href="../assistant/teaching.html">Teaching the assistant</a>.</p>
 <h2 id="write-documentation-for-it">Write documentation for it<a class="anchor" href="#write-documentation-for-it" aria-label="Link to this section"></a></h2>
 <p><code>docs/index.md</code> is the module&#39;s guide. Its opening is the <strong>About</strong> tab of the module&#39;s panel in
 <strong>Settings → Modules</strong>, and the whole of <code>docs/</code> is on the module&#39;s own page in <strong>Documentation</strong>,

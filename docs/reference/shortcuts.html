@@ -93,11 +93,11 @@ page that explains that part in full; this page is for looking a key up.</p>
 <p>Press <kbd>?</kbd> anywhere outside a text field, or choose <strong>Shortcuts</strong> in the account menu. The
 <strong>Keyboard shortcuts</strong> dialog opens, listing the keys that work anywhere under <strong>Anywhere</strong>, and a
 group for each part of the screen that has keys of its own while that part is on screen:
-<strong>Pictures</strong> for a grid of pictures, <strong>Lightbox</strong>, <strong>Video</strong> and <strong>Audio</strong> for the viewer, <strong>Nodes</strong>,
-<strong>Staging</strong> and <strong>Memories</strong>. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.</p>
+<strong>Pictures</strong> for a grid of pictures and <strong>Nodes</strong>, and with the Archive installed <strong>Lightbox</strong>,
+<strong>Video</strong> and <strong>Audio</strong> for the viewer, <strong>Staging</strong> and <strong>Memories</strong>. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.</p>
 <figure class="shot"><a href="../../assets/shots/shortcuts@2x.webp"><img src="../../assets/shots/shortcuts.webp" srcset="../../assets/shots/shortcuts.webp 1x, ../../assets/shots/shortcuts@2x.webp 2x" alt="The Keyboard shortcuts dialog over the Home page, listing the Anywhere group" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The ? dialog lists only the keys of what is on screen now.</figcaption></figure>
-<p>Some pages also show their keys at the foot of the page while you work, such as the <strong>Sort</strong> tab in
-staging; each key there is a button too.</p>
+<p>Some pages also show their keys at the foot of the page while you work, such as the Archive&#39;s
+<strong>Sort</strong> tab in staging; each key there is a button too.</p>
 <p>How to read the keys on this page:</p>
 <ul>
 <li><kbd>Ctrl</kbd> in a shortcut marked &quot;(<kbd>⌘</kbd> on a Mac)&quot; is <kbd>⌘</kbd> on a Mac. The
@@ -105,6 +105,8 @@ staging; each key there is a button too.</p>
 <li><kbd>Alt</kbd> is <kbd>⌥</kbd> on a Mac. The terminal&#39;s command line and the editor in the
 terminal use <kbd>Ctrl</kbd> on a Mac too, never <kbd>⌘</kbd>.</li>
 <li>A letter key works without <kbd>Shift</kbd> unless the table says <kbd>Shift</kbd>.</li>
+<li>Core&#39;s keys come first on this page. The keys a module brings are grouped under the module after
+them, <a href="#archive">Archive</a> and <a href="#assistant">Assistant</a>; they work only with that module installed.</li>
 <li>Keys typed into a text field are the field&#39;s. A page&#39;s single-letter keys, <kbd>?</kbd> and the
 top bar&#39;s keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
 terminal&#39;s <kbd>Alt</kbd> keys work there too.</li>
@@ -119,7 +121,7 @@ terminal&#39;s <kbd>Alt</kbd> keys work there too.</li>
 </thead>
 <tbody><tr>
 <td><kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac)</td>
-<td>Opens the finder: search, or go to a page, person or album; type <code>&gt;</code> for commands. In its dialog form, pressed again, closes it.</td>
+<td>Opens the finder: search, or go to a page or, with the Archive, a person or album; type <code>&gt;</code> for commands. In its dialog form, pressed again, closes it.</td>
 </tr>
 <tr>
 <td><kbd>?</kbd></td>
@@ -134,10 +136,6 @@ terminal&#39;s <kbd>Alt</kbd> keys work there too.</li>
 <td>Adds a terminal tab.</td>
 </tr>
 <tr>
-<td><kbd>Alt</kbd>+<kbd>R</kbd></td>
-<td>Opens an album at random (<strong>Random album</strong>, with the Archive module).</td>
-</tr>
-<tr>
 <td><kbd>Esc</kbd></td>
 <td>Closes a dialog, or a page shown full screen, such as the viewer.</td>
 </tr>
@@ -148,7 +146,7 @@ a dialog of its own. <a href="../guide/interface.html#keyboard-shortcuts">Findin
 dialog, and <a href="../guide/search.html#the-finder-in-the-top-bar">Search and the finder</a> the finder.</p>
 <h3 id="keys-for-top-bar-buttons">Keys for top-bar buttons<a class="anchor" href="#keys-for-top-bar-buttons" aria-label="Link to this section"></a></h3>
 <p>A top-bar button or a row of one of its menus can have a key, from a module or from your own
-navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for <strong>Random album</strong> is the only one EiN ships with.
+navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive&#39;s <strong>Random album</strong> is the only one a published module ships with.
 Each such key is listed under <strong>Anywhere</strong> in the <strong>Keyboard shortcuts</strong> dialog and shown in the
 button&#39;s tooltip, such as <strong>Random album (Alt+R)</strong>. <a href="../guide/customizing.html#give-an-entry-a-key">Your sidebar and top bar</a>
 shows how to give an entry a key, change one, or take one away.</p>
@@ -178,7 +176,7 @@ shows how to give an entry a key, change one, or take one away.</p>
 </tr>
 </tbody></table>
 </div>
-<p>In the search box of the <strong>Search</strong> and <strong>Media</strong> pages:</p>
+<p>In the search box of the <strong>Search</strong> page, and of the Archive&#39;s <strong>Media</strong> page:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -192,7 +190,7 @@ shows how to give an entry a key, change one, or take one away.</p>
 </tr>
 <tr>
 <td><kbd>↑</kbd> <kbd>↓</kbd> in the <code>@</code> list</td>
-<td>Light a person, place, album or other thing to pick.</td>
+<td>Light a thing to pick, such as a person, place or album.</td>
 </tr>
 <tr>
 <td><kbd>Enter</kbd> or <kbd>Tab</kbd> in the list</td>
@@ -205,8 +203,8 @@ shows how to give an entry a key, change one, or take one away.</p>
 </tbody></table>
 </div>
 <h2 id="pictures-in-a-grid">Pictures in a grid<a class="anchor" href="#pictures-in-a-grid" aria-label="Link to this section"></a></h2>
-<p>Wherever pictures stand in a grid: an album, <strong>Media</strong>, a person&#39;s pictures, search
-results. <a href="../archive/albums.html#select-pictures">Albums</a> describes selecting in full.</p>
+<p>Wherever pictures stand in a grid: search results, and with the Archive an album, <strong>Media</strong> or a
+person&#39;s pictures. <a href="../archive/albums.html#select-pictures">Albums</a> describes selecting in full.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -236,11 +234,226 @@ results. <a href="../archive/albums.html#select-pictures">Albums</a> describes s
 </tr>
 </tbody></table>
 </div>
+<h2 id="the-nodes-explorer">The Nodes explorer<a class="anchor" href="#the-nodes-explorer" aria-label="Link to this section"></a></h2>
+<p>While a folder listing of the <strong>Nodes</strong> explorer has the keyboard. <a href="../concepts/tree.html">The tree</a>
+says what the nodes are.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>↑</kbd> <kbd>↓</kbd></td>
+<td>Move the selection to the row above or below.</td>
+</tr>
+<tr>
+<td><kbd>Shift</kbd>+<kbd>↑</kbd> <kbd>Shift</kbd>+<kbd>↓</kbd></td>
+<td>Extend the selection.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>↑</kbd> <kbd>Ctrl</kbd>+<kbd>↓</kbd></td>
+<td>Move without selecting, to pick rows one by one.</td>
+</tr>
+<tr>
+<td><kbd>→</kbd> / <kbd>←</kbd></td>
+<td>Open / close the row&#39;s folder in place. In the icons view the arrows move by the tiles on screen instead.</td>
+</tr>
+<tr>
+<td><kbd>Space</kbd></td>
+<td>Opens or closes the row&#39;s folder in place.</td>
+</tr>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>Go into the row.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>Enter</kbd></td>
+<td><strong>Properties</strong></td>
+</tr>
+<tr>
+<td><kbd>Backspace</kbd></td>
+<td>Up a level.</td>
+</tr>
+<tr>
+<td><kbd>F2</kbd></td>
+<td>Rename. <kbd>Enter</kbd> keeps the new name, <kbd>Esc</kbd> gives it up.</td>
+</tr>
+<tr>
+<td><kbd>Delete</kbd></td>
+<td>Delete, after asking. Only where you may write.</td>
+</tr>
+<tr>
+<td><kbd>F5</kbd></td>
+<td>Reload the listing.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>H</kbd> (<kbd>⌘</kbd>+<kbd>H</kbd> on a Mac)</td>
+<td>Show or hide names that start with a dot.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac)</td>
+<td>Select every row shown, open folders included.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>⌘</kbd>+<kbd>C</kbd> on a Mac)</td>
+<td>Copy.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>X</kbd> (<kbd>⌘</kbd>+<kbd>X</kbd> on a Mac)</td>
+<td>Cut. Only where you may write.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on a Mac)</td>
+<td>Paste into the folder shown. Only where you may write.</td>
+</tr>
+<tr>
+<td><kbd>Tab</kbd></td>
+<td>With two panes, moves the keyboard to the other pane.</td>
+</tr>
+</tbody></table>
+</div>
+<p>In the address bar above a listing, <kbd>Enter</kbd> goes to the path typed and <kbd>Esc</kbd>
+puts back the path you were at.</p>
+<p>The explorer&#39;s code editor saves with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>⌘</kbd>+<kbd>S</kbd> on a
+Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. <a href="../shell/editor.html#edit-a-file-in-the-web-interface">The editor</a>
+covers it.</p>
+<h2 id="the-trash">The trash<a class="anchor" href="#the-trash" aria-label="Link to this section"></a></h2>
+<p>On the <strong>Trash</strong> page (<a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a>):</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>↑</kbd> <kbd>↓</kbd></td>
+<td>Move the selection.</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+click (<kbd>⌘</kbd>+click on a Mac)</td>
+<td>Add a row to the selection.</td>
+</tr>
+<tr>
+<td><kbd>Shift</kbd>+click</td>
+<td>Select a range.</td>
+</tr>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>Opens or closes a row that holds several things.</td>
+</tr>
+<tr>
+<td><kbd>Delete</kbd></td>
+<td><strong>Delete for good</strong>, after asking.</td>
+</tr>
+<tr>
+<td><kbd>F5</kbd></td>
+<td>Reload the list.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="the-terminal">The terminal<a class="anchor" href="#the-terminal" aria-label="Link to this section"></a></h2>
+<p>The terminal&#39;s own keys work whether you are typing in it or not, with <kbd>Alt</kbd> alone, without
+<kbd>Ctrl</kbd>, <kbd>Shift</kbd> or <kbd>⌘</kbd>. <a href="../shell/terminal.html#the-terminals-own-keys">The terminal</a>
+explains them.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Alt</kbd>+<kbd>T</kbd></td>
+<td>Show or hide the terminal</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>N</kbd></td>
+<td>New tab</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>W</kbd></td>
+<td>Close the tab you are typing in; never the last one</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>M</kbd></td>
+<td>Fill the window, or go back to half of it</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>Alt</kbd>+<kbd>→</kbd></td>
+<td>Previous / next tab</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd></td>
+<td>A tenth of the window shorter / taller</td>
+</tr>
+</tbody></table>
+</div>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>On a Mac, ⌥ with a letter types a character of its own (⌥T types †), so ⌥T, ⌥N, ⌥W and ⌥M may
+not reach the terminal. Use the terminal button in the top bar and the buttons in the tab bar
+instead. ⌥ with an arrow key works.</p>
+</aside>
+<p>The command line is edited with bash&#39;s keys: <kbd>Tab</kbd> completes, <kbd>↑</kbd> and
+<kbd>↓</kbd> walk your history, <kbd>Ctrl</kbd>+<kbd>R</kbd> searches it (and does not reload the
+page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command and <kbd>Ctrl</kbd>+<kbd>D</kbd>
+on an empty line ends the shell. <a href="../shell/terminal.html#edit-the-command-line">Edit the command line</a>
+has the full list. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.</p>
+<p>In an <code>ssh</code> session to another machine, <kbd>~</kbd> then <kbd>.</kbd> at the start of a line cuts
+the connection; see <a href="../shell/remote.html">Reaching other machines</a>.</p>
+<h2 id="the-editor-in-the-terminal">The editor in the terminal<a class="anchor" href="#the-editor-in-the-terminal" aria-label="Link to this section"></a></h2>
+<p><code>edit</code> opens a file in the terminal. Its keys are <kbd>Ctrl</kbd> on a Mac too.
+<a href="../shell/editor.html#keys">The editor</a> has every key.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd></td>
+<td>Save</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd></td>
+<td>Leave; asks first if anything is unsaved</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>F</kbd></td>
+<td>Find</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>G</kbd></td>
+<td>Go to a line, or <code>line:column</code></td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+<td>Undo / redo</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd></td>
+<td>Cut the line / paste what was cut</td>
+</tr>
+<tr>
+<td><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>Cancel a question</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
+<p>These keys work with the <a href="../archive/index.html">Archive</a> installed.</p>
+<h3 id="anywhere-with-the-archive">Anywhere with the Archive<a class="anchor" href="#anywhere-with-the-archive" aria-label="Link to this section"></a></h3>
+<p><kbd>Alt</kbd>+<kbd>R</kbd> opens an album at random, as <strong>Random album</strong> in the top bar does. It is a
+top-bar key, so it can be changed or taken away; see <a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a>.</p>
+<h3 id="the-time-scrubber">The time scrubber<a class="anchor" href="#the-time-scrubber" aria-label="Link to this section"></a></h3>
 <p>The time scrubber at the right of a long list (<strong>Scroll through time</strong>), on the albums page, in a
 media timeline and in staging, takes keys once you move to it with <kbd>Tab</kbd>: <kbd>↑</kbd> and
 <kbd>↓</kbd> step to the time before or after, <kbd>Home</kbd> and <kbd>End</kbd> go to the first and
 the last.</p>
-<h2 id="the-viewer">The viewer<a class="anchor" href="#the-viewer" aria-label="Link to this section"></a></h2>
+<h3 id="the-viewer">The viewer<a class="anchor" href="#the-viewer" aria-label="Link to this section"></a></h3>
 <p>While a photo, video or recording is open. <a href="../archive/viewer.html#keyboard-shortcuts-in-the-viewer">Viewing photos, videos and recordings</a>
 explains each.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -291,7 +504,7 @@ explains each.</p>
 <p>In the <strong>Who is this?</strong> box of an unnamed face, <kbd>Enter</kbd> names it. In the <strong>Text in the
 picture</strong> dialog, <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>⌘</kbd>+<kbd>Enter</kbd> on a Mac) saves.
 While a dialog lies over the viewer, the viewer&#39;s keys rest.</p>
-<h3 id="videos-and-recordings">Videos and recordings<a class="anchor" href="#videos-and-recordings" aria-label="Link to this section"></a></h3>
+<h4 id="videos-and-recordings">Videos and recordings<a class="anchor" href="#videos-and-recordings" aria-label="Link to this section"></a></h4>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -352,8 +565,8 @@ While a dialog lies over the viewer, the viewer&#39;s keys rest.</p>
 percent, <kbd>Home</kbd> silences it and <kbd>End</kbd> turns it full up. A click on the timeline
 or the slider leaves the keyboard where it was, so <kbd>←</kbd> and <kbd>→</kbd> still step between
 files.</p>
-<h2 id="the-memories-story">The memories story<a class="anchor" href="#the-memories-story" aria-label="Link to this section"></a></h2>
-<p>On <strong>Home</strong>, while <strong>On this day</strong> plays as a story (<a href="../guide/home.html#watch-the-memories-story">Home, memories and statistics</a>):</p>
+<h3 id="the-memories-story">The memories story<a class="anchor" href="#the-memories-story" aria-label="Link to this section"></a></h3>
+<p>On <strong>Home</strong>, while <strong>On this day</strong> plays as a story (<a href="../archive/home.html#watch-the-memories-story">Memories, news and events on Home</a>):</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -379,7 +592,7 @@ files.</p>
 </tr>
 </tbody></table>
 </div>
-<h2 id="people">People<a class="anchor" href="#people" aria-label="Link to this section"></a></h2>
+<h3 id="people">People<a class="anchor" href="#people" aria-label="Link to this section"></a></h3>
 <p><a href="../archive/people.html">People and faces</a> explains each place.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -431,7 +644,7 @@ files.</p>
 </tr>
 </tbody></table>
 </div>
-<h2 id="staging-the-sort-tab">Staging: the Sort tab<a class="anchor" href="#staging-the-sort-tab" aria-label="Link to this section"></a></h2>
+<h3 id="staging-the-sort-tab">Staging: the Sort tab<a class="anchor" href="#staging-the-sort-tab" aria-label="Link to this section"></a></h3>
 <p>On a computer, the line at the foot of the stream shows the keys for where you are; <strong>hide</strong> folds
 it to a <strong>Keys</strong> chip. The keys do nothing while you type in a field or a dialog is open, and there
 are none on a phone. <a href="../archive/staging.html#keys-in-the-sort-tab">Sorting in staging</a> explains what
@@ -583,7 +796,7 @@ so on pick the suggested album of that number.</li>
 <li><strong>Move to a group</strong>: <kbd>↑</kbd> and <kbd>↓</kbd> light a group, <kbd>Enter</kbd> takes it.</li>
 <li>Renaming a group: <kbd>Enter</kbd> keeps the name, <kbd>Esc</kbd> gives it up.</li>
 </ul>
-<h2 id="staging-duplicates">Staging: duplicates<a class="anchor" href="#staging-duplicates" aria-label="Link to this section"></a></h2>
+<h3 id="staging-duplicates">Staging: duplicates<a class="anchor" href="#staging-duplicates" aria-label="Link to this section"></a></h3>
 <p>On the <strong>Duplicates</strong> tab and in its compare dialog (<a href="../archive/duplicates.html#remove-the-copies-of-one-set">Duplicates</a>):</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -640,221 +853,14 @@ so on pick the suggested album of that number.</li>
 </tr>
 </tbody></table>
 </div>
-<h2 id="the-nodes-explorer">The Nodes explorer<a class="anchor" href="#the-nodes-explorer" aria-label="Link to this section"></a></h2>
-<p>While a folder listing of the <strong>Nodes</strong> explorer has the keyboard. <a href="../concepts/tree.html">The tree</a>
-says what the nodes are.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Keys</th>
-<th>What they do</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><kbd>↑</kbd> <kbd>↓</kbd></td>
-<td>Move the selection to the row above or below.</td>
-</tr>
-<tr>
-<td><kbd>Shift</kbd>+<kbd>↑</kbd> <kbd>Shift</kbd>+<kbd>↓</kbd></td>
-<td>Extend the selection.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>↑</kbd> <kbd>Ctrl</kbd>+<kbd>↓</kbd></td>
-<td>Move without selecting, to pick rows one by one.</td>
-</tr>
-<tr>
-<td><kbd>→</kbd> / <kbd>←</kbd></td>
-<td>Open / close the row&#39;s folder in place. In the icons view the arrows move by the tiles on screen instead.</td>
-</tr>
-<tr>
-<td><kbd>Space</kbd></td>
-<td>Opens or closes the row&#39;s folder in place.</td>
-</tr>
-<tr>
-<td><kbd>Enter</kbd></td>
-<td>Go into the row.</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>Enter</kbd></td>
-<td><strong>Properties</strong></td>
-</tr>
-<tr>
-<td><kbd>Backspace</kbd></td>
-<td>Up a level.</td>
-</tr>
-<tr>
-<td><kbd>F2</kbd></td>
-<td>Rename. <kbd>Enter</kbd> keeps the new name, <kbd>Esc</kbd> gives it up.</td>
-</tr>
-<tr>
-<td><kbd>Delete</kbd></td>
-<td>Delete, after asking. Only where you may write.</td>
-</tr>
-<tr>
-<td><kbd>F5</kbd></td>
-<td>Reload the listing.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>H</kbd> (<kbd>⌘</kbd>+<kbd>H</kbd> on a Mac)</td>
-<td>Show or hide names that start with a dot.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac)</td>
-<td>Select every row shown, open folders included.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>⌘</kbd>+<kbd>C</kbd> on a Mac)</td>
-<td>Copy.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>X</kbd> (<kbd>⌘</kbd>+<kbd>X</kbd> on a Mac)</td>
-<td>Cut. Only where you may write.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>⌘</kbd>+<kbd>V</kbd> on a Mac)</td>
-<td>Paste into the folder shown. Only where you may write.</td>
-</tr>
-<tr>
-<td><kbd>Tab</kbd></td>
-<td>With two panes, moves the keyboard to the other pane.</td>
-</tr>
-</tbody></table>
-</div>
-<p>In the address bar above a listing, <kbd>Enter</kbd> goes to the path typed and <kbd>Esc</kbd>
-puts back the path you were at.</p>
-<p>The explorer&#39;s code editor saves with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>⌘</kbd>+<kbd>S</kbd> on a
-Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. <a href="../shell/editor.html#edit-a-file-in-the-web-interface">The editor</a>
-covers it.</p>
-<h2 id="the-trash">The trash<a class="anchor" href="#the-trash" aria-label="Link to this section"></a></h2>
-<p>On the <strong>Trash</strong> page (<a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a>):</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Keys</th>
-<th>What they do</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><kbd>↑</kbd> <kbd>↓</kbd></td>
-<td>Move the selection.</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+click (<kbd>⌘</kbd>+click on a Mac)</td>
-<td>Add a row to the selection.</td>
-</tr>
-<tr>
-<td><kbd>Shift</kbd>+click</td>
-<td>Select a range.</td>
-</tr>
-<tr>
-<td><kbd>Enter</kbd></td>
-<td>Opens or closes a row that holds several things.</td>
-</tr>
-<tr>
-<td><kbd>Delete</kbd></td>
-<td><strong>Delete for good</strong>, after asking.</td>
-</tr>
-<tr>
-<td><kbd>F5</kbd></td>
-<td>Reload the list.</td>
-</tr>
-</tbody></table>
-</div>
-<h2 id="the-assistant">The assistant<a class="anchor" href="#the-assistant" aria-label="Link to this section"></a></h2>
+<h2 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h2>
+<p>These keys work with the <a href="../assistant/index.html">Assistant</a> installed.</p>
+<h3 id="the-chat">The chat<a class="anchor" href="#the-chat" aria-label="Link to this section"></a></h3>
 <p>In the chat box (<a href="../assistant/chat.html">Chatting with the assistant</a>), <kbd>Enter</kbd> sends the
 question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.</p>
 <p>The side drawer the chat opens in can be made wider or narrower from the keyboard: move to its edge
 (<strong>Resize side panel</strong>) with <kbd>Tab</kbd>, then <kbd>←</kbd> makes it 20 pixels wider and
 <kbd>→</kbd> 20 pixels narrower.</p>
-<h2 id="the-terminal">The terminal<a class="anchor" href="#the-terminal" aria-label="Link to this section"></a></h2>
-<p>The terminal&#39;s own keys work whether you are typing in it or not, with <kbd>Alt</kbd> alone, without
-<kbd>Ctrl</kbd>, <kbd>Shift</kbd> or <kbd>⌘</kbd>. <a href="../shell/terminal.html#the-terminals-own-keys">The terminal</a>
-explains them.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Keys</th>
-<th>What they do</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><kbd>Alt</kbd>+<kbd>T</kbd></td>
-<td>Show or hide the terminal</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>N</kbd></td>
-<td>New tab</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>W</kbd></td>
-<td>Close the tab you are typing in; never the last one</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>M</kbd></td>
-<td>Fill the window, or go back to half of it</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>←</kbd> / <kbd>Alt</kbd>+<kbd>→</kbd></td>
-<td>Previous / next tab</td>
-</tr>
-<tr>
-<td><kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd></td>
-<td>A tenth of the window shorter / taller</td>
-</tr>
-</tbody></table>
-</div>
-<aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>On a Mac, ⌥ with a letter types a character of its own (⌥T types †), so ⌥T, ⌥N, ⌥W and ⌥M may
-not reach the terminal. Use the terminal button in the top bar and the buttons in the tab bar
-instead. ⌥ with an arrow key works.</p>
-</aside>
-<p>The command line is edited with bash&#39;s keys: <kbd>Tab</kbd> completes, <kbd>↑</kbd> and
-<kbd>↓</kbd> walk your history, <kbd>Ctrl</kbd>+<kbd>R</kbd> searches it (and does not reload the
-page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command and <kbd>Ctrl</kbd>+<kbd>D</kbd>
-on an empty line ends the shell. <a href="../shell/terminal.html#edit-the-command-line">Edit the command line</a>
-has the full list. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.</p>
-<p>In an <code>ssh</code> session to another machine, <kbd>~</kbd> then <kbd>.</kbd> at the start of a line cuts
-the connection; see <a href="../shell/remote.html">Reaching other machines</a>.</p>
-<h2 id="the-editor-in-the-terminal">The editor in the terminal<a class="anchor" href="#the-editor-in-the-terminal" aria-label="Link to this section"></a></h2>
-<p><code>edit</code> opens a file in the terminal. Its keys are <kbd>Ctrl</kbd> on a Mac too.
-<a href="../shell/editor.html#keys">The editor</a> has every key.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Keys</th>
-<th>What they do</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd></td>
-<td>Save</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd></td>
-<td>Leave; asks first if anything is unsaved</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>F</kbd></td>
-<td>Find</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>G</kbd></td>
-<td>Go to a line, or <code>line:column</code></td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
-<td>Undo / redo</td>
-</tr>
-<tr>
-<td><kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd></td>
-<td>Cut the line / paste what was cut</td>
-</tr>
-<tr>
-<td><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
-<td>Cancel a question</td>
-</tr>
-</tbody></table>
-</div>
 <h2 id="when-a-key-does-nothing">When a key does nothing<a class="anchor" href="#when-a-key-does-nothing" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>The focus is in a text field.</strong> Click an empty part of the page, or press <kbd>Esc</kbd> in a
@@ -868,8 +874,7 @@ terminal also takes <kbd>Ctrl</kbd>+<kbd>O</kbd> and <kbd>Ctrl</kbd>+<kbd>X</kbd
 <li><strong>A top-bar key you set is missing.</strong> A key two entries ask for goes to the first in the top bar&#39;s
 order, and EiN&#39;s own keys are never given away. <a href="../guide/customizing.html#when-something-goes-differently">Your sidebar and top bar</a>
 helps find out why.</li>
-<li><strong>On a phone or tablet</strong> there is no keyboard to press; staging&#39;s keys and the others need a
-computer. <a href="../guide/phone.html">EiN on a phone</a> covers the gestures instead.</li>
+<li><strong>On a phone or tablet</strong> there is no keyboard to press; the keys need a computer. <a href="../guide/phone.html">EiN on a phone</a> covers the gestures instead.</li>
 </ul>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
@@ -887,7 +892,7 @@ computer. <a href="../guide/phone.html">EiN on a phone</a> covers the gestures i
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/shortcuts.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#see-the-keys-where-you-are">See the keys where you are</a></li><li><a href="#anywhere">Anywhere</a></li><li class="nested"><a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a></li><li><a href="#the-finder-and-search-boxes">The finder and search boxes</a></li><li><a href="#pictures-in-a-grid">Pictures in a grid</a></li><li><a href="#the-viewer">The viewer</a></li><li class="nested"><a href="#videos-and-recordings">Videos and recordings</a></li><li><a href="#the-memories-story">The memories story</a></li><li><a href="#people">People</a></li><li><a href="#staging-the-sort-tab">Staging: the Sort tab</a></li><li><a href="#staging-duplicates">Staging: duplicates</a></li><li><a href="#the-nodes-explorer">The Nodes explorer</a></li><li><a href="#the-trash">The trash</a></li><li><a href="#the-assistant">The assistant</a></li><li><a href="#the-terminal">The terminal</a></li><li><a href="#the-editor-in-the-terminal">The editor in the terminal</a></li><li><a href="#when-a-key-does-nothing">When a key does nothing</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#see-the-keys-where-you-are">See the keys where you are</a></li><li><a href="#anywhere">Anywhere</a></li><li class="nested"><a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a></li><li><a href="#the-finder-and-search-boxes">The finder and search boxes</a></li><li><a href="#pictures-in-a-grid">Pictures in a grid</a></li><li><a href="#the-nodes-explorer">The Nodes explorer</a></li><li><a href="#the-trash">The trash</a></li><li><a href="#the-terminal">The terminal</a></li><li><a href="#the-editor-in-the-terminal">The editor in the terminal</a></li><li><a href="#archive">Archive</a></li><li class="nested"><a href="#anywhere-with-the-archive">Anywhere with the Archive</a></li><li class="nested"><a href="#the-time-scrubber">The time scrubber</a></li><li class="nested"><a href="#the-viewer">The viewer</a></li><li class="nested"><a href="#the-memories-story">The memories story</a></li><li class="nested"><a href="#people">People</a></li><li class="nested"><a href="#staging-the-sort-tab">Staging: the Sort tab</a></li><li class="nested"><a href="#staging-duplicates">Staging: duplicates</a></li><li><a href="#assistant">Assistant</a></li><li class="nested"><a href="#the-chat">The chat</a></li><li><a href="#when-a-key-does-nothing">When a key does nothing</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

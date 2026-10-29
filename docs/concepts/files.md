@@ -4,6 +4,10 @@ This page explains how EiN keeps the content of files: what a file node records 
 where the bytes are kept on the machine, and what copying, moving and deleting do to them. It is for
 anyone who wants to know where their photos are, and for the administrator who looks after the disk.
 
+Files and their storage are core's. The examples use a photo in an album,
+`/archive/albums/christmas-2019`, a path that exists with the [Archive](../archive/index.md)
+installed, and what the Archive makes from a file is marked as such.
+
 ## A file is a node with bytes
 
 A photo, a video, a recording, a scanned letter and a text you write in the editor are all nodes of
@@ -25,7 +29,7 @@ A media file carries more once the Archive has read it, such as the time it was 
 orientation; [Nodes and node types](nodes.md) describes a node part by part.
 
 The bytes are kept apart from the node and are found by the node's id, not by its name or path.
-Renaming a file or moving it to another album changes the tree and leaves the bytes where they are,
+Renaming a file or moving it to another folder changes the tree and leaves the bytes where they are,
 however large the file is.
 
 To see a file's attributes, ask for the node in JSON and pick them out:
@@ -69,11 +73,11 @@ Over SFTP these children are in a hidden folder named after the file with `_` ad
 
 EiN keeps the bytes of files in three places, called tiers. Each file's bytes are on exactly one:
 
-| Tier       | What goes there                                                                                                                                                                                                                                                                             | Where it is in a standard install                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                                                           | `files` in the data folder                          |
-| `volatile` | What EiN makes from another file and can make again: thumbnails, playable videos and recordings, face crops                                                                                                                                                                                 | `files-volatile` in the data folder                 |
-| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, the events in a person's story, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the volume `ein_db` |
+| Tier       | What goes there                                                                                                                                                                                                                                                                                                  | Where it is in a standard install                   |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                                                                                | `files` in the data folder                          |
+| `volatile` | What EiN makes from another file and can make again: with the Archive, thumbnails, playable videos and recordings, face crops                                                                                                                                                                                    | `files-volatile` in the data folder                 |
+| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, and with the Archive the events in a person's story, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the volume `ein_db` |
 
 EiN decides the tier when the file is made:
 
@@ -102,14 +106,14 @@ than your originals. The deployment sets the two places with `FILE_ROOT_PATH` an
 In a standard install, the data folder is `~/ein/data` unless you chose another place at the
 install. EiN sees its folders at fixed paths inside its container:
 
-| Folder in the data folder | Path inside EiN   | What it holds                                                                                                    |
-| ------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `files`                   | `/files`          | the `disk` tier: your originals                                                                                  |
-| `files-volatile`          | `/files-volatile` | the `volatile` tier: thumbnails and other renditions                                                             |
-| `files-tmp`               | `/files-tmp`      | scratch space, such as copies of `db`-tier content handed to the media service                                   |
-| `old`                     | `/old`            | the files of an older installation that the importer module reads and links to; empty unless you put files there |
+| Folder in the data folder | Path inside EiN   | What it holds                                                                                                                     |
+| ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `files`                   | `/files`          | the `disk` tier: your originals                                                                                                   |
+| `files-volatile`          | `/files-volatile` | the `volatile` tier: thumbnails and other renditions                                                                              |
+| `files-tmp`               | `/files-tmp`      | scratch space, such as copies of `db`-tier content handed to the media service                                                    |
+| `old`                     | `/old`            | the files of an older installation that the [Importer](../importer/index.md) reads and links to; empty unless you put files there |
 
-The media service mounts the same folders at the same paths, so a path EiN hands it is the file it
+The media service, which the Archive needs, mounts the same folders at the same paths, so a path EiN hands it is the file it
 opens, and the files on the `disk` and `volatile` tiers are never copied between them. It may read your originals but never write them.
 [Installing in detail](../admin/install.md#the-data-folder) has the whole layout, and
 [The media service](../ems/index.md) how the two share it.
@@ -158,11 +162,11 @@ EiN keeps a file's `size`, `sha256` and `writtenAt` up to date as the bytes are 
 way they come in: an upload, SFTP, the editor or a shell redirect such as `>`. You never run anything
 to bring them up to date.
 
-| Attribute   | What depends on it                                                                                                                                                                                                      |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `size`      | Listings, `du`, and a download's length                                                                                                                                                                                 |
-| `sha256`    | Finding exact copies of a file ([Duplicates](../archive/duplicates.md)), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file's content changed so it reads it again |
-| `writtenAt` | The modification time SFTP reports, so a backup tool or `rsync` sees a photo as unchanged while EiN is still working out its faces and description                                                                      |
+| Attribute   | What depends on it                                                                                                                                                                                                                        |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `size`      | Listings, `du`, and a download's length                                                                                                                                                                                                   |
+| `sha256`    | With the Archive, finding exact copies of a file ([Duplicates](../archive/duplicates.md)), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file's content changed so it reads it again |
+| `writtenAt` | The modification time SFTP reports, so a backup tool or `rsync` sees a photo as unchanged while EiN is still working out its faces and description                                                                                        |
 
 `writtenAt` is when the bytes last changed. A node also has a modification time of its own, which
 moves whenever any attribute changes; that is why SFTP reports `writtenAt` instead. A client that
@@ -188,28 +192,28 @@ and [mime](../reference/commands-core.md#mime).
 Every way in writes through the same place, so each one records size, checksum and time, and checks
 your permissions the same way.
 
-| Way                               | What happens to the bytes                                                                                                                                                                                                        |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. [Getting your photos in](../archive/importing.md) has the ways to upload. |
-| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                               |
-| SFTP, `scp` and sshfs             | Written as on any SFTP server. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                         |
-| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                        |
-| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                             |
-| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                              |
+| Way                               | What happens to the bytes                                                                                                                                                                                                                          |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. With the Archive, [Getting your photos in](../archive/importing.md) has the ways to upload. |
+| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                                                 |
+| SFTP, `scp` and sshfs             | Written as on any SFTP server. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                                           |
+| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                                          |
+| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                                               |
+| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                                                |
 
 ## Copying, moving, linking and deleting
 
 What happens to the bytes depends on the command:
 
-| What you do                                                           | What happens to the bytes                                                                                   |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Rename or move a file, `mv`                                           | Nothing. The node keeps its id, and its bytes stay where they are.                                          |
-| Move a file into or out of a mount (see below)                        | The file is copied to the other side and then removed, so it gets a new id and its bytes are written again. |
-| Copy a file, `cp`                                                     | A new node with a copy of the bytes. The copy takes as much space again, and has the same checksum.         |
-| Make a hard link, `ln`                                                | The same node under a second name. There is one copy of the bytes.                                          |
-| Make a softlink, `ln -s`, or add a picture to an album from elsewhere | A link that points at the file by its path. It has no bytes of its own.                                     |
-| Put a file in the trash                                               | The file moves into your trash with its bytes, and comes back whole when you restore it.                    |
-| Delete a file, `rm`, or empty the trash                               | The node goes, with everything beneath it. Its bytes are removed once the last name the node has is gone.   |
+| What you do                                                                              | What happens to the bytes                                                                                   |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Rename or move a file, `mv`                                                              | Nothing. The node keeps its id, and its bytes stay where they are.                                          |
+| Move a file into or out of a mount (see below)                                           | The file is copied to the other side and then removed, so it gets a new id and its bytes are written again. |
+| Copy a file, `cp`                                                                        | A new node with a copy of the bytes. The copy takes as much space again, and has the same checksum.         |
+| Make a hard link, `ln`                                                                   | The same node under a second name. There is one copy of the bytes.                                          |
+| Make a softlink, `ln -s`, or, with the Archive, add a picture to an album from elsewhere | A link that points at the file by its path. It has no bytes of its own.                                     |
+| Put a file in the trash                                                                  | The file moves into your trash with its bytes, and comes back whole when you restore it.                    |
+| Delete a file, `rm`, or empty the trash                                                  | The node goes, with everything beneath it. Its bytes are removed once the last name the node has is gone.   |
 
 What is in your trash keeps its room on the disk. It is removed for good once it has been there
 longer than **Days in the trash**,
@@ -246,8 +250,8 @@ The mounts every EiN makes at its start:
 A `filesystem` mount shows a folder of the machine, and an `sftp` mount shows a folder of another
 machine. Both are mirrors: their files are the other side's files, and nothing is stored about them
 in EiN. A file in a mirror cannot have children, so EiN makes no thumbnails, reads no dates and
-finds no faces in them, and changes in an `sftp` mount start no pipelines at all. To bring files
-from a mount into the archive, copy them into staging.
+finds no faces in them, and changes in an `sftp` mount start no pipelines at all. With the Archive, to
+bring files from a mount into the archive, copy them into staging.
 
 Only the administrator mounts and unmounts. [Reaching other machines](../shell/remote.md#mount-a-folder-of-another-machine)
 shows how to mount a folder of another machine and keep the mount across restarts, and
@@ -294,16 +298,16 @@ how to make room.
 
 ## When something goes differently
 
-| What you see                                                            | Why                                                                                    | What to do                                                                                                                                        |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A picture's thumbnail is missing although the picture was read long ago | Its rendition was never finished, or its bytes on the `volatile` tier are gone.        | Run `regenerate --force` on the picture or its album. See [regenerate](../archive/commands.md#regenerate).                                        |
-| A file's size or checksum is wrong after it was changed outside EiN     | The bytes changed without passing through EiN, so the node was not told.               | Run `file-sync` on the file.                                                                                                                      |
-| `File is frozen and cannot be modified`                                 | The file is marked `frozen`, as the importer marks the originals it links to in `old`. | Leave its content as it is. Someone who may change the file can lift the mark with `attrs -d frozen <file>`; a copy made with `cp` is frozen too. |
-| `storage tier is set once at creation and cannot be changed`            | A command tried to move a file to another tier.                                        | Copy the content into a new file made with `--tier`, then remove the old one.                                                                     |
-| `a filesystem is mounted at /mnt/nas` when removing or moving a folder  | A mount stands on that folder or below it.                                             | Unmount it first with `unmount`, or `unmount --save` to keep it from coming back at the next start.                                               |
-| `mount: permission denied, only admin is allowed to mount`              | Only the administrator mounts.                                                         | Ask the administrator.                                                                                                                            |
-| `df` says `no disk sample yet — is metrics-sampler running?`            | The service that measures the disk has not taken a sample yet, or is not running.      | It takes its first sample as it starts, so wait a minute. If it stays, see [Services and logs](../admin/services-logs.md).                        |
-| `unzip` says `not enough space`                                         | The files in the zip would not leave a tenth of their size free.                       | Free space on the disk, or expand the zip on a machine with room and copy the files in.                                                           |
+| What you see                                                                              | Why                                                                                    | What to do                                                                                                                                        |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| With the Archive, a picture's thumbnail is missing although the picture was read long ago | Its rendition was never finished, or its bytes on the `volatile` tier are gone.        | Run `regenerate --force` on the picture or its album. See [regenerate](../archive/commands.md#regenerate).                                        |
+| A file's size or checksum is wrong after it was changed outside EiN                       | The bytes changed without passing through EiN, so the node was not told.               | Run `file-sync` on the file.                                                                                                                      |
+| `File is frozen and cannot be modified`                                                   | The file is marked `frozen`, as the Importer marks the originals it links to in `old`. | Leave its content as it is. Someone who may change the file can lift the mark with `attrs -d frozen <file>`; a copy made with `cp` is frozen too. |
+| `storage tier is set once at creation and cannot be changed`                              | A command tried to move a file to another tier.                                        | Copy the content into a new file made with `--tier`, then remove the old one.                                                                     |
+| `a filesystem is mounted at /mnt/nas` when removing or moving a folder                    | A mount stands on that folder or below it.                                             | Unmount it first with `unmount`, or `unmount --save` to keep it from coming back at the next start.                                               |
+| `mount: permission denied, only admin is allowed to mount`                                | Only the administrator mounts.                                                         | Ask the administrator.                                                                                                                            |
+| `df` says `no disk sample yet — is metrics-sampler running?`                              | The service that measures the disk has not taken a sample yet, or is not running.      | It takes its first sample as it starts, so wait a minute. If it stays, see [Services and logs](../admin/services-logs.md).                        |
+| `unzip` says `not enough space`                                                           | The files in the zip would not leave a tenth of their size free.                       | Free space on the disk, or expand the zip on a machine with room and copy the files in.                                                           |
 
 [Troubleshooting](../admin/troubleshooting.md) covers a disk that has filled up and other problems
 of the whole installation.

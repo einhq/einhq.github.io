@@ -94,6 +94,9 @@ command at a time: what EiN&#39;s shell does like bash, where it differs, how to
 get answers as JSON.</p>
 <p>The terminal itself, with its tabs, keys, history and <kbd>Tab</kbd> completion, has a page of its
 own: <a href="terminal.html">The terminal</a>. <a href="commands.html">Commands by task</a> tells you which command does what.</p>
+<p>The examples work on the <a href="../archive/index.html">Archive</a>&#39;s folders, such as <code>/archive/albums</code> and
+<code>/archive/people</code>, which are there once it is installed. The shell itself is the same on any EiN:
+try them on your home folder or <code>/etc</code> where the Archive is not installed.</p>
 <h2 id="bash-on-a-tree-of-nodes">Bash, on a tree of nodes<a class="anchor" href="#bash-on-a-tree-of-nodes" aria-label="Link to this section"></a></h2>
 <p>The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Nearly all
 of the language is there:</p>
@@ -209,10 +212,10 @@ on with the next round.</p>
 <h2 id="how-eins-shell-differs-from-bash-on-linux">How EiN&#39;s shell differs from bash on Linux<a class="anchor" href="#how-eins-shell-differs-from-bash-on-linux" aria-label="Link to this section"></a></h2>
 <p>Most scripts written for bash run unchanged. These are the places where EiN behaves differently,
 because the tree is not a disk and the commands are not Linux programs.</p>
-<p><strong>Every node can hold others.</strong> A photo has children of its own, such as its EXIF data and the regions of its faces, so
-<code>[ -d &quot;$path&quot; ]</code> is true for every node that exists. Test with <code>[ -e &quot;$path&quot; ]</code> whether a node is
-there, and <code>[ -f &quot;$path&quot; ]</code> whether it is a file. <code>[ -s &quot;$path&quot; ]</code> is true only for a file with
-content. <code>[ -t 1 ]</code> is always false.</p>
+<p><strong>Every node can hold others.</strong> A file can have children of its own, as a photo in the Archive has
+its EXIF data and the regions of its faces, so <code>[ -d &quot;$path&quot; ]</code> is true for every node that exists.
+Test with <code>[ -e &quot;$path&quot; ]</code> whether a node is there, and <code>[ -f &quot;$path&quot; ]</code> whether it is a file.
+<code>[ -s &quot;$path&quot; ]</code> is true only for a file with content. <code>[ -t 1 ]</code> is always false.</p>
 <p><strong>Plain variables reach commands.</strong> A command or script started from the shell sees all of the
 shell&#39;s variables, not only the exported ones. <code>JSON_OUTPUT=1</code> on a line of its own therefore
 changes every command after it until you <code>unset JSON_OUTPUT</code>. Put it in front of one command to

@@ -24,7 +24,7 @@ A location with a circle or a polygon does work for you:
 
 - Pictures whose position falls inside it are linked to it. The viewer shows the location's name
   for them, and its **Media** tab lists them.
-- Typing `@` and the location's name finds those pictures in [search](../guide/search.md) and on the map,
+- Typing `@` and the location's name finds those pictures in [search](search.md) and on the map,
   and narrows the Year page to what holds them.
 - An album's **Info** tab lists the locations of its pictures under **Places**.
 - [Staging](staging.md) names the albums it suggests after the location most of their pictures are
@@ -396,7 +396,7 @@ a phone, an info icon beside the box shows what the box understood. To show ever
 empty the box and press <kbd>Enter</kbd>.
 
 Finding pictures by what they show needs the media service; see
-[What needs the media service and a language model](../guide/search.md#what-needs-the-media-service-and-a-language-model).
+[What needs the media service and a language model](search.md#what-needs-the-media-service-and-a-language-model).
 
 ### Share or bookmark a view
 
@@ -506,6 +506,6 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   **Set location**
 - [Family tree, events and homes](family.md): homes, residents and events
 - [Devices and GPS tracks](devices.md): the devices whose tracks the map draws
-- [Search and the finder](../guide/search.md): finding pictures by location with `@`
+- [Search and the finder](search.md): finding pictures by location with `@`
 - [Albums](albums.md): an album's **Map** and **Info** tabs
 - [Viewing photos, videos and recordings](viewer.md): the place section of the details panel

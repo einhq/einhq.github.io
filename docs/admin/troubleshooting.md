@@ -1,6 +1,6 @@
 # Troubleshooting
 
-This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, work stops getting done, pictures get no thumbnails, or the assistant stays silent. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see [Install EiN](../start/install.md#when-something-goes-differently).
+This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, or work stops getting done. Core's problems come first; after them, the problems that belong to a module are grouped under its name, for you to skip when you have not installed it: the [Archive](#archive)'s pictures without thumbnails, the [Assistant](#assistant) that stays silent, and the [Media service](#media-service). Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see [Install EiN](../start/install.md#when-something-goes-differently).
 
 The commands on the machine are written for podman and run in `~/ein`, where the installer put EiN. With Docker, write `docker compose` where they say `podman compose`.
 
@@ -8,12 +8,12 @@ The commands on the machine are written for podman and run in `~/ein`, where the
 
 Three places tell you most of what is wrong. Look at them in this order.
 
-1. **The containers.** On the machine EiN runs on, see whether every container is up and whether the database and the media service are healthy:
+1. **The containers.** On the machine EiN runs on, see whether every container is up and whether the database, and the media service when it is installed, are healthy:
 
    ```bash
    # on the machine EiN runs on, in ~/ein
    podman compose ps
-   podman compose logs --tail 100 ein     # the end of EiN's log; db, ems or llm for the others
+   podman compose logs --tail 100 ein     # the end of EiN's log; db, and ems or llm when installed, for the others
    ```
 
    A container that shows `Up` for only a few seconds, again and again, stops and is started again by its restart policy. Its log says why.
@@ -22,7 +22,7 @@ Three places tell you most of what is wrong. Look at them in this order.
 
    ![The System dashboard with a green Healthy badge above its title, the tabs Overview, Work, Media service, Services and Log, and tiles for CPU, memory, GPU and VRAM above a chart of completed work](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
 
-3. **`health` in EiN's terminal.** The same verdict and every check, fine or not, in text:
+3. **`health` in EiN's terminal.** The same verdict and every check, fine or not, in text. On an EiN with the `ems` module installed, it may read:
 
    ```bash
    # in EiN's terminal, as an administrator
@@ -49,7 +49,7 @@ Inside EiN, the system log is `/var/logs/system`, which `dmesg` prints; it start
 ```bash
 # in EiN's terminal, as an administrator
 dmesg -n 50 --level=warn                       # the last 50 warnings and errors
-tail /var/logs/services/ems-link/stdout.log    # one service's log
+tail /var/logs/services/pipeline-engine/stdout.log    # one service's log
 ```
 
 [Services and logs](services-logs.md) covers both kinds of log and the services that write them.
@@ -72,7 +72,6 @@ EiN answers on port 8080 only once its database is up and its start is through: 
 | EiN is not running after the machine restarted                                                  | Under podman, `podman-restart.service` starts it at boot, and under rootless podman only for a user who lingers. Start it with `podman compose up -d`, and see [Start EiN when the machine boots](install.md#start-ein-when-the-machine-boots).                                                              |
 | EiN answers on the machine itself, but not from another computer                                | Open ports 8080 and 2222 in the machine's firewall, and try the machine's IP address instead of a name ending in `.local`. See [Open the ports in the firewall](network.md#open-the-ports-in-the-firewall).                                                                                                  |
 | The web interface or SSH stopped answering after a change to **HTTP port** or **SSH port**      | Reset the setting through whichever still answers, with `config unset CFG_HTTP_PORT` or `config unset CFG_SSH_PORT`, then `podman compose restart ein`. Ports are changed in `.env`; see [Ports, HTTPS and remote access](network.md).                                                                       |
-| `unresolvable CDI devices nvidia.com/gpu=all` when the containers start                         | The container engine cannot hand the graphics card over. See [The graphics card](../ems/gpu.md).                                                                                                                                                                                                             |
 
 A container that keeps starting over without a clear message in its log may be running out of memory: each has a limit, 6 GB for EiN unless `EIN_MEMORY` in `.env` sets another. The machine's kernel log records a container stopped for that reason (`journalctl -k | grep -i oom` on most systems). [Performance and sizing](performance.md) says how to raise the limits.
 
@@ -99,7 +98,7 @@ A container that keeps starting over without a clear message in its log may be r
 
 ## Work does not get done
 
-Everything EiN does after a file arrives, from thumbnails to faces to transcriptions, is pipeline work, done in the background. [Processing and pipelines](processing.md) explains how it is run; this section is about finding why it stopped.
+Everything EiN does after a file arrives is pipeline work, done in the background: with the Archive, everything from thumbnails to faces to transcriptions. [Processing and pipelines](processing.md) explains how it is run; this section is about finding why it stopped.
 
 Start with `health`, or the **Overview** and **Work** tabs of the dashboard. Each check that is not fine points at one of the cases below.
 
@@ -127,7 +126,7 @@ fail  failed work  2 instances failed again after three more runs and need a per
 
    `pipeline-status` shows each step of the instance and the error of the one that failed.
 
-2. Fix the cause the error names: a media service that was down, a full disk, a module that needed an update.
+2. Fix the cause the error names: a full disk, a module that needed an update or, with the Archive, a media service that was down.
 
 3. Run the work again. One instance at a time, from the pipeline's current definition:
 
@@ -146,74 +145,18 @@ fail  failed work  2 instances failed again after three more runs and need a per
 
 A step that failed on its input, such as a file no program can open, is not run again, since every run would meet the same bytes. `health` counts those as `input`, and they need nothing from you.
 
-When the media service is updated, the `ems-link` service runs the failed instances again at once (`pipeline heal --now --apply`), all but those that failed on their input or were left for a person, since a new build is the likeliest fix.
-
 ### Waiting work that does not drain
 
 | What `health` says                                                                              | What it means and what to do                                                                                                                                                                                                                |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stuck: … jobs waiting, none done in the last hour`                                             | Work waits and nothing takes it. The checks below the verdict say which kind; look there.                                                                                                                                                   |
-| `… waiting for EMS, which could not run it yet; next try in …`                                  | The media service is busy or could not load what the work needs. EiN tries again at the time it names. When it keeps saying so, see [Thumbnails, faces and text are missing](#thumbnails-faces-and-text-are-missing).                       |
 | `… waiting, and no worker offers this kind`                                                     | No running service takes this kind of work. The dashboard shows it in red as **Work that nothing will run**, with the pipelines that queue it. Usually a module's service has stopped: see [A service has stopped](#a-service-has-stopped). |
 | **Work that nothing will run** says no defined pipeline queues this kind any more               | The jobs are left over from a pipeline that was removed. Cancel them with the `pool cancel` command the message shows.                                                                                                                      |
-| `… waiting, the oldest for …, none done in the last hour`                                       | A kind of work has stopped draining. Check the service that does it, and the media service when the work needs it.                                                                                                                          |
+| `… waiting, the oldest for …, none done in the last hour`                                       | A kind of work has stopped draining. Check the service that does it, and, with the Archive, the media service when the work needs it.                                                                                                       |
 | `… running steps silent for … or more: …`                                                       | Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, stop its instance with `pipeline-cancel <pipeline>/<id>` and run it afresh with `pipeline-rerun <pipeline>/<id>`.       |
 | `… entries dropped after their delivery attempts (queue-dead /var/queues/…: --retry or --drop)` | Events a queue gave up delivering. Look at them with `queue-dead <path>`, then put them back with `queue-dead --retry <path>` once the cause is fixed, or remove them with `queue-dead --drop <path>`.                                      |
 
-`pipeline-overview` and `pool-stat` show the counts behind these checks, and `top` shows them live. `pipeline-repair` finds instances marked finished while steps of theirs still wait, and with `--apply` sets them running again; run it without `--apply` first to see what it would change.
-
-## Thumbnails, faces and text are missing
-
-Thumbnails, video renditions, faces, picture vectors, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.
-
-1. See whether EiN reaches it:
-
-   ```bash
-   # in EiN's terminal
-   ems-status
-   ```
-
-   `ems-status` shows its version, every model and its state, what it is running and what it is degraded in. On the dashboard, the **Media service** tab shows the same.
-
-2. When `health` says `http://ems:8181 is not answering; work that needs it waits`:
-
-   - **It was never installed.** The Archive needs it. Add it with `~/ein/setup.sh --ems`; its image is about 30 GB.
-   - **It is starting.** Its health check gives it two minutes to start. `podman compose ps` shows its state.
-   - **It stopped.** Read `podman compose logs ems`, and start it again with `podman compose up -d`.
-
-3. Once it answers, the waiting work goes on by itself. Files that never got their renditions can be given them again:
-
-   ```bash
-   # in EiN's terminal
-   regenerate /archive/albums/cornwall-1968            # what is missing
-   regenerate --force /archive/albums/cornwall-1968    # everything again
-   ```
-
-Lines beginning `ems-link: down` and `ems-link: up` in the `ems-link` service's log say when the media service went away and came back. A `fail` check named `ems gpu` means the card the media service is meant to have is gone; see [The graphics card](../ems/gpu.md). [The media service](../ems/index.md) covers the rest.
-
-## The assistant does not answer
-
-The chat shows one of three cards when a question gets no answer:
-
-| Card                      | What it means                                                                                                                                                                                                   |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Assistant unavailable** | "The assistant is not available right now." The language model could not be reached within [`CFG_LLM_WAIT`](../reference/settings.md#cfg_llm_wait), 180 seconds unless changed, or the assistant is not set up. |
-| **No answer**             | "The assistant could not answer this question." The model ran but gave up on this question. Ask it in other words.                                                                                              |
-| **Answer too long**       | "The answer was too long to finish. Ask for less, such as the last 20 rows."                                                                                                                                    |
-
-For **Assistant unavailable**, ask EiN whether it reaches the model:
-
-```bash
-# in EiN's terminal
-llm-status --checks
-```
-
-| What it says                                               | What to do                                                                                                                                                                                                                            |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `… is not answering; the chat cannot answer until it does` | With `--llm`, read `podman compose logs llm`: at its first start it downloads its model, several GB, and answers only after that. Without `--llm` and without a hosted model, there is no model: add one with `~/ein/setup.sh --llm`. |
-| `… does not offer …; the chat's questions to it fail`      | The hosted provider has no model by the name in `CFG_LLM_MODEL`. Set a name it offers.                                                                                                                                                |
-
-[The language model](../assistant/language-model.md) covers running the model yourself or using a hosted one.
+With the Archive, a kind can also wait for the media service; see [Media service](#media-service). `pipeline-overview` and `pool-stat` show the counts behind these checks, and `top` shows them live. `pipeline-repair` finds instances marked finished while steps of theirs still wait, and with `--apply` sets them running again; run it without `--apply` first to see what it would change.
 
 ## A service has stopped
 
@@ -232,7 +175,7 @@ EiN runs its own services inside its container: the web interface, SSH, the pipe
 
    ```bash
    # in EiN's terminal, as an administrator
-   service-start archive-bridge
+   service-start trash-purger
    ```
 
 A service shown as `disabled` has no buttons on the dashboard; enable it first with `service-enable <name>`. Restarting EiN, `podman compose restart ein`, starts every enabled service again. [Services and logs](services-logs.md) lists the services and what each does.
@@ -241,10 +184,10 @@ A service shown as `disabled` has no buttons on the dashboard; enable it first w
 
 Two places fill up, and they may be on different disks:
 
-| Where                                                         | How to see it                                                                                                        |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| The data folder, `EIN_DATA`: originals, renditions, the model | `df` in EiN's terminal: free space per storage tier, its growth per day, when it fills, and the size of the database |
-| The container engine's storage: images, the database volume   | `podman system df` on the machine                                                                                    |
+| Where                                                                                    | How to see it                                                                                                        |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| The data folder, `EIN_DATA`: originals, renditions and, with `--llm`, the language model | `df` in EiN's terminal: free space per storage tier, its growth per day, when it fills, and the size of the database |
+| The container engine's storage: images, the database volume                              | `podman system df` on the machine                                                                                    |
 
 To make room:
 
@@ -280,6 +223,80 @@ podman compose logs --tail 200 ein
 ```
 
 Read the logs before you send them on: they name your accounts, paths and addresses.
+
+## Archive
+
+With the [Archive](../archive/index.md) installed:
+
+### Thumbnails, faces and text are missing
+
+The Archive's thumbnails, video renditions, faces, picture vectors, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.
+
+1. See whether EiN reaches it:
+
+   ```bash
+   # in EiN's terminal
+   ems-status
+   ```
+
+   `ems-status` shows its version, every model and its state, what it is running and what it is degraded in. On the dashboard, the **Media service** tab shows the same.
+
+2. When `health` says `http://ems:8181 is not answering; work that needs it waits`:
+
+   - **It was never installed.** The Archive needs it. Add it with `~/ein/setup.sh --ems`; its image is about 30 GB.
+   - **It is starting.** Its health check gives it two minutes to start. `podman compose ps` shows its state.
+   - **It stopped.** Read `podman compose logs ems`, and start it again with `podman compose up -d`.
+
+3. Once it answers, the waiting work goes on by itself. Files that never got their renditions can be given them again:
+
+   ```bash
+   # in EiN's terminal
+   regenerate /archive/albums/cornwall-1968            # what is missing
+   regenerate --force /archive/albums/cornwall-1968    # everything again
+   ```
+
+## Assistant
+
+With the [Assistant](../assistant/index.md) installed:
+
+### The assistant does not answer
+
+The chat shows one of three cards when a question gets no answer:
+
+| Card                      | What it means                                                                                                                                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Assistant unavailable** | "The assistant is not available right now." The language model could not be reached within [`CFG_LLM_WAIT`](../reference/settings.md#cfg_llm_wait), 180 seconds unless changed, or the assistant is not set up. |
+| **No answer**             | "The assistant could not answer this question." The model ran but gave up on this question. Ask it in other words.                                                                                              |
+| **Answer too long**       | "The answer was too long to finish. Ask for less, such as the last 20 rows."                                                                                                                                    |
+
+For **Assistant unavailable**, ask EiN whether it reaches the model:
+
+```bash
+# in EiN's terminal
+llm-status --checks
+```
+
+| What it says                                               | What to do                                                                                                                                                                                                                            |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `… is not answering; the chat cannot answer until it does` | With `--llm`, read `podman compose logs llm`: at its first start it downloads its model, several GB, and answers only after that. Without `--llm` and without a hosted model, there is no model: add one with `~/ein/setup.sh --llm`. |
+| `… does not offer …; the chat's questions to it fail`      | The hosted provider has no model by the name in `CFG_LLM_MODEL`. Set a name it offers.                                                                                                                                                |
+
+[The language model](../assistant/language-model.md) covers running the model yourself or using a hosted one.
+
+## Media service
+
+These apply with the media service and the `ems` module installed, which the Archive needs. [The media service](../ems/index.md#when-something-goes-differently) covers more.
+
+| What you see                                                                 | What to do                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `unresolvable CDI devices nvidia.com/gpu=all` when the containers start      | The container engine cannot hand the graphics card to the media service or the language model. See [The graphics card](../ems/gpu.md).                                                                                |
+| `health` says `… waiting for EMS, which could not run it yet; next try in …` | The media service is busy or could not load what the work needs. EiN tries again at the time it names. When it keeps saying so, see [Thumbnails, faces and text are missing](#thumbnails-faces-and-text-are-missing). |
+| `health` says `http://ems:8181 is not answering; work that needs it waits`   | The media service was never installed, is starting or has stopped. See [Thumbnails, faces and text are missing](#thumbnails-faces-and-text-are-missing).                                                              |
+| A `fail` check named `ems gpu`                                               | The card the media service is meant to have is gone. See [The graphics card](../ems/gpu.md).                                                                                                                          |
+
+Lines beginning `ems-link: down` and `ems-link: up` in the `ems-link` service's log say when the media service went away and came back.
+
+When the media service is updated, the `ems-link` service runs the failed instances again at once (`pipeline heal --now --apply`), all but those that failed on their input or were left for a person, since a new build is the likeliest fix.
 
 ## Related pages
 

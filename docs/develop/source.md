@@ -9,12 +9,12 @@ EiN is several repositories in the [einhq](https://github.com/einhq) organisatio
 | Repository                                                                                                   | What it is                                                                                                           | Language                                 |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | [core](https://github.com/einhq/core)                                                                        | EiN itself: the node tree, the shell, pipelines, the SSH server and the web interface                                | TypeScript on Deno, React in the browser |
-| [module-archive](https://github.com/einhq/module-archive)                                                    | The Archive module: people, media, places, staging                                                                   | TypeScript                               |
-| [module-assistant](https://github.com/einhq/module-assistant)                                                | The chat that answers questions about the archive                                                                    | TypeScript                               |
-| [module-ems](https://github.com/einhq/module-ems)                                                            | EiN's client for the media service                                                                                   | TypeScript                               |
+| [module-archive](https://github.com/einhq/module-archive)                                                    | The [Archive](../archive/index.md) module: people, media, places, staging                                            | TypeScript                               |
+| [module-assistant](https://github.com/einhq/module-assistant)                                                | The [Assistant](../assistant/index.md) module: the chat that answers questions about the archive                     | TypeScript                               |
+| [module-ems](https://github.com/einhq/module-ems)                                                            | EiN's client for the [media service](../ems/index.md)                                                                | TypeScript                               |
 | [ems](https://github.com/einhq/ems)                                                                          | The media service: every media tool and model behind one HTTP API                                                    | Python                                   |
 | [db](https://github.com/einhq/db)                                                                            | The PostgreSQL image (TimescaleDB, pgvector, PostGIS, pg_trgm) and its run script                                    | Containerfile, bash                      |
-| [llm](https://github.com/einhq/llm)                                                                          | The assistant's local language model: llama.cpp's server in a container                                              | bash                                     |
+| [llm](https://github.com/einhq/llm)                                                                          | The local language model the Assistant uses: llama.cpp's server in a container                                       | bash                                     |
 | [deploy](https://github.com/einhq/deploy)                                                                    | EiN on one machine with compose: what the installer runs                                                             | bash, compose                            |
 | [bash-parser](https://github.com/einhq/bash-parser), [bash-executor](https://github.com/einhq/bash-executor) | The parser and the executor EiN's shell is built on, published on JSR as `@ein/bash-parser` and `@ein/bash-executor` | TypeScript                               |
 | [ssh2](https://github.com/einhq/ssh2)                                                                        | The SSH and SFTP library, published on JSR as `@ein/ssh2-ts`                                                         | TypeScript                               |
@@ -25,9 +25,9 @@ Core takes the shell and SSH libraries from JSR, not from a checkout: its `deno.
 ## What you need
 
 - **Deno 2.9.** Core's image is built on `denoland/deno:debian-2.9.6`, so that version is the one EiN is known to run on.
-- **podman**, run as your own user. The database, the media service and the language model run in containers, and core's `Makefile` builds and runs its image with podman.
+- **podman**, run as your own user. The database, and the media service and the language model when you add them, run in containers, and core's `Makefile` builds and runs its image with podman.
 - **git**, to clone the repositories.
-- Linux on x86-64, as for an installation. [Install EiN](../start/install.md#what-you-need) lists the memory and disk the media service needs.
+- Linux on x86-64, as for an installation. [Performance and sizing](../admin/performance.md#choose-a-machine) lists the memory and disk the media service, which the Archive needs, takes.
 
 Core itself needs no other program on the machine: its shell commands, `jq` and `awk` included, are its own.
 
@@ -241,7 +241,7 @@ An installation made with the installer builds from the organisation that `--sou
 - **`make container-run` fails on a missing folder.** Create `old/` in the checkout, or set `OLD_PATH` to a folder that exists.
 - **A module's page shows the old version.** Run `ui-build <name>` in EiN's terminal, then reload the page.
 - **A test fails in `module-boundary.test.ts` after you edited a manifest.** The module's `deno.jsonc` no longer matches its `mod.json`. Run `deno task sync:modules`.
-- **Files arrive but get no thumbnails.** The media service is not reached, or sees other paths than EiN. [The media service](../ems/index.md#when-something-goes-differently) has the checks.
+- **With the Archive, files arrive but get no thumbnails.** The media service is not reached, or sees other paths than EiN. [The media service](../ems/index.md#when-something-goes-differently) has the checks.
 
 ## Related pages
 

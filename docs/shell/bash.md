@@ -9,6 +9,10 @@ get answers as JSON.
 The terminal itself, with its tabs, keys, history and <kbd>Tab</kbd> completion, has a page of its
 own: [The terminal](terminal.md). [Commands by task](commands.md) tells you which command does what.
 
+The examples work on the [Archive](../archive/index.md)'s folders, such as `/archive/albums` and
+`/archive/people`, which are there once it is installed. The shell itself is the same on any EiN:
+try them on your home folder or `/etc` where the Archive is not installed.
+
 ## Bash, on a tree of nodes
 
 The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Nearly all
@@ -93,10 +97,10 @@ on with the next round.
 Most scripts written for bash run unchanged. These are the places where EiN behaves differently,
 because the tree is not a disk and the commands are not Linux programs.
 
-**Every node can hold others.** A photo has children of its own, such as its EXIF data and the regions of its faces, so
-`[ -d "$path" ]` is true for every node that exists. Test with `[ -e "$path" ]` whether a node is
-there, and `[ -f "$path" ]` whether it is a file. `[ -s "$path" ]` is true only for a file with
-content. `[ -t 1 ]` is always false.
+**Every node can hold others.** A file can have children of its own, as a photo in the Archive has
+its EXIF data and the regions of its faces, so `[ -d "$path" ]` is true for every node that exists.
+Test with `[ -e "$path" ]` whether a node is there, and `[ -f "$path" ]` whether it is a file.
+`[ -s "$path" ]` is true only for a file with content. `[ -t 1 ]` is always false.
 
 **Plain variables reach commands.** A command or script started from the shell sees all of the
 shell's variables, not only the exported ones. `JSON_OUTPUT=1` on a line of its own therefore

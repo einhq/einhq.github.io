@@ -119,12 +119,12 @@ repositories it fetches depends on what is installed:</p>
 </tr>
 <tr>
 <td>ems</td>
-<td>the media service</td>
+<td>the media service, which the Archive needs</td>
 <td>with the media service</td>
 </tr>
 <tr>
 <td>llm</td>
-<td>the language model&#39;s chat template</td>
+<td>the language model&#39;s chat template, for the Assistant</td>
 <td>with the language model</td>
 </tr>
 </tbody></table>
@@ -254,8 +254,8 @@ and its pages and commands are missing until it is updated. <a href="modules.htm
 <p>In the web interface, open the profile menu at the top right and choose <strong>About EiN</strong>. The <strong>Core</strong>
 tile shows core&#39;s version, and below it the commit EiN was built from and that commit&#39;s date; hold
 the pointer over it for the full time. The <strong>Module API</strong> tile shows the version modules build on,
-and <strong>Services</strong> shows the media service&#39;s version and commit when it is installed.</p>
-<p>In the terminal, <code>system-info</code> prints the same, with each module&#39;s commit:</p>
+and <strong>Services</strong> shows what installed modules add, such as the media service&#39;s version and commit with the <code>ems</code> module and the media service installed.</p>
+<p>In the terminal, <code>system-info</code> prints the same, with each module&#39;s commit, here on an EiN with every module installed:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 system-info</code></pre></div>
 <div class="code"><pre tabindex="0"><code>host      4e1d7c9b2a60
@@ -270,7 +270,7 @@ A short <code>uptime</code> confirms that EiN restarted. <code>host</code> is th
 has the command.</p>
 <h2 id="check-that-all-is-well-after-an-update">Check that all is well after an update<a class="anchor" href="#check-that-all-is-well-after-an-update" aria-label="Link to this section"></a></h2>
 <ol>
-<li>In <code>~/ein</code>, <code>podman compose ps</code> shows every container up, and <code>db</code> and <code>ems</code> healthy.</li>
+<li>In <code>~/ein</code>, <code>podman compose ps</code> shows every container up, and <code>db</code>, and <code>ems</code> when it is installed, healthy.</li>
 <li>In EiN&#39;s terminal, <code>health</code> says whether the system is healthy or catching up;
 <a href="monitoring.html">Health and the dashboard</a> explains its checks.</li>
 <li>Open <strong>Settings → Modules</strong> and look for a module with a badge instead of its version, and for
@@ -318,7 +318,7 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>Read the log it names. <code>podman compose ps</code> shows whether <code>db</code> became healthy; EiN does not start before it. <a href="troubleshooting.html">Troubleshooting</a> covers what the log may say.</td>
 </tr>
 <tr>
-<td>EiN does not take your admin password and has none of your albums</td>
+<td>EiN does not take your admin password and has none of your content</td>
 <td>It runs on an empty database, such as one under the other container engine. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
 </tr>
 <tr>
@@ -330,7 +330,7 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>It does not fit the new EiN. Update it; <a href="modules.html#when-a-module-does-not-work">When a module does not work</a> explains each message.</td>
 </tr>
 <tr>
-<td>The media service&#39;s tile in <strong>About EiN</strong> says <strong>Not answering</strong></td>
+<td>With the <code>ems</code> module, the media service&#39;s tile in <strong>About EiN</strong> says <strong>Not answering</strong></td>
 <td>The media service is still starting or failed to. <code>podman compose logs ems</code>; <a href="../ems/index.html">The media service</a> helps further.</td>
 </tr>
 </tbody></table>

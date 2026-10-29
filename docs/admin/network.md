@@ -13,7 +13,7 @@ EiN publishes two ports, on every address of the machine it runs on:
 
 These are the ports `setup.sh` picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
-Nothing else is reachable from outside. The database, the media service and the language model answer only EiN, on the containers' own network: no port of theirs is published on the machine.
+Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine.
 
 EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in [Put EiN behind HTTPS](#put-ein-behind-https).
 
@@ -171,7 +171,7 @@ With the proxy on the same machine, nothing else needs to reach port 8080. Close
 
 This closes port 2222 to the network as well, since `EIN_BIND` applies to both. To keep SSH and SFTP reachable from other machines, leave `EIN_BIND=0.0.0.0` and close 8080 in the firewall instead (under Docker, see the note in [Open the ports in the firewall](#open-the-ports-in-the-firewall)).
 
-To check that the proxy passes everything, sign in, open a few pages, upload a photo, and open the terminal with <kbd>Alt</kbd>+<kbd>T</kbd> (see [The terminal](../shell/terminal.md)): each of these uses a different part of the table above.
+To check that the proxy passes everything, sign in, open a few pages, upload a file, and open the terminal with <kbd>Alt</kbd>+<kbd>T</kbd> (see [The terminal](../shell/terminal.md)): each of these uses a different part of the table above.
 
 ## Reach EiN from outside your home
 

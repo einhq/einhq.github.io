@@ -2,7 +2,8 @@
 
 This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works
 on it from every door, pipelines that act on every change, and modules that decide what it is for.
-Read it first, whether you are going to use EiN, run it or build on it.
+Read it first, whether you are going to use EiN, run it or build on it. It also says how these
+pages are divided: **Core** for what every EiN has, and a section under **Modules** for each module.
 
 ## Everything is a node
 
@@ -24,12 +25,15 @@ the system's settings. Each has a path from `/`, as a file does:
 | The pipeline engine's queue                | `/var/queues/pipeline-engine`                        | `queue`    |
 | A command                                  | `/usr/bin/ls`                                        | `command`  |
 
+The photo, the album, the person and the place come with the [Archive](../archive/index.md) and are
+there once it is installed; the rest is in every EiN.
+
 A node has a type, a name in its folder, an owner, a group and permission bits, and the attributes
 its type needs: a photo's name, size, checksum and the time it was taken; a person's names and
 dates. Some types hold content as well: a file its bytes, a log its lines, a queue its messages.
 
-Any node can have children, a file included. A photo keeps what EiN works out about it beneath
-itself: its EXIF in `metadata/exif`, its thumbnails in `thumbnails/`, the faces found on it in
+Any node can have children, a file included. With the Archive, a photo keeps what EiN works out
+about it beneath itself: its EXIF in `metadata/exif`, its thumbnails in `thumbnails/`, the faces found on it in
 `regions/`. Delete the photo and they go with it.
 
 ![The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
@@ -43,7 +47,7 @@ standard path.
 
 | Folder         | What it holds                                                                                                                     |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `/archive`     | What the archive is for: albums, people, locations, devices and labels                                                            |
+| `/archive`     | The content EiN is for: the labels folder `tags`, and with the Archive its albums, people, locations and devices                  |
 | `/home/<you>`  | Your own space: your settings, shell history, favourites and trash, and with the Archive the uploads waiting for you to sort them |
 | `/etc`         | Accounts and groups, settings, and the services EiN runs                                                                          |
 | `/var`         | What the system writes as it runs: logs, sessions, queues, pools and pipeline runs                                                |
@@ -59,12 +63,13 @@ takes its group from the folder it is made in. The administrator passes every ch
 
 Two things work differently from a computer's files:
 
-- **What you may not read is not listed at all**: not in a folder, not in search, not on the map,
-  not in `ls`. Two people can see the same album differently, and an album can look emptier to you
-  than to its owner.
-- **You do not need the numbers.** **Share**, on an album, a picture, a person, a location or a device, sets the same
-  permissions in words: who can see it, who can change it, and links that open it without an
-  account.
+- **What you may not read is not listed at all**: not in a folder, not in search, not in `ls`, and
+  with the Archive not on the map. Two people can see the same folder or album differently, and it
+  can look emptier to you than to its owner.
+- **You do not need the numbers.** **Share** sets the same permissions in words: who can see a
+  node and who can change it, and for an album, a link that opens it without an account. It works
+  on any node from the **Nodes** explorer, and with the Archive installed its pages offer it on an
+  album, a picture, a person, a location or a device.
 
 Someone who has not signed in is the guest. The guest can sign in or open a share link and nothing
 more, unless an administrator turns on **Visitors may browse**, and the guest never changes
@@ -76,12 +81,12 @@ has the exact rules.
 A **softlink** is a node that points at another node by its path; opening it opens what it points
 at. EiN uses softlinks wherever one thing belongs in several places:
 
-- an album's cover is a link to one of its pictures;
-- a picture added to an album from somewhere else is a link to where it lives;
-- a label is a folder under `/archive/tags/` holding a link to everything that carries it;
+- being in a group is a link under `/etc/groups/<group>/users/`;
 - your favourites are links in `/home/<you>/stars`;
-- how two people are related is a pair of links, one on each person;
-- being in a group is a link under `/etc/groups/<group>/users/`.
+- with the Archive, an album's cover is a link to one of its pictures, and a picture added to an
+  album from somewhere else is a link to where it lives;
+- with the Archive, a label is a folder under `/archive/tags/` holding a link to everything that
+  carries it, and how two people are related is a pair of links, one on each person.
 
 Moving or renaming a node re-points every softlink to it, so an album can change its name without
 losing its cover or its labels. A **hard link** is the other kind: the same node under a second name
@@ -100,14 +105,15 @@ commands as you, except SFTP, which moves files and nothing else:
 | The terminal panel | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                   |
 | SSH                | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                          |
 | SFTP               | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                      |
-| The assistant      | **Chat** in the sidebar, with the assistant module                                         | It runs commands as tools, as you; one that would change something waits for you to press **Run** |
+| The assistant      | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; one that would change something waits for you to press **Run** |
 
 ![Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/doors.svg "Every door meets the same permission check, and all but SFTP go through the same commands.")
 
 The web interface is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with `JSON_OUTPUT=1` so that they answer in JSON; renaming a
 folder on the Nodes page runs `mv`. Only the bytes of files, uploaded or downloaded, take a way of
-their own, through the same permission check. You can run the same commands yourself:
+their own, through the same permission check. You can run the same commands yourself; these two
+list the Archive's albums, so they need the Archive installed:
 
 ```bash
 # in EiN's terminal
@@ -134,7 +140,7 @@ and the steps, each a command, that it then runs on the node that changed. A mod
 pipelines with it. Core brings none, so without a module EiN keeps what you give it and works
 nothing out.
 
-With the Archive installed, uploading a photo sets off a chain:
+With the [Archive](../archive/index.md) installed, uploading a photo sets off a chain:
 
 1. The Archive notices the uploaded photo, video or recording and announces it.
 2. `media-ingest` reads the file's metadata, such as the camera, the time it was taken and where,
@@ -172,19 +178,25 @@ of its commands: every command whose name starts with `search-` is asked when yo
 
 The published modules are in the einhq organisation on GitHub, each named `module-<name>`:
 
-| Module      | What it is for                                                                                                                                                                                         | What it needs                                                    |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| `archive`   | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted           | The `ems` module, installed along with it, and the media service |
-| `assistant` | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
-| `ems`       | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
+| Module                               | What it is for                                                                                                                                                                                         | What it needs                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted           | The `ems` module, installed along with it, and the media service |
+| [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
+| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
 
-A fourth module, `importer`, moves one particular older archive into EiN. It is not published and
-is not a general importer; photos from anywhere else come in through staging, as
-[Getting your photos in](../archive/importing.md) describes.
+A fourth module, [`importer`](../importer/index.md), moves one particular older archive into EiN.
+It is not published and is not a general importer; photos from anywhere else come in through the
+Archive's staging, as [Getting your photos in](../archive/importing.md) describes.
 
 An administrator installs, updates and removes modules on **Settings → Modules**, with
 `mod install`, or with the installer's `--module` option. [Modules](../admin/modules.md) explains all
 three.
+
+These pages are divided the same way. The **Core** part of the sidebar holds for every EiN, with or
+without modules; where a core page shows something a module adds, it says so and links to that
+module's pages. Under **Modules**, each module has a section of its own that opens with its overview,
+linked in the table above. Read a module's section once it is installed on your EiN, and leave it
+aside otherwise.
 
 ## What runs beside EiN
 
@@ -223,6 +235,9 @@ and [The language model](../assistant/language-model.md) say more about each.
 - [Install EiN](install.md) puts EiN on a machine of your own, and [First steps](first-steps.md)
   takes you from the first sign-in to a family using it.
 - [Finding your way around](../guide/interface.md) is a tour of the web interface.
+- [The Archive](../archive/index.md), [The Assistant](../assistant/index.md),
+  [The media service](../ems/index.md) and [The Importer](../importer/index.md) open each module's
+  section, for the modules installed on your EiN.
 - The Concepts pages take each idea above further: [Nodes and node types](../concepts/nodes.md),
   [The tree](../concepts/tree.md), [Links](../concepts/links.md),
   [Files and storage](../concepts/files.md) and [Changes and pipelines](../concepts/pipelines.md).

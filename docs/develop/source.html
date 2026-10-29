@@ -105,17 +105,17 @@
 </tr>
 <tr>
 <td><a href="https://github.com/einhq/module-archive">module-archive</a></td>
-<td>The Archive module: people, media, places, staging</td>
+<td>The <a href="../archive/index.html">Archive</a> module: people, media, places, staging</td>
 <td>TypeScript</td>
 </tr>
 <tr>
 <td><a href="https://github.com/einhq/module-assistant">module-assistant</a></td>
-<td>The chat that answers questions about the archive</td>
+<td>The <a href="../assistant/index.html">Assistant</a> module: the chat that answers questions about the archive</td>
 <td>TypeScript</td>
 </tr>
 <tr>
 <td><a href="https://github.com/einhq/module-ems">module-ems</a></td>
-<td>EiN&#39;s client for the media service</td>
+<td>EiN&#39;s client for the <a href="../ems/index.html">media service</a></td>
 <td>TypeScript</td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@
 </tr>
 <tr>
 <td><a href="https://github.com/einhq/llm">llm</a></td>
-<td>The assistant&#39;s local language model: llama.cpp&#39;s server in a container</td>
+<td>The local language model the Assistant uses: llama.cpp&#39;s server in a container</td>
 <td>bash</td>
 </tr>
 <tr>
@@ -159,9 +159,9 @@
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>Deno 2.9.</strong> Core&#39;s image is built on <code>denoland/deno:debian-2.9.6</code>, so that version is the one EiN is known to run on.</li>
-<li><strong>podman</strong>, run as your own user. The database, the media service and the language model run in containers, and core&#39;s <code>Makefile</code> builds and runs its image with podman.</li>
+<li><strong>podman</strong>, run as your own user. The database, and the media service and the language model when you add them, run in containers, and core&#39;s <code>Makefile</code> builds and runs its image with podman.</li>
 <li><strong>git</strong>, to clone the repositories.</li>
-<li>Linux on x86-64, as for an installation. <a href="../start/install.html#what-you-need">Install EiN</a> lists the memory and disk the media service needs.</li>
+<li>Linux on x86-64, as for an installation. <a href="../admin/performance.html#choose-a-machine">Performance and sizing</a> lists the memory and disk the media service, which the Archive needs, takes.</li>
 </ul>
 <p>Core itself needs no other program on the machine: its shell commands, <code>jq</code> and <code>awk</code> included, are its own.</p>
 <h2 id="get-the-source">Get the source<a class="anchor" href="#get-the-source" aria-label="Link to this section"></a></h2>
@@ -433,7 +433,7 @@ make container-logs</code></pre></div>
 <li><strong><code>make container-run</code> fails on a missing folder.</strong> Create <code>old/</code> in the checkout, or set <code>OLD_PATH</code> to a folder that exists.</li>
 <li><strong>A module&#39;s page shows the old version.</strong> Run <code>ui-build &lt;name&gt;</code> in EiN&#39;s terminal, then reload the page.</li>
 <li><strong>A test fails in <code>module-boundary.test.ts</code> after you edited a manifest.</strong> The module&#39;s <code>deno.jsonc</code> no longer matches its <code>mod.json</code>. Run <code>deno task sync:modules</code>.</li>
-<li><strong>Files arrive but get no thumbnails.</strong> The media service is not reached, or sees other paths than EiN. <a href="../ems/index.html#when-something-goes-differently">The media service</a> has the checks.</li>
+<li><strong>With the Archive, files arrive but get no thumbnails.</strong> The media service is not reached, or sees other paths than EiN. <a href="../ems/index.html#when-something-goes-differently">The media service</a> has the checks.</li>
 </ul>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
@@ -447,7 +447,7 @@ make container-logs</code></pre></div>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="manifest.html" rel="prev"><span>Previous</span>The module manifest</a><a class="next" href="../archive/index.html" rel="next"><span>Next</span>stub</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="manifest.html" rel="prev"><span>Previous</span>The module manifest</a><a class="next" href="../archive/index.html" rel="next"><span>Next</span>The Archive</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/source.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

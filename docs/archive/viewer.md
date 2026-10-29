@@ -15,7 +15,7 @@ page. With the keyboard, move to a tile with <kbd>Tab</kbd> and press <kbd>Enter
 
 The viewer walks the list you opened it from, in that list's order. A search hit on something said
 in a video or a recording opens it at the moment the words are spoken; see
-[Search and the finder](../guide/search.md).
+[Search and the finder](search.md).
 
 Each file in the viewer has its own address: the page's address with the file added in its
 `fullscreen` parameter (`…?fullscreen=%2Fmedia%2F…`), or, opened on its
@@ -324,7 +324,7 @@ staging area is read once it is filed into an album.
 - **Hide text**, or <kbd>t</kbd> again, takes it away.
 
 The text is also under **Text in image** in the [Details section](#the-details-section), and
-search finds pictures by it; see [Search and the finder](../guide/search.md).
+search finds pictures by it; see [Search and the finder](search.md).
 
 ### Correct the text, or add it by hand
 

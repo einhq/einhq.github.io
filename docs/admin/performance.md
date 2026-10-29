@@ -2,34 +2,36 @@
 
 This page is for the administrator who runs EiN on their own machine: what each part of EiN uses of the processor, memory and disk, how big a machine to give it, how to set the containers' memory limits, and which settings decide how much processing runs at once. The graphics card has a page of its own, [The graphics card](../ems/gpu.md).
 
+EiN without modules needs little. Most of what this page sizes and tunes comes with modules: the media service, which the [Archive](../archive/index.md) needs, and the language model, which the [Assistant](../assistant/index.md) answers with, are containers of their own, and the settings that pace media processing belong to the Archive. How big a machine they need is kept here, on this page alone.
+
 ## What uses the machine
 
-EiN runs as up to four containers. Each has its own appetite, and three of them have a memory limit that compose sets from `~/ein/.env`.
+EiN runs as two containers, `ein` and `db`, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from `~/ein/.env`.
 
-| Container | What uses the machine                                                                                                                      | Memory limit                | Processor   |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- | ----------- |
-| `ein`     | The web interface, every shell and SSH session, the pipelines that decide what to do with each file, and the modules                       | `EIN_MEMORY`, default `6g`  | not limited |
-| `db`      | PostgreSQL: every node, link, setting and the search index                                                                                 | none; 1 GB of shared memory | not limited |
-| `ems`     | The media service, with `--ems`: thumbnails, video encoding, fingerprints, and the models for faces, voices, transcripts, text and vectors | `EMS_MEMORY`, default `16g` | not limited |
-| `llm`     | The assistant's language model, with `--llm`: about 5.6 GB of model, on the card or in memory                                              | `LLM_MEMORY`, default `10g` | not limited |
+| Container | What uses the machine                                                                                                                                       | Memory limit                | Processor   |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ----------- |
+| `ein`     | The web interface, every shell and SSH session, the pipelines that decide what to do with each file, and the modules' services                              | `EIN_MEMORY`, default `6g`  | not limited |
+| `db`      | PostgreSQL: every node, link, setting and the search index                                                                                                  | none; 1 GB of shared memory | not limited |
+| `ems`     | The media service, with `--ems`, for the Archive: thumbnails, video encoding, fingerprints, and the models for faces, voices, transcripts, text and vectors | `EMS_MEMORY`, default `16g` | not limited |
+| `llm`     | The language model, with `--llm`, for the Assistant: about 5.6 GB of model, on the card or in memory                                                        | `LLM_MEMORY`, default `10g` | not limited |
 
-Nothing limits how many cores a container uses. The heavy work is in the media service: most pipeline steps are calls into it, and EiN mostly decides what to ask for and stores the answers. A machine running EiN Core alone, without the media service, does little beyond serving the interface and the shell.
+Nothing limits how many cores a container uses. With the Archive, the heavy work is in the media service: most of the Archive's pipeline steps are calls into it, and EiN mostly decides what to ask for and stores the answers. A machine running EiN Core alone, without the media service, does little beyond serving the interface and the shell.
 
 ## Choose a machine
 
 The installer checks the machine against the first two rows of these figures before it installs anything ([What the checks measure](install.md#what-the-checks-measure)); the language model's row is advice it does not check:
 
-| What you install                          | Processor                      | Memory                                             | Free disk                     |
-| ----------------------------------------- | ------------------------------ | -------------------------------------------------- | ----------------------------- |
-| EiN Core                                  | 2 cores                        | 4 GB                                               | 10 GB, plus your files        |
-| With the media service (`--ems`)          | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files |
-| With the language model as well (`--llm`) | as above                       | about 5.6 GB more, unless the model is on the card | as above                      |
+| What you install                                             | Processor                      | Memory                                             | Free disk                     |
+| ------------------------------------------------------------ | ------------------------------ | -------------------------------------------------- | ----------------------------- |
+| EiN Core                                                     | 2 cores                        | 4 GB                                               | 10 GB, plus your files        |
+| With the media service (`--ems`), for the Archive            | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files |
+| With the language model as well (`--llm`), for the Assistant | as above                       | about 5.6 GB more, unless the model is on the card | as above                      |
 
-Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](../assistant/language-model.md) describes.
+Cores are physical cores, not threads. With both installed, the default limits of the three containers that have one add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](../assistant/language-model.md) describes.
 
 What the figures mean in practice:
 
-- **More cores** let more media work run side by side, once you raise the settings in [Let more work run at once](#let-more-work-run-at-once). The defaults are set for a small machine and use few cores.
+- **More cores** let more of the Archive's media work run side by side, once you raise the settings in [Let more work run at once](#let-more-work-run-at-once). The defaults are set for a small machine and use few cores.
 - **More memory** matters for the media service, which holds several models at once, and for long videos, which are decoded on the processor without a card.
 - **A graphics card** changes how fast the models run, not what they find. On a card a recording's transcript takes about a minute; without one it takes about twice the length of the recording. [The graphics card](../ems/gpu.md) has the details.
 - **Disk** holds your originals once, plus the thumbnails and other renditions EiN makes of each, plus the images and the database in the container engine's storage. [Watch disk space](#watch-disk-space) shows how to see how fast it grows.
@@ -47,7 +49,7 @@ A memory limit is a ceiling, not a reservation: a container uses what it needs u
    LLM_MEMORY=12g
    ```
 
-   The value is a number with a unit, `g` for gigabytes or `m` for megabytes. Leave out a line to keep its default.
+   The value is a number with a unit, `g` for gigabytes or `m` for megabytes. Leave out a line to keep its default. `EMS_MEMORY` and `LLM_MEMORY` matter only while the media service or the language model is installed.
 
 2. Make the containers again with the new limits:
 
@@ -86,7 +88,7 @@ The media service's model processes log a warning of their own when the models a
 
 ## How processing is paced
 
-New files go through pipelines, and the pipelines' heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by settings in **Settings → System**, category **Processing**.
+This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines' heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by the Archive's settings in **Settings → System**, category **Processing**.
 
 | Worker   | Runs                                                                                                                                                                  | Paced by                                                      |
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -94,6 +96,8 @@ New files go through pipelines, and the pipelines' heavy steps go to two workers
 | `models` | Faces, picture vectors, text in pictures, text vectors, transcripts, voices and shots: each a request to the media service's models                                   | **Model requests in flight** (`CFG_MODEL_SLOTS`, default `2`) |
 
 The CPU budget is shared by cost: most jobs take 1 of it, and a video's encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.
+
+[Processing pictures](../archive/processing.md#how-much-runs-at-once) lists every setting of the two workers.
 
 The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.
 
@@ -111,7 +115,7 @@ EiN's settings decide how much it asks for; the media service's decide how much 
 
 ## Let more work run at once
 
-On a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:
+With the Archive, on a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:
 
 1. Sign in as an administrator and choose **Settings** in the sidebar, under **System**.
 2. Choose the category **Processing**.
@@ -135,11 +139,11 @@ config set CFG_MODEL_SLOTS 4
 config unset CFG_CPU_SLOTS      # back to the default
 ```
 
-The other settings in **Processing** tune the pipeline engine itself: how many steps, queue entries and triggers it handles at once, and how often it cleans up. Their defaults suit any machine EiN runs on, and [Processing and pipelines](processing.md) explains what they do. Every one is listed on [Settings](../reference/settings.md#processing).
+The other settings in **Processing** are core's and tune the pipeline engine itself: how many steps, queue entries and triggers it handles at once, and how often it cleans up. Their defaults suit any machine EiN runs on, and [Processing and pipelines](processing.md) explains what they do. Every one is listed on [Settings](../reference/settings.md#processing).
 
 ## Keep the interface quick during heavy work
 
-While the media service works through an import, people still search and browse. Several things keep their requests ahead of the processing without any setting:
+While the media service works through the Archive's import, people still search and browse. Several things keep their requests ahead of the processing without any setting:
 
 - The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (`EMS_WORKER_NICE`, default `10`). When the card has been free of processing for 10 minutes (`EMS_CARD_QUIET_AFTER`, `600` seconds), searches move to the card.
 - A search uses at most a few cores (`EMS_QUERY_WORKER_THREADS`, the machine's cores less two, at most 4), so it does not wait on threads the processing holds.
@@ -149,7 +153,7 @@ If the interface still feels slow on a small machine during an import, lower **C
 
 ## Watch disk space
 
-Your originals take the space they take. On top of them EiN keeps, in the data folder's `files-volatile`, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN's terminal, `df` shows each storage tier's free space, how fast it grows a day, and when it will be full at that rate, with the size of the database:
+Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder's `files-volatile`, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN's terminal, `df` shows each storage tier's free space, how fast it grows a day, and when it will be full at that rate, with the size of the database:
 
 ```bash
 # in EiN's terminal
@@ -180,21 +184,21 @@ Whether the machine is big enough shows in whether it keeps up with the work:
 | `host-metrics`                   | EiN's processor and memory use now and over the last 6 hours (`--window` in minutes)                                                                                                                                                   |
 | `pool-stat`                      | The backlog, rates and policy of each kind of work in the queues                                                                                                                                                                       |
 | `gauges`                         | What the running services report beside the machine's figures, such as the card's memory                                                                                                                                               |
-| `ems-status`                     | The media service's models, what it is running, its queues and the memory of its model processes                                                                                                                                       |
+| `ems-status`                     | With the `ems` module: the media service's models, what it is running, its queues and the memory of its model processes                                                                                                                |
 
 **Catching up** after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a **Work** tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. [Health and the dashboard](monitoring.md) explains the badge, the checks and the tabs.
 
 ## When something goes differently
 
-**The Dashboard reads Stuck.** Nothing has finished in the last hour. Read the checks under the badge on the **Overview** tab: they name the kind of work that is not moving and why, often the media service not answering. [Troubleshooting](troubleshooting.md) goes through the causes.
+**The Dashboard reads Stuck.** Nothing has finished in the last hour. Read the checks under the badge on the **Overview** tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. [Troubleshooting](troubleshooting.md) goes through the causes.
 
-**Videos never get their browser version.** Check that **CPU budget for media work** is 2 or more, and on the **Work** tab whether `transcode` is waiting. Without a graphics card, a long video takes many minutes to encode.
+**Videos in the Archive never get their browser version.** Check that **CPU budget for media work** is 2 or more, and on the **Work** tab whether `transcode` is waiting. Without a graphics card, a long video takes many minutes to encode.
 
 **A container restarts on its own.** Look for `Memory cgroup out of memory` in the kernel log as in [When a container reaches its limit](#when-a-container-reaches-its-limit), and raise that container's limit.
 
 **The whole machine slows down or stops responding during an import.** The containers together are using more memory than the machine has. Lower the limits so that they fit the machine, or leave out the language model, and lower the processing settings while the import runs.
 
-**Searches are slow while an import runs.** Lower **Model requests in flight** and **CPU budget for media work** for the duration of the import, as in [Keep the interface quick during heavy work](#keep-the-interface-quick-during-heavy-work).
+**Searches are slow while an Archive import runs.** Lower **Model requests in flight** and **CPU budget for media work** for the duration of the import, as in [Keep the interface quick during heavy work](#keep-the-interface-quick-during-heavy-work).
 
 **The disk fills up.** Run `df` in EiN's terminal to see which tier grows, and `podman system df` on the machine to see what the container engine's storage takes. EiN has no command that moves the data folder; [Your data: backup, moving and removing](data.md) explains how.
 

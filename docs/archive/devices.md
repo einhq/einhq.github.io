@@ -15,7 +15,7 @@ device is registered, the pictures it took are linked to it, and:
 - the device's page gathers everything it took, who owned it and when, and the route it recorded;
 - an album's **Info** tab lists the devices that took its pictures (see
   [Albums](albums.md#the-info-tab)), and the Search page finds devices and narrows albums by them
-  (see [Search and the finder](../guide/search.md#find-albums-people-locations-and-devices));
+  (see [Search and the finder](search.md#find-albums-people-locations-and-devices));
 - the device's **Timezone**, **Scanner or digitizer** and **Video times in UTC** settings correct
   the dates of every picture it took;
 - the GPS route it recorded, its track, is drawn on the maps.

@@ -140,7 +140,7 @@ For each recording, EiN:
 
 EiN reads the text of PDF files and of plain text files, so that search finds a document by what it
 is about: a search for `Christmas letter` finds the family newsletter of 2019. See
-[Search and the finder](../guide/search.md#find-photos-videos-recordings-and-documents).
+[Search and the finder](search.md#find-photos-videos-recordings-and-documents).
 
 - **PDF.** EiN reads the text the PDF holds. A page with almost no text, such as a scanned letter,
   is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
@@ -282,7 +282,7 @@ Every command and its options are in the
 - [Getting your photos in](importing.md): every way to bring files into EiN, and what happens next.
 - [Sorting in staging](staging.md): where uploaded files wait until you file them.
 - [Viewing photos, videos and recordings](viewer.md): how each kind of file is shown and played.
-- [Search and the finder](../guide/search.md): finding files by what they show, say and contain.
+- [Search and the finder](search.md): finding files by what they show, say and contain.
 - [Duplicates](duplicates.md): copies and look-alikes, and which format is kept.
 - [Files and storage](../concepts/files.md): how EiN stores files and what it keeps beside them.
 - [The media service](../ems/index.md): the part of EiN that does the reading.

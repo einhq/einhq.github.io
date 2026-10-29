@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Troubleshooting – EiN documentation</title>
-    <meta name="description" content="This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, work stops getting done, pictures get no thumbnails, or the assistant stays silent. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see Install EiN.">
+    <meta name="description" content="This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, or work stops getting done. Core's problems come first; after them, the problems that belong to a module are grouped under its name, for you to skip when you have not installed it: the Archive's pictures without thumbnails, the Assistant that stays silent, and the Media service. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see Install EiN.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/troubleshooting.html">
     <meta property="og:title" content="Troubleshooting – EiN documentation">
-    <meta property="og:description" content="This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, work stops getting done, pictures get no thumbnails, or the assistant stays silent. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see Install EiN.">
+    <meta property="og:description" content="This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, or work stops getting done. Core's problems come first; after them, the problems that belong to a module are grouped under its name, for you to skip when you have not installed it: the Archive's pictures without thumbnails, the Assistant that stays silent, and the Media service. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see Install EiN.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -87,21 +87,21 @@
           <h1>Troubleshooting</h1>
         </header>
         <article class="prose">
-<p>This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, work stops getting done, pictures get no thumbnails, or the assistant stays silent. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see <a href="../start/install.html#when-something-goes-differently">Install EiN</a>.</p>
+<p>This page is for whoever runs EiN, when something does not work after the install: EiN does not start or answer, nobody can sign in, or work stops getting done. Core&#39;s problems come first; after them, the problems that belong to a module are grouped under its name, for you to skip when you have not installed it: the <a href="#archive">Archive</a>&#39;s pictures without thumbnails, the <a href="#assistant">Assistant</a> that stays silent, and the <a href="#media-service">Media service</a>. Each section says what you see, how to find the cause and what to do, and links the page that covers the topic in full. For problems during the first install, see <a href="../start/install.html#when-something-goes-differently">Install EiN</a>.</p>
 <p>The commands on the machine are written for podman and run in <code>~/ein</code>, where the installer put EiN. With Docker, write <code>docker compose</code> where they say <code>podman compose</code>.</p>
 <h2 id="where-to-look-first">Where to look first<a class="anchor" href="#where-to-look-first" aria-label="Link to this section"></a></h2>
 <p>Three places tell you most of what is wrong. Look at them in this order.</p>
 <ol>
-<li><p><strong>The containers.</strong> On the machine EiN runs on, see whether every container is up and whether the database and the media service are healthy:</p>
+<li><p><strong>The containers.</strong> On the machine EiN runs on, see whether every container is up and whether the database, and the media service when it is installed, are healthy:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose ps
-podman compose logs --<span class="hljs-built_in">tail</span> 100 ein     <span class="hljs-comment"># the end of EiN&#x27;s log; db, ems or llm for the others</span></code></pre></div>
+podman compose logs --<span class="hljs-built_in">tail</span> 100 ein     <span class="hljs-comment"># the end of EiN&#x27;s log; db, and ems or llm when installed, for the others</span></code></pre></div>
 <p>A container that shows <code>Up</code> for only a few seconds, again and again, stops and is started again by its restart policy. Its log says why.</p>
 </li>
 <li><p><strong>The dashboard.</strong> When the web interface opens, sign in as an administrator and choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. The badge above <strong>System dashboard</strong> gives the verdict: <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Below it, the <strong>Overview</strong> tab lists each check that is not fine, with its reason. The <strong>Services</strong> tab shows each of EiN&#39;s own services, and the <strong>Log</strong> tab its <strong>Recent problems</strong> and the live log. <a href="monitoring.html">Health and the dashboard</a> explains every tile.</p>
 <p><figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard with a green Healthy badge above its title, the tabs Overview, Work, Media service, Services and Log, and tiles for CPU, memory, GPU and VRAM above a chart of completed work" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.</figcaption></figure></p>
 </li>
-<li><p><strong><code>health</code> in EiN&#39;s terminal.</strong> The same verdict and every check, fine or not, in text:</p>
+<li><p><strong><code>health</code> in EiN&#39;s terminal.</strong> The same verdict and every check, fine or not, in text. On an EiN with the <code>ems</code> module installed, it may read:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 health</code></pre></div>
 <div class="code"><pre tabindex="0"><code>needs a person: 1 check failed
@@ -138,7 +138,7 @@ warn  ems          http://ems:8181 is not answering; work that needs it waits</c
 <p>Inside EiN, the system log is <code>/var/logs/system</code>, which <code>dmesg</code> prints; it starts empty at each start of EiN. Each service writes its own log to <code>/var/logs/services/&lt;name&gt;/stdout.log</code> and <code>stderr.log</code>, which start empty each time the service starts:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 dmesg -n 50 --level=warn                       <span class="hljs-comment"># the last 50 warnings and errors</span>
-<span class="hljs-built_in">tail</span> /var/logs/services/ems-link/stdout.log    <span class="hljs-comment"># one service&#x27;s log</span></code></pre></div>
+<span class="hljs-built_in">tail</span> /var/logs/services/pipeline-engine/stdout.log    <span class="hljs-comment"># one service&#x27;s log</span></code></pre></div>
 <p><a href="services-logs.html">Services and logs</a> covers both kinds of log and the services that write them.</p>
 <h2 id="ein-does-not-start-or-does-not-answer">EiN does not start or does not answer<a class="anchor" href="#ein-does-not-start-or-does-not-answer" aria-label="Link to this section"></a></h2>
 <p>EiN answers on port 8080 only once its database is up and its start is through: it installs the modules <code>EIN_MODULES</code> names that are missing, sets every module up, and only then starts its services, the web interface and SSH among them. While it does, the browser cannot connect. A start that installs modules over a slow connection takes minutes.</p>
@@ -196,10 +196,6 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 <tr>
 <td>The web interface or SSH stopped answering after a change to <strong>HTTP port</strong> or <strong>SSH port</strong></td>
 <td>Reset the setting through whichever still answers, with <code>config unset CFG_HTTP_PORT</code> or <code>config unset CFG_SSH_PORT</code>, then <code>podman compose restart ein</code>. Ports are changed in <code>.env</code>; see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
-</tr>
-<tr>
-<td><code>unresolvable CDI devices nvidia.com/gpu=all</code> when the containers start</td>
-<td>The container engine cannot hand the graphics card over. See <a href="../ems/gpu.html">The graphics card</a>.</td>
 </tr>
 </tbody></table>
 </div>
@@ -269,7 +265,7 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </tbody></table>
 </div>
 <h2 id="work-does-not-get-done">Work does not get done<a class="anchor" href="#work-does-not-get-done" aria-label="Link to this section"></a></h2>
-<p>Everything EiN does after a file arrives, from thumbnails to faces to transcriptions, is pipeline work, done in the background. <a href="processing.html">Processing and pipelines</a> explains how it is run; this section is about finding why it stopped.</p>
+<p>Everything EiN does after a file arrives is pipeline work, done in the background: with the Archive, everything from thumbnails to faces to transcriptions. <a href="processing.html">Processing and pipelines</a> explains how it is run; this section is about finding why it stopped.</p>
 <p>Start with <code>health</code>, or the <strong>Overview</strong> and <strong>Work</strong> tabs of the dashboard. Each check that is not fine points at one of the cases below.</p>
 <h3 id="failed-work">Failed work<a class="anchor" href="#failed-work" aria-label="Link to this section"></a></h3>
 <p>A failed run is run again by itself, after 1 hour, 6 hours and 24 hours. The <code>pipeline-pruner</code> service does this, so nothing needs doing while <code>health</code> says:</p>
@@ -283,7 +279,7 @@ pipeline-instances --status failed
 pipeline-status &lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
 <p><code>pipeline-status</code> shows each step of the instance and the error of the one that failed.</p>
 </li>
-<li><p>Fix the cause the error names: a media service that was down, a full disk, a module that needed an update.</p>
+<li><p>Fix the cause the error names: a full disk, a module that needed an update or, with the Archive, a media service that was down.</p>
 </li>
 <li><p>Run the work again. One instance at a time, from the pipeline&#39;s current definition:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
@@ -295,7 +291,6 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </li>
 </ol>
 <p>A step that failed on its input, such as a file no program can open, is not run again, since every run would meet the same bytes. <code>health</code> counts those as <code>input</code>, and they need nothing from you.</p>
-<p>When the media service is updated, the <code>ems-link</code> service runs the failed instances again at once (<code>pipeline heal --now --apply</code>), all but those that failed on their input or were left for a person, since a new build is the likeliest fix.</p>
 <h3 id="waiting-work-that-does-not-drain">Waiting work that does not drain<a class="anchor" href="#waiting-work-that-does-not-drain" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -309,10 +304,6 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 <td>Work waits and nothing takes it. The checks below the verdict say which kind; look there.</td>
 </tr>
 <tr>
-<td><code>… waiting for EMS, which could not run it yet; next try in …</code></td>
-<td>The media service is busy or could not load what the work needs. EiN tries again at the time it names. When it keeps saying so, see <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
-</tr>
-<tr>
 <td><code>… waiting, and no worker offers this kind</code></td>
 <td>No running service takes this kind of work. The dashboard shows it in red as <strong>Work that nothing will run</strong>, with the pipelines that queue it. Usually a module&#39;s service has stopped: see <a href="#a-service-has-stopped">A service has stopped</a>.</td>
 </tr>
@@ -322,7 +313,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 <tr>
 <td><code>… waiting, the oldest for …, none done in the last hour</code></td>
-<td>A kind of work has stopped draining. Check the service that does it, and the media service when the work needs it.</td>
+<td>A kind of work has stopped draining. Check the service that does it, and, with the Archive, the media service when the work needs it.</td>
 </tr>
 <tr>
 <td><code>… running steps silent for … or more: …</code></td>
@@ -334,73 +325,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 </tbody></table>
 </div>
-<p><code>pipeline-overview</code> and <code>pool-stat</code> show the counts behind these checks, and <code>top</code> shows them live. <code>pipeline-repair</code> finds instances marked finished while steps of theirs still wait, and with <code>--apply</code> sets them running again; run it without <code>--apply</code> first to see what it would change.</p>
-<h2 id="thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing<a class="anchor" href="#thumbnails-faces-and-text-are-missing" aria-label="Link to this section"></a></h2>
-<p>Thumbnails, video renditions, faces, picture vectors, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.</p>
-<ol>
-<li><p>See whether EiN reaches it:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-ems-status</code></pre></div>
-<p><code>ems-status</code> shows its version, every model and its state, what it is running and what it is degraded in. On the dashboard, the <strong>Media service</strong> tab shows the same.</p>
-</li>
-<li><p>When <code>health</code> says <code>http://ems:8181 is not answering; work that needs it waits</code>:</p>
-<ul>
-<li><strong>It was never installed.</strong> The Archive needs it. Add it with <code>~/ein/setup.sh --ems</code>; its image is about 30 GB.</li>
-<li><strong>It is starting.</strong> Its health check gives it two minutes to start. <code>podman compose ps</code> shows its state.</li>
-<li><strong>It stopped.</strong> Read <code>podman compose logs ems</code>, and start it again with <code>podman compose up -d</code>.</li>
-</ul>
-</li>
-<li><p>Once it answers, the waiting work goes on by itself. Files that never got their renditions can be given them again:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-regenerate /archive/albums/cornwall-1968            <span class="hljs-comment"># what is missing</span>
-regenerate --force /archive/albums/cornwall-1968    <span class="hljs-comment"># everything again</span></code></pre></div>
-</li>
-</ol>
-<p>Lines beginning <code>ems-link: down</code> and <code>ems-link: up</code> in the <code>ems-link</code> service&#39;s log say when the media service went away and came back. A <code>fail</code> check named <code>ems gpu</code> means the card the media service is meant to have is gone; see <a href="../ems/gpu.html">The graphics card</a>. <a href="../ems/index.html">The media service</a> covers the rest.</p>
-<h2 id="the-assistant-does-not-answer">The assistant does not answer<a class="anchor" href="#the-assistant-does-not-answer" aria-label="Link to this section"></a></h2>
-<p>The chat shows one of three cards when a question gets no answer:</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Card</th>
-<th>What it means</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Assistant unavailable</strong></td>
-<td>&quot;The assistant is not available right now.&quot; The language model could not be reached within <a href="../reference/settings.html#cfg_llm_wait"><code>CFG_LLM_WAIT</code></a>, 180 seconds unless changed, or the assistant is not set up.</td>
-</tr>
-<tr>
-<td><strong>No answer</strong></td>
-<td>&quot;The assistant could not answer this question.&quot; The model ran but gave up on this question. Ask it in other words.</td>
-</tr>
-<tr>
-<td><strong>Answer too long</strong></td>
-<td>&quot;The answer was too long to finish. Ask for less, such as the last 20 rows.&quot;</td>
-</tr>
-</tbody></table>
-</div>
-<p>For <strong>Assistant unavailable</strong>, ask EiN whether it reaches the model:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-llm-status --checks</code></pre></div>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>What it says</th>
-<th>What to do</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>… is not answering; the chat cannot answer until it does</code></td>
-<td>With <code>--llm</code>, read <code>podman compose logs llm</code>: at its first start it downloads its model, several GB, and answers only after that. Without <code>--llm</code> and without a hosted model, there is no model: add one with <code>~/ein/setup.sh --llm</code>.</td>
-</tr>
-<tr>
-<td><code>… does not offer …; the chat&#39;s questions to it fail</code></td>
-<td>The hosted provider has no model by the name in <code>CFG_LLM_MODEL</code>. Set a name it offers.</td>
-</tr>
-</tbody></table>
-</div>
-<p><a href="../assistant/language-model.html">The language model</a> covers running the model yourself or using a hosted one.</p>
+<p>With the Archive, a kind can also wait for the media service; see <a href="#media-service">Media service</a>. <code>pipeline-overview</code> and <code>pool-stat</code> show the counts behind these checks, and <code>top</code> shows them live. <code>pipeline-repair</code> finds instances marked finished while steps of theirs still wait, and with <code>--apply</code> sets them running again; run it without <code>--apply</code> first to see what it would change.</p>
 <h2 id="a-service-has-stopped">A service has stopped<a class="anchor" href="#a-service-has-stopped" aria-label="Link to this section"></a></h2>
 <p>EiN runs its own services inside its container: the web interface, SSH, the pipeline engine, and each module&#39;s. A service that stops on its own is started again, but after three restarts within a minute EiN leaves it <code>failed</code>.</p>
 <ol>
@@ -412,7 +337,7 @@ service-list --detail</code></pre></div>
 </li>
 <li><p>Start it again, on the dashboard&#39;s <strong>Services</strong> tab with its <strong>Start</strong> button, or in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
-service-start archive-bridge</code></pre></div>
+service-start trash-purger</code></pre></div>
 </li>
 </ol>
 <p>A service shown as <code>disabled</code> has no buttons on the dashboard; enable it first with <code>service-enable &lt;name&gt;</code>. Restarting EiN, <code>podman compose restart ein</code>, starts every enabled service again. <a href="services-logs.html">Services and logs</a> lists the services and what each does.</p>
@@ -426,7 +351,7 @@ service-start archive-bridge</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td>The data folder, <code>EIN_DATA</code>: originals, renditions, the model</td>
+<td>The data folder, <code>EIN_DATA</code>: originals, renditions and, with <code>--llm</code>, the language model</td>
 <td><code>df</code> in EiN&#39;s terminal: free space per storage tier, its growth per day, when it fills, and the size of the database</td>
 </tr>
 <tr>
@@ -477,6 +402,104 @@ dmesg --level=warn       <span class="hljs-comment"># warnings and errors since 
 podman compose ps
 podman compose logs --<span class="hljs-built_in">tail</span> 200 ein</code></pre></div>
 <p>Read the logs before you send them on: they name your accounts, paths and addresses.</p>
+<h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../archive/index.html">Archive</a> installed:</p>
+<h3 id="thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing<a class="anchor" href="#thumbnails-faces-and-text-are-missing" aria-label="Link to this section"></a></h3>
+<p>The Archive&#39;s thumbnails, video renditions, faces, picture vectors, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.</p>
+<ol>
+<li><p>See whether EiN reaches it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ems-status</code></pre></div>
+<p><code>ems-status</code> shows its version, every model and its state, what it is running and what it is degraded in. On the dashboard, the <strong>Media service</strong> tab shows the same.</p>
+</li>
+<li><p>When <code>health</code> says <code>http://ems:8181 is not answering; work that needs it waits</code>:</p>
+<ul>
+<li><strong>It was never installed.</strong> The Archive needs it. Add it with <code>~/ein/setup.sh --ems</code>; its image is about 30 GB.</li>
+<li><strong>It is starting.</strong> Its health check gives it two minutes to start. <code>podman compose ps</code> shows its state.</li>
+<li><strong>It stopped.</strong> Read <code>podman compose logs ems</code>, and start it again with <code>podman compose up -d</code>.</li>
+</ul>
+</li>
+<li><p>Once it answers, the waiting work goes on by itself. Files that never got their renditions can be given them again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+regenerate /archive/albums/cornwall-1968            <span class="hljs-comment"># what is missing</span>
+regenerate --force /archive/albums/cornwall-1968    <span class="hljs-comment"># everything again</span></code></pre></div>
+</li>
+</ol>
+<h2 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../assistant/index.html">Assistant</a> installed:</p>
+<h3 id="the-assistant-does-not-answer">The assistant does not answer<a class="anchor" href="#the-assistant-does-not-answer" aria-label="Link to this section"></a></h3>
+<p>The chat shows one of three cards when a question gets no answer:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Assistant unavailable</strong></td>
+<td>&quot;The assistant is not available right now.&quot; The language model could not be reached within <a href="../reference/settings.html#cfg_llm_wait"><code>CFG_LLM_WAIT</code></a>, 180 seconds unless changed, or the assistant is not set up.</td>
+</tr>
+<tr>
+<td><strong>No answer</strong></td>
+<td>&quot;The assistant could not answer this question.&quot; The model ran but gave up on this question. Ask it in other words.</td>
+</tr>
+<tr>
+<td><strong>Answer too long</strong></td>
+<td>&quot;The answer was too long to finish. Ask for less, such as the last 20 rows.&quot;</td>
+</tr>
+</tbody></table>
+</div>
+<p>For <strong>Assistant unavailable</strong>, ask EiN whether it reaches the model:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+llm-status --checks</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What it says</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>… is not answering; the chat cannot answer until it does</code></td>
+<td>With <code>--llm</code>, read <code>podman compose logs llm</code>: at its first start it downloads its model, several GB, and answers only after that. Without <code>--llm</code> and without a hosted model, there is no model: add one with <code>~/ein/setup.sh --llm</code>.</td>
+</tr>
+<tr>
+<td><code>… does not offer …; the chat&#39;s questions to it fail</code></td>
+<td>The hosted provider has no model by the name in <code>CFG_LLM_MODEL</code>. Set a name it offers.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="../assistant/language-model.html">The language model</a> covers running the model yourself or using a hosted one.</p>
+<h2 id="media-service">Media service<a class="anchor" href="#media-service" aria-label="Link to this section"></a></h2>
+<p>These apply with the media service and the <code>ems</code> module installed, which the Archive needs. <a href="../ems/index.html#when-something-goes-differently">The media service</a> covers more.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>unresolvable CDI devices nvidia.com/gpu=all</code> when the containers start</td>
+<td>The container engine cannot hand the graphics card to the media service or the language model. See <a href="../ems/gpu.html">The graphics card</a>.</td>
+</tr>
+<tr>
+<td><code>health</code> says <code>… waiting for EMS, which could not run it yet; next try in …</code></td>
+<td>The media service is busy or could not load what the work needs. EiN tries again at the time it names. When it keeps saying so, see <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
+</tr>
+<tr>
+<td><code>health</code> says <code>http://ems:8181 is not answering; work that needs it waits</code></td>
+<td>The media service was never installed, is starting or has stopped. See <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
+</tr>
+<tr>
+<td>A <code>fail</code> check named <code>ems gpu</code></td>
+<td>The card the media service is meant to have is gone. See <a href="../ems/gpu.html">The graphics card</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Lines beginning <code>ems-link: down</code> and <code>ems-link: up</code> in the <code>ems-link</code> service&#39;s log say when the media service went away and came back.</p>
+<p>When the media service is updated, the <code>ems-link</code> service runs the failed instances again at once (<code>pipeline heal --now --apply</code>), all but those that failed on their input or were left for a person, since a new build is the likeliest fix.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="monitoring.html">Health and the dashboard</a>: every check, tile and gauge.</li>
@@ -495,7 +518,7 @@ podman compose logs --<span class="hljs-built_in">tail</span> 200 ein</code></pr
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/troubleshooting.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-to-look-first">Where to look first</a></li><li><a href="#ein-does-not-start-or-does-not-answer">EiN does not start or does not answer</a></li><li><a href="#you-cannot-sign-in">You cannot sign in</a></li><li><a href="#the-web-interface-misbehaves">The web interface misbehaves</a></li><li><a href="#work-does-not-get-done">Work does not get done</a></li><li class="nested"><a href="#failed-work">Failed work</a></li><li class="nested"><a href="#waiting-work-that-does-not-drain">Waiting work that does not drain</a></li><li><a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a></li><li><a href="#the-assistant-does-not-answer">The assistant does not answer</a></li><li><a href="#a-service-has-stopped">A service has stopped</a></li><li><a href="#the-disk-fills-up">The disk fills up</a></li><li><a href="#a-change-made-something-worse">A change made something worse</a></li><li><a href="#gather-what-to-report">Gather what to report</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-to-look-first">Where to look first</a></li><li><a href="#ein-does-not-start-or-does-not-answer">EiN does not start or does not answer</a></li><li><a href="#you-cannot-sign-in">You cannot sign in</a></li><li><a href="#the-web-interface-misbehaves">The web interface misbehaves</a></li><li><a href="#work-does-not-get-done">Work does not get done</a></li><li class="nested"><a href="#failed-work">Failed work</a></li><li class="nested"><a href="#waiting-work-that-does-not-drain">Waiting work that does not drain</a></li><li><a href="#a-service-has-stopped">A service has stopped</a></li><li><a href="#the-disk-fills-up">The disk fills up</a></li><li><a href="#a-change-made-something-worse">A change made something worse</a></li><li><a href="#gather-what-to-report">Gather what to report</a></li><li><a href="#archive">Archive</a></li><li class="nested"><a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a></li><li><a href="#assistant">Assistant</a></li><li class="nested"><a href="#the-assistant-does-not-answer">The assistant does not answer</a></li><li><a href="#media-service">Media service</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

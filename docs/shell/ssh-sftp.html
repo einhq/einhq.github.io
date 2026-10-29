@@ -198,6 +198,8 @@ command&#39;s exit status. That is what a script on your own computer wants:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;ls /archive/albums&#x27;</span>
 ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPUT=1 ls -l /archive/albums/cornwall-1968&#x27;</span> | jq .</code></pre></div>
+<p>The examples on this page use the <a href="../archive/index.html">Archive</a>&#39;s albums, which are there once it is
+installed; any folder you may read works the same way.</p>
 <ul>
 <li>With <code>JSON_OUTPUT=1</code> commands answer in JSON instead of text (see
 <a href="../reference/environment.html">Environment variables</a>).</li>
@@ -229,38 +231,29 @@ protocol that EiN does not speak; with OpenSSH 8.7 or 8.8 add <code>-s</code>, a
 <p>What you may see and change is decided by the same <a href="../admin/permissions.html">permissions</a> as in the web
 interface: a folder you cannot open in the browser cannot be opened over SFTP either.</p>
 <h3 id="bring-in-a-large-batch-of-photos">Bring in a large batch of photos<a class="anchor" href="#bring-in-a-large-batch-of-photos" aria-label="Link to this section"></a></h3>
-<p>For an export or a scanned box of tens of thousands of files, copy them over SFTP into your staging
-area rather than uploading them in the browser. The <strong>Import media</strong> dialog on the <strong>Staging</strong> page
-shows the folder to copy into, with a button that copies the path and a <strong>How</strong> link to this page.</p>
-<figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog: Inbox chosen as the category, the Choose files and Choose a folder buttons, and under them &quot;Over about 10,000 files? Copy them over SFTP instead, folders and all, into /home/admin/staging/files/inbox/&quot; with a copy button and a How link" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The dialog gives the exact folder to copy a large batch into over SFTP.</figcaption></figure>
-<p>Copy whole folders into a category&#39;s folder under <code>/home/&lt;you&gt;/staging/files/</code>, keeping their names,
-since folder names help EiN group what belongs together:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
-scp -P 2222 -r <span class="hljs-string">&quot;Cornwall 1968&quot;</span> helen@ein.local:/home/helen/staging/files/inbox/</code></pre></div>
-<p>A zip needs no unpacking: copy it in as it is, and EiN expands it where it lands once the upload has
-ended. What you copy into staging waits there, seen only by you, until you sort it;
-<a href="../archive/staging.html">Sorting in staging</a> takes it from there, and
-<a href="../archive/importing.html">Getting your photos in</a> compares the ways in.</p>
-<p>A photo, video or recording copied anywhere else you may write, such as into an album, is taken in
-straight away, exactly as an upload in the web interface is: EiN makes its thumbnails and reads its
-date, place and faces in the background. EiN decides what a file is by its contents, not only by its
-name.</p>
+<p>With the Archive installed, an export or a scanned box of tens of thousands of files is better
+copied over SFTP into your staging area than uploaded in the browser, and a photo copied into an
+album is taken in as an upload is. <a href="../archive/importing.html#copy-files-in-over-sftp">Copy files in over SFTP</a>
+gives the folder to copy into and how to keep folder names for the grouping, and
+<a href="../archive/importing.html#zips">Zips</a> what happens to a zip you copy in.</p>
 <h2 id="what-the-tree-looks-like-over-sftp">What the tree looks like over SFTP<a class="anchor" href="#what-the-tree-looks-like-over-sftp" aria-label="Link to this section"></a></h2>
 <p>EiN&#39;s tree holds more than an ordinary file system can show, so a few things look different.</p>
-<p><strong>What belongs to a photo.</strong> A photo keeps things of its own: its EXIF data, the faces found in it, its
-thumbnails. Those live in a hidden folder named after the photo with <code>_</code> added: what belongs to
-<code>beach.jpg</code> is in <code>beach.jpg_</code>. It is not listed, so copying an album with <code>scp -r</code> or <code>get -r</code> copies
-the photos without it. You can still go in by typing its name (<code>cd beach.jpg_</code>), look around and
-download at any depth. Nothing in it can be changed over SFTP, and removing the photo removes it too.</p>
+<p><strong>What belongs to a photo.</strong> A file can hold nodes of its own: with the Archive, a photo keeps its
+EXIF data, the faces found in it and its thumbnails. Those live in a hidden folder named after the
+photo with <code>_</code> added: what belongs to <code>beach.jpg</code> is in <code>beach.jpg_</code>. It is not listed, so copying
+an album with <code>scp -r</code> or <code>get -r</code> copies the photos without it. You can still go in by typing its
+name (<code>cd beach.jpg_</code>), look around and download at any depth. Nothing in it can be changed over
+SFTP, and removing the photo removes it too.</p>
 <p><strong>Modification times.</strong> A file&#39;s modification time is when its content last changed, not when EiN last
 added something about it. Backup tools therefore see a photo as unchanged while its faces or
 description are being worked out. <code>put -p</code>, <code>scp -p</code> and <code>cp -p</code> on a mount keep the time they set.</p>
 <p><strong>Sizes.</strong> A file can be emptied by setting its size to 0. Any other change of size without writing
 the content is refused.</p>
-<p><strong>Links.</strong> An album&#39;s cover, a picture added to an album and a person tagged in a photo appear as
-symbolic links, and following one takes you to what it points to. A recursive copy therefore copies
-the link, not what lies behind it. <code>ln -s</code> in <code>sftp</code> makes a new link, and removing a link removes only
-the link, never what it points to. <a href="../concepts/links.html">Links</a> explains what they are for.</p>
+<p><strong>Links.</strong> Softlinks, such as your favourites, or with the Archive an album&#39;s cover, a picture added
+to an album and a person tagged in a photo, appear as symbolic links, and following one takes you to
+what it points to. A recursive copy therefore copies the link, not what lies behind it. <code>ln -s</code> in
+<code>sftp</code> makes a new link, and removing a link removes only the link, never what it points to.
+<a href="../concepts/links.html">Links</a> explains what they are for.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>Removing a file over SFTP deletes it for good, with everything that belongs to it. It does not go to
 your trash, as deleting in the web interface does. Removing a folder works only once it is empty.</p>
