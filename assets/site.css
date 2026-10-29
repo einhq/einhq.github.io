@@ -424,7 +424,20 @@ kbd {
     opacity: 0;
   }
   .bar[data-over]:not([data-scrolled]) .brand {
-    transform: scale(1.6);
+    transform: scale(2.1);
+  }
+}
+/* At the top the chapters and the source link are larger too, shrinking with the bar. */
+@media (scripting: enabled) and (min-width: 781px) {
+  .bar[data-over]:not([data-scrolled]) nav,
+  .bar[data-over]:not([data-scrolled]) .bar-source {
+    font-size: 1.125rem;
+  }
+  .bar[data-over]:not([data-scrolled]) nav {
+    gap: 30px;
+  }
+  .bar[data-over]:not([data-scrolled]) .bar-source {
+    padding: 8px 18px 8px 15px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -439,6 +452,7 @@ kbd {
   gap: 24px;
   margin-inline-start: auto;
   font-size: 0.95rem;
+  transition: font-size 0.3s, gap 0.3s;
 }
 /* Each chapter's link carries its hat, faint until the chapter is in view (site.js). */
 .bar nav a {
@@ -447,6 +461,7 @@ kbd {
   gap: 7px;
   color: var(--muted);
   text-decoration: none;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.9), 0 0 8px rgb(0 0 0 / 0.7);
 }
 .bar nav a::before {
   content: '';
@@ -470,6 +485,8 @@ kbd {
   transform: rotate(60deg);
 }
 .bar-source {
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.9), 0 0 8px rgb(0 0 0 / 0.7);
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.8));
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -478,6 +495,7 @@ kbd {
   border-radius: 8px;
   font-size: 0.95rem;
   text-decoration: none;
+  transition: font-size 0.3s, padding 0.3s, border-color 0.15s;
 }
 .bar-source:hover {
   border-color: var(--muted);
@@ -682,146 +700,6 @@ kbd {
 .button-primary:hover {
   background: #fff;
 }
-/* The way in: a hat in the lime green of the system's pages, as wide as two of the field's, its words
- * where the hat is widest and an arrow down in its foot. Only the hat takes the pointer. On hover its
- * edge runs through the node types' colours, a light goes round it and the arrow nudges down; the
- * buttons beside it stand level with its words. */
-.button-start {
-  position: relative;
-  flex: none;
-  width: 200px;
-  aspect-ratio: 6.2 / 4.53;
-  color: var(--ink);
-  font-weight: 600;
-  text-decoration: none;
-  pointer-events: none;
-}
-.button-start svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.button-start span {
-  position: absolute;
-  left: 54.8%;
-  top: 30.8%;
-  font-size: 1.0625rem;
-  white-space: nowrap;
-  transform: translate(-50%, -50%);
-  pointer-events: auto;
-}
-.hat-fill {
-  fill: var(--system);
-  pointer-events: visiblePainted;
-  transition: filter 0.15s;
-}
-.hat-edge,
-.hat-run {
-  fill: none;
-  stroke-linejoin: round;
-}
-.hat-edge {
-  stroke: color-mix(in srgb, var(--system) 55%, #000);
-  stroke-width: 0.09;
-  transition: stroke-width 0.2s;
-}
-.hat-run {
-  stroke: #fff;
-  stroke-width: 0.12;
-  stroke-dasharray: 14 86;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.hat-arrow {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 0.11;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.button-start:hover .hat-fill {
-  filter: brightness(1.08);
-}
-.button-start:hover .hat-edge {
-  stroke-width: 0.13;
-  animation: hat-edge 2.4s linear infinite;
-}
-.button-start:hover .hat-run {
-  opacity: 0.85;
-  animation: hat-run 1.6s linear infinite;
-}
-.button-start:hover .hat-arrow {
-  transform: translateY(0.22px);
-}
-.button-start:focus-visible {
-  outline: none;
-}
-.button-start:focus-visible .hat-edge {
-  stroke: var(--text);
-  stroke-width: 0.14;
-}
-@keyframes hat-edge {
-  0%,
-  100% {
-    stroke: var(--album);
-  }
-  17% {
-    stroke: var(--person);
-  }
-  33% {
-    stroke: var(--place);
-  }
-  50% {
-    stroke: var(--track);
-  }
-  67% {
-    stroke: var(--device);
-  }
-  83% {
-    stroke: var(--label);
-  }
-}
-@keyframes hat-run {
-  to {
-    stroke-dashoffset: -100;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .button-start:hover .hat-edge {
-    stroke: var(--text);
-    animation: none;
-  }
-  .button-start:hover .hat-run {
-    opacity: 0;
-    animation: none;
-  }
-}
-.actions:has(.button-start) {
-  align-items: flex-start;
-}
-/* Level with the hat's words: their middle (30.8% down a hat 200 px wide, so 45 px), less half a
- * button's height. */
-.button-start ~ .button {
-  margin-top: calc(200px * 4.53 / 6.2 * 0.308 - 1.6em / 2 - 13px);
-}
-/* On a phone the way in takes the row, and the other two share the one under it. */
-@media (max-width: 780px) {
-  .actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .actions .button-start {
-    grid-column: 1 / -1;
-  }
-  .actions .button {
-    justify-content: center;
-    margin-top: 0;
-    padding-inline: 16px;
-  }
-}
-
 /* The field's tiles (drawn by site.js, which paints them). */
 .tile {
   stroke-width: 1;

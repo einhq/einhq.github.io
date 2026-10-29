@@ -157,10 +157,30 @@ engine() {
       false) short podman "$version, run as root here: run the installer, and EiN, as your own user" ;;
       *) short podman "$version, but 'podman info' fails: run it to see why" ;;
     esac
-    if podman compose version >/dev/null 2>&1; then
-      say compose ok "podman compose"
+    local provider
+    if provider=$(podman compose version 2>&1); then
+      if [[ $provider == *podman-compose* ]]; then
+        say compose ok "podman compose, with podman-compose"
+      elif curl -sf -o /dev/null --unix-socket "$(podman info --format '{{.Host.RemoteSocket.Path}}' 2>/dev/null)" http://d/_ping; then
+        say compose ok "podman compose, with docker-compose through podman's socket"
+      else
+        need compose "'podman compose' runs docker-compose here, which needs podman's socket: systemctl --user enable --now podman.socket"
+      fi
     else
       need compose "install podman-compose, which 'podman compose' runs"
+    fi
+    # Under the older network backend, CNI, containers find each other by name only with its dnsname
+    # plugin, and EiN finds its database by the name db.
+    if [ "$(podman info --format '{{.Host.NetworkBackend}}' 2>/dev/null)" = cni ]; then
+      local dir dnsname=
+      for dir in /usr/local/libexec/cni /usr/libexec/cni /usr/local/lib/cni /usr/lib/cni /opt/cni/bin; do
+        [ ! -x "$dir/dnsname" ] || dnsname=$dir/dnsname
+      done
+      if [ -n "$dnsname" ]; then
+        say network ok "CNI, with its dnsname plugin"
+      else
+        need network "podman's CNI networks give no names here: install its dnsname plugin (Debian and Ubuntu: golang-github-containernetworking-plugin-dnsname; Fedora: podman-plugins)"
+      fi
     fi
   elif command -v docker >/dev/null; then
     say docker ok "$(docker --version | awk '{print $3}' | tr -d ,)"
