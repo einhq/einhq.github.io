@@ -4,8 +4,8 @@
  * (page.js). Everything works without it: the hats are decoration, without script the tour shows
  * every page one after another (site.css, `scripting: none`), and a screenshot's card links to its image.
  */
-import { COVERED, HAT_WIDTH } from './hat-tiling.js';
-import { bands, bar, barBottom, hatsIn, mixedAt, noise, OUTLINE, paintOf, smooth, svg, tint } from './page.js';
+import { HAT_WIDTH } from './hat-tiling.js';
+import { bands, bar, barBottom, CUT, hatsIn, HERO_TINT, heroHat, layStrip, mixedAt, noise, OUTLINE, paintOf, smooth, svg, tint } from './page.js';
 
 /**
  * Tiles that show a node other than a picture, so the field says EiN keeps more than photos: each
@@ -31,12 +31,6 @@ const role = (picture) => picture.glyph ? 'drawn' : picture.kind === 'person' ? 
 
 /** How far apart, in hats, the middles of two filled tiles are at least, besides never touching. */
 const SPACING = 0.9;
-
-/** Where on the patch the field is cut, in patch units: fixed, so the page always shows the same hats. */
-const CUT = { x: COVERED.x + 58, y: COVERED.y + 36 };
-
-/** How much more the hero tints its tiles than a header band does: it is the page's picture, not a ground for controls. */
-const HERO_TINT = 1.5;
 
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -350,7 +344,7 @@ function layField(host, pictures, entering) {
       bottom: Math.max(...parts.map((r) => r.bottom)) - origin.top,
     }
     : null;
-  const hatPx = width < 720 ? 60 : Math.min(112, Math.max(76, width / 14));
+  const hatPx = heroHat(width);
   const tiles = hatsIn(width, height, CUT, hatPx / HAT_WIDTH);
 
   // The open side, right of the copy or above the headline when stacked, where the tinted hats are
@@ -468,36 +462,16 @@ function layField(host, pictures, entering) {
   layBar(host, tiles, (tile) => HERO_TINT * tint(tile, openness(tile), 1));
 }
 
-/** How deep a strip of the hero the top bar is given: more than the bar is at either of its heights. */
-const BAR_DEPTH = 120;
-
 /**
  * The top bar's hats, for once the page has scrolled: the strip of the hero's field that lies under
- * the bar at the top, its hats as large and tinted as the field's (`tintOf`) and none pictured, so
- * the bar takes over from the hero without a seam. site.css fades them towards the bar's foot.
+ * the bar at the top, so the bar takes over from the hero without a seam (page.js).
  */
 function layBar(host, tiles, tintOf) {
   const strip = document.querySelector('.bar-hats');
   if (!strip) return;
-  const width = host.clientWidth;
   // Where the bar starts on the hero, as the page lies at its top: the bar is fixed, the hero is not.
   const top = strip.getBoundingClientRect().top - (host.getBoundingClientRect().top + scrollY);
-  const root = svg('svg', { viewBox: `0 ${top} ${width} ${BAR_DEPTH}`, width, height: BAR_DEPTH });
-  const defs = svg('defs', {});
-  root.append(defs);
-  const paint = paintOf('mixed', defs, width, 'bar-paint');
-  for (const tile of tiles) {
-    if (tile.box.bottom < top || tile.box.y > top + BAR_DEPTH) continue;
-    root.append(svg('path', {
-      d: tile.d,
-      fill: paint,
-      'fill-opacity': tintOf(tile).toFixed(3),
-      stroke: paint,
-      'stroke-opacity': OUTLINE,
-      'stroke-linejoin': 'round',
-    }));
-  }
-  strip.replaceChildren(root);
+  layStrip(strip, host.clientWidth, top, tiles, tintOf);
 }
 
 async function field() {

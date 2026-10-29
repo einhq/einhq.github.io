@@ -405,12 +405,13 @@ kbd {
 /* The presentation page's bar (`data-over`) lies on the hero while the page is at its top: no ground
  * of its own, taller, and the mark larger. Scrolled, it shrinks to its usual height and lays the
  * hero's own hats under itself (site.js), as large and tinted as the field's and fading towards its
- * foot. Without script, which marks the scroll, it keeps its ground throughout. */
-.bar[data-over] .bar-hats {
+ * foot. Without script, which marks the scroll, it keeps its ground throughout. A page without the
+ * hero (`data-strip`, the documentation's) shows the scrolled bar throughout, with the same hats. */
+.bar:is([data-over], [data-strip]) .bar-hats {
   opacity: 1;
   transition: opacity 0.3s;
 }
-.bar[data-over] .bar-hats svg {
+.bar:is([data-over], [data-strip]) .bar-hats svg {
   height: auto;
   transform: none;
 }

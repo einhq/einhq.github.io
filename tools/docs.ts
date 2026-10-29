@@ -333,8 +333,8 @@ function document(page: Page, order: Page[], sections: { title: string; pages: E
       <span class="notice-short">Nothing is released yet.</span>
     </p>
 
-    <header class="bar">
-      <div class="bar-hats" data-band="neutral" data-foot aria-hidden="true"></div>
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
       <a class="brand" href="${root}" aria-label="EiN, the presentation page">
         <img src="${root}assets/favicon.svg" alt="" width="26" height="26">
         <span>EiN</span>

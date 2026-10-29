@@ -148,6 +148,63 @@ function groundOf(el) {
   return colour === 'rgba(0, 0, 0, 0)' ? getComputedStyle(document.body).backgroundColor : colour;
 }
 
+/** Where on the patch the hero's field is cut, in patch units: fixed, so the page always shows the same hats. */
+export const CUT = { x: COVERED.x + 58, y: COVERED.y + 36 };
+
+/** How much more the hero tints its tiles than a header band does: it is the page's picture, not a ground for controls. */
+export const HERO_TINT = 1.5;
+
+/** How wide, in px, the hero's hats are on a window `width` px wide. */
+export const heroHat = (width) => width < 720 ? 60 : Math.min(112, Math.max(76, width / 14));
+
+/** How deep a strip of the hero the top bar is given: more than the bar is at either of its heights. */
+const BAR_DEPTH = 120;
+
+/**
+ * The top bar's hats into `strip`: the hero's `tiles` from `top` down, as large and tinted as the
+ * field's (`tintOf`) and none pictured, in the mixed colours across `width`. site.css fades them
+ * towards the bar's foot.
+ */
+export function layStrip(strip, width, top, tiles, tintOf) {
+  const root = svg('svg', { viewBox: `0 ${top} ${width} ${BAR_DEPTH}`, width, height: BAR_DEPTH });
+  const defs = svg('defs', {});
+  root.append(defs);
+  const paint = paintOf('mixed', defs, width, 'bar-paint');
+  for (const tile of tiles) {
+    if (tile.box.bottom < top || tile.box.y > top + BAR_DEPTH) continue;
+    root.append(svg('path', {
+      d: tile.d,
+      fill: paint,
+      'fill-opacity': tintOf(tile).toFixed(3),
+      stroke: paint,
+      'stroke-opacity': OUTLINE,
+      'stroke-linejoin': 'round',
+    }));
+  }
+  strip.replaceChildren(root);
+}
+
+/**
+ * The top bar of a page without the hero, such as the documentation's (`data-strip`): the hats the
+ * presentation page's bar shows once scrolled, the top of the field the hero would lay at the
+ * window's width, brighter towards the open right as the hero's are. Laid again when the width changes.
+ */
+export function barStrip() {
+  const strip = document.querySelector('.bar[data-strip] .bar-hats');
+  if (!strip) return;
+  let laid = 0;
+  const lay = () => {
+    const width = document.documentElement.clientWidth;
+    if (width === laid) return;
+    laid = width;
+    const tiles = hatsIn(width, BAR_DEPTH, CUT, heroHat(width) / HAT_WIDTH);
+    const open = (tile) => (width < 1000 ? 1 : smooth(width * 0.38, width * 0.8, tile.cx));
+    layStrip(strip, width, 0, tiles, (tile) => HERO_TINT * tint(tile, open(tile), 1));
+  };
+  lay();
+  addEventListener('resize', lay, { passive: true });
+}
+
 /** Every band on the page, laid again when its width changes; the top bar's is numbered last, after the chapters'. */
 export function bands() {
   const hosts = [...document.querySelectorAll('[data-band]:not([data-foot])'), ...document.querySelectorAll('[data-band][data-foot]')];

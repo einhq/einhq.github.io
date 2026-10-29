@@ -4,7 +4,7 @@
  * heading in view marked in the page's outline. Everything works without it: the search falls back
  * to a web search of the site, and the pages' list stays under the page.
  */
-import { bands, bar } from './page.js';
+import { bands, bar, barStrip } from './page.js';
 
 // --- search ---
 
@@ -231,6 +231,6 @@ function outline() {
 }
 
 // Each part on its own, so one that fails leaves the others working.
-for (const part of [bar, bands, side, search, copyButtons, outline]) {
+for (const part of [bar, barStrip, bands, side, search, copyButtons, outline]) {
   Promise.resolve().then(part).catch((error) => console.error(error));
 }
