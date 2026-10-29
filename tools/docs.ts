@@ -357,7 +357,7 @@ function document(page: Page, order: Page[], sections: { title: string; pages: E
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="docs" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
