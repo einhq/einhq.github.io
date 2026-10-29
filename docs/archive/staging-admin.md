@@ -316,17 +316,6 @@ dedupe` for someone else answers `staging dedupe: staging dedupe moves copies to
 
 [Archive commands](commands.md#staging) lists every subcommand and option.
 
-## Import an older archive
-
-The `importer` module moves one particular older archive, kept as MongoDB dumps, into EiN: its
-users and groups, people, albums, files, places and the rest, with a command for each
-(`import-users-groups`, `import-files` and so on). It is not published, and it does nothing for
-any other archive. Files from a person's own area in the old archive land in their staging Inbox,
-in `files/inbox/legacy-import`, where they sort them like any upload. Its commands are listed under
-[Importer commands](../importer/commands.md).
-
-To bring in files from anywhere else, copy them into staging as above.
-
 ## When something goes differently
 
 **A person's `/home/<name>/staging` does not exist.** Their staging area is not set up yet. Run

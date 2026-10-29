@@ -11,7 +11,7 @@ Each turn of the chat is a short loop. The language model is given a system mess
 Both the system message and the tools are put together from the installed modules each time:
 
 - The tools are the commands the modules list, each described by its own `--help` spec, plus `find_commands`, `command_help`, `run_command` and `final_answer`.
-- The system message is the prompt file `/etc/assistant-prompt.md`, then what each module says about its part.
+- The system message is the prompt file `/etc/assistant-prompt.md`, then what each module says about its part, then a few lines about the question: who is asking, their home directory and the system's language ([`CFG_LANGUAGE`](../reference/settings.md#cfg_language)), which only a message too short to tell is answered in.
 - The cards an answer can carry, the questions an empty chat suggests and the questions `agent-eval` asks also come from the modules.
 
 A module gives all of this in one directory, `etc/assistant.d/`. When an administrator runs `mod setup`, that directory is linked as `/etc/assistant.d/<module>/`, and the setup log says `Linked assistant.d at /etc/assistant.d/<module>` (`Assistant.d already linked at …` when the link is there already). The assistant reads every directory under `/etc/assistant.d/` in name order, as the user who is asking. Every file is optional; a module ships only the ones it needs.
@@ -24,7 +24,7 @@ A module gives all of this in one directory, `etc/assistant.d/`. When an adminis
 | `examples`   | Questions the chat suggests before anything has been asked, one a line.                              |
 | `eval.json`  | Questions with known good commands, for `agent-eval` to measure the assistant with.                  |
 
-The assistant module ships its own drop-in this way (the `ls`, `stat`, `find` and `cat` tools and the chart card), and so does the Archive (its search, people and location commands, the family tree and map cards). The media service and importer modules ship none.
+The assistant module ships its own drop-in this way (the `ls`, `stat`, `find` and `cat` tools and the chart card), and so does the Archive (its search, people and location commands, the family tree and map cards). The media service module ships none.
 
 ```text
 modules/<module>/

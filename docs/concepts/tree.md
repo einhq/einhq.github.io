@@ -269,7 +269,7 @@ the database's part of the tree are kept.
 
 ## Browse the tree
 
-The tree looks the same through every door, and each shows you only what you may read.
+The tree looks the same through every interface, and each shows you only what you may read.
 
 **In the terminal**, `cd` moves around, `ls` lists a folder, `ls -l` adds each node's type, mode,
 owner, group, size and time, and `find` searches under a path:

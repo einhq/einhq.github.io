@@ -69,8 +69,7 @@ makes from them; see [How EiN works](../start/how-ein-works.md).
   bars for the nodes created in each calendar year, a line for the "Cumulative total by month", and
   the total, such as "2,431 nodes". Rest the pointer on a bar to read the year's count.
 
-A node counts in the year it was created in EiN. Material brought in from an older archive by the
-importer keeps the dates it had there. The charts leave out the kinds that make up the system
+A node counts in the year it was created in EiN. The charts leave out the kinds that make up the system
 itself, such as folders, links, accounts and sessions, and they count what you may see.
 
 These charts can take a few seconds to appear on a large archive. When there is nothing to count,

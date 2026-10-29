@@ -92,6 +92,7 @@
 - [Supported files](archive/file-types.md)
 - [Processing pictures](archive/processing.md)
 - [Staging for administrators](archive/staging-admin.md)
+- [Archive commands by task](archive/tasks.md)
 - [Archive commands](archive/commands.md)
 
 ## Assistant
@@ -100,6 +101,7 @@
 - [Chatting with the assistant](assistant/chat.md)
 - [The language model](assistant/language-model.md)
 - [Teaching the assistant](assistant/teaching.md)
+- [Assistant commands by task](assistant/tasks.md)
 - [Assistant commands](assistant/commands.md)
 
 ## Media service
@@ -107,8 +109,3 @@
 - [The media service](ems/index.md)
 - [The graphics card](ems/gpu.md)
 - [Media service commands](ems/commands.md)
-
-## Importer
-
-- [The Importer](importer/index.md)
-- [Importer commands](importer/commands.md)

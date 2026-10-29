@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 360 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -393,23 +393,3 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
-
-## Importer
-
-[All 13 in full](../importer/commands.md).
-
-| Command | What it does |
-| --- | --- |
-| [import-albums](../importer/commands.md#import-albums) | Create /albums nodes from the legacy extractor output. |
-| [import-check](../importer/commands.md#import-check) | Check the extracted legacy data before an import, and with --vfs what landed after one. |
-| [import-comments](../importer/commands.md#import-comments) | Create markdown comments from the legacy comment nodes. |
-| [import-covers](../importer/commands.md#import-covers) | Recreate legacy profilePicture links as coverPhoto softlinks. |
-| [import-devices](../importer/commands.md#import-devices) | Create /devices nodes (+ configuration log + dated owners) from the legacy extractor output. |
-| [import-files](../importer/commands.md#import-files) | Create frozen file nodes (symlinked to old bytes) with overrides, faces, links and versions; user files go to /home/<username>/staging/files/inbox/legacy-import. |
-| [import-homes](../importer/commands.md#import-homes) | Wire person↔location residence relations from the legacy extractor output. |
-| [import-measurements](../importer/commands.md#import-measurements) | Create measurement logs (unit attr + backdated value points) from the legacy series. |
-| [import-people](../importer/commands.md#import-people) | Create /locations and /people nodes from the legacy extractor output. |
-| [import-relations](../importer/commands.md#import-relations) | Wire up parents/children/partners from the legacy extractor output. |
-| [import-stories](../importer/commands.md#import-stories) | Create blob events from the legacy text/story nodes. |
-| [import-tags](../importer/commands.md#import-tags) | Port legacy /labels into the new tag system (label add per resolvable target) |
-| [import-users-groups](../importer/commands.md#import-users-groups) | Create /groups and /users nodes from the legacy extractor output, each account with a new uid and a group of its own, each group with a new gid. |

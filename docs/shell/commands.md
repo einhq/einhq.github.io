@@ -6,7 +6,7 @@ This page is for power users and administrators who know what they want to do an
 
 - Every command runs as you, with your permissions, in [the terminal](terminal.md) or over [SSH](ssh-sftp.md). The examples use the demo archive's invented Wrenfield family: the album `/archive/albums/christmas-2019`, the person `/archive/people/Peggy_Wrenfield`, the account `helen`. Albums and people come with the [Archive](../archive/index.md), so those paths are there once it is installed.
 - _administrators only_ marks a command that anyone else is refused before it starts, with `<name>: permission denied: only an administrator may run it`. A member of the `sudo` group can type `admin` to act as the administrator in that terminal. [Accounts and groups](../admin/accounts.md) explains who that is.
-- The [archive](../archive/index.md), [assistant](../assistant/index.md) and [media service](../ems/index.md) commands come with their [modules](../admin/modules.md). Without the module, the shell answers `error: command '<name>' not found`. `mod list` shows what is installed.
+- This page has core's commands. The modules' commands come with their [modules](../admin/modules.md), and their tasks are on [Archive commands by task](../archive/tasks.md) and [Assistant commands by task](../assistant/tasks.md); the [media service](../ems/index.md)'s are on its page. Without the module, the shell answers `error: command '<name>' not found`. `mod list` shows what is installed.
 - A command of a family can be typed as two words: `mod install` is `mod-install`, and `pipeline status` is `pipeline-status`. The families are `config`, `docs`, `group`, `mod`, `pipeline`, `pool`, `service`, `share` and `user`, and with the archive also `person` and `device`. `<family> --help`, such as `mod --help`, lists its subcommands; typing `mod` alone answers `mod: missing subcommand`.
 - `<command> --help` prints a command's arguments, options and examples without running it. `JSON_OUTPUT=1` in front of a command makes it answer in JSON; [The shell language](bash.md) covers that and the rest of the syntax.
 - `cd`, `pwd`, `jobs`, `kill` and the other bash builtins have no reference entry. They are described in [The shell language](bash.md).
@@ -49,150 +49,20 @@ The tree works like a file system: paths start at `/`, `..` is the parent, and `
 
 ## Search and find
 
-`search` looks through what EiN knows about your content. It asks each installed module's search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive, as in the examples below, the words, what the pictures show, the people in them, dates and places. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the web interface.
+`search` looks through what EiN knows about your content. It asks each installed module's search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive the words, what the pictures show, the people in them, dates and places; [Archive commands by task](../archive/tasks.md#search-your-pictures) has those searches. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the web interface.
 
-| Task                                   | Command                                                                 | Reference                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Search everything by words             | `search sailboat`                                                       | [search](../reference/commands-core.md#search)                                                            |
-| Only photos, or videos                 | `search sailboat --kind photo`, `--kind video,audio`                    | [search](../reference/commands-core.md#search)                                                            |
-| Find albums, people or places by name  | `search christmas --kind album`, `search peggy --kind person`           | [search](../reference/commands-core.md#search)                                                            |
-| Pictures of a person                   | `search --subject person:Peggy_Wrenfield --kind photo`                  | [search](../reference/commands-core.md#search)                                                            |
-| Pictures of two people together        | `search --subject person:Peggy_Wrenfield --subject person:Helen_Okafor` | [search](../reference/commands-core.md#search)                                                            |
-| Pictures taken in a period             | `search --from 1968 --to 1970 --kind photo`                             | [search](../reference/commands-core.md#search)                                                            |
-| Pictures from a town or an area        | `search --bbox=$(location-region Truro --bbox-only)`                    | [search](../reference/commands-core.md#search), [location-region](../archive/commands.md#location-region) |
-| Pictures with a label                  | `search --tag sailing`, or `members /archive/tags/sailing`              | [search](../reference/commands-core.md#search), [members](../reference/commands-core.md#members)          |
-| Pictures that look like one picture    | `search --like /archive/albums/christmas-2019/20191224_141841.jpg`      | [search](../reference/commands-core.md#search)                                                            |
-| Search inside one album                | `search --under /archive/albums/christmas-2019 tree`                    | [search](../reference/commands-core.md#search)                                                            |
-| Search everything below a folder       | `search --within ~/staging/files --undated`                             | [search](../reference/commands-core.md#search)                                                            |
-| Which albums hold the matches          | `search --subject person:Peggy_Wrenfield --group-by album`              | [search](../reference/commands-core.md#search)                                                            |
-| Count matches per year, month and kind | `search --subject person:Peggy_Wrenfield --facets`                      | [search](../reference/commands-core.md#search)                                                            |
-| Find nodes by name                     | `find /archive/albums -iname '*.heic' -type f`                          | [find](../reference/commands-core.md#find)                                                                |
-| Find nodes by type                     | `find /archive/people -mindepth 1 -maxdepth 1 -type person`             | [find](../reference/commands-core.md#find)                                                                |
-| Find large files                       | `find ~/staging -type f -size +10M -printf '%s %p\n'`                   | [find](../reference/commands-core.md#find)                                                                |
-| Find what changed in the last hour     | `find ~/staging -type f -mmin -60`                                      | [find](../reference/commands-core.md#find)                                                                |
-| Find lines in text files               | `grep -n -i cottage ~/notes.md`                                         | [grep](../reference/commands-core.md#grep)                                                                |
-| Find a command by what it does         | `docs find restart a service`                                           | [docs-find](../reference/commands-core.md#docs-find)                                                      |
+| Task                               | Command                                                     | Reference                                            |
+| ---------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
+| Search everything by words         | `search sailboat`                                           | [search](../reference/commands-core.md#search)       |
+| Search everything below a folder   | `search --within ~/staging/files --undated`                 | [search](../reference/commands-core.md#search)       |
+| Find nodes by name                 | `find /archive/albums -iname '*.heic' -type f`              | [find](../reference/commands-core.md#find)           |
+| Find nodes by type                 | `find /archive/people -mindepth 1 -maxdepth 1 -type person` | [find](../reference/commands-core.md#find)           |
+| Find large files                   | `find ~/staging -type f -size +10M -printf '%s %p\n'`       | [find](../reference/commands-core.md#find)           |
+| Find what changed in the last hour | `find ~/staging -type f -mmin -60`                          | [find](../reference/commands-core.md#find)           |
+| Find lines in text files           | `grep -n -i cottage ~/notes.md`                             | [grep](../reference/commands-core.md#grep)           |
+| Find a command by what it does     | `docs find restart a service`                               | [docs-find](../reference/commands-core.md#docs-find) |
 
 The node types `find -type` takes are listed in [Node types](../reference/node-types.md).
-
-## The archive
-
-These commands come with the archive module and are there once it is installed; [The Archive](../archive/index.md) says what it adds. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. [Albums](../archive/albums.md), [People and faces](../archive/people.md) and the other guide pages show the same tasks in the web interface.
-
-### Albums
-
-| Task                                              | Command                                                                                      | Reference                                             |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| List the albums                                   | `album list /archive/albums`                                                                 | [album](../archive/commands.md#album)                 |
-| An album's name, description, cover and size      | `album info /archive/albums/christmas-2019`                                                  | [album](../archive/commands.md#album)                 |
-| Make an album                                     | `album create /archive/albums/malpas-summer --name 'Summer at Malpas'`                       | [album](../archive/commands.md#album)                 |
-| Make a private album                              | `album create /archive/albums/malpas-summer --name 'Summer at Malpas' --share private`       | [album](../archive/commands.md#album)                 |
-| Put pictures in an album                          | `album add /archive/albums/malpas-summer <file>...`                                          | [album](../archive/commands.md#album)                 |
-| Rename an album, describe it                      | `album set /archive/albums/christmas-2019 name 'Christmas 2019'`, `... description '<text>'` | [album](../archive/commands.md#album)                 |
-| Choose an album's cover                           | `album set /archive/albums/christmas-2019 cover <file>`                                      | [album](../archive/commands.md#album)                 |
-| Widen an album's span by hand                     | `album set /archive/albums/christmas-2019 spanStart 2019-12-20`                              | [album](../archive/commands.md#album)                 |
-| Link albums as a series                           | `album set /archive/albums/christmas-2019 next /archive/albums/lockdown-2020`                | [album](../archive/commands.md#album)                 |
-| List an album's pictures                          | `members-album /archive/albums/christmas-2019`                                               | [members-album](../archive/commands.md#members-album) |
-| Who and what an album's pictures show             | `subjects-in /archive/albums/christmas-2019`                                                 | [subjects-in](../archive/commands.md#subjects-in)     |
-| One album at random                               | `album-random`                                                                               | [album-random](../archive/commands.md#album-random)   |
-| Give albums without a cover one of their pictures | `album-cover --all`                                                                          | [album-cover](../archive/commands.md#album-cover)     |
-| Write an album's span again                       | `album-span /archive/albums/christmas-2019`, `album-span --all --stale`                      | [album-span](../archive/commands.md#album-span)       |
-| Find stacks of similar photos taken in a row      | `album-stack refresh /archive/albums/christmas-2019 --dry-run --verbose`                     | [album-stack](../archive/commands.md#album-stack)     |
-
-### Pictures, videos and recordings
-
-| Task                                          | Command                                                            | Reference                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| Everything about one file                     | `media-details /archive/albums/christmas-2019/20191224_141841.jpg` | [media-details](../archive/commands.md#media-details)                   |
-| Its metadata as exiftool reads it             | `exiftool <file>`                                                  | [exiftool](../archive/commands.md#exiftool)                             |
-| Set when it was taken, as vaguely as you know | `file-set-time <file> 1968-07 --note 'Postmark on the back'`       | [file-set-time](../archive/commands.md#file-set-time)                   |
-| Undo a date set by hand                       | `file-set-time --clear <file>`                                     | [file-set-time](../archive/commands.md#file-set-time)                   |
-| Set where it was taken                        | `file-set-position <file> --lat=50.2632 --lng=-5.0510`             | [file-set-position](../archive/commands.md#file-set-position)           |
-| Rotate or mirror it for good                  | `file-set-orientation --rotate cw <file>`                          | [file-set-orientation](../archive/commands.md#file-set-orientation)     |
-| Write its description                         | `file-set-description --text 'Christmas morning' <file>`           | [file-set-description](../archive/commands.md#file-set-description)     |
-| Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                         | [file-set-text](../archive/commands.md#file-set-text)                   |
-| Read its text again in another language       | `file-set-text-language <file> en`                                 | [file-set-text-language](../archive/commands.md#file-set-text-language) |
-| Say who took it                               | `file-set-photographer <file> /archive/people/Helen_Okafor`        | [file-set-photographer](../archive/commands.md#file-set-photographer)   |
-| The latest pictures taken                     | `latest 20`                                                        | [latest](../archive/commands.md#latest)                                 |
-
-A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510`; on its own it would be read as another option. Only `file-set-time` can give a picture a vague date such as `1968` or `1968-07`; the web interface's dialog sets full dates. [Dates and places of pictures](../archive/dates-places.md) explains which date a picture gets.
-
-To have EiN look at one file again, run the step with `-f`:
-
-| Task                                            | Command                               | Reference                                                 |
-| ----------------------------------------------- | ------------------------------------- | --------------------------------------------------------- |
-| Read the text in a picture again                | `read-text -f <file>`                 | [read-text](../archive/commands.md#read-text)             |
-| Find the faces again (boxes drawn by hand stay) | `detect-faces -f <file>`              | [detect-faces](../archive/commands.md#detect-faces)       |
-| Transcribe a recording or video again           | `transcribe-file -f <file>`           | [transcribe-file](../archive/commands.md#transcribe-file) |
-| Make thumbnails and renditions again            | `regenerate --force <file or folder>` | [regenerate](../archive/commands.md#regenerate)           |
-
-All four ask the [media service](../ems/index.md), so they need it running. For many files at once, an administrator starts the pipelines instead: see [Processing and pipelines](../admin/processing.md).
-
-### People
-
-| Task                                     | Command                                                                                | Reference                                                       |
-| ---------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| List the named people                    | `person-list --sort count`                                                             | [person-list](../archive/commands.md#person-list)               |
-| A person's details, relations and events | `person-info /archive/people/Peggy_Wrenfield`                                          | [person-info](../archive/commands.md#person-info)               |
-| Add a person                             | `person-create /archive/people/Ada_Wrenfield --name 'Ada Wrenfield' --born 2026-03-02` | [person-create](../archive/commands.md#person-create)           |
-| Change names, dates and details          | `person-update /archive/people/Peggy_Wrenfield --born 1934-08-22`                      | [person-update](../archive/commands.md#person-update)           |
-| People found in pictures but not named   | `person-unknown --limit 20`                                                            | [person-unknown](../archive/commands.md#person-unknown)         |
-| Name one of them                         | `person-name --name 'Mabel Cole' /archive/people/unknown/<id>`                         | [person-name](../archive/commands.md#person-name)               |
-| Merge two people who are one             | `person-merge /archive/people/unknown/<id> /archive/people/Ruby_Wrenfield`             | [person-merge](../archive/commands.md#person-merge)             |
-| Every face of a person                   | `person-faces --sort date /archive/people/Peggy_Wrenfield`                             | [person-faces](../archive/commands.md#person-faces)             |
-| Take a wrong face off a person           | `person-detach --rematch <file>/regions/face-1`                                        | [person-detach](../archive/commands.md#person-detach)           |
-| Add a parent                             | `person-set-parent <child> <parent>`, `--kind adoptive`                                | [person-set-parent](../archive/commands.md#person-set-parent)   |
-| Add a partner                            | `person-set-partner --kind married --from 1956-06-02 <a> <b>`                          | [person-set-partner](../archive/commands.md#person-set-partner) |
-| Remove a relation between two people     | `person-remove <a> <b>`                                                                | [person-remove](../archive/commands.md#person-remove)           |
-| Add an event to a person                 | `person-add-event --type death --date 2021-01-17 /archive/people/Peggy_Wrenfield`      | [person-add-event](../archive/commands.md#person-add-event)     |
-| Record where someone lived               | `person-set-home --from 1956 --to 1999 <person> /archive/locations/Highbury`           | [person-set-home](../archive/commands.md#person-set-home)       |
-| How two people are related               | `person-how-related /archive/people/Ruby_Wrenfield /archive/people/Peggy_Wrenfield`    | [person-how-related](../archive/commands.md#person-how-related) |
-| Who a kin word reaches                   | `person-relatives Peggy_Wrenfield --relation daughter`                                 | [person-relatives](../archive/commands.md#person-relatives)     |
-| Ancestors and descendants                | `person-family-tree --up 2 --down 2 /archive/people/Helen_Okafor`                      | [person-family-tree](../archive/commands.md#person-family-tree) |
-| A person's life in order                 | `person-timeline /archive/people/Peggy_Wrenfield`                                      | [person-timeline](../archive/commands.md#person-timeline)       |
-
-The family relations, events and homes are explained in [Family tree, events and homes](../archive/family.md).
-
-### Locations, devices and tracks
-
-| Task                                        | Command                                                                                         | Reference                                                     |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| List the locations                          | `location-list`                                                                                 | [location-list](../archive/commands.md#location-list)         |
-| Change a location's name or description     | `location-update /archive/locations/Highbury --description '<text>'`                            | [location-update](../archive/commands.md#location-update)     |
-| What happened at a location                 | `location-timeline /archive/locations/Highbury`                                                 | [location-timeline](../archive/commands.md#location-timeline) |
-| List the devices                            | `device-list`                                                                                   | [device-list](../archive/commands.md#device-list)             |
-| A device's details and owners               | `device-info /archive/devices/peggy-lumix`                                                      | [device-info](../archive/commands.md#device-info)             |
-| Devices seen in pictures but not registered | `device-scan`                                                                                   | [device-scan](../archive/commands.md#device-scan)             |
-| Register a device                           | `device-create /archive/devices/ada-camera --name "Ada's camera" --make <make> --model <model>` | [device-create](../archive/commands.md#device-create)         |
-| Say who owned a device, and when            | `device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/Ruby_Wrenfield`      | [device-set-owner](../archive/commands.md#device-set-owner)   |
-| A device's history                          | `device-timeline /archive/devices/ruby-iphone`                                                  | [device-timeline](../archive/commands.md#device-timeline)     |
-| Devices with a GPS track                    | `track-list`                                                                                    | [track-list](../archive/commands.md#track-list)               |
-| Add a GPX file to a device's track          | `track-import /archive/devices/ruby-iphone <file>.gpx`                                          | [track-import](../archive/commands.md#track-import)           |
-
-### Feeds: timeline, news, events and on this day
-
-| Task                                                 | Command                                                     | Reference                                            |
-| ---------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
-| Everything that happened, newest first               | `timeline`                                                  | [timeline](../archive/commands.md#timeline)          |
-| One year, or one person's entries                    | `timeline --year 1968`, `timeline --person Peggy_Wrenfield` | [timeline](../archive/commands.md#timeline)          |
-| What people added lately                             | `news`, `news --limit 20`                                   | [news](../reference/commands-core.md#news)           |
-| Birthdays, memorials and anniversaries around a date | `events`, `events --today 2026-12-24 --days-ahead 7`        | [events](../reference/commands-core.md#events)       |
-| What the archive has from this day in earlier years  | `onthisday`, `onthisday 12-24`                              | [onthisday](../reference/commands-core.md#onthisday) |
-| Pictures taken on a day in past years                | `dayinhistory 12-24 --years 20`                             | [dayinhistory](../archive/commands.md#dayinhistory)  |
-
-`news`, `events` and `onthisday` are core commands that gather what every installed module tells; without the archive they have little to say. [Memories, news and events on Home](../archive/home.md) shows the same feeds on the Home page.
-
-### Duplicates and staging
-
-| Task                                                 | Command                                                           | Reference                                                   |
-| ---------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------- |
-| Exact copies in an album or below a folder           | `duplicates /archive/albums/christmas-2019`                       | [duplicates](../archive/commands.md#duplicates)             |
-| Look-alikes: resized, cropped or rescanned copies    | `duplicates --fuzzy /archive/albums`                              | [duplicates](../archive/commands.md#duplicates)             |
-| Keep one copy and trash the others                   | `merge-duplicates --dry-run <keep> <drop>...`                     | [merge-duplicates](../archive/commands.md#merge-duplicates) |
-| The state of your staging area                       | `staging status`                                                  | [staging](../archive/commands.md#staging)                   |
-| Pair Google Photos and XMP sidecars with their files | `media-sidecars --dry-run ~/staging/files/google-photos/<folder>` | [media-sidecars](../archive/commands.md#media-sidecars)     |
-
-The `staging` command has many subcommands for sorting, filing and undoing; [Sorting in staging](../archive/staging.md) and [Staging and importing for administrators](../archive/staging-admin.md) cover them. [Duplicates](../archive/duplicates.md) explains how copies are found.
 
 ## Accounts, groups and sharing
 
@@ -278,19 +148,17 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 
 ### Health and activity
 
-| Task                                                                    | Command                                    | Reference                                                      |
-| ----------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| Is everything fine and keeping up                                       | `health`                                   | [health](../reference/commands-core.md#health)                 |
-| Watch the system live                                                   | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
-| Commands running, yours or everyone's (administrator)                   | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
-| Who is signed in, from where, doing what                                | `who`                                      | [who](../reference/commands-core.md#who)                       |
-| Free space per storage tier, and when it fills                          | `df`                                       | [df](../reference/commands-core.md#df)                         |
-| CPU, memory and lag over the last hours                                 | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
-| Meters the services add, such as the graphics card's memory             | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
-| Versions of EiN, PostgreSQL and Deno, and each module's commit          | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
-| How the archive grew, by type, year and month                           | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
-| The media service's state, with its module                              | `ems-status`                               | [ems-status](../ems/commands.md#ems-status)                    |
-| Whose the language model is, and whether it answers, with the assistant | `llm-status --checks`                      | [llm-status](../assistant/commands.md#llm-status)              |
+| Task                                                           | Command                                    | Reference                                                      |
+| -------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| Is everything fine and keeping up                              | `health`                                   | [health](../reference/commands-core.md#health)                 |
+| Watch the system live                                          | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
+| Commands running, yours or everyone's (administrator)          | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
+| Who is signed in, from where, doing what                       | `who`                                      | [who](../reference/commands-core.md#who)                       |
+| Free space per storage tier, and when it fills                 | `df`                                       | [df](../reference/commands-core.md#df)                         |
+| CPU, memory and lag over the last hours                        | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
+| Meters the services add, such as the graphics card's memory    | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
+| Versions of EiN, PostgreSQL and Deno, and each module's commit | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
+| How the archive grew, by type, year and month                  | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
 
 `ps` and `who` show your own; an administrator sees everyone's.
 
@@ -345,23 +213,6 @@ There is no `logs` command. The system log and each service's output are log nod
 | Who changed, moved or removed what, _administrators only_ | `audit --user anna --since 2026-10-01 /archive/albums`                  | [audit](../reference/commands-core.md#audit) |
 
 The system log starts empty at every start of EiN, and a service's two log files start empty at every start of that service.
-
-## The assistant
-
-These commands come with the assistant module and are there once it is installed; [The Assistant](../assistant/index.md) says what it adds. [Chatting with the assistant](../assistant/chat.md) covers the chat in the web interface, and [The language model](../assistant/language-model.md) the model behind it.
-
-| Task                                               | Command                                               | Reference                                                         |
-| -------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------- |
-| Ask the assistant a question                       | `assistant-ask 'Which albums is Peggy Wrenfield in?'` | [assistant-ask](../assistant/commands.md#assistant-ask)           |
-| The same, thinking before each step                | `assistant-ask --think '<question>'`                  | [assistant-ask](../assistant/commands.md#assistant-ask)           |
-| Your saved chats                                   | `assistant-chat list`, `assistant-chat read <id>`     | [assistant-chat](../assistant/commands.md#assistant-chat)         |
-| Delete a chat                                      | `assistant-chat delete <id>`                          | [assistant-chat](../assistant/commands.md#assistant-chat)         |
-| Find a command by meaning                          | `assistant-commands find 'list running services'`     | [assistant-commands](../assistant/commands.md#assistant-commands) |
-| Whether a command line changes anything            | `assistant-commands judge 'service restart cpu'`      | [assistant-commands](../assistant/commands.md#assistant-commands) |
-| Ask the language model one thing, without tools    | `llm-chat 'The colour of the sky?'`                   | [llm-chat](../assistant/commands.md#llm-chat)                     |
-| Score the assistant against the modules' questions | `agent-eval --limit 5 --verbose`                      | [agent-eval](../assistant/commands.md#agent-eval)                 |
-
-Asked from the terminal, `assistant-ask` runs nothing that changes things: a change comes back as a proposal, and without `--chat` nothing is saved.
 
 ## Other machines
 

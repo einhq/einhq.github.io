@@ -109,7 +109,7 @@ A location gets its place on the map from the first of these that gives one:
 1. **Set by hand.** A circle or polygon drawn in **Edit location**, or coordinates given when the
    location was created. Nothing else ever moves it.
 2. **Its pictures.** When at least two geotagged pictures are linked to the location directly, by
-   the import from an older archive or by hand in the terminal, EiN puts a circle around them, as
+   hand in the terminal, EiN puts a circle around them, as
    wide as they spread. A picture far from the rest is left out, and pictures spread wider than
    25 km give no circle. Pictures that joined the location because they lie inside its shape do not
    count.
@@ -267,8 +267,8 @@ You do not file pictures into a location. EiN links them by these rules:
 - **A point contains nothing.** A location that is only a point collects no pictures.
 - **A changed shape moves the links.** Pictures the shape no longer covers are let go, or go to
   another location that covers them.
-- **A link made by a person stays.** A link made by hand in the terminal, or brought in by the
-  import from an older archive, is never replaced by one of these.
+- **A link made by a person stays.** A link made by hand in the terminal is never replaced by one
+  of these.
 
 To put pictures in a location, give them a position inside it. Select them, press **Set location**
 and choose the location under **A known location**: the pictures take the location's centre as

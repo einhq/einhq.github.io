@@ -176,6 +176,37 @@ function side() {
   narrow.addEventListener('change', () => drawer(false));
 }
 
+/**
+ * The list of pages keeps its scroll from page to page. Each page is a document of its own, so where
+ * the list was is kept in the tab's session storage when a page is left and put back as the next one
+ * opens; when the page open then lies out of sight (a first visit, or a link from a page's text), the
+ * list is scrolled to bring it to the middle. Only the list scrolls, never the window.
+ */
+function sideScroll() {
+  const aside = document.querySelector('.docs-side');
+  if (!aside) return;
+  const key = 'docs-side-scroll';
+  try {
+    const saved = sessionStorage.getItem(key);
+    if (saved !== null) aside.scrollTop = Number(saved);
+  } catch {
+    // Storage refused: the list starts at its top.
+  }
+  const here = aside.querySelector('[aria-current]');
+  if (here) {
+    const box = aside.getBoundingClientRect();
+    const item = here.getBoundingClientRect();
+    if (item.top < box.top || item.bottom > box.bottom) aside.scrollTop += item.top - box.top - (box.height - item.height) / 2;
+  }
+  addEventListener('pagehide', () => {
+    try {
+      sessionStorage.setItem(key, String(aside.scrollTop));
+    } catch {
+      // Not kept: the next page starts the list where its open page is.
+    }
+  });
+}
+
 // --- code blocks ---
 
 /**
@@ -231,6 +262,6 @@ function outline() {
 }
 
 // Each part on its own, so one that fails leaves the others working.
-for (const part of [bar, barStrip, bands, side, search, copyButtons, outline]) {
+for (const part of [bar, barStrip, bands, side, sideScroll, search, copyButtons, outline]) {
   Promise.resolve().then(part).catch((error) => console.error(error));
 }

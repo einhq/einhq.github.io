@@ -54,7 +54,7 @@
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -72,10 +72,9 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
-<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
-<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -92,7 +91,7 @@
 <ul>
 <li>Every command runs as you, with your permissions, in <a href="terminal.html">the terminal</a> or over <a href="ssh-sftp.html">SSH</a>. The examples use the demo archive&#39;s invented Wrenfield family: the album <code>/archive/albums/christmas-2019</code>, the person <code>/archive/people/Peggy_Wrenfield</code>, the account <code>helen</code>. Albums and people come with the <a href="../archive/index.html">Archive</a>, so those paths are there once it is installed.</li>
 <li><em>administrators only</em> marks a command that anyone else is refused before it starts, with <code>&lt;name&gt;: permission denied: only an administrator may run it</code>. A member of the <code>sudo</code> group can type <code>admin</code> to act as the administrator in that terminal. <a href="../admin/accounts.html">Accounts and groups</a> explains who that is.</li>
-<li>The <a href="../archive/index.html">archive</a>, <a href="../assistant/index.html">assistant</a> and <a href="../ems/index.html">media service</a> commands come with their <a href="../admin/modules.html">modules</a>. Without the module, the shell answers <code>error: command &#39;&lt;name&gt;&#39; not found</code>. <code>mod list</code> shows what is installed.</li>
+<li>This page has core&#39;s commands. The modules&#39; commands come with their <a href="../admin/modules.html">modules</a>, and their tasks are on <a href="../archive/tasks.html">Archive commands by task</a> and <a href="../assistant/tasks.html">Assistant commands by task</a>; the <a href="../ems/index.html">media service</a>&#39;s are on its page. Without the module, the shell answers <code>error: command &#39;&lt;name&gt;&#39; not found</code>. <code>mod list</code> shows what is installed.</li>
 <li>A command of a family can be typed as two words: <code>mod install</code> is <code>mod-install</code>, and <code>pipeline status</code> is <code>pipeline-status</code>. The families are <code>config</code>, <code>docs</code>, <code>group</code>, <code>mod</code>, <code>pipeline</code>, <code>pool</code>, <code>service</code>, <code>share</code> and <code>user</code>, and with the archive also <code>person</code> and <code>device</code>. <code>&lt;family&gt; --help</code>, such as <code>mod --help</code>, lists its subcommands; typing <code>mod</code> alone answers <code>mod: missing subcommand</code>.</li>
 <li><code>&lt;command&gt; --help</code> prints a command&#39;s arguments, options and examples without running it. <code>JSON_OUTPUT=1</code> in front of a command makes it answer in JSON; <a href="bash.html">The shell language</a> covers that and the rest of the syntax.</li>
 <li><code>cd</code>, <code>pwd</code>, <code>jobs</code>, <code>kill</code> and the other bash builtins have no reference entry. They are described in <a href="bash.html">The shell language</a>.</li>
@@ -243,7 +242,7 @@
 <p><code>rm</code> deletes for good: it does not use the trash. Without <code>-r</code> it refuses any node that has children, with <code>rm: cannot remove &#39;&lt;path&gt;&#39;: Node not empty</code>, and a processed photo has children (its metadata, thumbnails and faces). Use <code>trash put</code> for anything you may want back. <a href="../concepts/links.html">Links</a> explains what deleting and moving do to links.</p>
 </aside>
 <h2 id="search-and-find">Search and find<a class="anchor" href="#search-and-find" aria-label="Link to this section"></a></h2>
-<p><code>search</code> looks through what EiN knows about your content. It asks each installed module&#39;s search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive, as in the examples below, the words, what the pictures show, the people in them, dates and places. <code>find</code> walks the tree by name and type, as GNU find does. <a href="../guide/search.html">Search and the finder</a> covers searching in the web interface.</p>
+<p><code>search</code> looks through what EiN knows about your content. It asks each installed module&#39;s search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive the words, what the pictures show, the people in them, dates and places; <a href="../archive/tasks.html#search-your-pictures">Archive commands by task</a> has those searches. <code>find</code> walks the tree by name and type, as GNU find does. <a href="../guide/search.html">Search and the finder</a> covers searching in the web interface.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -258,63 +257,8 @@
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 <tr>
-<td>Only photos, or videos</td>
-<td><code>search sailboat --kind photo</code>, <code>--kind video,audio</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Find albums, people or places by name</td>
-<td><code>search christmas --kind album</code>, <code>search peggy --kind person</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Pictures of a person</td>
-<td><code>search --subject person:Peggy_Wrenfield --kind photo</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Pictures of two people together</td>
-<td><code>search --subject person:Peggy_Wrenfield --subject person:Helen_Okafor</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Pictures taken in a period</td>
-<td><code>search --from 1968 --to 1970 --kind photo</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Pictures from a town or an area</td>
-<td><code>search --bbox=$(location-region Truro --bbox-only)</code></td>
-<td><a href="../reference/commands-core.html#search">search</a>, <a href="../archive/commands.html#location-region">location-region</a></td>
-</tr>
-<tr>
-<td>Pictures with a label</td>
-<td><code>search --tag sailing</code>, or <code>members /archive/tags/sailing</code></td>
-<td><a href="../reference/commands-core.html#search">search</a>, <a href="../reference/commands-core.html#members">members</a></td>
-</tr>
-<tr>
-<td>Pictures that look like one picture</td>
-<td><code>search --like /archive/albums/christmas-2019/20191224_141841.jpg</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Search inside one album</td>
-<td><code>search --under /archive/albums/christmas-2019 tree</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
 <td>Search everything below a folder</td>
 <td><code>search --within ~/staging/files --undated</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Which albums hold the matches</td>
-<td><code>search --subject person:Peggy_Wrenfield --group-by album</code></td>
-<td><a href="../reference/commands-core.html#search">search</a></td>
-</tr>
-<tr>
-<td>Count matches per year, month and kind</td>
-<td><code>search --subject person:Peggy_Wrenfield --facets</code></td>
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 <tr>
@@ -350,440 +294,6 @@
 </tbody></table>
 </div>
 <p>The node types <code>find -type</code> takes are listed in <a href="../reference/node-types.html">Node types</a>.</p>
-<h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section"></a></h2>
-<p>These commands come with the archive module and are there once it is installed; <a href="../archive/index.html">The Archive</a> says what it adds. EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. <a href="../archive/albums.html">Albums</a>, <a href="../archive/people.html">People and faces</a> and the other guide pages show the same tasks in the web interface.</p>
-<h3 id="albums">Albums<a class="anchor" href="#albums" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>List the albums</td>
-<td><code>album list /archive/albums</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>An album&#39;s name, description, cover and size</td>
-<td><code>album info /archive/albums/christmas-2019</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Make an album</td>
-<td><code>album create /archive/albums/malpas-summer --name &#39;Summer at Malpas&#39;</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Make a private album</td>
-<td><code>album create /archive/albums/malpas-summer --name &#39;Summer at Malpas&#39; --share private</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Put pictures in an album</td>
-<td><code>album add /archive/albums/malpas-summer &lt;file&gt;...</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Rename an album, describe it</td>
-<td><code>album set /archive/albums/christmas-2019 name &#39;Christmas 2019&#39;</code>, <code>... description &#39;&lt;text&gt;&#39;</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Choose an album&#39;s cover</td>
-<td><code>album set /archive/albums/christmas-2019 cover &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Widen an album&#39;s span by hand</td>
-<td><code>album set /archive/albums/christmas-2019 spanStart 2019-12-20</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>Link albums as a series</td>
-<td><code>album set /archive/albums/christmas-2019 next /archive/albums/lockdown-2020</code></td>
-<td><a href="../archive/commands.html#album">album</a></td>
-</tr>
-<tr>
-<td>List an album&#39;s pictures</td>
-<td><code>members-album /archive/albums/christmas-2019</code></td>
-<td><a href="../archive/commands.html#members-album">members-album</a></td>
-</tr>
-<tr>
-<td>Who and what an album&#39;s pictures show</td>
-<td><code>subjects-in /archive/albums/christmas-2019</code></td>
-<td><a href="../archive/commands.html#subjects-in">subjects-in</a></td>
-</tr>
-<tr>
-<td>One album at random</td>
-<td><code>album-random</code></td>
-<td><a href="../archive/commands.html#album-random">album-random</a></td>
-</tr>
-<tr>
-<td>Give albums without a cover one of their pictures</td>
-<td><code>album-cover --all</code></td>
-<td><a href="../archive/commands.html#album-cover">album-cover</a></td>
-</tr>
-<tr>
-<td>Write an album&#39;s span again</td>
-<td><code>album-span /archive/albums/christmas-2019</code>, <code>album-span --all --stale</code></td>
-<td><a href="../archive/commands.html#album-span">album-span</a></td>
-</tr>
-<tr>
-<td>Find stacks of similar photos taken in a row</td>
-<td><code>album-stack refresh /archive/albums/christmas-2019 --dry-run --verbose</code></td>
-<td><a href="../archive/commands.html#album-stack">album-stack</a></td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="pictures-videos-and-recordings">Pictures, videos and recordings<a class="anchor" href="#pictures-videos-and-recordings" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Everything about one file</td>
-<td><code>media-details /archive/albums/christmas-2019/20191224_141841.jpg</code></td>
-<td><a href="../archive/commands.html#media-details">media-details</a></td>
-</tr>
-<tr>
-<td>Its metadata as exiftool reads it</td>
-<td><code>exiftool &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#exiftool">exiftool</a></td>
-</tr>
-<tr>
-<td>Set when it was taken, as vaguely as you know</td>
-<td><code>file-set-time &lt;file&gt; 1968-07 --note &#39;Postmark on the back&#39;</code></td>
-<td><a href="../archive/commands.html#file-set-time">file-set-time</a></td>
-</tr>
-<tr>
-<td>Undo a date set by hand</td>
-<td><code>file-set-time --clear &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#file-set-time">file-set-time</a></td>
-</tr>
-<tr>
-<td>Set where it was taken</td>
-<td><code>file-set-position &lt;file&gt; --lat=50.2632 --lng=-5.0510</code></td>
-<td><a href="../archive/commands.html#file-set-position">file-set-position</a></td>
-</tr>
-<tr>
-<td>Rotate or mirror it for good</td>
-<td><code>file-set-orientation --rotate cw &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#file-set-orientation">file-set-orientation</a></td>
-</tr>
-<tr>
-<td>Write its description</td>
-<td><code>file-set-description --text &#39;Christmas morning&#39; &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#file-set-description">file-set-description</a></td>
-</tr>
-<tr>
-<td>Correct the text read from it</td>
-<td><code>file-set-text &lt;file&gt; --text &#39;Dear Peggy&#39;</code></td>
-<td><a href="../archive/commands.html#file-set-text">file-set-text</a></td>
-</tr>
-<tr>
-<td>Read its text again in another language</td>
-<td><code>file-set-text-language &lt;file&gt; en</code></td>
-<td><a href="../archive/commands.html#file-set-text-language">file-set-text-language</a></td>
-</tr>
-<tr>
-<td>Say who took it</td>
-<td><code>file-set-photographer &lt;file&gt; /archive/people/Helen_Okafor</code></td>
-<td><a href="../archive/commands.html#file-set-photographer">file-set-photographer</a></td>
-</tr>
-<tr>
-<td>The latest pictures taken</td>
-<td><code>latest 20</code></td>
-<td><a href="../archive/commands.html#latest">latest</a></td>
-</tr>
-</tbody></table>
-</div>
-<p>A value that starts with a minus goes after an equals sign, as in <code>--lng=-5.0510</code>; on its own it would be read as another option. Only <code>file-set-time</code> can give a picture a vague date such as <code>1968</code> or <code>1968-07</code>; the web interface&#39;s dialog sets full dates. <a href="../archive/dates-places.html">Dates and places of pictures</a> explains which date a picture gets.</p>
-<p>To have EiN look at one file again, run the step with <code>-f</code>:</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Read the text in a picture again</td>
-<td><code>read-text -f &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#read-text">read-text</a></td>
-</tr>
-<tr>
-<td>Find the faces again (boxes drawn by hand stay)</td>
-<td><code>detect-faces -f &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#detect-faces">detect-faces</a></td>
-</tr>
-<tr>
-<td>Transcribe a recording or video again</td>
-<td><code>transcribe-file -f &lt;file&gt;</code></td>
-<td><a href="../archive/commands.html#transcribe-file">transcribe-file</a></td>
-</tr>
-<tr>
-<td>Make thumbnails and renditions again</td>
-<td><code>regenerate --force &lt;file or folder&gt;</code></td>
-<td><a href="../archive/commands.html#regenerate">regenerate</a></td>
-</tr>
-</tbody></table>
-</div>
-<p>All four ask the <a href="../ems/index.html">media service</a>, so they need it running. For many files at once, an administrator starts the pipelines instead: see <a href="../admin/processing.html">Processing and pipelines</a>.</p>
-<h3 id="people">People<a class="anchor" href="#people" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>List the named people</td>
-<td><code>person-list --sort count</code></td>
-<td><a href="../archive/commands.html#person-list">person-list</a></td>
-</tr>
-<tr>
-<td>A person&#39;s details, relations and events</td>
-<td><code>person-info /archive/people/Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-info">person-info</a></td>
-</tr>
-<tr>
-<td>Add a person</td>
-<td><code>person-create /archive/people/Ada_Wrenfield --name &#39;Ada Wrenfield&#39; --born 2026-03-02</code></td>
-<td><a href="../archive/commands.html#person-create">person-create</a></td>
-</tr>
-<tr>
-<td>Change names, dates and details</td>
-<td><code>person-update /archive/people/Peggy_Wrenfield --born 1934-08-22</code></td>
-<td><a href="../archive/commands.html#person-update">person-update</a></td>
-</tr>
-<tr>
-<td>People found in pictures but not named</td>
-<td><code>person-unknown --limit 20</code></td>
-<td><a href="../archive/commands.html#person-unknown">person-unknown</a></td>
-</tr>
-<tr>
-<td>Name one of them</td>
-<td><code>person-name --name &#39;Mabel Cole&#39; /archive/people/unknown/&lt;id&gt;</code></td>
-<td><a href="../archive/commands.html#person-name">person-name</a></td>
-</tr>
-<tr>
-<td>Merge two people who are one</td>
-<td><code>person-merge /archive/people/unknown/&lt;id&gt; /archive/people/Ruby_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-merge">person-merge</a></td>
-</tr>
-<tr>
-<td>Every face of a person</td>
-<td><code>person-faces --sort date /archive/people/Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-faces">person-faces</a></td>
-</tr>
-<tr>
-<td>Take a wrong face off a person</td>
-<td><code>person-detach --rematch &lt;file&gt;/regions/face-1</code></td>
-<td><a href="../archive/commands.html#person-detach">person-detach</a></td>
-</tr>
-<tr>
-<td>Add a parent</td>
-<td><code>person-set-parent &lt;child&gt; &lt;parent&gt;</code>, <code>--kind adoptive</code></td>
-<td><a href="../archive/commands.html#person-set-parent">person-set-parent</a></td>
-</tr>
-<tr>
-<td>Add a partner</td>
-<td><code>person-set-partner --kind married --from 1956-06-02 &lt;a&gt; &lt;b&gt;</code></td>
-<td><a href="../archive/commands.html#person-set-partner">person-set-partner</a></td>
-</tr>
-<tr>
-<td>Remove a relation between two people</td>
-<td><code>person-remove &lt;a&gt; &lt;b&gt;</code></td>
-<td><a href="../archive/commands.html#person-remove">person-remove</a></td>
-</tr>
-<tr>
-<td>Add an event to a person</td>
-<td><code>person-add-event --type death --date 2021-01-17 /archive/people/Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-add-event">person-add-event</a></td>
-</tr>
-<tr>
-<td>Record where someone lived</td>
-<td><code>person-set-home --from 1956 --to 1999 &lt;person&gt; /archive/locations/Highbury</code></td>
-<td><a href="../archive/commands.html#person-set-home">person-set-home</a></td>
-</tr>
-<tr>
-<td>How two people are related</td>
-<td><code>person-how-related /archive/people/Ruby_Wrenfield /archive/people/Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-how-related">person-how-related</a></td>
-</tr>
-<tr>
-<td>Who a kin word reaches</td>
-<td><code>person-relatives Peggy_Wrenfield --relation daughter</code></td>
-<td><a href="../archive/commands.html#person-relatives">person-relatives</a></td>
-</tr>
-<tr>
-<td>Ancestors and descendants</td>
-<td><code>person-family-tree --up 2 --down 2 /archive/people/Helen_Okafor</code></td>
-<td><a href="../archive/commands.html#person-family-tree">person-family-tree</a></td>
-</tr>
-<tr>
-<td>A person&#39;s life in order</td>
-<td><code>person-timeline /archive/people/Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#person-timeline">person-timeline</a></td>
-</tr>
-</tbody></table>
-</div>
-<p>The family relations, events and homes are explained in <a href="../archive/family.html">Family tree, events and homes</a>.</p>
-<h3 id="locations-devices-and-tracks">Locations, devices and tracks<a class="anchor" href="#locations-devices-and-tracks" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>List the locations</td>
-<td><code>location-list</code></td>
-<td><a href="../archive/commands.html#location-list">location-list</a></td>
-</tr>
-<tr>
-<td>Change a location&#39;s name or description</td>
-<td><code>location-update /archive/locations/Highbury --description &#39;&lt;text&gt;&#39;</code></td>
-<td><a href="../archive/commands.html#location-update">location-update</a></td>
-</tr>
-<tr>
-<td>What happened at a location</td>
-<td><code>location-timeline /archive/locations/Highbury</code></td>
-<td><a href="../archive/commands.html#location-timeline">location-timeline</a></td>
-</tr>
-<tr>
-<td>List the devices</td>
-<td><code>device-list</code></td>
-<td><a href="../archive/commands.html#device-list">device-list</a></td>
-</tr>
-<tr>
-<td>A device&#39;s details and owners</td>
-<td><code>device-info /archive/devices/peggy-lumix</code></td>
-<td><a href="../archive/commands.html#device-info">device-info</a></td>
-</tr>
-<tr>
-<td>Devices seen in pictures but not registered</td>
-<td><code>device-scan</code></td>
-<td><a href="../archive/commands.html#device-scan">device-scan</a></td>
-</tr>
-<tr>
-<td>Register a device</td>
-<td><code>device-create /archive/devices/ada-camera --name &quot;Ada&#39;s camera&quot; --make &lt;make&gt; --model &lt;model&gt;</code></td>
-<td><a href="../archive/commands.html#device-create">device-create</a></td>
-</tr>
-<tr>
-<td>Say who owned a device, and when</td>
-<td><code>device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/Ruby_Wrenfield</code></td>
-<td><a href="../archive/commands.html#device-set-owner">device-set-owner</a></td>
-</tr>
-<tr>
-<td>A device&#39;s history</td>
-<td><code>device-timeline /archive/devices/ruby-iphone</code></td>
-<td><a href="../archive/commands.html#device-timeline">device-timeline</a></td>
-</tr>
-<tr>
-<td>Devices with a GPS track</td>
-<td><code>track-list</code></td>
-<td><a href="../archive/commands.html#track-list">track-list</a></td>
-</tr>
-<tr>
-<td>Add a GPX file to a device&#39;s track</td>
-<td><code>track-import /archive/devices/ruby-iphone &lt;file&gt;.gpx</code></td>
-<td><a href="../archive/commands.html#track-import">track-import</a></td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day<a class="anchor" href="#feeds-timeline-news-events-and-on-this-day" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Everything that happened, newest first</td>
-<td><code>timeline</code></td>
-<td><a href="../archive/commands.html#timeline">timeline</a></td>
-</tr>
-<tr>
-<td>One year, or one person&#39;s entries</td>
-<td><code>timeline --year 1968</code>, <code>timeline --person Peggy_Wrenfield</code></td>
-<td><a href="../archive/commands.html#timeline">timeline</a></td>
-</tr>
-<tr>
-<td>What people added lately</td>
-<td><code>news</code>, <code>news --limit 20</code></td>
-<td><a href="../reference/commands-core.html#news">news</a></td>
-</tr>
-<tr>
-<td>Birthdays, memorials and anniversaries around a date</td>
-<td><code>events</code>, <code>events --today 2026-12-24 --days-ahead 7</code></td>
-<td><a href="../reference/commands-core.html#events">events</a></td>
-</tr>
-<tr>
-<td>What the archive has from this day in earlier years</td>
-<td><code>onthisday</code>, <code>onthisday 12-24</code></td>
-<td><a href="../reference/commands-core.html#onthisday">onthisday</a></td>
-</tr>
-<tr>
-<td>Pictures taken on a day in past years</td>
-<td><code>dayinhistory 12-24 --years 20</code></td>
-<td><a href="../archive/commands.html#dayinhistory">dayinhistory</a></td>
-</tr>
-</tbody></table>
-</div>
-<p><code>news</code>, <code>events</code> and <code>onthisday</code> are core commands that gather what every installed module tells; without the archive they have little to say. <a href="../archive/home.html">Memories, news and events on Home</a> shows the same feeds on the Home page.</p>
-<h3 id="duplicates-and-staging">Duplicates and staging<a class="anchor" href="#duplicates-and-staging" aria-label="Link to this section"></a></h3>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Exact copies in an album or below a folder</td>
-<td><code>duplicates /archive/albums/christmas-2019</code></td>
-<td><a href="../archive/commands.html#duplicates">duplicates</a></td>
-</tr>
-<tr>
-<td>Look-alikes: resized, cropped or rescanned copies</td>
-<td><code>duplicates --fuzzy /archive/albums</code></td>
-<td><a href="../archive/commands.html#duplicates">duplicates</a></td>
-</tr>
-<tr>
-<td>Keep one copy and trash the others</td>
-<td><code>merge-duplicates --dry-run &lt;keep&gt; &lt;drop&gt;...</code></td>
-<td><a href="../archive/commands.html#merge-duplicates">merge-duplicates</a></td>
-</tr>
-<tr>
-<td>The state of your staging area</td>
-<td><code>staging status</code></td>
-<td><a href="../archive/commands.html#staging">staging</a></td>
-</tr>
-<tr>
-<td>Pair Google Photos and XMP sidecars with their files</td>
-<td><code>media-sidecars --dry-run ~/staging/files/google-photos/&lt;folder&gt;</code></td>
-<td><a href="../archive/commands.html#media-sidecars">media-sidecars</a></td>
-</tr>
-</tbody></table>
-</div>
-<p>The <code>staging</code> command has many subcommands for sorting, filing and undoing; <a href="../archive/staging.html">Sorting in staging</a> and <a href="../archive/staging-admin.html">Staging and importing for administrators</a> cover them. <a href="../archive/duplicates.html">Duplicates</a> explains how copies are found.</p>
 <h2 id="accounts-groups-and-sharing">Accounts, groups and sharing<a class="anchor" href="#accounts-groups-and-sharing" aria-label="Link to this section"></a></h2>
 <p><a href="../admin/accounts.html">Accounts and groups</a> explains the built-in accounts and groups, and <a href="../admin/permissions.html">Permissions in depth</a> the permission model these commands change.</p>
 <h3 id="accounts">Accounts<a class="anchor" href="#accounts" aria-label="Link to this section"></a></h3>
@@ -1111,16 +621,6 @@
 <td><code>stats-overview</code></td>
 <td><a href="../reference/commands-core.html#stats-overview">stats-overview</a></td>
 </tr>
-<tr>
-<td>The media service&#39;s state, with its module</td>
-<td><code>ems-status</code></td>
-<td><a href="../ems/commands.html#ems-status">ems-status</a></td>
-</tr>
-<tr>
-<td>Whose the language model is, and whether it answers, with the assistant</td>
-<td><code>llm-status --checks</code></td>
-<td><a href="../assistant/commands.html#llm-status">llm-status</a></td>
-</tr>
 </tbody></table>
 </div>
 <p><code>ps</code> and <code>who</code> show your own; an administrator sees everyone&#39;s.</p>
@@ -1303,59 +803,6 @@
 </tbody></table>
 </div>
 <p>The system log starts empty at every start of EiN, and a service&#39;s two log files start empty at every start of that service.</p>
-<h2 id="the-assistant">The assistant<a class="anchor" href="#the-assistant" aria-label="Link to this section"></a></h2>
-<p>These commands come with the assistant module and are there once it is installed; <a href="../assistant/index.html">The Assistant</a> says what it adds. <a href="../assistant/chat.html">Chatting with the assistant</a> covers the chat in the web interface, and <a href="../assistant/language-model.html">The language model</a> the model behind it.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Command</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Ask the assistant a question</td>
-<td><code>assistant-ask &#39;Which albums is Peggy Wrenfield in?&#39;</code></td>
-<td><a href="../assistant/commands.html#assistant-ask">assistant-ask</a></td>
-</tr>
-<tr>
-<td>The same, thinking before each step</td>
-<td><code>assistant-ask --think &#39;&lt;question&gt;&#39;</code></td>
-<td><a href="../assistant/commands.html#assistant-ask">assistant-ask</a></td>
-</tr>
-<tr>
-<td>Your saved chats</td>
-<td><code>assistant-chat list</code>, <code>assistant-chat read &lt;id&gt;</code></td>
-<td><a href="../assistant/commands.html#assistant-chat">assistant-chat</a></td>
-</tr>
-<tr>
-<td>Delete a chat</td>
-<td><code>assistant-chat delete &lt;id&gt;</code></td>
-<td><a href="../assistant/commands.html#assistant-chat">assistant-chat</a></td>
-</tr>
-<tr>
-<td>Find a command by meaning</td>
-<td><code>assistant-commands find &#39;list running services&#39;</code></td>
-<td><a href="../assistant/commands.html#assistant-commands">assistant-commands</a></td>
-</tr>
-<tr>
-<td>Whether a command line changes anything</td>
-<td><code>assistant-commands judge &#39;service restart cpu&#39;</code></td>
-<td><a href="../assistant/commands.html#assistant-commands">assistant-commands</a></td>
-</tr>
-<tr>
-<td>Ask the language model one thing, without tools</td>
-<td><code>llm-chat &#39;The colour of the sky?&#39;</code></td>
-<td><a href="../assistant/commands.html#llm-chat">llm-chat</a></td>
-</tr>
-<tr>
-<td>Score the assistant against the modules&#39; questions</td>
-<td><code>agent-eval --limit 5 --verbose</code></td>
-<td><a href="../assistant/commands.html#agent-eval">agent-eval</a></td>
-</tr>
-</tbody></table>
-</div>
-<p>Asked from the terminal, <code>assistant-ask</code> runs nothing that changes things: a change comes back as a proposal, and without <code>--chat</code> nothing is saved.</p>
 <h2 id="other-machines">Other machines<a class="anchor" href="#other-machines" aria-label="Link to this section"></a></h2>
 <p><code>ssh</code>, <code>scp</code> and <code>ssh-copy-id</code> are for administrators and members of the group <code>ssh</code>. <a href="remote.html">Reaching other machines</a> covers them, with the host key prompts and <code>~/.ssh/config</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1567,7 +1014,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-to-read-the-tables">How to read the tables</a></li><li><a href="#files-and-nodes">Files and nodes</a></li><li><a href="#search-and-find">Search and find</a></li><li><a href="#the-archive">The archive</a></li><li class="nested"><a href="#albums">Albums</a></li><li class="nested"><a href="#pictures-videos-and-recordings">Pictures, videos and recordings</a></li><li class="nested"><a href="#people">People</a></li><li class="nested"><a href="#locations-devices-and-tracks">Locations, devices and tracks</a></li><li class="nested"><a href="#feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day</a></li><li class="nested"><a href="#duplicates-and-staging">Duplicates and staging</a></li><li><a href="#accounts-groups-and-sharing">Accounts, groups and sharing</a></li><li class="nested"><a href="#accounts">Accounts</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#permissions-and-sharing">Permissions and sharing</a></li><li><a href="#settings-and-modules">Settings and modules</a></li><li><a href="#the-system">The system</a></li><li class="nested"><a href="#health-and-activity">Health and activity</a></li><li class="nested"><a href="#jobs-and-processes">Jobs and processes</a></li><li class="nested"><a href="#work-pipelines-and-services">Work, pipelines and services</a></li><li class="nested"><a href="#logs-and-the-audit-trail">Logs and the audit trail</a></li><li><a href="#the-assistant">The assistant</a></li><li><a href="#other-machines">Other machines</a></li><li><a href="#text-and-data-tools">Text and data tools</a></li><li><a href="#unix-commands-ein-does-not-have">Unix commands EiN does not have</a></li><li><a href="#when-a-command-is-refused-or-missing">When a command is refused or missing</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-to-read-the-tables">How to read the tables</a></li><li><a href="#files-and-nodes">Files and nodes</a></li><li><a href="#search-and-find">Search and find</a></li><li><a href="#accounts-groups-and-sharing">Accounts, groups and sharing</a></li><li class="nested"><a href="#accounts">Accounts</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#permissions-and-sharing">Permissions and sharing</a></li><li><a href="#settings-and-modules">Settings and modules</a></li><li><a href="#the-system">The system</a></li><li class="nested"><a href="#health-and-activity">Health and activity</a></li><li class="nested"><a href="#jobs-and-processes">Jobs and processes</a></li><li class="nested"><a href="#work-pipelines-and-services">Work, pipelines and services</a></li><li class="nested"><a href="#logs-and-the-audit-trail">Logs and the audit trail</a></li><li><a href="#other-machines">Other machines</a></li><li><a href="#text-and-data-tools">Text and data tools</a></li><li><a href="#unix-commands-ein-does-not-have">Unix commands EiN does not have</a></li><li><a href="#when-a-command-is-refused-or-missing">When a command is refused or missing</a></li></ul></aside>
     </div>
   </body>
 </html>

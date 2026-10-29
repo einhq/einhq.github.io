@@ -95,6 +95,9 @@ export function svg(name, attributes, text) {
  * dialog's buttons instead: hats of the interface's 38 px, none darkened. Band `n` is cut from its own
  * part of the patch, so no two look alike.
  *
+ * With `data-jagged` the band's top edge is whole hats too, with a little room above them: a hat whose
+ * middle is in the band's top row is left out, and every other is drawn whole.
+ *
  * A band that opens a section below another starts on whole hats rather than on a straight line: a
  * hat whose middle is in the section is drawn whole, reaching up into the section before on the
  * section's own ground, and one whose middle is above it is painted in the ground of the section
@@ -105,6 +108,7 @@ export function layBand(host, n) {
   const height = host.clientHeight;
   if (!width || !height) return;
   const foot = 'foot' in host.dataset;
+  const jagged = 'jagged' in host.dataset;
   const hatPx = foot ? 38 : Math.min(52, Math.max(36, width / 28));
   const scale = hatPx / HAT_WIDTH;
   const spare = { x: Math.max(0, COVERED.width - width / scale), y: Math.max(0, COVERED.height - height / scale) };
@@ -128,6 +132,7 @@ export function layBand(host, n) {
   }
   for (const tile of tiles) {
     if (before && tile.cy < 0) continue;
+    if (jagged && tile.cy < hatPx * 1.1) continue;
     const light = Math.max(0, 1 - Math.hypot((tile.cx - 0.86 * width) / (0.62 * width), (tile.cy + 0.3 * height) / (1.5 * height)));
     const shade = foot ? 1 : 1 - 0.75 * smooth(0.1, 1, tile.cy / height);
     root.append(svg('path', {

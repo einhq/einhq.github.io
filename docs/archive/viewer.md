@@ -274,8 +274,10 @@ Face boxes stay hidden until you point at a face; then that face's box and name 
 
 Use **Edit faces** when recognition missed a face, drew the box in the wrong place, or matched the
 wrong person. It is offered on photos and videos you may change, except on a phone held upright. On
-a video it pauses the video, and you draw on the frame on screen; a box already there can be chosen
-and removed or given to someone else, but not moved or resized.
+a video it pauses the video, and you draw on the frame on screen; the large play button leaves the
+picture while you draw, and the one on the bar still plays. A box you draw on a video belongs to
+that moment and shows from half a second before it to half a second after. A box already there can
+be chosen and removed or given to someone else, but not moved or resized.
 
 1. In the pencil menu, choose **Edit faces**. The bar under the picture reads **Draw a new box or
    select a face**, and every box shows.
@@ -370,7 +372,7 @@ and come back when you move the mouse.
 | **Subtitles** (CC)                     | <kbd>c</kbd>                                                 | Shows or hides subtitles, when the video has a transcript. The tooltip names the language: **Subtitles: English (c)**. |
 | **Picture-in-picture**                 | <kbd>p</kbd>                                                 | Plays the video in a small window that stays on top, where the browser offers it.                                      |
 | **Cast to a screen**                   |                                                              | Sends the video to a television or other screen. Shown only while your browser finds one.                              |
-| **Fullscreen**                         |                                                              | Gives the video the whole screen.                                                                                      |
+| **Fullscreen**                         |                                                              | Gives the player alone the whole screen, with its controls and subtitles.                                              |
 
 The volume you set is remembered in this browser for the next video or recording. There is no
 control for the playback speed.
@@ -388,7 +390,9 @@ where the browser allows it.
 Click or drag on the timeline to jump. Pointing at it shows the time there and, once the media
 service has made the video's storyboard, a small frame from that moment.
 
-The media service finds the cuts in a video and makes each scene a chapter. Chapters show as pieces
+The media service finds the cuts in a video and makes each scene a chapter. A video whose file
+names the camera or phone that recorded it is taken to be one take, so there only a clear cut makes
+a chapter, not a lamp switched on or the exposure changing. Chapters show as pieces
 of the timeline with gaps between them; a video with too many to fit gets a small tick at each start
 instead. Pointing at the timeline shows the chapter too, such as `1:24 · Chapter 3`. **Previous
 chapter** more than two seconds into a chapter goes back to its start, and otherwise to the chapter

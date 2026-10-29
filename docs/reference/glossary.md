@@ -266,12 +266,6 @@ your trash and, with the Archive, your staging area. See [The tree](../concepts/
 
 ## I
 
-### Importer
-
-The `importer` module, which moves one particular older archive into EiN. It is not published and is
-not a general importer: photos from anywhere else come in through the Archive's staging. See
-[The Importer](../importer/index.md) and [Getting your photos in](../archive/importing.md).
-
 ### Inbox
 
 _Archive._ The staging category every account has, which cannot be removed. Uploads land in it unless you

@@ -54,7 +54,7 @@
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -72,10 +72,9 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
-<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
-<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -482,17 +481,17 @@ assistant-commands judge <span class="hljs-string">&#x27;service restart pipelin
 (<a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>); the assistant module and the
 media service set them when they are installed.</p>
 <h2 id="use-the-same-shell-over-ssh">Use the same shell over SSH<a class="anchor" href="#use-the-same-shell-over-ssh" aria-label="Link to this section"></a></h2>
-<p>The terminal is one of several doors into the same shell. From your own computer you can log in
+<p>The terminal is one of several interfaces to the same shell. From your own computer you can log in
 over SSH with your EiN username and password, on port 2222 unless your administrator chose another:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 ssh -p 2222 helen@ein.local</code></pre></div>
 <p>You get the same shell as in a terminal tab: the same prompt, your history, your <code>~/.bashrc</code>, Tab
 completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
 <code>cat</code>, and dropping files to upload them. Over SSH, copy files with SFTP or <code>scp</code> instead.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly">
-  <title>One shell, several doors</title>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly">
+  <title>One shell, several interfaces</title>
   <defs>
-    <marker id="shell-terminal-md-1-doors-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="shell-terminal-md-1-interfaces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
@@ -501,12 +500,12 @@ completion and the same keys. Two things belong to the browser alone: pictures a
   
   <rect x="24" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="91" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Web interface</text>
+    fill="#eceff4">Web UI</text>
   <text x="91" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">in a browser</text>
 
   <rect x="172" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="239" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Terminal panel</text>
+    fill="#eceff4">Terminal</text>
   <text x="239" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a shell per tab</text>
 
   <rect x="320" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -519,16 +518,16 @@ completion and the same keys. Two things belong to the browser alone: pictures a
     fill="#eceff4">The assistant</text>
   <text x="535" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes wait for you</text>
 
-  <line x1="91" y1="112" x2="91" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
-  <line x1="239" y1="112" x2="239" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
-  <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
-  <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
+  <line x1="91" y1="112" x2="91" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
+  <line x1="239" y1="112" x2="239" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
+  <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
+  <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
 
   
   <rect x="650" y="40" width="126" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
   <text x="713" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">files only</text>
-  <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
+  <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
   <text x="701" y="204" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">no commands</text>
 
   
@@ -539,23 +538,23 @@ completion and the same keys. Two things belong to the browser alone: pictures a
   <text x="582" y="196" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">bash</text>
   <text x="74" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
     fill="#a2abbb">runs core's and the modules' commands as the signed-in person</text>
-  <line x1="313" y1="240" x2="313" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
+  <line x1="313" y1="240" x2="313" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
 
   
   <rect x="24" y="288" width="752" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="400" y="317" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">The same permission check: what this person may read and change</text>
-  <line x1="313" y1="336" x2="313" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
-  <line x1="713" y1="336" x2="713" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-doors-arrow)" />
+  <line x1="313" y1="336" x2="313" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
+  <line x1="713" y1="336" x2="713" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
 
   
   <rect x="24" y="384" width="752" height="60" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="44" y="419" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The tree of nodes</text>
   <text x="756" y="419" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb"
     xml:space="preserve">/archive   /home   /etc   /var   /usr</text>
-</svg><figcaption>Whichever door you use, the same commands run as you, with the same permissions.</figcaption></figure>
+</svg><figcaption>Whichever interface you use, the same commands run as you, with the same permissions.</figcaption></figure>
 <p>The web pages run these same commands for you, and so does the assistant, always as the person
-signed in. A command you may not run in the terminal is refused through every other door too.
+signed in. A command you may not run in the terminal is refused through every other interface too.
 <a href="ssh-sftp.html">SSH and SFTP</a> covers keys, running one command at a time, and copying files.</p>
 <h2 id="commands-worth-knowing">Commands worth knowing<a class="anchor" href="#commands-worth-knowing" aria-label="Link to this section"></a></h2>
 <p>Commands marked <em>archive</em> come with the <a href="../archive/index.html">Archive</a> and exist only where it is
@@ -702,7 +701,7 @@ minutes, EiN restarted, or you signed out. Your history is still there; <kbd>↑
 with <kbd>Tab</kbd>, or look for it with <code>docs find</code>. Commands such as <code>timeline</code> and <code>person-info</code>
 exist only where their module is installed.</p>
 <p><strong><code>service-restart: permission denied: only an administrator may run it</code>.</strong> The command is for
-administrators. Through every door it is refused the same way; ask your administrator.</p>
+administrators. Through every interface it is refused the same way; ask your administrator.</p>
 <p><strong><code>du -h</code> shows help instead of sizes.</strong> <code>-h</code> straight after a command&#39;s name always asks for help.
 Write <code>du -sh</code> or <code>du -ch</code>.</p>
 <p><strong><code>cat</code> prints lines starting <code>__IMG:</code> instead of the picture.</strong> You are connected over SSH, or the

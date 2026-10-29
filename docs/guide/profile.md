@@ -256,9 +256,8 @@ for you: they do it in your account under **Settings → Users**, in its **Passw
 change it on the **Security** tab to one that only you know.
 
 An administrator cannot make you choose a new password at your next sign-in; EiN has no such
-switch. An account that an administrator made without a password, and an account brought over from
-an older archive by the importer, cannot sign in at all until an administrator sets a password for
-it. [Accounts and groups](../admin/accounts.md) covers this from the administrator's side.
+switch. An account that an administrator made without a password, and an account marked as needing one
+(`mustResetPassword`), cannot sign in at all until an administrator sets a password for it. [Accounts and groups](../admin/accounts.md) covers this from the administrator's side.
 
 ## Favourites
 

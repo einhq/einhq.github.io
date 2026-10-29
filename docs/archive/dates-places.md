@@ -424,8 +424,8 @@ Set location 50.153,-5.066 on /archive/albums/Peggy's Falmouth/P1000413.JPG
 - **The picture is not linked to the location you picked.** That location is a single point, which
   contains nothing. Draw a circle or a polygon for it, as
   [Locations and the map](places.md) describes, and the pictures inside join it.
-- **The picture still names its old location after you moved it.** Its link was made by hand or
-  brought in from an older archive, and EiN never replaces such a link. In **Edit file**, press
+- **The picture still names its old location after you moved it.** Its link was made by hand, and
+  EiN never replaces such a link. In **Edit file**, press
   **Clear location** and **Save**, then open **Edit file** again and set the point.
 - **`file-set-time` answers "not a capture time".** Write the date as `YYYY`, `YYYY-MM`,
   `YYYY-MM-DD`, `YYYY-MM-DDTHH:MM` or `YYYY-MM-DDTHH:MM:SS`, with a year from 1826 to next year.

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How EiN works – EiN documentation</title>
-    <meta name="description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
+    <meta name="description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every interface, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/start/how-ein-works.html">
     <meta property="og:title" content="How EiN works – EiN documentation">
-    <meta property="og:description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every door, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
+    <meta property="og:description" content="This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works on it from every interface, pipelines that act on every change, and modules that decide what it is for. Read it first, whether you are going to use EiN, run it or build on it. It also says how these pages are divided: Core for what every EiN has, and a section under Modules for each module.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -54,7 +54,7 @@
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -72,10 +72,9 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
-<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
-<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -88,7 +87,7 @@
         </header>
         <article class="prose">
 <p>This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works
-on it from every door, pipelines that act on every change, and modules that decide what it is for.
+on it from every interface, pipelines that act on every change, and modules that decide what it is for.
 Read it first, whether you are going to use EiN, run it or build on it. It also says how these
 pages are divided: <strong>Core</strong> for what every EiN has, and a section under <strong>Modules</strong> for each module.</p>
 <h2 id="everything-is-a-node">Everything is a node<a class="anchor" href="#everything-is-a-node" aria-label="Link to this section"></a></h2>
@@ -207,7 +206,7 @@ standard path.</p>
 <p>Every node has an owner, a group and permission bits that say who may read it, change it, and go
 into it or run it, written the way <code>chmod</code> writes them: <code>0750</code>, or <code>rwxr-x---</code>. A node may also give
 access to more users or groups through an access list. A node belongs to whoever made it and
-takes its group from the folder it is made in. The administrator by-passes every check permission check.</p>
+takes its group from the folder it is made in. The administrator bypasses every permission check.</p>
 <p>Two things work differently from a computer&#39;s files:</p>
 <ul>
 <li><strong>What you may not read is not listed at all</strong>: not in a folder, not in search, not in <code>ls</code>. Two people can see the same folder or album differently, and it
@@ -236,7 +235,7 @@ losing its cover or its labels. A <strong>hard link</strong> is the other kind: 
 in another folder, as on Unix. <a href="../concepts/links.html">Links</a> covers both, and what deleting and the
 trash do to them.</p>
 <h2 id="one-set-of-commands">One set of commands<a class="anchor" href="#one-set-of-commands" aria-label="Link to this section"></a></h2>
-<p>At the heart of EiN is a a shell implementing bash. Core brings more than 200 commands, and each module adds its own. All data access, web or SSH runs these
+<p>At the heart of EiN is a shell that speaks bash. Core brings more than 200 commands, and each module adds its own. All data access, from the web or over SSH, runs these
 commands, except SFTP, which moves files and nothing else:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -269,14 +268,14 @@ commands, except SFTP, which moves files and nothing else:</p>
 <tr>
 <td>The assistant</td>
 <td><strong>Chat</strong> in the sidebar, with the <a href="../assistant/index.html">assistant module</a></td>
-<td>It runs commands as tools, as you; commands that would change something waits for you to accept</td>
+<td>It runs commands as tools, as you; a command that would change something waits for you to accept it</td>
 </tr>
 </tbody></table>
 </div>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly">
-  <title>One shell, several doors</title>
+  <title>One shell, several interfaces</title>
   <defs>
-    <marker id="start-how-ein-works-md-1-doors-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="start-how-ein-works-md-1-interfaces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
@@ -285,12 +284,12 @@ commands, except SFTP, which moves files and nothing else:</p>
   
   <rect x="24" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="91" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Web interface</text>
+    fill="#eceff4">Web UI</text>
   <text x="91" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">in a browser</text>
 
   <rect x="172" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="239" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Terminal panel</text>
+    fill="#eceff4">Terminal</text>
   <text x="239" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a shell per tab</text>
 
   <rect x="320" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -303,16 +302,16 @@ commands, except SFTP, which moves files and nothing else:</p>
     fill="#eceff4">The assistant</text>
   <text x="535" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes wait for you</text>
 
-  <line x1="91" y1="112" x2="91" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
-  <line x1="239" y1="112" x2="239" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
-  <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
-  <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
+  <line x1="91" y1="112" x2="91" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
+  <line x1="239" y1="112" x2="239" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
+  <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
+  <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
 
   
   <rect x="650" y="40" width="126" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
   <text x="713" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">files only</text>
-  <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
+  <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
   <text x="701" y="204" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">no commands</text>
 
   
@@ -323,14 +322,14 @@ commands, except SFTP, which moves files and nothing else:</p>
   <text x="582" y="196" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">bash</text>
   <text x="74" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
     fill="#a2abbb">runs core's and the modules' commands as the signed-in person</text>
-  <line x1="313" y1="240" x2="313" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
+  <line x1="313" y1="240" x2="313" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
 
   
   <rect x="24" y="288" width="752" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="400" y="317" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">The same permission check: what this person may read and change</text>
-  <line x1="313" y1="336" x2="313" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
-  <line x1="713" y1="336" x2="713" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-doors-arrow)" />
+  <line x1="313" y1="336" x2="313" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
+  <line x1="713" y1="336" x2="713" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-how-ein-works-md-1-interfaces-arrow)" />
 
   
   <rect x="24" y="384" width="752" height="60" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -342,11 +341,11 @@ commands, except SFTP, which moves files and nothing else:</p>
 connection to the server, as you, with <code>JSON_OUTPUT=1</code> so that they answer in JSON; renaming a
 folder on the Nodes page runs <code>mv</code>. Only the bytes of files, uploaded or downloaded, take a way of
 their own, through the same permission check. You can run the same commands yourself; these two
-list the the root:</p>
+list the root:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">ls</span> /
 JSON_OUTPUT=1 <span class="hljs-built_in">ls</span> -l / | jq <span class="hljs-string">&#x27;.[].name&#x27;</span></code></pre></div>
-<p>Because every door acts as the same person under the same check, the rules are the same everywhere.
+<p>Because every interface acts as the same person under the same check, the rules are the same everywhere.
 What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
 either, and a command only an administrator may run is refused to anyone else whichever interface they
 use.</p>
@@ -417,9 +416,6 @@ of its commands: every command whose name starts with <code>search-</code> is as
 </tr>
 </tbody></table>
 </div>
-<p>A fourth module, <a href="../importer/index.html"><code>importer</code></a>, moves one particular older archive into EiN.
-It is not published and is not a general importer; photos from anywhere else come in through the
-Archive&#39;s staging, as <a href="../archive/importing.html">Getting your photos in</a> describes.</p>
 <p>An administrator installs, updates and removes modules on <strong>Settings → Modules</strong>, with
 <code>mod install</code>, or with the installer&#39;s <code>--module</code> option. <a href="../admin/modules.html">Modules</a> explains all
 three.</p>
@@ -569,9 +565,9 @@ and <a href="../assistant/language-model.html">The language model</a> say more a
 <li><a href="install.html">Install EiN</a> puts EiN on a machine of your own, and <a href="first-steps.html">First steps</a>
 takes you from the first sign-in to a family using it.</li>
 <li><a href="../guide/interface.html">Finding your way around</a> is a tour of the web interface.</li>
-<li><a href="../archive/index.html">The Archive</a>, <a href="../assistant/index.html">The Assistant</a>,
-<a href="../ems/index.html">The media service</a> and <a href="../importer/index.html">The Importer</a> open each module&#39;s
-section, for the modules installed on your EiN.</li>
+<li><a href="../archive/index.html">The Archive</a>, <a href="../assistant/index.html">The Assistant</a> and
+<a href="../ems/index.html">The media service</a> open each module&#39;s section, for the modules installed on
+your EiN.</li>
 <li>The Concepts pages take each idea above further: <a href="../concepts/nodes.html">Nodes and node types</a>,
 <a href="../concepts/tree.html">The tree</a>, <a href="../concepts/links.html">Links</a>,
 <a href="../concepts/files.html">Files and storage</a> and <a href="../concepts/pipelines.html">Changes and pipelines</a>.</li>

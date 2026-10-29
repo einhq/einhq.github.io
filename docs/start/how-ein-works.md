@@ -1,7 +1,7 @@
 # How EiN works
 
 This page explains the few ideas EiN is built on: one tree of nodes, one set of commands that works
-on it from every door, pipelines that act on every change, and modules that decide what it is for.
+on it from every interface, pipelines that act on every change, and modules that decide what it is for.
 Read it first, whether you are going to use EiN, run it or build on it. It also says how these
 pages are divided: **Core** for what every EiN has, and a section under **Modules** for each module.
 
@@ -59,7 +59,7 @@ standard path.
 Every node has an owner, a group and permission bits that say who may read it, change it, and go
 into it or run it, written the way `chmod` writes them: `0750`, or `rwxr-x---`. A node may also give
 access to more users or groups through an access list. A node belongs to whoever made it and
-takes its group from the folder it is made in. The administrator by-passes every check permission check.
+takes its group from the folder it is made in. The administrator bypasses every permission check.
 
 Two things work differently from a computer's files:
 
@@ -93,24 +93,24 @@ trash do to them.
 
 ## One set of commands
 
-At the heart of EiN is a a shell implementing bash. Core brings more than 200 commands, and each module adds its own. All data access, web or SSH runs these
+At the heart of EiN is a shell that speaks bash. Core brings more than 200 commands, and each module adds its own. All data access, from the web or over SSH, runs these
 commands, except SFTP, which moves files and nothing else:
 
-| Interface     | How you get there                                                                          | What happens                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| The web UI    | A browser at `http://ein.local:8080`                                                       | Each page runs commands as you and shows what they answer                                       |
-| The terminal  | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                 |
-| SSH           | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                        |
-| SFTP          | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                    |
-| The assistant | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; commands that would change something waits for you to accept |
+| Interface     | How you get there                                                                          | What happens                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| The web UI    | A browser at `http://ein.local:8080`                                                       | Each page runs commands as you and shows what they answer                                           |
+| The terminal  | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                     |
+| SSH           | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                            |
+| SFTP          | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                        |
+| The assistant | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; a command that would change something waits for you to accept it |
 
-![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/doors.svg "Every interface upholds the same permission checks, and all but SFTP go through the same commands.")
+![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/interfaces.svg "Every interface upholds the same permission checks, and all but SFTP go through the same commands.")
 
 The web interface is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with `JSON_OUTPUT=1` so that they answer in JSON; renaming a
 folder on the Nodes page runs `mv`. Only the bytes of files, uploaded or downloaded, take a way of
 their own, through the same permission check. You can run the same commands yourself; these two
-list the the root:
+list the root:
 
 ```bash
 # in EiN's terminal
@@ -118,7 +118,7 @@ ls /
 JSON_OUTPUT=1 ls -l / | jq '.[].name'
 ```
 
-Because every door acts as the same person under the same check, the rules are the same everywhere.
+Because every interface acts as the same person under the same check, the rules are the same everywhere.
 What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
 either, and a command only an administrator may run is refused to anyone else whichever interface they
 use.
@@ -181,10 +181,6 @@ The published modules are in the einhq organisation on GitHub, each named `modul
 | [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
 | [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
 
-A fourth module, [`importer`](../importer/index.md), moves one particular older archive into EiN.
-It is not published and is not a general importer; photos from anywhere else come in through the
-Archive's staging, as [Getting your photos in](../archive/importing.md) describes.
-
 An administrator installs, updates and removes modules on **Settings → Modules**, with
 `mod install`, or with the installer's `--module` option. [Modules](../admin/modules.md) explains all
 three.
@@ -232,9 +228,9 @@ and [The language model](../assistant/language-model.md) say more about each.
 - [Install EiN](install.md) puts EiN on a machine of your own, and [First steps](first-steps.md)
   takes you from the first sign-in to a family using it.
 - [Finding your way around](../guide/interface.md) is a tour of the web interface.
-- [The Archive](../archive/index.md), [The Assistant](../assistant/index.md),
-  [The media service](../ems/index.md) and [The Importer](../importer/index.md) open each module's
-  section, for the modules installed on your EiN.
+- [The Archive](../archive/index.md), [The Assistant](../assistant/index.md) and
+  [The media service](../ems/index.md) open each module's section, for the modules installed on
+  your EiN.
 - The Concepts pages take each idea above further: [Nodes and node types](../concepts/nodes.md),
   [The tree](../concepts/tree.md), [Links](../concepts/links.md),
   [Files and storage](../concepts/files.md) and [Changes and pipelines](../concepts/pipelines.md).

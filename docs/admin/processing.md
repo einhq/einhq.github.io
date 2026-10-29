@@ -51,7 +51,7 @@ The table has a row for every defined pipeline, also one that has never run, and
 | **Queued**    | Instances that are started and waiting for a worker or for an earlier step                           |
 | **Running**   | Instances with a step running this moment                                                            |
 | **Failed**    | Instances that failed                                                                                |
-| **Completed** | Instances that finished. Older ones are pruned, so this is not a count of every file ever processed. |
+| **Completed** | Instances that finished, counting those pruned since. Taken once a minute, so it can be a minute old |
 | **Cancelled** | Instances stopped on purpose                                                                         |
 | **In**        | Jobs that arrived per hour, over the last hour                                                       |
 | **Out**       | Instances completed in the last hour, the rate the ETA divides by                                    |

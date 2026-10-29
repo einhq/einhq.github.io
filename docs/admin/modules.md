@@ -29,16 +29,13 @@ gives no error, only a reminder from the installer and `setup.sh` when `EIN_MODU
 nothing you upload gets thumbnails, dates, faces or searchable text until the media service is
 there.
 
-A fourth module, [`importer`](../importer/index.md), moves one particular older archive into EiN. It
-is not published.
-
 ## See what is installed
 
 Open **Settings** in the sidebar and choose the **Modules** tab. Everyone who is signed in has this
 tab; for anyone but an administrator it is the only one, and it shows the modules without the
 buttons that change them.
 
-![The Modules tab of Settings: archive, assistant, ems and importer listed at the left with version 0.1.0 each, and archive open at the right, Active, with its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and its guide's introduction below](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
+![The Modules tab of Settings: archive, assistant and ems listed at the left with version 0.1.0 each, and archive open at the right, Active, with its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and its guide's introduction below](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
 
 The list at the left holds every installed module with its description. A module that works shows
 its version at the right; one that does not shows a badge instead and is listed first:
@@ -208,7 +205,7 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
 
 An update installs what the new version needs and is missing. It is refused when an installed
 module depends on this one and does not accept the new version; the message names them, for
-example `importer needs archive ^0.1.0, and this is archive 0.2.0: --force installs it all the
+example `letters needs archive ^0.1.0, and this is archive 0.2.0: --force installs it all the
 same`. `mod install --force` updates anyway, and also fetches again a commit that is installed
 already.
 

@@ -110,9 +110,6 @@ and the pages under **System**. These modules are published:
 | `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                 | a language model, your own or a hosted one                 |
 | `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                 | the media service                                          |
 
-A fourth module, the [Importer](../importer/index.md), moves one particular older archive into EiN;
-it is not published.
-
 If you installed with the **EiN Archive** command from einhq.eu, the three are installed already. Open
 **Settings → Modules**, choose each module, and check that its panel says **Active**, not
 **Not set up** or **Setup failed**.

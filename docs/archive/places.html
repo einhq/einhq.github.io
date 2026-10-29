@@ -54,7 +54,7 @@
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -72,10 +72,9 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html" aria-current="page">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
-<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html" aria-current="page">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
-<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -237,7 +236,7 @@ dialog reports an error for that reason, choose another name.</p>
 <li><strong>Set by hand.</strong> A circle or polygon drawn in <strong>Edit location</strong>, or coordinates given when the
 location was created. Nothing else ever moves it.</li>
 <li><strong>Its pictures.</strong> When at least two geotagged pictures are linked to the location directly, by
-the import from an older archive or by hand in the terminal, EiN puts a circle around them, as
+hand in the terminal, EiN puts a circle around them, as
 wide as they spread. A picture far from the rest is left out, and pictures spread wider than
 25 km give no circle. Pictures that joined the location because they lie inside its shape do not
 count.</li>
@@ -437,8 +436,8 @@ London&#39;s <strong>Media</strong> tab therefore does not list the pictures lin
 <li><strong>A point contains nothing.</strong> A location that is only a point collects no pictures.</li>
 <li><strong>A changed shape moves the links.</strong> Pictures the shape no longer covers are let go, or go to
 another location that covers them.</li>
-<li><strong>A link made by a person stays.</strong> A link made by hand in the terminal, or brought in by the
-import from an older archive, is never replaced by one of these.</li>
+<li><strong>A link made by a person stays.</strong> A link made by hand in the terminal is never replaced by one
+of these.</li>
 </ul>
 <p>To put pictures in a location, give them a position inside it. Select them, press <strong>Set location</strong>
 and choose the location under <strong>A known location</strong>: the pictures take the location&#39;s centre as

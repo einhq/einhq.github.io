@@ -20,7 +20,6 @@ These pages come in two parts, as EiN does:
 | [The Archive](archive/index.md)     | Albums of photos, videos, recordings and documents, people and their family tree, locations, devices, and staging, where uploads wait to be sorted |
 | [The Assistant](assistant/index.md) | The chat that answers your questions by running EiN's commands for you, with a language model                                                      |
 | [The media service](ems/index.md)   | EiN's side of the media service, the container that does the work on pictures, video and sound which the Archive needs                             |
-| [The Importer](importer/index.md)   | Moving one particular older archive into EiN                                                                                                       |
 
 ## Where to start
 

@@ -38,7 +38,7 @@ A module that adds a few commands, one setting and one page needs little more th
 }
 ```
 
-`letters` is an invented module, shown for the shape. The Importer's manifest is a real one of about the same size: a name, a version, a description, `coreApi`, one export, its imports and a dependency on `archive`.
+`letters` is an invented module, shown for the shape. The `ems` module's manifest is a real one with the same parts and no dependencies: a name, a version, a description, `coreApi`, four exports, its imports, seven settings and three pages.
 
 ## The fields at a glance
 
@@ -130,9 +130,9 @@ What the module's own code uses: private aliases into its own files, and externa
 
 ```json
 "imports": {
-  "@importer/legacy": "./lib/legacy.ts",
-  "@std/path": "jsr:@std/path@^1.1.3",
-  "bson": "npm:bson@^6.10.4"
+  "@assistant/agent": "./lib/agent.ts",
+  "@std/assert": "jsr:@std/assert@^1.0.16",
+  "mdast-util-from-markdown": "npm:mdast-util-from-markdown@^2.0.3"
 }
 ```
 

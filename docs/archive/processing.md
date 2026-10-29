@@ -44,7 +44,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-faces`          | Finds the faces in a photo and crops each one                                             | `faces`                        |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                     | `faces`                        |
 | `media-face-assign`    | Matches a found face to a person                                                          | `face-assign`                  |
-| `media-face-transfer`  | Moves face tags from an older archive onto the faces EiN found                            | `face-transfer`                |
+| `media-face-transfer`  | Moves names from hand-drawn face boxes onto the faces EiN found                           | `face-transfer`                |
 | `media-embed-picture`  | A picture vector, for searching by what is in the picture                                 | `embed-picture`                |
 | `media-ocr`            | Reads the text written in a picture                                                       | `ocr`                          |
 | `media-embed-text`     | Text vectors of a file's stored texts                                                     | `embed-text`                   |

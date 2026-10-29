@@ -222,7 +222,7 @@ If a face that was the person's cover leaves them, they get a new cover from the
 
 ### Doubtful faces
 
-Some archives come with names from an older system, brought in by the importer module as tags on the pictures. An administrator can check those names with the `face-audit` command, which marks a named face as doubtful when the closest named face in another photo belongs to somebody else. The audit does not run by itself. See [`face-audit`](commands.md#face-audit).
+A name that [`tag-transfer`](commands.md#tag-transfer) moved from a hand-drawn box onto the face EiN detected inside it can end up on the wrong person. An administrator can check those names with the `face-audit` command, which marks a named face as doubtful when the closest named face in another photo belongs to somebody else. The audit does not run by itself. See [`face-audit`](commands.md#face-audit).
 
 When a person has doubtful faces, the Faces tab shows a switch: **All faces** or **Doubtful (N)**, "Faces whose closest named face in another photo is somebody else". Each doubtful crop is badged with who it looks like, for example "like Peggy Wrenfield".
 

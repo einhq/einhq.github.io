@@ -30,7 +30,7 @@ While a chat is answering, its box is locked and the send button is grey. There 
 
 A new, empty chat shows a robot and "Ask about what is kept here, or about EiN itself.", and under it two questions the installed modules suggest, such as "When were we last at the beach?".
 
-The assistant answers in the language you ask in, whatever language the archive is kept in. The chat's own buttons and messages are in English.
+The assistant answers in the language you ask in, whatever language the archive is kept in or the commands print. A message too short to tell, such as a name or "ok", is answered in the **Archive language** ([`CFG_LANGUAGE`](../reference/settings.md#cfg_language)). The chat's own buttons and messages are in English.
 
 ### What the assistant knows about the page you are on
 

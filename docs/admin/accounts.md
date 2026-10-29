@@ -119,8 +119,9 @@ password" by e-mail and cannot make someone choose a new password at their next 
 someone has forgotten theirs, set a new one here and ask them to change it on their profile's
 **Security** tab (see [Change your password](../guide/profile.md#change-your-password)).
 
-An account brought over from an older archive by the [Importer](../importer/index.md) has no usable password. It shows
-**Needs a password**, and cannot sign in until you set one here.
+An account marked `mustResetPassword` has no usable password. It shows **Needs a password**, and
+cannot sign in by any means, an SSH key included, until you set one here; setting it clears the
+mark.
 
 ### Sign-in and removal
 
@@ -303,7 +304,7 @@ list every option.
 
 | What you see                                                                    | What it means                                                                        | What to do                                                                         |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Needs a password** on an account                                              | It was made without a password, or came from the Importer.                           | Set one under **Password**.                                                        |
+| **Needs a password** on an account                                              | It has no password, or is marked `mustResetPassword` until it is given one.          | Set one under **Password**.                                                        |
 | Someone does not see a folder or album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
 | **Create user** says "Already taken"                                            | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
 | "Another account has this address" under **E-mail**                             | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |

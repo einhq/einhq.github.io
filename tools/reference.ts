@@ -69,8 +69,11 @@ const MODULES: Record<string, string> = {
   archive: 'Archive',
   assistant: 'Assistant',
   ems: 'Media service',
-  importer: 'Importer',
 };
+
+/** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */
+const UNPUBLISHED = new Set(['importer']);
+const published = (module = 'core') => !UNPUBLISHED.has(module);
 const moduleName = (m: string) => MODULES[m] ?? m[0].toUpperCase() + m.slice(1);
 
 // --- commands ---
@@ -281,11 +284,11 @@ function nodeTypesPage(types: NodeType[]): string {
 
 // --- writing ---
 
-const commands = read<Command[]>('commands.json').sort((a, b) => a.name.localeCompare(b.name));
+const commands = read<Command[]>('commands.json').filter((c) => published(c.module)).sort((a, b) => a.name.localeCompare(b.name));
 const modules = ['core', ...[...new Set(commands.map((c) => c.module))].filter((m) => m !== 'core').sort()];
-const settings = read<Setting[]>('settings.json');
-const environment = read<EnvVar[]>('environment.json').filter((v) => !v.undescribed && v.description);
-const nodeTypes = read<NodeType[]>('node-types.json');
+const settings = read<Setting[]>('settings.json').filter((s) => published(s.owner));
+const environment = read<EnvVar[]>('environment.json').filter((v) => !v.undescribed && v.description && published(v.owner));
+const nodeTypes = read<NodeType[]>('node-types.json').filter((t) => published(t.owner));
 
 const pages: Record<string, string> = {
   'commands.md': commandIndex(commands, modules),

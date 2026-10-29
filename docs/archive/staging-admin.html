@@ -54,7 +54,7 @@
     </header>
 
     <div class="docs-layout">
-      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -72,10 +72,9 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html" aria-current="page">Staging for administrators</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
-<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html" aria-current="page">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
-<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -630,14 +629,6 @@ staging journal inbox --user helen --<span class="hljs-built_in">limit</span> 10
 staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N --user helen</code></pre></div>
 <p>Removing copies is the owner&#39;s alone: the copies go to the trash of whoever runs it, so <code>staging dedupe</code> for someone else answers <code>staging dedupe: staging dedupe moves copies to your own trash: run it as helen</code>.</p>
 <p><a href="commands.html#staging">Archive commands</a> lists every subcommand and option.</p>
-<h2 id="import-an-older-archive">Import an older archive<a class="anchor" href="#import-an-older-archive" aria-label="Link to this section"></a></h2>
-<p>The <code>importer</code> module moves one particular older archive, kept as MongoDB dumps, into EiN: its
-users and groups, people, albums, files, places and the rest, with a command for each
-(<code>import-users-groups</code>, <code>import-files</code> and so on). It is not published, and it does nothing for
-any other archive. Files from a person&#39;s own area in the old archive land in their staging Inbox,
-in <code>files/inbox/legacy-import</code>, where they sort them like any upload. Its commands are listed under
-<a href="../importer/commands.html">Importer commands</a>.</p>
-<p>To bring in files from anywhere else, copy them into staging as above.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><strong>A person&#39;s <code>/home/&lt;name&gt;/staging</code> does not exist.</strong> Their staging area is not set up yet. Run
 <code>staging init --user &lt;name&gt;</code>, or have them open <strong>Staging</strong> once.</p>
@@ -675,11 +666,11 @@ see <a href="../admin/accounts.html#delete-an-account">Accounts and groups</a>. 
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="processing.html" rel="prev"><span>Previous</span>Processing pictures</a><a class="next" href="commands.html" rel="next"><span>Next</span>Archive commands</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="processing.html" rel="prev"><span>Previous</span>Processing pictures</a><a class="next" href="tasks.html" rel="next"><span>Next</span>Archive commands by task</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/staging-admin.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-staging-area-is">What a staging area is</a></li><li><a href="#when-a-staging-area-is-set-up">When a staging area is set up</a></li><li><a href="#the-work-behind-staging">The work behind staging</a></li><li><a href="#look-at-a-persons-staging-area">Look at a person's staging area</a></li><li><a href="#plan-a-large-import">Plan a large import</a></li><li><a href="#change-the-finer-settings-of-a-category">Change the finer settings of a category</a></li><li><a href="#put-a-staging-area-right">Put a staging area right</a></li><li><a href="#act-for-another-person">Act for another person</a></li><li><a href="#import-an-older-archive">Import an older archive</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-staging-area-is">What a staging area is</a></li><li><a href="#when-a-staging-area-is-set-up">When a staging area is set up</a></li><li><a href="#the-work-behind-staging">The work behind staging</a></li><li><a href="#look-at-a-persons-staging-area">Look at a person's staging area</a></li><li><a href="#plan-a-large-import">Plan a large import</a></li><li><a href="#change-the-finer-settings-of-a-category">Change the finer settings of a category</a></li><li><a href="#put-a-staging-area-right">Put a staging area right</a></li><li><a href="#act-for-another-person">Act for another person</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

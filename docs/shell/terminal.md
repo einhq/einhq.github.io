@@ -356,7 +356,7 @@ media service set them when they are installed.
 
 ## Use the same shell over SSH
 
-The terminal is one of several doors into the same shell. From your own computer you can log in
+The terminal is one of several interfaces to the same shell. From your own computer you can log in
 over SSH with your EiN username and password, on port 2222 unless your administrator chose another:
 
 ```bash
@@ -368,10 +368,10 @@ You get the same shell as in a terminal tab: the same prompt, your history, your
 completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
 `cat`, and dropping files to upload them. Over SSH, copy files with SFTP or `scp` instead.
 
-![Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly](../diagrams/doors.svg "Whichever door you use, the same commands run as you, with the same permissions.")
+![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly](../diagrams/interfaces.svg "Whichever interface you use, the same commands run as you, with the same permissions.")
 
 The web pages run these same commands for you, and so does the assistant, always as the person
-signed in. A command you may not run in the terminal is refused through every other door too.
+signed in. A command you may not run in the terminal is refused through every other interface too.
 [SSH and SFTP](ssh-sftp.md) covers keys, running one command at a time, and copying files.
 
 ## Commands worth knowing
@@ -453,7 +453,7 @@ with <kbd>Tab</kbd>, or look for it with `docs find`. Commands such as `timeline
 exist only where their module is installed.
 
 **`service-restart: permission denied: only an administrator may run it`.** The command is for
-administrators. Through every door it is refused the same way; ask your administrator.
+administrators. Through every interface it is refused the same way; ask your administrator.
 
 **`du -h` shows help instead of sizes.** `-h` straight after a command's name always asks for help.
 Write `du -sh` or `du -ch`.
