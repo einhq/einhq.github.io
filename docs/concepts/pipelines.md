@@ -262,7 +262,7 @@ The Archive runs two workers on `/var/pools/media`:
 A third worker, `models-second`, takes the same model work as `models` in the reverse order. It is
 off until **Second models worker's slots**, `CFG_MODEL_SECOND_SLOTS`, is above 0.
 
-Most of these steps are calls into the [media service](../admin/media-service.md), which does
+Most of these steps are calls into the [media service](../ems/index.md), which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
 [Processing and pipelines](../admin/processing.md) explains how to size the workers.
@@ -291,7 +291,7 @@ starts its own pipelines:
 ![From upload to findable: a file arrives and its date, place and camera are read first, by media-ingest; then thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the grids and viewer, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "No stage waits for the one before it to finish; each waits for the fact it needs.")
 
 Nothing in the chain waits for "the previous step". Each stage waits for a fact, so each can be run
-again, put first or given its own workers without touching the others. [Getting your photos in](../guide/importing.md)
+again, put first or given its own workers without touching the others. [Getting your photos in](../archive/importing.md)
 describes what you see in the interface while this happens.
 
 The Archive's pipelines and what starts them:
@@ -327,7 +327,7 @@ The Archive's pipelines and what starts them:
 | `staging-retime`       | `staging.retime.requested`                               | Dates staged files by their category's time rules                       |
 | `track-stage`          | a file `updated` in staging                              | Turns a GPX file into its device's route                                |
 
-[Staging and importing for administrators](../admin/staging.md) explains the staging pipelines in
+[Staging and importing for administrators](../archive/staging-admin.md) explains the staging pipelines in
 detail.
 
 ## When a step fails
@@ -480,5 +480,5 @@ hers. The [audit command](../reference/commands-core.md#audit) lists every filte
 - [Nodes and node types](nodes.md) and [The tree](tree.md): what a change changes
 - [Processing and pipelines](../admin/processing.md): the administrator's side of the engine and its workers
 - [Health and the dashboard](../admin/monitoring.md): the four words and the **Work** tab
-- [The media service](../admin/media-service.md): where most steps do their work
+- [The media service](../ems/index.md): where most steps do their work
 - [Writing a module](../develop/modules.md): shipping pipelines with a module

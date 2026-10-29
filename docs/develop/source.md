@@ -148,7 +148,7 @@ mod install https://github.com/einhq/module-archive@main
 
 ## Add the media service and the language model
 
-Core runs without anything more, and the Assistant needs only a language model, below. The Archive needs the media service to make thumbnails, read metadata, find faces and make pictures searchable; without it, files arrive but nothing is analysed. [The media service](../admin/media-service.md) explains what it does.
+Core runs without anything more, and the Assistant needs only a language model, below. The Archive needs the media service to make thumbnails, read metadata, find faces and make pictures searchable; without it, files arrive but nothing is analysed. [The media service](../ems/index.md) explains what it does.
 
 The media service reads files by path, not by upload: EiN sends it an absolute path such as `/files/…`, and the service must see the same file at the same path. The simplest way to arrange that on one machine is to run core in its container too, as in [Build and run the image](#build-and-run-the-image), and give both containers the same folders:
 
@@ -162,7 +162,7 @@ make run FILES_PATH=$HOME/ein-core/files OLD_PATH=$HOME/ein-core/old \
 make health
 ```
 
-`make build` makes an image of tens of gigabytes, since the models are baked in. Add `GPU=1` to `make run` to give it an NVIDIA card; [The graphics card](../admin/gpu.md) has what the machine needs first. The service listens on port 8181 with the key `let-me-in` unless you set `EMS_PORT` and `EMS_KEY`.
+`make build` makes an image of tens of gigabytes, since the models are baked in. Add `GPU=1` to `make run` to give it an NVIDIA card; [The graphics card](../ems/gpu.md) has what the machine needs first. The service listens on port 8181 with the key `let-me-in` unless you set `EMS_PORT` and `EMS_KEY`.
 
 EiN looks for it at `http://127.0.0.1:8181`, the default of [`CFG_EMS_URL`](../reference/settings.md#cfg_ems_url). Give EiN the key with [`CFG_EMS_KEY`](../reference/settings.md#cfg_ems_key), in the settings file you pass to `make container-run` as `ENV_FILE`:
 
@@ -171,7 +171,7 @@ EiN looks for it at `http://127.0.0.1:8181`, the default of [`CFG_EMS_URL`](../r
 CFG_EMS_KEY=let-me-in
 ```
 
-For the assistant's model, clone [llm](https://github.com/einhq/llm) and run `bash run.sh` in it. It fetches the model on its first start and answers at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. A hosted provider works as well; [The language model](../admin/language-model.md) explains both.
+For the assistant's model, clone [llm](https://github.com/einhq/llm) and run `bash run.sh` in it. It fetches the model on its first start and answers at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. A hosted provider works as well; [The language model](../assistant/language-model.md) explains both.
 
 ## Test, check and lint
 
@@ -241,13 +241,13 @@ An installation made with the installer builds from the organisation that `--sou
 - **`make container-run` fails on a missing folder.** Create `old/` in the checkout, or set `OLD_PATH` to a folder that exists.
 - **A module's page shows the old version.** Run `ui-build <name>` in EiN's terminal, then reload the page.
 - **A test fails in `module-boundary.test.ts` after you edited a manifest.** The module's `deno.jsonc` no longer matches its `mod.json`. Run `deno task sync:modules`.
-- **Files arrive but get no thumbnails.** The media service is not reached, or sees other paths than EiN. [The media service](../admin/media-service.md#when-something-goes-differently) has the checks.
+- **Files arrive but get no thumbnails.** The media service is not reached, or sees other paths than EiN. [The media service](../ems/index.md#when-something-goes-differently) has the checks.
 
 ## Related pages
 
 - [Writing a module](modules.md)
 - [The module manifest](manifest.md)
-- [Teaching the assistant](assistant.md)
+- [Teaching the assistant](../assistant/teaching.md)
 - [Installing in detail](../admin/install.md)
-- [The media service](../admin/media-service.md)
+- [The media service](../ems/index.md)
 - [Environment variables](../reference/environment.md)

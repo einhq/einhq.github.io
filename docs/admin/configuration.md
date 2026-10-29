@@ -58,7 +58,7 @@ A few settings are keys that EiN sends to another service: the media service's k
 - A key is in no shell's environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key.
 
 > [!WARNING]
-> The media service's key, `CFG_EMS_KEY`, must be one the media service accepts. The installer gives both sides the same key from `.env`. A different key saved here leaves EiN unable to reach the media service; **Restore inherited value** brings back the deployment's. [The media service](media-service.md) explains the keys.
+> The media service's key, `CFG_EMS_KEY`, must be one the media service accepts. The installer gives both sides the same key from `.env`. A different key saved here leaves EiN unable to reach the media service; **Restore inherited value** brings back the deployment's. [The media service](../ems/index.md) explains the keys.
 
 ## What a change restarts
 
@@ -170,7 +170,7 @@ A value in `.env` does not always win:
 - **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
-The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](media-service.md) describes them.
+The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](../ems/index.md) describes them.
 
 > [!NOTE]
 > `.env` holds the database password and the media service's key, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.
@@ -234,4 +234,4 @@ A line for a name no part of EiN declares is exported into every shell but shows
 - [Accounts and groups](accounts.md): the **Users**, **Groups** and **Permissions** tabs, and the default sharing.
 - [Modules](modules.md): the **Modules** tab, module sources and their tokens.
 - [Processing and pipelines](processing.md) and [Performance and sizing](performance.md): what the **Processing** settings do in practice.
-- [The media service](media-service.md) and [The language model](language-model.md): their addresses and keys.
+- [The media service](../ems/index.md) and [The language model](../assistant/language-model.md): their addresses and keys.

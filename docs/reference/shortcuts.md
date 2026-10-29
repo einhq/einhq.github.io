@@ -76,7 +76,7 @@ In the search box of the **Search** and **Media** pages:
 ## Pictures in a grid
 
 Wherever pictures stand in a grid: an album, **Media**, a person's pictures, search
-results. [Albums](../guide/albums.md#select-pictures) describes selecting in full.
+results. [Albums](../archive/albums.md#select-pictures) describes selecting in full.
 
 | Keys                                                              | What they do                                                           |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -93,7 +93,7 @@ the last.
 
 ## The viewer
 
-While a photo, video or recording is open. [Viewing photos, videos and recordings](../guide/viewer.md#keyboard-shortcuts-in-the-viewer)
+While a photo, video or recording is open. [Viewing photos, videos and recordings](../archive/viewer.md#keyboard-shortcuts-in-the-viewer)
 explains each.
 
 | Keys                         | What they do                                                                                                                                    |
@@ -150,7 +150,7 @@ On **Home**, while **On this day** plays as a story ([Home, memories and statist
 
 ## People
 
-[People and faces](../guide/people.md) explains each place.
+[People and faces](../archive/people.md) explains each place.
 
 | Where                            | Keys                                                              | What they do                                                                    |
 | -------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- |
@@ -167,7 +167,7 @@ On **Home**, while **On this day** plays as a story ([Home, memories and statist
 
 On a computer, the line at the foot of the stream shows the keys for where you are; **hide** folds
 it to a **Keys** chip. The keys do nothing while you type in a field or a dialog is open, and there
-are none on a phone. [Sorting in staging](../guide/staging.md#keys-in-the-sort-tab) explains what
+are none on a phone. [Sorting in staging](../archive/staging.md#keys-in-the-sort-tab) explains what
 each does to a group.
 
 On a group:
@@ -227,7 +227,7 @@ In the dialogs these keys open:
 
 ## Staging: duplicates
 
-On the **Duplicates** tab and in its compare dialog ([Duplicates](../guide/duplicates.md#remove-the-copies-of-one-set)):
+On the **Duplicates** tab and in its compare dialog ([Duplicates](../archive/duplicates.md#remove-the-copies-of-one-set)):
 
 | Where              | Keys                        | What they do                                       |
 | ------------------ | --------------------------- | -------------------------------------------------- |
@@ -288,7 +288,7 @@ On the **Trash** page ([Your profile, favourites and trash](../guide/profile.md#
 
 ## The assistant
 
-In the chat box ([Chatting with the assistant](../guide/assistant.md)), <kbd>Enter</kbd> sends the
+In the chat box ([Chatting with the assistant](../assistant/chat.md)), <kbd>Enter</kbd> sends the
 question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
 
 The side drawer the chat opens in can be made wider or narrower from the keyboard: move to its edge
@@ -358,8 +358,8 @@ the connection; see [Reaching other machines](../shell/remote.md).
 ## Related pages
 
 - [Finding your way around](../guide/interface.md)
-- [Viewing photos, videos and recordings](../guide/viewer.md)
-- [Sorting in staging](../guide/staging.md)
+- [Viewing photos, videos and recordings](../archive/viewer.md)
+- [Sorting in staging](../archive/staging.md)
 - [The terminal](../shell/terminal.md)
 - [The editor](../shell/editor.md)
 - [Your sidebar and top bar](../guide/customizing.md)

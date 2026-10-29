@@ -141,8 +141,8 @@ does not install the service. If you left it out at the install, add it on the m
 It builds the media service's image, about 30 GB, on the machine, and starts EiN again. Without
 it, uploads arrive but wait in staging as **being prepared**. The assistant needs a language
 model the same way: `~/ein/setup.sh --llm` runs one on this machine, and a hosted provider is set
-in `~/ein/.env`. [Modules](../admin/modules.md), [The media service](../admin/media-service.md) and
-[The language model](../admin/language-model.md) have the details.
+in `~/ein/.env`. [Modules](../admin/modules.md), [The media service](../ems/index.md) and
+[The language model](../assistant/language-model.md) have the details.
 
 ## Decide who sees what
 
@@ -259,8 +259,8 @@ one:
    staging for the new album, shared as the **Sharing** card says.
 
 The album is now under **Albums** in the sidebar. Every decision can be undone, from the message
-it leaves or from the **Done** tab. [Getting your photos in](../guide/importing.md) and
-[Sorting in staging](../guide/staging.md) go through every way in and every choice on the Sort
+it leaves or from the **Done** tab. [Getting your photos in](../archive/importing.md) and
+[Sorting in staging](../archive/staging.md) go through every way in and every choice on the Sort
 tab.
 
 ## Share an album
@@ -294,7 +294,7 @@ Give each person:
 
 They sign in on the sign-in page with **Username or e-mail**, **Password** and **Sign in**. Ask
 them to change their password at once, under **Profile → Security**.
-[Finding your way around](../guide/interface.md) and [Getting your photos in](../guide/importing.md)
+[Finding your way around](../guide/interface.md) and [Getting your photos in](../archive/importing.md)
 are good pages to send them.
 
 EiN answers on your home network. Reaching it from elsewhere takes an HTTPS proxy of your own in

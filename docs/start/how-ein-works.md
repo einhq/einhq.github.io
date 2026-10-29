@@ -123,7 +123,7 @@ use.
 ![The terminal panel filling the window: ls /archive, a find that counts the people, person-info printing Peggy Wrenfield's relations, homes and events, and cat drawing a photo from the christmas-2019 album](../../assets/shots/terminal.webp "The terminal works on the tree the pages show: people, albums and photos are paths.")
 
 [The terminal](../shell/terminal.md), [SSH and SFTP](../shell/ssh-sftp.md) and
-[Chatting with the assistant](../guide/assistant.md) describe each door, and
+[Chatting with the assistant](../assistant/chat.md) describe each door, and
 [Commands](../reference/commands.md) lists every command.
 
 ## Changes start pipelines
@@ -180,7 +180,7 @@ The published modules are in the einhq organisation on GitHub, each named `modul
 
 A fourth module, `importer`, moves one particular older archive into EiN. It is not published and
 is not a general importer; photos from anywhere else come in through staging, as
-[Getting your photos in](../guide/importing.md) describes.
+[Getting your photos in](../archive/importing.md) describes.
 
 An administrator installs, updates and removes modules on **Settings → Modules**, with
 `mod install`, or with the installer's `--module` option. [Modules](../admin/modules.md) explains all
@@ -215,8 +215,8 @@ Without the media service, EiN still takes in, keeps and shares what you upload,
 no metadata, thumbnails, faces or transcripts: that work waits until the media service answers.
 Without a language model, everything except the chat works, though the search box then reads what
 you type by its own rules alone, without picking out the people and places you name.
-[The media service](../admin/media-service.md)
-and [The language model](../admin/language-model.md) say more about each.
+[The media service](../ems/index.md)
+and [The language model](../assistant/language-model.md) say more about each.
 
 ## Where to read on
 

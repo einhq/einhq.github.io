@@ -88,25 +88,25 @@ has `_` for spaces, such as `/devices/Canon_EOS_5D_Mark_III`. Addresses with
 
 ### Browsing
 
-| Address                   | What it shows                                                                                            |
-| ------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `/media`                  | **Media**: every picture, video, recording and document, see [Media, Year and labels](../guide/media.md) |
-| `/media/<path>`           | One file in the viewer, see [Viewing photos, videos and recordings](../guide/viewer.md)                  |
-| `/year`                   | **Year**                                                                                                 |
-| `/timeline`               | Opens `/year`, keeping the query                                                                         |
-| `/map`                    | **Map**, see [Locations and the map](../guide/places.md)                                                 |
-| `/albums`                 | **Albums**, see [Albums](../guide/albums.md)                                                             |
-| `/albums/<path>`          | One album, for example `/albums/%2Farchive%2Falbums%2FMalpas%201979`                                     |
-| `/people`                 | **People**, see [People and faces](../guide/people.md)                                                   |
-| `/people/<name>`          | One person, for example `/people/peggy-wrenfield`                                                        |
-| `/people/unknown`         | The people EiN has seen or heard but nobody has named                                                    |
-| `/family`                 | A family tree of chosen people, see [Family tree, events and homes](../guide/family.md)                  |
-| `/locations`              | **Locations**                                                                                            |
-| `/locations/<name>`       | One location                                                                                             |
-| `/devices`                | **Devices**, see [Devices and GPS tracks](../guide/devices.md)                                           |
-| `/devices/<name>`         | One device                                                                                               |
-| `/favourites`             | Your **Favourites**; signed in only, see [Your profile, favourites and trash](../guide/profile.md)       |
-| `/duplicates?path=<path>` | The copies of a node, see [Duplicates](../guide/duplicates.md)                                           |
+| Address                   | What it shows                                                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `/media`                  | **Media**: every picture, video, recording and document, see [Media, Year and labels](../archive/media.md) |
+| `/media/<path>`           | One file in the viewer, see [Viewing photos, videos and recordings](../archive/viewer.md)                  |
+| `/year`                   | **Year**                                                                                                   |
+| `/timeline`               | Opens `/year`, keeping the query                                                                           |
+| `/map`                    | **Map**, see [Locations and the map](../archive/places.md)                                                 |
+| `/albums`                 | **Albums**, see [Albums](../archive/albums.md)                                                             |
+| `/albums/<path>`          | One album, for example `/albums/%2Farchive%2Falbums%2FMalpas%201979`                                       |
+| `/people`                 | **People**, see [People and faces](../archive/people.md)                                                   |
+| `/people/<name>`          | One person, for example `/people/peggy-wrenfield`                                                          |
+| `/people/unknown`         | The people EiN has seen or heard but nobody has named                                                      |
+| `/family`                 | A family tree of chosen people, see [Family tree, events and homes](../archive/family.md)                  |
+| `/locations`              | **Locations**                                                                                              |
+| `/locations/<name>`       | One location                                                                                               |
+| `/devices`                | **Devices**, see [Devices and GPS tracks](../archive/devices.md)                                           |
+| `/devices/<name>`         | One device                                                                                                 |
+| `/favourites`             | Your **Favourites**; signed in only, see [Your profile, favourites and trash](../guide/profile.md)         |
+| `/duplicates?path=<path>` | The copies of a node, see [Duplicates](../archive/duplicates.md)                                           |
 
 ### Creating
 
@@ -122,7 +122,7 @@ a page by their address. All of them need you to be signed in.
 
 ### Staging and importing
 
-All of these need you to be signed in. [Sorting in staging](../guide/staging.md) and [Getting your photos in](../guide/importing.md) explain the work itself.
+All of these need you to be signed in. [Sorting in staging](../archive/staging.md) and [Getting your photos in](../archive/importing.md) explain the work itself.
 
 | Address                      | What it shows                                                            |
 | ---------------------------- | ------------------------------------------------------------------------ |
@@ -149,15 +149,15 @@ its own too, which is mostly useful for linking to it.
 
 ## The Assistant's and the media service's pages
 
-| Address                 | What it shows                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------ |
-| `/chat`                 | **Chat** with your latest conversation, see [Chatting with the assistant](../guide/assistant.md) |
-| `/chat/<id>`            | One conversation; the address follows when you switch conversations                              |
-| `/chart`                | A chart the chat draws under an answer; its parameters come from the chat                        |
-| `/about/language-model` | The language model, as **About EiN** shows it                                                    |
-| `/system/media-service` | The media service, the **Media service** tab of the **Dashboard**                                |
-| `/system/gpu`           | The graphics card, a part of the **Dashboard**'s overview                                        |
-| `/about/media-service`  | The media service, as **About EiN** shows it                                                     |
+| Address                 | What it shows                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `/chat`                 | **Chat** with your latest conversation, see [Chatting with the assistant](../assistant/chat.md) |
+| `/chat/<id>`            | One conversation; the address follows when you switch conversations                             |
+| `/chart`                | A chart the chat draws under an answer; its parameters come from the chat                       |
+| `/about/language-model` | The language model, as **About EiN** shows it                                                   |
+| `/system/media-service` | The media service, the **Media service** tab of the **Dashboard**                               |
+| `/system/gpu`           | The graphics card, a part of the **Dashboard**'s overview                                       |
+| `/about/media-service`  | The media service, as **About EiN** shows it                                                    |
 
 ## Parameters
 
@@ -340,7 +340,7 @@ You meet them in links to files, in scripts, and in a reverse proxy's configurat
 | `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                       |
 | `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
 | `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
-| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../guide/devices.md)                            |
+| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                          |
 | `/__shell`                       |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket                    |
 
 Any other path that is not a file of the web interface returns the interface itself, which then

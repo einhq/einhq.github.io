@@ -215,7 +215,7 @@ podman compose logs ems                # the media service: ems, llm or db for t
 
 With Docker, write `docker compose`. Each line reads `[2026-10-25 21:35:02] [INFO ] [service-registry] Service 'label-models' started`, followed by any details the message carries. This is the log to read when EiN does not start, since the tree's logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, `Admin password set to: …`, which is gone once the container is made again, as after `podman compose down`.
 
-The media service, the language model and the database write only to their containers' logs. [The media service](media-service.md#on-the-machine) covers reading its log.
+The media service, the language model and the database write only to their containers' logs. [The media service](../ems/index.md#on-the-machine) covers reading its log.
 
 ## Log more, or less
 
@@ -315,7 +315,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **A restart of `pipeline-engine` takes minutes.** It waits for the steps it runs to finish, for up to 16 minutes, and its row shows a spinner meanwhile.
 
-**`ems-link` says `not answering`.** The media service's container is down or still starting; `ems-link` only reports it. [The media service](media-service.md#when-something-goes-differently) has what to do.
+**`ems-link` says `not answering`.** The media service's container is down or still starting; `ems-link` only reports it. [The media service](../ems/index.md#when-something-goes-differently) has what to do.
 
 **The system log starts only a little while ago.** It is emptied each time EiN starts. Older lines, as far back as the container's life, are in the container's log: `podman compose logs ein`.
 
@@ -331,5 +331,5 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 - [Processing and pipelines](processing.md): the work the workers and the pipeline engine do
 - [Installing in detail](install.md): the containers, and running them with compose
 - [Configuration](configuration.md): settings, and which services a change restarts
-- [The media service](media-service.md) and [The language model](language-model.md)
+- [The media service](../ems/index.md) and [The language model](../assistant/language-model.md)
 - [Core commands](../reference/commands-core.md): every `service-` command, `dmesg` and `tail`

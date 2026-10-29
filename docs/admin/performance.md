@@ -1,6 +1,6 @@
 # Performance and sizing
 
-This page is for the administrator who runs EiN on their own machine: what each part of EiN uses of the processor, memory and disk, how big a machine to give it, how to set the containers' memory limits, and which settings decide how much processing runs at once. The graphics card has a page of its own, [The graphics card](gpu.md).
+This page is for the administrator who runs EiN on their own machine: what each part of EiN uses of the processor, memory and disk, how big a machine to give it, how to set the containers' memory limits, and which settings decide how much processing runs at once. The graphics card has a page of its own, [The graphics card](../ems/gpu.md).
 
 ## What uses the machine
 
@@ -25,13 +25,13 @@ The installer checks the machine against the first two rows of these figures bef
 | With the media service (`--ems`)          | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files |
 | With the language model as well (`--llm`) | as above                       | about 5.6 GB more, unless the model is on the card | as above                      |
 
-Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](language-model.md) describes.
+Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](../assistant/language-model.md) describes.
 
 What the figures mean in practice:
 
 - **More cores** let more media work run side by side, once you raise the settings in [Let more work run at once](#let-more-work-run-at-once). The defaults are set for a small machine and use few cores.
 - **More memory** matters for the media service, which holds several models at once, and for long videos, which are decoded on the processor without a card.
-- **A graphics card** changes how fast the models run, not what they find. On a card a recording's transcript takes about a minute; without one it takes about twice the length of the recording. [The graphics card](gpu.md) has the details.
+- **A graphics card** changes how fast the models run, not what they find. On a card a recording's transcript takes about a minute; without one it takes about twice the length of the recording. [The graphics card](../ems/gpu.md) has the details.
 - **Disk** holds your originals once, plus the thumbnails and other renditions EiN makes of each, plus the images and the database in the container engine's storage. [Watch disk space](#watch-disk-space) shows how to see how fast it grows.
 
 ## Set the memory limits
@@ -69,7 +69,7 @@ How to choose the limits:
 - **Keep the limits together below the machine's memory**, with a few GB to spare for the database, which has no limit, and for the system itself. A container that grows is then stopped at its own limit, and the kernel does not have to pick a process to stop somewhere else on the machine.
 - **`EIN_MEMORY`**: EiN itself, its shells and its pipelines. Raise it from the default of 6 GB if `top` shows EiN close to its limit during an import.
 - **`EMS_MEMORY`**: the media service holds the models it is using and decodes videos. A video decoded on the processor is planned within a budget of 4000 MB (`EMS_CPU_ENCODE_MAX_MB`) and split into parts when it would need more, so keep the limit well above that. Its main model process restarts itself when it passes 60% of the limit, so the rest is left for the decoding and the tools.
-- **`LLM_MEMORY`**: the model and its working memory. The default fits the default model; [The language model](language-model.md) explains which other models the container can run.
+- **`LLM_MEMORY`**: the model and its working memory. The default fits the default model; [The language model](../assistant/language-model.md) explains which other models the container can run.
 
 ### When a container reaches its limit
 
@@ -200,10 +200,10 @@ Whether the machine is big enough shows in whether it keeps up with the work:
 
 ## Related pages
 
-- [The graphics card](gpu.md): what the card speeds up and how the media service and the language model share it.
+- [The graphics card](../ems/gpu.md): what the card speeds up and how the media service and the language model share it.
 - [Installing in detail](install.md): the containers, `.env` and the installer's checks.
 - [Configuration](configuration.md): where settings live and what a change restarts.
 - [Processing and pipelines](processing.md): what the pipelines do with each file, and the engine's settings.
-- [The media service](media-service.md) and [The language model](language-model.md): the two optional services.
+- [The media service](../ems/index.md) and [The language model](../assistant/language-model.md): the two optional services.
 - [Health and the dashboard](monitoring.md): the badge, the checks and the Work tab.
 - [Settings](../reference/settings.md#processing): every **Processing** setting with its default.

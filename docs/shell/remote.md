@@ -214,7 +214,7 @@ nothing matches, `scp` says `No match`.
 
 A file copied in is recorded the way an upload is: its size, checksum and type are worked out, and
 EiN's processing takes it in from there. Copying into your staging folder is a way to bring a
-machine's photos into the archive: see [Sorting in staging](../guide/staging.md).
+machine's photos into the archive: see [Sorting in staging](../archive/staging.md).
 
 Copy out to another machine:
 

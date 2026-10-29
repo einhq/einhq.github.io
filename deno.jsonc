@@ -33,7 +33,7 @@
   "tasks": {
     "capture": "deno run -A --node-modules-dir=auto tools/capture.ts",
     "docs": "deno run --allow-read=. --allow-write=docs tools/docs.ts",
-    "reference": "deno run --allow-read=. --allow-write=docs/reference tools/reference.ts",
+    "reference": "deno run --allow-read=. --allow-write=docs tools/reference.ts",
     "serve": "deno run --allow-net --allow-read jsr:@std/http@^1/file-server --port 4507 ."
   }
 }

@@ -11,7 +11,7 @@ On your machine EiN runs as a few containers under podman or Docker. EiN itself 
 ## Where to start
 
 - **You want to try EiN.** [Install EiN](start/install.md) puts it on a Linux machine with one command, and [First steps](start/first-steps.md) takes you from the first sign-in to a family using it.
-- **You use EiN day to day.** [Finding your way around](guide/interface.md) shows the web interface. [Getting your photos in](guide/importing.md), [Albums](guide/albums.md), [Search and the finder](guide/search.md) and [Sharing](guide/sharing.md) cover what you do most.
+- **You use EiN day to day.** [Finding your way around](guide/interface.md) shows the web interface. [Getting your photos in](archive/importing.md), [Albums](archive/albums.md), [Search and the finder](guide/search.md) and [Sharing](guide/sharing.md) cover what you do most.
 - **You run EiN for others.** [Installing in detail](admin/install.md) explains every part of the installation, [Configuration](admin/configuration.md) and [Modules](admin/modules.md) how to change what it does, [Health and the dashboard](admin/monitoring.md) how to tell that it is keeping up, and [Troubleshooting](admin/troubleshooting.md) what to do when something is wrong.
 - **You work in the shell.** [The terminal](shell/terminal.md) opens EiN's shell in the browser, and [SSH and SFTP](shell/ssh-sftp.md) connects to it from your own computer.
 - **You build modules.** [Writing a module](develop/modules.md) shows a module's folder, what each part becomes and how EiN finds it.

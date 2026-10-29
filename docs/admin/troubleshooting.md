@@ -72,7 +72,7 @@ EiN answers on port 8080 only once its database is up and its start is through: 
 | EiN is not running after the machine restarted                                                  | Under podman, `podman-restart.service` starts it at boot, and under rootless podman only for a user who lingers. Start it with `podman compose up -d`, and see [Start EiN when the machine boots](install.md#start-ein-when-the-machine-boots).                                                              |
 | EiN answers on the machine itself, but not from another computer                                | Open ports 8080 and 2222 in the machine's firewall, and try the machine's IP address instead of a name ending in `.local`. See [Open the ports in the firewall](network.md#open-the-ports-in-the-firewall).                                                                                                  |
 | The web interface or SSH stopped answering after a change to **HTTP port** or **SSH port**      | Reset the setting through whichever still answers, with `config unset CFG_HTTP_PORT` or `config unset CFG_SSH_PORT`, then `podman compose restart ein`. Ports are changed in `.env`; see [Ports, HTTPS and remote access](network.md).                                                                       |
-| `unresolvable CDI devices nvidia.com/gpu=all` when the containers start                         | The container engine cannot hand the graphics card over. See [The graphics card](gpu.md).                                                                                                                                                                                                                    |
+| `unresolvable CDI devices nvidia.com/gpu=all` when the containers start                         | The container engine cannot hand the graphics card over. See [The graphics card](../ems/gpu.md).                                                                                                                                                                                                             |
 
 A container that keeps starting over without a clear message in its log may be running out of memory: each has a limit, 6 GB for EiN unless `EIN_MEMORY` in `.env` sets another. The machine's kernel log records a container stopped for that reason (`journalctl -k | grep -i oom` on most systems). [Performance and sizing](performance.md) says how to raise the limits.
 
@@ -189,7 +189,7 @@ Thumbnails, video renditions, faces, picture vectors, transcriptions and the tex
    regenerate --force /archive/albums/cornwall-1968    # everything again
    ```
 
-Lines beginning `ems-link: down` and `ems-link: up` in the `ems-link` service's log say when the media service went away and came back. A `fail` check named `ems gpu` means the card the media service is meant to have is gone; see [The graphics card](gpu.md). [The media service](media-service.md) covers the rest.
+Lines beginning `ems-link: down` and `ems-link: up` in the `ems-link` service's log say when the media service went away and came back. A `fail` check named `ems gpu` means the card the media service is meant to have is gone; see [The graphics card](../ems/gpu.md). [The media service](../ems/index.md) covers the rest.
 
 ## The assistant does not answer
 
@@ -213,7 +213,7 @@ llm-status --checks
 | `… is not answering; the chat cannot answer until it does` | With `--llm`, read `podman compose logs llm`: at its first start it downloads its model, several GB, and answers only after that. Without `--llm` and without a hosted model, there is no model: add one with `~/ein/setup.sh --llm`. |
 | `… does not offer …; the chat's questions to it fail`      | The hosted provider has no model by the name in `CFG_LLM_MODEL`. Set a name it offers.                                                                                                                                                |
 
-[The language model](language-model.md) covers running the model yourself or using a hosted one.
+[The language model](../assistant/language-model.md) covers running the model yourself or using a hosted one.
 
 ## A service has stopped
 
@@ -286,7 +286,7 @@ Read the logs before you send them on: they name your accounts, paths and addres
 - [Health and the dashboard](monitoring.md): every check, tile and gauge.
 - [Services and logs](services-logs.md): EiN's services and where each writes.
 - [Processing and pipelines](processing.md): how work is queued and run.
-- [The media service](media-service.md) and [The language model](language-model.md): the two optional containers.
+- [The media service](../ems/index.md) and [The language model](../assistant/language-model.md): the two optional containers.
 - [Installing in detail](install.md): `~/ein`, `.env` and running compose.
 - [Ports, HTTPS and remote access](network.md): reaching EiN, proxies and sign-in limits.
 - [Modules](modules.md): installing, updating and fixing modules.

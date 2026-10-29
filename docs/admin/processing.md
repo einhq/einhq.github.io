@@ -19,7 +19,7 @@ Work is done in three places:
 - **Pool workers** run the long steps. The engine puts each one as a job in a pool, and a worker
   takes it when it has room. The Archive brings `cpu`, for work done on this machine, such as
   reading metadata, making thumbnails and transcoding video, and `models`, for work done by a model
-  in the [media service](media-service.md), such as finding faces or transcribing speech. A second
+  in the [media service](../ems/index.md), such as finding faces or transcribing speech. A second
   model worker, `models-second`, runs beside `models` when `CFG_MODEL_SECOND_SLOTS` is above `0`;
   it is off by default.
 - **Background services** of the Archive: `archive-bridge` turns changes into the events the media
@@ -272,7 +272,7 @@ one entry.
 ### Steps waiting for the media service
 
 When **waiting for EMS** stays on a kind, the media service is the place to look:
-[The media service](media-service.md) shows how to check it. Once it answers again, the kind tries
+[The media service](../ems/index.md) shows how to check it. Once it answers again, the kind tries
 on its own at its next try. To try at once:
 
 ```bash
@@ -332,7 +332,7 @@ Work on a staging category of the **Google Photos export** or **Scans** kind run
 below all other work, so what people upload in the meantime is processed first. Bulk work is put
 behind, never stopped: it runs whenever nothing else that could run is waiting. Any category can be
 put in that lane with `staging category <name> --lane bulk`, which applies to work announced from
-then on. [Staging and importing for administrators](staging.md) covers categories.
+then on. [Staging and importing for administrators](../archive/staging-admin.md) covers categories.
 
 `pipeline-rerun` and `pipeline-start` always run in the normal lane; `pipeline-heal` keeps the
 lane an instance had.
@@ -391,7 +391,7 @@ pipeline of your own, see [Writing a module](../develop/modules.md).
 
 - [Changes and pipelines](../concepts/pipelines.md): how a change becomes finished work.
 - [Health and the dashboard](monitoring.md): the four words and the **Overview** tab.
-- [The media service](media-service.md): where the model work and much of the media work runs.
+- [The media service](../ems/index.md): where the model work and much of the media work runs.
 - [Performance and sizing](performance.md): what the slots should be on your machine.
 - [Services and logs](services-logs.md): starting, stopping and reading the workers.
 - [Troubleshooting](troubleshooting.md): when photos do not get thumbnails, faces or dates.

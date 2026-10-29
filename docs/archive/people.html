@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>People and faces – EiN documentation</title>
+    <meta name="description" content="EiN finds the faces in your photos and videos and the voices in your recordings, and groups the ones that belong to the same person. This page is for everyone in the family who names those people, corrects what recognition got wrong, and browses a person's pictures.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/archive/people.html">
+    <meta property="og:title" content="People and faces – EiN documentation">
+    <meta property="og:description" content="EiN finds the faces in your photos and videos and the voices in your recordings, and groups the ones that belong to the same person. This page is for everyone in the family who names those people, corrects what recognition got wrong, and browses a person's pictures.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/archive/people.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html" aria-current="page">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">People and faces</span></button>
+        <header class="docs-head">
+          <p class="crumb">Archive</p>
+          <h1>People and faces</h1>
+        </header>
+        <article class="prose">
+<p>EiN finds the faces in your photos and videos and the voices in your recordings, and groups the ones that belong to the same person. This page is for everyone in the family who names those people, corrects what recognition got wrong, and browses a person&#39;s pictures.</p>
+<h2 id="how-faces-become-people">How faces become people<a class="anchor" href="#how-faces-become-people" aria-label="Link to this section"></a></h2>
+<p>You do not have to tag anyone for recognition to start. Every photo, and frames sampled through every video, is searched for faces as it arrives, and every face that is found goes through the same three-way decision:</p>
+<ol>
+<li><strong>It joins a person</strong> when it looks enough like faces of that person in other photos, and the comparison clearly favours that one person over everyone else. That person may be named or still unidentified.</li>
+<li><strong>It starts an unidentified person</strong> when it matches nobody, but is clear and large enough to be worth treating as someone new. That person gets a placeholder name such as <code>Unknown 4XK9QM</code> and waits on the <a href="#name-the-people-recognition-found">Unidentified people</a> page for someone to say who it is.</li>
+<li><strong>It stays unknown</strong> when it is too small or too unsure to start anyone. In the viewer its box reads <strong>Unassigned</strong>.</li>
+</ol>
+<p>The next photo of the same stranger finds the first one, sees that it already belongs to an unidentified person, and joins that person instead of starting another. So when you name an unidentified person you name every face in the group at once, and new pictures of them join the named person by themselves from then on.</p>
+<p>Two faces in the same photo are never made the same person automatically. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.</p>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 552" role="img" aria-label="A detected face with three outcomes: it joins a person it clearly matches, named or not; it starts an unidentified person when it matches nobody but is clear and at least 48 px across; or it stays unknown, marked Unassigned; below them the actions a person can take: Name or Add to someone, Split off as someone new or Move to…, and Not a person or Not a face">
+  <title>Faces become people</title>
+  <defs>
+    <marker id="archive-people-md-1-faces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="552" rx="14" fill="#1a1e27" />
+
+  
+  <text x="24" y="46" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Recognition decides</text>
+  <rect x="296" y="64" width="208" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="400" y="89" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">A detected face</text>
+  <text x="400" y="109" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">in a photo or a video</text>
+  <line x1="360" y1="120" x2="150" y2="166" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-people-md-1-faces-arrow)" />
+  <line x1="400" y1="120" x2="400" y2="166" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-people-md-1-faces-arrow)" />
+  <line x1="440" y1="120" x2="650" y2="166" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-people-md-1-faces-arrow)" />
+
+  
+  <rect x="24" y="168" width="240" height="104" rx="10" fill="#da77f2" fill-opacity="0.12" stroke="#da77f2" stroke-width="1.25" />
+  <text x="44" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Joins a person</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="44" y="220">looks clearly like their faces</tspan>
+    <tspan x="44" y="238">in other photos, named or not</tspan>
+  </text>
+  <text x="44" y="258" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">never two faces of one photo</text>
+
+  
+  <rect x="280" y="168" width="240" height="104" rx="10" fill="#da77f2" fill-opacity="0.12" stroke="#da77f2" stroke-width="1.25" />
+  <text x="300" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Starts a person</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="300" y="220">matches nobody, but is clear</tspan>
+    <tspan x="300" y="238">and 48 px across or more</tspan>
+  </text>
+  <text x="300" y="258" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">Unknown 4XK9QM</text>
+
+  
+  <rect x="536" y="168" width="240" height="104" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="556" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Stays unknown</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="556" y="220">too small or too unsure</tspan>
+    <tspan x="556" y="238">to start anyone</tspan>
+  </text>
+  <text x="556" y="258" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">its box reads Unassigned</text>
+
+  
+  <text x="24" y="318" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Then a person can</text>
+
+  
+  <rect x="24" y="336" width="240" height="162" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="366" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Who is this?</text>
+  <rect x="44" y="382" width="72" height="28" rx="14" fill="#40c057" fill-opacity="0.12" stroke="#40c057" stroke-width="1.25" />
+  <text x="80.0" y="401.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Name</text>
+  <rect x="44" y="418" width="172" height="28" rx="14" fill="#40c057" fill-opacity="0.12" stroke="#40c057" stroke-width="1.25" />
+  <text x="130.0" y="437.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#eceff4">Add to Ruby Wrenfield</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="44" y="470">every face in the group</tspan>
+    <tspan x="44" y="488">takes the name</tspan>
+  </text>
+
+  
+  <rect x="280" y="336" width="240" height="162" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="300" y="366" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Take some faces out</text>
+  <rect x="300" y="382" width="196" height="28" rx="14" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="398.0" y="401.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#eceff4">Split off as someone new</text>
+  <rect x="300" y="418" width="96" height="28" rx="14" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="348.0" y="437.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Move to…</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="300" y="470">to a new person of their</tspan>
+    <tspan x="300" y="488">own, or to one you pick</tspan>
+  </text>
+
+  
+  <rect x="536" y="336" width="240" height="162" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="556" y="366" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Say what is not a person</text>
+  <rect x="556" y="382" width="120" height="28" rx="14" fill="#fd7e14" fill-opacity="0.12" stroke="#fd7e14" stroke-width="1.25" />
+  <text x="616.0" y="401.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Not a person</text>
+  <rect x="556" y="418" width="104" height="28" rx="14" fill="#fd7e14" fill-opacity="0.12" stroke="#fd7e14" stroke-width="1.25" />
+  <text x="608.0" y="437.0" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Not a face</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="556" y="470">locked without a name;</tspan>
+    <tspan x="556" y="488">nothing is deleted</tspan>
+  </text>
+
+  <text x="400" y="530" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">What a person decides is kept: recognition never undoes it.</text>
+</svg><figcaption>Recognition decides on its own, and anything a person decides afterwards is kept.</figcaption></figure>
+<p>The work is done by the <a href="../ems/index.html">media service</a> on your own machine; no photo, face or voice is sent anywhere to be analysed. Without the media service no faces are found, and they are found once it runs again. After a large import it takes a while for every picture to be looked at; the <strong>Dashboard</strong> reads <strong>Catching up</strong> until it is done (see <a href="../admin/monitoring.html">Health and the dashboard</a>).</p>
+<p>Faces are found in the pictures waiting in your <a href="staging.html">staging area</a> too, before you file them into albums.</p>
+<h2 id="the-people-page">The People page<a class="anchor" href="#the-people-page" aria-label="Link to this section"></a></h2>
+<p>Open <strong>People</strong> in the sidebar, under <strong>Browse</strong>.</p>
+<figure class="shot"><a href="../../assets/shots/people@2x.webp"><img src="../../assets/shots/people.webp" srcset="../../assets/shots/people.webp 1x, ../../assets/shots/people@2x.webp 2x" alt="The People page: a header with &quot;19 people&quot;, a filter box, a &quot;383 unidentified&quot; button and the &quot;Most pictured&quot; sort, above a grid of cards with each person's face, name and number of pictures" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Everyone with a name, the most pictured first; the button at the top leads to the people still waiting for one.</figcaption></figure>
+<ul>
+<li>The header counts the named people (<strong>19 people</strong>). The filter box (<strong>Filter people…</strong>) matches the name and the full name as you type.</li>
+<li><strong>N unidentified</strong> opens the people recognition found but nobody has named yet. It is there only when there are some. On a phone it is an icon with the count as a badge.</li>
+<li><strong>Sort</strong> offers <strong>Most pictured</strong> (the default), <strong>Name (A-Z)</strong> and <strong>Name (Z-A)</strong>. Your choice is remembered in this browser. A name that starts with <code>?</code>, a placeholder for someone known only from a family record, sorts after the real names.</li>
+<li>Each card shows the person&#39;s cover picture, their name and how many pictures they are in, or their full name when they are in none. Click a card to open the <a href="#a-persons-page">person&#39;s page</a>.</li>
+</ul>
+<p>The number on a card counts the faces and voices of that person in the library, so a recording they are heard in counts too. Faces and voices in files still waiting in someone&#39;s staging area count once those files are filed.</p>
+<p>When nobody has been named yet, the page says <strong>No people yet</strong> and &quot;Face recognition finds people in the pictures; name them under Unidentified, or add someone here.&quot; with a <strong>New person</strong> button.</p>
+<p>You can also find a person from the search box in the top bar, or with <code>@</code> and their name on the Search, Media, Year and Map pages; see <a href="../guide/search.html">Search and the finder</a>.</p>
+<h2 id="name-the-people-recognition-found">Name the people recognition found<a class="anchor" href="#name-the-people-recognition-found" aria-label="Link to this section"></a></h2>
+<p>Click <strong>N unidentified</strong> on the People page, or open <code>/people/unknown</code>.</p>
+<figure class="shot"><a href="../../assets/shots/people-unknown@2x.webp"><img src="../../assets/shots/people-unknown.webp" srcset="../../assets/shots/people-unknown.webp 1x, ../../assets/shots/people-unknown@2x.webp 2x" alt="The Unidentified people page: the header &quot;383 unidentified · 200 loaded&quot; with &quot;Most found&quot; and &quot;Any count&quot;, and cards that each show one large face, three small ones, a &quot;10 FACES&quot; badge and a &quot;Who is this?&quot; box" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each card is one person recognition put together; typing a name in its box names every face in it.</figcaption></figure>
+<p>The page is headed <strong>Unidentified people</strong>: &quot;Faces and voices recognized as the same person, but nobody has said who they are.&quot; Under it, <strong>N unidentified</strong> says how many there are, and <strong>N loaded</strong> how many the page has fetched so far.</p>
+<ul>
+<li><strong>Sort</strong> offers <strong>Most found</strong> (the default) and <strong>Newest</strong>.</li>
+<li><strong>Found</strong> shows only people found at least so many times: <strong>Any count</strong>, <strong>2+ times</strong>, <strong>5+ times</strong>, <strong>10+ times</strong> or <strong>50+ times</strong>. A face and a recording the voice is heard in count one time each.</li>
+<li>Each card shows one large glimpse and up to three small ones: the best faces first, then round play buttons that play the voice&#39;s longest turn. The badges say <strong>N faces</strong> and <strong>heard in N</strong> (recordings).</li>
+<li><strong>Load more (N of M)</strong> at the foot fetches the next cards.</li>
+</ul>
+<p>Both choices are kept in the address, so a link opens the same view.</p>
+<p>To name someone from their card:</p>
+<ol>
+<li>Click in the card&#39;s <strong>Who is this?</strong> box and type the name, for example <code>Ruby Wrenfield</code>. Once you type, the box lists the matching people who already have a name.</li>
+<li>Press <kbd>Enter</kbd>.</li>
+</ol>
+<p>What happens depends on the name:</p>
+<ul>
+<li><strong>A new name</strong> names the person. They move to the People page with every face and voice they hold, and a message says <strong>Named Ruby Wrenfield</strong>.</li>
+<li><strong>The name of someone who already exists</strong> adds the faces and voices to that person instead of making a second one, and the message says <strong>Added to Ruby Wrenfield</strong>. The name must match exactly, apart from capital letters, so pick it from the list rather than typing it differently.</li>
+</ul>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>Before you name a card you are unsure of, open it. A card shows at most four glimpses; the <a href="#look-at-everything-before-you-decide">review</a> shows every face and recording, which is where you notice that two people were put together.</p>
+</aside>
+<p>When nobody is waiting, the page says &quot;Nobody unidentified. Everyone recognized so far has a name.&quot; With a <strong>Found</strong> filter on, it says, for example, &quot;Nobody unidentified found 5 or more times.&quot;</p>
+<h2 id="look-at-everything-before-you-decide">Look at everything before you decide<a class="anchor" href="#look-at-everything-before-you-decide" aria-label="Link to this section"></a></h2>
+<p>Click a card, anywhere but its name box and its tick box, to open the review. Its title is the placeholder name, with the <strong>N faces</strong> and <strong>heard in N</strong> badges beside it.</p>
+<ul>
+<li>At the top, the <strong>Who is this?</strong> box (&quot;A new name, or someone you already have&quot;) works like the card&#39;s. Its button reads <strong>Name</strong>, or <strong>Add to &lt;name&gt;</strong> when the name is someone who already exists. <strong>Not a person</strong> beside it is described in <a href="#say-what-is-not-a-person">Say what is not a person</a>.</li>
+<li><strong>Faces</strong> shows every face of this person. Click a face to open the photo it came from in the viewer; the arrows then step through the photos of the faces shown. <strong>Load more (N of M)</strong> fetches more when there are many.</li>
+<li><strong>Voice</strong> (&quot;heard in N recordings&quot;) shows a tile for each recording the voice is heard in. The round button plays the voice&#39;s longest turn there, and <strong>Open in the lightbox</strong> opens the recording at that moment. <strong>Pick all</strong> picks every recording.</li>
+</ul>
+<p>To pick faces or recordings, tick the box in their corner. Once something is picked, a click on a face picks it too instead of opening its photo; <kbd>Shift</kbd>+click picks a range, and <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) picks everything shown. <kbd>Esc</kbd> closes an open photo first, then clears what is picked, then closes the review.</p>
+<p>The review has its own address, <code>/people/unknown?person=&lt;id&gt;</code>, so you can send it to a relative who may know who it is.</p>
+<h3 id="take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)<a class="anchor" href="#take-some-faces-out-split-off-move-to" aria-label="Link to this section"></a></h3>
+<p>When the review shows faces of more than one person, pick the ones that do not belong. A bar appears with <strong>N faces picked</strong> and these actions:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Dialog</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Split off as someone new</strong></td>
+<td><strong>Split off N faces?</strong> → <strong>Split off</strong></td>
+<td>The picked faces and recordings become a new unidentified person of their own, for you to name afterwards or add to someone.</td>
+</tr>
+<tr>
+<td><strong>Move to…</strong></td>
+<td><strong>Move N faces to someone?</strong>, then <strong>Who they are</strong> → <strong>Move</strong></td>
+<td>They move to the named person you pick, and count as decided by a human, so no later pass moves them again.</td>
+</tr>
+<tr>
+<td><strong>Not a person</strong></td>
+<td><strong>N faces: not a person?</strong> → <strong>Unassign and lock</strong></td>
+<td>They lose their identity and are locked, so recognition leaves them alone. Nothing is deleted.</td>
+</tr>
+<tr>
+<td><strong>Clear</strong></td>
+<td></td>
+<td>Unpicks everything.</td>
+</tr>
+</tbody></table>
+</div>
+<p>When you have picked everything the person holds, <strong>Split off as someone new</strong> and <strong>Move to…</strong> are greyed out, with the note &quot;That is everything they have. To give all of it to someone, name them or add them to someone above instead. Not a person removes them.&quot;</p>
+<h3 id="group-similar-faces">Group similar faces<a class="anchor" href="#group-similar-faces" aria-label="Link to this section"></a></h3>
+<p>Recognition sometimes joins two people through one weak resemblance, and four glimpses on a card will not show it. With three faces or more, the review has an <strong>Adjust group threshold</strong> switch beside <strong>Faces</strong> (and with three recordings or more, one beside <strong>Voice</strong>):</p>
+<ol>
+<li>Turn on <strong>Adjust group threshold</strong>. EiN compares every face of this person with every other (&quot;Comparing every face against every other&quot;), once.</li>
+<li>Drag the <strong>How alike</strong> slider. The faces are laid out in groups, <strong>Largest group</strong> first, then <strong>Group 2</strong> and onward, each with its number of faces. The slider starts where the comparison suggests the groups part.</li>
+<li>Tick a group&#39;s box to pick all of it, then use <strong>Split off as someone new</strong>, <strong>Move to…</strong> or <strong>Not a person</strong> as above.</li>
+</ol>
+<p>Only the 30 largest groups are shown; the rest are counted under them (&quot;Move the slider left to bring them up here.&quot;). A box someone drew by hand has nothing to compare and is in no group.</p>
+<h2 id="fold-several-unidentified-people-into-one">Fold several unidentified people into one<a class="anchor" href="#fold-several-unidentified-people-into-one" aria-label="Link to this section"></a></h2>
+<p>Recognition often splits one person into a large group and a few small ones. To join them:</p>
+<ol>
+<li>On the <strong>Unidentified people</strong> page, tick the box in the corner of each card. Once one is ticked, a plain click on a card ticks it too; <kbd>Ctrl</kbd>+<kbd>A</kbd> ticks every loaded card and <kbd>Esc</kbd> clears.</li>
+<li>In the bar at the bottom, press <strong>Merge</strong>. It needs two cards or more.</li>
+<li>The dialog <strong>Merge N into one person?</strong> names the one that survives: the card with the most faces, or the older one when two have as many. &quot;&lt;name&gt; survives with all N faces. It keeps its own entry and stays unidentified — name it afterwards.&quot; It lists the others with their faces.</li>
+<li>Press <strong>Merge</strong>. The other entries are removed, and their faces are marked as decided by a human, so no later pass undoes it.</li>
+<li>Name the person that is left, from its card or its review.</li>
+</ol>
+<p>The web interface merges only unidentified people. To fold one named person into another, for example a second Ruby made by a typo, use <code>person-merge</code> in the <a href="../shell/terminal.html">terminal</a>: faces, voices, events, relations and every other link move to the person you keep, and the other is removed. <code>--dry-run</code> shows what would move without changing anything.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+person-merge --dry-run /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield
+person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code></pre></div>
+<p>The last path is the person who stays. See <a href="commands.html#person-merge"><code>person-merge</code></a> in the command reference.</p>
+<h2 id="say-what-is-not-a-person">Say what is not a person<a class="anchor" href="#say-what-is-not-a-person" aria-label="Link to this section"></a></h2>
+<p>A poster, a statue, a doll, a pattern in the wallpaper or the back of a head can all be taken for a face. Saying so keeps recognition from trying again:</p>
+<ul>
+<li><strong>Several cards at once:</strong> tick them on the <strong>Unidentified people</strong> page and press <strong>Not a person</strong> in the bar.</li>
+<li><strong>One person:</strong> press <strong>Not a person</strong> at the top of their review.</li>
+</ul>
+<p>The dialog (<strong>Not a person?</strong>, or <strong>N: not a person?</strong> for several) says what happens: every face and recording they hold loses its identity and is locked, so recognition leaves it alone from now on, and the entry is removed. &quot;The photos and recordings themselves are untouched.&quot; Confirm with <strong>Not a person</strong>.</p>
+<ul>
+<li><strong>Some faces of one person:</strong> pick them in the review and press <strong>Not a person</strong> in the bar under it. The dialog (<strong>N faces: not a person?</strong>) locks only those, and the person keeps the rest. Confirm with <strong>Unassign and lock</strong>.</li>
+</ul>
+<p>For faces wrongly given to someone who already has a name, use <strong>Not a face</strong> on their <a href="#correct-a-persons-faces">Faces tab</a>.</p>
+<h2 id="name-a-face-in-the-viewer">Name a face in the viewer<a class="anchor" href="#name-a-face-in-the-viewer" aria-label="Link to this section"></a></h2>
+<p>You can also name people while you look at a picture. The <a href="viewer.html">viewer</a> describes it fully; in short:</p>
+<ul>
+<li>Press <kbd>f</kbd>, or choose <strong>Pin faces</strong> in the <strong>More</strong> (⋮) menu, to show every face box with its name. Hovering a box, or a name in the details panel, lights up the other.</li>
+<li>Click a named box to open that person&#39;s page. Click the box of an unidentified person to get a <strong>Who is this?</strong> box: type the name and press <kbd>Enter</kbd> or the check mark. This always makes a new person, even when someone of that name exists; to add the faces to someone who already exists, use the review instead.</li>
+<li>In the details panel, under the people in the picture, an unidentified person is listed by a crop of their face and their placeholder name. Click it to open their review over the viewer.</li>
+<li>On a computer, <strong>Edit faces</strong> in the pencil menu lets you select a box and press its name (&quot;Change who this is&quot;). The <strong>Who is this?</strong> dialog offers <strong>Someone I know</strong> (pick them under <strong>Who it is</strong>), <strong>Someone new</strong> (a new unidentified person, for you to name now or later) and, for a face recognition found, <strong>Let recognition decide</strong> (matched again against everyone except the person it is on now). Confirm with <strong>Move</strong> or <strong>Match again</strong>. This is also how you give a name to a face marked <strong>Unassigned</strong>.</li>
+<li>In <strong>Edit faces</strong> you can also drag a new box around a face recognition missed. It becomes a new unidentified person, and its review opens for you to name it. A box drawn by hand names the person in that picture, but is not used to recognise them in others.</li>
+</ul>
+<p><strong>Edit faces</strong> is offered on a computer, on photos you may change.</p>
+<h2 id="create-a-person-by-hand">Create a person by hand<a class="anchor" href="#create-a-person-by-hand" aria-label="Link to this section"></a></h2>
+<p>Someone who is in no picture yet, a great-grandparent for the family tree for example, can be added by hand:</p>
+<ol>
+<li>Open <strong>Create</strong> (the plus in the top bar) and choose <strong>Person</strong>, or press <strong>New person</strong> on an empty People page.</li>
+<li>In <strong>Create Person</strong>, fill in <strong>Name</strong> (required), and if you like <strong>Full name</strong> and <strong>Gender</strong> (<strong>Female</strong>, <strong>Male</strong>, <strong>Other</strong> or <strong>Unknown</strong>).</li>
+<li>Press <strong>Create</strong>. The new person&#39;s page opens.</li>
+</ol>
+<p>Look on the People page first, so that you do not add someone who is already there: the dialog does not look for someone of the same name. The address of the new page is made from the name, and if a person already has that address the dialog shows an error instead; give the new person a name that tells the two apart.</p>
+<p>Later faces only join a person through faces that already belong to them, so a person made by hand gets pictures once you give them a face: add an unidentified person to them by typing their name, or move faces to them with <strong>Move to…</strong> or <strong>Someone I know</strong>.</p>
+<h2 id="a-persons-page">A person&#39;s page<a class="anchor" href="#a-persons-page" aria-label="Link to this section"></a></h2>
+<p>Click a person on the People page, a name in the viewer, or a person in search results.</p>
+<figure class="shot"><a href="../../assets/shots/person@2x.webp"><img src="../../assets/shots/person.webp" srcset="../../assets/shots/person.webp 1x, ../../assets/shots/person@2x.webp 2x" alt="Peggy Wrenfield's page: her cover picture, the names &quot;Peggy Wrenfield&quot; and &quot;Margaret Wrenfield&quot;, &quot;1934 – 2021 · died aged 86&quot; and &quot;5 photos · 1956–2019&quot;, Share and Edit buttons, the tabs Timeline, Info, Media, Faces, Heard in, Family and Homes, and the Timeline tab listing her death, moves, an album and a partnership by year" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The header places a person in time; the tabs hold everything else.</figcaption></figure>
+<p>The header shows:</p>
+<ul>
+<li>their cover picture and name, the full name under it, and &quot;Born as &lt;birth name&gt;&quot; when that is different;</li>
+<li>a life line: &quot;1934 – 2021 · died aged 86&quot; for someone who has died, &quot;Born 1958 · 68&quot; for someone living. A <code>~</code> before the age means it is approximate, because the birth date has no day;</li>
+<li>where they live now, linking to the location, their contact details (not on a phone; the Info tab lists them), and how many photos they are in, over which years (&quot;34 photos · 1968–2025&quot;);</li>
+<li>allergies, marked with a warning sign, their labels, and the description.</li>
+</ul>
+<p>If you may change the person, the header has <strong>Share</strong> and <strong>Edit</strong>, and under ⋮ <strong>Add event</strong>, <strong>Split faces…</strong> (administrators only) and <strong>Move to trash</strong>. <strong>Share</strong> shares the person&#39;s page and what hangs off it, not the photos they are in; see <a href="../guide/sharing.html">Sharing</a>. <strong>Move to trash</strong> returns you to the People page with &quot;&lt;name&gt; moved to the trash&quot; and <strong>Undo</strong>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Timeline</strong></td>
+<td>Their life by year, the latest first: birth and death, events, moves, partnerships, their children&#39;s births, and the albums they appear in.</td>
+</tr>
+<tr>
+<td><strong>Info</strong></td>
+<td>Everything recorded about them: <strong>Person</strong> (Name, Full name, Born as, Gender, Born, Died, Age or Age at death, Photos), <strong>Contact</strong>, <strong>Allergies</strong>, <strong>Homes</strong> with the years, <strong>Family</strong> (each relative by role) and <strong>About</strong>.</td>
+</tr>
+<tr>
+<td><strong>Media</strong></td>
+<td>Every photo and video they are in, newest first, with the time rail at the side for jumping through the years.</td>
+</tr>
+<tr>
+<td><strong>Faces</strong></td>
+<td>Every face of theirs, as a grid of crops. See <a href="#correct-a-persons-faces">Correct a person&#39;s faces</a>.</td>
+</tr>
+<tr>
+<td><strong>Heard in</strong></td>
+<td>Every recording they speak in. See <a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a>.</td>
+</tr>
+<tr>
+<td><strong>Family</strong></td>
+<td>The family tree. See <a href="family.html">Family tree, events and homes</a>.</td>
+</tr>
+<tr>
+<td><strong>Homes</strong></td>
+<td>Where they have lived, with the years. See <a href="family.html">Family tree, events and homes</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The open tab is kept in the address (<code>?tab=faces</code>, <code>?tab=voices</code> and so on), so you can link straight to it.</p>
+<p>When there is nothing to show, the Timeline says &quot;Nothing recorded for &lt;name&gt; yet. Add an event to record something.&quot;, and the Media tab &quot;No photos of &lt;name&gt; yet. They appear here once tagged, or once a detected face is assigned to them.&quot;</p>
+<p>On the <strong>Media</strong> tab you can select pictures as in an album. If you may change the person, <strong>Set as cover</strong> in the selection bar makes the one selected picture their cover; <strong>Set time</strong> changes the capture time of pictures you may change (see <a href="dates-places.html">Dates and places of pictures</a>).</p>
+<p>On a phone, the tabs show only their icons, except the one that is open, and the header&#39;s buttons fold into ⋮.</p>
+<figure class="shot"><a href="../../assets/shots/phone-person@2x.webp"><img src="../../assets/shots/phone-person.webp" srcset="../../assets/shots/phone-person.webp 1x, ../../assets/shots/phone-person@2x.webp 2x" alt="Helen Okafor's page on a phone: her picture across the top, &quot;Born 1958 · 68&quot;, Crouch End and &quot;34 photos · 1968–2025&quot;, a row with the Timeline tab and six tab icons, and her timeline of albums by year" width="390" height="844" loading="lazy" decoding="async"></a><figcaption>On a phone the same page fits one column; the tab icons are in the same order as on a computer.</figcaption></figure>
+<h2 id="correct-a-persons-faces">Correct a person&#39;s faces<a class="anchor" href="#correct-a-persons-faces" aria-label="Link to this section"></a></h2>
+<p>The <strong>Faces</strong> tab shows every face assigned to the person, as crops in a grid. Click a crop to open the photo it came from in the viewer; the arrows step through the photos in the order of the grid. While there are more faces than are loaded, a note says &quot;N of M loaded&quot;, and more load as you scroll.</p>
+<figure class="shot"><a href="../../assets/shots/faces@2x.webp"><img src="../../assets/shots/faces.webp" srcset="../../assets/shots/faces.webp 1x, ../../assets/shots/faces@2x.webp 2x" alt="Helen Okafor's Faces tab: a grid of crops of her face from childhood to old age, under her header and the tabs" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A wrong face stands out among the right ones; select it and say who it really is.</figcaption></figure>
+<p>Select faces as you select pictures in an album: hover a crop and tick its box, <kbd>Shift</kbd>+click for a range, or long-press on a phone. The selection bar then offers:</p>
+<ul>
+<li><strong>Download</strong>: the selected crops, as one zip named &quot;&lt;name&gt; faces&quot; when there are several.</li>
+<li><strong>Set as cover</strong>: makes the one selected crop the person&#39;s picture.</li>
+<li><strong>Not &lt;name&gt;</strong>: takes the faces off this person.</li>
+<li><strong>Is &lt;name&gt;</strong>: only in the <strong>Doubtful</strong> view, described below.</li>
+</ul>
+<p><strong>Not &lt;name&gt;</strong> opens the dialog <strong>Not &lt;name&gt;?</strong>, with the number of faces under its title and four choices:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Let recognition decide</strong> (the default)</td>
+<td>Each face is matched again against everyone except this person. It joins whoever it looks like, or becomes a new unidentified person. It is never put back on this person.</td>
+</tr>
+<tr>
+<td><strong>Someone I know</strong></td>
+<td>The faces move to the person you pick under <strong>Who it is</strong>.</td>
+</tr>
+<tr>
+<td><strong>One new unidentified person</strong></td>
+<td>All the faces are the same person, not yet named. Name them later from the unidentified list.</td>
+</tr>
+<tr>
+<td><strong>Not a face</strong></td>
+<td>They lose their identity and are locked, so recognition leaves them alone from now on.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Press <strong>Move</strong>, or <strong>Unassign and lock</strong> for <strong>Not a face</strong>. After <strong>Let recognition decide</strong>, a short report (<strong>Faces moved</strong>) says where the faces went, for example &quot;2 faces matched to Peggy Wrenfield&quot;, &quot;3 faces became unidentified people&quot; or &quot;1 face left unassigned — too small or unclear to start a new person&quot;. Press <strong>Done</strong>.</p>
+<p>If a face that was the person&#39;s cover leaves them, they get a new cover from their remaining faces.</p>
+<h3 id="doubtful-faces">Doubtful faces<a class="anchor" href="#doubtful-faces" aria-label="Link to this section"></a></h3>
+<p>Some archives come with names from an older system, brought in by the importer module as tags on the pictures. An administrator can check those names with the <code>face-audit</code> command, which marks a named face as doubtful when the closest named face in another photo belongs to somebody else. The audit does not run by itself. See <a href="commands.html#face-audit"><code>face-audit</code></a>.</p>
+<p>When a person has doubtful faces, the Faces tab shows a switch: <strong>All faces</strong> or <strong>Doubtful (N)</strong>, &quot;Faces whose closest named face in another photo is somebody else&quot;. Each doubtful crop is badged with who it looks like, for example &quot;like Peggy Wrenfield&quot;.</p>
+<ol>
+<li>Choose <strong>Doubtful (N)</strong>.</li>
+<li>Select the faces that are someone else and press <strong>Not &lt;name&gt;</strong>. When they all look like the same person, the dialog opens on <strong>Someone I know</strong> with that person already picked.</li>
+<li>Select the faces that are right and press <strong>Is &lt;name&gt;</strong>. They stay, as a human&#39;s decision, and the audit leaves them alone from then on.</li>
+</ol>
+<p>When none are left, the tab says &quot;No doubtful faces of &lt;name&gt; left.&quot;</p>
+<h2 id="recordings-a-person-is-heard-in">Recordings a person is heard in<a class="anchor" href="#recordings-a-person-is-heard-in" aria-label="Link to this section"></a></h2>
+<p>The <strong>Heard in</strong> tab lists, under &quot;Heard in N recordings&quot;, a tile for each recording the person speaks in, those they speak most in first. The round button on a tile plays their longest turn in that recording. Hovering the name shows the recording&#39;s date and how long they speak in it (&quot;speaks 1:42 in it&quot;), and <strong>Open in the lightbox</strong> opens the recording at their turn.</p>
+<p>To take a recording off the person, tick its tile and press <strong>Not this person (N)</strong>. Their voice in it loses its identity and is locked, so recognition does not give it back. Nothing asks first.</p>
+<p>If the person speaks in no recording, the tab says &quot;Not heard in any recording yet.&quot; Naming a voice in a transcript, and seeing who speaks when, is in <a href="viewer.html">the viewer</a>.</p>
+<h2 id="split-a-person-who-is-really-two">Split a person who is really two<a class="anchor" href="#split-a-person-who-is-really-two" aria-label="Link to this section"></a></h2>
+<p>Naming an unidentified person approves every face in it. If it turns out to have held two people, an administrator can take them apart with <strong>Split faces…</strong> under ⋮ on the person&#39;s page. The dialog <strong>Split &lt;name&gt;</strong> compares the person&#39;s faces with each other, more strictly than recognition did.</p>
+<ol>
+<li>Drag the <strong>Similarity</strong> slider until the people come apart; the badge says how many groups there are. <strong>One group</strong>, <strong>Split in two</strong>, <strong>Suggested</strong> and <strong>Split off all but the largest</strong> are shortcuts.</li>
+<li>For each group, choose <strong>Keep</strong>, <strong>Split off</strong> (a new unidentified person; not offered for a group of one face), <strong>Merge into…</strong> (pick a named person) or <strong>Not a person</strong>. Every group starts on <strong>Keep</strong>.</li>
+<li>Click a face to see the photo it came from; the arrows then step through that group, which is the way to check that the same person keeps turning up.</li>
+<li>Read the summary at the foot, for example &quot;40 faces stay · 1 new unidentified person&quot;, and press <strong>Apply to N groups</strong>.</li>
+</ol>
+<p>At least one group has to stay: moving all of them is a rename, not a split. Only the 30 largest groups get a card; the smaller ones stay as they are. A box drawn by hand has nothing to compare and stays where it is.</p>
+<h2 id="edit-a-person">Edit a person<a class="anchor" href="#edit-a-person" aria-label="Link to this section"></a></h2>
+<p>Press <strong>Edit</strong> on the person&#39;s page to open <strong>Edit person</strong>. Leave an optional field empty to remove it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What to enter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Name</strong></td>
+<td>The name shown everywhere. Required.</td>
+</tr>
+<tr>
+<td><strong>Full name</strong></td>
+<td>Their whole name, shown under the name.</td>
+</tr>
+<tr>
+<td><strong>Birth name</strong></td>
+<td>The name they were born with, shown as &quot;Born as&quot;.</td>
+</tr>
+<tr>
+<td><strong>Gender</strong></td>
+<td><strong>Female</strong>, <strong>Male</strong>, <strong>Other</strong> or <strong>Unknown</strong>.</td>
+</tr>
+<tr>
+<td><strong>Born</strong>, <strong>Died</strong></td>
+<td>A year, a month or a day: <code>1934</code>, <code>1934-05</code> or <code>1934-05-20</code>. Without a day, their age is shown as approximate.</td>
+</tr>
+<tr>
+<td><strong>Contact information</strong></td>
+<td><strong>Add contact</strong> adds a row with a <strong>Type</strong> (for example &quot;Email, phone, address…&quot;) and the <strong>Details</strong>. An e-mail address becomes a link that writes to it, and a phone number one that calls it.</td>
+</tr>
+<tr>
+<td><strong>Allergies</strong></td>
+<td>Shown with a warning sign in the header.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Free text, with Markdown.</td>
+</tr>
+<tr>
+<td><strong>Labels</strong></td>
+<td>Words to find the person by. A space starts the next label.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Press <strong>Save</strong>. If something is missing, the dialog says &quot;a name is needed&quot; or &quot;each contact needs both a type and details&quot;. Events, parents, partners, children and homes are not in this dialog; see <a href="family.html">Family tree, events and homes</a>.</p>
+<h2 id="cover-pictures">Cover pictures<a class="anchor" href="#cover-pictures" aria-label="Link to this section"></a></h2>
+<p>A named person without a cover gets one by themselves: the crop of one of their own faces. Faces someone named or confirmed come first, then photos where they are the only face, then clear faces looking into the camera, then the largest. A cover you choose yourself, with <strong>Set as cover</strong> on the Faces or Media tab, is never replaced by another pick. A cover is replaced only when it no longer works: the picture is gone, or it is the crop of a face that has since been taken off the person, because their card would then show somebody else.</p>
+<h2 id="what-ein-keeps-of-your-decisions">What EiN keeps of your decisions<a class="anchor" href="#what-ein-keeps-of-your-decisions" aria-label="Link to this section"></a></h2>
+<p>Recognition only decides about faces nobody has decided about. Anything a person says is kept, and no later automatic pass undoes it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You</th>
+<th>Afterwards</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name an unidentified person</td>
+<td>Their faces count as named by a human. New faces that look like them join them by themselves.</td>
+</tr>
+<tr>
+<td>Add someone to an existing person, or <strong>Merge</strong></td>
+<td>The faces are marked as decided by a human.</td>
+</tr>
+<tr>
+<td><strong>Move to…</strong>, <strong>Someone I know</strong></td>
+<td>The faces stay with the person you picked.</td>
+</tr>
+<tr>
+<td><strong>Split off as someone new</strong>, <strong>One new unidentified person</strong></td>
+<td>The faces stay together as the new person.</td>
+</tr>
+<tr>
+<td><strong>Not a person</strong>, <strong>Not a face</strong>, <strong>Not this person</strong></td>
+<td>The faces and voices are locked without a name.</td>
+</tr>
+<tr>
+<td><strong>Let recognition decide</strong></td>
+<td>The faces are never matched back to the person you took them from.</td>
+</tr>
+<tr>
+<td><strong>Is &lt;name&gt;</strong></td>
+<td>The audit no longer questions the faces.</td>
+</tr>
+<tr>
+<td><strong>Set as cover</strong></td>
+<td>Your cover stays, as long as the picture is there and the face is still theirs.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Changing the recognition settings does not touch these decisions either.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><strong>No faces are found at all.</strong> Recognition needs the media service. Ask your administrator to check the <strong>Dashboard</strong>; see <a href="../ems/index.html">The media service</a>.</p>
+<p><strong>A face in a photo has no box.</strong> Faces that are very small, blurred or turned far away are not kept. Draw a box around it with <strong>Edit faces</strong> in the viewer, as described in <a href="#name-a-face-in-the-viewer">Name a face in the viewer</a>.</p>
+<p><strong>One person is spread over many unidentified cards.</strong> Tick the cards and <a href="#fold-several-unidentified-people-into-one">merge them</a>, or type the same name into each card&#39;s box.</p>
+<p><strong>An unidentified person holds two people.</strong> Open the review and use <a href="#group-similar-faces">Group similar faces</a>. For a named person, an administrator uses <a href="#split-a-person-who-is-really-two">Split faces…</a>.</p>
+<p><strong>A person has someone else&#39;s faces.</strong> Open their <strong>Faces</strong> tab, select the wrong ones and press <strong>Not &lt;name&gt;</strong>.</p>
+<p><strong>A person&#39;s card shows more pictures than their page.</strong> The card counts faces and voices, so each recording the person is heard in counts too.</p>
+<p><strong>An action fails.</strong> The reason appears in red under the bar or in the dialog. A change you are not allowed to make, to a picture or a person you may only view, is refused; ask whoever owns it, or your administrator.</p>
+<p><strong>Recognition is too eager or too cautious.</strong> An administrator can tune it under <strong>Settings → System</strong>, in the groups <strong>Faces</strong> and <strong>Voices</strong>. Changes apply to faces and voices decided from then on.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it decides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Face match threshold</strong></td>
+<td>0.55</td>
+<td>How similar two faces must be before one is attached to a known person. Higher makes fewer wrong matches and more unknown faces.</td>
+</tr>
+<tr>
+<td><strong>Face winner margin</strong></td>
+<td>1.2</td>
+<td>How far the leading person must outweigh the runner-up. Higher leaves close calls unknown.</td>
+</tr>
+<tr>
+<td><strong>Confidence to start a new person from a face</strong></td>
+<td>0.7</td>
+<td>How sure the detector must be before a face that matches nobody starts a new person.</td>
+</tr>
+<tr>
+<td><strong>Size to start a new person from a face (px)</strong></td>
+<td>48</td>
+<td>How large such a face must be: its shorter side, in pixels of the displayed photo.</td>
+</tr>
+<tr>
+<td><strong>Minimum face confidence</strong>, <strong>Minimum face size (px)</strong>, <strong>Maximum head turn (degrees)</strong></td>
+<td>0.7, 24, 80</td>
+<td>Which detections are kept as faces at all.</td>
+</tr>
+<tr>
+<td><strong>Speech to start a new person (seconds)</strong></td>
+<td>10</td>
+<td>How long a voice that matches nobody must speak in one recording, in all, before it starts a new person.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Every setting is described in the reference, under <a href="../reference/settings.html#faces">Faces</a> and <a href="../reference/settings.html#voices">Voices</a>.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="search.html" rel="prev"><span>Previous</span>stub</a><a class="next" href="family.html" rel="next"><span>Next</span>Family tree, events and homes</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/people.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-faces-become-people">How faces become people</a></li><li><a href="#the-people-page">The People page</a></li><li><a href="#name-the-people-recognition-found">Name the people recognition found</a></li><li><a href="#look-at-everything-before-you-decide">Look at everything before you decide</a></li><li class="nested"><a href="#take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)</a></li><li class="nested"><a href="#group-similar-faces">Group similar faces</a></li><li><a href="#fold-several-unidentified-people-into-one">Fold several unidentified people into one</a></li><li><a href="#say-what-is-not-a-person">Say what is not a person</a></li><li><a href="#name-a-face-in-the-viewer">Name a face in the viewer</a></li><li><a href="#create-a-person-by-hand">Create a person by hand</a></li><li><a href="#a-persons-page">A person's page</a></li><li><a href="#correct-a-persons-faces">Correct a person's faces</a></li><li class="nested"><a href="#doubtful-faces">Doubtful faces</a></li><li><a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a></li><li><a href="#split-a-person-who-is-really-two">Split a person who is really two</a></li><li><a href="#edit-a-person">Edit a person</a></li><li><a href="#cover-pictures">Cover pictures</a></li><li><a href="#what-ein-keeps-of-your-decisions">What EiN keeps of your decisions</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+    </div>
+  </body>
+</html>

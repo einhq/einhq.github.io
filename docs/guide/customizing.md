@@ -295,7 +295,7 @@ About `run`:
   has the error.
 - With `navigate` as well, EiN reads the command's answer as JSON and replaces each `{key}` in the
   address with the answer's field of that name, or with nothing when there is none. The archive's
-  **Random album** is made this way: [`album-random`](../reference/commands-archive.md#album-random)
+  **Random album** is made this way: [`album-random`](../archive/commands.md#album-random)
   answers with an album's `path`, and the button opens `/albums/{path}`.
 
 Three more fields change a button:

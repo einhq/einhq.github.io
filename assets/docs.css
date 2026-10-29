@@ -179,6 +179,18 @@
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
+/* Core, then the modules: each part's name above its sections, larger than a section's. */
+.docs-nav .docs-part {
+  margin: 30px 0 0;
+  padding: 0 10px 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1rem;
+}
+.docs-nav .docs-part + section h2 {
+  margin-top: 14px;
+}
 .docs-nav section.here h2 {
   color: var(--docs);
 }

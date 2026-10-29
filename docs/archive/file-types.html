@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Supported files – EiN documentation</title>
+    <meta name="description" content="EiN keeps any file you give it. What it works out from a file depends on what kind of file it is: a photo gets thumbnails, faces and a date, a video also gets a version your browser can play, and a document has its text read for search. This page is for everyone who brings files into EiN. It lists the formats EiN recognises, what it makes from each, and what happens to the rest.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/archive/file-types.html">
+    <meta property="og:title" content="Supported files – EiN documentation">
+    <meta property="og:description" content="EiN keeps any file you give it. What it works out from a file depends on what kind of file it is: a photo gets thumbnails, faces and a date, a video also gets a version your browser can play, and a document has its text read for search. This page is for everyone who brings files into EiN. It lists the formats EiN recognises, what it makes from each, and what happens to the rest.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/archive/file-types.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html" aria-current="page">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Supported files</span></button>
+        <header class="docs-head">
+          <p class="crumb">Archive</p>
+          <h1>Supported files</h1>
+        </header>
+        <article class="prose">
+<p>EiN keeps any file you give it. What it works out from a file depends on what kind of file it is:
+a photo gets thumbnails, faces and a date, a video also gets a version your browser can play, and a
+document has its text read for search. This page is for everyone who brings files into EiN. It
+lists the formats EiN recognises, what it makes from each, and what happens to the rest.</p>
+<h2 id="what-ein-does-with-each-kind-of-file">What EiN does with each kind of file<a class="anchor" href="#what-ein-does-with-each-kind-of-file" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Formats</th>
+<th>What EiN works out</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#photos">Photos</a></td>
+<td>JPEG, HEIC, PNG, TIFF, WebP, AVIF, GIF, BMP, camera RAW</td>
+<td>date, place, camera, thumbnails, faces, text in the picture, what it shows, look-alikes</td>
+</tr>
+<tr>
+<td><a href="#videos">Videos</a></td>
+<td>MP4, MOV, M4V, MTS and M2TS, MPG, AVI, MKV, WebM, 3GP, FLV</td>
+<td>date, place, camera, a playable version, a preview clip, chapters, faces, what is said and who says it, look-alikes</td>
+</tr>
+<tr>
+<td><a href="#recordings">Recordings</a></td>
+<td>M4A, MP3, WAV, FLAC, Ogg and Opus, AMR</td>
+<td>date, a playable version, a picture of the sound, what is said and who says it, the same recording twice</td>
+</tr>
+<tr>
+<td><a href="#documents">Documents</a></td>
+<td>PDF and plain text</td>
+<td>the text, for search; the text of scanned pages too</td>
+</tr>
+<tr>
+<td><a href="#sidecar-files">Sidecar files</a></td>
+<td>Google Takeout JSON, XMP</td>
+<td>nothing of their own: they give their picture its date, place and caption</td>
+</tr>
+<tr>
+<td><a href="#gps-tracks">GPS tracks</a></td>
+<td>GPX</td>
+<td>the route, added to the track of the device that recorded it</td>
+</tr>
+<tr>
+<td><a href="#zip-files">Zip files</a></td>
+<td>ZIP</td>
+<td>in staging, expanded into the files it holds</td>
+</tr>
+<tr>
+<td><a href="#other-files">Everything else</a></td>
+<td>any file</td>
+<td>kept as it is, and nothing more</td>
+</tr>
+</tbody></table>
+</div>
+<p>The work happens in the background after a file arrives, and each part shows up when it is done;
+<a href="importing.html#why-new-pictures-have-no-thumbnails-yet">Getting your photos in</a> explains the order.
+A file you upload into staging is read once it arrives, but the text in pictures and documents is
+read only when you file it into an album.</p>
+<h2 id="how-ein-tells-what-a-file-is">How EiN tells what a file is<a class="anchor" href="#how-ein-tells-what-a-file-is" aria-label="Link to this section"></a></h2>
+<p>EiN looks at the first bytes of a file, not at its name. A JPEG photo named <code>IMG_0412.png</code> is
+still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
+difference whether the file came in with <strong>Import media</strong>, an upload into an album, or by dropping
+it on a page. A file copied in over <a href="../shell/ssh-sftp.html">SFTP</a> is the exception: when EiN knows
+its extension, such as <code>.png</code>, <code>.docx</code> or <code>.md</code>, the type that extension names is the one it keeps,
+and only a file with an extension EiN does not know is recognised by its first bytes.</p>
+<p>The name decides in two cases, because the bytes say too little:</p>
+<ul>
+<li><strong>Camera RAW files.</strong> Most RAW formats look like a TIFF picture from their first bytes, so EiN
+goes by the extension, such as <code>.NEF</code> or <code>.CR3</code>. Capital or small letters do not matter.</li>
+<li><strong>Sidecar files.</strong> A text file ending in <code>.json</code> is JSON data, and one ending in <code>.xmp</code> is an XMP
+sidecar, not a document to read.</li>
+</ul>
+<p>Once the media service has read a photo, video or recording, the type it reports is the one EiN
+keeps. To see what EiN made of a file, run <code>mime</code> in the terminal; see
+<a href="#in-the-terminal">In the terminal</a>.</p>
+<h2 id="photos">Photos<a class="anchor" href="#photos" aria-label="Link to this section"></a></h2>
+<p>EiN recognises JPEG, HEIC and HEIF (what iPhones take), PNG, TIFF, WebP, AVIF, GIF and BMP, and the
+camera RAW formats below.</p>
+<p>For each photo, EiN:</p>
+<ul>
+<li>reads its date, its GPS position and the camera or phone that took it; see
+<a href="dates-places.html">Dates and places of pictures</a> and <a href="devices.html">Devices and GPS tracks</a>;</li>
+<li>makes thumbnails and screen-sized copies in the AVIF format: a square of 320 pixels, and copies
+that fit inside 512, 800, 1,600 and 2,560 pixels. These copies are never larger than the photo,
+so a small one gets only the sizes up to its own;</li>
+<li>finds the faces in it (<a href="people.html">People and faces</a>);</li>
+<li>reads any text in it, printed or handwritten, so that search finds it
+(<a href="viewer.html#read-the-text-in-a-picture">Read the text in a picture</a>);</li>
+<li>works out what it shows, so that you can search for &quot;a dog on a beach&quot;;</li>
+<li>takes a fingerprint, which finds copies, look-alikes and bursts (<a href="duplicates.html">Duplicates</a>).</li>
+</ul>
+<figure class="shot"><a href="../../assets/shots/postcard@2x.webp"><img src="../../assets/shots/postcard.webp" srcset="../../assets/shots/postcard.webp 1x, ../../assets/shots/postcard@2x.webp 2x" alt="The viewer on a handwritten postcard from 1968, with the text read from it laid over a darkened copy: Dear Joan, the cottage is ours, signed Love, Peggy" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Text in a photo is read, handwriting included, and search finds the picture by it.</figcaption></figure>
+<h3 id="camera-raw">Camera RAW<a class="anchor" href="#camera-raw" aria-label="Link to this section"></a></h3>
+<p>EiN takes the RAW files of these cameras:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Camera</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.cr2</code>, <code>.cr3</code>, <code>.crw</code></td>
+<td>Canon</td>
+</tr>
+<tr>
+<td><code>.nef</code>, <code>.nrw</code></td>
+<td>Nikon</td>
+</tr>
+<tr>
+<td><code>.arw</code>, <code>.sr2</code></td>
+<td>Sony</td>
+</tr>
+<tr>
+<td><code>.raf</code></td>
+<td>Fujifilm</td>
+</tr>
+<tr>
+<td><code>.orf</code></td>
+<td>Olympus</td>
+</tr>
+<tr>
+<td><code>.rw2</code>, <code>.raw</code></td>
+<td>Panasonic</td>
+</tr>
+<tr>
+<td><code>.pef</code></td>
+<td>Pentax</td>
+</tr>
+<tr>
+<td><code>.dng</code></td>
+<td>Adobe DNG, used by many cameras and phones</td>
+</tr>
+<tr>
+<td><code>.x3f</code></td>
+<td>Sigma</td>
+</tr>
+<tr>
+<td><code>.mrw</code></td>
+<td>Minolta</td>
+</tr>
+<tr>
+<td><code>.dcr</code>, <code>.kdc</code></td>
+<td>Kodak</td>
+</tr>
+<tr>
+<td><code>.3fr</code></td>
+<td>Hasselblad</td>
+</tr>
+<tr>
+<td><code>.iiq</code></td>
+<td>Phase One</td>
+</tr>
+<tr>
+<td><code>.erf</code></td>
+<td>Epson</td>
+</tr>
+<tr>
+<td><code>.srw</code></td>
+<td>Samsung</td>
+</tr>
+<tr>
+<td><code>.rwl</code></td>
+<td>Leica</td>
+</tr>
+</tbody></table>
+</div>
+<p>A RAW file gets everything a JPEG gets. EiN develops it for the thumbnails; a RAW file whose sensor
+data cannot be read is shown from the JPEG preview the camera put inside it. Faces and text are read
+from that preview too. A RAW file and the JPEG the camera saved beside it stay two pictures; when
+EiN finds them to be duplicates, it suggests keeping the RAW, as the better format
+(<a href="duplicates.html#which-copy-is-kept">Which copy is kept</a>).</p>
+<h2 id="videos">Videos<a class="anchor" href="#videos" aria-label="Link to this section"></a></h2>
+<p>EiN recognises MP4, MOV (what iPhones and many cameras record), M4V, MTS and M2TS (AVCHD
+camcorders), MPG, AVI, MKV, WebM, 3GP and FLV.</p>
+<p>For each video, EiN:</p>
+<ul>
+<li>reads its date, its GPS position and the camera or phone that recorded it;</li>
+<li>makes a still for its tile and the poster shown before it plays;</li>
+<li>makes a version your browser plays, at most 1920 × 1080 pixels, in the AV1 format inside an MP4
+file, with the sound at 128 kbit/s;</li>
+<li>makes a silent clip of up to 20 seconds that plays when you point at the tile. A video shorter
+than 2 seconds gets none: its still already shows it all;</li>
+<li>makes the small pictures you see when you move along the timeline, and finds where one shot cuts
+to the next, which become its chapters (<a href="viewer.html#play-a-video">Play a video</a>);</li>
+<li>finds the faces in it, and works out what it shows;</li>
+<li>writes down what is said in it and recognises who says it, so that search finds the words and the
+viewer can show subtitles;</li>
+<li>takes a fingerprint, which finds copies and look-alikes.</li>
+</ul>
+<p>The viewer plays the AV1 version, not the original. A browser or device that cannot play AV1 says
+so; the original can still be downloaded. If a video is too long or too heavy for the media service
+to convert within its limits, which can happen on a machine without a graphics card, it gets no
+playable version. Use <strong>Download</strong> to watch it on your own device.</p>
+<h2 id="recordings">Recordings<a class="anchor" href="#recordings" aria-label="Link to this section"></a></h2>
+<p>EiN recognises M4A (what phone voice memos are), MP3, WAV, FLAC, Ogg and Opus, and AMR. M4B
+audiobooks count as recordings too.</p>
+<p>For each recording, EiN:</p>
+<ul>
+<li>reads its date, where the file has one;</li>
+<li>makes a version your browser plays: AAC at no more than 128 kbit/s and 44.1 kHz, in an <code>.m4a</code>
+file;</li>
+<li>draws a picture of the sound, its waveform, which is the recording&#39;s tile and what you see while
+it plays;</li>
+<li>writes down what is said in it and recognises who says it
+(<a href="viewer.html#listen-to-a-recording">Listen to a recording</a>);</li>
+<li>takes a fingerprint of the sound, which finds the same recording twice. A recording shorter than
+about 2.5 seconds gets none.</li>
+</ul>
+<figure class="shot"><a href="../../assets/shots/recording@2x.webp"><img src="../../assets/shots/recording.webp" srcset="../../assets/shots/recording.webp 1x, ../../assets/shots/recording@2x.webp 2x" alt="The viewer on a recording called Voice 001.m4a: a waveform with the playhead near the start, the play controls, and the transcript beside it with the current line in bold" width="1140" height="640" loading="lazy" decoding="async"></a><figcaption>A recording&#39;s tile and player show a picture of its sound, and the transcript beside it is searchable.</figcaption></figure>
+<h2 id="documents">Documents<a class="anchor" href="#documents" aria-label="Link to this section"></a></h2>
+<p>EiN reads the text of PDF files and of plain text files, so that search finds a document by what it
+is about: a search for <code>Christmas letter</code> finds the family newsletter of 2019. See
+<a href="../guide/search.html#find-photos-videos-recordings-and-documents">Search and the finder</a>.</p>
+<ul>
+<li><strong>PDF.</strong> EiN reads the text the PDF holds. A page with almost no text, such as a scanned letter,
+is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
+way; the pages after that keep only the text they hold.</li>
+<li><strong>Plain text.</strong> Any file that is text, whatever its name: <code>.txt</code>, a Markdown note, an HTML page.
+An SVG drawing is text too, so EiN treats it as a document, not as a picture. Copied in over
+SFTP, a <code>.md</code> or <code>.html</code> file takes the type its name gives instead, and its text is not read.</li>
+</ul>
+<p>A document&#39;s text is read once the file is in an album or elsewhere in the library, not while it
+waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.</p>
+<p>Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
+<strong>Download</strong> to open one on your device. The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a>
+also lists RTF files, but EiN does not read their text: search finds them by their file name only.
+An old Word (<code>.doc</code>) file is not recognised at all and is kept as one of the <a href="#other-files">other files</a>.</p>
+<h3 id="word-and-opendocument-files">Word and OpenDocument files<a class="anchor" href="#word-and-opendocument-files" aria-label="Link to this section"></a></h3>
+<p>The media service can read the text of Word (<code>.docx</code>) and OpenDocument (<code>.odt</code>) files, but EiN
+recognises a file by its first bytes, and these formats begin like any zip file. A <code>.docx</code> or
+<code>.odt</code> file you upload is therefore kept as a zip file (one copied in over SFTP keeps its type, and
+its text is read):</p>
+<ul>
+<li>its text is not read, so search finds it by its name only;</li>
+<li>in a staging category, it is expanded like any other zip, into the parts it is made of, and the
+file itself is removed.</li>
+</ul>
+<p>To keep such a document whole and findable, save it as a PDF before you bring it in. To keep the
+Word file itself, upload it straight into an album rather than into staging
+(<a href="albums.html#upload-straight-into-the-album">Upload straight into the album</a>).</p>
+<h2 id="sidecar-files">Sidecar files<a class="anchor" href="#sidecar-files" aria-label="Link to this section"></a></h2>
+<p>A sidecar is a small file beside a picture that says things about it:</p>
+<ul>
+<li>the JSON file Google Photos writes beside every photo and video of a Takeout, such as
+<code>IMG_0001.jpg.supplemental-metadata.json</code>;</li>
+<li>the XMP file a photo editor or a scanning tool writes, <code>IMG_0001.jpg.xmp</code> or <code>IMG_0001.xmp</code>.</li>
+</ul>
+<p>A sidecar is not a picture or a document of its own. In staging, EiN pairs it with its picture and
+moves it under it, and the picture takes its date, its place where the file has no GPS position,
+and its caption. <a href="importing.html#a-google-takeout-export">A Google Takeout export</a> shows what each
+part of a Takeout becomes. A sidecar that matches no picture stays where it is, among the
+category&#39;s <strong>Other files</strong>.</p>
+<h2 id="gps-tracks">GPS tracks<a class="anchor" href="#gps-tracks" aria-label="Link to this section"></a></h2>
+<p>A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
+picture: EiN adds its points to the track of the device that recorded it, and the file goes. On a
+device&#39;s page you can upload GPX files to its track directly. See
+<a href="devices.html#gpx-files-in-staging">GPX files in staging</a> and
+<a href="devices.html#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device&#39;s track</a>.</p>
+<h2 id="zip-files">Zip files<a class="anchor" href="#zip-files" aria-label="Link to this section"></a></h2>
+<p>A zip file that you upload or copy anywhere into a staging category is expanded once its upload has
+ended: what it holds goes into the folder the zip lies in, and the zip is removed. Outside staging,
+for example uploaded into an album, a zip stays a zip.
+<a href="importing.html#zips-and-google-takeout-exports">Zips and Google Takeout exports</a> has the details.</p>
+<p>Only zip files are expanded. A <code>.tar</code>, <code>.7z</code> or <code>.rar</code> archive is kept as it is.</p>
+<h2 id="other-files">Other files<a class="anchor" href="#other-files" aria-label="Link to this section"></a></h2>
+<p>Any other file is kept as it came, with its name and size, and nothing is made from it. In staging
+it counts among the category&#39;s <strong>Other files</strong>, and the <strong>Folder</strong> view of the <strong>Files</strong> tab lists
+it, where you can move or discard it (<a href="staging.html#files-folders-and-moving">Sorting in staging</a>).
+It does not appear on the Media page, in albums&#39; grids or in search by content. You reach it over
+<a href="../shell/ssh-sftp.html">SFTP</a> or in the <a href="../shell/terminal.html">terminal</a>, and an administrator also
+on the <strong>Nodes</strong> page.</p>
+<p>Some media formats are among these, because EiN does not recognise them from their first bytes:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Usual extension</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows Media video and audio</td>
+<td><code>.wmv</code>, <code>.wma</code></td>
+</tr>
+<tr>
+<td>AIFF audio</td>
+<td><code>.aif</code>, <code>.aiff</code></td>
+</tr>
+<tr>
+<td>AAC audio outside an M4A file</td>
+<td><code>.aac</code></td>
+</tr>
+<tr>
+<td>JPEG XL</td>
+<td><code>.jxl</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>To have EiN work with such a file, convert it on your own computer first: a video to MP4, a sound to
+M4A, FLAC or WAV, a JPEG XL picture to JPEG or PNG.</p>
+<h2 id="your-originals-stay-as-they-are">Your originals stay as they are<a class="anchor" href="#your-originals-stay-as-they-are" aria-label="Link to this section"></a></h2>
+<p>EiN never changes the bytes of the file you uploaded. Thumbnails, playable versions, transcripts,
+read text and everything else it works out are kept beside the file. When you correct a date,
+turn a picture or write its text by hand, EiN changes what it keeps, not the file. <strong>Download</strong> in
+the viewer, and the file name at the top of its details panel, always give you the original.</p>
+<h2 id="when-a-file-does-not-show-up-as-expected">When a file does not show up as expected<a class="anchor" href="#when-a-file-does-not-show-up-as-expected" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A new picture shows a plain tile with a picture icon</td>
+<td>Its thumbnails are not made yet.</td>
+<td>Wait. A large import keeps the media service busy for a long while.</td>
+</tr>
+<tr>
+<td>A file you uploaded into staging is counted under <strong>Other files</strong></td>
+<td>EiN did not recognise it as a picture, video or recording: a document, a sidecar, or a format from the table above.</td>
+<td>Look at it in the <strong>Folder</strong> view of the <strong>Files</strong> tab. Convert an unrecognised media file and upload it again.</td>
+</tr>
+<tr>
+<td>A video or recording says &quot;This file cannot be played&quot;</td>
+<td>The file is damaged: nothing can read it. The reason is under the message.</td>
+<td><strong>Download</strong> it and check it on your own device.</td>
+</tr>
+<tr>
+<td>A video says &quot;This browser or device cannot play AV1, the format this video is in.&quot;</td>
+<td>The browser cannot play the format EiN makes playable videos in.</td>
+<td>Use a current browser, or <strong>Download</strong> the original.</td>
+</tr>
+<tr>
+<td>A document is not found by its words</td>
+<td>It is still in staging, it is a format whose text EiN does not read, or it is a <code>.docx</code> or <code>.odt</code> kept as a zip.</td>
+<td>File it into an album. Save Word and OpenDocument files as PDF.</td>
+</tr>
+<tr>
+<td>A <code>.docx</code> file in staging turned into a folder of XML files</td>
+<td>It was expanded as a zip.</td>
+<td>Discard the parts, and bring the document in as a PDF or upload it straight into an album.</td>
+</tr>
+<tr>
+<td>A RAW file is shown as an ordinary picture with no RAW detail</td>
+<td>Its sensor data could not be read, so it is shown from the preview inside it.</td>
+<td>Nothing is lost: the original is kept, and <strong>Download</strong> gives it to you.</td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="viewer.html#when-something-is-not-as-expected">Viewing photos, videos and recordings</a> covers the
+viewer&#39;s other messages.</p>
+<h2 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h2>
+<p><code>mime</code> shows the type EiN stored for a file, the type its name suggests, and the type its first
+bytes say, and whether it counts as camera RAW:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mime <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington/IMG_0412.HEIC&quot;</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>stored:  image/heic
+ext:     image/heic
+content: image/heic
+raw:     no</code></pre></div>
+<p>A file whose <code>stored</code> line says <code>application/octet-stream</code> was not recognised; one that says
+<code>application/zip</code> is kept as a zip.</p>
+<p>Two commands do a file&#39;s reading again, for a file you may change:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>exif-extract -f &lt;file&gt;</code></td>
+<td>Reads a photo&#39;s, video&#39;s or recording&#39;s date, place and camera again. A file marked as unreadable is tried again.</td>
+</tr>
+<tr>
+<td><code>index-document -f &lt;file&gt;</code></td>
+<td>Reads a document&#39;s text again.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Every command and its options are in the
+<a href="commands.html#exif-extract">archive&#39;s command reference</a> and the
+<a href="../reference/commands-core.html#mime">core command reference</a>.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="importing.html">Getting your photos in</a>: every way to bring files into EiN, and what happens next.</li>
+<li><a href="staging.html">Sorting in staging</a>: where uploaded files wait until you file them.</li>
+<li><a href="viewer.html">Viewing photos, videos and recordings</a>: how each kind of file is shown and played.</li>
+<li><a href="../guide/search.html">Search and the finder</a>: finding files by what they show, say and contain.</li>
+<li><a href="duplicates.html">Duplicates</a>: copies and look-alikes, and which format is kept.</li>
+<li><a href="../concepts/files.html">Files and storage</a>: how EiN stores files and what it keeps beside them.</li>
+<li><a href="../ems/index.html">The media service</a>: the part of EiN that does the reading.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="home.html" rel="prev"><span>Previous</span>stub</a><a class="next" href="processing.html" rel="next"><span>Next</span>stub</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/file-types.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-does-with-each-kind-of-file">What EiN does with each kind of file</a></li><li><a href="#how-ein-tells-what-a-file-is">How EiN tells what a file is</a></li><li><a href="#photos">Photos</a></li><li class="nested"><a href="#camera-raw">Camera RAW</a></li><li><a href="#videos">Videos</a></li><li><a href="#recordings">Recordings</a></li><li><a href="#documents">Documents</a></li><li class="nested"><a href="#word-and-opendocument-files">Word and OpenDocument files</a></li><li><a href="#sidecar-files">Sidecar files</a></li><li><a href="#gps-tracks">GPS tracks</a></li><li><a href="#zip-files">Zip files</a></li><li><a href="#other-files">Other files</a></li><li><a href="#your-originals-stay-as-they-are">Your originals stay as they are</a></li><li><a href="#when-a-file-does-not-show-up-as-expected">When a file does not show up as expected</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

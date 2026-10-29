@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chatting with the assistant – EiN documentation</title>
+    <meta name="description" content="The assistant answers questions about what your family keeps in EiN, and about EiN itself, in your own words. It looks things up by running EiN's own commands as you, shows you every command it ran, and asks you before it changes anything. This page is for everyone who uses the chat.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/assistant/chat.html">
+    <meta property="og:title" content="Chatting with the assistant – EiN documentation">
+    <meta property="og:description" content="The assistant answers questions about what your family keeps in EiN, and about EiN itself, in your own words. It looks things up by running EiN's own commands as you, shows you every command it ran, and asks you before it changes anything. This page is for everyone who uses the chat.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/assistant/chat.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section class="here"><h2>Assistant</h2><ul><li><a href="index.html">The Assistant</a></li><li><a href="chat.html" aria-current="page">Chatting with the assistant</a></li><li><a href="language-model.html">The language model</a></li><li><a href="teaching.html">Teaching the assistant</a></li><li><a href="commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Chatting with the assistant</span></button>
+        <header class="docs-head">
+          <p class="crumb">Assistant</p>
+          <h1>Chatting with the assistant</h1>
+        </header>
+        <article class="prose">
+<p>The assistant answers questions about what your family keeps in EiN, and about EiN itself, in your own words. It looks things up by running EiN&#39;s own commands as you, shows you every command it ran, and asks you before it changes anything. This page is for everyone who uses the chat.</p>
+<p>The chat comes with the assistant module. If you do not see <strong>Chat</strong> in the sidebar, the module is not installed; your administrator can add it (see <a href="../admin/modules.html">Modules</a>).</p>
+<h2 id="open-the-chat">Open the chat<a class="anchor" href="#open-the-chat" aria-label="Link to this section"></a></h2>
+<p>There are three places to open it, and they all show the same conversations.</p>
+<ul>
+<li><strong>Chat</strong> in the sidebar opens the Chat page, with your recent chats in a box beside the conversation.</li>
+<li>The <strong>Chat</strong> button in the top bar (a speech bubble) opens the chat in the side drawer, beside the page you are on, so you can ask about that page. Choose the button again to close the drawer. The drawer&#39;s title, <strong>Chat</strong>, is a link (<strong>Open as page</strong>) that opens the same conversation as the full Chat page. On the Chat page itself there is no chat button.</li>
+<li>In the viewer the top bar is covered, so the viewer has a <strong>Chat</strong> button of its own at the top right, next to the details button. The drawer then stays open beside the picture, with a <strong>Close chat</strong> button (×) of its own.</li>
+</ul>
+<p>On a phone the top bar&#39;s chat button opens the chat as a dialog that fills the screen; <strong>Back</strong> or the × closes it. In the viewer on a phone, open the menu at the top right and choose <strong>Chat</strong>. See <a href="../guide/phone.html">EiN on a phone</a> for what else differs.</p>
+<figure class="shot"><a href="../../assets/shots/chat@2x.webp"><img src="../../assets/shots/chat.webp" srcset="../../assets/shots/chat.webp 1x, ../../assets/shots/chat@2x.webp 2x" alt="The viewer's details panel for a photo from Christmas in Wellington on the left, and the chat drawer on the right: the question &quot;Who is in this picture, and how old was each of them that day?&quot;, a folded line &quot;Ran 1 command&quot;, and the answer listing David Okafor, 69, Helen Okafor, 67, and Ruby Wrenfield, 26" width="860" height="900" loading="lazy" decoding="async"></a><figcaption>The chat beside the viewer knows which picture is open, so you can ask about it without naming it.</figcaption></figure>
+<p>You can make the drawer wider or narrower by dragging its left edge; <a href="../guide/interface.html#pages-dialogs-the-side-drawer-and-full-screen">Finding your way around</a> explains the drawer. No keyboard shortcut opens the chat.</p>
+<h2 id="ask-a-question">Ask a question<a class="anchor" href="#ask-a-question" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Click in the box at the bottom, which reads &quot;Ask about what is kept here — or EiN itself…&quot; (&quot;Ask anything…&quot; on a phone). A click on any empty part of the chat puts the cursor there too.</li>
+<li>Type your question. <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line; the box grows to eight lines.</li>
+<li>Press <kbd>Enter</kbd>, or click the send button (a paper plane).</li>
+</ol>
+<p>The answer grows in front of you. It says &quot;Waiting…&quot; at first, &quot;Thinking…&quot; while the language model works out its next step, and &quot;Running commands… 2 done&quot; with the command it is running underneath. The answer&#39;s words appear as they are written. An answer takes from a few seconds to a few minutes, depending on how many commands the question needs and how fast your machine runs the language model.</p>
+<p>While a chat is answering, its box is locked and the send button is grey. There is no button to stop an answer once you have asked. You can start a new chat and ask something else in the meantime.</p>
+<p>A new, empty chat shows a robot and &quot;Ask about what is kept here, or about EiN itself.&quot;, and under it two questions the installed modules suggest, such as &quot;When were we last at the beach?&quot;.</p>
+<p>The assistant answers in the language you ask in, whatever language the archive is kept in. The chat&#39;s own buttons and messages are in English.</p>
+<h3 id="what-the-assistant-knows-about-the-page-you-are-on">What the assistant knows about the page you are on<a class="anchor" href="#what-the-assistant-knows-about-the-page-you-are-on" aria-label="Link to this section"></a></h3>
+<p>Every question carries what you have in front of you, so you do not have to name it:</p>
+<ul>
+<li>the date and time, from the clock of the machine EiN runs on, so &quot;this week&quot; and &quot;today&quot; work;</li>
+<li>the page you have open: its name and the sidebar entry it is under, what it says it shows, which tab is open, and the person, album, place or other thing the page is about;</li>
+<li>the picture, video or recording open in the viewer.</li>
+</ul>
+<p>So on Peggy Wrenfield&#39;s page you can ask &quot;When was she born?&quot;, and in the viewer &quot;Who is in this picture?&quot;. A dialog, or the chat itself, is never the page it is asked about.</p>
+<p>&quot;I&quot;, &quot;me&quot;, &quot;my&quot; and &quot;we&quot; mean you only when your account is linked to a person in the archive. You can tell: your account menu then has a <strong>Me</strong> row. Without the link, the assistant says it cannot tell who you are. Your administrator makes the link (see <a href="../admin/accounts.html">Accounts and groups</a>). A file you ask it to make without saying where goes in your home folder.</p>
+<p>The assistant knows nothing from your other chats. Each chat is a conversation of its own.</p>
+<p>The assistant reads only text: what EiN has recorded about a picture, such as its date, place, the people whose faces are named in it, its caption and any text found in it. It does not look at the picture itself. If nobody has named a face yet, it cannot tell you who that is; see <a href="../archive/people.html">People and faces</a>.</p>
+<h3 id="think-harder">Think harder<a class="anchor" href="#think-harder" aria-label="Link to this section"></a></h3>
+<p>The bulb inside the question box asks the model to think before every step. The answer takes about twice as long, and the assistant picks its commands more carefully.</p>
+<ul>
+<li>Off, its tooltip reads <strong>Think harder (slower)</strong>. Click it and it turns yellow: <strong>Thinking harder: slower, more careful</strong>.</li>
+<li>It stays on in this browser, for every chat, until you click it again.</li>
+<li>A question you asked with it shows a small bulb beside it (<strong>Asked with &quot;think harder&quot;</strong>), and the answer shows the model&#39;s thoughts.</li>
+</ul>
+<p>Try it when an answer came back as <strong>No answer</strong>, or when the commands the assistant ran were not the ones the question needed.</p>
+<h2 id="read-an-answer">Read an answer<a class="anchor" href="#read-an-answer" aria-label="Link to this section"></a></h2>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="A question, with what is on screen, goes to the language model, which calls tools: the modules' commands, find_commands, command_help and run_command. A line that only reads runs at once as you and its output goes back to the model; a line that would change something becomes a proposal card you run or decline. The loop ends in a final answer with pictures, links, tables and cards">
+  <title>How the assistant answers</title>
+  <defs>
+    <marker id="assistant-chat-md-1-assistant-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="560" rx="14" fill="#1a1e27" />
+
+  
+  <rect x="24" y="24" width="196" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your question</text>
+  <text x="42" y="76" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">with what is on screen</text>
+  <line x1="220" y1="60" x2="266" y2="60" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+
+  
+  <rect x="268" y="24" width="224" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Language model</text>
+  <text x="474" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">llm</text>
+  <text x="286" y="76" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">calls a tool, or answers</text>
+  <line x1="492" y1="60" x2="538" y2="60" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+
+  
+  <rect x="540" y="24" width="236" height="92" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="558" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The answer</text>
+  <text x="758" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">final_answer</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="558" y="76">text, pictures, links,</tspan>
+    <tspan x="558" y="96">a table, cards</tspan>
+  </text>
+
+  
+  <line x1="340" y1="96" x2="340" y2="142" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="330" y="124" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a call</text>
+  <line x1="420" y1="144" x2="420" y2="98" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="430" y="124" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its result</text>
+
+  
+  <rect x="268" y="144" width="224" height="128" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="172" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Its tools</text>
+  <text x="286" y="198" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the modules' commands</text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">
+    <tspan x="286" y="220">find_commands</tspan>
+    <tspan x="286" y="240">command_help</tspan>
+    <tspan x="286" y="260">run_command</tspan>
+  </text>
+  <line x1="380" y1="272" x2="380" y2="318" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="390" y="300" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a line to run</text>
+
+  
+  <rect x="268" y="320" width="224" height="80" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="348" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Read or write?</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="286" y="372">decided by the code,</tspan>
+    <tspan x="286" y="390">not by the model</tspan>
+  </text>
+
+  
+  <path d="M268,360 H122 V430" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="195" y="350" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">reads</text>
+  <rect x="24" y="432" width="196" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Runs at once, as you</text>
+  <text x="42" y="484" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">up to 60 s a line</text>
+  <path d="M64,432 V208 H266" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="165" y="198" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">what it printed</text>
+
+  
+  <path d="M492,360 H658 V430" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="575" y="350" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes</text>
+  <rect x="540" y="432" width="236" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="558" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A proposal card</text>
+  <rect x="558" y="472" width="52" height="22" rx="6" fill="#40c057" fill-opacity="0.12" stroke="#40c057" stroke-width="1.25" />
+  <text x="584" y="487" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Run</text>
+  <rect x="620" y="472" width="72" height="22" rx="6" fill="#fa5252" fill-opacity="0.12" stroke="#fa5252" stroke-width="1.25" />
+  <text x="656" y="487" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Decline</text>
+  <path d="M736,432 V208 H494" fill="none" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#assistant-chat-md-1-assistant-loop-arrow)" />
+  <text x="615" y="198" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">how it went</text>
+
+  
+  <text x="400" y="536" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">At most 12 commands a question, and 180 s for each call to the model</text>
+</svg><figcaption>Reading runs at once; anything that would change something waits for you.</figcaption></figure>
+<p>An answer that needed no command is a plain bubble. An answer for which the assistant ran something, or that has a card, pictures or links under it, is drawn as a timeline, starting with a robot, with a dot for each step:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Thought for 1.2s</strong></td>
+<td>What the model thought before it answered, when it thinks (always with <strong>Think harder</strong>). Click to read it.</td>
+</tr>
+<tr>
+<td>Words between steps</td>
+<td>What the model said while it worked.</td>
+</tr>
+<tr>
+<td><strong>Ran 3 commands · 0.4s</strong></td>
+<td>The commands it ran, folded to one line, with &quot;, 1 failed&quot; when one failed. Click to open: each command shows the line as it ran, how long it took, and what it printed, after the thought that led to it. Long output is folded behind <strong>output · N lines</strong>; a failure is shown in red.</td>
+</tr>
+<tr>
+<td><strong>Waited 42s for the language model to restart</strong></td>
+<td>The language model was away and came back during the answer.</td>
+</tr>
+<tr>
+<td>The answer</td>
+<td>The reply itself, with lists, bold text, tables and links where they help.</td>
+</tr>
+<tr>
+<td>After the answer</td>
+<td>A proposal card, a table, cards, pictures, links and <strong>Show in search</strong>, each described below.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Under the answer is the time it took, such as &quot;12.3s&quot;; point at it to see the date and time of the answer. Point at your picture beside a question to see when you asked it.</p>
+<p>Opening <strong>Ran N commands</strong> is how you check an answer: you see exactly what the assistant looked up and what EiN told it.</p>
+<h3 id="pictures">Pictures<a class="anchor" href="#pictures" aria-label="Link to this section"></a></h3>
+<p>Pictures come as a grid of up to 24 thumbnails under the answer; click one to open it in the <a href="../archive/viewer.html">viewer</a>. The text says in a sentence what they are rather than listing them. Ask for more in the same chat and the assistant leaves out the pictures it has already shown you there.</p>
+<p>A plain request for pictures, such as &quot;Show photos of Peggy Wrenfield in Falmouth&quot;, is answered straight from a search, without the longer back-and-forth: the answer begins &quot;Here are …&quot;, and its two steps, <code>parse-search</code> and <code>search</code>, show as its commands. This happens when <strong>Think harder</strong> is off and the request starts with words like &quot;show&quot;, &quot;find&quot;, &quot;get&quot;, &quot;photos&quot;, &quot;pictures&quot; or &quot;videos&quot;, or the Swedish &quot;visa&quot;, &quot;hitta&quot; or &quot;bilder&quot;, and asks nothing more. A request with &quot;who&quot;, &quot;when&quot;, &quot;how many&quot;, &quot;this&quot; or &quot;my&quot; in it is answered the longer way, through the commands.</p>
+<h3 id="links">Links<a class="anchor" href="#links" aria-label="Link to this section"></a></h3>
+<p>Names in the answer are links: a picture opens in the viewer, a person, album or place opens its page, and a web address opens as usual. Under the answer, links to the people, places and folders the answer is about are lined up for you. Before the answer reaches you, EiN checks every link as you: a link to something that does not exist, or that you may not see, is left as plain words.</p>
+<h3 id="show-in-search">Show in search<a class="anchor" href="#show-in-search" aria-label="Link to this section"></a></h3>
+<p>When the assistant searched, <strong>Show in search</strong> opens that search with its filters filled in: on the Media page for photos, videos and recordings, and on the Search page when it looked for albums, people, places, devices or tracks. Use it to see how the assistant understood your question, and to change the filters yourself. <a href="../guide/search.html">Search and the finder</a> explains the filters.</p>
+<h3 id="tables">Tables<a class="anchor" href="#tables" aria-label="Link to this section"></a></h3>
+<p>When you ask for a table, or the answer has many rows, the chat draws a table under it. EiN reads the rows from the command itself rather than from the model, so no value is copied wrongly. The table has a title, a header that stays in view as you scroll, and numbers aligned to the right. Under it are the command that printed the rows and how many there are, such as &quot;42 rows&quot;, with &quot;, the first 1000 shown&quot; when there are more than 1,000.</p>
+<h3 id="cards">Cards<a class="anchor" href="#cards" aria-label="Link to this section"></a></h3>
+<p>Some answers come with a card drawn under them:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>When</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Chart</strong></td>
+<td>When you ask for a chart, a graph or a diagram</td>
+<td>A line, bar or pie chart of a log&#39;s entries, or of numbers the assistant counted. With fewer than two values it says &quot;Nothing to chart.&quot;</td>
+</tr>
+<tr>
+<td><strong>Family tree</strong></td>
+<td>For a question about family</td>
+<td>The tree around a person, or the line of relations between two people. Comes with the archive.</td>
+</tr>
+<tr>
+<td><strong>Map</strong></td>
+<td>When you ask where something is, or ask for a map</td>
+<td>The places and pictures the answer named, pinned where the archive has them. Comes with the archive.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A card is drawn as you each time it appears, so it shows the archive as it is when you look, and leaves out anything you may not see.</p>
+<h2 id="when-the-assistant-offers-to-make-a-change">When the assistant offers to make a change<a class="anchor" href="#when-the-assistant-offers-to-make-a-change" aria-label="Link to this section"></a></h2>
+<p>The assistant reads on its own, but it never changes anything without you. When your question needs a change, such as writing a picture&#39;s caption, adding an event to someone&#39;s timeline, setting someone&#39;s parent or partner, or creating, moving or removing a file, it answers &quot;Shall I run this?&quot; and shows a proposal card:</p>
+<ul>
+<li>a header, <strong>Bash</strong>, and a title saying what the change does;</li>
+<li>the exact commands as a small script: <code>set -e</code> first, then each command under its title as a comment line starting with <code>#</code>;</li>
+<li>a yellow border while it waits for you;</li>
+<li>the buttons <strong>Run</strong> and <strong>Decline</strong>.</li>
+</ul>
+<p>Asked &quot;Add to Ruby Wrenfield&#39;s timeline that she graduated in December 2021&quot;, the card could read:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">set</span> -e
+
+<span class="hljs-comment"># Add an event (blob) to a person, album, location or device</span>
+person-add-event --<span class="hljs-built_in">date</span>=2021-12 --body=<span class="hljs-string">&#x27;Graduated&#x27;</span> /archive/people/Ruby_Wrenfield</code></pre></div>
+<p>To decide:</p>
+<ol>
+<li>Read the commands. Check the names, dates and paths: the card shows what the assistant understood.</li>
+<li>If something is wrong, click into the script and change it. The card then says <strong>edited</strong>; <strong>reset</strong> puts the proposal back as it was.</li>
+<li>Click <strong>Run</strong> to run the whole script, or <strong>Decline</strong> to leave things as they are.</li>
+</ol>
+<p><strong>Run</strong> runs the script exactly as the card shows it, as you, as if you had typed it in the <a href="../shell/terminal.html">terminal</a>. Because of <code>set -e</code>, it stops at the first line that fails; take that line out if you want the rest to run regardless.</p>
+<p>The card then shows how it went: green <strong>Done</strong> with &quot;· exit 0&quot; and what the commands printed, red <strong>Failed</strong> with the exit code and the error, or <strong>Dismissed</strong> when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it is told not to propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.</p>
+<h3 id="it-runs-as-you">It runs as you<a class="anchor" href="#it-runs-as-you" aria-label="Link to this section"></a></h3>
+<p>Every command the assistant runs, and every script you run from a card, runs as you, with your permissions. It sees what you can see in the browser and nothing more, and a change you may not make fails the same way it would if you made it yourself. In <a href="../guide/interface.html#admin-mode">admin mode</a> the assistant reads with the administrator&#39;s rights too.</p>
+<p>What counts as a change is decided by EiN, not by the model. A line runs at once only when every command in it is known to only read and nothing is written to a file; anything else becomes a card. The assistant cannot open the editor, sign in or out, run a service&#39;s own program (services are started with <code>service-start</code>, which it proposes like any change), or ask itself a question. <a href="teaching.html">Teaching the assistant</a> describes how this works.</p>
+<h3 id="visitors-who-have-not-signed-in">Visitors who have not signed in<a class="anchor" href="#visitors-who-have-not-signed-in" aria-label="Link to this section"></a></h3>
+<p>Where the administrator has turned on <strong>Visitors may browse</strong> (see <a href="../guide/interface.html#browse-without-signing-in">Browse without signing in</a>), someone who has not signed in can ask questions too. The assistant changes nothing for them: no proposal card appears, and the answer says that a change needs signing in. A visitor&#39;s conversation is kept only in the open page. There are no recent chats, <strong>New chat</strong> starts over, and the conversation is gone when the page is closed or reloaded.</p>
+<h2 id="your-conversations">Your conversations<a class="anchor" href="#your-conversations" aria-label="Link to this section"></a></h2>
+<figure class="shot"><a href="../../assets/shots/chat-page@2x.webp"><img src="../../assets/shots/chat-page.webp" srcset="../../assets/shots/chat-page.webp 1x, ../../assets/shots/chat-page@2x.webp 2x" alt="The Chat page: the sidebar on the left, a box of recent chats with their titles, dates, message counts and a trash icon each, and the conversation on the right, with the question box, the bulb and the send button at the bottom" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Chat page keeps every conversation you have had, newest first.</figcaption></figure>
+<ul>
+<li><strong>Start a new chat</strong> with the plus button (<strong>New chat</strong>). Start one for each new topic: the assistant remembers only what was said in the current chat. If the chat you are in has no messages yet, <strong>New chat</strong> stays in it rather than making another empty one.</li>
+<li><strong>Titles</strong> are the first question, on one line, cut at 60 characters. A chat cannot be renamed.</li>
+<li><strong>Recent chats</strong>: on the Chat page they are in the box at the left, the most recently used first, each with its title, the time (today) or the date, and how many messages it has. The <strong>Filter chats…</strong> box above them matches titles, not what was said. In the drawer and on a phone, the <strong>Recent chats</strong> button (a clock) opens the same list as a menu. With nothing to show, the list says &quot;No previous chats&quot;, or &quot;No chats match&quot; when the filter finds none.</li>
+<li><strong>Come back to a chat</strong> by its address: the Chat page shows <code>/chat/&lt;id&gt;</code> in the address bar, so you can bookmark a conversation. A chat opens only for you; anyone else who follows the address gets their own latest chat instead.</li>
+</ul>
+<p>To delete a chat:</p>
+<ol>
+<li>Open the Chat page from the sidebar.</li>
+<li>In the recent chats box, click the trash icon (<strong>Delete chat</strong>) beside the chat.</li>
+<li>Your browser asks <code>Delete “&lt;title&gt;”?</code>; confirm.</li>
+</ol>
+<p>The chat is deleted for good: it does not go to the <a href="../guide/profile.html">trash</a>. The menu in the drawer and on a phone has no delete button, and a chat cannot be deleted while it is answering.</p>
+<h3 id="where-your-conversations-are-kept">Where your conversations are kept<a class="anchor" href="#where-your-conversations-are-kept" aria-label="Link to this section"></a></h3>
+<p>Each chat is a log in your home folder, under <code>~/.chats/</code>. The folder and its logs are yours alone: other users cannot open them. An administrator can, because an administrator&#39;s access passes every permission. Chats are kept until you delete them; EiN removes none on its own.</p>
+<p>A chat&#39;s log holds your questions, the answers, the commands that ran and what they printed, so it holds copies of what the assistant read to answer you.</p>
+<p>From the <a href="../shell/terminal.html">terminal</a> you can list, read and delete your chats; see <a href="commands.html#assistant-chat"><code>assistant-chat</code></a>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+assistant-chat list
+assistant-chat <span class="hljs-built_in">read</span> &lt;<span class="hljs-built_in">id</span>&gt;
+assistant-chat delete &lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
+<h3 id="long-chats-forget-their-beginning">Long chats forget their beginning<a class="anchor" href="#long-chats-forget-their-beginning" aria-label="Link to this section"></a></h3>
+<p>With every question the assistant gets the earlier turns of the chat again, but long results from earlier turns go back shortened, and once the earlier turns add up to about 20,000 characters the oldest are dropped. Everything stays on your screen and in the log, but the assistant no longer reads the first questions of a long chat. Start a new chat for a new topic, or say again what matters.</p>
+<h2 id="when-the-assistant-cannot-answer">When the assistant cannot answer<a class="anchor" href="#when-the-assistant-cannot-answer" aria-label="Link to this section"></a></h2>
+<p>While the language model is starting or restarting, for example after an update or a restart of the machine, the answer says &quot;The language model is restarting; waiting for it…&quot;. The chat keeps trying, for three minutes unless your administrator has changed <strong>Wait for the language model (seconds)</strong> (<a href="../reference/settings.html#cfg_llm_wait"><code>CFG_LLM_WAIT</code></a>). If the model comes back in time, the answer goes on and its timeline notes how long it waited.</p>
+<p>Each command gets a minute. When commands take too long, the assistant stops running them and answers from what it has, saying what was slow.</p>
+<p>When there is no answer, a red card takes its place:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>It says</th>
+<th>What happened</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Assistant unavailable</strong></td>
+<td>&quot;The assistant is not available right now.&quot;</td>
+<td>The language model could not be reached within the wait, a step took longer than three minutes, or your browser lost contact with EiN.</td>
+<td>Try again later. If it keeps happening, tell your administrator.</td>
+</tr>
+<tr>
+<td><strong>No answer</strong></td>
+<td>&quot;The assistant could not answer this question.&quot;</td>
+<td>The model gave up: it kept repeating a command, used commands that do not exist, kept running commands after its 12 for one question, or the chat no longer fit.</td>
+<td>Ask more plainly, name the person or album, turn on <strong>Think harder</strong>, or start a new chat.</td>
+</tr>
+<tr>
+<td><strong>Answer too long</strong></td>
+<td>&quot;The answer was too long to finish. Ask for less, such as the last 20 rows.&quot;</td>
+<td>The answer was longer than the model may write at once.</td>
+<td>Ask for less, or ask for a table.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Under the text, the card gives the technical reason in small type, such as <code>model service unreachable: http://llm:8190: …; still away after 180s</code>. Pass it on to your administrator if you ask for help.</p>
+<p><strong>Retry</strong>, on the card, asks the same question again as a new message. It works after a reload too.</p>
+<p>If every question waits the full time and then shows <strong>Assistant unavailable</strong>, the language model is not running, or none has been set up; that is for your administrator. <a href="language-model.html">The language model</a> covers setting it up and <a href="../admin/troubleshooting.html">Troubleshooting</a> what to check.</p>
+<p>The assistant can also be wrong while looking sure. It is told to say only what the commands printed, but a small model sometimes picks the wrong command or misreads a result. When an answer matters, open <strong>Ran N commands</strong> to see what it looked up, or <strong>Show in search</strong> to see how it read your question.</p>
+<h2 id="where-your-questions-go">Where your questions go<a class="anchor" href="#where-your-questions-go" aria-label="Link to this section"></a></h2>
+<p>Usually the language model runs on the same machine as EiN, and nothing you ask leaves it. The chat says nothing about it then. The <strong>Language model</strong> tile in <strong>About EiN</strong>, in your account menu, says &quot;on this host&quot; under the model&#39;s name.</p>
+<p>Your administrator can choose a hosted provider&#39;s model instead. The chat then shows a line above the question box, with a globe icon, naming the provider, for example:</p>
+<div class="code"><pre tabindex="0"><code>Answered by OpenAI: your questions, and the names, places and search results used to answer them, leave this server.</code></pre></div>
+<p>With a provider, what goes there is your questions, what is on your screen (the page&#39;s name and the path of the thing or picture it shows), your name, and what the commands printed: names, dates, places, captions, and the text of files the assistant read. Pictures, videos and recordings themselves are never sent. Searches you type as sentences are read by the same model, so they go to the provider too. <a href="language-model.html">The language model</a> has the details for administrators.</p>
+<h2 id="questions-to-try">Questions to try<a class="anchor" href="#questions-to-try" aria-label="Link to this section"></a></h2>
+<p>These work on the demo archive of the Wrenfield family; use the names in your own archive instead.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Ask</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Show photos of Peggy Wrenfield in Falmouth</td>
+<td>A grid of pictures, straight from a search, with <strong>Show in search</strong></td>
+</tr>
+<tr>
+<td>Who is Helen Okafor?</td>
+<td>Her dates, parents, partner, children and life events</td>
+</tr>
+<tr>
+<td>How are Ruby Wrenfield and Helen Okafor related?</td>
+<td>The answer in words, with a family tree card of the line between them</td>
+</tr>
+<tr>
+<td>Who are Helen Okafor&#39;s grandchildren?</td>
+<td>A list of names, linked to their pages</td>
+</tr>
+<tr>
+<td>Whose birthday is coming up?</td>
+<td>Birthdays, anniversaries and other events around today</td>
+</tr>
+<tr>
+<td>Who is in this picture, and how old was each of them that day?</td>
+<td>With a picture open in the viewer: the people named in it and their ages</td>
+</tr>
+<tr>
+<td>Where were the pictures of Sailing in the archipelago taken? Show me on a map.</td>
+<td>A map card with the places pinned</td>
+</tr>
+<tr>
+<td>Add to Ruby Wrenfield&#39;s timeline that she graduated in December 2021</td>
+<td>A proposal card to run or decline</td>
+</tr>
+<tr>
+<td>Which services are running?</td>
+<td>A list or table of EiN&#39;s services and how they are doing</td>
+</tr>
+<tr>
+<td>How much disk space is used?</td>
+<td>The space used and free, from the machine EiN runs on</td>
+</tr>
+</tbody></table>
+</div>
+<p>For more about finding pictures without the chat, see <a href="../guide/search.html">Search and the finder</a>.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="index.html" rel="prev"><span>Previous</span>stub</a><a class="next" href="language-model.html" rel="next"><span>Next</span>The language model</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/assistant/chat.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-chat">Open the chat</a></li><li><a href="#ask-a-question">Ask a question</a></li><li class="nested"><a href="#what-the-assistant-knows-about-the-page-you-are-on">What the assistant knows about the page you are on</a></li><li class="nested"><a href="#think-harder">Think harder</a></li><li><a href="#read-an-answer">Read an answer</a></li><li class="nested"><a href="#pictures">Pictures</a></li><li class="nested"><a href="#links">Links</a></li><li class="nested"><a href="#show-in-search">Show in search</a></li><li class="nested"><a href="#tables">Tables</a></li><li class="nested"><a href="#cards">Cards</a></li><li><a href="#when-the-assistant-offers-to-make-a-change">When the assistant offers to make a change</a></li><li class="nested"><a href="#it-runs-as-you">It runs as you</a></li><li class="nested"><a href="#visitors-who-have-not-signed-in">Visitors who have not signed in</a></li><li><a href="#your-conversations">Your conversations</a></li><li class="nested"><a href="#where-your-conversations-are-kept">Where your conversations are kept</a></li><li class="nested"><a href="#long-chats-forget-their-beginning">Long chats forget their beginning</a></li><li><a href="#when-the-assistant-cannot-answer">When the assistant cannot answer</a></li><li><a href="#where-your-questions-go">Where your questions go</a></li><li><a href="#questions-to-try">Questions to try</a></li></ul></aside>
+    </div>
+  </body>
+</html>

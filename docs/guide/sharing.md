@@ -34,7 +34,7 @@ You do not need to know how this is stored. The **Share** dialog says it in word
 - **A person, a location or a device**: **Share** in its header. Sharing a person shares their page,
   not the photos they are in.
 - **One photo, video or recording**: open it in the viewer and choose **Share** in the pencil menu
-  of the details panel (see [Viewing photos, videos and recordings](viewer.md#change-a-file-from-the-pencil-menu)).
+  of the details panel (see [Viewing photos, videos and recordings](../archive/viewer.md#change-a-file-from-the-pencil-menu)).
 - **Several photos of an album**: select them and choose **Share** in the selection bar; see
   [Keep some photos private in a shared album](#keep-some-photos-private-in-a-shared-album).
 - **Anything in the tree**, for an administrator: open **Nodes** under **System** in the sidebar,
@@ -212,7 +212,7 @@ was opened, but not the address. Without a link, they see "No link opens this al
 They see that album and what is in it, and no other page of EiN: there is no sidebar and no search
 box, and the EiN mark at the top leads back to the album. Any other page asks them to sign in. In
 the viewer they see the pictures without the details panel, and can save each one with
-**Download** in the viewer's [More menu](viewer.md#the-more-menu).
+**Download** in the viewer's [More menu](../archive/viewer.md#the-more-menu).
 
 A few things to know about links:
 
@@ -242,7 +242,7 @@ moving them out of the album.
 
 1. In the album, select the photos: tick the round box in a picture's top-left corner,
    <kbd>Ctrl</kbd>-click (<kbd>⌘</kbd>-click on a Mac) to add more, or <kbd>Shift</kbd>-click to add
-   a range. On a phone, press and hold a picture. [Albums](albums.md) has every way to select.
+   a range. On a phone, press and hold a picture. [Albums](../archive/albums.md) has every way to select.
 2. Choose **Share** in the selection bar at the bottom. The dialog is headed **Share 3 photos**,
    with "In “Christmas at the cottage”" under it.
 3. Choose **Their own sharing**: "Only those you choose below. They keep this when the album's
@@ -310,7 +310,7 @@ Change the choice and **Save change** appears under it. [Your profile, favourite
 The preference applies to albums you create with **Create → Album**, and to new albums you make
 when you file pictures from your staging area. There, **New private album** always makes one only
 you can open, and pictures filed into an existing album take that album's sharing; see
-[Sorting in staging](staging.md#file-a-group). Anything else you create, such as a person or a
+[Sorting in staging](../archive/staging.md#file-a-group). Anything else you create, such as a person or a
 location, or a picture you upload into an album, takes the sharing of where it is created.
 
 Changing the preference changes no album you already have. To change one, use its **Share**
@@ -411,5 +411,5 @@ address in front of it:
 The reference has every option: [`share-info`](../reference/commands-core.md#share-info),
 [`share-link`](../reference/commands-core.md#share-link),
 [`share-set`](../reference/commands-core.md#share-set) and
-[`album`](../reference/commands-archive.md#album). [Permissions in depth](../admin/permissions.md)
+[`album`](../archive/commands.md#album). [Permissions in depth](../admin/permissions.md)
 explains `chmod`, `chown` and `acl`, which the dialog sets for you.

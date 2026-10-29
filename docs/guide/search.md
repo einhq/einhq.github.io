@@ -87,7 +87,7 @@ your searches.
 
 Every search finds only what you are allowed to see; a visitor browsing without signing in finds
 only what is shared with everyone ([Sharing](sharing.md)). Files still in your staging area are left
-out until they are filed ([Sorting in staging](staging.md)).
+out until they are filed ([Sorting in staging](../archive/staging.md)).
 
 ## Find photos, videos, recordings and documents
 
@@ -102,7 +102,7 @@ into a search, with the best matches first in one grid.
    and a video its length.
 5. To see one kind only, choose it under **Show**: **All**, **Images**, **Video**, **Audio** or
    **Documents**.
-6. Click a tile to open it in the [viewer](viewer.md).
+6. Click a tile to open it in the [viewer](../archive/viewer.md).
 
 To go back to the feed, empty the box, press <kbd>Enter</kbd> and remove any chips with their ×.
 
@@ -123,7 +123,7 @@ Each search looks in several places at once and puts the results together:
 
 A match in something said opens the video or recording at the moment the words are said, not at the
 start. A name said once in an hour of tape is found by its words. Documents have no preview in EiN
-and show as plain tiles; [Supported files](file-types.md) lists which files EiN reads text from.
+and show as plain tiles; [Supported files](../archive/file-types.md) lists which files EiN reads text from.
 
 ### Match percentages
 
@@ -137,7 +137,7 @@ show a different number in another search.
 **Show only mine** (only when you are signed in) limits the page, both the feed and a search, to
 the files you added yourself. EiN remembers the choice in this browser, not in your account. The
 Media page's other controls, its layouts and label pills, are covered in
-[Media, Year and labels](media.md#the-media-page).
+[Media, Year and labels](../archive/media.md#the-media-page).
 
 ## Write what you are looking for
 
@@ -162,7 +162,7 @@ found more.
 
 - A name that belongs to one person becomes that person. A name several people share becomes a chip
   ending in `…`, meaning every person whose name contains it.
-- A place becomes one of your [locations](places.md), or, for a country or a city that is not one,
+- A place becomes one of your [locations](../archive/places.md), or, for a country or a city that is not one,
   an **Area** chip covering it.
 - A word for a relative, such as `mother` or `husband`, is not read as a person: the yellow note
   names it, and it is searched as words. Name the person instead.
@@ -240,8 +240,8 @@ been taken as a place, or the other way round; remove that chip and search again
 <kbd>Esc</kbd> closes the list without picking. An `@` word you type without picking from the list
 stays in the box as ordinary words, and the yellow note mentions it. The Year page and the Map have
 boxes of their own that take `@` for a person, a location or a label; see
-[Media, Year and labels](media.md#narrow-the-year-to-a-person-a-place-or-a-label) and
-[Locations and the map](places.md).
+[Media, Year and labels](../archive/media.md#narrow-the-year-to-a-person-a-place-or-a-label) and
+[Locations and the map](../archive/places.md).
 
 ## Search with a picture
 
@@ -261,8 +261,8 @@ in `/tmp`, never adds it to the archive, and removes it after 24 hours (the **Ho
 setting, [`CFG_TMP_RETENTION_HOURS`](../reference/settings.md#cfg_tmp_retention_hours)). If it
 cannot be sent, a red message says `the picture could not be sent`, followed by the HTTP status.
 
-To find pictures like one that is already in the archive, open it in the [viewer](viewer.md). Its
-[details panel](viewer.md#the-details-panel) shows **Similar**, a strip of the nearest pictures, and
+To find pictures like one that is already in the archive, open it in the [viewer](../archive/viewer.md). Its
+[details panel](../archive/viewer.md#the-details-panel) shows **Similar**, a strip of the nearest pictures, and
 **Show all** opens the same search on the Media page.
 
 ## Narrow by label
@@ -274,7 +274,7 @@ is left out, as it would narrow nothing.
 A label shown anywhere else in EiN, on a picture or an album, opens the Search page for that label
 when you click it. When you are signed in, a search for exactly one label also offers the pictures
 that look like that label but do not carry it yet;
-[Media, Year and labels](media.md#let-ein-suggest-where-a-label-belongs) explains how to label them
+[Media, Year and labels](../archive/media.md#let-ein-suggest-where-a-label-belongs) explains how to label them
 and teach EiN what the label means.
 
 ## Find albums, people, locations and devices
@@ -317,7 +317,7 @@ Before you type, the Search page shows:
 - **Locations**: up to 16 locations that have a place on the map, as small maps, those placed from
   the most geotagged pictures first.
 - **Years**: every year with something in it, each opening that year on the
-  [Year page](media.md#the-year-page).
+  [Year page](../archive/media.md#the-year-page).
 - **Labels**: every label, the most used first, then suggested labels marked with a sparkle: words
   that at least five pictures look like although nothing carries them yet. Pointing at one shows
   **A suggested label: N pictures look like it, and nothing carries it yet**.
@@ -332,15 +332,15 @@ Copy it to send a search to someone in the family, or to come back to it later. 
 link sees only what they are allowed to see. To keep a search in your sidebar, see
 [Your sidebar and top bar](customizing.md).
 
-The assistant can search for you too: ask it in [Chat](assistant.md), and an answer that comes from
+The assistant can search for you too: ask it in [Chat](../assistant/chat.md), and an answer that comes from
 a search offers **Show in search** to open it on the Search or Media page.
 
 ## What needs the media service and a language model
 
 EiN's media service reads every picture, recording and document as it arrives, and turns your words
 into something it can compare with them when you search. A language model reads names out of a
-sentence. Your administrator installs both; see [The media service](../admin/media-service.md) and
-[The language model](../admin/language-model.md).
+sentence. Your administrator installs both; see [The media service](../ems/index.md) and
+[The language model](../assistant/language-model.md).
 
 | What you do                                                                                                               | Needs                                                         |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -378,7 +378,7 @@ picture finds nothing, and its line in the note says why.
 2. If the note keeps coming back, tell your administrator. Anyone signed in can check first: **About EiN**,
    in the menu under your picture, shows the **Media service** tile as `Not answering` while it is
    down. Your administrator finds more on the Dashboard's **Media service** tab, and
-   [The media service](../admin/media-service.md) covers what to do.
+   [The media service](../ems/index.md) covers what to do.
 
 Elsewhere you see no note, only less:
 

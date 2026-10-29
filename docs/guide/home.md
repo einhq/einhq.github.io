@@ -41,7 +41,7 @@ date, are not part of it, and neither are pictures you may not see. When no year
 today, the section is not shown at all.
 
 The same rings stand above the feed on the **Media** page; see
-[Media, Year and labels](media.md#browse-the-feed).
+[Media, Year and labels](../archive/media.md#browse-the-feed).
 
 ### Watch the memories story
 
@@ -63,12 +63,12 @@ The same rings stand above the feed on the **Media** page; see
 
 **Open in the lightbox** opens the story's pictures, from every year, in the viewer at the picture
 you were on, with the details panel and everything else the viewer offers; see
-[Viewing photos, videos and recordings](viewer.md).
+[Viewing photos, videos and recordings](../archive/viewer.md).
 
 A few things work differently from a slideshow in the viewer:
 
 - The 5 seconds are fixed. Your **Seconds per slide** preference applies to the viewer's slideshow
-  only; see [Watch a slideshow](viewer.md#watch-a-slideshow).
+  only; see [Watch a slideshow](../archive/viewer.md#watch-a-slideshow).
 - Each picture pans and zooms slowly whatever your **Ken Burns effect** preference says. On a device
   set to reduce motion, the pictures stay still.
 - A video shows as a still from it, and a recording as an empty slide. Use **Open in the lightbox**
@@ -104,7 +104,7 @@ What makes an entry:
 
 - **An album is made.** Every way of making one counts: **Create → Album**, **New album** while
   adding pictures, and filing a group from staging as a **New album** or **New private album**. See
-  [Create an album](albums.md#create-an-album) and [Sorting in staging](staging.md).
+  [Create an album](../archive/albums.md#create-an-album) and [Sorting in staging](../archive/staging.md).
 - **The time is when the album was made.** Adding pictures to an album, renaming it or changing
   its dates does not bring it back to the top.
 - **Only albums in the album list count**: folders inside an album, and the albums staging suggests
@@ -112,7 +112,7 @@ What makes an entry:
 
 When nothing has been added yet, News says "Nothing has been added yet" and "What people add shows
 up here.", and when you are signed in it offers **Import media**; see
-[Import media](importing.md#import-media).
+[Import media](../archive/importing.md#import-media).
 
 ## Events
 
@@ -169,13 +169,13 @@ milestones in bold:
 ### Make someone's dates appear
 
 - **Birthdays and memorials:** open the person, press **Edit**, and type **Born** or **Died** as a
-  full date, such as `1958-05-03`. See [Edit a person](people.md#edit-a-person).
+  full date, such as `1958-05-03`. See [Edit a person](../archive/people.md#edit-a-person).
 - **Wedding anniversaries:** give the partner relation a **From** date, such as `1996-02-03`, when
   you choose **Add partner** on the person's **Family** tab, and an **Until** date if it ended for
   another reason than a death. Choose **Married** under **Relationship** for "years married". In
   the web interface this takes an administrator. To date a partnership that is already recorded,
   choose **Add partner** again and pick the same partner. See
-  [Partnerships and their dates](family.md#partnerships-and-their-dates).
+  [Partnerships and their dates](../archive/family.md#partnerships-and-their-dates).
 
 ## The Statistics page
 
@@ -196,7 +196,7 @@ The **Events** section, from the Archive module, has four charts: **Births by mo
 - **Births** and **Deaths** count the **Born** and **Died** dates of people.
 - **Engagements** and **Marriages** count the **Engagement** and **Marriage** events written on
   people's pages. A wedding written on both spouses counts twice, and a partnership dated only by a
-  **From** date on the relation does not count. See [Record a wedding](family.md#record-a-wedding).
+  **From** date on the relation does not count. See [Record a wedding](../archive/family.md#record-a-wedding).
 
 ### How the archive grew
 
@@ -223,7 +223,7 @@ the section says "No node history found".
 
 | What you see                                                       | Why, and what to do                                                                                                                                                                                                                                                                       |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **On this day** is missing                                         | No picture in the albums you may see was taken on today's date in another year. Pictures still in staging and pictures without a date do not count; file them into an album and check their dates, see [Dates and places of pictures](dates-places.md).                                   |
+| **On this day** is missing                                         | No picture in the albums you may see was taken on today's date in another year. Pictures still in staging and pictures without a date do not count; file them into an album and check their dates, see [Dates and places of pictures](../archive/dates-places.md).                        |
 | A picture turns up under the day before or after                   | The day is counted in UTC, so a picture taken close to midnight can fall on the neighbouring day. A picture known only to a year or a month counts from the start of that period, so it can turn up on 1 January or the first of the month, or the day before in a time zone east of UTC. |
 | The story says "Nothing was taken on this day in earlier years."   | There are no pictures you may see from that date, for example when the story was opened from a link for another day.                                                                                                                                                                      |
 | An album you added pictures to is not in News                      | News shows when an album was made, not when pictures were added to it.                                                                                                                                                                                                                    |
@@ -277,17 +277,17 @@ person's birthdays at their death. By default it lists only milestone birthdays 
 
 The full options are in the reference for [`onthisday`](../reference/commands-core.md#onthisday),
 [`news`](../reference/commands-core.md#news), [`events`](../reference/commands-core.md#events),
-[`timeline`](../reference/commands-archive.md#timeline),
-[`dayinhistory`](../reference/commands-archive.md#dayinhistory) and
-[`person-stats`](../reference/commands-archive.md#person-stats), and
+[`timeline`](../archive/commands.md#timeline),
+[`dayinhistory`](../archive/commands.md#dayinhistory) and
+[`person-stats`](../archive/commands.md#person-stats), and
 [Commands by task](../shell/commands.md) lists more.
 
 ## Related pages
 
-- [Family tree, events and homes](family.md): dates of birth and death, partners and their dates,
+- [Family tree, events and homes](../archive/family.md): dates of birth and death, partners and their dates,
   and events on a person's page.
-- [Media, Year and labels](media.md): the Media feed with the same rings, and the Year page.
-- [Viewing photos, videos and recordings](viewer.md): the viewer and its slideshow.
-- [Albums](albums.md): making the albums that fill News.
+- [Media, Year and labels](../archive/media.md): the Media feed with the same rings, and the Year page.
+- [Viewing photos, videos and recordings](../archive/viewer.md): the viewer and its slideshow.
+- [Albums](../archive/albums.md): making the albums that fill News.
 - [Sharing](sharing.md): who sees which albums and people.
 - [Commands by task](../shell/commands.md): the shell commands by what they do.

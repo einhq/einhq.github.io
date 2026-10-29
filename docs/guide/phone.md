@@ -46,7 +46,7 @@ In the phone layout:
   so the phone does not zoom in while you type. A question that only asks you to confirm stays a
   small box. The phone's **Back** closes a dialog.
 - **The chat** opens as a dialog over the whole screen instead of in the side drawer; see
-  [Chatting with the assistant](assistant.md).
+  [Chatting with the assistant](../assistant/chat.md).
 - **The create and account menus** are wider, with taller rows.
 
 ### Page headers on a phone
@@ -109,15 +109,15 @@ A grid of pictures, such as an album or the **Media** page, works by touch like 
 A phone's grid starts with 2 pictures in a row, and keeps the number you pinch to in this browser.
 Pinching works where pictures keep their own shapes, such as an album or the **Media** page in its
 **Default** layout. The **Days** and **Months** layouts of the Media page have square tiles, three
-and five across on a phone, and do not change with a pinch; see [Media, Year and labels](media.md).
+and five across on a phone, and do not change with a pinch; see [Media, Year and labels](../archive/media.md).
 Where the grid is 640 pixels wide or more, as on most tablets, it fills its rows by height
 instead, and a pinch does not change it.
 
 Moving your finger while you hold cancels the press, so scrolling a grid never selects a picture.
 Once something is selected, the bar at the foot of the screen shows how many, for example **3
 selected**, with all its buttons in one **Actions** menu and **×** to clear the selection.
-[Albums](albums.md#select-pictures) covers selecting, and
-[The selection bar](albums.md#the-selection-bar) what each action does.
+[Albums](../archive/albums.md#select-pictures) covers selecting, and
+[The selection bar](../archive/albums.md#the-selection-bar) what each action does.
 
 A video in a grid plays a short silent preview when it scrolls into view, as there is no pointer
 to rest on it.
@@ -148,7 +148,7 @@ pixels.
 
 Turning the phone sideways makes the viewer fullscreen, and turning it upright again leaves
 fullscreen; an iPhone gives web pages no fullscreen, so there the viewer stays as it is. **Edit
-faces** is not offered on a phone. [Viewing photos, videos and recordings](viewer.md#on-a-phone-or-tablet)
+faces** is not offered on a phone. [Viewing photos, videos and recordings](../archive/viewer.md#on-a-phone-or-tablet)
 covers the viewer in full.
 
 The story that **On this day** plays works by touch too: tap the left third of the screen to go
@@ -162,14 +162,14 @@ Bring the photos and videos on your phone into your staging area with **Import m
 1. Tap the plus in the top bar, then **Import media**. The dialog fills the screen.
 2. Under **Into which category?**, pick where the files go. The **Inbox** is chosen at first. To
    keep a phone's pictures together, choose **New category** and, under **What it holds**,
-   **Phone**; see [The kinds of category](staging.md#the-kinds-of-category).
+   **Phone**; see [The kinds of category](../archive/staging.md#the-kinds-of-category).
 3. Tap **Choose files**. Your phone's own picker opens, with your photo library, the camera or your
    files, depending on the phone.
 4. Pick the files, then tap the button that counts them, for example **Upload 24**.
 
 The category opens on its **Files** tab, and the **Uploads** ring in the top bar shows how far the
-upload is. [Getting your photos in](importing.md#import-media) covers the dialog in full, and
-[Sorting in staging](staging.md) what to do with the files once they are in.
+upload is. [Getting your photos in](../archive/importing.md#import-media) covers the dialog in full, and
+[Sorting in staging](../archive/staging.md) what to do with the files once they are in.
 
 **Upload** also sits under ⋮ on an album you may change, on the **Media** page and on a staging
 category. On a phone its picker offers only photos, videos, recordings and GPX tracks, with the
@@ -186,7 +186,7 @@ not offer.
 
 For a whole camera roll, thousands of files, copying from a computer is steadier than uploading
 from the phone. The **Import media** dialog itself suggests copying over SFTP for more than about
-10,000 files; see [Copy files in over SFTP](importing.md#copy-files-in-over-sftp).
+10,000 files; see [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp).
 
 On the Media page, **Search with a picture** can take a photo with the camera and find what looks
 like it; see [Search with a picture](search.md#search-with-a-picture).
@@ -238,26 +238,26 @@ seconds by itself. On a phone a red crossed-out plug in the top bar tells you, i
   lists them.
 - **Edit faces** in the viewer.
 - **Keys and the column beside the stream in staging's Sort tab**, and selecting several groups
-  there; see [Sorting in staging](staging.md#on-a-phone).
+  there; see [Sorting in staging](../archive/staging.md#on-a-phone).
 
 ## When something goes differently
 
-| What you see                                                                                                   | Why                                                                                                                                        | What to do                                                                                                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The address does not open on the phone                                                                         | The phone is not on the network EiN is on, or it does not understand a name ending in `.local`.                                            | Join the same network, or use the address with the machine's IP number that your administrator gives you. Away from home, see [Ports, HTTPS and remote access](../admin/network.md).                                                                                    |
-| No **Add to Home Screen** or **Install app**, or EiN opens with the browser's address bar from the home screen | EiN is reached over plain `http://`.                                                                                                       | Ask your administrator for an `https://` address.                                                                                                                                                                                                                       |
-| Swiping does not bring the menu out                                                                            | The swipe was too slow or too slanted, began at the screen's edge, or landed on the map, a slider, a field or a row that scrolls sideways. | Tap the EiN mark instead.                                                                                                                                                                                                                                               |
-| Pinching does not change the grid                                                                              | The grid has square tiles (**Days** or **Months**), or the screen is wide enough for the grid to fill its rows by itself.                  | Choose the **Default** layout on the Media page.                                                                                                                                                                                                                        |
-| The upload stopped                                                                                             | The phone paused the browser, or the page was closed or reloaded.                                                                          | If **Uploads** in the top bar lists failed files, choose **Retry failed**. After a reload the list is gone: choose the files that did not arrive and upload them again. An exact copy of a file already sent is recognised in staging; see [Duplicates](duplicates.md). |
-| You cannot find **Upload**, **Share** or **Edit**                                                              | On a phone they are under ⋮ at the top right of the header.                                                                                | Tap ⋮.                                                                                                                                                                                                                                                                  |
-| You cannot find the viewer's close button                                                                      | The touch layout has none.                                                                                                                 | Swipe down on the picture, or use the phone's Back.                                                                                                                                                                                                                     |
+| What you see                                                                                                   | Why                                                                                                                                        | What to do                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The address does not open on the phone                                                                         | The phone is not on the network EiN is on, or it does not understand a name ending in `.local`.                                            | Join the same network, or use the address with the machine's IP number that your administrator gives you. Away from home, see [Ports, HTTPS and remote access](../admin/network.md).                                                                                               |
+| No **Add to Home Screen** or **Install app**, or EiN opens with the browser's address bar from the home screen | EiN is reached over plain `http://`.                                                                                                       | Ask your administrator for an `https://` address.                                                                                                                                                                                                                                  |
+| Swiping does not bring the menu out                                                                            | The swipe was too slow or too slanted, began at the screen's edge, or landed on the map, a slider, a field or a row that scrolls sideways. | Tap the EiN mark instead.                                                                                                                                                                                                                                                          |
+| Pinching does not change the grid                                                                              | The grid has square tiles (**Days** or **Months**), or the screen is wide enough for the grid to fill its rows by itself.                  | Choose the **Default** layout on the Media page.                                                                                                                                                                                                                                   |
+| The upload stopped                                                                                             | The phone paused the browser, or the page was closed or reloaded.                                                                          | If **Uploads** in the top bar lists failed files, choose **Retry failed**. After a reload the list is gone: choose the files that did not arrive and upload them again. An exact copy of a file already sent is recognised in staging; see [Duplicates](../archive/duplicates.md). |
+| You cannot find **Upload**, **Share** or **Edit**                                                              | On a phone they are under ⋮ at the top right of the header.                                                                                | Tap ⋮.                                                                                                                                                                                                                                                                             |
+| You cannot find the viewer's close button                                                                      | The touch layout has none.                                                                                                                 | Swipe down on the picture, or use the phone's Back.                                                                                                                                                                                                                                |
 
 ## Related pages
 
 - [Finding your way around](interface.md): the top bar, the menu and how pages, dialogs and full
   screen open and close.
-- [Viewing photos, videos and recordings](viewer.md): the viewer, its details and its gestures.
-- [Getting your photos in](importing.md): every way files get into EiN.
-- [Albums](albums.md): selecting pictures and the selection bar.
+- [Viewing photos, videos and recordings](../archive/viewer.md): the viewer, its details and its gestures.
+- [Getting your photos in](../archive/importing.md): every way files get into EiN.
+- [Albums](../archive/albums.md): selecting pictures and the selection bar.
 - [Ports, HTTPS and remote access](../admin/network.md): HTTPS and reaching EiN from outside the
   home, for administrators.

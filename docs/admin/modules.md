@@ -15,11 +15,11 @@ module is made of.
 The published modules are the repositories named `module-<name>` in the einhq organisation on
 GitHub:
 
-| Module      | What it gives you                                                                                                                            | What it needs                                                                                       |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `archive`   | The Archive: albums, media, people and the family tree, locations, devices and tracks, staging, and the search that finds things among them  | The `ems` module, installed along with it, and the [media service](media-service.md) to do its work |
-| `assistant` | **Chat**: the assistant that answers questions by running EiN's commands for you                                                             | A [language model](language-model.md), either the installer's `--llm` or a hosted one               |
-| `ems`       | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard** | The [media service](media-service.md)                                                               |
+| Module      | What it gives you                                                                                                                            | What it needs                                                                                      |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `archive`   | The Archive: albums, media, people and the family tree, locations, devices and tracks, staging, and the search that finds things among them  | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
+| `assistant` | **Chat**: the assistant that answers questions by running EiN's commands for you                                                             | A [language model](../assistant/language-model.md), either the installer's `--llm` or a hosted one |
+| `ems`       | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard** | The [media service](../ems/index.md)                                                               |
 
 A module needs only what its manifest names as dependencies; EiN installs those with it. A service
 that runs beside EiN, such as the media service or the language model, is no module: the installer

@@ -179,8 +179,8 @@ scp -P 2222 -r "Cornwall 1968" helen@ein.local:/home/helen/staging/files/inbox/
 
 A zip needs no unpacking: copy it in as it is, and EiN expands it where it lands once the upload has
 ended. What you copy into staging waits there, seen only by you, until you sort it;
-[Sorting in staging](../guide/staging.md) takes it from there, and
-[Getting your photos in](../guide/importing.md) compares the ways in.
+[Sorting in staging](../archive/staging.md) takes it from there, and
+[Getting your photos in](../archive/importing.md) compares the ways in.
 
 A photo, video or recording copied anywhere else you may write, such as into an album, is taken in
 straight away, exactly as an upload in the web interface is: EiN makes its thumbnails and reads its

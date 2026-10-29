@@ -356,7 +356,7 @@ Some of what a module brings is found by where it is in the module, not by a fie
 | `lib/`, `types/`, `test/` | ordinary source, reached through `imports` and `exports`                                              |
 | `deno.jsonc`              | generated from `mod.json` by `deno task sync:modules`; never edited                                   |
 
-Commands are also found by name. Core runs a module's command when it is named after a role: `members-<type>` for what a node of that type holds, `subject-<kind>` for `search --subject`, `search-*` providers for the search box, and `news-<x>`, `events-<x>` and `onthisday-<x>` for the home page's sections. [Writing a module](modules.md) gives each role's arguments and answer. [Teaching the assistant](assistant.md) covers what a module gives the assistant through `etc/assistant.d`.
+Commands are also found by name. Core runs a module's command when it is named after a role: `members-<type>` for what a node of that type holds, `subject-<kind>` for `search --subject`, `search-*` providers for the search box, and `news-<x>`, `events-<x>` and `onthisday-<x>` for the home page's sections. [Writing a module](modules.md) gives each role's arguments and answer. [Teaching the assistant](../assistant/teaching.md) covers what a module gives the assistant through `etc/assistant.d`.
 
 ## Check a manifest
 

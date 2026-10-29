@@ -149,7 +149,7 @@ category or an album first:
 cd ~/staging/files/inbox
 ```
 
-Then drop the files. [Getting your photos in](../guide/importing.md) explains staging, albums and
+Then drop the files. [Getting your photos in](../archive/importing.md) explains staging, albums and
 what happens after an upload. You need permission to write in the folder; an upload into a folder
 you may only read fails and is listed under **Uploads**.
 
@@ -392,8 +392,8 @@ Commands marked _archive_ come with the archive module and exist only where it i
 | [`news`](../reference/commands-core.md#news)                                         | What has been added lately, newest first                                                    |
 | [`events`](../reference/commands-core.md#events)                                     | What falls on the days around today, such as birthdays and anniversaries                    |
 | [`onthisday`](../reference/commands-core.md#onthisday)                               | What the archive has from this day in earlier years                                         |
-| [`timeline`](../reference/commands-archive.md#timeline)                              | _archive_: albums, life events, birthdays and tracks, newest first                          |
-| [`person-info`](../reference/commands-archive.md#person-info)                        | _archive_: a person's details, relations, homes and events                                  |
+| [`timeline`](../archive/commands.md#timeline)                                        | _archive_: albums, life events, birthdays and tracks, newest first                          |
+| [`person-info`](../archive/commands.md#person-info)                                  | _archive_: a person's details, relations, homes and events                                  |
 | [`top`](../reference/commands-core.md#top)                                           | Watches the system live; <kbd>q</kbd> quits                                                 |
 | [`ps`](../reference/commands-core.md#ps), [`who`](../reference/commands-core.md#who) | What is running now, and who is connected; your own, or everyone's for an administrator     |
 | [`health`](../reference/commands-core.md#health)                                     | One line on how the system is doing, and the checks behind it                               |

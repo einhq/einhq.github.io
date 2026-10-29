@@ -10,16 +10,16 @@ A photo, a video, a recording, a scanned letter and a text you write in the edit
 type `file`. Like every node, a file has a name in its folder, an owner, a group, permissions and an
 id. What sets it apart is that it holds bytes, and its attributes describe them:
 
-| Attribute     | What it is                                                                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `name`        | The file's name.                                                                                                                                             |
-| `mimetype`    | What kind of file it is, such as `image/jpeg` or `video/mp4`. [Supported files](../guide/file-types.md#how-ein-tells-what-a-file-is) explains how EiN tells. |
-| `size`        | The size of the content in bytes.                                                                                                                            |
-| `sha256`      | The SHA-256 checksum of the content.                                                                                                                         |
-| `writtenAt`   | When the content last changed.                                                                                                                               |
-| `description` | A description, when someone wrote one.                                                                                                                       |
-| `sourceId`    | On a file EiN made from another one, such as a thumbnail, the id of the file it was made from.                                                               |
-| `frozen`      | When `true`, the content cannot be written.                                                                                                                  |
+| Attribute     | What it is                                                                                                                                                     |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | The file's name.                                                                                                                                               |
+| `mimetype`    | What kind of file it is, such as `image/jpeg` or `video/mp4`. [Supported files](../archive/file-types.md#how-ein-tells-what-a-file-is) explains how EiN tells. |
+| `size`        | The size of the content in bytes.                                                                                                                              |
+| `sha256`      | The SHA-256 checksum of the content.                                                                                                                           |
+| `writtenAt`   | When the content last changed.                                                                                                                                 |
+| `description` | A description, when someone wrote one.                                                                                                                         |
+| `sourceId`    | On a file EiN made from another one, such as a thumbnail, the id of the file it was made from.                                                                 |
+| `frozen`      | When `true`, the content cannot be written.                                                                                                                    |
 
 A media file carries more once the Archive has read it, such as the time it was taken and its
 orientation; [Nodes and node types](nodes.md) describes a node part by part.
@@ -112,7 +112,7 @@ install. EiN sees its folders at fixed paths inside its container:
 The media service mounts the same folders at the same paths, so a path EiN hands it is the file it
 opens, and the files on the `disk` and `volatile` tiers are never copied between them. It may read your originals but never write them.
 [Installing in detail](../admin/install.md#the-data-folder) has the whole layout, and
-[The media service](../admin/media-service.md) how the two share it.
+[The media service](../ems/index.md) how the two share it.
 
 Inside `files` and `files-volatile`, each file's bytes are stored under its node id, in a folder named
 after the id's last two characters:
@@ -158,11 +158,11 @@ EiN keeps a file's `size`, `sha256` and `writtenAt` up to date as the bytes are 
 way they come in: an upload, SFTP, the editor or a shell redirect such as `>`. You never run anything
 to bring them up to date.
 
-| Attribute   | What depends on it                                                                                                                                                                                                    |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `size`      | Listings, `du`, and a download's length                                                                                                                                                                               |
-| `sha256`    | Finding exact copies of a file ([Duplicates](../guide/duplicates.md)), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file's content changed so it reads it again |
-| `writtenAt` | The modification time SFTP reports, so a backup tool or `rsync` sees a photo as unchanged while EiN is still working out its faces and description                                                                    |
+| Attribute   | What depends on it                                                                                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `size`      | Listings, `du`, and a download's length                                                                                                                                                                                 |
+| `sha256`    | Finding exact copies of a file ([Duplicates](../archive/duplicates.md)), noticing that a file arriving in staging is already in the archive, and telling the Archive that a file's content changed so it reads it again |
+| `writtenAt` | The modification time SFTP reports, so a backup tool or `rsync` sees a photo as unchanged while EiN is still working out its faces and description                                                                      |
 
 `writtenAt` is when the bytes last changed. A node also has a modification time of its own, which
 moves whenever any attribute changes; that is why SFTP reports `writtenAt` instead. A client that
@@ -188,14 +188,14 @@ and [mime](../reference/commands-core.md#mime).
 Every way in writes through the same place, so each one records size, checksum and time, and checks
 your permissions the same way.
 
-| Way                               | What happens to the bytes                                                                                                                                                                                                      |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. [Getting your photos in](../guide/importing.md) has the ways to upload. |
-| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                             |
-| SFTP, `scp` and sshfs             | Written as on any SFTP server. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                       |
-| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                      |
-| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                           |
-| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                            |
+| Way                               | What happens to the bytes                                                                                                                                                                                                        |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. [Getting your photos in](../archive/importing.md) has the ways to upload. |
+| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                               |
+| SFTP, `scp` and sshfs             | Written as on any SFTP server. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                         |
+| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                        |
+| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                             |
+| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                              |
 
 ## Copying, moving, linking and deleting
 
@@ -296,7 +296,7 @@ how to make room.
 
 | What you see                                                            | Why                                                                                    | What to do                                                                                                                                        |
 | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A picture's thumbnail is missing although the picture was read long ago | Its rendition was never finished, or its bytes on the `volatile` tier are gone.        | Run `regenerate --force` on the picture or its album. See [regenerate](../reference/commands-archive.md#regenerate).                              |
+| A picture's thumbnail is missing although the picture was read long ago | Its rendition was never finished, or its bytes on the `volatile` tier are gone.        | Run `regenerate --force` on the picture or its album. See [regenerate](../archive/commands.md#regenerate).                                        |
 | A file's size or checksum is wrong after it was changed outside EiN     | The bytes changed without passing through EiN, so the node was not told.               | Run `file-sync` on the file.                                                                                                                      |
 | `File is frozen and cannot be modified`                                 | The file is marked `frozen`, as the importer marks the originals it links to in `old`. | Leave its content as it is. Someone who may change the file can lift the mark with `attrs -d frozen <file>`; a copy made with `cp` is frozen too. |
 | `storage tier is set once at creation and cannot be changed`            | A command tried to move a file to another tier.                                        | Copy the content into a new file made with `--tier`, then remove the old one.                                                                     |
@@ -312,7 +312,7 @@ of the whole installation.
 
 - [Nodes and node types](nodes.md): what a node is, part by part.
 - [Links](links.md): hard links, softlinks, and what deleting and the trash do.
-- [Supported files](../guide/file-types.md): which files EiN works with and what it makes from them.
+- [Supported files](../archive/file-types.md): which files EiN works with and what it makes from them.
 - [Installing in detail](../admin/install.md#the-data-folder): the data folder and the database volume.
 - [Your data: backup, moving and removing](../admin/data.md): what to back up, and why the files and the database go together.
 - [Reaching other machines](../shell/remote.md): mounting a folder of another machine.

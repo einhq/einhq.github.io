@@ -84,7 +84,7 @@ The installer checks the machine before it touches anything. Each check prints o
 | `container GPU`          | nvidia-container-toolkit 1.18 or newer, with its spec in `/var/run/cdi/nvidia.yaml`                                                                | no toolkit, an older one, no spec, or a spec made by hand in `/etc/cdi`; podman before 5 with a spec it rejects; Docker before 28.2 |                                                                      |
 | `archive`                |                                                                                                                                                    | the Archive module named, by `--module archive` or in `.env`, without the media service; the line appears only then                 |                                                                      |
 
-The three before `archive` appear only with `--ems` or `--llm`, and none of them can stop the install: without a usable card the media service and the model run on the processor. With several cards, the line names the one with the most memory. [The graphics card](gpu.md) explains what each `low` line asks of you.
+The three before `archive` appear only with `--ems` or `--llm`, and none of them can stop the install: without a usable card the media service and the model run on the processor. With several cards, the line names the one with the most memory. [The graphics card](../ems/gpu.md) explains what each `low` line asks of you.
 
 A few details of how the checks count:
 
@@ -133,7 +133,7 @@ The compose files are plain Compose Spec, so both read them alike. What differs:
 | Who runs the containers                | your user                                                                                                                                                           | the Docker daemon; your user needs access to it, usually by being in the `docker` group, which nothing checks |
 | Who owns what EiN writes in `EIN_DATA` | your user                                                                                                                                                           | root, unless Docker itself runs rootless                                                                      |
 | Where images and the database are      | `~/.local/share/containers`, usually                                                                                                                                | `/var/lib/docker`, usually                                                                                    |
-| The graphics card                      | through the CDI spec; podman before 5 needs a fix first, see [The graphics card](gpu.md)                                                                            | through the CDI spec, from Docker Engine 28.2                                                                 |
+| The graphics card                      | through the CDI spec; podman before 5 needs a fix first, see [The graphics card](../ems/gpu.md)                                                                     | through the CDI spec, from Docker Engine 28.2                                                                 |
 | After the machine restarts             | `podman-restart.service` starts the containers, once `setup.sh` or you have turned it on; see [Start EiN when the machine boots](#start-ein-when-the-machine-boots) | Docker starts the containers again with its daemon, unless you stopped them                                   |
 | The build's scratch files              | `setup.sh` puts them in a `tmp` folder in podman's storage, as `/tmp` is often too small for the media service                                                      | in Docker's own storage                                                                                       |
 
@@ -176,7 +176,7 @@ compose runs EiN as the project `ein`, from the files in `~/ein`. Each service i
 | `ems`   | `localhost/ein-ems`, built from the ems sources                            | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
 | `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                   | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
 
-Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](media-service.md) and [The language model](language-model.md) cover the two optional ones.
+Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](../ems/index.md) and [The language model](../assistant/language-model.md) cover the two optional ones.
 
 ### The files in `~/ein`
 
@@ -245,7 +245,7 @@ EIN_DB_DIR=
 | `COMPOSE_PROJECT_NAME`          | `ein`, the compose project's name, which names its containers, network and volumes                                                                                                                                                                    |
 | `EIN_ENGINE`                    | `podman` or `docker`, the engine `setup.sh` picked at the install and keeps to; see [Keep to one engine](#keep-to-one-engine)                                                                                                                         |
 | `EIN_EMS`, `EIN_LLM`            | `1` when the media service or the language model is installed; `--ems`, `--no-ems`, `--llm` and `--no-llm` set them                                                                                                                                   |
-| `EIN_GPU`                       | `1` when the first run found an NVIDIA card that `nvidia-smi` reaches, with a CDI spec in `/var/run/cdi/nvidia.yaml` or `/etc/cdi`. Set only then; see [The graphics card](gpu.md) for a card added later                                             |
+| `EIN_GPU`                       | `1` when the first run found an NVIDIA card that `nvidia-smi` reaches, with a CDI spec in `/var/run/cdi/nvidia.yaml` or `/etc/cdi`. Set only then; see [The graphics card](../ems/gpu.md) for a card added later                                      |
 | `EIN_MODULES`                   | the modules EiN installs at its start when they are missing, separated by spaces                                                                                                                                                                      |
 | `EIN_DATA`                      | the data folder                                                                                                                                                                                                                                       |
 | `POSTGRES_PASSWORD`             | the database's password, random, made here                                                                                                                                                                                                            |
@@ -254,7 +254,7 @@ EIN_DB_DIR=
 | `INITIAL_ADMIN_PASSWORD`        | the `admin` account's first password, random, made here. EiN takes it at its first start, and changing it later does nothing; `setup.sh` prints it at the end of every run until you delete the line, which you do once you have changed the password |
 | `EIN_BIND`                      | the address the ports listen on: `0.0.0.0` for every address of the machine, `127.0.0.1` for the machine alone                                                                                                                                        |
 | `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the web interface and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                                                                      |
-| `CFG_LLM_…`                     | a hosted language model instead of `--llm`; see [The language model](language-model.md)                                                                                                                                                               |
+| `CFG_LLM_…`                     | a hosted language model instead of `--llm`; see [The language model](../assistant/language-model.md)                                                                                                                                                  |
 | `EIN_SOURCE`, `EIN_SOURCE_KEY`  | where the sources are cloned from, and the token that reads them when they are private; `--source` sets them                                                                                                                                          |
 | `EIN_DB_DIR`                    | the database's folder; empty keeps it in the volume `ein_db`. `--db-dir` sets it                                                                                                                                                                      |
 
@@ -298,7 +298,7 @@ Under Docker the `restart: always` lines are left out.
 | A setting of EiN (`CFG_…`) or of the media service (`EMS_…`) | Add the line to `~/ein/.env`, then run `podman compose up -d` in `~/ein`. Most settings can instead be changed while EiN runs; see [Configuration](configuration.md). |
 | The ports, or keep EiN to the machine                        | Change `EIN_HTTP_PORT`, `EIN_SSH_PORT` or `EIN_BIND` in `.env`, then `podman compose up -d`; see [Ports, HTTPS and remote access](network.md).                        |
 | A container's memory limit                                   | Add `EIN_MEMORY=8g`, `EMS_MEMORY=20g` or `LLM_MEMORY=12g` to `.env`, then `podman compose up -d`; see [Performance and sizing](performance.md).                       |
-| The language model's model or image                          | `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE` and `LLM_CARD_RESERVE_MB` in `.env`; see [The language model](language-model.md).                                       |
+| The language model's model or image                          | `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE` and `LLM_CARD_RESERVE_MB` in `.env`; see [The language model](../assistant/language-model.md).                          |
 | The data folder                                              | `EIN_DATA` in `.env` names it, but changing the line does not move your files; see [Your data](data.md).                                                              |
 
 When a change does not take, `podman compose up -d --force-recreate` makes every container again. With Docker, write `docker compose` for `podman compose`.
@@ -383,7 +383,7 @@ The commands are written for podman; with Docker, write `docker compose`. [Insta
 ## Related pages
 
 - [Install EiN](../start/install.md): the short path, and what to do first after it.
-- [The graphics card](gpu.md): the NVIDIA driver, the container toolkit and the CDI spec.
+- [The graphics card](../ems/gpu.md): the NVIDIA driver, the container toolkit and the CDI spec.
 - [Ports, HTTPS and remote access](network.md): reaching EiN from outside, behind a proxy.
 - [Configuration](configuration.md) and [Environment variables](../reference/environment.md): every setting and where it is set.
 - [Updating](updating.md) and [Your data](data.md): keeping EiN current, backing it up, moving and removing it.

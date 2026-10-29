@@ -54,6 +54,7 @@ const LANGUAGES: Record<string, string> = {
 const ALERTS: Record<string, string> = { NOTE: 'Note', TIP: 'Tip', IMPORTANT: 'Important', WARNING: 'Warning', CAUTION: 'Caution' };
 
 type Entry = { title: string; path: string; section: string; depth: number };
+type Section = { title: string; part: string; pages: Entry[] };
 type Heading = { id: string; text: string; depth: number };
 type Link = { from: string; target: string; hash: string; raw: string };
 type Page = Entry & {
@@ -71,15 +72,22 @@ const problems: string[] = [];
 
 /**
  * docs/SUMMARY.md, in mdBook's form: a link before any heading is a page outside the sections (the
- * welcome page), each `##` heading a section of the sidebar, and each list item under it a page,
+ * welcome page), each `#` heading a part that groups the sections after it (Core, then the
+ * modules), each `##` heading a section of the sidebar, and each list item under it a page,
  * indented two spaces for a page under the one above.
  */
-function contents(text: string): { sections: { title: string; pages: Entry[] }[]; pages: Entry[] } {
-  const sections: { title: string; pages: Entry[] }[] = [{ title: '', pages: [] }];
+function contents(text: string): { sections: Section[]; pages: Entry[] } {
+  const sections: Section[] = [{ title: '', part: '', pages: [] }];
+  let part = '';
   for (const line of text.split('\n')) {
-    const section = line.match(/^##\s+(.+)$/);
-    if (section) {
-      sections.push({ title: section[1].trim(), pages: [] });
+    const heading = line.match(/^(#{1,2})\s+(.+)$/);
+    if (heading?.[1] === '#') {
+      // The file's own title, "# Contents", comes before any section and names no part.
+      if (sections.length > 1 || sections[0].pages.length) part = heading[2].trim();
+      continue;
+    }
+    if (heading) {
+      sections.push({ title: heading[2].trim(), part, pages: [] });
       continue;
     }
     const item = line.match(/^(\s*)(?:[-*]\s+)?\[([^\]]+)\]\(([^)]+\.md)\)\s*$/);
@@ -267,13 +275,14 @@ function render(entry: Entry, markdown: string): Page {
 /** The site's root from a page at `path` under docs/, as a relative URL that works on a forge's preview as on the site. */
 const rootOf = (path: string) => '../'.repeat(path.split('/').length);
 
-function sidebar(sections: { title: string; pages: Entry[] }[], current: Page, root: string): string {
+function sidebar(sections: Section[], current: Page, root: string): string {
   const href = (p: Entry) => relative(dirname(join(DOCS, current.path)), join(DOCS, p.path)).replace(/\.md$/, '.html');
   const item = (p: Entry) => `<li${p.depth ? ' class="nested"' : ''}><a href="${href(p)}"${p.path === current.path ? ' aria-current="page"' : ''}>${escape(p.title)}</a></li>`;
-  return sections.map((s) =>
-    s.title
+  return sections.map((s, i) =>
+    (s.part && s.part !== sections[i - 1]?.part ? `<p class="docs-part">${escape(s.part)}</p>` : '') +
+    (s.title
       ? `<section${s.pages.some((p) => p.path === current.path) ? ' class="here"' : ''}><h2>${escape(s.title)}</h2><ul>${s.pages.map(item).join('')}</ul></section>`
-      : `<ul class="top">${s.pages.map(item).join('')}</ul>`
+      : `<ul class="top">${s.pages.map(item).join('')}</ul>`)
   ).join('\n') + `\n<p class="side-foot"><a href="${root}">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>`;
 }
 
@@ -295,7 +304,7 @@ function neighbours(order: Page[], page: Page): string {
   return `<nav class="pager" aria-label="Previous and next page">${link(order[at - 1], 'prev', 'Previous')}${link(order[at + 1], 'next', 'Next')}</nav>`;
 }
 
-function document(page: Page, order: Page[], sections: { title: string; pages: Entry[] }[]): string {
+function document(page: Page, order: Page[], sections: Section[]): string {
   const root = rootOf(page.path);
   const url = `${SITE}/docs/${page.path.replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, '.html')}`;
   const title = page.path === 'index.md' ? 'EiN documentation' : `${page.title} – EiN documentation`;

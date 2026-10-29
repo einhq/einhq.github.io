@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Albums – EiN documentation</title>
+    <meta name="description" content="An album gathers the photos, videos and recordings of one occasion: a summer, a trip, a birthday. This page is for everyone who browses and organises the family's pictures. It covers finding an album, making one, filling it, changing it, and acting on the pictures in it.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/archive/albums.html">
+    <meta property="og:title" content="Albums – EiN documentation">
+    <meta property="og:description" content="An album gathers the photos, videos and recordings of one occasion: a summer, a trip, a birthday. This page is for everyone who browses and organises the family's pictures. It covers finding an album, making one, filling it, changing it, and acting on the pictures in it.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/archive/albums.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html" aria-current="page">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Albums</span></button>
+        <header class="docs-head">
+          <p class="crumb">Archive</p>
+          <h1>Albums</h1>
+        </header>
+        <article class="prose">
+<p>An album gathers the photos, videos and recordings of one occasion: a summer, a trip, a birthday.
+This page is for everyone who browses and organises the family&#39;s pictures. It covers finding an
+album, making one, filling it, changing it, and acting on the pictures in it.</p>
+<h2 id="browse-the-albums">Browse the albums<a class="anchor" href="#browse-the-albums" aria-label="Link to this section"></a></h2>
+<p>Choose <strong>Albums</strong> in the sidebar, under <strong>Browse</strong>. The page lists every album you may see, with
+their number under the title, for example <strong>29 albums</strong>.</p>
+<figure class="shot"><a href="../../assets/shots/albums@2x.webp"><img src="../../assets/shots/albums.webp" srcset="../../assets/shots/albums.webp 1x, ../../assets/shots/albums@2x.webp 2x" alt="The Albums page: a grid of album cards with covers, titles and dates, under a Filter albums box and the Newest first sort" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each card shows the album&#39;s cover, its name, its dates and how many items it holds.</figcaption></figure>
+<p>Each card shows:</p>
+<ul>
+<li>the album&#39;s cover, with the number of items it holds in the corner;</li>
+<li>its name;</li>
+<li>its dates, from the first picture to the last, or the span someone set (see
+<a href="#change-an-albums-name-description-and-dates">Change an album&#39;s name, description and dates</a>);</li>
+<li>its labels, if it has any.</li>
+</ul>
+<p>Rest the pointer on a card to read the album&#39;s description. A card with a photo icon instead of a
+picture belongs to an album with nothing to show yet, such as one that holds only documents.</p>
+<p>To narrow the list, type in <strong>Filter albums…</strong>. It matches the album&#39;s name as you type. Case and
+accents do not matter, and every word must appear, in any order: <code>wellington christmas</code> finds
+&quot;Christmas in Wellington&quot;. The <strong>×</strong> in the box clears it. When nothing matches, the page says
+<code>No albums found matching &quot;&lt;what you typed&gt;&quot;</code>.</p>
+<p><strong>Sort</strong> orders the cards. EiN remembers your choice in this browser.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Order</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Newest first</strong> (the default)</td>
+<td>The albums with the latest dates first</td>
+</tr>
+<tr>
+<td><strong>Oldest first</strong></td>
+<td>The albums with the earliest dates first</td>
+</tr>
+<tr>
+<td><strong>Name (A-Z)</strong></td>
+<td>Alphabetical by name</td>
+</tr>
+<tr>
+<td><strong>Most items</strong></td>
+<td>The albums holding the most pictures first</td>
+</tr>
+</tbody></table>
+</div>
+<p>Sorted by date, the page has a rail at its right edge, <strong>Scroll through time</strong>, that marks the years
+with albums; drag along it to jump through them.</p>
+<p>The list holds the albums people made. The albums that <a href="staging.html">staging</a> suggests for your
+uploads stay in your staging area until you file them, so they are not here.</p>
+<p>On an archive with no albums yet, the page says <strong>No albums yet</strong> and, if you are signed in, offers
+<strong>New album</strong>.</p>
+<h3 id="open-an-album-at-random">Open an album at random<a class="anchor" href="#open-an-album-at-random" aria-label="Link to this section"></a></h3>
+<p><strong>Random album</strong>, the button with two crossing arrows beside the search box in the top bar, opens
+an album picked at random. <kbd>Alt</kbd>+<kbd>R</kbd> does the same from anywhere outside a text
+field. It picks among the albums people made that you may open, never a staging suggestion.</p>
+<p>To find one particular album, start typing its name in the search box at the top
+(<kbd>Ctrl</kbd>+<kbd>K</kbd>, or <kbd>⌘</kbd>+<kbd>K</kbd> on a Mac).
+<a href="../guide/search.html">Search and the finder</a> covers that, and the <strong>Search</strong> page, which also finds albums by
+what their pictures show.</p>
+<h2 id="create-an-album">Create an album<a class="anchor" href="#create-an-album" aria-label="Link to this section"></a></h2>
+<p>You need to be signed in.</p>
+<ol>
+<li>Choose <strong>Create</strong>, the plus in the top bar, then <strong>Album</strong>. On an empty Albums page, <strong>New
+album</strong> does the same.</li>
+<li><strong>Create Album</strong> opens. In <strong>Name</strong>, type what the album is called, for example
+<code>Sailing in the archipelago</code>.</li>
+<li>If you like, write a <strong>Description</strong>. It takes Markdown, so you can use headings, lists and
+links.</li>
+<li>Choose <strong>Create</strong>.</li>
+</ol>
+<p>EiN makes the album and opens it, empty. Add pictures to it as
+<a href="#add-pictures-to-an-album">Add pictures to an album</a> describes.</p>
+<p>The name is also the album&#39;s folder in the tree, <code>/archive/albums/&lt;name&gt;</code>, so two albums cannot
+share a name. If one is taken, the dialog shows an error in red and makes nothing.</p>
+<p>You can also make an album while adding pictures to it: in <strong>Add to an album</strong>, type a name no album
+has and choose <strong>New album “<name>”</strong>. And when you sort your uploads in staging, filing a group
+into an album of its own makes one.</p>
+<p>An album you create starts out shared the way your albums are by default. An administrator sets
+that for everyone, and you can change it for yourself with <strong>How widely what you create is shared</strong>
+under <strong>Profile → Preferences</strong>. <a href="../guide/sharing.html">Sharing</a> explains both, and how to share one album
+differently with <strong>Share</strong>.</p>
+<h2 id="what-an-album-page-shows">What an album page shows<a class="anchor" href="#what-an-album-page-shows" aria-label="Link to this section"></a></h2>
+<figure class="shot"><a href="../../assets/shots/album@2x.webp"><img src="../../assets/shots/album.webp" srcset="../../assets/shots/album.webp 1x, ../../assets/shots/album@2x.webp 2x" alt="An album page, Sailing in the archipelago: dates and title over the cover, the Upload, Share and Edit buttons, the Media, Map and Info tabs, Show and Sort, and the pictures of 4 August 2025" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>An album opens on its pictures, one section for each day they were taken.</figcaption></figure>
+<p>The header holds, from the top:</p>
+<ul>
+<li>links to the previous and next album, when the album is part of a series;</li>
+<li>the album&#39;s dates;</li>
+<li>its name, over its cover;</li>
+<li>its description;</li>
+<li>a chip that says how widely it is shared (visitors do not see it; <a href="../guide/sharing.html">Sharing</a> explains
+the colours);</li>
+<li>its labels. Choosing one searches for everything that carries it.</li>
+</ul>
+<p>If you may change the album, the header also has <strong>Upload</strong>, <strong>Share</strong> and <strong>Edit</strong>, and under
+<strong>⋮</strong> the items <strong>Add event</strong> and <strong>Move to trash</strong>. On a phone they are all under <strong>⋮</strong>. If you may
+only look at the album, none of them is there. With the default sharing, everyone with an account
+sees every album and only its owner changes it, so on someone else&#39;s album you usually have none of
+these buttons.</p>
+<p>Below the header are three tabs: <strong>Media</strong>, where the album opens, <strong>Map</strong> and <strong>Info</strong>. The tab
+you choose goes into the page&#39;s address (<code>?tab=map</code>, <code>?tab=info</code>), so a link can open the album on
+it.</p>
+<h3 id="the-media-tab">The Media tab<a class="anchor" href="#the-media-tab" aria-label="Link to this section"></a></h3>
+<ul>
+<li><strong>Show</strong> narrows the grid to one kind: <strong>All</strong>, <strong>Images</strong>, <strong>Video</strong>, <strong>Audio</strong> or
+<strong>Documents</strong>. It offers only the kinds the album holds, and is not there at all when the album
+holds one kind.</li>
+<li><strong>Sort</strong> puts the pictures <strong>Oldest first</strong> (the default) or <strong>Newest first</strong>. EiN remembers the
+choice in this browser, for every album.</li>
+</ul>
+<p>Folders inside the album come first, as square cards (see
+<a href="#folders-inside-an-album">Folders inside an album</a>). The pictures follow in sections, one for each
+day they were taken. The heading of a day gives its date and how many pictures it has. An album
+with pictures from more than 240 different days is shown by month instead, and one with more than
+240 months by year. Pictures with no date at all are gathered under <strong>Undated</strong>.</p>
+<p>What the tiles show:</p>
+<ul>
+<li>a video or a recording shows its length; a video plays a short silent preview when the pointer
+rests on it, or on a touch screen when it scrolls into view;</li>
+<li>a stack of similar photos shows how many it holds (see
+<a href="#stacks-of-similar-photos">Stacks of similar photos</a>);</li>
+<li>a heart marks a picture in your favourites;</li>
+<li>a lock marks a picture that keeps its own sharing; you see it if you may change the album.</li>
+</ul>
+<p>Notes added with <strong>Add event</strong> appear among the days (see <a href="#add-a-note-to-a-day">Add a note to a day</a>).
+Once the album holds more than 120 pictures and notes, a <strong>Scroll through time</strong> rail at the right
+lets you jump through its days.</p>
+<p>Choose a picture to open it in the viewer. The viewer walks the album in the order the grid shows,
+and after the last picture it goes on to the first. <a href="viewer.html">Viewing photos, videos and recordings</a> covers it.</p>
+<h3 id="the-map-tab">The Map tab<a class="anchor" href="#the-map-tab" aria-label="Link to this section"></a></h3>
+<figure class="shot"><a href="../../assets/shots/album-map@2x.webp"><img src="../../assets/shots/album-map.webp" srcset="../../assets/shots/album-map.webp 1x, ../../assets/shots/album-map@2x.webp 2x" alt="The album's Map tab: two piles of photos on a map of the archipelago, joined by coloured GPS routes" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Map tab puts the album&#39;s pictures where they were taken, with the routes recorded while it lasted.</figcaption></figure>
+<p>The <strong>Map</strong> tab shows the album&#39;s pictures that have a position, and the routes any GPS device
+recorded during the album&#39;s dates. The map opens fitted to both.</p>
+<ul>
+<li>A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.</li>
+<li>Pictures close together form a pile with a count. Choose it to list them in <strong>N photos here</strong>.</li>
+<li>Choosing never zooms. Zoom with the mouse wheel or a pinch; the map has no zoom buttons.</li>
+<li>The layers button in the corner switches between <strong>Map</strong>, <strong>Dark map</strong> and <strong>Satellite</strong>.</li>
+</ul>
+<p>The routes come from the album&#39;s whole span, so widening its dates in <strong>Edit album</strong> brings in the
+journey there and back. When nothing has a position and no route was recorded, the tab says
+<strong>Nothing in this album has a position, and no device recorded a route while it was taken.</strong>
+<a href="dates-places.html">Dates and places of pictures</a> shows how to give pictures a place, and
+<a href="devices.html">Devices and GPS tracks</a> how a route gets in.</p>
+<h3 id="the-info-tab">The Info tab<a class="anchor" href="#the-info-tab" aria-label="Link to this section"></a></h3>
+<figure class="shot"><a href="../../assets/shots/album-info@2x.webp"><img src="../../assets/shots/album-info.webp" srcset="../../assets/shots/album-info.webp 1x, ../../assets/shots/album-info@2x.webp 2x" alt="The album's Info tab: the Album section with Name, When, Holds and On the map, and the People, Places and Devices sections with counts" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Info tab sums up who and what is in the album, each with a link.</figcaption></figure>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Section</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Album</strong></td>
+<td><strong>Name</strong>, <strong>When</strong> (its dates), <strong>Holds</strong> (for example &quot;31 photos · 6 videos&quot;) and <strong>On the map</strong>: <strong>All of them</strong>, or how many of how many</td>
+</tr>
+<tr>
+<td><strong>About</strong></td>
+<td>The description</td>
+</tr>
+<tr>
+<td><strong>People</strong></td>
+<td>The people in its pictures, most often first</td>
+</tr>
+<tr>
+<td><strong>Places</strong></td>
+<td>The locations its pictures are linked to</td>
+</tr>
+<tr>
+<td><strong>Devices</strong></td>
+<td>The cameras and phones that took them</td>
+</tr>
+<tr>
+<td><strong>Photographers</strong></td>
+<td>The people who took them</td>
+</tr>
+<tr>
+<td><strong>Labels</strong></td>
+<td>The labels its pictures carry, with how many carry each</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each name opens its page. In <strong>People</strong>, <strong>Places</strong> and <strong>Devices</strong>, the number beside a name
+searches the album for the pictures that have it; in <strong>Labels</strong>, a label searches the album for
+that label. <strong>People</strong>, <strong>Places</strong>, <strong>Devices</strong> and <strong>Photographers</strong> show their first 10, then
+<strong>Show all N</strong> and <strong>Show fewer</strong>; <strong>Labels</strong> shows them all. When nobody is tagged and nothing is
+linked to a place or a device, the tab says so.</p>
+<h2 id="add-pictures-to-an-album">Add pictures to an album<a class="anchor" href="#add-pictures-to-an-album" aria-label="Link to this section"></a></h2>
+<p>There are two ways: upload files from your computer or phone straight into the album, or add
+pictures that are already in EiN.</p>
+<h3 id="upload-straight-into-the-album">Upload straight into the album<a class="anchor" href="#upload-straight-into-the-album" aria-label="Link to this section"></a></h3>
+<p>You can do this if you may change the album.</p>
+<ol>
+<li>Open the album.</li>
+<li>Choose <strong>Upload</strong> and pick the files. Or drag files from your computer and drop them anywhere on
+the page: while you drag, the page says <strong>Drop files to upload</strong> and, under it, <strong>Into</strong> and the
+album&#39;s name.</li>
+<li>Follow the upload under the <strong>Uploads</strong> button, which appears in the top bar once files are
+going up. It shows each upload&#39;s progress, with <strong>Cancel</strong> while files are going up,
+<strong>Retry failed</strong> when some failed, and <strong>Clear</strong>.</li>
+</ol>
+<p>The files go straight into the album; they skip <a href="staging.html">staging</a>. They are shared as the
+album is: whoever can see the album can see them. A file whose name the album already has is
+stored under a numbered name beside it; nothing is replaced. <strong>Upload</strong> takes files, not folders,
+and the files of a folder you drop go into the album without their folder. On a phone, the picker
+offers your photos, videos, recordings and GPX files, and the camera.</p>
+<p>When the upload ends, the album shows the files. Each one shows a placeholder until EiN has made its
+thumbnail, and goes to its day once its date has been read, which can take a few minutes after a
+large upload. <a href="importing.html">Getting your photos in</a> explains what happens to each file and why it
+takes a while.</p>
+<aside class="callout callout-tip"><p class="callout-title">Tip</p>
+<p>For a card full of pictures you have not sorted, use <strong>Create → Import media</strong> instead. Those
+files wait in your private staging area, where EiN suggests albums for them and nobody else sees
+them until you file them. <a href="importing.html">Getting your photos in</a> compares the ways in.</p>
+</aside>
+<p>A suggested album from staging takes no uploads.</p>
+<h3 id="add-pictures-that-are-already-in-ein">Add pictures that are already in EiN<a class="anchor" href="#add-pictures-that-are-already-in-ein" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Select the pictures, in any grid: an album, the <strong>Media</strong> page, a person&#39;s page, a search.
+<a href="#select-pictures">Select pictures</a> shows how.</li>
+<li>Choose <strong>Add to album</strong> in the selection bar. In the viewer, the same is in the pencil menu.</li>
+<li><strong>Add to an album</strong> opens. In <strong>Find an album, or name a new one</strong>, type part of the album&#39;s
+name, then choose it from the list.</li>
+</ol>
+<p>The list holds the albums you may change. An album whose whole name you type but cannot change is
+listed greyed out, marked <strong>View only</strong>. To put the pictures in an album that does not exist yet,
+type its name and choose <strong>New album “<name>”</strong>.</p>
+<p>EiN says what it did, for example <strong>12 added to Christmas in Wellington</strong>, adding <strong>3 already
+there</strong> when some were in it before, and offers <strong>Undo</strong>.</p>
+<p>The pictures are not copied. Each stays where it lives, and the album gets a link to it, so one
+picture can be in several albums at once. A date, a place, a name on a face or a label given to it
+shows in every album it is in. The one exception is a file from your staging area: it moves into
+the album, and the message adds <strong>N moved out of staging</strong>.</p>
+<h2 id="change-an-albums-name-description-and-dates">Change an album&#39;s name, description and dates<a class="anchor" href="#change-an-albums-name-description-and-dates" aria-label="Link to this section"></a></h2>
+<p>Choose <strong>Edit</strong> in the album&#39;s header. <strong>Edit album</strong> opens.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Name</strong></td>
+<td>What the album is called everywhere. Required.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Text about the album, in Markdown. It shows under the title and on the Info tab.</td>
+</tr>
+<tr>
+<td><strong>Labels</strong></td>
+<td>The album&#39;s own labels. Pick one in use or type one; a space starts the next label.</td>
+</tr>
+<tr>
+<td><strong>Starts</strong> and <strong>Ends</strong></td>
+<td>The album&#39;s span, as <code>YYYY-MM-DD</code>. See below.</td>
+</tr>
+<tr>
+<td><strong>Previous album</strong> and <strong>Next album</strong></td>
+<td>Its neighbours in a series. Type part of an album&#39;s name to find one, or clear the field for none.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Choose <strong>Save</strong>. EiN says <strong>Album saved</strong>.</p>
+<p>Renaming changes the name on every page. The album&#39;s folder in the tree keeps its first name, so
+links to the album, and to the pictures in it, keep working.</p>
+<p><strong>The span.</strong> An album&#39;s dates are those of its first and last picture. <strong>Starts</strong> and <strong>Ends</strong> let
+you reach out past them, to cover the journey there and back: the dates show on the card and over
+the title, the Albums page sorts by them, and the Map tab draws the routes recorded within them.
+You cannot move them inside the pictures: <strong>Starts</strong> stops at the first picture&#39;s day and <strong>Ends</strong>
+at the last one&#39;s. The line under the fields says what the pictures span, for example &quot;The media run
+from 2025-08-04 to 2025-08-10. Reach out past them to cover the journey there and back.&quot; To let
+the span follow the pictures again, clear the field or set it back to the pictures&#39; own day. An
+album whose pictures have no dates has only the span you set; the line then reads &quot;Nothing in the
+album is dated yet; the span is what you set here.&quot;</p>
+<p><strong>A series.</strong> Albums of one summer after another, or the parts of a long journey, can lead from one
+to the next. Pick the album before this one in <strong>Previous album</strong>, or the one after it in <strong>Next
+album</strong>; the album you pick links back to this one by itself. The header then shows a small pill
+for each neighbour, with an arrow, its cover and its name, above the dates. Rest the pointer on it
+to see a larger cover, and choose it to go there.</p>
+<h2 id="choose-the-cover">Choose the cover<a class="anchor" href="#choose-the-cover" aria-label="Link to this section"></a></h2>
+<p>The cover is the picture on the album&#39;s card and behind its title.</p>
+<ol>
+<li>Open the album and select one picture. It can be one that lives in the album or one added to it
+from elsewhere.</li>
+<li>Choose <strong>Set as cover</strong> in the selection bar.</li>
+</ol>
+<p>The header changes to the picture at once. <strong>Set as cover</strong> is in the bar only if you may change the
+album, and it works with exactly one picture selected; with more it is greyed out. A person&#39;s page
+has the same button for the person&#39;s picture.</p>
+<p>An album without a cover of its own is given one by EiN: one of its own pictures, picked at random,
+a photo before a video or a recording. A cover you choose is never replaced. If the cover picture is
+deleted, the album shows another of its pictures in its place.</p>
+<h2 id="stacks-of-similar-photos">Stacks of similar photos<a class="anchor" href="#stacks-of-similar-photos" aria-label="Link to this section"></a></h2>
+<p>When someone takes several shots of the same moment, EiN folds them into a stack in the album: one
+tile, the stack&#39;s front photo, with a count in its corner. The other photos are still in the
+album; the stack only hides them from the grid. No file moves.</p>
+<p>Photos are stacked when they follow one another, look alike, and were taken at most 10 seconds
+apart. An administrator can change both limits under <strong>Settings → System</strong>, in the <strong>Albums</strong> group:
+<strong>Stack similarity</strong>
+(<a href="../reference/settings.html#cfg_album_stack_threshold"><code>CFG_ALBUM_STACK_THRESHOLD</code></a>, 0.75) and
+<strong>Stack time gap (seconds)</strong>
+(<a href="../reference/settings.html#cfg_album_stack_max_gap_seconds"><code>CFG_ALBUM_STACK_MAX_GAP_SECONDS</code></a>,
+10).</p>
+<p>A stack belongs to one album. The same photos can be a stack in one album and separate in another.</p>
+<p>To look through a stack, open its tile. The details panel of the viewer has a section headed with the
+count, for example <strong>5 stacked photos</strong>, and a thumbnail of each photo, the front marked <strong>Front</strong>.
+Choose a thumbnail to see that photo. If you may change the album and every photo in the stack,
+the section has these buttons:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Make front</strong></td>
+<td>Makes the photo you are looking at the one the grid shows.</td>
+</tr>
+<tr>
+<td><strong>Keep separate</strong></td>
+<td>Takes this photo out of stacks in this album. The section then reads <strong>Kept separate</strong>.</td>
+</tr>
+<tr>
+<td><strong>Allow stacking</strong></td>
+<td>On a photo kept separate: lets it be stacked again.</td>
+</tr>
+</tbody></table>
+</div>
+<p>To stack photos yourself, select two or more in the album and choose <strong>Stack</strong> in the selection
+bar. If one of them is already in a stack, the others join it and its front stays the front.</p>
+<p>Selecting a stack&#39;s tile selects its front photo only, so <strong>Download</strong>, <strong>Delete</strong> and the other
+actions of the bar act on that one photo.</p>
+<h2 id="folders-inside-an-album">Folders inside an album<a class="anchor" href="#folders-inside-an-album" aria-label="Link to this section"></a></h2>
+<p>An album can hold folders, for example one for each day of a long trip. They show as square cards
+above the pictures, with the folder&#39;s name and how many entries it holds. If you may change the
+album, a lock on a card marks a folder that keeps its own sharing.</p>
+<p>Choose a card to open the folder. It opens like an album page of its own, with the same tabs. The
+album&#39;s grid shows only the pictures at the album&#39;s own level: open a folder to see what is in it.
+An album that holds only folders says <strong>No media here — open a folder above.</strong></p>
+<p>The web interface shows folders but has no button that makes one. They come from an import, from
+copying folders over <a href="../shell/ssh-sftp.html">SFTP</a>, or from <code>mkdir</code> in the
+<a href="../shell/terminal.html">terminal</a>. Once a folder is there, open it and choose <strong>Upload</strong> to upload
+into it. The selection bar&#39;s <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are offered in the album
+itself, not in its folders.</p>
+<h2 id="add-a-note-to-a-day">Add a note to a day<a class="anchor" href="#add-a-note-to-a-day" aria-label="Link to this section"></a></h2>
+<p>A note tells what happened on a day of the album: who arrived, where you sailed, why it rained.</p>
+<ol>
+<li>In the album&#39;s header, choose <strong>⋮</strong>, then <strong>Add event</strong>.</li>
+<li><strong>Add event</strong> opens. <strong>Date</strong> is filled in with the first day of the album&#39;s pictures that has no
+note yet; change it as you like, as <code>YYYY-MM-DD</code>.</li>
+<li>Write the note in <strong>Description</strong>.</li>
+<li><strong>Written by</strong> is you, when your account is linked to a person; choose someone else if they
+wrote it.</li>
+<li>Choose <strong>Add event</strong>.</li>
+</ol>
+<p>The note appears among the pictures, at its day, signed with the writer&#39;s name. If you may change
+it, a pencil on the note (<strong>Edit event</strong>) opens it again, with <strong>Delete</strong> to send it to the trash;
+EiN says <strong>Event moved to the trash</strong> and offers <strong>Undo</strong>.</p>
+<h2 id="select-pictures">Select pictures<a class="anchor" href="#select-pictures" aria-label="Link to this section"></a></h2>
+<p>You select pictures to act on several at once: download them, add them to another album, give them
+a date or a place, delete them.</p>
+<figure class="shot"><a href="../../assets/shots/selection@2x.webp"><img src="../../assets/shots/selection.webp" srcset="../../assets/shots/selection.webp 1x, ../../assets/shots/selection@2x.webp 2x" alt="The album with every picture of 4 August 2025 selected, the day's heading reading 24 / 24, and the selection bar at the foot with 24 selected and its buttons" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Choosing a day&#39;s heading selects all of that day; the bar at the foot acts on the selection.</figcaption></figure>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To</th>
+<th>Do this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Select one picture</td>
+<td>Point at it and tick the checkbox in its corner. On a touch screen, press and hold it; the phone gives a short buzz.</td>
+</tr>
+<tr>
+<td>Add or take away one picture</td>
+<td><kbd>Ctrl</kbd>+click it (<kbd>⌘</kbd>+click on a Mac). Once anything is selected, a plain click or tap does the same.</td>
+</tr>
+<tr>
+<td>Select a run</td>
+<td><kbd>Shift</kbd>+click: everything from the last picture you picked to this one, across days too.</td>
+</tr>
+<tr>
+<td>Select a whole day</td>
+<td>Choose the date in the day&#39;s heading. Its count then reads, for example, <strong>24 / 24</strong>. Choose it again to deselect the day.</td>
+</tr>
+<tr>
+<td>Select everything</td>
+<td><kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac).</td>
+</tr>
+<tr>
+<td>Clear the selection</td>
+<td><kbd>Esc</kbd>, or the <strong>×</strong> at the right end of the selection bar.</td>
+</tr>
+</tbody></table>
+</div>
+<p>While anything is selected, every picture shows its checkbox, and a plain click selects instead of
+opening. <kbd>Ctrl</kbd>+<kbd>A</kbd> takes the pictures the page has loaded; in a long album,
+scroll to its end first to take them all. With the viewer open, <kbd>Esc</kbd> closes the viewer and
+leaves the selection alone. A picture that has the keyboard&#39;s focus opens with <kbd>Enter</kbd> or
+<kbd>Space</kbd>. <kbd>?</kbd> lists these keys with the others; see <a href="../reference/shortcuts.html">Keyboard shortcuts</a>.</p>
+<h2 id="the-selection-bar">The selection bar<a class="anchor" href="#the-selection-bar" aria-label="Link to this section"></a></h2>
+<p>As soon as one picture is selected, a bar floats at the foot of the page with the count, for example
+<strong>24 selected</strong>, and buttons for what you can do. On a narrow screen the buttons fold into one
+<strong>Actions</strong> menu.</p>
+<p>Which buttons you see depends on the page and on what you may change. On an album page, in order:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+<th>Shown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Favourite</strong> / <strong>Unfavourite</strong></td>
+<td>Adds the pictures to your favourites, or takes them out when every one is there already. EiN says, for example, <strong>12 files added to favourites</strong>, with <strong>Undo</strong>. <a href="../guide/profile.html">Your profile, favourites and trash</a> has the Favourites page.</td>
+<td>When you are signed in</td>
+</tr>
+<tr>
+<td><strong>Download</strong></td>
+<td>Saves the original files: one file as itself, several as one zip named after the album.</td>
+<td>Always</td>
+</tr>
+<tr>
+<td><strong>Add to album</strong></td>
+<td>Adds the pictures to another album, as <a href="#add-pictures-that-are-already-in-ein">above</a>.</td>
+<td>When you are signed in</td>
+</tr>
+<tr>
+<td><strong>Set time</strong></td>
+<td>Gives the pictures a date and time. <a href="dates-places.html">Dates and places of pictures</a> covers the dialog.</td>
+<td>When you may change every selected picture</td>
+</tr>
+<tr>
+<td><strong>Stack</strong></td>
+<td>Stacks the pictures, as <a href="#stacks-of-similar-photos">above</a>. Needs two or more.</td>
+<td>On an album you may change</td>
+</tr>
+<tr>
+<td><strong>Set as cover</strong></td>
+<td>Makes the picture the album&#39;s cover. Needs exactly one.</td>
+<td>On an album you may change</td>
+</tr>
+<tr>
+<td><strong>Share</strong></td>
+<td>Shares the pictures <strong>Like the album</strong>, or gives them <strong>Their own sharing</strong>, for example to keep a few private in a shared album. <a href="../guide/sharing.html">Sharing</a> covers the dialog. Greyed out when the selection holds a picture only added here from elsewhere: that picture has the sharing of the place it lives.</td>
+<td>On an album you may change</td>
+</tr>
+<tr>
+<td><strong>Set location</strong></td>
+<td>Says where the pictures were taken. <a href="dates-places.html">Dates and places of pictures</a> covers it.</td>
+<td>When you may change every selected picture</td>
+</tr>
+<tr>
+<td><strong>Label</strong></td>
+<td>Adds labels to the pictures, in <strong>Add labels</strong>. <a href="media.html">Media, Year and labels</a> covers labels.</td>
+<td>When you may change every selected picture</td>
+</tr>
+<tr>
+<td><strong>Delete</strong> (red) or <strong>Remove</strong> (orange)</td>
+<td>Takes the pictures out of this album, as the next section explains.</td>
+<td>When you may change every selected picture that lives in the album</td>
+</tr>
+</tbody></table>
+</div>
+<p>Other pages have most of the same buttons. <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are the
+album&#39;s own; a person&#39;s page has <strong>Set as cover</strong> too.</p>
+<h2 id="delete-or-remove-pictures">Delete or remove pictures<a class="anchor" href="#delete-or-remove-pictures" aria-label="Link to this section"></a></h2>
+<p>A picture in an album either lives there, because it was uploaded or filed into that album, or it
+was added to the album from elsewhere, and only a link to it is there. The last button of the
+selection bar treats the two differently:</p>
+<ul>
+<li><strong>Delete</strong> sends a picture that lives in the album to your trash. It leaves every other album it
+was added to as well, and comes back to all of them if you restore it.</li>
+<li><strong>Remove</strong> takes a picture that was only added to the album out of it. The picture stays where it
+lives, and in any other album it is in.</li>
+</ul>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 488" role="img" aria-label="One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link">
+  <title>One photo, many links</title>
+  <defs>
+    <marker id="archive-albums-md-1-links-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="488" rx="14" fill="#1a1e27" />
+
+  
+  <rect x="24" y="24" width="328" height="296" rx="12" fill="#339af0" fill-opacity="0.08" stroke="#339af0" stroke-opacity="0.7" stroke-width="1.25" />
+  <text x="44" y="56" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">Summer 2020</text>
+  <text x="332" y="56" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">album</text>
+  <text x="44" y="78" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/albums/Summer 2020/</text>
+
+  
+  <rect x="44" y="100" width="288" height="80" rx="10" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(68 128) scale(3)"
+    fill="#748ffc" />
+  <text x="92" y="134" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">beach.jpg</text>
+  <text x="312" y="134" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">file</text>
+  <text x="64" y="162" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">The photo itself: it lives here</text>
+
+  
+  <rect x="44" y="232" width="288" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="64" y="260" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The album's cover</text>
+  <text x="64" y="284" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">coverPhoto</text>
+  <line x1="188" y1="232" x2="188" y2="183" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#archive-albums-md-1-links-arrow)" />
+
+  
+  <rect x="432" y="24" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Another album</text>
+  <text x="756" y="52" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">The coast</text>
+  <text x="452" y="78" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/albums/The coast/beach.jpg</text>
+
+  <rect x="432" y="136" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="164" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A label</text>
+  <text x="756" y="164" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">holiday</text>
+  <text x="452" y="190" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/tags/holiday/beach.jpg</text>
+
+  <rect x="432" y="248" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="276" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A favourite</text>
+  <text x="756" y="276" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">helen's</text>
+  <text x="452" y="302" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/home/helen/stars/beach.jpg</text>
+
+  <line x1="432" y1="60" x2="335" y2="122" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#archive-albums-md-1-links-arrow)" />
+  <line x1="432" y1="172" x2="335" y2="144" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#archive-albums-md-1-links-arrow)" />
+  <line x1="432" y1="284" x2="335" y2="166" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#archive-albums-md-1-links-arrow)" />
+
+  
+  <rect x="24" y="352" width="84" height="28" rx="14" fill="#fa5252" fill-opacity="0.18" />
+  <text x="66" y="371" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fa5252">Delete</text>
+  <text x="124" y="371" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
+    fill="#a2abbb">in Summer 2020: beach.jpg goes to your trash, gone from every place until restored</text>
+
+  <rect x="24" y="396" width="84" height="28" rx="14" fill="#fd7e14" fill-opacity="0.18" />
+  <text x="66" y="415" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fd7e14">Remove</text>
+  <text x="124" y="415" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
+    fill="#a2abbb">in The coast: only that album's link goes; beach.jpg stays where it lives</text>
+
+  <text x="24" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">Dashed: a softlink, which holds only the photo's path</text>
+</svg><figcaption>One picture, many places: Delete acts on the picture itself, Remove only on this album&#39;s link to it.</figcaption></figure>
+<p>The tiles look alike either way; the button tells you which you have. It reads <strong>Remove</strong>, in
+orange, when every selected picture was only added here. When any of them lives here it reads
+<strong>Delete</strong>, in red: the pictures that live here go to the trash, and the ones only added here are
+taken out of the album.</p>
+<p>Neither asks first. EiN says what it did, for example <strong>3 moved to the trash, 2 taken out of this
+album</strong>, and offers <strong>Undo</strong>, which brings back the deleted pictures and puts the links back.
+Deleted pictures wait in your trash, under your picture in the top bar → <strong>Trash</strong>, for 30 days by
+default (<a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>); after that
+they are gone for good. <a href="../guide/profile.html">Your profile, favourites and trash</a> covers the Trash page, and
+<a href="../concepts/links.html">Links</a> what deleting and the trash do to links.</p>
+<p>When you delete a picture, what EiN worked out about it, such as faces and a transcript, goes with
+it, and comes back with it if you restore it.</p>
+<h3 id="move-a-picture-to-another-album">Move a picture to another album<a class="anchor" href="#move-a-picture-to-another-album" aria-label="Link to this section"></a></h3>
+<p>The web interface has no button that moves a picture from one album to another. <strong>Add to album</strong>
+links it into the other album; if you then delete it from the first, it goes to the trash and leaves
+the other album too.</p>
+<p>To move pictures, use <code>mv</code> in the <a href="../shell/terminal.html">terminal</a>, if you may change both albums.
+<code>mv</code> keeps every link to them working, in other albums, covers and favourites:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">mv</span> -n <span class="hljs-string">&quot;/archive/albums/Sailing in the archipelago/IMG_0412.jpg&quot;</span> <span class="hljs-string">&quot;/archive/albums/Erik&#x27;s archipelago/&quot;</span></code></pre></div>
+<p>A moved picture keeps the sharing it had. To give it the sharing of the album it moved into, select
+it there, choose <strong>Share</strong>, then <strong>Like the album</strong> and <strong>Save</strong>.</p>
+<h2 id="undo-a-change">Undo a change<a class="anchor" href="#undo-a-change" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you did</th>
+<th>How to undo it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Favourite</strong> or <strong>Unfavourite</strong></td>
+<td><strong>Undo</strong> in EiN&#39;s message, or the other button</td>
+</tr>
+<tr>
+<td><strong>Add to album</strong></td>
+<td><strong>Undo</strong> in EiN&#39;s message takes the pictures out again, and files from staging go back to it. An album made in the same step may stay behind, empty; move it to the trash if you do not want it.</td>
+</tr>
+<tr>
+<td><strong>Delete</strong> or <strong>Remove</strong></td>
+<td><strong>Undo</strong> in EiN&#39;s message, or <strong>Restore</strong> on the Trash page for what was deleted</td>
+</tr>
+<tr>
+<td><strong>Move to trash</strong> on an album</td>
+<td><strong>Undo</strong> in EiN&#39;s message, or <strong>Restore</strong> on the Trash page</td>
+</tr>
+<tr>
+<td><strong>Delete</strong> on a note</td>
+<td><strong>Undo</strong> in EiN&#39;s message, or <strong>Restore</strong> on the Trash page</td>
+</tr>
+<tr>
+<td><strong>Edit album</strong></td>
+<td>No undo: open <strong>Edit</strong> and change it back</td>
+</tr>
+<tr>
+<td><strong>Set as cover</strong></td>
+<td>Choose another picture as the cover</td>
+</tr>
+<tr>
+<td><strong>Stack</strong></td>
+<td><strong>Keep separate</strong> on each photo, in the viewer&#39;s details</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="move-an-album-to-the-trash">Move an album to the trash<a class="anchor" href="#move-an-album-to-the-trash" aria-label="Link to this section"></a></h2>
+<p>In the album&#39;s header, choose <strong>⋮</strong>, then <strong>Move to trash</strong>. Nothing asks first. EiN takes you back
+to the Albums page and says, for example, <strong>Sailing in the archipelago moved to the trash</strong>, with
+<strong>Undo</strong>, which puts the album back and returns you to it. The album waits in your trash with
+everything that lives in it, and you can restore it from the Trash page for as long as the trash
+keeps it.</p>
+<p>The pictures that live in the album leave every other album they were added to, until you restore
+it. The pictures that were only added to it stay where they live.</p>
+<h2 id="suggested-albums-from-staging">Suggested albums from staging<a class="anchor" href="#suggested-albums-from-staging" aria-label="Link to this section"></a></h2>
+<p>When you upload into your staging area, EiN groups the files and suggests albums for them. Those
+live in your staging area, only you see them, and you decide them on the <strong>Staging</strong> page. You can
+open one as an album page (<strong>Open as an album page</strong> in staging). It then shows why its pictures
+were grouped, with <strong>Sort in Staging</strong> to go back to it, a match percentage, and under <strong>⋮</strong> the
+choice <strong>Keep album as is</strong> or <strong>Let the organizer manage album</strong>. It has no <strong>Upload</strong> and no
+<strong>Move to trash</strong>, and <strong>Edit</strong> changes only its name and labels. <a href="staging.html">Sorting in staging</a>
+covers all of it.</p>
+<h2 id="if-something-looks-different">If something looks different<a class="anchor" href="#if-something-looks-different" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No <strong>Upload</strong>, <strong>Share</strong> or <strong>Edit</strong> on an album</td>
+<td>You may look at the album but not change it.</td>
+<td>Ask its owner, or an administrator, to share it with you so that you can edit it. See <a href="../guide/sharing.html">Sharing</a>.</td>
+</tr>
+<tr>
+<td>A placeholder where a picture should be, after an upload</td>
+<td>Its thumbnail is not made yet. The media service makes it, after the pictures uploaded before it.</td>
+<td>Wait. <a href="importing.html">Getting your photos in</a> explains why it takes time.</td>
+</tr>
+<tr>
+<td>Uploaded pictures are not on their day yet</td>
+<td>Their dates have not been read yet.</td>
+<td>Reload the page a little later.</td>
+</tr>
+<tr>
+<td>An album has no dates on its card</td>
+<td>None of its pictures has a date, and no span is set.</td>
+<td>Set <strong>Starts</strong> and <strong>Ends</strong> in <strong>Edit album</strong>, or give the pictures a time with <strong>Set time</strong>.</td>
+</tr>
+<tr>
+<td><strong>Share</strong> in the selection bar is greyed out</td>
+<td>The selection holds a picture that was only added to this album; it has the sharing of the place it lives.</td>
+<td>Select only pictures that live here. Share the others where they live.</td>
+</tr>
+<tr>
+<td><strong>Set as cover</strong> is greyed out</td>
+<td>It needs exactly one picture selected.</td>
+<td>Select one.</td>
+</tr>
+<tr>
+<td><strong>Stack</strong> is greyed out</td>
+<td>It needs two or more.</td>
+<td>Select more.</td>
+</tr>
+<tr>
+<td>The last button reads <strong>Remove</strong>, not <strong>Delete</strong></td>
+<td>Every selected picture was only added to this album.</td>
+<td><strong>Remove</strong> takes them out of this album only. To delete a picture, go to the album where it lives.</td>
+</tr>
+<tr>
+<td>A picture is gone from an album nobody changed</td>
+<td>Someone deleted it where it lives, or moved that album to the trash.</td>
+<td>It comes back to every album when it is restored from the trash of whoever deleted it.</td>
+</tr>
+<tr>
+<td><strong>Nothing in this album has a position, and no device recorded a route while it was taken.</strong> on the Map tab</td>
+<td>No picture has a place, and no route falls within the album&#39;s dates.</td>
+<td>Give pictures a place with <strong>Set location</strong> (<a href="dates-places.html">Dates and places of pictures</a>), or widen the album&#39;s dates.</td>
+</tr>
+<tr>
+<td><strong>This album holds more than 20,000 entries; 20,000 of them are shown.</strong></td>
+<td>An album page shows at most 20,000 pictures.</td>
+<td>Split it into folders or several albums, or search inside it.</td>
+</tr>
+<tr>
+<td><code>album: Node already exists in parent … with name: …</code> when you create an album</td>
+<td>An album or folder of that name is already in <code>/archive/albums</code>.</td>
+<td>Choose another name.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Everything on this page is a command underneath, and the <a href="../shell/terminal.html">terminal</a> runs the
+same commands. A few of them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+album create <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> --description <span class="hljs-string">&quot;Christmas with Helen and the children&quot;</span>
+album add <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> <span class="hljs-string">&quot;/archive/albums/Ruby&#x27;s Wellington/IMG_2231.jpg&quot;</span>
+album <span class="hljs-built_in">set</span> <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> spanStart 2025-12-18
+album <span class="hljs-built_in">set</span> <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> next <span class="hljs-string">&quot;/archive/albums/Ruby&#x27;s Wellington&quot;</span>
+album-stack refresh <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> --dry-run -v
+album-random</code></pre></div>
+<p>An album&#39;s path is its folder, <code>/archive/albums/</code> and the name it was created with; renaming it
+does not change the path. <a href="commands.html#album"><code>album</code></a>,
+<a href="commands.html#album-stack"><code>album-stack</code></a> and
+<a href="commands.html#album-random"><code>album-random</code></a> have every option in the
+<a href="commands.html">archive&#39;s commands</a>.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="viewer.html">Viewing photos, videos and recordings</a>: the viewer an album&#39;s pictures open in.</li>
+<li><a href="../guide/sharing.html">Sharing</a>: who sees an album, share links, and keeping some pictures private.</li>
+<li><a href="importing.html">Getting your photos in</a>: every way files get in, and what happens to them.</li>
+<li><a href="staging.html">Sorting in staging</a>: your private inbox and the albums it suggests.</li>
+<li><a href="dates-places.html">Dates and places of pictures</a>: <strong>Set time</strong> and <strong>Set location</strong>.</li>
+<li><a href="../concepts/links.html">Links</a>: how one picture can be in several albums.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="dates-places.html" rel="prev"><span>Previous</span>Dates and places of pictures</a><a class="next" href="viewer.html" rel="next"><span>Next</span>Viewing photos, videos and recordings</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/albums.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -43,18 +43,18 @@ from the start.
 
 You make most links without typing `ln`: a button in the web interface or a command writes them.
 
-| What you do                                                                                                  | The link it makes                                                                           |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Add a picture to an album from elsewhere ([Albums](../guide/albums.md#add-pictures-that-are-already-in-ein)) | A link in the album, named after the picture, to where the picture lives                    |
-| Choose an album's, person's, location's or device's cover                                                    | `coverPhoto` in it, to the picture                                                          |
-| Set an album's **Previous album** or **Next album**                                                          | `previous` and `next` in the album, and the matching one back in the other album            |
-| Put a label on something ([Labels](../guide/media.md#labels))                                                | A link in `/archive/tags/<label>/` to what carries it                                       |
-| Heart a picture ([Favourites](../guide/profile.md#favourites))                                               | A link in `/home/<you>/stars/` to the picture                                               |
-| Add a parent, partner or child ([Family tree](../guide/family.md))                                           | A pair: one in `parents/`, `children/` or `partners/` of each person, pointing at the other |
-| Add a home or a resident                                                                                     | A pair: one in the person's `homes/`, one in the location's `residents/`                    |
-| Link a picture to a location ([Locations](../guide/places.md#how-pictures-join-a-location))                  | `location` in the picture, to the location                                                  |
-| Choose **Written by** on an event ([Albums](../guide/albums.md#add-a-note-to-a-day))                         | `writer` in the event, to the person                                                        |
-| Put someone in a group ([Accounts and groups](../admin/accounts.md))                                         | A link in `/etc/groups/<group>/users/`, named after the account, to `/etc/users/<account>`  |
+| What you do                                                                                                    | The link it makes                                                                           |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Add a picture to an album from elsewhere ([Albums](../archive/albums.md#add-pictures-that-are-already-in-ein)) | A link in the album, named after the picture, to where the picture lives                    |
+| Choose an album's, person's, location's or device's cover                                                      | `coverPhoto` in it, to the picture                                                          |
+| Set an album's **Previous album** or **Next album**                                                            | `previous` and `next` in the album, and the matching one back in the other album            |
+| Put a label on something ([Labels](../archive/media.md#labels))                                                | A link in `/archive/tags/<label>/` to what carries it                                       |
+| Heart a picture ([Favourites](../guide/profile.md#favourites))                                                 | A link in `/home/<you>/stars/` to the picture                                               |
+| Add a parent, partner or child ([Family tree](../archive/family.md))                                           | A pair: one in `parents/`, `children/` or `partners/` of each person, pointing at the other |
+| Add a home or a resident                                                                                       | A pair: one in the person's `homes/`, one in the location's `residents/`                    |
+| Link a picture to a location ([Locations](../archive/places.md#how-pictures-join-a-location))                  | `location` in the picture, to the location                                                  |
+| Choose **Written by** on an event ([Albums](../archive/albums.md#add-a-note-to-a-day))                         | `writer` in the event, to the person                                                        |
+| Put someone in a group ([Accounts and groups](../admin/accounts.md))                                           | A link in `/etc/groups/<group>/users/`, named after the account, to `/etc/users/<account>`  |
 
 The picture is never copied. One photo in five albums is one node with five links to it, so a date,
 a place, a face or a label given to it shows in all five.
@@ -162,14 +162,14 @@ For links that EiN keeps track of, use the command that owns them rather than `l
 label lives on the node that carries it, and searches read it there, so the link in
 `/archive/tags/` alone does not label anything:
 
-| To change               | Use                                                                                            |
-| ----------------------- | ---------------------------------------------------------------------------------------------- |
-| Labels                  | `label add`, `label remove`                                                                    |
-| Favourites              | `star`, `star -d`                                                                              |
-| Relations between nodes | `relate`, `unrelate`                                                                           |
-| Family ties and homes   | the `person-…` commands in [Family tree, events and homes](../guide/family.md#in-the-terminal) |
-| An album's cover        | `album set <album> cover <picture>`                                                            |
-| Group membership        | `group-add-member`, `group-remove-member`                                                      |
+| To change               | Use                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------ |
+| Labels                  | `label add`, `label remove`                                                                      |
+| Favourites              | `star`, `star -d`                                                                                |
+| Relations between nodes | `relate`, `unrelate`                                                                             |
+| Family ties and homes   | the `person-…` commands in [Family tree, events and homes](../archive/family.md#in-the-terminal) |
+| An album's cover        | `album set <album> cover <picture>`                                                              |
+| Group membership        | `group-add-member`, `group-remove-member`                                                        |
 
 ## Moving keeps softlinks pointing right
 
@@ -225,7 +225,7 @@ reachable by its other name.
 - [Nodes and node types](nodes.md): what a node is, the `softlink` type among them
 - [The tree](tree.md): the folders the links live in and point into
 - [Files and storage](files.md): what a file node holds
-- [Albums](../guide/albums.md): adding, removing and deleting pictures
+- [Albums](../archive/albums.md): adding, removing and deleting pictures
 - [Permissions in depth](../admin/permissions.md): why a softlink grants nothing and a hard link can
 - [Commands: `ln`](../reference/commands-core.md#ln), [`mv`](../reference/commands-core.md#mv),
   [`relate`](../reference/commands-core.md#relate), [`label`](../reference/commands-core.md#label)

@@ -102,8 +102,8 @@ From left to right:
 | The search box, **Search for anything** | Finds pages, albums, people and places as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. [Search and the finder](search.md) explains it. |
 | **Random album** (two crossing arrows)  | Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the archive.                                                                                                                                                |
 | **Disconnected** (with a red dot)       | Shown only while the page's connection to EiN is lost; on a phone it is a red crossed-out plug. EiN tries again by itself every second or two.                                                                                                   |
-| **Uploads**                             | Appears once you upload something. While files are going up it is a ring, with "Uploading N of M" in its tooltip; choose it for the files, **Cancel**, **Retry failed** and **Clear**. See [Getting your photos in](importing.md).               |
-| **Chat** (a speech bubble)              | Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see [Chatting with the assistant](assistant.md).                                                                                                 |
+| **Uploads**                             | Appears once you upload something. While files are going up it is a ring, with "Uploading N of M" in its tooltip; choose it for the files, **Cancel**, **Retry failed** and **Clear**. See [Getting your photos in](../archive/importing.md).    |
+| **Chat** (a speech bubble)              | Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see [Chatting with the assistant](../assistant/chat.md).                                                                                         |
 | **Create** (a plus)                     | The **Create New** menu, below. Signed in only.                                                                                                                                                                                                  |
 | **Toggle Terminal (Alt+T)**             | Opens and closes the terminal, which drops down over the page. Signed in only, and not on a phone. See [The terminal](../shell/terminal.md).                                                                                                     |
 | Your picture                            | The account menu, below. Its tooltip is your name.                                                                                                                                                                                               |
@@ -122,13 +122,13 @@ Choose the plus to make something. Each row opens a form in a dialog over the pa
 
 ![The Create New menu open under the plus: Import media, Album, Person, Location and Device](../../assets/shots/create-menu.webp "The Create menu's rows come from the modules; these are the archive's.")
 
-| Row              | Opens                                                                                | More                                   |
-| ---------------- | ------------------------------------------------------------------------------------ | -------------------------------------- |
-| **Import media** | **Import media**: choose a category in staging and the files or folders to bring in. | [Getting your photos in](importing.md) |
-| **Album**        | **Create Album**                                                                     | [Albums](albums.md)                    |
-| **Person**       | **Create Person**                                                                    | [People and faces](people.md)          |
-| **Location**     | **Create Location**                                                                  | [Locations and the map](places.md)     |
-| **Device**       | **Register Device**                                                                  | [Devices and GPS tracks](devices.md)   |
+| Row              | Opens                                                                                | More                                              |
+| ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| **Import media** | **Import media**: choose a category in staging and the files or folders to bring in. | [Getting your photos in](../archive/importing.md) |
+| **Album**        | **Create Album**                                                                     | [Albums](../archive/albums.md)                    |
+| **Person**       | **Create Person**                                                                    | [People and faces](../archive/people.md)          |
+| **Location**     | **Create Location**                                                                  | [Locations and the map](../archive/places.md)     |
+| **Device**       | **Register Device**                                                                  | [Devices and GPS tracks](../archive/devices.md)   |
 
 EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
 plus in the top bar.
@@ -184,16 +184,16 @@ The sidebar lists the pages, in four sections. The first has no heading.
 | Section | Entry             | Opens                                                                                                          | Shown to       | Added by  |
 | ------- | ----------------- | -------------------------------------------------------------------------------------------------------------- | -------------- | --------- |
 |         | **Home**          | On this day, News and Events: [Home, memories and statistics](home.md)                                         | everyone       | EiN       |
-|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](assistant.md)                                  | everyone       | assistant |
-|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](media.md)                                 | everyone       | archive   |
-|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](staging.md)                                            | signed in      | archive   |
+|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](../assistant/chat.md)                          | everyone       | assistant |
+|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](../archive/media.md)                      | everyone       | archive   |
+|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](../archive/staging.md)                                 | signed in      | archive   |
 | Explore | **Search**        | Photos, videos, albums, people, places and more, by name, date or @mention: [Search and the finder](search.md) | everyone       | EiN       |
-| Explore | **Year**          | One year's pictures: [Media, Year and labels](media.md)                                                        | everyone       | archive   |
-| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](places.md)                                               | everyone       | archive   |
-| Browse  | **Albums**        | [Albums](albums.md)                                                                                            | everyone       | archive   |
-| Browse  | **People**        | [People and faces](people.md)                                                                                  | everyone       | archive   |
-| Browse  | **Locations**     | [Locations and the map](places.md)                                                                             | everyone       | archive   |
-| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](devices.md)                                   | everyone       | archive   |
+| Explore | **Year**          | One year's pictures: [Media, Year and labels](../archive/media.md)                                             | everyone       | archive   |
+| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](../archive/places.md)                                    | everyone       | archive   |
+| Browse  | **Albums**        | [Albums](../archive/albums.md)                                                                                 | everyone       | archive   |
+| Browse  | **People**        | [People and faces](../archive/people.md)                                                                       | everyone       | archive   |
+| Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                  | everyone       | archive   |
+| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](../archive/devices.md)                        | everyone       | archive   |
 | System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                      | administrators | EiN       |
 | System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                           | administrators | EiN       |
 | System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                    | signed in      | EiN       |
@@ -261,7 +261,7 @@ A few things to know about each:
   button opens the chat as a dialog instead.
 - **Full screen** is part of the address (`?fullscreen=`), so a reload, or a link you send someone,
   opens it again. On a wide screen an open side drawer stays beside the viewer, so you can read the
-  chat next to a photo; see [Viewing photos, videos and recordings](viewer.md).
+  chat next to a photo; see [Viewing photos, videos and recordings](../archive/viewer.md).
 
 ## Keyboard shortcuts
 

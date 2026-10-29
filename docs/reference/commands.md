@@ -234,182 +234,182 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 131 in full](commands-archive.md).
+[All 131 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [album](commands-archive.md#album) | Manage albums (create, info, list, set, add files) |
-| [album-cover](commands-archive.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
-| [album-profile](commands-archive.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
-| [album-random](commands-archive.md#album-random) | The path of one album somebody made, at random. |
-| [album-span](commands-archive.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) |
-| [album-stack](commands-archive.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
-| [archive-bridge](commands-archive.md#archive-bridge) | Derive media and location domain events from VFS mutations (long-running) |
-| [archive-parse](commands-archive.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
-| [assign-faces](commands-archive.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
-| [assign-speakers](commands-archive.md#assign-speakers) | Match a recording's voices to existing people, creating unnamed people for the rest. |
-| [auto-album-assign](commands-archive.md#auto-album-assign) | Weigh media against the library albums they may belong in, as staging weighs its suggested groups, and write nothing. |
-| [auto-album-cluster](commands-archive.md#auto-album-cluster) | Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing. |
-| [cluster-faces](commands-archive.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
-| [cluster-voices](commands-archive.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
-| [compute-fingerprint](commands-archive.md#compute-fingerprint) | Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound. |
-| [dayinhistory](commands-archive.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |
-| [detect-chapters](commands-archive.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
-| [detect-faces](commands-archive.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
-| [device](commands-archive.md#device) | Camera and recording device management. |
-| [device-cover](commands-archive.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
-| [device-create](commands-archive.md#device-create) | Create a device node. |
-| [device-info](commands-archive.md#device-info) | Show device details and owners. |
-| [device-link](commands-archive.md#device-link) | Link a file to its capture device using extracted exif, or to a device named by hand. |
-| [device-list](commands-archive.md#device-list) | List all devices. |
-| [device-match](commands-archive.md#device-match) | Match a device by serial number or make/model. |
-| [device-relink](commands-archive.md#device-relink) | Link existing media to a registered device by its fingerprint. |
-| [device-remove-owner](commands-archive.md#device-remove-owner) | Unlink a person from a device (removes both halves) |
-| [device-scan](commands-archive.md#device-scan) | Propose devices seen in media but not registered. |
-| [device-set-owner](commands-archive.md#device-set-owner) | Link a person as owner of a device (dated relation pair) |
-| [device-timeline](commands-archive.md#device-timeline) | One device's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
-| [device-update](commands-archive.md#device-update) | Change a device's settings. |
-| [duplicates](commands-archive.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
-| [embed-picture](commands-archive.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
-| [events-anniversaries](commands-archive.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
-| [exif-extract](commands-archive.md#exif-extract) | Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced. |
-| [exiftool](commands-archive.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
-| [face-add](commands-archive.md#face-add) | Add a human-drawn face box to an image as a new unidentified person. |
-| [face-audit](commands-archive.md#face-audit) | Mark transferred faces whose nearest human-named face in another photo is somebody else. |
-| [face-confirm](commands-archive.md#face-confirm) | Confirm that regions show the person they are assigned to. |
-| [face-remove](commands-archive.md#face-remove) | Remove a face and its person when it was the person's only unidentified face. |
-| [face-reset](commands-archive.md#face-reset) | Undo automatic face→person assignments by provenance, leaving manual ones intact. |
-| [face-set-box](commands-archive.md#face-set-box) | Change a region's box and regenerate its preview crop; a moved face stops voting in recognition. |
-| [file-set-description](commands-archive.md#file-set-description) | Set a file's hand-written description. |
-| [file-set-orientation](commands-archive.md#file-set-orientation) | Rotate or mirror a file for good: writes angle/angleManual/mirror, remaps face boxes and regenerates renditions (a video re-encodes on the media pool) |
-| [file-set-photographer](commands-archive.md#file-set-photographer) | Link the person who took a file (photographer softlink) |
-| [file-set-position](commands-archive.md#file-set-position) | Set a manual location override (positionManual + child position node) on a file, or clear its location. |
-| [file-set-text](commands-archive.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
-| [file-set-text-language](commands-archive.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
-| [file-set-time](commands-archive.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
-| [find-within](commands-archive.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
-| [generate-derivatives](commands-archive.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
-| [geocode-files](commands-archive.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
-| [geocode-location](commands-archive.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
-| [geocode-position](commands-archive.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
-| [hello](commands-archive.md#hello) | Say hello (example TypeScript module command) |
-| [index-document](commands-archive.md#index-document) | Extract text content and generate embedding for a document file. |
-| [label-model](commands-archive.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |
-| [latest](commands-archive.md#latest) | List the most recently captured media, newest first. |
-| [location-link-media](commands-archive.md#location-link-media) | Link geotagged media files to the location whose shape contains them (<file>/location softlink) |
-| [location-list](commands-archive.md#location-list) | List locations with their saved coordinates. |
-| [location-locate](commands-archive.md#location-locate) | Give a location coordinates from its linked media, falling back to geocoding its address. |
-| [location-region](commands-archive.md#location-region) | Turn a location name (a city, a country, an area) into the region search --bbox filters on. |
-| [location-timeline](commands-archive.md#location-timeline) | What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it. |
-| [location-update](commands-archive.md#location-update) | Change a location's name, address, description, city or country. |
-| [media-details](commands-archive.md#media-details) | Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file. |
-| [media-reembed](commands-archive.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
-| [media-resolve-time](commands-archive.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
-| [media-scan](commands-archive.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
-| [media-sidecars](commands-archive.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites. |
-| [members-album](commands-archive.md#members-album) | List an album's media by the album's own rules: an imported album's files/ folder, links followed, the cover left out, stacks of similar photos folded. |
-| [merge-duplicates](commands-archive.md#merge-duplicates) | Keep one file of a set of duplicates, fill it in from the others, and move them to the trash as one batch. |
-| [news-albums](commands-archive.md#news-albums) | Recently created albums, newest first, with who made them, as news entries (core news gathers them) |
-| [onthisday-media](commands-archive.md#onthisday-media) | The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them) |
-| [parse-eval](commands-archive.md#parse-eval) | Score the search parse (archive-parse) against the filters each question means. |
-| [person](commands-archive.md#person) | People and family tree management. |
-| [person-add-event](commands-archive.md#person-add-event) | Add an event (blob) to a person, album, location or device. |
-| [person-check](commands-archive.md#person-check) | Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died) |
-| [person-children](commands-archive.md#person-children) | List a person's children (children/ dir) |
-| [person-cover](commands-archive.md#person-cover) | Give a named person without a cover the crop of one of their own faces (coverPhoto softlink) |
-| [person-create](commands-archive.md#person-create) | Create a person node. |
-| [person-detach](commands-archive.md#person-detach) | Take faces off a person: to a new unnamed person, to an existing one, or off identity entirely. |
-| [person-discard](commands-archive.md#person-discard) | Say unidentified people are not a person at all: unassign and lock everything they hold, and remove them. |
-| [person-faces](commands-archive.md#person-faces) | Every face and tag assigned to a person, with the photo each came from. |
-| [person-family-tree](commands-archive.md#person-family-tree) | Display ancestors and descendants of a person. |
-| [person-fixup](commands-archive.md#person-fixup) | Repair family-tree links (recreate missing reciprocals, rewrite stale reciprocal paths, drop dangling) |
-| [person-graph](commands-archive.md#person-graph) | Family graph around a person as nodes and edges, for drawing a tree. |
-| [person-how-related](commands-archive.md#person-how-related) | Compute the kinship term between two persons (English/Swedish) |
-| [person-info](commands-archive.md#person-info) | Show person details, relationships, and events. |
-| [person-list](commands-archive.md#person-list) | List the named people, with how many faces and voice turns each has. |
-| [person-merge](commands-archive.md#person-merge) | Merge people into another (faces, events, relations and links to them move; the sources are removed) |
-| [person-name](commands-archive.md#person-name) | Name an unidentified person and move them into /people. |
-| [person-relatives](commands-archive.md#person-relatives) | Who a kin phrase reaches from a person through the family tree: 'moster', 'mammas syster', 'barn', 'my father's brother'. |
-| [person-remove](commands-archive.md#person-remove) | Remove a relationship between two persons (both sides) |
-| [person-remove-home](commands-archive.md#person-remove-home) | Remove a person↔location residence relation (both halves) |
-| [person-set-home](commands-archive.md#person-set-home) | Record where a person lived, and when (dated relation pair) |
-| [person-set-parent](commands-archive.md#person-set-parent) | Add a parent relationship (parents/ ↔ children/) |
-| [person-set-partner](commands-archive.md#person-set-partner) | Add or update a partner relationship (partners/, both directions) |
-| [person-stats](commands-archive.md#person-stats) | Count births, engagements, marriages and deaths by calendar month across all years. |
-| [person-timeline](commands-archive.md#person-timeline) | One person's life as a chronological feed: events, homes, partnerships, children and albums. |
-| [person-unknown](commands-archive.md#person-unknown) | List auto-created people nobody has named yet, with face counts and crops. |
-| [person-update](commands-archive.md#person-update) | Change a person's profile: names, birth and death dates, gender, allergies, description, contact details. An empty value clears the field. |
-| [person-voices](commands-archive.md#person-voices) | Every recording a person is heard in, with how long they speak and a moment to hear them. |
-| [promote-exif-attrs](commands-archive.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
-| [raw](commands-archive.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
-| [read-text](commands-archive.md#read-text) | Read the text written in a picture and keep it for search. |
-| [regenerate](commands-archive.md#regenerate) | Regenerate web derivatives for media files under a path. |
-| [regenerate-face-crops](commands-archive.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces. |
-| [search-album](commands-archive.md#search-album) | Search albums by name, description and what their pictures show. |
-| [search-device](commands-archive.md#search-device) | Search devices by name, make, model or serial number. |
-| [search-document](commands-archive.md#search-document) | Search documents (PDF, Word, text) by what their text is about, using semantic similarity. |
-| [search-location](commands-archive.md#search-location) | Search locations by name. |
-| [search-media](commands-archive.md#search-media) | Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label. |
-| [search-people](commands-archive.md#search-people) | Search people by partial name; every query word must match the same person. |
-| [search-track](commands-archive.md#search-track) | Search tracks by the name of the device that recorded them, or their description. |
-| [staging](commands-archive.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
-| [subcluster-faces](commands-archive.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
-| [subject-device](commands-archive.md#subject-device) | What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers. |
-| [subject-location](commands-archive.md#subject-location) | What `search --subject location:<ref>` asks: the media linked to a location node. |
-| [subject-person](commands-archive.md#subject-person) | What `search --subject person:<ref>` asks: the media a person is in: tagged with a box (a face or a drawn region) or without one. |
-| [subjects-in](commands-archive.md#subjects-in) | Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted. |
-| [tag-transfer](commands-archive.md#tag-transfer) | Move legacy manual face tags onto the auto-detected face inside their box (recognition anchors) |
-| [timeline](commands-archive.md#timeline) | Chronological feed of albums, life events, birthdays and tracks, newest first. |
-| [timeline-facets](commands-archive.md#timeline-facets) | Per-day, per-month and per-year counts for the timeline scrubber. |
-| [track-append](commands-archive.md#track-append) | Append coordinate points to a device's track. |
-| [track-create](commands-archive.md#track-create) | Give a device a track for the coordinate points it recorded (the device's child track) |
-| [track-import](commands-archive.md#track-import) | Import GPX track points into a device's track. |
-| [track-list](commands-archive.md#track-list) | List the devices that have a track, with its point count, span and extent. |
-| [track-read](commands-archive.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
-| [track-stage](commands-archive.md#track-stage) | Import a staged GPX file into the track of the device it names, and remove the file; mark it pending when no single device matches, and keep it in its staging area's routes/. |
-| [transcribe-file](commands-archive.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
-| [voiceprint-file](commands-archive.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
+| [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add files) |
+| [album-cover](../archive/commands.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
+| [album-profile](../archive/commands.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
+| [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
+| [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) |
+| [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
+| [archive-bridge](../archive/commands.md#archive-bridge) | Derive media and location domain events from VFS mutations (long-running) |
+| [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
+| [assign-faces](../archive/commands.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
+| [assign-speakers](../archive/commands.md#assign-speakers) | Match a recording's voices to existing people, creating unnamed people for the rest. |
+| [auto-album-assign](../archive/commands.md#auto-album-assign) | Weigh media against the library albums they may belong in, as staging weighs its suggested groups, and write nothing. |
+| [auto-album-cluster](../archive/commands.md#auto-album-cluster) | Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing. |
+| [cluster-faces](../archive/commands.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
+| [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
+| [compute-fingerprint](../archive/commands.md#compute-fingerprint) | Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound. |
+| [dayinhistory](../archive/commands.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |
+| [detect-chapters](../archive/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
+| [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
+| [device](../archive/commands.md#device) | Camera and recording device management. |
+| [device-cover](../archive/commands.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
+| [device-create](../archive/commands.md#device-create) | Create a device node. |
+| [device-info](../archive/commands.md#device-info) | Show device details and owners. |
+| [device-link](../archive/commands.md#device-link) | Link a file to its capture device using extracted exif, or to a device named by hand. |
+| [device-list](../archive/commands.md#device-list) | List all devices. |
+| [device-match](../archive/commands.md#device-match) | Match a device by serial number or make/model. |
+| [device-relink](../archive/commands.md#device-relink) | Link existing media to a registered device by its fingerprint. |
+| [device-remove-owner](../archive/commands.md#device-remove-owner) | Unlink a person from a device (removes both halves) |
+| [device-scan](../archive/commands.md#device-scan) | Propose devices seen in media but not registered. |
+| [device-set-owner](../archive/commands.md#device-set-owner) | Link a person as owner of a device (dated relation pair) |
+| [device-timeline](../archive/commands.md#device-timeline) | One device's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
+| [device-update](../archive/commands.md#device-update) | Change a device's settings. |
+| [duplicates](../archive/commands.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
+| [embed-picture](../archive/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
+| [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
+| [exif-extract](../archive/commands.md#exif-extract) | Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced. |
+| [exiftool](../archive/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
+| [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image as a new unidentified person. |
+| [face-audit](../archive/commands.md#face-audit) | Mark transferred faces whose nearest human-named face in another photo is somebody else. |
+| [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
+| [face-remove](../archive/commands.md#face-remove) | Remove a face and its person when it was the person's only unidentified face. |
+| [face-reset](../archive/commands.md#face-reset) | Undo automatic face→person assignments by provenance, leaving manual ones intact. |
+| [face-set-box](../archive/commands.md#face-set-box) | Change a region's box and regenerate its preview crop; a moved face stops voting in recognition. |
+| [file-set-description](../archive/commands.md#file-set-description) | Set a file's hand-written description. |
+| [file-set-orientation](../archive/commands.md#file-set-orientation) | Rotate or mirror a file for good: writes angle/angleManual/mirror, remaps face boxes and regenerates renditions (a video re-encodes on the media pool) |
+| [file-set-photographer](../archive/commands.md#file-set-photographer) | Link the person who took a file (photographer softlink) |
+| [file-set-position](../archive/commands.md#file-set-position) | Set a manual location override (positionManual + child position node) on a file, or clear its location. |
+| [file-set-text](../archive/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
+| [file-set-text-language](../archive/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
+| [file-set-time](../archive/commands.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
+| [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
+| [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
+| [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
+| [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
+| [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
+| [hello](../archive/commands.md#hello) | Say hello (example TypeScript module command) |
+| [index-document](../archive/commands.md#index-document) | Extract text content and generate embedding for a document file. |
+| [label-model](../archive/commands.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |
+| [latest](../archive/commands.md#latest) | List the most recently captured media, newest first. |
+| [location-link-media](../archive/commands.md#location-link-media) | Link geotagged media files to the location whose shape contains them (<file>/location softlink) |
+| [location-list](../archive/commands.md#location-list) | List locations with their saved coordinates. |
+| [location-locate](../archive/commands.md#location-locate) | Give a location coordinates from its linked media, falling back to geocoding its address. |
+| [location-region](../archive/commands.md#location-region) | Turn a location name (a city, a country, an area) into the region search --bbox filters on. |
+| [location-timeline](../archive/commands.md#location-timeline) | What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it. |
+| [location-update](../archive/commands.md#location-update) | Change a location's name, address, description, city or country. |
+| [media-details](../archive/commands.md#media-details) | Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file. |
+| [media-reembed](../archive/commands.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
+| [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
+| [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
+| [media-sidecars](../archive/commands.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites. |
+| [members-album](../archive/commands.md#members-album) | List an album's media by the album's own rules: an imported album's files/ folder, links followed, the cover left out, stacks of similar photos folded. |
+| [merge-duplicates](../archive/commands.md#merge-duplicates) | Keep one file of a set of duplicates, fill it in from the others, and move them to the trash as one batch. |
+| [news-albums](../archive/commands.md#news-albums) | Recently created albums, newest first, with who made them, as news entries (core news gathers them) |
+| [onthisday-media](../archive/commands.md#onthisday-media) | The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them) |
+| [parse-eval](../archive/commands.md#parse-eval) | Score the search parse (archive-parse) against the filters each question means. |
+| [person](../archive/commands.md#person) | People and family tree management. |
+| [person-add-event](../archive/commands.md#person-add-event) | Add an event (blob) to a person, album, location or device. |
+| [person-check](../archive/commands.md#person-check) | Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died) |
+| [person-children](../archive/commands.md#person-children) | List a person's children (children/ dir) |
+| [person-cover](../archive/commands.md#person-cover) | Give a named person without a cover the crop of one of their own faces (coverPhoto softlink) |
+| [person-create](../archive/commands.md#person-create) | Create a person node. |
+| [person-detach](../archive/commands.md#person-detach) | Take faces off a person: to a new unnamed person, to an existing one, or off identity entirely. |
+| [person-discard](../archive/commands.md#person-discard) | Say unidentified people are not a person at all: unassign and lock everything they hold, and remove them. |
+| [person-faces](../archive/commands.md#person-faces) | Every face and tag assigned to a person, with the photo each came from. |
+| [person-family-tree](../archive/commands.md#person-family-tree) | Display ancestors and descendants of a person. |
+| [person-fixup](../archive/commands.md#person-fixup) | Repair family-tree links (recreate missing reciprocals, rewrite stale reciprocal paths, drop dangling) |
+| [person-graph](../archive/commands.md#person-graph) | Family graph around a person as nodes and edges, for drawing a tree. |
+| [person-how-related](../archive/commands.md#person-how-related) | Compute the kinship term between two persons (English/Swedish) |
+| [person-info](../archive/commands.md#person-info) | Show person details, relationships, and events. |
+| [person-list](../archive/commands.md#person-list) | List the named people, with how many faces and voice turns each has. |
+| [person-merge](../archive/commands.md#person-merge) | Merge people into another (faces, events, relations and links to them move; the sources are removed) |
+| [person-name](../archive/commands.md#person-name) | Name an unidentified person and move them into /people. |
+| [person-relatives](../archive/commands.md#person-relatives) | Who a kin phrase reaches from a person through the family tree: 'moster', 'mammas syster', 'barn', 'my father's brother'. |
+| [person-remove](../archive/commands.md#person-remove) | Remove a relationship between two persons (both sides) |
+| [person-remove-home](../archive/commands.md#person-remove-home) | Remove a person↔location residence relation (both halves) |
+| [person-set-home](../archive/commands.md#person-set-home) | Record where a person lived, and when (dated relation pair) |
+| [person-set-parent](../archive/commands.md#person-set-parent) | Add a parent relationship (parents/ ↔ children/) |
+| [person-set-partner](../archive/commands.md#person-set-partner) | Add or update a partner relationship (partners/, both directions) |
+| [person-stats](../archive/commands.md#person-stats) | Count births, engagements, marriages and deaths by calendar month across all years. |
+| [person-timeline](../archive/commands.md#person-timeline) | One person's life as a chronological feed: events, homes, partnerships, children and albums. |
+| [person-unknown](../archive/commands.md#person-unknown) | List auto-created people nobody has named yet, with face counts and crops. |
+| [person-update](../archive/commands.md#person-update) | Change a person's profile: names, birth and death dates, gender, allergies, description, contact details. An empty value clears the field. |
+| [person-voices](../archive/commands.md#person-voices) | Every recording a person is heard in, with how long they speak and a moment to hear them. |
+| [promote-exif-attrs](../archive/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
+| [raw](../archive/commands.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
+| [read-text](../archive/commands.md#read-text) | Read the text written in a picture and keep it for search. |
+| [regenerate](../archive/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
+| [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces. |
+| [search-album](../archive/commands.md#search-album) | Search albums by name, description and what their pictures show. |
+| [search-device](../archive/commands.md#search-device) | Search devices by name, make, model or serial number. |
+| [search-document](../archive/commands.md#search-document) | Search documents (PDF, Word, text) by what their text is about, using semantic similarity. |
+| [search-location](../archive/commands.md#search-location) | Search locations by name. |
+| [search-media](../archive/commands.md#search-media) | Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label. |
+| [search-people](../archive/commands.md#search-people) | Search people by partial name; every query word must match the same person. |
+| [search-track](../archive/commands.md#search-track) | Search tracks by the name of the device that recorded them, or their description. |
+| [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
+| [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
+| [subject-device](../archive/commands.md#subject-device) | What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers. |
+| [subject-location](../archive/commands.md#subject-location) | What `search --subject location:<ref>` asks: the media linked to a location node. |
+| [subject-person](../archive/commands.md#subject-person) | What `search --subject person:<ref>` asks: the media a person is in: tagged with a box (a face or a drawn region) or without one. |
+| [subjects-in](../archive/commands.md#subjects-in) | Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted. |
+| [tag-transfer](../archive/commands.md#tag-transfer) | Move legacy manual face tags onto the auto-detected face inside their box (recognition anchors) |
+| [timeline](../archive/commands.md#timeline) | Chronological feed of albums, life events, birthdays and tracks, newest first. |
+| [timeline-facets](../archive/commands.md#timeline-facets) | Per-day, per-month and per-year counts for the timeline scrubber. |
+| [track-append](../archive/commands.md#track-append) | Append coordinate points to a device's track. |
+| [track-create](../archive/commands.md#track-create) | Give a device a track for the coordinate points it recorded (the device's child track) |
+| [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track. |
+| [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
+| [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
+| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and remove the file; mark it pending when no single device matches, and keep it in its staging area's routes/. |
+| [transcribe-file](../archive/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
+| [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
 
 ## Assistant
 
-[All 6 in full](commands-assistant.md).
+[All 6 in full](../assistant/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [agent-eval](commands-assistant.md#agent-eval) | Ask the chat's loop the modules' questions against the real archive, and score what happens. |
-| [assistant-ask](commands-assistant.md#assistant-ask) | Answer a question about EiN by running its commands (the chat drawer's backend) |
-| [assistant-chat](commands-assistant.md#assistant-chat) | List, create, read, or delete durable assistant chats; read a turn in flight; record how a proposal ended; the questions the modules suggest. |
-| [assistant-commands](commands-assistant.md#assistant-commands) | Find a command by what it is for, judge whether a line changes anything, or rebuild the assistant's command index. |
-| [llm-chat](commands-assistant.md#llm-chat) | Ask the assistant's language model one thing, and print what it answers. |
-| [llm-status](commands-assistant.md#llm-status) | Whose the assistant's language model is, where it runs, and (with --checks) whether it answers. |
+| [agent-eval](../assistant/commands.md#agent-eval) | Ask the chat's loop the modules' questions against the real archive, and score what happens. |
+| [assistant-ask](../assistant/commands.md#assistant-ask) | Answer a question about EiN by running its commands (the chat drawer's backend) |
+| [assistant-chat](../assistant/commands.md#assistant-chat) | List, create, read, or delete durable assistant chats; read a turn in flight; record how a proposal ended; the questions the modules suggest. |
+| [assistant-commands](../assistant/commands.md#assistant-commands) | Find a command by what it is for, judge whether a line changes anything, or rebuild the assistant's command index. |
+| [llm-chat](../assistant/commands.md#llm-chat) | Ask the assistant's language model one thing, and print what it answers. |
+| [llm-status](../assistant/commands.md#llm-status) | Whose the assistant's language model is, where it runs, and (with --checks) whether it answers. |
 
 ## Media service
 
-[All 4 in full](commands-ems.md).
+[All 4 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [ems-gpu](commands-ems.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
-| [ems-gpu-sample](commands-ems.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
-| [ems-status](commands-ems.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
-| [ems-text-embed](commands-ems.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
+| [ems-gpu](../ems/commands.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
+| [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
+| [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
+| [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
 
 ## Importer
 
-[All 13 in full](commands-importer.md).
+[All 13 in full](../importer/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [import-albums](commands-importer.md#import-albums) | Create /albums nodes from the legacy extractor output. |
-| [import-check](commands-importer.md#import-check) | Check the extracted legacy data before an import, and with --vfs what landed after one. |
-| [import-comments](commands-importer.md#import-comments) | Create markdown comments from the legacy comment nodes. |
-| [import-covers](commands-importer.md#import-covers) | Recreate legacy profilePicture links as coverPhoto softlinks. |
-| [import-devices](commands-importer.md#import-devices) | Create /devices nodes (+ configuration log + dated owners) from the legacy extractor output. |
-| [import-files](commands-importer.md#import-files) | Create frozen file nodes (symlinked to old bytes) with overrides, faces, links and versions; user files go to /home/<username>/staging/files/inbox/legacy-import. |
-| [import-homes](commands-importer.md#import-homes) | Wire person↔location residence relations from the legacy extractor output. |
-| [import-measurements](commands-importer.md#import-measurements) | Create measurement logs (unit attr + backdated value points) from the legacy series. |
-| [import-people](commands-importer.md#import-people) | Create /locations and /people nodes from the legacy extractor output. |
-| [import-relations](commands-importer.md#import-relations) | Wire up parents/children/partners from the legacy extractor output. |
-| [import-stories](commands-importer.md#import-stories) | Create blob events from the legacy text/story nodes. |
-| [import-tags](commands-importer.md#import-tags) | Port legacy /labels into the new tag system (label add per resolvable target) |
-| [import-users-groups](commands-importer.md#import-users-groups) | Create /groups and /users nodes from the legacy extractor output, each account with a new uid and a group of its own, each group with a new gid. |
+| [import-albums](../importer/commands.md#import-albums) | Create /albums nodes from the legacy extractor output. |
+| [import-check](../importer/commands.md#import-check) | Check the extracted legacy data before an import, and with --vfs what landed after one. |
+| [import-comments](../importer/commands.md#import-comments) | Create markdown comments from the legacy comment nodes. |
+| [import-covers](../importer/commands.md#import-covers) | Recreate legacy profilePicture links as coverPhoto softlinks. |
+| [import-devices](../importer/commands.md#import-devices) | Create /devices nodes (+ configuration log + dated owners) from the legacy extractor output. |
+| [import-files](../importer/commands.md#import-files) | Create frozen file nodes (symlinked to old bytes) with overrides, faces, links and versions; user files go to /home/<username>/staging/files/inbox/legacy-import. |
+| [import-homes](../importer/commands.md#import-homes) | Wire person↔location residence relations from the legacy extractor output. |
+| [import-measurements](../importer/commands.md#import-measurements) | Create measurement logs (unit attr + backdated value points) from the legacy series. |
+| [import-people](../importer/commands.md#import-people) | Create /locations and /people nodes from the legacy extractor output. |
+| [import-relations](../importer/commands.md#import-relations) | Wire up parents/children/partners from the legacy extractor output. |
+| [import-stories](../importer/commands.md#import-stories) | Create blob events from the legacy text/story nodes. |
+| [import-tags](../importer/commands.md#import-tags) | Port legacy /labels into the new tag system (label add per resolvable target) |
+| [import-users-groups](../importer/commands.md#import-users-groups) | Create /groups and /users nodes from the legacy extractor output, each account with a new uid and a group of its own, each group with a new gid. |

@@ -59,7 +59,7 @@ your account is linked to. Helen Okafor's account, for example, can be linked to
 - **News** on **Home** shows her picture beside the albums you add;
 - an event or note you add to an album starts with her under **Written by**;
 - staging uses her homes to tell a trip from days at home when it suggests albums; see
-  [Sorting in staging](staging.md).
+  [Sorting in staging](../archive/staging.md).
 
 Without a link, your picture is an image of your username's first letters, which the browser
 fetches from the outside service `ui-avatars.com`. Where the browser cannot reach the internet, the
@@ -122,7 +122,7 @@ the default. If a save fails, the reason shows in a red box under the setting.
 | Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
 
 EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
-the archive module, and only an EiN with the archive has them. [Viewing photos, videos and recordings](viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
+the archive module, and only an EiN with the archive has them. [Viewing photos, videos and recordings](../archive/viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
 lists each with its key, such as
 [`CFG_USER_SLIDESHOW_SECONDS`](../reference/settings.md#cfg_user_slideshow_seconds).
 
@@ -277,7 +277,7 @@ deletes it. [Links](../concepts/links.md) explains how one picture can be in man
 
 A small heart on a tile marks a picture in your favourites. A picture marked as a favourite in a
 Google Photos export becomes one of your favourites when you import it; see
-[Getting your photos in](importing.md).
+[Getting your photos in](../archive/importing.md).
 
 ### Open your favourites
 
@@ -304,14 +304,14 @@ apart from an administrator, who can see everyone's.
 
 ### What goes to the trash
 
-| What you do                                                       | What goes                                                                                         |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Delete** in the selection bar                                   | The selected pictures that live where you are; see [Albums](albums.md#delete-or-remove-pictures). |
-| **Move to trash** under ⋮ on an album, person, location or device | That album, person, location or device, with everything that lives in it.                         |
-| **Delete** in **Edit event**                                      | That event or note.                                                                               |
-| **Discard** in staging                                            | The files, kept together as one entry; see [Sorting in staging](staging.md).                      |
-| Removing copies in staging's **Duplicates**                       | The copies, kept together as one entry; see [Duplicates](duplicates.md).                          |
-| `trash put` in the terminal                                       | What you name, if you may change it.                                                              |
+| What you do                                                       | What goes                                                                                                    |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Delete** in the selection bar                                   | The selected pictures that live where you are; see [Albums](../archive/albums.md#delete-or-remove-pictures). |
+| **Move to trash** under ⋮ on an album, person, location or device | That album, person, location or device, with everything that lives in it.                                    |
+| **Delete** in **Edit event**                                      | That event or note.                                                                                          |
+| **Discard** in staging                                            | The files, kept together as one entry; see [Sorting in staging](../archive/staging.md).                      |
+| Removing copies in staging's **Duplicates**                       | The copies, kept together as one entry; see [Duplicates](../archive/duplicates.md).                          |
+| `trash put` in the terminal                                       | What you name, if you may change it.                                                                         |
 
 Each of these in the browser says what it did in a message at the foot of the screen, with **Undo**. **Undo** is
 the quickest way back; the Trash page is for later.
@@ -455,8 +455,8 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg
 
 - [Finding your way around](interface.md): the account menu, signing in and out, and admin mode.
 - [Sharing](sharing.md): who sees what you create, the **Share** dialog and share links.
-- [Viewing photos, videos and recordings](viewer.md): the heart and slideshows in the viewer.
-- [Albums](albums.md): **Delete** and **Remove**, and moving an album to the trash.
+- [Viewing photos, videos and recordings](../archive/viewer.md): the heart and slideshows in the viewer.
+- [Albums](../archive/albums.md): **Delete** and **Remove**, and moving an album to the trash.
 - [Configuration](../admin/configuration.md): how settings work for the whole installation.
 - [Settings](../reference/settings.md): every setting with its key and default.
 - [Accounts and groups](../admin/accounts.md): passwords, e-mail addresses and accounts, for

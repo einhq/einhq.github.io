@@ -85,7 +85,7 @@ there is shared with others until you share it.
 | `.ui/nav.json`    | Your changes to the sidebar and top bar; see [Your sidebar and top bar](../guide/customizing.md)                               | Core      |
 | `.ssh/`           | Your SSH keys: `authorized_keys` for signing in, and the keys and `known_hosts` the `ssh` command uses                         | Core      |
 | `.chats/`         | Your conversations with the assistant, private to you                                                                          | Assistant |
-| `staging/`        | Uploads waiting for you to sort them; see [Sorting in staging](../guide/staging.md)                                            | Archive   |
+| `staging/`        | Uploads waiting for you to sort them; see [Sorting in staging](../archive/staging.md)                                          | Archive   |
 
 Most of these appear only once something needs them. Names starting
 with a dot are left out by `ls`; `ls -A`, or its alias `la`, shows them.

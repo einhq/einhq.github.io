@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run --allow-read=. --allow-write=docs/reference
+#!/usr/bin/env -S deno run --allow-read=. --allow-write=docs
 /**
  * Writes the documentation's reference pages under docs/reference/ from what a running EiN says about
  * itself, as `make reference` fetches it into build/reference/:
@@ -12,10 +12,13 @@
  * variable that instance has set without describing it. The pages are as good as the instance's
  * modules are complete, so take them from one running every module (`mod list`).
  */
-import { join } from '@std/path';
+import { dirname, join } from '@std/path';
 
 const IN = 'build/reference';
 const OUT = 'docs/reference';
+
+/** Where a module's command page lives: core's among the reference pages, each module's in its own part. */
+const commandsPath = (module: string) => (module === 'core' ? 'commands-core.md' : `../${module}/commands.md`);
 
 type Arg = { name: string; type?: string; description?: string; optional?: boolean; variadic?: boolean; repeatable?: boolean; choices?: string[] };
 type Flag = { name: string; short?: string; type?: string; description?: string; repeatable?: boolean };
@@ -132,7 +135,9 @@ function commandPage(module: string, commands: Command[]): string {
     GENERATED('docs commands'),
     `# ${title}`,
     '',
-    `${intro} ${commands.length} of them, by name. Every command also says this with \`--help\`; [Commands](commands.md) explains how to read an entry.`,
+    `${intro} ${commands.length} of them, by name. Every command also says this with \`--help\`; [Commands](${
+      module === 'core' ? '' : '../reference/'
+    }commands.md) explains how to read an entry.`,
     '',
     commands.map((c) => `[${c.name}](#${c.name.toLowerCase().replace(/[^a-z0-9_-]/g, '')})`).join(' · '),
     '',
@@ -170,8 +175,8 @@ function commandIndex(commands: Command[], modules: string[]): string {
   ];
   for (const module of modules) {
     const own = commands.filter((c) => c.module === module);
-    out.push(`## ${moduleName(module)}`, '', `[All ${own.length} in full](commands-${module}.md).`, '', '| Command | What it does |', '| --- | --- |');
-    for (const c of own) out.push(`| [${c.name}](commands-${module}.md#${c.name.toLowerCase().replace(/[^a-z0-9_-]/g, '')}) | ${sentence(c.spec.description)} |`);
+    out.push(`## ${moduleName(module)}`, '', `[All ${own.length} in full](${commandsPath(module)}).`, '', '| Command | What it does |', '| --- | --- |');
+    for (const c of own) out.push(`| [${c.name}](${commandsPath(module)}#${c.name.toLowerCase().replace(/[^a-z0-9_-]/g, '')}) | ${sentence(c.spec.description)} |`);
     out.push('');
   }
   return out.join('\n');
@@ -288,10 +293,13 @@ const pages: Record<string, string> = {
   'environment.md': environmentPage(environment),
   'node-types.md': nodeTypesPage(nodeTypes),
 };
-for (const module of modules) pages[`commands-${module}.md`] = commandPage(module, commands.filter((c) => c.module === module));
+for (const module of modules) pages[commandsPath(module)] = commandPage(module, commands.filter((c) => c.module === module));
 
-Deno.mkdirSync(OUT, { recursive: true });
-for (const [name, text] of Object.entries(pages)) Deno.writeTextFileSync(join(OUT, name), text.replace(/\n{3,}/g, '\n\n').trimEnd() + '\n');
+for (const [name, text] of Object.entries(pages)) {
+  const path = join(OUT, name);
+  Deno.mkdirSync(dirname(path), { recursive: true });
+  Deno.writeTextFileSync(path, text.replace(/\n{3,}/g, '\n\n').trimEnd() + '\n');
+}
 console.log(
   `${Object.keys(pages).length} reference pages: ${commands.length} commands, ${settings.length} settings, ${environment.length} variables, ${nodeTypes.length} node types`,
 );

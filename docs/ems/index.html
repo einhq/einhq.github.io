@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The media service – EiN documentation</title>
+    <meta name="description" content="The media service, EMS, is the container that holds every media tool and model EiN uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This page is for the administrator who installs it, watches it and tunes it.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/ems/">
+    <meta property="og:title" content="The media service – EiN documentation">
+    <meta property="og:description" content="The media service, EMS, is the container that holds every media tool and model EiN uses: it reads metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and makes pictures searchable. This page is for the administrator who installs it, watches it and tunes it.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/ems/">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section class="here"><h2>Media service</h2><ul><li><a href="index.html" aria-current="page">The media service</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="commands.html">Media service commands</a></li></ul></section>
+<section><h2>Importer</h2><ul><li><a href="../importer/index.html">The Importer</a></li><li><a href="../importer/commands.html">Importer commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">The media service</span></button>
+        <header class="docs-head">
+          <p class="crumb">Media service</p>
+          <h1>The media service</h1>
+        </header>
+        <article class="prose">
+<p>The media service, EMS, is the container that holds every media tool and model EiN uses: it reads
+metadata, makes thumbnails and video renditions, finds faces, voices and text, transcribes speech and
+makes pictures searchable. This page is for the administrator who installs it, watches it and
+tunes it.</p>
+<h2 id="what-the-media-service-does">What the media service does<a class="anchor" href="#what-the-media-service-does" aria-label="Link to this section"></a></h2>
+<p>EiN itself runs no media tool. Whenever a file needs looking at, EiN sends the media service a
+request naming the file, and the media service answers or writes the result where EiN asked. It
+keeps no data of its own and knows nothing of the tree: it reads the files EiN stores, and nothing
+else.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Work</th>
+<th>What you see in EiN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reading dates, places, cameras and codecs</td>
+<td>Dates and places on pictures; staging can group files</td>
+</tr>
+<tr>
+<td>Thumbnails, picture sizes, posters and waveforms</td>
+<td>Pictures, videos and recordings show in the grids and the viewer</td>
+</tr>
+<tr>
+<td>Video and audio renditions (AV1 video, AAC audio)</td>
+<td>Videos and recordings play in the browser</td>
+</tr>
+<tr>
+<td>Faces, voices and who is speaking</td>
+<td><a href="../archive/people.html">People and faces</a></td>
+</tr>
+<tr>
+<td>Transcripts and language detection</td>
+<td>What is said in videos and recordings, searchable</td>
+</tr>
+<tr>
+<td>Text in pictures and handwriting, text in documents</td>
+<td>Text found in photographed pages, letters and PDFs, searchable</td>
+</tr>
+<tr>
+<td>Picture and text vectors</td>
+<td>Finding pictures by what they show, and text by meaning</td>
+</tr>
+<tr>
+<td>Fingerprints and copy detection</td>
+<td><a href="../archive/duplicates.html">Duplicates</a></td>
+</tr>
+<tr>
+<td>Shot boundaries</td>
+<td>Chapters in a video</td>
+</tr>
+</tbody></table>
+</div>
+<p>The <a href="../admin/modules.html">Archive</a> needs it: installing the <code>archive</code> module installs the <code>ems</code> module with
+it, which is EiN&#39;s side of the media service. The <code>ems</code> module is the client, the health checks,
+the <strong>Media service</strong> tab on the dashboard and the GPU readings; the media service itself is a
+separate container that the module does not install.</p>
+<p>The media service generates no text. The chat belongs to the assistant&#39;s
+<a href="../assistant/language-model.html">language model</a>, and no processing step depends on it.</p>
+<h2 id="what-happens-without-it">What happens without it<a class="anchor" href="#what-happens-without-it" aria-label="Link to this section"></a></h2>
+<p>Without the media service, EiN still takes in, keeps and shares what you upload, but nothing new is
+read:</p>
+<ul>
+<li>Uploads wait in staging as <strong>being prepared</strong>.</li>
+<li>New files get no metadata, thumbnails, faces, transcripts or search vectors.</li>
+<li>The <strong>Dashboard</strong> shows the warning <code>http://ems:8181 is not answering; work that needs it waits</code>
+on its <strong>Overview</strong> tab. A warning does not stop <strong>Healthy</strong>.</li>
+</ul>
+<p>None of this work is lost. Each step that needs the media service waits without using up its
+retries, and runs once the media service answers again.</p>
+<h2 id="add-the-media-service">Add the media service<a class="anchor" href="#add-the-media-service" aria-label="Link to this section"></a></h2>
+<p>The installer adds it with <code>--ems</code>, at the first install or any time after:</p>
+<ol>
+<li><p>On the machine EiN runs on, run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+./setup.sh --ems</code></pre></div>
+</li>
+<li><p>Wait for the build. The first time, <code>setup.sh</code> prints
+<code>== Building the images (the media service the first time: about 30 GB)</code>: the image carries
+every model, and building it takes a while and about 30 GB of disk. <a href="../start/install.html#what-you-need">Install EiN</a>
+lists what the machine needs with the media service.</p>
+</li>
+<li><p><code>setup.sh</code> starts the containers and prints <code>EiN is up at http://…:8080/</code> once EiN answers.</p>
+</li>
+<li><p>Open <strong>Dashboard</strong> under <strong>System</strong> in the sidebar, and choose the <strong>Media service</strong> tab. For the
+first minutes the media service loads its models; the tab then shows the <strong>healthy</strong> badge.</p>
+</li>
+</ol>
+<p><code>--ems</code> writes <code>EIN_EMS=1</code> to <code>~/ein/.env</code>, so a later <code>./setup.sh</code> keeps it. When <code>setup.sh</code> found
+an NVIDIA card with its CDI spec at the first install (<code>EIN_GPU=1</code>), the media service gets the card;
+<a href="gpu.html">The graphics card</a> explains how.</p>
+<p>To leave the media service out again, run <code>./setup.sh --no-ems</code>. Its container stops and is
+removed; your files and everything already made from them stay.</p>
+<h2 id="how-ein-reaches-it">How EiN reaches it<a class="anchor" href="#how-ein-reaches-it" aria-label="Link to this section"></a></h2>
+<p>In the standard install, both containers run on the same machine and only EiN talks to the media
+service, on the compose network. Nothing outside the machine reaches it. Three things connect
+them, all set up by <code>setup.sh</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Where it is set</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The address</td>
+<td><code>CFG_EMS_URL</code> for EiN, in <code>compose.yaml</code></td>
+<td><code>http://ems:8181</code></td>
+</tr>
+<tr>
+<td>The key</td>
+<td><code>EMS_KEY</code> in <code>.env</code>, made at the install; EiN gets it as <code>CFG_EMS_KEY</code></td>
+<td>48 random hexadecimal characters</td>
+</tr>
+<tr>
+<td>The folders</td>
+<td>The same four folders under the data folder, mounted at the same paths in both containers</td>
+<td>see below</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path in both containers</th>
+<th>What it holds</th>
+<th>The media service may</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/files</code></td>
+<td>your originals</td>
+<td>read</td>
+</tr>
+<tr>
+<td><code>/old</code></td>
+<td>older originals</td>
+<td>read</td>
+</tr>
+<tr>
+<td><code>/files-volatile</code></td>
+<td>the renditions</td>
+<td>read and write</td>
+</tr>
+<tr>
+<td><code>/files-tmp</code></td>
+<td>scratch space</td>
+<td>read and write</td>
+</tr>
+</tbody></table>
+</div>
+<p>Because a path means the same file on both sides, nothing is ever copied between them, and the
+media service can never change an original. It refuses any path outside these four.</p>
+<p>The key is a secret: no shell in EiN sees it, and the settings page never shows it once it is set.
+The media service accepts a request only with that key. Leave <code>CFG_EMS_URL</code>, <code>EMS_KEY</code>, <code>EMS_PORT</code>
+and <code>EMS_ROOTS</code> as <code>setup.sh</code> and the compose files set them; <a href="../admin/configuration.html">Configuration</a>
+explains how a value set in the deployment relates to the settings page.</p>
+<h2 id="check-that-it-is-running">Check that it is running<a class="anchor" href="#check-that-it-is-running" aria-label="Link to this section"></a></h2>
+<h3 id="on-the-dashboard">On the dashboard<a class="anchor" href="#on-the-dashboard" aria-label="Link to this section"></a></h3>
+<p>Open <strong>Dashboard</strong> under <strong>System</strong> and choose the <strong>Media service</strong> tab. It asks the media service
+how it is, again and again, while the tab is open.</p>
+<ul>
+<li><strong>Media service</strong>: a badge, <strong>healthy</strong>, <strong>degraded</strong> or <strong>model worker down</strong>, and the facts:
+<strong>version</strong>, <strong>commit</strong>, <strong>api</strong>, <strong>uptime</strong>, <strong>batch worker</strong> and <strong>query worker</strong> (<code>up</code>, or <code>down</code>,
+with <code>×</code> and the number of restarts), <strong>card</strong>, <strong>driver</strong> and <strong>url</strong>.</li>
+<li><strong>Graphics card mode</strong>, when there is a card: who has the card now (see
+<a href="#the-graphics-card">The graphics card</a> below).</li>
+<li>An orange box for each degradation, such as <code>gpu degraded</code>, and a yellow one for each warning.</li>
+<li><strong>Graphics card memory</strong>: the card&#39;s memory split by process, the media service&#39;s workers and
+everything <strong>outside EMS</strong>, and what is free; <strong>GPU load</strong>, <strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
+<li><strong>Models</strong>: every model the media service can load, loaded or not, with <strong>Status</strong> (for example
+<strong>GPU loaded</strong> or <strong>CPU loading</strong>), <strong>Loaded</strong>, <strong>Last used</strong>, <strong>Size</strong> and <strong>Activity</strong>. Hover a
+model&#39;s name for what it does. The heading counts them: for example <code>3 of 15 loaded · 2 on the GPU</code>.</li>
+<li><strong>Executing</strong>: the requests running or waiting now, and the three lanes they go through, <strong>models</strong>,
+<strong>tools</strong> and <strong>encodes</strong>, each with how many run at once.</li>
+</ul>
+<p>When the media service does not answer, the tab shows only <strong>The media service is not answering</strong>,
+with the address it tried.</p>
+<p>The <strong>Overview</strong> tab shows <strong>GPU</strong> and <strong>VRAM</strong> tiles beside the computer&#39;s own CPU and memory when
+the media service has a card. With no card, or no media service, they are not there.</p>
+<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, and the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The GPU and VRAM tiles are the media service&#39;s card; they show only when it has one</figcaption></figure>
+<p><strong>About EiN</strong> in the account menu also has a <strong>Media service</strong> tile: its version, the API it speaks,
+its commit, how long it has been up and the card it runs on, or <strong>Not answering</strong>.</p>
+<h3 id="the-health-checks">The health checks<a class="anchor" href="#the-health-checks" aria-label="Link to this section"></a></h3>
+<p>The dashboard&#39;s verdict and the <a href="../reference/commands-core.html#health"><code>health</code></a> command read these
+checks about the media service:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>State</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ems</code></td>
+<td>ok</td>
+<td>It answers: <code>EMS &lt;commit&gt; answering, up &lt;time&gt;</code></td>
+</tr>
+<tr>
+<td><code>ems</code></td>
+<td>warn</td>
+<td>It does not answer: <code>&lt;address&gt; is not answering; work that needs it waits</code></td>
+</tr>
+<tr>
+<td><code>ems worker</code></td>
+<td>warn</td>
+<td><code>the model worker is down; EMS starts it again</code></td>
+</tr>
+<tr>
+<td><code>ems gpu</code></td>
+<td>fail</td>
+<td>The card is meant to be there and is not, or the card stopped working</td>
+</tr>
+<tr>
+<td><code>ems card</code></td>
+<td>ok</td>
+<td>Who has the card, <code>busy</code> or <code>quiet</code>, and which search models are on it</td>
+</tr>
+</tbody></table>
+</div>
+<p>Only <code>ems gpu</code> fails, and a failed check turns the verdict to <strong>Needs a person</strong>. The others are
+warnings: while the media service restarts or loads its models, the work that needs it waits.</p>
+<h3 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h3>
+<p><a href="commands.html#ems-status"><code>ems-status</code></a> prints the whole answer the dashboard
+draws, and its options shorten it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+ems-status            <span class="hljs-comment"># everything: version, models, requests, card, memory</span>
+ems-status --brief    <span class="hljs-comment"># one line, degradations first</span>
+ems-status --checks   <span class="hljs-comment"># the checks above</span>
+ems-gpu               <span class="hljs-comment"># the card now, with the last six hours</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>ok    ems  EMS 3f9a2c1 answering, up 2.4h
+ok    ems card  quiet, search on it: text-query, siglip-text</code></pre></div>
+<p><a href="../reference/commands-core.html#service-list"><code>service-list --detail</code></a> shows the same one line as
+<code>ems-status --brief</code> beside the <code>ems-link</code> service. When the media service does not answer,
+<code>ems-status</code> says <code>ems-status: http://ems:8181 is not answering</code> and exits with 1.</p>
+<h3 id="on-the-machine">On the machine<a class="anchor" href="#on-the-machine" aria-label="Link to this section"></a></h3>
+<p>The media service is the <code>ems</code> service of compose:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose ps ems          <span class="hljs-comment"># or docker compose</span>
+podman compose logs -f ems     <span class="hljs-comment"># what it says, as it says it</span>
+podman compose restart ems</code></pre></div>
+<p>Compose checks it every 30 seconds, and gives it 120 seconds to start before a failed check counts.</p>
+<h2 id="the-graphics-card">The graphics card<a class="anchor" href="#the-graphics-card" aria-label="Link to this section"></a></h2>
+<p>The media service uses an NVIDIA card when it has one, and the CPU otherwise. Without a card every
+model and every encoder still runs, only more slowly. Where each
+model runs is the media service&#39;s own decision, made each time it loads one; it changes how fast an
+answer comes, never what it is. A model that does not fit on the card runs on the CPU, except transcription and the handwriting
+readers, which wait for room on the card.</p>
+<p>With a card, the media service hands the card between indexing and search, and <strong>Graphics card
+mode</strong> on the <strong>Media service</strong> tab shows which has it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>busy</strong></td>
+<td>Indexing has the graphics card and search runs on the CPU, until no indexing work has come for a while.</td>
+</tr>
+<tr>
+<td><strong>quiet</strong></td>
+<td>No indexing work, so its models are unloaded and search runs on the graphics card, as far as it fits.</td>
+</tr>
+<tr>
+<td><strong>switching</strong></td>
+<td>Handing the graphics card over between indexing and search.</td>
+</tr>
+<tr>
+<td><strong>off</strong></td>
+<td>No graphics card to share: every model runs where its setting says.</td>
+</tr>
+</tbody></table>
+</div>
+<p>When the mode is off, which <code>EMS_CARD_QUIET_AFTER=0</code> makes it too, the tab leaves <strong>Graphics card mode</strong> out.</p>
+<p>It turns <strong>quiet</strong> after 600 seconds without indexing work (<code>EMS_CARD_QUIET_AFTER</code>). A search never
+waits for the card: a separate model process answers searches on the CPU throughout.</p>
+<p><a href="gpu.html">The graphics card</a> covers preparing the machine, checking that every model really runs on
+the card, <a href="gpu.html#share-one-card-with-the-language-model">sharing the card with the language model</a>
+and <a href="gpu.html#be-told-when-the-card-goes-missing">being told when the card goes missing</a>.</p>
+<h2 id="change-how-it-works">Change how it works<a class="anchor" href="#change-how-it-works" aria-label="Link to this section"></a></h2>
+<p>The media service is configured by its environment alone. <code>~/ein/.env</code> is that environment, so an
+<code>EMS_</code> line there reaches it:</p>
+<ol>
+<li><p>Add or change the line in <code>~/ein/.env</code>:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">EMS_WHISPER_LANGUAGES</span>=sv,en</code></pre></div>
+</li>
+<li><p>Apply it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+podman compose up -d</code></pre></div>
+<p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, so
+the media service&#39;s idle models may go to swap and a search waits for them; <code>./setup.sh</code> makes
+the containers again with the limit.</p>
+</li>
+</ol>
+<p>Any change restarts the media service, and EiN with it, since both read <code>.env</code>. Requests in flight fail and are retried; see
+<a href="#when-the-media-service-restarts">When the media service restarts</a>.</p>
+<p>These are the settings an administrator is most likely to need:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>EMS_MEMORY</code></td>
+<td><code>16g</code></td>
+<td>The most memory the container may use. Compose reads it, not the media service.</td>
+</tr>
+<tr>
+<td><code>EMS_WHISPER_LANGUAGES</code></td>
+<td>empty</td>
+<td>The languages spoken in your recordings, as codes separated by commas, the most common first. Detection is biased towards them; empty lets detection alone decide.</td>
+</tr>
+<tr>
+<td><code>EMS_WHISPER_LANGUAGE</code></td>
+<td>empty</td>
+<td>One language every recording is transcribed as; detection never runs. Right only when every recording is in that language.</td>
+</tr>
+<tr>
+<td><code>EMS_EXPECT_GPU</code></td>
+<td>empty</td>
+<td><code>1</code>: the machine is meant to have a card, and the <code>ems gpu</code> check fails when none is visible.</td>
+</tr>
+<tr>
+<td><code>EMS_CARD_SHARE_MB</code></td>
+<td><code>0</code></td>
+<td>The most of the card the media service holds, in MB, for a card shared with the language model; <code>0</code> is all of it.</td>
+</tr>
+<tr>
+<td><code>EMS_CARD_QUIET_AFTER</code></td>
+<td><code>600</code></td>
+<td>Seconds without indexing work before search gets the card; <code>0</code> keeps search on the CPU.</td>
+</tr>
+<tr>
+<td><code>EMS_MODEL_IDLE_EVICT</code></td>
+<td><code>21600</code></td>
+<td>Seconds a model may sit unused before it is unloaded.</td>
+</tr>
+<tr>
+<td><code>EMS_MODEL_PINNED</code></td>
+<td><code>text-query</code></td>
+<td>Models loaded at start and never unloaded, separated by commas. The search models, <code>text-query</code> and <code>siglip-text</code>, are pinned in the query worker whatever this says.</td>
+</tr>
+<tr>
+<td><code>EMS_MODEL_MAX_RSS</code></td>
+<td>0.6 of the container&#39;s memory</td>
+<td>The batch worker&#39;s memory ceiling, such as <code>10g</code>. At the ceiling the worker finishes its requests and starts again; <code>0</code> turns the ceiling off.</td>
+</tr>
+<tr>
+<td><code>EMS_LIMIT_MODELS</code></td>
+<td><code>8</code></td>
+<td>Model requests admitted at once.</td>
+</tr>
+<tr>
+<td><code>EMS_LIMIT_TOOLS</code></td>
+<td><code>4</code></td>
+<td>Tool requests at once: metadata, thumbnails, fingerprints, document text. Each tool uses one core, so this is a number of cores.</td>
+</tr>
+<tr>
+<td><code>EMS_LIMIT_ENCODES</code></td>
+<td><code>2</code></td>
+<td>Transcodes and other whole-file decodes at once.</td>
+</tr>
+<tr>
+<td><code>EMS_QUEUE_DEPTH</code></td>
+<td><code>64</code></td>
+<td>Requests that may wait before a new one is answered <code>busy</code>.</td>
+</tr>
+<tr>
+<td><code>EMS_INTERACTIVE_RESERVE</code></td>
+<td><code>1</code></td>
+<td>Slots more for a request a person is waiting on, so a person never waits behind indexing.</td>
+</tr>
+<tr>
+<td><code>EMS_VIDEO_ENCODER</code></td>
+<td>empty</td>
+<td>The video encoder: empty picks <code>av1_nvenc</code> on a card that offers it and <code>libsvtav1</code> otherwise.</td>
+</tr>
+<tr>
+<td><code>EMS_CPU_ENCODE_MAX_MB</code></td>
+<td><code>4000</code></td>
+<td>Memory one video decode on the CPU may grow to. A long video is encoded in pieces within it; one that cannot be is refused. <code>0</code> turns the CPU encode off.</td>
+</tr>
+<tr>
+<td><code>EMS_TOOL_STALL</code></td>
+<td><code>900</code></td>
+<td>Seconds a tool may go without using the CPU or moving a byte before it is stopped as stuck. Not a limit on how long it may take.</td>
+</tr>
+</tbody></table>
+</div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Leave <code>EMS_WHISPER_MODEL</code> as it is (<code>large-v3</code>). It must match the model built into the image;
+another name makes the first transcription download one, or fail without a network.</p>
+</aside>
+<p>A change to the transcription settings changes what EMS reports as its transcript settings. With
+<strong>Keep transcripts current</strong> (<a href="../reference/settings.html#cfg_media_transcripts_current"><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code></a>)
+left on, the Archive then transcribes every video and recording again in the background, behind new
+media. On a large archive that is hours of work.</p>
+<h3 id="settings-on-eins-side">Settings on EiN&#39;s side<a class="anchor" href="#settings-on-eins-side" aria-label="Link to this section"></a></h3>
+<p>EiN&#39;s own settings for the media service are in the <strong>Media service</strong> and <strong>Transcription</strong> groups
+of <strong>Settings → System</strong>, with <code>CFG_MODEL_SLOTS</code>, the Archive&#39;s, in <strong>Processing</strong>. All can be set
+with <code>config set</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../reference/settings.html#cfg_ems_url"><code>CFG_EMS_URL</code></a></td>
+<td><code>http://127.0.0.1:8181</code>; the install sets <code>http://ems:8181</code></td>
+<td>Where the media service answers</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_ems_key"><code>CFG_EMS_KEY</code></a></td>
+<td>none; the install sets it</td>
+<td>The key the media service expects</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_ems_connect_retry"><code>CFG_EMS_CONNECT_RETRY</code></a></td>
+<td><code>90</code></td>
+<td>Seconds a background request keeps retrying while the media service refuses connections</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_ems_link_interval_seconds"><code>CFG_EMS_LINK_INTERVAL_SECONDS</code></a></td>
+<td><code>60</code></td>
+<td>How often <code>ems-link</code> asks whether the media service answers</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_whisper_language"><code>CFG_WHISPER_LANGUAGE</code></a></td>
+<td>empty</td>
+<td>A language sent with every transcription; empty lets the media service decide</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_whisper_vad_min_silence_ms"><code>CFG_WHISPER_VAD_MIN_SILENCE_MS</code></a></td>
+<td>empty</td>
+<td>The pause that ends a stretch of speech</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_whisper_word_timestamps"><code>CFG_WHISPER_WORD_TIMESTAMPS</code></a></td>
+<td>empty</td>
+<td><code>1</code> for the time of every word, <code>0</code> for timings per segment</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
+<td><code>2</code></td>
+<td>Model requests the Archive keeps in flight against the media service at once</td>
+</tr>
+</tbody></table>
+</div>
+<p>For the languages of a family archive, prefer <code>EMS_WHISPER_LANGUAGES</code> in <code>.env</code> to
+<code>CFG_WHISPER_LANGUAGE</code>: the first biases detection, so a holiday clip in English is still
+transcribed as English; the second forces one language on everything. <a href="../admin/processing.html">Processing and pipelines</a> explains <code>CFG_MODEL_SLOTS</code> and the other slots.</p>
+<h2 id="when-the-media-service-restarts">When the media service restarts<a class="anchor" href="#when-the-media-service-restarts" aria-label="Link to this section"></a></h2>
+<p>A restart takes tens of seconds, longer when models load. Meanwhile:</p>
+<ul>
+<li>A background request that finds the connection refused tries again for up to
+<code>CFG_EMS_CONNECT_RETRY</code> seconds (90) before the step gives up for now.</li>
+<li>A step that cannot reach the media service, finds it <code>busy</code>, or finds a model still loading waits
+without using up an attempt, and runs again later.</li>
+<li>A request a person is waiting on, such as a search, does not wait: it fails at once.</li>
+<li>The <code>ems-link</code> service writes each change to its log, such as
+<code>ems-link: down — not answering</code> and <code>ems-link: up — …</code>.</li>
+</ul>
+<p>When the media service comes back with a different build, <code>ems-link</code> runs every failed pipeline
+instance again at once, since a new build is the likeliest fix for what failed under the old one.
+It logs <code>ems-link: EMS &lt;old&gt; -&gt; &lt;new&gt;; failed work runs again: …</code>. <a href="../admin/services-logs.html">Services and logs</a> shows how to read that log.</p>
+<h2 id="update-the-media-service">Update the media service<a class="anchor" href="#update-the-media-service" aria-label="Link to this section"></a></h2>
+<p><code>./setup.sh</code> without options fetches the newest sources of EiN and of each service it runs, the
+media service included, rebuilds the images and starts them again. <a href="../admin/updating.html">Updating</a> has the
+whole procedure.</p>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<p><strong>The Media service tab says The media service is not answering.</strong> Look at the container:
+<code>podman compose ps ems</code>. If it is not running, <code>podman compose logs ems</code> says why; start it with
+<code>podman compose up -d</code>. If <code>.env</code> has <code>EIN_EMS=0</code>, the media service is not installed: run
+<code>./setup.sh --ems</code>.</p>
+<p><strong>It answers, but the badge says model worker down.</strong> The model process stopped; the media service
+starts it again by itself. If it keeps stopping, the count after <code>×</code> beside <strong>batch worker</strong> climbs:
+<code>podman compose logs ems</code> says why. When it ran out of memory, give the container more with
+<code>EMS_MEMORY</code> in <code>.env</code>.</p>
+<p><strong><code>gpu degraded</code> and the verdict is Needs a person.</strong> The card the machine should have is not
+visible to the media service, or its context was lost. A reboot that renumbers the cards is the
+usual cause; <a href="gpu.html">The graphics card</a> has the fix.</p>
+<p><strong>A warning <code>no keys configured: authentication is off</code>.</strong> The media service got no key. Check that
+<code>EMS_KEY</code> is in <code>~/ein/.env</code>, and run <code>podman compose up -d</code>.</p>
+<p><strong>A warning <code>no roots configured: every file request will be refused</code>.</strong> <code>EMS_ROOTS</code> is empty. It
+is set in <code>compose.ems.yaml</code>; undo a change to that file with <code>git -C ~/ein checkout compose.ems.yaml</code>
+and run <code>podman compose up -d</code>.</p>
+<p><strong>Uploads stay being prepared for a long time.</strong> Look at <strong>Executing</strong> on the <strong>Media service</strong> tab.
+Requests waiting in the lanes mean the media service is busy: after a large import, the <strong>Dashboard</strong>
+reads <strong>Catching up</strong> until the work is done. With a card, a model shown as <strong>CPU loaded</strong> is several
+times slower than on the card; see <a href="../admin/performance.html">Performance and sizing</a>.</p>
+<p><strong>The first transcription or face search after a quiet spell is slow.</strong> Models are unloaded after
+<code>EMS_MODEL_IDLE_EVICT</code> seconds unused, and loading one again takes tens of seconds. The <strong>Models</strong>
+table shows it as loading.</p>
+<p><strong>The build fails or the disk fills.</strong> The media service&#39;s image is about 30 GB, and podman builds
+it in a folder beside its own storage, not in <code>/tmp</code>. Free space there and run <code>./setup.sh</code> again.</p>
+<p><a href="../admin/troubleshooting.html">Troubleshooting</a> covers problems that are not the media service&#39;s own.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="gpu.html">The graphics card</a></li>
+<li><a href="../admin/install.html">Installing in detail</a></li>
+<li><a href="../admin/configuration.html">Configuration</a></li>
+<li><a href="../admin/monitoring.html">Health and the dashboard</a></li>
+<li><a href="../admin/processing.html">Processing and pipelines</a></li>
+<li><a href="../admin/performance.html">Performance and sizing</a></li>
+<li><a href="commands.html">Media service commands</a></li>
+<li><a href="../reference/settings.html#media-service">Settings</a></li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../assistant/commands.html" rel="prev"><span>Previous</span>Assistant commands</a><a class="next" href="gpu.html" rel="next"><span>Next</span>The graphics card</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

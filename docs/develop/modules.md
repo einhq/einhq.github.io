@@ -520,7 +520,7 @@ for a language model or text vectors. The settings are in
 [the settings reference](../reference/settings.md).
 
 What the assistant knows about your module's commands, and how to give it more, is in
-[Teaching the assistant](assistant.md).
+[Teaching the assistant](../assistant/teaching.md).
 
 ## Write documentation for it
 
@@ -642,7 +642,7 @@ show them afterwards.
 ## Related pages
 
 - [The module manifest](manifest.md): every field of `mod.json`
-- [Teaching the assistant](assistant.md): making the assistant use your module's commands
+- [Teaching the assistant](../assistant/teaching.md): making the assistant use your module's commands
 - [Building from source](source.md): a checkout of core to type-check and test modules in
 - [Modules](../admin/modules.md): installing, updating and removing modules as an administrator
 - [The shell language](../shell/bash.md): the language bash commands and services are written in
