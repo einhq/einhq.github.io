@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 80 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -19,6 +19,7 @@ Every setting of an EiN with all its modules: 80 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `0.75` |
 | Kind | number |
+| Restarts | `album-metadata` |
 | From the module | Archive |
 
 ### `CFG_ALBUM_STACK_MAX_GAP_SECONDS`
@@ -30,6 +31,7 @@ Every setting of an EiN with all its modules: 80 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `10` |
 | Kind | number |
+| Restarts | `album-metadata` |
 | From the module | Archive |
 
 ## Appearance
@@ -471,12 +473,12 @@ Every setting of an EiN with all its modules: 80 of them, in the groups the Sett
 
 ### `CFG_MODEL_KIND_QUANTUM_MS`
 
-**Model backlog rotation (ms)**. How long the models worker stays on one backlog (faces, picture vectors, text in pictures, text vectors, transcripts, voices) before rotating to the next when work remains on more than one. Faces outrank the other backlogs and a crawl finds new ones continuously, so without this they would starve the rest outright.
+**Model backlog rotation (ms)**. How long the models worker stays on one backlog (faces, picture vectors, text in pictures, text vectors, transcripts, voices) before rotating to the next when work remains on more than one. Faces outrank the other backlogs and a crawl finds new ones continuously, so without this they would starve the rest outright. Each rotation costs the media service a minute or two of loading models and of slots waiting for the last long step of the old backlog, so an hour puts throughput before the wait of the other backlogs; a backlog with no work hands its turn on at once either way.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | `900000` |
+| Default | `3600000` |
 | Kind | number |
 | Restarts | `models` |
 | From the module | Archive |
@@ -557,6 +559,18 @@ Every setting of an EiN with all its modules: 80 of them, in the groups the Sett
 | Default | `21600` |
 | Kind | number |
 | Restarts | `media-heal` |
+| From the module | Archive |
+
+### `CFG_MODEL_SECOND_SLOTS`
+
+**Second models worker's slots**. Slots of a second worker for the model-bound media steps, which goes through the same backlogs in the reverse order, so the media service runs a second model family beside the first worker's. 0 leaves it off. Size both workers' slots together against the media service's model limit, and mind its card: two families' models must fit there, or one runs on the CPU.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `0` |
+| Kind | number |
+| Restarts | `models-second` |
 | From the module | Archive |
 
 ### `CFG_PIPELINE_MAX_ADMITTED_STEPS`
@@ -680,14 +694,13 @@ Every setting of an EiN with all its modules: 80 of them, in the groups the Sett
 
 ### `CFG_TERMINAL_RECONNECT_GRACE_SEC`
 
-**Terminal reconnect grace**. How long an interactive terminal survives without a browser connection, allowing reloads and short network interruptions to reattach.
+**Terminal reconnect grace**. How long an interactive terminal survives without a browser connection, allowing reloads and short network interruptions to reattach. A change applies from the next disconnect.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `300` |
 | Kind | number |
-| Restarts | `http-server` |
 
 ## Sharing
 

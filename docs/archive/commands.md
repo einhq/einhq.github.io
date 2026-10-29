@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 131 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 133 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-audit](#face-audit) · [face-confirm](#face-confirm) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [find-within](#find-within) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [tag-transfer](#tag-transfer) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [transcribe-file](#transcribe-file) · [voiceprint-file](#voiceprint-file)
+[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-audit](#face-audit) · [face-confirm](#face-confirm) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [find-within](#find-within) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [tag-transfer](#tag-transfer) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [transcribe-file](#transcribe-file) · [voiceprint-file](#voiceprint-file)
 
 ## A
 
@@ -908,25 +908,27 @@ With `JSON_OUTPUT=1`: the file's metadata exactly as exiftool reads it.
 
 ### `face-add`
 
-Add a human-drawn face box to an image as a new unidentified person.
+Add a human-drawn face box to an image or a video frame as a new unidentified person.
 
 <small>changes things</small>
 
 ```text
-face-add [--box=<string>] [--no-crop] <input>
+face-add [--box=<string>] [--at=<string>] [--no-crop] <input>
 ```
 
-| Argument  | What it is                 |
-| --------- | -------------------------- |
-| `<input>` | VFS path to an image file. |
+| Argument  | What it is                            |
+| --------- | ------------------------------------- |
+| `<input>` | VFS path to an image or a video file. |
 
-| Option           | What it does                               |
-| ---------------- | ------------------------------------------ |
-| `--box=<string>` | display-frame fractions: x,y,width,height. |
-| `--no-crop`      | create the crop node without rendering it. |
+| Option           | What it does                                                       |
+| ---------------- | ------------------------------------------------------------------ |
+| `--box=<string>` | display-frame fractions: x,y,width,height.                         |
+| `--at=<string>`  | on a video, required: the second of the frame the box is drawn on. |
+| `--no-crop`      | create the crop node without rendering it.                         |
 
 ```bash
 face-add --box 0.1,0.2,0.3,0.4 /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+face-add --box 0.4,0.1,0.2,0.3 --at 12.5 /archive/albums/Exempelalbum_2019/files/MVI_0012.mp4
 ```
 
 With `JSON_OUTPUT=1`: the new face and the unidentified person created for it.
@@ -2911,6 +2913,30 @@ search-track 'exempeltur' -l 10
 
 With `JSON_OUTPUT=1`: matching tracks, one row per channel that found it (name, description), best first within each.
 
+### `see-speakers`
+
+Tie a video's voices to the faces seen speaking them, the video's own face regions first.
+
+<small>changes things</small>
+
+```text
+see-speakers [-v] <video>
+```
+
+| Argument  | What it is                        |
+| --------- | --------------------------------- |
+| `<video>` | VFS path to a voiceprinted video. |
+
+| Option | What it does    |
+| ------ | --------------- |
+| `-v`   | Verbose output. |
+
+```bash
+see-speakers /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
+```
+
+With `JSON_OUTPUT=1`: nothing; each voice's asdRegionId, asdPersonId and asdScore are written.
+
 ### `staging`
 
 Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.
@@ -2918,7 +2944,7 @@ Manage a user's private staging area: its categories and which one a newly arriv
 <small>reads only</small>
 
 ```text
-staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue] [--if-pending] [--at=<path>] [--new] [--to=<string>] [--name=<string>] [--into=<path>] [--share=<string>] [--except=<path>] [--expect=<string>] [--confidence=<string>] [--action=<string>] [--limit=<string>] [--cursor=<string>] [--refresh] [--force] [--repair] [--counts] [--where=<string>] [--keep=<string>] [--apply] [--off] [--exact] [--near] [--loose-batch=<string>] [--layout-only] [--dry-run] [--create] [--remove] [--kind=<string>] [--label=<string>] [--destination=<path>] [--no-destination] [--strategy=<string>] [--significance=<string>] [--digitized=<string>] [--filename-dates=<string>] [--lane=<string>] [--sidecars=<string>] <subcommand> <path>...
+staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue] [--if-pending] [--at=<path>] [--new] [--to=<string>] [--name=<string>] [--into=<path>] [--share=<string>] [--except=<path>] [--expect=<string>] [--confidence=<string>] [--action=<string>] [--limit=<string>] [--cursor=<string>] [--refresh] [--force] [--repair] [--counts] [--where=<string>] [--keep=<string>] [--apply] [--off] [--exact] [--near] [--loose-batch=<string>] [--layout-only] [--idle-minutes=<string>] [--dry-run] [--create] [--remove] [--kind=<string>] [--label=<string>] [--destination=<path>] [--no-destination] [--strategy=<string>] [--significance=<string>] [--digitized=<string>] [--filename-dates=<string>] [--lane=<string>] [--sidecars=<string>] <subcommand> <path>...
 ```
 
 | Argument       | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -2959,6 +2985,7 @@ staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue
 | `--near`                    | duplicates, dedupe --apply: only look-alikes: the same picture in other bytes.                                                                                                                                          |
 | `--loose-batch=<string>`    | init: the default category's folder that loose entries of files/ move into (default unsorted)                                                                                                                           |
 | `--layout-only`             | init: make the directories and categories only; move nothing.                                                                                                                                                           |
+| `--idle-minutes=<string>`   | init: leave the loose files of files/ changed within this many minutes, which may still be being copied.                                                                                                                |
 | `--dry-run`                 | init, organize, promote, discard, accept, dedupe, duplicates, retime --refresh: say what would be done, and do none of it.                                                                                              |
 | `--create`                  | category: make it, with its directory of groups.                                                                                                                                                                        |
 | `--remove`                  | category: remove it, which only an empty one other than the default can be.                                                                                                                                             |
@@ -3053,6 +3080,32 @@ subcluster-faces /archive/people/Anna_Exempel
 ```
 
 With `JSON_OUTPUT=1`: the sub-clusters the person's faces fall into, which is how two people fused into one show up.
+
+### `subcluster-voices`
+
+Re-cluster one person's voices with average linkage, to find two people fused into one.
+
+<small>reads only</small>
+
+```text
+subcluster-voices [--threshold=<string>] [-k <string>] [--verbose] <person>
+```
+
+| Argument   | What it is                                       |
+| ---------- | ------------------------------------------------ |
+| `<person>` | person path, or a bare id under /people/unknown. |
+
+| Option                 | What it does                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `--threshold=<string>` | min average similarity to keep voices together (default: the largest gap in the dendrogram) |
+| `-k <string>`          | cut into exactly this many groups instead of by threshold.                                  |
+| `--verbose`            | list the recordings in each group.                                                          |
+
+```bash
+subcluster-voices /archive/people/Anna_Exempel
+```
+
+With `JSON_OUTPUT=1`: the sub-clusters the person's voices fall into, which is how two speakers fused into one show up.
 
 ### `subject-device`
 

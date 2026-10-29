@@ -21,6 +21,8 @@ Read once, from EiN's own environment, when it starts: `.env` in an installation
 | `DEV_MODULES_PATH` | `./modules` | The deployment's modules: a folder of module checkouts mounted read-only at /tmp/dev-modules and linked into /usr/modules. A name here wins over an installed module of the same name. In a shell the same name is that tree path. |
 | `MODULE_INSTALL_PATH` | `./modules-installed` | Host directory `mod install` puts modules in, mounted read-write at /var/lib/modules. A folder of the host mounted into the container keeps the installed modules when the container is replaced. |
 | `INSTALL_MODULES` |  | Modules boot installs with `mod install` when they are not installed: names or repository addresses, separated by spaces. One installed already is left as it is; `mod install` and the settings page update it. |
+| `INITIAL_ADMIN_PASSWORD` |  | The admin account's first password, set at the first start of a new instance. Without it that start sets a random one and prints it to the log once. Changing it later does nothing; the account's password is changed in Settings or with `user-passwd`. |
+| `INITIAL_ADMIN_PASSWORD` |  | The admin account's first password, set at the first start of a new instance; without it that start sets a random one and prints it to the log once. Changing it later does nothing: the account's password is changed in Settings or with `user-passwd`. |
 | `TZ` | `the host's zone` | Time zone for log lines, "today", and which year a date late on New Year's Eve belongs to. |
 | `LOG_LEVEL` | `INFO` | How much the process logs: DEBUG, INFO, WARN or ERROR. |
 | `LOG_MODULES` |  | Per-component log levels over LOG_LEVEL, such as ssh-server:DEBUG,pipeline:WARN. |

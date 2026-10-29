@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -49,7 +49,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [config-get](commands-core.md#config-get) | Print the effective value of one setting; for a key, only whether it is set. |
 | [config-list](commands-core.md#config-list) | List settings with their effective values. |
 | [config-publish](commands-core.md#config-publish) | Copy settings from this process's environment into /etc/environment. |
-| [config-set](commands-core.md#config-set) | Change a setting and restart whatever reads it. |
+| [config-set](commands-core.md#config-set) | Change a setting and restart the services that read it only at start. |
 | [config-unset](commands-core.md#config-unset) | Reset a setting to its default. |
 | [cp](commands-core.md#cp) | Copy files and directories. |
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
@@ -91,7 +91,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [group-update](commands-core.md#group-update) | Update a group's title or description; its gid is fixed when it is created. |
 | [head](commands-core.md#head) | Output the first part of files, logs, or stdin; on a queue, the next entries without consuming them. |
 | [health](commands-core.md#health) | Say whether the system is healthy, catching up, stuck or needs a person, and the checks that decide it. |
-| [host-metrics](commands-core.md#host-metrics) | CPU and memory use and event-loop lag now, with their recent history from metrics-sampler. |
+| [host-metrics](commands-core.md#host-metrics) | The machine's CPU, this container's memory and event-loop lag now, with their recent history from metrics-sampler. |
 | [http-server](commands-core.md#http-server) | Start an HTTP server. |
 | [info](commands-core.md#info) | Display node ID and type. |
 | [jq](commands-core.md#jq) | Lightweight JSON processor. |
@@ -103,7 +103,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [logout](commands-core.md#logout) | Log out of the current session. |
 | [ls](commands-core.md#ls) | List directory contents. |
 | [members](commands-core.md#members) | Who is in a container: an album's members by its rules, or a directory's media. |
-| [metrics-sampler](commands-core.md#metrics-sampler) | Sample host, storage and workload metrics into /logs/metrics (long-running) |
+| [metrics-sampler](commands-core.md#metrics-sampler) | Sample host, storage and workload metrics into /var/logs/metrics (long-running) |
 | [mime](commands-core.md#mime) | Show stored, extension-based and content-sniffed mimetype of a node. |
 | [mkbuf](commands-core.md#mkbuf) | Create a buffer node. |
 | [mkdir](commands-core.md#mkdir) | Create a directory node (-p to create parents) |
@@ -234,7 +234,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 131 in full](../archive/commands.md).
+[All 133 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -274,7 +274,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
 | [exif-extract](../archive/commands.md#exif-extract) | Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced. |
 | [exiftool](../archive/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
-| [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image as a new unidentified person. |
+| [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
 | [face-audit](../archive/commands.md#face-audit) | Mark transferred faces whose nearest human-named face in another photo is somebody else. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
 | [face-remove](../archive/commands.md#face-remove) | Remove a face and its person when it was the person's only unidentified face. |
@@ -352,8 +352,10 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [search-media](../archive/commands.md#search-media) | Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label. |
 | [search-people](../archive/commands.md#search-people) | Search people by partial name; every query word must match the same person. |
 | [search-track](../archive/commands.md#search-track) | Search tracks by the name of the device that recorded them, or their description. |
+| [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
 | [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
 | [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
+| [subcluster-voices](../archive/commands.md#subcluster-voices) | Re-cluster one person's voices with average linkage, to find two people fused into one. |
 | [subject-device](../archive/commands.md#subject-device) | What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers. |
 | [subject-location](../archive/commands.md#subject-location) | What `search --subject location:<ref>` asks: the media linked to a location node. |
 | [subject-person](../archive/commands.md#subject-person) | What `search --subject person:<ref>` asks: the media a person is in: tagged with a box (a face or a drawn region) or without one. |

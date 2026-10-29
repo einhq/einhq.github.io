@@ -750,7 +750,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>config-publish</code></pre></div>
 <h3 id="config-set"><code>config-set</code><a class="anchor" href="#config-set" aria-label="Link to this section"></a></h3>
-<p>Change a setting and restart whatever reads it.</p>
+<p>Change a setting and restart the services that read it only at start.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>config-set &lt;key&gt; &lt;value&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -804,7 +804,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tr>
 <tr>
 <td><code>&lt;dest&gt;</code></td>
-<td>destination path.</td>
+<td>destination: an existing directory (or other node that is not a file) to copy into, or the path of a single source, replacing a file there.</td>
 </tr>
 </tbody></table>
 </div>
@@ -821,7 +821,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tr>
 <tr>
 <td><code>-f</code></td>
-<td>overwrite existing destination files.</td>
+<td>replace a node of the same name in the destination directory; a file named as DEST is replaced without it.</td>
 </tr>
 </tbody></table>
 </div>
@@ -990,7 +990,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </thead>
 <tbody><tr>
 <td><code>[&lt;path&gt;]</code></td>
-<td>log node path (default: /logs/system)</td>
+<td>log node path (default: /var/logs/system)</td>
 </tr>
 </tbody></table>
 </div>
@@ -1841,7 +1841,7 @@ find /home/anna/staging -name <span class="hljs-string">&#x27;*.tmp&#x27;</span>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>health</code></pre></div>
 <h3 id="host-metrics"><code>host-metrics</code><a class="anchor" href="#host-metrics" aria-label="Link to this section"></a></h3>
-<p>CPU and memory use and event-loop lag now, with their recent history from metrics-sampler.</p>
+<p>The machine&#39;s CPU, this container&#39;s memory and event-loop lag now, with their recent history from metrics-sampler.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>host-metrics [--window=&lt;string&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2243,7 +2243,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 members /archive/tags/segling</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: every member&#39;s path, node id and, for a member held by a link, the link; with a type&#39;s own command (members-<type>), also which member stands for a folded group.</p>
 <h3 id="metrics-sampler"><code>metrics-sampler</code><a class="anchor" href="#metrics-sampler" aria-label="Link to this section"></a></h3>
-<p>Sample host, storage and workload metrics into /logs/metrics (long-running)</p>
+<p>Sample host, storage and workload metrics into /var/logs/metrics (long-running)</p>
 <p><small>administrators only · changes things</small></p>
 <div class="code"><pre tabindex="0"><code>metrics-sampler [--interval=&lt;string&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2580,7 +2580,7 @@ members /archive/tags/segling</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>&lt;module&gt;...</code></td>
-<td>A published module by name (archive), or its repository (<a href="https://github.com/einhq/module-archive">https://github.com/einhq/module-archive</a>), either with @branch, @tag or @commit.</td>
+<td>A published module by name (archive), or its repository (<a href="https://github.com/einhq/module-archive">https://github.com/einhq/module-archive</a>), either with @branch, @tag or @commit (its id whole, or its first seven characters or more)</td>
 </tr>
 </tbody></table>
 </div>
@@ -2749,7 +2749,7 @@ mount -a</code></pre></div>
 </tr>
 <tr>
 <td><code>&lt;dest&gt;</code></td>
-<td>destination: an existing node to move into, or the new path of a single source.</td>
+<td>destination: an existing node that is not a file to move into, or the new path of a single source, replacing a file there.</td>
 </tr>
 </tbody></table>
 </div>
@@ -3780,7 +3780,7 @@ queue-dead --drop --<span class="hljs-built_in">id</span> 42 /var/queues/archive
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>queue-peek -n 20 /pipelines/queues/example</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>queue-peek -n 20 /var/queues/pipeline-engine</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the next entries in delivery order: id, state (ready or in-flight), attempts, created, routing key and data; in JSON mode { items }.</p>
 <h2 id="r">R<a class="anchor" href="#r" aria-label="Link to this section"></a></h2>
 <h3 id="reach-check"><code>reach-check</code><a class="anchor" href="#reach-check" aria-label="Link to this section"></a></h3>
@@ -4563,7 +4563,7 @@ share-link remove 0123456789abcdef</code></pre></div>
 <h3 id="share-set"><code>share-set</code><a class="anchor" href="#share-set" aria-label="Link to this section"></a></h3>
 <p>Set who has access to nodes and everything below them.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>share-set [--mode=&lt;string&gt;] [--owner=&lt;string&gt;] [--group=&lt;string&gt;] [--default-owner] [--reference=&lt;path&gt;] [-m &lt;string&gt;] [-x &lt;string&gt;] [-b] [--drop-links] [--pin] [--unpin] [--no-recursive] [--strict] [-L] &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>share-set [--mode=&lt;string&gt;] [--owner=&lt;string&gt;] [--group=&lt;string&gt;] [--default-owner] [--reference=&lt;path&gt;] [-m &lt;string&gt;] [-x &lt;string&gt;] [-b] [--drop-links] [--pin] [--unpin] [--pinned-below] [--no-recursive] [--strict] [-L] &lt;path&gt;...</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -4627,6 +4627,10 @@ share-link remove 0123456789abcdef</code></pre></div>
 <tr>
 <td><code>--unpin</code></td>
 <td>let access changes from further up reach this node again.</td>
+</tr>
+<tr>
+<td><code>--pinned-below</code></td>
+<td>change the nodes below each path that hold their own access (--pin), not the path itself.</td>
 </tr>
 <tr>
 <td><code>--no-recursive</code></td>

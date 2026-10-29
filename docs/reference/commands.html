@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -88,7 +88,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 347 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 349 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -206,7 +206,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#config-set">config-set</a></td>
-<td>Change a setting and restart whatever reads it.</td>
+<td>Change a setting and restart the services that read it only at start.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#config-unset">config-unset</a></td>
@@ -374,7 +374,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#host-metrics">host-metrics</a></td>
-<td>CPU and memory use and event-loop lag now, with their recent history from metrics-sampler.</td>
+<td>The machine&#39;s CPU, this container&#39;s memory and event-loop lag now, with their recent history from metrics-sampler.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#http-server">http-server</a></td>
@@ -422,7 +422,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#metrics-sampler">metrics-sampler</a></td>
-<td>Sample host, storage and workload metrics into /logs/metrics (long-running)</td>
+<td>Sample host, storage and workload metrics into /var/logs/metrics (long-running)</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#mime">mime</a></td>
@@ -935,7 +935,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 131 in full</a>.</p>
+<p><a href="../archive/commands.html">All 133 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1089,7 +1089,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#face-add">face-add</a></td>
-<td>Add a human-drawn face box to an image as a new unidentified person.</td>
+<td>Add a human-drawn face box to an image or a video frame as a new unidentified person.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#face-audit">face-audit</a></td>
@@ -1400,12 +1400,20 @@
 <td>Search tracks by the name of the device that recorded them, or their description.</td>
 </tr>
 <tr>
+<td><a href="../archive/commands.html#see-speakers">see-speakers</a></td>
+<td>Tie a video&#39;s voices to the faces seen speaking them, the video&#39;s own face regions first.</td>
+</tr>
+<tr>
 <td><a href="../archive/commands.html#staging">staging</a></td>
 <td>Manage a user&#39;s private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#subcluster-faces">subcluster-faces</a></td>
 <td>Re-cluster one person&#39;s faces with average linkage, to find two people fused into one.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#subcluster-voices">subcluster-voices</a></td>
+<td>Re-cluster one person&#39;s voices with average linkage, to find two people fused into one.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#subject-device">subject-device</a></td>

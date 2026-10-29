@@ -155,6 +155,16 @@
 <td>Modules boot installs with <code>mod install</code> when they are not installed: names or repository addresses, separated by spaces. One installed already is left as it is; <code>mod install</code> and the settings page update it.</td>
 </tr>
 <tr>
+<td><code>INITIAL_ADMIN_PASSWORD</code></td>
+<td></td>
+<td>The admin account&#39;s first password, set at the first start of a new instance. Without it that start sets a random one and prints it to the log once. Changing it later does nothing; the account&#39;s password is changed in Settings or with <code>user-passwd</code>.</td>
+</tr>
+<tr>
+<td><code>INITIAL_ADMIN_PASSWORD</code></td>
+<td></td>
+<td>The admin account&#39;s first password, set at the first start of a new instance; without it that start sets a random one and prints it to the log once. Changing it later does nothing: the account&#39;s password is changed in Settings or with <code>user-passwd</code>.</td>
+</tr>
+<tr>
 <td><code>TZ</code></td>
 <td><code>the host&#39;s zone</code></td>
 <td>Time zone for log lines, &quot;today&quot;, and which year a date late on New Year&#39;s Eve belongs to.</td>

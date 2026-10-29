@@ -435,7 +435,7 @@ config-publish
 
 ### `config-set`
 
-Change a setting and restart whatever reads it.
+Change a setting and restart the services that read it only at start.
 
 <small>changes things</small>
 
@@ -475,12 +475,12 @@ cp [-r] [-f] <source> <dest>
 | Argument | What it is |
 | --- | --- |
 | `<source>` | source file(s) or directories to copy. |
-| `<dest>` | destination path. |
+| `<dest>` | destination: an existing directory (or other node that is not a file) to copy into, or the path of a single source, replacing a file there. |
 
 | Option | What it does |
 | --- | --- |
 | `-r` | copy directories recursively. |
-| `-f` | overwrite existing destination files. |
+| `-f` | replace a node of the same name in the destination directory; a file named as DEST is replaced without it. |
 
 ```bash
 cp /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg /archive/albums/Exempelalbum_2019/files/IMG_0007_copy.jpg
@@ -591,7 +591,7 @@ dmesg [-n <string>] [--level=<string>] [<path>]
 
 | Argument | What it is |
 | --- | --- |
-| `[<path>]` | log node path (default: /logs/system) |
+| `[<path>]` | log node path (default: /var/logs/system) |
 
 | Option | What it does |
 | --- | --- |
@@ -1206,7 +1206,7 @@ health
 
 ### `host-metrics`
 
-CPU and memory use and event-loop lag now, with their recent history from metrics-sampler.
+The machine's CPU, this container's memory and event-loop lag now, with their recent history from metrics-sampler.
 
 <small>reads only</small>
 
@@ -1467,7 +1467,7 @@ With `JSON_OUTPUT=1`: every member's path, node id and, for a member held by a l
 
 ### `metrics-sampler`
 
-Sample host, storage and workload metrics into /logs/metrics (long-running)
+Sample host, storage and workload metrics into /var/logs/metrics (long-running)
 
 <small>administrators only · changes things</small>
 
@@ -1702,7 +1702,7 @@ mod-install [--force] [--missing] [--no-setup] <module>...
 
 | Argument | What it is |
 | --- | --- |
-| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit. |
+| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit (its id whole, or its first seven characters or more) |
 
 | Option | What it does |
 | --- | --- |
@@ -1811,7 +1811,7 @@ mv [--no-clobber] [--no-relink] <source> <dest>
 | Argument | What it is |
 | --- | --- |
 | `<source>` | the files or directories to move; several go into DEST, which must exist. |
-| `<dest>` | destination: an existing node to move into, or the new path of a single source. |
+| `<dest>` | destination: an existing node that is not a file to move into, or the new path of a single source, replacing a file there. |
 
 | Option | What it does |
 | --- | --- |
@@ -2483,7 +2483,7 @@ queue-peek [-n <string>] [--limit=<string>] <path>
 | `--limit=<string>` | how many entries, from the front (default 10) |
 
 ```bash
-queue-peek -n 20 /pipelines/queues/example
+queue-peek -n 20 /var/queues/pipeline-engine
 ```
 
 With `JSON_OUTPUT=1`: the next entries in delivery order: id, state (ready or in-flight), attempts, created, routing key and data; in JSON mode { items }.
@@ -2996,7 +2996,7 @@ Set who has access to nodes and everything below them.
 <small>changes things</small>
 
 ```text
-share-set [--mode=<string>] [--owner=<string>] [--group=<string>] [--default-owner] [--reference=<path>] [-m <string>] [-x <string>] [-b] [--drop-links] [--pin] [--unpin] [--no-recursive] [--strict] [-L] <path>...
+share-set [--mode=<string>] [--owner=<string>] [--group=<string>] [--default-owner] [--reference=<path>] [-m <string>] [-x <string>] [-b] [--drop-links] [--pin] [--unpin] [--pinned-below] [--no-recursive] [--strict] [-L] <path>...
 ```
 
 | Argument | What it is |
@@ -3016,6 +3016,7 @@ share-set [--mode=<string>] [--owner=<string>] [--group=<string>] [--default-own
 | `--drop-links` | remove the share links' entries too, so no link opens the nodes. |
 | `--pin` | hold this node against access changes made further up. |
 | `--unpin` | let access changes from further up reach this node again. |
+| `--pinned-below` | change the nodes below each path that hold their own access (--pin), not the path itself. |
 | `--no-recursive` | change only this node, not what is below it. |
 | `--strict` | exit non-zero when any node below could not be changed. |
 | `-L` | do not follow symbolic links. |
