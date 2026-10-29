@@ -333,7 +333,8 @@ podman volume <span class="hljs-built_in">rm</span> ein_db</code></pre></div>
 </li>
 <li><p>Remove the images:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
-podman image <span class="hljs-built_in">rm</span> localhost/ein localhost/ein-core localhost/ein-db
+podman image <span class="hljs-built_in">rm</span> ghcr.io/einhq/core:main localhost/ein-db
+podman image <span class="hljs-built_in">rm</span> localhost/ein-core   <span class="hljs-comment"># if it was built from your own source</span>
 podman image <span class="hljs-built_in">rm</span> localhost/ein-ems    <span class="hljs-comment"># if you installed the media service</span>
 podman image prune</code></pre></div>
 <p>The language model&#39;s image is llama.cpp&#39;s, from <code>ghcr.io/ggml-org/llama.cpp</code>; <code>podman images</code> lists it if you want it gone too.</p>

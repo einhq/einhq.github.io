@@ -277,7 +277,8 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 
    ```bash
    # on the machine EiN runs on
-   podman image rm localhost/ein localhost/ein-core localhost/ein-db
+   podman image rm ghcr.io/einhq/core:main localhost/ein-db
+   podman image rm localhost/ein-core   # if it was built from your own source
    podman image rm localhost/ein-ems    # if you installed the media service
    podman image prune
    ```

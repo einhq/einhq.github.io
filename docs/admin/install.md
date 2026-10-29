@@ -169,28 +169,27 @@ compose runs EiN as the project `ein`, from the files in `~/ein`. Each service i
 
 ![One machine running four containers on a private network: ein with the web interface, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files](../diagrams/system.svg "Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.")
 
-| Service | Image                                                                      | Reached at                                              | Memory limit        | When         |
-| ------- | -------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------- | ------------ |
-| `ein`   | `localhost/ein`, built on `localhost/ein-core` from the core sources       | ports 8080 (web) and 2222 (SSH and SFTP) on the machine | `EIN_MEMORY`, `6g`  | always       |
-| `db`    | `localhost/ein-db`, PostgreSQL with TimescaleDB, built from the db sources | `db:5432`, on the compose network only                  | none                | always       |
-| `ems`   | `localhost/ein-ems`, built from the ems sources                            | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
-| `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                   | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
+| Service | Image                                                                                                                              | Reached at                                              | Memory limit        | When         |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------- | ------------ |
+| `ein`   | `ghcr.io/einhq/core`, ready-made with the web interface; built from the core sources as `localhost/ein-core` from any other source | ports 8080 (web) and 2222 (SSH and SFTP) on the machine | `EIN_MEMORY`, `6g`  | always       |
+| `db`    | `localhost/ein-db`, PostgreSQL with TimescaleDB, built from the db sources                                                         | `db:5432`, on the compose network only                  | none                | always       |
+| `ems`   | `localhost/ein-ems`, built from the ems sources                                                                                    | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
+| `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                                                                           | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
 
 Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](../ems/index.md), which the Archive needs, and [The language model](../assistant/language-model.md), which the Assistant uses, cover the two optional ones.
 
 ### The files in `~/ein`
 
-| Path                    | What it is                                                                       | From               |
-| ----------------------- | -------------------------------------------------------------------------------- | ------------------ |
-| `setup.sh`              | the install and update script                                                    | ein/deploy         |
-| `compose.yaml`          | EiN and its database: what every install runs                                    | ein/deploy         |
-| `compose.ems.yaml`      | the media service                                                                | ein/deploy         |
-| `compose.llm.yaml`      | the language model                                                               | ein/deploy         |
-| `ein.Containerfile`     | EiN's image: core's own image with the web interface built in                    | ein/deploy         |
-| `.env`                  | your options, settings and the passwords made at the install                     | made by `setup.sh` |
-| `compose.override.yaml` | the options in `.env` as services                                                | made by `setup.sh` |
-| `src/`                  | the sources that are built: `core`, `db`, and `ems` and `llm` with their options | made by `setup.sh` |
-| `data/`                 | the data folder, when `EIN_DATA` was left at its default                         | made by `setup.sh` |
+| Path                    | What it is                                                                                                            | From               |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `setup.sh`              | the install and update script                                                                                         | ein/deploy         |
+| `compose.yaml`          | EiN and its database: what every install runs                                                                         | ein/deploy         |
+| `compose.ems.yaml`      | the media service                                                                                                     | ein/deploy         |
+| `compose.llm.yaml`      | the language model                                                                                                    | ein/deploy         |
+| `.env`                  | your options, settings and the passwords made at the install                                                          | made by `setup.sh` |
+| `compose.override.yaml` | the options in `.env` as services                                                                                     | made by `setup.sh` |
+| `src/`                  | the sources that are built: `db`, `ems` and `llm` with their options, and `core` from any source but GitHub's `einhq` | made by `setup.sh` |
+| `data/`                 | the data folder, when `EIN_DATA` was left at its default                                                              | made by `setup.sh` |
 
 Leave the files from ein/deploy as they are: the installer and every run of `setup.sh` update the folder with `git pull --ff-only`, which stops when a file you changed is in its way. What you want to change goes in `.env`, which git ignores.
 

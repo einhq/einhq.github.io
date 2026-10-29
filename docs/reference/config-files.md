@@ -13,17 +13,16 @@ How the settings in these files combine, and how to change a setting without tou
 
 The installer fetches the deployment into `~/ein` and runs `setup.sh` there. After the first run the folder holds:
 
-| Path                    | Made by                   | What it is                                                                                                                        |
-| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `.env`                  | `setup.sh`, the first run | The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit.                 |
-| `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                                             |
-| `compose.ems.yaml`      | the deployment            | The media service, which the Archive needs, added with `--ems`.                                                                   |
-| `compose.llm.yaml`      | the deployment            | The language model the Assistant uses, added with `--llm`.                                                                        |
-| `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                    |
-| `ein.Containerfile`     | the deployment            | EiN's image: core's image with the web interface built in.                                                                        |
-| `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, builds the images and starts them. |
-| `src/`                  | `setup.sh`                | The sources it builds: `core`, `db`, and `ems` and `llm` when those options are on.                                               |
-| `data/`                 | `setup.sh`                | Your files, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                       |
+| Path                    | Made by                   | What it is                                                                                                                                               |
+| ----------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.env`                  | `setup.sh`, the first run | The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit.                                        |
+| `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                                                                    |
+| `compose.ems.yaml`      | the deployment            | The media service, which the Archive needs, added with `--ems`.                                                                                          |
+| `compose.llm.yaml`      | the deployment            | The language model the Assistant uses, added with `--llm`.                                                                                               |
+| `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                                           |
+| `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, pulls EiN's image and builds the others, and starts them. |
+| `src/`                  | `setup.sh`                | The sources it builds: `db`, and `ems` and `llm` when those options are on, and `core` from any source but GitHub's `einhq`.                             |
+| `data/`                 | `setup.sh`                | Your files, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                                              |
 
 The files from the deployment are replaced when `setup.sh` brings the folder up to date at the start of every run, so changes belong in `.env`, not in `compose.yaml`. `setup.sh --help` lists its options, and [Installing in detail](../admin/install.md) explains each.
 

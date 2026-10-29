@@ -489,7 +489,7 @@ podman compose down
 </thead>
 <tbody><tr>
 <td><code>ein</code></td>
-<td><code>localhost/ein</code>, built on <code>localhost/ein-core</code> from the core sources</td>
+<td><code>ghcr.io/einhq/core</code>, ready-made with the web interface; built from the core sources as <code>localhost/ein-core</code> from any other source</td>
 <td>ports 8080 (web) and 2222 (SSH and SFTP) on the machine</td>
 <td><code>EIN_MEMORY</code>, <code>6g</code></td>
 <td>always</td>
@@ -548,11 +548,6 @@ podman compose down
 <td>ein/deploy</td>
 </tr>
 <tr>
-<td><code>ein.Containerfile</code></td>
-<td>EiN&#39;s image: core&#39;s own image with the web interface built in</td>
-<td>ein/deploy</td>
-</tr>
-<tr>
 <td><code>.env</code></td>
 <td>your options, settings and the passwords made at the install</td>
 <td>made by <code>setup.sh</code></td>
@@ -564,7 +559,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>src/</code></td>
-<td>the sources that are built: <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> with their options</td>
+<td>the sources that are built: <code>db</code>, <code>ems</code> and <code>llm</code> with their options, and <code>core</code> from any source but GitHub&#39;s <code>einhq</code></td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 <tr>

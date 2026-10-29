@@ -129,19 +129,14 @@
 <td>The options chosen in <code>.env</code>, as compose services. Written again on every run; do not edit it.</td>
 </tr>
 <tr>
-<td><code>ein.Containerfile</code></td>
-<td>the deployment</td>
-<td>EiN&#39;s image: core&#39;s image with the web interface built in.</td>
-</tr>
-<tr>
 <td><code>setup.sh</code></td>
 <td>the deployment</td>
-<td>Brings this folder up to date, fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, builds the images and starts them.</td>
+<td>Brings this folder up to date, fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, pulls EiN&#39;s image and builds the others, and starts them.</td>
 </tr>
 <tr>
 <td><code>src/</code></td>
 <td><code>setup.sh</code></td>
-<td>The sources it builds: <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when those options are on.</td>
+<td>The sources it builds: <code>db</code>, and <code>ems</code> and <code>llm</code> when those options are on, and <code>core</code> from any source but GitHub&#39;s <code>einhq</code>.</td>
 </tr>
 <tr>
 <td><code>data/</code></td>
