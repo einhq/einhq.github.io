@@ -31,12 +31,12 @@
   <rect x="24" y="282" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="42" y="302" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Fetch the sources</text>
   <text x="358" y="302" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/ein/src</text>
-  <text x="42" y="320" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">core and db; ems and llm when chosen</text>
+  <text x="42" y="320" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">ems and llm when chosen; all from your own</text>
   <line x1="200" y1="330" x2="200" y2="350" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#install-flow-arrow)" />
 
   <rect x="24" y="352" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="42" y="372" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Build the images</text>
-  <text x="42" y="390" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">here, from source; the model's is downloaded</text>
+  <text x="42" y="372" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Get the images</text>
+  <text x="42" y="390" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">downloaded; built here from your own source</text>
   <line x1="200" y1="400" x2="200" y2="420" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#install-flow-arrow)" />
 
   <rect x="24" y="422" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />

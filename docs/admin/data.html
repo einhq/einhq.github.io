@@ -289,7 +289,7 @@ tier    volatile   41% used  1.1 TB free  full in ~212d
 tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB</code></pre></div>
 <p><code>disk</code> is <code>files</code>, <code>volatile</code> is <code>files-volatile</code> and <code>tmp</code> is <code>files-tmp</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive</code>.</p>
-<p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update builds new images and removes the ones they replaced; <code>podman image prune</code> removes other images without a name that nothing uses any more.</p>
+<p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update downloads new images and removes the ones they replaced; <code>podman image prune</code> removes other images without a name that nothing uses any more.</p>
 <h2 id="delete-things-and-free-space">Delete things and free space<a class="anchor" href="#delete-things-and-free-space" aria-label="Link to this section"></a></h2>
 <p>What you delete in the web interface goes to the deleter&#39;s trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a> (<strong>Days in the trash</strong>, under <strong>Settings → System</strong>). Only then does EiN remove the files from the data folder. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> explains the trash, and which ways of deleting skip it.</p>
 <p>To free the room at once, an administrator can empty every account&#39;s trash:</p>
@@ -317,7 +317,7 @@ trash empty --all</code></pre></div>
 </tr>
 <tr>
 <td>The media service or the language model</td>
-<td><code>~/ein/setup.sh --no-ems</code> or <code>--no-llm</code> stops it and keeps its data. Then <code>podman image rm localhost/ein-ems</code> frees the media service&#39;s image of about 30 GB, and removing <code>~/ein/data/llm</code> the model.</td>
+<td><code>~/ein/setup.sh --no-ems</code> or <code>--no-llm</code> stops it and keeps its data. Then <code>podman image rm ghcr.io/einhq/ems:main</code> frees the media service&#39;s image of about 30 GB (<code>localhost/ein-ems</code> when it was built from your own source), and removing <code>~/ein/data/llm</code> the model.</td>
 </tr>
 </tbody></table>
 </div>
@@ -333,9 +333,9 @@ podman volume <span class="hljs-built_in">rm</span> ein_db</code></pre></div>
 </li>
 <li><p>Remove the images:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
-podman image <span class="hljs-built_in">rm</span> ghcr.io/einhq/core:main localhost/ein-db
-podman image <span class="hljs-built_in">rm</span> localhost/ein-core   <span class="hljs-comment"># if it was built from your own source</span>
-podman image <span class="hljs-built_in">rm</span> localhost/ein-ems    <span class="hljs-comment"># if you installed the media service</span>
+podman image <span class="hljs-built_in">rm</span> ghcr.io/einhq/core:main ghcr.io/einhq/db:main
+podman image <span class="hljs-built_in">rm</span> ghcr.io/einhq/ems:main                          <span class="hljs-comment"># if you installed the media service</span>
+podman image <span class="hljs-built_in">rm</span> localhost/ein-core localhost/ein-db localhost/ein-ems   <span class="hljs-comment"># if they were built from your own source</span>
 podman image prune</code></pre></div>
 <p>The language model&#39;s image is llama.cpp&#39;s, from <code>ghcr.io/ggml-org/llama.cpp</code>; <code>podman images</code> lists it if you want it gone too.</p>
 </li>

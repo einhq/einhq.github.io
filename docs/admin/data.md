@@ -235,7 +235,7 @@ database  6.2 GB
 
 `disk` is `files`, `volatile` is `files-volatile` and `tmp` is `files-tmp`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive`.
 
-On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update builds new images and removes the ones they replaced; `podman image prune` removes other images without a name that nothing uses any more.
+On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update downloads new images and removes the ones they replaced; `podman image prune` removes other images without a name that nothing uses any more.
 
 ## Delete things and free space
 
@@ -250,12 +250,12 @@ trash empty --all
 
 Add `--older-than 7` to empty only what was deleted more than seven days ago. Either way it cannot be undone.
 
-| To remove                                                                  | Do this                                                                                                                                                                                                |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Files and folders, and the Archive's pictures, albums, people and the like | Delete them in the web interface, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                       |
-| An account                                                                 | **Delete account…** removes its home folder at once, without the trash, and passes everything it owned elsewhere to another account; see [Accounts and groups](accounts.md#delete-an-account).         |
-| A module                                                                   | **Remove** in **Settings → Modules**; see [Modules](modules.md#remove-a-module).                                                                                                                       |
-| The media service or the language model                                    | `~/ein/setup.sh --no-ems` or `--no-llm` stops it and keeps its data. Then `podman image rm localhost/ein-ems` frees the media service's image of about 30 GB, and removing `~/ein/data/llm` the model. |
+| To remove                                                                  | Do this                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Files and folders, and the Archive's pictures, albums, people and the like | Delete them in the web interface, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                                                                                         |
+| An account                                                                 | **Delete account…** removes its home folder at once, without the trash, and passes everything it owned elsewhere to another account; see [Accounts and groups](accounts.md#delete-an-account).                                                                           |
+| A module                                                                   | **Remove** in **Settings → Modules**; see [Modules](modules.md#remove-a-module).                                                                                                                                                                                         |
+| The media service or the language model                                    | `~/ein/setup.sh --no-ems` or `--no-llm` stops it and keeps its data. Then `podman image rm ghcr.io/einhq/ems:main` frees the media service's image of about 30 GB (`localhost/ein-ems` when it was built from your own source), and removing `~/ein/data/llm` the model. |
 
 Deleting an account does not delete what it owned, such as pictures in the Archive: it passes to the account you choose. To remove them, delete them before or after.
 
@@ -277,9 +277,9 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 
    ```bash
    # on the machine EiN runs on
-   podman image rm ghcr.io/einhq/core:main localhost/ein-db
-   podman image rm localhost/ein-core   # if it was built from your own source
-   podman image rm localhost/ein-ems    # if you installed the media service
+   podman image rm ghcr.io/einhq/core:main ghcr.io/einhq/db:main
+   podman image rm ghcr.io/einhq/ems:main                          # if you installed the media service
+   podman image rm localhost/ein-core localhost/ein-db localhost/ein-ems   # if they were built from your own source
    podman image prune
    ```
 

@@ -135,9 +135,10 @@ The installer adds it with `--ems`, at the first install or any time after:
    With the Archive not installed yet, add it in the same run: `./setup.sh --ems --module archive`
    installs the media service, and the Archive with the `ems` module at EiN's start.
 
-2. Wait for the build. The first time, `setup.sh` prints
-   `== Building the images (the media service the first time: about 30 GB)`: the image carries
-   every model, and building it takes a while and about 30 GB of disk. [Install EiN](../start/install.md#what-you-need)
+2. Wait for the download. The first time, `setup.sh` prints
+   `== Getting the images (the media service the first time: about 30 GB)`: the image carries
+   every model, and downloading it takes a while and about 30 GB of disk. Installed from your own
+   source, it is built on the machine instead, which takes about an hour more. [Install EiN](../start/install.md#what-you-need)
    lists what the machine needs with the media service.
 3. `setup.sh` starts the containers and prints `EiN is up at http://…:8080/` once EiN answers.
 4. Open **Dashboard** under **System** in the sidebar, and choose the **Media service** tab. For the
@@ -383,8 +384,8 @@ It logs `ems-link: EMS <old> -> <new>; failed work runs again: …`. [Services a
 
 ## Update the media service
 
-`./setup.sh` without options fetches the newest sources of EiN and of each service it runs, the
-media service included, rebuilds the images and starts them again. [Updating](../admin/updating.md) has the
+`./setup.sh` without options downloads the newest images of EiN and of each service it runs, the
+media service included, and starts them again. Only the layers that changed are downloaded. [Updating](../admin/updating.md) has the
 whole procedure.
 
 ## When something goes differently
@@ -419,8 +420,8 @@ times slower than on the card; see [Performance and sizing](../admin/performance
 `EMS_MODEL_IDLE_EVICT` seconds unused, and loading one again takes tens of seconds. The **Models**
 table shows it as loading.
 
-**The build fails or the disk fills.** The media service's image is about 30 GB, and podman builds
-it in a folder beside its own storage, not in `/tmp`. Free space there and run `./setup.sh` again.
+**The download or the build fails, or the disk fills.** The media service's image is about 30 GB,
+and podman downloads or builds it in a folder beside its own storage, not in `/tmp`. Free space there and run `./setup.sh` again.
 
 [Troubleshooting](../admin/troubleshooting.md) covers problems that are not the media service's own.
 

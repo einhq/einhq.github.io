@@ -88,7 +88,7 @@
         <article class="prose">
 <p>This page takes you from a Linux machine to an EiN you can sign in to: what the machine needs, the one command that installs EiN, what you see while it runs, and what to do first once it is up. It is the quick path for trying EiN on your own machine. <a href="../admin/install.html">Installing in detail</a> covers everything else.</p>
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
-<p>EiN runs as a few containers on one Linux machine. The installer builds them from source on that machine: there are no ready-made releases. It needs no root, but the tools it uses must be installed first.</p>
+<p>EiN runs as a few containers on one Linux machine. The installer downloads their images, which GitHub builds from the newest source: there are no releases. It needs no root, but the tools it uses must be installed first.</p>
 <p>What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which <a href="../archive/index.html">the Archive</a> needs to make thumbnails, find faces, read text and make pictures searchable:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -139,7 +139,7 @@
 <p>A few more things to know before you start:</p>
 <ul>
 <li><strong>No macOS, Windows or ARM.</strong> The installer stops at once on anything but Linux on x86-64, a Raspberry Pi included.</li>
-<li><strong>Internet access.</strong> The install fetches the sources from GitHub and the base images from their registries. At its first start EiN downloads the modules you named from GitHub, and the language model downloads its model from Hugging Face.</li>
+<li><strong>Internet access.</strong> The install downloads EiN&#39;s images from GitHub&#39;s registry, <code>ghcr.io</code>. At its first start EiN downloads the modules you named from GitHub, and the language model downloads its model from Hugging Face.</li>
 <li><strong>Docker needs your user to have access to its daemon</strong>, usually by being in the <code>docker</code> group. The installer does not check this.</li>
 <li><strong>A graphics card is optional.</strong> Without one everything works, only slower. Only NVIDIA cards are used, with driver 610 or newer to encode video on the card. <a href="../ems/gpu.html">The graphics card</a> has the setup.</li>
 <li><strong>A current browser</strong> that shows AVIF and plays AV1 video: Chrome, Edge or Firefox, or Safari 17 and newer on an Apple device that decodes AV1 (M3, A17 Pro or later).</li>
@@ -269,7 +269,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 </div>
 <p>The disk check measures the free space where your files go. The images and the database are kept in the container engine&#39;s own storage (for rootless podman, usually under <code>~/.local/share/containers</code>), which is often the same disk but need not be: that disk needs the room too.</p>
 <h2 id="what-the-installer-does">What the installer does<a class="anchor" href="#what-the-installer-does" aria-label="Link to this section"></a></h2>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, downloads the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password">
   <title>What the installer does</title>
   <defs>
     <marker id="start-install-md-1-install-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -302,12 +302,12 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <rect x="24" y="282" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="42" y="302" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Fetch the sources</text>
   <text x="358" y="302" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/ein/src</text>
-  <text x="42" y="320" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">core and db; ems and llm when chosen</text>
+  <text x="42" y="320" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">ems and llm when chosen; all from your own</text>
   <line x1="200" y1="330" x2="200" y2="350" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
 
   <rect x="24" y="352" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="42" y="372" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Build the images</text>
-  <text x="42" y="390" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">here, from source; the model's is downloaded</text>
+  <text x="42" y="372" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Get the images</text>
+  <text x="42" y="390" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">downloaded; built here from your own source</text>
   <line x1="200" y1="400" x2="200" y2="420" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
 
   <rect x="24" y="422" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -357,13 +357,13 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <rect x="456" y="476" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="474" y="496" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The services</text>
   <text x="474" y="514" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">started last, with those settings</text>
-</svg><figcaption>One command does all of it: the installer builds and starts EiN, and EiN sets itself up at its first start</figcaption></figure>
+</svg><figcaption>One command does all of it: the installer downloads and starts EiN, and EiN sets itself up at its first start</figcaption></figure>
 <p>Once the checks pass, the installer:</p>
 <ol>
 <li>Fetches <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it when it is there already, and runs <code>~/ein/setup.sh</code> with your options.</li>
 <li><code>setup.sh</code> writes <code>~/ein/.env</code> the first time: your options, the folder for your files, and the passwords it makes for the database, the media service and the <code>admin</code> account.</li>
-<li>It fetches the sources of EiN and its database, and of the media service and the model when you chose them, into <code>~/ein/src</code>.</li>
-<li>It builds the images on your machine. The language model&#39;s image is the one exception: it is downloaded ready-made.</li>
+<li>It downloads the images of EiN and its database, and of the media service and the model when you chose them. Their sources, for the media service and the model, it fetches into <code>~/ein/src</code>.</li>
+<li>From an organisation of your own (<code>--source</code>), it fetches the sources into <code>~/ein/src</code> instead and builds the images on your machine; <a href="../admin/install.html#where-the-sources-come-from">Where the sources come from</a> explains it.</li>
 <li>It starts everything with <code>podman compose</code> or <code>docker compose</code>, and waits for EiN to answer.</li>
 <li>At its first start, EiN sets up its database, makes the <code>admin</code> account, downloads the modules you named and the modules they need, sets them up, starts its services, and gives <code>admin</code> the password <code>INITIAL_ADMIN_PASSWORD</code> in <code>.env</code>.</li>
 <li><code>setup.sh</code> prints the address of EiN and the admin password, which it prints again at the end of every run until you delete its line from <code>.env</code>.</li>
@@ -374,12 +374,10 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 Wrote .env: your files go under /home/anna/ein/data
 
 == Fetching the sources
-  core 4b85250 2026-10-24
-  db 7c1d0e2 2026-10-02
   ems 93fa61b 2026-10-21
   llm 2e8b4d7 2026-09-30
 
-== Building the images (the media service the first time: about 30 GB)
+== Getting the images (the media service the first time: about 30 GB)
 …
 
 == Starting EiN
@@ -393,7 +391,7 @@ Enabled podman-restart.service, which starts EiN's containers at boot
 Enabled lingering for anna, so podman-restart.service runs at boot without a login
 EiN starts again when the machine does.</code></pre></div>
 <h3 id="how-long-it-takes">How long it takes<a class="anchor" href="#how-long-it-takes" aria-label="Link to this section"></a></h3>
-<p>Most of the time goes into the build, and how long that takes depends on your connection and your processor. EiN Core is the shorter of the two. With the media service, its image of about 30 GB is downloaded and built as well, which takes by far the longest. The build prints its own output as it goes.</p>
+<p>Most of the time goes into downloading the images, and how long that takes depends on your connection. EiN Core is a few hundred MB. With the media service, its image of about 30 GB takes by far the longest. The container engine prints its own progress as it goes. Built from your own source instead, the media service&#39;s image takes about an hour more.</p>
 <p>After <code>== Starting EiN</code>, <code>setup.sh</code> prints <code>Waiting for EiN to answer at …</code> and then, every 10 seconds, EiN&#39;s newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN&#39;s container stops or keeps restarting.</p>
 <p>With the media service and the model, two parts are still getting ready when the password appears. The media service loads its models for a few minutes after it starts; until then the Dashboard&#39;s health check for <code>ems</code> says <code>http://ems:8181 is not answering; work that needs it waits</code>, and the work resumes by itself. The language model downloads its model the first time it starts, so the assistant may not answer for a while.</p>
 <h3 id="what-is-where">What is where<a class="anchor" href="#what-is-where" aria-label="Link to this section"></a></h3>

@@ -6,17 +6,23 @@ what to do when an update goes differently.
 
 ## How updates work
 
-EiN has no releases and no version numbers to choose between. An update builds the newest commit of
-each repository from source, on your machine, and starts it in place of what ran before. Which
-repositories it fetches depends on what is installed:
+EiN has no releases and no version numbers to choose between. An update downloads the images
+GitHub built from the newest commit of each repository, and starts them in place of what ran before.
+The engine downloads only the layers of an image that changed, so an update of the media service is
+usually far smaller than its 30 GB. What it updates depends on what is installed:
 
-| Repository | What it is                                            | Fetched when            |
-| ---------- | ----------------------------------------------------- | ----------------------- |
-| deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           |
-| core       | EiN: the tree, the shell, the web interface           | always                  |
-| db         | PostgreSQL with TimescaleDB                           | always                  |
-| ems        | the media service, which the Archive needs            | with the media service  |
-| llm        | the language model's chat template, for the Assistant | with the language model |
+| Repository | What it is                                            | Updated when            | As                                   |
+| ---------- | ----------------------------------------------------- | ----------------------- | ------------------------------------ |
+| deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           | `git pull` of `~/ein`                |
+| core       | EiN: the tree, the shell, the web interface           | always                  | the image `ghcr.io/einhq/core:main`  |
+| db         | PostgreSQL with TimescaleDB, pgvector and PostGIS     | always                  | the image `ghcr.io/einhq/db:main`    |
+| ems        | the media service, which the Archive needs            | with the media service  | the image `ghcr.io/einhq/ems:main`   |
+| llm        | the language model's chat template, for the Assistant | with the language model | its source, fetched into `~/ein/src` |
+
+GitHub builds the database's image again every week too, so an update also brings PostgreSQL's and
+its extensions' minor releases. Installed from another organisation with `--source`, an update
+fetches the sources of core, db and ems into `~/ein/src` instead and builds the images on your
+machine, the media service's in about an hour ([Where the sources come from](install.md#where-the-sources-come-from)).
 
 The language model's server is not built: it is llama.cpp's ready-made image, named by a fixed
 digest in `compose.llm.yaml`. It changes only when that file does, which is when the deploy
@@ -33,7 +39,7 @@ Modules are not part of this. They live in the data folder and are updated separ
 2. Make sure the admin password is one you know. Its first one is `INITIAL_ADMIN_PASSWORD` in
    `~/ein/.env` until you delete that line; an older `.env` has no such line, and the random
    password a new EiN printed to its log goes when an update makes the containers again.
-3. Check that the container engine has room. An update builds the new images while the old ones
+3. Check that the container engine has room. An update downloads the new images while the old ones
    are still there, and removes the old ones only once EiN is up again; the media service's image
    is about 30 GB. `podman system df` shows the space images take.
 
@@ -60,12 +66,7 @@ What you will see:
 3. It runs `~/ein/setup.sh`, which prints its steps:
 
    ```text
-   == Fetching the sources
-     core 3f2a9c1 2026-10-24
-     db 8b41e07 2026-09-30
-     ems a90c2d4 2026-10-22
-
-   == Building the images
+   == Getting the images
 
    == Starting EiN
    Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
@@ -75,18 +76,19 @@ What you will see:
    EiN starts again when the machine does.
    ```
 
-   Each source line is the repository, the commit it is now at and that commit's date. Between the
-   steps the container engine prints its own build and start output, and while it waits,
+   With the language model, or from another source, `== Fetching the sources` comes first, with a
+   line for each repository fetched: its name, the commit it is now at and that commit's date. Between the steps the
+   container engine prints its own download, build and start output, and while it waits,
    `setup.sh` shows EiN's newest log line every 10 seconds.
 
-The build happens while the old EiN keeps running. EiN is down from the moment its container is made
+The download happens while the old EiN keeps running. EiN is down from the moment its container is made
 again until the new one answers, which is usually a minute or two, and longer when modules have to
 be set up or their pages built again. `setup.sh` waits up to 10 minutes for EiN to answer on its
 port.
 
 ### Update with `setup.sh` alone
 
-`~/ein/setup.sh` without the installer fetches, builds and restarts in the same way, and skips the
+`~/ein/setup.sh` without the installer downloads and restarts in the same way, and skips the
 machine checks. It brings `~/ein` itself up to date first, with `git pull --ff-only`, and when that
 brought a new commit, it says `Updated /home/anna/ein to …; running its setup.sh` and goes on with the
 new one:
@@ -110,14 +112,14 @@ in `~/ein` instead; [Configuration](configuration.md#set-a-value-in-the-deployme
 
 ## What an update changes and what it keeps
 
-| Changes                                                                                                       | Stays as it is                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| The files from the deploy repository in `~/ein`                                                               | `.env`: your options, settings and passwords                                     |
-| The sources in `~/ein/src`, each moved to its newest commit                                                   | The database, the `ein_db` volume or the folder `EIN_DB_DIR` names               |
-| The images, built again, and the ones they replaced removed; the engine reuses the layers that did not change | The data folder: your originals, renditions and the model file                   |
-| Every container, made again from the new images                                                               | The installed modules, in the data folder's `modules` folder                     |
-| `compose.override.yaml`, written again from `.env`                                                            | Settings changed in the web interface or the terminal, which are in the database |
-| The container logs, which go with the old containers                                                          | The SSH host key, kept in the tree                                               |
+| Changes                                                                                                        | Stays as it is                                                                   |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                                     |
+| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, the `ein_db` volume or the folder `EIN_DB_DIR` names               |
+| The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file                   |
+| Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder                     |
+| `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the web interface or the terminal, which are in the database |
+| The container logs, which go with the old containers                                                           | The SSH host key, kept in the tree                                               |
 
 `setup.sh` makes every container again from the new image even where compose sees no change, with
 `--force-recreate` (under podman-compose, it takes them all down and starts them one by one), and
@@ -178,9 +180,9 @@ has the command.
 `setup.sh` removes the images an update replaced, EiN's, the database's and the media service's,
 once the new EiN answers, and says so: `Removed the images this update replaced, which freed 31GB`.
 It keeps one that a container still uses, and an update whose EiN did not come up keeps them all.
-`--only` does the same for the one service it builds.
+`--only` does the same for the one service it updates.
 
-A build can leave other images without a name behind, such as its intermediate stages. Remove
+A build from another source can leave other images without a name behind, such as its intermediate stages. Remove
 those with:
 
 ```bash
@@ -200,7 +202,7 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | The installer reports a check as missing and stops                                                              | Nothing was changed. Fix what it names, or update with `setup.sh` alone, which does not check.                                                                                                                             |
 | `git pull` stops with a message about local changes, or `setup.sh` says `~/ein` could not be brought up to date | A file from the deploy repository in `~/ein` was changed. `git -C ~/ein status` shows which; put back the original with `git -C ~/ein checkout -- <file>` and move your change into `.env`.                                |
 | `fatal: Not possible to fast-forward, aborting.`, or a message about local changes, after a source line         | A repository under `~/ein/src` was changed or moved to another commit by hand. `git -C ~/ein/src/<name> status` shows what; `git -C ~/ein/src/<name> checkout -- .` and `git -C ~/ein/src/<name> switch main` put it back. |
-| The build stops with no space left on the device                                                                | The container engine's storage is full. Free the space old images take (above), or see `podman system df`.                                                                                                                 |
+| The download or the build stops with no space left on the device                                                | The container engine's storage is full. Free the space old images take (above), or see `podman system df`.                                                                                                                 |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                 | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
 | A module is still the old version                                                                               | `setup.sh` does not update modules. Use **Update** on **Settings → Modules**.                                                                                                                                              |

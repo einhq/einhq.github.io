@@ -90,44 +90,55 @@
 services up to date, what an update touches and what it keeps, how to see which version runs, and
 what to do when an update goes differently.</p>
 <h2 id="how-updates-work">How updates work<a class="anchor" href="#how-updates-work" aria-label="Link to this section"></a></h2>
-<p>EiN has no releases and no version numbers to choose between. An update builds the newest commit of
-each repository from source, on your machine, and starts it in place of what ran before. Which
-repositories it fetches depends on what is installed:</p>
+<p>EiN has no releases and no version numbers to choose between. An update downloads the images
+GitHub built from the newest commit of each repository, and starts them in place of what ran before.
+The engine downloads only the layers of an image that changed, so an update of the media service is
+usually far smaller than its 30 GB. What it updates depends on what is installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
 <th>Repository</th>
 <th>What it is</th>
-<th>Fetched when</th>
+<th>Updated when</th>
+<th>As</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>deploy</td>
 <td><code>~/ein</code> itself: <code>setup.sh</code> and the compose files</td>
 <td>always, first</td>
+<td><code>git pull</code> of <code>~/ein</code></td>
 </tr>
 <tr>
 <td>core</td>
 <td>EiN: the tree, the shell, the web interface</td>
 <td>always</td>
+<td>the image <code>ghcr.io/einhq/core:main</code></td>
 </tr>
 <tr>
 <td>db</td>
-<td>PostgreSQL with TimescaleDB</td>
+<td>PostgreSQL with TimescaleDB, pgvector and PostGIS</td>
 <td>always</td>
+<td>the image <code>ghcr.io/einhq/db:main</code></td>
 </tr>
 <tr>
 <td>ems</td>
 <td>the media service, which the Archive needs</td>
 <td>with the media service</td>
+<td>the image <code>ghcr.io/einhq/ems:main</code></td>
 </tr>
 <tr>
 <td>llm</td>
 <td>the language model&#39;s chat template, for the Assistant</td>
 <td>with the language model</td>
+<td>its source, fetched into <code>~/ein/src</code></td>
 </tr>
 </tbody></table>
 </div>
+<p>GitHub builds the database&#39;s image again every week too, so an update also brings PostgreSQL&#39;s and
+its extensions&#39; minor releases. Installed from another organisation with <code>--source</code>, an update
+fetches the sources of core, db and ems into <code>~/ein/src</code> instead and builds the images on your
+machine, the media service&#39;s in about an hour (<a href="install.html#where-the-sources-come-from">Where the sources come from</a>).</p>
 <p>The language model&#39;s server is not built: it is llama.cpp&#39;s ready-made image, named by a fixed
 digest in <code>compose.llm.yaml</code>. It changes only when that file does, which is when the deploy
 repository is updated.</p>
@@ -141,7 +152,7 @@ copy and why the database and the data folder go together.</li>
 <li>Make sure the admin password is one you know. Its first one is <code>INITIAL_ADMIN_PASSWORD</code> in
 <code>~/ein/.env</code> until you delete that line; an older <code>.env</code> has no such line, and the random
 password a new EiN printed to its log goes when an update makes the containers again.</li>
-<li>Check that the container engine has room. An update builds the new images while the old ones
+<li>Check that the container engine has room. An update downloads the new images while the old ones
 are still there, and removes the old ones only once EiN is up again; the media service&#39;s image
 is about 30 GB. <code>podman system df</code> shows the space images take.</li>
 </ol>
@@ -162,12 +173,7 @@ check.</p>
 the folder, which brings the newest <code>setup.sh</code> and compose files.</p>
 </li>
 <li><p>It runs <code>~/ein/setup.sh</code>, which prints its steps:</p>
-<div class="code"><pre tabindex="0"><code>== Fetching the sources
-  core 3f2a9c1 2026-10-24
-  db 8b41e07 2026-09-30
-  ems a90c2d4 2026-10-22
-
-== Building the images
+<div class="code"><pre tabindex="0"><code>== Getting the images
 
 == Starting EiN
 Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
@@ -175,17 +181,18 @@ Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a min
 EiN is up at http://ein:8080/
 Removed the images this update replaced, which freed 31GB
 EiN starts again when the machine does.</code></pre></div>
-<p>Each source line is the repository, the commit it is now at and that commit&#39;s date. Between the
-steps the container engine prints its own build and start output, and while it waits,
+<p>With the language model, or from another source, <code>== Fetching the sources</code> comes first, with a
+line for each repository fetched: its name, the commit it is now at and that commit&#39;s date. Between the steps the
+container engine prints its own download, build and start output, and while it waits,
 <code>setup.sh</code> shows EiN&#39;s newest log line every 10 seconds.</p>
 </li>
 </ol>
-<p>The build happens while the old EiN keeps running. EiN is down from the moment its container is made
+<p>The download happens while the old EiN keeps running. EiN is down from the moment its container is made
 again until the new one answers, which is usually a minute or two, and longer when modules have to
 be set up or their pages built again. <code>setup.sh</code> waits up to 10 minutes for EiN to answer on its
 port.</p>
 <h3 id="update-with-setupsh-alone">Update with <code>setup.sh</code> alone<a class="anchor" href="#update-with-setupsh-alone" aria-label="Link to this section"></a></h3>
-<p><code>~/ein/setup.sh</code> without the installer fetches, builds and restarts in the same way, and skips the
+<p><code>~/ein/setup.sh</code> without the installer downloads and restarts in the same way, and skips the
 machine checks. It brings <code>~/ein</code> itself up to date first, with <code>git pull --ff-only</code>, and when that
 brought a new commit, it says <code>Updated /home/anna/ein to …; running its setup.sh</code> and goes on with the
 new one:</p>
@@ -218,7 +225,7 @@ in <code>~/ein</code> instead; <a href="configuration.html#set-a-value-in-the-de
 <td>The database, the <code>ein_db</code> volume or the folder <code>EIN_DB_DIR</code> names</td>
 </tr>
 <tr>
-<td>The images, built again, and the ones they replaced removed; the engine reuses the layers that did not change</td>
+<td>The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay</td>
 <td>The data folder: your originals, renditions and the model file</td>
 </tr>
 <tr>
@@ -280,8 +287,8 @@ has the command.</p>
 <p><code>setup.sh</code> removes the images an update replaced, EiN&#39;s, the database&#39;s and the media service&#39;s,
 once the new EiN answers, and says so: <code>Removed the images this update replaced, which freed 31GB</code>.
 It keeps one that a container still uses, and an update whose EiN did not come up keeps them all.
-<code>--only</code> does the same for the one service it builds.</p>
-<p>A build can leave other images without a name behind, such as its intermediate stages. Remove
+<code>--only</code> does the same for the one service it updates.</p>
+<p>A build from another source can leave other images without a name behind, such as its intermediate stages. Remove
 those with:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 podman image prune</code></pre></div>
@@ -309,7 +316,7 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>A repository under <code>~/ein/src</code> was changed or moved to another commit by hand. <code>git -C ~/ein/src/&lt;name&gt; status</code> shows what; <code>git -C ~/ein/src/&lt;name&gt; checkout -- .</code> and <code>git -C ~/ein/src/&lt;name&gt; switch main</code> put it back.</td>
 </tr>
 <tr>
-<td>The build stops with no space left on the device</td>
+<td>The download or the build stops with no space left on the device</td>
 <td>The container engine&#39;s storage is full. Free the space old images take (above), or see <code>podman system df</code>.</td>
 </tr>
 <tr>

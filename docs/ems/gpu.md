@@ -162,7 +162,7 @@ Under Docker the `restart: always` lines are left out.
    ~/ein/setup.sh
    ```
 
-   It also fetches the newest sources and rebuilds, as on any update ([Updating](../admin/updating.md)).
+   It also downloads the newest images, as on any update ([Updating](../admin/updating.md)).
 
 `EIN_GPU=0` and `~/ein/setup.sh` take the card away again. Do not edit `compose.override.yaml` by hand: `setup.sh` writes it again from `.env` every time it runs.
 

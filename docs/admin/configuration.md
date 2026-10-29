@@ -161,7 +161,7 @@ A value with spaces, such as two module sources, is best quoted: `config set CFG
 
 4. Reload the Settings page. The setting shows the value with **From deployment**.
 
-Running `./setup.sh` applies `.env` too, but it also fetches and builds the newest sources: it is an update. [Updating](updating.md) explains it.
+Running `./setup.sh` applies `.env` too, but it also downloads the newest images: it is an update. [Updating](updating.md) explains it.
 
 A value in `.env` does not always win:
 

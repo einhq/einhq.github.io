@@ -105,7 +105,7 @@
 <tr>
 <td><code>setup.sh</code></td>
 <td><code>~/ein/setup.sh</code>, from ein/deploy</td>
-<td>Brings <code>~/ein</code> up to date from ein/deploy, writes <code>~/ein/.env</code> the first time, fetches the sources into <code>~/ein/src</code>, builds the images, starts them with compose and waits for EiN to answer. Run again, it updates.</td>
+<td>Brings <code>~/ein</code> up to date from ein/deploy, writes <code>~/ein/.env</code> the first time, downloads the images (or, from another source, fetches the sources into <code>~/ein/src</code> and builds them), starts them with compose and waits for EiN to answer. Run again, it updates.</td>
 </tr>
 </tbody></table>
 </div>
@@ -144,7 +144,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tr>
 <tr>
 <td><code>--only &lt;service&gt;</code></td>
-<td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code> or <code>llm</code>: fetches its sources, builds it and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
+<td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code> or <code>llm</code>: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
 </tr>
 <tr>
 <td><code>--source &lt;address&gt;</code></td>
@@ -215,7 +215,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 </div>
 <p><code>EIN_DATA</code> is made into an absolute path when <code>.env</code> is written, so a relative folder is taken from where <code>setup.sh</code> runs, which is <code>~/ein</code>.</p>
 <h3 id="where-the-sources-come-from">Where the sources come from<a class="anchor" href="#where-the-sources-come-from" aria-label="Link to this section"></a></h3>
-<p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when you use those options, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
+<p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when you use those options, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. EiN&#39;s, the database&#39;s and the media service&#39;s images are downloaded ready-made only from <code>https://github.com/einhq</code>, which publishes them; from any other organisation <code>setup.sh</code> builds them on the machine from its <code>core</code>, <code>db</code> and <code>ems</code>, since the published images have none of its own commits, and the media service&#39;s build takes about an hour. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
 <h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
 <p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install and <code>--no-ems</code> is not given; the same goes for <code>--llm</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -315,7 +315,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <li><strong>Disk</strong> is measured where your files go: on a later run the data folder <code>.env</code> names, which <code>setup.sh</code> keeps to, else <code>EIN_DATA</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
 <li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you set <code>EIN_ENGINE=docker</code> or <code>.env</code> keeps Docker: only <code>setup.sh</code> reads <code>EIN_ENGINE</code>.</li>
 </ul>
-<p>The images, the build&#39;s scratch files and the database (unless you gave <code>--db-dir</code>) live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
+<p>The images, a download&#39;s or build&#39;s scratch files and the database (unless you gave <code>--db-dir</code>) live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
 <p>To run only the checks:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
 curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
@@ -369,7 +369,7 @@ EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assi
 <td>Docker starts the containers again with its daemon, unless you stopped them</td>
 </tr>
 <tr>
-<td>The build&#39;s scratch files</td>
+<td>A download&#39;s or build&#39;s scratch files</td>
 <td><code>setup.sh</code> puts them in a <code>tmp</code> folder in podman&#39;s storage, as <code>/tmp</code> is often too small for the media service</td>
 <td>in Docker&#39;s own storage</td>
 </tr>
@@ -496,14 +496,14 @@ podman compose down
 </tr>
 <tr>
 <td><code>db</code></td>
-<td><code>localhost/ein-db</code>, PostgreSQL with TimescaleDB, built from the db sources</td>
+<td><code>ghcr.io/einhq/db</code>, PostgreSQL with TimescaleDB, pgvector and PostGIS, ready-made; built from the db sources as <code>localhost/ein-db</code> from any other source</td>
 <td><code>db:5432</code>, on the compose network only</td>
 <td>none</td>
 <td>always</td>
 </tr>
 <tr>
 <td><code>ems</code></td>
-<td><code>localhost/ein-ems</code>, built from the ems sources</td>
+<td><code>ghcr.io/einhq/ems</code>, ready-made with every model; built from the ems sources as <code>localhost/ein-ems</code> from any other source</td>
 <td><code>ems:8181</code>, on the compose network only</td>
 <td><code>EMS_MEMORY</code>, <code>16g</code></td>
 <td>with <code>--ems</code></td>
@@ -559,7 +559,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>src/</code></td>
-<td>the sources that are built: <code>db</code>, <code>ems</code> and <code>llm</code> with their options, and <code>core</code> from any source but GitHub&#39;s <code>einhq</code></td>
+<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code> and <code>ems</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 <tr>
@@ -798,7 +798,7 @@ EiN starts again when the machine does.</code></pre></div>
 Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman compose up -d</code></pre></div>
 <p>Run what it lists once. After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
 <h2 id="update-and-remove">Update and remove<a class="anchor" href="#update-and-remove" aria-label="Link to this section"></a></h2>
-<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest sources of everything installed, built and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only ein</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
+<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest images of everything installed, downloaded and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only ein</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
 <p>There is no uninstall script. <a href="data.html">Your data</a> says how to move EiN to another machine and how to remove it with its data.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p>The commands are written for podman; with Docker, write <code>docker compose</code>. <a href="../start/install.html#when-something-goes-differently">Install EiN</a> covers the messages of a first install, and <a href="troubleshooting.html">Troubleshooting</a> everything after.</p>
@@ -838,7 +838,7 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
 <td><code>--module</code> was the last word of the command. Give the name after it.</td>
 </tr>
 <tr>
-<td>The build stops with no space left on the device</td>
+<td>The download or the build stops with no space left on the device</td>
 <td>The container engine&#39;s storage is full, not necessarily your data folder. <code>podman system df</code> shows what takes the room there.</td>
 </tr>
 <tr>

@@ -353,9 +353,10 @@ and its source on (GPL, LGPL, AGPL). Check each licence for what it asks of your
 <p>With the Archive not installed yet, add it in the same run: <code>./setup.sh --ems --module archive</code>
 installs the media service, and the Archive with the <code>ems</code> module at EiN&#39;s start.</p>
 </li>
-<li><p>Wait for the build. The first time, <code>setup.sh</code> prints
-<code>== Building the images (the media service the first time: about 30 GB)</code>: the image carries
-every model, and building it takes a while and about 30 GB of disk. <a href="../start/install.html#what-you-need">Install EiN</a>
+<li><p>Wait for the download. The first time, <code>setup.sh</code> prints
+<code>== Getting the images (the media service the first time: about 30 GB)</code>: the image carries
+every model, and downloading it takes a while and about 30 GB of disk. Installed from your own
+source, it is built on the machine instead, which takes about an hour more. <a href="../start/install.html#what-you-need">Install EiN</a>
 lists what the machine needs with the media service.</p>
 </li>
 <li><p><code>setup.sh</code> starts the containers and prints <code>EiN is up at http://…:8080/</code> once EiN answers.</p>
@@ -753,8 +754,8 @@ without using up an attempt, and runs again later.</li>
 instance again at once, since a new build is the likeliest fix for what failed under the old one.
 It logs <code>ems-link: EMS &lt;old&gt; -&gt; &lt;new&gt;; failed work runs again: …</code>. <a href="../admin/services-logs.html">Services and logs</a> shows how to read that log.</p>
 <h2 id="update-the-media-service">Update the media service<a class="anchor" href="#update-the-media-service" aria-label="Link to this section"></a></h2>
-<p><code>./setup.sh</code> without options fetches the newest sources of EiN and of each service it runs, the
-media service included, rebuilds the images and starts them again. <a href="../admin/updating.html">Updating</a> has the
+<p><code>./setup.sh</code> without options downloads the newest images of EiN and of each service it runs, the
+media service included, and starts them again. Only the layers that changed are downloaded. <a href="../admin/updating.html">Updating</a> has the
 whole procedure.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><strong>The Media service tab says The media service is not answering.</strong> Look at the container:
@@ -780,8 +781,8 @@ times slower than on the card; see <a href="../admin/performance.html">Performan
 <p><strong>The first transcription or face search after a quiet spell is slow.</strong> Models are unloaded after
 <code>EMS_MODEL_IDLE_EVICT</code> seconds unused, and loading one again takes tens of seconds. The <strong>Models</strong>
 table shows it as loading.</p>
-<p><strong>The build fails or the disk fills.</strong> The media service&#39;s image is about 30 GB, and podman builds
-it in a folder beside its own storage, not in <code>/tmp</code>. Free space there and run <code>./setup.sh</code> again.</p>
+<p><strong>The download or the build fails, or the disk fills.</strong> The media service&#39;s image is about 30 GB,
+and podman downloads or builds it in a folder beside its own storage, not in <code>/tmp</code>. Free space there and run <code>./setup.sh</code> again.</p>
 <p><a href="../admin/troubleshooting.html">Troubleshooting</a> covers problems that are not the media service&#39;s own.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>

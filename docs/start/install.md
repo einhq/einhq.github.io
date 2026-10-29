@@ -4,7 +4,7 @@ This page takes you from a Linux machine to an EiN you can sign in to: what the 
 
 ## What you need
 
-EiN runs as a few containers on one Linux machine. The installer builds them from source on that machine: there are no ready-made releases. It needs no root, but the tools it uses must be installed first.
+EiN runs as a few containers on one Linux machine. The installer downloads their images, which GitHub builds from the newest source: there are no releases. It needs no root, but the tools it uses must be installed first.
 
 What the machine needs depends on whether you install EiN on its own (EiN Core) or with the media service, which [the Archive](../archive/index.md) needs to make thumbnails, find faces, read text and make pictures searchable:
 
@@ -23,7 +23,7 @@ Cores are counted as physical cores, not threads. The language model for the ass
 A few more things to know before you start:
 
 - **No macOS, Windows or ARM.** The installer stops at once on anything but Linux on x86-64, a Raspberry Pi included.
-- **Internet access.** The install fetches the sources from GitHub and the base images from their registries. At its first start EiN downloads the modules you named from GitHub, and the language model downloads its model from Hugging Face.
+- **Internet access.** The install downloads EiN's images from GitHub's registry, `ghcr.io`. At its first start EiN downloads the modules you named from GitHub, and the language model downloads its model from Hugging Face.
 - **Docker needs your user to have access to its daemon**, usually by being in the `docker` group. The installer does not check this.
 - **A graphics card is optional.** Without one everything works, only slower. Only NVIDIA cards are used, with driver 610 or newer to encode video on the card. [The graphics card](../ems/gpu.md) has the setup.
 - **A current browser** that shows AVIF and plays AV1 video: Chrome, Edge or Firefox, or Safari 17 and newer on an Apple device that decodes AV1 (M3, A17 Pro or later).
@@ -135,14 +135,14 @@ The disk check measures the free space where your files go. The images and the d
 
 ## What the installer does
 
-![Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password](../diagrams/install-flow.svg "One command does all of it: the installer builds and starts EiN, and EiN sets itself up at its first start")
+![Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, downloads the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password](../diagrams/install-flow.svg "One command does all of it: the installer downloads and starts EiN, and EiN sets itself up at its first start")
 
 Once the checks pass, the installer:
 
 1. Fetches [ein/deploy](https://github.com/einhq/deploy) into `~/ein`, or updates it when it is there already, and runs `~/ein/setup.sh` with your options.
 2. `setup.sh` writes `~/ein/.env` the first time: your options, the folder for your files, and the passwords it makes for the database, the media service and the `admin` account.
-3. It fetches the sources of EiN and its database, and of the media service and the model when you chose them, into `~/ein/src`.
-4. It builds the images on your machine. The language model's image is the one exception: it is downloaded ready-made.
+3. It downloads the images of EiN and its database, and of the media service and the model when you chose them. Their sources, for the media service and the model, it fetches into `~/ein/src`.
+4. From an organisation of your own (`--source`), it fetches the sources into `~/ein/src` instead and builds the images on your machine; [Where the sources come from](../admin/install.md#where-the-sources-come-from) explains it.
 5. It starts everything with `podman compose` or `docker compose`, and waits for EiN to answer.
 6. At its first start, EiN sets up its database, makes the `admin` account, downloads the modules you named and the modules they need, sets them up, starts its services, and gives `admin` the password `INITIAL_ADMIN_PASSWORD` in `.env`.
 7. `setup.sh` prints the address of EiN and the admin password, which it prints again at the end of every run until you delete its line from `.env`.
@@ -155,12 +155,10 @@ Fetching https://github.com/einhq/deploy into /home/anna/ein
 Wrote .env: your files go under /home/anna/ein/data
 
 == Fetching the sources
-  core 4b85250 2026-10-24
-  db 7c1d0e2 2026-10-02
   ems 93fa61b 2026-10-21
   llm 2e8b4d7 2026-09-30
 
-== Building the images (the media service the first time: about 30 GB)
+== Getting the images (the media service the first time: about 30 GB)
 …
 
 == Starting EiN
@@ -177,7 +175,7 @@ EiN starts again when the machine does.
 
 ### How long it takes
 
-Most of the time goes into the build, and how long that takes depends on your connection and your processor. EiN Core is the shorter of the two. With the media service, its image of about 30 GB is downloaded and built as well, which takes by far the longest. The build prints its own output as it goes.
+Most of the time goes into downloading the images, and how long that takes depends on your connection. EiN Core is a few hundred MB. With the media service, its image of about 30 GB takes by far the longest. The container engine prints its own progress as it goes. Built from your own source instead, the media service's image takes about an hour more.
 
 After `== Starting EiN`, `setup.sh` prints `Waiting for EiN to answer at …` and then, every 10 seconds, EiN's newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN's container stops or keeps restarting.
 

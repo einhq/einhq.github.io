@@ -234,7 +234,7 @@ reads dates and places, makes the previews, and finds faces, text and speech. In
 does not install the service. If you left it out at the install, add it on the machine:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh --ems</code></pre></div>
-<p>It builds the media service&#39;s image, about 30 GB, on the machine, and starts EiN again. Without
+<p>It downloads the media service&#39;s image, about 30 GB, and starts EiN again. Without
 it, uploads arrive but wait in staging as <strong>being prepared</strong>. The assistant needs a language
 model the same way: <code>~/ein/setup.sh --llm</code> runs one on this machine, and a hosted provider is set
 in <code>~/ein/.env</code>. <a href="../admin/modules.html">Modules</a>, <a href="../ems/index.html">The media service</a> and
@@ -396,7 +396,7 @@ EiN does not stop work for you when the disk fills.</p>
 <p><strong>Update</strong> by running the installer again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
-<p>It updates <code>~/ein</code>, then fetches the newest code of EiN and its services, builds it and starts it
+<p>It updates <code>~/ein</code>, then downloads the newest images of EiN and its services and starts them
 again, keeping your options in <code>~/ein/.env</code>, your data and the installed modules. <code>~/ein/setup.sh</code>
 alone does the same, <code>~/ein</code> included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated

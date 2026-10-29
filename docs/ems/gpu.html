@@ -248,7 +248,7 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <li><p>Run <code>setup.sh</code>, which writes <code>compose.override.yaml</code> again and starts the services with the card:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh</code></pre></div>
-<p>It also fetches the newest sources and rebuilds, as on any update (<a href="../admin/updating.html">Updating</a>).</p>
+<p>It also downloads the newest images, as on any update (<a href="../admin/updating.html">Updating</a>).</p>
 </li>
 </ol>
 <p><code>EIN_GPU=0</code> and <code>~/ein/setup.sh</code> take the card away again. Do not edit <code>compose.override.yaml</code> by hand: <code>setup.sh</code> writes it again from <code>.env</code> every time it runs.</p>

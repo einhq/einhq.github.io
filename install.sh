@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # EiN's installer. It checks this machine against EiN's system requirements, then fetches ein/deploy
-# into ~/ein and runs its setup.sh, which builds EiN from source and starts it with podman compose or
-# docker compose. It needs no root.
+# into ~/ein and runs its setup.sh, which downloads EiN's images (or builds them from another
+# source) and starts it with podman compose or docker compose. It needs no root.
 #
 #   curl -fsSL https://einhq.eu/install.sh | bash                    EiN and its database
 #   curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm  with the media service and the assistant's model

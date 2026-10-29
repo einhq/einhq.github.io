@@ -140,7 +140,7 @@ does not install the service. If you left it out at the install, add it on the m
 ~/ein/setup.sh --ems
 ```
 
-It builds the media service's image, about 30 GB, on the machine, and starts EiN again. Without
+It downloads the media service's image, about 30 GB, and starts EiN again. Without
 it, uploads arrive but wait in staging as **being prepared**. The assistant needs a language
 model the same way: `~/ein/setup.sh --llm` runs one on this machine, and a hosted provider is set
 in `~/ein/.env`. [Modules](../admin/modules.md), [The media service](../ems/index.md) and
@@ -301,7 +301,7 @@ EiN does not stop work for you when the disk fills.
 curl -fsSL https://einhq.eu/install.sh | bash
 ```
 
-It updates `~/ein`, then fetches the newest code of EiN and its services, builds it and starts it
+It updates `~/ein`, then downloads the newest images of EiN and its services and starts them
 again, keeping your options in `~/ein/.env`, your data and the installed modules. `~/ein/setup.sh`
 alone does the same, `~/ein` included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated

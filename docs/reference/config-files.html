@@ -131,12 +131,12 @@
 <tr>
 <td><code>setup.sh</code></td>
 <td>the deployment</td>
-<td>Brings this folder up to date, fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, pulls EiN&#39;s image and builds the others, and starts them.</td>
+<td>Brings this folder up to date, fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, pulls the images or builds them from your own source, and starts them.</td>
 </tr>
 <tr>
 <td><code>src/</code></td>
 <td><code>setup.sh</code></td>
-<td>The sources it builds: <code>db</code>, and <code>ems</code> and <code>llm</code> when those options are on, and <code>core</code> from any source but GitHub&#39;s <code>einhq</code>.</td>
+<td>The sources it fetches: <code>ems</code> and <code>llm</code> when those options are on, and <code>core</code> and <code>db</code> from any source but GitHub&#39;s <code>einhq</code>, which it builds with <code>ems</code>.</td>
 </tr>
 <tr>
 <td><code>data/</code></td>
