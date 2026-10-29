@@ -50,10 +50,10 @@ Type in the filter box to narrow the list by name or description. **Show only ac
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
 Choose a module to open its panel. At the top it shows the module's name, its version and the core
-API it is written for (`version 0.1.0 · core API ^0.5.0`), where it is installed
+API it is written for (`version 0.1.0 · core API ^0.6.0`), where it is installed
 (`/usr/modules/archive`), when it was set up, and its state. **Reference and guide** opens the
-module's own page in **Documentation**, with its guide and every command, setting and node type it
-brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
+module's own page in **Documentation**, with its pages in this guide and every command, setting and
+node type it brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
 another tab the module has nothing for is left out:
 
 | Tab              | What it shows                                                                                                                                                                 |
@@ -318,7 +318,7 @@ does. The usual ones:
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                               |
 | `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                           |
-| `archive: needs @ein/client ^0.6.0, this core provides 0.5.0`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
+| `archive: needs @ein/client ^0.7.0, this core provides 0.6.0`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
 
 After fixing the cause, set the module up again with `mod setup archive`, or every module with
 `mod setup --all`, which is what EiN runs at each start. Restarting EiN does the same.

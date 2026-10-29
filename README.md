@@ -65,6 +65,14 @@ colour only for node types and pages, as `site.css` names them (person `#da77f2`
 place `#38d9a9`, track `#22b8cf`, device `#ffa94d`, label `#f06595`, media `#748ffc`, system
 `#a9e34b`, documentation `#b197fc`).
 
+EiN shows the same Markdown on its own **Documentation** page, offline: its image bundles `docs/**/*.md`,
+`docs/diagrams/`, the screenshots the pages name and the diagrams' fonts from this repository's `main`,
+and renders them itself, its sidebar from `SUMMARY.md`. So the Markdown stays what both read:
+GitHub's flavour, relative links, the callouts above, and no HTML but `<kbd>`. A section in a part after
+the first (Core) is a module's, in a folder named after it. EiN draws the generated pages from the
+installation instead (the reference pages, and a module's `commands.md`), and a link to one opens
+its live page there. A change here reaches an installation with its next image.
+
 The pages under `docs/reference/` that list commands, settings, environment variables and node types
 are written by `make reference` from a running EiN that has every module, over its SSH:
 

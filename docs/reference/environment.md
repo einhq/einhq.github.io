@@ -17,7 +17,7 @@ Read once, from EiN's own environment, when it starts: `.env` in an installation
 | `FILE_ROOT_PATH` | `./files` | Host directory where file content is stored. |
 | `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH` | Host directory for content that can be made again — thumbnails, crops, transcodes — so it can live on a faster or cheaper disk. |
 | `FILE_TMP_PATH` | `/tmp` | Host directory for temporary files while content is written. |
-| `DOCS_PATH` | `./docs/user` | Host directory mounted as the guide at /usr/docs/guide. In a shell the same name is the tree path /usr/docs. |
+| `DOCS_PATH` | `./guide` | Host directory mounted as the guide at /usr/docs/guide: the documentation at einhq.eu, as the image bundles it or a checkout of the site. Without one the Docs page links to einhq.eu. In a shell the same name is the tree path /usr/docs. |
 | `DEV_MODULES_PATH` | `./modules` | The deployment's modules: a folder of module checkouts mounted read-only at /tmp/dev-modules and linked into /usr/modules. A name here wins over an installed module of the same name. In a shell the same name is that tree path. |
 | `MODULE_INSTALL_PATH` | `./modules-installed` | Host directory `mod install` puts modules in, mounted read-write at /var/lib/modules. A folder of the host mounted into the container keeps the installed modules when the container is replaced. |
 | `INSTALL_MODULES` |  | Modules boot installs with `mod install` when they are not installed: names or repository addresses, separated by spaces. One installed already is left as it is; `mod install` and the settings page update it. |

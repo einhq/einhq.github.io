@@ -101,16 +101,16 @@ EiN creates the extensions it uses in its database, and updates them after a new
 
 A bare `deno task dev` keeps its files beside the checkout, and reads every other setting from its environment:
 
-| Variable                  | Default                                 | What it is                                        |
-| ------------------------- | --------------------------------------- | ------------------------------------------------- |
-| `POSTGRES_URL`            | `postgres://ein:ein@127.0.0.1:5432/ein` | The database.                                     |
-| `FILE_ROOT_PATH`          | `./files`                               | Where file content is kept.                       |
-| `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH`                        | Where thumbnails, crops and transcodes are kept.  |
-| `FILE_TMP_PATH`           | `/tmp`                                  | Scratch space while content is written.           |
-| `DEV_MODULES_PATH`        | `./modules`                             | The module checkouts EiN runs, read-only.         |
-| `MODULE_INSTALL_PATH`     | `./modules-installed`                   | Where `mod install` puts the modules it fetches.  |
-| `DOCS_PATH`               | `./docs/user`                           | The guide shown at `/usr/docs/guide` in the tree. |
-| `LOG_LEVEL`               | `INFO`                                  | `DEBUG`, `INFO`, `WARN` or `ERROR`.               |
+| Variable                  | Default                                 | What it is                                                                          |
+| ------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------- |
+| `POSTGRES_URL`            | `postgres://ein:ein@127.0.0.1:5432/ein` | The database.                                                                       |
+| `FILE_ROOT_PATH`          | `./files`                               | Where file content is kept.                                                         |
+| `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH`                        | Where thumbnails, crops and transcodes are kept.                                    |
+| `FILE_TMP_PATH`           | `/tmp`                                  | Scratch space while content is written.                                             |
+| `DEV_MODULES_PATH`        | `./modules`                             | The module checkouts EiN runs, read-only.                                           |
+| `MODULE_INSTALL_PATH`     | `./modules-installed`                   | Where `mod install` puts the modules it fetches.                                    |
+| `DOCS_PATH`               | `./guide`                               | The guide at `/usr/docs/guide`: the image's copy of this site, or a checkout of it. |
+| `LOG_LEVEL`               | `INFO`                                  | `DEBUG`, `INFO`, `WARN` or `ERROR`.                                                 |
 
 Any `CFG_…` variable in the environment is a setting, so `CFG_HTTP_PORT=8090 deno task dev` moves the web interface to port 8090. [Environment variables](../reference/environment.md#set-by-the-deployment) has every variable, and [Settings](../reference/settings.md) every setting.
 

@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" width="800" height="564">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 504" width="800" height="504">
   <title>The parts of a module</title>
   <defs>
     <marker id="module-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
-  <rect width="800" height="564" rx="14" fill="#1a1e27" />
+  <rect width="800" height="504" rx="14" fill="#1a1e27" />
 
   <!-- Headings -->
   <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">A module's folder</text>
@@ -15,7 +15,7 @@
   <text x="776" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod setup</text>
 
   <!-- The folder -->
-  <rect x="24" y="72" width="200" height="468" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <rect x="24" y="72" width="200" height="408" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">
     <tspan x="44" y="101">mod.json</tspan>
     <tspan x="44" y="161">bin/</tspan>
@@ -23,9 +23,8 @@
     <tspan x="44" y="281">pipelines/</tspan>
     <tspan x="44" y="341">ui/</tspan>
     <tspan x="44" y="401">etc/</tspan>
-    <tspan x="44" y="461">docs/</tspan>
   </text>
-  <text x="44" y="521" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb">uninstall.sh</text>
+  <text x="44" y="461" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb">uninstall.sh</text>
 
   <!-- mod.json -->
   <line x1="224" y1="96" x2="310" y2="96" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#module-arrow)" />
@@ -74,19 +73,12 @@
   <text x="330" y="410" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#a2abbb">config and &lt;x&gt;.d linked; any other file copied once, never overwritten</text>
 
-  <!-- docs/ -->
-  <line x1="224" y1="456" x2="310" y2="456" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#module-arrow)" />
-  <rect x="312" y="432" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="330" y="452" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The module's guide</text>
-  <text x="758" y="452" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/usr/docs/modules</text>
-  <text x="330" y="470" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its own pages in Documentation</text>
-
   <!-- uninstall.sh -->
-  <line x1="224" y1="516" x2="310" y2="516" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#module-arrow)" />
-  <rect x="312" y="492" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="330" y="512" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+  <line x1="224" y1="456" x2="310" y2="456" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#module-arrow)" />
+  <rect x="312" y="432" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="330" y="452" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Run when the module is removed</text>
-  <text x="758" y="512" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod remove</text>
-  <text x="330" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+  <text x="758" y="452" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod remove</text>
+  <text x="330" y="470" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#a2abbb">before its commands, services and links are taken away</text>
 </svg>

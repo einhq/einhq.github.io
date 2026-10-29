@@ -7,7 +7,7 @@
  *   deno task docs --check    write nothing; fail when a page is stale
  *
  * Either way it fails on a broken link: a page, file or heading that is not there, or a link to the
- * site's root, which the in-app documentation's links are and the site's never are. It fails too on a
+ * site's root, which reads neither on a forge nor in EiN, which shows the same Markdown. It fails too on a
  * Markdown file SUMMARY.md leaves out, and in --check on an HTML file no page writes.
  *
  * The Markdown reads on a forge as it does here: links between pages name the .md files, which become

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -234,7 +234,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 133 in full](../archive/commands.md).
+[All 131 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -275,7 +275,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [exif-extract](../archive/commands.md#exif-extract) | Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced. |
 | [exiftool](../archive/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
-| [face-audit](../archive/commands.md#face-audit) | Mark transferred faces whose nearest human-named face in another photo is somebody else. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
 | [face-remove](../archive/commands.md#face-remove) | Remove a face and its person when it was the person's only unidentified face. |
 | [face-reset](../archive/commands.md#face-reset) | Undo automatic face→person assignments by provenance, leaving manual ones intact. |
@@ -360,7 +359,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [subject-location](../archive/commands.md#subject-location) | What `search --subject location:<ref>` asks: the media linked to a location node. |
 | [subject-person](../archive/commands.md#subject-person) | What `search --subject person:<ref>` asks: the media a person is in: tagged with a box (a face or a drawn region) or without one. |
 | [subjects-in](../archive/commands.md#subjects-in) | Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted. |
-| [tag-transfer](../archive/commands.md#tag-transfer) | Move legacy manual face tags onto the auto-detected face inside their box (recognition anchors) |
 | [timeline](../archive/commands.md#timeline) | Chronological feed of albums, life events, birthdays and tracks, newest first. |
 | [timeline-facets](../archive/commands.md#timeline-facets) | Per-day, per-month and per-year counts for the timeline scrubber. |
 | [track-append](../archive/commands.md#track-append) | Append coordinate points to a device's track. |

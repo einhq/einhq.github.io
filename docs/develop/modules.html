@@ -143,10 +143,6 @@ machinery core already has. Nothing in the manifest is code.</p>
 <td>Copies it into <code>/etc</code> when it is not there yet; never overwrites</td>
 </tr>
 <tr>
-<td><code>docs/</code></td>
-<td>Links it as <code>/usr/docs/modules/&lt;name&gt;</code>: the module&#39;s guide</td>
-</tr>
-<tr>
 <td><code>lib/</code>, <code>types/</code>, <code>test/</code></td>
 <td>Nothing; ordinary source, reached through the manifest&#39;s <code>imports</code> and <code>exports</code></td>
 </tr>
@@ -156,14 +152,14 @@ machinery core already has. Nothing in the manifest is code.</p>
 </tr>
 </tbody></table>
 </div>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; docs/ becomes the module's guide in /usr/docs/modules; and uninstall.sh, dashed, runs when mod remove takes the module away">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 504" role="img" aria-label="A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; and uninstall.sh, dashed, runs when mod remove takes the module away">
   <title>The parts of a module</title>
   <defs>
     <marker id="develop-modules-md-1-module-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
-  <rect width="800" height="564" rx="14" fill="#1a1e27" />
+  <rect width="800" height="504" rx="14" fill="#1a1e27" />
 
   
   <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">A module's folder</text>
@@ -173,7 +169,7 @@ machinery core already has. Nothing in the manifest is code.</p>
   <text x="776" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod setup</text>
 
   
-  <rect x="24" y="72" width="200" height="468" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <rect x="24" y="72" width="200" height="408" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">
     <tspan x="44" y="101">mod.json</tspan>
     <tspan x="44" y="161">bin/</tspan>
@@ -181,9 +177,8 @@ machinery core already has. Nothing in the manifest is code.</p>
     <tspan x="44" y="281">pipelines/</tspan>
     <tspan x="44" y="341">ui/</tspan>
     <tspan x="44" y="401">etc/</tspan>
-    <tspan x="44" y="461">docs/</tspan>
   </text>
-  <text x="44" y="521" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb">uninstall.sh</text>
+  <text x="44" y="461" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb">uninstall.sh</text>
 
   
   <line x1="224" y1="96" x2="310" y2="96" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
@@ -233,19 +228,12 @@ machinery core already has. Nothing in the manifest is code.</p>
     fill="#a2abbb">config and &lt;x&gt;.d linked; any other file copied once, never overwritten</text>
 
   
-  <line x1="224" y1="456" x2="310" y2="456" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
-  <rect x="312" y="432" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="330" y="452" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The module's guide</text>
-  <text x="758" y="452" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/usr/docs/modules</text>
-  <text x="330" y="470" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its own pages in Documentation</text>
-
-  
-  <line x1="224" y1="516" x2="310" y2="516" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#develop-modules-md-1-module-arrow)" />
-  <rect x="312" y="492" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="330" y="512" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+  <line x1="224" y1="456" x2="310" y2="456" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="432" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="330" y="452" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Run when the module is removed</text>
-  <text x="758" y="512" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod remove</text>
-  <text x="330" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+  <text x="758" y="452" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod remove</text>
+  <text x="330" y="470" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#a2abbb">before its commands, services and links are taken away</text>
 </svg><figcaption>EiN finds most of a module by where each part sits in its folder; mod.json says the rest.</figcaption></figure>
 <p><a href="manifest.html">The module manifest</a> describes every field of <code>mod.json</code>. This page uses the few a
@@ -288,7 +276,7 @@ aliases (<code>@recipes/…</code>).</p>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The family&#x27;s recipes: who cooked what, for how many&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ruby Wrenfield&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MIT&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.5.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.6.0&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;roots&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;/archive/recipes&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;nodeTypes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -515,7 +503,6 @@ mod setup recipes</code></pre></div>
   roots: /archive/recipes
   Added /usr/modules/recipes/bin to PATH
   Linked navigation at /etc/ui/nav.d/recipes.json
-  Linked docs at /usr/docs/modules/recipes
 Module 'recipes' setup complete
   recipes: built, 3.1 KB in 820 ms</code></pre></div>
 <p>The last lines come from bundling every module&#39;s pages, one line per module.</p>
@@ -568,10 +555,6 @@ your working copy, and its git history, somewhere else and copy it in.</p>
 <tr>
 <td><code>ui/nav.json</code></td>
 <td>Reload the web page</td>
-</tr>
-<tr>
-<td><code>docs/</code></td>
-<td>Nothing: the guide is read when it is opened</td>
 </tr>
 </tbody></table>
 </div>
@@ -863,15 +846,14 @@ for a language model or text vectors. The settings are in
 <p>With the Assistant installed, what the assistant knows about your module&#39;s commands, and how to
 give it more, is in <a href="../assistant/teaching.html">Teaching the assistant</a>.</p>
 <h2 id="write-documentation-for-it">Write documentation for it<a class="anchor" href="#write-documentation-for-it" aria-label="Link to this section"></a></h2>
-<p><code>docs/index.md</code> is the module&#39;s guide. Its opening is the <strong>About</strong> tab of the module&#39;s panel in
-<strong>Settings → Modules</strong>, and the whole of <code>docs/</code> is on the module&#39;s own page in <strong>Documentation</strong>,
-together with every command, setting and node type the module brings. Write it for the people who
-will use the module, not for developers; the guides of <code>module-archive</code> are a model.</p>
-<p>The rest of a module&#39;s documentation comes from what it already declares: each command&#39;s <code>spec</code> or
+<p>A module&#39;s documentation in EiN comes from what it already declares: each command&#39;s <code>spec</code> or
 <code>arg</code> lines, each setting&#39;s <code>label</code> and <code>description</code>, and in <code>mod.json</code> its <code>nodeTypes</code> and the
 environment variables it reads other than its settings, under <code>environment</code>. <code>docs commands</code>,
 <code>docs node-types</code> and <code>docs env</code> read them from the installed modules, and so do the reference pages
 of this site.</p>
+<p>A guide for the people who use the module, written for them rather than for developers, goes in its
+repository, beside <code>mod.json</code>. The modules published with EiN have theirs here, in this site&#39;s
+<strong>Modules</strong> part, which EiN carries offline in <strong>Documentation</strong>.</p>
 <h2 id="use-another-module">Use another module<a class="anchor" href="#use-another-module" aria-label="Link to this section"></a></h2>
 <p>A module shares files by naming them in <code>exports</code>, and another module imports them only if it
 lists the first in <code>dependencies</code>:</p>
@@ -954,7 +936,7 @@ show them afterwards.</p>
 <td><code>mod.json</code> must be at the folder&#39;s top</td>
 </tr>
 <tr>
-<td><code>recipes: needs @ein/client ^0.6.0, this core provides 0.5.0</code></td>
+<td><code>recipes: needs @ein/client ^0.7.0, this core provides 0.6.0</code></td>
 <td><code>coreApi</code> asks for another version of the module API than this EiN has</td>
 </tr>
 <tr>

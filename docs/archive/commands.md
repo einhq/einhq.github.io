@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 133 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 131 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-audit](#face-audit) · [face-confirm](#face-confirm) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [find-within](#find-within) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [tag-transfer](#tag-transfer) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [transcribe-file](#transcribe-file) · [voiceprint-file](#voiceprint-file)
+[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [find-within](#find-within) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [transcribe-file](#transcribe-file) · [voiceprint-file](#voiceprint-file)
 
 ## A
 
@@ -932,28 +932,6 @@ face-add --box 0.4,0.1,0.2,0.3 --at 12.5 /archive/albums/Exempelalbum_2019/files
 ```
 
 With `JSON_OUTPUT=1`: the new face and the unidentified person created for it.
-
-### `face-audit`
-
-Mark transferred faces whose nearest human-named face in another photo is somebody else.
-
-<small>changes things</small>
-
-```text
-face-audit [--dry-run] [--verbose]
-```
-
-| Option      | What it does                                 |
-| ----------- | -------------------------------------------- |
-| `--dry-run` | report without marking or clearing anything. |
-| `--verbose` | list every doubtful face.                    |
-
-```bash
-face-audit --dry-run
-face-audit --verbose
-```
-
-With `JSON_OUTPUT=1`: how many transferred faces look like somebody else, per person; marks them for review in the Faces tab.
 
 ### `face-confirm`
 
@@ -2107,7 +2085,7 @@ person-faces [--limit=<string>] [--offset=<string>] [--sort=<string>] [--doubtfu
 | `--limit=<string>`  | max faces to return (default: all as text, 500 as JSON)                                  |
 | `--offset=<string>` | skip this many (default 0)                                                               |
 | `--sort=<string>`   | 'confidence' (default), 'file', chronological 'date', or 'doubt' (clearest doubts first) |
-| `--doubtful`        | only the faces face-audit found looking like somebody else.                              |
+| `--doubtful`        | only the faces an audit found looking like somebody else.                                |
 
 ```bash
 person-faces /archive/people/Anna_Exempel
@@ -2969,7 +2947,7 @@ staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue
 | `--share=<string>`          | promote: 'private' makes the new album yours alone; 'default' shares it as your new albums are.                                                                                                                         |
 | `--except=<path>`           | promote, discard: leave this member in its group, which is then pinned (repeatable)                                                                                                                                     |
 | `--expect=<string>`         | promote, discard, accept, split, regroup, merge, delete: the member key each group must still have, in group order (repeatable)                                                                                         |
-| `--confidence=<string>`     | accept: the least sure proposal to apply (high, medium; default medium)                                                                                                                                                 |
+| `--confidence=<string>`     | accept: the least sure proposal to apply (high, medium, low; default medium)                                                                                                                                            |
 | `--action=<string>`         | journal: only decisions of this kind (promote, file, discard, dedupe, edit, reject)                                                                                                                                     |
 | `--limit=<string>`          | journal: entries per page (default 50, at most 200); duplicates: sets per page (default 50, at most 200); duplicates --refresh: files announced per call (default 5000); dedupe --apply: copies dropped per call.       |
 | `--cursor=<string>`         | journal, duplicates, duplicates --refresh, dedupe --apply: go on after this one's cursor.                                                                                                                               |
@@ -3001,7 +2979,7 @@ staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue
 | `--sidecars=<string>`       | category: whether the Google Photos Takeout JSON and XMP sidecars arriving there are paired with their files (pair, ignore), from then on.                                                                              |
 
 ```bash
-staging init --all --loose-batch legacy-import --dry-run
+staging init --all --loose-batch old-scans --dry-run
 staging status --user anna
 staging check
 staging detect
@@ -3204,32 +3182,6 @@ JSON_OUTPUT=1 subjects-in /archive/albums/Exempelalbum_2019
 With `JSON_OUTPUT=1`: how many media the container shows and how many carry a position; its people, locations, devices and photographers, each with its path, name and how many of the media have it, the most first.
 
 ## T
-
-### `tag-transfer`
-
-Move legacy manual face tags onto the auto-detected face inside their box (recognition anchors)
-
-<small>changes things</small>
-
-```text
-tag-transfer [--margin=<string>] [--min-scale=<string>] [--file=<path>] [--limit=<string>] [--no-crop] [--dry-run] [--verbose]
-```
-
-| Option                 | What it does                                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `--margin=<string>`    | how far a detection may stick out of the manual box and still count as inside, as a fraction of the box (default 0) |
-| `--min-scale=<string>` | narrowest a detection may be, as a fraction of the box's width (default 0.15)                                       |
-| `--file=<path>`        | restrict to one image.                                                                                              |
-| `--limit=<string>`     | max transfers this run.                                                                                             |
-| `--no-crop`            | skip generating crops for the tags left behind.                                                                     |
-| `--dry-run`            | report without writing.                                                                                             |
-| `--verbose`            | print each transfer.                                                                                                |
-
-```bash
-tag-transfer --dry-run
-```
-
-With `JSON_OUTPUT=1`: which legacy manual tags would move onto a detected face.
 
 ### `timeline`
 

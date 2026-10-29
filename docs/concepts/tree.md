@@ -164,13 +164,12 @@ the logs.
 `/usr` holds code and files nobody edits. An update of EiN replaces what core brings, and `mod install`
 what a module brings.
 
-| Path                       | What it is                                                                               |
-| -------------------------- | ---------------------------------------------------------------------------------------- |
-| `/usr/bin`                 | Core's commands, one `command` node each: `/usr/bin/ls` is the `ls` command              |
-| `/usr/lib`                 | Core's other files: its bash commands in `core/bin`, its services, and the web interface |
-| `/usr/modules/<name>`      | Each installed module, a link to its folder in `/var/lib/modules`                        |
-| `/usr/docs/guide`          | The guide built into EiN, which **Documentation** in the sidebar shows                   |
-| `/usr/docs/modules/<name>` | Each module's own guide                                                                  |
+| Path                  | What it is                                                                               |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `/usr/bin`            | Core's commands, one `command` node each: `/usr/bin/ls` is the `ls` command              |
+| `/usr/lib`            | Core's other files: its bash commands in `core/bin`, its services, and the web interface |
+| `/usr/modules/<name>` | Each installed module, a link to its folder in `/var/lib/modules`                        |
+| `/usr/docs/guide`     | This guide, bundled with EiN, which **Documentation** in the sidebar shows               |
 
 Your `PATH` holds `/usr/bin`, `/usr/lib/core/bin` and each module's `bin` folder, so a module's commands
 run by name as soon as it is set up. [Modules](../admin/modules.md#where-modules-are-kept) explains where

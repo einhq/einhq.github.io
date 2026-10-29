@@ -28,11 +28,10 @@ machinery core already has. Nothing in the manifest is code.
 | `etc/config`              | Links it as `/etc/config.d/<name>`: the module's own choice of settings                                                                          |
 | `etc/<x>.d/`              | Links it as `/etc/<x>.d/<name>`, for the module that reads that folder                                                                           |
 | `etc/` (anything else)    | Copies it into `/etc` when it is not there yet; never overwrites                                                                                 |
-| `docs/`                   | Links it as `/usr/docs/modules/<name>`: the module's guide                                                                                       |
 | `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                                                                 |
 | `uninstall.sh`            | Runs it when the module is removed                                                                                                               |
 
-![A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; docs/ becomes the module's guide in /usr/docs/modules; and uninstall.sh, dashed, runs when mod remove takes the module away](../diagrams/module.svg "EiN finds most of a module by where each part sits in its folder; mod.json says the rest.")
+![A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; and uninstall.sh, dashed, runs when mod remove takes the module away](../diagrams/module.svg "EiN finds most of a module by where each part sits in its folder; mod.json says the rest.")
 
 [The module manifest](manifest.md) describes every field of `mod.json`. This page uses the few a
 first module needs.
@@ -87,7 +86,7 @@ Start `mod.json` with who the module is and the core it is written for:
   "description": "The family's recipes: who cooked what, for how many",
   "author": "Ruby Wrenfield",
   "license": "MIT",
-  "coreApi": "^0.5.0",
+  "coreApi": "^0.6.0",
   "roots": ["/archive/recipes"],
   "nodeTypes": [
     {
@@ -253,7 +252,6 @@ With the standard installation, EiN keeps the modules it installs in `modules/` 
      roots: /archive/recipes
      Added /usr/modules/recipes/bin to PATH
      Linked navigation at /etc/ui/nav.d/recipes.json
-     Linked docs at /usr/docs/modules/recipes
    Module 'recipes' setup complete
      recipes: built, 3.1 KB in 820 ms
    ```
@@ -291,7 +289,6 @@ What you have to do after an edit depends on what you changed:
 | A new file in `services/` or `pipelines/`        | `mod setup recipes`, then `service start <name>` for a new service |
 | A page, or anything it imports                   | `ui-build recipes`, then reload the web page                       |
 | `ui/nav.json`                                    | Reload the web page                                                |
-| `docs/`                                          | Nothing: the guide is read when it is opened                       |
 
 EiN keeps a loaded TypeScript command against its file alone, so an edited `lib/` file reaches a
 command when the command's own file changes, after `mod setup`, or after EiN restarts.
@@ -525,16 +522,15 @@ give it more, is in [Teaching the assistant](../assistant/teaching.md).
 
 ## Write documentation for it
 
-`docs/index.md` is the module's guide. Its opening is the **About** tab of the module's panel in
-**Settings → Modules**, and the whole of `docs/` is on the module's own page in **Documentation**,
-together with every command, setting and node type the module brings. Write it for the people who
-will use the module, not for developers; the guides of `module-archive` are a model.
-
-The rest of a module's documentation comes from what it already declares: each command's `spec` or
+A module's documentation in EiN comes from what it already declares: each command's `spec` or
 `arg` lines, each setting's `label` and `description`, and in `mod.json` its `nodeTypes` and the
 environment variables it reads other than its settings, under `environment`. `docs commands`,
 `docs node-types` and `docs env` read them from the installed modules, and so do the reference pages
 of this site.
+
+A guide for the people who use the module, written for them rather than for developers, goes in its
+repository, beside `mod.json`. The modules published with EiN have theirs here, in this site's
+**Modules** part, which EiN carries offline in **Documentation**.
 
 ## Use another module
 
@@ -628,7 +624,7 @@ show them afterwards.
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `mod setup: module not found: /usr/modules/recipes`                           | The link in `/usr/modules` is missing; make it as in [Try the module](#try-the-module-on-your-ein)                     |
 | `mod setup: no mod.json found in /usr/modules/recipes`                        | `mod.json` must be at the folder's top                                                                                 |
-| `recipes: needs @ein/client ^0.6.0, this core provides 0.5.0`                 | `coreApi` asks for another version of the module API than this EiN has                                                 |
+| `recipes: needs @ein/client ^0.7.0, this core provides 0.6.0`                 | `coreApi` asks for another version of the module API than this EiN has                                                 |
 | `recipes: requires module 'archive' (^0.1.0), which is not installed`         | Install the dependency, or remove it from `dependencies`                                                               |
 | `recipes: export './api' points at a missing file: ./lib/api.ts`              | Fix the path in `exports`                                                                                              |
 | `recipes: ui.routes['/recipes'] must be a .tsx page: ui/pages/recipes.ts`     | A page is a `.tsx` file                                                                                                |

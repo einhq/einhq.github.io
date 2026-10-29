@@ -2,7 +2,7 @@
 
 Every module has a `mod.json` at its root: who the module is, what it shares with other modules, and what it adds to what core already has. This page is the reference for each field, for the developer writing a module. [Writing a module](modules.md) explains how a module is put together; this page is what to look up while you write its manifest.
 
-Nothing in a manifest is code. What a module does lives in its folders (`bin/`, `services/`, `pipelines/`, `ui/`, `docs/`), and `mod setup` finds those by where they are. The manifest names the module, lists its settings and node types, and declares what core should create or register for it.
+Nothing in a manifest is code. What a module does lives in its folders (`bin/`, `services/`, `pipelines/`, `ui/`, `etc/`), and `mod setup` finds those by where they are. The manifest names the module, lists its settings and node types, and declares what core should create or register for it.
 
 ## A small manifest
 
@@ -13,7 +13,7 @@ A module that adds a few commands, one setting and one page needs little more th
   "name": "letters",
   "version": "0.1.0",
   "description": "Letters: scanned letters, who wrote them and to whom",
-  "coreApi": "^0.5.0",
+  "coreApi": "^0.6.0",
   "dependencies": { "archive": "^0.1.0" },
   "exports": { "./api": "./lib/api.ts" },
   "imports": {
@@ -80,15 +80,15 @@ Free text. `description` is shown by `mod list --long` and `mod info`, on **Sett
 
 ### `coreApi`
 
-The range of core's module contract the module is written against, as a semver range: `"^0.5.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.5.0`; `system-info` shows it on its `api` line.
+The range of core's module contract the module is written against, as a semver range: `"^0.6.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.6.0`; `system-info` shows it on its `api` line.
 
-The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.5.0` accepts 0.5.x and nothing else.
+The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.6.0` accepts 0.6.x and nothing else.
 
 `mod setup` checks the range:
 
 | Manifest                      | What `mod setup` says                                                         |
 | ----------------------------- | ----------------------------------------------------------------------------- |
-| no `coreApi`                  | `letters: no coreApi declared, assuming 0.5.0`, and it goes on                |
+| no `coreApi`                  | `letters: no coreApi declared, assuming 0.6.0`, and it goes on                |
 | a range that does not parse   | `letters: coreApi is not a valid semver range: …`, and it refuses             |
 | a range core does not satisfy | `letters: needs @ein/client ^0.6.0, this core provides 0.5.0`, and it refuses |
 
@@ -352,7 +352,6 @@ Some of what a module brings is found by where it is in the module, not by a fie
 | `etc/config`              | links it as `/etc/config.d/<name>`: the module's own choice of setting values                         |
 | `etc/<x>.d/`              | links it as `/etc/<x>.d/<name>`, for whichever module reads `/etc/<x>.d/*` (`assistant.d`)            |
 | the rest of `etc/`        | copies each entry into `/etc` when it is not already there; never overwrites                          |
-| `docs/`                   | links it as `/usr/docs/modules/<name>`: the module's own guide                                        |
 | `lib/`, `types/`, `test/` | ordinary source, reached through `imports` and `exports`                                              |
 | `deno.jsonc`              | generated from `mod.json` by `deno task sync:modules`; never edited                                   |
 

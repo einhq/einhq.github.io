@@ -245,7 +245,7 @@ The mounts every EiN makes at its start:
 | `/tmp`             | `memory`     | Scratch space, held in memory. It is empty again after every restart.           |
 | `/tmp/dev-modules` | `filesystem` | Modules that come with the deployment itself, read-only                         |
 | `/var/lib/modules` | `filesystem` | The modules installed with `mod install`, in the data folder's `modules` folder |
-| `/usr/docs/guide`  | `filesystem` | The built-in guide, read-only                                                   |
+| `/usr/docs/guide`  | `filesystem` | This guide, as EiN was built with it, read-only                                 |
 
 A `filesystem` mount shows a folder of the machine, and an `sftp` mount shows a folder of another
 machine. Both are mirrors: their files are the other side's files, and nothing is stored about them
