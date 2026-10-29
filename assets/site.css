@@ -238,31 +238,23 @@ kbd {
   fill: currentColor;
 }
 .k-person,
-.t-person,
 .c-person {
   --accent: var(--person);
 }
-.t-album,
 .c-album {
   --accent: var(--album);
 }
 .k-place,
-.t-place,
 .c-place {
   --accent: var(--place);
 }
-.t-device,
 .c-device {
   --accent: var(--device);
-}
-.t-track {
-  --accent: var(--track);
 }
 .k-label {
   --accent: var(--label);
 }
 .k-media,
-.t-media,
 .c-media {
   --accent: var(--media);
 }
@@ -1002,95 +994,6 @@ figcaption {
   }
 }
 
-/* --- tour: tabs over screenshots --- */
-
-.tabs {
-  margin-top: 48px;
-}
-.tablist {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
-}
-.tablist button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: none;
-  color: var(--muted);
-  font: inherit;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-.tablist button::before {
-  content: '';
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
-  opacity: 0.55;
-  -webkit-mask: var(--hat-mask) center / contain no-repeat;
-  mask: var(--hat-mask) center / contain no-repeat;
-}
-.tablist button:hover {
-  color: var(--text);
-  border-color: var(--line-strong);
-}
-.tablist button[aria-selected='true'] {
-  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  color: var(--text);
-}
-.tablist button[aria-selected='true']::before {
-  opacity: 1;
-}
-.tabpanel {
-  display: grid;
-  gap: 24px;
-}
-.tabpanel[hidden] {
-  display: none;
-}
-.caption {
-  display: grid;
-  grid-template-columns: 20rem minmax(0, 44rem);
-  gap: 8px 40px;
-  align-items: baseline;
-}
-.caption p {
-  color: var(--muted);
-}
-/* Without script every panel shows, one after another. */
-@media (scripting: none) {
-  .tablist {
-    display: none;
-  }
-  .tabpanel[hidden] {
-    display: grid;
-    margin-top: 56px;
-  }
-}
-@media (max-width: 720px) {
-  .tablist {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    margin-inline: calc(-1 * var(--gutter));
-    padding: 0 var(--gutter) 4px;
-    scrollbar-width: none;
-  }
-  .tablist button {
-    flex: none;
-  }
-}
-@media (max-width: 1000px) {
-  .caption {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 /* --- what it finds --- */
 
 .find-groups {
@@ -1134,17 +1037,6 @@ figcaption {
 .search .shot {
   margin-top: 48px;
 }
-.pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  margin-top: 80px;
-}
-@media (max-width: 860px) {
-  .pair {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
 
 /* --- split sections: text beside a screenshot --- */
 
@@ -1183,8 +1075,7 @@ figcaption {
   margin-top: 10px;
 }
 /* A bullet is a small hat in the chapter's colour. */
-.points li::before,
-.notes li::before {
+.points li::before {
   content: '';
   position: absolute;
   left: 1px;
@@ -1206,7 +1097,7 @@ figcaption {
   align-items: start;
   margin-top: 56px;
 }
-.shell-doors > p {
+.shell-ways > p {
   margin-top: 12px;
   color: var(--muted);
 }
@@ -1236,13 +1127,10 @@ figcaption {
   color: var(--muted);
   user-select: none;
 }
-.term .c {
-  color: var(--muted);
-}
 
 /* --- architecture: the core's layers, and what a change sets going --- */
 
-/* The doors and the background over the shell, the shell over the tree, the tree over its stores:
+/* The interfaces and the background over the shell, the shell over the tree, the tree over its stores:
  * one grid, so each arrow stands under the box it leaves. On a narrow screen the boxes pair up. */
 .arch {
   margin: 56px 0 0;
@@ -1587,92 +1475,6 @@ figcaption {
   }
 }
 
-.arch-services {
-  margin-top: 96px;
-}
-.arch-services .intro > p {
-  margin-top: 14px;
-}
-.arch-services .term {
-  margin: 0;
-}
-
-/* --- nodes: what a node is, and the core's types --- */
-
-.node-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(32px, 5vw, 64px);
-  align-items: start;
-  margin-top: 56px;
-}
-@media (max-width: 960px) {
-  .node-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-.node-card dl {
-  margin: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  background: var(--raised);
-}
-.node-card dl > div {
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  gap: 16px;
-  padding: 16px 20px;
-}
-.node-card dl > div + div {
-  border-top: 1px solid var(--line);
-}
-.node-card dt {
-  color: var(--accent, var(--media));
-  font-family: var(--mono);
-  font-size: 0.9rem;
-}
-.node-card dd {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.node-card dd code {
-  overflow-wrap: anywhere;
-  color: var(--text);
-}
-.type-groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 32px;
-  margin-top: 20px;
-}
-@media (max-width: 560px) {
-  .type-groups {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-.type-groups section {
-  padding-top: 14px;
-  border-top: 1px solid var(--line-strong);
-}
-.type-groups h4 {
-  margin: 0;
-  color: var(--faint);
-  font-size: var(--t-small);
-  font-weight: 500;
-}
-.type-groups p {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-.types-note {
-  margin-top: 28px;
-  color: var(--muted);
-  font-size: 1rem;
-}
-
 /* --- the tree, and the layers a request passes --- */
 
 .tree-map {
@@ -1726,14 +1528,6 @@ figcaption {
 
 /* --- pipelines --- */
 
-.term-caption {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.pipelines .term {
-  margin-top: 0;
-}
 .keeping-up {
   margin-top: 96px;
 }
@@ -1891,44 +1685,7 @@ figcaption {
   margin-top: 24px;
 }
 
-/* --- the media service's models and tools, with their licences --- */
-
-.models .model {
-  display: block;
-}
-.models .model + .model {
-  margin-top: 6px;
-}
-.models a {
-  color: var(--text);
-}
-.licence {
-  color: var(--faint);
-  font-size: var(--t-small);
-  white-space: nowrap;
-}
-.licence-nc {
-  color: var(--device);
-}
-.tool-list .licence {
-  display: inline;
-  margin: 0 0 0 8px;
-  color: var(--faint);
-  font-size: var(--t-small);
-}
-
-.tools {
-  margin-top: 72px;
-}
-.tool-list {
-  margin-top: 20px;
-}
-.tool-list a {
-  font-family: var(--mono);
-  font-size: 0.95rem;
-}
-
-/* --- private --- */
+/* --- facts side by side, and a section's closing line --- */
 
 .facts {
   display: grid;
@@ -1948,60 +1705,7 @@ figcaption {
   color: var(--muted);
   font-size: 1rem;
 }
-
-/* --- the media service --- */
-
-.ems-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: 64px;
-  align-content: start;
-}
-.ems-body > * {
-  grid-column: 1;
-}
-.ems-body .models {
-  grid-column: 2;
-  grid-row: 1 / span 4;
-  margin-top: 0;
-}
-.models {
-  width: 100%;
-  margin-top: 18px;
-  border-collapse: collapse;
-  font-size: 0.92rem;
-}
-.models caption {
-  padding-bottom: 6px;
-  color: var(--faint);
-  font-size: var(--t-small);
-  text-align: left;
-}
-.models th,
-.models td {
-  padding: 7px 0;
-  border-top: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-}
-.models th {
-  width: 40%;
-  padding-right: 12px;
-  font-weight: 500;
-}
-.models td {
-  color: var(--muted);
-}
-@media (max-width: 1060px) {
-  .ems-body {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .ems-body .models {
-    grid-column: 1;
-    grid-row: auto;
-    margin-top: 18px;
-  }
-}
+/* A section's last line, which points on: to another chapter or the documentation. */
 .next {
   margin-top: 48px;
   color: var(--muted);
@@ -2189,69 +1893,11 @@ figcaption {
   }
 }
 
-/* --- requirements --- */
+/* --- a wide table, which scrolls sideways on a narrow screen --- */
 
 .table-scroll {
   margin-top: 48px;
   overflow-x: auto;
-}
-.spec {
-  width: 100%;
-  min-width: 40rem;
-  border-collapse: collapse;
-  font-size: 1rem;
-}
-.spec th,
-.spec td {
-  padding: 16px 20px 16px 0;
-  border-top: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-}
-.spec thead th {
-  padding-top: 0;
-  border-top: 0;
-  color: var(--muted);
-  font-size: var(--t-small);
-  font-weight: 500;
-}
-.spec tbody th {
-  width: 18%;
-  font-weight: 600;
-}
-.spec td {
-  width: 41%;
-  color: #cfd5df;
-}
-.components {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 28px 36px;
-  margin: 28px 0 0;
-}
-.components dt {
-  font-weight: 600;
-}
-.components dd {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 1rem;
-}
-.notes {
-  margin: 48px 0 0;
-  padding: 24px 0 0;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.95rem;
-  list-style: none;
-}
-.notes li {
-  position: relative;
-  max-width: 64rem;
-  padding-left: 24px;
-}
-.notes li + li {
-  margin-top: 8px;
 }
 
 /* --- get started --- */
@@ -2360,7 +2006,7 @@ figcaption {
   color: var(--muted);
   font-size: 1rem;
 }
-/* What the installer checks, short enough to read in one look; the table below has the rest. */
+/* What the installer checks, short enough to read in one look; the documentation has the rest. */
 .needs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -2380,32 +2026,7 @@ figcaption {
   color: var(--text);
   font-weight: 600;
 }
-/* The installer's options, each flag beside what it adds. */
-.options {
-  max-width: 56rem;
-  margin: 24px 0 0;
-}
-.options div {
-  display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr);
-  gap: 8px 24px;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-}
-@media (max-width: 640px) {
-  .options div {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-.options dt code {
-  color: var(--docs);
-}
-.options dd {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1rem;
-}
-/* Updating and adding later, after the options, in the same cards as the install commands. */
+/* Updating and adding later, after what it needs, in the same cards as the install commands. */
 .installs-later {
   margin-top: 48px;
 }

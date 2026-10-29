@@ -1,8 +1,8 @@
 /**
- * The presentation page's behaviour: the hero's field of hats, the tour's tabs, the screenshots'
- * viewer and the copy button, beside the top bar and the bands of hats that open the other chapters
- * (page.js). Everything works without it: the hats are decoration, without script the tour shows
- * every page one after another (site.css, `scripting: none`), and a screenshot's card links to its image.
+ * The presentation page's behaviour: the hero's field of hats, the screenshots' viewer and the copy
+ * buttons, beside the top bar and the bands of hats that open the other chapters (page.js).
+ * Everything works without it: the hats are decoration, a screenshot's card links to its image, and
+ * an install command can be selected and copied by hand.
  */
 import { HAT_WIDTH } from './hat-tiling.js';
 import { bands, bar, barBottom, CUT, hatsIn, HERO_TINT, heroHat, layStrip, mixedAt, noise, OUTLINE, paintOf, smooth, svg, tint } from './page.js';
@@ -508,35 +508,6 @@ async function field() {
   }).observe(host);
 }
 
-/** The tour's tabs: click, or the arrow keys, Home and End, as a tab list does. */
-function tabs() {
-  for (const root of document.querySelectorAll('[data-tabs]')) {
-    const buttons = [...root.querySelectorAll('[role=tab]')];
-    if (!buttons.length) continue;
-    const select = (button, focus) => {
-      for (const other of buttons) {
-        const selected = other === button;
-        other.setAttribute('aria-selected', String(selected));
-        other.tabIndex = selected ? 0 : -1;
-        const panel = document.getElementById(other.getAttribute('aria-controls'));
-        if (panel) panel.hidden = !selected;
-      }
-      if (focus) button.focus();
-    };
-    for (const button of buttons) {
-      button.addEventListener('click', () => select(button, false));
-      button.addEventListener('keydown', (event) => {
-        const at = buttons.indexOf(button);
-        const to = { ArrowRight: at + 1, ArrowLeft: at - 1, Home: 0, End: buttons.length - 1 }[event.key];
-        if (to === undefined) return;
-        event.preventDefault();
-        select(buttons[(to + buttons.length) % buttons.length], true);
-      });
-    }
-    select(buttons.find((b) => b.getAttribute('aria-selected') === 'true') ?? buttons[0], false);
-  }
-}
-
 /**
  * The install commands' copy buttons: each copies its command as the page shows it, and where the
  * clipboard is refused, selects it for the visitor to copy. A status beside it says which.
@@ -616,6 +587,6 @@ function viewer() {
 }
 
 // Each part on its own, so one that fails leaves the others working.
-for (const part of [tabs, copyButtons, bar, viewer, bands, field]) {
+for (const part of [copyButtons, bar, viewer, bands, field]) {
   Promise.resolve().then(part).catch((error) => console.error(error));
 }
