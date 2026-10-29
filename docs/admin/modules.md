@@ -50,10 +50,11 @@ Type in the filter box to narrow the list by name or description. **Show only ac
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
 Choose a module to open its panel. At the top it shows the module's name, its version and the core
-API it is written for (`version 0.1.0 · core API ^0.2.0`), where it is installed
+API it is written for (`version 0.1.0 · core API ^0.4.1`), where it is installed
 (`/usr/modules/archive`), when it was set up, and its state. **Reference and guide** opens the
 module's own page in **Documentation**, with its guide and every command, setting and node type it
-brings. Below are tabs, each with a count; a tab the module has nothing for is left out:
+brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
+another tab the module has nothing for is left out:
 
 | Tab              | What it shows                                                                                                                                                                 |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,7 +66,8 @@ brings. Below are tabs, each with a count; a tab the module has nothing for is l
 | **Settings**     | Its settings with their values, each marked **personal** or **system**; a row opens to the setting's description and, if you may change it, its control                       |
 | **Node types**   | The kinds of node it defines, with how many of each exist                                                                                                                     |
 
-A module's settings are the same ones the **System** tab lists, and they save the same way:
+A module's system settings are the same ones the **System** tab lists, and its personal ones are
+those on **Profile → Preferences**; they save the same way:
 [Configuration](configuration.md) explains where a value comes from and what a change restarts.
 
 The **About EiN** dialog, in the menu under your picture, also lists the installed modules, with a
@@ -105,9 +107,9 @@ the module.
 ![The Published modules panel on Settings → Modules: archive, assistant and ems from github.com/einhq, each 0.1.0 and marked The deployment's, with a Refresh button at the top right](../../assets/shots/modules-published.webp "The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
-and starts their services. Under the module it then says "Installed. Its pages appear when this
-page is reloaded.", or, when it brought dependencies along, for example "Installed, with ems. Its
-pages appear when this page is reloaded." Reload the page to see the new entries in the sidebar.
+and starts their services. Under the module it then says "Installed", or, when it brought
+dependencies along, for example "Installed, with ems". Its entries in the sidebar and its pages
+appear without reloading the page.
 
 Each published module carries a badge for what is installed of it:
 
@@ -119,13 +121,13 @@ Each published module carries a badge for what is installed of it:
 | **Installed from elsewhere** | A module of this name is installed from another repository.                                                                                            |
 | **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.    |
 
-A module written for a different core API says "Needs core API ^0.3.0, which this EiN does not
+A module written for a different core API says "Needs core API ^0.5.0, which this EiN does not
 provide." (with its own range), and its button is greyed out. **Refresh** asks the sources again.
 
 In the terminal, `mod search` lists the same, and `mod install` installs:
 
 ```bash
-# in EiN's terminal, as the administrator
+# in EiN's terminal
 mod search
 ```
 
@@ -161,11 +163,11 @@ A line follows for each step of each setup, ending in `Module 'archive' setup co
 services it started. `mod install` takes several modules at once, and each can be named in three
 ways:
 
-| You write                                      | What is installed                                                                |
-| ---------------------------------------------- | -------------------------------------------------------------------------------- |
-| `archive`                                      | `module-archive` from the first module source that has it, at its default branch |
-| `https://github.com/einhq/module-archive`      | That repository, at its default branch                                           |
-| `archive@v0.1.0`, `…/module-archive@5e1c07a42` | That branch, tag or commit                                                       |
+| You write                                     | What is installed                                                                |
+| --------------------------------------------- | -------------------------------------------------------------------------------- |
+| `archive`                                     | `module-archive` from the first module source that has it, at its default branch |
+| `https://github.com/einhq/module-archive`     | That repository, at its default branch                                           |
+| `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its full 40-character id                      |
 
 The [reference](../reference/commands-core.md#mod-install) lists its options.
 
@@ -179,8 +181,8 @@ modules it needs:
 ~/ein/setup.sh --module assistant
 ```
 
-`setup.sh` adds the name to `EIN_MODULES` in `~/ein/.env` and restarts EiN, which installs every
-module named there that is missing. One installed already is left as it is, at whatever version,
+`setup.sh` adds the name to `EIN_MODULES` in `~/ein/.env` and, as on every run, fetches the newest
+sources, builds and starts EiN again, which installs every module named there that is missing. One installed already is left as it is, at whatever version,
 without asking GitHub, so a restart never updates a module. If EiN cannot download one at its
 start, its log says `some of INSTALL_MODULES could not be installed; continuing boot` and EiN
 starts without it; install it from **Settings → Modules** once EiN is up.
@@ -195,8 +197,9 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
 - Or open the module's panel. A module installed from its repository has a section **Installed
   from its repository**, saying which repository and commit it came from and when, with **Update**
   and **Remove**. **Update** there fetches the newest commit of the branch it was installed from,
-  or the same tag or commit again for one installed at a tag or commit. It answers **Updated**, or
-  **Up to date** when there was nothing newer.
+  or the same tag again for one installed at a tag; one installed at a commit gets the newest
+  commit of the default branch. It answers **Updated**, or **Up to date** when there was nothing
+  newer.
 - In the terminal, `mod install archive` updates an installed module. The same commit again is
   left alone: `archive is installed at 5e1c07a42 (main) already`.
 
@@ -211,8 +214,8 @@ on it, directly or through another, is set up again too, and its running service
 nothing keeps running the code that was replaced. The new version takes the old one's place in a
 single step: the module's folder always holds one whole version.
 
-To pin a module to a version, install it at a tag or commit, such as `mod install archive@v0.1.0`;
-its panel's **Update** then keeps it there. The published modules always compare with the default
+To pin a module to a version, install it at a tag, such as `mod install archive@v0.1.0` where its
+repository has that tag; its panel's **Update** then keeps it there. The published modules always compare with the default
 branch, so they may offer **Update** for it, which installs the default branch.
 
 ## Remove a module
@@ -313,7 +316,7 @@ does. The usual ones:
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                               |
 | `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                           |
-| `archive: needs @ein/client ^0.2.0, this core provides 0.3.0`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
+| `archive: needs @ein/client ^0.5.0, this core provides 0.4.3`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
 
 After fixing the cause, set the module up again with `mod setup archive`, or every module with
 `mod setup --all`, which is what EiN runs at each start. Restarting EiN does the same.
@@ -323,8 +326,8 @@ place without setup. `mod setup <name>` sets it up.
 
 **Active, but something is missing.** Check its **Services** tab: a service that shows
 `failed` or `disabled` can be started again on the **Dashboard**'s services tab, and
-[Services and logs](services-logs.md) explains how to read its log. New pages appear only once the
-page is reloaded.
+[Services and logs](services-logs.md) explains how to read its log. A module installed from the
+terminal shows its pages in a browser tab that was already open once that page is reloaded.
 
 **Install or update refused.** The message says why, in words like these:
 

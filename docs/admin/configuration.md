@@ -62,13 +62,14 @@ A few settings are keys that EiN sends to another service: the media service's k
 
 ## What a change restarts
 
-A setting that a service reads when it starts restarts that service when you save it, so the change takes effect without restarting EiN. The setting's card lists the services before you save, and the line under it confirms what was restarted afterwards. Work already running is not lost: it is picked up again when the service is back.
+A setting that names the services that read it when they start restarts them when you save it, so the change takes effect without restarting EiN. The setting's card lists those services before you save, and the line under it confirms what was restarted afterwards. A setting that names no service restarts nothing. Work already running is not lost: it is picked up again when the service is back.
 
 - Only services that are running are restarted. A service you stopped stays stopped, and reads the new value when you start it. [Services and logs](services-logs.md) shows how.
 - If a restart fails, the value is still saved, and a red message says "Could not restart" with the service's name and the reason. The service keeps running on the old value until it starts again.
 - The ports, **HTTP port** and **SSH port**, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.
 - **Worker backlog rotation (ms)** is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.
 - Settings that are policy, such as the default sharing or **Visitors may browse**, are read each time they are applied, so they take effect at once and restart nothing.
+- Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as **Face match threshold**. Nothing restarts for them: they take effect when that service next starts, from [Services and logs](services-logs.md) or the next time EiN starts.
 
 > [!WARNING]
 > With the installer's setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing **HTTP port** or **SSH port** on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in `.env` instead, as [Ports, HTTPS and remote access](network.md) describes.
@@ -91,13 +92,13 @@ config unset CFG_TRASH_RETENTION_DAYS
 `config list` prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows `(set)` in place of its value, or nothing when it is not set:
 
 ```text
+CFG_EMS_KEY	(set) (environment)
+CFG_HTTP_PORT	8080 (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
 CFG_LANGUAGE_MODEL	llm-chat (module assistant)
 CFG_SEARCH_PARSER	archive-parse (module archive)
 CFG_TEXT_EMBEDDER	ems-text-embed (module ems)
 CFG_SESSION_REAP_INTERVAL	3600
-CFG_HTTP_PORT	8080 (environment)
-CFG_EMS_KEY	(set) (environment)
 CFG_TRASH_RETENTION_DAYS	14 (system)
 ```
 
@@ -134,7 +135,7 @@ Other refusals:
 - `config set: unknown setting 'CFG_TRASH_DAYS'`: no installed part of EiN declares that name. `config list` shows the names there are; a module's settings exist only while the module is installed.
 - `config set: 'CFG_CPU_SLOTS' is a system setting and needs administrator rights`: you are signed in as someone else. [Accounts and groups](accounts.md) explains how a member of the `sudo` group becomes the administrator in a terminal with `admin`.
 
-A value with spaces, such as two module sources, is best quoted: `config set CFG_MODULE_SOURCES 'https://github.com/einhq https://forge.example:3000/family'`. With `JSON_OUTPUT=1` in front, `config list`, `config get`, `config set` and `config unset` answer in JSON, with the setting's label, description, value and source. [Core commands](../reference/commands-core.md#config-set) has the full entries.
+A value with spaces, such as two module sources, is best quoted: `config set CFG_MODULE_SOURCES 'https://github.com/einhq https://forge.example:3000/family'`. With `JSON_OUTPUT=1` in front, `config list`, `config get`, `config set` and `config unset` answer in JSON: `config list` and `config get` with each setting's label, description, value and source, `config set` and `config unset` with the value and what was restarted. [Core commands](../reference/commands-core.md#config-set) has the full entries.
 
 ## Set a value in the deployment
 
@@ -162,11 +163,11 @@ Running `./setup.sh` applies `.env` too, but it also fetches and builds the newe
 A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
-- **A module's choice wins over it.** The Archive, the assistant and the media service each name a command for one of the **Search** settings, such as `CFG_SEARCH_PARSER`. To use another one, set it on the Settings page.
+- **A module's choice wins over it.** The Archive, the assistant and the media service name commands for the **Search** settings, such as `CFG_SEARCH_PARSER`. To use another one, set it on the Settings page.
 - **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
-The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](media-service.md) describes them.
+The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](media-service.md) describes them.
 
 > [!NOTE]
 > `.env` holds the database password and the media service's key, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.

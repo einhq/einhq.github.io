@@ -90,7 +90,7 @@ an album.</p>
 <p>Almost everything you bring in lands first in your <strong>staging area</strong>, a private place that only you
 can see. EiN reads each file there, checks whether you have it already and suggests albums for it.
 Nobody else sees the files, and they stay out of the shared library, until you file them into an
-album. The one way past staging is to upload straight into an album that already exists.</p>
+album. The usual way past staging is to upload straight into an album that already exists.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -226,9 +226,10 @@ as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new n
 <p>An upload into staging goes into a folder for the day inside the category, named
 <code>upload-YYYY-MM-DD</code>, and a folder you drop or choose keeps its structure below it:
 <code>Trip/day 2/IMG_0001.jpg</code> lands in <code>upload-2026-10-25/Trip/day 2/</code>. Folder names help the
-grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album
-of its own, named after the folder, such as &quot;Cornwall, summer 1968&quot;. Names that cameras and
-exports give folders, such as <code>DCIM</code>, <code>100CANON</code>, a bare year or date, or <code>Takeout</code>, are not used.</p>
+grouping. In most kinds of category, a folder you named yourself, holding at least three pictures,
+becomes a suggested album of its own, named after the folder, such as &quot;Cornwall, summer 1968&quot;.
+Names that cameras and exports give folders, such as <code>DCIM</code>, <code>100CANON</code>, a bare year or date, or
+<code>Takeout</code>, are not used.</p>
 <p>On a phone the header&#39;s buttons fold into the ⋮ menu, and <strong>Upload</strong> offers your photos, videos,
 recordings and GPX files, and the camera. <a href="phone.html">EiN on a phone</a> has more.</p>
 <p>Files dropped on a terminal tab are uploaded into that tab&#39;s current folder, without their folders;
@@ -286,8 +287,9 @@ themselves:</p>
     Christmas 1975/             two levels down: suggested as &quot;Christmas 1975&quot;</code></pre></div>
 <p>Pictures in a folder only one level down are still grouped, by when and where they were taken;
 only the folder&#39;s name is not used.</p>
-<p>Put files in a category&#39;s folder, never in <code>files/</code> itself: anything left directly in <code>files/</code> is
-moved into <code>files/inbox/unsorted/</code>.</p>
+<p>Put files in a category&#39;s folder, never in <code>files/</code> itself: a folder copied directly into <code>files/</code>
+becomes a category of its own, of the <strong>Other</strong> kind, and a file left there belongs to no category
+until your administrator runs <code>staging init</code>, which moves it into <code>files/inbox/unsorted/</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>A file you delete over SFTP is gone for good; it does not go to the trash. To get rid of staged
 files, use <strong>Discard…</strong> on the category&#39;s <strong>Files</strong> tab, which puts them in your trash with Undo.</p>
@@ -517,7 +519,8 @@ newest files are. Each stage shows while it holds files:</p>
 </tbody></table>
 </div>
 <ol>
-<li><strong>Arriving.</strong> The files are on their way from your browser.</li>
+<li><strong>Arriving.</strong> The files are on their way from your browser. Files copied over SFTP skip this
+stage and show first as being prepared.</li>
 <li><strong>Being prepared.</strong> EiN reads each file&#39;s date, place and camera. A file that is an exact copy
 of a picture you can open already is recognised here and goes no further: it is not processed,
 and shows its original&#39;s picture (see

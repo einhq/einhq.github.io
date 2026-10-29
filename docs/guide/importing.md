@@ -9,7 +9,7 @@ an album.
 Almost everything you bring in lands first in your **staging area**, a private place that only you
 can see. EiN reads each file there, checks whether you have it already and suggests albums for it.
 Nobody else sees the files, and they stay out of the shared library, until you file them into an
-album. The one way past staging is to upload straight into an album that already exists.
+album. The usual way past staging is to upload straight into an album that already exists.
 
 | Way in                                               | Where the files go                                    | Folders kept |
 | ---------------------------------------------------- | ----------------------------------------------------- | ------------ |
@@ -105,9 +105,10 @@ On the Staging overview, files dropped beside the tiles go nowhere.
 An upload into staging goes into a folder for the day inside the category, named
 `upload-YYYY-MM-DD`, and a folder you drop or choose keeps its structure below it:
 `Trip/day 2/IMG_0001.jpg` lands in `upload-2026-10-25/Trip/day 2/`. Folder names help the
-grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album
-of its own, named after the folder, such as "Cornwall, summer 1968". Names that cameras and
-exports give folders, such as `DCIM`, `100CANON`, a bare year or date, or `Takeout`, are not used.
+grouping. In most kinds of category, a folder you named yourself, holding at least three pictures,
+becomes a suggested album of its own, named after the folder, such as "Cornwall, summer 1968".
+Names that cameras and exports give folders, such as `DCIM`, `100CANON`, a bare year or date, or
+`Takeout`, are not used.
 
 On a phone the header's buttons fold into the ⋮ menu, and **Upload** offers your photos, videos,
 recordings and GPX files, and the camera. [EiN on a phone](phone.md) has more.
@@ -184,8 +185,9 @@ staging/files/inbox/
 Pictures in a folder only one level down are still grouped, by when and where they were taken;
 only the folder's name is not used.
 
-Put files in a category's folder, never in `files/` itself: anything left directly in `files/` is
-moved into `files/inbox/unsorted/`.
+Put files in a category's folder, never in `files/` itself: a folder copied directly into `files/`
+becomes a category of its own, of the **Other** kind, and a file left there belongs to no category
+until your administrator runs `staging init`, which moves it into `files/inbox/unsorted/`.
 
 > [!WARNING]
 > A file you delete over SFTP is gone for good; it does not go to the trash. To get rid of staged
@@ -283,7 +285,8 @@ newest files are. Each stage shows while it holds files:
 | "N being prepared, about 12 min" | "Their dates and places are being read; the groups they join may still change" |
 | "N being grouped"                | "Read, and waiting for the organizer to put them in a group"                   |
 
-1. **Arriving.** The files are on their way from your browser.
+1. **Arriving.** The files are on their way from your browser. Files copied over SFTP skip this
+   stage and show first as being prepared.
 2. **Being prepared.** EiN reads each file's date, place and camera. A file that is an exact copy
    of a picture you can open already is recognised here and goes no further: it is not processed,
    and shows its original's picture (see

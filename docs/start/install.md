@@ -18,7 +18,7 @@ What the machine needs depends on whether you install EiN on its own (EiN Core) 
 | Free disk        | 10 GB, plus your files                                                                            | about 100 GB, plus your files                         |
 | Graphics card    | not used                                                                                          | optional: NVIDIA, 16 GB recommended, 8 and 12 GB work |
 
-Cores are counted as physical cores, not threads. The language model for the assistant (`--llm`) takes about 5.6 GB more, on the graphics card or in memory. With 16 GB of memory, leave it out or use a hosted model instead; [The language model](../admin/language-model.md) explains both.
+Cores are counted as physical cores, not threads. The language model for the assistant (`--llm`) takes several GB more, on the graphics card or in memory. With 16 GB of memory, leave it out or use a hosted model instead; [The language model](../admin/language-model.md) explains both.
 
 A few more things to know before you start:
 
@@ -101,7 +101,7 @@ EiN: checking this machine against the system requirements
 
   system           ok       Linux on x86-64
   podman           ok       5.4.2, rootless
-  compose          ok       podman compose
+  compose          ok       podman compose, with podman-compose
   git              ok
   curl             ok
   openssl          ok
@@ -146,11 +146,12 @@ Once the checks pass, the installer:
 5. It starts everything with `podman compose` or `docker compose`, and waits for EiN to answer.
 6. At its first start, EiN sets up its database, makes the `admin` account with a random password, downloads the modules you named and the modules they need, sets them up and starts its services.
 7. `setup.sh` prints the address of EiN and the admin password.
+8. It makes EiN start again when the machine does, where your user may: under podman it turns on `podman-restart.service` for your user and lets your user's services run without a login. What it may not do, it prints as commands for you to run, such as `sudo loginctl enable-linger anna`.
 
 The end of a run looks like this:
 
 ```text
-Fetching ein/deploy into /home/anna/ein
+Fetching https://github.com/einhq/deploy into /home/anna/ein
 Wrote .env: your files go under /home/anna/ein/data
 
 == Fetching the sources
@@ -164,16 +165,21 @@ Wrote .env: your files go under /home/anna/ein/data
 
 == Starting EiN
 …
+Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
+  …
 
 EiN is up at http://ein:8080/
 Sign in as admin with the password 0b7c2e4a-5d91-4f3e-a8c6-2f19d7e0b543, and change it: it is shown this once.
+Enabled podman-restart.service, which starts EiN's containers at boot
+Enabled lingering for anna, so podman-restart.service runs at boot without a login
+EiN starts again when the machine does.
 ```
 
 ### How long it takes
 
 Most of the time goes into the build, and how long that takes depends on your connection and your processor. EiN Core is the shorter of the two. With the media service, its image of about 30 GB is downloaded and built as well, which takes by far the longest. The build prints its own output as it goes.
 
-After `== Starting EiN`, `setup.sh` prints nothing more until EiN answers, which takes longer at the first start, when EiN also downloads the modules you named. It waits up to 10 minutes.
+After `== Starting EiN`, `setup.sh` prints `Waiting for EiN to answer at …` and then, every 10 seconds, EiN's newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN's container stops or keeps restarting.
 
 With the media service and the model, two parts are still getting ready when the password appears. The media service loads its models for a few minutes after it starts; until then the Dashboard's health check for `ems` says `http://ems:8181 is not answering; work that needs it waits`, and the work resumes by itself. The language model downloads its model the first time it starts, so the assistant may not answer for a while.
 
@@ -198,7 +204,7 @@ Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) expla
 
 You land on the home page, **Welcome**, which is empty until there is something in EiN. There is no setup wizard: [First steps](first-steps.md) walks you from here to a family using it.
 
-EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read [Ports, HTTPS and remote access](../admin/network.md).
+EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read [Ports, HTTPS and remote access](../admin/network.md). When something else on the machine already uses 8080 or 2222, `setup.sh` gives EiN the next free port instead, says so (`Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)`), keeps it in `.env`, and prints the address with it.
 
 ## Change the admin password straight away
 
@@ -255,19 +261,20 @@ Instead of `--llm`, the assistant can use a hosted model, set in `~/ein/.env`: s
 
 The commands here are written for podman. With Docker, write `docker compose` where they say `podman compose`.
 
-| What you see                                                                                      | What to do                                                                                                                                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<n> requirement(s) not met, so nothing was installed.`                                           | Nothing was changed. Install or free what the `missing` lines name, and run the command again.                                                                                                                                                                  |
-| The `podman` line says `low` and `run as root here: run the installer, and EiN, as your own user` | You ran the installer as root. Run it again as your own user, without `sudo`.                                                                                                                                                                                   |
-| The `compose` line says `missing` and `install podman-compose, which 'podman compose' runs`       | Install `podman-compose`, or for Docker its compose plugin, and run the command again.                                                                                                                                                                          |
-| A line about an external compose provider each time `podman compose` runs                         | podman's own notice that `podman compose` runs `podman-compose`. It is not an error.                                                                                                                                                                            |
-| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`   | Look at what EiN is doing with `cd ~/ein && podman compose logs ein`. A first start that downloads modules over a slow connection can take this long; `podman compose ps` shows whether it still runs.                                                          |
-| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                 | The container engine cannot hand the graphics card to the containers. podman 4.9.3, as on Ubuntu 24.04, needs a fix once per machine: see [The graphics card](../admin/gpu.md).                                                                                 |
-| No `Sign in as admin` line at the end                                                             | Look for it in the log, below. When nothing is there, either the database was there from an earlier install, so the admin already had a password, or the containers have been made again after the install. See [Troubleshooting](../admin/troubleshooting.md). |
-| `some of INSTALL_MODULES could not be installed; continuing boot` in the log                      | EiN could not download a module, often for want of a connection to GitHub. Install it from **Settings → Modules** once EiN is up.                                                                                                                               |
-| The address does not open on another computer                                                     | Use the machine's IP address instead of its name, and open ports 8080 and 2222 in the machine's firewall if it has one. See [Ports, HTTPS and remote access](../admin/network.md).                                                                              |
-| EiN is not running after the machine restarts                                                     | Docker starts the containers again with the machine. With rootless podman, nothing in the install does: start EiN with `cd ~/ein && podman compose up -d`. [Installing in detail](../admin/install.md) explains.                                                |
-| Uploads in the Archive get no thumbnails                                                          | The media service is not installed, or is not answering yet. Add it with `~/ein/setup.sh --ems`, or see [The media service](../admin/media-service.md).                                                                                                         |
+| What you see                                                                                      | What to do                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<n> requirement(s) not met, so nothing was installed.`                                           | Nothing was changed. Install or free what the `missing` lines name, and run the command again.                                                                                                                                                                                                      |
+| The `podman` line says `low` and `run as root here: run the installer, and EiN, as your own user` | You ran the installer as root. Run it again as your own user, without `sudo`.                                                                                                                                                                                                                       |
+| The `compose` line says `missing` and `install podman-compose, which 'podman compose' runs`       | Install `podman-compose`, or for Docker its compose plugin, and run the command again.                                                                                                                                                                                                              |
+| A line about an external compose provider each time `podman compose` runs                         | podman's own notice that `podman compose` runs `podman-compose`. It is not an error.                                                                                                                                                                                                                |
+| `setup.sh: EiN stopped before it answered; its log is above: podman compose logs ein`             | EiN's container stopped, or restarted three times. The last lines of its log are printed above the message; they name what went wrong. See [Troubleshooting](../admin/troubleshooting.md).                                                                                                          |
+| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`   | Look at what EiN is doing with `cd ~/ein && podman compose logs ein`. A first start that downloads modules over a slow connection can take this long; `podman compose ps` shows whether it still runs.                                                                                              |
+| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                 | The container engine cannot hand the graphics card to the containers. podman 4.9.3, as on Ubuntu 24.04, needs a fix once per machine: see [The graphics card](../admin/gpu.md).                                                                                                                     |
+| No `Sign in as admin` line at the end                                                             | Look for it in the log, below. When nothing is there, either the database was there from an earlier install, so the admin already had a password, or the containers have been made again after the install. See [Troubleshooting](../admin/troubleshooting.md).                                     |
+| `some of INSTALL_MODULES could not be installed; continuing boot` in the log                      | EiN could not download a module, often for want of a connection to GitHub. Install it from **Settings → Modules** once EiN is up.                                                                                                                                                                   |
+| The address does not open on another computer                                                     | Use the machine's IP address instead of its name, and open ports 8080 and 2222 in the machine's firewall if it has one. See [Ports, HTTPS and remote access](../admin/network.md).                                                                                                                  |
+| `EiN does not start again when the machine does until this has run:` at the end                   | `setup.sh` could not turn on what starts EiN at boot, such as lingering for your user. Run the commands listed below the line; until then, start EiN after a reboot with `cd ~/ein && podman compose up -d`. [Installing in detail](../admin/install.md#start-ein-when-the-machine-boots) explains. |
+| Uploads in the Archive get no thumbnails                                                          | The media service is not installed, or is not answering yet. Add it with `~/ein/setup.sh --ems`, or see [The media service](../admin/media-service.md).                                                                                                                                             |
 
 To find the admin password in the log, as long as the containers have not been made again after the install:
 

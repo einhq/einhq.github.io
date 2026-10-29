@@ -70,7 +70,7 @@ part.
 ## Check the dashboard
 
 Choose **Dashboard** under **System** in the sidebar. Only administrators have it. The page,
-**System dashboard**, shows one word above its title for how things stand:
+**System dashboard**, shows a badge above its title for how things stand:
 
 | Badge              | What it means                                                            | What to do                                                                                             |
 | ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
@@ -101,13 +101,13 @@ themselves. Step 3 says how to add either part.
 What EiN is for comes from its modules. Without any, the sidebar holds only **Home**, **Search**
 and the pages under **System**. These modules are published:
 
-| Module      | What it adds                                                                                                                                                 | What it needs                                              |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| `archive`   | **Media**, **Staging**, **Year**, **Map**, **Albums**, **People**, **Locations** and **Devices** in the sidebar, and **Import media** in the **Create** menu | the `ems` module, installed with it, and the media service |
-| `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                             | a language model, your own or a hosted one                 |
-| `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                             | the media service                                          |
+| Module      | What it adds                                                                                                                                                                                                     | What it needs                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `archive`   | **Media**, **Staging**, **Year**, **Map**, **Albums**, **People**, **Locations** and **Devices** in the sidebar, and **Import media**, **Album**, **Person**, **Location** and **Device** in the **Create** menu | the `ems` module, installed with it, and the media service |
+| `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                 | a language model, your own or a hosted one                 |
+| `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                 | the media service                                          |
 
-If you installed with the Archive command from einhq.eu, the three are installed already. Open
+If you installed with the **EiN Archive** command from einhq.eu, the three are installed already. Open
 **Settings → Modules**, choose each module, and check that its panel says **Active**, not
 **Not set up** or **Setup failed**.
 
@@ -117,7 +117,7 @@ To install a module:
 2. Choose the **Published modules** button beside the filter.
 3. Choose **Install** beside the module. EiN installs the modules it needs as well, and says
    so: "Installed, with ems".
-4. Reload the page to see the module's pages.
+4. The module's pages appear in the sidebar without a reload.
 
 ![Settings → Modules with the archive module's panel open: its version, its Active badge, and the About, Dependencies, Services, Pages, Commands and Settings tabs](../../assets/shots/settings-modules.webp "Each installed module has a panel that says whether it is set up and what it adds")
 
@@ -326,9 +326,12 @@ takes the newest code, and there is no going back to the previous one. Modules a
 separately, with **Update** in **Settings → Modules → Published modules**.
 [Updating](../admin/updating.md) explains what an update touches.
 
-**After the machine restarts**, check that EiN came back. Nothing the installer sets up starts it
-when the machine boots: Docker starts the containers again by itself, but under rootless podman
-you may have to start EiN yourself:
+**After the machine restarts**, check that EiN came back. The installer makes EiN start at boot
+where it can: under podman it enables `podman-restart.service`, and lingering for your user, and
+with Docker it checks that Docker's own service is enabled. Where it cannot, its output ends with
+"EiN does not start again when the machine does until this has run:" and the commands to run,
+such as `sudo loginctl enable-linger` and your username. Until they have run, start EiN yourself
+after a reboot:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
@@ -343,7 +346,8 @@ needs three things, taken together:
   keeps them;
 - the data folder, `~/ein/data` unless you chose another at the install, and above all its
   `files` folder, which holds your originals;
-- the database, which is the container engine's volume `ein_db`, not part of the data folder.
+- the database, which is the container engine's volume `ein_db` (or the folder you gave
+  `--db-dir`), not part of the data folder.
 
 > [!NOTE]
 > The database holds every name, album, person and setting, and the `files` folder holds the

@@ -156,12 +156,12 @@ clicking it opens the Share dialog.
 
 ![A decision flow for the chip: if a share link opens it, or visitors may see it and visitors may browse, the chip is Public in green; otherwise, if everyone with an account can see it, there is no chip; otherwise, if some people or groups can, it is Restricted in orange; otherwise it is Private in red, seen only by its owner](../diagrams/visibility.svg "The chip answers one question at a glance: who besides you can see this.")
 
-| Chip                                | When                                                                                  | What it says                                                          |
-| ----------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| **Public**, green, with a globe     | A share link opens it, or it is shared with visitors and visitors may browse.         | "Anyone with its link, or any visitor, can see it without signing in" |
-| No chip                             | Everyone with an account can see it.                                                  | "Everyone with an account can see it" (in the dialog)                 |
-| **Restricted**, orange, with a lock | Some people or groups besides the owner can see it, but not everyone with an account. | "Only some of the people with an account can see it"                  |
-| **Private**, red, with a lock       | Nobody but its owner.                                                                 | "Only its owner can see it"                                           |
+| Chip                                           | When                                                                                  | What it says                                                          |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Public**, green, with a globe                | A share link opens it, or it is shared with visitors and visitors may browse.         | "Anyone with its link, or any visitor, can see it without signing in" |
+| No chip                                        | Everyone with an account can see it.                                                  | "Everyone with an account can see it" (in the dialog)                 |
+| **Restricted**, orange, with a lock in a frame | Some people or groups besides the owner can see it, but not everyone with an account. | "Only some of the people with an account can see it"                  |
+| **Private**, red, with a lock                  | Nobody but its owner.                                                                 | "Only its owner can see it"                                           |
 
 Most albums have no chip, because most are seen by everyone with an account. Visitors and people
 who opened a link never see the chip: they are not told who else can see something.

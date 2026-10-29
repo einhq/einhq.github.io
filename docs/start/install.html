@@ -132,7 +132,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>Cores are counted as physical cores, not threads. The language model for the assistant (<code>--llm</code>) takes about 5.6 GB more, on the graphics card or in memory. With 16 GB of memory, leave it out or use a hosted model instead; <a href="../admin/language-model.html">The language model</a> explains both.</p>
+<p>Cores are counted as physical cores, not threads. The language model for the assistant (<code>--llm</code>) takes several GB more, on the graphics card or in memory. With 16 GB of memory, leave it out or use a hosted model instead; <a href="../admin/language-model.html">The language model</a> explains both.</p>
 <p>A few more things to know before you start:</p>
 <ul>
 <li><strong>No macOS, Windows or ARM.</strong> The installer stops at once on anything but Linux on x86-64, a Raspberry Pi included.</li>
@@ -204,7 +204,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- --e
 
   system           ok       Linux on x86-64
   podman           ok       5.4.2, rootless
-  compose          ok       podman compose
+  compose          ok       podman compose, with podman-compose
   git              ok
   curl             ok
   openssl          ok
@@ -364,9 +364,10 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 <li>It starts everything with <code>podman compose</code> or <code>docker compose</code>, and waits for EiN to answer.</li>
 <li>At its first start, EiN sets up its database, makes the <code>admin</code> account with a random password, downloads the modules you named and the modules they need, sets them up and starts its services.</li>
 <li><code>setup.sh</code> prints the address of EiN and the admin password.</li>
+<li>It makes EiN start again when the machine does, where your user may: under podman it turns on <code>podman-restart.service</code> for your user and lets your user&#39;s services run without a login. What it may not do, it prints as commands for you to run, such as <code>sudo loginctl enable-linger anna</code>.</li>
 </ol>
 <p>The end of a run looks like this:</p>
-<div class="code"><pre tabindex="0"><code>Fetching ein/deploy into /home/anna/ein
+<div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/deploy into /home/anna/ein
 Wrote .env: your files go under /home/anna/ein/data
 
 == Fetching the sources
@@ -380,12 +381,17 @@ Wrote .env: your files go under /home/anna/ein/data
 
 == Starting EiN
 …
+Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
+  …
 
 EiN is up at http://ein:8080/
-Sign in as admin with the password 0b7c2e4a-5d91-4f3e-a8c6-2f19d7e0b543, and change it: it is shown this once.</code></pre></div>
+Sign in as admin with the password 0b7c2e4a-5d91-4f3e-a8c6-2f19d7e0b543, and change it: it is shown this once.
+Enabled podman-restart.service, which starts EiN's containers at boot
+Enabled lingering for anna, so podman-restart.service runs at boot without a login
+EiN starts again when the machine does.</code></pre></div>
 <h3 id="how-long-it-takes">How long it takes<a class="anchor" href="#how-long-it-takes" aria-label="Link to this section"></a></h3>
 <p>Most of the time goes into the build, and how long that takes depends on your connection and your processor. EiN Core is the shorter of the two. With the media service, its image of about 30 GB is downloaded and built as well, which takes by far the longest. The build prints its own output as it goes.</p>
-<p>After <code>== Starting EiN</code>, <code>setup.sh</code> prints nothing more until EiN answers, which takes longer at the first start, when EiN also downloads the modules you named. It waits up to 10 minutes.</p>
+<p>After <code>== Starting EiN</code>, <code>setup.sh</code> prints <code>Waiting for EiN to answer at …</code> and then, every 10 seconds, EiN&#39;s newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN&#39;s container stops or keeps restarting.</p>
 <p>With the media service and the model, two parts are still getting ready when the password appears. The media service loads its models for a few minutes after it starts; until then the Dashboard&#39;s health check for <code>ems</code> says <code>http://ems:8181 is not answering; work that needs it waits</code>, and the work resumes by itself. The language model downloads its model the first time it starts, so the assistant may not answer for a while.</p>
 <h3 id="what-is-where">What is where<a class="anchor" href="#what-is-where" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -422,7 +428,7 @@ Sign in as admin with the password 0b7c2e4a-5d91-4f3e-a8c6-2f19d7e0b543, and cha
 </ol>
 <figure class="shot"><a href="../../assets/shots/login@2x.webp"><img src="../../assets/shots/login.webp" srcset="../../assets/shots/login.webp 1x, ../../assets/shots/login@2x.webp 2x" alt="The EiN sign-in page: the fields Username or e-mail and Password, the Sign in button, and Browse without signing in below it" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The sign-in page. Browse without signing in appears only when visitors may browse, which is off after an install</figcaption></figure>
 <p>You land on the home page, <strong>Welcome</strong>, which is empty until there is something in EiN. There is no setup wizard: <a href="first-steps.html">First steps</a> walks you from here to a family using it.</p>
-<p>EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</p>
+<p>EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read <a href="../admin/network.html">Ports, HTTPS and remote access</a>. When something else on the machine already uses 8080 or 2222, <code>setup.sh</code> gives EiN the next free port instead, says so (<code>Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)</code>), keeps it in <code>.env</code>, and prints the address with it.</p>
 <h2 id="change-the-admin-password-straight-away">Change the admin password straight away<a class="anchor" href="#change-the-admin-password-straight-away" aria-label="Link to this section"></a></h2>
 <p>Do this before anything else:</p>
 <ul>
@@ -485,6 +491,10 @@ user passwd admin</code></pre></div>
 <td>podman&#39;s own notice that <code>podman compose</code> runs <code>podman-compose</code>. It is not an error.</td>
 </tr>
 <tr>
+<td><code>setup.sh: EiN stopped before it answered; its log is above: podman compose logs ein</code></td>
+<td>EiN&#39;s container stopped, or restarted three times. The last lines of its log are printed above the message; they name what went wrong. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
+</tr>
+<tr>
 <td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
 <td>Look at what EiN is doing with <code>cd ~/ein &amp;&amp; podman compose logs ein</code>. A first start that downloads modules over a slow connection can take this long; <code>podman compose ps</code> shows whether it still runs.</td>
 </tr>
@@ -505,8 +515,8 @@ user passwd admin</code></pre></div>
 <td>Use the machine&#39;s IP address instead of its name, and open ports 8080 and 2222 in the machine&#39;s firewall if it has one. See <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</td>
 </tr>
 <tr>
-<td>EiN is not running after the machine restarts</td>
-<td>Docker starts the containers again with the machine. With rootless podman, nothing in the install does: start EiN with <code>cd ~/ein &amp;&amp; podman compose up -d</code>. <a href="../admin/install.html">Installing in detail</a> explains.</td>
+<td><code>EiN does not start again when the machine does until this has run:</code> at the end</td>
+<td><code>setup.sh</code> could not turn on what starts EiN at boot, such as lingering for your user. Run the commands listed below the line; until then, start EiN after a reboot with <code>cd ~/ein &amp;&amp; podman compose up -d</code>. <a href="../admin/install.html#start-ein-when-the-machine-boots">Installing in detail</a> explains.</td>
 </tr>
 <tr>
 <td>Uploads in the Archive get no thumbnails</td>

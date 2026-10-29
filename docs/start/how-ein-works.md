@@ -62,7 +62,7 @@ Two things work differently from a computer's files:
 - **What you may not read is not listed at all**: not in a folder, not in search, not on the map,
   not in `ls`. Two people can see the same album differently, and an album can look emptier to you
   than to its owner.
-- **You do not need the numbers.** **Share**, on an album, a person, a location or a device, sets the same
+- **You do not need the numbers.** **Share**, on an album, a picture, a person, a location or a device, sets the same
   permissions in words: who can see it, who can change it, and links that open it without an
   account.
 
@@ -149,7 +149,8 @@ With the Archive installed, uploading a photo sets off a chain:
 Work waits in queues and pools, which are nodes like everything else, so nothing is lost when EiN
 restarts, and a node that changes ten times while it waits is worked on once. When the media service is busy or
 down, its steps wait for it rather than fail. Work that fails anyway is tried again after an hour,
-six hours and a day, and then marked as needing a person.
+six hours and a day, and then marked as needing a person; a file that no decoder can open is not
+tried again.
 
 The **Dashboard**, an administrator's page, sums all this up in one word: **Healthy**,
 **Catching up**, **Stuck** or **Needs a person**. After a large upload it reads Catching up for a
@@ -212,7 +213,9 @@ database is the container engine's volume `ein_db`. The two belong together, as
 
 Without the media service, EiN still takes in, keeps and shares what you upload, but the files you add get
 no metadata, thumbnails, faces or transcripts: that work waits until the media service answers.
-Without a language model, everything except the chat works. [The media service](../admin/media-service.md)
+Without a language model, everything except the chat works, though the search box then reads what
+you type by its own rules alone, without picking out the people and places you name.
+[The media service](../admin/media-service.md)
 and [The language model](../admin/language-model.md) say more about each.
 
 ## Where to read on

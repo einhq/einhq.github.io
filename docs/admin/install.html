@@ -106,7 +106,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>Both run as your own user and need no root. Every option you give the installer after <code>bash -s --</code> is passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code> and <code>--llm</code> itself, to choose which checks to run.</p>
+<p>Both run as your own user and need no root. Every option you give the installer after <code>bash -s --</code> is passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code> and <code>--llm</code> itself, to choose which checks to run, and <code>--source</code>, to fetch ein/deploy from there.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code></pre></div>
 <p>The installer&#39;s code runs from a function called on its last line, so a download cut short runs nothing.</p>
@@ -140,12 +140,24 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 <td>Adds a module&#39;s name to <code>EIN_MODULES</code> in <code>.env</code>. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.</td>
 </tr>
 <tr>
+<td><code>--only &lt;service&gt;</code></td>
+<td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code> or <code>llm</code>: fetches its sources, builds it and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
+</tr>
+<tr>
+<td><code>--source &lt;address&gt;</code></td>
+<td>Fetches the sources from this organisation instead of <code>https://github.com/einhq</code>, such as <code>http://forge.example:3000/ein</code> on a Forgejo or a Gitea. Sets <code>EIN_SOURCE</code>. See <a href="#where-the-sources-come-from">Where the sources come from</a>.</td>
+</tr>
+<tr>
+<td><code>--db-dir &lt;folder&gt;</code></td>
+<td>Keeps the database in this folder, an absolute path, instead of the volume <code>ein_db</code> in the container engine&#39;s storage, such as on a faster disk. Sets <code>EIN_DB_DIR</code>. The folder must be empty or hold a database.</td>
+</tr>
+<tr>
 <td><code>-h</code>, <code>--help</code></td>
 <td>Prints the help and stops.</td>
 </tr>
 </tbody></table>
 </div>
-<p>An option is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
+<p>An option other than <code>--only</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
 <p><code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
 <p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
@@ -185,15 +197,22 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <td><code>docker</code> uses Docker even when podman is installed. Not remembered: give it on every run.</td>
 </tr>
 <tr>
-<td><code>EIN_GIT</code></td>
+<td><code>EIN_SOURCE_KEY</code></td>
 <td>both</td>
-<td><code>https://github.com/einhq</code></td>
-<td>Where <code>deploy</code>, <code>core</code>, <code>db</code>, <code>ems</code> and <code>llm</code> are cloned from. Written into <code>.env</code> the first time, and read from there after.</td>
+<td>unset</td>
+<td>The token that reads <code>--source</code>&#39;s repositories when they are private. Kept in <code>.env</code> with the source.</td>
+</tr>
+<tr>
+<td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
+<td><code>setup.sh</code>, the first time</td>
+<td><code>8080</code>, <code>2222</code></td>
+<td>The ports on the machine for the web interface and for SSH and SFTP. Read only when <code>.env</code> is written.</td>
 </tr>
 </tbody></table>
 </div>
 <p><code>EIN_DATA</code> is made into an absolute path when <code>.env</code> is written, so a relative folder is taken from where <code>setup.sh</code> runs, which is <code>~/ein</code>.</p>
-<p><code>EIN_GIT</code> names an organisation, not a repository: it must hold <code>deploy.git</code>, <code>core.git</code>, <code>db.git</code>, and <code>ems.git</code> and <code>llm.git</code> when you use those options. The modules do not come from there. EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it.</p>
+<h3 id="where-the-sources-come-from">Where the sources come from<a class="anchor" href="#where-the-sources-come-from" aria-label="Link to this section"></a></h3>
+<p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when you use those options, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
 <h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
 <p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install; the same goes for <code>--llm</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -225,9 +244,15 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 </tr>
 <tr>
 <td><code>compose</code></td>
-<td><code>podman compose version</code> or <code>docker compose version</code> runs</td>
+<td><code>podman compose version</code> or <code>docker compose version</code> runs; under podman, with podman-compose, or with docker-compose and podman&#39;s socket answering</td>
 <td></td>
-<td>it does not</td>
+<td>it does not, or docker-compose under podman finds no socket</td>
+</tr>
+<tr>
+<td><code>network</code></td>
+<td>podman&#39;s older network backend, CNI, with its <code>dnsname</code> plugin; the line appears only under CNI</td>
+<td></td>
+<td>CNI without <code>dnsname</code>: the containers cannot find each other by name</td>
 </tr>
 <tr>
 <td><code>git</code>, <code>curl</code>, <code>openssl</code></td>
@@ -281,7 +306,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <li><strong>Disk</strong> is measured where your files go, <code>EIN_DATA</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
 <li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you set <code>EIN_ENGINE=docker</code>, which only <code>setup.sh</code> reads.</li>
 </ul>
-<p>The images, the build&#39;s scratch files and the database live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
+<p>The images, the build&#39;s scratch files and the database (unless you gave <code>--db-dir</code>) live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
 <p>To run only the checks:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
 curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
@@ -331,7 +356,7 @@ EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assi
 </tr>
 <tr>
 <td>After the machine restarts</td>
-<td>nothing starts EiN; see <a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></td>
+<td><code>podman-restart.service</code> starts the containers, once <code>setup.sh</code> or you have turned it on; see <a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></td>
 <td>Docker starts the containers again with its daemon, unless you stopped them</td>
 </tr>
 <tr>
@@ -344,8 +369,8 @@ EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assi
 <p>All data folders are mounted with <code>z</code>, which labels them for sharing between containers under SELinux and is ignored where SELinux is not on.</p>
 <h3 id="keep-to-one-engine">Keep to one engine<a class="anchor" href="#keep-to-one-engine" aria-label="Link to this section"></a></h3>
 <p>Each engine has its own images, containers and volumes, and so its own database. Install with one and keep to it.</p>
-<p>The engine is not remembered between runs. On a machine with both installed, an EiN installed with <code>EIN_ENGINE=docker</code> and then updated with a plain <code>~/ein/setup.sh</code> is built again under podman, with podman&#39;s own empty database volume. While Docker&#39;s containers run, podman&#39;s cannot take ports 8080 and 2222 and fail to start; with Docker&#39;s stopped, an empty EiN starts with a new admin password, on your data folder.</p>
-<p>If that has happened, remove podman&#39;s containers and run <code>setup.sh</code> again with the engine you installed with:</p>
+<p>The engine is not remembered between runs. On a machine with both installed, an EiN installed with <code>EIN_ENGINE=docker</code> and then updated with a plain <code>~/ein/setup.sh</code> is built again under podman, with podman&#39;s own empty database volume. While Docker&#39;s containers hold ports 8080 and 2222, <code>setup.sh</code> moves podman&#39;s EiN to the next free ports and writes them into <code>.env</code>; with Docker&#39;s stopped, it takes 8080 and 2222. Either way an empty EiN starts with a new admin password, on your data folder.</p>
+<p>If that has happened, remove podman&#39;s containers, put <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> in <code>.env</code> back if <code>setup.sh</code> moved them, and run <code>setup.sh</code> again with the engine you installed with:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose down
 EIN_ENGINE=docker ./setup.sh</code></pre></div>
@@ -480,7 +505,7 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>Every service restarts by itself if it stops on its own (<code>restart: unless-stopped</code>). EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. <a href="../start/how-ein-works.html#what-runs-beside-ein">How EiN works</a> says what each part is for; <a href="media-service.html">The media service</a> and <a href="language-model.html">The language model</a> cover the two optional ones.</p>
+<p>Every service restarts by itself if it stops on its own: <code>compose.yaml</code> gives each <code>restart: unless-stopped</code>, and under podman <code>compose.override.yaml</code> makes it <code>always</code>, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. <a href="../start/how-ein-works.html#what-runs-beside-ein">How EiN works</a> says what each part is for; <a href="media-service.html">The media service</a> and <a href="language-model.html">The language model</a> cover the two optional ones.</p>
 <h3 id="the-files-in-ein">The files in <code>~/ein</code><a class="anchor" href="#the-files-in-ein" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -537,7 +562,7 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>Leave the files from ein/deploy as they are: an update runs <code>git pull --ff-only</code> on the folder and stops when a file you changed is in its way. What you want to change goes in <code>.env</code>, which git ignores.</p>
+<p>Leave the files from ein/deploy as they are: the installer updates the folder with <code>git pull --ff-only</code>, which stops when a file you changed is in its way. What you want to change goes in <code>.env</code>, which git ignores.</p>
 <h3 id="the-data-folder">The data folder<a class="anchor" href="#the-data-folder" aria-label="Link to this section"></a></h3>
 <p><code>setup.sh</code> makes these folders in <code>EIN_DATA</code> on every run. Both EiN and the media service mount the first four at the same paths, so a path EiN hands the media service is the path it opens.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -580,10 +605,11 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>The database is not in the data folder. It is the volume <code>ein_db</code> in the container engine&#39;s storage, which compose made, so that the database&#39;s own user owns it; a folder mounted from your home would not be under rootless podman. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
+<p>The database is not in the data folder. It is the volume <code>ein_db</code> in the container engine&#39;s storage, or the folder you gave <code>--db-dir</code>, which <code>setup.sh</code> gives to the database&#39;s own user before the database starts. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
 <h3 id="env"><code>.env</code><a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
 <p><code>setup.sh</code> writes <code>~/ein/.env</code> the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN and the media service get every line of it as their environment, and <code>setup.sh</code> keeps your options in it. A fresh one looks like this:</p>
-<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, as setup.sh writes it (the comments it writes are shortened here)</span>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, as setup.sh writes it (without the comments it writes)</span>
+<span class="hljs-attr">COMPOSE_PROJECT_NAME</span>=ein
 <span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">1</span>
@@ -599,8 +625,10 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 <span class="hljs-comment"># CFG_LLM_KEY=</span>
 <span class="hljs-comment"># CFG_LLM_PROVIDER=OpenAI</span>
 <span class="hljs-comment"># CFG_LLM_MODEL=</span>
-<span class="hljs-attr">EIN_GIT</span>=https://github.com/einhq</code></pre></div>
-<p>The options you gave come next: <code>setup.sh</code> sets <code>EIN_EMS</code>, <code>EIN_LLM</code> and <code>EIN_MODULES</code> after writing the file.</p>
+<span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
+<span class="hljs-attr">EIN_SOURCE_KEY</span>=
+EIN_DB_DIR=</code></pre></div>
+<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MODULES</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code> or <code>EIN_SSH_PORT</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -609,6 +637,10 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
+<td><code>COMPOSE_PROJECT_NAME</code></td>
+<td><code>ein</code>, the compose project&#39;s name, which names its containers, network and volumes</td>
+</tr>
+<tr>
 <td><code>EIN_EMS</code>, <code>EIN_LLM</code></td>
 <td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
 </tr>
@@ -642,33 +674,44 @@ EIN_ENGINE=docker ./setup.sh</code></pre></div>
 </tr>
 <tr>
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
-<td>the ports on the machine for the web interface and for SSH and SFTP</td>
+<td>the ports on the machine for the web interface and for SSH and SFTP; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>
 <td>a hosted language model instead of <code>--llm</code>; see <a href="language-model.html">The language model</a></td>
 </tr>
 <tr>
-<td><code>EIN_GIT</code></td>
-<td>where the sources are cloned from</td>
+<td><code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code></td>
+<td>where the sources are cloned from, and the token that reads them when they are private; <code>--source</code> sets them</td>
+</tr>
+<tr>
+<td><code>EIN_DB_DIR</code></td>
+<td>the database&#39;s folder; empty keeps it in the volume <code>ein_db</code>. <code>--db-dir</code> sets it</td>
 </tr>
 </tbody></table>
 </div>
 <p>The two passwords are kept nowhere else. Without them the database cannot be reached, so copy <code>.env</code> with every backup. <a href="../reference/config-files.html">Configuration files</a> has every file EiN reads.</p>
 <h3 id="composeoverrideyaml"><code>compose.override.yaml</code><a class="anchor" href="#composeoverrideyaml" aria-label="Link to this section"></a></h3>
-<p>Every <code>compose</code> command reads <code>compose.override.yaml</code> beside <code>compose.yaml</code> by itself, so a plain <code>podman compose up -d</code> starts the same services <code>setup.sh</code> does. <code>setup.sh</code> writes it from <code>.env</code> on every run; do not edit it, as the next run writes over it. With the media service, the model and a card it reads:</p>
+<p>Every <code>compose</code> command reads <code>compose.override.yaml</code> beside <code>compose.yaml</code> by itself, so a plain <code>podman compose up -d</code> starts the same services <code>setup.sh</code> does. <code>setup.sh</code> writes it from <code>.env</code> and the container engine on every run; do not edit it, as the next run writes over it. Under podman, with the media service, the model and a card, it reads:</p>
 <div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/compose.override.yaml</span>
-<span class="hljs-comment"># Written by setup.sh from the options in .env; edit those and run setup.sh again.</span>
+<span class="hljs-comment"># Written by setup.sh from the options in .env and the container engine; edit those and run</span>
+<span class="hljs-comment"># setup.sh again.</span>
 <span class="hljs-attr">services:</span>
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">ems:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">llm:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
-  <span class="hljs-attr">ein:</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span></code></pre></div>
+<p>Under Docker the <code>restart: always</code> lines are left out.</p>
 <p><a href="../reference/settings.html#cfg_llm_card"><code>CFG_LLM_CARD</code></a> tells EiN whether the model runs on the card (<code>card</code>) or the processor (<code>cpu</code>).</p>
 <h2 id="change-the-installation-afterwards">Change the installation afterwards<a class="anchor" href="#change-the-installation-afterwards" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -726,34 +769,18 @@ podman compose up -d             <span class="hljs-comment"># make the container
 </aside>
 <p>EiN is down while it restarts, and a restart takes longer when there is a module to install. <a href="services-logs.html">Services and logs</a> covers EiN&#39;s own logs and services, the ones inside the container, and <a href="monitoring.html">Health and the dashboard</a> what to watch.</p>
 <h3 id="start-ein-when-the-machine-boots">Start EiN when the machine boots<a class="anchor" href="#start-ein-when-the-machine-boots" aria-label="Link to this section"></a></h3>
-<p>Under Docker the containers come back with the Docker daemon, which starts with the machine on most systems, as long as you did not stop them yourself.</p>
-<p>Under rootless podman, nothing in the install starts EiN when the machine boots. podman&#39;s own <code>podman-restart.service</code> starts only containers whose restart policy is <code>always</code>, and EiN&#39;s are <code>unless-stopped</code>. One way is a systemd service of your user&#39;s that runs compose:</p>
-<ol>
-<li><p>Write the service:</p>
-<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/.config/systemd/user/ein.service</span>
-<span class="hljs-section">[Unit]</span>
-<span class="hljs-attr">Description</span>=EiN
-
-<span class="hljs-section">[Service]</span>
-<span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
-<span class="hljs-attr">RemainAfterExit</span>=<span class="hljs-literal">yes</span>
-<span class="hljs-attr">WorkingDirectory</span>=%h/ein
-<span class="hljs-attr">ExecStart</span>=/usr/bin/podman compose up -d
-<span class="hljs-attr">ExecStop</span>=/usr/bin/podman compose stop
-
-<span class="hljs-section">[Install]</span>
-<span class="hljs-attr">WantedBy</span>=default.target</code></pre></div>
-</li>
-<li><p>Turn it on, and let your user&#39;s services run without you being signed in:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
-systemctl --user daemon-reload
-systemctl --user <span class="hljs-built_in">enable</span> --now ein.service
-<span class="hljs-built_in">sudo</span> loginctl enable-linger <span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span></code></pre></div>
-</li>
-</ol>
-<p>After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
+<p>Under Docker the containers come back with the Docker daemon, which starts with the machine on most systems, as long as you did not stop them yourself. When the daemon is not set to start at boot, <code>setup.sh</code> says so and lists <code>sudo systemctl enable docker</code>.</p>
+<p>Under podman, <code>compose.override.yaml</code> gives every service <code>restart: always</code>, the policy podman&#39;s own <code>podman-restart.service</code> starts at boot. Under rootless podman that is a service of your user&#39;s, which runs at boot only when your user lingers, that is, when its services run without you being signed in. At the end of every run, <code>setup.sh</code> turns on both where your user may, and says so:</p>
+<div class="code"><pre tabindex="0"><code>Enabled podman-restart.service, which starts EiN's containers at boot
+Enabled lingering for anna, so podman-restart.service runs at boot without a login
+EiN starts again when the machine does.</code></pre></div>
+<p>What it may not do, it lists instead. Lingering often needs an administrator:</p>
+<div class="code"><pre tabindex="0"><code>EiN does not start again when the machine does until this has run:
+  sudo loginctl enable-linger anna
+Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman compose up -d</code></pre></div>
+<p>Run what it lists once. After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
 <h2 id="update-and-remove">Update and remove<a class="anchor" href="#update-and-remove" aria-label="Link to this section"></a></h2>
-<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: the newest sources of everything installed, built and started again, with <code>--force-recreate</code> so every container is made from the new images, and <code>--remove-orphans</code> so a service you left out stops. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
+<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: the newest sources of everything installed, built and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only ein</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
 <p>There is no uninstall script. <a href="data.html">Your data</a> says how to move EiN to another machine and how to remove it with its data.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p>The commands are written for podman; with Docker, write <code>docker compose</code>. <a href="../start/install.html#when-something-goes-differently">Install EiN</a> covers the messages of a first install, and <a href="troubleshooting.html">Troubleshooting</a> everything after.</p>
@@ -790,7 +817,19 @@ systemctl --user <span class="hljs-built_in">enable</span> --now ein.service
 </tr>
 <tr>
 <td><code>podman compose up</code> says a port is already in use</td>
-<td>Something else listens on 8080 or 2222, perhaps an EiN under the other engine (see <a href="#keep-to-one-engine">Keep to one engine</a>). Stop it, or choose other ports in <code>.env</code>.</td>
+<td>Something else listens on the port <code>.env</code> names, perhaps an EiN under the other engine (see <a href="#keep-to-one-engine">Keep to one engine</a>). Stop it, or choose other ports in <code>.env</code>. <code>setup.sh</code> moves EiN to the next free port by itself, but only while EiN is stopped.</td>
+</tr>
+<tr>
+<td><code>setup.sh: &#39;podman compose&#39; runs docker-compose here, which needs podman&#39;s socket: …</code></td>
+<td>Turn on podman&#39;s socket for your user with <code>systemctl --user enable --now podman.socket</code>, or install <code>podman-compose</code>, and run <code>setup.sh</code> again.</td>
+</tr>
+<tr>
+<td><code>setup.sh: podman&#39;s networks here give no names, which EiN needs to find its database: …</code></td>
+<td>podman uses its older network backend, CNI, without the <code>dnsname</code> plugin. Install the package the message names and run <code>setup.sh</code> again.</td>
+</tr>
+<tr>
+<td><code>setup.sh: the database of an earlier install is here, the volume ein_db, and its password was in the .env that is gone. …</code></td>
+<td><code>.env</code> is missing but the database is not. Put the old <code>.env</code> back, or, to start from nothing, remove the database with <code>podman volume rm ein_db</code>.</td>
 </tr>
 <tr>
 <td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
@@ -822,7 +861,7 @@ systemctl --user <span class="hljs-built_in">enable</span> --now ein.service
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/install.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-scripts-do-the-install">Two scripts do the install</a></li><li><a href="#the-options">The options</a></li><li><a href="#the-variables">The variables</a></li><li><a href="#what-the-checks-measure">What the checks measure</a></li><li><a href="#install-without-the-installer">Install without the installer</a></li><li><a href="#podman-or-docker">Podman or Docker</a></li><li class="nested"><a href="#keep-to-one-engine">Keep to one engine</a></li><li><a href="#what-runs-where">What runs where</a></li><li class="nested"><a href="#the-files-in-ein">The files in ~/ein</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li><a href="#change-the-installation-afterwards">Change the installation afterwards</a></li><li><a href="#run-ein-day-to-day">Run EiN day to day</a></li><li class="nested"><a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></li><li><a href="#update-and-remove">Update and remove</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-scripts-do-the-install">Two scripts do the install</a></li><li><a href="#the-options">The options</a></li><li><a href="#the-variables">The variables</a></li><li class="nested"><a href="#where-the-sources-come-from">Where the sources come from</a></li><li><a href="#what-the-checks-measure">What the checks measure</a></li><li><a href="#install-without-the-installer">Install without the installer</a></li><li><a href="#podman-or-docker">Podman or Docker</a></li><li class="nested"><a href="#keep-to-one-engine">Keep to one engine</a></li><li><a href="#what-runs-where">What runs where</a></li><li class="nested"><a href="#the-files-in-ein">The files in ~/ein</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li><a href="#change-the-installation-afterwards">Change the installation afterwards</a></li><li><a href="#run-ein-day-to-day">Run EiN day to day</a></li><li class="nested"><a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></li><li><a href="#update-and-remove">Update and remove</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

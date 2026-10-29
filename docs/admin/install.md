@@ -11,7 +11,7 @@ The install is two scripts, run one after the other:
 | `install.sh` | [einhq.eu/install.sh](https://einhq.eu/install.sh), from the [einhq.github.io](https://github.com/einhq/einhq.github.io/blob/main/install.sh) repository | Checks the machine. When nothing is missing, clones [ein/deploy](https://github.com/einhq/deploy) into `~/ein`, or updates it there with `git pull --ff-only`, and runs `~/ein/setup.sh` with your options. |
 | `setup.sh`   | `~/ein/setup.sh`, from ein/deploy                                                                                                                        | Writes `~/ein/.env` the first time, fetches the sources into `~/ein/src`, builds the images, starts them with compose and waits for EiN to answer. Run again, it updates.                                   |
 
-Both run as your own user and need no root. Every option you give the installer after `bash -s --` is passed on to `setup.sh` unchanged; the installer reads only `--ems` and `--llm` itself, to choose which checks to run.
+Both run as your own user and need no root. Every option you give the installer after `bash -s --` is passed on to `setup.sh` unchanged; the installer reads only `--ems` and `--llm` itself, to choose which checks to run, and `--source`, to fetch ein/deploy from there.
 
 ```bash
 # on the machine that will run EiN, as your own user
@@ -24,16 +24,19 @@ The installer's code runs from a function called on its last line, so a download
 
 These are `setup.sh`'s options, and so the installer's too. `~/ein/setup.sh --help` lists them.
 
-| Option            | What it does                                                                                                                                                                                                      |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--ems`           | Adds the media service: every media tool and model, in an image of about 30 GB. Sets `EIN_EMS=1` in `.env`.                                                                                                       |
-| `--no-ems`        | Takes the media service out again: its container stops and is removed. Sets `EIN_EMS=0`. Its data stays.                                                                                                          |
-| `--llm`           | Adds the assistant's language model, Qwen3.5-4B in llama.cpp. Sets `EIN_LLM=1`.                                                                                                                                   |
-| `--no-llm`        | Takes the language model out again. Sets `EIN_LLM=0`. The downloaded model stays in the data folder.                                                                                                              |
-| `--module <name>` | Adds a module's name to `EIN_MODULES` in `.env`. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter. |
-| `-h`, `--help`    | Prints the help and stops.                                                                                                                                                                                        |
+| Option               | What it does                                                                                                                                                                                                                               |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--ems`              | Adds the media service: every media tool and model, in an image of about 30 GB. Sets `EIN_EMS=1` in `.env`.                                                                                                                                |
+| `--no-ems`           | Takes the media service out again: its container stops and is removed. Sets `EIN_EMS=0`. Its data stays.                                                                                                                                   |
+| `--llm`              | Adds the assistant's language model, Qwen3.5-4B in llama.cpp. Sets `EIN_LLM=1`.                                                                                                                                                            |
+| `--no-llm`           | Takes the language model out again. Sets `EIN_LLM=0`. The downloaded model stays in the data folder.                                                                                                                                       |
+| `--module <name>`    | Adds a module's name to `EIN_MODULES` in `.env`. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.                          |
+| `--only <service>`   | Updates one service, `ein`, `ems`, `db` or `llm`: fetches its sources, builds it and restarts it alone, leaving the others running (`db` restarts EiN with it). It updates an installation, so it needs `.env`, and takes no other option. |
+| `--source <address>` | Fetches the sources from this organisation instead of `https://github.com/einhq`, such as `http://forge.example:3000/ein` on a Forgejo or a Gitea. Sets `EIN_SOURCE`. See [Where the sources come from](#where-the-sources-come-from).     |
+| `--db-dir <folder>`  | Keeps the database in this folder, an absolute path, instead of the volume `ein_db` in the container engine's storage, such as on a faster disk. Sets `EIN_DB_DIR`. The folder must be empty or hold a database.                           |
+| `-h`, `--help`       | Prints the help and stops.                                                                                                                                                                                                                 |
 
-An option is kept in `.env` once given, so a run without it keeps it: `~/ein/setup.sh` alone runs with the options you chose before. Anything else stops `setup.sh` with `setup.sh: unknown option <option> (--help lists them)`.
+An option other than `--only` is kept in `.env` once given, so a run without it keeps it: `~/ein/setup.sh` alone runs with the options you chose before. Anything else stops `setup.sh` with `setup.sh: unknown option <option> (--help lists them)`.
 
 `--module` only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from `EIN_MODULES` in `~/ein/.env`. [Modules](modules.md) explains installing, updating and removing modules, which EiN does itself, not `setup.sh`.
 
@@ -46,35 +49,39 @@ Variables go in front of the command they are for. For the installer that is in 
 curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- --ems
 ```
 
-| Variable     | Read by              | Default                            | What it does                                                                                                                                                                              |
-| ------------ | -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EIN_HOME`   | `install.sh`         | `~/ein`                            | The folder EiN is installed in. Later, run `setup.sh` from there.                                                                                                                         |
-| `EIN_DATA`   | both, the first time | `~/ein/data`                       | The folder for your files: originals, renditions, scratch space, the language model and the installed modules. Read only when `.env` is written; later runs keep the folder `.env` names. |
-| `EIN_CHECK`  | `install.sh`         | unset                              | `1` runs the checks for the options given and stops, installing nothing.                                                                                                                  |
-| `EIN_ENGINE` | `setup.sh`           | podman when installed, else Docker | `docker` uses Docker even when podman is installed. Not remembered: give it on every run.                                                                                                 |
-| `EIN_GIT`    | both                 | `https://github.com/einhq`         | Where `deploy`, `core`, `db`, `ems` and `llm` are cloned from. Written into `.env` the first time, and read from there after.                                                             |
+| Variable                        | Read by                    | Default                            | What it does                                                                                                                                                                              |
+| ------------------------------- | -------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EIN_HOME`                      | `install.sh`               | `~/ein`                            | The folder EiN is installed in. Later, run `setup.sh` from there.                                                                                                                         |
+| `EIN_DATA`                      | both, the first time       | `~/ein/data`                       | The folder for your files: originals, renditions, scratch space, the language model and the installed modules. Read only when `.env` is written; later runs keep the folder `.env` names. |
+| `EIN_CHECK`                     | `install.sh`               | unset                              | `1` runs the checks for the options given and stops, installing nothing.                                                                                                                  |
+| `EIN_ENGINE`                    | `setup.sh`                 | podman when installed, else Docker | `docker` uses Docker even when podman is installed. Not remembered: give it on every run.                                                                                                 |
+| `EIN_SOURCE_KEY`                | both                       | unset                              | The token that reads `--source`'s repositories when they are private. Kept in `.env` with the source.                                                                                     |
+| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | `setup.sh`, the first time | `8080`, `2222`                     | The ports on the machine for the web interface and for SSH and SFTP. Read only when `.env` is written.                                                                                    |
 
 `EIN_DATA` is made into an absolute path when `.env` is written, so a relative folder is taken from where `setup.sh` runs, which is `~/ein`.
 
-`EIN_GIT` names an organisation, not a repository: it must hold `deploy.git`, `core.git`, `db.git`, and `ems.git` and `llm.git` when you use those options. The modules do not come from there. EiN looks for them in the places the setting [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names, `https://github.com/einhq` unless you change it.
+### Where the sources come from
+
+`--source` names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold `deploy`, `core`, `db`, and `ems` and `llm` when you use those options, under those names. The installer fetches ein/deploy from there, and `setup.sh` keeps the address in `.env` as `EIN_SOURCE`, so later runs fetch from there too. On GitHub the modules do not come from there: EiN looks for them in the places the setting [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names, `https://github.com/einhq` unless you change it. On a Forgejo or a Gitea, `setup.sh` sets `CFG_MODULE_SOURCES` in `.env` to the same organisation, and `CFG_MODULE_SOURCES_KEY` to its token, so EiN installs its modules from there too.
 
 ## What the checks measure
 
 The installer checks the machine before it touches anything. Each check prints one line: `ok`, `low` (the install goes on) or `missing` (nothing is installed). The thresholds depend on whether `--ems` is among the options, or `EIN_EMS=1` is already in `~/ein/.env` from an earlier install; the same goes for `--llm`.
 
-| Check                    | `ok`                                                                                | `low`                                                                    | `missing`                                     |
-| ------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- |
-| `system`                 | Linux on x86-64                                                                     |                                                                          | anything else; the installer stops at once    |
-| `podman`                 | podman installed and rootless                                                       | podman run as root, or `podman info` fails                               | neither podman nor Docker installed           |
-| `docker`                 | Docker installed, when podman is not                                                |                                                                          |                                               |
-| `compose`                | `podman compose version` or `docker compose version` runs                           |                                                                          | it does not                                   |
-| `git`, `curl`, `openssl` | installed                                                                           |                                                                          | not installed                                 |
-| `processor`              | 2 physical cores; with `--ems`, 6                                                   | with `--ems`, 4 or 5                                                     | fewer than 2; with `--ems`, fewer than 4      |
-| `memory`                 | 4 GB; with `--ems`, 30 GB                                                           | with `--ems`, 15 to 29 GB                                                | less than 4 GB; with `--ems`, less than 15 GB |
-| `disk`                   | 10 GB free; with `--ems`, 100 GB                                                    |                                                                          | less                                          |
-| `graphics`               | an NVIDIA card with driver 610 or newer                                             | no NVIDIA card, `nvidia-smi` cannot reach the driver, or an older driver |                                               |
-| `card memory`            | 15000 MB or more; the line is left out then                                         | less                                                                     |                                               |
-| `container GPU`          | nvidia-container-toolkit 1.18 or newer, with its spec in `/var/run/cdi/nvidia.yaml` | no toolkit, an older one, no spec, or a spec made by hand in `/etc/cdi`  |                                               |
+| Check                    | `ok`                                                                                                                                               | `low`                                                                    | `missing`                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `system`                 | Linux on x86-64                                                                                                                                    |                                                                          | anything else; the installer stops at once                           |
+| `podman`                 | podman installed and rootless                                                                                                                      | podman run as root, or `podman info` fails                               | neither podman nor Docker installed                                  |
+| `docker`                 | Docker installed, when podman is not                                                                                                               |                                                                          |                                                                      |
+| `compose`                | `podman compose version` or `docker compose version` runs; under podman, with podman-compose, or with docker-compose and podman's socket answering |                                                                          | it does not, or docker-compose under podman finds no socket          |
+| `network`                | podman's older network backend, CNI, with its `dnsname` plugin; the line appears only under CNI                                                    |                                                                          | CNI without `dnsname`: the containers cannot find each other by name |
+| `git`, `curl`, `openssl` | installed                                                                                                                                          |                                                                          | not installed                                                        |
+| `processor`              | 2 physical cores; with `--ems`, 6                                                                                                                  | with `--ems`, 4 or 5                                                     | fewer than 2; with `--ems`, fewer than 4                             |
+| `memory`                 | 4 GB; with `--ems`, 30 GB                                                                                                                          | with `--ems`, 15 to 29 GB                                                | less than 4 GB; with `--ems`, less than 15 GB                        |
+| `disk`                   | 10 GB free; with `--ems`, 100 GB                                                                                                                   |                                                                          | less                                                                 |
+| `graphics`               | an NVIDIA card with driver 610 or newer                                                                                                            | no NVIDIA card, `nvidia-smi` cannot reach the driver, or an older driver |                                                                      |
+| `card memory`            | 15000 MB or more; the line is left out then                                                                                                        | less                                                                     |                                                                      |
+| `container GPU`          | nvidia-container-toolkit 1.18 or newer, with its spec in `/var/run/cdi/nvidia.yaml`                                                                | no toolkit, an older one, no spec, or a spec made by hand in `/etc/cdi`  |                                                                      |
 
 The last three appear only with `--ems` or `--llm`, and none of them can stop the install: without a usable card the media service and the model run on the processor. With several cards, the line names the one with the most memory. [The graphics card](gpu.md) explains what each `low` line asks of you.
 
@@ -85,7 +92,7 @@ A few details of how the checks count:
 - **Disk** is measured where your files go, `EIN_DATA`. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: `(not made yet; measured on /home/anna)`.
 - **The container engine** is checked podman first. With both installed, the report shows podman's lines even when you set `EIN_ENGINE=docker`, which only `setup.sh` reads.
 
-The images, the build's scratch files and the database live in the container engine's own storage, not in `EIN_DATA`. For rootless podman that is usually `~/.local/share/containers`, for Docker `/var/lib/docker`. When that is another disk than your data folder, it needs room too: the disk check does not measure it.
+The images, the build's scratch files and the database (unless you gave `--db-dir`) live in the container engine's own storage, not in `EIN_DATA`. For rootless podman that is usually `~/.local/share/containers`, for Docker `/var/lib/docker`. When that is another disk than your data folder, it needs room too: the disk check does not measure it.
 
 To run only the checks:
 
@@ -120,14 +127,14 @@ EiN runs under either. `setup.sh` takes podman when the `podman` command exists,
 
 The compose files are plain Compose Spec, so both read them alike. What differs:
 
-|                                        | Rootless podman                                                                                                | Docker                                                                                                        |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Who runs the containers                | your user                                                                                                      | the Docker daemon; your user needs access to it, usually by being in the `docker` group, which nothing checks |
-| Who owns what EiN writes in `EIN_DATA` | your user                                                                                                      | root, unless Docker itself runs rootless                                                                      |
-| Where images and the database are      | `~/.local/share/containers`, usually                                                                           | `/var/lib/docker`, usually                                                                                    |
-| The graphics card                      | through the CDI spec, in every version; podman 4.9.3 needs a fix first, see [The graphics card](gpu.md)        | through the CDI spec, from Docker Engine 28.2                                                                 |
-| After the machine restarts             | nothing starts EiN; see [Start EiN when the machine boots](#start-ein-when-the-machine-boots)                  | Docker starts the containers again with its daemon, unless you stopped them                                   |
-| The build's scratch files              | `setup.sh` puts them in a `tmp` folder in podman's storage, as `/tmp` is often too small for the media service | in Docker's own storage                                                                                       |
+|                                        | Rootless podman                                                                                                                                                     | Docker                                                                                                        |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Who runs the containers                | your user                                                                                                                                                           | the Docker daemon; your user needs access to it, usually by being in the `docker` group, which nothing checks |
+| Who owns what EiN writes in `EIN_DATA` | your user                                                                                                                                                           | root, unless Docker itself runs rootless                                                                      |
+| Where images and the database are      | `~/.local/share/containers`, usually                                                                                                                                | `/var/lib/docker`, usually                                                                                    |
+| The graphics card                      | through the CDI spec, in every version; podman 4.9.3 needs a fix first, see [The graphics card](gpu.md)                                                             | through the CDI spec, from Docker Engine 28.2                                                                 |
+| After the machine restarts             | `podman-restart.service` starts the containers, once `setup.sh` or you have turned it on; see [Start EiN when the machine boots](#start-ein-when-the-machine-boots) | Docker starts the containers again with its daemon, unless you stopped them                                   |
+| The build's scratch files              | `setup.sh` puts them in a `tmp` folder in podman's storage, as `/tmp` is often too small for the media service                                                      | in Docker's own storage                                                                                       |
 
 All data folders are mounted with `z`, which labels them for sharing between containers under SELinux and is ignored where SELinux is not on.
 
@@ -135,9 +142,9 @@ All data folders are mounted with `z`, which labels them for sharing between con
 
 Each engine has its own images, containers and volumes, and so its own database. Install with one and keep to it.
 
-The engine is not remembered between runs. On a machine with both installed, an EiN installed with `EIN_ENGINE=docker` and then updated with a plain `~/ein/setup.sh` is built again under podman, with podman's own empty database volume. While Docker's containers run, podman's cannot take ports 8080 and 2222 and fail to start; with Docker's stopped, an empty EiN starts with a new admin password, on your data folder.
+The engine is not remembered between runs. On a machine with both installed, an EiN installed with `EIN_ENGINE=docker` and then updated with a plain `~/ein/setup.sh` is built again under podman, with podman's own empty database volume. While Docker's containers hold ports 8080 and 2222, `setup.sh` moves podman's EiN to the next free ports and writes them into `.env`; with Docker's stopped, it takes 8080 and 2222. Either way an empty EiN starts with a new admin password, on your data folder.
 
-If that has happened, remove podman's containers and run `setup.sh` again with the engine you installed with:
+If that has happened, remove podman's containers, put `EIN_HTTP_PORT` and `EIN_SSH_PORT` in `.env` back if `setup.sh` moved them, and run `setup.sh` again with the engine you installed with:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
@@ -160,7 +167,7 @@ compose runs EiN as the project `ein`, from the files in `~/ein`. Each service i
 | `ems`   | `localhost/ein-ems`, built from the ems sources                            | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
 | `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                   | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
 
-Every service restarts by itself if it stops on its own (`restart: unless-stopped`). EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](media-service.md) and [The language model](language-model.md) cover the two optional ones.
+Every service restarts by itself if it stops on its own: `compose.yaml` gives each `restart: unless-stopped`, and under podman `compose.override.yaml` makes it `always`, the policy podman starts again at boot. EiN starts once the database answers a query, and waits up to 60 seconds to stop cleanly, as does the media service. [How EiN works](../start/how-ein-works.md#what-runs-beside-ein) says what each part is for; [The media service](media-service.md) and [The language model](language-model.md) cover the two optional ones.
 
 ### The files in `~/ein`
 
@@ -176,7 +183,7 @@ Every service restarts by itself if it stops on its own (`restart: unless-stoppe
 | `src/`                  | the sources that are built: `core`, `db`, and `ems` and `llm` with their options | made by `setup.sh` |
 | `data/`                 | the data folder, when `EIN_DATA` was left at its default                         | made by `setup.sh` |
 
-Leave the files from ein/deploy as they are: an update runs `git pull --ff-only` on the folder and stops when a file you changed is in its way. What you want to change goes in `.env`, which git ignores.
+Leave the files from ein/deploy as they are: the installer updates the folder with `git pull --ff-only`, which stops when a file you changed is in its way. What you want to change goes in `.env`, which git ignores.
 
 ### The data folder
 
@@ -191,14 +198,15 @@ Leave the files from ein/deploy as they are: an update runs `git pull --ff-only`
 | `llm`            | `/models` in the language model           | the model, downloaded at its first start                                            |
 | `modules`        | `/modules-installed` in EiN               | the installed modules, so they stay when EiN is updated or its container made again |
 
-The database is not in the data folder. It is the volume `ein_db` in the container engine's storage, which compose made, so that the database's own user owns it; a folder mounted from your home would not be under rootless podman. [Your data](data.md) explains what to back up and why the database and the data folder belong together.
+The database is not in the data folder. It is the volume `ein_db` in the container engine's storage, or the folder you gave `--db-dir`, which `setup.sh` gives to the database's own user before the database starts. [Your data](data.md) explains what to back up and why the database and the data folder belong together.
 
 ### `.env`
 
 `setup.sh` writes `~/ein/.env` the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN and the media service get every line of it as their environment, and `setup.sh` keeps your options in it. A fresh one looks like this:
 
 ```ini
-# ~/ein/.env, as setup.sh writes it (the comments it writes are shortened here)
+# ~/ein/.env, as setup.sh writes it (without the comments it writes)
+COMPOSE_PROJECT_NAME=ein
 EIN_EMS=0
 EIN_LLM=0
 EIN_GPU=1
@@ -214,13 +222,16 @@ EIN_SSH_PORT=2222
 # CFG_LLM_KEY=
 # CFG_LLM_PROVIDER=OpenAI
 # CFG_LLM_MODEL=
-EIN_GIT=https://github.com/einhq
+EIN_SOURCE=https://github.com/einhq
+EIN_SOURCE_KEY=
+EIN_DB_DIR=
 ```
 
-The options you gave come next: `setup.sh` sets `EIN_EMS`, `EIN_LLM` and `EIN_MODULES` after writing the file.
+`setup.sh` then sets the options you gave in their own lines: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`. With a Forgejo or a Gitea as the source it adds `CFG_MODULE_SOURCES`, and `CFG_MODULE_SOURCES_KEY` with a token. When a port is taken, it changes `EIN_HTTP_PORT` or `EIN_SSH_PORT`.
 
 | Line                            | What it is                                                                                                                                                                                                |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `COMPOSE_PROJECT_NAME`          | `ein`, the compose project's name, which names its containers, network and volumes                                                                                                                        |
 | `EIN_EMS`, `EIN_LLM`            | `1` when the media service or the language model is installed; `--ems`, `--no-ems`, `--llm` and `--no-llm` set them                                                                                       |
 | `EIN_GPU`                       | `1` when the first run found an NVIDIA card that `nvidia-smi` reaches, with a CDI spec in `/var/run/cdi/nvidia.yaml` or `/etc/cdi`. Set only then; see [The graphics card](gpu.md) for a card added later |
 | `EIN_MODULES`                   | the modules EiN installs at its start when they are missing, separated by spaces                                                                                                                          |
@@ -229,30 +240,39 @@ The options you gave come next: `setup.sh` sets `EIN_EMS`, `EIN_LLM` and `EIN_MO
 | `EMS_KEY`                       | the key EiN and the media service share, random, made here                                                                                                                                                |
 | `TZ`                            | the machine's time zone, from `timedatectl`, `/etc/timezone` or `UTC`                                                                                                                                     |
 | `EIN_BIND`                      | the address the ports listen on: `0.0.0.0` for every address of the machine, `127.0.0.1` for the machine alone                                                                                            |
-| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the web interface and for SSH and SFTP                                                                                                                                       |
+| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the web interface and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                          |
 | `CFG_LLM_…`                     | a hosted language model instead of `--llm`; see [The language model](language-model.md)                                                                                                                   |
-| `EIN_GIT`                       | where the sources are cloned from                                                                                                                                                                         |
+| `EIN_SOURCE`, `EIN_SOURCE_KEY`  | where the sources are cloned from, and the token that reads them when they are private; `--source` sets them                                                                                              |
+| `EIN_DB_DIR`                    | the database's folder; empty keeps it in the volume `ein_db`. `--db-dir` sets it                                                                                                                          |
 
 The two passwords are kept nowhere else. Without them the database cannot be reached, so copy `.env` with every backup. [Configuration files](../reference/config-files.md) has every file EiN reads.
 
 ### `compose.override.yaml`
 
-Every `compose` command reads `compose.override.yaml` beside `compose.yaml` by itself, so a plain `podman compose up -d` starts the same services `setup.sh` does. `setup.sh` writes it from `.env` on every run; do not edit it, as the next run writes over it. With the media service, the model and a card it reads:
+Every `compose` command reads `compose.override.yaml` beside `compose.yaml` by itself, so a plain `podman compose up -d` starts the same services `setup.sh` does. `setup.sh` writes it from `.env` and the container engine on every run; do not edit it, as the next run writes over it. Under podman, with the media service, the model and a card, it reads:
 
 ```yaml
 # ~/ein/compose.override.yaml
-# Written by setup.sh from the options in .env; edit those and run setup.sh again.
+# Written by setup.sh from the options in .env and the container engine; edit those and run
+# setup.sh again.
 services:
-  ems:
-    extends: { file: compose.ems.yaml, service: ems }
-    devices: [nvidia.com/gpu=all]
-  llm:
-    extends: { file: compose.llm.yaml, service: llm }
-    devices: [nvidia.com/gpu=all]
+  db:
+    restart: always
   ein:
     environment:
       CFG_LLM_CARD: card
+    restart: always
+  ems:
+    extends: { file: compose.ems.yaml, service: ems }
+    devices: [nvidia.com/gpu=all]
+    restart: always
+  llm:
+    extends: { file: compose.llm.yaml, service: llm }
+    devices: [nvidia.com/gpu=all]
+    restart: always
 ```
+
+Under Docker the `restart: always` lines are left out.
 
 [`CFG_LLM_CARD`](../reference/settings.md#cfg_llm_card) tells EiN whether the model runs on the card (`card`) or the processor (`cpu`).
 
@@ -296,42 +316,29 @@ EiN is down while it restarts, and a restart takes longer when there is a module
 
 ### Start EiN when the machine boots
 
-Under Docker the containers come back with the Docker daemon, which starts with the machine on most systems, as long as you did not stop them yourself.
+Under Docker the containers come back with the Docker daemon, which starts with the machine on most systems, as long as you did not stop them yourself. When the daemon is not set to start at boot, `setup.sh` says so and lists `sudo systemctl enable docker`.
 
-Under rootless podman, nothing in the install starts EiN when the machine boots. podman's own `podman-restart.service` starts only containers whose restart policy is `always`, and EiN's are `unless-stopped`. One way is a systemd service of your user's that runs compose:
+Under podman, `compose.override.yaml` gives every service `restart: always`, the policy podman's own `podman-restart.service` starts at boot. Under rootless podman that is a service of your user's, which runs at boot only when your user lingers, that is, when its services run without you being signed in. At the end of every run, `setup.sh` turns on both where your user may, and says so:
 
-1. Write the service:
+```text
+Enabled podman-restart.service, which starts EiN's containers at boot
+Enabled lingering for anna, so podman-restart.service runs at boot without a login
+EiN starts again when the machine does.
+```
 
-   ```ini
-   # ~/.config/systemd/user/ein.service
-   [Unit]
-   Description=EiN
+What it may not do, it lists instead. Lingering often needs an administrator:
 
-   [Service]
-   Type=oneshot
-   RemainAfterExit=yes
-   WorkingDirectory=%h/ein
-   ExecStart=/usr/bin/podman compose up -d
-   ExecStop=/usr/bin/podman compose stop
+```text
+EiN does not start again when the machine does until this has run:
+  sudo loginctl enable-linger anna
+Until then, start it after a reboot with: cd /home/anna/ein && podman compose up -d
+```
 
-   [Install]
-   WantedBy=default.target
-   ```
-
-2. Turn it on, and let your user's services run without you being signed in:
-
-   ```bash
-   # on the machine EiN runs on, as your own user
-   systemctl --user daemon-reload
-   systemctl --user enable --now ein.service
-   sudo loginctl enable-linger "$USER"
-   ```
-
-After the next restart of the machine, `podman compose ps` in `~/ein` shows the containers up.
+Run what it lists once. After the next restart of the machine, `podman compose ps` in `~/ein` shows the containers up.
 
 ## Update and remove
 
-Running the installer or `~/ein/setup.sh` again is the update: the newest sources of everything installed, built and started again, with `--force-recreate` so every container is made from the new images, and `--remove-orphans` so a service you left out stops. [Updating](updating.md) explains what it touches and what it keeps.
+Running the installer or `~/ein/setup.sh` again is the update: the newest sources of everything installed, built and started again, every container made again from the new images, and a service you left out stopped and removed. `~/ein/setup.sh --only ein` (or `ems`, `db`, `llm`) updates one service and leaves the others running. [Updating](updating.md) explains what it touches and what it keeps.
 
 There is no uninstall script. [Your data](data.md) says how to move EiN to another machine and how to remove it with its data.
 
@@ -339,18 +346,21 @@ There is no uninstall script. [Your data](data.md) says how to move EiN to anoth
 
 The commands are written for podman; with Docker, write `docker compose`. [Install EiN](../start/install.md#when-something-goes-differently) covers the messages of a first install, and [Troubleshooting](troubleshooting.md) everything after.
 
-| What you see                                                                                    | What to do                                                                                                                                                                                                                              |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fatal: destination path '/home/anna/ein' already exists and is not an empty directory.`        | `~/ein` exists but is not a clone of ein/deploy. Move it away, or install elsewhere with `EIN_HOME`.                                                                                                                                    |
-| `git pull` stops with a message about local changes, and nothing is installed                   | A file from ein/deploy in `~/ein` was changed. See what with `git -C ~/ein status`, put back the original with `git -C ~/ein checkout -- <file>`, and move the change into `.env`.                                                      |
-| `setup.sh: neither podman nor Docker is installed`                                              | Install one, with its compose.                                                                                                                                                                                                          |
-| `setup.sh: --module takes a module's name, such as archive: <name>`                             | A module is given by its name, such as `archive`, in lower case. A repository address goes to `mod install` in EiN's terminal instead.                                                                                                  |
-| `setup.sh: --module needs a name, such as archive`                                              | `--module` was the last word of the command. Give the name after it.                                                                                                                                                                    |
-| The build stops with no space left on the device                                                | The container engine's storage is full, not necessarily your data folder. `podman system df` shows what takes the room there.                                                                                                           |
-| `podman compose up` says a port is already in use                                               | Something else listens on 8080 or 2222, perhaps an EiN under the other engine (see [Keep to one engine](#keep-to-one-engine)). Stop it, or choose other ports in `.env`.                                                                |
-| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein` | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it.                                                                                                                             |
-| EiN is up, but a new `CFG_` line in `.env` has no effect                                        | Run `podman compose up -d --force-recreate` to make EiN's container again with it, and check that `compose.yaml` does not set the same variable itself (see [Change the installation afterwards](#change-the-installation-afterwards)). |
-| After an update, a module is still the old version                                              | `setup.sh` does not update modules. Use **Update** in **Settings → Modules**; see [Modules](modules.md).                                                                                                                                |
+| What you see                                                                                                                | What to do                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fatal: destination path '/home/anna/ein' already exists and is not an empty directory.`                                    | `~/ein` exists but is not a clone of ein/deploy. Move it away, or install elsewhere with `EIN_HOME`.                                                                                                                                                                   |
+| `git pull` stops with a message about local changes, and nothing is installed                                               | A file from ein/deploy in `~/ein` was changed. See what with `git -C ~/ein status`, put back the original with `git -C ~/ein checkout -- <file>`, and move the change into `.env`.                                                                                     |
+| `setup.sh: neither podman nor Docker is installed`                                                                          | Install one, with its compose.                                                                                                                                                                                                                                         |
+| `setup.sh: --module takes a module's name, such as archive: <name>`                                                         | A module is given by its name, such as `archive`, in lower case. A repository address goes to `mod install` in EiN's terminal instead.                                                                                                                                 |
+| `setup.sh: --module needs a name, such as archive`                                                                          | `--module` was the last word of the command. Give the name after it.                                                                                                                                                                                                   |
+| The build stops with no space left on the device                                                                            | The container engine's storage is full, not necessarily your data folder. `podman system df` shows what takes the room there.                                                                                                                                          |
+| `podman compose up` says a port is already in use                                                                           | Something else listens on the port `.env` names, perhaps an EiN under the other engine (see [Keep to one engine](#keep-to-one-engine)). Stop it, or choose other ports in `.env`. `setup.sh` moves EiN to the next free port by itself, but only while EiN is stopped. |
+| `setup.sh: 'podman compose' runs docker-compose here, which needs podman's socket: …`                                       | Turn on podman's socket for your user with `systemctl --user enable --now podman.socket`, or install `podman-compose`, and run `setup.sh` again.                                                                                                                       |
+| `setup.sh: podman's networks here give no names, which EiN needs to find its database: …`                                   | podman uses its older network backend, CNI, without the `dnsname` plugin. Install the package the message names and run `setup.sh` again.                                                                                                                              |
+| `setup.sh: the database of an earlier install is here, the volume ein_db, and its password was in the .env that is gone. …` | `.env` is missing but the database is not. Put the old `.env` back, or, to start from nothing, remove the database with `podman volume rm ein_db`.                                                                                                                     |
+| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                             | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it.                                                                                                                                                            |
+| EiN is up, but a new `CFG_` line in `.env` has no effect                                                                    | Run `podman compose up -d --force-recreate` to make EiN's container again with it, and check that `compose.yaml` does not set the same variable itself (see [Change the installation afterwards](#change-the-installation-afterwards)).                                |
+| After an update, a module is still the old version                                                                          | `setup.sh` does not update modules. Use **Update** in **Settings → Modules**; see [Modules](modules.md).                                                                                                                                                               |
 
 ## Related pages
 

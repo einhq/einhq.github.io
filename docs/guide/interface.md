@@ -101,7 +101,7 @@ From left to right:
 | The EiN mark and name                   | Go to **Home**. On a phone the mark opens and closes the menu instead.                                                                                                                                                                           |
 | The search box, **Search for anything** | Finds pages, albums, people and places as you type; <kbd>Enter</kbd> searches everything. <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) puts the cursor in it from anywhere. [Search and the finder](search.md) explains it. |
 | **Random album** (two crossing arrows)  | Opens an album picked at random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same. Added by the archive.                                                                                                                                                |
-| **Disconnected** (with a red dot)       | Shown only while the connection to EiN is lost. EiN tries again every 2 seconds by itself.                                                                                                                                                       |
+| **Disconnected** (with a red dot)       | Shown only while the connection to EiN is lost, and not on a phone. EiN tries again by itself every second or two.                                                                                                                               |
 | **Uploads**                             | Appears once you upload something. While files are going up it is a ring, with "Uploading N of M" in its tooltip; choose it for the files, **Cancel**, **Retry failed** and **Clear**. See [Getting your photos in](importing.md).               |
 | **Chat** (a speech bubble)              | Opens the chat in the side drawer; choose it again to close the drawer. Added by the assistant; see [Chatting with the assistant](assistant.md).                                                                                                 |
 | **Create** (a plus)                     | The **Create New** menu, below. Signed in only.                                                                                                                                                                                                  |
@@ -181,24 +181,24 @@ command that does the same in the terminal.
 
 The sidebar lists the pages, in four sections. The first has no heading.
 
-| Section | Entry             | Opens                                                                                     | Shown to       | Added by  |
-| ------- | ----------------- | ----------------------------------------------------------------------------------------- | -------------- | --------- |
-|         | **Home**          | On this day, News and Events: [Home, memories and statistics](home.md)                    | everyone       | EiN       |
-|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](assistant.md)             | everyone       | assistant |
-|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](media.md)            | everyone       | archive   |
-|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](staging.md)                       | signed in      | archive   |
-| Explore | **Search**        | Albums, people, locations, devices and tracks by name: [Search and the finder](search.md) | everyone       | EiN       |
-| Explore | **Year**          | One year's pictures: [Media, Year and labels](media.md)                                   | everyone       | archive   |
-| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](places.md)                          | everyone       | archive   |
-| Browse  | **Albums**        | [Albums](albums.md)                                                                       | everyone       | archive   |
-| Browse  | **People**        | [People and faces](people.md)                                                             | everyone       | archive   |
-| Browse  | **Locations**     | [Locations and the map](places.md)                                                        | everyone       | archive   |
-| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](devices.md)              | everyone       | archive   |
-| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                 | administrators | EiN       |
-| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                      | administrators | EiN       |
-| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)               | signed in      | EiN       |
-| System  | **Statistics**    | How the archive has grown: [Home, memories and statistics](home.md)                       | everyone       | EiN       |
-| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN             | everyone       | EiN       |
+| Section | Entry             | Opens                                                                                                          | Shown to       | Added by  |
+| ------- | ----------------- | -------------------------------------------------------------------------------------------------------------- | -------------- | --------- |
+|         | **Home**          | On this day, News and Events: [Home, memories and statistics](home.md)                                         | everyone       | EiN       |
+|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](assistant.md)                                  | everyone       | assistant |
+|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](media.md)                                 | everyone       | archive   |
+|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](staging.md)                                            | signed in      | archive   |
+| Explore | **Search**        | Photos, videos, albums, people, places and more, by name, date or @mention: [Search and the finder](search.md) | everyone       | EiN       |
+| Explore | **Year**          | One year's pictures: [Media, Year and labels](media.md)                                                        | everyone       | archive   |
+| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](places.md)                                               | everyone       | archive   |
+| Browse  | **Albums**        | [Albums](albums.md)                                                                                            | everyone       | archive   |
+| Browse  | **People**        | [People and faces](people.md)                                                                                  | everyone       | archive   |
+| Browse  | **Locations**     | [Locations and the map](places.md)                                                                             | everyone       | archive   |
+| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](devices.md)                                   | everyone       | archive   |
+| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                      | administrators | EiN       |
+| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                           | administrators | EiN       |
+| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                    | signed in      | EiN       |
+| System  | **Statistics**    | How the archive has grown: [Home, memories and statistics](home.md)                                            | everyone       | EiN       |
+| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                  | everyone       | EiN       |
 
 "Administrators" means the `admin` account, or someone in admin mode. For anyone else **Settings**
 opens on its **Modules** tab, the only one they get. A section left with no entries is not shown.
@@ -294,14 +294,14 @@ knows, by area, is in [Keyboard shortcuts](../reference/shortcuts.md).
 
 ## When something goes differently
 
-| What you see                                                                                     | Why                                                                                    | What to do                                                                                                  |
-| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Disconnected** in the top bar                                                                  | The connection to EiN dropped: your network, or EiN restarting.                        | Wait; EiN reconnects by itself every 2 seconds. If it stays, ask your administrator whether EiN is running. |
-| The sign-in page appears while you were working                                                  | Your sign-in ended, or an administrator disabled your account.                         | Sign in again.                                                                                              |
-| **Nothing here**: "There is no page at … The link may be mistyped, or what it led to has moved." | The address leads to no page.                                                          | **Go back** or **Go home**.                                                                                 |
-| **This page did not load**                                                                       | Its code could not be fetched, usually because EiN was updated while the tab was open. | **Reload**.                                                                                                 |
-| **Something broke on this page**: "The rest of EiN still works."                                 | An error while drawing the page; the error text is shown under it.                     | **Reload**. If it keeps happening, send the error text to your administrator.                               |
-| An entry you expect is not in the sidebar                                                        | It is for administrators, its module is not installed, or someone hid it.              | See the sidebar table above, [Modules](../admin/modules.md) and [Your sidebar and top bar](customizing.md). |
+| What you see                                                                                     | Why                                                                                    | What to do                                                                                                         |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Disconnected** in the top bar                                                                  | The connection to EiN dropped: your network, or EiN restarting.                        | Wait; EiN reconnects by itself within a second or two. If it stays, ask your administrator whether EiN is running. |
+| The sign-in page appears while you were working                                                  | Your sign-in ended, or an administrator disabled your account.                         | Sign in again.                                                                                                     |
+| **Nothing here**: "There is no page at … The link may be mistyped, or what it led to has moved." | The address leads to no page.                                                          | **Go back** or **Go home**.                                                                                        |
+| **This page did not load**                                                                       | Its code could not be fetched, usually because EiN was updated while the tab was open. | **Reload**.                                                                                                        |
+| **Something broke on this page**: "The rest of EiN still works."                                 | An error while drawing the page; the error text is shown under it.                     | **Reload**. If it keeps happening, send the error text to your administrator.                                      |
+| An entry you expect is not in the sidebar                                                        | It is for administrators, its module is not installed, or someone hid it.              | See the sidebar table above, [Modules](../admin/modules.md) and [Your sidebar and top bar](customizing.md).        |
 
 ## Where to go next
 

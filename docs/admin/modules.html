@@ -156,10 +156,11 @@ its version at the right; one that does not shows a badge instead and is listed 
 <p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
 <p>Choose a module to open its panel. At the top it shows the module&#39;s name, its version and the core
-API it is written for (<code>version 0.1.0 · core API ^0.2.0</code>), where it is installed
+API it is written for (<code>version 0.1.0 · core API ^0.4.1</code>), where it is installed
 (<code>/usr/modules/archive</code>), when it was set up, and its state. <strong>Reference and guide</strong> opens the
 module&#39;s own page in <strong>Documentation</strong>, with its guide and every command, setting and node type it
-brings. Below are tabs, each with a count; a tab the module has nothing for is left out:</p>
+brings. Below are tabs, each with a count; <strong>About</strong> and <strong>Dependencies</strong> are always there, and
+another tab the module has nothing for is left out:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -197,7 +198,8 @@ brings. Below are tabs, each with a count; a tab the module has nothing for is l
 </tr>
 </tbody></table>
 </div>
-<p>A module&#39;s settings are the same ones the <strong>System</strong> tab lists, and they save the same way:
+<p>A module&#39;s system settings are the same ones the <strong>System</strong> tab lists, and its personal ones are
+those on <strong>Profile → Preferences</strong>; they save the same way:
 <a href="configuration.html">Configuration</a> explains where a value comes from and what a change restarts.</p>
 <p>The <strong>About EiN</strong> dialog, in the menu under your picture, also lists the installed modules, with a
 <strong>setup failed</strong> badge on any that did not set up.</p>
@@ -225,9 +227,9 @@ repository.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Published modules panel on Settings → Modules: archive, assistant and ems from github.com/einhq, each 0.1.0 and marked The deployment's, with a Refresh button at the top right" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
-and starts their services. Under the module it then says &quot;Installed. Its pages appear when this
-page is reloaded.&quot;, or, when it brought dependencies along, for example &quot;Installed, with ems. Its
-pages appear when this page is reloaded.&quot; Reload the page to see the new entries in the sidebar.</p>
+and starts their services. Under the module it then says &quot;Installed&quot;, or, when it brought
+dependencies along, for example &quot;Installed, with ems&quot;. Its entries in the sidebar and its pages
+appear without reloading the page.</p>
 <p>Each published module carries a badge for what is installed of it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -258,10 +260,10 @@ pages appear when this page is reloaded.&quot; Reload the page to see the new en
 </tr>
 </tbody></table>
 </div>
-<p>A module written for a different core API says &quot;Needs core API ^0.3.0, which this EiN does not
+<p>A module written for a different core API says &quot;Needs core API ^0.5.0, which this EiN does not
 provide.&quot; (with its own range), and its button is greyed out. <strong>Refresh</strong> asks the sources again.</p>
 <p>In the terminal, <code>mod search</code> lists the same, and <code>mod install</code> installs:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 mod search</code></pre></div>
 <div class="code"><pre tabindex="0"><code>archive 0.1.0
   EiN module: the family archive, with people, media, places and staging
@@ -300,8 +302,8 @@ ways:</p>
 <td>That repository, at its default branch</td>
 </tr>
 <tr>
-<td><code>archive@v0.1.0</code>, <code>…/module-archive@5e1c07a42</code></td>
-<td>That branch, tag or commit</td>
+<td><code>archive@v0.1.0</code>, <code>…/module-archive@&lt;commit&gt;</code></td>
+<td>That branch or tag, or a commit by its full 40-character id</td>
 </tr>
 </tbody></table>
 </div>
@@ -311,8 +313,8 @@ ways:</p>
 modules it needs:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh --module assistant</code></pre></div>
-<p><code>setup.sh</code> adds the name to <code>EIN_MODULES</code> in <code>~/ein/.env</code> and restarts EiN, which installs every
-module named there that is missing. One installed already is left as it is, at whatever version,
+<p><code>setup.sh</code> adds the name to <code>EIN_MODULES</code> in <code>~/ein/.env</code> and, as on every run, fetches the newest
+sources, builds and starts EiN again, which installs every module named there that is missing. One installed already is left as it is, at whatever version,
 without asking GitHub, so a restart never updates a module. If EiN cannot download one at its
 start, its log says <code>some of INSTALL_MODULES could not be installed; continuing boot</code> and EiN
 starts without it; install it from <strong>Settings → Modules</strong> once EiN is up.
@@ -325,8 +327,9 @@ starts without it; install it from <strong>Settings → Modules</strong> once Ei
 <li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
 from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
 and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest commit of the branch it was installed from,
-or the same tag or commit again for one installed at a tag or commit. It answers <strong>Updated</strong>, or
-<strong>Up to date</strong> when there was nothing newer.</li>
+or the same tag again for one installed at a tag; one installed at a commit gets the newest
+commit of the default branch. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
+newer.</li>
 <li>In the terminal, <code>mod install archive</code> updates an installed module. The same commit again is
 left alone: <code>archive is installed at 5e1c07a42 (main) already</code>.</li>
 </ul>
@@ -338,8 +341,8 @@ already.</p>
 on it, directly or through another, is set up again too, and its running services restarted, so
 nothing keeps running the code that was replaced. The new version takes the old one&#39;s place in a
 single step: the module&#39;s folder always holds one whole version.</p>
-<p>To pin a module to a version, install it at a tag or commit, such as <code>mod install archive@v0.1.0</code>;
-its panel&#39;s <strong>Update</strong> then keeps it there. The published modules always compare with the default
+<p>To pin a module to a version, install it at a tag, such as <code>mod install archive@v0.1.0</code> where its
+repository has that tag; its panel&#39;s <strong>Update</strong> then keeps it there. The published modules always compare with the default
 branch, so they may offer <strong>Update</strong> for it, which installs the default branch.</p>
 <h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
 <ol>
@@ -427,7 +430,7 @@ does. The usual ones:</p>
 <td>Update the module it needs.</td>
 </tr>
 <tr>
-<td><code>archive: needs @ein/client ^0.2.0, this core provides 0.3.0</code></td>
+<td><code>archive: needs @ein/client ^0.5.0, this core provides 0.4.3</code></td>
 <td>The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one.</td>
 </tr>
 </tbody></table>
@@ -438,8 +441,8 @@ does. The usual ones:</p>
 place without setup. <code>mod setup &lt;name&gt;</code> sets it up.</p>
 <p><strong>Active, but something is missing.</strong> Check its <strong>Services</strong> tab: a service that shows
 <code>failed</code> or <code>disabled</code> can be started again on the <strong>Dashboard</strong>&#39;s services tab, and
-<a href="services-logs.html">Services and logs</a> explains how to read its log. New pages appear only once the
-page is reloaded.</p>
+<a href="services-logs.html">Services and logs</a> explains how to read its log. A module installed from the
+terminal shows its pages in a browser tab that was already open once that page is reloaded.</p>
 <p><strong>Install or update refused.</strong> The message says why, in words like these:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
