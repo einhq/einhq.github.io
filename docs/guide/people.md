@@ -6,7 +6,7 @@ EiN finds the faces in your photos and videos and the voices in your recordings,
 
 You do not have to tag anyone for recognition to start. Every photo, and frames sampled through every video, is searched for faces as it arrives, and every face that is found goes through the same three-way decision:
 
-1. **It joins a named person** when it looks enough like faces of that person in other photos, and the comparison clearly favours that one person over everyone else.
+1. **It joins a person** when it looks enough like faces of that person in other photos, and the comparison clearly favours that one person over everyone else. That person may be named or still unidentified.
 2. **It starts an unidentified person** when it matches nobody, but is clear and large enough to be worth treating as someone new. That person gets a placeholder name such as `Unknown 4XK9QM` and waits on the [Unidentified people](#name-the-people-recognition-found) page for someone to say who it is.
 3. **It stays unknown** when it is too small or too unsure to start anyone. In the viewer its box reads **Unassigned**.
 
@@ -31,7 +31,7 @@ Open **People** in the sidebar, under **Browse**.
 - **Sort** offers **Most pictured** (the default), **Name (A-Z)** and **Name (Z-A)**. Your choice is remembered in this browser. A name that starts with `?`, a placeholder for someone known only from a family record, sorts after the real names.
 - Each card shows the person's cover picture, their name and how many pictures they are in, or their full name when they are in none. Click a card to open the [person's page](#a-persons-page).
 
-The number on a card counts every face and voice of that person, also those in files still waiting in someone's staging area. The person's own page lists only the pictures filed in the library, so the card can show a higher number until the staged files are filed or discarded.
+The number on a card counts the faces and voices of that person in the library, so a recording they are heard in counts too. Faces and voices in files still waiting in someone's staging area count once those files are filed.
 
 When nobody has been named yet, the page says **No people yet** and "Face recognition finds people in the pictures; name them under Unidentified, or add someone here." with a **New person** button.
 
@@ -94,9 +94,9 @@ When you have picked everything the person holds, **Split off as someone new** a
 
 ### Group similar faces
 
-Recognition sometimes joins two people through one weak resemblance, and four glimpses on a card will not show it. With three faces or more, the review has a **Group similar faces** switch:
+Recognition sometimes joins two people through one weak resemblance, and four glimpses on a card will not show it. With three faces or more, the review has an **Adjust group threshold** switch beside **Faces** (and with three recordings or more, one beside **Voice**):
 
-1. Turn on **Group similar faces**. EiN compares every face of this person with every other ("Comparing every face against every other"), once.
+1. Turn on **Adjust group threshold**. EiN compares every face of this person with every other ("Comparing every face against every other"), once.
 2. Drag the **How alike** slider. The faces are laid out in groups, **Largest group** first, then **Group 2** and onward, each with its number of faces. The slider starts where the comparison suggests the groups part.
 3. Tick a group's box to pick all of it, then use **Split off as someone new**, **Move to…** or **Not a person** as above.
 
@@ -116,8 +116,8 @@ The web interface merges only unidentified people. To fold one named person into
 
 ```bash
 # in EiN's terminal
-person-merge --dry-run /archive/people/ruby-wrenfeld /archive/people/Ruby_Wrenfield
-person-merge /archive/people/ruby-wrenfeld /archive/people/Ruby_Wrenfield
+person-merge --dry-run /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield
+person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield
 ```
 
 The last path is the person who stays. See [`person-merge`](../reference/commands-archive.md#person-merge) in the command reference.
@@ -129,7 +129,7 @@ A poster, a statue, a doll, a pattern in the wallpaper or the back of a head can
 - **Several cards at once:** tick them on the **Unidentified people** page and press **Not a person** in the bar.
 - **One person:** press **Not a person** at the top of their review.
 
-The dialog (**Not a person?**) says what happens: every face and recording they hold loses its identity and is locked, so recognition leaves it alone from now on, and the entry is removed. "The photos and recordings themselves are untouched." Confirm with **Not a person**.
+The dialog (**Not a person?**, or **N: not a person?** for several) says what happens: every face and recording they hold loses its identity and is locked, so recognition leaves it alone from now on, and the entry is removed. "The photos and recordings themselves are untouched." Confirm with **Not a person**.
 
 - **Some faces of one person:** pick them in the review and press **Not a person** in the bar under it. The dialog (**N faces: not a person?**) locks only those, and the person keeps the rest. Confirm with **Unassign and lock**.
 
@@ -155,7 +155,7 @@ Someone who is in no picture yet, a great-grandparent for the family tree for ex
 2. In **Create Person**, fill in **Name** (required), and if you like **Full name** and **Gender** (**Female**, **Male**, **Other** or **Unknown**).
 3. Press **Create**. The new person's page opens.
 
-Look on the People page first, so that you do not add someone who is already there: EiN does not stop you from making two people of the same name. The address of the new page is made from the name, and if a person already has that address the dialog shows an error instead; give the new person a name that tells the two apart.
+Look on the People page first, so that you do not add someone who is already there: the dialog does not look for someone of the same name. The address of the new page is made from the name, and if a person already has that address the dialog shows an error instead; give the new person a name that tells the two apart.
 
 Later faces only join a person through faces that already belong to them, so a person made by hand gets pictures once you give them a face: add an unidentified person to them by typing their name, or move faces to them with **Move to…** or **Someone I know**.
 
@@ -302,7 +302,7 @@ Changing the recognition settings does not touch these decisions either.
 
 **A person has someone else's faces.** Open their **Faces** tab, select the wrong ones and press **Not &lt;name&gt;**.
 
-**A person's card shows more pictures than their page.** The card also counts faces in staged files that are not filed yet.
+**A person's card shows more pictures than their page.** The card counts faces and voices, so each recording the person is heard in counts too.
 
 **An action fails.** The reason appears in red under the bar or in the dialog. A change you are not allowed to make, to a picture or a person you may only view, is refused; ask whoever owns it, or your administrator.
 

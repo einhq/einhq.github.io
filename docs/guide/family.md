@@ -43,8 +43,8 @@ someone's tree directly.
 The tree is drawn the way family trees usually are:
 
 - **Generations are rows.** Parents and grandparents are above, children and grandchildren below.
-- **Couples sit side by side**, joined by a line. When the partnership has dates, the years are
-  written over the line: `1956–2014`, or `1983` when it has no end.
+- **Couples sit side by side**, joined by a line. When the partnership has dates, the year it
+  began is written over the line and the year it ended under it.
 - **Each card** shows the person's picture, their name and their years: `1934 – 2021`, `b. 1958`
   for someone with only a birth date, `d. 2011` for someone with only a death date.
 - **The person the page is about** has an outlined card and a bold name.
@@ -57,10 +57,11 @@ the lines to them.
 
 A large family would not fit on a screen, so the tree opens with two generations up and two down
 from the person, and the partners of everyone drawn. A card with more family behind it has a round
-chevron on its edge: at the top when there are more parents ("Show more family for &lt;name&gt;"),
-at the bottom when there are more children ("Show more descendants of &lt;name&gt;"). Click either
-one and the tree loads one more generation in each direction around that card. The chevrons then
-go away from it.
+chevron on its edge: at the top when there are more parents ("Show &lt;name&gt;'s parents"), at
+the bottom when there are more children ("Show &lt;name&gt;'s children"). Click one and the tree
+loads one more generation that way: the parents above the card, or the children below it. The
+chevron then turns round ("Hide &lt;name&gt;'s parents" or "Hide &lt;name&gt;'s children"), and
+clicking it folds those relatives away again.
 
 Two things are not drawn until you ask:
 
@@ -71,17 +72,16 @@ Two things are not drawn until you ask:
 
 ### Move around the tree
 
-The tree scrolls inside its own box, so the rest of the page stays where it is. The buttons above
-it:
+The tree moves inside its own box, as a map does, so the rest of the page stays where it is. Drag
+it with the mouse or one finger. Scroll over it to zoom around the pointer, or pinch with two
+fingers or on a trackpad. A double click or double tap on the space between the cards zooms in
+there; hold <kbd>Shift</kbd> to zoom out. The buttons in the box's top right corner:
 
-| Button                    | What it does                                                                           |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| **Centre on this person** | Scrolls back to the person the page is about. Hidden while the whole family is fitted. |
-| **Fit the whole family**  | Shrinks the drawing until all of it fits the box.                                      |
-| **Zoom out**, **Zoom in** | Changes the size a step at a time.                                                     |
-
-Hold <kbd>Ctrl</kbd> and scroll over the tree to zoom around the pointer; a pinch on a trackpad does
-the same.
+| Button                    | What it does                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| **Full screen**           | Opens the tree in a window that fills the screen; **Leave full screen** closes it.   |
+| **Fit the whole family**  | Shrinks the drawing until all of it fits the box.                                    |
+| **Centre on this person** | Moves back to the person the page is about. Hidden while the whole family is fitted. |
 
 ### Brothers, sisters and in-laws
 
@@ -108,8 +108,9 @@ You need administrator rights for this in the web interface; see
    you know them, the dates in **From** and **Until**.
 6. Press **Add**.
 
-The tree, the person's header and their timeline are read again at once, and the new relative's card
-appears in its place.
+The tree, the person's header and their timeline are read again at once. The tree opens again as
+it first did, two generations up and two down, so a relative added further out shows once you open
+the chevrons to it again.
 
 Each tie joins two people. **Add child** gives the child one parent: if both partners of a couple
 are the child's parents, add the child from the other partner's card as well, or add the second
@@ -266,8 +267,8 @@ Albums, locations and devices have **Add event** under ⋮ too, for someone who 
 events are always generic, and need both a **Date** and a **Description**.
 
 - **On an album**, the date starts as the first day with pictures and no event yet. The event
-  stands as a note among that day's pictures, signed "— &lt;writer&gt;" when it has a writer. If you
-  may change it, a pencil on the note opens **Edit event**, where you change the date, the text or
+  stands as a note among that day's pictures, signed "— &lt;writer&gt;", or with the name of the
+  account that added it when it has no writer. If you may change it, a pencil on the note opens **Edit event**, where you change the date, the text or
   the writer and press **Save**, or press **Delete**. A deleted event goes to your trash, and the
   message "Event moved to the trash" has **Undo**.
 - **On a location or a device**, the event appears on its **Timeline** tab. It cannot be changed in
@@ -317,8 +318,8 @@ You need administrator rights for this in the web interface.
 A new location made here has only its name. It has no place on the map until someone opens it and
 gives it an address or a position; see [Locations and the map](places.md).
 
-Each row shows the location, which opens its page, and the years: `1956 – 1999`, `since 1983`,
-`until 1999`, or `dates unknown`. A home with a moved-in date and no moved-out date is marked
+Each row shows the location, which opens its page, and the dates as they were entered:
+`1956 – 1999`, `since 1983`, `until 1999`, or `dates unknown`. A home with a moved-in date and no moved-out date is marked
 **current**. Homes without a moved-out date come first, then the others, the latest move first.
 
 - **To correct the dates**, press the pencil on the row, change **Moved in** or **Moved out**, and
@@ -427,7 +428,8 @@ flags after them: placed before the people, a flag's value is taken for a person
 
 You can also tell the [assistant](assistant.md) a parent, a partnership or an event the archive
 should record, for example "Leo was adopted by Jon and Kiri". It proposes the command, and nothing
-changes until you press **Run**; it runs as you, with your permissions. It does not record homes.
+changes until you press **Run**; it runs as you, with your permissions. Homes are not among the
+commands it is pointed to, so record those on the **Homes** or **Residents** tab.
 
 ## When something goes differently
 

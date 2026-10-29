@@ -186,7 +186,7 @@ llm-status --checks</code></pre></div>
 <p>To change the division, set both sides in <code>~/ein/.env</code> and apply it:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
 <span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">8800</span>   <span class="hljs-comment"># what the model leaves free on the card</span>
-<span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">8000</span>     <span class="hljs-comment"># the most the media service takes; a little less than the line above</span></code></pre></div>
+<span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">8400</span>     <span class="hljs-comment"># the most the media service takes; 400 MB less than the line above</span></code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d</code></pre></div>
 <p><a href="gpu.html">The graphics card</a> covers the card itself, and <a href="performance.html">Performance and sizing</a> how much card and memory each part needs.</p>
@@ -299,7 +299,7 @@ llm-link: ours, qwen3.5-4b at http://llm:8190, on the card
 llm-link: http://llm:8190 is not answering; the chat cannot answer until it does</code></pre></div>
 <p>The log starts over each time the service starts. A model that does not answer is a warning in <code>health</code>, never a failure: the archive&#39;s work goes on without it. <a href="monitoring.html">Health and the dashboard</a> and <a href="services-logs.html">Services and logs</a> cover both in general.</p>
 <h2 id="settings">Settings<a class="anchor" href="#settings" aria-label="Link to this section"></a></h2>
-<p>All of these are system settings, on <strong>Settings → System → Assistant</strong>, in <code>~/ein/.env</code>, or with <code>config-set</code>. <a href="configuration.html">Configuration</a> explains where a value comes from and which one wins.</p>
+<p>All of these are system settings, on <strong>Settings → System → Assistant</strong> (<strong>Language model command</strong> is under <strong>Search</strong>), in <code>~/ein/.env</code>, or with <code>config-set</code>. <a href="configuration.html">Configuration</a> explains where a value comes from and which one wins.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -337,7 +337,7 @@ llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 <td><a href="../reference/settings.html#cfg_llm_card"><code>CFG_LLM_CARD</code></a></td>
 <td><strong>Where our language model runs</strong></td>
 <td>empty</td>
-<td><code>card</code> or <code>cpu</code>, for the status lines. <code>setup.sh --llm</code> sets it from whether the machine has a card.</td>
+<td><code>card</code> or <code>cpu</code>, for the status lines. <code>setup.sh --llm</code> sets it from <code>EIN_GPU</code>.</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_llm_thinking"><code>CFG_LLM_THINKING</code></a></td>
@@ -365,7 +365,7 @@ llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 </tr>
 </tbody></table>
 </div>
-<p>A change on the settings page restarts <code>llm-link</code>, and the next question uses the new value; EiN itself does not restart. A change in <code>.env</code> takes effect at the next <code>podman compose up -d</code>, unless the same setting has been saved on the settings page.</p>
+<p>A change on the settings page takes effect at the next question; EiN itself does not restart. A change to the address, model, key, provider or <strong>Where our language model runs</strong> also restarts <code>llm-link</code>. A change in <code>.env</code> takes effect at the next <code>podman compose up -d</code>, unless the same setting has been saved on the settings page.</p>
 <h2 id="ask-the-model-directly">Ask the model directly<a class="anchor" href="#ask-the-model-directly" aria-label="Link to this section"></a></h2>
 <p><code>llm-chat</code> sends one question to the model, with nothing from the archive, and prints the answer. It is the quickest way to see that the model answers and how fast:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -406,7 +406,7 @@ agent-eval --<span class="hljs-built_in">limit</span> 5 --verbose
 </tr>
 <tr>
 <td><code>llm-status --checks</code> says <code>on the CPU</code>, or answers are slow on a machine with a card</td>
-<td>Either <code>EIN_GPU=0</code> in <code>.env</code>, or the media service left too little of the card. See <a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a> and <a href="gpu.html">The graphics card</a>.</td>
+<td><code>on the CPU</code> means <code>EIN_GPU=0</code> in <code>.env</code>. Slow answers with a card can also mean the media service left too little of it; <code>podman compose logs llm</code> says how many layers went to the card. See <a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a> and <a href="gpu.html">The graphics card</a>.</td>
 </tr>
 <tr>
 <td>The <code>llm</code> container restarts again and again</td>

@@ -10,17 +10,17 @@ The commands are written for podman, run in `~/ein`. With Docker, write `docker`
 
 An installation keeps its data in three places: the database, the data folder and `~/ein/.env`.
 
-| Part                            | Where                                                         | What it holds                                                                                                                                         | Back it up?                                                                                                                 |
-| ------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| The database                    | the volume `ein_db` in the container engine's storage         | every node of the tree: names, folders, albums, people, faces, links, permissions, accounts and settings, and small content such as comments and keys | Yes, as a dump                                                                                                              |
-| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another | your originals                                                                                                                                        | Yes                                                                                                                         |
-| `old`                           | the data folder                                               | the files of an older installation that the importer reads; empty unless you put files there                                                          | When it holds anything                                                                                                      |
-| `modules`                       | the data folder                                               | the installed modules                                                                                                                                 | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                        |
-| `files-volatile`                | the data folder                                               | thumbnails, video renditions, face crops and the other renditions EiN makes from the originals                                                        | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](media-service.md) |
-| `files-tmp`                     | the data folder                                               | scratch space while files are written                                                                                                                 | No                                                                                                                          |
-| `llm`                           | the data folder                                               | the language model, downloaded at its first start                                                                                                     | No; it is downloaded again                                                                                                  |
-| `~/ein/.env`                    | `~/ein`                                                       | your options, the lines you added, and the passwords made at the install                                                                              | Yes                                                                                                                         |
-| `src/`, `compose.override.yaml` | `~/ein`                                                       | the sources and the options as services                                                                                                               | No; `setup.sh` makes them again                                                                                             |
+| Part                            | Where                                                                                   | What it holds                                                                                                                                         | Back it up?                                                                                                                 |
+| ------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| The database                    | the volume `ein_db` in the container engine's storage, or the folder `EIN_DB_DIR` names | every node of the tree: names, folders, albums, people, faces, links, permissions, accounts and settings, and small content such as comments and keys | Yes, as a dump                                                                                                              |
+| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another                           | your originals                                                                                                                                        | Yes                                                                                                                         |
+| `old`                           | the data folder                                                                         | the files of an older installation that the importer reads; empty unless you put files there                                                          | When it holds anything                                                                                                      |
+| `modules`                       | the data folder                                                                         | the installed modules                                                                                                                                 | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                        |
+| `files-volatile`                | the data folder                                                                         | thumbnails, video renditions, face crops and the other renditions EiN makes from the originals                                                        | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](media-service.md) |
+| `files-tmp`                     | the data folder                                                                         | scratch space while files are written                                                                                                                 | No                                                                                                                          |
+| `llm`                           | the data folder                                                                         | the language model, downloaded at its first start                                                                                                     | No; it is downloaded again                                                                                                  |
+| `~/ein/.env`                    | `~/ein`                                                                                 | your options, the lines you added, and the passwords made at the install                                                                              | Yes                                                                                                                         |
+| `src/`, `compose.override.yaml` | `~/ein`                                                                                 | the sources and the options as services                                                                                                               | No; `setup.sh` makes them again                                                                                             |
 
 [Installing in detail](install.md#the-data-folder) shows how the folders are mounted into the containers.
 
@@ -93,7 +93,7 @@ Docker runs the containers as root, so the files in the data folder belong to ro
 
 A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.
 
-1. Install EiN with the same options as before, such as `--ems --module archive`, as [Install EiN](../start/install.md) describes. The installer starts an empty EiN and prints a new admin password; that password stops mattering after the restore, when the accounts from your backup apply.
+1. Install EiN with the same options as before, such as `--ems --module archive`, as [Install EiN](../start/install.md) describes. The installer starts an empty EiN and prints a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. Delete its `INITIAL_ADMIN_PASSWORD` line from the new `.env` then, or `setup.sh` keeps showing a password that no longer signs in.
 
 2. Compare the new `~/ein/.env` with the copy in your backup, and copy over the lines you added yourself, such as `CFG_` settings, ports or memory limits. Keep the new `POSTGRES_PASSWORD` and `EMS_KEY`: the new database was made with them. Check `EIN_GPU` too, which says whether this machine has a graphics card for EiN; see [The graphics card](gpu.md).
 
@@ -148,7 +148,7 @@ With the Archive installed, the [`regenerate`](../reference/commands-archive.md#
 nohup regenerate --force /archive
 ```
 
-[`nohup`](../reference/commands-core.md#nohup) lets it run on when you close the terminal and logs it under `/var/logs/jobs`. It needs the media service, and over a large archive it takes as long as the first processing did. `regenerate --force /archive/albums/Summer 1987` does one album first, so you can check the result.
+[`nohup`](../reference/commands-core.md#nohup) lets it run on when you close the terminal and logs it under `/var/logs/jobs`. It needs the media service, and over a large archive it takes as long as the first processing did. `regenerate --force '/archive/albums/Summer 1987'` does one album first, so you can check the result.
 
 ## Move EiN to another machine
 
@@ -198,7 +198,7 @@ The data folder can be moved on the same machine, such as to a larger disk mount
 
 Check that pictures and thumbnails show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.
 
-The database volume is not in the data folder and does not move with it. It lives in the container engine's storage, under `~/.local/share/containers/storage` for rootless podman and `/var/lib/docker` for Docker, and the installation has no setting of its own for where that is.
+The database is not in the data folder and does not move with it. It lives in the container engine's storage, under `~/.local/share/containers/storage` for rootless podman and `/var/lib/docker` for Docker, unless `EIN_DB_DIR` in `.env` names a folder for it. To put it on another disk, run `./setup.sh --db-dir /srv/ein-db` with an empty folder: while the database is still in the volume, `setup.sh` stops and prints the commands that copy it there first.
 
 ## Get your files out without EiN
 
@@ -233,7 +233,7 @@ database  6.2 GB
 
 `disk` is `files`, `volatile` is `files-volatile` and `tmp` is `files-tmp`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive/albums`.
 
-On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update builds new images and leaves the old ones behind; `podman image prune` removes those that nothing uses any more.
+On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update builds new images and removes the ones they replaced; `podman image prune` removes other images without a name that nothing uses any more.
 
 ## Delete things and free space
 
@@ -269,7 +269,7 @@ There is no uninstall script. Removing EiN and everything in it takes these step
    podman volume rm ein_db
    ```
 
-   `podman volume rm ein_db` deletes the database for good: every name, album, person, account and setting.
+   `podman volume rm ein_db` deletes the database for good: every name, album, person, account and setting. If `EIN_DB_DIR` in `.env` names a folder, the database is there instead: remove that folder with `podman unshare rm -rf` and its path (under Docker, `sudo rm -rf`).
 
 2. Remove the images:
 
@@ -282,12 +282,12 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 
    The language model's image is llama.cpp's, from `ghcr.io/ggml-org/llama.cpp`; `podman images` lists it if you want it gone too.
 
-3. If you made a systemd service to start EiN at boot, as [Installing in detail](install.md#start-ein-when-the-machine-boots) shows, turn it off and remove it:
+3. Under podman, `setup.sh` turned on `podman-restart.service` and lingering for your user, so that EiN starts at boot (see [Installing in detail](install.md#start-ein-when-the-machine-boots)). With EiN's containers gone they start nothing of EiN's; if no other container of yours needs them, turn them off:
 
    ```bash
    # on the machine EiN runs on, as your own user
-   systemctl --user disable --now ein.service
-   rm ~/.config/systemd/user/ein.service
+   systemctl --user disable podman-restart.service
+   loginctl disable-linger
    ```
 
 4. Remove the installation and the data folder, which holds your originals:

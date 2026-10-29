@@ -187,7 +187,8 @@ only the folder's name is not used.
 
 Put files in a category's folder, never in `files/` itself: a folder copied directly into `files/`
 becomes a category of its own, of the **Other** kind, and a file left there belongs to no category
-until your administrator runs `staging init`, which moves it into `files/inbox/unsorted/`.
+until EiN moves it into `files/inbox/unsorted/`. It does that once an hour, for a file nothing has
+changed on for six hours, so a copy still being written is left alone.
 
 > [!WARNING]
 > A file you delete over SFTP is gone for good; it does not go to the trash. To get rid of staged
@@ -304,9 +305,10 @@ newest files are. Each stage shows while it holds files:
    EiN worked out about them; from then on whoever can see that album sees them. A discarded group
    goes to your trash. Filing and discarding can be undone on the category's **Done** tab.
 
-The card's bar shows the same files by how far along they are: **Being prepared**, **To sort**,
-**Needs a date** (read, but with no date) and **Other files** (files that are not pictures,
-videos or recordings). How to go through the groups is on
+The card's bar shows the same files by how far along they are: **Being prepared**, **To sort**
+(read, with a date), **Needs a date** (read, but with no date) and **Other files** (files that are
+not pictures, videos or recordings). An exact copy that went no further, and an empty picture,
+video or recording, are in none of them. How to go through the groups is on
 [Sorting in staging](staging.md#sort-the-stream-of-suggested-albums).
 
 ## Why new pictures have no thumbnails yet

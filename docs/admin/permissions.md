@@ -69,8 +69,8 @@ A few rules follow from how groups are read:
   `jon` to `/etc/users/jon` in `/etc/groups/family/users`. Anything else placed there makes nobody a
   member.
 - **Groups are read when someone signs in.** A person added to or taken out of a group keeps the
-  groups they signed in with until they sign in again. Taking someone out of `sudo` is the
-  exception: it ends their admin mode at once.
+  groups they signed in with until they sign in again. Membership of `sudo` is the exception: it
+  counts at once, and taking someone out of `sudo` ends their admin mode at once.
 - **Being in the `admin` group makes nobody an administrator.** It is the administrator's own group,
   as root's is on Linux, and gives no write to the system's folders. To let someone act as the
   administrator when they need to, add them to `sudo`; see [Accounts and groups](accounts.md).
@@ -139,7 +139,7 @@ an administrator, everyone who has access and through what.
 # in EiN's terminal
 chmod 0750 '/archive/albums/Christmas at the cottage'
 chmod g+w '/archive/albums/Christmas at the cottage'
-chmod u=rwx,g=rx,o= '/archive/albums/Christmas at the cottage'
+chmod u=rwx,g=rx,o-rwx '/archive/albums/Christmas at the cottage'
 chmod -r o-rw /archive                 # the whole subtree; each node keeps its other bits
 ```
 
@@ -212,9 +212,9 @@ recursive unless you say otherwise:
 # in EiN's terminal
 share-set '/archive/albums/Christmas at the cottage' --mode 0750 -b -m g:family:rwx -m u:jon:rx
 share-set '/archive/albums/Summer 1987' --group family --mode g+rx
-share-set '/archive/albums/Summer 1987' --default-owner          # the configured default sharing
-share-set '/archive/albums/Summer 1987/files/IMG_0042.jpg' --reference '/archive/albums/Summer 1987'
-share-set '/archive/albums/Summer 1987/files/IMG_0042.jpg' --mode 0700 -b --drop-links --pin
+share-set '/archive/albums/Summer 1987' --default-owner          # the configured default owner and group
+share-set '/archive/albums/Summer 1987/IMG_0042.jpg' --reference '/archive/albums/Summer 1987'
+share-set '/archive/albums/Summer 1987/IMG_0042.jpg' --mode 0700 -b --drop-links --pin
 ```
 
 ```text
@@ -231,6 +231,7 @@ updated 214, kept own access 3, skipped 0, failed 0
 | `-m`, `-x`, `-b`     | Edit the access list, as `acl` does.                                                                                                                       |
 | `--drop-links`       | Remove share links' entries too, so no link opens the nodes.                                                                                               |
 | `--pin`, `--unpin`   | Hold the node against changes from further up, or let them reach it again.                                                                                 |
+| `--pinned-below`     | Change the pinned nodes below each path named, in place of the path itself.                                                                                |
 | `--no-recursive`     | Change only the node named.                                                                                                                                |
 | `--strict`           | Exit non-zero when any node below could not be changed.                                                                                                    |
 
@@ -248,12 +249,14 @@ one photo stays private in a shared album; see
 
 ```bash
 # in EiN's terminal
-share-set '/archive/albums/Summer 1987/files/IMG_0042.jpg' --pin
-share-set '/archive/albums/Summer 1987/files/IMG_0042.jpg' --reference '/archive/albums/Summer 1987' --unpin
+share-set '/archive/albums/Summer 1987/IMG_0042.jpg' --pin
+share-set '/archive/albums/Summer 1987/IMG_0042.jpg' --reference '/archive/albums/Summer 1987' --unpin
+share-set '/archive/albums/Summer 1987' --pinned-below --reference '/archive/albums/Summer 1987' --unpin
 ```
 
 The pin is written on that node only. `share-info` on the album lists the pinned nodes below it,
-and a share link made on the album does not open them.
+and a share link made on the album does not open them. The last line shares every pinned node in
+the album as the album is, which is what **Share all like the album** in the **Share** dialog runs.
 
 ## What a recursive change does
 
@@ -315,7 +318,8 @@ account and changed only by its owner. Each person narrows or widens that for wh
 **How widely what you create is shared** on their profile
 ([`CFG_USER_DEFAULT_SHARE`](../reference/settings.md#cfg_user_default_share)); see
 [Your profile](../guide/profile.md#how-widely-what-you-create-is-shared). **Default** in the
-**Share** dialog, and `share-set --default-owner`, put a node back on the default sharing.
+**Share** dialog lets everyone with an account see a node, and `share-set --default-owner` gives it
+the configured default owner and group.
 
 The same settings in the terminal, in the octal form:
 
@@ -465,7 +469,8 @@ folder they can reach.
 **`chown` says `Access denied for operation 'change gid'`.** You are not in the group you named.
 An administrator can make the change, or add you to the group.
 
-**`share-info` says `sign in to see who has access`.** You are acting as the guest. Who has access
+**`share-info` says `sign in to see who has access`.** You have not signed in, or you came in through
+a share link. Who has access
 names people and groups, so it is shown only to someone signed in.
 
 **A visitor sees the sign-in page instead of a shared album.** **Visitors may browse** is off. Turn

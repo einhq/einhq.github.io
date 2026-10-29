@@ -146,7 +146,7 @@ recorded during the album's dates. The map opens fitted to both.
 
 - A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.
 - Pictures close together form a pile with a count. Choose it to list them in **N photos here**.
-- Choosing never zooms. Zoom with the mouse wheel, a pinch or the map's own controls.
+- Choosing never zooms. Zoom with the mouse wheel or a pinch; the map has no zoom buttons.
 - The layers button in the corner switches between **Map**, **Dark map** and **Satellite**.
 
 The routes come from the album's whole span, so widening its dates in **Edit album** brings in the
@@ -171,8 +171,9 @@ journey there and back. When nothing has a position and no route was recorded, t
 
 Each name opens its page. In **People**, **Places** and **Devices**, the number beside a name
 searches the album for the pictures that have it; in **Labels**, a label searches the album for
-that label. A section shows its first 10, then **Show all N** and **Show fewer**. When nobody is
-tagged and nothing is linked to a place or a device, the tab says so.
+that label. **People**, **Places**, **Devices** and **Photographers** show their first 10, then
+**Show all N** and **Show fewer**; **Labels** shows them all. When nobody is tagged and nothing is
+linked to a place or a device, the tab says so.
 
 ## Add pictures to an album
 
@@ -324,8 +325,8 @@ An album that holds only folders says **No media here — open a folder above.**
 The web interface shows folders but has no button that makes one. They come from an import, from
 copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
 [terminal](../shell/terminal.md). Once a folder is there, open it and choose **Upload** to upload
-into it. **Stack**, **Set as cover** and **Share** are offered in the album itself, not in its
-folders.
+into it. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
+itself, not in its folders.
 
 ## Add a note to a day
 

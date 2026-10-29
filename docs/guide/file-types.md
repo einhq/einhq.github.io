@@ -27,8 +27,10 @@ read only when you file it into an album.
 
 EiN looks at the first bytes of a file, not at its name. A JPEG photo named `IMG_0412.png` is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference how the file came in: **Import media**, an upload into an album, dropping it on a page,
-or copying it over [SFTP](../shell/ssh-sftp.md).
+difference whether the file came in with **Import media**, an upload into an album, or by dropping
+it on a page. A file copied in over [SFTP](../shell/ssh-sftp.md) is the exception: when EiN knows
+its extension, such as `.png`, `.docx` or `.md`, the type that extension names is the one it keeps,
+and only a file with an extension EiN does not know is recognised by its first bytes.
 
 The name decides in two cases, because the bytes say too little:
 
@@ -51,8 +53,8 @@ For each photo, EiN:
 - reads its date, its GPS position and the camera or phone that took it; see
   [Dates and places of pictures](dates-places.md) and [Devices and GPS tracks](devices.md);
 - makes thumbnails and screen-sized copies in the AVIF format: a square of 320 pixels, and copies
-  that fit inside 512, 800, 1,600 and 2,560 pixels. A photo is never enlarged, so a small one gets
-  only the sizes up to its own;
+  that fit inside 512, 800, 1,600 and 2,560 pixels. These copies are never larger than the photo,
+  so a small one gets only the sizes up to its own;
 - finds the faces in it ([People and faces](people.md));
 - reads any text in it, printed or handwritten, so that search finds it
   ([Read the text in a picture](viewer.md#read-the-text-in-a-picture));
@@ -123,7 +125,8 @@ audiobooks count as recordings too.
 For each recording, EiN:
 
 - reads its date, where the file has one;
-- makes a version your browser plays: AAC at 128 kbit/s and 44.1 kHz, in an `.m4a` file;
+- makes a version your browser plays: AAC at no more than 128 kbit/s and 44.1 kHz, in an `.m4a`
+  file;
 - draws a picture of the sound, its waveform, which is the recording's tile and what you see while
   it plays;
 - writes down what is said in it and recognises who says it
@@ -143,21 +146,23 @@ is about: a search for `Christmas letter` finds the family newsletter of 2019. S
   is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
   way; the pages after that keep only the text they hold.
 - **Plain text.** Any file that is text, whatever its name: `.txt`, a Markdown note, an HTML page.
-  An SVG drawing is text too, so EiN treats it as a document, not as a picture.
+  An SVG drawing is text too, so EiN treats it as a document, not as a picture. Copied in over
+  SFTP, a `.md` or `.html` file takes the type its name gives instead, and its text is not read.
 
 A document's text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.
 
 Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
 **Download** to open one on your device. The **Documents** choice on the [Media page](media.md#show-one-kind-of-file)
-also lists RTF and old Word (`.doc`) files, but EiN does not read their text: search finds them by
-their file name only.
+also lists RTF files, but EiN does not read their text: search finds them by their file name only.
+An old Word (`.doc`) file is not recognised at all and is kept as one of the [other files](#other-files).
 
 ### Word and OpenDocument files
 
 The media service can read the text of Word (`.docx`) and OpenDocument (`.odt`) files, but EiN
 recognises a file by its first bytes, and these formats begin like any zip file. A `.docx` or
-`.odt` file you upload is therefore kept as a zip file:
+`.odt` file you upload is therefore kept as a zip file (one copied in over SFTP keeps its type, and
+its text is read):
 
 - its text is not read, so search finds it by its name only;
 - in a staging category, it is expanded like any other zip, into the parts it is made of, and the

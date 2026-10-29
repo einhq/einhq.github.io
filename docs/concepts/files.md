@@ -69,11 +69,11 @@ Over SFTP these children are in a hidden folder named after the file with `_` ad
 
 EiN keeps the bytes of files in three places, called tiers. Each file's bytes are on exactly one:
 
-| Tier       | What goes there                                                                                                                                                                                                                                             | Where it is in a standard install                   |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                           | `files` in the data folder                          |
-| `volatile` | What EiN makes from another file and can make again: thumbnails, playable videos and recordings, face crops                                                                                                                                                 | `files-volatile` in the data folder                 |
-| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the volume `ein_db` |
+| Tier       | What goes there                                                                                                                                                                                                                                                                             | Where it is in a standard install                   |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                                                           | `files` in the data folder                          |
+| `volatile` | What EiN makes from another file and can make again: thumbnails, playable videos and recordings, face crops                                                                                                                                                                                 | `files-volatile` in the data folder                 |
+| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, the events in a person's story, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the volume `ein_db` |
 
 EiN decides the tier when the file is made:
 
@@ -172,7 +172,7 @@ While content is being written somewhere other than from the start in order, the
 cleared, and EiN reads the finished file back once to measure it. A file whose writing stopped
 part-way has no checksum rather than a wrong one.
 
-Two commands look at the bytes themselves rather than at what the node records:
+Three commands look at the bytes themselves rather than at what the node records:
 
 | Command            | What it does                                                                                                                                     |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -244,10 +244,10 @@ The mounts every EiN makes at its start:
 | `/usr/docs/guide`  | `filesystem` | The built-in guide, read-only                                                   |
 
 A `filesystem` mount shows a folder of the machine, and an `sftp` mount shows a folder of another
-machine. Both are mirrors: their files are the other side's files, nothing is stored about them in
-EiN, and changes there start no pipelines, so EiN makes no thumbnails, reads no dates and finds no
-faces in them. A file in a mirror cannot have children. To bring files from a mount into the
-archive, copy them into staging.
+machine. Both are mirrors: their files are the other side's files, and nothing is stored about them
+in EiN. A file in a mirror cannot have children, so EiN makes no thumbnails, reads no dates and
+finds no faces in them, and changes in an `sftp` mount start no pipelines at all. To bring files
+from a mount into the archive, copy them into staging.
 
 Only the administrator mounts and unmounts. [Reaching other machines](../shell/remote.md#mount-a-folder-of-another-machine)
 shows how to mount a folder of another machine and keep the mount across restarts, and
@@ -302,7 +302,7 @@ how to make room.
 | `storage tier is set once at creation and cannot be changed`            | A command tried to move a file to another tier.                                        | Copy the content into a new file made with `--tier`, then remove the old one.                                                                     |
 | `a filesystem is mounted at /mnt/nas` when removing or moving a folder  | A mount stands on that folder or below it.                                             | Unmount it first with `unmount`, or `unmount --save` to keep it from coming back at the next start.                                               |
 | `mount: permission denied, only admin is allowed to mount`              | Only the administrator mounts.                                                         | Ask the administrator.                                                                                                                            |
-| `df` says `no disk sample yet — is metrics-sampler running?`            | The service that measures the disk has not taken a sample yet, or is not running.      | Wait a quarter of an hour after a start. If it stays, see [Services and logs](../admin/services-logs.md).                                         |
+| `df` says `no disk sample yet — is metrics-sampler running?`            | The service that measures the disk has not taken a sample yet, or is not running.      | It takes its first sample as it starts, so wait a minute. If it stays, see [Services and logs](../admin/services-logs.md).                        |
 | `unzip` says `not enough space`                                         | The files in the zip would not leave a tenth of their size free.                       | Free space on the disk, or expand the zip on a machine with room and copy the files in.                                                           |
 
 [Troubleshooting](../admin/troubleshooting.md) covers a disk that has filled up and other problems

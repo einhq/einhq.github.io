@@ -63,7 +63,8 @@ A few rules decide the close cases:
   date someone set there, and it comes second on the ladder. Closer than that, it is Google's
   reading of the camera's clock: the picture keeps the camera's time, Google's time tells EiN which
   time zone the clock was in, and **Time source** reads "from Google Photos or a sidecar". A GPS time
-  still comes first then.
+  still comes first then, and a camera that recorded its own time zone keeps "from the camera
+  clock".
 - **File names count only where a staging category says so**, and only the names a phone, a
   messenger, a screenshot tool or a desktop uploader writes. A name that dates a picture before 1995
   is not believed, and a scanner's running number such as `IMG_20190601_0001.jpg` is no date.
@@ -151,7 +152,9 @@ instead, as described above.
 4. Press <kbd>T</kbd>, or open the group's ⋯ menu and choose **Set the time…**. To date only some of
    its pictures, select them first; <kbd>T</kbd> then sets the time of those.
 5. In the **Set time** dialog, set **Start time** and the order (see the next section), then press
-   **Set time on N files**.
+   **Set time on N files**. A picture dated only to a year or a month keeps that date unless you
+   click its row first (see the next section), so a group named like "1987 · Peggy's shoebox"
+   needs a click on each row you want to date.
 
 EiN confirms with "The time is set on N photos of “<group>”". Within a few minutes the organizer
 puts the pictures into groups by the dates you gave them: an event, a trip, or a year's

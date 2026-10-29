@@ -123,7 +123,7 @@
 </div>
 <p>Nothing limits how many cores a container uses. The heavy work is in the media service: most pipeline steps are calls into it, and EiN mostly decides what to ask for and stores the answers. A machine running EiN Core alone, without the media service, does little beyond serving the interface and the shell.</p>
 <h2 id="choose-a-machine">Choose a machine<a class="anchor" href="#choose-a-machine" aria-label="Link to this section"></a></h2>
-<p>The installer checks the machine against these figures before it installs anything (<a href="install.html#what-the-checks-measure">What the checks measure</a>):</p>
+<p>The installer checks the machine against the first two rows of these figures before it installs anything (<a href="install.html#what-the-checks-measure">What the checks measure</a>); the language model&#39;s row is advice it does not check:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -153,7 +153,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10), which is why 32 GB is the recommended memory with both options; on 16 GB, leave the language model out or use a hosted one, as <a href="language-model.html">The language model</a> describes.</p>
+<p>Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as <a href="language-model.html">The language model</a> describes.</p>
 <p>What the figures mean in practice:</p>
 <ul>
 <li><strong>More cores</strong> let more media work run side by side, once you raise the settings in <a href="#let-more-work-run-at-once">Let more work run at once</a>. The defaults are set for a small machine and use few cores.</li>
@@ -175,6 +175,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d</code></pre></div>
 <p>compose makes again the containers whose settings changed. EiN is down while it restarts. With Docker, write <code>docker compose</code>.</p>
+<p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, so it may swap as much again as its memory limit; <code>./setup.sh</code> makes the containers again with the swap limit.</p>
 </li>
 <li><p>Check the new limit. In EiN&#39;s terminal, <code>top</code> shows EiN&#39;s memory against its limit in its <strong>Memory</strong> panel, for example <code>367 MB of 6.0 GB</code>.</p>
 </li>
@@ -185,7 +186,7 @@ podman compose up -d</code></pre></div>
 <li><strong>Keep the limits together below the machine&#39;s memory</strong>, with a few GB to spare for the database, which has no limit, and for the system itself. A container that grows is then stopped at its own limit, and the kernel does not have to pick a process to stop somewhere else on the machine.</li>
 <li><strong><code>EIN_MEMORY</code></strong>: EiN itself, its shells and its pipelines. Raise it from the default of 6 GB if <code>top</code> shows EiN close to its limit during an import.</li>
 <li><strong><code>EMS_MEMORY</code></strong>: the media service holds the models it is using and decodes videos. A video decoded on the processor is planned within a budget of 4000 MB (<code>EMS_CPU_ENCODE_MAX_MB</code>) and split into parts when it would need more, so keep the limit well above that. Its main model process restarts itself when it passes 60% of the limit, so the rest is left for the decoding and the tools.</li>
-<li><strong><code>LLM_MEMORY</code></strong>: the model and its working memory. The default fits the default model; a larger model needs more, as <a href="language-model.html">The language model</a> explains.</li>
+<li><strong><code>LLM_MEMORY</code></strong>: the model and its working memory. The default fits the default model; <a href="language-model.html">The language model</a> explains which other models the container can run.</li>
 </ul>
 <h3 id="when-a-container-reaches-its-limit">When a container reaches its limit<a class="anchor" href="#when-a-container-reaches-its-limit" aria-label="Link to this section"></a></h3>
 <p>When a container needs more than its limit, the kernel stops one of its processes. Each container restarts by itself if its main process stops, and the work it had in hand is picked up again: a pipeline step that was interrupted runs again, as long as it has attempts left. To see whether that happened, read the kernel&#39;s log on the machine:</p>
@@ -216,7 +217,7 @@ podman compose up -d</code></pre></div>
 </tbody></table>
 </div>
 <p>The CPU budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
-<p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, 15 minutes) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.</p>
+<p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.</p>
 <p>The media service has its own limits on how much it runs at once, set in <code>~/ein/.env</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -287,7 +288,7 @@ config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">df</span></code></pre></div>
 <p>The same figures are on the <strong>Dashboard</strong>, and <code>top</code>&#39;s <strong>Disk</strong> panel shows them live. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</p>
-<p>The container engine keeps the images, the build&#39;s scratch files and the database in its own storage, usually <code>~/.local/share/containers</code> for rootless podman and <code>/var/lib/docker</code> for Docker, which may be another disk than your data folder. Each update builds new images, and nothing removes the old ones by itself. To see what they take, and to remove the images no container uses:</p>
+<p>The container engine keeps the images, the build&#39;s scratch files and the database in its own storage, usually <code>~/.local/share/containers</code> for rootless podman and <code>/var/lib/docker</code> for Docker, which may be another disk than your data folder. Each update builds new images, and <code>setup.sh</code> removes the ones they replaced once the new EiN answers; a build&#39;s intermediate stages and other images without a name stay. To see what the images take, and to remove the unnamed ones no container uses:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 podman system <span class="hljs-built_in">df</span>
 podman image prune</code></pre></div>
@@ -303,7 +304,7 @@ podman image prune</code></pre></div>
 </thead>
 <tbody><tr>
 <td>The <strong>Dashboard</strong>&#39;s badge</td>
-<td><strong>Healthy</strong>: nothing is waiting. <strong>Catching up</strong>: work is waiting and some finished in the last hour. <strong>Stuck</strong>: work is waiting and none finished in the last hour</td>
+<td><strong>Healthy</strong>: nothing is waiting. <strong>Catching up</strong>: work is waiting and some of it, or a pipeline instance, finished in the last hour. <strong>Stuck</strong>: work is waiting and none finished in the last hour. <strong>Needs a person</strong>: a check failed</td>
 </tr>
 <tr>
 <td>The <strong>Dashboard</strong>&#39;s <strong>Work</strong> tab</td>

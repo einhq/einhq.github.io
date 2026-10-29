@@ -14,7 +14,7 @@ Both the system message and the tools are put together from the installed module
 - The system message is the prompt file `/etc/assistant-prompt.md`, then what each module says about its part.
 - The cards an answer can carry, the questions an empty chat suggests and the questions `agent-eval` asks also come from the modules.
 
-A module gives all of this in one directory, `etc/assistant.d/`. When an administrator runs `mod setup`, that directory is linked as `/etc/assistant.d/<module>/`, and the setup log says `Linked assistant.d at /etc/assistant.d/<module>`. The assistant reads every directory under `/etc/assistant.d/` in name order, as the user who is asking. Every file is optional; a module ships only the ones it needs.
+A module gives all of this in one directory, `etc/assistant.d/`. When an administrator runs `mod setup`, that directory is linked as `/etc/assistant.d/<module>/`, and the setup log says `Linked assistant.d at /etc/assistant.d/<module>` (`Assistant.d already linked at …` when the link is there already). The assistant reads every directory under `/etc/assistant.d/` in name order, as the user who is asking. Every file is optional; a module ships only the ones it needs.
 
 | File         | What it gives the assistant                                                                          |
 | ------------ | ---------------------------------------------------------------------------------------------------- |
@@ -110,7 +110,7 @@ fileSetDescription.spec = {
 };
 ```
 
-A bash command declares the same with the `arg` builtin. This is the start of the Archive's `person-create`:
+A bash command declares the same with the `arg` builtin. This is the Archive's `person-create`, with some of its options left out:
 
 ```bash
 #!bash
@@ -141,7 +141,8 @@ So `effect` matters more than any other field:
 
 - `read`: running it never changes anything.
 - `write`: it changes something every time.
-- A command that does both is `read`, with what makes it a write marked: a flag with `writes: true`, an argument with `writes: true` (any value) or `writes: ['create', …]` (only those values), and a flag with `dryRun: true` that turns a write into a report. In bash: `arg --writes <name> [value…]`.
+- A command that does both is `read`, with what makes it a write marked: a flag with `writes: true`, an argument with `writes: true` (any value) or `writes: ['create', …]` (only those values). In bash: `arg --writes <name> [value…]`.
+- A flag with `dryRun: true` reports what the command would do: a line that uses it is a read, even for a `write` command.
 
 A command without `effect` is judged a write, so the user is asked before it runs even when it only reads. You can see how a line is judged:
 
@@ -280,7 +281,7 @@ agent-eval --print-prompt
 - `--fixtures=<path>` asks the questions of one file instead of every module's, and `--prompt=<path>` tries another prompt file without replacing the installed one.
 - `--user=<path>` asks as another person, by the path of their node.
 
-At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (`reached`) and how many did so first (`firstChoice`), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, split into model time and the rest.
+At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (`reached`) and how many did so first (`firstChoice`), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, with how much of it the model took.
 
 A full run over every module's questions takes a long time. Run it so it survives a dropped connection, and keep the results in a file that is written after every question:
 
@@ -330,6 +331,6 @@ Try a changed prompt before you install it with `agent-eval --prompt=<path>`.
 - **The model calls your command with a flag as a stray word, or a value as a switch.** A flag without a `type` cannot be told apart. Give every flag one.
 - **The model keeps leaving out an argument it needs, or insists on one it does not.** Check whether its description says "optional" or "default"; that alone decides whether it is required.
 - **Every use of your command asks the user first.** Its spec has no `effect`, or it is `write`. A command that only reads should say `read`.
-- **The chat answers "x is not an EiN command".** The model made up a command name. The answer names similar commands it found; a clearer description or an example in `prompt.md` helps it pick the right one.
+- **A command the model ran is refused as "x is not an EiN command".** The model made up a command name. That message, which the model reads, names similar commands it found; a clearer description or an example in `prompt.md` helps it pick the right one.
 - **A card never appears.** The model gives a card only when its `description` says it is wanted. Check the card with `agent-eval --print-prompt` under `final_answer`, and check that every `required` parameter can be filled: a path the asking user cannot see is dropped, and with it a card that needed it.
 - **Answers are good in one language and poor in another.** Add questions in both to `eval.json` and compare `language` in the summary.

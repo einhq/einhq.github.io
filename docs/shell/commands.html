@@ -1044,13 +1044,13 @@
 <td><a href="../reference/commands-core.html#mod-setup">mod-setup</a></td>
 </tr>
 <tr>
-<td>Your sidebar and top bar, and why an entry is left out</td>
+<td>Your sidebar and top bar, and what is wrong with an entry</td>
 <td><code>ui-nav</code></td>
 <td><a href="../reference/commands-core.html#ui-nav">ui-nav</a></td>
 </tr>
 </tbody></table>
 </div>
-<p><code>config set</code> restarts the services that read the setting and says which. Every setting and its default is in <a href="../reference/settings.html">Settings</a>, for example <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>.</p>
+<p><code>config set</code> restarts the services a setting names as reading it, if it names any, and says which. Every setting and its default is in <a href="../reference/settings.html">Settings</a>, for example <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>.</p>
 <h2 id="the-system">The system<a class="anchor" href="#the-system" aria-label="Link to this section"></a></h2>
 <p><a href="../admin/monitoring.html">Health and the dashboard</a>, <a href="../admin/processing.html">Processing and pipelines</a> and <a href="../admin/services-logs.html">Services and logs</a> explain what these commands report and what to do about it.</p>
 <h3 id="health-and-activity">Health and activity<a class="anchor" href="#health-and-activity" aria-label="Link to this section"></a></h3>
@@ -1098,7 +1098,7 @@
 <td><a href="../reference/commands-core.html#gauges">gauges</a></td>
 </tr>
 <tr>
-<td>Versions of EiN, its modules, PostgreSQL and Deno</td>
+<td>Versions of EiN, PostgreSQL and Deno, and each module&#39;s commit</td>
 <td><code>system-info</code></td>
 <td><a href="../reference/commands-core.html#system-info">system-info</a></td>
 </tr>
@@ -1488,7 +1488,7 @@
 </tr>
 <tr>
 <td><code>passwd</code>, <code>useradd</code>, <code>usermod</code></td>
-<td><code>user-passwd</code>, <code>user-create</code>, <code>user-update</code></td>
+<td><code>user-passwd</code>, <code>user-create</code>, <code>user-update</code>; for groups, <code>group-add-member</code></td>
 </tr>
 <tr>
 <td><code>chgrp</code></td>

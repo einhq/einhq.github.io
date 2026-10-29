@@ -254,23 +254,23 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 
 [Configuration](../admin/configuration.md) explains where a setting's value comes from, and [Modules](../admin/modules.md) what installing a module does.
 
-| Task                                                   | Command                                   | Reference                                                  |
-| ------------------------------------------------------ | ----------------------------------------- | ---------------------------------------------------------- |
-| Every setting, with where its value comes from         | `config list`                             | [config-list](../reference/commands-core.md#config-list)   |
-| Only your own settings                                 | `config list --scope user`                | [config-list](../reference/commands-core.md#config-list)   |
-| One setting's value                                    | `config get CFG_TRASH_RETENTION_DAYS`     | [config-get](../reference/commands-core.md#config-get)     |
-| Change one of your own settings                        | `config set CFG_USER_SLIDESHOW_SECONDS 5` | [config-set](../reference/commands-core.md#config-set)     |
-| Change a system setting (administrators)               | `config set CFG_TRASH_RETENTION_DAYS 60`  | [config-set](../reference/commands-core.md#config-set)     |
-| Put a setting back to its default                      | `config unset CFG_TRASH_RETENTION_DAYS`   | [config-unset](../reference/commands-core.md#config-unset) |
-| The installed modules                                  | `mod list`, `mod list --long`             | [mod-list](../reference/commands-core.md#mod-list)         |
-| One module's details                                   | `mod info archive`                        | [mod-info](../reference/commands-core.md#mod-info)         |
-| The published modules                                  | `mod search`                              | [mod-search](../reference/commands-core.md#mod-search)     |
-| Install or update a module, _administrators only_      | `mod install assistant`                   | [mod-install](../reference/commands-core.md#mod-install)   |
-| Remove a module, _administrators only_                 | `mod remove assistant`                    | [mod-remove](../reference/commands-core.md#mod-remove)     |
-| Set up every module again, _administrators only_       | `mod setup --all`                         | [mod-setup](../reference/commands-core.md#mod-setup)       |
-| Your sidebar and top bar, and why an entry is left out | `ui-nav`                                  | [ui-nav](../reference/commands-core.md#ui-nav)             |
+| Task                                                      | Command                                   | Reference                                                  |
+| --------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------- |
+| Every setting, with where its value comes from            | `config list`                             | [config-list](../reference/commands-core.md#config-list)   |
+| Only your own settings                                    | `config list --scope user`                | [config-list](../reference/commands-core.md#config-list)   |
+| One setting's value                                       | `config get CFG_TRASH_RETENTION_DAYS`     | [config-get](../reference/commands-core.md#config-get)     |
+| Change one of your own settings                           | `config set CFG_USER_SLIDESHOW_SECONDS 5` | [config-set](../reference/commands-core.md#config-set)     |
+| Change a system setting (administrators)                  | `config set CFG_TRASH_RETENTION_DAYS 60`  | [config-set](../reference/commands-core.md#config-set)     |
+| Put a setting back to its default                         | `config unset CFG_TRASH_RETENTION_DAYS`   | [config-unset](../reference/commands-core.md#config-unset) |
+| The installed modules                                     | `mod list`, `mod list --long`             | [mod-list](../reference/commands-core.md#mod-list)         |
+| One module's details                                      | `mod info archive`                        | [mod-info](../reference/commands-core.md#mod-info)         |
+| The published modules                                     | `mod search`                              | [mod-search](../reference/commands-core.md#mod-search)     |
+| Install or update a module, _administrators only_         | `mod install assistant`                   | [mod-install](../reference/commands-core.md#mod-install)   |
+| Remove a module, _administrators only_                    | `mod remove assistant`                    | [mod-remove](../reference/commands-core.md#mod-remove)     |
+| Set up every module again, _administrators only_          | `mod setup --all`                         | [mod-setup](../reference/commands-core.md#mod-setup)       |
+| Your sidebar and top bar, and what is wrong with an entry | `ui-nav`                                  | [ui-nav](../reference/commands-core.md#ui-nav)             |
 
-`config set` restarts the services that read the setting and says which. Every setting and its default is in [Settings](../reference/settings.md), for example [`CFG_TRASH_RETENTION_DAYS`](../reference/settings.md#cfg_trash_retention_days).
+`config set` restarts the services a setting names as reading it, if it names any, and says which. Every setting and its default is in [Settings](../reference/settings.md), for example [`CFG_TRASH_RETENTION_DAYS`](../reference/settings.md#cfg_trash_retention_days).
 
 ## The system
 
@@ -278,19 +278,19 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 
 ### Health and activity
 
-| Task                                                        | Command                                    | Reference                                                      |
-| ----------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| Is everything fine and keeping up                           | `health`                                   | [health](../reference/commands-core.md#health)                 |
-| Watch the system live                                       | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
-| Commands running, yours or everyone's (administrator)       | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
-| Who is signed in, from where, doing what                    | `who`                                      | [who](../reference/commands-core.md#who)                       |
-| Free space per storage tier, and when it fills              | `df`                                       | [df](../reference/commands-core.md#df)                         |
-| CPU, memory and lag over the last hours                     | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
-| Meters the services add, such as the graphics card's memory | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
-| Versions of EiN, its modules, PostgreSQL and Deno           | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
-| How the archive grew, by type, year and month               | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
-| The media service's state                                   | `ems-status`                               | [ems-status](../reference/commands-ems.md#ems-status)          |
-| Whose the language model is, and whether it answers         | `llm-status --checks`                      | [llm-status](../reference/commands-assistant.md#llm-status)    |
+| Task                                                           | Command                                    | Reference                                                      |
+| -------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------- |
+| Is everything fine and keeping up                              | `health`                                   | [health](../reference/commands-core.md#health)                 |
+| Watch the system live                                          | `top`, `top -d 5` (`q` quits)              | [top](../reference/commands-core.md#top)                       |
+| Commands running, yours or everyone's (administrator)          | `ps`, `ps --user anna`                     | [ps](../reference/commands-core.md#ps)                         |
+| Who is signed in, from where, doing what                       | `who`                                      | [who](../reference/commands-core.md#who)                       |
+| Free space per storage tier, and when it fills                 | `df`                                       | [df](../reference/commands-core.md#df)                         |
+| CPU, memory and lag over the last hours                        | `host-metrics`, `host-metrics --window 60` | [host-metrics](../reference/commands-core.md#host-metrics)     |
+| Meters the services add, such as the graphics card's memory    | `gauges`                                   | [gauges](../reference/commands-core.md#gauges)                 |
+| Versions of EiN, PostgreSQL and Deno, and each module's commit | `system-info`                              | [system-info](../reference/commands-core.md#system-info)       |
+| How the archive grew, by type, year and month                  | `stats-overview`                           | [stats-overview](../reference/commands-core.md#stats-overview) |
+| The media service's state                                      | `ems-status`                               | [ems-status](../reference/commands-ems.md#ems-status)          |
+| Whose the language model is, and whether it answers            | `llm-status --checks`                      | [llm-status](../reference/commands-assistant.md#llm-status)    |
 
 `ps` and `who` show your own; an administrator sees everyone's.
 
@@ -406,7 +406,7 @@ EiN's commands are its own, so some familiar names are missing. Use these instea
 | `less`, `more`, `man`                         | the terminal's scrollback, `<command> --help`, and the [reference](../reference/commands.md) |
 | `realpath`                                    | `abspath`                                                                                    |
 | `which`                                       | `type <name>` or `command -v <name>`                                                         |
-| `passwd`, `useradd`, `usermod`                | `user-passwd`, `user-create`, `user-update`                                                  |
+| `passwd`, `useradd`, `usermod`                | `user-passwd`, `user-create`, `user-update`; for groups, `group-add-member`                  |
 | `chgrp`                                       | `chown :<group> <path>`                                                                      |
 | `sudo`, `su`                                  | `admin` or `user-elevate`, for members of `sudo`                                             |
 | `getfacl`, `setfacl`                          | `acl`                                                                                        |

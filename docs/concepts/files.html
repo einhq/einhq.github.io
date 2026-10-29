@@ -205,7 +205,7 @@ beside the file, not the file. Deleting the file deletes everything beneath it.<
 </tr>
 <tr>
 <td><code>db</code></td>
-<td>Small content that belongs with the database: the settings file, comments, SSH keys and <code>known_hosts</code>, the host keys of EiN&#39;s SSH server, password hashes, <code>/etc/fstab</code>, the text read from pictures and documents, and staging&#39;s record of what you sorted</td>
+<td>Small content that belongs with the database: the settings file, comments, SSH keys and <code>known_hosts</code>, the host keys of EiN&#39;s SSH server, password hashes, <code>/etc/fstab</code>, the events in a person&#39;s story, the text read from pictures and documents, and staging&#39;s record of what you sorted</td>
 <td>Large objects in PostgreSQL, in the volume <code>ein_db</code></td>
 </tr>
 </tbody></table>
@@ -319,7 +319,7 @@ sets the time, such as <code>put -p</code> in <code>sftp</code> or <code>rsync -
 <p>While content is being written somewhere other than from the start in order, the checksum is
 cleared, and EiN reads the finished file back once to measure it. A file whose writing stopped
 part-way has no checksum rather than a wrong one.</p>
-<p>Two commands look at the bytes themselves rather than at what the node records:</p>
+<p>Three commands look at the bytes themselves rather than at what the node records:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -483,10 +483,10 @@ mount</code></pre></div>
 </tbody></table>
 </div>
 <p>A <code>filesystem</code> mount shows a folder of the machine, and an <code>sftp</code> mount shows a folder of another
-machine. Both are mirrors: their files are the other side&#39;s files, nothing is stored about them in
-EiN, and changes there start no pipelines, so EiN makes no thumbnails, reads no dates and finds no
-faces in them. A file in a mirror cannot have children. To bring files from a mount into the
-archive, copy them into staging.</p>
+machine. Both are mirrors: their files are the other side&#39;s files, and nothing is stored about them
+in EiN. A file in a mirror cannot have children, so EiN makes no thumbnails, reads no dates and
+finds no faces in them, and changes in an <code>sftp</code> mount start no pipelines at all. To bring files
+from a mount into the archive, copy them into staging.</p>
 <p>Only the administrator mounts and unmounts. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Reaching other machines</a>
 shows how to mount a folder of another machine and keep the mount across restarts, and
 <a href="tree.html">The tree</a> describes every standard path.</p>
@@ -554,7 +554,7 @@ how to make room.</p>
 <tr>
 <td><code>df</code> says <code>no disk sample yet — is metrics-sampler running?</code></td>
 <td>The service that measures the disk has not taken a sample yet, or is not running.</td>
-<td>Wait a quarter of an hour after a start. If it stays, see <a href="../admin/services-logs.html">Services and logs</a>.</td>
+<td>It takes its first sample as it starts, so wait a minute. If it stays, see <a href="../admin/services-logs.html">Services and logs</a>.</td>
 </tr>
 <tr>
 <td><code>unzip</code> says <code>not enough space</code></td>

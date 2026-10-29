@@ -89,7 +89,7 @@ archive has grown and when in the year births, weddings and deaths fall. This pa
 who uses EiN.</p>
 <h2 id="open-home">Open Home<a class="anchor" href="#open-home" aria-label="Link to this section"></a></h2>
 <p>Choose <strong>Home</strong> at the top of the sidebar. On a computer, the EiN mark at the top left also takes
-you there. EiN opens on Home when you sign in.</p>
+you there. EiN opens on Home when you sign in, unless you were on your way to another page.</p>
 <p>The page is headed <strong>Welcome</strong>, &quot;What is new in the archive, what is coming up, and this day in
 years past&quot;. Under the header:</p>
 <ul>
@@ -107,11 +107,12 @@ without it, Home has nothing to show.</p>
 <h2 id="on-this-day">On this day<a class="anchor" href="#on-this-day" aria-label="Link to this section"></a></h2>
 <p><strong>On this day</strong> is a row of round pictures, one for each year that has pictures taken on today&#39;s
 date, newest year first, up to 8. Under each ring it says how long ago that was, such as &quot;1 year
-ago&quot; or &quot;12 years ago&quot;, and the year. The picture in the ring is the first one taken that day.</p>
+ago&quot; or &quot;12 years ago&quot;, and the year. The picture in the ring is the first one taken that day.
+This year counts too, so a picture taken today has a ring of its own, &quot;0 years ago&quot;.</p>
 <p>When there are more rings than fit, swipe the row sideways, or scroll it with a trackpad.</p>
 <p>The row counts pictures in albums only. Pictures still in your staging area, and pictures with no
-date, are not part of it, and neither are pictures you may not see. When no earlier year has
-anything for today, the section is not shown at all.</p>
+date, are not part of it, and neither are pictures you may not see. When no year has anything for
+today, the section is not shown at all.</p>
 <p>The same rings stand above the feed on the <strong>Media</strong> page; see
 <a href="media.html#browse-the-feed">Media, Year and labels</a>.</p>
 <h3 id="watch-the-memories-story">Watch the memories story<a class="anchor" href="#watch-the-memories-story" aria-label="Link to this section"></a></h3>
@@ -121,8 +122,8 @@ anything for today, the section is not shown at all.</p>
 stays 5 seconds. Under the bars it says how long ago it was, such as &quot;7 years ago&quot;, and the
 date, such as &quot;25 December 2019&quot;.</li>
 <li>The story plays that year&#39;s pictures in the order they were taken, up to 24 of them, then moves
-on to the next earlier year with pictures from this day, reaching back up to 30 years. After the
-last picture of the oldest year, it closes.</li>
+on to the next earlier year with pictures from this day, through up to 30 years that have
+pictures. After the last picture of the oldest year, it closes.</li>
 </ol>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -190,7 +191,7 @@ how long ago under it:</p>
 </tr>
 <tr>
 <td>&quot;3h ago&quot;</td>
-<td>earlier today, in hours</td>
+<td>less than a day ago, in hours</td>
 </tr>
 <tr>
 <td>&quot;yesterday&quot;</td>
@@ -210,8 +211,9 @@ how long ago under it:</p>
 </tr>
 </tbody></table>
 </div>
-<p>Under it is a row of the album&#39;s pictures, as many as fit, the last one marked with how many more
-the album holds, such as <strong>+21</strong>. Click the album&#39;s name or any of the pictures to open the album.</p>
+<p>Under it is a row of the album&#39;s pictures, as many as fit and at most five, the last one marked
+with how many more the album holds, such as <strong>+21</strong>. Click the album&#39;s name or any of the pictures
+to open the album.</p>
 <p>Beside each entry is the portrait of the person whose account made the album, when the account is
 linked to a person in the archive; otherwise a picture icon. See
 <a href="profile.html">Your profile, favourites and trash</a>.</p>
@@ -352,7 +354,8 @@ each photo, album, person and place, and each file EiN makes from them; see
 <li><strong>File storage growth</strong> runs across the full width: the size of the files added each year,
 counting the originals and the smaller versions EiN makes of them, with a line for &quot;Cumulative
 file size by month&quot;. The total is at the top right.</li>
-<li>Then one chart for each kind of node, such as <strong>Person nodes</strong> or <strong>Album nodes</strong>, largest first:
+<li>Then one chart for each kind of node, such as <strong>Person nodes</strong> or <strong>Album nodes</strong>, <strong>File nodes</strong>
+first and the others largest first:
 bars for the nodes created in each calendar year, a line for the &quot;Cumulative total by month&quot;, and
 the total, such as &quot;2,431 nodes&quot;. Rest the pointer on a bar to read the year&#39;s count.</li>
 </ul>
@@ -375,7 +378,7 @@ the section says &quot;No node history found&quot;.</p>
 </tr>
 <tr>
 <td>A picture turns up under the day before or after</td>
-<td>The day is counted in UTC, so a picture taken close to midnight can fall on the neighbouring day. A picture known only to a year or a month counts from the first day of that period, so it can turn up on 1 January or on the first of the month.</td>
+<td>The day is counted in UTC, so a picture taken close to midnight can fall on the neighbouring day. A picture known only to a year or a month counts from the start of that period, so it can turn up on 1 January or the first of the month, or the day before in a time zone east of UTC.</td>
 </tr>
 <tr>
 <td>The story says &quot;Nothing was taken on this day in earlier years.&quot;</td>

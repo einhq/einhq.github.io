@@ -245,8 +245,8 @@ also appear in the search box's list under **Go to**, like every sidebar entry.
   lead to another website.
 - **`icon`** is the name of any icon at [tabler.io/icons](https://tabler.io/icons), written as it
   is there: `map-pin`, `beach`, `heart`. Add `-filled` for the filled form, `heart-filled`. It can
-  also be the path of an SVG file in EiN that you may read, which is drawn in the colour of the
-  text.
+  also be the full path, starting with `/`, of an SVG file in EiN that you may read, which is drawn
+  in the colour of the text.
 - **`id`** can be anything no one else uses. The shipped ones are `<module>.<name>`; starting yours
   with `me.` keeps them apart.
 
@@ -265,8 +265,8 @@ an `action` that says what choosing it does:
 | `{ "navigate": "/albums" }`                               | Opens the address as the page.                                                                                                                                                                                        |
 | `{ "dialog": "/albums/new" }`                             | Opens it in a dialog over the page you are on.                                                                                                                                                                        |
 | `{ "drawer": "/favourites" }`                             | Opens it in the side drawer at the right, or closes the drawer when it shows that address. The button is lit while the drawer is open, and left out on that address's own page. On a phone it opens a dialog instead. |
-| `{ "fullscreen": "/map" }`                                | Opens it over everything, the top bar too, until <kbd>Esc</kbd> or **Back**.                                                                                                                                          |
-| `{ "run": "<command line>" }`                             | Runs the command line as you, as if you typed it in the terminal.                                                                                                                                                     |
+| `{ "fullscreen": "/map" }`                                | Opens it over everything, the top bar too, until <kbd>Esc</kbd> or the browser's Back.                                                                                                                                |
+| `{ "run": "<command line>" }`                             | Runs the command line as you, as the web interface runs its commands: with `JSON_OUTPUT=1`.                                                                                                                           |
 | `{ "run": "album-random", "navigate": "/albums/{path}" }` | Runs the command, then opens an address filled in from its answer.                                                                                                                                                    |
 
 [Finding your way around](interface.md#pages-dialogs-the-side-drawer-and-full-screen) shows what a
@@ -394,7 +394,8 @@ This gives **Create** › **Album** the key <kbd>Alt</kbd>+<kbd>A</kbd>, gives y
   A button placed beside the search box counts by its `order` too.
 - EiN keeps its own keys: <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd>), <kbd>?</kbd>,
   and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd> or an arrow key,
-  which the terminal uses. An entry that asks for one of these does not get it.
+  which the terminal uses. An entry that asks for one of these as EiN writes it (`mod+K`, `shift+?`,
+  `alt+T` and so on) does not get it.
 
 Some pages have keys of their own while they are on screen, such as the photo viewer. Press
 <kbd>?</kbd> on a page to see which keys it uses before you pick one;
@@ -552,7 +553,7 @@ Give one of these:
 | `{ "navigate": "<address>" }`                          | Opens the address as the page.                                                                                                                      |
 | `{ "dialog": "<address>" }`                            | Opens it in a dialog over the page.                                                                                                                 |
 | `{ "drawer": "<address>" }`                            | Opens it in the side drawer, or closes the drawer when it shows it. A dialog on a phone.                                                            |
-| `{ "fullscreen": "<address>" }`                        | Opens it over everything until <kbd>Esc</kbd> or **Back**.                                                                                          |
+| `{ "fullscreen": "<address>" }`                        | Opens it over everything until <kbd>Esc</kbd> or the browser's Back.                                                                                |
 | `{ "run": "<command line>" }`                          | Runs the command line as you. Its output is not shown.                                                                                              |
 | `{ "run": "<command line>", "navigate": "<address>" }` | Runs it, then opens the address with each `{key}` replaced by that field of the command's JSON answer, URI-encoded; a missing field leaves nothing. |
 

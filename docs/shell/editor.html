@@ -111,8 +111,8 @@ completes paths after <code>edit</code> as it does after any command.</p>
  nav.json   ✗ 2:26 expected ',' or ']' after array element         JSON ✗   L 1:1
 ^S Save  ^Q Quit  ^F Find  ^G Line  ^Z Undo  ^Y Redo  ^K Cut  ^U Paste</code></pre></div>
 <ul>
-<li><strong>The text</strong>, with line numbers at the left. The cursor&#39;s line number is bright, the others
-grey. Rows after the end of the file show <code>~</code>.</li>
+<li><strong>The text</strong>, with line numbers at the left. The cursor&#39;s line number is in the text&#39;s own colour,
+the others grey. Rows after the end of the file show <code>~</code>.</li>
 <li><strong>The status bar</strong>, the second row from the bottom. At the left: the file&#39;s name, <code>[New]</code> for a
 file not saved yet, <code>[Modified]</code> while there are unsaved changes, then a message or the syntax
 error described under <a href="#checks-as-you-type">Checks as you type</a>. At the right: the language, a
@@ -131,7 +131,8 @@ script;</li>
 script, <code>#!/usr/bin/env python3</code> a Python file;</li>
 <li>otherwise plain text.</li>
 </ul>
-<p>Typing a <code>#!bash</code> line into a new file colours and checks it as bash at once.</p>
+<p>Typing a <code>#!bash</code> line into a new file colours and checks it as bash at once, unless its name
+already has one of the extensions under <a href="#colours-and-line-wrapping">Colours and line wrapping</a>.</p>
 <p>The folder must exist. To start a file in a folder that is not there yet, make the folder first:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">mkdir</span> -p ~/.ui &amp;&amp; edit ~/.ui/nav.json</code></pre></div>
@@ -211,8 +212,8 @@ usual reasons are a folder that does not exist and a file you may read but not c
 <ol>
 <li>Press <kbd>Alt</kbd>+<kbd>N</kbd> for a new terminal tab.</li>
 <li>Make the folder there with <code>mkdir -p</code>, or ask for access to the file.</li>
-<li>Go back to the editor&#39;s tab with <kbd>Alt</kbd>+<kbd>←</kbd> and press <kbd>Ctrl</kbd>+<kbd>S</kbd>
-again.</li>
+<li>Go back to the editor&#39;s tab, by clicking it or with <kbd>Alt</kbd>+<kbd>←</kbd>, and press
+<kbd>Ctrl</kbd>+<kbd>S</kbd> again.</li>
 </ol>
 <p>Over SSH, open a second SSH login for the same purpose.</p>
 <p><code>edit</code> does not notice when someone else changes the file while you have it open: saving writes
@@ -416,7 +417,7 @@ in the text reach the next stop of four columns, and other control characters as
 <p>The status bar names the language at its right; a file that matches none is <code>text</code>. A file without
 an extension, such as <code>~/.bashrc</code>, is plain text unless its first line starts with <code>#!</code>. In a
 Markdown file, each fenced code block is coloured in the language its fence names. A text longer
-than 256 KB is shown without colours.</p>
+than 262,144 characters (256 K) is shown without colours.</p>
 <p>Plain text and Markdown wrap at the edge of the window, at the last space that fits; a row that
 continues a line has no line number in front of it, and <kbd>↑</kbd> and <kbd>↓</kbd> move by
 rows on the screen. Code does not wrap: a long line scrolls sideways to keep the cursor in view, and

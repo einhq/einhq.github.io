@@ -35,8 +35,8 @@ What the editor shows, here on a `nav.json` with a missing comma:
 ^S Save  ^Q Quit  ^F Find  ^G Line  ^Z Undo  ^Y Redo  ^K Cut  ^U Paste
 ```
 
-- **The text**, with line numbers at the left. The cursor's line number is bright, the others
-  grey. Rows after the end of the file show `~`.
+- **The text**, with line numbers at the left. The cursor's line number is in the text's own colour,
+  the others grey. Rows after the end of the file show `~`.
 - **The status bar**, the second row from the bottom. At the left: the file's name, `[New]` for a
   file not saved yet, `[Modified]` while there are unsaved changes, then a message or the syntax
   error described under [Checks as you type](#checks-as-you-type). At the right: the language, a
@@ -57,7 +57,8 @@ The first save creates the file in the folder the path names, and decides its ty
   script, `#!/usr/bin/env python3` a Python file;
 - otherwise plain text.
 
-Typing a `#!bash` line into a new file colours and checks it as bash at once.
+Typing a `#!bash` line into a new file colours and checks it as bash at once, unless its name
+already has one of the extensions under [Colours and line wrapping](#colours-and-line-wrapping).
 
 The folder must exist. To start a file in a folder that is not there yet, make the folder first:
 
@@ -129,8 +130,8 @@ In the terminal panel you can put it right without losing the text:
 
 1. Press <kbd>Alt</kbd>+<kbd>N</kbd> for a new terminal tab.
 2. Make the folder there with `mkdir -p`, or ask for access to the file.
-3. Go back to the editor's tab with <kbd>Alt</kbd>+<kbd>←</kbd> and press <kbd>Ctrl</kbd>+<kbd>S</kbd>
-   again.
+3. Go back to the editor's tab, by clicking it or with <kbd>Alt</kbd>+<kbd>←</kbd>, and press
+   <kbd>Ctrl</kbd>+<kbd>S</kbd> again.
 
 Over SSH, open a second SSH login for the same purpose.
 
@@ -229,7 +230,7 @@ in the text reach the next stop of four columns, and other control characters as
 The status bar names the language at its right; a file that matches none is `text`. A file without
 an extension, such as `~/.bashrc`, is plain text unless its first line starts with `#!`. In a
 Markdown file, each fenced code block is coloured in the language its fence names. A text longer
-than 256 KB is shown without colours.
+than 262,144 characters (256 K) is shown without colours.
 
 Plain text and Markdown wrap at the edge of the window, at the last space that fits; a row that
 continues a line has no line number in front of it, and <kbd>↑</kbd> and <kbd>↓</kbd> move by

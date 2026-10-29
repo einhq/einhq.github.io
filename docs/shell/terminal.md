@@ -118,9 +118,9 @@ page is away.
 - **How long EiN waits.** EiN keeps a shell without a page for five minutes. The administrator sets
   this with **Terminal reconnect grace**
   ([`CFG_TERMINAL_RECONNECT_GRACE_SEC`](../reference/settings.md#cfg_terminal_reconnect_grace_sec),
-  `300` seconds; `0` ends a shell as soon as its page goes). After that the shell ends, with
-  whatever runs in it, and the tab starts a fresh one when you come back. To keep a long job going
-  after you leave, see [The shell language](bash.md).
+  `300` seconds; `0` ends a shell as soon as its page goes; a change applies from the next
+  disconnect). After that the shell ends, with whatever runs in it, and the tab starts a fresh one
+  when you come back. To keep a long job going after you leave, see [The shell language](bash.md).
 - **One browser tab, one set of terminals.** The tabs belong to the browser tab they were opened
   in. EiN in a second browser tab gets terminals of its own, starting again at **Session 1**, and
   closing a browser tab leaves its shells to end after the five minutes.
@@ -128,8 +128,9 @@ page is away.
   who signs in on that browser finds none of your shells.
 - **When EiN restarts**, for example for an update, every shell ends. The tabs stay, and each
   starts a fresh shell once EiN answers again.
-- **While the connection is down**, the top bar shows a red **Disconnected** badge. The terminal
-  reconnects by itself; there is nothing to press.
+- **While the connection is down**, the top bar shows a red **Disconnected** badge, and each tab
+  whose shell is not connected shows a red crossed-out plug in place of its terminal icon. The
+  terminal reconnects by itself; there is nothing to press.
 
 Your command history is kept through all of this (see
 [Find an earlier command](#find-an-earlier-command)).
@@ -172,8 +173,8 @@ Only the terminal in the browser draws pictures. Over SSH, `cat` prints marker l
 `__IMG:` instead.
 
 > [!NOTE]
-> A picture whose path holds a space, such as one in `/archive/albums/Summer 2020`, is not drawn:
-> the terminal shows its `__IMG:` lines instead. Open it in the web interface.
+> A picture whose path holds a space or a colon, such as one in `/archive/albums/Summer 2020`, is
+> not drawn: the terminal shows its `__IMG:` lines instead. Open it in the web interface.
 
 ## Edit the command line
 
@@ -231,7 +232,8 @@ bash's history commands work too: `history` lists what you ran, `!!` runs the la
 What EiN keeps:
 
 - Your history is the file `~/.bash_history`. Every terminal tab and every SSH login of yours adds
-  to it as each command runs, so a command typed in one tab can be found from another.
+  to it as each command runs, so a tab you open afterwards finds the commands typed in the others.
+  A tab that is already open keeps the list it started with.
 - A command typed with a space in front, or the same as the one before it, is not kept.
 - It keeps the last 1000 commands. Change this under **Profile → Preferences**, **Shell history
   length** ([`HISTSIZE`](../reference/settings.md#histsize)); a tab you open afterwards uses the new
@@ -356,8 +358,8 @@ ssh -p 2222 helen@ein.local
 ```
 
 You get the same shell as in a terminal tab: the same prompt, your history, your `~/.bashrc`, Tab
-completion and the same keys. Two things belong to the browser alone: pictures drawn by `cat`, and
-dropping files to upload them. Over SSH, copy files with SFTP or `scp` instead.
+completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
+`cat`, and dropping files to upload them. Over SSH, copy files with SFTP or `scp` instead.
 
 ![Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly](../diagrams/doors.svg "Whichever door you use, the same commands run as you, with the same permissions.")
 
@@ -427,8 +429,10 @@ small screen press <kbd>Alt</kbd>+<kbd>T</kbd> with a keyboard, or use SSH from 
 **The terminal closed while I was clicking on the page.** A click outside the terminal hides it. Its
 shells keep running; press <kbd>Alt</kbd>+<kbd>T</kbd> to bring it back.
 
-**The top bar says Disconnected.** EiN cannot be reached from the browser just now. The terminal
-reconnects by itself and finds its shell again if the connection is back within five minutes.
+**The top bar says Disconnected, or a tab shows a red crossed-out plug.** EiN cannot be reached
+from the browser just now: the badge is the page's own connection, the plug that tab's shell. The
+terminal reconnects by itself and finds its shell again if the connection is back within five
+minutes.
 
 **The screen was cleared and a fresh prompt waits.** The shell ended: you were away longer than five
 minutes, EiN restarted, or you signed out. Your history is still there; <kbd>↑</kbd> and
@@ -445,7 +449,7 @@ administrators. Through every door it is refused the same way; ask your administ
 Write `du -sh` or `du -ch`.
 
 **`cat` prints lines starting `__IMG:` instead of the picture.** You are connected over SSH, or the
-picture's path holds a space. Open the picture in the web interface.
+picture's path holds a space or a colon. Open the picture in the web interface.
 
 **Dropped files landed in the wrong folder.** They go into the folder the tab is in, the path on the
 tab. `cd` to where they belong and drop them again, or move them with `mv`.

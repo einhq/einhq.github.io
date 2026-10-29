@@ -8,7 +8,7 @@ page that explains that part in full; this page is for looking a key up.
 Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu. The
 **Keyboard shortcuts** dialog opens, listing the keys that work anywhere under **Anywhere**, and a
 group for each part of the screen that has keys of its own while that part is on screen:
-**Pictures** for a grid of pictures, **Lightbox** and **Video** for the viewer, **Nodes**,
+**Pictures** for a grid of pictures, **Lightbox**, **Video** and **Audio** for the viewer, **Nodes**,
 **Staging** and **Memories**. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.
 
 ![The Keyboard shortcuts dialog over the Home page, listing the Anywhere group](../../assets/shots/shortcuts.webp "The ? dialog lists only the keys of what is on screen now.")
@@ -75,7 +75,7 @@ In the search box of the **Search** and **Media** pages:
 
 ## Pictures in a grid
 
-Wherever pictures stand in a grid: an album, **Media**, **Year**, a person's pictures, search
+Wherever pictures stand in a grid: an album, **Media**, a person's pictures, search
 results. [Albums](../guide/albums.md#select-pictures) describes selecting in full.
 
 | Keys                                                              | What they do                                                           |
@@ -103,7 +103,7 @@ explains each.
 | <kbd>f</kbd>                 | Shows or hides the face boxes with their names.                                                                                                 |
 | <kbd>t</kbd>                 | Shows or hides the text in the picture, when it has some.                                                                                       |
 | <kbd>s</kbd>                 | Adds the file to your favourites, or takes it out.                                                                                              |
-| <kbd>+</kbd> or <kbd>=</kbd> | Zooms in a step (photos only).                                                                                                                  |
+| <kbd>+</kbd> or <kbd>=</kbd> | Zooms in a step (photos and videos, not during a slideshow).                                                                                    |
 | <kbd>-</kbd>                 | Zooms out a step.                                                                                                                               |
 | <kbd>0</kbd>                 | Fits the whole picture again.                                                                                                                   |
 | <kbd>Esc</kbd>               | Closes what lies over the picture first: the enlarged map, the text dialog, drawing a face box. Then stops a slideshow. Then closes the viewer. |
@@ -117,11 +117,10 @@ While a dialog lies over the viewer, the viewer's keys rest.
 | Keys                                                          | What they do                                                  |
 | ------------------------------------------------------------- | ------------------------------------------------------------- |
 | <kbd>Space</kbd> or <kbd>k</kbd>                              | Plays or pauses (videos and recordings).                      |
-| <kbd>j</kbd> / <kbd>l</kbd>                                   | Back / forward 10 seconds (videos).                           |
+| <kbd>j</kbd> / <kbd>l</kbd>                                   | Back / forward 10 seconds (videos and recordings).            |
 | <kbd>Shift</kbd>+<kbd>←</kbd> / <kbd>Shift</kbd>+<kbd>→</kbd> | Previous / next chapter, when the video has chapters.         |
 | <kbd>m</kbd>                                                  | Mutes or unmutes.                                             |
-| <kbd>c</kbd>                                                  | Turns subtitles on or off, when the video has a transcript.   |
-| <kbd>&lt;</kbd> / <kbd>&gt;</kbd>                             | Slower / faster.                                              |
+| <kbd>c</kbd>                                                  | Turns subtitles on or off, when the file has a transcript.    |
 | <kbd>p</kbd>                                                  | Turns picture-in-picture on or off, where the browser has it. |
 
 Move to the timeline, or a recording's waveform, with <kbd>Tab</kbd> to use these:
@@ -132,7 +131,7 @@ Move to the timeline, or a recording's waveform, with <kbd>Tab</kbd> to use thes
 | <kbd>Page Down</kbd> / <kbd>Page Up</kbd>             | Previous / next chapter, or a tenth of the file back / forward without chapters. |
 | <kbd>Home</kbd> / <kbd>End</kbd>                      | The start / the end.                                                             |
 
-On a video's volume slider, after <kbd>Tab</kbd>: <kbd>←</kbd> <kbd>↓</kbd> and <kbd>→</kbd>
+On the volume slider, after <kbd>Tab</kbd>: <kbd>←</kbd> <kbd>↓</kbd> and <kbd>→</kbd>
 <kbd>↑</kbd> change the volume by 5 percent, <kbd>Page Down</kbd> and <kbd>Page Up</kbd> by 20
 percent, <kbd>Home</kbd> silences it and <kbd>End</kbd> turns it full up. A click on the timeline
 or the slider leaves the keyboard where it was, so <kbd>←</kbd> and <kbd>→</kbd> still step between

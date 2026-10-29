@@ -11,8 +11,8 @@ own: [The terminal](terminal.md). [Commands by task](commands.md) tells you whic
 
 ## Bash, on a tree of nodes
 
-The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Everything
-the language has is there:
+The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Nearly all
+of the language is there:
 
 | What                     | Example                                                                       |
 | ------------------------ | ----------------------------------------------------------------------------- |
@@ -133,9 +133,8 @@ Each terminal tab, and each SSH login, is one shell that lasts until you close i
 page reload (see [Come back to a running shell](terminal.md#come-back-to-a-running-shell)). Other
 tabs have shells of their own and do not see it.
 
-A command sent with `ssh host 'command'` from your own computer, and every command the web pages
-run for you, gets a fresh shell that ends with the command. Join what belongs together with `&&` in
-one line:
+A command sent with `ssh host 'command'` from your own computer gets a fresh shell that ends with
+the command. Join what belongs together with `&&` in one line:
 
 ```bash
 # on your own computer
@@ -149,8 +148,8 @@ ssh -p 2222 helen@ein.local 'cd /archive/albums && ls -1 | wc -l'
 When a terminal tab or an SSH login opens, the shell reads, in this order:
 
 1. `/etc/bashrc`, the same for everyone. It defines the aliases `ll` (`ls -al`), `la` (`ls -A`),
-   `whoami` and `id`, and reads the settings: the administrator's in `/etc/config`, then your own in
-   `~/.config`.
+   `whoami` and `id`, and reads the settings: the modules' own, the administrator's in `/etc/config`,
+   then your own in `~/.config`.
 2. `~/.bashrc`, your own file, if you have one.
 
 EiN reads no `~/.bash_profile` or `~/.profile`. A command sent with `ssh host 'command'` reads
@@ -179,8 +178,8 @@ To make a change that lasts:
    [The editor](editor.md) has its other keys.
 4. Run `source ~/.bashrc` to use it in the tab you are in. New tabs read it when they open.
 
-A `~/.bashrc` that fails does not stop the shell from opening: the lines before the error have run,
-and you get a prompt. Fix the file and `source` it again.
+A `~/.bashrc` that fails does not stop the shell from opening: you get a prompt all the same. Fix
+the file and `source` it again.
 
 Some things to put there:
 

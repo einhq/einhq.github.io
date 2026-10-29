@@ -93,8 +93,7 @@ everyone who uses EiN in a browser.</p>
 under it. The list closes when you press <kbd>Esc</kbd>, click somewhere else or choose a row, and
 choosing a row empties the box.</p>
 <p>When something covers the box (a dialog, the viewer, or a page shown full screen), the same keys
-open the finder as a dialog of its own, with the prompt <strong>Search, or go to a page, person or
-album…</strong>. <kbd>Esc</kbd>, or <kbd>Ctrl</kbd>+<kbd>K</kbd> again, closes it.</p>
+open the finder as a dialog of its own, with the prompt <strong>Search, or go to a page…</strong>. <kbd>Esc</kbd>, or <kbd>Ctrl</kbd>+<kbd>K</kbd> again, closes it.</p>
 <p>On a phone the box reads <strong>Search</strong>, the list takes the width of the screen, and the keyboard&#39;s
 search key does what <kbd>Enter</kbd> does. <a href="phone.html">EiN on a phone</a> covers the rest.</p>
 <h3 id="go-somewhere-with-nothing-typed">Go somewhere with nothing typed<a class="anchor" href="#go-somewhere-with-nothing-typed" aria-label="Link to this section"></a></h3>
@@ -128,7 +127,7 @@ typed, <kbd>Enter</kbd> does nothing until an arrow key has lit a row.</p>
 <td>That page or action</td>
 </tr>
 <tr>
-<td><strong>Albums, people, locations</strong></td>
+<td><strong>Albums, people, locations, devices</strong></td>
 <td>Albums, people, locations and devices whose names match, with the kind of each beside it</td>
 <td>Its page</td>
 </tr>
@@ -174,7 +173,7 @@ yours. Without them it matches your words against the commands&#39; names and de
 <tbody><tr>
 <td><strong>Search</strong></td>
 <td><strong>Search</strong> under Explore in the sidebar, or <strong>Search for &quot;…&quot;</strong> in the finder</td>
-<td>Albums, people, locations, devices and GPS tracks: the things pictures belong to</td>
+<td>Albums, people, locations and devices: the things pictures belong to</td>
 </tr>
 <tr>
 <td><strong>Media</strong></td>
@@ -244,7 +243,7 @@ and a video its length.</li>
 <tr>
 <td>File names</td>
 <td>By the name</td>
-<td><code>DSC_4471</code>, <code>IMG_0001</code></td>
+<td><code>DSC_0215</code>, <code>IMG_0525</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -284,8 +283,8 @@ found more.</p>
 ending in <code>…</code>, meaning every person whose name contains it.</li>
 <li>A place becomes one of your <a href="places.html">locations</a>, or, for a country or a city that is not one,
 an <strong>Area</strong> chip covering it.</li>
-<li>When your account is linked to a person, <code>me</code>, <code>my</code> and a single relative, such as <code>my mother</code> or
-<code>my husband</code>, are read through the <a href="family.html">family tree</a>.</li>
+<li>A word for a relative, such as <code>mother</code> or <code>husband</code>, is not read as a person: the yellow note
+names it, and it is searched as words. Name the person instead.</li>
 </ul>
 <p>Some examples on the Media page of the Wrenfield demo:</p>
 <ul>
@@ -429,7 +428,7 @@ are standing in.</p>
 <p>The picture goes to your EiN and nowhere else, turned upright and made smaller first. EiN keeps it
 in <code>/tmp</code>, never adds it to the archive, and removes it after 24 hours (the <strong>Hours in /tmp</strong>
 setting, <a href="../reference/settings.html#cfg_tmp_retention_hours"><code>CFG_TMP_RETENTION_HOURS</code></a>). If it
-cannot be sent, a red message says <code>the picture could not be sent</code>, followed by the reason.</p>
+cannot be sent, a red message says <code>the picture could not be sent</code>, followed by the HTTP status.</p>
 <p>To find pictures like one that is already in the archive, open it in the <a href="viewer.html">viewer</a>. Its
 <a href="viewer.html#the-details-panel">details panel</a> shows <strong>Similar</strong>, a strip of the nearest pictures, and
 <strong>Show all</strong> opens the same search on the Media page.</p>
@@ -443,17 +442,15 @@ that look like that label but do not carry it yet;
 <a href="media.html#let-ein-suggest-where-a-label-belongs">Media, Year and labels</a> explains how to label them
 and teach EiN what the label means.</p>
 <h2 id="find-albums-people-locations-and-devices">Find albums, people, locations and devices<a class="anchor" href="#find-albums-people-locations-and-devices" aria-label="Link to this section"></a></h2>
-<p>The Search page finds the things pictures belong to. Its header reads <strong>Search</strong> and <strong>Search for
-anything by name, date or @mention</strong>.</p>
+<p>The Search page finds the things pictures belong to. Its header reads <strong>Search</strong> and <strong>Search by
+name, date or @mention</strong>.</p>
 <ol>
 <li>Open <strong>Search</strong> in the sidebar.</li>
-<li>Type in the box, <strong>Search — &quot;album summer 2019&quot;, or type @ for a person, location, label or
-device</strong>, and press <kbd>Enter</kbd>.</li>
+<li>Type in the box, <strong>Search, or type @ to pick something by name</strong>, and press <kbd>Enter</kbd>.</li>
 <li>The results appear as cards, 60 at a time, with more as you scroll. A card shows the name, a
 cover picture and the kind, and for an album its dates and how many files it holds. Click a card
 to open its page.</li>
-<li>Narrow the results with <strong>Show</strong>: <strong>All</strong>, <strong>Albums</strong>, <strong>People</strong>, <strong>Locations</strong>, <strong>Devices</strong> or
-<strong>Tracks</strong>.</li>
+<li>Narrow the results with <strong>Show</strong>: <strong>All</strong>, <strong>Albums</strong>, <strong>People</strong>, <strong>Locations</strong> or <strong>Devices</strong>.</li>
 <li>Order them with <strong>Sort</strong>: <strong>Relevance</strong> (the default), <strong>Name (A-Z)</strong>, <strong>Newest first</strong> or
 <strong>Oldest first</strong>.</li>
 </ol>
@@ -486,25 +483,21 @@ to open its page.</li>
 <td>Name, make, model or serial number</td>
 <td><code>lumix</code> finds Peggy&#39;s Lumix</td>
 </tr>
-<tr>
-<td>Tracks</td>
-<td>The device&#39;s name, or the track&#39;s description</td>
-<td><code>erik&#39;s iphone</code> finds the tracks Erik&#39;s iPhone recorded</td>
-</tr>
 </tbody></table>
 </div>
 <p>A person, location, year, device or label in the search narrows albums by their pictures:
 <code>@Peggy Wrenfield 1968</code> finds the albums holding a picture of Peggy taken in 1968. A label matches an album that carries it or holds a picture that does. When nothing is
 found, the page says <strong>No results found</strong>.</p>
 <h3 id="start-from-recent-searches-people-places-and-years">Start from recent searches, people, places and years<a class="anchor" href="#start-from-recent-searches-people-places-and-years" aria-label="Link to this section"></a></h3>
-<figure class="shot"><a href="../../assets/shots/search-page@2x.webp"><img src="../../assets/shots/search-page.webp" srcset="../../assets/shots/search-page.webp 1x, ../../assets/shots/search-page@2x.webp 2x" alt="The Search page before a search: the box with the Show choices All, Albums, People, Locations, Devices and Tracks and the Sort menu, and below it rows of People, Locations, Years and Labels" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/search-page@2x.webp"><img src="../../assets/shots/search-page.webp" srcset="../../assets/shots/search-page.webp 1x, ../../assets/shots/search-page@2x.webp 2x" alt="The Search page before a search: the box with the Show choices All, Albums, People, Locations and Devices and the Sort menu, and below it rows of People, Locations, Years and Labels" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.</figcaption></figure>
 <p>Before you type, the Search page shows:</p>
 <ul>
 <li><strong>Recent searches</strong>: your last eight searches on this page. Click one to run it again, its ×
 (<strong>Forget …</strong>) to drop it, or <strong>Clear</strong> to drop them all. They are kept in this browser, not in
 your account, so another computer or phone has a list of its own.</li>
 <li><strong>People</strong>: the people in the most pictures.</li>
-<li><strong>Locations</strong>: the locations on the map with the most pictures, as small maps.</li>
+<li><strong>Locations</strong>: up to 16 locations that have a place on the map, as small maps, those placed from
+the most geotagged pictures first.</li>
 <li><strong>Years</strong>: every year with something in it, each opening that year on the
 <a href="media.html#the-year-page">Year page</a>.</li>
 <li><strong>Labels</strong>: every label, the most used first, then suggested labels marked with a sparkle: words
@@ -519,7 +512,7 @@ Copy it to send a search to someone in the family, or to come back to it later. 
 link sees only what they are allowed to see. To keep a search in your sidebar, see
 <a href="customizing.html">Your sidebar and top bar</a>.</p>
 <p>The assistant can search for you too: ask it in <a href="assistant.html">Chat</a>, and an answer that comes from
-a search offers <strong>Show in search</strong> to open it here.</p>
+a search offers <strong>Show in search</strong> to open it on the Search or Media page.</p>
 <h2 id="what-needs-the-media-service-and-a-language-model">What needs the media service and a language model<a class="anchor" href="#what-needs-the-media-service-and-a-language-model" aria-label="Link to this section"></a></h2>
 <p>EiN&#39;s media service reads every picture, recording and document as it arrives, and turns your words
 into something it can compare with them when you search. A language model reads names out of a
@@ -537,7 +530,7 @@ sentence. Your administrator installs both; see <a href="../admin/media-service.
 <td>EiN alone</td>
 </tr>
 <tr>
-<td>Finding files, albums, people, locations, devices and tracks by name; <code>@</code> picks; labels; years and kinds read from a sentence</td>
+<td>Finding files, albums, people, locations and devices by name; <code>@</code> picks; labels; years and kinds read from a sentence</td>
 <td>EiN alone</td>
 </tr>
 <tr>
@@ -576,20 +569,20 @@ locations is looked up on OpenStreetMap&#39;s address service, Nominatim, to fin
 moment.</p>
 </blockquote>
 <p>More lines under it can name other parts that did not answer, such as the picture match. The results
-come only from what EiN can match without the media service, such as file names.</p>
+come only from what EiN can match without the media service, such as file names. A search with a
+picture finds nothing, and its line in the note says why.</p>
 <ol>
 <li>Wait a moment and press <kbd>Enter</kbd> in the box again. The media service may be busy or
 starting.</li>
-<li>If the note keeps coming back, tell your administrator. Anyone can check first: <strong>About EiN</strong>,
+<li>If the note keeps coming back, tell your administrator. Anyone signed in can check first: <strong>About EiN</strong>,
 in the menu under your picture, shows the <strong>Media service</strong> tile as <code>Not answering</code> while it is
 down. Your administrator finds more on the Dashboard&#39;s <strong>Media service</strong> tab, and
 <a href="../admin/media-service.html">The media service</a> covers what to do.</li>
 </ol>
 <p>Elsewhere you see no note, only less:</p>
 <ul>
-<li>The Search page still finds albums, people, locations, devices and tracks by name, but not albums
-by what their pictures show.</li>
-<li><strong>Search with a picture</strong> finds nothing.</li>
+<li>The Search page still finds albums, people, locations and devices by name, but not albums by what
+their pictures show.</li>
 <li>The finder finds commands by their words only.</li>
 </ul>
 <p>When the language model is slow or away, you see no error either: the search keeps the years and

@@ -145,8 +145,10 @@ read only when you file it into an album.</p>
 <h2 id="how-ein-tells-what-a-file-is">How EiN tells what a file is<a class="anchor" href="#how-ein-tells-what-a-file-is" aria-label="Link to this section"></a></h2>
 <p>EiN looks at the first bytes of a file, not at its name. A JPEG photo named <code>IMG_0412.png</code> is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference how the file came in: <strong>Import media</strong>, an upload into an album, dropping it on a page,
-or copying it over <a href="../shell/ssh-sftp.html">SFTP</a>.</p>
+difference whether the file came in with <strong>Import media</strong>, an upload into an album, or by dropping
+it on a page. A file copied in over <a href="../shell/ssh-sftp.html">SFTP</a> is the exception: when EiN knows
+its extension, such as <code>.png</code>, <code>.docx</code> or <code>.md</code>, the type that extension names is the one it keeps,
+and only a file with an extension EiN does not know is recognised by its first bytes.</p>
 <p>The name decides in two cases, because the bytes say too little:</p>
 <ul>
 <li><strong>Camera RAW files.</strong> Most RAW formats look like a TIFF picture from their first bytes, so EiN
@@ -165,8 +167,8 @@ camera RAW formats below.</p>
 <li>reads its date, its GPS position and the camera or phone that took it; see
 <a href="dates-places.html">Dates and places of pictures</a> and <a href="devices.html">Devices and GPS tracks</a>;</li>
 <li>makes thumbnails and screen-sized copies in the AVIF format: a square of 320 pixels, and copies
-that fit inside 512, 800, 1,600 and 2,560 pixels. A photo is never enlarged, so a small one gets
-only the sizes up to its own;</li>
+that fit inside 512, 800, 1,600 and 2,560 pixels. These copies are never larger than the photo,
+so a small one gets only the sizes up to its own;</li>
 <li>finds the faces in it (<a href="people.html">People and faces</a>);</li>
 <li>reads any text in it, printed or handwritten, so that search finds it
 (<a href="viewer.html#read-the-text-in-a-picture">Read the text in a picture</a>);</li>
@@ -282,7 +284,8 @@ audiobooks count as recordings too.</p>
 <p>For each recording, EiN:</p>
 <ul>
 <li>reads its date, where the file has one;</li>
-<li>makes a version your browser plays: AAC at 128 kbit/s and 44.1 kHz, in an <code>.m4a</code> file;</li>
+<li>makes a version your browser plays: AAC at no more than 128 kbit/s and 44.1 kHz, in an <code>.m4a</code>
+file;</li>
 <li>draws a picture of the sound, its waveform, which is the recording&#39;s tile and what you see while
 it plays;</li>
 <li>writes down what is said in it and recognises who says it
@@ -300,18 +303,20 @@ is about: a search for <code>Christmas letter</code> finds the family newsletter
 is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
 way; the pages after that keep only the text they hold.</li>
 <li><strong>Plain text.</strong> Any file that is text, whatever its name: <code>.txt</code>, a Markdown note, an HTML page.
-An SVG drawing is text too, so EiN treats it as a document, not as a picture.</li>
+An SVG drawing is text too, so EiN treats it as a document, not as a picture. Copied in over
+SFTP, a <code>.md</code> or <code>.html</code> file takes the type its name gives instead, and its text is not read.</li>
 </ul>
 <p>A document&#39;s text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.</p>
 <p>Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
 <strong>Download</strong> to open one on your device. The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a>
-also lists RTF and old Word (<code>.doc</code>) files, but EiN does not read their text: search finds them by
-their file name only.</p>
+also lists RTF files, but EiN does not read their text: search finds them by their file name only.
+An old Word (<code>.doc</code>) file is not recognised at all and is kept as one of the <a href="#other-files">other files</a>.</p>
 <h3 id="word-and-opendocument-files">Word and OpenDocument files<a class="anchor" href="#word-and-opendocument-files" aria-label="Link to this section"></a></h3>
 <p>The media service can read the text of Word (<code>.docx</code>) and OpenDocument (<code>.odt</code>) files, but EiN
 recognises a file by its first bytes, and these formats begin like any zip file. A <code>.docx</code> or
-<code>.odt</code> file you upload is therefore kept as a zip file:</p>
+<code>.odt</code> file you upload is therefore kept as a zip file (one copied in over SFTP keeps its type, and
+its text is read):</p>
 <ul>
 <li>its text is not read, so search finds it by its name only;</li>
 <li>in a staging category, it is expanded like any other zip, into the parts it is made of, and the

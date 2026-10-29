@@ -379,8 +379,8 @@ page and copy what your browser&#39;s address bar shows after the host, such as
 lead to another website.</li>
 <li><strong><code>icon</code></strong> is the name of any icon at <a href="https://tabler.io/icons">tabler.io/icons</a>, written as it
 is there: <code>map-pin</code>, <code>beach</code>, <code>heart</code>. Add <code>-filled</code> for the filled form, <code>heart-filled</code>. It can
-also be the path of an SVG file in EiN that you may read, which is drawn in the colour of the
-text.</li>
+also be the full path, starting with <code>/</code>, of an SVG file in EiN that you may read, which is drawn
+in the colour of the text.</li>
 <li><strong><code>id</code></strong> can be anything no one else uses. The shipped ones are <code>&lt;module&gt;.&lt;name&gt;</code>; starting yours
 with <code>me.</code> keeps them apart.</li>
 </ul>
@@ -412,11 +412,11 @@ an <code>action</code> that says what choosing it does:</p>
 </tr>
 <tr>
 <td><code>{ &quot;fullscreen&quot;: &quot;/map&quot; }</code></td>
-<td>Opens it over everything, the top bar too, until <kbd>Esc</kbd> or <strong>Back</strong>.</td>
+<td>Opens it over everything, the top bar too, until <kbd>Esc</kbd> or the browser&#39;s Back.</td>
 </tr>
 <tr>
 <td><code>{ &quot;run&quot;: &quot;&lt;command line&gt;&quot; }</code></td>
-<td>Runs the command line as you, as if you typed it in the terminal.</td>
+<td>Runs the command line as you, as the web interface runs its commands: with <code>JSON_OUTPUT=1</code>.</td>
 </tr>
 <tr>
 <td><code>{ &quot;run&quot;: &quot;album-random&quot;, &quot;navigate&quot;: &quot;/albums/{path}&quot; }</code></td>
@@ -525,7 +525,8 @@ bar&#39;s order keeps it: by <code>order</code>, lowest first, and a dropdown&#3
 A button placed beside the search box counts by its <code>order</code> too.</li>
 <li>EiN keeps its own keys: <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd>), <kbd>?</kbd>,
 and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd> or an arrow key,
-which the terminal uses. An entry that asks for one of these does not get it.</li>
+which the terminal uses. An entry that asks for one of these as EiN writes it (<code>mod+K</code>, <code>shift+?</code>,
+<code>alt+T</code> and so on) does not get it.</li>
 </ul>
 <p>Some pages have keys of their own while they are on screen, such as the photo viewer. Press
 <kbd>?</kbd> on a page to see which keys it uses before you pick one;
@@ -857,7 +858,7 @@ or hidden; neither can the search box.</p>
 </tr>
 <tr>
 <td><code>{ &quot;fullscreen&quot;: &quot;&lt;address&gt;&quot; }</code></td>
-<td>Opens it over everything until <kbd>Esc</kbd> or <strong>Back</strong>.</td>
+<td>Opens it over everything until <kbd>Esc</kbd> or the browser&#39;s Back.</td>
 </tr>
 <tr>
 <td><code>{ &quot;run&quot;: &quot;&lt;command line&gt;&quot; }</code></td>

@@ -236,12 +236,12 @@ when the camera writes one, <code>SerialNumber</code> (see <a href="viewer.html#
 Its page says so: &quot;No serial and no make/model — nothing is matched to this device automatically;
 <code>device-link --device</code> links files to it by hand.&quot;</p>
 <p>Anyone signed in can register a device. Changing it afterwards, with the buttons this page
-describes, is offered to whoever may change it: the person who registered it can, and the
-<strong>Share</strong> dialog decides who else can (see <a href="sharing.html">Sharing</a>).</p>
+describes, is offered to whoever may change it, which the device&#39;s <strong>Share</strong> dialog shows and sets
+(see <a href="sharing.html">Sharing</a>).</p>
 <h2 id="a-devices-page">A device&#39;s page<a class="anchor" href="#a-devices-page" aria-label="Link to this section"></a></h2>
 <p>Click a card on the Devices page, or the device&#39;s name in the viewer. The page&#39;s address is
-<code>/devices/&lt;name&gt;</code>, and a tab other than <strong>Info</strong> adds <code>?tab=</code> with the tab&#39;s name, such as
-<code>?tab=track</code>.</p>
+<code>/devices/</code> and the device&#39;s folder name, such as <code>/devices/Jons_eTrex</code>, and a tab other than
+<strong>Info</strong> adds <code>?tab=</code> with the tab&#39;s name, such as <code>?tab=track</code>.</p>
 <figure class="shot"><a href="../../assets/shots/device@2x.webp"><img src="../../assets/shots/device.webp" srcset="../../assets/shots/device.webp 1x, ../../assets/shots/device@2x.webp 2x" alt="The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, &quot;75 files · 2025–2026&quot;, the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A device&#39;s page opens on its settings, with the button that links the pictures it took before it was registered.</figcaption></figure>
 <p>Under the name, the header shows the current owners (up to three, then &quot;and N more&quot;), how many
 files the device took and in which years, such as <strong>75 files · 2025–2026</strong> (<strong>N+ files</strong> when
@@ -325,10 +325,10 @@ trip: Helen&#39;s Coolpix stayed on London time when she took it to Wellington, 
 <strong>Timezone</strong> set to <code>Europe/London</code>, EiN reads its clock as London time and gets the moment of
 each picture right.</li>
 <li><strong>Scanner or digitizer</strong>: the device&#39;s clock records when a file was scanned, not when the
-photograph was taken, so EiN does not date pictures by it. The pictures stay undated until
-someone gives them a date. Files brought in through a staging category of the kind <strong>Scans</strong> are
-treated as scans whatever device made them; this setting matters for scans uploaded straight into
-an album, copied in over SFTP, or already in the library.</li>
+photograph was taken, so EiN does not date pictures by it. Pictures with no other date stay
+undated until someone gives them one. Files brought in through a staging category of the kind
+<strong>Scans</strong> are treated as scans whatever device made them; this setting matters for scans uploaded
+straight into an album, copied in over SFTP, or already in the library.</li>
 <li><strong>Video times in UTC</strong>: phones keep their videos&#39; recording time in UTC. Turn this on for a phone
 whose videos come out off by its time zone.</li>
 </ul>
@@ -337,7 +337,7 @@ and time zone, and <a href="dates-places.html#date-scans-of-old-prints-and-slide
 how scans are dated.</p>
 <h2 id="say-who-owned-a-device">Say who owned a device<a class="anchor" href="#say-who-owned-a-device" aria-label="Link to this section"></a></h2>
 <p>A device can have several owners over the years. The viewer lists them under the camera&#39;s name,
-each with the years, such as <strong>Owned by</strong> Ruby Wrenfield (2023–), so you can tell whose camera it
+each with the dates, such as <strong>Owned by</strong> Ruby Wrenfield (2023–), so you can tell whose camera it
 was when a picture was taken.</p>
 <ol>
 <li>On the device&#39;s page, open the <strong>Owners</strong> tab: &quot;Who has owned &lt;name&gt;, and when.&quot;</li>
@@ -370,20 +370,19 @@ date that is not a year, month or day is refused with a message ending in &quot;
 <p>The picture on a device&#39;s card and behind its page&#39;s header is its cover: the newest picture linked
 to it, by the date it was taken. The cover moves on by itself as newer pictures are linked. A device
 that took only videos, such as a camcorder, gets the poster frame of its newest video once that
-video has been processed; recordings are never used. A device with no pictures shows a placeholder
-with its initials.</p>
+video has been processed; recordings are never used. The card of a device with no pictures shows
+a placeholder with its initials.</p>
 <p>The web interface has no button to choose a device&#39;s cover. In the terminal you can link a picture
 as the device&#39;s <code>coverPhoto</code> yourself, and a cover chosen this way is kept. In the demo, Ruby&#39;s
 iPhone is the folder <code>/archive/devices/ruby-iphone</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ln</span> -sf <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington/IMG_0412.HEIC&quot;</span> /archive/devices/ruby-iphone/coverPhoto</code></pre></div>
+<span class="hljs-built_in">ln</span> -sf /archive/albums/wellington-christmas-2025/IMG_0650.HEIC /archive/devices/ruby-iphone/coverPhoto</code></pre></div>
 <p>To go back to the automatic cover, remove the link with <code>rm /archive/devices/ruby-iphone/coverPhoto</code>
 and run <code>device-cover /archive/devices/ruby-iphone</code>.</p>
 <h2 id="a-devices-track">A device&#39;s track<a class="anchor" href="#a-devices-track" aria-label="Link to this section"></a></h2>
 <p>The route a GPS-capable device recorded is its track. It shows on the device&#39;s <strong>Track</strong> tab, on
 the <strong>Map</strong> page with its <strong>Tracks</strong> layer (see <a href="places.html">Locations and the map</a>), on the <strong>Map</strong>
-tab of every album whose dates it falls in (see <a href="albums.html#the-map-tab">Albums</a>), and on the Search
-page under <strong>Show</strong> → <strong>Tracks</strong>.</p>
+tab of every album whose dates it falls in (see <a href="albums.html#the-map-tab">Albums</a>).</p>
 <p>The <strong>Track</strong> tab draws the route on a map, each day in its own colour, and adds it up:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -436,8 +435,8 @@ then goes.</p>
 <p>The file names its device in its <code>creator</code> attribute or in one of its <code>&lt;name&gt;</code> entries. It matches a
 registered device when one of these holds, as whole words, the device&#39;s name, its make and model
 together, or its serial number. Capital letters and punctuation do not count. A file whose creator
-reads <code>Garmin eTrex 30x</code> joins the device with the make <code>Garmin</code> and the model <code>eTrex 30x</code>; the
-demo&#39;s phone tracks say <code>Apple iPhone 15</code> and join Ruby&#39;s iPhone.</p>
+reads <code>Garmin eTrex 30x</code> joins the device with the make <code>Garmin</code> and the model <code>eTrex 30x</code>; in the
+demo, Ruby&#39;s tracks say <code>Apple iPhone 15</code> and join Ruby&#39;s iPhone.</p>
 <p>When a file names no registered device, or more than one, it waits for you:</p>
 <ol>
 <li>Open <strong>Staging</strong> in the sidebar. A yellow box titled <strong>Needs you</strong> says &quot;1 GPS track waits for the
@@ -445,7 +444,7 @@ device that recorded it.&quot; (or how many).</li>
 <li>Click <strong>Choose device</strong>. The Inbox&#39;s <strong>Files</strong> tab opens with the card
 <strong>Routes waiting for a device</strong>: &quot;These GPX files do not name a device the archive knows. Say
 which device recorded each, and its route joins that device&#39;s track.&quot;</li>
-<li>Beside each file, choose the device under <strong>Device</strong> and click <strong>Import</strong>.</li>
+<li>Beside each file, choose the device in the <strong>Device</strong> list and click <strong>Import</strong>.</li>
 </ol>
 <p>If the device is not registered yet, register it first (see
 <a href="#register-a-device-by-hand">Register a device by hand</a>) and open the card again; a waiting file is

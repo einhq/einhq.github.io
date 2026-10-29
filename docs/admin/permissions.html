@@ -218,8 +218,8 @@ exception; see <a href="#change-the-owner-and-the-group">Change the owner and th
 <code>jon</code> to <code>/etc/users/jon</code> in <code>/etc/groups/family/users</code>. Anything else placed there makes nobody a
 member.</li>
 <li><strong>Groups are read when someone signs in.</strong> A person added to or taken out of a group keeps the
-groups they signed in with until they sign in again. Taking someone out of <code>sudo</code> is the
-exception: it ends their admin mode at once.</li>
+groups they signed in with until they sign in again. Membership of <code>sudo</code> is the exception: it
+counts at once, and taking someone out of <code>sudo</code> ends their admin mode at once.</li>
 <li><strong>Being in the <code>admin</code> group makes nobody an administrator.</strong> It is the administrator&#39;s own group,
 as root&#39;s is on Linux, and gives no write to the system&#39;s folders. To let someone act as the
 administrator when they need to, add them to <code>sudo</code>; see <a href="accounts.html">Accounts and groups</a>.</li>
@@ -270,7 +270,7 @@ an administrator, everyone who has access and through what.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">chmod</span> 0750 <span class="hljs-string">&#x27;/archive/albums/Christmas at the cottage&#x27;</span>
 <span class="hljs-built_in">chmod</span> g+w <span class="hljs-string">&#x27;/archive/albums/Christmas at the cottage&#x27;</span>
-<span class="hljs-built_in">chmod</span> u=rwx,g=rx,o= <span class="hljs-string">&#x27;/archive/albums/Christmas at the cottage&#x27;</span>
+<span class="hljs-built_in">chmod</span> u=rwx,g=rx,o-rwx <span class="hljs-string">&#x27;/archive/albums/Christmas at the cottage&#x27;</span>
 <span class="hljs-built_in">chmod</span> -r o-rw /archive                 <span class="hljs-comment"># the whole subtree; each node keeps its other bits</span></code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -344,9 +344,9 @@ recursive unless you say otherwise:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 share-set <span class="hljs-string">&#x27;/archive/albums/Christmas at the cottage&#x27;</span> --mode 0750 -b -m g:family:rwx -m u:jon:rx
 share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --group family --mode g+rx
-share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --default-owner          <span class="hljs-comment"># the configured default sharing</span>
-share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/files/IMG_0042.jpg&#x27;</span> --reference <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span>
-share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/files/IMG_0042.jpg&#x27;</span> --mode 0700 -b --drop-links --pin</code></pre></div>
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --default-owner          <span class="hljs-comment"># the configured default owner and group</span>
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/IMG_0042.jpg&#x27;</span> --reference <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span>
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/IMG_0042.jpg&#x27;</span> --mode 0700 -b --drop-links --pin</code></pre></div>
 <div class="code"><pre tabindex="0"><code>updated 214, kept own access 3, skipped 0, failed 0</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -388,6 +388,10 @@ share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/files/IMG_
 <td>Hold the node against changes from further up, or let them reach it again.</td>
 </tr>
 <tr>
+<td><code>--pinned-below</code></td>
+<td>Change the pinned nodes below each path named, in place of the path itself.</td>
+</tr>
+<tr>
 <td><code>--no-recursive</code></td>
 <td>Change only the node named.</td>
 </tr>
@@ -407,10 +411,12 @@ writes the node it was aimed at, but passes over a pinned node and everything be
 one photo stays private in a shared album; see
 <a href="../guide/sharing.html#keep-some-photos-private-in-a-shared-album">Keep some photos private in a shared album</a>.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/files/IMG_0042.jpg&#x27;</span> --pin
-share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/files/IMG_0042.jpg&#x27;</span> --reference <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --unpin</code></pre></div>
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/IMG_0042.jpg&#x27;</span> --pin
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987/IMG_0042.jpg&#x27;</span> --reference <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --unpin
+share-set <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --pinned-below --reference <span class="hljs-string">&#x27;/archive/albums/Summer 1987&#x27;</span> --unpin</code></pre></div>
 <p>The pin is written on that node only. <code>share-info</code> on the album lists the pinned nodes below it,
-and a share link made on the album does not open them.</p>
+and a share link made on the album does not open them. The last line shares every pinned node in
+the album as the album is, which is what <strong>Share all like the album</strong> in the <strong>Share</strong> dialog runs.</p>
 <h2 id="what-a-recursive-change-does">What a recursive change does<a class="anchor" href="#what-a-recursive-change-does" aria-label="Link to this section"></a></h2>
 <p><code>chmod -r</code>, <code>chown -r</code>, <code>acl -r</code> and <code>share-set</code> walk the subtree the same way:</p>
 <ul>
@@ -499,7 +505,8 @@ account and changed only by its owner. Each person narrows or widens that for wh
 <strong>How widely what you create is shared</strong> on their profile
 (<a href="../reference/settings.html#cfg_user_default_share"><code>CFG_USER_DEFAULT_SHARE</code></a>); see
 <a href="../guide/profile.html#how-widely-what-you-create-is-shared">Your profile</a>. <strong>Default</strong> in the
-<strong>Share</strong> dialog, and <code>share-set --default-owner</code>, put a node back on the default sharing.</p>
+<strong>Share</strong> dialog lets everyone with an account see a node, and <code>share-set --default-owner</code> gives it
+the configured default owner and group.</p>
 <p>The same settings in the terminal, in the octal form:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 config <span class="hljs-built_in">set</span> CFG_DEFAULT_SHARE_GROUP family
@@ -655,7 +662,8 @@ path to it is closed to them. Give them pass-through on that folder, or link the
 folder they can reach.</p>
 <p><strong><code>chown</code> says <code>Access denied for operation &#39;change gid&#39;</code>.</strong> You are not in the group you named.
 An administrator can make the change, or add you to the group.</p>
-<p><strong><code>share-info</code> says <code>sign in to see who has access</code>.</strong> You are acting as the guest. Who has access
+<p><strong><code>share-info</code> says <code>sign in to see who has access</code>.</strong> You have not signed in, or you came in through
+a share link. Who has access
 names people and groups, so it is shown only to someone signed in.</p>
 <p><strong>A visitor sees the sign-in page instead of a shared album.</strong> <strong>Visitors may browse</strong> is off. Turn
 it on under <strong>Settings → Permissions</strong>, or send them a <a href="../guide/sharing.html#share-an-album-with-a-link">share link</a>,

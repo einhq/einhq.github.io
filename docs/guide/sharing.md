@@ -277,8 +277,9 @@ There are three ways:
   photos that keep their own sharing: "These keep their own sharing: changes to the album's sharing,
   and its link, do not reach them." Each row shows the photo, its name and **Private**,
   **Shared differently** or **Open to visitors**. **Share like the album** on a row puts that photo
-  back at once, and **Share all like the album** puts them all back. The first five are listed;
-  **Show all 12** lists the rest.
+  back at once, and **Share all like the album** puts every one of them back, listed or not. The
+  first five are listed; **Show all 12** lists the rest. The list stops at 50, and "And 7 more."
+  under it counts the others.
 - **From the viewer.** Open the photo, choose **Share** in the pencil menu, and the dialog says "It
   keeps its own sharing: changes to the album “Christmas at the cottage” do not reach it." Choose
   **Like the album**, then **Save**.

@@ -17,8 +17,10 @@ The viewer walks the list you opened it from, in that list's order. A search hit
 in a video or a recording opens it at the moment the words are spoken; see
 [Search and the finder](search.md).
 
-Each file in the viewer has its own address: `/media/` followed by the file's path. You can copy it
-from the browser's address bar and send it to someone who may see the file. Stepping to another
+Each file in the viewer has its own address: the page's address with the file added in its
+`fullscreen` parameter (`…?fullscreen=%2Fmedia%2F…`), or, opened on its
+own, `/media/` followed by the file's path. You can copy it from the browser's address bar and send
+it to someone who may see the file. Stepping to another
 file replaces the address instead of adding to the browser's history, so one press of the browser's
 Back button closes the viewer and returns you to the page underneath.
 
@@ -88,12 +90,12 @@ you were in the grid.
 
 ## Zoom in on a photo
 
-Photos zoom; videos and recordings do not, and neither does a photo during a slideshow.
+Photos and videos zoom; recordings do not, and nothing zooms during a slideshow.
 
 | To                             | With a mouse and keyboard          | On a touch screen    |
 | ------------------------------ | ---------------------------------- | -------------------- |
 | Zoom in or out at a spot       | Turn the mouse wheel over the spot | Pinch                |
-| Zoom in on a spot, or back out | Double-click                       | Double-tap           |
+| Zoom in on a spot, or back out | Double-click a photo               | Double-tap           |
 | Zoom in a step                 | <kbd>+</kbd> or <kbd>=</kbd>       |                      |
 | Zoom out a step                | <kbd>-</kbd>                       |                      |
 | Fit the whole picture again    | <kbd>0</kbd>                       | Double-tap           |
@@ -123,8 +125,8 @@ Videos and recordings have keys of their own; see [Play a video](#play-a-video).
 
 ## On a phone or tablet
 
-The viewer takes its phone layout on any touch screen, and in any browser window narrower than 768
-pixels.
+The viewer takes its phone layout on any touch screen, and in any browser window 768 pixels wide or
+narrower.
 
 ![The viewer on a phone held upright: the date in a dark pill over the top of the picture, the position and the place under it, and the details sheet pulled up over the bottom half with the camera, the album and three people with their ages](../../assets/shots/phone-lightbox.webp "On a phone the details are a sheet you pull up from under the picture with a swipe.")
 
@@ -136,7 +138,7 @@ pixels.
   up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
   the details open as a panel on the right: press **Show details** beside ⋮, or swipe up, and swipe
   the panel to the right to close it.
-- **Edit faces** is not offered on a phone.
+- **Edit faces** is not offered on a phone held upright.
 
 | Gesture                                | What it does                                                                      |
 | -------------------------------------- | --------------------------------------------------------------------------------- |
@@ -218,14 +220,14 @@ is remembered in this browser, for the next picture and the next visit.
 The pencil at the top right of the details panel (**Edit media**) opens a menu. It is there when you
 may change the file, and for any signed-in reader for **Add to album**.
 
-| Row                               | Who sees it                                               | What it does                                                                                                                                                                                                                                                                                                 |
-| --------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Edit**                          | Readers who may change the file                           | Opens **Edit file**: description, labels and location. See below.                                                                                                                                                                                                                                            |
-| **Share**                         | Readers who may change the file                           | Opens the Share dialog for this file. See [Sharing](sharing.md).                                                                                                                                                                                                                                             |
-| **Add to album**                  | Signed-in readers                                         | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
-| **Edit faces**                    | Readers who may change the file, on photos, on a computer | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
-| **Rotate left**, **Rotate right** | Readers who may change the file, on photos and videos     | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
-| **Mirror horizontally**           | Readers who may change the file, on photos and videos     | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
+| Row                               | Who sees it                                                                        | What it does                                                                                                                                                                                                                                                                                                 |
+| --------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Edit**                          | Readers who may change the file                                                    | Opens **Edit file**: description, labels and location. See below.                                                                                                                                                                                                                                            |
+| **Share**                         | Readers who may change the file                                                    | Opens the Share dialog for this file. See [Sharing](sharing.md).                                                                                                                                                                                                                                             |
+| **Add to album**                  | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
+| **Edit faces**                    | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
+| **Rotate left**, **Rotate right** | Readers who may change the file, on photos and videos                              | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
+| **Mirror horizontally**           | Readers who may change the file, on photos and videos                              | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
 
 A turn or a flip is kept on the file, for everyone who sees it. EiN moves the face boxes with the
 picture and makes the smaller versions it shows again. A video is re-encoded by the media service,
@@ -271,7 +273,9 @@ Face boxes stay hidden until you point at a face; then that face's box and name 
 ### Draw or correct a face box
 
 Use **Edit faces** when recognition missed a face, drew the box in the wrong place, or matched the
-wrong person. It is offered on photos you may change, on a computer.
+wrong person. It is offered on photos and videos you may change, except on a phone held upright. On
+a video it pauses the video, and you draw on the frame on screen; a box already there can be chosen
+and removed or given to someone else, but not moved or resized.
 
 1. In the pencil menu, choose **Edit faces**. The bar under the picture reads **Draw a new box or
    select a face**, and every box shows.
@@ -326,7 +330,7 @@ search finds pictures by it; see [Search and the finder](search.md).
 
 1. In the More menu, choose **Edit text**, or **Add text** when nothing was read. With the text
    shown, the pencil at its top right does the same.
-2. The dialog **Text in the picture** opens: the picture on the left, which you can zoom to read
+2. The dialog **Text in the picture** opens: the picture on the left (above, on a narrow screen), which you can zoom to read
    closely, and a text box on the right.
 3. Type or correct the text.
 4. Press **Save**, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. Saving empty text removes it.
@@ -364,20 +368,19 @@ and come back when you move the mouse.
 | **Mute** / **Unmute**                  | <kbd>m</kbd>                                                 | Turns the sound off or on. The slider beside it sets the volume, where the browser lets a page do that.                |
 | The clock                              |                                                              | Where you are and how long the video is, such as `0:42 / 2:11`, and **Chapter 2 of 5** when it has chapters.           |
 | **Subtitles** (CC)                     | <kbd>c</kbd>                                                 | Shows or hides subtitles, when the video has a transcript. The tooltip names the language: **Subtitles: English (c)**. |
-| Speed, such as `1×`                    | <kbd><</kbd> / <kbd>></kbd>                                  | Opens **Speed**: 0.5×, 0.75×, **Normal**, 1.25×, 1.5× and 2×. The keys step slower or faster.                          |
 | **Picture-in-picture**                 | <kbd>p</kbd>                                                 | Plays the video in a small window that stays on top, where the browser offers it.                                      |
-| **Cast to a screen**                   |                                                              | Sends the video to a television or other screen, while your browser finds one.                                         |
+| **Cast to a screen**                   |                                                              | Sends the video to a television or other screen. Shown only while your browser finds one.                              |
 | **Fullscreen**                         |                                                              | Gives the video the whole screen.                                                                                      |
 
-The volume you set is remembered in this browser for the next video. The speed belongs to the video
-you set it on.
+The volume you set is remembered in this browser for the next video or recording. There is no
+control for the playback speed.
 
 On a phone, tap the picture to show or hide the controls. Three buttons sit over the middle of the
 picture: back ten seconds, play or pause, and forward ten seconds, or previous and next chapter
-when the video has chapters. **Playback settings** (the gear) holds the speed, **Picture-in-picture**
-and **Cast to a screen…**. There is no mute button: use the phone's own volume buttons. On an
-iPhone, **Fullscreen** opens Safari's own player, which shows the subtitles when you have turned
-them on. Elsewhere, a wide video put fullscreen with the player's button turns the screen sideways
+when the video has chapters. **More** (⋮) on the bar holds **Picture-in-picture** and
+**Cast to a screen…**, where the browser offers them. There is no mute button: use the phone's own volume buttons. On an
+iPhone, **Fullscreen** opens Safari's own player, which shows the subtitles when they are
+on. Elsewhere, a wide video put fullscreen with the player's button turns the screen sideways
 where the browser allows it.
 
 ### The timeline and chapters
@@ -398,8 +401,9 @@ previous and next chapter (or a tenth of the video, without chapters), and <kbd>
 
 ### Subtitles
 
-A video with a transcript has the CC button. Subtitles start off; once you turn them on, they stay
-on for the next video in this browser. When two or more people speak, each line starts with the
+A video or recording with a transcript has the CC button. Subtitles start on; once you turn them
+off, they stay off for the next video or recording in this browser, until you turn them on again.
+When two or more people speak, each line starts with the
 speaker's name, in a colour of their own. A voice nobody has named is called **Speaker 1**,
 **Speaker 2** and so on.
 
@@ -417,10 +421,14 @@ the frame where the face is seen most clearly and keeps a box on the face from t
 
 A recording starts playing when it opens. Its picture is the waveform of the sound, and the waveform
 is the timeline: the part already played is brighter, a line marks where you are, and a click or a
-drag on it jumps there. Under it are **Back 10s**, play or pause (**Play (space)**, **Pause
-(space)**) and **Forward 10s**, then the clock and the file name.
+drag on it jumps there. A large play button sits on it while the recording is paused. Under it are
+play or pause (**Play (Space)**, **Pause (Space)**), **Back 10 s** and **Forward 10 s**, mute and
+the volume slider (not on a phone), and the clock; at the right end **Subtitles** (CC) when it has a
+transcript, **Picture-in-picture** where the browser offers it, and **Fullscreen**. With subtitles
+on, the line being said shows between the waveform and the buttons.
 
-<kbd>Space</kbd> or <kbd>k</kbd> plays and pauses. Move to the waveform with <kbd>Tab</kbd> to use
+<kbd>Space</kbd> or <kbd>k</kbd> plays and pauses, and <kbd>j</kbd>, <kbd>l</kbd>, <kbd>m</kbd>,
+<kbd>c</kbd> and <kbd>p</kbd> work as on a video. Move to the waveform with <kbd>Tab</kbd> to use
 the same keys as on a video's timeline.
 
 ## Read along with a transcript
@@ -435,7 +443,7 @@ The transcript appears near the top of the details panel, under the file.
 Above the lines is a chip for each voice, such as **Speaker 1 · 1:38**: who it is and how long they
 speak in the file.
 
-- The small play button on a chip (**Hear Speaker 1**) plays that voice's longest turn.
+- The small play button on a chip (**Hear Speaker 1**) jumps to the start of that voice's longest turn.
 - Click a chip to say who it is. A named voice opens the person's page. An unnamed one opens the
   review, where you name them or say they are someone already in the archive. A voice that belongs
   to nobody yet becomes an unidentified person of its own first; this needs permission to change

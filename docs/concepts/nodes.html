@@ -240,9 +240,11 @@ administrators.</p>
 <li><strong>General</strong> shows the node&#39;s <strong>Id</strong>, <strong>Type</strong>, <strong>Links</strong>, <strong>Created</strong>, <strong>Changed</strong> and
 <strong>Modified</strong>, a file&#39;s <strong>Mimetype</strong> and <strong>Size</strong>, a link&#39;s <strong>Link to</strong>, and the <strong>Mode</strong>,
 <strong>Owner</strong> and <strong>Group</strong>, which you can change there and save with <strong>Apply</strong>.</li>
-<li><strong>Attributes</strong> shows the attributes as JSON. If you may change the node, you can edit them and
-choose <strong>Save</strong>, or <strong>Reset</strong> to go back to what is stored. Otherwise it says <em>You can read these
-attributes but not change them.</em></li>
+<li><strong>Attributes</strong> shows the attributes, a <strong>Key</strong> and a <strong>Value</strong> to a row. If you may change the
+node, you can edit a row, remove it or <strong>Add</strong> one, and save with <strong>Apply</strong>, or <strong>Reset</strong> to go
+back to what is stored. The <strong>Attributes</strong> tab beside the listing shows them as JSON instead,
+saved with <strong>Save</strong>; when you may not change the node it says <em>You can read these attributes but
+not change them.</em></li>
 <li><strong>Sharing</strong> is the <strong>Share</strong> dialog&#39;s body; <a href="../admin/permissions.html">Permissions in depth</a>
 explains it.</li>
 </ul>
@@ -493,7 +495,8 @@ for the type.</p>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">ls</span> /archive/albums/christmas-2019/20191225_155434.jpg</code></pre></div>
-<p>Deleting a node deletes its children with it. Names are unique within a folder, so a folder cannot
+<p>Deleting a node deletes its children with it: <code>rm</code> refuses a node that has children unless you
+add <code>-r</code>. Names are unique within a folder, so a folder cannot
 hold two children of the same name. How the tree is laid out, folder by folder, is in
 <a href="tree.html">The tree</a>.</p>
 <h2 id="what-a-nodes-type-decides">What a node&#39;s type decides<a class="anchor" href="#what-a-nodes-type-decides" aria-label="Link to this section"></a></h2>
@@ -504,7 +507,7 @@ hold two children of the same name. How the tree is laid out, folder by folder, 
 in order; a <code>session</code> disappears when its connection ends; a <code>file</code> is shown as a picture, a video
 or a text by its mimetype.</li>
 <li><strong>Where it shows.</strong> The Archive&#39;s pages list <code>album</code>, <code>person</code>, <code>location</code> and <code>device</code> nodes;
-the search box&#39;s <code>@</code> completes the names of these types. <code>find -type person</code> finds a type
+the search box&#39;s <code>@</code> completes their names, and labels&#39;. <code>find -type person</code> finds a type
 anywhere in the tree.</li>
 </ul>
 <p>A node&#39;s type does not change after it is made. To turn a folder into an album, for example, make

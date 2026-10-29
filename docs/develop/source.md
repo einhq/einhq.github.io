@@ -82,7 +82,7 @@ EiN creates the extensions it uses in its database, and updates them after a new
    deno task dev
    ```
 
-3. Read the administrator's password in the output. A new instance makes a random one and prints it once:
+3. Read the administrator's password in the output. A new instance without `INITIAL_ADMIN_PASSWORD` in its environment makes a random one and prints it once:
 
    ```text
    Admin password set to: 4f6c2a1e-…
@@ -148,7 +148,7 @@ mod install https://github.com/einhq/module-archive@main
 
 ## Add the media service and the language model
 
-Core and the Assistant run without anything more. The Archive needs the media service to make thumbnails, read metadata, find faces and make pictures searchable; without it, files arrive but nothing is analysed. [The media service](../admin/media-service.md) explains what it does.
+Core runs without anything more, and the Assistant needs only a language model, below. The Archive needs the media service to make thumbnails, read metadata, find faces and make pictures searchable; without it, files arrive but nothing is analysed. [The media service](../admin/media-service.md) explains what it does.
 
 The media service reads files by path, not by upload: EiN sends it an absolute path such as `/files/…`, and the service must see the same file at the same path. The simplest way to arrange that on one machine is to run core in its container too, as in [Build and run the image](#build-and-run-the-image), and give both containers the same folders:
 
@@ -171,7 +171,7 @@ EiN looks for it at `http://127.0.0.1:8181`, the default of [`CFG_EMS_URL`](../r
 CFG_EMS_KEY=let-me-in
 ```
 
-For the assistant's model, clone [llm](https://github.com/einhq/llm) and run `bash run.sh` in it. It fetches the model on first use and answers at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. A hosted provider works as well; [The language model](../admin/language-model.md) explains both.
+For the assistant's model, clone [llm](https://github.com/einhq/llm) and run `bash run.sh` in it. It fetches the model on its first start and answers at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. A hosted provider works as well; [The language model](../admin/language-model.md) explains both.
 
 ## Test, check and lint
 
@@ -230,9 +230,9 @@ The administrator's password is in `make container-logs` on the first start. `ma
 
 ## Run your own build in an installation
 
-An installation made with the installer builds from the repositories that `EIN_GIT` names, `https://github.com/einhq` unless you set it. To run your own changes there, push them to an organisation of your own that holds `deploy`, `core` and `db` (and `ems` and `llm` when you use those options), and set `EIN_GIT` to it when you install. [Installing in detail](../admin/install.md#the-variables) explains the variable, and [Updating](../admin/updating.md) how `setup.sh` fetches the newest commits and rebuilds.
+An installation made with the installer builds from the organisation that `--source` names, `https://github.com/einhq` unless you give it, and keeps it in `.env` as `EIN_SOURCE`. To run your own changes there, push them to an organisation of your own on GitHub, Forgejo or Gitea that holds `deploy`, `core` and `db` (and `ems` and `llm` when you use those options), and install, or run `setup.sh` again, with `--source` and its address. [Where the sources come from](../admin/install.md#where-the-sources-come-from) explains the option, and [Updating](../admin/updating.md) how `setup.sh` fetches the newest commits and rebuilds.
 
-`setup.sh` builds core's image from `src/core/src/Containerfile` and then deploy's `ein.Containerfile` on top of it, which runs `deno task bundle-ui`. Modules do not come from `EIN_GIT`: EiN installs them from the places [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names.
+`setup.sh` builds core's image from `src/core/src/Containerfile` and then deploy's `ein.Containerfile` on top of it, which runs `deno task bundle-ui`. EiN installs modules from the places [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names; with a Forgejo or Gitea source, `setup.sh` sets it to the same organisation, while a GitHub source leaves it at `https://github.com/einhq`.
 
 ## When something goes differently
 

@@ -13,30 +13,33 @@ How the settings in these files combine, and how to change a setting without tou
 
 The installer fetches the deployment into `~/ein` and runs `setup.sh` there. After the first run the folder holds:
 
-| Path                    | Made by                   | What it is                                                                                                        |
-| ----------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `.env`                  | `setup.sh`, the first run | The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit. |
-| `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                             |
-| `compose.ems.yaml`      | the deployment            | The media service, added with `--ems`.                                                                            |
-| `compose.llm.yaml`      | the deployment            | The assistant's language model, added with `--llm`.                                                               |
-| `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                    |
-| `ein.Containerfile`     | the deployment            | EiN's image: core's image with the web interface built in.                                                        |
-| `setup.sh`              | the deployment            | Fetches the sources, writes `.env` and `compose.override.yaml`, builds the images and starts them.                |
-| `src/`                  | `setup.sh`                | The sources it builds: `core`, `db`, and `ems` and `llm` when those options are on.                               |
-| `data/`                 | `setup.sh`                | Your files, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).       |
+| Path                    | Made by                   | What it is                                                                                                                        |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `.env`                  | `setup.sh`, the first run | The settings and passwords of this installation, and the environment of EiN and the media service. Yours to edit.                 |
+| `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                                             |
+| `compose.ems.yaml`      | the deployment            | The media service, added with `--ems`.                                                                                            |
+| `compose.llm.yaml`      | the deployment            | The assistant's language model, added with `--llm`.                                                                               |
+| `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                    |
+| `ein.Containerfile`     | the deployment            | EiN's image: core's image with the web interface built in.                                                                        |
+| `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, builds the images and starts them. |
+| `src/`                  | `setup.sh`                | The sources it builds: `core`, `db`, and `ems` and `llm` when those options are on.                                               |
+| `data/`                 | `setup.sh`                | Your files, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                       |
 
-The files from the deployment are replaced when `setup.sh` updates the sources, so changes belong in `.env`, not in `compose.yaml`. `setup.sh --help` lists its options, and [Installing in detail](../admin/install.md) explains each.
+The files from the deployment are replaced when `setup.sh` brings the folder up to date at the start of every run, so changes belong in `.env`, not in `compose.yaml`. `setup.sh --help` lists its options, and [Installing in detail](../admin/install.md) explains each.
 
-The database is not in the folder: it is the container engine's volume `ein_db`. [Your data: backup, moving and removing](../admin/data.md) says how to keep it.
+The database is not in the folder: it is the container engine's volume `ein_db`, or the folder `setup.sh --db-dir` named. [Your data: backup, moving and removing](../admin/data.md) says how to keep it.
 
 ### .env
 
-`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, and EiN's and the media service's containers get every line of it as their environment. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM` and `EIN_MODULES`.
+`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, and EiN's and the media service's containers get every line of it as their environment. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`, and adds `EIN_ENGINE` to a `.env` written before it had that line. It also moves `EIN_HTTP_PORT` or `EIN_SSH_PORT` to the next free port when another program holds it, and with a Forgejo or Gitea source keeps `CFG_MODULE_SOURCES` and `CFG_MODULE_SOURCES_KEY` in step with `EIN_SOURCE`.
 
 The file the installer writes looks like this, with your own values:
 
 ```ini
 # ~/ein/.env, on the machine EiN runs on
+COMPOSE_PROJECT_NAME=ein
+EIN_ENGINE=podman
+
 EIN_EMS=0
 EIN_LLM=0
 EIN_GPU=0
@@ -48,6 +51,8 @@ POSTGRES_PASSWORD=…
 EMS_KEY=…
 TZ=Europe/London
 
+INITIAL_ADMIN_PASSWORD=…
+
 EIN_BIND=0.0.0.0
 EIN_HTTP_PORT=8080
 EIN_SSH_PORT=2222
@@ -57,24 +62,32 @@ EIN_SSH_PORT=2222
 # CFG_LLM_PROVIDER=OpenAI
 # CFG_LLM_MODEL=
 
-EIN_GIT=https://github.com/einhq
+EIN_SOURCE=https://github.com/einhq
+EIN_SOURCE_KEY=
+
+EIN_DB_DIR=
 ```
 
-| Line                | What it does                                                                                                                           | Explained on                                                  |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `EIN_EMS`           | `1` runs the media service. `--ems` and `--no-ems` set it.                                                                             | [The media service](../admin/media-service.md)                |
-| `EIN_LLM`           | `1` runs the language model. `--llm` and `--no-llm` set it.                                                                            | [The language model](../admin/language-model.md)              |
-| `EIN_GPU`           | `1` gives the graphics card to the media service and the language model. The first run sets it when it finds a card with its CDI file. | [The graphics card](../admin/gpu.md)                          |
-| `EIN_MODULES`       | The modules EiN installs at its start when they are missing, separated by spaces. `--module` adds a name.                              | [Modules](../admin/modules.md)                                |
-| `EIN_DATA`          | The data folder, as an absolute path.                                                                                                  | [Installing in detail](../admin/install.md)                   |
-| `POSTGRES_PASSWORD` | The database's password, made at the install.                                                                                          |                                                               |
-| `EMS_KEY`           | The media service's key, made at the install. Both EiN and the media service get it.                                                   | [The media service](../admin/media-service.md)                |
-| `TZ`                | The time zone, taken from the machine at the install.                                                                                  | [Environment variables](environment.md#set-by-the-deployment) |
-| `EIN_BIND`          | The address the ports are published on. `127.0.0.1` keeps them to the machine.                                                         | [Ports, HTTPS and remote access](../admin/network.md)         |
-| `EIN_HTTP_PORT`     | The machine's port for the web interface.                                                                                              | [Ports, HTTPS and remote access](../admin/network.md)         |
-| `EIN_SSH_PORT`      | The machine's port for SSH and SFTP.                                                                                                   | [Ports, HTTPS and remote access](../admin/network.md)         |
-| `CFG_LLM_…`         | A hosted language model in place of `--llm`, commented out until you use it.                                                           | [The language model](../admin/language-model.md)              |
-| `EIN_GIT`           | Where the sources are cloned from.                                                                                                     | [Installing in detail](../admin/install.md)                   |
+| Line                     | What it does                                                                                                                                                                                                 | Explained on                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| `COMPOSE_PROJECT_NAME`   | `ein`, the name of the containers, network and volumes.                                                                                                                                                      |                                                                            |
+| `EIN_ENGINE`             | `podman` or `docker`, the engine `setup.sh` picked at the install and keeps to.                                                                                                                              | [Installing in detail](../admin/install.md)                                |
+| `EIN_EMS`                | `1` runs the media service. `--ems` and `--no-ems` set it.                                                                                                                                                   | [The media service](../admin/media-service.md)                             |
+| `EIN_LLM`                | `1` runs the language model. `--llm` and `--no-llm` set it.                                                                                                                                                  | [The language model](../admin/language-model.md)                           |
+| `EIN_GPU`                | `1` gives the graphics card to the media service and the language model. The first run sets it when it finds a card with its CDI file.                                                                       | [The graphics card](../admin/gpu.md)                                       |
+| `EIN_MODULES`            | The modules EiN installs at its start when they are missing, separated by spaces. `--module` adds a name.                                                                                                    | [Modules](../admin/modules.md)                                             |
+| `EIN_DATA`               | The data folder, as an absolute path.                                                                                                                                                                        | [Installing in detail](../admin/install.md)                                |
+| `POSTGRES_PASSWORD`      | The database's password, made at the install.                                                                                                                                                                |                                                                            |
+| `EMS_KEY`                | The media service's key, made at the install. Both EiN and the media service get it.                                                                                                                         | [The media service](../admin/media-service.md)                             |
+| `TZ`                     | The time zone, taken from the machine at the install.                                                                                                                                                        | [Environment variables](environment.md#set-by-the-deployment)              |
+| `INITIAL_ADMIN_PASSWORD` | The `admin` account's first password, made at the install. EiN takes it at its first start only; `setup.sh` prints it at the end of every run until you delete the line, once you have changed the password. | [Install EiN](../start/install.md#change-the-admin-password-straight-away) |
+| `EIN_BIND`               | The address the ports are published on. `127.0.0.1` keeps them to the machine.                                                                                                                               | [Ports, HTTPS and remote access](../admin/network.md)                      |
+| `EIN_HTTP_PORT`          | The machine's port for the web interface.                                                                                                                                                                    | [Ports, HTTPS and remote access](../admin/network.md)                      |
+| `EIN_SSH_PORT`           | The machine's port for SSH and SFTP.                                                                                                                                                                         | [Ports, HTTPS and remote access](../admin/network.md)                      |
+| `CFG_LLM_…`              | A hosted language model in place of `--llm`, commented out until you use it.                                                                                                                                 | [The language model](../admin/language-model.md)                           |
+| `EIN_SOURCE`             | The organisation the sources are cloned from. `--source` sets it.                                                                                                                                            | [Installing in detail](../admin/install.md)                                |
+| `EIN_SOURCE_KEY`         | The token that reads the source's repositories when they are private.                                                                                                                                        | [Installing in detail](../admin/install.md)                                |
+| `EIN_DB_DIR`             | The database's folder; empty keeps it in the engine's volume `ein_db`. `--db-dir` sets it.                                                                                                                   | [Installing in detail](../admin/install.md)                                |
 
 Lines you can add:
 
@@ -94,30 +107,36 @@ To apply a change to `.env`:
 podman compose up -d    # or: docker compose up -d
 ```
 
-Running `./setup.sh` applies it too, but also fetches and builds the newest sources; [Updating](../admin/updating.md) explains it. Change `EIN_EMS`, `EIN_LLM` or `EIN_GPU` with `setup.sh`, since only it writes them into `compose.override.yaml`.
+Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, which `setup.sh` gives each one: the media service's idle models then go to swap, and a search waits for them. Running `./setup.sh` makes the containers again with it, and applies `.env` too, but also fetches and builds the newest sources; [Updating](../admin/updating.md) explains it. After a change to `EIN_EMS`, `EIN_LLM` or `EIN_GPU`, run `setup.sh`, since only it writes them into `compose.override.yaml`.
 
 > [!WARNING]
 > `.env` holds the database password and the media service's key, and no other file keeps them. Keep a copy of it with your backups.
 
 ### compose.override.yaml
 
-`setup.sh` writes this file from `.env` on every run, and every compose reads it beside `compose.yaml` on its own, so `podman compose up -d` starts the same services as `setup.sh` does. With the media service, the language model and a card it reads:
+`setup.sh` writes this file from `.env` on every run, and every compose reads it beside `compose.yaml` on its own, so `podman compose up -d` starts the same services as `setup.sh` does. Under podman, with the media service, the language model and a card, it reads:
 
 ```yaml
-# Written by setup.sh from the options in .env; edit those and run setup.sh again.
+# Written by setup.sh from the options in .env and the container engine; edit those and run
+# setup.sh again.
 services:
-  ems:
-    extends: { file: compose.ems.yaml, service: ems }
-    devices: [nvidia.com/gpu=all]
-  llm:
-    extends: { file: compose.llm.yaml, service: llm }
-    devices: [nvidia.com/gpu=all]
+  db:
+    restart: always
   ein:
     environment:
       CFG_LLM_CARD: card
+    restart: always
+  ems:
+    extends: { file: compose.ems.yaml, service: ems }
+    devices: [nvidia.com/gpu=all]
+    restart: always
+  llm:
+    extends: { file: compose.llm.yaml, service: llm }
+    devices: [nvidia.com/gpu=all]
+    restart: always
 ```
 
-A change made by hand is gone at the next run of `setup.sh`.
+Under podman every service gets `restart: always`, the policy podman starts again at boot; under Docker those lines are left out. A change made by hand is gone at the next run of `setup.sh`.
 
 ### The data folder
 
@@ -220,7 +239,7 @@ Boot and `mod setup` keep some lines in it, whatever else you change:
 
 `/etc/layout` exports where each folder of the tree is, such as `ETC_PATH` and `LOGS_PATH`, and where the data folders are on the machine (`EIN_FILE_ROOT_PATH`, `EIN_VOLATILE_FILE_ROOT_PATH`, `EIN_FILE_TMP_PATH`). Boot writes it whole at every start; leave it alone. [Folders in the tree](environment.md#folders-in-the-tree) lists the variables.
 
-A change to `/etc/bashrc` reaches shells opened after it. In a tab that is already open, run `source /etc/bashrc`. Put aliases and settings of your own in `~/.bashrc` instead, which is yours alone.
+A change to `/etc/bashrc` reaches every shell before its next command, an open terminal tab included; a command already running keeps what it started with. Put aliases and settings of your own in `~/.bashrc` instead, which is yours alone.
 
 ### Your shell files
 
@@ -317,7 +336,7 @@ The files in EiN's tree are in the database, so a backup of the database keeps t
 | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A `CFG_…` line in `.env` has no effect                                                | The setting is set on the Settings page or chosen by a module, both of which win; it is one of the four `compose.yaml` fixes; or the container was not made again with `podman compose up -d`.        |
 | A change to `compose.override.yaml` is gone                                           | `setup.sh` writes it on every run. Change the options in `.env`, or with `setup.sh`, instead.                                                                                                         |
-| A change to `/etc/config`, `~/.config` or `/etc/bashrc` does not show in the terminal | The tab was open before the change. Open a new tab, or run `source /etc/bashrc`.                                                                                                                      |
+| A change to `/etc/config`, `~/.config` or `/etc/bashrc` does not show in the terminal | A command that was already running keeps the environment it started with; the next command reads the change. A service's own loop keeps it too until the service restarts.                            |
 | A service still uses the old value after a hand edit                                  | A hand edit restarts nothing. Restart the service from [Services and logs](../admin/services-logs.md), or save the setting on the Settings page, which does.                                          |
 | `could not write …` when you save                                                     | You may read the file but not change it. `/etc` is the administrator's; a member of the `sudo` group becomes the administrator with `admin`, as [Accounts and groups](../admin/accounts.md) explains. |
 | A line you added to `/etc/environment` or `/etc/layout` is gone                       | Boot writes both files whole at every start. Put the value in `/etc/config`, or the `CFG_…` line in `.env`.                                                                                           |

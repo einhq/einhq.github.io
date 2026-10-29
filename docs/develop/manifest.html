@@ -91,7 +91,7 @@
   <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;letters&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Letters: scanned letters, who wrote them and to whom&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.5.0&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;archive&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.1.0&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;exports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;./api&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./lib/api.ts&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;imports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -207,12 +207,12 @@
 <p>The module&#39;s name. It must be the name of the directory the module is installed in, <code>/usr/modules/&lt;name&gt;</code>, because dependencies and import aliases are both found by directory name. Use lower case letters, digits and hyphens: only such a name can be imported as <code>@&lt;name&gt;/…</code>.</p>
 <p>The name is also the owner shown beside the module&#39;s settings, node types and commands, the prefix of its aliases (everything <code>archive</code> shares is imported as <code>@archive/…</code>), and the name its navigation, settings and documentation are linked under.</p>
 <h3 id="version"><code>version</code><a class="anchor" href="#version" aria-label="Link to this section"></a></h3>
-<p>The module&#39;s version, in semver: <code>&quot;0.1.0&quot;</code>. A module that depends on this one names a range, and <code>mod setup</code> refuses the dependent when the installed version is outside it. Raise the minor when you add something a dependent may start to rely on, and the major when something a dependent uses changes.</p>
+<p>The module&#39;s version, in semver: <code>&quot;0.1.0&quot;</code>. A module that depends on this one names a range, and <code>mod setup</code> refuses the dependent when the installed version is outside it. Step it as a caret range reads it: below 1.0.0, raise the minor when something a dependent uses changes or goes, and the patch for anything else; from 1.0.0, the major and the minor. Tag each released version <code>v&lt;version&gt;</code> in the module&#39;s repository, such as <code>v0.1.0</code>, which is what <code>mod install &lt;name&gt;@v0.1.0</code> installs.</p>
 <h3 id="description-author-license"><code>description</code>, <code>author</code>, <code>license</code><a class="anchor" href="#description-author-license" aria-label="Link to this section"></a></h3>
-<p>Free text. <code>description</code> is shown by <code>mod list</code> and <code>mod info</code>, on <strong>Settings → Modules</strong> and on the documentation&#39;s modules page. Write it as what the module is, for a reader: the Assistant&#39;s is &quot;Assistant: answers questions by running EiN&#39;s commands for the user, with what the installed modules offer it&quot;.</p>
+<p>Free text. <code>description</code> is shown by <code>mod list --long</code> and <code>mod info</code>, on <strong>Settings → Modules</strong> and on the documentation&#39;s modules page. Write it as what the module is, for a reader: the Assistant&#39;s is &quot;Assistant: answers questions by running EiN&#39;s commands for the user, with what the installed modules offer it&quot;.</p>
 <h3 id="coreapi"><code>coreApi</code><a class="anchor" href="#coreapi" aria-label="Link to this section"></a></h3>
-<p>The range of core&#39;s module contract the module is written against, as a semver range: <code>&quot;^0.2.0&quot;</code>. Core&#39;s side of it is <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code>, at present <code>0.2.1</code>.</p>
-<p>The contract is what a module may use from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the web interface&#39;s kit, <code>@ein/ui/*</code>. Core&#39;s <code>src/client/contract.snapshot</code> lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: <code>^0.2.0</code> accepts 0.2.x and nothing else.</p>
+<p>The range of core&#39;s module contract the module is written against, as a semver range: <code>&quot;^0.5.0&quot;</code>. Core&#39;s side of it is <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code>, at present <code>0.5.0</code>; <code>system-info</code> shows it on its <code>api</code> line.</p>
+<p>The contract is what a module may use from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the web interface&#39;s kit, <code>@ein/ui/*</code>. Core&#39;s <code>src/client/contract.snapshot</code> lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: <code>^0.5.0</code> accepts 0.5.x and nothing else.</p>
 <p><code>mod setup</code> checks the range:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -223,7 +223,7 @@
 </thead>
 <tbody><tr>
 <td>no <code>coreApi</code></td>
-<td><code>letters: no coreApi declared, assuming 0.2.1</code>, and it goes on</td>
+<td><code>letters: no coreApi declared, assuming 0.5.0</code>, and it goes on</td>
 </tr>
 <tr>
 <td>a range that does not parse</td>
@@ -231,7 +231,7 @@
 </tr>
 <tr>
 <td>a range core does not satisfy</td>
-<td><code>letters: needs @ein/client ^0.3.0, this core provides 0.2.1</code>, and it refuses</td>
+<td><code>letters: needs @ein/client ^0.6.0, this core provides 0.5.0</code>, and it refuses</td>
 </tr>
 </tbody></table>
 </div>
@@ -390,7 +390,7 @@
   <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://nominatim.openstreetmap.org/search&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one&#x27;s rate limit.&quot;</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
-<p><code>key</code> and <code>description</code> are required, <code>default</code> is what the reader falls back to when the variable is not set, and <code>kind</code> says how the variable reaches whatever reads it:</p>
+<p><code>key</code>, <code>kind</code> and <code>description</code> are required, <code>default</code> is what the reader falls back to when the variable is not set, and <code>kind</code> says how the variable reaches whatever reads it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -434,7 +434,7 @@
   <span class="hljs-attr">&quot;root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/archive/albums&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A collection of photos and videos that behaves as a directory. …&quot;</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
-<p><code>type</code>, <code>label</code> and <code>description</code> are required. <code>category</code> is <code>content</code> (what the archive holds), <code>structure</code> (what organises it) or <code>system</code>.</p>
+<p><code>type</code>, <code>label</code>, <code>description</code> and <code>category</code> are required. <code>category</code> is <code>content</code> (what the archive holds), <code>structure</code> (what organises it) or <code>system</code>. <code>plural</code> names several of them (&quot;People&quot;; the label with an <code>s</code> when it is left out), and <code>searchable: true</code> offers the type on the Search page as a choice of what to show, which needs a <code>root</code> and a type the <code>search</code> command knows.</p>
 <p>A type whose nodes live directly under one folder names that folder as <code>root</code>, and that makes it something an <code>@</code> in the search box completes to. Typing <code>@hel</code> lists the names, matching what you typed, of the nodes of every such type directly under its root, so Helen Okafor&#39;s person node comes up. <code>mod setup</code> registers the types with a root and <code>mod remove</code> drops them. When two modules give the same type a root, the first one set up keeps it.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section"></a></h2>
 <h3 id="roots"><code>roots</code><a class="anchor" href="#roots" aria-label="Link to this section"></a></h3>

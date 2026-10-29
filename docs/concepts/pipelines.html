@@ -306,7 +306,7 @@ so most events are turned away without starting a process:</p>
 </div>
 <p>In <code>match</code> and <code>unless</code>, a field names a value the event carries: <code>mimetype</code>, <code>nodePath</code>, or any
 key of a fact&#39;s <code>data</code>. In a path field, <code>*</code> matches within one name and <code>**</code> crosses <code>/</code>, so
-<code>/home/*/staging/**</code> is each person&#39;s staging folder and nothing deeper. A trigger may also set
+<code>/home/*/staging/**</code> is everything in each person&#39;s staging folder. A trigger may also set
 <code>priority</code> and <code>vars</code> for the runs it starts.</p>
 <h3 id="the-steps">The steps<a class="anchor" href="#the-steps" aria-label="Link to this section"></a></h3>
 <p>Each step is a command with a name. Steps without <code>dependsOn</code> start together; a step with
@@ -359,9 +359,10 @@ decides, when the step&#39;s turn comes, whether it runs or is skipped.</p>
 </div>
 <p>A command and its tests see the subject&#39;s path as <code>$NODE_PATH</code>. A run started by a fact also has
 <code>$EVENT_TYPE</code>, <code>$EVENT_ID</code>, <code>$EVENT_SOURCE</code>, the whole <code>data</code> as JSON in <code>$EVENT_DATA</code>, and each
-key of <code>data</code> as <code>$EVENT_&lt;NAME&gt;</code> in capitals: <code>data.mimetype</code> is <code>$EVENT_MIMETYPE</code>. A run started by
-a raw event has <code>$MIMETYPE</code>, <code>$NODE_TYPE</code> and <code>$EVENT_TYPE</code>. The name is <code>$NODE_PATH</code> and not
-<code>$PATH</code>, which the shell needs for finding commands.</p>
+key of <code>data</code> as <code>$EVENT_&lt;NAME&gt;</code> in capitals, with <code>_</code> between words: <code>data.mimetype</code> is
+<code>$EVENT_MIMETYPE</code> and <code>data.filePath</code> is <code>$EVENT_FILE_PATH</code>. The guards of a raw-event trigger also
+see <code>$MIMETYPE</code>, <code>$NODE_TYPE</code> and <code>$EVENT_TYPE</code>; the steps of a run it starts get <code>$NODE_PATH</code>
+alone. The name is <code>$NODE_PATH</code> and not <code>$PATH</code>, which the shell needs for finding commands.</p>
 <p>In a <code>command</code>, write <code>$NODE_PATH</code> bare: EiN substitutes the path already quoted, so a name with
 spaces is safe. In <code>filter</code>, <code>skipIf</code> and <code>condition</code> the path is an ordinary shell variable, so
 quote it yourself: <code>info &quot;$NODE_PATH/exif&quot;</code>.</p>
@@ -529,6 +530,8 @@ the best job that fits: the highest priority first, the oldest among equals.</p>
 </tr>
 </tbody></table>
 </div>
+<p>A third worker, <code>models-second</code>, takes the same model work as <code>models</code> in the reverse order. It is
+off until <strong>Second models worker&#39;s slots</strong>, <code>CFG_MODEL_SECOND_SLOTS</code>, is above 0.</p>
 <p>Most of these steps are calls into the <a href="../admin/media-service.html">media service</a>, which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
@@ -542,10 +545,12 @@ checksum and type, an <code>updated</code> event.</li>
 <li><code>archive-bridge</code> sees a photo with bytes and no metadata and announces <code>media.file.discovered</code>.</li>
 <li><code>media-ingest</code> runs <code>exif-extract</code>, which reads the camera, the time and the place and writes
 them under the photo as <code>metadata/exif</code>.</li>
-<li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes),
-<code>media-fingerprint</code>, <code>media-faces</code>, <code>media-embed-picture</code> (search by what is in the picture),
-<code>media-ocr</code> (text in the picture) and <code>media-device</code>; for a video or recording also
-<code>media-transcode</code> and <code>media-transcribe</code>. They run side by side.</li>
+<li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes)
+and <code>media-fingerprint</code>; for a picture also <code>media-faces</code>, <code>media-embed-picture</code> (search by what
+is in the picture) and <code>media-ocr</code> (text in the picture); for a video <code>media-video-faces</code>,
+<code>media-embed-picture</code>, <code>media-transcode</code> and <code>media-transcribe</code>; for a recording
+<code>media-transcode</code> and <code>media-transcribe</code>; and <code>media-device</code> when the metadata names the device
+that made the file. They run side by side.</li>
 <li><code>media-faces</code> writes each face it finds under the photo, which becomes <code>media.face.detected</code>
 and starts <code>media-face-assign</code>, matching the face to a person.</li>
 <li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
@@ -693,12 +698,12 @@ describes what you see in the interface while this happens.</p>
 </tr>
 <tr>
 <td><code>media-faces</code></td>
-<td><code>media.metadata.extracted</code></td>
+<td><code>media.metadata.extracted</code>, for a picture</td>
 <td>Finds the faces in a picture and crops each one</td>
 </tr>
 <tr>
 <td><code>media-video-faces</code></td>
-<td><code>media.metadata.extracted</code></td>
+<td><code>media.metadata.extracted</code>, for a video</td>
 <td>Finds the faces a video shows, and when</td>
 </tr>
 <tr>
@@ -723,7 +728,7 @@ describes what you see in the interface while this happens.</p>
 </tr>
 <tr>
 <td><code>media-ocr</code></td>
-<td><code>media.metadata.extracted</code> and others</td>
+<td><code>media.metadata.extracted</code> for a picture, and others</td>
 <td>Reads the text written in a picture</td>
 </tr>
 <tr>
@@ -737,13 +742,18 @@ describes what you see in the interface while this happens.</p>
 <td>Finds who speaks when, with a voiceprint per voice</td>
 </tr>
 <tr>
+<td><code>media-speaker-faces</code></td>
+<td><code>media.faces.completed</code>, for a video with voices</td>
+<td>Ties a video&#39;s voices to the faces seen speaking them</td>
+</tr>
+<tr>
 <td><code>media-speaker-assign</code></td>
-<td><code>media.speakers.detected</code></td>
+<td><code>media.speakers.detected</code>, <code>media.speakers.face-changed</code></td>
 <td>Decides which person each voice is</td>
 </tr>
 <tr>
 <td><code>media-device</code></td>
-<td><code>media.metadata.extracted</code></td>
+<td><code>media.metadata.extracted</code>, with a device in it</td>
 <td>Links a file to the device that made it</td>
 </tr>
 <tr>
@@ -819,7 +829,7 @@ status:</p>
 <tbody><tr>
 <td><code>75</code></td>
 <td>A service the step needs cannot do it now: the media service is busy, loading a model, restarting or unreachable</td>
-<td>The step goes back to wait without spending an attempt. Its kind of job rests 30 seconds, doubling up to 10 minutes, until one succeeds</td>
+<td>The step goes back to wait without spending an attempt. In a pool its kind of job rests 30 seconds, doubling up to 10 minutes, until one succeeds; a step the engine runs itself waits five minutes</td>
 </tr>
 <tr>
 <td><code>65</code></td>
@@ -902,8 +912,8 @@ one marks every photo that arrives in the Wrenfield albums as not yet reviewed:<
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 pipeline define /home/helen/pipelines/mark-unreviewed.yaml</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Defined pipeline 'mark-unreviewed'</code></pre></div>
-<p>A definition EiN cannot read gives <code>pipeline-define: invalid pipeline: …</code> with the reason, such
-as <code>missing steps</code> or <code>step &#39;mark&#39; depends on unknown step &#39;read&#39;</code>.</p>
+<p>A definition EiN cannot read gives <code>pipeline-define:</code> and the reason, such as
+<code>invalid pipeline: missing steps</code> or <code>step &#39;mark&#39; depends on unknown step &#39;read&#39;</code>.</p>
 </li>
 <li><p>Upload a photo to one of the albums. The pipeline appears on the <strong>Work</strong> tab of the
 <strong>Dashboard</strong> once it has run.</p>

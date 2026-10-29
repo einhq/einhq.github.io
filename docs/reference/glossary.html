@@ -105,7 +105,7 @@ node under <code>/etc/users</code>, belongs to groups and has a personal group n
 with two accounts, <code>admin</code> and <code>guest</code>. See <a href="../admin/accounts.html">Accounts and groups</a>.</p>
 <h3 id="admin-mode">Admin mode<a class="anchor" href="#admin-mode" aria-label="Link to this section"></a></h3>
 <p>A sign-in of a member of the <code>sudo</code> group that acts as the administrator for a while. It starts
-with <strong>Administer…</strong> in the account menu, or <code>admin</code> in a terminal, and ends with
+with <strong>Administer…</strong> in the account menu, or <code>admin</code> in a terminal for that terminal alone, and ends with
 <strong>Leave admin mode</strong>, or <code>admin --off</code>. See
 <a href="../guide/interface.html#admin-mode">Finding your way around</a>.</p>
 <h3 id="administrator">Administrator<a class="anchor" href="#administrator" aria-label="Link to this section"></a></h3>
@@ -119,8 +119,8 @@ files uploaded into it and links to pictures added from elsewhere, and keeps its
 span and its stacks. Albums are under <code>/archive/albums</code>. See <a href="../guide/albums.html">Albums</a>.</p>
 <h3 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h3>
 <p>The first module, <code>archive</code>, and what it adds: albums, people and their family tree, locations,
-devices and their tracks, labels, staging, and the pipelines that process media. Its part of the
-tree is <code>/archive</code>. Without it, EiN keeps what you give it and works nothing out. See
+devices and their tracks, labels, staging, and the pipelines that process media. Its parts of the
+tree are <code>/archive/albums</code>, <code>/archive/people</code>, <code>/archive/locations</code> and <code>/archive/devices</code>. Without it, EiN keeps what you give it and works nothing out. See
 <a href="../admin/modules.html">Modules</a>.</p>
 <h3 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h3>
 <p>The chat that answers questions about what the archive holds and about EiN, by running EiN&#39;s
@@ -138,7 +138,7 @@ and terminal sessions leave no record. See <a href="commands-core.html#audit">Co
 <h2 id="b">B<a class="anchor" href="#b" aria-label="Link to this section"></a></h2>
 <h3 id="bulk-lane">Bulk lane<a class="anchor" href="#bulk-lane" aria-label="Link to this section"></a></h3>
 <p>The lowest place in the order of processing work. Work on a staging category of the
-<strong>Google Photos export</strong> or <strong>Scans</strong> kind runs there, so what people upload in the meantime is
+<strong>Google Photos export</strong> or <strong>Scans</strong> kind runs there unless you change it, so what people upload in the meantime is
 processed first. See
 <a href="../admin/processing.html#large-imports-and-the-bulk-lane">Processing and pipelines</a>.</p>
 <h3 id="burst">Burst<a class="anchor" href="#burst" aria-label="Link to this section"></a></h3>
@@ -161,7 +161,7 @@ sharing, and the frame of the web interface. Core brings no pipelines of its own
 <a href="../start/how-ein-works.html#modules-decide-what-ein-is-for">How EiN works</a>.</p>
 <h3 id="cover">Cover<a class="anchor" href="#cover" aria-label="Link to this section"></a></h3>
 <p>The picture that stands for an album, a person, a location or a device on its card and in its
-header. A cover is a softlink to one of the pictures. See <a href="../guide/albums.html">Albums</a> and
+header. A cover is a softlink to one of the pictures, for a person to one of their face crops. See <a href="../guide/albums.html">Albums</a> and
 <a href="../guide/people.html#cover-pictures">People and faces</a>.</p>
 <h2 id="d">D<a class="anchor" href="#d" aria-label="Link to this section"></a></h2>
 <h3 id="dashboard">Dashboard<a class="anchor" href="#dashboard" aria-label="Link to this section"></a></h3>
@@ -205,7 +205,7 @@ event has the type <strong>Generic</strong>, <strong>Birth</strong>, <strong>Dea
 <a href="../guide/family.html#record-an-event">Family tree, events and homes</a>.</p>
 <h3 id="exif">EXIF<a class="anchor" href="#exif" aria-label="Link to this section"></a></h3>
 <p>The metadata a camera or phone writes into a picture: the camera, the time it was taken, the
-exposure and often where. EiN reads it on arrival and keeps it as the file&#39;s child
+exposure and often where. EiN reads it on arrival and keeps it under the file as
 <code>metadata/exif</code>. See <a href="../guide/dates-places.html">Dates and places of pictures</a>.</p>
 <h2 id="f">F<a class="anchor" href="#f" aria-label="Link to this section"></a></h2>
 <h3 id="favourite">Favourite<a class="anchor" href="#favourite" aria-label="Link to this section"></a></h3>
@@ -226,7 +226,7 @@ places as you type, and <kbd>Ctrl</kbd>+<kbd>K</kbd> puts the cursor in it from 
 <a href="../guide/search.html#the-finder-in-the-top-bar">Search and the finder</a>.</p>
 <h3 id="fingerprint">Fingerprint<a class="anchor" href="#fingerprint" aria-label="Link to this section"></a></h3>
 <p>A short summary of a file&#39;s picture or sound that finds copies in other bytes, such as a smaller
-version or a re-encoded video. EiN makes one once a file is prepared and compares it to find
+version or a re-encoded video. EiN makes one once a file&#39;s metadata is read and compares it to find
 look-alikes. See <a href="../guide/duplicates.html">Duplicates</a>.</p>
 <h3 id="front">Front<a class="anchor" href="#front" aria-label="Link to this section"></a></h3>
 <p>The photo a stack shows as its tile in an album&#39;s grid. <strong>Make front</strong> in the viewer chooses another.
@@ -336,7 +336,8 @@ Core has types of its own and modules add theirs. See <a href="node-types.html">
 that day&#39;s memories story. See <a href="../guide/home.html#on-this-day">Home, memories and statistics</a>.</p>
 <h3 id="organizer">Organizer<a class="anchor" href="#organizer" aria-label="Link to this section"></a></h3>
 <p>The part of the Archive that sorts the files in your staging area into groups, within a few minutes
-of their arrival. It leaves alone a group you have edited. The <code>staging-organizer</code> service runs it.
+of their arrival. It leaves alone a group you have edited. The <code>staging-organize</code> pipeline runs it,
+and the <code>staging-organizer</code> service asks for a run of what it missed.
 See <a href="../guide/staging.html">Sorting in staging</a>.</p>
 <h3 id="owner">Owner<a class="anchor" href="#owner" aria-label="Link to this section"></a></h3>
 <p>The account a node belongs to, usually whoever created it. The owner&#39;s bits in the mode say what
@@ -360,7 +361,8 @@ that changed. Modules bring pipelines; core brings none. See
 <a href="../admin/processing.html">Processing and pipelines</a>.</p>
 <h3 id="pool">Pool<a class="anchor" href="#pool" aria-label="Link to this section"></a></h3>
 <p>A node under <code>/var/pools</code> holding long-running jobs that wait for a worker with room for them. The
-Archive&#39;s media steps wait in <code>/var/pools/media</code>, where its workers <code>cpu</code> and <code>models</code> take them.
+Archive&#39;s media steps wait in <code>/var/pools/media</code>, where its workers <code>cpu</code>, <code>models</code> and
+<code>models-second</code> take them.
 <code>pool stat</code> shows what is waiting. See
 <a href="../admin/processing.html">Processing and pipelines</a>.</p>
 <h3 id="position">Position<a class="anchor" href="#position" aria-label="Link to this section"></a></h3>
@@ -396,7 +398,7 @@ when it ends. See <a href="../admin/accounts.html">Accounts and groups</a>.</p>
 <h3 id="setting">Setting<a class="anchor" href="#setting" aria-label="Link to this section"></a></h3>
 <p>A named value that changes how EiN works, such as <code>CFG_TRASH_RETENTION_DAYS</code>. System settings, named
 <code>CFG_…</code>, are changed by an administrator on <strong>Settings → System</strong>; personal ones, named
-<code>CFG_USER_…</code>, by each person under <strong>Profile → Preferences</strong>. Both can be changed with <code>config set</code>.
+<code>CFG_USER_…</code> (and <code>HISTSIZE</code>), by each person under <strong>Profile → Preferences</strong>. Both can be changed with <code>config set</code>.
 See <a href="../admin/configuration.html#two-kinds-of-settings">Configuration</a> and <a href="settings.html">Settings</a>.</p>
 <h3 id="share-link">Share link<a class="anchor" href="#share-link" aria-label="Link to this section"></a></h3>
 <p>An address that opens one album, and what it holds, to anyone who has it, without an account. It
@@ -415,7 +417,8 @@ tree. The terminal, SSH and the assistant all run it. See <a href="../shell/bash
 <a href="../guide/interface.html#pages-dialogs-the-side-drawer-and-full-screen">Finding your way around</a>.</p>
 <h3 id="sidebar">Sidebar<a class="anchor" href="#sidebar" aria-label="Link to this section"></a></h3>
 <p>The column of entries down the left of every page. Core gives <strong>Home</strong>, <strong>Search</strong>, <strong>Settings</strong>,
-<strong>Statistics</strong> and <strong>Documentation</strong>, and modules add theirs. See
+<strong>Statistics</strong> and <strong>Documentation</strong>, and for administrators <strong>Nodes</strong> and <strong>Dashboard</strong>, and
+modules add theirs. See
 <a href="../guide/customizing.html">Your sidebar and top bar</a>.</p>
 <h3 id="softlink">Softlink<a class="anchor" href="#softlink" aria-label="Link to this section"></a></h3>
 <p>A node that points at another node by its path; opening it opens what it points at. Album covers,
@@ -453,7 +456,7 @@ Nodes page do not use it. See <a href="../guide/profile.html#the-trash">Your pro
 <code>/var</code>, <code>/usr</code>, <code>/dev</code> and <code>/tmp</code>. See <a href="../concepts/tree.html">The tree</a>.</p>
 <h2 id="u">U<a class="anchor" href="#u" aria-label="Link to this section"></a></h2>
 <h3 id="unidentified-person">Unidentified person<a class="anchor" href="#unidentified-person" aria-label="Link to this section"></a></h3>
-<p>A person recognition started for faces that match nobody named, with a placeholder name such as
+<p>A person recognition started for a face or a voice that matches nobody, with a placeholder name such as
 <code>Unknown 4XK9QM</code>, waiting for someone to say who it is. See
 <a href="../guide/people.html#name-the-people-recognition-found">People and faces</a>.</p>
 <h2 id="v">V<a class="anchor" href="#v" aria-label="Link to this section"></a></h2>
@@ -470,10 +473,11 @@ Nodes page do not use it. See <a href="../guide/profile.html#the-trash">Your pro
 see what is granted to the <code>guest</code> group. It is off unless set. See <a href="#guest">Guest</a>.</p>
 <h2 id="w">W<a class="anchor" href="#w" aria-label="Link to this section"></a></h2>
 <h3 id="worker">Worker<a class="anchor" href="#worker" aria-label="Link to this section"></a></h3>
-<p>A service that takes long jobs from a pool when it has room. The Archive brings two, both on
+<p>A service that takes long jobs from a pool when it has room. The Archive brings three, all on
 <code>/var/pools/media</code>: <code>cpu</code>, for work
 done on this machine such as thumbnails and transcoding, and <code>models</code>, for work done by a model in
-the media service such as finding faces. See <a href="../admin/processing.html">Processing and pipelines</a>.</p>
+the media service such as finding faces, with <code>models-second</code>, off unless
+<code>CFG_MODEL_SECOND_SLOTS</code> is set above 0, beside it. See <a href="../admin/processing.html">Processing and pipelines</a>.</p>
 
         </article>
         <footer class="docs-foot">

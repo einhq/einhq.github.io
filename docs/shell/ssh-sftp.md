@@ -19,7 +19,8 @@ SSH and SFTP share the one port. With the standard install it is set by `EIN_SSH
 the machine EiN runs on; [Ports, HTTPS and remote access](../admin/network.md) explains how to change
 it and how to reach EiN from outside your home network. The setting
 [`CFG_SSH_PORT`](../reference/settings.md#cfg_ssh_port) (**SSH port** in **Settings**) is the port
-EiN listens on, and takes effect the next time EiN starts.
+EiN listens on inside its container, and takes effect the next time EiN starts. With the standard
+install leave it at `2222`: that is the port `EIN_SSH_PORT` is passed on to.
 
 The examples below use Helen Okafor's account `helen` on `ein.local`, port `2222`. Use your own.
 
@@ -49,8 +50,9 @@ The examples below use Helen Okafor's account `helen` on `ein.local`, port `2222
 You land in your home folder, `/home/helen`, at the same prompt as in a terminal tab. Everything on
 [The terminal](terminal.md) holds here too: your history, your `~/.bashrc`, Tab completion and the
 same keys, and every command on [Commands by task](commands.md). The editor works as well
-([The editor](editor.md)). Two things belong to the browser alone: pictures drawn by `cat`, which
-over SSH prints lines starting `__IMG:` instead, and dropping files to upload them.
+([The editor](editor.md)). Two things belong to the browser alone: the pictures, videos and
+recordings `cat` shows, which over SSH print lines starting `__IMG:`, `__VID:` or `__AUD:` instead,
+and dropping files to upload them.
 
 To log out, type `exit`. Closing the window or losing the connection ends the shell too, and stops
 whatever command was running in it.
@@ -84,8 +86,9 @@ A line with options in front of the key (`command="…"`, `from="…"`, `no-pty`
 skipped entirely.
 
 EiN trusts the file only while nobody but you can change it, since anyone who could write to it could
-sign in as you. Your home, `~/.ssh` and `authorized_keys` must each be owned by you, writable by
-neither group nor others, and none of them may be a link. `ssh-copy-id -s` sets the modes for you.
+sign in as you. Your home, `~/.ssh` and `authorized_keys` must each be owned by you (or the
+administrator), writable by neither group nor others nor by anyone else through an access list, and
+none of them may be a link. `ssh-copy-id -s` sets the modes for you.
 
 ### Add a key without ssh-copy-id
 
@@ -233,8 +236,8 @@ it needs an `rsync` program on EiN's side, and EiN's shell has none.
 - Every account with a password can sign in over SSH and SFTP; no group membership is needed. Being in
   the group `ssh` is about reaching other machines from EiN, not about reaching EiN (see
   [Reaching other machines](remote.md)).
-- An account that must choose a new password cannot sign in over SSH, with a key or with a password,
-  until it has. Sign in to the web interface once and set one there.
+- An account still waiting for a password, such as one imported without one, cannot sign in over SSH,
+  with a key or with a password, nor anywhere else, until the administrator sets one for it.
 - A disabled account cannot sign in at all, and disabling an account, or deleting it, ends the SSH and
   SFTP connections it already has open. [Accounts and groups](../admin/accounts.md) covers both.
 - After five wrong passwords from one address, that address is refused for a while, starting at a second
@@ -250,7 +253,7 @@ agent.
 | What you see                                                     | Why                                                                                                      | What to do                                                                                                                         |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `Connection refused` or a time-out                               | Wrong port or host, or EiN is not running, or the port is not reachable from where you are.              | Check the port with your administrator; from outside your home network see [Ports, HTTPS and remote access](../admin/network.md).  |
-| `Permission denied (publickey,password)` with the right password | The account must choose a new password, is disabled, or your address is held back after failed attempts. | Sign in to the web interface to set a new password, ask your administrator, or wait and try again.                                 |
+| `Permission denied (publickey,password)` with the right password | The account still waits for a password, is disabled, or your address is held back after failed attempts. | Ask your administrator to set a password or enable the account, or wait and try again.                                             |
 | The key is not used and you are asked for the password           | `authorized_keys` is missing, the key line has options in front, or the modes let others write.          | Check with `ls -la ~/.ssh` in EiN's terminal and fix with `chmod 700 ~/.ssh` and `chmod 600 ~/.ssh/authorized_keys`.               |
 | `WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!`               | EiN's server key is not the one your computer remembers, as after EiN was installed again from scratch.  | Ask your administrator whether that happened. If so, forget the old key with `ssh-keygen -R "[ein.local]:2222"` and connect again. |
 | `ssh-copy-id` fails without `-s`                                 | Without `-s` it runs Unix shell commands on EiN's side.                                                  | Run it with `-s`.                                                                                                                  |

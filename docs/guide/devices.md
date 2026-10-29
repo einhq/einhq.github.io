@@ -144,14 +144,14 @@ Its page says so: "No serial and no make/model — nothing is matched to this de
 `device-link --device` links files to it by hand."
 
 Anyone signed in can register a device. Changing it afterwards, with the buttons this page
-describes, is offered to whoever may change it: the person who registered it can, and the
-**Share** dialog decides who else can (see [Sharing](sharing.md)).
+describes, is offered to whoever may change it, which the device's **Share** dialog shows and sets
+(see [Sharing](sharing.md)).
 
 ## A device's page
 
 Click a card on the Devices page, or the device's name in the viewer. The page's address is
-`/devices/<name>`, and a tab other than **Info** adds `?tab=` with the tab's name, such as
-`?tab=track`.
+`/devices/` and the device's folder name, such as `/devices/Jons_eTrex`, and a tab other than
+**Info** adds `?tab=` with the tab's name, such as `?tab=track`.
 
 ![The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, "75 files · 2025–2026", the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card](../../assets/shots/device.webp "A device's page opens on its settings, with the button that links the pictures it took before it was registered.")
 
@@ -225,10 +225,10 @@ device, and changing it re-dates them.
   **Timezone** set to `Europe/London`, EiN reads its clock as London time and gets the moment of
   each picture right.
 - **Scanner or digitizer**: the device's clock records when a file was scanned, not when the
-  photograph was taken, so EiN does not date pictures by it. The pictures stay undated until
-  someone gives them a date. Files brought in through a staging category of the kind **Scans** are
-  treated as scans whatever device made them; this setting matters for scans uploaded straight into
-  an album, copied in over SFTP, or already in the library.
+  photograph was taken, so EiN does not date pictures by it. Pictures with no other date stay
+  undated until someone gives them one. Files brought in through a staging category of the kind
+  **Scans** are treated as scans whatever device made them; this setting matters for scans uploaded
+  straight into an album, copied in over SFTP, or already in the library.
 - **Video times in UTC**: phones keep their videos' recording time in UTC. Turn this on for a phone
   whose videos come out off by its time zone.
 
@@ -239,7 +239,7 @@ how scans are dated.
 ## Say who owned a device
 
 A device can have several owners over the years. The viewer lists them under the camera's name,
-each with the years, such as **Owned by** Ruby Wrenfield (2023–), so you can tell whose camera it
+each with the dates, such as **Owned by** Ruby Wrenfield (2023–), so you can tell whose camera it
 was when a picture was taken.
 
 1. On the device's page, open the **Owners** tab: "Who has owned &lt;name&gt;, and when."
@@ -277,8 +277,8 @@ The event appears on the device's **Timeline** tab. Events are described in full
 The picture on a device's card and behind its page's header is its cover: the newest picture linked
 to it, by the date it was taken. The cover moves on by itself as newer pictures are linked. A device
 that took only videos, such as a camcorder, gets the poster frame of its newest video once that
-video has been processed; recordings are never used. A device with no pictures shows a placeholder
-with its initials.
+video has been processed; recordings are never used. The card of a device with no pictures shows
+a placeholder with its initials.
 
 The web interface has no button to choose a device's cover. In the terminal you can link a picture
 as the device's `coverPhoto` yourself, and a cover chosen this way is kept. In the demo, Ruby's
@@ -286,7 +286,7 @@ iPhone is the folder `/archive/devices/ruby-iphone`:
 
 ```bash
 # in EiN's terminal
-ln -sf "/archive/albums/Christmas in Wellington/IMG_0412.HEIC" /archive/devices/ruby-iphone/coverPhoto
+ln -sf /archive/albums/wellington-christmas-2025/IMG_0650.HEIC /archive/devices/ruby-iphone/coverPhoto
 ```
 
 To go back to the automatic cover, remove the link with `rm /archive/devices/ruby-iphone/coverPhoto`
@@ -296,8 +296,7 @@ and run `device-cover /archive/devices/ruby-iphone`.
 
 The route a GPS-capable device recorded is its track. It shows on the device's **Track** tab, on
 the **Map** page with its **Tracks** layer (see [Locations and the map](places.md)), on the **Map**
-tab of every album whose dates it falls in (see [Albums](albums.md#the-map-tab)), and on the Search
-page under **Show** → **Tracks**.
+tab of every album whose dates it falls in (see [Albums](albums.md#the-map-tab)).
 
 The **Track** tab draws the route on a map, each day in its own colour, and adds it up:
 
@@ -341,8 +340,8 @@ then goes.
 The file names its device in its `creator` attribute or in one of its `<name>` entries. It matches a
 registered device when one of these holds, as whole words, the device's name, its make and model
 together, or its serial number. Capital letters and punctuation do not count. A file whose creator
-reads `Garmin eTrex 30x` joins the device with the make `Garmin` and the model `eTrex 30x`; the
-demo's phone tracks say `Apple iPhone 15` and join Ruby's iPhone.
+reads `Garmin eTrex 30x` joins the device with the make `Garmin` and the model `eTrex 30x`; in the
+demo, Ruby's tracks say `Apple iPhone 15` and join Ruby's iPhone.
 
 When a file names no registered device, or more than one, it waits for you:
 
@@ -351,7 +350,7 @@ When a file names no registered device, or more than one, it waits for you:
 2. Click **Choose device**. The Inbox's **Files** tab opens with the card
    **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Say
    which device recorded each, and its route joins that device's track."
-3. Beside each file, choose the device under **Device** and click **Import**.
+3. Beside each file, choose the device in the **Device** list and click **Import**.
 
 If the device is not registered yet, register it first (see
 [Register a device by hand](#register-a-device-by-hand)) and open the card again; a waiting file is

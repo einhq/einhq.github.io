@@ -93,7 +93,7 @@ owner and mode, the same content and children. Nothing marks one name as the ori
 
 ```bash
 # in EiN's terminal
-ln /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/IMG_0412.jpg
+ln /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/20191225_155434.jpg
 ```
 
 Each node counts its names. The count is the third column of `ls -l`, and **Links** in the
@@ -138,8 +138,8 @@ target and **Links** with the count of names.
 ![The Nodes explorer open at /archive/people/Peggy_Wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums](../../assets/shots/nodes.webp "A person's folder holds folders of relation links and a cover link; the arrow shows where the link points.")
 
 **Over SFTP.** Softlinks are symbolic links: `ls -l` in `sftp` shows them as links, following one
-takes you to the target, and `ln -s` makes one. A recursive copy copies the link, not what it points
-at. [SSH and SFTP](../shell/ssh-sftp.md#what-the-tree-looks-like-over-sftp) has the rest.
+takes you to the target, and `ln -s` makes one. How a recursive copy treats a link depends on your
+SFTP client. [SSH and SFTP](../shell/ssh-sftp.md#what-the-tree-looks-like-over-sftp) has the rest.
 
 ## Make and remove links in the terminal
 
@@ -147,11 +147,11 @@ at. [SSH and SFTP](../shell/ssh-sftp.md#what-the-tree-looks-like-over-sftp) has 
 
    ```bash
    # in EiN's terminal
-   ln -s /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/favourite.jpg
+   ln -s /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/favourite.jpg
    ```
 
 2. Check it with `ls -l /home/helen`. The line for `favourite.jpg` ends with
-   `-> /archive/albums/christmas-2019/files/IMG_0412.jpg`.
+   `-> /archive/albums/christmas-2019/20191225_155434.jpg`.
 3. Remove it with `rm /home/helen/favourite.jpg`. That removes the link only; the picture stays.
 
 If the name is taken, `ln` stops with `ln: failed to create link '<name>': File exists`. `ln -f`
@@ -168,7 +168,7 @@ label lives on the node that carries it, and searches read it there, so the link
 | Favourites              | `star`, `star -d`                                                                              |
 | Relations between nodes | `relate`, `unrelate`                                                                           |
 | Family ties and homes   | the `person-…` commands in [Family tree, events and homes](../guide/family.md#in-the-terminal) |
-| An album's cover        | `album-cover`                                                                                  |
+| An album's cover        | `album set <album> cover <picture>`                                                            |
 | Group membership        | `group-add-member`, `group-remove-member`                                                      |
 
 ## Moving keeps softlinks pointing right
@@ -176,8 +176,8 @@ label lives on the node that carries it, and searches read it there, so the link
 When a node moves, every softlink that points at it, or at anything under it, is re-pointed to the
 new path in the same step. An album can therefore be moved without losing its cover, its labels,
 its place in other albums or anyone's favourites. This holds for `mv`, for **Rename** and
-**Paste** in the **Nodes** explorer, for filing pictures from staging into an album, and for merging
-people or duplicates.
+**Paste** in the **Nodes** explorer, and for filing pictures from staging into an album. Merging
+people or duplicates moves the links to the one that is kept.
 
 Two kinds of softlink are not re-pointed:
 

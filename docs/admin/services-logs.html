@@ -86,7 +86,7 @@
 <p>This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the dashboard and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on <a href="install.html#run-ein-day-to-day">Installing in detail</a>.</p>
 <h2 id="what-a-service-is">What a service is<a class="anchor" href="#what-a-service-is" aria-label="Link to this section"></a></h2>
 <p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, the workers that process your media, and small loops that tidy up on a timer. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the media service (<code>ems</code>), the language model (<code>llm</code>) and the database (<code>db</code>) are containers beside EiN, and EiN watches the first two through services of its own, <code>ems-link</code> and <code>llm-link</code>.</p>
-<p>Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 20:</p>
+<p>Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 21:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -156,6 +156,11 @@
 <td>Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices</td>
 </tr>
 <tr>
+<td><code>models-second</code></td>
+<td>archive</td>
+<td>A second worker for the same steps, in the reverse order; it ends at once, stopped, while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code></td>
+</tr>
+<tr>
 <td><code>media-heal</code></td>
 <td>archive</td>
 <td>Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up</td>
@@ -211,7 +216,7 @@
 <li><code>×</code> and a number when EiN has restarted it since it was last started by hand. Hover it for &quot;Restarted 2 time(s)&quot;.</li>
 <li>A badge: <strong>running</strong>, <strong>starting</strong>, <strong>stopping</strong>, <strong>stopped</strong>, <strong>failed</strong>, or <strong>disabled</strong> for a service that is switched off.</li>
 </ul>
-<p>The heading counts them: <code>20 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
+<p>The heading counts them: <code>21 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. While <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code>, the stopped <code>models-second</code> is counted as down. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
 <p><strong>Settings → Modules</strong> also shows a module&#39;s services and whether each runs, on the module&#39;s <strong>Services</strong> tab; the controls are here on the dashboard.</p>
 <h2 id="restart-stop-and-start-a-service">Restart, stop and start a service<a class="anchor" href="#restart-stop-and-start-a-service" aria-label="Link to this section"></a></h2>
 <p>On the <strong>Services</strong> tab, as the administrator or in <a href="../guide/interface.html#admin-mode">admin mode</a>, each row has buttons at its right:</p>
@@ -260,7 +265,7 @@ service-start-all      <span class="hljs-comment"># every enabled service that i
 </aside>
 <p>Saving a setting on the Settings page restarts the services that read it by itself; <a href="configuration.html#what-a-change-restarts">Configuration</a> lists what restarts what.</p>
 <h2 id="when-ein-restarts-a-service-by-itself">When EiN restarts a service by itself<a class="anchor" href="#when-ein-restarts-a-service-by-itself" aria-label="Link to this section"></a></h2>
-<p>Every service that ships with EiN restarts when its script fails: when it ends with an exit code other than 0, EiN starts it again a second later, and the <code>×</code> count on its row goes up. A service that fails three times within a minute is not started again; it stays <strong>failed</strong> until you start it. A script that ends with 0 is <strong>stopped</strong>, and is not started again.</p>
+<p>Every service that ships with EiN restarts when its script fails: when it ends with an exit code other than 0, EiN starts it again a second later, and the <code>×</code> count on its row goes up. A service that has been restarted three times within a minute and fails again is not started again; it stays <strong>failed</strong> until you start it. A script that ends with 0 is <strong>stopped</strong>, and is not started again.</p>
 <p>The count belongs to the run you started: <strong>Restart</strong>, or <code>service-restart</code>, starts it at 0 again.</p>
 <h2 id="look-at-services-in-the-terminal">Look at services in the terminal<a class="anchor" href="#look-at-services-in-the-terminal" aria-label="Link to this section"></a></h2>
 <p><a href="../reference/commands-core.html#service-list"><code>service-list</code></a> lists every service; anyone may run it.</p>
@@ -315,7 +320,7 @@ Errors: /var/logs/services/ems-link/stderr.log</code></pre></div>
 <tr>
 <td>The <code>ein</code> container&#39;s log</td>
 <td>The same messages as <code>/var/logs/system</code>, with the details behind them, such as an error&#39;s stack, and what EiN prints while it starts</td>
-<td>Until the container is removed with <code>podman compose down</code></td>
+<td>Until the container is removed or made again, by <code>podman compose down</code> or by an <code>up -d</code> after a change</td>
 </tr>
 </tbody></table>
 </div>
@@ -356,7 +361,7 @@ Errors: /var/logs/services/ems-link/stderr.log</code></pre></div>
 dmesg -n 50                  <span class="hljs-comment"># the last 50 lines</span>
 dmesg --level warn -n 10     <span class="hljs-comment"># the last 10 problems, as Recent problems shows them</span>
 dmesg --level error          <span class="hljs-comment"># every error since EiN started</span></code></pre></div>
-<div class="code"><pre tabindex="0"><code>2026-10-25 21:34:13 WARN  pool-worker pooled step could not run yet, kind resting
+<div class="code"><pre tabindex="0"><code>2026-10-25 21:34:13 WARN  pool-worker      pooled step could not run yet, kind resting
 2026-10-25 21:35:02 INFO  service-registry Service 'label-models' started</code></pre></div>
 <p><code>--level</code> filters before <code>-n</code> counts, so <code>--level warn -n 10</code> is the last ten problems, not the problems among the last ten lines. The levels are <code>debug</code>, <code>info</code>, <code>warn</code> and <code>error</code>. Pipe it on as with any command: <code>dmesg | grep ssh-server</code>.</p>
 <p>For a service&#39;s output, use <a href="../reference/commands-core.html#tail"><code>tail</code></a>, which prints each line as the service wrote it:</p>
@@ -372,7 +377,7 @@ ems-link: down — not answering</code></pre></div>
 podman compose logs --<span class="hljs-built_in">tail</span> 200 ein     <span class="hljs-comment"># the last 200 lines</span>
 podman compose logs -f ein             <span class="hljs-comment"># follow; Ctrl+C ends it</span>
 podman compose logs ems                <span class="hljs-comment"># the media service: ems, llm or db for the others</span></code></pre></div>
-<p>With Docker, write <code>docker compose</code>. Each line reads <code>[2026-10-25 21:35:02] [INFO ] [service-registry] Service &#39;label-models&#39; started</code>, followed by any details the message carries. This is the log to read when EiN does not start, since the tree&#39;s logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, <code>Admin password set to: …</code>, which is gone with the container after <code>podman compose down</code>.</p>
+<p>With Docker, write <code>docker compose</code>. Each line reads <code>[2026-10-25 21:35:02] [INFO ] [service-registry] Service &#39;label-models&#39; started</code>, followed by any details the message carries. This is the log to read when EiN does not start, since the tree&#39;s logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, <code>Admin password set to: …</code>, which is gone once the container is made again, as after <code>podman compose down</code>.</p>
 <p>The media service, the language model and the database write only to their containers&#39; logs. <a href="media-service.html#on-the-machine">The media service</a> covers reading its log.</p>
 <h2 id="log-more-or-less">Log more, or less<a class="anchor" href="#log-more-or-less" aria-label="Link to this section"></a></h2>
 <p>How much EiN logs is set by two variables in <code>~/ein/.env</code>, read when the container starts:</p>
@@ -482,7 +487,7 @@ service-start disk-report</code></pre></div>
 <tr>
 <td><code>statusCommand</code></td>
 <td>none</td>
-<td>A command whose first line of output is shown beside the service</td>
+<td>A command whose first line of output is shown under the service&#39;s name, in place of its description</td>
 </tr>
 <tr>
 <td><code>checkCommand</code></td>
@@ -498,7 +503,7 @@ service-start disk-report</code></pre></div>
 </div>
 <p>To take a service away, stop it, disable it and remove it: <code>service-stop disk-report</code>, <code>service-disable disk-report</code>, <code>service-remove disk-report</code>. Removing it removes only the registration, not the folder. A module&#39;s services are declared in the module itself; <a href="../develop/modules.html">Writing a module</a> covers them.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
-<p><strong>A service is failed, with <code>×3</code> beside it.</strong> Its script failed three times within a minute. Its <code>stderr.log</code> holds the output of the last attempt only, since each start empties it, so read it first: <code>tail -n 50 /var/logs/services/&lt;name&gt;/stderr.log</code>. <code>dmesg | grep &quot;&lt;name&gt;&quot;</code> shows EiN&#39;s lines about it, such as <code>Service &#39;cpu&#39; exited with code 1</code> and <code>Service &#39;cpu&#39; exceeded max restarts (3) within window</code>; the container&#39;s log has the details behind them. Start it again with <strong>Start</strong> once you have fixed the cause.</p>
+<p><strong>A service is failed, with <code>×3</code> beside it.</strong> It was restarted three times within a minute and failed again. Its <code>stderr.log</code> holds the output of the last attempt only, since each start empties it, so read it first: <code>tail -n 50 /var/logs/services/&lt;name&gt;/stderr.log</code>. <code>dmesg | grep &quot;&lt;name&gt;&quot;</code> shows EiN&#39;s lines about it, such as <code>Service &#39;cpu&#39; exited with code 1</code> and <code>Service &#39;cpu&#39; exceeded max restarts (3) within window</code>; the container&#39;s log has the details behind them. Start it again with <strong>Start</strong> once you have fixed the cause.</p>
 <p><strong><code>service start: &#39;x&#39; is not enabled</code>.</strong> The service is switched off; the dashboard shows it as <strong>disabled</strong>. Run <code>service-enable x</code>, then <code>service-start x</code>. Disabling one of core&#39;s or a module&#39;s services lasts only until EiN starts again, which enables them all.</p>
 <p><strong><code>service stop: service &#39;x&#39; is not running</code></strong> or <strong><code>service &#39;x&#39; is already running</code>.</strong> The service was already in that state; the dashboard row may be up to 10 seconds old.</p>
 <p><strong><code>service remove: &#39;x&#39; is running, stop it first</code></strong> or <strong><code>&#39;x&#39; is enabled, disable it first</code>.</strong> Stop it and disable it, then remove it.</p>

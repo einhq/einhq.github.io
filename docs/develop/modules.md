@@ -16,19 +16,20 @@ When EiN sets a module up, it finds most of what the module brings by where it i
 The manifest says who the module is, what it shares with other modules, and what it adds to
 machinery core already has. Nothing in the manifest is code.
 
-| In the module             | What EiN does with it at setup                                                                      |
-| ------------------------- | --------------------------------------------------------------------------------------------------- |
-| `mod.json`                | Reads and checks it; refuses the module when it is wrong                                            |
-| `bin/`                    | Adds the folder to every shell's `PATH`; each file is a command, in bash or TypeScript              |
-| `services/<name>/`        | Registers and enables a background service: `start.sh` with a `config.json`                         |
-| `pipelines/*.yaml`        | Registers each pipeline definition                                                                  |
-| `ui/`                     | Bundles the pages `mod.json` names; links `ui/nav.json` as the module's sidebar and top-bar entries |
-| `etc/config`              | Links it as `/etc/config.d/<name>`: the module's own choice of settings                             |
-| `etc/<x>.d/`              | Links it as `/etc/<x>.d/<name>`, for the module that reads that folder                              |
-| `etc/` (anything else)    | Copies it into `/etc` when it is not there yet; never overwrites                                    |
-| `docs/`                   | Links it as `/usr/docs/modules/<name>`: the module's guide                                          |
-| `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                    |
-| `uninstall.sh`            | Runs it when the module is removed                                                                  |
+| In the module             | What EiN does with it at setup                                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `mod.json`                | Reads and checks it; refuses the module when it is wrong                                                                                         |
+| `bin/`                    | Adds the folder to every shell's `PATH`; each file is a command, in bash or TypeScript                                                           |
+| `services/<name>/`        | Registers and enables a background service: `start.sh` with a `config.json`; a single script `services/<name>` is wrapped in a folder of its own |
+| `pipelines/*.yaml`        | Registers each pipeline definition                                                                                                               |
+| `ui/`                     | Bundles the pages `mod.json` names; links `ui/nav.json` as the module's sidebar and top-bar entries                                              |
+| `ui/index.html`           | Links a built `ui/` as a site of its own, `/var/www/<name>`                                                                                      |
+| `etc/config`              | Links it as `/etc/config.d/<name>`: the module's own choice of settings                                                                          |
+| `etc/<x>.d/`              | Links it as `/etc/<x>.d/<name>`, for the module that reads that folder                                                                           |
+| `etc/` (anything else)    | Copies it into `/etc` when it is not there yet; never overwrites                                                                                 |
+| `docs/`                   | Links it as `/usr/docs/modules/<name>`: the module's guide                                                                                       |
+| `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                                                                 |
+| `uninstall.sh`            | Runs it when the module is removed                                                                                                               |
 
 ![A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; docs/ becomes the module's guide in /usr/docs/modules; and uninstall.sh, dashed, runs when mod remove takes the module away](../diagrams/module.svg "EiN finds most of a module by where each part sits in its folder; mod.json says the rest.")
 
@@ -85,7 +86,7 @@ Start `mod.json` with who the module is and the core it is written for:
   "description": "The family's recipes: who cooked what, for how many",
   "author": "Ruby Wrenfield",
   "license": "MIT",
-  "coreApi": "^0.2.0",
+  "coreApi": "^0.5.0",
   "roots": ["/archive/recipes"],
   "nodeTypes": [
     {
@@ -112,8 +113,9 @@ Start `mod.json` with who the module is and the core it is written for:
 | `nodeTypes`   | The node types it defines, for the documentation; one with a `root` is what an `@` in the search box completes to       |
 | `ui.routes`   | Its pages, each route with the file that draws it                                                                       |
 
-`mod info` on any installed module shows the core API this EiN provides beside the range the module
-asks for. A module without `coreApi` still installs, with a warning.
+`mod info` on any installed module shows the range it asks for under **Core API**, and `system-info`
+shows the core API this EiN provides on its `api` line. A module without `coreApi` still installs,
+with a warning.
 
 ## Add a command in bash
 
@@ -249,6 +251,7 @@ With the standard installation, EiN keeps the modules it installs in `modules/` 
    Setting up module 'recipes'...
      roots: /archive/recipes
      Added /usr/modules/recipes/bin to PATH
+     Linked navigation at /etc/ui/nav.d/recipes.json
      Linked docs at /usr/docs/modules/recipes
    Module 'recipes' setup complete
      recipes: built, 3.1 KB in 820 ms
@@ -256,7 +259,7 @@ With the standard installation, EiN keeps the modules it installs in `modules/` 
 
    The last lines come from bundling every module's pages, one line per module.
 
-3. Open a new terminal tab, so its shell reads the new `PATH`, and try the commands:
+3. Try the commands. `mod setup` added `bin/` to `PATH` in `/etc/bashrc`, which every shell reads again before its next command, an open terminal tab included:
 
    ```bash
    # in EiN's terminal
@@ -378,7 +381,8 @@ opens:
 
 A top-bar entry's `action` is `{ "navigate": "/recipes" }` for the page, `{ "dialog": "/recipes/new" }`
 for the dialog over it, `{ "drawer": … }` for the side drawer and `{ "fullscreen": … }` for over
-everything. Each entry's `id` is `<module>.<name>`. `icon` is a Tabler icon name. `admin: true` shows
+everything; `{ "run": … }` runs a command line instead, and with `navigate` beside it goes where the
+command's answer says. Each entry's `id` is `<module>.<name>`. `icon` is a Tabler icon name. `admin: true` shows
 an entry to administrators only, `signedIn: true` to people who are signed in. `ui-nav` prints the
 navigation as the reader gets it, with a warning for each entry it left out and why.
 
@@ -446,17 +450,18 @@ while true; do
 done
 ```
 
-| Key             | What it does                                                                                             |
-| --------------- | -------------------------------------------------------------------------------------------------------- |
-| `description`   | One line for the **Dashboard**'s services and `service list`                                             |
-| `restartPolicy` | `on-failure`, `always` or `never`; with a restart policy EiN starts a failed service again               |
-| `maxRestarts`   | How many restarts within `restartWindow` before the service stays failed; 3 by default                   |
-| `restartWindow` | That window, in milliseconds; 60000 by default                                                           |
-| `stopTimeout`   | How long a stopping script may take before it is closed, in milliseconds; 5000 by default                |
-| `env`           | Environment variables for the script                                                                     |
-| `statusCommand` | A command answering the service's health in one line, shown beside its status                            |
-| `checkCommand`  | A command answering checks for `health`, as JSON `[{ name, state, reason }]` with `ok`, `warn` or `fail` |
-| `gaugeCommand`  | A command answering meters for `top` and the **Dashboard**, as JSON `[{ label, percent?, value }]`       |
+| Key             | What it does                                                                                                      |
+| --------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `description`   | One line for the **Dashboard**'s services and `service list`                                                      |
+| `restartPolicy` | `on-failure`, `always` or `never`; with a restart policy EiN starts a failed service again                        |
+| `maxRestarts`   | How many restarts within `restartWindow` before the service stays failed; 3 by default                            |
+| `restartWindow` | That window, in milliseconds; 60000 by default                                                                    |
+| `stopTimeout`   | How long a stopping script may take before it is closed, in milliseconds; 5000 by default                         |
+| `env`           | Environment variables for the script                                                                              |
+| `statusCommand` | A command answering the service's health in one line, shown beside its status                                     |
+| `checkCommand`  | A command answering checks for `health`, as JSON `[{ name, state, reason }]` with `ok`, `warn` or `fail`          |
+| `gaugeCommand`  | A command answering meters for `top` and the **Dashboard**, as JSON `[{ label, percent?, value }]`                |
+| `workClass`     | `background` for a service whose work may wait behind people's: its database connections leave some free for them |
 
 Module services use `"restartPolicy": "on-failure"`. A service whose name the module stops
 shipping is stopped and removed at the next setup. [Services and logs](../admin/services-logs.md)
@@ -593,7 +598,7 @@ module's commands only when it depends on it.
    mod install https://forge.example:3000/wrenfield/module-recipes@v0.1.0
    ```
 
-   EiN fetches the commit over HTTPS, checks the module as setup would, puts it in place, sets it
+   EiN fetches the commit from the forge, checks the module as setup would, puts it in place, sets it
    up and starts its services.
 
 4. To let administrators install it by name, they add your organisation to **Module sources**,
@@ -602,7 +607,7 @@ module's commands only when it depends on it.
    covers sources that need a token.
 
 When EiN's module API changes in a way that breaks modules, a module whose `coreApi` range the new
-EiN does not satisfy is refused at setup with `needs @ein/client ^0.2.0, this core provides 0.3.0`.
+EiN does not satisfy is refused at setup with `needs @ein/client ^0.5.0, this core provides 0.6.0`.
 Publish a version written for the new API, with its `coreApi` raised.
 
 ## Remove it
@@ -622,12 +627,12 @@ show them afterwards.
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `mod setup: module not found: /usr/modules/recipes`                           | The link in `/usr/modules` is missing; make it as in [Try the module](#try-the-module-on-your-ein)                     |
 | `mod setup: no mod.json found in /usr/modules/recipes`                        | `mod.json` must be at the folder's top                                                                                 |
-| `recipes: needs @ein/client ^0.3.0, this core provides 0.2.1`                 | `coreApi` asks for another version of the module API than this EiN has                                                 |
+| `recipes: needs @ein/client ^0.6.0, this core provides 0.5.0`                 | `coreApi` asks for another version of the module API than this EiN has                                                 |
 | `recipes: requires module 'archive' (^0.1.0), which is not installed`         | Install the dependency, or remove it from `dependencies`                                                               |
 | `recipes: export './api' points at a missing file: ./lib/api.ts`              | Fix the path in `exports`                                                                                              |
 | `recipes: ui.routes['/recipes'] must be a .tsx page: ui/pages/recipes.ts`     | A page is a `.tsx` file                                                                                                |
 | `ui-build: recipes: …: '…' is neither lent by the shell nor the module's own` | The page imports a package the interface does not lend; see the table in [Add a page](#add-a-page-and-a-sidebar-entry) |
-| `recipe-list: command not found`                                              | Open a new terminal tab, so its shell reads the new `PATH`                                                             |
+| `recipe-list: command not found`                                              | `mod setup` has not run since `bin/` was made, or the file is not in `bin/`; run `mod setup recipes`                   |
 | `Access denied` when someone else runs a command                              | The file has no execute bit; `chmod 755` it, and commit the mode                                                       |
 | The sidebar entry does not appear                                             | Run `ui-nav` and read its warnings: a missing field or an unknown section leaves an entry out                          |
 | A page shows an error inside the frame                                        | Its bundle failed to load or the page threw; run `ui-build recipes` and read its output, then the browser's console    |

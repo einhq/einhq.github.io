@@ -213,12 +213,11 @@ year of everyday pictures. You go through the groups and decide for each one:</p
   <text x="712" y="476" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Undo restores it</text>
 </svg><figcaption>A file&#39;s way through staging: nothing reaches the shared library until you file it</figcaption></figure>
 <p>Until a file is filed, the views of the whole library leave it out: the Media page and its
-counts, the map, On this day and search. One number still counts staged files: the count beside
-a person in the People list includes faces and voices found in your staged files, so it can be
-higher than the pictures you see when you open that person.</p>
+counts, the map, On this day, search, and the number on a person&#39;s card on the People page. The
+faces and voices in it are found all the same, and count once the file is filed.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>Staging is only for people who are signed in. A visitor browsing without an account does not see
-it in the sidebar, and its address answers &quot;Sign in to use your private staging area.&quot;</p>
+it in the sidebar, and opening its address asks them to sign in.</p>
 </aside>
 <h2 id="open-staging">Open staging<a class="anchor" href="#open-staging" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Staging</strong> in the sidebar, under <strong>Media</strong>. While you have only the Inbox, staging opens the
@@ -313,7 +312,7 @@ category.</p>
 <tr>
 <td><strong>Scans</strong></td>
 <td>Scanned prints, negatives and slides</td>
-<td>Grouped by folder and by runs of file names; when a scan was made never groups it. No scanner clock, file name or upload time dates a scan, so each one waits in <strong>Needs a date</strong> until you give it a date. Processed after other work.</td>
+<td>Grouped by folder and by runs of file names; when a scan was made never groups it. No scanner clock, file name or upload time dates a scan, only a date a person gave it, so most count under <strong>Needs a date</strong> until you give them one. Processed after other work.</td>
 </tr>
 <tr>
 <td><strong>Phone</strong></td>
@@ -401,7 +400,8 @@ discard its files first.&quot; The Inbox cannot be removed.</p>
 <p>The page&#39;s title is the category&#39;s name with a chevron. Click it to switch to another category,
 to <strong>All categories</strong>, or to <strong>New category…</strong>.</p>
 <p>The header has <strong>Upload</strong>, which adds files to the category&#39;s folder for today, and under ⋮:
-<strong>Upload a folder</strong>, <strong>Import media…</strong>, <strong>Category settings</strong> and <strong>All categories</strong>. You can also
+<strong>Upload a folder</strong>, <strong>Import media…</strong>, <strong>Category settings</strong> and, with more than one category,
+<strong>All categories</strong>. You can also
 drop files anywhere on the page, on any tab, and they go into the category on screen.</p>
 <p>Under the tab names, a thin bar shows the category&#39;s files and the stages of what is arriving,
 with <strong>Group now</strong>. The four tabs:</p>
@@ -610,8 +610,9 @@ which files that day&#39;s pictures into the album. Select the day with <kbd>[</
 and <kbd>Enter</kbd> does the same. A closed Everyday group says how many of its days match an
 album, for example &quot;→ 3 days match an album&quot;.</li>
 <li><strong>Needs a date.</strong> Give the pictures a time with <strong>T</strong> (<strong>Set the time…</strong>): the <strong>Set time</strong>
-dialog takes one start time, and the pictures keep their spacing or follow a minute apart. Once
-dated, the organizer puts them with the events and days they belong to. The dialog is explained
+dialog takes one start time, and the pictures keep their spacing or follow a minute apart. A
+picture known only to a year or a month keeps that date unless you click its row to give it a
+time. Once dated, the organizer puts them with the events and days they belong to. The dialog is explained
 on <a href="dates-places.html">Dates and places of pictures</a>.</li>
 <li><strong>Clutter.</strong> Its proposal is <strong>Discard</strong>.</li>
 </ul>
@@ -666,6 +667,10 @@ the column beside the stream (on a wide screen) it comes with how sure it is:</p
 <tr>
 <td><strong>Discard</strong></td>
 <td>Clutter</td>
+</tr>
+<tr>
+<td><strong>File N matched days · M photos</strong></td>
+<td>An Everyday group some of whose days match a library album you may add to; each matched day goes into its album and the rest stays</td>
 </tr>
 <tr>
 <td>&quot;No proposal: N, A, B or X.&quot;</td>
@@ -747,7 +752,7 @@ pictures&quot;.</li>
 <p>With pictures selected, <strong>New group of N pictures</strong> under the open group makes them a group of
 their own instead.</p>
 <h3 id="candidates-and-compare">Candidates and compare<a class="anchor" href="#candidates-and-compare" aria-label="Link to this section"></a></h3>
-<p>On a computer with a window at least 1,100 pixels wide, a column stands beside the stream. It
+<p>On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream. It
 starts with &quot;Put it in&quot; and the group&#39;s name, then the proposal and its dots. Below them are up to
 three <strong>candidates</strong>: library albums the group may belong in, best first. Each shows its name, a
 percentage, its dates and size, and up to three reasons in words, such as &quot;within 40 min of its
@@ -790,11 +795,14 @@ the photos back (see <a href="profile.html">Your profile, favourites and trash</
 <li>hold <kbd>Shift</kbd> to select everything from where the selection started;</li>
 <li>press <kbd>Shift</kbd>+<kbd>J</kbd> or <kbd>Shift</kbd>+<kbd>K</kbd> to select on to the next or
 previous group;</li>
-<li>choose <strong>Select</strong> → <strong>All in To sort</strong> (or whichever lane you are in);</li>
+<li>choose <strong>Select</strong> → <strong>All in To sort</strong> (or whichever lane you are in), or <strong>Those with a sure
+proposal</strong>;</li>
 <li>or draw a box around them from an empty part of the page (hold <kbd>Shift</kbd> to add,
 <kbd>Alt</kbd> to take away, <kbd>Esc</kbd> to stop).</li>
 </ul>
-<p>Then <kbd>N</kbd> or <kbd>P</kbd> makes one album of everything selected, <kbd>A</kbd> and
+<p>Then <kbd>Enter</kbd> accepts each group&#39;s proposal, after the <strong>Accept the proposals?</strong> dialog
+has asked which to take (<strong>Every proposal</strong>, <strong>Likely and sure</strong> or <strong>Only sure</strong>);
+<kbd>N</kbd> or <kbd>P</kbd> makes one album of everything selected, <kbd>A</kbd> and
 <kbd>B</kbd> file it into an album, <kbd>X</kbd> discards it after asking, and <kbd>L</kbd> puts
 the groups aside. <kbd>Esc</kbd> clears the selection. A message shows the progress, for example
 &quot;Filing 1,840 of 9,830 photos · 37 of 214 groups&quot;, with <strong>Cancel</strong>; when it is done, <strong>Undo all</strong>
@@ -1009,7 +1017,7 @@ and one that is removed disappears.</p>
 <p>What you decide is kept through every one of those runs:</p>
 <ul>
 <li>Your changes of the groups (splits, moves, new groups, merges, <strong>Not a group</strong>, names) are kept
-on every run until you undo them. On the <strong>Done</strong> tab they carry the badge <strong>kept</strong>: &quot;The
+on every run until you undo them. On the <strong>Done</strong> tab all but a rename carry the badge <strong>kept</strong>: &quot;The
 organizer keeps this change on every run until it is undone&quot;.</li>
 <li>A group whose pictures you changed by hand shows <strong>Yours</strong>, and the organizer leaves it as it is.</li>
 <li><strong>Not this album</strong> keeps that album away from those photos until you undo it.</li>

@@ -122,8 +122,9 @@ GitHub:</p>
 <p>A module needs only what its manifest names as dependencies; EiN installs those with it. A service
 that runs beside EiN, such as the media service or the language model, is no module: the installer
 adds it (see <a href="install.html">Installing in detail</a>). Installing <code>archive</code> without the media service
-gives no error, but nothing you upload gets thumbnails, dates, faces or searchable text until the
-media service is there.</p>
+gives no error, only a reminder from the installer and <code>setup.sh</code> when <code>EIN_MODULES</code> names it, but
+nothing you upload gets thumbnails, dates, faces or searchable text until the media service is
+there.</p>
 <p>A fourth module, <code>importer</code>, moves one particular older archive into EiN. It is not published.</p>
 <h2 id="see-what-is-installed">See what is installed<a class="anchor" href="#see-what-is-installed" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Settings</strong> in the sidebar and choose the <strong>Modules</strong> tab. Everyone who is signed in has this
@@ -156,7 +157,7 @@ its version at the right; one that does not shows a badge instead and is listed 
 <p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
 <p>Choose a module to open its panel. At the top it shows the module&#39;s name, its version and the core
-API it is written for (<code>version 0.1.0 · core API ^0.4.1</code>), where it is installed
+API it is written for (<code>version 0.1.0 · core API ^0.5.0</code>), where it is installed
 (<code>/usr/modules/archive</code>), when it was set up, and its state. <strong>Reference and guide</strong> opens the
 module&#39;s own page in <strong>Documentation</strong>, with its guide and every command, setting and node type it
 brings. Below are tabs, each with a count; <strong>About</strong> and <strong>Dependencies</strong> are always there, and
@@ -260,7 +261,7 @@ appear without reloading the page.</p>
 </tr>
 </tbody></table>
 </div>
-<p>A module written for a different core API says &quot;Needs core API ^0.5.0, which this EiN does not
+<p>A module written for a different core API says &quot;Needs core API ^0.6.0, which this EiN does not
 provide.&quot; (with its own range), and its button is greyed out. <strong>Refresh</strong> asks the sources again.</p>
 <p>In the terminal, <code>mod search</code> lists the same, and <code>mod install</code> installs:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -303,7 +304,7 @@ ways:</p>
 </tr>
 <tr>
 <td><code>archive@v0.1.0</code>, <code>…/module-archive@&lt;commit&gt;</code></td>
-<td>That branch or tag, or a commit by its full 40-character id</td>
+<td>That branch or tag, or a commit by its id, whole or its first seven characters or more, which EiN records whole</td>
 </tr>
 </tbody></table>
 </div>
@@ -327,8 +328,8 @@ starts without it; install it from <strong>Settings → Modules</strong> once Ei
 <li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
 from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
 and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest commit of the branch it was installed from,
-or the same tag again for one installed at a tag; one installed at a commit gets the newest
-commit of the default branch. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
+or the same tag again for one installed at a tag. One installed at a commit stays there, and its
+panel offers no <strong>Update</strong>. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
 newer.</li>
 <li>In the terminal, <code>mod install archive</code> updates an installed module. The same commit again is
 left alone: <code>archive is installed at 5e1c07a42 (main) already</code>.</li>
@@ -342,8 +343,10 @@ on it, directly or through another, is set up again too, and its running service
 nothing keeps running the code that was replaced. The new version takes the old one&#39;s place in a
 single step: the module&#39;s folder always holds one whole version.</p>
 <p>To pin a module to a version, install it at a tag, such as <code>mod install archive@v0.1.0</code> where its
-repository has that tag; its panel&#39;s <strong>Update</strong> then keeps it there. The published modules always compare with the default
-branch, so they may offer <strong>Update</strong> for it, which installs the default branch.</p>
+repository has that tag, or at a commit, such as <code>mod install archive@463a92f</code>. Its panel&#39;s
+<strong>Update</strong> then keeps it at the tag, and a module installed at a commit has no <strong>Update</strong> there.
+The published modules always compare with the default branch, so they may offer <strong>Update</strong> for
+it, which installs the default branch, as <code>mod install archive</code> without a ref does.</p>
 <h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Open <strong>Settings → Modules</strong> and choose the module.</li>
@@ -430,7 +433,7 @@ does. The usual ones:</p>
 <td>Update the module it needs.</td>
 </tr>
 <tr>
-<td><code>archive: needs @ein/client ^0.5.0, this core provides 0.4.3</code></td>
+<td><code>archive: needs @ein/client ^0.6.0, this core provides 0.5.0</code></td>
 <td>The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one.</td>
 </tr>
 </tbody></table>
@@ -456,7 +459,7 @@ terminal shows its pages in a browser tab that was already open once that page i
 <td>None of the module sources has <code>module-recipes</code>, or none answered; the reasons follow.</td>
 </tr>
 <tr>
-<td><code>https://github.com/einhq/module-archive has no branch or tag &#39;v9&#39;</code></td>
+<td><code>https://github.com/einhq/module-archive has no branch, tag or commit &#39;v9&#39;</code></td>
 <td>The ref after <code>@</code> does not exist.</td>
 </tr>
 <tr>

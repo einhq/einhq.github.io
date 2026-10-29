@@ -112,7 +112,7 @@ machinery core already has. Nothing in the manifest is code.</p>
 </tr>
 <tr>
 <td><code>services/&lt;name&gt;/</code></td>
-<td>Registers and enables a background service: <code>start.sh</code> with a <code>config.json</code></td>
+<td>Registers and enables a background service: <code>start.sh</code> with a <code>config.json</code>; a single script <code>services/&lt;name&gt;</code> is wrapped in a folder of its own</td>
 </tr>
 <tr>
 <td><code>pipelines/*.yaml</code></td>
@@ -121,6 +121,10 @@ machinery core already has. Nothing in the manifest is code.</p>
 <tr>
 <td><code>ui/</code></td>
 <td>Bundles the pages <code>mod.json</code> names; links <code>ui/nav.json</code> as the module&#39;s sidebar and top-bar entries</td>
+</tr>
+<tr>
+<td><code>ui/index.html</code></td>
+<td>Links a built <code>ui/</code> as a site of its own, <code>/var/www/&lt;name&gt;</code></td>
 </tr>
 <tr>
 <td><code>etc/config</code></td>
@@ -280,7 +284,7 @@ aliases (<code>@recipes/…</code>).</p>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The family&#x27;s recipes: who cooked what, for how many&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Ruby Wrenfield&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MIT&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;coreApi&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.5.0&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;roots&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;/archive/recipes&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;nodeTypes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
@@ -332,8 +336,9 @@ aliases (<code>@recipes/…</code>).</p>
 </tr>
 </tbody></table>
 </div>
-<p><code>mod info</code> on any installed module shows the core API this EiN provides beside the range the module
-asks for. A module without <code>coreApi</code> still installs, with a warning.</p>
+<p><code>mod info</code> on any installed module shows the range it asks for under <strong>Core API</strong>, and <code>system-info</code>
+shows the core API this EiN provides on its <code>api</code> line. A module without <code>coreApi</code> still installs,
+with a warning.</p>
 <h2 id="add-a-command-in-bash">Add a command in bash<a class="anchor" href="#add-a-command-in-bash" aria-label="Link to this section"></a></h2>
 <p>A file in <code>bin/</code> that starts with <code>#!bash</code> is a command written in EiN&#39;s shell language. The <code>arg</code>
 builtin declares its arguments, which gives it <code>--help</code>, <kbd>Tab</kbd> completion and an entry in
@@ -505,12 +510,13 @@ mod setup recipes</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Setting up module 'recipes'...
   roots: /archive/recipes
   Added /usr/modules/recipes/bin to PATH
+  Linked navigation at /etc/ui/nav.d/recipes.json
   Linked docs at /usr/docs/modules/recipes
 Module 'recipes' setup complete
   recipes: built, 3.1 KB in 820 ms</code></pre></div>
 <p>The last lines come from bundling every module&#39;s pages, one line per module.</p>
 </li>
-<li><p>Open a new terminal tab, so its shell reads the new <code>PATH</code>, and try the commands:</p>
+<li><p>Try the commands. <code>mod setup</code> added <code>bin/</code> to <code>PATH</code> in <code>/etc/bashrc</code>, which every shell reads again before its next command, an open terminal tab included:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 recipe-add <span class="hljs-string">&quot;Peggy Wrenfield&#x27;s apple cake&quot;</span> --serves 8
 recipe-list
@@ -684,7 +690,8 @@ opens:</p>
 </div>
 <p>A top-bar entry&#39;s <code>action</code> is <code>{ &quot;navigate&quot;: &quot;/recipes&quot; }</code> for the page, <code>{ &quot;dialog&quot;: &quot;/recipes/new&quot; }</code>
 for the dialog over it, <code>{ &quot;drawer&quot;: … }</code> for the side drawer and <code>{ &quot;fullscreen&quot;: … }</code> for over
-everything. Each entry&#39;s <code>id</code> is <code>&lt;module&gt;.&lt;name&gt;</code>. <code>icon</code> is a Tabler icon name. <code>admin: true</code> shows
+everything; <code>{ &quot;run&quot;: … }</code> runs a command line instead, and with <code>navigate</code> beside it goes where the
+command&#39;s answer says. Each entry&#39;s <code>id</code> is <code>&lt;module&gt;.&lt;name&gt;</code>. <code>icon</code> is a Tabler icon name. <code>admin: true</code> shows
 an entry to administrators only, <code>signedIn: true</code> to people who are signed in. <code>ui-nav</code> prints the
 navigation as the reader gets it, with a warning for each entry it left out and why.</p>
 <p>The administrator and each person can move, rename and hide a module&#39;s entries;
@@ -773,6 +780,10 @@ the administrator sets wins over it. The <code>ems</code> module&#39;s names its
 <tr>
 <td><code>gaugeCommand</code></td>
 <td>A command answering meters for <code>top</code> and the <strong>Dashboard</strong>, as JSON <code>[{ label, percent?, value }]</code></td>
+</tr>
+<tr>
+<td><code>workClass</code></td>
+<td><code>background</code> for a service whose work may wait behind people&#39;s: its database connections leave some free for them</td>
 </tr>
 </tbody></table>
 </div>
@@ -902,7 +913,7 @@ something another module may come to rely on, the major when something they use 
 <li><p>Install it on any EiN by its address, with a branch, tag or commit after <code>@</code> if you want one:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod install https://forge.example:3000/wrenfield/module-recipes@v0.1.0</code></pre></div>
-<p>EiN fetches the commit over HTTPS, checks the module as setup would, puts it in place, sets it
+<p>EiN fetches the commit from the forge, checks the module as setup would, puts it in place, sets it
 up and starts its services.</p>
 </li>
 <li><p>To let administrators install it by name, they add your organisation to <strong>Module sources</strong>,
@@ -912,7 +923,7 @@ covers sources that need a token.</p>
 </li>
 </ol>
 <p>When EiN&#39;s module API changes in a way that breaks modules, a module whose <code>coreApi</code> range the new
-EiN does not satisfy is refused at setup with <code>needs @ein/client ^0.2.0, this core provides 0.3.0</code>.
+EiN does not satisfy is refused at setup with <code>needs @ein/client ^0.5.0, this core provides 0.6.0</code>.
 Publish a version written for the new API, with its <code>coreApi</code> raised.</p>
 <h2 id="remove-it">Remove it<a class="anchor" href="#remove-it" aria-label="Link to this section"></a></h2>
 <p><code>mod remove recipes</code> asks before it removes anything, runs the module&#39;s <code>uninstall.sh</code> if it has
@@ -939,7 +950,7 @@ show them afterwards.</p>
 <td><code>mod.json</code> must be at the folder&#39;s top</td>
 </tr>
 <tr>
-<td><code>recipes: needs @ein/client ^0.3.0, this core provides 0.2.1</code></td>
+<td><code>recipes: needs @ein/client ^0.6.0, this core provides 0.5.0</code></td>
 <td><code>coreApi</code> asks for another version of the module API than this EiN has</td>
 </tr>
 <tr>
@@ -960,7 +971,7 @@ show them afterwards.</p>
 </tr>
 <tr>
 <td><code>recipe-list: command not found</code></td>
-<td>Open a new terminal tab, so its shell reads the new <code>PATH</code></td>
+<td><code>mod setup</code> has not run since <code>bin/</code> was made, or the file is not in <code>bin/</code>; run <code>mod setup recipes</code></td>
 </tr>
 <tr>
 <td><code>Access denied</code> when someone else runs a command</td>

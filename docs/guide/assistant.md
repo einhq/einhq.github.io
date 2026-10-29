@@ -62,7 +62,7 @@ Try it when an answer came back as **No answer**, or when the commands the assis
 
 ![A question, with what is on screen, goes to the language model, which calls tools: the modules' commands, find_commands, command_help and run_command. A line that only reads runs at once as you and its output goes back to the model; a line that would change something becomes a proposal card you run or decline. The loop ends in a final answer with pictures, links, tables and cards](../diagrams/assistant-loop.svg "Reading runs at once; anything that would change something waits for you.")
 
-An answer that needed no command is a plain bubble. An answer for which the assistant ran something is drawn as a timeline, starting with a robot, with a dot for each step:
+An answer that needed no command is a plain bubble. An answer for which the assistant ran something, or that has a card, pictures or links under it, is drawn as a timeline, starting with a robot, with a dot for each step:
 
 | What you see                                     | What it is                                                                                                                                                                                                                                                                               |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -81,7 +81,7 @@ Opening **Ran N commands** is how you check an answer: you see exactly what the 
 
 Pictures come as a grid of up to 24 thumbnails under the answer; click one to open it in the [viewer](viewer.md). The text says in a sentence what they are rather than listing them. Ask for more in the same chat and the assistant leaves out the pictures it has already shown you there.
 
-A plain request for pictures, such as "Show photos of Peggy Wrenfield in Falmouth", is answered straight from a search, without the longer back-and-forth: the answer begins "Here are …", and its two steps, `parse-search` and `search`, show as its commands. This happens when the request starts with words like "show", "find", "get", "photos", "pictures" or "videos", or the Swedish "visa", "hitta" or "bilder", and asks nothing more. A request with "who", "when", "how many", "this" or "my" in it is answered the longer way, through the commands.
+A plain request for pictures, such as "Show photos of Peggy Wrenfield in Falmouth", is answered straight from a search, without the longer back-and-forth: the answer begins "Here are …", and its two steps, `parse-search` and `search`, show as its commands. This happens when **Think harder** is off and the request starts with words like "show", "find", "get", "photos", "pictures" or "videos", or the Swedish "visa", "hitta" or "bilder", and asks nothing more. A request with "who", "when", "how many", "this" or "my" in it is answered the longer way, through the commands.
 
 ### Links
 
@@ -122,7 +122,7 @@ Asked "Add to Ruby Wrenfield's timeline that she graduated in December 2021", th
 set -e
 
 # Add an event (blob) to a person, album, location or device
-person-add-event --date=2021-12 --body='Graduated in Wellington' /archive/people/Ruby_Wrenfield
+person-add-event --date=2021-12 --body='Graduated' /archive/people/Ruby_Wrenfield
 ```
 
 To decide:
@@ -133,7 +133,7 @@ To decide:
 
 **Run** runs the script exactly as the card shows it, as you, as if you had typed it in the [terminal](../shell/terminal.md). Because of `set -e`, it stops at the first line that fails; take that line out if you want the rest to run regardless.
 
-The card then shows how it went: green **Done** with "· exit 0" and what the commands printed, red **Failed** with the exit code and the error, or **Dismissed** when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it does not propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.
+The card then shows how it went: green **Done** with "· exit 0" and what the commands printed, red **Failed** with the exit code and the error, or **Dismissed** when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it is told not to propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.
 
 ### It runs as you
 
@@ -157,7 +157,7 @@ Where the administrator has turned on **Visitors may browse** (see [Browse witho
 To delete a chat:
 
 1. Open the Chat page from the sidebar.
-2. Point at the chat in the recent chats box and click its trash icon (**Delete chat**).
+2. In the recent chats box, click the trash icon (**Delete chat**) beside the chat.
 3. Your browser asks `Delete “<title>”?`; confirm.
 
 The chat is deleted for good: it does not go to the [trash](profile.md). The menu in the drawer and on a phone has no delete button, and a chat cannot be deleted while it is answering.

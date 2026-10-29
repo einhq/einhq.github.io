@@ -60,7 +60,7 @@ The installer adds it with `--ems`, at the first install or any time after:
    `== Building the images (the media service the first time: about 30 GB)`: the image carries
    every model, and building it takes a while and about 30 GB of disk. [Install EiN](../start/install.md#what-you-need)
    lists what the machine needs with the media service.
-3. `setup.sh` starts the containers and ends with `EiN is up at http://…:8080/`.
+3. `setup.sh` starts the containers and prints `EiN is up at http://…:8080/` once EiN answers.
 4. Open **Dashboard** under **System** in the sidebar, and choose the **Media service** tab. For the
    first minutes the media service loads its models; the tab then shows the **healthy** badge.
 
@@ -111,8 +111,8 @@ how it is, again and again, while the tab is open.
 - **Graphics card mode**, when there is a card: who has the card now (see
   [The graphics card](#the-graphics-card) below).
 - An orange box for each degradation, such as `gpu degraded`, and a yellow one for each warning.
-- **Graphics card memory**: what each model holds on the card, and what is free; **GPU load**,
-  **Batch worker RAM** and **Query worker RAM**.
+- **Graphics card memory**: the card's memory split by process, the media service's workers and
+  everything **outside EMS**, and what is free; **GPU load**, **Batch worker RAM** and **Query worker RAM**.
 - **Models**: every model the media service can load, loaded or not, with **Status** (for example
   **GPU loaded** or **CPU loading**), **Loaded**, **Last used**, **Size** and **Activity**. Hover a
   model's name for what it does. The heading counts them: for example `3 of 15 loaded · 2 on the GPU`.
@@ -184,9 +184,10 @@ Compose checks it every 30 seconds, and gives it 120 seconds to start before a f
 ## The graphics card
 
 The media service uses an NVIDIA card when it has one, and the CPU otherwise. Without a card every
-model and every encoder still runs, only more slowly: transcription and faces most of all. Where each
+model and every encoder still runs, only more slowly. Where each
 model runs is the media service's own decision, made each time it loads one; it changes how fast an
-answer comes, never what it is. A model that does not fit on the card runs on the CPU.
+answer comes, never what it is. A model that does not fit on the card runs on the CPU, except transcription and the handwriting
+readers, which wait for room on the card.
 
 With a card, the media service hands the card between indexing and search, and **Graphics card
 mode** on the **Media service** tab shows which has it:
@@ -197,6 +198,8 @@ mode** on the **Media service** tab shows which has it:
 | **quiet**     | No indexing work, so its models are unloaded and search runs on the graphics card, as far as it fits.   |
 | **switching** | Handing the graphics card over between indexing and search.                                             |
 | **off**       | No graphics card to share: every model runs where its setting says.                                     |
+
+When the mode is off, which `EMS_CARD_QUIET_AFTER=0` makes it too, the tab leaves **Graphics card mode** out.
 
 It turns **quiet** after 600 seconds without indexing work (`EMS_CARD_QUIET_AFTER`). A search never
 waits for the card: a separate model process answers searches on the CPU throughout.
@@ -224,30 +227,34 @@ The media service is configured by its environment alone. `~/ein/.env` is that e
    podman compose up -d
    ```
 
-Any change restarts the media service. Requests in flight fail and are retried; see
+   Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, so
+   the media service's idle models may go to swap and a search waits for them; `./setup.sh` makes
+   the containers again with the limit.
+
+Any change restarts the media service, and EiN with it, since both read `.env`. Requests in flight fail and are retried; see
 [When the media service restarts](#when-the-media-service-restarts).
 
 These are the settings an administrator is most likely to need:
 
-| Setting                   | Default                       | What it does                                                                                                                                                       |
-| ------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `EMS_MEMORY`              | `16g`                         | The most memory the container may use. Compose reads it, not the media service.                                                                                    |
-| `EMS_WHISPER_LANGUAGES`   | empty                         | The languages spoken in your recordings, as codes separated by commas, the most common first. Detection is biased towards them; empty lets detection alone decide. |
-| `EMS_WHISPER_LANGUAGE`    | empty                         | One language every recording is transcribed as; detection never runs. Right only when every recording is in that language.                                         |
-| `EMS_EXPECT_GPU`          | empty                         | `1`: the machine is meant to have a card, and the `ems gpu` check fails when none is visible.                                                                      |
-| `EMS_CARD_SHARE_MB`       | `0`                           | The most of the card the media service holds, in MB, for a card shared with the language model; `0` is all of it.                                                  |
-| `EMS_CARD_QUIET_AFTER`    | `600`                         | Seconds without indexing work before search gets the card; `0` keeps search on the CPU.                                                                            |
-| `EMS_MODEL_IDLE_EVICT`    | `21600`                       | Seconds a model may sit unused before it is unloaded.                                                                                                              |
-| `EMS_MODEL_PINNED`        | `text-query`                  | Models loaded at start and never unloaded, separated by commas.                                                                                                    |
-| `EMS_MODEL_MAX_RSS`       | 0.6 of the container's memory | The batch worker's memory ceiling, such as `10g`. At the ceiling the worker finishes its requests and starts again; `0` turns the ceiling off.                     |
-| `EMS_LIMIT_MODELS`        | `8`                           | Model requests admitted at once.                                                                                                                                   |
-| `EMS_LIMIT_TOOLS`         | `4`                           | Tool requests at once: metadata, thumbnails, fingerprints, document text. Each tool uses one core, so this is a number of cores.                                   |
-| `EMS_LIMIT_ENCODES`       | `2`                           | Transcodes and other whole-file decodes at once.                                                                                                                   |
-| `EMS_QUEUE_DEPTH`         | `64`                          | Requests that may wait before a new one is answered `busy`.                                                                                                        |
-| `EMS_INTERACTIVE_RESERVE` | `1`                           | Slots more for a request a person is waiting on, so a person never waits behind indexing.                                                                          |
-| `EMS_VIDEO_ENCODER`       | empty                         | The video encoder: empty picks `av1_nvenc` on a card that offers it and `libsvtav1` otherwise.                                                                     |
-| `EMS_CPU_ENCODE_MAX_MB`   | `4000`                        | Memory one video decode on the CPU may grow to. A long video is encoded in pieces within it; one that cannot be is refused. `0` turns the CPU encode off.          |
-| `EMS_TOOL_STALL`          | `900`                         | Seconds a tool may go without using the CPU or moving a byte before it is stopped as stuck. Not a limit on how long it may take.                                   |
+| Setting                   | Default                       | What it does                                                                                                                                                          |
+| ------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EMS_MEMORY`              | `16g`                         | The most memory the container may use. Compose reads it, not the media service.                                                                                       |
+| `EMS_WHISPER_LANGUAGES`   | empty                         | The languages spoken in your recordings, as codes separated by commas, the most common first. Detection is biased towards them; empty lets detection alone decide.    |
+| `EMS_WHISPER_LANGUAGE`    | empty                         | One language every recording is transcribed as; detection never runs. Right only when every recording is in that language.                                            |
+| `EMS_EXPECT_GPU`          | empty                         | `1`: the machine is meant to have a card, and the `ems gpu` check fails when none is visible.                                                                         |
+| `EMS_CARD_SHARE_MB`       | `0`                           | The most of the card the media service holds, in MB, for a card shared with the language model; `0` is all of it.                                                     |
+| `EMS_CARD_QUIET_AFTER`    | `600`                         | Seconds without indexing work before search gets the card; `0` keeps search on the CPU.                                                                               |
+| `EMS_MODEL_IDLE_EVICT`    | `21600`                       | Seconds a model may sit unused before it is unloaded.                                                                                                                 |
+| `EMS_MODEL_PINNED`        | `text-query`                  | Models loaded at start and never unloaded, separated by commas. The search models, `text-query` and `siglip-text`, are pinned in the query worker whatever this says. |
+| `EMS_MODEL_MAX_RSS`       | 0.6 of the container's memory | The batch worker's memory ceiling, such as `10g`. At the ceiling the worker finishes its requests and starts again; `0` turns the ceiling off.                        |
+| `EMS_LIMIT_MODELS`        | `8`                           | Model requests admitted at once.                                                                                                                                      |
+| `EMS_LIMIT_TOOLS`         | `4`                           | Tool requests at once: metadata, thumbnails, fingerprints, document text. Each tool uses one core, so this is a number of cores.                                      |
+| `EMS_LIMIT_ENCODES`       | `2`                           | Transcodes and other whole-file decodes at once.                                                                                                                      |
+| `EMS_QUEUE_DEPTH`         | `64`                          | Requests that may wait before a new one is answered `busy`.                                                                                                           |
+| `EMS_INTERACTIVE_RESERVE` | `1`                           | Slots more for a request a person is waiting on, so a person never waits behind indexing.                                                                             |
+| `EMS_VIDEO_ENCODER`       | empty                         | The video encoder: empty picks `av1_nvenc` on a card that offers it and `libsvtav1` otherwise.                                                                        |
+| `EMS_CPU_ENCODE_MAX_MB`   | `4000`                        | Memory one video decode on the CPU may grow to. A long video is encoded in pieces within it; one that cannot be is refused. `0` turns the CPU encode off.             |
+| `EMS_TOOL_STALL`          | `900`                         | Seconds a tool may go without using the CPU or moving a byte before it is stopped as stuck. Not a limit on how long it may take.                                      |
 
 > [!WARNING]
 > Leave `EMS_WHISPER_MODEL` as it is (`large-v3`). It must match the model built into the image;
@@ -261,7 +268,8 @@ media. On a large archive that is hours of work.
 ### Settings on EiN's side
 
 EiN's own settings for the media service are in the **Media service** and **Transcription** groups
-of **Settings → System**, and can be set with `config set`:
+of **Settings → System**, with `CFG_MODEL_SLOTS`, the Archive's, in **Processing**. All can be set
+with `config set`:
 
 | Setting                                                                                     | Default                                                     | What it does                                                                            |
 | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -320,7 +328,8 @@ usual cause; [The graphics card](gpu.md) has the fix.
 `EMS_KEY` is in `~/ein/.env`, and run `podman compose up -d`.
 
 **A warning `no roots configured: every file request will be refused`.** `EMS_ROOTS` is empty. It
-is set in `compose.ems.yaml`; run `./setup.sh` to restore the compose files.
+is set in `compose.ems.yaml`; undo a change to that file with `git -C ~/ein checkout compose.ems.yaml`
+and run `podman compose up -d`.
 
 **Uploads stay being prepared for a long time.** Look at **Executing** on the **Media service** tab.
 Requests waiting in the lanes mean the media service is busy: after a large import, the **Dashboard**

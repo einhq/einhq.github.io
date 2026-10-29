@@ -37,7 +37,8 @@ In the phone layout:
   **Random album**, **Chat**, the plus of the **Create** menu and your picture. Its buttons are
   larger, to suit a finger. The **Uploads** button appears there while files are going up.
 - **The menu is hidden** until you ask for it: see [Open the menu](#open-the-menu).
-- **There is no terminal button**, and no **Disconnected** badge when the connection drops.
+- **There is no terminal button.** When the connection drops, a red crossed-out plug stands in the
+  top bar in place of the **Disconnected** badge.
 - **The search box** opens its list across the whole width of the screen, above the keyboard, and
   the keyboard's search key does what <kbd>Enter</kbd> does. [Search and the finder](search.md)
   covers what it finds.
@@ -109,8 +110,8 @@ A phone's grid starts with 2 pictures in a row, and keeps the number you pinch t
 Pinching works where pictures keep their own shapes, such as an album or the **Media** page in its
 **Default** layout. The **Days** and **Months** layouts of the Media page have square tiles, three
 and five across on a phone, and do not change with a pinch; see [Media, Year and labels](media.md).
-On a wider screen, such as most tablets held sideways, the grid fills its rows by height instead,
-and a pinch does not change it.
+Where the grid is 640 pixels wide or more, as on most tablets, it fills its rows by height
+instead, and a pinch does not change it.
 
 Moving your finger while you hold cancels the press, so scrolling a grid never selects a picture.
 Once something is selected, the bar at the foot of the screen shows how many, for example **3
@@ -198,7 +199,8 @@ You can add EiN to your phone's home screen, where it looks and opens like an ap
 - it opens on **Home**, using the whole screen, without the browser's address bar and buttons;
 - the phone's status bar and the screen shown while it starts are in EiN's dark colour.
 
-This needs HTTPS: an address that begins with `https://`. EiN on its own serves plain HTTP, on port
+Most browsers, Chrome on Android among them, install it as an app only over HTTPS: an address that
+begins with `https://`. EiN on its own serves plain HTTP, on port
 8080, so your administrator first has to put it behind an HTTPS proxy; see
 [Ports, HTTPS and remote access](../admin/network.md). Over plain `http://`, a phone may only add a
 bookmark that opens in the browser.
@@ -225,8 +227,8 @@ picture and search comes from your EiN as you open it, so you need a connection 
 wherever your administrator has made it reachable.
 
 When the connection drops while EiN is open, pages stop loading and EiN tries again every 2
-seconds by itself. On a phone there is no **Disconnected** badge to tell you; EiN picks up again
-by itself once the phone is back on the network.
+seconds by itself. On a phone a red crossed-out plug in the top bar tells you, in place of the
+**Disconnected** badge; EiN picks up again by itself once the phone is back on the network.
 
 ## What a phone does not have
 

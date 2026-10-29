@@ -28,13 +28,12 @@ Only filing makes the files visible to anyone else. Every decision can be undone
 ![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "A file's way through staging: nothing reaches the shared library until you file it")
 
 Until a file is filed, the views of the whole library leave it out: the Media page and its
-counts, the map, On this day and search. One number still counts staged files: the count beside
-a person in the People list includes faces and voices found in your staged files, so it can be
-higher than the pictures you see when you open that person.
+counts, the map, On this day, search, and the number on a person's card on the People page. The
+faces and voices in it are found all the same, and count once the file is filed.
 
 > [!NOTE]
 > Staging is only for people who are signed in. A visitor browsing without an account does not see
-> it in the sidebar, and its address answers "Sign in to use your private staging area."
+> it in the sidebar, and opening its address asks them to sign in.
 
 ## Open staging
 
@@ -106,16 +105,16 @@ category.
 
 ### The kinds of category
 
-| What it holds            | Use it for                           | What it changes                                                                                                                                                                                                                                         |
-| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Inbox**                | Anything; the default                | Grouped by time and place. A date in a file name, such as a phone's `IMG_20190601_123456.jpg`, counts when nothing better dates the picture.                                                                                                            |
-| **Google Photos export** | A Google Takeout                     | Grouped by time and place. Google's JSON files are paired with their photos and give them their date, place and caption. An album folder's title names its group. Processed after other work, so what you upload to the Inbox meanwhile is ready first. |
-| **Scans**                | Scanned prints, negatives and slides | Grouped by folder and by runs of file names; when a scan was made never groups it. No scanner clock, file name or upload time dates a scan, so each one waits in **Needs a date** until you give it a date. Processed after other work.                 |
-| **Phone**                | A phone's pictures                   | Grouped by time and place. Dates in file names count.                                                                                                                                                                                                   |
-| **Camera**               | A camera's memory card               | Grouped by time and place. File names are not read as dates.                                                                                                                                                                                            |
-| **Messaging**            | Pictures saved from a messenger      | A group per folder and month, all in the **Everyday** lane. Dates in file names count. Sidecar files are left as they are.                                                                                                                              |
-| **Screenshots**          | Screenshots                          | Like Messaging.                                                                                                                                                                                                                                         |
-| **Other**                | Anything else                        | Grouped by time and place. File names are not read as dates.                                                                                                                                                                                            |
+| What it holds            | Use it for                           | What it changes                                                                                                                                                                                                                                                     |
+| ------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Inbox**                | Anything; the default                | Grouped by time and place. A date in a file name, such as a phone's `IMG_20190601_123456.jpg`, counts when nothing better dates the picture.                                                                                                                        |
+| **Google Photos export** | A Google Takeout                     | Grouped by time and place. Google's JSON files are paired with their photos and give them their date, place and caption. An album folder's title names its group. Processed after other work, so what you upload to the Inbox meanwhile is ready first.             |
+| **Scans**                | Scanned prints, negatives and slides | Grouped by folder and by runs of file names; when a scan was made never groups it. No scanner clock, file name or upload time dates a scan, only a date a person gave it, so most count under **Needs a date** until you give them one. Processed after other work. |
+| **Phone**                | A phone's pictures                   | Grouped by time and place. Dates in file names count.                                                                                                                                                                                                               |
+| **Camera**               | A camera's memory card               | Grouped by time and place. File names are not read as dates.                                                                                                                                                                                                        |
+| **Messaging**            | Pictures saved from a messenger      | A group per folder and month, all in the **Everyday** lane. Dates in file names count. Sidecar files are left as they are.                                                                                                                                          |
+| **Screenshots**          | Screenshots                          | Like Messaging.                                                                                                                                                                                                                                                     |
+| **Other**                | Anything else                        | Grouped by time and place. File names are not read as dates.                                                                                                                                                                                                        |
 
 How these work for dates is explained further on [Dates and places of pictures](dates-places.md).
 
@@ -172,7 +171,8 @@ The page's title is the category's name with a chevron. Click it to switch to an
 to **All categories**, or to **New category…**.
 
 The header has **Upload**, which adds files to the category's folder for today, and under ⋮:
-**Upload a folder**, **Import media…**, **Category settings** and **All categories**. You can also
+**Upload a folder**, **Import media…**, **Category settings** and, with more than one category,
+**All categories**. You can also
 drop files anywhere on the page, on any tab, and they go into the category on screen.
 
 Under the tab names, a thin bar shows the category's files and the stages of what is arriving,
@@ -262,8 +262,9 @@ with **New group** on a day, or move them with <kbd>&lt;</kbd>, <kbd>&gt;</kbd> 
   and <kbd>Enter</kbd> does the same. A closed Everyday group says how many of its days match an
   album, for example "→ 3 days match an album".
 - **Needs a date.** Give the pictures a time with **T** (**Set the time…**): the **Set time**
-  dialog takes one start time, and the pictures keep their spacing or follow a minute apart. Once
-  dated, the organizer puts them with the events and days they belong to. The dialog is explained
+  dialog takes one start time, and the pictures keep their spacing or follow a minute apart. A
+  picture known only to a year or a month keeps that date unless you click its row to give it a
+  time. Once dated, the organizer puts them with the events and days they belong to. The dialog is explained
   on [Dates and places of pictures](dates-places.md).
 - **Clutter.** Its proposal is **Discard**.
 
@@ -286,6 +287,7 @@ The button says what happens:
 | **New album “…”**                         | No album fits: a new album under the group's name. A folder a person named is proposed as a new album under the folder's name, sure. |
 | **Keep the library copies · N photos go** | Most of the group's photos are copies of photos already in the library; the copies go and the rest of the group stays to be sorted   |
 | **Discard**                               | Clutter                                                                                                                              |
+| **File N matched days · M photos**        | An Everyday group some of whose days match a library album you may add to; each matched day goes into its album and the rest stays   |
 | "No proposal: N, A, B or X."              | Nothing to propose, for example an Everyday group with no matched days in a category with no album under **Files go to**             |
 
 Runs of scans and folders a person named go into an existing album only when the match is sure.
@@ -340,7 +342,7 @@ their own instead.
 
 ### Candidates and compare
 
-On a computer with a window at least 1,100 pixels wide, a column stands beside the stream. It
+On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream. It
 starts with "Put it in" and the group's name, then the proposal and its dots. Below them are up to
 three **candidates**: library albums the group may belong in, best first. Each shows its name, a
 percentage, its dates and size, and up to three reasons in words, such as "within 40 min of its
@@ -388,11 +390,14 @@ On a computer you can select several groups and decide them together:
 - hold <kbd>Shift</kbd> to select everything from where the selection started;
 - press <kbd>Shift</kbd>+<kbd>J</kbd> or <kbd>Shift</kbd>+<kbd>K</kbd> to select on to the next or
   previous group;
-- choose **Select** → **All in To sort** (or whichever lane you are in);
+- choose **Select** → **All in To sort** (or whichever lane you are in), or **Those with a sure
+  proposal**;
 - or draw a box around them from an empty part of the page (hold <kbd>Shift</kbd> to add,
   <kbd>Alt</kbd> to take away, <kbd>Esc</kbd> to stop).
 
-Then <kbd>N</kbd> or <kbd>P</kbd> makes one album of everything selected, <kbd>A</kbd> and
+Then <kbd>Enter</kbd> accepts each group's proposal, after the **Accept the proposals?** dialog
+has asked which to take (**Every proposal**, **Likely and sure** or **Only sure**);
+<kbd>N</kbd> or <kbd>P</kbd> makes one album of everything selected, <kbd>A</kbd> and
 <kbd>B</kbd> file it into an album, <kbd>X</kbd> discards it after asking, and <kbd>L</kbd> puts
 the groups aside. <kbd>Esc</kbd> clears the selection. A message shows the progress, for example
 "Filing 1,840 of 9,830 photos · 37 of 214 groups", with **Cancel**; when it is done, **Undo all**
@@ -485,7 +490,7 @@ and one that is removed disappears.
 What you decide is kept through every one of those runs:
 
 - Your changes of the groups (splits, moves, new groups, merges, **Not a group**, names) are kept
-  on every run until you undo them. On the **Done** tab they carry the badge **kept**: "The
+  on every run until you undo them. On the **Done** tab all but a rename carry the badge **kept**: "The
   organizer keeps this change on every run until it is undone".
 - A group whose pictures you changed by hand shows **Yours**, and the organizer leaves it as it is.
 - **Not this album** keeps that album away from those photos until you undo it.

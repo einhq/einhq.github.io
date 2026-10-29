@@ -128,7 +128,7 @@ to know what you are looking at.</p>
 </tr>
 <tr>
 <td><code>/dev</code></td>
-<td>The channels changes are announced on, and <code>/dev/null</code></td>
+<td>The channels facts about changes are announced on, and <code>/dev/null</code></td>
 <td>EiN itself</td>
 </tr>
 <tr>
@@ -585,12 +585,14 @@ what a module brings.</p>
 run by name as soon as it is set up. <a href="../admin/modules.html#where-modules-are-kept">Modules</a> explains where
 installed modules are kept.</p>
 <h2 id="dev-and-tmp">/dev and /tmp<a class="anchor" href="#dev-and-tmp" aria-label="Link to this section"></a></h2>
-<p><code>/dev/events</code> and <code>/dev/pipeline-events</code> are <code>router</code> nodes: every change to the tree is announced
-on <code>/dev/events</code> once it is saved, and the pipeline engine announces its own progress on
-<code>/dev/pipeline-events</code>. <code>/dev/null</code> works as on Linux: reading it gives nothing, and what is written
+<p><code>/dev/events</code> and <code>/dev/pipeline-events</code> are <code>router</code> nodes: modules announce the facts they
+derive from changes to the tree on <code>/dev/events</code>, and the pipeline engine announces its own progress
+on <code>/dev/pipeline-events</code>; see <a href="pipelines.html">Changes and pipelines</a>. <code>/dev/null</code> works as on Linux: reading it gives nothing, and what is written
 to it is thrown away.</p>
 <p><code>/tmp</code> is open to everyone, with the mode <code>0777</code>, and is kept in memory: what you put there is gone
-when EiN restarts. Use it for files you need only for a moment.</p>
+when EiN restarts. A file directly in <code>/tmp</code> that has not changed for a day is removed before that;
+<strong>Hours in /tmp</strong>, <code>CFG_TMP_RETENTION_HOURS</code>, sets how long. Use it for files you need only for a
+moment.</p>
 <h2 id="find-a-folder-by-its-variable">Find a folder by its variable<a class="anchor" href="#find-a-folder-by-its-variable" aria-label="Link to this section"></a></h2>
 <p>Every shell has a variable for each standard folder, so a script does not have to spell the path
 out:</p>
@@ -598,7 +600,8 @@ out:</p>
 <span class="hljs-built_in">cd</span> <span class="hljs-variable">$LOGS_PATH</span>
 <span class="hljs-built_in">ls</span> <span class="hljs-variable">$ARCHIVE_PATH</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span></code></pre></div>
-<div class="code"><pre tabindex="0"><code>/home/helen</code></pre></div>
+<div class="code"><pre tabindex="0"><code>albums  devices  locations  people  tags
+/home/helen</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -710,6 +713,7 @@ mount</code></pre></div>
 <div class="code"><pre tabindex="0"><code>/                pg         rw 3 Oct 2026 09:14:02
 /etc/files       filesystem r  3 Oct 2026 09:14:02
 /tmp             memory     rw 3 Oct 2026 09:14:02
+/tmp/dev-modules filesystem r  3 Oct 2026 09:14:02
 /usr/bin         command    r  3 Oct 2026 09:14:02
 /usr/docs/guide  filesystem r  3 Oct 2026 09:14:04
 /usr/lib         filesystem r  3 Oct 2026 09:14:02
@@ -784,8 +788,8 @@ favourite&#39;s.</p>
 <h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><strong><code>ls /archive</code> shows only <code>tags</code>.</strong> The Archive module is not installed. An administrator installs it on
 <strong>Settings → Modules</strong>; see <a href="../admin/modules.html">Modules</a>.</p>
-<p><strong>A file I put in <code>/tmp</code> is gone.</strong> <code>/tmp</code> is kept in memory and emptied when EiN restarts. Keep what
-you need in your home or in an album.</p>
+<p><strong>A file I put in <code>/tmp</code> is gone.</strong> <code>/tmp</code> is kept in memory and emptied when EiN restarts, and a
+file left directly in it is removed after a day. Keep what you need in your home or in an album.</p>
 <p><strong><code>mount: permission denied, only admin is allowed to mount</code>.</strong> Mounting is for the administrator.</p>
 <p><strong>A folder holds more than I see, or will not be deleted.</strong> Something in it is hidden from you. Ask its
 owner or an administrator; <a href="../guide/sharing.html">Sharing</a> explains why.</p>

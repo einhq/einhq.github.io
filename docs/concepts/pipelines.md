@@ -142,7 +142,7 @@ so most events are turned away without starting a process:
 
 In `match` and `unless`, a field names a value the event carries: `mimetype`, `nodePath`, or any
 key of a fact's `data`. In a path field, `*` matches within one name and `**` crosses `/`, so
-`/home/*/staging/**` is each person's staging folder and nothing deeper. A trigger may also set
+`/home/*/staging/**` is everything in each person's staging folder. A trigger may also set
 `priority` and `vars` for the runs it starts.
 
 ### The steps
@@ -165,9 +165,10 @@ decides, when the step's turn comes, whether it runs or is skipped.
 
 A command and its tests see the subject's path as `$NODE_PATH`. A run started by a fact also has
 `$EVENT_TYPE`, `$EVENT_ID`, `$EVENT_SOURCE`, the whole `data` as JSON in `$EVENT_DATA`, and each
-key of `data` as `$EVENT_<NAME>` in capitals: `data.mimetype` is `$EVENT_MIMETYPE`. A run started by
-a raw event has `$MIMETYPE`, `$NODE_TYPE` and `$EVENT_TYPE`. The name is `$NODE_PATH` and not
-`$PATH`, which the shell needs for finding commands.
+key of `data` as `$EVENT_<NAME>` in capitals, with `_` between words: `data.mimetype` is
+`$EVENT_MIMETYPE` and `data.filePath` is `$EVENT_FILE_PATH`. The guards of a raw-event trigger also
+see `$MIMETYPE`, `$NODE_TYPE` and `$EVENT_TYPE`; the steps of a run it starts get `$NODE_PATH`
+alone. The name is `$NODE_PATH` and not `$PATH`, which the shell needs for finding commands.
 
 In a `command`, write `$NODE_PATH` bare: EiN substitutes the path already quoted, so a name with
 spaces is safe. In `filter`, `skipIf` and `condition` the path is an ordinary shell variable, so
@@ -258,6 +259,9 @@ The Archive runs two workers on `/var/pools/media`:
 | `cpu`    | Work on the processor: reading metadata, thumbnails, renditions, fingerprints, zips, matching faces            | **CPU budget for media work**, [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)    |
 | `models` | Requests to the media service's models: faces, picture and text vectors, text in pictures, transcripts, voices | **Model requests in flight**, [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots) |
 
+A third worker, `models-second`, takes the same model work as `models` in the reverse order. It is
+off until **Second models worker's slots**, `CFG_MODEL_SECOND_SLOTS`, is above 0.
+
 Most of these steps are calls into the [media service](../admin/media-service.md), which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
@@ -273,10 +277,12 @@ starts its own pipelines:
 2. `archive-bridge` sees a photo with bytes and no metadata and announces `media.file.discovered`.
 3. `media-ingest` runs `exif-extract`, which reads the camera, the time and the place and writes
    them under the photo as `metadata/exif`.
-4. That write becomes `media.metadata.extracted`, which starts `media-stills` (the display sizes),
-   `media-fingerprint`, `media-faces`, `media-embed-picture` (search by what is in the picture),
-   `media-ocr` (text in the picture) and `media-device`; for a video or recording also
-   `media-transcode` and `media-transcribe`. They run side by side.
+4. That write becomes `media.metadata.extracted`, which starts `media-stills` (the display sizes)
+   and `media-fingerprint`; for a picture also `media-faces`, `media-embed-picture` (search by what
+   is in the picture) and `media-ocr` (text in the picture); for a video `media-video-faces`,
+   `media-embed-picture`, `media-transcode` and `media-transcribe`; for a recording
+   `media-transcode` and `media-transcribe`; and `media-device` when the metadata names the device
+   that made the file. They run side by side.
 5. `media-faces` writes each face it finds under the photo, which becomes `media.face.detected`
    and starts `media-face-assign`, matching the face to a person.
 6. A GPS position becomes `media.position.available`, which starts `media-geocode` for the
@@ -290,35 +296,36 @@ describes what you see in the interface while this happens.
 
 The Archive's pipelines and what starts them:
 
-| Pipeline               | Starts on                                              | What it does                                                            |
-| ---------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------- |
-| `media-ingest`         | `media.file.discovered`                                | Reads a file's metadata; every other media pipeline waits on it         |
-| `media-reindex`        | `media.file.content-changed`                           | Reads the metadata again when a file's bytes changed                    |
-| `media-stills`         | `media.metadata.extracted`                             | A photo's sizes, a video's poster frames, a recording's waveform        |
-| `media-transcode`      | `media.metadata.extracted`, `media.file.turned`        | Video and audio the browser can play, a video's storyboard and chapters |
-| `media-fingerprint`    | `media.metadata.extracted`                             | The fingerprints duplicate detection and photo stacks compare           |
-| `media-faces`          | `media.metadata.extracted`                             | Finds the faces in a picture and crops each one                         |
-| `media-video-faces`    | `media.metadata.extracted`                             | Finds the faces a video shows, and when                                 |
-| `media-face-assign`    | `media.face.detected`                                  | Attaches a found face to a person                                       |
-| `media-face-transfer`  | `media.faces.completed`                                | Moves older hand-made face tags onto found faces                        |
-| `media-embed-picture`  | `media.metadata.extracted`, `media.picture.stale`      | A picture vector, for search by what is in the picture                  |
-| `media-embed-text`     | `media.text-embedding.stale`                           | Text vectors for a file's stored texts                                  |
-| `media-ocr`            | `media.metadata.extracted` and others                  | Reads the text written in a picture                                     |
-| `media-transcribe`     | `media.metadata.extracted`, `media.transcript.stale`   | Transcribes a video or recording                                        |
-| `media-voiceprint`     | `media.transcript.generated`, `media.speakers.missing` | Finds who speaks when, with a voiceprint per voice                      |
-| `media-speaker-assign` | `media.speakers.detected`                              | Decides which person each voice is                                      |
-| `media-device`         | `media.metadata.extracted`                             | Links a file to the device that made it                                 |
-| `media-geocode`        | `media.position.available`                             | The address of a file's GPS position                                    |
-| `location-link-point`  | `location.point.changed`                               | Links a photo to the location containing its position                   |
-| `location-upkeep`      | `location.changed`                                     | Redraws a location and links the photos inside it again                 |
-| `media-album`          | `media.album.members-changed`                          | An album's stacks, time span, cover and matching profile                |
-| `media-duplicates`     | `media.duplicates.stale`                               | Decides a staged file's duplicate findings again                        |
-| `document-index`       | a file `updated` or `moved`, `media.text.missing`      | Extracts the text of PDFs, text and word-processor files for search     |
-| `staging-unzip`        | a file `updated` in a staging category                 | Expands a zip beside itself and removes it                              |
-| `staging-sidecars`     | `staging.sidecars.arrived`                             | Pairs sidecar files with their files                                    |
-| `staging-organize`     | `staging.category.changed`                             | Suggests groups for a staging category again                            |
-| `staging-retime`       | `staging.retime.requested`                             | Dates staged files by their category's time rules                       |
-| `track-stage`          | a file `updated` in staging                            | Turns a GPX file into its device's route                                |
+| Pipeline               | Starts on                                                | What it does                                                            |
+| ---------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `media-ingest`         | `media.file.discovered`                                  | Reads a file's metadata; every other media pipeline waits on it         |
+| `media-reindex`        | `media.file.content-changed`                             | Reads the metadata again when a file's bytes changed                    |
+| `media-stills`         | `media.metadata.extracted`                               | A photo's sizes, a video's poster frames, a recording's waveform        |
+| `media-transcode`      | `media.metadata.extracted`, `media.file.turned`          | Video and audio the browser can play, a video's storyboard and chapters |
+| `media-fingerprint`    | `media.metadata.extracted`                               | The fingerprints duplicate detection and photo stacks compare           |
+| `media-faces`          | `media.metadata.extracted`, for a picture                | Finds the faces in a picture and crops each one                         |
+| `media-video-faces`    | `media.metadata.extracted`, for a video                  | Finds the faces a video shows, and when                                 |
+| `media-face-assign`    | `media.face.detected`                                    | Attaches a found face to a person                                       |
+| `media-face-transfer`  | `media.faces.completed`                                  | Moves older hand-made face tags onto found faces                        |
+| `media-embed-picture`  | `media.metadata.extracted`, `media.picture.stale`        | A picture vector, for search by what is in the picture                  |
+| `media-embed-text`     | `media.text-embedding.stale`                             | Text vectors for a file's stored texts                                  |
+| `media-ocr`            | `media.metadata.extracted` for a picture, and others     | Reads the text written in a picture                                     |
+| `media-transcribe`     | `media.metadata.extracted`, `media.transcript.stale`     | Transcribes a video or recording                                        |
+| `media-voiceprint`     | `media.transcript.generated`, `media.speakers.missing`   | Finds who speaks when, with a voiceprint per voice                      |
+| `media-speaker-faces`  | `media.faces.completed`, for a video with voices         | Ties a video's voices to the faces seen speaking them                   |
+| `media-speaker-assign` | `media.speakers.detected`, `media.speakers.face-changed` | Decides which person each voice is                                      |
+| `media-device`         | `media.metadata.extracted`, with a device in it          | Links a file to the device that made it                                 |
+| `media-geocode`        | `media.position.available`                               | The address of a file's GPS position                                    |
+| `location-link-point`  | `location.point.changed`                                 | Links a photo to the location containing its position                   |
+| `location-upkeep`      | `location.changed`                                       | Redraws a location and links the photos inside it again                 |
+| `media-album`          | `media.album.members-changed`                            | An album's stacks, time span, cover and matching profile                |
+| `media-duplicates`     | `media.duplicates.stale`                                 | Decides a staged file's duplicate findings again                        |
+| `document-index`       | a file `updated` or `moved`, `media.text.missing`        | Extracts the text of PDFs, text and word-processor files for search     |
+| `staging-unzip`        | a file `updated` in a staging category                   | Expands a zip beside itself and removes it                              |
+| `staging-sidecars`     | `staging.sidecars.arrived`                               | Pairs sidecar files with their files                                    |
+| `staging-organize`     | `staging.category.changed`                               | Suggests groups for a staging category again                            |
+| `staging-retime`       | `staging.retime.requested`                               | Dates staged files by their category's time rules                       |
+| `track-stage`          | a file `updated` in staging                              | Turns a GPX file into its device's route                                |
 
 [Staging and importing for administrators](../admin/staging.md) explains the staging pipelines in
 detail.
@@ -328,11 +335,11 @@ detail.
 A step fails when its command exits with a status other than 0. What happens next depends on the
 status:
 
-| Exit status | Means                                                                                                            | What EiN does                                                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `75`        | A service the step needs cannot do it now: the media service is busy, loading a model, restarting or unreachable | The step goes back to wait without spending an attempt. Its kind of job rests 30 seconds, doubling up to 10 minutes, until one succeeds |
-| `65`        | The input is the problem, such as bytes no decoder can open                                                      | The step fails at once, whatever attempts are left, and is never run again by itself                                                    |
-| any other   | The step itself failed                                                                                           | One attempt is spent; the step runs again until `maxAttempts` is used up, and then the instance fails                                   |
+| Exit status | Means                                                                                                            | What EiN does                                                                                                                                                                                       |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `75`        | A service the step needs cannot do it now: the media service is busy, loading a model, restarting or unreachable | The step goes back to wait without spending an attempt. In a pool its kind of job rests 30 seconds, doubling up to 10 minutes, until one succeeds; a step the engine runs itself waits five minutes |
+| `65`        | The input is the problem, such as bytes no decoder can open                                                      | The step fails at once, whatever attempts are left, and is never run again by itself                                                                                                                |
+| any other   | The step itself failed                                                                                           | One attempt is spent; the step runs again until `maxAttempts` is used up, and then the instance fails                                                                                               |
 
 So a media service that is down for an hour fails nothing: its work waits and starts again when it
 answers.
@@ -429,8 +436,8 @@ steps:
    Defined pipeline 'mark-unreviewed'
    ```
 
-   A definition EiN cannot read gives `pipeline-define: invalid pipeline: …` with the reason, such
-   as `missing steps` or `step 'mark' depends on unknown step 'read'`.
+   A definition EiN cannot read gives `pipeline-define:` and the reason, such as
+   `invalid pipeline: missing steps` or `step 'mark' depends on unknown step 'read'`.
 3. Upload a photo to one of the albums. The pipeline appears on the **Work** tab of the
    **Dashboard** once it has run.
 

@@ -106,6 +106,7 @@
 </tr>
 </tbody></table>
 </div>
+<p>These are the ports <code>setup.sh</code> picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to <code>.env</code> and says so (&quot;Port 8080 is taken on this machine: EiN uses 8081 instead&quot;).</p>
 <p>Nothing else is reachable from outside. The database, the media service and the language model answer only EiN, on the containers&#39; own network: no port of theirs is published on the machine.</p>
 <p>EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in <a href="#put-ein-behind-https">Put EiN behind HTTPS</a>.</p>
 <h2 id="change-the-ports-or-the-address">Change the ports or the address<a class="anchor" href="#change-the-ports-or-the-address" aria-label="Link to this section"></a></h2>

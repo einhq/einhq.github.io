@@ -97,9 +97,11 @@ pipelines below, so with only core installed nothing is processed.</p>
 <li><strong>The pipeline engine</strong> (the <code>pipeline-engine</code> service) matches changes to pipelines, creates an
 <strong>instance</strong> for each pipeline and node, and runs the short steps itself.</li>
 <li><strong>Pool workers</strong> run the long steps. The engine puts each one as a job in a pool, and a worker
-takes it when it has room. The Archive brings two: <code>cpu</code>, for work done on this machine, such as
+takes it when it has room. The Archive brings <code>cpu</code>, for work done on this machine, such as
 reading metadata, making thumbnails and transcoding video, and <code>models</code>, for work done by a model
-in the <a href="media-service.html">media service</a>, such as finding faces or transcribing speech.</li>
+in the <a href="media-service.html">media service</a>, such as finding faces or transcribing speech. A second
+model worker, <code>models-second</code>, runs beside <code>models</code> when <code>CFG_MODEL_SECOND_SLOTS</code> is above <code>0</code>;
+it is off by default.</li>
 <li><strong>Background services</strong> of the Archive: <code>archive-bridge</code> turns changes into the events the media
 pipelines wait for, and <code>media-heal</code> finds files that are missing something and announces them
 again (see <a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>).</li>
@@ -191,6 +193,11 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <td><code>speaker-assign</code></td>
 </tr>
 <tr>
+<td><code>media-speaker-faces</code></td>
+<td>Ties a video&#39;s voices to the faces seen speaking them, once its faces are found</td>
+<td><code>diarize</code>, <code>speaker-assign</code></td>
+</tr>
+<tr>
 <td><code>media-device</code></td>
 <td>Links a file to the camera or phone that took it</td>
 <td>run by the engine</td>
@@ -255,7 +262,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <p>The <code>cpu</code> worker takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>face-transfer</code>,
 <code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>. The
 <code>models</code> worker takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
-<code>shots</code>. <code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
+<code>shots</code>, and <code>models-second</code> the same kinds in the reverse order. <code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
 <h2 id="watch-the-work-on-the-dashboard">Watch the work on the Dashboard<a class="anchor" href="#watch-the-work-on-the-dashboard" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Sign in as an administrator and choose <strong>Dashboard</strong> in the sidebar, under <strong>System</strong>.</li>
@@ -516,7 +523,7 @@ pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre
 </tr>
 </thead>
 <tbody><tr>
-<td>Run one pipeline on one file or folder</td>
+<td>Run one pipeline on one file</td>
 <td><code>pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg</code></td>
 </tr>
 <tr>
@@ -524,7 +531,7 @@ pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre
 <td><code>pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
 </tr>
 <tr>
-<td>Make the display sizes again under a folder</td>
+<td>Make the renditions again under a folder, without the pipelines</td>
 <td><code>regenerate --force /archive/albums/christmas-2019</code></td>
 </tr>
 <tr>
@@ -554,7 +561,8 @@ media-scan -n /archive/albums/christmas-2019    <span class="hljs-comment"># onl
 media-scan /archive/albums/christmas-2019</code></pre></div>
 <p>A run examines up to 20000 files (<code>--scan-limit</code>) and announces up to 1000 (<code>--limit</code>), and
 remembers where it stopped, so the next run goes on from there; <code>--restart</code> starts from the top. It
-announces nothing while more than 500 ingest runs and triggers are waiting (<code>--max-active</code>).</p>
+announces fewer as running <code>media-ingest</code> instances and waiting triggers add up, and nothing once they reach 500
+(<code>--max-active</code>).</p>
 <p><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code> set to <code>off</code> stops transcripts from being made again when the
 media service&#39;s speech settings change. On a large archive such a change otherwise means hours of
 background work.</p>
@@ -568,8 +576,9 @@ then on. <a href="staging.html">Staging and importing for administrators</a> cov
 lane an instance had.</p>
 <h2 id="how-much-runs-at-once">How much runs at once<a class="anchor" href="#how-much-runs-at-once" aria-label="Link to this section"></a></h2>
 <p>These settings are in the <strong>Processing</strong> category of <strong>Settings → System</strong>, or set with
-<code>config set</code>. Saving one restarts the service that reads it, and work in progress is picked up
-again; <a href="configuration.html">Configuration</a> explains how.</p>
+<code>config set</code>. Saving one restarts the service that reads it, when it is read by a service, and work
+in progress is picked up again; <code>CFG_PIPELINE_STEP_QUIET_MS</code> restarts nothing and counts from the
+next look. <a href="configuration.html">Configuration</a> explains how.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -600,7 +609,7 @@ again; <a href="configuration.html">Configuration</a> explains how.</p>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_model_kind_quantum_ms"><code>CFG_MODEL_KIND_QUANTUM_MS</code></a></td>
-<td><code>900000</code></td>
+<td><code>3600000</code></td>
 <td>How long the <code>models</code> worker stays on one kind before turning to the next, so faces do not starve the rest</td>
 </tr>
 <tr>

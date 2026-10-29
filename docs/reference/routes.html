@@ -232,8 +232,9 @@ administrator turns on <a href="settings.html#cfg_guest_browsing"><code>CFG_GUES
 in&quot; always asks a visitor to sign in first. What each person then sees on a page follows the
 permissions on the nodes behind it; see <a href="../admin/permissions.html">Permissions in depth</a>.</p>
 <h2 id="the-archives-pages">The Archive&#39;s pages<a class="anchor" href="#the-archives-pages" aria-label="Link to this section"></a></h2>
-<p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree, which is the person&#39;s, place&#39;s or
-device&#39;s name in lower case with hyphens: Helen Okafor is <code>/people/helen-okafor</code>. Addresses with
+<p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree. A person&#39;s or a place&#39;s is its name
+in lower case with hyphens: Helen Okafor is <code>/people/helen-okafor</code>. A device&#39;s keeps its capitals and
+has <code>_</code> for spaces, such as <code>/devices/Canon_EOS_5D_Mark_III</code>. Addresses with
 <code>&lt;path&gt;</code> take the node&#39;s whole path, URL-encoded.</p>
 <h3 id="browsing">Browsing<a class="anchor" href="#browsing" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -860,7 +861,8 @@ opens: other pages ask them to sign in. A link that has expired or been turned o
 <p>In a dialog or the side panel the same messages appear smaller, with <strong>Close</strong> in place of
 <strong>Go home</strong>.</p>
 <p>After an administrator installs or updates a module, its pages reach the browser once EiN has
-rebuilt them with <a href="commands-core.html#ui-build"><code>ui-build</code></a>, which it does when it starts. An open tab
+rebuilt them with <a href="commands-core.html#ui-build"><code>ui-build</code></a>, which it does after <code>mod install</code>,
+<code>mod setup</code> and <code>mod remove</code>, and when it starts. An open tab
 picks them up when you reload it.</p>
 <h2 id="other-addresses-the-server-answers">Other addresses the server answers<a class="anchor" href="#other-addresses-the-server-answers" aria-label="Link to this section"></a></h2>
 <p>Besides the pages, EiN&#39;s web server answers a few addresses that programs use rather than people.

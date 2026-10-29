@@ -31,7 +31,7 @@ with two accounts, `admin` and `guest`. See [Accounts and groups](../admin/accou
 ### Admin mode
 
 A sign-in of a member of the `sudo` group that acts as the administrator for a while. It starts
-with **Administer…** in the account menu, or `admin` in a terminal, and ends with
+with **Administer…** in the account menu, or `admin` in a terminal for that terminal alone, and ends with
 **Leave admin mode**, or `admin --off`. See
 [Finding your way around](../guide/interface.md#admin-mode).
 
@@ -51,8 +51,8 @@ span and its stacks. Albums are under `/archive/albums`. See [Albums](../guide/a
 ### Archive
 
 The first module, `archive`, and what it adds: albums, people and their family tree, locations,
-devices and their tracks, labels, staging, and the pipelines that process media. Its part of the
-tree is `/archive`. Without it, EiN keeps what you give it and works nothing out. See
+devices and their tracks, labels, staging, and the pipelines that process media. Its parts of the
+tree are `/archive/albums`, `/archive/people`, `/archive/locations` and `/archive/devices`. Without it, EiN keeps what you give it and works nothing out. See
 [Modules](../admin/modules.md).
 
 ### Assistant
@@ -79,7 +79,7 @@ and terminal sessions leave no record. See [Commands](commands-core.md#audit).
 ### Bulk lane
 
 The lowest place in the order of processing work. Work on a staging category of the
-**Google Photos export** or **Scans** kind runs there, so what people upload in the meantime is
+**Google Photos export** or **Scans** kind runs there unless you change it, so what people upload in the meantime is
 processed first. See
 [Processing and pipelines](../admin/processing.md#large-imports-and-the-bulk-lane).
 
@@ -113,7 +113,7 @@ sharing, and the frame of the web interface. Core brings no pipelines of its own
 ### Cover
 
 The picture that stands for an album, a person, a location or a device on its card and in its
-header. A cover is a softlink to one of the pictures. See [Albums](../guide/albums.md) and
+header. A cover is a softlink to one of the pictures, for a person to one of their face crops. See [Albums](../guide/albums.md) and
 [People and faces](../guide/people.md#cover-pictures).
 
 ## D
@@ -181,7 +181,7 @@ event has the type **Generic**, **Birth**, **Death**, **Marriage** or **Engageme
 ### EXIF
 
 The metadata a camera or phone writes into a picture: the camera, the time it was taken, the
-exposure and often where. EiN reads it on arrival and keeps it as the file's child
+exposure and often where. EiN reads it on arrival and keeps it under the file as
 `metadata/exif`. See [Dates and places of pictures](../guide/dates-places.md).
 
 ## F
@@ -213,7 +213,7 @@ places as you type, and <kbd>Ctrl</kbd>+<kbd>K</kbd> puts the cursor in it from 
 ### Fingerprint
 
 A short summary of a file's picture or sound that finds copies in other bytes, such as a smaller
-version or a re-encoded video. EiN makes one once a file is prepared and compares it to find
+version or a re-encoded video. EiN makes one once a file's metadata is read and compares it to find
 look-alikes. See [Duplicates](../guide/duplicates.md).
 
 ### Front
@@ -385,7 +385,8 @@ that day's memories story. See [Home, memories and statistics](../guide/home.md#
 ### Organizer
 
 The part of the Archive that sorts the files in your staging area into groups, within a few minutes
-of their arrival. It leaves alone a group you have edited. The `staging-organizer` service runs it.
+of their arrival. It leaves alone a group you have edited. The `staging-organize` pipeline runs it,
+and the `staging-organizer` service asks for a run of what it missed.
 See [Sorting in staging](../guide/staging.md).
 
 ### Owner
@@ -422,7 +423,8 @@ that changed. Modules bring pipelines; core brings none. See
 ### Pool
 
 A node under `/var/pools` holding long-running jobs that wait for a worker with room for them. The
-Archive's media steps wait in `/var/pools/media`, where its workers `cpu` and `models` take them.
+Archive's media steps wait in `/var/pools/media`, where its workers `cpu`, `models` and
+`models-second` take them.
 `pool stat` shows what is waiting. See
 [Processing and pipelines](../admin/processing.md).
 
@@ -477,7 +479,7 @@ when it ends. See [Accounts and groups](../admin/accounts.md).
 
 A named value that changes how EiN works, such as `CFG_TRASH_RETENTION_DAYS`. System settings, named
 `CFG_…`, are changed by an administrator on **Settings → System**; personal ones, named
-`CFG_USER_…`, by each person under **Profile → Preferences**. Both can be changed with `config set`.
+`CFG_USER_…` (and `HISTSIZE`), by each person under **Profile → Preferences**. Both can be changed with `config set`.
 See [Configuration](../admin/configuration.md#two-kinds-of-settings) and [Settings](settings.md).
 
 ### Share link
@@ -506,7 +508,8 @@ The panel at the right of the screen, where the chat opens. See
 ### Sidebar
 
 The column of entries down the left of every page. Core gives **Home**, **Search**, **Settings**,
-**Statistics** and **Documentation**, and modules add theirs. See
+**Statistics** and **Documentation**, and for administrators **Nodes** and **Dashboard**, and
+modules add theirs. See
 [Your sidebar and top bar](../guide/customizing.md).
 
 ### Softlink
@@ -566,7 +569,7 @@ The one hierarchy of nodes that holds everything in EiN, from `/`: `/archive`, `
 
 ### Unidentified person
 
-A person recognition started for faces that match nobody named, with a placeholder name such as
+A person recognition started for a face or a voice that matches nobody, with a placeholder name such as
 `Unknown 4XK9QM`, waiting for someone to say who it is. See
 [People and faces](../guide/people.md#name-the-people-recognition-found).
 
@@ -593,7 +596,8 @@ see what is granted to the `guest` group. It is off unless set. See [Guest](#gue
 
 ### Worker
 
-A service that takes long jobs from a pool when it has room. The Archive brings two, both on
+A service that takes long jobs from a pool when it has room. The Archive brings three, all on
 `/var/pools/media`: `cpu`, for work
 done on this machine such as thumbnails and transcoding, and `models`, for work done by a model in
-the media service such as finding faces. See [Processing and pipelines](../admin/processing.md).
+the media service such as finding faces, with `models-second`, off unless
+`CFG_MODEL_SECOND_SLOTS` is set above 0, beside it. See [Processing and pipelines](../admin/processing.md).

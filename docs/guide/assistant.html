@@ -207,7 +207,7 @@
   <text x="400" y="536" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#7d8697">At most 12 commands a question, and 180 s for each call to the model</text>
 </svg><figcaption>Reading runs at once; anything that would change something waits for you.</figcaption></figure>
-<p>An answer that needed no command is a plain bubble. An answer for which the assistant ran something is drawn as a timeline, starting with a robot, with a dot for each step:</p>
+<p>An answer that needed no command is a plain bubble. An answer for which the assistant ran something, or that has a card, pictures or links under it, is drawn as a timeline, starting with a robot, with a dot for each step:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -245,7 +245,7 @@
 <p>Opening <strong>Ran N commands</strong> is how you check an answer: you see exactly what the assistant looked up and what EiN told it.</p>
 <h3 id="pictures">Pictures<a class="anchor" href="#pictures" aria-label="Link to this section"></a></h3>
 <p>Pictures come as a grid of up to 24 thumbnails under the answer; click one to open it in the <a href="viewer.html">viewer</a>. The text says in a sentence what they are rather than listing them. Ask for more in the same chat and the assistant leaves out the pictures it has already shown you there.</p>
-<p>A plain request for pictures, such as &quot;Show photos of Peggy Wrenfield in Falmouth&quot;, is answered straight from a search, without the longer back-and-forth: the answer begins &quot;Here are …&quot;, and its two steps, <code>parse-search</code> and <code>search</code>, show as its commands. This happens when the request starts with words like &quot;show&quot;, &quot;find&quot;, &quot;get&quot;, &quot;photos&quot;, &quot;pictures&quot; or &quot;videos&quot;, or the Swedish &quot;visa&quot;, &quot;hitta&quot; or &quot;bilder&quot;, and asks nothing more. A request with &quot;who&quot;, &quot;when&quot;, &quot;how many&quot;, &quot;this&quot; or &quot;my&quot; in it is answered the longer way, through the commands.</p>
+<p>A plain request for pictures, such as &quot;Show photos of Peggy Wrenfield in Falmouth&quot;, is answered straight from a search, without the longer back-and-forth: the answer begins &quot;Here are …&quot;, and its two steps, <code>parse-search</code> and <code>search</code>, show as its commands. This happens when <strong>Think harder</strong> is off and the request starts with words like &quot;show&quot;, &quot;find&quot;, &quot;get&quot;, &quot;photos&quot;, &quot;pictures&quot; or &quot;videos&quot;, or the Swedish &quot;visa&quot;, &quot;hitta&quot; or &quot;bilder&quot;, and asks nothing more. A request with &quot;who&quot;, &quot;when&quot;, &quot;how many&quot;, &quot;this&quot; or &quot;my&quot; in it is answered the longer way, through the commands.</p>
 <h3 id="links">Links<a class="anchor" href="#links" aria-label="Link to this section"></a></h3>
 <p>Names in the answer are links: a picture opens in the viewer, a person, album or place opens its page, and a web address opens as usual. Under the answer, links to the people, places and folders the answer is about are lined up for you. Before the answer reaches you, EiN checks every link as you: a link to something that does not exist, or that you may not see, is left as plain words.</p>
 <h3 id="show-in-search">Show in search<a class="anchor" href="#show-in-search" aria-label="Link to this section"></a></h3>
@@ -292,7 +292,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">set</span> -e
 
 <span class="hljs-comment"># Add an event (blob) to a person, album, location or device</span>
-person-add-event --<span class="hljs-built_in">date</span>=2021-12 --body=<span class="hljs-string">&#x27;Graduated in Wellington&#x27;</span> /archive/people/Ruby_Wrenfield</code></pre></div>
+person-add-event --<span class="hljs-built_in">date</span>=2021-12 --body=<span class="hljs-string">&#x27;Graduated&#x27;</span> /archive/people/Ruby_Wrenfield</code></pre></div>
 <p>To decide:</p>
 <ol>
 <li>Read the commands. Check the names, dates and paths: the card shows what the assistant understood.</li>
@@ -300,7 +300,7 @@ person-add-event --<span class="hljs-built_in">date</span>=2021-12 --body=<span 
 <li>Click <strong>Run</strong> to run the whole script, or <strong>Decline</strong> to leave things as they are.</li>
 </ol>
 <p><strong>Run</strong> runs the script exactly as the card shows it, as you, as if you had typed it in the <a href="../shell/terminal.html">terminal</a>. Because of <code>set -e</code>, it stops at the first line that fails; take that line out if you want the rest to run regardless.</p>
-<p>The card then shows how it went: green <strong>Done</strong> with &quot;· exit 0&quot; and what the commands printed, red <strong>Failed</strong> with the exit code and the error, or <strong>Dismissed</strong> when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it does not propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.</p>
+<p>The card then shows how it went: green <strong>Done</strong> with &quot;· exit 0&quot; and what the commands printed, red <strong>Failed</strong> with the exit code and the error, or <strong>Dismissed</strong> when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it is told not to propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.</p>
 <h3 id="it-runs-as-you">It runs as you<a class="anchor" href="#it-runs-as-you" aria-label="Link to this section"></a></h3>
 <p>Every command the assistant runs, and every script you run from a card, runs as you, with your permissions. It sees what you can see in the browser and nothing more, and a change you may not make fails the same way it would if you made it yourself. In <a href="interface.html#admin-mode">admin mode</a> the assistant reads with the administrator&#39;s rights too.</p>
 <p>What counts as a change is decided by EiN, not by the model. A line runs at once only when every command in it is known to only read and nothing is written to a file; anything else becomes a card. The assistant cannot open the editor, sign in or out, run a service&#39;s own program (services are started with <code>service-start</code>, which it proposes like any change), or ask itself a question. <a href="../develop/assistant.html">Teaching the assistant</a> describes how this works.</p>
@@ -317,7 +317,7 @@ person-add-event --<span class="hljs-built_in">date</span>=2021-12 --body=<span 
 <p>To delete a chat:</p>
 <ol>
 <li>Open the Chat page from the sidebar.</li>
-<li>Point at the chat in the recent chats box and click its trash icon (<strong>Delete chat</strong>).</li>
+<li>In the recent chats box, click the trash icon (<strong>Delete chat</strong>) beside the chat.</li>
 <li>Your browser asks <code>Delete “&lt;title&gt;”?</code>; confirm.</li>
 </ol>
 <p>The chat is deleted for good: it does not go to the <a href="profile.html">trash</a>. The menu in the drawer and on a phone has no delete button, and a chat cannot be deleted while it is answering.</p>

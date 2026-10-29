@@ -123,7 +123,8 @@ their own machine; going the other way, from EiN out to a NAS or another server,
 the machine EiN runs on; <a href="../admin/network.html">Ports, HTTPS and remote access</a> explains how to change
 it and how to reach EiN from outside your home network. The setting
 <a href="../reference/settings.html#cfg_ssh_port"><code>CFG_SSH_PORT</code></a> (<strong>SSH port</strong> in <strong>Settings</strong>) is the port
-EiN listens on, and takes effect the next time EiN starts.</p>
+EiN listens on inside its container, and takes effect the next time EiN starts. With the standard
+install leave it at <code>2222</code>: that is the port <code>EIN_SSH_PORT</code> is passed on to.</p>
 <p>The examples below use Helen Okafor&#39;s account <code>helen</code> on <code>ein.local</code>, port <code>2222</code>. Use your own.</p>
 <h2 id="log-in-with-a-shell">Log in with a shell<a class="anchor" href="#log-in-with-a-shell" aria-label="Link to this section"></a></h2>
 <ol>
@@ -145,8 +146,9 @@ answering, ask your administrator to compare the fingerprint; they see it in EiN
 <p>You land in your home folder, <code>/home/helen</code>, at the same prompt as in a terminal tab. Everything on
 <a href="terminal.html">The terminal</a> holds here too: your history, your <code>~/.bashrc</code>, Tab completion and the
 same keys, and every command on <a href="commands.html">Commands by task</a>. The editor works as well
-(<a href="editor.html">The editor</a>). Two things belong to the browser alone: pictures drawn by <code>cat</code>, which
-over SSH prints lines starting <code>__IMG:</code> instead, and dropping files to upload them.</p>
+(<a href="editor.html">The editor</a>). Two things belong to the browser alone: the pictures, videos and
+recordings <code>cat</code> shows, which over SSH print lines starting <code>__IMG:</code>, <code>__VID:</code> or <code>__AUD:</code> instead,
+and dropping files to upload them.</p>
 <p>To log out, type <code>exit</code>. Closing the window or losing the connection ends the shell too, and stops
 whatever command was running in it.</p>
 <aside class="callout callout-tip"><p class="callout-title">Tip</p>
@@ -173,8 +175,9 @@ You can add and remove lines there yourself. EiN reads lines starting with a key
 A line with options in front of the key (<code>command=&quot;…&quot;</code>, <code>from=&quot;…&quot;</code>, <code>no-pty</code> and the like) is
 skipped entirely.</p>
 <p>EiN trusts the file only while nobody but you can change it, since anyone who could write to it could
-sign in as you. Your home, <code>~/.ssh</code> and <code>authorized_keys</code> must each be owned by you, writable by
-neither group nor others, and none of them may be a link. <code>ssh-copy-id -s</code> sets the modes for you.</p>
+sign in as you. Your home, <code>~/.ssh</code> and <code>authorized_keys</code> must each be owned by you (or the
+administrator), writable by neither group nor others nor by anyone else through an access list, and
+none of them may be a link. <code>ssh-copy-id -s</code> sets the modes for you.</p>
 <h3 id="add-a-key-without-ssh-copy-id">Add a key without ssh-copy-id<a class="anchor" href="#add-a-key-without-ssh-copy-id" aria-label="Link to this section"></a></h3>
 <p>Where <code>ssh-copy-id</code> is missing, as on Windows, add the key from EiN&#39;s terminal. Copy the contents of
 your public key file (<code>id_ed25519.pub</code> in the <code>.ssh</code> folder of your home on your own computer), then:</p>
@@ -274,8 +277,8 @@ it needs an <code>rsync</code> program on EiN&#39;s side, and EiN&#39;s shell ha
 <li>Every account with a password can sign in over SSH and SFTP; no group membership is needed. Being in
 the group <code>ssh</code> is about reaching other machines from EiN, not about reaching EiN (see
 <a href="remote.html">Reaching other machines</a>).</li>
-<li>An account that must choose a new password cannot sign in over SSH, with a key or with a password,
-until it has. Sign in to the web interface once and set one there.</li>
+<li>An account still waiting for a password, such as one imported without one, cannot sign in over SSH,
+with a key or with a password, nor anywhere else, until the administrator sets one for it.</li>
 <li>A disabled account cannot sign in at all, and disabling an account, or deleting it, ends the SSH and
 SFTP connections it already has open. <a href="../admin/accounts.html">Accounts and groups</a> covers both.</li>
 <li>After five wrong passwords from one address, that address is refused for a while, starting at a second
@@ -301,8 +304,8 @@ agent.</p>
 </tr>
 <tr>
 <td><code>Permission denied (publickey,password)</code> with the right password</td>
-<td>The account must choose a new password, is disabled, or your address is held back after failed attempts.</td>
-<td>Sign in to the web interface to set a new password, ask your administrator, or wait and try again.</td>
+<td>The account still waits for a password, is disabled, or your address is held back after failed attempts.</td>
+<td>Ask your administrator to set a password or enable the account, or wait and try again.</td>
 </tr>
 <tr>
 <td>The key is not used and you are asked for the password</td>

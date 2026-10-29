@@ -149,8 +149,8 @@ someone&#39;s tree directly.</p>
 <p>The tree is drawn the way family trees usually are:</p>
 <ul>
 <li><strong>Generations are rows.</strong> Parents and grandparents are above, children and grandchildren below.</li>
-<li><strong>Couples sit side by side</strong>, joined by a line. When the partnership has dates, the years are
-written over the line: <code>1956–2014</code>, or <code>1983</code> when it has no end.</li>
+<li><strong>Couples sit side by side</strong>, joined by a line. When the partnership has dates, the year it
+began is written over the line and the year it ended under it.</li>
 <li><strong>Each card</strong> shows the person&#39;s picture, their name and their years: <code>1934 – 2021</code>, <code>b. 1958</code>
 for someone with only a birth date, <code>d. 2011</code> for someone with only a death date.</li>
 <li><strong>The person the page is about</strong> has an outlined card and a bold name.</li>
@@ -161,10 +161,11 @@ the lines to them.</p>
 <h3 id="show-more-of-the-family">Show more of the family<a class="anchor" href="#show-more-of-the-family" aria-label="Link to this section"></a></h3>
 <p>A large family would not fit on a screen, so the tree opens with two generations up and two down
 from the person, and the partners of everyone drawn. A card with more family behind it has a round
-chevron on its edge: at the top when there are more parents (&quot;Show more family for &lt;name&gt;&quot;),
-at the bottom when there are more children (&quot;Show more descendants of &lt;name&gt;&quot;). Click either
-one and the tree loads one more generation in each direction around that card. The chevrons then
-go away from it.</p>
+chevron on its edge: at the top when there are more parents (&quot;Show &lt;name&gt;&#39;s parents&quot;), at
+the bottom when there are more children (&quot;Show &lt;name&gt;&#39;s children&quot;). Click one and the tree
+loads one more generation that way: the parents above the card, or the children below it. The
+chevron then turns round (&quot;Hide &lt;name&gt;&#39;s parents&quot; or &quot;Hide &lt;name&gt;&#39;s children&quot;), and
+clicking it folds those relatives away again.</p>
 <p>Two things are not drawn until you ask:</p>
 <ul>
 <li><strong>Brothers and sisters.</strong> The tree walks up from the person and down from the person, so their
@@ -173,8 +174,10 @@ siblings appear once you open the chevron on one of their parents&#39; cards.</l
 chevron on the partner&#39;s card to bring them in.</li>
 </ul>
 <h3 id="move-around-the-tree">Move around the tree<a class="anchor" href="#move-around-the-tree" aria-label="Link to this section"></a></h3>
-<p>The tree scrolls inside its own box, so the rest of the page stays where it is. The buttons above
-it:</p>
+<p>The tree moves inside its own box, as a map does, so the rest of the page stays where it is. Drag
+it with the mouse or one finger. Scroll over it to zoom around the pointer, or pinch with two
+fingers or on a trackpad. A double click or double tap on the space between the cards zooms in
+there; hold <kbd>Shift</kbd> to zoom out. The buttons in the box&#39;s top right corner:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -183,21 +186,19 @@ it:</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Centre on this person</strong></td>
-<td>Scrolls back to the person the page is about. Hidden while the whole family is fitted.</td>
+<td><strong>Full screen</strong></td>
+<td>Opens the tree in a window that fills the screen; <strong>Leave full screen</strong> closes it.</td>
 </tr>
 <tr>
 <td><strong>Fit the whole family</strong></td>
 <td>Shrinks the drawing until all of it fits the box.</td>
 </tr>
 <tr>
-<td><strong>Zoom out</strong>, <strong>Zoom in</strong></td>
-<td>Changes the size a step at a time.</td>
+<td><strong>Centre on this person</strong></td>
+<td>Moves back to the person the page is about. Hidden while the whole family is fitted.</td>
 </tr>
 </tbody></table>
 </div>
-<p>Hold <kbd>Ctrl</kbd> and scroll over the tree to zoom around the pointer; a pinch on a trackpad does
-the same.</p>
 <h3 id="brothers-sisters-and-in-laws">Brothers, sisters and in-laws<a class="anchor" href="#brothers-sisters-and-in-laws" aria-label="Link to this section"></a></h3>
 <p>There is no brother or sister relation to record. Two people are siblings when they share a parent:
 give both the same two parents and they are brother and sister, give them one parent in common and
@@ -220,8 +221,9 @@ person the page is about.</li>
 you know them, the dates in <strong>From</strong> and <strong>Until</strong>.</li>
 <li>Press <strong>Add</strong>.</li>
 </ol>
-<p>The tree, the person&#39;s header and their timeline are read again at once, and the new relative&#39;s card
-appears in its place.</p>
+<p>The tree, the person&#39;s header and their timeline are read again at once. The tree opens again as
+it first did, two generations up and two down, so a relative added further out shows once you open
+the chevrons to it again.</p>
 <p>Each tie joins two people. <strong>Add child</strong> gives the child one parent: if both partners of a couple
 are the child&#39;s parents, add the child from the other partner&#39;s card as well, or add the second
 parent from the child&#39;s own card. Adding a partner links no children.</p>
@@ -416,8 +418,8 @@ shows the two as one entry; the partner&#39;s timeline shows the partnership.</p
 events are always generic, and need both a <strong>Date</strong> and a <strong>Description</strong>.</p>
 <ul>
 <li><strong>On an album</strong>, the date starts as the first day with pictures and no event yet. The event
-stands as a note among that day&#39;s pictures, signed &quot;— &lt;writer&gt;&quot; when it has a writer. If you
-may change it, a pencil on the note opens <strong>Edit event</strong>, where you change the date, the text or
+stands as a note among that day&#39;s pictures, signed &quot;— &lt;writer&gt;&quot;, or with the name of the
+account that added it when it has no writer. If you may change it, a pencil on the note opens <strong>Edit event</strong>, where you change the date, the text or
 the writer and press <strong>Save</strong>, or press <strong>Delete</strong>. A deleted event goes to your trash, and the
 message &quot;Event moved to the trash&quot; has <strong>Undo</strong>.</li>
 <li><strong>On a location or a device</strong>, the event appears on its <strong>Timeline</strong> tab. It cannot be changed in
@@ -482,8 +484,8 @@ a <strong>Location name</strong>.</li>
 </ol>
 <p>A new location made here has only its name. It has no place on the map until someone opens it and
 gives it an address or a position; see <a href="places.html">Locations and the map</a>.</p>
-<p>Each row shows the location, which opens its page, and the years: <code>1956 – 1999</code>, <code>since 1983</code>,
-<code>until 1999</code>, or <code>dates unknown</code>. A home with a moved-in date and no moved-out date is marked
+<p>Each row shows the location, which opens its page, and the dates as they were entered:
+<code>1956 – 1999</code>, <code>since 1983</code>, <code>until 1999</code>, or <code>dates unknown</code>. A home with a moved-in date and no moved-out date is marked
 <strong>current</strong>. Homes without a moved-out date come first, then the others, the latest move first.</p>
 <ul>
 <li><strong>To correct the dates</strong>, press the pencil on the row, change <strong>Moved in</strong> or <strong>Moved out</strong>, and
@@ -661,7 +663,8 @@ flags after them: placed before the people, a flag&#39;s value is taken for a pe
 </div>
 <p>You can also tell the <a href="assistant.html">assistant</a> a parent, a partnership or an event the archive
 should record, for example &quot;Leo was adopted by Jon and Kiri&quot;. It proposes the command, and nothing
-changes until you press <strong>Run</strong>; it runs as you, with your permissions. It does not record homes.</p>
+changes until you press <strong>Run</strong>; it runs as you, with your permissions. Homes are not among the
+commands it is pointed to, so record those on the <strong>Homes</strong> or <strong>Residents</strong> tab.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><strong>There is no ⋯ on the cards, or no Add home button.</strong> These are shown only to administrators. Ask
 one to make the change, or, if you are in the <code>sudo</code> group, choose <strong>Administer…</strong> in the account

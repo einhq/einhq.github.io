@@ -326,8 +326,8 @@ while the map reads what is in view.
 - **A pile** is several pictures close together, drawn as one of them with the count on it.
   Pointing at it says "N photos — click to browse". Click it to open **N photos here**: the
   pictures behind it in month sections, with the spot's coordinates under the title. Open one in
-  the viewer, or select pictures as in an album. **Back**, or a phone's back gesture, closes it and
-  leaves you on the map.
+  the viewer, or select pictures as in an album. The browser's Back, or a phone's back gesture,
+  closes it and leaves you on the map.
 - **List the N photos in this view**, the button with four squares in the top-right corner, opens
   every picture in view the same way, titled "N photos in this view". It shows while pictures are
   drawn and the view holds some.

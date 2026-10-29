@@ -25,13 +25,13 @@ bookmark an account or send the link to another administrator.
 
 ## The accounts and groups EiN starts with
 
-EiN makes these at its first start. Each is marked **Built in** in its panel, and none can be
-deleted.
+EiN makes these at its first start, and none can be deleted. The two accounts are marked
+**Administrator** and **Guest** in their panels, and each of the groups **Built in**.
 
-| Account | Title         | What it is                                                                                                                                                                                                              |
-| ------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `admin` | Administrator | The administrator. It cannot be disabled or deleted. Its first password is printed once at the end of the install; [First steps](../start/first-steps.md#sign-in-and-change-the-admin-password) shows how to change it. |
-| `guest` | Guest         | Who a visitor browses as when **Visitors may browse** is on. It has no password, cannot be given one, and its groups give it nothing.                                                                                   |
+| Account | Title         | What it is                                                                                                                                                                                                                                                                                           |
+| ------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `admin` | Administrator | The administrator. It cannot be disabled or deleted. Its first password is `INITIAL_ADMIN_PASSWORD` in `~/ein/.env`, which `setup.sh` prints at the end of each run until you delete that line; [First steps](../start/first-steps.md#sign-in-and-change-the-admin-password) shows how to change it. |
+| `guest` | Guest         | Who a visitor browses as when **Visitors may browse** is on. It has no password, cannot be given one, and its groups give it nothing.                                                                                                                                                                |
 
 | Group   | Title                     | What it is for                                                                                                                                                            |
 | ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -228,7 +228,7 @@ on request** (`sudo`):
 
 1. Open their account in **Settings → Users**.
 2. Under **Groups**, tick **Administrators on request**.
-3. Ask them to sign out and in again, since group changes apply at the next sign-in.
+3. Ask them to reload the page. Membership of `sudo` counts at once, without signing in again.
 
 They then have **Administer…** in the account menu under their picture. It asks for their own
 password again: "Enter your password again to act as the administrator until you sign out or leave
@@ -305,7 +305,7 @@ list every option.
 | Someone does not see an album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
 | **Create user** says "Already taken"                                   | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
 | "Another account has this address" under **E-mail**                    | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |
-| `user create: '<name>' is the name of a built-in group`                | Names such as `ssh` and `sudo` belong to built-in groups.                            | Choose another username.                                                           |
+| `user create: '<name>' is the name of a built-in group`                | The names `users` and `ssh` belong to built-in groups.                               | Choose another username.                                                           |
 | `group delete: cannot delete the built-in group '<name>'`              | Built-in groups stay.                                                                | Nothing to do.                                                                     |
 | `user passwd: the guest account cannot have a password`                | `guest` never signs in.                                                              | Turn **Visitors may browse** on or off instead.                                    |
 | `<name>: permission denied: only an administrator may run it`          | The command is the administrator's.                                                  | Choose **Administer…**, or type `admin` in that terminal, if you are in `sudo`.    |

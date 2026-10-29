@@ -6,7 +6,7 @@ This page is for whoever runs EiN: the services that run inside EiN and keep it 
 
 Inside the `ein` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, the workers that process your media, and small loops that tidy up on a timer. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the media service (`ems`), the language model (`llm`) and the database (`db`) are containers beside EiN, and EiN watches the first two through services of its own, `ems-link` and `llm-link`.
 
-Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 20:
+Core brings nine services, and each module brings its own. With the Archive, the media service and the assistant installed, there are 21:
 
 | Service             | From      | What it does                                                                                                                    |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -22,6 +22,7 @@ Core brings nine services, and each module brings its own. With the Archive, the
 | `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                           |
 | `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                          |
 | `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                  |
+| `models-second`     | archive   | A second worker for the same steps, in the reverse order; it ends at once, stopped, while `CFG_MODEL_SECOND_SLOTS` is `0`       |
 | `media-heal`        | archive   | Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up |
 | `album-metadata`    | archive   | Keeps each album's photo stacks, time span and cover current                                                                    |
 | `label-models`      | archive   | Keeps the models behind label suggestions trained                                                                               |
@@ -47,7 +48,7 @@ The card lists every service, one row each, and asks again every 10 seconds whil
 - `×` and a number when EiN has restarted it since it was last started by hand. Hover it for "Restarted 2 time(s)".
 - A badge: **running**, **starting**, **stopping**, **stopped**, **failed**, or **disabled** for a service that is switched off.
 
-The heading counts them: `20 healthy`, or in red `1 down` when an enabled service is not running. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
+The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. While `CFG_MODEL_SECOND_SLOTS` is `0`, the stopped `models-second` is counted as down. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
 
 **Settings → Modules** also shows a module's services and whether each runs, on the module's **Services** tab; the controls are here on the dashboard.
 
@@ -90,7 +91,7 @@ Saving a setting on the Settings page restarts the services that read it by itse
 
 ## When EiN restarts a service by itself
 
-Every service that ships with EiN restarts when its script fails: when it ends with an exit code other than 0, EiN starts it again a second later, and the `×` count on its row goes up. A service that fails three times within a minute is not started again; it stays **failed** until you start it. A script that ends with 0 is **stopped**, and is not started again.
+Every service that ships with EiN restarts when its script fails: when it ends with an exit code other than 0, EiN starts it again a second later, and the `×` count on its row goes up. A service that has been restarted three times within a minute and fails again is not started again; it stays **failed** until you start it. A script that ends with 0 is **stopped**, and is not started again.
 
 The count belongs to the run you started: **Restart**, or `service-restart`, starts it at 0 again.
 
@@ -140,12 +141,12 @@ Errors: /var/logs/services/ems-link/stderr.log
 
 EiN writes to four places. Three are logs in the tree, which you read in EiN's terminal; the fourth is the container's own log, which you read on the machine.
 
-| Log                                    | What is in it                                                                                                                        | How long it is kept                                       |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
-| `/var/logs/system`                     | EiN's own messages: each line with a time, a level, the part of EiN that wrote it and the message                                    | Emptied each time EiN starts                              |
-| `/var/logs/services/<name>/stdout.log` | What a service's script prints                                                                                                       | Emptied each time the service starts                      |
-| `/var/logs/services/<name>/stderr.log` | What a service's script prints as errors                                                                                             | Emptied each time the service starts                      |
-| The `ein` container's log              | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed with `podman compose down` |
+| Log                                    | What is in it                                                                                                                        | How long it is kept                                                                                    |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `/var/logs/system`                     | EiN's own messages: each line with a time, a level, the part of EiN that wrote it and the message                                    | Emptied each time EiN starts                                                                           |
+| `/var/logs/services/<name>/stdout.log` | What a service's script prints                                                                                                       | Emptied each time the service starts                                                                   |
+| `/var/logs/services/<name>/stderr.log` | What a service's script prints as errors                                                                                             | Emptied each time the service starts                                                                   |
+| The `ein` container's log              | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed or made again, by `podman compose down` or by an `up -d` after a change |
 
 A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the dashboard draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach).
 
@@ -180,7 +181,7 @@ dmesg --level error          # every error since EiN started
 ```
 
 ```text
-2026-10-25 21:34:13 WARN  pool-worker pooled step could not run yet, kind resting
+2026-10-25 21:34:13 WARN  pool-worker      pooled step could not run yet, kind resting
 2026-10-25 21:35:02 INFO  service-registry Service 'label-models' started
 ```
 
@@ -212,7 +213,7 @@ podman compose logs -f ein             # follow; Ctrl+C ends it
 podman compose logs ems                # the media service: ems, llm or db for the others
 ```
 
-With Docker, write `docker compose`. Each line reads `[2026-10-25 21:35:02] [INFO ] [service-registry] Service 'label-models' started`, followed by any details the message carries. This is the log to read when EiN does not start, since the tree's logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, `Admin password set to: …`, which is gone with the container after `podman compose down`.
+With Docker, write `docker compose`. Each line reads `[2026-10-25 21:35:02] [INFO ] [service-registry] Service 'label-models' started`, followed by any details the message carries. This is the log to read when EiN does not start, since the tree's logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, `Admin password set to: …`, which is gone once the container is made again, as after `podman compose down`.
 
 The media service, the language model and the database write only to their containers' logs. [The media service](media-service.md#on-the-machine) covers reading its log.
 
@@ -294,7 +295,7 @@ The keys `config.json` takes:
 | `stopTimeout`   | `5000`  | Milliseconds a stop waits for the script to end before closing it                                                       |
 | `env`           | none    | Variables set for the script, as an object of names and values                                                          |
 | `workClass`     | none    | `background` makes its database work give way to people's, as EiN's own workers do                                      |
-| `statusCommand` | none    | A command whose first line of output is shown beside the service                                                        |
+| `statusCommand` | none    | A command whose first line of output is shown under the service's name, in place of its description                     |
 | `checkCommand`  | none    | A command answering checks for `health`, as JSON                                                                        |
 | `gaugeCommand`  | none    | A command answering gauges for `top` and the dashboard, as JSON                                                         |
 
@@ -302,7 +303,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 ## When something goes differently
 
-**A service is failed, with `×3` beside it.** Its script failed three times within a minute. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'cpu' exited with code 1` and `Service 'cpu' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
+**A service is failed, with `×3` beside it.** It was restarted three times within a minute and failed again. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'cpu' exited with code 1` and `Service 'cpu' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
 
 **`service start: 'x' is not enabled`.** The service is switched off; the dashboard shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's or a module's services lasts only until EiN starts again, which enables them all.
 

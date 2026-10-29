@@ -216,9 +216,9 @@ page is away.</p>
 <li><strong>How long EiN waits.</strong> EiN keeps a shell without a page for five minutes. The administrator sets
 this with <strong>Terminal reconnect grace</strong>
 (<a href="../reference/settings.html#cfg_terminal_reconnect_grace_sec"><code>CFG_TERMINAL_RECONNECT_GRACE_SEC</code></a>,
-<code>300</code> seconds; <code>0</code> ends a shell as soon as its page goes). After that the shell ends, with
-whatever runs in it, and the tab starts a fresh one when you come back. To keep a long job going
-after you leave, see <a href="bash.html">The shell language</a>.</li>
+<code>300</code> seconds; <code>0</code> ends a shell as soon as its page goes; a change applies from the next
+disconnect). After that the shell ends, with whatever runs in it, and the tab starts a fresh one
+when you come back. To keep a long job going after you leave, see <a href="bash.html">The shell language</a>.</li>
 <li><strong>One browser tab, one set of terminals.</strong> The tabs belong to the browser tab they were opened
 in. EiN in a second browser tab gets terminals of its own, starting again at <strong>Session 1</strong>, and
 closing a browser tab leaves its shells to end after the five minutes.</li>
@@ -226,8 +226,9 @@ closing a browser tab leaves its shells to end after the five minutes.</li>
 who signs in on that browser finds none of your shells.</li>
 <li><strong>When EiN restarts</strong>, for example for an update, every shell ends. The tabs stay, and each
 starts a fresh shell once EiN answers again.</li>
-<li><strong>While the connection is down</strong>, the top bar shows a red <strong>Disconnected</strong> badge. The terminal
-reconnects by itself; there is nothing to press.</li>
+<li><strong>While the connection is down</strong>, the top bar shows a red <strong>Disconnected</strong> badge, and each tab
+whose shell is not connected shows a red crossed-out plug in place of its terminal icon. The
+terminal reconnects by itself; there is nothing to press.</li>
 </ul>
 <p>Your command history is kept through all of this (see
 <a href="#find-an-earlier-command">Find an earlier command</a>).</p>
@@ -257,8 +258,8 @@ starts playing.</li>
 <p>Only the terminal in the browser draws pictures. Over SSH, <code>cat</code> prints marker lines starting
 <code>__IMG:</code> instead.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>A picture whose path holds a space, such as one in <code>/archive/albums/Summer 2020</code>, is not drawn:
-the terminal shows its <code>__IMG:</code> lines instead. Open it in the web interface.</p>
+<p>A picture whose path holds a space or a colon, such as one in <code>/archive/albums/Summer 2020</code>, is
+not drawn: the terminal shows its <code>__IMG:</code> lines instead. Open it in the web interface.</p>
 </aside>
 <h2 id="edit-the-command-line">Edit the command line<a class="anchor" href="#edit-the-command-line" aria-label="Link to this section"></a></h2>
 <p>The line you type is edited with the keys of bash on Linux, in its default (emacs) mode. The ones
@@ -346,7 +347,8 @@ turns into the search and shows the newest command that matches:</p>
 <p>What EiN keeps:</p>
 <ul>
 <li>Your history is the file <code>~/.bash_history</code>. Every terminal tab and every SSH login of yours adds
-to it as each command runs, so a command typed in one tab can be found from another.</li>
+to it as each command runs, so a tab you open afterwards finds the commands typed in the others.
+A tab that is already open keeps the list it started with.</li>
 <li>A command typed with a space in front, or the same as the one before it, is not kept.</li>
 <li>It keeps the last 1000 commands. Change this under <strong>Profile → Preferences</strong>, <strong>Shell history
 length</strong> (<a href="../reference/settings.html#histsize"><code>HISTSIZE</code></a>); a tab you open afterwards uses the new
@@ -476,8 +478,8 @@ over SSH with your EiN username and password, on port 2222 unless your administr
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 ssh -p 2222 helen@ein.local</code></pre></div>
 <p>You get the same shell as in a terminal tab: the same prompt, your history, your <code>~/.bashrc</code>, Tab
-completion and the same keys. Two things belong to the browser alone: pictures drawn by <code>cat</code>, and
-dropping files to upload them. Over SSH, copy files with SFTP or <code>scp</code> instead.</p>
+completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
+<code>cat</code>, and dropping files to upload them. Over SSH, copy files with SFTP or <code>scp</code> instead.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four doors, the web interface, the terminal panel, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly">
   <title>One shell, several doors</title>
   <defs>
@@ -677,8 +679,10 @@ bash on Linux.</p>
 small screen press <kbd>Alt</kbd>+<kbd>T</kbd> with a keyboard, or use SSH from a computer.</p>
 <p><strong>The terminal closed while I was clicking on the page.</strong> A click outside the terminal hides it. Its
 shells keep running; press <kbd>Alt</kbd>+<kbd>T</kbd> to bring it back.</p>
-<p><strong>The top bar says Disconnected.</strong> EiN cannot be reached from the browser just now. The terminal
-reconnects by itself and finds its shell again if the connection is back within five minutes.</p>
+<p><strong>The top bar says Disconnected, or a tab shows a red crossed-out plug.</strong> EiN cannot be reached
+from the browser just now: the badge is the page&#39;s own connection, the plug that tab&#39;s shell. The
+terminal reconnects by itself and finds its shell again if the connection is back within five
+minutes.</p>
 <p><strong>The screen was cleared and a fresh prompt waits.</strong> The shell ended: you were away longer than five
 minutes, EiN restarted, or you signed out. Your history is still there; <kbd>↑</kbd> and
 <kbd>Ctrl</kbd>+<kbd>R</kbd> find your commands.</p>
@@ -690,7 +694,7 @@ administrators. Through every door it is refused the same way; ask your administ
 <p><strong><code>du -h</code> shows help instead of sizes.</strong> <code>-h</code> straight after a command&#39;s name always asks for help.
 Write <code>du -sh</code> or <code>du -ch</code>.</p>
 <p><strong><code>cat</code> prints lines starting <code>__IMG:</code> instead of the picture.</strong> You are connected over SSH, or the
-picture&#39;s path holds a space. Open the picture in the web interface.</p>
+picture&#39;s path holds a space or a colon. Open the picture in the web interface.</p>
 <p><strong>Dropped files landed in the wrong folder.</strong> They go into the folder the tab is in, the path on the
 tab. <code>cd</code> to where they belong and drop them again, or move them with <code>mv</code>.</p>
 <p><strong>The browser tab closed when I pressed Ctrl+W.</strong> The browser keeps that key for itself. Open EiN

@@ -81,8 +81,9 @@ permissions on the nodes behind it; see [Permissions in depth](../admin/permissi
 
 ## The Archive's pages
 
-Addresses with `<name>` take the name of the node in the tree, which is the person's, place's or
-device's name in lower case with hyphens: Helen Okafor is `/people/helen-okafor`. Addresses with
+Addresses with `<name>` take the name of the node in the tree. A person's or a place's is its name
+in lower case with hyphens: Helen Okafor is `/people/helen-okafor`. A device's keeps its capitals and
+has `_` for spaces, such as `/devices/Canon_EOS_5D_Mark_III`. Addresses with
 `<path>` take the node's whole path, URL-encoded.
 
 ### Browsing
@@ -321,7 +322,8 @@ In a dialog or the side panel the same messages appear smaller, with **Close** i
 **Go home**.
 
 After an administrator installs or updates a module, its pages reach the browser once EiN has
-rebuilt them with [`ui-build`](commands-core.md#ui-build), which it does when it starts. An open tab
+rebuilt them with [`ui-build`](commands-core.md#ui-build), which it does after `mod install`,
+`mod setup` and `mod remove`, and when it starts. An open tab
 picks them up when you reload it.
 
 ## Other addresses the server answers

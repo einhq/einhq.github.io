@@ -178,12 +178,12 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 <td>Another program, or an EiN under the other container engine, has port 8080 or 2222. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>, or choose other ports in <code>.env</code>.</td>
 </tr>
 <tr>
-<td>After an update, an empty EiN with a new admin password</td>
+<td>After an update, an empty EiN where your admin password does not work</td>
 <td>The update ran under the other container engine, with an empty database of its own. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
 </tr>
 <tr>
 <td>EiN is not running after the machine restarted</td>
-<td>Under rootless podman nothing starts it. Start it with <code>podman compose up -d</code>, and see <a href="install.html#start-ein-when-the-machine-boots">Start EiN when the machine boots</a>.</td>
+<td>Under podman, <code>podman-restart.service</code> starts it at boot, and under rootless podman only for a user who lingers. Start it with <code>podman compose up -d</code>, and see <a href="install.html#start-ein-when-the-machine-boots">Start EiN when the machine boots</a>.</td>
 </tr>
 <tr>
 <td>EiN answers on the machine itself, but not from another computer</td>
@@ -210,11 +210,11 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </thead>
 <tbody><tr>
 <td><code>setup.sh</code> showed no admin password at the end</td>
-<td>A new EiN writes it to its log once, as <code>Admin password set to:</code>. Find it with <code>podman compose logs ein | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
+<td><code>setup.sh</code> shows <code>INITIAL_ADMIN_PASSWORD</code> from <code>~/ein/.env</code>, and the line is gone: you deleted it, or <code>.env</code> was written before <code>setup.sh</code> kept the password there. Then a new EiN made a random one and wrote it to its log once, as <code>Admin password set to:</code>; find it with <code>podman compose logs ein | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
 </tr>
 <tr>
 <td>The <code>admin</code> password is lost</td>
-<td>Nothing keeps it. A member of the group <code>sudo</code> signs in, chooses <strong>Administer…</strong> in the account menu, and sets a new one on the <strong>Users</strong> tab of <strong>Settings</strong>, under <strong>Password</strong>, or types <code>admin</code> and then <code>user-passwd admin</code> in the terminal. EiN has no way to reset it from the machine, so <a href="accounts.html#let-a-second-person-administer">let a second person administer</a> before you need it.</td>
+<td>Once changed, nothing keeps it; the <code>INITIAL_ADMIN_PASSWORD</code> line in <code>.env</code> holds only the first one, which works only until it is changed. A member of the group <code>sudo</code> signs in, chooses <strong>Administer…</strong> in the account menu, and sets a new one on the <strong>Users</strong> tab of <strong>Settings</strong>, under <strong>Password</strong>, or types <code>admin</code> and then <code>user-passwd admin</code> in the terminal. EiN has no way to reset it from the machine, so <a href="accounts.html#let-a-second-person-administer">let a second person administer</a> before you need it.</td>
 </tr>
 <tr>
 <td>Someone&#39;s sign-in fails with the right password</td>
@@ -291,7 +291,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </li>
 </ol>
 <p>A step that failed on its input, such as a file no program can open, is not run again, since every run would meet the same bytes. <code>health</code> counts those as <code>input</code>, and they need nothing from you.</p>
-<p>When the media service is updated, the <code>ems-link</code> service runs every failed instance once at once, since a new build is the likeliest fix.</p>
+<p>When the media service is updated, the <code>ems-link</code> service runs the failed instances again at once (<code>pipeline heal --now --apply</code>), all but those that failed on their input or were left for a person, since a new build is the likeliest fix.</p>
 <h3 id="waiting-work-that-does-not-drain">Waiting work that does not drain<a class="anchor" href="#waiting-work-that-does-not-drain" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -322,7 +322,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 <tr>
 <td><code>… running steps silent for … or more: …</code></td>
-<td>Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, restart that step with <code>pipeline-step-restart &lt;id&gt; &lt;step&gt;</code>.</td>
+<td>Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, stop its instance with <code>pipeline-cancel &lt;pipeline&gt;/&lt;id&gt;</code> and run it afresh with <code>pipeline-rerun &lt;pipeline&gt;/&lt;id&gt;</code>.</td>
 </tr>
 <tr>
 <td><code>… entries dropped after their delivery attempts (queue-dead /var/queues/…: --retry or --drop)</code></td>
@@ -332,7 +332,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </div>
 <p><code>pipeline-overview</code> and <code>pool-stat</code> show the counts behind these checks, and <code>top</code> shows them live. <code>pipeline-repair</code> finds instances marked finished while steps of theirs still wait, and with <code>--apply</code> sets them running again; run it without <code>--apply</code> first to see what it would change.</p>
 <h2 id="thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing<a class="anchor" href="#thumbnails-faces-and-text-are-missing" aria-label="Link to this section"></a></h2>
-<p>Thumbnails, video renditions, faces, captions, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.</p>
+<p>Thumbnails, video renditions, faces, picture vectors, transcriptions and the text of documents all come from the media service, a container of its own. When it is missing or not answering, the work waits for it and nothing fails.</p>
 <ol>
 <li><p>See whether EiN reaches it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -434,7 +434,7 @@ service-start archive-bridge</code></pre></div>
 <p>To make room:</p>
 <ul>
 <li>Trashed files are removed for good after <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a>, 30 days unless changed. An administrator can empty it sooner, <code>trash empty --all --older-than 7</code> for what everyone trashed over a week ago.</li>
-<li>Old images from earlier updates stay in the container engine&#39;s storage. <code>podman image prune</code> removes the untagged ones that earlier builds left behind.</li>
+<li><code>setup.sh</code> removes the images an update replaced once the new EiN answers. Other images without a name, such as a build&#39;s intermediate stages, stay in the container engine&#39;s storage; <code>podman image prune</code> removes them.</li>
 </ul>
 <p><a href="performance.html">Performance and sizing</a> says how much room EiN needs.</p>
 <h2 id="a-change-made-something-worse">A change made something worse<a class="anchor" href="#a-change-made-something-worse" aria-label="Link to this section"></a></h2>

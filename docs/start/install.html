@@ -145,7 +145,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
 <span class="hljs-built_in">sudo</span> apt install podman podman-compose git curl openssl</code></pre></div>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>When both podman and Docker are installed, EiN uses podman. To use Docker, put <code>EIN_ENGINE=docker</code> in front of <code>bash</code> in the install command, and in front of every later <code>./setup.sh</code>: it is not remembered. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
+<p>When both podman and Docker are installed, EiN uses podman. To use Docker, put <code>EIN_ENGINE=docker</code> in front of <code>bash</code> in the install command. <code>setup.sh</code> keeps the engine in <code>.env</code>, and every later run uses it. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
 </aside>
 <h2 id="choose-what-to-install">Choose what to install<a class="anchor" href="#choose-what-to-install" aria-label="Link to this section"></a></h2>
 <p>There are two install commands. Both check the machine first and install nothing when it falls short.</p>
@@ -182,7 +182,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive
 </tbody></table>
 </div>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>The Archive module needs the media service. <code>setup.sh</code> gives no warning when you install <code>--module archive</code> without <code>--ems</code>, but nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. <a href="../admin/modules.html">Modules</a> lists what each module needs.</p>
+<p>The Archive module needs the media service. Installed with <code>--module archive</code> but without <code>--ems</code>, it still installs: the installer&#39;s <code>archive</code> line says <code>low</code>, and <code>setup.sh</code> ends with <code>The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.</code> Nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. <a href="../admin/modules.html">Modules</a> lists what each module needs.</p>
 </aside>
 <h3 id="check-the-machine-without-installing">Check the machine without installing<a class="anchor" href="#check-the-machine-without-installing" aria-label="Link to this section"></a></h3>
 <p><code>EIN_CHECK=1</code> runs the checks for the options you give and stops. A variable for the installer goes in front of <code>bash</code>, not in front of <code>curl</code>:</p>
@@ -266,7 +266,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 </div>
 <p>The disk check measures the free space where your files go. The images and the database are kept in the container engine&#39;s own storage (for rootless podman, usually under <code>~/.local/share/containers</code>), which is often the same disk but need not be: that disk needs the room too.</p>
 <h2 id="what-the-installer-does">What the installer does<a class="anchor" href="#what-the-installer-does" aria-label="Link to this section"></a></h2>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account with a random password, fetches and sets up the modules, takes the CFG_ lines of .env as settings and starts its services, and the installer reads the password from EiN's log">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password">
   <title>What the installer does</title>
   <defs>
     <marker id="start-install-md-1-install-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -321,7 +321,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <line x1="376" y1="446" x2="438" y2="446" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
   <text x="408" y="436" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">starts</text>
   <line x1="440" y1="516" x2="378" y2="516" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
-  <text x="408" y="506" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its log</text>
+  <text x="408" y="506" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">answers</text>
 
   
   <rect x="440" y="24" width="336" height="516" rx="12" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
@@ -337,7 +337,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 
   <rect x="456" y="173" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="474" y="193" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The admin account</text>
-  <text x="474" y="211" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a random password, printed to its log</text>
+  <text x="474" y="211" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its first password from .env, or a random one</text>
   <line x1="608" y1="221" x2="608" y2="272" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
 
   <rect x="456" y="274" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -358,12 +358,12 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 <p>Once the checks pass, the installer:</p>
 <ol>
 <li>Fetches <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it when it is there already, and runs <code>~/ein/setup.sh</code> with your options.</li>
-<li><code>setup.sh</code> writes <code>~/ein/.env</code> the first time: your options, the folder for your files, and the passwords it makes for the database and the media service.</li>
+<li><code>setup.sh</code> writes <code>~/ein/.env</code> the first time: your options, the folder for your files, and the passwords it makes for the database, the media service and the <code>admin</code> account.</li>
 <li>It fetches the sources of EiN and its database, and of the media service and the model when you chose them, into <code>~/ein/src</code>.</li>
 <li>It builds the images on your machine. The language model&#39;s image is the one exception: it is downloaded ready-made.</li>
 <li>It starts everything with <code>podman compose</code> or <code>docker compose</code>, and waits for EiN to answer.</li>
-<li>At its first start, EiN sets up its database, makes the <code>admin</code> account with a random password, downloads the modules you named and the modules they need, sets them up and starts its services.</li>
-<li><code>setup.sh</code> prints the address of EiN and the admin password.</li>
+<li>At its first start, EiN sets up its database, makes the <code>admin</code> account, downloads the modules you named and the modules they need, sets them up, starts its services, and gives <code>admin</code> the password <code>INITIAL_ADMIN_PASSWORD</code> in <code>.env</code>.</li>
+<li><code>setup.sh</code> prints the address of EiN and the admin password, which it prints again at the end of every run until you delete its line from <code>.env</code>.</li>
 <li>It makes EiN start again when the machine does, where your user may: under podman it turns on <code>podman-restart.service</code> for your user and lets your user&#39;s services run without a login. What it may not do, it prints as commands for you to run, such as <code>sudo loginctl enable-linger anna</code>.</li>
 </ol>
 <p>The end of a run looks like this:</p>
@@ -385,7 +385,7 @@ Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a min
   …
 
 EiN is up at http://ein:8080/
-Sign in as admin with the password 0b7c2e4a-5d91-4f3e-a8c6-2f19d7e0b543, and change it: it is shown this once.
+Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.
 Enabled podman-restart.service, which starts EiN's containers at boot
 Enabled lingering for anna, so podman-restart.service runs at boot without a login
 EiN starts again when the machine does.</code></pre></div>
@@ -432,8 +432,8 @@ EiN starts again when the machine does.</code></pre></div>
 <h2 id="change-the-admin-password-straight-away">Change the admin password straight away<a class="anchor" href="#change-the-admin-password-straight-away" aria-label="Link to this section"></a></h2>
 <p>Do this before anything else:</p>
 <ul>
-<li>The password is printed this once.</li>
-<li>The copy in the container&#39;s log is gone once the containers are made again, which the next <code>setup.sh</code> run does.</li>
+<li>The password is in <code>~/ein/.env</code>, as <code>INITIAL_ADMIN_PASSWORD</code>, readable by anyone who can read that file, and <code>setup.sh</code> prints it at the end of every run while the line is there.</li>
+<li>Once you have changed it, delete that line from <code>.env</code>. Changing the line does not change the password: EiN reads it only at its first start.</li>
 <li>EiN has no way to recover a lost administrator password. Only another administrator can set a new one, and a fresh install has no other.</li>
 </ul>
 <h3 id="in-the-web-interface">In the web interface<a class="anchor" href="#in-the-web-interface" aria-label="Link to this section"></a></h3>
@@ -459,7 +459,7 @@ user passwd admin</code></pre></div>
 ~/ein/setup.sh --module archive   <span class="hljs-comment"># a module, with the modules it needs</span></code></pre></div>
 <ul>
 <li>An option is kept in <code>.env</code> once given, so a later run without it keeps it. Give each option only when you add it.</li>
-<li>Every run of <code>setup.sh</code> is also an update: it fetches the newest sources of what is installed, builds again and restarts EiN, which is down while it starts. <a href="../admin/updating.html">Updating</a> has the details.</li>
+<li>Every run of <code>setup.sh</code> is also an update: it brings <code>~/ein</code> itself up to date, fetches the newest sources of what is installed, builds again and restarts EiN, which is down while it starts. <a href="../admin/updating.html">Updating</a> has the details.</li>
 <li>A module given with <code>--module</code> is installed by EiN at its next start, which that same run brings about.</li>
 <li><code>--no-ems</code> and <code>--no-llm</code> take the media service or the model out again. Their data stays.</li>
 </ul>
@@ -500,11 +500,11 @@ user passwd admin</code></pre></div>
 </tr>
 <tr>
 <td>Starting fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code></td>
-<td>The container engine cannot hand the graphics card to the containers. podman 4.9.3, as on Ubuntu 24.04, needs a fix once per machine: see <a href="../admin/gpu.html">The graphics card</a>.</td>
+<td>The container engine cannot hand the graphics card to the containers. podman before 5, such as 4.9.3 on Ubuntu 24.04, needs a fix once per machine, which the installer&#39;s <code>container GPU</code> line names: see <a href="../admin/gpu.html">The graphics card</a>.</td>
 </tr>
 <tr>
 <td>No <code>Sign in as admin</code> line at the end</td>
-<td>Look for it in the log, below. When nothing is there, either the database was there from an earlier install, so the admin already had a password, or the containers have been made again after the install. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
+<td><code>.env</code> has no <code>INITIAL_ADMIN_PASSWORD</code> line: you deleted it, or <code>.env</code> was written before <code>setup.sh</code> kept the password there. In the second case a new EiN printed a random password to its log, below. When nothing is there, the database was there from an earlier install, so the admin already had a password, or the containers have been made again since. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
 </tr>
 <tr>
 <td><code>some of INSTALL_MODULES could not be installed; continuing boot</code> in the log</td>
@@ -520,11 +520,11 @@ user passwd admin</code></pre></div>
 </tr>
 <tr>
 <td>Uploads in the Archive get no thumbnails</td>
-<td>The media service is not installed, or is not answering yet. Add it with <code>~/ein/setup.sh --ems</code>, or see <a href="../admin/media-service.html">The media service</a>.</td>
+<td>The media service is not installed, or is not answering yet. Without it, the installer&#39;s <code>archive</code> line says <code>low</code> and <code>setup.sh</code> ends with <code>The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.</code> Add it with <code>~/ein/setup.sh --ems</code>, or see <a href="../admin/media-service.html">The media service</a>.</td>
 </tr>
 </tbody></table>
 </div>
-<p>To find the admin password in the log, as long as the containers have not been made again after the install:</p>
+<p>To find a random admin password in the log, as long as the containers have not been made again since:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 <span class="hljs-built_in">cd</span> ~/ein &amp;&amp; podman compose logs ein | grep <span class="hljs-string">&#x27;Admin password set to&#x27;</span></code></pre></div>
 <p><a href="../admin/troubleshooting.html">Troubleshooting</a> has more questions and answers.</p>

@@ -91,8 +91,8 @@ get answers as JSON.</p>
 <p>The terminal itself, with its tabs, keys, history and <kbd>Tab</kbd> completion, has a page of its
 own: <a href="terminal.html">The terminal</a>. <a href="commands.html">Commands by task</a> tells you which command does what.</p>
 <h2 id="bash-on-a-tree-of-nodes">Bash, on a tree of nodes<a class="anchor" href="#bash-on-a-tree-of-nodes" aria-label="Link to this section"></a></h2>
-<p>The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Everything
-the language has is there:</p>
+<p>The shell is a bash written for EiN and tested against the test suite of GNU bash 5.2. Nearly all
+of the language is there:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -234,9 +234,8 @@ interface and over SSH. <a href="../admin/permissions.html">Permissions in depth
 <code>export</code>, an alias or a function you define stays for the next command in that tab, and survives a
 page reload (see <a href="terminal.html#come-back-to-a-running-shell">Come back to a running shell</a>). Other
 tabs have shells of their own and do not see it.</p>
-<p>A command sent with <code>ssh host &#39;command&#39;</code> from your own computer, and every command the web pages
-run for you, gets a fresh shell that ends with the command. Join what belongs together with <code>&amp;&amp;</code> in
-one line:</p>
+<p>A command sent with <code>ssh host &#39;command&#39;</code> from your own computer gets a fresh shell that ends with
+the command. Join what belongs together with <code>&amp;&amp;</code> in one line:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;cd /archive/albums &amp;&amp; ls -1 | wc -l&#x27;</span></code></pre></div>
 <p><a href="ssh-sftp.html">SSH and SFTP</a> covers logging in from your own computer.</p>
@@ -244,8 +243,8 @@ ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;cd /archive/albums &
 <p>When a terminal tab or an SSH login opens, the shell reads, in this order:</p>
 <ol>
 <li><code>/etc/bashrc</code>, the same for everyone. It defines the aliases <code>ll</code> (<code>ls -al</code>), <code>la</code> (<code>ls -A</code>),
-<code>whoami</code> and <code>id</code>, and reads the settings: the administrator&#39;s in <code>/etc/config</code>, then your own in
-<code>~/.config</code>.</li>
+<code>whoami</code> and <code>id</code>, and reads the settings: the modules&#39; own, the administrator&#39;s in <code>/etc/config</code>,
+then your own in <code>~/.config</code>.</li>
 <li><code>~/.bashrc</code>, your own file, if you have one.</li>
 </ol>
 <p>EiN reads no <code>~/.bash_profile</code> or <code>~/.profile</code>. A command sent with <code>ssh host &#39;command&#39;</code> reads
@@ -269,8 +268,8 @@ edit ~/.bashrc</code></pre></div>
 <li><p>Run <code>source ~/.bashrc</code> to use it in the tab you are in. New tabs read it when they open.</p>
 </li>
 </ol>
-<p>A <code>~/.bashrc</code> that fails does not stop the shell from opening: the lines before the error have run,
-and you get a prompt. Fix the file and <code>source</code> it again.</p>
+<p>A <code>~/.bashrc</code> that fails does not stop the shell from opening: you get a prompt all the same. Fix
+the file and <code>source</code> it again.</p>
 <p>Some things to put there:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>

@@ -133,7 +133,7 @@
 <tr>
 <td><code>setup.sh</code></td>
 <td>the deployment</td>
-<td>Fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, builds the images and starts them.</td>
+<td>Brings this folder up to date, fetches the sources, writes <code>.env</code> and <code>compose.override.yaml</code>, builds the images and starts them.</td>
 </tr>
 <tr>
 <td><code>src/</code></td>
@@ -147,12 +147,15 @@
 </tr>
 </tbody></table>
 </div>
-<p>The files from the deployment are replaced when <code>setup.sh</code> updates the sources, so changes belong in <code>.env</code>, not in <code>compose.yaml</code>. <code>setup.sh --help</code> lists its options, and <a href="../admin/install.html">Installing in detail</a> explains each.</p>
-<p>The database is not in the folder: it is the container engine&#39;s volume <code>ein_db</code>. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how to keep it.</p>
+<p>The files from the deployment are replaced when <code>setup.sh</code> brings the folder up to date at the start of every run, so changes belong in <code>.env</code>, not in <code>compose.yaml</code>. <code>setup.sh --help</code> lists its options, and <a href="../admin/install.html">Installing in detail</a> explains each.</p>
+<p>The database is not in the folder: it is the container engine&#39;s volume <code>ein_db</code>, or the folder <code>setup.sh --db-dir</code> named. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how to keep it.</p>
 <h3 id="env">.env<a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
-<p><code>.env</code> is read in two ways. Compose reads it to fill in <code>compose.yaml</code>, and EiN&#39;s and the media service&#39;s containers get every line of it as their environment. <code>setup.sh</code> writes it once, with mode <code>0600</code>, and from then on changes only the lines its options set: <code>EIN_EMS</code>, <code>EIN_LLM</code> and <code>EIN_MODULES</code>.</p>
+<p><code>.env</code> is read in two ways. Compose reads it to fill in <code>compose.yaml</code>, and EiN&#39;s and the media service&#39;s containers get every line of it as their environment. <code>setup.sh</code> writes it once, with mode <code>0600</code>, and from then on changes only the lines its options set: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MODULES</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>, and adds <code>EIN_ENGINE</code> to a <code>.env</code> written before it had that line. It also moves <code>EIN_HTTP_PORT</code> or <code>EIN_SSH_PORT</code> to the next free port when another program holds it, and with a Forgejo or Gitea source keeps <code>CFG_MODULE_SOURCES</code> and <code>CFG_MODULE_SOURCES_KEY</code> in step with <code>EIN_SOURCE</code>.</p>
 <p>The file the installer writes looks like this, with your own values:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, on the machine EiN runs on</span>
+<span class="hljs-attr">COMPOSE_PROJECT_NAME</span>=ein
+<span class="hljs-attr">EIN_ENGINE</span>=podman
+
 <span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">0</span>
@@ -164,6 +167,8 @@
 <span class="hljs-attr">EMS_KEY</span>=…
 <span class="hljs-attr">TZ</span>=Europe/London
 
+<span class="hljs-attr">INITIAL_ADMIN_PASSWORD</span>=…
+
 <span class="hljs-attr">EIN_BIND</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
 <span class="hljs-attr">EIN_HTTP_PORT</span>=<span class="hljs-number">8080</span>
 <span class="hljs-attr">EIN_SSH_PORT</span>=<span class="hljs-number">2222</span>
@@ -173,7 +178,10 @@
 <span class="hljs-comment"># CFG_LLM_PROVIDER=OpenAI</span>
 <span class="hljs-comment"># CFG_LLM_MODEL=</span>
 
-<span class="hljs-attr">EIN_GIT</span>=https://github.com/einhq</code></pre></div>
+<span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
+<span class="hljs-attr">EIN_SOURCE_KEY</span>=
+
+EIN_DB_DIR=</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -183,6 +191,16 @@
 </tr>
 </thead>
 <tbody><tr>
+<td><code>COMPOSE_PROJECT_NAME</code></td>
+<td><code>ein</code>, the name of the containers, network and volumes.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>EIN_ENGINE</code></td>
+<td><code>podman</code> or <code>docker</code>, the engine <code>setup.sh</code> picked at the install and keeps to.</td>
+<td><a href="../admin/install.html">Installing in detail</a></td>
+</tr>
+<tr>
 <td><code>EIN_EMS</code></td>
 <td><code>1</code> runs the media service. <code>--ems</code> and <code>--no-ems</code> set it.</td>
 <td><a href="../admin/media-service.html">The media service</a></td>
@@ -223,6 +241,11 @@
 <td><a href="environment.html#set-by-the-deployment">Environment variables</a></td>
 </tr>
 <tr>
+<td><code>INITIAL_ADMIN_PASSWORD</code></td>
+<td>The <code>admin</code> account&#39;s first password, made at the install. EiN takes it at its first start only; <code>setup.sh</code> prints it at the end of every run until you delete the line, once you have changed the password.</td>
+<td><a href="../start/install.html#change-the-admin-password-straight-away">Install EiN</a></td>
+</tr>
+<tr>
 <td><code>EIN_BIND</code></td>
 <td>The address the ports are published on. <code>127.0.0.1</code> keeps them to the machine.</td>
 <td><a href="../admin/network.html">Ports, HTTPS and remote access</a></td>
@@ -243,8 +266,18 @@
 <td><a href="../admin/language-model.html">The language model</a></td>
 </tr>
 <tr>
-<td><code>EIN_GIT</code></td>
-<td>Where the sources are cloned from.</td>
+<td><code>EIN_SOURCE</code></td>
+<td>The organisation the sources are cloned from. <code>--source</code> sets it.</td>
+<td><a href="../admin/install.html">Installing in detail</a></td>
+</tr>
+<tr>
+<td><code>EIN_SOURCE_KEY</code></td>
+<td>The token that reads the source&#39;s repositories when they are private.</td>
+<td><a href="../admin/install.html">Installing in detail</a></td>
+</tr>
+<tr>
+<td><code>EIN_DB_DIR</code></td>
+<td>The database&#39;s folder; empty keeps it in the engine&#39;s volume <code>ein_db</code>. <code>--db-dir</code> sets it.</td>
 <td><a href="../admin/install.html">Installing in detail</a></td>
 </tr>
 </tbody></table>
@@ -284,24 +317,30 @@
 <p>To apply a change to <code>.env</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
-<p>Running <code>./setup.sh</code> applies it too, but also fetches and builds the newest sources; <a href="../admin/updating.html">Updating</a> explains it. Change <code>EIN_EMS</code>, <code>EIN_LLM</code> or <code>EIN_GPU</code> with <code>setup.sh</code>, since only it writes them into <code>compose.override.yaml</code>.</p>
+<p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, which <code>setup.sh</code> gives each one: the media service&#39;s idle models then go to swap, and a search waits for them. Running <code>./setup.sh</code> makes the containers again with it, and applies <code>.env</code> too, but also fetches and builds the newest sources; <a href="../admin/updating.html">Updating</a> explains it. After a change to <code>EIN_EMS</code>, <code>EIN_LLM</code> or <code>EIN_GPU</code>, run <code>setup.sh</code>, since only it writes them into <code>compose.override.yaml</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p><code>.env</code> holds the database password and the media service&#39;s key, and no other file keeps them. Keep a copy of it with your backups.</p>
 </aside>
 <h3 id="composeoverrideyaml">compose.override.yaml<a class="anchor" href="#composeoverrideyaml" aria-label="Link to this section"></a></h3>
-<p><code>setup.sh</code> writes this file from <code>.env</code> on every run, and every compose reads it beside <code>compose.yaml</code> on its own, so <code>podman compose up -d</code> starts the same services as <code>setup.sh</code> does. With the media service, the language model and a card it reads:</p>
-<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># Written by setup.sh from the options in .env; edit those and run setup.sh again.</span>
+<p><code>setup.sh</code> writes this file from <code>.env</code> on every run, and every compose reads it beside <code>compose.yaml</code> on its own, so <code>podman compose up -d</code> starts the same services as <code>setup.sh</code> does. Under podman, with the media service, the language model and a card, it reads:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># Written by setup.sh from the options in .env and the container engine; edit those and run</span>
+<span class="hljs-comment"># setup.sh again.</span>
 <span class="hljs-attr">services:</span>
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">ems:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">llm:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
-  <span class="hljs-attr">ein:</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
-<p>A change made by hand is gone at the next run of <code>setup.sh</code>.</p>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span></code></pre></div>
+<p>Under podman every service gets <code>restart: always</code>, the policy podman starts again at boot; under Docker those lines are left out. A change made by hand is gone at the next run of <code>setup.sh</code>.</p>
 <h3 id="the-data-folder">The data folder<a class="anchor" href="#the-data-folder" aria-label="Link to this section"></a></h3>
 <p><code>EIN_DATA</code> is the folder for what is yours outside the database. <code>setup.sh</code> makes its subfolders, and the containers mount them:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -543,7 +582,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <li>At every start, boot moves the four lines that source the settings files to the end, so they come after anything you add.</li>
 </ul>
 <p><code>/etc/layout</code> exports where each folder of the tree is, such as <code>ETC_PATH</code> and <code>LOGS_PATH</code>, and where the data folders are on the machine (<code>EIN_FILE_ROOT_PATH</code>, <code>EIN_VOLATILE_FILE_ROOT_PATH</code>, <code>EIN_FILE_TMP_PATH</code>). Boot writes it whole at every start; leave it alone. <a href="environment.html#folders-in-the-tree">Folders in the tree</a> lists the variables.</p>
-<p>A change to <code>/etc/bashrc</code> reaches shells opened after it. In a tab that is already open, run <code>source /etc/bashrc</code>. Put aliases and settings of your own in <code>~/.bashrc</code> instead, which is yours alone.</p>
+<p>A change to <code>/etc/bashrc</code> reaches every shell before its next command, an open terminal tab included; a command already running keeps what it started with. Put aliases and settings of your own in <code>~/.bashrc</code> instead, which is yours alone.</p>
 <h3 id="your-shell-files">Your shell files<a class="anchor" href="#your-shell-files" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -737,7 +776,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tr>
 <tr>
 <td>A change to <code>/etc/config</code>, <code>~/.config</code> or <code>/etc/bashrc</code> does not show in the terminal</td>
-<td>The tab was open before the change. Open a new tab, or run <code>source /etc/bashrc</code>.</td>
+<td>A command that was already running keeps the environment it started with; the next command reads the change. A service&#39;s own loop keeps it too until the service restarts.</td>
 </tr>
 <tr>
 <td>A service still uses the old value after a hand edit</td>

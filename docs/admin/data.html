@@ -99,7 +99,7 @@
 </thead>
 <tbody><tr>
 <td>The database</td>
-<td>the volume <code>ein_db</code> in the container engine&#39;s storage</td>
+<td>the volume <code>ein_db</code> in the container engine&#39;s storage, or the folder <code>EIN_DB_DIR</code> names</td>
 <td>every node of the tree: names, folders, albums, people, faces, links, permissions, accounts and settings, and small content such as comments and keys</td>
 <td>Yes, as a dump</td>
 </tr>
@@ -197,7 +197,7 @@ podman compose start ein</code></pre></div>
 <h2 id="restore-a-backup">Restore a backup<a class="anchor" href="#restore-a-backup" aria-label="Link to this section"></a></h2>
 <p>A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.</p>
 <ol>
-<li><p>Install EiN with the same options as before, such as <code>--ems --module archive</code>, as <a href="../start/install.html">Install EiN</a> describes. The installer starts an empty EiN and prints a new admin password; that password stops mattering after the restore, when the accounts from your backup apply.</p>
+<li><p>Install EiN with the same options as before, such as <code>--ems --module archive</code>, as <a href="../start/install.html">Install EiN</a> describes. The installer starts an empty EiN and prints a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. Delete its <code>INITIAL_ADMIN_PASSWORD</code> line from the new <code>.env</code> then, or <code>setup.sh</code> keeps showing a password that no longer signs in.</p>
 </li>
 <li><p>Compare the new <code>~/ein/.env</code> with the copy in your backup, and copy over the lines you added yourself, such as <code>CFG_</code> settings, ports or memory limits. Keep the new <code>POSTGRES_PASSWORD</code> and <code>EMS_KEY</code>: the new database was made with them. Check <code>EIN_GPU</code> too, which says whether this machine has a graphics card for EiN; see <a href="gpu.html">The graphics card</a>.</p>
 </li>
@@ -233,7 +233,7 @@ podman compose up -d</code></pre></div>
 <p>With the Archive installed, the <a href="../reference/commands-archive.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, face crops included. After a restore without <code>files-volatile</code>, the database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 <span class="hljs-built_in">nohup</span> regenerate --force /archive</code></pre></div>
-<p><a href="../reference/commands-core.html#nohup"><code>nohup</code></a> lets it run on when you close the terminal and logs it under <code>/var/logs/jobs</code>. It needs the media service, and over a large archive it takes as long as the first processing did. <code>regenerate --force /archive/albums/Summer 1987</code> does one album first, so you can check the result.</p>
+<p><a href="../reference/commands-core.html#nohup"><code>nohup</code></a> lets it run on when you close the terminal and logs it under <code>/var/logs/jobs</code>. It needs the media service, and over a large archive it takes as long as the first processing did. <code>regenerate --force &#39;/archive/albums/Summer 1987&#39;</code> does one album first, so you can check the result.</p>
 <h2 id="move-ein-to-another-machine">Move EiN to another machine<a class="anchor" href="#move-ein-to-another-machine" aria-label="Link to this section"></a></h2>
 <p>Moving is a backup on the old machine and a restore on the new one:</p>
 <ol>
@@ -265,7 +265,7 @@ podman compose up -d</code></pre></div>
 </li>
 </ol>
 <p>Check that pictures and thumbnails show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.</p>
-<p>The database volume is not in the data folder and does not move with it. It lives in the container engine&#39;s storage, under <code>~/.local/share/containers/storage</code> for rootless podman and <code>/var/lib/docker</code> for Docker, and the installation has no setting of its own for where that is.</p>
+<p>The database is not in the data folder and does not move with it. It lives in the container engine&#39;s storage, under <code>~/.local/share/containers/storage</code> for rootless podman and <code>/var/lib/docker</code> for Docker, unless <code>EIN_DB_DIR</code> in <code>.env</code> names a folder for it. To put it on another disk, run <code>./setup.sh --db-dir /srv/ein-db</code> with an empty folder: while the database is still in the volume, <code>setup.sh</code> stops and prints the commands that copy it there first.</p>
 <h2 id="get-your-files-out-without-ein">Get your files out without EiN<a class="anchor" href="#get-your-files-out-without-ein" aria-label="Link to this section"></a></h2>
 <p>The data folder holds your files under ids, not names, so copying it gives you nothing you can browse. To get files out with their names and folders, take them out through EiN:</p>
 <ul>
@@ -285,7 +285,7 @@ tier    volatile   41% used  1.1 TB free  full in ~212d
 tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB</code></pre></div>
 <p><code>disk</code> is <code>files</code>, <code>volatile</code> is <code>files-volatile</code> and <code>tmp</code> is <code>files-tmp</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive/albums</code>.</p>
-<p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update builds new images and leaves the old ones behind; <code>podman image prune</code> removes those that nothing uses any more.</p>
+<p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update builds new images and removes the ones they replaced; <code>podman image prune</code> removes other images without a name that nothing uses any more.</p>
 <h2 id="delete-things-and-free-space">Delete things and free space<a class="anchor" href="#delete-things-and-free-space" aria-label="Link to this section"></a></h2>
 <p>What you delete in the web interface goes to the deleter&#39;s trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a> (<strong>Days in the trash</strong>, under <strong>Settings → System</strong>). Only then does EiN remove the files from the data folder. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> explains the trash, and which ways of deleting skip it.</p>
 <p>To free the room at once, an administrator can empty every account&#39;s trash:</p>
@@ -325,7 +325,7 @@ trash empty --all</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose down
 podman volume <span class="hljs-built_in">rm</span> ein_db</code></pre></div>
-<p><code>podman volume rm ein_db</code> deletes the database for good: every name, album, person, account and setting.</p>
+<p><code>podman volume rm ein_db</code> deletes the database for good: every name, album, person, account and setting. If <code>EIN_DB_DIR</code> in <code>.env</code> names a folder, the database is there instead: remove that folder with <code>podman unshare rm -rf</code> and its path (under Docker, <code>sudo rm -rf</code>).</p>
 </li>
 <li><p>Remove the images:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
@@ -334,10 +334,10 @@ podman image <span class="hljs-built_in">rm</span> localhost/ein-ems    <span cl
 podman image prune</code></pre></div>
 <p>The language model&#39;s image is llama.cpp&#39;s, from <code>ghcr.io/ggml-org/llama.cpp</code>; <code>podman images</code> lists it if you want it gone too.</p>
 </li>
-<li><p>If you made a systemd service to start EiN at boot, as <a href="install.html#start-ein-when-the-machine-boots">Installing in detail</a> shows, turn it off and remove it:</p>
+<li><p>Under podman, <code>setup.sh</code> turned on <code>podman-restart.service</code> and lingering for your user, so that EiN starts at boot (see <a href="install.html#start-ein-when-the-machine-boots">Installing in detail</a>). With EiN&#39;s containers gone they start nothing of EiN&#39;s; if no other container of yours needs them, turn them off:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
-systemctl --user <span class="hljs-built_in">disable</span> --now ein.service
-<span class="hljs-built_in">rm</span> ~/.config/systemd/user/ein.service</code></pre></div>
+systemctl --user <span class="hljs-built_in">disable</span> podman-restart.service
+loginctl disable-linger</code></pre></div>
 </li>
 <li><p>Remove the installation and the data folder, which holds your originals:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>

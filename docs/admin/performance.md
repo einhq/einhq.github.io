@@ -17,7 +17,7 @@ Nothing limits how many cores a container uses. The heavy work is in the media s
 
 ## Choose a machine
 
-The installer checks the machine against these figures before it installs anything ([What the checks measure](install.md#what-the-checks-measure)):
+The installer checks the machine against the first two rows of these figures before it installs anything ([What the checks measure](install.md#what-the-checks-measure)); the language model's row is advice it does not check:
 
 | What you install                          | Processor                      | Memory                                             | Free disk                     |
 | ----------------------------------------- | ------------------------------ | -------------------------------------------------- | ----------------------------- |
@@ -25,7 +25,7 @@ The installer checks the machine against these figures before it installs anythi
 | With the media service (`--ems`)          | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files |
 | With the language model as well (`--llm`) | as above                       | about 5.6 GB more, unless the model is on the card | as above                      |
 
-Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10), which is why 32 GB is the recommended memory with both options; on 16 GB, leave the language model out or use a hosted one, as [The language model](language-model.md) describes.
+Cores are physical cores, not threads. The default limits of the three containers add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](language-model.md) describes.
 
 What the figures mean in practice:
 
@@ -58,6 +58,8 @@ A memory limit is a ceiling, not a reservation: a container uses what it needs u
 
    compose makes again the containers whose settings changed. EiN is down while it restarts. With Docker, write `docker compose`.
 
+   Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, so it may swap as much again as its memory limit; `./setup.sh` makes the containers again with the swap limit.
+
 3. Check the new limit. In EiN's terminal, `top` shows EiN's memory against its limit in its **Memory** panel, for example `367 MB of 6.0 GB`.
 
 ![EiN's top in the terminal: a CPU graph for the machine's 6 cores, a Memory panel with RAM at 367 MB of 6.0 GB and the heap, a Disk panel with the free space and when it fills, the Work panel saying nothing is waiting, and lists of sessions, processes and services](../../assets/shots/terminal-top.webp "top shows EiN's memory against its container's limit, so you see how close it comes.")
@@ -67,7 +69,7 @@ How to choose the limits:
 - **Keep the limits together below the machine's memory**, with a few GB to spare for the database, which has no limit, and for the system itself. A container that grows is then stopped at its own limit, and the kernel does not have to pick a process to stop somewhere else on the machine.
 - **`EIN_MEMORY`**: EiN itself, its shells and its pipelines. Raise it from the default of 6 GB if `top` shows EiN close to its limit during an import.
 - **`EMS_MEMORY`**: the media service holds the models it is using and decodes videos. A video decoded on the processor is planned within a budget of 4000 MB (`EMS_CPU_ENCODE_MAX_MB`) and split into parts when it would need more, so keep the limit well above that. Its main model process restarts itself when it passes 60% of the limit, so the rest is left for the decoding and the tools.
-- **`LLM_MEMORY`**: the model and its working memory. The default fits the default model; a larger model needs more, as [The language model](language-model.md) explains.
+- **`LLM_MEMORY`**: the model and its working memory. The default fits the default model; [The language model](language-model.md) explains which other models the container can run.
 
 ### When a container reaches its limit
 
@@ -93,7 +95,7 @@ New files go through pipelines, and the pipelines' heavy steps go to two workers
 
 The CPU budget is shared by cost: most jobs take 1 of it, and a video's encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.
 
-The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, 15 minutes) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.
+The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.
 
 The media service has its own limits on how much it runs at once, set in `~/ein/.env`:
 
@@ -156,7 +158,7 @@ df
 
 The same figures are on the **Dashboard**, and `top`'s **Disk** panel shows them live. [Files and storage](../concepts/files.md) explains the tiers.
 
-The container engine keeps the images, the build's scratch files and the database in its own storage, usually `~/.local/share/containers` for rootless podman and `/var/lib/docker` for Docker, which may be another disk than your data folder. Each update builds new images, and nothing removes the old ones by itself. To see what they take, and to remove the images no container uses:
+The container engine keeps the images, the build's scratch files and the database in its own storage, usually `~/.local/share/containers` for rootless podman and `/var/lib/docker` for Docker, which may be another disk than your data folder. Each update builds new images, and `setup.sh` removes the ones they replaced once the new EiN answers; a build's intermediate stages and other images without a name stay. To see what the images take, and to remove the unnamed ones no container uses:
 
 ```bash
 # on the machine EiN runs on
@@ -170,15 +172,15 @@ With Docker, write `docker` for `podman`. `podman image prune` removes only imag
 
 Whether the machine is big enough shows in whether it keeps up with the work:
 
-| Where                            | What it tells you                                                                                                                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **Dashboard**'s badge        | **Healthy**: nothing is waiting. **Catching up**: work is waiting and some finished in the last hour. **Stuck**: work is waiting and none finished in the last hour |
-| The **Dashboard**'s **Work** tab | Each kind of work, what is left of it, how fast it goes, and when it will be done                                                                                   |
-| `top`                            | The processor, EiN's memory and the event loop's lag, the disks, and the work, live                                                                                 |
-| `host-metrics`                   | EiN's processor and memory use now and over the last 6 hours (`--window` in minutes)                                                                                |
-| `pool-stat`                      | The backlog, rates and policy of each kind of work in the queues                                                                                                    |
-| `gauges`                         | What the running services report beside the machine's figures, such as the card's memory                                                                            |
-| `ems-status`                     | The media service's models, what it is running, its queues and the memory of its model processes                                                                    |
+| Where                            | What it tells you                                                                                                                                                                                                                      |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Dashboard**'s badge        | **Healthy**: nothing is waiting. **Catching up**: work is waiting and some of it, or a pipeline instance, finished in the last hour. **Stuck**: work is waiting and none finished in the last hour. **Needs a person**: a check failed |
+| The **Dashboard**'s **Work** tab | Each kind of work, what is left of it, how fast it goes, and when it will be done                                                                                                                                                      |
+| `top`                            | The processor, EiN's memory and the event loop's lag, the disks, and the work, live                                                                                                                                                    |
+| `host-metrics`                   | EiN's processor and memory use now and over the last 6 hours (`--window` in minutes)                                                                                                                                                   |
+| `pool-stat`                      | The backlog, rates and policy of each kind of work in the queues                                                                                                                                                                       |
+| `gauges`                         | What the running services report beside the machine's figures, such as the card's memory                                                                                                                                               |
+| `ems-status`                     | The media service's models, what it is running, its queues and the memory of its model processes                                                                                                                                       |
 
 **Catching up** after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a **Work** tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. [Health and the dashboard](monitoring.md) explains the badge, the checks and the tabs.
 

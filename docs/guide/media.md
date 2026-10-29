@@ -16,9 +16,9 @@ The page works in two ways:
 ### Browse the feed
 
 - Each section is headed by its date, such as "29 June 2026", and the number of pictures in it. As you scroll, the date of the section you are in stays at the top of the page.
-- Click a date heading to select everything from that day. Click it again to clear the day.
+- Click a date heading to select everything under it. Click it again to clear the selection.
 - A picture known only to a year, such as a scan dated 1975, sits under the year alone. Pictures with no date at all come last, under **Undated**. [Dates and places of pictures](dates-places.md) explains where dates come from.
-- Above the feed, round rings stand for **On this day**: one for each earlier year with pictures taken on today's date, marked "1 year ago", "12 years ago" and so on. A ring plays that year's pictures as a story. [Home, memories and statistics](home.md) describes it.
+- Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today's date, marked "1 year ago", "12 years ago" and so on. A ring plays that year's pictures as a story. [Home, memories and statistics](home.md) describes it.
 - Once the feed holds more than 120 pictures, a time rail runs down the right edge of the page. Drag it to move through the years; the feed loads the pictures from the date you drag to.
 - Click a picture to open it in the viewer, where the arrows walk through the feed. The viewer's "N of M" counter is not shown here, because the feed loads part of the archive at a time. [Viewing photos, videos and recordings](viewer.md) covers the viewer.
 - On a phone, in the **Default** layout, pinch the grid to fit between 2 and 5 pictures across.
@@ -72,7 +72,7 @@ Type in the box, where it says "Filter the media — “Anna sailing 2011”, or
 - `@` opens a list of people, locations, labels, devices and albums. Pick one to keep only the pictures that have it: `@Peggy Wrenfield`, `@The cottage at Malpas`, `#sailing`.
 - The picture button beside the box, **Search with a picture**, finds what looks like a picture from your device, such as a photo of an old print.
 
-The results are one grid, best matches first. Where the search scores how well a picture matches, as it does for words and for a picture, each tile shows the score as a percentage. The search is kept in the page's address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.
+The results are one grid, best matches first. Each tile shows its score as a percentage, measured against the best match, which is 100%. The search is kept in the page's address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.
 
 [Search and the finder](search.md) explains the rest: how the box reads a sentence, the **Interpreted filter** beside the box, what needs the media service and what a language model adds.
 
@@ -197,7 +197,7 @@ The Search page's **Labels** section also lists suggested labels, drawn outlined
 
 Every label is also a folder: `/archive/tags/<label>` holds a link to each picture, album, person, location or device that carries the label. You can look through it in the terminal, for example with `ls /archive/tags/sailing`. [Links](../concepts/links.md) explains links in the tree.
 
-The folder is for browsing. The label itself is kept on the node that carries it, and that is what searches read, so put labels on and take them off with the dialogs or with `label add` and `label remove`, not by adding or deleting links in the folder. When something labelled is deleted, its link in the folder goes with it, and `label prune` clears any link left pointing at nothing. A label is listed while at least one thing carries it.
+A label is kept in two places: on the node that carries it, which the label pills count, and as the link in the folder, which a search for the label reads. The dialogs, `label add` and `label remove` keep the two in step, so put labels on and take them off with those, not by adding or deleting links in the folder. When something labelled is deleted, its link in the folder goes with it, and `label prune` clears any link left pointing at nothing. A label is listed while at least one thing carries it.
 
 ### Let EiN suggest where a label belongs
 
@@ -208,7 +208,7 @@ When you are signed in and the Search page or the Media page asks for exactly on
 3. Look through the suggestions: pictures and albums that do not carry the label yet, the most alike first.
 4. Select the pictures that belong and press **Label sailing**, or select the ones that do not and press **Not sailing**. An album's card has its own **Label** and **Not sailing** buttons.
 
-EiN learns from each answer: the model and the suggestions are worked out again at once, and what you marked as not the label is left out of the suggestions from then on. **Show all** opens the Media page with every picture ranked by how much it looks like the label, under the chip **Looks like sailing**. **Hide** folds the bar.
+EiN learns from each answer: the model and the suggestions are worked out again at once, and what you marked as not the label is left out of the suggestions from then on. **Show all** opens the Media page with every picture that looks like the label and does not carry it yet, the most alike first, under the chip **Looks like sailing**. **Hide** folds the bar.
 
 When the model is good enough to stand on its own, the bar says how many pictures it would add, for example "40 more look like it", before you open it. For a suggested label that nothing carries yet, the bar opens by itself, because the suggestions are all there is.
 
@@ -248,7 +248,7 @@ The Media page, the Year page and labels all run ordinary commands, which you ca
 # in EiN's terminal
 search --tag sailing --kind photo,video          # pictures that carry a label
 search 'christmas tree' --kind photo             # pictures by what they show
-timeline --year 1968 --kind album,birth,death    # what the Year page shows for 1968
+timeline --year 1968 --kind album,auto-album,birth,death  # what the Year page shows for 1968
 labels                                           # every label in use, with its count
 label add '/archive/albums/Summer 2020' sailing  # put a label on an album
 label remove '/archive/albums/Summer 2020' sailing

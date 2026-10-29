@@ -73,13 +73,14 @@ following, so albums and suggestions keep pointing at it:
 
 A name already taken where something moves gets `-2`, `-3`. Run again, it finds nothing to do.
 
-| Option                 | What it does                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------- |
-| `--user <name>`        | Sets up that person's staging area. Without it, your own.                       |
-| `--all`                | Every account's.                                                                |
-| `--loose-batch <name>` | The Inbox folder that loose files of `files/` move into, instead of `unsorted`. |
-| `--layout-only`        | Makes the directories and categories and moves nothing. The service runs this.  |
-| `--dry-run`            | Says what it would do and does none of it.                                      |
+| Option                 | What it does                                                                                                                                                   |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--user <name>`        | Sets up that person's staging area. Without it, your own.                                                                                                      |
+| `--all`                | Every account's.                                                                                                                                               |
+| `--loose-batch <name>` | The Inbox folder that loose files of `files/` move into, instead of `unsorted`.                                                                                |
+| `--idle-minutes <n>`   | Leaves a loose file of `files/` where it is when it changed within the last `n` minutes, so a copy still being written is not moved. The service passes `360`. |
+| `--layout-only`        | Makes the directories and categories and moves nothing. The **Staging** page runs this.                                                                        |
+| `--dry-run`            | Says what it would do and does none of it.                                                                                                                     |
 
 ## The work behind staging
 
@@ -87,16 +88,16 @@ Nothing in staging needs you to start it. Each step below is a pipeline that sta
 when files arrive or change, or a service that runs on a timer. All of them run in EiN's pipeline
 engine, which [Processing and pipelines](processing.md) covers.
 
-| Pipeline or service               | Starts when                                                                                                       | What it does                                                                                                                                                                      |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `staging-unzip`                   | A zip anywhere in a category has finished uploading                                                               | Expands it into the folder it lies in (`unzip -n`), then removes it. One zip at a time.                                                                                           |
-| `staging-sidecars`                | A Google Takeout JSON or an XMP file lands in a category that pairs sidecars, about 30 seconds after the last one | Pairs each sidecar with its photo or video (`media-sidecars`), which gives the picture its date, place and caption. One run at a time.                                            |
-| `media-ingest` and the media work | A file lands                                                                                                      | Reads its date, place and camera, and checks whether it is an exact copy; then the thumbnails, faces, fingerprints and the rest, through the [media service](media-service.md).   |
-| `staging-retime`                  | Files move into a category with other time rules, about 10 seconds after the last one                             | Dates them again by the rules of the category they are in now (`staging retime`).                                                                                                 |
-| `staging-organize`                | A category's files arrive, leave, move or are read, or someone asks for a run; held two minutes                   | Plans the category's groups again where its files changed, and writes what differs (`staging organize`).                                                                          |
-| `track-stage`                     | A `.gpx` file lands anywhere in staging                                                                           | Adds its points to the track of the device it names and removes the file; one that names no known device waits for its owner.                                                     |
-| `staging-organizer` (service)     | Every 15 minutes                                                                                                  | Asks for an organizer run of each category that something waits for, and matches the groups due a match against the library's albums.                                             |
-| `staging-organizer` (service)     | Every hour                                                                                                        | Sets up every account's staging area (`staging init --all --layout-only`) and checks every duplicate finding against where its file is now (`staging duplicates --repair --all`). |
+| Pipeline or service               | Starts when                                                                                                       | What it does                                                                                                                                                                                                                                                                                                    |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `staging-unzip`                   | A zip anywhere in a category has finished uploading                                                               | Expands it into the folder it lies in (`unzip -n`), then removes it. One zip at a time.                                                                                                                                                                                                                         |
+| `staging-sidecars`                | A Google Takeout JSON or an XMP file lands in a category that pairs sidecars, about 30 seconds after the last one | Pairs each sidecar with its photo or video (`media-sidecars`), which gives the picture its date, place and caption. One run at a time.                                                                                                                                                                          |
+| `media-ingest` and the media work | A file lands                                                                                                      | Reads its date, place and camera, and checks whether it is an exact copy; then the thumbnails, faces, fingerprints and the rest, through the [media service](media-service.md).                                                                                                                                 |
+| `staging-retime`                  | Files move into a category with other time rules, about 10 seconds after the last one                             | Dates them again by the rules of the category they are in now (`staging retime`).                                                                                                                                                                                                                               |
+| `staging-organize`                | A category's files arrive, leave, move or are read, or someone asks for a run; held two minutes                   | Plans the category's groups again where its files changed, and writes what differs (`staging organize`).                                                                                                                                                                                                        |
+| `track-stage`                     | A `.gpx` file lands anywhere in staging                                                                           | Adds its points to the track of the device it names and removes the file; one that names no known device waits for its owner.                                                                                                                                                                                   |
+| `staging-organizer` (service)     | Every 15 minutes                                                                                                  | Asks for an organizer run of each category that something waits for, and matches the groups due a match against the library's albums.                                                                                                                                                                           |
+| `staging-organizer` (service)     | Every hour                                                                                                        | Sets up every account's staging area and moves a file copied loose into `files/`, once nothing has changed on it for six hours, into `files/inbox/unsorted/` (`staging init --all --idle-minutes 360`); and checks every duplicate finding against where its file is now (`staging duplicates --repair --all`). |
 
 The organizer reads what changed since its last run and plans only that again. A run while
 another is going folds into one more run, so a large upload does not queue thousands of them. A
@@ -178,8 +179,8 @@ years of a phone's pictures, copy the files in over SFTP and let EiN work throug
    details the person copying needs, and [SSH and SFTP](../shell/ssh-sftp.md) the connection.
 4. **Let it run.** `staging status --user helen` shows how many files are still being read. The
    **Dashboard** reads **Catching up** while work waits and gets done. A file that is an exact copy
-   of one its owner can already open is not processed at all, so a second copy of an export costs
-   little.
+   of one its owner can already open is recorded as a copy and processed no further, so a second
+   copy of an export costs little.
 5. **Sort.** The groups appear on the category's **Sort** tab as the files are read; its owner
    files them as [Sorting in staging](../guide/staging.md) describes.
 
@@ -198,19 +199,19 @@ The web interface changes a category's name, kind and default album. The rest of
 changed with `staging category`. A person may change their own categories; an administrator may
 change anyone's with `--user`.
 
-| Option                     | Values                                                                                      | What it decides                                                                                                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--kind <kind>`            | `inbox`, `google-photos`, `scans`, `phone`, `camera`, `messaging`, `screenshots`, `generic` | What it holds. A new kind resets every other setting to that kind's, but for the default album, and the label unless the same command sets one.          |
-| `--label <text>`           |                                                                                             | The name the pages show.                                                                                                                                 |
-| `--destination <album>`    | an album's path                                                                             | The library album its files are filed into by default. `--no-destination` clears it.                                                                     |
-| `--strategy <strategy>`    | `events`, `folders`, `none`                                                                 | How its files are grouped: by time and place, by folder and runs of file names, or into monthly lanes only.                                              |
-| `--significance <level>`   | `fewer`, `normal`, `more`                                                                   | How readily a day becomes a group of its own rather than part of an **Everyday** lane.                                                                   |
-| `--digitized on\|off`      | `on`, `off`                                                                                 | On: the files are scans, and no clock recorded while digitizing them (the scanner, a GPS fix, the file name) dates them.                                 |
-| `--filename-dates on\|off` | `on`, `off`                                                                                 | On: a date the file name spells, such as `IMG_20190601_123456.jpg`, dates a file when nothing better does.                                               |
-| `--lane <lane>`            | `normal`, `bulk`                                                                            | `bulk` runs the work on its files below all other work. It applies to work announced from then on, within a minute; work already queued keeps its place. |
-| `--sidecars <mode>`        | `pair`, `ignore`                                                                            | Whether Google Takeout JSON and XMP files arriving from then on are paired with their files.                                                             |
-| `--create`                 |                                                                                             | Makes the category. Its name is lowercase letters, digits and dashes.                                                                                    |
-| `--remove`                 |                                                                                             | Removes it. Only an empty category other than the Inbox can be removed.                                                                                  |
+| Option                     | Values                                                                                      | What it decides                                                                                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--kind <kind>`            | `inbox`, `google-photos`, `scans`, `phone`, `camera`, `messaging`, `screenshots`, `generic` | What it holds; only the Inbox is of the `inbox` kind. A new kind resets every other setting, the label too, to that kind's, but for the default album and what the same command sets. |
+| `--label <text>`           |                                                                                             | The name the pages show.                                                                                                                                                              |
+| `--destination <album>`    | an album's path                                                                             | The library album its files are filed into by default. `--no-destination` clears it.                                                                                                  |
+| `--strategy <strategy>`    | `events`, `folders`, `none`                                                                 | How its files are grouped: by time and place, by folder and runs of file names, or into monthly lanes only.                                                                           |
+| `--significance <level>`   | `fewer`, `normal`, `more`                                                                   | How readily a day becomes a group of its own rather than part of an **Everyday** lane.                                                                                                |
+| `--digitized on\|off`      | `on`, `off`                                                                                 | On: the files are scans, and no clock recorded while digitizing them (the scanner, a GPS fix, the file name) dates them.                                                              |
+| `--filename-dates on\|off` | `on`, `off`                                                                                 | On: a date the file name spells, such as `IMG_20190601_123456.jpg`, dates a file when nothing better does.                                                                            |
+| `--lane <lane>`            | `normal`, `bulk`                                                                            | `bulk` runs the work on its files below all other work. It applies to work announced from then on, within a minute; work already queued keeps its place.                              |
+| `--sidecars <mode>`        | `pair`, `ignore`                                                                            | Whether Google Takeout JSON and XMP files arriving from then on are paired with their files.                                                                                          |
+| `--create`                 |                                                                                             | Makes the category. Its name is lowercase letters, digits and dashes.                                                                                                                 |
+| `--remove`                 |                                                                                             | Removes it. Only an empty category other than the Inbox can be removed.                                                                                                               |
 
 What each kind starts with:
 
@@ -311,7 +312,7 @@ staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N --user helen
 ```
 
 Removing copies is the owner's alone: the copies go to the trash of whoever runs it, so `staging
-dedupe` for someone else answers `staging dedupe moves copies to your own trash: run it as helen`.
+dedupe` for someone else answers `staging dedupe: staging dedupe moves copies to your own trash: run it as helen`.
 
 [Archive commands](../reference/commands-archive.md#staging) lists every subcommand and option.
 

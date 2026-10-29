@@ -101,7 +101,7 @@ repositories it fetches depends on what is installed:</p>
 <tbody><tr>
 <td>deploy</td>
 <td><code>~/ein</code> itself: <code>setup.sh</code> and the compose files</td>
-<td>by the installer only</td>
+<td>always, first</td>
 </tr>
 <tr>
 <td>core</td>
@@ -135,10 +135,12 @@ repository is updated.</p>
 <li>Back up. An update cannot be undone: there is no command to go back to the previous version,
 and the database is changed in place when the new EiN starts. <a href="data.html">Your data</a> says what to
 copy and why the database and the data folder go together.</li>
-<li>Make sure the admin password is one you know. A new EiN prints its first admin password to its
-log once, and an update makes the containers again, which removes that log.</li>
-<li>Check that the container engine has room. An update builds new images before the old ones are
-removed, and the media service&#39;s image is large. <code>podman system df</code> shows the space images take.</li>
+<li>Make sure the admin password is one you know. Its first one is <code>INITIAL_ADMIN_PASSWORD</code> in
+<code>~/ein/.env</code> until you delete that line; an older <code>.env</code> has no such line, and the random
+password a new EiN printed to its log goes when an update makes the containers again.</li>
+<li>Check that the container engine has room. An update builds the new images while the old ones
+are still there, and removes the old ones only once EiN is up again; the media service&#39;s image
+is about 30 GB. <code>podman system df</code> shows the space images take.</li>
 </ol>
 <h2 id="update-ein">Update EiN<a class="anchor" href="#update-ein" aria-label="Link to this section"></a></h2>
 <p>Run the installer again, as your own user, on the machine EiN runs on:</p>
@@ -153,8 +155,8 @@ and the language model counted when <code>.env</code> has them. When a check fai
 changes nothing; <a href="install.html#what-the-checks-measure">Installing in detail</a> explains each
 check.</p>
 </li>
-<li><p><code>Updating /home/anna/ein</code>: it runs <code>git pull --ff-only</code> on the folder, which brings the newest
-<code>setup.sh</code> and compose files.</p>
+<li><p><code>Updating /home/anna/ein from https://github.com/einhq/deploy</code>: it runs <code>git pull --ff-only</code> on
+the folder, which brings the newest <code>setup.sh</code> and compose files.</p>
 </li>
 <li><p>It runs <code>~/ein/setup.sh</code>, which prints its steps:</p>
 <div class="code"><pre tabindex="0"><code>== Fetching the sources
@@ -165,10 +167,14 @@ check.</p>
 == Building the images
 
 == Starting EiN
+Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
 
-EiN is up at http://ein:8080/</code></pre></div>
+EiN is up at http://ein:8080/
+Removed the images this update replaced, which freed 31GB
+EiN starts again when the machine does.</code></pre></div>
 <p>Each source line is the repository, the commit it is now at and that commit&#39;s date. Between the
-steps the container engine prints its own build and start output.</p>
+steps the container engine prints its own build and start output, and while it waits,
+<code>setup.sh</code> shows EiN&#39;s newest log line every 10 seconds.</p>
 </li>
 </ol>
 <p>The build happens while the old EiN keeps running. EiN is down from the moment its container is made
@@ -176,20 +182,20 @@ again until the new one answers, which is usually a minute or two, and longer wh
 be set up or their pages built again. <code>setup.sh</code> waits up to 10 minutes for EiN to answer on its
 port.</p>
 <h3 id="update-with-setupsh-alone">Update with <code>setup.sh</code> alone<a class="anchor" href="#update-with-setupsh-alone" aria-label="Link to this section"></a></h3>
-<p><code>~/ein/setup.sh</code> without the installer fetches, builds and restarts in the same way, but it does not
-update <code>~/ein</code> itself and skips the machine checks. To do the whole update by hand:</p>
+<p><code>~/ein/setup.sh</code> without the installer fetches, builds and restarts in the same way, and skips the
+machine checks. It brings <code>~/ein</code> itself up to date first, with <code>git pull --ff-only</code>, and when that
+brought a new commit, it says <code>Updated /home/anna/ein to …; running its setup.sh</code> and goes on with the
+new one:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
-git -C ~/ein pull --ff-only
 ~/ein/setup.sh</code></pre></div>
-<p>Without the first line, <code>setup.sh</code> and the compose files stay as they were, and with them the
-language model&#39;s image.</p>
+<p><code>./setup.sh --only ein</code> updates one service, <code>ein</code>, <code>ems</code>, <code>db</code> or <code>llm</code>, and restarts only that
+one, leaving the others running.</p>
 <p>Every run of <code>setup.sh</code> is an update, also one that only adds or removes an option, such as
 <code>./setup.sh --ems</code>. To apply a changed line of <code>.env</code> without updating, run <code>podman compose up -d</code>
 in <code>~/ein</code> instead; <a href="configuration.html#set-a-value-in-the-deployment">Configuration</a> explains it.</p>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>On a machine with both podman and Docker, <code>setup.sh</code> takes podman unless <code>EIN_ENGINE=docker</code> is
-set, and the engine is not remembered. If you installed with Docker, update with
-<code>EIN_ENGINE=docker</code> every time, or the update builds a second, empty EiN under podman. See
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p><code>setup.sh</code> keeps to the container engine EiN was installed under, which <code>.env</code> names in
+<code>EIN_ENGINE</code>. Run with another <code>EIN_ENGINE</code>, it stops instead of building a second, empty EiN. See
 <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</p>
 </aside>
 <h2 id="what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps<a class="anchor" href="#what-an-update-changes-and-what-it-keeps" aria-label="Link to this section"></a></h2>
@@ -201,15 +207,15 @@ set, and the engine is not remembered. If you installed with Docker, update with
 </tr>
 </thead>
 <tbody><tr>
-<td>The files from the deploy repository in <code>~/ein</code> (installer only)</td>
+<td>The files from the deploy repository in <code>~/ein</code></td>
 <td><code>.env</code>: your options, settings and passwords</td>
 </tr>
 <tr>
 <td>The sources in <code>~/ein/src</code>, each moved to its newest commit</td>
-<td>The database, the <code>ein_db</code> volume</td>
+<td>The database, the <code>ein_db</code> volume or the folder <code>EIN_DB_DIR</code> names</td>
 </tr>
 <tr>
-<td>The images, built again; the engine reuses the layers that did not change</td>
+<td>The images, built again, and the ones they replaced removed; the engine reuses the layers that did not change</td>
 <td>The data folder: your originals, renditions and the model file</td>
 </tr>
 <tr>
@@ -226,9 +232,9 @@ set, and the engine is not remembered. If you installed with Docker, update with
 </tr>
 </tbody></table>
 </div>
-<p><code>setup.sh</code> starts the containers with <code>--force-recreate</code>, so each is made from the new image even
-where compose sees no change, and with <code>--remove-orphans</code>, so a service whose option you turned off
-stops.</p>
+<p><code>setup.sh</code> makes every container again from the new image even where compose sees no change, with
+<code>--force-recreate</code> (under podman-compose, it takes them all down and starts them one by one), and
+with <code>--remove-orphans</code>, so a service whose option you turned off stops.</p>
 <h3 id="what-happens-when-the-new-ein-starts">What happens when the new EiN starts<a class="anchor" href="#what-happens-when-the-new-ein-starts" aria-label="Link to this section"></a></h3>
 <p>EiN does the rest of an update itself, at its start:</p>
 <ul>
@@ -251,7 +257,7 @@ system-info</code></pre></div>
 <div class="code"><pre tabindex="0"><code>host      4e1d7c9b2a60
 uptime    4m
 core      0.1.0 (3f2a9c1, 2026-10-24)
-api       0.2.1
+api       0.5.0
 modules   archive 5d81b2e04, assistant 1c9e7a352, ems 77f0ad913, importer e2b4c6801
 postgres  18.1
 deno      2.9.6</code></pre></div>
@@ -268,7 +274,12 @@ has the command.</p>
 <a href="modules.html#update-a-module">Modules</a>.</li>
 </ol>
 <h2 id="free-the-space-old-images-take">Free the space old images take<a class="anchor" href="#free-the-space-old-images-take" aria-label="Link to this section"></a></h2>
-<p>Building new images leaves the old ones behind, without a name. Once the new EiN runs, remove them:</p>
+<p><code>setup.sh</code> removes the images an update replaced, EiN&#39;s, the database&#39;s and the media service&#39;s,
+once the new EiN answers, and says so: <code>Removed the images this update replaced, which freed 31GB</code>.
+It keeps one that a container still uses, and an update whose EiN did not come up keeps them all.
+<code>--only</code> does the same for the one service it builds.</p>
+<p>A build can leave other images without a name behind, such as its intermediate stages. Remove
+those with:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 podman image prune</code></pre></div>
 <p>With Docker, <code>docker image prune</code>. It removes only images no container uses and that have no name,
@@ -287,7 +298,7 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>Nothing was changed. Fix what it names, or update with <code>setup.sh</code> alone, which does not check.</td>
 </tr>
 <tr>
-<td><code>git pull</code> stops with a message about local changes</td>
+<td><code>git pull</code> stops with a message about local changes, or <code>setup.sh</code> says <code>~/ein</code> could not be brought up to date</td>
 <td>A file from the deploy repository in <code>~/ein</code> was changed. <code>git -C ~/ein status</code> shows which; put back the original with <code>git -C ~/ein checkout -- &lt;file&gt;</code> and move your change into <code>.env</code>.</td>
 </tr>
 <tr>
@@ -303,8 +314,8 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>Read the log it names. <code>podman compose ps</code> shows whether <code>db</code> became healthy; EiN does not start before it. <a href="troubleshooting.html">Troubleshooting</a> covers what the log may say.</td>
 </tr>
 <tr>
-<td>EiN starts with a new admin password and none of your albums</td>
-<td>It runs on an empty database: most likely the update ran under the other container engine. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
+<td>EiN does not take your admin password and has none of your albums</td>
+<td>It runs on an empty database, such as one under the other container engine. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
 </tr>
 <tr>
 <td>A module is still the old version</td>

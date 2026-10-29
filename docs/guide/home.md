@@ -8,7 +8,7 @@ who uses EiN.
 ## Open Home
 
 Choose **Home** at the top of the sidebar. On a computer, the EiN mark at the top left also takes
-you there. EiN opens on Home when you sign in.
+you there. EiN opens on Home when you sign in, unless you were on your way to another page.
 
 The page is headed **Welcome**, "What is new in the archive, what is coming up, and this day in
 years past". Under the header:
@@ -32,12 +32,13 @@ without it, Home has nothing to show.
 **On this day** is a row of round pictures, one for each year that has pictures taken on today's
 date, newest year first, up to 8. Under each ring it says how long ago that was, such as "1 year
 ago" or "12 years ago", and the year. The picture in the ring is the first one taken that day.
+This year counts too, so a picture taken today has a ring of its own, "0 years ago".
 
 When there are more rings than fit, swipe the row sideways, or scroll it with a trackpad.
 
 The row counts pictures in albums only. Pictures still in your staging area, and pictures with no
-date, are not part of it, and neither are pictures you may not see. When no earlier year has
-anything for today, the section is not shown at all.
+date, are not part of it, and neither are pictures you may not see. When no year has anything for
+today, the section is not shown at all.
 
 The same rings stand above the feed on the **Media** page; see
 [Media, Year and labels](media.md#browse-the-feed).
@@ -49,8 +50,8 @@ The same rings stand above the feed on the **Media** page; see
    stays 5 seconds. Under the bars it says how long ago it was, such as "7 years ago", and the
    date, such as "25 December 2019".
 3. The story plays that year's pictures in the order they were taken, up to 24 of them, then moves
-   on to the next earlier year with pictures from this day, reaching back up to 30 years. After the
-   last picture of the oldest year, it closes.
+   on to the next earlier year with pictures from this day, through up to 30 years that have
+   pictures. After the last picture of the oldest year, it closes.
 
 | To                             | With a finger or the mouse                                                                          | With the keyboard |
 | ------------------------------ | --------------------------------------------------------------------------------------------------- | ----------------- |
@@ -85,14 +86,15 @@ how long ago under it:
 | It says                       | When the album was made                   |
 | ----------------------------- | ----------------------------------------- |
 | "just now"                    | less than an hour ago                     |
-| "3h ago"                      | earlier today, in hours                   |
+| "3h ago"                      | less than a day ago, in hours             |
 | "yesterday"                   | one day ago                               |
 | "4 days ago"                  | up to a week ago                          |
 | "2 weeks ago"                 | up to a month ago                         |
 | a date, such as "12 Jul 2025" | longer ago, in your browser's date format |
 
-Under it is a row of the album's pictures, as many as fit, the last one marked with how many more
-the album holds, such as **+21**. Click the album's name or any of the pictures to open the album.
+Under it is a row of the album's pictures, as many as fit and at most five, the last one marked
+with how many more the album holds, such as **+21**. Click the album's name or any of the pictures
+to open the album.
 
 Beside each entry is the portrait of the person whose account made the album, when the account is
 linked to a person in the archive; otherwise a picture icon. See
@@ -205,7 +207,8 @@ each photo, album, person and place, and each file EiN makes from them; see
 - **File storage growth** runs across the full width: the size of the files added each year,
   counting the originals and the smaller versions EiN makes of them, with a line for "Cumulative
   file size by month". The total is at the top right.
-- Then one chart for each kind of node, such as **Person nodes** or **Album nodes**, largest first:
+- Then one chart for each kind of node, such as **Person nodes** or **Album nodes**, **File nodes**
+  first and the others largest first:
   bars for the nodes created in each calendar year, a line for the "Cumulative total by month", and
   the total, such as "2,431 nodes". Rest the pointer on a bar to read the year's count.
 
@@ -218,18 +221,18 @@ the section says "No node history found".
 
 ## When something goes differently
 
-| What you see                                                       | Why, and what to do                                                                                                                                                                                                                                     |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **On this day** is missing                                         | No picture in the albums you may see was taken on today's date in another year. Pictures still in staging and pictures without a date do not count; file them into an album and check their dates, see [Dates and places of pictures](dates-places.md). |
-| A picture turns up under the day before or after                   | The day is counted in UTC, so a picture taken close to midnight can fall on the neighbouring day. A picture known only to a year or a month counts from the first day of that period, so it can turn up on 1 January or on the first of the month.      |
-| The story says "Nothing was taken on this day in earlier years."   | There are no pictures you may see from that date, for example when the story was opened from a link for another day.                                                                                                                                    |
-| An album you added pictures to is not in News                      | News shows when an album was made, not when pictures were added to it.                                                                                                                                                                                  |
-| An entry reads "Somebody added …"                                  | EiN could not tell which account made the album, for example because that account is gone.                                                                                                                                                              |
-| A birthday or memorial is missing                                  | The **Born** or **Died** date needs a day, the person must be on the **People** page, and birthdays stop at 110 years. Memorials show only in milestone years. The card also holds at most 16 entries, milestones first.                                |
-| A wedding anniversary is missing                                   | The partner relation needs a **From** date with a day. Anniversaries stop after the relation's **Until** year, after the year one of the two died, and after 75 years. A **Marriage** event alone does not make one.                                    |
-| Events is a day out, or **On this day** shows yesterday's pictures | Home takes today's date from your computer or phone. Check its date and time zone.                                                                                                                                                                      |
-| A red box above the sections                                       | One section could not be loaded, and the box gives the reason. The other sections still show. Reload the page; if the box stays, tell whoever looks after EiN.                                                                                          |
-| The **Marriages** chart shows twice as many weddings as there were | Each wedding was written as an event on both spouses, and each event counts. See [When in the year life events fall](#when-in-the-year-life-events-fall).                                                                                               |
+| What you see                                                       | Why, and what to do                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **On this day** is missing                                         | No picture in the albums you may see was taken on today's date in another year. Pictures still in staging and pictures without a date do not count; file them into an album and check their dates, see [Dates and places of pictures](dates-places.md).                                   |
+| A picture turns up under the day before or after                   | The day is counted in UTC, so a picture taken close to midnight can fall on the neighbouring day. A picture known only to a year or a month counts from the start of that period, so it can turn up on 1 January or the first of the month, or the day before in a time zone east of UTC. |
+| The story says "Nothing was taken on this day in earlier years."   | There are no pictures you may see from that date, for example when the story was opened from a link for another day.                                                                                                                                                                      |
+| An album you added pictures to is not in News                      | News shows when an album was made, not when pictures were added to it.                                                                                                                                                                                                                    |
+| An entry reads "Somebody added …"                                  | EiN could not tell which account made the album, for example because that account is gone.                                                                                                                                                                                                |
+| A birthday or memorial is missing                                  | The **Born** or **Died** date needs a day, the person must be on the **People** page, and birthdays stop at 110 years. Memorials show only in milestone years. The card also holds at most 16 entries, milestones first.                                                                  |
+| A wedding anniversary is missing                                   | The partner relation needs a **From** date with a day. Anniversaries stop after the relation's **Until** year, after the year one of the two died, and after 75 years. A **Marriage** event alone does not make one.                                                                      |
+| Events is a day out, or **On this day** shows yesterday's pictures | Home takes today's date from your computer or phone. Check its date and time zone.                                                                                                                                                                                                        |
+| A red box above the sections                                       | One section could not be loaded, and the box gives the reason. The other sections still show. Reload the page; if the box stays, tell whoever looks after EiN.                                                                                                                            |
+| The **Marriages** chart shows twice as many weddings as there were | Each wedding was written as an event on both spouses, and each event counts. See [When in the year life events fall](#when-in-the-year-life-events-fall).                                                                                                                                 |
 
 ## In the terminal
 

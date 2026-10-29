@@ -95,9 +95,9 @@
 <h3 id="browse-the-feed">Browse the feed<a class="anchor" href="#browse-the-feed" aria-label="Link to this section"></a></h3>
 <ul>
 <li>Each section is headed by its date, such as &quot;29 June 2026&quot;, and the number of pictures in it. As you scroll, the date of the section you are in stays at the top of the page.</li>
-<li>Click a date heading to select everything from that day. Click it again to clear the day.</li>
+<li>Click a date heading to select everything under it. Click it again to clear the selection.</li>
 <li>A picture known only to a year, such as a scan dated 1975, sits under the year alone. Pictures with no date at all come last, under <strong>Undated</strong>. <a href="dates-places.html">Dates and places of pictures</a> explains where dates come from.</li>
-<li>Above the feed, round rings stand for <strong>On this day</strong>: one for each earlier year with pictures taken on today&#39;s date, marked &quot;1 year ago&quot;, &quot;12 years ago&quot; and so on. A ring plays that year&#39;s pictures as a story. <a href="home.html">Home, memories and statistics</a> describes it.</li>
+<li>Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today&#39;s date, marked &quot;1 year ago&quot;, &quot;12 years ago&quot; and so on. A ring plays that year&#39;s pictures as a story. <a href="home.html">Home, memories and statistics</a> describes it.</li>
 <li>Once the feed holds more than 120 pictures, a time rail runs down the right edge of the page. Drag it to move through the years; the feed loads the pictures from the date you drag to.</li>
 <li>Click a picture to open it in the viewer, where the arrows walk through the feed. The viewer&#39;s &quot;N of M&quot; counter is not shown here, because the feed loads part of the archive at a time. <a href="viewer.html">Viewing photos, videos and recordings</a> covers the viewer.</li>
 <li>On a phone, in the <strong>Default</strong> layout, pinch the grid to fit between 2 and 5 pictures across.</li>
@@ -173,7 +173,7 @@
 <li><code>@</code> opens a list of people, locations, labels, devices and albums. Pick one to keep only the pictures that have it: <code>@Peggy Wrenfield</code>, <code>@The cottage at Malpas</code>, <code>#sailing</code>.</li>
 <li>The picture button beside the box, <strong>Search with a picture</strong>, finds what looks like a picture from your device, such as a photo of an old print.</li>
 </ul>
-<p>The results are one grid, best matches first. Where the search scores how well a picture matches, as it does for words and for a picture, each tile shows the score as a percentage. The search is kept in the page&#39;s address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.</p>
+<p>The results are one grid, best matches first. Each tile shows its score as a percentage, measured against the best match, which is 100%. The search is kept in the page&#39;s address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.</p>
 <p><a href="search.html">Search and the finder</a> explains the rest: how the box reads a sentence, the <strong>Interpreted filter</strong> beside the box, what needs the media service and what a language model adds.</p>
 <h3 id="act-on-pictures">Act on pictures<a class="anchor" href="#act-on-pictures" aria-label="Link to this section"></a></h3>
 <p>Select pictures as you would in an album: hover over a picture and tick its box, <kbd>Shift</kbd>+click to select a range, <kbd>Ctrl</kbd>+click (<kbd>⌘</kbd>+click on a Mac) to add or remove one, <kbd>Ctrl</kbd>+<kbd>A</kbd> to select everything loaded, and <kbd>Esc</kbd> to clear. On a touch screen, press and hold a picture. <kbd>?</kbd> lists these keys, and <a href="albums.html">Albums</a> describes selecting in full.</p>
@@ -345,7 +345,7 @@
 <p>The Search page&#39;s <strong>Labels</strong> section also lists suggested labels, drawn outlined with a sparkle: words that at least five pictures look like but that nothing carries yet. Pointing at one says, for example, &quot;A suggested label: 12 pictures look like it, and nothing carries it yet&quot;. The words come from a list of things a family archive shows, such as <code>beach</code>, <code>wedding</code> or <code>christmas</code>, in the archive&#39;s language (<code>en</code> or <code>sv</code>, the setting <a href="../reference/settings.html#cfg_language"><code>CFG_LANGUAGE</code></a>).</p>
 <h3 id="the-labels-folder">The labels folder<a class="anchor" href="#the-labels-folder" aria-label="Link to this section"></a></h3>
 <p>Every label is also a folder: <code>/archive/tags/&lt;label&gt;</code> holds a link to each picture, album, person, location or device that carries the label. You can look through it in the terminal, for example with <code>ls /archive/tags/sailing</code>. <a href="../concepts/links.html">Links</a> explains links in the tree.</p>
-<p>The folder is for browsing. The label itself is kept on the node that carries it, and that is what searches read, so put labels on and take them off with the dialogs or with <code>label add</code> and <code>label remove</code>, not by adding or deleting links in the folder. When something labelled is deleted, its link in the folder goes with it, and <code>label prune</code> clears any link left pointing at nothing. A label is listed while at least one thing carries it.</p>
+<p>A label is kept in two places: on the node that carries it, which the label pills count, and as the link in the folder, which a search for the label reads. The dialogs, <code>label add</code> and <code>label remove</code> keep the two in step, so put labels on and take them off with those, not by adding or deleting links in the folder. When something labelled is deleted, its link in the folder goes with it, and <code>label prune</code> clears any link left pointing at nothing. A label is listed while at least one thing carries it.</p>
 <h3 id="let-ein-suggest-where-a-label-belongs">Let EiN suggest where a label belongs<a class="anchor" href="#let-ein-suggest-where-a-label-belongs" aria-label="Link to this section"></a></h3>
 <p>When you are signed in and the Search page or the Media page asks for exactly one label, a bar headed <strong>Looks like</strong> and the label appears above the results. EiN learns what the label looks like from the pictures that carry it, and suggests other pictures and albums that look the same.</p>
 <ol>
@@ -354,7 +354,7 @@
 <li>Look through the suggestions: pictures and albums that do not carry the label yet, the most alike first.</li>
 <li>Select the pictures that belong and press <strong>Label sailing</strong>, or select the ones that do not and press <strong>Not sailing</strong>. An album&#39;s card has its own <strong>Label</strong> and <strong>Not sailing</strong> buttons.</li>
 </ol>
-<p>EiN learns from each answer: the model and the suggestions are worked out again at once, and what you marked as not the label is left out of the suggestions from then on. <strong>Show all</strong> opens the Media page with every picture ranked by how much it looks like the label, under the chip <strong>Looks like sailing</strong>. <strong>Hide</strong> folds the bar.</p>
+<p>EiN learns from each answer: the model and the suggestions are worked out again at once, and what you marked as not the label is left out of the suggestions from then on. <strong>Show all</strong> opens the Media page with every picture that looks like the label and does not carry it yet, the most alike first, under the chip <strong>Looks like sailing</strong>. <strong>Hide</strong> folds the bar.</p>
 <p>When the model is good enough to stand on its own, the bar says how many pictures it would add, for example &quot;40 more look like it&quot;, before you open it. For a suggested label that nothing carries yet, the bar opens by itself, because the suggestions are all there is.</p>
 <p>Under the bar, one line says how far to trust the suggestions:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -439,7 +439,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 search --tag sailing --kind photo,video          <span class="hljs-comment"># pictures that carry a label</span>
 search <span class="hljs-string">&#x27;christmas tree&#x27;</span> --kind photo             <span class="hljs-comment"># pictures by what they show</span>
-timeline --year 1968 --kind album,birth,death    <span class="hljs-comment"># what the Year page shows for 1968</span>
+timeline --year 1968 --kind album,auto-album,birth,death  <span class="hljs-comment"># what the Year page shows for 1968</span>
 labels                                           <span class="hljs-comment"># every label in use, with its count</span>
 label add <span class="hljs-string">&#x27;/archive/albums/Summer 2020&#x27;</span> sailing  <span class="hljs-comment"># put a label on an album</span>
 label remove <span class="hljs-string">&#x27;/archive/albums/Summer 2020&#x27;</span> sailing

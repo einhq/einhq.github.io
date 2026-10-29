@@ -26,7 +26,7 @@ At its end the install printed the address and the administrator's password:
 
 ```text
 EiN is up at http://ein.local:8080/
-Sign in as admin with the password 0b6f2c1e-8d4a-4c7e-9a51-2e7d3f6b9c40, and change it: it is shown this once.
+Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.
 ```
 
 1. Open the address in a browser. If your computer cannot find that name, use the machine's IP
@@ -51,19 +51,20 @@ user passwd admin
 It asks for the new password after `Password:`. The [reference](../reference/commands-core.md#user-passwd)
 lists its options.
 
-If the install's output is gone, the password is still in the container's log:
+If the install's output is gone, the password is still in `~/ein/.env`, as
+`INITIAL_ADMIN_PASSWORD`, and every later run of `./setup.sh` prints it again at its end:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
-podman compose logs ein | grep 'Admin password set to'
+grep INITIAL_ADMIN_PASSWORD .env
 ```
 
-That copy lasts only as long as the container. Every later run of `./setup.sh` makes the
-containers anew, and the line goes with them, so change the password before you update or add a
-part.
+Once you have changed the password, delete that line from `.env`: the old password stays readable
+there for anyone who can read the file, and changing the line does not change the password, which
+EiN takes from it only at its first start.
 
 > [!WARNING]
-> Nothing else keeps the admin password, and EiN sends no e-mail, so there is no "forgot password".
+> Once you have changed it, nothing else keeps the admin password, and EiN sends no e-mail, so there is no "forgot password".
 > Keep the new one in a password manager. If it is lost, only someone who can act as the
 > administrator can set a new one. Step 5 shows how to give a second person that right.
 
@@ -321,7 +322,7 @@ curl -fsSL https://einhq.eu/install.sh | bash
 
 It updates `~/ein`, then fetches the newest code of EiN and its services, builds it and starts it
 again, keeping your options in `~/ein/.env`, your data and the installed modules. `~/ein/setup.sh`
-alone does the same but leaves the files in `~/ein` as they are. There are no releases: an update
+alone does the same, `~/ein` included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated
 separately, with **Update** in **Settings → Modules → Published modules**.
 [Updating](../admin/updating.md) explains what an update touches.

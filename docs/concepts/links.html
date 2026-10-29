@@ -279,7 +279,7 @@ and the path.</p>
 <p>A hard link gives a node a second name. Both names are the same node: the same id, the same
 owner and mode, the same content and children. Nothing marks one name as the original.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ln</span> /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/IMG_0412.jpg</code></pre></div>
+<span class="hljs-built_in">ln</span> /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/20191225_155434.jpg</code></pre></div>
 <p>Each node counts its names. The count is the third column of <code>ls -l</code>, and <strong>Links</strong> in the
 <strong>Nodes</strong> explorer&#39;s <strong>Properties</strong>; a node with one name shows <code>1</code>. Removing a name with <code>rm</code>
 lowers the count, and the node itself is deleted only when its last name goes. <code>rm -r</code> on a folder
@@ -330,16 +330,16 @@ Select it and choose <strong>Properties</strong> (<kbd>Alt</kbd>+<kbd>Enter</kbd
 target and <strong>Links</strong> with the count of names.</p>
 <figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes explorer open at /archive/people/Peggy_Wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person&#39;s folder holds folders of relation links and a cover link; the arrow shows where the link points.</figcaption></figure>
 <p><strong>Over SFTP.</strong> Softlinks are symbolic links: <code>ls -l</code> in <code>sftp</code> shows them as links, following one
-takes you to the target, and <code>ln -s</code> makes one. A recursive copy copies the link, not what it points
-at. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SSH and SFTP</a> has the rest.</p>
+takes you to the target, and <code>ln -s</code> makes one. How a recursive copy treats a link depends on your
+SFTP client. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SSH and SFTP</a> has the rest.</p>
 <h2 id="make-and-remove-links-in-the-terminal">Make and remove links in the terminal<a class="anchor" href="#make-and-remove-links-in-the-terminal" aria-label="Link to this section"></a></h2>
 <ol>
 <li><p>Make a softlink with <code>ln -s</code>, the target first:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ln</span> -s /archive/albums/christmas-2019/files/IMG_0412.jpg /home/helen/favourite.jpg</code></pre></div>
+<span class="hljs-built_in">ln</span> -s /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/favourite.jpg</code></pre></div>
 </li>
 <li><p>Check it with <code>ls -l /home/helen</code>. The line for <code>favourite.jpg</code> ends with
-<code>-&gt; /archive/albums/christmas-2019/files/IMG_0412.jpg</code>.</p>
+<code>-&gt; /archive/albums/christmas-2019/20191225_155434.jpg</code>.</p>
 </li>
 <li><p>Remove it with <code>rm /home/helen/favourite.jpg</code>. That removes the link only; the picture stays.</p>
 </li>
@@ -375,7 +375,7 @@ label lives on the node that carries it, and searches read it there, so the link
 </tr>
 <tr>
 <td>An album&#39;s cover</td>
-<td><code>album-cover</code></td>
+<td><code>album set &lt;album&gt; cover &lt;picture&gt;</code></td>
 </tr>
 <tr>
 <td>Group membership</td>
@@ -387,8 +387,8 @@ label lives on the node that carries it, and searches read it there, so the link
 <p>When a node moves, every softlink that points at it, or at anything under it, is re-pointed to the
 new path in the same step. An album can therefore be moved without losing its cover, its labels,
 its place in other albums or anyone&#39;s favourites. This holds for <code>mv</code>, for <strong>Rename</strong> and
-<strong>Paste</strong> in the <strong>Nodes</strong> explorer, for filing pictures from staging into an album, and for merging
-people or duplicates.</p>
+<strong>Paste</strong> in the <strong>Nodes</strong> explorer, and for filing pictures from staging into an album. Merging
+people or duplicates moves the links to the one that is kept.</p>
 <p>Two kinds of softlink are not re-pointed:</p>
 <ul>
 <li>one with a <strong>relative</strong> target, which keeps its text as it was;</li>

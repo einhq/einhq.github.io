@@ -166,7 +166,7 @@ retries, and runs once the media service answers again.</p>
 every model, and building it takes a while and about 30 GB of disk. <a href="../start/install.html#what-you-need">Install EiN</a>
 lists what the machine needs with the media service.</p>
 </li>
-<li><p><code>setup.sh</code> starts the containers and ends with <code>EiN is up at http://…:8080/</code>.</p>
+<li><p><code>setup.sh</code> starts the containers and prints <code>EiN is up at http://…:8080/</code> once EiN answers.</p>
 </li>
 <li><p>Open <strong>Dashboard</strong> under <strong>System</strong> in the sidebar, and choose the <strong>Media service</strong> tab. For the
 first minutes the media service loads its models; the tab then shows the <strong>healthy</strong> badge.</p>
@@ -253,8 +253,8 @@ with <code>×</code> and the number of restarts), <strong>card</strong>, <strong
 <li><strong>Graphics card mode</strong>, when there is a card: who has the card now (see
 <a href="#the-graphics-card">The graphics card</a> below).</li>
 <li>An orange box for each degradation, such as <code>gpu degraded</code>, and a yellow one for each warning.</li>
-<li><strong>Graphics card memory</strong>: what each model holds on the card, and what is free; <strong>GPU load</strong>,
-<strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
+<li><strong>Graphics card memory</strong>: the card&#39;s memory split by process, the media service&#39;s workers and
+everything <strong>outside EMS</strong>, and what is free; <strong>GPU load</strong>, <strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
 <li><strong>Models</strong>: every model the media service can load, loaded or not, with <strong>Status</strong> (for example
 <strong>GPU loaded</strong> or <strong>CPU loading</strong>), <strong>Loaded</strong>, <strong>Last used</strong>, <strong>Size</strong> and <strong>Activity</strong>. Hover a
 model&#39;s name for what it does. The heading counts them: for example <code>3 of 15 loaded · 2 on the GPU</code>.</li>
@@ -330,9 +330,10 @@ podman compose restart ems</code></pre></div>
 <p>Compose checks it every 30 seconds, and gives it 120 seconds to start before a failed check counts.</p>
 <h2 id="the-graphics-card">The graphics card<a class="anchor" href="#the-graphics-card" aria-label="Link to this section"></a></h2>
 <p>The media service uses an NVIDIA card when it has one, and the CPU otherwise. Without a card every
-model and every encoder still runs, only more slowly: transcription and faces most of all. Where each
+model and every encoder still runs, only more slowly. Where each
 model runs is the media service&#39;s own decision, made each time it loads one; it changes how fast an
-answer comes, never what it is. A model that does not fit on the card runs on the CPU.</p>
+answer comes, never what it is. A model that does not fit on the card runs on the CPU, except transcription and the handwriting
+readers, which wait for room on the card.</p>
 <p>With a card, the media service hands the card between indexing and search, and <strong>Graphics card
 mode</strong> on the <strong>Media service</strong> tab shows which has it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -360,6 +361,7 @@ mode</strong> on the <strong>Media service</strong> tab shows which has it:</p>
 </tr>
 </tbody></table>
 </div>
+<p>When the mode is off, which <code>EMS_CARD_QUIET_AFTER=0</code> makes it too, the tab leaves <strong>Graphics card mode</strong> out.</p>
 <p>It turns <strong>quiet</strong> after 600 seconds without indexing work (<code>EMS_CARD_QUIET_AFTER</code>). A search never
 waits for the card: a separate model process answers searches on the CPU throughout.</p>
 <p><a href="gpu.html">The graphics card</a> covers preparing the machine, checking that every model really runs on
@@ -376,9 +378,12 @@ and <a href="gpu.html#be-told-when-the-card-goes-missing">being told when the ca
 <li><p>Apply it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d</code></pre></div>
+<p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, so
+the media service&#39;s idle models may go to swap and a search waits for them; <code>./setup.sh</code> makes
+the containers again with the limit.</p>
 </li>
 </ol>
-<p>Any change restarts the media service. Requests in flight fail and are retried; see
+<p>Any change restarts the media service, and EiN with it, since both read <code>.env</code>. Requests in flight fail and are retried; see
 <a href="#when-the-media-service-restarts">When the media service restarts</a>.</p>
 <p>These are the settings an administrator is most likely to need:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -427,7 +432,7 @@ podman compose up -d</code></pre></div>
 <tr>
 <td><code>EMS_MODEL_PINNED</code></td>
 <td><code>text-query</code></td>
-<td>Models loaded at start and never unloaded, separated by commas.</td>
+<td>Models loaded at start and never unloaded, separated by commas. The search models, <code>text-query</code> and <code>siglip-text</code>, are pinned in the query worker whatever this says.</td>
 </tr>
 <tr>
 <td><code>EMS_MODEL_MAX_RSS</code></td>
@@ -486,7 +491,8 @@ left on, the Archive then transcribes every video and recording again in the bac
 media. On a large archive that is hours of work.</p>
 <h3 id="settings-on-eins-side">Settings on EiN&#39;s side<a class="anchor" href="#settings-on-eins-side" aria-label="Link to this section"></a></h3>
 <p>EiN&#39;s own settings for the media service are in the <strong>Media service</strong> and <strong>Transcription</strong> groups
-of <strong>Settings → System</strong>, and can be set with <code>config set</code>:</p>
+of <strong>Settings → System</strong>, with <code>CFG_MODEL_SLOTS</code>, the Archive&#39;s, in <strong>Processing</strong>. All can be set
+with <code>config set</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -573,7 +579,8 @@ usual cause; <a href="gpu.html">The graphics card</a> has the fix.</p>
 <p><strong>A warning <code>no keys configured: authentication is off</code>.</strong> The media service got no key. Check that
 <code>EMS_KEY</code> is in <code>~/ein/.env</code>, and run <code>podman compose up -d</code>.</p>
 <p><strong>A warning <code>no roots configured: every file request will be refused</code>.</strong> <code>EMS_ROOTS</code> is empty. It
-is set in <code>compose.ems.yaml</code>; run <code>./setup.sh</code> to restore the compose files.</p>
+is set in <code>compose.ems.yaml</code>; undo a change to that file with <code>git -C ~/ein checkout compose.ems.yaml</code>
+and run <code>podman compose up -d</code>.</p>
 <p><strong>Uploads stay being prepared for a long time.</strong> Look at <strong>Executing</strong> on the <strong>Media service</strong> tab.
 Requests waiting in the lanes mean the media service is busy: after a large import, the <strong>Dashboard</strong>
 reads <strong>Catching up</strong> until the work is done. With a card, a model shown as <strong>CPU loaded</strong> is several

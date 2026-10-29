@@ -13,8 +13,7 @@ under it. The list closes when you press <kbd>Esc</kbd>, click somewhere else or
 choosing a row empties the box.
 
 When something covers the box (a dialog, the viewer, or a page shown full screen), the same keys
-open the finder as a dialog of its own, with the prompt **Search, or go to a page, person or
-album…**. <kbd>Esc</kbd>, or <kbd>Ctrl</kbd>+<kbd>K</kbd> again, closes it.
+open the finder as a dialog of its own, with the prompt **Search, or go to a page…**. <kbd>Esc</kbd>, or <kbd>Ctrl</kbd>+<kbd>K</kbd> again, closes it.
 
 On a phone the box reads **Search**, the list takes the width of the screen, and the keyboard's
 search key does what <kbd>Enter</kbd> does. [EiN on a phone](phone.md) covers the rest.
@@ -35,11 +34,11 @@ typed, <kbd>Enter</kbd> does nothing until an arrow key has lit a row.
 
 As you type, the list changes to these groups, in this order:
 
-| Group                         | Rows                                                                                     | A row takes you to                                         |
-| ----------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| **Search**                    | `Search for "<your words>"` and `Pictures of "<your words>"`                             | The Search page or the Media page, searching for the words |
-| **Go to** and **Do**          | The pages and actions whose names hold your words                                        | That page or action                                        |
-| **Albums, people, locations** | Albums, people, locations and devices whose names match, with the kind of each beside it | Its page                                                   |
+| Group                                  | Rows                                                                                     | A row takes you to                                         |
+| -------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Search**                             | `Search for "<your words>"` and `Pictures of "<your words>"`                             | The Search page or the Media page, searching for the words |
+| **Go to** and **Do**                   | The pages and actions whose names hold your words                                        | That page or action                                        |
+| **Albums, people, locations, devices** | Albums, people, locations and devices whose names match, with the kind of each beside it | Its page                                                   |
 
 The first row is lit, so <kbd>Enter</kbd> opens the Search page for your words, and so does the
 arrow button at the end of the box. To go straight to a person or an album, light its row with the
@@ -76,10 +75,10 @@ yours. Without them it matches your words against the commands' names and descri
 
 ## Two pages for searching
 
-| Page       | Where you find it                                                            | What it finds                                                                    |
-| ---------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Search** | **Search** under Explore in the sidebar, or **Search for "…"** in the finder | Albums, people, locations, devices and GPS tracks: the things pictures belong to |
-| **Media**  | **Media** in the sidebar, or **Pictures of "…"** in the finder               | The photos, videos, audio recordings and documents themselves                    |
+| Page       | Where you find it                                                            | What it finds                                                        |
+| ---------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Search** | **Search** under Explore in the sidebar, or **Search for "…"** in the finder | Albums, people, locations and devices: the things pictures belong to |
+| **Media**  | **Media** in the sidebar, or **Pictures of "…"** in the finder               | The photos, videos, audio recordings and documents themselves        |
 
 Both pages have the same kind of search box. You can write a sentence, pick something exactly with
 `@`, and see what the box understood as chips you can remove one by one. The address in the browser
@@ -120,7 +119,7 @@ Each search looks in several places at once and puts the results together:
 | What is said in videos and recordings                                             | By meaning and by its exact words                        | `the knife's gone blunt` finds Arthur carving the goose at Christmas 1998                                            |
 | Documents: PDF, Word (`.docx`), OpenDocument (`.odt`) and plain text              | By what their text is about                              | `Christmas letter` finds the family newsletter from 2019                                                             |
 | Descriptions someone wrote                                                        | By meaning                                               |                                                                                                                      |
-| File names                                                                        | By the name                                              | `DSC_4471`, `IMG_0001`                                                                                               |
+| File names                                                                        | By the name                                              | `DSC_0215`, `IMG_0525`                                                                                               |
 
 A match in something said opens the video or recording at the moment the words are said, not at the
 start. A name said once in an hour of tape is found by its words. Documents have no preview in EiN
@@ -165,8 +164,8 @@ found more.
   ending in `…`, meaning every person whose name contains it.
 - A place becomes one of your [locations](places.md), or, for a country or a city that is not one,
   an **Area** chip covering it.
-- When your account is linked to a person, `me`, `my` and a single relative, such as `my mother` or
-  `my husband`, are read through the [family tree](family.md).
+- A word for a relative, such as `mother` or `husband`, is not read as a person: the yellow note
+  names it, and it is searched as words. Name the person instead.
 
 Some examples on the Media page of the Wrenfield demo:
 
@@ -260,7 +259,7 @@ Chips and **Show** narrow the answer the same way they narrow words. Typing word
 The picture goes to your EiN and nowhere else, turned upright and made smaller first. EiN keeps it
 in `/tmp`, never adds it to the archive, and removes it after 24 hours (the **Hours in /tmp**
 setting, [`CFG_TMP_RETENTION_HOURS`](../reference/settings.md#cfg_tmp_retention_hours)). If it
-cannot be sent, a red message says `the picture could not be sent`, followed by the reason.
+cannot be sent, a red message says `the picture could not be sent`, followed by the HTTP status.
 
 To find pictures like one that is already in the archive, open it in the [viewer](viewer.md). Its
 [details panel](viewer.md#the-details-panel) shows **Similar**, a strip of the nearest pictures, and
@@ -280,17 +279,15 @@ and teach EiN what the label means.
 
 ## Find albums, people, locations and devices
 
-The Search page finds the things pictures belong to. Its header reads **Search** and **Search for
-anything by name, date or @mention**.
+The Search page finds the things pictures belong to. Its header reads **Search** and **Search by
+name, date or @mention**.
 
 1. Open **Search** in the sidebar.
-2. Type in the box, **Search — "album summer 2019", or type @ for a person, location, label or
-   device**, and press <kbd>Enter</kbd>.
+2. Type in the box, **Search, or type @ to pick something by name**, and press <kbd>Enter</kbd>.
 3. The results appear as cards, 60 at a time, with more as you scroll. A card shows the name, a
    cover picture and the kind, and for an album its dates and how many files it holds. Click a card
    to open its page.
-4. Narrow the results with **Show**: **All**, **Albums**, **People**, **Locations**, **Devices** or
-   **Tracks**.
+4. Narrow the results with **Show**: **All**, **Albums**, **People**, **Locations** or **Devices**.
 5. Order them with **Sort**: **Relevance** (the default), **Name (A-Z)**, **Newest first** or
    **Oldest first**.
 
@@ -302,7 +299,6 @@ What each kind is found by:
 | People    | Name; every word must match the same person     | `helen okafor`                                                                                                                   |
 | Locations | Name                                            | `falmouth`                                                                                                                       |
 | Devices   | Name, make, model or serial number              | `lumix` finds Peggy's Lumix                                                                                                      |
-| Tracks    | The device's name, or the track's description   | `erik's iphone` finds the tracks Erik's iPhone recorded                                                                          |
 
 A person, location, year, device or label in the search narrows albums by their pictures:
 `@Peggy Wrenfield 1968` finds the albums holding a picture of Peggy taken in 1968. A label matches an album that carries it or holds a picture that does. When nothing is
@@ -310,7 +306,7 @@ found, the page says **No results found**.
 
 ### Start from recent searches, people, places and years
 
-![The Search page before a search: the box with the Show choices All, Albums, People, Locations, Devices and Tracks and the Sort menu, and below it rows of People, Locations, Years and Labels](../../assets/shots/search-page.webp "Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.")
+![The Search page before a search: the box with the Show choices All, Albums, People, Locations and Devices and the Sort menu, and below it rows of People, Locations, Years and Labels](../../assets/shots/search-page.webp "Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.")
 
 Before you type, the Search page shows:
 
@@ -318,7 +314,8 @@ Before you type, the Search page shows:
   (**Forget …**) to drop it, or **Clear** to drop them all. They are kept in this browser, not in
   your account, so another computer or phone has a list of its own.
 - **People**: the people in the most pictures.
-- **Locations**: the locations on the map with the most pictures, as small maps.
+- **Locations**: up to 16 locations that have a place on the map, as small maps, those placed from
+  the most geotagged pictures first.
 - **Years**: every year with something in it, each opening that year on the
   [Year page](media.md#the-year-page).
 - **Labels**: every label, the most used first, then suggested labels marked with a sparkle: words
@@ -336,7 +333,7 @@ link sees only what they are allowed to see. To keep a search in your sidebar, s
 [Your sidebar and top bar](customizing.md).
 
 The assistant can search for you too: ask it in [Chat](assistant.md), and an answer that comes from
-a search offers **Show in search** to open it here.
+a search offers **Show in search** to open it on the Search or Media page.
 
 ## What needs the media service and a language model
 
@@ -345,15 +342,15 @@ into something it can compare with them when you search. A language model reads 
 sentence. Your administrator installs both; see [The media service](../admin/media-service.md) and
 [The language model](../admin/language-model.md).
 
-| What you do                                                                                                                   | Needs                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Finding pages, actions, albums, people, locations and devices in the finder                                                   | EiN alone                                                     |
-| Finding files, albums, people, locations, devices and tracks by name; `@` picks; labels; years and kinds read from a sentence | EiN alone                                                     |
-| Finding pictures by what they show; text in pictures and speech by meaning; documents; albums by what their pictures show     | The media service, answering when you search                  |
-| Searching with a picture you choose                                                                                           | The media service, answering when you search                  |
-| Finding text in pictures and speech by their exact words                                                                      | The media service to have read them once; not when you search |
-| Finding commands by what they are for                                                                                         | The assistant module and the media service                    |
-| Reading people, places and descriptive words from a sentence, and `me` or `my mother`                                         | A language model                                              |
+| What you do                                                                                                               | Needs                                                         |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Finding pages, actions, albums, people, locations and devices in the finder                                               | EiN alone                                                     |
+| Finding files, albums, people, locations and devices by name; `@` picks; labels; years and kinds read from a sentence     | EiN alone                                                     |
+| Finding pictures by what they show; text in pictures and speech by meaning; documents; albums by what their pictures show | The media service, answering when you search                  |
+| Searching with a picture you choose                                                                                       | The media service, answering when you search                  |
+| Finding text in pictures and speech by their exact words                                                                  | The media service to have read them once; not when you search |
+| Finding commands by what they are for                                                                                     | The assistant module and the media service                    |
+| Reading people, places and descriptive words from a sentence, and `me` or `my mother`                                     | A language model                                              |
 
 A file is found by what it shows or says only once the media service has looked at it: a picture
 added a few minutes ago may not turn up by meaning yet. Your administrator's
@@ -373,20 +370,20 @@ On the Media page a yellow note appears above the results:
 > moment.
 
 More lines under it can name other parts that did not answer, such as the picture match. The results
-come only from what EiN can match without the media service, such as file names.
+come only from what EiN can match without the media service, such as file names. A search with a
+picture finds nothing, and its line in the note says why.
 
 1. Wait a moment and press <kbd>Enter</kbd> in the box again. The media service may be busy or
    starting.
-2. If the note keeps coming back, tell your administrator. Anyone can check first: **About EiN**,
+2. If the note keeps coming back, tell your administrator. Anyone signed in can check first: **About EiN**,
    in the menu under your picture, shows the **Media service** tile as `Not answering` while it is
    down. Your administrator finds more on the Dashboard's **Media service** tab, and
    [The media service](../admin/media-service.md) covers what to do.
 
 Elsewhere you see no note, only less:
 
-- The Search page still finds albums, people, locations, devices and tracks by name, but not albums
-  by what their pictures show.
-- **Search with a picture** finds nothing.
+- The Search page still finds albums, people, locations and devices by name, but not albums by what
+  their pictures show.
 - The finder finds commands by their words only.
 
 When the language model is slow or away, you see no error either: the search keeps the years and

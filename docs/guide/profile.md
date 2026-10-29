@@ -152,7 +152,8 @@ that exist already; to change who sees one of those, use its **Share** button.
 | `shared`   | Seen by the members of the default group the administrator chose. Unless the administrator has changed it, that group is everyone with an account.                  |
 | `everyone` | Seen by everyone with an account, even where the administrator's default group is a smaller one.                                                                    |
 
-None of them shows an album to visitors who are not signed in; you grant that yourself in the
+None of them shows an album to visitors who are not signed in, unless you keep `default` and the
+administrator's default sharing lets everyone else view; otherwise you grant that yourself in the
 **Share** dialog. An administrator can see every album, whatever you choose. **New private album** in staging is always private, whatever you choose here.
 [Sharing](sharing.md) explains the default sharing and the **Share** dialog.
 
@@ -180,8 +181,8 @@ echo $CFG_USER_SLIDESHOW_SECONDS
 ```
 
 It prints an empty line for a setting you have never changed: defaults are not written into the
-file. A terminal that was already open when you saved a change keeps the old value; open a new
-terminal tab, or run `source ~/.config` in it, to pick up the change.
+file. A terminal that is open when you save a change reads it before its next command; only a
+command that was already running keeps the old value.
 
 The `config` command lists and changes your preferences:
 
@@ -259,7 +260,8 @@ it. [Accounts and groups](../admin/accounts.md) covers this from the administrat
 ## Favourites
 
 Your favourites are the pictures you have marked with a heart, from any album, gathered on one page.
-Only someone signed in has favourites; visitors have none.
+Only someone signed in has favourites; visitors have none. The Favourites page and its row in the
+account menu come with the Archive module.
 
 A favourite is a link to the picture where it lives, kept in the folder `stars` in your home
 folder. Hearting a picture never copies or moves it, and taking it out of your favourites never
@@ -311,7 +313,7 @@ apart from an administrator, who can see everyone's.
 | Removing copies in staging's **Duplicates**                       | The copies, kept together as one entry; see [Duplicates](duplicates.md).                          |
 | `trash put` in the terminal                                       | What you name, if you may change it.                                                              |
 
-Each of these says what it did in a message at the foot of the screen, with **Undo**. **Undo** is
+Each of these in the browser says what it did in a message at the foot of the screen, with **Undo**. **Undo** is
 the quickest way back; the Trash page is for later.
 
 What you delete goes to _your_ trash, also when it belongs to someone else who lets you change it.
@@ -364,7 +366,7 @@ without asking.
 
 1. On the Trash page, select one or more rows.
 2. Choose **Delete for good**, or press <kbd>Delete</kbd>.
-3. The dialog **Delete for good?** says, for one row: "This item and everything derived from it is
+3. The dialog **Delete for good?** says, for a single item: "This item and everything derived from it is
    removed for good. This cannot be undone." Choose **Delete for good**, or **Cancel**.
 
 **Empty trash**, in the bar at the top, does the same for everything in the trash, and its dialog's
@@ -444,7 +446,7 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg
 | There is no **Me** in the account menu, and your picture is letters | Your account is not linked to a person in the archive.                                              | Ask an administrator to link it, as under [Your picture and the person you are](#your-picture-and-the-person-you-are). |
 | **Update password** stays greyed out                                | A field is empty, or the two new passwords differ.                                                  | Fill in all three, and type the new password the same way twice.                                                       |
 | A preference you saved does not show in another tab                 | That tab loaded your preferences before you saved.                                                  | Reload the tab.                                                                                                        |
-| `echo $CFG_USER_…` prints an empty line                             | You never changed that setting, or the terminal was open before you did.                            | Open a new terminal tab; `config list --scope user` shows every value, defaults included.                              |
+| `echo $CFG_USER_…` prints an empty line                             | You never changed that setting: defaults are not written into the file.                             | `config list --scope user` shows every value, defaults included.                                                       |
 | There is no heart in the viewer and no **Favourite** button         | You are not signed in.                                                                              | Sign in.                                                                                                               |
 | Something you deleted is not in your trash                          | Someone else deleted it, and it is in their trash; or it was deleted for good; or its days ran out. | Ask the person who deleted it. Nothing brings back what was deleted for good.                                          |
 | Restoring fails with a message that ends in `is gone`               | The folder or album it came from is no longer there.                                                | Restore that album or folder first, if it is in the trash, then restore the picture.                                   |

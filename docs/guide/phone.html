@@ -127,7 +127,8 @@ a picture selects it. So a tablet has the computer&#39;s frame with the phone&#3
 <strong>Random album</strong>, <strong>Chat</strong>, the plus of the <strong>Create</strong> menu and your picture. Its buttons are
 larger, to suit a finger. The <strong>Uploads</strong> button appears there while files are going up.</li>
 <li><strong>The menu is hidden</strong> until you ask for it: see <a href="#open-the-menu">Open the menu</a>.</li>
-<li><strong>There is no terminal button</strong>, and no <strong>Disconnected</strong> badge when the connection drops.</li>
+<li><strong>There is no terminal button.</strong> When the connection drops, a red crossed-out plug stands in the
+top bar in place of the <strong>Disconnected</strong> badge.</li>
 <li><strong>The search box</strong> opens its list across the whole width of the screen, above the keyboard, and
 the keyboard&#39;s search key does what <kbd>Enter</kbd> does. <a href="search.html">Search and the finder</a>
 covers what it finds.</li>
@@ -220,8 +221,8 @@ is in the menu.</p>
 Pinching works where pictures keep their own shapes, such as an album or the <strong>Media</strong> page in its
 <strong>Default</strong> layout. The <strong>Days</strong> and <strong>Months</strong> layouts of the Media page have square tiles, three
 and five across on a phone, and do not change with a pinch; see <a href="media.html">Media, Year and labels</a>.
-On a wider screen, such as most tablets held sideways, the grid fills its rows by height instead,
-and a pinch does not change it.</p>
+Where the grid is 640 pixels wide or more, as on most tablets, it fills its rows by height
+instead, and a pinch does not change it.</p>
 <p>Moving your finger while you hold cancels the press, so scrolling a grid never selects a picture.
 Once something is selected, the bar at the foot of the screen shows how many, for example <strong>3
 selected</strong>, with all its buttons in one <strong>Actions</strong> menu and <strong>×</strong> to clear the selection.
@@ -320,7 +321,8 @@ like it; see <a href="search.html#search-with-a-picture">Search with a picture</
 <li>it opens on <strong>Home</strong>, using the whole screen, without the browser&#39;s address bar and buttons;</li>
 <li>the phone&#39;s status bar and the screen shown while it starts are in EiN&#39;s dark colour.</li>
 </ul>
-<p>This needs HTTPS: an address that begins with <code>https://</code>. EiN on its own serves plain HTTP, on port
+<p>Most browsers, Chrome on Android among them, install it as an app only over HTTPS: an address that
+begins with <code>https://</code>. EiN on its own serves plain HTTP, on port
 8080, so your administrator first has to put it behind an HTTPS proxy; see
 <a href="../admin/network.html">Ports, HTTPS and remote access</a>. Over plain <code>http://</code>, a phone may only add a
 bookmark that opens in the browser.</p>
@@ -342,8 +344,8 @@ sign in once more.</p>
 picture and search comes from your EiN as you open it, so you need a connection to it, at home or
 wherever your administrator has made it reachable.</p>
 <p>When the connection drops while EiN is open, pages stop loading and EiN tries again every 2
-seconds by itself. On a phone there is no <strong>Disconnected</strong> badge to tell you; EiN picks up again
-by itself once the phone is back on the network.</p>
+seconds by itself. On a phone a red crossed-out plug in the top bar tells you, in place of the
+<strong>Disconnected</strong> badge; EiN picks up again by itself once the phone is back on the network.</p>
 <h2 id="what-a-phone-does-not-have">What a phone does not have<a class="anchor" href="#what-a-phone-does-not-have" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>The terminal.</strong> There is no terminal button on a phone. With a keyboard connected to it,

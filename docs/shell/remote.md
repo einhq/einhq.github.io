@@ -327,10 +327,11 @@ under the mount point and stay on the other machine.
    ssh-copy-id -i ~/.ssh/nas.pub anna@nas.local
    ```
 
-2. Mount the folder:
+2. Make the mount point, which must exist, and mount the folder on it:
 
    ```bash
    # in EiN's terminal, as the administrator
+   mkdir -p /mnt/nas
    mount --save /mnt/nas sftp "host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas"
    ```
 
@@ -390,20 +391,20 @@ command; use `scp`, or a mount. `ssh` refuses flags it does not have with `unkno
 
 ## When something goes wrong
 
-| Message                                                                                                | What it means and what to do                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `permission denied, you must be a member of group 'ssh'`                                               | Ask the administrator to add you to **SSH users**, then sign out and in.                                                                                                               |
-| `Could not resolve hostname nas.local: Name or service not known`                                      | The machine EiN runs on does not know that name. Names ending in `.local` may not resolve where EiN runs; use the IP address, or set it as `HostName` in `~/.ssh/config`.              |
-| `connect to host nas.local port 22: Connection refused`                                                | Nothing listens on that port: the SSH server is off, or on another port (`-p`).                                                                                                        |
-| `connect to host nas.local port 22: Connection timed out`                                              | No answer within 15 seconds: the machine is off, or a firewall is between it and EiN.                                                                                                  |
-| `anna@nas.local: Permission denied.`                                                                   | The keys were refused and the password was wrong or not asked for. In a script there is nobody to ask, so only keys are tried: install one with `ssh-copy-id`.                         |
-| `No ED25519 host key is known for nas.local.` … `Connect once from an interactive shell to accept it.` | The host is unknown and there was nobody to ask (a script, `BatchMode`, or `StrictHostKeyChecking yes`). Connect once from the terminal, or use `-o StrictHostKeyChecking=accept-new`. |
-| `WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!`                                                     | See [Host keys](#host-keys).                                                                                                                                                           |
-| `Warning: Identity file /home/helen/.ssh/nas not accessible: No such file or directory.`               | The key named with `-i` or `IdentityFile` is not there. Check the path with `ls ~/.ssh`.                                                                                               |
-| `Load key "/home/helen/.ssh/id_rsa": encrypted, and no one to ask for its passphrase`                  | A key with a passphrase, used where nobody can type it. Use a key without a passphrase for scripts and mounts.                                                                         |
-| `ssh-copy-id: no public key found in ~/.ssh; make one with ssh-keygen`                                 | Run `ssh-keygen` first.                                                                                                                                                                |
-| `ssh-copy-id: WARNING: All keys were skipped because they already exist on the remote system.`         | Nothing to do: the key is installed. `-f` adds it again.                                                                                                                               |
-| `mount: permission denied, only admin is allowed to mount`                                             | Mounting is for the administrator.                                                                                                                                                     |
+| Message                                                                                               | What it means and what to do                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `permission denied, you must be a member of group 'ssh'`                                              | Ask the administrator to add you to **SSH users**, then sign out and in.                                                                                                               |
+| `Could not resolve hostname nas.local: Name or service not known`                                     | The machine EiN runs on does not know that name. Names ending in `.local` may not resolve where EiN runs; use the IP address, or set it as `HostName` in `~/.ssh/config`.              |
+| `connect to host nas.local port 22: Connection refused`                                               | Nothing listens on that port: the SSH server is off, or on another port (`-p`).                                                                                                        |
+| `connect to host nas.local port 22: Connection timed out`                                             | No answer within 15 seconds: the machine is off, or a firewall is between it and EiN.                                                                                                  |
+| `anna@nas.local: Permission denied.`                                                                  | The keys were refused and the password was wrong or not asked for. In a script there is nobody to ask, so only keys are tried: install one with `ssh-copy-id`.                         |
+| `No ED25519 host key is known for nas.local` … `Connect once from an interactive shell to accept it.` | The host is unknown and there was nobody to ask (a script, `BatchMode`, or `StrictHostKeyChecking yes`). Connect once from the terminal, or use `-o StrictHostKeyChecking=accept-new`. |
+| `WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!`                                                    | See [Host keys](#host-keys).                                                                                                                                                           |
+| `Warning: Identity file /home/helen/.ssh/nas not accessible: No such file or directory.`              | The key named with `-i` or `IdentityFile` is not there. Check the path with `ls ~/.ssh`.                                                                                               |
+| `Load key "/home/helen/.ssh/id_rsa": encrypted, and no one to ask for its passphrase`                 | A key with a passphrase and no `.pub` beside it, used where nobody can type it. Use a key without a passphrase for scripts and mounts.                                                 |
+| `ssh-copy-id: no public key found in ~/.ssh; make one with ssh-keygen`                                | Run `ssh-keygen` first.                                                                                                                                                                |
+| `ssh-copy-id: WARNING: All keys were skipped because they already exist on the remote system.`        | Nothing to do: the key is installed. `-f` adds it again.                                                                                                                               |
+| `mount: permission denied, only admin is allowed to mount`                                            | Mounting is for the administrator.                                                                                                                                                     |
 
 ## Related pages
 

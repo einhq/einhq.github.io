@@ -13,7 +13,7 @@ A module that adds a few commands, one setting and one page needs little more th
   "name": "letters",
   "version": "0.1.0",
   "description": "Letters: scanned letters, who wrote them and to whom",
-  "coreApi": "^0.2.0",
+  "coreApi": "^0.5.0",
   "dependencies": { "archive": "^0.1.0" },
   "exports": { "./api": "./lib/api.ts" },
   "imports": {
@@ -72,25 +72,25 @@ The name is also the owner shown beside the module's settings, node types and co
 
 ### `version`
 
-The module's version, in semver: `"0.1.0"`. A module that depends on this one names a range, and `mod setup` refuses the dependent when the installed version is outside it. Raise the minor when you add something a dependent may start to rely on, and the major when something a dependent uses changes.
+The module's version, in semver: `"0.1.0"`. A module that depends on this one names a range, and `mod setup` refuses the dependent when the installed version is outside it. Step it as a caret range reads it: below 1.0.0, raise the minor when something a dependent uses changes or goes, and the patch for anything else; from 1.0.0, the major and the minor. Tag each released version `v<version>` in the module's repository, such as `v0.1.0`, which is what `mod install <name>@v0.1.0` installs.
 
 ### `description`, `author`, `license`
 
-Free text. `description` is shown by `mod list` and `mod info`, on **Settings → Modules** and on the documentation's modules page. Write it as what the module is, for a reader: the Assistant's is "Assistant: answers questions by running EiN's commands for the user, with what the installed modules offer it".
+Free text. `description` is shown by `mod list --long` and `mod info`, on **Settings → Modules** and on the documentation's modules page. Write it as what the module is, for a reader: the Assistant's is "Assistant: answers questions by running EiN's commands for the user, with what the installed modules offer it".
 
 ### `coreApi`
 
-The range of core's module contract the module is written against, as a semver range: `"^0.2.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.2.1`.
+The range of core's module contract the module is written against, as a semver range: `"^0.5.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.5.0`; `system-info` shows it on its `api` line.
 
-The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.2.0` accepts 0.2.x and nothing else.
+The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.5.0` accepts 0.5.x and nothing else.
 
 `mod setup` checks the range:
 
 | Manifest                      | What `mod setup` says                                                         |
 | ----------------------------- | ----------------------------------------------------------------------------- |
-| no `coreApi`                  | `letters: no coreApi declared, assuming 0.2.1`, and it goes on                |
+| no `coreApi`                  | `letters: no coreApi declared, assuming 0.5.0`, and it goes on                |
 | a range that does not parse   | `letters: coreApi is not a valid semver range: …`, and it refuses             |
-| a range core does not satisfy | `letters: needs @ein/client ^0.3.0, this core provides 0.2.1`, and it refuses |
+| a range core does not satisfy | `letters: needs @ein/client ^0.6.0, this core provides 0.5.0`, and it refuses |
 
 ## What a module shares and uses
 
@@ -230,7 +230,7 @@ Environment variables the module reads that are not its settings, documented for
 }
 ```
 
-`key` and `description` are required, `default` is what the reader falls back to when the variable is not set, and `kind` says how the variable reaches whatever reads it:
+`key`, `kind` and `description` are required, `default` is what the reader falls back to when the variable is not set, and `kind` says how the variable reaches whatever reads it:
 
 | `kind`       | How it is set                                                                |
 | ------------ | ---------------------------------------------------------------------------- |
@@ -257,7 +257,7 @@ The node types the module defines, described for `docs node-types` and the [Node
 }
 ```
 
-`type`, `label` and `description` are required. `category` is `content` (what the archive holds), `structure` (what organises it) or `system`.
+`type`, `label`, `description` and `category` are required. `category` is `content` (what the archive holds), `structure` (what organises it) or `system`. `plural` names several of them ("People"; the label with an `s` when it is left out), and `searchable: true` offers the type on the Search page as a choice of what to show, which needs a `root` and a type the `search` command knows.
 
 A type whose nodes live directly under one folder names that folder as `root`, and that makes it something an `@` in the search box completes to. Typing `@hel` lists the names, matching what you typed, of the nodes of every such type directly under its root, so Helen Okafor's person node comes up. `mod setup` registers the types with a root and `mod remove` drops them. When two modules give the same type a root, the first one set up keeps it.
 

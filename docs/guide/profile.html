@@ -302,7 +302,8 @@ that exist already; to change who sees one of those, use its <strong>Share</stro
 </tr>
 </tbody></table>
 </div>
-<p>None of them shows an album to visitors who are not signed in; you grant that yourself in the
+<p>None of them shows an album to visitors who are not signed in, unless you keep <code>default</code> and the
+administrator&#39;s default sharing lets everyone else view; otherwise you grant that yourself in the
 <strong>Share</strong> dialog. An administrator can see every album, whatever you choose. <strong>New private album</strong> in staging is always private, whatever you choose here.
 <a href="sharing.html">Sharing</a> explains the default sharing and the <strong>Share</strong> dialog.</p>
 <h3 id="when-a-change-takes-effect">When a change takes effect<a class="anchor" href="#when-a-change-takes-effect" aria-label="Link to this section"></a></h3>
@@ -335,8 +336,8 @@ preference is also a variable there:</p>
 <span class="hljs-built_in">echo</span> <span class="hljs-variable">$CFG_USER_SLIDESHOW_SECONDS</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>5</code></pre></div>
 <p>It prints an empty line for a setting you have never changed: defaults are not written into the
-file. A terminal that was already open when you saved a change keeps the old value; open a new
-terminal tab, or run <code>source ~/.config</code> in it, to pick up the change.</p>
+file. A terminal that is open when you save a change reads it before its next command; only a
+command that was already running keeps the old value.</p>
 <p>The <code>config</code> command lists and changes your preferences:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 config list --scope user                  <span class="hljs-comment"># your preferences, and where each value comes from</span>
@@ -409,7 +410,8 @@ an older archive by the importer, cannot sign in at all until an administrator s
 it. <a href="../admin/accounts.html">Accounts and groups</a> covers this from the administrator&#39;s side.</p>
 <h2 id="favourites">Favourites<a class="anchor" href="#favourites" aria-label="Link to this section"></a></h2>
 <p>Your favourites are the pictures you have marked with a heart, from any album, gathered on one page.
-Only someone signed in has favourites; visitors have none.</p>
+Only someone signed in has favourites; visitors have none. The Favourites page and its row in the
+account menu come with the Archive module.</p>
 <p>A favourite is a link to the picture where it lives, kept in the folder <code>stars</code> in your home
 folder. Hearting a picture never copies or moves it, and taking it out of your favourites never
 deletes it. <a href="../concepts/links.html">Links</a> explains how one picture can be in many places.</p>
@@ -476,7 +478,7 @@ apart from an administrator, who can see everyone&#39;s.</p>
 </tr>
 </tbody></table>
 </div>
-<p>Each of these says what it did in a message at the foot of the screen, with <strong>Undo</strong>. <strong>Undo</strong> is
+<p>Each of these in the browser says what it did in a message at the foot of the screen, with <strong>Undo</strong>. <strong>Undo</strong> is
 the quickest way back; the Trash page is for later.</p>
 <p>What you delete goes to <em>your</em> trash, also when it belongs to someone else who lets you change it.
 If a picture disappears from an album of yours, the person who deleted it has it in their trash.</p>
@@ -522,7 +524,7 @@ without asking.</p>
 <ol>
 <li>On the Trash page, select one or more rows.</li>
 <li>Choose <strong>Delete for good</strong>, or press <kbd>Delete</kbd>.</li>
-<li>The dialog <strong>Delete for good?</strong> says, for one row: &quot;This item and everything derived from it is
+<li>The dialog <strong>Delete for good?</strong> says, for a single item: &quot;This item and everything derived from it is
 removed for good. This cannot be undone.&quot; Choose <strong>Delete for good</strong>, or <strong>Cancel</strong>.</li>
 </ol>
 <p><strong>Empty trash</strong>, in the bar at the top, does the same for everything in the trash, and its dialog&#39;s
@@ -616,8 +618,8 @@ Starred /archive/albums/Sailing in the archipelago/IMG_0412.jpg</code></pre></di
 </tr>
 <tr>
 <td><code>echo $CFG_USER_…</code> prints an empty line</td>
-<td>You never changed that setting, or the terminal was open before you did.</td>
-<td>Open a new terminal tab; <code>config list --scope user</code> shows every value, defaults included.</td>
+<td>You never changed that setting: defaults are not written into the file.</td>
+<td><code>config list --scope user</code> shows every value, defaults included.</td>
 </tr>
 <tr>
 <td>There is no heart in the viewer and no <strong>Favourite</strong> button</td>

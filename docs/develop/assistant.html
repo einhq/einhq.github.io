@@ -93,7 +93,7 @@
 <li>The system message is the prompt file <code>/etc/assistant-prompt.md</code>, then what each module says about its part.</li>
 <li>The cards an answer can carry, the questions an empty chat suggests and the questions <code>agent-eval</code> asks also come from the modules.</li>
 </ul>
-<p>A module gives all of this in one directory, <code>etc/assistant.d/</code>. When an administrator runs <code>mod setup</code>, that directory is linked as <code>/etc/assistant.d/&lt;module&gt;/</code>, and the setup log says <code>Linked assistant.d at /etc/assistant.d/&lt;module&gt;</code>. The assistant reads every directory under <code>/etc/assistant.d/</code> in name order, as the user who is asking. Every file is optional; a module ships only the ones it needs.</p>
+<p>A module gives all of this in one directory, <code>etc/assistant.d/</code>. When an administrator runs <code>mod setup</code>, that directory is linked as <code>/etc/assistant.d/&lt;module&gt;/</code>, and the setup log says <code>Linked assistant.d at /etc/assistant.d/&lt;module&gt;</code> (<code>Assistant.d already linked at …</code> when the link is there already). The assistant reads every directory under <code>/etc/assistant.d/</code> in name order, as the user who is asking. Every file is optional; a module ships only the ones it needs.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -209,7 +209,7 @@ assistant-commands find <span class="hljs-string">&#x27;find a recipe by ingredi
   ],
   <span class="hljs-attr">returns</span>: <span class="hljs-string">&#x27;nothing; the description is written.&#x27;</span>,
 };</code></pre></div>
-<p>A bash command declares the same with the <code>arg</code> builtin. This is the start of the Archive&#39;s <code>person-create</code>:</p>
+<p>A bash command declares the same with the <code>arg</code> builtin. This is the Archive&#39;s <code>person-create</code>, with some of its options left out:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment">#!bash</span>
 arg --desc <span class="hljs-string">&quot;Create a person node&quot;</span>
 arg --effect write
@@ -229,7 +229,8 @@ JSON_OUTPUT=1 recipe-search --<span class="hljs-built_in">help</span></code></pr
 <ul>
 <li><code>read</code>: running it never changes anything.</li>
 <li><code>write</code>: it changes something every time.</li>
-<li>A command that does both is <code>read</code>, with what makes it a write marked: a flag with <code>writes: true</code>, an argument with <code>writes: true</code> (any value) or <code>writes: [&#39;create&#39;, …]</code> (only those values), and a flag with <code>dryRun: true</code> that turns a write into a report. In bash: <code>arg --writes &lt;name&gt; [value…]</code>.</li>
+<li>A command that does both is <code>read</code>, with what makes it a write marked: a flag with <code>writes: true</code>, an argument with <code>writes: true</code> (any value) or <code>writes: [&#39;create&#39;, …]</code> (only those values). In bash: <code>arg --writes &lt;name&gt; [value…]</code>.</li>
+<li>A flag with <code>dryRun: true</code> reports what the command would do: a line that uses it is a read, even for a <code>write</code> command.</li>
 </ul>
 <p>A command without <code>effect</code> is judged a write, so the user is asked before it runs even when it only reads. You can see how a line is judged:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -383,7 +384,7 @@ agent-eval --print-prompt</code></pre></div>
 <li><code>--fixtures=&lt;path&gt;</code> asks the questions of one file instead of every module&#39;s, and <code>--prompt=&lt;path&gt;</code> tries another prompt file without replacing the installed one.</li>
 <li><code>--user=&lt;path&gt;</code> asks as another person, by the path of their node.</li>
 </ul>
-<p>At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (<code>reached</code>) and how many did so first (<code>firstChoice</code>), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, split into model time and the rest.</p>
+<p>At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (<code>reached</code>) and how many did so first (<code>firstChoice</code>), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, with how much of it the model took.</p>
 <p>A full run over every module&#39;s questions takes a long time. Run it so it survives a dropped connection, and keep the results in a file that is written after every question:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">nohup</span> agent-eval --out /tmp/agent-eval.json</code></pre></div>
@@ -433,7 +434,7 @@ mod setup assistant</code></pre></div>
 <li><strong>The model calls your command with a flag as a stray word, or a value as a switch.</strong> A flag without a <code>type</code> cannot be told apart. Give every flag one.</li>
 <li><strong>The model keeps leaving out an argument it needs, or insists on one it does not.</strong> Check whether its description says &quot;optional&quot; or &quot;default&quot;; that alone decides whether it is required.</li>
 <li><strong>Every use of your command asks the user first.</strong> Its spec has no <code>effect</code>, or it is <code>write</code>. A command that only reads should say <code>read</code>.</li>
-<li><strong>The chat answers &quot;x is not an EiN command&quot;.</strong> The model made up a command name. The answer names similar commands it found; a clearer description or an example in <code>prompt.md</code> helps it pick the right one.</li>
+<li><strong>A command the model ran is refused as &quot;x is not an EiN command&quot;.</strong> The model made up a command name. That message, which the model reads, names similar commands it found; a clearer description or an example in <code>prompt.md</code> helps it pick the right one.</li>
 <li><strong>A card never appears.</strong> The model gives a card only when its <code>description</code> says it is wanted. Check the card with <code>agent-eval --print-prompt</code> under <code>final_answer</code>, and check that every <code>required</code> parameter can be filled: a path the asking user cannot see is dropped, and with it a card that needed it.</li>
 <li><strong>Answers are good in one language and poor in another.</strong> Add questions in both to <code>eval.json</code> and compare <code>language</code> in the summary.</li>
 </ul>

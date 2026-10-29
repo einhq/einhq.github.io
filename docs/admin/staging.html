@@ -197,8 +197,12 @@ following, so albums and suggestions keep pointing at it:</p>
 <td>The Inbox folder that loose files of <code>files/</code> move into, instead of <code>unsorted</code>.</td>
 </tr>
 <tr>
+<td><code>--idle-minutes &lt;n&gt;</code></td>
+<td>Leaves a loose file of <code>files/</code> where it is when it changed within the last <code>n</code> minutes, so a copy still being written is not moved. The service passes <code>360</code>.</td>
+</tr>
+<tr>
 <td><code>--layout-only</code></td>
-<td>Makes the directories and categories and moves nothing. The service runs this.</td>
+<td>Makes the directories and categories and moves nothing. The <strong>Staging</strong> page runs this.</td>
 </tr>
 <tr>
 <td><code>--dry-run</code></td>
@@ -256,7 +260,7 @@ engine, which <a href="processing.html">Processing and pipelines</a> covers.</p>
 <tr>
 <td><code>staging-organizer</code> (service)</td>
 <td>Every hour</td>
-<td>Sets up every account&#39;s staging area (<code>staging init --all --layout-only</code>) and checks every duplicate finding against where its file is now (<code>staging duplicates --repair --all</code>).</td>
+<td>Sets up every account&#39;s staging area and moves a file copied loose into <code>files/</code>, once nothing has changed on it for six hours, into <code>files/inbox/unsorted/</code> (<code>staging init --all --idle-minutes 360</code>); and checks every duplicate finding against where its file is now (<code>staging duplicates --repair --all</code>).</td>
 </tr>
 </tbody></table>
 </div>
@@ -339,8 +343,8 @@ details the person copying needs, and <a href="../shell/ssh-sftp.html">SSH and S
 </li>
 <li><p><strong>Let it run.</strong> <code>staging status --user helen</code> shows how many files are still being read. The
 <strong>Dashboard</strong> reads <strong>Catching up</strong> while work waits and gets done. A file that is an exact copy
-of one its owner can already open is not processed at all, so a second copy of an export costs
-little.</p>
+of one its owner can already open is recorded as a copy and processed no further, so a second
+copy of an export costs little.</p>
 </li>
 <li><p><strong>Sort.</strong> The groups appear on the category&#39;s <strong>Sort</strong> tab as the files are read; its owner
 files them as <a href="../guide/staging.html">Sorting in staging</a> describes.</p>
@@ -369,7 +373,7 @@ change anyone&#39;s with <code>--user</code>.</p>
 <tbody><tr>
 <td><code>--kind &lt;kind&gt;</code></td>
 <td><code>inbox</code>, <code>google-photos</code>, <code>scans</code>, <code>phone</code>, <code>camera</code>, <code>messaging</code>, <code>screenshots</code>, <code>generic</code></td>
-<td>What it holds. A new kind resets every other setting to that kind&#39;s, but for the default album, and the label unless the same command sets one.</td>
+<td>What it holds; only the Inbox is of the <code>inbox</code> kind. A new kind resets every other setting, the label too, to that kind&#39;s, but for the default album and what the same command sets.</td>
 </tr>
 <tr>
 <td><code>--label &lt;text&gt;</code></td>
@@ -620,7 +624,7 @@ into their journal and shows on their <strong>Done</strong> tab, where they can 
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 staging journal inbox --user helen --<span class="hljs-built_in">limit</span> 10
 staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N --user helen</code></pre></div>
-<p>Removing copies is the owner&#39;s alone: the copies go to the trash of whoever runs it, so <code>staging dedupe</code> for someone else answers <code>staging dedupe moves copies to your own trash: run it as helen</code>.</p>
+<p>Removing copies is the owner&#39;s alone: the copies go to the trash of whoever runs it, so <code>staging dedupe</code> for someone else answers <code>staging dedupe: staging dedupe moves copies to your own trash: run it as helen</code>.</p>
 <p><a href="../reference/commands-archive.html#staging">Archive commands</a> lists every subcommand and option.</p>
 <h2 id="import-an-older-archive">Import an older archive<a class="anchor" href="#import-an-older-archive" aria-label="Link to this section"></a></h2>
 <p>The <code>importer</code> module moves one particular older archive, kept as MongoDB dumps, into EiN: its

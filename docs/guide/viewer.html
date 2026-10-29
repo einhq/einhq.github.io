@@ -96,8 +96,10 @@ page. With the keyboard, move to a tile with <kbd>Tab</kbd> and press <kbd>Enter
 <p>The viewer walks the list you opened it from, in that list&#39;s order. A search hit on something said
 in a video or a recording opens it at the moment the words are spoken; see
 <a href="search.html">Search and the finder</a>.</p>
-<p>Each file in the viewer has its own address: <code>/media/</code> followed by the file&#39;s path. You can copy it
-from the browser&#39;s address bar and send it to someone who may see the file. Stepping to another
+<p>Each file in the viewer has its own address: the page&#39;s address with the file added in its
+<code>fullscreen</code> parameter (<code>…?fullscreen=%2Fmedia%2F…</code>), or, opened on its
+own, <code>/media/</code> followed by the file&#39;s path. You can copy it from the browser&#39;s address bar and send
+it to someone who may see the file. Stepping to another
 file replaces the address instead of adding to the browser&#39;s history, so one press of the browser&#39;s
 Back button closes the viewer and returns you to the page underneath.</p>
 <h2 id="what-the-viewer-shows">What the viewer shows<a class="anchor" href="#what-the-viewer-shows" aria-label="Link to this section"></a></h2>
@@ -177,7 +179,7 @@ you were in the grid.</p>
 <p><kbd>Esc</kbd> first closes whatever lies over the picture: the enlarged map, the text dialog or
 <strong>Edit faces</strong>. During a slideshow it stops the slideshow. Only then does it close the viewer.</p>
 <h2 id="zoom-in-on-a-photo">Zoom in on a photo<a class="anchor" href="#zoom-in-on-a-photo" aria-label="Link to this section"></a></h2>
-<p>Photos zoom; videos and recordings do not, and neither does a photo during a slideshow.</p>
+<p>Photos and videos zoom; recordings do not, and nothing zooms during a slideshow.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -193,7 +195,7 @@ you were in the grid.</p>
 </tr>
 <tr>
 <td>Zoom in on a spot, or back out</td>
-<td>Double-click</td>
+<td>Double-click a photo</td>
 <td>Double-tap</td>
 </tr>
 <tr>
@@ -271,8 +273,8 @@ text laid on the picture, the mouse wheel scrolls the text; hold <kbd>Ctrl</kbd>
 <kbd>?</kbd> to see the shortcuts that work where you are, and see
 <a href="../reference/shortcuts.html">Keyboard shortcuts</a> for every key in EiN.</p>
 <h2 id="on-a-phone-or-tablet">On a phone or tablet<a class="anchor" href="#on-a-phone-or-tablet" aria-label="Link to this section"></a></h2>
-<p>The viewer takes its phone layout on any touch screen, and in any browser window narrower than 768
-pixels.</p>
+<p>The viewer takes its phone layout on any touch screen, and in any browser window 768 pixels wide or
+narrower.</p>
 <figure class="shot"><a href="../../assets/shots/phone-lightbox@2x.webp"><img src="../../assets/shots/phone-lightbox.webp" srcset="../../assets/shots/phone-lightbox.webp 1x, ../../assets/shots/phone-lightbox@2x.webp 2x" alt="The viewer on a phone held upright: the date in a dark pill over the top of the picture, the position and the place under it, and the details sheet pulled up over the bottom half with the camera, the album and three people with their ages" width="390" height="844" loading="lazy" decoding="async"></a><figcaption>On a phone the details are a sheet you pull up from under the picture with a swipe.</figcaption></figure>
 <ul>
 <li>The date sits in a dark pill centred over the top of the picture, with the time beneath it.</li>
@@ -283,7 +285,7 @@ pixels.</p>
 up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
 the details open as a panel on the right: press <strong>Show details</strong> beside ⋮, or swipe up, and swipe
 the panel to the right to close it.</li>
-<li><strong>Edit faces</strong> is not offered on a phone.</li>
+<li><strong>Edit faces</strong> is not offered on a phone held upright.</li>
 </ul>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -478,7 +480,7 @@ may change the file, and for any signed-in reader for <strong>Add to album</stro
 </tr>
 <tr>
 <td><strong>Edit faces</strong></td>
-<td>Readers who may change the file, on photos, on a computer</td>
+<td>Readers who may change the file, on photos and videos, not on a phone held upright</td>
 <td>Draw, move or remove face boxes. See <a href="#draw-or-correct-a-face-box">Draw or correct a face box</a>.</td>
 </tr>
 <tr>
@@ -533,7 +535,9 @@ is a found face whose box someone has moved or resized.</li>
 </ul>
 <h3 id="draw-or-correct-a-face-box">Draw or correct a face box<a class="anchor" href="#draw-or-correct-a-face-box" aria-label="Link to this section"></a></h3>
 <p>Use <strong>Edit faces</strong> when recognition missed a face, drew the box in the wrong place, or matched the
-wrong person. It is offered on photos you may change, on a computer.</p>
+wrong person. It is offered on photos and videos you may change, except on a phone held upright. On
+a video it pauses the video, and you draw on the frame on screen; a box already there can be chosen
+and removed or given to someone else, but not moved or resized.</p>
 <ol>
 <li>In the pencil menu, choose <strong>Edit faces</strong>. The bar under the picture reads <strong>Draw a new box or
 select a face</strong>, and every box shows.</li>
@@ -585,7 +589,7 @@ search finds pictures by it; see <a href="search.html">Search and the finder</a>
 <ol>
 <li>In the More menu, choose <strong>Edit text</strong>, or <strong>Add text</strong> when nothing was read. With the text
 shown, the pencil at its top right does the same.</li>
-<li>The dialog <strong>Text in the picture</strong> opens: the picture on the left, which you can zoom to read
+<li>The dialog <strong>Text in the picture</strong> opens: the picture on the left (above, on a narrow screen), which you can zoom to read
 closely, and a text box on the right.</li>
 <li>Type or correct the text.</li>
 <li>Press <strong>Save</strong>, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. Saving empty text removes it.</li>
@@ -652,11 +656,6 @@ and come back when you move the mouse.</p>
 <td>Shows or hides subtitles, when the video has a transcript. The tooltip names the language: <strong>Subtitles: English (c)</strong>.</td>
 </tr>
 <tr>
-<td>Speed, such as <code>1×</code></td>
-<td><kbd><</kbd> / <kbd>></kbd></td>
-<td>Opens <strong>Speed</strong>: 0.5×, 0.75×, <strong>Normal</strong>, 1.25×, 1.5× and 2×. The keys step slower or faster.</td>
-</tr>
-<tr>
 <td><strong>Picture-in-picture</strong></td>
 <td><kbd>p</kbd></td>
 <td>Plays the video in a small window that stays on top, where the browser offers it.</td>
@@ -664,7 +663,7 @@ and come back when you move the mouse.</p>
 <tr>
 <td><strong>Cast to a screen</strong></td>
 <td></td>
-<td>Sends the video to a television or other screen, while your browser finds one.</td>
+<td>Sends the video to a television or other screen. Shown only while your browser finds one.</td>
 </tr>
 <tr>
 <td><strong>Fullscreen</strong></td>
@@ -673,14 +672,14 @@ and come back when you move the mouse.</p>
 </tr>
 </tbody></table>
 </div>
-<p>The volume you set is remembered in this browser for the next video. The speed belongs to the video
-you set it on.</p>
+<p>The volume you set is remembered in this browser for the next video or recording. There is no
+control for the playback speed.</p>
 <p>On a phone, tap the picture to show or hide the controls. Three buttons sit over the middle of the
 picture: back ten seconds, play or pause, and forward ten seconds, or previous and next chapter
-when the video has chapters. <strong>Playback settings</strong> (the gear) holds the speed, <strong>Picture-in-picture</strong>
-and <strong>Cast to a screen…</strong>. There is no mute button: use the phone&#39;s own volume buttons. On an
-iPhone, <strong>Fullscreen</strong> opens Safari&#39;s own player, which shows the subtitles when you have turned
-them on. Elsewhere, a wide video put fullscreen with the player&#39;s button turns the screen sideways
+when the video has chapters. <strong>More</strong> (⋮) on the bar holds <strong>Picture-in-picture</strong> and
+<strong>Cast to a screen…</strong>, where the browser offers them. There is no mute button: use the phone&#39;s own volume buttons. On an
+iPhone, <strong>Fullscreen</strong> opens Safari&#39;s own player, which shows the subtitles when they are
+on. Elsewhere, a wide video put fullscreen with the player&#39;s button turns the screen sideways
 where the browser allows it.</p>
 <h3 id="the-timeline-and-chapters">The timeline and chapters<a class="anchor" href="#the-timeline-and-chapters" aria-label="Link to this section"></a></h3>
 <p>Click or drag on the timeline to jump. Pointing at it shows the time there and, once the media
@@ -695,8 +694,9 @@ before.</p>
 previous and next chapter (or a tenth of the video, without chapters), and <kbd>Home</kbd> and
 <kbd>End</kbd> go to the start and the end.</p>
 <h3 id="subtitles">Subtitles<a class="anchor" href="#subtitles" aria-label="Link to this section"></a></h3>
-<p>A video with a transcript has the CC button. Subtitles start off; once you turn them on, they stay
-on for the next video in this browser. When two or more people speak, each line starts with the
+<p>A video or recording with a transcript has the CC button. Subtitles start on; once you turn them
+off, they stay off for the next video or recording in this browser, until you turn them on again.
+When two or more people speak, each line starts with the
 speaker&#39;s name, in a colour of their own. A voice nobody has named is called <strong>Speaker 1</strong>,
 <strong>Speaker 2</strong> and so on.</p>
 <h3 id="faces-in-a-video">Faces in a video<a class="anchor" href="#faces-in-a-video" aria-label="Link to this section"></a></h3>
@@ -709,9 +709,13 @@ the frame where the face is seen most clearly and keeps a box on the face from t
 <figure class="shot"><a href="../../assets/shots/recording@2x.webp"><img src="../../assets/shots/recording.webp" srcset="../../assets/shots/recording.webp 1x, ../../assets/shots/recording@2x.webp 2x" alt="The viewer on a recording called Voice 001.m4a: a waveform with the playhead line near the start, buttons to go back and forward ten seconds around a pause button, the clock 0:42 / 2:11, and the details panel with the speaker chip Speaker 1 · 1:38 above the transcript, the current line in bold" width="1140" height="640" loading="lazy" decoding="async"></a><figcaption>A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.</figcaption></figure>
 <p>A recording starts playing when it opens. Its picture is the waveform of the sound, and the waveform
 is the timeline: the part already played is brighter, a line marks where you are, and a click or a
-drag on it jumps there. Under it are <strong>Back 10s</strong>, play or pause (<strong>Play (space)</strong>, <strong>Pause
-(space)</strong>) and <strong>Forward 10s</strong>, then the clock and the file name.</p>
-<p><kbd>Space</kbd> or <kbd>k</kbd> plays and pauses. Move to the waveform with <kbd>Tab</kbd> to use
+drag on it jumps there. A large play button sits on it while the recording is paused. Under it are
+play or pause (<strong>Play (Space)</strong>, <strong>Pause (Space)</strong>), <strong>Back 10 s</strong> and <strong>Forward 10 s</strong>, mute and
+the volume slider (not on a phone), and the clock; at the right end <strong>Subtitles</strong> (CC) when it has a
+transcript, <strong>Picture-in-picture</strong> where the browser offers it, and <strong>Fullscreen</strong>. With subtitles
+on, the line being said shows between the waveform and the buttons.</p>
+<p><kbd>Space</kbd> or <kbd>k</kbd> plays and pauses, and <kbd>j</kbd>, <kbd>l</kbd>, <kbd>m</kbd>,
+<kbd>c</kbd> and <kbd>p</kbd> work as on a video. Move to the waveform with <kbd>Tab</kbd> to use
 the same keys as on a video&#39;s timeline.</p>
 <h2 id="read-along-with-a-transcript">Read along with a transcript<a class="anchor" href="#read-along-with-a-transcript" aria-label="Link to this section"></a></h2>
 <p>The media service writes down what is said in videos and recordings, and works out who speaks when.
@@ -724,7 +728,7 @@ The transcript appears near the top of the details panel, under the file.</p>
 <p>Above the lines is a chip for each voice, such as <strong>Speaker 1 · 1:38</strong>: who it is and how long they
 speak in the file.</p>
 <ul>
-<li>The small play button on a chip (<strong>Hear Speaker 1</strong>) plays that voice&#39;s longest turn.</li>
+<li>The small play button on a chip (<strong>Hear Speaker 1</strong>) jumps to the start of that voice&#39;s longest turn.</li>
 <li>Click a chip to say who it is. A named voice opens the person&#39;s page. An unnamed one opens the
 review, where you name them or say they are someone already in the archive. A voice that belongs
 to nobody yet becomes an unidentified person of its own first; this needs permission to change

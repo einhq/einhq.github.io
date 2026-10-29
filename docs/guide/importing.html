@@ -289,7 +289,8 @@ themselves:</p>
 only the folder&#39;s name is not used.</p>
 <p>Put files in a category&#39;s folder, never in <code>files/</code> itself: a folder copied directly into <code>files/</code>
 becomes a category of its own, of the <strong>Other</strong> kind, and a file left there belongs to no category
-until your administrator runs <code>staging init</code>, which moves it into <code>files/inbox/unsorted/</code>.</p>
+until EiN moves it into <code>files/inbox/unsorted/</code>. It does that once an hour, for a file nothing has
+changed on for six hours, so a copy still being written is left alone.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>A file you delete over SFTP is gone for good; it does not go to the trash. To get rid of staged
 files, use <strong>Discard…</strong> on the category&#39;s <strong>Files</strong> tab, which puts them in your trash with Undo.</p>
@@ -538,9 +539,10 @@ N still to go.&quot;</li>
 EiN worked out about them; from then on whoever can see that album sees them. A discarded group
 goes to your trash. Filing and discarding can be undone on the category&#39;s <strong>Done</strong> tab.</li>
 </ol>
-<p>The card&#39;s bar shows the same files by how far along they are: <strong>Being prepared</strong>, <strong>To sort</strong>,
-<strong>Needs a date</strong> (read, but with no date) and <strong>Other files</strong> (files that are not pictures,
-videos or recordings). How to go through the groups is on
+<p>The card&#39;s bar shows the same files by how far along they are: <strong>Being prepared</strong>, <strong>To sort</strong>
+(read, with a date), <strong>Needs a date</strong> (read, but with no date) and <strong>Other files</strong> (files that are
+not pictures, videos or recordings). An exact copy that went no further, and an empty picture,
+video or recording, are in none of them. How to go through the groups is on
 <a href="staging.html#sort-the-stream-of-suggested-albums">Sorting in staging</a>.</p>
 <h2 id="why-new-pictures-have-no-thumbnails-yet">Why new pictures have no thumbnails yet<a class="anchor" href="#why-new-pictures-have-no-thumbnails-yet" aria-label="Link to this section"></a></h2>
 <p>Reading a file&#39;s date and place is only the first step. The rest of the work runs side by side

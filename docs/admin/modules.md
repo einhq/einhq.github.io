@@ -24,8 +24,9 @@ GitHub:
 A module needs only what its manifest names as dependencies; EiN installs those with it. A service
 that runs beside EiN, such as the media service or the language model, is no module: the installer
 adds it (see [Installing in detail](install.md)). Installing `archive` without the media service
-gives no error, but nothing you upload gets thumbnails, dates, faces or searchable text until the
-media service is there.
+gives no error, only a reminder from the installer and `setup.sh` when `EIN_MODULES` names it, but
+nothing you upload gets thumbnails, dates, faces or searchable text until the media service is
+there.
 
 A fourth module, `importer`, moves one particular older archive into EiN. It is not published.
 
@@ -50,7 +51,7 @@ Type in the filter box to narrow the list by name or description. **Show only ac
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
 Choose a module to open its panel. At the top it shows the module's name, its version and the core
-API it is written for (`version 0.1.0 · core API ^0.4.1`), where it is installed
+API it is written for (`version 0.1.0 · core API ^0.5.0`), where it is installed
 (`/usr/modules/archive`), when it was set up, and its state. **Reference and guide** opens the
 module's own page in **Documentation**, with its guide and every command, setting and node type it
 brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
@@ -121,7 +122,7 @@ Each published module carries a badge for what is installed of it:
 | **Installed from elsewhere** | A module of this name is installed from another repository.                                                                                            |
 | **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.    |
 
-A module written for a different core API says "Needs core API ^0.5.0, which this EiN does not
+A module written for a different core API says "Needs core API ^0.6.0, which this EiN does not
 provide." (with its own range), and its button is greyed out. **Refresh** asks the sources again.
 
 In the terminal, `mod search` lists the same, and `mod install` installs:
@@ -163,11 +164,11 @@ A line follows for each step of each setup, ending in `Module 'archive' setup co
 services it started. `mod install` takes several modules at once, and each can be named in three
 ways:
 
-| You write                                     | What is installed                                                                |
-| --------------------------------------------- | -------------------------------------------------------------------------------- |
-| `archive`                                     | `module-archive` from the first module source that has it, at its default branch |
-| `https://github.com/einhq/module-archive`     | That repository, at its default branch                                           |
-| `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its full 40-character id                      |
+| You write                                     | What is installed                                                                                               |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `archive`                                     | `module-archive` from the first module source that has it, at its default branch                                |
+| `https://github.com/einhq/module-archive`     | That repository, at its default branch                                                                          |
+| `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its id, whole or its first seven characters or more, which EiN records whole |
 
 The [reference](../reference/commands-core.md#mod-install) lists its options.
 
@@ -197,8 +198,8 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
 - Or open the module's panel. A module installed from its repository has a section **Installed
   from its repository**, saying which repository and commit it came from and when, with **Update**
   and **Remove**. **Update** there fetches the newest commit of the branch it was installed from,
-  or the same tag again for one installed at a tag; one installed at a commit gets the newest
-  commit of the default branch. It answers **Updated**, or **Up to date** when there was nothing
+  or the same tag again for one installed at a tag. One installed at a commit stays there, and its
+  panel offers no **Update**. It answers **Updated**, or **Up to date** when there was nothing
   newer.
 - In the terminal, `mod install archive` updates an installed module. The same commit again is
   left alone: `archive is installed at 5e1c07a42 (main) already`.
@@ -215,8 +216,10 @@ nothing keeps running the code that was replaced. The new version takes the old 
 single step: the module's folder always holds one whole version.
 
 To pin a module to a version, install it at a tag, such as `mod install archive@v0.1.0` where its
-repository has that tag; its panel's **Update** then keeps it there. The published modules always compare with the default
-branch, so they may offer **Update** for it, which installs the default branch.
+repository has that tag, or at a commit, such as `mod install archive@463a92f`. Its panel's
+**Update** then keeps it at the tag, and a module installed at a commit has no **Update** there.
+The published modules always compare with the default branch, so they may offer **Update** for
+it, which installs the default branch, as `mod install archive` without a ref does.
 
 ## Remove a module
 
@@ -316,7 +319,7 @@ does. The usual ones:
 | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                               |
 | `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                           |
-| `archive: needs @ein/client ^0.5.0, this core provides 0.4.3`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
+| `archive: needs @ein/client ^0.6.0, this core provides 0.5.0`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
 
 After fixing the cause, set the module up again with `mod setup archive`, or every module with
 `mod setup --all`, which is what EiN runs at each start. Restarting EiN does the same.
@@ -334,7 +337,7 @@ terminal shows its pages in a browser tab that was already open once that page i
 | Message                                                                                            | What it means                                                                          |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `no module source has 'recipes': …`                                                                | None of the module sources has `module-recipes`, or none answered; the reasons follow. |
-| `https://github.com/einhq/module-archive has no branch or tag 'v9'`                                | The ref after `@` does not exist.                                                      |
+| `https://github.com/einhq/module-archive has no branch, tag or commit 'v9'`                        | The ref after `@` does not exist.                                                      |
 | `… has no mod.json at its top: not a module`                                                       | The repository is not a module.                                                        |
 | `/usr/modules/archive is a module mod install did not put there; mod remove archive first`         | Something else holds the name.                                                         |
 | `no module sources to find 'archive' in: CFG_MODULE_SOURCES is empty; name its repository instead` | **Module sources** is empty.                                                           |

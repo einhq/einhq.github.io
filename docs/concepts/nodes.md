@@ -60,9 +60,11 @@ The properties dialog has three tabs:
 - **General** shows the node's **Id**, **Type**, **Links**, **Created**, **Changed** and
   **Modified**, a file's **Mimetype** and **Size**, a link's **Link to**, and the **Mode**,
   **Owner** and **Group**, which you can change there and save with **Apply**.
-- **Attributes** shows the attributes as JSON. If you may change the node, you can edit them and
-  choose **Save**, or **Reset** to go back to what is stored. Otherwise it says _You can read these
-  attributes but not change them._
+- **Attributes** shows the attributes, a **Key** and a **Value** to a row. If you may change the
+  node, you can edit a row, remove it or **Add** one, and save with **Apply**, or **Reset** to go
+  back to what is stored. The **Attributes** tab beside the listing shows them as JSON instead,
+  saved with **Save**; when you may not change the node it says _You can read these attributes but
+  not change them._
 - **Sharing** is the **Share** dialog's body; [Permissions in depth](../admin/permissions.md)
   explains it.
 
@@ -221,7 +223,8 @@ Children work the same for every type. A photo keeps what EiN works out about it
 ls /archive/albums/christmas-2019/20191225_155434.jpg
 ```
 
-Deleting a node deletes its children with it. Names are unique within a folder, so a folder cannot
+Deleting a node deletes its children with it: `rm` refuses a node that has children unless you
+add `-r`. Names are unique within a folder, so a folder cannot
 hold two children of the same name. How the tree is laid out, folder by folder, is in
 [The tree](tree.md).
 
@@ -234,7 +237,7 @@ The type is a plain word stored on the node, and it decides three things:
   in order; a `session` disappears when its connection ends; a `file` is shown as a picture, a video
   or a text by its mimetype.
 - **Where it shows.** The Archive's pages list `album`, `person`, `location` and `device` nodes;
-  the search box's `@` completes the names of these types. `find -type person` finds a type
+  the search box's `@` completes their names, and labels'. `find -type person` finds a type
   anywhere in the tree.
 
 A node's type does not change after it is made. To turn a folder into an album, for example, make

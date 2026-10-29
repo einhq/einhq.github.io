@@ -53,7 +53,7 @@
   <line x1="376" y1="446" x2="438" y2="446" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#install-flow-arrow)" />
   <text x="408" y="436" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">starts</text>
   <line x1="440" y1="516" x2="378" y2="516" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#install-flow-arrow)" />
-  <text x="408" y="506" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its log</text>
+  <text x="408" y="506" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">answers</text>
 
   <!-- EiN's first start, in its container -->
   <rect x="440" y="24" width="336" height="516" rx="12" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
@@ -69,7 +69,7 @@
 
   <rect x="456" y="173" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="474" y="193" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The admin account</text>
-  <text x="474" y="211" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a random password, printed to its log</text>
+  <text x="474" y="211" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its first password from .env, or a random one</text>
   <line x1="608" y1="221" x2="608" y2="272" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#install-flow-arrow)" />
 
   <rect x="456" y="274" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />

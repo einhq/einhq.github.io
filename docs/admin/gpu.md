@@ -11,7 +11,7 @@ Two of EiN's optional services use the card. EiN itself and its database never d
 | The media service (`ems`, the `--ems` option)  | The models for faces, voices, transcripts, text in pictures and handwriting, picture and text vectors; AV1 video encoding |
 | The language model (`llm`, the `--llm` option) | As many of the model's layers as fit in the part of the card left to it                                                   |
 
-A card changes how fast the work is done, not what comes out of it, with one exception. Each model family is placed when the media service loads it: on the card when there is room, otherwise on the processor with the same weights. Transcripts are the exception: on a machine with a card, whisper always runs on the card and a transcription waits for room there rather than move to the processor; on a machine without one it runs on the processor, at about twice the length of the recording. The two give slightly different words, so a transcript never depends on what else happened to be on the card.
+A card changes how fast the work is done, not what comes out of it, with one exception. Each model family is placed when the media service loads it: on the card when there is room, otherwise on the processor with the same weights. Transcripts are the exception: on a machine with a card, whisper always runs on the card and a transcription waits for room there rather than move to the processor; on a machine without one it runs on the processor, at about twice the length of the recording. The two give slightly different words, so a transcript never depends on what else happened to be on the card. The handwriting readers also wait for room on the card rather than move, since on the processor they are about ten times slower.
 
 | Card  | Transcripts                              | Everything else                                  | Language model     |
 | ----- | ---------------------------------------- | ------------------------------------------------ | ------------------ |
@@ -78,10 +78,12 @@ The containers reach the card through CDI, the Container Device Interface: a fil
 
 5. Check your container engine:
 
-   | Engine | What it needs                                                                                                      |
-   | ------ | ------------------------------------------------------------------------------------------------------------------ |
-   | podman | Any version reads CDI. podman 4.9.3, the one in Ubuntu 24.04 and Linux Mint 22, needs the fix in the next section. |
-   | Docker | Docker Engine 28.2 or newer, where CDI is on by default.                                                           |
+   | Engine | What it needs                                                                                                                               |
+   | ------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+   | podman | podman 5 reads the CDI file as it is. Versions before 5, such as 4.9.3 in Ubuntu 24.04 and Linux Mint 22, need the fix in the next section. |
+   | Docker | Docker Engine 28.2 or newer, where CDI is on by default.                                                                                    |
+
+   The installer checks both, and reports a podman before 5 that would reject the file, or a Docker before 28.2, as `low` on its `container GPU` line.
 
 6. Check that a container sees the card:
 
@@ -92,9 +94,9 @@ The containers reach the card through CDI, the Container Device Interface: a fil
 
    With Docker, write `docker run --rm --device nvidia.com/gpu=all` instead. It prints one line per card. When it fails with `unresolvable CDI devices nvidia.com/gpu=all`, the engine cannot read the CDI file: see the next section.
 
-### Fix the CDI file for podman 4.9.3
+### Fix the CDI file for podman before 5
 
-podman 4.9.3 rejects the CDI file as `nvidia-ctk` 1.17 and newer writes it, with `unknown field "additionalGids"`, and a container asking for `nvidia.com/gpu=all` then finds no card. The media service's repository has a script that makes every regeneration of the file readable to podman 4.9.3, once per machine:
+podman before 5, such as 4.9.3, rejects the CDI file as `nvidia-ctk` 1.17 and newer writes it, with `unknown field "additionalGids"`, and a container asking for `nvidia.com/gpu=all` then finds no card. The media service's repository has a script that makes every regeneration of the file readable to it, once per machine:
 
 1. Make sure the machine has Python's YAML library, which the fix uses. On Ubuntu and Mint:
 
@@ -112,24 +114,33 @@ podman 4.9.3 rejects the CDI file as `nvidia-ctk` 1.17 and newer writes it, with
 
    Without the media service, fetch its repository first with `git clone https://github.com/einhq/ems.git` and run `deploy/install-cdi-refresh.sh` from there.
 
-The script copies the fix to `/usr/local/sbin/ems-fix-cdi`, adds it to `nvidia-cdi-refresh.service` as a step that runs after every regeneration, removes `/etc/cdi/nvidia.yaml` if there is one, and regenerates the file at once. It ends by printing the lines of `/var/run/cdi/nvidia.yaml` it changed: `cdiVersion: 0.6.0` and no `additionalGids`. It keeps working across reboots and toolkit upgrades, and running it again does no harm. Then try the check in step 6 again.
+The script copies the fix to `/usr/local/sbin/ems-fix-cdi`, adds it to `nvidia-cdi-refresh.service` as a step that runs after every regeneration, removes `/etc/cdi/nvidia.yaml` if there is one, and regenerates the file at once. It ends with the service's status and a count of the `cdiVersion`, `additionalGids` and `/dev/dri/card` lines in `/var/run/cdi/nvidia.yaml`: after the fix, `cdiVersion: 0.6.0` and no `additionalGids`. It keeps working across reboots and toolkit upgrades, and running it again does no harm. Then try the check in step 6 again.
 
 ## Give the card to EiN
 
-The first `setup.sh`, the one the installer runs, looks for a card. When `nvidia-smi` works and a CDI file exists in `/var/run/cdi` or `/etc/cdi`, it writes `EIN_GPU=1` into `~/ein/.env`; otherwise `EIN_GPU=0`. From then on, every run of `setup.sh` gives the card to the media service and the language model, whichever of them you installed, by writing this into `~/ein/compose.override.yaml`:
+The first `setup.sh`, the one the installer runs, looks for a card. When `nvidia-smi` works and a CDI file exists in `/var/run/cdi` or `/etc/cdi`, it writes `EIN_GPU=1` into `~/ein/.env`; otherwise `EIN_GPU=0`. From then on, every run of `setup.sh` gives the card to the media service and the language model, whichever of them you installed, by writing it into `~/ein/compose.override.yaml`. Under podman, with both installed, the file reads:
 
 ```yaml
+# Written by setup.sh from the options in .env and the container engine; edit those and run
+# setup.sh again.
 services:
-  ems:
-    extends: { file: compose.ems.yaml, service: ems }
-    devices: [nvidia.com/gpu=all]
-  llm:
-    extends: { file: compose.llm.yaml, service: llm }
-    devices: [nvidia.com/gpu=all]
+  db:
+    restart: always
   ein:
     environment:
       CFG_LLM_CARD: card
+    restart: always
+  ems:
+    extends: { file: compose.ems.yaml, service: ems }
+    devices: [nvidia.com/gpu=all]
+    restart: always
+  llm:
+    extends: { file: compose.llm.yaml, service: llm }
+    devices: [nvidia.com/gpu=all]
+    restart: always
 ```
+
+Under Docker the `restart: always` lines are left out.
 
 `CFG_LLM_CARD` tells EiN where its own language model runs, `card` or `cpu`, so the chat and the health checks can say so ([setting](../reference/settings.md#cfg_llm_card)).
 
@@ -162,7 +173,7 @@ Open **Dashboard** under **System** in the sidebar. The **Overview** tab has a *
 The **Media service** tab shows more:
 
 - **Media service**, at the top, names the **card** and its **driver**.
-- **Graphics card mode** says who has the card now: **busy** while indexing has it and search runs on the processor, **quiet** when there is no indexing work and search runs on the card as far as it fits, **switching** while it is handed over. **off** means there is no card to share.
+- **Graphics card mode** says who has the card now: **busy** while indexing has it and search runs on the processor, **quiet** when there is no indexing work and search runs on the card as far as it fits, **switching** while it is handed over. With no card to share, or with `EMS_CARD_QUIET_AFTER=0`, the mode is off and the tab leaves this out.
 - **Graphics card memory** splits the card's memory by process: the media service's batch, query and card workers, its other processes such as transcodes, and **outside EMS**, which is the language model when it shares the card.
 - The list of models gives each copy its place, **GPU** or **CPU**, and whether it is loaded.
 
@@ -195,7 +206,7 @@ With both `--ems` and `--llm` on one card, the two services split it by one numb
 | `EMS_CARD_SHARE_MB`   | the media service  | `0`     | The most of the card, in MB, the media service's processes hold. A model that would take it past this runs on the processor, even while the rest of the card is free. `0` is the whole card. |
 | `LLM_CARD_RESERVE_MB` | the language model | `8800`  | How much of the card the language model leaves free when it starts. It takes as many layers as fit in the rest, and runs the others on the processor.                                        |
 
-Set the language model's reserve 400 MB above the media service's share: the language model counts the card as `nvidia-smi` does, and some 400 MB of that are never usable by the media service. Then neither loads into the other's part, whichever starts first. `setup.sh` sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.
+Set the language model's reserve 400 MB above the media service's share: the language model counts the card as `nvidia-smi` does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model's part. The language model fits its layers when it starts, into what is free then less its reserve, so it gets all of them when it starts beside a media service that holds little, as when both start together; started again while the media service holds models, it gets fewer until its next start. `setup.sh` sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.
 
 On a 16 GB card, the pair EiN's own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:
 
@@ -239,18 +250,20 @@ Without a card, or with `EIN_GPU=0`, the media service and the language model ru
 
 The commands are written for podman. With Docker, write `docker compose` where they say `podman compose`.
 
-| What you see                                                                                      | What to do                                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The installer says `no NVIDIA card: everything runs on the processor, more slowly`                | The machine has no NVIDIA card, or the system does not list one. EiN works without it.                                                                                                                                              |
-| The installer says `an NVIDIA card is present but nvidia-smi cannot reach its driver`             | The driver is missing or not loaded. Run `nvidia-smi` to see why; a reboot after installing the driver is often needed.                                                                                                             |
-| The installer says `610 or newer is needed to encode video on the card`                           | Install a newer driver. Until then the models still use the card where they can; video is encoded on the processor.                                                                                                                 |
-| The installer says `install nvidia-container-toolkit 1.18 or newer`, or `1.18 or newer is needed` | Install or upgrade the toolkit ([Prepare the machine](#prepare-the-machine), step 2).                                                                                                                                               |
-| The installer says `but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service`      | Run that command, then check that `/var/run/cdi/nvidia.yaml` exists.                                                                                                                                                                |
-| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                 | The engine cannot read the CDI file. On podman 4.9.3, apply the [fix](#fix-the-cdi-file-for-podman-493); otherwise check that `/var/run/cdi/nvidia.yaml` exists. With Docker, check that it is Engine 28.2 or newer.                |
-| The card is there but the dashboard has no **GPU** tile                                           | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                |
-| After a reboot the media service does not start, or starts without the card                       | A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: `podman compose up -d --force-recreate`.                                                  |
-| Models show **CPU** on the **Media service** tab while the card has room                          | The card may be full at that moment, or held by the language model. Look at **Graphics card memory**, and set the [share](#share-one-card-with-the-language-model) when the two use one card.                                       |
-| The chat answers slowly on a machine with a card                                                  | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many went to the card. Raise the part of the card it gets by lowering `LLM_CARD_RESERVE_MB` and `EMS_CARD_SHARE_MB` together. |
-| A transcription waits for a long time                                                             | On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.                                                                         |
+| What you see                                                                                                                                        | What to do                                                                                                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The installer says `no NVIDIA card: everything runs on the processor, more slowly`                                                                  | The machine has no NVIDIA card, or the system does not list one. EiN works without it.                                                                                                                                              |
+| The installer says `an NVIDIA card is present but nvidia-smi cannot reach its driver`                                                               | The driver is missing or not loaded. Run `nvidia-smi` to see why; a reboot after installing the driver is often needed.                                                                                                             |
+| The installer says `610 or newer is needed to encode video on the card`                                                                             | Install a newer driver. Until then the models still use the card where they can; video is encoded on the processor.                                                                                                                 |
+| The installer says `install nvidia-container-toolkit 1.18 or newer`, or `1.18 or newer is needed`                                                   | Install or upgrade the toolkit ([Prepare the machine](#prepare-the-machine), step 2).                                                                                                                                               |
+| The installer says `but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service`                                                        | Run that command, then check that `/var/run/cdi/nvidia.yaml` exists.                                                                                                                                                                |
+| The installer says `podman 4.9.3 rejects the CDI spec nvidia-container-toolkit 1.18.1 writes (cdiVersion 0.7.0), so the containers find no card: …` | Apply the [fix](#fix-the-cdi-file-for-podman-before-5) with the command the line ends with, or upgrade podman to 5 or newer.                                                                                                        |
+| The installer says `Docker 27.5.1 passes the card through its CDI spec from 28.2 on: update Docker`                                                 | Upgrade Docker Engine to 28.2 or newer.                                                                                                                                                                                             |
+| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                                                                   | The engine cannot read the CDI file. On podman before 5, apply the [fix](#fix-the-cdi-file-for-podman-before-5); otherwise check that `/var/run/cdi/nvidia.yaml` exists. With Docker, check that it is Engine 28.2 or newer.        |
+| The card is there but the dashboard has no **GPU** tile                                                                                             | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                |
+| After a reboot the media service does not start, or starts without the card                                                                         | A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: `podman compose up -d --force-recreate`.                                                  |
+| Models show **CPU** on the **Media service** tab while the card has room                                                                            | The card may be full at that moment, or held by the language model. Look at **Graphics card memory**, and set the [share](#share-one-card-with-the-language-model) when the two use one card.                                       |
+| The chat answers slowly on a machine with a card                                                                                                    | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many went to the card. Raise the part of the card it gets by lowering `LLM_CARD_RESERVE_MB` and `EMS_CARD_SHARE_MB` together. |
+| A transcription waits for a long time                                                                                                               | On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.                                                                         |
 
 [Troubleshooting](troubleshooting.md) has more, and [The media service](media-service.md) covers the media service beyond its card.

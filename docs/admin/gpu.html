@@ -103,7 +103,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>A card changes how fast the work is done, not what comes out of it, with one exception. Each model family is placed when the media service loads it: on the card when there is room, otherwise on the processor with the same weights. Transcripts are the exception: on a machine with a card, whisper always runs on the card and a transcription waits for room there rather than move to the processor; on a machine without one it runs on the processor, at about twice the length of the recording. The two give slightly different words, so a transcript never depends on what else happened to be on the card.</p>
+<p>A card changes how fast the work is done, not what comes out of it, with one exception. Each model family is placed when the media service loads it: on the card when there is room, otherwise on the processor with the same weights. Transcripts are the exception: on a machine with a card, whisper always runs on the card and a transcription waits for room there rather than move to the processor; on a machine without one it runs on the processor, at about twice the length of the recording. The two give slightly different words, so a transcript never depends on what else happened to be on the card. The handwriting readers also wait for room on the card rather than move, since on the processor they are about ten times slower.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -184,7 +184,7 @@ nvidia-ctk --version</code></pre></div>
 </thead>
 <tbody><tr>
 <td>podman</td>
-<td>Any version reads CDI. podman 4.9.3, the one in Ubuntu 24.04 and Linux Mint 22, needs the fix in the next section.</td>
+<td>podman 5 reads the CDI file as it is. Versions before 5, such as 4.9.3 in Ubuntu 24.04 and Linux Mint 22, need the fix in the next section.</td>
 </tr>
 <tr>
 <td>Docker</td>
@@ -192,6 +192,7 @@ nvidia-ctk --version</code></pre></div>
 </tr>
 </tbody></table>
 </div>
+<p>The installer checks both, and reports a podman before 5 that would reject the file, or a Docker before 28.2, as <code>low</code> on its <code>container GPU</code> line.</p>
 </li>
 <li><p>Check that a container sees the card:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as the user EiN runs as</span>
@@ -199,8 +200,8 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <p>With Docker, write <code>docker run --rm --device nvidia.com/gpu=all</code> instead. It prints one line per card. When it fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code>, the engine cannot read the CDI file: see the next section.</p>
 </li>
 </ol>
-<h3 id="fix-the-cdi-file-for-podman-493">Fix the CDI file for podman 4.9.3<a class="anchor" href="#fix-the-cdi-file-for-podman-493" aria-label="Link to this section"></a></h3>
-<p>podman 4.9.3 rejects the CDI file as <code>nvidia-ctk</code> 1.17 and newer writes it, with <code>unknown field &quot;additionalGids&quot;</code>, and a container asking for <code>nvidia.com/gpu=all</code> then finds no card. The media service&#39;s repository has a script that makes every regeneration of the file readable to podman 4.9.3, once per machine:</p>
+<h3 id="fix-the-cdi-file-for-podman-before-5">Fix the CDI file for podman before 5<a class="anchor" href="#fix-the-cdi-file-for-podman-before-5" aria-label="Link to this section"></a></h3>
+<p>podman before 5, such as 4.9.3, rejects the CDI file as <code>nvidia-ctk</code> 1.17 and newer writes it, with <code>unknown field &quot;additionalGids&quot;</code>, and a container asking for <code>nvidia.com/gpu=all</code> then finds no card. The media service&#39;s repository has a script that makes every regeneration of the file readable to it, once per machine:</p>
 <ol>
 <li><p>Make sure the machine has Python&#39;s YAML library, which the fix uses. On Ubuntu and Mint:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
@@ -212,19 +213,27 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <p>Without the media service, fetch its repository first with <code>git clone https://github.com/einhq/ems.git</code> and run <code>deploy/install-cdi-refresh.sh</code> from there.</p>
 </li>
 </ol>
-<p>The script copies the fix to <code>/usr/local/sbin/ems-fix-cdi</code>, adds it to <code>nvidia-cdi-refresh.service</code> as a step that runs after every regeneration, removes <code>/etc/cdi/nvidia.yaml</code> if there is one, and regenerates the file at once. It ends by printing the lines of <code>/var/run/cdi/nvidia.yaml</code> it changed: <code>cdiVersion: 0.6.0</code> and no <code>additionalGids</code>. It keeps working across reboots and toolkit upgrades, and running it again does no harm. Then try the check in step 6 again.</p>
+<p>The script copies the fix to <code>/usr/local/sbin/ems-fix-cdi</code>, adds it to <code>nvidia-cdi-refresh.service</code> as a step that runs after every regeneration, removes <code>/etc/cdi/nvidia.yaml</code> if there is one, and regenerates the file at once. It ends with the service&#39;s status and a count of the <code>cdiVersion</code>, <code>additionalGids</code> and <code>/dev/dri/card</code> lines in <code>/var/run/cdi/nvidia.yaml</code>: after the fix, <code>cdiVersion: 0.6.0</code> and no <code>additionalGids</code>. It keeps working across reboots and toolkit upgrades, and running it again does no harm. Then try the check in step 6 again.</p>
 <h2 id="give-the-card-to-ein">Give the card to EiN<a class="anchor" href="#give-the-card-to-ein" aria-label="Link to this section"></a></h2>
-<p>The first <code>setup.sh</code>, the one the installer runs, looks for a card. When <code>nvidia-smi</code> works and a CDI file exists in <code>/var/run/cdi</code> or <code>/etc/cdi</code>, it writes <code>EIN_GPU=1</code> into <code>~/ein/.env</code>; otherwise <code>EIN_GPU=0</code>. From then on, every run of <code>setup.sh</code> gives the card to the media service and the language model, whichever of them you installed, by writing this into <code>~/ein/compose.override.yaml</code>:</p>
-<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">services:</span>
+<p>The first <code>setup.sh</code>, the one the installer runs, looks for a card. When <code>nvidia-smi</code> works and a CDI file exists in <code>/var/run/cdi</code> or <code>/etc/cdi</code>, it writes <code>EIN_GPU=1</code> into <code>~/ein/.env</code>; otherwise <code>EIN_GPU=0</code>. From then on, every run of <code>setup.sh</code> gives the card to the media service and the language model, whichever of them you installed, by writing it into <code>~/ein/compose.override.yaml</code>. Under podman, with both installed, the file reads:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># Written by setup.sh from the options in .env and the container engine; edit those and run</span>
+<span class="hljs-comment"># setup.sh again.</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
+  <span class="hljs-attr">ein:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">ems:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.ems.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">ems</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
   <span class="hljs-attr">llm:</span>
     <span class="hljs-attr">extends:</span> { <span class="hljs-attr">file:</span> <span class="hljs-string">compose.llm.yaml</span>, <span class="hljs-attr">service:</span> <span class="hljs-string">llm</span> }
     <span class="hljs-attr">devices:</span> [<span class="hljs-string">nvidia.com/gpu=all</span>]
-  <span class="hljs-attr">ein:</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">CFG_LLM_CARD:</span> <span class="hljs-string">card</span></code></pre></div>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span></code></pre></div>
+<p>Under Docker the <code>restart: always</code> lines are left out.</p>
 <p><code>CFG_LLM_CARD</code> tells EiN where its own language model runs, <code>card</code> or <code>cpu</code>, so the chat and the health checks can say so (<a href="../reference/settings.html#cfg_llm_card">setting</a>).</p>
 <p><code>setup.sh</code> looks for the card only when it first writes <code>.env</code>. When you add a card, or prepare the machine, after EiN is installed, turn it on yourself:</p>
 <ol>
@@ -245,7 +254,7 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <p>The <strong>Media service</strong> tab shows more:</p>
 <ul>
 <li><strong>Media service</strong>, at the top, names the <strong>card</strong> and its <strong>driver</strong>.</li>
-<li><strong>Graphics card mode</strong> says who has the card now: <strong>busy</strong> while indexing has it and search runs on the processor, <strong>quiet</strong> when there is no indexing work and search runs on the card as far as it fits, <strong>switching</strong> while it is handed over. <strong>off</strong> means there is no card to share.</li>
+<li><strong>Graphics card mode</strong> says who has the card now: <strong>busy</strong> while indexing has it and search runs on the processor, <strong>quiet</strong> when there is no indexing work and search runs on the card as far as it fits, <strong>switching</strong> while it is handed over. With no card to share, or with <code>EMS_CARD_QUIET_AFTER=0</code>, the mode is off and the tab leaves this out.</li>
 <li><strong>Graphics card memory</strong> splits the card&#39;s memory by process: the media service&#39;s batch, query and card workers, its other processes such as transcodes, and <strong>outside EMS</strong>, which is the language model when it shares the card.</li>
 <li>The list of models gives each copy its place, <strong>GPU</strong> or <strong>CPU</strong>, and whether it is loaded.</li>
 </ul>
@@ -284,7 +293,7 @@ podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_s
 </tr>
 </tbody></table>
 </div>
-<p>Set the language model&#39;s reserve 400 MB above the media service&#39;s share: the language model counts the card as <code>nvidia-smi</code> does, and some 400 MB of that are never usable by the media service. Then neither loads into the other&#39;s part, whichever starts first. <code>setup.sh</code> sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.</p>
+<p>Set the language model&#39;s reserve 400 MB above the media service&#39;s share: the language model counts the card as <code>nvidia-smi</code> does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model&#39;s part. The language model fits its layers when it starts, into what is free then less its reserve, so it gets all of them when it starts beside a media service that holds little, as when both start together; started again while the media service holds models, it gets fewer until its next start. <code>setup.sh</code> sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.</p>
 <p>On a 16 GB card, the pair EiN&#39;s own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
 <span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">9700</span>
@@ -332,8 +341,16 @@ podman compose up -d</code></pre></div>
 <td>Run that command, then check that <code>/var/run/cdi/nvidia.yaml</code> exists.</td>
 </tr>
 <tr>
+<td>The installer says <code>podman 4.9.3 rejects the CDI spec nvidia-container-toolkit 1.18.1 writes (cdiVersion 0.7.0), so the containers find no card: …</code></td>
+<td>Apply the <a href="#fix-the-cdi-file-for-podman-before-5">fix</a> with the command the line ends with, or upgrade podman to 5 or newer.</td>
+</tr>
+<tr>
+<td>The installer says <code>Docker 27.5.1 passes the card through its CDI spec from 28.2 on: update Docker</code></td>
+<td>Upgrade Docker Engine to 28.2 or newer.</td>
+</tr>
+<tr>
 <td>Starting fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code></td>
-<td>The engine cannot read the CDI file. On podman 4.9.3, apply the <a href="#fix-the-cdi-file-for-podman-493">fix</a>; otherwise check that <code>/var/run/cdi/nvidia.yaml</code> exists. With Docker, check that it is Engine 28.2 or newer.</td>
+<td>The engine cannot read the CDI file. On podman before 5, apply the <a href="#fix-the-cdi-file-for-podman-before-5">fix</a>; otherwise check that <code>/var/run/cdi/nvidia.yaml</code> exists. With Docker, check that it is Engine 28.2 or newer.</td>
 </tr>
 <tr>
 <td>The card is there but the dashboard has no <strong>GPU</strong> tile</td>
@@ -365,7 +382,7 @@ podman compose up -d</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/gpu.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-card-is-used-for">What the card is used for</a></li><li><a href="#what-card-you-need">What card you need</a></li><li><a href="#prepare-the-machine">Prepare the machine</a></li><li class="nested"><a href="#fix-the-cdi-file-for-podman-493">Fix the CDI file for podman 4.9.3</a></li><li><a href="#give-the-card-to-ein">Give the card to EiN</a></li><li><a href="#check-that-ein-uses-the-card">Check that EiN uses the card</a></li><li><a href="#share-one-card-with-the-language-model">Share one card with the language model</a></li><li><a href="#be-told-when-the-card-goes-missing">Be told when the card goes missing</a></li><li><a href="#run-without-a-card">Run without a card</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-card-is-used-for">What the card is used for</a></li><li><a href="#what-card-you-need">What card you need</a></li><li><a href="#prepare-the-machine">Prepare the machine</a></li><li class="nested"><a href="#fix-the-cdi-file-for-podman-before-5">Fix the CDI file for podman before 5</a></li><li><a href="#give-the-card-to-ein">Give the card to EiN</a></li><li><a href="#check-that-ein-uses-the-card">Check that EiN uses the card</a></li><li><a href="#share-one-card-with-the-language-model">Share one card with the language model</a></li><li><a href="#be-told-when-the-card-goes-missing">Be told when the card goes missing</a></li><li><a href="#run-without-a-card">Run without a card</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

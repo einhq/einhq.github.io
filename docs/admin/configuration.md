@@ -69,12 +69,12 @@ A setting that names the services that read it when they start restarts them whe
 - The ports, **HTTP port** and **SSH port**, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.
 - **Worker backlog rotation (ms)** is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.
 - Settings that are policy, such as the default sharing or **Visitors may browse**, are read each time they are applied, so they take effect at once and restart nothing.
-- Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as **Face match threshold**. Nothing restarts for them: they take effect when that service next starts, from [Services and logs](services-logs.md) or the next time EiN starts.
+- Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as **Face match threshold**. Nothing restarts for them: the service's shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.
 
 > [!WARNING]
 > With the installer's setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing **HTTP port** or **SSH port** on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in `.env` instead, as [Ports, HTTPS and remote access](network.md) describes.
 
-A terminal that was already open when a setting changed keeps the value it started with in its environment. Open a new terminal tab, or run `source /etc/bashrc`, to see the new one with `echo`.
+A terminal that is open when a setting changes reads the settings again before its next command, so `echo` shows the new value. A command already running keeps the value it started with.
 
 ## Change settings from the terminal
 
@@ -156,6 +156,9 @@ A value with spaces, such as two module sources, is best quoted: `config set CFG
    podman compose up -d    # or: docker compose up -d
    ```
 
+   Under podman-compose, a container made again this way has no swap limit, which `setup.sh`
+   gives each one; `./setup.sh` makes the containers again with it.
+
 4. Reload the Settings page. The setting shows the value with **From deployment**.
 
 Running `./setup.sh` applies `.env` too, but it also fetches and builds the newest sources: it is an update. [Updating](updating.md) explains it.
@@ -167,7 +170,7 @@ A value in `.env` does not always win:
 - **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
-The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](media-service.md) describes them.
+The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. A media service setting is an `EMS_…` line in the same file; [The media service](media-service.md) describes them.
 
 > [!NOTE]
 > `.env` holds the database password and the media service's key, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.
@@ -210,7 +213,7 @@ The files are ordinary shell files in EiN's tree, kept in the database, so they 
 An administrator can open `/etc/config` in the editor, `edit /etc/config`, and add, change or remove `export` lines. Two things differ from the Settings page:
 
 - Nothing checks the values. A number written as `four` reaches the service that reads it as it is.
-- Nothing is restarted. Policy settings apply at once; a setting a service reads at its start applies when that service restarts, from [Services and logs](services-logs.md) or the next time EiN starts.
+- Nothing is restarted. Policy settings apply at once, and settings read by the commands a pipeline runs from the next step; a setting a service reads at its start applies when that service restarts, from [Services and logs](services-logs.md) or the next time EiN starts.
 
 A line for a name no part of EiN declares is exported into every shell but shows nowhere. Prefer the Settings page or `config set` for anything listed there.
 
@@ -218,7 +221,7 @@ A line for a name no part of EiN declares is exported into every shell but shows
 
 - **The value in `.env` does not show.** The setting is **Set here** or chosen by a module, both of which win; or it is one of the values `compose.yaml` fixes; or EiN's container was not made again. See [Set a value in the deployment](#set-a-value-in-the-deployment).
 - **The page says the value is saved, but the service behaves as before.** Look for a red "Could not restart" message under the setting, or check the service on [Services and logs](services-logs.md). A stopped service reads the value when it starts.
-- **The terminal shows the old value.** The terminal was open before the change. Open a new tab.
+- **The terminal shows the old value.** A command that was already running when you saved keeps the value it started with; the next command reads the new one.
 - **A port change did nothing.** Ports take effect when EiN starts again, and with the installer's setup they should be changed in `.env`, not here. See [Ports, HTTPS and remote access](network.md).
 - **A module's settings are missing.** They exist only while the module is installed and working; check it on **Settings → Modules**, as [Modules](modules.md) describes.
 - **Something else is wrong.** [Troubleshooting](troubleshooting.md) goes through the common problems.

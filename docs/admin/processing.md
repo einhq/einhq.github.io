@@ -17,9 +17,11 @@ Work is done in three places:
 - **The pipeline engine** (the `pipeline-engine` service) matches changes to pipelines, creates an
   **instance** for each pipeline and node, and runs the short steps itself.
 - **Pool workers** run the long steps. The engine puts each one as a job in a pool, and a worker
-  takes it when it has room. The Archive brings two: `cpu`, for work done on this machine, such as
+  takes it when it has room. The Archive brings `cpu`, for work done on this machine, such as
   reading metadata, making thumbnails and transcoding video, and `models`, for work done by a model
-  in the [media service](media-service.md), such as finding faces or transcribing speech.
+  in the [media service](media-service.md), such as finding faces or transcribing speech. A second
+  model worker, `models-second`, runs beside `models` when `CFG_MODEL_SECOND_SLOTS` is above `0`;
+  it is off by default.
 - **Background services** of the Archive: `archive-bridge` turns changes into the events the media
   pipelines wait for, and `media-heal` finds files that are missing something and announces them
   again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)).
@@ -46,6 +48,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 | `media-transcribe`     | A transcript of what is said in a video or recording                                      | `transcribe`                   |
 | `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                               | `diarize`                      |
 | `media-speaker-assign` | Decides which person each voice is                                                        | `speaker-assign`               |
+| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found           | `diarize`, `speaker-assign`    |
 | `media-device`         | Links a file to the camera or phone that took it                                          | run by the engine              |
 | `media-geocode`        | Looks up the address of a file's GPS position                                             | run by the engine              |
 | `media-album`          | An album's stacks, time span, missing cover and profile, when its members change          | run by the engine              |
@@ -62,7 +65,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 The `cpu` worker takes `unzip`, `ingest`, `stills`, `face-assign`, `face-transfer`,
 `speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`. The
 `models` worker takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and
-`shots`. `pipeline-list` prints every pipeline that is defined, with its trigger.
+`shots`, and `models-second` the same kinds in the reverse order. `pipeline-list` prints every pipeline that is defined, with its trigger.
 
 ## Watch the work on the Dashboard
 
@@ -280,12 +283,12 @@ pool-wake transcribe    # one kind
 
 ## Run work again on purpose
 
-| You want to                                                    | Run                                                                                         |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Run one pipeline on one file or folder                         | `pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg`                    |
-| Transcode a video again although it has renditions             | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
-| Make the display sizes again under a folder                    | `regenerate --force /archive/albums/christmas-2019`                                         |
-| Announce files the Archive never saw, or that are missing work | `media-scan /archive/albums`                                                                |
+| You want to                                                     | Run                                                                                         |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Run one pipeline on one file                                    | `pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg`                    |
+| Transcode a video again although it has renditions              | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
+| Make the renditions again under a folder, without the pipelines | `regenerate --force /archive/albums/christmas-2019`                                         |
+| Announce files the Archive never saw, or that are missing work  | `media-scan /archive/albums`                                                                |
 
 `pipeline-start` starts the run at once, in the normal lane, and skips the checks a trigger makes.
 `--var` sets a variable the pipeline declares; `media-transcode`, `media-transcribe`,
@@ -316,7 +319,8 @@ media-scan /archive/albums/christmas-2019
 
 A run examines up to 20000 files (`--scan-limit`) and announces up to 1000 (`--limit`), and
 remembers where it stopped, so the next run goes on from there; `--restart` starts from the top. It
-announces nothing while more than 500 ingest runs and triggers are waiting (`--max-active`).
+announces fewer as running `media-ingest` instances and waiting triggers add up, and nothing once they reach 500
+(`--max-active`).
 
 `CFG_MEDIA_TRANSCRIPTS_CURRENT` set to `off` stops transcripts from being made again when the
 media service's speech settings change. On a large archive such a change otherwise means hours of
@@ -336,8 +340,9 @@ lane an instance had.
 ## How much runs at once
 
 These settings are in the **Processing** category of **Settings → System**, or set with
-`config set`. Saving one restarts the service that reads it, and work in progress is picked up
-again; [Configuration](configuration.md) explains how.
+`config set`. Saving one restarts the service that reads it, when it is read by a service, and work
+in progress is picked up again; `CFG_PIPELINE_STEP_QUIET_MS` restarts nothing and counts from the
+next look. [Configuration](configuration.md) explains how.
 
 | Setting                                                                               | Default   | What it decides                                                                                                                                |
 | ------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -345,7 +350,7 @@ again; [Configuration](configuration.md) explains how.
 | [`CFG_CPU_NON_ENTRY_SLOTS`](../reference/settings.md#cfg_cpu_non_entry_slots)         | `1`       | Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits. |
 | [`CFG_CPU_WORKERS`](../reference/settings.md#cfg_cpu_workers)                         | `4`       | The most CPU jobs in flight; the slots are the real limit                                                                                      |
 | [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                         | `2`       | Requests the `models` worker keeps in flight against the media service. Size it to what the media service runs at once.                        |
-| [`CFG_MODEL_KIND_QUANTUM_MS`](../reference/settings.md#cfg_model_kind_quantum_ms)     | `900000`  | How long the `models` worker stays on one kind before turning to the next, so faces do not starve the rest                                     |
+| [`CFG_MODEL_KIND_QUANTUM_MS`](../reference/settings.md#cfg_model_kind_quantum_ms)     | `3600000` | How long the `models` worker stays on one kind before turning to the next, so faces do not starve the rest                                     |
 | [`CFG_PIPELINE_MAX_CONCURRENT`](../reference/settings.md#cfg_pipeline_max_concurrent) | `4`       | Steps the engine itself runs at once                                                                                                           |
 | [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)   | `1800000` | How long a running step may be silent before it is listed as quiet                                                                             |
 | [`CFG_PIPELINE_PRUNE_INTERVAL`](../reference/settings.md#cfg_pipeline_prune_interval) | `3600`    | Seconds between the pruner's rounds, which also run `pipeline-heal`                                                                            |

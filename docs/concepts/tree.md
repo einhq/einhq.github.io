@@ -27,7 +27,7 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 | `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the web interface | The administrator, and commands such as `config set`      |
 | `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs           | EiN itself                                                |
 | `/usr`     | Code and read-only files: the commands, the modules and the built-in guide                                | Nobody by hand; an update or `mod install` replaces it    |
-| `/dev`     | The channels changes are announced on, and `/dev/null`                                                    | EiN itself                                                |
+| `/dev`     | The channels facts about changes are announced on, and `/dev/null`                                        | EiN itself                                                |
 | `/tmp`     | Scratch space that does not outlast a restart                                                             | Everyone                                                  |
 
 ![The tree from /: /archive with the Archive module's albums, people, locations and devices and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
@@ -173,13 +173,15 @@ installed modules are kept.
 
 ## /dev and /tmp
 
-`/dev/events` and `/dev/pipeline-events` are `router` nodes: every change to the tree is announced
-on `/dev/events` once it is saved, and the pipeline engine announces its own progress on
-`/dev/pipeline-events`. `/dev/null` works as on Linux: reading it gives nothing, and what is written
+`/dev/events` and `/dev/pipeline-events` are `router` nodes: modules announce the facts they
+derive from changes to the tree on `/dev/events`, and the pipeline engine announces its own progress
+on `/dev/pipeline-events`; see [Changes and pipelines](pipelines.md). `/dev/null` works as on Linux: reading it gives nothing, and what is written
 to it is thrown away.
 
 `/tmp` is open to everyone, with the mode `0777`, and is kept in memory: what you put there is gone
-when EiN restarts. Use it for files you need only for a moment.
+when EiN restarts. A file directly in `/tmp` that has not changed for a day is removed before that;
+**Hours in /tmp**, `CFG_TMP_RETENTION_HOURS`, sets how long. Use it for files you need only for a
+moment.
 
 ## Find a folder by its variable
 
@@ -194,6 +196,7 @@ echo $HOME
 ```
 
 ```text
+albums  devices  locations  people  tags
 /home/helen
 ```
 
@@ -240,6 +243,7 @@ mount
 /                pg         rw 3 Oct 2026 09:14:02
 /etc/files       filesystem r  3 Oct 2026 09:14:02
 /tmp             memory     rw 3 Oct 2026 09:14:02
+/tmp/dev-modules filesystem r  3 Oct 2026 09:14:02
 /usr/bin         command    r  3 Oct 2026 09:14:02
 /usr/docs/guide  filesystem r  3 Oct 2026 09:14:04
 /usr/lib         filesystem r  3 Oct 2026 09:14:02
@@ -310,8 +314,8 @@ favourite's.
 **`ls /archive` shows only `tags`.** The Archive module is not installed. An administrator installs it on
 **Settings → Modules**; see [Modules](../admin/modules.md).
 
-**A file I put in `/tmp` is gone.** `/tmp` is kept in memory and emptied when EiN restarts. Keep what
-you need in your home or in an album.
+**A file I put in `/tmp` is gone.** `/tmp` is kept in memory and emptied when EiN restarts, and a
+file left directly in it is removed after a day. Keep what you need in your home or in an album.
 
 **`mount: permission denied, only admin is allowed to mount`.** Mounting is for the administrator.
 

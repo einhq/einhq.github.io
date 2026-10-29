@@ -437,8 +437,9 @@ If <code>~/.ssh</code> does not exist yet, run <code>ssh-keygen</code> once with
 ssh-keygen -f ~/.ssh/nas -N <span class="hljs-string">&#x27;&#x27;</span>
 ssh-copy-id -i ~/.ssh/nas.pub anna@nas.local</code></pre></div>
 </li>
-<li><p>Mount the folder:</p>
+<li><p>Make the mount point, which must exist, and mount the folder on it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<span class="hljs-built_in">mkdir</span> -p /mnt/nas
 mount --save /mnt/nas sftp <span class="hljs-string">&quot;host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas&quot;</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>mounted sftp at '/mnt/nas' (saved in /etc/fstab)</code></pre></div>
 <p>The first mount from a terminal asks about an unknown host key as <code>ssh</code> does. <code>--save</code> writes the
@@ -544,7 +545,7 @@ command; use <code>scp</code>, or a mount. <code>ssh</code> refuses flags it doe
 <td>The keys were refused and the password was wrong or not asked for. In a script there is nobody to ask, so only keys are tried: install one with <code>ssh-copy-id</code>.</td>
 </tr>
 <tr>
-<td><code>No ED25519 host key is known for nas.local.</code> … <code>Connect once from an interactive shell to accept it.</code></td>
+<td><code>No ED25519 host key is known for nas.local</code> … <code>Connect once from an interactive shell to accept it.</code></td>
 <td>The host is unknown and there was nobody to ask (a script, <code>BatchMode</code>, or <code>StrictHostKeyChecking yes</code>). Connect once from the terminal, or use <code>-o StrictHostKeyChecking=accept-new</code>.</td>
 </tr>
 <tr>
@@ -557,7 +558,7 @@ command; use <code>scp</code>, or a mount. <code>ssh</code> refuses flags it doe
 </tr>
 <tr>
 <td><code>Load key &quot;/home/helen/.ssh/id_rsa&quot;: encrypted, and no one to ask for its passphrase</code></td>
-<td>A key with a passphrase, used where nobody can type it. Use a key without a passphrase for scripts and mounts.</td>
+<td>A key with a passphrase and no <code>.pub</code> beside it, used where nobody can type it. Use a key without a passphrase for scripts and mounts.</td>
 </tr>
 <tr>
 <td><code>ssh-copy-id: no public key found in ~/.ssh; make one with ssh-keygen</code></td>

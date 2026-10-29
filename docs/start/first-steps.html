@@ -104,7 +104,7 @@ says <code>podman compose</code>.</p>
 <h2 id="sign-in-and-change-the-admin-password">Sign in and change the admin password<a class="anchor" href="#sign-in-and-change-the-admin-password" aria-label="Link to this section"></a></h2>
 <p>At its end the install printed the address and the administrator&#39;s password:</p>
 <div class="code"><pre tabindex="0"><code>EiN is up at http://ein.local:8080/
-Sign in as admin with the password 0b6f2c1e-8d4a-4c7e-9a51-2e7d3f6b9c40, and change it: it is shown this once.</code></pre></div>
+Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.</code></pre></div>
 <ol>
 <li>Open the address in a browser. If your computer cannot find that name, use the machine&#39;s IP
 address instead, such as <code>http://192.168.1.20:8080/</code>.</li>
@@ -122,14 +122,15 @@ or <kbd>Alt</kbd>+<kbd>T</kbd>, and run:</p>
 user passwd admin</code></pre></div>
 <p>It asks for the new password after <code>Password:</code>. The <a href="../reference/commands-core.html#user-passwd">reference</a>
 lists its options.</p>
-<p>If the install&#39;s output is gone, the password is still in the container&#39;s log:</p>
+<p>If the install&#39;s output is gone, the password is still in <code>~/ein/.env</code>, as
+<code>INITIAL_ADMIN_PASSWORD</code>, and every later run of <code>./setup.sh</code> prints it again at its end:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose logs ein | grep <span class="hljs-string">&#x27;Admin password set to&#x27;</span></code></pre></div>
-<p>That copy lasts only as long as the container. Every later run of <code>./setup.sh</code> makes the
-containers anew, and the line goes with them, so change the password before you update or add a
-part.</p>
+grep INITIAL_ADMIN_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>
+<p>Once you have changed the password, delete that line from <code>.env</code>: the old password stays readable
+there for anyone who can read the file, and changing the line does not change the password, which
+EiN takes from it only at its first start.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Nothing else keeps the admin password, and EiN sends no e-mail, so there is no &quot;forgot password&quot;.
+<p>Once you have changed it, nothing else keeps the admin password, and EiN sends no e-mail, so there is no &quot;forgot password&quot;.
 Keep the new one in a password manager. If it is lost, only someone who can act as the
 administrator can set a new one. Step 5 shows how to give a second person that right.</p>
 </aside>
@@ -415,7 +416,7 @@ EiN does not stop work for you when the disk fills.</p>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
 <p>It updates <code>~/ein</code>, then fetches the newest code of EiN and its services, builds it and starts it
 again, keeping your options in <code>~/ein/.env</code>, your data and the installed modules. <code>~/ein/setup.sh</code>
-alone does the same but leaves the files in <code>~/ein</code> as they are. There are no releases: an update
+alone does the same, <code>~/ein</code> included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated
 separately, with <strong>Update</strong> in <strong>Settings → Modules → Published modules</strong>.
 <a href="../admin/updating.html">Updating</a> explains what an update touches.</p>

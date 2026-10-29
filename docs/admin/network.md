@@ -11,6 +11,8 @@ EiN publishes two ports, on every address of the machine it runs on:
 | `8080` | the web interface, its files and its WebSocket | plain HTTP |
 | `2222` | the SSH and SFTP server                        | SSH        |
 
+These are the ports `setup.sh` picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
+
 Nothing else is reachable from outside. The database, the media service and the language model answer only EiN, on the containers' own network: no port of theirs is published on the machine.
 
 EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in [Put EiN behind HTTPS](#put-ein-behind-https).

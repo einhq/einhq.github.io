@@ -175,12 +175,12 @@
 <li>The ports, <strong>HTTP port</strong> and <strong>SSH port</strong>, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.</li>
 <li><strong>Worker backlog rotation (ms)</strong> is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.</li>
 <li>Settings that are policy, such as the default sharing or <strong>Visitors may browse</strong>, are read each time they are applied, so they take effect at once and restart nothing.</li>
-<li>Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as <strong>Face match threshold</strong>. Nothing restarts for them: they take effect when that service next starts, from <a href="services-logs.html">Services and logs</a> or the next time EiN starts.</li>
+<li>Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as <strong>Face match threshold</strong>. Nothing restarts for them: the service&#39;s shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.</li>
 </ul>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>With the installer&#39;s setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing <strong>HTTP port</strong> or <strong>SSH port</strong> on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in <code>.env</code> instead, as <a href="network.html">Ports, HTTPS and remote access</a> describes.</p>
 </aside>
-<p>A terminal that was already open when a setting changed keeps the value it started with in its environment. Open a new terminal tab, or run <code>source /etc/bashrc</code>, to see the new one with <code>echo</code>.</p>
+<p>A terminal that is open when a setting changes reads the settings again before its next command, so <code>echo</code> shows the new value. A command already running keeps the value it started with.</p>
 <h2 id="change-settings-from-the-terminal">Change settings from the terminal<a class="anchor" href="#change-settings-from-the-terminal" aria-label="Link to this section"></a></h2>
 <p>The <code>config</code> command does everything the Settings page does. Everyone signed in can list and read settings, and change their own; only an administrator can change a system setting.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -267,6 +267,8 @@ Restarted: trash-purger</code></pre></div>
 <li><p>Apply it. This makes EiN&#39;s container again with the new environment:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
+<p>Under podman-compose, a container made again this way has no swap limit, which <code>setup.sh</code>
+gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
 </li>
 <li><p>Reload the Settings page. The setting shows the value with <strong>From deployment</strong>.</p>
 </li>
@@ -279,7 +281,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <li><strong>Some settings are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>, <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
 <li><strong>An empty line sets nothing.</strong> <code>CFG_LANGUAGE_MODEL=</code> in <code>.env</code> is the same as leaving the line out.</li>
 </ul>
-<p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_DB_DIR</code>, <code>COMPOSE_PROJECT_NAME</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. A media service setting is an <code>EMS_…</code> line in the same file; <a href="media-service.html">The media service</a> describes them.</p>
+<p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_DB_DIR</code>, <code>EIN_ENGINE</code>, <code>COMPOSE_PROJECT_NAME</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. A media service setting is an <code>EMS_…</code> line in the same file; <a href="media-service.html">The media service</a> describes them.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p><code>.env</code> holds the database password and the media service&#39;s key, and nothing else keeps them. Keep a copy of it with your backups; <a href="data.html">Your data: backup, moving and removing</a> says what else to keep.</p>
 </aside>
@@ -424,14 +426,14 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <p>An administrator can open <code>/etc/config</code> in the editor, <code>edit /etc/config</code>, and add, change or remove <code>export</code> lines. Two things differ from the Settings page:</p>
 <ul>
 <li>Nothing checks the values. A number written as <code>four</code> reaches the service that reads it as it is.</li>
-<li>Nothing is restarted. Policy settings apply at once; a setting a service reads at its start applies when that service restarts, from <a href="services-logs.html">Services and logs</a> or the next time EiN starts.</li>
+<li>Nothing is restarted. Policy settings apply at once, and settings read by the commands a pipeline runs from the next step; a setting a service reads at its start applies when that service restarts, from <a href="services-logs.html">Services and logs</a> or the next time EiN starts.</li>
 </ul>
 <p>A line for a name no part of EiN declares is exported into every shell but shows nowhere. Prefer the Settings page or <code>config set</code> for anything listed there.</p>
 <h2 id="when-a-change-does-not-take-effect">When a change does not take effect<a class="anchor" href="#when-a-change-does-not-take-effect" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>The value in <code>.env</code> does not show.</strong> The setting is <strong>Set here</strong> or chosen by a module, both of which win; or it is one of the values <code>compose.yaml</code> fixes; or EiN&#39;s container was not made again. See <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a>.</li>
 <li><strong>The page says the value is saved, but the service behaves as before.</strong> Look for a red &quot;Could not restart&quot; message under the setting, or check the service on <a href="services-logs.html">Services and logs</a>. A stopped service reads the value when it starts.</li>
-<li><strong>The terminal shows the old value.</strong> The terminal was open before the change. Open a new tab.</li>
+<li><strong>The terminal shows the old value.</strong> A command that was already running when you saved keeps the value it started with; the next command reads the new one.</li>
 <li><strong>A port change did nothing.</strong> Ports take effect when EiN starts again, and with the installer&#39;s setup they should be changed in <code>.env</code>, not here. See <a href="network.html">Ports, HTTPS and remote access</a>.</li>
 <li><strong>A module&#39;s settings are missing.</strong> They exist only while the module is installed and working; check it on <strong>Settings → Modules</strong>, as <a href="modules.html">Modules</a> describes.</li>
 <li><strong>Something else is wrong.</strong> <a href="troubleshooting.html">Troubleshooting</a> goes through the common problems.</li>
