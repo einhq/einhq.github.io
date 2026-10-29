@@ -3378,7 +3378,7 @@ ui-icons <name>...
 
 ### `ui-nav`
 
-The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's and the user's changes.
+The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes.
 
 <small>reads only</small>
 

@@ -465,6 +465,12 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td></td>
 </tr>
 <tr>
+<td><code>/etc/ui/groups/&lt;group&gt;/nav.json</code></td>
+<td>the administrator</td>
+<td>the group&#39;s members&#39; sidebar and top bar</td>
+<td></td>
+</tr>
+<tr>
 <td><code>~/.ui/nav.json</code></td>
 <td>you</td>
 <td>your sidebar and top bar</td>
@@ -610,7 +616,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </div>
 <p>EiN reads no <code>~/.bash_profile</code> or <code>~/.profile</code>. <a href="../shell/bash.html#keep-your-settings-in-bashrc">Keep your settings in ~/.bashrc</a> shows what to put in it.</p>
 <h3 id="the-navigation-files">The navigation files<a class="anchor" href="#the-navigation-files" aria-label="Link to this section"></a></h3>
-<p>The sidebar and the top bar are put together from three layers of JSON, each changing only what it names:</p>
+<p>The sidebar and the top bar are put together from four layers of JSON, each changing only what it names:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -630,13 +636,18 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td>everyone</td>
 </tr>
 <tr>
+<td><code>/etc/ui/groups/&lt;group&gt;/nav.json</code></td>
+<td>an administrator</td>
+<td>the group&#39;s members</td>
+</tr>
+<tr>
 <td><code>~/.ui/nav.json</code></td>
 <td>you</td>
 <td>you only</td>
 </tr>
 </tbody></table>
 </div>
-<p>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; files, and an update replaces them; put changes in <code>/etc/ui/nav.json</code> or <code>~/.ui/nav.json</code>, which exist only once someone writes them. <a href="../guide/customizing.html">Your sidebar and top bar</a> describes the format and its fields.</p>
+<p>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; files, and an update replaces them; put changes in <code>/etc/ui/nav.json</code>, a group&#39;s <code>/etc/ui/groups/&lt;group&gt;/nav.json</code> or <code>~/.ui/nav.json</code>, which exist only once someone writes them. <a href="../guide/customizing.html">Your sidebar and top bar</a> describes the format and its fields.</p>
 <h3 id="etcfstab">/etc/fstab<a class="anchor" href="#etcfstab" aria-label="Link to this section"></a></h3>
 <p><code>/etc/fstab</code> lists the mounts EiN makes again at every start, one per line: the mount point, the type and the options, separated by spaces. A field with a space in it is in double quotes, and a line starting with <code>#</code> is a comment.</p>
 <div class="code"><pre tabindex="0"><code>/mnt/nas sftp host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas</code></pre></div>

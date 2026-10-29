@@ -2,22 +2,23 @@
 
 You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add
 pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it
-for yourself and, if you are an administrator, for everyone on your EiN.
+for yourself and, if you are an administrator, for everyone on your EiN or for one group.
 
 There is no page in **Settings** for this: the files on this page are the only way. You need to be
 signed in and able to edit a few lines of JSON, usually in the [terminal](../shell/terminal.md).
 
 ## How the sidebar and top bar are put together
 
-The sidebar and the top bar are laid together from three layers, read in this order:
+The sidebar and the top bar are laid together from four layers, read in this order:
 
-| Layer                | File                                                                                     | Written by                     | Applies to |
-| -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------ | ---------- |
-| The modules' entries | `/etc/ui/nav.d/<module>.json`, one for each module; EiN's own is `/etc/ui/nav.d/ui.json` | each module, when it is set up | everyone   |
-| Changes for everyone | `/etc/ui/nav.json`                                                                       | an administrator               | everyone   |
-| Your changes         | `~/.ui/nav.json`, which is `/home/<your username>/.ui/nav.json`                          | you                            | you only   |
+| Layer                | File                                                                                     | Written by                     | Applies to          |
+| -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------ | ------------------- |
+| The modules' entries | `/etc/ui/nav.d/<module>.json`, one for each module; EiN's own is `/etc/ui/nav.d/ui.json` | each module, when it is set up | everyone            |
+| Changes for everyone | `/etc/ui/nav.json`                                                                       | an administrator               | everyone            |
+| A group's changes    | `/etc/ui/groups/<group>/nav.json`, one for each group that has one                       | an administrator               | the group's members |
+| Your changes         | `~/.ui/nav.json`, which is `/home/<your username>/.ui/nav.json`                          | you                            | you only            |
 
-![Three layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one](../diagrams/nav-layers.svg "Each layer changes only what it names, so your file holds only what you want different.")
+![Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /etc/ui/groups/<group>/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one](../diagrams/nav-layers.svg "Each layer changes only what it names, so your file holds only what you want different.")
 
 Every entry has an id, such as `archive.albums` for **Albums**. A later layer works on the earlier
 ones by id:
@@ -32,7 +33,8 @@ reach everything you left alone.
 
 A few things follow from this:
 
-- Neither `/etc/ui/nav.json` nor `~/.ui/nav.json` exists until someone writes it.
+- None of `/etc/ui/nav.json`, `/etc/ui/groups/<group>/nav.json` and `~/.ui/nav.json` exists until
+  someone writes it.
 - What one layer hides stays hidden. There is no way to unhide, so you cannot bring back an entry
   your administrator hid.
 - The files in `/etc/ui/nav.d` are links to the modules' own files, and an update replaces them.
@@ -484,9 +486,37 @@ button that reruns failed work with
 ```
 
 Everyone gets the change the next time they load a page. People can still rename and move, in their
-own files, what you changed, but they cannot bring back what you hid. There is no file for a single
-group of accounts: `admin` and `signedIn` are the only ways to narrow an entry.
+own files, what you changed, but they cannot bring back what you hid. To change the navigation for
+some accounts only, write a [group's file](#change-the-navigation-for-a-group).
 [Processing and pipelines](../admin/processing.md) explains what `pipeline-heal` reruns.
+
+## Change the navigation for a group
+
+As an administrator you can also change the navigation for the members of one group, such as a
+link to a page only they use. The file is `/etc/ui/groups/<group>/nav.json`, where `<group>` is the
+group's name as `group-list` prints it, not its title, in the same format as the other files.
+
+This gives the members of a `sailors` group a page of their own in the **Explore** section:
+
+```bash
+# in EiN's terminal, as an administrator
+mkdir -p /etc/ui/groups/sailors
+edit /etc/ui/groups/sailors/nav.json
+```
+
+```json
+{
+  "sidebar": [
+    { "id": "sailors.boats", "section": "explore", "label": "Boats", "icon": "sailboat", "to": "/search?q=sailboat" }
+  ]
+}
+```
+
+A group's file is laid over `/etc/ui/nav.json` and under each member's own file, so members can
+still rename and move what it gives. Someone in several groups with a file gets each of them, in the
+order of the groups' names. Groups are read at sign-in, so someone added to a group gets its file the
+next time they sign in. The `guest` group's file is for visitors browsing without signing in.
+If the folder's name is not a group, `ui-nav` warns `/etc/ui/groups/<name>: no group <name>`.
 
 > [!WARNING]
 > `hide`, `admin` and `signedIn` decide only what the sidebar and top bar show. A page still opens
@@ -633,6 +663,6 @@ Other things that can go differently:
 
 - [Finding your way around](interface.md): every part of the sidebar and the top bar.
 - [The editor](../shell/editor.md): editing files in the terminal and in the Nodes explorer.
-- [Configuration files](../reference/config-files.md): `/etc/ui/nav.json`, `~/.ui/nav.json` and
+- [Configuration files](../reference/config-files.md): `/etc/ui/nav.json`, a group's file, `~/.ui/nav.json` and
   the other files you can edit.
 - [Writing a module](../develop/modules.md): how a module gives its own entries, routes and panels.

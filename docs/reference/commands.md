@@ -205,7 +205,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
 | [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the web UI to load, unless unchanged since the last build. |
 | [ui-icons](commands-core.md#ui-icons) | Tabler icons by name, as SVG markup, for the web UI. |
-| [ui-nav](commands-core.md#ui-nav) | The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's and the user's changes. |
+| [ui-nav](commands-core.md#ui-nav) | The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
 | [uniq](commands-core.md#uniq) | Report or omit repeated lines. |
 | [unmount](commands-core.md#unmount) | Unmount a filesystem. |
 | [unrelate](commands-core.md#unrelate) | Remove a bidirectional relation (both sides) |

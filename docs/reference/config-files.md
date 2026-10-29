@@ -157,28 +157,29 @@ The media service, when installed, mounts the same four file folders at the same
 
 These files are nodes in the tree, so they live in the database and survive a restart, an update and a new container. Read them in EiN's terminal with `cat`, and change them with [`edit`](../shell/editor.md) or the code editor on the **Nodes** page, as far as your rights allow.
 
-| Path                          | Written by                                      | Read by                               | Mode   |
-| ----------------------------- | ----------------------------------------------- | ------------------------------------- | ------ |
-| `/etc/bashrc`                 | core at the first start, then the administrator | every shell, when it opens            | `0644` |
-| `/etc/layout`                 | boot, at every start                            | `/etc/bashrc`                         |        |
-| `/etc/environment`            | boot, at every start                            | `/etc/bashrc`                         | `0644` |
-| `/etc/config.d/<module>`      | `mod setup`, as a link to the module's file     | `/etc/bashrc`                         |        |
-| `/etc/config`                 | **Settings → System**, `config set`             | `/etc/bashrc`                         | `0644` |
-| `/etc/keys`                   | **Settings → System**, `config set`, for keys   | EiN itself, never a shell             | `0600` |
-| `~/.config`                   | **Profile → Preferences**, `config set`         | `/etc/bashrc`                         | `0600` |
-| `~/.bashrc`                   | you                                             | your terminal and SSH logins          |        |
-| `~/.bash_history`             | your shell                                      | your shell                            |        |
-| `/etc/ui/nav.d/<module>.json` | `mod setup`, as a link to the module's file     | the sidebar and top bar               |        |
-| `/etc/ui/nav.json`            | the administrator                               | the sidebar and top bar               |        |
-| `~/.ui/nav.json`              | you                                             | your sidebar and top bar              |        |
-| `/etc/fstab`                  | `mount --save`, `unmount --save`                | boot, with `mount -a`                 | `0600` |
-| `/etc/ssh_host_key`, `.pub`   | the SSH server, at the first start              | the SSH server                        | `0700` |
-| `~/.ssh/…`                    | you, `ssh-keygen`, `ssh`                        | the SSH server, `ssh`, `scp`, `mount` | `0700` |
-| `/etc/users/`, `/etc/groups/` | the account and group commands                  | every sign-in and access check        |        |
-| `/etc/services/`              | `service add`, `service enable`, `mod setup`    | `service start-all` at boot           |        |
-| `/etc/files/`, `/etc/init/`   | boot                                            | boot                                  |        |
-| `/etc/assistant-prompt.md`    | `mod setup`, once; then the administrator       | the Assistant, when installed         |        |
-| `/etc/assistant.d/<module>/`  | `mod setup`, as a link to the module's folder   | the Assistant, when installed         |        |
+| Path                              | Written by                                      | Read by                                  | Mode   |
+| --------------------------------- | ----------------------------------------------- | ---------------------------------------- | ------ |
+| `/etc/bashrc`                     | core at the first start, then the administrator | every shell, when it opens               | `0644` |
+| `/etc/layout`                     | boot, at every start                            | `/etc/bashrc`                            |        |
+| `/etc/environment`                | boot, at every start                            | `/etc/bashrc`                            | `0644` |
+| `/etc/config.d/<module>`          | `mod setup`, as a link to the module's file     | `/etc/bashrc`                            |        |
+| `/etc/config`                     | **Settings → System**, `config set`             | `/etc/bashrc`                            | `0644` |
+| `/etc/keys`                       | **Settings → System**, `config set`, for keys   | EiN itself, never a shell                | `0600` |
+| `~/.config`                       | **Profile → Preferences**, `config set`         | `/etc/bashrc`                            | `0600` |
+| `~/.bashrc`                       | you                                             | your terminal and SSH logins             |        |
+| `~/.bash_history`                 | your shell                                      | your shell                               |        |
+| `/etc/ui/nav.d/<module>.json`     | `mod setup`, as a link to the module's file     | the sidebar and top bar                  |        |
+| `/etc/ui/nav.json`                | the administrator                               | the sidebar and top bar                  |        |
+| `/etc/ui/groups/<group>/nav.json` | the administrator                               | the group's members' sidebar and top bar |        |
+| `~/.ui/nav.json`                  | you                                             | your sidebar and top bar                 |        |
+| `/etc/fstab`                      | `mount --save`, `unmount --save`                | boot, with `mount -a`                    | `0600` |
+| `/etc/ssh_host_key`, `.pub`       | the SSH server, at the first start              | the SSH server                           | `0700` |
+| `~/.ssh/…`                        | you, `ssh-keygen`, `ssh`                        | the SSH server, `ssh`, `scp`, `mount`    | `0700` |
+| `/etc/users/`, `/etc/groups/`     | the account and group commands                  | every sign-in and access check           |        |
+| `/etc/services/`                  | `service add`, `service enable`, `mod setup`    | `service start-all` at boot              |        |
+| `/etc/files/`, `/etc/init/`       | boot                                            | boot                                     |        |
+| `/etc/assistant-prompt.md`        | `mod setup`, once; then the administrator       | the Assistant, when installed            |        |
+| `/etc/assistant.d/<module>/`      | `mod setup`, as a link to the module's folder   | the Assistant, when installed            |        |
 
 A blank mode is the default the folder gives a new file. `~` is your home, `/home/<your username>`.
 
@@ -253,15 +254,16 @@ EiN reads no `~/.bash_profile` or `~/.profile`. [Keep your settings in ~/.bashrc
 
 ### The navigation files
 
-The sidebar and the top bar are put together from three layers of JSON, each changing only what it names:
+The sidebar and the top bar are put together from four layers of JSON, each changing only what it names:
 
-| File                          | Who writes it                                                            | Who it is for |
-| ----------------------------- | ------------------------------------------------------------------------ | ------------- |
-| `/etc/ui/nav.d/<module>.json` | each module, linked by `mod setup`; EiN's own is `/etc/ui/nav.d/ui.json` | everyone      |
-| `/etc/ui/nav.json`            | an administrator                                                         | everyone      |
-| `~/.ui/nav.json`              | you                                                                      | you only      |
+| File                              | Who writes it                                                            | Who it is for       |
+| --------------------------------- | ------------------------------------------------------------------------ | ------------------- |
+| `/etc/ui/nav.d/<module>.json`     | each module, linked by `mod setup`; EiN's own is `/etc/ui/nav.d/ui.json` | everyone            |
+| `/etc/ui/nav.json`                | an administrator                                                         | everyone            |
+| `/etc/ui/groups/<group>/nav.json` | an administrator                                                         | the group's members |
+| `~/.ui/nav.json`                  | you                                                                      | you only            |
 
-The files in `/etc/ui/nav.d` are links to the modules' files, and an update replaces them; put changes in `/etc/ui/nav.json` or `~/.ui/nav.json`, which exist only once someone writes them. [Your sidebar and top bar](../guide/customizing.md) describes the format and its fields.
+The files in `/etc/ui/nav.d` are links to the modules' files, and an update replaces them; put changes in `/etc/ui/nav.json`, a group's `/etc/ui/groups/<group>/nav.json` or `~/.ui/nav.json`, which exist only once someone writes them. [Your sidebar and top bar](../guide/customizing.md) describes the format and its fields.
 
 ### /etc/fstab
 

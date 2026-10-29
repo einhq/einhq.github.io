@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Your sidebar and top bar – EiN documentation</title>
-    <meta name="description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN.">
+    <meta name="description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN or for one group.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/guide/customizing.html">
     <meta property="og:title" content="Your sidebar and top bar – EiN documentation">
-    <meta property="og:description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN.">
+    <meta property="og:description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN or for one group.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -88,11 +88,11 @@
         <article class="prose">
 <p>You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add
 pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it
-for yourself and, if you are an administrator, for everyone on your EiN.</p>
+for yourself and, if you are an administrator, for everyone on your EiN or for one group.</p>
 <p>There is no page in <strong>Settings</strong> for this: the files on this page are the only way. You need to be
 signed in and able to edit a few lines of JSON, usually in the <a href="../shell/terminal.html">terminal</a>.</p>
 <h2 id="how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together<a class="anchor" href="#how-the-sidebar-and-top-bar-are-put-together" aria-label="Link to this section"></a></h2>
-<p>The sidebar and the top bar are laid together from three layers, read in this order:</p>
+<p>The sidebar and the top bar are laid together from four layers, read in this order:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -115,6 +115,12 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 <td>everyone</td>
 </tr>
 <tr>
+<td>A group&#39;s changes</td>
+<td><code>/etc/ui/groups/&lt;group&gt;/nav.json</code>, one for each group that has one</td>
+<td>an administrator</td>
+<td>the group&#39;s members</td>
+</tr>
+<tr>
 <td>Your changes</td>
 <td><code>~/.ui/nav.json</code>, which is <code>/home/&lt;your username&gt;/.ui/nav.json</code></td>
 <td>you</td>
@@ -122,14 +128,14 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 </tr>
 </tbody></table>
 </div>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 448" role="img" aria-label="Three layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 556" role="img" aria-label="Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /etc/ui/groups/&lt;group&gt;/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one">
   <title>How the sidebar is put together</title>
   <defs>
     <marker id="guide-customizing-md-1-nav-layers-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
-  <rect width="800" height="448" rx="14" fill="#1a1e27" />
+  <rect width="800" height="556" rx="14" fill="#1a1e27" />
 
   
   <rect x="24" y="32" width="420" height="96" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
@@ -154,11 +160,21 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 
   
   <rect x="24" y="276" width="420" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="42" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your changes</text>
-  <text x="426" y="304" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/.ui/nav.json</text>
-  <text x="42" y="328" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">written by you, for you only</text>
+  <text x="42" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A group's changes</text>
+  <text x="426" y="304" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/ui/groups/&lt;group&gt;/nav.json</text>
+  <text x="42" y="328" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">written by an administrator, for the group's members</text>
 
-  <line x1="444" y1="310" x2="498" y2="310" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
+  <line x1="234" y1="344" x2="234" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
+  <text x="246" y="368" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">laid over, by id</text>
+
+  
+  <rect x="24" y="384" width="420" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="412" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your changes</text>
+  <text x="426" y="412" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/.ui/nav.json</text>
+  <text x="42" y="436" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">written by you, for you only</text>
+
+  <line x1="444" y1="418" x2="498" y2="418" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
 
   
   <rect x="500" y="32" width="276" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
@@ -171,20 +187,20 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
   <text x="518" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">removes the ids it lists, for good</text>
 
   
-  <rect x="500" y="276" width="276" height="112" rx="10" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
-  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(524 298) scale(3)"
+  <rect x="500" y="384" width="276" height="112" rx="10" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(524 406) scale(3)"
     fill="#a9e34b" />
-  <text x="548" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Sidebar and top bar</text>
-  <text x="518" y="330" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">as the person reading gets them:</text>
+  <text x="548" y="412" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Sidebar and top bar</text>
+  <text x="518" y="438" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">as the person reading gets them:</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
-    <tspan x="518" y="352" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">admin</tspan>
+    <tspan x="518" y="460" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">admin</tspan>
     <tspan> entries for administrators,</tspan>
-    <tspan x="518" y="372" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">signedIn</tspan>
+    <tspan x="518" y="480" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">signedIn</tspan>
     <tspan> ones not for visitors</tspan>
   </text>
 
   
-  <text x="24" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">
+  <text x="24" y="528" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">
     <tspan font-family="Fragment Mono, ui-monospace, monospace" fill="#a2abbb">ui-nav</tspan>
     <tspan> in the terminal prints the result for you, with any warnings</tspan>
   </text>
@@ -201,7 +217,8 @@ write. The entry keeps all the others.</li>
 reach everything you left alone.</p>
 <p>A few things follow from this:</p>
 <ul>
-<li>Neither <code>/etc/ui/nav.json</code> nor <code>~/.ui/nav.json</code> exists until someone writes it.</li>
+<li>None of <code>/etc/ui/nav.json</code>, <code>/etc/ui/groups/&lt;group&gt;/nav.json</code> and <code>~/.ui/nav.json</code> exists until
+someone writes it.</li>
 <li>What one layer hides stays hidden. There is no way to unhide, so you cannot bring back an entry
 your administrator hid.</li>
 <li>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; own files, and an update replaces them.
@@ -648,9 +665,27 @@ button that reruns failed work with
   <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;archive.create-device&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
 <p>Everyone gets the change the next time they load a page. People can still rename and move, in their
-own files, what you changed, but they cannot bring back what you hid. There is no file for a single
-group of accounts: <code>admin</code> and <code>signedIn</code> are the only ways to narrow an entry.
+own files, what you changed, but they cannot bring back what you hid. To change the navigation for
+some accounts only, write a <a href="#change-the-navigation-for-a-group">group&#39;s file</a>.
 <a href="../admin/processing.html">Processing and pipelines</a> explains what <code>pipeline-heal</code> reruns.</p>
+<h2 id="change-the-navigation-for-a-group">Change the navigation for a group<a class="anchor" href="#change-the-navigation-for-a-group" aria-label="Link to this section"></a></h2>
+<p>As an administrator you can also change the navigation for the members of one group, such as a
+link to a page only they use. The file is <code>/etc/ui/groups/&lt;group&gt;/nav.json</code>, where <code>&lt;group&gt;</code> is the
+group&#39;s name as <code>group-list</code> prints it, not its title, in the same format as the other files.</p>
+<p>This gives the members of a <code>sailors</code> group a page of their own in the <strong>Explore</strong> section:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+<span class="hljs-built_in">mkdir</span> -p /etc/ui/groups/sailors
+edit /etc/ui/groups/sailors/nav.json</code></pre></div>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sailors.boats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;explore&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Boats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sailboat&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/search?q=sailboat&quot;</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A group&#39;s file is laid over <code>/etc/ui/nav.json</code> and under each member&#39;s own file, so members can
+still rename and move what it gives. Someone in several groups with a file gets each of them, in the
+order of the groups&#39; names. Groups are read at sign-in, so someone added to a group gets its file the
+next time they sign in. The <code>guest</code> group&#39;s file is for visitors browsing without signing in.
+If the folder&#39;s name is not a group, <code>ui-nav</code> warns <code>/etc/ui/groups/&lt;name&gt;: no group &lt;name&gt;</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p><code>hide</code>, <code>admin</code> and <code>signedIn</code> decide only what the sidebar and top bar show. A page still opens
 by its address for anyone whose permissions allow it, and anyone can add an entry of their own
@@ -1045,7 +1080,7 @@ administrator.</p>
 <ul>
 <li><a href="interface.html">Finding your way around</a>: every part of the sidebar and the top bar.</li>
 <li><a href="../shell/editor.html">The editor</a>: editing files in the terminal and in the Nodes explorer.</li>
-<li><a href="../reference/config-files.html">Configuration files</a>: <code>/etc/ui/nav.json</code>, <code>~/.ui/nav.json</code> and
+<li><a href="../reference/config-files.html">Configuration files</a>: <code>/etc/ui/nav.json</code>, a group&#39;s file, <code>~/.ui/nav.json</code> and
 the other files you can edit.</li>
 <li><a href="../develop/modules.html">Writing a module</a>: how a module gives its own entries, routes and panels.</li>
 </ul>
@@ -1056,7 +1091,7 @@ the other files you can edit.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/customizing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#change-the-navigation-for-a-group">Change the navigation for a group</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
     </div>
   </body>
 </html>
