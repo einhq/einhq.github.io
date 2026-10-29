@@ -253,9 +253,9 @@ the best job that fits: the highest priority first, the oldest among equals.
 
 The Archive runs two workers on `/var/pools/media`:
 
-| Service  | What it runs                                                                                                   | Paced by                                                      |
-| -------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `cpu`    | Work on the processor: reading metadata, thumbnails, renditions, fingerprints, zips, matching faces            | **CPU budget for media work**, [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots) |
+| Service  | What it runs                                                                                                   | Paced by                                                                                    |
+| -------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `cpu`    | Work on the processor: reading metadata, thumbnails, renditions, fingerprints, zips, matching faces            | **CPU budget for media work**, [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)    |
 | `models` | Requests to the media service's models: faces, picture and text vectors, text in pictures, transcripts, voices | **Model requests in flight**, [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots) |
 
 Most of these steps are calls into the [media service](../admin/media-service.md), which does

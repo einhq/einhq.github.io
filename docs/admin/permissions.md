@@ -376,8 +376,8 @@ share:
 | `/home/<user>/staging`        | the account                | `0700` | Nobody else, not even through search.                                    |
 | `/etc/users/<name>`           | `admin`                    | `0755` | The account itself; only the administrator changes it.                   |
 | `/etc/users/<name>/.password` | `admin`                    | `0600` | Its user can neither read nor replace it.                                |
-| `/etc/groups/<group>/users` | its creator, the group | `0750` | Members may see who else is in the group, not add anyone. |
-| `/var/links/<id>` | `admin` | `0600` | A share link's record, holding its token. |
+| `/etc/groups/<group>/users`   | its creator, the group     | `0750` | Members may see who else is in the group, not add anyone.                |
+| `/var/links/<id>`             | `admin`                    | `0600` | A share link's record, holding its token.                                |
 
 Content reaches every account through the `users` group, and visitors who are not signed in through
 an access-list entry for the `guest` group, `g:guest:rx`, which the **Share** dialog shows as

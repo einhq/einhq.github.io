@@ -74,11 +74,11 @@ Two things are not drawn until you ask:
 The tree scrolls inside its own box, so the rest of the page stays where it is. The buttons above
 it:
 
-| Button                    | What it does                                      |
-| ------------------------- | ------------------------------------------------- |
+| Button                    | What it does                                                                           |
+| ------------------------- | -------------------------------------------------------------------------------------- |
 | **Centre on this person** | Scrolls back to the person the page is about. Hidden while the whole family is fitted. |
-| **Fit the whole family**  | Shrinks the drawing until all of it fits the box. |
-| **Zoom out**, **Zoom in** | Changes the size a step at a time.                |
+| **Fit the whole family**  | Shrinks the drawing until all of it fits the box.                                      |
+| **Zoom out**, **Zoom in** | Changes the size a step at a time.                                                     |
 
 Hold <kbd>Ctrl</kbd> and scroll over the tree to zoom around the pointer; a pinch on a trackpad does
 the same.

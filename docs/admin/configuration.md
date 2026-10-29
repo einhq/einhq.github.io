@@ -122,7 +122,7 @@ A value of the wrong kind is refused before anything is written:
 | --------------- | ------------------------------------------- | ---------------------------------------------------------- |
 | number          | digits, with an optional minus and decimals | `config set: CFG_CPU_SLOTS: expected a number, got 'four'` |
 | on or off       | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                    |
-| choice          | one of the setting's choices                | `expected one of en, sv, got 'english'`                 |
+| choice          | one of the setting's choices                | `expected one of en, sv, got 'english'`                    |
 | permission mode | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`     |
 | person or group | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                |
 | text or key     | anything                                    |                                                            |

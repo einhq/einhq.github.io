@@ -53,7 +53,7 @@ You make most links without typing `ln`: a button in the web interface or a comm
 | Add a parent, partner or child ([Family tree](../guide/family.md))                                           | A pair: one in `parents/`, `children/` or `partners/` of each person, pointing at the other |
 | Add a home or a resident                                                                                     | A pair: one in the person's `homes/`, one in the location's `residents/`                    |
 | Link a picture to a location ([Locations](../guide/places.md#how-pictures-join-a-location))                  | `location` in the picture, to the location                                                  |
-| Choose **Written by** on an event ([Albums](../guide/albums.md#add-a-note-to-a-day))                                                                            | `writer` in the event, to the person                                                         |
+| Choose **Written by** on an event ([Albums](../guide/albums.md#add-a-note-to-a-day))                         | `writer` in the event, to the person                                                        |
 | Put someone in a group ([Accounts and groups](../admin/accounts.md))                                         | A link in `/etc/groups/<group>/users/`, named after the account, to `/etc/users/<account>`  |
 
 The picture is never copied. One photo in five albums is one node with five links to it, so a date,
@@ -218,7 +218,7 @@ reachable by its other name.
 | The other half of a family tie is missing                          | One half was removed while `relations-guard` was not running                                               | `person-check /archive/people` reports broken ties; remove the tie and add it again                  |
 | Labels or relation halves stay after something is deleted for good | The `relations-guard` service is stopped                                                                   | An administrator checks it with `service-status`; see [Services and logs](../admin/services-logs.md) |
 | `ln: failed to access '<target>': No such file or directory`       | A hard link needs an existing target                                                                       | Check the path, or make a softlink with `-s`                                                         |
-| `Access denied for operation` when you follow a link                             | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                            |
+| `Access denied for operation` when you follow a link               | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                            |
 
 ## Related pages
 

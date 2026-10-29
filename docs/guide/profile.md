@@ -111,15 +111,15 @@ the default. If a save fails, the reason shows in a red box under the setting.
 
 ### The settings
 
-| Category   | Setting                                  | Default   | What it changes                                                                                                                                                                                                           |
-| ---------- | ---------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Appearance | **Header entrance**                      | `drawn`   | How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.                                                               |
-| Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                     |
+| Category   | Setting                                  | Default   | What it changes                                                                                                                                                                                                                    |
+| ---------- | ---------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Appearance | **Header entrance**                      | `drawn`   | How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.                                                                        |
+| Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                              |
 | Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; `lines` lays only their outlines over the photo. |
-| Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                              |
-| Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                        |
-| Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                          |
-| Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                          |
+| Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                       |
+| Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
+| Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
+| Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
 
 EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
 the archive module, and only an EiN with the archive has them. [Viewing photos, videos and recordings](viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
@@ -413,12 +413,12 @@ removes for good what was deleted more than 7 days ago; `trash empty` with no id
 Besides `config` and `trash` above, these commands do in the terminal what this page does in the
 browser:
 
-| Command                                                                                          | What it does                                                              |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| [`user-info`](../reference/commands-core.md#user-info) `<username>`                              | Shows an account's display name, numbers, e-mail address and description. |
-| [`user-update`](../reference/commands-core.md#user-update) `<username> --name=… --description=…` | Changes your display name and description, as **Save changes** does.      |
+| Command                                                                                          | What it does                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`user-info`](../reference/commands-core.md#user-info) `<username>`                              | Shows an account's display name, numbers, e-mail address and description.                                                                                                          |
+| [`user-update`](../reference/commands-core.md#user-update) `<username> --name=… --description=…` | Changes your display name and description, as **Save changes** does.                                                                                                               |
 | [`user-passwd`](../reference/commands-core.md#user-passwd) `<username> --old-password=…`         | Changes your password; it asks for the new one with `Password:`. A password typed on the command line can end up in your shell history, so the **Security** tab is the better way. |
-| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`, `star list`             | Hearts a picture, takes the heart away, or lists your favourites.         |
+| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`, `star list`             | Hearts a picture, takes the heart away, or lists your favourites.                                                                                                                  |
 
 ```bash
 # in EiN's terminal

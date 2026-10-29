@@ -58,12 +58,12 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive
 
 Everything after `bash -s --` is passed on to `~/ein/setup.sh`, EiN's own setup script:
 
-| Option                 | What it adds                                                                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Option                 | What it adds                                                                                                                                                |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers. |
-| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                              |
-| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs. Give it once for each module. |
-| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                       |
+| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                     |
+| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs. Give it once for each module.                        |
+| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                              |
 
 > [!NOTE]
 > The Archive module needs the media service. `setup.sh` gives no warning when you install `--module archive` without `--ems`, but nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. [Modules](../admin/modules.md) lists what each module needs.

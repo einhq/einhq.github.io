@@ -245,12 +245,12 @@ one thing fits, EiN fills it in, with `/` after a folder and a space after anyth
 it if it holds spaces. When several fit, it fills in as much as they share; press <kbd>Tab</kbd>
 again to list them all.
 
-| You type                            | <kbd>Tab</kbd> gives                          |
-| ----------------------------------- | --------------------------------------------- |
-| `cd /archive/al`                    | `cd /archive/albums/`                         |
-| `person-info /archive/people/Peg`   | `person-info /archive/people/Peggy_Wrenfield` |
-| `search --ki`                       | `search --kind=`, ready for the value         |
-| `user-info he`                      | `user-info helen`                             |
+| You type                                  | <kbd>Tab</kbd> gives                          |
+| ----------------------------------------- | --------------------------------------------- |
+| `cd /archive/al`                          | `cd /archive/albums/`                         |
+| `person-info /archive/people/Peg`         | `person-info /archive/people/Peggy_Wrenfield` |
+| `search --ki`                             | `search --kind=`, ready for the value         |
+| `user-info he`                            | `user-info helen`                             |
 | `pipeline`, a space, <kbd>Tab</kbd> twice | the list of `pipeline`'s subcommands          |
 
 Completion reads each command's own description of its arguments and options, so it knows a

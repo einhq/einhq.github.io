@@ -29,14 +29,14 @@ How to read the keys on this page:
 
 ## Anywhere
 
-| Keys                                                              | What they do                                                                                        |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Keys                                                              | What they do                                                                                                                     |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac) | Opens the finder: search, or go to a page, person or album; type `>` for commands. In its dialog form, pressed again, closes it. |
-| <kbd>?</kbd>                                                      | Opens or closes the **Keyboard shortcuts** dialog.                                                  |
-| <kbd>Alt</kbd>+<kbd>T</kbd>                                       | Shows or hides the terminal.                                                                        |
-| <kbd>Alt</kbd>+<kbd>N</kbd>                                       | Adds a terminal tab.                                                                                |
-| <kbd>Alt</kbd>+<kbd>R</kbd>                                       | Opens an album at random (**Random album**, with the Archive module).                               |
-| <kbd>Esc</kbd>                                                    | Closes a dialog, or a page shown full screen, such as the viewer.                                   |
+| <kbd>?</kbd>                                                      | Opens or closes the **Keyboard shortcuts** dialog.                                                                               |
+| <kbd>Alt</kbd>+<kbd>T</kbd>                                       | Shows or hides the terminal.                                                                                                     |
+| <kbd>Alt</kbd>+<kbd>N</kbd>                                       | Adds a terminal tab.                                                                                                             |
+| <kbd>Alt</kbd>+<kbd>R</kbd>                                       | Opens an album at random (**Random album**, with the Archive module).                                                            |
+| <kbd>Esc</kbd>                                                    | Closes a dialog, or a page shown full screen, such as the viewer.                                                                |
 
 Where a dialog or the viewer covers the search box, <kbd>Ctrl</kbd>+<kbd>K</kbd> opens the finder as
 a dialog of its own. [Finding your way around](../guide/interface.md#keyboard-shortcuts) shows the

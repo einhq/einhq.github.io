@@ -71,8 +71,8 @@ with the picture over it. Opened by its own address, `/media/<path>`, the pictur
 | `/about`                            | **About EiN**; from the account menu it opens in a dialog                            | Signed in                         |
 | `/system`                           | **Dashboard**, see [Health and the dashboard](../admin/monitoring.md)                | In the sidebar for administrators |
 | `/system/nodes`                     | **Nodes**, the node explorer                                                         | In the sidebar for administrators |
-| `/system/pipelines/<pipeline>` | One pipeline and its recent runs, for example `/system/pipelines/media-faces` | Reached from the **Dashboard** |
-| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline | Reached from the pipeline's page |
+| `/system/pipelines/<pipeline>`      | One pipeline and its recent runs, for example `/system/pipelines/media-faces`        | Reached from the **Dashboard**    |
+| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline                                                                | Reached from the pipeline's page  |
 
 "Everyone who can browse" means signed-in users, and also visitors who have not signed in when the
 administrator turns on [`CFG_GUEST_BROWSING`](settings.md#cfg_guest_browsing). A page marked "Signed
@@ -216,15 +216,15 @@ page rather than searching for everything.
 The map keeps where you look, the layers and the filters in the address. What is at its default is
 left out, so a plain `/map` stays plain.
 
-| Parameter                   | What it holds                                                                | Default           |
-| --------------------------- | ---------------------------------------------------------------------------- | ----------------- |
-| `c` | The centre, as `latitude,longitude` | |
-| `z`                         | The zoom level                                                               |                   |
-| `layers`                    | Layers shown, separated by commas: `media`, `locations`, `tracks`; or `none` | All three         |
-| `from`, `to`                | The first and last year                                                      | No limit          |
-| `base`                      | The background: `Map`, `Dark map` or `Satellite`                             | `Map`             |
-| `q`                         | Words to search for                                                          |                   |
-| `person`, `location`, `tag` | Only what has this person, location or label                                 |                   |
+| Parameter                   | What it holds                                                                | Default   |
+| --------------------------- | ---------------------------------------------------------------------------- | --------- |
+| `c`                         | The centre, as `latitude,longitude`                                          |           |
+| `z`                         | The zoom level                                                               |           |
+| `layers`                    | Layers shown, separated by commas: `media`, `locations`, `tracks`; or `none` | All three |
+| `from`, `to`                | The first and last year                                                      | No limit  |
+| `base`                      | The background: `Map`, `Dark map` or `Satellite`                             | `Map`     |
+| `q`                         | Words to search for                                                          |           |
+| `person`, `location`, `tag` | Only what has this person, location or label                                 |           |
 
 ```text
 /map?c=50.26300,-5.05100&z=13&layers=media,tracks&from=1979&to=1979&base=Satellite
@@ -237,7 +237,7 @@ left out, so a plain `/map` stays plain.
 | `/year`                                        | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
 | `/people`, `/albums`, `/locations`, `/devices` | `q`                  | The filter typed into the page's own search box                                                                                          |
 | `/people/<name>`                               | `faces=doubtful`     | On **Faces**, only the faces EiN is unsure of                                                                                            |
-| `/people/unknown` | `sort` | `faces` (the default) or `created` |
+| `/people/unknown`                              | `sort`               | `faces` (the default) or `created`                                                                                                       |
 | `/people/unknown`                              | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
 | `/people/unknown`                              | `person`             | The unknown person open for review                                                                                                       |
 | `/staging`                                     | `c`                  | The category, by name, for example `c=inbox`                                                                                             |
@@ -330,16 +330,16 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address            | Method        | What it does                                                                               |
-| ------------------ | ------------- | ------------------------------------------------------------------------------------------ |
-| `/file/<path>`     | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                 |
-| `/file/<path>` | `PUT` | Stores the body at exactly that path, creating or replacing the file |
-| `/file/<directory>/?name=<name>` | `POST` | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on |
-| `/archive`         | `POST`        | Collects a selection of files for a download as one zip                                    |
-| `/archive/<token>` | `GET`         | Downloads that zip                                                                         |
-| `/log/<path>`      | `POST`        | Adds JSON entries to a log node                                                            |
-| `/track/<path>`    | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../guide/devices.md)         |
-| `/__shell`         |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket |
+| Address                          | Method        | What it does                                                                                                  |
+| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                    |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                          |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                       |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
+| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
+| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../guide/devices.md)                            |
+| `/__shell`                       |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket                    |
 
 Any other path that is not a file of the web interface returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse

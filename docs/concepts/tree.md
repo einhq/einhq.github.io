@@ -45,7 +45,7 @@ since they hold the content.
 | Path                      | What is there                                                                                         | From    |
 | ------------------------- | ----------------------------------------------------------------------------------------------------- | ------- |
 | `/archive/albums`         | Albums, and the photos, videos, recordings and documents in them                                      | Archive |
-| `/archive/people`         | People, each with folders such as children, partners, homes, events and devices                  | Archive |
+| `/archive/people`         | People, each with folders such as children, partners, homes, events and devices                       | Archive |
 | `/archive/people/unknown` | People face recognition found but nobody has named yet; naming one moves it up into `/archive/people` | Archive |
 | `/archive/locations`      | Locations, each with its outline on the map as a child `position` node                                | Archive |
 | `/archive/devices`        | Cameras, phones and GPS trackers, each with the route it recorded as a child `track` node             | Archive |
@@ -139,7 +139,7 @@ so `ls /var` reads the same on a fresh instance as on one that has run for a yea
 | `/var/logs/metrics`          | Measurements of the machine and of EiN over time, for the Dashboard                |
 | `/var/logs/services/<name>`  | Each service's output                                                              |
 | `/var/logs/jobs/<pid>`       | The output of a job started with `nohup`                                           |
-| `/var/sessions`              | The open sessions: one node per session, from a browser or over SSH        |
+| `/var/sessions`              | The open sessions: one node per session, from a browser or over SSH                |
 | `/var/links`                 | Share links: one node per link that opens something without an account             |
 | `/var/queues`                | Queues of events waiting to be handled, the pipeline engine's in `pipeline-engine` |
 | `/var/pools`                 | Pools of jobs waiting for a worker, such as those for the media service            |

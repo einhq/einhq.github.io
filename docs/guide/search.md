@@ -296,13 +296,13 @@ anything by name, date or @mention**.
 
 What each kind is found by:
 
-| Kind      | Found by                                        | Try it in the Wrenfield demo                                                                                        |
-| --------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Albums | Name, description, and what their pictures show | `album christmas` sets **Show** to **Albums** and finds the Christmas albums, such as Christmas 1975 and Christmas in Wellington |
-| People    | Name; every word must match the same person     | `helen okafor`                                                                                                      |
-| Locations | Name                                            | `falmouth`                                                                                                          |
-| Devices   | Name, make, model or serial number              | `lumix` finds Peggy's Lumix                                                                                         |
-| Tracks | The device's name, or the track's description | `erik's iphone` finds the tracks Erik's iPhone recorded |
+| Kind      | Found by                                        | Try it in the Wrenfield demo                                                                                                     |
+| --------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Albums    | Name, description, and what their pictures show | `album christmas` sets **Show** to **Albums** and finds the Christmas albums, such as Christmas 1975 and Christmas in Wellington |
+| People    | Name; every word must match the same person     | `helen okafor`                                                                                                                   |
+| Locations | Name                                            | `falmouth`                                                                                                                       |
+| Devices   | Name, make, model or serial number              | `lumix` finds Peggy's Lumix                                                                                                      |
+| Tracks    | The device's name, or the track's description   | `erik's iphone` finds the tracks Erik's iPhone recorded                                                                          |
 
 A person, location, year, device or label in the search narrows albums by their pictures:
 `@Peggy Wrenfield 1968` finds the albums holding a picture of Peggy taken in 1968. A label matches an album that carries it or holds a picture that does. When nothing is

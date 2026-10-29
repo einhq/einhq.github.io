@@ -222,13 +222,13 @@ stays) or **Stays**. Under each are its picture size, file size, the time it was
 and how alike it is. When a file has exact copies of its own, "and 2 byte copies" says so: they
 go with it when it is removed.
 
-| Key                         | What it does                          |
-| --------------------------- | ------------------------------------- |
-| <kbd>←</kbd> / <kbd>→</kbd> | Move between the files                |
+| Key                         | What it does                                       |
+| --------------------------- | -------------------------------------------------- |
+| <kbd>←</kbd> / <kbd>→</kbd> | Move between the files                             |
 | <kbd>K</kbd>                | Keep the file in focus instead (staged files only) |
-| <kbd>Enter</kbd>            | Remove the others                     |
-| <kbd>X</kbd>                | Not duplicates (look-alikes only)     |
-| <kbd>Esc</kbd>              | Close without changing anything       |
+| <kbd>Enter</kbd>            | Remove the others                                  |
+| <kbd>X</kbd>                | Not duplicates (look-alikes only)                  |
+| <kbd>Esc</kbd>              | Close without changing anything                    |
 
 The buttons at the bottom do the same: **Not duplicates** (for look-alikes), **Cancel** and
 **Remove the others**. On a phone, tap a file to focus it and use the buttons.
@@ -291,7 +291,7 @@ The Trash page is described on [Your profile, favourites and trash](profile.md).
 | "a staged one has more pixels than the library’s"                   | Your new file is larger than the library photo, but the library photo is still the one kept                                                                                                     | To keep both, click **Not duplicates** and file your photo like any other. You can then remove the smaller one from its album yourself, as [Albums](albums.md) describes |
 | "files in other folders stay"                                       | A copy lies in another category                                                                                                                                                                 | Remove it from that category's **Duplicates** tab                                                                                                                        |
 | "its original is gone or changed: nothing is dropped"               | The kept file is no longer there with the same bytes. **Remove** is greyed out                                                                                                                  | Nothing to do. EiN checks every finding each hour, and the set changes or goes away                                                                                      |
-| "you cannot write the kept one, which would gain from the copies"   | You may not change the library photo, and a copy holds something it would gain. **Remove** is greyed out                                                                         | Ask someone who may change that photo, or, if what the copy holds does not matter, discard it on the **Files** tab (its **Folder** view lists copies too)                                           |
+| "you cannot write the kept one, which would gain from the copies"   | You may not change the library photo, and a copy holds something it would gain. **Remove** is greyed out                                                                                        | Ask someone who may change that photo, or, if what the copy holds does not matter, discard it on the **Files** tab (its **Folder** view lists copies too)                |
 | "it changed: look again"                                            | The set changed after the page read it                                                                                                                                                          | Open the tab again                                                                                                                                                       |
 | "look-alikes are for you to look at: Remove all leaves them"        | **Remove all** skips this set                                                                                                                                                                   | Look at it and use **Remove**, **Keep this one** or **Not duplicates**                                                                                                   |
 | The message "Left as it is: …" after **Remove**                     | The set changed before the removal ran, so nothing was removed. This also happens after **Keep this one** on the only staged photo beside a library photo, since nothing else is left to remove | Look at the set again. To keep both pictures, use **Not duplicates**                                                                                                     |
