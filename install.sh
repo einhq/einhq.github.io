@@ -24,27 +24,39 @@ set -uo pipefail
 
 # Everything runs from main, called on the last line, so a download cut short runs nothing.
 main() {
-  local home=${EIN_HOME:-$HOME/ein} source= installed= arg next=
+  local home=${EIN_HOME:-$HOME/ein} source= installed= data= modules= arg next=
   key=${EIN_SOURCE_KEY:-}
   ems=0 llm=0
-  for arg in "$@"; do
-    if [ "$next" = source ]; then
-      source=${arg%/}
-      next=
-      continue
-    fi
-    case $arg in --ems) ems=1 ;; --llm) llm=1 ;; --source) next=source ;; esac
-  done
-  # A machine installed before keeps its options, its source and the source's token: they are in
-  # its .env.
+  # A machine installed before keeps its options, its modules, its data folder, its source and the
+  # source's token: they are in its .env, and setup.sh reads EIN_DATA only the first time.
   if [ -f "$home/.env" ]; then
     grep -qx 'EIN_EMS=1' "$home/.env" && ems=1
     grep -qx 'EIN_LLM=1' "$home/.env" && llm=1
+    modules=$(sed -n 's/^EIN_MODULES=//p' "$home/.env" | tr -d '"')
+    data=$(sed -n 's/^EIN_DATA=//p' "$home/.env")
     installed=$(sed -n 's/^EIN_SOURCE=//p' "$home/.env")
     [ -n "$key" ] || key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
   fi
+  for arg in "$@"; do
+    case $next in
+      source) source=${arg%/} ;;
+      module) modules="$modules $arg" ;;
+    esac
+    if [ -n "$next" ]; then
+      next=
+      continue
+    fi
+    case $arg in
+      --ems) ems=1 ;;
+      --no-ems) ems=0 ;;
+      --llm) llm=1 ;;
+      --no-llm) llm=0 ;;
+      --module) next=module ;;
+      --source) next=source ;;
+    esac
+  done
   source=${source:-${installed:-https://github.com/einhq}}
-  local data=${EIN_DATA:-$home/data}
+  data=${data:-${EIN_DATA:-$home/data}}
   failed=0
   warned=0
 
@@ -120,6 +132,11 @@ main() {
   fi
 
   if [ "$ems" = 1 ] || [ "$llm" = 1 ]; then graphics; fi
+
+  # --- modules: the Archive's photos, videos and documents are analysed by the media service ---
+  if [[ " $modules " == *" archive "* ]] && [ "$ems" = 0 ]; then
+    short archive "the Archive module needs the media service: add --ems, now or later with $home/setup.sh --ems"
+  fi
 
   summary || return 1
   [ "${EIN_CHECK:-0}" = 1 ] && return
