@@ -27,6 +27,7 @@ main() {
   local home=${EIN_HOME:-$HOME/ein} source= installed= data= modules= arg next=
   key=${EIN_SOURCE_KEY:-}
   ems=0 llm=0
+  container= container_version=
   # A machine installed before keeps its options, its modules, its data folder, its source and the
   # source's token: they are in its .env, and setup.sh reads EIN_DATA only the first time.
   if [ -f "$home/.env" ]; then
@@ -168,6 +169,7 @@ engine() {
   if command -v podman >/dev/null; then
     local version rootless
     version=$(podman --version | awk '{print $3}')
+    container=podman container_version=$version
     rootless=$(podman info --format '{{.Host.Security.Rootless}}' 2>/dev/null)
     case $rootless in
       true) say podman ok "$version, rootless" ;;
@@ -200,7 +202,8 @@ engine() {
       fi
     fi
   elif command -v docker >/dev/null; then
-    say docker ok "$(docker --version | awk '{print $3}' | tr -d ,)"
+    container=docker container_version=$(docker --version | awk '{print $3}' | tr -d ,)
+    say docker ok "$container_version"
     if docker compose version >/dev/null 2>&1; then
       say compose ok "docker compose $(docker compose version --short 2>/dev/null)"
     else
@@ -242,7 +245,8 @@ graphics() {
 
   # The container toolkit 1.18 and newer keeps a CDI spec in /var/run/cdi up to date
   # (nvidia-cdi-refresh.service); a spec made by hand in /etc/cdi names the cards of the moment.
-  # podman and Docker 28.2 and newer both pass the card through it.
+  # podman and Docker 28.2 and newer both pass the card through it, podman before 5 only once the
+  # spec is made readable to it (see cdi_spec).
   if ! command -v nvidia-ctk >/dev/null; then
     short "container GPU" "install nvidia-container-toolkit 1.18 or newer, so the containers can use the card"
     return
@@ -252,12 +256,37 @@ graphics() {
   if [ "$(printf '%s\n' 1.18 "${ctk:-0}" | sort -V | head -1)" != 1.18 ]; then
     short "container GPU" "nvidia-container-toolkit ${ctk:-?}: 1.18 or newer is needed (it ships nvidia-cdi-refresh.service)"
   elif [ -s /var/run/cdi/nvidia.yaml ]; then
-    say "container GPU" ok "nvidia-container-toolkit $ctk, CDI spec in /var/run/cdi"
+    cdi_spec "$ctk"
   elif compgen -G '/etc/cdi/nvidia*.yaml' >/dev/null; then
     short "container GPU" "nvidia-container-toolkit $ctk with a hand-made spec in /etc/cdi: let nvidia-cdi-refresh.service write /var/run/cdi/nvidia.yaml instead"
   else
     short "container GPU" "nvidia-container-toolkit $ctk, but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service"
   fi
+}
+
+# The spec in /var/run/cdi, as the container engine reads it. podman before 5 reads CDI specs up to
+# version 0.6.0, and the toolkit 1.17 and newer writes 0.7.0 with additionalGids, which it rejects
+# whole: the media service and the model then find no card. ems's deploy/install-cdi-refresh.sh
+# makes the refresh rewrite the spec for it each time. Docker reads CDI specs from 28.2 on.
+cdi_spec() {
+  local ctk=$1 spec=/var/run/cdi/nvidia.yaml version fix
+  if [ "$container" = podman ] && [ "${container_version%%.*}" -lt 5 ] 2>/dev/null; then
+    version=$(sed -n 's/^cdiVersion: *//p' "$spec" | tr -d "\"'")
+    if grep -qiE '^[ -]*additionalGids:' "$spec" ||
+      [ "$(printf '%s\n' 0.6.0 "${version:-0.6.0}" | sort -V | tail -1)" != 0.6.0 ]; then
+      if [ "$ems" = 1 ]; then
+        fix="sudo bash $home/src/ems/deploy/install-cdi-refresh.sh once EiN is installed"
+      else
+        fix="sudo bash deploy/install-cdi-refresh.sh in a checkout of $source/ems"
+      fi
+      short "container GPU" "podman $container_version rejects the CDI spec nvidia-container-toolkit $ctk writes (cdiVersion ${version:-?}), so the containers find no card: $fix"
+      return
+    fi
+  elif [ "$container" = docker ] && [ "$(printf '%s\n' 28.2 "${container_version:-0}" | sort -V | head -1)" != 28.2 ]; then
+    short "container GPU" "Docker $container_version passes the card through its CDI spec from 28.2 on: update Docker"
+    return
+  fi
+  say "container GPU" ok "nvidia-container-toolkit $ctk, CDI spec in /var/run/cdi"
 }
 
 # One line of the report: what was checked, ok / missing / low (coloured on a terminal), and why.
