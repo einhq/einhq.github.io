@@ -167,6 +167,183 @@ on its <strong>Overview</strong> tab. A warning does not stop <strong>Healthy</s
 </ul>
 <p>None of this work is lost. Each step that needs the media service waits without using up its
 retries, and runs once the media service answers again.</p>
+<h2 id="models-and-their-licences">Models and their licences<a class="anchor" href="#models-and-their-licences" aria-label="Link to this section"></a></h2>
+<p>EiN&#39;s own code, the media service&#39;s included, is under the MIT licence. The media service&#39;s image
+also downloads and carries models and tools made by others, each under its own licence, and some
+of those licences forbid commercial use. An installation used commercially must check them, or go
+without the features that rest on them (<a href="#using-ein-commercially">Using EiN commercially</a>). This is
+what the image carries, all of it used by the Archive:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What it does in EiN</th>
+<th>Model or tool</th>
+<th>Licence: code / weights</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Faces in pictures and videos</td>
+<td><a href="https://github.com/deepinsight/insightface/tree/master/python-package">InsightFace</a> <code>buffalo_l</code></td>
+<td><a href="https://github.com/deepinsight/insightface/tree/master/python-package#license">MIT</a> / non-commercial research only</td>
+<td><strong>Non-commercial</strong></td>
+</tr>
+<tr>
+<td>Transcripts</td>
+<td><a href="https://github.com/openai/whisper#license">Whisper</a> <code>large-v3</code>, as <a href="https://github.com/SYSTRAN/faster-whisper/blob/master/LICENSE">faster-whisper</a> runs <a href="https://huggingface.co/Systran/faster-whisper-large-v3">it</a></td>
+<td>MIT / MIT</td>
+<td></td>
+</tr>
+<tr>
+<td>Where speech is, for transcripts</td>
+<td><a href="https://github.com/snakers4/silero-vad/blob/master/LICENSE">Silero VAD</a></td>
+<td>MIT / MIT</td>
+<td></td>
+</tr>
+<tr>
+<td>Who is speaking when</td>
+<td>NVIDIA <a href="https://huggingface.co/nvidia/diar_sortformer_4spk-v1#licence">Sortformer</a> <code>diar_sortformer_4spk-v1</code>, run by <a href="https://github.com/NVIDIA-NeMo/NeMo/blob/main/LICENSE">NeMo</a></td>
+<td>Apache-2.0 / CC BY-NC 4.0</td>
+<td><strong>Non-commercial</strong>; attribution</td>
+</tr>
+<tr>
+<td>Voiceprints, to tie a voice to a person</td>
+<td>NVIDIA <a href="https://huggingface.co/nvidia/speakerverification_en_titanet_large#licence">TitaNet large</a>, run by NeMo</td>
+<td>Apache-2.0 / CC BY 4.0</td>
+<td>Attribution</td>
+</tr>
+<tr>
+<td>The face seen speaking</td>
+<td><a href="https://github.com/Junhua-Liao/LR-ASD/blob/main/LICENSE">LR-ASD</a>, its TalkSet weights</td>
+<td>MIT / MIT, in the same repository</td>
+<td></td>
+</tr>
+<tr>
+<td>Picture vectors: finding pictures by what they show</td>
+<td>Google&#39;s <a href="https://huggingface.co/google/siglip2-so400m-patch16-384">SigLIP 2 So400m/16-384</a>, as <a href="https://huggingface.co/immich-app/ViT-SO400M-16-SigLIP2-384__webli">Immich exports it</a></td>
+<td>— / Apache-2.0</td>
+<td>Immich&#39;s export states no licence of its own</td>
+</tr>
+<tr>
+<td>Text vectors: finding text by meaning</td>
+<td><a href="https://huggingface.co/jinaai/jina-embeddings-v5-text-small#license">jina-embeddings-v5-text-small</a>, built on <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base">Qwen3-0.6B-Base</a> (Apache-2.0)</td>
+<td>— / CC BY-NC 4.0</td>
+<td><strong>Non-commercial</strong>; Jina AI licenses it for commercial use</td>
+</tr>
+<tr>
+<td>Text in pictures</td>
+<td><a href="https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE">PP-OCRv6</a>, run by <a href="https://github.com/RapidAI/RapidOCR/blob/main/LICENSE">RapidOCR</a></td>
+<td>Apache-2.0 / Apache-2.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Handwriting in Swedish and Finnish</td>
+<td>The National Archives of Finland&#39;s <a href="https://huggingface.co/Kansallisarkisto/multicentury-ppocrv6-medium">multicentury-ppocrv6-medium</a> and <a href="https://huggingface.co/Kansallisarkisto/multicentury-htr-model">multicentury-htr-model</a></td>
+<td>— / Apache-2.0</td>
+<td>The second is fine-tuned from Microsoft&#39;s TrOCR below</td>
+</tr>
+<tr>
+<td>Handwriting in English</td>
+<td>Microsoft&#39;s <a href="https://huggingface.co/microsoft/trocr-large-handwritten">TrOCR large handwritten</a></td>
+<td><a href="https://github.com/microsoft/unilm/blob/master/LICENSE">MIT</a> / not stated</td>
+<td>Trained on the <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database">IAM database</a>, for non-commercial research only</td>
+</tr>
+<tr>
+<td>The language of read text</td>
+<td><a href="https://github.com/pemistahl/lingua-py/blob/main/LICENSE.txt">Lingua</a></td>
+<td>Apache-2.0, its models included</td>
+<td></td>
+</tr>
+<tr>
+<td>Copies of pictures and videos</td>
+<td>Meta&#39;s <a href="https://github.com/facebookresearch/sscd-copy-detection#license">SSCD</a> <code>sscd_disc_mixup</code></td>
+<td>MIT / not stated</td>
+<td></td>
+</tr>
+<tr>
+<td>Copies of recordings</td>
+<td><a href="https://github.com/acoustid/chromaprint/blob/master/LICENSE.md">Chromaprint</a></td>
+<td>LGPL-2.1 as a whole; its own code MIT</td>
+<td></td>
+</tr>
+<tr>
+<td>Shot boundaries: chapters in a video</td>
+<td><a href="https://github.com/soCzech/TransNetV2/blob/master/LICENSE">TransNetV2</a>, its weights <a href="https://huggingface.co/Sn4kehead/TransNetV2">converted to PyTorch</a></td>
+<td>MIT / Apache-2.0</td>
+<td>The authors&#39; own weights are in their MIT repository</td>
+</tr>
+<tr>
+<td>Video and audio: renditions, stills, waveforms</td>
+<td><a href="https://github.com/BtbN/FFmpeg-Builds#package-list">FFmpeg</a> 9.0, BtbN&#39;s <code>gpl</code> build</td>
+<td>GPL-3.0, as built</td>
+<td>Debian&#39;s own FFmpeg is in the image too</td>
+</tr>
+<tr>
+<td>Pictures: turning, sizes, AVIF</td>
+<td><a href="https://imagemagick.org/license/">ImageMagick</a> with <a href="https://github.com/strukturag/libheif/blob/master/COPYING">libheif</a> and <a href="https://aomedia.googlesource.com/aom/+/refs/heads/main/LICENSE">aom</a></td>
+<td>ImageMagick License; LGPL-3.0; BSD-2-Clause</td>
+<td></td>
+</tr>
+<tr>
+<td>Dates, places, cameras: metadata</td>
+<td><a href="https://exiftool.org/#license">ExifTool</a></td>
+<td>The same terms as Perl: Artistic or GPL</td>
+<td></td>
+</tr>
+<tr>
+<td>Camera RAW files</td>
+<td><a href="https://github.com/letmaik/rawpy/blob/main/LICENSE">rawpy</a> with <a href="https://github.com/LibRaw/LibRaw#licensing">LibRaw</a></td>
+<td>MIT; LGPL-2.1 or CDDL-1.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Pictures for the models, HEIC included</td>
+<td><a href="https://github.com/python-pillow/Pillow/blob/main/LICENSE">Pillow</a> and <a href="https://github.com/bigcat88/pillow_heif#readme">pillow-heif</a></td>
+<td>MIT-CMU; BSD-3-Clause</td>
+<td>pillow-heif&#39;s binary wheels are GPL-2.0, as they bundle x265</td>
+</tr>
+<tr>
+<td>Text of PDF files</td>
+<td><a href="https://github.com/pymupdf/PyMuPDF/blob/main/COPYING">PyMuPDF</a></td>
+<td>AGPL-3.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Text of Word and OpenDocument files</td>
+<td><a href="https://github.com/python-openxml/python-docx/blob/master/LICENSE">python-docx</a> and <a href="https://github.com/eea/odfpy#redistribution-license">odfpy</a></td>
+<td>MIT; GPL-2.0 or later, or Apache-2.0</td>
+<td></td>
+</tr>
+</tbody></table>
+</div>
+<p>In the licence column, code comes before weights where a model has both; <code>—</code> means the media
+service runs the weights with no code of the model&#39;s own, through the libraries the models run on.
+These are under permissive licences: <a href="https://github.com/pytorch/pytorch/blob/main/LICENSE">PyTorch</a>
+under a BSD-style licence, <a href="https://github.com/microsoft/onnxruntime/blob/main/LICENSE">ONNX Runtime</a>
+and <a href="https://github.com/OpenNMT/CTranslate2/blob/master/LICENSE">CTranslate2</a> under MIT, and
+<a href="https://github.com/huggingface/transformers/blob/main/LICENSE">transformers</a>,
+<a href="https://github.com/huggingface/sentence-transformers/blob/master/LICENSE">sentence-transformers</a>
+and <a href="https://github.com/opencv/opencv/blob/4.x/LICENSE">OpenCV</a> under Apache-2.0.</p>
+<h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
+<p>Four features rest on models whose terms allow no commercial use:</p>
+<ul>
+<li><strong>Faces</strong>, in pictures and in videos, and with them the face seen speaking, since LR-ASD reads
+the faces InsightFace finds: InsightFace&#39;s models are for non-commercial research only.</li>
+<li><strong>Who is speaking when</strong>: Sortformer&#39;s weights are under CC BY-NC 4.0.</li>
+<li><strong>Finding text by meaning</strong>, in transcripts, read text and documents, and the assistant&#39;s
+command search: jina-embeddings-v5-text-small is under CC BY-NC 4.0.</li>
+<li><strong>English handwriting</strong>: TrOCR large handwritten states no licence, and it is trained on the IAM
+database, whose terms allow non-commercial research only. The National Archives of Finland&#39;s
+transcriber, under Apache-2.0, is fine-tuned from it.</li>
+</ul>
+<p>No setting turns one of these features off, in EiN or in the media service: with the media service
+there, the Archive asks it for all of them. The one way to go without them is to go without the
+media service, with <code>./setup.sh --no-ems</code>, and so without everything in
+<a href="#what-the-media-service-does">What the media service does</a>. The assistant&#39;s command search alone
+can leave the text vectors out: with <a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>
+empty, it matches words instead.</p>
+<p>Other licences in the table ask for attribution (CC BY 4.0) or set conditions on passing the software
+and its source on (GPL, LGPL, AGPL). Check each licence for what it asks of your installation.</p>
 <h2 id="add-the-media-service">Add the media service<a class="anchor" href="#add-the-media-service" aria-label="Link to this section"></a></h2>
 <p>The installer adds it with <code>--ems</code>, at the first install or any time after:</p>
 <ol>
@@ -625,7 +802,7 @@ it in a folder beside its own storage, not in <code>/tmp</code>. Free space ther
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#models-and-their-licences">Models and their licences</a></li><li class="nested"><a href="#using-ein-commercially">Using EiN commercially</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
