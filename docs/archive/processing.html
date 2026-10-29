@@ -183,11 +183,6 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td><code>face-assign</code></td>
 </tr>
 <tr>
-<td><code>media-face-transfer</code></td>
-<td>Moves names from hand-drawn face boxes onto the faces EiN found</td>
-<td><code>face-transfer</code></td>
-</tr>
-<tr>
 <td><code>media-embed-picture</code></td>
 <td>A picture vector, for searching by what is in the picture</td>
 <td><code>embed-picture</code></td>
@@ -288,7 +283,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the Archive&#39;s workers take it:</p>
 <ul>
-<li><code>cpu</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>face-transfer</code>, <code>speaker-assign</code>,
+<li><code>cpu</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>speaker-assign</code>,
 <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>.</li>
 <li><code>models</code> takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
 <code>shots</code>, and <code>models-second</code> the same kinds in the reverse order.</li>

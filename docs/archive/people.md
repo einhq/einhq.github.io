@@ -205,7 +205,6 @@ Select faces as you select pictures in an album: hover a crop and tick its box, 
 - **Download**: the selected crops, as one zip named "&lt;name&gt; faces" when there are several.
 - **Set as cover**: makes the one selected crop the person's picture.
 - **Not &lt;name&gt;**: takes the faces off this person.
-- **Is &lt;name&gt;**: only in the **Doubtful** view, described below.
 
 **Not &lt;name&gt;** opens the dialog **Not &lt;name&gt;?**, with the number of faces under its title and four choices:
 
@@ -219,18 +218,6 @@ Select faces as you select pictures in an album: hover a crop and tick its box, 
 Press **Move**, or **Unassign and lock** for **Not a face**. After **Let recognition decide**, a short report (**Faces moved**) says where the faces went, for example "2 faces matched to Peggy Wrenfield", "3 faces became unidentified people" or "1 face left unassigned — too small or unclear to start a new person". Press **Done**.
 
 If a face that was the person's cover leaves them, they get a new cover from their remaining faces.
-
-### Doubtful faces
-
-A name that [`tag-transfer`](commands.md#tag-transfer) moved from a hand-drawn box onto the face EiN detected inside it can end up on the wrong person. An administrator can check those names with the `face-audit` command, which marks a named face as doubtful when the closest named face in another photo belongs to somebody else. The audit does not run by itself. See [`face-audit`](commands.md#face-audit).
-
-When a person has doubtful faces, the Faces tab shows a switch: **All faces** or **Doubtful (N)**, "Faces whose closest named face in another photo is somebody else". Each doubtful crop is badged with who it looks like, for example "like Peggy Wrenfield".
-
-1. Choose **Doubtful (N)**.
-2. Select the faces that are someone else and press **Not &lt;name&gt;**. When they all look like the same person, the dialog opens on **Someone I know** with that person already picked.
-3. Select the faces that are right and press **Is &lt;name&gt;**. They stay, as a human's decision, and the audit leaves them alone from then on.
-
-When none are left, the tab says "No doubtful faces of &lt;name&gt; left."
 
 ## Recordings a person is heard in
 
@@ -285,7 +272,6 @@ Recognition only decides about faces nobody has decided about. Anything a person
 | **Split off as someone new**, **One new unidentified person** | The faces stay together as the new person.                                                    |
 | **Not a person**, **Not a face**, **Not this person**         | The faces and voices are locked without a name.                                               |
 | **Let recognition decide**                                    | The faces are never matched back to the person you took them from.                            |
-| **Is &lt;name&gt;**                                           | The audit no longer questions the faces.                                                      |
 | **Set as cover**                                              | Your cover stays, as long as the picture is there and the face is still theirs.               |
 
 Changing the recognition settings does not touch these decisions either.

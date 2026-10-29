@@ -44,7 +44,6 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-faces`          | Finds the faces in a photo and crops each one                                             | `faces`                        |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                     | `faces`                        |
 | `media-face-assign`    | Matches a found face to a person                                                          | `face-assign`                  |
-| `media-face-transfer`  | Moves names from hand-drawn face boxes onto the faces EiN found                           | `face-transfer`                |
 | `media-embed-picture`  | A picture vector, for searching by what is in the picture                                 | `embed-picture`                |
 | `media-ocr`            | Reads the text written in a picture                                                       | `ocr`                          |
 | `media-embed-text`     | Text vectors of a file's stored texts                                                     | `embed-text`                   |
@@ -70,7 +69,7 @@ show **waiting for EMS** on the **Dashboard**.
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the Archive's workers take it:
 
-- `cpu` takes `unzip`, `ingest`, `stills`, `face-assign`, `face-transfer`, `speaker-assign`,
+- `cpu` takes `unzip`, `ingest`, `stills`, `face-assign`, `speaker-assign`,
   `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`.
 - `models` takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and
   `shots`, and `models-second` the same kinds in the reverse order.

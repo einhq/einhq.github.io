@@ -310,7 +310,6 @@ The Archive's pipelines and what starts them:
 | `media-faces`          | `media.metadata.extracted`, for a picture                | Finds the faces in a picture and crops each one                         |
 | `media-video-faces`    | `media.metadata.extracted`, for a video                  | Finds the faces a video shows, and when                                 |
 | `media-face-assign`    | `media.face.detected`                                    | Attaches a found face to a person                                       |
-| `media-face-transfer`  | `media.faces.completed`                                  | Moves older hand-made face tags onto found faces                        |
 | `media-embed-picture`  | `media.metadata.extracted`, `media.picture.stale`        | A picture vector, for search by what is in the picture                  |
 | `media-embed-text`     | `media.text-embedding.stale`                             | Text vectors for a file's stored texts                                  |
 | `media-ocr`            | `media.metadata.extracted` for a picture, and others     | Reads the text written in a picture                                     |
