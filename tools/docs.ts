@@ -357,6 +357,7 @@ function document(page: Page, order: Page[], sections: { title: string; pages: E
     </header>
 
     <div class="docs-layout">
+      <div class="docs-band" data-band="docs" aria-hidden="true"></div>
       <aside class="docs-side" id="docs-side" aria-label="Documentation">
         <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
           <label class="visually-hidden" for="docs-q">Search the documentation</label>
@@ -371,9 +372,10 @@ ${sidebar(sections, page, root)}
       </aside>
 
       <main id="main" class="docs-main">
-        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents</button>
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">${
+    escape(page.title)
+  }</span></button>
         <header class="docs-head">
-          <div class="docs-band" data-band="docs" aria-hidden="true"></div>
           ${crumb}
           <h1>${escape(page.title)}</h1>
         </header>

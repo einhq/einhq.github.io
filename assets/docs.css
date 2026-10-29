@@ -1,7 +1,9 @@
 /*
  * The documentation's pages, over site.css: the same ground, bar and type, with the pages listed down
  * the side, the page's headings down the other, and the documentation's lilac (`--docs`) as the accent,
- * as the web interface's own documentation wears it. Each page opens on a band of lilac hats.
+ * as the web interface's own documentation wears it. The bar, the pages' list and the page form one
+ * frame, as in the web interface: the bar keeps its edge, the list runs down the left edge under it,
+ * and each page opens on a band of lilac hats that fills the frame beside the list.
  */
 
 .docs {
@@ -9,7 +11,11 @@
   --top: calc(var(--notice-h) + 60px);
   --side: 272px;
   --toc: 220px;
+  --gap: clamp(28px, 3.5vw, 56px);
   padding-top: var(--top);
+}
+.docs .bar {
+  border-bottom-color: var(--line);
 }
 
 .visually-hidden {
@@ -26,15 +32,28 @@
 .docs-layout {
   display: grid;
   grid-template-columns: var(--side) minmax(0, 1fr) var(--toc);
-  gap: clamp(28px, 3.5vw, 56px);
-  max-width: 1480px;
-  margin: 0 auto;
+  gap: 0 var(--gap);
   padding-inline: var(--gutter);
+  isolation: isolate;
 }
 .docs-layout:not(:has(.docs-toc)) {
   grid-template-columns: var(--side) minmax(0, 1fr);
 }
 
+.docs-side,
+.docs-main,
+.docs-toc {
+  grid-row: 1;
+}
+.docs-side {
+  grid-column: 1;
+}
+.docs-main {
+  grid-column: 2;
+}
+.docs-toc {
+  grid-column: 3;
+}
 .docs-side,
 .docs-toc {
   position: sticky;
@@ -47,7 +66,9 @@
   scrollbar-color: var(--line-strong) transparent;
 }
 .docs-side {
-  padding: 22px 6px 40px 0;
+  height: calc(100vh - var(--top));
+  padding: 22px 18px 40px 0;
+  border-right: 1px solid var(--line);
 }
 
 /* --- search --- */
@@ -216,20 +237,23 @@
 /* --- the page --- */
 
 .docs-main {
+  justify-self: center;
+  width: 100%;
   min-width: 0;
   max-width: 820px;
   padding-bottom: 80px;
 }
 .docs-head {
-  position: relative;
-  isolation: isolate;
   padding: clamp(40px, 6vw, 72px) 0 8px;
 }
+/* From the list's edge to the window's, under the page's title and its outline. */
 .docs-band {
-  position: absolute;
-  inset: 0 calc(-1 * clamp(28px, 3.5vw, 56px)) auto;
+  grid-row: 1;
+  grid-column: 2 / -1;
+  align-self: start;
   z-index: -1;
-  height: 190px;
+  height: 220px;
+  margin-inline: calc(-1 * var(--gap)) calc(-1 * var(--gutter));
   pointer-events: none;
   -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent);
   mask-image: linear-gradient(to bottom, #000 30%, transparent);
@@ -715,8 +739,16 @@ kbd {
   .docs-layout:not(:has(.docs-toc)) {
     grid-template-columns: minmax(0, 1fr);
   }
+  .docs-band,
+  .docs-main {
+    grid-column: 1;
+  }
+  .docs-band {
+    margin-inline: calc(-1 * var(--gutter));
+  }
   .docs-side {
     position: fixed;
+    height: auto;
     top: var(--top);
     bottom: 0;
     left: 0;
@@ -745,33 +777,48 @@ kbd {
       visibility: visible;
       box-shadow: none;
       border: 0;
-      order: 2;
+      grid-row: 2;
+      grid-column: 1;
     }
   }
+  /* The drawer's button is a strip that stays under the bar, naming the page open. */
   .docs-menu:not([hidden]) {
     position: sticky;
-    top: calc(var(--top) + 10px);
+    top: var(--top);
     z-index: 5;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 16px;
-    padding: 7px 14px 7px 12px;
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    background: rgb(26 30 39 / 0.92);
-    backdrop-filter: blur(10px);
+    gap: 10px;
+    width: calc(100% + 2 * var(--gutter));
+    height: 44px;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter);
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: rgb(18 21 28 / 0.88);
+    backdrop-filter: blur(14px) saturate(140%);
     color: var(--text);
     font: inherit;
     font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
   }
   .docs-menu::before {
     content: '';
+    flex: none;
     width: 14px;
     height: 10px;
     background: linear-gradient(currentColor 0 0) top / 100% 2px no-repeat, linear-gradient(currentColor 0 0) center / 100% 2px no-repeat,
       linear-gradient(currentColor 0 0) bottom / 100% 2px no-repeat;
+  }
+  .docs-menu-page {
+    min-width: 0;
+    margin-inline-start: auto;
+    overflow: hidden;
+    color: var(--faint);
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .docs-head {
     padding-top: 28px;
