@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 512" width="800" height="512">
+  <title>Which chip a node wears</title>
+  <defs>
+    <marker id="visibility-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="512" rx="14" fill="#1a1e27" />
+
+  <!-- Question 1: link or visitors -->
+  <rect x="24" y="24" width="352" height="88" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">
+    <tspan x="44" y="54">Does a share link open it?</tspan>
+  </text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
+    <tspan x="44" y="78">Or is it shared with visitors, and may</tspan>
+    <tspan x="44" y="98">visitors browse this EiN?</tspan>
+  </text>
+
+  <!-- Question 2: every account -->
+  <rect x="24" y="136" width="352" height="88" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="170" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Can everyone with an account see it?</text>
+  <text x="44" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">The users group, or all others</text>
+
+  <!-- Question 3: anyone besides the owner -->
+  <rect x="24" y="248" width="352" height="88" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="282" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Can anyone besides its owner see it?</text>
+  <text x="44" y="308" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Some people or groups</text>
+
+  <!-- Down: no -->
+  <line x1="120" y1="112" x2="120" y2="134" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="132" y="129" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">no</text>
+  <line x1="120" y1="224" x2="120" y2="246" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="132" y="241" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">no</text>
+  <path d="M120,336 L120,404 L430,404" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="132" y="374" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">no</text>
+
+  <!-- Right: yes -->
+  <line x1="376" y1="68" x2="430" y2="68" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="403" y="58" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">yes</text>
+  <line x1="376" y1="180" x2="430" y2="180" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="403" y="170" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">yes</text>
+  <line x1="376" y1="292" x2="430" y2="292" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#visibility-arrow)" />
+  <text x="403" y="282" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">yes</text>
+
+  <!-- Public -->
+  <rect x="432" y="24" width="344" height="88" rx="10" fill="#40c057" fill-opacity="0.08" stroke="#40c057" stroke-opacity="0.7" stroke-width="1.25" />
+  <rect x="452" y="38" width="76" height="26" rx="13" fill="#40c057" fill-opacity="0.18" />
+  <text x="490" y="56" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#40c057">Public</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="452" y="80">Anyone with its link, or any visitor, can</tspan>
+    <tspan x="452" y="98">see it without signing in</tspan>
+  </text>
+
+  <!-- No chip -->
+  <rect x="432" y="136" width="344" height="88" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <rect x="452" y="150" width="76" height="26" rx="13" fill="none" stroke="#a2abbb" stroke-opacity="0.6" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="490" y="168" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">no chip</text>
+  <text x="452" y="194" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Everyone with an account can see it</text>
+
+  <!-- Restricted -->
+  <rect x="432" y="248" width="344" height="88" rx="10" fill="#fd7e14" fill-opacity="0.08" stroke="#fd7e14" stroke-opacity="0.7" stroke-width="1.25" />
+  <rect x="452" y="262" width="104" height="26" rx="13" fill="#fd7e14" fill-opacity="0.18" />
+  <text x="504" y="280" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600"
+    fill="#fd7e14">Restricted</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="452" y="304">Only some of the people with an account</tspan>
+    <tspan x="452" y="322">can see it</tspan>
+  </text>
+
+  <!-- Private -->
+  <rect x="432" y="360" width="344" height="88" rx="10" fill="#fa5252" fill-opacity="0.08" stroke="#fa5252" stroke-opacity="0.7" stroke-width="1.25" />
+  <rect x="452" y="374" width="80" height="26" rx="13" fill="#fa5252" fill-opacity="0.18" />
+  <text x="492" y="392" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600"
+    fill="#fa5252">Private</text>
+  <text x="452" y="418" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Only its owner can see it</text>
+
+  <text x="24" y="484" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">Visitors and people who opened a link never see the chip.</text>
+</svg>

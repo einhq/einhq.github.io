@@ -564,7 +564,69 @@ was added to as well, and comes back to all of them if you restore it.</li>
 <li><strong>Remove</strong> takes a picture that was only added to the album out of it. The picture stays where it
 lives, and in any other album it is in.</li>
 </ul>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 488" role="img" aria-label="One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link">
+  <title>One photo, many links</title>
+  <defs>
+    <marker id="guide-albums-md-1-links-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="488" rx="14" fill="#1a1e27" />
 
+  
+  <rect x="24" y="24" width="328" height="296" rx="12" fill="#339af0" fill-opacity="0.08" stroke="#339af0" stroke-opacity="0.7" stroke-width="1.25" />
+  <text x="44" y="56" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">Summer 2020</text>
+  <text x="332" y="56" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">album</text>
+  <text x="44" y="78" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/albums/Summer 2020/</text>
+
+  
+  <rect x="44" y="100" width="288" height="80" rx="10" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(68 128) scale(3)"
+    fill="#748ffc" />
+  <text x="92" y="134" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">beach.jpg</text>
+  <text x="312" y="134" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">file</text>
+  <text x="64" y="162" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">The photo itself: it lives here</text>
+
+  
+  <rect x="44" y="232" width="288" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="64" y="260" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The album's cover</text>
+  <text x="64" y="284" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">coverPhoto</text>
+  <line x1="188" y1="232" x2="188" y2="183" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#guide-albums-md-1-links-arrow)" />
+
+  
+  <rect x="432" y="24" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Another album</text>
+  <text x="756" y="52" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">The coast</text>
+  <text x="452" y="78" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/albums/The coast/beach.jpg</text>
+
+  <rect x="432" y="136" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="164" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A label</text>
+  <text x="756" y="164" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">holiday</text>
+  <text x="452" y="190" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/archive/tags/holiday/beach.jpg</text>
+
+  <rect x="432" y="248" width="344" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="452" y="276" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A favourite</text>
+  <text x="756" y="276" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">helen's</text>
+  <text x="452" y="302" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">/home/helen/stars/beach.jpg</text>
+
+  <line x1="432" y1="60" x2="335" y2="122" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#guide-albums-md-1-links-arrow)" />
+  <line x1="432" y1="172" x2="335" y2="144" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#guide-albums-md-1-links-arrow)" />
+  <line x1="432" y1="284" x2="335" y2="166" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#guide-albums-md-1-links-arrow)" />
+
+  
+  <rect x="24" y="352" width="84" height="28" rx="14" fill="#fa5252" fill-opacity="0.18" />
+  <text x="66" y="371" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fa5252">Delete</text>
+  <text x="124" y="371" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
+    fill="#a2abbb">in Summer 2020: beach.jpg goes to your trash, gone from every place until restored</text>
+
+  <rect x="24" y="396" width="84" height="28" rx="14" fill="#fd7e14" fill-opacity="0.18" />
+  <text x="66" y="415" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fd7e14">Remove</text>
+  <text x="124" y="415" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
+    fill="#a2abbb">in The coast: only that album's link goes; beach.jpg stays where it lives</text>
+
+  <text x="24" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">Dashed: a softlink, which holds only the photo's path</text>
+</svg><figcaption>One picture, many places: Delete acts on the picture itself, Remove only on this album&#39;s link to it.</figcaption></figure>
 <p>The tiles look alike either way; the button tells you which you have. It reads <strong>Remove</strong>, in
 orange, when every selected picture was only added here. When any of them lives here it reads
 <strong>Delete</strong>, in red: the pictures that live here go to the trash, and the ones only added here are

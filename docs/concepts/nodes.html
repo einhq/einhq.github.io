@@ -126,6 +126,96 @@ they see in <code>ls -l</code>, in <strong>Nodes</strong> or in a node&#39;s <st
 </div>
 <p>Some types also hold <strong>content</strong>: a file its bytes, a log its lines, a queue its messages, a
 position its shape on the map. And any node can hold <strong>children</strong>, a file included.</p>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 552" role="img" aria-label="One node taken apart: the album christmas-2019 holds it under the name 20191225_155434.jpg, which gives its path; the node has the id 01JA7Q3M5X8R2C4V6B9N0P1T2W, the type file and the tier disk, properties (owner helen, group users, mode rwxr-x---, no access list, who created, changed and modified it and when, and 1 link) and attributes (name, mimetype image/jpeg, size, sha256, takenAt and labels), and beneath it its content, the bytes on disk in files/2W/, and its children thumbnails/, metadata/, regions/ and position">
+  <title>One node, taken apart</title>
+  <defs>
+    <marker id="concepts-nodes-md-1-node-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="552" rx="14" fill="#1a1e27" />
+
+  
+  <rect x="24" y="24" width="240" height="56" rx="10" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="44" y="57" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">christmas-2019</text>
+  <text x="244" y="57" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">album</text>
+  <line x1="96" y1="80" x2="96" y2="142" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-nodes-md-1-node-arrow)" />
+  <text x="112" y="108" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">20191225_155434.jpg</text>
+  <text x="112" y="129" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its name, kept by the folder</text>
+  <text x="362" y="57" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">its path</text>
+  <text x="776" y="57" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13"
+    fill="#a2abbb">/archive/albums/christmas-2019/20191225_155434.jpg</text>
+
+  
+  <rect x="24" y="144" width="752" height="280" rx="12" fill="#748ffc" fill-opacity="0.08" stroke="#748ffc" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(52 172) scale(3)"
+    fill="#748ffc" />
+  <text x="80" y="178" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Id</text>
+  <text x="104" y="178" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">01JA7Q3M5X8R2C4V6B9N0P1T2W</text>
+  <text x="432" y="178" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Type</text>
+  <text x="472" y="178" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">file</text>
+  <text x="600" y="178" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Tier</text>
+  <text x="634" y="178" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">disk</text>
+  <line x1="44" y1="198" x2="756" y2="198" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1" />
+
+  
+  <text x="48" y="228" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Properties</text>
+  <text x="392" y="228" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">every node's</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">
+    <tspan x="48" y="256">Owner</tspan>
+    <tspan x="48" y="278">Group</tspan>
+    <tspan x="48" y="300">Mode</tspan>
+    <tspan x="48" y="322">Access list</tspan>
+    <tspan x="48" y="344">Created</tspan>
+    <tspan x="48" y="366">Changed</tspan>
+    <tspan x="48" y="388">Modified</tspan>
+    <tspan x="48" y="410">Links</tspan>
+  </text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">
+    <tspan x="136" y="256">helen</tspan>
+    <tspan x="136" y="278">users</tspan>
+    <tspan x="136" y="300">rwxr-x---</tspan>
+    <tspan x="136" y="322">none</tspan>
+    <tspan x="136" y="344">helen · 14 Mar 2026 09:12</tspan>
+    <tspan x="136" y="366">helen · 14 Mar 2026 09:12</tspan>
+    <tspan x="136" y="388">helen · 2 Apr 2026 18:40</tspan>
+    <tspan x="136" y="410">1</tspan>
+  </text>
+
+  
+  <text x="432" y="228" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Attributes</text>
+  <text x="756" y="228" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">what its type needs</text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">
+    <tspan x="432" y="256">name</tspan>
+    <tspan x="432" y="278">mimetype</tspan>
+    <tspan x="432" y="300">size</tspan>
+    <tspan x="432" y="322">sha256</tspan>
+    <tspan x="432" y="344">takenAt</tspan>
+    <tspan x="432" y="366">labels</tspan>
+  </text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">
+    <tspan x="528" y="256">20191225_155434.jpg</tspan>
+    <tspan x="528" y="278">image/jpeg</tspan>
+    <tspan x="528" y="300">3482117</tspan>
+    <tspan x="528" y="322">9f2c41…e07a</tspan>
+    <tspan x="528" y="344">2019-12-25T15:54:34</tspan>
+    <tspan x="528" y="366">["christmas"]</tspan>
+  </text>
+
+  
+  <line x1="206" y1="424" x2="206" y2="454" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-nodes-md-1-node-arrow)" />
+  <line x1="594" y1="424" x2="594" y2="454" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-nodes-md-1-node-arrow)" />
+
+  <rect x="24" y="456" width="364" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="484" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Content</text>
+  <text x="368" y="484" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">its bytes, on disk</text>
+  <text x="44" y="508" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">files/2W/01JA7Q3M5X8R2C4V6B9N0P1T2W</text>
+
+  <rect x="412" y="456" width="364" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="432" y="484" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Children</text>
+  <text x="756" y="484" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">nodes of their own</text>
+  <text x="432" y="508" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">thumbnails/  metadata/  regions/  position</text>
+</svg><figcaption>A node keeps its id, type, properties and attributes; its name belongs to the folder that holds it.</figcaption></figure>
 <p>Take a photo from the Wrenfield family&#39;s album:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 info /archive/albums/christmas-2019/20191225_155434.jpg</code></pre></div>

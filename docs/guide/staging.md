@@ -25,7 +25,7 @@ year of everyday pictures. You go through the groups and decide for each one:
 
 Only filing makes the files visible to anyone else. Every decision can be undone.
 
-![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging, where files go through arriving, being prepared and being grouped, become a suggested album in a lane, and are then filed as a new album, a new private album or into an existing album, put aside for later or discarded](../diagrams/staging-flow.svg "A file's way through staging: nothing reaches the shared library until you file it")
+![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "A file's way through staging: nothing reaches the shared library until you file it")
 
 Until a file is filed, the views of the whole library leave it out: the Media page and its
 counts, the map, On this day and search. One number still counts staged files: the count beside
@@ -247,7 +247,7 @@ The stream is divided into lanes. Each lane is a view of some of the category's 
 | **Clutter**      | Screenshots and images saved from messages                                    |
 | **Later**        | Anything you put aside with **L**, whatever lane it came from                 |
 
-![Five lanes, To sort, Everyday, Needs a date, Clutter and Later, each with example groups; L moves a group to Later and back, and T gives pictures in Needs a date a time so they join the timeline](../diagrams/lanes.svg "Lanes keep the events to decide apart from the everyday pictures, the undated ones and the clutter")
+![Five lanes, To sort, Everyday, Needs a date, Clutter and Later, each with example groups; L moves a group to Later and back, and T gives pictures in Needs a date a time so they join their events in To sort and their days in Everyday](../diagrams/lanes.svg "Lanes keep the events to decide apart from the everyday pictures, the undated ones and the clutter")
 
 Groups in the Everyday, Needs a date and Clutter lanes are named after what they hold:
 "Everyday · 2014", "Screenshots and saved images · 2019", "Undated · box-3", or "1987 · box-3"

@@ -35,7 +35,7 @@ feed lists pictures by date, so it leaves out a picture that has none.
 EiN looks at up to five sources for a picture's date and takes the first one that has it. The
 **Time source** says in words which one it was.
 
-![A ladder of five date sources, the top one winning: set by hand, a sidecar or Google Photos, GPS time, the camera's clock, the file name; beside it, a box for scans whose scanner's clocks are ignored](../diagrams/dates.svg "The first source on the ladder that has a date decides; a scan waits until a person gives it one")
+![A ladder of five date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time, the camera's clock and the file name, then Undated; beside the last three, a box for scans, whose GPS time, camera clock and file name are ignored, so a scan waits for a person's date](../diagrams/dates.svg "The first source on the ladder that has a date decides; a scan waits until a person gives it one")
 
 | Order | Source                     | Time source reads               | What it is                                                                                                                        |
 | ----- | -------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |

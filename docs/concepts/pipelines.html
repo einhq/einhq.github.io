@@ -551,7 +551,109 @@ and starts <code>media-face-assign</code>, matching the face to a person.</li>
 <li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
 address, and <code>location.point.changed</code>, which links the photo to the location that contains it.</li>
 </ol>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" role="img" aria-label="From upload to findable: a file arrives and its date, place and camera are read first, by media-ingest; then thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the grids and viewer, People, Search, duplicates and stacks, or Locations">
+  <title>From upload to findable</title>
+  <defs>
+    <marker id="concepts-pipelines-md-1-pipeline-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="550" rx="14" fill="#1a1e27" />
 
+  
+  <text x="24" y="48" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Arrives</text>
+  <text x="188" y="48" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Read first</text>
+  <text x="380" y="48" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Then, side by side</text>
+  <text x="628" y="48" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Shows up in</text>
+
+  
+  <rect x="24" y="263" width="136" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="293" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A file arrives</text>
+  <text x="42" y="315" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#a2abbb">IMG_0042.jpg</text>
+  <line x1="160" y1="299" x2="186" y2="299" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+
+  
+  <rect x="188" y="247" width="152" height="104" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="206" y="277" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Its date, place</text>
+  <text x="206" y="297" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">and camera</text>
+  <text x="206" y="329" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">media-ingest</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">
+    <tspan x="188" y="377">every step on the right</tspan>
+    <tspan x="188" y="395">waits for this one</tspan>
+  </text>
+
+  
+  <line x1="340" y1="299" x2="356" y2="299" stroke="#a2abbb" stroke-width="1.5" />
+  <line x1="356" y1="96" x2="356" y2="502" stroke="#a2abbb" stroke-width="1.5" />
+
+  
+  <line x1="356" y1="96" x2="378" y2="96" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="72" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="93" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Thumbnails</text>
+  <text x="396" y="111" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-stills</text>
+  <line x1="596" y1="96" x2="620" y2="96" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="101" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Grids and viewer</text>
+
+  
+  <line x1="356" y1="154" x2="378" y2="154" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="130" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="396" y="151" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Video and sound to play</text>
+  <text x="396" y="169" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-transcode</text>
+  <line x1="596" y1="154" x2="620" y2="154" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="159" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Viewer</text>
+
+  
+  <line x1="356" y1="212" x2="378" y2="212" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="188" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="209" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Faces, then people</text>
+  <text x="396" y="227" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-faces</text>
+  <line x1="596" y1="212" x2="620" y2="212" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="217" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">People</text>
+
+  
+  <line x1="356" y1="270" x2="378" y2="270" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="246" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="267" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Picture vectors</text>
+  <text x="396" y="285" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-embed-picture</text>
+  <line x1="596" y1="270" x2="620" y2="270" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="275" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Search</text>
+
+  
+  <line x1="356" y1="328" x2="378" y2="328" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="304" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="325" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Text in the picture</text>
+  <text x="396" y="343" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-ocr</text>
+  <line x1="596" y1="328" x2="620" y2="328" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="333" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Search, once filed</text>
+
+  
+  <line x1="356" y1="386" x2="378" y2="386" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="362" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="396" y="383" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Transcripts and voices</text>
+  <text x="396" y="401" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-transcribe</text>
+  <line x1="596" y1="386" x2="620" y2="386" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="391" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Search, People</text>
+
+  
+  <line x1="356" y1="444" x2="378" y2="444" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="420" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="441" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Fingerprints</text>
+  <text x="396" y="459" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-fingerprint</text>
+  <line x1="596" y1="444" x2="620" y2="444" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="449" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Duplicates, stacks</text>
+
+  
+  <line x1="356" y1="502" x2="378" y2="502" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <rect x="380" y="478" width="216" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="396" y="499" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Address and place</text>
+  <text x="396" y="517" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#7d8697">media-geocode</text>
+  <line x1="596" y1="502" x2="620" y2="502" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#concepts-pipelines-md-1-pipeline-arrow)" />
+  <text x="628" y="507" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">Viewer, Locations</text>
+
+  
+  <rect x="24" y="492" width="28" height="20" rx="6" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="62" y="507" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">videos and recordings only</text>
+</svg><figcaption>No stage waits for the one before it to finish; each waits for the fact it needs.</figcaption></figure>
 <p>Nothing in the chain waits for &quot;the previous step&quot;. Each stage waits for a fact, so each can be run
 again, put first or given its own workers without touching the others. <a href="../guide/importing.html">Getting your photos in</a>
 describes what you see in the interface while this happens.</p>

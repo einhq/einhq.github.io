@@ -59,7 +59,7 @@ You make most links without typing `ln`: a button in the web interface or a comm
 The picture is never copied. One photo in five albums is one node with five links to it, so a date,
 a place, a face or a label given to it shows in all five.
 
-![One photo where it lives, in the album Summer 2020, with dashed links pointing at it from another album, from Summer 2020's cover, from a label and from a favourite](../diagrams/links.svg "One picture, many places: everything that points at it is a softlink, and the picture itself lives in one folder.")
+![One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link](../diagrams/links.svg "One picture, many places: everything that points at it is a softlink, and the picture itself lives in one folder.")
 
 ### Pairs of links
 

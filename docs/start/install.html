@@ -266,7 +266,95 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 </div>
 <p>The disk check measures the free space where your files go. The images and the database are kept in the container engine&#39;s own storage (for rootless podman, usually under <code>~/.local/share/containers</code>), which is often the same disk but need not be: that disk needs the room too.</p>
 <h2 id="what-the-installer-does">What the installer does<a class="anchor" href="#what-the-installer-does" aria-label="Link to this section"></a></h2>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account with a random password, fetches and sets up the modules, takes the CFG_ lines of .env as settings and starts its services, and the installer reads the password from EiN's log">
+  <title>What the installer does</title>
+  <defs>
+    <marker id="start-install-md-1-install-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="564" rx="14" fill="#1a1e27" />
 
+  
+  <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">The installer</text>
+  <text x="376" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">install.sh, then setup.sh</text>
+
+  <rect x="24" y="72" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="92" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Check the machine</text>
+  <text x="42" y="110" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">stops here when a requirement is missing</text>
+  <line x1="200" y1="120" x2="200" y2="140" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="142" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="162" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Fetch ein/deploy</text>
+  <text x="358" y="162" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/ein</text>
+  <text x="42" y="180" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">cloned, or pulled; then it runs setup.sh</text>
+  <line x1="200" y1="190" x2="200" y2="210" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="212" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="232" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Write the settings</text>
+  <text x="358" y="232" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">.env</text>
+  <text x="42" y="250" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the first time: options, folder, passwords</text>
+  <line x1="200" y1="260" x2="200" y2="280" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="282" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="302" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Fetch the sources</text>
+  <text x="358" y="302" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/ein/src</text>
+  <text x="42" y="320" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">core and db; ems and llm when chosen</text>
+  <line x1="200" y1="330" x2="200" y2="350" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="352" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="372" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Build the images</text>
+  <text x="42" y="390" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">here, from source; the model's is downloaded</text>
+  <line x1="200" y1="400" x2="200" y2="420" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="422" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="442" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Start them with compose</text>
+  <text x="42" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the database first, EiN once it is ready</text>
+  <line x1="200" y1="470" x2="200" y2="490" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="24" y="492" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="512" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Print the address and password</text>
+  <text x="42" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">once EiN answers; it waits up to 10 minutes</text>
+
+  
+  <line x1="376" y1="446" x2="438" y2="446" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+  <text x="408" y="436" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">starts</text>
+  <line x1="440" y1="516" x2="378" y2="516" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+  <text x="408" y="506" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its log</text>
+
+  
+  <rect x="440" y="24" width="336" height="516" rx="12" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(464 46) scale(3)"
+    fill="#a9e34b" />
+  <text x="488" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN's first start</text>
+  <text x="760" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
+
+  <rect x="456" y="72" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="474" y="92" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The database</text>
+  <text x="474" y="110" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">extensions updated, EiN's tables made</text>
+  <line x1="608" y1="120" x2="608" y2="171" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="456" y="173" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="474" y="193" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The admin account</text>
+  <text x="474" y="211" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a random password, printed to its log</text>
+  <line x1="608" y1="221" x2="608" y2="272" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="456" y="274" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="474" y="294" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The modules</text>
+  <text x="742" y="294" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">EIN_MODULES</text>
+  <text x="474" y="312" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">fetched with what they need, set up</text>
+  <line x1="608" y1="322" x2="608" y2="373" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="456" y="375" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="474" y="395" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The settings</text>
+  <text x="474" y="413" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the CFG_ lines of .env, for every shell</text>
+  <line x1="608" y1="423" x2="608" y2="474" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
+
+  <rect x="456" y="476" width="304" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="474" y="496" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The services</text>
+  <text x="474" y="514" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">started last, with those settings</text>
+</svg><figcaption>One command does all of it: the installer builds and starts EiN, and EiN sets itself up at its first start</figcaption></figure>
 <p>Once the checks pass, the installer:</p>
 <ol>
 <li>Fetches <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it when it is there already, and runs <code>~/ein/setup.sh</code> with your options.</li>

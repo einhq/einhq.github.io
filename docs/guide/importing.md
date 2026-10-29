@@ -272,7 +272,7 @@ from a messenger and screenshots.
 
 ## What happens after the upload
 
-![A file's way through staging: four ways in, then arriving, being prepared and being grouped, a suggested album in a lane, and the decisions that file it into the library](../diagrams/staging-flow.svg "Every file passes the same stages; only filing makes it visible to others.")
+![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
 
 Each category's card on the Staging page, and the strip above a category's tabs, show where your
 newest files are. Each stage shows while it holds files:
@@ -311,7 +311,7 @@ videos or recordings). How to go through the groups is on
 Reading a file's date and place is only the first step. The rest of the work runs side by side
 afterwards, and each part shows up in EiN when it is done.
 
-![From upload to findable: a file arrives, its date, place and camera are read, then thumbnails, faces, picture vectors, text, transcripts, fingerprints and the address are worked out side by side](../diagrams/pipeline.svg "Each piece of work fills in its own part of EiN as it finishes.")
+![From upload to findable: a file arrives and its date, place and camera are read first, by media-ingest; then thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the grids and viewer, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "Each piece of work fills in its own part of EiN as it finishes.")
 
 | Work                                                                        | What it gives you                                                                                                            |
 | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |

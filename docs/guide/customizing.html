@@ -119,7 +119,73 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 </tr>
 </tbody></table>
 </div>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 448" role="img" aria-label="Three layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one">
+  <title>How the sidebar is put together</title>
+  <defs>
+    <marker id="guide-customizing-md-1-nav-layers-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="448" rx="14" fill="#1a1e27" />
 
+  
+  <rect x="24" y="32" width="420" height="96" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="60" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The modules' entries</text>
+  <text x="426" y="60" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/ui/nav.d</text>
+  <text x="42" y="86" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb"
+    xml:space="preserve">archive.json  assistant.json  ems.json  ui.json</text>
+  <text x="42" y="110" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">in name order; the first to give an id keeps it</text>
+
+  <line x1="234" y1="128" x2="234" y2="166" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
+  <text x="246" y="152" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">laid over, by id</text>
+
+  
+  <rect x="24" y="168" width="420" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Changes for everyone</text>
+  <text x="426" y="196" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/ui/nav.json</text>
+  <text x="42" y="220" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">written by an administrator</text>
+
+  <line x1="234" y1="236" x2="234" y2="274" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
+  <text x="246" y="260" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">laid over, by id</text>
+
+  
+  <rect x="24" y="276" width="420" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your changes</text>
+  <text x="426" y="304" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/.ui/nav.json</text>
+  <text x="42" y="328" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">written by you, for you only</text>
+
+  <line x1="444" y1="310" x2="498" y2="310" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
+
+  
+  <rect x="500" y="32" width="276" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="518" y="60" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">What a later layer does</text>
+  <text x="518" y="94" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Same id</text>
+  <text x="518" y="114" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes only the fields it names</text>
+  <text x="518" y="148" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Another id</text>
+  <text x="518" y="168" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">adds an entry</text>
+  <text x="518" y="202" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">hide</text>
+  <text x="518" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">removes the ids it lists, for good</text>
+
+  
+  <rect x="500" y="276" width="276" height="112" rx="10" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(524 298) scale(3)"
+    fill="#a9e34b" />
+  <text x="548" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Sidebar and top bar</text>
+  <text x="518" y="330" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">as the person reading gets them:</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="518" y="352" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">admin</tspan>
+    <tspan> entries for administrators,</tspan>
+    <tspan x="518" y="372" font-family="Fragment Mono, ui-monospace, monospace" fill="#eceff4">signedIn</tspan>
+    <tspan> ones not for visitors</tspan>
+  </text>
+
+  
+  <text x="24" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">
+    <tspan font-family="Fragment Mono, ui-monospace, monospace" fill="#a2abbb">ui-nav</tspan>
+    <tspan> in the terminal prints the result for you, with any warnings</tspan>
+  </text>
+</svg><figcaption>Each layer changes only what it names, so your file holds only what you want different.</figcaption></figure>
 <p>Every entry has an id, such as <code>archive.albums</code> for <strong>Albums</strong>. A later layer works on the earlier
 ones by id:</p>
 <ul>

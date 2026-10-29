@@ -148,6 +148,98 @@ machinery core already has. Nothing in the manifest is code.</p>
 </tr>
 </tbody></table>
 </div>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; docs/ becomes the module's guide in /usr/docs/modules; and uninstall.sh, dashed, runs when mod remove takes the module away">
+  <title>The parts of a module</title>
+  <defs>
+    <marker id="develop-modules-md-1-module-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="564" rx="14" fill="#1a1e27" />
+
+  
+  <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">A module's folder</text>
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(318 46) scale(3)"
+    fill="#a9e34b" />
+  <text x="342" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">What EiN makes of it</text>
+  <text x="776" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod setup</text>
+
+  
+  <rect x="24" y="72" width="200" height="468" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#eceff4">
+    <tspan x="44" y="101">mod.json</tspan>
+    <tspan x="44" y="161">bin/</tspan>
+    <tspan x="44" y="221">services/</tspan>
+    <tspan x="44" y="281">pipelines/</tspan>
+    <tspan x="44" y="341">ui/</tspan>
+    <tspan x="44" y="401">etc/</tspan>
+    <tspan x="44" y="461">docs/</tspan>
+  </text>
+  <text x="44" y="521" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb">uninstall.sh</text>
+
+  
+  <line x1="224" y1="96" x2="310" y2="96" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="72" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="92" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Checked, then registered</text>
+  <text x="330" y="110" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">its settings, node types, archive roots and indexes</text>
+
+  
+  <line x1="224" y1="156" x2="310" y2="156" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="132" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="152" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Commands</text>
+  <text x="758" y="152" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">PATH</text>
+  <text x="330" y="170" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">each file a command, in bash or TypeScript, in every shell</text>
+
+  
+  <line x1="224" y1="216" x2="310" y2="216" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="192" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="212" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Services</text>
+  <text x="758" y="212" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/services</text>
+  <text x="330" y="230" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">registered and enabled, run in the background</text>
+
+  
+  <line x1="224" y1="276" x2="310" y2="276" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="252" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="272" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Pipelines</text>
+  <text x="758" y="272" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/var/pipelines/definitions</text>
+  <text x="330" y="290" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">defined, to run on the events they match</text>
+
+  
+  <line x1="224" y1="336" x2="310" y2="336" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="312" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="332" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Pages, sidebar and top-bar entries</text>
+  <text x="758" y="332" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/ui/nav.d</text>
+  <text x="330" y="350" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">the pages mod.json routes to, bundled by ui-build; nav.json linked</text>
+
+  
+  <line x1="224" y1="396" x2="310" y2="396" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="372" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="392" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Settings values and drop-ins</text>
+  <text x="758" y="392" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc</text>
+  <text x="330" y="410" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">config and &lt;x&gt;.d linked; any other file copied once, never overwritten</text>
+
+  
+  <line x1="224" y1="456" x2="310" y2="456" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="432" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="330" y="452" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The module's guide</text>
+  <text x="758" y="452" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/usr/docs/modules</text>
+  <text x="330" y="470" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its own pages in Documentation</text>
+
+  
+  <line x1="224" y1="516" x2="310" y2="516" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#develop-modules-md-1-module-arrow)" />
+  <rect x="312" y="492" width="464" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="330" y="512" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Run when the module is removed</text>
+  <text x="758" y="512" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">mod remove</text>
+  <text x="330" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">before its commands, services and links are taken away</text>
+</svg><figcaption>EiN finds most of a module by where each part sits in its folder; mod.json says the rest.</figcaption></figure>
 <p><a href="manifest.html">The module manifest</a> describes every field of <code>mod.json</code>. This page uses the few a
 first module needs.</p>
 <h2 id="before-you-start">Before you start<a class="anchor" href="#before-you-start" aria-label="Link to this section"></a></h2>

@@ -20,6 +20,8 @@ Every node has the same five parts, whatever its type:
 Some types also hold **content**: a file its bytes, a log its lines, a queue its messages, a
 position its shape on the map. And any node can hold **children**, a file included.
 
+![One node taken apart: the album christmas-2019 holds it under the name 20191225_155434.jpg, which gives its path; the node has the id 01JA7Q3M5X8R2C4V6B9N0P1T2W, the type file and the tier disk, properties (owner helen, group users, mode rwxr-x---, no access list, who created, changed and modified it and when, and 1 link) and attributes (name, mimetype image/jpeg, size, sha256, takenAt and labels), and beneath it its content, the bytes on disk in files/2W/, and its children thumbnails/, metadata/, regions/ and position](../diagrams/node.svg "A node keeps its id, type, properties and attributes; its name belongs to the folder that holds it.")
+
 Take a photo from the Wrenfield family's album:
 
 ```bash

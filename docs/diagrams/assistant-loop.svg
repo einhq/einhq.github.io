@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560">
+  <title>How the assistant answers</title>
+  <defs>
+    <marker id="assistant-loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="560" rx="14" fill="#1a1e27" />
+
+  <!-- The question -->
+  <rect x="24" y="24" width="196" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your question</text>
+  <text x="42" y="76" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">with what is on screen</text>
+  <line x1="220" y1="60" x2="266" y2="60" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+
+  <!-- The model -->
+  <rect x="268" y="24" width="224" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Language model</text>
+  <text x="474" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">llm</text>
+  <text x="286" y="76" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">calls a tool, or answers</text>
+  <line x1="492" y1="60" x2="538" y2="60" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+
+  <!-- The answer -->
+  <rect x="540" y="24" width="236" height="92" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="558" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The answer</text>
+  <text x="758" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">final_answer</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="558" y="76">text, pictures, links,</tspan>
+    <tspan x="558" y="96">a table, cards</tspan>
+  </text>
+
+  <!-- Call and result -->
+  <line x1="340" y1="96" x2="340" y2="142" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="330" y="124" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a call</text>
+  <line x1="420" y1="144" x2="420" y2="98" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="430" y="124" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">its result</text>
+
+  <!-- The tools -->
+  <rect x="268" y="144" width="224" height="128" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="172" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Its tools</text>
+  <text x="286" y="198" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the modules' commands</text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">
+    <tspan x="286" y="220">find_commands</tspan>
+    <tspan x="286" y="240">command_help</tspan>
+    <tspan x="286" y="260">run_command</tspan>
+  </text>
+  <line x1="380" y1="272" x2="380" y2="318" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="390" y="300" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a line to run</text>
+
+  <!-- The judge -->
+  <rect x="268" y="320" width="224" height="80" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="286" y="348" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Read or write?</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="286" y="372">decided by the code,</tspan>
+    <tspan x="286" y="390">not by the model</tspan>
+  </text>
+
+  <!-- A read -->
+  <path d="M268,360 H122 V430" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="195" y="350" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">reads</text>
+  <rect x="24" y="432" width="196" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="42" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Runs at once, as you</text>
+  <text x="42" y="484" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">up to 60 s a line</text>
+  <path d="M64,432 V208 H266" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="165" y="198" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">what it printed</text>
+
+  <!-- A change -->
+  <path d="M492,360 H658 V430" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#assistant-loop-arrow)" />
+  <text x="575" y="350" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes</text>
+  <rect x="540" y="432" width="236" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="558" y="460" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A proposal card</text>
+  <rect x="558" y="472" width="52" height="22" rx="6" fill="#40c057" fill-opacity="0.12" stroke="#40c057" stroke-width="1.25" />
+  <text x="584" y="487" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Run</text>
+  <rect x="620" y="472" width="72" height="22" rx="6" fill="#fa5252" fill-opacity="0.12" stroke="#fa5252" stroke-width="1.25" />
+  <text x="656" y="487" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">Decline</text>
+  <path d="M736,432 V208 H494" fill="none" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#assistant-loop-arrow)" />
+  <text x="615" y="198" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">how it went</text>
+
+  <!-- Limits -->
+  <text x="400" y="536" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">At most 12 commands a question, and 180 s for each call to the model</text>
+</svg>

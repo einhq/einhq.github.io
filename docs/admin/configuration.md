@@ -185,6 +185,8 @@ A setting can be given a value in up to four places. The narrowest wins:
 
 A personal setting comes from `~/.config`, the deployment or its default: neither a module nor `/etc/config` sets it. A system setting is never read from anyone's `~/.config`.
 
+![Five layers stacked, the higher one winning: Your setting in ~/.config, from Profile → Preferences or config set; Set here in /etc/config, from Settings → System or config set, which restarts the services the setting names; From archive in /etc/config.d/archive, a module's own etc/config; From deployment in /etc/environment, the CFG_ lines of .env written again at each start; and Default, declared with the setting; beside them, a system setting reads every layer but Your setting and a personal one only Your setting, From deployment and Default; below, a key, CFG_…_KEY, comes from /etc/keys over the deployment's and is in no shell's environment, a .env change applies when the container is made again, and HTTP port and SSH port wait for EiN's next start](../diagrams/settings-layers.svg "The highest layer that sets a value wins, and each scope skips the layers that are not its own.")
+
 Every shell in EiN, the services' shells included, sources these files at its start, `/etc/environment` first and `~/.config` last, so each is exported over the one before. That is why every setting is an ordinary environment variable in the terminal:
 
 ```bash

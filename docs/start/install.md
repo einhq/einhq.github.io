@@ -135,7 +135,7 @@ The disk check measures the free space where your files go. The images and the d
 
 ## What the installer does
 
-![Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; below it, EiN's first start in its container sets up the database, makes the admin account, installs the modules and starts its services](../diagrams/install-flow.svg "One command does all of it: the installer builds and starts EiN, and EiN sets itself up at its first start")
+![Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, fetches the sources, builds the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account with a random password, fetches and sets up the modules, takes the CFG_ lines of .env as settings and starts its services, and the installer reads the password from EiN's log](../diagrams/install-flow.svg "One command does all of it: the installer builds and starts EiN, and EiN sets itself up at its first start")
 
 Once the checks pass, the installer:
 

@@ -86,7 +86,94 @@
 <p>These pages explain how to install EiN, use it day to day, look after it and build on it. This one says what EiN is and where to start, whoever you are.</p>
 <p>EiN (<em>Everything is a Node</em>) is a system you host yourself, on your own Linux machine (x86-64). Everything it keeps is a node in one tree: photos and albums, people and places, accounts, logs, queues, even its own commands, each with an owner and permissions as a file has. The web interface, a bash-compatible shell in the browser or over SSH, and SFTP all work on that one tree, as you and under the same permissions. Modules decide what EiN is for, and bring the pipelines that do the work each change starts. The first is the Archive, for a family&#39;s photos, videos, recordings and letters: as files come in, its pipelines make thumbnails, find faces, read text, transcribe speech and prepare everything for search. The assistant module adds a chat that answers your questions by running EiN&#39;s commands for you.</p>
 <p>On your machine EiN runs as a few containers under podman or Docker. EiN itself serves the web interface on port 8080 and SSH and SFTP on port 2222 by default, and keeps every node in a PostgreSQL database beside it and the files themselves in a data folder. Two more services are optional: the media service, which does the work on pictures, video and sound and which the Archive needs, and a language model for the assistant. A graphics card makes both faster, but nothing needs one. <a href="start/how-ein-works.html">How EiN works</a> explains the whole model in one page.</p>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="EiN's containers on one machine: ein, which a browser reaches on port 8080 and an SSH or SFTP client on port 2222, beside PostgreSQL, the optional media service and the optional language model, with the data folder they use below">
+  <title>What runs where</title>
+  <defs>
+    <marker id="index-md-1-system-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="548" rx="14" fill="#1a1e27" />
 
+  
+  <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Other machines</text>
+  <rect x="24" y="150" width="148" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="98" y="183" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">A browser</text>
+  <rect x="24" y="234" width="148" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="98" y="267" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SSH or SFTP</text>
+
+  <line x1="172" y1="178" x2="226" y2="178" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+  <text x="200" y="168" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">8080</text>
+  <line x1="172" y1="262" x2="226" y2="262" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+  <text x="200" y="252" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">2222</text>
+
+  
+  <rect x="204" y="24" width="572" height="500" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="228" y="56" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">One machine</text>
+  <text x="752" y="56" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">containers on compose's private network</text>
+
+  
+  <rect x="228" y="80" width="212" height="324" rx="10" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(252 110) scale(3)"
+    fill="#a9e34b" />
+  <text x="276" y="116" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN</text>
+  <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
+    <tspan x="248" y="182">The web interface</tspan>
+    <tspan x="248" y="216">The shell</tspan>
+    <tspan x="248" y="250">SSH and SFTP</tspan>
+    <tspan x="248" y="284">Pipelines</tspan>
+    <tspan x="248" y="318">Modules</tspan>
+  </text>
+  <text x="248" y="384" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">one process</text>
+
+  
+  <rect x="504" y="80" width="248" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="522" y="106" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">PostgreSQL</text>
+  <text x="734" y="106" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">db</text>
+  <text x="522" y="128" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">nodes, links, logs, vectors</text>
+
+  
+  <rect x="504" y="172" width="248" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="522" y="198" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Media service</text>
+  <text x="734" y="198" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ems</text>
+  <text x="522" y="220" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">optional, with the Archive</text>
+
+  
+  <rect x="538" y="268" width="180" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="628" y="293" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">NVIDIA graphics card</text>
+  <line x1="628" y1="236" x2="628" y2="266" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#index-md-1-system-arrow)" />
+  <line x1="628" y1="340" x2="628" y2="310" stroke="#a2abbb" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#index-md-1-system-arrow)" />
+
+  
+  <rect x="504" y="340" width="248" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="522" y="366" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Language model</text>
+  <text x="734" y="366" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">llm</text>
+  <text x="522" y="388" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">optional, with the assistant</text>
+
+  
+  <line x1="440" y1="112" x2="502" y2="112" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+  <line x1="440" y1="204" x2="502" y2="204" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+  <line x1="440" y1="372" x2="502" y2="372" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+
+  
+  <line x1="334" y1="404" x2="334" y2="434" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#index-md-1-system-arrow)" />
+  <rect x="228" y="436" width="348" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="246" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The data folder</text>
+  <text x="558" y="462" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/ein/data</text>
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#a2abbb">
+    <tspan x="246" y="484">files</tspan>
+    <tspan x="298" y="484">files-volatile</tspan>
+    <tspan x="415" y="484">modules</tspan>
+    <tspan x="481" y="484">llm</tspan>
+  </text>
+  <rect x="600" y="436" width="152" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="618" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The database</text>
+  <text x="618" y="484" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#a2abbb">volume ein_db</text>
+</svg><figcaption>Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.</figcaption></figure>
 <h2 id="where-to-start">Where to start<a class="anchor" href="#where-to-start" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>You want to try EiN.</strong> <a href="start/install.html">Install EiN</a> puts it on a Linux machine with one command, and <a href="start/first-steps.html">First steps</a> takes you from the first sign-in to a family using it.</li>

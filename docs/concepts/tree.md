@@ -30,6 +30,8 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 | `/dev`     | The channels changes are announced on, and `/dev/null`                                                    | EiN itself                                                |
 | `/tmp`     | Scratch space that does not outlast a restart                                                             | Everyone                                                  |
 
+![The tree from /: /archive with the Archive module's albums, people, locations and devices and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
+
 The administrator owns `/` and the system folders, most of them with the mode `0755`: every account
 may read and pass through them, and only the administrator changes them. Your own data lives in `/archive` and
 in your home. [Permissions in depth](../admin/permissions.md#the-other-bits-are-the-systems) lists

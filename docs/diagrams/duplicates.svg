@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 316" width="800" height="316">
+  <title>Copies, look-alikes and bursts</title>
+  <rect width="800" height="316" rx="14" fill="#1a1e27" />
+
+  <!-- Exact copy -->
+  <rect x="24" y="24" width="240" height="268" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="54" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Exact copy</text>
+  <text x="244" y="54" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">by checksum</text>
+
+  <!-- Look-alike -->
+  <rect x="280" y="24" width="240" height="268" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="300" y="54" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Look-alike</text>
+  <text x="500" y="54" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">by fingerprint</text>
+
+  <!-- Burst -->
+  <rect x="536" y="24" width="240" height="268" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="556" y="54" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Burst</text>
+  <text x="756" y="54" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">by capture time</text>
+  <g transform="translate(48 88) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <g transform="translate(160 88) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <text x="144" y="124" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="20" fill="#a2abbb">=</text>
+  <text x="144" y="180" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600"
+    fill="#eceff4">the same bytes</text>
+  <g transform="translate(316 88) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <g transform="translate(428 97) scale(0.7)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <text x="412" y="124" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="20" fill="#a2abbb">≈</text>
+  <text x="400" y="180" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600"
+    fill="#eceff4">97% alike</text>
+  <g transform="translate(608 80) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <g transform="translate(616 88) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <g transform="translate(624 96) scale(1.0)">
+    <rect width="80" height="60" rx="6" fill="#1a1e27" />
+    <rect width="80" height="60" rx="6" fill="#748ffc" fill-opacity="0.12" stroke="#748ffc" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    <circle cx="58" cy="19" r="6" fill="#748ffc" fill-opacity="0.55" />
+    <path d="M8 52 L28 28 L40 40 L52 31 L72 52 Z" fill="#748ffc" fill-opacity="0.45" />
+  </g>
+  <rect x="676" y="136" width="38" height="20" rx="10" fill="#1a1e27" stroke="#748ffc" stroke-width="1.25" />
+  <text x="695" y="151" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="12" fill="#eceff4">3</text>
+  <text x="656" y="180" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600"
+    fill="#eceff4">seconds apart</text>
+  <rect x="98" y="198" width="92" height="24" rx="12" fill="#40c057" fill-opacity="0.15" stroke="#40c057" stroke-width="1.25" />
+  <text x="144" y="215" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">kept once</text>
+  <rect x="342" y="198" width="116" height="24" rx="12" fill="#fd7e14" fill-opacity="0.15" stroke="#fd7e14" stroke-width="1.25" />
+  <text x="400" y="215" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">yours to judge</text>
+  <rect x="618" y="198" width="76" height="24" rx="12" fill="#339af0" fill-opacity="0.15" stroke="#339af0" stroke-width="1.25" />
+  <text x="656" y="215" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#eceff4">a stack</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="44" y="250">Found as the file arrives;</tspan>
+    <tspan x="44" y="270">the copy is not processed</tspan>
+  </text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="300" y="250">The same picture in other bytes;</tspan>
+    <tspan x="300" y="270">EiN suggests which to keep</tspan>
+  </text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="556" y="250">Shots taken a moment apart;</tspan>
+    <tspan x="556" y="270">never a duplicate, none removed</tspan>
+  </text>
+</svg>

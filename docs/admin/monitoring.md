@@ -39,6 +39,8 @@ The badge is the first line of the [`health`](../reference/commands-core.md#heal
 
 Warnings never change the verdict on their own. An install without the media service or without a language model reads **Healthy** with a warning about each, and the same warnings show for a while after every start while the services load their models.
 
+![Above, a step that runs ends one of four ways: exit 0 completes it; exit 75, a busy service, leaves it waiting with its attempt given back while its kind rests 30 seconds, doubling up to 10 minutes; exit 65, bad input, fails it for good; any other exit retries it, 3 attempts in all, then the instance fails, pipeline heal runs it again after 1 h, 6 h and 24 h, and after that it needs a person and the failed work check fails; below, the four verdicts in the order they are decided: Needs a person in red when a check failed, Healthy in green when nothing is waiting, Catching up in blue when work is waiting and some was done in the last hour, and Stuck in orange when none was](../diagrams/health.svg "A busy service only makes work wait; a person is asked for only when work fails through every retry and heal, or a check fails.")
+
 ## Read the checks
 
 On **Overview**, a card above the tiles lists every check that is not fine, failed ones first, each with its reason; a red edge marks a failed check, a yellow one a warning. When every check is fine the card is not there. `health` in the terminal lists them all, the fine ones too.

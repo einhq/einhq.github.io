@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 528" width="800" height="528">
+  <title>Where a setting's value comes from</title>
+  <defs>
+    <marker id="settings-layers-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="528" rx="14" fill="#1a1e27" />
+
+  <!-- Headings -->
+  <text x="60" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600"
+    fill="#eceff4">Where a setting's value comes from</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb" text-anchor="middle">
+    <tspan x="664" y="52">System</tspan>
+    <tspan x="740" y="52">Personal</tspan>
+  </text>
+
+  <!-- The higher wins -->
+  <line x1="40" y1="380" x2="40" y2="74" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#settings-layers-arrow)" />
+  <text x="0" y="0" transform="translate(30 226) rotate(-90)" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">the higher one wins</text>
+
+  <!-- Your setting -->
+  <rect x="60" y="72" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="94" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Your setting</text>
+  <text x="602" y="94" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">~/.config</text>
+  <text x="78" y="113" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">Profile → Preferences, or config set: each person's own</text>
+
+  <!-- Set here -->
+  <rect x="60" y="136" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="158" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Set here</text>
+  <text x="602" y="158" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/config</text>
+  <text x="78" y="177" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">Settings → System, or config set: restarts the services the setting names</text>
+
+  <!-- From a module -->
+  <rect x="60" y="200" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">From archive</text>
+  <text x="602" y="222" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/config.d/archive</text>
+  <text x="78" y="241" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">a module's own etc/config, linked when the module is set up</text>
+
+  <!-- From deployment -->
+  <rect x="60" y="264" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="286" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">From deployment</text>
+  <text x="602" y="286" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/environment</text>
+  <text x="78" y="305" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">the CFG_ lines of .env, written again each time EiN's container starts</text>
+
+  <!-- Default -->
+  <rect x="60" y="328" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="350" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Default</text>
+  <text x="78" y="369" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">declared with the setting, by core or by the module it belongs to</text>
+
+  <!-- Which layers each scope reads -->
+  <circle cx="740" cy="98" r="6" fill="#eceff4" />
+  <line x1="656" y1="98" x2="672" y2="98" stroke="#7d8697" stroke-width="1.5" />
+  <circle cx="664" cy="162" r="6" fill="#eceff4" />
+  <line x1="732" y1="162" x2="748" y2="162" stroke="#7d8697" stroke-width="1.5" />
+  <circle cx="664" cy="226" r="6" fill="#eceff4" />
+  <line x1="732" y1="226" x2="748" y2="226" stroke="#7d8697" stroke-width="1.5" />
+  <circle cx="664" cy="290" r="6" fill="#eceff4" />
+  <circle cx="740" cy="290" r="6" fill="#eceff4" />
+  <circle cx="664" cy="354" r="6" fill="#eceff4" />
+  <circle cx="740" cy="354" r="6" fill="#eceff4" />
+
+  <!-- Keys -->
+  <rect x="60" y="408" width="560" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="78" y="430" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">A key <tspan font-family="Fragment Mono, ui-monospace, monospace" font-size="14" font-weight="400">CFG_…_KEY</tspan></text>
+  <text x="602" y="430" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/keys</text>
+  <text x="78" y="449" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">Set here over From deployment, else Not set; in no shell's environment</text>
+  <circle cx="664" cy="434" r="6" fill="#eceff4" />
+  <line x1="732" y1="434" x2="748" y2="434" stroke="#7d8697" stroke-width="1.5" />
+
+  <text x="60" y="496" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">A .env change applies when the container is made again; HTTP port and SSH port wait for EiN's next start.</text>
+</svg>

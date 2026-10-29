@@ -14,7 +14,7 @@ The next photo of the same stranger finds the first one, sees that it already be
 
 Two faces in the same photo are never made the same person automatically. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.
 
-![A detected face with three outcomes: joined to a named person, started as an unidentified person, or left unknown; below them the actions a person can take: Name, Add to someone, Split off as someone new, Move to…, Not a person and Not a face](../diagrams/faces.svg "Recognition decides on its own, and anything a person decides afterwards is kept.")
+![A detected face with three outcomes: it joins a person it clearly matches, named or not; it starts an unidentified person when it matches nobody but is clear and at least 48 px across; or it stays unknown, marked Unassigned; below them the actions a person can take: Name or Add to someone, Split off as someone new or Move to…, and Not a person or Not a face](../diagrams/faces.svg "Recognition decides on its own, and anything a person decides afterwards is kept.")
 
 The work is done by the [media service](../admin/media-service.md) on your own machine; no photo, face or voice is sent anywhere to be analysed. Without the media service no faces are found, and they are found once it runs again. After a large import it takes a while for every picture to be looked at; the **Dashboard** reads **Catching up** until it is done (see [Health and the dashboard](../admin/monitoring.md)).
 

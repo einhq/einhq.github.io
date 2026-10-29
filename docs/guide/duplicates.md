@@ -12,7 +12,7 @@ pictures get there is on [Getting your photos in](importing.md), and the rest of
 
 EiN sorts "the same picture twice" into three kinds and treats each one differently.
 
-![Three columns: two identical pictures marked as the same bytes, two slightly different pictures marked 97% alike, and three nearly identical pictures stacked as a burst](../diagrams/duplicates.svg "An exact copy is kept once, a look-alike is yours to judge, and a burst is a stack, never a duplicate")
+![Three columns: an exact copy, two identical pictures found by checksum to be the same bytes and kept once; a look-alike, a picture and a smaller version of it found by fingerprint to be 97% alike and left for you to judge; and a burst, three shots taken seconds apart and folded into a stack of 3, never a duplicate](../diagrams/duplicates.svg "An exact copy is kept once, a look-alike is yours to judge, and a burst is a stack, never a duplicate")
 
 | Kind       | What it is                                                                                                                                                          | When EiN finds it                                     | What happens                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |

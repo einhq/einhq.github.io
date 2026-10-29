@@ -597,6 +597,17 @@ kbd {
   height: auto;
   max-height: 80vh;
 }
+/* On a narrow screen a diagram keeps a width its labels can be read at, and scrolls sideways. */
+@media (max-width: 640px) {
+  .diagram {
+    overflow-x: auto;
+  }
+  .diagram svg {
+    width: 640px;
+    max-width: none;
+    max-height: none;
+  }
+}
 .prose figcaption {
   margin-top: 10px;
   color: var(--muted);

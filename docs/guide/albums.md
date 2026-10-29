@@ -400,7 +400,7 @@ selection bar treats the two differently:
 - **Remove** takes a picture that was only added to the album out of it. The picture stays where it
   lives, and in any other album it is in.
 
-![One photo where it lives, in the album Summer 2020, with dashed links pointing at it from another album, from Summer 2020's cover, from a label and from a favourite; Delete sends the photo to the trash, Remove drops only one link](../diagrams/links.svg "One picture, many places: Delete acts on the picture itself, Remove only on this album's link to it.")
+![One photo, beach.jpg, where it lives in the album Summer 2020, with dashed softlinks pointing at it from Summer 2020's cover, from another album, from a label and from a favourite; Delete in Summer 2020 sends the photo to the trash, while Remove in the other album drops only that album's link](../diagrams/links.svg "One picture, many places: Delete acts on the picture itself, Remove only on this album's link to it.")
 
 The tiles look alike either way; the button tells you which you have. It reads **Remove**, in
 orange, when every selected picture was only added here. When any of them lives here it reads

@@ -282,7 +282,7 @@ starts its own pipelines:
 6. A GPS position becomes `media.position.available`, which starts `media-geocode` for the
    address, and `location.point.changed`, which links the photo to the location that contains it.
 
-![From upload to findable: a file arrives, its date, place and camera are read, then thumbnails, faces, picture vectors, text, transcripts, fingerprints and the address are worked out side by side](../diagrams/pipeline.svg "No stage waits for the one before it to finish; each waits for the fact it needs.")
+![From upload to findable: a file arrives and its date, place and camera are read first, by media-ingest; then thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the grids and viewer, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "No stage waits for the one before it to finish; each waits for the fact it needs.")
 
 Nothing in the chain waits for "the previous step". Each stage waits for a fact, so each can be run
 again, put first or given its own workers without touching the others. [Getting your photos in](../guide/importing.md)

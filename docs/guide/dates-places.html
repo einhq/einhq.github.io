@@ -112,7 +112,93 @@ feed lists pictures by date, so it leaves out a picture that has none.</p>
 <h2 id="which-date-a-picture-gets">Which date a picture gets<a class="anchor" href="#which-date-a-picture-gets" aria-label="Link to this section"></a></h2>
 <p>EiN looks at up to five sources for a picture&#39;s date and takes the first one that has it. The
 <strong>Time source</strong> says in words which one it was.</p>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 526" role="img" aria-label="A ladder of five date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time, the camera's clock and the file name, then Undated; beside the last three, a box for scans, whose GPS time, camera clock and file name are ignored, so a scan waits for a person's date">
+  <title>Which date a picture gets</title>
+  <defs>
+    <marker id="guide-dates-places-md-1-dates-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="526" rx="14" fill="#1a1e27" />
 
+  
+  <text x="24" y="46" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">The first source with a date wins</text>
+  <text x="488" y="46" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">Time source reads</text>
+
+  
+  <rect x="24" y="64" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="46" y="88" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">1</text>
+  <text x="68" y="88" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Set by hand</text>
+  <text x="488" y="88" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">entered by hand</text>
+  <text x="68" y="108" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">Set time in the viewer, or file-set-time in the shell</text>
+  <line x1="46" y1="120" x2="46" y2="140" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-dates-places-md-1-dates-arrow)" />
+  <text x="58" y="137" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
+
+  
+  <rect x="24" y="142" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="46" y="166" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">2</text>
+  <text x="68" y="166" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A sidecar or Google Photos</text>
+  <text x="488" y="166" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">from Google Photos or a sidecar</text>
+  <text x="68" y="186" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">an editor’s XMP date, or a date changed in Google Photos</text>
+  <line x1="46" y1="198" x2="46" y2="218" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-dates-places-md-1-dates-arrow)" />
+  <text x="58" y="215" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
+
+  
+  <rect x="24" y="220" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="46" y="244" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">3</text>
+  <text x="68" y="244" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">GPS time</text>
+  <text x="488" y="244" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from GPS</text>
+  <text x="68" y="264" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">the receiver’s clock, unless over 26 hours off the camera’s</text>
+  <line x1="46" y1="276" x2="46" y2="296" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-dates-places-md-1-dates-arrow)" />
+  <text x="58" y="293" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
+
+  
+  <rect x="24" y="298" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="46" y="322" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">4</text>
+  <text x="68" y="322" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The camera’s clock</text>
+  <text x="488" y="322" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from the camera clock</text>
+  <text x="68" y="342" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">what the camera or phone wrote; not a registered scanner’s</text>
+  <line x1="46" y1="354" x2="46" y2="374" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-dates-places-md-1-dates-arrow)" />
+  <text x="58" y="371" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
+
+  
+  <rect x="24" y="376" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="46" y="400" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">5</text>
+  <text x="68" y="400" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The file name</text>
+  <text x="488" y="400" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from the file name</text>
+  <text x="68" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">a date the name spells, where its staging category says so</text>
+  <line x1="46" y1="432" x2="46" y2="452" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-dates-places-md-1-dates-arrow)" />
+  <text x="58" y="449" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
+
+  
+  <rect x="24" y="454" width="480" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="46" y="483" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Undated</text>
+  <text x="488" y="483" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">never when it was uploaded or last changed</text>
+
+  
+  <path d="M504,248 H520 V404 H504" fill="none" stroke="#a2abbb" stroke-width="1.5" />
+  <line x1="520" y1="326" x2="536" y2="326" stroke="#a2abbb" stroke-width="1.5" />
+  <rect x="536" y="220" width="240" height="212" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="556" y="250" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A scan</text>
+  <text x="556" y="270" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from a Scans category</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
+    <tspan x="556" y="304">GPS time, the camera’s</tspan>
+    <tspan x="556" y="324">clock and the file name</tspan>
+    <tspan x="556" y="344">say when it was scanned,</tspan>
+    <tspan x="556" y="364">so they are ignored.</tspan>
+  </text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#eceff4">
+    <tspan x="556" y="396">It waits for a person’s</tspan>
+    <tspan x="556" y="416">date: rung 1 or 2.</tspan>
+  </text>
+</svg><figcaption>The first source on the ladder that has a date decides; a scan waits until a person gives it one</figcaption></figure>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

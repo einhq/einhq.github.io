@@ -30,6 +30,8 @@ machinery core already has. Nothing in the manifest is code.
 | `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                    |
 | `uninstall.sh`            | Runs it when the module is removed                                                                  |
 
+![A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; docs/ becomes the module's guide in /usr/docs/modules; and uninstall.sh, dashed, runs when mod remove takes the module away](../diagrams/module.svg "EiN finds most of a module by where each part sits in its folder; mod.json says the rest.")
+
 [The module manifest](manifest.md) describes every field of `mod.json`. This page uses the few a
 first module needs.
 

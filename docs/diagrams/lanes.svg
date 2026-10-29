@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360">
+  <title>The lanes of the Sort tab</title>
+  <defs>
+    <marker id="lanes-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="360" rx="14" fill="#1a1e27" />
+
+  <!-- To sort -->
+  <rect x="24" y="24" width="140" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="38" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">To sort</text>
+  <rect x="34" y="72" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="44" y="98" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Christmas Eve</text>
+  <text x="44" y="118" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">24 Dec 1975</text>
+  <rect x="34" y="148" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="44" y="174" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Falmouth</text>
+  <text x="44" y="194" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">3–9 Aug 1968</text>
+
+  <!-- Everyday -->
+  <rect x="177" y="24" width="140" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="191" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Everyday</text>
+  <rect x="187" y="72" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="197" y="98" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Everyday</text>
+  <text x="197" y="118" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">2014</text>
+  <rect x="187" y="148" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="197" y="174" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Everyday</text>
+  <text x="197" y="194" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Jun 2015</text>
+
+  <!-- Needs a date -->
+  <rect x="330" y="24" width="140" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="344" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Needs a date</text>
+  <rect x="340" y="72" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="350" y="98" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Undated</text>
+  <text x="350" y="118" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">box-3</text>
+  <rect x="340" y="148" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="350" y="174" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">1987</text>
+  <text x="350" y="194" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">box-3</text>
+
+  <!-- Clutter -->
+  <rect x="483" y="24" width="140" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="497" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Clutter</text>
+  <rect x="493" y="72" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">
+    <tspan x="503" y="91">Screenshots and</tspan>
+    <tspan x="503" y="108">saved images</tspan>
+  </text>
+  <text x="503" y="126" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">2019</text>
+
+  <!-- Later -->
+  <rect x="636" y="24" width="140" height="204" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="650" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Later</text>
+  <rect x="646" y="72" width="120" height="64" rx="8" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="656" y="98" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#eceff4">Midsummer Eve</text>
+  <text x="656" y="118" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">21 Jun 1974</text>
+
+  <!-- T: dated pictures join their events and days -->
+  <path d="M400 228 V262 H124 V232" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#lanes-arrow)" />
+  <line x1="247" y1="262" x2="247" y2="232" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#lanes-arrow)" />
+  <rect x="416" y="251" width="22" height="22" rx="5" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <text x="427" y="267" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">T</text>
+  <text x="448" y="267" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">gives a time: they join their events and days</text>
+
+  <!-- L: to Later and back -->
+  <path d="M60 232 V300 H706 V232" fill="none" stroke="#a2abbb" stroke-width="1.5" marker-start="url(#lanes-arrow)" marker-end="url(#lanes-arrow)" />
+  <rect x="268" y="313" width="22" height="22" rx="5" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+  <text x="279" y="329" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">L</text>
+  <text x="300" y="329" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">puts a group aside, from any lane; L again puts it back</text>
+</svg>

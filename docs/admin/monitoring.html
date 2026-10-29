@@ -172,6 +172,102 @@
 </tbody></table>
 </div>
 <p>Warnings never change the verdict on their own. An install without the media service or without a language model reads <strong>Healthy</strong> with a warning about each, and the same warnings show for a while after every start while the services load their models.</p>
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 556" role="img" aria-label="Above, a step that runs ends one of four ways: exit 0 completes it; exit 75, a busy service, leaves it waiting with its attempt given back while its kind rests 30 seconds, doubling up to 10 minutes; exit 65, bad input, fails it for good; any other exit retries it, 3 attempts in all, then the instance fails, pipeline heal runs it again after 1 h, 6 h and 24 h, and after that it needs a person and the failed work check fails; below, the four verdicts in the order they are decided: Needs a person in red when a check failed, Healthy in green when nothing is waiting, Catching up in blue when work is waiting and some was done in the last hour, and Stuck in orange when none was">
+  <title>From a step's exit to the verdict</title>
+  <defs>
+    <marker id="admin-monitoring-md-1-health-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="556" rx="14" fill="#1a1e27" />
+
+  
+  <text x="24" y="52" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">What a step's exit does</text>
+
+  <rect x="24" y="152" width="128" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="88" y="181" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">A step runs</text>
+
+  <line x1="152" y1="176" x2="184" y2="176" stroke="#a2abbb" stroke-width="1.5" />
+  <line x1="184" y1="92" x2="184" y2="260" stroke="#a2abbb" stroke-width="1.5" />
+  <line x1="184" y1="92" x2="262" y2="92" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <line x1="184" y1="148" x2="262" y2="148" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <line x1="184" y1="204" x2="262" y2="204" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <line x1="184" y1="260" x2="262" y2="260" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <text font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">
+    <tspan x="196" y="84">exit 0</tspan>
+    <tspan x="196" y="140">exit 75</tspan>
+    <tspan x="196" y="196">exit 65</tspan>
+  </text>
+  <text x="196" y="252" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">any other</text>
+
+  <rect x="264" y="72" width="192" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="280" y="97" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Completed</text>
+  <rect x="264" y="128" width="192" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="280" y="153" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Waiting</text>
+  <rect x="264" y="184" width="192" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="280" y="209" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Failed on its input</text>
+  <rect x="264" y="240" width="192" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="280" y="265" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Failed</text>
+
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="480" y="97">the steps that wait for it can start</tspan>
+    <tspan x="480" y="140">service busy: the attempt is given back,</tspan>
+    <tspan x="480" y="157">its kind rests 30 s, doubling up to 10 min</tspan>
+    <tspan x="480" y="209">bad input: never run again</tspan>
+    <tspan x="480" y="256">tried again, 3 attempts in all; then the</tspan>
+    <tspan x="480" y="273">instance fails</tspan>
+  </text>
+
+  
+  <line x1="360" y1="280" x2="360" y2="318" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <rect x="264" y="320" width="256" height="52" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="280" y="342" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Run again after 1 h, 6 h, 24 h</text>
+  <text x="280" y="361" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">by pipeline heal, each time it fails</text>
+  <line x1="520" y1="346" x2="558" y2="346" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+  <rect x="560" y="320" width="216" height="52" rx="10" fill="#fa5252" fill-opacity="0.12" stroke="#fa5252" stroke-width="1.25" />
+  <text x="576" y="342" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Needs a person</text>
+  <text x="576" y="361" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the failed work check fails</text>
+
+  
+  <text x="24" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600"
+    fill="#eceff4">The verdict, decided in this order</text>
+  <text x="776" y="420" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">health</text>
+
+  <rect x="24" y="436" width="164" height="76" rx="10" fill="#fa5252" fill-opacity="0.12" stroke="#fa5252" stroke-width="1.25" />
+  <text x="40" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Needs a person</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="40" y="482">a check failed, such</tspan>
+    <tspan x="40" y="499">as failed work</tspan>
+  </text>
+  <line x1="188" y1="474" x2="218" y2="474" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+
+  <rect x="220" y="436" width="164" height="76" rx="10" fill="#40c057" fill-opacity="0.12" stroke="#40c057" stroke-width="1.25" />
+  <text x="236" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Healthy</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="236" y="482">nothing is waiting</tspan>
+  </text>
+  <line x1="384" y1="474" x2="414" y2="474" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+
+  <rect x="416" y="436" width="164" height="76" rx="10" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <text x="432" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Catching up</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="432" y="482">work waiting, and some</tspan>
+    <tspan x="432" y="499">done in the last hour</tspan>
+  </text>
+  <line x1="580" y1="474" x2="610" y2="474" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#admin-monitoring-md-1-health-arrow)" />
+
+  <rect x="612" y="436" width="164" height="76" rx="10" fill="#fd7e14" fill-opacity="0.12" stroke="#fd7e14" stroke-width="1.25" />
+  <text x="628" y="462" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Stuck</text>
+  <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
+    <tspan x="628" y="482">work waiting, and none</tspan>
+    <tspan x="628" y="499">done in the last hour</tspan>
+  </text>
+
+  <text x="24" y="536" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#7d8697">Warnings, such as a kind waiting for EMS or failed work still being run again, never change the verdict.</text>
+</svg><figcaption>A busy service only makes work wait; a person is asked for only when work fails through every retry and heal, or a check fails.</figcaption></figure>
 <h2 id="read-the-checks">Read the checks<a class="anchor" href="#read-the-checks" aria-label="Link to this section"></a></h2>
 <p>On <strong>Overview</strong>, a card above the tiles lists every check that is not fine, failed ones first, each with its reason; a red edge marks a failed check, a yellow one a warning. When every check is fine the card is not there. <code>health</code> in the terminal lists them all, the fine ones too.</p>
 <p>These are the checks EiN makes about its own work:</p>

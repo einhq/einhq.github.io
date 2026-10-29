@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" width="800" height="468">
+  <title>One shell, several doors</title>
+  <defs>
+    <marker id="doors-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
+    </marker>
+  </defs>
+  <rect width="800" height="468" rx="14" fill="#1a1e27" />
+
+  <!-- The doors that run commands -->
+  <rect x="24" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="91" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Web interface</text>
+  <text x="91" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">in a browser</text>
+
+  <rect x="172" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="239" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Terminal panel</text>
+  <text x="239" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">a shell per tab</text>
+
+  <rect x="320" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="387" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SSH login</text>
+  <text x="387" y="94" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#a2abbb">ssh -p 2222</text>
+
+  <rect x="468" y="40" width="134" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="535" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">The assistant</text>
+  <text x="535" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">changes wait for you</text>
+
+  <line x1="91" y1="112" x2="91" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+  <line x1="239" y1="112" x2="239" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+  <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+  <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+
+  <!-- SFTP, the door without a shell -->
+  <rect x="650" y="40" width="126" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
+  <text x="713" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">files only</text>
+  <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+  <text x="701" y="204" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">no commands</text>
+
+  <!-- The shell -->
+  <rect x="24" y="160" width="578" height="80" rx="10" fill="#a9e34b" fill-opacity="0.08" stroke="#a9e34b" stroke-opacity="0.7" stroke-width="1.25" />
+  <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(50 190) scale(3)"
+    fill="#a9e34b" />
+  <text x="74" y="196" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN's shell</text>
+  <text x="582" y="196" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">bash</text>
+  <text x="74" y="222" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14"
+    fill="#a2abbb">runs core's and the modules' commands as the signed-in person</text>
+  <line x1="313" y1="240" x2="313" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+
+  <!-- The permission check -->
+  <rect x="24" y="288" width="752" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="400" y="317" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">The same permission check: what this person may read and change</text>
+  <line x1="313" y1="336" x2="313" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+  <line x1="713" y1="336" x2="713" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#doors-arrow)" />
+
+  <!-- The tree -->
+  <rect x="24" y="384" width="752" height="60" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="44" y="419" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The tree of nodes</text>
+  <text x="756" y="419" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="14" fill="#a2abbb"
+    xml:space="preserve">/archive   /home   /etc   /var   /usr</text>
+</svg>
