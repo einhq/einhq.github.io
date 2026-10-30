@@ -190,14 +190,17 @@ picture has no date or the person has no birth date.
 Pointing at a name lights up that person's face box on the picture, and pointing at a box lights up
 the name. Click a name to open the person's page.
 
-Point at a name for a moment and a small card opens beside it with what you can do with that face:
-**Show at 0:42** on a video (see [Faces in a video](#faces-in-a-video)), and **Not sure this is
-&lt;name&gt;?** when you may change the picture. Moving the pointer onto the card keeps it open; moving
-away closes it. On a phone there is nothing to point with, so the same actions are small buttons at
-the end of the row instead.
+Point at a name for a moment and a card opens above it. It shows the person's picture, larger, with
+their full name, the years of their life, where they live now and the start of their description,
+as on their page; for a face nobody has named yet, the face itself. Under that is what you can do
+with the face: **Show at 0:42** on a video (see [Faces in a video](#faces-in-a-video)), and **Not
+sure this is them?** when you may change the picture. Moving the pointer onto the card keeps it open;
+moving away closes it. On a phone there is nothing to point with, so the actions are small buttons
+at the end of the row instead.
 
-If you are not sure a face really is the person named, press **Not sure this is &lt;name&gt;?** (the
-question mark on a phone) and either:
+If you are not sure a face really is the person named, press **Not sure this is them?** (the
+question mark on a phone). The card asks **Not sure this is &lt;name&gt;?**, still under their
+picture to compare with, and you either:
 
 - say who it is: pick someone, or type a name and choose **New person: &lt;name&gt;**, and press
   **Move**; or
@@ -206,7 +209,7 @@ question mark on a phone) and either:
   [Doubtful faces](people.md#doubtful-faces)).
 
 A doubtful face always has an orange question mark at the end of its row. Press it, or point at
-the name and press **Is this &lt;name&gt;?** in the card; it shows who marked the face, such as
+the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;?** and shows who marked the face, such as
 "peggy is not sure.":
 
 - **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
@@ -444,7 +447,8 @@ speaker's name, in a colour of their own. A voice nobody has named is called **S
 
 The face boxes follow the faces as the video plays, and **Pin faces** works as it does on a photo.
 In the details panel, point at a person or an unnamed face and press **Show at 0:42** in the card
-beside it, which also says when they are on screen, for example **On screen 0:00–0:39, 0:42–1:28**.
+above it. Just above the button the card says when they are on screen, for example **On screen
+0:00–0:39, 0:42–1:28**.
 The video pauses on the frame where the face is seen most clearly and keeps a box on the face from
 there. While it does, a lit button at the end of the row reads **Stop following Ruby Wrenfield**:
 press it, or **Stop following** in the card, to let go. On a phone the button is always in the row.
