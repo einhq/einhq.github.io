@@ -354,7 +354,7 @@ its circle or polygon.
 ## Change or clear the place of one picture
 
 1. Open the picture in the viewer and open the details panel.
-2. Click the pencil at the top of the panel and choose **Edit**. The **Edit file** dialog opens, with
+2. Click the cog at the top of the panel and choose **Edit**. The **Edit file** dialog opens, with
    **Description** and the labels on one side and the place on the other, starting at the picture's
    point.
 3. To move the point, pick under **A known location**, click the map under **On the map**, or type
@@ -364,7 +364,7 @@ its circle or polygon.
    for the map or for searching by location."
 5. Press **Save**.
 
-The pencil menu has **Edit** when you may change the picture. **Clear location** removes the point,
+The cog menu has **Edit** when you may change the picture. **Clear location** removes the point,
 whether the GPS or a person put it there, and the picture's link to a location, however it was
 made. EiN reads a file's GPS position when it takes the file in, so the picture stays without a
 place. To clear several pictures at once, use `file-set-position` with `--clear` in the terminal.

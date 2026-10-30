@@ -214,7 +214,7 @@ A suggested album from staging takes no uploads.
 
 1. Select the pictures, in any grid: an album, the **Media** page, a person's page, a search.
    [Select pictures](#select-pictures) shows how.
-2. Choose **Add to album** in the selection bar. In the viewer, the same is in the pencil menu.
+2. Choose **Add to album** in the selection bar. In the viewer, the same is in the cog menu.
 3. **Add to an album** opens. In **Find an album, or name a new one**, type part of the album's
    name, then choose it from the list.
 

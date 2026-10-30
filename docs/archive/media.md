@@ -169,7 +169,7 @@ Labels show under the name of what carries them: in an album's, a person's, a lo
 3. In **Add labels**, type the labels. "Pick a label in use or type a new one. A space starts the next label."
 4. Press **Add labels**.
 
-**Label** is offered only when you may change every selected file. To put labels on a single picture you have open, use its pencil menu in the viewer: **Edit** opens **Edit file**, which has a **Labels** field.
+**Label** is offered only when you may change every selected file. To put labels on a single picture you have open, use its cog menu in the viewer: **Edit** opens **Edit file**, which has a **Labels** field.
 
 ### Put labels on an album, a person, a location or a device
 

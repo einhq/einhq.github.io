@@ -43,8 +43,8 @@ With the Archive installed, its pages offer **Share** as well:
 - **An album**: **Share** in the album's header. On a phone the header's buttons are under **⋮**.
 - **A person, a location or a device**: **Share** in its header. Sharing a person shares their page,
   not the photos they are in.
-- **One photo, video or recording**: open it in the viewer and choose **Share** in the pencil menu
-  of the details panel (see [Viewing photos, videos and recordings](../archive/viewer.md#change-a-file-from-the-pencil-menu)).
+- **One photo, video or recording**: open it in the viewer and choose **Share** in the cog menu
+  of the details panel (see [Viewing photos, videos and recordings](../archive/viewer.md#change-a-file-from-the-cog-menu)).
 - **Several photos of an album**: select them and choose **Share** in the selection bar; see
   [Keep some photos private in a shared album](#keep-some-photos-private-in-a-shared-album).
 
@@ -289,7 +289,7 @@ There are three ways:
   back at once, and **Share all like the album** puts every one of them back, listed or not. The
   first five are listed; **Show all 12** lists the rest. The list stops at 50, and "And 7 more."
   under it counts the others.
-- **From the viewer.** Open the photo, choose **Share** in the pencil menu, and the dialog says "It
+- **From the viewer.** Open the photo, choose **Share** in the cog menu, and the dialog says "It
   keeps its own sharing: changes to the album “Christmas at the cottage” do not reach it." Choose
   **Like the album**, then **Save**.
 
