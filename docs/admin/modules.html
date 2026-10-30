@@ -362,6 +362,8 @@ and that they will not work without it. Choose <strong>Remove assistant</strong>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod remove assistant</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Remove module 'assistant' (0.1.0)? (y/N) y</code></pre></div>
+<p>Where no one can answer, as in <code>ssh host &#39;mod remove assistant&#39;</code> or a script, it does not ask: it
+stops with <code>mod-remove: no terminal to answer on; add --force</code>, and removes nothing.</p>
 <p>Removing stops and unregisters the module&#39;s services, takes its commands off the path, retires its
 pipelines, its sidebar entries and its documentation, rebuilds the pages and deletes its folder.
 Some things stay, so that installing it again finds them as they were:</p>

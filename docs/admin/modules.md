@@ -239,6 +239,9 @@ mod remove assistant
 Remove module 'assistant' (0.1.0)? (y/N) y
 ```
 
+Where no one can answer, as in `ssh host 'mod remove assistant'` or a script, it does not ask: it
+stops with `mod-remove: no terminal to answer on; add --force`, and removes nothing.
+
 Removing stops and unregisters the module's services, takes its commands off the path, retires its
 pipelines, its sidebar entries and its documentation, rebuilds the pages and deletes its folder.
 Some things stay, so that installing it again finds them as they were:

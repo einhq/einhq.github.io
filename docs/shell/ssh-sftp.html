@@ -205,7 +205,9 @@ installed; any folder you may read works the same way.</p>
 <li>Each command gets a shell of its own, so <code>cd</code> does not carry over to the next <code>ssh</code>. Chain steps
 that belong together in one line: <code>&#39;cd /archive/albums &amp;&amp; ls&#39;</code>.</li>
 <li>The command runs without a terminal, so <code>edit</code> and anything else that needs one stops; log in with a
-shell for those. Commands sent this way are not added to your history.</li>
+shell for those. A command that would ask a question, such as a password or &quot;Remove module?&quot;,
+stops instead with <code>&lt;name&gt;: no terminal to answer on</code>, followed by the option that gives the
+answer: <code>mod remove --force</code>, <code>user-passwd --new-password</code>, <code>user-elevate --password</code>. Commands sent this way are not added to your history.</li>
 <li>Errors arrive on the same stream as the output, so <code>2&gt;/dev/null</code> on your side does not separate them.
 Use the exit status to tell success from failure.</li>
 </ul>

@@ -275,6 +275,7 @@ There is also no `sh` or `bash` command: a script is run by its path, or with `s
 | `<name>: sign in first`                                          | You are not signed in, and visitors may not browse                                           | `login <username>`                                                           |
 | `rm: cannot remove '<path>': Node not empty`                     | The node has children                                                                        | `rm -r <path>` deletes it with them; `trash put <path>` keeps it recoverable |
 | `edit: not a terminal`                                           | `edit` needs a terminal, which `ssh host 'command'` does not give                            | Log in with `ssh` first, or use the terminal panel                           |
+| `<name>: no terminal to answer on; add --force`                  | The command would ask a question, and `ssh host 'command'` or a script has no one to answer  | Give the answer as the option it names, or run it in the terminal panel      |
 | `mount: permission denied, only admin is allowed to mount`       | Mounting is for administrators                                                               | Ask an administrator                                                         |
 
 For anything else, [Troubleshooting](../admin/troubleshooting.md) goes through problems by area, and the [reference](../reference/commands.md) has every command with all its options.
