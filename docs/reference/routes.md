@@ -328,6 +328,7 @@ left out, so a plain `/map` stays plain.
 | ---------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `/year`                                        | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
 | `/people`, `/albums`, `/locations`, `/devices` | `q`                  | The filter typed into the page's own search box                                                                                          |
+| `/people/<name>`                               | `faces=doubtful`     | On **Faces**, only the faces somebody marked as doubtful                                                                                 |
 | `/people/unknown`                              | `sort`               | `faces` (the default) or `created`                                                                                                       |
 | `/people/unknown`                              | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
 | `/people/unknown`                              | `person`             | The unknown person open for review                                                                                                       |

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 347 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 348 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -234,7 +234,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 131 in full](../archive/commands.md).
+[All 132 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -276,6 +276,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [exiftool](../archive/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
+| [face-doubt](../archive/commands.md#face-doubt) | Question whether regions show the person they are assigned to. |
 | [face-remove](../archive/commands.md#face-remove) | Remove a face and its person when it was the person's only unidentified face. |
 | [face-reset](../archive/commands.md#face-reset) | Undo automatic face→person assignments by provenance, leaving manual ones intact. |
 | [face-set-box](../archive/commands.md#face-set-box) | Change a region's box and regenerate its preview crop; a moved face stops voting in recognition. |

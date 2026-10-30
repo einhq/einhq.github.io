@@ -190,6 +190,21 @@ picture has no date or the person has no birth date.
 Pointing at a name lights up that person's face box on the picture, and pointing at a box lights up
 the name. Click a name to open the person's page.
 
+If you may change the picture and are not sure a face really is the person named, press the
+question mark beside the name, **Not sure this is &lt;name&gt;?**, and then **Mark as doubtful**. The
+face stays the person's, marked as doubtful until somebody who knows answers, here or on the
+person's Faces tab (see [Doubtful faces](people.md#doubtful-faces)). Beside a doubtful face the
+question mark is orange and asks **Is this &lt;name&gt;?**, with who marked it, such as "peggy is
+not sure.":
+
+- **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
+- **No…**: opens **Who is this?**, where you say who it is instead (see
+  [Draw or correct a face box](#draw-or-correct-a-face-box)).
+- **Withdraw**: takes your doubt back without answering it.
+
+Readers who may not change the picture see the orange question mark and who marked the face, but
+cannot answer.
+
 Faces that recognition has grouped as one person but nobody has named yet are listed with a crop of
 the face and a placeholder name, such as **Unknown 8F3C81**. Click one to open the review over the
 viewer, where you name them or say they are someone you already have. [People and faces](people.md)

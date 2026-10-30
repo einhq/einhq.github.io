@@ -380,6 +380,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 <li><strong>Download</strong>: the selected crops, as one zip named &quot;&lt;name&gt; faces&quot; when there are several.</li>
 <li><strong>Set as cover</strong>: makes the one selected crop the person&#39;s picture.</li>
 <li><strong>Not &lt;name&gt;</strong>: takes the faces off this person.</li>
+<li><strong>Is &lt;name&gt;</strong>: only in the <strong>Doubtful</strong> view, described below.</li>
 </ul>
 <p><strong>Not &lt;name&gt;</strong> opens the dialog <strong>Not &lt;name&gt;?</strong>, with the number of faces under its title and four choices:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -409,6 +410,17 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 </div>
 <p>Press <strong>Move</strong>, or <strong>Unassign and lock</strong> for <strong>Not a face</strong>. After <strong>Let recognition decide</strong>, a short report (<strong>Faces moved</strong>) says where the faces went, for example &quot;2 faces matched to Peggy Wrenfield&quot;, &quot;3 faces became unidentified people&quot; or &quot;1 face left unassigned — too small or unclear to start a new person&quot;. Press <strong>Done</strong>.</p>
 <p>If a face that was the person&#39;s cover leaves them, they get a new cover from their remaining faces.</p>
+<h3 id="doubtful-faces">Doubtful faces<a class="anchor" href="#doubtful-faces" aria-label="Link to this section"></a></h3>
+<p>Somebody who is not sure a face is the person can mark it as doubtful in the viewer (see
+<a href="viewer.html#people-in-the-picture">People in the picture</a>), or with the
+<a href="commands.html#face-doubt"><code>face-doubt</code></a> command. The face stays the person&#39;s until somebody answers.</p>
+<p>When a person has doubtful faces, the Faces tab shows a switch: <strong>All faces</strong> or <strong>Doubtful (N)</strong>, &quot;Faces somebody is not sure of, or that look more like somebody else&quot;. Each doubtful crop is badged with who marked it, for example &quot;asked by peggy&quot;.</p>
+<ol>
+<li>Choose <strong>Doubtful (N)</strong>.</li>
+<li>Select the faces that are someone else and press <strong>Not &lt;name&gt;</strong>.</li>
+<li>Select the faces that are right and press <strong>Is &lt;name&gt;</strong>. They stay, as a person&#39;s decision.</li>
+</ol>
+<p>When none are left, the tab says &quot;No doubtful faces of &lt;name&gt; left.&quot;</p>
 <h2 id="recordings-a-person-is-heard-in">Recordings a person is heard in<a class="anchor" href="#recordings-a-person-is-heard-in" aria-label="Link to this section"></a></h2>
 <p>The <strong>Heard in</strong> tab lists, under &quot;Heard in N recordings&quot;, a tile for each recording the person speaks in, those they speak most in first. The round button on a tile plays their longest turn in that recording. Hovering the name shows the recording&#39;s date and how long they speak in it (&quot;speaks 1:42 in it&quot;), and <strong>Open in the lightbox</strong> opens the recording at their turn.</p>
 <p>To take a recording off the person, tick its tile and press <strong>Not this person (N)</strong>. Their voice in it loses its identity and is locked, so recognition does not give it back. Nothing asks first.</p>
@@ -506,6 +518,10 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 <td>The faces are never matched back to the person you took them from.</td>
 </tr>
 <tr>
+<td><strong>Is &lt;name&gt;</strong>, <strong>Yes</strong> to <strong>Is this &lt;name&gt;?</strong></td>
+<td>The faces are marked as decided by a human, and the doubt goes.</td>
+</tr>
+<tr>
 <td><strong>Set as cover</strong></td>
 <td>Your cover stays, as long as the picture is there and the face is still theirs.</td>
 </tr>
@@ -569,7 +585,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/people.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-faces-become-people">How faces become people</a></li><li><a href="#the-people-page">The People page</a></li><li><a href="#name-the-people-recognition-found">Name the people recognition found</a></li><li><a href="#look-at-everything-before-you-decide">Look at everything before you decide</a></li><li class="nested"><a href="#take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)</a></li><li class="nested"><a href="#group-similar-faces">Group similar faces</a></li><li><a href="#fold-several-unidentified-people-into-one">Fold several unidentified people into one</a></li><li><a href="#say-what-is-not-a-person">Say what is not a person</a></li><li><a href="#name-a-face-in-the-viewer">Name a face in the viewer</a></li><li><a href="#create-a-person-by-hand">Create a person by hand</a></li><li><a href="#a-persons-page">A person's page</a></li><li><a href="#correct-a-persons-faces">Correct a person's faces</a></li><li><a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a></li><li><a href="#split-a-person-who-is-really-two">Split a person who is really two</a></li><li><a href="#edit-a-person">Edit a person</a></li><li><a href="#cover-pictures">Cover pictures</a></li><li><a href="#what-ein-keeps-of-your-decisions">What EiN keeps of your decisions</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-faces-become-people">How faces become people</a></li><li><a href="#the-people-page">The People page</a></li><li><a href="#name-the-people-recognition-found">Name the people recognition found</a></li><li><a href="#look-at-everything-before-you-decide">Look at everything before you decide</a></li><li class="nested"><a href="#take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)</a></li><li class="nested"><a href="#group-similar-faces">Group similar faces</a></li><li><a href="#fold-several-unidentified-people-into-one">Fold several unidentified people into one</a></li><li><a href="#say-what-is-not-a-person">Say what is not a person</a></li><li><a href="#name-a-face-in-the-viewer">Name a face in the viewer</a></li><li><a href="#create-a-person-by-hand">Create a person by hand</a></li><li><a href="#a-persons-page">A person's page</a></li><li><a href="#correct-a-persons-faces">Correct a person's faces</a></li><li class="nested"><a href="#doubtful-faces">Doubtful faces</a></li><li><a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a></li><li><a href="#split-a-person-who-is-really-two">Split a person who is really two</a></li><li><a href="#edit-a-person">Edit a person</a></li><li><a href="#cover-pictures">Cover pictures</a></li><li><a href="#what-ein-keeps-of-your-decisions">What EiN keeps of your decisions</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>
