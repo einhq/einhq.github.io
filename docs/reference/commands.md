@@ -328,7 +328,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [person-graph](../archive/commands.md#person-graph) | Family graph around a person as nodes and edges, for drawing a tree. |
 | [person-how-related](../archive/commands.md#person-how-related) | Compute the kinship term between two persons (English/Swedish) |
 | [person-info](../archive/commands.md#person-info) | Show person details, relationships, and events. |
-| [person-list](../archive/commands.md#person-list) | List the named people, with how many faces and voice turns each has. |
+| [person-list](../archive/commands.md#person-list) | List the named people, with how many files of the library each is seen or heard in. |
 | [person-merge](../archive/commands.md#person-merge) | Merge people into another (faces, events, relations and links to them move; the sources are removed) |
 | [person-name](../archive/commands.md#person-name) | Name an unidentified person and move them into /people. |
 | [person-relatives](../archive/commands.md#person-relatives) | Who a kin phrase reaches from a person through the family tree: 'moster', 'mammas syster', 'barn', 'my father's brother'. |

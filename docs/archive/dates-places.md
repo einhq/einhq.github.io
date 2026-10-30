@@ -154,7 +154,9 @@ instead, as described above.
 5. In the **Set time** dialog, set **Start time** and the order (see the next section), then press
    **Set time on N files**. A picture dated only to a year or a month keeps that date unless you
    click its row first (see the next section), so a group named like "1987 · Peggy's shoebox"
-   needs a click on each row you want to date.
+   needs a click on each row you want to date. Until you do, the button is off and the dialog says
+   "These pictures are known only to a year or a month and keep that date. Click a row to give it
+   a time."
 
 EiN confirms with "The time is set on N photos of “<group>”". Within a few minutes the organizer
 puts the pictures into groups by the dates you gave them: an event, a trip, or a year's
@@ -198,7 +200,8 @@ The times are worked out from the top:
    with the tooltip "Keeping this date as it is. Give it a time to replace it.", and the rows after
    it follow the last row that took a time. Click it to give it a full time instead.
 
-Press **Set time on N files**. Each picture's date becomes one entered by hand, with the time of day
+Press **Set time on N files**, where N counts the pictures that get a time; one that keeps its
+vague date is left out. Each picture's date becomes one entered by hand, with the time of day
 included, also for a picture that was known only to the day. Albums holding the pictures update
 their date range.
 

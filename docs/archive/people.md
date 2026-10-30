@@ -31,7 +31,7 @@ Open **People** in the sidebar, under **Browse**.
 - **Sort** offers **Most pictured** (the default), **Name (A-Z)** and **Name (Z-A)**. Your choice is remembered in this browser. A name that starts with `?`, a placeholder for someone known only from a family record, sorts after the real names.
 - Each card shows the person's cover picture, their name and how many pictures they are in, or their full name when they are in none. Click a card to open the [person's page](#a-persons-page).
 
-The number on a card counts the faces and voices of that person in the library, so a recording they are heard in counts too. Faces and voices in files still waiting in someone's staging area count once those files are filed.
+The number on a card counts the files of the library the person is seen or heard in: a picture with their face or a box naming them, or a recording with their voice. A picture with two of their faces counts once, as does a recording they speak in many times. Files still waiting in someone's staging area count once they are filed.
 
 When nobody has been named yet, the page says **No people yet** and "Face recognition finds people in the pictures; name them under Unidentified, or add someone here." with a **New person** button.
 

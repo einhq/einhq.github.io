@@ -3638,7 +3638,7 @@ person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exe
 <div class="code" data-lang="bash"><pre tabindex="0"><code>person-info /archive/people/Bo_Exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the person&#39;s name, birth and death dates, their parents, partners and children, and their events.</p>
 <h3 id="person-list"><code>person-list</code><a class="anchor" href="#person-list" aria-label="Link to this section"></a></h3>
-<p>List the named people, with how many faces and voice turns each has.</p>
+<p>List the named people, with how many files of the library each is seen or heard in.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>person-list [--sort=&lt;string&gt;] [--limit=&lt;number&gt;] [--min=&lt;number&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -3658,11 +3658,11 @@ person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exe
 </tr>
 <tr>
 <td><code>--min=&lt;number&gt;</code></td>
-<td>only people with at least this many faces and voice turns.</td>
+<td>only people in at least this many files.</td>
 </tr>
 </tbody></table>
 </div>
-<p>With <code>JSON_OUTPUT=1</code>: the named people with their face and voice counts, as JSON (PersonListEntry[]).</p>
+<p>With <code>JSON_OUTPUT=1</code>: the named people with the number of files each is in, as JSON (PersonListEntry[]).</p>
 <h3 id="person-merge"><code>person-merge</code><a class="anchor" href="#person-merge" aria-label="Link to this section"></a></h3>
 <p>Merge people into another (faces, events, relations and links to them move; the sources are removed)</p>
 <p><small>changes things</small></p>

@@ -334,7 +334,10 @@ You do not have to file a group whole.
    <kbd>Space</kbd> selects it.
 2. <kbd>Enter</kbd>, <kbd>N</kbd>, <kbd>P</kbd>, <kbd>A</kbd>, <kbd>B</kbd> and <kbd>X</kbd> act on
    those pictures alone; the line at the foot of the stream says so, for example "New album of 12
-   pictures".
+   pictures". On a day matched to an album, <kbd>Enter</kbd> adds it there. Filing the matched days
+   and keeping the library copies are for the whole group, so on a day with no matched album, or
+   on selected pictures, such a group has no proposal: <kbd>Enter</kbd> says "No proposal: N, A, B
+   or X."
 3. The rest of the group stays where it is.
 
 With pictures selected, **New group of N pictures** under the open group makes them a group of

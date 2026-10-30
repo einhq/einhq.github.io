@@ -2273,7 +2273,7 @@ With `JSON_OUTPUT=1`: the person's name, birth and death dates, their parents, p
 
 ### `person-list`
 
-List the named people, with how many faces and voice turns each has.
+List the named people, with how many files of the library each is seen or heard in.
 
 <small>reads only</small>
 
@@ -2285,9 +2285,9 @@ person-list [--sort=<string>] [--limit=<number>] [--min=<number>]
 | ------------------ | --------------------------------------------------------------------- |
 | `--sort=<string>`  | name (default; placeholder names last) or count (most pictured first) |
 | `--limit=<number>` | at most this many people.                                             |
-| `--min=<number>`   | only people with at least this many faces and voice turns.            |
+| `--min=<number>`   | only people in at least this many files.                              |
 
-With `JSON_OUTPUT=1`: the named people with their face and voice counts, as JSON (PersonListEntry[]).
+With `JSON_OUTPUT=1`: the named people with the number of files each is in, as JSON (PersonListEntry[]).
 
 ### `person-merge`
 
