@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 350 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 351 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -232,6 +232,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [who](commands-core.md#who) | List who is signed in: each SSH login, terminal and web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own. |
 | [www](commands-core.md#www) | Manage active web UI. |
 | [xargs](commands-core.md#xargs) | Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run. |
+
+## Album folders
+
+[All 1 in full](../album-folders/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [album-folders](../album-folders/commands.md#album-folders) | Keep the albums as folders of real files on disk, for browsing outside EiN (status, sync, watch) |
 
 ## Archive
 

@@ -216,6 +216,8 @@ sshfs -p 2222 -o transform_symlinks helen@ein.local:/ ~/ein
 `/archive/people/peggy-wrenfield`, and the option makes it point inside the mount rather than to the
 same path on your computer. `fusermount -u ~/ein` (on macOS `umount ~/ein`) unmounts it.
 
+With the [Album folders](../album-folders/index.md) module, the albums are also folders of real files on the machine EiN runs on, which a shared folder can offer without SSH.
+
 `rsync` works against such a mount. Over SSH directly, `rsync helen@ein.local:…` does not, because
 it needs an `rsync` program on EiN's side, and EiN's shell has none.
 

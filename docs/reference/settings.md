@@ -2,11 +2,37 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 79 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
 - **Restarts**: the services a change restarts by itself. Work already running is picked up again when they are back.
+
+## Album folders
+
+### `CFG_ALBUM_FOLDERS_INTERVAL`
+
+**Album folders full check (seconds)**. How often every album folder is compared with its album, beside following each change as it happens. This catches what a change notice missed.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `3600` |
+| Kind | number |
+| Restarts | `album-folders` |
+| From the module | Album folders |
+
+### `CFG_ALBUM_FOLDERS_PATH`
+
+**Album folders location**. Where the albums are kept as folders of files, as the EiN server sees it. Empty means the folder albums beside the stored files. It must be on the same mount as the stored files, since each file there is a hard link to one of them.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty |
+| Kind | string |
+| Restarts | `album-folders` |
+| From the module | Album folders |
 
 ## Albums
 

@@ -104,6 +104,11 @@
 - [Assistant commands by task](assistant/tasks.md)
 - [Assistant commands](assistant/commands.md)
 
+## Album folders
+
+- [Album folders](album-folders/index.md)
+- [Album folders commands](album-folders/commands.md)
+
 ## Media service
 
 - [The media service](ems/index.md)

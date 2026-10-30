@@ -71,7 +71,7 @@ Do this before every [update](updating.md) and on a schedule of your own. The ex
    rsync -a --delete --exclude /files-tmp --exclude /llm ~/ein/data/ /mnt/backup/ein/data/
    ```
 
-   Add `--exclude /files-volatile` to leave out the renditions as well; see [Make the renditions again](#make-the-renditions-again) for what that costs at a restore. If you chose another data folder at the install, give its path instead of `~/ein/data/`.
+   With the [Album folders](../album-folders/index.md) module, add `--exclude /files/albums` too: its folders are second names for the originals in `files`, which `rsync -a` would copy once more, and EiN makes them again. Add `--exclude /files-volatile` to leave out the renditions as well; see [Make the renditions again](#make-the-renditions-again) for what that costs at a restore. If you chose another data folder at the install, give its path instead of `~/ein/data/`.
 
 5. Start EiN again:
 
@@ -206,6 +206,7 @@ The data folder holds your files under ids, not names, so copying it gives you n
 
 - **In the web interface**, with the [Archive](../archive/index.md) installed, select pictures in an album or the grid and choose **Download** in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See [Albums](../archive/albums.md#the-selection-bar).
 - **Over SFTP**, copy whole albums or the whole archive with `scp -r`, `sftp` or a graphical client, or mount EiN with `sshfs` and copy with `rsync` or a file manager. [SSH and SFTP](../shell/ssh-sftp.md#copy-files-with-sftp) shows how.
+- **As folders on the machine EiN runs on**, with the [Album folders](../album-folders/index.md) module: every album of the Archive is a folder of its pictures in `files/albums` in the data folder, for a file manager or a shared folder, kept up to date as the albums change.
 - **From EiN's terminal**, [`scp -r`](../reference/commands-core.md#scp) copies a folder to another machine, such as a NAS, if you are in the group `ssh`. [Reaching other machines](../shell/remote.md) covers keys and addresses.
 
 This copies one of the Archive's albums:

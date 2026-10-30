@@ -515,3 +515,4 @@ does not change the path. [`album`](commands.md#album),
 - [Sorting in staging](staging.md): your private inbox and the albums it suggests.
 - [Dates and places of pictures](dates-places.md): **Set time** and **Set location**.
 - [Links](../concepts/links.md): how one picture can be in several albums.
+- [Album folders](../album-folders/index.md): with that module, the albums as folders of files on the machine EiN runs on.
