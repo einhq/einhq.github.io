@@ -371,7 +371,8 @@ dmesg --level error          <span class="hljs-comment"># every error since EiN 
 <p>For a service&#39;s output, use <a href="../reference/commands-core.html#tail"><code>tail</code></a>, which prints each line as the service wrote it. The examples are the <code>ems</code> module&#39;s <code>ems-link</code> and the Archive&#39;s <code>models</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">tail</span> -n 50 /var/logs/services/ems-link/stdout.log
-<span class="hljs-built_in">tail</span> -f /var/logs/services/models/stderr.log      <span class="hljs-comment"># keep following; Ctrl+C ends it</span></code></pre></div>
+<span class="hljs-built_in">tail</span> -f /var/logs/services/models/stderr.log      <span class="hljs-comment"># keep following; Ctrl+C ends it</span>
+<span class="hljs-built_in">tail</span> -n 0 -f /var/logs/services/models/stderr.log <span class="hljs-comment"># only what is written from now on</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>ems-link: watching http://ems:8181
 ems-link: down — not answering</code></pre></div>
 <p><code>tail -f /var/logs/system</code> follows the system log in the terminal the way the <strong>Live log</strong> does.</p>

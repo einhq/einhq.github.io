@@ -358,7 +358,9 @@ search finds pictures by it; see [Search and the finder](search.md).
 3. Type or correct the text.
 4. Press **Save**, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. Saving empty text removes it.
 
-What you write replaces what was read. It is offered on photos you may change.
+What you write replaces what was read. It is offered on photos you may change. Saving does not wait
+for the media service: when it is away, the text is saved at once and search finds it once the
+service is back.
 
 ### Read the text again in another language
 
@@ -511,6 +513,8 @@ The keys work while you type in a line, so you can listen and write at once:
 Closing with changes not saved asks first. What you save is what the subtitles, the transcript in
 the details panel and search show from then on, and EiN keeps it: the file is not transcribed
 again, not even when the media service's transcription improves. The speakers stay as they were.
+Saving does not wait for the media service: when it is away, the lines are saved at once and search
+finds the new words once the service is back.
 
 For a recording or video you reach from a search for words that are said in it, the viewer opens at
 the moment they are said.
