@@ -103,6 +103,9 @@ the module.
    at the right lists the published modules, each with its version, its description and its
    repository.
 3. Choose **Install** on the module you want.
+4. EiN asks who the module is for. Keep **Everyone**, or choose **Only some groups** and the groups
+   (see [Keep a module to some groups](#keep-a-module-to-some-groups)), then choose **Install** and
+   the module's name.
 
 ![The Published modules panel on Settings → Modules: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 from github.com/einhq, each marked The deployment's, with a Refresh button at the top right](../../assets/shots/modules-published.webp "The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.")
 
@@ -229,8 +232,9 @@ reference. For everyone else it is as if it were not installed.
 
 - On **Settings → Modules**, open the module. Its section **Available to** says who has it. Choose
   the groups in the box and choose **Save**; empty the box to make it everyone's again.
-- When you install a module there, choose the groups in **Available to** at the top of the
-  **Published modules** panel first. The modules it needs and brings along stay everyone's.
+- When you install a module there, **Install** asks first who it is for: **Everyone**, or **Only
+  some groups** with the groups to choose. The modules it needs and brings along stay everyone's,
+  and an **Update** asks nothing and keeps whom the module was for.
 - In the terminal, `mod groups` says who a module is for and changes it, and `mod install --groups`
   installs a module for some groups from the start:
 
@@ -338,7 +342,9 @@ A source that does not answer is named above the published modules, as "https://
 did not answer" with the reason, and the other sources are still listed.
 
 A module that is in no source can still be installed from its repository's address:
-`mod install https://forge.example:3000/wrenfield/module-recipes`. EiN fetches modules over plain
+`mod install https://forge.example:3000/wrenfield/module-recipes`, or the **From a repository** box
+at the top of the **Published modules** panel, whose **Install** asks who the module is for as on a
+published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git's HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. [Writing a module](../develop/modules.md) is for making one of your own.
 

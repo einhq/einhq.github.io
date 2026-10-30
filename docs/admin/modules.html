@@ -228,6 +228,9 @@ the module.</p>
 at the right lists the published modules, each with its version, its description and its
 repository.</li>
 <li>Choose <strong>Install</strong> on the module you want.</li>
+<li>EiN asks who the module is for. Keep <strong>Everyone</strong>, or choose <strong>Only some groups</strong> and the groups
+(see <a href="#keep-a-module-to-some-groups">Keep a module to some groups</a>), then choose <strong>Install</strong> and
+the module&#39;s name.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Published modules panel on Settings → Modules: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 from github.com/einhq, each marked The deployment's, with a Refresh button at the top right" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
@@ -358,8 +361,9 @@ reference. For everyone else it is as if it were not installed.</p>
 <ul>
 <li>On <strong>Settings → Modules</strong>, open the module. Its section <strong>Available to</strong> says who has it. Choose
 the groups in the box and choose <strong>Save</strong>; empty the box to make it everyone&#39;s again.</li>
-<li>When you install a module there, choose the groups in <strong>Available to</strong> at the top of the
-<strong>Published modules</strong> panel first. The modules it needs and brings along stay everyone&#39;s.</li>
+<li>When you install a module there, <strong>Install</strong> asks first who it is for: <strong>Everyone</strong>, or <strong>Only
+some groups</strong> with the groups to choose. The modules it needs and brings along stay everyone&#39;s,
+and an <strong>Update</strong> asks nothing and keeps whom the module was for.</li>
 <li>In the terminal, <code>mod groups</code> says who a module is for and changes it, and <code>mod install --groups</code>
 installs a module for some groups from the start:</li>
 </ul>
@@ -437,7 +441,9 @@ both.</p>
 <p>A source that does not answer is named above the published modules, as &quot;<a href="https://forge.example:3000/wrenfield">https://forge.example:3000/wrenfield</a>
 did not answer&quot; with the reason, and the other sources are still listed.</p>
 <p>A module that is in no source can still be installed from its repository&#39;s address:
-<code>mod install https://forge.example:3000/wrenfield/module-recipes</code>. EiN fetches modules over plain
+<code>mod install https://forge.example:3000/wrenfield/module-recipes</code>, or the <strong>From a repository</strong> box
+at the top of the <strong>Published modules</strong> panel, whose <strong>Install</strong> asks who the module is for as on a
+published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git&#39;s HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. <a href="../develop/modules.html">Writing a module</a> is for making one of your own.</p>
 <h2 id="where-modules-are-kept">Where modules are kept<a class="anchor" href="#where-modules-are-kept" aria-label="Link to this section"></a></h2>
