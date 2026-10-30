@@ -151,7 +151,7 @@ Archive; without it, nothing you create follows this preference.
 | Choice     | A new album starts out                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `default`  | As the administrator's default sharing says, under **Settings → Permissions**. Unless the administrator has changed it, everyone with an account can see the album. |
-| `private`  | Seen only by you.                                                                                                                                                   |
+| `private`  | Seen only by you, and yours even where the administrator chose another owner.                                                                                       |
 | `shared`   | Seen by the members of the default group the administrator chose. Unless the administrator has changed it, that group is everyone with an account.                  |
 | `everyone` | Seen by everyone with an account, even where the administrator's default group is a smaller one.                                                                    |
 

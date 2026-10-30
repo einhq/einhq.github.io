@@ -813,7 +813,7 @@ Every setting of an EiN with all its modules: 81 of them, in the groups the Sett
 
 ### `CFG_DEFAULT_SHARE_OWNER`
 
-**Default owner**. Who owns anything created as shared. Leave empty to let whoever creates it own it.
+**Default owner**. Who owns anything created as shared; a private album stays its creator's. Leave empty to let whoever creates it own it.
 
 | | |
 | --- | --- |

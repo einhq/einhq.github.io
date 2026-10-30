@@ -315,7 +315,7 @@ then **Profile**, the **Preferences** tab, and **How widely what you create is s
 | Choice     | A new album starts out                                                                                                                                             |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `default`  | As the administrator set it. This is the choice until you change it.                                                                                               |
-| `private`  | Seen by you alone. Its chip says **Private**.                                                                                                                      |
+| `private`  | Seen by you alone, and yours even where the administrator chose another owner. Its chip says **Private**.                                                          |
 | `shared`   | Seen by the administrator's default group. On a standard installation that is everyone with an account; with a narrower group, such as `family`, only its members. |
 | `everyone` | Seen by the default group and by everyone with an account. It never includes visitors who are not signed in.                                                       |
 
