@@ -289,7 +289,7 @@ how paths with spaces and wildcards work.
 **System** in the sidebar; its address is `/system/nodes`, and `/system/nodes?path=/archive/albums`
 opens it at a given folder.
 
-![The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "The Nodes page shows the tree as it is, with each node's type, mode, owner and group.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "The Nodes page shows the tree as it is, with each node's type, mode, owner and group.")
 
 1. Click a segment of the path above the list to go up to it, or click beside the segments to type a
    path and press <kbd>Enter</kbd>. **Up** and **Home** beside it go to the folder above and to your home.

@@ -240,7 +240,7 @@ administrators.</p>
 <li>Go to the node, by its folders or by typing its path in the address bar.</li>
 <li>Choose <strong>Properties</strong> in the node&#39;s context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other, with folders of her own beneath her.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other, with folders of her own beneath her.</figcaption></figure>
 <p>The properties dialog has three tabs:</p>
 <ul>
 <li><strong>General</strong> shows the node&#39;s <strong>Id</strong>, <strong>Type</strong>, <strong>Links</strong>, <strong>Created</strong>, <strong>Changed</strong> and
@@ -290,7 +290,7 @@ and the files in it, a person&#39;s page a <code>person</code> node and what lin
 <p><code>info</code>, <code>props</code>, <code>attrs</code> and <code>stat</code> print YAML with the keys in alphabetical order, and JSON with
 <code>JSON_OUTPUT=1</code> in front. A person&#39;s attributes, for example:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-attrs /archive/people/Peggy_Wrenfield</code></pre></div>
+attrs /archive/people/peggy-wrenfield</code></pre></div>
 <div class="code"><pre tabindex="0"><code>born: '1934-08-22'
 died: '2021-01-17'
 fullname: Margaret Wrenfield
@@ -298,7 +298,7 @@ gender: female
 name: Peggy Wrenfield</code></pre></div>
 <p><code>ls -l</code> starts each line with the node&#39;s type, so it shows at a glance what a folder holds:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ls</span> -l /archive/people/Peggy_Wrenfield</code></pre></div>
+<span class="hljs-built_in">ls</span> -l /archive/people/peggy-wrenfield</code></pre></div>
 <div class="code"><pre tabindex="0"><code>directory rwxrwxr-x 1 admin users 2 14 Mar 2026 09:12:40 children
 directory rwxrwxr-x 1 admin users 1 14 Mar 2026 09:12:41 partners</code></pre></div>
 <p>The size column is a file&#39;s size in bytes, and for every other node the number of children it
@@ -417,9 +417,9 @@ Archive, give Peggy a death date with <code>person-update --died=…</code> or o
 that depends on it in step.</p>
 <p>For anything else, <code>attrs</code> sets and removes attributes directly:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-attrs -s <span class="hljs-string">&#x27;birthname=Margaret Cole&#x27;</span> /archive/people/Peggy_Wrenfield
-attrs -J <span class="hljs-string">&#x27;contact=[{&quot;type&quot;:&quot;phone&quot;,&quot;data&quot;:&quot;01632 960 418&quot;}]&#x27;</span> /archive/people/Helen_Okafor
-attrs -d contact /archive/people/Helen_Okafor</code></pre></div>
+attrs -s <span class="hljs-string">&#x27;birthname=Margaret Cole&#x27;</span> /archive/people/peggy-wrenfield
+attrs -J <span class="hljs-string">&#x27;contact=[{&quot;type&quot;:&quot;phone&quot;,&quot;data&quot;:&quot;01632 960 418&quot;}]&#x27;</span> /archive/people/helen-okafor
+attrs -d contact /archive/people/helen-okafor</code></pre></div>
 <ul>
 <li><code>-s key=value</code> sets an attribute to the text after the first <code>=</code>.</li>
 <li><code>-J key=value</code> sets it to a JSON value: a number, <code>true</code>, a list, an object. Invalid JSON is

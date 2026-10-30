@@ -122,7 +122,7 @@ Asked "Add to Ruby Wrenfield's timeline that she graduated in December 2021", th
 set -e
 
 # Add an event (blob) to a person, album, location or device
-person-add-event --date=2021-12 --body='Graduated' /archive/people/Ruby_Wrenfield
+person-add-event --date=2021-12 --body='Graduated' /archive/people/ruby-wrenfield
 ```
 
 To decide:

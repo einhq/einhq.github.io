@@ -33,7 +33,7 @@ agent-eval [--fixtures=<path>] [--bucket=<string>] [--ids=<string>] [--limit=<nu
 ```bash
 agent-eval --limit 5 --verbose
 agent-eval --bucket kin
-nohup agent-eval --user /archive/people/Anna_Exempel --out /tmp/agent-eval.json
+nohup agent-eval --user /archive/people/anna-exempel --out /tmp/agent-eval.json
 ```
 
 With `JSON_OUTPUT=1`: a summary — the model that answered, how often the right command was reached, how many lines ran, how many questions were answered — and the turns of each question.

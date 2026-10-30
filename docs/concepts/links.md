@@ -85,14 +85,14 @@ You can make a pair of your own between any two nodes with `relate`. It puts the
 
 ```bash
 # in EiN's terminal
-relate /archive/people/Peggy_Wrenfield /archive/people/Helen_Okafor godmother --reverse goddaughter
+relate /archive/people/peggy-wrenfield /archive/people/helen-okafor godmother --reverse goddaughter
 ```
 
 ```text
-Created bidirectional relation: /archive/people/Peggy_Wrenfield <-godmother/goddaughter-> /archive/people/Helen_Okafor
+Created bidirectional relation: /archive/people/peggy-wrenfield <-godmother/goddaughter-> /archive/people/helen-okafor
 ```
 
-`unrelate /archive/people/Peggy_Wrenfield/relations/godmother-Helen_Okafor` removes both halves
+`unrelate /archive/people/peggy-wrenfield/relations/godmother-helen-okafor` removes both halves
 again. `relate` refuses a pair that is already there with `relate: relation already exists:`
 and the path.
 
@@ -145,7 +145,7 @@ EiN has no `readlink` command, and nothing lists the links that point at a node.
 Select it and choose **Properties** (<kbd>Alt</kbd>+<kbd>Enter</kbd>) to see **Link to** with the
 target and **Links** with the count of names.
 
-![The Nodes explorer open at /archive/people/Peggy_Wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums](../../assets/shots/nodes.webp "A person's folder holds folders of relation links and a cover link; the arrow shows where the link points.")
+![The Nodes explorer open at /archive/people/peggy-wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums](../../assets/shots/nodes.webp "A person's folder holds folders of relation links and a cover link; the arrow shows where the link points.")
 
 **Over SFTP.** Softlinks are symbolic links: `ls -l` in `sftp` shows them as links, following one
 takes you to the target, and `ln -s` makes one. How a recursive copy treats a link depends on your

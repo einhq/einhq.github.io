@@ -1882,7 +1882,7 @@ face-doubt --clear /archive/photos/2001/IMG_0001.jpg/regions/face-0</code></pre>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>file-set-photographer /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>file-set-photographer /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the photographer link is written.</p>
 <h3 id="file-set-position"><code>file-set-position</code><a class="anchor" href="#file-set-position" aria-label="Link to this section"></a></h3>
 <p>Set a manual location override (positionManual + child position node) on a file, or clear its location.</p>
@@ -3116,8 +3116,8 @@ onthisday-media 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person info /archive/people/Anna_Exempel
-person create /archive/people/Cecilia_Exempel --name <span class="hljs-string">&#x27;Cecilia Exempel&#x27;</span></code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person info /archive/people/anna-exempel
+person create /archive/people/cecilia-exempel --name <span class="hljs-string">&#x27;Cecilia Exempel&#x27;</span></code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: whatever the subcommand answers with; &#39;person&#39; alone lists the subcommands.</p>
 <h3 id="person-add-event"><code>person-add-event</code><a class="anchor" href="#person-add-event" aria-label="Link to this section"></a></h3>
 <p>Add an event (blob) to a person, album, location or device.</p>
@@ -3173,14 +3173,14 @@ person create /archive/people/Cecilia_Exempel --name <span class="hljs-string">&
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-add-event --<span class="hljs-built_in">date</span> 1998-06 --body <span class="hljs-string">&#x27;Flyttade till Lund&#x27;</span> /archive/people/Anna_Exempel
-person-add-event --<span class="hljs-built_in">type</span> marriage --<span class="hljs-built_in">date</span> 1972-05-20 /archive/people/Anna_Exempel wedding
-person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <span class="hljs-string">&#x27;A day on the water&#x27;</span> --writer /archive/people/Anna_Exempel /archive/albums/Exempelalbum_2019</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-add-event --<span class="hljs-built_in">date</span> 1998-06 --body <span class="hljs-string">&#x27;Flyttade till Lund&#x27;</span> /archive/people/anna-exempel
+person-add-event --<span class="hljs-built_in">type</span> marriage --<span class="hljs-built_in">date</span> 1972-05-20 /archive/people/anna-exempel wedding
+person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <span class="hljs-string">&#x27;A day on the water&#x27;</span> --writer /archive/people/anna-exempel /archive/albums/Exempelalbum_2019</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the event path; the event is written, and for a dated birth/death the born/died attr.</p>
 <h3 id="person-check"><code>person-check</code><a class="anchor" href="#person-check" aria-label="Link to this section"></a></h3>
 <p>Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>person-check [--json=&lt;string&gt;] &lt;root&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>person-check [--json] &lt;root&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3190,7 +3190,7 @@ person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <sp
 </thead>
 <tbody><tr>
 <td><code>&lt;root&gt;</code></td>
-<td>people root (default /people)</td>
+<td>people root (default /archive/people)</td>
 </tr>
 </tbody></table>
 </div>
@@ -3202,7 +3202,7 @@ person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <sp
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--json=&lt;string&gt;</code></td>
+<td><code>--json</code></td>
 <td>JSON output.</td>
 </tr>
 </tbody></table>
@@ -3226,7 +3226,7 @@ person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <sp
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-children /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-children /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: each child&#39;s name and slug.</p>
 <h3 id="person-cover"><code>person-cover</code><a class="anchor" href="#person-cover" aria-label="Link to this section"></a></h3>
 <p>Give a named person without a cover the crop of one of their own faces (coverPhoto softlink)</p>
@@ -3274,7 +3274,7 @@ person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <sp
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-cover /archive/people/Anna_Exempel
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-cover /archive/people/anna-exempel
 person-cover --file /archive/media/2019/IMG_0001.jpg
 person-cover --all --<span class="hljs-built_in">limit</span> 50
 person-cover --all --repick</code></pre></div>
@@ -3329,7 +3329,7 @@ person-cover --all --repick</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-create /archive/people/Disa_Exempel --name <span class="hljs-string">&#x27;Disa Exempel&#x27;</span> --born 2019-01-01</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-create /archive/people/disa-exempel --name <span class="hljs-string">&#x27;Disa Exempel&#x27;</span> --born 2019-01-01</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the person node is created.</p>
 <h3 id="person-detach"><code>person-detach</code><a class="anchor" href="#person-detach" aria-label="Link to this section"></a></h3>
 <p>Take faces off a person: to a new unnamed person, to an existing one, or off identity entirely.</p>
@@ -3426,7 +3426,7 @@ person-discard --dry-run 01J0EXAMPLE 01J0EXAMPLF</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>&lt;person&gt;</code></td>
-<td>person path, or a bare id under /people/unknown.</td>
+<td>person path, or a bare id under /archive/people/unknown.</td>
 </tr>
 </tbody></table>
 </div>
@@ -3455,9 +3455,9 @@ person-discard --dry-run 01J0EXAMPLE 01J0EXAMPLF</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-faces /archive/people/Anna_Exempel
-person-faces --<span class="hljs-built_in">limit</span> 20 --<span class="hljs-built_in">sort</span> <span class="hljs-built_in">date</span> /archive/people/Anna_Exempel
-person-faces --doubtful --<span class="hljs-built_in">sort</span> doubt /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-faces /archive/people/anna-exempel
+person-faces --<span class="hljs-built_in">limit</span> 20 --<span class="hljs-built_in">sort</span> <span class="hljs-built_in">date</span> /archive/people/anna-exempel
+person-faces --doubtful --<span class="hljs-built_in">sort</span> doubt /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the faces assigned to the person, with the photo each came from; JSON pages, and nextOffset starts the next page.</p>
 <h3 id="person-family-tree"><code>person-family-tree</code><a class="anchor" href="#person-family-tree" aria-label="Link to this section"></a></h3>
 <p>Display ancestors and descendants of a person.</p>
@@ -3493,7 +3493,7 @@ person-faces --doubtful --<span class="hljs-built_in">sort</span> doubt /archive
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-family-tree --up 2 --down 2 /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-family-tree --up 2 --down 2 /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the person&#39;s ancestors and descendants to the given depth.</p>
 <h3 id="person-fixup"><code>person-fixup</code><a class="anchor" href="#person-fixup" aria-label="Link to this section"></a></h3>
 <p>Repair family-tree links (recreate missing reciprocals, rewrite stale reciprocal paths, drop dangling)</p>
@@ -3508,7 +3508,7 @@ person-faces --doubtful --<span class="hljs-built_in">sort</span> doubt /archive
 </thead>
 <tbody><tr>
 <td><code>&lt;root&gt;</code></td>
-<td>people root (default /people)</td>
+<td>people root (default /archive/people)</td>
 </tr>
 </tbody></table>
 </div>
@@ -3573,9 +3573,9 @@ person-faces --doubtful --<span class="hljs-built_in">sort</span> doubt /archive
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-graph --up 2 --down 2 /archive/people/Anna_Exempel
-person-graph /archive/people/Anna_Exempel --only /archive/people/Bo_Exempel --only /archive/people/Cecilia_Exempel
-person-graph /archive/people/Anna_Exempel --to /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-graph --up 2 --down 2 /archive/people/anna-exempel
+person-graph /archive/people/anna-exempel --only /archive/people/bo-exempel --only /archive/people/cecilia-exempel
+person-graph /archive/people/anna-exempel --to /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the family graph around the person as nodes and edges, for drawing.</p>
 <h3 id="person-how-related"><code>person-how-related</code><a class="anchor" href="#person-how-related" aria-label="Link to this section"></a></h3>
 <p>Compute the kinship term between two persons (English/Swedish)</p>
@@ -3615,8 +3615,8 @@ person-graph /archive/people/Anna_Exempel --to /archive/people/Bo_Exempel</code>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-how-related /archive/people/Anna_Exempel /archive/people/Bo_Exempel
-person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-how-related /archive/people/anna-exempel /archive/people/bo-exempel
+person-how-related --lang sv /archive/people/anna-exempel /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the kinship term in English and Swedish, as a sentence to repeat as it comes.</p>
 <h3 id="person-info"><code>person-info</code><a class="anchor" href="#person-info" aria-label="Link to this section"></a></h3>
 <p>Show person details, relationships, and events.</p>
@@ -3635,7 +3635,7 @@ person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exe
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-info /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-info /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the person&#39;s name, birth and death dates, their parents, partners and children, and their events.</p>
 <h3 id="person-list"><code>person-list</code><a class="anchor" href="#person-list" aria-label="Link to this section"></a></h3>
 <p>List the named people, with how many files of the library each is seen or heard in.</p>
@@ -3705,7 +3705,7 @@ person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exe
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-merge /archive/people/unnamed-1 /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-merge /archive/people/unnamed-1 /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: what moved; with --dry-run, what would move.</p>
 <h3 id="person-name"><code>person-name</code><a class="anchor" href="#person-name" aria-label="Link to this section"></a></h3>
 <p>Name an unidentified person and move them into /people.</p>
@@ -3797,9 +3797,9 @@ person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exe
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-relatives /archive/people/Anna_Exempel --relation moster
-person-relatives Anna_Exempel --relation <span class="hljs-string">&#x27;mammas syster&#x27;</span>
-person-relatives Anna_Exempel --relation dotter --age 6</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-relatives /archive/people/anna-exempel --relation moster
+person-relatives anna-exempel --relation <span class="hljs-string">&#x27;mammas syster&#x27;</span>
+person-relatives anna-exempel --relation dotter --age 6</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: each relative the phrase reaches, with their path, name, birth and death dates and what they are to the person in Swedish and English; with --age, the capture-date span to search in.</p>
 <h3 id="person-remove"><code>person-remove</code><a class="anchor" href="#person-remove" aria-label="Link to this section"></a></h3>
 <p>Remove a relationship between two persons (both sides)</p>
@@ -3822,7 +3822,7 @@ person-relatives Anna_Exempel --relation dotter --age 6</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-remove /archive/people/Anna_Exempel /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-remove /archive/people/anna-exempel /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the relation is removed from both sides.</p>
 <h3 id="person-remove-home"><code>person-remove-home</code><a class="anchor" href="#person-remove-home" aria-label="Link to this section"></a></h3>
 <p>Remove a person↔location residence relation (both halves)</p>
@@ -3845,7 +3845,7 @@ person-relatives Anna_Exempel --relation dotter --age 6</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-remove-home /archive/people/Anna_Exempel /archive/locations/Exempelstad</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-remove-home /archive/people/anna-exempel /archive/locations/Exempelstad</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the residence relation is removed from both sides.</p>
 <h3 id="person-set-home"><code>person-set-home</code><a class="anchor" href="#person-set-home" aria-label="Link to this section"></a></h3>
 <p>Record where a person lived, and when (dated relation pair)</p>
@@ -3889,7 +3889,7 @@ person-relatives Anna_Exempel --relation dotter --age 6</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-home --from 2001-01 /archive/people/Anna_Exempel /archive/locations/Exempelstad</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-home --from 2001-01 /archive/people/anna-exempel /archive/locations/Exempelstad</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the residence relation is written on both sides.</p>
 <h3 id="person-set-parent"><code>person-set-parent</code><a class="anchor" href="#person-set-parent" aria-label="Link to this section"></a></h3>
 <p>Add a parent relationship (parents/ ↔ children/)</p>
@@ -3925,8 +3925,8 @@ person-relatives Anna_Exempel --relation dotter --age 6</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-parent /archive/people/Cecilia_Exempel /archive/people/Anna_Exempel
-person-set-parent --kind adoptive /archive/people/Disa_Exempel /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-parent /archive/people/cecilia-exempel /archive/people/anna-exempel
+person-set-parent --kind adoptive /archive/people/disa-exempel /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the link is written.</p>
 <h3 id="person-set-partner"><code>person-set-partner</code><a class="anchor" href="#person-set-partner" aria-label="Link to this section"></a></h3>
 <p>Add or update a partner relationship (partners/, both directions)</p>
@@ -3970,7 +3970,7 @@ person-set-parent --kind adoptive /archive/people/Disa_Exempel /archive/people/B
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-partner --kind married --from 2001-01-01 /archive/people/Anna_Exempel /archive/people/Bo_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-set-partner --kind married --from 2001-01-01 /archive/people/anna-exempel /archive/people/bo-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the link is written in both directions.</p>
 <h3 id="person-stats"><code>person-stats</code><a class="anchor" href="#person-stats" aria-label="Link to this section"></a></h3>
 <p>Count births, engagements, marriages and deaths by calendar month across all years.</p>
@@ -4008,7 +4008,7 @@ person-set-parent --kind adoptive /archive/people/Disa_Exempel /archive/people/B
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-timeline /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-timeline /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the person&#39;s life in order: events, homes, partnerships, children and the albums they appear in.</p>
 <h3 id="person-unknown"><code>person-unknown</code><a class="anchor" href="#person-unknown" aria-label="Link to this section"></a></h3>
 <p>List auto-created people nobody has named yet, with face counts and crops.</p>
@@ -4128,7 +4128,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </thead>
 <tbody><tr>
 <td><code>&lt;person&gt;</code></td>
-<td>person path, or a bare id under /people/unknown.</td>
+<td>person path, or a bare id under /archive/people/unknown.</td>
 </tr>
 </tbody></table>
 </div>
@@ -4153,7 +4153,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>person-voices /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>person-voices /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: every recording voice assigned to the person, with its talk time and the moment to play.</p>
 <h3 id="promote-exif-attrs"><code>promote-exif-attrs</code><a class="anchor" href="#promote-exif-attrs" aria-label="Link to this section"></a></h3>
 <p>Copy width/height/duration from a file&#39;s exif node onto the file node.</p>
@@ -4973,7 +4973,7 @@ staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/
 </thead>
 <tbody><tr>
 <td><code>&lt;person&gt;</code></td>
-<td>person path, or a bare id under /people/unknown.</td>
+<td>person path, or a bare id under /archive/people/unknown.</td>
 </tr>
 </tbody></table>
 </div>
@@ -4998,7 +4998,7 @@ staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>subcluster-faces /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>subcluster-faces /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the sub-clusters the person&#39;s faces fall into, which is how two people fused into one show up.</p>
 <h3 id="subcluster-voices"><code>subcluster-voices</code><a class="anchor" href="#subcluster-voices" aria-label="Link to this section"></a></h3>
 <p>Re-cluster one person&#39;s voices with average linkage, to find two people fused into one.</p>
@@ -5013,7 +5013,7 @@ staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/
 </thead>
 <tbody><tr>
 <td><code>&lt;person&gt;</code></td>
-<td>person path, or a bare id under /people/unknown.</td>
+<td>person path, or a bare id under /archive/people/unknown.</td>
 </tr>
 </tbody></table>
 </div>
@@ -5038,7 +5038,7 @@ staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>subcluster-voices /archive/people/Anna_Exempel</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>subcluster-voices /archive/people/anna-exempel</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the sub-clusters the person&#39;s voices fall into, which is how two speakers fused into one show up.</p>
 <h3 id="subject-device"><code>subject-device</code><a class="anchor" href="#subject-device" aria-label="Link to this section"></a></h3>
 <p>What <code>search --subject device:&lt;ref&gt;</code> asks: the media a device produced, as the attr equality the store answers.</p>

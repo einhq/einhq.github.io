@@ -172,7 +172,7 @@ This editor does not check the JSON. Run `ui-nav` afterwards, or reload the page
 ## Rename, move and hide entries
 
 The examples on this page change entries the Archive and the assistant add, and lead to their
-pages, such as `/albums` and `/people/Peggy_Wrenfield`. The same works for any entry, EiN's own
+pages, such as `/albums` and `/people/peggy-wrenfield`. The same works for any entry, EiN's own
 included, and for any address on your EiN.
 
 To rename **Albums** to **Photo albums**, move it up beside **Home**, and hide **Map**, write this in
@@ -240,8 +240,8 @@ for Cornwall in **Explore** after **Search**:
     { "id": "family", "label": "Family", "order": 25 }
   ],
   "sidebar": [
-    { "id": "me.peggy", "section": "family", "label": "Grandma Peggy", "icon": "user", "to": "/people/Peggy_Wrenfield" },
-    { "id": "me.ruby", "section": "family", "label": "Ruby", "icon": "user", "to": "/people/Ruby_Wrenfield" },
+    { "id": "me.peggy", "section": "family", "label": "Grandma Peggy", "icon": "user", "to": "/people/peggy-wrenfield" },
+    { "id": "me.ruby", "section": "family", "label": "Ruby", "icon": "user", "to": "/people/ruby-wrenfield" },
     { "id": "me.cornwall", "section": "explore", "label": "Cornwall", "icon": "beach", "to": "/media?q=Cornwall", "order": 15 }
   ]
 }
@@ -252,7 +252,7 @@ also appear in the search box's list under **Go to**, like every sidebar entry.
 
 - **`to`** is an address inside EiN, starting with `/`. The easiest way to get one is to open the
   page and copy what your browser's address bar shows after the host, such as
-  `/people/Peggy_Wrenfield`. Filters you set on a page are part of its address, which is how
+  `/people/peggy-wrenfield`. Filters you set on a page are part of its address, which is how
   `/media?q=Cornwall` opens **Media** already searching for Cornwall.
   [Addresses in the web interface](../reference/routes.md) lists them all. A sidebar entry cannot
   lead to another website.
@@ -290,7 +290,7 @@ This adds four buttons:
 ```json
 {
   "topbar": [
-    { "id": "me.peggy-button", "title": "Grandma Peggy", "icon": "user", "action": { "navigate": "/people/Peggy_Wrenfield" } },
+    { "id": "me.peggy-button", "title": "Grandma Peggy", "icon": "user", "action": { "navigate": "/people/peggy-wrenfield" } },
     { "id": "me.new-album", "title": "New album", "icon": "photo-plus", "action": { "dialog": "/albums/new" } },
     { "id": "me.favourites", "title": "Favourites", "icon": "heart", "action": { "drawer": "/favourites" } },
     { "id": "me.map", "title": "Map", "icon": "map", "action": { "fullscreen": "/map" } }
@@ -336,8 +336,8 @@ Each of those is a row of the menu and needs an `action` of its own:
 {
   "topbar": [
     { "id": "me.family-menu", "title": "Family", "label": "Family pages", "icon": "users", "order": 15 },
-    { "id": "me.family-peggy", "parent": "me.family-menu", "title": "Grandma Peggy", "icon": "user", "action": { "navigate": "/people/Peggy_Wrenfield" } },
-    { "id": "me.family-ruby", "parent": "me.family-menu", "title": "Ruby", "icon": "user", "action": { "navigate": "/people/Ruby_Wrenfield" } }
+    { "id": "me.family-peggy", "parent": "me.family-menu", "title": "Grandma Peggy", "icon": "user", "action": { "navigate": "/people/peggy-wrenfield" } },
+    { "id": "me.family-ruby", "parent": "me.family-menu", "title": "Ruby", "icon": "user", "action": { "navigate": "/people/ruby-wrenfield" } }
   ]
 }
 ```

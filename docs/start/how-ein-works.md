@@ -16,7 +16,7 @@ the system's settings. Each has a path from `/`, as a file does:
 | ------------------------------------------ | ---------------------------------------------------- | ---------- |
 | A photo                                    | `/archive/albums/christmas-2019/20191225_155434.jpg` | `file`     |
 | The album it is in                         | `/archive/albums/christmas-2019`                     | `album`    |
-| A person                                   | `/archive/people/Peggy_Wrenfield`                    | `person`   |
+| A person                                   | `/archive/people/peggy-wrenfield`                    | `person`   |
 | A place she lived                          | `/archive/locations/Highbury`                        | `location` |
 | An account                                 | `/etc/users/admin`                                   | `user`     |
 | The group everyone who signs in belongs to | `/etc/groups/users`                                  | `group`    |
@@ -36,7 +36,7 @@ Any node can have children, a file included. With the Archive, a photo keeps wha
 about it beneath itself: its EXIF in `metadata/exif`, its thumbnails in `thumbnails/`, the faces found on it in
 `regions/`. Delete the photo and they go with it.
 
-![The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
 
 The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
 theirs, such as the archive's `album`, `person` and `location`. [Nodes and node types](../concepts/nodes.md)

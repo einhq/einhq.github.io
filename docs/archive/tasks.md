@@ -12,15 +12,15 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | -------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Only photos, or videos                 | `search sailboat --kind photo`, `--kind video,audio`                    | [search](../reference/commands-core.md#search)                                                   |
 | Find albums, people or places by name  | `search christmas --kind album`, `search peggy --kind person`           | [search](../reference/commands-core.md#search)                                                   |
-| Pictures of a person                   | `search --subject person:Peggy_Wrenfield --kind photo`                  | [search](../reference/commands-core.md#search)                                                   |
-| Pictures of two people together        | `search --subject person:Peggy_Wrenfield --subject person:Helen_Okafor` | [search](../reference/commands-core.md#search)                                                   |
+| Pictures of a person                   | `search --subject person:peggy-wrenfield --kind photo`                  | [search](../reference/commands-core.md#search)                                                   |
+| Pictures of two people together        | `search --subject person:peggy-wrenfield --subject person:helen-okafor` | [search](../reference/commands-core.md#search)                                                   |
 | Pictures taken in a period             | `search --from 1968 --to 1970 --kind photo`                             | [search](../reference/commands-core.md#search)                                                   |
 | Pictures from a town or an area        | `search --bbox=$(location-region Truro --bbox-only)`                    | [search](../reference/commands-core.md#search), [location-region](commands.md#location-region)   |
 | Pictures with a label                  | `search --tag sailing`, or `members /archive/tags/sailing`              | [search](../reference/commands-core.md#search), [members](../reference/commands-core.md#members) |
 | Pictures that look like one picture    | `search --like /archive/albums/christmas-2019/20191224_141841.jpg`      | [search](../reference/commands-core.md#search)                                                   |
 | Search inside one album                | `search --under /archive/albums/christmas-2019 tree`                    | [search](../reference/commands-core.md#search)                                                   |
-| Which albums hold the matches          | `search --subject person:Peggy_Wrenfield --group-by album`              | [search](../reference/commands-core.md#search)                                                   |
-| Count matches per year, month and kind | `search --subject person:Peggy_Wrenfield --facets`                      | [search](../reference/commands-core.md#search)                                                   |
+| Which albums hold the matches          | `search --subject person:peggy-wrenfield --group-by album`              | [search](../reference/commands-core.md#search)                                                   |
+| Count matches per year, month and kind | `search --subject person:peggy-wrenfield --facets`                      | [search](../reference/commands-core.md#search)                                                   |
 
 ## Albums
 
@@ -56,7 +56,7 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                         | [file-set-text](commands.md#file-set-text)                   |
 | Read its text again in another language       | `file-set-text-language <file> en`                                 | [file-set-text-language](commands.md#file-set-text-language) |
 | Correct what is said in a video or recording  | `cat corrected.vtt \| file-set-transcript <file>`                  | [file-set-transcript](commands.md#file-set-transcript)       |
-| Say who took it                               | `file-set-photographer <file> /archive/people/Helen_Okafor`        | [file-set-photographer](commands.md#file-set-photographer)   |
+| Say who took it                               | `file-set-photographer <file> /archive/people/helen-okafor`        | [file-set-photographer](commands.md#file-set-photographer)   |
 | The latest pictures taken                     | `latest 20`                                                        | [latest](commands.md#latest)                                 |
 
 A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510`; on its own it would be read as another option. Only `file-set-time` can give a picture a vague date such as `1968` or `1968-07`; the web interface's dialog sets full dates. [Dates and places of pictures](dates-places.md) explains which date a picture gets.
@@ -77,23 +77,23 @@ All four ask the [media service](../ems/index.md), so they need it running. For 
 | Task                                     | Command                                                                                | Reference                                            |
 | ---------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | List the named people                    | `person-list --sort count`                                                             | [person-list](commands.md#person-list)               |
-| A person's details, relations and events | `person-info /archive/people/Peggy_Wrenfield`                                          | [person-info](commands.md#person-info)               |
+| A person's details, relations and events | `person-info /archive/people/peggy-wrenfield`                                          | [person-info](commands.md#person-info)               |
 | Add a person                             | `person-create /archive/people/Ada_Wrenfield --name 'Ada Wrenfield' --born 2026-03-02` | [person-create](commands.md#person-create)           |
-| Change names, dates and details          | `person-update /archive/people/Peggy_Wrenfield --born 1934-08-22`                      | [person-update](commands.md#person-update)           |
+| Change names, dates and details          | `person-update /archive/people/peggy-wrenfield --born 1934-08-22`                      | [person-update](commands.md#person-update)           |
 | People found in pictures but not named   | `person-unknown --limit 20`                                                            | [person-unknown](commands.md#person-unknown)         |
 | Name one of them                         | `person-name --name 'Mabel Cole' /archive/people/unknown/<id>`                         | [person-name](commands.md#person-name)               |
-| Merge two people who are one             | `person-merge /archive/people/unknown/<id> /archive/people/Ruby_Wrenfield`             | [person-merge](commands.md#person-merge)             |
-| Every face of a person                   | `person-faces --sort date /archive/people/Peggy_Wrenfield`                             | [person-faces](commands.md#person-faces)             |
+| Merge two people who are one             | `person-merge /archive/people/unknown/<id> /archive/people/ruby-wrenfield`             | [person-merge](commands.md#person-merge)             |
+| Every face of a person                   | `person-faces --sort date /archive/people/peggy-wrenfield`                             | [person-faces](commands.md#person-faces)             |
 | Take a wrong face off a person           | `person-detach --rematch <file>/regions/face-1`                                        | [person-detach](commands.md#person-detach)           |
 | Add a parent                             | `person-set-parent <child> <parent>`, `--kind adoptive`                                | [person-set-parent](commands.md#person-set-parent)   |
 | Add a partner                            | `person-set-partner --kind married --from 1956-06-02 <a> <b>`                          | [person-set-partner](commands.md#person-set-partner) |
 | Remove a relation between two people     | `person-remove <a> <b>`                                                                | [person-remove](commands.md#person-remove)           |
-| Add an event to a person                 | `person-add-event --type death --date 2021-01-17 /archive/people/Peggy_Wrenfield`      | [person-add-event](commands.md#person-add-event)     |
+| Add an event to a person                 | `person-add-event --type death --date 2021-01-17 /archive/people/peggy-wrenfield`      | [person-add-event](commands.md#person-add-event)     |
 | Record where someone lived               | `person-set-home --from 1956 --to 1999 <person> /archive/locations/Highbury`           | [person-set-home](commands.md#person-set-home)       |
-| How two people are related               | `person-how-related /archive/people/Ruby_Wrenfield /archive/people/Peggy_Wrenfield`    | [person-how-related](commands.md#person-how-related) |
-| Who a kin word reaches                   | `person-relatives Peggy_Wrenfield --relation daughter`                                 | [person-relatives](commands.md#person-relatives)     |
-| Ancestors and descendants                | `person-family-tree --up 2 --down 2 /archive/people/Helen_Okafor`                      | [person-family-tree](commands.md#person-family-tree) |
-| A person's life in order                 | `person-timeline /archive/people/Peggy_Wrenfield`                                      | [person-timeline](commands.md#person-timeline)       |
+| How two people are related               | `person-how-related /archive/people/ruby-wrenfield /archive/people/peggy-wrenfield`    | [person-how-related](commands.md#person-how-related) |
+| Who a kin word reaches                   | `person-relatives peggy-wrenfield --relation daughter`                                 | [person-relatives](commands.md#person-relatives)     |
+| Ancestors and descendants                | `person-family-tree --up 2 --down 2 /archive/people/helen-okafor`                      | [person-family-tree](commands.md#person-family-tree) |
+| A person's life in order                 | `person-timeline /archive/people/peggy-wrenfield`                                      | [person-timeline](commands.md#person-timeline)       |
 
 The family relations, events and homes are explained in [Family tree, events and homes](family.md).
 
@@ -108,7 +108,7 @@ The family relations, events and homes are explained in [Family tree, events and
 | A device's details and owners               | `device-info /archive/devices/peggy-lumix`                                                      | [device-info](commands.md#device-info)             |
 | Devices seen in pictures but not registered | `device-scan`                                                                                   | [device-scan](commands.md#device-scan)             |
 | Register a device                           | `device-create /archive/devices/ada-camera --name "Ada's camera" --make <make> --model <model>` | [device-create](commands.md#device-create)         |
-| Say who owned a device, and when            | `device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/Ruby_Wrenfield`      | [device-set-owner](commands.md#device-set-owner)   |
+| Say who owned a device, and when            | `device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/ruby-wrenfield`      | [device-set-owner](commands.md#device-set-owner)   |
 | A device's history                          | `device-timeline /archive/devices/ruby-iphone`                                                  | [device-timeline](commands.md#device-timeline)     |
 | Devices with a GPS track                    | `track-list`                                                                                    | [track-list](commands.md#track-list)               |
 | Add a GPX file to a device's track          | `track-import /archive/devices/ruby-iphone <file>.gpx`                                          | [track-import](commands.md#track-import)           |
@@ -118,7 +118,7 @@ The family relations, events and homes are explained in [Family tree, events and
 | Task                                                 | Command                                                     | Reference                                            |
 | ---------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
 | Everything that happened, newest first               | `timeline`                                                  | [timeline](commands.md#timeline)                     |
-| One year, or one person's entries                    | `timeline --year 1968`, `timeline --person Peggy_Wrenfield` | [timeline](commands.md#timeline)                     |
+| One year, or one person's entries                    | `timeline --year 1968`, `timeline --person peggy-wrenfield` | [timeline](commands.md#timeline)                     |
 | What people added lately                             | `news`, `news --limit 20`                                   | [news](../reference/commands-core.md#news)           |
 | Birthdays, memorials and anniversaries around a date | `events`, `events --today 2026-12-24 --days-ahead 7`        | [events](../reference/commands-core.md#events)       |
 | What the archive has from this day in earlier years  | `onthisday`, `onthisday 12-24`                              | [onthisday](../reference/commands-core.md#onthisday) |

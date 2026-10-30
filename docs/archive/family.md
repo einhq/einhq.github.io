@@ -108,21 +108,17 @@ You need administrator rights for this in the web interface; see
    you know them, the dates in **From** and **Until**.
 6. Press **Add**.
 
-The tree, the person's header and their timeline are read again at once. The tree opens again as
-it first did, two generations up and two down, so a relative added further out shows once you open
-the chevrons to it again.
+The tree, the person's header and their timeline are read again at once. The tree keeps every
+chevron you opened, so the new relative appears where they belong; a branch whose card the edit
+took off the tree closes.
 
 Each tie joins two people. **Add child** gives the child one parent: if both partners of a couple
 are the child's parents, add the child from the other partner's card as well, or add the second
 parent from the child's own card. Adding a partner links no children.
 
-> [!WARNING]
-> Choose **Someone already here**, not **Someone new**, in this dialog. **Someone new** makes the
-> person outside the archive's people folder: they are not listed on the People page, their card in
-> the tree does not open their page, and their birthday never reaches the Home page. To add someone
-> who is not in the archive yet, a great-grandmother for example, first create them with
-> **Create → Person** (see [Create a person by hand](people.md#create-a-person-by-hand)), then add
-> them here with **Someone already here**.
+To add someone who is not in the archive yet, a great-grandmother for example, choose **Someone
+new** and type their name: they are created as with **Create → Person** (see
+[Create a person by hand](people.md#create-a-person-by-hand)) and linked in the same step.
 
 ### Parent kinds
 
@@ -163,7 +159,7 @@ change the **Relationship** or to clear a date, remove the relation and add it a
 ### When EiN refuses
 
 Problems show in a red box in the dialog, which stays open so you can correct them. People are
-named there by the last part of their page's address, such as `Helen_Okafor`.
+named there by the last part of their page's address, such as `helen-okafor`.
 
 | Message                                                                             | What it means                                                           |
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -197,8 +193,8 @@ line between the two, with a **Full screen** button. In the [terminal](../shell/
 
 ```bash
 # in EiN's terminal
-person-how-related /archive/people/Peggy_Wrenfield /archive/people/Ruby_Wrenfield
-person-how-related /archive/people/Erik_Wrenfield /archive/people/Rachel_Moore
+person-how-related /archive/people/peggy-wrenfield /archive/people/ruby-wrenfield
+person-how-related /archive/people/erik-wrenfield /archive/people/rachel-moore
 ```
 
 ```text
@@ -241,8 +237,8 @@ Things to know:
 
   ```bash
   # in EiN's terminal
-  ls /archive/people/Peggy_Wrenfield/events
-  trash put /archive/people/Peggy_Wrenfield/events/event-1999
+  ls /archive/people/peggy-wrenfield/events
+  trash put /archive/people/peggy-wrenfield/events/event-1999
   ```
 
   `trash put` moves the event to your trash, where you can restore it; see
@@ -401,11 +397,11 @@ to change the people and locations they write to; they do not ask for administra
 
 ```bash
 # in EiN's terminal
-person-set-parent /archive/people/Leo_Wrenfield /archive/people/Kiri_Wrenfield --kind adoptive
-person-set-partner /archive/people/Jon_Wrenfield /archive/people/Kiri_Wrenfield --kind married --from 1996-02-03
-person-set-home --from 1996 /archive/people/Jon_Wrenfield /archive/locations/Kelburn
-person-add-event --type marriage --date 1956-06-16 --body 'Married at Islington Town Hall' /archive/people/Peggy_Wrenfield
-person-family-tree /archive/people/Peggy_Wrenfield
+person-set-parent /archive/people/leo-wrenfield /archive/people/kiri-wrenfield --kind adoptive
+person-set-partner /archive/people/jon-wrenfield /archive/people/kiri-wrenfield --kind married --from 1996-02-03
+person-set-home --from 1996 /archive/people/jon-wrenfield /archive/locations/Kelburn
+person-add-event --type marriage --date 1956-06-16 --body 'Married at Islington Town Hall' /archive/people/peggy-wrenfield
+person-family-tree /archive/people/peggy-wrenfield
 ```
 
 Give `person-set-parent`, `person-set-partner` and `person-how-related` the two people first and the
@@ -440,11 +436,6 @@ menu first.
 **A relative is missing from the tree.** Open the chevron on the nearest card that is shown;
 siblings and a partner's family appear only then. If there is no chevron, the tie is not recorded,
 or the relative's page is hidden from you.
-
-**A card in the tree opens "Person not found."** The person was made with **Someone new** in the
-relation dialog, outside the archive's people folder. Remove the relation, create the person with
-**Create → Person**, and add the relation again with **Someone already here**. The stray person
-stays under `/people`, where an administrator can delete it in the Nodes explorer or the terminal.
 
 **A birthday or anniversary does not show on the Home page.** Check that the date has a day, that it
 falls within the next 30 days or the last 7, and for an anniversary that the partnership has a

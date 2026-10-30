@@ -224,20 +224,15 @@ person the page is about.</li>
 you know them, the dates in <strong>From</strong> and <strong>Until</strong>.</li>
 <li>Press <strong>Add</strong>.</li>
 </ol>
-<p>The tree, the person&#39;s header and their timeline are read again at once. The tree opens again as
-it first did, two generations up and two down, so a relative added further out shows once you open
-the chevrons to it again.</p>
+<p>The tree, the person&#39;s header and their timeline are read again at once. The tree keeps every
+chevron you opened, so the new relative appears where they belong; a branch whose card the edit
+took off the tree closes.</p>
 <p>Each tie joins two people. <strong>Add child</strong> gives the child one parent: if both partners of a couple
 are the child&#39;s parents, add the child from the other partner&#39;s card as well, or add the second
 parent from the child&#39;s own card. Adding a partner links no children.</p>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Choose <strong>Someone already here</strong>, not <strong>Someone new</strong>, in this dialog. <strong>Someone new</strong> makes the
-person outside the archive&#39;s people folder: they are not listed on the People page, their card in
-the tree does not open their page, and their birthday never reaches the Home page. To add someone
-who is not in the archive yet, a great-grandmother for example, first create them with
-<strong>Create → Person</strong> (see <a href="people.html#create-a-person-by-hand">Create a person by hand</a>), then add
-them here with <strong>Someone already here</strong>.</p>
-</aside>
+<p>To add someone who is not in the archive yet, a great-grandmother for example, choose <strong>Someone
+new</strong> and type their name: they are created as with <strong>Create → Person</strong> (see
+<a href="people.html#create-a-person-by-hand">Create a person by hand</a>) and linked in the same step.</p>
 <h3 id="parent-kinds">Parent kinds<a class="anchor" href="#parent-kinds" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -289,7 +284,7 @@ partnership you have instead of adding a second one, and keeps its <strong>Relat
 change the <strong>Relationship</strong> or to clear a date, remove the relation and add it again.</p>
 <h3 id="when-ein-refuses">When EiN refuses<a class="anchor" href="#when-ein-refuses" aria-label="Link to this section"></a></h3>
 <p>Problems show in a red box in the dialog, which stays open so you can correct them. People are
-named there by the last part of their page&#39;s address, such as <code>Helen_Okafor</code>.</p>
+named there by the last part of their page&#39;s address, such as <code>helen-okafor</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -341,8 +336,8 @@ example &quot;How is Ruby related to Peggy?&quot;. Its answer can carry a small 
 line between the two, with a <strong>Full screen</strong> button. In the <a href="../shell/terminal.html">terminal</a>,
 <code>person-how-related</code> answers in English or Swedish:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-person-how-related /archive/people/Peggy_Wrenfield /archive/people/Ruby_Wrenfield
-person-how-related /archive/people/Erik_Wrenfield /archive/people/Rachel_Moore</code></pre></div>
+person-how-related /archive/people/peggy-wrenfield /archive/people/ruby-wrenfield
+person-how-related /archive/people/erik-wrenfield /archive/people/rachel-moore</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Ruby Wrenfield is Peggy Wrenfield's granddaughter
 Rachel Moore is Erik Wrenfield's stepmother</code></pre></div>
 <p>Add <code>--lang sv</code> after the two people for the Swedish word.</p>
@@ -399,8 +394,8 @@ by. Give it a date to see it.</p>
 administrator, or anyone who may change the person, can do it in the terminal: the events are
 files in the person&#39;s <code>events</code> folder.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ls</span> /archive/people/Peggy_Wrenfield/events
-trash put /archive/people/Peggy_Wrenfield/events/event-1999</code></pre></div>
+<span class="hljs-built_in">ls</span> /archive/people/peggy-wrenfield/events
+trash put /archive/people/peggy-wrenfield/events/event-1999</code></pre></div>
 <p><code>trash put</code> moves the event to your trash, where you can restore it; see
 <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
 </li>
@@ -600,11 +595,11 @@ its charts of births, engagements, marriages and deaths by month.</p>
 <a href="../shell/terminal.html">terminal</a> or over <a href="../shell/ssh-sftp.html">SSH</a>. The commands need permission
 to change the people and locations they write to; they do not ask for administrator rights.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-person-set-parent /archive/people/Leo_Wrenfield /archive/people/Kiri_Wrenfield --kind adoptive
-person-set-partner /archive/people/Jon_Wrenfield /archive/people/Kiri_Wrenfield --kind married --from 1996-02-03
-person-set-home --from 1996 /archive/people/Jon_Wrenfield /archive/locations/Kelburn
-person-add-event --<span class="hljs-built_in">type</span> marriage --<span class="hljs-built_in">date</span> 1956-06-16 --body <span class="hljs-string">&#x27;Married at Islington Town Hall&#x27;</span> /archive/people/Peggy_Wrenfield
-person-family-tree /archive/people/Peggy_Wrenfield</code></pre></div>
+person-set-parent /archive/people/leo-wrenfield /archive/people/kiri-wrenfield --kind adoptive
+person-set-partner /archive/people/jon-wrenfield /archive/people/kiri-wrenfield --kind married --from 1996-02-03
+person-set-home --from 1996 /archive/people/jon-wrenfield /archive/locations/Kelburn
+person-add-event --<span class="hljs-built_in">type</span> marriage --<span class="hljs-built_in">date</span> 1956-06-16 --body <span class="hljs-string">&#x27;Married at Islington Town Hall&#x27;</span> /archive/people/peggy-wrenfield
+person-family-tree /archive/people/peggy-wrenfield</code></pre></div>
 <p>Give <code>person-set-parent</code>, <code>person-set-partner</code> and <code>person-how-related</code> the two people first and the
 flags after them: placed before the people, a flag&#39;s value is taken for a person.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -675,10 +670,6 @@ menu first.</p>
 <p><strong>A relative is missing from the tree.</strong> Open the chevron on the nearest card that is shown;
 siblings and a partner&#39;s family appear only then. If there is no chevron, the tie is not recorded,
 or the relative&#39;s page is hidden from you.</p>
-<p><strong>A card in the tree opens &quot;Person not found.&quot;</strong> The person was made with <strong>Someone new</strong> in the
-relation dialog, outside the archive&#39;s people folder. Remove the relation, create the person with
-<strong>Create → Person</strong>, and add the relation again with <strong>Someone already here</strong>. The stray person
-stays under <code>/people</code>, where an administrator can delete it in the Nodes explorer or the terminal.</p>
 <p><strong>A birthday or anniversary does not show on the Home page.</strong> Check that the date has a day, that it
 falls within the next 30 days or the last 7, and for an anniversary that the partnership has a
 <strong>From</strong> date. When more than 16 entries fall in the window, the rest are left out; round years are

@@ -580,7 +580,7 @@ route is the child <code>track</code>. The commands below are in the
 <p>Registering Jon&#39;s GPS tracker, making him its owner and adding a route copied into your home folder:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 device-create --name <span class="hljs-string">&quot;Jon&#x27;s eTrex&quot;</span> --make Garmin --model <span class="hljs-string">&quot;eTrex 30x&quot;</span> --timezone Pacific/Auckland
-device-set-owner /archive/devices/Jons_eTrex /archive/people/Jon_Wrenfield --from 2021
+device-set-owner /archive/devices/Jons_eTrex /archive/people/jon-wrenfield --from 2021
 track-stage <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/tararua-walk.gpx&quot;</span> --device /archive/devices/Jons_eTrex</code></pre></div>
 <p><code>device-create</code> prints the device&#39;s folder, <code>/archive/devices/Jons_eTrex</code>, and <code>track-stage</code>
 removes the GPX file once its points are in the track. See

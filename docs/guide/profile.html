@@ -145,9 +145,9 @@ fetches from the outside service <code>ui-avatars.com</code>. Where the browser 
 first letter of your name shows instead.</p>
 <p>There is no button to link an account to a person. An administrator makes the link in the terminal:
 it is a softlink named <code>person</code> in the account&#39;s folder under <code>/etc/users</code>. For the account <code>helen</code>
-and the person whose page is at <code>/people/Helen_Okafor</code>:</p>
+and the person whose page is at <code>/people/helen-okafor</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-<span class="hljs-built_in">ln</span> -s /archive/people/Helen_Okafor /etc/users/helen/person</code></pre></div>
+<span class="hljs-built_in">ln</span> -s /archive/people/helen-okafor /etc/users/helen/person</code></pre></div>
 <p>Helen sees her picture and <strong>Me</strong> the next time her page loads. <code>rm /etc/users/helen/person</code> takes
 the link away again; removing a link never removes the person it points at.</p>
 <h2 id="set-your-preferences">Set your preferences<a class="anchor" href="#set-your-preferences" aria-label="Link to this section"></a></h2>

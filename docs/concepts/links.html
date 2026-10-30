@@ -287,9 +287,9 @@ together:</p>
 <p>You can make a pair of your own between any two nodes with <code>relate</code>. It puts the links in a
 <code>relations/</code> folder of each node, named <code>&lt;label&gt;-&lt;name of the other&gt;</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-relate /archive/people/Peggy_Wrenfield /archive/people/Helen_Okafor godmother --reverse goddaughter</code></pre></div>
-<div class="code"><pre tabindex="0"><code>Created bidirectional relation: /archive/people/Peggy_Wrenfield &lt;-godmother/goddaughter-&gt; /archive/people/Helen_Okafor</code></pre></div>
-<p><code>unrelate /archive/people/Peggy_Wrenfield/relations/godmother-Helen_Okafor</code> removes both halves
+relate /archive/people/peggy-wrenfield /archive/people/helen-okafor godmother --reverse goddaughter</code></pre></div>
+<div class="code"><pre tabindex="0"><code>Created bidirectional relation: /archive/people/peggy-wrenfield &lt;-godmother/goddaughter-&gt; /archive/people/helen-okafor</code></pre></div>
+<p><code>unrelate /archive/people/peggy-wrenfield/relations/godmother-helen-okafor</code> removes both halves
 again. <code>relate</code> refuses a pair that is already there with <code>relate: relation already exists:</code>
 and the path.</p>
 <h2 id="hard-links">Hard links<a class="anchor" href="#hard-links" aria-label="Link to this section"></a></h2>
@@ -345,7 +345,7 @@ the softlinks under a folder. Commands follow softlinks unless you ask them not 
 <p><strong>In the Nodes explorer.</strong> A softlink shows a link icon, with <code>→</code> and its target after its name.
 Select it and choose <strong>Properties</strong> (<kbd>Alt</kbd>+<kbd>Enter</kbd>) to see <strong>Link to</strong> with the
 target and <strong>Links</strong> with the count of names.</p>
-<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes explorer open at /archive/people/Peggy_Wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person&#39;s folder holds folders of relation links and a cover link; the arrow shows where the link points.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes explorer open at /archive/people/peggy-wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person&#39;s folder holds folders of relation links and a cover link; the arrow shows where the link points.</figcaption></figure>
 <p><strong>Over SFTP.</strong> Softlinks are symbolic links: <code>ls -l</code> in <code>sftp</code> shows them as links, following one
 takes you to the target, and <code>ln -s</code> makes one. How a recursive copy treats a link depends on your
 SFTP client. <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SSH and SFTP</a> has the rest.</p>

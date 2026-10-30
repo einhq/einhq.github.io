@@ -49,15 +49,15 @@ done
 ```
 
 ```text
-Arthur_Wrenfield
-Erik_Wrenfield
-Freya_Wrenfield
-Jon_Wrenfield
-Kiri_Wrenfield
-Leo_Wrenfield
-Peggy_Wrenfield
-Ruby_Wrenfield
-Thomas_Wrenfield
+arthur-wrenfield
+erik-wrenfield
+freya-wrenfield
+jon-wrenfield
+kiri-wrenfield
+leo-wrenfield
+peggy-wrenfield
+ruby-wrenfield
+thomas-wrenfield
 ```
 
 ## What happens when you press Enter

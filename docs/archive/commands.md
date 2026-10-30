@@ -1121,7 +1121,7 @@ file-set-photographer <file> <person>
 | `<person>` | VFS path to person node. |
 
 ```bash
-file-set-photographer /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg /archive/people/Anna_Exempel
+file-set-photographer /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: nothing; the photographer link is written.
@@ -1920,8 +1920,8 @@ person <subcommand>
 | `<subcommand>` | Subcommand: list, create, name, merge, detach, discard, unknown, faces, set-parent, set-partner, remove, add-event, info, children, family-tree, graph, timeline, how-related, check, fixup. |
 
 ```bash
-person info /archive/people/Anna_Exempel
-person create /archive/people/Cecilia_Exempel --name 'Cecilia Exempel'
+person info /archive/people/anna-exempel
+person create /archive/people/cecilia-exempel --name 'Cecilia Exempel'
 ```
 
 With `JSON_OUTPUT=1`: whatever the subcommand answers with; 'person' alone lists the subcommands.
@@ -1951,9 +1951,9 @@ person-add-event [--type=<string>] [--date=<string>] [--body=<string>] [--lat=<s
 | `--writer=<path>` | the person who wrote the text, linked as the event's `writer`; without it, whoever adds the event. |
 
 ```bash
-person-add-event --date 1998-06 --body 'Flyttade till Lund' /archive/people/Anna_Exempel
-person-add-event --type marriage --date 1972-05-20 /archive/people/Anna_Exempel wedding
-person-add-event --date 2019-07-14 --body 'A day on the water' --writer /archive/people/Anna_Exempel /archive/albums/Exempelalbum_2019
+person-add-event --date 1998-06 --body 'Flyttade till Lund' /archive/people/anna-exempel
+person-add-event --type marriage --date 1972-05-20 /archive/people/anna-exempel wedding
+person-add-event --date 2019-07-14 --body 'A day on the water' --writer /archive/people/anna-exempel /archive/albums/Exempelalbum_2019
 ```
 
 With `JSON_OUTPUT=1`: the event path; the event is written, and for a dated birth/death the born/died attr.
@@ -1965,16 +1965,16 @@ Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/d
 <small>reads only</small>
 
 ```text
-person-check [--json=<string>] <root>
+person-check [--json] <root>
 ```
 
-| Argument | What it is                    |
-| -------- | ----------------------------- |
-| `<root>` | people root (default /people) |
+| Argument | What it is                            |
+| -------- | ------------------------------------- |
+| `<root>` | people root (default /archive/people) |
 
-| Option            | What it does |
-| ----------------- | ------------ |
-| `--json=<string>` | JSON output. |
+| Option   | What it does |
+| -------- | ------------ |
+| `--json` | JSON output. |
 
 ```bash
 person-check /archive/people
@@ -1997,7 +1997,7 @@ person-children <target>
 | `<target>` | VFS path to person node. |
 
 ```bash
-person-children /archive/people/Bo_Exempel
+person-children /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: each child's name and slug.
@@ -2025,7 +2025,7 @@ person-cover [--all] [--file=<path>] [--repick] [--limit=<number>] [--verbose] <
 | `--verbose`        | print each person as it is written.                                                 |
 
 ```bash
-person-cover /archive/people/Anna_Exempel
+person-cover /archive/people/anna-exempel
 person-cover --file /archive/media/2019/IMG_0001.jpg
 person-cover --all --limit 50
 person-cover --all --repick
@@ -2057,7 +2057,7 @@ person-create [--name=<string>] [--fullname=<string>] [--gender=<string>] [--bor
 | `--allergies=<string>`, `-a` | Allergy notes.                        |
 
 ```bash
-person-create /archive/people/Disa_Exempel --name 'Disa Exempel' --born 2019-01-01
+person-create /archive/people/disa-exempel --name 'Disa Exempel' --born 2019-01-01
 ```
 
 With `JSON_OUTPUT=1`: nothing; the person node is created.
@@ -2126,9 +2126,9 @@ Every face and tag assigned to a person, with the photo each came from.
 person-faces [--limit=<string>] [--offset=<string>] [--sort=<string>] [--doubtful] <person>
 ```
 
-| Argument   | What it is                                       |
-| ---------- | ------------------------------------------------ |
-| `<person>` | person path, or a bare id under /people/unknown. |
+| Argument   | What it is                                               |
+| ---------- | -------------------------------------------------------- |
+| `<person>` | person path, or a bare id under /archive/people/unknown. |
 
 | Option              | What it does                                                                                                        |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -2138,9 +2138,9 @@ person-faces [--limit=<string>] [--offset=<string>] [--sort=<string>] [--doubtfu
 | `--doubtful`        | only the faces in question: questioned by somebody, or found looking like somebody else.                            |
 
 ```bash
-person-faces /archive/people/Anna_Exempel
-person-faces --limit 20 --sort date /archive/people/Anna_Exempel
-person-faces --doubtful --sort doubt /archive/people/Anna_Exempel
+person-faces /archive/people/anna-exempel
+person-faces --limit 20 --sort date /archive/people/anna-exempel
+person-faces --doubtful --sort doubt /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: the faces assigned to the person, with the photo each came from; JSON pages, and nextOffset starts the next page.
@@ -2165,7 +2165,7 @@ person-family-tree [--up=<number>] [--down=<number>] <target>
 | `--down=<number>` | descendant generations (default 2) |
 
 ```bash
-person-family-tree --up 2 --down 2 /archive/people/Anna_Exempel
+person-family-tree --up 2 --down 2 /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: the person's ancestors and descendants to the given depth.
@@ -2180,9 +2180,9 @@ Repair family-tree links (recreate missing reciprocals, rewrite stale reciprocal
 person-fixup [--dry-run=<string>] [--delete-orphans] <root>
 ```
 
-| Argument | What it is                    |
-| -------- | ----------------------------- |
-| `<root>` | people root (default /people) |
+| Argument | What it is                            |
+| -------- | ------------------------------------- |
+| `<root>` | people root (default /archive/people) |
 
 | Option               | What it does                              |
 | -------------------- | ----------------------------------------- |
@@ -2217,9 +2217,9 @@ person-graph [--up=<number>] [--down=<number>] [--only=<path>] [--to=<path>] <ta
 | `--to=<path>`     | draw the line of relations from the person to this one: how the two are related (repeatable) |
 
 ```bash
-person-graph --up 2 --down 2 /archive/people/Anna_Exempel
-person-graph /archive/people/Anna_Exempel --only /archive/people/Bo_Exempel --only /archive/people/Cecilia_Exempel
-person-graph /archive/people/Anna_Exempel --to /archive/people/Bo_Exempel
+person-graph --up 2 --down 2 /archive/people/anna-exempel
+person-graph /archive/people/anna-exempel --only /archive/people/bo-exempel --only /archive/people/cecilia-exempel
+person-graph /archive/people/anna-exempel --to /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: the family graph around the person as nodes and edges, for drawing.
@@ -2245,8 +2245,8 @@ person-how-related [--lang=<string>] [--json] <a> <b>
 | `--json`          | JSON output.                         |
 
 ```bash
-person-how-related /archive/people/Anna_Exempel /archive/people/Bo_Exempel
-person-how-related --lang sv /archive/people/Anna_Exempel /archive/people/Bo_Exempel
+person-how-related /archive/people/anna-exempel /archive/people/bo-exempel
+person-how-related --lang sv /archive/people/anna-exempel /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: the kinship term in English and Swedish, as a sentence to repeat as it comes.
@@ -2266,7 +2266,7 @@ person-info <target>
 | `<target>` | VFS path to person node. |
 
 ```bash
-person-info /archive/people/Bo_Exempel
+person-info /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: the person's name, birth and death dates, their parents, partners and children, and their events.
@@ -2311,7 +2311,7 @@ person-merge [--dry-run] [--force] [--verbose] <src...> <dst>
 | `--verbose` | print detail.                                         |
 
 ```bash
-person-merge /archive/people/unnamed-1 /archive/people/Anna_Exempel
+person-merge /archive/people/unnamed-1 /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: what moved; with --dry-run, what would move.
@@ -2366,9 +2366,9 @@ person-relatives [--relation=<string>] [--age=<number>] <person>
 | `--age=<number>`      | also give the capture-date span in which each relative was this many years old. |
 
 ```bash
-person-relatives /archive/people/Anna_Exempel --relation moster
-person-relatives Anna_Exempel --relation 'mammas syster'
-person-relatives Anna_Exempel --relation dotter --age 6
+person-relatives /archive/people/anna-exempel --relation moster
+person-relatives anna-exempel --relation 'mammas syster'
+person-relatives anna-exempel --relation dotter --age 6
 ```
 
 With `JSON_OUTPUT=1`: each relative the phrase reaches, with their path, name, birth and death dates and what they are to the person in Swedish and English; with --age, the capture-date span to search in.
@@ -2389,7 +2389,7 @@ person-remove <a> <b>
 | `<b>`    | second person. |
 
 ```bash
-person-remove /archive/people/Anna_Exempel /archive/people/Bo_Exempel
+person-remove /archive/people/anna-exempel /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: nothing; the relation is removed from both sides.
@@ -2410,7 +2410,7 @@ person-remove-home <person> <location>
 | `<location>` | VFS path to a location.  |
 
 ```bash
-person-remove-home /archive/people/Anna_Exempel /archive/locations/Exempelstad
+person-remove-home /archive/people/anna-exempel /archive/locations/Exempelstad
 ```
 
 With `JSON_OUTPUT=1`: nothing; the residence relation is removed from both sides.
@@ -2437,7 +2437,7 @@ person-set-home [--from=<string>] [--to=<string>] [--update] <person> <location>
 | `--update`        | rewrite the span of a residence that already exists; the flags given are the new span. |
 
 ```bash
-person-set-home --from 2001-01 /archive/people/Anna_Exempel /archive/locations/Exempelstad
+person-set-home --from 2001-01 /archive/people/anna-exempel /archive/locations/Exempelstad
 ```
 
 With `JSON_OUTPUT=1`: nothing; the residence relation is written on both sides.
@@ -2462,8 +2462,8 @@ person-set-parent [--kind=<string>] <child> <parent>
 | `--kind=<string>` | blood (default) \| adoptive \| step \| foster. |
 
 ```bash
-person-set-parent /archive/people/Cecilia_Exempel /archive/people/Anna_Exempel
-person-set-parent --kind adoptive /archive/people/Disa_Exempel /archive/people/Bo_Exempel
+person-set-parent /archive/people/cecilia-exempel /archive/people/anna-exempel
+person-set-parent --kind adoptive /archive/people/disa-exempel /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: nothing; the link is written.
@@ -2490,7 +2490,7 @@ person-set-partner [--kind=<string>] [--from=<string>] [--to=<string>] <a> <b>
 | `--to=<string>`   | partnership end date.         |
 
 ```bash
-person-set-partner --kind married --from 2001-01-01 /archive/people/Anna_Exempel /archive/people/Bo_Exempel
+person-set-partner --kind married --from 2001-01-01 /archive/people/anna-exempel /archive/people/bo-exempel
 ```
 
 With `JSON_OUTPUT=1`: nothing; the link is written in both directions.
@@ -2530,7 +2530,7 @@ person-timeline [--no-albums] <target>
 | `--no-albums` | skip the albums, which are most of the cost — the life itself in a few round trips. |
 
 ```bash
-person-timeline /archive/people/Anna_Exempel
+person-timeline /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: the person's life in order: events, homes, partnerships, children and the albums they appear in.
@@ -2604,9 +2604,9 @@ Every recording a person is heard in, with how long they speak and a moment to h
 person-voices [--limit=<string>] [--offset=<string>] [--sort=<string>] <person>
 ```
 
-| Argument   | What it is                                       |
-| ---------- | ------------------------------------------------ |
-| `<person>` | person path, or a bare id under /people/unknown. |
+| Argument   | What it is                                               |
+| ---------- | -------------------------------------------------------- |
+| `<person>` | person path, or a bare id under /archive/people/unknown. |
 
 | Option              | What it does                                                              |
 | ------------------- | ------------------------------------------------------------------------- |
@@ -2615,7 +2615,7 @@ person-voices [--limit=<string>] [--offset=<string>] [--sort=<string>] <person>
 | `--sort=<string>`   | 'duration' (most spoken first, default), 'file', or chronological 'date'. |
 
 ```bash
-person-voices /archive/people/Anna_Exempel
+person-voices /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: every recording voice assigned to the person, with its talk time and the moment to play.
@@ -3093,9 +3093,9 @@ Re-cluster one person's faces with average linkage, to find two people fused int
 subcluster-faces [--threshold=<string>] [-k <string>] [--verbose] <person>
 ```
 
-| Argument   | What it is                                       |
-| ---------- | ------------------------------------------------ |
-| `<person>` | person path, or a bare id under /people/unknown. |
+| Argument   | What it is                                               |
+| ---------- | -------------------------------------------------------- |
+| `<person>` | person path, or a bare id under /archive/people/unknown. |
 
 | Option                 | What it does                                                                               |
 | ---------------------- | ------------------------------------------------------------------------------------------ |
@@ -3104,7 +3104,7 @@ subcluster-faces [--threshold=<string>] [-k <string>] [--verbose] <person>
 | `--verbose`            | list the photos in each group.                                                             |
 
 ```bash
-subcluster-faces /archive/people/Anna_Exempel
+subcluster-faces /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: the sub-clusters the person's faces fall into, which is how two people fused into one show up.
@@ -3119,9 +3119,9 @@ Re-cluster one person's voices with average linkage, to find two people fused in
 subcluster-voices [--threshold=<string>] [-k <string>] [--verbose] <person>
 ```
 
-| Argument   | What it is                                       |
-| ---------- | ------------------------------------------------ |
-| `<person>` | person path, or a bare id under /people/unknown. |
+| Argument   | What it is                                               |
+| ---------- | -------------------------------------------------------- |
+| `<person>` | person path, or a bare id under /archive/people/unknown. |
 
 | Option                 | What it does                                                                                |
 | ---------------------- | ------------------------------------------------------------------------------------------- |
@@ -3130,7 +3130,7 @@ subcluster-voices [--threshold=<string>] [-k <string>] [--verbose] <person>
 | `--verbose`            | list the recordings in each group.                                                          |
 
 ```bash
-subcluster-voices /archive/people/Anna_Exempel
+subcluster-voices /archive/people/anna-exempel
 ```
 
 With `JSON_OUTPUT=1`: the sub-clusters the person's voices fall into, which is how two speakers fused into one show up.

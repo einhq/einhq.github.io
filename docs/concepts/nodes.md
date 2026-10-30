@@ -57,7 +57,7 @@ administrators.
 2. Go to the node, by its folders or by typing its path in the address bar.
 3. Choose **Properties** in the node's context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.
 
-![The Nodes page open on /archive/people/Peggy_Wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside](../../assets/shots/nodes.webp "A person is a node like any other, with folders of her own beneath her.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside](../../assets/shots/nodes.webp "A person is a node like any other, with folders of her own beneath her.")
 
 The properties dialog has three tabs:
 
@@ -92,7 +92,7 @@ Five commands show a node, each a different amount of it. All of them take a pat
 
 ```bash
 # in EiN's terminal
-attrs /archive/people/Peggy_Wrenfield
+attrs /archive/people/peggy-wrenfield
 ```
 
 ```text
@@ -107,7 +107,7 @@ name: Peggy Wrenfield
 
 ```bash
 # in EiN's terminal
-ls -l /archive/people/Peggy_Wrenfield
+ls -l /archive/people/peggy-wrenfield
 ```
 
 ```text
@@ -179,9 +179,9 @@ For anything else, `attrs` sets and removes attributes directly:
 
 ```bash
 # in EiN's terminal
-attrs -s 'birthname=Margaret Cole' /archive/people/Peggy_Wrenfield
-attrs -J 'contact=[{"type":"phone","data":"01632 960 418"}]' /archive/people/Helen_Okafor
-attrs -d contact /archive/people/Helen_Okafor
+attrs -s 'birthname=Margaret Cole' /archive/people/peggy-wrenfield
+attrs -J 'contact=[{"type":"phone","data":"01632 960 418"}]' /archive/people/helen-okafor
+attrs -d contact /archive/people/helen-okafor
 ```
 
 - `-s key=value` sets an attribute to the text after the first `=`.

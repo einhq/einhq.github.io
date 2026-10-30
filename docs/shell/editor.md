@@ -307,7 +307,7 @@ under **System** in an administrator's sidebar. Other people do not have it in t
 anyone signed in can open it at `/system/nodes` (for example `http://ein.local:8080/system/nodes`),
 and sees there what they may read.
 
-![The Nodes page open on /archive/people/Peggy_Wrenfield: the address bar, her children, devices, events, homes and partners folders with their type, size, mode, owner and group, and the Preview pane beside them](../../assets/shots/nodes.webp "The Nodes page browses the whole tree. Right-click a text file here and choose Open to edit it.")
+![The Nodes page open on /archive/people/peggy-wrenfield: the address bar, her children, devices, events, homes and partners folders with their type, size, mode, owner and group, and the Preview pane beside them](../../assets/shots/nodes.webp "The Nodes page browses the whole tree. Right-click a text file here and choose Open to edit it.")
 
 1. Open **Nodes**. It starts in your home folder, `/home/<you>`.
 2. Go to the folder that holds the file. Names that start with a dot, such as `.bashrc`, `.config`

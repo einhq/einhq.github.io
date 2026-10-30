@@ -398,7 +398,7 @@ Registering Jon's GPS tracker, making him its owner and adding a route copied in
 ```bash
 # in EiN's terminal
 device-create --name "Jon's eTrex" --make Garmin --model "eTrex 30x" --timezone Pacific/Auckland
-device-set-owner /archive/devices/Jons_eTrex /archive/people/Jon_Wrenfield --from 2021
+device-set-owner /archive/devices/Jons_eTrex /archive/people/jon-wrenfield --from 2021
 track-stage "$HOME/tararua-walk.gpx" --device /archive/devices/Jons_eTrex
 ```
 

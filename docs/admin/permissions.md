@@ -96,7 +96,7 @@ user-groups helen
    the arrow means you may not list what it holds.
 3. Choose **Properties** in the node's context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.
 
-![The Nodes page at /archive/people/Peggy_Wrenfield: folders children, devices, events, homes and partners, each rwxrwxr-x, owned by admin, group users; the tool pane shows Peggy Wrenfield's picture with her mode, owner and group](../../assets/shots/nodes.webp "The Nodes page shows every node's mode, owner and group, and the properties dialog changes them.")
+![The Nodes page at /archive/people/peggy-wrenfield: folders children, devices, events, homes and partners, each rwxrwxr-x, owned by admin, group users; the tool pane shows Peggy Wrenfield's picture with her mode, owner and group](../../assets/shots/nodes.webp "The Nodes page shows every node's mode, owner and group, and the properties dialog changes them.")
 
 The properties dialog has three tabs:
 

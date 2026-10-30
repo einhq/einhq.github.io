@@ -110,12 +110,12 @@
 </tr>
 <tr>
 <td>Pictures of a person</td>
-<td><code>search --subject person:Peggy_Wrenfield --kind photo</code></td>
+<td><code>search --subject person:peggy-wrenfield --kind photo</code></td>
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 <tr>
 <td>Pictures of two people together</td>
-<td><code>search --subject person:Peggy_Wrenfield --subject person:Helen_Okafor</code></td>
+<td><code>search --subject person:peggy-wrenfield --subject person:helen-okafor</code></td>
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 <tr>
@@ -145,12 +145,12 @@
 </tr>
 <tr>
 <td>Which albums hold the matches</td>
-<td><code>search --subject person:Peggy_Wrenfield --group-by album</code></td>
+<td><code>search --subject person:peggy-wrenfield --group-by album</code></td>
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 <tr>
 <td>Count matches per year, month and kind</td>
-<td><code>search --subject person:Peggy_Wrenfield --facets</code></td>
+<td><code>search --subject person:peggy-wrenfield --facets</code></td>
 <td><a href="../reference/commands-core.html#search">search</a></td>
 </tr>
 </tbody></table>
@@ -302,7 +302,7 @@
 </tr>
 <tr>
 <td>Say who took it</td>
-<td><code>file-set-photographer &lt;file&gt; /archive/people/Helen_Okafor</code></td>
+<td><code>file-set-photographer &lt;file&gt; /archive/people/helen-okafor</code></td>
 <td><a href="commands.html#file-set-photographer">file-set-photographer</a></td>
 </tr>
 <tr>
@@ -361,7 +361,7 @@
 </tr>
 <tr>
 <td>A person&#39;s details, relations and events</td>
-<td><code>person-info /archive/people/Peggy_Wrenfield</code></td>
+<td><code>person-info /archive/people/peggy-wrenfield</code></td>
 <td><a href="commands.html#person-info">person-info</a></td>
 </tr>
 <tr>
@@ -371,7 +371,7 @@
 </tr>
 <tr>
 <td>Change names, dates and details</td>
-<td><code>person-update /archive/people/Peggy_Wrenfield --born 1934-08-22</code></td>
+<td><code>person-update /archive/people/peggy-wrenfield --born 1934-08-22</code></td>
 <td><a href="commands.html#person-update">person-update</a></td>
 </tr>
 <tr>
@@ -386,12 +386,12 @@
 </tr>
 <tr>
 <td>Merge two people who are one</td>
-<td><code>person-merge /archive/people/unknown/&lt;id&gt; /archive/people/Ruby_Wrenfield</code></td>
+<td><code>person-merge /archive/people/unknown/&lt;id&gt; /archive/people/ruby-wrenfield</code></td>
 <td><a href="commands.html#person-merge">person-merge</a></td>
 </tr>
 <tr>
 <td>Every face of a person</td>
-<td><code>person-faces --sort date /archive/people/Peggy_Wrenfield</code></td>
+<td><code>person-faces --sort date /archive/people/peggy-wrenfield</code></td>
 <td><a href="commands.html#person-faces">person-faces</a></td>
 </tr>
 <tr>
@@ -416,7 +416,7 @@
 </tr>
 <tr>
 <td>Add an event to a person</td>
-<td><code>person-add-event --type death --date 2021-01-17 /archive/people/Peggy_Wrenfield</code></td>
+<td><code>person-add-event --type death --date 2021-01-17 /archive/people/peggy-wrenfield</code></td>
 <td><a href="commands.html#person-add-event">person-add-event</a></td>
 </tr>
 <tr>
@@ -426,22 +426,22 @@
 </tr>
 <tr>
 <td>How two people are related</td>
-<td><code>person-how-related /archive/people/Ruby_Wrenfield /archive/people/Peggy_Wrenfield</code></td>
+<td><code>person-how-related /archive/people/ruby-wrenfield /archive/people/peggy-wrenfield</code></td>
 <td><a href="commands.html#person-how-related">person-how-related</a></td>
 </tr>
 <tr>
 <td>Who a kin word reaches</td>
-<td><code>person-relatives Peggy_Wrenfield --relation daughter</code></td>
+<td><code>person-relatives peggy-wrenfield --relation daughter</code></td>
 <td><a href="commands.html#person-relatives">person-relatives</a></td>
 </tr>
 <tr>
 <td>Ancestors and descendants</td>
-<td><code>person-family-tree --up 2 --down 2 /archive/people/Helen_Okafor</code></td>
+<td><code>person-family-tree --up 2 --down 2 /archive/people/helen-okafor</code></td>
 <td><a href="commands.html#person-family-tree">person-family-tree</a></td>
 </tr>
 <tr>
 <td>A person&#39;s life in order</td>
-<td><code>person-timeline /archive/people/Peggy_Wrenfield</code></td>
+<td><code>person-timeline /archive/people/peggy-wrenfield</code></td>
 <td><a href="commands.html#person-timeline">person-timeline</a></td>
 </tr>
 </tbody></table>
@@ -493,7 +493,7 @@
 </tr>
 <tr>
 <td>Say who owned a device, and when</td>
-<td><code>device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/Ruby_Wrenfield</code></td>
+<td><code>device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/ruby-wrenfield</code></td>
 <td><a href="commands.html#device-set-owner">device-set-owner</a></td>
 </tr>
 <tr>
@@ -529,7 +529,7 @@
 </tr>
 <tr>
 <td>One year, or one person&#39;s entries</td>
-<td><code>timeline --year 1968</code>, <code>timeline --person Peggy_Wrenfield</code></td>
+<td><code>timeline --year 1968</code>, <code>timeline --person peggy-wrenfield</code></td>
 <td><a href="commands.html#timeline">timeline</a></td>
 </tr>
 <tr>

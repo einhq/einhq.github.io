@@ -222,7 +222,7 @@ To find one by a word in it, press <kbd>Ctrl</kbd>+<kbd>R</kbd> and type part of
 turns into the search and shows the newest command that matches:
 
 ```text
-(reverse-i-search)`peg': person-info /archive/people/Peggy_Wrenfield
+(reverse-i-search)`peg': person-info /archive/people/peggy-wrenfield
 ```
 
 - <kbd>Ctrl</kbd>+<kbd>R</kbd> again finds the next older match.
@@ -257,7 +257,7 @@ The first two rows are on an EiN with the Archive installed:
 | You type                                  | <kbd>Tab</kbd> gives                          |
 | ----------------------------------------- | --------------------------------------------- |
 | `cd /archive/al`                          | `cd /archive/albums/`                         |
-| `person-info /archive/people/Peg`         | `person-info /archive/people/Peggy_Wrenfield` |
+| `person-info /archive/people/Peg`         | `person-info /archive/people/peggy-wrenfield` |
 | `search --ki`                             | `search --kind=`, ready for the value         |
 | `user-info he`                            | `user-info helen`                             |
 | `pipeline`, a space, <kbd>Tab</kbd> twice | the list of `pipeline`'s subcommands          |

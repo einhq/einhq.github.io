@@ -69,11 +69,11 @@ first letter of your name shows instead.
 
 There is no button to link an account to a person. An administrator makes the link in the terminal:
 it is a softlink named `person` in the account's folder under `/etc/users`. For the account `helen`
-and the person whose page is at `/people/Helen_Okafor`:
+and the person whose page is at `/people/helen-okafor`:
 
 ```bash
 # in EiN's terminal, as the administrator
-ln -s /archive/people/Helen_Okafor /etc/users/helen/person
+ln -s /archive/people/helen-okafor /etc/users/helen/person
 ```
 
 Helen sees her picture and **Me** the next time her page loads. `rm /etc/users/helen/person` takes
