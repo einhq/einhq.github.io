@@ -271,13 +271,13 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 </tr>
 <tr>
 <td><code>memory</code></td>
-<td>4 GB; with <code>--ems</code>, 30 GB</td>
-<td>with <code>--ems</code>, 15 to 29 GB</td>
+<td>4 GB; with <code>--llm</code>, 10 GB; with <code>--ems</code>, 30 GB</td>
+<td>with <code>--llm</code>, 4 to 9 GB, enough with the model on the card; with <code>--ems</code>, 15 to 29 GB</td>
 <td>less than 4 GB; with <code>--ems</code>, less than 15 GB</td>
 </tr>
 <tr>
 <td><code>disk</code></td>
-<td>10 GB free; with <code>--ems</code>, 100 GB</td>
+<td>10 GB free; with <code>--ems</code>, 100 GB; <code>--llm</code> adds 6 GB for the model&#39;s file</td>
 <td></td>
 <td>less</td>
 </tr>

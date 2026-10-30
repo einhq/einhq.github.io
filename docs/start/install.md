@@ -18,7 +18,7 @@ What the machine needs depends on whether you install EiN on its own (EiN Core) 
 | Free disk        | 10 GB, plus your files                                                                            | about 100 GB, plus your files                         |
 | Graphics card    | not used                                                                                          | optional: NVIDIA, 16 GB recommended, 8 and 12 GB work |
 
-Cores are counted as physical cores, not threads. The language model for the assistant (`--llm`) takes several GB more, on the graphics card or in memory. With 16 GB of memory, leave it out or use a hosted model instead; [The language model](../assistant/language-model.md) explains both.
+Cores are counted as physical cores, not threads. The language model for the assistant (`--llm`) takes several GB more, on the graphics card or in memory, and about 6 GB more disk for its file. With 16 GB of memory, leave it out or use a hosted model instead; [The language model](../assistant/language-model.md) explains both.
 
 A few more things to know before you start:
 

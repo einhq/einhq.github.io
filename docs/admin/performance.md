@@ -21,11 +21,11 @@ Nothing limits how many cores a container uses. With the Archive, the heavy work
 
 The installer checks the machine against the first two rows of these figures before it installs anything ([What the checks measure](install.md#what-the-checks-measure)); the language model's row is advice it does not check:
 
-| What you install                                             | Processor                      | Memory                                             | Free disk                     |
-| ------------------------------------------------------------ | ------------------------------ | -------------------------------------------------- | ----------------------------- |
-| EiN Core                                                     | 2 cores                        | 4 GB                                               | 10 GB, plus your files        |
-| With the media service (`--ems`), for the Archive            | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files |
-| With the language model as well (`--llm`), for the Assistant | as above                       | about 5.6 GB more, unless the model is on the card | as above                      |
+| What you install                                             | Processor                      | Memory                                             | Free disk                             |
+| ------------------------------------------------------------ | ------------------------------ | -------------------------------------------------- | ------------------------------------- |
+| EiN Core                                                     | 2 cores                        | 4 GB                                               | 10 GB, plus your files                |
+| With the media service (`--ems`), for the Archive            | 4 cores; 6 or more recommended | 16 GB; 32 GB recommended                           | about 100 GB, plus your files         |
+| With the language model as well (`--llm`), for the Assistant | as above                       | about 5.6 GB more, unless the model is on the card | about 6 GB more, for the model's file |
 
 Cores are physical cores, not threads. With both installed, the default limits of the three containers that have one add up to 32 GB (6 + 16 + 10). On 16 GB the installer calls the memory enough with the language model left out or hosted, so leave it out or use a hosted one, as [The language model](../assistant/language-model.md) describes.
 

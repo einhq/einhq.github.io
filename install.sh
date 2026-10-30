@@ -84,7 +84,7 @@ main() {
     if command -v "$tool" >/dev/null; then say "$tool" ok ""; else need "$tool" "install $tool"; fi
   done
 
-  # --- processor and memory: the media service is what needs them ---
+  # --- processor and memory: the media service is what needs them, and memory the language model too ---
   local cores threads
   cores=$(lscpu -p=core,socket 2>/dev/null | grep -v '^#' | sort -u | wc -l)
   threads=$(nproc 2>/dev/null || echo 0)
@@ -114,6 +114,12 @@ main() {
     else
       need memory "$memory_gb GB: the media service needs at least 16 GB"
     fi
+  elif [ "$llm" = 1 ] && [ "$memory_gb" -ge 4 ]; then
+    if [ "$memory_gb" -ge 10 ]; then
+      say memory ok "$memory_gb GB"
+    else
+      short memory "$memory_gb GB: enough with the language model on the card; on the processor it takes about 6 GB more than EiN's 4"
+    fi
   elif [ "$memory_gb" -ge 4 ]; then
     say memory ok "$memory_gb GB"
   else
@@ -121,8 +127,10 @@ main() {
   fi
 
   # --- disk: measured on the nearest folder that exists, as EIN_DATA may not be made yet ---
-  local dir=$data free_gb where want_gb=10
+  local dir=$data free_gb where want_gb=10 what="the images and the database"
   [ "$ems" = 1 ] && want_gb=100
+  # The language model's file, about 5.6 GB, is kept under EIN_DATA.
+  [ "$llm" = 1 ] && want_gb=$((want_gb + 6)) && what="the images, the database and the language model"
   while [ ! -d "$dir" ] && [ "$dir" != / ]; do dir=$(dirname "$dir"); done
   free_gb=$(df -Pk "$dir" 2>/dev/null | awk 'NR == 2 {printf "%d", $4 / 1024 / 1024}')
   free_gb=${free_gb:-0}
@@ -131,7 +139,7 @@ main() {
   if [ "$free_gb" -ge "$want_gb" ]; then
     say disk ok "$free_gb GB free $where, plus room for your own files"
   else
-    need disk "$free_gb GB free $where: about $want_gb GB is needed for the images and the database, plus your files"
+    need disk "$free_gb GB free $where: about $want_gb GB is needed for $what, plus your files"
   fi
 
   if [ "$ems" = 1 ] || [ "$llm" = 1 ]; then graphics; fi
