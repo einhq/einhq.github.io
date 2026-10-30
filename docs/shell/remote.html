@@ -441,9 +441,9 @@ If <code>~/.ssh</code> does not exist yet, run <code>ssh-keygen</code> once with
 ssh-keygen -f ~/.ssh/nas -N <span class="hljs-string">&#x27;&#x27;</span>
 ssh-copy-id -i ~/.ssh/nas.pub anna@nas.local</code></pre></div>
 </li>
-<li><p>Make the mount point, which must exist, and mount the folder on it:</p>
+<li><p>Mount the folder. A mount point that does not exist yet, such as <code>/mnt/nas</code>, is made as a
+folder, with any folders above it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-<span class="hljs-built_in">mkdir</span> -p /mnt/nas
 mount --save /mnt/nas sftp <span class="hljs-string">&quot;host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas&quot;</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>mounted sftp at '/mnt/nas' (saved in /etc/fstab)</code></pre></div>
 <p>The first mount from a terminal asks about an unknown host key as <code>ssh</code> does. <code>--save</code> writes the

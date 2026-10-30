@@ -65,7 +65,8 @@ The tab bar runs along the foot of the terminal. Each tab is a shell of its own,
 folder, its own variables and whatever is running in it; switching tabs does not stop the others.
 
 - **Add a tab**: choose **+** (**New session (Alt+N)**) or press <kbd>Alt</kbd>+<kbd>N</kbd>. The
-  first tab is called **Session 1**, the next **Session 2**, and so on. If the terminal is hidden,
+  first tab is called **Session 1**, and a new one takes the lowest number no open tab has: with
+  **Session 2** closed, the next is **Session 2** again. If the terminal is hidden,
   <kbd>Alt</kbd>+<kbd>N</kbd> adds the tab without showing it.
 - **Know which is which**: once a tab's shell has reported its folder, the tab shows that path
   instead of its name, such as `/home/helen` or `/archive/albums/christmas-2019`.

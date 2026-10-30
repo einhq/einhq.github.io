@@ -66,13 +66,9 @@ A setting that names the services that read it when they start restarts them whe
 
 - Only services that are running are restarted. A service you stopped stays stopped, and reads the new value when you start it. [Services and logs](services-logs.md) shows how.
 - If a restart fails, the value is still saved, and a red message says "Could not restart" with the service's name and the reason. The service keeps running on the old value until it starts again.
-- The ports, **HTTP port** and **SSH port**, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.
 - **Worker backlog rotation (ms)** is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.
 - Settings that are policy, such as the default sharing or **Visitors may browse**, are read each time they are applied, so they take effect at once and restart nothing.
 - Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as the Archive's **Face match threshold**. Nothing restarts for them: the service's shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.
-
-> [!WARNING]
-> With the installer's setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing **HTTP port** or **SSH port** on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in `.env` instead, as [Ports, HTTPS and remote access](network.md) describes.
 
 A terminal that is open when a setting changes reads the settings again before its next command, so `echo` shows the new value. A command already running keeps the value it started with.
 
@@ -93,7 +89,6 @@ config unset CFG_TRASH_RETENTION_DAYS
 
 ```text
 CFG_EMS_KEY	(set) (environment)
-CFG_HTTP_PORT	8080 (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
 CFG_LANGUAGE_MODEL	llm-chat (module assistant)
 CFG_SEARCH_PARSER	archive-parse (module archive)
@@ -167,7 +162,7 @@ A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
 - **A module's choice wins over it.** An installed module may name commands for the **Search** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, and the `ems` module `CFG_TEXT_EMBEDDER`. To use another one, set it on the Settings page.
-- **Some settings are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT`, `CFG_SSH_PORT`, and the `ems` module's `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
+- **Some variables are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container, which are not settings, and the `ems` module's settings `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
 The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. With the media service installed, its settings are `EMS_…` lines in the same file; [The media service](../ems/index.md) describes them.
@@ -189,7 +184,7 @@ A setting can be given a value in up to four places. The narrowest wins:
 
 A personal setting comes from `~/.config`, the deployment or its default: neither a module nor `/etc/config` sets it. A system setting is never read from anyone's `~/.config`.
 
-![Five layers stacked, the higher one winning: Your setting in ~/.config, from Profile → Preferences or config set; Set here in /etc/config, from Settings → System or config set, which restarts the services the setting names; From archive in /etc/config.d/archive, a module's own etc/config; From deployment in /etc/environment, the CFG_ lines of .env written again at each start; and Default, declared with the setting; beside them, a system setting reads every layer but Your setting and a personal one only Your setting, From deployment and Default; below, a key, CFG_…_KEY, comes from /etc/keys over the deployment's and is in no shell's environment, a .env change applies when the container is made again, and HTTP port and SSH port wait for EiN's next start](../diagrams/settings-layers.svg "The highest layer that sets a value wins, and each scope skips the layers that are not its own.")
+![Five layers stacked, the higher one winning: Your setting in ~/.config, from Profile → Preferences or config set; Set here in /etc/config, from Settings → System or config set, which restarts the services the setting names; From archive in /etc/config.d/archive, a module's own etc/config; From deployment in /etc/environment, the CFG_ lines of .env written again at each start; and Default, declared with the setting; beside them, a system setting reads every layer but Your setting and a personal one only Your setting, From deployment and Default; below, a key, CFG_…_KEY, comes from /etc/keys over the deployment's and is in no shell's environment, and a .env change applies when the container is made again](../diagrams/settings-layers.svg "The highest layer that sets a value wins, and each scope skips the layers that are not its own.")
 
 Every shell in EiN, the services' shells included, sources these files at its start, `/etc/environment` first and `~/.config` last, so each is exported over the one before. That is why every setting is an ordinary environment variable in the terminal:
 

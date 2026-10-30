@@ -124,10 +124,8 @@ their own machine; going the other way, from EiN out to a NAS or another server,
 </div>
 <p>SSH and SFTP share the one port. With the standard install it is set by <code>EIN_SSH_PORT</code> in <code>.env</code> on
 the machine EiN runs on; <a href="../admin/network.html">Ports, HTTPS and remote access</a> explains how to change
-it and how to reach EiN from outside your home network. The setting
-<a href="../reference/settings.html#cfg_ssh_port"><code>CFG_SSH_PORT</code></a> (<strong>SSH port</strong> in <strong>Settings</strong>) is the port
-EiN listens on inside its container, and takes effect the next time EiN starts. With the standard
-install leave it at <code>2222</code>: that is the port <code>EIN_SSH_PORT</code> is passed on to.</p>
+it and how to reach EiN from outside your home network. Inside its container EiN always listens on
+<code>2222</code>, the port <code>EIN_SSH_PORT</code> is passed on to.</p>
 <p>The examples below use Helen Okafor&#39;s account <code>helen</code> on <code>ein.local</code>, port <code>2222</code>. Use your own.</p>
 <h2 id="log-in-with-a-shell">Log in with a shell<a class="anchor" href="#log-in-with-a-shell" aria-label="Link to this section"></a></h2>
 <ol>
@@ -208,7 +206,8 @@ that belong together in one line: <code>&#39;cd /archive/albums &amp;&amp; ls&#3
 shell for those. A command that would ask a question, such as a password or &quot;Remove module?&quot;,
 stops instead with <code>&lt;name&gt;: no terminal to answer on</code>, followed by the option that gives the
 answer: <code>mod remove --force</code>, <code>user-passwd --new-password</code>, <code>user-elevate --password</code>. Commands sent this way are not added to your history.</li>
-<li>Errors arrive on the same stream as the output, so <code>2&gt;/dev/null</code> on your side does not separate them.
+<li>Errors arrive on their own stream, as with any SSH server, so <code>2&gt;/dev/null</code> on your side drops them
+and <code>2&gt;errors.txt</code> keeps them apart from the output.
 Use the exit status to tell success from failure.</li>
 </ul>
 <h2 id="copy-files-with-sftp">Copy files with SFTP<a class="anchor" href="#copy-files-with-sftp" aria-label="Link to this section"></a></h2>

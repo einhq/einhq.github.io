@@ -344,7 +344,7 @@
 </tbody></table>
 </div>
 <h2 id="set-by-the-system">Set by the system<a class="anchor" href="#set-by-the-system" aria-label="Link to this section"></a></h2>
-<p>What EiN exports for every shell at its start besides the folders: the built-in accounts and the host folders its storage is on.</p>
+<p>What EiN exports for every shell at its start besides the folders: the built-in accounts, the host folders its storage is on, and the ports the deployment gave it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -407,6 +407,16 @@
 <td><code>USERS_GID</code></td>
 <td></td>
 <td>Its id.</td>
+</tr>
+<tr>
+<td><code>CFG_HTTP_PORT</code></td>
+<td><code>8080</code></td>
+<td>The port the web interface listens on, as the deployment set it, which the http-server service reads at its start. In the installer&#39;s container it is always 8080: the machine publishes EIN_HTTP_PORT from .env onto it. It is not a setting, since only the deployment knows which port reaches it.</td>
+</tr>
+<tr>
+<td><code>CFG_SSH_PORT</code></td>
+<td><code>2222</code></td>
+<td>The port the SSH and SFTP server listens on, as the deployment set it, which the ssh-server service reads at its start. In the installer&#39;s container it is always 2222: the machine publishes EIN_SSH_PORT from .env onto it.</td>
 </tr>
 <tr>
 <td><code>EIN_PATH_EXPORTS</code></td>

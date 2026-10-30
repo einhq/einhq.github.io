@@ -17,10 +17,8 @@ their own machine; going the other way, from EiN out to a NAS or another server,
 
 SSH and SFTP share the one port. With the standard install it is set by `EIN_SSH_PORT` in `.env` on
 the machine EiN runs on; [Ports, HTTPS and remote access](../admin/network.md) explains how to change
-it and how to reach EiN from outside your home network. The setting
-[`CFG_SSH_PORT`](../reference/settings.md#cfg_ssh_port) (**SSH port** in **Settings**) is the port
-EiN listens on inside its container, and takes effect the next time EiN starts. With the standard
-install leave it at `2222`: that is the port `EIN_SSH_PORT` is passed on to.
+it and how to reach EiN from outside your home network. Inside its container EiN always listens on
+`2222`, the port `EIN_SSH_PORT` is passed on to.
 
 The examples below use Helen Okafor's account `helen` on `ein.local`, port `2222`. Use your own.
 
@@ -128,7 +126,8 @@ installed; any folder you may read works the same way.
   shell for those. A command that would ask a question, such as a password or "Remove module?",
   stops instead with `<name>: no terminal to answer on`, followed by the option that gives the
   answer: `mod remove --force`, `user-passwd --new-password`, `user-elevate --password`. Commands sent this way are not added to your history.
-- Errors arrive on the same stream as the output, so `2>/dev/null` on your side does not separate them.
+- Errors arrive on their own stream, as with any SSH server, so `2>/dev/null` on your side drops them
+  and `2>errors.txt` keeps them apart from the output.
   Use the exit status to tell success from failure.
 
 ## Copy files with SFTP

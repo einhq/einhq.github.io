@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Settings – EiN documentation</title>
-    <meta name="description" content="Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta name="description" content="Every setting of an EiN with all its modules: 79 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/settings.html">
     <meta property="og:title" content="Settings – EiN documentation">
-    <meta property="og:description" content="Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta property="og:description" content="Every setting of an EiN with all its modules: 79 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -88,7 +88,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. -->
 
-<p>Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
+<p>Every setting of an EiN with all its modules: 79 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
 <ul>
 <li><strong>Who it is for</strong>: <em>everyone</em> is a system setting, which only an administrator changes, on Settings → System or with <code>config set</code>; <em>each person</em> is a preference everyone sets for themselves, on Profile → Preferences.</li>
 <li><strong>Default</strong>: the value until someone changes it. A deployment can set another in <code>.env</code>, and a module can choose one.</li>
@@ -921,61 +921,6 @@
 <tr>
 <td>Kind</td>
 <td>a key: never readable, in no shell</td>
-</tr>
-</tbody></table>
-</div>
-<h2 id="network">Network<a class="anchor" href="#network" aria-label="Link to this section"></a></h2>
-<h3 id="cfg_http_port"><code>CFG_HTTP_PORT</code><a class="anchor" href="#cfg_http_port" aria-label="Link to this section"></a></h3>
-<p><strong>HTTP port</strong>. The port the web interface listens on.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td><code>8080</code></td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>number</td>
-</tr>
-<tr>
-<td>Takes effect</td>
-<td>Takes effect the next time the server starts — restarting it from here would drop this connection.</td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="cfg_ssh_port"><code>CFG_SSH_PORT</code><a class="anchor" href="#cfg_ssh_port" aria-label="Link to this section"></a></h3>
-<p><strong>SSH port</strong>. The port the SSH and SFTP server listens on.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td><code>2222</code></td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>number</td>
-</tr>
-<tr>
-<td>Takes effect</td>
-<td>Takes effect the next time the server starts.</td>
 </tr>
 </tbody></table>
 </div>
@@ -2327,7 +2272,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/settings.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#albums">Albums</a></li><li><a href="#appearance">Appearance</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#faces">Faces</a></li><li><a href="#language">Language</a></li><li><a href="#media-service">Media service</a></li><li><a href="#modules">Modules</a></li><li><a href="#network">Network</a></li><li><a href="#playback">Playback</a></li><li><a href="#processing">Processing</a></li><li><a href="#search">Search</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#shell">Shell</a></li><li><a href="#storage">Storage</a></li><li><a href="#transcription">Transcription</a></li><li><a href="#trash">Trash</a></li><li><a href="#users-and-sharing">Users and sharing</a></li><li><a href="#voices">Voices</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#albums">Albums</a></li><li><a href="#appearance">Appearance</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#faces">Faces</a></li><li><a href="#language">Language</a></li><li><a href="#media-service">Media service</a></li><li><a href="#modules">Modules</a></li><li><a href="#playback">Playback</a></li><li><a href="#processing">Processing</a></li><li><a href="#search">Search</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#shell">Shell</a></li><li><a href="#storage">Storage</a></li><li><a href="#transcription">Transcription</a></li><li><a href="#trash">Trash</a></li><li><a href="#users-and-sharing">Users and sharing</a></li><li><a href="#voices">Voices</a></li></ul></aside>
     </div>
   </body>
 </html>

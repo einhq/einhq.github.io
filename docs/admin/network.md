@@ -47,16 +47,13 @@ To change one:
    Running `./setup.sh` applies it too, and also updates EiN.
 3. Open EiN at the new address, such as `http://ein.local:8443/` after `EIN_HTTP_PORT=8443`.
 
-Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them.
-
-> [!WARNING]
-> Leave the settings **HTTP port** and **SSH port** (`CFG_HTTP_PORT`, `CFG_SSH_PORT`) on **Settings → System**, in the **Network** group, as they are. They set the ports EiN listens on inside its container, and the machine forwards only 8080 and 2222 to it: a change there makes the web interface or SSH unreachable at the next start. Change `.env` instead.
+Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them. The ports are not settings, so nothing on the Settings page can move EiN off them.
 
 A few things to know:
 
 - **Ports below 1024**, such as 80 or 443, cannot be published by rootless podman unless the machine allows it (the kernel setting `net.ipv4.ip_unprivileged_port_start`). Use a port above 1024, or let an HTTPS proxy take 443.
 - **`EIN_BIND` takes one address.** With an address other than `0.0.0.0` or `127.0.0.1`, such as the machine's LAN address, EiN runs normally, but `setup.sh` waits for it at `127.0.0.1`, does not find it, and ends with "EiN did not answer" after ten minutes.
-- **The built-in guide** shows SSH commands with port 2222 even when `EIN_SSH_PORT` maps another port, since that is the port EiN listens on. Tell your family the port you chose.
+- **The documentation**, here and on EiN's **Docs** page, shows SSH commands with port 2222 whatever `EIN_SSH_PORT` maps. Tell your family the port you chose.
 
 ## Open the ports in the firewall
 
@@ -226,18 +223,17 @@ The server's host key is made at EiN's first start and kept in the tree as `/etc
 
 ## When something goes differently
 
-| What you see                                                                                                       | What to do                                                                                                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| EiN opens on the machine itself but not from another computer                                                      | Open the ports in the machine's firewall, and check that `EIN_BIND` is `0.0.0.0`. Try the machine's IP address instead of a name ending in `.local`.                                                                                                        |
-| `compose up` fails because the address or port is already in use                                                   | Another program has the port. Choose another `EIN_HTTP_PORT` or `EIN_SSH_PORT` in `.env`, or stop that program.                                                                                                                                             |
-| Behind the proxy, the page frame loads but stays empty, and the terminal does not connect                          | The proxy does not pass WebSocket connections. Add the `Upgrade` and `Connection` headers (nginx) or check the proxy's WebSocket support.                                                                                                                   |
-| Uploads of large files fail behind the proxy, often with 413                                                       | The proxy limits the size of a request. In nginx, set `client_max_body_size 0;`.                                                                                                                                                                            |
-| The terminal or the interface reconnects every minute behind the proxy                                             | The proxy closes idle connections. Raise its read timeout, such as `proxy_read_timeout 1h;` in nginx.                                                                                                                                                       |
-| Signing in works, but the next page asks you to sign in again                                                      | The browser uses plain `http://` while something in front of EiN sends `X-Forwarded-Proto: https`, so the cookie is marked `Secure` and the browser does not send it back. Open the `https://` address, or have the proxy send the scheme the browser used. |
-| Signing in says "too many failed sign-ins"                                                                         | Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see [How EiN slows down password guessing](#how-ein-slows-down-password-guessing).                                                   |
-| After a change to **HTTP port** or **SSH port** on **Settings → System**, the web interface or SSH does not answer | Reset the setting through the one that still answers: on the **System** tab, or with `config unset CFG_HTTP_PORT` (or `CFG_SSH_PORT`) in EiN's terminal or over SSH. Then restart EiN with `podman compose restart ein` in `~/ein`.                         |
-| A share link does not open for the person you sent it to                                                           | It begins with the address you had open. Open EiN at its public address and make the link again; see [Sharing](../guide/sharing.md).                                                                                                                        |
-| `setup.sh` ends with "EiN did not answer at http://127.0.0.1:…"                                                    | When `EIN_BIND` is an address other than `0.0.0.0` or `127.0.0.1`, this is expected and EiN is running: open it at that address. Otherwise read `podman compose logs ein`; see [Troubleshooting](troubleshooting.md).                                       |
+| What you see                                                                              | What to do                                                                                                                                                                                                                                                  |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| EiN opens on the machine itself but not from another computer                             | Open the ports in the machine's firewall, and check that `EIN_BIND` is `0.0.0.0`. Try the machine's IP address instead of a name ending in `.local`.                                                                                                        |
+| `compose up` fails because the address or port is already in use                          | Another program has the port. Choose another `EIN_HTTP_PORT` or `EIN_SSH_PORT` in `.env`, or stop that program.                                                                                                                                             |
+| Behind the proxy, the page frame loads but stays empty, and the terminal does not connect | The proxy does not pass WebSocket connections. Add the `Upgrade` and `Connection` headers (nginx) or check the proxy's WebSocket support.                                                                                                                   |
+| Uploads of large files fail behind the proxy, often with 413                              | The proxy limits the size of a request. In nginx, set `client_max_body_size 0;`.                                                                                                                                                                            |
+| The terminal or the interface reconnects every minute behind the proxy                    | The proxy closes idle connections. Raise its read timeout, such as `proxy_read_timeout 1h;` in nginx.                                                                                                                                                       |
+| Signing in works, but the next page asks you to sign in again                             | The browser uses plain `http://` while something in front of EiN sends `X-Forwarded-Proto: https`, so the cookie is marked `Secure` and the browser does not send it back. Open the `https://` address, or have the proxy send the scheme the browser used. |
+| Signing in says "too many failed sign-ins"                                                | Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see [How EiN slows down password guessing](#how-ein-slows-down-password-guessing).                                                   |
+| A share link does not open for the person you sent it to                                  | It begins with the address you had open. Open EiN at its public address and make the link again; see [Sharing](../guide/sharing.md).                                                                                                                        |
+| `setup.sh` ends with "EiN did not answer at http://127.0.0.1:…"                           | When `EIN_BIND` is an address other than `0.0.0.0` or `127.0.0.1`, this is expected and EiN is running: open it at that address. Otherwise read `podman compose logs ein`; see [Troubleshooting](troubleshooting.md).                                       |
 
 ## Related pages
 
@@ -246,5 +242,5 @@ The server's host key is made at EiN's first start and kept in the tree as `/etc
 - [SSH and SFTP](../shell/ssh-sftp.md): signing in with keys, file managers and `scp`.
 - [EiN on a phone](../guide/phone.md): what HTTPS gives a phone.
 - [Sharing](../guide/sharing.md): share links and who can open them.
-- [Settings](../reference/settings.md#cfg_http_port): the reference entries for the ports and every other setting.
+- [Environment variables](../reference/environment.md#set-by-the-system): `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container.
 - [Troubleshooting](troubleshooting.md): when EiN does not start or answer at all.

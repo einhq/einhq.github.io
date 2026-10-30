@@ -175,14 +175,10 @@
 <ul>
 <li>Only services that are running are restarted. A service you stopped stays stopped, and reads the new value when you start it. <a href="services-logs.html">Services and logs</a> shows how.</li>
 <li>If a restart fails, the value is still saved, and a red message says &quot;Could not restart&quot; with the service&#39;s name and the reason. The service keeps running on the old value until it starts again.</li>
-<li>The ports, <strong>HTTP port</strong> and <strong>SSH port</strong>, restart nothing: restarting the web server from a web page would drop the connection you are using. They take effect the next time EiN starts, and the page says so.</li>
 <li><strong>Worker backlog rotation (ms)</strong> is read by each pipeline worker as it starts, so the services that run one must be restarted by hand.</li>
 <li>Settings that are policy, such as the default sharing or <strong>Visitors may browse</strong>, are read each time they are applied, so they take effect at once and restart nothing.</li>
 <li>Some settings that name no service are read by the commands a pipeline runs, in the environment of the service that runs them, such as the Archive&#39;s <strong>Face match threshold</strong>. Nothing restarts for them: the service&#39;s shell reads the settings again before its next command, so they take effect from the next step it runs, such as the next picture it looks for faces in. A step already running finishes with the value it started with.</li>
 </ul>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>With the installer&#39;s setup, EiN listens on 8080 and 2222 inside its container, and the machine publishes those two. Changing <strong>HTTP port</strong> or <strong>SSH port</strong> on the Settings page moves EiN off them at its next start, and the web interface or SSH becomes unreachable. Change the published ports in <code>.env</code> instead, as <a href="network.html">Ports, HTTPS and remote access</a> describes.</p>
-</aside>
 <p>A terminal that is open when a setting changes reads the settings again before its next command, so <code>echo</code> shows the new value. A command already running keeps the value it started with.</p>
 <h2 id="change-settings-from-the-terminal">Change settings from the terminal<a class="anchor" href="#change-settings-from-the-terminal" aria-label="Link to this section"></a></h2>
 <p>The <code>config</code> command does everything the Settings page does. Everyone signed in can list and read settings, and change their own; only an administrator can change a system setting.</p>
@@ -194,7 +190,6 @@ config <span class="hljs-built_in">set</span> CFG_TRASH_RETENTION_DAYS 14
 config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS</code></pre></div>
 <p><code>config list</code> prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows <code>(set)</code> in place of its value, or nothing when it is not set. On an EiN with the Archive, the Assistant and the <code>ems</code> module installed, it starts like this:</p>
 <div class="code"><pre tabindex="0"><code>CFG_EMS_KEY	(set) (environment)
-CFG_HTTP_PORT	8080 (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
 CFG_LANGUAGE_MODEL	llm-chat (module assistant)
 CFG_SEARCH_PARSER	archive-parse (module archive)
@@ -281,7 +276,7 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
 <ul>
 <li><strong>A value set here wins over it.</strong> If the setting shows <strong>Set here</strong>, the line in <code>.env</code> has no visible effect. Choose <strong>Restore inherited value</strong>, or run <code>config unset</code>, to let it through.</li>
 <li><strong>A module&#39;s choice wins over it.</strong> An installed module may name commands for the <strong>Search</strong> settings: the Archive names <code>CFG_SEARCH_PARSER</code>, the Assistant <code>CFG_LANGUAGE_MODEL</code> and <code>CFG_COMMAND_FINDER</code>, and the <code>ems</code> module <code>CFG_TEXT_EMBEDDER</code>. To use another one, set it on the Settings page.</li>
-<li><strong>Some settings are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>, and the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. The Assistant&#39;s <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
+<li><strong>Some variables are fixed by the installation&#39;s <code>compose.yaml</code></strong>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code>, the ports EiN listens on inside its container, which are not settings, and the <code>ems</code> module&#39;s settings <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code>. A line for them in <code>.env</code> changes nothing. The published ports are <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> instead, and the media service&#39;s key is <code>EMS_KEY</code>, which goes to both sides. The Assistant&#39;s <code>CFG_LLM_URL</code> is read from <code>.env</code> and defaults to the language model the installer adds.</li>
 <li><strong>An empty line sets nothing.</strong> <code>CFG_LANGUAGE_MODEL=</code> in <code>.env</code> is the same as leaving the line out.</li>
 </ul>
 <p>The rest of <code>.env</code> is not settings but the installation&#39;s own variables: <code>EIN_DATA</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_MODULES</code>, <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_GPU</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_DB_DIR</code>, <code>EIN_ENGINE</code>, <code>COMPOSE_PROJECT_NAME</code>, <code>TZ</code> and the passwords. <a href="install.html">Installing in detail</a> explains each, and <a href="../reference/environment.html">Environment variables</a> lists every variable EiN reads besides its settings. With the media service installed, its settings are <code>EMS_…</code> lines in the same file; <a href="../ems/index.html">The media service</a> describes them.</p>
@@ -332,7 +327,7 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
 </tbody></table>
 </div>
 <p>A personal setting comes from <code>~/.config</code>, the deployment or its default: neither a module nor <code>/etc/config</code> sets it. A system setting is never read from anyone&#39;s <code>~/.config</code>.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 528" role="img" aria-label="Five layers stacked, the higher one winning: Your setting in ~/.config, from Profile → Preferences or config set; Set here in /etc/config, from Settings → System or config set, which restarts the services the setting names; From archive in /etc/config.d/archive, a module's own etc/config; From deployment in /etc/environment, the CFG_ lines of .env written again at each start; and Default, declared with the setting; beside them, a system setting reads every layer but Your setting and a personal one only Your setting, From deployment and Default; below, a key, CFG_…_KEY, comes from /etc/keys over the deployment's and is in no shell's environment, a .env change applies when the container is made again, and HTTP port and SSH port wait for EiN's next start">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 528" role="img" aria-label="Five layers stacked, the higher one winning: Your setting in ~/.config, from Profile → Preferences or config set; Set here in /etc/config, from Settings → System or config set, which restarts the services the setting names; From archive in /etc/config.d/archive, a module's own etc/config; From deployment in /etc/environment, the CFG_ lines of .env written again at each start; and Default, declared with the setting; beside them, a system setting reads every layer but Your setting and a personal one only Your setting, From deployment and Default; below, a key, CFG_…_KEY, comes from /etc/keys over the deployment's and is in no shell's environment, and a .env change applies when the container is made again">
   <title>Where a setting's value comes from</title>
   <defs>
     <marker id="admin-configuration-md-1-settings-layers-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -411,7 +406,7 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
   <line x1="732" y1="434" x2="748" y2="434" stroke="#7d8697" stroke-width="1.5" />
 
   <text x="60" y="496" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
-    fill="#7d8697">A .env change applies when the container is made again; HTTP port and SSH port wait for EiN's next start.</text>
+    fill="#7d8697">A .env change applies when the container is made again.</text>
 </svg><figcaption>The highest layer that sets a value wins, and each scope skips the layers that are not its own.</figcaption></figure>
 <p>Every shell in EiN, the services&#39; shells included, sources these files at its start, <code>/etc/environment</code> first and <code>~/.config</code> last, so each is exported over the one before. That is why every setting is an ordinary environment variable in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>

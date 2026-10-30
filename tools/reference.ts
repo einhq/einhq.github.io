@@ -229,7 +229,10 @@ const KINDS: Record<string, [string, string]> = {
     "Read once, from EiN's own environment, when it starts: `.env` in an installation made with the installer. No shell has them, and none is shown back, since `POSTGRES_URL` carries the database's password.",
   ],
   path: ['Folders in the tree', 'Where the tree keeps each kind of thing, exported for every shell, so `cd $LOGS_PATH` works wherever the folder lives.'],
-  system: ['Set by the system', 'What EiN exports for every shell at its start besides the folders: the built-in accounts and the host folders its storage is on.'],
+  system: [
+    'Set by the system',
+    'What EiN exports for every shell at its start besides the folders: the built-in accounts, the host folders its storage is on, and the ports the deployment gave it.',
+  ],
   session: ['Set for each shell', 'Set by the server that opened the shell: the web interface, the terminal panel or SSH.'],
   option: ['Options you set', 'Nobody sets these for you. Export one in a shell, or put it in front of a command, to change how commands behave there: `JSON_OUTPUT=1 ls`.'],
   pipeline: ['Set for a pipeline step', 'Set for each step of a pipeline by the change that started it.'],

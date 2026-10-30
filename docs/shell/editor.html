@@ -266,8 +266,8 @@ your text over theirs.</p>
 <td>One row up or down, keeping to the column you started from.</td>
 </tr>
 <tr>
-<td><kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>←</kbd> <kbd>Alt</kbd>+<kbd>→</kbd></td>
-<td>One word left or right. In the terminal panel only the <kbd>Ctrl</kbd> keys reach the editor.</td>
+<td><kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>←</kbd> <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>B</kbd> <kbd>Alt</kbd>+<kbd>F</kbd></td>
+<td>One word left or right. In the terminal panel <kbd>Alt</kbd> with an arrow switches tabs instead.</td>
 </tr>
 <tr>
 <td><kbd>Home</kbd> or <kbd>Ctrl</kbd>+<kbd>A</kbd></td>
@@ -332,11 +332,12 @@ as it is, without being indented again, and undoes in one step.</p>
 <h3 id="indentation">Indentation<a class="anchor" href="#indentation" aria-label="Link to this section"></a></h3>
 <p><kbd>Enter</kbd> starts the new line with the indent of the one before. A line left holding only
 spaces is emptied.</p>
-<p><kbd>Tab</kbd> inserts one step of the file&#39;s own indent:</p>
+<p><kbd>Tab</kbd> inserts one step of the indent the text has when you press it, so it follows what you
+paste or type:</p>
 <ul>
-<li>a tab, when the file indents mostly with tabs, and always in a Makefile;</li>
-<li>otherwise as many spaces as the smallest indent of two or more spaces the file has, at most 8;</li>
-<li>two spaces in a file with no indent yet.</li>
+<li>a tab, when the text indents mostly with tabs, and always in a Makefile;</li>
+<li>otherwise as many spaces as the smallest indent of two or more spaces the text has, at most 8;</li>
+<li>two spaces in a text with no indent yet.</li>
 </ul>
 <p><kbd>Shift</kbd>+<kbd>Tab</kbd> does nothing; take an indent away with <kbd>Backspace</kbd>. Tabs
 in the text reach the next stop of four columns, and other control characters as <code>^</code> and a letter.</p>
@@ -419,7 +420,9 @@ in the text reach the next stop of four columns, and other control characters as
 </div>
 <p>The status bar names the language at its right; a file that matches none is <code>text</code>. A file without
 an extension, such as <code>~/.bashrc</code>, is plain text unless its first line starts with <code>#!</code>. In a
-Markdown file, each fenced code block is coloured in the language its fence names. A text longer
+Markdown file, each fenced code block is coloured in the language its fence names; a <code>console</code> block
+is a session, with the <code>$</code> prompt dimmed, the command after it coloured as bash and the output left
+plain. A text longer
 than 262,144 characters (256 K) is shown without colours.</p>
 <p>Plain text and Markdown wrap at the edge of the window, at the last space that fits; a row that
 continues a line has no line number in front of it, and <kbd>↑</kbd> and <kbd>↓</kbd> move by
@@ -429,7 +432,8 @@ rows on the screen. Code does not wrap: a long line scrolls sideways to keep the
 <h2 id="checks-as-you-type">Checks as you type<a class="anchor" href="#checks-as-you-type" aria-label="Link to this section"></a></h2>
 <p><code>edit</code> checks a JSON, JSONC, YAML or bash file after each change. In a Markdown file it checks
 every fenced code block whose fence names one of those languages: <code>json</code>, <code>jsonc</code> or <code>json5</code>,
-<code>yaml</code> or <code>yml</code>, and <code>bash</code>, <code>sh</code>, <code>shell</code>, <code>zsh</code> or <code>console</code>, fenced with <code>```</code> or <code>~~~</code>.
+<code>yaml</code> or <code>yml</code>, and <code>bash</code>, <code>sh</code>, <code>shell</code> or <code>zsh</code>, fenced with <code>```</code> or <code>~~~</code>. A <code>console</code>
+block holds output as well as commands, so it is not checked.
 An error in a block is shown at its line in the whole document.</p>
 <div class="code" data-lang="markdown"><pre tabindex="0"><code>Hide the map for everyone:
 

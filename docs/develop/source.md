@@ -112,7 +112,7 @@ A bare `deno task dev` keeps its files beside the checkout, and reads every othe
 | `DOCS_PATH`               | `./guide`                               | The guide at `/usr/docs/guide`: the image's copy of this site, or a checkout of it. |
 | `LOG_LEVEL`               | `INFO`                                  | `DEBUG`, `INFO`, `WARN` or `ERROR`.                                                 |
 
-Any `CFG_…` variable in the environment is a setting, so `CFG_HTTP_PORT=8090 deno task dev` moves the web interface to port 8090. [Environment variables](../reference/environment.md#set-by-the-deployment) has every variable, and [Settings](../reference/settings.md) every setting.
+A setting can be given in the environment the same way, as `CFG_…`, and so can the ports, which are not settings: `CFG_HTTP_PORT=8090 deno task dev` moves the web interface to port 8090. [Environment variables](../reference/environment.md#set-by-the-deployment) has every variable, and [Settings](../reference/settings.md) every setting.
 
 ## Work on a module
 

@@ -328,11 +328,11 @@ under the mount point and stay on the other machine.
    ssh-copy-id -i ~/.ssh/nas.pub anna@nas.local
    ```
 
-2. Make the mount point, which must exist, and mount the folder on it:
+2. Mount the folder. A mount point that does not exist yet, such as `/mnt/nas`, is made as a
+   folder, with any folders above it:
 
    ```bash
    # in EiN's terminal, as the administrator
-   mkdir -p /mnt/nas
    mount --save /mnt/nas sftp "host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas"
    ```
 

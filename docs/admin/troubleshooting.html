@@ -192,10 +192,6 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 <td>EiN answers on the machine itself, but not from another computer</td>
 <td>Open ports 8080 and 2222 in the machine&#39;s firewall, and try the machine&#39;s IP address instead of a name ending in <code>.local</code>. See <a href="network.html#open-the-ports-in-the-firewall">Open the ports in the firewall</a>.</td>
 </tr>
-<tr>
-<td>The web interface or SSH stopped answering after a change to <strong>HTTP port</strong> or <strong>SSH port</strong></td>
-<td>Reset the setting through whichever still answers, with <code>config unset CFG_HTTP_PORT</code> or <code>config unset CFG_SSH_PORT</code>, then <code>podman compose restart ein</code>. Ports are changed in <code>.env</code>; see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
-</tr>
 </tbody></table>
 </div>
 <p>A container that keeps starting over without a clear message in its log may be running out of memory: each has a limit, 6 GB for EiN unless <code>EIN_MEMORY</code> in <code>.env</code> sets another. The machine&#39;s kernel log records a container stopped for that reason (<code>journalctl -k | grep -i oom</code> on most systems). <a href="performance.html">Performance and sizing</a> says how to raise the limits.</p>

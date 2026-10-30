@@ -66,7 +66,7 @@ Where the tree keeps each kind of thing, exported for every shell, so `cd $LOGS_
 
 ## Set by the system
 
-What EiN exports for every shell at its start besides the folders: the built-in accounts and the host folders its storage is on.
+What EiN exports for every shell at its start besides the folders: the built-in accounts, the host folders its storage is on, and the ports the deployment gave it.
 
 | Variable | Default | What it is |
 | --- | --- | --- |
@@ -81,6 +81,8 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 | `GUEST_GID` |  | Its group's id. |
 | `USERS_GROUPNAME` |  | The group every account belongs to: what "everyone" means when sharing. |
 | `USERS_GID` |  | Its id. |
+| `CFG_HTTP_PORT` | `8080` | The port the web interface listens on, as the deployment set it, which the http-server service reads at its start. In the installer's container it is always 8080: the machine publishes EIN_HTTP_PORT from .env onto it. It is not a setting, since only the deployment knows which port reaches it. |
+| `CFG_SSH_PORT` | `2222` | The port the SSH and SFTP server listens on, as the deployment set it, which the ssh-server service reads at its start. In the installer's container it is always 2222: the machine publishes EIN_SSH_PORT from .env onto it. |
 | `EIN_PATH_EXPORTS` |  | The layout variables as export lines, written into /etc/layout at boot. |
 | `EIN_FILE_ROOT_PATH` |  | Where file content is stored on the host, as FILE_ROOT_PATH gave it: what the dashboard reports disk use for. |
 | `EIN_VOLATILE_FILE_ROOT_PATH` |  | The same for content that can be made again. |

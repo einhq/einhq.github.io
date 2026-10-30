@@ -151,15 +151,12 @@ podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</sp
 <li><p>Open EiN at the new address, such as <code>http://ein.local:8443/</code> after <code>EIN_HTTP_PORT=8443</code>.</p>
 </li>
 </ol>
-<p>Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them.</p>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Leave the settings <strong>HTTP port</strong> and <strong>SSH port</strong> (<code>CFG_HTTP_PORT</code>, <code>CFG_SSH_PORT</code>) on <strong>Settings → System</strong>, in the <strong>Network</strong> group, as they are. They set the ports EiN listens on inside its container, and the machine forwards only 8080 and 2222 to it: a change there makes the web interface or SSH unreachable at the next start. Change <code>.env</code> instead.</p>
-</aside>
+<p>Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them. The ports are not settings, so nothing on the Settings page can move EiN off them.</p>
 <p>A few things to know:</p>
 <ul>
 <li><strong>Ports below 1024</strong>, such as 80 or 443, cannot be published by rootless podman unless the machine allows it (the kernel setting <code>net.ipv4.ip_unprivileged_port_start</code>). Use a port above 1024, or let an HTTPS proxy take 443.</li>
 <li><strong><code>EIN_BIND</code> takes one address.</strong> With an address other than <code>0.0.0.0</code> or <code>127.0.0.1</code>, such as the machine&#39;s LAN address, EiN runs normally, but <code>setup.sh</code> waits for it at <code>127.0.0.1</code>, does not find it, and ends with &quot;EiN did not answer&quot; after ten minutes.</li>
-<li><strong>The built-in guide</strong> shows SSH commands with port 2222 even when <code>EIN_SSH_PORT</code> maps another port, since that is the port EiN listens on. Tell your family the port you chose.</li>
+<li><strong>The documentation</strong>, here and on EiN&#39;s <strong>Docs</strong> page, shows SSH commands with port 2222 whatever <code>EIN_SSH_PORT</code> maps. Tell your family the port you chose.</li>
 </ul>
 <h2 id="open-the-ports-in-the-firewall">Open the ports in the firewall<a class="anchor" href="#open-the-ports-in-the-firewall" aria-label="Link to this section"></a></h2>
 <p>When another computer on the network cannot open EiN while the machine itself can, the machine&#39;s firewall is the usual cause. Open the two ports there:</p>
@@ -356,10 +353,6 @@ sftp -P 2222 helen@ein.wrenfield.example</code></pre></div>
 <td>Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see <a href="#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a>.</td>
 </tr>
 <tr>
-<td>After a change to <strong>HTTP port</strong> or <strong>SSH port</strong> on <strong>Settings → System</strong>, the web interface or SSH does not answer</td>
-<td>Reset the setting through the one that still answers: on the <strong>System</strong> tab, or with <code>config unset CFG_HTTP_PORT</code> (or <code>CFG_SSH_PORT</code>) in EiN&#39;s terminal or over SSH. Then restart EiN with <code>podman compose restart ein</code> in <code>~/ein</code>.</td>
-</tr>
-<tr>
 <td>A share link does not open for the person you sent it to</td>
 <td>It begins with the address you had open. Open EiN at its public address and make the link again; see <a href="../guide/sharing.html">Sharing</a>.</td>
 </tr>
@@ -376,7 +369,7 @@ sftp -P 2222 helen@ein.wrenfield.example</code></pre></div>
 <li><a href="../shell/ssh-sftp.html">SSH and SFTP</a>: signing in with keys, file managers and <code>scp</code>.</li>
 <li><a href="../guide/phone.html">EiN on a phone</a>: what HTTPS gives a phone.</li>
 <li><a href="../guide/sharing.html">Sharing</a>: share links and who can open them.</li>
-<li><a href="../reference/settings.html#cfg_http_port">Settings</a>: the reference entries for the ports and every other setting.</li>
+<li><a href="../reference/environment.html#set-by-the-system">Environment variables</a>: <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code>, the ports EiN listens on inside its container.</li>
 <li><a href="troubleshooting.html">Troubleshooting</a>: when EiN does not start or answer at all.</li>
 </ul>
 

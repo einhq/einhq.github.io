@@ -140,27 +140,27 @@ your text over theirs.
 
 ## Keys
 
-| Keys                                                                                                               | What they do                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd>                                                       | Save. With a syntax error in the text, asks first.                                                                                    |
-| <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd>                                                       | Leave. With unsaved changes, asks first.                                                                                              |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                                                                                       | Find. The question starts with the last search; <kbd>Enter</kbd> goes to the next match.                                              |
-| <kbd>Ctrl</kbd>+<kbd>G</kbd>                                                                                       | Go to a line, or to `line:column`.                                                                                                    |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>                                                        | Undo / redo.                                                                                                                          |
-| <kbd>Ctrl</kbd>+<kbd>K</kbd>                                                                                       | Cut the cursor's line. Lines cut one after another collect into one cut.                                                              |
-| <kbd>Ctrl</kbd>+<kbd>U</kbd>                                                                                       | Paste what was cut, at the cursor.                                                                                                    |
-| <kbd>←</kbd> <kbd>→</kbd>                                                                                          | One character left or right, on to the next or previous line at a line's end.                                                         |
-| <kbd>↑</kbd> <kbd>↓</kbd>                                                                                          | One row up or down, keeping to the column you started from.                                                                           |
-| <kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>←</kbd> <kbd>Alt</kbd>+<kbd>→</kbd> | One word left or right. In the terminal panel only the <kbd>Ctrl</kbd> keys reach the editor.                                         |
-| <kbd>Home</kbd> or <kbd>Ctrl</kbd>+<kbd>A</kbd>                                                                    | To the first character of the line that is not a space; pressed again, to the very start. On a wrapped row, to the start of that row. |
-| <kbd>End</kbd> or <kbd>Ctrl</kbd>+<kbd>E</kbd>                                                                     | To the end of the line. On a wrapped row, to the end of that row.                                                                     |
-| <kbd>Ctrl</kbd>+<kbd>Home</kbd> / <kbd>Ctrl</kbd>+<kbd>End</kbd>                                                   | To the start / end of the file.                                                                                                       |
-| <kbd>PgUp</kbd> / <kbd>PgDn</kbd>                                                                                  | A screen up / down.                                                                                                                   |
-| <kbd>Enter</kbd>                                                                                                   | A new line, indented as the line it came from.                                                                                        |
-| <kbd>Tab</kbd>                                                                                                     | Indent. See [Indentation](#indentation).                                                                                              |
-| <kbd>Backspace</kbd> / <kbd>Delete</kbd>                                                                           | Delete the character before / after the cursor. At the start or end of a line, join it with the line before or after.                 |
-| <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>                                                                     | Cancel a question: find, go to a line, save with errors, save changes.                                                                |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd> with no question open                                                                 | Shows `^Q quits`.                                                                                                                     |
+| Keys                                                                                                                                                                        | What they do                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Ctrl</kbd>+<kbd>O</kbd>                                                                                                                | Save. With a syntax error in the text, asks first.                                                                                    |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>X</kbd>                                                                                                                | Leave. With unsaved changes, asks first.                                                                                              |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                                                                                                                                                | Find. The question starts with the last search; <kbd>Enter</kbd> goes to the next match.                                              |
+| <kbd>Ctrl</kbd>+<kbd>G</kbd>                                                                                                                                                | Go to a line, or to `line:column`.                                                                                                    |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>                                                                                                                 | Undo / redo.                                                                                                                          |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd>                                                                                                                                                | Cut the cursor's line. Lines cut one after another collect into one cut.                                                              |
+| <kbd>Ctrl</kbd>+<kbd>U</kbd>                                                                                                                                                | Paste what was cut, at the cursor.                                                                                                    |
+| <kbd>←</kbd> <kbd>→</kbd>                                                                                                                                                   | One character left or right, on to the next or previous line at a line's end.                                                         |
+| <kbd>↑</kbd> <kbd>↓</kbd>                                                                                                                                                   | One row up or down, keeping to the column you started from.                                                                           |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>←</kbd> <kbd>Alt</kbd>+<kbd>→</kbd>, <kbd>Alt</kbd>+<kbd>B</kbd> <kbd>Alt</kbd>+<kbd>F</kbd> | One word left or right. In the terminal panel <kbd>Alt</kbd> with an arrow switches tabs instead.                                     |
+| <kbd>Home</kbd> or <kbd>Ctrl</kbd>+<kbd>A</kbd>                                                                                                                             | To the first character of the line that is not a space; pressed again, to the very start. On a wrapped row, to the start of that row. |
+| <kbd>End</kbd> or <kbd>Ctrl</kbd>+<kbd>E</kbd>                                                                                                                              | To the end of the line. On a wrapped row, to the end of that row.                                                                     |
+| <kbd>Ctrl</kbd>+<kbd>Home</kbd> / <kbd>Ctrl</kbd>+<kbd>End</kbd>                                                                                                            | To the start / end of the file.                                                                                                       |
+| <kbd>PgUp</kbd> / <kbd>PgDn</kbd>                                                                                                                                           | A screen up / down.                                                                                                                   |
+| <kbd>Enter</kbd>                                                                                                                                                            | A new line, indented as the line it came from.                                                                                        |
+| <kbd>Tab</kbd>                                                                                                                                                              | Indent. See [Indentation](#indentation).                                                                                              |
+| <kbd>Backspace</kbd> / <kbd>Delete</kbd>                                                                                                                                    | Delete the character before / after the cursor. At the start or end of a line, join it with the line before or after.                 |
+| <kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>                                                                                                                              | Cancel a question: find, go to a line, save with errors, save changes.                                                                |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd> with no question open                                                                                                                          | Shows `^Q quits`.                                                                                                                     |
 
 On a Mac, too, the keys are <kbd>Ctrl</kbd>, not <kbd>⌘</kbd>.
 
@@ -195,11 +195,12 @@ as it is, without being indented again, and undoes in one step.
 <kbd>Enter</kbd> starts the new line with the indent of the one before. A line left holding only
 spaces is emptied.
 
-<kbd>Tab</kbd> inserts one step of the file's own indent:
+<kbd>Tab</kbd> inserts one step of the indent the text has when you press it, so it follows what you
+paste or type:
 
-- a tab, when the file indents mostly with tabs, and always in a Makefile;
-- otherwise as many spaces as the smallest indent of two or more spaces the file has, at most 8;
-- two spaces in a file with no indent yet.
+- a tab, when the text indents mostly with tabs, and always in a Makefile;
+- otherwise as many spaces as the smallest indent of two or more spaces the text has, at most 8;
+- two spaces in a text with no indent yet.
 
 <kbd>Shift</kbd>+<kbd>Tab</kbd> does nothing; take an indent away with <kbd>Backspace</kbd>. Tabs
 in the text reach the next stop of four columns, and other control characters as `^` and a letter.
@@ -229,7 +230,9 @@ in the text reach the next stop of four columns, and other control characters as
 
 The status bar names the language at its right; a file that matches none is `text`. A file without
 an extension, such as `~/.bashrc`, is plain text unless its first line starts with `#!`. In a
-Markdown file, each fenced code block is coloured in the language its fence names. A text longer
+Markdown file, each fenced code block is coloured in the language its fence names; a `console` block
+is a session, with the `$` prompt dimmed, the command after it coloured as bash and the output left
+plain. A text longer
 than 262,144 characters (256 K) is shown without colours.
 
 Plain text and Markdown wrap at the edge of the window, at the last space that fits; a row that
@@ -243,7 +246,8 @@ rows on the screen. Code does not wrap: a long line scrolls sideways to keep the
 
 `edit` checks a JSON, JSONC, YAML or bash file after each change. In a Markdown file it checks
 every fenced code block whose fence names one of those languages: `json`, `jsonc` or `json5`,
-`yaml` or `yml`, and `bash`, `sh`, `shell`, `zsh` or `console`, fenced with `` ``` `` or `~~~`.
+`yaml` or `yml`, and `bash`, `sh`, `shell` or `zsh`, fenced with `` ``` `` or `~~~`. A `console`
+block holds output as well as commands, so it is not checked.
 An error in a block is shown at its line in the whole document.
 
 ````markdown
