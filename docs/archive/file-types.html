@@ -116,7 +116,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 </tr>
 <tr>
 <td><a href="#documents">Documents</a></td>
-<td>PDF and plain text</td>
+<td>PDF, Word, OpenDocument and plain text</td>
 <td>the text, for search; the text of scanned pages too</td>
 </tr>
 <tr>
@@ -148,16 +148,19 @@ read only when you file it into an album.</p>
 <h2 id="how-ein-tells-what-a-file-is">How EiN tells what a file is<a class="anchor" href="#how-ein-tells-what-a-file-is" aria-label="Link to this section"></a></h2>
 <p>EiN looks at the first bytes of a file, not at its name. A JPEG photo named <code>IMG_0412.png</code> is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference whether the file came in with <strong>Import media</strong>, an upload into an album, or by dropping
-it on a page. A file copied in over <a href="../shell/ssh-sftp.html">SFTP</a> is the exception: when EiN knows
-its extension, such as <code>.png</code>, <code>.docx</code> or <code>.md</code>, the type that extension names is the one it keeps,
-and only a file with an extension EiN does not know is recognised by its first bytes.</p>
-<p>The name decides in two cases, because the bytes say too little:</p>
+difference whether the file came in with <strong>Import media</strong>, an upload into an album, by dropping it
+on a page, or over <a href="../shell/ssh-sftp.html">SFTP</a>. A program that copies a file over SFTP under a
+temporary name, such as <code>IMG_0412.jpg.filepart</code>, and renames it when it is done gets the type the
+final name gives.</p>
+<p>The name decides in three cases, because the bytes say too little:</p>
 <ul>
 <li><strong>Camera RAW files.</strong> Most RAW formats look like a TIFF picture from their first bytes, so EiN
 goes by the extension, such as <code>.NEF</code> or <code>.CR3</code>. Capital or small letters do not matter.</li>
 <li><strong>Sidecar files.</strong> A text file ending in <code>.json</code> is JSON data, and one ending in <code>.xmp</code> is an XMP
 sidecar, not a document to read.</li>
+<li><strong>Office files.</strong> Word, Excel and PowerPoint files, OpenDocument files and EPUB books begin like
+any zip file, and the old Word, Excel and PowerPoint formats (<code>.doc</code>, <code>.xls</code>, <code>.ppt</code>) all begin
+alike, so EiN goes by the extension, such as <code>.docx</code> or <code>.odt</code>.</li>
 </ul>
 <p>Once the media service has read a photo, video or recording, the type it reports is the one EiN
 keeps. To see what EiN made of a file, run <code>mime</code> in the terminal; see
@@ -298,7 +301,8 @@ about 2.5 seconds gets none.</li>
 </ul>
 <figure class="shot"><a href="../../assets/shots/recording@2x.webp"><img src="../../assets/shots/recording.webp" srcset="../../assets/shots/recording.webp 1x, ../../assets/shots/recording@2x.webp 2x" alt="The viewer on a recording called Voice 001.m4a: a waveform with the playhead near the start, the play controls under it, and the transcript beside it with the current line in bold" width="1440" height="640" loading="lazy" decoding="async"></a><figcaption>A recording&#39;s tile and player show a picture of its sound, and the transcript beside it is searchable.</figcaption></figure>
 <h2 id="documents">Documents<a class="anchor" href="#documents" aria-label="Link to this section"></a></h2>
-<p>EiN reads the text of PDF files and of plain text files, so that search finds a document by what it
+<p>EiN reads the text of PDF files, Word (<code>.docx</code>) and OpenDocument (<code>.odt</code>) files and plain text
+files, so that search finds a document by what it
 is about: a search for <code>Christmas letter</code> finds the family newsletter of 2019. See
 <a href="search.html#find-photos-videos-recordings-and-documents">Search and the finder</a>.</p>
 <ul>
@@ -306,28 +310,15 @@ is about: a search for <code>Christmas letter</code> finds the family newsletter
 is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
 way; the pages after that keep only the text they hold.</li>
 <li><strong>Plain text.</strong> Any file that is text, whatever its name: <code>.txt</code>, a Markdown note, an HTML page.
-An SVG drawing is text too, so EiN treats it as a document, not as a picture. Copied in over
-SFTP, a <code>.md</code> or <code>.html</code> file takes the type its name gives instead, and its text is not read.</li>
+An SVG drawing is text too, so EiN treats it as a document, not as a picture.</li>
+<li><strong>Word and OpenDocument.</strong> A <code>.docx</code> or <code>.odt</code> file.</li>
 </ul>
 <p>A document&#39;s text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.</p>
 <p>Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
 <strong>Download</strong> to open one on your device. The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a>
-also lists RTF files, but EiN does not read their text: search finds them by their file name only.
-An old Word (<code>.doc</code>) file is not recognised at all and is kept as one of the <a href="#other-files">other files</a>.</p>
-<h3 id="word-and-opendocument-files">Word and OpenDocument files<a class="anchor" href="#word-and-opendocument-files" aria-label="Link to this section"></a></h3>
-<p>The media service can read the text of Word (<code>.docx</code>) and OpenDocument (<code>.odt</code>) files, but EiN
-recognises a file by its first bytes, and these formats begin like any zip file. A <code>.docx</code> or
-<code>.odt</code> file you upload is therefore kept as a zip file (one copied in over SFTP keeps its type, and
-its text is read):</p>
-<ul>
-<li>its text is not read, so search finds it by its name only;</li>
-<li>in a staging category, it is expanded like any other zip, into the parts it is made of, and the
-file itself is removed.</li>
-</ul>
-<p>To keep such a document whole and findable, save it as a PDF before you bring it in. To keep the
-Word file itself, upload it straight into an album rather than into staging
-(<a href="albums.html#upload-straight-into-the-album">Upload straight into the album</a>).</p>
+also lists RTF files and old Word (<code>.doc</code>) files, but EiN does not read their text: search finds
+them by their file name only. To have their text read, save them as PDF or <code>.docx</code> first.</p>
 <h2 id="sidecar-files">Sidecar files<a class="anchor" href="#sidecar-files" aria-label="Link to this section"></a></h2>
 <p>A sidecar is a small file beside a picture that says things about it:</p>
 <ul>
@@ -351,7 +342,9 @@ device&#39;s page you can upload GPX files to its track directly. See
 ended: what it holds goes into the folder the zip lies in, and the zip is removed. Outside staging,
 for example uploaded into an album, a zip stays a zip.
 <a href="importing.html#zips-and-google-takeout-exports">Zips and Google Takeout exports</a> has the details.</p>
-<p>Only zip files are expanded. A <code>.tar</code>, <code>.7z</code> or <code>.rar</code> archive is kept as it is.</p>
+<p>Only zip files are expanded. A <code>.tar</code>, <code>.7z</code> or <code>.rar</code> archive is kept as it is, and so is an
+<a href="#how-ein-tells-what-a-file-is">office file</a> such as a <code>.docx</code>, <code>.xlsx</code> or <code>.odt</code>, though it is a
+zip inside.</p>
 <h2 id="other-files">Other files<a class="anchor" href="#other-files" aria-label="Link to this section"></a></h2>
 <p>Any other file is kept as it came, with its name and size, and nothing is made from it. In staging
 it counts among the category&#39;s <strong>Other files</strong>, and the <strong>Folder</strong> view of the <strong>Files</strong> tab lists
@@ -423,13 +416,8 @@ the viewer, and the file name at the top of its details panel, always give you t
 </tr>
 <tr>
 <td>A document is not found by its words</td>
-<td>It is still in staging, it is a format whose text EiN does not read, or it is a <code>.docx</code> or <code>.odt</code> kept as a zip.</td>
-<td>File it into an album. Save Word and OpenDocument files as PDF.</td>
-</tr>
-<tr>
-<td>A <code>.docx</code> file in staging turned into a folder of XML files</td>
-<td>It was expanded as a zip.</td>
-<td>Discard the parts, and bring the document in as a PDF or upload it straight into an album.</td>
+<td>It is still in staging, or it is a format whose text EiN does not read.</td>
+<td>File it into an album. Save an RTF or <code>.doc</code> file as PDF or <code>.docx</code>.</td>
 </tr>
 <tr>
 <td>A RAW file is shown as an ordinary picture with no RAW detail</td>
@@ -489,7 +477,7 @@ raw:     no</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/file-types.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-does-with-each-kind-of-file">What EiN does with each kind of file</a></li><li><a href="#how-ein-tells-what-a-file-is">How EiN tells what a file is</a></li><li><a href="#photos">Photos</a></li><li class="nested"><a href="#camera-raw">Camera RAW</a></li><li><a href="#videos">Videos</a></li><li><a href="#recordings">Recordings</a></li><li><a href="#documents">Documents</a></li><li class="nested"><a href="#word-and-opendocument-files">Word and OpenDocument files</a></li><li><a href="#sidecar-files">Sidecar files</a></li><li><a href="#gps-tracks">GPS tracks</a></li><li><a href="#zip-files">Zip files</a></li><li><a href="#other-files">Other files</a></li><li><a href="#your-originals-stay-as-they-are">Your originals stay as they are</a></li><li><a href="#when-a-file-does-not-show-up-as-expected">When a file does not show up as expected</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-does-with-each-kind-of-file">What EiN does with each kind of file</a></li><li><a href="#how-ein-tells-what-a-file-is">How EiN tells what a file is</a></li><li><a href="#photos">Photos</a></li><li class="nested"><a href="#camera-raw">Camera RAW</a></li><li><a href="#videos">Videos</a></li><li><a href="#recordings">Recordings</a></li><li><a href="#documents">Documents</a></li><li><a href="#sidecar-files">Sidecar files</a></li><li><a href="#gps-tracks">GPS tracks</a></li><li><a href="#zip-files">Zip files</a></li><li><a href="#other-files">Other files</a></li><li><a href="#your-originals-stay-as-they-are">Your originals stay as they are</a></li><li><a href="#when-a-file-does-not-show-up-as-expected">When a file does not show up as expected</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

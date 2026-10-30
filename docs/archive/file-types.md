@@ -12,7 +12,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 | [Photos](#photos)               | JPEG, HEIC, PNG, TIFF, WebP, AVIF, GIF, BMP, camera RAW    | date, place, camera, thumbnails, faces, text in the picture, what it shows, look-alikes                             |
 | [Videos](#videos)               | MP4, MOV, M4V, MTS and M2TS, MPG, AVI, MKV, WebM, 3GP, FLV | date, place, camera, a playable version, a preview clip, chapters, faces, what is said and who says it, look-alikes |
 | [Recordings](#recordings)       | M4A, MP3, WAV, FLAC, Ogg and Opus, AMR                     | date, a playable version, a picture of the sound, what is said and who says it, the same recording twice            |
-| [Documents](#documents)         | PDF and plain text                                         | the text, for search; the text of scanned pages too                                                                 |
+| [Documents](#documents)         | PDF, Word, OpenDocument and plain text                     | the text, for search; the text of scanned pages too                                                                 |
 | [Sidecar files](#sidecar-files) | Google Takeout JSON, XMP                                   | nothing of their own: they give their picture its date, place and caption                                           |
 | [GPS tracks](#gps-tracks)       | GPX                                                        | the route, added to the track of the device that recorded it                                                        |
 | [Zip files](#zip-files)         | ZIP                                                        | in staging, expanded into the files it holds                                                                        |
@@ -27,17 +27,20 @@ read only when you file it into an album.
 
 EiN looks at the first bytes of a file, not at its name. A JPEG photo named `IMG_0412.png` is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference whether the file came in with **Import media**, an upload into an album, or by dropping
-it on a page. A file copied in over [SFTP](../shell/ssh-sftp.md) is the exception: when EiN knows
-its extension, such as `.png`, `.docx` or `.md`, the type that extension names is the one it keeps,
-and only a file with an extension EiN does not know is recognised by its first bytes.
+difference whether the file came in with **Import media**, an upload into an album, by dropping it
+on a page, or over [SFTP](../shell/ssh-sftp.md). A program that copies a file over SFTP under a
+temporary name, such as `IMG_0412.jpg.filepart`, and renames it when it is done gets the type the
+final name gives.
 
-The name decides in two cases, because the bytes say too little:
+The name decides in three cases, because the bytes say too little:
 
 - **Camera RAW files.** Most RAW formats look like a TIFF picture from their first bytes, so EiN
   goes by the extension, such as `.NEF` or `.CR3`. Capital or small letters do not matter.
 - **Sidecar files.** A text file ending in `.json` is JSON data, and one ending in `.xmp` is an XMP
   sidecar, not a document to read.
+- **Office files.** Word, Excel and PowerPoint files, OpenDocument files and EPUB books begin like
+  any zip file, and the old Word, Excel and PowerPoint formats (`.doc`, `.xls`, `.ppt`) all begin
+  alike, so EiN goes by the extension, such as `.docx` or `.odt`.
 
 Once the media service has read a photo, video or recording, the type it reports is the one EiN
 keeps. To see what EiN made of a file, run `mime` in the terminal; see
@@ -138,7 +141,8 @@ For each recording, EiN:
 
 ## Documents
 
-EiN reads the text of PDF files and of plain text files, so that search finds a document by what it
+EiN reads the text of PDF files, Word (`.docx`) and OpenDocument (`.odt`) files and plain text
+files, so that search finds a document by what it
 is about: a search for `Christmas letter` finds the family newsletter of 2019. See
 [Search and the finder](search.md#find-photos-videos-recordings-and-documents).
 
@@ -146,31 +150,16 @@ is about: a search for `Christmas letter` finds the family newsletter of 2019. S
   is read as a picture instead, handwriting included. At most 40 pages of one PDF are read this
   way; the pages after that keep only the text they hold.
 - **Plain text.** Any file that is text, whatever its name: `.txt`, a Markdown note, an HTML page.
-  An SVG drawing is text too, so EiN treats it as a document, not as a picture. Copied in over
-  SFTP, a `.md` or `.html` file takes the type its name gives instead, and its text is not read.
+  An SVG drawing is text too, so EiN treats it as a document, not as a picture.
+- **Word and OpenDocument.** A `.docx` or `.odt` file.
 
 A document's text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.
 
 Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
 **Download** to open one on your device. The **Documents** choice on the [Media page](media.md#show-one-kind-of-file)
-also lists RTF files, but EiN does not read their text: search finds them by their file name only.
-An old Word (`.doc`) file is not recognised at all and is kept as one of the [other files](#other-files).
-
-### Word and OpenDocument files
-
-The media service can read the text of Word (`.docx`) and OpenDocument (`.odt`) files, but EiN
-recognises a file by its first bytes, and these formats begin like any zip file. A `.docx` or
-`.odt` file you upload is therefore kept as a zip file (one copied in over SFTP keeps its type, and
-its text is read):
-
-- its text is not read, so search finds it by its name only;
-- in a staging category, it is expanded like any other zip, into the parts it is made of, and the
-  file itself is removed.
-
-To keep such a document whole and findable, save it as a PDF before you bring it in. To keep the
-Word file itself, upload it straight into an album rather than into staging
-([Upload straight into the album](albums.md#upload-straight-into-the-album)).
+also lists RTF files and old Word (`.doc`) files, but EiN does not read their text: search finds
+them by their file name only. To have their text read, save them as PDF or `.docx` first.
 
 ## Sidecar files
 
@@ -201,7 +190,9 @@ ended: what it holds goes into the folder the zip lies in, and the zip is remove
 for example uploaded into an album, a zip stays a zip.
 [Zips and Google Takeout exports](importing.md#zips-and-google-takeout-exports) has the details.
 
-Only zip files are expanded. A `.tar`, `.7z` or `.rar` archive is kept as it is.
+Only zip files are expanded. A `.tar`, `.7z` or `.rar` archive is kept as it is, and so is an
+[office file](#how-ein-tells-what-a-file-is) such as a `.docx`, `.xlsx` or `.odt`, though it is a
+zip inside.
 
 ## Other files
 
@@ -239,8 +230,7 @@ the viewer, and the file name at the top of its details panel, always give you t
 | A file you uploaded into staging is counted under **Other files**                   | EiN did not recognise it as a picture, video or recording: a document, a sidecar, or a format from the table above. | Look at it in the **Folder** view of the **Files** tab. Convert an unrecognised media file and upload it again. |
 | A video or recording says "This file cannot be played"                              | The file is damaged: nothing can read it. The reason is under the message.                                          | **Download** it and check it on your own device.                                                                |
 | A video says "This browser or device cannot play AV1, the format this video is in." | The browser cannot play the format EiN makes playable videos in.                                                    | Use a current browser, or **Download** the original.                                                            |
-| A document is not found by its words                                                | It is still in staging, it is a format whose text EiN does not read, or it is a `.docx` or `.odt` kept as a zip.    | File it into an album. Save Word and OpenDocument files as PDF.                                                 |
-| A `.docx` file in staging turned into a folder of XML files                         | It was expanded as a zip.                                                                                           | Discard the parts, and bring the document in as a PDF or upload it straight into an album.                      |
+| A document is not found by its words                                                | It is still in staging, or it is a format whose text EiN does not read.                                             | File it into an album. Save an RTF or `.doc` file as PDF or `.docx`.                                            |
 | A RAW file is shown as an ordinary picture with no RAW detail                       | Its sensor data could not be read, so it is shown from the preview inside it.                                       | Nothing is lost: the original is kept, and **Download** gives it to you.                                        |
 
 [Viewing photos, videos and recordings](viewer.md#when-something-is-not-as-expected) covers the
