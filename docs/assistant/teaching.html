@@ -189,7 +189,7 @@ assistant-commands find <span class="hljs-string">&#x27;find a recipe by ingredi
 </div>
 <p>How a spec becomes a tool:</p>
 <ul>
-<li>A positional argument is required unless its description contains &quot;optional&quot; or &quot;default&quot;, as in <code>day as MM-DD (default today)</code>. Say so in the description of every argument that may be left out.</li>
+<li>A positional argument is required unless the spec marks it <code>optional: true</code>. Mark every argument that may be left out, whatever its description says.</li>
 <li>An argument marked <code>variadic</code> becomes a list.</li>
 <li>A flag marked <code>repeatable</code> becomes a list, and each entry is passed as its own <code>--flag=value</code>. Use it where a user might name several things, such as two people in one search.</li>
 <li>When a short and a long flag have the same description, only the long one is offered.</li>
@@ -222,7 +222,7 @@ arg -b --born string <span class="hljs-string">&quot;Birth date (YYYY[-MM[-DD]])
 arg --example <span class="hljs-string">&quot;person-create /archive/people/Disa_Exempel --name &#x27;Disa Exempel&#x27; --born 2019-01-01&quot;</span>
 arg --returns <span class="hljs-string">&quot;nothing; the person node is created.&quot;</span>
 arg --<span class="hljs-built_in">export</span></code></pre></div>
-<p>An optional bash argument (<code>arg [&lt;name&gt;] type = default &quot;desc&quot;</code>) needs the word &quot;optional&quot; or &quot;default&quot; in its description too, or the model is told it is required.</p>
+<p>An optional bash argument (<code>arg [&lt;name&gt;] type = default &quot;desc&quot;</code>) is marked <code>optional: true</code> in the spec <code>arg</code> writes, so the model is not told to give one.</p>
 <p>Check what the model will read with the command&#39;s own help:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 JSON_OUTPUT=1 recipe-search --<span class="hljs-built_in">help</span></code></pre></div>
@@ -383,7 +383,7 @@ agent-eval --bucket write
 agent-eval --print-prompt</code></pre></div>
 <ul>
 <li><code>--verbose</code> prints a line per question as it finishes, such as <code>find-by-ingredient: reached recipe-search via recipe-search</code>.</li>
-<li><code>--print-prompt</code> prints the whole system message and every tool schema the model is given, and stops. It is the quickest way to see what your <code>prompt.md</code>, <code>tools</code> and <code>cards.json</code> turned into.</li>
+<li><code>--print-prompt</code> prints the whole system message, with the lines the chat adds about who is asking, their home folder and the system&#39;s language, and every tool schema the model is given, and stops. It is the quickest way to see what your <code>prompt.md</code>, <code>tools</code> and <code>cards.json</code> turned into.</li>
 <li><code>--fixtures=&lt;path&gt;</code> asks the questions of one file instead of every module&#39;s, and <code>--prompt=&lt;path&gt;</code> tries another prompt file without replacing the installed one.</li>
 <li><code>--user=&lt;path&gt;</code> asks as another person, by the path of their node.</li>
 </ul>

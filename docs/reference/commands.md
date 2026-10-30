@@ -40,7 +40,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [completion](commands-core.md#completion) | Spec-driven completion helpers. |
 | [completion-arg](commands-core.md#completion-arg) | Autocomplete a command argument. |
 | [completion-commands](commands-core.md#completion-commands) | Autocomplete a command name, without the subcommands of groups. |
-| [completion-entity](commands-core.md#completion-entity) | Complete a person, location, album, device or track by name. |
+| [completion-entity](commands-core.md#completion-entity) | Complete a person, location, album or device by name. |
 | [completion-group](commands-core.md#completion-group) | Autocomplete a group. |
 | [completion-path](commands-core.md#completion-path) | Autocomplete a path. |
 | [completion-subcommand](commands-core.md#completion-subcommand) | Autocomplete a command. |
@@ -215,7 +215,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [user-create](commands-core.md#user-create) | Create a user account and its home with its own group (an existing group of its name when that group's gid is free as a uid) and link it into its own and its other groups. |
 | [user-delete](commands-core.md#user-delete) | Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user. |
 | [user-disable](commands-core.md#user-disable) | Disable a user account and end its open sessions. |
-| [user-elevate](commands-core.md#user-elevate) | Make this sign-in an administrator's, for a member of the sudo group, after entering the password again. |
+| [user-elevate](commands-core.md#user-elevate) | Make this shell an administrator's, or with --session the whole sign-in, for a member of the sudo group, after entering the password again. |
 | [user-enable](commands-core.md#user-enable) | Enable a disabled user account. |
 | [user-exists](commands-core.md#user-exists) | Check if a user account exists. |
 | [user-groups](commands-core.md#user-groups) | List groups a user belongs to. |

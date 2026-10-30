@@ -446,12 +446,12 @@ List media taken on a given day (MM-DD, default today) in past years.
 <small>reads only</small>
 
 ```text
-dayinhistory [--years=<number>] [--per-year=<number>] <day>
+dayinhistory [--years=<number>] [--per-year=<number>] [<day>]
 ```
 
-| Argument | What it is                   |
-| -------- | ---------------------------- |
-| `<day>`  | day as MM-DD (default today) |
+| Argument  | What it is                   |
+| --------- | ---------------------------- |
+| `[<day>]` | day as MM-DD (default today) |
 
 | Option                | What it does                                          |
 | --------------------- | ----------------------------------------------------- |
@@ -1674,12 +1674,12 @@ Embed the extracted texts, transcripts and hand-written descriptions already sto
 <small>changes things</small>
 
 ```text
-media-reembed [-l <number>] [-f] [-v] <path>...
+media-reembed [-l <number>] [-f] [-v] [<path>...]
 ```
 
-| Argument    | What it is                                                          |
-| ----------- | ------------------------------------------------------------------- |
-| `<path>...` | files to embed the texts of (default: every text the archive holds) |
+| Argument      | What it is                                                          |
+| ------------- | ------------------------------------------------------------------- |
+| `[<path>...]` | files to embed the texts of (default: every text the archive holds) |
 
 | Option        | What it does                                                                                    |
 | ------------- | ----------------------------------------------------------------------------------------------- |
@@ -1866,12 +1866,12 @@ The years with pictures taken on a day (MM-DD, default today), as onthisday entr
 <small>reads only</small>
 
 ```text
-onthisday-media [--limit=<number>] <day>
+onthisday-media [--limit=<number>] [<day>]
 ```
 
-| Argument | What it is                        |
-| -------- | --------------------------------- |
-| `<day>`  | day as MM-DD (default today, UTC) |
+| Argument  | What it is                        |
+| --------- | --------------------------------- |
+| `[<day>]` | day as MM-DD (default today, UTC) |
 
 | Option             | What it does                             |
 | ------------------ | ---------------------------------------- |
@@ -1933,13 +1933,13 @@ Add an event (blob) to a person, album, location or device.
 <small>changes things</small>
 
 ```text
-person-add-event [--type=<string>] [--date=<string>] [--body=<string>] [--lat=<string>] [--lng=<string>] [--writer=<path>] <target> <name>
+person-add-event [--type=<string>] [--date=<string>] [--body=<string>] [--lat=<string>] [--lng=<string>] [--writer=<path>] <target> [<name>]
 ```
 
 | Argument   | What it is                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------------ |
 | `<target>` | VFS path to the person, album, location or device.                                         |
-| `<name>`   | optional event name (e.g. birth, wedding); without one, it is made from the type and date. |
+| `[<name>]` | optional event name (e.g. birth, wedding); without one, it is made from the type and date. |
 
 | Option            | What it does                                                                                       |
 | ----------------- | -------------------------------------------------------------------------------------------------- |

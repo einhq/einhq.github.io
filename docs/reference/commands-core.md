@@ -147,13 +147,13 @@ Strip directory and suffix from filenames.
 <small>reads only</small>
 
 ```text
-basename [-s <string>] [-a] [-z] <NAME> <SUFFIX>
+basename [-s <string>] [-a] [-z] <NAME> [<SUFFIX>]
 ```
 
 | Argument | What it is |
 | --- | --- |
 | `<NAME>` | the path to extract basename from. |
-| `<SUFFIX>` | optional suffix to remove. |
+| `[<SUFFIX>]` | optional suffix to remove. |
 
 | Option | What it does |
 | --- | --- |
@@ -170,12 +170,12 @@ Print nodes' contents, one after the other: a text file, a log (one JSON entry a
 <small>reads only</small>
 
 ```text
-cat [-s] [-l] [-t] [--timestamps] <path>...
+cat [-s] [-l] [-t] [--timestamps] [<path>...]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<path>...` | nodes to output, one after the other; without one, or for -, stdin is copied. |
+| `[<path>...]` | nodes to output, one after the other; without one, or for -, stdin is copied. |
 
 | Option | What it does |
 | --- | --- |
@@ -304,7 +304,7 @@ completion-commands [--word=<string>]
 
 ### `completion-entity`
 
-Complete a person, location, album, device or track by name.
+Complete a person, location, album or device by name.
 
 <small>reads only</small>
 
@@ -318,7 +318,7 @@ completion-entity [--kind=<string>] [--limit=<string>] <query>
 
 | Option | What it does |
 | --- | --- |
-| `--kind=<string>` | restrict to these kinds, comma-separated: whichever the installed modules declare (person, location, album, device, track) |
+| `--kind=<string>` | restrict to these kinds, comma-separated: whichever the installed modules declare (person, location, album, device) |
 | `--limit=<string>` | maximum suggestions (default 8) |
 
 ### `completion-group`
@@ -684,12 +684,12 @@ Estimate file usage in node structures.
 <small>reads only</small>
 
 ```text
-du [-c] [-h] [-s] <path>
+du [-c] [-h] [-s] [<path>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<path>` | one or more structures to measure (default: .) |
+| `[<path>]` | one or more structures to measure (default: .) |
 
 | Option | What it does |
 | --- | --- |
@@ -829,12 +829,12 @@ Search for nodes under a path, as GNU find does: starting points, then an expres
 <small>reads only</small>
 
 ```text
-find [--name=<string>] [--iname=<string>] [--type=<string>] [--maxdepth=<string>] [--mindepth=<string>] <path>
+find [--name=<string>] [--iname=<string>] [--type=<string>] [--maxdepth=<string>] [--mindepth=<string>] [<path>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<path>` | starting point, printed itself at depth 0; several may be given (default: .) |
+| `[<path>]` | starting point, printed itself at depth 0; several may be given (default: .) |
 
 | Option | What it does |
 | --- | --- |
@@ -1017,7 +1017,7 @@ group-create [--gid=<string>] [--title=<string>] [--description=<string>] <group
 
 | Argument | What it is |
 | --- | --- |
-| `<groupname>` | name of the group to create: letters, digits and . _ - @, starting with a letter or _. |
+| `<groupname>` | name of the group to create: lower-case letters, digits and . _ -, starting with a letter or _. |
 
 | Option | What it does |
 | --- | --- |
@@ -1314,12 +1314,12 @@ List labels (all, or of a node); search --tag <label> finds what carries one.
 <small>reads only</small>
 
 ```text
-labels <path>
+labels [<path>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<path>` | node path (optional) |
+| `[<path>]` | node path (optional) |
 
 ```bash
 labels
@@ -1381,13 +1381,13 @@ Authenticate as a user.
 <small>visitors too · changes things</small>
 
 ```text
-login [--session] <username> <password>
+login [--session] <username> [<password>]
 ```
 
 | Argument | What it is |
 | --- | --- |
 | `<username>` | user to login: a username, or the e-mail address of an account. |
-| `<password>` | password (optional, prompts if not provided) |
+| `[<password>]` | password (optional, prompts if not provided) |
 
 | Option | What it does |
 | --- | --- |
@@ -1414,12 +1414,12 @@ List directory contents.
 <small>reads only</small>
 
 ```text
-ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=<string>] [--after=<string>] <path>...
+ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=<string>] [--after=<string>] [<path>...]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<path>...` | paths to list, each under its own header when there are several. |
+| `[<path>...]` | paths to list, each under its own header when there are several. |
 
 | Option | What it does |
 | --- | --- |
@@ -1810,7 +1810,7 @@ mount [--save] [-a] <path> <type> <options>
 
 | Argument | What it is |
 | --- | --- |
-| `<path>` | mount point. |
+| `<path>` | mount point, made as a directory when it is missing. |
 | `<type>` | type: memory, pg, filesystem, command, sftp. |
 | `<options>` | k=v,... — any: readonly, noaudit (paths, separated by `:`, whose writes the audit trail skips); sftp: host, port, user, path, key (identity file), hostkey (SHA256:… to pin), uid, gid. |
 
@@ -1899,12 +1899,12 @@ What the archive has from a calendar day (MM-DD, default today) in earlier years
 <small>reads only</small>
 
 ```text
-onthisday [--limit=<number>] <day>
+onthisday [--limit=<number>] [<day>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<day>` | day as MM-DD (default today, UTC) |
+| `[<day>]` | day as MM-DD (default today, UTC) |
 
 | Option | What it does |
 | --- | --- |
@@ -2010,12 +2010,12 @@ List pipeline instances — running, failed or completed — newest first.
 <small>reads only</small>
 
 ```text
-pipeline-instances [-s <string>] [--limit=<string>] [--after=<string>] <name>
+pipeline-instances [-s <string>] [--limit=<string>] [--after=<string>] [<name>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<name>` | Pipeline name (optional, repeatable) |
+| `[<name>]` | Pipeline name (optional, repeatable) |
 
 | Option | What it does |
 | --- | --- |
@@ -2685,12 +2685,12 @@ Faceted search over content: text, time, region, kind, tags, subjects (people, l
 <small>reads only</small>
 
 ```text
-search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] <query>
+search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<query>` | search query text (optional) |
+| `[<query>]` | search query text (optional) |
 
 | Option | What it does |
 | --- | --- |
@@ -3564,7 +3564,7 @@ user-disable <username>
 
 ### `user-elevate`
 
-Make this sign-in an administrator's, for a member of the sudo group, after entering the password again.
+Make this shell an administrator's, or with --session the whole sign-in, for a member of the sudo group, after entering the password again.
 
 <small>changes things</small>
 
@@ -3576,7 +3576,7 @@ user-elevate [--password=<string>] [--session] [--off]
 | --- | --- |
 | `--password=<string>` | your own password (prompts if not given); --password=<value> for one starting with a dash. |
 | `--session` | the session's sign-in, every page and terminal of it, not just this shell's. |
-| `--off` | make the sign-in no longer an administrator's. |
+| `--off` | make the shell, or with --session the sign-in, no longer an administrator's. |
 
 ### `user-enable`
 
@@ -3680,7 +3680,7 @@ user-passwd [--username=<user>] [--old-password=<string>] [--new-password=<strin
 | Option | What it does |
 | --- | --- |
 | `--username=<user>` | username (alternative to positional) |
-| `--old-password=<string>` | current password (required for non-admin) |
+| `--old-password=<string>` | current password: required but for an administrator, and checked whenever given. |
 | `--new-password=<string>` | new password to set. |
 
 ### `user-resolve`
@@ -3728,7 +3728,7 @@ user-update [--name=<string>] [--email=<string>] [--description=<string>] <usern
 
 | Option | What it does |
 | --- | --- |
-| `--name=<string>` | set display name. |
+| `--name=<string>` | set the display name, which cannot be empty. |
 | `--email=<string>` | set the e-mail address, which signs in like the username; empty to remove it. |
 | `--description=<string>` | set description. |
 
@@ -3821,12 +3821,12 @@ Run a command with the items read from stdin as its arguments, as GNU xargs does
 <small>reads only</small>
 
 ```text
-xargs [--null] [-0] [--delimiter=<string>] [-d <string>] [--max-args=<string>] [-n <string>] [--max-lines=<string>] [-L <string>] [--max-chars=<string>] [-s <string>] [--replace=<string>] [-I <string>] [--eof=<string>] [-E <string>] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=<path>] [-a <path>] <command>...
+xargs [--null] [-0] [--delimiter=<string>] [-d <string>] [--max-args=<string>] [-n <string>] [--max-lines=<string>] [-L <string>] [--max-chars=<string>] [-s <string>] [--replace=<string>] [-I <string>] [--eof=<string>] [-E <string>] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=<path>] [-a <path>] [<command>...]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<command>...` | the command to run and its first arguments; the items follow them (default: echo) |
+| `[<command>...]` | the command to run and its first arguments; the items follow them (default: echo) |
 
 | Option | What it does |
 | --- | --- |

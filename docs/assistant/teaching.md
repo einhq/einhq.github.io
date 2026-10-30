@@ -83,7 +83,7 @@ A small model calls a command exactly as its spec describes it. Give every comma
 
 How a spec becomes a tool:
 
-- A positional argument is required unless its description contains "optional" or "default", as in `day as MM-DD (default today)`. Say so in the description of every argument that may be left out.
+- A positional argument is required unless the spec marks it `optional: true`. Mark every argument that may be left out, whatever its description says.
 - An argument marked `variadic` becomes a list.
 - A flag marked `repeatable` becomes a list, and each entry is passed as its own `--flag=value`. Use it where a user might name several things, such as two people in one search.
 - When a short and a long flag have the same description, only the long one is offered.
@@ -124,7 +124,7 @@ arg --returns "nothing; the person node is created."
 arg --export
 ```
 
-An optional bash argument (`arg [<name>] type = default "desc"`) needs the word "optional" or "default" in its description too, or the model is told it is required.
+An optional bash argument (`arg [<name>] type = default "desc"`) is marked `optional: true` in the spec `arg` writes, so the model is not told to give one.
 
 Check what the model will read with the command's own help:
 
@@ -277,7 +277,7 @@ agent-eval --print-prompt
 ```
 
 - `--verbose` prints a line per question as it finishes, such as `find-by-ingredient: reached recipe-search via recipe-search`.
-- `--print-prompt` prints the whole system message and every tool schema the model is given, and stops. It is the quickest way to see what your `prompt.md`, `tools` and `cards.json` turned into.
+- `--print-prompt` prints the whole system message, with the lines the chat adds about who is asking, their home folder and the system's language, and every tool schema the model is given, and stops. It is the quickest way to see what your `prompt.md`, `tools` and `cards.json` turned into.
 - `--fixtures=<path>` asks the questions of one file instead of every module's, and `--prompt=<path>` tries another prompt file without replacing the installed one.
 - `--user=<path>` asks as another person, by the path of their node.
 

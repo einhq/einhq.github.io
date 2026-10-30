@@ -10,7 +10,7 @@ There are three places to open it, and they all show the same conversations.
 
 - **Chat** in the sidebar opens the Chat page, with your recent chats in a box beside the conversation.
 - The **Chat** button in the top bar (a speech bubble) opens the chat in the side drawer, beside the page you are on, so you can ask about that page. Choose the button again to close the drawer. The drawer's title, **Chat**, is a link (**Open as page**) that opens the same conversation as the full Chat page. On the Chat page itself there is no chat button.
-- In the viewer the top bar is covered, so the viewer has a **Chat** button of its own at the top right, next to the details button. The drawer then stays open beside the picture, with a **Close chat** button (×) of its own.
+- In the viewer the top bar is covered, so the viewer has a **Chat** button of its own at the top right, next to the details button. The drawer then stays open beside the picture, with a **Close chat** button (×) of its own. In a window narrower than 992 pixels there is no room beside the picture, and the button opens the chat as a dialog over it instead.
 
 On a phone the top bar's chat button opens the chat as a dialog that fills the screen; **Back** or the × closes it. In the viewer on a phone, open the menu at the top right and choose **Chat**. See [EiN on a phone](../guide/phone.md) for what else differs.
 
@@ -133,7 +133,7 @@ To decide:
 
 **Run** runs the script exactly as the card shows it, as you, as if you had typed it in the [terminal](../shell/terminal.md). Because of `set -e`, it stops at the first line that fails; take that line out if you want the rest to run regardless.
 
-The card then shows how it went: green **Done** with "· exit 0" and what the commands printed, red **Failed** with the exit code and the error, or **Dismissed** when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it is told not to propose the same change again. Pages open beside the chat show the change at once. A card can be run or declined only once.
+The card then shows how it went: green **Done** with "· exit 0" and what the commands printed, red **Failed** with the exit code and the error, or **Dismissed** when you declined. The assistant goes on by itself: it reads what happened and takes the next step, which may be another card, or gives its answer. After you decline, it does not propose the same change again in that answer; if you change your mind, ask for it in a new message. Pages open beside the chat show the change at once. A card can be run or declined only once.
 
 ### It runs as you
 

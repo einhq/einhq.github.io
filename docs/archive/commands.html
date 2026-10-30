@@ -830,7 +830,7 @@ auto-album-cluster /archive/albums/2019-lake --members --significance more</code
 <h3 id="dayinhistory"><code>dayinhistory</code><a class="anchor" href="#dayinhistory" aria-label="Link to this section"></a></h3>
 <p>List media taken on a given day (MM-DD, default today) in past years.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>dayinhistory [--years=&lt;number&gt;] [--per-year=&lt;number&gt;] &lt;day&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>dayinhistory [--years=&lt;number&gt;] [--per-year=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -839,7 +839,7 @@ auto-album-cluster /archive/albums/2019-lake --members --significance more</code
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;day&gt;</code></td>
+<td><code>[&lt;day&gt;]</code></td>
 <td>day as MM-DD (default today)</td>
 </tr>
 </tbody></table>
@@ -2764,7 +2764,7 @@ location-update /archive/locations/ekbacksvagen --clear description</code></pre>
 <h3 id="media-reembed"><code>media-reembed</code><a class="anchor" href="#media-reembed" aria-label="Link to this section"></a></h3>
 <p>Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>media-reembed [-l &lt;number&gt;] [-f] [-v] &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>media-reembed [-l &lt;number&gt;] [-f] [-v] [&lt;path&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2773,7 +2773,7 @@ location-update /archive/locations/ekbacksvagen --clear description</code></pre>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;...</code></td>
+<td><code>[&lt;path&gt;...]</code></td>
 <td>files to embed the texts of (default: every text the archive holds)</td>
 </tr>
 </tbody></table>
@@ -3046,7 +3046,7 @@ news-albums --<span class="hljs-built_in">limit</span> 20 --preview 0</code></pr
 <h3 id="onthisday-media"><code>onthisday-media</code><a class="anchor" href="#onthisday-media" aria-label="Link to this section"></a></h3>
 <p>The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>onthisday-media [--limit=&lt;number&gt;] &lt;day&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>onthisday-media [--limit=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3055,7 +3055,7 @@ news-albums --<span class="hljs-built_in">limit</span> 20 --preview 0</code></pr
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;day&gt;</code></td>
+<td><code>[&lt;day&gt;]</code></td>
 <td>day as MM-DD (default today, UTC)</td>
 </tr>
 </tbody></table>
@@ -3122,7 +3122,7 @@ person create /archive/people/cecilia-exempel --name <span class="hljs-string">&
 <h3 id="person-add-event"><code>person-add-event</code><a class="anchor" href="#person-add-event" aria-label="Link to this section"></a></h3>
 <p>Add an event (blob) to a person, album, location or device.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>person-add-event [--type=&lt;string&gt;] [--date=&lt;string&gt;] [--body=&lt;string&gt;] [--lat=&lt;string&gt;] [--lng=&lt;string&gt;] [--writer=&lt;path&gt;] &lt;target&gt; &lt;name&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>person-add-event [--type=&lt;string&gt;] [--date=&lt;string&gt;] [--body=&lt;string&gt;] [--lat=&lt;string&gt;] [--lng=&lt;string&gt;] [--writer=&lt;path&gt;] &lt;target&gt; [&lt;name&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3135,7 +3135,7 @@ person create /archive/people/cecilia-exempel --name <span class="hljs-string">&
 <td>VFS path to the person, album, location or device.</td>
 </tr>
 <tr>
-<td><code>&lt;name&gt;</code></td>
+<td><code>[&lt;name&gt;]</code></td>
 <td>optional event name (e.g. birth, wedding); without one, it is made from the type and date.</td>
 </tr>
 </tbody></table>

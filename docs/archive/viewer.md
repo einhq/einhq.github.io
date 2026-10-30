@@ -33,8 +33,9 @@ On a computer:
 - **Top left**: the close button (×).
 - **Top right**: the details button (ⓘ, tooltip **Details (i)**), which shows or hides the
   [details panel](#the-details-panel), and beside it **Chat**, where the assistant module is
-  installed, which opens the assistant in a drawer beside the picture. You can ask it about the
-  picture you are looking at; see [Chatting with the assistant](../assistant/chat.md).
+  installed, which opens the assistant in a drawer beside the picture, or as a dialog over it in a
+  window narrower than 992 pixels. You can ask it about the picture you are looking at; see
+  [Chatting with the assistant](../assistant/chat.md).
 - **Left and right edges**: arrows to the previous and the next file.
 - **The bar under the picture**, from left to right:
   - where you are in the list, such as **24 of 26**. The **Media** page leaves this out, because it

@@ -322,7 +322,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <h3 id="basename"><code>basename</code><a class="anchor" href="#basename" aria-label="Link to this section"></a></h3>
 <p>Strip directory and suffix from filenames.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>basename [-s &lt;string&gt;] [-a] [-z] &lt;NAME&gt; &lt;SUFFIX&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>basename [-s &lt;string&gt;] [-a] [-z] &lt;NAME&gt; [&lt;SUFFIX&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -335,7 +335,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <td>the path to extract basename from.</td>
 </tr>
 <tr>
-<td><code>&lt;SUFFIX&gt;</code></td>
+<td><code>[&lt;SUFFIX&gt;]</code></td>
 <td>optional suffix to remove.</td>
 </tr>
 </tbody></table>
@@ -365,7 +365,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <h3 id="cat"><code>cat</code><a class="anchor" href="#cat" aria-label="Link to this section"></a></h3>
 <p>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>cat [-s] [-l] [-t] [--timestamps] &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>cat [-s] [-l] [-t] [--timestamps] [&lt;path&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -374,7 +374,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;...</code></td>
+<td><code>[&lt;path&gt;...]</code></td>
 <td>nodes to output, one after the other; without one, or for -, stdin is copied.</td>
 </tr>
 </tbody></table>
@@ -580,7 +580,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tbody></table>
 </div>
 <h3 id="completion-entity"><code>completion-entity</code><a class="anchor" href="#completion-entity" aria-label="Link to this section"></a></h3>
-<p>Complete a person, location, album, device or track by name.</p>
+<p>Complete a person, location, album or device by name.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>completion-entity [--kind=&lt;string&gt;] [--limit=&lt;string&gt;] &lt;query&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -605,7 +605,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </thead>
 <tbody><tr>
 <td><code>--kind=&lt;string&gt;</code></td>
-<td>restrict to these kinds, comma-separated: whichever the installed modules declare (person, location, album, device, track)</td>
+<td>restrict to these kinds, comma-separated: whichever the installed modules declare (person, location, album, device)</td>
 </tr>
 <tr>
 <td><code>--limit=&lt;string&gt;</code></td>
@@ -1079,7 +1079,7 @@ docs <span class="hljs-built_in">env</span> | grep PATH</code></pre></div>
 <h3 id="du"><code>du</code><a class="anchor" href="#du" aria-label="Link to this section"></a></h3>
 <p>Estimate file usage in node structures.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>du [-c] [-h] [-s] &lt;path&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>du [-c] [-h] [-s] [&lt;path&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1088,7 +1088,7 @@ docs <span class="hljs-built_in">env</span> | grep PATH</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;</code></td>
+<td><code>[&lt;path&gt;]</code></td>
 <td>one or more structures to measure (default: .)</td>
 </tr>
 </tbody></table>
@@ -1253,7 +1253,7 @@ events --today 2026-12-24 --days-ahead 7</code></pre></div>
 <h3 id="find"><code>find</code><a class="anchor" href="#find" aria-label="Link to this section"></a></h3>
 <p>Search for nodes under a path, as GNU find does: starting points, then an expression of tests (-name -iname -path -ipath GLOB, -regex -iregex RE on the whole path, -type f|d|l|<node type>, -empty, -size [+-]N[cwbkMG], -user -group NAME, -uid -gid N, -newer PATH, -mmin and -mtime [+-]N), operators (! -not -a -o and parentheses), options (-maxdepth -mindepth N, -depth) and actions (-print -print0 -printf FORMAT -prune -quit -delete, -exec CMD {} &#39;;&#39; and -exec CMD {} +); -printf knows %p %f %h %P %d %s %y %m %u %g %U %G %t %c and %Tk %Ck %Bk for k in @YymdHMSFTDab+; the flags below are the same tests.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>find [--name=&lt;string&gt;] [--iname=&lt;string&gt;] [--type=&lt;string&gt;] [--maxdepth=&lt;string&gt;] [--mindepth=&lt;string&gt;] &lt;path&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>find [--name=&lt;string&gt;] [--iname=&lt;string&gt;] [--type=&lt;string&gt;] [--maxdepth=&lt;string&gt;] [--mindepth=&lt;string&gt;] [&lt;path&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1262,7 +1262,7 @@ events --today 2026-12-24 --days-ahead 7</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;</code></td>
+<td><code>[&lt;path&gt;]</code></td>
 <td>starting point, printed itself at depth 0; several may be given (default: .)</td>
 </tr>
 </tbody></table>
@@ -1566,7 +1566,7 @@ find /home/anna/staging -name <span class="hljs-string">&#x27;*.tmp&#x27;</span>
 </thead>
 <tbody><tr>
 <td><code>&lt;groupname&gt;</code></td>
-<td>name of the group to create: letters, digits and . _ - @, starting with a letter or _.</td>
+<td>name of the group to create: lower-case letters, digits and . _ -, starting with a letter or _.</td>
 </tr>
 </tbody></table>
 </div>
@@ -2005,7 +2005,7 @@ label list /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></di
 <h3 id="labels"><code>labels</code><a class="anchor" href="#labels" aria-label="Link to this section"></a></h3>
 <p>List labels (all, or of a node); search --tag <label> finds what carries one.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>labels &lt;path&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>labels [&lt;path&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2014,7 +2014,7 @@ label list /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></di
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;</code></td>
+<td><code>[&lt;path&gt;]</code></td>
 <td>node path (optional)</td>
 </tr>
 </tbody></table>
@@ -2103,7 +2103,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <h3 id="login"><code>login</code><a class="anchor" href="#login" aria-label="Link to this section"></a></h3>
 <p>Authenticate as a user.</p>
 <p><small>visitors too · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>login [--session] &lt;username&gt; &lt;password&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>login [--session] &lt;username&gt; [&lt;password&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2116,7 +2116,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <td>user to login: a username, or the e-mail address of an account.</td>
 </tr>
 <tr>
-<td><code>&lt;password&gt;</code></td>
+<td><code>[&lt;password&gt;]</code></td>
 <td>password (optional, prompts if not provided)</td>
 </tr>
 </tbody></table>
@@ -2154,7 +2154,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <h3 id="ls"><code>ls</code><a class="anchor" href="#ls" aria-label="Link to this section"></a></h3>
 <p>List directory contents.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] [&lt;path&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2163,7 +2163,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;path&gt;...</code></td>
+<td><code>[&lt;path&gt;...]</code></td>
 <td>paths to list, each under its own header when there are several.</td>
 </tr>
 </tbody></table>
@@ -2741,7 +2741,7 @@ mod <span class="hljs-built_in">groups</span> archive --everyone</code></pre></d
 </thead>
 <tbody><tr>
 <td><code>&lt;path&gt;</code></td>
-<td>mount point.</td>
+<td>mount point, made as a directory when it is missing.</td>
 </tr>
 <tr>
 <td><code>&lt;type&gt;</code></td>
@@ -2857,7 +2857,7 @@ news --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <h3 id="onthisday"><code>onthisday</code><a class="anchor" href="#onthisday" aria-label="Link to this section"></a></h3>
 <p>What the archive has from a calendar day (MM-DD, default today) in earlier years, from every onthisday-* command on PATH.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>onthisday [--limit=&lt;number&gt;] &lt;day&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>onthisday [--limit=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2866,7 +2866,7 @@ news --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;day&gt;</code></td>
+<td><code>[&lt;day&gt;]</code></td>
 <td>day as MM-DD (default today, UTC)</td>
 </tr>
 </tbody></table>
@@ -3000,7 +3000,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <h3 id="pipeline-instances"><code>pipeline-instances</code><a class="anchor" href="#pipeline-instances" aria-label="Link to this section"></a></h3>
 <p>List pipeline instances — running, failed or completed — newest first.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>pipeline-instances [-s &lt;string&gt;] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] &lt;name&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>pipeline-instances [-s &lt;string&gt;] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] [&lt;name&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3009,7 +3009,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;name&gt;</code></td>
+<td><code>[&lt;name&gt;]</code></td>
 <td>Pipeline name (optional, repeatable)</td>
 </tr>
 </tbody></table>
@@ -4062,7 +4062,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 <h3 id="search"><code>search</code><a class="anchor" href="#search" aria-label="Link to this section"></a></h3>
 <p>Faceted search over content: text, time, region, kind, tags, subjects (people, locations, devices) and containers.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] &lt;query&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] [&lt;query&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -4071,7 +4071,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;query&gt;</code></td>
+<td><code>[&lt;query&gt;]</code></td>
 <td>search query text (optional)</td>
 </tr>
 </tbody></table>
@@ -5501,7 +5501,7 @@ trash empty --older-than 30</code></pre></div>
 </tbody></table>
 </div>
 <h3 id="user-elevate"><code>user-elevate</code><a class="anchor" href="#user-elevate" aria-label="Link to this section"></a></h3>
-<p>Make this sign-in an administrator&#39;s, for a member of the sudo group, after entering the password again.</p>
+<p>Make this shell an administrator&#39;s, or with --session the whole sign-in, for a member of the sudo group, after entering the password again.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>user-elevate [--password=&lt;string&gt;] [--session] [--off]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -5521,7 +5521,7 @@ trash empty --older-than 30</code></pre></div>
 </tr>
 <tr>
 <td><code>--off</code></td>
-<td>make the sign-in no longer an administrator&#39;s.</td>
+<td>make the shell, or with --session the sign-in, no longer an administrator&#39;s.</td>
 </tr>
 </tbody></table>
 </div>
@@ -5661,7 +5661,7 @@ trash empty --older-than 30</code></pre></div>
 </tr>
 <tr>
 <td><code>--old-password=&lt;string&gt;</code></td>
-<td>current password (required for non-admin)</td>
+<td>current password: required but for an administrator, and checked whenever given.</td>
 </tr>
 <tr>
 <td><code>--new-password=&lt;string&gt;</code></td>
@@ -5733,7 +5733,7 @@ trash empty --older-than 30</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>--name=&lt;string&gt;</code></td>
-<td>set display name.</td>
+<td>set the display name, which cannot be empty.</td>
 </tr>
 <tr>
 <td><code>--email=&lt;string&gt;</code></td>
@@ -5829,7 +5829,7 @@ trash empty --older-than 30</code></pre></div>
 <h3 id="xargs"><code>xargs</code><a class="anchor" href="#xargs" aria-label="Link to this section"></a></h3>
 <p>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>xargs [--null] [-0] [--delimiter=&lt;string&gt;] [-d &lt;string&gt;] [--max-args=&lt;string&gt;] [-n &lt;string&gt;] [--max-lines=&lt;string&gt;] [-L &lt;string&gt;] [--max-chars=&lt;string&gt;] [-s &lt;string&gt;] [--replace=&lt;string&gt;] [-I &lt;string&gt;] [--eof=&lt;string&gt;] [-E &lt;string&gt;] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=&lt;path&gt;] [-a &lt;path&gt;] &lt;command&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>xargs [--null] [-0] [--delimiter=&lt;string&gt;] [-d &lt;string&gt;] [--max-args=&lt;string&gt;] [-n &lt;string&gt;] [--max-lines=&lt;string&gt;] [-L &lt;string&gt;] [--max-chars=&lt;string&gt;] [-s &lt;string&gt;] [--replace=&lt;string&gt;] [-I &lt;string&gt;] [--eof=&lt;string&gt;] [-E &lt;string&gt;] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=&lt;path&gt;] [-a &lt;path&gt;] [&lt;command&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -5838,7 +5838,7 @@ trash empty --older-than 30</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;command&gt;...</code></td>
+<td><code>[&lt;command&gt;...]</code></td>
 <td>the command to run and its first arguments; the items follow them (default: echo)</td>
 </tr>
 </tbody></table>

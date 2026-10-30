@@ -127,13 +127,13 @@ llm-chat [--system=<string>] [--history=<string>] [--max-tokens=<number>] [--tim
 | -------------- | ------------ |
 | `<message>...` | what to ask. |
 
-| Option                  | What it does                                                          |
-| ----------------------- | --------------------------------------------------------------------- |
-| `--system=<string>`     | the system text: what the model is and how to answer.                 |
-| `--history=<string>`    | earlier turns, as JSON: [{"role":"user"\|"assistant","content":"…"}]. |
-| `--max-tokens=<number>` | the most the answer may be (default 768)                              |
-| `--timeout=<number>`    | seconds to wait for the answer (default 180)                          |
-| `--think`               | let the model think before it answers.                                |
+| Option                  | What it does                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `--system=<string>`     | the system text: what the model is and how to answer.                        |
+| `--history=<string>`    | earlier turns, as JSON: [{"role":"user"\|"assistant","content":"…"}].        |
+| `--max-tokens=<number>` | the most the answer may be (default 768)                                     |
+| `--timeout=<number>`    | seconds to wait for the answer (default 180)                                 |
+| `--think`               | let the model think before it answers (without it, CFG_LLM_THINKING decides) |
 
 ```bash
 llm-chat 'Vad är huvudstaden i Norge?'
