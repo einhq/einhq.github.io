@@ -188,7 +188,7 @@ ems-gpu
 llm-status
 ```
 
-`llm-status` says whose the language model is and where it runs, such as `http://llm:8190: ours, on the card` ([reference](../assistant/commands.md#llm-status)). It repeats what `CFG_LLM_CARD` says; how many layers the model really holds on the card is in its log (`podman compose logs llm`).
+`llm-status` says whose the language model is and where it runs, such as `http://llm:8190: ours, on the card` ([reference](../assistant/commands.md#llm-status)). It repeats what `CFG_LLM_CARD` says. How many layers the model really holds on the card is in its log (`podman compose logs llm`), which starts with the part of the card it was given, such as `llm: 6211 MB of the card, 7552 MB of it in use by others: 2548 MB left free beside the model`.
 
 To prove that every model really computes on the card, run the media service's self-test inside its container. It loads each model in turn and prints the device it bound to, ending with `all GPU checks passed` or a list of failures. It needs most of the card, so run it while the archive is not busy:
 
@@ -206,9 +206,9 @@ With both `--ems` and `--llm` on one card, the two services split it by one numb
 | Variable              | Read by            | Default | What it sets                                                                                                                                                                                 |
 | --------------------- | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `EMS_CARD_SHARE_MB`   | the media service  | `0`     | The most of the card, in MB, the media service's processes hold. A model that would take it past this runs on the processor, even while the rest of the card is free. `0` is the whole card. |
-| `LLM_CARD_RESERVE_MB` | the language model | `8800`  | How much of the card the language model leaves free when it starts. It takes as many layers as fit in the rest, and runs the others on the processor.                                        |
+| `LLM_CARD_RESERVE_MB` | the language model | `8800`  | How much of the card the language model leaves the media service. It takes as many layers as fit in the rest, and runs the others on the processor.                                          |
 
-Set the language model's reserve 400 MB above the media service's share: the language model counts the card as `nvidia-smi` does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model's part. The language model fits its layers when it starts, into what is free then less its reserve, so it gets all of them when it starts beside a media service that holds little, as when both start together; started again while the media service holds models, it gets fewer until its next start. `setup.sh` sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.
+Set the language model's reserve 400 MB above the media service's share: the language model counts the card as `nvidia-smi` does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model's part. The language model fits its layers into the card less its reserve each time it starts, its restarts included, whatever the media service holds at the time, so it gets the same part whichever of the two started first. `setup.sh` sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.
 
 On a 16 GB card, the pair EiN's own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:
 

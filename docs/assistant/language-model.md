@@ -77,13 +77,13 @@ The server keeps what it last read in a cache, so a follow-up question in the sa
 
 ### Share the graphics card with the media service
 
-With the media service on the same card, the two divide its memory. The model loads as many of its layers onto the card as fit while leaving `LLM_CARD_RESERVE_MB` free, 8800 MB unless you change it, and runs the rest on the processor. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.
+With the media service on the same card, the two divide its memory. The model leaves the media service `LLM_CARD_RESERVE_MB` of the card, 8800 MB unless you change it, loads as many of its layers as fit in the rest, and runs the others on the processor. It works its part out each time it starts, from what the media service holds then, so it gets the same part whichever of the two started first. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.
 
 To change the division, set both sides in `~/ein/.env` and apply it:
 
 ```ini
 # in ~/ein/.env
-LLM_CARD_RESERVE_MB=8800   # what the model leaves free on the card
+LLM_CARD_RESERVE_MB=8800   # what the model leaves the media service of the card
 EMS_CARD_SHARE_MB=8400     # the most the media service takes; 400 MB less than the line above
 ```
 

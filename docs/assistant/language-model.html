@@ -185,10 +185,10 @@ llm-status --checks</code></pre></div>
 </div>
 <p>The server keeps what it last read in a cache, so a follow-up question in the same chat reads only the new message. It stays loaded between questions.</p>
 <h3 id="share-the-graphics-card-with-the-media-service">Share the graphics card with the media service<a class="anchor" href="#share-the-graphics-card-with-the-media-service" aria-label="Link to this section"></a></h3>
-<p>With the media service on the same card, the two divide its memory. The model loads as many of its layers onto the card as fit while leaving <code>LLM_CARD_RESERVE_MB</code> free, 8800 MB unless you change it, and runs the rest on the processor. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.</p>
+<p>With the media service on the same card, the two divide its memory. The model leaves the media service <code>LLM_CARD_RESERVE_MB</code> of the card, 8800 MB unless you change it, loads as many of its layers as fit in the rest, and runs the others on the processor. It works its part out each time it starts, from what the media service holds then, so it gets the same part whichever of the two started first. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.</p>
 <p>To change the division, set both sides in <code>~/ein/.env</code> and apply it:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
-<span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">8800</span>   <span class="hljs-comment"># what the model leaves free on the card</span>
+<span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">8800</span>   <span class="hljs-comment"># what the model leaves the media service of the card</span>
 <span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">8400</span>     <span class="hljs-comment"># the most the media service takes; 400 MB less than the line above</span></code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d</code></pre></div>

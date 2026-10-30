@@ -625,7 +625,7 @@ the containers again with the limit.</p>
 <tr>
 <td><code>EMS_MODEL_PINNED</code></td>
 <td><code>text-query</code></td>
-<td>Models loaded at start and never unloaded, separated by commas. The search models, <code>text-query</code> and <code>siglip-text</code>, are pinned in the query worker whatever this says.</td>
+<td>Models loaded at start and never unloaded, separated by commas. The search models, <code>text-query</code> and <code>siglip-text</code>, are pinned in the query worker whatever this says, and only there, so the default pins nothing unless <code>EMS_QUERY_WORKER=0</code>.</td>
 </tr>
 <tr>
 <td><code>EMS_MODEL_MAX_RSS</code></td>
