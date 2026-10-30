@@ -20,7 +20,7 @@ Three places tell you most of what is wrong. Look at them in this order.
 
 2. **The dashboard.** When the web interface opens, sign in as an administrator and choose **Dashboard** under **System** in the sidebar. The badge above **System dashboard** gives the verdict: **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Below it, the **Overview** tab lists each check that is not fine, with its reason. The **Services** tab shows each of EiN's own services, and the **Log** tab its **Recent problems** and the live log. [Health and the dashboard](monitoring.md) explains every tile.
 
-   ![The System dashboard with a green Healthy badge above its title, the tabs Overview, Work, Media service, Services and Log, and tiles for CPU, memory, GPU and VRAM above a chart of completed work](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
+   ![The System dashboard with a blue Catching up badge above its title, the tabs Overview, Work, Media service, Services and Log, and tiles for CPU, memory, GPU and VRAM above a chart of completed work](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
 
 3. **`health` in EiN's terminal.** The same verdict and every check, fine or not, in text. On an EiN with the `ems` module installed, it may read:
 

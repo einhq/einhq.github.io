@@ -205,7 +205,7 @@ with the address it tried.
 The **Overview** tab shows **GPU** and **VRAM** tiles beside the computer's own CPU and memory when
 the media service has a card. With no card, or no media service, they are not there.
 
-![The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles are the media service's card; they show only when it has one")
+![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles are the media service's card; they show only when it has one")
 
 **About EiN** in the account menu also has a **Media service** tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or **Not answering**.

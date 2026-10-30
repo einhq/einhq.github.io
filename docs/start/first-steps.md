@@ -82,7 +82,7 @@ Choose **Dashboard** under **System** in the sidebar. Only administrators have i
 | **Stuck**          | Work is waiting, and none was done in the last hour.                     | Look at the **Work** tab, and read [Health and the dashboard](../admin/monitoring.md).                 |
 | **Needs a person** | A check failed.                                                          | Read the failed check on the **Overview** tab, and see [Troubleshooting](../admin/troubleshooting.md). |
 
-![The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "Healthy means nothing is waiting: a fresh install should read so within a minute or two")
+![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "Healthy means nothing is waiting; this one reads Catching up, as work waits and is being done, and a fresh install reads Healthy within a minute or two")
 
 For the first minute after EiN starts, the dashboard may show **warming up** while it takes its
 first readings.

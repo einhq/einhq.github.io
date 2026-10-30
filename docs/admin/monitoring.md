@@ -6,7 +6,7 @@ This page is for the administrator who keeps EiN running: how to tell at a glanc
 
 Choose **Dashboard** under **System** in the sidebar. The sidebar shows it only to administrators; the page is at `/system`, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.
 
-![The System dashboard's Overview tab with the Healthy badge above the title, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
+![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
 
 The page, **System dashboard**, has up to three badges above its title and four tabs below it, five with the `ems` module installed:
 
@@ -114,7 +114,7 @@ The `ems` module adds this tab, and it is there only while that module is instal
 
 **Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down`; with the Archive installed, its stopped `models-second`, off while `CFG_MODEL_SECOND_SLOTS` is `0`, counts as down.
 
-![The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 8h 50m and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
+![The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 1h 16m and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
 
 An administrator has **Restart** and **Stop** on a running service and **Start** on a stopped one. A disabled service has no buttons; enable it from the terminal first. [Services and logs](services-logs.md) explains each service and the commands behind these buttons.
 
@@ -122,7 +122,7 @@ An administrator has **Restart** and **Stop** on a running service and **Start**
 
 **Log** has two cards. **Recent problems** shows the last 10 lines logged at WARN or ERROR, newest first, or **Nothing logged at WARN or above**. **Live log** follows the system log, `/var/logs/system`, as it is written: choose **DEBUG**, **INFO**, **WARN** or **ERROR** to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.
 
-![The Log tab: Recent problems with ten WARN lines from pool-worker, and below it the Live log of /var/logs/system with INFO lines from http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
+![The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
 
 With the Archive, a warning such as `pooled step could not run yet, kind resting` means the media service was not ready for a job; the job is tried again on its own. [Services and logs](services-logs.md) covers the logs and `dmesg`.
 
