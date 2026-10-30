@@ -156,7 +156,7 @@ system-info
 host      4e1d7c9b2a60
 uptime    4m
 core      0.1.0 (3f2a9c1, 2026-10-24)
-api       0.6.0
+api       0.7.0
 modules   archive 5d81b2e04, assistant 1c9e7a352, ems 77f0ad913
 postgres  18.1
 deno      2.9.6

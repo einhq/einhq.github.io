@@ -50,7 +50,7 @@ Type in the filter box to narrow the list by name or description. **Show only ac
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
 Choose a module to open its panel. At the top it shows the module's name, its version and the core
-API it is written for (`version 0.1.0 · core API ^0.6.0`), where it is installed
+API it is written for (`version 0.1.0 · core API ^0.7.0`), where it is installed
 (`/usr/modules/archive`), when it was set up, and its state. **Reference and guide** opens the
 module's own page in **Documentation**, with its pages in this guide and every command, setting and
 node type it brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
