@@ -190,9 +190,14 @@ picture has no date or the person has no birth date.
 Pointing at a name lights up that person's face box on the picture, and pointing at a box lights up
 the name. Click a name to open the person's page.
 
-If you may change the picture and are not sure a face really is the person named, point at the
-name: a question mark slides in beside it (on a phone it is always there). Press it, **Not sure
-this is &lt;name&gt;?**, and either:
+Point at a name for a moment and a small card opens beside it with what you can do with that face:
+**Show at 0:42** on a video (see [Faces in a video](#faces-in-a-video)), and **Not sure this is
+&lt;name&gt;?** when you may change the picture. Moving the pointer onto the card keeps it open; moving
+away closes it. On a phone there is nothing to point with, so the same actions are small buttons at
+the end of the row instead.
+
+If you are not sure a face really is the person named, press **Not sure this is &lt;name&gt;?** (the
+question mark on a phone) and either:
 
 - say who it is: pick someone, or type a name and choose **New person: &lt;name&gt;**, and press
   **Move**; or
@@ -200,8 +205,9 @@ this is &lt;name&gt;?**, and either:
   as doubtful until somebody answers, here or on the person's Faces tab (see
   [Doubtful faces](people.md#doubtful-faces)).
 
-Beside a doubtful face the question mark is always shown, orange, and asks **Is this
-&lt;name&gt;?**, with who marked it, such as "peggy is not sure.":
+A doubtful face always has an orange question mark at the end of its row. Press it, or point at
+the name and press **Is this &lt;name&gt;?** in the card; it shows who marked the face, such as
+"peggy is not sure.":
 
 - **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
 - **No, it is…**: pick who it is instead, or a new name, as above, and press **Move**.
@@ -437,10 +443,11 @@ speaker's name, in a colour of their own. A voice nobody has named is called **S
 ### Faces in a video
 
 The face boxes follow the faces as the video plays, and **Pin faces** works as it does on a photo.
-In the details panel, a button beside each person shows them: its tooltip reads, for example,
-**Show Ruby Wrenfield at 0:42 · on screen 0:00–0:39, 0:42–1:28**. Pressing it pauses the video on
-the frame where the face is seen most clearly and keeps a box on the face from there. Press it again
-(**Stop following Ruby Wrenfield**) to let go.
+In the details panel, point at a person or an unnamed face and press **Show at 0:42** in the card
+beside it, which also says when they are on screen, for example **On screen 0:00–0:39, 0:42–1:28**.
+The video pauses on the frame where the face is seen most clearly and keeps a box on the face from
+there. While it does, a lit button at the end of the row reads **Stop following Ruby Wrenfield**:
+press it, or **Stop following** in the card, to let go. On a phone the button is always in the row.
 
 ## Listen to a recording
 
