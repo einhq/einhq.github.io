@@ -55,7 +55,8 @@ Both choices are kept in the address, so a link opens the same view.
 To name someone from their card:
 
 1. Click in the card's **Who is this?** box and type the name, for example `Ruby Wrenfield`. Once you type, the box lists the matching people who already have a name.
-2. Press <kbd>Enter</kbd>.
+2. Press <kbd>Enter</kbd>, or click one of the listed people, which adds this person to them at
+   once.
 
 What happens depends on the name:
 
