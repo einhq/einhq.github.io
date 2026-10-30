@@ -158,6 +158,10 @@ date a picture gets and how to change it.</p>
 <td>Opens the text for writing by hand. Shown on photos you may change.</td>
 </tr>
 <tr>
+<td><strong>Edit subtitles</strong> / <strong>Add subtitles</strong></td>
+<td>Opens what is said, line by line, beside the video or recording, to correct it. Shown on videos and recordings you may change.</td>
+</tr>
+<tr>
 <td><strong>Fullscreen</strong> / <strong>Exit fullscreen</strong></td>
 <td>Gives the viewer the whole screen.</td>
 </tr>
@@ -760,8 +764,66 @@ review, where you name them or say they are someone already in the archive. A vo
 to nobody yet becomes an unidentified person of its own first; this needs permission to change
 the file.</li>
 </ul>
-<p>You cannot correct a transcript&#39;s words in EiN; you can name its speakers. A transcript can also
-read <strong>No speech was detected.</strong>, or <strong>Transcript unavailable.</strong> when it could not be loaded.</p>
+<p>A transcript can also read <strong>No speech was detected.</strong>, or <strong>Transcript unavailable.</strong> when it could
+not be loaded.</p>
+<h3 id="correct-the-subtitles">Correct the subtitles<a class="anchor" href="#correct-the-subtitles" aria-label="Link to this section"></a></h3>
+<p>The transcript is written by a machine, and it mishears: a name, a word in a dialect, a line it
+invents over a quiet stretch, or one it never heard. You can correct it on a video or a recording
+you may change.</p>
+<ol>
+<li>In the More menu, choose <strong>Edit subtitles</strong>, or <strong>Add subtitles</strong> when there are none.</li>
+<li>The dialog <strong>Subtitles</strong> opens where the viewer was playing, and pauses it: the video (or the
+recording&#39;s waveform) on the left, above a timeline that shows where every line lies, and the
+lines on the right (below, on a narrow screen). The line being said is drawn over the picture as
+it reads now, with your changes, and tinted in the list.</li>
+<li>Correct a line by typing in it. Each line has its start and end, which you can type
+(<code>1:23.4</code>, or seconds such as <code>83.4</code>), and a play button that plays just that line and stops.</li>
+<li>The line you are in has buttons to start or end it at the playhead, split it at the cursor, join
+it with the next line, and delete it. <strong>Add line</strong> puts a new line at the playhead.</li>
+<li>Press <strong>Save</strong>, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. An empty line is left out. A line that ends
+before it starts is marked in red and must be fixed first.</li>
+</ol>
+<p>The keys work while you type in a line, so you can listen and write at once:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Ctrl</kbd>+<kbd>Space</kbd>, <kbd>Alt</kbd>+<kbd>K</kbd></td>
+<td>Play or pause. Outside a text box <kbd>Space</kbd> and <kbd>k</kbd> do too.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>J</kbd> / <kbd>Alt</kbd>+<kbd>L</kbd></td>
+<td>Back or forward two seconds.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>P</kbd></td>
+<td>Play the line, from its start to its end.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>I</kbd> / <kbd>Alt</kbd>+<kbd>O</kbd></td>
+<td>The line starts, or ends, at the playhead.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>N</kbd></td>
+<td>A new line at the playhead.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>S</kbd></td>
+<td>Split the line at the cursor.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd></td>
+<td>The line before, or after.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Closing with changes not saved asks first. What you save is what the subtitles, the transcript in
+the details panel and search show from then on, and EiN keeps it: the file is not transcribed
+again, not even when the media service&#39;s transcription improves. The speakers stay as they were.</p>
 <p>For a recording or video you reach from a search for words that are said in it, the viewer opens at
 the moment they are said.</p>
 <h2 id="watch-a-slideshow">Watch a slideshow<a class="anchor" href="#watch-a-slideshow" aria-label="Link to this section"></a></h2>
@@ -828,7 +890,7 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 </tr>
 <tr>
 <td>Signed in, and may only see the file</td>
-<td>The pencil menu holds only <strong>Add to album</strong>. You read comments but cannot write them, and see the text language without the menu. No <strong>Edit text</strong>, <strong>Edit faces</strong>, rotate or mirror.</td>
+<td>The pencil menu holds only <strong>Add to album</strong>. You read comments but cannot write them, and see the text language without the menu. No <strong>Edit text</strong>, <strong>Edit subtitles</strong>, <strong>Edit faces</strong>, rotate or mirror.</td>
 </tr>
 <tr>
 <td>A visitor who is not signed in</td>
@@ -892,6 +954,10 @@ See <a href="dates-places.html">Dates and places of pictures</a>.</p>
 <td>Reads the text again in a language.</td>
 </tr>
 <tr>
+<td><a href="commands.html#file-set-transcript"><code>file-set-transcript</code></a> <code>&lt;file&gt; &lt; subtitles.vtt</code></td>
+<td>Writes what is said in a video or recording, as WebVTT, by hand.</td>
+</tr>
+<tr>
 <td><a href="commands.html#file-set-orientation"><code>file-set-orientation</code></a> <code>--rotate cw &lt;file&gt;</code></td>
 <td>Turns a file; <code>ccw</code> and <code>180</code> too, and <code>--toggle-mirror</code> flips it.</td>
 </tr>
@@ -911,7 +977,7 @@ file-set-text-language /archive/albums/cornwall-1968/img20120303_133900582.jpg e
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/viewer.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-viewer">Open the viewer</a></li><li><a href="#what-the-viewer-shows">What the viewer shows</a></li><li class="nested"><a href="#the-date-under-the-picture">The date under the picture</a></li><li class="nested"><a href="#the-more-menu">The More menu</a></li><li><a href="#move-between-files-and-close-the-viewer">Move between files and close the viewer</a></li><li><a href="#zoom-in-on-a-photo">Zoom in on a photo</a></li><li><a href="#keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer</a></li><li><a href="#on-a-phone-or-tablet">On a phone or tablet</a></li><li><a href="#the-details-panel">The details panel</a></li><li class="nested"><a href="#people-in-the-picture">People in the picture</a></li><li class="nested"><a href="#the-details-section">The Details section</a></li><li><a href="#change-a-file-from-the-pencil-menu">Change a file from the pencil menu</a></li><li class="nested"><a href="#change-the-description-labels-or-location">Change the description, labels or location</a></li><li><a href="#faces-in-the-viewer">Faces in the viewer</a></li><li class="nested"><a href="#draw-or-correct-a-face-box">Draw or correct a face box</a></li><li><a href="#read-the-text-in-a-picture">Read the text in a picture</a></li><li class="nested"><a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a></li><li class="nested"><a href="#read-the-text-again-in-another-language">Read the text again in another language</a></li><li><a href="#play-a-video">Play a video</a></li><li class="nested"><a href="#the-timeline-and-chapters">The timeline and chapters</a></li><li class="nested"><a href="#subtitles">Subtitles</a></li><li class="nested"><a href="#faces-in-a-video">Faces in a video</a></li><li><a href="#listen-to-a-recording">Listen to a recording</a></li><li><a href="#read-along-with-a-transcript">Read along with a transcript</a></li><li><a href="#watch-a-slideshow">Watch a slideshow</a></li><li><a href="#mark-a-favourite">Mark a favourite</a></li><li><a href="#what-you-see-depends-on-who-you-are">What you see depends on who you are</a></li><li><a href="#when-something-is-not-as-expected">When something is not as expected</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-viewer">Open the viewer</a></li><li><a href="#what-the-viewer-shows">What the viewer shows</a></li><li class="nested"><a href="#the-date-under-the-picture">The date under the picture</a></li><li class="nested"><a href="#the-more-menu">The More menu</a></li><li><a href="#move-between-files-and-close-the-viewer">Move between files and close the viewer</a></li><li><a href="#zoom-in-on-a-photo">Zoom in on a photo</a></li><li><a href="#keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer</a></li><li><a href="#on-a-phone-or-tablet">On a phone or tablet</a></li><li><a href="#the-details-panel">The details panel</a></li><li class="nested"><a href="#people-in-the-picture">People in the picture</a></li><li class="nested"><a href="#the-details-section">The Details section</a></li><li><a href="#change-a-file-from-the-pencil-menu">Change a file from the pencil menu</a></li><li class="nested"><a href="#change-the-description-labels-or-location">Change the description, labels or location</a></li><li><a href="#faces-in-the-viewer">Faces in the viewer</a></li><li class="nested"><a href="#draw-or-correct-a-face-box">Draw or correct a face box</a></li><li><a href="#read-the-text-in-a-picture">Read the text in a picture</a></li><li class="nested"><a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a></li><li class="nested"><a href="#read-the-text-again-in-another-language">Read the text again in another language</a></li><li><a href="#play-a-video">Play a video</a></li><li class="nested"><a href="#the-timeline-and-chapters">The timeline and chapters</a></li><li class="nested"><a href="#subtitles">Subtitles</a></li><li class="nested"><a href="#faces-in-a-video">Faces in a video</a></li><li><a href="#listen-to-a-recording">Listen to a recording</a></li><li><a href="#read-along-with-a-transcript">Read along with a transcript</a></li><li class="nested"><a href="#correct-the-subtitles">Correct the subtitles</a></li><li><a href="#watch-a-slideshow">Watch a slideshow</a></li><li><a href="#mark-a-favourite">Mark a favourite</a></li><li><a href="#what-you-see-depends-on-who-you-are">What you see depends on who you are</a></li><li><a href="#when-something-is-not-as-expected">When something is not as expected</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
     </div>
   </body>
 </html>

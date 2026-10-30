@@ -67,6 +67,7 @@ date a picture gets and how to change it.
 | **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. For photos and videos. |
 | **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it. Shown only when text was read.                                                                |
 | **Edit text** / **Add text**                   | Opens the text for writing by hand. Shown on photos you may change.                                                                      |
+| **Edit subtitles** / **Add subtitles**         | Opens what is said, line by line, beside the video or recording, to correct it. Shown on videos and recordings you may change.           |
 | **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                       |
 | **Download**                                   | Saves the original file to your device.                                                                                                  |
 
@@ -473,8 +474,42 @@ speak in the file.
   to nobody yet becomes an unidentified person of its own first; this needs permission to change
   the file.
 
-You cannot correct a transcript's words in EiN; you can name its speakers. A transcript can also
-read **No speech was detected.**, or **Transcript unavailable.** when it could not be loaded.
+A transcript can also read **No speech was detected.**, or **Transcript unavailable.** when it could
+not be loaded.
+
+### Correct the subtitles
+
+The transcript is written by a machine, and it mishears: a name, a word in a dialect, a line it
+invents over a quiet stretch, or one it never heard. You can correct it on a video or a recording
+you may change.
+
+1. In the More menu, choose **Edit subtitles**, or **Add subtitles** when there are none.
+2. The dialog **Subtitles** opens where the viewer was playing, and pauses it: the video (or the
+   recording's waveform) on the left, above a timeline that shows where every line lies, and the
+   lines on the right (below, on a narrow screen). The line being said is drawn over the picture as
+   it reads now, with your changes, and tinted in the list.
+3. Correct a line by typing in it. Each line has its start and end, which you can type
+   (`1:23.4`, or seconds such as `83.4`), and a play button that plays just that line and stops.
+4. The line you are in has buttons to start or end it at the playhead, split it at the cursor, join
+   it with the next line, and delete it. **Add line** puts a new line at the playhead.
+5. Press **Save**, or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. An empty line is left out. A line that ends
+   before it starts is marked in red and must be fixed first.
+
+The keys work while you type in a line, so you can listen and write at once:
+
+| Key                                                           | What it does                                                                |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>Space</kbd>, <kbd>Alt</kbd>+<kbd>K</kbd> | Play or pause. Outside a text box <kbd>Space</kbd> and <kbd>k</kbd> do too. |
+| <kbd>Alt</kbd>+<kbd>J</kbd> / <kbd>Alt</kbd>+<kbd>L</kbd>     | Back or forward two seconds.                                                |
+| <kbd>Alt</kbd>+<kbd>P</kbd>                                   | Play the line, from its start to its end.                                   |
+| <kbd>Alt</kbd>+<kbd>I</kbd> / <kbd>Alt</kbd>+<kbd>O</kbd>     | The line starts, or ends, at the playhead.                                  |
+| <kbd>Alt</kbd>+<kbd>N</kbd>                                   | A new line at the playhead.                                                 |
+| <kbd>Alt</kbd>+<kbd>S</kbd>                                   | Split the line at the cursor.                                               |
+| <kbd>Alt</kbd>+<kbd>↑</kbd> / <kbd>Alt</kbd>+<kbd>↓</kbd>     | The line before, or after.                                                  |
+
+Closing with changes not saved asks first. What you save is what the subtitles, the transcript in
+the details panel and search show from then on, and EiN keeps it: the file is not transcribed
+again, not even when the media service's transcription improves. The speakers stay as they were.
 
 For a recording or video you reach from a search for words that are said in it, the viewer opens at
 the moment they are said.
@@ -523,12 +558,12 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 
 ## What you see depends on who you are
 
-| You are                              | What differs                                                                                                                                                                          |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Signed in, and may change the file   | Everything on this page.                                                                                                                                                              |
-| Signed in, and may only see the file | The pencil menu holds only **Add to album**. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit faces**, rotate or mirror. |
-| A visitor who is not signed in       | No heart, no pencil menu and no sharing chip. **Path** is plain text.                                                                                                                 |
-| Someone who opened a share link      | The pictures without the details panel; the details button and <kbd>i</kbd> are not there.                                                                                            |
+| You are                              | What differs                                                                                                                                                                                              |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signed in, and may change the file   | Everything on this page.                                                                                                                                                                                  |
+| Signed in, and may only see the file | The pencil menu holds only **Add to album**. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
+| A visitor who is not signed in       | No heart, no pencil menu and no sharing chip. **Path** is plain text.                                                                                                                                     |
+| Someone who opened a share link      | The pictures without the details panel; the details button and <kbd>i</kbd> are not there.                                                                                                                |
 
 [Sharing](../guide/sharing.md) explains who can see what.
 
@@ -576,6 +611,7 @@ What the viewer shows and changes can also be done in [EiN's terminal](../shell/
 | [`file-set-description`](commands.md#file-set-description) `--text '…' <file>`       | Sets or clears the description.                                    |
 | [`file-set-text`](commands.md#file-set-text) `--text '…' <file>`                     | Writes the text in a picture by hand.                              |
 | [`file-set-text-language`](commands.md#file-set-text-language) `<file> <code\|auto>` | Reads the text again in a language.                                |
+| [`file-set-transcript`](commands.md#file-set-transcript) `<file> < subtitles.vtt`    | Writes what is said in a video or recording, as WebVTT, by hand.   |
 | [`file-set-orientation`](commands.md#file-set-orientation) `--rotate cw <file>`      | Turns a file; `ccw` and `180` too, and `--toggle-mirror` flips it. |
 | [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`              | Marks a favourite, or takes it away.                               |
 

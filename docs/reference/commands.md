@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 350 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -235,7 +235,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 132 in full](../archive/commands.md).
+[All 133 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -288,6 +288,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-text](../archive/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../archive/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-time](../archive/commands.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
+| [file-set-transcript](../archive/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
 | [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |

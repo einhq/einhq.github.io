@@ -55,6 +55,7 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | Write its description                         | `file-set-description --text 'Christmas morning' <file>`           | [file-set-description](commands.md#file-set-description)     |
 | Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                         | [file-set-text](commands.md#file-set-text)                   |
 | Read its text again in another language       | `file-set-text-language <file> en`                                 | [file-set-text-language](commands.md#file-set-text-language) |
+| Correct what is said in a video or recording  | `cat corrected.vtt \| file-set-transcript <file>`                  | [file-set-transcript](commands.md#file-set-transcript)       |
 | Say who took it                               | `file-set-photographer <file> /archive/people/Helen_Okafor`        | [file-set-photographer](commands.md#file-set-photographer)   |
 | The latest pictures taken                     | `latest 20`                                                        | [latest](commands.md#latest)                                 |
 
