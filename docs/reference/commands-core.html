@@ -3044,9 +3044,9 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>pipeline-overview</code></pre></div>
 <h3 id="pipeline-prune"><code>pipeline-prune</code><a class="anchor" href="#pipeline-prune" aria-label="Link to this section"></a></h3>
-<p>Remove terminal pipeline instances (completed/failed/cancelled)</p>
+<p>Remove completed and cancelled pipeline instances; failed ones only when asked.</p>
 <p><small>administrators only · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>pipeline-prune [-s &lt;string&gt;] [--all] [--keep=&lt;string&gt;] [--max=&lt;string&gt;] [--older-than=&lt;string&gt;] [--budget=&lt;string&gt;] &lt;name&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>pipeline-prune [-s &lt;string&gt;] [--all] [--keep=&lt;string&gt;] [--max=&lt;string&gt;] [--older-than=&lt;string&gt;] [--budget=&lt;string&gt;] [&lt;name&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3055,7 +3055,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;name&gt;</code></td>
+<td><code>[&lt;name&gt;]</code></td>
 <td>Pipeline name (optional; all if omitted)</td>
 </tr>
 </tbody></table>
@@ -3069,11 +3069,11 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>-s &lt;string&gt;</code></td>
-<td>Only remove instances with this status.</td>
+<td>Only remove instances with this status, such as failed.</td>
 </tr>
 <tr>
 <td><code>--all</code></td>
-<td>Remove all instances, including running (cancels first)</td>
+<td>Remove all instances, failed and running too (cancels first)</td>
 </tr>
 <tr>
 <td><code>--keep=&lt;string&gt;</code></td>
@@ -3226,7 +3226,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 </tbody></table>
 </div>
 <h3 id="pipeline-step-restart"><code>pipeline-step-restart</code><a class="anchor" href="#pipeline-step-restart" aria-label="Link to this section"></a></h3>
-<p>Restart a single pipeline step.</p>
+<p>Run one pipeline step again: a failed or skipped one, or a running one, which is stopped first.</p>
 <p><small>administrators only · changes things</small></p>
 <div class="code"><pre tabindex="0"><code>pipeline-step-restart &lt;id&gt; &lt;step&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>

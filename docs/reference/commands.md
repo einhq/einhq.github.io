@@ -136,14 +136,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [pipeline-instances](commands-core.md#pipeline-instances) | List pipeline instances — running, failed or completed — newest first. |
 | [pipeline-list](commands-core.md#pipeline-list) | List pipeline definitions. |
 | [pipeline-overview](commands-core.md#pipeline-overview) | Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate. |
-| [pipeline-prune](commands-core.md#pipeline-prune) | Remove terminal pipeline instances (completed/failed/cancelled) |
+| [pipeline-prune](commands-core.md#pipeline-prune) | Remove completed and cancelled pipeline instances; failed ones only when asked. |
 | [pipeline-remove](commands-core.md#pipeline-remove) | Remove pipeline instances (cancels running ones first) |
 | [pipeline-repair](commands-core.md#pipeline-repair) | Return instances marked terminal while still holding unfinished steps to running. |
 | [pipeline-rerun](commands-core.md#pipeline-rerun) | Rerun pipeline(s) from the current definition, replacing the old instance. |
 | [pipeline-restart](commands-core.md#pipeline-restart) | Restart a failed pipeline (re-queue failed steps) |
 | [pipeline-start](commands-core.md#pipeline-start) | Manually start a pipeline. |
 | [pipeline-status](commands-core.md#pipeline-status) | Show pipeline instance status. |
-| [pipeline-step-restart](commands-core.md#pipeline-step-restart) | Restart a single pipeline step. |
+| [pipeline-step-restart](commands-core.md#pipeline-step-restart) | Run one pipeline step again: a failed or skipped one, or a running one, which is stopped first. |
 | [pipeline-undefine](commands-core.md#pipeline-undefine) | Remove a pipeline definition, and cancel its running instances. |
 | [pipeline-worker](commands-core.md#pipeline-worker) | Run a pool worker (long-running) |
 | [pool](commands-core.md#pool) | Manage work pools. |

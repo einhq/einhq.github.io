@@ -2045,22 +2045,22 @@ pipeline-overview
 
 ### `pipeline-prune`
 
-Remove terminal pipeline instances (completed/failed/cancelled)
+Remove completed and cancelled pipeline instances; failed ones only when asked.
 
 <small>administrators only · changes things</small>
 
 ```text
-pipeline-prune [-s <string>] [--all] [--keep=<string>] [--max=<string>] [--older-than=<string>] [--budget=<string>] <name>
+pipeline-prune [-s <string>] [--all] [--keep=<string>] [--max=<string>] [--older-than=<string>] [--budget=<string>] [<name>]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<name>` | Pipeline name (optional; all if omitted) |
+| `[<name>]` | Pipeline name (optional; all if omitted) |
 
 | Option | What it does |
 | --- | --- |
-| `-s <string>` | Only remove instances with this status. |
-| `--all` | Remove all instances, including running (cancels first) |
+| `-s <string>` | Only remove instances with this status, such as failed. |
+| `--all` | Remove all instances, failed and running too (cancels first) |
 | `--keep=<string>` | Retention cap: keep this many newest per pipeline, remove the rest. |
 | `--max=<string>` | Stop after removing this many per pipeline (with --keep or --older-than) |
 | `--older-than=<string>` | Retention by age: remove those completed longer ago than this, e.g. 30d. |
@@ -2161,7 +2161,7 @@ pipeline-status <id>
 
 ### `pipeline-step-restart`
 
-Restart a single pipeline step.
+Run one pipeline step again: a failed or skipped one, or a running one, which is stopped first.
 
 <small>administrators only · changes things</small>
 
