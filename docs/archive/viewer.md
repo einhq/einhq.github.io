@@ -190,11 +190,12 @@ picture has no date or the person has no birth date.
 Pointing at a name lights up that person's face box on the picture, and pointing at a box lights up
 the name. Click a name to open the person's page.
 
-If you may change the picture and are not sure a face really is the person named, press the
-question mark beside the name, **Not sure this is &lt;name&gt;?**, and then **Mark as doubtful**. The
+If you may change the picture and are not sure a face really is the person named, point at the
+name: a question mark appears beside it (on a phone it is always there). Press it, **Not sure this
+is &lt;name&gt;?**, and then **Mark as doubtful**. The
 face stays the person's, marked as doubtful until somebody who knows answers, here or on the
 person's Faces tab (see [Doubtful faces](people.md#doubtful-faces)). Beside a doubtful face the
-question mark is orange and asks **Is this &lt;name&gt;?**, with who marked it, such as "peggy is
+question mark is always shown, orange, and asks **Is this &lt;name&gt;?**, with who marked it, such as "peggy is
 not sure.":
 
 - **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
