@@ -338,7 +338,7 @@ function document(page: Page, order: Page[], sections: Section[]): string {
 
     <p class="notice">
       <strong>Work in progress</strong>
-      <span class="notice-long">EiN runs, but nothing is released yet: the installer builds it from source, and what these pages describe may change.</span>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
       <span class="notice-short">Nothing is released yet.</span>
     </p>
 
