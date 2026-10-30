@@ -6,7 +6,7 @@ albums people made lately, and the birthdays and anniversaries around today, and
 everyone who uses EiN. Home's layout and the rest of the Statistics page are EiN's own, and
 [Home and statistics](../guide/home.md) covers them.
 
-![The Home page of the Wrenfield family's archive: the Welcome header, News with four albums the Administrator added 2 weeks ago, each with a row of pictures ending in a +N tile, and an Events card with one entry, Noah Price turns 7, in 4 weeks](../../assets/shots/home.webp "News lists the albums made lately and Events what comes round in the next month. On this day is missing here because nothing was taken on that date in earlier years.")
+![The Home page of the Wrenfield family's archive: the Welcome header, News with four albums the Administrator added 3 weeks ago, each with a row of pictures ending in a +N tile, and an Events card with one entry, Noah Price turns 7, in 3 weeks](../../assets/shots/home.webp "News lists the albums made lately and Events what comes round in the next month. On this day is missing here because nothing was taken on that date in earlier years.")
 
 The Archive fills all three of Home's sections. Like everything on Home, they show only what you
 may see: an album or a person that is not shared with you does not appear.
@@ -155,7 +155,7 @@ milestones in bold:
 The Archive adds the **Events** section to the [Statistics page](../guide/home.md#the-statistics-page),
 above EiN's own **Nodes** section.
 
-![The Statistics page: the Events section with four charts, Births by month with a total of 19, Engagements by month with 0, Marriages by month with 10 and Deaths by month with 2, each with a bar for every month from Jan to Dec, and the Nodes heading below them](../../assets/shots/stats.webp "Each chart folds every year into twelve months, so you see when in the year births, weddings and deaths fall.")
+![The Statistics page: the Events section with four charts, Births by month with a total of 19, Engagements by month with 0, Marriages by month with 10 and Deaths by month with 2, each with the months from Jan to Dec along its foot, and the Nodes heading below them](../../assets/shots/stats.webp "Each chart folds every year into twelve months, so you see when in the year births, weddings and deaths fall.")
 
 It has four charts: **Births by month**, **Engagements by month**, **Marriages by month** and
 **Deaths by month**.

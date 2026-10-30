@@ -64,7 +64,7 @@ A memory limit is a ceiling, not a reservation: a container uses what it needs u
 
 3. Check the new limit. In EiN's terminal, `top` shows EiN's memory against its limit in its **Memory** panel, for example `367 MB of 6.0 GB`.
 
-![EiN's top in the terminal: a CPU graph for the machine's 6 cores, a Memory panel with RAM at 367 MB of 6.0 GB and the heap, a Disk panel with the free space and when it fills, the Work panel saying nothing is waiting, and lists of sessions, processes and services](../../assets/shots/terminal-top.webp "top shows EiN's memory against its container's limit, so you see how close it comes.")
+![EiN's top in the terminal: a CPU graph for the machine's 6 cores, a Memory panel with RAM at 486 MB of 6.0 GB and the heap, a Disk panel with the free space and when it fills, the Work panel saying nothing is waiting, and lists of sessions, processes and services](../../assets/shots/terminal-top.webp "top shows EiN's memory against its container's limit, so you see how close it comes.")
 
 How to choose the limits:
 

@@ -25,7 +25,7 @@ Apart from the settings, the installation has its own environment in `.env`, in 
 4. Change the value in the setting's field. **Save change** and **Cancel** appear under it.
 5. Choose **Save change**. A line under the setting says what was restarted, for example "Restarted trash-purger.", or why nothing could be.
 
-![The System tab of Settings: the Find a setting box with the Overrides only button, a list of categories from Albums to Transcription, and the Albums category open with Stack similarity and Stack time gap, each marked Default and Archive](../../assets/shots/settings.webp "Settings are browsed by category, and each says where its value comes from and which module it belongs to.")
+![The System tab of Settings: the Find a setting box with the Overrides only button, a list of categories beginning with Albums, and the Albums category open with Stack similarity and Stack time gap, each marked Default and Archive](../../assets/shots/settings.webp "Settings are browsed by category, and each says where its value comes from and which module it belongs to.")
 
 Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: [Accounts and groups](accounts.md) covers **Users**, **Groups** and **Permissions**, and [Modules](modules.md) covers **Modules**. The **Permissions** tab shows some of the same settings as **System**, such as the default sharing, and a change made on either shows on both.
 

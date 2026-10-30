@@ -421,7 +421,7 @@ the frame where the face is seen most clearly and keeps a box on the face from t
 
 ## Listen to a recording
 
-![The viewer on a recording called Voice 001.m4a: a waveform with the playhead line near the start, buttons to go back and forward ten seconds around a pause button, the clock 0:42 / 2:11, and the details panel with the speaker chip Speaker 1 · 1:38 above the transcript, the current line in bold](../../assets/shots/recording.webp "A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.")
+![The viewer on a recording called Voice 001.m4a: a waveform with the playhead line near the start; under it pause, buttons to go back and forward ten seconds, the volume, the clock 0:42 / 2:11, and the subtitle and fullscreen buttons; and the details panel with the speaker chip Speaker 1 · 1:38 above the transcript, the current line in bold](../../assets/shots/recording.webp "A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.")
 
 A recording starts playing when it opens. Its picture is the waveform of the sound, and the waveform
 is the timeline: the part already played is brighter, a line marks where you are, and a click or a

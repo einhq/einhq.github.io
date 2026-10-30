@@ -135,7 +135,7 @@ const SHOTS: Shot[] = [
   { id: 'dashboard', clip: { x: 240, y: 48, width: 1200, height: 650 }, run: (page) => open(page, '/system', 6000) },
   {
     id: 'recording',
-    clip: { x: 300, y: 0, width: 1140, height: 640 },
+    clip: { x: 0, y: 0, width: 1440, height: 640 },
     run: async (page) => {
       await viewer(page, 'christmas-2019', 'Voice 001.m4a');
       // Each transcript line is a button that seeks to it; the line under the playhead is marked.
