@@ -196,7 +196,8 @@ badges for its state: <strong>Administrator</strong>, <strong>Guest</strong>, <s
 <p><strong>Display name</strong>, <strong>E-mail</strong> and <strong>Description</strong>, saved with <strong>Save profile</strong>. The display name is
 how the account is named to others; the person can change their own name and description too, on
 their profile (see <a href="../guide/profile.html#change-your-name-and-description">Your profile</a>). Only an
-administrator sets the e-mail address. Empty the field and save to remove it.</p>
+administrator sets the e-mail address. Empty the field and save to remove it. <strong>Save profile</strong> stays
+greyed out while <strong>Display name</strong> is empty: every account has a name.</p>
 <p>The account&#39;s picture is not set here: with the <a href="../archive/index.html">Archive</a> installed, it is the
 cover photo of the person in the archive that the account is linked to. <a href="../guide/profile.html#your-picture-and-the-person-you-are">Your picture and the person you are</a>
 shows how to make that link in the terminal.</p>
@@ -436,8 +437,13 @@ list every option.</p>
 </tr>
 <tr>
 <td><code>user create: &#39;&lt;name&gt;&#39; is the name of a built-in group</code></td>
-<td>The names <code>users</code> and <code>ssh</code> belong to built-in groups.</td>
+<td>The names <code>users</code>, <code>ssh</code> and <code>sudo</code> belong to built-in groups.</td>
 <td>Choose another username.</td>
+</tr>
+<tr>
+<td><code>user update: a display name cannot be empty</code></td>
+<td>Every account has a name.</td>
+<td>Give <code>--name</code> a name, or leave it out to keep the one it has.</td>
 </tr>
 <tr>
 <td><code>group delete: cannot delete the built-in group &#39;&lt;name&gt;&#39;</code></td>

@@ -83,7 +83,8 @@ badges for its state: **Administrator**, **Guest**, **Disabled**, **Needs a pass
 **Display name**, **E-mail** and **Description**, saved with **Save profile**. The display name is
 how the account is named to others; the person can change their own name and description too, on
 their profile (see [Your profile](../guide/profile.md#change-your-name-and-description)). Only an
-administrator sets the e-mail address. Empty the field and save to remove it.
+administrator sets the e-mail address. Empty the field and save to remove it. **Save profile** stays
+greyed out while **Display name** is empty: every account has a name.
 
 The account's picture is not set here: with the [Archive](../archive/index.md) installed, it is the
 cover photo of the person in the archive that the account is linked to. [Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)
@@ -308,7 +309,8 @@ list every option.
 | Someone does not see a folder or album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
 | **Create user** says "Already taken"                                            | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
 | "Another account has this address" under **E-mail**                             | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |
-| `user create: '<name>' is the name of a built-in group`                         | The names `users` and `ssh` belong to built-in groups.                               | Choose another username.                                                           |
+| `user create: '<name>' is the name of a built-in group`                         | The names `users`, `ssh` and `sudo` belong to built-in groups.                       | Choose another username.                                                           |
+| `user update: a display name cannot be empty`                                   | Every account has a name.                                                            | Give `--name` a name, or leave it out to keep the one it has.                      |
 | `group delete: cannot delete the built-in group '<name>'`                       | Built-in groups stay.                                                                | Nothing to do.                                                                     |
 | `user passwd: the guest account cannot have a password`                         | `guest` never signs in.                                                              | Turn **Visitors may browse** on or off instead.                                    |
 | `<name>: permission denied: only an administrator may run it`                   | The command is the administrator's.                                                  | Choose **Administer…**, or type `admin` in that terminal, if you are in `sudo`.    |
