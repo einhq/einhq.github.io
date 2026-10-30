@@ -154,10 +154,14 @@ When a terminal tab or an SSH login opens, the shell reads, in this order:
 1. `/etc/bashrc`, the same for everyone. It defines the aliases `ll` (`ls -al`), `la` (`ls -A`),
    `whoami` and `id`, and reads the settings: the modules' own, the administrator's in `/etc/config`,
    then your own in `~/.config`.
-2. `~/.bashrc`, your own file, if you have one.
+2. `/etc/bashrc.d/<group>` for each of your groups that has one, in the order of their names: what
+   the administrator gives a group, such as the commands of a module
+   [kept to the group](../admin/modules.md#keep-a-module-to-some-groups). An administrator also gets
+   `/etc/bashrc.d/admin`.
+3. `~/.bashrc`, your own file, if you have one.
 
 EiN reads no `~/.bash_profile` or `~/.profile`. A command sent with `ssh host 'command'` reads
-`/etc/bashrc` but not `~/.bashrc`.
+`/etc/bashrc` and your groups' files but not `~/.bashrc`.
 
 To make a change that lasts:
 

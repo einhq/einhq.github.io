@@ -251,10 +251,14 @@ ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;cd /archive/albums &
 <li><code>/etc/bashrc</code>, the same for everyone. It defines the aliases <code>ll</code> (<code>ls -al</code>), <code>la</code> (<code>ls -A</code>),
 <code>whoami</code> and <code>id</code>, and reads the settings: the modules&#39; own, the administrator&#39;s in <code>/etc/config</code>,
 then your own in <code>~/.config</code>.</li>
+<li><code>/etc/bashrc.d/&lt;group&gt;</code> for each of your groups that has one, in the order of their names: what
+the administrator gives a group, such as the commands of a module
+<a href="../admin/modules.html#keep-a-module-to-some-groups">kept to the group</a>. An administrator also gets
+<code>/etc/bashrc.d/admin</code>.</li>
 <li><code>~/.bashrc</code>, your own file, if you have one.</li>
 </ol>
 <p>EiN reads no <code>~/.bash_profile</code> or <code>~/.profile</code>. A command sent with <code>ssh host &#39;command&#39;</code> reads
-<code>/etc/bashrc</code> but not <code>~/.bashrc</code>.</p>
+<code>/etc/bashrc</code> and your groups&#39; files but not <code>~/.bashrc</code>.</p>
 <p>To make a change that lasts:</p>
 <ol>
 <li><p>Open the file in the editor:</p>

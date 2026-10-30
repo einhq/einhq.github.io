@@ -400,6 +400,12 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td><code>0644</code></td>
 </tr>
 <tr>
+<td><code>/etc/bashrc.d/&lt;group&gt;</code></td>
+<td>the administrator, <code>mod setup</code></td>
+<td>the group&#39;s members&#39; shells, when they open</td>
+<td><code>0644</code></td>
+</tr>
+<tr>
 <td><code>/etc/layout</code></td>
 <td>boot, at every start</td>
 <td><code>/etc/bashrc</code></td>
@@ -464,6 +470,18 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td>the administrator</td>
 <td>the group&#39;s members&#39; sidebar and top bar</td>
 <td></td>
+</tr>
+<tr>
+<td><code>/etc/ui/groups/&lt;group&gt;/nav.d/&lt;module&gt;.json</code></td>
+<td><code>mod setup</code>, as a link to the module&#39;s file, for a module kept to the group</td>
+<td>the group&#39;s members&#39; sidebar and top bar</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/modules/&lt;module&gt;.groups</code></td>
+<td><code>mod groups</code>, <code>mod install --groups</code>, <strong>Settings → Modules</strong></td>
+<td><code>mod setup</code> and the shell, for who has the module</td>
+<td><code>0644</code></td>
 </tr>
 <tr>
 <td><code>~/.ui/nav.json</code></td>
@@ -642,7 +660,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tr>
 </tbody></table>
 </div>
-<p>The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; files, and an update replaces them; put changes in <code>/etc/ui/nav.json</code>, a group&#39;s <code>/etc/ui/groups/&lt;group&gt;/nav.json</code> or <code>~/.ui/nav.json</code>, which exist only once someone writes them. <a href="../guide/customizing.html">Your sidebar and top bar</a> describes the format and its fields.</p>
+<p>A module <a href="../admin/modules.html#keep-a-module-to-some-groups">kept to some groups</a> has its file linked in <code>/etc/ui/groups/&lt;group&gt;/nav.d/&lt;module&gt;.json</code> for each of them and for <code>admin</code> instead, read for the group&#39;s members alongside <code>/etc/ui/nav.d</code>. The files in <code>/etc/ui/nav.d</code> are links to the modules&#39; files, and an update replaces them; put changes in <code>/etc/ui/nav.json</code>, a group&#39;s <code>/etc/ui/groups/&lt;group&gt;/nav.json</code> or <code>~/.ui/nav.json</code>, which exist only once someone writes them. <a href="../guide/customizing.html">Your sidebar and top bar</a> describes the format and its fields.</p>
 <h3 id="etcfstab">/etc/fstab<a class="anchor" href="#etcfstab" aria-label="Link to this section"></a></h3>
 <p><code>/etc/fstab</code> lists the mounts EiN makes again at every start, one per line: the mount point, the type and the options, separated by spaces. A field with a space in it is in double quotes, and a line starting with <code>#</code> is a comment.</p>
 <div class="code"><pre tabindex="0"><code>/mnt/nas sftp host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas</code></pre></div>

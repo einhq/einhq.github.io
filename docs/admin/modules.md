@@ -3,7 +3,7 @@
 Modules decide what your EiN is for: the Archive, the assistant and the client for the media
 service are each a module. This page is for the administrator: which modules there are and what
 they need, how to install, update and remove them on **Settings → Modules** or in the terminal, how
-to see whether each one works, and what to do when one does not.
+to keep one to some groups, how to see whether each one works, and what to do when one does not.
 
 ## The modules there are
 
@@ -220,6 +220,60 @@ repository has that tag, or at a commit, such as `mod install archive@463a92f`. 
 The published modules always compare with the default branch, so they may offer **Update** for
 it, which installs the default branch, as `mod install archive` without a ref does.
 
+## Keep a module to some groups
+
+A module is everyone's until you keep it to some groups. Then only the members of those groups,
+and administrators, have it: its commands, its entries in the sidebar and the top bar, its pages,
+its personal settings, and the module itself on **Settings → Modules** and on the Docs page's
+reference. For everyone else it is as if it were not installed.
+
+- On **Settings → Modules**, open the module. Its section **Available to** says who has it. Choose
+  the groups in the box and choose **Save**; empty the box to make it everyone's again.
+- When you install a module there, choose the groups in **Available to** at the top of the
+  **Published modules** panel first. The modules it needs and brings along stay everyone's.
+- In the terminal, `mod groups` says who a module is for and changes it, and `mod install --groups`
+  installs a module for some groups from the start:
+
+```bash
+# in EiN's terminal, as the administrator
+mod groups assistant family
+mod groups assistant
+```
+
+```text
+family
+```
+
+```bash
+# in EiN's terminal, as the administrator
+mod groups assistant --everyone
+mod install --groups family,friends assistant
+```
+
+`mod groups` names groups as `group-list` prints them, and refuses one there is not:
+`mod groups: no group famly`.
+
+Someone outside the groups who types one of the module's commands gets `command not found`, and
+one who names it by its path is refused:
+`/usr/modules/assistant/bin/assistant-ask: permission denied: module assistant is kept to groups you are not in`.
+The module's services and pipelines go on working for the whole archive, as they run as the
+administrator.
+
+Groups are read when someone signs in, so a person added to a group gets its modules the next time
+they sign in. A terminal open already picks up a change to who a module is for at its next
+command.
+
+When a module that is everyone's needs the one you keep to groups, `mod groups` and the panel warn
+that what it runs of that module fails for anyone outside them, for example
+`mod groups: archive depends on ems and is everyone's: what it runs of ems fails for anyone outside family`.
+Keep both to the same groups, or neither.
+
+Behind this, the groups are in `/etc/modules/<module>.groups`, one name per line. Setting the module
+up puts its commands on the path in `/etc/bashrc.d/<group>` for each group and for `admin`, instead
+of in `/etc/bashrc`, and its sidebar entries in `/etc/ui/groups/<group>/nav.d/<module>.json` instead
+of in `/etc/ui/nav.d`. Removing the module forgets its groups.
+[Configuration files](../reference/config-files.md) lists these files.
+
 ## Remove a module
 
 1. Open **Settings → Modules** and choose the module.
@@ -351,14 +405,15 @@ terminal shows its pages in a browser tab that was already open once that page i
 Every command here runs in EiN's [terminal](../shell/terminal.md) or over SSH. Those that change
 something are for administrators only.
 
-| Command                               | What it does                                                               |
-| ------------------------------------- | -------------------------------------------------------------------------- |
-| `mod list [--long]`                   | The installed modules and whether each works                               |
-| `mod info <name>`                     | One module's manifest, what it requires and what uses it                   |
-| `mod search [words]`                  | The published modules of the module sources, and what is installed of them |
-| `mod install <module>...`             | Install or update modules with what they need, and set them up             |
-| `mod remove [--force] <name>`         | Stop and remove a module                                                   |
-| `mod setup <name>`, `mod setup --all` | Set up one module, or every module in the order of their dependencies      |
+| Command                               | What it does                                                                |
+| ------------------------------------- | --------------------------------------------------------------------------- |
+| `mod list [--long]`                   | The installed modules and whether each works                                |
+| `mod info <name>`                     | One module's manifest, what it requires and what uses it                    |
+| `mod search [words]`                  | The published modules of the module sources, and what is installed of them  |
+| `mod install <module>...`             | Install or update modules with what they need, and set them up              |
+| `mod groups <name> [group...]`        | Who a module is for, or keep it to groups; `--everyone` makes it everyone's |
+| `mod remove [--force] <name>`         | Stop and remove a module                                                    |
+| `mod setup <name>`, `mod setup --all` | Set up one module, or every module in the order of their dependencies       |
 
 [The core commands reference](../reference/commands-core.md#mod) has each one's options, and
 [Updating](updating.md) covers updating EiN itself.

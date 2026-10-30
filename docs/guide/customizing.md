@@ -518,6 +518,10 @@ order of the groups' names. Groups are read at sign-in, so someone added to a gr
 next time they sign in. The `guest` group's file is for visitors browsing without signing in.
 If the folder's name is not a group, `ui-nav` warns `/etc/ui/groups/<name>: no group <name>`.
 
+A group's folder may also hold `nav.d`, with the entries of the modules
+[kept to the group](../admin/modules.md#keep-a-module-to-some-groups). `mod setup` links them there,
+and they count as modules' entries, under everything else, for the group's members alone.
+
 > [!WARNING]
 > `hide`, `admin` and `signedIn` decide only what the sidebar and top bar show. A page still opens
 > by its address for anyone whose permissions allow it, and anyone can add an entry of their own

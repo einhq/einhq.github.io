@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 348 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 349 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 206 in full](commands-core.md).
+[All 207 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -115,9 +115,10 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [mkrouter](commands-core.md#mkrouter) | Create a router node. |
 | [mod](commands-core.md#mod) | Module management. |
 | [mod-cache](commands-core.md#mod-cache) | Pre-fetch a module's TypeScript command dependencies. |
+| [mod-groups](commands-core.md#mod-groups) | Say which groups a module is kept to, or keep it to some groups, or make it everyone's again. |
 | [mod-info](commands-core.md#mod-info) | Show module information. |
 | [mod-install](commands-core.md#mod-install) | Install modules from their repositories, or update them, with the dependencies they lack, and set them up. |
-| [mod-list](commands-core.md#mod-list) | List installed modules. |
+| [mod-list](commands-core.md#mod-list) | List installed modules, those kept to groups only for their members and administrators. |
 | [mod-remove](commands-core.md#mod-remove) | Uninstall a module. |
 | [mod-search](commands-core.md#mod-search) | The published modules: each module-* repository of the module sources (CFG_MODULE_SOURCES), with its version and whether it is installed. |
 | [mod-setup](commands-core.md#mod-setup) | Set up a module already in the modules directory. |

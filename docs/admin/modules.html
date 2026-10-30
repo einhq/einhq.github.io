@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Modules – EiN documentation</title>
-    <meta name="description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to see whether each one works, and what to do when one does not.">
+    <meta name="description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to keep one to some groups, how to see whether each one works, and what to do when one does not.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/modules.html">
     <meta property="og:title" content="Modules – EiN documentation">
-    <meta property="og:description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to see whether each one works, and what to do when one does not.">
+    <meta property="og:description" content="Modules decide what your EiN is for: the Archive, the assistant and the client for the media service are each a module. This page is for the administrator: which modules there are and what they need, how to install, update and remove them on Settings → Modules or in the terminal, how to keep one to some groups, how to see whether each one works, and what to do when one does not.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,7 +89,7 @@
 <p>Modules decide what your EiN is for: the Archive, the assistant and the client for the media
 service are each a module. This page is for the administrator: which modules there are and what
 they need, how to install, update and remove them on <strong>Settings → Modules</strong> or in the terminal, how
-to see whether each one works, and what to do when one does not.</p>
+to keep one to some groups, how to see whether each one works, and what to do when one does not.</p>
 <h2 id="the-modules-there-are">The modules there are<a class="anchor" href="#the-modules-there-are" aria-label="Link to this section"></a></h2>
 <p>EiN without modules is the tree, the shell, accounts and the frame of the web interface. Every
 page for photos, people and places, the chat, and the work done on what you upload comes from a
@@ -350,6 +350,45 @@ repository has that tag, or at a commit, such as <code>mod install archive@463a9
 <strong>Update</strong> then keeps it at the tag, and a module installed at a commit has no <strong>Update</strong> there.
 The published modules always compare with the default branch, so they may offer <strong>Update</strong> for
 it, which installs the default branch, as <code>mod install archive</code> without a ref does.</p>
+<h2 id="keep-a-module-to-some-groups">Keep a module to some groups<a class="anchor" href="#keep-a-module-to-some-groups" aria-label="Link to this section"></a></h2>
+<p>A module is everyone&#39;s until you keep it to some groups. Then only the members of those groups,
+and administrators, have it: its commands, its entries in the sidebar and the top bar, its pages,
+its personal settings, and the module itself on <strong>Settings → Modules</strong> and on the Docs page&#39;s
+reference. For everyone else it is as if it were not installed.</p>
+<ul>
+<li>On <strong>Settings → Modules</strong>, open the module. Its section <strong>Available to</strong> says who has it. Choose
+the groups in the box and choose <strong>Save</strong>; empty the box to make it everyone&#39;s again.</li>
+<li>When you install a module there, choose the groups in <strong>Available to</strong> at the top of the
+<strong>Published modules</strong> panel first. The modules it needs and brings along stay everyone&#39;s.</li>
+<li>In the terminal, <code>mod groups</code> says who a module is for and changes it, and <code>mod install --groups</code>
+installs a module for some groups from the start:</li>
+</ul>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod <span class="hljs-built_in">groups</span> assistant family
+mod <span class="hljs-built_in">groups</span> assistant</code></pre></div>
+<div class="code"><pre tabindex="0"><code>family</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod <span class="hljs-built_in">groups</span> assistant --everyone
+mod install --<span class="hljs-built_in">groups</span> family,friends assistant</code></pre></div>
+<p><code>mod groups</code> names groups as <code>group-list</code> prints them, and refuses one there is not:
+<code>mod groups: no group famly</code>.</p>
+<p>Someone outside the groups who types one of the module&#39;s commands gets <code>command not found</code>, and
+one who names it by its path is refused:
+<code>/usr/modules/assistant/bin/assistant-ask: permission denied: module assistant is kept to groups you are not in</code>.
+The module&#39;s services and pipelines go on working for the whole archive, as they run as the
+administrator.</p>
+<p>Groups are read when someone signs in, so a person added to a group gets its modules the next time
+they sign in. A terminal open already picks up a change to who a module is for at its next
+command.</p>
+<p>When a module that is everyone&#39;s needs the one you keep to groups, <code>mod groups</code> and the panel warn
+that what it runs of that module fails for anyone outside them, for example
+<code>mod groups: archive depends on ems and is everyone&#39;s: what it runs of ems fails for anyone outside family</code>.
+Keep both to the same groups, or neither.</p>
+<p>Behind this, the groups are in <code>/etc/modules/&lt;module&gt;.groups</code>, one name per line. Setting the module
+up puts its commands on the path in <code>/etc/bashrc.d/&lt;group&gt;</code> for each group and for <code>admin</code>, instead
+of in <code>/etc/bashrc</code>, and its sidebar entries in <code>/etc/ui/groups/&lt;group&gt;/nav.d/&lt;module&gt;.json</code> instead
+of in <code>/etc/ui/nav.d</code>. Removing the module forgets its groups.
+<a href="../reference/config-files.html">Configuration files</a> lists these files.</p>
 <h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Open <strong>Settings → Modules</strong> and choose the module.</li>
@@ -509,6 +548,10 @@ something are for administrators only.</p>
 <td>Install or update modules with what they need, and set them up</td>
 </tr>
 <tr>
+<td><code>mod groups &lt;name&gt; [group...]</code></td>
+<td>Who a module is for, or keep it to groups; <code>--everyone</code> makes it everyone&#39;s</td>
+</tr>
+<tr>
 <td><code>mod remove [--force] &lt;name&gt;</code></td>
 <td>Stop and remove a module</td>
 </tr>
@@ -527,7 +570,7 @@ something are for administrators only.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
     </div>
   </body>
 </html>

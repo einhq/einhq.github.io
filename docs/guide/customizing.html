@@ -686,6 +686,9 @@ still rename and move what it gives. Someone in several groups with a file gets 
 order of the groups&#39; names. Groups are read at sign-in, so someone added to a group gets its file the
 next time they sign in. The <code>guest</code> group&#39;s file is for visitors browsing without signing in.
 If the folder&#39;s name is not a group, <code>ui-nav</code> warns <code>/etc/ui/groups/&lt;name&gt;: no group &lt;name&gt;</code>.</p>
+<p>A group&#39;s folder may also hold <code>nav.d</code>, with the entries of the modules
+<a href="../admin/modules.html#keep-a-module-to-some-groups">kept to the group</a>. <code>mod setup</code> links them there,
+and they count as modules&#39; entries, under everything else, for the group&#39;s members alone.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p><code>hide</code>, <code>admin</code> and <code>signedIn</code> decide only what the sidebar and top bar show. A page still opens
 by its address for anyone whose permissions allow it, and anyone can add an entry of their own
