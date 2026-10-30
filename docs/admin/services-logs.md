@@ -195,6 +195,7 @@ For a service's output, use [`tail`](../reference/commands-core.md#tail), which 
 # in EiN's terminal
 tail -n 50 /var/logs/services/ems-link/stdout.log
 tail -f /var/logs/services/models/stderr.log      # keep following; Ctrl+C ends it
+tail -n 0 -f /var/logs/services/models/stderr.log # only what is written from now on
 ```
 
 ```text
