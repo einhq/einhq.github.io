@@ -203,7 +203,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <td><code>EIN_SOURCE_KEY</code></td>
 <td>both</td>
 <td>unset</td>
-<td>The token that reads <code>--source</code>&#39;s repositories when they are private. Kept in <code>.env</code> with the source.</td>
+<td>The token that reads <code>--source</code>&#39;s repositories when they are private. Kept in <code>.env</code> with the source; a <code>--source</code> on another host without one drops it.</td>
 </tr>
 <tr>
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
@@ -699,7 +699,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code></td>
-<td>where the sources are cloned from, and the token that reads them when they are private; <code>--source</code> sets them</td>
+<td>where the sources are cloned from, and the token that reads them when they are private; <code>--source</code> sets them, and one on another host empties the token unless <code>EIN_SOURCE_KEY</code> gives a new one</td>
 </tr>
 <tr>
 <td><code>EIN_DB_DIR</code></td>

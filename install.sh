@@ -24,19 +24,20 @@ set -uo pipefail
 
 # Everything runs from main, called on the last line, so a download cut short runs nothing.
 main() {
-  local home=${EIN_HOME:-$HOME/ein} source= installed= data= modules= arg next=
+  local home=${EIN_HOME:-$HOME/ein} source= installed= installed_key= data= modules= arg next=
   key=${EIN_SOURCE_KEY:-}
   ems=0 llm=0
   container= container_version=
   # A machine installed before keeps its options, its modules, its data folder, its source and the
-  # source's token: they are in its .env, and setup.sh reads EIN_DATA only the first time.
+  # source's token: they are in its .env, and setup.sh reads EIN_DATA only the first time. The token
+  # is kept only while the source stays on the same host: another one would refuse it.
   if [ -f "$home/.env" ]; then
     grep -qx 'EIN_EMS=1' "$home/.env" && ems=1
     grep -qx 'EIN_LLM=1' "$home/.env" && llm=1
     modules=$(sed -n 's/^EIN_MODULES=//p' "$home/.env" | tr -d '"')
     data=$(sed -n 's/^EIN_DATA=//p' "$home/.env")
     installed=$(sed -n 's/^EIN_SOURCE=//p' "$home/.env")
-    [ -n "$key" ] || key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
+    installed_key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
   fi
   for arg in "$@"; do
     case $next in
@@ -57,6 +58,7 @@ main() {
     esac
   done
   source=${source:-${installed:-https://github.com/einhq}}
+  [ -n "$key" ] || [ "$(host_of "$source")" != "$(host_of "$installed")" ] || key=$installed_key
   data=${data:-${EIN_DATA:-$home/data}}
   failed=0
   warned=0
@@ -152,6 +154,12 @@ main() {
     git_source clone --quiet "$source/deploy.git" "$home" || return 1
   fi
   EIN_DATA=$data EIN_SOURCE_KEY=$key exec "$home/setup.sh" "$@"
+}
+
+host_of() {
+  local host=${1#*://}
+  host=${host%%/*}
+  echo "${host,,}"
 }
 
 # git with the source's token as a header, given in the environment of this call alone: it is not
