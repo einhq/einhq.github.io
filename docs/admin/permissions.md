@@ -147,12 +147,12 @@ chmod u=rwx,g=rx,o-rwx '/archive/albums/Christmas at the cottage'
 chmod -r o-rw /archive                 # the whole subtree; each node keeps its other bits
 ```
 
-| Form               | Meaning                                                               |
-| ------------------ | --------------------------------------------------------------------- |
-| `0750`, `750`      | Set all nine bits. The same mode on every node of a recursive change. |
-| `u`, `g`, `o`, `a` | Owner, group, everyone else, all three. No letter means all three.    |
-| `+`, `-`, `=`      | Add these bits, take them away, or set exactly these.                 |
-| `r`, `w`, `x`      | The bits. Clauses are joined with commas.                             |
+| Form               | Meaning                                                                 |
+| ------------------ | ----------------------------------------------------------------------- |
+| `0750`, `750`      | Set all nine bits. The same mode on every node of a recursive change.   |
+| `u`, `g`, `o`, `a` | Owner, group, everyone else, all three. No letter means all three.      |
+| `+`, `-`, `=`      | Add these bits, take them away, or set exactly these; `o=` clears them. |
+| `r`, `w`, `x`      | The bits. Clauses are joined with commas.                               |
 
 A symbolic mode is worked out from each node's own mode, as coreutils' `chmod -R` does, so
 `chmod -r o-rw` clears only those bits and leaves every node's other bits as they were. EiN has no

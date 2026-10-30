@@ -81,16 +81,20 @@ you save, so you can see what a change will do.
 
 Two buttons fill the list for you:
 
-| Button      | What it sets                                                                                   |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| **Default** | Everyone with an account can view it, and nobody else is listed. The owner keeps their access. |
-| **Private** | Nobody but the owner: every person, group and visitor row is taken away.                       |
+| Button      | What it sets                                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Default** | The administrator's default sharing: its group, with what it gives the owner and the group. Nobody else is listed. |
+| **Private** | Nobody but the owner: every person, group and visitor row is taken away.                                           |
 
 The button that matches the list is highlighted. A preset only fills the list; **Save** applies
 it.
 
-**Default** here always means "everyone with an account can see it". It is not the sharing your
-administrator chose for new albums, which can be narrower.
+**Default** is the sharing your administrator chose for what is created as shared, under
+**Settings → Permissions → Sharing**; resting the pointer on it says whom it shares with. On a
+standard installation that is everyone with an account, who can view it. Where the administrator
+also named an owner, **Default** gives the album to that person, and the dialog shows them as its
+owner before you save; you then keep only the access the default sharing gives you. It is not
+**How widely what you create is shared** on your profile, which is yours alone.
 
 **Private** does not touch a share link. An album with a link stays **Public** to anyone holding
 the link until you choose **Delete link** under **Share with a link**.
