@@ -197,7 +197,7 @@ The Search page's **Labels** section also lists suggested labels, drawn outlined
 
 Every label is also a folder: `/archive/tags/<label>` holds a link to each picture, album, person, location or device that carries the label. You can look through it in the terminal, for example with `ls /archive/tags/sailing`. [Links](../concepts/links.md) explains links in the tree.
 
-A label is kept in two places: on the node that carries it, which the label pills count, and as the link in the folder, which a search for the label reads. The dialogs, `label add` and `label remove` keep the two in step, so put labels on and take them off with those, not by adding or deleting links in the folder. When something labelled is deleted, its link in the folder goes with it, and `label prune` clears any link left pointing at nothing. A label is listed while at least one thing carries it.
+A label is kept on the node that carries it: the label pills count it there, and a search for the label finds it there. The link in the folder is for looking through, so a link added or deleted by hand labels nothing and unlabels nothing. The dialogs, `label add` and `label remove` keep the folder in step, so put labels on and take them off with those. When something labelled is deleted, its link in the folder goes with it, and `label prune` clears any link left pointing at nothing. A label is listed while at least one thing carries it.
 
 ### Let EiN suggest where a label belongs
 

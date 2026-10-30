@@ -64,6 +64,10 @@ When words or a picture rank the results, each tile shows a percentage. The best
 result ranks within this search; it is not a measure of how sure EiN is, and the same picture can
 show a different number in another search.
 
+A search of chips alone, such as a person, a label or a year, has nothing to rank by: a picture is
+either in it or not. Its results show newest first, without percentages, and with the date rail
+beside them when they span enough dates.
+
 ### Show only your own files
 
 **Show only mine** (only when you are signed in) limits the page, both the feed and a search, to
@@ -96,8 +100,13 @@ found more.
   ending in `…`, meaning every person whose name contains it.
 - A place becomes one of your [locations](places.md), or, for a country or a city that is not one,
   an **Area** chip covering it.
-- A word for a relative, such as `mother` or `husband`, is not read as a person: the yellow note
-  names it, and it is searched as words. Name the person instead.
+- `me` (`mig`) is you, and a relative of yours, such as `my mother` or `min mammas syster`, is
+  whoever your family tree says that is. Both need your account to be linked to your person in the
+  archive (your account menu then has a **Me** row; your administrator makes the link, see
+  [Accounts and groups](../admin/accounts.md)). Without the link, or when the tree records no such
+  relative or more than one, or the search names two relations, the yellow note names the word and
+  it is searched as words; name the person instead. `show me` at the start of a search asks for
+  nobody.
 
 Some examples on the Media page of the Wrenfield demo:
 
