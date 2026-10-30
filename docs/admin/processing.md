@@ -192,13 +192,14 @@ runs `pipeline-heal --apply`.
 
 To act on many at once, tick them on the pipeline's page and choose **Rerun**.
 
-| To                                                       | On the pages          | In the terminal                                |
-| -------------------------------------------------------- | --------------------- | ---------------------------------------------- |
-| Run an instance afresh from the pipeline's current steps | **Rerun**             | `pipeline-rerun <pipeline>/<id> …`             |
-| Run only the failed steps again                          | none                  | `pipeline-restart <pipeline>/<id>`             |
-| Run one failed or skipped step again                     | **Retry** on the step | `pipeline-step-restart <pipeline>/<id> <step>` |
-| Stop a running instance                                  | **Cancel**            | `pipeline-cancel <pipeline>/<id>`              |
-| Delete instances, cancelling running ones first          | **Remove**            | `pipeline-remove <pipeline>/<id> …`            |
+| To                                                       | On the pages            | In the terminal                                |
+| -------------------------------------------------------- | ----------------------- | ---------------------------------------------- |
+| Run an instance afresh from the pipeline's current steps | **Rerun**               | `pipeline-rerun <pipeline>/<id> …`             |
+| Run only the failed steps again                          | none                    | `pipeline-restart <pipeline>/<id>`             |
+| Run one failed or skipped step again                     | **Retry** on the step   | `pipeline-step-restart <pipeline>/<id> <step>` |
+| Stop a running step that hangs and run it again          | **Restart** on the step | `pipeline-step-restart <pipeline>/<id> <step>` |
+| Stop a running or queued instance                        | **Cancel**              | `pipeline-cancel <pipeline>/<id>`              |
+| Delete instances, cancelling running ones first          | **Remove**              | `pipeline-remove <pipeline>/<id> …`            |
 
 Only an administrator sees these buttons, and only an administrator can run these commands.
 
@@ -213,14 +214,22 @@ service is stopped:
 2. Start the one that is stopped, or read its log if it keeps stopping.
    [Services and logs](services-logs.md) shows how.
 
-When no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was
-removed. The warning then gives the command that cancels them, with the pool's path, such as the
-Archive's `/var/pools/media`:
+When no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline
+changed or is gone, and the warning says what to do in each case:
 
-```bash
-# in EiN's terminal
-pool-cancel /var/pools/media --kind <kind>
-```
+- The pipeline now queues that step under another kind. Cancel the jobs, with the pool's path, such
+  as the Archive's `/var/pools/media`, and the engine queues them again under the new kind within a
+  minute:
+
+  ```bash
+  # in EiN's terminal
+  pool-cancel /var/pools/media --kind <kind>
+  ```
+
+- The pipeline is no longer defined. Cancelling its jobs does not last: the engine queues them again
+  while their instances are open. `pipeline-prune` removes the instances and their jobs once the
+  definition has been gone for 10 minutes, and the `pipeline-pruner` service does it in its next
+  round.
 
 ### Dropped events
 
@@ -287,13 +296,19 @@ These settings are in the **Processing** category of **Settings → System**, or
 in progress is picked up again; `CFG_PIPELINE_STEP_QUIET_MS` restarts nothing and counts from the
 next look. [Configuration](configuration.md) explains how.
 
-| Setting                                                                               | Default   | What it decides                                                     |
-| ------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
-| [`CFG_PIPELINE_MAX_CONCURRENT`](../reference/settings.md#cfg_pipeline_max_concurrent) | `4`       | Steps the engine itself runs at once                                |
-| [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)   | `1800000` | How long a running step may be silent before it is listed as quiet  |
-| [`CFG_PIPELINE_PRUNE_INTERVAL`](../reference/settings.md#cfg_pipeline_prune_interval) | `3600`    | Seconds between the pruner's rounds, which also run `pipeline-heal` |
+| Setting                                                                                       | Default   | What it decides                                                     |
+| --------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
+| [`CFG_PIPELINE_MAX_CONCURRENT`](../reference/settings.md#cfg_pipeline_max_concurrent)         | `4`       | Steps the engine itself runs at once                                |
+| [`CFG_PIPELINE_MAX_OPEN_INSTANCES`](../reference/settings.md#cfg_pipeline_max_open_instances) | `5000`    | Instances open at once, those waiting in a pool included            |
+| [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)           | `1800000` | How long a running step may be silent before it is listed as quiet  |
+| [`CFG_PIPELINE_PRUNE_INTERVAL`](../reference/settings.md#cfg_pipeline_prune_interval)         | `3600`    | Seconds between the pruner's rounds, which also run `pipeline-heal` |
 
-The engine has more settings, for how many triggers and instances it holds; their defaults suit a
+With 5000 instances open, the engine starts new ones only for the pipelines holding less than an
+equal share of the 5000, up to 10000 open in all, and the rest of the new work waits in the pool
+`/var/pools/triggers` until instances finish; nothing is lost. Every minute the engine looks at each
+open instance again, so raise the limit only together with `CFG_PIPELINE_STUCK_SWEEP_MS`.
+
+The engine has more settings, for how many triggers and steps it holds; their defaults suit a
 machine of any size, and [Settings](../reference/settings.md#processing) lists them all. The
 **Processing** category also holds the settings modules bring, such as how much work the Archive's
 workers run at once; [Processing pictures](../archive/processing.md#how-much-runs-at-once) covers
@@ -308,11 +323,14 @@ leaves failed and running instances alone. A pipeline that is no longer defined,
 was removed or it was renamed, loses all its instances once its definition has been gone for 10
 minutes.
 
-To delete by hand, use **Prune** on a pipeline's page, which removes its finished instances, or
-only those of the tab you are on, or `pipeline-prune`:
+To delete by hand, use **Prune** on a pipeline's page, which removes its completed and cancelled
+instances, or only those of the tab you are on, or `pipeline-prune`. Neither removes a failed
+instance unless you ask for failed ones, from the **Failed** tab or with `-s failed`, since
+`pipeline-heal` runs those again:
 
 ```bash
 # in EiN's terminal
+pipeline-prune                             # completed and cancelled instances, every pipeline
 pipeline-prune -s failed media-faces       # the failed instances of one pipeline
 pipeline-prune --older-than 30d            # completed more than 30 days ago, every pipeline
 ```

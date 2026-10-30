@@ -161,7 +161,7 @@
 <tr>
 <td><code>models-second</code></td>
 <td>archive</td>
-<td>A second worker for the same steps, in the reverse order; it ends at once, stopped, while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code></td>
+<td>A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code></td>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
@@ -219,7 +219,7 @@
 <li><code>×</code> and a number when EiN has restarted it since it was last started by hand. Hover it for &quot;Restarted 2 time(s)&quot;.</li>
 <li>A badge: <strong>running</strong>, <strong>starting</strong>, <strong>stopping</strong>, <strong>stopped</strong>, <strong>failed</strong>, or <strong>disabled</strong> for a service that is switched off.</li>
 </ul>
-<p>The heading counts them: <code>21 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. With the Archive installed, its stopped <code>models-second</code> is counted as down while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code>. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
+<p>The heading counts them: <code>21 healthy</code>, or in red <code>1 down</code> when an enabled service is not running. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.</p>
 <p><strong>Settings → Modules</strong> also shows a module&#39;s services and whether each runs, on the module&#39;s <strong>Services</strong> tab; the controls are here on the dashboard.</p>
 <h2 id="restart-stop-and-start-a-service">Restart, stop and start a service<a class="anchor" href="#restart-stop-and-start-a-service" aria-label="Link to this section"></a></h2>
 <p>On the <strong>Services</strong> tab, as the administrator or in <a href="../guide/interface.html#admin-mode">admin mode</a>, each row has buttons at its right:</p>

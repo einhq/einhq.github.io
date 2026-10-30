@@ -22,7 +22,7 @@ Core brings nine services, the first nine below, and they are all an EiN without
 | `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                           |
 | `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                          |
 | `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                  |
-| `models-second`     | archive   | A second worker for the same steps, in the reverse order; it ends at once, stopped, while `CFG_MODEL_SECOND_SLOTS` is `0`       |
+| `models-second`     | archive   | A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while `CFG_MODEL_SECOND_SLOTS` is `0`    |
 | `media-heal`        | archive   | Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up |
 | `album-metadata`    | archive   | Keeps each album's photo stacks, time span and cover current                                                                    |
 | `label-models`      | archive   | Keeps the models behind label suggestions trained                                                                               |
@@ -48,7 +48,7 @@ The card lists every service, one row each, and asks again every 10 seconds whil
 - `×` and a number when EiN has restarted it since it was last started by hand. Hover it for "Restarted 2 time(s)".
 - A badge: **running**, **starting**, **stopping**, **stopped**, **failed**, or **disabled** for a service that is switched off.
 
-The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. With the Archive installed, its stopped `models-second` is counted as down while `CFG_MODEL_SECOND_SLOTS` is `0`. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
+The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
 
 **Settings → Modules** also shows a module's services and whether each runs, on the module's **Services** tab; the controls are here on the dashboard.
 

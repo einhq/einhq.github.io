@@ -24,7 +24,7 @@ The Archive runs these services for its processing:
 | `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                                |
 | `cpu`            | The worker for work done on this machine, such as reading metadata, making thumbnails and transcoding video                               |
 | `models`         | The worker for work done by a model in the [media service](../ems/index.md), such as finding faces or transcribing speech                 |
-| `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; it is off by default                                   |
+| `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; at the default `0` it runs idle and takes no work      |
 | `media-heal`     | Finds files that are missing something and announces them again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)) |
 
 Its other services, which keep albums, person covers, label suggestions and staging up to date,

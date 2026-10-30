@@ -308,7 +308,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 <tr>
 <td><strong>Work that nothing will run</strong> says no defined pipeline queues this kind any more</td>
-<td>The jobs are left over from a pipeline that was removed. Cancel them with the <code>pool cancel</code> command the message shows.</td>
+<td>The jobs belong to a pipeline that changed or is gone. If it queues the step under another kind now, run the <code>pool cancel</code> command the message shows; if it is no longer defined, run <code>pipeline-prune</code>. See <a href="processing.html#work-that-nothing-will-run">Work that nothing will run</a>.</td>
 </tr>
 <tr>
 <td><code>… waiting, the oldest for …, none done in the last hour</code></td>
@@ -316,7 +316,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 <tr>
 <td><code>… running steps silent for … or more: …</code></td>
-<td>Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, stop its instance with <code>pipeline-cancel &lt;pipeline&gt;/&lt;id&gt;</code> and run it afresh with <code>pipeline-rerun &lt;pipeline&gt;/&lt;id&gt;</code>.</td>
+<td>Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, stop it and run it again with <strong>Restart</strong> on the step, or <code>pipeline-step-restart &lt;pipeline&gt;/&lt;id&gt; &lt;step&gt;</code>.</td>
 </tr>
 <tr>
 <td><code>… entries dropped after their delivery attempts (queue-dead /var/queues/…: --retry or --drop)</code></td>

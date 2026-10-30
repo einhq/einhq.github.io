@@ -99,12 +99,14 @@ The storage projection is measured over the last seven days. A tier that is not 
 When jobs of some kind are ready and no running worker offers that kind for more than five minutes, a red box, **Work that nothing will run**, stands above the tabs on every tab, and the `kind <name>` check fails. The box names the pool, how many jobs are ready and for how long, and the pipelines that queue that kind.
 
 - When it names pipelines, the worker that should run the kind is not running. Open **Services** and start the stopped one, or read the **Log** tab for why it stopped.
-- When it says that no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was removed or renamed. Cancel them with the command the box gives:
+- When it says that no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline changed or is gone. If the pipeline now queues that step under another kind, cancel the jobs with the command the box gives, and the engine queues them again under the new kind:
 
   ```bash
   # in EiN's terminal, as an administrator
   pool cancel /var/pools/media --kind gpu-describe
   ```
+
+  If the pipeline is no longer defined, cancelling does not last, since the engine queues the jobs again while their instances are open; `pipeline prune` removes the instances and their jobs once it has been gone for ten minutes. [Work that nothing will run](processing.md#work-that-nothing-will-run) has both.
 
 ## The Media service tab
 
@@ -112,7 +114,7 @@ The `ems` module adds this tab, and it is there only while that module is instal
 
 ## The Services tab
 
-**Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down`; with the Archive installed, its stopped `models-second`, off while `CFG_MODEL_SECOND_SLOTS` is `0`, counts as down.
+**Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down` when enabled services are not running.
 
 ![The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 1h 16m and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
 

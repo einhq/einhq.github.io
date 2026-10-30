@@ -323,7 +323,12 @@ pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code><
 <td><code>pipeline-step-restart &lt;pipeline&gt;/&lt;id&gt; &lt;step&gt;</code></td>
 </tr>
 <tr>
-<td>Stop a running instance</td>
+<td>Stop a running step that hangs and run it again</td>
+<td><strong>Restart</strong> on the step</td>
+<td><code>pipeline-step-restart &lt;pipeline&gt;/&lt;id&gt; &lt;step&gt;</code></td>
+</tr>
+<tr>
+<td>Stop a running or queued instance</td>
 <td><strong>Cancel</strong></td>
 <td><code>pipeline-cancel &lt;pipeline&gt;/&lt;id&gt;</code></td>
 </tr>
@@ -345,11 +350,21 @@ with the Archive installed, they are <code>cpu</code> and <code>models</code>.</
 <li>Start the one that is stopped, or read its log if it keeps stopping.
 <a href="services-logs.html">Services and logs</a> shows how.</li>
 </ol>
-<p>When no defined pipeline queues the kind any more, the jobs are left over from a pipeline that was
-removed. The warning then gives the command that cancels them, with the pool&#39;s path, such as the
-Archive&#39;s <code>/var/pools/media</code>:</p>
+<p>When no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline
+changed or is gone, and the warning says what to do in each case:</p>
+<ul>
+<li><p>The pipeline now queues that step under another kind. Cancel the jobs, with the pool&#39;s path, such
+as the Archive&#39;s <code>/var/pools/media</code>, and the engine queues them again under the new kind within a
+minute:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pool-cancel /var/pools/media --kind &lt;kind&gt;</code></pre></div>
+</li>
+<li><p>The pipeline is no longer defined. Cancelling its jobs does not last: the engine queues them again
+while their instances are open. <code>pipeline-prune</code> removes the instances and their jobs once the
+definition has been gone for 10 minutes, and the <code>pipeline-pruner</code> service does it in its next
+round.</p>
+</li>
+</ul>
 <h3 id="dropped-events">Dropped events<a class="anchor" href="#dropped-events" aria-label="Link to this section"></a></h3>
 <p>An event that fails ten delivery attempts, for example because its node no longer exists, is set
 aside rather than tried forever. The <strong>Work</strong> table then shows <strong>N dropped</strong>, and <code>health</code> fails
@@ -406,6 +421,11 @@ next look. <a href="configuration.html">Configuration</a> explains how.</p>
 <td>Steps the engine itself runs at once</td>
 </tr>
 <tr>
+<td><a href="../reference/settings.html#cfg_pipeline_max_open_instances"><code>CFG_PIPELINE_MAX_OPEN_INSTANCES</code></a></td>
+<td><code>5000</code></td>
+<td>Instances open at once, those waiting in a pool included</td>
+</tr>
+<tr>
 <td><a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a></td>
 <td><code>1800000</code></td>
 <td>How long a running step may be silent before it is listed as quiet</td>
@@ -417,7 +437,11 @@ next look. <a href="configuration.html">Configuration</a> explains how.</p>
 </tr>
 </tbody></table>
 </div>
-<p>The engine has more settings, for how many triggers and instances it holds; their defaults suit a
+<p>With 5000 instances open, the engine starts new ones only for the pipelines holding less than an
+equal share of the 5000, up to 10000 open in all, and the rest of the new work waits in the pool
+<code>/var/pools/triggers</code> until instances finish; nothing is lost. Every minute the engine looks at each
+open instance again, so raise the limit only together with <code>CFG_PIPELINE_STUCK_SWEEP_MS</code>.</p>
+<p>The engine has more settings, for how many triggers and steps it holds; their defaults suit a
 machine of any size, and <a href="../reference/settings.html#processing">Settings</a> lists them all. The
 <strong>Processing</strong> category also holds the settings modules bring, such as how much work the Archive&#39;s
 workers run at once; <a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> covers
@@ -429,9 +453,12 @@ then keeps the 2000 most recently completed instances of each pipeline and delet
 leaves failed and running instances alone. A pipeline that is no longer defined, because its module
 was removed or it was renamed, loses all its instances once its definition has been gone for 10
 minutes.</p>
-<p>To delete by hand, use <strong>Prune</strong> on a pipeline&#39;s page, which removes its finished instances, or
-only those of the tab you are on, or <code>pipeline-prune</code>:</p>
+<p>To delete by hand, use <strong>Prune</strong> on a pipeline&#39;s page, which removes its completed and cancelled
+instances, or only those of the tab you are on, or <code>pipeline-prune</code>. Neither removes a failed
+instance unless you ask for failed ones, from the <strong>Failed</strong> tab or with <code>-s failed</code>, since
+<code>pipeline-heal</code> runs those again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+pipeline-prune                             <span class="hljs-comment"># completed and cancelled instances, every pipeline</span>
 pipeline-prune -s failed media-faces       <span class="hljs-comment"># the failed instances of one pipeline</span>
 pipeline-prune --older-than 30d            <span class="hljs-comment"># completed more than 30 days ago, every pipeline</span></code></pre></div>
 <h2 id="pipelines-come-with-modules">Pipelines come with modules<a class="anchor" href="#pipelines-come-with-modules" aria-label="Link to this section"></a></h2>
