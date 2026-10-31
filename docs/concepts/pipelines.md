@@ -225,7 +225,8 @@ records where it came from. Such a derived file starts no pipeline unless the tr
 `allowDerived: true`, so a face crop is never searched for faces of its own.
 
 If the subject is deleted while its run is going, the run is cancelled: its remaining steps are
-skipped and their pool jobs dropped.
+skipped and their pool jobs dropped. A step that was running when it went, and failed for want of
+it, is skipped too, not failed or retried.
 
 ### What a run's state means
 

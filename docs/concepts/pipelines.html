@@ -442,7 +442,8 @@ to one more run when it ends.</p>
 records where it came from. Such a derived file starts no pipeline unless the trigger says
 <code>allowDerived: true</code>, so a face crop is never searched for faces of its own.</p>
 <p>If the subject is deleted while its run is going, the run is cancelled: its remaining steps are
-skipped and their pool jobs dropped.</p>
+skipped and their pool jobs dropped. A step that was running when it went, and failed for want of
+it, is skipped too, not failed or retried.</p>
 <h3 id="what-a-runs-state-means">What a run&#39;s state means<a class="anchor" href="#what-a-runs-state-means" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
