@@ -21,8 +21,8 @@ Each file in the viewer has its own address: the page's address with the file ad
 `fullscreen` parameter (`…?fullscreen=%2Fmedia%2F…`), or, opened on its
 own, `/media/` followed by the file's path. You can copy it from the browser's address bar and send
 it to someone who may see the file. Stepping to another
-file replaces the address instead of adding to the browser's history, so one press of the browser's
-Back button closes the viewer and returns you to the page underneath.
+file replaces the address once you stop on it, instead of adding to the browser's history, so one
+press of the browser's Back button closes the viewer and returns you to the page underneath.
 
 ## What the viewer shows
 
