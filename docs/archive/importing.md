@@ -305,6 +305,12 @@ newest files are. Each stage shows while it holds files:
    EiN worked out about them; from then on whoever can see that album sees them. A discarded group
    goes to your trash. Filing and discarding can be undone on the category's **Done** tab.
 
+A picture, video or recording you upload or copy in over SFTP is
+[frozen](../concepts/files.md#frozen-files): EiN keeps it as it arrived, and nothing, in EiN or on
+the disk, can write over it. What EiN works out about it, from its date to the faces in it, is kept
+beside it, so filing, turning and correcting it never change the file. The pictures in a zip or a
+Takeout export are taken out by EiN, and are not frozen.
+
 The card's bar shows the same files by how far along they are: **Being prepared**, **To sort**
 (read, with a date), **Needs a date** (read, but with no date) and **Other files** (files that are
 not pictures, videos or recordings). An exact copy that went no further, and an empty picture,

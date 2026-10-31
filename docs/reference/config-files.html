@@ -497,6 +497,12 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td><code>0600</code></td>
 </tr>
 <tr>
+<td><code>/etc/frozen-uploads</code></td>
+<td>core at the first start, then the administrator</td>
+<td>an upload over the web or SFTP, as it arrives</td>
+<td><code>0644</code></td>
+</tr>
+<tr>
 <td><code>/etc/ssh_host_key</code>, <code>.pub</code></td>
 <td>the SSH server, at the first start</td>
 <td>the SSH server</td>
@@ -666,6 +672,16 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <p><code>/etc/fstab</code> lists the mounts EiN makes again at every start, one per line: the mount point, the type and the options, separated by spaces. A field with a space in it is in double quotes, and a line starting with <code>#</code> is a comment.</p>
 <div class="code"><pre tabindex="0"><code>/mnt/nas sftp host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas</code></pre></div>
 <p><code>mount --save</code> adds or replaces the line for its mount point, and <code>unmount --save</code> removes it, keeping every other line and comment. The file is made with mode <code>0600</code>, since it names other machines and their users. When it is missing, boot mounts nothing. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Mount a folder of another machine</a> explains the options.</p>
+<h3 id="etcfrozen-uploads">/etc/frozen-uploads<a class="anchor" href="#etcfrozen-uploads" aria-label="Link to this section"></a></h3>
+<p><code>/etc/frozen-uploads</code> says which uploads are <a href="../concepts/files.html#frozen-files">frozen</a> as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk. One type per line; <code>image/*</code> stands for every subtype, a <code>!</code> in front leaves a type out that another line takes in, and <code>#</code> starts a comment. It is copied from core&#39;s own file at the first start, and from then on it is the administrator&#39;s:</p>
+<div class="code"><pre tabindex="0"><code># /etc/frozen-uploads
+image/*
+video/*
+audio/*
+
+# An SVG is a text file that can hold a script.
+!image/svg+xml</code></pre></div>
+<p>An upload reads the file as it is then, so a change applies to the next one and freezes or thaws nothing already there. An empty file freezes no upload; a missing one is copied again at the next start. What EiN writes itself is never frozen by it.</p>
 <h3 id="the-ssh-files">The SSH files<a class="anchor" href="#the-ssh-files" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -815,6 +831,10 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td>You may read the file but not change it. <code>/etc</code> is the administrator&#39;s; a member of the <code>sudo</code> group becomes the administrator with <code>admin</code>, as <a href="../admin/accounts.html">Accounts and groups</a> explains.</td>
 </tr>
 <tr>
+<td>A photo uploaded again over an earlier one is refused</td>
+<td>The earlier one is frozen, as <code>/etc/frozen-uploads</code> says. Upload it under another name, or lift the mark with <code>attrs -d frozen &lt;file&gt;</code> first; see <a href="../concepts/files.html#frozen-files">Frozen files</a>.</td>
+</tr>
+<tr>
 <td>A line you added to <code>/etc/environment</code> or <code>/etc/layout</code> is gone</td>
 <td>Boot writes both files whole at every start. Put the value in <code>/etc/config</code>, or the <code>CFG_…</code> line in <code>.env</code>.</td>
 </tr>
@@ -840,7 +860,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/config-files.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-installation-folder">The installation folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li><a href="#files-in-eins-tree">Files in EiN's tree</a></li><li class="nested"><a href="#the-settings-files">The settings files</a></li><li class="nested"><a href="#etcbashrc-and-etclayout">/etc/bashrc and /etc/layout</a></li><li class="nested"><a href="#your-shell-files">Your shell files</a></li><li class="nested"><a href="#the-navigation-files">The navigation files</a></li><li class="nested"><a href="#etcfstab">/etc/fstab</a></li><li class="nested"><a href="#the-ssh-files">The SSH files</a></li><li class="nested"><a href="#accounts-groups-and-services">Accounts, groups and services</a></li><li class="nested"><a href="#boot-files">Boot files</a></li><li class="nested"><a href="#the-assistants-files">The assistant's files</a></li><li><a href="#what-a-module-adds-to-etc">What a module adds to /etc</a></li><li><a href="#back-up-and-restore">Back up and restore</a></li><li><a href="#when-a-file-does-not-do-what-you-expect">When a file does not do what you expect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-installation-folder">The installation folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li><a href="#files-in-eins-tree">Files in EiN's tree</a></li><li class="nested"><a href="#the-settings-files">The settings files</a></li><li class="nested"><a href="#etcbashrc-and-etclayout">/etc/bashrc and /etc/layout</a></li><li class="nested"><a href="#your-shell-files">Your shell files</a></li><li class="nested"><a href="#the-navigation-files">The navigation files</a></li><li class="nested"><a href="#etcfstab">/etc/fstab</a></li><li class="nested"><a href="#etcfrozen-uploads">/etc/frozen-uploads</a></li><li class="nested"><a href="#the-ssh-files">The SSH files</a></li><li class="nested"><a href="#accounts-groups-and-services">Accounts, groups and services</a></li><li class="nested"><a href="#boot-files">Boot files</a></li><li class="nested"><a href="#the-assistants-files">The assistant's files</a></li><li><a href="#what-a-module-adds-to-etc">What a module adds to /etc</a></li><li><a href="#back-up-and-restore">Back up and restore</a></li><li><a href="#when-a-file-does-not-do-what-you-expect">When a file does not do what you expect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

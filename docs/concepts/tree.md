@@ -127,6 +127,7 @@ owns it.
 | `/etc/ui/nav.json`            | The administrator's changes to the navigation, laid over every module's                     |
 | `/etc/ui/groups`              | A group's changes to the navigation, `<group>/nav.json`, for its members                    |
 | `/etc/fstab`                  | Mounts recorded with `mount --save`, mounted again at every start                           |
+| `/etc/frozen-uploads`         | The types of upload that are [frozen](files.md#frozen-files) as they arrive                 |
 | `/etc/ssh_host_key`           | The SSH server's host key                                                                   |
 | `/etc/init`, `/etc/files`     | The scripts EiN runs as it starts                                                           |
 

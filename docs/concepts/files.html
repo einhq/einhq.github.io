@@ -134,7 +134,7 @@ id. What sets it apart is that it holds bytes, and its attributes describe them:
 </tr>
 <tr>
 <td><code>frozen</code></td>
-<td>When <code>true</code>, the content cannot be written.</td>
+<td>When <code>true</code>, the content cannot be written, in EiN or on the disk. See <a href="#frozen-files">Frozen files</a>.</td>
 </tr>
 </tbody></table>
 </div>
@@ -362,7 +362,7 @@ your permissions the same way.</p>
 </thead>
 <tbody><tr>
 <td>An upload in the web interface</td>
-<td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. With the Archive, <a href="../archive/importing.html">Getting your photos in</a> has the ways to upload.</td>
+<td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. A picture, video or recording is <a href="#frozen-files">frozen</a> once it has arrived. With the Archive, <a href="../archive/importing.html">Getting your photos in</a> has the ways to upload.</td>
 </tr>
 <tr>
 <td>Saving in the editor</td>
@@ -370,7 +370,7 @@ your permissions the same way.</p>
 </tr>
 <tr>
 <td>SFTP, <code>scp</code> and sshfs</td>
-<td>Written as on any SFTP server. See <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</td>
+<td>Written as on any SFTP server, and frozen as an upload is. See <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</td>
 </tr>
 <tr>
 <td>A shell redirect, <code>cp</code>, <code>unzip</code></td>
@@ -386,6 +386,40 @@ your permissions the same way.</p>
 </tr>
 </tbody></table>
 </div>
+<h2 id="frozen-files">Frozen files<a class="anchor" href="#frozen-files" aria-label="Link to this section"></a></h2>
+<p>A frozen file keeps the content it arrived with. EiN refuses to write it, and its bytes on the disk
+are read-only as well, so a program on the machine that reaches them cannot change them either: a
+photo editor saving into one of the <a href="../album-folders/index.html">album folders</a>, say. Everything
+else about the file can still change: its name and folder, its attributes, what EiN keeps beneath
+it, and it can be deleted.</p>
+<p>What is frozen:</p>
+<ul>
+<li><strong>An upload</strong> in the web interface, with <code>POST</code> or <code>PUT</code> on <code>/file/…</code>, or over SFTP, <code>scp</code> and
+sshfs, whose type <code>/etc/frozen-uploads</code> lists. As EiN comes, that is every picture, video and
+recording except an SVG; text, documents, scripts and settings files stay writable. The file is
+frozen once the whole of it has arrived, so an upload that stopped part-way can be sent again.</li>
+<li><strong>A copy of a frozen file</strong>, made with <code>cp</code>.</li>
+<li><strong>A file marked by hand</strong>, with <code>attrs -J frozen=true &lt;file&gt;</code>.</li>
+</ul>
+<p>What EiN writes itself is not frozen by <code>/etc/frozen-uploads</code>: a file made in the terminal or with a
+redirect, the files <code>unzip</code> takes out of a zip, and everything EiN makes from a file, such as its
+thumbnails.</p>
+<p><code>/etc/frozen-uploads</code> lists one type per line. <code>image/*</code> stands for every type of picture, and a <code>!</code>
+in front leaves a type out:</p>
+<div class="code"><pre tabindex="0"><code># /etc/frozen-uploads, as EiN comes
+image/*
+video/*
+audio/*
+!image/svg+xml</code></pre></div>
+<p>The administrator may change it with <a href="../shell/editor.html"><code>edit</code></a>; it applies to the next upload.
+An empty file freezes no upload. <a href="../reference/config-files.html#etcfrozen-uploads">Configuration files</a>
+says more.</p>
+<p>To change a frozen file, lift the mark first. Only someone who may change the file can:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+attrs -d frozen /archive/albums/christmas-2019/20191225_155434.jpg</code></pre></div>
+<p>On the disk, a frozen file&#39;s bytes lose their write permissions, <code>0644</code> becoming <code>0444</code>, and
+lifting the mark gives the owner&#39;s back. A file whose bytes are kept elsewhere, behind a link, such
+as files kept from an older installation in <code>old</code>, is left as it is.</p>
 <h2 id="copying-moving-linking-and-deleting">Copying, moving, linking and deleting<a class="anchor" href="#copying-moving-linking-and-deleting" aria-label="Link to this section"></a></h2>
 <p>What happens to the bytes depends on the command:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -539,9 +573,9 @@ how to make room.</p>
 <td>Run <code>file-sync</code> on the file.</td>
 </tr>
 <tr>
-<td><code>File is frozen and cannot be modified</code></td>
+<td><code>file is frozen and cannot be modified</code>, an upload refused with 403, or <code>Permission denied</code> over SFTP</td>
 <td>The file is marked <code>frozen</code>, so its content cannot be written.</td>
-<td>Leave its content as it is. Someone who may change the file can lift the mark with <code>attrs -d frozen &lt;file&gt;</code>; a copy made with <code>cp</code> is frozen too.</td>
+<td>Leave its content as it is, or upload the new version under another name. Someone who may change the file can lift the mark with <code>attrs -d frozen &lt;file&gt;</code>; see <a href="#frozen-files">Frozen files</a>.</td>
 </tr>
 <tr>
 <td><code>storage tier is set once at creation and cannot be changed</code></td>
@@ -589,7 +623,7 @@ of the whole installation.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/files.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-file-is-a-node-with-bytes">A file is a node with bytes</a></li><li><a href="#what-a-file-keeps-beneath-it">What a file keeps beneath it</a></li><li><a href="#where-the-bytes-are-kept">Where the bytes are kept</a></li><li><a href="#on-the-machines-disk">On the machine's disk</a></li><li><a href="#size-checksum-and-when-the-content-changed">Size, checksum and when the content changed</a></li><li><a href="#how-bytes-come-in-and-go-out">How bytes come in and go out</a></li><li><a href="#copying-moving-linking-and-deleting">Copying, moving, linking and deleting</a></li><li><a href="#mounts-parts-of-the-tree-kept-elsewhere">Mounts: parts of the tree kept elsewhere</a></li><li><a href="#see-how-much-space-is-used">See how much space is used</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-file-is-a-node-with-bytes">A file is a node with bytes</a></li><li><a href="#what-a-file-keeps-beneath-it">What a file keeps beneath it</a></li><li><a href="#where-the-bytes-are-kept">Where the bytes are kept</a></li><li><a href="#on-the-machines-disk">On the machine's disk</a></li><li><a href="#size-checksum-and-when-the-content-changed">Size, checksum and when the content changed</a></li><li><a href="#how-bytes-come-in-and-go-out">How bytes come in and go out</a></li><li><a href="#frozen-files">Frozen files</a></li><li><a href="#copying-moving-linking-and-deleting">Copying, moving, linking and deleting</a></li><li><a href="#mounts-parts-of-the-tree-kept-elsewhere">Mounts: parts of the tree kept elsewhere</a></li><li><a href="#see-how-much-space-is-used">See how much space is used</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

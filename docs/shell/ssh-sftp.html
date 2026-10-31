@@ -250,6 +250,11 @@ added something about it. Backup tools therefore see a photo as unchanged while 
 description are being worked out. <code>put -p</code>, <code>scp -p</code> and <code>cp -p</code> on a mount keep the time they set.</p>
 <p><strong>Sizes.</strong> A file can be emptied by setting its size to 0. Any other change of size without writing
 the content is refused.</p>
+<p><strong>Photos you copy in are frozen.</strong> A picture, video or recording is
+<a href="../concepts/files.html#frozen-files">frozen</a> once the whole of it has arrived, as an upload in the
+browser is, so writing over it is refused with <code>Permission denied</code>; renaming, moving and deleting it
+work. A copy that stopped part-way is not frozen and can be sent again. Which types are frozen is up
+to your administrator, in <code>/etc/frozen-uploads</code>.</p>
 <p><strong>Links.</strong> Softlinks, such as your favourites, or with the Archive an album&#39;s cover, a picture added
 to an album and a person tagged in a photo, appear as symbolic links, and following one takes you to
 what it points to. A recursive copy therefore copies the link, not what lies behind it. <code>ln -s</code> in
@@ -335,6 +340,11 @@ agent.</p>
 <td>A copied folder lacks faces, EXIF and thumbnails</td>
 <td>What belongs to a photo is in its hidden <code>_</code> folder, which recursive copies skip.</td>
 <td>Go into <code>beach.jpg_</code> by name to fetch it; the photos themselves are complete.</td>
+</tr>
+<tr>
+<td><code>Permission denied</code> when copying a photo over one already there</td>
+<td>The photo there is <a href="../concepts/files.html#frozen-files">frozen</a>.</td>
+<td>Copy it under another name, or lift the mark with <code>attrs -d frozen &lt;file&gt;</code> in EiN&#39;s terminal first.</td>
 </tr>
 <tr>
 <td>Writing in a folder is refused</td>

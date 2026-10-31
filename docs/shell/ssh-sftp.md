@@ -191,6 +191,12 @@ description are being worked out. `put -p`, `scp -p` and `cp -p` on a mount keep
 **Sizes.** A file can be emptied by setting its size to 0. Any other change of size without writing
 the content is refused.
 
+**Photos you copy in are frozen.** A picture, video or recording is
+[frozen](../concepts/files.md#frozen-files) once the whole of it has arrived, as an upload in the
+browser is, so writing over it is refused with `Permission denied`; renaming, moving and deleting it
+work. A copy that stopped part-way is not frozen and can be sent again. Which types are frozen is up
+to your administrator, in `/etc/frozen-uploads`.
+
 **Links.** Softlinks, such as your favourites, or with the Archive an album's cover, a picture added
 to an album and a person tagged in a photo, appear as symbolic links, and following one takes you to
 what it points to. A recursive copy therefore copies the link, not what lies behind it. `ln -s` in
@@ -250,4 +256,5 @@ agent.
 | `scp` fails right away                                           | An `scp` older than OpenSSH 9.0 uses a protocol EiN does not speak.                                      | Add `-s` (OpenSSH 8.7 or 8.8), or use `sftp`.                                                                                      |
 | `edit: not a terminal`                                           | The command was sent along on the `ssh` line, without a shell.                                           | Log in with `ssh -p 2222 helen@ein.local` and run it there.                                                                        |
 | A copied folder lacks faces, EXIF and thumbnails                 | What belongs to a photo is in its hidden `_` folder, which recursive copies skip.                        | Go into `beach.jpg_` by name to fetch it; the photos themselves are complete.                                                      |
+| `Permission denied` when copying a photo over one already there  | The photo there is [frozen](../concepts/files.md#frozen-files).                                          | Copy it under another name, or lift the mark with `attrs -d frozen <file>` in EiN's terminal first.                                |
 | Writing in a folder is refused                                   | You may not change that folder, or it lies inside a photo's `_` folder.                                  | See [Permissions in depth](../admin/permissions.md), or copy into your home or staging area instead.                               |

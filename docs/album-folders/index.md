@@ -72,8 +72,13 @@ The folders cannot be changed: nothing can be added, renamed or removed in them.
 > writes to the original: a photo program that saves an edit into a picture changes it in EiN, and
 > EiN does not know. Give everyone and every program the folders read-only.
 
+A [frozen](../concepts/files.md#frozen-files) original is read-only on the disk, mode `0444`, and
+every photo, video and recording that was uploaded or copied in over SFTP is frozen as it arrives.
+A program can still write to a file that is not frozen, such as one taken out of a zip, and a
+program that may change permissions can make a frozen one writable again.
+
 Under podman, which the installer uses unless told otherwise, the files belong to your own user,
-who can write to them. Two ways to give the folders read-only:
+who can write to every file that is not frozen. Two ways to give the folders read-only:
 
 - **A shared folder** in Samba, with `read only = yes`:
 

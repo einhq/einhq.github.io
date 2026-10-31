@@ -175,6 +175,7 @@ These files are nodes in the tree, so they live in the database and survive a re
 | `/etc/modules/<module>.groups`               | `mod groups`, `mod install --groups`, **Settings → Modules**                | `mod setup` and the shell, for who has the module | `0644` |
 | `~/.ui/nav.json`                             | you                                                                         | your sidebar and top bar                          |        |
 | `/etc/fstab`                                 | `mount --save`, `unmount --save`                                            | boot, with `mount -a`                             | `0600` |
+| `/etc/frozen-uploads`                        | core at the first start, then the administrator                             | an upload over the web or SFTP, as it arrives     | `0644` |
 | `/etc/ssh_host_key`, `.pub`                  | the SSH server, at the first start                                          | the SSH server                                    | `0700` |
 | `~/.ssh/…`                                   | you, `ssh-keygen`, `ssh`                                                    | the SSH server, `ssh`, `scp`, `mount`             | `0700` |
 | `/etc/users/`, `/etc/groups/`                | the account and group commands                                              | every sign-in and access check                    |        |
@@ -277,6 +278,22 @@ A module [kept to some groups](../admin/modules.md#keep-a-module-to-some-groups)
 
 `mount --save` adds or replaces the line for its mount point, and `unmount --save` removes it, keeping every other line and comment. The file is made with mode `0600`, since it names other machines and their users. When it is missing, boot mounts nothing. [Mount a folder of another machine](../shell/remote.md#mount-a-folder-of-another-machine) explains the options.
 
+### /etc/frozen-uploads
+
+`/etc/frozen-uploads` says which uploads are [frozen](../concepts/files.md#frozen-files) as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk. One type per line; `image/*` stands for every subtype, a `!` in front leaves a type out that another line takes in, and `#` starts a comment. It is copied from core's own file at the first start, and from then on it is the administrator's:
+
+```text
+# /etc/frozen-uploads
+image/*
+video/*
+audio/*
+
+# An SVG is a text file that can hold a script.
+!image/svg+xml
+```
+
+An upload reads the file as it is then, so a change applies to the next one and freezes or thaws nothing already there. An empty file freezes no upload; a missing one is copied again at the next start. What EiN writes itself is never frozen by it.
+
 ### The SSH files
 
 | File                                         | What it is                                                                                                                                    |
@@ -343,6 +360,7 @@ The files in EiN's tree are in the database, so a backup of the database keeps t
 | A change to `/etc/config`, `~/.config` or `/etc/bashrc` does not show in the terminal | A command that was already running keeps the environment it started with; the next command reads the change. A service's own loop keeps it too until the service restarts.                            |
 | A service still uses the old value after a hand edit                                  | A hand edit restarts nothing. Restart the service from [Services and logs](../admin/services-logs.md), or save the setting on the Settings page, which does.                                          |
 | `could not write …` when you save                                                     | You may read the file but not change it. `/etc` is the administrator's; a member of the `sudo` group becomes the administrator with `admin`, as [Accounts and groups](../admin/accounts.md) explains. |
+| A photo uploaded again over an earlier one is refused                                 | The earlier one is frozen, as `/etc/frozen-uploads` says. Upload it under another name, or lift the mark with `attrs -d frozen <file>` first; see [Frozen files](../concepts/files.md#frozen-files).  |
 | A line you added to `/etc/environment` or `/etc/layout` is gone                       | Boot writes both files whole at every start. Put the value in `/etc/config`, or the `CFG_…` line in `.env`.                                                                                           |
 | A saved mount is not there after a start                                              | Run `cat /etc/fstab` to check its line and `mount -a` to try again. An SFTP mount whose host key is neither in `known_hosts` nor pinned with `hostkey=` is not connected at start-up.                 |
 

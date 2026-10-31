@@ -23,7 +23,7 @@ id. What sets it apart is that it holds bytes, and its attributes describe them:
 | `writtenAt`   | When the content last changed.                                                                                                                                 |
 | `description` | A description, when someone wrote one.                                                                                                                         |
 | `sourceId`    | On a file EiN made from another one, such as a thumbnail, the id of the file it was made from.                                                                 |
-| `frozen`      | When `true`, the content cannot be written.                                                                                                                    |
+| `frozen`      | When `true`, the content cannot be written, in EiN or on the disk. See [Frozen files](#frozen-files).                                                          |
 
 A media file carries more once the Archive has read it, such as the time it was taken and its
 orientation; [Nodes and node types](nodes.md) describes a node part by part.
@@ -192,14 +192,61 @@ and [mime](../reference/commands-core.md#mime).
 Every way in writes through the same place, so each one records size, checksum and time, and checks
 your permissions the same way.
 
-| Way                               | What happens to the bytes                                                                                                                                                                                                                          |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. With the Archive, [Getting your photos in](../archive/importing.md) has the ways to upload. |
-| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                                                 |
-| SFTP, `scp` and sshfs             | Written as on any SFTP server. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                                           |
-| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                                          |
-| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                                               |
-| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                                                |
+| Way                               | What happens to the bytes                                                                                                                                                                                                                                                                                                        |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. A picture, video or recording is [frozen](#frozen-files) once it has arrived. With the Archive, [Getting your photos in](../archive/importing.md) has the ways to upload. |
+| Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                                                                                                                               |
+| SFTP, `scp` and sshfs             | Written as on any SFTP server, and frozen as an upload is. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                                                                                             |
+| A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                                                                                                                        |
+| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                                                                                                                             |
+| Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                                                                                                                              |
+
+## Frozen files
+
+A frozen file keeps the content it arrived with. EiN refuses to write it, and its bytes on the disk
+are read-only as well, so a program on the machine that reaches them cannot change them either: a
+photo editor saving into one of the [album folders](../album-folders/index.md), say. Everything
+else about the file can still change: its name and folder, its attributes, what EiN keeps beneath
+it, and it can be deleted.
+
+What is frozen:
+
+- **An upload** in the web interface, with `POST` or `PUT` on `/file/…`, or over SFTP, `scp` and
+  sshfs, whose type `/etc/frozen-uploads` lists. As EiN comes, that is every picture, video and
+  recording except an SVG; text, documents, scripts and settings files stay writable. The file is
+  frozen once the whole of it has arrived, so an upload that stopped part-way can be sent again.
+- **A copy of a frozen file**, made with `cp`.
+- **A file marked by hand**, with `attrs -J frozen=true <file>`.
+
+What EiN writes itself is not frozen by `/etc/frozen-uploads`: a file made in the terminal or with a
+redirect, the files `unzip` takes out of a zip, and everything EiN makes from a file, such as its
+thumbnails.
+
+`/etc/frozen-uploads` lists one type per line. `image/*` stands for every type of picture, and a `!`
+in front leaves a type out:
+
+```text
+# /etc/frozen-uploads, as EiN comes
+image/*
+video/*
+audio/*
+!image/svg+xml
+```
+
+The administrator may change it with [`edit`](../shell/editor.md); it applies to the next upload.
+An empty file freezes no upload. [Configuration files](../reference/config-files.md#etcfrozen-uploads)
+says more.
+
+To change a frozen file, lift the mark first. Only someone who may change the file can:
+
+```bash
+# in EiN's terminal
+attrs -d frozen /archive/albums/christmas-2019/20191225_155434.jpg
+```
+
+On the disk, a frozen file's bytes lose their write permissions, `0644` becoming `0444`, and
+lifting the mark gives the owner's back. A file whose bytes are kept elsewhere, behind a link, such
+as files kept from an older installation in `old`, is left as it is.
 
 ## Copying, moving, linking and deleting
 
@@ -298,16 +345,16 @@ how to make room.
 
 ## When something goes differently
 
-| What you see                                                                              | Why                                                                               | What to do                                                                                                                                        |
-| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| With the Archive, a picture's thumbnail is missing although the picture was read long ago | Its rendition was never finished, or its bytes on the `volatile` tier are gone.   | Run `regenerate --force` on the picture or its album. See [regenerate](../archive/commands.md#regenerate).                                        |
-| A file's size or checksum is wrong after it was changed outside EiN                       | The bytes changed without passing through EiN, so the node was not told.          | Run `file-sync` on the file.                                                                                                                      |
-| `File is frozen and cannot be modified`                                                   | The file is marked `frozen`, so its content cannot be written.                    | Leave its content as it is. Someone who may change the file can lift the mark with `attrs -d frozen <file>`; a copy made with `cp` is frozen too. |
-| `storage tier is set once at creation and cannot be changed`                              | A command tried to move a file to another tier.                                   | Copy the content into a new file made with `--tier`, then remove the old one.                                                                     |
-| `a filesystem is mounted at /mnt/nas` when removing or moving a folder                    | A mount stands on that folder or below it.                                        | Unmount it first with `unmount`, or `unmount --save` to keep it from coming back at the next start.                                               |
-| `mount: permission denied, only admin is allowed to mount`                                | Only the administrator mounts.                                                    | Ask the administrator.                                                                                                                            |
-| `df` says `no disk sample yet — is metrics-sampler running?`                              | The service that measures the disk has not taken a sample yet, or is not running. | It takes its first sample as it starts, so wait a minute. If it stays, see [Services and logs](../admin/services-logs.md).                        |
-| `unzip` says `not enough space`                                                           | The files in the zip would not leave a tenth of their size free.                  | Free space on the disk, or expand the zip on a machine with room and copy the files in.                                                           |
+| What you see                                                                                          | Why                                                                               | What to do                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| With the Archive, a picture's thumbnail is missing although the picture was read long ago             | Its rendition was never finished, or its bytes on the `volatile` tier are gone.   | Run `regenerate --force` on the picture or its album. See [regenerate](../archive/commands.md#regenerate).                                                                                    |
+| A file's size or checksum is wrong after it was changed outside EiN                                   | The bytes changed without passing through EiN, so the node was not told.          | Run `file-sync` on the file.                                                                                                                                                                  |
+| `file is frozen and cannot be modified`, an upload refused with 403, or `Permission denied` over SFTP | The file is marked `frozen`, so its content cannot be written.                    | Leave its content as it is, or upload the new version under another name. Someone who may change the file can lift the mark with `attrs -d frozen <file>`; see [Frozen files](#frozen-files). |
+| `storage tier is set once at creation and cannot be changed`                                          | A command tried to move a file to another tier.                                   | Copy the content into a new file made with `--tier`, then remove the old one.                                                                                                                 |
+| `a filesystem is mounted at /mnt/nas` when removing or moving a folder                                | A mount stands on that folder or below it.                                        | Unmount it first with `unmount`, or `unmount --save` to keep it from coming back at the next start.                                                                                           |
+| `mount: permission denied, only admin is allowed to mount`                                            | Only the administrator mounts.                                                    | Ask the administrator.                                                                                                                                                                        |
+| `df` says `no disk sample yet — is metrics-sampler running?`                                          | The service that measures the disk has not taken a sample yet, or is not running. | It takes its first sample as it starts, so wait a minute. If it stays, see [Services and logs](../admin/services-logs.md).                                                                    |
+| `unzip` says `not enough space`                                                                       | The files in the zip would not leave a tenth of their size free.                  | Free space on the disk, or expand the zip on a machine with room and copy the files in.                                                                                                       |
 
 [Troubleshooting](../admin/troubleshooting.md) covers a disk that has filled up and other problems
 of the whole installation.
