@@ -607,7 +607,9 @@ module's commands only when it depends on it.
 
 When EiN's module API changes in a way that breaks modules, a module whose `coreApi` range the new
 EiN does not satisfy is refused at setup with `needs @ein/client ^0.5.0, this core provides 0.6.0`.
-Publish a version written for the new API, with its `coreApi` raised.
+Publish a version written for the new API, with its `coreApi` raised. An EiN that is older than the
+API a release asks for still installs your module by name: `mod install` without a ref takes the
+newest release whose `coreApi` it satisfies.
 
 ## Remove it
 

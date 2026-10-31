@@ -125,7 +125,11 @@ Each published module carries a badge for what is installed of it:
 | **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.                      |
 
 A module written for a different core API says "Needs core API ^0.6.0, which this EiN does not
-provide." (with its own range), and its button is greyed out. **Refresh** asks the sources again.
+provide." (with its own range), and its button is greyed out. When only its newest release is
+written for another core API and an older one runs here, the module is listed at that older
+release, with a note such as "0.3.0 needs core API ^0.8.0, which this EiN does not provide; 0.2.4
+is the newest release it can run.", and **Install** installs 0.2.4. **Refresh** asks the sources
+again.
 
 In the terminal, `mod search` lists the same, and `mod install` installs:
 
@@ -173,12 +177,17 @@ ways:
 | `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its id, whole or its first seven characters or more, which EiN records whole |
 
 A release is a tag `v` and a version, such as `v0.3.1`, and the newest is the highest version; a
-prerelease such as `v0.4.0-rc.1` does not count. A repository with no release is installed at its
+prerelease such as `v0.4.0-rc.1` does not count. When the newest release is written for a core API
+this EiN does not provide, EiN takes the newest release that is written for it instead and says so:
+`archive 0.3.0 needs core API ^0.8.0, and this core provides 0.7.2: taking v0.2.4`. A ref, such as
+`archive@v0.3.0`, takes that release or none. A repository with no release is installed at its
 default branch, and `@main` installs the default branch of one that has releases, with whatever
 was pushed after the last one. A module that is missing and needed by the one you install comes at
 its newest release that the module accepts: `archive` needing `ems ^0.1.0` gets `ems` 0.1.2 even
-when 0.2.0 is out. `mod search` lists each module's newest release, its version and the core API
-it needs.
+when 0.2.0 is out, and the newest in that range this EiN can run. `mod search` lists each module
+at the release `mod install` would take, its version and the core API it needs, and names a newer
+release written for another core API: `archive 0.2.4 (0.3.0 needs core API ^0.8.0, this is
+0.7.2)`.
 
 The [reference](../reference/commands-core.md#mod-install) lists its options.
 
@@ -227,9 +236,9 @@ nothing keeps running the code that was replaced. The new version takes the old 
 single step: the module's folder always holds one whole version.
 
 To keep a module at a version, install it at a commit, such as `mod install archive@463a92f`; its
-panel then has no **Update**. The published modules still compare it with the newest release, so
-they may offer **Update** for it, which installs the newest release, as `mod install archive`
-without a ref does. A module installed from its default branch past the newest release is not
+panel then has no **Update**. The published modules still compare it with the newest release this
+EiN can run, so they may offer **Update** for it, which installs that release, as `mod install
+archive` without a ref does. A module installed from its default branch past the newest release is not
 offered the release.
 
 ## Keep a module to some groups

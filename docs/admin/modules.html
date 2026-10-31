@@ -269,7 +269,11 @@ appear without reloading the page.</p>
 </tbody></table>
 </div>
 <p>A module written for a different core API says &quot;Needs core API ^0.6.0, which this EiN does not
-provide.&quot; (with its own range), and its button is greyed out. <strong>Refresh</strong> asks the sources again.</p>
+provide.&quot; (with its own range), and its button is greyed out. When only its newest release is
+written for another core API and an older one runs here, the module is listed at that older
+release, with a note such as &quot;0.3.0 needs core API ^0.8.0, which this EiN does not provide; 0.2.4
+is the newest release it can run.&quot;, and <strong>Install</strong> installs 0.2.4. <strong>Refresh</strong> asks the sources
+again.</p>
 <p>In the terminal, <code>mod search</code> lists the same, and <code>mod install</code> installs:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 mod search</code></pre></div>
@@ -316,12 +320,16 @@ ways:</p>
 </tbody></table>
 </div>
 <p>A release is a tag <code>v</code> and a version, such as <code>v0.3.1</code>, and the newest is the highest version; a
-prerelease such as <code>v0.4.0-rc.1</code> does not count. A repository with no release is installed at its
+prerelease such as <code>v0.4.0-rc.1</code> does not count. When the newest release is written for a core API
+this EiN does not provide, EiN takes the newest release that is written for it instead and says so:
+<code>archive 0.3.0 needs core API ^0.8.0, and this core provides 0.7.2: taking v0.2.4</code>. A ref, such as
+<code>archive@v0.3.0</code>, takes that release or none. A repository with no release is installed at its
 default branch, and <code>@main</code> installs the default branch of one that has releases, with whatever
 was pushed after the last one. A module that is missing and needed by the one you install comes at
 its newest release that the module accepts: <code>archive</code> needing <code>ems ^0.1.0</code> gets <code>ems</code> 0.1.2 even
-when 0.2.0 is out. <code>mod search</code> lists each module&#39;s newest release, its version and the core API
-it needs.</p>
+when 0.2.0 is out, and the newest in that range this EiN can run. <code>mod search</code> lists each module
+at the release <code>mod install</code> would take, its version and the core API it needs, and names a newer
+release written for another core API: <code>archive 0.2.4 (0.3.0 needs core API ^0.8.0, this is 0.7.2)</code>.</p>
 <p>The <a href="../reference/commands-core.html#mod-install">reference</a> lists its options.</p>
 <h3 id="install-modules-with-the-installer">Install modules with the installer<a class="anchor" href="#install-modules-with-the-installer" aria-label="Link to this section"></a></h3>
 <p>The installer&#39;s <code>--module</code> option names a module for EiN to install at its start, with the
@@ -358,9 +366,8 @@ on it, directly or through another, is set up again too, and its running service
 nothing keeps running the code that was replaced. The new version takes the old one&#39;s place in a
 single step: the module&#39;s folder always holds one whole version.</p>
 <p>To keep a module at a version, install it at a commit, such as <code>mod install archive@463a92f</code>; its
-panel then has no <strong>Update</strong>. The published modules still compare it with the newest release, so
-they may offer <strong>Update</strong> for it, which installs the newest release, as <code>mod install archive</code>
-without a ref does. A module installed from its default branch past the newest release is not
+panel then has no <strong>Update</strong>. The published modules still compare it with the newest release this
+EiN can run, so they may offer <strong>Update</strong> for it, which installs that release, as <code>mod install archive</code> without a ref does. A module installed from its default branch past the newest release is not
 offered the release.</p>
 <h2 id="keep-a-module-to-some-groups">Keep a module to some groups<a class="anchor" href="#keep-a-module-to-some-groups" aria-label="Link to this section"></a></h2>
 <p>A module is everyone&#39;s until you keep it to some groups. Then only the members of those groups,

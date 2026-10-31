@@ -1729,7 +1729,7 @@ mod-install [--force] [--missing] [--groups=<string>] [--no-setup] <module>...
 
 | Argument | What it is |
 | --- | --- |
-| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit (its id whole, or its first seven characters or more); without one, its newest release (v<version> tag), or its default branch when it has none. |
+| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit (its id whole, or its first seven characters or more); without one, its newest release (v<version> tag) that this core can run, or its default branch when it has none. |
 
 | Option | What it does |
 | --- | --- |

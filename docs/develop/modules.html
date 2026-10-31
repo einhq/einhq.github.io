@@ -913,7 +913,9 @@ covers sources that need a token.</p>
 </ol>
 <p>When EiN&#39;s module API changes in a way that breaks modules, a module whose <code>coreApi</code> range the new
 EiN does not satisfy is refused at setup with <code>needs @ein/client ^0.5.0, this core provides 0.6.0</code>.
-Publish a version written for the new API, with its <code>coreApi</code> raised.</p>
+Publish a version written for the new API, with its <code>coreApi</code> raised. An EiN that is older than the
+API a release asks for still installs your module by name: <code>mod install</code> without a ref takes the
+newest release whose <code>coreApi</code> it satisfies.</p>
 <h2 id="remove-it">Remove it<a class="anchor" href="#remove-it" aria-label="Link to this section"></a></h2>
 <p><code>mod remove recipes</code> asks before it removes anything, runs the module&#39;s <code>uninstall.sh</code> if it has
 one, then takes back what setup did: its commands leave <code>PATH</code>, its services are stopped and
