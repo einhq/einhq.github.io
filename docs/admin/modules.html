@@ -161,7 +161,7 @@ its version at the right; one that does not shows a badge instead and is listed 
 <p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
 <p>Choose a module to open its panel. At the top it shows the module&#39;s name, its version and the core
-API it is written for (<code>version 0.1.0 · core API ^0.6.0</code>), where it is installed
+API it is written for (<code>version 0.1.0 · core API ^0.7.0</code>), where it is installed
 (<code>/usr/modules/archive</code>), when it was set up, and its state. <strong>Reference and guide</strong> opens the
 module&#39;s own page in <strong>Documentation</strong>, with its pages in this guide and every command, setting and
 node type it brings. Below are tabs, each with a count; <strong>About</strong> and <strong>Dependencies</strong> are always there, and
@@ -252,11 +252,11 @@ appear without reloading the page.</p>
 </tr>
 <tr>
 <td><strong>Installed</strong></td>
-<td>Installed from this repository, at the commit its default branch has now.</td>
+<td>Installed from this repository, at its newest release, or at a commit past it.</td>
 </tr>
 <tr>
 <td><strong>Update available</strong></td>
-<td>Installed from this repository, and its default branch has moved on; the button reads <strong>Update</strong>. Hold the pointer over the badge to see both commits.</td>
+<td>Installed from this repository, and a newer release is out; the button reads <strong>Update</strong>. Hold the pointer over the badge to see what is installed and what is published.</td>
 </tr>
 <tr>
 <td><strong>Installed from elsewhere</strong></td>
@@ -285,9 +285,9 @@ ems 0.1.0
 <p>Words after <code>mod search</code> narrow the list to modules whose name or description holds them all.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod install archive</code></pre></div>
-<div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/module-archive at main (5e1c07a42)...
+<div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/module-archive at v0.1.0 (5e1c07a42)...
 archive needs ems ^0.1.0, which is not installed
-Fetching https://github.com/einhq/module-ems at main (b83d2f610)...
+Fetching https://github.com/einhq/module-ems at v0.1.2 (b83d2f610)...
 Installed ems 0.1.0 from https://github.com/einhq/module-ems at b83d2f610
 Installed archive 0.1.0 from https://github.com/einhq/module-archive at 5e1c07a42
 Setting up module 'ems'...</code></pre></div>
@@ -303,11 +303,11 @@ ways:</p>
 </thead>
 <tbody><tr>
 <td><code>archive</code></td>
-<td><code>module-archive</code> from the first module source that has it, at its default branch</td>
+<td><code>module-archive</code> from the first module source that has it, at its newest release</td>
 </tr>
 <tr>
 <td><code>https://github.com/einhq/module-archive</code></td>
-<td>That repository, at its default branch</td>
+<td>That repository, at its newest release</td>
 </tr>
 <tr>
 <td><code>archive@v0.1.0</code>, <code>…/module-archive@&lt;commit&gt;</code></td>
@@ -315,6 +315,13 @@ ways:</p>
 </tr>
 </tbody></table>
 </div>
+<p>A release is a tag <code>v</code> and a version, such as <code>v0.3.1</code>, and the newest is the highest version; a
+prerelease such as <code>v0.4.0-rc.1</code> does not count. A repository with no release is installed at its
+default branch, and <code>@main</code> installs the default branch of one that has releases, with whatever
+was pushed after the last one. A module that is missing and needed by the one you install comes at
+its newest release that the module accepts: <code>archive</code> needing <code>ems ^0.1.0</code> gets <code>ems</code> 0.1.2 even
+when 0.2.0 is out. <code>mod search</code> lists each module&#39;s newest release, its version and the core API
+it needs.</p>
 <p>The <a href="../reference/commands-core.html#mod-install">reference</a> lists its options.</p>
 <h3 id="install-modules-with-the-installer">Install modules with the installer<a class="anchor" href="#install-modules-with-the-installer" aria-label="Link to this section"></a></h3>
 <p>The installer&#39;s <code>--module</code> option names a module for EiN to install at its start, with the
@@ -334,12 +341,13 @@ starts without it; install it from <strong>Settings → Modules</strong> once Ei
 <strong>Update available</strong>.</li>
 <li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
 from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
-and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest commit of the branch it was installed from,
-or the same tag again for one installed at a tag. One installed at a commit stays there, and its
-panel offers no <strong>Update</strong>. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
+and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest release for one installed at a release, and
+the newest commit of the branch for one installed from a branch. One installed at any other tag
+gets that tag again, and one installed at a commit stays there, and its panel offers no
+<strong>Update</strong>. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
 newer.</li>
 <li>In the terminal, <code>mod install archive</code> updates an installed module. The same commit again is
-left alone: <code>archive is installed at 5e1c07a42 (main) already</code>.</li>
+left alone: <code>archive is installed at 5e1c07a42 (v0.1.0) already</code>.</li>
 </ul>
 <p>An update installs what the new version needs and is missing. It is refused when an installed
 module depends on this one and does not accept the new version; the message names them, for
@@ -349,11 +357,11 @@ already.</p>
 on it, directly or through another, is set up again too, and its running services restarted, so
 nothing keeps running the code that was replaced. The new version takes the old one&#39;s place in a
 single step: the module&#39;s folder always holds one whole version.</p>
-<p>To pin a module to a version, install it at a tag, such as <code>mod install archive@v0.1.0</code> where its
-repository has that tag, or at a commit, such as <code>mod install archive@463a92f</code>. Its panel&#39;s
-<strong>Update</strong> then keeps it at the tag, and a module installed at a commit has no <strong>Update</strong> there.
-The published modules always compare with the default branch, so they may offer <strong>Update</strong> for
-it, which installs the default branch, as <code>mod install archive</code> without a ref does.</p>
+<p>To keep a module at a version, install it at a commit, such as <code>mod install archive@463a92f</code>; its
+panel then has no <strong>Update</strong>. The published modules still compare it with the newest release, so
+they may offer <strong>Update</strong> for it, which installs the newest release, as <code>mod install archive</code>
+without a ref does. A module installed from its default branch past the newest release is not
+offered the release.</p>
 <h2 id="keep-a-module-to-some-groups">Keep a module to some groups<a class="anchor" href="#keep-a-module-to-some-groups" aria-label="Link to this section"></a></h2>
 <p>A module is everyone&#39;s until you keep it to some groups. Then only the members of those groups,
 and administrators, have it: its commands, its entries in the sidebar and the top bar, its pages,

@@ -80,7 +80,7 @@ Free text. `description` is shown by `mod list --long` and `mod info`, on **Sett
 
 ### `coreApi`
 
-The range of core's module contract the module is written against, as a semver range: `"^0.7.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.7.0`; `system-info` shows it on its `api` line.
+The range of core's module contract the module is written against, as a semver range: `"^0.7.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.7.1`; `system-info` shows it on its `api` line.
 
 The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.6.0` accepts 0.6.x and nothing else.
 

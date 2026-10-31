@@ -116,13 +116,13 @@ appear without reloading the page.
 
 Each published module carries a badge for what is installed of it:
 
-| Badge                        | What it means                                                                                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| none                         | Not installed; the button reads **Install**.                                                                                                           |
-| **Installed**                | Installed from this repository, at the commit its default branch has now.                                                                              |
-| **Update available**         | Installed from this repository, and its default branch has moved on; the button reads **Update**. Hold the pointer over the badge to see both commits. |
-| **Installed from elsewhere** | A module of this name is installed from another repository.                                                                                            |
-| **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.    |
+| Badge                        | What it means                                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| none                         | Not installed; the button reads **Install**.                                                                                                                             |
+| **Installed**                | Installed from this repository, at its newest release, or at a commit past it.                                                                                           |
+| **Update available**         | Installed from this repository, and a newer release is out; the button reads **Update**. Hold the pointer over the badge to see what is installed and what is published. |
+| **Installed from elsewhere** | A module of this name is installed from another repository.                                                                                                              |
+| **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.                      |
 
 A module written for a different core API says "Needs core API ^0.6.0, which this EiN does not
 provide." (with its own range), and its button is greyed out. **Refresh** asks the sources again.
@@ -154,9 +154,9 @@ mod install archive
 ```
 
 ```text
-Fetching https://github.com/einhq/module-archive at main (5e1c07a42)...
+Fetching https://github.com/einhq/module-archive at v0.1.0 (5e1c07a42)...
 archive needs ems ^0.1.0, which is not installed
-Fetching https://github.com/einhq/module-ems at main (b83d2f610)...
+Fetching https://github.com/einhq/module-ems at v0.1.2 (b83d2f610)...
 Installed ems 0.1.0 from https://github.com/einhq/module-ems at b83d2f610
 Installed archive 0.1.0 from https://github.com/einhq/module-archive at 5e1c07a42
 Setting up module 'ems'...
@@ -168,9 +168,17 @@ ways:
 
 | You write                                     | What is installed                                                                                               |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `archive`                                     | `module-archive` from the first module source that has it, at its default branch                                |
-| `https://github.com/einhq/module-archive`     | That repository, at its default branch                                                                          |
+| `archive`                                     | `module-archive` from the first module source that has it, at its newest release                                |
+| `https://github.com/einhq/module-archive`     | That repository, at its newest release                                                                          |
 | `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its id, whole or its first seven characters or more, which EiN records whole |
+
+A release is a tag `v` and a version, such as `v0.3.1`, and the newest is the highest version; a
+prerelease such as `v0.4.0-rc.1` does not count. A repository with no release is installed at its
+default branch, and `@main` installs the default branch of one that has releases, with whatever
+was pushed after the last one. A module that is missing and needed by the one you install comes at
+its newest release that the module accepts: `archive` needing `ems ^0.1.0` gets `ems` 0.1.2 even
+when 0.2.0 is out. `mod search` lists each module's newest release, its version and the core API
+it needs.
 
 The [reference](../reference/commands-core.md#mod-install) lists its options.
 
@@ -199,12 +207,13 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
   **Update available**.
 - Or open the module's panel. A module installed from its repository has a section **Installed
   from its repository**, saying which repository and commit it came from and when, with **Update**
-  and **Remove**. **Update** there fetches the newest commit of the branch it was installed from,
-  or the same tag again for one installed at a tag. One installed at a commit stays there, and its
-  panel offers no **Update**. It answers **Updated**, or **Up to date** when there was nothing
+  and **Remove**. **Update** there fetches the newest release for one installed at a release, and
+  the newest commit of the branch for one installed from a branch. One installed at any other tag
+  gets that tag again, and one installed at a commit stays there, and its panel offers no
+  **Update**. It answers **Updated**, or **Up to date** when there was nothing
   newer.
 - In the terminal, `mod install archive` updates an installed module. The same commit again is
-  left alone: `archive is installed at 5e1c07a42 (main) already`.
+  left alone: `archive is installed at 5e1c07a42 (v0.1.0) already`.
 
 An update installs what the new version needs and is missing. It is refused when an installed
 module depends on this one and does not accept the new version; the message names them, for
@@ -217,11 +226,11 @@ on it, directly or through another, is set up again too, and its running service
 nothing keeps running the code that was replaced. The new version takes the old one's place in a
 single step: the module's folder always holds one whole version.
 
-To pin a module to a version, install it at a tag, such as `mod install archive@v0.1.0` where its
-repository has that tag, or at a commit, such as `mod install archive@463a92f`. Its panel's
-**Update** then keeps it at the tag, and a module installed at a commit has no **Update** there.
-The published modules always compare with the default branch, so they may offer **Update** for
-it, which installs the default branch, as `mod install archive` without a ref does.
+To keep a module at a version, install it at a commit, such as `mod install archive@463a92f`; its
+panel then has no **Update**. The published modules still compare it with the newest release, so
+they may offer **Update** for it, which installs the newest release, as `mod install archive`
+without a ref does. A module installed from its default branch past the newest release is not
+offered the release.
 
 ## Keep a module to some groups
 

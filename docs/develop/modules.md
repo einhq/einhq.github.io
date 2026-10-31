@@ -585,8 +585,10 @@ module's commands only when it depends on it.
    commands with their execute bit (`git update-index --chmod=+x bin/*`): EiN installs each file
    with the mode the repository gives it.
 
-2. Mark versions with tags, and raise `version` in `mod.json` with each: the minor when you add
-   something another module may come to rely on, the major when something they use changes.
+2. Release versions as tags `v<version>`, such as `v0.1.0`, and raise `version` in `mod.json` with
+   each: the minor when you add something another module may come to rely on, the major when
+   something they use changes. Without a ref, `mod install` takes the highest of them, and the
+   default branch only while there is none.
 
 3. Install it on any EiN by its address, with a branch, tag or commit after `@` if you want one:
 
