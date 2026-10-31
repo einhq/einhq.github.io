@@ -229,7 +229,7 @@ engine, which <a href="../admin/processing.html">Processing and pipelines</a> co
 <tbody><tr>
 <td><code>staging-unzip</code></td>
 <td>A zip anywhere in a category has finished uploading</td>
-<td>Expands it into the folder it lies in (<code>unzip -n</code>), then removes it. One zip at a time.</td>
+<td>Expands it into the folder it lies in (<code>unzip -n --as-upload</code>, which freezes what <code>/etc/frozen-uploads</code> lists, as an upload), then removes it. One zip at a time.</td>
 </tr>
 <tr>
 <td><code>staging-sidecars</code></td>
@@ -637,8 +637,8 @@ staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N --user helen</code></pre></div>
 <code>pipeline-instances -s failed staging-unzip</code> and <code>pipeline-status &lt;id&gt;</code>. The step&#39;s error says why:
 <code>not enough space: …</code> when the disk lacks room for what it holds and a tenth more, <code>refusing entry &#39;…&#39;: it would land outside …</code> for an unsafe archive, or <code>a file of another size is there</code> when a
 file of that name is in the folder already. Free space or move the clashing file, then expand it
-by hand: <code>unzip -d &lt;folder&gt; &lt;zip&gt;</code> goes on where the last run stopped, and <code>-o</code> writes over the
-files there.</p>
+by hand: <code>unzip --as-upload -d &lt;folder&gt; &lt;zip&gt;</code> goes on where the last run stopped, freezing what
+the run would have, and <code>-o</code> writes over the files there.</p>
 <p><strong>Files stay &quot;being prepared&quot; for hours.</strong> A large import takes hours, and a bulk-lane category
 waits behind all other work. If <code>staging status</code> shows the <code>indexing</code> count not going down at all,
 see whether the media service answers (<a href="../ems/index.html">The media service</a>) and whether the

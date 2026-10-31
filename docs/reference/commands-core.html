@@ -5351,7 +5351,7 @@ trash empty --older-than 30</code></pre></div>
 <h3 id="unzip"><code>unzip</code><a class="anchor" href="#unzip" aria-label="Link to this section"></a></h3>
 <p>Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A file already there at its entry’s size is left as it is, so a run that stopped can be run again.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>unzip [-d &lt;path&gt;] [-n] [-o] &lt;archive&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>unzip [-d &lt;path&gt;] [-n] [-o] [--as-upload] &lt;archive&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -5384,9 +5384,14 @@ trash empty --older-than 30</code></pre></div>
 <td><code>-o</code></td>
 <td>write over an existing file.</td>
 </tr>
+<tr>
+<td><code>--as-upload</code></td>
+<td>take the files for the upload the archive came in: one of a type /etc/frozen-uploads lists is frozen, as an upload of it would be.</td>
+</tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>unzip -d /home/anna/staging/files/inbox /home/anna/staging/files/inbox/takeout-001.zip</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>unzip -d /home/anna/staging/files/inbox /home/anna/staging/files/inbox/takeout-001.zip
+unzip --as-upload -d /home/anna/staging/files/inbox /home/anna/staging/files/inbox/takeout-001.zip</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: in JSON mode, UnzipAnswer: the files, directories and bytes written, the files left as they were, and each entry not expanded with why. Exits non-zero when any entry was not expanded.</p>
 <h3 id="user"><code>user</code><a class="anchor" href="#user" aria-label="Link to this section"></a></h3>
 <p>Manage users.</p>

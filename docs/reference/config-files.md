@@ -156,33 +156,33 @@ The media service, when installed, mounts the same four file folders at the same
 
 These files are nodes in the tree, so they live in the database and survive a restart, an update and a new container. Read them in EiN's terminal with `cat`, and change them with [`edit`](../shell/editor.md) or the code editor on the **Nodes** page, as far as your rights allow.
 
-| Path                                         | Written by                                                                  | Read by                                           | Mode   |
-| -------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------- | ------ |
-| `/etc/bashrc`                                | core at the first start, then the administrator                             | every shell, when it opens                        | `0644` |
-| `/etc/bashrc.d/<group>`                      | the administrator, `mod setup`                                              | the group's members' shells, when they open       | `0644` |
-| `/etc/layout`                                | boot, at every start                                                        | `/etc/bashrc`                                     |        |
-| `/etc/environment`                           | boot, at every start                                                        | `/etc/bashrc`                                     | `0644` |
-| `/etc/config.d/<module>`                     | `mod setup`, as a link to the module's file                                 | `/etc/bashrc`                                     |        |
-| `/etc/config`                                | **Settings → System**, `config set`                                         | `/etc/bashrc`                                     | `0644` |
-| `/etc/keys`                                  | **Settings → System**, `config set`, for keys                               | EiN itself, never a shell                         | `0600` |
-| `~/.config`                                  | **Profile → Preferences**, `config set`                                     | `/etc/bashrc`                                     | `0600` |
-| `~/.bashrc`                                  | you                                                                         | your terminal and SSH logins                      |        |
-| `~/.bash_history`                            | your shell                                                                  | your shell                                        |        |
-| `/etc/ui/nav.d/<module>.json`                | `mod setup`, as a link to the module's file                                 | the sidebar and top bar                           |        |
-| `/etc/ui/nav.json`                           | the administrator                                                           | the sidebar and top bar                           |        |
-| `/etc/ui/groups/<group>/nav.json`            | the administrator                                                           | the group's members' sidebar and top bar          |        |
-| `/etc/ui/groups/<group>/nav.d/<module>.json` | `mod setup`, as a link to the module's file, for a module kept to the group | the group's members' sidebar and top bar          |        |
-| `/etc/modules/<module>.groups`               | `mod groups`, `mod install --groups`, **Settings → Modules**                | `mod setup` and the shell, for who has the module | `0644` |
-| `~/.ui/nav.json`                             | you                                                                         | your sidebar and top bar                          |        |
-| `/etc/fstab`                                 | `mount --save`, `unmount --save`                                            | boot, with `mount -a`                             | `0600` |
-| `/etc/frozen-uploads`                        | core at the first start, then the administrator                             | an upload over the web or SFTP, as it arrives     | `0644` |
-| `/etc/ssh_host_key`, `.pub`                  | the SSH server, at the first start                                          | the SSH server                                    | `0700` |
-| `~/.ssh/…`                                   | you, `ssh-keygen`, `ssh`                                                    | the SSH server, `ssh`, `scp`, `mount`             | `0700` |
-| `/etc/users/`, `/etc/groups/`                | the account and group commands                                              | every sign-in and access check                    |        |
-| `/etc/services/`                             | `service add`, `service enable`, `mod setup`                                | `service start-all` at boot                       |        |
-| `/etc/files/`, `/etc/init/`                  | boot                                                                        | boot                                              |        |
-| `/etc/assistant-prompt.md`                   | `mod setup`, once; then the administrator                                   | the Assistant, when installed                     |        |
-| `/etc/assistant.d/<module>/`                 | `mod setup`, as a link to the module's folder                               | the Assistant, when installed                     |        |
+| Path                                         | Written by                                                                  | Read by                                             | Mode   |
+| -------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------- | ------ |
+| `/etc/bashrc`                                | core at the first start, then the administrator                             | every shell, when it opens                          | `0644` |
+| `/etc/bashrc.d/<group>`                      | the administrator, `mod setup`                                              | the group's members' shells, when they open         | `0644` |
+| `/etc/layout`                                | boot, at every start                                                        | `/etc/bashrc`                                       |        |
+| `/etc/environment`                           | boot, at every start                                                        | `/etc/bashrc`                                       | `0644` |
+| `/etc/config.d/<module>`                     | `mod setup`, as a link to the module's file                                 | `/etc/bashrc`                                       |        |
+| `/etc/config`                                | **Settings → System**, `config set`                                         | `/etc/bashrc`                                       | `0644` |
+| `/etc/keys`                                  | **Settings → System**, `config set`, for keys                               | EiN itself, never a shell                           | `0600` |
+| `~/.config`                                  | **Profile → Preferences**, `config set`                                     | `/etc/bashrc`                                       | `0600` |
+| `~/.bashrc`                                  | you                                                                         | your terminal and SSH logins                        |        |
+| `~/.bash_history`                            | your shell                                                                  | your shell                                          |        |
+| `/etc/ui/nav.d/<module>.json`                | `mod setup`, as a link to the module's file                                 | the sidebar and top bar                             |        |
+| `/etc/ui/nav.json`                           | the administrator                                                           | the sidebar and top bar                             |        |
+| `/etc/ui/groups/<group>/nav.json`            | the administrator                                                           | the group's members' sidebar and top bar            |        |
+| `/etc/ui/groups/<group>/nav.d/<module>.json` | `mod setup`, as a link to the module's file, for a module kept to the group | the group's members' sidebar and top bar            |        |
+| `/etc/modules/<module>.groups`               | `mod groups`, `mod install --groups`, **Settings → Modules**                | `mod setup` and the shell, for who has the module   | `0644` |
+| `~/.ui/nav.json`                             | you                                                                         | your sidebar and top bar                            |        |
+| `/etc/fstab`                                 | `mount --save`, `unmount --save`                                            | boot, with `mount -a`                               | `0600` |
+| `/etc/frozen-uploads`                        | core at the first start, then the administrator                             | an upload over the web or SFTP, `unzip --as-upload` | `0644` |
+| `/etc/ssh_host_key`, `.pub`                  | the SSH server, at the first start                                          | the SSH server                                      | `0700` |
+| `~/.ssh/…`                                   | you, `ssh-keygen`, `ssh`                                                    | the SSH server, `ssh`, `scp`, `mount`               | `0700` |
+| `/etc/users/`, `/etc/groups/`                | the account and group commands                                              | every sign-in and access check                      |        |
+| `/etc/services/`                             | `service add`, `service enable`, `mod setup`                                | `service start-all` at boot                         |        |
+| `/etc/files/`, `/etc/init/`                  | boot                                                                        | boot                                                |        |
+| `/etc/assistant-prompt.md`                   | `mod setup`, once; then the administrator                                   | the Assistant, when installed                       |        |
+| `/etc/assistant.d/<module>/`                 | `mod setup`, as a link to the module's folder                               | the Assistant, when installed                       |        |
 
 A blank mode is the default the folder gives a new file. `~` is your home, `/home/<your username>`.
 
@@ -280,7 +280,7 @@ A module [kept to some groups](../admin/modules.md#keep-a-module-to-some-groups)
 
 ### /etc/frozen-uploads
 
-`/etc/frozen-uploads` says which uploads are [frozen](../concepts/files.md#frozen-files) as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk. One type per line; `image/*` stands for every subtype, a `!` in front leaves a type out that another line takes in, and `#` starts a comment. It is copied from core's own file at the first start, and from then on it is the administrator's:
+`/etc/frozen-uploads` says which uploads are [frozen](../concepts/files.md#frozen-files) as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk, and so can one `unzip --as-upload` takes out of an uploaded zip, as the Archive's staging does. One type per line; `image/*` stands for every subtype, a `!` in front leaves a type out that another line takes in, and `#` starts a comment. It is copied from core's own file at the first start, and from then on it is the administrator's:
 
 ```text
 # /etc/frozen-uploads

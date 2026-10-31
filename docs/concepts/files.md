@@ -215,12 +215,15 @@ What is frozen:
   sshfs, whose type `/etc/frozen-uploads` lists. As EiN comes, that is every picture, video and
   recording except an SVG; text, documents, scripts and settings files stay writable. The file is
   frozen once the whole of it has arrived, so an upload that stopped part-way can be sent again.
+- **A file taken out of an uploaded zip**, with `unzip --as-upload`, whose type
+  `/etc/frozen-uploads` lists, as if it had been uploaded on its own. With the Archive, a zip or a
+  Google Takeout export uploaded into staging is taken apart this way.
 - **A copy of a frozen file**, made with `cp`.
 - **A file marked by hand**, with `attrs -J frozen=true <file>`.
 
 What EiN writes itself is not frozen by `/etc/frozen-uploads`: a file made in the terminal or with a
-redirect, the files `unzip` takes out of a zip, and everything EiN makes from a file, such as its
-thumbnails.
+redirect, the files `unzip` takes out of a zip without `--as-upload`, and everything EiN makes from
+a file, such as its thumbnails.
 
 `/etc/frozen-uploads` lists one type per line. `image/*` stands for every type of picture, and a `!`
 in front leaves a type out:

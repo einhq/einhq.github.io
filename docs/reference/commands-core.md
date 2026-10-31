@@ -3476,7 +3476,7 @@ Expand a zip archive into a directory, streaming each entry. Refuses an archive 
 <small>changes things</small>
 
 ```text
-unzip [-d <path>] [-n] [-o] <archive>
+unzip [-d <path>] [-n] [-o] [--as-upload] <archive>
 ```
 
 | Argument | What it is |
@@ -3488,9 +3488,11 @@ unzip [-d <path>] [-n] [-o] <archive>
 | `-d <path>` | the directory to expand into, made if missing (default: the current one) |
 | `-n` | never write over an existing file (the default) |
 | `-o` | write over an existing file. |
+| `--as-upload` | take the files for the upload the archive came in: one of a type /etc/frozen-uploads lists is frozen, as an upload of it would be. |
 
 ```bash
 unzip -d /home/anna/staging/files/inbox /home/anna/staging/files/inbox/takeout-001.zip
+unzip --as-upload -d /home/anna/staging/files/inbox /home/anna/staging/files/inbox/takeout-001.zip
 ```
 
 With `JSON_OUTPUT=1`: in JSON mode, UnzipAnswer: the files, directories and bytes written, the files left as they were, and each entry not expanded with why. Exits non-zero when any entry was not expanded.

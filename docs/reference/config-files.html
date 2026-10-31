@@ -499,7 +499,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <tr>
 <td><code>/etc/frozen-uploads</code></td>
 <td>core at the first start, then the administrator</td>
-<td>an upload over the web or SFTP, as it arrives</td>
+<td>an upload over the web or SFTP, <code>unzip --as-upload</code></td>
 <td><code>0644</code></td>
 </tr>
 <tr>
@@ -673,7 +673,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <div class="code"><pre tabindex="0"><code>/mnt/nas sftp host=nas.local,user=anna,path=/srv/photos,key=/home/admin/.ssh/nas</code></pre></div>
 <p><code>mount --save</code> adds or replaces the line for its mount point, and <code>unmount --save</code> removes it, keeping every other line and comment. The file is made with mode <code>0600</code>, since it names other machines and their users. When it is missing, boot mounts nothing. <a href="../shell/remote.html#mount-a-folder-of-another-machine">Mount a folder of another machine</a> explains the options.</p>
 <h3 id="etcfrozen-uploads">/etc/frozen-uploads<a class="anchor" href="#etcfrozen-uploads" aria-label="Link to this section"></a></h3>
-<p><code>/etc/frozen-uploads</code> says which uploads are <a href="../concepts/files.html#frozen-files">frozen</a> as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk. One type per line; <code>image/*</code> stands for every subtype, a <code>!</code> in front leaves a type out that another line takes in, and <code>#</code> starts a comment. It is copied from core&#39;s own file at the first start, and from then on it is the administrator&#39;s:</p>
+<p><code>/etc/frozen-uploads</code> says which uploads are <a href="../concepts/files.html#frozen-files">frozen</a> as they arrive: a file uploaded in the web interface or copied in over SFTP whose type it lists can no longer be written, in EiN or on the disk, and so can one <code>unzip --as-upload</code> takes out of an uploaded zip, as the Archive&#39;s staging does. One type per line; <code>image/*</code> stands for every subtype, a <code>!</code> in front leaves a type out that another line takes in, and <code>#</code> starts a comment. It is copied from core&#39;s own file at the first start, and from then on it is the administrator&#39;s:</p>
 <div class="code"><pre tabindex="0"><code># /etc/frozen-uploads
 image/*
 video/*
