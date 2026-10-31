@@ -177,7 +177,7 @@
             <h2 id="architecture-title">How the core is put together</h2>
             <p>
               EiN can be just its core: one program, in TypeScript on Deno, with PostgreSQL beside it. Everything it keeps is a node in one tree, and every interface to it runs the
-              same shell commands, as you, under one permission check. Modules add what EiN is for.
+              same shell commands, under one permission check. Modules add what EiN is for.
             </p>
           </div>
 
@@ -265,8 +265,8 @@
           <div class="intro">
             <h2 id="shell-title">A real shell, behind every interface</h2>
             <p>
-              At EiN's heart is a bash-compatible shell with more than 200 commands, and each module adds its own. The web interface, its terminal and SSH all run these commands
-              as you; SFTP moves files under the same permissions.
+              At EiN's heart is a bash-compatible shell with more than 200 commands, and each module adds its own. The web interface, its terminal and SSH all run these commands;
+              SFTP moves files under the same permissions.
             </p>
           </div>
           <div class="shell-grid">
@@ -281,7 +281,7 @@
             </div>
             <ul class="points shell-points">
               <li>
-                Each page of the web interface gets what it shows by running commands as you, answering in JSON. Anything you can click you can script, and what you may not see in
+                Each page of the web interface gets what it shows by running commands, answering in JSON. Anything you can click you can script, and what you may not see in
                 the shell you cannot see in the browser either.
               </li>
               <li>Jobs, pipes and signals work as in bash, and a bash script that declares its arguments becomes a command with <code>--help</code> and Tab completion.</li>
@@ -385,7 +385,7 @@
             </div>
             <div>
               <dt><a href="#assistant">The Assistant</a> <code>assistant</code></dt>
-              <dd>A chat that answers by running EiN's commands as you. It needs a language model, on your machine or a hosted one.</dd>
+              <dd>A chat that answers by running EiN's commands. It needs a language model, on your machine or a hosted one.</dd>
             </div>
             <div>
               <dt><a href="#media-service">The media service</a> <code>ems</code></dt>
@@ -407,7 +407,7 @@
           <h2 id="assistant-title">Ask EiN in your own words</h2>
           <div class="chapter-body">
             <p class="chapter-lede">
-              The Assistant is a module that adds a chat, in a drawer beside every page and on a page of your conversations. It answers by running EiN's own commands, as you,
+              The Assistant is a module that adds a chat, in a drawer beside every page and on a page of your conversations. It answers by running EiN's own commands,
               with your permissions, and shows every command it ran.
             </p>
             <p>
@@ -446,7 +446,7 @@
             </li>
             <li>
               <strong><code>run_command</code></strong>
-              <span><code>pipeline-overview</code>, run in the shell as you</span>
+              <span><code>pipeline-overview</code>, run in the shell</span>
             </li>
             <li>
               <strong>The answer</strong>
@@ -518,7 +518,7 @@
             </p>
             <p>
               It is built from core's pieces: its albums, people and places are node types, its pages sit in core's frame, and its pipelines process every file as it arrives.
-              The screenshots are from the demo: one invented family, 616 files from 1956 to 2026.
+              The screenshots show one invented family, 616 files from 1956 to 2026.
             </p>
           </div>
         </div>
@@ -553,7 +553,7 @@
                 <li class="c-media" style="--x: 72.3%; --y: 76%"><span>Pictures that look alike</span></li>
               </ol>
             </div>
-            <figcaption>Christmas in Wellington, 2025: Ruby with her aunt Helen and Helen's husband David. From the demo archive of the invented Wrenfield family.</figcaption>
+            <figcaption>Christmas in Wellington, 2025: Ruby with her aunt Helen and Helen's husband David. From the archive of the invented Wrenfield family.</figcaption>
           </figure>
         </div>
       </section>
@@ -777,7 +777,7 @@
           <div class="intro">
             <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Screenshots</p>
             <h2 id="screenshots-title">Almost every page</h2>
-            <p>From the demo archive of the invented Wrenfield family. Open one to see it large; the arrow keys step through them.</p>
+            <p>From the archive of the invented Wrenfield family.</p>
           </div>
           <div class="gallery-group ch-core">
             <h3><span class="mark" aria-hidden="true"></span>The core<span>The pages every installation has, whatever modules it runs.</span></h3>
@@ -804,7 +804,7 @@
                     alt="The terminal pane listing the archive, counting its people, showing one person&#x27;s relations and a photo inline">
                 </a>
                 <h4>The terminal</h4>
-                <p>Alt+T opens a bash shell beside any page, as you, with your permissions. It shows pictures inline.</p>
+                <p>Alt+T opens a bash shell beside any page, with your permissions. It shows pictures inline.</p>
               </li>
               <li>
                 <a href="assets/shots/nodes@2x.webp" data-shot data-width="2880" data-height="1800">
@@ -889,7 +889,7 @@
             </ul>
           </div>
           <div class="gallery-group ch-assistant">
-            <h3><span class="mark" aria-hidden="true"></span>The Assistant<span>A chat that answers by running EiN&#x27;s commands as you.</span></h3>
+            <h3><span class="mark" aria-hidden="true"></span>The Assistant<span>A chat that answers by running EiN&#x27;s commands.</span></h3>
             <ul class="gallery-list">
               <li>
                 <a href="assets/shots/chat@2x.webp" data-shot data-width="1720" data-height="1800">
@@ -1175,7 +1175,7 @@
         <div class="foot-notice">
           <h2>About the people in these pictures</h2>
           <p>
-            Nobody in the demo exists. The Wrenfields, 19 people over four generations, are invented, and nothing comes from a real family's archive. Every picture with the family
+            Nobody in these pictures exists. The Wrenfields, 19 people over four generations, are invented, and nothing comes from a real family's archive. Every picture with the family
             in it was generated whole, settings included, with the open FLUX.2 [klein] 4B model, and says so inside the file. Their voices are synthetic, and no real person's voice
             was cloned. The photos without people are real: freely licensed photos from Wikimedia Commons and camera RAW samples from raw.pixls.us, each credited by author and
             licence in <a href="https://github.com/einhq/einhq.github.io/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a>. Among them, the covers of Freya's

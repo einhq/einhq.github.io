@@ -1821,6 +1821,24 @@ figcaption {
   color: var(--muted);
   font-size: 0.95rem;
 }
+/* In one column a title below its picture reads as the next one's, so there it stands above. Two
+ * columns need 2 × 17rem and the gap. */
+.gallery-list {
+  container-type: inline-size;
+}
+@container (max-width: calc(34rem + 27px)) {
+  .gallery-list li {
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery-list a {
+    order: 1;
+    margin-top: 14px;
+  }
+  .gallery-list h4 {
+    margin-top: 0;
+  }
+}
 
 .viewer {
   width: 100vw;
@@ -2111,14 +2129,17 @@ figcaption {
 }
 @media (max-width: 760px) {
   .dedication-to {
+    align-items: flex-start;
     gap: 20px;
   }
   .dedication-to br {
     display: none;
   }
+  /* At the top of the words, level with the first line's capitals. */
   .dedication-heart {
     width: 64px;
     height: 64px;
+    margin-top: 8px;
   }
 }
 
