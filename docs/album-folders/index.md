@@ -54,22 +54,26 @@ they were added.
 
 ## What is left out
 
-- **Pictures kept in the `old` folder.** Files kept from an older installation stay where they are,
-  and EiN's file for them only points there. A hard link cannot reach them, so they are left out,
-  and an album of nothing else is an empty folder. `album-folders status` counts them as kept
-  elsewhere.
+- **Files whose bytes are not on the `disk` tier.** A hard link can only be made to a file on the
+  same disk, so a folder holds only what EiN keeps with your originals, in `files`. Renditions on
+  the `volatile` tier and content kept in the database, the `db` tier, never show up there, nor does
+  a picture made on either of them with `mknode --tier`. `album-folders status` counts what it left
+  out. [Where the bytes are kept](../concepts/files.md#where-the-bytes-are-kept) explains the tiers.
 - **What EiN knows about the pictures**: faces, people, places, descriptions and comments stay in
   EiN, as do thumbnails and video renditions. The folders hold the originals.
 - **Suggested albums** in staging, until they are filed as albums.
 
 ## Share them read-only
 
-The folders cannot be changed: nothing can be added, renamed or removed in them. The files in them
-are EiN's own originals, though, and whoever may write to a file there writes to EiN's original. A
-photo program that saves an edit into the file changes the picture in EiN, without EiN knowing.
+The folders cannot be changed: nothing can be added, renamed or removed in them.
 
-Under podman, which the installer uses unless told otherwise, the files belong to your own user.
-Give other programs and other people the folders read-only:
+> [!WARNING]
+> The files in the folders are EiN's own originals, not copies. Whoever may write to a file there
+> writes to the original: a photo program that saves an edit into a picture changes it in EiN, and
+> EiN does not know. Give everyone and every program the folders read-only.
+
+Under podman, which the installer uses unless told otherwise, the files belong to your own user,
+who can write to them. Two ways to give the folders read-only:
 
 - **A shared folder** in Samba, with `read only = yes`:
 
@@ -126,7 +130,7 @@ album-folders status
 
 ```text
 /files/albums: ready
-last full pass 2026-10-30T21:00:00.000Z, 112 albums: 0 linked, 0 removed, 8410 in place, 2 skipped (2 kept elsewhere, 0 not on disk)
+last full pass 2026-10-30T21:00:00.000Z, 112 albums: 0 linked, 0 removed, 8410 in place
 ```
 
 `album-folders sync` compares them now, every album or the albums under one path, and `--dry-run`
@@ -152,7 +156,7 @@ with `--exclude /files/albums`: EiN makes them again from the albums after a res
 | `holds files but no .ein-album-folders; not taken as the album folders`        | The location already holds files the module did not make. It only takes an empty folder or one it made, since it removes every file there that no album wants. Choose an empty folder.                                                           |
 | `not on the same mount as the stored files`                                    | `CFG_ALBUM_FOLDERS_PATH` is outside `/files`. Choose a folder inside it.                                                                                                                                                                         |
 | `… of … files belong to no album; not removing them (--force does)` in the log | A full comparison would have emptied more than half the folders, which is what an archive not yet in place looks like. If the albums really are gone, run `album-folders sync --force`.                                                          |
-| An album's folder is empty                                                     | Its pictures are kept in the `old` folder ([What is left out](#what-is-left-out)), or it has none.                                                                                                                                               |
+| An album's folder is empty                                                     | The album has no pictures, or none whose bytes are on the `disk` tier ([What is left out](#what-is-left-out)).                                                                                                                                   |
 | A picture is missing in a folder after a change                                | Wait a few seconds, or run `album-folders sync` with the album's path. What the service did is in `/var/logs/services/album-folders/stdout.log`, its errors in `stderr.log` ([Services and logs](../admin/services-logs.md#where-the-logs-are)). |
 
 ## Related pages

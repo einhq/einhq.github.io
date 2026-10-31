@@ -128,20 +128,24 @@ hard link. The folders take no room of their own, and the files keep their dates
 they were added.</p>
 <h2 id="what-is-left-out">What is left out<a class="anchor" href="#what-is-left-out" aria-label="Link to this section"></a></h2>
 <ul>
-<li><strong>Pictures kept in the <code>old</code> folder.</strong> Files kept from an older installation stay where they are,
-and EiN&#39;s file for them only points there. A hard link cannot reach them, so they are left out,
-and an album of nothing else is an empty folder. <code>album-folders status</code> counts them as kept
-elsewhere.</li>
+<li><strong>Files whose bytes are not on the <code>disk</code> tier.</strong> A hard link can only be made to a file on the
+same disk, so a folder holds only what EiN keeps with your originals, in <code>files</code>. Renditions on
+the <code>volatile</code> tier and content kept in the database, the <code>db</code> tier, never show up there, nor does
+a picture made on either of them with <code>mknode --tier</code>. <code>album-folders status</code> counts what it left
+out. <a href="../concepts/files.html#where-the-bytes-are-kept">Where the bytes are kept</a> explains the tiers.</li>
 <li><strong>What EiN knows about the pictures</strong>: faces, people, places, descriptions and comments stay in
 EiN, as do thumbnails and video renditions. The folders hold the originals.</li>
 <li><strong>Suggested albums</strong> in staging, until they are filed as albums.</li>
 </ul>
 <h2 id="share-them-read-only">Share them read-only<a class="anchor" href="#share-them-read-only" aria-label="Link to this section"></a></h2>
-<p>The folders cannot be changed: nothing can be added, renamed or removed in them. The files in them
-are EiN&#39;s own originals, though, and whoever may write to a file there writes to EiN&#39;s original. A
-photo program that saves an edit into the file changes the picture in EiN, without EiN knowing.</p>
-<p>Under podman, which the installer uses unless told otherwise, the files belong to your own user.
-Give other programs and other people the folders read-only:</p>
+<p>The folders cannot be changed: nothing can be added, renamed or removed in them.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>The files in the folders are EiN&#39;s own originals, not copies. Whoever may write to a file there
+writes to the original: a photo program that saves an edit into a picture changes it in EiN, and
+EiN does not know. Give everyone and every program the folders read-only.</p>
+</aside>
+<p>Under podman, which the installer uses unless told otherwise, the files belong to your own user,
+who can write to them. Two ways to give the folders read-only:</p>
 <ul>
 <li><p><strong>A shared folder</strong> in Samba, with <code>read only = yes</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-section">[albums]</span>
@@ -194,7 +198,7 @@ folder still holds a file, the file keeps its room on the disk.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 album-folders status</code></pre></div>
 <div class="code"><pre tabindex="0"><code>/files/albums: ready
-last full pass 2026-10-30T21:00:00.000Z, 112 albums: 0 linked, 0 removed, 8410 in place, 2 skipped (2 kept elsewhere, 0 not on disk)</code></pre></div>
+last full pass 2026-10-30T21:00:00.000Z, 112 albums: 0 linked, 0 removed, 8410 in place</code></pre></div>
 <p><code>album-folders sync</code> compares them now, every album or the albums under one path, and <code>--dry-run</code>
 only counts what it would change:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
@@ -226,7 +230,7 @@ with <code>--exclude /files/albums</code>: EiN makes them again from the albums 
 </tr>
 <tr>
 <td>An album&#39;s folder is empty</td>
-<td>Its pictures are kept in the <code>old</code> folder (<a href="#what-is-left-out">What is left out</a>), or it has none.</td>
+<td>The album has no pictures, or none whose bytes are on the <code>disk</code> tier (<a href="#what-is-left-out">What is left out</a>).</td>
 </tr>
 <tr>
 <td>A picture is missing in a folder after a change</td>
