@@ -2077,9 +2077,15 @@ figcaption {
 .dedication-years {
   white-space: nowrap;
 }
-.dedication-to .mark {
+/* The one red on the page: a heart of hats, set apart from the node types' colours. */
+.dedication-heart {
   display: block;
-  margin-bottom: 20px;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+  stroke: var(--ink);
+  stroke-width: 0.3;
+  stroke-linejoin: round;
 }
 .dedication h2 {
   font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
