@@ -204,13 +204,13 @@ what the image carries, all of it used by the Archive:</p>
 <tr>
 <td>Who is speaking when</td>
 <td>NVIDIA <a href="https://huggingface.co/nvidia/diar_sortformer_4spk-v1#licence">Sortformer</a> <code>diar_sortformer_4spk-v1</code>, run by <a href="https://github.com/NVIDIA-NeMo/NeMo/blob/main/LICENSE">NeMo</a></td>
-<td>Apache-2.0 / CC BY-NC 4.0</td>
+<td>Apache-2.0 / <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">CC BY-NC 4.0</a></td>
 <td><strong>Non-commercial</strong>; attribution</td>
 </tr>
 <tr>
 <td>Voiceprints, to tie a voice to a person</td>
 <td>NVIDIA <a href="https://huggingface.co/nvidia/speakerverification_en_titanet_large#licence">TitaNet large</a>, run by NeMo</td>
-<td>Apache-2.0 / CC BY 4.0</td>
+<td>Apache-2.0 / <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a></td>
 <td>Attribution</td>
 </tr>
 <tr>
@@ -222,25 +222,25 @@ what the image carries, all of it used by the Archive:</p>
 <tr>
 <td>Picture vectors: finding pictures by what they show</td>
 <td>Google&#39;s <a href="https://huggingface.co/google/siglip2-so400m-patch16-384">SigLIP 2 So400m/16-384</a>, as <a href="https://huggingface.co/immich-app/ViT-SO400M-16-SigLIP2-384__webli">Immich exports it</a></td>
-<td>— / Apache-2.0</td>
+<td>— / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td>
 <td>Immich&#39;s export states no licence of its own</td>
 </tr>
 <tr>
 <td>Text vectors: finding text by meaning</td>
-<td><a href="https://huggingface.co/jinaai/jina-embeddings-v5-text-small#license">jina-embeddings-v5-text-small</a>, built on <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base">Qwen3-0.6B-Base</a> (Apache-2.0)</td>
-<td>— / CC BY-NC 4.0</td>
+<td><a href="https://huggingface.co/jinaai/jina-embeddings-v5-text-small#license">jina-embeddings-v5-text-small</a>, built on <a href="https://huggingface.co/Qwen/Qwen3-0.6B-Base">Qwen3-0.6B-Base</a> (<a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a>)</td>
+<td>— / <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">CC BY-NC 4.0</a></td>
 <td><strong>Non-commercial</strong>; Jina AI licenses it for commercial use</td>
 </tr>
 <tr>
 <td>Text in pictures</td>
 <td><a href="https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE">PP-OCRv6</a>, run by <a href="https://github.com/RapidAI/RapidOCR/blob/main/LICENSE">RapidOCR</a></td>
-<td>Apache-2.0 / Apache-2.0</td>
+<td>Apache-2.0 / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td>
 <td></td>
 </tr>
 <tr>
 <td>Handwriting in Swedish and Finnish</td>
 <td>The National Archives of Finland&#39;s <a href="https://huggingface.co/Kansallisarkisto/multicentury-ppocrv6-medium">multicentury-ppocrv6-medium</a> and <a href="https://huggingface.co/Kansallisarkisto/multicentury-htr-model">multicentury-htr-model</a></td>
-<td>— / Apache-2.0</td>
+<td>— / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td>
 <td>The second is fine-tuned from Microsoft&#39;s TrOCR below</td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@ what the image carries, all of it used by the Archive:</p>
 <tr>
 <td>The language of read text</td>
 <td><a href="https://github.com/pemistahl/lingua-py/blob/main/LICENSE.txt">Lingua</a></td>
-<td>Apache-2.0, its models included</td>
+<td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a>, its models included</td>
 <td></td>
 </tr>
 <tr>
@@ -270,7 +270,7 @@ what the image carries, all of it used by the Archive:</p>
 <tr>
 <td>Shot boundaries: chapters in a video</td>
 <td><a href="https://github.com/soCzech/TransNetV2/blob/master/LICENSE">TransNetV2</a>, its weights <a href="https://huggingface.co/Sn4kehead/TransNetV2">converted to PyTorch</a></td>
-<td>MIT / Apache-2.0</td>
+<td>MIT / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td>
 <td>The authors&#39; own weights are in their MIT repository</td>
 </tr>
 <tr>
@@ -325,6 +325,13 @@ and <a href="https://github.com/OpenNMT/CTranslate2/blob/master/LICENSE">CTransl
 <a href="https://github.com/huggingface/transformers/blob/main/LICENSE">transformers</a>,
 <a href="https://github.com/huggingface/sentence-transformers/blob/master/LICENSE">sentence-transformers</a>
 and <a href="https://github.com/opencv/opencv/blob/4.x/LICENSE">OpenCV</a> under Apache-2.0.</p>
+<p>The image passes each model&#39;s weights on unmodified: as their maker publishes them or, where the
+table names an export or a conversion, as the one who made it publishes it. They come as is,
+without warranties, as their licences say. Beside them, the image writes out two files derived
+from published ones: the Finnish handwriting recogniser&#39;s character list, and TrOCR&#39;s tokenizer in
+the format transformers reads. The image&#39;s <code>/usr/share/doc/ein-ems/NOTICE.md</code> points
+to this page, names the models under Creative Commons and Apache-2.0, links the Creative Commons
+licences and holds the text of Apache-2.0.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
 <p>Four features rest on models whose terms allow no commercial use:</p>
 <ul>
@@ -343,8 +350,10 @@ media service, with <code>./setup.sh --no-ems</code>, and so without everything 
 <a href="#what-the-media-service-does">What the media service does</a>. The assistant&#39;s command search alone
 can leave the text vectors out: with <a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>
 empty, it matches words instead.</p>
-<p>Other licences in the table ask for attribution (CC BY 4.0) or set conditions on passing the software
-and its source on (GPL, LGPL, AGPL). Check each licence for what it asks of your installation.</p>
+<p>Other licences in the table set conditions on passing a model or tool on: CC BY 4.0 and CC BY-NC
+4.0 a credit to its maker and a link to the licence, Apache-2.0 a copy of the licence, which this
+page and the image&#39;s notice give; GPL, LGPL and AGPL conditions on passing the software and its
+source on. Check each licence for what it asks of your installation.</p>
 <h2 id="add-the-media-service">Add the media service<a class="anchor" href="#add-the-media-service" aria-label="Link to this section"></a></h2>
 <p>The installer adds it with <code>--ems</code>, at the first install or any time after:</p>
 <ol>
