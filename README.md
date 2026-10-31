@@ -7,7 +7,8 @@ shell, the web interface, pipelines and modules. Assistant is the chat and what 
 installation, ending where it has a real purpose, the Archive. Archive is the first module, with the
 screenshots from the demo archive, its media types and pipelines, asking the assistant about the
 family, and the media service. Screenshots is a gallery of almost every page, and the system
-requirements and the source close the page, Getting started's like the install. Each chapter opens
+requirements and the source follow it, Getting started's like the install. The page ends on the
+dedication and the projects EiN grew out of. Each chapter opens
 on a band of hats in the colour of the interface's pages it is about.
 It is the GitHub Pages site of the [einhq](https://github.com/einhq) organisation, served at
 <https://einhq.eu> (`CNAME`).

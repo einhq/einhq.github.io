@@ -232,10 +232,10 @@ export function barBottom() {
 
 /**
  * The top bar: an edge once the page has scrolled, and its link to the chapter in view marked
- * (`aria-current`): the chapter (`ch-` class) of the last section whose start has passed a third of
- * the way down, the hero's being the first link's. Getting started comes both first and last. On a
- * phone its links are a menu (site.css), which a chapter's link, Escape, a tap outside it or a wider
- * window closes again. A page without chapters, such as the documentation's, keeps the link its HTML
+ * (`aria-current`): the chapter (`ch-` class) of the last section with one whose start has passed a
+ * third of the way down, so the dedication at the end keeps Getting started's, and the hero's is the
+ * first link's. Getting started comes both first and last. On a phone its links are a menu
+ * (site.css), which a chapter's link, Escape, a tap outside it or a wider window closes again. A page without chapters, such as the documentation's, keeps the link its HTML
  * marks.
  */
 export function bar() {
@@ -249,7 +249,8 @@ export function bar() {
     header.toggleAttribute('data-scrolled', scrollY > 8);
     if (!sections.length) return;
     const line = innerHeight / 3;
-    const section = sections.findLast((el) => el.getBoundingClientRect().top <= line);
+    const passed = sections.filter((el) => el.getBoundingClientRect().top <= line);
+    const section = passed.findLast(chapterOf) ?? passed[0];
     const at = section && linkOf(section);
     for (const link of links) link === at ? link.setAttribute('aria-current', 'true') : link.removeAttribute('aria-current');
   };
