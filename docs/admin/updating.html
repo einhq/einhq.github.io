@@ -92,9 +92,10 @@ services up to date, what an update touches and what it keeps, how to see which 
 what to do when an update goes differently.</p>
 <h2 id="how-updates-work">How updates work<a class="anchor" href="#how-updates-work" aria-label="Link to this section"></a></h2>
 <p>EiN has no releases and no version numbers to choose between. An update downloads the images
-GitHub built from the newest commit of each repository, and starts them in place of what ran before.
-The engine downloads only the layers of an image that changed, so an update of the media service is
-usually far smaller than its 30 GB. What it updates depends on what is installed:</p>
+GitHub builds each night from the newest commit of each repository, and starts them in place of
+what ran before; a change made today reaches an update tomorrow. The engine downloads only the
+layers of an image that changed, so an update of the media service is usually far smaller than its
+30 GB. What it updates depends on what is installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

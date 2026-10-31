@@ -7,9 +7,10 @@ what to do when an update goes differently.
 ## How updates work
 
 EiN has no releases and no version numbers to choose between. An update downloads the images
-GitHub built from the newest commit of each repository, and starts them in place of what ran before.
-The engine downloads only the layers of an image that changed, so an update of the media service is
-usually far smaller than its 30 GB. What it updates depends on what is installed:
+GitHub builds each night from the newest commit of each repository, and starts them in place of
+what ran before; a change made today reaches an update tomorrow. The engine downloads only the
+layers of an image that changed, so an update of the media service is usually far smaller than its
+30 GB. What it updates depends on what is installed:
 
 | Repository | What it is                                            | Updated when            | As                                   |
 | ---------- | ----------------------------------------------------- | ----------------------- | ------------------------------------ |
