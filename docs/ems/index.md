@@ -266,8 +266,9 @@ Compose checks it every 30 seconds, and gives it 120 seconds to start before a f
 The media service uses an NVIDIA card when it has one, and the CPU otherwise. Without a card every
 model and every encoder still runs, only more slowly. Where each
 model runs is the media service's own decision, made each time it loads one; it changes how fast an
-answer comes, never what it is. A model that does not fit on the card runs on the CPU, except transcription and the handwriting
-readers, which wait for room on the card.
+answer comes, never what it is. A model that does not fit on the card runs on the CPU, except transcription and the Swedish
+and Finnish handwriting reader, which wait for room on the card. To make room, the media service unloads the models used
+longest ago first, and only as many as it needs.
 
 With a card, the media service hands the card between indexing and search, and **Graphics card
 mode** on the **Media service** tab shows which has it:
