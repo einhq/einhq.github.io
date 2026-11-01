@@ -1287,7 +1287,7 @@ find-within [--north=<string>] [--south=<string>] [--east=<string>] [--west=<str
 
 ### `gedcom-import`
 
-Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents and partners, and keep the file in /archive/sources/genealogy, linked from every person it describes.
+Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes.
 
 <small>changes things</small>
 
@@ -1299,16 +1299,16 @@ gedcom-import [--dry-run] <file>
 | -------- | ----------------------- |
 | `<file>` | the GEDCOM (.ged) file. |
 
-| Option      | What it does                                                   |
-| ----------- | -------------------------------------------------------------- |
-| `--dry-run` | say who would be matched, made and related, and write nothing. |
+| Option      | What it does                                                                            |
+| ----------- | --------------------------------------------------------------------------------------- |
+| `--dry-run` | say who would be matched, made and related, and what would be added, and write nothing. |
 
 ```bash
 gedcom-import /home/ruby/wrenfield.ged --dry-run
 gedcom-import /home/ruby/wrenfield.ged
 ```
 
-With `JSON_OUTPUT=1`: the kept file, who each individual was found to be or was made, what was skipped, and how many relations were added.
+With `JSON_OUTPUT=1`: the kept file, who each individual was found to be or was made, what was skipped, and how many relations, events and homes were added.
 
 ### `generate-derivatives`
 

@@ -133,7 +133,7 @@ of the controls are shown only to an administrator:</p>
 <td>anyone who may change it</td>
 </tr>
 <tr>
-<td>People and relations from a GEDCOM file</td>
+<td>People, relations, events from a GEDCOM</td>
 <td>a <code>.ged</code> file uploaded to staging</td>
 <td>anyone who may change those people</td>
 </tr>
@@ -575,10 +575,22 @@ with their full name, the name they were born with, gender, and the dates of bir
 the file gives exactly. An approximate date, such as &quot;about 1890&quot;, helps find a person but is
 not written down.</li>
 <li><strong>What a person is missing is filled in.</strong> A full name, birth name, gender or date the archive
-does not have yet is taken from the file; nothing the archive already has is changed.</li>
+does not have yet is taken from the file, and so are their notes, as the description on their
+<strong>Info</strong> tab; nothing the archive already has is changed.</li>
 <li><strong>Parents and partners are added</strong> where the archive does not have them yet: a marriage with its
 date, an adoption or a foster child as such (see <a href="#parent-kinds">Parent kinds</a>). A child who has
 two parents already gets no third, and nobody becomes their own ancestor.</li>
+<li><strong>Events are added</strong>: christenings, occupations, emigrations, censuses, burials and the other
+events and facts the file gives, each as an <a href="#record-an-event">event</a> on the person, with its
+place and notes as its text. A birth, death, marriage or divorce becomes an event only when the
+file says where it happened or has a note on it, since the dates are on the person and the
+partnership already. A wedding goes on one of the two partners. An event the person has already,
+of the same kind on the same day, is not added again, and a person has one birth and one death.</li>
+<li><strong>A place that is a location in the archive</strong> gives the event that location&#39;s position on the
+map: the whole place, or its first part, such as &quot;Lower Wrenfield&quot; for &quot;Lower Wrenfield, Kent&quot;,
+must be the name of exactly one location. A residence at such a location becomes a
+<a href="#homes-and-residents">home</a>, with the moved-in and moved-out dates of a &quot;from … to …&quot; period;
+a residence anywhere else is an event. EiN makes no locations of its own from the file.</li>
 <li><strong>The file is kept</strong> in <code>/archive/sources/genealogy/</code> and every person it describes lists it
 under <strong>Sources</strong> on their <strong>Info</strong> tab, where you can download it.</li>
 </ul>
@@ -695,7 +707,7 @@ flags after them: placed before the people, a flag&#39;s value is taken for a pe
 </tr>
 <tr>
 <td><a href="commands.html#gedcom-import"><code>gedcom-import</code></a></td>
-<td>Brings in a GEDCOM file&#39;s people and relations; <code>--dry-run</code> only says what it would do.</td>
+<td>Brings in a GEDCOM file: people, relations, events and homes. <code>--dry-run</code> writes nothing.</td>
 </tr>
 <tr>
 <td><a href="commands.html#source-list"><code>source-list</code></a></td>

@@ -298,7 +298,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-time](../archive/commands.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
 | [file-set-transcript](../archive/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
-| [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents and partners, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
+| [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
 | [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |

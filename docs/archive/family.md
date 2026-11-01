@@ -18,7 +18,7 @@ of the controls are shown only to an administrator:
 | Events of a person                         | ⋮ → **Add event** on the person   | anyone who may change the person   |
 | Born and died                              | **Edit** on the person            | anyone who may change the person   |
 | Events of an album, a location or a device | ⋮ → **Add event** on its page     | anyone who may change it           |
-| People and relations from a GEDCOM file    | a `.ged` file uploaded to staging | anyone who may change those people |
+| People, relations, events from a GEDCOM    | a `.ged` file uploaded to staging | anyone who may change those people |
 
 An administrator is someone signed in as `admin`, or a member of the `sudo` group who has chosen
 **Administer…** in the account menu and entered their password again. See
@@ -385,10 +385,22 @@ SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and 
   the file gives exactly. An approximate date, such as "about 1890", helps find a person but is
   not written down.
 - **What a person is missing is filled in.** A full name, birth name, gender or date the archive
-  does not have yet is taken from the file; nothing the archive already has is changed.
+  does not have yet is taken from the file, and so are their notes, as the description on their
+  **Info** tab; nothing the archive already has is changed.
 - **Parents and partners are added** where the archive does not have them yet: a marriage with its
   date, an adoption or a foster child as such (see [Parent kinds](#parent-kinds)). A child who has
   two parents already gets no third, and nobody becomes their own ancestor.
+- **Events are added**: christenings, occupations, emigrations, censuses, burials and the other
+  events and facts the file gives, each as an [event](#record-an-event) on the person, with its
+  place and notes as its text. A birth, death, marriage or divorce becomes an event only when the
+  file says where it happened or has a note on it, since the dates are on the person and the
+  partnership already. A wedding goes on one of the two partners. An event the person has already,
+  of the same kind on the same day, is not added again, and a person has one birth and one death.
+- **A place that is a location in the archive** gives the event that location's position on the
+  map: the whole place, or its first part, such as "Lower Wrenfield" for "Lower Wrenfield, Kent",
+  must be the name of exactly one location. A residence at such a location becomes a
+  [home](#homes-and-residents), with the moved-in and moved-out dates of a "from … to …" period;
+  a residence anywhere else is an event. EiN makes no locations of its own from the file.
 - **The file is kept** in `/archive/sources/genealogy/` and every person it describes lists it
   under **Sources** on their **Info** tab, where you can download it.
 
@@ -462,7 +474,7 @@ flags after them: placed before the people, a flag's value is taken for a person
 | [`person-how-related`](commands.md#person-how-related) | Names how two people are related.                                                              |
 | [`person-timeline`](commands.md#person-timeline)       | Prints a person's timeline.                                                                    |
 | [`person-check`](commands.md#person-check)             | Looks for broken ties, impossible dates and loops in the tree: `person-check /archive/people`. |
-| [`gedcom-import`](commands.md#gedcom-import)           | Brings in a GEDCOM file's people and relations; `--dry-run` only says what it would do.        |
+| [`gedcom-import`](commands.md#gedcom-import)           | Brings in a GEDCOM file: people, relations, events and homes. `--dry-run` writes nothing.      |
 | [`source-list`](commands.md#source-list)               | Lists the files a person was read from, such as a GEDCOM file.                                 |
 | [`events`](../reference/commands-core.md#events)       | Prints what the Home page's Events panel shows.                                                |
 

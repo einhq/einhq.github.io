@@ -2153,7 +2153,7 @@ file-set-time --clear /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code
 </div>
 <h2 id="g">G<a class="anchor" href="#g" aria-label="Link to this section"></a></h2>
 <h3 id="gedcom-import"><code>gedcom-import</code><a class="anchor" href="#gedcom-import" aria-label="Link to this section"></a></h3>
-<p>Import a GEDCOM file&#39;s people and relations: match each individual to a person of the archive or make one, add missing parents and partners, and keep the file in /archive/sources/genealogy, linked from every person it describes.</p>
+<p>Import a GEDCOM file&#39;s people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>gedcom-import [--dry-run] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2178,13 +2178,13 @@ file-set-time --clear /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code
 </thead>
 <tbody><tr>
 <td><code>--dry-run</code></td>
-<td>say who would be matched, made and related, and write nothing.</td>
+<td>say who would be matched, made and related, and what would be added, and write nothing.</td>
 </tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>gedcom-import /home/ruby/wrenfield.ged --dry-run
 gedcom-import /home/ruby/wrenfield.ged</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the kept file, who each individual was found to be or was made, what was skipped, and how many relations were added.</p>
+<p>With <code>JSON_OUTPUT=1</code>: the kept file, who each individual was found to be or was made, what was skipped, and how many relations, events and homes were added.</p>
 <h3 id="generate-derivatives"><code>generate-derivatives</code><a class="anchor" href="#generate-derivatives" aria-label="Link to this section"></a></h3>
 <p>Generate web derivatives (still pictures, transcoded renditions) for a media file.</p>
 <p><small>changes things</small></p>
