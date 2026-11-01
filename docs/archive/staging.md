@@ -92,7 +92,8 @@ that recorded it; **Choose device** opens the Inbox's files, where you say which
 (see [Devices and GPS tracks](devices.md)). Another appears when a family tree (a GEDCOM file)
 waits; **Review and import** opens it (see
 [Look over a family tree before it is imported](family.md#look-over-a-family-tree-before-it-is-imported)).
-With only the Inbox, the box stands at the top of its page. Last comes the folder to copy into over SFTP, for tens
+The same boxes stand at the top of every category's page: a GPX or GEDCOM file uploaded into a
+category does not stay among its files but waits in the staging area, and the boxes say where. Last comes the folder to copy into over SFTP, for tens
 of thousands of files; see [SSH and SFTP](../shell/ssh-sftp.md) and
 [Staging and importing for administrators](staging-admin.md).
 
