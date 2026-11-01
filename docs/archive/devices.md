@@ -365,12 +365,12 @@ to choose its device, as below.
 When a file names no registered device, or more than one, it waits for you:
 
 1. Open **Staging** in the sidebar. A yellow box titled **Needs you** says "1 GPS track waits for the
-   device that recorded it." (or how many).
-2. Click **Choose device**. The Inbox's **Files** tab opens with the card
-   **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Tick
-   the ones one device recorded, choose that device, and their routes join its track. Click a file
-   to see what it says about itself." Under each file's name is its own name (or its first track's),
-   the day it starts and how many points it has.
+   device that recorded it." (or how many). The box is on the overview and at the top of every
+   category's page, whichever category the file was dropped on.
+2. Click **Choose device**. The page **Routes waiting for a device** opens: "These GPX files do not
+   name a device the archive knows. Tick the ones one device recorded, choose that device, and their
+   routes join its track." Under each file's name in its list is its own name (or its first
+   track's), the day it starts and how many points it has.
 3. Click a file to see, beside the list, what it says about itself: its **Name** and
    **Description**, its **Tracks**, its **Creator**, when it was **Recorded** (first and last point,
    in UTC, and how long between), its **Points**, its **Size**, and the **Devices named** in it,
@@ -378,13 +378,14 @@ When a file names no registered device, or more than one, it waits for you:
 4. Tick the files that one device recorded, or **Select all**, choose the device in the
    **Device** list and click **Import** (**Import 3 files** with three ticked). Each route joins
    that device's track and its file moves to the device's `routes` folder. A file that cannot be
-   read stays, ticked, and the card names it and why.
+   read stays, ticked, and the page names it and why. **Back to staging** returns to the staging
+   page.
 
 In the terminal, [`gpx-info`](commands.md#gpx-info) says the same of any GPX file without importing it:
 `gpx-info /home/<you>/staging/routes/*.gpx`.
 
 If the device is not registered yet, register it first (see
-[Register a device by hand](#register-a-device-by-hand)) and open the card again; a waiting file is
+[Register a device by hand](#register-a-device-by-hand)) and open the page again; a waiting file is
 not tried again by itself. Waiting files are kept in your staging area's `routes` folder,
 `/home/<you>/staging/routes/`. [Sorting in staging](staging.md) describes the staging area.
 

@@ -88,8 +88,8 @@ same box shows on the Inbox's **Files** tab.
 Nothing moves by itself.
 
 Below the cards, a yellow box titled **Needs you** appears when a GPS track waits for the device
-that recorded it; **Choose device** opens the Inbox's files, where you say which device it was
-(see [Devices and GPS tracks](devices.md)). Another appears when a family tree (a GEDCOM file)
+that recorded it; **Choose device** opens the page where you say which device it was (see
+[GPX files in staging](devices.md#gpx-files-in-staging)). Another appears when a family tree (a GEDCOM file)
 waits; **Review and import** opens it (see
 [Look over a family tree before it is imported](family.md#look-over-a-family-tree-before-it-is-imported)).
 The same boxes stand at the top of every category's page: a GPX or GEDCOM file uploaded into a
