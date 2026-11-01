@@ -4,7 +4,7 @@ This page is for developers who want to run EiN from its source: which repositor
 
 ## The repositories
 
-EiN is several repositories in the [einhq](https://github.com/einhq) organisation on GitHub, all under the MIT licence. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.
+EiN is several repositories in the [einhq](https://github.com/einhq) organisation on GitHub, all under the MIT licence; what they are built on keeps its own, as [Third-party licences](#third-party-licences) explains. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.
 
 | Repository                                                                                                   | What it is                                                                                                           | Language                                 |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -22,6 +22,14 @@ EiN is several repositories in the [einhq](https://github.com/einhq) organisatio
 | [einhq.github.io](https://github.com/einhq/einhq.github.io)                                                  | The site at einhq.eu and this documentation                                                                          | HTML, Markdown                           |
 
 Core takes the shell and SSH libraries from JSR, not from a checkout: its `deno.jsonc` imports `jsr:@ein/bash-executor@^3.0.0` and `jsr:@ein/ssh2-ts@1.1.1`. A change in one of them reaches core once it is published there.
+
+## Third-party licences
+
+EiN's own code is under the MIT licence. The images carry code and fonts made by others, each under its own licence:
+
+- **Core's image** is built from the npm, JSR and deno.land packages its `deno.lock` pins, all under permissive licences (MIT, ISC, BSD, Apache-2.0, 0BSD), and the Web UI uses the fonts Inter and Mochiy Pop One (SIL Open Font License 1.1) and Special Elite (Apache-2.0). `deno task bundle-ui` writes every package's and font's licence and notice into `public/licences.txt` beside the Web UI, and **About EiN** links to it as **third-party notices**; on a running instance it is at `/public/licences.txt`. The licence files of the fonts are beside them, in `src/builtin/ui/src/client/public/fonts/`.
+- **The database image** is TimescaleDB's PostgreSQL image with pgvector added. EiN's log keeps its entries with TimescaleDB's retention and compression policies, which are TimescaleDB's community features under the [Timescale License](https://github.com/timescale/timescaledb/blob/main/tsl/LICENSE-TIMESCALE), not Apache-2.0. It allows running TimescaleDB yourself, for any purpose and in products built on it, but not offering TimescaleDB itself to others as a hosted database service. The image also carries PostGIS and pgRouting, under the GPL; the db repository changes and builds neither, and its `NOTICE.md` says where their source, at the versions the image holds, is.
+- **The media service's image** carries models and tools under their own licences, some of them non-commercial: [Models and their licences](../ems/index.md#models-and-their-licences) lists them.
 
 ## What you need
 

@@ -89,7 +89,7 @@
         <article class="prose">
 <p>This page is for developers who want to run EiN from its source: which repositories make it up, how to start core on your own machine with a database beside it, how to work on a module against it, and how to test, check and build the image. To install EiN for use, follow <a href="../start/install.html">Install EiN</a> instead; the installer builds from the same source.</p>
 <h2 id="the-repositories">The repositories<a class="anchor" href="#the-repositories" aria-label="Link to this section"></a></h2>
-<p>EiN is several repositories in the <a href="https://github.com/einhq">einhq</a> organisation on GitHub, all under the MIT licence. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.</p>
+<p>EiN is several repositories in the <a href="https://github.com/einhq">einhq</a> organisation on GitHub, all under the MIT licence; what they are built on keeps its own, as <a href="#third-party-licences">Third-party licences</a> explains. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -161,6 +161,13 @@
 </tbody></table>
 </div>
 <p>Core takes the shell and SSH libraries from JSR, not from a checkout: its <code>deno.jsonc</code> imports <code>jsr:@ein/bash-executor@^3.0.0</code> and <code>jsr:@ein/ssh2-ts@1.1.1</code>. A change in one of them reaches core once it is published there.</p>
+<h2 id="third-party-licences">Third-party licences<a class="anchor" href="#third-party-licences" aria-label="Link to this section"></a></h2>
+<p>EiN&#39;s own code is under the MIT licence. The images carry code and fonts made by others, each under its own licence:</p>
+<ul>
+<li><strong>Core&#39;s image</strong> is built from the npm, JSR and deno.land packages its <code>deno.lock</code> pins, all under permissive licences (MIT, ISC, BSD, Apache-2.0, 0BSD), and the Web UI uses the fonts Inter and Mochiy Pop One (SIL Open Font License 1.1) and Special Elite (Apache-2.0). <code>deno task bundle-ui</code> writes every package&#39;s and font&#39;s licence and notice into <code>public/licences.txt</code> beside the Web UI, and <strong>About EiN</strong> links to it as <strong>third-party notices</strong>; on a running instance it is at <code>/public/licences.txt</code>. The licence files of the fonts are beside them, in <code>src/builtin/ui/src/client/public/fonts/</code>.</li>
+<li><strong>The database image</strong> is TimescaleDB&#39;s PostgreSQL image with pgvector added. EiN&#39;s log keeps its entries with TimescaleDB&#39;s retention and compression policies, which are TimescaleDB&#39;s community features under the <a href="https://github.com/timescale/timescaledb/blob/main/tsl/LICENSE-TIMESCALE">Timescale License</a>, not Apache-2.0. It allows running TimescaleDB yourself, for any purpose and in products built on it, but not offering TimescaleDB itself to others as a hosted database service. The image also carries PostGIS and pgRouting, under the GPL; the db repository changes and builds neither, and its <code>NOTICE.md</code> says where their source, at the versions the image holds, is.</li>
+<li><strong>The media service&#39;s image</strong> carries models and tools under their own licences, some of them non-commercial: <a href="../ems/index.html#models-and-their-licences">Models and their licences</a> lists them.</li>
+</ul>
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>Deno 2.9.</strong> Core&#39;s image is built on <code>denoland/deno:debian-2.9.6</code>, so that version is the one EiN is known to run on.</li>
@@ -456,7 +463,7 @@ make container-logs</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/source.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-repositories">The repositories</a></li><li><a href="#what-you-need">What you need</a></li><li><a href="#get-the-source">Get the source</a></li><li><a href="#start-the-database">Start the database</a></li><li><a href="#run-core">Run core</a></li><li><a href="#work-on-a-module">Work on a module</a></li><li><a href="#add-the-media-service-and-the-language-model">Add the media service and the language model</a></li><li><a href="#test-check-and-lint">Test, check and lint</a></li><li><a href="#build-and-run-the-image">Build and run the image</a></li><li><a href="#run-your-own-build-in-an-installation">Run your own build in an installation</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-repositories">The repositories</a></li><li><a href="#third-party-licences">Third-party licences</a></li><li><a href="#what-you-need">What you need</a></li><li><a href="#get-the-source">Get the source</a></li><li><a href="#start-the-database">Start the database</a></li><li><a href="#run-core">Run core</a></li><li><a href="#work-on-a-module">Work on a module</a></li><li><a href="#add-the-media-service-and-the-language-model">Add the media service and the language model</a></li><li><a href="#test-check-and-lint">Test, check and lint</a></li><li><a href="#build-and-run-the-image">Build and run the image</a></li><li><a href="#run-your-own-build-in-an-installation">Run your own build in an installation</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
