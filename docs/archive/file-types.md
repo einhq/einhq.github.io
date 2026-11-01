@@ -187,8 +187,9 @@ its track directly. See [GPX files in staging](devices.md#gpx-files-in-staging) 
 ## Family trees
 
 A GEDCOM file (`.ged`) is a family tree as genealogy programs export it, in any of the character
-sets they write: UTF-8, UTF-16, ANSEL or ANSI. In staging it is not a document: EiN finds each of
-its people among the archive's people or makes them a page, adds the parents and partners, the
+sets they write: UTF-8, UTF-16, ANSEL or ANSI. In staging it is not a document: it waits for you to
+look over its family tree beside the archive's, and then EiN finds each of its people among the
+archive's people or makes them a page, adds the parents and partners, the
 events, the homes and the notes it gives, and keeps the file in `/archive/sources/genealogy/`, where every person it describes links it. Its
 text is not made searchable. See
 [Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file).

@@ -89,7 +89,10 @@ Nothing moves by itself.
 
 Below the cards, a yellow box titled **Needs you** appears when a GPS track waits for the device
 that recorded it; **Choose device** opens the Inbox's files, where you say which device it was
-(see [Devices and GPS tracks](devices.md)). Last comes the folder to copy into over SFTP, for tens
+(see [Devices and GPS tracks](devices.md)). Another appears when a family tree (a GEDCOM file)
+waits; **Review and import** opens it (see
+[Look over a family tree before it is imported](family.md#look-over-a-family-tree-before-it-is-imported)).
+With only the Inbox, the box stands at the top of its page. Last comes the folder to copy into over SFTP, for tens
 of thousands of files; see [SSH and SFTP](../shell/ssh-sftp.md) and
 [Staging and importing for administrators](staging-admin.md).
 

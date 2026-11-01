@@ -32,8 +32,8 @@ EiN takes photos (camera RAW files too), videos, recordings, documents such as P
 and GEDCOM family trees. [Supported files](file-types.md) lists the formats and what EiN works out
 from each. A GPX track you upload into staging is not a picture: it joins the track of the device
 that recorded it, or waits for you to say which device that was (see
-[Devices and GPS tracks](devices.md)). A GEDCOM file brings its people and their relations into the
-archive (see [Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file)).
+[Devices and GPS tracks](devices.md)). A GEDCOM file waits for you to say who its people are, then brings
+them and their relations into the archive (see [Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file)).
 
 > [!NOTE]
 > You need to be signed in to bring files in: visitors are not offered **Import media** or

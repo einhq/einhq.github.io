@@ -100,7 +100,8 @@ module provides staging; without the <code>archive</code> module there is none (
   files/&lt;category&gt;/…        the staged files, in any folders below a category
   albums/&lt;category&gt;/&lt;slug&gt;  the suggested albums (groups) for that category's files
   journal/&lt;id&gt;              one entry per decision, with the plan that undoes it
-  routes/                   GPX files waiting for the device that recorded them</code></pre></div>
+  routes/                   GPX files waiting for the device that recorded them
+  genealogy/                GEDCOM files waiting to be looked over and imported</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -127,6 +128,10 @@ module provides staging; without the <code>archive</code> module there is none (
 <tr>
 <td><code>routes/</code></td>
 <td>GPX tracks that name no device EiN knows, until their owner says which device recorded them.</td>
+</tr>
+<tr>
+<td><code>genealogy/</code></td>
+<td>GEDCOM family trees, until their owner has said who the people in them are and imported them.</td>
 </tr>
 </tbody></table>
 </div>
@@ -258,8 +263,8 @@ engine, which <a href="../admin/processing.html">Processing and pipelines</a> co
 </tr>
 <tr>
 <td><code>gedcom-stage</code></td>
-<td>A <code>.ged</code> file lands anywhere in staging</td>
-<td>Brings its people and relations in as the staging area&#39;s owner (<code>gedcom-import</code>), and moves the file to <code>/archive/sources/genealogy/</code>.</td>
+<td>A <code>.ged</code> file lands under <code>files/</code></td>
+<td>Moves it to <code>genealogy/</code>, where it waits for its owner to look it over and import it (<code>gedcom-import</code>, which moves it to <code>/archive/sources/genealogy/</code> and imports as the staging area&#39;s owner).</td>
 </tr>
 <tr>
 <td><code>staging-organizer</code> (service)</td>
@@ -292,7 +297,8 @@ without a date.</p>
 staging status --user helen</code></pre></div>
 <div class="code"><pre tabindex="0"><code>inbox: 1204 media, 37 other, 212 indexing, 18 undated
 google-photos: 48210 media, 1391 other, 30544 indexing, 66 undated
-1 route(s) waiting for a device</code></pre></div>
+1 route(s) waiting for a device
+1 family tree(s) waiting to be imported</code></pre></div>
 <p>A staging area that was never set up answers <code>helen: not initialized; run staging init</code>. With
 <code>JSON_OUTPUT=1</code> the answer also holds the bytes, each category&#39;s organizer summary, the exact
 copies by where their originals are, and how many files were filed and discarded.</p>

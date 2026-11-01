@@ -10,15 +10,15 @@ and it says which parts need an administrator.
 Everything on this page hangs off a person's page or a location's page. In the Web UI, two
 of the controls are shown only to an administrator:
 
-| What                                       | Where                             | Who sees the controls              |
-| ------------------------------------------ | --------------------------------- | ---------------------------------- |
-| Parents, partners and children             | the person's **Family** tab       | administrators only                |
-| A person's homes                           | the person's **Homes** tab        | administrators only                |
-| A location's residents                     | the location's **Residents** tab  | anyone who may change the location |
-| Events of a person                         | ⋮ → **Add event** on the person   | anyone who may change the person   |
-| Born and died                              | **Edit** on the person            | anyone who may change the person   |
-| Events of an album, a location or a device | ⋮ → **Add event** on its page     | anyone who may change it           |
-| People, relations, events from a GEDCOM    | a `.ged` file uploaded to staging | anyone who may change those people |
+| What                                       | Where                                                         | Who sees the controls              |
+| ------------------------------------------ | ------------------------------------------------------------- | ---------------------------------- |
+| Parents, partners and children             | the person's **Family** tab                                   | administrators only                |
+| A person's homes                           | the person's **Homes** tab                                    | administrators only                |
+| A location's residents                     | the location's **Residents** tab                              | anyone who may change the location |
+| Events of a person                         | ⋮ → **Add event** on the person                               | anyone who may change the person   |
+| Born and died                              | **Edit** on the person                                        | anyone who may change the person   |
+| Events of an album, a location or a device | ⋮ → **Add event** on its page                                 | anyone who may change it           |
+| People, relations, events from a GEDCOM    | a `.ged` file uploaded to staging, then **Review and import** | anyone who may change those people |
 
 An administrator is someone signed in as `admin`, or a member of the `sudo` group who has chosen
 **Administer…** in the account menu and entered their password again. See
@@ -375,14 +375,18 @@ The form stays open with the reason in a red box:
 
 A GEDCOM file (`.ged`) is the file genealogy programs and family tree websites export a family
 tree as. Upload one into your staging area, by **Import media**, the Media page's **Upload** or
-SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and families in it:
+SFTP (see [Getting your photos in](importing.md)). Nothing is imported yet: the file waits, and
+the Staging page says so in a yellow **Needs you** box. **Review and import** opens the family tree
+(see [Look over a family tree before it is imported](#look-over-a-family-tree-before-it-is-imported)),
+where you can say who each person is before anything is written. When you press **Import**, EiN
+brings in the people and families in it:
 
 - **Who each person is.** EiN looks for each person in the file among the people of the archive.
   A first name, the surname and the year of birth together are enough, as are a first name and
   the full date of birth. A person known only by a first name is found when a parent, partner or
   child of theirs in the file has been found and is related to them the same way in the archive.
   A date or a gender that disagrees rules a person out, and when two people fit equally well,
-  neither is chosen.
+  neither is chosen. Whatever you chose on the family tree comes first.
 - **Everyone else gets a page**, named by the name they went by and the surname they had last,
   with their full name, the name they were born with, gender, and the dates of birth and death.
   A date the file gives only roughly is kept as such: "about 1890" as **About** 1890, "before
@@ -412,16 +416,56 @@ SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and 
 The file is read as you: someone you may not change is still recognised, but nothing is written on
 them, and a relation that would need writing on them is left out. Uploading the same file again
 finds the same people and adds nothing, and so does a newer export of the same tree from a program
-that gives each person a lasting identifier. When EiN has made two pages for one person, fold them
-together with `person-merge` (see [People and faces](people.md#fold-several-unidentified-people-into-one)).
+that gives each person a lasting identifier. When EiN has made two pages for one person after all,
+fold them together with `person-merge` (see [People and faces](people.md#fold-several-unidentified-people-into-one)).
 
-To see who would be found and who would be made before anything is written, copy the file into
-your home folder and run `gedcom-import` with `--dry-run` in the terminal:
+### Look over a family tree before it is imported
+
+**Review and import** on the Staging page opens the family tree waiting there, drawn as one tree
+with the archive's own people. Each card is a person in the file, and its coloured stripe says what
+the import would do with them:
+
+| Stripe | Says                 | Means                                                                                        |
+| ------ | -------------------- | -------------------------------------------------------------------------------------------- |
+| Green  | Found in the archive | EiN takes them to be this person of the archive; the card's last line names them.            |
+| Blue   | Chosen by you        | You said who they are.                                                                       |
+| Orange | To decide            | Several people of the archive could be them and EiN chose none, so a new page would be made. |
+| Purple | New person           | Nobody in the archive fits; they get a page of their own.                                    |
+| Red    | Left out             | You left them out: no page, and none of their relations.                                     |
+| Grey   | Only in the archive  | Not in the file: a parent, partner or child, in the archive, of someone found there.         |
+
+A person who is found brings their family in the archive along, so the file's relations and the
+archive's meet on their card, and you can see whether the two trees agree. People in the file
+related to nobody else in it are listed below the tree.
+
+Select a card and the panel beside the tree shows what the file says of them next to what the
+archive has, marking with **+** what the import would add; it never changes what the archive has
+already. Under **Who is this?** are the people who fit, best first, each with **This is them**,
+and:
+
+- **Someone else in the archive…** picks anyone else.
+- **New person** makes them a page of their own, whoever they fit.
+- **Leave out** brings in neither them nor their relations.
+- **Let the import decide** takes back your choice.
+
+Selecting a grey card offers the other way round: **Is one of the file's individuals** says which
+person in the file they are. After each choice the tree is read again, so saying who one person is
+can settle their relatives too: a child known only by a first name is found once their parent is.
+Your choices are kept in your browser until you import. **Import** brings the file in with them;
+**Move to trash** under ⋮ removes the file without importing it.
+
+### Import a GEDCOM file in the terminal
+
+`gedcom-read` says who each person in a file would be, and `gedcom-import` brings it in. The same
+choices as on the family tree are flags that name a person by their record in the file (its xref,
+such as `@I3@`): `--match @I3@=ruby-wrenfield` says who they are, `--new @I4@` makes them a new
+person, and `--skip @I9@` leaves them out. With `--dry-run`, `gedcom-import` writes nothing:
 
 ```bash
 # in EiN's terminal
-gedcom-import "$HOME/wrenfield.ged" --dry-run
-gedcom-import "$HOME/wrenfield.ged"
+gedcom-read "$HOME/staging/genealogy/wrenfield.ged"
+gedcom-import "$HOME/staging/genealogy/wrenfield.ged" --match @I3@=ruby-wrenfield --dry-run
+gedcom-import "$HOME/staging/genealogy/wrenfield.ged" --match @I3@=ruby-wrenfield
 ```
 
 Run on a file outside staging, `gedcom-import` keeps a copy and leaves your file where it is.
@@ -479,6 +523,7 @@ flags after them: placed before the people, a flag's value is taken for a person
 | [`person-how-related`](commands.md#person-how-related) | Names how two people are related.                                                              |
 | [`person-timeline`](commands.md#person-timeline)       | Prints a person's timeline.                                                                    |
 | [`person-check`](commands.md#person-check)             | Looks for broken ties, impossible dates and loops in the tree: `person-check /archive/people`. |
+| [`gedcom-read`](commands.md#gedcom-read)               | Says who each person in a GEDCOM file would be, and who else could be them.                    |
 | [`gedcom-import`](commands.md#gedcom-import)           | Brings in a GEDCOM file: people, relations, events and homes. `--dry-run` writes nothing.      |
 | [`source-list`](commands.md#source-list)               | Lists the files a person was read from, such as a GEDCOM file.                                 |
 | [`events`](../reference/commands-core.md#events)       | Prints what the Home page's Events panel shows.                                                |

@@ -91,6 +91,7 @@ All four ask the [media service](../ems/index.md), so they need it running. For 
 | Add an event to a person                  | `person-add-event --type death --date 2021-01-17 /archive/people/peggy-wrenfield`      | [person-add-event](commands.md#person-add-event)     |
 | Record where someone lived                | `person-set-home --from 1956 --to 1999 <person> /archive/locations/Highbury`           | [person-set-home](commands.md#person-set-home)       |
 | How two people are related                | `person-how-related /archive/people/ruby-wrenfield /archive/people/peggy-wrenfield`    | [person-how-related](commands.md#person-how-related) |
+| Who the people in a GEDCOM file would be  | `gedcom-read <file>.ged`                                                               | [gedcom-read](commands.md#gedcom-read)               |
 | Bring in a family tree from GEDCOM        | `gedcom-import --dry-run <file>.ged`, then without `--dry-run`                         | [gedcom-import](commands.md#gedcom-import)           |
 | The files a person or track was read from | `source-list /archive/people/peggy-wrenfield`                                          | [source-list](commands.md#source-list)               |
 | Who a kin word reaches                    | `person-relatives peggy-wrenfield --relation daughter`                                 | [person-relatives](commands.md#person-relatives)     |
