@@ -460,8 +460,9 @@ and:
 - **Let the import decide** takes back your choice.
 
 Selecting a grey card offers the other way round: **Is one of the file's individuals** says which
-person in the file they are. After each choice the tree is read again, so saying who one person is
-can settle their relatives too: a child known only by a first name is found once their parent is.
+person in the file they are. A choice shows at once, so you can go straight on to the next person,
+while the tree is read again behind it ("Reading the tree again…"): saying who one person is can
+settle their relatives too, so a child known only by a first name is found once their parent is.
 Your choices are kept in your browser until you import. **Import** brings the file in with them;
 **Move to trash** under ⋮ removes the file without importing it.
 
