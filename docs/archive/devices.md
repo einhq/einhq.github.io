@@ -368,12 +368,20 @@ When a file names no registered device, or more than one, it waits for you:
    device that recorded it." (or how many).
 2. Click **Choose device**. The Inbox's **Files** tab opens with the card
    **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Tick
-   the ones one device recorded, choose that device, and their routes join its track." Beside a
-   file whose `creator` names something, the card shows it, such as `creator "Track Logger 2.1"`.
-3. Tick the files that one device recorded, or **Select all**, choose the device in the
+   the ones one device recorded, choose that device, and their routes join its track. Click a file
+   to see what it says about itself." Under each file's name is its own name (or its first track's),
+   the day it starts and how many points it has.
+3. Click a file to see, beside the list, what it says about itself: its **Name** and
+   **Description**, its **Tracks**, its **Creator**, when it was **Recorded** (first and last point,
+   in UTC, and how long between), its **Points**, its **Size**, and the **Devices named** in it,
+   when it names more than one.
+4. Tick the files that one device recorded, or **Select all**, choose the device in the
    **Device** list and click **Import** (**Import 3 files** with three ticked). Each route joins
    that device's track and its file moves to the device's `routes` folder. A file that cannot be
    read stays, ticked, and the card names it and why.
+
+In the terminal, [`gpx-info`](commands.md#gpx-info) says the same of any GPX file without importing it:
+`gpx-info /home/<you>/staging/routes/*.gpx`.
 
 If the device is not registered yet, register it first (see
 [Register a device by hand](#register-a-device-by-hand)) and open the card again; a waiting file is
@@ -414,6 +422,7 @@ route is the child `track`, and the GPX files the route was read from are in its
 | Add an owner, or change the dates             | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                                                                 |
 | Remove an owner                               | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                                                                |
 | Add a GPX file to a device's track            | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`, which moves the file to the device's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
+| See what GPX files hold, without importing    | [`gpx-info`](commands.md#gpx-info) `<gpx>…`: name, tracks, creator, points and their time span, size, and the devices each names                                                                            |
 | List the GPX files a track was read from      | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
 | Bring a device's automatic cover up to date   | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 

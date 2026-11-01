@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 355 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 356 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -243,7 +243,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 137 in full](../archive/commands.md).
+[All 138 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -305,6 +305,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
 | [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
+| [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the registered devices each names. |
 | [hello](../archive/commands.md#hello) | Say hello (example TypeScript module command) |
 | [index-document](../archive/commands.md#index-document) | Extract text content and generate embedding for a document file. |
 | [label-model](../archive/commands.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |

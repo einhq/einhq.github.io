@@ -461,13 +461,20 @@ to choose its device, as below.</p>
 device that recorded it.&quot; (or how many).</li>
 <li>Click <strong>Choose device</strong>. The Inbox&#39;s <strong>Files</strong> tab opens with the card
 <strong>Routes waiting for a device</strong>: &quot;These GPX files do not name a device the archive knows. Tick
-the ones one device recorded, choose that device, and their routes join its track.&quot; Beside a
-file whose <code>creator</code> names something, the card shows it, such as <code>creator &quot;Track Logger 2.1&quot;</code>.</li>
+the ones one device recorded, choose that device, and their routes join its track. Click a file
+to see what it says about itself.&quot; Under each file&#39;s name is its own name (or its first track&#39;s),
+the day it starts and how many points it has.</li>
+<li>Click a file to see, beside the list, what it says about itself: its <strong>Name</strong> and
+<strong>Description</strong>, its <strong>Tracks</strong>, its <strong>Creator</strong>, when it was <strong>Recorded</strong> (first and last point,
+in UTC, and how long between), its <strong>Points</strong>, its <strong>Size</strong>, and the <strong>Devices named</strong> in it,
+when it names more than one.</li>
 <li>Tick the files that one device recorded, or <strong>Select all</strong>, choose the device in the
 <strong>Device</strong> list and click <strong>Import</strong> (<strong>Import 3 files</strong> with three ticked). Each route joins
 that device&#39;s track and its file moves to the device&#39;s <code>routes</code> folder. A file that cannot be
 read stays, ticked, and the card names it and why.</li>
 </ol>
+<p>In the terminal, <a href="commands.html#gpx-info"><code>gpx-info</code></a> says the same of any GPX file without importing it:
+<code>gpx-info /home/&lt;you&gt;/staging/routes/*.gpx</code>.</p>
 <p>If the device is not registered yet, register it first (see
 <a href="#register-a-device-by-hand">Register a device by hand</a>) and open the card again; a waiting file is
 not tried again by itself. Waiting files are kept in your staging area&#39;s <code>routes</code> folder,
@@ -589,6 +596,10 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <tr>
 <td>Add a GPX file to a device&#39;s track</td>
 <td><a href="commands.html#track-stage"><code>track-stage</code></a> <code>&lt;gpx&gt; --device &lt;device&gt;</code>, which moves the file to the device&#39;s <code>routes</code>, or <a href="commands.html#track-import"><code>track-import</code></a> <code>&lt;device&gt; &lt;gpx&gt;</code>, which keeps a copy there</td>
+</tr>
+<tr>
+<td>See what GPX files hold, without importing</td>
+<td><a href="commands.html#gpx-info"><code>gpx-info</code></a> <code>&lt;gpx&gt;…</code>: name, tracks, creator, points and their time span, size, and the devices each names</td>
 </tr>
 <tr>
 <td>List the GPX files a track was read from</td>
