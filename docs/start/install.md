@@ -12,7 +12,7 @@ What the machine needs depends on whether you install EiN on its own (EiN Core) 
 | ---------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | System           | Linux on x86-64                                                                                   | Linux on x86-64                                       |
 | Container engine | podman, run as your own user (rootless), with `podman compose`; or Docker with its compose plugin | the same                                              |
-| Tools            | `git`, `curl` and `openssl`                                                                       | the same                                              |
+| Tools            | `git` and `curl`                                                                                  | the same                                              |
 | Processor        | 2 cores                                                                                           | 4 cores; 6 or more recommended                        |
 | Memory           | 4 GB                                                                                              | 16 GB; 32 GB recommended                              |
 | Free disk        | 10 GB, plus your files                                                                            | about 100 GB, plus your files                         |
@@ -32,7 +32,7 @@ On Ubuntu 24.04, for example, this installs the tools for the podman route:
 
 ```bash
 # on the machine that will run EiN
-sudo apt install podman podman-compose git curl openssl
+sudo apt install podman podman-compose git curl
 ```
 
 > [!NOTE]
@@ -104,7 +104,6 @@ EiN: checking this machine against the system requirements
   compose          ok       podman compose, with podman-compose
   git              ok
   curl             ok
-  openssl          ok
   processor        ok       8 cores
   memory           ok       31 GB
   disk             ok       870 GB free under /home/anna/ein/data (not made yet; measured on /home/anna), plus room for your own files

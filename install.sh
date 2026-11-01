@@ -80,7 +80,7 @@ main() {
   # --- tools ---
   engine
   local tool
-  for tool in git curl openssl; do
+  for tool in git curl; do
     if command -v "$tool" >/dev/null; then say "$tool" ok ""; else need "$tool" "install $tool"; fi
   done
 

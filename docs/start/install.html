@@ -111,7 +111,7 @@
 </tr>
 <tr>
 <td>Tools</td>
-<td><code>git</code>, <code>curl</code> and <code>openssl</code></td>
+<td><code>git</code> and <code>curl</code></td>
 <td>the same</td>
 </tr>
 <tr>
@@ -147,7 +147,7 @@
 </ul>
 <p>On Ubuntu 24.04, for example, this installs the tools for the podman route:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-<span class="hljs-built_in">sudo</span> apt install podman podman-compose git curl openssl</code></pre></div>
+<span class="hljs-built_in">sudo</span> apt install podman podman-compose git curl</code></pre></div>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>When both podman and Docker are installed, EiN uses podman. To use Docker, put <code>EIN_ENGINE=docker</code> in front of <code>bash</code> in the install command. <code>setup.sh</code> keeps the engine in <code>.env</code>, and every later run uses it. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
 </aside>
@@ -211,7 +211,6 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- --e
   compose          ok       podman compose, with podman-compose
   git              ok
   curl             ok
-  openssl          ok
   processor        ok       8 cores
   memory           ok       31 GB
   disk             ok       870 GB free under /home/anna/ein/data (not made yet; measured on /home/anna), plus room for your own files
