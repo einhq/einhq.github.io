@@ -386,7 +386,10 @@ brings in the people and families in it:
   initial stands for a given name it begins, so "Harold J R Wrenfield" can be the file's Harold
   James Robert Wrenfield. A first name, the surname and the year of birth together are enough, as
   are a first name and the full date of birth, or two given names or more and the surname written
-  out in full. A person known only by a first name is found when a parent, partner or
+  out in full. Two spellings of one name, such as Eriksson and Ericsson or Thompson and Thomson,
+  are read as one (see [Spellings of a name](#spellings-of-a-name)); a person who fits only that
+  way is found when the day of birth is the same as well, and otherwise suggested. A person
+  known only by a first name is found when a parent, partner or
   child of theirs in the file has been found and is related to them the same way in the archive.
   A date or a gender that disagrees rules a person out, and when two people fit equally well,
   neither is chosen. Whatever you chose on the family tree comes first.
@@ -458,6 +461,38 @@ person in the file they are. After each choice the tree is read again, so saying
 can settle their relatives too: a child known only by a first name is found once their parent is.
 Your choices are kept in your browser until you import. **Import** brings the file in with them;
 **Move to trash** under ⋮ removes the file without importing it.
+
+### Spellings of a name
+
+Names were written many ways before spelling settled, and are still: Eriksson, Ericsson and
+Erikson; Olsson, Ohlson and Olsen; Gustaf and Gustav; Thompson and Thomson; MacDonald and
+McDonald. When EiN compares the names in a family tree file with the archive's, it reads every
+word through a set of spelling rules first, and two words that come out the same are one name.
+The rules cover Swedish and English names alike: `ck`, `ch`, `q` and a hard `c` are read as `k`,
+an `h` after the first letter is dropped, a doubled letter is one, `-sen` is `-son`, `ph` is `f`,
+`th` is `t`, `w` is `v`, `z` is `s`, `mac` is `mc`, a final `e` is dropped, and a few more.
+
+A person who fits only by spelling is found when their day of birth is the same too. Otherwise
+they are suggested under **Who is this?**, marked "a like name", for you to choose.
+
+An administrator can add rules. Every file in `/etc/name-spellings.d` is read; the archive's own
+are in `/etc/name-spellings.d/archive/spellings`, which shows how they are written, and are
+replaced when the Archive module is updated, so add yours in a file of your own beside them, such
+as `/etc/name-spellings.d/local`. Each line is a rule, `<from> -> <to>`: `<from>` a regular
+expression over one word in lower case without accents (Öberg is read as oberg), `<to>` what it
+becomes, empty to drop it. `#` starts a comment. Your files are read before the archive's, so a
+rule of yours sees the name as it is written:
+
+```bash
+# in EiN's terminal, as an administrator
+cat /etc/name-spellings.d/archive/spellings
+echo 'ie$ -> e   # Rosie, Rose' >> /etc/name-spellings.d/local
+echo '^petrus$ -> per   # Petrus, Per' >> /etc/name-spellings.d/local
+```
+
+The rules are read each time a family tree is matched, so a new rule counts at once. A rule that
+is not a regular expression stops the match with the file and the line, such as
+"/etc/name-spellings.d/local:2: '(ck' is not a regular expression".
 
 ### Import a GEDCOM file in the terminal
 

@@ -576,7 +576,10 @@ by any of their names: the name they go by, their full name or the name they wer
 initial stands for a given name it begins, so &quot;Harold J R Wrenfield&quot; can be the file&#39;s Harold
 James Robert Wrenfield. A first name, the surname and the year of birth together are enough, as
 are a first name and the full date of birth, or two given names or more and the surname written
-out in full. A person known only by a first name is found when a parent, partner or
+out in full. Two spellings of one name, such as Eriksson and Ericsson or Thompson and Thomson,
+are read as one (see <a href="#spellings-of-a-name">Spellings of a name</a>); a person who fits only that
+way is found when the day of birth is the same as well, and otherwise suggested. A person
+known only by a first name is found when a parent, partner or
 child of theirs in the file has been found and is related to them the same way in the archive.
 A date or a gender that disagrees rules a person out, and when two people fit equally well,
 neither is chosen. Whatever you chose on the family tree comes first.</li>
@@ -675,6 +678,30 @@ person in the file they are. After each choice the tree is read again, so saying
 can settle their relatives too: a child known only by a first name is found once their parent is.
 Your choices are kept in your browser until you import. <strong>Import</strong> brings the file in with them;
 <strong>Move to trash</strong> under ⋮ removes the file without importing it.</p>
+<h3 id="spellings-of-a-name">Spellings of a name<a class="anchor" href="#spellings-of-a-name" aria-label="Link to this section"></a></h3>
+<p>Names were written many ways before spelling settled, and are still: Eriksson, Ericsson and
+Erikson; Olsson, Ohlson and Olsen; Gustaf and Gustav; Thompson and Thomson; MacDonald and
+McDonald. When EiN compares the names in a family tree file with the archive&#39;s, it reads every
+word through a set of spelling rules first, and two words that come out the same are one name.
+The rules cover Swedish and English names alike: <code>ck</code>, <code>ch</code>, <code>q</code> and a hard <code>c</code> are read as <code>k</code>,
+an <code>h</code> after the first letter is dropped, a doubled letter is one, <code>-sen</code> is <code>-son</code>, <code>ph</code> is <code>f</code>,
+<code>th</code> is <code>t</code>, <code>w</code> is <code>v</code>, <code>z</code> is <code>s</code>, <code>mac</code> is <code>mc</code>, a final <code>e</code> is dropped, and a few more.</p>
+<p>A person who fits only by spelling is found when their day of birth is the same too. Otherwise
+they are suggested under <strong>Who is this?</strong>, marked &quot;a like name&quot;, for you to choose.</p>
+<p>An administrator can add rules. Every file in <code>/etc/name-spellings.d</code> is read; the archive&#39;s own
+are in <code>/etc/name-spellings.d/archive/spellings</code>, which shows how they are written, and are
+replaced when the Archive module is updated, so add yours in a file of your own beside them, such
+as <code>/etc/name-spellings.d/local</code>. Each line is a rule, <code>&lt;from&gt; -&gt; &lt;to&gt;</code>: <code>&lt;from&gt;</code> a regular
+expression over one word in lower case without accents (Öberg is read as oberg), <code>&lt;to&gt;</code> what it
+becomes, empty to drop it. <code>#</code> starts a comment. Your files are read before the archive&#39;s, so a
+rule of yours sees the name as it is written:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+<span class="hljs-built_in">cat</span> /etc/name-spellings.d/archive/spellings
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;ie$ -&gt; e   # Rosie, Rose&#x27;</span> &gt;&gt; /etc/name-spellings.d/local
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;^petrus$ -&gt; per   # Petrus, Per&#x27;</span> &gt;&gt; /etc/name-spellings.d/local</code></pre></div>
+<p>The rules are read each time a family tree is matched, so a new rule counts at once. A rule that
+is not a regular expression stops the match with the file and the line, such as
+&quot;/etc/name-spellings.d/local:2: &#39;(ck&#39; is not a regular expression&quot;.</p>
 <h3 id="import-a-gedcom-file-in-the-terminal">Import a GEDCOM file in the terminal<a class="anchor" href="#import-a-gedcom-file-in-the-terminal" aria-label="Link to this section"></a></h3>
 <p><code>gedcom-read</code> says who each person in a file would be, and <code>gedcom-import</code> brings it in. The same
 choices as on the family tree are flags that name a person by their record in the file (its xref,
@@ -835,7 +862,7 @@ Add one.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/family.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-change-what">Who may change what</a></li><li><a href="#the-family-tree">The family tree</a></li><li class="nested"><a href="#show-more-of-the-family">Show more of the family</a></li><li class="nested"><a href="#move-around-the-tree">Move around the tree</a></li><li class="nested"><a href="#brothers-sisters-and-in-laws">Brothers, sisters and in-laws</a></li><li><a href="#add-a-parent-partner-or-child">Add a parent, partner or child</a></li><li class="nested"><a href="#parent-kinds">Parent kinds</a></li><li class="nested"><a href="#partnerships-and-their-dates">Partnerships and their dates</a></li><li class="nested"><a href="#when-ein-refuses">When EiN refuses</a></li><li><a href="#remove-a-relation">Remove a relation</a></li><li><a href="#how-two-people-are-related">How two people are related</a></li><li><a href="#record-an-event">Record an event</a></li><li class="nested"><a href="#record-a-wedding">Record a wedding</a></li><li class="nested"><a href="#events-of-albums-locations-and-devices">Events of albums, locations and devices</a></li><li><a href="#what-appears-on-a-timeline">What appears on a timeline</a></li><li><a href="#homes-and-residents">Homes and residents</a></li><li class="nested"><a href="#add-a-home-to-a-person">Add a home to a person</a></li><li class="nested"><a href="#add-a-resident-to-a-location">Add a resident to a location</a></li><li class="nested"><a href="#why-the-dates-matter">Why the dates matter</a></li><li class="nested"><a href="#when-saving-a-home-fails">When saving a home fails</a></li><li><a href="#bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file</a></li><li class="nested"><a href="#look-over-a-family-tree-before-it-is-imported">Look over a family tree before it is imported</a></li><li class="nested"><a href="#import-a-gedcom-file-in-the-terminal">Import a GEDCOM file in the terminal</a></li><li><a href="#birthdays-memorials-and-anniversaries-on-the-home-page">Birthdays, memorials and anniversaries on the Home page</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-change-what">Who may change what</a></li><li><a href="#the-family-tree">The family tree</a></li><li class="nested"><a href="#show-more-of-the-family">Show more of the family</a></li><li class="nested"><a href="#move-around-the-tree">Move around the tree</a></li><li class="nested"><a href="#brothers-sisters-and-in-laws">Brothers, sisters and in-laws</a></li><li><a href="#add-a-parent-partner-or-child">Add a parent, partner or child</a></li><li class="nested"><a href="#parent-kinds">Parent kinds</a></li><li class="nested"><a href="#partnerships-and-their-dates">Partnerships and their dates</a></li><li class="nested"><a href="#when-ein-refuses">When EiN refuses</a></li><li><a href="#remove-a-relation">Remove a relation</a></li><li><a href="#how-two-people-are-related">How two people are related</a></li><li><a href="#record-an-event">Record an event</a></li><li class="nested"><a href="#record-a-wedding">Record a wedding</a></li><li class="nested"><a href="#events-of-albums-locations-and-devices">Events of albums, locations and devices</a></li><li><a href="#what-appears-on-a-timeline">What appears on a timeline</a></li><li><a href="#homes-and-residents">Homes and residents</a></li><li class="nested"><a href="#add-a-home-to-a-person">Add a home to a person</a></li><li class="nested"><a href="#add-a-resident-to-a-location">Add a resident to a location</a></li><li class="nested"><a href="#why-the-dates-matter">Why the dates matter</a></li><li class="nested"><a href="#when-saving-a-home-fails">When saving a home fails</a></li><li><a href="#bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file</a></li><li class="nested"><a href="#look-over-a-family-tree-before-it-is-imported">Look over a family tree before it is imported</a></li><li class="nested"><a href="#spellings-of-a-name">Spellings of a name</a></li><li class="nested"><a href="#import-a-gedcom-file-in-the-terminal">Import a GEDCOM file in the terminal</a></li><li><a href="#birthdays-memorials-and-anniversaries-on-the-home-page">Birthdays, memorials and anniversaries on the Home page</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>
