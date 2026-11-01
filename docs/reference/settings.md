@@ -211,7 +211,7 @@ Every setting of an EiN with all its modules: 81 of them, in the groups the Sett
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | `0.55` |
+| Default | `0.56` |
 | Kind | number |
 | From the module | Archive |
 
@@ -222,7 +222,7 @@ Every setting of an EiN with all its modules: 81 of them, in the groups the Sett
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | `0.5` |
+| Default | `0.51` |
 | Kind | number |
 | From the module | Archive |
 

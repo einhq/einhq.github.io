@@ -429,11 +429,11 @@ archive-parse --rules <span class="hljs-string">&#x27;filmer från 2010&#x27;</s
 </thead>
 <tbody><tr>
 <td><code>--vote-threshold=&lt;string&gt;</code></td>
-<td>min cosine similarity for a neighbour vote (default 0.5)</td>
+<td>min cosine similarity for a neighbour vote (default 0.51)</td>
 </tr>
 <tr>
 <td><code>--attach-threshold=&lt;string&gt;</code></td>
-<td>min winning vote weight to attach to a person (default 0.55)</td>
+<td>min winning vote weight to attach to a person (default 0.56)</td>
 </tr>
 <tr>
 <td><code>--margin=&lt;string&gt;</code></td>
@@ -670,7 +670,7 @@ auto-album-cluster /archive/albums/2019-lake --members --significance more</code
 </thead>
 <tbody><tr>
 <td><code>--threshold=&lt;string&gt;</code></td>
-<td>min cosine similarity for a neighbour vote (default 0.5)</td>
+<td>min cosine similarity for a neighbour vote (default 0.51)</td>
 </tr>
 <tr>
 <td><code>--margin=&lt;string&gt;</code></td>
@@ -678,7 +678,7 @@ auto-album-cluster /archive/albums/2019-lake --members --significance more</code
 </tr>
 <tr>
 <td><code>--min-votes=&lt;string&gt;</code></td>
-<td>min winning vote weight to assign (default 0.5)</td>
+<td>min winning vote weight to assign (default 0.51)</td>
 </tr>
 <tr>
 <td><code>-k &lt;string&gt;</code></td>
@@ -690,7 +690,7 @@ auto-album-cluster /archive/albums/2019-lake --members --significance more</code
 </tr>
 <tr>
 <td><code>--cluster-threshold=&lt;string&gt;</code></td>
-<td>stricter min similarity to group two untagged faces (default 0.6)</td>
+<td>stricter min similarity to group two untagged faces (default 0.61)</td>
 </tr>
 <tr>
 <td><code>--max-cluster=&lt;string&gt;</code></td>
@@ -931,7 +931,7 @@ dayinhistory 06-21 --years 20 --per-year 1</code></pre></div>
 </tr>
 <tr>
 <td><code>-f</code></td>
-<td>Re-detect: drop previous face-* regions first (manual-* boxes are kept)</td>
+<td>Re-detect: each face found continues the face-* region it is the same face as; manual-* boxes are kept.</td>
 </tr>
 <tr>
 <td><code>-v</code></td>

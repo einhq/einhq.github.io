@@ -231,8 +231,8 @@ assign-faces [--vote-threshold=<string>] [--attach-threshold=<string>] [--margin
 
 | Option                             | What it does                                                 |
 | ---------------------------------- | ------------------------------------------------------------ |
-| `--vote-threshold=<string>`        | min cosine similarity for a neighbour vote (default 0.5)     |
-| `--attach-threshold=<string>`      | min winning vote weight to attach to a person (default 0.55) |
+| `--vote-threshold=<string>`        | min cosine similarity for a neighbour vote (default 0.51)    |
+| `--attach-threshold=<string>`      | min winning vote weight to attach to a person (default 0.56) |
 | `--margin=<string>`                | winner must beat runner-up by this factor (default 1.2)      |
 | `-k <string>`                      | neighbours to consider per face (default 24)                 |
 | `--min-create-confidence=<string>` | min detection confidence to seed a new person (default 0.7)  |
@@ -360,12 +360,12 @@ cluster-faces [--threshold=<string>] [--margin=<string>] [--min-votes=<string>] 
 
 | Option                         | What it does                                                       |
 | ------------------------------ | ------------------------------------------------------------------ |
-| `--threshold=<string>`         | min cosine similarity for a neighbour vote (default 0.5)           |
+| `--threshold=<string>`         | min cosine similarity for a neighbour vote (default 0.51)          |
 | `--margin=<string>`            | winning person must beat runner-up by this factor (default 1.2)    |
-| `--min-votes=<string>`         | min winning vote weight to assign (default 0.5)                    |
+| `--min-votes=<string>`         | min winning vote weight to assign (default 0.51)                   |
 | `-k <string>`                  | nearest neighbours per face (default 8)                            |
 | `--min-cluster=<string>`       | min faces in a new-person cluster (default 3)                      |
-| `--cluster-threshold=<string>` | stricter min similarity to group two untagged faces (default 0.6)  |
+| `--cluster-threshold=<string>` | stricter min similarity to group two untagged faces (default 0.61) |
 | `--max-cluster=<string>`       | skip clusters larger than this as likely chained (default 60)      |
 | `--max-people=<string>`        | max unnamed people to create per run (default 500)                 |
 | `--create-people`              | create an unnamed person per leftover cluster (off by default)     |
@@ -504,11 +504,11 @@ detect-faces [-c <string>] [-f] [-v] <input>
 | --------- | ----------------------------------- |
 | `<input>` | VFS path to an image or video file. |
 
-| Option        | What it does                                                            |
-| ------------- | ----------------------------------------------------------------------- |
-| `-c <string>` | Minimum confidence (default: CFG_FACE_MIN_CONFIDENCE, 0.7)              |
-| `-f`          | Re-detect: drop previous face-* regions first (manual-* boxes are kept) |
-| `-v`          | Verbose output.                                                         |
+| Option        | What it does                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------------- |
+| `-c <string>` | Minimum confidence (default: CFG_FACE_MIN_CONFIDENCE, 0.7)                                              |
+| `-f`          | Re-detect: each face found continues the face-* region it is the same face as; manual-* boxes are kept. |
+| `-v`          | Verbose output.                                                                                         |
 
 ```bash
 detect-faces /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
