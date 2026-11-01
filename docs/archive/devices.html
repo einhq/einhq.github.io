@@ -460,20 +460,20 @@ to choose its device, as below.</p>
 <li>Open <strong>Staging</strong> in the sidebar. A yellow box titled <strong>Needs you</strong> says &quot;1 GPS track waits for the
 device that recorded it.&quot; (or how many). The box is on the overview and at the top of every
 category&#39;s page, whichever category the file was dropped on.</li>
-<li>Click <strong>Choose device</strong>. The page <strong>Routes waiting for a device</strong> opens: &quot;These GPX files do not
-name a device the archive knows. Tick the ones one device recorded, choose that device, and their
-routes join its track.&quot; Under each file&#39;s name in its list is its own name (or its first
-track&#39;s), the day it starts and how many points it has.</li>
-<li>Click a file to see, beside the list, what it says about itself: its <strong>Name</strong> and
-<strong>Description</strong>, its <strong>Tracks</strong>, its <strong>Creator</strong>, when it was <strong>Recorded</strong> (first and last point,
-in UTC, and how long between), its <strong>Points</strong>, its <strong>Size</strong>, and the <strong>Devices named</strong> in it,
-when it names more than one.</li>
-<li>Tick the files that one device recorded, or <strong>Select all</strong>, choose the device in the
-<strong>Device</strong> list and click <strong>Import</strong> (<strong>Import 3 files</strong> with three ticked). Each route joins
-that device&#39;s track and its file moves to the device&#39;s <code>routes</code> folder. A file that cannot be
-read stays, ticked, and the page names it and why. <strong>Back to staging</strong> returns to the staging
-page.</li>
+<li>Click <strong>Choose device</strong>. The page <strong>Routes waiting for a device</strong> opens, with your staging
+area&#39;s <code>routes</code> folder listed below its header as on the Nodes page, and a panel beside it.</li>
+<li>Click a file to see in the panel what it says about itself: its <strong>Name</strong> and <strong>Description</strong>,
+its <strong>Tracks</strong>, its <strong>Creator</strong>, when it was <strong>Recorded</strong> (first and last point, in UTC, and how
+long between), its <strong>Points</strong>, its <strong>Size</strong>, and the <strong>Devices named</strong> in it, when it names more
+than one. The arrow keys move from file to file.</li>
+<li>Select the files that one device recorded: <kbd>Ctrl</kbd> and click adds or removes one,
+<kbd>Shift</kbd> and click takes a run of them, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. At
+the top of the panel, choose the device in the <strong>Device that recorded them</strong> list and click
+<strong>Import</strong> (<strong>Import 3 files</strong> with three selected). Each route joins that device&#39;s track and its
+file moves out of the list into the device&#39;s <code>routes</code> folder. A file that cannot be read stays,
+and the panel names it and why. <strong>Back to staging</strong> returns to the staging page.</li>
 </ol>
+<p>On a narrow screen the panel is below the list.</p>
 <p>In the terminal, <a href="commands.html#gpx-info"><code>gpx-info</code></a> says the same of any GPX file without importing it:
 <code>gpx-info /home/&lt;you&gt;/staging/routes/*.gpx</code>.</p>
 <p>If the device is not registered yet, register it first (see
