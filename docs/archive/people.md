@@ -114,7 +114,7 @@ Recognition often splits one person into a large group and a few small ones. To 
 4. Press **Merge**. The other entries are removed, and their faces are marked as decided by a human, so no later pass undoes it.
 5. Name the person that is left, from its card or its review.
 
-The web interface merges only unidentified people. To fold one named person into another, for example a second Ruby made by a typo, use `person-merge` in the [terminal](../shell/terminal.md): faces, voices, events, relations and every other link move to the person you keep, and the other is removed. `--dry-run` shows what would move without changing anything.
+The Web UI merges only unidentified people. To fold one named person into another, for example a second Ruby made by a typo, use `person-merge` in the [terminal](../shell/terminal.md): faces, voices, events, relations and every other link move to the person you keep, and the other is removed. `--dry-run` shows what would move without changing anything.
 
 ```bash
 # in EiN's terminal

@@ -85,7 +85,7 @@ What happens when you stop a service:
 - With their modules installed, `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the dashboard's verdict rather than failing.
 
 > [!WARNING]
-> Stopping `http-server` takes the web interface away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the dashboard drops the page's connection for a moment.
+> Stopping `http-server` takes the Web UI away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the dashboard drops the page's connection for a moment.
 
 Saving a setting on the Settings page restarts the services that read it by itself; [Configuration](configuration.md#what-a-change-restarts) lists what restarts what.
 
@@ -324,7 +324,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **The Live log says "Waiting for the stream" or shows `connecting`.** The page has lost its connection to EiN, for example while `http-server` restarts. It reconnects by itself; reload the page if it does not.
 
-**The web interface is gone after stopping `http-server`.** Start it over SSH with `service-start http-server`, or restart the container with `podman compose restart ein`.
+**The Web UI is gone after stopping `http-server`.** Start it over SSH with `service-start http-server`, or restart the container with `podman compose restart ein`.
 
 [Troubleshooting](troubleshooting.md) covers problems that are not a service's own.
 

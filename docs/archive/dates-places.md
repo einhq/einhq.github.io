@@ -261,7 +261,7 @@ file-set-time --clear scan0004.jpg
 - `--note` keeps a reason with the date. It shows beside the time source, in the date's tooltip and
   under **Time source**.
 - `--clear` takes away a date set by hand, and its note. The picture falls back to the next source
-  on the ladder, or to no date. The web interface has no button for this.
+  on the ladder, or to no date. The Web UI has no button for this.
 
 ## Time zones
 

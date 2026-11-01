@@ -89,7 +89,7 @@ user-groups helen
 
 ## See a node's permissions
 
-### In the web interface
+### In the Web UI
 
 1. Open **Nodes** under **System** in the sidebar.
 2. Go to the node. The **Mode**, **Owner** and **Group** columns show its access; a lock in place of
@@ -308,7 +308,7 @@ where the new parent gives none and less everyone else's write.
 The **default sharing** is an owner, a group and a mode for what is created as shared, which an
 administrator sets under **Settings → Permissions**, on the **Sharing** card. **Default** in the
 **Share** dialog and `share-set --default-owner` apply it to a node. With the Archive installed, a
-new album, made in the web interface or with `album create`, and what staging publishes start with
+new album, made in the Web UI or with `album create`, and what staging publishes start with
 it.
 
 ![The Permissions tab of Settings: the New users card with the Users group ticked, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty, Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750, and the Sign-in sessions card](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
@@ -374,7 +374,7 @@ and the uids or gids the stored answers name that no account, group or link hold
 ## The other bits are the system's
 
 The bits for everyone else give every visitor and every account the parts of EiN they all need to
-run: `/`, `/etc`, the commands, the web interface, the modules' files. Content does not use them to
+run: `/`, `/etc`, the commands, the Web UI, the modules' files. Content does not use them to
 share:
 
 | Path                          | Owner and group            | Mode   | Why                                                                      |
@@ -444,7 +444,7 @@ inherits nothing.
 
 ## Over SSH, SFTP and the web
 
-The same rules apply wherever you come in: the web interface, EiN's terminal, SSH and SFTP all sign
+The same rules apply wherever you come in: the Web UI, EiN's terminal, SSH and SFTP all sign
 in as the same account and see only what it may. Downloading a file over the web takes read on it.
 See [SSH and SFTP](../shell/ssh-sftp.md).
 

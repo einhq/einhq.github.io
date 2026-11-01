@@ -125,8 +125,8 @@ When something in a file cannot be used, `ui-nav` says so after the list, on lin
 The browser's console shows the same lines.
 
 To read every field a module gives its entries, print its file, for example
-`cat /etc/ui/nav.d/archive.json`. `JSON_OUTPUT=1 ui-nav` gives the result as JSON, the form the web
-interface reads.
+`cat /etc/ui/nav.d/archive.json`. `JSON_OUTPUT=1 ui-nav` gives the result as JSON, the form the Web
+UI reads.
 
 ## Create or edit your file
 
@@ -254,7 +254,7 @@ also appear in the search box's list under **Go to**, like every sidebar entry.
   page and copy what your browser's address bar shows after the host, such as
   `/people/peggy-wrenfield`. Filters you set on a page are part of its address, which is how
   `/media?q=Cornwall` opens **Media** already searching for Cornwall.
-  [Addresses in the web interface](../reference/routes.md) lists them all. A sidebar entry cannot
+  [Addresses in the Web UI](../reference/routes.md) lists them all. A sidebar entry cannot
   lead to another website.
 - **`icon`** is the name of any icon at [tabler.io/icons](https://tabler.io/icons), written as it
   is there: `map-pin`, `beach`, `heart`. Add `-filled` for the filled form, `heart-filled`. It can
@@ -279,7 +279,7 @@ an `action` that says what choosing it does:
 | `{ "dialog": "/albums/new" }`                             | Opens it in a dialog over the page you are on.                                                                                                                                                                        |
 | `{ "drawer": "/favourites" }`                             | Opens it in the side drawer at the right, or closes the drawer when it shows that address. The button is lit while the drawer is open, and left out on that address's own page. On a phone it opens a dialog instead. |
 | `{ "fullscreen": "/map" }`                                | Opens it over everything, the top bar too, until <kbd>Esc</kbd> or the browser's Back.                                                                                                                                |
-| `{ "run": "<command line>" }`                             | Runs the command line as you, as the web interface runs its commands: with `JSON_OUTPUT=1`.                                                                                                                           |
+| `{ "run": "<command line>" }`                             | Runs the command line as you, as the Web UI runs its commands: with `JSON_OUTPUT=1`.                                                                                                                                  |
 | `{ "run": "album-random", "navigate": "/albums/{path}" }` | Runs the command, then opens an address filled in from its answer.                                                                                                                                                    |
 
 [Finding your way around](interface.md#pages-dialogs-the-side-drawer-and-full-screen) shows what a

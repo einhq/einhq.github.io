@@ -43,7 +43,7 @@ Do this before every [update](updating.md) and on a schedule of your own. The ex
    podman compose stop ein
    ```
 
-   The web interface, SSH and SFTP are down until step 5.
+   The Web UI, SSH and SFTP are down until step 5.
 
 2. Find the database's container and dump the database, with the TimescaleDB version it was made with:
 
@@ -204,7 +204,7 @@ The database is not in the data folder and does not move with it. It lives in th
 
 The data folder holds your files under ids, not names, so copying it gives you nothing you can browse. To get files out with their names and folders, take them out through EiN:
 
-- **In the web interface**, with the [Archive](../archive/index.md) installed, select pictures in an album or the grid and choose **Download** in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See [Albums](../archive/albums.md#the-selection-bar).
+- **In the Web UI**, with the [Archive](../archive/index.md) installed, select pictures in an album or the grid and choose **Download** in the selection bar. One file downloads as itself, several as one zip named after the album, of up to 5000 files. See [Albums](../archive/albums.md#the-selection-bar).
 - **Over SFTP**, copy whole albums or the whole archive with `scp -r`, `sftp` or a graphical client, or mount EiN with `sshfs` and copy with `rsync` or a file manager. [SSH and SFTP](../shell/ssh-sftp.md#copy-files-with-sftp) shows how.
 - **As folders on the machine EiN runs on**, with the [Album folders](../album-folders/index.md) module: every album of the Archive is a folder of its pictures in `files/albums` in the data folder, for a file manager or a shared folder, kept up to date as the albums change.
 - **From EiN's terminal**, [`scp -r`](../reference/commands-core.md#scp) copies a folder to another machine, such as a NAS, if you are in the group `ssh`. [Reaching other machines](../shell/remote.md) covers keys and addresses.
@@ -240,7 +240,7 @@ On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folde
 
 ## Delete things and free space
 
-What you delete in the web interface goes to the deleter's trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in [`CFG_TRASH_RETENTION_DAYS`](../reference/settings.md#cfg_trash_retention_days) (**Days in the trash**, under **Settings → System**). Only then does EiN remove the files from the data folder. [Your profile, favourites and trash](../guide/profile.md#the-trash) explains the trash, and which ways of deleting skip it.
+What you delete in the Web UI goes to the deleter's trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in [`CFG_TRASH_RETENTION_DAYS`](../reference/settings.md#cfg_trash_retention_days) (**Days in the trash**, under **Settings → System**). Only then does EiN remove the files from the data folder. [Your profile, favourites and trash](../guide/profile.md#the-trash) explains the trash, and which ways of deleting skip it.
 
 To free the room at once, an administrator can empty every account's trash:
 
@@ -253,7 +253,7 @@ Add `--older-than 7` to empty only what was deleted more than seven days ago. Ei
 
 | To remove                                                                  | Do this                                                                                                                                                                                                                                                                  |
 | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Files and folders, and the Archive's pictures, albums, people and the like | Delete them in the web interface, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                                                                                         |
+| Files and folders, and the Archive's pictures, albums, people and the like | Delete them in the Web UI, then empty the trash; see [Your profile, favourites and trash](../guide/profile.md#the-trash).                                                                                                                                                |
 | An account                                                                 | **Delete account…** removes its home folder at once, without the trash, and passes everything it owned elsewhere to another account; see [Accounts and groups](accounts.md#delete-an-account).                                                                           |
 | A module                                                                   | **Remove** in **Settings → Modules**; see [Modules](modules.md#remove-a-module).                                                                                                                                                                                         |
 | The media service or the language model                                    | `~/ein/setup.sh --no-ems` or `--no-llm` stops it and keeps its data. Then `podman image rm ghcr.io/einhq/ems:main` frees the media service's image of about 30 GB (`localhost/ein-ems` when it was built from your own source), and removing `~/ein/data/llm` the model. |

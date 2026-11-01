@@ -241,7 +241,7 @@ leaves the list, and the message "Kept apart: not duplicates" has **Undo**. EiN 
 choice on each staged file and never pairs those files again.
 
 This choice is not listed on the **Done** tab, so the message's **Undo** is the only way back in
-the web interface. Exact copies cannot be kept apart, since their bytes are the same.
+the Web UI. Exact copies cannot be kept apart, since their bytes are the same.
 
 ## Remove a whole list at once
 

@@ -197,7 +197,7 @@ Module code imports from core only `@ein/client`, the module API. What a command
 | Member                                           | What it is                                                                         |
 | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | `cmd.args`                                       | The words after the command's name; read flags from them with `parseArgs`          |
-| `cmd.json`                                       | True when the caller wants JSON, as the web interface and `JSON_OUTPUT=1` do       |
+| `cmd.json`                                       | True when the caller wants JSON, as the Web UI and `JSON_OUTPUT=1` do              |
 | `cmd.writeLn`, `cmd.writeJSON`, `cmd.writeError` | Write a line, a JSON answer, or a line on stderr                                   |
 | `cmd.stdin`                                      | Standard input: `for await (const line of cmd.stdin.lines())`                      |
 | `cmd.execute(script)`                            | Run a shell line and get its `code`, `stdout` and `stderr`; quote paths with `shq` |
@@ -335,8 +335,8 @@ modules are set up; there is no build step on your side and nothing is fetched f
    ```
 
    `useCommand` runs a command in the reader's own shell, as JSON, and keeps its answer. A page reads
-   and changes the tree only through commands, which is why each part of a module that the web
-   interface shows has a command behind it.
+   and changes the tree only through commands, which is why each part of a module that the Web
+   UI shows has a command behind it.
 
 3. Give it a sidebar entry in `ui/nav.json`:
 
@@ -351,12 +351,12 @@ modules are set up; there is no build step on your side and nothing is fetched f
 4. Run `ui-build recipes` and reload the web page. **Recipes** is in the sidebar's **Browse**
    section.
 
-A page imports only what the web interface lends it, its own files, and anything at all with
+A page imports only what the Web UI lends it, its own files, and anything at all with
 `import type`:
 
 | Import                                                                                   | What it is                                                                  |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `react`, `react-dom`                                                                     | React, the one the web interface runs                                       |
+| `react`, `react-dom`                                                                     | React, the one the Web UI runs                                              |
 | `@mantine/core`, `@mantine/dates`, `@mantine/hooks`                                      | The Mantine components the interface is built with                          |
 | `react-router-dom`                                                                       | Routing: `Link`, `useParams`, `useNavigate`, `useSearchParams` and the like |
 | `@preact/signals-react`, `@hello-pangea/dnd`                                             | Signals, and drag and drop                                                  |
@@ -368,7 +368,7 @@ Anything else stops the build with a message naming the file and the import.
 
 ### Where an entry opens a route
 
-A module gives the web interface entries and routes, nothing more. Each entry says where its route
+A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:
 
 | Entry     | Where it appears                                                                                               |

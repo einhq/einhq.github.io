@@ -38,7 +38,7 @@ These are `setup.sh`'s options, and so the installer's too. `~/ein/setup.sh --he
 
 An option other than `--only` is kept in `.env` once given, so a run without it keeps it: `~/ein/setup.sh` alone runs with the options you chose before. Anything else stops `setup.sh` with `setup.sh: unknown option <option> (--help lists them)`.
 
-With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the web interface. `--module` only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from `EIN_MODULES` in `~/ein/.env`. [Modules](modules.md) explains installing, updating and removing modules, which EiN does itself, not `setup.sh`.
+With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the Web UI. `--module` only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from `EIN_MODULES` in `~/ein/.env`. [Modules](modules.md) explains installing, updating and removing modules, which EiN does itself, not `setup.sh`.
 
 ## The variables
 
@@ -56,7 +56,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 | `EIN_CHECK`                     | `install.sh`               | unset                              | `1` runs the checks for the options given and stops, installing nothing.                                                                                                                  |
 | `EIN_ENGINE`                    | `setup.sh`, the first time | podman when installed, else Docker | `docker` uses Docker even when podman is installed. Kept in `.env`, and later runs use that engine; given with the other engine later, it stops `setup.sh`.                               |
 | `EIN_SOURCE_KEY`                | both                       | unset                              | The token that reads `--source`'s repositories when they are private. Kept in `.env` with the source; a `--source` on another host without one drops it.                                  |
-| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | `setup.sh`, the first time | `8080`, `2222`                     | The ports on the machine for the web interface and for SSH and SFTP. Read only when `.env` is written.                                                                                    |
+| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | `setup.sh`, the first time | `8080`, `2222`                     | The ports on the machine for the Web UI and for SSH and SFTP. Read only when `.env` is written.                                                                                           |
 
 `EIN_DATA` is made into an absolute path when `.env` is written, so a relative folder is taken from where `setup.sh` runs, which is `~/ein`.
 
@@ -167,11 +167,11 @@ podman compose down
 
 compose runs EiN as the project `ein`, from the files in `~/ein`. Each service is a container of its own, and only `ein` is reached from other machines.
 
-![One machine running four containers on a private network: ein with the web interface, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files](../diagrams/system.svg "Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.")
+![One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files](../diagrams/system.svg "Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.")
 
 | Service | Image                                                                                                                                                    | Reached at                                              | Memory limit        | When         |
 | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------- | ------------ |
-| `ein`   | `ghcr.io/einhq/core`, ready-made with the web interface; built from the core sources as `localhost/ein-core` from any other source                       | ports 8080 (web) and 2222 (SSH and SFTP) on the machine | `EIN_MEMORY`, `6g`  | always       |
+| `ein`   | `ghcr.io/einhq/core`, ready-made with the Web UI; built from the core sources as `localhost/ein-core` from any other source                              | ports 8080 (web) and 2222 (SSH and SFTP) on the machine | `EIN_MEMORY`, `6g`  | always       |
 | `db`    | `ghcr.io/einhq/db`, PostgreSQL with TimescaleDB, pgvector and PostGIS, ready-made; built from the db sources as `localhost/ein-db` from any other source | `db:5432`, on the compose network only                  | none                | always       |
 | `ems`   | `ghcr.io/einhq/ems`, ready-made with every model; built from the ems sources as `localhost/ein-ems` from any other source                                | `ems:8181`, on the compose network only                 | `EMS_MEMORY`, `16g` | with `--ems` |
 | `llm`   | llama.cpp's server, downloaded ready-made from `ghcr.io`                                                                                                 | `llm:8190`, on the compose network only                 | `LLM_MEMORY`, `10g` | with `--llm` |
@@ -252,7 +252,7 @@ EIN_DB_DIR=
 | `TZ`                            | the machine's time zone, from `timedatectl`, `/etc/timezone` or `UTC`                                                                                                                                                                                 |
 | `INITIAL_ADMIN_PASSWORD`        | the `admin` account's first password, random, made here. EiN takes it at its first start, and changing it later does nothing; `setup.sh` prints it at the end of every run until you delete the line, which you do once you have changed the password |
 | `EIN_BIND`                      | the address the ports listen on: `0.0.0.0` for every address of the machine, `127.0.0.1` for the machine alone                                                                                                                                        |
-| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the web interface and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                                                                      |
+| `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the Web UI and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                                                                             |
 | `CFG_LLM_…`                     | the Assistant's settings for a hosted language model instead of `--llm`; see [The language model](../assistant/language-model.md)                                                                                                                     |
 | `EIN_SOURCE`, `EIN_SOURCE_KEY`  | where the sources are cloned from, and the token that reads them when they are private; `--source` sets them, and one on another host empties the token unless `EIN_SOURCE_KEY` gives a new one                                                       |
 | `EIN_DB_DIR`                    | the database's folder; empty keeps it in the volume `ein_db`. `--db-dir` sets it                                                                                                                                                                      |

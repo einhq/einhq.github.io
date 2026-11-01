@@ -62,7 +62,7 @@
 - [Node types](reference/node-types.md)
 - [Configuration files](reference/config-files.md)
 - [Keyboard shortcuts](reference/shortcuts.md)
-- [Addresses in the web interface](reference/routes.md)
+- [Addresses in the Web UI](reference/routes.md)
 - [Glossary](reference/glossary.md)
 
 ## Developing

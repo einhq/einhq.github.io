@@ -111,7 +111,7 @@ One part of an installation, run by podman or Docker with compose: `ein` (EiN it
 ### Core
 
 EiN without modules: the tree, the shell and its commands, the pipeline engine, accounts and
-sharing, and the frame of the web interface. Core brings no pipelines of its own. See
+sharing, and the frame of the Web UI. Core brings no pipelines of its own. See
 [How EiN works](../start/how-ein-works.md#modules-decide-what-ein-is-for).
 
 ### Cover
@@ -555,7 +555,7 @@ GPX files or sent live. See [Devices and GPS tracks](../archive/devices.md#a-dev
 
 ### Trash
 
-Where what you delete in the web interface waits, in `.trash` in your home folder, for 30 days
+Where what you delete in the Web UI waits, in `.trash` in your home folder, for 30 days
 unless the administrator set another number in
 [`CFG_TRASH_RETENTION_DAYS`](settings.md#cfg_trash_retention_days). `rm` and **Delete** on the
 Nodes page do not use it. See [Your profile, favourites and trash](../guide/profile.md#the-trash).

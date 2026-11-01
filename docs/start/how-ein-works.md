@@ -106,7 +106,7 @@ commands, except SFTP, which moves files and nothing else:
 
 ![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/interfaces.svg "Every interface upholds the same permission checks, and all but SFTP go through the same commands.")
 
-The web interface is no exception. Each page gets what it shows by running commands over one
+The Web UI is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with `JSON_OUTPUT=1` so that they answer in JSON; renaming a
 folder on the Nodes page runs `mv`. Only the bytes of files, uploaded or downloaded, take a way of
 their own, through the same permission check. You can run the same commands yourself; these two
@@ -164,7 +164,7 @@ side, and [Health and the dashboard](../admin/monitoring.md) explains the four w
 ## Modules decide what EiN is for
 
 Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the
-frame of the web interface. On its own, its sidebar holds **Home**, **Search**, **Settings**,
+frame of the Web UI. On its own, its sidebar holds **Home**, **Search**, **Settings**,
 **Statistics** and **Documentation**, and for an administrator **Nodes** and **Dashboard**.
 Everything else comes from modules.
 
@@ -193,12 +193,12 @@ aside otherwise.
 
 ## What runs beside EiN
 
-EiN itself is one process: the web interface, the shell, SSH and SFTP, the pipelines and the
+EiN itself is one process: the Web UI, the shell, SSH and SFTP, the pipelines and the
 modules' services all run in it. The installer sets it up on one machine with podman or Docker and
 compose, each part in a container of its own: EiN, PostgreSQL and, if you choose them, the media
 service and the language model.
 
-![One machine running four containers on a private network: ein with the web interface, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files](../diagrams/system.svg "Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.")
+![One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files](../diagrams/system.svg "Only EiN is reached from outside; the database, the media service and the language model answer EiN alone.")
 
 | Container | What it is                                                                                                                                                                                                                                                                                                                                             | When you need it                                                       |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
@@ -207,7 +207,7 @@ service and the language model.
 | `ems`     | The media service: every media tool and model, for thumbnails and video renditions, faces, voices, text in pictures, transcripts, search vectors and fingerprints. It keeps no data of its own and knows nothing of the tree: it reads the files EiN stores and answers EiN. It uses an NVIDIA graphics card when there is one, and the CPU otherwise. | With the Archive: the installer's `--ems`                              |
 | `llm`     | The language model the assistant asks: Qwen3.5-4B in llama.cpp, on the graphics card or the CPU. A hosted provider with an OpenAI-compatible API can take its place.                                                                                                                                                                                   | With the assistant: the installer's `--llm`, unless you use a provider |
 
-Only EiN is reachable from other machines: port 8080 for the web interface and 2222 for SSH and
+Only EiN is reachable from other machines: port 8080 for the Web UI and 2222 for SSH and
 SFTP. The database, the media service and the language model answer only EiN, on the network
 compose makes for them.
 
@@ -227,7 +227,7 @@ and [The language model](../assistant/language-model.md) say more about each.
 
 - [Install EiN](install.md) puts EiN on a machine of your own, and [First steps](first-steps.md)
   takes you from the first sign-in to a family using it.
-- [Finding your way around](../guide/interface.md) is a tour of the web interface.
+- [Finding your way around](../guide/interface.md) is a tour of the Web UI.
 - [The Archive](../archive/index.md), [The Assistant](../assistant/index.md) and
   [The media service](../ems/index.md) open each module's section, for the modules installed on
   your EiN.

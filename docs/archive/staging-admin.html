@@ -70,7 +70,7 @@
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
-<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
 <p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html" aria-current="page">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
@@ -142,7 +142,7 @@ disk as the library; <code>df</code> in the terminal shows the free space.</p>
 <h2 id="when-a-staging-area-is-set-up">When a staging area is set up<a class="anchor" href="#when-a-staging-area-is-set-up" aria-label="Link to this section"></a></h2>
 <p>A new account has no staging area until one of these sets it up:</p>
 <ul>
-<li>the person opens <strong>Staging</strong> in the web interface, or drops files on a page that uploads into
+<li>the person opens <strong>Staging</strong> in the Web UI, or drops files on a page that uploads into
 staging;</li>
 <li>the <code>staging-organizer</code> service, which sets up every account&#39;s staging area once an hour;</li>
 <li>you, with <code>staging init</code>.</li>
@@ -164,7 +164,7 @@ following, so albums and suggestions keep pointing at it:</p>
 </thead>
 <tbody><tr>
 <td>A folder directly under <code>files/</code></td>
-<td>Adopts it as a category of the <code>generic</code> kind (<strong>Other</strong> in the web interface), named after it.</td>
+<td>Adopts it as a category of the <code>generic</code> kind (<strong>Other</strong> in the Web UI), named after it.</td>
 </tr>
 <tr>
 <td>A file directly in <code>files/</code></td>
@@ -368,7 +368,7 @@ dated again by the new category&#39;s rules.</p>
 <p>How fast the work goes depends on the machine and the graphics card; see
 <a href="../admin/performance.html">Performance and sizing</a>.</p>
 <h2 id="change-the-finer-settings-of-a-category">Change the finer settings of a category<a class="anchor" href="#change-the-finer-settings-of-a-category" aria-label="Link to this section"></a></h2>
-<p>The web interface changes a category&#39;s name, kind and default album. The rest of its settings are
+<p>The Web UI changes a category&#39;s name, kind and default album. The rest of its settings are
 changed with <code>staging category</code>. A person may change their own categories; an administrator may
 change anyone&#39;s with <code>--user</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>

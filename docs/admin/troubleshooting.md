@@ -18,7 +18,7 @@ Three places tell you most of what is wrong. Look at them in this order.
 
    A container that shows `Up` for only a few seconds, again and again, stops and is started again by its restart policy. Its log says why.
 
-2. **The dashboard.** When the web interface opens, sign in as an administrator and choose **Dashboard** under **System** in the sidebar. The badge above **System dashboard** gives the verdict: **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Below it, the **Overview** tab lists each check that is not fine, with its reason. The **Services** tab shows each of EiN's own services, and the **Log** tab its **Recent problems** and the live log. [Health and the dashboard](monitoring.md) explains every tile.
+2. **The dashboard.** When the Web UI opens, sign in as an administrator and choose **Dashboard** under **System** in the sidebar. The badge above **System dashboard** gives the verdict: **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Below it, the **Overview** tab lists each check that is not fine, with its reason. The **Services** tab shows each of EiN's own services, and the **Log** tab its **Recent problems** and the live log. [Health and the dashboard](monitoring.md) explains every tile.
 
    ![The System dashboard with a blue Catching up badge above its title, the tabs Overview, Work, Media service, Services and Log, and tiles for CPU, memory, GPU and VRAM above a chart of completed work](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
 
@@ -56,7 +56,7 @@ tail /var/logs/services/pipeline-engine/stdout.log    # one service's log
 
 ## EiN does not start or does not answer
 
-EiN answers on port 8080 only once its database is up and its start is through: it installs the modules `EIN_MODULES` names that are missing, sets every module up, and only then starts its services, the web interface and SSH among them. While it does, the browser cannot connect. A start that installs modules over a slow connection takes minutes.
+EiN answers on port 8080 only once its database is up and its start is through: it installs the modules `EIN_MODULES` names that are missing, sets every module up, and only then starts its services, the Web UI and SSH among them. While it does, the browser cannot connect. A start that installs modules over a slow connection takes minutes.
 
 | What you see                                                                                    | What to do                                                                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -85,7 +85,7 @@ A container that keeps starting over without a clear message in its log may be r
 | Signing in works, but the next page asks you to sign in again    | The browser uses `http://` while the proxy says `https`, so the browser does not send the cookie back. Open the `https://` address. See [Ports, HTTPS and remote access](network.md).                                                                                                                                                                                                                                                                                                                                        |
 | SSH warns that the host key has changed                          | The key is kept in EiN's database and stays across updates; it changes only when EiN was installed afresh. Remove the old key from your `~/.ssh/known_hosts` once you know that is what happened. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                                                                                                                                                  |
 
-## The web interface misbehaves
+## The Web UI misbehaves
 
 | What you see                                                            | What to do                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -159,7 +159,7 @@ With the Archive, a kind can also wait for the media service; see [Media service
 
 ## A service has stopped
 
-EiN runs its own services inside its container: the web interface, SSH, the pipeline engine, and each module's. A service that stops on its own is started again, but after three restarts within a minute EiN leaves it `failed`.
+EiN runs its own services inside its container: the Web UI, SSH, the pipeline engine, and each module's. A service that stops on its own is started again, but after three restarts within a minute EiN leaves it `failed`.
 
 1. See which services run:
 

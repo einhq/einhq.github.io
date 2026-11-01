@@ -1,6 +1,6 @@
 # Assistant commands by task
 
-This page is for power users and administrators who use the assistant from the terminal. Each table row gives a task, a command line that does it, and a link to that command's full entry. The commands come with the assistant module and are there once it is installed; [The Assistant](index.md) says what it adds, [Chatting with the assistant](chat.md) covers the chat in the web interface, and [Commands by task](../shell/commands.md) has core's commands.
+This page is for power users and administrators who use the assistant from the terminal. Each table row gives a task, a command line that does it, and a link to that command's full entry. The commands come with the assistant module and are there once it is installed; [The Assistant](index.md) says what it adds, [Chatting with the assistant](chat.md) covers the chat in the Web UI, and [Commands by task](../shell/commands.md) has core's commands.
 
 | Task                                               | Command                                               | Reference                                            |
 | -------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |

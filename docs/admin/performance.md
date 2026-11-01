@@ -10,7 +10,7 @@ EiN runs as two containers, `ein` and `db`, and up to four with the media servic
 
 | Container | What uses the machine                                                                                                                                       | Memory limit                | Processor   |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ----------- |
-| `ein`     | The web interface, every shell and SSH session, the pipelines that decide what to do with each file, and the modules' services                              | `EIN_MEMORY`, default `6g`  | not limited |
+| `ein`     | The Web UI, every shell and SSH session, the pipelines that decide what to do with each file, and the modules' services                                     | `EIN_MEMORY`, default `6g`  | not limited |
 | `db`      | PostgreSQL: every node, link, setting and the search index                                                                                                  | none; 1 GB of shared memory | not limited |
 | `ems`     | The media service, with `--ems`, for the Archive: thumbnails, video encoding, fingerprints, and the models for faces, voices, transcripts, text and vectors | `EMS_MEMORY`, default `16g` | not limited |
 | `llm`     | The language model, with `--llm`, for the Assistant: about 5.6 GB of model, on the card or in memory                                                        | `LLM_MEMORY`, default `10g` | not limited |

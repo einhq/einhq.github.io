@@ -143,7 +143,7 @@ These go in `~/ein/.env` and take effect at the next `podman compose up -d`.
 
    The second line is expected for every model but Qwen3.5-4B. It is a warning only: the chat answers, but nobody has measured how well. [Try a model before you rely on it](#try-a-model-before-you-rely-on-it) shows how to measure it.
 
-The same settings are on **Settings → System**, in the **Assistant** category, for an administrator who prefers the web interface: **Language model address**, **Language model key**, **Language model provider** and **Language model**. A value saved there wins over `.env` and shows the badge **Set here**; a value from `.env` shows **From deployment**. **Restore inherited value** goes back to the one from `.env`. In the terminal, `config-set CFG_LLM_PROVIDER OpenAI` does the same as saving it on the page ([reference](../reference/commands-core.md#config-set)).
+The same settings are on **Settings → System**, in the **Assistant** category, for an administrator who prefers the Web UI: **Language model address**, **Language model key**, **Language model provider** and **Language model**. A value saved there wins over `.env` and shows the badge **Set here**; a value from `.env` shows **From deployment**. **Restore inherited value** goes back to the one from `.env`. In the terminal, `config-set CFG_LLM_PROVIDER OpenAI` does the same as saving it on the page ([reference](../reference/commands-core.md#config-set)).
 
 ### What a provider receives
 

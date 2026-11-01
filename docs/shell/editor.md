@@ -1,7 +1,7 @@
 # The editor
 
 EiN has two places to change a text file: `edit` in the terminal, which colours the text and checks
-JSON, YAML and bash as you type, and the code editor on the **Nodes** page of the web interface.
+JSON, YAML and bash as you type, and the code editor on the **Nodes** page of the Web UI.
 This page is for anyone who edits a script, a note or a configuration file in EiN.
 
 ## Open a file with edit
@@ -304,7 +304,7 @@ Over SSH, `edit` needs the shell you get by signing in: `ssh -p 2222 anna@ein.lo
 `edit notes.md`. A command sent along on the `ssh` line, even with `ssh -t`, runs without a terminal
 and stops with `edit: not a terminal`. [SSH and SFTP](ssh-sftp.md) has the rest.
 
-## Edit a file in the web interface
+## Edit a file in the Web UI
 
 The **Nodes** page has a code editor for those who would rather stay in the browser. **Nodes** is
 under **System** in an administrator's sidebar. Other people do not have it in their sidebar, but

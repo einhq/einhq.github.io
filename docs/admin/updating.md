@@ -15,7 +15,7 @@ layers of an image that changed, so an update of the media service is usually fa
 | Repository | What it is                                            | Updated when            | As                                   |
 | ---------- | ----------------------------------------------------- | ----------------------- | ------------------------------------ |
 | deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           | `git pull` of `~/ein`                |
-| core       | EiN: the tree, the shell, the web interface           | always                  | the image `ghcr.io/einhq/core:main`  |
+| core       | EiN: the tree, the shell, the Web UI                  | always                  | the image `ghcr.io/einhq/core:main`  |
 | db         | PostgreSQL with TimescaleDB, pgvector and PostGIS     | always                  | the image `ghcr.io/einhq/db:main`    |
 | ems        | the media service, which the Archive needs            | with the media service  | the image `ghcr.io/einhq/ems:main`   |
 | llm        | the language model's chat template, for the Assistant | with the language model | its source, fetched into `~/ein/src` |
@@ -113,14 +113,14 @@ in `~/ein` instead; [Configuration](configuration.md#set-a-value-in-the-deployme
 
 ## What an update changes and what it keeps
 
-| Changes                                                                                                        | Stays as it is                                                                   |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                                     |
-| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, the `ein_db` volume or the folder `EIN_DB_DIR` names               |
-| The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file                   |
-| Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder                     |
-| `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the web interface or the terminal, which are in the database |
-| The container logs, which go with the old containers                                                           | The SSH host key, kept in the tree                                               |
+| Changes                                                                                                        | Stays as it is                                                            |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                              |
+| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, the `ein_db` volume or the folder `EIN_DB_DIR` names        |
+| The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file            |
+| Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder              |
+| `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the Web UI or the terminal, which are in the database |
+| The container logs, which go with the old containers                                                           | The SSH host key, kept in the tree                                        |
 
 `setup.sh` makes every container again from the new image even where compose sees no change, with
 `--force-recreate` (under podman-compose, it takes them all down and starts them one by one), and
@@ -141,7 +141,7 @@ and its pages and commands are missing until it is updated. [When a module does 
 
 ## See which version runs
 
-In the web interface, open the profile menu at the top right and choose **About EiN**. The **Core**
+In the Web UI, open the profile menu at the top right and choose **About EiN**. The **Core**
 tile shows core's version, and below it the commit EiN was built from and that commit's date; hold
 the pointer over it for the full time. The **Module API** tile shows the version modules build on,
 and **Services** shows what installed modules add, such as the media service's version and commit with the `ems` module and the media service installed.

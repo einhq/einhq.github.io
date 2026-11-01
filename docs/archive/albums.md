@@ -322,7 +322,7 @@ Choose a card to open the folder. It opens like an album page of its own, with t
 album's grid shows only the pictures at the album's own level: open a folder to see what is in it.
 An album that holds only folders says **No media here — open a folder above.**
 
-The web interface shows folders but has no button that makes one. They come from an import, from
+The Web UI shows folders but has no button that makes one. They come from an import, from
 copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
 [terminal](../shell/terminal.md). Once a folder is there, open it and choose **Upload** to upload
 into it. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
@@ -420,7 +420,7 @@ it, and comes back with it if you restore it.
 
 ### Move a picture to another album
 
-The web interface has no button that moves a picture from one album to another. **Add to album**
+The Web UI has no button that moves a picture from one album to another. **Add to album**
 links it into the other album; if you then delete it from the first, it goes to the trash and leaves
 the other album too.
 

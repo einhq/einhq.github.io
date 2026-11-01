@@ -1,6 +1,6 @@
 # Keyboard shortcuts
 
-Every key EiN's web interface knows, by the part of the screen it works in. Each section links the
+Every key EiN's Web UI knows, by the part of the screen it works in. Each section links the
 page that explains that part in full; this page is for looking a key up.
 
 ## See the keys where you are
@@ -116,7 +116,7 @@ In the address bar above a listing, <kbd>Enter</kbd> goes to the path typed and 
 puts back the path you were at.
 
 The explorer's code editor saves with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>⌘</kbd>+<kbd>S</kbd> on a
-Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. [The editor](../shell/editor.md#edit-a-file-in-the-web-interface)
+Mac); <kbd>Esc</kbd> closes it only when nothing is unsaved. [The editor](../shell/editor.md#edit-a-file-in-the-web-ui)
 covers it.
 
 ## The trash

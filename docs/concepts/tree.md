@@ -28,7 +28,7 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 | ---------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and devices                       | Everyone with an account, as each folder's sharing allows |
 | `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging | Each account in its own folder                            |
-| `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the web interface | The administrator, and commands such as `config set`      |
+| `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the Web UI        | The administrator, and commands such as `config set`      |
 | `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs           | EiN itself                                                |
 | `/usr`     | Code and read-only files: the commands, the modules and the built-in guide                                | Nobody by hand; an update or `mod install` replaces it    |
 | `/dev`     | The channels facts about changes are announced on, and `/dev/null`                                        | EiN itself                                                |
@@ -153,7 +153,7 @@ so `ls /var` reads the same on a fresh instance as on one that has run for a yea
 | `/var/pools`                 | Pools of jobs waiting for a worker, such as the Archive's for the media service    |
 | `/var/pipelines/definitions` | The pipelines the modules define                                                   |
 | `/var/pipelines/instances`   | The pipeline runs, finished and in progress                                        |
-| `/var/www`                   | The sites the web server serves, as links to the web interface                     |
+| `/var/www`                   | The sites the web server serves, as links to the Web UI                            |
 | `/var/lib/modules`           | The modules `mod install` installed, one folder each                               |
 
 Changes under `/var` are left out of the audit trail. [Changes and pipelines](pipelines.md) follows
@@ -165,12 +165,12 @@ the logs.
 `/usr` holds code and files nobody edits. An update of EiN replaces what core brings, and `mod install`
 what a module brings.
 
-| Path                  | What it is                                                                               |
-| --------------------- | ---------------------------------------------------------------------------------------- |
-| `/usr/bin`            | Core's commands, one `command` node each: `/usr/bin/ls` is the `ls` command              |
-| `/usr/lib`            | Core's other files: its bash commands in `core/bin`, its services, and the web interface |
-| `/usr/modules/<name>` | Each installed module, a link to its folder in `/var/lib/modules`                        |
-| `/usr/docs/guide`     | This guide, bundled with EiN, which **Documentation** in the sidebar shows               |
+| Path                  | What it is                                                                        |
+| --------------------- | --------------------------------------------------------------------------------- |
+| `/usr/bin`            | Core's commands, one `command` node each: `/usr/bin/ls` is the `ls` command       |
+| `/usr/lib`            | Core's other files: its bash commands in `core/bin`, its services, and the Web UI |
+| `/usr/modules/<name>` | Each installed module, a link to its folder in `/var/lib/modules`                 |
+| `/usr/docs/guide`     | This guide, bundled with EiN, which **Documentation** in the sidebar shows        |
 
 Your `PATH` holds `/usr/bin`, `/usr/lib/core/bin` and each module's `bin` folder, so a module's commands
 run by name as soon as it is set up. [Modules](../admin/modules.md#where-modules-are-kept) explains where

@@ -153,7 +153,7 @@ browser. You need the host name, the SSH port (2222 unless your administrator ch
 EiN username and password. `sftp`, `scp`, FileZilla, Cyberduck and your file manager's "connect to
 server" all work; [SSH and SFTP](../shell/ssh-sftp.md) explains connecting.
 
-1. Open **Staging** in the web interface once. This sets up your staging area. Without that, EiN
+1. Open **Staging** in the Web UI once. This sets up your staging area. Without that, EiN
    sets it up within the hour.
 2. For a big export or a box of scans, make its category first: on the Staging page, choose its
    kind on the **New category** card, type what it is **Called** and choose **Create**.
@@ -388,7 +388,7 @@ three pictures, or has a name a camera or an export gives.
 **New pictures are not on the Media page, the map or in search.** That is how staging works: they
 appear there once you file them. Look for them on the **Staging** page.
 
-**Over SFTP, `/home/<you>/staging` does not exist.** Open **Staging** in the web interface once, then
+**Over SFTP, `/home/<you>/staging` does not exist.** Open **Staging** in the Web UI once, then
 copy again.
 
 **The dates are wrong, or scans have none.** A scan is undated until you give it a date; see

@@ -3,7 +3,7 @@
 EiN's presentation page, in five chapters that are the top bar's links. It opens on the hero, whose
 field wears the interface's mixed pattern as its home page does, and how to install comes right
 under it. Core is EiN itself, naming no module: nodes and the core's node types, the tree, the
-shell, the web interface, pipelines and modules. Assistant is the chat and what it does on any
+shell, the Web UI, pipelines and modules. Assistant is the chat and what it does on any
 installation, ending where it has a real purpose, the Archive. Archive is the first module, with the
 screenshots from the demo archive, its media types and pipelines, asking the assistant about the
 family, and the media service. Screenshots is a gallery of almost every page, and the system
@@ -22,7 +22,7 @@ index.html          the page
 assets/site.css     its styles
 assets/site.js      the hero's field, the tour's tabs, the screenshots' viewer, the copy button
 assets/page.js      what every page has: the top bar, its links and a phone's menu of them, and the bands of hats
-assets/hat-tiling.js  the einstein hat and a patch of its tiling, as EiN's web interface lays them
+assets/hat-tiling.js  the einstein hat and a patch of its tiling, as EiN's Web UI lays them
 assets/docs.css     the documentation's pages, over site.css
 assets/docs.js      the documentation's search, its pages' drawer on a phone, the code blocks' copy buttons
 docs/               the documentation: Markdown, and the HTML and search.json made from it
@@ -120,7 +120,7 @@ also type-checks the capture tool.
 
 - The page, its scripts and styles: MIT (`LICENSE`).
 - The hat tiling comes from ein/core (MIT), which builds it as isohedral/hatviz (BSD-3-Clause) does.
-- Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark, as EiN's web interface draws it, and the headings) and Glass
+- Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark, as EiN's Web UI draws it, and the headings) and Glass
   Antiqua (the dedication): SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
 - The screenshots and node pictures show the demo archive. Its story and generated media are CC0;
   the real photos in it keep their own licences, credited one by one in `ATTRIBUTION.md`. Map data

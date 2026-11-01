@@ -82,7 +82,7 @@ Free text. `description` is shown by `mod list --long` and `mod info`, on **Sett
 
 The range of core's module contract the module is written against, as a semver range: `"^0.7.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.7.1`; `system-info` shows it on its `api` line.
 
-The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.6.0` accepts 0.6.x and nothing else.
+The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the Web UI's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.6.0` accepts 0.6.x and nothing else.
 
 `mod setup` checks the range:
 
@@ -312,15 +312,15 @@ The module's pages: each route with the file that draws it, relative to the modu
 }
 ```
 
-A route is a path below `/` made of literal and `:param` segments; `/` itself is the home page, which belongs to the web interface. The page is a `.tsx` file inside the module, and its default export is the page's component. If `ui.routes` is present it must hold at least one route.
+A route is a path below `/` made of literal and `:param` segments; `/` itself is the home page, which belongs to the Web UI. The page is a `.tsx` file inside the module, and its default export is the page's component. If `ui.routes` is present it must hold at least one route.
 
-`ui-build` bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module's bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and `ui-build` reports `/devices is archive's route already`. A route at the exact path of one of the web interface's own pages is never reached, since the interface's own is matched first.
+`ui-build` bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module's bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and `ui-build` reports `/devices is archive's route already`. A route at the exact path of one of the Web UI's own pages is never reached, since the interface's own is matched first.
 
 How a route is shown, as a page, in a dialog, in the side drawer or full screen, is decided by the entry that opens it in the module's `ui/nav.json`, not by the route. [Writing a module](modules.md) covers navigation entries.
 
 ### `ui.open`
 
-Which route opens a node of a type, so the web interface can link nodes it finds but does not know: search results, completions in the header, and **Open** in the node explorer.
+Which route opens a node of a type, so the Web UI can link nodes it finds but does not know: search results, completions in the header, and **Open** in the node explorer.
 
 ```json
 "open": {

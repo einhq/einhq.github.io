@@ -43,7 +43,7 @@ disk as the library; `df` in the terminal shows the free space.
 
 A new account has no staging area until one of these sets it up:
 
-- the person opens **Staging** in the web interface, or drops files on a page that uploads into
+- the person opens **Staging** in the Web UI, or drops files on a page that uploads into
   staging;
 - the `staging-organizer` service, which sets up every account's staging area once an hour;
 - you, with `staging init`.
@@ -64,12 +64,12 @@ ruby: 7 created, 0 repaired, 0 adopted, 0 moved, 0 groups, 0 routes, 0 relinked
 makes the Inbox. It also puts right what is out of place, moving each thing with every link to it
 following, so albums and suggestions keep pointing at it:
 
-| Found                            | What `staging init` does                                                                        |
-| -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| A folder directly under `files/` | Adopts it as a category of the `generic` kind (**Other** in the web interface), named after it. |
-| A file directly in `files/`      | Moves it into `files/inbox/unsorted/`, or the folder `--loose-batch` names.                     |
-| A group directly in `albums/`    | Moves it into `albums/inbox/`.                                                                  |
-| A GPX file waiting for a device  | Moves it into `routes/`.                                                                        |
+| Found                            | What `staging init` does                                                                 |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
+| A folder directly under `files/` | Adopts it as a category of the `generic` kind (**Other** in the Web UI), named after it. |
+| A file directly in `files/`      | Moves it into `files/inbox/unsorted/`, or the folder `--loose-batch` names.              |
+| A group directly in `albums/`    | Moves it into `albums/inbox/`.                                                           |
+| A GPX file waiting for a device  | Moves it into `routes/`.                                                                 |
 
 A name already taken where something moves gets `-2`, `-3`. Run again, it finds nothing to do.
 
@@ -196,7 +196,7 @@ How fast the work goes depends on the machine and the graphics card; see
 
 ## Change the finer settings of a category
 
-The web interface changes a category's name, kind and default album. The rest of its settings are
+The Web UI changes a category's name, kind and default album. The rest of its settings are
 changed with `staging category`. A person may change their own categories; an administrator may
 change anyone's with `--user`.
 

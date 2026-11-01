@@ -7,7 +7,7 @@ and it says which parts need an administrator.
 
 ## Who may change what
 
-Everything on this page hangs off a person's page or a location's page. In the web interface, two
+Everything on this page hangs off a person's page or a location's page. In the Web UI, two
 of the controls are shown only to an administrator:
 
 | What                                       | Where                             | Who sees the controls              |
@@ -29,7 +29,7 @@ Everyone else reads the tree, the homes and the timelines like any other page, a
 on the tree's cards and no **Add home** button.
 
 > [!NOTE]
-> The administrator rule belongs to the web interface only. The same changes are ordinary commands
+> The administrator rule belongs to the Web UI only. The same changes are ordinary commands
 > in the [terminal](../shell/terminal.md), and the [assistant](../assistant/chat.md) can propose parents,
 > partners and events for you; there they need permission to change the people they touch, not
 > administrator rights. See [In the terminal](#in-the-terminal).
@@ -95,7 +95,7 @@ father-in-law or mother-in-law. Set each person's **Gender** with **Edit** (see
 
 ## Add a parent, partner or child
 
-You need administrator rights for this in the web interface; see
+You need administrator rights for this in the Web UI; see
 [Who may change what](#who-may-change-what).
 
 1. Open the person's **Family** tab.
@@ -187,7 +187,7 @@ relations of theirs are on screen.", open the chevrons until the other person's 
 
 ## How two people are related
 
-There is no page in the web interface that answers this. Ask the [assistant](../assistant/chat.md), for
+There is no page in the Web UI that answers this. Ask the [assistant](../assistant/chat.md), for
 example "How is Ruby related to Peggy?". Its answer can carry a small tree of only the people on the
 line between the two, with a **Full screen** button. In the [terminal](../shell/terminal.md),
 `person-how-related` answers in English or Swedish:
@@ -232,7 +232,7 @@ Things to know:
   by. Give it a date to see it.
 - **Without a description**, the timeline shows a name made from the type and the date, such as
   `marriage-1956-06-16`. Write a first line that says what happened.
-- **A person's events cannot be changed or removed in the web interface** once added. An
+- **A person's events cannot be changed or removed in the Web UI** once added. An
   administrator, or anyone who may change the person, can do it in the terminal: the events are
   files in the person's `events` folder.
 
@@ -269,7 +269,7 @@ events are always generic, and need both a **Date** and a **Description**.
   the writer and press **Save**, or press **Delete**. A deleted event goes to your trash, and the
   message "Event moved to the trash" has **Undo**.
 - **On a location or a device**, the event appears on its **Timeline** tab. It cannot be changed in
-  the web interface afterwards.
+  the Web UI afterwards.
 
 ## What appears on a timeline
 
@@ -302,7 +302,7 @@ side shows on both.
 
 ### Add a home to a person
 
-You need administrator rights for this in the web interface.
+You need administrator rights for this in the Web UI.
 
 1. Open the person's **Homes** tab. It says "Where &lt;name&gt; has lived, and when."
 2. Press **Add home**.

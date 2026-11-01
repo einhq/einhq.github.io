@@ -146,7 +146,7 @@ milestones in bold:
 - **Wedding anniversaries:** give the partner relation a **From** date, such as `1996-02-03`, when
   you choose **Add partner** on the person's **Family** tab, and an **Until** date if it ended for
   another reason than a death. Choose **Married** under **Relationship** for "years married". In
-  the web interface this takes an administrator. To date a partnership that is already recorded,
+  the Web UI this takes an administrator. To date a partnership that is already recorded,
   choose **Add partner** again and pick the same partner. See
   [Partnerships and their dates](family.md#partnerships-and-their-dates).
 

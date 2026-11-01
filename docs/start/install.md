@@ -42,7 +42,7 @@ sudo apt install podman podman-compose git curl
 
 There are two install commands. Both check the machine first and install nothing when it falls short.
 
-**EiN Core** is EiN and its database: the tree, the web interface, the shell, SSH and SFTP. You add the rest when you want it.
+**EiN Core** is EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. You add the rest when you want it.
 
 ```bash
 # on the machine that will run EiN, as your own user
@@ -211,7 +211,7 @@ Do this before anything else:
 - Once you have changed it, delete that line from `.env`. Changing the line does not change the password: EiN reads it only at its first start.
 - EiN has no way to recover a lost administrator password. Only another administrator can set a new one, and a fresh install has no other.
 
-### In the web interface
+### In the Web UI
 
 1. Click your picture at the top right to open the account menu, and choose **Profile**.
 2. Open the **Security** tab.
@@ -250,7 +250,7 @@ Everything the Archive command installs can be added to EiN Core afterwards. Run
 - A module given with `--module` is installed by EiN at its next start, which that same run brings about.
 - `--no-ems` and `--no-llm` take the media service or the model out again. Their data stays.
 
-Modules can also be installed without a restart. In the web interface, open **Settings → Modules**, click the **Published modules** button beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
+Modules can also be installed without a restart. In the Web UI, open **Settings → Modules**, click the **Published modules** button beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
 
 Instead of `--llm`, the assistant can use a hosted model, set in `~/ein/.env`: see [The language model](../assistant/language-model.md).
 

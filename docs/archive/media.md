@@ -175,7 +175,7 @@ Labels show under the name of what carries them: in an album's, a person's, a lo
 
 Each of these has a **Labels** field in its edit dialog, opened with **Edit** in its header: **Edit album**, **Edit person**, **Edit location** and **Edit device**. Add a label by typing it, take one off with the × on it, and save the dialog. You see **Edit** only where you may change the thing.
 
-The edit dialogs are also the only place in the web interface where you take labels off. There is no button that takes a label off many pictures at once; in the terminal, `label remove` does it for one node at a time.
+The edit dialogs are also the only place in the Web UI where you take labels off. There is no button that takes a label off many pictures at once; in the terminal, `label remove` does it for one node at a time.
 
 ### Find what carries a label
 
@@ -224,7 +224,7 @@ Under the bar, one line says how far to trust the suggestions:
 
 "Nothing else looks like sailing" means that no picture outside the label is alike enough, apart from those marked as not it.
 
-Learning works from what the media service has worked out about each picture, so a picture it has not looked at yet is neither learned from nor suggested. Besides the learning you start from the bar, the archive's `label-models` service relearns every label, and every suggested word, once an hour when something has changed: when pictures gained or lost the label, when something was marked as not the label, or when a week has passed. The web interface has no button to take back a **Not**; in the terminal, `label-model unreject` does.
+Learning works from what the media service has worked out about each picture, so a picture it has not looked at yet is neither learned from nor suggested. Besides the learning you start from the bar, the archive's `label-models` service relearns every label, and every suggested word, once an hour when something has changed: when pictures gained or lost the label, when something was marked as not the label, or when a week has passed. The Web UI has no button to take back a **Not**; in the terminal, `label-model unreject` does.
 
 ## When something goes differently
 

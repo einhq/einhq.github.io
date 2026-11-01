@@ -1,5 +1,5 @@
 /**
- * The einstein hat and a patch of its tiling, as EiN's web interface lays them behind its page
+ * The einstein hat and a patch of its tiling, as EiN's Web UI lays them behind its page
  * headers (ein/core, src/builtin/ui/src/client/lib/hat.ts and hat-tiling.ts, MIT).
  *
  * The patch is 7,010 hats, three substitution steps of the hat's metatiles as isohedral/hatviz

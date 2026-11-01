@@ -127,8 +127,8 @@ temporary node under `/tmp` before the reading command opens it, so it is not st
 **Many Unix programs are missing.** `tar`, `curl`, `diff`, `less` and others have no EiN command.
 [Commands by task](commands.md#unix-commands-ein-does-not-have) lists what to use instead.
 
-**Permissions are EiN's.** A command you may not run is refused the same way in the shell, the web
-interface and over SSH. [Permissions in depth](../admin/permissions.md) explains who may do what.
+**Permissions are EiN's.** A command you may not run is refused the same way in the shell, the Web
+UI and over SSH. [Permissions in depth](../admin/permissions.md) explains who may do what.
 
 ## One shell per terminal tab
 
@@ -385,7 +385,7 @@ are in the reference.
 ## Get answers as JSON
 
 Put `JSON_OUTPUT=1` in front of a command and it answers in JSON instead of text. This is how the
-web interface runs every command, so the JSON holds everything the pages show. Read it with `jq`:
+Web UI runs every command, so the JSON holds everything the pages show. Read it with `jq`:
 
 ```bash
 # in EiN's terminal

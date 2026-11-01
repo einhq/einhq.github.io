@@ -70,7 +70,7 @@
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section class="here"><h2>Administration</h2><ul><li><a href="install.html" aria-current="page">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
-<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
 <p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
@@ -162,7 +162,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tbody></table>
 </div>
 <p>An option other than <code>--only</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
-<p>With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the web interface. <code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
+<p>With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the Web UI. <code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
 <p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
@@ -210,7 +210,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
 <td><code>setup.sh</code>, the first time</td>
 <td><code>8080</code>, <code>2222</code></td>
-<td>The ports on the machine for the web interface and for SSH and SFTP. Read only when <code>.env</code> is written.</td>
+<td>The ports on the machine for the Web UI and for SSH and SFTP. Read only when <code>.env</code> is written.</td>
 </tr>
 </tbody></table>
 </div>
@@ -390,7 +390,7 @@ podman compose down
 <p><code>podman compose down</code> keeps podman&#39;s volumes. The empty database volume it made is <code>ein_db</code> in podman&#39;s storage; remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
 <h2 id="what-runs-where">What runs where<a class="anchor" href="#what-runs-where" aria-label="Link to this section"></a></h2>
 <p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>ein</code> is reached from other machines.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: ein with the web interface, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
   <title>What runs where</title>
   <defs>
     <marker id="admin-install-md-1-system-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -426,7 +426,7 @@ podman compose down
   <text x="276" y="116" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN</text>
   <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
-    <tspan x="248" y="182">The web interface</tspan>
+    <tspan x="248" y="182">The Web UI</tspan>
     <tspan x="248" y="216">The shell</tspan>
     <tspan x="248" y="250">SSH and SFTP</tspan>
     <tspan x="248" y="284">Pipelines</tspan>
@@ -490,7 +490,7 @@ podman compose down
 </thead>
 <tbody><tr>
 <td><code>ein</code></td>
-<td><code>ghcr.io/einhq/core</code>, ready-made with the web interface; built from the core sources as <code>localhost/ein-core</code> from any other source</td>
+<td><code>ghcr.io/einhq/core</code>, ready-made with the Web UI; built from the core sources as <code>localhost/ein-core</code> from any other source</td>
 <td>ports 8080 (web) and 2222 (SSH and SFTP) on the machine</td>
 <td><code>EIN_MEMORY</code>, <code>6g</code></td>
 <td>always</td>
@@ -692,7 +692,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
-<td>the ports on the machine for the web interface and for SSH and SFTP; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
+<td>the ports on the machine for the Web UI and for SSH and SFTP; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>

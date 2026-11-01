@@ -171,10 +171,10 @@ function commandIndex(commands: Command[], modules: string[]): string {
     '- `<target>` is something you give, `[...]` may be left out, and `...` may be given more than once.',
     '- `--name=<value>` takes a value after an equals sign, which a value starting with a minus needs (`--lng=-3.7`); `-x` is a short option.',
     '- _administrators only_ marks a command only the administrator may run; _visitors too_, one a visitor browsing without signing in may run.',
-    '- _answers JSON_ marks a command whose answer comes as JSON with `JSON_OUTPUT=1` in front of it, which is what the web interface reads.',
+    '- _answers JSON_ marks a command whose answer comes as JSON with `JSON_OUTPUT=1` in front of it, which is what the Web UI reads.',
     '',
     'A command of a family, such as `mod-install` or `user-passwd`, can be typed as two words where the family has a command of its own: `mod install archive`. ' +
-    'In the shell, `<command> --help` says the same as these pages, for what is installed there; the documentation page in the web interface has them too.',
+    'In the shell, `<command> --help` says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.',
     '',
   ];
   for (const module of modules) {
@@ -234,7 +234,7 @@ const KINDS: Record<string, [string, string]> = {
     'Set by the system',
     'What EiN exports for every shell at its start besides the folders: the built-in accounts, the host folders its storage is on, and the ports the deployment gave it.',
   ],
-  session: ['Set for each shell', 'Set by the server that opened the shell: the web interface, the terminal panel or SSH.'],
+  session: ['Set for each shell', 'Set by the server that opened the shell: the Web UI, the terminal panel or SSH.'],
   option: ['Options you set', 'Nobody sets these for you. Export one in a shell, or put it in front of a command, to change how commands behave there: `JSON_OUTPUT=1 ls`.'],
   pipeline: ['Set for a pipeline step', 'Set for each step of a pipeline by the change that started it.'],
 };

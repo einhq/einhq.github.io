@@ -1,12 +1,12 @@
 /**
- * What every page of the site has: the top bar, and the bands of hats laid as the web interface lays
+ * What every page of the site has: the top bar, and the bands of hats laid as the Web UI lays
  * them behind a page's header, with the hat tiling's helpers the presentation page's hero draws with
  * too. Everything works without it: the hats are decoration, and the bar is plain links.
  */
 import { COVERED, HAT_WIDTH, hats } from './hat-tiling.js';
 
 /**
- * EiN's `mixed` pattern, as its web interface tints the home page's header: node types' colours
+ * EiN's `mixed` pattern, as its Web UI tints the home page's header: node types' colours
  * (site.css) as stops across a field's width.
  */
 export const MIXED = [[0.05, 'album'], [0.25, 'person'], [0.45, 'place'], [0.62, 'track'], [0.8, 'device'], [0.98, 'label']];
@@ -42,7 +42,7 @@ export function paintOf(pattern, defs, width, id) {
 }
 
 /**
- * A tile's fill opacity, as the web interface tints a header: a little more at random, where the
+ * A tile's fill opacity, as the Web UI tints a header: a little more at random, where the
  * light falls (`light`, 0 to 1) and on the mirrored hats, and all of it less where `shade` darkens it.
  */
 export const tint = (tile, light, shade) => (0.09 + 0.05 * noise(tile.index, 3) + 0.1 * light + (tile.mirrored ? 0.1 : 0)) * shade;
@@ -89,7 +89,7 @@ export function svg(name, attributes, text) {
 }
 
 /**
- * A band of hats over `host`, as the web interface lays one behind a page's header, in the pattern
+ * A band of hats over `host`, as the Web UI lays one behind a page's header, in the pattern
  * its `data-band` names (`paintOf`): every tile filled and outlined, lit from the upper right and
  * darkening towards the foot, where the title stands. With `data-foot` it is the field under a
  * dialog's buttons instead: hats of the interface's 38 px, none darkened. Band `n` is cut from its own

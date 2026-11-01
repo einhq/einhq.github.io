@@ -2,11 +2,11 @@
 
 This page is for power users and administrators who use the Archive from the terminal. Each table row gives a task, a command line that does it, and a link to that command's full entry. The commands come with the Archive and are there once it is installed; [The Archive](index.md) says what it adds, and [Commands by task](../shell/commands.md) has core's commands and how to read the tables.
 
-EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. [Albums](albums.md), [People and faces](people.md) and the other guide pages show the same tasks in the web interface.
+EiN runs most of the analysis by itself after an upload; the commands here are for looking things up, changing them by hand, and doing one thing again. [Albums](albums.md), [People and faces](people.md) and the other guide pages show the same tasks in the Web UI.
 
 ## Search your pictures
 
-`search` is core's command, and what it finds in pictures, people, places and labels comes from the Archive. [Searching your pictures](search.md) covers the same in the web interface.
+`search` is core's command, and what it finds in pictures, people, places and labels comes from the Archive. [Searching your pictures](search.md) covers the same in the Web UI.
 
 | Task                                   | Command                                                                 | Reference                                                                                        |
 | -------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -59,7 +59,7 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | Say who took it                               | `file-set-photographer <file> /archive/people/helen-okafor`        | [file-set-photographer](commands.md#file-set-photographer)   |
 | The latest pictures taken                     | `latest 20`                                                        | [latest](commands.md#latest)                                 |
 
-A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510`; on its own it would be read as another option. Only `file-set-time` can give a picture a vague date such as `1968` or `1968-07`; the web interface's dialog sets full dates. [Dates and places of pictures](dates-places.md) explains which date a picture gets.
+A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510`; on its own it would be read as another option. Only `file-set-time` can give a picture a vague date such as `1968` or `1968-07`; the Web UI's dialog sets full dates. [Dates and places of pictures](dates-places.md) explains which date a picture gets.
 
 To have EiN look at one file again, run the step with `-f`:
 

@@ -6,14 +6,14 @@
     <title>EiN – Everything is a Node</title>
     <meta
       name="description"
-      content="EiN is a system you host yourself in which everything is a node in one tree: files, accounts, logs, queues and its own commands. A web interface, a bash-compatible shell and pipelines work on that tree, and modules decide what it is for, starting with an archive for a family's photos, videos, recordings and letters."
+      content="EiN is a system you host yourself in which everything is a node in one tree: files, accounts, logs, queues and its own commands. A Web UI, a bash-compatible shell and pipelines work on that tree, and modules decide what it is for, starting with an archive for a family's photos, videos, recordings and letters."
     >
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/">
     <meta property="og:title" content="EiN – Everything is a Node">
     <meta property="og:description"
-      content="One tree of nodes, a real shell, a web interface and pipelines, on your own machine. Its first module keeps a family's photos, videos, recordings and letters.">
+      content="One tree of nodes, a real shell, a Web UI and pipelines, on your own machine. Its first module keeps a family's photos, videos, recordings and letters.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -101,7 +101,7 @@
           <div class="installs">
             <div class="install-choice install-core">
               <h3><span class="mark" aria-hidden="true"></span>EiN Core</h3>
-              <p>EiN and its database: the tree, the web interface, the shell, SSH and SFTP. Add the rest when you want it.</p>
+              <p>EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. Add the rest when you want it.</p>
               <div class="install">
                 <pre class="term term-command"
                   tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span></span></code></pre>
@@ -265,7 +265,7 @@
           <div class="intro">
             <h2 id="shell-title">A real shell</h2>
             <p>
-              At EiN's heart is a bash-compatible shell with more than 200 commands, and each module adds its own. The web interface, its terminal and SSH all run these commands;
+              At EiN's heart is a bash-compatible shell with more than 200 commands, and each module adds its own. The Web UI, its terminal and SSH all run these commands;
               SFTP moves files under the same permissions.
             </p>
           </div>
@@ -281,7 +281,7 @@
             </div>
             <ul class="points shell-points">
               <li>
-                Each page of the web interface gets what it shows by running commands, answering in JSON. Anything you can click you can script, and what you may not see in
+                Each page of the Web UI gets what it shows by running commands, answering in JSON. Anything you can click you can script, and what you may not see in
                 the shell you cannot see in the browser either.
               </li>
               <li>Jobs, pipes and signals work as in bash, and a bash script that declares its arguments becomes a command with <code>--help</code> and Tab completion.</li>
@@ -374,7 +374,7 @@
           <div class="intro">
             <h2 id="modules-title">Extend with modules</h2>
             <p>
-              Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the frame of the web interface. What EiN is for comes from modules: a
+              Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the frame of the Web UI. What EiN is for comes from modules: a
               module is a folder with a manifest, and brings commands, pipelines, services, pages, settings and node types.
             </p>
           </div>

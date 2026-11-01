@@ -70,7 +70,7 @@
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html" aria-current="page">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li></ul></section>
-<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the web interface</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
 <p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
@@ -169,7 +169,7 @@ Archive, a photo holds:</p>
 </tr>
 <tr>
 <td><code>thumbnails/</code></td>
-<td>The sizes the web interface shows, and for a video or recording the versions a browser plays</td>
+<td>The sizes the Web UI shows, and for a video or recording the versions a browser plays</td>
 </tr>
 <tr>
 <td><code>regions/</code></td>
@@ -289,7 +289,7 @@ folder, here <code>~/ein/data/files/1C/01JFX7Q2M8K4T6V9B3N5R0WD1C</code>. A file
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>Leave the folders in the data folder to EiN. A file changed there by hand no longer matches the
 size and checksum its node records, and a file deleted there leaves a node whose content is
-gone. Copy files in through the web interface, SFTP or the terminal instead.</p>
+gone. Copy files in through the Web UI, SFTP or the terminal instead.</p>
 </aside>
 <p>The data folder and the database belong together: the folders hold bytes named by ids, and only
 the database knows which id is which photo, in which album, owned by whom. Neither is any use
@@ -361,7 +361,7 @@ your permissions the same way.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td>An upload in the web interface</td>
+<td>An upload in the Web UI</td>
 <td>Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as <code>IMG_0001 (2).jpg</code>, then <code>IMG_0001 (3).jpg</code>, and so on. A picture, video or recording is <a href="#frozen-files">frozen</a> once it has arrived. With the Archive, <a href="../archive/importing.html">Getting your photos in</a> has the ways to upload.</td>
 </tr>
 <tr>
@@ -377,7 +377,7 @@ your permissions the same way.</p>
 <td>Written by the command, in EiN&#39;s terminal or over SSH. <code>unzip</code> refuses an archive whose files would not leave a tenth of their size free.</td>
 </tr>
 <tr>
-<td><strong>Download</strong> in the web interface</td>
+<td><strong>Download</strong> in the Web UI</td>
 <td>The original&#39;s bytes, exactly as they were uploaded.</td>
 </tr>
 <tr>
@@ -394,7 +394,7 @@ else about the file can still change: its name and folder, its attributes, what 
 it, and it can be deleted.</p>
 <p>What is frozen:</p>
 <ul>
-<li><strong>An upload</strong> in the web interface, with <code>POST</code> or <code>PUT</code> on <code>/file/…</code>, or over SFTP, <code>scp</code> and
+<li><strong>An upload</strong> in the Web UI, with <code>POST</code> or <code>PUT</code> on <code>/file/…</code>, or over SFTP, <code>scp</code> and
 sshfs, whose type <code>/etc/frozen-uploads</code> lists. As EiN comes, that is every picture, video and
 recording except an SVG; text, documents, scripts and settings files stay writable. The file is
 frozen once the whole of it has arrived, so an upload that stopped part-way can be sent again.</li>
@@ -468,7 +468,7 @@ longer than <strong>Days in the trash</strong>,
 administrator changes it. <code>rm</code>, a file removed over SFTP and <strong>Empty trash</strong> do not wait; what they
 delete is gone at once. <a href="links.html#deleting-the-trash-and-links">Links</a> explains what deleting does to
 the links to a file, and <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> shows the
-trash in the web interface.</p>
+trash in the Web UI.</p>
 <h2 id="mounts-parts-of-the-tree-kept-elsewhere">Mounts: parts of the tree kept elsewhere<a class="anchor" href="#mounts-parts-of-the-tree-kept-elsewhere" aria-label="Link to this section"></a></h2>
 <p>Most of the tree is stored in PostgreSQL, with its files&#39; bytes on the tiers above. A few parts of
 it are kept elsewhere, each mounted at a path the way a disk is mounted on Linux. <code>mount</code> with no

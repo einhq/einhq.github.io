@@ -1,6 +1,6 @@
 # Finding your way around
 
-This page shows the parts of EiN's web interface and what each one does: the top bar, the sidebar,
+This page shows the parts of EiN's Web UI and what each one does: the top bar, the sidebar,
 the headers of pages, and the dialogs and side panel that pages open in. It also covers signing in
 and out. It is for everyone who uses EiN in a browser.
 
@@ -79,7 +79,7 @@ and shows the sign-in page.
 Every page sits in the same frame: the top bar across the top, the sidebar down the left, the page
 itself in the middle, and the side drawer at the right when something is open in it.
 
-![A labelled outline of the web interface: the top bar with the EiN mark, search box, Random album, chat, Create, terminal and your picture; the sidebar with its sections and the collapse button; a page header with title, tabs and actions; the page; and the side drawer with the chat](../diagrams/frame.svg "The frame stays the same on every page; only the page in the middle changes.")
+![A labelled outline of the Web UI: the top bar with the EiN mark, search box, Random album, chat, Create, terminal and your picture; the sidebar with its sections and the collapse button; a page header with title, tabs and actions; the page; and the side drawer with the chat](../diagrams/frame.svg "The frame stays the same on every page; only the page in the middle changes.")
 
 ![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the archive and assistant modules installed.")
 
@@ -231,7 +231,7 @@ under it, and often counts.
   <kbd>⋮</kbd> too. Actions that change something are offered only on what you may change.
 - **Tabs** sit along the header's foot, such as **Media**, **Map** and **Info** on the Archive's
   album pages. The chosen tab is part of the page's address (`?tab=`), so a link can open a given
-  tab; see [Addresses in the web interface](../reference/routes.md).
+  tab; see [Addresses in the Web UI](../reference/routes.md).
 - **Scrolled down**, the header's last row, its tabs or filters, stays in view under the top bar,
   with <kbd>⋮</kbd> holding every action of the page. On a wide screen the page's name appears at
   that row's left.
@@ -315,4 +315,4 @@ knows, by area, is in [Keyboard shortcuts](../reference/shortcuts.md).
 - [Your sidebar and top bar](customizing.md): rename, hide and add entries.
 - [EiN on a phone](phone.md): the menu behind the mark, swiping and adding EiN to the home screen.
 - [Your profile, favourites and trash](profile.md): your own pages from the account menu.
-- [Addresses in the web interface](../reference/routes.md): every page's address, for links.
+- [Addresses in the Web UI](../reference/routes.md): every page's address, for links.

@@ -300,7 +300,7 @@ Favourite, or press the heart in the lightbox.", with a button **Open Media**.
 
 ## The trash
 
-When you delete something in the web interface, such as with the Archive a picture, an album or a
+When you delete something in the Web UI, such as with the Archive a picture, an album or a
 person, it goes to your trash first. You can restore it from there for 30 days, unless your
 administrator chose another number; the few ways of deleting that skip the trash are listed below.
 Only you see your trash, apart from an administrator, who can see everyone's.

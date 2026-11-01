@@ -30,7 +30,7 @@ it means a softlink.
 ## Softlinks
 
 A softlink stores a path, nothing else. Opening it opens the node at that path: `ls`, `cat`, `cd`
-and the web interface all go through to the target, as they do on Unix. If the target has links of
+and the Web UI all go through to the target, as they do on Unix. If the target has links of
 its own on the way, those are followed too, up to 40 in a row; past that EiN stops with
 `too many levels of symbolic links`.
 
@@ -45,7 +45,7 @@ from the start.
 
 ### Where EiN makes softlinks for you
 
-You make most links without typing `ln`: a button in the web interface or a command writes them.
+You make most links without typing `ln`: a button in the Web UI or a command writes them.
 
 | What you do                                                          | The link it makes                                                                          |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -111,7 +111,7 @@ Each node counts its names. The count is the third column of `ls -l`, and **Link
 lowers the count, and the node itself is deleted only when its last name goes. `rm -r` on a folder
 that still has another name removes only that name and leaves everything in it.
 
-EiN makes no hard links of its own, and the web interface has no way to make one. `ln` refuses one
+EiN makes no hard links of its own, and the Web UI has no way to make one. `ln` refuses one
 between two different stores, for example into a [mounted](../shell/remote.md) folder of another
 machine, with `cannot link across different VFS backends`, and SFTP has no hard links.
 

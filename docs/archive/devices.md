@@ -280,7 +280,7 @@ that took only videos, such as a camcorder, gets the poster frame of its newest 
 video has been processed; recordings are never used. The card of a device with no pictures shows
 a placeholder with its initials.
 
-The web interface has no button to choose a device's cover. In the terminal you can link a picture
+The Web UI has no button to choose a device's cover. In the terminal you can link a picture
 as the device's `coverPhoto` yourself, and a cover chosen this way is kept. In the demo, Ruby's
 iPhone is the folder `/archive/devices/ruby-iphone`:
 

@@ -15,9 +15,9 @@ share-link [--expires=<string>] [--never] [--session] <subcommand> <target>
 - `<target>` is something you give, `[...]` may be left out, and `...` may be given more than once.
 - `--name=<value>` takes a value after an equals sign, which a value starting with a minus needs (`--lng=-3.7`); `-x` is a short option.
 - _administrators only_ marks a command only the administrator may run; _visitors too_, one a visitor browsing without signing in may run.
-- _answers JSON_ marks a command whose answer comes as JSON with `JSON_OUTPUT=1` in front of it, which is what the web interface reads.
+- _answers JSON_ marks a command whose answer comes as JSON with `JSON_OUTPUT=1` in front of it, which is what the Web UI reads.
 
-A command of a family, such as `mod-install` or `user-passwd`, can be typed as two words where the family has a command of its own: `mod install archive`. In the shell, `<command> --help` says the same as these pages, for what is installed there; the documentation page in the web interface has them too.
+A command of a family, such as `mod-install` or `user-passwd`, can be typed as two words where the family has a command of its own: `mod install archive`. In the shell, `<command> --help` says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.
 
 ## Core
 

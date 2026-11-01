@@ -196,7 +196,7 @@ In the terminal panel, press <kbd>Alt</kbd>+<kbd>M</kbd> first to give it the wh
 
 ## Check from another computer
 
-EiN sends no e-mail and raises no alert outside itself: the dashboard and `health` are where problems show. To look without opening the web interface, send `health` over SSH:
+EiN sends no e-mail and raises no alert outside itself: the dashboard and `health` are where problems show. To look without opening the Web UI, send `health` over SSH:
 
 ```bash
 # on your own computer

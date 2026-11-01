@@ -1,7 +1,7 @@
 # SSH and SFTP
 
 EiN runs its own SSH server, so you can reach it from your own computer: log in to the same shell as
-the terminal in the web interface, run one command from a script, and copy files in and out with SFTP,
+the terminal in the Web UI, run one command from a script, and copy files in and out with SFTP,
 `scp` or a graphical file manager. This page is for anyone with an EiN account who wants to work from
 their own machine; going the other way, from EiN out to a NAS or another server, is on
 [Reaching other machines](remote.md).
@@ -13,7 +13,7 @@ their own machine; going the other way, from EiN out to a NAS or another server,
 | The host     | `ein.local`   | The name or address of the machine EiN runs on, the same one you open in the browser. |
 | The SSH port | `2222`        | `2222` unless your administrator chose another.                                       |
 | Your account | `helen`       | Your EiN username. Your e-mail address works too, where your account has one.         |
-| Your secret  | your password | The password you sign in to the web interface with, or a key once you have added one. |
+| Your secret  | your password | The password you sign in to the Web UI with, or a key once you have added one.        |
 
 SSH and SFTP share the one port. With the standard install it is set by `EIN_SSH_PORT` in `.env` on
 the machine EiN runs on; [Ports, HTTPS and remote access](../admin/network.md) explains how to change
@@ -162,8 +162,8 @@ scp -P 2222 -r helen@ein.local:/archive/albums/cornwall-1968 .
 `scp` from OpenSSH 9.0 and later copies over SFTP, which EiN serves. An older `scp` uses a different
 protocol that EiN does not speak; with OpenSSH 8.7 or 8.8 add `-s`, and with anything older use `sftp`.
 
-What you may see and change is decided by the same [permissions](../admin/permissions.md) as in the web
-interface: a folder you cannot open in the browser cannot be opened over SFTP either.
+What you may see and change is decided by the same [permissions](../admin/permissions.md) as in the Web
+UI: a folder you cannot open in the browser cannot be opened over SFTP either.
 
 ### Bring in a large batch of photos
 
@@ -205,7 +205,7 @@ what it points to. A recursive copy therefore copies the link, not what lies beh
 
 > [!WARNING]
 > Removing a file over SFTP deletes it for good, with everything that belongs to it. It does not go to
-> your trash, as deleting in the web interface does. Removing a folder works only once it is empty.
+> your trash, as deleting in the Web UI does. Removing a folder works only once it is empty.
 
 ## Mount EiN as a folder
 

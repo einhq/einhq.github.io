@@ -1,6 +1,6 @@
 # The terminal
 
-The terminal is a command line inside EiN's web interface: a shell that works on the same tree of
+The terminal is a command line inside EiN's Web UI: a shell that works on the same tree of
 nodes that the pages show, with the same commands and the same permissions. This
 page is for anyone who signs in and wants to use it: how to open it, work in tabs, move around with
 the keyboard, find earlier commands, get help, and find the command you need.
@@ -180,7 +180,7 @@ Only the terminal in the browser draws pictures. Over SSH, `cat` prints marker l
 
 > [!NOTE]
 > A picture whose path holds a space or a colon, such as one in `/archive/albums/Summer 2020`, is
-> not drawn: the terminal shows its `__IMG:` lines instead. Open it in the web interface.
+> not drawn: the terminal shows its `__IMG:` lines instead. Open it in the Web UI.
 
 ## Edit the command line
 
@@ -460,7 +460,7 @@ administrators. Through every interface it is refused the same way; ask your adm
 Write `du -sh` or `du -ch`.
 
 **`cat` prints lines starting `__IMG:` instead of the picture.** You are connected over SSH, or the
-picture's path holds a space or a colon. Open the picture in the web interface.
+picture's path holds a space or a colon. Open the picture in the Web UI.
 
 **Dropped files landed in the wrong folder.** They go into the folder the tab is in, the path on the
 tab. `cd` to where they belong and drop them again, or move them with `mv`.

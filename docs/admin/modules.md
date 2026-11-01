@@ -7,7 +7,7 @@ to keep one to some groups, how to see whether each one works, and what to do wh
 
 ## The modules there are
 
-EiN without modules is the tree, the shell, accounts and the frame of the web interface. Every
+EiN without modules is the tree, the shell, accounts and the frame of the Web UI. Every
 page for photos, people and places, the chat, and the work done on what you upload comes from a
 module. [How EiN works](../start/how-ein-works.md#modules-decide-what-ein-is-for) explains what a
 module is made of. Each module has a section of its own in this documentation, under **Modules**;

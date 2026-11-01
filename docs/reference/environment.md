@@ -57,7 +57,7 @@ Where the tree keeps each kind of thing, exported for every shell, so `cd $LOGS_
 | `MOD_INSTALL_PATH` |  | The modules `mod install` installed, each linked into /usr/modules. |
 | `USR_PATH` |  | Code and read-only payload. |
 | `BIN_PATH` |  | Built-in commands. |
-| `LIB_PATH` |  | Core's other files: its shell commands, its services and the web interface. |
+| `LIB_PATH` |  | Core's other files: its shell commands, its services and the Web UI. |
 | `MOD_PATH` |  | Installed modules. |
 | `DOCS_PATH` |  | This documentation. |
 | `TEMP_PATH` |  | Temporary nodes. |
@@ -81,7 +81,7 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 | `GUEST_GID` |  | Its group's id. |
 | `USERS_GROUPNAME` |  | The group every account belongs to: what "everyone" means when sharing. |
 | `USERS_GID` |  | Its id. |
-| `CFG_HTTP_PORT` | `8080` | The port the web interface listens on, as the deployment set it, which the http-server service reads at its start. In the installer's container it is always 8080: the machine publishes EIN_HTTP_PORT from .env onto it. It is not a setting, since only the deployment knows which port reaches it. |
+| `CFG_HTTP_PORT` | `8080` | The port the Web UI listens on, as the deployment set it, which the http-server service reads at its start. In the installer's container it is always 8080: the machine publishes EIN_HTTP_PORT from .env onto it. It is not a setting, since only the deployment knows which port reaches it. |
 | `CFG_SSH_PORT` | `2222` | The port the SSH and SFTP server listens on, as the deployment set it, which the ssh-server service reads at its start. In the installer's container it is always 2222: the machine publishes EIN_SSH_PORT from .env onto it. |
 | `EIN_PATH_EXPORTS` |  | The layout variables as export lines, written into /etc/layout at boot. |
 | `EIN_FILE_ROOT_PATH` |  | Where file content is stored on the host, as FILE_ROOT_PATH gave it: what the dashboard reports disk use for. |
@@ -96,7 +96,7 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 
 ## Set for each shell
 
-Set by the server that opened the shell: the web interface, the terminal panel or SSH.
+Set by the server that opened the shell: the Web UI, the terminal panel or SSH.
 
 | Variable | Default | What it is |
 | --- | --- | --- |
@@ -121,7 +121,7 @@ Nobody sets these for you. Export one in a shell, or put it in front of a comman
 
 | Variable | Default | What it is |
 | --- | --- | --- |
-| `JSON_OUTPUT` |  | Set to 1 and commands answer in JSON instead of text. The web interface runs every command this way. |
+| `JSON_OUTPUT` |  | Set to 1 and commands answer in JSON instead of text. The Web UI runs every command this way. |
 | `MEDIA_LINES` | `20` | How many text lines tall `cat` draws a picture in a terminal. |
 | `SEARCH_TRACE` |  | Set to 1 and `search` reports how long each of its sources took. |
 | `CFG_PASSWORD_HASH_LOGN` | `16` | The scrypt work factor for new password hashes, as a power of two. Lowered by the test tier, where the passwords protect nothing; leave it unset anywhere else. |

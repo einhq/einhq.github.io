@@ -1,7 +1,7 @@
 # Nodes and node types
 
 Everything EiN keeps is a node: a photo, an album, a person, an account, a log, a command. This
-page takes one node apart, says what each part means and how to look at it in the web interface and
+page takes one node apart, says what each part means and how to look at it in the Web UI and
 the shell, and explains what a node's type decides. It is for anyone who wants to understand what
 they see in `ls -l`, in **Nodes** or in a node's **Properties**.
 
@@ -48,7 +48,7 @@ resolve-id 01JA7Q3M5X8R2C4V6B9N0P1T2W
 
 ## Look at a node
 
-### In the web interface
+### In the Web UI
 
 The **Nodes** page browses the whole tree. It is in the sidebar under **System**, for
 administrators.
@@ -190,7 +190,7 @@ attrs -d contact /archive/people/helen-okafor
 - `-d key` removes it.
 
 Each option may be given several times. The attributes you do not name are left as they are. The
-**Attributes** tab in **Properties** does the same from the web interface.
+**Attributes** tab in **Properties** does the same from the Web UI.
 
 > [!WARNING]
 > `attrs` writes what you give it without knowing what the type expects. A wrong value, such as a
@@ -272,7 +272,7 @@ The types fall into three groups:
 [Node types](../reference/node-types.md) describes every type of an EiN with all its modules. Your
 own installation lists what it has, with how many of each:
 
-- In the web interface, open **System → Documentation** and choose **Node types**. Each type shows
+- In the Web UI, open **System → Documentation** and choose **Node types**. Each type shows
   its label, its description, the module it comes from and how many are in the tree. A type that
   no installed module describes, perhaps left by a module since removed, is listed under **Also in
   the tree**.

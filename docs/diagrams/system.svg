@@ -34,7 +34,7 @@
   <text x="276" y="116" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN</text>
   <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
-    <tspan x="248" y="182">The web interface</tspan>
+    <tspan x="248" y="182">The Web UI</tspan>
     <tspan x="248" y="216">The shell</tspan>
     <tspan x="248" y="250">SSH and SFTP</tspan>
     <tspan x="248" y="284">Pipelines</tspan>

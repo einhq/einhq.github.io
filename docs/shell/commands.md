@@ -49,7 +49,7 @@ The tree works like a file system: paths start at `/`, `..` is the parent, and `
 
 ## Search and find
 
-`search` looks through what EiN knows about your content. It asks each installed module's search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive the words, what the pictures show, the people in them, dates and places; [Archive commands by task](../archive/tasks.md#search-your-pictures) has those searches. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the web interface.
+`search` looks through what EiN knows about your content. It asks each installed module's search, so what it finds comes from the modules: with no module it finds nothing, and with the Archive the words, what the pictures show, the people in them, dates and places; [Archive commands by task](../archive/tasks.md#search-your-pictures) has those searches. `find` walks the tree by name and type, as GNU find does. [Search and the finder](../guide/search.md) covers searching in the Web UI.
 
 | Task                               | Command                                                     | Reference                                            |
 | ---------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
@@ -118,7 +118,7 @@ A change of groups applies the next time that person signs in. To let someone us
 | Show a node's access list                          | `acl <path>`                                               | [acl](../reference/commands-core.md#acl)               |
 | Add or remove an access list entry                 | `acl -m u:anna:rx <path>`, `acl -x u:anna <path>`          | [acl](../reference/commands-core.md#acl)               |
 
-The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share link made with `share-link create` lasts 30 days unless you give `--expires` or `--never`. [Sharing](../guide/sharing.md) shows the Share dialog that does the same in the web interface.
+The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share link made with `share-link create` lasts 30 days unless you give `--expires` or `--never`. [Sharing](../guide/sharing.md) shows the Share dialog that does the same in the Web UI.
 
 ## Settings and modules
 

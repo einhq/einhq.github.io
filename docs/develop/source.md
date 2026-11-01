@@ -8,7 +8,7 @@ EiN is several repositories in the [einhq](https://github.com/einhq) organisatio
 
 | Repository                                                                                                   | What it is                                                                                                           | Language                                 |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| [core](https://github.com/einhq/core)                                                                        | EiN itself: the node tree, the shell, pipelines, the SSH server and the web interface                                | TypeScript on Deno, React in the browser |
+| [core](https://github.com/einhq/core)                                                                        | EiN itself: the node tree, the shell, pipelines, the SSH server and the Web UI                                       | TypeScript on Deno, React in the browser |
 | [module-archive](https://github.com/einhq/module-archive)                                                    | The [Archive](../archive/index.md) module: people, media, places, staging                                            | TypeScript                               |
 | [module-assistant](https://github.com/einhq/module-assistant)                                                | The [Assistant](../assistant/index.md) module: the chat that answers questions about the archive                     | TypeScript                               |
 | [module-album-folders](https://github.com/einhq/module-album-folders)                                        | The [Album folders](../album-folders/index.md) module: the albums as folders of real files on disk                   | TypeScript                               |
@@ -67,14 +67,14 @@ EiN creates the extensions it uses in its database, and updates them after a new
 
 ## Run core
 
-1. Build the web interface once:
+1. Build the Web UI once:
 
    ```bash
    # on your machine, in the core checkout
    deno task bundle-ui
    ```
 
-   This bundles the browser shell into `src/builtin/ui/ui/`, which git ignores. Without it EiN still starts, but it serves the terminal page instead of the web interface.
+   This bundles the browser shell into `src/builtin/ui/ui/`, which git ignores. Without it EiN still starts, but it serves the terminal page instead of the Web UI.
 
 2. Start EiN:
 
@@ -98,7 +98,7 @@ EiN creates the extensions it uses in its database, and updates them after a new
    ssh -p 2222 admin@localhost
    ```
 
-`deno task dev-w` runs the same with Deno's `--watch`, restarting EiN when a source file changes. `deno task bundle-ui-w` keeps the bundler watching the web interface's sources and rebuilds it on every change; reload the page to see it.
+`deno task dev-w` runs the same with Deno's `--watch`, restarting EiN when a source file changes. `deno task bundle-ui-w` keeps the bundler watching the Web UI's sources and rebuilds it on every change; reload the page to see it.
 
 A bare `deno task dev` keeps its files beside the checkout, and reads every other setting from its environment:
 
@@ -113,7 +113,7 @@ A bare `deno task dev` keeps its files beside the checkout, and reads every othe
 | `DOCS_PATH`               | `./guide`                               | The guide at `/usr/docs/guide`: the image's copy of this site, or a checkout of it. |
 | `LOG_LEVEL`               | `INFO`                                  | `DEBUG`, `INFO`, `WARN` or `ERROR`.                                                 |
 
-A setting can be given in the environment the same way, as `CFG_…`, and so can the ports, which are not settings: `CFG_HTTP_PORT=8090 deno task dev` moves the web interface to port 8090. [Environment variables](../reference/environment.md#set-by-the-deployment) has every variable, and [Settings](../reference/settings.md) every setting.
+A setting can be given in the environment the same way, as `CFG_…`, and so can the ports, which are not settings: `CFG_HTTP_PORT=8090 deno task dev` moves the Web UI to port 8090. [Environment variables](../reference/environment.md#set-by-the-deployment) has every variable, and [Settings](../reference/settings.md) every setting.
 
 ## Work on a module
 
@@ -184,11 +184,11 @@ Run these in the core checkout before you send a change:
 | `make test-pg`              | The same tests, plus the PostgreSQL tier, against the database at `POSTGRES_URL`. Those tests keep their tables under a prefix of their own.                                 |
 | `make container-test`       | Every module's end-to-end tests (`*.e2e.test.ts`) inside core's image, against the services the `ENV_FILE` points at. Build the image first.                                 |
 | `deno task test:one <file>` | One test file.                                                                                                                                                               |
-| `deno task check`           | Type-checks core, the module contract, the modules' commands and the web interface's pages.                                                                                  |
+| `deno task check`           | Type-checks core, the module contract, the modules' commands and the Web UI's pages.                                                                                         |
 | `deno task lint`            | `deno lint` over `src/` and `modules/`.                                                                                                                                      |
 | `deno fmt`                  | Formats the code as `deno.jsonc` says: 175 columns, two spaces, single quotes. `deno fmt --check` reports what it would change.                                              |
 
-The module contract is what modules may import from core: `@ein/client`, `@ein/api`, `@ein/paths` and the web interface's kit, `@ein/ui/*`. Its surface is kept as a snapshot in `src/client/contract.snapshot`, and a test fails when the surface changes. After a deliberate change, raise `MODULE_API_VERSION` in `src/modules/types.ts` and run `deno task contract:snapshot` to write the snapshot again.
+The module contract is what modules may import from core: `@ein/client`, `@ein/api`, `@ein/paths` and the Web UI's kit, `@ein/ui/*`. Its surface is kept as a snapshot in `src/client/contract.snapshot`, and a test fails when the surface changes. After a deliberate change, raise `MODULE_API_VERSION` in `src/modules/types.ts` and run `deno task contract:snapshot` to write the snapshot again.
 
 The commit history follows Conventional Commits, such as `fix(shell): …` or `feat(archive): …`. Write yours the same way.
 
@@ -211,7 +211,7 @@ make container-run ENV_FILE=ems.env
 make container-logs
 ```
 
-`make container-run` mounts the web interface from the checkout's `src/builtin/ui/ui/`, so bundle it first, and the checkout's `old/` at `/old`, so that folder must exist. It runs the container on the host's network, with these variables:
+`make container-run` mounts the Web UI from the checkout's `src/builtin/ui/ui/`, so bundle it first, and the checkout's `old/` at `/old`, so that folder must exist. It runs the container on the host's network, with these variables:
 
 | Variable                                                     | Default                                      | What it sets                                                                     |
 | ------------------------------------------------------------ | -------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -238,7 +238,7 @@ From `https://github.com/einhq`, `setup.sh` pulls the images `ghcr.io/einhq/core
 ## When something goes differently
 
 - **`deno task dev` stops at `Connecting to database...`.** PostgreSQL is not answering at `POSTGRES_URL`. Check that the container runs with `podman ps`, and run `bash ein-db/run.sh` again; it reports `postgres did not answer on port 5432` when the server does not come up.
-- **The browser shows a terminal instead of the web interface.** The web interface was not bundled when EiN started. Run `deno task bundle-ui` and restart EiN.
+- **The browser shows a terminal instead of the Web UI.** The Web UI was not bundled when EiN started. Run `deno task bundle-ui` and restart EiN.
 - **`make container-run` fails on a missing folder.** Create `old/` in the checkout, or set `OLD_PATH` to a folder that exists.
 - **A module's page shows the old version.** Run `ui-build <name>` in EiN's terminal, then reload the page.
 - **A test fails in `module-boundary.test.ts` after you edited a manifest.** The module's `deno.jsonc` no longer matches its `mod.json`. Run `deno task sync:modules`.

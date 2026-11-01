@@ -6,10 +6,10 @@ This page is for whoever runs EiN: which ports it listens on and how to change t
 
 EiN publishes two ports, on every address of the machine it runs on:
 
-| Port   | What answers                                   | Protocol   |
-| ------ | ---------------------------------------------- | ---------- |
-| `8080` | the web interface, its files and its WebSocket | plain HTTP |
-| `2222` | the SSH and SFTP server                        | SSH        |
+| Port   | What answers                            | Protocol   |
+| ------ | --------------------------------------- | ---------- |
+| `8080` | the Web UI, its files and its WebSocket | plain HTTP |
+| `2222` | the SSH and SFTP server                 | SSH        |
 
 These are the ports `setup.sh` picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
@@ -31,7 +31,7 @@ EIN_SSH_PORT=2222
 | Line            | What it decides                                                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `EIN_BIND`      | The address of the machine the two ports are published on. `0.0.0.0` is every address; `127.0.0.1` keeps them to the machine itself. |
-| `EIN_HTTP_PORT` | The port of the machine that reaches the web interface.                                                                              |
+| `EIN_HTTP_PORT` | The port of the machine that reaches the Web UI.                                                                                     |
 | `EIN_SSH_PORT`  | The port of the machine that reaches SSH and SFTP.                                                                                   |
 
 To change one:
@@ -189,11 +189,11 @@ Only the public proxy makes [share links](../guide/sharing.md#share-an-album-wit
 - **Change the admin password** if you have not: [Install EiN](../start/install.md#change-the-admin-password-straight-away) shows how. Give every account a password of its own; [Accounts and groups](accounts.md) covers them.
 - **Leave visitors out.** The setting **Visitors may browse** (`CFG_GUEST_BROWSING`, under **Settings → System**) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.
 - **Publish HTTPS only.** Forward only the proxy's ports, never 8080, which is plain HTTP.
-- **Decide about SSH.** Port 2222 is not needed for the web interface. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
+- **Decide about SSH.** Port 2222 is not needed for the Web UI. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
 
 ### How EiN slows down password guessing
 
-EiN counts failed sign-ins, in the web interface and over SSH alike, per client address and per account:
+EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address and per account:
 
 - After five failures from one address, that address is refused without its password being checked, with "too many failed sign-ins; try again in" and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.
 - After five failures at one account, each attempt at it waits, up to 10 seconds, but the account is never locked: someone guessing a password cannot lock its owner out.

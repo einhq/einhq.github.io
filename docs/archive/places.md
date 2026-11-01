@@ -58,7 +58,7 @@ yet, then its name, its address and one of these badges:
 | **from address**  | Its circle comes from looking up its address                                   |
 | **N suggestions** | The address lookup found candidates but was not sure; you pick one on its page |
 
-Click a card to open the location. A location has no cover photo to choose in the web interface;
+Click a card to open the location. A location has no cover photo to choose in the Web UI;
 its card shows the map.
 
 With no locations at all, the page says "No locations yet" and "Homes, churches, summer houses:
@@ -413,8 +413,8 @@ reload keeps it. These parts of the address are the map's:
 | `q`, `person`, `location`, `tag` | What the search box holds                                         |
 
 For example, `/map?c=50.244,-5.027&z=14&layers=media&from=1968&to=1975` shows the pictures taken
-around the cottage at Malpas from 1968 to 1975. Every address of the web interface is listed on
-[Addresses in the web interface](../reference/routes.md).
+around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is listed on
+[Addresses in the Web UI](../reference/routes.md).
 
 ## Where the maps and addresses come from
 

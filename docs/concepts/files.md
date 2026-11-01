@@ -54,13 +54,13 @@ JSON_OUTPUT=1 stat /archive/albums/christmas-2019/20191225_155434.jpg | jq '.att
 Any node can have children, and a file uses this to keep what EiN works out about it. With the
 Archive, a photo holds:
 
-| Child         | What it is                                                                                   |
-| ------------- | -------------------------------------------------------------------------------------------- |
-| `metadata/`   | What was read from the file, such as its EXIF in `metadata/exif` and the text read from it   |
-| `thumbnails/` | The sizes the web interface shows, and for a video or recording the versions a browser plays |
-| `regions/`    | The faces found on it and the boxes people drew                                              |
-| `position`    | Where it was taken, when that is known                                                       |
-| `comments/`   | The comments people wrote on it                                                              |
+| Child         | What it is                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| `metadata/`   | What was read from the file, such as its EXIF in `metadata/exif` and the text read from it |
+| `thumbnails/` | The sizes the Web UI shows, and for a video or recording the versions a browser plays      |
+| `regions/`    | The faces found on it and the boxes people drew                                            |
+| `position`    | Where it was taken, when that is known                                                     |
+| `comments/`   | The comments people wrote on it                                                            |
 
 These are nodes like any other, and many of them are files with bytes of their own. The original's
 bytes are never changed: when you turn a picture or correct its date, EiN changes what it keeps
@@ -149,7 +149,7 @@ folder, here `~/ein/data/files/1C/01JFX7Q2M8K4T6V9B3N5R0WD1C`. A file on the `db
 > [!WARNING]
 > Leave the folders in the data folder to EiN. A file changed there by hand no longer matches the
 > size and checksum its node records, and a file deleted there leaves a node whose content is
-> gone. Copy files in through the web interface, SFTP or the terminal instead.
+> gone. Copy files in through the Web UI, SFTP or the terminal instead.
 
 The data folder and the database belong together: the folders hold bytes named by ids, and only
 the database knows which id is which photo, in which album, owned by whom. Neither is any use
@@ -194,11 +194,11 @@ your permissions the same way.
 
 | Way                               | What happens to the bytes                                                                                                                                                                                                                                                                                                        |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| An upload in the web interface    | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. A picture, video or recording is [frozen](#frozen-files) once it has arrived. With the Archive, [Getting your photos in](../archive/importing.md) has the ways to upload. |
+| An upload in the Web UI           | Stored as a new file. An upload never replaces a file: when the name is taken, it is stored as `IMG_0001 (2).jpg`, then `IMG_0001 (3).jpg`, and so on. A picture, video or recording is [frozen](#frozen-files) once it has arrived. With the Archive, [Getting your photos in](../archive/importing.md) has the ways to upload. |
 | Saving in the editor              | Replaces the content of the file you opened. See [The editor](../shell/editor.md).                                                                                                                                                                                                                                               |
 | SFTP, `scp` and sshfs             | Written as on any SFTP server, and frozen as an upload is. See [SSH and SFTP](../shell/ssh-sftp.md).                                                                                                                                                                                                                             |
 | A shell redirect, `cp`, `unzip`   | Written by the command, in EiN's terminal or over SSH. `unzip` refuses an archive whose files would not leave a tenth of their size free.                                                                                                                                                                                        |
-| **Download** in the web interface | The original's bytes, exactly as they were uploaded.                                                                                                                                                                                                                                                                             |
+| **Download** in the Web UI        | The original's bytes, exactly as they were uploaded.                                                                                                                                                                                                                                                                             |
 | Downloading several files at once | One zip of at most 5000 files, made while it downloads. The files are stored in it, not compressed, since photos and videos are compressed already.                                                                                                                                                                              |
 
 ## Frozen files
@@ -211,7 +211,7 @@ it, and it can be deleted.
 
 What is frozen:
 
-- **An upload** in the web interface, with `POST` or `PUT` on `/file/…`, or over SFTP, `scp` and
+- **An upload** in the Web UI, with `POST` or `PUT` on `/file/…`, or over SFTP, `scp` and
   sshfs, whose type `/etc/frozen-uploads` lists. As EiN comes, that is every picture, video and
   recording except an SVG; text, documents, scripts and settings files stay writable. The file is
   frozen once the whole of it has arrived, so an upload that stopped part-way can be sent again.
@@ -271,7 +271,7 @@ longer than **Days in the trash**,
 administrator changes it. `rm`, a file removed over SFTP and **Empty trash** do not wait; what they
 delete is gone at once. [Links](links.md#deleting-the-trash-and-links) explains what deleting does to
 the links to a file, and [Your profile, favourites and trash](../guide/profile.md#the-trash) shows the
-trash in the web interface.
+trash in the Web UI.
 
 ## Mounts: parts of the tree kept elsewhere
 

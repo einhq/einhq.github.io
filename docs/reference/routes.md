@@ -1,6 +1,6 @@
-# Addresses in the web interface
+# Addresses in the Web UI
 
-Every page of EiN's web interface has an address of its own, and most of what a page shows, such
+Every page of EiN's Web UI has an address of its own, and most of what a page shows, such
 as the tab, the filters, the year or the part of the map, is written into that address. This page
 lists the addresses and their parameters, so you can bookmark a view, send someone a link to it,
 or type one in. It is for anyone who uses EiN in a browser, and for administrators who link to
@@ -213,9 +213,9 @@ You meet them in links to files, in scripts, and in a reverse proxy's configurat
 | `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
 | `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
 | `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                          |
-| `/__shell`                       |               | The connection the web interface talks to EiN over; a proxy must pass it on as a WebSocket                    |
+| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                           |
 
-Any other path that is not a file of the web interface returns the interface itself, which then
+Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
 gets `sign in first` from `/file/` and `/archive/`.
 
