@@ -287,8 +287,9 @@ that recorded it; <strong>Choose device</strong> opens the page where you say wh
 <a href="devices.html#gpx-files-in-staging">GPX files in staging</a>). Another appears when a family tree (a GEDCOM file)
 waits; <strong>Review and import</strong> opens it (see
 <a href="family.html#look-over-a-family-tree-before-it-is-imported">Look over a family tree before it is imported</a>).
-The same boxes stand at the top of every category&#39;s page: a GPX or GEDCOM file uploaded into a
-category does not stay among its files but waits in the staging area, and the boxes say where. Last comes the folder to copy into over SFTP, for tens
+The boxes are on the overview only: a GPX or GEDCOM file uploaded into a category does not stay
+among its files but waits in the staging area, so a category&#39;s page, which is for media, does not
+show them. With only one category, its page stands in for the overview and shows them. Last comes the folder to copy into over SFTP, for tens
 of thousands of files; see <a href="../shell/ssh-sftp.html">SSH and SFTP</a> and
 <a href="staging-admin.html">Staging and importing for administrators</a>.</p>
 <h2 id="categories">Categories<a class="anchor" href="#categories" aria-label="Link to this section"></a></h2>
@@ -753,8 +754,7 @@ anything moves: &quot;You can&#39;t add to “Christmas 1975”.&quot;</p>
 pictures the way you do in an album (see <a href="albums.html">Albums</a>). With the arrow keys on a picture,
 <kbd>Space</kbd> selects it.</li>
 <li><kbd>Enter</kbd>, <kbd>N</kbd>, <kbd>P</kbd>, <kbd>A</kbd>, <kbd>B</kbd> and <kbd>X</kbd> act on
-those pictures alone; the line at the foot of the stream says so, for example &quot;New album of 12
-pictures&quot;. On a day matched to an album, <kbd>Enter</kbd> adds it there. Filing the matched days
+those pictures alone. On a day matched to an album, <kbd>Enter</kbd> adds it there. Filing the matched days
 and keeping the library copies are for the whole group, so on a day with no matched album, or
 on selected pictures, such a group has no proposal: <kbd>Enter</kbd> says &quot;No proposal: N, A, B
 or X.&quot;</li>
@@ -763,8 +763,9 @@ or X.&quot;</li>
 <p>With pictures selected, <strong>New group of N pictures</strong> under the open group makes them a group of
 their own instead.</p>
 <h3 id="candidates-and-compare">Candidates and compare<a class="anchor" href="#candidates-and-compare" aria-label="Link to this section"></a></h3>
-<p>On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream. It
-starts with &quot;Put it in&quot; and the group&#39;s name, then the proposal and its dots. Below them are up to
+<p>On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream:
+a side panel as tall as the window below the page&#39;s header, which stays put while the stream
+scrolls and scrolls by itself when it holds more than fits. It starts with &quot;Put it in&quot; and the group&#39;s name, then the proposal and its dots. Below them are up to
 three <strong>candidates</strong>: library albums the group may belong in, best first. Each shows its name, a
 percentage, its dates and size, and up to three reasons in words, such as &quot;within 40 min of its
 photos for 12 of 12&quot;, &quot;same places for 8 of 10 located photos&quot;, &quot;2 of 3 people appear in it&quot; or
@@ -782,7 +783,8 @@ back.</p>
 </ul>
 <p>Further down the column are <strong>New album</strong>, <strong>New private album</strong>, the target with &quot;⇧B chooses
 another&quot; (or <strong>Choose a target…</strong>), up to four recent albums, <strong>Add to album…</strong>, the ways to change
-the group, <strong>Later</strong> and <strong>Discard</strong> (&quot;To the trash, with Undo&quot;).</p>
+the group, <strong>Later</strong>, <strong>Discard</strong> (&quot;To the trash, with Undo&quot;) and, last, <strong>Keyboard shortcuts</strong>,
+which lists every key.</p>
 <h3 id="not-this-album">Not this album<a class="anchor" href="#not-this-album" aria-label="Link to this section"></a></h3>
 <p>When a candidate is wrong, press <kbd>R</kbd>, or click the ✕ (&quot;Not this album (R)&quot;) on the
 highlighted one. The message &quot;“Christmas 1975” is no longer offered for “Christmas Eve · 24 Dec
@@ -821,8 +823,9 @@ takes the whole run back.</p>
 <p>You can also drag selected pictures, or a group by the grip ⠿ in its header, onto a row of the
 column or onto another group&#39;s header. Each place says what the drop would do as you arrive.</p>
 <h2 id="keys-in-the-sort-tab">Keys in the Sort tab<a class="anchor" href="#keys-in-the-sort-tab" aria-label="Link to this section"></a></h2>
-<p>On a computer, the line at the foot of the stream shows the keys for where you are, each also a
-button; <strong>hide</strong> folds it to a <strong>Keys</strong> chip. <kbd>?</kbd> lists every key. Keys do nothing while
+<p>On a computer, <kbd>?</kbd>, or <strong>Keyboard shortcuts</strong> at the foot of the column, lists every key:
+under <strong>Staging</strong> those for a group, then those on a picture, on a day or month, with pictures
+selected and with groups selected. Keys do nothing while
 you type in a field or a dialog is open, and there are none on a phone. All the app&#39;s shortcuts
 are on <a href="../reference/shortcuts.html">Keyboard shortcuts</a>.</p>
 <p>On a group:</p>
@@ -1044,12 +1047,17 @@ the category; subfolders are cards with the number of entries in each.</p>
 <li><strong>Media</strong> shows every picture, video and recording in the folder and its subfolders, by day.
 Select pictures to use <strong>Add to album</strong>, <strong>Set time</strong>, and, when you may change them all, <strong>Set
 location</strong> and <strong>Label</strong>.</li>
-<li><strong>Folder</strong> lists every entry in the folder itself, whatever its type (a PDF, a sidecar file),
-200 at a time in name order, with <strong>Name</strong>, <strong>Kind</strong> and <strong>Size</strong>, a box to select each, and
-<strong>Show more</strong>.</li>
+<li><strong>Folder</strong> lists every entry of the folder, whatever its type (a PDF, a sidecar file), as the
+Nodes page does, filling the page below its header: details, list or icons, sorted by a click
+on a column&#39;s name, a folder opened in place with its arrow or gone into with a double click or
+<kbd>Enter</kbd>, and a panel beside it that previews the entry you are on. It stays within the
+category: <strong>Up</strong> stops at it and <strong>Home</strong> goes back to it. Select entries with a click,
+<kbd>Ctrl</kbd> or <kbd>Shift</kbd> and a click for more, or <kbd>Ctrl</kbd>+<kbd>A</kbd>; the
+top of the panel then offers <strong>Move to folder…</strong>, <strong>Move to category…</strong> and <strong>Discard…</strong> for
+them, and <kbd>Delete</kbd> discards them too.</li>
 </ul>
 <p>To move or discard a folder or files, use the ⋯ on a folder&#39;s card, the <strong>Actions</strong> button for
-the folder you are in, or <strong>Actions</strong> over a selection in <strong>Folder</strong>:</p>
+the folder you are in, or the panel beside a selection in <strong>Folder</strong>:</p>
 <ul>
 <li><strong>Move to folder…</strong> moves it to another folder of the same category.</li>
 <li><strong>Move to category…</strong> moves it into another category (offered when you have more than one). It

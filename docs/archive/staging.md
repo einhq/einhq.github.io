@@ -92,8 +92,9 @@ that recorded it; **Choose device** opens the page where you say which device it
 [GPX files in staging](devices.md#gpx-files-in-staging)). Another appears when a family tree (a GEDCOM file)
 waits; **Review and import** opens it (see
 [Look over a family tree before it is imported](family.md#look-over-a-family-tree-before-it-is-imported)).
-The same boxes stand at the top of every category's page: a GPX or GEDCOM file uploaded into a
-category does not stay among its files but waits in the staging area, and the boxes say where. Last comes the folder to copy into over SFTP, for tens
+The boxes are on the overview only: a GPX or GEDCOM file uploaded into a category does not stay
+among its files but waits in the staging area, so a category's page, which is for media, does not
+show them. With only one category, its page stands in for the overview and shows them. Last comes the folder to copy into over SFTP, for tens
 of thousands of files; see [SSH and SFTP](../shell/ssh-sftp.md) and
 [Staging and importing for administrators](staging-admin.md).
 
@@ -337,8 +338,7 @@ You do not have to file a group whole.
    pictures the way you do in an album (see [Albums](albums.md)). With the arrow keys on a picture,
    <kbd>Space</kbd> selects it.
 2. <kbd>Enter</kbd>, <kbd>N</kbd>, <kbd>P</kbd>, <kbd>A</kbd>, <kbd>B</kbd> and <kbd>X</kbd> act on
-   those pictures alone; the line at the foot of the stream says so, for example "New album of 12
-   pictures". On a day matched to an album, <kbd>Enter</kbd> adds it there. Filing the matched days
+   those pictures alone. On a day matched to an album, <kbd>Enter</kbd> adds it there. Filing the matched days
    and keeping the library copies are for the whole group, so on a day with no matched album, or
    on selected pictures, such a group has no proposal: <kbd>Enter</kbd> says "No proposal: N, A, B
    or X."
@@ -349,8 +349,9 @@ their own instead.
 
 ### Candidates and compare
 
-On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream. It
-starts with "Put it in" and the group's name, then the proposal and its dots. Below them are up to
+On a computer, when the Sort tab is at least 1,100 pixels wide, a column stands beside the stream:
+a side panel as tall as the window below the page's header, which stays put while the stream
+scrolls and scrolls by itself when it holds more than fits. It starts with "Put it in" and the group's name, then the proposal and its dots. Below them are up to
 three **candidates**: library albums the group may belong in, best first. Each shows its name, a
 percentage, its dates and size, and up to three reasons in words, such as "within 40 min of its
 photos for 12 of 12", "same places for 8 of 10 located photos", "2 of 3 people appear in it" or
@@ -369,7 +370,8 @@ back.
 
 Further down the column are **New album**, **New private album**, the target with "⇧B chooses
 another" (or **Choose a target…**), up to four recent albums, **Add to album…**, the ways to change
-the group, **Later** and **Discard** ("To the trash, with Undo").
+the group, **Later**, **Discard** ("To the trash, with Undo") and, last, **Keyboard shortcuts**,
+which lists every key.
 
 ### Not this album
 
@@ -415,8 +417,9 @@ column or onto another group's header. Each place says what the drop would do as
 
 ## Keys in the Sort tab
 
-On a computer, the line at the foot of the stream shows the keys for where you are, each also a
-button; **hide** folds it to a **Keys** chip. <kbd>?</kbd> lists every key. Keys do nothing while
+On a computer, <kbd>?</kbd>, or **Keyboard shortcuts** at the foot of the column, lists every key:
+under **Staging** those for a group, then those on a picture, on a day or month, with pictures
+selected and with groups selected. Keys do nothing while
 you type in a field or a dialog is open, and there are none on a phone. All the app's shortcuts
 are on [Keyboard shortcuts](../reference/shortcuts.md).
 
@@ -515,12 +518,17 @@ the category; subfolders are cards with the number of entries in each.
 - **Media** shows every picture, video and recording in the folder and its subfolders, by day.
   Select pictures to use **Add to album**, **Set time**, and, when you may change them all, **Set
   location** and **Label**.
-- **Folder** lists every entry in the folder itself, whatever its type (a PDF, a sidecar file),
-  200 at a time in name order, with **Name**, **Kind** and **Size**, a box to select each, and
-  **Show more**.
+- **Folder** lists every entry of the folder, whatever its type (a PDF, a sidecar file), as the
+  Nodes page does, filling the page below its header: details, list or icons, sorted by a click
+  on a column's name, a folder opened in place with its arrow or gone into with a double click or
+  <kbd>Enter</kbd>, and a panel beside it that previews the entry you are on. It stays within the
+  category: **Up** stops at it and **Home** goes back to it. Select entries with a click,
+  <kbd>Ctrl</kbd> or <kbd>Shift</kbd> and a click for more, or <kbd>Ctrl</kbd>+<kbd>A</kbd>; the
+  top of the panel then offers **Move to folder…**, **Move to category…** and **Discard…** for
+  them, and <kbd>Delete</kbd> discards them too.
 
 To move or discard a folder or files, use the ⋯ on a folder's card, the **Actions** button for
-the folder you are in, or **Actions** over a selection in **Folder**:
+the folder you are in, or the panel beside a selection in **Folder**:
 
 - **Move to folder…** moves it to another folder of the same category.
 - **Move to category…** moves it into another category (offered when you have more than one). It

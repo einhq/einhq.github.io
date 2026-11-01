@@ -365,8 +365,8 @@ to choose its device, as below.
 When a file names no registered device, or more than one, it waits for you:
 
 1. Open **Staging** in the sidebar. A yellow box titled **Needs you** says "1 GPS track waits for the
-   device that recorded it." (or how many). The box is on the overview and at the top of every
-   category's page, whichever category the file was dropped on.
+   device that recorded it." (or how many), whichever category the file was dropped on. The box is
+   on the overview, not on a category's page.
 2. Click **Choose device**. The page **Routes waiting for a device** opens, with your staging
    area's `routes` folder listed below its header as on the Nodes page, and a panel beside it.
 3. Click a file to see in the panel what it says about itself: its **Name** and **Description**,

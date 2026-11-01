@@ -266,8 +266,8 @@ On **Home**, while **On this day** plays as a story ([Memories, news and events 
 
 ### Staging: the Sort tab
 
-On a computer, the line at the foot of the stream shows the keys for where you are; **hide** folds
-it to a **Keys** chip. The keys do nothing while you type in a field or a dialog is open, and there
+On a computer, <kbd>?</kbd>, or **Keyboard shortcuts** at the foot of the column beside the
+stream, lists them under **Staging**, a section for each place the cursor can be. The keys do nothing while you type in a field or a dialog is open, and there
 are none on a phone. [Sorting in staging](../archive/staging.md#keys-in-the-sort-tab) explains what
 each does to a group.
 

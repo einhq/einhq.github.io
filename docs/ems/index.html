@@ -275,9 +275,9 @@ what the image carries, all of it used by the Archive:</p>
 </tr>
 <tr>
 <td>Video and audio: renditions, stills, waveforms</td>
-<td><a href="https://github.com/BtbN/FFmpeg-Builds#package-list">FFmpeg</a> 9.0, BtbN&#39;s <code>gpl</code> build</td>
-<td>GPL-3.0, as built</td>
-<td>Debian&#39;s own FFmpeg is in the image too</td>
+<td><a href="https://github.com/BtbN/FFmpeg-Builds#package-list">FFmpeg</a> 9.0, BtbN&#39;s <code>lgpl</code> build</td>
+<td>LGPL-3.0, as built</td>
+<td></td>
 </tr>
 <tr>
 <td>Pictures: turning, sizes, AVIF</td>
@@ -299,9 +299,9 @@ what the image carries, all of it used by the Archive:</p>
 </tr>
 <tr>
 <td>Pictures for the models, HEIC included</td>
-<td><a href="https://github.com/python-pillow/Pillow/blob/main/LICENSE">Pillow</a> and <a href="https://github.com/bigcat88/pillow_heif#readme">pillow-heif</a></td>
+<td><a href="https://github.com/python-pillow/Pillow/blob/main/LICENSE">Pillow</a> and <a href="https://github.com/bigcat88/pillow_heif#readme">pi-heif</a>, pillow-heif without its encoders</td>
 <td>MIT-CMU; BSD-3-Clause</td>
-<td>pillow-heif&#39;s binary wheels are GPL-2.0, as they bundle x265</td>
+<td>Its wheels bundle libheif and libde265, both LGPL-3.0</td>
 </tr>
 <tr>
 <td>Text of PDF files</td>
@@ -332,6 +332,11 @@ from published ones: the Finnish handwriting recogniser&#39;s character list, an
 the format transformers reads. The image&#39;s <code>/usr/share/doc/ein-ems/NOTICE.md</code> points
 to this page, names the models under Creative Commons and Apache-2.0, links the Creative Commons
 licences and holds the text of Apache-2.0.</p>
+<p>None of EMS&#39;s own tools is under the GPL: it encodes AV1 only, so its FFmpeg and its HEIC reader
+are builds without the GPL encoders x264 and x265. Two parts of the image carry GPL code all the
+same: Debian&#39;s packages, among them the FFmpeg libraries, x264 and x265 that Chromaprint&#39;s <code>fpcalc</code>
+links, and PyAV, whose wheel bundles FFmpeg with x264 and x265 and which faster-whisper decodes
+audio with. <code>NOTICE.md</code> names each of them, its version and where its source is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
 <p>Three features rest on models whose terms allow no commercial use:</p>
 <ul>
