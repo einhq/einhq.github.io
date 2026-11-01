@@ -20,6 +20,8 @@ The work is done by the [media service](../ems/index.md) on your own machine; no
 
 Faces are found in the pictures waiting in your [staging area](staging.md) too, before you file them into albums.
 
+When an update of the media service brings other face models, EiN looks for the faces in every picture and video again by itself, after the new pictures waiting for theirs. Each face it finds again keeps the person it had, and a face a person named that the new models no longer find stays as a box with its name. Until a picture has had its turn, its faces keep their names but are not compared with any others, since two models' fingerprints of a face cannot be compared.
+
 ## The People page
 
 Open **People** in the sidebar, under **Browse**.

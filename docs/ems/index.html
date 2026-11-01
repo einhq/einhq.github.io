@@ -185,9 +185,15 @@ what the image carries, all of it used by the Archive:</p>
 </thead>
 <tbody><tr>
 <td>Faces in pictures and videos</td>
-<td><a href="https://github.com/deepinsight/insightface/tree/master/python-package">InsightFace</a> <code>buffalo_l</code></td>
-<td><a href="https://opensource.org/license/mit">MIT</a> / <a href="https://github.com/deepinsight/insightface/tree/master/python-package#license">non-commercial research only</a></td>
-<td><strong>Non-commercial</strong></td>
+<td><a href="https://github.com/yakhyo/retinaface-pytorch">RetinaFace</a> ResNet-34, its v0.0.1 release</td>
+<td><a href="https://opensource.org/license/mit">MIT</a> / <a href="https://opensource.org/license/mit">MIT</a></td>
+<td>Head pose is read from its five points</td>
+</tr>
+<tr>
+<td>A fingerprint per face, to tie it to a person</td>
+<td>Alibaba DAMO&#39;s <a href="https://www.modelscope.cn/models/iic/cv_vit_face-recognition">TransFace</a> at tag <code>v1.2</code></td>
+<td>— / <a href="https://opensource.org/license/mit">MIT</a></td>
+<td></td>
 </tr>
 <tr>
 <td>Transcripts</td>
@@ -339,22 +345,18 @@ same: Debian&#39;s packages, among them the FFmpeg libraries, x264 and x265 that
 links, and PyAV, whose wheel bundles FFmpeg with x264 and x265 and which faster-whisper decodes
 audio with. <code>NOTICE.md</code> names each of them, its version and where its source is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
-<p>Two features rest on models whose terms allow no commercial use:</p>
-<ul>
-<li><strong>Faces</strong>, in pictures and in videos, and with them the face seen speaking, since LR-ASD reads
-the faces InsightFace finds: InsightFace&#39;s models are for non-commercial research only.</li>
-<li><strong>Finding text by meaning</strong>, in transcripts, read text and documents, and the assistant&#39;s
-command search: jina-embeddings-v5-text-small is under CC BY-NC 4.0.</li>
-</ul>
-<p>No setting turns one of these features off, in EiN or in the media service: with the media service
-there, the Archive asks it for all of them. The one way to go without them is to go without the
+<p>One feature rests on a model whose terms allow no commercial use: <strong>finding text by meaning</strong>, in
+transcripts, read text and documents, and the assistant&#39;s command search.
+jina-embeddings-v5-text-small is under CC BY-NC 4.0.</p>
+<p>No setting turns this feature off, in EiN or in the media service: with the media service
+there, the Archive asks it for it. The one way to go without it is to go without the
 media service, with <code>./setup.sh --no-ems</code>, and so without everything in
 <a href="#what-the-media-service-does">What the media service does</a>. The assistant&#39;s command search alone
 can leave the text vectors out: with <a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>
 empty, it matches words instead.</p>
 <p>Other licences in the table set conditions on passing a model or tool on: CC BY 4.0 and CC BY-NC
-4.0 a credit to its maker and a link to the licence, Apache-2.0 a copy of the licence, which this
-page and the image&#39;s notice give; GPL and LGPL conditions on passing the software and its
+4.0 a credit to its maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its
+copyright notice, which this page and the image&#39;s notice give; GPL and LGPL conditions on passing the software and its
 source on. Check each licence for what it asks of your installation.</p>
 <h2 id="add-the-media-service">Add the media service<a class="anchor" href="#add-the-media-service" aria-label="Link to this section"></a></h2>
 <p>The installer adds it with <code>--ems</code>, at the first install or any time after:</p>

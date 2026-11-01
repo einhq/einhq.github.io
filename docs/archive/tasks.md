@@ -63,12 +63,12 @@ A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510
 
 To have EiN look at one file again, run the step with `-f`:
 
-| Task                                            | Command                               | Reference                                      |
-| ----------------------------------------------- | ------------------------------------- | ---------------------------------------------- |
-| Read the text in a picture again                | `read-text -f <file>`                 | [read-text](commands.md#read-text)             |
-| Find the faces again (boxes drawn by hand stay) | `detect-faces -f <file>`              | [detect-faces](commands.md#detect-faces)       |
-| Transcribe a recording or video again           | `transcribe-file -f <file>`           | [transcribe-file](commands.md#transcribe-file) |
-| Make thumbnails and renditions again            | `regenerate --force <file or folder>` | [regenerate](commands.md#regenerate)           |
+| Task                                       | Command                               | Reference                                      |
+| ------------------------------------------ | ------------------------------------- | ---------------------------------------------- |
+| Read the text in a picture again           | `read-text -f <file>`                 | [read-text](commands.md#read-text)             |
+| Find the faces again, keeping who they are | `detect-faces -f <file>`              | [detect-faces](commands.md#detect-faces)       |
+| Transcribe a recording or video again      | `transcribe-file -f <file>`           | [transcribe-file](commands.md#transcribe-file) |
+| Make thumbnails and renditions again       | `regenerate --force <file or folder>` | [regenerate](commands.md#regenerate)           |
 
 All four ask the [media service](../ems/index.md), so they need it running. For many files at once, an administrator starts the pipelines instead: see [Processing and pipelines](../admin/processing.md).
 

@@ -26,8 +26,8 @@ section apply once the Archive is installed.
   previews, and finds faces, text and speech. Installing the module does not install it: the
   installer's `--ems` option does. Without it, the Archive installs and uploads arrive, but nothing
   gets thumbnails, dates, faces or searchable text, and uploads wait in staging as **being
-  prepared** until the service is there. [The media service](../ems/index.md) covers it. Some
-  of its models are for non-commercial use only; see
+  prepared** until the service is there. [The media service](../ems/index.md) covers it. One
+  of its models, the one text search finds meaning with, is for non-commercial use only; see
   [Models, tools and their licences](../ems/index.md#models-tools-and-their-licences).
 
 A language model is optional. With the assistant module's model, the search box also reads people
