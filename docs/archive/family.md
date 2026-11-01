@@ -381,9 +381,12 @@ the Staging page says so in a yellow **Needs you** box. **Review and import** op
 where you can say who each person is before anything is written. When you press **Import**, EiN
 brings in the people and families in it:
 
-- **Who each person is.** EiN looks for each person in the file among the people of the archive.
-  A first name, the surname and the year of birth together are enough, as are a first name and
-  the full date of birth. A person known only by a first name is found when a parent, partner or
+- **Who each person is.** EiN looks for each person in the file among the people of the archive,
+  by any of their names: the name they go by, their full name or the name they were born with. An
+  initial stands for a given name it begins, so "Harold J R Wrenfield" can be the file's Harold
+  James Robert Wrenfield. A first name, the surname and the year of birth together are enough, as
+  are a first name and the full date of birth, or two given names or more and the surname written
+  out in full. A person known only by a first name is found when a parent, partner or
   child of theirs in the file has been found and is related to them the same way in the archive.
   A date or a gender that disagrees rules a person out, and when two people fit equally well,
   neither is chosen. Whatever you chose on the family tree comes first.
@@ -425,14 +428,14 @@ fold them together with `person-merge` (see [People and faces](people.md#fold-se
 with the archive's own people. Each card is a person in the file, and its coloured stripe says what
 the import would do with them:
 
-| Stripe | Says                 | Means                                                                                        |
-| ------ | -------------------- | -------------------------------------------------------------------------------------------- |
-| Green  | Found in the archive | EiN takes them to be this person of the archive; the card's last line names them.            |
-| Blue   | Chosen by you        | You said who they are.                                                                       |
-| Orange | To decide            | Several people of the archive could be them and EiN chose none, so a new page would be made. |
-| Purple | New person           | Nobody in the archive fits; they get a page of their own.                                    |
-| Red    | Left out             | You left them out: no page, and none of their relations.                                     |
-| Grey   | Only in the archive  | Not in the file: a parent, partner or child, in the archive, of someone found there.         |
+| Stripe | Says                 | Means                                                                                                      |
+| ------ | -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Green  | Found in the archive | EiN takes them to be this person of the archive; the card's last line names them.                          |
+| Blue   | Chosen by you        | You said who they are.                                                                                     |
+| Orange | To decide            | People of the archive could be them, or have a like name, and EiN chose none, so a new page would be made. |
+| Purple | New person           | Nobody in the archive fits; they get a page of their own.                                                  |
+| Red    | Left out             | You left them out: no page, and none of their relations.                                                   |
+| Grey   | Only in the archive  | Not in the file: a parent, partner or child, in the archive, of someone found there.                       |
 
 A person who is found brings their family in the archive along, so the file's relations and the
 archive's meet on their card, and you can see whether the two trees agree. People in the file
@@ -440,7 +443,9 @@ related to nobody else in it are listed below the tree.
 
 Select a card and the panel beside the tree shows what the file says of them next to what the
 archive has, marking with **+** what the import would add; it never changes what the archive has
-already. Under **Who is this?** are the people who fit, best first, each with **This is them**,
+already. Under **Who is this?** are the people who fit, best first, then people of a like name:
+those who share a given name and the surname but have a word in their names the file does not,
+such as a nickname, marked "a like name" and never chosen for you. Each has **This is them**,
 and:
 
 - **Someone else in the archive…** picks anyone else.
