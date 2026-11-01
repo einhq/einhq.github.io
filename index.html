@@ -187,13 +187,14 @@
               <p class="arch-label a-lpe">People</p>
               <div class="arch-box a-svc"><strong>Services</strong><span>Started at boot and kept running</span></div>
               <div class="arch-box a-pip"><strong>Pipelines</strong><span>Steps that run when the tree changes</span></div>
-              <div class="arch-box a-web"><strong>Web interface</strong><span>Pages and a terminal</span></div>
               <div class="arch-box a-ssh"><strong>SSH</strong><span>A terminal</span></div>
+              <div class="arch-box a-web"><strong>Web UI</strong><span>Pages and a terminal</span></div>
               <div class="arch-box a-sftp"><strong>SFTP</strong><span>Files</span></div>
               <span class="arch-down a-d1" aria-hidden="true"></span>
               <span class="arch-down a-d2" aria-hidden="true"></span>
               <span class="arch-down a-d3" aria-hidden="true"></span>
               <span class="arch-down a-d4" aria-hidden="true"></span>
+              <span class="arch-down a-d8" aria-hidden="true"></span>
               <span class="arch-down a-d5" aria-hidden="true"></span>
               <div class="arch-box arch-layer a-sh">
                 <strong>The shell</strong>
@@ -217,10 +218,9 @@
               <div class="arch-box arch-store a-host"><strong>A folder</strong><span>On the server, read as it is</span></div>
               <div class="arch-box arch-store a-rsftp"><strong>SFTP</strong><span>A folder on another machine</span></div>
               <div class="arch-box arch-store a-cmd"><strong>Commands</strong><span><code>/usr/bin</code>, every command as a node</span></div>
-              <p class="arch-label a-lst">Stores, each mounted where its part of the tree belongs</p>
             </div>
             <figcaption id="arch-caption">
-              Every interface leads to the shell, and every command to the tree. Files sent over SFTP, or up and down through the web interface, go to the tree directly, past the same
+              Every interface leads to the shell, and every command to the tree. Files sent over SFTP, or up and down through the Web UI, go to the tree directly, past the same
               permission check. <a href="docs/start/how-ein-works.html">How EiN works</a> explains it on one page.
             </figcaption>
           </figure>
@@ -263,7 +263,7 @@
       <section class="shell ch-core" id="shell" aria-labelledby="shell-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="shell-title">A real shell, behind every interface</h2>
+            <h2 id="shell-title">A real shell</h2>
             <p>
               At EiN's heart is a bash-compatible shell with more than 200 commands, and each module adds its own. The web interface, its terminal and SSH all run these commands;
               SFTP moves files under the same permissions.
@@ -297,7 +297,7 @@
       <section class="pipelines deep ch-core" id="pipelines" aria-labelledby="pipelines-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="pipelines-title">Pipelines act on every change</h2>
+            <h2 id="pipelines-title">Automation through pipelines</h2>
             <p>
               A pipeline names the change it waits for and the steps, each a command, that it then runs. Modules bring their pipelines; core brings the engine and none of its own,
               so on its own EiN keeps what you give it and works nothing out.
@@ -346,7 +346,7 @@
       <section class="private ch-core" id="sharing" aria-labelledby="private-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="private-title">Shared on your terms</h2>
+            <h2 id="private-title">Sharing made easy</h2>
             <p>
               The same check applies in the browser, the shell, SSH and SFTP, so what someone may not open is nowhere for them: not in folders, search or the home page.
             </p>
@@ -372,7 +372,7 @@
       <section class="modules deep ch-core" id="modules" aria-labelledby="modules-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="modules-title">Everything else is a module</h2>
+            <h2 id="modules-title">Extend with modules</h2>
             <p>
               Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the frame of the web interface. What EiN is for comes from modules: a
               module is a folder with a manifest, and brings commands, pipelines, services, pages, settings and node types.
@@ -610,7 +610,7 @@
       <section class="search ch-archive" aria-labelledby="search-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="search-title">One search box for pictures, speech and letters</h2>
+            <h2 id="search-title">One search for all media</h2>
             <p>
               Type "Christmas tree" and get the family's Christmases, from a black-and-white print of 1962 to phone photos of 2019, and the moments in home videos that show one,
               with nothing tagged. The same box finds a word on a sign, in a letter or in something said. See <a href="docs/archive/search.html">Searching your pictures</a>.
@@ -633,7 +633,7 @@
       <section class="archive-shell deep ch-archive" aria-labelledby="archive-shell-title">
         <div class="wrap">
           <div class="intro">
-            <h2 id="archive-shell-title">Staging first, then albums</h2>
+            <h2 id="archive-shell-title">Staging first, then organize</h2>
             <p>
               Uploads, SFTP copies and zips land in your own staging area, which nobody else sees. EiN reads their dates and places and proposes the album each group belongs in;
               nothing is filed without you. See <a href="docs/archive/importing.html">Getting your photos in</a>.
@@ -1063,31 +1063,6 @@
               </li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <section class="source deep ch-start" id="source" aria-labelledby="source-title">
-        <div class="wrap">
-          <div class="intro">
-            <h2 id="source-title">Open source</h2>
-            <p>
-              EiN and the libraries it is built on, on GitHub under <a href="https://github.com/einhq">einhq</a>. The three libraries are on JSR too.
-              <a href="docs/develop/source.html">Building from source</a> shows how to run EiN from them.
-            </p>
-          </div>
-          <ul class="repos">
-            <li><strong>core</strong><span>EiN itself: the node tree, the shell, the pipelines, the web interface, SSH and SFTP. TypeScript on Deno. MIT.</span></li>
-            <li><strong>module-archive</strong><span>The Archive: people and their family tree, photos and videos, places, staging. MIT.</span></li>
-            <li><strong>module-assistant</strong><span>The Assistant: the chat that answers by running EiN's commands. MIT.</span></li>
-            <li><strong>module-ems</strong><span>EiN's side of the media service. MIT.</span></li>
-            <li><strong>ems</strong><span>The media service: every media tool and model behind one HTTP API. Python.</span></li>
-            <li><strong>deploy</strong><span>EiN on one machine with podman compose or docker compose: what the installer fetches and runs. MIT.</span></li>
-            <li><strong>db</strong><span>The PostgreSQL 18 image and its run script.</span></li>
-            <li><strong>llm</strong><span>The assistant's local language model: llama.cpp's server and its run script.</span></li>
-            <li><strong>bash-parser</strong><span>Parses bash 5.2 syntax into a syntax tree. <code>@ein/bash-parser</code> on JSR. MIT.</span></li>
-            <li><strong>bash-executor</strong><span>Runs it: expansions, control flow, builtins, line editing and completion. <code>@ein/bash-executor</code> on JSR. MIT.</span></li>
-            <li><strong>ssh2</strong><span>An SSH client and server in TypeScript, with no native bindings. <code>@ein/ssh2-ts</code> on JSR. MIT.</span></li>
-          </ul>
         </div>
       </section>
 

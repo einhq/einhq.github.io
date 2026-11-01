@@ -901,9 +901,6 @@ main > section {
 .deep .term {
   background: var(--ink);
 }
-.source h2 {
-  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
-}
 .intro {
   max-width: 44rem;
 }
@@ -1141,23 +1138,24 @@ figcaption {
 /* --- architecture: the core's layers, and what a change sets going --- */
 
 /* The interfaces and the background over the shell, the shell over the tree, the tree over its stores:
- * one grid, so each arrow stands under the box it leaves. On a narrow screen the boxes pair up. */
+ * one grid, so each arrow stands under the box it leaves. Each box spans two columns, so the Web UI
+ * stands half over the shell and half over the lane past it, with an arrow into each. On a narrow
+ * screen the boxes pair up. */
 .arch {
   margin: 56px 0 0;
 }
 .arch-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   grid-template-areas:
-    'lbg lbg lpe lpe lpe'
-    'svc pip web ssh sftp'
-    'd1 d2 d3 d4 d5'
-    'sh sh sh sh lane'
-    'd6 d6 d6 d6 d7'
-    'vfs vfs vfs vfs vfs'
-    'e1 e2 e3 e4 e5'
-    'pg mem host rsftp cmd'
-    'lst lst lst lst lst';
+    'lbg lbg lbg lbg lpe lpe lpe lpe lpe lpe'
+    'svc svc pip pip ssh ssh web web sftp sftp'
+    'd1 d1 d2 d2 d3 d3 d4 d8 d5 d5'
+    'sh sh sh sh sh sh sh lane lane lane'
+    'd6 d6 d6 d6 d6 d6 d6 d7 d7 d7'
+    'vfs vfs vfs vfs vfs vfs vfs vfs vfs vfs'
+    'e1 e1 e2 e2 e3 e3 e4 e4 e5 e5'
+    'pg pg mem mem host host rsftp rsftp cmd cmd';
   column-gap: 14px;
 }
 .a-lbg {
@@ -1195,6 +1193,9 @@ figcaption {
 }
 .a-d5 {
   grid-area: d5;
+}
+.a-d8 {
+  grid-area: d8;
 }
 .a-sh {
   grid-area: sh;
@@ -1241,9 +1242,6 @@ figcaption {
 .a-cmd {
   grid-area: cmd;
 }
-.a-lst {
-  grid-area: lst;
-}
 @media (max-width: 760px) {
   .arch-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1251,16 +1249,15 @@ figcaption {
       'lbg lbg lbg lbg lbg lbg'
       'svc svc svc pip pip pip'
       'lpe lpe lpe lpe lpe lpe'
-      'web web ssh ssh sftp sftp'
-      'd3 d3 d4 d4 d5 d5'
-      'sh sh sh sh lane lane'
-      'd6 d6 d6 d6 d7 d7'
+      'ssh ssh web web sftp sftp'
+      'd3 d3 d4 d8 d5 d5'
+      'sh sh sh lane lane lane'
+      'd6 d6 d6 d7 d7 d7'
       'vfs vfs vfs vfs vfs vfs'
       'e1 e1 e1 e1 e1 e1'
       'pg pg pg mem mem mem'
       'host host host rsftp rsftp rsftp'
-      'cmd cmd cmd cmd cmd cmd'
-      'lst lst lst lst lst lst';
+      'cmd cmd cmd cmd cmd cmd';
     column-gap: 10px;
   }
   .a-d1,
@@ -1278,16 +1275,49 @@ figcaption {
     margin-bottom: 10px;
   }
 }
+/* Each part in a colour of its own, its arrows in the colour of the part they leave: the background
+ * orange, people's ways in blue, the shell indigo, the tree in the chapter's lime and its stores teal. */
+.a-lbg,
+.a-svc,
+.a-pip,
+.a-d1,
+.a-d2 {
+  --c: var(--device);
+}
+.a-lpe,
+.a-ssh,
+.a-web,
+.a-sftp,
+.a-d3,
+.a-d4,
+.a-d5,
+.a-d8,
+.a-lane,
+.a-d7 {
+  --c: var(--album);
+}
+.a-sh,
+.a-d6 {
+  --c: var(--media);
+}
+.a-vfs,
+.a-e1,
+.a-e2,
+.a-e3,
+.a-e4,
+.a-e5 {
+  --c: var(--accent);
+}
+.arch-store {
+  --c: var(--place);
+}
 .arch-label {
   padding-bottom: 10px;
-  color: var(--faint);
+  color: var(--c);
   font-size: var(--t-small);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-}
-.a-lst {
-  padding: 12px 0 0;
 }
 .arch-box {
   display: grid;
@@ -1295,9 +1325,9 @@ figcaption {
   align-content: start;
   min-width: 0;
   padding: 14px 16px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
   border-radius: 12px;
-  background: var(--raised);
+  background: radial-gradient(80% 140% at 0% 0%, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%), var(--raised);
 }
 .arch-box strong {
   font-size: 1rem;
@@ -1317,8 +1347,7 @@ figcaption {
   font-weight: 400;
 }
 .arch-tree {
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-  background: radial-gradient(80% 140% at 0% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%), var(--raised);
+  border-color: color-mix(in srgb, var(--c) 65%, transparent);
 }
 /* What skips the shell: a path, not a part. */
 .arch-lane {
@@ -1326,7 +1355,7 @@ figcaption {
   align-items: center;
   justify-content: center;
   padding: 12px;
-  border: 1px dashed var(--line-strong);
+  border: 1px dashed color-mix(in srgb, var(--c) 60%, transparent);
   border-radius: 12px;
   color: var(--muted);
   font-size: 0.875rem;
@@ -1345,7 +1374,7 @@ figcaption {
   top: 4px;
   bottom: 10px;
   width: 2px;
-  background: var(--faint);
+  background: var(--c);
 }
 .arch-down::after {
   content: '';
@@ -1353,7 +1382,7 @@ figcaption {
   left: calc(50% - 6px);
   bottom: 4px;
   border: 6px solid transparent;
-  border-top-color: var(--faint);
+  border-top-color: var(--c);
   border-bottom-width: 0;
 }
 .arch figcaption,
@@ -2065,34 +2094,12 @@ figcaption {
   --accent: var(--docs);
 }
 
-/* --- open source --- */
+/* --- dedication --- */
 
-.repos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-  gap: 0 40px;
-  margin: 48px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.repos li {
-  padding: 18px 0;
+/* After the screenshots, on the same ground: a rule between them, as over the footer. */
+.dedication {
   border-top: 1px solid var(--line);
 }
-.repos strong {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.95rem;
-  font-weight: 400;
-}
-.repos span {
-  display: block;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-/* --- dedication --- */
 
 /* The dedication: the heart of hats at its left, and the words in a face of their own. */
 .dedication-to {
