@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 351 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 353 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -243,7 +243,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 133 in full](../archive/commands.md).
+[All 135 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -298,6 +298,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-time](../archive/commands.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
 | [file-set-transcript](../archive/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
+| [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents and partners, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
 | [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
@@ -363,6 +364,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [search-people](../archive/commands.md#search-people) | Search people by partial name; every query word must match the same person. |
 | [search-track](../archive/commands.md#search-track) | Search tracks by the name of the device that recorded them, or their description. |
 | [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
+| [source-list](../archive/commands.md#source-list) | List the files a node was read from: the links in its sources/, such as a track's GPX files or a person's GEDCOM files. |
 | [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
 | [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
 | [subcluster-voices](../archive/commands.md#subcluster-voices) | Re-cluster one person's voices with average linkage, to find two people fused into one. |
@@ -374,10 +376,10 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [timeline-facets](../archive/commands.md#timeline-facets) | Per-day, per-month and per-year counts for the timeline scrubber. |
 | [track-append](../archive/commands.md#track-append) | Append coordinate points to a device's track. |
 | [track-create](../archive/commands.md#track-create) | Give a device a track for the coordinate points it recorded (the device's child track) |
-| [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track. |
+| [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track, keeping a copy of the file in the device's routes/. |
 | [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
 | [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
-| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and remove the file; mark it pending when no single device matches, and keep it in its staging area's routes/. |
+| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
 | [transcribe-file](../archive/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
 

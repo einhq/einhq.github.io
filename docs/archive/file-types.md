@@ -15,6 +15,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 | [Documents](#documents)         | PDF, Word, OpenDocument and plain text                     | the text, for search; the text of scanned pages too                                                                 |
 | [Sidecar files](#sidecar-files) | Google Takeout JSON, XMP                                   | nothing of their own: they give their picture its date, place and caption                                           |
 | [GPS tracks](#gps-tracks)       | GPX                                                        | the route, added to the track of the device that recorded it                                                        |
+| [Family trees](#family-trees)   | GEDCOM                                                     | the people and their relations, found among the archive's people or added                                           |
 | [Zip files](#zip-files)         | ZIP                                                        | in staging, expanded into the files it holds                                                                        |
 | [Everything else](#other-files) | any file                                                   | kept as it is, and nothing more                                                                                     |
 
@@ -178,10 +179,19 @@ category's **Other files**.
 ## GPS tracks
 
 A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
-picture: EiN adds its points to the track of the device that recorded it, and the file goes. On a
-device's page you can upload GPX files to its track directly. See
-[GPX files in staging](devices.md#gpx-files-in-staging) and
+picture: EiN adds its points to the track of the device that recorded it, and the file moves to the
+device's `routes` folder, where its track links it. On a device's page you can upload GPX files to
+its track directly. See [GPX files in staging](devices.md#gpx-files-in-staging) and
 [Upload a GPX file to a device's track](devices.md#upload-a-gpx-file-to-a-devices-track).
+
+## Family trees
+
+A GEDCOM file (`.ged`) is a family tree as genealogy programs export it, in any of the character
+sets they write: UTF-8, UTF-16, ANSEL or ANSI. In staging it is not a document: EiN finds each of
+its people among the archive's people or makes them a page, adds the parents and partners it gives,
+and keeps the file in `/archive/sources/genealogy/`, where every person it describes links it. Its
+text is not made searchable. See
+[Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file).
 
 ## Zip files
 

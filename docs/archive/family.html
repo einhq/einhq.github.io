@@ -132,6 +132,11 @@ of the controls are shown only to an administrator:</p>
 <td>⋮ → <strong>Add event</strong> on its page</td>
 <td>anyone who may change it</td>
 </tr>
+<tr>
+<td>People and relations from a GEDCOM file</td>
+<td>a <code>.ged</code> file uploaded to staging</td>
+<td>anyone who may change those people</td>
+</tr>
 </tbody></table>
 </div>
 <p>An administrator is someone signed in as <code>admin</code>, or a member of the <code>sudo</code> group who has chosen
@@ -554,6 +559,40 @@ residents. Give a moved-out date to every home somebody has left.</li>
 </tr>
 </tbody></table>
 </div>
+<h2 id="bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file<a class="anchor" href="#bring-in-a-family-tree-from-a-gedcom-file" aria-label="Link to this section"></a></h2>
+<p>A GEDCOM file (<code>.ged</code>) is the file genealogy programs and family tree websites export a family
+tree as. Upload one into your staging area, by <strong>Import media</strong>, the Media page&#39;s <strong>Upload</strong> or
+SFTP (see <a href="importing.html">Getting your photos in</a>), and EiN reads the people and families in it:</p>
+<ul>
+<li><strong>Who each person is.</strong> EiN looks for each person in the file among the people of the archive.
+A first name, the surname and the year of birth together are enough, as are a first name and
+the full date of birth. A person known only by a first name is found when a parent, partner or
+child of theirs in the file has been found and is related to them the same way in the archive.
+A date or a gender that disagrees rules a person out, and when two people fit equally well,
+neither is chosen.</li>
+<li><strong>Everyone else gets a page</strong>, named by the name they went by and the surname they had last,
+with their full name, the name they were born with, gender, and the dates of birth and death
+the file gives exactly. An approximate date, such as &quot;about 1890&quot;, helps find a person but is
+not written down.</li>
+<li><strong>What a person is missing is filled in.</strong> A full name, birth name, gender or date the archive
+does not have yet is taken from the file; nothing the archive already has is changed.</li>
+<li><strong>Parents and partners are added</strong> where the archive does not have them yet: a marriage with its
+date, an adoption or a foster child as such (see <a href="#parent-kinds">Parent kinds</a>). A child who has
+two parents already gets no third, and nobody becomes their own ancestor.</li>
+<li><strong>The file is kept</strong> in <code>/archive/sources/genealogy/</code> and every person it describes lists it
+under <strong>Sources</strong> on their <strong>Info</strong> tab, where you can download it.</li>
+</ul>
+<p>The file is read as you: someone you may not change is still recognised, but nothing is written on
+them, and a relation that would need writing on them is left out. Uploading the same file again
+finds the same people and adds nothing, and so does a newer export of the same tree from a program
+that gives each person a lasting identifier. When EiN has made two pages for one person, fold them
+together with <code>person-merge</code> (see <a href="people.html#fold-several-unidentified-people-into-one">People and faces</a>).</p>
+<p>To see who would be found and who would be made before anything is written, copy the file into
+your home folder and run <code>gedcom-import</code> with <code>--dry-run</code> in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+gedcom-import <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/wrenfield.ged&quot;</span> --dry-run
+gedcom-import <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/wrenfield.ged&quot;</span></code></pre></div>
+<p>Run on a file outside staging, <code>gedcom-import</code> keeps a copy and leaves your file where it is.</p>
 <h2 id="birthdays-memorials-and-anniversaries-on-the-home-page">Birthdays, memorials and anniversaries on the Home page<a class="anchor" href="#birthdays-memorials-and-anniversaries-on-the-home-page" aria-label="Link to this section"></a></h2>
 <p>The <strong>Events</strong> panel on the Home page lists what comes round in the next 30 days and what came round
 in the last 7, under <strong>Today</strong>, <strong>Coming up</strong> and <strong>Recently</strong>. It is filled from the dates on this
@@ -655,6 +694,14 @@ flags after them: placed before the people, a flag&#39;s value is taken for a pe
 <td>Looks for broken ties, impossible dates and loops in the tree: <code>person-check /archive/people</code>.</td>
 </tr>
 <tr>
+<td><a href="commands.html#gedcom-import"><code>gedcom-import</code></a></td>
+<td>Brings in a GEDCOM file&#39;s people and relations; <code>--dry-run</code> only says what it would do.</td>
+</tr>
+<tr>
+<td><a href="commands.html#source-list"><code>source-list</code></a></td>
+<td>Lists the files a person was read from, such as a GEDCOM file.</td>
+</tr>
+<tr>
 <td><a href="../reference/commands-core.html#events"><code>events</code></a></td>
 <td>Prints what the Home page&#39;s Events panel shows.</td>
 </tr>
@@ -675,6 +722,12 @@ or the relative&#39;s page is hidden from you.</p>
 falls within the next 30 days or the last 7, and for an anniversary that the partnership has a
 <strong>From</strong> date. When more than 16 entries fall in the window, the rest are left out; round years are
 kept first.</p>
+<p><strong>A GEDCOM file made a second page for someone already in the archive.</strong> Their names or dates in
+the file and in the archive differ, or two people in the archive fit equally well. Fold the new
+page into the old one with <code>person-merge</code>. A dry run (<code>gedcom-import --dry-run</code>) shows beforehand
+whom EiN will find.</p>
+<p><strong>A GEDCOM upload stays in staging.</strong> EiN found no people in it: it is not a GEDCOM file, or one
+with nothing in it but the header.</p>
 <p><strong>A move is not on the timeline.</strong> The home has no dates. Press the pencil on its row and fill in
 <strong>Moved in</strong>.</p>
 <p><strong>Someone shows a home they left long ago as where they live.</strong> That home has no moved-out date.
@@ -686,7 +739,7 @@ Add one.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/family.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-change-what">Who may change what</a></li><li><a href="#the-family-tree">The family tree</a></li><li class="nested"><a href="#show-more-of-the-family">Show more of the family</a></li><li class="nested"><a href="#move-around-the-tree">Move around the tree</a></li><li class="nested"><a href="#brothers-sisters-and-in-laws">Brothers, sisters and in-laws</a></li><li><a href="#add-a-parent-partner-or-child">Add a parent, partner or child</a></li><li class="nested"><a href="#parent-kinds">Parent kinds</a></li><li class="nested"><a href="#partnerships-and-their-dates">Partnerships and their dates</a></li><li class="nested"><a href="#when-ein-refuses">When EiN refuses</a></li><li><a href="#remove-a-relation">Remove a relation</a></li><li><a href="#how-two-people-are-related">How two people are related</a></li><li><a href="#record-an-event">Record an event</a></li><li class="nested"><a href="#record-a-wedding">Record a wedding</a></li><li class="nested"><a href="#events-of-albums-locations-and-devices">Events of albums, locations and devices</a></li><li><a href="#what-appears-on-a-timeline">What appears on a timeline</a></li><li><a href="#homes-and-residents">Homes and residents</a></li><li class="nested"><a href="#add-a-home-to-a-person">Add a home to a person</a></li><li class="nested"><a href="#add-a-resident-to-a-location">Add a resident to a location</a></li><li class="nested"><a href="#why-the-dates-matter">Why the dates matter</a></li><li class="nested"><a href="#when-saving-a-home-fails">When saving a home fails</a></li><li><a href="#birthdays-memorials-and-anniversaries-on-the-home-page">Birthdays, memorials and anniversaries on the Home page</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-change-what">Who may change what</a></li><li><a href="#the-family-tree">The family tree</a></li><li class="nested"><a href="#show-more-of-the-family">Show more of the family</a></li><li class="nested"><a href="#move-around-the-tree">Move around the tree</a></li><li class="nested"><a href="#brothers-sisters-and-in-laws">Brothers, sisters and in-laws</a></li><li><a href="#add-a-parent-partner-or-child">Add a parent, partner or child</a></li><li class="nested"><a href="#parent-kinds">Parent kinds</a></li><li class="nested"><a href="#partnerships-and-their-dates">Partnerships and their dates</a></li><li class="nested"><a href="#when-ein-refuses">When EiN refuses</a></li><li><a href="#remove-a-relation">Remove a relation</a></li><li><a href="#how-two-people-are-related">How two people are related</a></li><li><a href="#record-an-event">Record an event</a></li><li class="nested"><a href="#record-a-wedding">Record a wedding</a></li><li class="nested"><a href="#events-of-albums-locations-and-devices">Events of albums, locations and devices</a></li><li><a href="#what-appears-on-a-timeline">What appears on a timeline</a></li><li><a href="#homes-and-residents">Homes and residents</a></li><li class="nested"><a href="#add-a-home-to-a-person">Add a home to a person</a></li><li class="nested"><a href="#add-a-resident-to-a-location">Add a resident to a location</a></li><li class="nested"><a href="#why-the-dates-matter">Why the dates matter</a></li><li class="nested"><a href="#when-saving-a-home-fails">When saving a home fails</a></li><li><a href="#bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file</a></li><li><a href="#birthdays-memorials-and-anniversaries-on-the-home-page">Birthdays, memorials and anniversaries on the Home page</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

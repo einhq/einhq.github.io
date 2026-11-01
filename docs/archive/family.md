@@ -10,14 +10,15 @@ and it says which parts need an administrator.
 Everything on this page hangs off a person's page or a location's page. In the web interface, two
 of the controls are shown only to an administrator:
 
-| What                                       | Where                            | Who sees the controls              |
-| ------------------------------------------ | -------------------------------- | ---------------------------------- |
-| Parents, partners and children             | the person's **Family** tab      | administrators only                |
-| A person's homes                           | the person's **Homes** tab       | administrators only                |
-| A location's residents                     | the location's **Residents** tab | anyone who may change the location |
-| Events of a person                         | ⋮ → **Add event** on the person  | anyone who may change the person   |
-| Born and died                              | **Edit** on the person           | anyone who may change the person   |
-| Events of an album, a location or a device | ⋮ → **Add event** on its page    | anyone who may change it           |
+| What                                       | Where                             | Who sees the controls              |
+| ------------------------------------------ | --------------------------------- | ---------------------------------- |
+| Parents, partners and children             | the person's **Family** tab       | administrators only                |
+| A person's homes                           | the person's **Homes** tab        | administrators only                |
+| A location's residents                     | the location's **Residents** tab  | anyone who may change the location |
+| Events of a person                         | ⋮ → **Add event** on the person   | anyone who may change the person   |
+| Born and died                              | **Edit** on the person            | anyone who may change the person   |
+| Events of an album, a location or a device | ⋮ → **Add event** on its page     | anyone who may change it           |
+| People and relations from a GEDCOM file    | a `.ged` file uploaded to staging | anyone who may change those people |
 
 An administrator is someone signed in as `admin`, or a member of the `sudo` group who has chosen
 **Administer…** in the account menu and entered their password again. See
@@ -367,6 +368,47 @@ The form stays open with the reason in a red box:
 | "person-set-home: moved out … before moving in …"                      | **Moved out** is earlier than **Moved in**.                                 |
 | "person-set-home: … already exists (use --update to change the dates)" | The home is already recorded. Close the form and use the pencil on its row. |
 
+## Bring in a family tree from a GEDCOM file
+
+A GEDCOM file (`.ged`) is the file genealogy programs and family tree websites export a family
+tree as. Upload one into your staging area, by **Import media**, the Media page's **Upload** or
+SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and families in it:
+
+- **Who each person is.** EiN looks for each person in the file among the people of the archive.
+  A first name, the surname and the year of birth together are enough, as are a first name and
+  the full date of birth. A person known only by a first name is found when a parent, partner or
+  child of theirs in the file has been found and is related to them the same way in the archive.
+  A date or a gender that disagrees rules a person out, and when two people fit equally well,
+  neither is chosen.
+- **Everyone else gets a page**, named by the name they went by and the surname they had last,
+  with their full name, the name they were born with, gender, and the dates of birth and death
+  the file gives exactly. An approximate date, such as "about 1890", helps find a person but is
+  not written down.
+- **What a person is missing is filled in.** A full name, birth name, gender or date the archive
+  does not have yet is taken from the file; nothing the archive already has is changed.
+- **Parents and partners are added** where the archive does not have them yet: a marriage with its
+  date, an adoption or a foster child as such (see [Parent kinds](#parent-kinds)). A child who has
+  two parents already gets no third, and nobody becomes their own ancestor.
+- **The file is kept** in `/archive/sources/genealogy/` and every person it describes lists it
+  under **Sources** on their **Info** tab, where you can download it.
+
+The file is read as you: someone you may not change is still recognised, but nothing is written on
+them, and a relation that would need writing on them is left out. Uploading the same file again
+finds the same people and adds nothing, and so does a newer export of the same tree from a program
+that gives each person a lasting identifier. When EiN has made two pages for one person, fold them
+together with `person-merge` (see [People and faces](people.md#fold-several-unidentified-people-into-one)).
+
+To see who would be found and who would be made before anything is written, copy the file into
+your home folder and run `gedcom-import` with `--dry-run` in the terminal:
+
+```bash
+# in EiN's terminal
+gedcom-import "$HOME/wrenfield.ged" --dry-run
+gedcom-import "$HOME/wrenfield.ged"
+```
+
+Run on a file outside staging, `gedcom-import` keeps a copy and leaves your file where it is.
+
 ## Birthdays, memorials and anniversaries on the Home page
 
 The **Events** panel on the Home page lists what comes round in the next 30 days and what came round
@@ -420,6 +462,8 @@ flags after them: placed before the people, a flag's value is taken for a person
 | [`person-how-related`](commands.md#person-how-related) | Names how two people are related.                                                              |
 | [`person-timeline`](commands.md#person-timeline)       | Prints a person's timeline.                                                                    |
 | [`person-check`](commands.md#person-check)             | Looks for broken ties, impossible dates and loops in the tree: `person-check /archive/people`. |
+| [`gedcom-import`](commands.md#gedcom-import)           | Brings in a GEDCOM file's people and relations; `--dry-run` only says what it would do.        |
+| [`source-list`](commands.md#source-list)               | Lists the files a person was read from, such as a GEDCOM file.                                 |
 | [`events`](../reference/commands-core.md#events)       | Prints what the Home page's Events panel shows.                                                |
 
 You can also tell the [assistant](../assistant/chat.md) a parent, a partnership or an event the archive
@@ -441,6 +485,14 @@ or the relative's page is hidden from you.
 falls within the next 30 days or the last 7, and for an anniversary that the partnership has a
 **From** date. When more than 16 entries fall in the window, the rest are left out; round years are
 kept first.
+
+**A GEDCOM file made a second page for someone already in the archive.** Their names or dates in
+the file and in the archive differ, or two people in the archive fit equally well. Fold the new
+page into the old one with `person-merge`. A dry run (`gedcom-import --dry-run`) shows beforehand
+whom EiN will find.
+
+**A GEDCOM upload stays in staging.** EiN found no people in it: it is not a GEDCOM file, or one
+with nothing in it but the header.
 
 **A move is not on the timeline.** The home has no dates. Press the pencil on its row and fill in
 **Moved in**.

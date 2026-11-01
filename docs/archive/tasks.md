@@ -74,26 +74,28 @@ All four ask the [media service](../ems/index.md), so they need it running. For 
 
 ## People
 
-| Task                                     | Command                                                                                | Reference                                            |
-| ---------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| List the named people                    | `person-list --sort count`                                                             | [person-list](commands.md#person-list)               |
-| A person's details, relations and events | `person-info /archive/people/peggy-wrenfield`                                          | [person-info](commands.md#person-info)               |
-| Add a person                             | `person-create /archive/people/Ada_Wrenfield --name 'Ada Wrenfield' --born 2026-03-02` | [person-create](commands.md#person-create)           |
-| Change names, dates and details          | `person-update /archive/people/peggy-wrenfield --born 1934-08-22`                      | [person-update](commands.md#person-update)           |
-| People found in pictures but not named   | `person-unknown --limit 20`                                                            | [person-unknown](commands.md#person-unknown)         |
-| Name one of them                         | `person-name --name 'Mabel Cole' /archive/people/unknown/<id>`                         | [person-name](commands.md#person-name)               |
-| Merge two people who are one             | `person-merge /archive/people/unknown/<id> /archive/people/ruby-wrenfield`             | [person-merge](commands.md#person-merge)             |
-| Every face of a person                   | `person-faces --sort date /archive/people/peggy-wrenfield`                             | [person-faces](commands.md#person-faces)             |
-| Take a wrong face off a person           | `person-detach --rematch <file>/regions/face-1`                                        | [person-detach](commands.md#person-detach)           |
-| Add a parent                             | `person-set-parent <child> <parent>`, `--kind adoptive`                                | [person-set-parent](commands.md#person-set-parent)   |
-| Add a partner                            | `person-set-partner --kind married --from 1956-06-02 <a> <b>`                          | [person-set-partner](commands.md#person-set-partner) |
-| Remove a relation between two people     | `person-remove <a> <b>`                                                                | [person-remove](commands.md#person-remove)           |
-| Add an event to a person                 | `person-add-event --type death --date 2021-01-17 /archive/people/peggy-wrenfield`      | [person-add-event](commands.md#person-add-event)     |
-| Record where someone lived               | `person-set-home --from 1956 --to 1999 <person> /archive/locations/Highbury`           | [person-set-home](commands.md#person-set-home)       |
-| How two people are related               | `person-how-related /archive/people/ruby-wrenfield /archive/people/peggy-wrenfield`    | [person-how-related](commands.md#person-how-related) |
-| Who a kin word reaches                   | `person-relatives peggy-wrenfield --relation daughter`                                 | [person-relatives](commands.md#person-relatives)     |
-| Ancestors and descendants                | `person-family-tree --up 2 --down 2 /archive/people/helen-okafor`                      | [person-family-tree](commands.md#person-family-tree) |
-| A person's life in order                 | `person-timeline /archive/people/peggy-wrenfield`                                      | [person-timeline](commands.md#person-timeline)       |
+| Task                                      | Command                                                                                | Reference                                            |
+| ----------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| List the named people                     | `person-list --sort count`                                                             | [person-list](commands.md#person-list)               |
+| A person's details, relations and events  | `person-info /archive/people/peggy-wrenfield`                                          | [person-info](commands.md#person-info)               |
+| Add a person                              | `person-create /archive/people/Ada_Wrenfield --name 'Ada Wrenfield' --born 2026-03-02` | [person-create](commands.md#person-create)           |
+| Change names, dates and details           | `person-update /archive/people/peggy-wrenfield --born 1934-08-22`                      | [person-update](commands.md#person-update)           |
+| People found in pictures but not named    | `person-unknown --limit 20`                                                            | [person-unknown](commands.md#person-unknown)         |
+| Name one of them                          | `person-name --name 'Mabel Cole' /archive/people/unknown/<id>`                         | [person-name](commands.md#person-name)               |
+| Merge two people who are one              | `person-merge /archive/people/unknown/<id> /archive/people/ruby-wrenfield`             | [person-merge](commands.md#person-merge)             |
+| Every face of a person                    | `person-faces --sort date /archive/people/peggy-wrenfield`                             | [person-faces](commands.md#person-faces)             |
+| Take a wrong face off a person            | `person-detach --rematch <file>/regions/face-1`                                        | [person-detach](commands.md#person-detach)           |
+| Add a parent                              | `person-set-parent <child> <parent>`, `--kind adoptive`                                | [person-set-parent](commands.md#person-set-parent)   |
+| Add a partner                             | `person-set-partner --kind married --from 1956-06-02 <a> <b>`                          | [person-set-partner](commands.md#person-set-partner) |
+| Remove a relation between two people      | `person-remove <a> <b>`                                                                | [person-remove](commands.md#person-remove)           |
+| Add an event to a person                  | `person-add-event --type death --date 2021-01-17 /archive/people/peggy-wrenfield`      | [person-add-event](commands.md#person-add-event)     |
+| Record where someone lived                | `person-set-home --from 1956 --to 1999 <person> /archive/locations/Highbury`           | [person-set-home](commands.md#person-set-home)       |
+| How two people are related                | `person-how-related /archive/people/ruby-wrenfield /archive/people/peggy-wrenfield`    | [person-how-related](commands.md#person-how-related) |
+| Bring in a family tree from GEDCOM        | `gedcom-import --dry-run <file>.ged`, then without `--dry-run`                         | [gedcom-import](commands.md#gedcom-import)           |
+| The files a person or track was read from | `source-list /archive/people/peggy-wrenfield`                                          | [source-list](commands.md#source-list)               |
+| Who a kin word reaches                    | `person-relatives peggy-wrenfield --relation daughter`                                 | [person-relatives](commands.md#person-relatives)     |
+| Ancestors and descendants                 | `person-family-tree --up 2 --down 2 /archive/people/helen-okafor`                      | [person-family-tree](commands.md#person-family-tree) |
+| A person's life in order                  | `person-timeline /archive/people/peggy-wrenfield`                                      | [person-timeline](commands.md#person-timeline)       |
 
 The family relations, events and homes are explained in [Family tree, events and homes](family.md).
 

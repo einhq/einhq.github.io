@@ -311,6 +311,11 @@ Under the figures are the times of the first and the last point. A long track is
 thinned copy; the line then ends with "drawn from a thinned copy of the track", and the distance
 comes out a little shorter than the route really was.
 
+Under them, **Read from** lists the GPX files the track was read from, with their sizes. Click one
+to download it. EiN keeps every GPX file it reads into a track, in the device's `routes` folder
+(`/archive/devices/<device>/routes/`), and the track links each one from its own `sources` folder.
+The same file brought in twice, byte for byte, is kept once.
+
 A device with no route says **This device has recorded no track**.
 
 EiN draws a track on the maps; it does not use it to give a position to pictures that have none.
@@ -328,14 +333,15 @@ recorded a file, upload it on that device's page:
 
 The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The GPX file itself is not kept, only the points.
+uploading the same file again changes nothing. The file is kept with the device under its own name
+and listed under **Read from**.
 
 ### GPX files in staging
 
 A GPX file that arrives in your staging area, by **Import media**, the Media page's **Upload** or
 copying over SFTP (see [Getting your photos in](importing.md)), is not treated as a picture. EiN
 reads which device the file says recorded it and adds the route to that device's track; the file
-then goes.
+then moves out of staging into the device's `routes` folder, and is listed under **Read from**.
 
 The file names its device in its `creator` attribute or in one of its `<name>` entries. It matches a
 registered device when one of these holds, as whole words, the device's name, its make and model
@@ -350,7 +356,8 @@ When a file names no registered device, or more than one, it waits for you:
 2. Click **Choose device**. The Inbox's **Files** tab opens with the card
    **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Say
    which device recorded each, and its route joins that device's track."
-3. Beside each file, choose the device in the **Device** list and click **Import**.
+3. Beside each file, choose the device in the **Device** list and click **Import**. The route
+   joins that device's track and the file moves to its `routes` folder.
 
 If the device is not registered yet, register it first (see
 [Register a device by hand](#register-a-device-by-hand)) and open the card again; a waiting file is
@@ -376,22 +383,23 @@ not tried again by itself. Waiting files are kept in your staging area's `routes
 
 ## From the terminal
 
-Each device is a folder under `/archive/devices`; `ls /archive/devices` lists their names, and its
-route is the child `track`. The commands below are in the
+Each device is a folder under `/archive/devices`; `ls /archive/devices` lists their names, its
+route is the child `track`, and the GPX files the route was read from are in its `routes` folder. The commands below are in the
 [archive command reference](commands.md), and every one takes `--help`.
 
-| Task                                                  | Command                                                                                                                                                       |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the cameras seen but not registered              | [`device-scan`](commands.md#device-scan)                                                                                                                      |
-| Register a device                                     | [`device-create`](commands.md#device-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc` |
-| Change a device's settings                            | [`device-update`](commands.md#device-update) `<device> --timezone <zone>`, or `--clear <field>`                                                               |
-| Show a device and its owners                          | [`device-info`](commands.md#device-info) `<device>`                                                                                                           |
-| Link the files a device took before it was registered | [`device-relink`](commands.md#device-relink) `<device>`; `--dry-run` reports first, `--force` takes files from another device, `--all` does every device      |
-| Link files to a device by hand                        | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                |
-| Add an owner, or change the dates                     | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                   |
-| Remove an owner                                       | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                  |
-| Add a GPX file to a device's track                    | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`                                                                                            |
-| Bring a device's automatic cover up to date           | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                             |
+| Task                                                  | Command                                                                                                                                                                                                     |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List the cameras seen but not registered              | [`device-scan`](commands.md#device-scan)                                                                                                                                                                    |
+| Register a device                                     | [`device-create`](commands.md#device-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc`                                               |
+| Change a device's settings                            | [`device-update`](commands.md#device-update) `<device> --timezone <zone>`, or `--clear <field>`                                                                                                             |
+| Show a device and its owners                          | [`device-info`](commands.md#device-info) `<device>`                                                                                                                                                         |
+| Link the files a device took before it was registered | [`device-relink`](commands.md#device-relink) `<device>`; `--dry-run` reports first, `--force` takes files from another device, `--all` does every device                                                    |
+| Link files to a device by hand                        | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                                                              |
+| Add an owner, or change the dates                     | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                                                                 |
+| Remove an owner                                       | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                                                                |
+| Add a GPX file to a device's track                    | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`, which moves the file to the device's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
+| List the GPX files a track was read from              | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
+| Bring a device's automatic cover up to date           | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 
 Registering Jon's GPS tracker, making him its owner and adding a route copied into your home folder:
 
@@ -403,7 +411,7 @@ track-stage "$HOME/tararua-walk.gpx" --device /archive/devices/Jons_eTrex
 ```
 
 `device-create` prints the device's folder, `/archive/devices/Jons_eTrex`, and `track-stage`
-removes the GPX file once its points are in the track. See
+moves the GPX file to `/archive/devices/Jons_eTrex/routes/` once its points are in the track. See
 [Commands by task](../shell/commands.md) for the rest of the archive's commands.
 
 ## Related pages

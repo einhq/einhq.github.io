@@ -131,6 +131,11 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 <td>the route, added to the track of the device that recorded it</td>
 </tr>
 <tr>
+<td><a href="#family-trees">Family trees</a></td>
+<td>GEDCOM</td>
+<td>the people and their relations, found among the archive&#39;s people or added</td>
+</tr>
+<tr>
 <td><a href="#zip-files">Zip files</a></td>
 <td>ZIP</td>
 <td>in staging, expanded into the files it holds</td>
@@ -334,10 +339,17 @@ part of a Takeout becomes. A sidecar that matches no picture stays where it is, 
 category&#39;s <strong>Other files</strong>.</p>
 <h2 id="gps-tracks">GPS tracks<a class="anchor" href="#gps-tracks" aria-label="Link to this section"></a></h2>
 <p>A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
-picture: EiN adds its points to the track of the device that recorded it, and the file goes. On a
-device&#39;s page you can upload GPX files to its track directly. See
-<a href="devices.html#gpx-files-in-staging">GPX files in staging</a> and
+picture: EiN adds its points to the track of the device that recorded it, and the file moves to the
+device&#39;s <code>routes</code> folder, where its track links it. On a device&#39;s page you can upload GPX files to
+its track directly. See <a href="devices.html#gpx-files-in-staging">GPX files in staging</a> and
 <a href="devices.html#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device&#39;s track</a>.</p>
+<h2 id="family-trees">Family trees<a class="anchor" href="#family-trees" aria-label="Link to this section"></a></h2>
+<p>A GEDCOM file (<code>.ged</code>) is a family tree as genealogy programs export it, in any of the character
+sets they write: UTF-8, UTF-16, ANSEL or ANSI. In staging it is not a document: EiN finds each of
+its people among the archive&#39;s people or makes them a page, adds the parents and partners it gives,
+and keeps the file in <code>/archive/sources/genealogy/</code>, where every person it describes links it. Its
+text is not made searchable. See
+<a href="family.html#bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file</a>.</p>
 <h2 id="zip-files">Zip files<a class="anchor" href="#zip-files" aria-label="Link to this section"></a></h2>
 <p>A zip file that you upload or copy anywhere into a staging category is expanded once its upload has
 ended: what it holds goes into the folder the zip lies in, and the zip is removed. Outside staging,
@@ -478,7 +490,7 @@ raw:     no</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/file-types.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-does-with-each-kind-of-file">What EiN does with each kind of file</a></li><li><a href="#how-ein-tells-what-a-file-is">How EiN tells what a file is</a></li><li><a href="#photos">Photos</a></li><li class="nested"><a href="#camera-raw">Camera RAW</a></li><li><a href="#videos">Videos</a></li><li><a href="#recordings">Recordings</a></li><li><a href="#documents">Documents</a></li><li><a href="#sidecar-files">Sidecar files</a></li><li><a href="#gps-tracks">GPS tracks</a></li><li><a href="#zip-files">Zip files</a></li><li><a href="#other-files">Other files</a></li><li><a href="#your-originals-stay-as-they-are">Your originals stay as they are</a></li><li><a href="#when-a-file-does-not-show-up-as-expected">When a file does not show up as expected</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-does-with-each-kind-of-file">What EiN does with each kind of file</a></li><li><a href="#how-ein-tells-what-a-file-is">How EiN tells what a file is</a></li><li><a href="#photos">Photos</a></li><li class="nested"><a href="#camera-raw">Camera RAW</a></li><li><a href="#videos">Videos</a></li><li><a href="#recordings">Recordings</a></li><li><a href="#documents">Documents</a></li><li><a href="#sidecar-files">Sidecar files</a></li><li><a href="#gps-tracks">GPS tracks</a></li><li><a href="#family-trees">Family trees</a></li><li><a href="#zip-files">Zip files</a></li><li><a href="#other-files">Other files</a></li><li><a href="#your-originals-stay-as-they-are">Your originals stay as they are</a></li><li><a href="#when-a-file-does-not-show-up-as-expected">When a file does not show up as expected</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

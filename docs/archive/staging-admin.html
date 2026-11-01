@@ -254,7 +254,12 @@ engine, which <a href="../admin/processing.html">Processing and pipelines</a> co
 <tr>
 <td><code>track-stage</code></td>
 <td>A <code>.gpx</code> file lands anywhere in staging</td>
-<td>Adds its points to the track of the device it names and removes the file; one that names no known device waits for its owner.</td>
+<td>Adds its points to the track of the device it names and moves the file to the device&#39;s <code>routes/</code>; one that names no known device waits for its owner.</td>
+</tr>
+<tr>
+<td><code>gedcom-stage</code></td>
+<td>A <code>.ged</code> file lands anywhere in staging</td>
+<td>Brings its people and relations in as the staging area&#39;s owner (<code>gedcom-import</code>), and moves the file to <code>/archive/sources/genealogy/</code>.</td>
 </tr>
 <tr>
 <td><code>staging-organizer</code> (service)</td>

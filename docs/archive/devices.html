@@ -416,6 +416,10 @@ tab of every album whose dates it falls in (see <a href="albums.html#the-map-tab
 <p>Under the figures are the times of the first and the last point. A long track is drawn from a
 thinned copy; the line then ends with &quot;drawn from a thinned copy of the track&quot;, and the distance
 comes out a little shorter than the route really was.</p>
+<p>Under them, <strong>Read from</strong> lists the GPX files the track was read from, with their sizes. Click one
+to download it. EiN keeps every GPX file it reads into a track, in the device&#39;s <code>routes</code> folder
+(<code>/archive/devices/&lt;device&gt;/routes/</code>), and the track links each one from its own <code>sources</code> folder.
+The same file brought in twice, byte for byte, is kept once.</p>
 <p>A device with no route says <strong>This device has recorded no track</strong>.</p>
 <p>EiN draws a track on the maps; it does not use it to give a position to pictures that have none.
 To place those, see <a href="dates-places.html#where-a-pictures-place-comes-from">Dates and places of pictures</a>.</p>
@@ -430,12 +434,13 @@ in it&quot;.</li>
 </ol>
 <p>The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The GPX file itself is not kept, only the points.</p>
+uploading the same file again changes nothing. The file is kept with the device under its own name
+and listed under <strong>Read from</strong>.</p>
 <h3 id="gpx-files-in-staging">GPX files in staging<a class="anchor" href="#gpx-files-in-staging" aria-label="Link to this section"></a></h3>
 <p>A GPX file that arrives in your staging area, by <strong>Import media</strong>, the Media page&#39;s <strong>Upload</strong> or
 copying over SFTP (see <a href="importing.html">Getting your photos in</a>), is not treated as a picture. EiN
 reads which device the file says recorded it and adds the route to that device&#39;s track; the file
-then goes.</p>
+then moves out of staging into the device&#39;s <code>routes</code> folder, and is listed under <strong>Read from</strong>.</p>
 <p>The file names its device in its <code>creator</code> attribute or in one of its <code>&lt;name&gt;</code> entries. It matches a
 registered device when one of these holds, as whole words, the device&#39;s name, its make and model
 together, or its serial number. Capital letters and punctuation do not count. A file whose creator
@@ -448,7 +453,8 @@ device that recorded it.&quot; (or how many).</li>
 <li>Click <strong>Choose device</strong>. The Inbox&#39;s <strong>Files</strong> tab opens with the card
 <strong>Routes waiting for a device</strong>: &quot;These GPX files do not name a device the archive knows. Say
 which device recorded each, and its route joins that device&#39;s track.&quot;</li>
-<li>Beside each file, choose the device in the <strong>Device</strong> list and click <strong>Import</strong>.</li>
+<li>Beside each file, choose the device in the <strong>Device</strong> list and click <strong>Import</strong>. The route
+joins that device&#39;s track and the file moves to its <code>routes</code> folder.</li>
 </ol>
 <p>If the device is not registered yet, register it first (see
 <a href="#register-a-device-by-hand">Register a device by hand</a>) and open the card again; a waiting file is
@@ -526,8 +532,8 @@ not tried again by itself. Waiting files are kept in your staging area&#39;s <co
 </tbody></table>
 </div>
 <h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
-<p>Each device is a folder under <code>/archive/devices</code>; <code>ls /archive/devices</code> lists their names, and its
-route is the child <code>track</code>. The commands below are in the
+<p>Each device is a folder under <code>/archive/devices</code>; <code>ls /archive/devices</code> lists their names, its
+route is the child <code>track</code>, and the GPX files the route was read from are in its <code>routes</code> folder. The commands below are in the
 <a href="commands.html">archive command reference</a>, and every one takes <code>--help</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -570,7 +576,11 @@ route is the child <code>track</code>. The commands below are in the
 </tr>
 <tr>
 <td>Add a GPX file to a device&#39;s track</td>
-<td><a href="commands.html#track-stage"><code>track-stage</code></a> <code>&lt;gpx&gt; --device &lt;device&gt;</code></td>
+<td><a href="commands.html#track-stage"><code>track-stage</code></a> <code>&lt;gpx&gt; --device &lt;device&gt;</code>, which moves the file to the device&#39;s <code>routes</code>, or <a href="commands.html#track-import"><code>track-import</code></a> <code>&lt;device&gt; &lt;gpx&gt;</code>, which keeps a copy there</td>
+</tr>
+<tr>
+<td>List the GPX files a track was read from</td>
+<td><a href="commands.html#source-list"><code>source-list</code></a> <code>/archive/devices/&lt;device&gt;/track</code></td>
 </tr>
 <tr>
 <td>Bring a device&#39;s automatic cover up to date</td>
@@ -584,7 +594,7 @@ device-create --name <span class="hljs-string">&quot;Jon&#x27;s eTrex&quot;</spa
 device-set-owner /archive/devices/Jons_eTrex /archive/people/jon-wrenfield --from 2021
 track-stage <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/tararua-walk.gpx&quot;</span> --device /archive/devices/Jons_eTrex</code></pre></div>
 <p><code>device-create</code> prints the device&#39;s folder, <code>/archive/devices/Jons_eTrex</code>, and <code>track-stage</code>
-removes the GPX file once its points are in the track. See
+moves the GPX file to <code>/archive/devices/Jons_eTrex/routes/</code> once its points are in the track. See
 <a href="../shell/commands.html">Commands by task</a> for the rest of the archive&#39;s commands.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
