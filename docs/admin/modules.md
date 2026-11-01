@@ -230,7 +230,8 @@ example `letters needs archive ^0.1.0, and this is archive 0.2.0: --force instal
 same`. `mod install --force` updates anyway, and also fetches again a commit that is installed
 already.
 
-After the update EiN sets the module up again and restarts its services. Every module that depends
+After the update EiN sets the module up again and restarts its services; its settings take the new
+version's defaults and descriptions, and a setting it no longer has is gone. Every module that depends
 on it, directly or through another, is set up again too, and its running services restarted, so
 nothing keeps running the code that was replaced. The new version takes the old one's place in a
 single step: the module's folder always holds one whole version.
