@@ -28,7 +28,7 @@ section apply once the Archive is installed.
   gets thumbnails, dates, faces or searchable text, and uploads wait in staging as **being
   prepared** until the service is there. [The media service](../ems/index.md) covers it. Some
   of its models are for non-commercial use only; see
-  [Models and their licences](../ems/index.md#models-and-their-licences).
+  [Models, tools and their licences](../ems/index.md#models-tools-and-their-licences).
 
 A language model is optional. With the assistant module's model, the search box also reads people
 and places out of a sentence; see [Searching your pictures](search.md#write-what-you-are-looking-for).
