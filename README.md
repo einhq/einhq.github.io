@@ -30,7 +30,7 @@ docs/diagrams/      the documentation's diagrams, SVG
 docs/SUMMARY.md     the documentation's pages, in the order of its sidebar
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
 assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
-assets/fonts/       Familjen Grotesk and its italic, Fragment Mono and Mochiy Pop One, the wordmark's and the headings', served from here
+assets/fonts/       Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark's and the headings') and Glass Antiqua (the dedication's), served from here
 assets/og.jpg       the link preview: the page's own hero at 1200 × 630, screenshotted from `make serve`
 assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.svg
 install.sh          what the page's install command fetches: it checks the machine, then fetches ein/deploy into ~/ein and runs its setup.sh
@@ -120,8 +120,8 @@ also type-checks the capture tool.
 
 - The page, its scripts and styles: MIT (`LICENSE`).
 - The hat tiling comes from ein/core (MIT), which builds it as isohedral/hatviz (BSD-3-Clause) does.
-- Familjen Grotesk, Fragment Mono and Mochiy Pop One (the wordmark, as EiN's web interface draws it, and the headings): SIL Open
-  Font License 1.1 (`assets/fonts/OFL-*.txt`).
+- Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark, as EiN's web interface draws it, and the headings) and Glass
+  Antiqua (the dedication): SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
 - The screenshots and node pictures show the demo archive. Its story and generated media are CC0;
   the real photos in it keep their own licences, credited one by one in `ATTRIBUTION.md`. Map data
   © OpenStreetMap contributors.
