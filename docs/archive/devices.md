@@ -349,17 +349,31 @@ The file names its device in its `creator` attribute or in one of its `<name>` e
 registered device when one of these holds, as whole words, the device's name, its make and model
 together, or its serial number. Capital letters and punctuation do not count. A file whose creator
 reads `Garmin eTrex 30x` joins the device with the make `Garmin` and the model `eTrex 30x`; in the
-demo, Ruby's tracks say `Apple iPhone 15` and join Ruby's iPhone.
+demo, Ruby's tracks say `Apple iPhone 15` and join Ruby's iPhone. Either of these places counts:
+
+```xml
+<gpx version="1.1" creator="Garmin eTrex 30x">
+  <metadata><name>Garmin eTrex 30x</name></metadata>
+  <trk><name>Garmin eTrex 30x</name> …</trk>
+</gpx>
+```
+
+A `<name>` inside a track point is a waypoint's label and does not count. Many apps write their
+own name as the creator (`Track Logger 2.1`) and no device anywhere; such a file waits for you
+to choose its device, as below.
 
 When a file names no registered device, or more than one, it waits for you:
 
 1. Open **Staging** in the sidebar. A yellow box titled **Needs you** says "1 GPS track waits for the
    device that recorded it." (or how many).
 2. Click **Choose device**. The Inbox's **Files** tab opens with the card
-   **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Say
-   which device recorded each, and its route joins that device's track."
-3. Beside each file, choose the device in the **Device** list and click **Import**. The route
-   joins that device's track and the file moves to its `routes` folder.
+   **Routes waiting for a device**: "These GPX files do not name a device the archive knows. Tick
+   the ones one device recorded, choose that device, and their routes join its track." Beside a
+   file whose `creator` names something, the card shows it, such as `creator "Track Logger 2.1"`.
+3. Tick the files that one device recorded, or **Select all**, choose the device in the
+   **Device** list and click **Import** (**Import 3 files** with three ticked). Each route joins
+   that device's track and its file moves to the device's `routes` folder. A file that cannot be
+   read stays, ticked, and the card names it and why.
 
 If the device is not registered yet, register it first (see
 [Register a device by hand](#register-a-device-by-hand)) and open the card again; a waiting file is
