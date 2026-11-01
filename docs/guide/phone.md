@@ -154,12 +154,11 @@ upload is. [Getting your photos in](../archive/importing.md#import-media) covers
 [Sorting in staging](../archive/staging.md) what to do with the files once they are in.
 
 **Upload** also sits under ⋮ on an album you may change, on the **Media** page and on a staging
-category. On a phone its picker offers only photos, videos, recordings and GPX tracks, with the
-camera among the choices, so you can take a picture and upload it in one go. An album's **Upload**
-puts the files straight into that album; the Media page's puts them into your Inbox. To bring in a
-PDF or another kind of file from a phone, use **Choose files** in **Import media**. **Choose a
-folder** and **Upload a folder** need a browser that can pick a folder, which a phone's browser may
-not offer.
+category. Its picker is your phone's own, as in **Import media**: your photo library, the camera, so
+you can take a picture and upload it in one go, and your files, such as a GPX track or a GEDCOM
+family tree. An album's **Upload** puts the files straight into that album; the Media page's puts
+them into your Inbox. **Choose a folder** and **Upload a folder** need a browser that can pick a
+folder, which a phone's browser may not offer.
 
 > [!WARNING]
 > An upload runs in the open page. Keep EiN on screen until the upload has finished: a phone may

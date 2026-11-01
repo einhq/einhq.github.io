@@ -196,7 +196,7 @@ The files go straight into the album; they skip [staging](staging.md). They are 
 album is: whoever can see the album can see them. A file whose name the album already has is
 stored under a numbered name beside it; nothing is replaced. **Upload** takes files, not folders,
 and the files of a folder you drop go into the album without their folder. On a phone, the picker
-offers your photos, videos, recordings and GPX files, and the camera.
+offers your photo library and camera beside your files.
 
 When the upload ends, the album shows the files. Each one shows a placeholder until EiN has made its
 thumbnail, and goes to its day once its date has been read, which can take a few minutes after a

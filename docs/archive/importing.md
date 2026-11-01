@@ -112,8 +112,8 @@ becomes a suggested album of its own, named after the folder, such as "Cornwall,
 Names that cameras and exports give folders, such as `DCIM`, `100CANON`, a bare year or date, or
 `Takeout`, are not used.
 
-On a phone the header's buttons fold into the ⋮ menu, and **Upload** offers your photos, videos,
-recordings and GPX files, and the camera. [EiN on a phone](../guide/phone.md) has more.
+On a phone the header's buttons fold into the ⋮ menu, and **Upload** offers your photo library and
+camera beside your files. [EiN on a phone](../guide/phone.md) has more.
 
 Files dropped on a terminal tab are uploaded into that tab's current folder, without their folders;
 see [The terminal](../shell/terminal.md).
