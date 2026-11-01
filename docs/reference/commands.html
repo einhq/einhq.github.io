@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 353 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 355 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 353 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 355 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,7 +89,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 353 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 355 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -827,15 +827,15 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#ui-build">ui-build</a></td>
-<td>Bundle modules&#39; pages into /var/cache/ui for the web UI to load, unless unchanged since the last build.</td>
+<td>Bundle modules&#39; pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#ui-icons">ui-icons</a></td>
-<td>Tabler icons by name, as SVG markup, for the web UI.</td>
+<td>Tabler icons by name, as SVG markup, for the Web UI.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#ui-nav">ui-nav</a></td>
-<td>The web UI&#39;s sidebar, top bar and panels for the caller, from every module&#39;s entries and the administrator&#39;s, the caller&#39;s groups&#39; and the user&#39;s changes.</td>
+<td>The Web UI&#39;s sidebar, top bar and panels for the caller, from every module&#39;s entries and the administrator&#39;s, the caller&#39;s groups&#39; and the user&#39;s changes.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#uniq">uniq</a></td>
@@ -927,11 +927,11 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#who">who</a></td>
-<td>List who is signed in: each SSH login, terminal and web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone&#39;s, anyone else their own.</td>
+<td>List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone&#39;s, anyone else their own.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#www">www</a></td>
-<td>Manage active web UI.</td>
+<td>Manage active Web UI.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#xargs">xargs</a></td>
@@ -955,7 +955,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 135 in full</a>.</p>
+<p><a href="../archive/commands.html">All 137 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1045,7 +1045,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#device-create">device-create</a></td>
-<td>Create a device node.</td>
+<td>Create a device node and link the media already carrying its fingerprint.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#device-info">device-info</a></td>
@@ -1170,6 +1170,14 @@
 <tr>
 <td><a href="../archive/commands.html#gedcom-import">gedcom-import</a></td>
 <td>Import a GEDCOM file&#39;s people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#gedcom-read">gedcom-read</a></td>
+<td>Read a GEDCOM file and say who each of its individuals would be if it were imported now: matched to a person, made one or left out, with the people who could be them.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#gedcom-stage">gedcom-stage</a></td>
+<td>Move a GEDCOM file staged under files/ to its staging area&#39;s genealogy/, where it waits to be looked over and imported.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#generate-derivatives">generate-derivatives</a></td>

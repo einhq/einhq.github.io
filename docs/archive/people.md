@@ -170,7 +170,7 @@ Click a person on the People page, a name in the viewer, or a person in search r
 The header shows:
 
 - their cover picture and name, the full name under it, and "Born as &lt;birth name&gt;" when that is different;
-- a life line: "1934 – 2021 · died aged 86" for someone who has died, "Born 1958 · 68" for someone living. A `~` before the age means it is approximate, because the birth date has no day;
+- a life line: "1934 – 2021 · died aged 86" for someone who has died, "Born 1958 · 68" for someone living. A `~` before the age means it is approximate, because the birth date has no day or is uncertain; an uncertain year reads "~1890", "before 1900" or "after 1900" (see [Uncertain dates](#uncertain-dates));
 - where they live now, linking to the location, their contact details (not on a phone; the Info tab lists them), and how many photos they are in, over which years ("34 photos · 1968–2025");
 - allergies, marked with a warning sign, their labels, and the description.
 
@@ -259,19 +259,39 @@ At least one group has to stay: moving all of them is a rename, not a split. Onl
 
 Press **Edit** on the person's page to open **Edit person**. Leave an optional field empty to remove it.
 
-| Field                   | What to enter                                                                                                                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Name**                | The name shown everywhere. Required.                                                                                                                                                             |
-| **Full name**           | Their whole name, shown under the name.                                                                                                                                                          |
-| **Birth name**          | The name they were born with, shown as "Born as".                                                                                                                                                |
-| **Gender**              | **Female**, **Male**, **Other** or **Unknown**.                                                                                                                                                  |
-| **Born**, **Died**      | A year, a month or a day: `1934`, `1934-05` or `1934-05-20`. Without a day, their age is shown as approximate.                                                                                   |
-| **Contact information** | **Add contact** adds a row with a **Type** (for example "Email, phone, address…") and the **Details**. An e-mail address becomes a link that writes to it, and a phone number one that calls it. |
-| **Allergies**           | Shown with a warning sign in the header.                                                                                                                                                         |
-| **Description**         | Free text, with Markdown.                                                                                                                                                                        |
-| **Labels**              | Words to find the person by. A space starts the next label.                                                                                                                                      |
+| Field                   | What to enter                                                                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Name**                | The name shown everywhere. Required.                                                                                                                                                                   |
+| **Full name**           | Their whole name, shown under the name.                                                                                                                                                                |
+| **Birth name**          | The name they were born with, shown as "Born as".                                                                                                                                                      |
+| **Gender**              | **Female**, **Male**, **Other** or **Unknown**.                                                                                                                                                        |
+| **Born**, **Died**      | A year, a month or a day: `1934`, `1934-05` or `1934-05-20`, and beside it **On**, or **About**, **Before** or **After** when the date is uncertain. Without a day, their age is shown as approximate. |
+| **Contact information** | **Add contact** adds a row with a **Type** (for example "Email, phone, address…") and the **Details**. An e-mail address becomes a link that writes to it, and a phone number one that calls it.       |
+| **Allergies**           | Shown with a warning sign in the header.                                                                                                                                                               |
+| **Description**         | Free text, with Markdown.                                                                                                                                                                              |
+| **Labels**              | Words to find the person by. A space starts the next label.                                                                                                                                            |
 
 Press **Save**. If something is missing, the dialog says "a name is needed" or "each contact needs both a type and details". Events, parents, partners, children and homes are not in this dialog; see [Family tree, events and homes](family.md).
+
+### Uncertain dates
+
+Old records often say only roughly when something happened. Beside **Born**, **Died** and an
+event's **Date**, choose how sure the date is:
+
+| Choice     | Means                     | Shown as      |
+| ---------- | ------------------------- | ------------- |
+| **On**     | it happened then          | `1890`        |
+| **About**  | around then, give or take | `~1890`       |
+| **Before** | at the latest then        | `before 1900` |
+| **After**  | at the earliest then      | `after 1900`  |
+
+An uncertain date is placed on the timeline at its year, under "about", "before" or "after", and
+the header and the **Info** tab show it as above; a card in the family tree, short of room, writes
+`<1900` and `>1900`. It makes no birthday or memorial on the Home page, since the day is not known.
+An age worked out from a date **About** a year is shown with a `~`; a birth or death only
+**Before** or **After** a year gives no age at all. Typing a new date in **Edit person** keeps the
+choice beside it; in the terminal, `person-update --born` alone makes the date exact, and
+`--born-qualifier about` (or `before`, `after`) qualifies it.
 
 ## Cover pictures
 

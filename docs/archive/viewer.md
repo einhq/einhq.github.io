@@ -185,8 +185,9 @@ to show. From the top:
 
 Each person has a badge with their age on the day the picture was taken: **69 years**, or
 **8 months** for a child under one. A **~** in front, as in **~44 years**, marks an age that is
-approximate because only the year or month of the person's birth is known. There is no age when the
-picture has no date or the person has no birth date.
+approximate because only the year or month of the person's birth is known, or only about when
+they were born. There is no age when the picture has no date, or the person has no birth date or
+one only before or after a year.
 
 Pointing at a name lights up that person's face box on the picture, and pointing at a box lights up
 the name. Click a name to open the person's page.

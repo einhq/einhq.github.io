@@ -211,7 +211,10 @@ An event is a dated note on a person: a wedding, a move abroad, a graduation, a 
 
 1. Open the person's page, click ⋮ in the header and choose **Add event**.
 2. Choose the **Type**: **Generic**, **Birth**, **Death**, **Marriage** or **Engagement**.
-3. Type the **Date** as `1956`, `1956-06` or `1956-06-16`.
+3. Type the **Date** as `1956`, `1956-06` or `1956-06-16`. Beside it, **On** says it happened
+   then; choose **About**, **Before** or **After** when that is all you know (see
+   [Uncertain dates](people.md#uncertain-dates)). A birth or death sets the same on **Born** or
+   **Died**.
 4. Write the **Description**, with Markdown if you like. Its first line becomes the event's title
    on the timeline.
 5. **Written by** names the person who wrote the text. It starts as you, when your account is linked
@@ -381,9 +384,10 @@ SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and 
   A date or a gender that disagrees rules a person out, and when two people fit equally well,
   neither is chosen.
 - **Everyone else gets a page**, named by the name they went by and the surname they had last,
-  with their full name, the name they were born with, gender, and the dates of birth and death
-  the file gives exactly. An approximate date, such as "about 1890", helps find a person but is
-  not written down.
+  with their full name, the name they were born with, gender, and the dates of birth and death.
+  A date the file gives only roughly is kept as such: "about 1890" as **About** 1890, "before
+  1900" and "after 1900" as **Before** and **After**, and "between 1885 and 1889" as about 1887
+  (see [Uncertain dates](people.md#uncertain-dates)).
 - **What a person is missing is filled in.** A full name, birth name, gender or date the archive
   does not have yet is taken from the file, and so are their notes, as the description on their
   **Info** tab; nothing the archive already has is changed.
@@ -394,7 +398,8 @@ SFTP (see [Getting your photos in](importing.md)), and EiN reads the people and 
   events and facts the file gives, each as an [event](#record-an-event) on the person, with its
   place and notes as its text. A birth, death, marriage or divorce becomes an event only when the
   file says where it happened or has a note on it, since the dates are on the person and the
-  partnership already. A wedding goes on one of the two partners. An event the person has already,
+  partnership already; a marriage or divorce the file dates only roughly becomes one too, since
+  a partnership's dates are exact. A wedding goes on one of the two partners. An event the person has already,
   of the same kind on the same day, is not added again, and a person has one birth and one death.
 - **A place that is a location in the archive** gives the event that location's position on the
   map: the whole place, or its first part, such as "Lower Wrenfield" for "Lower Wrenfield, Kent",
@@ -429,8 +434,8 @@ page, so what it shows depends on what you record:
 
 | On the Home page                                                                 | Comes from               | Needs                                                            |
 | -------------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------------------------- |
-| Birthdays: "&lt;name&gt; turns N", or "would have turned N" after their death    | the person's **Born**    | a full date, `1934-08-22`                                        |
-| Memorials: "N years since &lt;name&gt; died"                                     | the person's **Died**    | a full date; only on round years                                 |
+| Birthdays: "&lt;name&gt; turns N", or "would have turned N" after their death    | the person's **Born**    | a full date, `1934-08-22`, not an uncertain one                  |
+| Memorials: "N years since &lt;name&gt; died"                                     | the person's **Died**    | a full date, not an uncertain one; only on round years           |
 | Anniversaries: "&lt;A&gt; and &lt;B&gt; — N years married" or "… years together" | a partnership's **From** | a full date; **Married** says married, **Partner** says together |
 
 A date known only to the year or the month never comes round, since it has no day. Round years, the

@@ -328,7 +328,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 <p>The header shows:</p>
 <ul>
 <li>their cover picture and name, the full name under it, and &quot;Born as &lt;birth name&gt;&quot; when that is different;</li>
-<li>a life line: &quot;1934 – 2021 · died aged 86&quot; for someone who has died, &quot;Born 1958 · 68&quot; for someone living. A <code>~</code> before the age means it is approximate, because the birth date has no day;</li>
+<li>a life line: &quot;1934 – 2021 · died aged 86&quot; for someone who has died, &quot;Born 1958 · 68&quot; for someone living. A <code>~</code> before the age means it is approximate, because the birth date has no day or is uncertain; an uncertain year reads &quot;~1890&quot;, &quot;before 1900&quot; or &quot;after 1900&quot; (see <a href="#uncertain-dates">Uncertain dates</a>);</li>
 <li>where they live now, linking to the location, their contact details (not on a phone; the Info tab lists them), and how many photos they are in, over which years (&quot;34 photos · 1968–2025&quot;);</li>
 <li>allergies, marked with a warning sign, their labels, and the description.</li>
 </ul>
@@ -464,7 +464,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 </tr>
 <tr>
 <td><strong>Born</strong>, <strong>Died</strong></td>
-<td>A year, a month or a day: <code>1934</code>, <code>1934-05</code> or <code>1934-05-20</code>. Without a day, their age is shown as approximate.</td>
+<td>A year, a month or a day: <code>1934</code>, <code>1934-05</code> or <code>1934-05-20</code>, and beside it <strong>On</strong>, or <strong>About</strong>, <strong>Before</strong> or <strong>After</strong> when the date is uncertain. Without a day, their age is shown as approximate.</td>
 </tr>
 <tr>
 <td><strong>Contact information</strong></td>
@@ -485,6 +485,46 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 </tbody></table>
 </div>
 <p>Press <strong>Save</strong>. If something is missing, the dialog says &quot;a name is needed&quot; or &quot;each contact needs both a type and details&quot;. Events, parents, partners, children and homes are not in this dialog; see <a href="family.html">Family tree, events and homes</a>.</p>
+<h3 id="uncertain-dates">Uncertain dates<a class="anchor" href="#uncertain-dates" aria-label="Link to this section"></a></h3>
+<p>Old records often say only roughly when something happened. Beside <strong>Born</strong>, <strong>Died</strong> and an
+event&#39;s <strong>Date</strong>, choose how sure the date is:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>Means</th>
+<th>Shown as</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>On</strong></td>
+<td>it happened then</td>
+<td><code>1890</code></td>
+</tr>
+<tr>
+<td><strong>About</strong></td>
+<td>around then, give or take</td>
+<td><code>~1890</code></td>
+</tr>
+<tr>
+<td><strong>Before</strong></td>
+<td>at the latest then</td>
+<td><code>before 1900</code></td>
+</tr>
+<tr>
+<td><strong>After</strong></td>
+<td>at the earliest then</td>
+<td><code>after 1900</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>An uncertain date is placed on the timeline at its year, under &quot;about&quot;, &quot;before&quot; or &quot;after&quot;, and
+the header and the <strong>Info</strong> tab show it as above; a card in the family tree, short of room, writes
+<code>&lt;1900</code> and <code>&gt;1900</code>. It makes no birthday or memorial on the Home page, since the day is not known.
+An age worked out from a date <strong>About</strong> a year is shown with a <code>~</code>; a birth or death only
+<strong>Before</strong> or <strong>After</strong> a year gives no age at all. Typing a new date in <strong>Edit person</strong> keeps the
+choice beside it; in the terminal, <code>person-update --born</code> alone makes the date exact, and
+<code>--born-qualifier about</code> (or <code>before</code>, <code>after</code>) qualifies it.</p>
 <h2 id="cover-pictures">Cover pictures<a class="anchor" href="#cover-pictures" aria-label="Link to this section"></a></h2>
 <p>A named person without a cover gets one by themselves: the crop of one of their own faces. Faces someone named or confirmed come first, then photos where they are the only face, then clear faces looking into the camera, then the largest. A cover you choose yourself, with <strong>Set as cover</strong> on the Faces or Media tab, is never replaced by another pick. A cover is replaced only when it no longer works: the picture is gone, or it is the crop of a face that has since been taken off the person, because their card would then show somebody else.</p>
 <h2 id="what-ein-keeps-of-your-decisions">What EiN keeps of your decisions<a class="anchor" href="#what-ein-keeps-of-your-decisions" aria-label="Link to this section"></a></h2>
@@ -588,7 +628,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/people.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-faces-become-people">How faces become people</a></li><li><a href="#the-people-page">The People page</a></li><li><a href="#name-the-people-recognition-found">Name the people recognition found</a></li><li><a href="#look-at-everything-before-you-decide">Look at everything before you decide</a></li><li class="nested"><a href="#take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)</a></li><li class="nested"><a href="#group-similar-faces">Group similar faces</a></li><li><a href="#fold-several-unidentified-people-into-one">Fold several unidentified people into one</a></li><li><a href="#say-what-is-not-a-person">Say what is not a person</a></li><li><a href="#name-a-face-in-the-viewer">Name a face in the viewer</a></li><li><a href="#create-a-person-by-hand">Create a person by hand</a></li><li><a href="#a-persons-page">A person's page</a></li><li><a href="#correct-a-persons-faces">Correct a person's faces</a></li><li class="nested"><a href="#doubtful-faces">Doubtful faces</a></li><li><a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a></li><li><a href="#split-a-person-who-is-really-two">Split a person who is really two</a></li><li><a href="#edit-a-person">Edit a person</a></li><li><a href="#cover-pictures">Cover pictures</a></li><li><a href="#what-ein-keeps-of-your-decisions">What EiN keeps of your decisions</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-faces-become-people">How faces become people</a></li><li><a href="#the-people-page">The People page</a></li><li><a href="#name-the-people-recognition-found">Name the people recognition found</a></li><li><a href="#look-at-everything-before-you-decide">Look at everything before you decide</a></li><li class="nested"><a href="#take-some-faces-out-split-off-move-to">Take some faces out (Split off, Move to…)</a></li><li class="nested"><a href="#group-similar-faces">Group similar faces</a></li><li><a href="#fold-several-unidentified-people-into-one">Fold several unidentified people into one</a></li><li><a href="#say-what-is-not-a-person">Say what is not a person</a></li><li><a href="#name-a-face-in-the-viewer">Name a face in the viewer</a></li><li><a href="#create-a-person-by-hand">Create a person by hand</a></li><li><a href="#a-persons-page">A person's page</a></li><li><a href="#correct-a-persons-faces">Correct a person's faces</a></li><li class="nested"><a href="#doubtful-faces">Doubtful faces</a></li><li><a href="#recordings-a-person-is-heard-in">Recordings a person is heard in</a></li><li><a href="#split-a-person-who-is-really-two">Split a person who is really two</a></li><li><a href="#edit-a-person">Edit a person</a></li><li class="nested"><a href="#uncertain-dates">Uncertain dates</a></li><li><a href="#cover-pictures">Cover pictures</a></li><li><a href="#what-ein-keeps-of-your-decisions">What EiN keeps of your decisions</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -352,7 +352,10 @@ Rachel Moore is Erik Wrenfield's stepmother</code></pre></div>
 <ol>
 <li>Open the person&#39;s page, click ⋮ in the header and choose <strong>Add event</strong>.</li>
 <li>Choose the <strong>Type</strong>: <strong>Generic</strong>, <strong>Birth</strong>, <strong>Death</strong>, <strong>Marriage</strong> or <strong>Engagement</strong>.</li>
-<li>Type the <strong>Date</strong> as <code>1956</code>, <code>1956-06</code> or <code>1956-06-16</code>.</li>
+<li>Type the <strong>Date</strong> as <code>1956</code>, <code>1956-06</code> or <code>1956-06-16</code>. Beside it, <strong>On</strong> says it happened
+then; choose <strong>About</strong>, <strong>Before</strong> or <strong>After</strong> when that is all you know (see
+<a href="people.html#uncertain-dates">Uncertain dates</a>). A birth or death sets the same on <strong>Born</strong> or
+<strong>Died</strong>.</li>
 <li>Write the <strong>Description</strong>, with Markdown if you like. Its first line becomes the event&#39;s title
 on the timeline.</li>
 <li><strong>Written by</strong> names the person who wrote the text. It starts as you, when your account is linked
@@ -571,9 +574,10 @@ child of theirs in the file has been found and is related to them the same way i
 A date or a gender that disagrees rules a person out, and when two people fit equally well,
 neither is chosen.</li>
 <li><strong>Everyone else gets a page</strong>, named by the name they went by and the surname they had last,
-with their full name, the name they were born with, gender, and the dates of birth and death
-the file gives exactly. An approximate date, such as &quot;about 1890&quot;, helps find a person but is
-not written down.</li>
+with their full name, the name they were born with, gender, and the dates of birth and death.
+A date the file gives only roughly is kept as such: &quot;about 1890&quot; as <strong>About</strong> 1890, &quot;before
+1900&quot; and &quot;after 1900&quot; as <strong>Before</strong> and <strong>After</strong>, and &quot;between 1885 and 1889&quot; as about 1887
+(see <a href="people.html#uncertain-dates">Uncertain dates</a>).</li>
 <li><strong>What a person is missing is filled in.</strong> A full name, birth name, gender or date the archive
 does not have yet is taken from the file, and so are their notes, as the description on their
 <strong>Info</strong> tab; nothing the archive already has is changed.</li>
@@ -584,7 +588,8 @@ two parents already gets no third, and nobody becomes their own ancestor.</li>
 events and facts the file gives, each as an <a href="#record-an-event">event</a> on the person, with its
 place and notes as its text. A birth, death, marriage or divorce becomes an event only when the
 file says where it happened or has a note on it, since the dates are on the person and the
-partnership already. A wedding goes on one of the two partners. An event the person has already,
+partnership already; a marriage or divorce the file dates only roughly becomes one too, since
+a partnership&#39;s dates are exact. A wedding goes on one of the two partners. An event the person has already,
 of the same kind on the same day, is not added again, and a person has one birth and one death.</li>
 <li><strong>A place that is a location in the archive</strong> gives the event that location&#39;s position on the
 map: the whole place, or its first part, such as &quot;Lower Wrenfield&quot; for &quot;Lower Wrenfield, Kent&quot;,
@@ -620,12 +625,12 @@ page, so what it shows depends on what you record:</p>
 <tbody><tr>
 <td>Birthdays: &quot;&lt;name&gt; turns N&quot;, or &quot;would have turned N&quot; after their death</td>
 <td>the person&#39;s <strong>Born</strong></td>
-<td>a full date, <code>1934-08-22</code></td>
+<td>a full date, <code>1934-08-22</code>, not an uncertain one</td>
 </tr>
 <tr>
 <td>Memorials: &quot;N years since &lt;name&gt; died&quot;</td>
 <td>the person&#39;s <strong>Died</strong></td>
-<td>a full date; only on round years</td>
+<td>a full date, not an uncertain one; only on round years</td>
 </tr>
 <tr>
 <td>Anniversaries: &quot;&lt;A&gt; and &lt;B&gt; — N years married&quot; or &quot;… years together&quot;</td>

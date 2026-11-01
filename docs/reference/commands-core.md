@@ -3374,7 +3374,7 @@ truncate [-s <string>] <path>
 
 ### `ui-build`
 
-Bundle modules' pages into /var/cache/ui for the web UI to load, unless unchanged since the last build.
+Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build.
 
 <small>changes things</small>
 
@@ -3392,7 +3392,7 @@ ui-build [--all] <module>...
 
 ### `ui-icons`
 
-Tabler icons by name, as SVG markup, for the web UI.
+Tabler icons by name, as SVG markup, for the Web UI.
 
 <small>reads only</small>
 
@@ -3406,7 +3406,7 @@ ui-icons <name>...
 
 ### `ui-nav`
 
-The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes.
+The Web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes.
 
 <small>reads only</small>
 
@@ -3785,7 +3785,7 @@ With `JSON_OUTPUT=1`: the counts asked for, then the file name; a total line whe
 
 ### `who`
 
-List who is signed in: each SSH login, terminal and web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own.
+List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own.
 
 <small>reads only</small>
 
@@ -3801,7 +3801,7 @@ With `JSON_OUTPUT=1`: One row per open session, oldest first.
 
 ### `www`
 
-Manage active web UI.
+Manage active Web UI.
 
 <small>reads only</small>
 

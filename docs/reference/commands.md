@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 353 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 355 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -204,9 +204,9 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [tr](commands-core.md#tr) | Translate or delete characters. |
 | [trash](commands-core.md#trash) | Move nodes into the reader's trash, alone or as one batch, list it, restore entries, or empty it. |
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
-| [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the web UI to load, unless unchanged since the last build. |
-| [ui-icons](commands-core.md#ui-icons) | Tabler icons by name, as SVG markup, for the web UI. |
-| [ui-nav](commands-core.md#ui-nav) | The web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
+| [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build. |
+| [ui-icons](commands-core.md#ui-icons) | Tabler icons by name, as SVG markup, for the Web UI. |
+| [ui-nav](commands-core.md#ui-nav) | The Web UI's sidebar, top bar and panels for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
 | [uniq](commands-core.md#uniq) | Report or omit repeated lines. |
 | [unmount](commands-core.md#unmount) | Unmount a filesystem. |
 | [unrelate](commands-core.md#unrelate) | Remove a bidirectional relation (both sides) |
@@ -229,8 +229,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [user-whoami](commands-core.md#user-whoami) | Print the current username. |
 | [uuid](commands-core.md#uuid) | Generate a random UUID. |
 | [wc](commands-core.md#wc) | Print newline, word, and byte counts of files or stdin. |
-| [who](commands-core.md#who) | List who is signed in: each SSH login, terminal and web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own. |
-| [www](commands-core.md#www) | Manage active web UI. |
+| [who](commands-core.md#who) | List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own. |
+| [www](commands-core.md#www) | Manage active Web UI. |
 | [xargs](commands-core.md#xargs) | Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run. |
 
 ## Album folders
@@ -243,7 +243,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 135 in full](../archive/commands.md).
+[All 137 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -267,7 +267,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
 | [device](../archive/commands.md#device) | Camera and recording device management. |
 | [device-cover](../archive/commands.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
-| [device-create](../archive/commands.md#device-create) | Create a device node. |
+| [device-create](../archive/commands.md#device-create) | Create a device node and link the media already carrying its fingerprint. |
 | [device-info](../archive/commands.md#device-info) | Show device details and owners. |
 | [device-link](../archive/commands.md#device-link) | Link a file to its capture device using extracted exif, or to a device named by hand. |
 | [device-list](../archive/commands.md#device-list) | List all devices. |
@@ -299,6 +299,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-transcript](../archive/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
 | [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
+| [gedcom-read](../archive/commands.md#gedcom-read) | Read a GEDCOM file and say who each of its individuals would be if it were imported now: matched to a person, made one or left out, with the people who could be them. |
+| [gedcom-stage](../archive/commands.md#gedcom-stage) | Move a GEDCOM file staged under files/ to its staging area's genealogy/, where it waits to be looked over and imported. |
 | [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
