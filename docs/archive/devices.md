@@ -35,9 +35,10 @@ The device's name plays no part. The make and model are compared exactly as the 
 them, so a device registered with the make `Nikon` does not match files that say
 `NIKON CORPORATION`.
 
-EiN does this once, when it first reads the file. A device you register afterwards does not claim
-the files that arrived before it; **Link existing media** on its page finds them (see
-[Link the pictures it took before it was registered](#link-the-pictures-it-took-before-it-was-registered)).
+EiN does this when it first reads the file, and when you register the device: registering a camera
+links the files that arrived before it. A make, model or serial number you change later links only
+the files that arrive from then on; **Link existing media** on its page finds the rest (see
+[Link the files a changed fingerprint matches](#link-the-files-a-changed-fingerprint-matches)).
 
 Two things a fingerprint cannot do:
 
@@ -91,9 +92,9 @@ The quickest way to register a camera is from the pictures it took.
 5. Under **Timezone**, choose the time zone its clock was set to, and turn on
    **Scanner or digitizer** or **Video times in UTC** if they apply (see
    [Clocks, time zones and scanners](#clocks-time-zones-and-scanners)).
-6. Click **Register**. The device's page opens.
-7. On its **Info** tab, click **Link existing media**. The files the camera took are linked to it,
-   and a message says, for example, "Linked 412 files and updated dates on 37."
+6. Click **Register**. The files the camera took are linked to it and dated by its settings, and
+   the device's page opens. For a camera known only by its make and model this can take minutes in
+   a large archive.
 
 **Rescan** at the top of the unregistered list looks again, for instance after a large import.
 When every camera is registered, the list says "Every camera the media names is registered (N files
@@ -123,7 +124,8 @@ before the scans arrive, or a camera whose files you are about to import.
 1. Open the **Create** menu (the plus in the top bar) and choose **Device**, or click **New device**
    on an empty Devices page. The **Register Device** dialog opens.
 2. Fill in the fields below. Only **Name** is required.
-3. Click **Register**. The device's page opens.
+3. Click **Register**. The device's page opens. With a serial number, or both a make and a model,
+   the files already in the archive that carry them are linked to it first.
 
 | Field                    | What to enter                                                                                                                                       |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -153,7 +155,7 @@ Click a card on the Devices page, or the device's name in the viewer. The page's
 `/devices/` and the device's folder name, such as `/devices/Jons_eTrex`, and a tab other than
 **Info** adds `?tab=` with the tab's name, such as `?tab=track`.
 
-![The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, "75 files · 2025–2026", the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card](../../assets/shots/device.webp "A device's page opens on its settings, with the button that links the pictures it took before it was registered.")
+![The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, "75 files · 2025–2026", the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card](../../assets/shots/device.webp "A device's page opens on its settings, with the button that links the pictures a changed fingerprint matches.")
 
 Under the name, the header shows the current owners (up to three, then "and N more"), how many
 files the device took and in which years, such as **75 files · 2025–2026** (**N+ files** when
@@ -176,16 +178,16 @@ describes.
 **Move to trash** sends the device to your trash, and the message's **Undo** brings it back (see
 [Your profile, favourites and trash](../guide/profile.md)).
 
-## Link the pictures it took before it was registered
+## Link the files a changed fingerprint matches
 
-Files are linked to their device when EiN first reads them. A camera registered afterwards leaves
-its older pictures unclaimed, and so does a device whose make, model or serial number you change
-later.
+Files are linked to their device when EiN first reads them and when the device is registered. A
+device whose make, model or serial number you change later leaves the files already in the archive
+that carry the new ones unclaimed.
 
 1. Open the device's page. The **Info** tab opens.
-2. Click **Link existing media**. The card explains: "Files are linked to their device when they are
-   indexed. A camera registered afterwards leaves its older photos unclaimed; this finds them by
-   fingerprint and attaches them."
+2. Click **Link existing media**. The card explains: "Files are linked to their device when it is
+   registered and when they are indexed. A make, model or serial number changed afterwards leaves
+   the files it now matches unclaimed; this finds them by fingerprint and attaches them."
 3. Wait for the message, such as "Linked 412 files and updated dates on 37.", or "Nothing new to
    link or update — every matching file already has this device policy."
 
@@ -366,20 +368,20 @@ not tried again by itself. Waiting files are kept in your staging area's `routes
 
 ## If something goes differently
 
-| What you see                                                                                                                                       | Why                                                                                                                                              | What to do                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The viewer shows only a make and model where the camera's name should be.                                                                          | The camera is not registered, or it was registered after the picture arrived.                                                                    | Register it from **Unregistered**, or click **Link existing media** on its page.                                                                                                        |
-| A device's **Media** tab says "Nothing is linked to this device yet. If it was registered after the media was indexed, use “Link existing media”." | The device was registered after its pictures arrived.                                                                                            | Click **Link existing media** on the **Info** tab.                                                                                                                                      |
-| The **Media** tab says "Nothing is linked to this device yet, and nothing can be: give it a serial number, or both a make and a model."            | The device has no fingerprint.                                                                                                                   | **Edit** it, fill in **Make** and **Model** exactly as the files have them, then click **Link existing media**.                                                                         |
-| **Link existing media** finds nothing, but pictures from the camera are missing from its page.                                                     | The make or model differs from what the files say; the files are linked to another device; or they name no camera at all.                        | Compare with the `Make` and `Model` in the viewer's **Details**. For files linked elsewhere or naming no camera, use `device-relink --force` or `device-link --device` in the terminal. |
-| Pictures from two people's phones are mixed up on one device.                                                                                      | The phones are the same model and write no serial number.                                                                                        | EiN cannot tell them apart. Link one person's pictures by hand with `device-link --device`.                                                                                             |
-| A camera's pictures are some hours off.                                                                                                            | Its clock was set to another time zone.                                                                                                          | Set its **Timezone**; see [Clocks, time zones and scanners](#clocks-time-zones-and-scanners).                                                                                           |
-| A phone's videos are off by exactly its time zone.                                                                                                 | The phone keeps video times in UTC.                                                                                                              | Turn on **Video times in UTC** for it.                                                                                                                                                  |
-| Scans are dated to the day they were scanned.                                                                                                      | The scanner is not registered with **Scanner or digitizer**.                                                                                     | Register it with the setting on, or turn it on in **Edit device**.                                                                                                                      |
-| Registering says `device-create: /archive/devices/…: already exists`.                                                                              | A device with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so `Davids 7D` and `David's 7D` clash. | Choose another name, or open the existing device.                                                                                                                                       |
-| **Edit**, **Link existing media**, **Add owner** or **Upload GPX** is missing.                                                                     | You may not change this device.                                                                                                                  | Ask the person who registered it, or an administrator.                                                                                                                                  |
-| **Upload GPX** gives a message ending in "no track points found".                                                                                  | The file holds no recorded track points, only a planned route or waypoints.                                                                      | Use the file the device recorded while it moved.                                                                                                                                        |
-| A GPX file sits in an album as an ordinary file.                                                                                                   | It was uploaded straight into the album, where GPX files are not read as routes.                                                                 | Upload it on the device's **Track** tab, then delete the file from the album.                                                                                                           |
+| What you see                                                                                                                                                                                   | Why                                                                                                                                              | What to do                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The viewer shows only a make and model where the camera's name should be.                                                                                                                      | The camera is not registered, or its make, model or serial number was changed after the picture arrived.                                         | Register it from **Unregistered**, or click **Link existing media** on its page.                                                                                                        |
+| A device's **Media** tab says "Nothing is linked to this device yet: no file carries its make and model or serial number. If they changed since it was registered, use “Link existing media”." | No file names this camera as the device has it, or its make, model or serial number was changed after its pictures arrived.                      | Click **Link existing media** on the **Info** tab.                                                                                                                                      |
+| The **Media** tab says "Nothing is linked to this device yet, and nothing can be: give it a serial number, or both a make and a model."                                                        | The device has no fingerprint.                                                                                                                   | **Edit** it, fill in **Make** and **Model** exactly as the files have them, then click **Link existing media**.                                                                         |
+| **Link existing media** finds nothing, but pictures from the camera are missing from its page.                                                                                                 | The make or model differs from what the files say; the files are linked to another device; or they name no camera at all.                        | Compare with the `Make` and `Model` in the viewer's **Details**. For files linked elsewhere or naming no camera, use `device-relink --force` or `device-link --device` in the terminal. |
+| Pictures from two people's phones are mixed up on one device.                                                                                                                                  | The phones are the same model and write no serial number.                                                                                        | EiN cannot tell them apart. Link one person's pictures by hand with `device-link --device`.                                                                                             |
+| A camera's pictures are some hours off.                                                                                                                                                        | Its clock was set to another time zone.                                                                                                          | Set its **Timezone**; see [Clocks, time zones and scanners](#clocks-time-zones-and-scanners).                                                                                           |
+| A phone's videos are off by exactly its time zone.                                                                                                                                             | The phone keeps video times in UTC.                                                                                                              | Turn on **Video times in UTC** for it.                                                                                                                                                  |
+| Scans are dated to the day they were scanned.                                                                                                                                                  | The scanner is not registered with **Scanner or digitizer**.                                                                                     | Register it with the setting on, or turn it on in **Edit device**.                                                                                                                      |
+| Registering says `device-create: /archive/devices/…: already exists`.                                                                                                                          | A device with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so `Davids 7D` and `David's 7D` clash. | Choose another name, or open the existing device.                                                                                                                                       |
+| **Edit**, **Link existing media**, **Add owner** or **Upload GPX** is missing.                                                                                                                 | You may not change this device.                                                                                                                  | Ask the person who registered it, or an administrator.                                                                                                                                  |
+| **Upload GPX** gives a message ending in "no track points found".                                                                                                                              | The file holds no recorded track points, only a planned route or waypoints.                                                                      | Use the file the device recorded while it moved.                                                                                                                                        |
+| A GPX file sits in an album as an ordinary file.                                                                                                                                               | It was uploaded straight into the album, where GPX files are not read as routes.                                                                 | Upload it on the device's **Track** tab, then delete the file from the album.                                                                                                           |
 
 ## From the terminal
 
@@ -387,19 +389,19 @@ Each device is a folder under `/archive/devices`; `ls /archive/devices` lists th
 route is the child `track`, and the GPX files the route was read from are in its `routes` folder. The commands below are in the
 [archive command reference](commands.md), and every one takes `--help`.
 
-| Task                                                  | Command                                                                                                                                                                                                     |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the cameras seen but not registered              | [`device-scan`](commands.md#device-scan)                                                                                                                                                                    |
-| Register a device                                     | [`device-create`](commands.md#device-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc`                                               |
-| Change a device's settings                            | [`device-update`](commands.md#device-update) `<device> --timezone <zone>`, or `--clear <field>`                                                                                                             |
-| Show a device and its owners                          | [`device-info`](commands.md#device-info) `<device>`                                                                                                                                                         |
-| Link the files a device took before it was registered | [`device-relink`](commands.md#device-relink) `<device>`; `--dry-run` reports first, `--force` takes files from another device, `--all` does every device                                                    |
-| Link files to a device by hand                        | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                                                              |
-| Add an owner, or change the dates                     | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                                                                 |
-| Remove an owner                                       | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                                                                |
-| Add a GPX file to a device's track                    | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`, which moves the file to the device's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
-| List the GPX files a track was read from              | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
-| Bring a device's automatic cover up to date           | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
+| Task                                          | Command                                                                                                                                                                                                     |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List the cameras seen but not registered      | [`device-scan`](commands.md#device-scan)                                                                                                                                                                    |
+| Register a device                             | [`device-create`](commands.md#device-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc`                                               |
+| Change a device's settings                    | [`device-update`](commands.md#device-update) `<device> --timezone <zone>`, or `--clear <field>`                                                                                                             |
+| Show a device and its owners                  | [`device-info`](commands.md#device-info) `<device>`                                                                                                                                                         |
+| Link the files a device's fingerprint matches | [`device-relink`](commands.md#device-relink) `<device>`; `--dry-run` reports first, `--force` takes files from another device, `--all` does every device                                                    |
+| Link files to a device by hand                | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                                                              |
+| Add an owner, or change the dates             | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                                                                 |
+| Remove an owner                               | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                                                                |
+| Add a GPX file to a device's track            | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`, which moves the file to the device's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
+| List the GPX files a track was read from      | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
+| Bring a device's automatic cover up to date   | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 
 Registering Jon's GPS tracker, making him its owner and adding a route copied into your home folder:
 

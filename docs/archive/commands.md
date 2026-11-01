@@ -559,7 +559,7 @@ With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink to its newest picture (or v
 
 ### `device-create`
 
-Create a device node.
+Create a device node and link the media already carrying its fingerprint.
 
 <small>changes things</small>
 

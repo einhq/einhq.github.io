@@ -118,9 +118,10 @@ model (<code>Model</code>) and, when the camera writes one, its serial number (<
 <p>The device&#39;s name plays no part. The make and model are compared exactly as the camera writes
 them, so a device registered with the make <code>Nikon</code> does not match files that say
 <code>NIKON CORPORATION</code>.</p>
-<p>EiN does this once, when it first reads the file. A device you register afterwards does not claim
-the files that arrived before it; <strong>Link existing media</strong> on its page finds them (see
-<a href="#link-the-pictures-it-took-before-it-was-registered">Link the pictures it took before it was registered</a>).</p>
+<p>EiN does this when it first reads the file, and when you register the device: registering a camera
+links the files that arrived before it. A make, model or serial number you change later links only
+the files that arrive from then on; <strong>Link existing media</strong> on its page finds the rest (see
+<a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a>).</p>
 <p>Two things a fingerprint cannot do:</p>
 <ul>
 <li><strong>Tell two phones of the same model apart.</strong> A serial number identifies one camera body; a make
@@ -168,9 +169,9 @@ cameras with the most files come first.</li>
 <li>Under <strong>Timezone</strong>, choose the time zone its clock was set to, and turn on
 <strong>Scanner or digitizer</strong> or <strong>Video times in UTC</strong> if they apply (see
 <a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a>).</li>
-<li>Click <strong>Register</strong>. The device&#39;s page opens.</li>
-<li>On its <strong>Info</strong> tab, click <strong>Link existing media</strong>. The files the camera took are linked to it,
-and a message says, for example, &quot;Linked 412 files and updated dates on 37.&quot;</li>
+<li>Click <strong>Register</strong>. The files the camera took are linked to it and dated by its settings, and
+the device&#39;s page opens. For a camera known only by its make and model this can take minutes in
+a large archive.</li>
 </ol>
 <p><strong>Rescan</strong> at the top of the unregistered list looks again, for instance after a large import.
 When every camera is registered, the list says &quot;Every camera the media names is registered (N files
@@ -194,7 +195,8 @@ before the scans arrive, or a camera whose files you are about to import.</p>
 <li>Open the <strong>Create</strong> menu (the plus in the top bar) and choose <strong>Device</strong>, or click <strong>New device</strong>
 on an empty Devices page. The <strong>Register Device</strong> dialog opens.</li>
 <li>Fill in the fields below. Only <strong>Name</strong> is required.</li>
-<li>Click <strong>Register</strong>. The device&#39;s page opens.</li>
+<li>Click <strong>Register</strong>. The device&#39;s page opens. With a serial number, or both a make and a model,
+the files already in the archive that carry them are linked to it first.</li>
 </ol>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -246,7 +248,7 @@ describes, is offered to whoever may change it, which the device&#39;s <strong>S
 <p>Click a card on the Devices page, or the device&#39;s name in the viewer. The page&#39;s address is
 <code>/devices/</code> and the device&#39;s folder name, such as <code>/devices/Jons_eTrex</code>, and a tab other than
 <strong>Info</strong> adds <code>?tab=</code> with the tab&#39;s name, such as <code>?tab=track</code>.</p>
-<figure class="shot"><a href="../../assets/shots/device@2x.webp"><img src="../../assets/shots/device.webp" srcset="../../assets/shots/device.webp 1x, ../../assets/shots/device@2x.webp 2x" alt="The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, &quot;75 files · 2025–2026&quot;, the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A device&#39;s page opens on its settings, with the button that links the pictures it took before it was registered.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/device@2x.webp"><img src="../../assets/shots/device.webp" srcset="../../assets/shots/device.webp 1x, ../../assets/shots/device@2x.webp 2x" alt="The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, &quot;75 files · 2025–2026&quot;, the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A device&#39;s page opens on its settings, with the button that links the pictures a changed fingerprint matches.</figcaption></figure>
 <p>Under the name, the header shows the current owners (up to three, then &quot;and N more&quot;), how many
 files the device took and in which years, such as <strong>75 files · 2025–2026</strong> (<strong>N+ files</strong> when
 counting stopped at its limit), and the device&#39;s labels. For those who may change the device, the
@@ -286,15 +288,15 @@ use <strong>Set time</strong>, as <a href="dates-places.html#set-the-time-of-sev
 describes.</p>
 <p><strong>Move to trash</strong> sends the device to your trash, and the message&#39;s <strong>Undo</strong> brings it back (see
 <a href="../guide/profile.html">Your profile, favourites and trash</a>).</p>
-<h2 id="link-the-pictures-it-took-before-it-was-registered">Link the pictures it took before it was registered<a class="anchor" href="#link-the-pictures-it-took-before-it-was-registered" aria-label="Link to this section"></a></h2>
-<p>Files are linked to their device when EiN first reads them. A camera registered afterwards leaves
-its older pictures unclaimed, and so does a device whose make, model or serial number you change
-later.</p>
+<h2 id="link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches<a class="anchor" href="#link-the-files-a-changed-fingerprint-matches" aria-label="Link to this section"></a></h2>
+<p>Files are linked to their device when EiN first reads them and when the device is registered. A
+device whose make, model or serial number you change later leaves the files already in the archive
+that carry the new ones unclaimed.</p>
 <ol>
 <li>Open the device&#39;s page. The <strong>Info</strong> tab opens.</li>
-<li>Click <strong>Link existing media</strong>. The card explains: &quot;Files are linked to their device when they are
-indexed. A camera registered afterwards leaves its older photos unclaimed; this finds them by
-fingerprint and attaches them.&quot;</li>
+<li>Click <strong>Link existing media</strong>. The card explains: &quot;Files are linked to their device when it is
+registered and when they are indexed. A make, model or serial number changed afterwards leaves
+the files it now matches unclaimed; this finds them by fingerprint and attaches them.&quot;</li>
 <li>Wait for the message, such as &quot;Linked 412 files and updated dates on 37.&quot;, or &quot;Nothing new to
 link or update — every matching file already has this device policy.&quot;</li>
 </ol>
@@ -471,12 +473,12 @@ not tried again by itself. Waiting files are kept in your staging area&#39;s <co
 </thead>
 <tbody><tr>
 <td>The viewer shows only a make and model where the camera&#39;s name should be.</td>
-<td>The camera is not registered, or it was registered after the picture arrived.</td>
+<td>The camera is not registered, or its make, model or serial number was changed after the picture arrived.</td>
 <td>Register it from <strong>Unregistered</strong>, or click <strong>Link existing media</strong> on its page.</td>
 </tr>
 <tr>
-<td>A device&#39;s <strong>Media</strong> tab says &quot;Nothing is linked to this device yet. If it was registered after the media was indexed, use “Link existing media”.&quot;</td>
-<td>The device was registered after its pictures arrived.</td>
+<td>A device&#39;s <strong>Media</strong> tab says &quot;Nothing is linked to this device yet: no file carries its make and model or serial number. If they changed since it was registered, use “Link existing media”.&quot;</td>
+<td>No file names this camera as the device has it, or its make, model or serial number was changed after its pictures arrived.</td>
 <td>Click <strong>Link existing media</strong> on the <strong>Info</strong> tab.</td>
 </tr>
 <tr>
@@ -559,7 +561,7 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <td><a href="commands.html#device-info"><code>device-info</code></a> <code>&lt;device&gt;</code></td>
 </tr>
 <tr>
-<td>Link the files a device took before it was registered</td>
+<td>Link the files a device&#39;s fingerprint matches</td>
 <td><a href="commands.html#device-relink"><code>device-relink</code></a> <code>&lt;device&gt;</code>; <code>--dry-run</code> reports first, <code>--force</code> takes files from another device, <code>--all</code> does every device</td>
 </tr>
 <tr>
@@ -612,7 +614,7 @@ chosen.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-pictures-it-took-before-it-was-registered">Link the pictures it took before it was registered</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -1001,7 +1001,7 @@ device-cover --all
 device-cover --media /archive/albums/Exempelalbum_2019/files/clip.mp4</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; a coverPhoto softlink to its newest picture (or video) is written for each device without a cover somebody chose.</p>
 <h3 id="device-create"><code>device-create</code><a class="anchor" href="#device-create" aria-label="Link to this section"></a></h3>
-<p>Create a device node.</p>
+<p>Create a device node and link the media already carrying its fingerprint.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>device-create [--name=&lt;string&gt;] [--make=&lt;string&gt;] [--model=&lt;string&gt;] [--serial=&lt;string&gt;] [--timezone=&lt;string&gt;] [--digitizer] [--quicktime-utc] [--description=&lt;string&gt;] &lt;target&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>

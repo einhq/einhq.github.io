@@ -288,8 +288,7 @@ When a camera's pictures come out hours off:
   a trip: give the camera's device the **Timezone** its clock was set to. For a registered camera,
   open its page, press **Edit** and set **Timezone**; saving re-dates the pictures linked to it and
   says "Re-dated N linked files." Register an unregistered one from the **Devices** page with its
-  **Timezone**, then press **Link existing media** on its page, which links its pictures and updates
-  their dates. [Devices and GPS tracks](devices.md) has the details.
+  **Timezone**, which links its pictures and dates them by it. [Devices and GPS tracks](devices.md) has the details.
 - **A phone's videos are off by exactly its time zone**: turn on **Video times in UTC** for that
   phone. Phones keep their videos' recording time in UTC.
 - **The clock was wrong by some amount**: use **Set time** as described above.
