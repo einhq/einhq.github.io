@@ -427,9 +427,10 @@ fold them together with `person-merge` (see [People and faces](people.md#fold-se
 
 ### Look over a family tree before it is imported
 
-**Review and import** on the Staging page opens the family tree waiting there, drawn as one tree
-with the archive's own people. Each card is a person in the file, and its coloured stripe says what
-the import would do with them:
+**Review and import** on the Staging page opens the family tree waiting there, drawn over the whole
+window as one tree with the archive's own people; the header counts them by what becomes of them.
+Each card is a person in the file, and its coloured stripe says what the import would do with
+them:
 
 | Stripe | Says                 | Means                                                                                                      |
 | ------ | -------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -441,10 +442,12 @@ the import would do with them:
 | Grey   | Only in the archive  | Not in the file: a parent, partner or child, in the archive, of someone found there.                       |
 
 A person who is found brings their family in the archive along, so the file's relations and the
-archive's meet on their card, and you can see whether the two trees agree. People in the file
-related to nobody else in it are listed below the tree.
+archive's meet on their card, and you can see whether the two trees agree. When the file holds
+families not related to each other, or people related to nobody else in it, a switch at the top of
+the tree picks which to show.
 
-Select a card and the panel beside the tree shows what the file says of them next to what the
+Select a card and a panel floating over the tree, at its right (over its lower part on a phone),
+shows what the file says of them next to what the
 archive has, marking with **+** what the import would add; it never changes what the archive has
 already. Under **Who is this?** are the people who fit, best first, then people of a like name:
 those who share a given name and the surname but have a word in their names the file does not,
