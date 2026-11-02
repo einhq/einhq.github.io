@@ -363,11 +363,11 @@ While one layer is chosen, the button shows that layer's icon instead of the fun
 The button under it, **Map style**, opens a column of previews, each showing the place you are
 looking at in one style. Pointing at a preview names it, and clicking it changes the map:
 
-| Style         | What it is                              |
-| ------------- | --------------------------------------- |
-| **Map**       | OpenStreetMap's street map, the default |
-| **Dark map**  | A dark grey map from Esri               |
-| **Satellite** | Aerial photographs from Esri            |
+| Style         | What it is                                                                          |
+| ------------- | ----------------------------------------------------------------------------------- |
+| **Map**       | OpenStreetMap's street map with OpenSeaMap's buoys, lights and beacons, the default |
+| **Dark map**  | A dark grey map from Esri                                                           |
+| **Satellite** | Aerial photographs from Esri                                                        |
 
 The maps on a location's page and on an album's **Map** tab have their own style button in the
 corner, with the same three styles.
@@ -424,6 +424,7 @@ recordings are never sent to them.
 | What                                           | From                                                     | What is sent                                                      |
 | ---------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------- |
 | The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`   | Your browser asks for the map squares of the area you look at     |
+| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                       | The same                                                          |
 | The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                          | The same                                                          |
 | A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org` | The machine EiN runs on sends the location's address, or its name |
 | Pictures' street addresses                     | Nominatim                                                | The machine EiN runs on sends each picture's coordinates          |
