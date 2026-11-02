@@ -170,10 +170,10 @@ on its <strong>Overview</strong> tab. A warning does not stop <strong>Healthy</s
 retries, and runs once the media service answers again.</p>
 <h2 id="models-tools-and-their-licences">Models, tools and their licences<a class="anchor" href="#models-tools-and-their-licences" aria-label="Link to this section"></a></h2>
 <p>EiN&#39;s own code, the media service&#39;s included, is under the MIT licence. The media service&#39;s image
-also downloads and carries models and tools made by others, each under its own licence, and some
-of those licences forbid commercial use. An installation used commercially must check them, or go
-without the features that rest on them (<a href="#using-ein-commercially">Using EiN commercially</a>). This is
-what the image carries, all of it used by the Archive:</p>
+also downloads and carries models and tools made by others, each under its own licence. None of
+them forbids commercial use, and two state no licence for their weights
+(<a href="#using-ein-commercially">Using EiN commercially</a>). This is what the image carries, all of it used
+by the Archive:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -233,9 +233,9 @@ what the image carries, all of it used by the Archive:</p>
 </tr>
 <tr>
 <td>Text vectors: finding text by meaning</td>
-<td><a href="https://huggingface.co/jinaai/jina-embeddings-v5-text-small">jina-embeddings-v5-text-small</a></td>
-<td>— / <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">CC BY-NC 4.0</a></td>
-<td><strong>Non-commercial</strong>; Jina AI licenses it for commercial use</td>
+<td>BAAI&#39;s <a href="https://huggingface.co/BAAI/bge-m3">bge-m3</a> at commit <code>5617a9f61b</code></td>
+<td>— / <a href="https://opensource.org/license/mit">MIT</a></td>
+<td></td>
 </tr>
 <tr>
 <td>Text in pictures</td>
@@ -337,25 +337,20 @@ table names an export or a conversion, as the one who made it publishes it. They
 without warranties, as their licences say. Beside them, the image writes out two files derived
 from published ones: the Finnish handwriting recogniser&#39;s character list, and TrOCR&#39;s tokenizer in
 the format transformers reads. The image&#39;s <code>/usr/share/doc/ein-ems/NOTICE.md</code> points
-to this page, names the models under Creative Commons and Apache-2.0, links the Creative Commons
-licences and holds the text of Apache-2.0.</p>
+to this page, names the models under Creative Commons, Apache-2.0 and MIT, links the Creative
+Commons licences and holds the texts of Apache-2.0 and MIT.</p>
 <p>None of EMS&#39;s own tools is under the GPL: it encodes AV1 only, so its FFmpeg and its HEIC reader
 are builds without the GPL encoders x264 and x265. Two parts of the image carry GPL code all the
 same: Debian&#39;s packages, among them the FFmpeg libraries, x264 and x265 that Chromaprint&#39;s <code>fpcalc</code>
 links, and PyAV, whose wheel bundles FFmpeg with x264 and x265 and which faster-whisper decodes
 audio with. <code>NOTICE.md</code> names each of them, its version and where its source is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
-<p>One feature rests on a model whose terms allow no commercial use: <strong>finding text by meaning</strong>, in
-transcripts, read text and documents, and the assistant&#39;s command search.
-jina-embeddings-v5-text-small is under CC BY-NC 4.0.</p>
-<p>No setting turns this feature off, in EiN or in the media service: with the media service
-there, the Archive asks it for it. The one way to go without it is to go without the
-media service, with <code>./setup.sh --no-ems</code>, and so without everything in
-<a href="#what-the-media-service-does">What the media service does</a>. The assistant&#39;s command search alone
-can leave the text vectors out: with <a href="../reference/settings.html#cfg_text_embedder"><code>CFG_TEXT_EMBEDDER</code></a>
-empty, it matches words instead.</p>
-<p>Other licences in the table set conditions on passing a model or tool on: CC BY 4.0 and CC BY-NC
-4.0 a credit to its maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its
+<p>No model or tool in the table is under terms that forbid commercial use. Two models&#39; weights
+state no licence of their own: Microsoft&#39;s TrOCR large handwritten, which reads English
+handwriting, and Meta&#39;s SSCD, which finds copies of pictures and videos, whose code is under MIT.
+An installation used commercially checks those two with their makers.</p>
+<p>The licences in the table set conditions on passing a model or tool on: CC BY 4.0 a credit to its
+maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its
 copyright notice, which this page and the image&#39;s notice give; GPL and LGPL conditions on passing the software and its
 source on. Check each licence for what it asks of your installation.</p>
 <h2 id="add-the-media-service">Add the media service<a class="anchor" href="#add-the-media-service" aria-label="Link to this section"></a></h2>
