@@ -169,6 +169,7 @@ phone they are all under ⋮.
 | **Timeline** | The device's history: when each owner started and stopped using it, the events written on it, and the albums holding pictures it took.                                                                                                                                                                                                                                                                                    |
 | **Media**    | Every file linked to the device, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)).                                                                                                                                                                                                                     |
 | **Track**    | The route the device recorded (see [A device's track](#a-devices-track)).                                                                                                                                                                                                                                                                                                                                                 |
+| **Trips**    | The trips found in that route, newest first (see [A device's trips](#a-devices-trips)).                                                                                                                                                                                                                                                                                                                                   |
 | **Owners**   | Everyone who has owned it, with the dates (see [Say who owned a device](#say-who-owned-a-device)).                                                                                                                                                                                                                                                                                                                        |
 
 The **Media** tab is the place to correct a camera whose clock was wrong: select its pictures and
@@ -456,6 +457,51 @@ the same address again whenever you open it. If the address got out, click **New
 one stops working at once, and the phone has to scan the new QR code. **Turn off** stops the
 address working and keeps the track.
 
+## A device's trips
+
+EiN cuts a device's track into trips by itself, and the device's **Trips** tab lists them, newest
+first. A trip runs from where the device lay still to where it lay still again:
+
+- Arriving at one of the device's [home bases](#home-bases) ends a trip, once it has been there
+  half an hour or the track ends there. Passing by does not.
+- Staying anywhere else longer than three days ends a trip too (two days for a bike or on foot), as
+  does a gap of that long with no points at all.
+- A trip that never gets 500 m from where it started is not a trip, and is left out.
+
+How near a place has to be to count as the same place depends on
+[how the device travels](#how-a-device-travels): within 1 km for a boat, 500 m for a car, 300 m
+for a bike and 200 m on foot.
+
+Each trip's card shows its dates, an **Ongoing** badge while it has not ended and its last point
+is less than two days old, how many days it took, its length, how far from its start it got, and
+where it started and ended: at home, after a long stay, or on the way. The farthest place it stayed
+at is named too. A stay of two hours or more across midnight is an overnight stay; it does not end
+the trip. Under **Albums** are the albums whose dates overlap the trip and whose devices include
+this one (see
+[Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
+
+Click **N legs** to see the trip day by day: each day's date, its first and last time, its length,
+and where the day ended. Days follow the device's **Timezone**, so a day ends at midnight where the
+device was set to be; a device without one ends its days at midnight UTC.
+
+The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
+again from where the last finished trip ended. Changing how the device travels, its time zone or
+its home bases finds them again from the start. **Find trips again** does it at once.
+
+### Join and part trips
+
+EiN may end a trip where you do not: a weekend at home in the middle of a holiday, or a long wait
+for weather in a harbour. Those who may change the device can correct it:
+
+- **Join to the trip before**, on a trip's card, makes it and the trip before it one trip,
+  whatever ended the first. The card then says **Joined on** and the day, with **Part again** to
+  undo it.
+- **Start a trip here**, beside a day in a trip's legs, makes that day the first day of a trip of
+  its own. **Join to the trip before** on the new trip undoes it.
+
+The trips are found again at once. The changes are kept with the device, in its `tripEdits`
+setting, and hold when the trips are found again later.
+
 ## If something goes differently
 
 | What you see                                                                                                                                                                                   | Why                                                                                                                                                      | What to do                                                                                                                                                                                                                   |
@@ -469,6 +515,8 @@ address working and keeps the track.
 | A phone's videos are off by exactly its time zone.                                                                                                                                             | The phone keeps video times in UTC.                                                                                                                      | Turn on **Video times in UTC** for it.                                                                                                                                                                                       |
 | Scans are dated to the day they were scanned.                                                                                                                                                  | The scanner is not registered with **Scanner or digitizer**.                                                                                             | Register it with the setting on, or turn it on in **Edit device**.                                                                                                                                                           |
 | Registering says `device-create: /archive/devices/…: already exists`.                                                                                                                          | A device with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so `Davids 7D` and `David's 7D` clash.         | Choose another name, or open the existing device.                                                                                                                                                                            |
+| The **Trips** tab says "No trips" though the device has a track.                                                                                                                               | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                                                     | Click **Find trips**, or **Find trips again**.                                                                                                                                                                               |
+| A trip ends at home in the middle of a holiday, or two trips should be one.                                                                                                                    | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                                                       | Click **Join to the trip before** on the second trip's card.                                                                                                                                                                 |
 | **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking from a phone** is missing.                                                                                 | You may not change this device.                                                                                                                          | Ask the person who registered it, or an administrator.                                                                                                                                                                       |
 | **Upload GPX** gives a message ending in "no track points found".                                                                                                                              | The file holds no recorded track points, only a planned route or waypoints.                                                                              | Use the file the device recorded while it moved.                                                                                                                                                                             |
 | The phone reports nothing to the track.                                                                                                                                                        | It cannot reach EiN at the address it was given, over HTTPS from where it is; the link was replaced or turned off; or tracking is off in Traccar Client. | Open the address in the phone's browser: a page saying `Forbidden` means the link is no longer the device's, so scan the new QR code. If it does not load at all, see [Ports, HTTPS and remote access](../admin/network.md). |
@@ -496,6 +544,9 @@ route is the child `track`, and the GPX files the route was read from are in its
 | Turn live tracking from a phone on, or replace or turn off its address | [`tracker-setup`](commands.md#tracker-setup) `<device>`, with `--new` or `--off`; `--origin https://<where EiN is>` adds the full URL and the QR code                                                       |
 | See what GPX files hold, without importing                             | [`gpx-info`](commands.md#gpx-info) `<gpx>…`: name, tracks, creator, points and their time span, size, and the devices each names                                                                            |
 | List the GPX files a track was read from                               | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
+| Find a device's trips in its track                                     | [`track-trips`](commands.md#track-trips) `<device>`, `--full` from the start, `--dry-run` to see them without keeping them                                                                                  |
+| List a device's trips                                                  | [`trip-list`](commands.md#trip-list) `<device>`                                                                                                                                                             |
+| Join a trip to the one before, or part one                             | [`trip-edit`](commands.md#trip-edit) `<device> <trip> --merge`, or `<device> <day> --split`                                                                                                                 |
 | Bring a device's automatic cover up to date                            | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 
 Registering Jon's GPS tracker, making him its owner and adding a route copied into your home folder:
