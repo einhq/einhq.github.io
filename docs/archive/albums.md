@@ -159,7 +159,10 @@ While the trip is ongoing, the tab follows it as the device's points come in.
 ![The album's Map tab: two piles of photos on a map of the archipelago, joined by coloured GPS routes](../../assets/shots/album-map.webp "The Map tab puts the album's pictures where they were taken, with the routes recorded while it lasted.")
 
 The **Map** tab shows the album's pictures that have a position, and the routes the album's
-devices recorded during its dates. The map opens fitted to both. The album's devices are the
+devices recorded during its dates. The map opens fitted to both, and fills the window below the
+tabs: opening the tab shrinks the album's header down to its row of tabs, and the map grows upward
+into the room without moving, so the mouse wheel over the map zooms it rather than scrolling the
+page. Scroll up over the tabs to bring the header back. The album's devices are the
 cameras and phones that took its pictures and any device added to it, such as a GPS tracker carried
 on the trip; a route someone else recorded on the same days stays off the map (see
 [Choose which devices' routes the map shows](#choose-which-devices-routes-the-map-shows)).
