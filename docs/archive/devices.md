@@ -495,7 +495,8 @@ this one (see
 
 Click **N legs** to see the trip day by day: each day's date, its first and last time, its length,
 and where the day ended. Days follow the device's **Timezone**, so a day ends at midnight where the
-device was set to be; a device without one ends its days at midnight UTC.
+device was set to be, and the times are on that clock; a device without one has its days and times
+in UTC.
 
 The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
 again from where the last finished trip ended. Changing how the device travels, its time zone or
