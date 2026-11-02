@@ -80,7 +80,7 @@ by the Archive:
 | Handwriting in English                              | Microsoft's [TrOCR large handwritten](https://huggingface.co/microsoft/trocr-large-handwritten)                                                                                                                                    | — / not stated                                                                  |                                                       |
 | The language of read text                           | [Lingua](https://github.com/pemistahl/lingua-py)                                                                                                                                                                                   | [Apache-2.0][apache] / [Apache-2.0][apache]                                     |                                                       |
 | Copies of pictures and videos                       | Meta's [SSCD](https://github.com/facebookresearch/sscd-copy-detection) `sscd_disc_mixup`                                                                                                                                           | [MIT][mit] / not stated                                                         |                                                       |
-| Copies of recordings                                | [Chromaprint](https://github.com/acoustid/chromaprint)                                                                                                                                                                             | [LGPL-2.1][lgpl-2.1] as a whole; its own code [MIT][mit]                        |                                                       |
+| Copies of recordings                                | [Chromaprint](https://github.com/acoustid/chromaprint), as FFmpeg runs it                                                                                                                                                          | [LGPL-2.1][lgpl-2.1] as a whole; its own code [MIT][mit]                        |                                                       |
 | Shot boundaries: chapters in a video                | [TransNetV2](https://github.com/soCzech/TransNetV2), its weights [converted to PyTorch](https://huggingface.co/Sn4kehead/TransNetV2)                                                                                               | [MIT][mit] / [Apache-2.0][apache]                                               | The authors' own weights are in their MIT repository  |
 | Video and audio: renditions, stills, waveforms      | [FFmpeg](https://github.com/BtbN/FFmpeg-Builds#package-list) 9.0, BtbN's `lgpl` build                                                                                                                                              | [LGPL-3.0][lgpl-3.0], as built                                                  |                                                       |
 | Pictures: turning, sizes, AVIF                      | [ImageMagick](https://imagemagick.org/) with [libheif](https://github.com/strukturag/libheif) and [aom](https://aomedia.googlesource.com/aom)                                                                                      | [ImageMagick License][imagemagick]; [LGPL-3.0][lgpl-3.0]; [BSD-2-Clause][bsd-2] |                                                       |
@@ -123,10 +123,11 @@ to this page, names the models under Creative Commons, Apache-2.0 and MIT, links
 Commons licences and holds the texts of Apache-2.0 and MIT.
 
 None of EMS's own tools is under the GPL: it encodes AV1 only, so its FFmpeg and its HEIC reader
-are builds without the GPL encoders x264 and x265. Two parts of the image carry GPL code all the
-same: Debian's packages, among them the FFmpeg libraries, x264 and x265 that Chromaprint's `fpcalc`
-links, and PyAV, whose wheel bundles FFmpeg with x264 and x265 and which faster-whisper decodes
-audio with. `NOTICE.md` names each of them, its version and where its source is.
+are builds without the GPL encoders x264 and x265. The image carries one FFmpeg, which also
+fingerprints recordings with the Chromaprint built into it, and faster-whisper is installed without
+PyAV, since the media service hands it audio FFmpeg has already decoded. The image's GPL code is
+Debian's, programs such as bash and coreutils among its packages. `NOTICE.md` names FFmpeg's build
+and where the source of it and of Debian's packages is.
 
 ### Using EiN commercially
 

@@ -269,7 +269,7 @@ by the Archive:</p>
 </tr>
 <tr>
 <td>Copies of recordings</td>
-<td><a href="https://github.com/acoustid/chromaprint">Chromaprint</a></td>
+<td><a href="https://github.com/acoustid/chromaprint">Chromaprint</a>, as FFmpeg runs it</td>
 <td><a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">LGPL-2.1</a> as a whole; its own code <a href="https://opensource.org/license/mit">MIT</a></td>
 <td></td>
 </tr>
@@ -340,10 +340,11 @@ the format transformers reads. The image&#39;s <code>/usr/share/doc/ein-ems/NOTI
 to this page, names the models under Creative Commons, Apache-2.0 and MIT, links the Creative
 Commons licences and holds the texts of Apache-2.0 and MIT.</p>
 <p>None of EMS&#39;s own tools is under the GPL: it encodes AV1 only, so its FFmpeg and its HEIC reader
-are builds without the GPL encoders x264 and x265. Two parts of the image carry GPL code all the
-same: Debian&#39;s packages, among them the FFmpeg libraries, x264 and x265 that Chromaprint&#39;s <code>fpcalc</code>
-links, and PyAV, whose wheel bundles FFmpeg with x264 and x265 and which faster-whisper decodes
-audio with. <code>NOTICE.md</code> names each of them, its version and where its source is.</p>
+are builds without the GPL encoders x264 and x265. The image carries one FFmpeg, which also
+fingerprints recordings with the Chromaprint built into it, and faster-whisper is installed without
+PyAV, since the media service hands it audio FFmpeg has already decoded. The image&#39;s GPL code is
+Debian&#39;s, programs such as bash and coreutils among its packages. <code>NOTICE.md</code> names FFmpeg&#39;s build
+and where the source of it and of Debian&#39;s packages is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
 <p>No model or tool in the table is under terms that forbid commercial use. Two models&#39; weights
 state no licence of their own: Microsoft&#39;s TrOCR large handwritten, which reads English
