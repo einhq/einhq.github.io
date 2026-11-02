@@ -163,13 +163,13 @@ counting stopped at its limit), and the device's labels. For those who may chang
 corner has **Share** and **Edit**, and the ⋮ menu has **Add event** and **Move to trash**. On a
 phone they are all under ⋮.
 
-| Tab          | What it shows                                                                                                                                                                                                                                                                                                                                         |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Info**     | The page opens here. The **Settings** card lists Make, Model, Serial number, Timezone, "Capture dates: Scanner dates suppressed" for a scanner, "Video times: UTC", and the description; with nothing but a name it says "Nothing recorded beyond the name." Below it, **Link existing media**, and beside it **Current owners** with **All owners**. |
-| **Timeline** | The device's history: when each owner started and stopped using it, the events written on it, and the albums holding pictures it took.                                                                                                                                                                                                                |
-| **Media**    | Every file linked to the device, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)).                                                                                                                                                 |
-| **Track**    | The route the device recorded (see [A device's track](#a-devices-track)).                                                                                                                                                                                                                                                                             |
-| **Owners**   | Everyone who has owned it, with the dates (see [Say who owned a device](#say-who-owned-a-device)).                                                                                                                                                                                                                                                    |
+| Tab          | What it shows                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Info**     | The page opens here. The **Settings** card lists Make, Model, Serial number, Timezone, **Travels as**, "Capture dates: Scanner dates suppressed" for a scanner, "Video times: UTC", and the description; with nothing but a name it says "Nothing recorded beyond the name." Below it, **Link existing media**, and beside it **Current owners** with **All owners**, and **Home bases** (see [Home bases](#home-bases)). |
+| **Timeline** | The device's history: when each owner started and stopped using it, the events written on it, and the albums holding pictures it took.                                                                                                                                                                                                                                                                                    |
+| **Media**    | Every file linked to the device, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)).                                                                                                                                                                                                                     |
+| **Track**    | The route the device recorded (see [A device's track](#a-devices-track)).                                                                                                                                                                                                                                                                                                                                                 |
+| **Owners**   | Everyone who has owned it, with the dates (see [Say who owned a device](#say-who-owned-a-device)).                                                                                                                                                                                                                                                                                                                        |
 
 The **Media** tab is the place to correct a camera whose clock was wrong: select its pictures and
 use **Set time**, as [Dates and places of pictures](dates-places.md#set-the-time-of-several-pictures-at-once)
@@ -202,7 +202,8 @@ by its make and model can take minutes in a large archive.
 
 1. On the device's page, click **Edit**. The **Edit device** dialog opens.
 2. Change what you need: **Name**, **Make**, **Model**, **Serial number**, **Timezone** (a list of
-   time zones you can type in, such as `Pacific/Auckland`), **Scanner or digitizer**,
+   time zones you can type in, such as `Pacific/Auckland`), **Travels as** (see
+   [How a device travels](#how-a-device-travels)), **Scanner or digitizer**,
    **Video times in UTC**, **Description** and **Labels**.
 3. Click **Save**.
 
@@ -262,6 +263,33 @@ An owner without a **To** date counts as a current owner, in the page's header a
 date that is not a year, month or day is refused with a message ending in "is not a date
 (YYYY[-MM[-DD]])".
 
+## How a device travels
+
+A device that records a track moves as a boat, a car, a bike or on foot. Its **Travels as** setting,
+**Boat**, **Car**, **Bike** or **On foot**, says which, and so which units its track is shown in: a
+boat's distances in nautical miles and its speeds in knots, everyone else's in kilometres and km/h.
+A device without the setting is shown as a car. Set it in the **Edit device** dialog (see
+[Change a device's settings](#change-a-devices-settings)); a phone carried on a sailing holiday is
+best left as it is, and a tracker that stays on the boat set to **Boat**.
+
+## Home bases
+
+A device's home bases are the places it belongs: the boat's home berth and winter yard, the house
+where the car is parked. Arriving at one ends a trip. The **Home bases** card on the **Info** tab
+lists them, each linking to its location.
+
+- Click **Add home base**, choose a location in the list, and click **Add**. A place that is not a
+  location yet is added on the **Locations** page first (see [Locations and the map](places.md)).
+- Click the cross beside a home base to remove it.
+
+While a device has no home bases of its own, its owners' homes count instead: each place an owner
+lived while they owned the device, for the years both are true (see
+[Say who owned a device](#say-who-owned-a-device) and [Homes and residents](family.md#homes-and-residents)). The card then says
+"None set, so its owners' homes count:" and lists them with those years, such as "2010 – 2020". As
+soon as the device has one home base of its own, the owners' homes no longer count.
+
+Adding and removing are offered to those who may change the device.
+
 ## Write something on a device's timeline
 
 To keep a story with a device, such as where it was bought or when it broke, add an event:
@@ -305,12 +333,13 @@ A GPS tracker takes no pictures, so add it to the albums of the trips it was car
 
 The **Track** tab draws the route on a map, each day in its own colour, and adds it up:
 
-| Figure       | What it is                                                                                                                                                     |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Points**   | How many recorded positions the track holds.                                                                                                                   |
-| **Days**     | On how many days it recorded.                                                                                                                                  |
-| **Distance** | The length of the route in kilometres, added up day by day, so the gap between one day's end and the next day's start is not counted.                          |
-| **Duration** | The time from the first point to the last, in hours and minutes. It includes the time between trips, so a track that holds several trips shows the whole span. |
+| Figure            | What it is                                                                                                                                                                                                                         |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Points**        | How many recorded positions the track holds.                                                                                                                                                                                       |
+| **Days**          | On how many days it recorded.                                                                                                                                                                                                      |
+| **Distance**      | The length of the route, added up day by day, so the gap between one day's end and the next day's start is not counted. In nautical miles for a boat, in kilometres otherwise (see [How a device travels](#how-a-device-travels)). |
+| **Average speed** | The average speed while it moved, in knots for a boat and km/h otherwise. Time lying still, jumps no device could make, and gaps of more than an hour between two points are left out.                                             |
+| **Duration**      | The time from the first point to the last, in hours and minutes. It includes the time between trips, so a track that holds several trips shows the whole span.                                                                     |
 
 Under the figures are the times of the first and the last point. A long track is drawn from a
 thinned copy; the line then ends with "drawn from a thinned copy of the track", and the distance
@@ -427,7 +456,9 @@ route is the child `track`, and the GPX files the route was read from are in its
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | List the cameras seen but not registered      | [`device-scan`](commands.md#device-scan)                                                                                                                                                                    |
 | Register a device                             | [`device-create`](commands.md#device-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc`                                               |
-| Change a device's settings                    | [`device-update`](commands.md#device-update) `<device> --timezone <zone>`, or `--clear <field>`                                                                                                             |
+| Change a device's settings                    | [`device-update`](commands.md#device-update) `<device> --timezone <zone>` or `--kind boat` (`car`, `bike`, `foot`), or `--clear <field>`                                                                    |
+| List a device's home bases                    | [`device-home`](commands.md#device-home) `<device> list`; with none of its own, its owners' homes and the years they count                                                                                  |
+| Add or remove a home base                     | [`device-home`](commands.md#device-home) `<device> add <location>…` or `rm <location>…`; a device or location is its path, or its folder name                                                               |
 | Show a device and its owners                  | [`device-info`](commands.md#device-info) `<device>`                                                                                                                                                         |
 | Link the files a device's fingerprint matches | [`device-relink`](commands.md#device-relink) `<device>`; `--dry-run` reports first, `--force` takes files from another device, `--all` does every device                                                    |
 | Link files to a device by hand                | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                                                              |

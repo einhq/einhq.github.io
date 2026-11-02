@@ -263,7 +263,7 @@ phone they are all under ⋮.</p>
 </thead>
 <tbody><tr>
 <td><strong>Info</strong></td>
-<td>The page opens here. The <strong>Settings</strong> card lists Make, Model, Serial number, Timezone, &quot;Capture dates: Scanner dates suppressed&quot; for a scanner, &quot;Video times: UTC&quot;, and the description; with nothing but a name it says &quot;Nothing recorded beyond the name.&quot; Below it, <strong>Link existing media</strong>, and beside it <strong>Current owners</strong> with <strong>All owners</strong>.</td>
+<td>The page opens here. The <strong>Settings</strong> card lists Make, Model, Serial number, Timezone, <strong>Travels as</strong>, &quot;Capture dates: Scanner dates suppressed&quot; for a scanner, &quot;Video times: UTC&quot;, and the description; with nothing but a name it says &quot;Nothing recorded beyond the name.&quot; Below it, <strong>Link existing media</strong>, and beside it <strong>Current owners</strong> with <strong>All owners</strong>, and <strong>Home bases</strong> (see <a href="#home-bases">Home bases</a>).</td>
 </tr>
 <tr>
 <td><strong>Timeline</strong></td>
@@ -309,7 +309,8 @@ by its make and model can take minutes in a large archive.</p>
 <ol>
 <li>On the device&#39;s page, click <strong>Edit</strong>. The <strong>Edit device</strong> dialog opens.</li>
 <li>Change what you need: <strong>Name</strong>, <strong>Make</strong>, <strong>Model</strong>, <strong>Serial number</strong>, <strong>Timezone</strong> (a list of
-time zones you can type in, such as <code>Pacific/Auckland</code>), <strong>Scanner or digitizer</strong>,
+time zones you can type in, such as <code>Pacific/Auckland</code>), <strong>Travels as</strong> (see
+<a href="#how-a-device-travels">How a device travels</a>), <strong>Scanner or digitizer</strong>,
 <strong>Video times in UTC</strong>, <strong>Description</strong> and <strong>Labels</strong>.</li>
 <li>Click <strong>Save</strong>.</li>
 </ol>
@@ -362,6 +363,28 @@ remove them; EiN asks &quot;Remove &lt;person&gt; as an owner of &lt;device&gt;?
 &quot;&lt;person&gt; started using &lt;device&gt;&quot; and &quot;&lt;person&gt; stopped using &lt;device&gt;&quot;. A
 date that is not a year, month or day is refused with a message ending in &quot;is not a date
 (YYYY[-MM[-DD]])&quot;.</p>
+<h2 id="how-a-device-travels">How a device travels<a class="anchor" href="#how-a-device-travels" aria-label="Link to this section"></a></h2>
+<p>A device that records a track moves as a boat, a car, a bike or on foot. Its <strong>Travels as</strong> setting,
+<strong>Boat</strong>, <strong>Car</strong>, <strong>Bike</strong> or <strong>On foot</strong>, says which, and so which units its track is shown in: a
+boat&#39;s distances in nautical miles and its speeds in knots, everyone else&#39;s in kilometres and km/h.
+A device without the setting is shown as a car. Set it in the <strong>Edit device</strong> dialog (see
+<a href="#change-a-devices-settings">Change a device&#39;s settings</a>); a phone carried on a sailing holiday is
+best left as it is, and a tracker that stays on the boat set to <strong>Boat</strong>.</p>
+<h2 id="home-bases">Home bases<a class="anchor" href="#home-bases" aria-label="Link to this section"></a></h2>
+<p>A device&#39;s home bases are the places it belongs: the boat&#39;s home berth and winter yard, the house
+where the car is parked. Arriving at one ends a trip. The <strong>Home bases</strong> card on the <strong>Info</strong> tab
+lists them, each linking to its location.</p>
+<ul>
+<li>Click <strong>Add home base</strong>, choose a location in the list, and click <strong>Add</strong>. A place that is not a
+location yet is added on the <strong>Locations</strong> page first (see <a href="places.html">Locations and the map</a>).</li>
+<li>Click the cross beside a home base to remove it.</li>
+</ul>
+<p>While a device has no home bases of its own, its owners&#39; homes count instead: each place an owner
+lived while they owned the device, for the years both are true (see
+<a href="#say-who-owned-a-device">Say who owned a device</a> and <a href="family.html#homes-and-residents">Homes and residents</a>). The card then says
+&quot;None set, so its owners&#39; homes count:&quot; and lists them with those years, such as &quot;2010 – 2020&quot;. As
+soon as the device has one home base of its own, the owners&#39; homes no longer count.</p>
+<p>Adding and removing are offered to those who may change the device.</p>
 <h2 id="write-something-on-a-devices-timeline">Write something on a device&#39;s timeline<a class="anchor" href="#write-something-on-a-devices-timeline" aria-label="Link to this section"></a></h2>
 <p>To keep a story with a device, such as where it was bought or when it broke, add an event:</p>
 <ol>
@@ -410,7 +433,11 @@ A GPS tracker takes no pictures, so add it to the albums of the trips it was car
 </tr>
 <tr>
 <td><strong>Distance</strong></td>
-<td>The length of the route in kilometres, added up day by day, so the gap between one day&#39;s end and the next day&#39;s start is not counted.</td>
+<td>The length of the route, added up day by day, so the gap between one day&#39;s end and the next day&#39;s start is not counted. In nautical miles for a boat, in kilometres otherwise (see <a href="#how-a-device-travels">How a device travels</a>).</td>
+</tr>
+<tr>
+<td><strong>Average speed</strong></td>
+<td>The average speed while it moved, in knots for a boat and km/h otherwise. Time lying still, jumps no device could make, and gaps of more than an hour between two points are left out.</td>
 </tr>
 <tr>
 <td><strong>Duration</strong></td>
@@ -581,7 +608,15 @@ route is the child <code>track</code>, and the GPX files the route was read from
 </tr>
 <tr>
 <td>Change a device&#39;s settings</td>
-<td><a href="commands.html#device-update"><code>device-update</code></a> <code>&lt;device&gt; --timezone &lt;zone&gt;</code>, or <code>--clear &lt;field&gt;</code></td>
+<td><a href="commands.html#device-update"><code>device-update</code></a> <code>&lt;device&gt; --timezone &lt;zone&gt;</code> or <code>--kind boat</code> (<code>car</code>, <code>bike</code>, <code>foot</code>), or <code>--clear &lt;field&gt;</code></td>
+</tr>
+<tr>
+<td>List a device&#39;s home bases</td>
+<td><a href="commands.html#device-home"><code>device-home</code></a> <code>&lt;device&gt; list</code>; with none of its own, its owners&#39; homes and the years they count</td>
+</tr>
+<tr>
+<td>Add or remove a home base</td>
+<td><a href="commands.html#device-home"><code>device-home</code></a> <code>&lt;device&gt; add &lt;location&gt;…</code> or <code>rm &lt;location&gt;…</code>; a device or location is its path, or its folder name</td>
 </tr>
 <tr>
 <td>Show a device and its owners</td>
@@ -645,7 +680,7 @@ chosen.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

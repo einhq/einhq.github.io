@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 142 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 146 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [transcribe-file](#transcribe-file) · [voiceprint-file](#voiceprint-file)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file)
 
 ## A
 
@@ -3620,6 +3620,57 @@ track-stage /home/anna/staging/routes/hike.gpx --device garmin-etrex
 
 With `JSON_OUTPUT=1`: imported, with the track, the number of new fixes and where the file is kept; or pending, with why.
 
+### `track-trips`
+
+Derive a device's trips and stays from its track, into <device>/.trips.
+
+<small>changes things</small>
+
+```text
+track-trips [--full] [--dry-run] <device>
+```
+
+| Argument   | What it is                                      |
+| ---------- | ----------------------------------------------- |
+| `<device>` | the device (slug or path), or its track's path. |
+
+| Option      | What it does                                                     |
+| ----------- | ---------------------------------------------------------------- |
+| `--full`    | read the whole track, not only from where its trips are settled. |
+| `--dry-run` | derive and show them without writing .trips.                     |
+
+```bash
+track-trips the-sailboat
+track-trips /archive/devices/the-sailboat --full --dry-run
+```
+
+### `tracker-setup`
+
+Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to.
+
+<small>reads only</small>
+
+```text
+tracker-setup [--new] [--off] [--origin=<string>] <device>
+```
+
+| Argument   | What it is                                                |
+| ---------- | --------------------------------------------------------- |
+| `<device>` | the device: its slug under the devices root, or its path. |
+
+| Option              | What it does                                                                                          |
+| ------------------- | ----------------------------------------------------------------------------------------------------- |
+| `--new`             | turn live tracking on, or replace the link; the one before it stops working.                          |
+| `--off`             | turn live tracking off.                                                                               |
+| `--origin=<string>` | the address the phone reaches EiN at, such as https://ein.example; adds the full URL and the QR code. |
+
+```bash
+tracker-setup sailboat
+tracker-setup sailboat --new --origin https://ein.example
+```
+
+With `JSON_OUTPUT=1`: TrackerSetup: whether live tracking is on, the link, and the QR code.
+
 ### `transcribe-file`
 
 Transcribe audio or video into a timed WebVTT node with chunk embeddings.
@@ -3644,6 +3695,49 @@ transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
 ```
 
 With `JSON_OUTPUT=1`: nothing; a timed WebVTT transcript with chunk embeddings is written under the file.
+
+### `trip-edit`
+
+Join a device's trip to the one before it, or part its track on a day, and derive its trips again.
+
+<small>changes things</small>
+
+```text
+trip-edit [--merge] [--split] <device> <trip>
+```
+
+| Argument   | What it is                                                          |
+| ---------- | ------------------------------------------------------------------- |
+| `<device>` | the device (slug or path), or its track's path.                     |
+| `<trip>`   | the trip (its id, or its first day) to join, or the day to part on. |
+
+| Option    | What it does                                                 |
+| --------- | ------------------------------------------------------------ |
+| `--merge` | join the trip to the one before it.                          |
+| `--split` | part a trip joined on this day again, or start a trip on it. |
+
+```bash
+trip-edit the-sailboat 2025-06-10 --merge
+trip-edit the-sailboat 2025-06-10 --split
+```
+
+### `trip-list`
+
+A device's trips and stays, as track-trips last derived them.
+
+<small>reads only</small>
+
+```text
+trip-list <device>
+```
+
+| Argument   | What it is                                      |
+| ---------- | ----------------------------------------------- |
+| `<device>` | the device (slug or path), or its track's path. |
+
+```bash
+trip-list the-sailboat
+```
 
 ## V
 

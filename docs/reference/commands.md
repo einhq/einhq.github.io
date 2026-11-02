@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 362 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 366 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -245,7 +245,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 142 in full](../archive/commands.md).
+[All 146 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -389,7 +389,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
 | [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
 | [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
+| [track-trips](../archive/commands.md#track-trips) | Derive a device's trips and stays from its track, into <device>/.trips. |
+| [tracker-setup](../archive/commands.md#tracker-setup) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to. |
 | [transcribe-file](../archive/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
+| [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
+| [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
 
 ## Assistant
