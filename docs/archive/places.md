@@ -113,10 +113,7 @@ A location gets its place on the map from the first of these that gives one:
    wide as they spread. A picture far from the rest is left out, and pictures spread wider than
    25 km give no circle. Pictures that joined the location because they lie inside its shape do not
    count.
-3. **Where a device stayed.** A location EiN made for a stay in a device's track (see
-   [Places a device stayed at](#places-a-device-stayed-at)) has a circle with a radius of 150 m
-   around where the device lay. Its pictures replace it once they give a circle.
-4. **Its address.** EiN asks OpenStreetMap's Nominatim service where the address is, or where the
+3. **Its address.** EiN asks OpenStreetMap's Nominatim service where the address is, or where the
    name is when there is no address. EiN uses the answer by itself only when the answer is a
    building, the house number or postcode you wrote agrees with it, and no answer that ranks almost
    as high lies more than 250 m away. The location then gets a circle with a radius of 50 m, and its
@@ -127,7 +124,6 @@ A location gets its place on the map from the first of these that gives one:
 | ------------ | ----------------- | ------------------------------------------------- |
 | Set by hand  | set by hand       | "Set by hand"                                     |
 | Its pictures | from N photos     | "Derived from N geotagged photos spread over N m" |
-| A stay       | from a track      | "Where a device stayed, from its track"           |
 | Its address  | from address      | "Geocoded from the address"                       |
 
 An address is looked up in Sweden first, and in the rest of the world when Sweden has no match. A
@@ -139,29 +135,6 @@ changed address. If it cannot be placed with certainty, the location loses its o
 shows suggestions instead, or "No location set yet." when nothing matched. A location placed from
 its pictures stays where its pictures are, and a location set by hand keeps its shape whatever the
 address says.
-
-## Places a device stayed at
-
-Where a device with a track lay still, EiN puts the stay at a location, so that its trips say where
-they went (see [A device's trips](devices.md#a-devices-trips)). Each stay goes to the first of these:
-
-1. **A home base.** A stay at one of the device's [home bases](devices.md#home-bases) is at that
-   home's location.
-2. **A location near it.** A stay within 150 m of a location's position is at that location: a
-   harbour you have stayed at before, or a location you made yourself.
-3. **A new location.** Otherwise EiN makes a location there and names it after what OpenStreetMap
-   has within 500 m: a marina or harbour first, then a boatyard (a name ending in "varv"), then an
-   island or islet, then a bay, the nearest of each kind. A harbour named only "Gästhamn",
-   "Småbåtshamn", "Marina" or a similar word is passed over. With none of these near, the location
-   is named after the town or village around it. The next stay within 150 m of it is at it too.
-
-A new location gets a circle with a radius of 150 m, so the pictures taken inside it join it as
-pictures join any location (see [How pictures join a location](#how-pictures-join-a-location)).
-
-When you rename such a location in **Edit location**, your name stays, wherever the device stays
-there later. Out at sea, where nothing has a name, a stay gets no location. When a lookup fails,
-because OpenStreetMap's services are busy or out of reach, the stay is looked up again the next time
-the device's trips are found again.
 
 ## A location's page
 
@@ -465,23 +438,20 @@ around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is l
 The map pictures and the address lookups come from outside services. Your photos, videos and
 recordings are never sent to them.
 
-| What                                           | From                                                           | What is sent                                                      |
-| ---------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
-| The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`         | Your browser asks for the map squares of the area you look at     |
-| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                             | The same                                                          |
-| The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                                | The same                                                          |
-| A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`       | The machine EiN runs on sends the location's address, or its name |
-| Pictures' street addresses                     | Nominatim                                                      | The machine EiN runs on sends each picture's coordinates          |
-| The names of places a device stayed at         | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim | The machine EiN runs on sends the coordinates of each new stay    |
+| What                                           | From                                                     | What is sent                                                      |
+| ---------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`   | Your browser asks for the map squares of the area you look at     |
+| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                       | The same                                                          |
+| The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                          | The same                                                          |
+| A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org` | The machine EiN runs on sends the location's address, or its name |
+| Pictures' street addresses                     | Nominatim                                                | The machine EiN runs on sends each picture's coordinates          |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.
 
 For administrators: the public Nominatim service answers one request a second, and EiN paces its
-own requests to that, and its Overpass requests to one every 1.1 seconds. The environment variable
-`NOMINATIM_SEARCH_URL` points the address lookups at another Nominatim server, such as one of your
-own, and `NOMINATIM_REVERSE_URL` the lookups from coordinates. `OVERPASS_URL` lists the Overpass
-servers, separated by spaces, which EiN takes in turn when one is busy; see
+own requests to that. The environment variable `NOMINATIM_SEARCH_URL` points the address lookups at
+another Nominatim server, such as one of your own; see
 [Environment variables](../reference/environment.md#options-you-set).
 
 ## In the terminal
@@ -500,8 +470,6 @@ Locations are ordinary nodes, and these commands work on them in the
 | Place a location again from its pictures or its address         | [`location-locate`](commands.md#location-locate) `--force <location>`                                           |
 | Change the name, address, city, country or description          | [`location-update`](commands.md#location-update)                                                                |
 | Link the pictures inside a location's shape at once             | [`location-link-media`](commands.md#location-link-media) `--location <location>`                                |
-| Put a device's stays at locations, and name the new ones        | [`track-places`](commands.md#track-places) `<device>`, `--dry-run` to see them first                            |
-| Look the names of a device's stay locations up again            | `track-places <device> --rename`; names changed by hand are kept                                                |
 
 To turn the point "Islington Town Hall" into a circle with a radius of 150 m, the way the dialog
 does it:

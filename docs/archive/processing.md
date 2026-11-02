@@ -63,7 +63,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `staging-organize`     | Plans a staging category's suggested groups again                                         | `organize`                     |
 | `staging-retime`       | Dates staged files again by the rules of the category they were moved into                | `retime`                       |
 | `track-stage`          | Makes a GPX file dropped in staging into its device's route                               | run by the engine              |
-| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed          | run by the engine              |
+| `track-trips`          | Finds a device's trips in its track again, ten minutes after points arrive                | run by the engine              |
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported    | run by the engine              |
 
 ## The workers

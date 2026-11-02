@@ -571,19 +571,15 @@ does a gap of that long with no points at all.</li>
 for a bike and 200 m on foot.</p>
 <p>Each trip&#39;s card shows its dates, an <strong>Ongoing</strong> badge while it has not ended and its last point
 is less than two days old, how many days it took, its length, how far from its start it got, and
-where it started and ended: the location of the stay, such as a harbour, an island or your home, or
-&quot;on the way&quot;. The farthest place it stayed at is named too. Click a name to open its location. How
-stays get their locations and names is on
-<a href="places.html#places-a-device-stayed-at">Places a device stayed at</a>. A stay of two hours or more across midnight is an overnight stay; it does not end
-the trip. Under <strong>Albums</strong> are the albums whose dates overlap the trip and whose devices include
-this one (see
-<a href="albums.html#choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows</a>).</p>
+where it started and ended: at home, after a long stay, or on the way. The farthest place it stayed
+at is named too. A stay of two hours or more across midnight is an overnight stay; it does not end
+the trip. A trip that is an album names it under <strong>Album</strong>; see
+<a href="#make-a-trip-an-album">Make a trip an album</a>.</p>
 <p>Click <strong>N legs</strong> to see the trip day by day: each day&#39;s date, its first and last time, its length,
 and where the day ended. Days follow the device&#39;s <strong>Timezone</strong>, so a day ends at midnight where the
-device was set to be, and the times are on that clock; a device without one has its days and times
-in UTC.</p>
+device was set to be; a device without one ends its days at midnight UTC.</p>
 <p>The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended, and puts the new stays at locations. Changing how the device travels, its time zone or
+again from where the last finished trip ended. Changing how the device travels, its time zone or
 its home bases finds them again from the start. <strong>Find trips again</strong> does it at once.</p>
 <h3 id="join-and-part-trips">Join and part trips<a class="anchor" href="#join-and-part-trips" aria-label="Link to this section"></a></h3>
 <p>EiN may end a trip where you do not: a weekend at home in the middle of a holiday, or a long wait
@@ -597,6 +593,26 @@ its own. <strong>Join to the trip before</strong> on the new trip undoes it.</li
 </ul>
 <p>The trips are found again at once. The changes are kept with the device, in its <code>tripEdits</code>
 setting, and hold when the trips are found again later.</p>
+<h3 id="make-a-trip-an-album">Make a trip an album<a class="anchor" href="#make-a-trip-an-album" aria-label="Link to this section"></a></h3>
+<p>A trip EiN finds is only a proposal until you make it an album. Those who may change the device see,
+on each trip&#39;s card:</p>
+<ul>
+<li><strong>New album</strong>, which makes an album of the trip in <code>/archive/albums</code>, named after the farthest
+place it stayed at when that place has a name, else after the device, and its dates, for example
+&quot;Sailboat 2025-06-10 – 2025-06-14&quot;. Rename it in the album&#39;s <strong>Edit album</strong>.</li>
+<li><strong>Use</strong> and an album&#39;s name, for each album whose dates overlap the trip and whose devices include
+this one (see
+<a href="albums.html#choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows</a>).
+It makes that album the trip&#39;s.</li>
+</ul>
+<p>Either way the device is added to the album&#39;s devices, so its Map tab draws the route, and the album
+spans the trip even before it has any pictures. The card then names the album under <strong>Album</strong>, with
+<strong>Take off the album</strong> to undo it; the album and its pictures stay, and so does the device on its
+list. A trip is one album&#39;s, and an album holds one trip. While a trip is ongoing, its album grows
+with it each time the trips are found again.</p>
+<p>The album gets a <strong>Trip</strong> tab: the days, the distance in the device&#39;s units, where it stayed, and
+each day&#39;s notes. See <a href="albums.html#the-trip-tab">The Trip tab</a>. Those who may only look at the device
+see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -763,12 +779,12 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <td><a href="commands.html#trip-list"><code>trip-list</code></a> <code>&lt;device&gt;</code></td>
 </tr>
 <tr>
-<td>Put a device&#39;s stays at locations, and name the new ones</td>
-<td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;device&gt;</code>; see <a href="places.html#places-a-device-stayed-at">Places a device stayed at</a></td>
-</tr>
-<tr>
 <td>Join a trip to the one before, or part one</td>
 <td><a href="commands.html#trip-edit"><code>trip-edit</code></a> <code>&lt;device&gt; &lt;trip&gt; --merge</code>, or <code>&lt;device&gt; &lt;day&gt; --split</code></td>
+</tr>
+<tr>
+<td>Make a trip an album, or take it off</td>
+<td><a href="commands.html#trip-album"><code>trip-album</code></a> <code>&lt;device&gt; &lt;trip&gt; --new</code>, <code>--album=&lt;album&gt;</code>, or <code>--detach</code></td>
 </tr>
 <tr>
 <td>Bring a device&#39;s automatic cover up to date</td>
@@ -800,7 +816,7 @@ chosen.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li><a href="#a-devices-trips">A device's trips</a></li><li class="nested"><a href="#join-and-part-trips">Join and part trips</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li><a href="#a-devices-trips">A device's trips</a></li><li class="nested"><a href="#join-and-part-trips">Join and part trips</a></li><li class="nested"><a href="#make-a-trip-an-album">Make a trip an album</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

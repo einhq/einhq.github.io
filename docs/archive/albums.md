@@ -103,9 +103,9 @@ only look at the album, none of them is there. With the default sharing, everyon
 sees every album and only its owner changes it, so on someone else's album you usually have none of
 these buttons.
 
-Below the header are three tabs: **Media**, where the album opens, **Map** and **Info**. The tab
-you choose goes into the page's address (`?tab=map`, `?tab=info`), so a link can open the album on
-it.
+Below the header are three tabs: **Media**, where the album opens, **Map** and **Info**. An album
+made of a trip has a fourth, **Trip**, after **Media**. The tab you choose goes into the page's
+address (`?tab=map`, `?tab=info`, `?tab=trip`), so a link can open the album on it.
 
 ### The Media tab
 
@@ -136,6 +136,23 @@ lets you jump through its days.
 
 Choose a picture to open it in the viewer. The viewer walks the album in the order the grid shows,
 and after the last picture it goes on to the first. [Viewing photos, videos and recordings](viewer.md) covers it.
+
+### The Trip tab
+
+An album made of a trip a device's track recorded has a **Trip** tab (see
+[Make a trip an album](devices.md#make-a-trip-an-album)). At the top are the trip's dates, an
+**Ongoing** badge while it lasts, the device, which links to its trips, how many days it took and its
+length, in nautical miles for a boat and kilometres for anything else. Under them is where it
+started and ended, and the farthest place it stayed at.
+
+Each day of the trip has a card of its own: the date, the first and last time on the device's clock
+(UTC for a device without a **Timezone**), the day's length, where it started and where it ended. The album's notes from that day stand
+under it, as on the Media tab: this is the trip's logbook. **Add note** on a day's card writes a
+note dated on that day, as **Add event** does; the pen on a note changes it. Under the days,
+**Stays** lists the places the trip stayed at, when it arrived and when it left. A place that is a
+location links to it.
+
+While the trip is ongoing, the tab follows it as the device's points come in.
 
 ### The Map tab
 
@@ -280,6 +297,9 @@ from 2025-08-04 to 2025-08-10. Reach out past them to cover the journey there an
 the span follow the pictures again, clear the field or set it back to the pictures' own day. An
 album whose pictures have no dates has only the span you set; the line then reads "Nothing in the
 album is dated yet; the span is what you set here."
+
+An album made of a trip spans the trip too, from its first point to its last, so it has dates
+before it has any pictures.
 
 **A series.** Albums of one summer after another, or the parts of a long journey, can lead from one
 to the next. Pick the album before this one in **Previous album**, or the one after it in **Next
@@ -500,7 +520,7 @@ covers all of it.
 | No **Upload**, **Share** or **Edit** on an album                                                     | You may look at the album but not change it.                                                               | Ask its owner, or an administrator, to share it with you so that you can edit it. See [Sharing](../guide/sharing.md).                                                                                                                                         |
 | A placeholder where a picture should be, after an upload                                             | Its thumbnail is not made yet. The media service makes it, after the pictures uploaded before it.          | Wait. [Getting your photos in](importing.md) explains why it takes time.                                                                                                                                                                                      |
 | Uploaded pictures are not on their day yet                                                           | Their dates have not been read yet.                                                                        | Reload the page a little later.                                                                                                                                                                                                                               |
-| An album has no dates on its card                                                                    | None of its pictures has a date, and no span is set.                                                       | Set **Starts** and **Ends** in **Edit album**, or give the pictures a time with **Set time**.                                                                                                                                                                 |
+| An album has no dates on its card                                                                    | None of its pictures has a date, no span is set, and it is not a trip's.                                   | Set **Starts** and **Ends** in **Edit album**, or give the pictures a time with **Set time**.                                                                                                                                                                 |
 | **Share** in the selection bar is greyed out                                                         | The selection holds a picture that was only added to this album; it has the sharing of the place it lives. | Select only pictures that live here. Share the others where they live.                                                                                                                                                                                        |
 | **Set as cover** is greyed out                                                                       | It needs exactly one picture selected.                                                                     | Select one.                                                                                                                                                                                                                                                   |
 | **Stack** is greyed out                                                                              | It needs two or more.                                                                                      | Select more.                                                                                                                                                                                                                                                  |

@@ -487,21 +487,17 @@ for a bike and 200 m on foot.
 
 Each trip's card shows its dates, an **Ongoing** badge while it has not ended and its last point
 is less than two days old, how many days it took, its length, how far from its start it got, and
-where it started and ended: the location of the stay, such as a harbour, an island or your home, or
-"on the way". The farthest place it stayed at is named too. Click a name to open its location. How
-stays get their locations and names is on
-[Places a device stayed at](places.md#places-a-device-stayed-at). A stay of two hours or more across midnight is an overnight stay; it does not end
-the trip. Under **Albums** are the albums whose dates overlap the trip and whose devices include
-this one (see
-[Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
+where it started and ended: at home, after a long stay, or on the way. The farthest place it stayed
+at is named too. A stay of two hours or more across midnight is an overnight stay; it does not end
+the trip. A trip that is an album names it under **Album**; see
+[Make a trip an album](#make-a-trip-an-album).
 
 Click **N legs** to see the trip day by day: each day's date, its first and last time, its length,
 and where the day ended. Days follow the device's **Timezone**, so a day ends at midnight where the
-device was set to be, and the times are on that clock; a device without one has its days and times
-in UTC.
+device was set to be; a device without one ends its days at midnight UTC.
 
 The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended, and puts the new stays at locations. Changing how the device travels, its time zone or
+again from where the last finished trip ended. Changing how the device travels, its time zone or
 its home bases finds them again from the start. **Find trips again** does it at once.
 
 ### Join and part trips
@@ -517,6 +513,29 @@ for weather in a harbour. Those who may change the device can correct it:
 
 The trips are found again at once. The changes are kept with the device, in its `tripEdits`
 setting, and hold when the trips are found again later.
+
+### Make a trip an album
+
+A trip EiN finds is only a proposal until you make it an album. Those who may change the device see,
+on each trip's card:
+
+- **New album**, which makes an album of the trip in `/archive/albums`, named after the farthest
+  place it stayed at when that place has a name, else after the device, and its dates, for example
+  "Sailboat 2025-06-10 – 2025-06-14". Rename it in the album's **Edit album**.
+- **Use** and an album's name, for each album whose dates overlap the trip and whose devices include
+  this one (see
+  [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
+  It makes that album the trip's.
+
+Either way the device is added to the album's devices, so its Map tab draws the route, and the album
+spans the trip even before it has any pictures. The card then names the album under **Album**, with
+**Take off the album** to undo it; the album and its pictures stay, and so does the device on its
+list. A trip is one album's, and an album holds one trip. While a trip is ongoing, its album grows
+with it each time the trips are found again.
+
+The album gets a **Trip** tab: the days, the distance in the device's units, where it stayed, and
+each day's notes. See [The Trip tab](albums.md#the-trip-tab). Those who may only look at the device
+see the albums the trip may belong to under **Maybe in**.
 
 ## If something goes differently
 
@@ -563,8 +582,8 @@ route is the child `track`, and the GPX files the route was read from are in its
 | List the GPX files a track was read from                               | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
 | Find a device's trips in its track                                     | [`track-trips`](commands.md#track-trips) `<device>`, `--full` from the start, `--dry-run` to see them without keeping them                                                                                  |
 | List a device's trips                                                  | [`trip-list`](commands.md#trip-list) `<device>`                                                                                                                                                             |
-| Put a device's stays at locations, and name the new ones               | [`track-places`](commands.md#track-places) `<device>`; see [Places a device stayed at](places.md#places-a-device-stayed-at)                                                                                 |
 | Join a trip to the one before, or part one                             | [`trip-edit`](commands.md#trip-edit) `<device> <trip> --merge`, or `<device> <day> --split`                                                                                                                 |
+| Make a trip an album, or take it off                                   | [`trip-album`](commands.md#trip-album) `<device> <trip> --new`, `--album=<album>`, or `--detach`                                                                                                            |
 | Bring a device's automatic cover up to date                            | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 
 Registering Jon's GPS tracker, making him its owner and adding a route copied into your home folder:

@@ -241,9 +241,6 @@ hand in the terminal, EiN puts a circle around them, as
 wide as they spread. A picture far from the rest is left out, and pictures spread wider than
 25 km give no circle. Pictures that joined the location because they lie inside its shape do not
 count.</li>
-<li><strong>Where a device stayed.</strong> A location EiN made for a stay in a device&#39;s track (see
-<a href="#places-a-device-stayed-at">Places a device stayed at</a>) has a circle with a radius of 150 m
-around where the device lay. Its pictures replace it once they give a circle.</li>
 <li><strong>Its address.</strong> EiN asks OpenStreetMap&#39;s Nominatim service where the address is, or where the
 name is when there is no address. EiN uses the answer by itself only when the answer is a
 building, the house number or postcode you wrote agrees with it, and no answer that ranks almost
@@ -270,11 +267,6 @@ for you to choose from.</li>
 <td>&quot;Derived from N geotagged photos spread over N m&quot;</td>
 </tr>
 <tr>
-<td>A stay</td>
-<td>from a track</td>
-<td>&quot;Where a device stayed, from its track&quot;</td>
-</tr>
-<tr>
 <td>Its address</td>
 <td>from address</td>
 <td>&quot;Geocoded from the address&quot;</td>
@@ -289,26 +281,6 @@ changed address. If it cannot be placed with certainty, the location loses its o
 shows suggestions instead, or &quot;No location set yet.&quot; when nothing matched. A location placed from
 its pictures stays where its pictures are, and a location set by hand keeps its shape whatever the
 address says.</p>
-<h2 id="places-a-device-stayed-at">Places a device stayed at<a class="anchor" href="#places-a-device-stayed-at" aria-label="Link to this section"></a></h2>
-<p>Where a device with a track lay still, EiN puts the stay at a location, so that its trips say where
-they went (see <a href="devices.html#a-devices-trips">A device&#39;s trips</a>). Each stay goes to the first of these:</p>
-<ol>
-<li><strong>A home base.</strong> A stay at one of the device&#39;s <a href="devices.html#home-bases">home bases</a> is at that
-home&#39;s location.</li>
-<li><strong>A location near it.</strong> A stay within 150 m of a location&#39;s position is at that location: a
-harbour you have stayed at before, or a location you made yourself.</li>
-<li><strong>A new location.</strong> Otherwise EiN makes a location there and names it after what OpenStreetMap
-has within 500 m: a marina or harbour first, then a boatyard (a name ending in &quot;varv&quot;), then an
-island or islet, then a bay, the nearest of each kind. A harbour named only &quot;Gästhamn&quot;,
-&quot;Småbåtshamn&quot;, &quot;Marina&quot; or a similar word is passed over. With none of these near, the location
-is named after the town or village around it. The next stay within 150 m of it is at it too.</li>
-</ol>
-<p>A new location gets a circle with a radius of 150 m, so the pictures taken inside it join it as
-pictures join any location (see <a href="#how-pictures-join-a-location">How pictures join a location</a>).</p>
-<p>When you rename such a location in <strong>Edit location</strong>, your name stays, wherever the device stays
-there later. Out at sea, where nothing has a name, a stay gets no location. When a lookup fails,
-because OpenStreetMap&#39;s services are busy or out of reach, the stay is looked up again the next time
-the device&#39;s trips are found again.</p>
 <h2 id="a-locations-page">A location&#39;s page<a class="anchor" href="#a-locations-page" aria-label="Link to this section"></a></h2>
 <figure class="shot"><a href="../../assets/shots/place@2x.webp"><img src="../../assets/shots/place.webp" srcset="../../assets/shots/place.webp 1x, ../../assets/shots/place@2x.webp 2x" alt="The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading &quot;50.24400, -5.02700 · radius 300 m&quot; and &quot;Set by hand&quot;, and Freya Wrenfield under Current residents" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Info tab shows the shape that decides which pictures belong here, and where that shape came from.</figcaption></figure>
 <p>The header shows the location&#39;s name and address, the people who live there, and its labels. If
@@ -691,20 +663,13 @@ recordings are never sent to them.</p>
 <td>Nominatim</td>
 <td>The machine EiN runs on sends each picture&#39;s coordinates</td>
 </tr>
-<tr>
-<td>The names of places a device stayed at</td>
-<td>OpenStreetMap&#39;s Overpass API, <code>overpass-api.de</code>, and Nominatim</td>
-<td>The machine EiN runs on sends the coordinates of each new stay</td>
-</tr>
 </tbody></table>
 </div>
 <p>Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.</p>
 <p>For administrators: the public Nominatim service answers one request a second, and EiN paces its
-own requests to that, and its Overpass requests to one every 1.1 seconds. The environment variable
-<code>NOMINATIM_SEARCH_URL</code> points the address lookups at another Nominatim server, such as one of your
-own, and <code>NOMINATIM_REVERSE_URL</code> the lookups from coordinates. <code>OVERPASS_URL</code> lists the Overpass
-servers, separated by spaces, which EiN takes in turn when one is busy; see
+own requests to that. The environment variable <code>NOMINATIM_SEARCH_URL</code> points the address lookups at
+another Nominatim server, such as one of your own; see
 <a href="../reference/environment.html#options-you-set">Environment variables</a>.</p>
 <h2 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h2>
 <p>Locations are ordinary nodes, and these commands work on them in the
@@ -751,14 +716,6 @@ servers, separated by spaces, which EiN takes in turn when one is busy; see
 <tr>
 <td>Link the pictures inside a location&#39;s shape at once</td>
 <td><a href="commands.html#location-link-media"><code>location-link-media</code></a> <code>--location &lt;location&gt;</code></td>
-</tr>
-<tr>
-<td>Put a device&#39;s stays at locations, and name the new ones</td>
-<td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;device&gt;</code>, <code>--dry-run</code> to see them first</td>
-</tr>
-<tr>
-<td>Look the names of a device&#39;s stay locations up again</td>
-<td><code>track-places &lt;device&gt; --rename</code>; names changed by hand are kept</td>
 </tr>
 </tbody></table>
 </div>
@@ -827,7 +784,7 @@ stopped sending, or cannot reach EiN. The age beside its name says when the poin
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

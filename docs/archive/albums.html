@@ -187,9 +187,9 @@ the colours);</li>
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else&#39;s album you usually have none of
 these buttons.</p>
-<p>Below the header are three tabs: <strong>Media</strong>, where the album opens, <strong>Map</strong> and <strong>Info</strong>. The tab
-you choose goes into the page&#39;s address (<code>?tab=map</code>, <code>?tab=info</code>), so a link can open the album on
-it.</p>
+<p>Below the header are three tabs: <strong>Media</strong>, where the album opens, <strong>Map</strong> and <strong>Info</strong>. An album
+made of a trip has a fourth, <strong>Trip</strong>, after <strong>Media</strong>. The tab you choose goes into the page&#39;s
+address (<code>?tab=map</code>, <code>?tab=info</code>, <code>?tab=trip</code>), so a link can open the album on it.</p>
 <h3 id="the-media-tab">The Media tab<a class="anchor" href="#the-media-tab" aria-label="Link to this section"></a></h3>
 <ul>
 <li><strong>Show</strong> narrows the grid to one kind: <strong>All</strong>, <strong>Images</strong>, <strong>Video</strong>, <strong>Audio</strong> or
@@ -217,6 +217,19 @@ Once the album holds more than 120 pictures and notes, a <strong>Scroll through 
 lets you jump through its days.</p>
 <p>Choose a picture to open it in the viewer. The viewer walks the album in the order the grid shows,
 and after the last picture it goes on to the first. <a href="viewer.html">Viewing photos, videos and recordings</a> covers it.</p>
+<h3 id="the-trip-tab">The Trip tab<a class="anchor" href="#the-trip-tab" aria-label="Link to this section"></a></h3>
+<p>An album made of a trip a device&#39;s track recorded has a <strong>Trip</strong> tab (see
+<a href="devices.html#make-a-trip-an-album">Make a trip an album</a>). At the top are the trip&#39;s dates, an
+<strong>Ongoing</strong> badge while it lasts, the device, which links to its trips, how many days it took and its
+length, in nautical miles for a boat and kilometres for anything else. Under them is where it
+started and ended, and the farthest place it stayed at.</p>
+<p>Each day of the trip has a card of its own: the date, the first and last time on the device&#39;s clock
+(UTC for a device without a <strong>Timezone</strong>), the day&#39;s length, where it started and where it ended. The album&#39;s notes from that day stand
+under it, as on the Media tab: this is the trip&#39;s logbook. <strong>Add note</strong> on a day&#39;s card writes a
+note dated on that day, as <strong>Add event</strong> does; the pen on a note changes it. Under the days,
+<strong>Stays</strong> lists the places the trip stayed at, when it arrived and when it left. A place that is a
+location links to it.</p>
+<p>While the trip is ongoing, the tab follows it as the device&#39;s points come in.</p>
 <h3 id="the-map-tab">The Map tab<a class="anchor" href="#the-map-tab" aria-label="Link to this section"></a></h3>
 <figure class="shot"><a href="../../assets/shots/album-map@2x.webp"><img src="../../assets/shots/album-map.webp" srcset="../../assets/shots/album-map.webp 1x, ../../assets/shots/album-map@2x.webp 2x" alt="The album's Map tab: two piles of photos on a map of the archipelago, joined by coloured GPS routes" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Map tab puts the album&#39;s pictures where they were taken, with the routes recorded while it lasted.</figcaption></figure>
 <p>The <strong>Map</strong> tab shows the album&#39;s pictures that have a position, and the routes the album&#39;s
@@ -389,6 +402,8 @@ from 2025-08-04 to 2025-08-10. Reach out past them to cover the journey there an
 the span follow the pictures again, clear the field or set it back to the pictures&#39; own day. An
 album whose pictures have no dates has only the span you set; the line then reads &quot;Nothing in the
 album is dated yet; the span is what you set here.&quot;</p>
+<p>An album made of a trip spans the trip too, from its first point to its last, so it has dates
+before it has any pictures.</p>
 <p><strong>A series.</strong> Albums of one summer after another, or the parts of a long journey, can lead from one
 to the next. Pick the album before this one in <strong>Previous album</strong>, or the one after it in <strong>Next
 album</strong>; the album you pick links back to this one by itself. The header then shows a small pill
@@ -762,7 +777,7 @@ covers all of it.</p>
 </tr>
 <tr>
 <td>An album has no dates on its card</td>
-<td>None of its pictures has a date, and no span is set.</td>
+<td>None of its pictures has a date, no span is set, and it is not a trip&#39;s.</td>
 <td>Set <strong>Starts</strong> and <strong>Ends</strong> in <strong>Edit album</strong>, or give the pictures a time with <strong>Set time</strong>.</td>
 </tr>
 <tr>
@@ -848,7 +863,7 @@ and <a href="commands.html#album-random"><code>album-random</code></a> have ever
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/albums.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-routes-the-map-shows">Choose which devices' routes the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-trip-tab">The Trip tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-routes-the-map-shows">Choose which devices' routes the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
