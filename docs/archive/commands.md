@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 146 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 148 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file)
 
 ## A
 
@@ -175,7 +175,7 @@ album-random
 
 ### `album-span`
 
-Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd)
+Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip.
 
 <small>changes things</small>
 
@@ -1807,14 +1807,14 @@ location-update [--name=<string>] [--address=<string>] [--description=<string>] 
 | ---------- | -------------------------- |
 | `<target>` | VFS path to location node. |
 
-| Option                   | What it does                                                        |
-| ------------------------ | ------------------------------------------------------------------- |
-| `--name=<string>`        | what the location is called.                                        |
-| `--address=<string>`     | the written address; a change is geocoded again by location-upkeep. |
-| `--description=<string>` | free text about the location.                                       |
-| `--city=<string>`        | city.                                                               |
-| `--country=<string>`     | country.                                                            |
-| `--clear=<string>`       | remove a field (repeatable): address, description, city or country. |
+| Option                   | What it does                                                                                    |
+| ------------------------ | ----------------------------------------------------------------------------------------------- |
+| `--name=<string>`        | what the location is called; a name given here is never looked up again (track-places --rename) |
+| `--address=<string>`     | the written address; a change is geocoded again by location-upkeep.                             |
+| `--description=<string>` | free text about the location.                                                                   |
+| `--city=<string>`        | city.                                                                                           |
+| `--country=<string>`     | country.                                                                                        |
+| `--clear=<string>`       | remove a field (repeatable): address, description, city or country.                             |
 
 ```bash
 location-update /archive/locations/ekbacksvagen --address 'Ekbacksvägen 4, 123 45 Exempelby'
@@ -3571,6 +3571,30 @@ track-list <root>
 
 With `JSON_OUTPUT=1`: one row per device with a track.
 
+### `track-places`
+
+Put each of a device's stays at a location, naming the ones it makes after the harbour, island, bay or town there.
+
+<small>changes things</small>
+
+```text
+track-places [--rename] [--dry-run] <device>
+```
+
+| Argument   | What it is                                      |
+| ---------- | ----------------------------------------------- |
+| `<device>` | the device (slug or path), or its track's path. |
+
+| Option      | What it does                                                                   |
+| ----------- | ------------------------------------------------------------------------------ |
+| `--rename`  | look the names of the stays' locations up again, except names changed by hand. |
+| `--dry-run` | look the places up and show them without making locations or writing .trips.   |
+
+```bash
+track-places the-sailboat
+track-places /archive/devices/the-sailboat --dry-run
+```
+
 ### `track-read`
 
 Read a device's track as drawable segments ({segments, points, truncated})
@@ -3578,21 +3602,23 @@ Read a device's track as drawable segments ({segments, points, truncated})
 <small>reads only</small>
 
 ```text
-track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] <device>
+track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] <device>
 ```
 
 | Argument   | What it is                                                        |
 | ---------- | ----------------------------------------------------------------- |
 | `<device>` | the device (slug or path) whose track to read, or a track's path. |
 
-| Option                 | What it does                                                       |
-| ---------------------- | ------------------------------------------------------------------ |
-| `--from=<string>`      | only fixes at or after this ISO timestamp.                         |
-| `--to=<string>`        | only fixes before this ISO timestamp.                              |
-| `--bbox=<string>`      | only points near north,south,east,west.                            |
-| `--margin=<string>`    | how far outside --bbox to read, as a fraction of it (default 0.25) |
-| `--tolerance=<string>` | simplification tolerance in degrees (level of detail)              |
-| `--limit=<string>`     | max points to return.                                              |
+| Option                 | What it does                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| `--from=<string>`      | only fixes at or after this ISO timestamp.                                            |
+| `--to=<string>`        | only fixes before this ISO timestamp.                                                 |
+| `--bbox=<string>`      | only points near north,south,east,west.                                               |
+| `--margin=<string>`    | how far outside --bbox to read, as a fraction of it (default 0.25)                    |
+| `--tolerance=<string>` | simplification tolerance in degrees (level of detail)                                 |
+| `--limit=<string>`     | max points to return.                                                                 |
+| `--still`              | drop GPS spikes and draw each stay as two points, by the device's kind.               |
+| `--max-speed=<string>` | with --still, a jump faster than this (m/s) is a spike (default by the device's kind) |
 
 ### `track-stage`
 
@@ -3695,6 +3721,36 @@ transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
 ```
 
 With `JSON_OUTPUT=1`: nothing; a timed WebVTT transcript with chunk embeddings is written under the file.
+
+### `trip-album`
+
+Make a trip of a device's track an album, a new one or one that is there, or take it from its album.
+
+<small>changes things</small>
+
+```text
+trip-album [--new] [--name=<string>] [--album=<path>] [--detach] <device> <trip>
+```
+
+| Argument   | What it is                                         |
+| ---------- | -------------------------------------------------- |
+| `<device>` | the device (slug or path), or its track's path.    |
+| `<trip>`   | the trip: its id from trip-list, or its first day. |
+
+| Option            | What it does                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| `--new`           | make a new album of the trip.                                                              |
+| `--name=<string>` | the new album's name; by default where the trip got farthest, or the device, and its days. |
+| `--album=<path>`  | make this album the album of the trip.                                                     |
+| `--detach`        | take the trip off its album.                                                               |
+
+```bash
+trip-album the-sailboat 2025-06-10 --new
+trip-album the-sailboat 2025-06-10 --album=/archive/albums/Exempelalbum_2019
+trip-album the-sailboat 2025-06-10 --detach
+```
+
+With `JSON_OUTPUT=1`: the album the trip was made, or the one it was taken from.
 
 ### `trip-edit`
 

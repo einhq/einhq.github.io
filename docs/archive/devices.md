@@ -487,8 +487,10 @@ for a bike and 200 m on foot.
 
 Each trip's card shows its dates, an **Ongoing** badge while it has not ended and its last point
 is less than two days old, how many days it took, its length, how far from its start it got, and
-where it started and ended: at home, after a long stay, or on the way. The farthest place it stayed
-at is named too. A stay of two hours or more across midnight is an overnight stay; it does not end
+where it started and ended: the location of the stay, such as a harbour, an island or your home, or
+"on the way". The farthest place it stayed at is named too. Click a name to open its location. How
+stays get their locations and names is on
+[Places a device stayed at](places.md#places-a-device-stayed-at). A stay of two hours or more across midnight is an overnight stay; it does not end
 the trip. Under **Albums** are the albums whose dates overlap the trip and whose devices include
 this one (see
 [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
@@ -499,7 +501,7 @@ device was set to be, and the times are on that clock; a device without one has 
 in UTC.
 
 The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended. Changing how the device travels, its time zone or
+again from where the last finished trip ended, and puts the new stays at locations. Changing how the device travels, its time zone or
 its home bases finds them again from the start. **Find trips again** does it at once.
 
 ### Join and part trips
@@ -561,6 +563,7 @@ route is the child `track`, and the GPX files the route was read from are in its
 | List the GPX files a track was read from                               | [`source-list`](commands.md#source-list) `/archive/devices/<device>/track`                                                                                                                                  |
 | Find a device's trips in its track                                     | [`track-trips`](commands.md#track-trips) `<device>`, `--full` from the start, `--dry-run` to see them without keeping them                                                                                  |
 | List a device's trips                                                  | [`trip-list`](commands.md#trip-list) `<device>`                                                                                                                                                             |
+| Put a device's stays at locations, and name the new ones               | [`track-places`](commands.md#track-places) `<device>`; see [Places a device stayed at](places.md#places-a-device-stayed-at)                                                                                 |
 | Join a trip to the one before, or part one                             | [`trip-edit`](commands.md#trip-edit) `<device> <trip> --merge`, or `<device> <day> --split`                                                                                                                 |
 | Bring a device's automatic cover up to date                            | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 

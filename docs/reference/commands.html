@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 366 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 368 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 366 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 368 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,7 +89,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 366 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 368 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -963,7 +963,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 146 in full</a>.</p>
+<p><a href="../archive/commands.html">All 148 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1001,7 +1001,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#album-span">album-span</a></td>
-<td>Write an album&#39;s time span (timeStart/timeEnd/mediaCount) onto the album node: its media&#39;s, widened to the days set by hand (spanStart/spanEnd)</td>
+<td>Write an album&#39;s time span (timeStart/timeEnd/mediaCount) onto the album node: its media&#39;s, widened to the days set by hand (spanStart/spanEnd) and to its trip.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#album-stack">album-stack</a></td>
@@ -1524,6 +1524,10 @@
 <td>List the devices that have a track, with its point count, span and extent.</td>
 </tr>
 <tr>
+<td><a href="../archive/commands.html#track-places">track-places</a></td>
+<td>Put each of a device&#39;s stays at a location, naming the ones it makes after the harbour, island, bay or town there.</td>
+</tr>
+<tr>
 <td><a href="../archive/commands.html#track-read">track-read</a></td>
 <td>Read a device&#39;s track as drawable segments ({segments, points, truncated})</td>
 </tr>
@@ -1542,6 +1546,10 @@
 <tr>
 <td><a href="../archive/commands.html#transcribe-file">transcribe-file</a></td>
 <td>Transcribe audio or video into a timed WebVTT node with chunk embeddings.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#trip-album">trip-album</a></td>
+<td>Make a trip of a device&#39;s track an album, a new one or one that is there, or take it from its album.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#trip-edit">trip-edit</a></td>

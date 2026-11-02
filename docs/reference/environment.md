@@ -127,6 +127,8 @@ Nobody sets these for you. Export one in a shell, or put it in front of a comman
 | `SEARCH_TRACE` |  | Set to 1 and `search` reports how long each of its sources took. |
 | `CFG_PASSWORD_HASH_LOGN` | `16` | The scrypt work factor for new password hashes, as a power of two. Lowered by the test tier, where the passwords protect nothing; leave it unset anywhere else. |
 | `NOMINATIM_SEARCH_URL` | `https://nominatim.openstreetmap.org/search` | Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one's rate limit. From the archive module. |
+| `NOMINATIM_REVERSE_URL` | `https://nominatim.openstreetmap.org/reverse` | Where Nominatim is asked for the address at a point: a picture's street address (geocode-position), and the town around a stay that has no harbour, island or bay nearby (track-places). From the archive module. |
+| `OVERPASS_URL` | `https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter` | Where track-places asks OpenStreetMap's Overpass API for the harbours, islands and bays a device stayed at: one or more endpoints, separated by spaces, tried in turn. Point it at your own server to avoid the public ones' rate limit. From the archive module. |
 
 ## Set for a pipeline step
 

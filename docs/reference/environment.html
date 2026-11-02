@@ -593,6 +593,16 @@
 <td><code>https://nominatim.openstreetmap.org/search</code></td>
 <td>Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one&#39;s rate limit. From the archive module.</td>
 </tr>
+<tr>
+<td><code>NOMINATIM_REVERSE_URL</code></td>
+<td><code>https://nominatim.openstreetmap.org/reverse</code></td>
+<td>Where Nominatim is asked for the address at a point: a picture&#39;s street address (geocode-position), and the town around a stay that has no harbour, island or bay nearby (track-places). From the archive module.</td>
+</tr>
+<tr>
+<td><code>OVERPASS_URL</code></td>
+<td><code>https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter</code></td>
+<td>Where track-places asks OpenStreetMap&#39;s Overpass API for the harbours, islands and bays a device stayed at: one or more endpoints, separated by spaces, tried in turn. Point it at your own server to avoid the public ones&#39; rate limit. From the archive module.</td>
+</tr>
 </tbody></table>
 </div>
 <h2 id="set-for-a-pipeline-step">Set for a pipeline step<a class="anchor" href="#set-for-a-pipeline-step" aria-label="Link to this section"></a></h2>

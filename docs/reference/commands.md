@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 366 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 368 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -245,7 +245,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 146 in full](../archive/commands.md).
+[All 148 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -256,7 +256,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [album-device-rm](../archive/commands.md#album-device-rm) | Take devices off an album's list, whose tracks its map draws. |
 | [album-profile](../archive/commands.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
-| [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) |
+| [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip. |
 | [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
 | [archive-bridge](../archive/commands.md#archive-bridge) | Derive media and location domain events from VFS mutations (long-running) |
 | [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
@@ -387,11 +387,13 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-create](../archive/commands.md#track-create) | Give a device a track for the coordinate points it recorded (the device's child track) |
 | [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track, keeping a copy of the file in the device's routes/. |
 | [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
+| [track-places](../archive/commands.md#track-places) | Put each of a device's stays at a location, naming the ones it makes after the harbour, island, bay or town there. |
 | [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
 | [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
 | [track-trips](../archive/commands.md#track-trips) | Derive a device's trips and stays from its track, into <device>/.trips. |
 | [tracker-setup](../archive/commands.md#tracker-setup) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to. |
 | [transcribe-file](../archive/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
+| [trip-album](../archive/commands.md#trip-album) | Make a trip of a device's track an album, a new one or one that is there, or take it from its album. |
 | [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
 | [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
