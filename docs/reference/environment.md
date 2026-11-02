@@ -70,7 +70,6 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 
 | Variable | Default | What it is |
 | --- | --- | --- |
-| `INSTANCE_MODE` |  | What this process was started as: primary, or test. |
 | `ADMIN_USERNAME` |  | The built-in administrator account. |
 | `ADMIN_GROUPNAME` |  | Its group. |
 | `ADMIN_UID` |  | Its user id. |
@@ -93,6 +92,8 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 | `EXTERNAL_DOCS_PATH` |  | DOCS_PATH as boot received it: what is mounted at /usr/docs/guide. |
 | `EXTERNAL_DEV_MODULES_PATH` |  | DEV_MODULES_PATH as boot received it. |
 | `EXTERNAL_MODULE_INSTALL_PATH` |  | MODULE_INSTALL_PATH as boot received it. |
+| `DEV_MODULES` |  | Which of the modules in DEV_MODULES_PATH boot links, when set: the test harness names the modules a test loads. Unset, it links them all. |
+| `HEADLESS` |  | Set to 1 by the test harness, which serves HTTP itself: boot leaves the HTTP and SSH servers disabled and links no browser shell. |
 
 ## Set for each shell
 
