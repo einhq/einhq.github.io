@@ -516,6 +516,30 @@ and the panel names it and why. <strong>Back to staging</strong> returns to the 
 <a href="#register-a-device-by-hand">Register a device by hand</a>) and open the page again; a waiting file is
 not tried again by itself. Waiting files are kept in your staging area&#39;s <code>routes</code> folder,
 <code>/home/&lt;you&gt;/staging/routes/</code>. <a href="staging.html">Sorting in staging</a> describes the staging area.</p>
+<h3 id="live-tracking-from-a-phone">Live tracking from a phone<a class="anchor" href="#live-tracking-from-a-phone" aria-label="Link to this section"></a></h3>
+<p>A phone can add its position to a device&#39;s track as it moves, with the free
+<a href="https://www.traccar.org/client/">Traccar Client</a> app for Android and iPhone. The app keeps
+reporting with the screen off and sends what it recorded out of signal once it is back. A GPS
+tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
+the same address.</p>
+<ol>
+<li>Open the device&#39;s page and the <strong>Track</strong> tab. Under the route is <strong>Live tracking from a phone</strong>.</li>
+<li>Click <strong>Turn on</strong>. EiN gives the device a track if it has none, and shows a QR code and the
+server URL.</li>
+<li>On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
+server URL and, as the device identifier, the device&#39;s name.</li>
+<li>Set how often it reports, for example every 30 seconds, and switch tracking on.</li>
+</ol>
+<p>Open the device&#39;s page at the address the phone will reach EiN at: the QR code and the URL are
+made from the address in your browser. The phone has to reach EiN there wherever it is, so EiN
+must be reachable from the internet over HTTPS (see
+<a href="../admin/network.html#phones-posting-their-position">Ports, HTTPS and remote access</a>). The section
+is offered to those who may change the device.</p>
+<p>The address is the whole key: anyone who has it can add positions to the track, and nobody needs
+to sign in to use it. The positions are added as the person who owns the track. The section shows
+the same address again whenever you open it. If the address got out, click <strong>New link</strong>: the old
+one stops working at once, and the phone has to scan the new QR code. <strong>Turn off</strong> stops the
+address working and keeps the track.</p>
 <h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -571,7 +595,7 @@ not tried again by itself. Waiting files are kept in your staging area&#39;s <co
 <td>Choose another name, or open the existing device.</td>
 </tr>
 <tr>
-<td><strong>Edit</strong>, <strong>Link existing media</strong>, <strong>Add owner</strong> or <strong>Upload GPX</strong> is missing.</td>
+<td><strong>Edit</strong>, <strong>Link existing media</strong>, <strong>Add owner</strong>, <strong>Upload GPX</strong> or <strong>Live tracking from a phone</strong> is missing.</td>
 <td>You may not change this device.</td>
 <td>Ask the person who registered it, or an administrator.</td>
 </tr>
@@ -579,6 +603,11 @@ not tried again by itself. Waiting files are kept in your staging area&#39;s <co
 <td><strong>Upload GPX</strong> gives a message ending in &quot;no track points found&quot;.</td>
 <td>The file holds no recorded track points, only a planned route or waypoints.</td>
 <td>Use the file the device recorded while it moved.</td>
+</tr>
+<tr>
+<td>The phone reports nothing to the track.</td>
+<td>It cannot reach EiN at the address it was given, over HTTPS from where it is; the link was replaced or turned off; or tracking is off in Traccar Client.</td>
+<td>Open the address in the phone&#39;s browser: a page saying <code>Forbidden</code> means the link is no longer the device&#39;s, so scan the new QR code. If it does not load at all, see <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</td>
 </tr>
 <tr>
 <td>A GPX file sits in an album as an ordinary file.</td>
@@ -643,6 +672,10 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <td><a href="commands.html#track-stage"><code>track-stage</code></a> <code>&lt;gpx&gt; --device &lt;device&gt;</code>, which moves the file to the device&#39;s <code>routes</code>, or <a href="commands.html#track-import"><code>track-import</code></a> <code>&lt;device&gt; &lt;gpx&gt;</code>, which keeps a copy there</td>
 </tr>
 <tr>
+<td>Turn live tracking from a phone on, or replace or turn off its address</td>
+<td><a href="commands.html#tracker-setup"><code>tracker-setup</code></a> <code>&lt;device&gt;</code>, with <code>--new</code> or <code>--off</code>; <code>--origin https://&lt;where EiN is&gt;</code> adds the full URL and the QR code</td>
+</tr>
+<tr>
 <td>See what GPX files hold, without importing</td>
 <td><a href="commands.html#gpx-info"><code>gpx-info</code></a> <code>&lt;gpx&gt;…</code>: name, tracks, creator, points and their time span, size, and the devices each names</td>
 </tr>
@@ -680,7 +713,7 @@ chosen.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

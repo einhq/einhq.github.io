@@ -184,6 +184,16 @@ EiN's own SSH server does not forward ports, so the tunnel goes through the mach
 
 Only the public proxy makes [share links](../guide/sharing.md#share-an-album-with-a-link) work for people outside the family: a share link begins with the address the person who made it had open, so it reaches whoever can reach that address. Make links while EiN is open at its public address, not at `http://ein.local:8080`.
 
+### Phones posting their position
+
+A phone that reports its position to a device's track (see
+[Live tracking from a phone](../archive/devices.md#live-tracking-from-a-phone)) posts to EiN from
+wherever it is, without signing in, so it needs the public HTTPS proxy: over a VPN it reports only
+while the VPN is up, and an SSH tunnel does not reach it at all. Its address is
+`/tracker/<id>.<token>`, which the proxy passes on like any other; the token in it is all that lets
+the phone in. A request with a wrong token is refused with `Forbidden` and logged as
+"tracker post refused", with the client's address.
+
 ### Before you open EiN to the internet
 
 - **Change the admin password** if you have not: [Install EiN](../start/install.md#change-the-admin-password-straight-away) shows how. Give every account a password of its own; [Accounts and groups](accounts.md) covers them.

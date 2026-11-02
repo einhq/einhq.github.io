@@ -292,6 +292,14 @@ server {
 </div>
 <p>EiN&#39;s own SSH server does not forward ports, so the tunnel goes through the machine&#39;s SSH server, not through port 2222.</p>
 <p>Only the public proxy makes <a href="../guide/sharing.html#share-an-album-with-a-link">share links</a> work for people outside the family: a share link begins with the address the person who made it had open, so it reaches whoever can reach that address. Make links while EiN is open at its public address, not at <code>http://ein.local:8080</code>.</p>
+<h3 id="phones-posting-their-position">Phones posting their position<a class="anchor" href="#phones-posting-their-position" aria-label="Link to this section"></a></h3>
+<p>A phone that reports its position to a device&#39;s track (see
+<a href="../archive/devices.html#live-tracking-from-a-phone">Live tracking from a phone</a>) posts to EiN from
+wherever it is, without signing in, so it needs the public HTTPS proxy: over a VPN it reports only
+while the VPN is up, and an SSH tunnel does not reach it at all. Its address is
+<code>/tracker/&lt;id&gt;.&lt;token&gt;</code>, which the proxy passes on like any other; the token in it is all that lets
+the phone in. A request with a wrong token is refused with <code>Forbidden</code> and logged as
+&quot;tracker post refused&quot;, with the client&#39;s address.</p>
 <h3 id="before-you-open-ein-to-the-internet">Before you open EiN to the internet<a class="anchor" href="#before-you-open-ein-to-the-internet" aria-label="Link to this section"></a></h3>
 <ul>
 <li><strong>Change the admin password</strong> if you have not: <a href="../start/install.html#change-the-admin-password-straight-away">Install EiN</a> shows how. Give every account a password of its own; <a href="accounts.html">Accounts and groups</a> covers them.</li>
@@ -380,7 +388,7 @@ sftp -P 2222 helen@ein.wrenfield.example</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/network.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-listens-on">What EiN listens on</a></li><li><a href="#change-the-ports-or-the-address">Change the ports or the address</a></li><li><a href="#open-the-ports-in-the-firewall">Open the ports in the firewall</a></li><li><a href="#put-ein-behind-https">Put EiN behind HTTPS</a></li><li class="nested"><a href="#what-ein-needs-from-the-proxy">What EiN needs from the proxy</a></li><li class="nested"><a href="#caddy">Caddy</a></li><li class="nested"><a href="#nginx">nginx</a></li><li class="nested"><a href="#keep-eins-own-port-to-the-machine">Keep EiN's own port to the machine</a></li><li><a href="#reach-ein-from-outside-your-home">Reach EiN from outside your home</a></li><li class="nested"><a href="#before-you-open-ein-to-the-internet">Before you open EiN to the internet</a></li><li class="nested"><a href="#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a></li><li><a href="#ssh-and-sftp-from-another-network">SSH and SFTP from another network</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-ein-listens-on">What EiN listens on</a></li><li><a href="#change-the-ports-or-the-address">Change the ports or the address</a></li><li><a href="#open-the-ports-in-the-firewall">Open the ports in the firewall</a></li><li><a href="#put-ein-behind-https">Put EiN behind HTTPS</a></li><li class="nested"><a href="#what-ein-needs-from-the-proxy">What EiN needs from the proxy</a></li><li class="nested"><a href="#caddy">Caddy</a></li><li class="nested"><a href="#nginx">nginx</a></li><li class="nested"><a href="#keep-eins-own-port-to-the-machine">Keep EiN's own port to the machine</a></li><li><a href="#reach-ein-from-outside-your-home">Reach EiN from outside your home</a></li><li class="nested"><a href="#phones-posting-their-position">Phones posting their position</a></li><li class="nested"><a href="#before-you-open-ein-to-the-internet">Before you open EiN to the internet</a></li><li class="nested"><a href="#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a></li><li><a href="#ssh-and-sftp-from-another-network">SSH and SFTP from another network</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -204,16 +204,17 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address                          | Method        | What it does                                                                                                  |
-| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
-| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                    |
-| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                          |
-| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on |
-| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                       |
-| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                            |
-| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                               |
-| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                          |
-| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                           |
+| Address                          | Method        | What it does                                                                                                                                           |
+| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                             |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                   |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                          |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                     |
+| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                                                                        |
+| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                                                                   |
+| `/tracker/<id>.<token>`          | `GET`, `POST` | Where a phone or GPS tracker posts its position without signing in, see [Live tracking from a phone](../archive/devices.md#live-tracking-from-a-phone) |
+| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                    |
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
