@@ -136,6 +136,7 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 | One module's details                                      | `mod info archive`                        | [mod-info](../reference/commands-core.md#mod-info)         |
 | The published modules                                     | `mod search`                              | [mod-search](../reference/commands-core.md#mod-search)     |
 | Install or update a module, _administrators only_         | `mod install assistant`                   | [mod-install](../reference/commands-core.md#mod-install)   |
+| How far a module install has got                          | `mod status`, `mod status --follow`       | [mod-status](../reference/commands-core.md#mod-status)     |
 | Remove a module, _administrators only_                    | `mod remove assistant`                    | [mod-remove](../reference/commands-core.md#mod-remove)     |
 | Set up every module again, _administrators only_          | `mod setup --all`                         | [mod-setup](../reference/commands-core.md#mod-setup)       |
 | Your sidebar and top bar, and what is wrong with an entry | `ui-nav`                                  | [ui-nav](../reference/commands-core.md#ui-nav)             |

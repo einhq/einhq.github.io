@@ -110,9 +110,15 @@ the module.
 ![The Published modules panel on Settings → Modules: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 from github.com/einhq, each marked The deployment's, with a Refresh button at the top right](../../assets/shots/modules-published.webp "The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
-and starts their services. Under the module it then says "Installed", or, when it brought
-dependencies along, for example "Installed, with ems". Its entries in the sidebar and its pages
-appear without reloading the page.
+and starts their services. Its entries in the sidebar and its pages appear without reloading the
+page.
+
+The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
+top of **Settings → Modules** says so to everyone who opens the tab, with who started it, how many of
+the module's files are in place and the last thing it did, and **Install** and **Update** wait for
+it, since EiN installs one thing at a time. A module of many files, such as one with map tiles, can
+take a long while. When it ends, the tab says what it installed, with a link to each module, or why
+it failed.
 
 Each published module carries a badge for what is installed of it:
 
@@ -189,6 +195,22 @@ at the release `mod install` would take, its version and the core API it needs, 
 release written for another core API: `archive 0.2.4 (0.3.0 needs core API ^0.8.0, this is
 0.7.2)`.
 
+The install goes on when the terminal is closed or the connection drops; `mod install` only
+follows it, and stops following when you press <kbd>Ctrl</kbd>+<kbd>C</kbd>. `mod install
+--background archive` starts it and returns at once. `mod status` says how far the install running
+now has got, or what the last one came to, and `mod status --follow` follows it to its end:
+
+```text
+mod install seacharts: running for 4m 12s, for admin
+  18234 files of seacharts unpacked
+  Fetching https://github.com/einhq/module-seacharts at v0.4.0 (3a9c0e1f2)...
+    18011 files of seacharts unpacked
+```
+
+EiN installs one thing at a time. While an install runs, `mod install` with the same modules
+follows it, and with any other refuses, naming the one running. An install EiN stopped in the
+middle of, by restarting, leaves nothing installed of it; the next install clears away what it left.
+
 The [reference](../reference/commands-core.md#mod-install) lists its options.
 
 ### Install modules with the installer
@@ -219,8 +241,8 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
   and **Remove**. **Update** there fetches the newest release for one installed at a release, and
   the newest commit of the branch for one installed from a branch. One installed at any other tag
   gets that tag again, and one installed at a commit stays there, and its panel offers no
-  **Update**. It answers **Updated**, or **Up to date** when there was nothing
-  newer.
+  **Update**. The top of the tab says how it goes, as for an install, and when it ends what it
+  updated, or that there was nothing newer.
 - In the terminal, `mod install archive` updates an installed module. The same commit again is
   left alone: `archive is installed at 5e1c07a42 (v0.1.0) already`.
 

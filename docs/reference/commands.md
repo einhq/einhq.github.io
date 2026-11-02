@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 359 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 362 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 207 in full](commands-core.md).
+[All 209 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -117,11 +117,12 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [mod-cache](commands-core.md#mod-cache) | Pre-fetch a module's TypeScript command dependencies. |
 | [mod-groups](commands-core.md#mod-groups) | Say which groups a module is kept to, or keep it to some groups, or make it everyone's again. |
 | [mod-info](commands-core.md#mod-info) | Show module information. |
-| [mod-install](commands-core.md#mod-install) | Install modules from their repositories, or update them, with the dependencies they lack, and set them up. |
+| [mod-install](commands-core.md#mod-install) | Install modules from their repositories, or update them, with the dependencies they lack, and set them up: one install at a time, which goes on when the session ends. |
 | [mod-list](commands-core.md#mod-list) | List installed modules, those kept to groups only for their members and administrators. |
 | [mod-remove](commands-core.md#mod-remove) | Uninstall a module. |
 | [mod-search](commands-core.md#mod-search) | The published modules: each module-* repository of the module sources (CFG_MODULE_SOURCES), with its version and whether it is installed. |
 | [mod-setup](commands-core.md#mod-setup) | Set up a module already in the modules directory. |
+| [mod-status](commands-core.md#mod-status) | Say how far the module install running now has got, or what the last one came to. |
 | [mount](commands-core.md#mount) | Mount a filesystem. |
 | [mv](commands-core.md#mv) | Move or rename files and directories, re-pointing the softlinks at each moved path or anywhere under it (and a relation link’s peerLink with them) |
 | [news](commands-core.md#news) | What has been added lately, newest first, from every news-* command on PATH. |
@@ -202,6 +203,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
 | [tr](commands-core.md#tr) | Translate or delete characters. |
+| [track-token](commands-core.md#track-token) | Show, make or turn off the link a phone or GPS tracker posts a track's fixes to without signing in. |
 | [trash](commands-core.md#trash) | Move nodes into the reader's trash, alone or as one batch, list it, restore entries, or empty it. |
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
 | [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build. |
@@ -243,7 +245,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 141 in full](../archive/commands.md).
+[All 142 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -271,6 +273,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [device](../archive/commands.md#device) | Camera and recording device management. |
 | [device-cover](../archive/commands.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
 | [device-create](../archive/commands.md#device-create) | Create a device node and link the media already carrying its fingerprint. |
+| [device-home](../archive/commands.md#device-home) | List or change a device's home bases, where arriving ends a trip. |
 | [device-info](../archive/commands.md#device-info) | Show device details and owners. |
 | [device-link](../archive/commands.md#device-link) | Link a file to its capture device using extracted exif, or to a device named by hand. |
 | [device-list](../archive/commands.md#device-list) | List all devices. |

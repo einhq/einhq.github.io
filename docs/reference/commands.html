@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 359 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 362 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 359 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 362 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,7 +89,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 359 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 362 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -101,7 +101,7 @@
 </ul>
 <p>A command of a family, such as <code>mod-install</code> or <code>user-passwd</code>, can be typed as two words where the family has a command of its own: <code>mod install archive</code>. In the shell, <code>&lt;command&gt; --help</code> says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.</p>
 <h2 id="core">Core<a class="anchor" href="#core" aria-label="Link to this section"></a></h2>
-<p><a href="commands-core.html">All 207 in full</a>.</p>
+<p><a href="commands-core.html">All 209 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -479,7 +479,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#mod-install">mod-install</a></td>
-<td>Install modules from their repositories, or update them, with the dependencies they lack, and set them up.</td>
+<td>Install modules from their repositories, or update them, with the dependencies they lack, and set them up: one install at a time, which goes on when the session ends.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#mod-list">mod-list</a></td>
@@ -496,6 +496,10 @@
 <tr>
 <td><a href="commands-core.html#mod-setup">mod-setup</a></td>
 <td>Set up a module already in the modules directory.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-status">mod-status</a></td>
+<td>Say how far the module install running now has got, or what the last one came to.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#mount">mount</a></td>
@@ -818,6 +822,10 @@
 <td>Translate or delete characters.</td>
 </tr>
 <tr>
+<td><a href="commands-core.html#track-token">track-token</a></td>
+<td>Show, make or turn off the link a phone or GPS tracker posts a track&#39;s fixes to without signing in.</td>
+</tr>
+<tr>
 <td><a href="commands-core.html#trash">trash</a></td>
 <td>Move nodes into the reader&#39;s trash, alone or as one batch, list it, restore entries, or empty it.</td>
 </tr>
@@ -955,7 +963,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 141 in full</a>.</p>
+<p><a href="../archive/commands.html">All 142 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1058,6 +1066,10 @@
 <tr>
 <td><a href="../archive/commands.html#device-create">device-create</a></td>
 <td>Create a device node and link the media already carrying its fingerprint.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#device-home">device-home</a></td>
+<td>List or change a device&#39;s home bases, where arriving ends a trip.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#device-info">device-info</a></td>

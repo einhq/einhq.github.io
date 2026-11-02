@@ -2,7 +2,7 @@
 
 # Node types
 
-Every node has a type, which decides what it holds and how it behaves. These are the 24 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
+Every node has a type, which decides what it holds and how it behaves. These are the 25 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
 
 ## Content
 
@@ -47,4 +47,5 @@ How EiN runs: its commands, logs, queues and the other parts of the system that 
 | `router` Router | A live broadcast channel: what is written reaches every current reader and nothing is kept. /dev/events is one. |  | Core |
 | `session` Session | A signed-in connection — a browser, an SSH login, a service — under /var/sessions. Removed when it ends. |  | Core |
 | `share-link` Share link | A link that opens an album, and what it holds, to whoever has it, without signing in; under /var/links, with when it expires and how often it was opened. `share-link` makes, lists and turns them off. |  | Core |
+| `tracker-token` Tracker token | The secret in the link a phone or GPS tracker posts a track's positions to without signing in: the track's child .tracker, readable by the administrator alone. `track-token` makes, shows and turns it off. |  | Core |
 | `tty` Terminal | An interactive terminal belonging to a session, with its size and working directory. |  | Core |

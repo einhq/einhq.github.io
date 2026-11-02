@@ -235,9 +235,14 @@ the module&#39;s name.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Published modules panel on Settings → Modules: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 from github.com/einhq, each marked The deployment's, with a Refresh button at the top right" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
-and starts their services. Under the module it then says &quot;Installed&quot;, or, when it brought
-dependencies along, for example &quot;Installed, with ems&quot;. Its entries in the sidebar and its pages
-appear without reloading the page.</p>
+and starts their services. Its entries in the sidebar and its pages appear without reloading the
+page.</p>
+<p>The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
+top of <strong>Settings → Modules</strong> says so to everyone who opens the tab, with who started it, how many of
+the module&#39;s files are in place and the last thing it did, and <strong>Install</strong> and <strong>Update</strong> wait for
+it, since EiN installs one thing at a time. A module of many files, such as one with map tiles, can
+take a long while. When it ends, the tab says what it installed, with a link to each module, or why
+it failed.</p>
 <p>Each published module carries a badge for what is installed of it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -330,6 +335,16 @@ its newest release that the module accepts: <code>archive</code> needing <code>e
 when 0.2.0 is out, and the newest in that range this EiN can run. <code>mod search</code> lists each module
 at the release <code>mod install</code> would take, its version and the core API it needs, and names a newer
 release written for another core API: <code>archive 0.2.4 (0.3.0 needs core API ^0.8.0, this is 0.7.2)</code>.</p>
+<p>The install goes on when the terminal is closed or the connection drops; <code>mod install</code> only
+follows it, and stops following when you press <kbd>Ctrl</kbd>+<kbd>C</kbd>. <code>mod install --background archive</code> starts it and returns at once. <code>mod status</code> says how far the install running
+now has got, or what the last one came to, and <code>mod status --follow</code> follows it to its end:</p>
+<div class="code"><pre tabindex="0"><code>mod install seacharts: running for 4m 12s, for admin
+  18234 files of seacharts unpacked
+  Fetching https://github.com/einhq/module-seacharts at v0.4.0 (3a9c0e1f2)...
+    18011 files of seacharts unpacked</code></pre></div>
+<p>EiN installs one thing at a time. While an install runs, <code>mod install</code> with the same modules
+follows it, and with any other refuses, naming the one running. An install EiN stopped in the
+middle of, by restarting, leaves nothing installed of it; the next install clears away what it left.</p>
 <p>The <a href="../reference/commands-core.html#mod-install">reference</a> lists its options.</p>
 <h3 id="install-modules-with-the-installer">Install modules with the installer<a class="anchor" href="#install-modules-with-the-installer" aria-label="Link to this section"></a></h3>
 <p>The installer&#39;s <code>--module</code> option names a module for EiN to install at its start, with the
@@ -352,8 +367,8 @@ from its repository</strong>, saying which repository and commit it came from an
 and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest release for one installed at a release, and
 the newest commit of the branch for one installed from a branch. One installed at any other tag
 gets that tag again, and one installed at a commit stays there, and its panel offers no
-<strong>Update</strong>. It answers <strong>Updated</strong>, or <strong>Up to date</strong> when there was nothing
-newer.</li>
+<strong>Update</strong>. The top of the tab says how it goes, as for an install, and when it ends what it
+updated, or that there was nothing newer.</li>
 <li>In the terminal, <code>mod install archive</code> updates an installed module. The same commit again is
 left alone: <code>archive is installed at 5e1c07a42 (v0.1.0) already</code>.</li>
 </ul>
