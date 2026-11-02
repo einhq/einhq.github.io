@@ -571,15 +571,18 @@ does a gap of that long with no points at all.</li>
 for a bike and 200 m on foot.</p>
 <p>Each trip&#39;s card shows its dates, an <strong>Ongoing</strong> badge while it has not ended and its last point
 is less than two days old, how many days it took, its length, how far from its start it got, and
-where it started and ended: at home, after a long stay, or on the way. The farthest place it stayed
-at is named too. A stay of two hours or more across midnight is an overnight stay; it does not end
+where it started and ended: the location of the stay, such as a harbour, an island or your home, or
+&quot;on the way&quot;. The farthest place it stayed at is named too. Click a name to open its location. How
+stays get their locations and names is on
+<a href="places.html#places-a-device-stayed-at">Places a device stayed at</a>. A stay of two hours or more across midnight is an overnight stay; it does not end
 the trip. A trip that is an album names it under <strong>Album</strong>; see
 <a href="#make-a-trip-an-album">Make a trip an album</a>.</p>
 <p>Click <strong>N legs</strong> to see the trip day by day: each day&#39;s date, its first and last time, its length,
 and where the day ended. Days follow the device&#39;s <strong>Timezone</strong>, so a day ends at midnight where the
-device was set to be; a device without one ends its days at midnight UTC.</p>
+device was set to be, and the times are on that clock; a device without one has its days and times
+in UTC.</p>
 <p>The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended. Changing how the device travels, its time zone or
+again from where the last finished trip ended, and puts the new stays at locations. Changing how the device travels, its time zone or
 its home bases finds them again from the start. <strong>Find trips again</strong> does it at once.</p>
 <h3 id="join-and-part-trips">Join and part trips<a class="anchor" href="#join-and-part-trips" aria-label="Link to this section"></a></h3>
 <p>EiN may end a trip where you do not: a weekend at home in the middle of a holiday, or a long wait
@@ -608,8 +611,9 @@ It makes that album the trip&#39;s.</li>
 <p>Either way the device is added to the album&#39;s devices, so its Map tab draws the route, and the album
 spans the trip even before it has any pictures. The card then names the album under <strong>Album</strong>, with
 <strong>Take off the album</strong> to undo it; the album and its pictures stay, and so does the device on its
-list. A trip is one album&#39;s, and an album holds one trip. While a trip is ongoing, its album grows
-with it each time the trips are found again.</p>
+list. A trip is one album&#39;s, and an album holds one trip. Each time the trips are found again, or
+their stays put at locations, the album follows: it grows while the trip is ongoing, and its stays
+get their locations.</p>
 <p>The album gets a <strong>Trip</strong> tab: the days, the distance in the device&#39;s units, where it stayed, and
 each day&#39;s notes. See <a href="albums.html#the-trip-tab">The Trip tab</a>. Those who may only look at the device
 see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
@@ -777,6 +781,10 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <tr>
 <td>List a device&#39;s trips</td>
 <td><a href="commands.html#trip-list"><code>trip-list</code></a> <code>&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td>Put a device&#39;s stays at locations, and name the new ones</td>
+<td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;device&gt;</code>; see <a href="places.html#places-a-device-stayed-at">Places a device stayed at</a></td>
 </tr>
 <tr>
 <td>Join a trip to the one before, or part one</td>
