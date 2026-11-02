@@ -82,6 +82,9 @@ at once, select them in the grid and use **Download** in the selection bar.
 The list goes round: after the last file comes the first again, and before the first comes the
 last.
 
+While the next picture slides in, the position, the date and the place turn to it once it covers
+more than half the screen. A swipe you take back before letting go turns them back.
+
 To close the viewer, press × at the top left, press <kbd>Esc</kbd>, use the browser's Back button,
 or on a phone swipe down on the picture. The picture shrinks back into its tile, so you see where
 you were in the grid.
