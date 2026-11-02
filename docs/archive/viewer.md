@@ -141,14 +141,14 @@ narrower.
   the panel to the right to close it.
 - **Edit faces** is not offered on a phone held upright.
 
-| Gesture                                | What it does                                                                      |
-| -------------------------------------- | --------------------------------------------------------------------------------- |
-| Swipe left / right                     | Next / previous file                                                              |
-| Swipe up                               | Open the details                                                                  |
-| Swipe down                             | Close the details; with the details closed, close the viewer                      |
-| Pinch, or double-tap                   | Zoom a photo                                                                      |
-| Drag with one finger on a zoomed photo | Look around it                                                                    |
-| Tap a face                             | Open the person's page, or name an unnamed person; pin the faces to see the boxes |
+| Gesture                                | What it does                                                 |
+| -------------------------------------- | ------------------------------------------------------------ |
+| Swipe left / right                     | Next / previous file                                         |
+| Swipe up                               | Open the details                                             |
+| Swipe down                             | Close the details; with the details closed, close the viewer |
+| Pinch, or double-tap                   | Zoom a photo                                                 |
+| Drag with one finger on a zoomed photo | Look around it                                               |
+| Tap a pinned face                      | Open the person's page, or name an unnamed person            |
 
 A swipe that starts at the very edge of the screen is left to the phone itself, so its own Back
 gesture closes the viewer.
@@ -292,8 +292,10 @@ Face boxes stay hidden until you point at a face; then that face's box and name 
 - **Pin faces** in the More menu, or <kbd>f</kbd>, shows every box with its name. They stay pinned as
   you move from file to file, until you unpin them or reload the page. On a touch screen, where
   nothing can be pointed at, pinning is the way to see the boxes.
-- Click a named box to open that person's page.
-- Click the box of an unnamed person to open a small field, **Who is this?**. Type a name and press
+- With the faces pinned, click a named box to open that person's page. Unpinned, a box is part of
+  the picture: a click or a double-click on a face does what it does anywhere else on the picture,
+  so zooming in on a face never opens the person by accident.
+- With the faces pinned, click the box of an unnamed person to open a small field, **Who is this?**. Type a name and press
   <kbd>Enter</kbd> or the tick. This gives them a name as a person of their own. If they are someone
   already in the archive, click their placeholder name in the details panel instead and choose the
   person in the review.
