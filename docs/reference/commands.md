@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 356 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 359 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -243,12 +243,15 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 138 in full](../archive/commands.md).
+[All 141 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add files) |
 | [album-cover](../archive/commands.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
+| [album-device-add](../archive/commands.md#album-device-add) | Put devices on an album's list, whose tracks its map draws. |
+| [album-device-list](../archive/commands.md#album-device-list) | The devices whose tracks an album's map draws: those that took its media and those added by hand, and the devices of its media removed from the list. |
+| [album-device-rm](../archive/commands.md#album-device-rm) | Take devices off an album's list, whose tracks its map draws. |
 | [album-profile](../archive/commands.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
 | [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) |

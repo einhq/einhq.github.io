@@ -219,8 +219,11 @@ lets you jump through its days.</p>
 and after the last picture it goes on to the first. <a href="viewer.html">Viewing photos, videos and recordings</a> covers it.</p>
 <h3 id="the-map-tab">The Map tab<a class="anchor" href="#the-map-tab" aria-label="Link to this section"></a></h3>
 <figure class="shot"><a href="../../assets/shots/album-map@2x.webp"><img src="../../assets/shots/album-map.webp" srcset="../../assets/shots/album-map.webp 1x, ../../assets/shots/album-map@2x.webp 2x" alt="The album's Map tab: two piles of photos on a map of the archipelago, joined by coloured GPS routes" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Map tab puts the album&#39;s pictures where they were taken, with the routes recorded while it lasted.</figcaption></figure>
-<p>The <strong>Map</strong> tab shows the album&#39;s pictures that have a position, and the routes any GPS device
-recorded during the album&#39;s dates. The map opens fitted to both.</p>
+<p>The <strong>Map</strong> tab shows the album&#39;s pictures that have a position, and the routes the album&#39;s
+devices recorded during its dates. The map opens fitted to both. The album&#39;s devices are the
+cameras and phones that took its pictures and any device added to it, such as a GPS tracker carried
+on the trip; a route someone else recorded on the same days stays off the map (see
+<a href="#choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows</a>).</p>
 <ul>
 <li>A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.</li>
 <li>Pictures close together form a pile with a count. Choose it to list them in <strong>N photos here</strong>.</li>
@@ -228,8 +231,10 @@ recorded during the album&#39;s dates. The map opens fitted to both.</p>
 <li>The layers button in the corner switches between <strong>Map</strong>, <strong>Dark map</strong> and <strong>Satellite</strong>.</li>
 </ul>
 <p>The routes come from the album&#39;s whole span, so widening its dates in <strong>Edit album</strong> brings in the
-journey there and back. When nothing has a position and no route was recorded, the tab says
-<strong>Nothing in this album has a position, and no device recorded a route while it was taken.</strong>
+journey there and back. When nothing has a position and none of its devices recorded a route, the
+tab says so and names the devices, for example <strong>Nothing in this album has a position, and Ruby&#39;s
+iPhone recorded no route while it was taken.</strong> An album with no devices at all says <strong>Nothing in
+this album has a position, and it has no devices whose routes to show.</strong>
 <a href="dates-places.html">Dates and places of pictures</a> shows how to give pictures a place, and
 <a href="devices.html">Devices and GPS tracks</a> how a route gets in.</p>
 <h3 id="the-info-tab">The Info tab<a class="anchor" href="#the-info-tab" aria-label="Link to this section"></a></h3>
@@ -259,7 +264,7 @@ journey there and back. When nothing has a position and no route was recorded, t
 </tr>
 <tr>
 <td><strong>Devices</strong></td>
-<td>The cameras and phones that took them</td>
+<td>The devices whose routes the Map tab shows: those that took its pictures, then those added to the album</td>
 </tr>
 <tr>
 <td><strong>Photographers</strong></td>
@@ -272,10 +277,29 @@ journey there and back. When nothing has a position and no route was recorded, t
 </tbody></table>
 </div>
 <p>Each name opens its page. In <strong>People</strong>, <strong>Places</strong> and <strong>Devices</strong>, the number beside a name
-searches the album for the pictures that have it; in <strong>Labels</strong>, a label searches the album for
-that label. <strong>People</strong>, <strong>Places</strong>, <strong>Devices</strong> and <strong>Photographers</strong> show their first 10, then
-<strong>Show all N</strong> and <strong>Show fewer</strong>; <strong>Labels</strong> shows them all. When nobody is tagged and nothing is
-linked to a place or a device, the tab says so.</p>
+searches the album for the pictures that have it; a device added to the album says <strong>added</strong>
+instead. In <strong>Labels</strong>, a label searches the album for that label. <strong>People</strong>, <strong>Places</strong> and
+<strong>Photographers</strong> show their first 10, then <strong>Show all N</strong> and <strong>Show fewer</strong>; <strong>Devices</strong> and
+<strong>Labels</strong> show them all. When nobody is tagged and nothing is linked to a place or a device, the
+tab says so.</p>
+<h2 id="choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows<a class="anchor" href="#choose-which-devices-routes-the-map-shows" aria-label="Link to this section"></a></h2>
+<p>An album&#39;s devices start as the cameras and phones that took its pictures. A device that took
+pictures joining later, say from an import, is on the list as soon as they are in the album, and a
+route one of them records later shows on the map. You can add a device that took none of the
+pictures, such as a GPS tracker, and take off one whose route does not belong. You can do this if
+you may change the album.</p>
+<ol>
+<li>Open the album and choose the <strong>Info</strong> tab.</li>
+<li>In <strong>Devices</strong>:<ul>
+<li>to add one, choose it in <strong>Add a device to the map</strong>;</li>
+<li>to take one off, choose <strong>×</strong> beside it (<strong>Take off the map</strong>).</li>
+</ul>
+</li>
+</ol>
+<p>A device that took some of the album&#39;s pictures and was taken off is listed under <strong>Taken off the
+map</strong>, and stays off when more of its pictures join the album. Choose <strong>+</strong> beside it (<strong>Put back
+on the map</strong>) to put it back. Only the map is changed: the pictures stay in the album, linked to
+their device.</p>
 <h2 id="add-pictures-to-an-album">Add pictures to an album<a class="anchor" href="#add-pictures-to-an-album" aria-label="Link to this section"></a></h2>
 <p>There are two ways: upload files from your computer or phone straight into the album, or add
 pictures that are already in EiN.</p>
@@ -767,9 +791,14 @@ covers all of it.</p>
 <td>It comes back to every album when it is restored from the trash of whoever deleted it.</td>
 </tr>
 <tr>
-<td><strong>Nothing in this album has a position, and no device recorded a route while it was taken.</strong> on the Map tab</td>
-<td>No picture has a place, and no route falls within the album&#39;s dates.</td>
-<td>Give pictures a place with <strong>Set location</strong> (<a href="dates-places.html">Dates and places of pictures</a>), or widen the album&#39;s dates.</td>
+<td><strong>Nothing in this album has a position, and … recorded no route while it was taken.</strong> on the Map tab</td>
+<td>No picture has a place, and none of the album&#39;s devices recorded a route within its dates.</td>
+<td>Give pictures a place with <strong>Set location</strong> (<a href="dates-places.html">Dates and places of pictures</a>), widen the album&#39;s dates, or add the device that recorded the route (<a href="#choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows</a>).</td>
+</tr>
+<tr>
+<td>A route recorded on the trip is not on the Map tab</td>
+<td>The device that recorded it took none of the album&#39;s pictures, or was taken off the map.</td>
+<td>Add it in the <strong>Info</strong> tab&#39;s <strong>Devices</strong> (<a href="#choose-which-devices-routes-the-map-shows">Choose which devices&#39; routes the map shows</a>).</td>
 </tr>
 <tr>
 <td><strong>This album holds more than 20,000 entries; 20,000 of them are shown.</strong></td>
@@ -792,11 +821,15 @@ album add <span class="hljs-string">&quot;/archive/albums/Christmas in Wellingto
 album <span class="hljs-built_in">set</span> <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> spanStart 2025-12-18
 album <span class="hljs-built_in">set</span> <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> next <span class="hljs-string">&quot;/archive/albums/Ruby&#x27;s Wellington&quot;</span>
 album-stack refresh <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> --dry-run -v
+album-device-list <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span>
+album-device-add <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> gps-tracker
+album-device-rm <span class="hljs-string">&quot;/archive/albums/Christmas in Wellington&quot;</span> ruby-iphone
 album-random</code></pre></div>
 <p>An album&#39;s path is its folder, <code>/archive/albums/</code> and the name it was created with; renaming it
-does not change the path. <a href="commands.html#album"><code>album</code></a>,
-<a href="commands.html#album-stack"><code>album-stack</code></a> and
-<a href="commands.html#album-random"><code>album-random</code></a> have every option in the
+does not change the path. A device is its path or its slug, the last part of the path. <a href="commands.html#album"><code>album</code></a>,
+<a href="commands.html#album-stack"><code>album-stack</code></a>, <a href="commands.html#album-device-list"><code>album-device-list</code></a>,
+<a href="commands.html#album-device-add"><code>album-device-add</code></a>, <a href="commands.html#album-device-rm"><code>album-device-rm</code></a>
+and <a href="commands.html#album-random"><code>album-random</code></a> have every option in the
 <a href="commands.html">archive&#39;s commands</a>.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
@@ -815,7 +848,7 @@ does not change the path. <a href="commands.html#album"><code>album</code></a>,
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/albums.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-routes-the-map-shows">Choose which devices' routes the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

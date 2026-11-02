@@ -13,8 +13,8 @@ device is registered, the pictures it took are linked to it, and:
 - the viewer's camera line names the device, links to its page and says who owned it (see
   [The details panel](viewer.md#the-details-panel));
 - the device's page gathers everything it took, who owned it and when, and the route it recorded;
-- an album's **Info** tab lists the devices that took its pictures (see
-  [Albums](albums.md#the-info-tab)), and the Search page finds devices and narrows albums by them
+- an album's **Info** tab lists the devices that took its pictures, and its **Map** tab draws
+  their routes (see [Albums](albums.md#the-info-tab)), and the Search page finds devices and narrows albums by them
   (see [Search and the finder](search.md#find-albums-people-locations-and-devices));
 - the device's **Timezone**, **Scanner or digitizer** and **Video times in UTC** settings correct
   the dates of every picture it took;
@@ -297,8 +297,11 @@ and run `device-cover /archive/devices/ruby-iphone`.
 ## A device's track
 
 The route a GPS-capable device recorded is its track. It shows on the device's **Track** tab, on
-the **Map** page with its **Tracks** layer (see [Locations and the map](places.md)), on the **Map**
-tab of every album whose dates it falls in (see [Albums](albums.md#the-map-tab)).
+the **Map** page with its **Tracks** layer (see [Locations and the map](places.md)), and on the
+**Map** tab of an album whose dates it falls in, when the device is one of the album's: it took
+some of the album's pictures, or was added to the album (see
+[Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
+A GPS tracker takes no pictures, so add it to the albums of the trips it was carried on.
 
 The **Track** tab draws the route on a map, each day in its own colour, and adds it up:
 
