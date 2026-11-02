@@ -321,6 +321,13 @@ to download it. EiN keeps every GPX file it reads into a track, in the device's 
 (`/archive/devices/<device>/routes/`), and the track links each one from its own `sources` folder.
 The same file brought in twice, byte for byte, is kept once.
 
+While the device is sending its position as it moves, and its last point is under four hours old,
+a **Live** card sits above the map with its speed in km/h and how long ago that point was taken
+("12 km/h · 40 s ago"). The map then draws a pin where the device is now and extends the route as
+points arrive. Click **Follow**, the crosshair on the card, and the map keeps the newest point in
+view until you drag it. The **Map** page follows live devices the same way; see
+[Follow a device live](places.md#follow-a-device-live).
+
 A device with no route says **This device has recorded no track**.
 
 EiN draws a track on the maps; it does not use it to give a position to pictures that have none.

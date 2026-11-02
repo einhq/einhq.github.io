@@ -345,6 +345,20 @@ Piles depend on the zoom: zoom in, and a pile splits into smaller piles and sing
 Tracks are always drawn in full: the years and the search box narrow the pictures only. How tracks
 get into EiN from GPX files is on [A device's track](devices.md#a-devices-track).
 
+### Follow a device live
+
+A device that is sending its position as it moves is **live** while its last point is under four
+hours old. The map then draws a pin where it is now and extends its line as new points arrive,
+without a reload. Pointing at the pin shows the device's name, its speed in km/h and how long ago
+the point was taken ("12 km/h · 40 s ago").
+
+The live devices are also listed in the top-left corner, each with its colour, name, speed and age.
+Click **Follow** (the crosshair beside a device), or the device's pin, and the map moves along with
+it, keeping its newest point in view; zooming does not stop it. Drag the map, or click **Follow**
+again, to stop. A device drops out of the list four hours after its last point.
+
+Live devices belong to the tracks: they show while **Show** is on **All** or **Tracks**.
+
 ### Choose what the map shows
 
 The funnel button at the top of the right-hand corner is the **Show** menu:
@@ -500,6 +514,10 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   **Media** or **Tracks**.
 - **A track ignores the year slider.** Tracks are always drawn in full; only the pictures are
   narrowed.
+- **A device's pin stays where it was.** Its last point is older than you expected: the device has
+  stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.
+- **The map jumps back after you zoom.** You are following a device; drag the map or click
+  **Follow** to stop.
 
 ## Related pages
 
