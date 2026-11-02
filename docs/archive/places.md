@@ -2,8 +2,8 @@
 
 This page is for everyone in the family who works with places: the homes, cottages, churches and
 towns where pictures were taken and people lived. It covers the **Locations** page, creating a
-location and drawing where it lies, how pictures join a location by themselves, and the **Map**
-page, where pictures, locations and GPS tracks are drawn together.
+location and drawing where it lies, how pictures join a location by themselves, the weather at a
+place and time, and the **Map** page, where pictures, locations and GPS tracks are drawn together.
 
 How one picture gets its position, and how you correct it, is on
 [Dates and places of pictures](dates-places.md).
@@ -169,7 +169,32 @@ time, and every later stay in that area, by any device, is named without going o
 place where nothing had a name, and a location you deleted that a stay needs again. Only
 `track-places --rename` asks again.
 
-## A location's page
+## The weather at a place and time
+
+EiN can look up what the weather was at a place and an hour: the air temperature, the wind's speed
+and the direction it blew from, and how much of the sky was covered by cloud. It is off until an
+administrator turns on **Look up the weather** (`CFG_WEATHER`) in **Settings → System**, under
+**Places**, because every lookup sends the place and the date to a weather service.
+
+Each value comes from the first of these that has it:
+
+1. **The nearest SMHI weather station** that measured it then, if one is within 30 km. SMHI is the
+   Swedish meteorological institute, so this is the weather actually observed, in Sweden and just
+   across its borders. Not every station measures everything: the wind may come from one station
+   and the cloud from another, a little farther away. **SMHI station distance**
+   (`CFG_WEATHER_SMHI_KM`) sets how far a station may be; 0 leaves SMHI out.
+2. **Open-Meteo**, for everywhere else and for an hour the station missed. It gives ERA5, a
+   reconstruction of the weather from 1940 until a few days ago, for squares of 0.25 degrees, about
+   28 km from north to south. It is close to what was observed over open country and the sea, and
+   less so in mountains and along a broken coast.
+
+The value is the one of the whole hour nearest the time asked about. A time still to come has no
+weather.
+
+EiN keeps what the services answered in `/archive/sources/weather`: a station's values a year at a
+time, and Open-Meteo's a month at a time. The first lookup near a station fetches its whole history
+of that measurement, which can take a minute; every later hour there, in any year, is answered
+without going online. Answers kept there can be deleted: they are asked for again when needed.
 
 ![The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading "50.24400, -5.02700 · radius 300 m" and "Set by hand", and Freya Wrenfield under Current residents](../../assets/shots/place.webp "The Info tab shows the shape that decides which pictures belong here, and where that shape came from.")
 
@@ -468,17 +493,18 @@ around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is l
 
 ## Where the maps and addresses come from
 
-The map pictures and the address lookups come from outside services. Your photos, videos and
+The map pictures, the address lookups and the weather come from outside services. Your photos, videos and
 recordings are never sent to them.
 
-| What                                           | From                                                           | What is sent                                                                                                                                  |
-| ---------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`         | Your browser asks for the map squares of the area you look at                                                                                 |
-| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                             | The same                                                                                                                                      |
-| The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                                | The same                                                                                                                                      |
-| A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`       | The machine EiN runs on sends the location's address, or its name                                                                             |
-| Pictures' street addresses                     | Nominatim                                                      | The machine EiN runs on sends each picture's coordinates                                                                                      |
-| The names of places a device stayed at         | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it |
+| What                                            | From                                                                                                  | What is sent                                                                                                                                                               |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Map** style, and the small maps on cards  | OpenStreetMap's tile servers, `tile.openstreetmap.org`                                                | Your browser asks for the map squares of the area you look at                                                                                                              |
+| The sea marks on the **Map** style and cards    | OpenSeaMap, `tiles.openseamap.org`                                                                    | The same                                                                                                                                                                   |
+| The **Dark map** and **Satellite** styles       | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
+| A location's position from its address          | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
+| Pictures' street addresses                      | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
+| The names of places a device stayed at          | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
+| The weather at a place and time, when turned on | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.
@@ -487,8 +513,9 @@ For administrators: the public Nominatim service answers one request a second, a
 own requests to that, and its Overpass requests to one every 1.1 seconds. The environment variable
 `NOMINATIM_SEARCH_URL` points the address lookups at another Nominatim server, such as one of your
 own, and `NOMINATIM_REVERSE_URL` the lookups from coordinates. `OVERPASS_URL` lists the Overpass
-servers, separated by spaces, which EiN takes in turn when one is busy; see
-[Environment variables](../reference/environment.md#options-you-set).
+servers, separated by spaces, which EiN takes in turn when one is busy. SMHI and Open-Meteo are
+asked at most once a second each; `SMHI_METOBS_URL` and `OPEN_METEO_ARCHIVE_URL` point the weather
+lookups at other servers. See [Environment variables](../reference/environment.md#options-you-set).
 
 ## In the terminal
 
@@ -508,6 +535,7 @@ Locations are ordinary nodes, and these commands work on them in the
 | Link the pictures inside a location's shape at once             | [`location-link-media`](commands.md#location-link-media) `--location <location>`                                |
 | Put a device's stays at locations, and name the new ones        | [`track-places`](commands.md#track-places) `<device>`, `--dry-run` to see them first                            |
 | Look the names of a device's stay locations up again            | `track-places <device> --rename`, which asks the services again; names changed by hand are kept                 |
+| The weather at a place and time                                 | [`weather`](commands.md#weather) `<lat> <lng> <time>`, such as `weather 59.33 18.07 2024-07-14T15:00`           |
 
 To turn the point "Islington Town Hall" into a circle with a radius of 150 m, the way the dialog
 does it:
@@ -518,7 +546,9 @@ position-set /archive/locations/Islington_Town_Hall/position --lat=51.5416 --lng
 geocode-location /archive/locations/Islington_Town_Hall --drawn
 ```
 
-Write negative coordinates with `=`, as `--lng=-0.1028`, so they are not read as an option. How to
+Write negative coordinates with `=`, as `--lng=-0.1028`, so they are not read as an option; for
+`weather` that is `weather --lat=50.24 --lng=-5.03 1972-08-12T14:00`. A time without an offset, such
+as `+02:00`, is UTC. How to
 link one picture to a location by hand is in [Dates and places of pictures](dates-places.md#in-the-terminal).
 
 ## When something goes differently
@@ -557,6 +587,13 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   narrowed.
 - **A device's pin stays where it was.** Its last point is older than you expected: the device has
   stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.
+- **`weather` answers "weather lookups are off".** An administrator has to turn on **Look up the
+  weather** first.
+- **The weather of a place in Sweden comes from Open-Meteo.** No SMHI station within 30 km measured
+  that value at that hour: the stations near it opened later, closed earlier, or did not measure it.
+  Older stations often measured wind only three times a day.
+- **The first weather lookup near a station takes a minute.** It fetches the station's whole history;
+  later lookups there are immediate.
 - **The map jumps back after you zoom.** You are following a device; drag the map or click
   **Follow** to stop.
 

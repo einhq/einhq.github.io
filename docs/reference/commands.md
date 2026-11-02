@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 368 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 369 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -245,7 +245,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 148 in full](../archive/commands.md).
+[All 149 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -397,6 +397,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
 | [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
+| [weather](../archive/commands.md#weather) | The weather at a place and time: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo. |
 
 ## Assistant
 

@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 81 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 83 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -376,6 +376,30 @@ Every setting of an EiN with all its modules: 81 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | none: a key is set by you, and never shown again |
 | Kind | a key: never readable, in no shell |
+
+## Places
+
+### `CFG_WEATHER`
+
+**Look up the weather**. Let EiN ask SMHI and Open-Meteo what the weather was at a place and time. Each lookup sends the coordinates and the date to them, so it is off until you turn it on.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `false` |
+| Kind | boolean |
+| From the module | Archive |
+
+### `CFG_WEATHER_SMHI_KM`
+
+**SMHI station distance (km)**. How far from a place the nearest SMHI weather station may be and still give its weather. Farther away, and outside Sweden, the weather comes from Open-Meteo's reanalysis instead. 0 leaves SMHI out.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `30` |
+| Kind | number |
+| From the module | Archive |
 
 ## Playback
 

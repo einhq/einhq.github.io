@@ -129,6 +129,8 @@ Nobody sets these for you. Export one in a shell, or put it in front of a comman
 | `NOMINATIM_SEARCH_URL` | `https://nominatim.openstreetmap.org/search` | Where geocoding asks Nominatim for an address, as geocode-location and location-region do. Point it at your own server to avoid the public one's rate limit. From the archive module. |
 | `NOMINATIM_REVERSE_URL` | `https://nominatim.openstreetmap.org/reverse` | Where Nominatim is asked for the address at a point: a picture's street address (geocode-position), and the town around a stay that has no harbour, island or bay nearby (track-places). From the archive module. |
 | `OVERPASS_URL` | `https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter` | Where track-places asks OpenStreetMap's Overpass API for the harbours, islands and bays a device stayed at: one or more endpoints, separated by spaces, tried in turn. Point it at your own server to avoid the public ones' rate limit. From the archive module. |
+| `SMHI_METOBS_URL` | `https://opendata-download-metobs.smhi.se/api/version/1.0` | Where weather asks SMHI's meteorological observations for the weather stations and their hourly values. From the archive module. |
+| `OPEN_METEO_ARCHIVE_URL` | `https://archive-api.open-meteo.com/v1/archive` | Where weather asks Open-Meteo's historical weather API for the hourly weather of places with no SMHI station near them. From the archive module. |
 
 ## Set for a pipeline step
 

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Locations and the map – EiN documentation</title>
-    <meta name="description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, and the Map page, where pictures, locations and GPS tracks are drawn together.">
+    <meta name="description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/archive/places.html">
     <meta property="og:title" content="Locations and the map – EiN documentation">
-    <meta property="og:description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, and the Map page, where pictures, locations and GPS tracks are drawn together.">
+    <meta property="og:description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -89,8 +89,8 @@
         <article class="prose">
 <p>This page is for everyone in the family who works with places: the homes, cottages, churches and
 towns where pictures were taken and people lived. It covers the <strong>Locations</strong> page, creating a
-location and drawing where it lies, how pictures join a location by themselves, and the <strong>Map</strong>
-page, where pictures, locations and GPS tracks are drawn together.</p>
+location and drawing where it lies, how pictures join a location by themselves, the weather at a
+place and time, and the <strong>Map</strong> page, where pictures, locations and GPS tracks are drawn together.</p>
 <p>How one picture gets its position, and how you correct it, is on
 <a href="dates-places.html">Dates and places of pictures</a>.</p>
 <h2 id="what-a-location-is">What a location is<a class="anchor" href="#what-a-location-is" aria-label="Link to this section"></a></h2>
@@ -314,7 +314,29 @@ once. It asks OpenStreetMap for the harbours, islands and bays of an area about 
 time, and every later stay in that area, by any device, is named without going online. So is a
 place where nothing had a name, and a location you deleted that a stay needs again. Only
 <code>track-places --rename</code> asks again.</p>
-<h2 id="a-locations-page">A location&#39;s page<a class="anchor" href="#a-locations-page" aria-label="Link to this section"></a></h2>
+<h2 id="the-weather-at-a-place-and-time">The weather at a place and time<a class="anchor" href="#the-weather-at-a-place-and-time" aria-label="Link to this section"></a></h2>
+<p>EiN can look up what the weather was at a place and an hour: the air temperature, the wind&#39;s speed
+and the direction it blew from, and how much of the sky was covered by cloud. It is off until an
+administrator turns on <strong>Look up the weather</strong> (<code>CFG_WEATHER</code>) in <strong>Settings → System</strong>, under
+<strong>Places</strong>, because every lookup sends the place and the date to a weather service.</p>
+<p>Each value comes from the first of these that has it:</p>
+<ol>
+<li><strong>The nearest SMHI weather station</strong> that measured it then, if one is within 30 km. SMHI is the
+Swedish meteorological institute, so this is the weather actually observed, in Sweden and just
+across its borders. Not every station measures everything: the wind may come from one station
+and the cloud from another, a little farther away. <strong>SMHI station distance</strong>
+(<code>CFG_WEATHER_SMHI_KM</code>) sets how far a station may be; 0 leaves SMHI out.</li>
+<li><strong>Open-Meteo</strong>, for everywhere else and for an hour the station missed. It gives ERA5, a
+reconstruction of the weather from 1940 until a few days ago, for squares of 0.25 degrees, about
+28 km from north to south. It is close to what was observed over open country and the sea, and
+less so in mountains and along a broken coast.</li>
+</ol>
+<p>The value is the one of the whole hour nearest the time asked about. A time still to come has no
+weather.</p>
+<p>EiN keeps what the services answered in <code>/archive/sources/weather</code>: a station&#39;s values a year at a
+time, and Open-Meteo&#39;s a month at a time. The first lookup near a station fetches its whole history
+of that measurement, which can take a minute; every later hour there, in any year, is answered
+without going online. Answers kept there can be deleted: they are asked for again when needed.</p>
 <figure class="shot"><a href="../../assets/shots/place@2x.webp"><img src="../../assets/shots/place.webp" srcset="../../assets/shots/place.webp 1x, ../../assets/shots/place@2x.webp 2x" alt="The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading &quot;50.24400, -5.02700 · radius 300 m&quot; and &quot;Set by hand&quot;, and Freya Wrenfield under Current residents" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Info tab shows the shape that decides which pictures belong here, and where that shape came from.</figcaption></figure>
 <p>The header shows the location&#39;s name and address, the people who live there, and its labels. If
 you may change the location, it also has <strong>Share</strong>, <strong>Edit</strong> and a ⋮ menu with <strong>Add event</strong> and
@@ -661,7 +683,7 @@ reload keeps it. These parts of the address are the map&#39;s:</p>
 around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is listed on
 <a href="../reference/routes.html">Addresses in the Web UI</a>.</p>
 <h2 id="where-the-maps-and-addresses-come-from">Where the maps and addresses come from<a class="anchor" href="#where-the-maps-and-addresses-come-from" aria-label="Link to this section"></a></h2>
-<p>The map pictures and the address lookups come from outside services. Your photos, videos and
+<p>The map pictures, the address lookups and the weather come from outside services. Your photos, videos and
 recordings are never sent to them.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -701,6 +723,11 @@ recordings are never sent to them.</p>
 <td>OpenStreetMap&#39;s Overpass API, <code>overpass-api.de</code>, and Nominatim</td>
 <td>The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it</td>
 </tr>
+<tr>
+<td>The weather at a place and time, when turned on</td>
+<td>SMHI&#39;s observations, <code>opendata-download-metobs.smhi.se</code>, and Open-Meteo, <code>archive-api.open-meteo.com</code></td>
+<td>The machine EiN runs on asks SMHI for its list of stations and a station&#39;s values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month</td>
+</tr>
 </tbody></table>
 </div>
 <p>Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
@@ -709,8 +736,9 @@ still drawn, and addresses cannot be looked up.</p>
 own requests to that, and its Overpass requests to one every 1.1 seconds. The environment variable
 <code>NOMINATIM_SEARCH_URL</code> points the address lookups at another Nominatim server, such as one of your
 own, and <code>NOMINATIM_REVERSE_URL</code> the lookups from coordinates. <code>OVERPASS_URL</code> lists the Overpass
-servers, separated by spaces, which EiN takes in turn when one is busy; see
-<a href="../reference/environment.html#options-you-set">Environment variables</a>.</p>
+servers, separated by spaces, which EiN takes in turn when one is busy. SMHI and Open-Meteo are
+asked at most once a second each; <code>SMHI_METOBS_URL</code> and <code>OPEN_METEO_ARCHIVE_URL</code> point the weather
+lookups at other servers. See <a href="../reference/environment.html#options-you-set">Environment variables</a>.</p>
 <h2 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h2>
 <p>Locations are ordinary nodes, and these commands work on them in the
 <a href="../shell/terminal.html">terminal</a>. Each links to its reference entry.</p>
@@ -765,6 +793,10 @@ servers, separated by spaces, which EiN takes in turn when one is busy; see
 <td>Look the names of a device&#39;s stay locations up again</td>
 <td><code>track-places &lt;device&gt; --rename</code>, which asks the services again; names changed by hand are kept</td>
 </tr>
+<tr>
+<td>The weather at a place and time</td>
+<td><a href="commands.html#weather"><code>weather</code></a> <code>&lt;lat&gt; &lt;lng&gt; &lt;time&gt;</code>, such as <code>weather 59.33 18.07 2024-07-14T15:00</code></td>
+</tr>
 </tbody></table>
 </div>
 <p>To turn the point &quot;Islington Town Hall&quot; into a circle with a radius of 150 m, the way the dialog
@@ -772,7 +804,9 @@ does it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 position-set /archive/locations/Islington_Town_Hall/position --lat=51.5416 --lng=-0.1028 --radius=150
 geocode-location /archive/locations/Islington_Town_Hall --drawn</code></pre></div>
-<p>Write negative coordinates with <code>=</code>, as <code>--lng=-0.1028</code>, so they are not read as an option. How to
+<p>Write negative coordinates with <code>=</code>, as <code>--lng=-0.1028</code>, so they are not read as an option; for
+<code>weather</code> that is <code>weather --lat=50.24 --lng=-5.03 1972-08-12T14:00</code>. A time without an offset, such
+as <code>+02:00</code>, is UTC. How to
 link one picture to a location by hand is in <a href="dates-places.html#in-the-terminal">Dates and places of pictures</a>.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <ul>
@@ -812,6 +846,13 @@ empty.</li>
 narrowed.</li>
 <li><strong>A device&#39;s pin stays where it was.</strong> Its last point is older than you expected: the device has
 stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.</li>
+<li><strong><code>weather</code> answers &quot;weather lookups are off&quot;.</strong> An administrator has to turn on <strong>Look up the
+weather</strong> first.</li>
+<li><strong>The weather of a place in Sweden comes from Open-Meteo.</strong> No SMHI station within 30 km measured
+that value at that hour: the stations near it opened later, closed earlier, or did not measure it.
+Older stations often measured wind only three times a day.</li>
+<li><strong>The first weather lookup near a station takes a minute.</strong> It fetches the station&#39;s whole history;
+later lookups there are immediate.</li>
 <li><strong>The map jumps back after you zoom.</strong> You are following a device; drag the map or click
 <strong>Follow</strong> to stop.</li>
 </ul>
@@ -832,7 +873,7 @@ stopped sending, or cannot reach EiN. The age beside its name says when the poin
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
