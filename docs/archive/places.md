@@ -342,6 +342,9 @@ Piles depend on the zoom: zoom in, and a pile splits into smaller piles and sing
   three colours of its own that its days take in turn, so two days in a row differ, and other
   tracks use other colours. Pointing at a line shows the device's name and the day.
 
+Where a device lay still, its track ends on that spot and leaves from it later, without the
+wandering its GPS recorded meanwhile; see [A device's track](devices.md#a-devices-track).
+
 Tracks are always drawn in full: the years and the search box narrow the pictures only. How tracks
 get into EiN from GPX files is on [A device's track](devices.md#a-devices-track).
 

@@ -371,7 +371,11 @@ date that is not a year, month or day is refused with a message ending in &quot;
 <p>A device that records a track moves as a boat, a car, a bike or on foot. Its <strong>Travels as</strong> setting,
 <strong>Boat</strong>, <strong>Car</strong>, <strong>Bike</strong> or <strong>On foot</strong>, says which, and so which units its track is shown in: a
 boat&#39;s distances in nautical miles and its speeds in knots, everyone else&#39;s in kilometres and km/h.
-A device without the setting is shown as a car. Set it in the <strong>Edit device</strong> dialog (see
+It also says what lying still looks like when the track is drawn (see
+<a href="#a-devices-track">A device&#39;s track</a>): a boat lies still within 80 m for 15 minutes, a car or a bike
+within 50 or 30 m for 10 minutes, someone on foot within 25 m; and a jump faster than 50 knots,
+250, 100 or 40 km/h is a GPS error. A device without the setting is shown as a car. Set it in the
+<strong>Edit device</strong> dialog (see
 <a href="#change-a-devices-settings">Change a device&#39;s settings</a>); a phone carried on a sailing holiday is
 best left as it is, and a tracker that stays on the boat set to <strong>Boat</strong>.</p>
 <h2 id="home-bases">Home bases<a class="anchor" href="#home-bases" aria-label="Link to this section"></a></h2>
@@ -449,6 +453,14 @@ A GPS tracker takes no pictures, so add it to the albums of the trips it was car
 </tr>
 </tbody></table>
 </div>
+<p>While a device lies still, its GPS keeps wandering: around a berth or a parking space it records a
+tangle of positions, now and then one far out that it never went to. EiN draws neither. Where the
+device stayed in one place, at walking pace or slower, the line ends on the middle of where it lay
+and later leaves from there, and a position it could not have reached so fast is left out. What
+counts as staying and as too fast follows its <strong>Travels as</strong> setting (see
+<a href="#how-a-device-travels">How a device travels</a>). The <strong>Points</strong> figure still counts every recorded
+position, while <strong>Distance</strong> leaves the wandering out. The <strong>Map</strong> page and an album&#39;s <strong>Map</strong> tab
+draw tracks the same way.</p>
 <p>Under the figures are the times of the first and the last point. A long track is drawn from a
 thinned copy; the line then ends with &quot;drawn from a thinned copy of the track&quot;, and the distance
 comes out a little shorter than the route really was.</p>
@@ -718,6 +730,10 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <tr>
 <td>Remove an owner</td>
 <td><a href="commands.html#device-remove-owner"><code>device-remove-owner</code></a> <code>&lt;device&gt; &lt;person&gt;</code></td>
+</tr>
+<tr>
+<td>Read a device&#39;s track as the maps draw it</td>
+<td><a href="commands.html#track-read"><code>track-read</code></a> <code>&lt;device&gt; --still</code>; without <code>--still</code> every recorded position, <code>--max-speed &lt;m/s&gt;</code> to change what is too fast</td>
 </tr>
 <tr>
 <td>Add a GPX file to a device&#39;s track</td>

@@ -269,7 +269,11 @@ date that is not a year, month or day is refused with a message ending in "is no
 A device that records a track moves as a boat, a car, a bike or on foot. Its **Travels as** setting,
 **Boat**, **Car**, **Bike** or **On foot**, says which, and so which units its track is shown in: a
 boat's distances in nautical miles and its speeds in knots, everyone else's in kilometres and km/h.
-A device without the setting is shown as a car. Set it in the **Edit device** dialog (see
+It also says what lying still looks like when the track is drawn (see
+[A device's track](#a-devices-track)): a boat lies still within 80 m for 15 minutes, a car or a bike
+within 50 or 30 m for 10 minutes, someone on foot within 25 m; and a jump faster than 50 knots,
+250, 100 or 40 km/h is a GPS error. A device without the setting is shown as a car. Set it in the
+**Edit device** dialog (see
 [Change a device's settings](#change-a-devices-settings)); a phone carried on a sailing holiday is
 best left as it is, and a tracker that stays on the boat set to **Boat**.
 
@@ -341,6 +345,15 @@ The **Track** tab draws the route on a map, each day in its own colour, and adds
 | **Distance**      | The length of the route, added up day by day, so the gap between one day's end and the next day's start is not counted. In nautical miles for a boat, in kilometres otherwise (see [How a device travels](#how-a-device-travels)). |
 | **Average speed** | The average speed while it moved, in knots for a boat and km/h otherwise. Time lying still, jumps no device could make, and gaps of more than an hour between two points are left out.                                             |
 | **Duration**      | The time from the first point to the last, in hours and minutes. It includes the time between trips, so a track that holds several trips shows the whole span.                                                                     |
+
+While a device lies still, its GPS keeps wandering: around a berth or a parking space it records a
+tangle of positions, now and then one far out that it never went to. EiN draws neither. Where the
+device stayed in one place, at walking pace or slower, the line ends on the middle of where it lay
+and later leaves from there, and a position it could not have reached so fast is left out. What
+counts as staying and as too fast follows its **Travels as** setting (see
+[How a device travels](#how-a-device-travels)). The **Points** figure still counts every recorded
+position, while **Distance** leaves the wandering out. The **Map** page and an album's **Map** tab
+draw tracks the same way.
 
 Under the figures are the times of the first and the last point. A long track is drawn from a
 thinned copy; the line then ends with "drawn from a thinned copy of the track", and the distance
@@ -540,6 +553,7 @@ route is the child `track`, and the GPX files the route was read from are in its
 | Link files to a device by hand                                         | [`device-link`](commands.md#device-link) `--device <device> <file or folder>…`                                                                                                                              |
 | Add an owner, or change the dates                                      | [`device-set-owner`](commands.md#device-set-owner) `<device> <person> --from <date> --to <date>`, with `--update` to change                                                                                 |
 | Remove an owner                                                        | [`device-remove-owner`](commands.md#device-remove-owner) `<device> <person>`                                                                                                                                |
+| Read a device's track as the maps draw it                              | [`track-read`](commands.md#track-read) `<device> --still`; without `--still` every recorded position, `--max-speed <m/s>` to change what is too fast                                                        |
 | Add a GPX file to a device's track                                     | [`track-stage`](commands.md#track-stage) `<gpx> --device <device>`, which moves the file to the device's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
 | Turn live tracking from a phone on, or replace or turn off its address | [`tracker-setup`](commands.md#tracker-setup) `<device>`, with `--new` or `--off`; `--origin https://<where EiN is>` adds the full URL and the QR code                                                       |
 | See what GPX files hold, without importing                             | [`gpx-info`](commands.md#gpx-info) `<gpx>…`: name, tracks, creator, points and their time span, size, and the devices each names                                                                            |
