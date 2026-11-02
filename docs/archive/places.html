@@ -501,6 +501,16 @@ tracks use other colours. Pointing at a line shows the device&#39;s name and the
 </ul>
 <p>Tracks are always drawn in full: the years and the search box narrow the pictures only. How tracks
 get into EiN from GPX files is on <a href="devices.html#a-devices-track">A device&#39;s track</a>.</p>
+<h3 id="follow-a-device-live">Follow a device live<a class="anchor" href="#follow-a-device-live" aria-label="Link to this section"></a></h3>
+<p>A device that is sending its position as it moves is <strong>live</strong> while its last point is under four
+hours old. The map then draws a pin where it is now and extends its line as new points arrive,
+without a reload. Pointing at the pin shows the device&#39;s name, its speed in km/h and how long ago
+the point was taken (&quot;12 km/h · 40 s ago&quot;).</p>
+<p>The live devices are also listed in the top-left corner, each with its colour, name, speed and age.
+Click <strong>Follow</strong> (the crosshair beside a device), or the device&#39;s pin, and the map moves along with
+it, keeping its newest point in view; zooming does not stop it. Drag the map, or click <strong>Follow</strong>
+again, to stop. A device drops out of the list four hours after its last point.</p>
+<p>Live devices belong to the tracks: they show while <strong>Show</strong> is on <strong>All</strong> or <strong>Tracks</strong>.</p>
 <h3 id="choose-what-the-map-shows">Choose what the map shows<a class="anchor" href="#choose-what-the-map-shows" aria-label="Link to this section"></a></h3>
 <p>The funnel button at the top of the right-hand corner is the <strong>Show</strong> menu:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -750,6 +760,10 @@ empty.</li>
 <strong>Media</strong> or <strong>Tracks</strong>.</li>
 <li><strong>A track ignores the year slider.</strong> Tracks are always drawn in full; only the pictures are
 narrowed.</li>
+<li><strong>A device&#39;s pin stays where it was.</strong> Its last point is older than you expected: the device has
+stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.</li>
+<li><strong>The map jumps back after you zoom.</strong> You are following a device; drag the map or click
+<strong>Follow</strong> to stop.</li>
 </ul>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
@@ -768,7 +782,7 @@ narrowed.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
