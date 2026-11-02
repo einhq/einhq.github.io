@@ -3585,10 +3585,10 @@ track-places [--rename] [--dry-run] <device>
 | ---------- | ----------------------------------------------- |
 | `<device>` | the device (slug or path), or its track's path. |
 
-| Option      | What it does                                                                   |
-| ----------- | ------------------------------------------------------------------------------ |
-| `--rename`  | look the names of the stays' locations up again, except names changed by hand. |
-| `--dry-run` | look the places up and show them without making locations or writing .trips.   |
+| Option      | What it does                                                                                          |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| `--rename`  | ask Overpass and Nominatim again for the names of the stays' locations, except names changed by hand. |
+| `--dry-run` | look the places up and show them without making locations or writing .trips.                          |
 
 ```bash
 track-places the-sailboat

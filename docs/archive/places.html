@@ -309,6 +309,11 @@ pictures join any location (see <a href="#how-pictures-join-a-location">How pict
 there later. Out at sea, where nothing has a name, a stay gets no location. When a lookup fails,
 because OpenStreetMap&#39;s services are busy or out of reach, the stay is looked up again the next time
 the device&#39;s trips are found again.</p>
+<p>EiN keeps what the services answered, in <code>/archive/sources/places</code>, so each place is asked about
+once. It asks OpenStreetMap for the harbours, islands and bays of an area about 5 km across at a
+time, and every later stay in that area, by any device, is named without going online. So is a
+place where nothing had a name, and a location you deleted that a stay needs again. Only
+<code>track-places --rename</code> asks again.</p>
 <h2 id="a-locations-page">A location&#39;s page<a class="anchor" href="#a-locations-page" aria-label="Link to this section"></a></h2>
 <figure class="shot"><a href="../../assets/shots/place@2x.webp"><img src="../../assets/shots/place.webp" srcset="../../assets/shots/place.webp 1x, ../../assets/shots/place@2x.webp 2x" alt="The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading &quot;50.24400, -5.02700 · radius 300 m&quot; and &quot;Set by hand&quot;, and Freya Wrenfield under Current residents" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Info tab shows the shape that decides which pictures belong here, and where that shape came from.</figcaption></figure>
 <p>The header shows the location&#39;s name and address, the people who live there, and its labels. If
@@ -694,7 +699,7 @@ recordings are never sent to them.</p>
 <tr>
 <td>The names of places a device stayed at</td>
 <td>OpenStreetMap&#39;s Overpass API, <code>overpass-api.de</code>, and Nominatim</td>
-<td>The machine EiN runs on sends the coordinates of each new stay</td>
+<td>The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it</td>
 </tr>
 </tbody></table>
 </div>
@@ -758,7 +763,7 @@ servers, separated by spaces, which EiN takes in turn when one is busy; see
 </tr>
 <tr>
 <td>Look the names of a device&#39;s stay locations up again</td>
-<td><code>track-places &lt;device&gt; --rename</code>; names changed by hand are kept</td>
+<td><code>track-places &lt;device&gt; --rename</code>, which asks the services again; names changed by hand are kept</td>
 </tr>
 </tbody></table>
 </div>

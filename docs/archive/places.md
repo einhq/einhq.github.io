@@ -163,6 +163,12 @@ there later. Out at sea, where nothing has a name, a stay gets no location. When
 because OpenStreetMap's services are busy or out of reach, the stay is looked up again the next time
 the device's trips are found again.
 
+EiN keeps what the services answered, in `/archive/sources/places`, so each place is asked about
+once. It asks OpenStreetMap for the harbours, islands and bays of an area about 5 km across at a
+time, and every later stay in that area, by any device, is named without going online. So is a
+place where nothing had a name, and a location you deleted that a stay needs again. Only
+`track-places --rename` asks again.
+
 ## A location's page
 
 ![The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading "50.24400, -5.02700 · radius 300 m" and "Set by hand", and Freya Wrenfield under Current residents](../../assets/shots/place.webp "The Info tab shows the shape that decides which pictures belong here, and where that shape came from.")
@@ -465,14 +471,14 @@ around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is l
 The map pictures and the address lookups come from outside services. Your photos, videos and
 recordings are never sent to them.
 
-| What                                           | From                                                           | What is sent                                                      |
-| ---------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
-| The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`         | Your browser asks for the map squares of the area you look at     |
-| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                             | The same                                                          |
-| The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                                | The same                                                          |
-| A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`       | The machine EiN runs on sends the location's address, or its name |
-| Pictures' street addresses                     | Nominatim                                                      | The machine EiN runs on sends each picture's coordinates          |
-| The names of places a device stayed at         | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim | The machine EiN runs on sends the coordinates of each new stay    |
+| What                                           | From                                                           | What is sent                                                                                                                                  |
+| ---------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Map** style, and the small maps on cards | OpenStreetMap's tile servers, `tile.openstreetmap.org`         | Your browser asks for the map squares of the area you look at                                                                                 |
+| The sea marks on the **Map** style and cards   | OpenSeaMap, `tiles.openseamap.org`                             | The same                                                                                                                                      |
+| The **Dark map** and **Satellite** styles      | Esri, `server.arcgisonline.com`                                | The same                                                                                                                                      |
+| A location's position from its address         | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`       | The machine EiN runs on sends the location's address, or its name                                                                             |
+| Pictures' street addresses                     | Nominatim                                                      | The machine EiN runs on sends each picture's coordinates                                                                                      |
+| The names of places a device stayed at         | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.
@@ -501,7 +507,7 @@ Locations are ordinary nodes, and these commands work on them in the
 | Change the name, address, city, country or description          | [`location-update`](commands.md#location-update)                                                                |
 | Link the pictures inside a location's shape at once             | [`location-link-media`](commands.md#location-link-media) `--location <location>`                                |
 | Put a device's stays at locations, and name the new ones        | [`track-places`](commands.md#track-places) `<device>`, `--dry-run` to see them first                            |
-| Look the names of a device's stay locations up again            | `track-places <device> --rename`; names changed by hand are kept                                                |
+| Look the names of a device's stay locations up again            | `track-places <device> --rename`, which asks the services again; names changed by hand are kept                 |
 
 To turn the point "Islington Town Hall" into a circle with a radius of 150 m, the way the dialog
 does it:
