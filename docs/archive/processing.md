@@ -127,12 +127,14 @@ something a pipeline should have given it: a fingerprint, display sizes, faces, 
 transcript made with other settings than the media service runs now. Each pipeline then skips
 what is already done.
 
-The `media-heal` service runs it for you, but only when no media work is waiting, so a scan never
-repeats what is already on its way. Work for other pipelines does not hold it back, such as the
-trips of a tracker that is still sending. Each scan goes through the whole archive and announces
-every gap it finds at once, so the work it starts shows on the dashboard and in `health` until it
-is done. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds (900), and after a scan that finds
-nothing it rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
+The `media-heal` service runs it for you. It holds back a gap whose pipeline already has work
+waiting, so a scan never repeats what is already on its way, and announces the rest: a long queue
+of one kind of work, such as faces, does not keep voices or fingerprints from being found. Each scan
+goes through the whole archive and announces every gap it finds at once, so the work it starts
+shows on the dashboard and in `health` until it is done. The gaps it held back get a scan of their
+own once their pipelines have nothing waiting. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
+(900), and after a scan that finds nothing and holds nothing back it rests for
+`CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
 
 Run it by hand after installing the Archive on files that were already there, or to look at one
 folder:

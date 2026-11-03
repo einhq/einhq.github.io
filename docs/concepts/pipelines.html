@@ -859,8 +859,8 @@ away. A running step that has written nothing for 30 minutes
 (<a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a>) is listed as
 quiet, and you decide whether it is stuck.</p>
 <p>Some gaps no change announces: a file whose pipeline never ran, work an outage lost, vectors from
-a model the media service no longer runs. The Archive&#39;s <code>media-heal</code> service looks for these when
-nothing else is waiting, and announces each as a fact for the pipeline that fills it.</p>
+a model the media service no longer runs. The Archive&#39;s <code>media-heal</code> service looks for these and
+announces each as a fact for the pipeline that fills it, once that pipeline has nothing waiting.</p>
 <h2 id="watch-and-steer-the-work">Watch and steer the work<a class="anchor" href="#watch-and-steer-the-work" aria-label="Link to this section"></a></h2>
 <p>The <strong>Dashboard</strong> in an administrator&#39;s sidebar shows the state of all this in one word at the top:
 <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Its <strong>Work</strong> tab lists every pipeline

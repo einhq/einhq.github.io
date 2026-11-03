@@ -361,8 +361,8 @@ away. A running step that has written nothing for 30 minutes
 quiet, and you decide whether it is stuck.
 
 Some gaps no change announces: a file whose pipeline never ran, work an outage lost, vectors from
-a model the media service no longer runs. The Archive's `media-heal` service looks for these when
-nothing else is waiting, and announces each as a fact for the pipeline that fills it.
+a model the media service no longer runs. The Archive's `media-heal` service looks for these and
+announces each as a fact for the pipeline that fills it, once that pipeline has nothing waiting.
 
 ## Watch and steer the work
 
