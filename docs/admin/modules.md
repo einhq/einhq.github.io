@@ -255,13 +255,13 @@ already.
 After the update EiN sets the module up again and restarts its services; its settings take the new
 version's defaults and descriptions, and a setting it no longer has is gone. Every module that depends
 on it, directly or through another, is set up again too, and its running services restarted, so
-nothing keeps running the code that was replaced.
+nothing keeps running the code that was replaced. The new version takes the old one's place in a
+single step: the module's folder always holds one whole version.
 
 An update that changes only the module's pages, the files under its `ui/` folder, restarts nothing:
 its services run none of them, and a restart would stop the work they are in the middle of, such as
-the pictures and videos its workers are sending to the media service. The install says so: `Only the
-pages of archive changed: its services keep running`. The new version takes the old one's place in a
-single step: the module's folder always holds one whole version.
+the pictures and videos its workers are sending to the media service. The install says so:
+`Nothing but the pages of archive changed: its services keep running`.
 
 To keep a module at a version, install it at a commit, such as `mod install archive@463a92f`; its
 panel then has no **Update**. The published modules still compare it with the newest release this
