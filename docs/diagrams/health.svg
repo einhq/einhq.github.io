@@ -39,7 +39,7 @@
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">
     <tspan x="480" y="97">the steps that wait for it can start</tspan>
     <tspan x="480" y="140">service busy: the attempt is given back,</tspan>
-    <tspan x="480" y="157">its kind rests 30 s, doubling up to 10 min</tspan>
+    <tspan x="480" y="157">it waits 30 s, doubling up to 10 min</tspan>
     <tspan x="480" y="209">bad input: never run again</tspan>
     <tspan x="480" y="256">tried again, 3 attempts in all; then the</tspan>
     <tspan x="480" y="273">instance fails</tspan>

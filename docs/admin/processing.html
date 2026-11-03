@@ -176,10 +176,10 @@ the pipeline&#39;s page.</p>
 <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. This is where the slow steps are. A
 kind may carry a badge:</p>
 <ul>
-<li><strong>waiting for EMS</strong>: a step of this kind could not run yet, because a service it needs was busy,
-loading a model, restarting or unreachable; for the Archive&#39;s steps that service is the media
-service. The jobs are not failed. The kind rests for 30 seconds, then twice as long each time it
-is refused again, up to 10 minutes; hover over the badge for the next try.</li>
+<li><strong>waiting for EMS</strong>: five steps of this kind in a row could not run yet, because a service they
+need was busy, loading a model, restarting or unreachable; for the Archive&#39;s steps that service
+is the media service. The jobs are not failed. The kind rests for 30 seconds, then twice as long
+each time it is refused again, up to 10 minutes; hover over the badge for the next try.</li>
 <li><strong>no worker</strong>: no running worker takes this kind, so the jobs will never run.</li>
 </ul>
 <p><strong>Ongoing</strong> lists the instances with a step running, with the target file and how long it has run.
@@ -261,8 +261,11 @@ bare id that more than one pipeline uses is refused with the pipelines it could 
 otherwise, before the instance fails. Two kinds of failure are treated differently:</p>
 <ul>
 <li><strong>A service the step needs could not do it yet.</strong> The step goes back to wait with its attempt
-given back, and its kind rests, as <strong>waiting for EMS</strong> shows. Nothing fails however long the
-service is away. The Archive&#39;s steps fail this way while the media service is busy or away.</li>
+given back, and is tried again after 30 seconds, then twice as long each time up to 10 minutes;
+the other jobs of its kind run meanwhile. When five in a row are refused, the whole kind rests,
+as <strong>waiting for EMS</strong> shows. Nothing fails however long the service is away. The Archive&#39;s
+steps fail this way while the media service is busy or away, or when the graphics card has no
+room for the model a file needs.</li>
 <li><strong>The file itself cannot be processed</strong>, such as bytes no decoder can open. The step fails at
 once, whatever attempts are left, and the file is not tried again. <code>health</code> counts these under
 <code>input</code> and treats them as settled.</li>
@@ -380,7 +383,8 @@ queue-dead --drop /var/queues/pipeline-engine    <span class="hljs-comment"># de
 <h3 id="steps-waiting-for-a-service">Steps waiting for a service<a class="anchor" href="#steps-waiting-for-a-service" aria-label="Link to this section"></a></h3>
 <p>When <strong>waiting for EMS</strong> stays on a kind, the service its steps need is the place to look; for the
 Archive&#39;s steps it is the media service, and <a href="../ems/index.html">The media service</a> shows how to
-check it. Once it answers again, the kind tries on its own at its next try. To try at once:</p>
+check it. Once it answers again, the kind tries on its own at its next try. To try at once (the
+steps that were refused still wait out their own pause):</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pool-wake               <span class="hljs-comment"># every resting kind</span>
 pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre></div>

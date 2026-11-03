@@ -39,7 +39,7 @@ The badge is the first line of the [`health`](../reference/commands-core.md#heal
 
 Warnings never change the verdict on their own. An install that has the `ems` module but no media service, or the Assistant but no language model, reads **Healthy** with a warning about each, and the same warnings show for a while after every start while the services load their models. An EiN with no modules has neither check.
 
-![Above, a step that runs ends one of four ways: exit 0 completes it; exit 75, a busy service, leaves it waiting with its attempt given back while its kind rests 30 seconds, doubling up to 10 minutes; exit 65, bad input, fails it for good; any other exit retries it, 3 attempts in all, then the instance fails, pipeline heal runs it again after 1 h, 6 h and 24 h, and after that it needs a person and the failed work check fails; below, the four verdicts in the order they are decided: Needs a person in red when a check failed, Healthy in green when nothing is waiting, Catching up in blue when work is waiting and some was done in the last hour, and Stuck in orange when none was](../diagrams/health.svg "A busy service only makes work wait; a person is asked for only when work fails through every retry and heal, or a check fails.")
+![Above, a step that runs ends one of four ways: exit 0 completes it; exit 75, a busy service, leaves it waiting with its attempt given back for 30 seconds, doubling up to 10 minutes; exit 65, bad input, fails it for good; any other exit retries it, 3 attempts in all, then the instance fails, pipeline heal runs it again after 1 h, 6 h and 24 h, and after that it needs a person and the failed work check fails; below, the four verdicts in the order they are decided: Needs a person in red when a check failed, Healthy in green when nothing is waiting, Catching up in blue when work is waiting and some was done in the last hour, and Stuck in orange when none was](../diagrams/health.svg "A busy service only makes work wait; a person is asked for only when work fails through every retry and heal, or a check fails.")
 
 ## Read the checks
 
@@ -91,7 +91,7 @@ The storage projection is measured over the last seven days. A tier that is not 
 ![The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA](../../assets/shots/system-work.webp "One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone")
 
 - The pipeline table has one row per defined pipeline, even one that has never run, with **Workload**, **Waiting**, **Queued**, **Running**, **Failed**, **Completed** and **Cancelled**. **In** is the work arriving for it per hour, **Out** what it finished in the last hour, and **ETA** the waiting work divided by **Out**; **no rate** when nothing finished recently, `—` when nothing waits. When queue entries were dropped after their delivery attempts, a red **N dropped** stands above the table. Choose a row to see that pipeline's instances.
-- **Kinds of work** lists each kind of job in the work pools that has something left or was done lately: **Left**, **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. A red **no worker** badge marks a kind nothing runs; with the Archive, a yellow **waiting for EMS** badge marks a kind resting because the media service could not run it, with the next try in its tooltip.
+- **Kinds of work** lists each kind of job in the work pools that has something left or was done lately: **Left**, **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. A red **no worker** badge marks a kind nothing runs; with the Archive, a yellow **waiting for EMS** badge marks a kind resting because the media service refused several of its jobs in a row, with the next try in its tooltip.
 - **Ongoing** lists the instances running now, with how long each has run. Steps that have written nothing for the quiet time are listed above it in a yellow box.
 
 ### Work that nothing will run
@@ -126,7 +126,7 @@ An administrator has **Restart** and **Stop** on a running service and **Start**
 
 ![The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
 
-With the Archive, a warning such as `pooled step could not run yet, kind resting` means the media service was not ready for a job; the job is tried again on its own. [Services and logs](services-logs.md) covers the logs and `dmesg`.
+With the Archive, a warning such as `pooled step could not run yet, job waiting` means the media service was not ready for a job; the job is tried again on its own, and the kind's other jobs run meanwhile. `pooled step could not run yet, kind resting` means it refused several in a row, so the whole kind waits. [Services and logs](services-logs.md) covers the logs and `dmesg`.
 
 ## Ask in the terminal
 

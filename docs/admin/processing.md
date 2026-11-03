@@ -64,10 +64,10 @@ Below the table, **Kinds of work** lists what the pools hold, a row per kind of 
 **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. This is where the slow steps are. A
 kind may carry a badge:
 
-- **waiting for EMS**: a step of this kind could not run yet, because a service it needs was busy,
-  loading a model, restarting or unreachable; for the Archive's steps that service is the media
-  service. The jobs are not failed. The kind rests for 30 seconds, then twice as long each time it
-  is refused again, up to 10 minutes; hover over the badge for the next try.
+- **waiting for EMS**: five steps of this kind in a row could not run yet, because a service they
+  need was busy, loading a model, restarting or unreachable; for the Archive's steps that service
+  is the media service. The jobs are not failed. The kind rests for 30 seconds, then twice as long
+  each time it is refused again, up to 10 minutes; hover over the badge for the next try.
 - **no worker**: no running worker takes this kind, so the jobs will never run.
 
 **Ongoing** lists the instances with a step running, with the target file and how long it has run.
@@ -138,8 +138,11 @@ A failed step is tried again up to its limit of attempts, three unless the pipel
 otherwise, before the instance fails. Two kinds of failure are treated differently:
 
 - **A service the step needs could not do it yet.** The step goes back to wait with its attempt
-  given back, and its kind rests, as **waiting for EMS** shows. Nothing fails however long the
-  service is away. The Archive's steps fail this way while the media service is busy or away.
+  given back, and is tried again after 30 seconds, then twice as long each time up to 10 minutes;
+  the other jobs of its kind run meanwhile. When five in a row are refused, the whole kind rests,
+  as **waiting for EMS** shows. Nothing fails however long the service is away. The Archive's
+  steps fail this way while the media service is busy or away, or when the graphics card has no
+  room for the model a file needs.
 - **The file itself cannot be processed**, such as bytes no decoder can open. The step fails at
   once, whatever attempts are left, and the file is not tried again. `health` counts these under
   `input` and treats them as settled.
@@ -252,7 +255,8 @@ queue-dead --drop /var/queues/pipeline-engine    # delete them
 
 When **waiting for EMS** stays on a kind, the service its steps need is the place to look; for the
 Archive's steps it is the media service, and [The media service](../ems/index.md) shows how to
-check it. Once it answers again, the kind tries on its own at its next try. To try at once:
+check it. Once it answers again, the kind tries on its own at its next try. To try at once (the
+steps that were refused still wait out their own pause):
 
 ```bash
 # in EiN's terminal
