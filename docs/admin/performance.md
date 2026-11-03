@@ -99,7 +99,7 @@ The CPU budget is shared by cost: most jobs take 1 of it, and a video's encoding
 
 [Processing pictures](../archive/processing.md#how-much-runs-at-once) lists every setting of the two workers.
 
-The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts.
+The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts. A kind it left because the media service refused several of its jobs in a row (**waiting for EMS**) is taken up again as soon as that rest ends, rather than an hour later.
 
 The media service has its own limits on how much it runs at once, set in `~/ein/.env`:
 

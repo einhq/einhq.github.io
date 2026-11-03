@@ -64,10 +64,12 @@ Below the table, **Kinds of work** lists what the pools hold, a row per kind of 
 **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. This is where the slow steps are. A
 kind may carry a badge:
 
-- **waiting for EMS**: five steps of this kind in a row could not run yet, because a service they
-  need was busy, loading a model, restarting or unreachable; for the Archive's steps that service
-  is the media service. The jobs are not failed. The kind rests for 30 seconds, then twice as long
-  each time it is refused again, up to 10 minutes; hover over the badge for the next try.
+- **waiting for EMS**: five jobs of this kind in a row could not run yet, each for the first time,
+  because a service they need was busy, loading a model, restarting or unreachable; for the
+  Archive's steps that service is the media service. The jobs are not failed. The kind rests for
+  30 seconds, then twice as long each time it rests again, up to 10 minutes; hover over the badge
+  for the next try. A worker that turned to other work for the rest comes back to this kind when
+  the rest ends.
 - **no worker**: no running worker takes this kind, so the jobs will never run.
 
 **Ongoing** lists the instances with a step running, with the target file and how long it has run.
@@ -139,8 +141,8 @@ otherwise, before the instance fails. Two kinds of failure are treated different
 
 - **A service the step needs could not do it yet.** The step goes back to wait with its attempt
   given back, and is tried again after 30 seconds, then twice as long each time up to 10 minutes;
-  the other jobs of its kind run meanwhile. When five in a row are refused, the whole kind rests,
-  as **waiting for EMS** shows. Nothing fails however long the service is away. The Archive's
+  the other jobs of its kind run meanwhile. When five in a row are refused, each for the first
+  time, the whole kind rests, as **waiting for EMS** shows; a job refused again does not count. Nothing fails however long the service is away. The Archive's
   steps fail this way while the media service is busy or away, or when the graphics card has no
   room for the model a file needs.
 - **The file itself cannot be processed**, such as bytes no decoder can open. The step fails at
