@@ -588,9 +588,9 @@ setting, and hold when the trips are found again later.
 A trip EiN finds is only a proposal until you make it an album. Those who may change the device see,
 on each trip's card:
 
-- **New album**, which makes an album of the trip in `/archive/albums`, named after the farthest
-  place it stayed at when that place has a name, else after the device, and its dates, for example
-  "Sailboat 2025-06-10 – 2025-06-14". Rename it in the album's **Edit album**.
+- **New album…**, which opens **Create Album** to ask what the album is called. The name starts as
+  the farthest place the trip stayed at when that place has a name; the trip's dates are the
+  album's span, not part of its name. **Create** makes the album in `/archive/albums` and opens it.
 - **Put in an album…**, which opens **Put the trip in an album**. Before you type, it offers the
   albums whose dates overlap the trip and whose devices include this one (see
   [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows));

@@ -3794,12 +3794,12 @@ trip-album [--new] [--name=<string>] [--album=<path>] [--detach] <device> <trip>
 | `<device>` | the device (slug or path), or its track's path.    |
 | `<trip>`   | the trip: its id from trip-list, or its first day. |
 
-| Option            | What it does                                                                               |
-| ----------------- | ------------------------------------------------------------------------------------------ |
-| `--new`           | make a new album of the trip.                                                              |
-| `--name=<string>` | the new album's name; by default where the trip got farthest, or the device, and its days. |
-| `--album=<path>`  | make this album the album of the trip.                                                     |
-| `--detach`        | take the trip off its album.                                                               |
+| Option            | What it does                                                                 |
+| ----------------- | ---------------------------------------------------------------------------- |
+| `--new`           | make a new album of the trip.                                                |
+| `--name=<string>` | the new album's name; by default where the trip got farthest, or the device. |
+| `--album=<path>`  | make this album the album of the trip.                                       |
+| `--detach`        | take the trip off its album.                                                 |
 
 ```bash
 trip-album the-sailboat 2025-06-10 --new
