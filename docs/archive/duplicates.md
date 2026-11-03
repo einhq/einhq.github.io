@@ -24,17 +24,20 @@ EiN compares each new file with the library photos you can open and with the res
 staging area, across all your categories. A copy in someone else's staging area, or in a library
 album you cannot open, does not count.
 
-EiN does not take two shots for one picture when their times tell them apart. Two photos whose
-camera clocks (or GPS times) are a second or more apart are two shots, unless the clock read the
-same: a copy placed in another time zone than its original is still the same picture. So are two photos from one camera, of one size and taken in
-the same second, when the camera recorded different fractions of that second. When it recorded
-the same fraction, they are one picture: an edit keeps the time, so a black-and-white or mirrored
-copy of a photo is a look-alike of it, even though it looks less alike than a smaller version
-does. Without a fraction to tell, two such photos count as one picture only if they are as alike
-as a re-saved copy. A crop that cuts away most of the picture is not found, and a picture turned
-on its side often is not. A picture that
-looks like thirty or more other files, such as a dark frame or a test chart, counts as alike to
-none of them.
+EiN does not take two shots for one picture when their times tell them apart:
+
+- Two photos whose camera clocks (or GPS times) are a second or more apart are two shots. A copy
+  that EiN placed in another time zone than its original is not, since its camera's clock read
+  the same.
+- Two photos from one camera, of one size and taken in the same second, are two shots when the
+  camera recorded different fractions of that second. When it recorded the same fraction, they
+  are one picture: an edit keeps the time, so a black-and-white or mirrored copy is a look-alike
+  of its photo, even though it looks less alike than a smaller version does. Without a fraction
+  to tell, such photos are one picture only if they are as alike as a re-saved copy.
+
+A crop that cuts away most of the picture is not found, and a picture turned on its side often is
+not. A picture that looks like thirty or more other files, such as a dark frame or a test chart,
+counts as alike to none of them.
 
 ## An exact copy shows its original
 
