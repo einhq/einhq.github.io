@@ -26,7 +26,12 @@ album you cannot open, does not count.
 
 EiN does not take two shots for one picture when their times tell them apart. Two photos whose
 camera clocks (or GPS times) are a second or more apart are two shots. So are two photos from one camera, of one size and taken in
-the same second, when the camera recorded different fractions of that second. A picture that
+the same second, when the camera recorded different fractions of that second. When it recorded
+the same fraction, they are one picture: an edit keeps the time, so a black-and-white or mirrored
+copy of a photo is a look-alike of it, even though it looks less alike than a smaller version
+does. Without a fraction to tell, two such photos count as one picture only if they are as alike
+as a re-saved copy. A crop that cuts away most of the picture is not found, and a picture turned
+on its side often is not. A picture that
 looks like thirty or more other files, such as a dark frame or a test chart, counts as alike to
 none of them.
 
