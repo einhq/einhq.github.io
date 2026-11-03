@@ -1919,8 +1919,8 @@ media-scan [--limit=<number>] [--max-active=<number>] [--depth=<number>] [--scan
 
 | Option                  | What it does                                                                                                                                  |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--limit=<number>`      | Maximum events to emit per run (default 1000)                                                                                                 |
-| `--max-active=<number>` | Cap running media-ingest instances plus queued triggers (default 500)                                                                         |
+| `--limit=<number>`      | Maximum events to emit per run; 0 emits every gap found (default 1000)                                                                        |
+| `--max-active=<number>` | Cap running media-ingest instances plus queued triggers; 0 adds no cap (default 500)                                                          |
 | `--depth=<number>`      | Maximum directory depth (default 12)                                                                                                          |
 | `--scan-limit=<number>` | Maximum files examined per run; 0 walks the whole subtree (default 20000)                                                                     |
 | `--restart`             | Ignore the stored resume point and start the pass at the top.                                                                                 |

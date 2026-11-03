@@ -3088,11 +3088,11 @@ media-resolve-time --device /archive/devices/Exempelkamera --dry-run</code></pre
 </thead>
 <tbody><tr>
 <td><code>--limit=&lt;number&gt;</code></td>
-<td>Maximum events to emit per run (default 1000)</td>
+<td>Maximum events to emit per run; 0 emits every gap found (default 1000)</td>
 </tr>
 <tr>
 <td><code>--max-active=&lt;number&gt;</code></td>
-<td>Cap running media-ingest instances plus queued triggers (default 500)</td>
+<td>Cap running media-ingest instances plus queued triggers; 0 adds no cap (default 500)</td>
 </tr>
 <tr>
 <td><code>--depth=&lt;number&gt;</code></td>

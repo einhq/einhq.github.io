@@ -128,9 +128,10 @@ transcript made with other settings than the media service runs now. Each pipeli
 what is already done.
 
 The `media-heal` service runs it for you, but only when nothing is waiting in the pools, so a scan
-never repeats what is already on its way. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds (900),
-and after a pass through the whole archive it rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six
-hours).
+never repeats what is already on its way. Each scan goes through the whole archive and announces
+every gap it finds at once, so the work it starts shows on the dashboard and in `health` until it
+is done. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds (900), and after a scan that finds
+nothing it rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
 
 Run it by hand after installing the Archive on files that were already there, or to look at one
 folder:
