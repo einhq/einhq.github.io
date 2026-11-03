@@ -54,8 +54,10 @@ Each search looks in several places at once and puts the results together:
 | File names                                                                        | By the name                                              | `DSC_0215`, `IMG_0525`                                                                                               |
 
 A match in something said opens the video or recording at the moment the words are said, not at the
-start. A name said once in an hour of tape is found by its words. Documents have no preview in EiN
-and show as plain tiles; [Supported files](file-types.md) lists which files EiN reads text from.
+start. A name said once in an hour of tape is found by its words. Write what you remember being said
+as a sentence: when half or more of its longer words are said in one of the recordings that match it
+best, that recording counts as an exact match and comes near the top. Documents have no preview in
+EiN and show as plain tiles; [Supported files](file-types.md) lists which files EiN reads text from.
 
 ### Match percentages
 
