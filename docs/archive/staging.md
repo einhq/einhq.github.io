@@ -254,6 +254,13 @@ The stream is divided into lanes. Each lane is a view of some of the category's 
 
 ![Five lanes, To sort, Everyday, Needs a date, Clutter and Later, each with example groups; L moves a group to Later and back, and T gives pictures in Needs a date a time so they join their events in To sort and their days in Everyday](../diagrams/lanes.svg "Lanes keep the events to decide apart from the everyday pictures, the undated ones and the clutter")
 
+Events and trips are named by what, where and when, each part only when it is known: "Midsummer Eve
+· Harbour cottage · 21 Jun 2019", "With Anna and Bo · 3 Aug 2014", "Lisbon · 4–9 May 2015". The what
+is a folder's name, a holiday, a birthday or the guests at home. The where is a place you named, a
+point of interest, the town of a trip, or for an outing near home its neighbourhood, unless most of
+that year's pictures were taken there. A group with neither says when in the week it was ("Saturday
+evening", "Weekend"), or only its dates.
+
 Groups in the Everyday, Needs a date and Clutter lanes are named after what they hold:
 "Everyday · 2014", "Screenshots and saved images · 2019", "Undated · box-3", or "1987 · box-3"
 for pictures known only to a year. They are collections, not events, so they are not split,
