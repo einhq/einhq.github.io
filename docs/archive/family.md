@@ -14,7 +14,7 @@ of the controls are shown only to an administrator:
 | ------------------------------------------ | ------------------------------------------------------------- | ---------------------------------- |
 | Parents, partners and children             | the person's **Family** tab                                   | administrators only                |
 | A person's homes                           | the person's **Homes** tab                                    | administrators only                |
-| A location's residents                     | the location's **Residents** tab                              | anyone who may change the location |
+| A location's residents                     | **Residents** on the location's **Info** tab                  | anyone who may change the location |
 | Events of a person                         | ⋮ → **Add event** on the person                               | anyone who may change the person   |
 | Born and died                              | **Edit** on the person                                        | anyone who may change the person   |
 | Events of an album, a location or a device | ⋮ → **Add event** on its page                                 | anyone who may change it           |
@@ -271,8 +271,8 @@ events are always generic, and need both a **Date** and a **Description**.
   account that added it when it has no writer. If you may change it, a pencil on the note opens **Edit event**, where you change the date, the text or
   the writer and press **Save**, or press **Delete**. A deleted event goes to your trash, and the
   message "Event moved to the trash" has **Undo**.
-- **On a location or a device**, the event appears on its **Timeline** tab. It cannot be changed in
-  the Web UI afterwards.
+- **On a location or a device**, the event appears on its timeline: a location's is on its **Info**
+  tab, a device's on its **Timeline** tab. It cannot be changed in the Web UI afterwards.
 
 ## What appears on a timeline
 
@@ -290,7 +290,7 @@ do not add entries to it directly.
 | "&lt;child&gt; was born", with "Child of &lt;name&gt;"                         | Their children's **Born**                                |
 | An album                                                                       | The albums with pictures of them                         |
 
-A location's **Timeline** tab shows its residents moving in and out, its own events and the albums
+A location's timeline, on the left of its **Info** tab, shows its residents moving in and out, its own events and the albums
 with photos taken there. When it has none, it says "Nothing recorded at &lt;location&gt; yet.
 Residents with dates, and albums with photos taken here, appear on its timeline."
 
@@ -300,7 +300,7 @@ A person's **Born** and **Died** also put them on the Year page for those years,
 ## Homes and residents
 
 Where someone lived is one record seen from two sides: the person's **Homes** tab lists their
-homes, and each location's **Residents** tab lists the people who lived there. A change on either
+homes, and **Residents** on each location's **Info** tab lists the people who lived there. A change on either
 side shows on both.
 
 ### Add a home to a person
@@ -332,12 +332,11 @@ A person with no homes shows "No homes recorded."
 
 ### Add a resident to a location
 
-The **Residents** tab of a location works the same way, from the other side, and anyone who may
-change the location can use it.
+**Residents** on a location's **Info** tab works the same way, from the other side, and anyone who
+may change the location can use it.
 
-1. Open the location and choose the **Residents** tab. It says "Who has lived at &lt;location&gt;,
-   and when."
-2. Press **Add resident**.
+1. Open the location. **Residents** is on the right of the **Info** tab, the tab it opens on.
+2. Press **Add resident** beside the heading.
 3. Choose **Person already here** and pick them in **Person**, or choose **New person** and type
    their **Name**. A new person made here is an ordinary person on the People page.
 4. Fill in **Moved in** and **Moved out**, and press **Add resident**.
@@ -575,7 +574,8 @@ flags after them: placed before the people, a flag's value is taken for a person
 You can also tell the [assistant](../assistant/chat.md) a parent, a partnership or an event the archive
 should record, for example "Leo was adopted by Jon and Kiri". It proposes the command, and nothing
 changes until you press **Run**; it runs as you, with your permissions. Homes are not among the
-commands it is pointed to, so record those on the **Homes** or **Residents** tab.
+commands it is pointed to, so record those on a person's **Homes** tab or under a location's
+**Residents**.
 
 ## When something goes differently
 

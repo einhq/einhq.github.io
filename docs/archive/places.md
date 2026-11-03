@@ -196,37 +196,57 @@ time, and Open-Meteo's a month at a time. The first lookup near a station fetche
 of that measurement, which can take a minute; every later hour there, in any year, is answered
 without going online. Answers kept there can be deleted: they are asked for again when needed.
 
-![The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading "50.24400, -5.02700 · radius 300 m" and "Set by hand", and Freya Wrenfield under Current residents](../../assets/shots/place.webp "The Info tab shows the shape that decides which pictures belong here, and where that shape came from.")
-
 The header shows the location's name and address, the people who live there, and its labels. If
 you may change the location, it also has **Share**, **Edit** and a ⋮ menu with **Add event** and
 **Move to trash**. On a phone all of these are in the ⋮ menu. Sharing a location works as for
 anything else; see [Sharing](../guide/sharing.md).
 
-| Tab           | What it shows                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------------------- |
-| **Info**      | The map with the location's shape, its details and its current residents. The page opens here. |
-| **Timeline**  | Residents moving in and out, the location's own events, and the albums with photos taken there |
-| **Media**     | The pictures linked to the location, newest first, in month sections                           |
-| **Residents** | Everyone recorded as having lived there, with their dates                                      |
+| Tab       | What it shows                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Info**  | The location's timeline, and beside it its place, everyone who has lived there and its description. The page opens here. |
+| **Map**   | The location's shape and the pictures linked to it, on a map that fills the window                                       |
+| **Media** | The pictures linked to the location, newest first, in month sections                                                     |
 
 The page's web address keeps the tab, for example `/locations/the-cottage-at-malpas?tab=media`, so
 you can link straight to it.
 
 ### The Info tab
 
-- **The map** shows the location's circle, polygon or point. The button in its top-right corner
-  switches between **Map**, **Dark map** and **Satellite**.
-- **Details** lists the address as written, the full address the lookup found when that differs,
-  the city and country, the description, the shape ("Polygon, 6 points", "50.24400, -5.02700 ·
-  radius 300 m", or the coordinates alone for a point), and where the position came from.
-- **Current residents** lists the people living there, each with when they moved in, such as
-  "since 2021", or "dates unknown". **All residents** opens the **Residents** tab. With nobody
-  recorded, the card says "No known residents."; when everyone recorded has moved out, it says
-  "Nobody lives here now, as far as the archive knows."
+On the left is the location's **timeline**: its residents moving in and out, its own events and
+the albums with photos taken there, newest first. When it has none, it says "Nothing recorded at
+&lt;location&gt; yet. Residents with dates, and albums with photos taken here, appear on its
+timeline." On the right, and above the timeline on a phone:
 
-A location with no place says "No location set yet." under the map. If you may change the
-location, **Location on map** beside it opens **Edit location**.
+- **Place** lists the address as written, the full address the lookup found when that differs
+  (**Found as**), the city and country, and the **Position**: the coordinates of its centre with
+  **On the map**, which opens the **Map** tab, and where the position came from, such as "Set by
+  hand". **Area** gives the shape: "Circle, radius 300 m", "Polygon, 6 corners", or "A point,
+  which holds no pictures". **Photos** counts the pictures linked to the location and the years
+  they span.
+- **Residents** lists everyone who has lived there, with their dates; see
+  [Residents and events](#residents-and-events). With nobody recorded, it says "No known
+  residents."
+- **About** shows the description, when there is one.
+
+A location with no place says "Not placed yet" under **Position**. If you may change the location,
+**Location on map** beside it opens **Edit location**. When the lookup left suggestions, it says
+how many, with a link to them on the **Map** tab; see
+[Pick from suggested locations](#pick-from-suggested-locations).
+
+### The Map tab
+
+The **Map** tab shows the location's circle, polygon or point and the pictures linked to it that
+have a position. The map opens fitted to both and fills the window below the tabs, as an album's
+**Map** tab does: opening it shrinks the header down to its row of tabs, so the mouse wheel over
+the map zooms it rather than scrolling the page. Scroll up over the tabs to bring the header back.
+
+- A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.
+- Pictures close together form a pile with a count. Choose it to list them in **N photos here**.
+- The layers button in the corner switches between **Map**, **Dark map** and **Satellite**.
+
+A location with no place, no suggestions and no pictures with a position says "No location set
+yet." instead of a map. If you may change the location, **Location on map** under it opens **Edit
+location**.
 
 ### The Media tab
 
@@ -239,19 +259,19 @@ location, geotagged photos inside its area are linked to it automatically."
 
 ## Pick from suggested locations
 
-When the lookup found candidates but was not sure, the **Info** tab shows numbered pins on the map
-and a **Suggested locations** card: "Geocoding was not confident enough to place this automatically.
-Pick the right one, or set it by hand." Each row has the place's full name, its kind (such as
-`city` or `house`) and its coordinates. Pointing at a row lights up its pin, and the other way
-round.
+When the lookup found candidates but was not sure, the location's **Map** tab shows numbered pins
+and, over the foot of the map, a **Suggested locations** list: "Geocoding was not confident enough
+to place this automatically. Pick the right one, or set it by hand." Each row has the place's full
+name, its kind (such as `city` or `house`) and its coordinates. Pointing at a row lights up its
+pin, and the other way round. The **Info** tab says how many there are under **Position**, with a
+link to them.
 
-1. Open the location's **Info** tab.
+1. Open the location's **Map** tab.
 2. Click the numbered pin that looks right, or its row in the list.
 
 The location gets a circle with a radius of 50 m at that spot, marked "Geocoded from the address",
-and the suggestions disappear. If none of them is right, press **None of these** under the map or
-**None of these — place it by hand** under the list. Both open **Edit location**, where you draw
-the shape yourself.
+and the suggestions disappear. If none of them is right, press **None of these — place it by hand**
+under the list. It opens **Edit location**, where you draw the shape yourself.
 
 Only someone who may change the location can pick a suggestion. Everyone else sees the list.
 
@@ -335,14 +355,14 @@ their position, and join it when it has a circle or a polygon. The steps are in
 
 ## Residents and events
 
-The **Residents** tab lists everyone who has lived at the location. Anyone who may change the
-location can add residents and correct their dates there with **Add resident**, choosing **Person
+**Residents** on the **Info** tab lists everyone who has lived at the location. Anyone who may
+change the location can add residents and correct their dates there with **Add resident**, choosing **Person
 already here** or **New person** and giving **Moved in** and **Moved out**. A resident without a
-**Moved out** date counts as living there, and appears under **Current residents** and in the
-header. The same records are a person's homes, seen from the other side: see
+**Moved out** date counts as living there, is marked **current** when it has a **Moved in** date,
+and appears in the header. The same records are a person's homes, seen from the other side: see
 [Add a resident to a location](family.md#add-a-resident-to-a-location).
 
-Under ⋮, **Add event** writes a dated note on the location, which appears on its **Timeline** tab.
+Under ⋮, **Add event** writes a dated note on the location, which appears on its timeline on the **Info** tab.
 A location's event needs both a **Date** and a **Description**; see
 [Events of albums, locations and devices](family.md#events-of-albums-locations-and-devices).
 
@@ -444,8 +464,8 @@ looking at in one style. Pointing at a preview names it, and clicking it changes
 | **Dark map**  | A dark grey map from Esri                                                           |
 | **Satellite** | Aerial photographs from Esri                                                        |
 
-The maps on a location's page and on an album's **Map** tab have their own style button in the
-corner, with the same three styles.
+The **Map** tabs of a location and of an album have their own style button in the corner, with the
+same three styles.
 
 ### Narrow by years
 

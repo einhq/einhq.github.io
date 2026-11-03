@@ -337,7 +337,6 @@ weather.</p>
 time, and Open-Meteo&#39;s a month at a time. The first lookup near a station fetches its whole history
 of that measurement, which can take a minute; every later hour there, in any year, is answered
 without going online. Answers kept there can be deleted: they are asked for again when needed.</p>
-<figure class="shot"><a href="../../assets/shots/place@2x.webp"><img src="../../assets/shots/place.webp" srcset="../../assets/shots/place.webp 1x, ../../assets/shots/place@2x.webp 2x" alt="The location page of The cottage at Malpas: Share and Edit at the top right, the tabs Info, Timeline, Media and Residents, a map with a circle over the cottage by the Truro River, Details reading &quot;50.24400, -5.02700 · radius 300 m&quot; and &quot;Set by hand&quot;, and Freya Wrenfield under Current residents" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The Info tab shows the shape that decides which pictures belong here, and where that shape came from.</figcaption></figure>
 <p>The header shows the location&#39;s name and address, the people who live there, and its labels. If
 you may change the location, it also has <strong>Share</strong>, <strong>Edit</strong> and a ⋮ menu with <strong>Add event</strong> and
 <strong>Move to trash</strong>. On a phone all of these are in the ⋮ menu. Sharing a location works as for
@@ -351,38 +350,54 @@ anything else; see <a href="../guide/sharing.html">Sharing</a>.</p>
 </thead>
 <tbody><tr>
 <td><strong>Info</strong></td>
-<td>The map with the location&#39;s shape, its details and its current residents. The page opens here.</td>
+<td>The location&#39;s timeline, and beside it its place, everyone who has lived there and its description. The page opens here.</td>
 </tr>
 <tr>
-<td><strong>Timeline</strong></td>
-<td>Residents moving in and out, the location&#39;s own events, and the albums with photos taken there</td>
+<td><strong>Map</strong></td>
+<td>The location&#39;s shape and the pictures linked to it, on a map that fills the window</td>
 </tr>
 <tr>
 <td><strong>Media</strong></td>
 <td>The pictures linked to the location, newest first, in month sections</td>
-</tr>
-<tr>
-<td><strong>Residents</strong></td>
-<td>Everyone recorded as having lived there, with their dates</td>
 </tr>
 </tbody></table>
 </div>
 <p>The page&#39;s web address keeps the tab, for example <code>/locations/the-cottage-at-malpas?tab=media</code>, so
 you can link straight to it.</p>
 <h3 id="the-info-tab">The Info tab<a class="anchor" href="#the-info-tab" aria-label="Link to this section"></a></h3>
+<p>On the left is the location&#39;s <strong>timeline</strong>: its residents moving in and out, its own events and
+the albums with photos taken there, newest first. When it has none, it says &quot;Nothing recorded at
+&lt;location&gt; yet. Residents with dates, and albums with photos taken here, appear on its
+timeline.&quot; On the right, and above the timeline on a phone:</p>
 <ul>
-<li><strong>The map</strong> shows the location&#39;s circle, polygon or point. The button in its top-right corner
-switches between <strong>Map</strong>, <strong>Dark map</strong> and <strong>Satellite</strong>.</li>
-<li><strong>Details</strong> lists the address as written, the full address the lookup found when that differs,
-the city and country, the description, the shape (&quot;Polygon, 6 points&quot;, &quot;50.24400, -5.02700 ·
-radius 300 m&quot;, or the coordinates alone for a point), and where the position came from.</li>
-<li><strong>Current residents</strong> lists the people living there, each with when they moved in, such as
-&quot;since 2021&quot;, or &quot;dates unknown&quot;. <strong>All residents</strong> opens the <strong>Residents</strong> tab. With nobody
-recorded, the card says &quot;No known residents.&quot;; when everyone recorded has moved out, it says
-&quot;Nobody lives here now, as far as the archive knows.&quot;</li>
+<li><strong>Place</strong> lists the address as written, the full address the lookup found when that differs
+(<strong>Found as</strong>), the city and country, and the <strong>Position</strong>: the coordinates of its centre with
+<strong>On the map</strong>, which opens the <strong>Map</strong> tab, and where the position came from, such as &quot;Set by
+hand&quot;. <strong>Area</strong> gives the shape: &quot;Circle, radius 300 m&quot;, &quot;Polygon, 6 corners&quot;, or &quot;A point,
+which holds no pictures&quot;. <strong>Photos</strong> counts the pictures linked to the location and the years
+they span.</li>
+<li><strong>Residents</strong> lists everyone who has lived there, with their dates; see
+<a href="#residents-and-events">Residents and events</a>. With nobody recorded, it says &quot;No known
+residents.&quot;</li>
+<li><strong>About</strong> shows the description, when there is one.</li>
 </ul>
-<p>A location with no place says &quot;No location set yet.&quot; under the map. If you may change the
-location, <strong>Location on map</strong> beside it opens <strong>Edit location</strong>.</p>
+<p>A location with no place says &quot;Not placed yet&quot; under <strong>Position</strong>. If you may change the location,
+<strong>Location on map</strong> beside it opens <strong>Edit location</strong>. When the lookup left suggestions, it says
+how many, with a link to them on the <strong>Map</strong> tab; see
+<a href="#pick-from-suggested-locations">Pick from suggested locations</a>.</p>
+<h3 id="the-map-tab">The Map tab<a class="anchor" href="#the-map-tab" aria-label="Link to this section"></a></h3>
+<p>The <strong>Map</strong> tab shows the location&#39;s circle, polygon or point and the pictures linked to it that
+have a position. The map opens fitted to both and fills the window below the tabs, as an album&#39;s
+<strong>Map</strong> tab does: opening it shrinks the header down to its row of tabs, so the mouse wheel over
+the map zooms it rather than scrolling the page. Scroll up over the tabs to bring the header back.</p>
+<ul>
+<li>A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.</li>
+<li>Pictures close together form a pile with a count. Choose it to list them in <strong>N photos here</strong>.</li>
+<li>The layers button in the corner switches between <strong>Map</strong>, <strong>Dark map</strong> and <strong>Satellite</strong>.</li>
+</ul>
+<p>A location with no place, no suggestions and no pictures with a position says &quot;No location set
+yet.&quot; instead of a map. If you may change the location, <strong>Location on map</strong> under it opens <strong>Edit
+location</strong>.</p>
 <h3 id="the-media-tab">The Media tab<a class="anchor" href="#the-media-tab" aria-label="Link to this section"></a></h3>
 <p>The <strong>Media</strong> tab lists every picture linked to the location; see
 <a href="#how-pictures-join-a-location">How pictures join a location</a>. You can select pictures and open
@@ -391,19 +406,19 @@ the tab says &quot;No photos here yet. Geotagged photos inside its area are link
 automatically.&quot; For a location with no place yet, it says &quot;No photos here yet. Once it has a
 location, geotagged photos inside its area are linked to it automatically.&quot;</p>
 <h2 id="pick-from-suggested-locations">Pick from suggested locations<a class="anchor" href="#pick-from-suggested-locations" aria-label="Link to this section"></a></h2>
-<p>When the lookup found candidates but was not sure, the <strong>Info</strong> tab shows numbered pins on the map
-and a <strong>Suggested locations</strong> card: &quot;Geocoding was not confident enough to place this automatically.
-Pick the right one, or set it by hand.&quot; Each row has the place&#39;s full name, its kind (such as
-<code>city</code> or <code>house</code>) and its coordinates. Pointing at a row lights up its pin, and the other way
-round.</p>
+<p>When the lookup found candidates but was not sure, the location&#39;s <strong>Map</strong> tab shows numbered pins
+and, over the foot of the map, a <strong>Suggested locations</strong> list: &quot;Geocoding was not confident enough
+to place this automatically. Pick the right one, or set it by hand.&quot; Each row has the place&#39;s full
+name, its kind (such as <code>city</code> or <code>house</code>) and its coordinates. Pointing at a row lights up its
+pin, and the other way round. The <strong>Info</strong> tab says how many there are under <strong>Position</strong>, with a
+link to them.</p>
 <ol>
-<li>Open the location&#39;s <strong>Info</strong> tab.</li>
+<li>Open the location&#39;s <strong>Map</strong> tab.</li>
 <li>Click the numbered pin that looks right, or its row in the list.</li>
 </ol>
 <p>The location gets a circle with a radius of 50 m at that spot, marked &quot;Geocoded from the address&quot;,
-and the suggestions disappear. If none of them is right, press <strong>None of these</strong> under the map or
-<strong>None of these — place it by hand</strong> under the list. Both open <strong>Edit location</strong>, where you draw
-the shape yourself.</p>
+and the suggestions disappear. If none of them is right, press <strong>None of these — place it by hand</strong>
+under the list. It opens <strong>Edit location</strong>, where you draw the shape yourself.</p>
 <p>Only someone who may change the location can pick a suggestion. Everyone else sees the list.</p>
 <h2 id="draw-a-circle-or-a-polygon">Draw a circle or a polygon<a class="anchor" href="#draw-a-circle-or-a-polygon" aria-label="Link to this section"></a></h2>
 <p>You need permission to change the location.</p>
@@ -500,13 +515,13 @@ and choose the location under <strong>A known location</strong>: the pictures ta
 their position, and join it when it has a circle or a polygon. The steps are in
 <a href="dates-places.html#set-the-place-of-pictures">Set the place of pictures</a>.</p>
 <h2 id="residents-and-events">Residents and events<a class="anchor" href="#residents-and-events" aria-label="Link to this section"></a></h2>
-<p>The <strong>Residents</strong> tab lists everyone who has lived at the location. Anyone who may change the
-location can add residents and correct their dates there with <strong>Add resident</strong>, choosing <strong>Person
+<p><strong>Residents</strong> on the <strong>Info</strong> tab lists everyone who has lived at the location. Anyone who may
+change the location can add residents and correct their dates there with <strong>Add resident</strong>, choosing <strong>Person
 already here</strong> or <strong>New person</strong> and giving <strong>Moved in</strong> and <strong>Moved out</strong>. A resident without a
-<strong>Moved out</strong> date counts as living there, and appears under <strong>Current residents</strong> and in the
-header. The same records are a person&#39;s homes, seen from the other side: see
+<strong>Moved out</strong> date counts as living there, is marked <strong>current</strong> when it has a <strong>Moved in</strong> date,
+and appears in the header. The same records are a person&#39;s homes, seen from the other side: see
 <a href="family.html#add-a-resident-to-a-location">Add a resident to a location</a>.</p>
-<p>Under ⋮, <strong>Add event</strong> writes a dated note on the location, which appears on its <strong>Timeline</strong> tab.
+<p>Under ⋮, <strong>Add event</strong> writes a dated note on the location, which appears on its timeline on the <strong>Info</strong> tab.
 A location&#39;s event needs both a <strong>Date</strong> and a <strong>Description</strong>; see
 <a href="family.html#events-of-albums-locations-and-devices">Events of albums, locations and devices</a>.</p>
 <h2 id="move-a-location-to-the-trash">Move a location to the trash<a class="anchor" href="#move-a-location-to-the-trash" aria-label="Link to this section"></a></h2>
@@ -620,8 +635,8 @@ looking at in one style. Pointing at a preview names it, and clicking it changes
 </tr>
 </tbody></table>
 </div>
-<p>The maps on a location&#39;s page and on an album&#39;s <strong>Map</strong> tab have their own style button in the
-corner, with the same three styles.</p>
+<p>The <strong>Map</strong> tabs of a location and of an album have their own style button in the corner, with the
+same three styles.</p>
 <h3 id="narrow-by-years">Narrow by years<a class="anchor" href="#narrow-by-years" aria-label="Link to this section"></a></h3>
 <p>Under the search box is a slider for the years, with the first year of the range drawn at its
 left and the last at its right. Drag either handle, and the map reads again when you let go. While
@@ -873,7 +888,7 @@ later lookups there are immediate.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
