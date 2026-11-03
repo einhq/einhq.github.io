@@ -1910,7 +1910,7 @@ Emit media events for files the bridge never saw (backfill / gap recovery)
 <small>changes things</small>
 
 ```text
-media-scan [--limit=<number>] [--max-active=<number>] [--depth=<number>] [--scan-limit=<number>] [--restart] [--no-gaps] [--only=<string>] [-n] [-v] <root>
+media-scan [--limit=<number>] [--max-active=<number>] [--depth=<number>] [--scan-limit=<number>] [--restart] [--no-gaps] [--if-idle] [--only=<string>] [-n] [-v] <root>
 ```
 
 | Argument | What it is                                |
@@ -1925,6 +1925,7 @@ media-scan [--limit=<number>] [--max-active=<number>] [--depth=<number>] [--scan
 | `--scan-limit=<number>` | Maximum files examined per run; 0 walks the whole subtree (default 20000)                                                                     |
 | `--restart`             | Ignore the stored resume point and start the pass at the top.                                                                                 |
 | `--no-gaps`             | Only discover unindexed files; skip half-indexed ones.                                                                                        |
+| `--if-idle`             | Scan only when no media work waits: nothing ready in the media pool, and no ready trigger for a media pipeline.                               |
 | `--only=<string>`       | Emit only these fact types, comma-separated (e.g. media.picture.stale); the cursor still moves, so follow with a --restart pass for the rest. |
 | `-n`                    | Dry run — report what would be emitted.                                                                                                       |
 | `-v`                    | Verbose output.                                                                                                                               |

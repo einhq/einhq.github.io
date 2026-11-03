@@ -3065,7 +3065,7 @@ media-resolve-time --device /archive/devices/Exempelkamera --dry-run</code></pre
 <h3 id="media-scan"><code>media-scan</code><a class="anchor" href="#media-scan" aria-label="Link to this section"></a></h3>
 <p>Emit media events for files the bridge never saw (backfill / gap recovery)</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>media-scan [--limit=&lt;number&gt;] [--max-active=&lt;number&gt;] [--depth=&lt;number&gt;] [--scan-limit=&lt;number&gt;] [--restart] [--no-gaps] [--only=&lt;string&gt;] [-n] [-v] &lt;root&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>media-scan [--limit=&lt;number&gt;] [--max-active=&lt;number&gt;] [--depth=&lt;number&gt;] [--scan-limit=&lt;number&gt;] [--restart] [--no-gaps] [--if-idle] [--only=&lt;string&gt;] [-n] [-v] &lt;root&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3109,6 +3109,10 @@ media-resolve-time --device /archive/devices/Exempelkamera --dry-run</code></pre
 <tr>
 <td><code>--no-gaps</code></td>
 <td>Only discover unindexed files; skip half-indexed ones.</td>
+</tr>
+<tr>
+<td><code>--if-idle</code></td>
+<td>Scan only when no media work waits: nothing ready in the media pool, and no ready trigger for a media pipeline.</td>
 </tr>
 <tr>
 <td><code>--only=&lt;string&gt;</code></td>

@@ -127,8 +127,9 @@ something a pipeline should have given it: a fingerprint, display sizes, faces, 
 transcript made with other settings than the media service runs now. Each pipeline then skips
 what is already done.
 
-The `media-heal` service runs it for you, but only when nothing is waiting in the pools, so a scan
-never repeats what is already on its way. Each scan goes through the whole archive and announces
+The `media-heal` service runs it for you, but only when no media work is waiting, so a scan never
+repeats what is already on its way. Work for other pipelines does not hold it back, such as the
+trips of a tracker that is still sending. Each scan goes through the whole archive and announces
 every gap it finds at once, so the work it starts shows on the dashboard and in `health` until it
 is done. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds (900), and after a scan that finds
 nothing it rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
