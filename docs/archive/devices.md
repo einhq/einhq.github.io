@@ -352,7 +352,10 @@ some of the album's pictures, or was added to the album (see
 [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
 A GPS tracker takes no pictures, so add it to the albums of the trips it was carried on.
 
-The **Track** tab draws the route on a map, each day in its own colour, and adds it up:
+The **Track** tab draws the route on a map that fills the window below the tabs, each day in its
+own colour, as an album's **Map** tab does: opening it shrinks the header down to its row of tabs,
+so the mouse wheel over the map zooms it. A panel floats over the foot of the map with what the
+route adds up to:
 
 | Figure            | What it is                                                                                                                                                                                                                         |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -371,23 +374,26 @@ counts as staying and as too fast follows its **Travels as** setting (see
 position, while **Distance** leaves the wandering out. The **Map** page and an album's **Map** tab
 draw tracks the same way.
 
-Under the figures are the times of the first and the last point. A long track is drawn from a
-thinned copy; the line then ends with "drawn from a thinned copy of the track", and the distance
+**Details**, in the panel's corner, opens the rest of it above the figures: the times of the first
+and the last point, the GPX files, **Upload GPX** and
+[Live tracking from a phone](#live-tracking-from-a-phone). A long track is drawn from a thinned
+copy; the times are then followed by "drawn from a thinned copy of the track", and the distance
 comes out a little shorter than the route really was.
 
-Under them, **Read from** lists the GPX files the track was read from, with their sizes. Click one
+**Read from** lists the GPX files the track was read from, with their sizes. Click one
 to download it. EiN keeps every GPX file it reads into a track, in the device's `routes` folder
 (`/archive/devices/<device>/routes/`), and the track links each one from its own `sources` folder.
 The same file brought in twice, byte for byte, is kept once.
 
 While the device is sending its position as it moves, and its last point is under four hours old,
-a **Live** card sits above the map with its speed in km/h and how long ago that point was taken
+a **Live** line tops the panel with its speed in km/h and how long ago that point was taken
 ("12 km/h · 40 s ago"). The map then draws a pin where the device is now and extends the route as
-points arrive. Click **Follow**, the crosshair on the card, and the map keeps the newest point in
+points arrive. Click **Follow**, the crosshair at the end of that line, and the map keeps the newest point in
 view until you drag it. The **Map** page follows live devices the same way; see
 [Follow a device live](places.md#follow-a-device-live).
 
-A device with no route says **This device has recorded no track**.
+A device with no route says **This device has recorded no track**, with **Upload GPX** and
+**Live tracking from a phone** under it.
 
 EiN draws a track on the maps; it does not use it to give a position to pictures that have none.
 To place those, see [Dates and places of pictures](dates-places.md#where-a-pictures-place-comes-from).
@@ -399,7 +405,8 @@ recorded a file, upload it on that device's page:
 
 1. Open the device's page and the **Track** tab. A device with no track yet has the tab once its
    **Travels as** is set in **Edit**.
-2. Click **Upload GPX** and choose one or more `.gpx` files.
+2. Click **Details** in the panel at the foot of the map, then **Upload GPX**, and choose one or
+   more `.gpx` files. A device with no track yet has **Upload GPX** on the tab itself.
 3. Wait for the message: "N new points added to the track", or "The track already had every point
    in it".
 
@@ -468,8 +475,9 @@ reporting with the screen off and sends what it recorded out of signal once it i
 tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
 the same address.
 
-1. Open the device's page and the **Track** tab (set **Travels as** first if it has none). Under the
-   route is **Live tracking from a phone**.
+1. Open the device's page and the **Track** tab (set **Travels as** first if it has none), and click
+   **Details** in the panel at the foot of the map. **Live tracking from a phone** is at the end. A
+   device with no track yet has it on the tab itself.
 2. Click **Turn on**. EiN gives the device a track if it has none, and shows a QR code and the
    server URL.
 3. On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
@@ -543,10 +551,13 @@ on each trip's card:
 - **New album**, which makes an album of the trip in `/archive/albums`, named after the farthest
   place it stayed at when that place has a name, else after the device, and its dates, for example
   "Sailboat 2025-06-10 – 2025-06-14". Rename it in the album's **Edit album**.
-- **Use** and an album's name, for each album whose dates overlap the trip and whose devices include
-  this one (see
-  [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows)).
-  It makes that album the trip's.
+- **Put in an album…**, which opens **Put the trip in an album**. Before you type, it offers the
+  albums whose dates overlap the trip and whose devices include this one (see
+  [Choose which devices' routes the map shows](albums.md#choose-which-devices-routes-the-map-shows));
+  their number keys pick them. Type part of a name to find any album you may change, or type a new
+  name and press **New album “…”** to make an album of the trip under that name. Choosing an album
+  makes it the trip's. An album that already holds another trip is refused with a message saying
+  so.
 
 Either way the device is added to the album's devices, so its Map tab draws the route, and the album
 spans the trip even before it has any pictures. The card then names the album under **Album**, with
