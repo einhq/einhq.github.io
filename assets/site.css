@@ -46,16 +46,6 @@
     U+20AD-20C4,
     U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-/* Glass Antiqua: the dedication, and nothing else. */
-@font-face {
-  font-family: 'Glass Antiqua';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(fonts/glass-antiqua-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
-}
 /* Mochiy Pop One: the wordmark, as EiN's Web UI draws it beside the mark, and every heading. */
 @font-face {
   font-family: 'Mochiy Pop One';
@@ -2092,62 +2082,6 @@ figcaption {
 }
 .install-add {
   --accent: var(--docs);
-}
-
-/* --- dedication --- */
-
-/* After the screenshots, on the same ground: a rule between them, as over the footer. */
-.dedication {
-  border-top: 1px solid var(--line);
-}
-
-/* The dedication: the heart of hats at its left, and the words in a face of their own. */
-.dedication-to {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  margin-bottom: 72px;
-}
-.dedication-to p {
-  max-width: 40rem;
-  color: var(--text);
-  font-family: 'Glass Antiqua', var(--sans);
-  font-size: 1.4rem;
-  line-height: 1.4;
-}
-.dedication-years {
-  white-space: nowrap;
-}
-/* The one red on the page: a heart of hats, set apart from the node types' colours. */
-.dedication-heart {
-  width: 96px;
-  height: 96px;
-  flex: none;
-  stroke: var(--ink);
-  stroke-width: 0.3;
-  stroke-linejoin: round;
-}
-.dedication h2 {
-  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem);
-}
-.intro > .dedication-by {
-  margin-top: 28px;
-  color: var(--faint);
-}
-@media (max-width: 760px) {
-  .dedication-to {
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .dedication-to br {
-    display: none;
-  }
-  /* At the top of the words, level with the first line's capitals. */
-  .dedication-heart {
-    width: 64px;
-    height: 64px;
-    margin-top: 8px;
-  }
 }
 
 /* --- footer --- */

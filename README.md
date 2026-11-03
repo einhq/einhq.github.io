@@ -7,9 +7,8 @@ shell, the Web UI, pipelines and modules. Assistant is the chat and what it does
 installation, ending where it has a real purpose, the Archive. Archive is the first module, with the
 screenshots from the demo archive, its media types and pipelines, asking the assistant about the
 family, and the media service. Screenshots is a gallery of almost every page, and the system
-requirements and the source follow it, Getting started's like the install. The page ends on the
-dedication and the projects EiN grew out of. Each chapter opens
-on a band of hats in the colour of the interface's pages it is about.
+requirements and the source follow it, Getting started's like the install. Each chapter opens on a
+band of hats in the colour of the interface's pages it is about.
 It is the GitHub Pages site of the [einhq](https://github.com/einhq) organisation, served at
 <https://einhq.eu> (`CNAME`).
 
@@ -30,7 +29,7 @@ docs/diagrams/      the documentation's diagrams, SVG
 docs/SUMMARY.md     the documentation's pages, in the order of its sidebar
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
 assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
-assets/fonts/       Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark's and the headings') and Glass Antiqua (the dedication's), served from here
+assets/fonts/       Familjen Grotesk, Fragment Mono and Mochiy Pop One (the wordmark's and the headings'), served from here
 assets/og.jpg       the link preview: the page's own hero at 1200 × 630, screenshotted from `make serve`
 assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.svg
 install.sh          what the page's install command fetches: it checks the machine, then fetches ein/deploy into ~/ein and runs its setup.sh
@@ -122,8 +121,7 @@ also type-checks the capture tool.
 
 - The page, its scripts and styles: MIT (`LICENSE`).
 - The hat tiling comes from ein/core, whose author gives it to this site under MIT; core builds it as isohedral/hatviz (BSD-3-Clause) does.
-- Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark, as EiN's Web UI draws it, and the headings) and Glass
-  Antiqua (the dedication): SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
+- Familjen Grotesk, Fragment Mono and Mochiy Pop One (the wordmark, as EiN's Web UI draws it, and the headings): SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
 - The screenshots and node pictures show the demo archive. Its story and generated media are CC0;
   the real photos in it keep their own licences, credited one by one in `ATTRIBUTION.md`. Map data
   © OpenStreetMap contributors.

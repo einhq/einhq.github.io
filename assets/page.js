@@ -233,10 +233,10 @@ export function barBottom() {
 /**
  * The top bar: an edge once the page has scrolled, and its link to the chapter in view marked
  * (`aria-current`): the chapter (`ch-` class) of the last section with one whose start has passed a
- * third of the way down, so the dedication at the end keeps Getting started's, and the hero's is the
- * first link's. Getting started comes both first and last. On a phone its links are a menu
- * (site.css), which a chapter's link, Escape, a tap outside it or a wider window closes again. A page without chapters, such as the documentation's, keeps the link its HTML
- * marks.
+ * third of the way down, and the hero's, which has none, is the first link's. Getting started comes
+ * both first and last. On a phone its links are a menu (site.css), which a chapter's link, Escape,
+ * a tap outside it or a wider window closes again. A page without chapters, such as the
+ * documentation's, keeps the link its HTML marks.
  */
 export function bar() {
   const header = document.querySelector('.bar');
