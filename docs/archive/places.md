@@ -435,6 +435,7 @@ without a reload. Pointing at the pin shows the device's name, its speed in km/h
 the point was taken ("12 km/h · 40 s ago").
 
 The live devices are also listed in the top-left corner, each with its colour, name, speed and age.
+Click a name to open that device's **Track** tab.
 Click **Follow** (the crosshair beside a device), or the device's pin, and the map moves along with
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click **Follow**
 again, to stop. A device drops out of the list four hours after its last point.
