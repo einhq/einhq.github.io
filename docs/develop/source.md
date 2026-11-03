@@ -31,6 +31,10 @@ The Elastic License lets anyone use, copy, change and pass on EiN, also commerci
 
 What was published before the change, on 3 November 2026, remains under the MIT licence it was published with.
 
+## Contributing
+
+Issues and pull requests go to the repositories on GitHub. Each repository's `CONTRIBUTING.md` says how a change is sent and what the code should look like. A contribution to core, a module or the media service is accepted once its author has agreed to the [EiN Contributor License Agreement](https://github.com/einhq/core/blob/main/CLA.md), in which they keep their copyright and give EiN's author the right to license their work on any terms, the separate licences for hosting included. The libraries need no agreement.
+
 ## Third-party licences
 
 EiN's own code is under the licences [The licence](#the-licence) gives. The images carry code and fonts made by others, each under its own licence. All three are built on the same Debian 13 (trixie) release and carry Debian's packages unmodified, some of them under the GPL or the LGPL; each image's `NOTICE.md`, in `/usr/share/doc/` inside it, says the same about them, and where their source is.
