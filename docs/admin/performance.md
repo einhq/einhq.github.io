@@ -172,6 +172,12 @@ podman image prune
 
 With Docker, write `docker` for `podman`. `podman image prune` removes only images without a name that no container uses; the database is a volume and is never touched by it. Never add `--volumes` to a prune: `ein_db` is your database.
 
+### The database
+
+With the Archive, the database grows by about 120 KB for each photo or video it indexes: the file's node, its renditions, its metadata, faces and the vectors search uses. The audit trail adds up to 80 KB more while it keeps the records of the pipelines that worked on the file, 14 days by default ([Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause)), so plan on 200 KB a file while an import runs; two weeks after it, the database is back near 120 KB a file. An exact copy of a file that is already there costs about 5 KB.
+
+PostgreSQL also needs room of its own to clean up and rebuild indexes, so keep at least 10 GB free on the disk the database is on. Before a large import, multiply its number of photos and videos by 200 KB: 100,000 files need about 20 GB, plus those 10 GB. When the disk the container engine's storage is on is too small, put the database on another disk with the installer's `--db-dir`, as [Move the data folder to another disk](data.md#move-the-data-folder-to-another-disk) describes; `df` in EiN's terminal shows the database's size.
+
 ## Watch it keep up
 
 Whether the machine is big enough shows in whether it keeps up with the work:

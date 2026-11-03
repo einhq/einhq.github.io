@@ -90,7 +90,7 @@
 <p>This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the dashboard and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on <a href="install.html#run-ein-day-to-day">Installing in detail</a>.</p>
 <h2 id="what-a-service-is">What a service is<a class="anchor" href="#what-a-service-is" aria-label="Link to this section"></a></h2>
 <p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive&#39;s workers that process your media. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (<code>db</code>), and the media service (<code>ems</code>) and the language model (<code>llm</code>) when they are installed, are containers beside EiN. The <code>ems</code> module and the Assistant watch the last two through services of their own, <code>ems-link</code> and <code>llm-link</code>.</p>
-<p>Core brings nine services, the first nine below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> module it brings along (<a href="../ems/index.html">The media service</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 21:</p>
+<p>Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> module it brings along (<a href="../ems/index.html">The media service</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 22:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -143,6 +143,11 @@
 <td><code>trash-purger</code></td>
 <td>core</td>
 <td>Removes trashed files for good once they are older than <code>CFG_TRASH_RETENTION_DAYS</code>; twice a day</td>
+</tr>
+<tr>
+<td><code>audit-purger</code></td>
+<td>core</td>
+<td>Removes audit records once they are older than <code>CFG_AUDIT_PIPELINE_RETENTION_DAYS</code> or <code>CFG_AUDIT_RETENTION_DAYS</code>; twice a day</td>
 </tr>
 <tr>
 <td><code>archive-bridge</code></td>

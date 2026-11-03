@@ -6,7 +6,7 @@ This page is for whoever runs EiN: the services that run inside EiN and keep it 
 
 Inside the `ein` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive's workers that process your media. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (`db`), and the media service (`ems`) and the language model (`llm`) when they are installed, are containers beside EiN. The `ems` module and the Assistant watch the last two through services of their own, `ems-link` and `llm-link`.
 
-Core brings nine services, the first nine below, and they are all an EiN without modules runs. Each module brings its own, listed after core's with the module they come from. With the [Archive](../archive/index.md), the `ems` module it brings along ([The media service](../ems/index.md)) and the [Assistant](../assistant/index.md) installed, there are 21:
+Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core's with the module they come from. With the [Archive](../archive/index.md), the `ems` module it brings along ([The media service](../ems/index.md)) and the [Assistant](../assistant/index.md) installed, there are 22:
 
 | Service             | From      | What it does                                                                                                                    |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,6 +19,7 @@ Core brings nine services, the first nine below, and they are all an EiN without
 | `session-reaper`    | core      | Removes expired sessions, and turns off expired share links; hourly                                                             |
 | `tmp-sweeper`       | core      | Removes files left in `/tmp` once they are older than `CFG_TMP_RETENTION_HOURS`; hourly                                         |
 | `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                 |
+| `audit-purger`      | core      | Removes audit records once they are older than `CFG_AUDIT_PIPELINE_RETENTION_DAYS` or `CFG_AUDIT_RETENTION_DAYS`; twice a day   |
 | `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                           |
 | `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                          |
 | `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                  |

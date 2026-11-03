@@ -941,6 +941,12 @@ id to <code>audit --cause=&lt;id&gt;</code> to list every write its pipelines ma
 instances, queues and pools live, are not recorded, nor are session and terminal writes.</p>
 <p>What a run makes belongs to whoever made the subject, so a thumbnail of Helen Okafor&#39;s photo is
 hers. The <a href="../reference/commands-core.html#audit">audit command</a> lists every filter.</p>
+<p>The writes of runs are most of the trail, about ninety records for each photo an import indexes, so
+the <code>audit-purger</code> service removes them after 14 days, the setting <strong>Days the audit trail keeps
+pipelines&#39; writes</strong> (<code>CFG_AUDIT_PIPELINE_RETENTION_DAYS</code>). Every other write, by people, imports
+and services, is kept until <strong>Days the audit trail keeps every other write</strong>
+(<code>CFG_AUDIT_RETENTION_DAYS</code>), which is 0, for good, unless you set it. <code>audit-purge</code> removes records
+by hand: <code>audit-purge --older-than 7d --pipeline</code>.</p>
 <h2 id="what-pipelines-do-not-do">What pipelines do not do<a class="anchor" href="#what-pipelines-do-not-do" aria-label="Link to this section"></a></h2>
 <ul>
 <li>Core brings no pipelines. Without a module, EiN keeps what you give it and works nothing out.</li>

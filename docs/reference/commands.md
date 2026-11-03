@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 370 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 372 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 209 in full](commands-core.md).
+[All 210 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -30,6 +30,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [admin](commands-core.md#admin) | Become the administrator in this terminal, for a member of the sudo group (user-elevate) |
 | [attrs](commands-core.md#attrs) | Display or set node attributes. |
 | [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only) |
+| [audit-purge](commands-core.md#audit-purge) | Remove audit records older than a given age, so the audit trail does not grow without bound (administrators only) |
 | [awk](commands-core.md#awk) | Pattern scanning and text processing language (fields, patterns, arrays, printf) |
 | [basename](commands-core.md#basename) | Strip directory and suffix from filenames. |
 | [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON) |
@@ -245,7 +246,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 150 in full](../archive/commands.md).
+[All 151 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -388,6 +389,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track, keeping a copy of the file in the device's routes/. |
 | [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
 | [track-mark](../archive/commands.md#track-mark) | Reject or accept the fixes of a time range of a device's track by hand, overruling its rules, or clear that. |
+| [track-move](../archive/commands.md#track-move) | Move the fixes of a time range from one device's track to another's, for a trip recorded on the wrong device. |
 | [track-places](../archive/commands.md#track-places) | Put each of a device's stays at a location, naming the ones it makes after the harbour, island, bay or town there. |
 | [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
 | [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |

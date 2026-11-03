@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 83 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 85 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -190,6 +190,30 @@ Every setting of an EiN with all its modules: 83 of them, in the groups the Sett
 | Kind | select |
 | Restarts | `llm-link` |
 | From the module | Assistant |
+
+## Audit trail
+
+### `CFG_AUDIT_RETENTION_DAYS`
+
+**Days the audit trail keeps every other write**. How long the audit trail keeps the records of every other write: what people, imports and services changed. 0 keeps them for good.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `0` |
+| Kind | number |
+| Restarts | `audit-purger` |
+
+### `CFG_AUDIT_PIPELINE_RETENTION_DAYS`
+
+**Days the audit trail keeps pipelines' writes**. How long the audit trail keeps the records of what pipelines wrote: thumbnails, faces, text and the other nodes derived from a file, most of the trail. 0 keeps them for good.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `14` |
+| Kind | number |
+| Restarts | `audit-purger` |
 
 ## Faces
 

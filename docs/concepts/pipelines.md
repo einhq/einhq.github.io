@@ -474,6 +474,13 @@ instances, queues and pools live, are not recorded, nor are session and terminal
 What a run makes belongs to whoever made the subject, so a thumbnail of Helen Okafor's photo is
 hers. The [audit command](../reference/commands-core.md#audit) lists every filter.
 
+The writes of runs are most of the trail, about ninety records for each photo an import indexes, so
+the `audit-purger` service removes them after 14 days, the setting **Days the audit trail keeps
+pipelines' writes** (`CFG_AUDIT_PIPELINE_RETENTION_DAYS`). Every other write, by people, imports
+and services, is kept until **Days the audit trail keeps every other write**
+(`CFG_AUDIT_RETENTION_DAYS`), which is 0, for good, unless you set it. `audit-purge` removes records
+by hand: `audit-purge --older-than 7d --pipeline`.
+
 ## What pipelines do not do
 
 - Core brings no pipelines. Without a module, EiN keeps what you give it and works nothing out.

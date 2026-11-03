@@ -318,6 +318,10 @@ trash empty --all</code></pre></div>
 <td><strong>Remove</strong> in <strong>Settings → Modules</strong>; see <a href="modules.html#remove-a-module">Modules</a>.</td>
 </tr>
 <tr>
+<td>Old records of the audit trail</td>
+<td><code>audit-purge --older-than 7d --pipeline</code> in EiN&#39;s terminal removes what pipelines wrote more than a week ago, which the <code>audit-purger</code> service otherwise does after 14 days; see <a href="../concepts/pipelines.html#trace-a-result-back-to-its-cause">Trace a result back to its cause</a>. The database keeps the room for new records rather than giving it back to the disk.</td>
+</tr>
+<tr>
 <td>The media service or the language model</td>
 <td><code>~/ein/setup.sh --no-ems</code> or <code>--no-llm</code> stops it and keeps its data. Then <code>podman image rm ghcr.io/einhq/ems:main</code> frees the media service&#39;s image of about 30 GB (<code>localhost/ein-ems</code> when it was built from your own source), and removing <code>~/ein/data/llm</code> the model.</td>
 </tr>
