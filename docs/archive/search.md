@@ -51,7 +51,7 @@ Each search looks in several places at once and puts the results together:
 | What is said in videos and recordings                                             | By meaning and by its exact words                        | `the knife's gone blunt` finds Arthur carving the goose at Christmas 1998                                            |
 | Documents: PDF, Word (`.docx`), OpenDocument (`.odt`) and plain text              | By what their text is about                              | `Christmas letter` finds the family newsletter from 2019                                                             |
 | Descriptions someone wrote                                                        | By meaning                                               |                                                                                                                      |
-| File names                                                                        | By the name                                              | `DSC_0215`, `IMG_0525`                                                                                               |
+| File names                                                                        | By the name; an underscore and a space count alike       | `DSC_0215`, `IMG_0525`                                                                                               |
 
 A match in something said opens the video or recording at the moment the words are said, not at the
 start. A name said once in an hour of tape is found by its words. Write what you remember being said
@@ -229,12 +229,12 @@ files it holds.
 
 What each kind is found by:
 
-| Kind      | Found by                                        | Try it in the Wrenfield demo                                                                                                     |
-| --------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Albums    | Name, description, and what their pictures show | `album christmas` sets **Show** to **Albums** and finds the Christmas albums, such as Christmas 1975 and Christmas in Wellington |
-| People    | Name; every word must match the same person     | `helen okafor`                                                                                                                   |
-| Locations | Name                                            | `falmouth`                                                                                                                       |
-| Devices   | Name, make, model or serial number              | `lumix` finds Peggy's Lumix                                                                                                      |
+| Kind      | Found by                                                                                                                                         | Try it in the Wrenfield demo                                                                                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Albums    | Name, description, and what their pictures show                                                                                                  | `album christmas` sets **Show** to **Albums** and finds the Christmas albums, such as Christmas 1975 and Christmas in Wellington |
+| People    | Name; every word must match the same person. A first name and surname find them without their middle names, or with one half of a double surname | `helen okafor`                                                                                                                   |
+| Locations | Name                                                                                                                                             | `falmouth`                                                                                                                       |
+| Devices   | Name, make, model or serial number                                                                                                               | `lumix` finds Peggy's Lumix                                                                                                      |
 
 A person, location, year, device or label in the search narrows albums by their pictures:
 `@Peggy Wrenfield 1968` finds the albums holding a picture of Peggy taken in 1968. A label matches
