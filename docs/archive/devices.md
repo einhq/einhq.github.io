@@ -370,7 +370,8 @@ route adds up to:
 While a device lies still, its GPS keeps wandering: around a berth or a parking space it records a
 tangle of positions, now and then one far out that it never went to. EiN draws neither. Where the
 device stayed in one place, at walking pace or slower, the line ends on the middle of where it lay
-and later leaves from there, and a position it could not have reached so fast is left out. What
+and later leaves from there, and a position it could not have reached so fast is left out, unless
+you accepted it (see [Reject or accept a position by hand](#reject-or-accept-a-position-by-hand)). What
 counts as staying and as too fast follows its **Travels as** setting (see
 [How a device travels](#how-a-device-travels)). The **Points** figure still counts every recorded
 position, while **Distance** leaves the wandering out. The **Map** page and an album's **Map** tab
