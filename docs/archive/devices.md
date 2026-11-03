@@ -158,8 +158,10 @@ Click a card on the Devices page, or the device's name in the viewer. The page's
 Under the name, the header shows the current owners (up to three, then "and N more"), how many
 files the device took and in which years, such as **75 files · 2025–2026** (**N+ files** when
 counting stopped at its limit), and the device's labels. For those who may change the device, the
-corner has **Share** and **Edit**, and the ⋮ menu has **Add event** and **Move to trash**. On a
-phone they are all under ⋮.
+corner has **Share** and **Edit**, and the ⋮ menu has **Add event** and **Move to trash**. A device
+whose **Travels as** is set also has **Upload GPX** in the corner and **Live tracking** under ⋮ (see
+[Upload a GPX file to a device's track](#upload-a-gpx-file-to-a-devices-track) and
+[Live tracking from a phone](#live-tracking-from-a-phone)). On a phone they are all under ⋮.
 
 | Tab       | What it shows                                                                                                                                                                                         |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -374,14 +376,10 @@ counts as staying and as too fast follows its **Travels as** setting (see
 position, while **Distance** leaves the wandering out. The **Map** page and an album's **Map** tab
 draw tracks the same way.
 
-**Details**, in the panel's corner, opens the rest of it above the figures: the times of the first
-and the last point, the GPX files, **Upload GPX** and
-[Live tracking from a phone](#live-tracking-from-a-phone). A long track is drawn from a thinned
-copy; the times are then followed by "drawn from a thinned copy of the track", and the distance
-comes out a little shorter than the route really was.
+A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
+the route really was.
 
-**Read from** lists the GPX files the track was read from, with their sizes. Click one
-to download it. EiN keeps every GPX file it reads into a track, in the device's `routes` folder
+EiN keeps every GPX file it reads into a track, in the device's `routes` folder
 (`/archive/devices/<device>/routes/`), and the track links each one from its own `sources` folder.
 The same file brought in twice, byte for byte, is kept once.
 
@@ -392,8 +390,8 @@ points arrive. Click **Follow**, the crosshair at the end of that line, and the 
 view until you drag it. The **Map** page follows live devices the same way; see
 [Follow a device live](places.md#follow-a-device-live).
 
-A device with no route says **This device has recorded no track**, with **Upload GPX** and
-**Live tracking from a phone** under it.
+A device with no route says **This device has recorded no track**, with **Upload GPX** and **Live
+tracking** under it for those who may change it.
 
 EiN draws a track on the maps; it does not use it to give a position to pictures that have none.
 To place those, see [Dates and places of pictures](dates-places.md#where-a-pictures-place-comes-from).
@@ -403,24 +401,24 @@ To place those, see [Dates and places of pictures](dates-places.md#where-a-pictu
 A GPX file is the format GPS trackers and tracking apps save routes in. If you know which device
 recorded a file, upload it on that device's page:
 
-1. Open the device's page and the **Track** tab. A device with no track yet has the tab once its
-   **Travels as** is set in **Edit**.
-2. Click **Details** in the panel at the foot of the map, then **Upload GPX**, and choose one or
-   more `.gpx` files. A device with no track yet has **Upload GPX** on the tab itself.
+1. Open the device's page. **Upload GPX** is in the header's corner once its **Travels as** is set
+   in **Edit**; on a phone it is under ⋮.
+2. Click **Upload GPX** and choose one or more `.gpx` files. The file picker offers GPX files
+   only.
 3. Wait for the message: "N new points added to the track", or "The track already had every point
    in it".
 
 The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The file is kept with the device under its own name
-and listed under **Read from**.
+uploading the same file again changes nothing. The file is kept with the device under its own name,
+in its `routes` folder.
 
 ### GPX files in staging
 
 A GPX file that arrives in your staging area, by **Import media**, the Media page's **Upload** or
 copying over SFTP (see [Getting your photos in](importing.md)), is not treated as a picture. EiN
 reads which device the file says recorded it and adds the route to that device's track; the file
-then moves out of staging into the device's `routes` folder, and is listed under **Read from**.
+then moves out of staging into the device's `routes` folder.
 
 The file names its device in its `creator` attribute or in one of its `<name>` entries. It matches a
 registered device when one of these holds, as whole words, the device's name, its make and model
@@ -475,9 +473,8 @@ reporting with the screen off and sends what it recorded out of signal once it i
 tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
 the same address.
 
-1. Open the device's page and the **Track** tab (set **Travels as** first if it has none), and click
-   **Details** in the panel at the foot of the map. **Live tracking from a phone** is at the end. A
-   device with no track yet has it on the tab itself.
+1. Open the device's page, open the ⋮ menu and choose **Live tracking** (set **Travels as** in
+   **Edit** first if it has none). The **Live tracking from a phone** dialog opens.
 2. Click **Turn on**. EiN gives the device a track if it has none, and shows a QR code and the
    server URL.
 3. On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
@@ -487,11 +484,11 @@ the same address.
 Open the device's page at the address the phone will reach EiN at: the QR code and the URL are
 made from the address in your browser. The phone has to reach EiN there wherever it is, so EiN
 must be reachable from the internet over HTTPS (see
-[Ports, HTTPS and remote access](../admin/network.md#phones-posting-their-position)). The section
+[Ports, HTTPS and remote access](../admin/network.md#phones-posting-their-position)). The dialog
 is offered to those who may change the device.
 
 The address is the whole key: anyone who has it can add positions to the track, and nobody needs
-to sign in to use it. The positions are added as the person who owns the track. The section shows
+to sign in to use it. The positions are added as the person who owns the track. The dialog shows
 the same address again whenever you open it. If the address got out, click **New link**: the old
 one stops working at once, and the phone has to scan the new QR code. **Turn off** stops the
 address working and keeps the track.
@@ -586,7 +583,7 @@ see the albums the trip may belong to under **Maybe in**.
 | A device's page has no **Track** or **Trips** tab.                                                                                                                                             | It has no **Travels as** and has recorded no track, so EiN takes it for a device that does not travel.                                                   | **Edit** it and choose **Travels as**.                                                                                                                                                                                       |
 | The **Trips** tab says "No trips" though the device has a track.                                                                                                                               | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                                                     | Click **Find trips**, or **Find trips again**.                                                                                                                                                                               |
 | A trip ends at home in the middle of a holiday, or two trips should be one.                                                                                                                    | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                                                       | Click **Join to the trip before** on the second trip's card.                                                                                                                                                                 |
-| **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking from a phone** is missing.                                                                                 | You may not change this device.                                                                                                                          | Ask the person who registered it, or an administrator.                                                                                                                                                                       |
+| **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking** is missing.                                                                                              | You may not change this device, or, for **Upload GPX** and **Live tracking**, its **Travels as** is not set.                                             | Ask the person who registered it, or an administrator; or **Edit** it and choose **Travels as**.                                                                                                                             |
 | **Upload GPX** gives a message ending in "no track points found".                                                                                                                              | The file holds no recorded track points, only a planned route or waypoints.                                                                              | Use the file the device recorded while it moved.                                                                                                                                                                             |
 | The phone reports nothing to the track.                                                                                                                                                        | It cannot reach EiN at the address it was given, over HTTPS from where it is; the link was replaced or turned off; or tracking is off in Traccar Client. | Open the address in the phone's browser: a page saying `Forbidden` means the link is no longer the device's, so scan the new QR code. If it does not load at all, see [Ports, HTTPS and remote access](../admin/network.md). |
 | A GPX file sits in an album as an ordinary file.                                                                                                                                               | It was uploaded straight into the album, where GPX files are not read as routes.                                                                         | Upload it on the device's **Track** tab, then delete the file from the album.                                                                                                                                                |

@@ -251,8 +251,10 @@ describes, is offered to whoever may change it, which the device&#39;s <strong>S
 <p>Under the name, the header shows the current owners (up to three, then &quot;and N more&quot;), how many
 files the device took and in which years, such as <strong>75 files · 2025–2026</strong> (<strong>N+ files</strong> when
 counting stopped at its limit), and the device&#39;s labels. For those who may change the device, the
-corner has <strong>Share</strong> and <strong>Edit</strong>, and the ⋮ menu has <strong>Add event</strong> and <strong>Move to trash</strong>. On a
-phone they are all under ⋮.</p>
+corner has <strong>Share</strong> and <strong>Edit</strong>, and the ⋮ menu has <strong>Add event</strong> and <strong>Move to trash</strong>. A device
+whose <strong>Travels as</strong> is set also has <strong>Upload GPX</strong> in the corner and <strong>Live tracking</strong> under ⋮ (see
+<a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device&#39;s track</a> and
+<a href="#live-tracking-from-a-phone">Live tracking from a phone</a>). On a phone they are all under ⋮.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -474,13 +476,9 @@ counts as staying and as too fast follows its <strong>Travels as</strong> settin
 <a href="#how-a-device-travels">How a device travels</a>). The <strong>Points</strong> figure still counts every recorded
 position, while <strong>Distance</strong> leaves the wandering out. The <strong>Map</strong> page and an album&#39;s <strong>Map</strong> tab
 draw tracks the same way.</p>
-<p><strong>Details</strong>, in the panel&#39;s corner, opens the rest of it above the figures: the times of the first
-and the last point, the GPX files, <strong>Upload GPX</strong> and
-<a href="#live-tracking-from-a-phone">Live tracking from a phone</a>. A long track is drawn from a thinned
-copy; the times are then followed by &quot;drawn from a thinned copy of the track&quot;, and the distance
-comes out a little shorter than the route really was.</p>
-<p><strong>Read from</strong> lists the GPX files the track was read from, with their sizes. Click one
-to download it. EiN keeps every GPX file it reads into a track, in the device&#39;s <code>routes</code> folder
+<p>A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
+the route really was.</p>
+<p>EiN keeps every GPX file it reads into a track, in the device&#39;s <code>routes</code> folder
 (<code>/archive/devices/&lt;device&gt;/routes/</code>), and the track links each one from its own <code>sources</code> folder.
 The same file brought in twice, byte for byte, is kept once.</p>
 <p>While the device is sending its position as it moves, and its last point is under four hours old,
@@ -489,30 +487,30 @@ a <strong>Live</strong> line tops the panel with its speed in km/h and how long 
 points arrive. Click <strong>Follow</strong>, the crosshair at the end of that line, and the map keeps the newest point in
 view until you drag it. The <strong>Map</strong> page follows live devices the same way; see
 <a href="places.html#follow-a-device-live">Follow a device live</a>.</p>
-<p>A device with no route says <strong>This device has recorded no track</strong>, with <strong>Upload GPX</strong> and
-<strong>Live tracking from a phone</strong> under it.</p>
+<p>A device with no route says <strong>This device has recorded no track</strong>, with <strong>Upload GPX</strong> and <strong>Live
+tracking</strong> under it for those who may change it.</p>
 <p>EiN draws a track on the maps; it does not use it to give a position to pictures that have none.
 To place those, see <a href="dates-places.html#where-a-pictures-place-comes-from">Dates and places of pictures</a>.</p>
 <h3 id="upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device&#39;s track<a class="anchor" href="#upload-a-gpx-file-to-a-devices-track" aria-label="Link to this section"></a></h3>
 <p>A GPX file is the format GPS trackers and tracking apps save routes in. If you know which device
 recorded a file, upload it on that device&#39;s page:</p>
 <ol>
-<li>Open the device&#39;s page and the <strong>Track</strong> tab. A device with no track yet has the tab once its
-<strong>Travels as</strong> is set in <strong>Edit</strong>.</li>
-<li>Click <strong>Details</strong> in the panel at the foot of the map, then <strong>Upload GPX</strong>, and choose one or
-more <code>.gpx</code> files. A device with no track yet has <strong>Upload GPX</strong> on the tab itself.</li>
+<li>Open the device&#39;s page. <strong>Upload GPX</strong> is in the header&#39;s corner once its <strong>Travels as</strong> is set
+in <strong>Edit</strong>; on a phone it is under ⋮.</li>
+<li>Click <strong>Upload GPX</strong> and choose one or more <code>.gpx</code> files. The file picker offers GPX files
+only.</li>
 <li>Wait for the message: &quot;N new points added to the track&quot;, or &quot;The track already had every point
 in it&quot;.</li>
 </ol>
 <p>The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The file is kept with the device under its own name
-and listed under <strong>Read from</strong>.</p>
+uploading the same file again changes nothing. The file is kept with the device under its own name,
+in its <code>routes</code> folder.</p>
 <h3 id="gpx-files-in-staging">GPX files in staging<a class="anchor" href="#gpx-files-in-staging" aria-label="Link to this section"></a></h3>
 <p>A GPX file that arrives in your staging area, by <strong>Import media</strong>, the Media page&#39;s <strong>Upload</strong> or
 copying over SFTP (see <a href="importing.html">Getting your photos in</a>), is not treated as a picture. EiN
 reads which device the file says recorded it and adds the route to that device&#39;s track; the file
-then moves out of staging into the device&#39;s <code>routes</code> folder, and is listed under <strong>Read from</strong>.</p>
+then moves out of staging into the device&#39;s <code>routes</code> folder.</p>
 <p>The file names its device in its <code>creator</code> attribute or in one of its <code>&lt;name&gt;</code> entries. It matches a
 registered device when one of these holds, as whole words, the device&#39;s name, its make and model
 together, or its serial number. Capital letters and punctuation do not count. A file whose creator
@@ -557,9 +555,8 @@ reporting with the screen off and sends what it recorded out of signal once it i
 tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
 the same address.</p>
 <ol>
-<li>Open the device&#39;s page and the <strong>Track</strong> tab (set <strong>Travels as</strong> first if it has none), and click
-<strong>Details</strong> in the panel at the foot of the map. <strong>Live tracking from a phone</strong> is at the end. A
-device with no track yet has it on the tab itself.</li>
+<li>Open the device&#39;s page, open the ⋮ menu and choose <strong>Live tracking</strong> (set <strong>Travels as</strong> in
+<strong>Edit</strong> first if it has none). The <strong>Live tracking from a phone</strong> dialog opens.</li>
 <li>Click <strong>Turn on</strong>. EiN gives the device a track if it has none, and shows a QR code and the
 server URL.</li>
 <li>On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
@@ -569,10 +566,10 @@ server URL and, as the device identifier, the device&#39;s name.</li>
 <p>Open the device&#39;s page at the address the phone will reach EiN at: the QR code and the URL are
 made from the address in your browser. The phone has to reach EiN there wherever it is, so EiN
 must be reachable from the internet over HTTPS (see
-<a href="../admin/network.html#phones-posting-their-position">Ports, HTTPS and remote access</a>). The section
+<a href="../admin/network.html#phones-posting-their-position">Ports, HTTPS and remote access</a>). The dialog
 is offered to those who may change the device.</p>
 <p>The address is the whole key: anyone who has it can add positions to the track, and nobody needs
-to sign in to use it. The positions are added as the person who owns the track. The section shows
+to sign in to use it. The positions are added as the person who owns the track. The dialog shows
 the same address again whenever you open it. If the address got out, click <strong>New link</strong>: the old
 one stops working at once, and the phone has to scan the new QR code. <strong>Turn off</strong> stops the
 address working and keeps the track.</p>
@@ -710,9 +707,9 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <td>Click <strong>Join to the trip before</strong> on the second trip&#39;s card.</td>
 </tr>
 <tr>
-<td><strong>Edit</strong>, <strong>Link existing media</strong>, <strong>Add owner</strong>, <strong>Upload GPX</strong> or <strong>Live tracking from a phone</strong> is missing.</td>
-<td>You may not change this device.</td>
-<td>Ask the person who registered it, or an administrator.</td>
+<td><strong>Edit</strong>, <strong>Link existing media</strong>, <strong>Add owner</strong>, <strong>Upload GPX</strong> or <strong>Live tracking</strong> is missing.</td>
+<td>You may not change this device, or, for <strong>Upload GPX</strong> and <strong>Live tracking</strong>, its <strong>Travels as</strong> is not set.</td>
+<td>Ask the person who registered it, or an administrator; or <strong>Edit</strong> it and choose <strong>Travels as</strong>.</td>
 </tr>
 <tr>
 <td><strong>Upload GPX</strong> gives a message ending in &quot;no track points found&quot;.</td>
