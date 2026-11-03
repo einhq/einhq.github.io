@@ -5709,7 +5709,7 @@ track-places /archive/devices/the-sailboat --dry-run</code></pre></div>
 <h3 id="track-read"><code>track-read</code><a class="anchor" href="#track-read" aria-label="Link to this section"></a></h3>
 <p>Read a device&#39;s track as drawable segments ({segments, points, truncated})</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>track-read [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--bbox=&lt;string&gt;] [--margin=&lt;string&gt;] [--tolerance=&lt;string&gt;] [--limit=&lt;string&gt;] [--still] [--max-speed=&lt;string&gt;] &lt;device&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>track-read [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--bbox=&lt;string&gt;] [--margin=&lt;string&gt;] [--tolerance=&lt;string&gt;] [--limit=&lt;string&gt;] [--still] [--max-speed=&lt;string&gt;] [--rejected] &lt;device&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -5761,6 +5761,10 @@ track-places /archive/devices/the-sailboat --dry-run</code></pre></div>
 <tr>
 <td><code>--max-speed=&lt;string&gt;</code></td>
 <td>with --still, a jump faster than this (m/s) is a spike (default by the device&#39;s kind)</td>
+</tr>
+<tr>
+<td><code>--rejected</code></td>
+<td>read the fixes the track&#39;s rules rejected too, each marked &#39;rejected&#39;.</td>
 </tr>
 </tbody></table>
 </div>

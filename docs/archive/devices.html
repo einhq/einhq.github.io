@@ -448,7 +448,7 @@ route adds up to:</p>
 </thead>
 <tbody><tr>
 <td><strong>Points</strong></td>
-<td>How many recorded positions the track holds.</td>
+<td>How many recorded positions the track holds, without those EiN rejected (see below).</td>
 </tr>
 <tr>
 <td><strong>Days</strong></td>
@@ -476,6 +476,21 @@ counts as staying and as too fast follows its <strong>Travels as</strong> settin
 <a href="#how-a-device-travels">How a device travels</a>). The <strong>Points</strong> figure still counts every recorded
 position, while <strong>Distance</strong> leaves the wandering out. The <strong>Map</strong> page and an album&#39;s <strong>Map</strong> tab
 draw tracks the same way.</p>
+<p>A GPS can also be wrong for longer than one position. A receiver that loses most of its
+satellites can draw a smooth route hundreds of kilometres away for minutes, and a phone that loses
+its fix falls back to a position a cell or a network gave it, sometimes the same one over and
+over. EiN keeps every position it is given, and as it adds them to a track it rejects such runs:</p>
+<ul>
+<li>a stretch the track jumps out to and back from, faster than anything on the ground or the water
+goes (over 600 km/h for more than a kilometre), within two hours;</li>
+<li>a position it jumps back onto exactly, to the last decimal, after being away from it longer than
+it was there.</li>
+</ul>
+<p>A rejected position is not drawn, counted in <strong>Points</strong> or used for trips. A jump that does not come
+back, as when a logger starts again somewhere else, keeps its positions, and the line is broken
+there instead of drawn across. A route flown with the logger on is neither: every one of its steps
+is fast. The same rules apply however the positions arrive: a GPX file uploaded or staged, or a
+phone tracking live. <code>track-read --rejected</code> reads the rejected positions too, marked.</p>
 <p>A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
 the route really was.</p>
 <p>EiN keeps every GPX file it reads into a track, in the device&#39;s <code>routes</code> folder

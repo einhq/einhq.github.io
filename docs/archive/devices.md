@@ -361,7 +361,7 @@ route adds up to:
 
 | Figure            | What it is                                                                                                                                                                                                                         |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Points**        | How many recorded positions the track holds.                                                                                                                                                                                       |
+| **Points**        | How many recorded positions the track holds, without those EiN rejected (see below).                                                                                                                                               |
 | **Days**          | On how many days it recorded.                                                                                                                                                                                                      |
 | **Distance**      | The length of the route, added up day by day, so the gap between one day's end and the next day's start is not counted. In nautical miles for a boat, in kilometres otherwise (see [How a device travels](#how-a-device-travels)). |
 | **Average speed** | The average speed while it moved, in knots for a boat and km/h otherwise. Time lying still, jumps no device could make, and gaps of more than an hour between two points are left out.                                             |
@@ -375,6 +375,22 @@ counts as staying and as too fast follows its **Travels as** setting (see
 [How a device travels](#how-a-device-travels)). The **Points** figure still counts every recorded
 position, while **Distance** leaves the wandering out. The **Map** page and an album's **Map** tab
 draw tracks the same way.
+
+A GPS can also be wrong for longer than one position. A receiver that loses most of its
+satellites can draw a smooth route hundreds of kilometres away for minutes, and a phone that loses
+its fix falls back to a position a cell or a network gave it, sometimes the same one over and
+over. EiN keeps every position it is given, and as it adds them to a track it rejects such runs:
+
+- a stretch the track jumps out to and back from, faster than anything on the ground or the water
+  goes (over 600 km/h for more than a kilometre), within two hours;
+- a position it jumps back onto exactly, to the last decimal, after being away from it longer than
+  it was there.
+
+A rejected position is not drawn, counted in **Points** or used for trips. A jump that does not come
+back, as when a logger starts again somewhere else, keeps its positions, and the line is broken
+there instead of drawn across. A route flown with the logger on is neither: every one of its steps
+is fast. The same rules apply however the positions arrive: a GPX file uploaded or staged, or a
+phone tracking live. `track-read --rejected` reads the rejected positions too, marked.
 
 A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
 the route really was.

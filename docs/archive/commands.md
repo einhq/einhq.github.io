@@ -3602,7 +3602,7 @@ Read a device's track as drawable segments ({segments, points, truncated})
 <small>reads only</small>
 
 ```text
-track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] <device>
+track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] [--rejected] <device>
 ```
 
 | Argument   | What it is                                                        |
@@ -3619,6 +3619,7 @@ track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string
 | `--limit=<string>`     | max points to return.                                                                 |
 | `--still`              | drop GPS spikes and draw each stay as two points, by the device's kind.               |
 | `--max-speed=<string>` | with --still, a jump faster than this (m/s) is a spike (default by the device's kind) |
+| `--rejected`           | read the fixes the track's rules rejected too, each marked 'rejected'.                |
 
 ### `track-stage`
 
