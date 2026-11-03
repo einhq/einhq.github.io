@@ -2725,7 +2725,7 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 
 | Argument | What it is |
 | --- | --- |
-| `[<query>]` | search query text (optional) |
+| `[<query>]` | search query text (optional). A year or date among the words (sailing 2011) is a time window, not words. A name that carries the window's one date, typed so or given as both --from and --to, is found though it has no date of its own: the album 'Autumn trip 2014' for 'autumn trip 2014'. |
 
 | Option | What it does |
 | --- | --- |

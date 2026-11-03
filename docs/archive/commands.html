@@ -3112,7 +3112,7 @@ media-resolve-time --device /archive/devices/Exempelkamera --dry-run</code></pre
 </tr>
 <tr>
 <td><code>--if-idle</code></td>
-<td>Scan only when no media work waits: nothing ready in the media pool, and no ready trigger for a media pipeline.</td>
+<td>Hold back the facts whose pipelines have work ready, in the trigger pool or the media pool, and name them; scan nothing when all wait.</td>
 </tr>
 <tr>
 <td><code>--only=&lt;string&gt;</code></td>
