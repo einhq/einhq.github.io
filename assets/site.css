@@ -1504,55 +1504,11 @@ figcaption {
   }
 }
 
-/* --- the tree, and the layers a request passes --- */
+/* --- the tree --- */
 
 .tree-map {
   margin: 0;
   font-size: 0.85rem;
-}
-.layers {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: layer;
-}
-.layers li {
-  position: relative;
-  display: grid;
-  gap: 4px;
-  padding: 18px 22px;
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  background: var(--raised);
-}
-.layers li + li {
-  margin-top: 30px;
-}
-/* The arrow down to the next layer. */
-.layers li + li::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: -24px;
-  width: 2px;
-  height: 18px;
-  background: var(--faint);
-}
-.layers li + li::after {
-  content: '';
-  position: absolute;
-  left: calc(50% - 5px);
-  top: -9px;
-  border: 6px solid transparent;
-  border-top-color: var(--faint);
-  border-bottom-width: 0;
-}
-.layers li:last-child {
-  border-color: color-mix(in srgb, var(--accent, var(--media)) 55%, transparent);
-}
-.layers span {
-  color: var(--muted);
-  font-size: 0.95rem;
 }
 
 /* --- pipelines --- */
@@ -1644,42 +1600,9 @@ figcaption {
 
 /* --- the assistant --- */
 
-/* Questions as the chat shows them, each over a command it may run to answer. */
-.asks {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.asks li {
-  display: grid;
-  justify-items: start;
-  gap: 8px;
-}
-.asks li + li {
-  margin-top: 18px;
-}
-.asks q {
-  padding: 8px 15px;
-  border-radius: 16px 16px 16px 4px;
-  background: color-mix(in srgb, var(--album) 30%, var(--ink));
-  color: var(--text);
-  font-size: 1rem;
-  quotes: none;
-}
-.asks code {
-  margin-left: 15px;
-  padding: 0;
-  background: none;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-.asks code::before {
-  content: '$ ';
-  color: var(--faint);
-}
-.asks .chip {
-  margin: 0 0 0 10px;
-  font-family: var(--sans);
+/* The Chat page, under the words. */
+.ask-shot {
+  margin-top: 56px;
 }
 
 /* The hand-over to the Archive: a card whose right runs into a band of the Archive's hats. */

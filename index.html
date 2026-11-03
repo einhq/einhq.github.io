@@ -343,33 +343,7 @@
         </div>
       </section>
 
-      <section class="private ch-core" id="sharing" aria-labelledby="private-title">
-        <div class="wrap">
-          <div class="intro">
-            <h2 id="private-title">Sharing made easy</h2>
-            <p>
-              The same check applies in the browser, the shell, SSH and SFTP, so what someone may not open is nowhere for them: not in folders, search or the home page.
-            </p>
-          </div>
-          <dl class="facts">
-            <div>
-              <dt>Sharing in plain words</dt>
-              <dd>The Share dialog says who can see something and who can change it: everyone with an account, some people, or only you.</dd>
-            </div>
-            <div>
-              <dt>A link for someone without an account</dt>
-              <dd>It works for a day, a week, a year or for good, and you can delete it whenever you like.</dd>
-            </div>
-            <div>
-              <dt>Visitors only if you say so</dt>
-              <dd>Turn on "Visitors may browse" and people who are not signed in see what you shared with visitors, and nothing else. They can never change anything.</dd>
-            </div>
-          </dl>
-          <p class="next"><a href="docs/guide/sharing.html">Sharing</a> shows the dialog, and <a href="docs/admin/permissions.html">Permissions in depth</a> has the rules.</p>
-        </div>
-      </section>
-
-      <section class="modules deep ch-core" id="modules" aria-labelledby="modules-title">
+      <section class="modules ch-core" id="modules" aria-labelledby="modules-title">
         <div class="wrap">
           <div class="intro">
             <h2 id="modules-title">Extend with modules</h2>
@@ -417,82 +391,39 @@
         </div>
       </section>
 
-      <section class="turns ch-assistant" aria-labelledby="turns-title">
-        <div class="wrap split">
-          <div class="intro">
-            <h2 id="turns-title">The commands are its tools</h2>
-            <p>
-              The assistant offers its model the few commands each module lists, and a way to find the rest: it searches the commands on your path by what they do, reads one's
-              own <code>--help</code>, and runs a line of bash in EiN's shell.
-            </p>
-            <ul class="points">
-              <li>A line that only reads runs at once. One that would change anything comes to you as a card with the exact line, to run or decline.</li>
-              <li>It knows the page you have open, and can draw a table, a chart or a card under its answer.</li>
-              <li>Every conversation is kept in your own home folder.</li>
-            </ul>
-          </div>
-          <ol class="layers" aria-label="One question, step by step">
-            <li>
-              <strong>Your question</strong>
-              <span>"Is a pipeline stuck?", and the page you are on</span>
-            </li>
-            <li>
-              <strong><code>find_commands</code></strong>
-              <span>Every command, searched by what it does</span>
-            </li>
-            <li>
-              <strong><code>command_help</code></strong>
-              <span>The command's arguments and flags, and an example</span>
-            </li>
-            <li>
-              <strong><code>run_command</code></strong>
-              <span><code>pipeline-overview</code>, run in the shell</span>
-            </li>
-            <li>
-              <strong>The answer</strong>
-              <span>Text with links, and a table, a chart or a card when it helps</span>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="ask deep ch-assistant" aria-labelledby="ask-title">
+      <section class="ask ch-assistant" aria-labelledby="ask-title">
         <div class="wrap">
           <div class="intro">
             <h2 id="ask-title">It knows the system, on your own machine</h2>
             <p>
-              Without any other module, the assistant knows what core keeps: files and folders, logs, services, pipelines, accounts and storage. Ask it as you would ask whoever
-              runs the machine.
+              Without any other module, the assistant knows what core keeps: files and folders, logs, services, pipelines, accounts and storage. Ask it as you would ask
+              whoever runs the machine: which services are running, how much disk is left, whether a pipeline is stuck.
             </p>
+            <ul class="points">
+              <li>Looking runs at once. Anything that would change something comes to you as a card with the exact command, to run or decline.</li>
+              <li>It knows the page you have open, and can draw a table, a chart or a card under its answer.</li>
+              <li>Every conversation is kept in your own home folder and listed on the Chat page.</li>
+              <li>
+                The model is Qwen3.5-4B, on your own graphics card or processor, or any server that speaks OpenAI's chat API, hosted ones included. Then your questions,
+                and what the assistant reads to answer them, leave your machine.
+              </li>
+            </ul>
           </div>
-          <div class="shell-grid">
-            <ul class="asks" aria-label="Questions, each with a command the assistant may run to answer it">
-              <li><q>What is in my home folder?</q><code>ls -l ~</code></li>
-              <li><q>Which services are running?</q><code>service-list --detail</code></li>
-              <li><q>How much disk is left?</q><code>df</code></li>
-              <li><q>Which users are there?</q><code>user-list</code></li>
-              <li><q>Put "Hello" in a file called hello.txt</q><span><code>echo "Hello" &gt; ~/hello.txt</code><span class="chip">Run</span></span></li>
-            </ul>
-            <ul class="points shell-points">
-              <li>By default the model is Qwen3.5-4B in llama.cpp, on your own graphics card or processor: the installer's <code>--llm</code> adds it.</li>
-              <li>
-                Any server that speaks OpenAI's chat API can take its place: vLLM, Ollama or LM Studio, or a hosted provider such as OpenAI, OpenRouter, Mistral or Groq. Then your
-                questions, and what the assistant reads to answer them, leave your machine.
-              </li>
-              <li>
-                A module teaches it through <code>/etc/assistant.d/</code>: the commands to offer, what it keeps and where, and the cards it can draw.
-              </li>
-            </ul>
+          <div class="shot ask-shot">
+            <img
+              src="assets/shots/chat-page.webp"
+              srcset="assets/shots/chat-page.webp 1440w, assets/shots/chat-page@2x.webp 2880w"
+              sizes="(min-width: 1240px) 1160px, 92vw"
+              width="1440"
+              height="900"
+              loading="lazy"
+              alt="The Chat page: a list of conversations, and an answer that ran one command"
+            >
           </div>
           <p class="next">
             <a href="docs/assistant/index.html">The Assistant</a> says what it needs and adds, <a href="docs/assistant/chat.html">Chatting with the assistant</a> shows the chat,
             and <a href="docs/assistant/language-model.html">The language model</a> how to run one or choose a provider.
           </p>
-        </div>
-      </section>
-
-      <section class="teach ch-assistant" aria-labelledby="handover-title">
-        <div class="wrap">
           <aside class="handover ch-archive" aria-labelledby="handover-title">
             <div class="band" data-band="album" aria-hidden="true"></div>
             <p class="chapter-mark"><span class="mark" aria-hidden="true"></span>Where it has a real purpose</p>
