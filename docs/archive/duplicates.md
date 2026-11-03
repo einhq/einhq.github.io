@@ -25,7 +25,8 @@ staging area, across all your categories. A copy in someone else's staging area,
 album you cannot open, does not count.
 
 EiN does not take two shots for one picture when their times tell them apart. Two photos whose
-camera clocks (or GPS times) are a second or more apart are two shots. So are two photos from one camera, of one size and taken in
+camera clocks (or GPS times) are a second or more apart are two shots, unless the clock read the
+same: a copy placed in another time zone than its original is still the same picture. So are two photos from one camera, of one size and taken in
 the same second, when the camera recorded different fractions of that second. When it recorded
 the same fraction, they are one picture: an edit keeps the time, so a black-and-white or mirrored
 copy of a photo is a look-alike of it, even though it looks less alike than a smaller version
