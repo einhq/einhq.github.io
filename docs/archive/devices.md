@@ -155,22 +155,36 @@ Click a card on the Devices page, or the device's name in the viewer. The page's
 `/devices/` and the device's folder name, such as `/devices/Jons_eTrex`, and a tab other than
 **Info** adds `?tab=` with the tab's name, such as `?tab=track`.
 
-![The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, "75 files · 2025–2026", the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card](../../assets/shots/device.webp "A device's page opens on its settings, with the button that links the pictures a changed fingerprint matches.")
-
 Under the name, the header shows the current owners (up to three, then "and N more"), how many
 files the device took and in which years, such as **75 files · 2025–2026** (**N+ files** when
 counting stopped at its limit), and the device's labels. For those who may change the device, the
 corner has **Share** and **Edit**, and the ⋮ menu has **Add event** and **Move to trash**. On a
 phone they are all under ⋮.
 
-| Tab          | What it shows                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Info**     | The page opens here. The **Settings** card lists Make, Model, Serial number, Timezone, **Travels as**, "Capture dates: Scanner dates suppressed" for a scanner, "Video times: UTC", and the description; with nothing but a name it says "Nothing recorded beyond the name." Below it, **Link existing media**, and beside it **Current owners** with **All owners**, and **Home bases** (see [Home bases](#home-bases)). |
-| **Timeline** | The device's history: when each owner started and stopped using it, the events written on it, and the albums holding pictures it took.                                                                                                                                                                                                                                                                                    |
-| **Media**    | Every file linked to the device, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)).                                                                                                                                                                                                                     |
-| **Track**    | The route the device recorded (see [A device's track](#a-devices-track)).                                                                                                                                                                                                                                                                                                                                                 |
-| **Trips**    | The trips found in that route, newest first (see [A device's trips](#a-devices-trips)).                                                                                                                                                                                                                                                                                                                                   |
-| **Owners**   | Everyone who has owned it, with the dates (see [Say who owned a device](#say-who-owned-a-device)).                                                                                                                                                                                                                                                                                                                        |
+| Tab       | What it shows                                                                                                                                                                                         |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Info**  | The page opens here: the device's timeline, and beside it its settings, owners, home bases and description (see below).                                                                               |
+| **Media** | Every file linked to the device, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)). |
+| **Track** | The route the device recorded (see [A device's track](#a-devices-track)).                                                                                                                             |
+| **Trips** | The trips found in that route, newest first (see [A device's trips](#a-devices-trips)).                                                                                                               |
+
+**Track** and **Trips** are there only for a device that travels: one whose **Travels as** is set
+(see [How a device travels](#how-a-device-travels)), or one that has recorded a track. A camera or a
+scanner has neither.
+
+On the **Info** tab, the **timeline** on the left is the device's history: when each owner started
+and stopped using it, the events written on it, and the albums holding pictures it took. When it has
+none, it says "Nothing recorded for &lt;device&gt; yet. Owners with dates, and albums with photos it
+took, appear on its timeline." On the right, and above the timeline on a phone:
+
+- **Device** lists Make, Model, Serial number, Timezone, **Travels as**, "Capture dates: Scanner
+  dates suppressed" for a scanner and "Video times: UTC"; with nothing but a name it says "Nothing
+  recorded beyond the name." Under them is **Link existing media** (see
+  [Link the files a changed fingerprint matches](#link-the-files-a-changed-fingerprint-matches)).
+- **Owners** lists everyone who has owned it, with the dates (see
+  [Say who owned a device](#say-who-owned-a-device)).
+- **Home bases**, for a device that travels (see [Home bases](#home-bases)).
+- **About** shows the description, when there is one.
 
 The **Media** tab is the place to correct a camera whose clock was wrong: select its pictures and
 use **Set time**, as [Dates and places of pictures](dates-places.md#set-the-time-of-several-pictures-at-once)
@@ -186,7 +200,7 @@ device whose make, model or serial number you change later leaves the files alre
 that carry the new ones unclaimed.
 
 1. Open the device's page. The **Info** tab opens.
-2. Click **Link existing media**. The card explains: "Files are linked to their device when it is
+2. Click **Link existing media** under **Device**. The text under it explains: "Files are linked to their device when it is
    registered and when they are indexed. A make, model or serial number changed afterwards leaves
    the files it now matches unclaimed; this finds them by fingerprint and attaches them."
 3. Wait for the message, such as "Linked 412 files and updated dates on 37.", or "Nothing new to
@@ -195,7 +209,7 @@ that carry the new ones unclaimed.
 Linking also dates the files again by the device's settings, which is what "updated dates" counts.
 Files that are already linked to another device are left with it.
 
-The card is shown only to those who may change the device, and only when the device has a serial
+The button is shown only to those who may change the device, and only when the device has a serial
 number or both a make and a model. A device with a serial number is linked quickly; one known only
 by its make and model can take minutes in a large archive.
 
@@ -246,8 +260,8 @@ A device can have several owners over the years. The viewer lists them under the
 each with the dates, such as **Owned by** Ruby Wrenfield (2023–), so you can tell whose camera it
 was when a picture was taken.
 
-1. On the device's page, open the **Owners** tab: "Who has owned &lt;name&gt;, and when."
-2. Click **Add owner**.
+1. Open the device's page. **Owners** is on the right of the **Info** tab, the tab it opens on.
+2. Click **Add owner** beside the heading.
 3. Under **Person**, choose the person.
 4. Fill in **From** and **To** as a year, a month or a day: `2005`, `2005-06` or `2005-06-20`. Leave
    **To** empty while they still own it, and leave both empty if you do not know the dates.
@@ -258,8 +272,8 @@ The list shows the current owners first, then the earlier ones, with their dates
 **current**. Use the pencil beside an owner to change the dates (**Save changes**), and the bin to
 remove them; EiN asks "Remove &lt;person&gt; as an owner of &lt;device&gt;?" before it does.
 
-An owner without a **To** date counts as a current owner, in the page's header and on the
-**Info** tab's **Current owners** card. Dated ownership appears on the **Timeline** tab, as
+An owner without a **To** date counts as a current owner, in the page's header and under
+**Owners**. Dated ownership appears on the device's timeline, on the **Info** tab, as
 "&lt;person&gt; started using &lt;device&gt;" and "&lt;person&gt; stopped using &lt;device&gt;". A
 date that is not a year, month or day is refused with a message ending in "is not a date
 (YYYY[-MM[-DD]])".
@@ -275,13 +289,15 @@ within 50 or 30 m for 10 minutes, someone on foot within 25 m; and a jump faster
 250, 100 or 40 km/h is a GPS error. A device without the setting is shown as a car. Set it in the
 **Edit device** dialog (see
 [Change a device's settings](#change-a-devices-settings)); a phone carried on a sailing holiday is
-best left as it is, and a tracker that stays on the boat set to **Boat**.
+best left as it is, and a tracker that stays on the boat set to **Boat**. Setting it gives the
+device its **Track** and **Trips** tabs, and its **Home bases**; a device without it has them once
+it has recorded a track.
 
 ## Home bases
 
 A device's home bases are the places it belongs: the boat's home berth and winter yard, the house
-where the car is parked. Arriving at one ends a trip. The **Home bases** card on the **Info** tab
-lists them, each linking to its location.
+where the car is parked. Arriving at one ends a trip. **Home bases** on the **Info** tab of a device that
+travels lists them, each linking to its location.
 
 - Click **Add home base**, choose a location in the list, and click **Add**. A place that is not a
   location yet is added on the **Locations** page first (see [Locations and the map](places.md)).
@@ -289,7 +305,7 @@ lists them, each linking to its location.
 
 While a device has no home bases of its own, its owners' homes count instead: each place an owner
 lived while they owned the device, for the years both are true (see
-[Say who owned a device](#say-who-owned-a-device) and [Homes and residents](family.md#homes-and-residents)). The card then says
+[Say who owned a device](#say-who-owned-a-device) and [Homes and residents](family.md#homes-and-residents)). It then says
 "None set, so its owners' homes count:" and lists them with those years, such as "2010 – 2020". As
 soon as the device has one home base of its own, the owners' homes no longer count.
 
@@ -304,7 +320,7 @@ To keep a story with a device, such as where it was bought or when it broke, add
    **Written by** is you unless you choose someone else.
 3. Click **Add event**.
 
-The event appears on the device's **Timeline** tab. Events are described in full in
+The event appears on the device's timeline, on its **Info** tab. Events are described in full in
 [Family tree, events and homes](family.md).
 
 ## The device's cover
@@ -381,7 +397,8 @@ To place those, see [Dates and places of pictures](dates-places.md#where-a-pictu
 A GPX file is the format GPS trackers and tracking apps save routes in. If you know which device
 recorded a file, upload it on that device's page:
 
-1. Open the device's page and the **Track** tab.
+1. Open the device's page and the **Track** tab. A device with no track yet has the tab once its
+   **Travels as** is set in **Edit**.
 2. Click **Upload GPX** and choose one or more `.gpx` files.
 3. Wait for the message: "N new points added to the track", or "The track already had every point
    in it".
@@ -451,7 +468,8 @@ reporting with the screen off and sends what it recorded out of signal once it i
 tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
 the same address.
 
-1. Open the device's page and the **Track** tab. Under the route is **Live tracking from a phone**.
+1. Open the device's page and the **Track** tab (set **Travels as** first if it has none). Under the
+   route is **Live tracking from a phone**.
 2. Click **Turn on**. EiN gives the device a track if it has none, and shows a QR code and the
    server URL.
 3. On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
@@ -554,6 +572,7 @@ see the albums the trip may belong to under **Maybe in**.
 | A phone's videos are off by exactly its time zone.                                                                                                                                             | The phone keeps video times in UTC.                                                                                                                      | Turn on **Video times in UTC** for it.                                                                                                                                                                                       |
 | Scans are dated to the day they were scanned.                                                                                                                                                  | The scanner is not registered with **Scanner or digitizer**.                                                                                             | Register it with the setting on, or turn it on in **Edit device**.                                                                                                                                                           |
 | Registering says `device-create: /archive/devices/…: already exists`.                                                                                                                          | A device with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so `Davids 7D` and `David's 7D` clash.         | Choose another name, or open the existing device.                                                                                                                                                                            |
+| A device's page has no **Track** or **Trips** tab.                                                                                                                                             | It has no **Travels as** and has recorded no track, so EiN takes it for a device that does not travel.                                                   | **Edit** it and choose **Travels as**.                                                                                                                                                                                       |
 | The **Trips** tab says "No trips" though the device has a track.                                                                                                                               | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                                                     | Click **Find trips**, or **Find trips again**.                                                                                                                                                                               |
 | A trip ends at home in the middle of a holiday, or two trips should be one.                                                                                                                    | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                                                       | Click **Join to the trip before** on the second trip's card.                                                                                                                                                                 |
 | **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking from a phone** is missing.                                                                                 | You may not change this device.                                                                                                                          | Ask the person who registered it, or an administrator.                                                                                                                                                                       |

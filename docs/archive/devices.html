@@ -248,7 +248,6 @@ describes, is offered to whoever may change it, which the device&#39;s <strong>S
 <p>Click a card on the Devices page, or the device&#39;s name in the viewer. The page&#39;s address is
 <code>/devices/</code> and the device&#39;s folder name, such as <code>/devices/Jons_eTrex</code>, and a tab other than
 <strong>Info</strong> adds <code>?tab=</code> with the tab&#39;s name, such as <code>?tab=track</code>.</p>
-<figure class="shot"><a href="../../assets/shots/device@2x.webp"><img src="../../assets/shots/device.webp" srcset="../../assets/shots/device.webp 1x, ../../assets/shots/device@2x.webp 2x" alt="The page of Ruby's iPhone: a banner picture, the owner Ruby Wrenfield, &quot;75 files · 2025–2026&quot;, the tabs Info, Timeline, Media, Track and Owners, the Settings card with Make Apple, Model iPhone 15 and Timezone Pacific/Auckland, the Link existing media card, and the Current owners card" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A device&#39;s page opens on its settings, with the button that links the pictures a changed fingerprint matches.</figcaption></figure>
 <p>Under the name, the header shows the current owners (up to three, then &quot;and N more&quot;), how many
 files the device took and in which years, such as <strong>75 files · 2025–2026</strong> (<strong>N+ files</strong> when
 counting stopped at its limit), and the device&#39;s labels. For those who may change the device, the
@@ -263,11 +262,7 @@ phone they are all under ⋮.</p>
 </thead>
 <tbody><tr>
 <td><strong>Info</strong></td>
-<td>The page opens here. The <strong>Settings</strong> card lists Make, Model, Serial number, Timezone, <strong>Travels as</strong>, &quot;Capture dates: Scanner dates suppressed&quot; for a scanner, &quot;Video times: UTC&quot;, and the description; with nothing but a name it says &quot;Nothing recorded beyond the name.&quot; Below it, <strong>Link existing media</strong>, and beside it <strong>Current owners</strong> with <strong>All owners</strong>, and <strong>Home bases</strong> (see <a href="#home-bases">Home bases</a>).</td>
-</tr>
-<tr>
-<td><strong>Timeline</strong></td>
-<td>The device&#39;s history: when each owner started and stopped using it, the events written on it, and the albums holding pictures it took.</td>
+<td>The page opens here: the device&#39;s timeline, and beside it its settings, owners, home bases and description (see below).</td>
 </tr>
 <tr>
 <td><strong>Media</strong></td>
@@ -281,12 +276,25 @@ phone they are all under ⋮.</p>
 <td><strong>Trips</strong></td>
 <td>The trips found in that route, newest first (see <a href="#a-devices-trips">A device&#39;s trips</a>).</td>
 </tr>
-<tr>
-<td><strong>Owners</strong></td>
-<td>Everyone who has owned it, with the dates (see <a href="#say-who-owned-a-device">Say who owned a device</a>).</td>
-</tr>
 </tbody></table>
 </div>
+<p><strong>Track</strong> and <strong>Trips</strong> are there only for a device that travels: one whose <strong>Travels as</strong> is set
+(see <a href="#how-a-device-travels">How a device travels</a>), or one that has recorded a track. A camera or a
+scanner has neither.</p>
+<p>On the <strong>Info</strong> tab, the <strong>timeline</strong> on the left is the device&#39;s history: when each owner started
+and stopped using it, the events written on it, and the albums holding pictures it took. When it has
+none, it says &quot;Nothing recorded for &lt;device&gt; yet. Owners with dates, and albums with photos it
+took, appear on its timeline.&quot; On the right, and above the timeline on a phone:</p>
+<ul>
+<li><strong>Device</strong> lists Make, Model, Serial number, Timezone, <strong>Travels as</strong>, &quot;Capture dates: Scanner
+dates suppressed&quot; for a scanner and &quot;Video times: UTC&quot;; with nothing but a name it says &quot;Nothing
+recorded beyond the name.&quot; Under them is <strong>Link existing media</strong> (see
+<a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a>).</li>
+<li><strong>Owners</strong> lists everyone who has owned it, with the dates (see
+<a href="#say-who-owned-a-device">Say who owned a device</a>).</li>
+<li><strong>Home bases</strong>, for a device that travels (see <a href="#home-bases">Home bases</a>).</li>
+<li><strong>About</strong> shows the description, when there is one.</li>
+</ul>
 <p>The <strong>Media</strong> tab is the place to correct a camera whose clock was wrong: select its pictures and
 use <strong>Set time</strong>, as <a href="dates-places.html#set-the-time-of-several-pictures-at-once">Dates and places of pictures</a>
 describes.</p>
@@ -298,7 +306,7 @@ device whose make, model or serial number you change later leaves the files alre
 that carry the new ones unclaimed.</p>
 <ol>
 <li>Open the device&#39;s page. The <strong>Info</strong> tab opens.</li>
-<li>Click <strong>Link existing media</strong>. The card explains: &quot;Files are linked to their device when it is
+<li>Click <strong>Link existing media</strong> under <strong>Device</strong>. The text under it explains: &quot;Files are linked to their device when it is
 registered and when they are indexed. A make, model or serial number changed afterwards leaves
 the files it now matches unclaimed; this finds them by fingerprint and attaches them.&quot;</li>
 <li>Wait for the message, such as &quot;Linked 412 files and updated dates on 37.&quot;, or &quot;Nothing new to
@@ -306,7 +314,7 @@ link or update — every matching file already has this device policy.&quot;</li
 </ol>
 <p>Linking also dates the files again by the device&#39;s settings, which is what &quot;updated dates&quot; counts.
 Files that are already linked to another device are left with it.</p>
-<p>The card is shown only to those who may change the device, and only when the device has a serial
+<p>The button is shown only to those who may change the device, and only when the device has a serial
 number or both a make and a model. A device with a serial number is linked quickly; one known only
 by its make and model can take minutes in a large archive.</p>
 <h2 id="change-a-devices-settings">Change a device&#39;s settings<a class="anchor" href="#change-a-devices-settings" aria-label="Link to this section"></a></h2>
@@ -351,8 +359,8 @@ how scans are dated.</p>
 each with the dates, such as <strong>Owned by</strong> Ruby Wrenfield (2023–), so you can tell whose camera it
 was when a picture was taken.</p>
 <ol>
-<li>On the device&#39;s page, open the <strong>Owners</strong> tab: &quot;Who has owned &lt;name&gt;, and when.&quot;</li>
-<li>Click <strong>Add owner</strong>.</li>
+<li>Open the device&#39;s page. <strong>Owners</strong> is on the right of the <strong>Info</strong> tab, the tab it opens on.</li>
+<li>Click <strong>Add owner</strong> beside the heading.</li>
 <li>Under <strong>Person</strong>, choose the person.</li>
 <li>Fill in <strong>From</strong> and <strong>To</strong> as a year, a month or a day: <code>2005</code>, <code>2005-06</code> or <code>2005-06-20</code>. Leave
 <strong>To</strong> empty while they still own it, and leave both empty if you do not know the dates.</li>
@@ -362,8 +370,8 @@ was when a picture was taken.</p>
 &quot;since 2019&quot;, &quot;until 2023&quot;, or &quot;dates unknown&quot;. A current owner with a start date has the badge
 <strong>current</strong>. Use the pencil beside an owner to change the dates (<strong>Save changes</strong>), and the bin to
 remove them; EiN asks &quot;Remove &lt;person&gt; as an owner of &lt;device&gt;?&quot; before it does.</p>
-<p>An owner without a <strong>To</strong> date counts as a current owner, in the page&#39;s header and on the
-<strong>Info</strong> tab&#39;s <strong>Current owners</strong> card. Dated ownership appears on the <strong>Timeline</strong> tab, as
+<p>An owner without a <strong>To</strong> date counts as a current owner, in the page&#39;s header and under
+<strong>Owners</strong>. Dated ownership appears on the device&#39;s timeline, on the <strong>Info</strong> tab, as
 &quot;&lt;person&gt; started using &lt;device&gt;&quot; and &quot;&lt;person&gt; stopped using &lt;device&gt;&quot;. A
 date that is not a year, month or day is refused with a message ending in &quot;is not a date
 (YYYY[-MM[-DD]])&quot;.</p>
@@ -377,11 +385,13 @@ within 50 or 30 m for 10 minutes, someone on foot within 25 m; and a jump faster
 250, 100 or 40 km/h is a GPS error. A device without the setting is shown as a car. Set it in the
 <strong>Edit device</strong> dialog (see
 <a href="#change-a-devices-settings">Change a device&#39;s settings</a>); a phone carried on a sailing holiday is
-best left as it is, and a tracker that stays on the boat set to <strong>Boat</strong>.</p>
+best left as it is, and a tracker that stays on the boat set to <strong>Boat</strong>. Setting it gives the
+device its <strong>Track</strong> and <strong>Trips</strong> tabs, and its <strong>Home bases</strong>; a device without it has them once
+it has recorded a track.</p>
 <h2 id="home-bases">Home bases<a class="anchor" href="#home-bases" aria-label="Link to this section"></a></h2>
 <p>A device&#39;s home bases are the places it belongs: the boat&#39;s home berth and winter yard, the house
-where the car is parked. Arriving at one ends a trip. The <strong>Home bases</strong> card on the <strong>Info</strong> tab
-lists them, each linking to its location.</p>
+where the car is parked. Arriving at one ends a trip. <strong>Home bases</strong> on the <strong>Info</strong> tab of a device that
+travels lists them, each linking to its location.</p>
 <ul>
 <li>Click <strong>Add home base</strong>, choose a location in the list, and click <strong>Add</strong>. A place that is not a
 location yet is added on the <strong>Locations</strong> page first (see <a href="places.html">Locations and the map</a>).</li>
@@ -389,7 +399,7 @@ location yet is added on the <strong>Locations</strong> page first (see <a href=
 </ul>
 <p>While a device has no home bases of its own, its owners&#39; homes count instead: each place an owner
 lived while they owned the device, for the years both are true (see
-<a href="#say-who-owned-a-device">Say who owned a device</a> and <a href="family.html#homes-and-residents">Homes and residents</a>). The card then says
+<a href="#say-who-owned-a-device">Say who owned a device</a> and <a href="family.html#homes-and-residents">Homes and residents</a>). It then says
 &quot;None set, so its owners&#39; homes count:&quot; and lists them with those years, such as &quot;2010 – 2020&quot;. As
 soon as the device has one home base of its own, the owners&#39; homes no longer count.</p>
 <p>Adding and removing are offered to those who may change the device.</p>
@@ -401,7 +411,7 @@ soon as the device has one home base of its own, the owners&#39; homes no longer
 <strong>Written by</strong> is you unless you choose someone else.</li>
 <li>Click <strong>Add event</strong>.</li>
 </ol>
-<p>The event appears on the device&#39;s <strong>Timeline</strong> tab. Events are described in full in
+<p>The event appears on the device&#39;s timeline, on its <strong>Info</strong> tab. Events are described in full in
 <a href="family.html">Family tree, events and homes</a>.</p>
 <h2 id="the-devices-cover">The device&#39;s cover<a class="anchor" href="#the-devices-cover" aria-label="Link to this section"></a></h2>
 <p>The picture on a device&#39;s card and behind its page&#39;s header is its cover: the newest picture linked
@@ -481,7 +491,8 @@ To place those, see <a href="dates-places.html#where-a-pictures-place-comes-from
 <p>A GPX file is the format GPS trackers and tracking apps save routes in. If you know which device
 recorded a file, upload it on that device&#39;s page:</p>
 <ol>
-<li>Open the device&#39;s page and the <strong>Track</strong> tab.</li>
+<li>Open the device&#39;s page and the <strong>Track</strong> tab. A device with no track yet has the tab once its
+<strong>Travels as</strong> is set in <strong>Edit</strong>.</li>
 <li>Click <strong>Upload GPX</strong> and choose one or more <code>.gpx</code> files.</li>
 <li>Wait for the message: &quot;N new points added to the track&quot;, or &quot;The track already had every point
 in it&quot;.</li>
@@ -539,7 +550,8 @@ reporting with the screen off and sends what it recorded out of signal once it i
 tracker that posts its position over HTTP, in the OsmAnd protocol or as a GPRMC sentence, can use
 the same address.</p>
 <ol>
-<li>Open the device&#39;s page and the <strong>Track</strong> tab. Under the route is <strong>Live tracking from a phone</strong>.</li>
+<li>Open the device&#39;s page and the <strong>Track</strong> tab (set <strong>Travels as</strong> first if it has none). Under the
+route is <strong>Live tracking from a phone</strong>.</li>
 <li>Click <strong>Turn on</strong>. EiN gives the device a track if it has none, and shows a QR code and the
 server URL.</li>
 <li>On the phone, install Traccar Client, open its settings and scan the QR code. It fills in the
@@ -670,6 +682,11 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <td>Registering says <code>device-create: /archive/devices/…: already exists</code>.</td>
 <td>A device with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so <code>Davids 7D</code> and <code>David&#39;s 7D</code> clash.</td>
 <td>Choose another name, or open the existing device.</td>
+</tr>
+<tr>
+<td>A device&#39;s page has no <strong>Track</strong> or <strong>Trips</strong> tab.</td>
+<td>It has no <strong>Travels as</strong> and has recorded no track, so EiN takes it for a device that does not travel.</td>
+<td><strong>Edit</strong> it and choose <strong>Travels as</strong>.</td>
 </tr>
 <tr>
 <td>The <strong>Trips</strong> tab says &quot;No trips&quot; though the device has a track.</td>

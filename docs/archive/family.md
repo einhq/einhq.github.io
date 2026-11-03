@@ -271,8 +271,8 @@ events are always generic, and need both a **Date** and a **Description**.
   account that added it when it has no writer. If you may change it, a pencil on the note opens **Edit event**, where you change the date, the text or
   the writer and press **Save**, or press **Delete**. A deleted event goes to your trash, and the
   message "Event moved to the trash" has **Undo**.
-- **On a location or a device**, the event appears on its timeline: a location's is on its **Info**
-  tab, a device's on its **Timeline** tab. It cannot be changed in the Web UI afterwards.
+- **On a location or a device**, the event appears on its timeline, on its **Info** tab. It cannot
+  be changed in the Web UI afterwards.
 
 ## What appears on a timeline
 
