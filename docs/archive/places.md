@@ -393,8 +393,9 @@ Zoom out to find them, or keep a bookmark of the view you use; see
 ### Move around the map
 
 Drag the map to move it, and zoom with the mouse wheel or by pinching. The map has no zoom buttons,
-and clicking a pile never zooms: it opens the pile. A small spinner in the top-left corner shows
-while the map reads what is in view.
+and clicking a pile never zooms: it opens the pile. A small spinner under the buttons in the
+top-right corner shows while the map reads what is in view after you move it. It does not show while
+the map follows a live device.
 
 ### Open pictures and piles
 
