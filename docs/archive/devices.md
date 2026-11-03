@@ -390,7 +390,33 @@ A rejected position is not drawn, counted in **Points** or used for trips. A jum
 back, as when a logger starts again somewhere else, keeps its positions, and the line is broken
 there instead of drawn across. A route flown with the logger on is neither: every one of its steps
 is fast. The same rules apply however the positions arrive: a GPX file uploaded or staged, or a
-phone tracking live. `track-read --rejected` reads the rejected positions too, marked.
+phone tracking live. `track-read --rejected` reads the rejected positions too, marked, and
+`track-read --only-rejected` reads them alone.
+
+### Reject or accept a position by hand
+
+The rules can be wrong both ways: a glitch they miss stays on the map, and a real stretch they
+reject, such as a flight with the logger off that lands near where it left, is left out. On the
+**Track** tab the rejected positions are drawn faintly in red, each with a dot, and the panel over
+the map says how many there are. Click near a position, drawn or rejected, and the panel says when
+it was recorded and what EiN made of it. If you may change the device, it also offers:
+
+- **Reject**, on a drawn position: it is left out, whatever the rules say.
+- **Accept**, on a rejected one: it is drawn, whatever the rules say. When it is one of a run of
+  rejected positions, **Accept all** takes the whole run.
+- **Undo**, on a position you rejected or accepted: it goes back to what the rules make of it.
+
+A position rejected by hand is left out before the rules judge the positions around it, so the
+line can break somewhere else once it is gone. To do the same for a time span, use `track-mark`
+with `--reject`, `--accept` or `--clear`:
+
+```bash
+# in EiN's terminal
+track-mark ruby-iphone --from 2025-12-24T13:00:00Z --to 2025-12-24T15:30:00Z --accept
+```
+
+`--from` and `--to` are both optional: without them the whole track is marked, so
+`track-mark ruby-iphone --clear` hands every position back to the rules.
 
 A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
 the route really was.
