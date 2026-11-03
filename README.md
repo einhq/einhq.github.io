@@ -74,15 +74,17 @@ the first (Core) is a module's, in a folder named after it. EiN draws the genera
 installation instead (the reference pages, and a module's `commands.md`), and a link to one opens
 its live page there. A change here reaches an installation with its next image.
 
-The pages under `docs/reference/` that list commands, settings, environment variables and node types
-are written by `make reference` from a running EiN that has every module, over its SSH:
+The pages under `docs/reference/` that list commands, settings, environment variables and node types,
+and each module's `commands.md`, are written by `make reference` from a running EiN that has every
+module, over its SSH:
 
 ```bash
 make reference SSH='ssh -p 2222 admin@ein.local'
 ```
 
-It keeps what describes EiN (a setting's default, never its value there). Run it when a command, a
-setting, a variable or a node type changes, and commit what it writes; never edit those pages by hand.
+It keeps what describes EiN (a setting's default, never its value there), and formats the pages as the
+pre-commit hook checks them, so a changed command changes only its own lines. Run it when a command,
+a setting, a variable or a node type changes, and commit what it writes; never edit those pages by hand.
 
 ## Taking the screenshots again
 

@@ -57,7 +57,9 @@ thumbs: ## The gallery's thumbnails under assets/shots/thumbs/, from the shots' 
 docs: ## The documentation's HTML pages and search index under docs/, from its Markdown (docs/SUMMARY.md lists the pages)
 	deno task docs
 
-# What a running EiN says about itself, over SSH as its administrator, then the pages made from it.
+# What a running EiN says about itself, over SSH as its administrator, then the pages made from it,
+# formatted as the pre-commit hook checks them: a module's commands.md is formatted like any page, the
+# pages under docs/reference/ are left as written (deno.jsonc excludes them).
 # SSH is the command that reaches its shell; with a password it asks for it once per command.
 SSH ?= ssh -p 2222 admin@localhost
 reference: ## The reference pages under docs/reference/ from a running EiN with every module (SSH='ssh -p 2222 admin@host')
@@ -67,6 +69,7 @@ reference: ## The reference pages under docs/reference/ from a running EiN with 
 	$(SSH) 'JSON_OUTPUT=1 docs env' > build/reference/environment.json
 	$(SSH) 'JSON_OUTPUT=1 docs node-types' > build/reference/node-types.json
 	deno task reference
+	deno fmt docs/
 	@$(MAKE) --no-print-directory docs
 
 serve: ## Serve the site on http://localhost:4507
