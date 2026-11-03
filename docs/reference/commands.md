@@ -206,7 +206,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-token](commands-core.md#track-token) | Show, make or turn off the link a phone or GPS tracker posts a track's fixes to without signing in. |
 | [trash](commands-core.md#trash) | Move nodes into the reader's trash, alone or as one batch, list it, restore entries, or empty it. |
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
-| [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build. |
+| [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build, and write the installation's third-party notices there. |
 | [ui-icons](commands-core.md#ui-icons) | Tabler icons by name, as SVG markup, for the Web UI. |
 | [ui-nav](commands-core.md#ui-nav) | The Web UI's sidebar, top bar, panels and map layers for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
 | [uniq](commands-core.md#uniq) | Report or omit repeated lines. |

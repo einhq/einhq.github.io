@@ -2771,7 +2771,7 @@ mod <span class="hljs-built_in">groups</span> archive --everyone</code></pre></d
 </tr>
 <tr>
 <td><code>&lt;options&gt;</code></td>
-<td>k=v,... — any: readonly, noaudit (paths, separated by <code>:</code>, whose writes the audit trail skips); sftp: host, port, user, path, key (identity file), hostkey (SHA256:… to pin), uid, gid.</td>
+<td>k=v,... — any: readonly, noaudit (paths, separated by <code>:</code>, whose writes the audit trail skips), nopublish (its events reach no queue, so no pipeline or service bound to one sees them); sftp: host, port, user, path, key (identity file), hostkey (SHA256:… to pin), uid, gid.</td>
 </tr>
 </tbody></table>
 </div>
@@ -5259,7 +5259,7 @@ trash empty --older-than 30</code></pre></div>
 </div>
 <h2 id="u">U<a class="anchor" href="#u" aria-label="Link to this section"></a></h2>
 <h3 id="ui-build"><code>ui-build</code><a class="anchor" href="#ui-build" aria-label="Link to this section"></a></h3>
-<p>Bundle modules&#39; pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build.</p>
+<p>Bundle modules&#39; pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build, and write the installation&#39;s third-party notices there.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>ui-build [--all] &lt;module&gt;...</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>

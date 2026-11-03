@@ -1827,7 +1827,7 @@ mount [--save] [-a] <path> <type> <options>
 | --- | --- |
 | `<path>` | mount point, made as a directory when it is missing. |
 | `<type>` | type: memory, pg, filesystem, command, sftp. |
-| `<options>` | k=v,... — any: readonly, noaudit (paths, separated by `:`, whose writes the audit trail skips); sftp: host, port, user, path, key (identity file), hostkey (SHA256:… to pin), uid, gid. |
+| `<options>` | k=v,... — any: readonly, noaudit (paths, separated by `:`, whose writes the audit trail skips), nopublish (its events reach no queue, so no pipeline or service bound to one sees them); sftp: host, port, user, path, key (identity file), hostkey (SHA256:… to pin), uid, gid. |
 
 | Option | What it does |
 | --- | --- |
@@ -3415,7 +3415,7 @@ truncate [-s <string>] <path>
 
 ### `ui-build`
 
-Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build.
+Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build, and write the installation's third-party notices there.
 
 <small>changes things</small>
 
