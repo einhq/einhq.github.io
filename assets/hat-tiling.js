@@ -1,6 +1,7 @@
 /**
  * The einstein hat and a patch of its tiling, as EiN's Web UI lays them behind its page
- * headers (ein/core, src/builtin/ui/src/client/lib/hat.ts and hat-tiling.ts, MIT).
+ * headers (ein/core, src/builtin/ui/src/client/lib/hat.ts and hat-tiling.ts, by
+ * the same author and MIT here).
  *
  * The patch is 7,010 hats, three substitution steps of the hat's metatiles as isohedral/hatviz
  * (BSD-3-Clause) builds them. Five base-36 characters a hat: its orientation k (the hat of

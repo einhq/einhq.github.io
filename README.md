@@ -119,7 +119,7 @@ also type-checks the capture tool.
 ## Licences
 
 - The page, its scripts and styles: MIT (`LICENSE`).
-- The hat tiling comes from ein/core (MIT), which builds it as isohedral/hatviz (BSD-3-Clause) does.
+- The hat tiling comes from ein/core, whose author gives it to this site under MIT; core builds it as isohedral/hatviz (BSD-3-Clause) does.
 - Familjen Grotesk, Fragment Mono, Mochiy Pop One (the wordmark, as EiN's Web UI draws it, and the headings) and Glass
   Antiqua (the dedication): SIL Open Font License 1.1 (`assets/fonts/OFL-*.txt`).
 - The screenshots and node pictures show the demo archive. Its story and generated media are CC0;

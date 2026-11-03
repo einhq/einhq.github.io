@@ -4,7 +4,7 @@ This page is for developers who want to run EiN from its source: which repositor
 
 ## The repositories
 
-EiN is several repositories in the [einhq](https://github.com/einhq) organisation on GitHub, all under the MIT licence; what they are built on keeps its own, as [Third-party licences](#third-party-licences) explains. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.
+EiN is several repositories in the [einhq](https://github.com/einhq) organisation on GitHub, under the licences [The licence](#the-licence) gives; what they are built on keeps its own, as [Third-party licences](#third-party-licences) explains. Core names no module and no service: each is a repository of its own, and a deployment chooses which ones it runs.
 
 | Repository                                                                                                   | What it is                                                                                                           | Language                                 |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -23,9 +23,17 @@ EiN is several repositories in the [einhq](https://github.com/einhq) organisatio
 
 Core takes the shell and SSH libraries from JSR, not from a checkout: its `deno.jsonc` imports `jsr:@ein/bash-executor@^3.0.0` and `jsr:@ein/ssh2-ts@1.1.1`. A change in one of them reaches core once it is published there.
 
+## The licence
+
+Core, its modules and the media service are under the [Elastic License 2.0](https://www.elastic.co/licensing/elastic-license) (ELv2), with one permission added; each repository's `LICENSE` holds the text. The libraries (bash-parser, bash-executor, ssh2), db, llm, deploy and this site are under the MIT licence.
+
+The Elastic License lets anyone use, copy, change and pass on EiN, also commercially: a family or a company may run it for its own use, on its own machines or rented ones. What it does not allow without a separate licence from EiN's author is offering EiN to others as a hosted or managed service. The added permission allows one such service: hosting EiN for your family, relatives and friends, as long as no one is charged for it; sharing what running it actually costs among them is not a charge. Hosting EiN for customers, members or the public, or as part of a paid product or service, needs the separate licence.
+
+What was published before the change, on 3 November 2026, remains under the MIT licence it was published with.
+
 ## Third-party licences
 
-EiN's own code is under the MIT licence. The images carry code and fonts made by others, each under its own licence. All three are built on the same Debian 13 (trixie) release and carry Debian's packages unmodified, some of them under the GPL or the LGPL; each image's `NOTICE.md`, in `/usr/share/doc/` inside it, says the same about them, and where their source is.
+EiN's own code is under the licences [The licence](#the-licence) gives. The images carry code and fonts made by others, each under its own licence. All three are built on the same Debian 13 (trixie) release and carry Debian's packages unmodified, some of them under the GPL or the LGPL; each image's `NOTICE.md`, in `/usr/share/doc/` inside it, says the same about them, and where their source is.
 
 - **Core's image** is Debian, Deno's own binary (MIT licence) and core, which is built from the npm, JSR and deno.land packages its `deno.lock` pins, all under permissive licences (MIT, ISC, BSD, Apache-2.0, 0BSD); the Web UI uses the fonts Inter and Mochiy Pop One (SIL Open Font License 1.1) and Special Elite (Apache-2.0). `deno task bundle-ui` writes every package's and font's licence and notice into `public/licences.txt` beside the Web UI, and **About EiN** links to it as **third-party notices**; on a running instance it is at `/public/licences.txt`. The licence files of the fonts are beside them, in `src/builtin/ui/src/client/public/fonts/`.
 - **The database image** is PostgreSQL 18 with TimescaleDB, pgvector and PostGIS, from PostgreSQL's and Timescale's apt repositories. EiN's log keeps its entries with TimescaleDB's retention and compression policies, which are TimescaleDB's community features under the [Timescale License](https://github.com/timescale/timescaledb/blob/main/tsl/LICENSE-TIMESCALE), not Apache-2.0. It allows running TimescaleDB yourself, for any purpose and in products built on it, but not offering TimescaleDB itself to others as a hosted database service. The image also carries PostGIS, under the GPL; the db repository changes and builds none of it, and its `NOTICE.md` says where its source, at the version the image holds, is.
