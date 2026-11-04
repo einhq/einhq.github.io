@@ -19,13 +19,13 @@ start to finish.
 
 The Archive runs these services for its processing:
 
-| Service          | What it does                                                                                                                              |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                                |
-| `cpu`            | The worker for work done on this machine, such as reading metadata, making thumbnails and transcoding video                               |
-| `models`         | The worker for work done by a model in the [media service](../ems/index.md), such as finding faces or transcribing speech                 |
-| `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; at the default `0` it runs idle and takes no work      |
-| `media-heal`     | Finds files that are missing something and announces them again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)) |
+| Service          | What it does                                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                                 |
+| `media-worker`   | The worker for the rest: reading metadata, thumbnails and video renditions the media service makes while it waits, matching faces, staging |
+| `models`         | The worker for work done by a model in the [media service](../ems/index.md), such as finding faces or transcribing speech                  |
+| `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; at the default `0` it runs idle and takes no work       |
+| `media-heal`     | Finds files that are missing something and announces them again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed))  |
 
 Its other services, which keep albums, person covers, label suggestions and staging up to date,
 are listed in [Services and logs](../admin/services-logs.md). Most of the model work and much of
@@ -71,7 +71,7 @@ show **waiting for EMS** on the **Dashboard**.
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the Archive's workers take it:
 
-- `cpu` takes `unzip`, `ingest`, `stills`, `face-assign`, `speaker-assign`,
+- `media-worker` takes `unzip`, `ingest`, `stills`, `face-assign`, `speaker-assign`,
   `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`.
 - `models` takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and
   `shots`, and `models-second` the same kinds in the reverse order.
@@ -88,7 +88,7 @@ progress is picked up again. [Configuration](../admin/configuration.md) explains
 
 | Setting                                                                           | Default   | What it decides                                                                                                                                              |
 | --------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)                         | `2`       | How much CPU work the `cpu` worker runs at once. A transcode takes two slots, other kinds one.                                                               |
+| [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)                         | `2`       | How much work the `media-worker` worker runs at once. A transcode takes two slots, other kinds one.                                                          |
 | [`CFG_CPU_NON_ENTRY_SLOTS`](../reference/settings.md#cfg_cpu_non_entry_slots)     | `1`       | Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits.               |
 | [`CFG_CPU_WORKERS`](../reference/settings.md#cfg_cpu_workers)                     | `4`       | The most CPU jobs in flight; the slots are the real limit                                                                                                    |
 | [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                     | `2`       | Requests the `models` worker keeps in flight against the media service. Size it to what the media service runs at once.                                      |

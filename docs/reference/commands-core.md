@@ -2927,7 +2927,7 @@ service-enable <name>
 
 ### `service-list`
 
-List services, with how often each has restarted.
+List services, with the module that ships each and how often it has restarted.
 
 <small>reads only</small>
 

@@ -1181,99 +1181,6 @@
 </tbody></table>
 </div>
 <h2 id="processing">Processing<a class="anchor" href="#processing" aria-label="Link to this section"></a></h2>
-<h3 id="cfg_cpu_slots"><code>CFG_CPU_SLOTS</code><a class="anchor" href="#cfg_cpu_slots" aria-label="Link to this section"></a></h3>
-<p><strong>CPU budget for media work</strong>. How much CPU-bound media work runs at once. Each job declares what it costs, so one video transcode can exclude a face assignment on a small box.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td><code>2</code></td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>number</td>
-</tr>
-<tr>
-<td>Restarts</td>
-<td><code>cpu</code></td>
-</tr>
-<tr>
-<td>From the module</td>
-<td>Archive</td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code><a class="anchor" href="#cfg_cpu_non_entry_slots" aria-label="Link to this section"></a></h3>
-<p><strong>CPU slots for downstream media</strong>. Soft reservation for non-ingest CPU work. Ingest borrows unused slots, but ready downstream jobs get them first so a continuous ingest backlog cannot starve the rest of the pipeline.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td><code>1</code></td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>number</td>
-</tr>
-<tr>
-<td>Restarts</td>
-<td><code>cpu</code></td>
-</tr>
-<tr>
-<td>From the module</td>
-<td>Archive</td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="cfg_cpu_workers"><code>CFG_CPU_WORKERS</code><a class="anchor" href="#cfg_cpu_workers" aria-label="Link to this section"></a></h3>
-<p><strong>CPU worker slots</strong>. Upper bound on concurrent CPU media jobs. The budget above is the real limit; this only caps how many can be in flight.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td><code>4</code></td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>number</td>
-</tr>
-<tr>
-<td>Restarts</td>
-<td><code>cpu</code></td>
-</tr>
-<tr>
-<td>From the module</td>
-<td>Archive</td>
-</tr>
-</tbody></table>
-</div>
 <h3 id="cfg_pipeline_entry_admission_percent"><code>CFG_PIPELINE_ENTRY_ADMISSION_PERCENT</code><a class="anchor" href="#cfg_pipeline_entry_admission_percent" aria-label="Link to this section"></a></h3>
 <p><strong>Entry pipeline reservation (%)</strong>. Share of trigger claims that first try pipelines declaring options.entryPoint. Empty reserved claims fall back to the ordinary fair rotation.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1352,6 +1259,99 @@
 <tr>
 <td>Kind</td>
 <td>string</td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_cpu_slots"><code>CFG_CPU_SLOTS</code><a class="anchor" href="#cfg_cpu_slots" aria-label="Link to this section"></a></h3>
+<p><strong>Media worker budget</strong>. How much media work the media-worker service runs at once: thumbnails, renditions, fingerprints, face matching, duplicates and staging. Each job declares what it costs, so one video transcode can exclude a face assignment on a small box.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>media-worker</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_cpu_workers"><code>CFG_CPU_WORKERS</code><a class="anchor" href="#cfg_cpu_workers" aria-label="Link to this section"></a></h3>
+<p><strong>Media worker jobs in flight</strong>. Upper bound on the media worker&#39;s concurrent jobs. The budget above is the real limit; this only caps how many can be in flight.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>media-worker</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Archive</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code><a class="anchor" href="#cfg_cpu_non_entry_slots" aria-label="Link to this section"></a></h3>
+<p><strong>Media worker slots for downstream work</strong>. Soft reservation in the media worker&#39;s budget for work after ingest. Ingest borrows unused slots, but ready downstream jobs get them first so a continuous ingest backlog cannot starve the rest of the pipeline.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>number</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>media-worker</code></td>
 </tr>
 <tr>
 <td>From the module</td>

@@ -180,7 +180,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [service-add](commands-core.md#service-add) | Add a service by linking to a service script directory. |
 | [service-disable](commands-core.md#service-disable) | Disable a service. |
 | [service-enable](commands-core.md#service-enable) | Enable a service. |
-| [service-list](commands-core.md#service-list) | List services, with how often each has restarted. |
+| [service-list](commands-core.md#service-list) | List services, with the module that ships each and how often it has restarted. |
 | [service-remove](commands-core.md#service-remove) | Remove a service. |
 | [service-restart](commands-core.md#service-restart) | Restart a service. |
 | [service-start](commands-core.md#service-start) | Start a service. |

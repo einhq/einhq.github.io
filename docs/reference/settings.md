@@ -462,42 +462,6 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 
 ## Processing
 
-### `CFG_CPU_SLOTS`
-
-**CPU budget for media work**. How much CPU-bound media work runs at once. Each job declares what it costs, so one video transcode can exclude a face assignment on a small box.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | `2` |
-| Kind | number |
-| Restarts | `cpu` |
-| From the module | Archive |
-
-### `CFG_CPU_NON_ENTRY_SLOTS`
-
-**CPU slots for downstream media**. Soft reservation for non-ingest CPU work. Ingest borrows unused slots, but ready downstream jobs get them first so a continuous ingest backlog cannot starve the rest of the pipeline.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | `1` |
-| Kind | number |
-| Restarts | `cpu` |
-| From the module | Archive |
-
-### `CFG_CPU_WORKERS`
-
-**CPU worker slots**. Upper bound on concurrent CPU media jobs. The budget above is the real limit; this only caps how many can be in flight.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | `4` |
-| Kind | number |
-| Restarts | `cpu` |
-| From the module | Archive |
-
 ### `CFG_PIPELINE_ENTRY_ADMISSION_PERCENT`
 
 **Entry pipeline reservation (%)**. Share of trigger claims that first try pipelines declaring options.entryPoint. Empty reserved claims fall back to the ordinary fair rotation.
@@ -530,6 +494,42 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | empty |
 | Kind | string |
+| From the module | Archive |
+
+### `CFG_CPU_SLOTS`
+
+**Media worker budget**. How much media work the media-worker service runs at once: thumbnails, renditions, fingerprints, face matching, duplicates and staging. Each job declares what it costs, so one video transcode can exclude a face assignment on a small box.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `2` |
+| Kind | number |
+| Restarts | `media-worker` |
+| From the module | Archive |
+
+### `CFG_CPU_WORKERS`
+
+**Media worker jobs in flight**. Upper bound on the media worker's concurrent jobs. The budget above is the real limit; this only caps how many can be in flight.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `4` |
+| Kind | number |
+| Restarts | `media-worker` |
+| From the module | Archive |
+
+### `CFG_CPU_NON_ENTRY_SLOTS`
+
+**Media worker slots for downstream work**. Soft reservation in the media worker's budget for work after ingest. Ingest borrows unused slots, but ready downstream jobs get them first so a continuous ingest backlog cannot starve the rest of the pipeline.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `1` |
+| Kind | number |
+| Restarts | `media-worker` |
 | From the module | Archive |
 
 ### `CFG_MODEL_KIND_QUANTUM_MS`

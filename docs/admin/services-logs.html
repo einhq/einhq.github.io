@@ -155,9 +155,9 @@
 <td>Turns changes in the tree into the media and location facts that pipelines trigger on</td>
 </tr>
 <tr>
-<td><code>cpu</code></td>
+<td><code>media-worker</code></td>
 <td>archive</td>
-<td>Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints</td>
+<td>Worker for the media pipelines&#39; other steps: thumbnails, renditions, fingerprints and the media service&#39;s encodes it waits on, face matching, duplicates, staging</td>
 </tr>
 <tr>
 <td><code>models</code></td>
@@ -221,6 +221,7 @@
 <p>The card lists every service, one row each, and asks again every 10 seconds while the tab is open:</p>
 <ul>
 <li>The service&#39;s name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: with their modules installed, <code>ems-link</code> shows what the media service holds, or <code>not answering</code>, and <code>llm-link</code> shows where the language model runs.</li>
+<li><strong>Module</strong>: who brings it, <code>core</code> or a module such as <code>archive</code>, whose documentation explains the service. A dash is a service an administrator added by hand with <code>service-add</code>.</li>
 <li>How long it has been up, such as <code>up 8h 50m</code>. Hover it for the time it started.</li>
 <li><code>×</code> and a number when EiN has restarted it since it was last started by hand. Hover it for &quot;Restarted 2 time(s)&quot;.</li>
 <li>A badge: <strong>running</strong>, <strong>starting</strong>, <strong>stopping</strong>, <strong>stopped</strong>, <strong>failed</strong>, or <strong>disabled</strong> for a service that is switched off.</li>
@@ -254,7 +255,7 @@
 </tr>
 </tbody></table>
 </div>
-<p>The row shows a spinner while the action runs and is read again as soon as it is done. If the action fails, a red line above the table names it and the reason, such as <code>stop cpu: …</code>.</p>
+<p>The row shows a spinner while the action runs and is read again as soon as it is done. If the action fails, a red line above the table names it and the reason, such as <code>stop media-worker: …</code>.</p>
 <p>In the terminal the same actions are commands, which only an administrator may run:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 service-restart metrics-sampler
@@ -281,15 +282,15 @@ service-start-all      <span class="hljs-comment"># every enabled service that i
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 service-list --detail</code></pre></div>
 <p>On an EiN with the Archive and the <code>ems</code> module, it starts:</p>
-<div class="code"><pre tabindex="0"><code>NAME                 STATUS      ENABLED  RESTARTS DESCRIPTION
--------------------- ----------- -------- -------- -----------
-album-metadata       running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
-archive-bridge       running     yes      0        Turns VFS mutations into the media and location domain facts pipelines trigger on
-cpu                  running     yes      0        Worker for CPU-bound media jobs — transcodes, derivatives, fingerprints
-ems-link             running     yes      0        Watches the media service and reports what it holds
-                     not answering
+<div class="code"><pre tabindex="0"><code>NAME                 MODULE         STATUS      ENABLED  RESTARTS DESCRIPTION
+-------------------- -------------- ----------- -------- -------- -----------
+album-metadata       archive        running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
+archive-bridge       archive        running     yes      0        Turns VFS mutations into the media and location domain facts pipelines trigger on
+audit-purger         core           running     yes      0        Removes audit and access-log records once they are older than their retention
+ems-link             ems            running     yes      0        Watches the media service and reports what it holds
+                                    not answering
 …</code></pre></div>
-<p><code>--detail</code> asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without <code>--detail</code> the list is quicker. With <code>JSON_OUTPUT=1</code> it is JSON, with each service&#39;s start time.</p>
+<p><code>--detail</code> asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without <code>--detail</code> the list is quicker. The <code>MODULE</code> column is who brings the service, <code>-</code> for one added by hand. With <code>JSON_OUTPUT=1</code> it is JSON, with each service&#39;s start time and its <code>module</code>.</p>
 <p><a href="../reference/commands-core.html#service-status"><code>service-status</code></a> shows one service, and where its output goes, here the <code>ems</code> module&#39;s <code>ems-link</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 service-status ems-link</code></pre></div>
@@ -514,7 +515,7 @@ service-start disk-report</code></pre></div>
 </div>
 <p>To take a service away, stop it, disable it and remove it: <code>service-stop disk-report</code>, <code>service-disable disk-report</code>, <code>service-remove disk-report</code>. Removing it removes only the registration, not the folder. A module&#39;s services are declared in the module itself; <a href="../develop/modules.html">Writing a module</a> covers them.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
-<p><strong>A service is failed, with <code>×3</code> beside it.</strong> It was restarted three times within a minute and failed again. Its <code>stderr.log</code> holds the output of the last attempt only, since each start empties it, so read it first: <code>tail -n 50 /var/logs/services/&lt;name&gt;/stderr.log</code>. <code>dmesg | grep &quot;&lt;name&gt;&quot;</code> shows EiN&#39;s lines about it, such as <code>Service &#39;cpu&#39; exited with code 1</code> and <code>Service &#39;cpu&#39; exceeded max restarts (3) within window</code>; the container&#39;s log has the details behind them. Start it again with <strong>Start</strong> once you have fixed the cause.</p>
+<p><strong>A service is failed, with <code>×3</code> beside it.</strong> It was restarted three times within a minute and failed again. Its <code>stderr.log</code> holds the output of the last attempt only, since each start empties it, so read it first: <code>tail -n 50 /var/logs/services/&lt;name&gt;/stderr.log</code>. <code>dmesg | grep &quot;&lt;name&gt;&quot;</code> shows EiN&#39;s lines about it, such as <code>Service &#39;media-worker&#39; exited with code 1</code> and <code>Service &#39;media-worker&#39; exceeded max restarts (3) within window</code>; the container&#39;s log has the details behind them. Start it again with <strong>Start</strong> once you have fixed the cause.</p>
 <p><strong><code>service start: &#39;x&#39; is not enabled</code>.</strong> The service is switched off; the dashboard shows it as <strong>disabled</strong>. Run <code>service-enable x</code>, then <code>service-start x</code>. Disabling one of core&#39;s or a module&#39;s services lasts only until EiN starts again, which enables them all.</p>
 <p><strong><code>service stop: service &#39;x&#39; is not running</code></strong> or <strong><code>service &#39;x&#39; is already running</code>.</strong> The service was already in that state; the dashboard row may be up to 10 seconds old.</p>
 <p><strong><code>service remove: &#39;x&#39; is running, stop it first</code></strong> or <strong><code>&#39;x&#39; is enabled, disable it first</code>.</strong> Stop it and disable it, then remove it.</p>

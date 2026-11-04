@@ -215,7 +215,7 @@ and `health` (as a failed check `kind <name>`) both say so. The usual cause is t
 service is stopped:
 
 1. Open the **Services** tab of the **Dashboard**, or run `service-list`, and look at the workers;
-   with the Archive installed, they are `cpu` and `models`.
+   with the Archive installed, they are `media-worker` and `models`.
 2. Start the one that is stopped, or read its log if it keeps stopping.
    [Services and logs](services-logs.md) shows how.
 

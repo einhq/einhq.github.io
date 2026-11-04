@@ -113,8 +113,8 @@ start to finish.</p>
 <td>Turns changes into the events the media pipelines wait for</td>
 </tr>
 <tr>
-<td><code>cpu</code></td>
-<td>The worker for work done on this machine, such as reading metadata, making thumbnails and transcoding video</td>
+<td><code>media-worker</code></td>
+<td>The worker for the rest: reading metadata, thumbnails and video renditions the media service makes while it waits, matching faces, staging</td>
 </tr>
 <tr>
 <td><code>models</code></td>
@@ -294,7 +294,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the Archive&#39;s workers take it:</p>
 <ul>
-<li><code>cpu</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>speaker-assign</code>,
+<li><code>media-worker</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>speaker-assign</code>,
 <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>.</li>
 <li><code>models</code> takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
 <code>shots</code>, and <code>models-second</code> the same kinds in the reverse order.</li>
@@ -317,7 +317,7 @@ progress is picked up again. <a href="../admin/configuration.html">Configuration
 <tbody><tr>
 <td><a href="../reference/settings.html#cfg_cpu_slots"><code>CFG_CPU_SLOTS</code></a></td>
 <td><code>2</code></td>
-<td>How much CPU work the <code>cpu</code> worker runs at once. A transcode takes two slots, other kinds one.</td>
+<td>How much work the <code>media-worker</code> worker runs at once. A transcode takes two slots, other kinds one.</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code></a></td>

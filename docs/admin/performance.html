@@ -210,9 +210,9 @@ podman compose up -d</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>cpu</code></td>
+<td><code>media-worker</code></td>
 <td>Unpacking zips, reading metadata, thumbnails and posters, fingerprints, duplicates, matching faces to people, staging&#39;s dating and grouping, video and audio encoding</td>
-<td><strong>CPU budget for media work</strong> (<code>CFG_CPU_SLOTS</code>, default <code>2</code>)</td>
+<td><strong>Media worker budget</strong> (<code>CFG_CPU_SLOTS</code>, default <code>2</code>)</td>
 </tr>
 <tr>
 <td><code>models</code></td>
@@ -221,7 +221,7 @@ podman compose up -d</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>The CPU budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
+<p>The media worker&#39;s budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
 <p><a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> lists every setting of the two workers.</p>
 <p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts. A kind it left because the media service refused several of its jobs in a row (<strong>waiting for EMS</strong>) is taken up again as soon as that rest ends, rather than an hour later.</p>
 <p>The media service has its own limits on how much it runs at once, set in <code>~/ein/.env</code>:</p>
@@ -262,17 +262,17 @@ podman compose up -d</code></pre></div>
 </div>
 <p>EiN&#39;s settings decide how much it asks for; the media service&#39;s decide how much it does. Asking for more than the media service runs at once only moves the wait into its queue.</p>
 <h2 id="let-more-work-run-at-once">Let more work run at once<a class="anchor" href="#let-more-work-run-at-once" aria-label="Link to this section"></a></h2>
-<p>With the Archive, on a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:</p>
+<p>With the Archive, on a machine with more cores than the minimum, raise the media worker&#39;s budget so that more thumbnails, fingerprints and encodings run side by side:</p>
 <ol>
 <li>Sign in as an administrator and choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>.</li>
 <li>Choose the category <strong>Processing</strong>.</li>
-<li>Set <strong>CPU budget for media work</strong> to the number of jobs you want at once, for example <code>4</code> on a machine with 6 cores, and choose <strong>Save change</strong>. The line under it says &quot;Restarted cpu.&quot;</li>
-<li>If you set the budget above 4, raise <strong>CPU worker slots</strong> (<code>CFG_CPU_WORKERS</code>) to the same number. It caps how many jobs can be in flight whatever the budget.</li>
+<li>Set <strong>Media worker budget</strong> to the number of jobs you want at once, for example <code>4</code> on a machine with 6 cores, and choose <strong>Save change</strong>. The line under it says &quot;Restarted media-worker.&quot;</li>
+<li>If you set the budget above 4, raise <strong>Media worker jobs in flight</strong> (<code>CFG_CPU_WORKERS</code>) to the same number. It caps how many jobs can be in flight whatever the budget.</li>
 <li>Watch the result on the <strong>Dashboard</strong>, on its <strong>Work</strong> tab, as described in <a href="#watch-it-keep-up">Watch it keep up</a>.</li>
 </ol>
 <p>Most of these jobs are work for the media service, so with a budget above 4, raise <code>EMS_LIMIT_TOOLS</code> in <code>~/ein/.env</code> to match and run <code>podman compose up -d</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Keep <strong>CPU budget for media work</strong> at 2 or more. A video&#39;s encoding takes 2 of the budget, and with 1 no video is ever encoded.</p>
+<p>Keep <strong>Media worker budget</strong> at 2 or more. A video&#39;s encoding takes 2 of the budget, and with 1 no video is ever encoded.</p>
 </aside>
 <p>With a graphics card that has room to spare, or many cores for the models, raise <strong>Model requests in flight</strong> the same way; it restarts the <code>models</code> service. Keep it at or below <code>EMS_LIMIT_MODELS</code>. More requests at once do not always finish sooner: the media service runs the requests for one model one after another, so the gain comes from different kinds of work overlapping.</p>
 <p>From the terminal, the same changes are:</p>
@@ -288,7 +288,7 @@ config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="
 <li>A search uses at most a few cores (<code>EMS_QUERY_WORKER_THREADS</code>, the machine&#39;s cores less two, at most 4), so it does not wait on threads the processing holds.</li>
 <li><code>EMS_INTERACTIVE_RESERVE</code> keeps a place free for a person waiting.</li>
 </ul>
-<p>If the interface still feels slow on a small machine during an import, lower <strong>CPU budget for media work</strong> back towards 2 and <strong>Model requests in flight</strong> towards 1 until the import is done. The work waits in its queue and costs nothing there.</p>
+<p>If the interface still feels slow on a small machine during an import, lower <strong>Media worker budget</strong> back towards 2 and <strong>Model requests in flight</strong> towards 1 until the import is done. The work waits in its queue and costs nothing there.</p>
 <h2 id="watch-disk-space">Watch disk space<a class="anchor" href="#watch-disk-space" aria-label="Link to this section"></a></h2>
 <p>Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder&#39;s <code>files-volatile</code>, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN&#39;s terminal, <code>df</code> shows each storage tier&#39;s free space, how fast it grows a day, and when it will be full at that rate, with the size of the database:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -344,10 +344,10 @@ podman image prune</code></pre></div>
 <p><strong>Catching up</strong> after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a <strong>Work</strong> tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. <a href="monitoring.html">Health and the dashboard</a> explains the badge, the checks and the tabs.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><strong>The Dashboard reads Stuck.</strong> Nothing has finished in the last hour. Read the checks under the badge on the <strong>Overview</strong> tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. <a href="troubleshooting.html">Troubleshooting</a> goes through the causes.</p>
-<p><strong>Videos in the Archive never get their browser version.</strong> Check that <strong>CPU budget for media work</strong> is 2 or more, and on the <strong>Work</strong> tab whether <code>transcode</code> is waiting. Without a graphics card, a long video takes many minutes to encode.</p>
+<p><strong>Videos in the Archive never get their browser version.</strong> Check that <strong>Media worker budget</strong> is 2 or more, and on the <strong>Work</strong> tab whether <code>transcode</code> is waiting. Without a graphics card, a long video takes many minutes to encode.</p>
 <p><strong>A container restarts on its own.</strong> Look for <code>Memory cgroup out of memory</code> in the kernel log as in <a href="#when-a-container-reaches-its-limit">When a container reaches its limit</a>, and raise that container&#39;s limit.</p>
 <p><strong>The whole machine slows down or stops responding during an import.</strong> The containers together are using more memory than the machine has. Lower the limits so that they fit the machine, or leave out the language model, and lower the processing settings while the import runs.</p>
-<p><strong>Searches are slow while an Archive import runs.</strong> Lower <strong>Model requests in flight</strong> and <strong>CPU budget for media work</strong> for the duration of the import, as in <a href="#keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work</a>.</p>
+<p><strong>Searches are slow while an Archive import runs.</strong> Lower <strong>Model requests in flight</strong> and <strong>Media worker budget</strong> for the duration of the import, as in <a href="#keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work</a>.</p>
 <p><strong>The disk fills up.</strong> Run <code>df</code> in EiN&#39;s terminal to see which tier grows, and <code>podman system df</code> on the machine to see what the container engine&#39;s storage takes. EiN has no command that moves the data folder; <a href="data.html">Your data: backup, moving and removing</a> explains how.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>

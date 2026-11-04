@@ -10,7 +10,7 @@ This page is for power users and administrators who use the assistant from the t
 | Your saved chats                                   | `assistant-chat list`, `assistant-chat read <id>`     | [assistant-chat](commands.md#assistant-chat)         |
 | Delete a chat                                      | `assistant-chat delete <id>`                          | [assistant-chat](commands.md#assistant-chat)         |
 | Find a command by meaning                          | `assistant-commands find 'list running services'`     | [assistant-commands](commands.md#assistant-commands) |
-| Whether a command line changes anything            | `assistant-commands judge 'service restart cpu'`      | [assistant-commands](commands.md#assistant-commands) |
+| Whether a command line changes anything            | `assistant-commands judge 'service restart models'`   | [assistant-commands](commands.md#assistant-commands) |
 | Ask the language model one thing, without tools    | `llm-chat 'The colour of the sky?'`                   | [llm-chat](commands.md#llm-chat)                     |
 | Score the assistant against the modules' questions | `agent-eval --limit 5 --verbose`                      | [agent-eval](commands.md#agent-eval)                 |
 

@@ -90,12 +90,12 @@ The media service's model processes log a warning of their own when the models a
 
 This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines' heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by the Archive's settings in **Settings → System**, category **Processing**.
 
-| Worker   | Runs                                                                                                                                                                  | Paced by                                                      |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `cpu`    | Unpacking zips, reading metadata, thumbnails and posters, fingerprints, duplicates, matching faces to people, staging's dating and grouping, video and audio encoding | **CPU budget for media work** (`CFG_CPU_SLOTS`, default `2`)  |
-| `models` | Faces, picture vectors, text in pictures, text vectors, transcripts, voices and shots: each a request to the media service's models                                   | **Model requests in flight** (`CFG_MODEL_SLOTS`, default `2`) |
+| Worker         | Runs                                                                                                                                                                  | Paced by                                                      |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `media-worker` | Unpacking zips, reading metadata, thumbnails and posters, fingerprints, duplicates, matching faces to people, staging's dating and grouping, video and audio encoding | **Media worker budget** (`CFG_CPU_SLOTS`, default `2`)        |
+| `models`       | Faces, picture vectors, text in pictures, text vectors, transcripts, voices and shots: each a request to the media service's models                                   | **Model requests in flight** (`CFG_MODEL_SLOTS`, default `2`) |
 
-The CPU budget is shared by cost: most jobs take 1 of it, and a video's encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.
+The media worker's budget is shared by cost: most jobs take 1 of it, and a video's encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.
 
 [Processing pictures](../archive/processing.md#how-much-runs-at-once) lists every setting of the two workers.
 
@@ -115,18 +115,18 @@ EiN's settings decide how much it asks for; the media service's decide how much 
 
 ## Let more work run at once
 
-With the Archive, on a machine with more cores than the minimum, raise the CPU budget so that more thumbnails, fingerprints and encodings run side by side:
+With the Archive, on a machine with more cores than the minimum, raise the media worker's budget so that more thumbnails, fingerprints and encodings run side by side:
 
 1. Sign in as an administrator and choose **Settings** in the sidebar, under **System**.
 2. Choose the category **Processing**.
-3. Set **CPU budget for media work** to the number of jobs you want at once, for example `4` on a machine with 6 cores, and choose **Save change**. The line under it says "Restarted cpu."
-4. If you set the budget above 4, raise **CPU worker slots** (`CFG_CPU_WORKERS`) to the same number. It caps how many jobs can be in flight whatever the budget.
+3. Set **Media worker budget** to the number of jobs you want at once, for example `4` on a machine with 6 cores, and choose **Save change**. The line under it says "Restarted media-worker."
+4. If you set the budget above 4, raise **Media worker jobs in flight** (`CFG_CPU_WORKERS`) to the same number. It caps how many jobs can be in flight whatever the budget.
 5. Watch the result on the **Dashboard**, on its **Work** tab, as described in [Watch it keep up](#watch-it-keep-up).
 
 Most of these jobs are work for the media service, so with a budget above 4, raise `EMS_LIMIT_TOOLS` in `~/ein/.env` to match and run `podman compose up -d`.
 
 > [!WARNING]
-> Keep **CPU budget for media work** at 2 or more. A video's encoding takes 2 of the budget, and with 1 no video is ever encoded.
+> Keep **Media worker budget** at 2 or more. A video's encoding takes 2 of the budget, and with 1 no video is ever encoded.
 
 With a graphics card that has room to spare, or many cores for the models, raise **Model requests in flight** the same way; it restarts the `models` service. Keep it at or below `EMS_LIMIT_MODELS`. More requests at once do not always finish sooner: the media service runs the requests for one model one after another, so the gain comes from different kinds of work overlapping.
 
@@ -149,7 +149,7 @@ While the media service works through the Archive's import, people still search 
 - A search uses at most a few cores (`EMS_QUERY_WORKER_THREADS`, the machine's cores less two, at most 4), so it does not wait on threads the processing holds.
 - `EMS_INTERACTIVE_RESERVE` keeps a place free for a person waiting.
 
-If the interface still feels slow on a small machine during an import, lower **CPU budget for media work** back towards 2 and **Model requests in flight** towards 1 until the import is done. The work waits in its queue and costs nothing there.
+If the interface still feels slow on a small machine during an import, lower **Media worker budget** back towards 2 and **Model requests in flight** towards 1 until the import is done. The work waits in its queue and costs nothing there.
 
 ## Watch disk space
 
@@ -198,13 +198,13 @@ Whether the machine is big enough shows in whether it keeps up with the work:
 
 **The Dashboard reads Stuck.** Nothing has finished in the last hour. Read the checks under the badge on the **Overview** tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. [Troubleshooting](troubleshooting.md) goes through the causes.
 
-**Videos in the Archive never get their browser version.** Check that **CPU budget for media work** is 2 or more, and on the **Work** tab whether `transcode` is waiting. Without a graphics card, a long video takes many minutes to encode.
+**Videos in the Archive never get their browser version.** Check that **Media worker budget** is 2 or more, and on the **Work** tab whether `transcode` is waiting. Without a graphics card, a long video takes many minutes to encode.
 
 **A container restarts on its own.** Look for `Memory cgroup out of memory` in the kernel log as in [When a container reaches its limit](#when-a-container-reaches-its-limit), and raise that container's limit.
 
 **The whole machine slows down or stops responding during an import.** The containers together are using more memory than the machine has. Lower the limits so that they fit the machine, or leave out the language model, and lower the processing settings while the import runs.
 
-**Searches are slow while an Archive import runs.** Lower **Model requests in flight** and **CPU budget for media work** for the duration of the import, as in [Keep the interface quick during heavy work](#keep-the-interface-quick-during-heavy-work).
+**Searches are slow while an Archive import runs.** Lower **Model requests in flight** and **Media worker budget** for the duration of the import, as in [Keep the interface quick during heavy work](#keep-the-interface-quick-during-heavy-work).
 
 **The disk fills up.** Run `df` in EiN's terminal to see which tier grows, and `podman system df` on the machine to see what the container engine's storage takes. EiN has no command that moves the data folder; [Your data: backup, moving and removing](data.md) explains how.
 

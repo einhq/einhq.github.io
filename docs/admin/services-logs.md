@@ -21,7 +21,7 @@ Core brings ten services, the first ten below, and they are all an EiN without m
 | `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                                                                                  |
 | `audit-purger`      | core      | Removes audit records once they are older than `CFG_AUDIT_PIPELINE_RETENTION_DAYS` or `CFG_AUDIT_RETENTION_DAYS`, and access-log records older than `CFG_ACCESS_LOG_RETENTION_DAYS`; twice a day |
 | `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                                                                                            |
-| `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                                                                                           |
+| `media-worker`      | archive   | Worker for the media pipelines' other steps: thumbnails, renditions, fingerprints and the media service's encodes it waits on, face matching, duplicates, staging                                |
 | `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                                                                                   |
 | `models-second`     | archive   | A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while `CFG_MODEL_SECOND_SLOTS` is `0`                                                                     |
 | `media-heal`        | archive   | Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up                                                                  |
@@ -45,6 +45,7 @@ Every time EiN starts, it registers and enables core's services and those of eve
 The card lists every service, one row each, and asks again every 10 seconds while the tab is open:
 
 - The service's name, and under it its description. A service that reports on itself shows that line instead, and its description when you hover it: with their modules installed, `ems-link` shows what the media service holds, or `not answering`, and `llm-link` shows where the language model runs.
+- **Module**: who brings it, `core` or a module such as `archive`, whose documentation explains the service. A dash is a service an administrator added by hand with `service-add`.
 - How long it has been up, such as `up 8h 50m`. Hover it for the time it started.
 - `×` and a number when EiN has restarted it since it was last started by hand. Hover it for "Restarted 2 time(s)".
 - A badge: **running**, **starting**, **stopping**, **stopped**, **failed**, or **disabled** for a service that is switched off.
@@ -64,7 +65,7 @@ On the **Services** tab, as the administrator or in [admin mode](../guide/interf
 | starting or stopping | a spinner; wait for it to settle                                         |
 | disabled             | a dash; its tooltip says "Disabled — enable it from the shell to run it" |
 
-The row shows a spinner while the action runs and is read again as soon as it is done. If the action fails, a red line above the table names it and the reason, such as `stop cpu: …`.
+The row shows a spinner while the action runs and is read again as soon as it is done. If the action fails, a red line above the table names it and the reason, such as `stop media-worker: …`.
 
 In the terminal the same actions are commands, which only an administrator may run:
 
@@ -108,17 +109,17 @@ service-list --detail
 On an EiN with the Archive and the `ems` module, it starts:
 
 ```text
-NAME                 STATUS      ENABLED  RESTARTS DESCRIPTION
--------------------- ----------- -------- -------- -----------
-album-metadata       running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
-archive-bridge       running     yes      0        Turns VFS mutations into the media and location domain facts pipelines trigger on
-cpu                  running     yes      0        Worker for CPU-bound media jobs — transcodes, derivatives, fingerprints
-ems-link             running     yes      0        Watches the media service and reports what it holds
-                     not answering
+NAME                 MODULE         STATUS      ENABLED  RESTARTS DESCRIPTION
+-------------------- -------------- ----------- -------- -------- -----------
+album-metadata       archive        running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
+archive-bridge       archive        running     yes      0        Turns VFS mutations into the media and location domain facts pipelines trigger on
+audit-purger         core           running     yes      0        Removes audit and access-log records once they are older than their retention
+ems-link             ems            running     yes      0        Watches the media service and reports what it holds
+                                    not answering
 …
 ```
 
-`--detail` asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without `--detail` the list is quicker. With `JSON_OUTPUT=1` it is JSON, with each service's start time.
+`--detail` asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without `--detail` the list is quicker. The `MODULE` column is who brings the service, `-` for one added by hand. With `JSON_OUTPUT=1` it is JSON, with each service's start time and its `module`.
 
 [`service-status`](../reference/commands-core.md#service-status) shows one service, and where its output goes, here the `ems` module's `ems-link`:
 
@@ -307,7 +308,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 ## When something goes differently
 
-**A service is failed, with `×3` beside it.** It was restarted three times within a minute and failed again. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'cpu' exited with code 1` and `Service 'cpu' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
+**A service is failed, with `×3` beside it.** It was restarted three times within a minute and failed again. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'media-worker' exited with code 1` and `Service 'media-worker' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
 
 **`service start: 'x' is not enabled`.** The service is switched off; the dashboard shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's or a module's services lasts only until EiN starts again, which enables them all.
 
