@@ -431,7 +431,7 @@ service has made the video's storyboard, a small frame from that moment.
 
 The media service finds the cuts in a video and makes each scene a chapter. A video whose file
 names the camera or phone that recorded it is taken to be one take, so there only a clear cut makes
-a chapter, not a lamp switched on or the exposure changing. Chapters show as pieces
+a chapter, not a lamp switched on, the exposure changing or a dark moment. Chapters show as pieces
 of the timeline with gaps between them; a video with too many to fit gets a small tick at each start
 instead. Pointing at the timeline shows the chapter too, such as `1:24 · Chapter 3`. **Previous
 chapter** more than two seconds into a chapter goes back to its start, and otherwise to the chapter

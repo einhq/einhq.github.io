@@ -104,11 +104,13 @@ camcorders), MPG, AVI, MKV, WebM, 3GP and FLV.
 For each video, EiN:
 
 - reads its date, its GPS position and the camera or phone that recorded it;
-- makes a still for its tile and the poster shown before it plays;
+- makes a still for its tile and the poster shown before it plays, from a second in. When that
+  frame shows nothing, such as black, white or a tape's blue screen, the still comes from further
+  into the video;
 - makes a version your browser plays, at most 1920 × 1080 pixels, in the AV1 format inside an MP4
   file, with the sound at 128 kbit/s;
-- makes a silent clip of up to 20 seconds that plays when you point at the tile. A video shorter
-  than 2 seconds gets none: its still already shows it all;
+- makes a silent clip of up to 20 seconds that plays when you point at the tile, starting where
+  the still was taken. A video shorter than 2 seconds gets none: its still already shows it all;
 - makes the small pictures you see when you move along the timeline, and finds where one shot cuts
   to the next, which become its chapters ([Play a video](viewer.md#play-a-video));
 - finds the faces in it, and works out what it shows;
