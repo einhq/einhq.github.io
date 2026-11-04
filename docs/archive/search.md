@@ -329,7 +329,9 @@ search --subject-name person:peggy --from 1968 --to 1968
 ```
 
 The first finds photos by what they show; the second lists everything with a person whose name
-contains Peggy, taken in 1968. Its options are in the
+contains Peggy, taken in 1968. Without `--kind`, `search` finds every kind at once, and a person's
+name finds the person first and the pictures they are in after them: `search "Peggy Wrenfield"`
+puts Peggy ahead of every photo of her, even one named after her. Its options are in the
 [command reference](../reference/commands-core.md#search), the Archive's providers behind it, such
 as [`search-media`](commands.md#search-media), are in [Archive commands](commands.md), and
 [Commands by task](../shell/commands.md) lists the archive's other search commands.
