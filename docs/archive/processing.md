@@ -130,9 +130,10 @@ what is already done.
 The `media-heal` service runs it for you. It holds back a gap whose pipeline already has work
 waiting, so a scan never repeats what is already on its way, and announces the rest: a long queue
 of one kind of work, such as faces, does not keep voices or fingerprints from being found. Each scan
-goes through the whole archive and announces every gap it finds at once, so the work it starts
-shows on the dashboard and in `health` until it is done. The gaps it held back get a scan of their
-own once their pipelines have nothing waiting. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
+goes through the whole archive and announces every gap it finds as it goes, so the work it starts
+shows on the dashboard and in `health` until it is done. It goes through the archive 5000 files at a
+time and remembers where it is, so a restart of EiN does not send it back to the beginning. The gaps
+it held back get a scan of their own once their pipelines have nothing waiting. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
 (900), and after a scan that finds nothing and holds nothing back it rests for
 `CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
 
