@@ -106,6 +106,11 @@ Every run of `setup.sh` is an update, also one that only adds or removes an opti
 `./setup.sh --ems`. To apply a changed line of `.env` without updating, run `podman compose up -d`
 in `~/ein` instead; [Configuration](configuration.md#set-a-value-in-the-deployment) explains it.
 
+One `setup.sh` runs in `~/ein` at a time. A run goes on when the SSH connection that started it
+drops, so one started again meanwhile says
+`Another setup.sh is running in /home/anna/ein; waiting for it to end` and begins once the first
+has ended.
+
 > [!NOTE]
 > `setup.sh` keeps to the container engine EiN was installed under, which `.env` names in
 > `EIN_ENGINE`. Run with another `EIN_ENGINE`, it stops instead of building a second, empty EiN. See

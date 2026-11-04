@@ -205,6 +205,10 @@ one, leaving the others running.</p>
 <p>Every run of <code>setup.sh</code> is an update, also one that only adds or removes an option, such as
 <code>./setup.sh --ems</code>. To apply a changed line of <code>.env</code> without updating, run <code>podman compose up -d</code>
 in <code>~/ein</code> instead; <a href="configuration.html#set-a-value-in-the-deployment">Configuration</a> explains it.</p>
+<p>One <code>setup.sh</code> runs in <code>~/ein</code> at a time. A run goes on when the SSH connection that started it
+drops, so one started again meanwhile says
+<code>Another setup.sh is running in /home/anna/ein; waiting for it to end</code> and begins once the first
+has ended.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p><code>setup.sh</code> keeps to the container engine EiN was installed under, which <code>.env</code> names in
 <code>EIN_ENGINE</code>. Run with another <code>EIN_ENGINE</code>, it stops instead of building a second, empty EiN. See
