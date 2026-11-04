@@ -326,6 +326,10 @@ sets the time, such as <code>put -p</code> in <code>sftp</code> or <code>rsync -
 <p>While content is being written somewhere other than from the start in order, the checksum is
 cleared, and EiN reads the finished file back once to measure it. A file whose writing stopped
 part-way has no checksum rather than a wrong one.</p>
+<p>Adding to the end of a file that already has content, such as <code>echo line &gt;&gt; notes.txt</code>, clears the
+checksum and leaves it cleared: measuring it would read the whole file every time a line is added.
+<code>size</code> and <code>writtenAt</code> still follow, and the next write that replaces the content, or <code>file-sync</code>,
+gives the file a checksum again.</p>
 <p>Three commands look at the bytes themselves rather than at what the node records:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>

@@ -176,6 +176,11 @@ While content is being written somewhere other than from the start in order, the
 cleared, and EiN reads the finished file back once to measure it. A file whose writing stopped
 part-way has no checksum rather than a wrong one.
 
+Adding to the end of a file that already has content, such as `echo line >> notes.txt`, clears the
+checksum and leaves it cleared: measuring it would read the whole file every time a line is added.
+`size` and `writtenAt` still follow, and the next write that replaces the content, or `file-sync`,
+gives the file a checksum again.
+
 Three commands look at the bytes themselves rather than at what the node records:
 
 | Command            | What it does                                                                                                                                     |
