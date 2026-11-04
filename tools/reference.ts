@@ -70,6 +70,7 @@ const MODULES: Record<string, string> = {
   assistant: 'Assistant',
   ems: 'Media service',
   'album-folders': 'Album folders',
+  todo: 'Todo',
 };
 
 /** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */

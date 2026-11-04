@@ -94,6 +94,7 @@ A new account has no password and cannot sign in until one is set. `whoami` and 
 | List the groups and their members                  | `group-list --members`                         | [group-list](../reference/commands-core.md#group-list)                   |
 | One group's details                                | `group-info family`                            | [group-info](../reference/commands-core.md#group-info)                   |
 | Create a group, _administrators only_              | `group-create family --title 'Family'`         | [group-create](../reference/commands-core.md#group-create)               |
+| Give a group a shared home, _administrators only_  | `group-home family`                            | [group-home](../reference/commands-core.md#group-home)                   |
 | Add someone to a group, _administrators only_      | `group-add-member family anna`                 | [group-add-member](../reference/commands-core.md#group-add-member)       |
 | Take someone out of a group, _administrators only_ | `group-remove-member family anna`              | [group-remove-member](../reference/commands-core.md#group-remove-member) |
 | List a group's members, _administrators only_      | `group-members family`                         | [group-members](../reference/commands-core.md#group-members)             |

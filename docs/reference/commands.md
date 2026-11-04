@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 374 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 384 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 212 in full](commands-core.md).
+[All 213 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -85,9 +85,10 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [group-create](commands-core.md#group-create) | Create a new group. |
 | [group-delete](commands-core.md#group-delete) | Delete a group: what it owned goes to another group, and ACL entries naming it are dropped. |
 | [group-exists](commands-core.md#group-exists) | Check if a group exists. |
+| [group-home](commands-core.md#group-home) | Give a group a home, a directory its members share and nobody else sees, or with --off move it to the administrator's trash. |
 | [group-info](commands-core.md#group-info) | Display group information. |
 | [group-is-member](commands-core.md#group-is-member) | Check if a user is a member of a group. |
-| [group-list](commands-core.md#group-list) | List the groups; as JSON with each one's description and built-in role. |
+| [group-list](commands-core.md#group-list) | List the groups; as JSON with each one's description, built-in role and whether it has a home. |
 | [group-members](commands-core.md#group-members) | List members of a group. |
 | [group-remove-member](commands-core.md#group-remove-member) | Remove a user from a group. |
 | [group-resolve](commands-core.md#group-resolve) | Resolve group name to GID or vice versa. |
@@ -427,3 +428,19 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
+
+## Todo
+
+[All 9 in full](../todo/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [events-todo](../todo/commands.md#events-todo) | Home's events from the todo lists: open items due around a day that are yours, given to you or to nobody. |
+| [todo-add](../todo/commands.md#todo-add) | Add an item to a todo list, with the day it is due and who is to do it if you like. |
+| [todo-done](../todo/commands.md#todo-done) | Mark a todo item done, with who did it and when, or with --undo not done again. |
+| [todo-items](../todo/commands.md#todo-items) | Show a todo list and its items, in the order they were added. |
+| [todo-list-create](../todo/commands.md#todo-list-create) | Make a todo list: your own, in ~/todos, or with --group one every member of the group shares, in the group's shared home. |
+| [todo-lists](../todo/commands.md#todo-lists) | List the todo lists you can see: your own, then those in the shared homes of your groups. |
+| [todo-members](../todo/commands.md#todo-members) | List who an item of a todo list may be given to: the members of the list's group, or you for a list of your own. |
+| [todo-mine](../todo/commands.md#todo-mine) | List what is left for you to do: open items given to you on any list, and your own lists' open items given to nobody, soonest due first. |
+| [todo-set](../todo/commands.md#todo-set) | Change a todo item's title, the day it is due, or who is to do it. |

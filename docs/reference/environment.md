@@ -39,6 +39,7 @@ Where the tree keeps each kind of thing, exported for every shell, so `cd $LOGS_
 | `ARCHIVE_PATH` |  | The archive: everything people put in and look at. |
 | `TAGS_PATH` |  | Labels, one directory per label holding links to what carries it. |
 | `HOMES_PATH` |  | One home directory per user, owned by the user. |
+| `GROUP_HOMES_PATH` |  | One shared home per group given one, which only its members see. |
 | `ETC_PATH` |  | System configuration: settings, groups, services, boot scripts. |
 | `USERS_PATH` |  | The accounts: one user node per account, the administrator's. |
 | `GROUPS_PATH` |  | Groups. |

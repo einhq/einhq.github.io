@@ -184,14 +184,31 @@ In a group's panel:
   An account that no longer exists but is still linked shows as **no longer an account**, ready to
   untick. `users` has no list, since everyone who signs in is in it.
 - Built-in groups say what they are for at the top, and "Built-in groups can't be deleted."
+- **Shared home** gives the group a folder of its own; see below. Built-in groups other than
+  `users` and personal groups have no such section.
 
 ![Settings → Groups with Administrators open: the built-in groups in the list, the Built in badge, the group's Profile and its Members](../../assets/shots/settings-groups.webp "Built-in groups say what they are for; the Users group shows Everyone instead of faces")
+
+### A group's shared home
+
+A group can have a shared home, `/groups/<group>`: a folder its members share and nobody else
+sees, where they keep what the group has in common and where modules keep the group's things.
+`users` has one from the start, `/groups/users`, so everyone with an account shares one folder.
+
+To give a group a home, open it and switch on **Shared home**. The switch then shows where the
+folder is, such as `/groups/family`. Everything put in it, however deep, belongs to the group:
+every member can read, change and remove it, and anyone who leaves the group stops seeing it.
+
+Switching **Shared home** off moves the folder, with everything in it, to your trash, from where
+**Restore** brings it back. `users` stays without one once you have switched its home off.
 
 ### Delete a group
 
 1. Open the group and choose **Delete group…** under **Delete**.
 2. Pick the group that takes over what this one owns. **Administrators** is picked to start with.
 3. Choose **Delete** followed by the group's name, such as **Delete family**.
+
+A group with a shared home says so in the confirmation: its home goes to your trash.
 
 Nobody loses their account. Accounts whose primary group it was go back to their own groups, and
 grants that named the group on folders, or on albums with the Archive, are dropped, so its members lose what they could
@@ -278,11 +295,14 @@ user-disable helen                   # signs her out everywhere and keeps her ou
 user-enable helen
 user-delete helen --to=peggy         # what she owned passes to peggy
 
-group-create family --title=Family
+group-create family --title=Family --home   # --home: with a shared home, /groups/family
+group-home family                    # give an existing group its shared home
+group-home family --off              # move it to your trash
 group-add-member family helen
 group-remove-member family helen
 group-update family --description='The Wrenfield household'
-group-delete family --to=users       # --force when it is someone's primary group
+group-delete family --to=users       # --force when it is someone's primary group,
+                                     # --remove-home when it has a shared home
 ```
 
 To see who there is and who is signed in:

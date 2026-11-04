@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo commands – EiN documentation</title>
+    <meta name="description" content="The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/todo/commands.html">
+    <meta property="og:title" content="Todo commands – EiN documentation">
+    <meta property="og:description" content="The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/todo/commands.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section class="here"><h2>Todo</h2><ul><li><a href="index.html">Todo lists</a></li><li><a href="commands.html" aria-current="page">Todo commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Todo commands</span></button>
+        <header class="docs-head">
+          <p class="crumb">Todo</p>
+          <h1>Todo commands</h1>
+        </header>
+        <article class="prose">
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
+
+<p>The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#events-todo">events-todo</a> · <a href="#todo-add">todo-add</a> · <a href="#todo-done">todo-done</a> · <a href="#todo-items">todo-items</a> · <a href="#todo-list-create">todo-list-create</a> · <a href="#todo-lists">todo-lists</a> · <a href="#todo-members">todo-members</a> · <a href="#todo-mine">todo-mine</a> · <a href="#todo-set">todo-set</a></p>
+<h2 id="e">E<a class="anchor" href="#e" aria-label="Link to this section"></a></h2>
+<h3 id="events-todo"><code>events-todo</code><a class="anchor" href="#events-todo" aria-label="Link to this section"></a></h3>
+<p>Home&#39;s events from the todo lists: open items due around a day that are yours, given to you or to nobody.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>events-todo [--today=&lt;string&gt;] [--days-ahead=&lt;number&gt;] [--days-past=&lt;number&gt;] [--limit=&lt;number&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--today=&lt;string&gt;</code></td>
+<td>the day to look around, YYYY-MM-DD (default today)</td>
+</tr>
+<tr>
+<td><code>--days-ahead=&lt;number&gt;</code></td>
+<td>how many days ahead (default 30)</td>
+</tr>
+<tr>
+<td><code>--days-past=&lt;number&gt;</code></td>
+<td>how many days back (default 7)</td>
+</tr>
+<tr>
+<td><code>--limit=&lt;number&gt;</code></td>
+<td>at most this many (default 16)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>events-todo --today 2026-11-04</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One events entry per item: title, route, path and date.</p>
+<h2 id="t">T<a class="anchor" href="#t" aria-label="Link to this section"></a></h2>
+<h3 id="todo-add"><code>todo-add</code><a class="anchor" href="#todo-add" aria-label="Link to this section"></a></h3>
+<p>Add an item to a todo list, with the day it is due and who is to do it if you like.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-add [--due=&lt;string&gt;] [--assignee=&lt;user&gt;] &lt;list&gt; &lt;title&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;list&gt;</code></td>
+<td>the list, by its path.</td>
+</tr>
+<tr>
+<td><code>&lt;title&gt;</code></td>
+<td>what is to be done.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--due=&lt;string&gt;</code></td>
+<td>the day it is due, as YYYY-MM-DD.</td>
+</tr>
+<tr>
+<td><code>--assignee=&lt;user&gt;</code></td>
+<td>who is to do it: a member of the list&#39;s group, or you on a list of your own.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-add /groups/users/todos/shopping Milk
+todo-add ~/todos/before-the-trip <span class="hljs-string">&quot;Renew the passport&quot;</span> --due 2026-12-01</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The new item: path, list, title, done, due and assignee.</p>
+<h3 id="todo-done"><code>todo-done</code><a class="anchor" href="#todo-done" aria-label="Link to this section"></a></h3>
+<p>Mark a todo item done, with who did it and when, or with --undo not done again.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-done [--undo] &lt;item&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;item&gt;</code></td>
+<td>the item, by its path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--undo</code></td>
+<td>mark it not done.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-done /groups/users/todos/shopping/01JB...</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The item as it is now, with doneAt and doneBy when it is done.</p>
+<h3 id="todo-items"><code>todo-items</code><a class="anchor" href="#todo-items" aria-label="Link to this section"></a></h3>
+<p>Show a todo list and its items, in the order they were added.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>todo-items &lt;list&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;list&gt;</code></td>
+<td>the list, by its path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-items /groups/users/todos/shopping</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The list (path, title, group, open, total) and its items (path, title, done, doneAt, doneBy, due, assignee).</p>
+<h3 id="todo-list-create"><code>todo-list-create</code><a class="anchor" href="#todo-list-create" aria-label="Link to this section"></a></h3>
+<p>Make a todo list: your own, in ~/todos, or with --group one every member of the group shares, in the group&#39;s shared home.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-list-create [--group=&lt;group&gt;] &lt;title&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;title&gt;</code></td>
+<td>what the list is called, such as Shopping.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--group=&lt;group&gt;</code></td>
+<td>a group of yours with a shared home, whose members share the list.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-list-create Shopping --group <span class="hljs-built_in">users</span>
+todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The new list: path, title, group, open and total.</p>
+<h3 id="todo-lists"><code>todo-lists</code><a class="anchor" href="#todo-lists" aria-label="Link to this section"></a></h3>
+<p>List the todo lists you can see: your own, then those in the shared homes of your groups.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>todo-lists</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-lists</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per list: path, title, group (absent for your own), open and total.</p>
+<h3 id="todo-members"><code>todo-members</code><a class="anchor" href="#todo-members" aria-label="Link to this section"></a></h3>
+<p>List who an item of a todo list may be given to: the members of the list&#39;s group, or you for a list of your own.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>todo-members &lt;list&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;list&gt;</code></td>
+<td>the list, by its path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-members /groups/users/todos/shopping</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per person: username and name.</p>
+<h3 id="todo-mine"><code>todo-mine</code><a class="anchor" href="#todo-mine" aria-label="Link to this section"></a></h3>
+<p>List what is left for you to do: open items given to you on any list, and your own lists&#39; open items given to nobody, soonest due first.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>todo-mine</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-mine</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per item, as todo-items gives them, with listTitle and group.</p>
+<h3 id="todo-set"><code>todo-set</code><a class="anchor" href="#todo-set" aria-label="Link to this section"></a></h3>
+<p>Change a todo item&#39;s title, the day it is due, or who is to do it.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-set [--title=&lt;string&gt;] [--due=&lt;string&gt;] [--no-due] [--assignee=&lt;user&gt;] [--no-assignee] &lt;item&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;item&gt;</code></td>
+<td>the item, by its path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--title=&lt;string&gt;</code></td>
+<td>its new title.</td>
+</tr>
+<tr>
+<td><code>--due=&lt;string&gt;</code></td>
+<td>the day it is due, as YYYY-MM-DD.</td>
+</tr>
+<tr>
+<td><code>--no-due</code></td>
+<td>it is due on no particular day.</td>
+</tr>
+<tr>
+<td><code>--assignee=&lt;user&gt;</code></td>
+<td>who is to do it: a member of the list&#39;s group, or you on a list of your own.</td>
+</tr>
+<tr>
+<td><code>--no-assignee</code></td>
+<td>it is nobody in particular&#39;s.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-set /groups/users/todos/shopping/01JB... --due 2026-11-20 --assignee anna</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The item as it is now.</p>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="index.html" rel="prev"><span>Previous</span>Todo lists</a><a class="next" href="../ems/index.html" rel="next"><span>Next</span>The media service</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/todo/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#e">E</a></li><li class="nested"><a href="#events-todo">events-todo</a></li><li><a href="#t">T</a></li><li class="nested"><a href="#todo-add">todo-add</a></li><li class="nested"><a href="#todo-done">todo-done</a></li><li class="nested"><a href="#todo-items">todo-items</a></li><li class="nested"><a href="#todo-list-create">todo-list-create</a></li><li class="nested"><a href="#todo-lists">todo-lists</a></li><li class="nested"><a href="#todo-members">todo-members</a></li><li class="nested"><a href="#todo-mine">todo-mine</a></li><li class="nested"><a href="#todo-set">todo-set</a></li></ul></aside>
+    </div>
+  </body>
+</html>

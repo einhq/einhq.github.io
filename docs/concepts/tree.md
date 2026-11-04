@@ -11,7 +11,7 @@ described.
 
 ## The top of the tree
 
-A fresh installation has seven folders at the top:
+A fresh installation has eight folders at the top:
 
 ```bash
 # in EiN's terminal
@@ -19,7 +19,7 @@ ls /
 ```
 
 ```text
-archive  dev  etc  home  tmp  usr  var
+archive  dev  etc  groups  home  tmp  usr  var
 ```
 
 Each holds one kind of thing, and the kind is the reason a path sits where it does:
@@ -28,13 +28,14 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 | ---------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and devices                       | Everyone with an account, as each folder's sharing allows |
 | `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging | Each account in its own folder                            |
+| `/groups`  | One folder per group given a shared home: what its members have in common                                 | The group's members, each in their own group's folder     |
 | `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the Web UI        | The administrator, and commands such as `config set`      |
 | `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs           | EiN itself                                                |
 | `/usr`     | Code and read-only files: the commands, the modules and the built-in guide                                | Nobody by hand; an update or `mod install` replaces it    |
 | `/dev`     | The channels facts about changes are announced on, and `/dev/null`                                        | EiN itself                                                |
 | `/tmp`     | Scratch space that does not outlast a restart                                                             | Everyone                                                  |
 
-![The tree from /: /archive with the Archive module's albums, people, locations and devices and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
+![The tree from /: /archive with the Archive module's albums, people, locations and devices and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /groups with the users and family groups' homes, each seen only by its members; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
 
 The administrator owns `/` and the system folders, most of them with the mode `0755`: every account
 may read and pass through them, and only the administrator changes them. Your own data lives in `/archive` and
@@ -106,6 +107,18 @@ included. It has four folders of its own:
 
 Neither your trash nor, with the Archive, your staging is part of the library: search, and the
 Archive's Media and Year pages, map and **On this day**, leave out everything in them.
+
+## /groups: what a group shares
+
+A group the administrator has given a shared home has a folder here, `/groups/<group>`. Everyone
+with an account is in the `users` group, which has one from the start: `/groups/users` is the
+household's. The administrator gives other groups one, such as `/groups/family`; see
+[Accounts and groups](../admin/accounts.md#a-groups-shared-home).
+
+A group's home belongs to the group, with the mode `0770`: its members read and write everything
+in it, and nobody else sees it. What is made in it, however deep, stays the whole group's. `ls
+/groups` therefore lists the homes of your own groups and nothing else. Modules keep a group's
+things here, such as its lists in `todos/` with [Todo](../todo/index.md).
 
 ## /etc: accounts and settings
 
@@ -210,6 +223,7 @@ albums  devices  locations  people  tags
 | `ARCHIVE_PATH`     | `/archive`         |
 | `TAGS_PATH`        | `/archive/tags`    |
 | `HOMES_PATH`       | `/home`            |
+| `GROUP_HOMES_PATH` | `/groups`          |
 | `HOME`             | your own home      |
 | `ETC_PATH`         | `/etc`             |
 | `USERS_PATH`       | `/etc/users`       |

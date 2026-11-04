@@ -109,6 +109,11 @@
 - [Album folders](album-folders/index.md)
 - [Album folders commands](album-folders/commands.md)
 
+## Todo
+
+- [Todo lists](todo/index.md)
+- [Todo commands](todo/commands.md)
+
 ## Media service
 
 - [The media service](ems/index.md)

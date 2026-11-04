@@ -75,6 +75,7 @@
 <p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -282,14 +283,26 @@ is stays ticked and greyed; the panel links to their page, where their primary g
 An account that no longer exists but is still linked shows as <strong>no longer an account</strong>, ready to
 untick. <code>users</code> has no list, since everyone who signs in is in it.</li>
 <li>Built-in groups say what they are for at the top, and &quot;Built-in groups can&#39;t be deleted.&quot;</li>
+<li><strong>Shared home</strong> gives the group a folder of its own; see below. Built-in groups other than
+<code>users</code> and personal groups have no such section.</li>
 </ul>
 <figure class="shot"><a href="../../assets/shots/settings-groups@2x.webp"><img src="../../assets/shots/settings-groups.webp" srcset="../../assets/shots/settings-groups.webp 1x, ../../assets/shots/settings-groups@2x.webp 2x" alt="Settings → Groups with Administrators open: the built-in groups in the list, the Built in badge, the group's Profile and its Members" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Built-in groups say what they are for; the Users group shows Everyone instead of faces</figcaption></figure>
+<h3 id="a-groups-shared-home">A group&#39;s shared home<a class="anchor" href="#a-groups-shared-home" aria-label="Link to this section"></a></h3>
+<p>A group can have a shared home, <code>/groups/&lt;group&gt;</code>: a folder its members share and nobody else
+sees, where they keep what the group has in common and where modules keep the group&#39;s things.
+<code>users</code> has one from the start, <code>/groups/users</code>, so everyone with an account shares one folder.</p>
+<p>To give a group a home, open it and switch on <strong>Shared home</strong>. The switch then shows where the
+folder is, such as <code>/groups/family</code>. Everything put in it, however deep, belongs to the group:
+every member can read, change and remove it, and anyone who leaves the group stops seeing it.</p>
+<p>Switching <strong>Shared home</strong> off moves the folder, with everything in it, to your trash, from where
+<strong>Restore</strong> brings it back. <code>users</code> stays without one once you have switched its home off.</p>
 <h3 id="delete-a-group">Delete a group<a class="anchor" href="#delete-a-group" aria-label="Link to this section"></a></h3>
 <ol>
 <li>Open the group and choose <strong>Delete group…</strong> under <strong>Delete</strong>.</li>
 <li>Pick the group that takes over what this one owns. <strong>Administrators</strong> is picked to start with.</li>
 <li>Choose <strong>Delete</strong> followed by the group&#39;s name, such as <strong>Delete family</strong>.</li>
 </ol>
+<p>A group with a shared home says so in the confirmation: its home goes to your trash.</p>
 <p>Nobody loses their account. Accounts whose primary group it was go back to their own groups, and
 grants that named the group on folders, or on albums with the Archive, are dropped, so its members lose what they could
 see only through it.</p>
@@ -391,11 +404,14 @@ user-disable helen                   <span class="hljs-comment"># signs her out 
 user-enable helen
 user-delete helen --to=peggy         <span class="hljs-comment"># what she owned passes to peggy</span>
 
-group-create family --title=Family
+group-create family --title=Family --home   <span class="hljs-comment"># --home: with a shared home, /groups/family</span>
+group-home family                    <span class="hljs-comment"># give an existing group its shared home</span>
+group-home family --off              <span class="hljs-comment"># move it to your trash</span>
 group-add-member family helen
 group-remove-member family helen
 group-update family --description=<span class="hljs-string">&#x27;The Wrenfield household&#x27;</span>
-group-delete family --to=<span class="hljs-built_in">users</span>       <span class="hljs-comment"># --force when it is someone&#x27;s primary group</span></code></pre></div>
+group-delete family --to=<span class="hljs-built_in">users</span>       <span class="hljs-comment"># --force when it is someone&#x27;s primary group,</span>
+                                     <span class="hljs-comment"># --remove-home when it has a shared home</span></code></pre></div>
 <p>To see who there is and who is signed in:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 user-list                <span class="hljs-comment"># every account, with uid and title; --inactive for the disabled ones</span>
@@ -485,7 +501,7 @@ list every option.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/accounts.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-accounts-are-managed">Where accounts are managed</a></li><li><a href="#the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with</a></li><li><a href="#create-an-account">Create an account</a></li><li><a href="#change-an-account">Change an account</a></li><li class="nested"><a href="#profile">Profile</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#password">Password</a></li><li class="nested"><a href="#sign-in-and-removal">Sign-in and removal</a></li><li><a href="#delete-an-account">Delete an account</a></li><li><a href="#create-and-change-groups">Create and change groups</a></li><li class="nested"><a href="#delete-a-group">Delete a group</a></li><li><a href="#what-new-accounts-start-with">What new accounts start with</a></li><li><a href="#let-a-second-person-administer">Let a second person administer</a></li><li><a href="#signing-in-and-why-it-fails">Signing in and why it fails</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-accounts-are-managed">Where accounts are managed</a></li><li><a href="#the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with</a></li><li><a href="#create-an-account">Create an account</a></li><li><a href="#change-an-account">Change an account</a></li><li class="nested"><a href="#profile">Profile</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#password">Password</a></li><li class="nested"><a href="#sign-in-and-removal">Sign-in and removal</a></li><li><a href="#delete-an-account">Delete an account</a></li><li><a href="#create-and-change-groups">Create and change groups</a></li><li class="nested"><a href="#a-groups-shared-home">A group's shared home</a></li><li class="nested"><a href="#delete-a-group">Delete a group</a></li><li><a href="#what-new-accounts-start-with">What new accounts start with</a></li><li><a href="#let-a-second-person-administer">Let a second person administer</a></li><li><a href="#signing-in-and-why-it-fails">Signing in and why it fails</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
