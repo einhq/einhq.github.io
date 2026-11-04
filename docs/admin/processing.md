@@ -109,8 +109,9 @@ A pipeline's page, opened from the **Work** table, shows its description, its **
 **Started** and **Duration**. The tabs **All**, **Running**, **Completed**, **Failed** and
 **Cancelled** narrow the list, and **Load more** fetches the next page.
 
-Choose an instance to open it. Its page shows the status, the target node and the steps:
-**Step**, **Status**, **Depends on**, **Command** and **Duration**. A step's status is one of these:
+Choose an instance to open it. Its page is named after the target node, with the way back above
+the name: **System dashboard › Work ›** the pipeline, as on the pipeline's own page. It shows the
+status and the steps: **Step**, **Status**, **Depends on**, **Command** and **Duration**. A step's status is one of these:
 
 | Status      | What it means                                                                                        |
 | ----------- | ---------------------------------------------------------------------------------------------------- |
@@ -206,7 +207,8 @@ To act on many at once, tick them on the pipeline's page and choose **Rerun**.
 | Stop a running or queued instance                        | **Cancel**              | `pipeline-cancel <pipeline>/<id>`              |
 | Delete instances, cancelling running ones first          | **Remove**              | `pipeline-remove <pipeline>/<id> …`            |
 
-Only an administrator sees these buttons, and only an administrator can run these commands.
+Only an administrator sees these buttons, and only an administrator can run these commands. On an
+instance's page, **Remove** is under ⋮ in the header's corner.
 
 ### Work that nothing will run
 

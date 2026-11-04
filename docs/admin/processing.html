@@ -212,8 +212,9 @@ that to <code>--after</code> for the next page. Give it pipeline names to narrow
 <strong>Steps</strong> and its <strong>Priority</strong>, and below them its <strong>Instances</strong>: <strong>Status</strong>, <strong>Target</strong>,
 <strong>Started</strong> and <strong>Duration</strong>. The tabs <strong>All</strong>, <strong>Running</strong>, <strong>Completed</strong>, <strong>Failed</strong> and
 <strong>Cancelled</strong> narrow the list, and <strong>Load more</strong> fetches the next page.</p>
-<p>Choose an instance to open it. Its page shows the status, the target node and the steps:
-<strong>Step</strong>, <strong>Status</strong>, <strong>Depends on</strong>, <strong>Command</strong> and <strong>Duration</strong>. A step&#39;s status is one of these:</p>
+<p>Choose an instance to open it. Its page is named after the target node, with the way back above
+the name: <strong>System dashboard › Work ›</strong> the pipeline, as on the pipeline&#39;s own page. It shows the
+status and the steps: <strong>Step</strong>, <strong>Status</strong>, <strong>Depends on</strong>, <strong>Command</strong> and <strong>Duration</strong>. A step&#39;s status is one of these:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -345,7 +346,8 @@ pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code><
 </tr>
 </tbody></table>
 </div>
-<p>Only an administrator sees these buttons, and only an administrator can run these commands.</p>
+<p>Only an administrator sees these buttons, and only an administrator can run these commands. On an
+instance&#39;s page, <strong>Remove</strong> is under ⋮ in the header&#39;s corner.</p>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
 <p>A kind with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Dashboard</strong>
 and <code>health</code> (as a failed check <code>kind &lt;name&gt;</code>) both say so. The usual cause is that the worker
