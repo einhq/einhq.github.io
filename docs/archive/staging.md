@@ -261,6 +261,13 @@ point of interest, the town of a trip, or for an outing near home its neighbourh
 that year's pictures were taken there. A group with neither says when in the week it was ("Saturday
 evening", "Weekend"), or only its dates.
 
+Home, which trips are away from and outings are near, is decided per year. It is the home on your
+person's [Homes tab](family.md#homes-and-residents) that covers most of that year, when your
+account is linked to your person; else the spot where at least a quarter of the category's located
+pictures that year were taken; else the year before's home. A home without dates covers every year,
+so the pictures can overrule it: in a year with 20 or more located pictures, none of them within a
+kilometre of it, that spot is home instead. A home with dates is always taken as given.
+
 Groups in the Everyday, Needs a date and Clutter lanes are named after what they hold:
 "Everyday · 2014", "Screenshots and saved images · 2019", "Undated · box-3", or "1987 · box-3"
 for pictures known only to a year. They are collections, not events, so they are not split,
