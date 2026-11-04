@@ -446,7 +446,9 @@ household&#39;s. The administrator gives other groups one, such as <code>/groups
 <a href="../admin/accounts.html#a-groups-shared-home">Accounts and groups</a>.</p>
 <p>A group&#39;s home belongs to the group, with the mode <code>0770</code>: its members read and write everything
 in it, and nobody else sees it. What is made in it, however deep, stays the whole group&#39;s. <code>ls /groups</code> therefore lists the homes of your own groups and nothing else. Modules keep a group&#39;s
-things here, such as its lists in <code>todos/</code> with <a href="../todo/index.html">Todo</a>.</p>
+things here, such as its lists in <code>todos/</code> with <a href="../todo/index.html">Todo</a>. <code>.ui/nav.json</code> holds the
+group&#39;s changes to the sidebar and top bar, and <code>.ui/nav.d</code> the entries of the modules kept to the
+group; see <a href="../guide/customizing.html#change-the-navigation-for-a-group">Your sidebar and top bar</a>.</p>
 <h2 id="etc-accounts-and-settings">/etc: accounts and settings<a class="anchor" href="#etc-accounts-and-settings" aria-label="Link to this section"></a></h2>
 <p><code>/etc</code> holds what a person declares: the accounts, the settings and what runs. The administrator
 owns it.</p>
@@ -500,10 +502,6 @@ owns it.</p>
 <tr>
 <td><code>/etc/ui/nav.json</code></td>
 <td>The administrator&#39;s changes to the navigation, laid over every module&#39;s</td>
-</tr>
-<tr>
-<td><code>/etc/ui/groups</code></td>
-<td>A group&#39;s changes to the navigation, <code>&lt;group&gt;/nav.json</code>, for its members</td>
 </tr>
 <tr>
 <td><code>/etc/fstab</code></td>

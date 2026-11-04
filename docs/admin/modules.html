@@ -426,8 +426,12 @@ that what it runs of that module fails for anyone outside them, for example
 Keep both to the same groups, or neither.</p>
 <p>Behind this, the groups are in <code>/etc/modules/&lt;module&gt;.groups</code>, one name per line. Setting the module
 up puts its commands on the path in <code>/etc/bashrc.d/&lt;group&gt;</code> for each group and for <code>admin</code>, instead
-of in <code>/etc/bashrc</code>, and its sidebar entries in <code>/etc/ui/groups/&lt;group&gt;/nav.d/&lt;module&gt;.json</code> instead
-of in <code>/etc/ui/nav.d</code>. Removing the module forgets its groups.
+of in <code>/etc/bashrc</code>, and its sidebar entries in <code>/groups/&lt;group&gt;/.ui/nav.d/&lt;module&gt;.json</code>, in each
+group&#39;s <a href="accounts.html#a-groups-shared-home">shared home</a>, instead of in <code>/etc/ui/nav.d</code>. A group
+without a home is given one, so a module can be kept only to a group that can have one: not to
+<code>admin</code>, <code>guest</code>, <code>ssh</code> or <code>sudo</code>, nor to a person&#39;s own group, which <code>mod groups</code> refuses with
+<code>mod groups: a module is kept to groups that can have a home, for its navigation, and &#39;sudo&#39; is a built-in group</code>.
+Removing the module forgets its groups.
 <a href="../reference/config-files.html">Configuration files</a> lists these files.</p>
 <h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
 <ol>

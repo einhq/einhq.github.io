@@ -118,7 +118,9 @@ household's. The administrator gives other groups one, such as `/groups/family`;
 A group's home belongs to the group, with the mode `0770`: its members read and write everything
 in it, and nobody else sees it. What is made in it, however deep, stays the whole group's. `ls
 /groups` therefore lists the homes of your own groups and nothing else. Modules keep a group's
-things here, such as its lists in `todos/` with [Todo](../todo/index.md).
+things here, such as its lists in `todos/` with [Todo](../todo/index.md). `.ui/nav.json` holds the
+group's changes to the sidebar and top bar, and `.ui/nav.d` the entries of the modules kept to the
+group; see [Your sidebar and top bar](../guide/customizing.md#change-the-navigation-for-a-group).
 
 ## /etc: accounts and settings
 
@@ -138,7 +140,6 @@ owns it.
 | `/etc/services`               | The services EiN can run (`available/`) and those it starts (`enabled/`)                    |
 | `/etc/ui/nav.d/<module>.json` | Each module's sidebar and top-bar entries                                                   |
 | `/etc/ui/nav.json`            | The administrator's changes to the navigation, laid over every module's                     |
-| `/etc/ui/groups`              | A group's changes to the navigation, `<group>/nav.json`, for its members                    |
 | `/etc/fstab`                  | Mounts recorded with `mount --save`, mounted again at every start                           |
 | `/etc/frozen-uploads`         | The types of upload that are [frozen](files.md#frozen-files) as they arrive                 |
 | `/etc/ssh_host_key`           | The SSH server's host key                                                                   |

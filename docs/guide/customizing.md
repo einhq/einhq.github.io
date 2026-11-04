@@ -15,10 +15,10 @@ The sidebar and the top bar are laid together from four layers, read in this ord
 | -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------ | ------------------- |
 | The modules' entries | `/etc/ui/nav.d/<module>.json`, one for each module; EiN's own is `/etc/ui/nav.d/ui.json` | each module, when it is set up | everyone            |
 | Changes for everyone | `/etc/ui/nav.json`                                                                       | an administrator               | everyone            |
-| A group's changes    | `/etc/ui/groups/<group>/nav.json`, one for each group that has one                       | an administrator               | the group's members |
+| A group's changes    | `/groups/<group>/.ui/nav.json`, in the group's home                                      | the group's members            | the group's members |
 | Your changes         | `~/.ui/nav.json`, which is `/home/<your username>/.ui/nav.json`                          | you                            | you only            |
 
-![Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /etc/ui/groups/<group>/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one](../diagrams/nav-layers.svg "Each layer changes only what it names, so your file holds only what you want different.")
+![Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /groups/<group>/.ui/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one](../diagrams/nav-layers.svg "Each layer changes only what it names, so your file holds only what you want different.")
 
 Every entry has an id, such as `archive.albums` for **Albums**. A later layer works on the earlier
 ones by id:
@@ -33,7 +33,7 @@ reach everything you left alone.
 
 A few things follow from this:
 
-- None of `/etc/ui/nav.json`, `/etc/ui/groups/<group>/nav.json` and `~/.ui/nav.json` exists until
+- None of `/etc/ui/nav.json`, `/groups/<group>/.ui/nav.json` and `~/.ui/nav.json` exists until
   someone writes it.
 - What one layer hides stays hidden. There is no way to unhide, so you cannot bring back an entry
   your administrator hid.
@@ -502,16 +502,18 @@ some accounts only, write a [group's file](#change-the-navigation-for-a-group).
 
 ## Change the navigation for a group
 
-As an administrator you can also change the navigation for the members of one group, such as a
-link to a page only they use. The file is `/etc/ui/groups/<group>/nav.json`, where `<group>` is the
-group's name as `group-list` prints it, not its title, in the same format as the other files.
+The members of a group with a [shared home](../admin/accounts.md#a-groups-shared-home) can change
+the navigation for all of them, such as a link to a page only they use. The file is
+`/groups/<group>/.ui/nav.json` in the group's home, where `<group>` is the group's name as
+`group-list` prints it, not its title, in the same format as the other files. Any member can write
+it, and so can an administrator.
 
 This gives the members of a `sailors` group a page of their own in the **Explore** section:
 
 ```bash
-# in EiN's terminal, as an administrator
-mkdir -p /etc/ui/groups/sailors
-edit /etc/ui/groups/sailors/nav.json
+# in EiN's terminal, as a member of sailors
+mkdir -p /groups/sailors/.ui
+edit /groups/sailors/.ui/nav.json
 ```
 
 ```json
@@ -525,12 +527,13 @@ edit /etc/ui/groups/sailors/nav.json
 A group's file is laid over `/etc/ui/nav.json` and under each member's own file, so members can
 still rename and move what it gives. Someone in several groups with a file gets each of them, in the
 order of the groups' names. Groups are read at sign-in, so someone added to a group gets its file the
-next time they sign in. The `guest` group's file is for visitors browsing without signing in.
-If the folder's name is not a group, `ui-nav` warns `/etc/ui/groups/<name>: no group <name>`.
+next time they sign in. A group without a home has no file of its own; to keep an entry from
+visitors browsing without signing in, give it `"signedIn": true` in `/etc/ui/nav.json`.
 
-A group's folder may also hold `nav.d`, with the entries of the modules
+A group's home may also hold `.ui/nav.d`, with the entries of the modules
 [kept to the group](../admin/modules.md#keep-a-module-to-some-groups). `mod setup` links them there,
-and they count as modules' entries, under everything else, for the group's members alone.
+and they count as modules' entries, under everything else, for the group's members alone and for
+the administrator.
 
 > [!WARNING]
 > `hide`, `admin` and `signedIn` decide only what the sidebar and top bar show. A page still opens

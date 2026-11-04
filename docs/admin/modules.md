@@ -319,8 +319,12 @@ Keep both to the same groups, or neither.
 
 Behind this, the groups are in `/etc/modules/<module>.groups`, one name per line. Setting the module
 up puts its commands on the path in `/etc/bashrc.d/<group>` for each group and for `admin`, instead
-of in `/etc/bashrc`, and its sidebar entries in `/etc/ui/groups/<group>/nav.d/<module>.json` instead
-of in `/etc/ui/nav.d`. Removing the module forgets its groups.
+of in `/etc/bashrc`, and its sidebar entries in `/groups/<group>/.ui/nav.d/<module>.json`, in each
+group's [shared home](accounts.md#a-groups-shared-home), instead of in `/etc/ui/nav.d`. A group
+without a home is given one, so a module can be kept only to a group that can have one: not to
+`admin`, `guest`, `ssh` or `sudo`, nor to a person's own group, which `mod groups` refuses with
+`mod groups: a module is kept to groups that can have a home, for its navigation, and 'sudo' is a built-in group`.
+Removing the module forgets its groups.
 [Configuration files](../reference/config-files.md) lists these files.
 
 ## Remove a module

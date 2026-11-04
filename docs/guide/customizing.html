@@ -118,8 +118,8 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 </tr>
 <tr>
 <td>A group&#39;s changes</td>
-<td><code>/etc/ui/groups/&lt;group&gt;/nav.json</code>, one for each group that has one</td>
-<td>an administrator</td>
+<td><code>/groups/&lt;group&gt;/.ui/nav.json</code>, in the group&#39;s home</td>
+<td>the group&#39;s members</td>
 <td>the group&#39;s members</td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
 </tr>
 </tbody></table>
 </div>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 556" role="img" aria-label="Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /etc/ui/groups/&lt;group&gt;/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 556" role="img" aria-label="Four layers stacked into the sidebar: the modules' entries in /etc/ui/nav.d, the administrator's /etc/ui/nav.json for everyone, a group's /groups/&lt;group&gt;/.ui/nav.json for its members, and your ~/.ui/nav.json, with the rules same id changes fields, another id adds an entry, hide removes one">
   <title>How the sidebar is put together</title>
   <defs>
     <marker id="guide-customizing-md-1-nav-layers-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -163,9 +163,9 @@ signed in and able to edit a few lines of JSON, usually in the <a href="../shell
   
   <rect x="24" y="276" width="420" height="68" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="42" y="304" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A group's changes</text>
-  <text x="426" y="304" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/etc/ui/groups/&lt;group&gt;/nav.json</text>
+  <text x="426" y="304" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/groups/&lt;group&gt;/.ui/nav.json</text>
   <text x="42" y="328" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
-    fill="#a2abbb">written by an administrator, for the group's members</text>
+    fill="#a2abbb">in the group's home, written by its members</text>
 
   <line x1="234" y1="344" x2="234" y2="382" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#guide-customizing-md-1-nav-layers-arrow)" />
   <text x="246" y="368" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">laid over, by id</text>
@@ -219,7 +219,7 @@ write. The entry keeps all the others.</li>
 reach everything you left alone.</p>
 <p>A few things follow from this:</p>
 <ul>
-<li>None of <code>/etc/ui/nav.json</code>, <code>/etc/ui/groups/&lt;group&gt;/nav.json</code> and <code>~/.ui/nav.json</code> exists until
+<li>None of <code>/etc/ui/nav.json</code>, <code>/groups/&lt;group&gt;/.ui/nav.json</code> and <code>~/.ui/nav.json</code> exists until
 someone writes it.</li>
 <li>What one layer hides stays hidden. There is no way to unhide, so you cannot bring back an entry
 your administrator hid.</li>
@@ -681,13 +681,15 @@ own files, what you changed, but they cannot bring back what you hid. To change 
 some accounts only, write a <a href="#change-the-navigation-for-a-group">group&#39;s file</a>.
 <a href="../admin/processing.html">Processing and pipelines</a> explains what <code>pipeline-heal</code> reruns.</p>
 <h2 id="change-the-navigation-for-a-group">Change the navigation for a group<a class="anchor" href="#change-the-navigation-for-a-group" aria-label="Link to this section"></a></h2>
-<p>As an administrator you can also change the navigation for the members of one group, such as a
-link to a page only they use. The file is <code>/etc/ui/groups/&lt;group&gt;/nav.json</code>, where <code>&lt;group&gt;</code> is the
-group&#39;s name as <code>group-list</code> prints it, not its title, in the same format as the other files.</p>
+<p>The members of a group with a <a href="../admin/accounts.html#a-groups-shared-home">shared home</a> can change
+the navigation for all of them, such as a link to a page only they use. The file is
+<code>/groups/&lt;group&gt;/.ui/nav.json</code> in the group&#39;s home, where <code>&lt;group&gt;</code> is the group&#39;s name as
+<code>group-list</code> prints it, not its title, in the same format as the other files. Any member can write
+it, and so can an administrator.</p>
 <p>This gives the members of a <code>sailors</code> group a page of their own in the <strong>Explore</strong> section:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
-<span class="hljs-built_in">mkdir</span> -p /etc/ui/groups/sailors
-edit /etc/ui/groups/sailors/nav.json</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of sailors</span>
+<span class="hljs-built_in">mkdir</span> -p /groups/sailors/.ui
+edit /groups/sailors/.ui/nav.json</code></pre></div>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sailors.boats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;explore&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Boats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sailboat&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/search?q=sailboat&quot;</span> <span class="hljs-punctuation">}</span>
@@ -696,11 +698,12 @@ edit /etc/ui/groups/sailors/nav.json</code></pre></div>
 <p>A group&#39;s file is laid over <code>/etc/ui/nav.json</code> and under each member&#39;s own file, so members can
 still rename and move what it gives. Someone in several groups with a file gets each of them, in the
 order of the groups&#39; names. Groups are read at sign-in, so someone added to a group gets its file the
-next time they sign in. The <code>guest</code> group&#39;s file is for visitors browsing without signing in.
-If the folder&#39;s name is not a group, <code>ui-nav</code> warns <code>/etc/ui/groups/&lt;name&gt;: no group &lt;name&gt;</code>.</p>
-<p>A group&#39;s folder may also hold <code>nav.d</code>, with the entries of the modules
+next time they sign in. A group without a home has no file of its own; to keep an entry from
+visitors browsing without signing in, give it <code>&quot;signedIn&quot;: true</code> in <code>/etc/ui/nav.json</code>.</p>
+<p>A group&#39;s home may also hold <code>.ui/nav.d</code>, with the entries of the modules
 <a href="../admin/modules.html#keep-a-module-to-some-groups">kept to the group</a>. <code>mod setup</code> links them there,
-and they count as modules&#39; entries, under everything else, for the group&#39;s members alone.</p>
+and they count as modules&#39; entries, under everything else, for the group&#39;s members alone and for
+the administrator.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p><code>hide</code>, <code>admin</code> and <code>signedIn</code> decide only what the sidebar and top bar show. A page still opens
 by its address for anyone whose permissions allow it, and anyone can add an entry of their own

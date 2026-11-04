@@ -200,7 +200,9 @@ folder is, such as `/groups/family`. Everything put in it, however deep, belongs
 every member can read, change and remove it, and anyone who leaves the group stops seeing it.
 
 Switching **Shared home** off moves the folder, with everything in it, to your trash, from where
-**Restore** brings it back. `users` stays without one once you have switched its home off.
+**Restore** brings it back. `users` stays without one once you have switched its home off. A group
+a module is [kept to](modules.md#keep-a-module-to-some-groups) gets a new home the next time the
+module is set up, since its home holds the module's sidebar entries.
 
 ### Delete a group
 
