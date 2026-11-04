@@ -310,6 +310,11 @@ EIN_DB_DIR=</code></pre></div>
 <td>compose</td>
 <td>The language model&#39;s file, image and share of the card.</td>
 </tr>
+<tr>
+<td><code>TRUSTED_PROXIES</code></td>
+<td>EiN</td>
+<td>The addresses of proxies whose forwarding headers name the visitor, by commas. See <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
 </tbody></table>
 </div>
 <p>Four settings are fixed by <code>compose.yaml</code>, which wins over <code>.env</code>: <code>CFG_HTTP_PORT</code> (<code>8080</code>), <code>CFG_SSH_PORT</code> (<code>2222</code>), and the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> (<code>http://ems:8181</code>) and <code>CFG_EMS_KEY</code> (the value of <code>EMS_KEY</code>). A line for them in <code>.env</code> changes nothing. The Assistant&#39;s <code>CFG_LLM_URL</code> is read from <code>.env</code> and is <code>http://llm:8190</code> when the line is missing. With <code>--llm</code>, <code>compose.override.yaml</code> also sets <code>CFG_LLM_CARD</code> to <code>card</code> or <code>cpu</code> after <code>EIN_GPU</code>.</p>

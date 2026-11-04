@@ -90,12 +90,13 @@ EIN_DB_DIR=
 
 Lines you can add:
 
-| Line                                                                 | Read by           | What it does                                                                       |
-| -------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
-| `CFG_…`                                                              | EiN               | Gives a setting its value, shown as **From deployment**. See the exceptions below. |
-| `EMS_…`                                                              | the media service | Configures the media service.                                                      |
-| `EIN_MEMORY`, `EMS_MEMORY`, `LLM_MEMORY`                             | compose           | The most memory each container may use: `6g`, `16g` and `10g` unless set.          |
-| `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE`, `LLM_CARD_RESERVE_MB` | compose           | The language model's file, image and share of the card.                            |
+| Line                                                                 | Read by           | What it does                                                                                                                              |
+| -------------------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `CFG_…`                                                              | EiN               | Gives a setting its value, shown as **From deployment**. See the exceptions below.                                                        |
+| `EMS_…`                                                              | the media service | Configures the media service.                                                                                                             |
+| `EIN_MEMORY`, `EMS_MEMORY`, `LLM_MEMORY`                             | compose           | The most memory each container may use: `6g`, `16g` and `10g` unless set.                                                                 |
+| `LLM_GGUF_REPO`, `LLM_GGUF_FILE`, `LLM_IMAGE`, `LLM_CARD_RESERVE_MB` | compose           | The language model's file, image and share of the card.                                                                                   |
+| `TRUSTED_PROXIES`                                                    | EiN               | The addresses of proxies whose forwarding headers name the visitor, by commas. See [Ports, HTTPS and remote access](../admin/network.md). |
 
 Four settings are fixed by `compose.yaml`, which wins over `.env`: `CFG_HTTP_PORT` (`8080`), `CFG_SSH_PORT` (`2222`), and the `ems` module's `CFG_EMS_URL` (`http://ems:8181`) and `CFG_EMS_KEY` (the value of `EMS_KEY`). A line for them in `.env` changes nothing. The Assistant's `CFG_LLM_URL` is read from `.env` and is `http://llm:8190` when the line is missing. With `--llm`, `compose.override.yaml` also sets `CFG_LLM_CARD` to `card` or `cpu` after `EIN_GPU`.
 

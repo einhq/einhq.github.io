@@ -14,6 +14,7 @@ Read once, from EiN's own environment, when it starts: `.env` in an installation
 | `POSTGRES_POOL_MAX` | `20` | Database connections the process may hold at once. Parallel work queues on this long before PostgreSQL itself is the limit. |
 | `POSTGRES_POOL_RESERVED` | `4` | Of those, connections background work may never take, so an interactive command never waits behind a crawl. 0 is first come, first served. |
 | `POSTGRES_LISTEN_POOL_MAX` | `4` | Connections kept apart for change notifications, which hold theirs for good. |
+| `TRUSTED_PROXIES` |  | Addresses, separated by commas, of proxies whose X-Forwarded-For and Forwarded headers name the client, besides this host's loopback, which is always believed. setup.sh sets 10.0.2.2 under rootless podman's slirp4netns, where a proxy on the machine reaches EiN from there. |
 | `FILE_ROOT_PATH` | `./files` | Host directory where file content is stored. |
 | `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH` | Host directory for content that can be made again — thumbnails, crops, transcodes — so it can live on a faster or cheaper disk. |
 | `FILE_TMP_PATH` | `/tmp` | Host directory for temporary files while content is written. |

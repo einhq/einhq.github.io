@@ -222,7 +222,14 @@ EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address
 
 Repeated failures are logged as "repeated failed sign-ins", with the address or account; [Services and logs](services-logs.md) shows where to read them.
 
-EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run `who` once after setting up the proxy to see which you have. Under rootless podman with a `podman-compose` older than 1.1, as on Ubuntu 24.04, a proxy on the same machine reaches EiN from `10.0.2.2` rather than from the loopback address; there EiN sees every visitor through the proxy as `10.0.2.2`.
+EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address, or from an address named in `TRUSTED_PROXIES` in `~/ein/.env`. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run `who` once after setting up the proxy to see which you have. If it shows the proxy's address, put that address in `.env` and run `~/ein/setup.sh` again:
+
+```bash
+# in ~/ein/.env on the machine that runs EiN; several addresses are separated by commas
+TRUSTED_PROXIES=192.0.2.10
+```
+
+Name only your proxy's address: a client that reaches EiN from an address in the list can make `who`, the access log and the sign-in throttle show any address it likes. Under rootless podman with a `podman-compose` older than 1.1, as on Ubuntu 24.04, a proxy on the same machine reaches EiN from `10.0.2.2` rather than from the loopback address; `setup.sh` adds `10.0.2.2` to the list there itself, so such a proxy needs no line.
 
 ```bash
 # in EiN's terminal, as an administrator

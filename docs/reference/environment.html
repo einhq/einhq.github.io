@@ -121,6 +121,11 @@
 <td>Connections kept apart for change notifications, which hold theirs for good.</td>
 </tr>
 <tr>
+<td><code>TRUSTED_PROXIES</code></td>
+<td></td>
+<td>Addresses, separated by commas, of proxies whose X-Forwarded-For and Forwarded headers name the client, besides this host&#39;s loopback, which is always believed. setup.sh sets 10.0.2.2 under rootless podman&#39;s slirp4netns, where a proxy on the machine reaches EiN from there.</td>
+</tr>
+<tr>
 <td><code>FILE_ROOT_PATH</code></td>
 <td><code>./files</code></td>
 <td>Host directory where file content is stored.</td>
