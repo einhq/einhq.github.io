@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 372 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 374 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,11 +21,13 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 210 in full](commands-core.md).
+[All 212 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
 | [abspath](commands-core.md#abspath) | Ensure path is abspath. |
+| [access-log](commands-core.md#access-log) | Show who signed in or out, opened a share link or downloaded what, from where, and when (administrators only) |
+| [access-log-purge](commands-core.md#access-log-purge) | Remove access-log records older than a given age, so the access log does not grow without bound (administrators only) |
 | [acl](commands-core.md#acl) | Display or modify a node access control list. |
 | [admin](commands-core.md#admin) | Become the administrator in this terminal, for a member of the sudo group (user-elevate) |
 | [attrs](commands-core.md#attrs) | Display or set node attributes. |

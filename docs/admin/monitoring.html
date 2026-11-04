@@ -91,7 +91,7 @@
 <h2 id="open-the-dashboard">Open the dashboard<a class="anchor" href="#open-the-dashboard" aria-label="Link to this section"></a></h2>
 <p>Choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. The sidebar shows it only to administrators; the page is at <code>/system</code>, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.</p>
 <figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The badge above the title answers the first question: is anything wrong</figcaption></figure>
-<p>The page, <strong>System dashboard</strong>, has up to three badges above its title and four tabs below it, five with the <code>ems</code> module installed:</p>
+<p>The page, <strong>System dashboard</strong>, has up to three badges above its title and five tabs below it, six with the <code>ems</code> module installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -139,6 +139,10 @@
 <tr>
 <td><strong>Log</strong></td>
 <td>The last problems logged, and the system log as it is written</td>
+</tr>
+<tr>
+<td><strong>Activity</strong></td>
+<td>Who signed in, opened a share link or downloaded what, and who changed what</td>
 </tr>
 </tbody></table>
 </div>
@@ -413,6 +417,53 @@ pool cancel /var/pools/media --kind gpu-describe</code></pre></div>
 <p><strong>Log</strong> has two cards. <strong>Recent problems</strong> shows the last 10 lines logged at WARN or ERROR, newest first, or <strong>Nothing logged at WARN or above</strong>. <strong>Live log</strong> follows the system log, <code>/var/logs/system</code>, as it is written: choose <strong>DEBUG</strong>, <strong>INFO</strong>, <strong>WARN</strong> or <strong>ERROR</strong> to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.</p>
 <figure class="shot"><a href="../../assets/shots/system-log@2x.webp"><img src="../../assets/shots/system-log.webp" srcset="../../assets/shots/system-log.webp 1x, ../../assets/shots/system-log@2x.webp 2x" alt="The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Recent problems answers whether anything went wrong while you were not watching</figcaption></figure>
 <p>With the Archive, a warning such as <code>pooled step could not run yet, job waiting</code> means the media service was not ready for a job; the job is tried again on its own, and the kind&#39;s other jobs run meanwhile. <code>pooled step could not run yet, kind resting</code> means it refused several in a row, so the whole kind waits. <a href="services-logs.html">Services and logs</a> covers the logs and <code>dmesg</code>.</p>
+<h2 id="the-activity-tab">The Activity tab<a class="anchor" href="#the-activity-tab" aria-label="Link to this section"></a></h2>
+<p><strong>Activity</strong> lists, newest first, who reached EiN and what they did:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Shown as</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>signed in</strong>, <strong>signed out</strong></td>
+<td>Someone signed in or out in the Web UI, a terminal or over SSH. An SSH sign-in says <code>password</code> or <code>publickey</code>.</td>
+</tr>
+<tr>
+<td><strong>sign-in failed</strong></td>
+<td>A wrong password, an account that may not sign in, or too many tries. The reason is under the row. An account that does not exist shows as <strong>unknown account</strong>: what was typed is not kept, since it is sometimes a password.</td>
+</tr>
+<tr>
+<td><strong>became administrator</strong>, <strong>elevation failed</strong></td>
+<td>A member of <code>sudo</code> chose <strong>Administer…</strong>, or got the password wrong.</td>
+</tr>
+<tr>
+<td><strong>opened share link</strong></td>
+<td>A share link was opened. A visitor shows as the link&#39;s number; someone signed in as themselves.</td>
+</tr>
+<tr>
+<td><strong>downloaded</strong></td>
+<td>A file someone put in <code>/archive</code> or a home was sent in full, saved or shown, in the browser or over SFTP. Thumbnails and other renditions are not counted, and the same person reading the same file again within ten minutes counts once.</td>
+</tr>
+<tr>
+<td><strong>downloaded zip</strong></td>
+<td>Several files were downloaded as one zip; the row names the folder that holds them and how many there were.</td>
+</tr>
+<tr>
+<td><strong>created</strong>, <strong>changed</strong>, <strong>moved</strong>, <strong>deleted</strong> …</td>
+<td>A change to the archive, from the audit trail: the row names the kind of node and, for a change, what changed.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each row has the time, the account, where the event happened (a path), how it came (<code>web</code>, <code>terminal</code>, <code>ssh</code>, <code>sftp</code> or <code>http</code>) and from which address, and the session. Choose a name, path, address or session in a row to show only that; the session shows a sign-in together with everything that sign-in changed. Above the list you can show only <strong>Sign-ins</strong>, <strong>Failures</strong>, <strong>Downloads</strong>, <strong>Share links</strong> or <strong>Changes</strong>, and narrow by user, path, address, session and days. <strong>Show more</strong> reads further back.</p>
+<p>What pipelines derive from each file (thumbnails, faces, text) is left out of the changes unless you turn on <strong>Include what pipelines derived</strong>: there are about ninety such records for every photo.</p>
+<p>The same lists are in the terminal, for administrators only:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+access-log --event sign-in-failed --since 2026-11-01
+access-log /archive/albums/wrenfield-summer-1987 --event download --event download-archive
+audit --sid session-01JC4ZK3E2 --no-pipeline</code></pre></div>
+<p>EiN keeps sign-ins and downloads for a year: the <code>audit-purger</code> service removes older ones, after <strong>Days the access log keeps sign-ins and downloads</strong> (<a href="../reference/settings.html#cfg_access_log_retention_days"><code>CFG_ACCESS_LOG_RETENTION_DAYS</code></a>, 0 keeps them for good). Changes are kept as <a href="../concepts/pipelines.html#trace-a-result-back-to-its-cause">Trace a result back to its cause</a> describes.</p>
 <h2 id="ask-in-the-terminal">Ask in the terminal<a class="anchor" href="#ask-in-the-terminal" aria-label="Link to this section"></a></h2>
 <p>Every figure on the dashboard comes from an ordinary command, and you can run the same commands in EiN&#39;s terminal or over SSH. <code>health</code> gives the verdict and every check:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -671,7 +722,7 @@ verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPU
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/monitoring.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-dashboard">Open the dashboard</a></li><li><a href="#what-the-verdict-means">What the verdict means</a></li><li><a href="#read-the-checks">Read the checks</a></li><li><a href="#the-overview-tab">The Overview tab</a></li><li><a href="#the-work-tab">The Work tab</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li><a href="#the-media-service-tab">The Media service tab</a></li><li><a href="#the-services-tab">The Services tab</a></li><li><a href="#the-log-tab">The Log tab</a></li><li><a href="#ask-in-the-terminal">Ask in the terminal</a></li><li><a href="#watch-it-live-with-top">Watch it live with top</a></li><li><a href="#check-from-another-computer">Check from another computer</a></li><li><a href="#where-the-figures-come-from">Where the figures come from</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-dashboard">Open the dashboard</a></li><li><a href="#what-the-verdict-means">What the verdict means</a></li><li><a href="#read-the-checks">Read the checks</a></li><li><a href="#the-overview-tab">The Overview tab</a></li><li><a href="#the-work-tab">The Work tab</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li><a href="#the-media-service-tab">The Media service tab</a></li><li><a href="#the-services-tab">The Services tab</a></li><li><a href="#the-log-tab">The Log tab</a></li><li><a href="#the-activity-tab">The Activity tab</a></li><li><a href="#ask-in-the-terminal">Ask in the terminal</a></li><li><a href="#watch-it-live-with-top">Watch it live with top</a></li><li><a href="#check-from-another-computer">Check from another computer</a></li><li><a href="#where-the-figures-come-from">Where the figures come from</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

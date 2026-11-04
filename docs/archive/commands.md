@@ -1465,7 +1465,7 @@ generate-derivatives [-v] [-f] [--only=<string>] [--size=<string>] [--prune] <in
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-v`              | Verbose output.                                                                                                                               |
 | `-f`              | Force regenerate even if derivatives exist.                                                                                                   |
-| `--only=<string>` | Generate one class only: still \| transcode \| storyboard.                                                                                    |
+| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                                                                         |
 | `--size=<string>` | Generate only these sizes (comma-separated): thumb \| grid \| small \| medium \| large \| face \| preview \| 1080p \| storyboard \| standard. |
 | `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                                                                               |
 
