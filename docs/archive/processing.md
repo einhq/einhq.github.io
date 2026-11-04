@@ -34,37 +34,37 @@ show **waiting for EMS** on the **Dashboard**.
 
 ## The Archive's pipelines
 
-| Pipeline               | What it does                                                                              | Kind of work                   |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ------------------------------ |
-| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it. | `ingest`                       |
-| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                   | `ingest`                       |
-| `media-stills`         | A photo's display sizes and face crops, a video's poster frames, a recording's waveform   | `stills`                       |
-| `media-transcode`      | Video and audio the browser can play, a video's hover clip, storyboard and chapters       | `transcode`, `stills`, `shots` |
-| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                    | `fingerprint`                  |
-| `media-faces`          | Finds the faces in a photo and crops each one                                             | `faces`                        |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen                                     | `faces`                        |
-| `media-face-assign`    | Matches a found face to a person                                                          | `face-assign`                  |
-| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                 | `embed-picture`                |
-| `media-ocr`            | Reads the text written in a picture                                                       | `ocr`                          |
-| `media-embed-text`     | Text vectors of a file's stored texts                                                     | `embed-text`                   |
-| `media-transcribe`     | A transcript of what is said in a video or recording                                      | `transcribe`                   |
-| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                               | `diarize`                      |
-| `media-speaker-assign` | Decides which person each voice is                                                        | `speaker-assign`               |
-| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found           | `diarize`, `speaker-assign`    |
-| `media-device`         | Links a file to the camera or phone that took it                                          | run by the engine              |
-| `media-geocode`        | Looks up the address of a file's GPS position                                             | run by the engine              |
-| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change          | run by the engine              |
-| `media-duplicates`     | Decides again the duplicate findings of a staged file                                     | `dedupe`                       |
-| `location-link-point`  | Links a photo to the location that contains its GPS point                                 | run by the engine              |
-| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change          | run by the engine              |
-| `document-index`       | Extracts the text of a document and makes it searchable                                   | run by the engine              |
-| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                      | `unzip`                        |
-| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                           | `sidecars`                     |
-| `staging-organize`     | Plans a staging category's suggested groups again                                         | `organize`                     |
-| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                | `retime`                       |
-| `track-stage`          | Makes a GPX file dropped in staging into its device's route                               | run by the engine              |
-| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed          | run by the engine              |
-| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported    | run by the engine              |
+| Pipeline               | What it does                                                                                                    | Kind of work                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it.                       | `ingest`                       |
+| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                                         | `ingest`                       |
+| `media-stills`         | A photo's display sizes and face crops, a video's poster frames and then its hover clip, a recording's waveform | `stills`, `transcode`          |
+| `media-transcode`      | Video and audio the browser can play, a video's storyboard and chapters                                         | `transcode`, `stills`, `shots` |
+| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                          | `fingerprint`                  |
+| `media-faces`          | Finds the faces in a photo and crops each one                                                                   | `faces`                        |
+| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                           | `faces`                        |
+| `media-face-assign`    | Matches a found face to a person                                                                                | `face-assign`                  |
+| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                                       | `embed-picture`                |
+| `media-ocr`            | Reads the text written in a picture                                                                             | `ocr`                          |
+| `media-embed-text`     | Text vectors of a file's stored texts                                                                           | `embed-text`                   |
+| `media-transcribe`     | A transcript of what is said in a video or recording                                                            | `transcribe`                   |
+| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                     | `diarize`                      |
+| `media-speaker-assign` | Decides which person each voice is                                                                              | `speaker-assign`               |
+| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                 | `diarize`, `speaker-assign`    |
+| `media-device`         | Links a file to the camera or phone that took it                                                                | run by the engine              |
+| `media-geocode`        | Looks up the address of a file's GPS position                                                                   | run by the engine              |
+| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                | run by the engine              |
+| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                           | `dedupe`                       |
+| `location-link-point`  | Links a photo to the location that contains its GPS point                                                       | run by the engine              |
+| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                                | run by the engine              |
+| `document-index`       | Extracts the text of a document and makes it searchable                                                         | run by the engine              |
+| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                            | `unzip`                        |
+| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                 | `sidecars`                     |
+| `staging-organize`     | Plans a staging category's suggested groups again                                                               | `organize`                     |
+| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                      | `retime`                       |
+| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                     | run by the engine              |
+| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                                | run by the engine              |
+| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                          | run by the engine              |
 
 ## The workers
 
