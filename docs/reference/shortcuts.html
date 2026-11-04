@@ -91,8 +91,8 @@
 page that explains that part in full; this page is for looking a key up.</p>
 <h2 id="see-the-keys-where-you-are">See the keys where you are<a class="anchor" href="#see-the-keys-where-you-are" aria-label="Link to this section"></a></h2>
 <p>Press <kbd>?</kbd> anywhere outside a text field, or choose <strong>Shortcuts</strong> in the account menu. The
-<strong>Keyboard shortcuts</strong> dialog opens, listing the keys that work anywhere under <strong>Anywhere</strong>, and a
-group for each part of the screen that has keys of its own while that part is on screen:
+<strong>Keyboard shortcuts</strong> dialog opens, listing the keys that work anywhere under <strong>Anywhere</strong>, the
+keys that open a page under <strong>Go to</strong>, and a group for each part of the screen that has keys of its own while that part is on screen:
 <strong>Pictures</strong> for a grid of pictures and <strong>Nodes</strong>, and with the Archive installed <strong>Lightbox</strong>,
 <strong>Video</strong> and <strong>Audio</strong> for the viewer, <strong>Staging</strong> and <strong>Memories</strong>. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.</p>
 <figure class="shot"><a href="../../assets/shots/shortcuts@2x.webp"><img src="../../assets/shots/shortcuts.webp" srcset="../../assets/shots/shortcuts.webp 1x, ../../assets/shots/shortcuts@2x.webp 2x" alt="The Keyboard shortcuts dialog over the Home page, listing the Anywhere group" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The ? dialog lists only the keys of what is on screen now.</figcaption></figure>
@@ -108,7 +108,7 @@ terminal use <kbd>Ctrl</kbd> on a Mac too, never <kbd>⌘</kbd>.</li>
 <li>Core&#39;s keys come first on this page. The keys a module brings are grouped under the module after
 them, <a href="#archive">Archive</a> and <a href="#assistant">Assistant</a>; they work only with that module installed.</li>
 <li>Keys typed into a text field are the field&#39;s. A page&#39;s single-letter keys, <kbd>?</kbd> and the
-top bar&#39;s keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
+sidebar&#39;s and top bar&#39;s keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
 terminal&#39;s <kbd>Alt</kbd> keys work there too.</li>
 </ul>
 <h2 id="anywhere">Anywhere<a class="anchor" href="#anywhere" aria-label="Link to this section"></a></h2>
@@ -144,13 +144,37 @@ terminal&#39;s <kbd>Alt</kbd> keys work there too.</li>
 <p>Where a dialog or the viewer covers the search box, <kbd>Ctrl</kbd>+<kbd>K</kbd> opens the finder as
 a dialog of its own. <a href="../guide/interface.html#keyboard-shortcuts">Finding your way around</a> shows the
 dialog, and <a href="../guide/search.html#the-finder-in-the-top-bar">Search and the finder</a> the finder.</p>
+<h2 id="go-to-a-page">Go to a page<a class="anchor" href="#go-to-a-page" aria-label="Link to this section"></a></h2>
+<p>The main pages of the sidebar have a key that opens them, as choosing the entry does. The keys rest
+while a dialog or the viewer is open, which have keys of their own.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Alt</kbd>+<kbd>H</kbd></td>
+<td>Opens <strong>Home</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>S</kbd></td>
+<td>Opens the <strong>Search</strong> page.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The Archive&#39;s pages have keys too, under <a href="#anywhere-with-the-archive">Anywhere with the Archive</a>, and
+the Assistant&#39;s <strong>Chat</strong> under <a href="#anywhere-with-the-assistant">Anywhere with the Assistant</a>. On a
+computer, holding the pointer over an icon of the narrowed sidebar shows its key, such as
+<strong>People (Alt+P)</strong>, and the finder shows each page&#39;s key beside its row.</p>
 <h3 id="keys-for-top-bar-buttons">Keys for top-bar buttons<a class="anchor" href="#keys-for-top-bar-buttons" aria-label="Link to this section"></a></h3>
-<p>A top-bar button or a row of one of its menus can have a key, from a module or from your own
-navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive&#39;s <strong>Random album</strong> is the only one a published module ships with.
+<p>A sidebar entry, a top-bar button or a row of one of its menus can have a key, from a module or from
+your own navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive&#39;s <strong>Random album</strong> is the only one a published module ships with.
 Each such key is listed under <strong>Anywhere</strong> in the <strong>Keyboard shortcuts</strong> dialog and shown in the
 button&#39;s tooltip, such as <strong>Random album (Alt+R)</strong>. <a href="../guide/customizing.html#give-an-entry-a-key">Your sidebar and top bar</a>
 shows how to give an entry a key, change one, or take one away.</p>
-<p>These keys are EiN&#39;s own and no top-bar entry can take them: <kbd>Ctrl</kbd>+<kbd>K</kbd>,
+<p>These keys are EiN&#39;s own and no sidebar or top-bar entry can take them: <kbd>Ctrl</kbd>+<kbd>K</kbd>,
 <kbd>?</kbd>, and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd>,
 <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd> or <kbd>↓</kbd>.</p>
 <h2 id="the-finder-and-search-boxes">The finder and search boxes<a class="anchor" href="#the-finder-and-search-boxes" aria-label="Link to this section"></a></h2>
@@ -446,8 +470,45 @@ the connection; see <a href="../shell/remote.html">Reaching other machines</a>.<
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
 <p>These keys work with the <a href="../archive/index.html">Archive</a> installed.</p>
 <h3 id="anywhere-with-the-archive">Anywhere with the Archive<a class="anchor" href="#anywhere-with-the-archive" aria-label="Link to this section"></a></h3>
-<p><kbd>Alt</kbd>+<kbd>R</kbd> opens an album at random, as <strong>Random album</strong> in the top bar does. It is a
-top-bar key, so it can be changed or taken away; see <a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Keys</th>
+<th>What they do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><kbd>Alt</kbd>+<kbd>I</kbd></td>
+<td>Opens <strong>Media</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>Y</kbd></td>
+<td>Opens <strong>Year</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>G</kbd></td>
+<td>Opens the <strong>Map</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>A</kbd></td>
+<td>Opens <strong>Albums</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>P</kbd></td>
+<td>Opens <strong>People</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>L</kbd></td>
+<td>Opens <strong>Locations</strong>.</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>R</kbd></td>
+<td>Opens an album at random, as <strong>Random album</strong> in the top bar does.</td>
+</tr>
+</tbody></table>
+</div>
+<p>These are sidebar and top-bar keys, so they can be changed or taken away; see
+<a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a>.</p>
 <h3 id="the-time-scrubber">The time scrubber<a class="anchor" href="#the-time-scrubber" aria-label="Link to this section"></a></h3>
 <p>The time scrubber at the right of a long list (<strong>Scroll through time</strong>), on the albums page, in a
 media timeline and in staging, takes keys once you move to it with <kbd>Tab</kbd>: <kbd>↑</kbd> and
@@ -855,6 +916,8 @@ so on pick the suggested album of that number.</li>
 </div>
 <h2 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h2>
 <p>These keys work with the <a href="../assistant/index.html">Assistant</a> installed.</p>
+<h3 id="anywhere-with-the-assistant">Anywhere with the Assistant<a class="anchor" href="#anywhere-with-the-assistant" aria-label="Link to this section"></a></h3>
+<p><kbd>Alt</kbd>+<kbd>C</kbd> opens the <strong>Chat</strong> page, as its entry in the sidebar does.</p>
 <h3 id="the-chat">The chat<a class="anchor" href="#the-chat" aria-label="Link to this section"></a></h3>
 <p>In the chat box (<a href="../assistant/chat.html">Chatting with the assistant</a>), <kbd>Enter</kbd> sends the
 question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.</p>
@@ -866,13 +929,14 @@ question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.</p>
 <li><strong>The focus is in a text field.</strong> Click an empty part of the page, or press <kbd>Esc</kbd> in a
 search box to leave it, and press the key again.</li>
 <li><strong>The key belongs to something else on screen.</strong> A dialog over the page takes the keyboard: the
-viewer&#39;s keys rest while a dialog lies over it, and staging&#39;s keys rest while a dialog is open.
+viewer&#39;s keys rest while a dialog lies over it, staging&#39;s keys rest while a dialog is open, and
+the keys that open a page rest while a dialog or the viewer is open.
 Press <kbd>?</kbd> to see which groups are active.</li>
 <li><strong>The browser or the computer keeps the key.</strong> Some browsers keep <kbd>Ctrl</kbd>+<kbd>W</kbd>,
 <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>S</kbd> for themselves; the editor in the
 terminal also takes <kbd>Ctrl</kbd>+<kbd>O</kbd> and <kbd>Ctrl</kbd>+<kbd>X</kbd>.</li>
-<li><strong>A top-bar key you set is missing.</strong> A key two entries ask for goes to the first in the top bar&#39;s
-order, and EiN&#39;s own keys are never given away. <a href="../guide/customizing.html#when-something-goes-differently">Your sidebar and top bar</a>
+<li><strong>A sidebar or top-bar key you set is missing.</strong> A key two entries ask for goes to the first in
+the sidebar&#39;s order, then the top bar&#39;s, and EiN&#39;s own keys are never given away. <a href="../guide/customizing.html#when-something-goes-differently">Your sidebar and top bar</a>
 helps find out why.</li>
 <li><strong>On a phone or tablet</strong> there is no keyboard to press; the keys need a computer. <a href="../guide/phone.html">EiN on a phone</a> covers the gestures instead.</li>
 </ul>
@@ -892,7 +956,7 @@ helps find out why.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/shortcuts.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#see-the-keys-where-you-are">See the keys where you are</a></li><li><a href="#anywhere">Anywhere</a></li><li class="nested"><a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a></li><li><a href="#the-finder-and-search-boxes">The finder and search boxes</a></li><li><a href="#pictures-in-a-grid">Pictures in a grid</a></li><li><a href="#the-nodes-explorer">The Nodes explorer</a></li><li><a href="#the-trash">The trash</a></li><li><a href="#the-terminal">The terminal</a></li><li><a href="#the-editor-in-the-terminal">The editor in the terminal</a></li><li><a href="#archive">Archive</a></li><li class="nested"><a href="#anywhere-with-the-archive">Anywhere with the Archive</a></li><li class="nested"><a href="#the-time-scrubber">The time scrubber</a></li><li class="nested"><a href="#the-viewer">The viewer</a></li><li class="nested"><a href="#the-memories-story">The memories story</a></li><li class="nested"><a href="#people">People</a></li><li class="nested"><a href="#staging-the-sort-tab">Staging: the Sort tab</a></li><li class="nested"><a href="#staging-duplicates">Staging: duplicates</a></li><li><a href="#assistant">Assistant</a></li><li class="nested"><a href="#the-chat">The chat</a></li><li><a href="#when-a-key-does-nothing">When a key does nothing</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#see-the-keys-where-you-are">See the keys where you are</a></li><li><a href="#anywhere">Anywhere</a></li><li><a href="#go-to-a-page">Go to a page</a></li><li class="nested"><a href="#keys-for-top-bar-buttons">Keys for top-bar buttons</a></li><li><a href="#the-finder-and-search-boxes">The finder and search boxes</a></li><li><a href="#pictures-in-a-grid">Pictures in a grid</a></li><li><a href="#the-nodes-explorer">The Nodes explorer</a></li><li><a href="#the-trash">The trash</a></li><li><a href="#the-terminal">The terminal</a></li><li><a href="#the-editor-in-the-terminal">The editor in the terminal</a></li><li><a href="#archive">Archive</a></li><li class="nested"><a href="#anywhere-with-the-archive">Anywhere with the Archive</a></li><li class="nested"><a href="#the-time-scrubber">The time scrubber</a></li><li class="nested"><a href="#the-viewer">The viewer</a></li><li class="nested"><a href="#the-memories-story">The memories story</a></li><li class="nested"><a href="#people">People</a></li><li class="nested"><a href="#staging-the-sort-tab">Staging: the Sort tab</a></li><li class="nested"><a href="#staging-duplicates">Staging: duplicates</a></li><li><a href="#assistant">Assistant</a></li><li class="nested"><a href="#anywhere-with-the-assistant">Anywhere with the Assistant</a></li><li class="nested"><a href="#the-chat">The chat</a></li><li><a href="#when-a-key-does-nothing">When a key does nothing</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

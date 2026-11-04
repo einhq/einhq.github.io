@@ -530,29 +530,39 @@ be changed.</li>
 goes where its dropdown goes: hide the dropdown, or keep it from someone, and its rows go too. In
 the search box&#39;s list a row reads with its menu&#39;s title, as <code>Create: Staging category</code>.</p>
 <h2 id="give-an-entry-a-key">Give an entry a key<a class="anchor" href="#give-an-entry-a-key" aria-label="Link to this section"></a></h2>
-<p>A top-bar button or a dropdown&#39;s row can have a key that does what choosing it does, from anywhere
-outside a text field:</p>
+<p>A sidebar entry, a top-bar button or a dropdown&#39;s row can have a key that does what choosing it does,
+from anywhere outside a text field:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.create-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+A&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+P&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;fullscreen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/map&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.create-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+B&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+K&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;fullscreen&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/map&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.random-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+U&quot;</span> <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
-<p>This gives <strong>Create</strong> › <strong>Album</strong> the key <kbd>Alt</kbd>+<kbd>A</kbd>, gives your <strong>Map</strong> button
-<kbd>Alt</kbd>+<kbd>P</kbd>, and takes <kbd>Alt</kbd>+<kbd>R</kbd> away from <strong>Random album</strong>.</p>
+<p>This gives <strong>Create</strong> › <strong>Album</strong> the key <kbd>Alt</kbd>+<kbd>B</kbd>, gives your <strong>Map</strong> button
+<kbd>Alt</kbd>+<kbd>K</kbd>, takes <kbd>Alt</kbd>+<kbd>R</kbd> away from <strong>Random album</strong>, and opens
+<strong>Devices</strong> with <kbd>Alt</kbd>+<kbd>U</kbd>.</p>
 <ul>
 <li>A key is modifiers and one key, joined by <code>+</code>. The modifiers are <code>alt</code>, <code>ctrl</code>, <code>shift</code>, <code>meta</code>,
 and <code>mod</code>, which is <kbd>Ctrl</kbd>, or <kbd>⌘</kbd> on a Mac. Letter case does not matter:
 <code>alt+R</code> and <code>Alt+r</code> are the same key.</li>
 <li><code>null</code> takes a key away, which is how you remove a module&#39;s key.</li>
-<li>The key shows in the button&#39;s tooltip, such as <strong>Map (Alt+P)</strong>, beside the row in its menu, and
+<li>The key shows in the button&#39;s tooltip, such as <strong>Map (Alt+K)</strong>, beside the row in its menu, and
 in the <strong>Keyboard shortcuts</strong> list that <kbd>?</kbd> opens, under <strong>Anywhere</strong>; a row is listed
-with its menu, as <strong>Create › Album</strong>. On a Mac, Alt shows as <kbd>⌥</kbd>.</li>
+with its menu, as <strong>Create › Album</strong>. A sidebar entry&#39;s key shows in its icon&#39;s tooltip when the
+sidebar is narrowed to icons, and under <strong>Go to</strong> in the list. The finder shows every key beside
+its row. On a Mac, Alt shows as <kbd>⌥</kbd>.</li>
+<li>A sidebar entry&#39;s key does nothing while a dialog or the viewer is open.</li>
 <li>A dropdown itself cannot have a key; its rows can.</li>
-<li>A key is given once. When two entries ask for the same key, the one that comes first in the top
-bar&#39;s order keeps it: by <code>order</code>, lowest first, and a dropdown&#39;s rows where their dropdown stands.
-A button placed beside the search box counts by its <code>order</code> too.</li>
+<li>A key is given once. When two entries ask for the same key, the sidebar&#39;s come first, in the
+sidebar&#39;s order, and then the top bar&#39;s: by <code>order</code>, lowest first, and a dropdown&#39;s rows where
+their dropdown stands. A button placed beside the search box counts by its <code>order</code> too. The
+shipped entries already hold <kbd>Alt</kbd> with <kbd>H</kbd>, <kbd>S</kbd>, <kbd>I</kbd>,
+<kbd>Y</kbd>, <kbd>G</kbd>, <kbd>A</kbd>, <kbd>P</kbd>, <kbd>L</kbd>, <kbd>C</kbd> and
+<kbd>R</kbd>; <a href="../reference/shortcuts.html">Keyboard shortcuts</a> says which is whose.</li>
 <li>EiN keeps its own keys: <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd>), <kbd>?</kbd>,
 and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd> or an arrow key,
 which the terminal uses. An entry that asks for one of these as EiN writes it (<code>mod+K</code>, <code>shift+?</code>,
@@ -805,6 +815,11 @@ change. An entry of your own needs every field marked required below.</p>
 <td><code>signedIn</code></td>
 <td>no</td>
 <td><code>true</code>: never shown to a visitor.</td>
+</tr>
+<tr>
+<td><code>shortcut</code></td>
+<td>no</td>
+<td>A key that opens the page, such as <code>alt+U</code>; see <a href="#give-an-entry-a-key">Give an entry a key</a>. <code>null</code> takes a key away.</td>
 </tr>
 </tbody></table>
 </div>
