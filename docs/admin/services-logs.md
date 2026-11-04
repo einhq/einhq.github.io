@@ -8,30 +8,30 @@ Inside the `ein` container, EiN runs a set of long-running jobs it calls service
 
 Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core's with the module they come from. With the [Archive](../archive/index.md), the `ems` module it brings along ([The media service](../ems/index.md)) and the [Assistant](../assistant/index.md) installed, there are 22:
 
-| Service             | From      | What it does                                                                                                                    |
-| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `http-server`       | core      | Serves the web UI and the WebSocket API                                                                                         |
-| `ssh-server`        | core      | Serves the EiN shell and SFTP over SSH                                                                                          |
-| `pipeline-engine`   | core      | Matches events against pipeline triggers and runs the resulting steps                                                           |
-| `pipeline-pruner`   | core      | Runs failed pipeline work again after a growing wait, and keeps the pipeline instances and the pools bounded                    |
-| `relations-guard`   | core      | Removes links that would dangle after a node is deleted                                                                         |
-| `metrics-sampler`   | core      | Samples host, storage and workload counters into `/var/logs/metrics`, which the dashboard draws                                 |
-| `session-reaper`    | core      | Removes expired sessions, and turns off expired share links; hourly                                                             |
-| `tmp-sweeper`       | core      | Removes files left in `/tmp` once they are older than `CFG_TMP_RETENTION_HOURS`; hourly                                         |
-| `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                 |
-| `audit-purger`      | core      | Removes audit records once they are older than `CFG_AUDIT_PIPELINE_RETENTION_DAYS` or `CFG_AUDIT_RETENTION_DAYS`; twice a day   |
-| `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                           |
-| `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                          |
-| `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                  |
-| `models-second`     | archive   | A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while `CFG_MODEL_SECOND_SLOTS` is `0`    |
-| `media-heal`        | archive   | Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up |
-| `album-metadata`    | archive   | Keeps each album's photo stacks, time span and cover current                                                                    |
-| `label-models`      | archive   | Keeps the models behind label suggestions trained                                                                               |
-| `person-covers`     | archive   | Gives every named person without a cover the crop of one of their own faces                                                     |
-| `staging-organizer` | archive   | Runs the staging organizer when something waits for it, and matches the groups due a match                                      |
-| `ems-link`          | ems       | Watches the media service and reports what it holds                                                                             |
-| `gpu-sampler`       | ems       | Samples the media service's graphics card for the dashboard                                                                     |
-| `llm-link`          | assistant | Watches the assistant's language model and reports whose it is and where it runs                                                |
+| Service             | From      | What it does                                                                                                                                                                                     |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `http-server`       | core      | Serves the web UI and the WebSocket API                                                                                                                                                          |
+| `ssh-server`        | core      | Serves the EiN shell and SFTP over SSH                                                                                                                                                           |
+| `pipeline-engine`   | core      | Matches events against pipeline triggers and runs the resulting steps                                                                                                                            |
+| `pipeline-pruner`   | core      | Runs failed pipeline work again after a growing wait, and keeps the pipeline instances and the pools bounded                                                                                     |
+| `relations-guard`   | core      | Removes links that would dangle after a node is deleted                                                                                                                                          |
+| `metrics-sampler`   | core      | Samples host, storage and workload counters into `/var/logs/metrics`, which the dashboard draws                                                                                                  |
+| `session-reaper`    | core      | Removes expired sessions, and turns off expired share links; hourly                                                                                                                              |
+| `tmp-sweeper`       | core      | Removes files left in `/tmp` once they are older than `CFG_TMP_RETENTION_HOURS`; hourly                                                                                                          |
+| `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                                                                                  |
+| `audit-purger`      | core      | Removes audit records once they are older than `CFG_AUDIT_PIPELINE_RETENTION_DAYS` or `CFG_AUDIT_RETENTION_DAYS`, and access-log records older than `CFG_ACCESS_LOG_RETENTION_DAYS`; twice a day |
+| `archive-bridge`    | archive   | Turns changes in the tree into the media and location facts that pipelines trigger on                                                                                                            |
+| `cpu`               | archive   | Worker for CPU-bound media jobs: transcodes, derivatives, fingerprints                                                                                                                           |
+| `models`            | archive   | Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices                                                                                   |
+| `models-second`     | archive   | A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while `CFG_MODEL_SECOND_SLOTS` is `0`                                                                     |
+| `media-heal`        | archive   | Closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost, once the engine has caught up                                                                  |
+| `album-metadata`    | archive   | Keeps each album's photo stacks, time span and cover current                                                                                                                                     |
+| `label-models`      | archive   | Keeps the models behind label suggestions trained                                                                                                                                                |
+| `person-covers`     | archive   | Gives every named person without a cover the crop of one of their own faces                                                                                                                      |
+| `staging-organizer` | archive   | Runs the staging organizer when something waits for it, and matches the groups due a match                                                                                                       |
+| `ems-link`          | ems       | Watches the media service and reports what it holds                                                                                                                                              |
+| `gpu-sampler`       | ems       | Samples the media service's graphics card for the dashboard                                                                                                                                      |
+| `llm-link`          | assistant | Watches the assistant's language model and reports whose it is and where it runs                                                                                                                 |
 
 Every time EiN starts, it registers and enables core's services and those of every module that is set up, then starts every enabled service as the last step of its start. A module's services are added when it is installed and removed with it; see [Modules](modules.md).
 

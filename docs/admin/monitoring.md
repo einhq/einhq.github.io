@@ -8,7 +8,7 @@ Choose **Dashboard** under **System** in the sidebar. The sidebar shows it only 
 
 ![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
 
-The page, **System dashboard**, has up to three badges above its title and four tabs below it, five with the `ems` module installed:
+The page, **System dashboard**, has up to three badges above its title and five tabs below it, six with the `ems` module installed:
 
 | Badge                                                         | What it says                                                                                                               |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -23,6 +23,7 @@ The page, **System dashboard**, has up to three badges above its title and four 
 | **Media service** | With the `ems` module: the media service's own state; see [The media service](../ems/index.md)      |
 | **Services**      | Which services run, with start, stop and restart for the administrator                              |
 | **Log**           | The last problems logged, and the system log as it is written                                       |
+| **Activity**      | Who signed in, opened a share link or downloaded what, and who changed what                         |
 
 The tab you choose goes into the address (`/system?tab=work`), so a link opens the same view. The pipeline figures update whenever the pipelines change; every other card asks EiN for its own figures every 10 seconds, and only while its tab is open. The badges and the alarm above the tabs are kept current on every tab. Nothing is fetched while the browser tab is hidden, and the numbers refresh as soon as you come back.
 
@@ -127,6 +128,35 @@ An administrator has **Restart** and **Stop** on a running service and **Start**
 ![The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
 
 With the Archive, a warning such as `pooled step could not run yet, job waiting` means the media service was not ready for a job; the job is tried again on its own, and the kind's other jobs run meanwhile. `pooled step could not run yet, kind resting` means it refused several in a row, so the whole kind waits. [Services and logs](services-logs.md) covers the logs and `dmesg`.
+
+## The Activity tab
+
+**Activity** lists, newest first, who reached EiN and what they did:
+
+| Shown as                                           | When                                                                                                                                                                                                                                       |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **signed in**, **signed out**                      | Someone signed in or out in the Web UI, a terminal or over SSH. An SSH sign-in says `password` or `publickey`.                                                                                                                             |
+| **sign-in failed**                                 | A wrong password, an account that may not sign in, or too many tries. The reason is under the row. An account that does not exist shows as **unknown account**: what was typed is not kept, since it is sometimes a password.              |
+| **became administrator**, **elevation failed**     | A member of `sudo` chose **Administer…**, or got the password wrong.                                                                                                                                                                       |
+| **opened share link**                              | A share link was opened. A visitor shows as the link's number; someone signed in as themselves.                                                                                                                                            |
+| **downloaded**                                     | A file someone put in `/archive` or a home was sent in full, saved or shown, in the browser or over SFTP. Thumbnails and other renditions are not counted, and the same person reading the same file again within ten minutes counts once. |
+| **downloaded zip**                                 | Several files were downloaded as one zip; the row names the folder that holds them and how many there were.                                                                                                                                |
+| **created**, **changed**, **moved**, **deleted** … | A change to the archive, from the audit trail: the row names the kind of node and, for a change, what changed.                                                                                                                             |
+
+Each row has the time, the account, where the event happened (a path), how it came (`web`, `terminal`, `ssh`, `sftp` or `http`) and from which address, and the session. Choose a name, path, address or session in a row to show only that; the session shows a sign-in together with everything that sign-in changed. Above the list you can show only **Sign-ins**, **Failures**, **Downloads**, **Share links** or **Changes**, and narrow by user, path, address, session and days. **Show more** reads further back.
+
+What pipelines derive from each file (thumbnails, faces, text) is left out of the changes unless you turn on **Include what pipelines derived**: there are about ninety such records for every photo.
+
+The same lists are in the terminal, for administrators only:
+
+```bash
+# in EiN's terminal
+access-log --event sign-in-failed --since 2026-11-01
+access-log /archive/albums/wrenfield-summer-1987 --event download --event download-archive
+audit --sid session-01JC4ZK3E2 --no-pipeline
+```
+
+EiN keeps sign-ins and downloads for a year: the `audit-purger` service removes older ones, after **Days the access log keeps sign-ins and downloads** ([`CFG_ACCESS_LOG_RETENTION_DAYS`](../reference/settings.md#cfg_access_log_retention_days), 0 keeps them for good). Changes are kept as [Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause) describes.
 
 ## Ask in the terminal
 

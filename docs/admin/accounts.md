@@ -127,7 +127,8 @@ mark.
 ### Sign-in and removal
 
 **Signed in now** lists where the person is signed in: **In the browser**, **Over SSH** or **In a
-terminal**, each with the address it comes from and since when.
+terminal**, each with the address it comes from and since when. Earlier sign-ins, failed ones
+included, are on the dashboard's [Activity tab](monitoring.md#the-activity-tab).
 
 **Disable sign-in** signs them out everywhere at once, ends what they have running, and keeps them
 out of the browser, SSH and SFTP alike. Nothing they own is changed. The button then reads

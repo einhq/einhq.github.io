@@ -419,7 +419,8 @@ entry `rx` for it on the node and on everything below it that its creator may ch
 pinned nodes. Whoever opens the link reads what it opens and nothing an earlier link opened, never
 writes, and loses the access when the link expires. Turning a link off takes its entry off every
 node, wherever the node has moved since. Someone already signed in who opens a link stays themselves.
-How to make and send one is on [Sharing](../guide/sharing.md#share-an-album-with-a-link).
+Every opening is recorded, with the address it came from, on the dashboard's
+[Activity tab](monitoring.md#the-activity-tab). How to make and send one is on [Sharing](../guide/sharing.md#share-an-album-with-a-link).
 
 ## Administrators
 
