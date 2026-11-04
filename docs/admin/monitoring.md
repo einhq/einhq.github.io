@@ -117,7 +117,7 @@ The `ems` module adds this tab, and it is there only while that module is instal
 
 **Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down` when enabled services are not running.
 
-![The Services tab: a list of services such as album-metadata, cpu, ems-link and http-server, each up 1h 16m and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
+![The Services tab: a list of services such as album-metadata, ems-link and http-server, each with the module it comes from, up a few minutes and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
 
 An administrator has **Restart** and **Stop** on a running service and **Start** on a stopped one. A disabled service has no buttons; enable it from the terminal first. [Services and logs](services-logs.md) explains each service and the commands behind these buttons.
 

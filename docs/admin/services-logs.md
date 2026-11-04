@@ -40,7 +40,7 @@ Every time EiN starts, it registers and enables core's services and those of eve
 1. Open **Dashboard** under **System** in the sidebar. The dashboard is the administrator's; see [Health and the dashboard](monitoring.md) for its other tabs.
 2. Choose the **Services** tab.
 
-![The System dashboard's Services tab: a card titled Services with "22 healthy" at its right, and one row per service with its name, its description, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
+![The System dashboard's Services tab: a card titled Services with "23 healthy" at its right, and one row per service with its name and description, the module it comes from, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
 
 The card lists every service, one row each, and asks again every 10 seconds while the tab is open:
 
