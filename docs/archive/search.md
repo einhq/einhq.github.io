@@ -237,7 +237,8 @@ What each kind is found by:
 | Devices   | Name, make, model or serial number                                                                                                               | `lumix` finds Peggy's Lumix                                                                                                      |
 
 A person's name typed in whole words, even without the middle names, finds the person ahead of the
-albums named after them: `helen okafor` puts Helen before an album called Helen Okafor in Falmouth.
+albums named after them and of the pictures with their name written in them: `helen okafor` puts
+Helen before an album called Helen Okafor in Falmouth and before a letter she signed.
 
 A person, location, year, device or label in the search narrows albums by their pictures:
 `@Peggy Wrenfield 1968` finds the albums holding a picture of Peggy taken in 1968. A label matches
