@@ -855,7 +855,9 @@ six hours, then after a day. One that still fails is marked as needing a person 
 that failed on its input is never run again. The same service removes finished instances, keeping
 the newest 2000 of each pipeline, and leaves failed ones for you to look at.</p>
 <p>No step is stopped for taking long: a long step is working, and stopping it would throw the work
-away. A running step that has written nothing for 30 minutes
+away. A step that says how much of its work is done shows it under Ongoing on the
+<a href="../admin/processing.html">Processing page</a>. A running step that has written nothing and moved no
+progress for 30 minutes
 (<a href="../reference/settings.html#cfg_pipeline_step_quiet_ms"><code>CFG_PIPELINE_STEP_QUIET_MS</code></a>) is listed as
 quiet, and you decide whether it is stuck.</p>
 <p>Some gaps no change announces: a file whose pipeline never ran, work an outage lost, vectors from

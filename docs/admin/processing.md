@@ -72,8 +72,11 @@ kind may carry a badge:
   the rest ends.
 - **no worker**: no running worker takes this kind, so the jobs will never run.
 
-**Ongoing** lists the instances with a step running, with the target file and how long it has run.
-A step that has written nothing for 30 minutes is listed above it as quiet, with "Still running;
+**Ongoing** lists the instances with a step running, with the target file, how far the step has
+come and how long it has run. **Progress** is filled in for a step that says how much of its work is
+done, such as finding the faces in a long video, as a bar and a percentage that move about once a
+minute; a quick step leaves it empty. A step that has written nothing and moved no progress for 30
+minutes is listed above it as quiet, with "Still running;
 nothing stops a step for taking long." No step is stopped for taking long; a quiet step is for you
 to look at, not a fault in itself.
 

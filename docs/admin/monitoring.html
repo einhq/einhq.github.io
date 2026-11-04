@@ -340,7 +340,7 @@
 <td><code>quiet steps</code></td>
 <td>warn</td>
 <td><code>1 running step silent for 30m00s or more: media-transcode/transcode</code></td>
-<td>A step has written nothing for a long while. It keeps running; nothing stops a step for taking long.</td>
+<td>A step has written nothing and moved no progress for a long while. It keeps running; nothing stops a step for taking long.</td>
 </tr>
 <tr>
 <td><code>queue &lt;name&gt;</code></td>
@@ -394,7 +394,7 @@
 <ul>
 <li>The pipeline table has one row per defined pipeline, even one that has never run, with <strong>Workload</strong>, <strong>Waiting</strong>, <strong>Queued</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Completed</strong> and <strong>Cancelled</strong>. <strong>In</strong> is the work arriving for it per hour, <strong>Out</strong> what it finished in the last hour, and <strong>ETA</strong> the waiting work divided by <strong>Out</strong>; <strong>no rate</strong> when nothing finished recently, <code>—</code> when nothing waits. When queue entries were dropped after their delivery attempts, a red <strong>N dropped</strong> stands above the table. Choose a row to see that pipeline&#39;s instances.</li>
 <li><strong>Kinds of work</strong> lists each kind of job in the work pools that has something left or was done lately: <strong>Left</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. A red <strong>no worker</strong> badge marks a kind nothing runs; with the Archive, a yellow <strong>waiting for EMS</strong> badge marks a kind resting because the media service refused several of its jobs in a row, with the next try in its tooltip.</li>
-<li><strong>Ongoing</strong> lists the instances running now, with how long each has run. Steps that have written nothing for the quiet time are listed above it in a yellow box.</li>
+<li><strong>Ongoing</strong> lists the instances running now, with how far the running step has come, for a step that says, and how long each has run. Steps that have written nothing and moved no progress for the quiet time are listed above it in a yellow box.</li>
 </ul>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
 <p>When jobs of some kind are ready and no running worker offers that kind for more than five minutes, a red box, <strong>Work that nothing will run</strong>, stands above the tabs on every tab, and the <code>kind &lt;name&gt;</code> check fails. The box names the pool, how many jobs are ready and for how long, and the pipelines that queue that kind.</p>

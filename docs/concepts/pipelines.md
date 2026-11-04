@@ -356,7 +356,9 @@ that failed on its input is never run again. The same service removes finished i
 the newest 2000 of each pipeline, and leaves failed ones for you to look at.
 
 No step is stopped for taking long: a long step is working, and stopping it would throw the work
-away. A running step that has written nothing for 30 minutes
+away. A step that says how much of its work is done shows it under Ongoing on the
+[Processing page](../admin/processing.md). A running step that has written nothing and moved no
+progress for 30 minutes
 ([`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms)) is listed as
 quiet, and you decide whether it is stuck.
 

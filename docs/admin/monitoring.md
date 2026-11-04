@@ -58,7 +58,7 @@ These are the checks core makes about EiN's own work, with or without modules:
 | `failed work`  | warn  | `3 failed instances, run again on their own after 1 h, 6 h and 24 h`                                         | Nothing yet: failed work is run again on its own.                                                                                                     |
 | `failed work`  | fail  | `2 instances failed again after three more runs and need a person (pipeline-instances --status failed)`      | List them with `pipeline-instances -s failed` and see [Processing and pipelines](processing.md).                                                      |
 | `input`        | ok    | `5 steps met input nothing can process, and will not be run again`                                           | Nothing: a damaged or unreadable file. Running it again would give the same result.                                                                   |
-| `quiet steps`  | warn  | `1 running step silent for 30m00s or more: media-transcode/transcode`                                        | A step has written nothing for a long while. It keeps running; nothing stops a step for taking long.                                                  |
+| `quiet steps`  | warn  | `1 running step silent for 30m00s or more: media-transcode/transcode`                                        | A step has written nothing and moved no progress for a long while. It keeps running; nothing stops a step for taking long.                            |
 | `queue <name>` | fail  | `4 entries dropped after their delivery attempts (queue-dead /var/queues/archive-bridge: --retry or --drop)` | Look at them with `queue-dead <path>`, then put them back with `--retry` or delete them with `--drop`.                                                |
 
 How long a step may stay silent before it counts as quiet is the setting [`CFG_PIPELINE_STEP_QUIET_MS`](../reference/settings.md#cfg_pipeline_step_quiet_ms), 30 minutes by default.
@@ -93,7 +93,7 @@ The storage projection is measured over the last seven days. A tier that is not 
 
 - The pipeline table has one row per defined pipeline, even one that has never run, with **Workload**, **Waiting**, **Queued**, **Running**, **Failed**, **Completed** and **Cancelled**. **In** is the work arriving for it per hour, **Out** what it finished in the last hour, and **ETA** the waiting work divided by **Out**; **no rate** when nothing finished recently, `—` when nothing waits. When queue entries were dropped after their delivery attempts, a red **N dropped** stands above the table. Choose a row to see that pipeline's instances.
 - **Kinds of work** lists each kind of job in the work pools that has something left or was done lately: **Left**, **Running**, **In**, **Out**, **ETA** and **Oldest waiting**. A red **no worker** badge marks a kind nothing runs; with the Archive, a yellow **waiting for EMS** badge marks a kind resting because the media service refused several of its jobs in a row, with the next try in its tooltip.
-- **Ongoing** lists the instances running now, with how long each has run. Steps that have written nothing for the quiet time are listed above it in a yellow box.
+- **Ongoing** lists the instances running now, with how far the running step has come, for a step that says, and how long each has run. Steps that have written nothing and moved no progress for the quiet time are listed above it in a yellow box.
 
 ### Work that nothing will run
 
