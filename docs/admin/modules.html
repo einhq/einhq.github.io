@@ -338,10 +338,9 @@ release written for another core API: <code>archive 0.2.4 (0.3.0 needs core API 
 <p>The install goes on when the terminal is closed or the connection drops; <code>mod install</code> only
 follows it, and stops following when you press <kbd>Ctrl</kbd>+<kbd>C</kbd>. <code>mod install --background archive</code> starts it and returns at once. <code>mod status</code> says how far the install running
 now has got, or what the last one came to, and <code>mod status --follow</code> follows it to its end:</p>
-<div class="code"><pre tabindex="0"><code>mod install seacharts: running for 4m 12s, for admin
-  18234 files of seacharts unpacked
+<div class="code"><pre tabindex="0"><code>mod install seacharts: running for 32s, for admin
   Fetching https://github.com/einhq/module-seacharts at v0.4.0 (3a9c0e1f2)...
-    18011 files of seacharts unpacked</code></pre></div>
+    12759 files of seacharts unpacked</code></pre></div>
 <p>EiN installs one thing at a time. While an install runs, <code>mod install</code> with the same modules
 follows it, and with any other refuses, naming the one running. An install EiN stopped in the
 middle of, by restarting, leaves nothing installed of it; the next install clears away what it left.</p>

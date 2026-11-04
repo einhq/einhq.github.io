@@ -201,10 +201,9 @@ follows it, and stops following when you press <kbd>Ctrl</kbd>+<kbd>C</kbd>. `mo
 now has got, or what the last one came to, and `mod status --follow` follows it to its end:
 
 ```text
-mod install seacharts: running for 4m 12s, for admin
-  18234 files of seacharts unpacked
+mod install seacharts: running for 32s, for admin
   Fetching https://github.com/einhq/module-seacharts at v0.4.0 (3a9c0e1f2)...
-    18011 files of seacharts unpacked
+    12759 files of seacharts unpacked
 ```
 
 EiN installs one thing at a time. While an install runs, `mod install` with the same modules
