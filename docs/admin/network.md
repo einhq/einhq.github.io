@@ -13,7 +13,17 @@ EiN publishes two ports, on every address of the machine it runs on:
 
 These are the ports `setup.sh` picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
-Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine.
+Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine's network.
+
+Under rootless podman, EiN does not sit on that network: there a published port would reach EiN from the network's own address, and EiN would see every visitor as that one address. EiN gets a network of its own, which keeps each visitor's address, and reaches the other three on the machine's loopback address, where they are published for it alone:
+
+| Line           | Default | What answers on `127.0.0.1` |
+| -------------- | ------- | --------------------------- |
+| `EIN_DB_PORT`  | `15432` | the database                |
+| `EIN_EMS_PORT` | `18181` | the media service           |
+| `EIN_LLM_PORT` | `18190` | the language model          |
+
+`setup.sh` moves one to the next free port when another program has it, and writes it to `.env`, as with EiN's own ports. Under Docker and rootful podman these lines do nothing.
 
 EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in [Put EiN behind HTTPS](#put-ein-behind-https).
 
@@ -212,7 +222,7 @@ EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address
 
 Repeated failures are logged as "repeated failed sign-ins", with the address or account; [Services and logs](services-logs.md) shows where to read them.
 
-EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run `who` once after setting up the proxy to see which you have.
+EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run `who` once after setting up the proxy to see which you have. Under rootless podman with a `podman-compose` older than 1.1, as on Ubuntu 24.04, a proxy on the same machine reaches EiN from `10.0.2.2` rather than from the loopback address; there EiN sees every visitor through the proxy as `10.0.2.2`.
 
 ```bash
 # in EiN's terminal, as an administrator
@@ -236,7 +246,7 @@ The server's host key is made at EiN's first start and kept in the tree as `/etc
 | What you see                                                                              | What to do                                                                                                                                                                                                                                                  |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | EiN opens on the machine itself but not from another computer                             | Open the ports in the machine's firewall, and check that `EIN_BIND` is `0.0.0.0`. Try the machine's IP address instead of a name ending in `.local`.                                                                                                        |
-| `compose up` fails because the address or port is already in use                          | Another program has the port. Choose another `EIN_HTTP_PORT` or `EIN_SSH_PORT` in `.env`, or stop that program.                                                                                                                                             |
+| `compose up` fails because the address or port is already in use                          | Another program has the port. Choose another `EIN_HTTP_PORT`, `EIN_SSH_PORT`, or under rootless podman `EIN_DB_PORT`, `EIN_EMS_PORT` or `EIN_LLM_PORT`, in `.env`, or stop that program.                                                                    |
 | Behind the proxy, the page frame loads but stays empty, and the terminal does not connect | The proxy does not pass WebSocket connections. Add the `Upgrade` and `Connection` headers (nginx) or check the proxy's WebSocket support.                                                                                                                   |
 | Uploads of large files fail behind the proxy, often with 413                              | The proxy limits the size of a request. In nginx, set `client_max_body_size 0;`.                                                                                                                                                                            |
 | The terminal or the interface reconnects every minute behind the proxy                    | The proxy closes idle connections. Raise its read timeout, such as `proxy_read_timeout 1h;` in nginx.                                                                                                                                                       |
