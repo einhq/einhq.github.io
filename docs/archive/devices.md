@@ -402,14 +402,22 @@ reject, such as a flight with the logger off that lands near where it left, is l
 the map says how many there are. Click near a position, drawn or rejected, and the panel says when
 it was recorded and what EiN made of it. If you may change the device, it also offers:
 
-- **Reject**, on a drawn position: it is left out, whatever the rules say.
+- **Reject**, on a drawn position: it is left out, whatever the rules say, and so are the other
+  drawn positions within 40 m of it that day (the day in UTC, as the track colours it). A point on
+  the drawn line often stands for several positions recorded close together, and one taken away
+  would let the next take its place. The panel says how many there are, and the button reads
+  **Reject all** and the number. Over 25 is a place the device stayed at, not a glitch, and then
+  **Reject** takes the one position alone.
 - **Accept**, on a rejected one: it is drawn, whatever the rules say. When it is one of a run of
   rejected positions, **Accept all** takes the whole run.
 - **Undo**, on a position you rejected or accepted: it goes back to what the rules make of it.
+- **Undo all N that day**, on a position you rejected, when you rejected others that day: every
+  position rejected by hand that day goes back to the rules. Positions you accepted stay accepted.
 
 A position rejected by hand is left out before the rules judge the positions around it, so the
-line can break somewhere else once it is gone. To do the same for a time span, use `track-mark`
-with `--reject`, `--accept` or `--clear`:
+line can break somewhere else once it is gone. The device's trips are found again ten minutes
+later, as when points arrive. To do the same for a time span, use `track-mark` with `--reject`,
+`--accept` or `--clear`:
 
 ```bash
 # in EiN's terminal
@@ -417,7 +425,15 @@ track-mark ruby-iphone --from 2025-12-24T13:00:00Z --to 2025-12-24T15:30:00Z --a
 ```
 
 `--from` and `--to` are both optional: without them the whole track is marked, so
-`track-mark ruby-iphone --clear` hands every position back to the rules.
+`track-mark ruby-iphone --clear` hands every position back to the rules. `--near <lat,lng>` marks
+only the positions within 40 m of a point (`--within` sets another distance in metres), and
+`--marked reject` or `--marked accept` only those you rejected or accepted. **Undo all N that day**
+is this:
+
+```bash
+# in EiN's terminal
+track-mark ruby-iphone --from 2025-12-24T00:00:00Z --to 2025-12-25T00:00:00Z --marked reject --clear
+```
 
 A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
 the route really was.
@@ -583,6 +599,27 @@ for weather in a harbour. Those who may change the device can correct it:
 The trips are found again at once. The changes are kept with the device, in its `tripEdits`
 setting, and hold when the trips are found again later.
 
+### Move a trip to another device
+
+A trip recorded on the wrong device, such as a phone logging the sailboat's trip under the car,
+can be moved to the right one. Those who may change the device click **Move to device…** on the
+trip's card, pick the device in **Move the trip to another device**, and click **Move**. The list
+holds the devices you may change. The trip's positions, from its first to its last, leave this
+device's track for the other's; a device with no track yet gets one. Positions you rejected or
+accepted by hand keep that. The trips of both devices are found again at once.
+
+The positions recorded where the trip began and ended stay, as does any GPX file the trip was read
+from, in this device's `routes` folder. To move another stretch, use `track-move` with the time
+span:
+
+```bash
+# in EiN's terminal
+track-move ruby-iphone the-sailboat --from 2025-07-01T06:00:00Z --to 2025-07-03T18:00:00Z
+```
+
+A position at the very same moment as one the other device has already is dropped, and the other
+device keeps its own.
+
 ### Make a trip an album
 
 A trip EiN finds is only a proposal until you make it an album. Those who may change the device see,
@@ -626,6 +663,7 @@ see the albums the trip may belong to under **Maybe in**.
 | A device's page has no **Track** or **Trips** tab.                                                                                                                                             | It has no **Travels as** and has recorded no track, so EiN takes it for a device that does not travel.                                                   | **Edit** it and choose **Travels as**.                                                                                                                                                                                       |
 | The **Trips** tab says "No trips" though the device has a track.                                                                                                                               | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                                                     | Click **Find trips**, or **Find trips again**.                                                                                                                                                                               |
 | A trip ends at home in the middle of a holiday, or two trips should be one.                                                                                                                    | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                                                       | Click **Join to the trip before** on the second trip's card.                                                                                                                                                                 |
+| A trip is listed under the wrong device.                                                                                                                                                       | The device that recorded it sent its positions to another device's track, or its GPX file was uploaded to the wrong device.                              | Click **Move to device…** on the trip's card; see [Move a trip to another device](#move-a-trip-to-another-device).                                                                                                           |
 | **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking** is missing.                                                                                              | You may not change this device, or, for **Upload GPX** and **Live tracking**, its **Travels as** is not set.                                             | Ask the person who registered it, or an administrator; or **Edit** it and choose **Travels as**.                                                                                                                             |
 | **Upload GPX** gives a message ending in "no track points found".                                                                                                                              | The file holds no recorded track points, only a planned route or waypoints.                                                                              | Use the file the device recorded while it moved.                                                                                                                                                                             |
 | The phone reports nothing to the track.                                                                                                                                                        | It cannot reach EiN at the address it was given, over HTTPS from where it is; the link was replaced or turned off; or tracking is off in Traccar Client. | Open the address in the phone's browser: a page saying `Forbidden` means the link is no longer the device's, so scan the new QR code. If it does not load at all, see [Ports, HTTPS and remote access](../admin/network.md). |
@@ -659,6 +697,8 @@ route is the child `track`, and the GPX files the route was read from are in its
 | Put a device's stays at locations, and name the new ones               | [`track-places`](commands.md#track-places) `<device>`; see [Places a device stayed at](places.md#places-a-device-stayed-at)                                                                                 |
 | Join a trip to the one before, or part one                             | [`trip-edit`](commands.md#trip-edit) `<device> <trip> --merge`, or `<device> <day> --split`                                                                                                                 |
 | Make a trip an album, or take it off                                   | [`trip-album`](commands.md#trip-album) `<device> <trip> --new`, `--album=<album>`, or `--detach`                                                                                                            |
+| Reject or accept positions by hand, or hand them back to the rules     | [`track-mark`](commands.md#track-mark) `<device> --reject`, `--accept` or `--clear`, with `--from`, `--to`, `--near <lat,lng>` and `--marked reject`                                                        |
+| Move a stretch of a track to another device                            | [`track-move`](commands.md#track-move) `<device> <to-device> --from <time> --to <time>`                                                                                                                     |
 | Bring a device's automatic cover up to date                            | [`device-cover`](commands.md#device-cover) `<device>`, or `--all`                                                                                                                                           |
 
 Registering Jon's GPS tracker, making him its owner and adding a route copied into your home folder:

@@ -500,18 +500,31 @@ reject, such as a flight with the logger off that lands near where it left, is l
 the map says how many there are. Click near a position, drawn or rejected, and the panel says when
 it was recorded and what EiN made of it. If you may change the device, it also offers:</p>
 <ul>
-<li><strong>Reject</strong>, on a drawn position: it is left out, whatever the rules say.</li>
+<li><strong>Reject</strong>, on a drawn position: it is left out, whatever the rules say, and so are the other
+drawn positions within 40 m of it that day (the day in UTC, as the track colours it). A point on
+the drawn line often stands for several positions recorded close together, and one taken away
+would let the next take its place. The panel says how many there are, and the button reads
+<strong>Reject all</strong> and the number. Over 25 is a place the device stayed at, not a glitch, and then
+<strong>Reject</strong> takes the one position alone.</li>
 <li><strong>Accept</strong>, on a rejected one: it is drawn, whatever the rules say. When it is one of a run of
 rejected positions, <strong>Accept all</strong> takes the whole run.</li>
 <li><strong>Undo</strong>, on a position you rejected or accepted: it goes back to what the rules make of it.</li>
+<li><strong>Undo all N that day</strong>, on a position you rejected, when you rejected others that day: every
+position rejected by hand that day goes back to the rules. Positions you accepted stay accepted.</li>
 </ul>
 <p>A position rejected by hand is left out before the rules judge the positions around it, so the
-line can break somewhere else once it is gone. To do the same for a time span, use <code>track-mark</code>
-with <code>--reject</code>, <code>--accept</code> or <code>--clear</code>:</p>
+line can break somewhere else once it is gone. The device&#39;s trips are found again ten minutes
+later, as when points arrive. To do the same for a time span, use <code>track-mark</code> with <code>--reject</code>,
+<code>--accept</code> or <code>--clear</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 track-mark ruby-iphone --from 2025-12-24T13:00:00Z --to 2025-12-24T15:30:00Z --accept</code></pre></div>
 <p><code>--from</code> and <code>--to</code> are both optional: without them the whole track is marked, so
-<code>track-mark ruby-iphone --clear</code> hands every position back to the rules.</p>
+<code>track-mark ruby-iphone --clear</code> hands every position back to the rules. <code>--near &lt;lat,lng&gt;</code> marks
+only the positions within 40 m of a point (<code>--within</code> sets another distance in metres), and
+<code>--marked reject</code> or <code>--marked accept</code> only those you rejected or accepted. <strong>Undo all N that day</strong>
+is this:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+track-mark ruby-iphone --from 2025-12-24T00:00:00Z --to 2025-12-25T00:00:00Z --marked reject --clear</code></pre></div>
 <p>A long track is drawn from a thinned copy, and its distance then comes out a little shorter than
 the route really was.</p>
 <p>EiN keeps every GPX file it reads into a track, in the device&#39;s <code>routes</code> folder
@@ -649,6 +662,20 @@ its own. <strong>Join to the trip before</strong> on the new trip undoes it.</li
 </ul>
 <p>The trips are found again at once. The changes are kept with the device, in its <code>tripEdits</code>
 setting, and hold when the trips are found again later.</p>
+<h3 id="move-a-trip-to-another-device">Move a trip to another device<a class="anchor" href="#move-a-trip-to-another-device" aria-label="Link to this section"></a></h3>
+<p>A trip recorded on the wrong device, such as a phone logging the sailboat&#39;s trip under the car,
+can be moved to the right one. Those who may change the device click <strong>Move to device…</strong> on the
+trip&#39;s card, pick the device in <strong>Move the trip to another device</strong>, and click <strong>Move</strong>. The list
+holds the devices you may change. The trip&#39;s positions, from its first to its last, leave this
+device&#39;s track for the other&#39;s; a device with no track yet gets one. Positions you rejected or
+accepted by hand keep that. The trips of both devices are found again at once.</p>
+<p>The positions recorded where the trip began and ended stay, as does any GPX file the trip was read
+from, in this device&#39;s <code>routes</code> folder. To move another stretch, use <code>track-move</code> with the time
+span:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+track-move ruby-iphone the-sailboat --from 2025-07-01T06:00:00Z --to 2025-07-03T18:00:00Z</code></pre></div>
+<p>A position at the very same moment as one the other device has already is dropped, and the other
+device keeps its own.</p>
 <h3 id="make-a-trip-an-album">Make a trip an album<a class="anchor" href="#make-a-trip-an-album" aria-label="Link to this section"></a></h3>
 <p>A trip EiN finds is only a proposal until you make it an album. Those who may change the device see,
 on each trip&#39;s card:</p>
@@ -741,6 +768,11 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <td>A trip ends at home in the middle of a holiday, or two trips should be one.</td>
 <td>Arriving at a home base, or staying somewhere longer than three days, ends a trip.</td>
 <td>Click <strong>Join to the trip before</strong> on the second trip&#39;s card.</td>
+</tr>
+<tr>
+<td>A trip is listed under the wrong device.</td>
+<td>The device that recorded it sent its positions to another device&#39;s track, or its GPX file was uploaded to the wrong device.</td>
+<td>Click <strong>Move to device…</strong> on the trip&#39;s card; see <a href="#move-a-trip-to-another-device">Move a trip to another device</a>.</td>
 </tr>
 <tr>
 <td><strong>Edit</strong>, <strong>Link existing media</strong>, <strong>Add owner</strong>, <strong>Upload GPX</strong> or <strong>Live tracking</strong> is missing.</td>
@@ -856,6 +888,14 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <td><a href="commands.html#trip-album"><code>trip-album</code></a> <code>&lt;device&gt; &lt;trip&gt; --new</code>, <code>--album=&lt;album&gt;</code>, or <code>--detach</code></td>
 </tr>
 <tr>
+<td>Reject or accept positions by hand, or hand them back to the rules</td>
+<td><a href="commands.html#track-mark"><code>track-mark</code></a> <code>&lt;device&gt; --reject</code>, <code>--accept</code> or <code>--clear</code>, with <code>--from</code>, <code>--to</code>, <code>--near &lt;lat,lng&gt;</code> and <code>--marked reject</code></td>
+</tr>
+<tr>
+<td>Move a stretch of a track to another device</td>
+<td><a href="commands.html#track-move"><code>track-move</code></a> <code>&lt;device&gt; &lt;to-device&gt; --from &lt;time&gt; --to &lt;time&gt;</code></td>
+</tr>
+<tr>
 <td>Bring a device&#39;s automatic cover up to date</td>
 <td><a href="commands.html#device-cover"><code>device-cover</code></a> <code>&lt;device&gt;</code>, or <code>--all</code></td>
 </tr>
@@ -885,7 +925,7 @@ chosen.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#reject-or-accept-a-position-by-hand">Reject or accept a position by hand</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li><a href="#a-devices-trips">A device's trips</a></li><li class="nested"><a href="#join-and-part-trips">Join and part trips</a></li><li class="nested"><a href="#make-a-trip-an-album">Make a trip an album</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-registering-a-device-gives-you">What registering a device gives you</a></li><li><a href="#how-ein-recognises-a-device">How EiN recognises a device</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#register-a-camera-ein-has-already-seen">Register a camera EiN has already seen</a></li><li class="nested"><a href="#when-a-card-says-registered-as--but-unmatchable">When a card says &quot;registered as …, but unmatchable&quot;</a></li><li><a href="#register-a-device-by-hand">Register a device by hand</a></li><li><a href="#a-devices-page">A device's page</a></li><li><a href="#link-the-files-a-changed-fingerprint-matches">Link the files a changed fingerprint matches</a></li><li><a href="#change-a-devices-settings">Change a device's settings</a></li><li><a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a></li><li><a href="#say-who-owned-a-device">Say who owned a device</a></li><li><a href="#how-a-device-travels">How a device travels</a></li><li><a href="#home-bases">Home bases</a></li><li><a href="#write-something-on-a-devices-timeline">Write something on a device's timeline</a></li><li><a href="#the-devices-cover">The device's cover</a></li><li><a href="#a-devices-track">A device's track</a></li><li class="nested"><a href="#reject-or-accept-a-position-by-hand">Reject or accept a position by hand</a></li><li class="nested"><a href="#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device's track</a></li><li class="nested"><a href="#gpx-files-in-staging">GPX files in staging</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li><a href="#a-devices-trips">A device's trips</a></li><li class="nested"><a href="#join-and-part-trips">Join and part trips</a></li><li class="nested"><a href="#move-a-trip-to-another-device">Move a trip to another device</a></li><li class="nested"><a href="#make-a-trip-an-album">Make a trip an album</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
