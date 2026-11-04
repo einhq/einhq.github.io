@@ -531,7 +531,7 @@ goes where its dropdown goes: hide the dropdown, or keep it from someone, and it
 the search box&#39;s list a row reads with its menu&#39;s title, as <code>Create: Staging category</code>.</p>
 <h2 id="give-an-entry-a-key">Give an entry a key<a class="anchor" href="#give-an-entry-a-key" aria-label="Link to this section"></a></h2>
 <p>A sidebar entry, a top-bar button or a dropdown&#39;s row can have a key that does what choosing it does,
-from anywhere outside a text field:</p>
+from anywhere outside a text field, and an <kbd>Alt</kbd> key from a text field too, except on a Mac:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.create-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+B&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -1088,7 +1088,8 @@ beech: none</code></pre></div>
 </li>
 <li><p><strong>An entry of yours is never lit.</strong> Its address has a <code>?</code> in it, so it cannot match the page.</p>
 </li>
-<li><p><strong>A key does nothing.</strong> Keys do not work while the cursor is in a text field. Press <kbd>?</kbd>
+<li><p><strong>A key does nothing.</strong> A key without <kbd>Alt</kbd>, and on a Mac any key, does not work while the
+cursor is in a text field. Press <kbd>?</kbd>
 to see whether the key is listed; if it is not, run <code>ui-nav</code> for the reason.</p>
 </li>
 <li><p><strong>An entry you want back was hidden by your administrator.</strong> You cannot unhide it. Ask your

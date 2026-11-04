@@ -379,7 +379,7 @@ the search box's list a row reads with its menu's title, as `Create: Staging cat
 ## Give an entry a key
 
 A sidebar entry, a top-bar button or a dropdown's row can have a key that does what choosing it does,
-from anywhere outside a text field:
+from anywhere outside a text field, and an <kbd>Alt</kbd> key from a text field too, except on a Mac:
 
 ```json
 {
@@ -669,7 +669,8 @@ Other things that can go differently:
   ```
 
 - **An entry of yours is never lit.** Its address has a `?` in it, so it cannot match the page.
-- **A key does nothing.** Keys do not work while the cursor is in a text field. Press <kbd>?</kbd>
+- **A key does nothing.** A key without <kbd>Alt</kbd>, and on a Mac any key, does not work while the
+  cursor is in a text field. Press <kbd>?</kbd>
   to see whether the key is listed; if it is not, run `ui-nav` for the reason.
 - **An entry you want back was hidden by your administrator.** You cannot unhide it. Ask your
   administrator.

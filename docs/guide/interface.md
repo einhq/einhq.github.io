@@ -215,7 +215,8 @@ tab, the only one they get. A section left with no entries is not shown.
 - **Collapse to icons.** The button at the foot of the sidebar, **Collapse to icons**, narrows it to
   a column of icons; hold the pointer over an icon to see its name, and its key when it has one. The same button, then called
   **Show labels**, brings the names back. This browser remembers the choice.
-- **Keys.** The main pages open from the keyboard too, from anywhere outside a text field:
+- **Keys.** The main pages open from the keyboard too, from anywhere (on a Mac, from anywhere
+  outside a text field):
   <kbd>Alt</kbd>+<kbd>H</kbd> for **Home** and <kbd>Alt</kbd>+<kbd>S</kbd> for **Search**, and with
   the Archive <kbd>Alt</kbd>+<kbd>I</kbd> **Media**, <kbd>Alt</kbd>+<kbd>Y</kbd> **Year**,
   <kbd>Alt</kbd>+<kbd>G</kbd> **Map**, <kbd>Alt</kbd>+<kbd>A</kbd> **Albums**,

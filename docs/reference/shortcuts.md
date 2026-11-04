@@ -25,9 +25,10 @@ How to read the keys on this page:
 - A letter key works without <kbd>Shift</kbd> unless the table says <kbd>Shift</kbd>.
 - Core's keys come first on this page. The keys a module brings are grouped under the module after
   them, [Archive](#archive) and [Assistant](#assistant); they work only with that module installed.
-- Keys typed into a text field are the field's. A page's single-letter keys, <kbd>?</kbd> and the
-  sidebar's and top bar's keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
-  terminal's <kbd>Alt</kbd> keys work there too.
+- Keys typed into a text field are the field's. A page's single-letter keys and <kbd>?</kbd> do
+  nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd>, the terminal's <kbd>Alt</kbd> keys
+  and the <kbd>Alt</kbd> keys of the sidebar and top bar work there too, except on a Mac, where
+  <kbd>⌥</kbd> with a letter types a character in a box.
 
 ## Anywhere
 
@@ -387,7 +388,8 @@ The side drawer the chat opens in can be made wider or narrower from the keyboar
 ## When a key does nothing
 
 - **The focus is in a text field.** Click an empty part of the page, or press <kbd>Esc</kbd> in a
-  search box to leave it, and press the key again.
+  search box to leave it, and press the key again. Pages such as **People** and **Albums** put the
+  focus in their filter box; on a Mac that holds the sidebar's keys too.
 - **The key belongs to something else on screen.** A dialog over the page takes the keyboard: the
   viewer's keys rest while a dialog lies over it, staging's keys rest while a dialog is open, and
   the keys that open a page rest while a dialog or the viewer is open.

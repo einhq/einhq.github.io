@@ -48,8 +48,8 @@ On an archive with no albums yet, the page says **No albums yet** and, if you ar
 ### Open an album at random
 
 **Random album**, the button with two crossing arrows beside the search box in the top bar, opens
-an album picked at random. <kbd>Alt</kbd>+<kbd>R</kbd> does the same from anywhere outside a text
-field. It picks among the albums people made that you may open, never a staging suggestion.
+an album picked at random. <kbd>Alt</kbd>+<kbd>R</kbd> does the same from anywhere, on a Mac from
+anywhere outside a text field. It picks among the albums people made that you may open, never a staging suggestion.
 
 To find one particular album, start typing its name in the search box at the top
 (<kbd>Ctrl</kbd>+<kbd>K</kbd>, or <kbd>⌘</kbd>+<kbd>K</kbd> on a Mac).
