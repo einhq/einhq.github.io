@@ -378,33 +378,43 @@ the search box's list a row reads with its menu's title, as `Create: Staging cat
 
 ## Give an entry a key
 
-A top-bar button or a dropdown's row can have a key that does what choosing it does, from anywhere
-outside a text field:
+A sidebar entry, a top-bar button or a dropdown's row can have a key that does what choosing it does,
+from anywhere outside a text field:
 
 ```json
 {
   "topbar": [
-    { "id": "archive.create-album", "shortcut": "alt+A" },
-    { "id": "me.map", "title": "Map", "icon": "map", "shortcut": "alt+P", "action": { "fullscreen": "/map" } },
+    { "id": "archive.create-album", "shortcut": "alt+B" },
+    { "id": "me.map", "title": "Map", "icon": "map", "shortcut": "alt+K", "action": { "fullscreen": "/map" } },
     { "id": "archive.random-album", "shortcut": null }
+  ],
+  "sidebar": [
+    { "id": "archive.devices", "shortcut": "alt+U" }
   ]
 }
 ```
 
-This gives **Create** › **Album** the key <kbd>Alt</kbd>+<kbd>A</kbd>, gives your **Map** button
-<kbd>Alt</kbd>+<kbd>P</kbd>, and takes <kbd>Alt</kbd>+<kbd>R</kbd> away from **Random album**.
+This gives **Create** › **Album** the key <kbd>Alt</kbd>+<kbd>B</kbd>, gives your **Map** button
+<kbd>Alt</kbd>+<kbd>K</kbd>, takes <kbd>Alt</kbd>+<kbd>R</kbd> away from **Random album**, and opens
+**Devices** with <kbd>Alt</kbd>+<kbd>U</kbd>.
 
 - A key is modifiers and one key, joined by `+`. The modifiers are `alt`, `ctrl`, `shift`, `meta`,
   and `mod`, which is <kbd>Ctrl</kbd>, or <kbd>⌘</kbd> on a Mac. Letter case does not matter:
   `alt+R` and `Alt+r` are the same key.
 - `null` takes a key away, which is how you remove a module's key.
-- The key shows in the button's tooltip, such as **Map (Alt+P)**, beside the row in its menu, and
+- The key shows in the button's tooltip, such as **Map (Alt+K)**, beside the row in its menu, and
   in the **Keyboard shortcuts** list that <kbd>?</kbd> opens, under **Anywhere**; a row is listed
-  with its menu, as **Create › Album**. On a Mac, Alt shows as <kbd>⌥</kbd>.
+  with its menu, as **Create › Album**. A sidebar entry's key shows in its icon's tooltip when the
+  sidebar is narrowed to icons, and under **Go to** in the list. The finder shows every key beside
+  its row. On a Mac, Alt shows as <kbd>⌥</kbd>.
+- A sidebar entry's key does nothing while a dialog or the viewer is open.
 - A dropdown itself cannot have a key; its rows can.
-- A key is given once. When two entries ask for the same key, the one that comes first in the top
-  bar's order keeps it: by `order`, lowest first, and a dropdown's rows where their dropdown stands.
-  A button placed beside the search box counts by its `order` too.
+- A key is given once. When two entries ask for the same key, the sidebar's come first, in the
+  sidebar's order, and then the top bar's: by `order`, lowest first, and a dropdown's rows where
+  their dropdown stands. A button placed beside the search box counts by its `order` too. The
+  shipped entries already hold <kbd>Alt</kbd> with <kbd>H</kbd>, <kbd>S</kbd>, <kbd>I</kbd>,
+  <kbd>Y</kbd>, <kbd>G</kbd>, <kbd>A</kbd>, <kbd>P</kbd>, <kbd>L</kbd>, <kbd>C</kbd> and
+  <kbd>R</kbd>; [Keyboard shortcuts](../reference/shortcuts.md) says which is whose.
 - EiN keeps its own keys: <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd>), <kbd>?</kbd>,
   and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd> or an arrow key,
   which the terminal uses. An entry that asks for one of these as EiN writes it (`mod+K`, `shift+?`,
@@ -567,6 +577,7 @@ A section with no entries left to show is not drawn.
 | `order`    | no       | Its place in the section, lowest first. Without it, 1000; entries with the same number keep the order the files give them.              |
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                   |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                       |
+| `shortcut` | no       | A key that opens the page, such as `alt+U`; see [Give an entry a key](#give-an-entry-a-key). `null` takes a key away.                   |
 
 ### `topbar`
 

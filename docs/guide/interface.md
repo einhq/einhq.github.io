@@ -213,8 +213,15 @@ tab, the only one they get. A section left with no entries is not shown.
   again to unfold it. A folded section still shows the entry of the page you are on. This browser
   remembers which sections you folded.
 - **Collapse to icons.** The button at the foot of the sidebar, **Collapse to icons**, narrows it to
-  a column of icons; hold the pointer over an icon to see its name. The same button, then called
+  a column of icons; hold the pointer over an icon to see its name, and its key when it has one. The same button, then called
   **Show labels**, brings the names back. This browser remembers the choice.
+- **Keys.** The main pages open from the keyboard too, from anywhere outside a text field:
+  <kbd>Alt</kbd>+<kbd>H</kbd> for **Home** and <kbd>Alt</kbd>+<kbd>S</kbd> for **Search**, and with
+  the Archive <kbd>Alt</kbd>+<kbd>I</kbd> **Media**, <kbd>Alt</kbd>+<kbd>Y</kbd> **Year**,
+  <kbd>Alt</kbd>+<kbd>G</kbd> **Map**, <kbd>Alt</kbd>+<kbd>A</kbd> **Albums**,
+  <kbd>Alt</kbd>+<kbd>P</kbd> **People** and <kbd>Alt</kbd>+<kbd>L</kbd> **Locations**; with the
+  Assistant <kbd>Alt</kbd>+<kbd>C</kbd> **Chat**. The **Keyboard shortcuts** dialog lists them
+  under **Go to**.
 
 You and your administrator can rename, reorder, hide and add entries: see
 [Your sidebar and top bar](customizing.md). On a phone the sidebar is out of sight until you
@@ -270,8 +277,8 @@ A few things to know about each:
 ## Keyboard shortcuts
 
 Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu, to see
-the **Keyboard shortcuts** dialog. It lists the keys that work anywhere, and a group for each part
-of the screen that has keys of its own, such as the viewer or the **Nodes** explorer, while that
+the **Keyboard shortcuts** dialog. It lists the keys that work anywhere, the keys that open a page
+under **Go to** (see [The sidebar](#the-sidebar)), and a group for each part of the screen that has keys of its own, such as the viewer or the **Nodes** explorer, while that
 part is on screen.
 
 ![The Keyboard shortcuts dialog over the Home page, listing the Anywhere group](../../assets/shots/shortcuts.webp "Press ? on any page to see the keys that work there.")

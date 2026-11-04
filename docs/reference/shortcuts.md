@@ -6,8 +6,8 @@ page that explains that part in full; this page is for looking a key up.
 ## See the keys where you are
 
 Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu. The
-**Keyboard shortcuts** dialog opens, listing the keys that work anywhere under **Anywhere**, and a
-group for each part of the screen that has keys of its own while that part is on screen:
+**Keyboard shortcuts** dialog opens, listing the keys that work anywhere under **Anywhere**, the
+keys that open a page under **Go to**, and a group for each part of the screen that has keys of its own while that part is on screen:
 **Pictures** for a grid of pictures and **Nodes**, and with the Archive installed **Lightbox**,
 **Video** and **Audio** for the viewer, **Staging** and **Memories**. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.
 
@@ -26,7 +26,7 @@ How to read the keys on this page:
 - Core's keys come first on this page. The keys a module brings are grouped under the module after
   them, [Archive](#archive) and [Assistant](#assistant); they work only with that module installed.
 - Keys typed into a text field are the field's. A page's single-letter keys, <kbd>?</kbd> and the
-  top bar's keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
+  sidebar's and top bar's keys do nothing while you type in a box; <kbd>Ctrl</kbd>+<kbd>K</kbd> and the
   terminal's <kbd>Alt</kbd> keys work there too.
 
 ## Anywhere
@@ -43,15 +43,30 @@ Where a dialog or the viewer covers the search box, <kbd>Ctrl</kbd>+<kbd>K</kbd>
 a dialog of its own. [Finding your way around](../guide/interface.md#keyboard-shortcuts) shows the
 dialog, and [Search and the finder](../guide/search.md#the-finder-in-the-top-bar) the finder.
 
+## Go to a page
+
+The main pages of the sidebar have a key that opens them, as choosing the entry does. The keys rest
+while a dialog or the viewer is open, which have keys of their own.
+
+| Keys                        | What they do               |
+| --------------------------- | -------------------------- |
+| <kbd>Alt</kbd>+<kbd>H</kbd> | Opens **Home**.            |
+| <kbd>Alt</kbd>+<kbd>S</kbd> | Opens the **Search** page. |
+
+The Archive's pages have keys too, under [Anywhere with the Archive](#anywhere-with-the-archive), and
+the Assistant's **Chat** under [Anywhere with the Assistant](#anywhere-with-the-assistant). On a
+computer, holding the pointer over an icon of the narrowed sidebar shows its key, such as
+**People (Alt+P)**, and the finder shows each page's key beside its row.
+
 ### Keys for top-bar buttons
 
-A top-bar button or a row of one of its menus can have a key, from a module or from your own
-navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive's **Random album** is the only one a published module ships with.
+A sidebar entry, a top-bar button or a row of one of its menus can have a key, from a module or from
+your own navigation file. <kbd>Alt</kbd>+<kbd>R</kbd> for the Archive's **Random album** is the only one a published module ships with.
 Each such key is listed under **Anywhere** in the **Keyboard shortcuts** dialog and shown in the
 button's tooltip, such as **Random album (Alt+R)**. [Your sidebar and top bar](../guide/customizing.md#give-an-entry-a-key)
 shows how to give an entry a key, change one, or take one away.
 
-These keys are EiN's own and no top-bar entry can take them: <kbd>Ctrl</kbd>+<kbd>K</kbd>,
+These keys are EiN's own and no sidebar or top-bar entry can take them: <kbd>Ctrl</kbd>+<kbd>K</kbd>,
 <kbd>?</kbd>, and <kbd>Alt</kbd> with <kbd>T</kbd>, <kbd>N</kbd>, <kbd>M</kbd>, <kbd>W</kbd>,
 <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd> or <kbd>↓</kbd>.
 
@@ -182,8 +197,18 @@ These keys work with the [Archive](../archive/index.md) installed.
 
 ### Anywhere with the Archive
 
-<kbd>Alt</kbd>+<kbd>R</kbd> opens an album at random, as **Random album** in the top bar does. It is a
-top-bar key, so it can be changed or taken away; see [Keys for top-bar buttons](#keys-for-top-bar-buttons).
+| Keys                        | What they do                                                       |
+| --------------------------- | ------------------------------------------------------------------ |
+| <kbd>Alt</kbd>+<kbd>I</kbd> | Opens **Media**.                                                   |
+| <kbd>Alt</kbd>+<kbd>Y</kbd> | Opens **Year**.                                                    |
+| <kbd>Alt</kbd>+<kbd>G</kbd> | Opens the **Map**.                                                 |
+| <kbd>Alt</kbd>+<kbd>A</kbd> | Opens **Albums**.                                                  |
+| <kbd>Alt</kbd>+<kbd>P</kbd> | Opens **People**.                                                  |
+| <kbd>Alt</kbd>+<kbd>L</kbd> | Opens **Locations**.                                               |
+| <kbd>Alt</kbd>+<kbd>R</kbd> | Opens an album at random, as **Random album** in the top bar does. |
+
+These are sidebar and top-bar keys, so they can be changed or taken away; see
+[Keys for top-bar buttons](#keys-for-top-bar-buttons).
 
 ### The time scrubber
 
@@ -346,6 +371,10 @@ On the **Duplicates** tab and in its compare dialog ([Duplicates](../archive/dup
 
 These keys work with the [Assistant](../assistant/index.md) installed.
 
+### Anywhere with the Assistant
+
+<kbd>Alt</kbd>+<kbd>C</kbd> opens the **Chat** page, as its entry in the sidebar does.
+
 ### The chat
 
 In the chat box ([Chatting with the assistant](../assistant/chat.md)), <kbd>Enter</kbd> sends the
@@ -360,13 +389,14 @@ The side drawer the chat opens in can be made wider or narrower from the keyboar
 - **The focus is in a text field.** Click an empty part of the page, or press <kbd>Esc</kbd> in a
   search box to leave it, and press the key again.
 - **The key belongs to something else on screen.** A dialog over the page takes the keyboard: the
-  viewer's keys rest while a dialog lies over it, and staging's keys rest while a dialog is open.
+  viewer's keys rest while a dialog lies over it, staging's keys rest while a dialog is open, and
+  the keys that open a page rest while a dialog or the viewer is open.
   Press <kbd>?</kbd> to see which groups are active.
 - **The browser or the computer keeps the key.** Some browsers keep <kbd>Ctrl</kbd>+<kbd>W</kbd>,
   <kbd>Ctrl</kbd>+<kbd>Q</kbd> or <kbd>Ctrl</kbd>+<kbd>S</kbd> for themselves; the editor in the
   terminal also takes <kbd>Ctrl</kbd>+<kbd>O</kbd> and <kbd>Ctrl</kbd>+<kbd>X</kbd>.
-- **A top-bar key you set is missing.** A key two entries ask for goes to the first in the top bar's
-  order, and EiN's own keys are never given away. [Your sidebar and top bar](../guide/customizing.md#when-something-goes-differently)
+- **A sidebar or top-bar key you set is missing.** A key two entries ask for goes to the first in
+  the sidebar's order, then the top bar's, and EiN's own keys are never given away. [Your sidebar and top bar](../guide/customizing.md#when-something-goes-differently)
   helps find out why.
 - **On a phone or tablet** there is no keyboard to press; the keys need a computer. [EiN on a phone](../guide/phone.md) covers the gestures instead.
 
