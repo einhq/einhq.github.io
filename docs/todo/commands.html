@@ -224,7 +224,7 @@ todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <s
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The item as it is now, at its new path, with doneAt and doneBy when it is done.</p>
 <h3 id="todo-item"><code>todo-item</code><a class="anchor" href="#todo-item" aria-label="Link to this section"></a></h3>
-<p>Show one todo item: its title, notes, due day, who is to do it, its column and its links.</p>
+<p>Show one todo item: its title, description, due day, who is to do it, its column and its links.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>todo-item &lt;item&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -241,7 +241,7 @@ todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md</code></
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>todo-item /groups/users/todos/Shopping/2026-11-05-140322.md</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The item: path, list, column, title, notes, done, doneAt, doneBy, due, assignee, order and links.</p>
+<p>With <code>JSON_OUTPUT=1</code>: The item: path, list, column, title, description, done, doneAt, doneBy, due, assignee, order and links.</p>
 <h3 id="todo-items"><code>todo-items</code><a class="anchor" href="#todo-items" aria-label="Link to this section"></a></h3>
 <p>Show a todo list&#39;s board: its columns, Todo (the list itself), each folder in it, then Done (its done/), and the items of each in their order. archived/ is left out.</p>
 <p><small>reads only</small></p>
@@ -260,7 +260,7 @@ todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md</code></
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>todo-items /groups/users/todos/Shopping</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The list (path, title, group, open, total), its columns (path, title, stage) and their items column by column (path, column, title, notes, done, doneAt, doneBy, due, assignee, order, links).</p>
+<p>With <code>JSON_OUTPUT=1</code>: The list (path, title, group, open, total), its columns (path, title, stage) and their items column by column (path, column, title, description, done, doneAt, doneBy, due, assignee, order, links).</p>
 <h3 id="todo-link"><code>todo-link</code><a class="anchor" href="#todo-link" aria-label="Link to this section"></a></h3>
 <p>Link a todo item to what it is about, such as a picture or an album: a softlink under the item&#39;s file, named as what it points at. rm takes one away.</p>
 <p><small>changes things</small></p>
@@ -390,9 +390,9 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --before /groups/users/todos/Shopping/2026-11-04-091500.md</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The item as it is now, at its new path, with its column and order.</p>
 <h3 id="todo-set"><code>todo-set</code><a class="anchor" href="#todo-set" aria-label="Link to this section"></a></h3>
-<p>Change a todo item&#39;s title, its notes, the day it is due, or who is to do it.</p>
+<p>Change a todo item&#39;s title, its description, the day it is due, or who is to do it.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>todo-set [--title=&lt;string&gt;] [--notes=&lt;string&gt;] [--due=&lt;string&gt;] [--no-due] [--assignee=&lt;user&gt;] [--no-assignee] &lt;item&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>todo-set [--title=&lt;string&gt;] [--description=&lt;string&gt;] [--due=&lt;string&gt;] [--no-due] [--assignee=&lt;user&gt;] [--no-assignee] &lt;item&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -418,8 +418,8 @@ todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --before /groups/use
 <td>its new title.</td>
 </tr>
 <tr>
-<td><code>--notes=&lt;string&gt;</code></td>
-<td>what the file says under the title, in place of what it said; empty for none.</td>
+<td><code>--description=&lt;string&gt;</code></td>
+<td>what the file says under the title, in markdown, in place of what it said; empty for none.</td>
 </tr>
 <tr>
 <td><code>--due=&lt;string&gt;</code></td>

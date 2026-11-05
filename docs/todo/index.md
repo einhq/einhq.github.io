@@ -33,7 +33,7 @@ assignee: helen
 The old one is in the desk drawer.
 ```
 
-- The first heading is the item's **title**, and what follows it is its **notes**.
+- The first heading is the item's **title**, and what follows it is its **description**.
 - The front matter between the `---` lines says the day it is **due**, who is to do it
   (`assignee`) and its place on the list (`order`). All are optional, and an item with none needs
   no front matter at all.
@@ -86,33 +86,36 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
 
 - **Make a list**: choose **⋯** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
-- **Add an item**: open the list's tab, choose **Add an item** at the foot of **Todo**, type what is
-  to be done and press <kbd>Enter</kbd>. The line stays open for the next one; <kbd>Esc</kbd>
-  closes it.
-- **Move an item**: drag its card to another place in the column, or to another column. Dropped on
-  **Done** it is done, and dragged out of Done it is not. The arrows among an open card's buttons
-  move it too, to a column you pick from a menu.
+- **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** and press
+  <kbd>Enter</kbd>. The line stays for the next one.
+- **Move an item**: drag its card to another place in the column, or to another column; a dashed
+  frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
 - **Give it to someone**: the round button at a card's right is the face of whoever is to do it,
   their person's picture or their initials, or an empty circle when it is nobody's. Choose it to
   give the item to a member of the list's group, or to **Nobody in particular**.
-- **Open a card**: choose its title. It shows the notes, and buttons to give it a due day, move it,
-  mark it done or not done, and change it.
-- **Change an item**: the pencil on an open card opens the item in a dialog: its **Title**, its
-  **Notes**, written in Markdown (lists, links, **bold**; **Preview** shows how they will look), the
-  day it is **Due** and **Who is to do it**. **Save** keeps the change.
+- **Give it a due day**: the calendar in a card's heading picks one; once set, the day stands there
+  instead and opens the picker again, where **No due day** takes it away.
+- **Read the description**: a card shows the first line of its description, with **…** when there
+  is more. Choose it to read the whole of it, as formatted Markdown, and again to fold it.
+- **Change an item**: the pencil in a card's heading opens the item in a dialog: its **Title**, its
+  **Description**, written in Markdown (lists, links, **bold**; **Preview** shows how it will look),
+  the day it is **Due**, and **Assign to**, where typing a name narrows the members to choose from.
+  **Save** keeps the change.
 - **Link an item**: in the same dialog, type in **Link to** to find a person, a place, an album or
   the other things the top bar's search finds by name, and choose one; or type a whole path, such as
   `/albums/Summer/beach.jpg`, to link a picture or a folder. A link is made as soon as you choose
-  it, and the cross on one takes it away. **Move to trash** takes the item away into your
-  [trash](../guide/profile.md), from where it can be restored.
+  it, and the cross on one takes it away.
+- **Delete an item**: **Delete** in the dialog removes it for good, with its links; what they point
+  at stays where it is.
 - **Add a column**: open the list's tab, choose **⋯** in the page's bar and **New column**, and type
-  its name; it comes before **Done**. The pencil in a column's
-  heading renames it, and the bin takes away a column with nothing in it. Todo cannot be renamed,
-  and `done` and `archived` are names the list keeps for itself.
+  its name; it comes before **Done**. The pencil in a column's heading renames it and, once no card
+  is left in it, **Delete** takes it away. Todo cannot be renamed, Done cannot be deleted, and
+  `done` and `archived` are names the list keeps for itself.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
   for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
-A card shows its due day, red once it has passed, a mark when it has notes, and what it links to.
+On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
+over it; on a phone they are always there. A due day that has passed is red.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
@@ -125,8 +128,10 @@ To add an item from anywhere, choose **Create → Todo item** in the top bar, pi
 choose **Add**. Opened while a picture, an album or another page about one thing is showing, it
 offers **About** that thing, ticked, and the new item links to it.
 
-A card's links are listed on it, a picture as its thumbnail. Choosing one opens what it points at: a picture in the lightbox, an album or a person on their page. A link to something
-that is gone, or that you may not see, is greyed out.
+A card's links are listed at its foot, each with its picture: a picture's own, an album's cover, a
+person's, place's or device's picture. A link is called what it points at is called, such as an
+album's title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
+A link to something that is gone, or that you may not see, is greyed out.
 
 ## On Home
 
@@ -147,7 +152,7 @@ todo-list-create 'Before the trip'                  # a list of your own
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/'Before the trip' 'Renew the passport' --due 2026-12-01
 todo-items /groups/users/todos/Shopping             # the list, its columns and their items
-todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   # one item, with its notes and links
+todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   # one item, with its description and links
 ls /groups/users/todos/Shopping                     # what is not started, as files
 todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md

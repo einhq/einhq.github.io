@@ -111,7 +111,7 @@ assignee: helen
 
 The old one is in the desk drawer.</code></pre></div>
 <ul>
-<li>The first heading is the item&#39;s <strong>title</strong>, and what follows it is its <strong>notes</strong>.</li>
+<li>The first heading is the item&#39;s <strong>title</strong>, and what follows it is its <strong>description</strong>.</li>
 <li>The front matter between the <code>---</code> lines says the day it is <strong>due</strong>, who is to do it
 (<code>assignee</code>) and its place on the list (<code>order</code>). All are optional, and an item with none needs
 no front matter at all.</li>
@@ -159,33 +159,36 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
 <ul>
 <li><strong>Make a list</strong>: choose <strong>⋯</strong> in the page&#39;s bar and <strong>New list</strong>, type a <strong>Title</strong> such as Shopping, and under
 <strong>Shared with</strong> keep <strong>Nobody, it is mine</strong> or pick a group. Choose <strong>Create list</strong>.</li>
-<li><strong>Add an item</strong>: open the list&#39;s tab, choose <strong>Add an item</strong> at the foot of <strong>Todo</strong>, type what is
-to be done and press <kbd>Enter</kbd>. The line stays open for the next one; <kbd>Esc</kbd>
-closes it.</li>
-<li><strong>Move an item</strong>: drag its card to another place in the column, or to another column. Dropped on
-<strong>Done</strong> it is done, and dragged out of Done it is not. The arrows among an open card&#39;s buttons
-move it too, to a column you pick from a menu.</li>
+<li><strong>Add an item</strong>: open the list&#39;s tab, type in <strong>Add an item</strong> at the foot of <strong>Todo</strong> and press
+<kbd>Enter</kbd>. The line stays for the next one.</li>
+<li><strong>Move an item</strong>: drag its card to another place in the column, or to another column; a dashed
+frame shows where it will land. Dropped on <strong>Done</strong> it is done, and dragged out of Done it is not.</li>
 <li><strong>Give it to someone</strong>: the round button at a card&#39;s right is the face of whoever is to do it,
 their person&#39;s picture or their initials, or an empty circle when it is nobody&#39;s. Choose it to
 give the item to a member of the list&#39;s group, or to <strong>Nobody in particular</strong>.</li>
-<li><strong>Open a card</strong>: choose its title. It shows the notes, and buttons to give it a due day, move it,
-mark it done or not done, and change it.</li>
-<li><strong>Change an item</strong>: the pencil on an open card opens the item in a dialog: its <strong>Title</strong>, its
-<strong>Notes</strong>, written in Markdown (lists, links, <strong>bold</strong>; <strong>Preview</strong> shows how they will look), the
-day it is <strong>Due</strong> and <strong>Who is to do it</strong>. <strong>Save</strong> keeps the change.</li>
+<li><strong>Give it a due day</strong>: the calendar in a card&#39;s heading picks one; once set, the day stands there
+instead and opens the picker again, where <strong>No due day</strong> takes it away.</li>
+<li><strong>Read the description</strong>: a card shows the first line of its description, with <strong>…</strong> when there
+is more. Choose it to read the whole of it, as formatted Markdown, and again to fold it.</li>
+<li><strong>Change an item</strong>: the pencil in a card&#39;s heading opens the item in a dialog: its <strong>Title</strong>, its
+<strong>Description</strong>, written in Markdown (lists, links, <strong>bold</strong>; <strong>Preview</strong> shows how it will look),
+the day it is <strong>Due</strong>, and <strong>Assign to</strong>, where typing a name narrows the members to choose from.
+<strong>Save</strong> keeps the change.</li>
 <li><strong>Link an item</strong>: in the same dialog, type in <strong>Link to</strong> to find a person, a place, an album or
 the other things the top bar&#39;s search finds by name, and choose one; or type a whole path, such as
 <code>/albums/Summer/beach.jpg</code>, to link a picture or a folder. A link is made as soon as you choose
-it, and the cross on one takes it away. <strong>Move to trash</strong> takes the item away into your
-<a href="../guide/profile.html">trash</a>, from where it can be restored.</li>
+it, and the cross on one takes it away.</li>
+<li><strong>Delete an item</strong>: <strong>Delete</strong> in the dialog removes it for good, with its links; what they point
+at stays where it is.</li>
 <li><strong>Add a column</strong>: open the list&#39;s tab, choose <strong>⋯</strong> in the page&#39;s bar and <strong>New column</strong>, and type
-its name; it comes before <strong>Done</strong>. The pencil in a column&#39;s
-heading renames it, and the bin takes away a column with nothing in it. Todo cannot be renamed,
-and <code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
+its name; it comes before <strong>Done</strong>. The pencil in a column&#39;s heading renames it and, once no card
+is left in it, <strong>Delete</strong> takes it away. Todo cannot be renamed, Done cannot be deleted, and
+<code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
 <li><strong>Archive done items</strong>: tick the cards in <strong>Done</strong> you want put away, or the box in its heading
 for all of them, and choose <strong>Archive</strong>. They move to the list&#39;s <code>archived/</code> folder.</li>
 </ul>
-<p>A card shows its due day, red once it has passed, a mark when it has notes, and what it links to.
+<p>On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
+over it; on a phone they are always there. A due day that has passed is red.
 An item can be given only to a member of the list&#39;s group; on a list of your own every item is
 yours.</p>
 <p><strong>Overview</strong> is what is left for you, soonest due first: the items given to you on any list, and
@@ -195,8 +198,10 @@ and the column when it is started; choose that to open the list&#39;s tab.</p>
 <p>To add an item from anywhere, choose <strong>Create → Todo item</strong> in the top bar, pick the list and
 choose <strong>Add</strong>. Opened while a picture, an album or another page about one thing is showing, it
 offers <strong>About</strong> that thing, ticked, and the new item links to it.</p>
-<p>A card&#39;s links are listed on it, a picture as its thumbnail. Choosing one opens what it points at: a picture in the lightbox, an album or a person on their page. A link to something
-that is gone, or that you may not see, is greyed out.</p>
+<p>A card&#39;s links are listed at its foot, each with its picture: a picture&#39;s own, an album&#39;s cover, a
+person&#39;s, place&#39;s or device&#39;s picture. A link is called what it points at is called, such as an
+album&#39;s title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
+A link to something that is gone, or that you may not see, is greyed out.</p>
 <h2 id="on-home">On Home<a class="anchor" href="#on-home" aria-label="Link to this section"></a></h2>
 <p>Home&#39;s <strong>Events</strong> lists the items falling due that are yours to do: given to you, or to nobody on
 a list you can see. They show from a week before they are due until a week after, beside the other
@@ -211,7 +216,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span>   
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <span class="hljs-string">&#x27;Renew the passport&#x27;</span> --due 2026-12-01
 todo-items /groups/users/todos/Shopping             <span class="hljs-comment"># the list, its columns and their items</span>
-todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   <span class="hljs-comment"># one item, with its notes and links</span>
+todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   <span class="hljs-comment"># one item, with its description and links</span>
 <span class="hljs-built_in">ls</span> /groups/users/todos/Shopping                     <span class="hljs-comment"># what is not started, as files</span>
 todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md

@@ -108,7 +108,7 @@ With `JSON_OUTPUT=1`: The item as it is now, at its new path, with doneAt and do
 
 ### `todo-item`
 
-Show one todo item: its title, notes, due day, who is to do it, its column and its links.
+Show one todo item: its title, description, due day, who is to do it, its column and its links.
 
 <small>reads only</small>
 
@@ -124,7 +124,7 @@ todo-item <item>
 todo-item /groups/users/todos/Shopping/2026-11-05-140322.md
 ```
 
-With `JSON_OUTPUT=1`: The item: path, list, column, title, notes, done, doneAt, doneBy, due, assignee, order and links.
+With `JSON_OUTPUT=1`: The item: path, list, column, title, description, done, doneAt, doneBy, due, assignee, order and links.
 
 ### `todo-items`
 
@@ -144,7 +144,7 @@ todo-items <list>
 todo-items /groups/users/todos/Shopping
 ```
 
-With `JSON_OUTPUT=1`: The list (path, title, group, open, total), its columns (path, title, stage) and their items column by column (path, column, title, notes, done, doneAt, doneBy, due, assignee, order, links).
+With `JSON_OUTPUT=1`: The list (path, title, group, open, total), its columns (path, title, stage) and their items column by column (path, column, title, description, done, doneAt, doneBy, due, assignee, order, links).
 
 ### `todo-link`
 
@@ -273,26 +273,26 @@ With `JSON_OUTPUT=1`: The item as it is now, at its new path, with its column an
 
 ### `todo-set`
 
-Change a todo item's title, its notes, the day it is due, or who is to do it.
+Change a todo item's title, its description, the day it is due, or who is to do it.
 
 <small>changes things</small>
 
 ```text
-todo-set [--title=<string>] [--notes=<string>] [--due=<string>] [--no-due] [--assignee=<user>] [--no-assignee] <item>
+todo-set [--title=<string>] [--description=<string>] [--due=<string>] [--no-due] [--assignee=<user>] [--no-assignee] <item>
 ```
 
 | Argument | What it is             |
 | -------- | ---------------------- |
 | `<item>` | the item, by its path. |
 
-| Option              | What it does                                                                  |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `--title=<string>`  | its new title.                                                                |
-| `--notes=<string>`  | what the file says under the title, in place of what it said; empty for none. |
-| `--due=<string>`    | the day it is due, as YYYY-MM-DD.                                             |
-| `--no-due`          | it is due on no particular day.                                               |
-| `--assignee=<user>` | who is to do it: a member of the list's group, or you on a list of your own.  |
-| `--no-assignee`     | it is nobody in particular's.                                                 |
+| Option                   | What it does                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------ |
+| `--title=<string>`       | its new title.                                                                             |
+| `--description=<string>` | what the file says under the title, in markdown, in place of what it said; empty for none. |
+| `--due=<string>`         | the day it is due, as YYYY-MM-DD.                                                          |
+| `--no-due`               | it is due on no particular day.                                                            |
+| `--assignee=<user>`      | who is to do it: a member of the list's group, or you on a list of your own.               |
+| `--no-assignee`          | it is nobody in particular's.                                                              |
 
 ```bash
 todo-set /groups/users/todos/Shopping/2026-11-05-140322.md --due 2026-11-20 --assignee anna
