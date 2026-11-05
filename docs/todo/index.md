@@ -83,9 +83,9 @@ Open **Todo** in the sidebar. The bar at the top has a tab for **Overview** and 
 list you can see, your own marked with a list and a group's with two people; hovering a tab says
 whose it is. On a phone the tabs scroll sideways.
 
-A list's columns stand side by side in one frame, in alternating shades, sharing the width of the
-page and running to its foot; each scrolls its own cards. When
-there are more than fit, the board scrolls sideways, and on a phone it shows one column at a time.
+A list's columns fill the page under the bar side by side, a line between each, sharing its width
+and running to its foot; each scrolls its own cards. When there are more than fit, the board
+scrolls sideways. On a phone the columns stand one under the other and the board scrolls down.
 
 - **Make a list**: choose **⋮** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
@@ -93,6 +93,8 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
   <kbd>Enter</kbd>. The line stays for the next one.
 - **Move an item**: drag its card to another place in the column, or to another column; a dashed
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
+  On a phone, lifting a card brings up the names of the columns at the foot of the screen: let go
+  over one and the card goes to the end of that column.
 - **Assign it**: the round button at a card's right is the face of whoever is to do it, their
   person's picture or their initials, or an empty circle when it is nobody's. Choose it and, under
   **Assign to**, a member of the list's group, or **Nobody in particular**.
