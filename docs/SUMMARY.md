@@ -114,6 +114,11 @@
 - [Todo lists](todo/index.md)
 - [Todo commands](todo/commands.md)
 
+## Recipes
+
+- [Recipes](recipes/index.md)
+- [Recipes commands](recipes/commands.md)
+
 ## Media service
 
 - [The media service](ems/index.md)

@@ -71,10 +71,11 @@ const MODULES: Record<string, string> = {
   ems: 'Media service',
   'album-folders': 'Album folders',
   todo: 'Todo',
+  recipes: 'Recipes',
 };
 
 /** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */
-const UNPUBLISHED = new Set(['importer']);
+const UNPUBLISHED = new Set(['importer', 'recipe-scraper']);
 const published = (module = 'core') => !UNPUBLISHED.has(module);
 const moduleName = (m: string) => MODULES[m] ?? m[0].toUpperCase() + m.slice(1);
 
