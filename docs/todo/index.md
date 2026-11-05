@@ -81,7 +81,10 @@ Open **Todo** in the sidebar. The bar at the top has a tab for **Overview** and 
 list you can see, your own marked with a list and a group's with two people; hovering a tab says
 whose it is. On a phone the tabs scroll sideways.
 
-- **Make a list**: choose **+** in the page's bar, type a **Title** such as Shopping, and under
+A list's columns share the width of the page and run to its foot; each scrolls its own cards. When
+there are more than fit, the board scrolls sideways, and on a phone it shows one column at a time.
+
+- **Make a list**: choose **⋯** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
 - **Add an item**: open the list's tab, choose **Add an item** at the foot of **Todo**, type what is
   to be done and press <kbd>Enter</kbd>. The line stays open for the next one; <kbd>Esc</kbd>
@@ -92,19 +95,24 @@ whose it is. On a phone the tabs scroll sideways.
 - **Give it to someone**: the round button at a card's right is the face of whoever is to do it,
   their person's picture or their initials, or an empty circle when it is nobody's. Choose it to
   give the item to a member of the list's group, or to **Nobody in particular**.
-- **Open a card**: choose its title. It shows the notes and the links, and buttons to give it a due
-  day, move it, mark it done or not done, and change it.
-- **Change an item**: the pencil on an open card shows its title, its notes, its due day and who is
-  to do it; **Save** keeps the change. Under them are the item's links: the cross on one takes it
-  away, and **Link a path** adds one, such as `/albums/Summer/beach.jpg`. **Move to trash** takes
-  the item away into your [trash](../guide/profile.md), from where it can be restored.
-- **Add a column**: choose **+** just before **Done** and type its name. The pencil in a column's
+- **Open a card**: choose its title. It shows the notes, and buttons to give it a due day, move it,
+  mark it done or not done, and change it.
+- **Change an item**: the pencil on an open card opens the item in a dialog: its **Title**, its
+  **Notes**, written in Markdown (lists, links, **bold**; **Preview** shows how they will look), the
+  day it is **Due** and **Who is to do it**. **Save** keeps the change.
+- **Link an item**: in the same dialog, type in **Link to** to find a person, a place, an album or
+  the other things the top bar's search finds by name, and choose one; or type a whole path, such as
+  `/albums/Summer/beach.jpg`, to link a picture or a folder. A link is made as soon as you choose
+  it, and the cross on one takes it away. **Move to trash** takes the item away into your
+  [trash](../guide/profile.md), from where it can be restored.
+- **Add a column**: open the list's tab, choose **⋯** in the page's bar and **New column**, and type
+  its name; it comes before **Done**. The pencil in a column's
   heading renames it, and the bin takes away a column with nothing in it. Todo cannot be renamed,
   and `done` and `archived` are names the list keeps for itself.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
   for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
-A card shows its due day, red once it has passed, and a mark for notes and links when it has them.
+A card shows its due day, red once it has passed, a mark when it has notes, and what it links to.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
@@ -117,8 +125,7 @@ To add an item from anywhere, choose **Create → Todo item** in the top bar, pi
 choose **Add**. Opened while a picture, an album or another page about one thing is showing, it
 offers **About** that thing, ticked, and the new item links to it.
 
-An open card's links are listed under its notes, a picture as its thumbnail. Choosing one opens what
-it points at: a picture in the lightbox, an album or a person on their page. A link to something
+A card's links are listed on it, a picture as its thumbnail. Choosing one opens what it points at: a picture in the lightbox, an album or a person on their page. A link to something
 that is gone, or that you may not see, is greyed out.
 
 ## On Home
@@ -140,6 +147,7 @@ todo-list-create 'Before the trip'                  # a list of your own
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/'Before the trip' 'Renew the passport' --due 2026-12-01
 todo-items /groups/users/todos/Shopping             # the list, its columns and their items
+todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   # one item, with its notes and links
 ls /groups/users/todos/Shopping                     # what is not started, as files
 todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md

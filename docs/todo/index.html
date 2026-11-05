@@ -154,8 +154,10 @@ from the start; the administrator gives other groups theirs.</p>
 <p>Open <strong>Todo</strong> in the sidebar. The bar at the top has a tab for <strong>Overview</strong> and then one for every
 list you can see, your own marked with a list and a group&#39;s with two people; hovering a tab says
 whose it is. On a phone the tabs scroll sideways.</p>
+<p>A list&#39;s columns share the width of the page and run to its foot; each scrolls its own cards. When
+there are more than fit, the board scrolls sideways, and on a phone it shows one column at a time.</p>
 <ul>
-<li><strong>Make a list</strong>: choose <strong>+</strong> in the page&#39;s bar, type a <strong>Title</strong> such as Shopping, and under
+<li><strong>Make a list</strong>: choose <strong>⋯</strong> in the page&#39;s bar and <strong>New list</strong>, type a <strong>Title</strong> such as Shopping, and under
 <strong>Shared with</strong> keep <strong>Nobody, it is mine</strong> or pick a group. Choose <strong>Create list</strong>.</li>
 <li><strong>Add an item</strong>: open the list&#39;s tab, choose <strong>Add an item</strong> at the foot of <strong>Todo</strong>, type what is
 to be done and press <kbd>Enter</kbd>. The line stays open for the next one; <kbd>Esc</kbd>
@@ -166,19 +168,24 @@ move it too, to a column you pick from a menu.</li>
 <li><strong>Give it to someone</strong>: the round button at a card&#39;s right is the face of whoever is to do it,
 their person&#39;s picture or their initials, or an empty circle when it is nobody&#39;s. Choose it to
 give the item to a member of the list&#39;s group, or to <strong>Nobody in particular</strong>.</li>
-<li><strong>Open a card</strong>: choose its title. It shows the notes and the links, and buttons to give it a due
-day, move it, mark it done or not done, and change it.</li>
-<li><strong>Change an item</strong>: the pencil on an open card shows its title, its notes, its due day and who is
-to do it; <strong>Save</strong> keeps the change. Under them are the item&#39;s links: the cross on one takes it
-away, and <strong>Link a path</strong> adds one, such as <code>/albums/Summer/beach.jpg</code>. <strong>Move to trash</strong> takes
-the item away into your <a href="../guide/profile.html">trash</a>, from where it can be restored.</li>
-<li><strong>Add a column</strong>: choose <strong>+</strong> just before <strong>Done</strong> and type its name. The pencil in a column&#39;s
+<li><strong>Open a card</strong>: choose its title. It shows the notes, and buttons to give it a due day, move it,
+mark it done or not done, and change it.</li>
+<li><strong>Change an item</strong>: the pencil on an open card opens the item in a dialog: its <strong>Title</strong>, its
+<strong>Notes</strong>, written in Markdown (lists, links, <strong>bold</strong>; <strong>Preview</strong> shows how they will look), the
+day it is <strong>Due</strong> and <strong>Who is to do it</strong>. <strong>Save</strong> keeps the change.</li>
+<li><strong>Link an item</strong>: in the same dialog, type in <strong>Link to</strong> to find a person, a place, an album or
+the other things the top bar&#39;s search finds by name, and choose one; or type a whole path, such as
+<code>/albums/Summer/beach.jpg</code>, to link a picture or a folder. A link is made as soon as you choose
+it, and the cross on one takes it away. <strong>Move to trash</strong> takes the item away into your
+<a href="../guide/profile.html">trash</a>, from where it can be restored.</li>
+<li><strong>Add a column</strong>: open the list&#39;s tab, choose <strong>⋯</strong> in the page&#39;s bar and <strong>New column</strong>, and type
+its name; it comes before <strong>Done</strong>. The pencil in a column&#39;s
 heading renames it, and the bin takes away a column with nothing in it. Todo cannot be renamed,
 and <code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
 <li><strong>Archive done items</strong>: tick the cards in <strong>Done</strong> you want put away, or the box in its heading
 for all of them, and choose <strong>Archive</strong>. They move to the list&#39;s <code>archived/</code> folder.</li>
 </ul>
-<p>A card shows its due day, red once it has passed, and a mark for notes and links when it has them.
+<p>A card shows its due day, red once it has passed, a mark when it has notes, and what it links to.
 An item can be given only to a member of the list&#39;s group; on a list of your own every item is
 yours.</p>
 <p><strong>Overview</strong> is what is left for you, soonest due first: the items given to you on any list, and
@@ -188,8 +195,7 @@ and the column when it is started; choose that to open the list&#39;s tab.</p>
 <p>To add an item from anywhere, choose <strong>Create → Todo item</strong> in the top bar, pick the list and
 choose <strong>Add</strong>. Opened while a picture, an album or another page about one thing is showing, it
 offers <strong>About</strong> that thing, ticked, and the new item links to it.</p>
-<p>An open card&#39;s links are listed under its notes, a picture as its thumbnail. Choosing one opens what
-it points at: a picture in the lightbox, an album or a person on their page. A link to something
+<p>A card&#39;s links are listed on it, a picture as its thumbnail. Choosing one opens what it points at: a picture in the lightbox, an album or a person on their page. A link to something
 that is gone, or that you may not see, is greyed out.</p>
 <h2 id="on-home">On Home<a class="anchor" href="#on-home" aria-label="Link to this section"></a></h2>
 <p>Home&#39;s <strong>Events</strong> lists the items falling due that are yours to do: given to you, or to nobody on
@@ -205,6 +211,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span>   
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <span class="hljs-string">&#x27;Renew the passport&#x27;</span> --due 2026-12-01
 todo-items /groups/users/todos/Shopping             <span class="hljs-comment"># the list, its columns and their items</span>
+todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   <span class="hljs-comment"># one item, with its notes and links</span>
 <span class="hljs-built_in">ls</span> /groups/users/todos/Shopping                     <span class="hljs-comment"># what is not started, as files</span>
 todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md
