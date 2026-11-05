@@ -67,6 +67,24 @@ show **waiting for EMS** on the **Dashboard**.
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                          | run by the engine              |
 | `media-heal`           | Goes through the whole archive and announces the files missing work the other pipelines should have done        | run by the engine              |
 
+## Which processing a folder gets
+
+Each media pipeline belongs to a family of work, which it names with `wants`, so a folder can ask
+for only some of it ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)):
+
+| Family            | What it covers                                                                                                                           | Pipelines                                                                     |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | `media-stills`, `media-transcode`                                             |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | `media-embed-picture`                                                         |
+| `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                             |
+| `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                        |
+| `archive`         | Faces and voices and who they are, fingerprints and duplicates, the camera, the place                                                    | the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
+
+`media-ingest` and `media-reindex` name no family, since every family needs what they read, and nor
+do the pipelines that work on the Archive's own folders: albums, staging, tracks and places. A
+folder with `processing` set to `["renditions"]` gets its pictures read and their sizes made, and no
+faces, text, picture vectors or fingerprints.
+
 ## The workers
 
 Every kind of work above that is not run by the engine goes as a job into the pool

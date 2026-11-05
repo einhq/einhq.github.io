@@ -138,6 +138,7 @@ so most events are turned away without starting a process:
 | -------------- | ----------------------------------------------------------------------------------------------------------- |
 | `match`        | every named field matches its glob, or one of a list of globs: `mimetype: 'image/*'`                        |
 | `unless`       | not every named field matches: `nodePath: '/var/**'` leaves a whole subtree alone                           |
+| `wants`        | the folder the subject lies in wants one of these families of work: `wants: renditions` (below)             |
 | `allowDerived` | `true` lets a derived file, such as a thumbnail or a face crop, start it; without it derived files never do |
 | `skipIfExists` | the path does not exist: `$NODE_PATH/metadata/exif`                                                         |
 | `skipIfAttr`   | the subject does not already have this attribute set: `skipIfAttr: textIndexedAt`                           |
@@ -148,6 +149,25 @@ In `match` and `unless`, a field names a value the event carries: `mimetype`, `n
 key of a fact's `data`. In a path field, `*` matches within one name and `**` crosses `/`, so
 `/home/*/staging/**` is everything in each person's staging folder. A trigger may also set
 `priority` and `vars` for the runs it starts.
+
+### Which processing a folder wants
+
+A folder can say which families of work it wants for what lies under it, with its `processing`
+attribute: a list of family names, such as `["renditions"]`. The nearest folder with one decides,
+so a folder inside another can ask for more or for less. With none above a file, every family is
+wanted; an empty list wants none. A trigger names its family with `wants`, a list meaning any of
+them, and starts only where the folder wants one; a trigger that names none starts wherever its
+event says. The modules name the families of their own pipelines: the Archive's are in
+[Processing pictures](../archive/processing.md#which-processing-a-folder-gets).
+
+Only the folder's owner or an administrator sets or clears it:
+
+```sh
+attrs -J 'processing=["renditions"]' /home/helen/screenshots   # sizes and playable copies, nothing else
+attrs -d processing /home/helen/screenshots                     # every family again
+```
+
+`pipeline start` starts a pipeline on a file whatever its folder says.
 
 ### The steps
 

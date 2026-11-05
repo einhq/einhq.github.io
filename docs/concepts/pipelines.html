@@ -291,6 +291,10 @@ so most events are turned away without starting a process:</p>
 <td>not every named field matches: <code>nodePath: &#39;/var/**&#39;</code> leaves a whole subtree alone</td>
 </tr>
 <tr>
+<td><code>wants</code></td>
+<td>the folder the subject lies in wants one of these families of work: <code>wants: renditions</code> (below)</td>
+</tr>
+<tr>
 <td><code>allowDerived</code></td>
 <td><code>true</code> lets a derived file, such as a thumbnail or a face crop, start it; without it derived files never do</td>
 </tr>
@@ -316,6 +320,18 @@ so most events are turned away without starting a process:</p>
 key of a fact&#39;s <code>data</code>. In a path field, <code>*</code> matches within one name and <code>**</code> crosses <code>/</code>, so
 <code>/home/*/staging/**</code> is everything in each person&#39;s staging folder. A trigger may also set
 <code>priority</code> and <code>vars</code> for the runs it starts.</p>
+<h3 id="which-processing-a-folder-wants">Which processing a folder wants<a class="anchor" href="#which-processing-a-folder-wants" aria-label="Link to this section"></a></h3>
+<p>A folder can say which families of work it wants for what lies under it, with its <code>processing</code>
+attribute: a list of family names, such as <code>[&quot;renditions&quot;]</code>. The nearest folder with one decides,
+so a folder inside another can ask for more or for less. With none above a file, every family is
+wanted; an empty list wants none. A trigger names its family with <code>wants</code>, a list meaning any of
+them, and starts only where the folder wants one; a trigger that names none starts wherever its
+event says. The modules name the families of their own pipelines: the Archive&#39;s are in
+<a href="../archive/processing.html#which-processing-a-folder-gets">Processing pictures</a>.</p>
+<p>Only the folder&#39;s owner or an administrator sets or clears it:</p>
+<div class="code" data-lang="sh"><pre tabindex="0"><code>attrs -J <span class="hljs-string">&#x27;processing=[&quot;renditions&quot;]&#x27;</span> /home/helen/screenshots   <span class="hljs-comment"># sizes and playable copies, nothing else</span>
+attrs -d processing /home/helen/screenshots                     <span class="hljs-comment"># every family again</span></code></pre></div>
+<p><code>pipeline start</code> starts a pipeline on a file whatever its folder says.</p>
 <h3 id="the-steps">The steps<a class="anchor" href="#the-steps" aria-label="Link to this section"></a></h3>
 <p>Each step is a command with a name. Steps without <code>dependsOn</code> start together; a step with
 <code>dependsOn: [other]</code> waits for those steps to complete. A step&#39;s <code>condition</code> is a shell test that
@@ -974,7 +990,7 @@ media; for anything else, start the runs with <code>pipeline start</code>.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/pipelines.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#every-change-is-announced">Every change is announced</a></li><li><a href="#modules-turn-changes-into-facts">Modules turn changes into facts</a></li><li><a href="#a-pipeline-says-what-to-do-with-a-change">A pipeline says what to do with a change</a></li><li class="nested"><a href="#the-trigger">The trigger</a></li><li class="nested"><a href="#the-steps">The steps</a></li><li class="nested"><a href="#the-options">The options</a></li><li><a href="#from-a-change-to-a-run">From a change to a run</a></li><li class="nested"><a href="#what-a-runs-state-means">What a run's state means</a></li><li><a href="#pools-and-workers">Pools and workers</a></li><li><a href="#one-upload-start-to-finish">One upload, start to finish</a></li><li><a href="#when-a-step-fails">When a step fails</a></li><li><a href="#watch-and-steer-the-work">Watch and steer the work</a></li><li><a href="#add-a-pipeline-of-your-own">Add a pipeline of your own</a></li><li><a href="#trace-a-result-back-to-its-cause">Trace a result back to its cause</a></li><li><a href="#what-pipelines-do-not-do">What pipelines do not do</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#every-change-is-announced">Every change is announced</a></li><li><a href="#modules-turn-changes-into-facts">Modules turn changes into facts</a></li><li><a href="#a-pipeline-says-what-to-do-with-a-change">A pipeline says what to do with a change</a></li><li class="nested"><a href="#the-trigger">The trigger</a></li><li class="nested"><a href="#which-processing-a-folder-wants">Which processing a folder wants</a></li><li class="nested"><a href="#the-steps">The steps</a></li><li class="nested"><a href="#the-options">The options</a></li><li><a href="#from-a-change-to-a-run">From a change to a run</a></li><li class="nested"><a href="#what-a-runs-state-means">What a run's state means</a></li><li><a href="#pools-and-workers">Pools and workers</a></li><li><a href="#one-upload-start-to-finish">One upload, start to finish</a></li><li><a href="#when-a-step-fails">When a step fails</a></li><li><a href="#watch-and-steer-the-work">Watch and steer the work</a></li><li><a href="#add-a-pipeline-of-your-own">Add a pipeline of your own</a></li><li><a href="#trace-a-result-back-to-its-cause">Trace a result back to its cause</a></li><li><a href="#what-pipelines-do-not-do">What pipelines do not do</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

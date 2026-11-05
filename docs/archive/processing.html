@@ -296,6 +296,48 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 </tbody></table>
 </div>
+<h2 id="which-processing-a-folder-gets">Which processing a folder gets<a class="anchor" href="#which-processing-a-folder-gets" aria-label="Link to this section"></a></h2>
+<p>Each media pipeline belongs to a family of work, which it names with <code>wants</code>, so a folder can ask
+for only some of it (<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>):</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Family</th>
+<th>What it covers</th>
+<th>Pipelines</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>renditions</code></td>
+<td>A picture&#39;s sizes, a video&#39;s poster frames, hover clip, playable copy, storyboard and chapters, a recording&#39;s playable copy and waveform</td>
+<td><code>media-stills</code>, <code>media-transcode</code></td>
+</tr>
+<tr>
+<td><code>picture-vectors</code></td>
+<td>Searching by what is in a picture</td>
+<td><code>media-embed-picture</code></td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>The text written in a picture, and a document&#39;s text</td>
+<td><code>media-ocr</code>, <code>document-index</code>, <code>media-embed-text</code></td>
+</tr>
+<tr>
+<td><code>transcripts</code></td>
+<td>What is said in a video or recording</td>
+<td><code>media-transcribe</code>, <code>media-embed-text</code></td>
+</tr>
+<tr>
+<td><code>archive</code></td>
+<td>Faces and voices and who they are, fingerprints and duplicates, the camera, the place</td>
+<td>the face, voice, fingerprint, device, geocoding and duplicate pipelines above</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>media-ingest</code> and <code>media-reindex</code> name no family, since every family needs what they read, and nor
+do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks and places. A
+folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their sizes made, and no
+faces, text, picture vectors or fingerprints.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the Archive&#39;s workers take it:</p>
@@ -459,7 +501,7 @@ the meantime is processed first. Any category can be put in that lane with
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
