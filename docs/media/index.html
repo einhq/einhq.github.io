@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media – EiN documentation</title>
-    <meta name="description" content="The Media module runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, reading each picture's metadata, its thumbnails and video copies, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive needs it, so it comes with the Archive.">
+    <meta name="description" content="The Media module makes the thumbnails, display sizes and playable copies of every picture, video and recording in a folder that wants them, and keeps them current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, reading each picture's metadata, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive needs it, so it comes with the Archive.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/media/">
     <meta property="og:title" content="Media – EiN documentation">
-    <meta property="og:description" content="The Media module runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, reading each picture's metadata, its thumbnails and video copies, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive needs it, so it comes with the Archive.">
+    <meta property="og:description" content="The Media module makes the thumbnails, display sizes and playable copies of every picture, video and recording in a folder that wants them, and keeps them current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, reading each picture's metadata, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive needs it, so it comes with the Archive.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -90,16 +90,67 @@
           <h1>Media</h1>
         </header>
         <article class="prose">
-<p>The Media module runs the media work the other modules hand it, so that a large import never starts
-it all at once: with the <a href="../archive/index.html">Archive</a>, reading each picture&#39;s metadata, its
-thumbnails and video copies, finding and matching faces, picture vectors, text in pictures and
-transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive
-needs it, so it comes with the Archive.</p>
+<p>The Media module makes the thumbnails, display sizes and playable copies of every picture, video
+and recording in a folder that wants them, and keeps them current. It also runs the media work the
+other modules hand it, so that a large import never starts it all at once: with the
+<a href="../archive/index.html">Archive</a>, reading each picture&#39;s metadata, finding and matching faces,
+picture vectors, text in pictures and transcripts. It holds the workers of the pool that work
+waits in, and their settings. The Archive needs it, so it comes with the Archive.</p>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>Installing the Archive installs it too. On its own:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod install media</code></pre></div>
 <p><a href="../admin/modules.html">Modules</a> covers installing and removing modules.</p>
+<h2 id="the-renditions-it-makes">The renditions it makes<a class="anchor" href="#the-renditions-it-makes" aria-label="Link to this section"></a></h2>
+<p>The thumbnails, display sizes, video and sound copies are listed in <code>/etc/renditions.yaml</code>, each
+under the role it plays: <code>thumb</code>, the square thumbnail, and <code>grid</code>, <code>small</code>, <code>medium</code> and <code>large</code>,
+which keep the picture&#39;s shape; a video&#39;s <code>preview</code>, the silent clip a tile plays, and its
+<code>playback</code>; a recording&#39;s <code>playback</code>; and the <code>storyboard</code>, a video&#39;s frames on one sheet. The
+pages ask for a role, so changing a size there changes what they show. <code>renditions</code> in the
+terminal says what the file holds now, and names any entry it leaves out as wrong.</p>
+<p>Two pipelines make them, once a file&#39;s metadata is read: <code>media-stills</code> the pictures (a photo&#39;s
+sizes, a video&#39;s poster frames and then its hover clip, a recording&#39;s waveform), and
+<code>media-transcode</code> the video and sound a browser can play, with a video&#39;s storyboard and its
+chapters, the cuts its player marks. A folder whose <code>processing</code> setting leaves out <code>renditions</code>
+gets none (<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>).</p>
+<p>The Media module installed the file, and a newer version of it never overwrites it, so a change you
+make stays. Each rendition is named after its size (<code>800x800.avif</code>), so a size changed is a new file
+for every picture. Pages pick up the change when they are opened again.</p>
+<h2 id="renditions-kept-current">Renditions kept current<a class="anchor" href="#renditions-kept-current" aria-label="Link to this section"></a></h2>
+<p>Once a file has every rendition <code>/etc/renditions.yaml</code> names for it, it is marked with the table
+they were made by (<code>renditionsFor</code> and <code>renditionsAt</code> in its attributes). Every hour the
+<code>renditions-heal</code> service runs <code>renditions-scan</code>, which asks for the files whose mark is missing or
+names another table, in every folder that wants renditions, and announces them to <code>media-stills</code>
+and <code>media-transcode</code>, which make what is missing. A size changed in the table is made for every
+file of the kinds it touched, which on a large archive takes hours or days. A rendition the media
+service refused for its processor budget counts as made, until that budget changes. While
+rendition work waits, the scan announces nothing, so it never repeats what is already on its way.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want to</th>
+<th>Run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>See which files lack renditions the table names, without changing anything</td>
+<td><code>renditions-scan -n -v</code></td>
+</tr>
+<tr>
+<td>Announce them now, rather than at the next hour</td>
+<td><code>renditions-scan</code></td>
+</tr>
+<tr>
+<td>Make the renditions again under a folder, without the pipelines</td>
+<td><code>regenerate --force /archive/albums/christmas-2019</code></td>
+</tr>
+<tr>
+<td>Remove the renditions no role names any more</td>
+<td><code>regenerate --prune /archive</code></td>
+</tr>
+</tbody></table>
+</div>
+<p><a href="commands.html">Media commands</a> lists their options.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Each module puts the work a crawl must not start all at once as jobs into the pool
 <code>/var/pools/media</code>, and names the kinds of its jobs for the workers here:</p>
@@ -185,7 +236,7 @@ and <code>service restart models</code>.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li></ul></aside>
     </div>
   </body>
 </html>

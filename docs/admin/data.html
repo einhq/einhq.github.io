@@ -237,9 +237,10 @@ podman compose up -d</code></pre></div>
 </ol>
 <p>With the Archive, if you left out <code>files-volatile</code>, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.</p>
 <h3 id="make-the-renditions-again">Make the renditions again<a class="anchor" href="#make-the-renditions-again" aria-label="Link to this section"></a></h3>
-<p>With the Archive installed, the <a href="../archive/commands.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, face crops included. After a restore without <code>files-volatile</code>, the database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
+<p>With the Media module installed, the <a href="../media/commands.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, and with the Archive, <a href="../archive/commands.html#regenerate-face-crops"><code>regenerate-face-crops --missing</code></a> the face crops. After a restore without <code>files-volatile</code>, the database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 <span class="hljs-built_in">nohup</span> regenerate --force /archive</code></pre></div>
+<p>The face crops go a page at a time: <code>regenerate-face-crops --missing --limit 1000</code> prints where the next page starts, and <code>--after</code> with that id goes on from there, until it says nothing is left.</p>
 <p><a href="../reference/commands-core.html#nohup"><code>nohup</code></a> lets it run on when you close the terminal and logs it under <code>/var/logs/jobs</code>. It needs the media service, and over a large archive it takes as long as the first processing did. <code>regenerate --force &#39;/archive/albums/Summer 1987&#39;</code> does one album first, so you can check the result.</p>
 <h2 id="move-ein-to-another-machine">Move EiN to another machine<a class="anchor" href="#move-ein-to-another-machine" aria-label="Link to this section"></a></h2>
 <p>Moving is a backup on the old machine and a restore on the new one:</p>

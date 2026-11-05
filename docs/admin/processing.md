@@ -284,12 +284,13 @@ pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI
 ```
 
 It starts the run at once, in the normal lane, and skips the checks a trigger makes. `--var` sets a
-variable the pipeline declares; the second line makes the Archive's `media-transcode` redo a video
+variable the pipeline declares; the second line makes the Media module's `media-transcode` redo a video
 that already has its renditions. A pipeline that reads its starting event has nothing to read when
 started by hand, and `pipeline-start` warns about it.
 
-A module may bring commands of its own for redoing its work over many files; the Archive's are
-`regenerate` and `media-scan`, described in [Processing pictures](../archive/processing.md#run-work-again-on-purpose).
+A module may bring commands of its own for redoing its work over many files: the Media module's
+`regenerate` and `renditions-scan`, described in [Media](../media/index.md#renditions-kept-current),
+and the Archive's `media-scan`, in [Processing pictures](../archive/processing.md#run-work-again-on-purpose).
 
 ## The bulk lane
 

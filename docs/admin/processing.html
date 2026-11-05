@@ -406,11 +406,12 @@ pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre
 pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg
 pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></pre></div>
 <p>It starts the run at once, in the normal lane, and skips the checks a trigger makes. <code>--var</code> sets a
-variable the pipeline declares; the second line makes the Archive&#39;s <code>media-transcode</code> redo a video
+variable the pipeline declares; the second line makes the Media module&#39;s <code>media-transcode</code> redo a video
 that already has its renditions. A pipeline that reads its starting event has nothing to read when
 started by hand, and <code>pipeline-start</code> warns about it.</p>
-<p>A module may bring commands of its own for redoing its work over many files; the Archive&#39;s are
-<code>regenerate</code> and <code>media-scan</code>, described in <a href="../archive/processing.html#run-work-again-on-purpose">Processing pictures</a>.</p>
+<p>A module may bring commands of its own for redoing its work over many files: the Media module&#39;s
+<code>regenerate</code> and <code>renditions-scan</code>, described in <a href="../media/index.html#renditions-kept-current">Media</a>,
+and the Archive&#39;s <code>media-scan</code>, in <a href="../archive/processing.html#run-work-again-on-purpose">Processing pictures</a>.</p>
 <h2 id="the-bulk-lane">The bulk lane<a class="anchor" href="#the-bulk-lane" aria-label="Link to this section"></a></h2>
 <p>An event can put the work it starts in the bulk lane, below all other work, so that what people do
 in the meantime is processed first. Bulk work is put behind, never stopped: it runs whenever

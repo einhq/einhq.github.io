@@ -38,39 +38,37 @@ show **waiting for EMS** on the **Dashboard**.
 
 ## The Archive's pipelines
 
-| Pipeline               | What it does                                                                                                    | Kind of work                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it.                       | `ingest`                       |
-| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                                         | `ingest`                       |
-| `media-stills`         | A photo's display sizes and face crops, a video's poster frames and then its hover clip, a recording's waveform | `stills`, `transcode`          |
-| `media-transcode`      | Video and audio the browser can play, a video's storyboard and chapters                                         | `transcode`, `stills`, `shots` |
-| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                          | `fingerprint`                  |
-| `media-faces`          | Finds the faces in a photo and crops each one                                                                   | `faces`                        |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                           | `faces`                        |
-| `media-face-assign`    | Matches a found face to a person                                                                                | `face-assign`                  |
-| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                                       | `embed-picture`                |
-| `media-ocr`            | Reads the text written in a picture                                                                             | `ocr`                          |
-| `media-embed-text`     | Text vectors of a file's stored texts                                                                           | `embed-text`                   |
-| `media-transcribe`     | A transcript of what is said in a video or recording                                                            | `transcribe`                   |
-| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                     | `diarize`                      |
-| `media-speaker-assign` | Decides which person each voice is                                                                              | `speaker-assign`               |
-| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                 | `diarize`, `speaker-assign`    |
-| `media-device`         | Links a file to the camera or phone that took it                                                                | run by the engine              |
-| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                          | run by the engine              |
-| `media-geocode`        | Looks up the address of a file's GPS position                                                                   | run by the engine              |
-| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                | run by the engine              |
-| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                           | `dedupe`                       |
-| `location-link-point`  | Links a photo to the location that contains its GPS point                                                       | run by the engine              |
-| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                                | run by the engine              |
-| `document-index`       | Extracts the text of a document and makes it searchable                                                         | run by the engine              |
-| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                            | `unzip`                        |
-| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                 | `sidecars`                     |
-| `staging-organize`     | Plans a staging category's suggested groups again                                                               | `organize`                     |
-| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                      | `retime`                       |
-| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                     | run by the engine              |
-| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                                | run by the engine              |
-| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                          | run by the engine              |
-| `media-heal`           | Announces the files missing work the other pipelines should have done, renditions in any folder among them      | run by the engine              |
+| Pipeline               | What it does                                                                                             | Kind of work                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it.                | `ingest`                    |
+| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                                  | `ingest`                    |
+| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                   | `fingerprint`               |
+| `media-faces`          | Finds the faces in a photo and crops each one                                                            | `faces`                     |
+| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                    | `faces`                     |
+| `media-face-assign`    | Matches a found face to a person                                                                         | `face-assign`               |
+| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                                | `embed-picture`             |
+| `media-ocr`            | Reads the text written in a picture                                                                      | `ocr`                       |
+| `media-embed-text`     | Text vectors of a file's stored texts                                                                    | `embed-text`                |
+| `media-transcribe`     | A transcript of what is said in a video or recording                                                     | `transcribe`                |
+| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                              | `diarize`                   |
+| `media-speaker-assign` | Decides which person each voice is                                                                       | `speaker-assign`            |
+| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                          | `diarize`, `speaker-assign` |
+| `media-device`         | Links a file to the camera or phone that took it                                                         | run by the engine           |
+| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                   | run by the engine           |
+| `media-geocode`        | Looks up the address of a file's GPS position                                                            | run by the engine           |
+| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                         | run by the engine           |
+| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                    | `dedupe`                    |
+| `location-link-point`  | Links a photo to the location that contains its GPS point                                                | run by the engine           |
+| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                         | run by the engine           |
+| `document-index`       | Extracts the text of a document and makes it searchable                                                  | run by the engine           |
+| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                     | `unzip`                     |
+| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                          | `sidecars`                  |
+| `staging-organize`     | Plans a staging category's suggested groups again                                                        | `organize`                  |
+| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                               | `retime`                    |
+| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                              | run by the engine           |
+| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                         | run by the engine           |
+| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                   | run by the engine           |
+| `media-heal`           | Goes through the whole archive and announces the files missing work the other pipelines should have done | run by the engine           |
 
 ## Which processing a folder gets
 
@@ -79,7 +77,7 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 
 | Family            | What it covers                                                                                                                           | Pipelines                                                                     |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | `media-stills`, `media-transcode`                                             |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                       |
 | `picture-vectors` | Searching by what is in a picture                                                                                                        | `media-embed-picture`                                                         |
 | `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                             |
 | `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                        |
@@ -90,22 +88,13 @@ do the pipelines that work on the Archive's own folders: albums, staging, tracks
 folder with `processing` set to `["renditions"]` gets its pictures read and their sizes made, and no
 faces, text, picture vectors or fingerprints.
 
-## The sizes it makes
+## The renditions
 
-The thumbnails, display sizes, video and sound copies the Archive makes are listed in
-`/etc/renditions.yaml`, each under the role it plays: `thumb`, the square thumbnail, and `grid`,
-`small`, `medium` and `large`, which keep the picture's shape; a video's `preview`, the silent clip
-a tile plays, and its `playback`; a recording's `playback`; and the `storyboard`, a video's frames on
-one sheet. The pages ask for a role, so changing a size there changes what they show. `renditions`
-in the terminal says what the file holds now, and names any entry it leaves out as wrong.
-
-The Archive installed the file, and a newer version of it never overwrites it, so a change you make
-stays. Each rendition is named after its size (`800x800.avif`), so a size changed is a new file for
-every picture. A file is marked with the table its renditions were made by, so the next pass of
-`media-heal` finds every file of a kind the change touched, in any folder, and the pipelines make
-the new sizes: on a large archive that takes hours or days. The files no role names any more stay
-until `regenerate --prune` under `/archive` removes them. Pages pick up the change when they are
-opened again.
+The thumbnails, display sizes and playable copies of the Archive's pictures, videos and recordings,
+and the pipelines that make them, `media-stills` and `media-transcode`, are the Media module's:
+[The renditions it makes](../media/index.md#the-renditions-it-makes). The Archive's own are a
+picture's face crops, which `detect-faces` cuts, `file-set-orientation` cuts again when a picture is
+turned, and `regenerate-face-crops --missing` cuts where a crash left one empty.
 
 ## The workers
 
@@ -119,15 +108,14 @@ in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
 ## Run work again on purpose
 
-| You want to                                                     | Run                                                                                         |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Run one pipeline on one file                                    | `pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg`                    |
-| Transcode a video again although it has renditions              | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
-| Make the renditions again under a folder, without the pipelines | `regenerate --force /archive/albums/christmas-2019`                                         |
-| Announce files the Archive never saw, or that are missing work  | `media-scan /archive/albums`                                                                |
-| Announce the files that lack renditions the table names now     | `renditions-scan`                                                                           |
-| Embed the stored texts and transcripts again, as they are       | `media-reembed`                                                                             |
-| Encode the face crops again without finding the faces again     | `regenerate-face-crops --limit 200`                                                         |
+| You want to                                                    | Run                                                                                         |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Run one pipeline on one file                                   | `pipeline-start media-faces /archive/albums/christmas-2019/IMG_2041.jpg`                    |
+| Transcode a video again although it has renditions             | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
+| Announce files the Archive never saw, or that are missing work | `media-scan /archive/albums`                                                                |
+| Embed the stored texts and transcripts again, as they are      | `media-reembed`                                                                             |
+| Encode the face crops again without finding the faces again    | `regenerate-face-crops --limit 200`                                                         |
+| Cut the face crops a crash left empty, or never cut            | `regenerate-face-crops --missing --limit 200`                                               |
 
 `media-transcode`, `media-transcribe`, `media-embed-picture` and `media-ocr` declare `FORCE`, which
 `-f` makes them redo work already done. [`pipeline-start`](../admin/processing.md#run-work-again-on-purpose)
@@ -140,16 +128,9 @@ options.
 something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
 settings than the media service runs now. Each pipeline then skips what is already done.
 
-Renditions are found another way. Once a file has every rendition `/etc/renditions.yaml` names for
-it, it is marked with the table they were made by (`renditionsFor` and `renditionsAt` in its
-attributes). `renditions-scan` asks for the files whose mark is missing or names another table, in
-every folder that wants renditions, not only the albums, and announces them to `media-stills` and
-`media-transcode` alone, which make what is missing. A rendition the media service refused for its
-processor budget counts as made, until that budget changes. A file read before the marks existed
-has none, so the first pass announces it once.
+Renditions are the Media module's to keep current: [Renditions kept current](../media/index.md#renditions-kept-current).
 
-The `media-heal` pipeline runs `media-scan` for you over `/archive/albums`, and `renditions-scan`
-beside it. Each pass is one instance, which
+The `media-heal` pipeline runs `media-scan` for you over `/archive/albums`. Each pass is one instance, which
 shows under **Ongoing** on the **Dashboard** with how far through the archive it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces

@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 153 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 149 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-chapters](#detect-chapters) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [generate-derivatives](#generate-derivatives) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate](#regenerate) · [regenerate-face-crops](#regenerate-face-crops) · [renditions-scan](#renditions-scan) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
 
 ## A
 
@@ -525,31 +525,6 @@ dayinhistory 06-21 --years 20 --per-year 1
 ```
 
 With `JSON_OUTPUT=1`: monthDay, and the years that have media taken on that day, newest first, each with its first media.
-
-### `detect-chapters`
-
-Find a video's cuts and write them as its chapters (metadata/chapters)
-
-<small>changes things</small>
-
-```text
-detect-chapters [-v] [-f] <input>
-```
-
-| Argument  | What it is                |
-| --------- | ------------------------- |
-| `<input>` | VFS path to a video file. |
-
-| Option | What it does                               |
-| ------ | ------------------------------------------ |
-| `-v`   | Verbose output.                            |
-| `-f`   | Look again even if the chapters are found. |
-
-```bash
-detect-chapters /archive/albums/Exempelalbum_1978/files/sommarfilm.avi
-```
-
-With `JSON_OUTPUT=1`: nothing; the chapters are written as WebVTT under the file, with the cuts on the node.
 
 ### `detect-faces`
 
@@ -1446,35 +1421,6 @@ gedcom-stage /home/ruby/staging/files/inbox/upload-2026-11-01/wrenfield.ged
 ```
 
 With `JSON_OUTPUT=1`: where the file waits, and how many individuals and families it holds.
-
-### `generate-derivatives`
-
-Generate web derivatives (still pictures, transcoded renditions) for a media file.
-
-<small>changes things</small>
-
-```text
-generate-derivatives [-v] [-f] [--only=<string>] [--size=<string>] [--prune] <input>
-```
-
-| Argument  | What it is              |
-| --------- | ----------------------- |
-| `<input>` | VFS path to media file. |
-
-| Option            | What it does                                                                                    |
-| ----------------- | ----------------------------------------------------------------------------------------------- |
-| `-v`              | Verbose output.                                                                                 |
-| `-f`              | Force regenerate even if derivatives exist.                                                     |
-| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                           |
-| `--size=<string>` | Generate only these roles (comma-separated): roles of /etc/renditions.yaml, face or storyboard. |
-| `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                                 |
-
-```bash
-generate-derivatives /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
-generate-derivatives --only still /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
-```
-
-With `JSON_OUTPUT=1`: nothing; the thumbnail, display and transcode renditions are written, and the file is marked (renditionsFor, renditionsAt) once it has every one the table owes it.
 
 ### `geocode-files`
 
@@ -2905,87 +2851,31 @@ read-text [-v] [-f] <input>
 | `-v`   | Verbose output.                  |
 | `-f`   | Read again even if already read. |
 
-### `regenerate`
-
-Regenerate web derivatives for media files under a path.
-
-<small>changes things</small>
-
-```text
-regenerate [--force] [--prune] [--size=<string>] [--mime=<string>] [--verbose] <target>
-```
-
-| Argument   | What it is                     |
-| ---------- | ------------------------------ |
-| `<target>` | VFS path to file or directory. |
-
-| Option                  | What it does                                                                                                      |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `--force`, `-f`         | Force regenerate even if derivatives exist.                                                                       |
-| `--prune`               | Delete renditions that are no longer part of the target set.                                                      |
-| `--size=<string>`, `-s` | Generate only these roles, comma-separated: roles of /etc/renditions.yaml, face or storyboard (e.g. small,medium) |
-| `--mime=<string>`       | Only files whose mimetype matches this glob (e.g. 'video/*')                                                      |
-| `--verbose`, `-v`       | Verbose output.                                                                                                   |
-
-```bash
-regenerate /archive/albums/Exempelalbum_2019
-regenerate --force --size thumb /archive/albums
-```
-
-With `JSON_OUTPUT=1`: how many files had their derivatives regenerated.
-
 ### `regenerate-face-crops`
 
-Re-encode a bounded, resumable batch of existing face crops without re-detecting faces.
+Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes.
 
 <small>changes things</small>
 
 ```text
-regenerate-face-crops [--limit=<string>] [--after=<string>] [--file=<path>] [--dry-run] [--verbose]
+regenerate-face-crops [--limit=<string>] [--after=<string>] [--file=<path>] [--missing] [--dry-run] [--verbose]
 ```
 
-| Option             | What it does                                    |
-| ------------------ | ----------------------------------------------- |
-| `--limit=<string>` | maximum face nodes to scan (default 100)        |
-| `--after=<string>` | resume after the node id returned as nextAfter. |
-| `--file=<path>`    | restrict the batch to one source image.         |
-| `--dry-run`        | report existing crops without rewriting them.   |
-| `--verbose`        | print each crop considered.                     |
+| Option             | What it does                                                                      |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `--limit=<string>` | maximum face nodes to scan (default 100)                                          |
+| `--after=<string>` | resume after the node id returned as nextAfter.                                   |
+| `--file=<path>`    | restrict the batch to one source image.                                           |
+| `--missing`        | cut the crops an interrupted write left without bytes, or never created, instead. |
+| `--dry-run`        | report the crops without writing them.                                            |
+| `--verbose`        | print each crop considered.                                                       |
 
 ```bash
 regenerate-face-crops --limit 200
+regenerate-face-crops --missing --file /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
 With `JSON_OUTPUT=1`: how many face crops were re-encoded, and where to resume.
-
-### `renditions-scan`
-
-Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs.
-
-<small>changes things</small>
-
-```text
-renditions-scan [--limit=<number>] [--if-idle] [-n] [-v] [<path>]
-```
-
-| Argument   | What it is                      |
-| ---------- | ------------------------------- |
-| `[<path>]` | The tree to look in (default /) |
-
-| Option             | What it does                                                      |
-| ------------------ | ----------------------------------------------------------------- |
-| `--limit=<number>` | Facts one run announces at most (default 1000; 0 for no cap)      |
-| `--if-idle`        | Announce nothing while the rendition pipelines have work waiting. |
-| `-n`               | Dry run — count what would be announced without announcing it.    |
-| `-v`               | Name each file announced.                                         |
-
-```bash
-renditions-scan -n
-renditions-scan /archive/recipes
-renditions-scan --if-idle --limit 0
-```
-
-With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as media.renditions.stale.
 
 ## S
 

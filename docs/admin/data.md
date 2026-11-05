@@ -141,12 +141,14 @@ With the Archive, if you left out `files-volatile`, make the renditions again no
 
 ### Make the renditions again
 
-With the Archive installed, the [`regenerate`](../archive/commands.md#regenerate) command makes the renditions of every picture, video and recording under a folder, face crops included. After a restore without `files-volatile`, the database still records the renditions, so add `--force` to make them although they seem to exist:
+With the Media module installed, the [`regenerate`](../media/commands.md#regenerate) command makes the renditions of every picture, video and recording under a folder, and with the Archive, [`regenerate-face-crops --missing`](../archive/commands.md#regenerate-face-crops) the face crops. After a restore without `files-volatile`, the database still records the renditions, so add `--force` to make them although they seem to exist:
 
 ```bash
 # in EiN's terminal, as the administrator
 nohup regenerate --force /archive
 ```
+
+The face crops go a page at a time: `regenerate-face-crops --missing --limit 1000` prints where the next page starts, and `--after` with that id goes on from there, until it says nothing is left.
 
 [`nohup`](../reference/commands-core.md#nohup) lets it run on when you close the terminal and logs it under `/var/logs/jobs`. It needs the media service, and over a large archive it takes as long as the first processing did. `regenerate --force '/archive/albums/Summer 1987'` does one album first, so you can check the result.
 

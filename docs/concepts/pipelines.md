@@ -321,7 +321,7 @@ Nothing in the chain waits for "the previous step". Each stage waits for a fact,
 again, put first or given its own workers without touching the others. [Getting your photos in](../archive/importing.md)
 describes what you see in the interface while this happens.
 
-The Archive's pipelines and what starts them:
+The Archive's pipelines, with the Media module's `media-stills` and `media-transcode`, and what starts them:
 
 | Pipeline               | Starts on                                                                 | What it does                                                                    |
 | ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |

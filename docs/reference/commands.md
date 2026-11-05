@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 153 in full](../archive/commands.md).
+[All 149 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -273,7 +273,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [compute-fingerprint](../archive/commands.md#compute-fingerprint) | Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound. |
 | [dayinhistory](../archive/commands.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |
-| [detect-chapters](../archive/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
 | [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
 | [device](../archive/commands.md#device) | Camera and recording device management. |
 | [device-cover](../archive/commands.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
@@ -312,7 +311,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
 | [gedcom-read](../archive/commands.md#gedcom-read) | Read a GEDCOM file and say who each of its individuals would be if it were imported now: matched to a person, made one or left out, with the people who could be them. |
 | [gedcom-stage](../archive/commands.md#gedcom-stage) | Move a GEDCOM file staged under files/ to its staging area's genealogy/, where it waits to be looked over and imported. |
-| [generate-derivatives](../archive/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
 | [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
@@ -369,9 +367,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [promote-exif-attrs](../archive/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
 | [raw](../archive/commands.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
 | [read-text](../archive/commands.md#read-text) | Read the text written in a picture and keep it for search. |
-| [regenerate](../archive/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
-| [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces. |
-| [renditions-scan](../archive/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
+| [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes. |
 | [search-album](../archive/commands.md#search-album) | Search albums by name, description and what their pictures show. |
 | [search-device](../archive/commands.md#search-device) | Search devices by name, make, model or serial number. |
 | [search-document](../archive/commands.md#search-document) | Search documents (PDF, Word, text) by what their text is about, using semantic similarity. |
@@ -434,11 +430,15 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 1 in full](../media/commands.md).
+[All 5 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
+| [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
+| [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
+| [regenerate](../media/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
+| [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
 
 ## Recipes
 

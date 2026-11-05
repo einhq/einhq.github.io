@@ -151,16 +151,6 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td><code>ingest</code></td>
 </tr>
 <tr>
-<td><code>media-stills</code></td>
-<td>A photo&#39;s display sizes and face crops, a video&#39;s poster frames and then its hover clip, a recording&#39;s waveform</td>
-<td><code>stills</code>, <code>transcode</code></td>
-</tr>
-<tr>
-<td><code>media-transcode</code></td>
-<td>Video and audio the browser can play, a video&#39;s storyboard and chapters</td>
-<td><code>transcode</code>, <code>stills</code>, <code>shots</code></td>
-</tr>
-<tr>
 <td><code>media-fingerprint</code></td>
 <td>The fingerprints that find duplicates and photo stacks</td>
 <td><code>fingerprint</code></td>
@@ -292,7 +282,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
-<td>Announces the files missing work the other pipelines should have done, renditions in any folder among them</td>
+<td>Goes through the whole archive and announces the files missing work the other pipelines should have done</td>
 <td>run by the engine</td>
 </tr>
 </tbody></table>
@@ -311,7 +301,7 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 <tbody><tr>
 <td><code>renditions</code></td>
 <td>A picture&#39;s sizes, a video&#39;s poster frames, hover clip, playable copy, storyboard and chapters, a recording&#39;s playable copy and waveform</td>
-<td><code>media-stills</code>, <code>media-transcode</code></td>
+<td>the Media module&#39;s <code>media-stills</code> and <code>media-transcode</code></td>
 </tr>
 <tr>
 <td><code>picture-vectors</code></td>
@@ -339,20 +329,12 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks and places. A
 folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their sizes made, and no
 faces, text, picture vectors or fingerprints.</p>
-<h2 id="the-sizes-it-makes">The sizes it makes<a class="anchor" href="#the-sizes-it-makes" aria-label="Link to this section"></a></h2>
-<p>The thumbnails, display sizes, video and sound copies the Archive makes are listed in
-<code>/etc/renditions.yaml</code>, each under the role it plays: <code>thumb</code>, the square thumbnail, and <code>grid</code>,
-<code>small</code>, <code>medium</code> and <code>large</code>, which keep the picture&#39;s shape; a video&#39;s <code>preview</code>, the silent clip
-a tile plays, and its <code>playback</code>; a recording&#39;s <code>playback</code>; and the <code>storyboard</code>, a video&#39;s frames on
-one sheet. The pages ask for a role, so changing a size there changes what they show. <code>renditions</code>
-in the terminal says what the file holds now, and names any entry it leaves out as wrong.</p>
-<p>The Archive installed the file, and a newer version of it never overwrites it, so a change you make
-stays. Each rendition is named after its size (<code>800x800.avif</code>), so a size changed is a new file for
-every picture. A file is marked with the table its renditions were made by, so the next pass of
-<code>media-heal</code> finds every file of a kind the change touched, in any folder, and the pipelines make
-the new sizes: on a large archive that takes hours or days. The files no role names any more stay
-until <code>regenerate --prune</code> under <code>/archive</code> removes them. Pages pick up the change when they are
-opened again.</p>
+<h2 id="the-renditions">The renditions<a class="anchor" href="#the-renditions" aria-label="Link to this section"></a></h2>
+<p>The thumbnails, display sizes and playable copies of the Archive&#39;s pictures, videos and recordings,
+and the pipelines that make them, <code>media-stills</code> and <code>media-transcode</code>, are the Media module&#39;s:
+<a href="../media/index.html#the-renditions-it-makes">The renditions it makes</a>. The Archive&#39;s own are a
+picture&#39;s face crops, which <code>detect-faces</code> cuts, <code>file-set-orientation</code> cuts again when a picture is
+turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left one empty.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
@@ -378,16 +360,8 @@ in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>
 <td><code>pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
 </tr>
 <tr>
-<td>Make the renditions again under a folder, without the pipelines</td>
-<td><code>regenerate --force /archive/albums/christmas-2019</code></td>
-</tr>
-<tr>
 <td>Announce files the Archive never saw, or that are missing work</td>
 <td><code>media-scan /archive/albums</code></td>
-</tr>
-<tr>
-<td>Announce the files that lack renditions the table names now</td>
-<td><code>renditions-scan</code></td>
 </tr>
 <tr>
 <td>Embed the stored texts and transcripts again, as they are</td>
@@ -396,6 +370,10 @@ in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>
 <tr>
 <td>Encode the face crops again without finding the faces again</td>
 <td><code>regenerate-face-crops --limit 200</code></td>
+</tr>
+<tr>
+<td>Cut the face crops a crash left empty, or never cut</td>
+<td><code>regenerate-face-crops --missing --limit 200</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -407,15 +385,8 @@ options.</p>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
 something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
 settings than the media service runs now. Each pipeline then skips what is already done.</p>
-<p>Renditions are found another way. Once a file has every rendition <code>/etc/renditions.yaml</code> names for
-it, it is marked with the table they were made by (<code>renditionsFor</code> and <code>renditionsAt</code> in its
-attributes). <code>renditions-scan</code> asks for the files whose mark is missing or names another table, in
-every folder that wants renditions, not only the albums, and announces them to <code>media-stills</code> and
-<code>media-transcode</code> alone, which make what is missing. A rendition the media service refused for its
-processor budget counts as made, until that budget changes. A file read before the marks existed
-has none, so the first pass announces it once.</p>
-<p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code>, and <code>renditions-scan</code>
-beside it. Each pass is one instance, which
+<p>Renditions are the Media module&#39;s to keep current: <a href="../media/index.html#renditions-kept-current">Renditions kept current</a>.</p>
+<p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code>. Each pass is one instance, which
 shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through the archive it has come; it is
 housekeeping, not work waiting, so <code>health</code> does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
@@ -471,7 +442,7 @@ the meantime is processed first. Any category can be put in that lane with
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-sizes-it-makes">The sizes it makes</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-renditions">The renditions</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

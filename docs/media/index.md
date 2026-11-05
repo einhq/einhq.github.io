@@ -1,10 +1,11 @@
 # Media
 
-The Media module runs the media work the other modules hand it, so that a large import never starts
-it all at once: with the [Archive](../archive/index.md), reading each picture's metadata, its
-thumbnails and video copies, finding and matching faces, picture vectors, text in pictures and
-transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive
-needs it, so it comes with the Archive.
+The Media module makes the thumbnails, display sizes and playable copies of every picture, video
+and recording in a folder that wants them, and keeps them current. It also runs the media work the
+other modules hand it, so that a large import never starts it all at once: with the
+[Archive](../archive/index.md), reading each picture's metadata, finding and matching faces,
+picture vectors, text in pictures and transcripts. It holds the workers of the pool that work
+waits in, and their settings. The Archive needs it, so it comes with the Archive.
 
 ## Install it
 
@@ -16,6 +17,45 @@ mod install media
 ```
 
 [Modules](../admin/modules.md) covers installing and removing modules.
+
+## The renditions it makes
+
+The thumbnails, display sizes, video and sound copies are listed in `/etc/renditions.yaml`, each
+under the role it plays: `thumb`, the square thumbnail, and `grid`, `small`, `medium` and `large`,
+which keep the picture's shape; a video's `preview`, the silent clip a tile plays, and its
+`playback`; a recording's `playback`; and the `storyboard`, a video's frames on one sheet. The
+pages ask for a role, so changing a size there changes what they show. `renditions` in the
+terminal says what the file holds now, and names any entry it leaves out as wrong.
+
+Two pipelines make them, once a file's metadata is read: `media-stills` the pictures (a photo's
+sizes, a video's poster frames and then its hover clip, a recording's waveform), and
+`media-transcode` the video and sound a browser can play, with a video's storyboard and its
+chapters, the cuts its player marks. A folder whose `processing` setting leaves out `renditions`
+gets none ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)).
+
+The Media module installed the file, and a newer version of it never overwrites it, so a change you
+make stays. Each rendition is named after its size (`800x800.avif`), so a size changed is a new file
+for every picture. Pages pick up the change when they are opened again.
+
+## Renditions kept current
+
+Once a file has every rendition `/etc/renditions.yaml` names for it, it is marked with the table
+they were made by (`renditionsFor` and `renditionsAt` in its attributes). Every hour the
+`renditions-heal` service runs `renditions-scan`, which asks for the files whose mark is missing or
+names another table, in every folder that wants renditions, and announces them to `media-stills`
+and `media-transcode`, which make what is missing. A size changed in the table is made for every
+file of the kinds it touched, which on a large archive takes hours or days. A rendition the media
+service refused for its processor budget counts as made, until that budget changes. While
+rendition work waits, the scan announces nothing, so it never repeats what is already on its way.
+
+| You want to                                                                | Run                                                 |
+| -------------------------------------------------------------------------- | --------------------------------------------------- |
+| See which files lack renditions the table names, without changing anything | `renditions-scan -n -v`                             |
+| Announce them now, rather than at the next hour                            | `renditions-scan`                                   |
+| Make the renditions again under a folder, without the pipelines            | `regenerate --force /archive/albums/christmas-2019` |
+| Remove the renditions no role names any more                               | `regenerate --prune /archive`                       |
+
+[Media commands](commands.md) lists their options.
 
 ## The workers
 
