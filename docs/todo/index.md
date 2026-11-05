@@ -155,7 +155,7 @@ A link to something that is gone, or that you may not see, is greyed out.
 
 The todo widget keeps the todos about what you are looking at in reach on every page. Turn it on
 with the pin in the Todo page's bar, **Show the todo widget**, and off with the same button,
-**Hide the todo widget**; it is also **Todo widget** under **Settings**, and it is yours alone,
+**Hide the todo widget**; it is also **Todo widget** under **Profile → Preferences**, and it is yours alone,
 on every device you sign in on.
 
 While it is on, a round button floats over every page and over the lightbox; dialogs open over it.

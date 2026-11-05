@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 399 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 400 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -456,11 +456,12 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Todo
 
-[All 13 in full](../todo/commands.md).
+[All 14 in full](../todo/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [events-todo](../todo/commands.md#events-todo) | Home's events from the todo lists: open items due around a day that are yours, given to you or to nobody. |
+| [todo-about](../todo/commands.md#todo-about) | List the items not done, on every list you can see, that are about a path: that link to it, such as a picture, an album or a person. With no path, every item that links to anything; with --done the done ones too. |
 | [todo-add](../todo/commands.md#todo-add) | Add an item to a todo list, a markdown file named for when it was added, with the day it is due and who is to do it if you like. |
 | [todo-archive](../todo/commands.md#todo-archive) | Put done todo items away in their list's archived/, which is no column of the board. todo-move or todo-done --undo takes one out again. |
 | [todo-done](../todo/commands.md#todo-done) | Mark a todo item done, with who did it and when, moving it to the list's done/; with --undo, not done again and back in the list's Todo. |

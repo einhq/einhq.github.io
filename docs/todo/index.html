@@ -220,6 +220,25 @@ offers <strong>About</strong> that thing, ticked, and the new item links to it.<
 person&#39;s, place&#39;s or device&#39;s picture. A link is called what it points at is called, such as an
 album&#39;s title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
 A link to something that is gone, or that you may not see, is greyed out.</p>
+<h2 id="the-todo-widget">The todo widget<a class="anchor" href="#the-todo-widget" aria-label="Link to this section"></a></h2>
+<p>The todo widget keeps the todos about what you are looking at in reach on every page. Turn it on
+with the pin in the Todo page&#39;s bar, <strong>Show the todo widget</strong>, and off with the same button,
+<strong>Hide the todo widget</strong>; it is also <strong>Todo widget</strong> under <strong>Profile → Preferences</strong>, and it is yours alone,
+on every device you sign in on.</p>
+<p>While it is on, a round button floats over every page and over the lightbox; dialogs open over it.
+Drag it wherever it is out of your way; it stays there on that device.</p>
+<ul>
+<li>Its <strong>badge</strong> counts the open todos, on any list you can see, that link to what is on screen: the
+picture open in the lightbox, or the album, person, place or device whose page is open. Stepping
+from picture to picture in the lightbox, the count follows.</li>
+<li>With <strong>none</strong>, choosing the button opens <strong>New todo item</strong> at once, with <strong>About</strong> what is on
+screen ticked, so the new item links to it. Adding it leaves you where you were.</li>
+<li>With <strong>some</strong>, choosing it slides out a list of them, above the button or below it, whichever way
+has more room. Tick one to mark it done, choose its title to open it in the item&#39;s dialog, or
+choose <strong>New todo about this</strong> to add another. Choosing anywhere else puts the list away.</li>
+</ul>
+<p>On a page about nothing in particular, such as Home or Search, the button has no badge and adds an
+item that links to nothing.</p>
 <h2 id="on-home">On Home<a class="anchor" href="#on-home" aria-label="Link to this section"></a></h2>
 <p>Home&#39;s <strong>Events</strong> lists the items falling due that are yours to do: given to you, or to nobody on
 a list you can see. They show from a week before they are due until a week after, beside the other
@@ -253,7 +272,9 @@ todo-archive /groups/users/todos/Shopping/done/2026-11-05-140322.md
 todo-add ~/todos/Fix <span class="hljs-string">&#x27;Straighten the horizon&#x27;</span> --<span class="hljs-built_in">link</span> /albums/Summer/beach.jpg
 todo-link ~/todos/Fix/2026-11-05-150210.md /albums/Summer   <span class="hljs-comment"># another link</span>
 todo-mine                                           <span class="hljs-comment"># what is left for you</span>
-todo-mine --<span class="hljs-keyword">done</span>                                    <span class="hljs-comment"># and what you have done, as Overview shows it</span></code></pre></div>
+todo-mine --<span class="hljs-keyword">done</span>                                    <span class="hljs-comment"># and what you have done, as Overview shows it</span>
+todo-about /albums/Summer/beach.jpg                 <span class="hljs-comment"># what is left to do about a picture</span>
+todo-about                                          <span class="hljs-comment"># every open item that links to anything</span></code></pre></div>
 <p>An item&#39;s path is its list&#39;s, then its column&#39;s folder unless it is in Todo, and then its file&#39;s
 name, which <code>todo-items</code> shows; a done item&#39;s is in the list&#39;s <code>done/</code>, an archived one&#39;s in
 <code>archived/</code>. <code>todo-move --column</code> or <code>todo-done --undo</code> takes an archived item out again. An item&#39;s links are under its file, <code>…/2026-11-05-150210.md/beach.jpg</code>, and
@@ -319,7 +340,7 @@ option.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/todo/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#lists-are-folders-items-are-files">Lists are folders, items are files</a></li><li><a href="#columns-are-folders-too">Columns are folders too</a></li><li><a href="#your-own-lists-and-a-groups">Your own lists and a group's</a></li><li><a href="#use-the-todo-page">Use the Todo page</a></li><li><a href="#on-home">On Home</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#lists-are-folders-items-are-files">Lists are folders, items are files</a></li><li><a href="#columns-are-folders-too">Columns are folders too</a></li><li><a href="#your-own-lists-and-a-groups">Your own lists and a group's</a></li><li><a href="#use-the-todo-page">Use the Todo page</a></li><li><a href="#the-todo-widget">The todo widget</a></li><li><a href="#on-home">On Home</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

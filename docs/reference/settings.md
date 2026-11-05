@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 86 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 87 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -800,6 +800,19 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `24` |
 | Kind | number |
 | Restarts | `tmp-sweeper` |
+
+## Todo
+
+### `CFG_USER_TODO_WIDGET`
+
+**Todo widget**. A button floating over every page, which you can drag anywhere: it counts the todos about what is on screen — the picture in the lightbox, an album, a person — and lists them, or adds one about it.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | `false` |
+| Kind | boolean |
+| From the module | Todo |
 
 ## Transcription
 

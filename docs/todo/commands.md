@@ -2,9 +2,9 @@
 
 # Todo commands
 
-The commands the todo module adds. They are there once the module is installed. 13 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the todo module adds. They are there once the module is installed. 14 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[events-todo](#events-todo) · [todo-add](#todo-add) · [todo-archive](#todo-archive) · [todo-done](#todo-done) · [todo-item](#todo-item) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
+[events-todo](#events-todo) · [todo-about](#todo-about) · [todo-add](#todo-add) · [todo-archive](#todo-archive) · [todo-done](#todo-done) · [todo-item](#todo-item) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
 
 ## E
 
@@ -32,6 +32,31 @@ events-todo --today 2026-11-04
 With `JSON_OUTPUT=1`: One events entry per item: title, route, path and date.
 
 ## T
+
+### `todo-about`
+
+List the items not done, on every list you can see, that are about a path: that link to it, such as a picture, an album or a person. With no path, every item that links to anything; with --done the done ones too.
+
+<small>reads only</small>
+
+```text
+todo-about [--done] [<path>...]
+```
+
+| Argument      | What it is           |
+| ------------- | -------------------- |
+| `[<path>...]` | what they are about. |
+
+| Option   | What it does                                                   |
+| -------- | -------------------------------------------------------------- |
+| `--done` | the done ones as well, those in a list's done/ (not archived/) |
+
+```bash
+todo-about /albums/Summer/beach.jpg
+todo-about
+```
+
+With `JSON_OUTPUT=1`: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo, doing or done), list by list in their columns' order.
 
 ### `todo-add`
 
