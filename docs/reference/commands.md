@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 387 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 394 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -429,6 +429,20 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
+
+## Recipes
+
+[All 7 in full](../recipes/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [recipe-categories](../recipes/commands.md#recipe-categories) | List the categories recipes are in, with how many are in each. |
+| [recipe-cover](../recipes/commands.md#recipe-cover) | Make one of a recipe's pictures the one it is shown with; with none named, its first, when it has no cover yet. |
+| [recipe-create](../recipes/commands.md#recipe-create) | Add a recipe: its title, and its ingredients, steps and the rest if you like. |
+| [recipe-list](../recipes/commands.md#recipe-list) | List the recipes, by title or the newest first, in a category or with words in their title. |
+| [recipe-set](../recipes/commands.md#recipe-set) | Change what a recipe says; a field given empty is taken away. |
+| [recipe-show](../recipes/commands.md#recipe-show) | Show a recipe: its facts, ingredients and steps. |
+| [search-recipe](../recipes/commands.md#search-recipe) | Search recipes by title or description. |
 
 ## Todo
 

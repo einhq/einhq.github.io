@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Node types – EiN documentation</title>
-    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 27 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/node-types.html">
     <meta property="og:title" content="Node types – EiN documentation">
-    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 27 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -76,6 +76,7 @@
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -90,7 +91,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs node-types` on a running EiN: make reference, never by hand. -->
 
-<p>Every node has a type, which decides what it holds and how it behaves. These are the 27 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
+<p>Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
 <h2 id="content">Content<a class="anchor" href="#content" aria-label="Link to this section"></a></h2>
 <p>What the archive is made of: what people add, and what EiN works out about it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -155,6 +156,12 @@
 <td>A point on the map with an optional radius or outline. A photo, a location or an event keeps where it is as a child named position.</td>
 <td></td>
 <td>Core</td>
+</tr>
+<tr>
+<td><code>recipe</code> Recipe</td>
+<td>A recipe in /archive/recipes: its title, the servings it is written for, its ingredients and steps in sections, the categories it is in, the language it is written in and the page it was taken from. Its pictures are files in its pictures/ directory, one of them its cover.</td>
+<td><code>/archive/recipes</code></td>
+<td>Recipes</td>
 </tr>
 <tr>
 <td><code>track</code> Track</td>

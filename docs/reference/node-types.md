@@ -2,7 +2,7 @@
 
 # Node types
 
-Every node has a type, which decides what it holds and how it behaves. These are the 27 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
+Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
 
 ## Content
 
@@ -19,6 +19,7 @@ What the archive is made of: what people add, and what EiN works out about it.
 | `media-region` Region | A box on a photo, kept under the photo's regions/ directory: a face the detector found, a box someone drew, or a tag imported from the old archive. It carries who is in it. A region that shows a usable face has the face's vector as a child named embedding, and only those take part in face recognition. |  | Archive |
 | `person` Person | Someone in the archive, with names, dates of birth and death, and contact details. Parents, children and partners are links between people; the photos they appear in are found by their faces. | `/archive/people` | Archive |
 | `position` Position | A point on the map with an optional radius or outline. A photo, a location or an event keeps where it is as a child named position. |  | Core |
+| `recipe` Recipe | A recipe in /archive/recipes: its title, the servings it is written for, its ingredients and steps in sections, the categories it is in, the language it is written in and the page it was taken from. Its pictures are files in its pictures/ directory, one of them its cover. | `/archive/recipes` | Recipes |
 | `track` Track | The route a device recorded, kept as the device's child named track: timestamped GPS points, live or from imported GPX files, summarised by their extent and time span. |  | Core |
 
 ## Structure

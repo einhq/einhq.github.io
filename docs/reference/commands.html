@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 387 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 394 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 387 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 394 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -76,6 +76,7 @@
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -90,7 +91,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 387 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 394 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -1660,6 +1661,45 @@
 </tr>
 </tbody></table>
 </div>
+<h2 id="recipes">Recipes<a class="anchor" href="#recipes" aria-label="Link to this section"></a></h2>
+<p><a href="../recipes/commands.html">All 7 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../recipes/commands.html#recipe-categories">recipe-categories</a></td>
+<td>List the categories recipes are in, with how many are in each.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#recipe-cover">recipe-cover</a></td>
+<td>Make one of a recipe&#39;s pictures the one it is shown with; with none named, its first, when it has no cover yet.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#recipe-create">recipe-create</a></td>
+<td>Add a recipe: its title, and its ingredients, steps and the rest if you like.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#recipe-list">recipe-list</a></td>
+<td>List the recipes, by title or the newest first, in a category or with words in their title.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#recipe-set">recipe-set</a></td>
+<td>Change what a recipe says; a field given empty is taken away.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#recipe-show">recipe-show</a></td>
+<td>Show a recipe: its facts, ingredients and steps.</td>
+</tr>
+<tr>
+<td><a href="../recipes/commands.html#search-recipe">search-recipe</a></td>
+<td>Search recipes by title or description.</td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="todo">Todo<a class="anchor" href="#todo" aria-label="Link to this section"></a></h2>
 <p><a href="../todo/commands.html">All 11 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1722,7 +1762,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#media-service">Media service</a></li><li><a href="#todo">Todo</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#media-service">Media service</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#todo">Todo</a></li></ul></aside>
     </div>
   </body>
 </html>
