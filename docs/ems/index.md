@@ -372,7 +372,7 @@ media. On a large archive that is hours of work.
 ### Settings on EiN's side
 
 EiN's own settings for the media service are in the **Media service** and **Transcription** groups
-of **Settings → System**, with `CFG_MODEL_SLOTS`, the Archive's, in **Processing**. All can be set
+of **Settings → System**, with `CFG_MODEL_SLOTS`, the Media module's, in **Processing**. All can be set
 with `config set`:
 
 | Setting                                                                                     | Default                                                     | What it does                                                                            |
@@ -384,11 +384,11 @@ with `config set`:
 | [`CFG_WHISPER_LANGUAGE`](../reference/settings.md#cfg_whisper_language)                     | empty                                                       | A language sent with every transcription; empty lets the media service decide           |
 | [`CFG_WHISPER_VAD_MIN_SILENCE_MS`](../reference/settings.md#cfg_whisper_vad_min_silence_ms) | empty                                                       | The pause that ends a stretch of speech                                                 |
 | [`CFG_WHISPER_WORD_TIMESTAMPS`](../reference/settings.md#cfg_whisper_word_timestamps)       | empty                                                       | `1` for the time of every word, `0` for timings per segment                             |
-| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                               | `2`                                                         | Model requests the Archive keeps in flight against the media service at once            |
+| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                               | `2`                                                         | Model requests the `models` worker keeps in flight against the media service at once    |
 
 For the languages of a family archive, prefer `EMS_WHISPER_LANGUAGES` in `.env` to
 `CFG_WHISPER_LANGUAGE`: the first biases detection, so a holiday clip in English is still
-transcribed as English; the second forces one language on everything. [Processing pictures](../archive/processing.md#how-much-runs-at-once) explains `CFG_MODEL_SLOTS` and the other slots.
+transcribed as English; the second forces one language on everything. [Media](../media/index.md#how-much-runs-at-once) explains `CFG_MODEL_SLOTS` and the other slots.
 
 ## When the media service restarts
 

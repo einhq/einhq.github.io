@@ -69,6 +69,7 @@ const MODULES: Record<string, string> = {
   archive: 'Archive',
   assistant: 'Assistant',
   ems: 'Media service',
+  media: 'Media',
   'album-folders': 'Album folders',
   todo: 'Todo',
   recipes: 'Recipes',

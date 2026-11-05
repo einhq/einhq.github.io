@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section class="here"><h2>Media service</h2><ul><li><a href="index.html" aria-current="page">The media service</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -699,7 +700,7 @@ left on, the Archive then transcribes every video and recording again in the bac
 media. On a large archive that is hours of work.</p>
 <h3 id="settings-on-eins-side">Settings on EiN&#39;s side<a class="anchor" href="#settings-on-eins-side" aria-label="Link to this section"></a></h3>
 <p>EiN&#39;s own settings for the media service are in the <strong>Media service</strong> and <strong>Transcription</strong> groups
-of <strong>Settings → System</strong>, with <code>CFG_MODEL_SLOTS</code>, the Archive&#39;s, in <strong>Processing</strong>. All can be set
+of <strong>Settings → System</strong>, with <code>CFG_MODEL_SLOTS</code>, the Media module&#39;s, in <strong>Processing</strong>. All can be set
 with <code>config set</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -747,13 +748,13 @@ with <code>config set</code>:</p>
 <tr>
 <td><a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
 <td><code>2</code></td>
-<td>Model requests the Archive keeps in flight against the media service at once</td>
+<td>Model requests the <code>models</code> worker keeps in flight against the media service at once</td>
 </tr>
 </tbody></table>
 </div>
 <p>For the languages of a family archive, prefer <code>EMS_WHISPER_LANGUAGES</code> in <code>.env</code> to
 <code>CFG_WHISPER_LANGUAGE</code>: the first biases detection, so a holiday clip in English is still
-transcribed as English; the second forces one language on everything. <a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> explains <code>CFG_MODEL_SLOTS</code> and the other slots.</p>
+transcribed as English; the second forces one language on everything. <a href="../media/index.html#how-much-runs-at-once">Media</a> explains <code>CFG_MODEL_SLOTS</code> and the other slots.</p>
 <h2 id="when-the-media-service-restarts">When the media service restarts<a class="anchor" href="#when-the-media-service-restarts" aria-label="Link to this section"></a></h2>
 <p>A restart takes tens of seconds, longer when models load. Meanwhile:</p>
 <ul>
@@ -814,7 +815,7 @@ and podman downloads or builds it in a folder beside its own storage, not in <co
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../recipes/commands.html" rel="prev"><span>Previous</span>Recipes commands</a><a class="next" href="gpu.html" rel="next"><span>Next</span>The graphics card</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../media/commands.html" rel="prev"><span>Previous</span>Media commands</a><a class="next" href="gpu.html" rel="next"><span>Next</span>The graphics card</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

@@ -351,7 +351,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `http://127.0.0.1:8181` |
 | Kind | string |
-| Restarts | `models`, `cpu`, `ems-link`, `metrics-sampler` |
+| Restarts | `models`, `models-second`, `media-worker`, `ems-link`, `metrics-sampler` |
 | From the module | Media service |
 
 ### `CFG_EMS_LINK_INTERVAL_SECONDS`
@@ -387,7 +387,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `90` |
 | Kind | number |
-| Restarts | `models`, `cpu` |
+| Restarts | `models`, `models-second`, `media-worker` |
 | From the module | Media service |
 
 ## Modules
@@ -506,7 +506,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `2` |
 | Kind | number |
 | Restarts | `media-worker` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_CPU_WORKERS`
 
@@ -518,7 +518,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `4` |
 | Kind | number |
 | Restarts | `media-worker` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_CPU_NON_ENTRY_SLOTS`
 
@@ -530,7 +530,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `1` |
 | Kind | number |
 | Restarts | `media-worker` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_MODEL_KIND_QUANTUM_MS`
 
@@ -542,7 +542,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `3600000` |
 | Kind | number |
 | Restarts | `models` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_MODEL_SLOTS`
 
@@ -554,7 +554,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `2` |
 | Kind | number |
 | Restarts | `models` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_PIPELINE_PRUNE_INTERVAL`
 
@@ -632,7 +632,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 | Default | `0` |
 | Kind | number |
 | Restarts | `models-second` |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_PIPELINE_MAX_ADMITTED_STEPS`
 

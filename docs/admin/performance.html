@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -202,7 +203,7 @@ podman compose up -d</code></pre></div>
 <p>A line that names <code>Memory cgroup out of memory</code> is a container that reached its limit. Raise that container&#39;s limit, or lower the work that runs at once (<a href="#let-more-work-run-at-once">Let more work run at once</a> describes the settings, which work in both directions).</p>
 <p>The media service&#39;s model processes log a warning of their own when the models alone do not fit under their ceiling, ending in &quot;Raise CFG_MODEL_MAX_RSS if this is the real footprint.&quot; For the media service, set it as <code>EMS_MODEL_MAX_RSS</code> in <code>~/ein/.env</code>, such as <code>EMS_MODEL_MAX_RSS=12g</code>, or raise <code>EMS_MEMORY</code>, which raises the ceiling with it.</p>
 <h2 id="how-processing-is-paced">How processing is paced<a class="anchor" href="#how-processing-is-paced" aria-label="Link to this section"></a></h2>
-<p>This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines&#39; heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by the Archive&#39;s settings in <strong>Settings → System</strong>, category <strong>Processing</strong>.</p>
+<p>This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines&#39; heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the <a href="../media/index.html">Media</a> module, which the Archive brings along, and both are paced by its settings in <strong>Settings → System</strong>, category <strong>Processing</strong>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -224,7 +225,7 @@ podman compose up -d</code></pre></div>
 </tbody></table>
 </div>
 <p>The media worker&#39;s budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
-<p><a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> lists every setting of the two workers.</p>
+<p><a href="../media/index.html#how-much-runs-at-once">Media</a> lists every setting of the two workers.</p>
 <p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts. A kind it left because the media service refused several of its jobs in a row (<strong>waiting for EMS</strong>) is taken up again as soon as that rest ends, rather than an hour later.</p>
 <p>The media service has its own limits on how much it runs at once, set in <code>~/ein/.env</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>

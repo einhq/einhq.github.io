@@ -277,7 +277,8 @@ go to a pool rather than running in the engine. A pool is a node holding jobs, e
 priority and what it requires. Workers, each a service, offer the pool their free capacity and take
 the best job that fits: the highest priority first, the oldest among equals.
 
-The Archive runs two workers on `/var/pools/media`:
+The [Media](../media/index.md) module runs two workers on `/var/pools/media`, for the kinds of work
+the modules name for them. With the Archive:
 
 | Service        | What it runs                                                                                                       | Paced by                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
@@ -290,7 +291,7 @@ off until **Second models worker's slots**, `CFG_MODEL_SECOND_SLOTS`, is above 0
 Most of these steps are calls into the [media service](../ems/index.md), which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
-[Processing pictures](../archive/processing.md#how-much-runs-at-once) explains how to size the workers.
+[Media](../media/index.md#how-much-runs-at-once) explains how to size the workers.
 
 ## One upload, start to finish
 

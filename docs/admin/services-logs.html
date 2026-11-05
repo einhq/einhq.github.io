@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -92,7 +93,7 @@
 <p>This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the dashboard and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on <a href="install.html#run-ein-day-to-day">Installing in detail</a>.</p>
 <h2 id="what-a-service-is">What a service is<a class="anchor" href="#what-a-service-is" aria-label="Link to this section"></a></h2>
 <p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive&#39;s workers that process your media. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (<code>db</code>), and the media service (<code>ems</code>) and the language model (<code>llm</code>) when they are installed, are containers beside EiN. The <code>ems</code> module and the Assistant watch the last two through services of their own, <code>ems-link</code> and <code>llm-link</code>.</p>
-<p>Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> module it brings along (<a href="../ems/index.html">The media service</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 22:</p>
+<p>Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> and <code>media</code> modules it brings along (<a href="../ems/index.html">The media service</a> and <a href="../media/index.html">Media</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 22:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -157,21 +158,6 @@
 <td>Turns changes in the tree into the media and location facts that pipelines trigger on</td>
 </tr>
 <tr>
-<td><code>media-worker</code></td>
-<td>archive</td>
-<td>Worker for the media pipelines&#39; other steps: thumbnails, renditions, fingerprints and the media service&#39;s encodes it waits on, face matching, duplicates, staging</td>
-</tr>
-<tr>
-<td><code>models</code></td>
-<td>archive</td>
-<td>Worker for the model-bound media steps: faces, picture and text vectors, text in pictures, transcripts, voices</td>
-</tr>
-<tr>
-<td><code>models-second</code></td>
-<td>archive</td>
-<td>A second worker for the same steps, in the reverse order; it runs idle, doing nothing, while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code></td>
-</tr>
-<tr>
 <td><code>media-heal</code></td>
 <td>archive</td>
 <td>Starts a pass of the <code>media-heal</code> pipeline when one is due, which closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost</td>
@@ -205,6 +191,21 @@
 <td><code>gpu-sampler</code></td>
 <td>ems</td>
 <td>Samples the media service&#39;s graphics card for the dashboard</td>
+</tr>
+<tr>
+<td><code>media-worker</code></td>
+<td>media</td>
+<td>Worker for the processor work the modules hand the media pool: for the Archive, thumbnails, renditions, fingerprints and the media service&#39;s encodes it waits on, face matching, duplicates, staging</td>
+</tr>
+<tr>
+<td><code>models</code></td>
+<td>media</td>
+<td>Worker for the model-bound work the modules hand the media pool: for the Archive, faces, picture and text vectors, text in pictures, transcripts, voices</td>
+</tr>
+<tr>
+<td><code>models-second</code></td>
+<td>media</td>
+<td>A second worker for the same work, in the reverse order; it runs idle, doing nothing, while <code>CFG_MODEL_SECOND_SLOTS</code> is <code>0</code></td>
 </tr>
 <tr>
 <td><code>llm-link</code></td>

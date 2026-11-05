@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Processing pictures – EiN documentation</title>
-    <meta name="description" content="This page is for the administrator of an EiN with the Archive installed. It covers the work the Archive does on every photo, video, recording and document that arrives: its pipelines, the workers that run them, the settings that decide how much runs at once, and the commands that run the work again.">
+    <meta name="description" content="This page is for the administrator of an EiN with the Archive installed. It covers the work the Archive does on every photo, video, recording and document that arrives: its pipelines, the workers that run them and the commands that run the work again. How much runs at once is set on the Media module's page.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/archive/processing.html">
     <meta property="og:title" content="Processing pictures – EiN documentation">
-    <meta property="og:description" content="This page is for the administrator of an EiN with the Archive installed. It covers the work the Archive does on every photo, video, recording and document that arrives: its pipelines, the workers that run them, the settings that decide how much runs at once, and the commands that run the work again.">
+    <meta property="og:description" content="This page is for the administrator of an EiN with the Archive installed. It covers the work the Archive does on every photo, video, recording and document that arrives: its pipelines, the workers that run them and the commands that run the work again. How much runs at once is set on the Media module's page.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -91,8 +92,8 @@
         <article class="prose">
 <p>This page is for the administrator of an EiN with the <a href="index.html">Archive</a> installed. It covers the
 work the Archive does on every photo, video, recording and document that arrives: its pipelines,
-the workers that run them, the settings that decide how much runs at once, and the commands that
-run the work again.</p>
+the workers that run them and the commands that run the work again. How much runs at once is set on
+the <a href="../media/index.html">Media</a> module&#39;s page.</p>
 <p>The pipelines run in core&#39;s engine. <a href="../admin/processing.html">Processing and pipelines</a> covers the
 engine itself: watching the work on the <strong>Dashboard</strong> and in the terminal, failed work and how it
 is run again, the bulk lane, and the engine&#39;s own settings.</p>
@@ -115,23 +116,17 @@ start to finish.</p>
 <td>Turns changes into the events the media pipelines wait for</td>
 </tr>
 <tr>
-<td><code>media-worker</code></td>
-<td>The worker for the rest: reading metadata, thumbnails and video renditions the media service makes while it waits, matching faces, staging</td>
-</tr>
-<tr>
-<td><code>models</code></td>
-<td>The worker for work done by a model in the <a href="../ems/index.html">media service</a>, such as finding faces or transcribing speech</td>
-</tr>
-<tr>
-<td><code>models-second</code></td>
-<td>A second model worker beside <code>models</code>, when <code>CFG_MODEL_SECOND_SLOTS</code> is above <code>0</code>; at the default <code>0</code> it runs idle and takes no work</td>
-</tr>
-<tr>
 <td><code>media-heal</code></td>
 <td>Starts a pass of the <code>media-heal</code> pipeline when one is due (see <a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>)</td>
 </tr>
 </tbody></table>
 </div>
+<p>The steps themselves are run by the <a href="../media/index.html">Media</a> module&#39;s workers, which take the
+kinds of work the Archive names for them: <code>media-worker</code> the rest, reading metadata, thumbnails and
+video renditions the media service makes while it waits, matching faces, staging; <code>models</code> the work
+done by a model in the <a href="../ems/index.html">media service</a>, such as finding faces or transcribing
+speech, and <code>models-second</code> the same beside it when it is on. <a href="#the-workers">The workers</a> lists the
+kinds.</p>
 <p>Its other services, which keep albums, person covers, label suggestions and staging up to date,
 are listed in <a href="../admin/services-logs.html">Services and logs</a>. Most of the model work and much of
 the media work are calls into the media service: without it, those steps wait, and their kinds
@@ -353,68 +348,12 @@ days on a large archive, and removes the files no role names any more. Pages pic
 when they are opened again.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
-<code>/var/pools/media</code>, where the Archive&#39;s workers take it:</p>
-<ul>
-<li><code>media-worker</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>, <code>speaker-assign</code>,
-<code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>.</li>
-<li><code>models</code> takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and
-<code>shots</code>, and <code>models-second</code> the same kinds in the reverse order.</li>
-</ul>
-<p>When a worker is stopped and no other takes its kinds, they show <strong>no worker</strong> on the <strong>Dashboard</strong>,
-and the work waits until it starts again; <a href="../admin/processing.html#work-that-nothing-will-run">Work that nothing will run</a>
-says what to do.</p>
-<h2 id="how-much-runs-at-once">How much runs at once<a class="anchor" href="#how-much-runs-at-once" aria-label="Link to this section"></a></h2>
-<p>These settings are in the <strong>Processing</strong> category of <strong>Settings → System</strong>, or set with
-<code>config set</code>, and come with the Archive. Saving one restarts the worker that reads it, and work in
-progress is picked up again. <a href="../admin/configuration.html">Configuration</a> explains how.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>Default</th>
-<th>What it decides</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="../reference/settings.html#cfg_cpu_slots"><code>CFG_CPU_SLOTS</code></a></td>
-<td><code>2</code></td>
-<td>How much work the <code>media-worker</code> worker runs at once. A transcode takes two slots, other kinds one.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_cpu_non_entry_slots"><code>CFG_CPU_NON_ENTRY_SLOTS</code></a></td>
-<td><code>1</code></td>
-<td>Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_cpu_workers"><code>CFG_CPU_WORKERS</code></a></td>
-<td><code>4</code></td>
-<td>The most CPU jobs in flight; the slots are the real limit</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a></td>
-<td><code>2</code></td>
-<td>Requests the <code>models</code> worker keeps in flight against the media service. Size it to what the media service runs at once.</td>
-</tr>
-<tr>
-<td><code>CFG_MODEL_SECOND_SLOTS</code></td>
-<td><code>0</code></td>
-<td>Requests the <code>models-second</code> worker keeps in flight; <code>0</code> leaves it off. Size both workers&#39; slots together against the media service.</td>
-</tr>
-<tr>
-<td><a href="../reference/settings.html#cfg_model_kind_quantum_ms"><code>CFG_MODEL_KIND_QUANTUM_MS</code></a></td>
-<td><code>3600000</code></td>
-<td>How long the <code>models</code> worker stays on one kind before turning to the next, so faces do not starve the rest; <code>models-second</code> takes a change at its next start</td>
-</tr>
-</tbody></table>
-</div>
-<aside class="callout callout-tip"><p class="callout-title">Tip</p>
-<p>More <code>CFG_MODEL_SLOTS</code> than the media service runs at once only moves the wait into its queue,
-and past its depth into <strong>waiting for EMS</strong>. With <code>models-second</code> on, the media service holds two
-families of models at once, and both must fit on its graphics card, or one runs on the processor.</p>
-</aside>
-<p><a href="../admin/performance.html">Performance and sizing</a> says what to set on a small or a large machine,
-and <a href="../ems/index.html#change-how-it-works">Change how it works</a>, on the media service&#39;s page, how many
-model requests the media service admits at once, <code>EMS_LIMIT_MODELS</code>.</p>
+<code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
+its kinds for them. <code>media-worker</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>,
+<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>;
+<code>models</code> takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and <code>shots</code>,
+and <code>models-second</code> the same kinds in the reverse order. How much of it runs at once is set there,
+in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>.</p>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -514,7 +453,7 @@ the meantime is processed first. Any category can be put in that lane with
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-sizes-it-makes">The sizes it makes</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-sizes-it-makes">The sizes it makes</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

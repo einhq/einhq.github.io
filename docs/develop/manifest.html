@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -374,13 +375,13 @@
 </tr>
 </tbody></table>
 </div>
-<p>The example is the Archive&#39;s <a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a>. <a href="../reference/settings.html">Settings</a> lists every setting the installed modules declare, with its default.</p>
+<p>The example is the Media module&#39;s <a href="../reference/settings.html#cfg_model_slots"><code>CFG_MODEL_SLOTS</code></a>. <a href="../reference/settings.html">Settings</a> lists every setting the installed modules declare, with its default.</p>
 <p>The names and the scope must agree:</p>
 <ul>
 <li>a <code>user</code> setting is named <code>CFG_USER_…</code> (the one exception is <code>HISTSIZE</code>, which bash owns), and a <code>system</code> setting is not;</li>
 <li>a <code>secret</code> is a key to another service. It is named <code>CFG_…_KEY</code>, a name only a secret may have, it is a <code>system</code> setting, and its <code>default</code> is <code>&quot;&quot;</code>. No shell sees it, and the Settings page says only whether it is set. The Assistant&#39;s <code>CFG_LLM_KEY</code> is one.</li>
 </ul>
-<p>A malformed setting does not stop the module. <code>mod setup</code> prints a warning such as <code>letters: option &#39;CFG_LETTERS_X&#39;: type &#39;select&#39; needs choices</code> and leaves that setting out. A key that core or another module already registered is also left out, and the first owner keeps it.</p>
+<p>A malformed setting does not stop the module. <code>mod setup</code> prints a warning such as <code>letters: option &#39;CFG_LETTERS_X&#39;: type &#39;select&#39; needs choices</code> and leaves that setting out. A key that core or another module already registered is also left out, and the first owner keeps it. When that owner drops the setting, by an update that no longer declares it or by being removed, the module that was left out gets it: a setting moves from one module to another that way, whichever of the two is set up first.</p>
 <h3 id="a-modules-own-choice-of-values">A module&#39;s own choice of values<a class="anchor" href="#a-modules-own-choice-of-values" aria-label="Link to this section"></a></h3>
 <p>A module that wants a setting, its own or core&#39;s, to have a value of its choosing writes it in <code>etc/config</code>, a shell file of <code>export KEY=&#39;value&#39;</code> lines. <code>mod setup</code> links it as <code>/etc/config.d/&lt;name&gt;</code> and <code>mod remove</code> removes the link. The Archive&#39;s is:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># Read what is typed into the search box as filters: people, locations, years, kinds.</span>

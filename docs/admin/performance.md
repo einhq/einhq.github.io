@@ -88,7 +88,7 @@ The media service's model processes log a warning of their own when the models a
 
 ## How processing is paced
 
-This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines' heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the Archive module, and both are paced by the Archive's settings in **Settings → System**, category **Processing**.
+This section and the next two apply with the Archive installed. New files go through its pipelines, and the pipelines' heavy steps go to two workers inside EiN, which decide how much runs at once. Both are services of the [Media](../media/index.md) module, which the Archive brings along, and both are paced by its settings in **Settings → System**, category **Processing**.
 
 | Worker         | Runs                                                                                                                                                                  | Paced by                                                      |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -97,7 +97,7 @@ This section and the next two apply with the Archive installed. New files go thr
 
 The media worker's budget is shared by cost: most jobs take 1 of it, and a video's encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.
 
-[Processing pictures](../archive/processing.md#how-much-runs-at-once) lists every setting of the two workers.
+[Media](../media/index.md#how-much-runs-at-once) lists every setting of the two workers.
 
 The `models` worker takes turns between its kinds of work. It stays on one kind for up to **Model backlog rotation (ms)** (`CFG_MODEL_KIND_QUANTUM_MS`, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts. A kind it left because the media service refused several of its jobs in a row (**waiting for EMS**) is taken up again as soon as that rest ends, rather than an hour later.
 

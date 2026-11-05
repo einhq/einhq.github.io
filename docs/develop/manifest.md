@@ -193,14 +193,14 @@ The values are never in the manifest. They live in `/etc/config` for system sett
 | `restartNote` | shown instead of restarting, for a service that cannot be restarted from a page                                          |
 | `emptyMeans`  | what an empty value means, when empty is a choice rather than "not set"                                                  |
 
-The example is the Archive's [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots). [Settings](../reference/settings.md) lists every setting the installed modules declare, with its default.
+The example is the Media module's [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots). [Settings](../reference/settings.md) lists every setting the installed modules declare, with its default.
 
 The names and the scope must agree:
 
 - a `user` setting is named `CFG_USER_…` (the one exception is `HISTSIZE`, which bash owns), and a `system` setting is not;
 - a `secret` is a key to another service. It is named `CFG_…_KEY`, a name only a secret may have, it is a `system` setting, and its `default` is `""`. No shell sees it, and the Settings page says only whether it is set. The Assistant's `CFG_LLM_KEY` is one.
 
-A malformed setting does not stop the module. `mod setup` prints a warning such as `letters: option 'CFG_LETTERS_X': type 'select' needs choices` and leaves that setting out. A key that core or another module already registered is also left out, and the first owner keeps it.
+A malformed setting does not stop the module. `mod setup` prints a warning such as `letters: option 'CFG_LETTERS_X': type 'select' needs choices` and leaves that setting out. A key that core or another module already registered is also left out, and the first owner keeps it. When that owner drops the setting, by an update that no longer declares it or by being removed, the module that was left out gets it: a setting moves from one module to another that way, whichever of the two is set up first.
 
 ### A module's own choice of values
 

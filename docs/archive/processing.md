@@ -2,8 +2,8 @@
 
 This page is for the administrator of an EiN with the [Archive](index.md) installed. It covers the
 work the Archive does on every photo, video, recording and document that arrives: its pipelines,
-the workers that run them, the settings that decide how much runs at once, and the commands that
-run the work again.
+the workers that run them and the commands that run the work again. How much runs at once is set on
+the [Media](../media/index.md) module's page.
 
 The pipelines run in core's engine. [Processing and pipelines](../admin/processing.md) covers the
 engine itself: watching the work on the **Dashboard** and in the terminal, failed work and how it
@@ -19,13 +19,17 @@ start to finish.
 
 The Archive runs these services for its processing:
 
-| Service          | What it does                                                                                                                               |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                                 |
-| `media-worker`   | The worker for the rest: reading metadata, thumbnails and video renditions the media service makes while it waits, matching faces, staging |
-| `models`         | The worker for work done by a model in the [media service](../ems/index.md), such as finding faces or transcribing speech                  |
-| `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; at the default `0` it runs idle and takes no work       |
-| `media-heal`     | Starts a pass of the `media-heal` pipeline when one is due (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed))       |
+| Service          | What it does                                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                           |
+| `media-heal`     | Starts a pass of the `media-heal` pipeline when one is due (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)) |
+
+The steps themselves are run by the [Media](../media/index.md) module's workers, which take the
+kinds of work the Archive names for them: `media-worker` the rest, reading metadata, thumbnails and
+video renditions the media service makes while it waits, matching faces, staging; `models` the work
+done by a model in the [media service](../ems/index.md), such as finding faces or transcribing
+speech, and `models-second` the same beside it when it is on. [The workers](#the-workers) lists the
+kinds.
 
 Its other services, which keep albums, person covers, label suggestions and staging up to date,
 are listed in [Services and logs](../admin/services-logs.md). Most of the model work and much of
@@ -103,40 +107,12 @@ when they are opened again.
 ## The workers
 
 Every kind of work above that is not run by the engine goes as a job into the pool
-`/var/pools/media`, where the Archive's workers take it:
-
-- `media-worker` takes `unzip`, `ingest`, `stills`, `face-assign`, `speaker-assign`,
-  `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`.
-- `models` takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and
-  `shots`, and `models-second` the same kinds in the reverse order.
-
-When a worker is stopped and no other takes its kinds, they show **no worker** on the **Dashboard**,
-and the work waits until it starts again; [Work that nothing will run](../admin/processing.md#work-that-nothing-will-run)
-says what to do.
-
-## How much runs at once
-
-These settings are in the **Processing** category of **Settings → System**, or set with
-`config set`, and come with the Archive. Saving one restarts the worker that reads it, and work in
-progress is picked up again. [Configuration](../admin/configuration.md) explains how.
-
-| Setting                                                                           | Default   | What it decides                                                                                                                                              |
-| --------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`CFG_CPU_SLOTS`](../reference/settings.md#cfg_cpu_slots)                         | `2`       | How much work the `media-worker` worker runs at once. A transcode takes two slots, other kinds one.                                                          |
-| [`CFG_CPU_NON_ENTRY_SLOTS`](../reference/settings.md#cfg_cpu_non_entry_slots)     | `1`       | Slots kept first for work after ingest, so a long import does not hold back thumbnails and faces. Ingest borrows them when nothing else waits.               |
-| [`CFG_CPU_WORKERS`](../reference/settings.md#cfg_cpu_workers)                     | `4`       | The most CPU jobs in flight; the slots are the real limit                                                                                                    |
-| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                     | `2`       | Requests the `models` worker keeps in flight against the media service. Size it to what the media service runs at once.                                      |
-| `CFG_MODEL_SECOND_SLOTS`                                                          | `0`       | Requests the `models-second` worker keeps in flight; `0` leaves it off. Size both workers' slots together against the media service.                         |
-| [`CFG_MODEL_KIND_QUANTUM_MS`](../reference/settings.md#cfg_model_kind_quantum_ms) | `3600000` | How long the `models` worker stays on one kind before turning to the next, so faces do not starve the rest; `models-second` takes a change at its next start |
-
-> [!TIP]
-> More `CFG_MODEL_SLOTS` than the media service runs at once only moves the wait into its queue,
-> and past its depth into **waiting for EMS**. With `models-second` on, the media service holds two
-> families of models at once, and both must fit on its graphics card, or one runs on the processor.
-
-[Performance and sizing](../admin/performance.md) says what to set on a small or a large machine,
-and [Change how it works](../ems/index.md#change-how-it-works), on the media service's page, how many
-model requests the media service admits at once, `EMS_LIMIT_MODELS`.
+`/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
+its kinds for them. `media-worker` takes `unzip`, `ingest`, `stills`, `face-assign`,
+`speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`;
+`models` takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and `shots`,
+and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
+in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
 ## Run work again on purpose
 

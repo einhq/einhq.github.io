@@ -421,8 +421,8 @@ that changed. Modules bring pipelines; core brings none. See
 ### Pool
 
 A node under `/var/pools` holding long-running jobs that wait for a worker with room for them. The
-Archive's media steps wait in `/var/pools/media`, where its workers `cpu`, `models` and
-`models-second` take them.
+Archive's media steps wait in `/var/pools/media`, where the Media module's workers `media-worker`,
+`models` and `models-second` take them.
 `pool stat` shows what is waiting. See
 [Processing and pipelines](../admin/processing.md).
 
@@ -596,9 +596,9 @@ see what is granted to the `guest` group. It is off unless set. See [Guest](#gue
 
 ### Worker
 
-A service that takes long jobs from a pool when it has room. The Archive brings three, all on
-`/var/pools/media`: `cpu`, for work
-done on this machine such as thumbnails and transcoding, and `models`, for work done by a model in
-the media service such as finding faces, with `models-second`, off unless
-`CFG_MODEL_SECOND_SLOTS` is set above 0, beside it. See [Processing pictures](../archive/processing.md#the-workers),
+A service that takes long jobs from a pool when it has room. The [Media](../media/index.md) module
+brings three, all on `/var/pools/media`: `media-worker`, for work done on this machine such as
+thumbnails and transcoding, and `models`, for work done by a model in the media service such as
+finding faces, with `models-second`, off unless `CFG_MODEL_SECOND_SLOTS` is set above 0, beside it.
+See [The workers](../media/index.md#the-workers),
 and [Processing and pipelines](../admin/processing.md) for workers in general.

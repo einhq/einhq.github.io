@@ -323,9 +323,8 @@ open instance again, so raise the limit only together with `CFG_PIPELINE_STUCK_S
 
 The engine has more settings, for how many triggers and steps it holds; their defaults suit a
 machine of any size, and [Settings](../reference/settings.md#processing) lists them all. The
-**Processing** category also holds the settings modules bring, such as how much work the Archive's
-workers run at once; [Processing pictures](../archive/processing.md#how-much-runs-at-once) covers
-those. [Performance and sizing](performance.md) says what to set on a small or a large machine.
+**Processing** category also holds the settings modules bring, such as how much work the media
+pool's workers run at once; [Media](../media/index.md#how-much-runs-at-once) covers those. [Performance and sizing](performance.md) says what to set on a small or a large machine.
 
 ## Old instances are pruned
 

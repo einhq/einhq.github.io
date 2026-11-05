@@ -119,6 +119,11 @@
 - [Recipes](recipes/index.md)
 - [Recipes commands](recipes/commands.md)
 
+## Media
+
+- [Media](media/index.md)
+- [Media commands](media/commands.md)
+
 ## Media service
 
 - [The media service](ems/index.md)

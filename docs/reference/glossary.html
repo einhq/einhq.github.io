@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -366,8 +367,8 @@ that changed. Modules bring pipelines; core brings none. See
 <a href="../admin/processing.html">Processing and pipelines</a>.</p>
 <h3 id="pool">Pool<a class="anchor" href="#pool" aria-label="Link to this section"></a></h3>
 <p>A node under <code>/var/pools</code> holding long-running jobs that wait for a worker with room for them. The
-Archive&#39;s media steps wait in <code>/var/pools/media</code>, where its workers <code>cpu</code>, <code>models</code> and
-<code>models-second</code> take them.
+Archive&#39;s media steps wait in <code>/var/pools/media</code>, where the Media module&#39;s workers <code>media-worker</code>,
+<code>models</code> and <code>models-second</code> take them.
 <code>pool stat</code> shows what is waiting. See
 <a href="../admin/processing.html">Processing and pipelines</a>.</p>
 <h3 id="position">Position<a class="anchor" href="#position" aria-label="Link to this section"></a></h3>
@@ -480,11 +481,11 @@ Nodes page do not use it. See <a href="../guide/profile.html#the-trash">Your pro
 see what is granted to the <code>guest</code> group. It is off unless set. See <a href="#guest">Guest</a>.</p>
 <h2 id="w">W<a class="anchor" href="#w" aria-label="Link to this section"></a></h2>
 <h3 id="worker">Worker<a class="anchor" href="#worker" aria-label="Link to this section"></a></h3>
-<p>A service that takes long jobs from a pool when it has room. The Archive brings three, all on
-<code>/var/pools/media</code>: <code>cpu</code>, for work
-done on this machine such as thumbnails and transcoding, and <code>models</code>, for work done by a model in
-the media service such as finding faces, with <code>models-second</code>, off unless
-<code>CFG_MODEL_SECOND_SLOTS</code> is set above 0, beside it. See <a href="../archive/processing.html#the-workers">Processing pictures</a>,
+<p>A service that takes long jobs from a pool when it has room. The <a href="../media/index.html">Media</a> module
+brings three, all on <code>/var/pools/media</code>: <code>media-worker</code>, for work done on this machine such as
+thumbnails and transcoding, and <code>models</code>, for work done by a model in the media service such as
+finding faces, with <code>models-second</code>, off unless <code>CFG_MODEL_SECOND_SLOTS</code> is set above 0, beside it.
+See <a href="../media/index.html#the-workers">The workers</a>,
 and <a href="../admin/processing.html">Processing and pipelines</a> for workers in general.</p>
 
         </article>

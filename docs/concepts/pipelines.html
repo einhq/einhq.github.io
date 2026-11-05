@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
@@ -535,7 +536,8 @@ it, is skipped too, not failed or retried.</p>
 go to a pool rather than running in the engine. A pool is a node holding jobs, each with a kind, a
 priority and what it requires. Workers, each a service, offer the pool their free capacity and take
 the best job that fits: the highest priority first, the oldest among equals.</p>
-<p>The Archive runs two workers on <code>/var/pools/media</code>:</p>
+<p>The <a href="../media/index.html">Media</a> module runs two workers on <code>/var/pools/media</code>, for the kinds of work
+the modules name for them. With the Archive:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -561,7 +563,7 @@ off until <strong>Second models worker&#39;s slots</strong>, <code>CFG_MODEL_SEC
 <p>Most of these steps are calls into the <a href="../ems/index.html">media service</a>, which does
 the heavy work; EiN decides what to ask for and stores the answers. A worker holds a lease on each
 job it runs; if the worker stops, the lease runs out and the job goes back to the pool for another.
-<a href="../archive/processing.html#how-much-runs-at-once">Processing pictures</a> explains how to size the workers.</p>
+<a href="../media/index.html#how-much-runs-at-once">Media</a> explains how to size the workers.</p>
 <h2 id="one-upload-start-to-finish">One upload, start to finish<a class="anchor" href="#one-upload-start-to-finish" aria-label="Link to this section"></a></h2>
 <p>With the Archive installed, an upload sets off this chain. Each arrow is a fact, and each fact
 starts its own pipelines:</p>

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 397 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 398 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -430,6 +430,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
+
+## Media
+
+[All 1 in full](../media/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
 
 ## Recipes
 
