@@ -137,6 +137,12 @@ it held back get a scan of their own once their pipelines have nothing waiting. 
 (900), and after a scan that finds nothing and holds nothing back it rests for
 `CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
 
+Faces, picture and text vectors, text in pictures and transcripts are compared with the models the
+media service runs now, so a scan needs the service to answer. While it does not, `media-heal`
+waits and looks again later rather than going on without those checks. Run by hand, `media-scan`
+goes on and names the kinds of gap it could not check; scan for those again with `--only` and
+`--restart` once the service is back.
+
 Run it by hand after installing the Archive on files that were already there, or to look at one
 folder:
 
