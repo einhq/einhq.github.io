@@ -122,9 +122,11 @@ the default. If a save fails, the reason shows in a red box under the setting.
 | Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
 | Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
 | Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
+| Todo       | **Todo widget**                          | **Off**   | A button floating over every page, which you can drag anywhere, counting and listing the todos about what is on screen; see [The todo widget](../todo/index.md#the-todo-widget).                                                   |
 
 EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
-the archive module, and only an EiN with the archive has them. [Viewing photos, videos and recordings](../archive/viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
+the archive module, and only an EiN with the archive has them; the one under Todo comes with the
+todo module. [Viewing photos, videos and recordings](../archive/viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
 lists each with its key, such as
 [`CFG_USER_SLIDESHOW_SECONDS`](../reference/settings.md#cfg_user_slideshow_seconds).
 

@@ -98,6 +98,7 @@ panels
   system.overview  GPU              /system/gpu              ems.gpu
   system.tabs      Media service    /system/media-service    ems.media-service
   about.services   Media service    /about/media-service     ems.about
+  shell.float      Todo widget      /todo-widget             todo.widget
 ```
 
 - **The sidebar** comes first, a section at a time. Each section starts with its heading; the
@@ -452,6 +453,7 @@ Each panel has a slot, the place in a page where it is drawn:
 | `system.tabs`     | A tab of the **Dashboard**                                         | `ems.media-service` (**Media service**)                                 |
 | `system.overview` | Gauges beside the computer's own on the **Dashboard**'s overview   | `ems.gpu` (**GPU**)                                                     |
 | `about.services`  | A tile in **About EiN**                                            | `assistant.about` (**Language model**), `ems.about` (**Media service**) |
+| `shell.float`     | Floating over every page and the lightbox, under dialogs           | `todo.widget` (**Todo widget**, signed in only)                         |
 
 A panel draws a page that a module made for that place. Adding panels of your own works the same
 way in principle, but it is a module's work; see [Writing a module](../develop/modules.md).

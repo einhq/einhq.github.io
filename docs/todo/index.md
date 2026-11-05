@@ -151,6 +151,28 @@ person's, place's or device's picture. A link is called what it points at is cal
 album's title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
 A link to something that is gone, or that you may not see, is greyed out.
 
+## The todo widget
+
+The todo widget keeps the todos about what you are looking at in reach on every page. Turn it on
+with the pin in the Todo page's bar, **Show the todo widget**, and off with the same button,
+**Hide the todo widget**; it is also **Todo widget** under **Settings**, and it is yours alone,
+on every device you sign in on.
+
+While it is on, a round button floats over every page and over the lightbox; dialogs open over it.
+Drag it wherever it is out of your way; it stays there on that device.
+
+- Its **badge** counts the open todos, on any list you can see, that link to what is on screen: the
+  picture open in the lightbox, or the album, person, place or device whose page is open. Stepping
+  from picture to picture in the lightbox, the count follows.
+- With **none**, choosing the button opens **New todo item** at once, with **About** what is on
+  screen ticked, so the new item links to it. Adding it leaves you where you were.
+- With **some**, choosing it slides out a list of them, above the button or below it, whichever way
+  has more room. Tick one to mark it done, choose its title to open it in the item's dialog, or
+  choose **New todo about this** to add another. Choosing anywhere else puts the list away.
+
+On a page about nothing in particular, such as Home or Search, the button has no badge and adds an
+item that links to nothing.
+
 ## On Home
 
 Home's **Events** lists the items falling due that are yours to do: given to you, or to nobody on
@@ -192,6 +214,8 @@ todo-add ~/todos/Fix 'Straighten the horizon' --link /albums/Summer/beach.jpg
 todo-link ~/todos/Fix/2026-11-05-150210.md /albums/Summer   # another link
 todo-mine                                           # what is left for you
 todo-mine --done                                    # and what you have done, as Overview shows it
+todo-about /albums/Summer/beach.jpg                 # what is left to do about a picture
+todo-about                                          # every open item that links to anything
 ```
 
 An item's path is its list's, then its column's folder unless it is in Todo, and then its file's
