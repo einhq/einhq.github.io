@@ -206,7 +206,7 @@ todo-lists
 todo-lists
 ```
 
-With `JSON_OUTPUT=1`: One entry per list: path, title, group (absent for your own), open and total.
+With `JSON_OUTPUT=1`: One entry per list: path, title, group (absent for your own), open, total, and its columns (path, title, stage) in their order.
 
 ### `todo-members`
 
@@ -230,19 +230,24 @@ With `JSON_OUTPUT=1`: One entry per person: username and name.
 
 ### `todo-mine`
 
-List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column.
+List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column; with --done the done ones too.
 
 <small>reads only</small>
 
 ```text
-todo-mine
+todo-mine [--done]
 ```
+
+| Option   | What it does                                                   |
+| -------- | -------------------------------------------------------------- |
+| `--done` | the done ones as well, those in a list's done/ (not archived/) |
 
 ```bash
 todo-mine
+todo-mine --done
 ```
 
-With `JSON_OUTPUT=1`: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo or doing).
+With `JSON_OUTPUT=1`: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo, doing or done).
 
 ### `todo-move`
 

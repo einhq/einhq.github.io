@@ -55,9 +55,11 @@ The old one is in the desk drawer.
 A list is a board of columns, and an item is in one of them:
 
 - **Todo** is the list's own folder: what is not started yet. `ls` of a list is its Todo column.
-- Every folder in the list is a column of its own, such as `In progress/` or `Waiting/`, in the
-  order the folders were made. It is called by its folder's name, unless the folder has a `name`
-  attribute, which is then its title: `attrs ~/todos/Fix/doing -s 'name=In progress'`.
+- Every folder in the list is a column of its own, such as `In progress/` or `Waiting/`. It is called
+  by its folder's name, unless the folder has a `name` attribute, which is then its title:
+  `attrs ~/todos/Fix/doing -s 'name=In progress'`. The columns stand in the order of their `order`
+  attributes, which moving a column on the page writes, and those without one after them in the
+  order the folders were made.
 - **Done** is the list's `done/` folder, always the last column. A new list has one from the start.
 - `archived/` is where done items are put away. It is no column, so they are off the board and out
   of the counts, but they are still files in the list.
@@ -109,9 +111,13 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
 - **Delete an item**: **Delete** in the dialog removes it for good, with its links; what they point
   at stays where it is.
 - **Add a column**: open the list's tab, choose **⋮** in the page's bar and **New column**, and type
-  its name; it comes before **Done**. The pencil in a column's heading renames it and, once no card
-  is left in it, **Delete** takes it away. Todo cannot be renamed, Done cannot be deleted, and
-  `done` and `archived` are names the list keeps for itself.
+  its name; it comes before **Done**. The pencil in a column's heading renames it, **Left** and
+  **Right** move it among the list's own columns, and once no card is left in it, **Delete** takes
+  it away. Todo stays first and Done last: they cannot be moved, Todo cannot be renamed, Done cannot
+  be deleted, and `done` and `archived` are names the list keeps for itself.
+- **Delete a list**: the cross on its tab, then **Delete the list**. The list goes for good, with
+  every item on it, archived ones too, and for everyone a group's list is shared with; what the items
+  link to stays where it is.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
   for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
@@ -124,10 +130,13 @@ when it was added.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
-**Overview** is what is left for you, soonest due first: the items assigned to you on any list, and
-the items of your own lists assigned to nobody. It has two columns, **Todo** for what is not started
-and **In progress** for what is in any other column of its list. Each card says the list it is on,
-and the column when it is started; choose that to open the list's tab.
+**Overview** is everything of yours, soonest due first: the items assigned to you on any list, and
+the items of your own lists assigned to nobody, done ones too (archived ones are not). Its columns
+are those of the lists your items are on, put together by title: **Todo**, then every other
+column in the order it is first met, two lists' _Ongoing_ being one column, and **Done** last. A
+card's title starts with its list, _Shopping › Milk_; choose the list's name to open its tab. Drag
+a card to another column to move it there on its own list; a column its list does not have takes
+no drop.
 
 To add an item from anywhere, choose **Create → Todo item** in the top bar, pick the list and
 choose **Add**. Opened while a picture, an album or another page about one thing is showing, it
@@ -177,6 +186,7 @@ todo-archive /groups/users/todos/Shopping/done/2026-11-05-140322.md
 todo-add ~/todos/Fix 'Straighten the horizon' --link /albums/Summer/beach.jpg
 todo-link ~/todos/Fix/2026-11-05-150210.md /albums/Summer   # another link
 todo-mine                                           # what is left for you
+todo-mine --done                                    # and what you have done, as Overview shows it
 ```
 
 An item's path is its list's, then its column's folder unless it is in Todo, and then its file's
@@ -197,5 +207,5 @@ option.
 | A list someone made has no tab                         | It is someone else's own, or of a group you are not in | Group changes apply the next time you sign in                          |
 | `todo-list-create: there is already a list called …`   | A list's name is its title, and that one is taken      | Pick another title, or add to the list that is there                   |
 | An item's due day or person is not shown               | Its front matter is not YAML the module can read       | Open the file and correct the lines between the `---` lines            |
-| An item due long ago is not on Home                    | Home shows a week back                                 | **Overview** lists every item of yours not done, overdue or not        |
+| An item due long ago is not on Home                    | Home shows a week back                                 | **Overview** lists every item of yours, overdue or not                 |
 | A folder in the list is not a column                   | Its name starts with a dot, or it is `archived`        | Rename the folder                                                      |

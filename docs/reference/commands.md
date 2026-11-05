@@ -470,6 +470,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [todo-list-create](../todo/commands.md#todo-list-create) | Make a todo list, a folder named by its title: your own, in ~/todos, or with --group one every member of the group shares, in the group's shared home. |
 | [todo-lists](../todo/commands.md#todo-lists) | List the todo lists you can see: your own, then those in the shared homes of your groups. |
 | [todo-members](../todo/commands.md#todo-members) | List who an item of a todo list may be given to: the members of the list's group, or you for a list of your own. |
-| [todo-mine](../todo/commands.md#todo-mine) | List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column. |
+| [todo-mine](../todo/commands.md#todo-mine) | List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column; with --done the done ones too. |
 | [todo-move](../todo/commands.md#todo-move) | Move a todo item to another column of its list's board, at its end, or put it just before or just after another item, numbering that column's items in their new order. Into done/ it is marked done, out of it not done. |
 | [todo-set](../todo/commands.md#todo-set) | Change a todo item's title, its description, the day it is due, or who is to do it. |

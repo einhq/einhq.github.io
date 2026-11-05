@@ -323,7 +323,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>todo-lists</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>todo-lists</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: One entry per list: path, title, group (absent for your own), open and total.</p>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per list: path, title, group (absent for your own), open, total, and its columns (path, title, stage) in their order.</p>
 <h3 id="todo-members"><code>todo-members</code><a class="anchor" href="#todo-members" aria-label="Link to this section"></a></h3>
 <p>List who an item of a todo list may be given to: the members of the list&#39;s group, or you for a list of your own.</p>
 <p><small>reads only</small></p>
@@ -344,11 +344,25 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 <div class="code" data-lang="bash"><pre tabindex="0"><code>todo-members /groups/users/todos/Shopping</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: One entry per person: username and name.</p>
 <h3 id="todo-mine"><code>todo-mine</code><a class="anchor" href="#todo-mine" aria-label="Link to this section"></a></h3>
-<p>List what is left for you to do: items not done given to you on any list, and your own lists&#39; items not done given to nobody, soonest due first, each with its column.</p>
+<p>List what is left for you to do: items not done given to you on any list, and your own lists&#39; items not done given to nobody, soonest due first, each with its column; with --done the done ones too.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>todo-mine</code></pre></div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-mine</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo or doing).</p>
+<div class="code"><pre tabindex="0"><code>todo-mine [--done]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--done</code></td>
+<td>the done ones as well, those in a list&#39;s done/ (not archived/)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-mine
+todo-mine --<span class="hljs-keyword">done</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo, doing or done).</p>
 <h3 id="todo-move"><code>todo-move</code><a class="anchor" href="#todo-move" aria-label="Link to this section"></a></h3>
 <p>Move a todo item to another column of its list&#39;s board, at its end, or put it just before or just after another item, numbering that column&#39;s items in their new order. Into done/ it is marked done, out of it not done.</p>
 <p><small>changes things</small></p>

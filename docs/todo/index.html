@@ -133,9 +133,11 @@ file says so. Moving it there on the page, or with <code>todo-done</code> or <co
 <p>A list is a board of columns, and an item is in one of them:</p>
 <ul>
 <li><strong>Todo</strong> is the list&#39;s own folder: what is not started yet. <code>ls</code> of a list is its Todo column.</li>
-<li>Every folder in the list is a column of its own, such as <code>In progress/</code> or <code>Waiting/</code>, in the
-order the folders were made. It is called by its folder&#39;s name, unless the folder has a <code>name</code>
-attribute, which is then its title: <code>attrs ~/todos/Fix/doing -s &#39;name=In progress&#39;</code>.</li>
+<li>Every folder in the list is a column of its own, such as <code>In progress/</code> or <code>Waiting/</code>. It is called
+by its folder&#39;s name, unless the folder has a <code>name</code> attribute, which is then its title:
+<code>attrs ~/todos/Fix/doing -s &#39;name=In progress&#39;</code>. The columns stand in the order of their <code>order</code>
+attributes, which moving a column on the page writes, and those without one after them in the
+order the folders were made.</li>
 <li><strong>Done</strong> is the list&#39;s <code>done/</code> folder, always the last column. A new list has one from the start.</li>
 <li><code>archived/</code> is where done items are put away. It is no column, so they are off the board and out
 of the counts, but they are still files in the list.</li>
@@ -183,9 +185,13 @@ it, and the cross on one takes it away.</li>
 <li><strong>Delete an item</strong>: <strong>Delete</strong> in the dialog removes it for good, with its links; what they point
 at stays where it is.</li>
 <li><strong>Add a column</strong>: open the list&#39;s tab, choose <strong>⋮</strong> in the page&#39;s bar and <strong>New column</strong>, and type
-its name; it comes before <strong>Done</strong>. The pencil in a column&#39;s heading renames it and, once no card
-is left in it, <strong>Delete</strong> takes it away. Todo cannot be renamed, Done cannot be deleted, and
-<code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
+its name; it comes before <strong>Done</strong>. The pencil in a column&#39;s heading renames it, <strong>Left</strong> and
+<strong>Right</strong> move it among the list&#39;s own columns, and once no card is left in it, <strong>Delete</strong> takes
+it away. Todo stays first and Done last: they cannot be moved, Todo cannot be renamed, Done cannot
+be deleted, and <code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
+<li><strong>Delete a list</strong>: the cross on its tab, then <strong>Delete the list</strong>. The list goes for good, with
+every item on it, archived ones too, and for everyone a group&#39;s list is shared with; what the items
+link to stays where it is.</li>
 <li><strong>Archive done items</strong>: tick the cards in <strong>Done</strong> you want put away, or the box in its heading
 for all of them, and choose <strong>Archive</strong>. They move to the list&#39;s <code>archived/</code> folder.</li>
 </ul>
@@ -196,10 +202,13 @@ then yellow, and red once it is four weeks old; a done card&#39;s is grey. Hover
 when it was added.
 An item can be given only to a member of the list&#39;s group; on a list of your own every item is
 yours.</p>
-<p><strong>Overview</strong> is what is left for you, soonest due first: the items assigned to you on any list, and
-the items of your own lists assigned to nobody. It has two columns, <strong>Todo</strong> for what is not started
-and <strong>In progress</strong> for what is in any other column of its list. Each card says the list it is on,
-and the column when it is started; choose that to open the list&#39;s tab.</p>
+<p><strong>Overview</strong> is everything of yours, soonest due first: the items assigned to you on any list, and
+the items of your own lists assigned to nobody, done ones too (archived ones are not). Its columns
+are those of the lists your items are on, put together by title: <strong>Todo</strong>, then every other
+column in the order it is first met, two lists&#39; <em>Ongoing</em> being one column, and <strong>Done</strong> last. A
+card&#39;s title starts with its list, <em>Shopping › Milk</em>; choose the list&#39;s name to open its tab. Drag
+a card to another column to move it there on its own list; a column its list does not have takes
+no drop.</p>
 <p>To add an item from anywhere, choose <strong>Create → Todo item</strong> in the top bar, pick the list and
 choose <strong>Add</strong>. Opened while a picture, an album or another page about one thing is showing, it
 offers <strong>About</strong> that thing, ticked, and the new item links to it.</p>
@@ -238,7 +247,8 @@ todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --column <span class
 todo-archive /groups/users/todos/Shopping/done/2026-11-05-140322.md
 todo-add ~/todos/Fix <span class="hljs-string">&#x27;Straighten the horizon&#x27;</span> --<span class="hljs-built_in">link</span> /albums/Summer/beach.jpg
 todo-link ~/todos/Fix/2026-11-05-150210.md /albums/Summer   <span class="hljs-comment"># another link</span>
-todo-mine                                           <span class="hljs-comment"># what is left for you</span></code></pre></div>
+todo-mine                                           <span class="hljs-comment"># what is left for you</span>
+todo-mine --<span class="hljs-keyword">done</span>                                    <span class="hljs-comment"># and what you have done, as Overview shows it</span></code></pre></div>
 <p>An item&#39;s path is its list&#39;s, then its column&#39;s folder unless it is in Todo, and then its file&#39;s
 name, which <code>todo-items</code> shows; a done item&#39;s is in the list&#39;s <code>done/</code>, an archived one&#39;s in
 <code>archived/</code>. <code>todo-move --column</code> or <code>todo-done --undo</code> takes an archived item out again. An item&#39;s links are under its file, <code>…/2026-11-05-150210.md/beach.jpg</code>, and
@@ -288,7 +298,7 @@ option.</p>
 <tr>
 <td>An item due long ago is not on Home</td>
 <td>Home shows a week back</td>
-<td><strong>Overview</strong> lists every item of yours not done, overdue or not</td>
+<td><strong>Overview</strong> lists every item of yours, overdue or not</td>
 </tr>
 <tr>
 <td>A folder in the list is not a column</td>
