@@ -339,6 +339,18 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks and places. A
 folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their sizes made, and no
 faces, text, picture vectors or fingerprints.</p>
+<h2 id="the-sizes-it-makes">The sizes it makes<a class="anchor" href="#the-sizes-it-makes" aria-label="Link to this section"></a></h2>
+<p>The thumbnails, display sizes, video and sound copies the Archive makes are listed in
+<code>/etc/renditions.yaml</code>, each under the role it plays: <code>thumb</code>, the square thumbnail, and <code>grid</code>,
+<code>small</code>, <code>medium</code> and <code>large</code>, which keep the picture&#39;s shape; a video&#39;s <code>preview</code>, the silent clip
+a tile plays, and its <code>playback</code>; a recording&#39;s <code>playback</code>; and the <code>storyboard</code>, a video&#39;s frames on
+one sheet. The pages ask for a role, so changing a size there changes what they show. <code>renditions</code>
+in the terminal says what the file holds now, and names any entry it leaves out as wrong.</p>
+<p>The Archive installed the file, and a newer version of it never overwrites it, so a change you make
+stays. Each rendition is named after its size (<code>800x800.avif</code>), so a size changed is a new file for
+every picture: make them again with <code>regenerate --prune</code> under <code>/archive</code>, which can take hours or
+days on a large archive, and removes the files no role names any more. Pages pick up the change
+when they are opened again.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the Archive&#39;s workers take it:</p>
@@ -502,7 +514,7 @@ the meantime is processed first. Any category can be put in that lane with
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-sizes-it-makes">The sizes it makes</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

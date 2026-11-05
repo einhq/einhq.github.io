@@ -85,6 +85,21 @@ do the pipelines that work on the Archive's own folders: albums, staging, tracks
 folder with `processing` set to `["renditions"]` gets its pictures read and their sizes made, and no
 faces, text, picture vectors or fingerprints.
 
+## The sizes it makes
+
+The thumbnails, display sizes, video and sound copies the Archive makes are listed in
+`/etc/renditions.yaml`, each under the role it plays: `thumb`, the square thumbnail, and `grid`,
+`small`, `medium` and `large`, which keep the picture's shape; a video's `preview`, the silent clip
+a tile plays, and its `playback`; a recording's `playback`; and the `storyboard`, a video's frames on
+one sheet. The pages ask for a role, so changing a size there changes what they show. `renditions`
+in the terminal says what the file holds now, and names any entry it leaves out as wrong.
+
+The Archive installed the file, and a newer version of it never overwrites it, so a change you make
+stays. Each rendition is named after its size (`800x800.avif`), so a size changed is a new file for
+every picture: make them again with `regenerate --prune` under `/archive`, which can take hours or
+days on a large archive, and removes the files no role names any more. Pages pick up the change
+when they are opened again.
+
 ## The workers
 
 Every kind of work above that is not run by the engine goes as a job into the pool
