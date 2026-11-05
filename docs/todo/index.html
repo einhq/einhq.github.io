@@ -164,7 +164,9 @@ scrolls sideways. On a phone the columns stand one under the other and the board
 <li><strong>Make a list</strong>: choose <strong>⋮</strong> in the page&#39;s bar and <strong>New list</strong>, type a <strong>Title</strong> such as Shopping, and under
 <strong>Shared with</strong> keep <strong>Nobody, it is mine</strong> or pick a group. Choose <strong>Create list</strong>.</li>
 <li><strong>Add an item</strong>: open the list&#39;s tab, type in <strong>Add an item</strong> at the foot of <strong>Todo</strong> and press
-<kbd>Enter</kbd>. The line stays for the next one.</li>
+<kbd>Enter</kbd>. The line stays for the next one. <kbd>Shift</kbd>+<kbd>Enter</kbd>, or pasting
+several lines, gives it more: the first line is the item&#39;s title and the lines after it its
+description, blank ones at its top and foot left out.</li>
 <li><strong>Move an item</strong>: drag its card to another place in the column, or to another column; a dashed
 frame shows where it will land. Dropped on <strong>Done</strong> it is done, and dragged out of Done it is not.
 On a phone, lifting a card brings up the names of the columns at the foot of the screen: let go
@@ -237,6 +239,7 @@ todo-list-create Shopping --group <span class="hljs-built_in">users</span>      
 todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span>                  <span class="hljs-comment"># a list of your own</span>
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <span class="hljs-string">&#x27;Renew the passport&#x27;</span> --due 2026-12-01
+todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> Pack --description <span class="hljs-string">&#x27;Warm clothes, the charger.&#x27;</span>
 todo-items /groups/users/todos/Shopping             <span class="hljs-comment"># the list, its columns and their items</span>
 todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   <span class="hljs-comment"># one item, with its description and links</span>
 <span class="hljs-built_in">ls</span> /groups/users/todos/Shopping                     <span class="hljs-comment"># what is not started, as files</span>

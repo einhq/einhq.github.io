@@ -40,7 +40,7 @@ Add an item to a todo list, a markdown file named for when it was added, with th
 <small>changes things</small>
 
 ```text
-todo-add [--due=<string>] [--assignee=<user>] [--link=<path>] <list> <title>
+todo-add [--description=<string>] [--due=<string>] [--assignee=<user>] [--link=<path>] <list> <title>
 ```
 
 | Argument  | What it is             |
@@ -48,11 +48,12 @@ todo-add [--due=<string>] [--assignee=<user>] [--link=<path>] <list> <title>
 | `<list>`  | the list, by its path. |
 | `<title>` | what is to be done.    |
 
-| Option              | What it does                                                                 |
-| ------------------- | ---------------------------------------------------------------------------- |
-| `--due=<string>`    | the day it is due, as YYYY-MM-DD.                                            |
-| `--assignee=<user>` | who is to do it: a member of the list's group, or you on a list of your own. |
-| `--link=<path>`     | what it is about, such as a picture or an album: a softlink under the item.  |
+| Option                   | What it does                                                                 |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `--description=<string>` | what it says under the title, in markdown.                                   |
+| `--due=<string>`         | the day it is due, as YYYY-MM-DD.                                            |
+| `--assignee=<user>`      | who is to do it: a member of the list's group, or you on a list of your own. |
+| `--link=<path>`          | what it is about, such as a picture or an album: a softlink under the item.  |
 
 ```bash
 todo-add /groups/users/todos/Shopping Milk

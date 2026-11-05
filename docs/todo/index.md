@@ -90,7 +90,9 @@ scrolls sideways. On a phone the columns stand one under the other and the board
 - **Make a list**: choose **⋮** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
 - **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** and press
-  <kbd>Enter</kbd>. The line stays for the next one.
+  <kbd>Enter</kbd>. The line stays for the next one. <kbd>Shift</kbd>+<kbd>Enter</kbd>, or pasting
+  several lines, gives it more: the first line is the item's title and the lines after it its
+  description, blank ones at its top and foot left out.
 - **Move an item**: drag its card to another place in the column, or to another column; a dashed
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
   On a phone, lifting a card brings up the names of the columns at the foot of the screen: let go
@@ -175,6 +177,7 @@ todo-list-create Shopping --group users             # a list shared with users
 todo-list-create 'Before the trip'                  # a list of your own
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/'Before the trip' 'Renew the passport' --due 2026-12-01
+todo-add ~/todos/'Before the trip' Pack --description 'Warm clothes, the charger.'
 todo-items /groups/users/todos/Shopping             # the list, its columns and their items
 todo-item /groups/users/todos/Shopping/2026-11-05-140322.md   # one item, with its description and links
 ls /groups/users/todos/Shopping                     # what is not started, as files
