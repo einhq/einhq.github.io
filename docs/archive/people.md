@@ -49,7 +49,7 @@ The page is headed **Unidentified people**: "Faces and voices recognized as the 
 
 - **Sort** offers **Most found** (the default) and **Newest**.
 - **Found** shows only people found at least so many times: **Any count**, **2+ times**, **5+ times**, **10+ times** or **50+ times**. A face and a recording the voice is heard in count one time each.
-- Each card shows one large glimpse and up to three small ones: the best faces first, then round play buttons that play the voice's longest turn. The badges say **N faces** and **heard in N** (recordings).
+- Each card shows one large glimpse and up to three small ones: the best faces first, then round play buttons that play the voice's longest turn. A voice heard in a video shows the video in its button: the moment the person speaks, those moments one after another while the pointer rests on it, and what is on screen as you listen. The badges say **N faces** and **heard in N** (recordings).
 - **Load more (N of M)** at the foot fetches the next cards.
 
 Both choices are kept in the address, so a link opens the same view.
@@ -77,7 +77,7 @@ Click a card, anywhere but its name box and its tick box, to open the review. It
 
 - At the top, the **Who is this?** box ("A new name, or someone you already have") works like the card's. Its button reads **Name**, or **Add to &lt;name&gt;** when the name is someone who already exists. **Not a person** beside it is described in [Say what is not a person](#say-what-is-not-a-person).
 - **Faces** shows every face of this person. Click a face to open the photo it came from in the viewer; the arrows then step through the photos of the faces shown. **Load more (N of M)** fetches more when there are many.
-- **Voice** ("heard in N recordings") shows a tile for each recording the voice is heard in. The round button plays the voice's longest turn there, and **Open in the lightbox** opens the recording at that moment. **Pick all** picks every recording.
+- **Voice** ("heard in N recordings") shows a tile for each recording the voice is heard in. The round button plays the voice's longest turn there, with the video's frames in it for a video, and **Open in the lightbox** opens the recording at that moment. **Pick all** picks every recording.
 
 To pick faces or recordings, tick the box in their corner. Once something is picked, a click on a face picks it too instead of opening its photo; <kbd>Shift</kbd>+click picks a range, and <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) picks everything shown. <kbd>Esc</kbd> closes an open photo first, then clears what is picked, then closes the review.
 
@@ -240,7 +240,7 @@ When none are left, the tab says "No doubtful faces of &lt;name&gt; left."
 
 ## Recordings a person is heard in
 
-The **Heard in** tab lists, under "Heard in N recordings", a tile for each recording the person speaks in, those they speak most in first. The round button on a tile plays their longest turn in that recording. Hovering the name shows the recording's date and how long they speak in it ("speaks 1:42 in it"), and **Open in the lightbox** opens the recording at their turn.
+The **Heard in** tab lists, under "Heard in N recordings", a tile for each recording the person speaks in, those they speak most in first. The round button on a tile plays their longest turn in that recording; for a video it shows the video's frames of that turn. Hovering the name shows the recording's date and how long they speak in it ("speaks 1:42 in it"), and **Open in the lightbox** opens the recording at their turn.
 
 To take a recording off the person, tick its tile and press **Not this person (N)**. Their voice in it loses its identity and is locked, so recognition does not give it back. Nothing asks first.
 
