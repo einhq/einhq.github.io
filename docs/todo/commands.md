@@ -2,9 +2,9 @@
 
 # Todo commands
 
-The commands the todo module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the todo module adds. They are there once the module is installed. 12 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[events-todo](#events-todo) · [todo-add](#todo-add) · [todo-done](#todo-done) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
+[events-todo](#events-todo) · [todo-add](#todo-add) · [todo-archive](#todo-archive) · [todo-done](#todo-done) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
 
 ## E
 
@@ -61,9 +61,29 @@ todo-add ~/todos/'Before the trip' 'Renew the passport' --due 2026-12-01
 
 With `JSON_OUTPUT=1`: The new item: path, list, title, done, due, assignee and links.
 
+### `todo-archive`
+
+Put done todo items away in their list's archived/, which is no column of the board. todo-move or todo-done --undo takes one out again.
+
+<small>changes things</small>
+
+```text
+todo-archive <item>...
+```
+
+| Argument    | What it is                |
+| ----------- | ------------------------- |
+| `<item>...` | a done item, by its path. |
+
+```bash
+todo-archive /groups/users/todos/Shopping/done/2026-11-05-140322.md
+```
+
+With `JSON_OUTPUT=1`: The items as they are now, at their paths in archived/.
+
 ### `todo-done`
 
-Mark a todo item done, with who did it and when, moving it to the list's done/; with --undo, not done again and back in the list.
+Mark a todo item done, with who did it and when, moving it to the list's done/; with --undo, not done again and back in the list's Todo.
 
 <small>changes things</small>
 
@@ -88,7 +108,7 @@ With `JSON_OUTPUT=1`: The item as it is now, at its new path, with doneAt and do
 
 ### `todo-items`
 
-Show a todo list and its items: the open ones, then those in its done/, each in the order they were added.
+Show a todo list's board: its columns, Todo (the list itself), each folder in it, then Done (its done/), and the items of each in their order. archived/ is left out.
 
 <small>reads only</small>
 
@@ -104,7 +124,7 @@ todo-items <list>
 todo-items /groups/users/todos/Shopping
 ```
 
-With `JSON_OUTPUT=1`: The list (path, title, group, open, total) and its items (path, title, notes, done, doneAt, doneBy, due, assignee).
+With `JSON_OUTPUT=1`: The list (path, title, group, open, total), its columns (path, title, stage) and their items column by column (path, column, title, notes, done, doneAt, doneBy, due, assignee, order, links).
 
 ### `todo-link`
 
@@ -190,7 +210,7 @@ With `JSON_OUTPUT=1`: One entry per person: username and name.
 
 ### `todo-mine`
 
-List what is left for you to do: open items given to you on any list, and your own lists' open items given to nobody, soonest due first.
+List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column.
 
 <small>reads only</small>
 
@@ -202,32 +222,34 @@ todo-mine
 todo-mine
 ```
 
-With `JSON_OUTPUT=1`: One entry per item, as todo-items gives them, with listTitle and group.
+With `JSON_OUTPUT=1`: One entry per item, as todo-items gives them, with listTitle, group, columnTitle and stage (todo or doing).
 
 ### `todo-move`
 
-Put an open todo item just before or just after another on its list, numbering the list's open items in their new order.
+Move a todo item to another column of its list's board, at its end, or put it just before or just after another item, numbering that column's items in their new order. Into done/ it is marked done, out of it not done.
 
 <small>changes things</small>
 
 ```text
-todo-move [--before=<path>] [--after=<path>] <item>
+todo-move [--column=<path>] [--before=<path>] [--after=<path>] <item>
 ```
 
 | Argument | What it is             |
 | -------- | ---------------------- |
 | `<item>` | the item, by its path. |
 
-| Option            | What it does               |
-| ----------------- | -------------------------- |
-| `--before=<path>` | the item to put it before. |
-| `--after=<path>`  | the item to put it after.  |
+| Option            | What it does                                                             |
+| ----------------- | ------------------------------------------------------------------------ |
+| `--column=<path>` | the column: the list itself (Todo), or a folder in it such as its done/. |
+| `--before=<path>` | the item to put it before, in whichever column that is.                  |
+| `--after=<path>`  | the item to put it after, in whichever column that is.                   |
 
 ```bash
+todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --column '/groups/users/todos/Shopping/In the basket'
 todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --before /groups/users/todos/Shopping/2026-11-04-091500.md
 ```
 
-With `JSON_OUTPUT=1`: The item as it is now, with its order.
+With `JSON_OUTPUT=1`: The item as it is now, at its new path, with its column and order.
 
 ### `todo-set`
 

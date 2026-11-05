@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo lists – EiN documentation</title>
-    <meta name="description" content="The Todo module keeps lists of things to do: lists of your own that nobody else sees, and lists you share with a group, such as the household's shopping list. An item can have a day it is due and someone to do it, and what falls due shows on Home among the events.">
+    <meta name="description" content="The Todo module keeps lists of things to do: lists of your own that nobody else sees, and lists you share with a group, such as the household's shopping list. Each list is a board whose columns an item moves through, from Todo to Done. An item can have a day it is due and someone to do it, and what falls due shows on Home among the events.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/todo/">
     <meta property="og:title" content="Todo lists – EiN documentation">
-    <meta property="og:description" content="The Todo module keeps lists of things to do: lists of your own that nobody else sees, and lists you share with a group, such as the household's shopping list. An item can have a day it is due and someone to do it, and what falls due shows on Home among the events.">
+    <meta property="og:description" content="The Todo module keeps lists of things to do: lists of your own that nobody else sees, and lists you share with a group, such as the household's shopping list. Each list is a board whose columns an item moves through, from Todo to Done. An item can have a day it is due and someone to do it, and what falls due shows on Home among the events.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -90,8 +90,9 @@
         </header>
         <article class="prose">
 <p>The Todo module keeps lists of things to do: lists of your own that nobody else sees, and lists you
-share with a group, such as the household&#39;s shopping list. An item can have a day it is due and
-someone to do it, and what falls due shows on Home among the events.</p>
+share with a group, such as the household&#39;s shopping list. Each list is a board whose columns an
+item moves through, from Todo to Done. An item can have a day it is due and someone to do it, and
+what falls due shows on Home among the events.</p>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>Install it from <strong>Settings → Modules</strong>, or in EiN&#39;s terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
@@ -117,15 +118,26 @@ no front matter at all.</li>
 <li>A new item&#39;s file is named for when it was added, such as <code>2026-11-05-140322.md</code>, so the files
 sort in the order they came. Any other name works as well: rename a file, or write a text file of
 your own into the list, and it is an item.</li>
-<li>Items are in the order their <code>order</code> numbers say. Dragging an item on the page, or <code>todo-move</code>,
-numbers the open items from 1 in their new order; an item with no number comes after those that
-have one, in the order it was added.</li>
+<li>Items are in the order their <code>order</code> numbers say, in each column of the list. Dragging an item
+on the page, or <code>todo-move</code>, numbers the items of the column it lands in from 1 in their new
+order; an item with no number comes after those that have one, in the order it was added.</li>
 <li>An item can be about something else in EiN, such as a picture to fix or an album to sort: a
 <a href="../concepts/links.html">softlink</a> under the item&#39;s own file points at it, and goes with the item
 when it is done. When the picture is moved or renamed, the link follows it.</li>
-<li>A done item is moved to the list&#39;s <code>done/</code> folder, so <code>ls</code> of a list is what is left on it. An
-item in <code>done/</code> is done whether or not its file says so. Ticking it off on the page or with
-<code>todo-done</code> also writes <code>done:</code> and <code>done-by:</code> into its front matter, the time and who did it.</li>
+<li>A done item is moved to the list&#39;s <code>done/</code> folder. An item in <code>done/</code> is done whether or not its
+file says so. Moving it there on the page, or with <code>todo-done</code> or <code>todo-move</code>, also writes
+<code>done:</code> and <code>done-by:</code> into its front matter, the time and who did it.</li>
+</ul>
+<h2 id="columns-are-folders-too">Columns are folders too<a class="anchor" href="#columns-are-folders-too" aria-label="Link to this section"></a></h2>
+<p>A list is a board of columns, and an item is in one of them:</p>
+<ul>
+<li><strong>Todo</strong> is the list&#39;s own folder: what is not started yet. <code>ls</code> of a list is its Todo column.</li>
+<li>Every folder in the list is a column of its own, such as <code>In progress/</code> or <code>Waiting/</code>, in the
+order the folders were made. It is called by its folder&#39;s name, unless the folder has a <code>name</code>
+attribute, which is then its title: <code>attrs ~/todos/Fix/doing -s &#39;name=In progress&#39;</code>.</li>
+<li><strong>Done</strong> is the list&#39;s <code>done/</code> folder, always the last column. A new list has one from the start.</li>
+<li><code>archived/</code> is where done items are put away. It is no column, so they are off the board and out
+of the counts, but they are still files in the list.</li>
 </ul>
 <h2 id="your-own-lists-and-a-groups">Your own lists and a group&#39;s<a class="anchor" href="#your-own-lists-and-a-groups" aria-label="Link to this section"></a></h2>
 <p>A list is either yours or a group&#39;s, and that is decided when you make it:</p>
@@ -139,34 +151,46 @@ them, and nobody else sees them. Everyone with an account is in <code>users</cod
 <p>You can share a list only with a group that has a shared home and that you are in. <code>users</code> has one
 from the start; the administrator gives other groups theirs.</p>
 <h2 id="use-the-todo-page">Use the Todo page<a class="anchor" href="#use-the-todo-page" aria-label="Link to this section"></a></h2>
-<p>Open <strong>Todo</strong> in the sidebar. The box at the left lists <strong>What&#39;s mine</strong> and then every list you can
-see, each with how much is left on it and whose it is; type in <strong>Filter lists…</strong> to narrow them by
-title. On a phone the lists are under the list button in the page&#39;s bar.</p>
+<p>Open <strong>Todo</strong> in the sidebar. The bar at the top has a tab for <strong>Overview</strong> and then one for every
+list you can see, your own marked with a list and a group&#39;s with two people; hovering a tab says
+whose it is. On a phone the tabs scroll sideways.</p>
 <ul>
 <li><strong>Make a list</strong>: choose <strong>+</strong> in the page&#39;s bar, type a <strong>Title</strong> such as Shopping, and under
 <strong>Shared with</strong> keep <strong>Nobody, it is mine</strong> or pick a group. Choose <strong>Create list</strong>.</li>
-<li><strong>Add an item</strong>: open the list, type in <strong>Add an item</strong> and press <kbd>Enter</kbd>. The calendar
-button beside it picks a due day, and on a group&#39;s list <strong>Anyone</strong> picks who is to do it; both
-are optional.</li>
-<li><strong>Reorder</strong>: drag an open item by the grip at its left to where it belongs.</li>
-<li><strong>Tick an item off</strong>: its box marks it done, and it moves under <strong>Done</strong> at the foot of the list,
-where hovering the check mark says who did it and when. Untick it there to bring it back.</li>
-<li><strong>Change an item</strong>: the pencil opens its title, its notes, its due day and who is to do it;
-<strong>Save</strong> keeps the change. Under them are the item&#39;s links: the cross on one takes it away, and
-<strong>Link a path</strong> adds one, such as <code>/albums/Summer/beach.jpg</code>. <strong>Move to trash</strong> takes the item away into your <a href="../guide/profile.html">trash</a>, from where it can be
-restored.</li>
+<li><strong>Add an item</strong>: open the list&#39;s tab, choose <strong>Add an item</strong> at the foot of <strong>Todo</strong>, type what is
+to be done and press <kbd>Enter</kbd>. The line stays open for the next one; <kbd>Esc</kbd>
+closes it.</li>
+<li><strong>Move an item</strong>: drag its card to another place in the column, or to another column. Dropped on
+<strong>Done</strong> it is done, and dragged out of Done it is not. The arrows among an open card&#39;s buttons
+move it too, to a column you pick from a menu.</li>
+<li><strong>Give it to someone</strong>: the round button at a card&#39;s right is the face of whoever is to do it,
+their person&#39;s picture or their initials, or an empty circle when it is nobody&#39;s. Choose it to
+give the item to a member of the list&#39;s group, or to <strong>Nobody in particular</strong>.</li>
+<li><strong>Open a card</strong>: choose its title. It shows the notes and the links, and buttons to give it a due
+day, move it, mark it done or not done, and change it.</li>
+<li><strong>Change an item</strong>: the pencil on an open card shows its title, its notes, its due day and who is
+to do it; <strong>Save</strong> keeps the change. Under them are the item&#39;s links: the cross on one takes it
+away, and <strong>Link a path</strong> adds one, such as <code>/albums/Summer/beach.jpg</code>. <strong>Move to trash</strong> takes
+the item away into your <a href="../guide/profile.html">trash</a>, from where it can be restored.</li>
+<li><strong>Add a column</strong>: choose <strong>+</strong> just before <strong>Done</strong> and type its name. The pencil in a column&#39;s
+heading renames it, and the bin takes away a column with nothing in it. Todo cannot be renamed,
+and <code>done</code> and <code>archived</code> are names the list keeps for itself.</li>
+<li><strong>Archive done items</strong>: tick the cards in <strong>Done</strong> you want put away, or the box in its heading
+for all of them, and choose <strong>Archive</strong>. They move to the list&#39;s <code>archived/</code> folder.</li>
 </ul>
-<p>A due day that has passed is red. An item can be given only to a member of the list&#39;s group; on a
-list of your own every item is yours.</p>
-<p><strong>What&#39;s mine</strong> is what is left for you, soonest due first: the items given to you on any list, and
-the items of your own lists given to nobody. Each says the list it is on; choose that to open the
-list.</p>
+<p>A card shows its due day, red once it has passed, and a mark for notes and links when it has them.
+An item can be given only to a member of the list&#39;s group; on a list of your own every item is
+yours.</p>
+<p><strong>Overview</strong> is what is left for you, soonest due first: the items given to you on any list, and
+the items of your own lists given to nobody. It has two columns, <strong>Todo</strong> for what is not started
+and <strong>In progress</strong> for what is in any other column of its list. Each card says the list it is on,
+and the column when it is started; choose that to open the list&#39;s tab.</p>
 <p>To add an item from anywhere, choose <strong>Create → Todo item</strong> in the top bar, pick the list and
 choose <strong>Add</strong>. Opened while a picture, an album or another page about one thing is showing, it
 offers <strong>About</strong> that thing, ticked, and the new item links to it.</p>
-<p>An item&#39;s links show under its title, a picture as its thumbnail. Choosing one opens what it points
-at: a picture in the lightbox, an album or a person on their page. A link to something that is gone,
-or that you may not see, is greyed out.</p>
+<p>An open card&#39;s links are listed under its notes, a picture as its thumbnail. Choosing one opens what
+it points at: a picture in the lightbox, an album or a person on their page. A link to something
+that is gone, or that you may not see, is greyed out.</p>
 <h2 id="on-home">On Home<a class="anchor" href="#on-home" aria-label="Link to this section"></a></h2>
 <p>Home&#39;s <strong>Events</strong> lists the items falling due that are yours to do: given to you, or to nobody on
 a list you can see. They show from a week before they are due until a week after, beside the other
@@ -180,17 +204,21 @@ todo-list-create Shopping --group <span class="hljs-built_in">users</span>      
 todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span>                  <span class="hljs-comment"># a list of your own</span>
 todo-add /groups/users/todos/Shopping Milk
 todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <span class="hljs-string">&#x27;Renew the passport&#x27;</span> --due 2026-12-01
-todo-items /groups/users/todos/Shopping             <span class="hljs-comment"># the list and its items</span>
-<span class="hljs-built_in">ls</span> /groups/users/todos/Shopping                     <span class="hljs-comment"># what is left on it, as files</span>
+todo-items /groups/users/todos/Shopping             <span class="hljs-comment"># the list, its columns and their items</span>
+<span class="hljs-built_in">ls</span> /groups/users/todos/Shopping                     <span class="hljs-comment"># what is not started, as files</span>
 todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
 todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md
 todo-set /groups/users/todos/Shopping/2026-11-05-140322.md --assignee helen --due 2026-11-20
 todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --before /groups/users/todos/Shopping/2026-11-04-091500.md
+<span class="hljs-built_in">mkdir</span> <span class="hljs-string">&#x27;/groups/users/todos/Shopping/In the basket&#x27;</span>  <span class="hljs-comment"># a column</span>
+todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --column <span class="hljs-string">&#x27;/groups/users/todos/Shopping/In the basket&#x27;</span>
+todo-archive /groups/users/todos/Shopping/done/2026-11-05-140322.md
 todo-add ~/todos/Fix <span class="hljs-string">&#x27;Straighten the horizon&#x27;</span> --<span class="hljs-built_in">link</span> /albums/Summer/beach.jpg
 todo-link ~/todos/Fix/2026-11-05-150210.md /albums/Summer   <span class="hljs-comment"># another link</span>
 todo-mine                                           <span class="hljs-comment"># what is left for you</span></code></pre></div>
-<p>An item&#39;s path is its list&#39;s and then its file&#39;s name, which <code>todo-items</code> shows; a done item&#39;s is
-in the list&#39;s <code>done/</code>. An item&#39;s links are under its file, <code>…/2026-11-05-150210.md/beach.jpg</code>, and
+<p>An item&#39;s path is its list&#39;s, then its column&#39;s folder unless it is in Todo, and then its file&#39;s
+name, which <code>todo-items</code> shows; a done item&#39;s is in the list&#39;s <code>done/</code>, an archived one&#39;s in
+<code>archived/</code>. <code>todo-move --column</code> or <code>todo-done --undo</code> takes an archived item out again. An item&#39;s links are under its file, <code>…/2026-11-05-150210.md/beach.jpg</code>, and
 <code>rm</code> of one takes the link away and leaves the picture. Once <code>~/todos</code> is there, <code>mkdir</code> in it makes a list as well as <code>todo-list-create</code> does, and
 <code>cat</code> and any editor read and change an item. Remove an item, or a whole list, with
 <a href="../reference/commands-core.html#trash"><code>trash put</code></a>. <a href="commands.html">Todo commands</a> lists every
@@ -220,7 +248,7 @@ option.</p>
 <td>Make the list a group&#39;s to share it</td>
 </tr>
 <tr>
-<td>A list someone made is not in your box</td>
+<td>A list someone made has no tab</td>
 <td>It is someone else&#39;s own, or of a group you are not in</td>
 <td>Group changes apply the next time you sign in</td>
 </tr>
@@ -237,7 +265,12 @@ option.</p>
 <tr>
 <td>An item due long ago is not on Home</td>
 <td>Home shows a week back</td>
-<td><strong>What&#39;s mine</strong> lists every open item of yours, overdue or not</td>
+<td><strong>Overview</strong> lists every item of yours not done, overdue or not</td>
+</tr>
+<tr>
+<td>A folder in the list is not a column</td>
+<td>Its name starts with a dot, or it is <code>archived</code></td>
+<td>Rename the folder</td>
 </tr>
 </tbody></table>
 </div>
@@ -248,7 +281,7 @@ option.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/todo/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#lists-are-folders-items-are-files">Lists are folders, items are files</a></li><li><a href="#your-own-lists-and-a-groups">Your own lists and a group's</a></li><li><a href="#use-the-todo-page">Use the Todo page</a></li><li><a href="#on-home">On Home</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#lists-are-folders-items-are-files">Lists are folders, items are files</a></li><li><a href="#columns-are-folders-too">Columns are folders too</a></li><li><a href="#your-own-lists-and-a-groups">Your own lists and a group's</a></li><li><a href="#use-the-todo-page">Use the Todo page</a></li><li><a href="#on-home">On Home</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

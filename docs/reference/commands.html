@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 394 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 395 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 394 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 395 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -91,7 +91,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 394 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 395 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -1701,7 +1701,7 @@
 </tbody></table>
 </div>
 <h2 id="todo">Todo<a class="anchor" href="#todo" aria-label="Link to this section"></a></h2>
-<p><a href="../todo/commands.html">All 11 in full</a>.</p>
+<p><a href="../todo/commands.html">All 12 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1718,12 +1718,16 @@
 <td>Add an item to a todo list, a markdown file named for when it was added, with the day it is due and who is to do it if you like.</td>
 </tr>
 <tr>
+<td><a href="../todo/commands.html#todo-archive">todo-archive</a></td>
+<td>Put done todo items away in their list&#39;s archived/, which is no column of the board. todo-move or todo-done --undo takes one out again.</td>
+</tr>
+<tr>
 <td><a href="../todo/commands.html#todo-done">todo-done</a></td>
-<td>Mark a todo item done, with who did it and when, moving it to the list&#39;s done/; with --undo, not done again and back in the list.</td>
+<td>Mark a todo item done, with who did it and when, moving it to the list&#39;s done/; with --undo, not done again and back in the list&#39;s Todo.</td>
 </tr>
 <tr>
 <td><a href="../todo/commands.html#todo-items">todo-items</a></td>
-<td>Show a todo list and its items: the open ones, then those in its done/, each in the order they were added.</td>
+<td>Show a todo list&#39;s board: its columns, Todo (the list itself), each folder in it, then Done (its done/), and the items of each in their order. archived/ is left out.</td>
 </tr>
 <tr>
 <td><a href="../todo/commands.html#todo-link">todo-link</a></td>
@@ -1743,11 +1747,11 @@
 </tr>
 <tr>
 <td><a href="../todo/commands.html#todo-mine">todo-mine</a></td>
-<td>List what is left for you to do: open items given to you on any list, and your own lists&#39; open items given to nobody, soonest due first.</td>
+<td>List what is left for you to do: items not done given to you on any list, and your own lists&#39; items not done given to nobody, soonest due first, each with its column.</td>
 </tr>
 <tr>
 <td><a href="../todo/commands.html#todo-move">todo-move</a></td>
-<td>Put an open todo item just before or just after another on its list, numbering the list&#39;s open items in their new order.</td>
+<td>Move a todo item to another column of its list&#39;s board, at its end, or put it just before or just after another item, numbering that column&#39;s items in their new order. Into done/ it is marked done, out of it not done.</td>
 </tr>
 <tr>
 <td><a href="../todo/commands.html#todo-set">todo-set</a></td>
