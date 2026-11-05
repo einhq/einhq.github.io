@@ -81,10 +81,11 @@ Open **Todo** in the sidebar. The bar at the top has a tab for **Overview** and 
 list you can see, your own marked with a list and a group's with two people; hovering a tab says
 whose it is. On a phone the tabs scroll sideways.
 
-A list's columns share the width of the page and run to its foot; each scrolls its own cards. When
+A list's columns stand side by side in one frame, in alternating shades, sharing the width of the
+page and running to its foot; each scrolls its own cards. When
 there are more than fit, the board scrolls sideways, and on a phone it shows one column at a time.
 
-- **Make a list**: choose **⋯** in the page's bar and **New list**, type a **Title** such as Shopping, and under
+- **Make a list**: choose **⋮** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
 - **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** and press
   <kbd>Enter</kbd>. The line stays for the next one.
@@ -107,7 +108,7 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
   it, and the cross on one takes it away.
 - **Delete an item**: **Delete** in the dialog removes it for good, with its links; what they point
   at stays where it is.
-- **Add a column**: open the list's tab, choose **⋯** in the page's bar and **New column**, and type
+- **Add a column**: open the list's tab, choose **⋮** in the page's bar and **New column**, and type
   its name; it comes before **Done**. The pencil in a column's heading renames it and, once no card
   is left in it, **Delete** takes it away. Todo cannot be renamed, Done cannot be deleted, and
   `done` and `archived` are names the list keeps for itself.
