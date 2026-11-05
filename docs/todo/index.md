@@ -145,6 +145,14 @@ a list you can see. They show from a week before they are due until a week after
 events, and choosing one opens its list. [Home and statistics](../guide/home.md) covers the rest of
 Home.
 
+## Ask the assistant
+
+With the [Assistant](../assistant/index.md) installed, the chat reads and changes your lists too:
+ask "what's on the shopping list?", "what do I have left to do?" or "add milk and bread to the
+shopping list". It finds a list you name among those you can see, and with a list open on the Todo
+page, "this list" and "add it" mean that one. Reading happens at once; adding, ticking off, moving
+or changing an item is a [proposal card](../assistant/chat.md#when-the-assistant-offers-to-make-a-change) you run or decline.
+
 ## From the terminal
 
 Every part of the page is a command, and a list or an item is named by its path:

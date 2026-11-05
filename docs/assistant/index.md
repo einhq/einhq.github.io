@@ -29,6 +29,9 @@ someone's timeline, and can draw a family tree or a map under an answer. The Arc
 then reads a sentence typed into it with the assistant's language model too
 ([The language model](language-model.md#what-the-language-model-is-for)).
 
+With [Todo](../todo/index.md) installed, it reads your todo lists and what is left for you to do, and
+proposes adding, ticking off and moving their items.
+
 ## What it needs
 
 A language model that speaks the OpenAI chat API. The module brings none of its own:
