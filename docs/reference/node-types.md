@@ -19,8 +19,6 @@ What the archive is made of: what people add, and what EiN works out about it.
 | `media-region` Region | A box on a photo, kept under the photo's regions/ directory: a face the detector found, a box someone drew, or a tag imported from the old archive. It carries who is in it. A region that shows a usable face has the face's vector as a child named embedding, and only those take part in face recognition. |  | Archive |
 | `person` Person | Someone in the archive, with names, dates of birth and death, and contact details. Parents, children and partners are links between people; the photos they appear in are found by their faces. | `/archive/people` | Archive |
 | `position` Position | A point on the map with an optional radius or outline. A photo, a location or an event keeps where it is as a child named position. |  | Core |
-| `todo` Todo item | One thing to do, in a todo list: its title, whether it is done and by whom and when, and optionally the day it is due and who is to do it. |  | Todo |
-| `todo-list` Todo list | A list of things to do, holding its items: in its owner's home under todos/, or in a group's shared home under todos/, where every member of the group shares it. |  | Todo |
 | `track` Track | The route a device recorded, kept as the device's child named track: timestamped GPS points, live or from imported GPX files, summarised by their extent and time span. |  | Core |
 
 ## Structure

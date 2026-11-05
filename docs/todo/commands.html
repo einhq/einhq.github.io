@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Todo commands – EiN documentation</title>
-    <meta name="description" content="The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="description" content="The commands the todo module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/todo/commands.html">
     <meta property="og:title" content="Todo commands – EiN documentation">
-    <meta property="og:description" content="The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:description" content="The commands the todo module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -90,8 +90,8 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>The commands the todo module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
-<p><a href="#events-todo">events-todo</a> · <a href="#todo-add">todo-add</a> · <a href="#todo-done">todo-done</a> · <a href="#todo-items">todo-items</a> · <a href="#todo-list-create">todo-list-create</a> · <a href="#todo-lists">todo-lists</a> · <a href="#todo-members">todo-members</a> · <a href="#todo-mine">todo-mine</a> · <a href="#todo-set">todo-set</a></p>
+<p>The commands the todo module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#events-todo">events-todo</a> · <a href="#todo-add">todo-add</a> · <a href="#todo-done">todo-done</a> · <a href="#todo-items">todo-items</a> · <a href="#todo-link">todo-link</a> · <a href="#todo-list-create">todo-list-create</a> · <a href="#todo-lists">todo-lists</a> · <a href="#todo-members">todo-members</a> · <a href="#todo-mine">todo-mine</a> · <a href="#todo-move">todo-move</a> · <a href="#todo-set">todo-set</a></p>
 <h2 id="e">E<a class="anchor" href="#e" aria-label="Link to this section"></a></h2>
 <h3 id="events-todo"><code>events-todo</code><a class="anchor" href="#events-todo" aria-label="Link to this section"></a></h3>
 <p>Home&#39;s events from the todo lists: open items due around a day that are yours, given to you or to nobody.</p>
@@ -126,9 +126,9 @@
 <p>With <code>JSON_OUTPUT=1</code>: One events entry per item: title, route, path and date.</p>
 <h2 id="t">T<a class="anchor" href="#t" aria-label="Link to this section"></a></h2>
 <h3 id="todo-add"><code>todo-add</code><a class="anchor" href="#todo-add" aria-label="Link to this section"></a></h3>
-<p>Add an item to a todo list, with the day it is due and who is to do it if you like.</p>
+<p>Add an item to a todo list, a markdown file named for when it was added, with the day it is due and who is to do it if you like.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>todo-add [--due=&lt;string&gt;] [--assignee=&lt;user&gt;] &lt;list&gt; &lt;title&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>todo-add [--due=&lt;string&gt;] [--assignee=&lt;user&gt;] [--link=&lt;path&gt;] &lt;list&gt; &lt;title&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -161,13 +161,17 @@
 <td><code>--assignee=&lt;user&gt;</code></td>
 <td>who is to do it: a member of the list&#39;s group, or you on a list of your own.</td>
 </tr>
+<tr>
+<td><code>--link=&lt;path&gt;</code></td>
+<td>what it is about, such as a picture or an album: a softlink under the item.</td>
+</tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-add /groups/users/todos/shopping Milk
-todo-add ~/todos/before-the-trip <span class="hljs-string">&quot;Renew the passport&quot;</span> --due 2026-12-01</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The new item: path, list, title, done, due and assignee.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-add /groups/users/todos/Shopping Milk
+todo-add ~/todos/<span class="hljs-string">&#x27;Before the trip&#x27;</span> <span class="hljs-string">&#x27;Renew the passport&#x27;</span> --due 2026-12-01</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The new item: path, list, title, done, due, assignee and links.</p>
 <h3 id="todo-done"><code>todo-done</code><a class="anchor" href="#todo-done" aria-label="Link to this section"></a></h3>
-<p>Mark a todo item done, with who did it and when, or with --undo not done again.</p>
+<p>Mark a todo item done, with who did it and when, moving it to the list&#39;s done/; with --undo, not done again and back in the list.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>todo-done [--undo] &lt;item&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -196,10 +200,11 @@ todo-add ~/todos/before-the-trip <span class="hljs-string">&quot;Renew the passp
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-done /groups/users/todos/shopping/01JB...</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The item as it is now, with doneAt and doneBy when it is done.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-done /groups/users/todos/Shopping/2026-11-05-140322.md
+todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The item as it is now, at its new path, with doneAt and doneBy when it is done.</p>
 <h3 id="todo-items"><code>todo-items</code><a class="anchor" href="#todo-items" aria-label="Link to this section"></a></h3>
-<p>Show a todo list and its items, in the order they were added.</p>
+<p>Show a todo list and its items: the open ones, then those in its done/, each in the order they were added.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>todo-items &lt;list&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -215,10 +220,33 @@ todo-add ~/todos/before-the-trip <span class="hljs-string">&quot;Renew the passp
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-items /groups/users/todos/shopping</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The list (path, title, group, open, total) and its items (path, title, done, doneAt, doneBy, due, assignee).</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-items /groups/users/todos/Shopping</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The list (path, title, group, open, total) and its items (path, title, notes, done, doneAt, doneBy, due, assignee).</p>
+<h3 id="todo-link"><code>todo-link</code><a class="anchor" href="#todo-link" aria-label="Link to this section"></a></h3>
+<p>Link a todo item to what it is about, such as a picture or an album: a softlink under the item&#39;s file, named as what it points at. rm takes one away.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-link &lt;item&gt; &lt;path&gt;...</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;item&gt;</code></td>
+<td>the item, by its path.</td>
+</tr>
+<tr>
+<td><code>&lt;path&gt;...</code></td>
+<td>what it is about.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-link ~/todos/Fix/2026-11-05-140322.md /albums/Summer/beach.jpg</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The item as it is now, with its links.</p>
 <h3 id="todo-list-create"><code>todo-list-create</code><a class="anchor" href="#todo-list-create" aria-label="Link to this section"></a></h3>
-<p>Make a todo list: your own, in ~/todos, or with --group one every member of the group shares, in the group&#39;s shared home.</p>
+<p>Make a todo list, a folder named by its title: your own, in ~/todos, or with --group one every member of the group shares, in the group&#39;s shared home.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>todo-list-create [--group=&lt;group&gt;] &lt;title&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -273,7 +301,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-members /groups/users/todos/shopping</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-members /groups/users/todos/Shopping</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: One entry per person: username and name.</p>
 <h3 id="todo-mine"><code>todo-mine</code><a class="anchor" href="#todo-mine" aria-label="Link to this section"></a></h3>
 <p>List what is left for you to do: open items given to you on any list, and your own lists&#39; open items given to nobody, soonest due first.</p>
@@ -281,10 +309,46 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 <div class="code"><pre tabindex="0"><code>todo-mine</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>todo-mine</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: One entry per item, as todo-items gives them, with listTitle and group.</p>
-<h3 id="todo-set"><code>todo-set</code><a class="anchor" href="#todo-set" aria-label="Link to this section"></a></h3>
-<p>Change a todo item&#39;s title, the day it is due, or who is to do it.</p>
+<h3 id="todo-move"><code>todo-move</code><a class="anchor" href="#todo-move" aria-label="Link to this section"></a></h3>
+<p>Put an open todo item just before or just after another on its list, numbering the list&#39;s open items in their new order.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>todo-set [--title=&lt;string&gt;] [--due=&lt;string&gt;] [--no-due] [--assignee=&lt;user&gt;] [--no-assignee] &lt;item&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>todo-move [--before=&lt;path&gt;] [--after=&lt;path&gt;] &lt;item&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;item&gt;</code></td>
+<td>the item, by its path.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--before=&lt;path&gt;</code></td>
+<td>the item to put it before.</td>
+</tr>
+<tr>
+<td><code>--after=&lt;path&gt;</code></td>
+<td>the item to put it after.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-move /groups/users/todos/Shopping/2026-11-05-140322.md --before /groups/users/todos/Shopping/2026-11-04-091500.md</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The item as it is now, with its order.</p>
+<h3 id="todo-set"><code>todo-set</code><a class="anchor" href="#todo-set" aria-label="Link to this section"></a></h3>
+<p>Change a todo item&#39;s title, its notes, the day it is due, or who is to do it.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>todo-set [--title=&lt;string&gt;] [--notes=&lt;string&gt;] [--due=&lt;string&gt;] [--no-due] [--assignee=&lt;user&gt;] [--no-assignee] &lt;item&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -310,6 +374,10 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 <td>its new title.</td>
 </tr>
 <tr>
+<td><code>--notes=&lt;string&gt;</code></td>
+<td>what the file says under the title, in place of what it said; empty for none.</td>
+</tr>
+<tr>
 <td><code>--due=&lt;string&gt;</code></td>
 <td>the day it is due, as YYYY-MM-DD.</td>
 </tr>
@@ -327,7 +395,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-set /groups/users/todos/shopping/01JB... --due 2026-11-20 --assignee anna</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>todo-set /groups/users/todos/Shopping/2026-11-05-140322.md --due 2026-11-20 --assignee anna</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The item as it is now.</p>
 
         </article>
@@ -336,7 +404,7 @@ todo-list-create <span class="hljs-string">&#x27;Before the trip&#x27;</span></c
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/todo/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#e">E</a></li><li class="nested"><a href="#events-todo">events-todo</a></li><li><a href="#t">T</a></li><li class="nested"><a href="#todo-add">todo-add</a></li><li class="nested"><a href="#todo-done">todo-done</a></li><li class="nested"><a href="#todo-items">todo-items</a></li><li class="nested"><a href="#todo-list-create">todo-list-create</a></li><li class="nested"><a href="#todo-lists">todo-lists</a></li><li class="nested"><a href="#todo-members">todo-members</a></li><li class="nested"><a href="#todo-mine">todo-mine</a></li><li class="nested"><a href="#todo-set">todo-set</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#e">E</a></li><li class="nested"><a href="#events-todo">events-todo</a></li><li><a href="#t">T</a></li><li class="nested"><a href="#todo-add">todo-add</a></li><li class="nested"><a href="#todo-done">todo-done</a></li><li class="nested"><a href="#todo-items">todo-items</a></li><li class="nested"><a href="#todo-link">todo-link</a></li><li class="nested"><a href="#todo-list-create">todo-list-create</a></li><li class="nested"><a href="#todo-lists">todo-lists</a></li><li class="nested"><a href="#todo-members">todo-members</a></li><li class="nested"><a href="#todo-mine">todo-mine</a></li><li class="nested"><a href="#todo-move">todo-move</a></li><li class="nested"><a href="#todo-set">todo-set</a></li></ul></aside>
     </div>
   </body>
 </html>

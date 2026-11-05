@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 385 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 387 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -432,16 +432,18 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Todo
 
-[All 9 in full](../todo/commands.md).
+[All 11 in full](../todo/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [events-todo](../todo/commands.md#events-todo) | Home's events from the todo lists: open items due around a day that are yours, given to you or to nobody. |
-| [todo-add](../todo/commands.md#todo-add) | Add an item to a todo list, with the day it is due and who is to do it if you like. |
-| [todo-done](../todo/commands.md#todo-done) | Mark a todo item done, with who did it and when, or with --undo not done again. |
-| [todo-items](../todo/commands.md#todo-items) | Show a todo list and its items, in the order they were added. |
-| [todo-list-create](../todo/commands.md#todo-list-create) | Make a todo list: your own, in ~/todos, or with --group one every member of the group shares, in the group's shared home. |
+| [todo-add](../todo/commands.md#todo-add) | Add an item to a todo list, a markdown file named for when it was added, with the day it is due and who is to do it if you like. |
+| [todo-done](../todo/commands.md#todo-done) | Mark a todo item done, with who did it and when, moving it to the list's done/; with --undo, not done again and back in the list. |
+| [todo-items](../todo/commands.md#todo-items) | Show a todo list and its items: the open ones, then those in its done/, each in the order they were added. |
+| [todo-link](../todo/commands.md#todo-link) | Link a todo item to what it is about, such as a picture or an album: a softlink under the item's file, named as what it points at. rm takes one away. |
+| [todo-list-create](../todo/commands.md#todo-list-create) | Make a todo list, a folder named by its title: your own, in ~/todos, or with --group one every member of the group shares, in the group's shared home. |
 | [todo-lists](../todo/commands.md#todo-lists) | List the todo lists you can see: your own, then those in the shared homes of your groups. |
 | [todo-members](../todo/commands.md#todo-members) | List who an item of a todo list may be given to: the members of the list's group, or you for a list of your own. |
 | [todo-mine](../todo/commands.md#todo-mine) | List what is left for you to do: open items given to you on any list, and your own lists' open items given to nobody, soonest due first. |
-| [todo-set](../todo/commands.md#todo-set) | Change a todo item's title, the day it is due, or who is to do it. |
+| [todo-move](../todo/commands.md#todo-move) | Put an open todo item just before or just after another on its list, numbering the list's open items in their new order. |
+| [todo-set](../todo/commands.md#todo-set) | Change a todo item's title, its notes, the day it is due, or who is to do it. |
