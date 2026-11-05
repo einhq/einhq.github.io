@@ -411,7 +411,7 @@ agent-eval --<span class="hljs-built_in">limit</span> 5 --verbose
 </tr>
 <tr>
 <td><code>llm-status --checks</code> says <code>on the CPU</code>, or answers are slow on a machine with a card</td>
-<td><code>on the CPU</code> means <code>EIN_GPU=0</code> in <code>.env</code>. Slow answers with a card can also mean the media service left too little of it; <code>podman compose logs llm</code> says how many layers went to the card. See <a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a> and <a href="../ems/gpu.html">The graphics card</a>.</td>
+<td><code>on the CPU</code> means <code>EIN_GPU=0</code> in <code>.env</code>. Slow answers with a card can also mean the media service left too little of it; <code>podman compose logs llm</code> says how many of its layers fit on the card when it started. See <a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a> and <a href="../ems/gpu.html">The graphics card</a>.</td>
 </tr>
 <tr>
 <td>The <code>llm</code> container restarts again and again</td>

@@ -269,7 +269,10 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 ems-status --checks
 ems-gpu
 llm-status</code></pre></div>
-<p><code>llm-status</code> says whose the language model is and where it runs, such as <code>http://llm:8190: ours, on the card</code> (<a href="../assistant/commands.html#llm-status">reference</a>). It repeats what <code>CFG_LLM_CARD</code> says. How many layers the model really holds on the card is in its log (<code>podman compose logs llm</code>), which starts with the part of the card it was given, such as <code>llm: 6211 MB of the card, 7552 MB of it in use by others: 2548 MB left free beside the model</code>.</p>
+<p><code>llm-status</code> says whose the language model is and where it runs, such as <code>http://llm:8190: ours, on the card</code> (<a href="../assistant/commands.html#llm-status">reference</a>). It repeats what <code>CFG_LLM_CARD</code> says. How many of the model&#39;s layers really fit on the card is in its log (<code>podman compose logs llm</code>), which starts with the part of the card it was given and how many layers fit there, worked out at every start:</p>
+<div class="code"><pre tabindex="0"><code>llm: 6211 MB of the card, 7552 MB of it in use by others: 2548 MB left free beside the model
+llm: all of the model's layers fit there</code></pre></div>
+<p>When they do not all fit, the second line says how many did, such as <code>llm: 25 of the model&#39;s layers fit there; the others run on the CPU, at a fraction of the speed</code>.</p>
 <p>To prove that every model really computes on the card, run the media service&#39;s self-test inside its container. It loads each model in turn and prints the device it bound to, ending with <code>all GPU checks passed</code> or a list of failures. It needs most of the card, so run it while the archive is not busy:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_selftest.py</code></pre></div>
@@ -372,7 +375,7 @@ podman compose up -d</code></pre></div>
 </tr>
 <tr>
 <td>The chat answers slowly on a machine with a card</td>
-<td>The language model got only some of its layers, or none. Its log, <code>podman compose logs llm</code>, says how many went to the card. Raise the part of the card it gets by lowering <code>LLM_CARD_RESERVE_MB</code> and <code>EMS_CARD_SHARE_MB</code> together.</td>
+<td>The language model got only some of its layers, or none. Its log, <code>podman compose logs llm</code>, says how many fit on the card when it started. Raise the part of the card it gets by lowering <code>LLM_CARD_RESERVE_MB</code> and <code>EMS_CARD_SHARE_MB</code> together.</td>
 </tr>
 <tr>
 <td>A transcription waits for a long time</td>
