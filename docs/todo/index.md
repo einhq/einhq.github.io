@@ -91,9 +91,9 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
   <kbd>Enter</kbd>. The line stays for the next one.
 - **Move an item**: drag its card to another place in the column, or to another column; a dashed
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
-- **Give it to someone**: the round button at a card's right is the face of whoever is to do it,
-  their person's picture or their initials, or an empty circle when it is nobody's. Choose it to
-  give the item to a member of the list's group, or to **Nobody in particular**.
+- **Assign it**: the round button at a card's right is the face of whoever is to do it, their
+  person's picture or their initials, or an empty circle when it is nobody's. Choose it and, under
+  **Assign to**, a member of the list's group, or **Nobody in particular**.
 - **Give it a due day**: the calendar in a card's heading picks one; once set, the day stands there
   instead and opens the picker again, where **No due day** takes it away.
 - **Read the description**: a card shows the first line of its description, with **…** when there
@@ -124,8 +124,8 @@ when it was added.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
-**Overview** is what is left for you, soonest due first: the items given to you on any list, and
-the items of your own lists given to nobody. It has two columns, **Todo** for what is not started
+**Overview** is what is left for you, soonest due first: the items assigned to you on any list, and
+the items of your own lists assigned to nobody. It has two columns, **Todo** for what is not started
 and **In progress** for what is in any other column of its list. Each card says the list it is on,
 and the column when it is started; choose that to open the list's tab.
 
