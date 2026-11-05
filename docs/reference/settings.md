@@ -612,7 +612,7 @@ Every setting of an EiN with all its modules: 86 of them, in the groups the Sett
 
 ### `CFG_MEDIA_HEAL_REST`
 
-**Rest after a full gap check (seconds)**. How long the background gap check waits after it has been through the whole archive before it starts over.
+**Rest after a full gap check (seconds)**. How long the background gap check waits after a pass through the whole archive that found nothing before it starts another.
 
 | | |
 | --- | --- |

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 384 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 385 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -249,7 +249,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 151 in full](../archive/commands.md).
+[All 152 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -327,6 +327,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [location-timeline](../archive/commands.md#location-timeline) | What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it. |
 | [location-update](../archive/commands.md#location-update) | Change a location's name, address, description, city or country. |
 | [media-details](../archive/commands.md#media-details) | Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file. |
+| [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the archive when one is due: none is running or failed, the last found something or rested, and not all its media work waits. |
 | [media-reembed](../archive/commands.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
 | [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
 | [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
