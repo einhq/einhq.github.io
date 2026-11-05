@@ -117,6 +117,10 @@ there are more than fit, the board scrolls sideways, and on a phone it shows one
 
 On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
 over it; on a phone they are always there. A due day that has passed is red.
+
+A card's heading is coloured by how long it has been on the list: green on the day it is added,
+then yellow, and red once it is four weeks old; a done card's is grey. Hovering the heading says
+when it was added.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
