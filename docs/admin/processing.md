@@ -126,8 +126,10 @@ status and the steps: **Step**, **Status**, **Depends on**, **Command** and **Du
 | `failed`    | Failed on its last attempt                                                                           |
 | `skipped`   | Not run: its condition said no, or the instance was cancelled                                        |
 
-Choose a step to see its **Exit code**, its **Attempts**, its pool and its condition, and for a
-failed step the **Error** it wrote. In the terminal, `pipeline-status` prints the same:
+Choose a step to see its **Exit code**, its **Attempts**, its pool and its condition, for a
+failed step the **Error** it wrote, and for a completed step that wrote something the end of its
+**Output**, where a command that sums up what it did says it. In the terminal, `pipeline-status`
+prints the same:
 
 ```bash
 # in EiN's terminal

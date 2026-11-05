@@ -256,8 +256,10 @@ status and the steps: <strong>Step</strong>, <strong>Status</strong>, <strong>De
 </tr>
 </tbody></table>
 </div>
-<p>Choose a step to see its <strong>Exit code</strong>, its <strong>Attempts</strong>, its pool and its condition, and for a
-failed step the <strong>Error</strong> it wrote. In the terminal, <code>pipeline-status</code> prints the same:</p>
+<p>Choose a step to see its <strong>Exit code</strong>, its <strong>Attempts</strong>, its pool and its condition, for a
+failed step the <strong>Error</strong> it wrote, and for a completed step that wrote something the end of its
+<strong>Output</strong>, where a command that sums up what it did says it. In the terminal, <code>pipeline-status</code>
+prints the same:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pipeline-status media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code></pre></div>
 <p>An instance is named after the node it works on, so one file has the same id in every pipeline

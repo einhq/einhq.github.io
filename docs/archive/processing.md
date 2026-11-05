@@ -25,7 +25,7 @@ The Archive runs these services for its processing:
 | `media-worker`   | The worker for the rest: reading metadata, thumbnails and video renditions the media service makes while it waits, matching faces, staging |
 | `models`         | The worker for work done by a model in the [media service](../ems/index.md), such as finding faces or transcribing speech                  |
 | `models-second`  | A second model worker beside `models`, when `CFG_MODEL_SECOND_SLOTS` is above `0`; at the default `0` it runs idle and takes no work       |
-| `media-heal`     | Finds files that are missing something and announces them again (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed))  |
+| `media-heal`     | Starts a pass of the `media-heal` pipeline when one is due (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed))       |
 
 Its other services, which keep albums, person covers, label suggestions and staging up to date,
 are listed in [Services and logs](../admin/services-logs.md). Most of the model work and much of
@@ -65,6 +65,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                     | run by the engine              |
 | `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                                | run by the engine              |
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                          | run by the engine              |
+| `media-heal`           | Goes through the whole archive and announces the files missing work the other pipelines should have done        | run by the engine              |
 
 ## The workers
 
@@ -127,19 +128,28 @@ something a pipeline should have given it: a fingerprint, display sizes, faces, 
 transcript made with other settings than the media service runs now. Each pipeline then skips
 what is already done.
 
-The `media-heal` service runs it for you. It holds back a gap whose pipeline already has work
-waiting, so a scan never repeats what is already on its way, and announces the rest: a long queue
-of one kind of work, such as faces, does not keep voices or fingerprints from being found. Each scan
-goes through the whole archive and announces every gap it finds as it goes, so the work it starts
-shows on the dashboard and in `health` until it is done. It goes through the archive 5000 files at a
-time and remembers where it is, so a restart of EiN does not send it back to the beginning. The gaps
-it held back get a scan of their own once their pipelines have nothing waiting. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
-(900), and after a scan that finds nothing and holds nothing back it rests for
-`CFG_MEDIA_HEAL_REST` seconds (21600, six hours).
+The `media-heal` pipeline runs it for you over `/archive/albums`. Each pass is one instance, which
+shows under **Ongoing** on the **Dashboard** with how far through the archive it has come; it is
+housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
+pipeline already has work waiting, so it never repeats what is already on its way, and announces
+the rest: a long queue of one kind of work, such as faces, does not keep voices or fingerprints
+from being found. It announces every gap as it finds it, so the work it starts shows on the
+dashboard and in `health` until it is done. It remembers where it is every thousand files, so a
+restart of EiN does not send it back to the beginning. When a pass ends, the **Output** of its step
+says how many files it went through, how many gaps it announced and which kinds it held back. A
+pass that fails is a failed instance, run again like any other [failed work](../admin/processing.md).
+
+The `media-heal` service says when a pass is due. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
+(900) and starts one unless one is running, the last one failed, or every kind of gap it would look
+for has work waiting. The kinds the last pass held back get a pass of their own once their pipelines
+have nothing waiting. After a pass that finds nothing and holds nothing back it rests for
+`CFG_MEDIA_HEAL_REST` seconds (21600, six hours). `media-heal -n` says whether a pass is due now,
+and `media-heal --rest 0` starts one without waiting out the rest.
 
 Faces, picture and text vectors, text in pictures and transcripts are compared with the models the
-media service runs now, so a scan needs the service to answer. While it does not, `media-heal`
-waits and looks again later rather than going on without those checks. Run by hand, `media-scan`
+media service runs now, so a scan needs the service to answer. While it does not, a pass ends
+without going through the archive, and the service starts it again at its next look, rather than
+going on without those checks. Run by hand, `media-scan`
 goes on and names the kinds of gap it could not check; scan for those again with `--only` and
 `--restart` once the service is back.
 
