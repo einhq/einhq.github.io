@@ -85,21 +85,27 @@ whose it is. On a phone the tabs scroll sideways.
 
 A list's columns fill the page under the bar side by side, a line between each, sharing its width
 and running to its foot; each scrolls its own cards. When there are more than fit, the board
-scrolls sideways. On a phone the columns stand one under the other and the board scrolls down.
+scrolls sideways.
 
-On a phone a list reads as a plain list, one row per item rather than a card:
+On a phone a list reads as a plain list: one row per item, the columns one after the other with no
+headings, Todo first and Done last.
 
 - The round box at a row's left ticks the item off, moving it to **Done**; unticking it in Done
   moves it back to **Todo**.
 - A spinner before the title says the item is under way: it is in a column of your own, neither
   Todo nor Done.
-- At the right are its due day (or a calendar to give it one), whoever is to do it, the pencil, and,
-  when it has a description, a chevron that unfolds it.
-- What it links to shows under the title as pictures alone; holding one says what it is.
+- A chevron after the title, when the item has a description, unfolds it.
+- At the right are its due day (or a calendar to give it one) and whoever is to do it.
+- What it links to shows under the title as pictures alone.
+- Hold a row still for half a second to open the item in its dialog; hold it and move to move it.
+- **Add an item** floats at the foot of the screen, and adds to Todo.
+- Columns are made, renamed and deleted, and done items archived, on a computer, or with the
+  commands below.
 
 - **Make a list**: choose **⋮** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
-- **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** and press
+- **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** (on a phone,
+  of the screen) and press
   <kbd>Enter</kbd>. The line stays for the next one. <kbd>Shift</kbd>+<kbd>Enter</kbd>, or pasting
   several lines, gives it more: the first line is the item's title and the lines after it its
   description, blank ones at its top and foot left out.
@@ -114,7 +120,8 @@ On a phone a list reads as a plain list, one row per item rather than a card:
   instead and opens the picker again, where **No due day** takes it away.
 - **Read the description**: a card shows the first line of its description, with **…** when there
   is more. Choose it to read the whole of it, as formatted Markdown, and again to fold it.
-- **Change an item**: the pencil in a card's heading opens the item in a dialog: its **Title**, its
+- **Change an item**: the pencil in a card's heading, or on a phone a long press on its row, opens
+  the item in a dialog: its **Title**, its
   **Description**, written in Markdown (lists, links, **bold**; **Preview** shows how it will look),
   the day it is **Due**, and **Assign to**, where typing a name narrows the members to choose from.
   **Save** keeps the change.
@@ -133,8 +140,7 @@ On a phone a list reads as a plain list, one row per item rather than a card:
   every item on it, archived ones too, and for everyone a group's list is shared with; what the items
   link to stays where it is.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
-  for all of them, and choose **Archive**. They move to the list's `archived/` folder. On a phone a
-  row's box is for done and not done, so the box in Done's heading is the way to pick them.
+  for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
 On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
 over it. A due day that has passed is red.
