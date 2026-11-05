@@ -365,13 +365,14 @@ pipelines with it. Core brings none, so without a module EiN keeps what you give
 nothing out.</p>
 <p>With the <a href="../archive/index.html">Archive</a> installed, uploading a photo sets off a chain:</p>
 <ol>
-<li>The Archive notices the uploaded photo, video or recording and announces it.</li>
-<li><code>media-ingest</code> reads the file&#39;s metadata, such as the camera, the time it was taken and where,
+<li>The Media module notices the uploaded photo, video or recording and announces it.</li>
+<li><code>media-ingest</code> reads the file&#39;s metadata, such as the camera, its clocks and its GPS fix,
 through the media service.</li>
-<li>Its result starts the rest, each a pipeline of its own: thumbnails and display sizes, video and
-audio the browser can play, the faces on it, a picture vector for searching by meaning, text read
-from the picture, a transcript of what is said in a video or recording, a fingerprint that finds
-copies, the address of its GPS position, and a link to the location that contains it.</li>
+<li>Its result starts the rest, each a pipeline of its own: when and where it was taken, thumbnails
+and display sizes, video and audio the browser can play, the faces on it, a picture vector for
+searching by meaning, text read from the picture, a transcript of what is said in a video or
+recording, a fingerprint that finds copies, the address of its GPS position, and a link to the
+location that contains it.</li>
 <li>What these write are changes too, and they start what depends on them, such as matching the
 faces to the people they show.</li>
 </ol>

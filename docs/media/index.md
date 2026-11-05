@@ -1,11 +1,11 @@
 # Media
 
-The Media module makes the thumbnails, display sizes and playable copies of every picture, video
-and recording in a folder that wants them, and keeps them current. It also runs the media work the
-other modules hand it, so that a large import never starts it all at once: with the
-[Archive](../archive/index.md), reading each picture's metadata, finding and matching faces,
-picture vectors, text in pictures and transcripts. It holds the workers of the pool that work
-waits in, and their settings. The Archive needs it, so it comes with the Archive.
+The Media module reads every picture, video and recording as it arrives, and makes the thumbnails,
+display sizes and playable copies of each in a folder that wants them, and keeps them current. It
+also runs the media work the other modules hand it, so that a large import never starts it all at
+once: with the [Archive](../archive/index.md), dating and placing each file, finding and matching
+faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that
+work waits in, and their settings. The Archive needs it, so it comes with the Archive.
 
 ## Install it
 
@@ -17,6 +17,31 @@ mod install media
 ```
 
 [Modules](../admin/modules.md) covers installing and removing modules.
+
+## Reading a file
+
+When a picture, video or recording has its last byte written, the `media-bridge` service announces
+it, and `media-ingest` reads it with `exif-extract`, through the [media service](../ems/index.md).
+What it reads goes on the file: its type, its size and shape, how it is turned, and a video's or
+recording's length and codec. Everything the file's metadata says is kept under it, as
+`metadata/exif`: the camera that made it, the clocks it recorded, and its GPS fix. What these
+mean, such as when the picture was taken and where, the other modules work out: the Archive's way
+is in [Dates and places](../archive/dates-places.md). The renditions and every other module's work
+on the file wait for the reading. When a file's bytes change, `media-reindex` reads it again.
+
+Nothing under `/tmp`, `/etc`, `/var`, `/usr` or `/dev` is read, nor anything in a trash, nor a
+rendition. A video or recording whose container cannot be read is marked `undecodable`, and
+nothing is made of it.
+
+A module can hold a file before it is read. A held file is left unread, and nothing starts for it,
+for as long as it has the same bytes in the same folder. The Archive holds a file that arrives in a
+staging area as an exact copy of one its owner already has
+([An exact copy shows its original](../archive/duplicates.md#an-exact-copy-shows-its-original)).
+
+| You want to                                              | Run                                                               |
+| -------------------------------------------------------- | ----------------------------------------------------------------- |
+| Read a file again, also one held or marked `undecodable` | `exif-extract -f /archive/albums/christmas-2019/IMG_0042.jpg`     |
+| See everything its metadata says                         | `attrs /archive/albums/christmas-2019/IMG_0042.jpg/metadata/exif` |
 
 ## The renditions it makes
 
@@ -93,6 +118,23 @@ in progress is picked up again. [Configuration](../admin/configuration.md) expla
 > and past its depth into **waiting for EMS**. With `models-second` on, the media service holds two
 > families of models at once, and both must fit on its graphics card, or one runs on the processor.
 
+### The bulk lane
+
+A folder can put the work on the files under it behind all other work. When its `lane` attribute
+is `bulk`, everything that starts for a file under it, from its reading and its renditions to the
+other modules' work, waits until nothing else does, so what anyone uploads meanwhile is ready
+first. The nearest folder above a file that sets `lane` decides. The Archive's staging categories
+set it from their lane
+([Plan a large import](../archive/staging-admin.md#plan-a-large-import)); on any
+other folder, as its owner or the administrator:
+
+```bash
+# in EiN's terminal
+attrs -s lane=bulk /archive/imports/old-drive
+```
+
+It applies to work announced from then on, within a minute; work already waiting keeps its place.
+
 [Performance and sizing](../admin/performance.md) says what to set on a small or a large machine,
 and [Change how it works](../ems/index.md#change-how-it-works), on the media service's page, how many
 model requests the media service admits at once, `EMS_LIMIT_MODELS`.
@@ -106,11 +148,25 @@ line, in the order offered; `reserve` after a CPU kind puts it in the share kept
 ingest; `#` starts a comment:
 
 ```text
-# the steps a crawl runs after ingest, reserved
-ingest
-stills reserve
+# what a file's metadata means, kept for the work after ingest
+interpret reserve
 ```
 
 A kind no worker takes never runs, so name every kind a step of yours declares. The workers read the
-drop-ins as they start: after you change your kinds, restart them with `service restart media-worker`
-and `service restart models`.
+drop-ins as they start, and `mod install` restarts them when it puts in place a module whose kinds
+are new or changed ([`dropIns`](../develop/manifest.md#dropins)). After you change your kinds by
+hand, restart them with `service restart media-worker` and `service restart models`.
+
+## For a module's author: holding a file
+
+A module that must have its say before a file is read puts a command in `etc/media-read.d/hold`,
+which `mod setup` links as `/etc/media-read.d/<module>/hold`. Its first line that is not a comment
+runs before each reading as `<command> <file>`, with `-f` before the file when the reading is
+forced. To hold the file, the command sets `hold` on it:
+
+```json
+{ "by": "archive", "reason": "an exact copy of …", "sha256": "<the file's sha256>", "within": "<a folder>" }
+```
+
+The hold lasts while the file has those bytes and lies under that folder. New bytes, or a move out
+of the folder, end it without anyone taking it off, and a forced reading reads the file anyway.

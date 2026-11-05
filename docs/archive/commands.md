@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 149 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 148 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [promote-exif-attrs](#promote-exif-attrs) · [raw](#raw) · [read-text](#read-text) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [embed-picture](#embed-picture) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [read-text](#read-text) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
 
 ## A
 
@@ -237,7 +237,7 @@ With `JSON_OUTPUT=1`: refresh: how many albums were scanned and changed, stacks 
 
 ### `archive-bridge`
 
-Derive media and location domain events from VFS mutations (long-running)
+Derive the archive's domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running)
 
 <small>changes things</small>
 
@@ -249,7 +249,7 @@ archive-bridge
 archive-bridge
 ```
 
-With `JSON_OUTPUT=1`: nothing; it runs until stopped, turning VFS mutations into media and location events.
+With `JSON_OUTPUT=1`: nothing; it runs until stopped, turning VFS mutations into the archive's events.
 
 ### `archive-parse`
 
@@ -916,54 +916,29 @@ events-anniversaries --today 2026-12-24 --days-ahead 7
 
 With `JSON_OUTPUT=1`: each birthday, milestone memorial and wedding anniversary in the window as an events entry, in date order: the day, the sentence, whether it is a milestone, the person, and the route that draws it.
 
-### `exif-extract`
+### `exif-interpret`
 
-Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced.
+Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar.
 
 <small>changes things</small>
 
 ```text
-exif-extract [-f] [-v] <input>
+exif-interpret [-v] <input>
 ```
 
-| Argument  | What it is        |
-| --------- | ----------------- |
-| `<input>` | VFS path to file. |
+| Argument  | What it is                                               |
+| --------- | -------------------------------------------------------- |
+| `<input>` | VFS path to a file whose metadata is read (exif-extract) |
 
-| Option | What it does                                                                      |
-| ------ | --------------------------------------------------------------------------------- |
-| `-f`   | Re-extract even when metadata/exif already exists, and index a staged exact copy. |
-| `-v`   | Verbose output.                                                                   |
+| Option | What it does    |
+| ------ | --------------- |
+| `-v`   | Verbose output. |
 
 ```bash
-exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+exif-interpret /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
-With `JSON_OUTPUT=1`: nothing; exif and position nodes are written under the file, and its duplicate finding on a staged file; for a deferred copy only that finding.
-
-### `exiftool`
-
-Extract metadata from a file, as exiftool reads it (through the media service)
-
-<small>reads only</small>
-
-```text
-exiftool [-n] <filename>
-```
-
-| Argument     | What it is        |
-| ------------ | ----------------- |
-| `<filename>` | VFS path to file. |
-
-| Option | What it does                                                     |
-| ------ | ---------------------------------------------------------------- |
-| `-n`   | Numeric values (always the case now; accepted for compatibility) |
-
-```bash
-exiftool /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
-```
-
-With `JSON_OUTPUT=1`: the file's metadata exactly as exiftool reads it.
+With `JSON_OUTPUT=1`: the capture time it resolved and where, and its position; the attrs and the position node are written on the file.
 
 ## F
 
@@ -2776,33 +2751,6 @@ person-voices /archive/people/anna-exempel
 
 With `JSON_OUTPUT=1`: every recording voice assigned to the person, with its talk time and the moment to play.
 
-### `promote-exif-attrs`
-
-Copy width/height/duration from a file's exif node onto the file node.
-
-<small>changes things</small>
-
-```text
-promote-exif-attrs [-v] [-n] [--angle] [--codec] <path>
-```
-
-| Argument | What it is                                       |
-| -------- | ------------------------------------------------ |
-| `<path>` | VFS path to a media file or a directory to walk. |
-
-| Option    | What it does                                                                                   |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `-v`      | Verbose output.                                                                                |
-| `-n`      | Dry run — report what would be set, write nothing.                                             |
-| `--angle` | Also promote a video's container rotation to `angle` (never a still's, never over angleManual) |
-| `--codec` | Also promote a video's picture codec to `codec` (the hint EMS skips its VRAM stage on)         |
-
-```bash
-promote-exif-attrs /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
-```
-
-With `JSON_OUTPUT=1`: nothing; width, height and duration are copied from the exif node onto the file.
-
 ## R
 
 ### `raw`
@@ -3232,6 +3180,30 @@ staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/
 ```
 
 With `JSON_OUTPUT=1`: promote: StagingPromoteResult; discard: StagingDiscardResult; accept: StagingAcceptResult; later: StagingLaterResult; undo: StagingUndoResult; journal: StagingJournalPage; move: StagingMoveResult; split, regroup, merge, delete, rename, pin, reject: StagingEditResult; match: StagingMatchResult; organize: StagingOrganizeReport, with --queue StagingQueueReport; init: StagingInitAnswer; retime: StagingRetimeAnswer; status: StagingStatus; check: StagingCheckAnswer; detect: StagingDetectAnswer; category: StagingCategoryAnswer; duplicates: DuplicatePage; duplicates --counts: DuplicateCounts; dedupe: DuplicateResolveResult; separate: DuplicateSeparateResult; duplicates --refresh: DuplicateRefreshResult; duplicates --repair: DuplicateRepairResult.
+
+### `staging-hold`
+
+Decide a file's duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file's finding is recorded, and one left on a file no longer staged is taken off.
+
+<small>changes things</small>
+
+```text
+staging-hold [-f] <file>
+```
+
+| Argument | What it is                             |
+| -------- | -------------------------------------- |
+| `<file>` | VFS path to the file about to be read. |
+
+| Option | What it does                                                 |
+| ------ | ------------------------------------------------------------ |
+| `-f`   | The reading is forced: record the finding, and hold nothing. |
+
+```bash
+staging-hold /home/helen/staging/files/Inbox/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: whether the file is held, and the original it is a copy of.
 
 ### `subcluster-faces`
 

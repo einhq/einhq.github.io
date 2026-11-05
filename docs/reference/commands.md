@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 400 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 403 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 149 in full](../archive/commands.md).
+[All 148 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -263,7 +263,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
 | [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip. |
 | [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
-| [archive-bridge](../archive/commands.md#archive-bridge) | Derive media and location domain events from VFS mutations (long-running) |
+| [archive-bridge](../archive/commands.md#archive-bridge) | Derive the archive's domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running) |
 | [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
 | [assign-faces](../archive/commands.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
 | [assign-speakers](../archive/commands.md#assign-speakers) | Match a recording's voices to existing people, creating unnamed people for the rest. |
@@ -291,8 +291,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [duplicates](../archive/commands.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
 | [embed-picture](../archive/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
-| [exif-extract](../archive/commands.md#exif-extract) | Extract EXIF metadata from file and create exif/position nodes; the file's paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category's time rules, and its exact copies among its inbox's files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced. |
-| [exiftool](../archive/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
+| [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar. |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
 | [face-doubt](../archive/commands.md#face-doubt) | Question whether regions show the person they are assigned to. |
@@ -364,7 +363,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [person-unknown](../archive/commands.md#person-unknown) | List auto-created people nobody has named yet, with face counts and crops. |
 | [person-update](../archive/commands.md#person-update) | Change a person's profile: names, birth and death dates, gender, allergies, description, contact details. An empty value clears the field. |
 | [person-voices](../archive/commands.md#person-voices) | Every recording a person is heard in, with how long they speak and a moment to hear them. |
-| [promote-exif-attrs](../archive/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
 | [raw](../archive/commands.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
 | [read-text](../archive/commands.md#read-text) | Read the text written in a picture and keep it for search. |
 | [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes. |
@@ -378,6 +376,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
 | [source-list](../archive/commands.md#source-list) | List the files a node was read from: the links in its sources/, such as a track's GPX files or a person's GEDCOM files. |
 | [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
+| [staging-hold](../archive/commands.md#staging-hold) | Decide a file's duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file's finding is recorded, and one left on a file no longer staged is taken off. |
 | [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
 | [subcluster-voices](../archive/commands.md#subcluster-voices) | Re-cluster one person's voices with average linkage, to find two people fused into one. |
 | [subject-device](../archive/commands.md#subject-device) | What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers. |
@@ -430,13 +429,17 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 5 in full](../media/commands.md).
+[All 9 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
+| [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
+| [exiftool](../media/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
+| [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running) |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
+| [promote-exif-attrs](../media/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
 | [regenerate](../media/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
 | [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
 

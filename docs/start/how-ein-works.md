@@ -139,13 +139,14 @@ nothing out.
 
 With the [Archive](../archive/index.md) installed, uploading a photo sets off a chain:
 
-1. The Archive notices the uploaded photo, video or recording and announces it.
-2. `media-ingest` reads the file's metadata, such as the camera, the time it was taken and where,
+1. The Media module notices the uploaded photo, video or recording and announces it.
+2. `media-ingest` reads the file's metadata, such as the camera, its clocks and its GPS fix,
    through the media service.
-3. Its result starts the rest, each a pipeline of its own: thumbnails and display sizes, video and
-   audio the browser can play, the faces on it, a picture vector for searching by meaning, text read
-   from the picture, a transcript of what is said in a video or recording, a fingerprint that finds
-   copies, the address of its GPS position, and a link to the location that contains it.
+3. Its result starts the rest, each a pipeline of its own: when and where it was taken, thumbnails
+   and display sizes, video and audio the browser can play, the faces on it, a picture vector for
+   searching by meaning, text read from the picture, a transcript of what is said in a video or
+   recording, a fingerprint that finds copies, the address of its GPS position, and a link to the
+   location that contains it.
 4. What these write are changes too, and they start what depends on them, such as matching the
    faces to the people they show.
 

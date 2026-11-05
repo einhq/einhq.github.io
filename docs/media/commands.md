@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 5 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[detect-chapters](#detect-chapters) · [generate-derivatives](#generate-derivatives) · [media-pool-kinds](#media-pool-kinds) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan)
+[detect-chapters](#detect-chapters) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [generate-derivatives](#generate-derivatives) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [promote-exif-attrs](#promote-exif-attrs) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan)
 
 ## D
 
@@ -32,6 +32,57 @@ detect-chapters /archive/albums/Exempelalbum_1978/files/sommarfilm.avi
 ```
 
 With `JSON_OUTPUT=1`: nothing; the chapters are written as WebVTT under the file, with the cuts on the node.
+
+## E
+
+### `exif-extract`
+
+Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced.
+
+<small>changes things</small>
+
+```text
+exif-extract [-f] [-v] <input>
+```
+
+| Argument  | What it is        |
+| --------- | ----------------- |
+| `<input>` | VFS path to file. |
+
+| Option | What it does                                                                  |
+| ------ | ----------------------------------------------------------------------------- |
+| `-f`   | Read again even when metadata/exif already exists, and a file a module holds. |
+| `-v`   | Verbose output.                                                               |
+
+```bash
+exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: nothing; the exif node is written under the file and its facts on it, or nothing for a file a module holds.
+
+### `exiftool`
+
+Extract metadata from a file, as exiftool reads it (through the media service)
+
+<small>reads only</small>
+
+```text
+exiftool [-n] <filename>
+```
+
+| Argument     | What it is        |
+| ------------ | ----------------- |
+| `<filename>` | VFS path to file. |
+
+| Option | What it does                                                     |
+| ------ | ---------------------------------------------------------------- |
+| `-n`   | Numeric values (always the case now; accepted for compatibility) |
+
+```bash
+exiftool /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: the file's metadata exactly as exiftool reads it.
 
 ## G
 
@@ -66,6 +117,22 @@ With `JSON_OUTPUT=1`: nothing; the thumbnail, display and transcode renditions a
 
 ## M
 
+### `media-bridge`
+
+Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running)
+
+<small>changes things</small>
+
+```text
+media-bridge
+```
+
+```bash
+media-bridge
+```
+
+With `JSON_OUTPUT=1`: nothing; it runs until stopped, turning VFS mutations into the facts of media files.
+
 ### `media-pool-kinds`
 
 The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags.
@@ -91,6 +158,35 @@ JSON_OUTPUT=1 media-pool-kinds models
 ```
 
 With `JSON_OUTPUT=1`: the flags (--kind for each kind, --reserve-kind for each reserved one); in JSON the kinds in order and the reserved ones.
+
+## P
+
+### `promote-exif-attrs`
+
+Copy width/height/duration from a file's exif node onto the file node.
+
+<small>changes things</small>
+
+```text
+promote-exif-attrs [-v] [-n] [--angle] [--codec] <path>
+```
+
+| Argument | What it is                                       |
+| -------- | ------------------------------------------------ |
+| `<path>` | VFS path to a media file or a directory to walk. |
+
+| Option    | What it does                                                                                   |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| `-v`      | Verbose output.                                                                                |
+| `-n`      | Dry run — report what would be set, write nothing.                                             |
+| `--angle` | Also promote a video's container rotation to `angle` (never a still's, never over angleManual) |
+| `--codec` | Also promote a video's picture codec to `codec` (the hint EMS skips its VRAM stage on)         |
+
+```bash
+promote-exif-attrs /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: nothing; width, height and duration are copied from the exif node onto the file.
 
 ## R
 

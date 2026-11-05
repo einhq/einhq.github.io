@@ -155,7 +155,7 @@
 <tr>
 <td><code>archive-bridge</code></td>
 <td>archive</td>
-<td>Turns changes in the tree into the media and location facts that pipelines trigger on</td>
+<td>Turns changes in the tree into the Archive&#39;s facts that pipelines trigger on: a file dated and placed, a face found, staging, albums and locations changed</td>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
@@ -193,9 +193,19 @@
 <td>Samples the media service&#39;s graphics card for the dashboard</td>
 </tr>
 <tr>
+<td><code>media-bridge</code></td>
+<td>media</td>
+<td>Turns changes in the tree into the facts of a media file itself that pipelines trigger on: arrived, its bytes changed, read, turned, removed, its renditions made</td>
+</tr>
+<tr>
+<td><code>renditions-heal</code></td>
+<td>media</td>
+<td>Every hour, announces the files whose renditions are missing or were made by another rendition table, unless rendition work is waiting</td>
+</tr>
+<tr>
 <td><code>media-worker</code></td>
 <td>media</td>
-<td>Worker for the processor work the modules hand the media pool: for the Archive, thumbnails, renditions, fingerprints and the media service&#39;s encodes it waits on, face matching, duplicates, staging</td>
+<td>Worker for the processor work the modules hand the media pool: the Media module&#39;s reading and renditions, and for the Archive, dates and places, fingerprints, face matching, duplicates, staging</td>
 </tr>
 <tr>
 <td><code>models</code></td>
@@ -288,7 +298,7 @@ service-list --detail</code></pre></div>
 <div class="code"><pre tabindex="0"><code>NAME                 MODULE         STATUS      ENABLED  RESTARTS DESCRIPTION
 -------------------- -------------- ----------- -------- -------- -----------
 album-metadata       archive        running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
-archive-bridge       archive        running     yes      0        Turns VFS mutations into the media and location domain facts pipelines trigger on
+archive-bridge       archive        running     yes      0        Turns VFS mutations into the archive's facts — a file dated and placed, a face found, staging, albums and locations changed — that pipelines trigger on
 audit-purger         core           running     yes      0        Removes audit and access-log records once they are older than their retention
 ems-link             ems            running     yes      0        Watches the media service and reports what it holds
                                     not answering

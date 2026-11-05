@@ -140,7 +140,7 @@ machinery core already has. Nothing in the manifest is code.</p>
 </tr>
 <tr>
 <td><code>etc/&lt;x&gt;.d/</code></td>
-<td>Links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for the module that reads that folder</td>
+<td>Links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for the module that reads that folder; <code>mod install</code> restarts the services that read it when it changes (<a href="manifest.html#dropins"><code>dropIns</code></a>)</td>
 </tr>
 <tr>
 <td><code>etc/</code> (anything else)</td>
@@ -802,8 +802,8 @@ Each file in <code>pipelines/</code> defines one:</p>
 <span class="hljs-attr">options:</span>
   <span class="hljs-attr">maxAttempts:</span> <span class="hljs-number">2</span>
   <span class="hljs-attr">priority:</span> <span class="hljs-number">5</span></code></pre></div>
-<p>The events come from the modules that emit them: <code>media.metadata.extracted</code> is the Archive&#39;s, so
-this module would list <code>archive</code> in its <code>dependencies</code>. <a href="../concepts/pipelines.html">Changes and pipelines</a>
+<p>The events come from the modules that emit them: <code>media.metadata.extracted</code> is the Media module&#39;s,
+so this module would list <code>media</code> in its <code>dependencies</code>. <a href="../concepts/pipelines.html">Changes and pipelines</a>
 explains triggers and steps, and <a href="../admin/processing.html">Processing and pipelines</a> how to watch them
 run. A definition the module stops shipping is removed at the next setup.</p>
 <h2 id="plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places<a class="anchor" href="#plug-into-search-the-home-page-and-other-places" aria-label="Link to this section"></a></h2>

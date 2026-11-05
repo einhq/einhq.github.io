@@ -47,7 +47,7 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | Task                                          | Command                                                            | Reference                                                    |
 | --------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------ |
 | Everything about one file                     | `media-details /archive/albums/christmas-2019/20191224_141841.jpg` | [media-details](commands.md#media-details)                   |
-| Its metadata as exiftool reads it             | `exiftool <file>`                                                  | [exiftool](commands.md#exiftool)                             |
+| Its metadata as exiftool reads it             | `exiftool <file>`                                                  | [exiftool](../media/commands.md#exiftool)                    |
 | Set when it was taken, as vaguely as you know | `file-set-time <file> 1968-07 --note 'Postmark on the back'`       | [file-set-time](commands.md#file-set-time)                   |
 | Undo a date set by hand                       | `file-set-time --clear <file>`                                     | [file-set-time](commands.md#file-set-time)                   |
 | Set where it was taken                        | `file-set-position <file> --lat=50.2632 --lng=-5.0510`             | [file-set-position](commands.md#file-set-position)           |

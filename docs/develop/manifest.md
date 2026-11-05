@@ -42,23 +42,24 @@ A module that adds a few commands, one setting and one page needs little more th
 
 ## The fields at a glance
 
-| Field               | What it is                                                      | When it matters        |
-| ------------------- | --------------------------------------------------------------- | ---------------------- |
-| `name`              | the module's name, its directory and its alias prefix           | always                 |
-| `version`           | its semver version, checked against dependents' ranges          | `mod setup`            |
-| `description`       | one sentence shown wherever the module is listed                | display                |
-| `author`, `license` | free text                                                       | display                |
-| `coreApi`           | the range of core's module contract it is written against       | `mod setup`            |
-| `exports`           | the files other modules may import                              | loading, type checks   |
-| `imports`           | its own private aliases and external packages                   | loading, type checks   |
-| `dependencies`      | the modules it needs, with version ranges                       | `mod setup`            |
-| `config.options`    | the settings it owns                                            | `mod setup`            |
-| `environment`       | environment variables it reads that are not settings            | documentation          |
-| `nodeTypes`         | the node types it defines; with a `root`, what `@` completes to | documentation, runtime |
-| `roots`             | folders directly under `/archive` its content lives in          | `mod setup`            |
-| `indexes`           | database indexes on node attrs its queries need                 | `mod setup`            |
-| `ui.routes`         | its pages, by route                                             | `ui-build`             |
-| `ui.open`           | which route opens a node of a type                              | `ui-build`, browser    |
+| Field               | What it is                                                      | When it matters             |
+| ------------------- | --------------------------------------------------------------- | --------------------------- |
+| `name`              | the module's name, its directory and its alias prefix           | always                      |
+| `version`           | its semver version, checked against dependents' ranges          | `mod setup`                 |
+| `description`       | one sentence shown wherever the module is listed                | display                     |
+| `author`, `license` | free text                                                       | display                     |
+| `coreApi`           | the range of core's module contract it is written against       | `mod setup`                 |
+| `exports`           | the files other modules may import                              | loading, type checks        |
+| `imports`           | its own private aliases and external packages                   | loading, type checks        |
+| `dependencies`      | the modules it needs, with version ranges                       | `mod setup`                 |
+| `config.options`    | the settings it owns                                            | `mod setup`                 |
+| `dropIns`           | the drop-in folders its services read, and which to restart     | `mod install`, `mod remove` |
+| `environment`       | environment variables it reads that are not settings            | documentation               |
+| `nodeTypes`         | the node types it defines; with a `root`, what `@` completes to | documentation, runtime      |
+| `roots`             | folders directly under `/archive` its content lives in          | `mod setup`                 |
+| `indexes`           | database indexes on node attrs its queries need                 | `mod setup`                 |
+| `ui.routes`         | its pages, by route                                             | `ui-build`                  |
+| `ui.open`           | which route opens a node of a type                              | `ui-build`, browser         |
 
 EiN runs `mod setup --all` at every start, for every installed module in dependency order, so a field read by `mod setup` takes effect the next time EiN starts or the next time you run `mod setup <name>`. "Loading, type checks" means the field is read when the module's TypeScript is loaded, and by `deno task check` through the module's generated `deno.jsonc`. `ui-build` bundles the modules' pages; `mod setup` runs it after it has set modules up.
 
@@ -80,7 +81,7 @@ Free text. `description` is shown by `mod list --long` and `mod info`, on **Sett
 
 ### `coreApi`
 
-The range of core's module contract the module is written against, as a semver range: `"^0.7.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.7.1`; `system-info` shows it on its `api` line.
+The range of core's module contract the module is written against, as a semver range: `"^0.7.0"`. Core's side of it is `MODULE_API_VERSION` in `src/modules/types.ts`, at present `0.12.4`; `system-info` shows it on its `api` line.
 
 The contract is what a module may use from core: `@ein/client`, `@ein/api`, `@ein/paths` and the Web UI's kit, `@ein/ui/*`. Core's `src/client/contract.snapshot` lists every symbol in it, and a test fails when the contract changes without the version and the snapshot changing too. Below 1.0.0 the minor is the breaking part: `^0.6.0` accepts 0.6.x and nothing else.
 
@@ -212,6 +213,21 @@ export CFG_SEARCH_PARSER='archive-parse'
 ```
 
 The file is read before the administrator's `/etc/config`, so a value set on the Settings page wins, and the Settings page shows a value that came from the file as the module's.
+
+## Drop-ins
+
+### `dropIns`
+
+A module can read a folder the other modules put files in: `mod setup` links each module's `etc/<x>.d/` as `/etc/<x>.d/<module>`, and the module that reads `/etc/<x>.d` takes what is there. A service that reads such a folder as it starts names it here, with the services to restart when what is there changes:
+
+```json
+"dropIns": {
+  "media-worker.d": { "restarts": ["media-worker"] },
+  "media-models.d": { "restarts": ["models", "models-second"] }
+}
+```
+
+The example is the Media module's: its workers take the kinds of work the modules name in `/etc/media-worker.d` and `/etc/media-models.d`. `mod install` restarts the services named that run once it has put in place a module whose drop-ins in the folder are new or changed, after every module is set up, so they find them linked; an update that leaves its drop-ins as they were leaves them running. `mod remove` restarts them when it removes a module that had some there. A drop-in changed by hand needs `service restart`. The field needs core's module contract 0.12.4 or later.
 
 ## Reference
 

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 400 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 403 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 400 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 403 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -92,7 +92,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 400 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 403 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -986,7 +986,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 149 in full</a>.</p>
+<p><a href="../archive/commands.html">All 148 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1032,7 +1032,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#archive-bridge">archive-bridge</a></td>
-<td>Derive media and location domain events from VFS mutations (long-running)</td>
+<td>Derive the archive&#39;s domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running)</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#archive-parse">archive-parse</a></td>
@@ -1143,12 +1143,8 @@
 <td>Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them)</td>
 </tr>
 <tr>
-<td><a href="../archive/commands.html#exif-extract">exif-extract</a></td>
-<td>Extract EXIF metadata from file and create exif/position nodes; the file&#39;s paired sidecar (<file>/sidecar) dates and places it too, a staged file is dated by its category&#39;s time rules, and its exact copies among its inbox&#39;s files are recorded with it. A staged exact copy of a file its owner can read is recorded and not indexed (duplicate.deferred) unless forced.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#exiftool">exiftool</a></td>
-<td>Extract metadata from a file, as exiftool reads it (through the media service)</td>
+<td><a href="../archive/commands.html#exif-interpret">exif-interpret</a></td>
+<td>Read what a file&#39;s metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category&#39;s time rules), and its position node from the GPS fix or the sidecar.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#face-add">face-add</a></td>
@@ -1435,10 +1431,6 @@
 <td>Every recording a person is heard in, with how long they speak and a moment to hear them.</td>
 </tr>
 <tr>
-<td><a href="../archive/commands.html#promote-exif-attrs">promote-exif-attrs</a></td>
-<td>Copy width/height/duration from a file&#39;s exif node onto the file node.</td>
-</tr>
-<tr>
 <td><a href="../archive/commands.html#raw">raw</a></td>
 <td>Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to.</td>
 </tr>
@@ -1489,6 +1481,10 @@
 <tr>
 <td><a href="../archive/commands.html#staging">staging</a></td>
 <td>Manage a user&#39;s private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#staging-hold">staging-hold</a></td>
+<td>Decide a file&#39;s duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file&#39;s finding is recorded, and one left on a file no longer staged is taken off.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#subcluster-faces">subcluster-faces</a></td>
@@ -1655,7 +1651,7 @@
 </tbody></table>
 </div>
 <h2 id="media">Media<a class="anchor" href="#media" aria-label="Link to this section"></a></h2>
-<p><a href="../media/commands.html">All 5 in full</a>.</p>
+<p><a href="../media/commands.html">All 9 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1668,12 +1664,28 @@
 <td>Find a video&#39;s cuts and write them as its chapters (metadata/chapters)</td>
 </tr>
 <tr>
+<td><a href="../media/commands.html#exif-extract">exif-extract</a></td>
+<td>Read a media file&#39;s metadata: the probe&#39;s dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module&#39;s hold command runs first, and a file it holds is not read unless forced.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#exiftool">exiftool</a></td>
+<td>Extract metadata from a file, as exiftool reads it (through the media service)</td>
+</tr>
+<tr>
 <td><a href="../media/commands.html#generate-derivatives">generate-derivatives</a></td>
 <td>Generate web derivatives (still pictures, transcoded renditions) for a media file.</td>
 </tr>
 <tr>
+<td><a href="../media/commands.html#media-bridge">media-bridge</a></td>
+<td>Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running)</td>
+</tr>
+<tr>
 <td><a href="../media/commands.html#media-pool-kinds">media-pool-kinds</a></td>
 <td>The kinds of work a worker of the media pool takes, from the modules&#39; drop-ins, as pipeline-worker&#39;s flags.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#promote-exif-attrs">promote-exif-attrs</a></td>
+<td>Copy width/height/duration from a file&#39;s exif node onto the file node.</td>
 </tr>
 <tr>
 <td><a href="../media/commands.html#regenerate">regenerate</a></td>

@@ -11,9 +11,10 @@ is run again, the bulk lane, and the engine's own settings.
 
 ## What runs after an upload
 
-When a file arrives, the Archive's `archive-bridge` service turns the change into an event that a
-new file is there, `media.file.discovered`. That starts `media-ingest`, which reads the file's
-metadata; every other media pipeline waits on it, and starts once the metadata is read.
+When a file arrives, the [Media](../media/index.md) module reads its metadata first
+([Reading a file](../media/index.md#reading-a-file)). Then the Archive's `media-interpret` works out
+from it when the file was taken and where, side by side with the thumbnails, picture vectors, text
+and transcripts; faces, fingerprints and the device that made the file wait for the date and place.
 [Changes and pipelines](../concepts/pipelines.md#one-upload-start-to-finish) follows one upload from
 start to finish.
 
@@ -21,12 +22,12 @@ The Archive runs these services for its processing:
 
 | Service          | What it does                                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `archive-bridge` | Turns changes into the events the media pipelines wait for                                                                           |
+| `archive-bridge` | Turns changes into the events the Archive's pipelines wait for                                                                       |
 | `media-heal`     | Starts a pass of the `media-heal` pipeline when one is due (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed)) |
 
 The steps themselves are run by the [Media](../media/index.md) module's workers, which take the
-kinds of work the Archive names for them: `media-worker` the rest, reading metadata, thumbnails and
-video renditions the media service makes while it waits, matching faces, staging; `models` the work
+kinds of work the Archive names for them: `media-worker` the rest, such as dating and placing
+files, matching faces, fingerprints and staging; `models` the work
 done by a model in the [media service](../ems/index.md), such as finding faces or transcribing
 speech, and `models-second` the same beside it when it is on. [The workers](#the-workers) lists the
 kinds.
@@ -40,8 +41,7 @@ show **waiting for EMS** on the **Dashboard**.
 
 | Pipeline               | What it does                                                                                             | Kind of work                |
 | ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `media-ingest`         | Reads a photo's, video's or recording's metadata. Every other media pipeline waits on it.                | `ingest`                    |
-| `media-reindex`        | Reads the metadata again for a file whose bytes changed                                                  | `ingest`                    |
+| `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name          | `interpret`                 |
 | `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                   | `fingerprint`               |
 | `media-faces`          | Finds the faces in a photo and crops each one                                                            | `faces`                     |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                                    | `faces`                     |
@@ -75,18 +75,18 @@ show **waiting for EMS** on the **Dashboard**.
 Each media pipeline belongs to a family of work, which it names with `wants`, so a folder can ask
 for only some of it ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)):
 
-| Family            | What it covers                                                                                                                           | Pipelines                                                                     |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                       |
-| `picture-vectors` | Searching by what is in a picture                                                                                                        | `media-embed-picture`                                                         |
-| `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                             |
-| `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                        |
-| `archive`         | Faces and voices and who they are, fingerprints and duplicates, the camera, the place                                                    | the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
+| Family            | What it covers                                                                                                                           | Pipelines                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                              |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | `media-embed-picture`                                                                                |
+| `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                                                    |
+| `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                                               |
+| `archive`         | The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera                                       | `media-interpret`, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
 
-`media-ingest` and `media-reindex` name no family, since every family needs what they read, and nor
-do the pipelines that work on the Archive's own folders: albums, staging, tracks and places. A
-folder with `processing` set to `["renditions"]` gets its pictures read and their sizes made, and no
-faces, text, picture vectors or fingerprints.
+The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
+they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks
+and places. A folder with `processing` set to `["renditions"]` gets its pictures read and their
+sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints.
 
 ## The renditions
 
@@ -100,9 +100,10 @@ turned, and `regenerate-face-crops --missing` cuts where a crash left one empty.
 
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
-its kinds for them. `media-worker` takes `unzip`, `ingest`, `stills`, `face-assign`,
-`speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize`, `sidecars` and `transcode`;
-`models` takes `faces`, `embed-picture`, `ocr`, `embed-text`, `transcribe`, `diarize` and `shots`,
+its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
+`speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media
+module's own `ingest`, `stills` and `transcode`; `models` takes the Archive's `faces`,
+`embed-picture`, `ocr`, `embed-text`, `transcribe` and `diarize`, beside the Media module's `shots`,
 and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
 in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
@@ -125,8 +126,8 @@ options.
 ### Close gaps the pipelines missed
 
 `media-scan` walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
-settings than the media service runs now. Each pipeline then skips what is already done.
+something a pipeline should have given it: its date and place, a fingerprint, faces, or a
+transcript made with other settings than the media service runs now. Each pipeline then skips what is already done.
 
 Renditions are the Media module's to keep current: [Renditions kept current](../media/index.md#renditions-kept-current).
 

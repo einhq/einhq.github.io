@@ -324,7 +324,7 @@ video or recording, are in none of them. How to go through the groups is on
 Reading a file's date and place is only the first step. The rest of the work runs side by side
 afterwards, and each part shows up in EiN when it is done.
 
-![From upload to findable: a file arrives and its date, place and camera are read first, by media-ingest; then thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the grids and viewer, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "Each piece of work fills in its own part of EiN as it finishes.")
+![From upload to findable: a file arrives and its camera, clocks and GPS fix are read first, by media-ingest; then its date and place, thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the viewer and the albums by day, the grids, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "Each piece of work fills in its own part of EiN as it finishes.")
 
 | Work                                                                        | What it gives you                                                                                                            |
 | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |

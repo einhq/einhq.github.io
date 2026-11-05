@@ -245,9 +245,9 @@ engine, which <a href="../admin/processing.html">Processing and pipelines</a> co
 <td>Pairs each sidecar with its photo or video (<code>media-sidecars</code>), which gives the picture its date, place and caption. One run at a time.</td>
 </tr>
 <tr>
-<td><code>media-ingest</code> and the media work</td>
+<td><code>media-ingest</code>, <code>media-interpret</code> and the media work</td>
 <td>A file lands</td>
-<td>Reads its date, place and camera, and checks whether it is an exact copy; then the thumbnails, faces, fingerprints and the rest, through the <a href="../ems/index.html">media service</a>.</td>
+<td>Checks whether it is an exact copy, which then waits unread; reads its metadata, then dates and places it by the category&#39;s time rules; then the thumbnails, faces, fingerprints and the rest, through the <a href="../ems/index.html">media service</a>.</td>
 </tr>
 <tr>
 <td><code>staging-retime</code></td>

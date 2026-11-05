@@ -98,9 +98,10 @@ the <a href="../media/index.html">Media</a> module&#39;s page.</p>
 engine itself: watching the work on the <strong>Dashboard</strong> and in the terminal, failed work and how it
 is run again, the bulk lane, and the engine&#39;s own settings.</p>
 <h2 id="what-runs-after-an-upload">What runs after an upload<a class="anchor" href="#what-runs-after-an-upload" aria-label="Link to this section"></a></h2>
-<p>When a file arrives, the Archive&#39;s <code>archive-bridge</code> service turns the change into an event that a
-new file is there, <code>media.file.discovered</code>. That starts <code>media-ingest</code>, which reads the file&#39;s
-metadata; every other media pipeline waits on it, and starts once the metadata is read.
+<p>When a file arrives, the <a href="../media/index.html">Media</a> module reads its metadata first
+(<a href="../media/index.html#reading-a-file">Reading a file</a>). Then the Archive&#39;s <code>media-interpret</code> works out
+from it when the file was taken and where, side by side with the thumbnails, picture vectors, text
+and transcripts; faces, fingerprints and the device that made the file wait for the date and place.
 <a href="../concepts/pipelines.html#one-upload-start-to-finish">Changes and pipelines</a> follows one upload from
 start to finish.</p>
 <p>The Archive runs these services for its processing:</p>
@@ -113,7 +114,7 @@ start to finish.</p>
 </thead>
 <tbody><tr>
 <td><code>archive-bridge</code></td>
-<td>Turns changes into the events the media pipelines wait for</td>
+<td>Turns changes into the events the Archive&#39;s pipelines wait for</td>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
@@ -122,8 +123,8 @@ start to finish.</p>
 </tbody></table>
 </div>
 <p>The steps themselves are run by the <a href="../media/index.html">Media</a> module&#39;s workers, which take the
-kinds of work the Archive names for them: <code>media-worker</code> the rest, reading metadata, thumbnails and
-video renditions the media service makes while it waits, matching faces, staging; <code>models</code> the work
+kinds of work the Archive names for them: <code>media-worker</code> the rest, such as dating and placing
+files, matching faces, fingerprints and staging; <code>models</code> the work
 done by a model in the <a href="../ems/index.html">media service</a>, such as finding faces or transcribing
 speech, and <code>models-second</code> the same beside it when it is on. <a href="#the-workers">The workers</a> lists the
 kinds.</p>
@@ -141,14 +142,9 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>media-ingest</code></td>
-<td>Reads a photo&#39;s, video&#39;s or recording&#39;s metadata. Every other media pipeline waits on it.</td>
-<td><code>ingest</code></td>
-</tr>
-<tr>
-<td><code>media-reindex</code></td>
-<td>Reads the metadata again for a file whose bytes changed</td>
-<td><code>ingest</code></td>
+<td><code>media-interpret</code></td>
+<td>When a photo, video or recording was taken and where, from its metadata, a sidecar and its name</td>
+<td><code>interpret</code></td>
 </tr>
 <tr>
 <td><code>media-fingerprint</code></td>
@@ -320,15 +316,15 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 </tr>
 <tr>
 <td><code>archive</code></td>
-<td>Faces and voices and who they are, fingerprints and duplicates, the camera, the place</td>
-<td>the face, voice, fingerprint, device, geocoding and duplicate pipelines above</td>
+<td>The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera</td>
+<td><code>media-interpret</code>, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above</td>
 </tr>
 </tbody></table>
 </div>
-<p><code>media-ingest</code> and <code>media-reindex</code> name no family, since every family needs what they read, and nor
-do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks and places. A
-folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their sizes made, and no
-faces, text, picture vectors or fingerprints.</p>
+<p>The Media module&#39;s <code>media-ingest</code> and <code>media-reindex</code> name no family, since every family needs what
+they read, and nor do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks
+and places. A folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their
+sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints.</p>
 <h2 id="the-renditions">The renditions<a class="anchor" href="#the-renditions" aria-label="Link to this section"></a></h2>
 <p>The thumbnails, display sizes and playable copies of the Archive&#39;s pictures, videos and recordings,
 and the pipelines that make them, <code>media-stills</code> and <code>media-transcode</code>, are the Media module&#39;s:
@@ -338,9 +334,10 @@ turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
-its kinds for them. <code>media-worker</code> takes <code>unzip</code>, <code>ingest</code>, <code>stills</code>, <code>face-assign</code>,
-<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code>, <code>sidecars</code> and <code>transcode</code>;
-<code>models</code> takes <code>faces</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>, <code>diarize</code> and <code>shots</code>,
+its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-assign</code>,
+<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media
+module&#39;s own <code>ingest</code>, <code>stills</code> and <code>transcode</code>; <code>models</code> takes the Archive&#39;s <code>faces</code>,
+<code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code> and <code>diarize</code>, beside the Media module&#39;s <code>shots</code>,
 and <code>models-second</code> the same kinds in the reverse order. How much of it runs at once is set there,
 in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>.</p>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
@@ -383,8 +380,8 @@ is core&#39;s; the other commands are the Archive&#39;s, and <a href="commands.h
 options.</p>
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
-settings than the media service runs now. Each pipeline then skips what is already done.</p>
+something a pipeline should have given it: its date and place, a fingerprint, faces, or a
+transcript made with other settings than the media service runs now. Each pipeline then skips what is already done.</p>
 <p>Renditions are the Media module&#39;s to keep current: <a href="../media/index.html#renditions-kept-current">Renditions kept current</a>.</p>
 <p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code>. Each pass is one instance, which
 shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through the archive it has come; it is

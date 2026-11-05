@@ -271,13 +271,14 @@ A file whose `stored` line says `application/octet-stream` was not recognised; o
 
 Two commands do a file's reading again, for a file you may change:
 
-| Command                    | What it does                                                                                                      |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `exif-extract -f <file>`   | Reads a photo's, video's or recording's date, place and camera again. A file marked as unreadable is tried again. |
-| `index-document -f <file>` | Reads a document's text again.                                                                                    |
+| Command                    | What it does                                                                                                                                         |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `exif-extract -f <file>`   | Reads a photo's, video's or recording's metadata again, and dates and places it again from what it read. A file marked as unreadable is tried again. |
+| `index-document -f <file>` | Reads a document's text again.                                                                                                                       |
 
 Every command and its options are in the
-[archive's command reference](commands.md#exif-extract) and the
+[Media module's command reference](../media/commands.md#exif-extract), the
+[archive's command reference](commands.md#index-document) and the
 [core command reference](../reference/commands-core.md#mime).
 
 ## Related pages

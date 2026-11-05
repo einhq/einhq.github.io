@@ -17,19 +17,19 @@ When EiN sets a module up, it finds most of what the module brings by where it i
 The manifest says who the module is, what it shares with other modules, and what it adds to
 machinery core already has. Nothing in the manifest is code.
 
-| In the module             | What EiN does with it at setup                                                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `mod.json`                | Reads and checks it; refuses the module when it is wrong                                                                                         |
-| `bin/`                    | Adds the folder to every shell's `PATH`; each file is a command, in bash or TypeScript                                                           |
-| `services/<name>/`        | Registers and enables a background service: `start.sh` with a `config.json`; a single script `services/<name>` is wrapped in a folder of its own |
-| `pipelines/*.yaml`        | Registers each pipeline definition                                                                                                               |
-| `ui/`                     | Bundles the pages `mod.json` names; links `ui/nav.json` as the module's sidebar and top-bar entries                                              |
-| `ui/index.html`           | Links a built `ui/` as a site of its own, `/var/www/<name>`                                                                                      |
-| `etc/config`              | Links it as `/etc/config.d/<name>`: the module's own choice of settings                                                                          |
-| `etc/<x>.d/`              | Links it as `/etc/<x>.d/<name>`, for the module that reads that folder                                                                           |
-| `etc/` (anything else)    | Copies it into `/etc` when it is not there yet; never overwrites                                                                                 |
-| `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                                                                 |
-| `uninstall.sh`            | Runs it when the module is removed                                                                                                               |
+| In the module             | What EiN does with it at setup                                                                                                                                              |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mod.json`                | Reads and checks it; refuses the module when it is wrong                                                                                                                    |
+| `bin/`                    | Adds the folder to every shell's `PATH`; each file is a command, in bash or TypeScript                                                                                      |
+| `services/<name>/`        | Registers and enables a background service: `start.sh` with a `config.json`; a single script `services/<name>` is wrapped in a folder of its own                            |
+| `pipelines/*.yaml`        | Registers each pipeline definition                                                                                                                                          |
+| `ui/`                     | Bundles the pages `mod.json` names; links `ui/nav.json` as the module's sidebar and top-bar entries                                                                         |
+| `ui/index.html`           | Links a built `ui/` as a site of its own, `/var/www/<name>`                                                                                                                 |
+| `etc/config`              | Links it as `/etc/config.d/<name>`: the module's own choice of settings                                                                                                     |
+| `etc/<x>.d/`              | Links it as `/etc/<x>.d/<name>`, for the module that reads that folder; `mod install` restarts the services that read it when it changes ([`dropIns`](manifest.md#dropins)) |
+| `etc/` (anything else)    | Copies it into `/etc` when it is not there yet; never overwrites                                                                                                            |
+| `lib/`, `types/`, `test/` | Nothing; ordinary source, reached through the manifest's `imports` and `exports`                                                                                            |
+| `uninstall.sh`            | Runs it when the module is removed                                                                                                                                          |
 
 ![A module's folder beside what EiN makes of each part at mod setup: mod.json is checked and its settings, node types, archive roots and indexes registered; bin/ becomes commands on every shell's PATH; services/ are registered in /etc/services and enabled; pipelines/ are defined in /var/pipelines/definitions; ui/ gives pages bundled by ui-build and sidebar and top-bar entries linked into /etc/ui/nav.d; etc/ gives settings values and drop-ins, linked, and other files copied once into /etc; and uninstall.sh, dashed, runs when mod remove takes the module away](../diagrams/module.svg "EiN finds most of a module by where each part sits in its folder; mod.json says the rest.")
 
@@ -488,8 +488,8 @@ options:
   priority: 5
 ```
 
-The events come from the modules that emit them: `media.metadata.extracted` is the Archive's, so
-this module would list `archive` in its `dependencies`. [Changes and pipelines](../concepts/pipelines.md)
+The events come from the modules that emit them: `media.metadata.extracted` is the Media module's,
+so this module would list `media` in its `dependencies`. [Changes and pipelines](../concepts/pipelines.md)
 explains triggers and steps, and [Processing and pipelines](../admin/processing.md) how to watch them
 run. A definition the module stops shipping is removed at the next setup.
 
