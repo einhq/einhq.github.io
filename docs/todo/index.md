@@ -87,6 +87,16 @@ A list's columns fill the page under the bar side by side, a line between each, 
 and running to its foot; each scrolls its own cards. When there are more than fit, the board
 scrolls sideways. On a phone the columns stand one under the other and the board scrolls down.
 
+On a phone a list reads as a plain list, one row per item rather than a card:
+
+- The round box at a row's left ticks the item off, moving it to **Done**; unticking it in Done
+  moves it back to **Todo**.
+- A spinner before the title says the item is under way: it is in a column of your own, neither
+  Todo nor Done.
+- At the right are its due day (or a calendar to give it one), whoever is to do it, the pencil, and,
+  when it has a description, a chevron that unfolds it.
+- What it links to shows under the title as pictures alone; holding one says what it is.
+
 - **Make a list**: choose **⋮** in the page's bar and **New list**, type a **Title** such as Shopping, and under
   **Shared with** keep **Nobody, it is mine** or pick a group. Choose **Create list**.
 - **Add an item**: open the list's tab, type in **Add an item** at the foot of **Todo** and press
@@ -95,7 +105,7 @@ scrolls sideways. On a phone the columns stand one under the other and the board
   description, blank ones at its top and foot left out.
 - **Move an item**: drag its card to another place in the column, or to another column; a dashed
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
-  On a phone, lifting a card brings up the names of the columns at the foot of the screen: let go
+  On a phone, lifting a row brings up the names of the columns at the foot of the screen: let go
   over one and the card goes to the end of that column.
 - **Assign it**: the round button at a card's right is the face of whoever is to do it, their
   person's picture or their initials, or an empty circle when it is nobody's. Choose it and, under
@@ -123,12 +133,13 @@ scrolls sideways. On a phone the columns stand one under the other and the board
   every item on it, archived ones too, and for everyone a group's list is shared with; what the items
   link to stays where it is.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
-  for all of them, and choose **Archive**. They move to the list's `archived/` folder.
+  for all of them, and choose **Archive**. They move to the list's `archived/` folder. On a phone a
+  row's box is for done and not done, so the box in Done's heading is the way to pick them.
 
 On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
-over it; on a phone they are always there. A due day that has passed is red.
+over it. A due day that has passed is red.
 
-A card's heading is coloured by how long it has been on the list: green on the day it is added,
+On a computer a card's heading is coloured by how long it has been on the list: green on the day it is added,
 then yellow, and red once it is four weeks old; a done card's is grey. Hovering the heading says
 when it was added.
 An item can be given only to a member of the list's group; on a list of your own every item is
