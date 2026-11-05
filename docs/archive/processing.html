@@ -407,6 +407,11 @@ time and remembers where it is, so a restart of EiN does not send it back to the
 it held back get a scan of their own once their pipelines have nothing waiting. It looks every <code>CFG_MEDIA_HEAL_INTERVAL</code> seconds
 (900), and after a scan that finds nothing and holds nothing back it rests for
 <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six hours).</p>
+<p>Faces, picture and text vectors, text in pictures and transcripts are compared with the models the
+media service runs now, so a scan needs the service to answer. While it does not, <code>media-heal</code>
+waits and looks again later rather than going on without those checks. Run by hand, <code>media-scan</code>
+goes on and names the kinds of gap it could not check; scan for those again with <code>--only</code> and
+<code>--restart</code> once the service is back.</p>
 <p>Run it by hand after installing the Archive on files that were already there, or to look at one
 folder:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>

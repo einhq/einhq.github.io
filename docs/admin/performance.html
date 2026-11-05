@@ -285,7 +285,7 @@ config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="
 <h2 id="keep-the-interface-quick-during-heavy-work">Keep the interface quick during heavy work<a class="anchor" href="#keep-the-interface-quick-during-heavy-work" aria-label="Link to this section"></a></h2>
 <p>While the media service works through the Archive&#39;s import, people still search and browse. Several things keep their requests ahead of the processing without any setting:</p>
 <ul>
-<li>The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (<code>EMS_WORKER_NICE</code>, default <code>10</code>). When the card has been free of processing for 10 minutes (<code>EMS_CARD_QUIET_AFTER</code>, <code>600</code> seconds), searches move to the card.</li>
+<li>The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (<code>EMS_WORKER_NICE</code>, default <code>10</code>). When the card has been free of processing for 10 minutes (<code>EMS_CARD_QUIET_AFTER</code>, <code>600</code> seconds), searches move to the card. The process that runs them there waits ready while the card is busy, so the move takes about as long as loading the two search models, under a minute on a slow disk; it holds about 1 GB of memory meanwhile.</li>
 <li>A search uses at most a few cores (<code>EMS_QUERY_WORKER_THREADS</code>, the machine&#39;s cores less two, at most 4), so it does not wait on threads the processing holds.</li>
 <li><code>EMS_INTERACTIVE_RESERVE</code> keeps a place free for a person waiting.</li>
 </ul>

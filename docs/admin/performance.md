@@ -145,7 +145,7 @@ The other settings in **Processing** are core's and tune the pipeline engine its
 
 While the media service works through the Archive's import, people still search and browse. Several things keep their requests ahead of the processing without any setting:
 
-- The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (`EMS_WORKER_NICE`, default `10`). When the card has been free of processing for 10 minutes (`EMS_CARD_QUIET_AFTER`, `600` seconds), searches move to the card.
+- The media service answers searches from a model process of its own, on the processor, while the processing runs in another at a lower priority (`EMS_WORKER_NICE`, default `10`). When the card has been free of processing for 10 minutes (`EMS_CARD_QUIET_AFTER`, `600` seconds), searches move to the card. The process that runs them there waits ready while the card is busy, so the move takes about as long as loading the two search models, under a minute on a slow disk; it holds about 1 GB of memory meanwhile.
 - A search uses at most a few cores (`EMS_QUERY_WORKER_THREADS`, the machine's cores less two, at most 4), so it does not wait on threads the processing holds.
 - `EMS_INTERACTIVE_RESERVE` keeps a place free for a person waiting.
 
