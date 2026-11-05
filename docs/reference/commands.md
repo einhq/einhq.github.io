@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 395 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 397 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 213 in full](commands-core.md).
+[All 214 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -169,6 +169,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [reach-check](commands-core.md#reach-check) | Check stored reach against a walk of each path, for a sample of nodes and every account. |
 | [relate](commands-core.md#relate) | Create a bidirectional relation between two nodes. |
 | [relations-guard](commands-core.md#relations-guard) | Remove reciprocal relation links when one side is deleted (long-running) |
+| [renditions](commands-core.md#renditions) | The renditions made of every picture, video and recording, by role, from /etc/renditions.yaml. |
 | [resolve-id](commands-core.md#resolve-id) | Resolve node ID to path. |
 | [rev](commands-core.md#rev) | Reverse lines character-wise. |
 | [rm](commands-core.md#rm) | Remove (delete) files or directories. |
@@ -446,7 +447,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Todo
 
-[All 12 in full](../todo/commands.md).
+[All 13 in full](../todo/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -454,6 +455,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [todo-add](../todo/commands.md#todo-add) | Add an item to a todo list, a markdown file named for when it was added, with the day it is due and who is to do it if you like. |
 | [todo-archive](../todo/commands.md#todo-archive) | Put done todo items away in their list's archived/, which is no column of the board. todo-move or todo-done --undo takes one out again. |
 | [todo-done](../todo/commands.md#todo-done) | Mark a todo item done, with who did it and when, moving it to the list's done/; with --undo, not done again and back in the list's Todo. |
+| [todo-item](../todo/commands.md#todo-item) | Show one todo item: its title, notes, due day, who is to do it, its column and its links. |
 | [todo-items](../todo/commands.md#todo-items) | Show a todo list's board: its columns, Todo (the list itself), each folder in it, then Done (its done/), and the items of each in their order. archived/ is left out. |
 | [todo-link](../todo/commands.md#todo-link) | Link a todo item to what it is about, such as a picture or an album: a softlink under the item's file, named as what it points at. rm takes one away. |
 | [todo-list-create](../todo/commands.md#todo-list-create) | Make a todo list, a folder named by its title: your own, in ~/todos, or with --group one every member of the group shares, in the group's shared home. |

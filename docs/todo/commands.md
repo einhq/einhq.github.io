@@ -2,9 +2,9 @@
 
 # Todo commands
 
-The commands the todo module adds. They are there once the module is installed. 12 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the todo module adds. They are there once the module is installed. 13 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[events-todo](#events-todo) · [todo-add](#todo-add) · [todo-archive](#todo-archive) · [todo-done](#todo-done) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
+[events-todo](#events-todo) · [todo-add](#todo-add) · [todo-archive](#todo-archive) · [todo-done](#todo-done) · [todo-item](#todo-item) · [todo-items](#todo-items) · [todo-link](#todo-link) · [todo-list-create](#todo-list-create) · [todo-lists](#todo-lists) · [todo-members](#todo-members) · [todo-mine](#todo-mine) · [todo-move](#todo-move) · [todo-set](#todo-set)
 
 ## E
 
@@ -105,6 +105,26 @@ todo-done --undo /groups/users/todos/Shopping/done/2026-11-05-140322.md
 ```
 
 With `JSON_OUTPUT=1`: The item as it is now, at its new path, with doneAt and doneBy when it is done.
+
+### `todo-item`
+
+Show one todo item: its title, notes, due day, who is to do it, its column and its links.
+
+<small>reads only</small>
+
+```text
+todo-item <item>
+```
+
+| Argument | What it is             |
+| -------- | ---------------------- |
+| `<item>` | the item, by its path. |
+
+```bash
+todo-item /groups/users/todos/Shopping/2026-11-05-140322.md
+```
+
+With `JSON_OUTPUT=1`: The item: path, list, column, title, notes, done, doneAt, doneBy, due, assignee, order and links.
 
 ### `todo-items`
 

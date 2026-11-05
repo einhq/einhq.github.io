@@ -1461,13 +1461,13 @@ generate-derivatives [-v] [-f] [--only=<string>] [--size=<string>] [--prune] <in
 | --------- | ----------------------- |
 | `<input>` | VFS path to media file. |
 
-| Option            | What it does                                                                                                                                  |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-v`              | Verbose output.                                                                                                                               |
-| `-f`              | Force regenerate even if derivatives exist.                                                                                                   |
-| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                                                                         |
-| `--size=<string>` | Generate only these sizes (comma-separated): thumb \| grid \| small \| medium \| large \| face \| preview \| 1080p \| storyboard \| standard. |
-| `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                                                                               |
+| Option            | What it does                                                                                    |
+| ----------------- | ----------------------------------------------------------------------------------------------- |
+| `-v`              | Verbose output.                                                                                 |
+| `-f`              | Force regenerate even if derivatives exist.                                                     |
+| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                           |
+| `--size=<string>` | Generate only these roles (comma-separated): roles of /etc/renditions.yaml, face or storyboard. |
+| `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                                 |
 
 ```bash
 generate-derivatives /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
@@ -2919,17 +2919,17 @@ regenerate [--force] [--prune] [--size=<string>] [--mime=<string>] [--verbose] <
 | ---------- | ------------------------------ |
 | `<target>` | VFS path to file or directory. |
 
-| Option                  | What it does                                                          |
-| ----------------------- | --------------------------------------------------------------------- |
-| `--force`, `-f`         | Force regenerate even if derivatives exist.                           |
-| `--prune`               | Delete renditions that are no longer part of the target set.          |
-| `--size=<string>`, `-s` | Generate only these size classes, comma-separated (e.g. small,medium) |
-| `--mime=<string>`       | Only files whose mimetype matches this glob (e.g. 'video/*')          |
-| `--verbose`, `-v`       | Verbose output.                                                       |
+| Option                  | What it does                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `--force`, `-f`         | Force regenerate even if derivatives exist.                                                                       |
+| `--prune`               | Delete renditions that are no longer part of the target set.                                                      |
+| `--size=<string>`, `-s` | Generate only these roles, comma-separated: roles of /etc/renditions.yaml, face or storyboard (e.g. small,medium) |
+| `--mime=<string>`       | Only files whose mimetype matches this glob (e.g. 'video/*')                                                      |
+| `--verbose`, `-v`       | Verbose output.                                                                                                   |
 
 ```bash
 regenerate /archive/albums/Exempelalbum_2019
-regenerate --force --size thumbnail /archive/albums
+regenerate --force --size thumb /archive/albums
 ```
 
 With `JSON_OUTPUT=1`: how many files had their derivatives regenerated.

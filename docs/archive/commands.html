@@ -2397,7 +2397,7 @@ gedcom-read /home/ruby/staging/genealogy/wrenfield.ged --match @I3@=ruby-wrenfie
 </tr>
 <tr>
 <td><code>--size=&lt;string&gt;</code></td>
-<td>Generate only these sizes (comma-separated): thumb | grid | small | medium | large | face | preview | 1080p | storyboard | standard.</td>
+<td>Generate only these roles (comma-separated): roles of /etc/renditions.yaml, face or storyboard.</td>
 </tr>
 <tr>
 <td><code>--prune</code></td>
@@ -4581,7 +4581,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </tr>
 <tr>
 <td><code>--size=&lt;string&gt;</code>, <code>-s</code></td>
-<td>Generate only these size classes, comma-separated (e.g. small,medium)</td>
+<td>Generate only these roles, comma-separated: roles of /etc/renditions.yaml, face or storyboard (e.g. small,medium)</td>
 </tr>
 <tr>
 <td><code>--mime=&lt;string&gt;</code></td>
@@ -4594,7 +4594,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>regenerate /archive/albums/Exempelalbum_2019
-regenerate --force --size thumbnail /archive/albums</code></pre></div>
+regenerate --force --size thumb /archive/albums</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: how many files had their derivatives regenerated.</p>
 <h3 id="regenerate-face-crops"><code>regenerate-face-crops</code><a class="anchor" href="#regenerate-face-crops" aria-label="Link to this section"></a></h3>
 <p>Re-encode a bounded, resumable batch of existing face crops without re-detecting faces.</p>
