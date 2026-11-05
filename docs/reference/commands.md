@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 398 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 399 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 152 in full](../archive/commands.md).
+[All 153 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -371,6 +371,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [read-text](../archive/commands.md#read-text) | Read the text written in a picture and keep it for search. |
 | [regenerate](../archive/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
 | [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces. |
+| [renditions-scan](../archive/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
 | [search-album](../archive/commands.md#search-album) | Search albums by name, description and what their pictures show. |
 | [search-device](../archive/commands.md#search-device) | Search devices by name, make, model or serial number. |
 | [search-document](../archive/commands.md#search-document) | Search documents (PDF, Word, text) by what their text is about, using semantic similarity. |

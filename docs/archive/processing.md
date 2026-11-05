@@ -56,6 +56,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-speaker-assign` | Decides which person each voice is                                                                              | `speaker-assign`               |
 | `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                 | `diarize`, `speaker-assign`    |
 | `media-device`         | Links a file to the camera or phone that took it                                                                | run by the engine              |
+| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                          | run by the engine              |
 | `media-geocode`        | Looks up the address of a file's GPS position                                                                   | run by the engine              |
 | `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                | run by the engine              |
 | `media-duplicates`     | Decides again the duplicate findings of a staged file                                                           | `dedupe`                       |
@@ -69,7 +70,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                     | run by the engine              |
 | `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                                | run by the engine              |
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                          | run by the engine              |
-| `media-heal`           | Goes through the whole archive and announces the files missing work the other pipelines should have done        | run by the engine              |
+| `media-heal`           | Announces the files missing work the other pipelines should have done, renditions in any folder among them      | run by the engine              |
 
 ## Which processing a folder gets
 
@@ -100,9 +101,11 @@ in the terminal says what the file holds now, and names any entry it leaves out 
 
 The Archive installed the file, and a newer version of it never overwrites it, so a change you make
 stays. Each rendition is named after its size (`800x800.avif`), so a size changed is a new file for
-every picture: make them again with `regenerate --prune` under `/archive`, which can take hours or
-days on a large archive, and removes the files no role names any more. Pages pick up the change
-when they are opened again.
+every picture. A file is marked with the table its renditions were made by, so the next pass of
+`media-heal` finds every file of a kind the change touched, in any folder, and the pipelines make
+the new sizes: on a large archive that takes hours or days. The files no role names any more stay
+until `regenerate --prune` under `/archive` removes them. Pages pick up the change when they are
+opened again.
 
 ## The workers
 
@@ -122,6 +125,7 @@ in [How much runs at once](../media/index.md#how-much-runs-at-once).
 | Transcode a video again although it has renditions              | `pipeline-start --var FORCE=-f media-transcode /archive/albums/christmas-2019/MVI_0412.mp4` |
 | Make the renditions again under a folder, without the pipelines | `regenerate --force /archive/albums/christmas-2019`                                         |
 | Announce files the Archive never saw, or that are missing work  | `media-scan /archive/albums`                                                                |
+| Announce the files that lack renditions the table names now     | `renditions-scan`                                                                           |
 | Embed the stored texts and transcripts again, as they are       | `media-reembed`                                                                             |
 | Encode the face crops again without finding the faces again     | `regenerate-face-crops --limit 200`                                                         |
 
@@ -133,11 +137,19 @@ options.
 ### Close gaps the pipelines missed
 
 `media-scan` walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, display sizes, faces, renditions, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips
-what is already done.
+something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
+settings than the media service runs now. Each pipeline then skips what is already done.
 
-The `media-heal` pipeline runs it for you over `/archive/albums`. Each pass is one instance, which
+Renditions are found another way. Once a file has every rendition `/etc/renditions.yaml` names for
+it, it is marked with the table they were made by (`renditionsFor` and `renditionsAt` in its
+attributes). `renditions-scan` asks for the files whose mark is missing or names another table, in
+every folder that wants renditions, not only the albums, and announces them to `media-stills` and
+`media-transcode` alone, which make what is missing. A rendition the media service refused for its
+processor budget counts as made, until that budget changes. A file read before the marks existed
+has none, so the first pass announces it once.
+
+The `media-heal` pipeline runs `media-scan` for you over `/archive/albums`, and `renditions-scan`
+beside it. Each pass is one instance, which
 shows under **Ongoing** on the **Dashboard** with how far through the archive it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces

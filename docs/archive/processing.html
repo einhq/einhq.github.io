@@ -221,6 +221,11 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td>run by the engine</td>
 </tr>
 <tr>
+<td><code>media-device-cover</code></td>
+<td>Offers a video&#39;s poster frame to the camera that took it, once its renditions are made</td>
+<td>run by the engine</td>
+</tr>
+<tr>
 <td><code>media-geocode</code></td>
 <td>Looks up the address of a file&#39;s GPS position</td>
 <td>run by the engine</td>
@@ -287,7 +292,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
-<td>Goes through the whole archive and announces the files missing work the other pipelines should have done</td>
+<td>Announces the files missing work the other pipelines should have done, renditions in any folder among them</td>
 <td>run by the engine</td>
 </tr>
 </tbody></table>
@@ -343,9 +348,11 @@ one sheet. The pages ask for a role, so changing a size there changes what they 
 in the terminal says what the file holds now, and names any entry it leaves out as wrong.</p>
 <p>The Archive installed the file, and a newer version of it never overwrites it, so a change you make
 stays. Each rendition is named after its size (<code>800x800.avif</code>), so a size changed is a new file for
-every picture: make them again with <code>regenerate --prune</code> under <code>/archive</code>, which can take hours or
-days on a large archive, and removes the files no role names any more. Pages pick up the change
-when they are opened again.</p>
+every picture. A file is marked with the table its renditions were made by, so the next pass of
+<code>media-heal</code> finds every file of a kind the change touched, in any folder, and the pipelines make
+the new sizes: on a large archive that takes hours or days. The files no role names any more stay
+until <code>regenerate --prune</code> under <code>/archive</code> removes them. Pages pick up the change when they are
+opened again.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
@@ -379,6 +386,10 @@ in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>
 <td><code>media-scan /archive/albums</code></td>
 </tr>
 <tr>
+<td>Announce the files that lack renditions the table names now</td>
+<td><code>renditions-scan</code></td>
+</tr>
+<tr>
 <td>Embed the stored texts and transcripts again, as they are</td>
 <td><code>media-reembed</code></td>
 </tr>
@@ -394,10 +405,17 @@ is core&#39;s; the other commands are the Archive&#39;s, and <a href="commands.h
 options.</p>
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: a fingerprint, display sizes, faces, renditions, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips
-what is already done.</p>
-<p>The <code>media-heal</code> pipeline runs it for you over <code>/archive/albums</code>. Each pass is one instance, which
+something a pipeline should have given it: a fingerprint, faces, or a transcript made with other
+settings than the media service runs now. Each pipeline then skips what is already done.</p>
+<p>Renditions are found another way. Once a file has every rendition <code>/etc/renditions.yaml</code> names for
+it, it is marked with the table they were made by (<code>renditionsFor</code> and <code>renditionsAt</code> in its
+attributes). <code>renditions-scan</code> asks for the files whose mark is missing or names another table, in
+every folder that wants renditions, not only the albums, and announces them to <code>media-stills</code> and
+<code>media-transcode</code> alone, which make what is missing. A rendition the media service refused for its
+processor budget counts as made, until that budget changes. A file read before the marks existed
+has none, so the first pass announces it once.</p>
+<p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code>, and <code>renditions-scan</code>
+beside it. Each pass is one instance, which
 shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through the archive it has come; it is
 housekeeping, not work waiting, so <code>health</code> does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces

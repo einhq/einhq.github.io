@@ -578,7 +578,8 @@ and <code>media-fingerprint</code>; for a picture also <code>media-faces</code>,
 is in the picture) and <code>media-ocr</code> (text in the picture); for a video <code>media-video-faces</code>,
 <code>media-embed-picture</code>, <code>media-transcode</code> and <code>media-transcribe</code>; for a recording
 <code>media-transcode</code> and <code>media-transcribe</code>; and <code>media-device</code> when the metadata names the device
-that made the file. They run side by side.</li>
+that made the file. They run side by side. Once a file has every rendition the rendition table
+names for it, it is marked so, which becomes <code>media.renditions.made</code>.</li>
 <li><code>media-faces</code> writes each face it finds under the photo, which becomes <code>media.face.detected</code>
 and starts <code>media-face-assign</code>, matching the face to a person.</li>
 <li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
@@ -711,12 +712,12 @@ describes what you see in the interface while this happens.</p>
 </tr>
 <tr>
 <td><code>media-stills</code></td>
-<td><code>media.metadata.extracted</code></td>
+<td><code>media.metadata.extracted</code>, <code>media.renditions.stale</code></td>
 <td>A photo&#39;s sizes, a video&#39;s poster frames and hover clip, a recording&#39;s waveform</td>
 </tr>
 <tr>
 <td><code>media-transcode</code></td>
-<td><code>media.metadata.extracted</code>, <code>media.file.turned</code></td>
+<td><code>media.metadata.extracted</code>, <code>media.file.turned</code>, <code>media.renditions.stale</code></td>
 <td>Video and audio the browser can play, a video&#39;s storyboard and chapters</td>
 </tr>
 <tr>
@@ -778,6 +779,11 @@ describes what you see in the interface while this happens.</p>
 <td><code>media-device</code></td>
 <td><code>media.metadata.extracted</code>, with a device in it</td>
 <td>Links a file to the device that made it</td>
+</tr>
+<tr>
+<td><code>media-device-cover</code></td>
+<td><code>media.renditions.made</code>, for a video</td>
+<td>Offers the video&#39;s poster frame to its device as a cover</td>
 </tr>
 <tr>
 <td><code>media-geocode</code></td>
