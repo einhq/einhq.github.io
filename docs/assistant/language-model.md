@@ -68,7 +68,7 @@ The commands on this page are written for podman. With Docker, write `docker com
 | Model    | `Qwen3.5-4B-Q8_0.gguf` from `unsloth/Qwen3.5-4B-GGUF`, named `qwen3.5-4b`                 |
 | Server   | llama.cpp's server, a ready-made image pinned to one build                                |
 | Address  | `http://llm:8190`, on the compose network only; nothing outside the containers reaches it |
-| Context  | 32768 tokens: the most of a conversation the model reads at once                          |
+| Context  | 32768 tokens: the most of a conversation the model reads at once, cached at 8 bits        |
 | Requests | One at a time; a second question waits until the first is answered                        |
 | Memory   | At most 10 GB (`LLM_MEMORY`)                                                              |
 | Thinking | Off, unless a question asks for it (the chat's **Think harder**)                          |
