@@ -62,7 +62,8 @@ staging init --user ruby
 ruby: 7 created, 0 repaired, 0 adopted, 0 moved, 0 groups, 0 routes, 0 relinked
 ```
 
-`staging init` makes the directories with their modes and owner, marks `staging/` unlisted and
+`staging init` makes the directories with their modes and owner, marks `staging/` unlisted, sets its
+`processing` to every family but `text` (so a staged file's text is read once it is filed), and
 makes the Inbox. It also puts right what is out of place, moving each thing with every link to it
 following, so albums and suggestions keep pointing at it:
 
@@ -270,6 +271,7 @@ Each problem is a line `<code>: <path>: <detail>`:
 | `not-directory`  | Something other than a directory stands where one should be.             |
 | `mode`, `owner`  | A directory has another mode than `0700`, or another owner.              |
 | `not-unlisted`   | `staging/` is not marked unlisted, so the library's views would show it. |
+| `processing`     | `staging/` wants other processing than staging's, such as text.          |
 | `loose-entry`    | Something lies directly in `files/` or `albums/`.                        |
 | `no-inbox`       | The Inbox category is missing.                                           |
 | `orphan-albums`  | A folder of groups has no category.                                      |

@@ -82,7 +82,9 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks
 and places. A folder with `processing` set to `["renditions"]` gets its pictures read and their
-sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints.
+sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints. A staging
+area wants every family but `text`: its files get everything else while they wait, and their text
+is read once they are filed into a folder that wants it.
 
 ## The renditions
 
