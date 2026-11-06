@@ -196,6 +196,11 @@ time, and Open-Meteo's a month at a time. The first lookup near a station fetche
 of that measurement, which can take a minute; every later hour there, in any year, is answered
 without going online. Answers kept there can be deleted: they are asked for again when needed.
 
+A device's trips get their weather this way too: each whole hour of a trip, the weather where the
+device was then, summed up for each day and for the whole trip on the album made of it
+([The Trip tab](albums.md#the-trip-tab)). A trip is looked up once it has been found in the track,
+and again for a week after each day, since the last hours are sometimes observed later.
+
 The header shows the location's name and address, the people who live there, and its labels. If
 you may change the location, it also has **Share**, **Edit** and a ⋮ menu with **Add event** and
 **Move to trash**. On a phone all of these are in the ⋮ menu. Sharing a location works as for

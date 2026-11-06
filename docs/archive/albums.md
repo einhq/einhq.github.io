@@ -143,14 +143,22 @@ An album made of a trip a device's track recorded has a **Trip** tab (see
 [Make a trip an album](devices.md#make-a-trip-an-album)). At the top are the trip's dates, an
 **Ongoing** badge while it lasts, the device, which links to its trips, how many days it took and its
 length, in nautical miles for a boat and kilometres for anything else. Under them is where it
-started and ended, and the farthest place it stayed at.
+started and ended, and the farthest place it stayed at, and the weather over the whole trip.
 
 Each day of the trip has a card of its own: the date, the first and last time on the device's clock
-(UTC for a device without a **Timezone**), the day's length, where it started and where it ended. The album's notes from that day stand
+(UTC for a device without a **Timezone**), the day's length, where it started and where it ended,
+and the day's weather. The album's notes from that day stand
 under it, as on the Media tab: this is the trip's logbook. **Add note** on a day's card writes a
 note dated on that day, as **Add event** does; the pen on a note changes it. Under the days,
 **Stays** lists the places the trip stayed at, when it arrived and when it left. A place that is a
 location links to it.
+
+The weather is there when an administrator has turned on **Look up the weather** (see
+[The weather at a place and time](places.md#the-weather-at-a-place-and-time)). It is the weather
+where the device was at each whole hour of the day: the mean wind in metres per second, the
+strongest hour's when it was stronger, and where the wind mostly blew from; the coldest and the
+warmest hour; and the mean cloud cover. For example _Wind 5.5 m/s, at most 9, from SW · 14 to 19 °C ·
+40 % cloud_.
 
 While the trip is ongoing, the tab follows it as the device's points come in.
 
