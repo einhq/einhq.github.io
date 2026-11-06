@@ -511,7 +511,8 @@ When a file names no registered device, or more than one, it waits for you:
    long between), its **Points**, its **Size**, and the **Devices named** in it, when it names more
    than one. The arrow keys move from file to file.
 4. Select the files that one device recorded: <kbd>Ctrl</kbd> and click adds or removes one,
-   <kbd>Shift</kbd> and click takes a run of them, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. At
+   <kbd>Shift</kbd> and click takes a run of them, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. On a
+   phone, press and hold a file, then tap the others. At
    the top of the panel, choose the device in the **Device that recorded them** list and click
    **Import** (**Import 3 files** with three selected). Each route joins that device's track and its
    file moves out of the list into the device's `routes` folder. A file that cannot be read stays,

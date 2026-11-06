@@ -537,7 +537,8 @@ the category; subfolders are cards with the number of entries in each.
   on a column's name, a folder opened in place with its arrow or gone into with a double click or
   <kbd>Enter</kbd>, and a panel beside it that previews the entry you are on. It stays within the
   category: **Up** stops at it and **Home** goes back to it. Select entries with a click,
-  <kbd>Ctrl</kbd> or <kbd>Shift</kbd> and a click for more, or <kbd>Ctrl</kbd>+<kbd>A</kbd>; the
+  <kbd>Ctrl</kbd> or <kbd>Shift</kbd> and a click for more, or <kbd>Ctrl</kbd>+<kbd>A</kbd> (on a
+  phone, press and hold one, then tap the others); the
   top of the panel then offers **Move to folder…**, **Move to category…** and **Discard…** for
   them, and <kbd>Delete</kbd> discards them too.
 

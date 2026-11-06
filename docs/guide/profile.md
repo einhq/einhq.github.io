@@ -352,7 +352,8 @@ and a transcript, and comes back with all of it when you restore it.
    `Discarded from Inbox: “Boat trip” · 86 items`.
 3. Select a row. The pane beside the list, or under it on a phone, shows its name, **From** where it
    came, when it was **Deleted**, and a preview. Hold <kbd>Ctrl</kbd> (<kbd>⌘</kbd> on a Mac) while
-   you click to add a row to the selection, or <kbd>Shift</kbd> to select a range.
+   you click to add a row to the selection, or <kbd>Shift</kbd> to select a range. On a phone, press
+   and hold a row, then tap the others.
 4. Choose **Restore**, or **Restore 3** with three rows selected. EiN says **Restored to** and the
    path, or how many it restored.
 

@@ -310,9 +310,13 @@ opens it at a given folder.
 1. Click a segment of the path above the list to go up to it, or click beside the segments to type a
    path and press <kbd>Enter</kbd>. **Up** and **Home** beside it go to the folder above and to your home.
 2. Double-click a folder, or press <kbd>Enter</kbd>, to go into it.
-3. Right-click a node for **Open**, **Cut**, **Copy**, **Paste**, **Rename**, **Delete**,
-   **New directory**, **Properties** and **Open terminal here**.
-4. **Tools** at the top right opens a pane with the selected node's **Preview**, **Attributes** and
+3. Click a node to select it; <kbd>Ctrl</kbd> and click adds or removes one, <kbd>Shift</kbd> and
+   click takes a run, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. On a touch screen, press and hold
+   a node to start picking: a tap then adds or removes one, until none is left selected.
+4. Right-click a node, or press and hold a selected one on a touch screen, for **Open**, **Cut**,
+   **Copy**, **Paste**, **Rename**, **Delete**, **New directory**, **Properties** and **Open
+   terminal here**.
+5. **Tools** at the top right opens a pane with the selected node's **Preview**, **Attributes** and
    **Sharing**; **Split** opens a second list beside the first.
 
 **Properties** (<kbd>Alt</kbd>+<kbd>Enter</kbd>) shows and changes a node's owner, group and mode;
