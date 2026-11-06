@@ -610,7 +610,8 @@ a video, and <code>media-device</code> when the metadata names the device that m
 <li><code>media-faces</code> writes each face it finds under the photo, which becomes <code>media.face.detected</code>
 and starts <code>media-face-assign</code>, matching the face to a person.</li>
 <li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
-address, and <code>location.point.changed</code>, which links the photo to the location that contains it.</li>
+address, and <code>location.point.changed</code>, which links the photo to the location that contains it
+and starts <code>media-weather</code> for the weather it was taken in.</li>
 </ol>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 608" role="img" aria-label="From upload to findable: a file arrives and its camera, clocks and GPS fix are read first, by media-ingest; then its date and place, thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the viewer and the albums by day, the grids, People, Search, duplicates and stacks, or Locations">
   <title>From upload to findable</title>
@@ -829,6 +830,11 @@ describes what you see in the interface while this happens.</p>
 <td><code>media-geocode</code></td>
 <td><code>media.position.available</code></td>
 <td>The address of a file&#39;s GPS position</td>
+</tr>
+<tr>
+<td><code>media-weather</code></td>
+<td><code>location.point.changed</code>, <code>media.weather.owed</code></td>
+<td>The weather at a photo&#39;s position and date</td>
 </tr>
 <tr>
 <td><code>location-link-point</code></td>

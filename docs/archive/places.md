@@ -196,6 +196,14 @@ time, and Open-Meteo's a month at a time. The first lookup near a station fetche
 of that measurement, which can take a minute; every later hour there, in any year, is answered
 without going online. Answers kept there can be deleted: they are asked for again when needed.
 
+A photo or video with a place and a date gets the weather of that hour at that place, shown under
+the map in the viewer's details ([The details panel](viewer.md#the-details-panel)). It is looked
+up once the picture's place is known, and again when someone moves the picture. A picture whose
+date changed, and the pictures already in the archive, get theirs from the background check that
+closes the gaps the pipelines missed
+([Close gaps the pipelines missed](processing.md#close-gaps-the-pipelines-missed)).
+In the terminal, `weather-photo '<file>/position'` looks one up, and `-f` looks it up again.
+
 A device's trips get their weather this way too: each whole hour of a trip, the weather where the
 device was then, summed up for each day and for the whole trip on the album made of it
 ([The Trip tab](albums.md#the-trip-tab)). A trip is looked up once it has been found in the track,

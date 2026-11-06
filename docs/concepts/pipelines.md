@@ -329,7 +329,8 @@ starts its own pipelines:
 6. `media-faces` writes each face it finds under the photo, which becomes `media.face.detected`
    and starts `media-face-assign`, matching the face to a person.
 7. A GPS position becomes `media.position.available`, which starts `media-geocode` for the
-   address, and `location.point.changed`, which links the photo to the location that contains it.
+   address, and `location.point.changed`, which links the photo to the location that contains it
+   and starts `media-weather` for the weather it was taken in.
 
 ![From upload to findable: a file arrives and its camera, clocks and GPS fix are read first, by media-ingest; then its date and place, thumbnails, video and sound to play, faces and people, picture vectors, text in the picture, transcripts and voices, fingerprints and the address are worked out side by side, each showing up in its own place: the viewer and the albums by day, the grids, People, Search, duplicates and stacks, or Locations](../diagrams/pipeline.svg "No stage waits for the one before it to finish; each waits for the fact it needs.")
 
@@ -360,6 +361,7 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `media-device`         | `media.metadata.interpreted`, with a device in it                         | Links a file to the device that made it                                         |
 | `media-device-cover`   | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its device as a cover                        |
 | `media-geocode`        | `media.position.available`                                                | The address of a file's GPS position                                            |
+| `media-weather`        | `location.point.changed`, `media.weather.owed`                            | The weather at a photo's position and date                                      |
 | `location-link-point`  | `location.point.changed`                                                  | Links a photo to the location containing its position                           |
 | `location-upkeep`      | `location.changed`                                                        | Redraws a location and links the photos inside it again                         |
 | `media-album`          | `media.album.members-changed`                                             | An album's stacks, time span, cover and matching profile                        |

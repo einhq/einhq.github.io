@@ -52,6 +52,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-device`         | Links a file to the camera or phone that took it                                                                    | run by the engine           |
 | `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
 | `media-geocode`        | Looks up the address of a file's GPS position                                                                       | run by the engine           |
+| `media-weather`        | Looks up the weather a photo was taken in, at its GPS position and its date                                         | run by the engine           |
 | `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
 | `media-duplicates`     | Decides the duplicate findings of a staged file again, or once its fingerprints are in                              | `dedupe`                    |
 | `location-link-point`  | Links a photo to the location that contains its GPS point                                                           | run by the engine           |
@@ -71,14 +72,14 @@ show **waiting for EMS** on the **Dashboard**.
 Each media pipeline belongs to a family of work, which it names with `wants`, so a folder can ask
 for only some of it ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)):
 
-| Family            | What it covers                                                                                                                           | Pipelines                                                                               |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                 |
-| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                |
-| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                 |
-| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                            |
-| `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                  |
-| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera                                                        | `media-interpret`, and the face, voice, device, geocoding and duplicate pipelines above |
+| Family            | What it covers                                                                                                                           | Pipelines                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                          |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                         |
+| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                          |
+| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                     |
+| `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                           |
+| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather                                           | `media-interpret`, and the face, voice, device, geocoding, weather and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks
@@ -125,8 +126,8 @@ the Archive's, which [Archive commands](commands.md) lists with their options.
 ### Close gaps the pipelines missed
 
 `media-scan` walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: its date and place, faces or voices. Each
-pipeline then skips what is already done.
+something a pipeline should have given it: its date and place, faces or voices, its address, or
+the weather it was taken in. Each pipeline then skips what is already done.
 
 What describes a file is the Media module's to keep current, in every folder:
 [renditions](../media/index.md#renditions-kept-current), [picture vectors](../media/index.md#picture-vectors),

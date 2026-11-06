@@ -193,6 +193,11 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td>run by the engine</td>
 </tr>
 <tr>
+<td><code>media-weather</code></td>
+<td>Looks up the weather a photo was taken in, at its GPS position and its date</td>
+<td>run by the engine</td>
+</tr>
+<tr>
 <td><code>media-album</code></td>
 <td>An album&#39;s stacks, time span, missing cover and profile, when its members change</td>
 <td>run by the engine</td>
@@ -297,8 +302,8 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 </tr>
 <tr>
 <td><code>archive</code></td>
-<td>The date and the place, faces and voices and who they are, duplicates, the camera</td>
-<td><code>media-interpret</code>, and the face, voice, device, geocoding and duplicate pipelines above</td>
+<td>The date and the place, faces and voices and who they are, duplicates, the camera, the weather</td>
+<td><code>media-interpret</code>, and the face, voice, device, geocoding, weather and duplicate pipelines above</td>
 </tr>
 </tbody></table>
 </div>
@@ -363,8 +368,8 @@ is core&#39;s, <code>media-reembed</code> the <a href="../media/commands.html#me
 the Archive&#39;s, which <a href="commands.html">Archive commands</a> lists with their options.</p>
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: its date and place, faces or voices. Each
-pipeline then skips what is already done.</p>
+something a pipeline should have given it: its date and place, faces or voices, its address, or
+the weather it was taken in. Each pipeline then skips what is already done.</p>
 <p>What describes a file is the Media module&#39;s to keep current, in every folder:
 <a href="../media/index.html#renditions-kept-current">renditions</a>, <a href="../media/index.html#picture-vectors">picture vectors</a>,
 <a href="../media/index.html#fingerprints">fingerprints</a> and <a href="../media/index.html#text-and-transcripts-kept-current">text, transcripts and their vectors</a>.</p>
