@@ -157,8 +157,8 @@ yours.
 the items of your own lists assigned to nobody, done ones too (archived ones are not). Its columns
 are those of the lists your items are on, put together by title: **Todo**, then every other
 column in the order it is first met, two lists' _Ongoing_ being one column, and **Done** last. A
-card names its list at its foot, and on a phone a row's title starts with it, _Shopping › Milk_;
-choose the list's name to open its tab. Drag
+card names its list with a label at its foot, with the icon of the list's tab, and on a phone a
+row's title starts with it, _Shopping › Milk_; choose the list's name to open its tab. Drag
 a card to another column to move it there on its own list; a column its list does not have takes
 no drop.
 
