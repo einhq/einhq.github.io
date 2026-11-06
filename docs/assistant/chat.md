@@ -99,11 +99,11 @@ When you ask for a table, or the answer has many rows, the chat draws a table un
 
 Some answers come with a card drawn under them:
 
-| Card            | When                                              | What it shows                                                                                                                            |
-| --------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **Chart**       | When you ask for a chart, a graph or a diagram    | A line, bar or pie chart of a log's entries, or of numbers the assistant counted. With fewer than two values it says "Nothing to chart." |
-| **Family tree** | For a question about family                       | The tree around a person, or the line of relations between two people. Comes with the archive.                                           |
-| **Map**         | When you ask where something is, or ask for a map | The places and pictures the answer named, pinned where the archive has them. Comes with the archive.                                     |
+| Card            | When                                              | What it shows                                                                                                                                                                                                        |
+| --------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Chart**       | When you ask for a chart, a graph or a diagram    | A line, bar or pie chart of a log's entries, of a series a command prints, such as the weather hour by hour over a week, or of numbers the assistant counted. With fewer than two values it says "Nothing to chart." |
+| **Family tree** | For a question about family                       | The tree around a person, or the line of relations between two people. Comes with the archive.                                                                                                                       |
+| **Map**         | When you ask where something is, or ask for a map | The places and pictures the answer named, pinned where the archive has them. Comes with the archive.                                                                                                                 |
 
 A card is drawn as you each time it appears, so it shows the archive as it is when you look, and leaves out anything you may not see.
 

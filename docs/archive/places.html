@@ -335,7 +335,11 @@ reconstruction of the weather from 1940 until a few days ago, for squares of 0.2
 less so in mountains and along a broken coast.</li>
 </ol>
 <p>The value is the one of the whole hour nearest the time asked about. A time still to come has no
-weather.</p>
+weather. <code>weather</code> with <code>--to</code> answers every hour from one time to another, at most 31 days, a
+line each, the way a log is printed, which is what the assistant draws a chart of when you ask for
+the temperature over a week:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+weather 57.71 11.97 2026-10-30T00:00 --to=2026-11-06T00:00</code></pre></div>
 <p>EiN keeps what the services answered in <code>/archive/sources/weather</code>: a station&#39;s values a year at a
 time, and Open-Meteo&#39;s a month at a time. The first lookup near a station fetches its whole history
 of that measurement, which can take a minute; every later hour there, in any year, is answered

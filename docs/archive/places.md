@@ -189,7 +189,14 @@ Each value comes from the first of these that has it:
    less so in mountains and along a broken coast.
 
 The value is the one of the whole hour nearest the time asked about. A time still to come has no
-weather.
+weather. `weather` with `--to` answers every hour from one time to another, at most 31 days, a
+line each, the way a log is printed, which is what the assistant draws a chart of when you ask for
+the temperature over a week:
+
+```bash
+# in EiN's terminal
+weather 57.71 11.97 2026-10-30T00:00 --to=2026-11-06T00:00
+```
 
 EiN keeps what the services answered in `/archive/sources/weather`: a station's values a year at a
 time, and Open-Meteo's a month at a time. The first lookup near a station fetches its whole history
