@@ -455,7 +455,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_llm_thinking"><code>CFG_LLM_THINKING</code><a class="anchor" href="#cfg_llm_thinking" aria-label="Link to this section"></a></h3>
-<p><strong>Think before answering</strong>. 1 asks the model to think before it answers, 0 asks it not to. Sent as llama.cpp&#39;s chat_template_kwargs, so only a server that reads them honours it. Empty sends nothing and the server decides.</p>
+<p><strong>Think before answering</strong>. 1 asks the model to think before it answers in the chat, 0 asks it not to; llm-chat, and the search box through it, thinks only when given --think. Sent as llama.cpp&#39;s chat_template_kwargs, so only a server that reads them honours it. Empty sends nothing and the server decides.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

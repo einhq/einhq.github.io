@@ -157,7 +157,7 @@ Every setting of an EiN with all its modules: 87 of them, in the groups the Sett
 
 ### `CFG_LLM_THINKING`
 
-**Think before answering**. 1 asks the model to think before it answers, 0 asks it not to. Sent as llama.cpp's chat_template_kwargs, so only a server that reads them honours it. Empty sends nothing and the server decides.
+**Think before answering**. 1 asks the model to think before it answers in the chat, 0 asks it not to; llm-chat, and the search box through it, thinks only when given --think. Sent as llama.cpp's chat_template_kwargs, so only a server that reads them honours it. Empty sends nothing and the server decides.
 
 | | |
 | --- | --- |

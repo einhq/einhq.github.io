@@ -350,7 +350,7 @@ llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 <td><a href="../reference/settings.html#cfg_llm_thinking"><code>CFG_LLM_THINKING</code></a></td>
 <td><strong>Think before answering</strong></td>
 <td>empty</td>
-<td><code>1</code> or <code>0</code> turns the model&#39;s thinking on or off for every question that does not ask otherwise. Only llama.cpp reads it; empty leaves it to the server.</td>
+<td><code>1</code> or <code>0</code> turns the model&#39;s thinking on or off for every question in the chat that does not ask otherwise. <code>llm-chat</code>, and the search box through it, thinks only when asked with <code>--think</code>. Only llama.cpp reads it; empty leaves it to the server.</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_llm_max_tokens"><code>CFG_LLM_MAX_TOKENS</code></a></td>
@@ -378,7 +378,7 @@ llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 llm-chat <span class="hljs-string">&#x27;Answer in one word: what colour is the sky?&#x27;</span>
 llm-chat --system <span class="hljs-string">&#x27;Answer in one word.&#x27;</span> <span class="hljs-string">&#x27;The colour of grass?&#x27;</span></code></pre></div>
-<p>It gives up after 180 seconds (<code>--timeout</code>) and does not wait for a model that is restarting. <a href="commands.html#llm-chat"><code>llm-chat</code></a> lists its options.</p>
+<p>It gives up after 180 seconds (<code>--timeout</code>) and does not wait for a model that is restarting. With <code>--think</code> the model thinks first, and the thought counts toward <code>--max-tokens</code>: a thought that uses them all up leaves no answer, and <code>llm-chat</code> fails with <code>the answer was cut off before it began</code>. <a href="commands.html#llm-chat"><code>llm-chat</code></a> lists its options.</p>
 <h3 id="try-a-model-before-you-rely-on-it">Try a model before you rely on it<a class="anchor" href="#try-a-model-before-you-rely-on-it" aria-label="Link to this section"></a></h3>
 <p><code>agent-eval</code> asks the chat the test questions every module ships, against your real archive, and scores whether the model reached the right commands and answered. Run it after switching to another model, and compare it with a run on the default one:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
