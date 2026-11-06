@@ -92,9 +92,9 @@ headings, Todo first and Done last.
 
 - The round box at a row's left ticks the item off, moving it to **Done**; unticking it in Done
   moves it back to **Todo**.
-- A spinner before the title says the item is under way: it is in a column of your own, neither
-  Todo nor Done.
-- A chevron after the title, when the item has a description, unfolds it.
+- A slowly turning spinner after the title says the item is under way: it is in a column of your
+  own, neither Todo nor Done.
+- A chevron after that, when the item has a description, unfolds it.
 - At the right are its due day (or a calendar to give it one) and whoever is to do it.
 - What it links to shows under the title as pictures alone.
 - Hold a row still for half a second to open the item in its dialog; hold it and move to move it.
@@ -113,14 +113,15 @@ headings, Todo first and Done last.
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
   On a phone, lifting a row brings up the names of the columns at the foot of the screen: let go
   over one and the card goes to the end of that column.
-- **Assign it**: the round button at a card's right is the face of whoever is to do it, their
-  person's picture or their initials, or an empty circle when it is nobody's. Choose it and, under
-  **Assign to**, a member of the list's group, or **Nobody in particular**.
-- **Give it a due day**: the calendar in a card's heading picks one; once set, the day stands there
-  instead and opens the picker again, where **No due day** takes it away.
+- **Assign it**: the round button at the right of a card's foot is the face of whoever is to do it,
+  their person's picture or their initials. An item that is nobody's has an empty circle instead,
+  at the card's top right while the pointer is over it (on a phone, at the row's right). Choose it
+  and, under **Assign to**, a member of the list's group, or **Nobody in particular**.
+- **Give it a due day**: the calendar at a card's top right picks one; once set, the day stands at
+  the card's foot instead and opens the picker again, where **No due day** takes it away.
 - **Read the description**: a card shows the first line of its description, with **…** when there
   is more. Choose it to read the whole of it, as formatted Markdown, and again to fold it.
-- **Change an item**: the pencil in a card's heading, or on a phone a long press on its row, opens
+- **Change an item**: the pencil at a card's top right, or on a phone a long press on its row, opens
   the item in a dialog: its **Title**, its
   **Description**, written in Markdown (lists, links, **bold**; **Preview** shows how it will look),
   the day it is **Due**, and **Assign to**, where typing a name narrows the members to choose from.
@@ -142,12 +143,13 @@ headings, Todo first and Done last.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
   for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
-On a computer a card shows its pencil, and its calendar when it has no due day, while the pointer is
-over it. A due day that has passed is red.
+On a computer a card shows its pencil at its top right while the pointer is over it, with the
+calendar when it has no due day and the empty circle when it is nobody's. A due day that has passed
+is red.
 
-On a computer a card's heading is coloured by how long it has been on the list: green on the day it is added,
-then yellow, and red once it is four weeks old; a done card's is grey. Hovering the heading says
-when it was added.
+On a computer a stripe down a card's left edge is coloured by how long it has been on the list:
+green on the day it is added, then yellow, and red once it is four weeks old; a done card's is grey.
+Hovering the card says when it was added.
 An item can be given only to a member of the list's group; on a list of your own every item is
 yours.
 
@@ -155,7 +157,8 @@ yours.
 the items of your own lists assigned to nobody, done ones too (archived ones are not). Its columns
 are those of the lists your items are on, put together by title: **Todo**, then every other
 column in the order it is first met, two lists' _Ongoing_ being one column, and **Done** last. A
-card's title starts with its list, _Shopping › Milk_; choose the list's name to open its tab. Drag
+card names its list at its foot, and on a phone a row's title starts with it, _Shopping › Milk_;
+choose the list's name to open its tab. Drag
 a card to another column to move it there on its own list; a column its list does not have takes
 no drop.
 
@@ -163,9 +166,10 @@ To add an item from anywhere, choose **Create → Todo item** in the top bar, pi
 choose **Add**. Opened while a picture, an album or another page about one thing is showing, it
 offers **About** that thing, ticked, and the new item links to it.
 
-A card's links are listed at its foot, each with its picture: a picture's own, an album's cover, a
-person's, place's or device's picture. A link is called what it points at is called, such as an
-album's title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
+A card's links are listed under its description, each with its picture: a picture's own, an
+album's cover, a person's, place's or device's picture. A picture or a video shows as its picture
+alone, its name said on hovering it; any other link is named too, called what it points at is
+called, such as an album's title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
 A link to something that is gone, or that you may not see, is greyed out.
 
 ## The todo widget
