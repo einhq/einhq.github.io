@@ -39,32 +39,32 @@ show **waiting for EMS** on the **Dashboard**.
 
 ## The Archive's pipelines
 
-| Pipeline               | What it does                                                                                             | Kind of work                |
-| ---------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name          | `interpret`                 |
-| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                   | `fingerprint`               |
-| `media-faces`          | Finds the faces in a photo and crops each one                                                            | `faces`                     |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                    | `faces`                     |
-| `media-face-assign`    | Matches a found face to a person                                                                         | `face-assign`               |
-| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                              | `diarize`                   |
-| `media-speaker-assign` | Decides which person each voice is                                                                       | `speaker-assign`            |
-| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                          | `diarize`, `speaker-assign` |
-| `media-device`         | Links a file to the camera or phone that took it                                                         | run by the engine           |
-| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                   | run by the engine           |
-| `media-geocode`        | Looks up the address of a file's GPS position                                                            | run by the engine           |
-| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                         | run by the engine           |
-| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                    | `dedupe`                    |
-| `location-link-point`  | Links a photo to the location that contains its GPS point                                                | run by the engine           |
-| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                         | run by the engine           |
-| `document-index`       | Extracts the text of a document and makes it searchable                                                  | run by the engine           |
-| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                     | `unzip`                     |
-| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                          | `sidecars`                  |
-| `staging-organize`     | Plans a staging category's suggested groups again                                                        | `organize`                  |
-| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                               | `retime`                    |
-| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                              | run by the engine           |
-| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                         | run by the engine           |
-| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                   | run by the engine           |
-| `media-heal`           | Goes through the whole archive and announces the files missing work the other pipelines should have done | run by the engine           |
+| Pipeline               | What it does                                                                                                        | Kind of work                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name                     | `interpret`                 |
+| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                              | `fingerprint`               |
+| `media-faces`          | Finds the faces in a photo and crops each one                                                                       | `faces`                     |
+| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                               | `faces`                     |
+| `media-face-assign`    | Matches a found face to a person                                                                                    | `face-assign`               |
+| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                         | `diarize`                   |
+| `media-speaker-assign` | Decides which person each voice is                                                                                  | `speaker-assign`            |
+| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                     | `diarize`, `speaker-assign` |
+| `media-device`         | Links a file to the camera or phone that took it                                                                    | run by the engine           |
+| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
+| `media-geocode`        | Looks up the address of a file's GPS position                                                                       | run by the engine           |
+| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
+| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                               | `dedupe`                    |
+| `location-link-point`  | Links a photo to the location that contains its GPS point                                                           | run by the engine           |
+| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                                    | run by the engine           |
+| `document-index`       | Extracts the text of a document and makes it searchable                                                             | run by the engine           |
+| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                                | `unzip`                     |
+| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
+| `staging-organize`     | Plans a staging category's suggested groups again                                                                   | `organize`                  |
+| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
+| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                         | run by the engine           |
+| `track-trips`          | Finds a device's trips again after points arrive, and names the places it stayed                                    | run by the engine           |
+| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
+| `media-heal`           | Goes through the albums or a staging area and announces the files missing work the other pipelines should have done | run by the engine           |
 
 ## Which processing a folder gets
 
@@ -127,8 +127,10 @@ transcript made with other settings than the media service runs now. Each pipeli
 
 Renditions are the Media module's to keep current: [Renditions kept current](../media/index.md#renditions-kept-current).
 
-The `media-heal` pipeline runs `media-scan` for you over `/archive/albums`. Each pass is one instance, which
-shows under **Ongoing** on the **Dashboard** with how far through the archive it has come; it is
+The `media-heal` pipeline runs `media-scan` for you over `/archive/albums` and over each user's
+staged files, `/home/<user>/staging/files`, whose faces staging uses to suggest groups. Text in a
+staged file is not a gap: it is read when the file is filed. Each pass is one instance, which
+shows under **Ongoing** on the **Dashboard** with how far through its folder it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
 the rest: a long queue of one kind of work, such as faces, does not keep voices or fingerprints
@@ -139,10 +141,11 @@ says how many files it went through, how many gaps it announced and which kinds 
 pass that fails is a failed instance, run again like any other [failed work](../admin/processing.md).
 
 The `media-heal` service says when a pass is due. It looks every `CFG_MEDIA_HEAL_INTERVAL` seconds
-(900) and starts one unless one is running, the last one failed, or every kind of gap it would look
-for has work waiting. The kinds the last pass held back get a pass of their own once their pipelines
-have nothing waiting. After a pass that finds nothing and holds nothing back it rests for
-`CFG_MEDIA_HEAL_REST` seconds (21600, six hours). `media-heal -n` says whether a pass is due now,
+(900) and, unless a pass is running, starts one over the first folder, the albums before the staging
+areas, whose pass is due: one runs at a time. A folder's pass is not due when its last one failed, or
+when every kind of gap it would look for has work waiting. The kinds a folder's last pass held back
+get a pass of their own once their pipelines have nothing waiting. After a pass that finds nothing
+and holds nothing back, that folder rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six hours). `media-heal -n` says whether a pass is due now,
 and `media-heal --rest 0` starts one without waiting out the rest.
 
 Faces, text vectors, text in pictures and transcripts are compared with the models the media

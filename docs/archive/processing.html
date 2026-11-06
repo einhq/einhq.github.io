@@ -258,7 +258,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 <tr>
 <td><code>media-heal</code></td>
-<td>Goes through the whole archive and announces the files missing work the other pipelines should have done</td>
+<td>Goes through the albums or a staging area and announces the files missing work the other pipelines should have done</td>
 <td>run by the engine</td>
 </tr>
 </tbody></table>
@@ -363,8 +363,10 @@ the Archive&#39;s, which <a href="commands.html">Archive commands</a> lists with
 something a pipeline should have given it: its date and place, a fingerprint, faces, or a
 transcript made with other settings than the media service runs now. Each pipeline then skips what is already done.</p>
 <p>Renditions are the Media module&#39;s to keep current: <a href="../media/index.html#renditions-kept-current">Renditions kept current</a>.</p>
-<p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code>. Each pass is one instance, which
-shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through the archive it has come; it is
+<p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code> and over each user&#39;s
+staged files, <code>/home/&lt;user&gt;/staging/files</code>, whose faces staging uses to suggest groups. Text in a
+staged file is not a gap: it is read when the file is filed. Each pass is one instance, which
+shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through its folder it has come; it is
 housekeeping, not work waiting, so <code>health</code> does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
 the rest: a long queue of one kind of work, such as faces, does not keep voices or fingerprints
@@ -374,10 +376,11 @@ restart of EiN does not send it back to the beginning. When a pass ends, the <st
 says how many files it went through, how many gaps it announced and which kinds it held back. A
 pass that fails is a failed instance, run again like any other <a href="../admin/processing.html">failed work</a>.</p>
 <p>The <code>media-heal</code> service says when a pass is due. It looks every <code>CFG_MEDIA_HEAL_INTERVAL</code> seconds
-(900) and starts one unless one is running, the last one failed, or every kind of gap it would look
-for has work waiting. The kinds the last pass held back get a pass of their own once their pipelines
-have nothing waiting. After a pass that finds nothing and holds nothing back it rests for
-<code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six hours). <code>media-heal -n</code> says whether a pass is due now,
+(900) and, unless a pass is running, starts one over the first folder, the albums before the staging
+areas, whose pass is due: one runs at a time. A folder&#39;s pass is not due when its last one failed, or
+when every kind of gap it would look for has work waiting. The kinds a folder&#39;s last pass held back
+get a pass of their own once their pipelines have nothing waiting. After a pass that finds nothing
+and holds nothing back, that folder rests for <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six hours). <code>media-heal -n</code> says whether a pass is due now,
 and <code>media-heal --rest 0</code> starts one without waiting out the rest.</p>
 <p>Faces, text vectors, text in pictures and transcripts are compared with the models the media
 service runs now (picture vectors are the <a href="../media/index.html#picture-vectors">Media</a> module&#39;s to
