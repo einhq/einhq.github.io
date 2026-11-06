@@ -1,11 +1,13 @@
 # Your sidebar and top bar
 
-You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add
-pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it
-for yourself and, if you are an administrator, for everyone on your EiN or for one group.
+You can move the entries of the sidebar, the buttons of the top bar and the rows of the menu under
+your picture between the three, and put them in another order, by dragging them: see
+[Arrange by dragging](#arrange-by-dragging). That writes a short JSON file for you.
 
-There is no page in **Settings** for this: the files on this page are the only way. You need to be
-signed in and able to edit a few lines of JSON, usually in the [terminal](../shell/terminal.md).
+Everything else — renaming and hiding entries, adding pages, buttons and menus of your own — is
+done by writing that file yourself. This page shows how, for yourself and, if you are an
+administrator, for everyone on your EiN or for one group. You need to be signed in and able to edit
+a few lines of JSON, usually in the [terminal](../shell/terminal.md).
 
 ## How the sidebar and top bar are put together
 
@@ -170,6 +172,43 @@ the file in the terminal first; after that you can edit it here:
 
 This editor does not check the JSON. Run `ui-nav` afterwards, or reload the page and look.
 
+## Arrange by dragging
+
+1. Open the menu under your picture and choose **Arrange navigation**. The menu stays open, and
+   every place an entry can go is outlined with a dashed line: each section of the sidebar, the
+   top bar beside the search box and at the right, and the menu itself.
+2. Drag an entry to where you want it. A line shows where it lands. Drop a sidebar page in the top
+   bar and it becomes a button that opens the page; drop a button in a section and it becomes an
+   entry there; drop either in the menu and it becomes a row of it.
+3. Choose **Done**.
+
+On a phone, or with the keyboard, tap or choose an entry instead: a menu moves it **Earlier** or
+**Later**, or to another place under **Move to**.
+
+Some entries cannot go everywhere. A dropdown, such as **Create**, and a button that runs a command,
+such as **Random album**, stay in the top bar; a dropdown does not go into the menu under your
+picture. Those places are not outlined while you drag them, and are greyed out under **Move to**.
+
+**Reset** puts every entry back where the modules and your administrator have it. It takes away only
+what arranging wrote, the places and the order, and keeps your own renames, hidden entries and pages.
+
+Each move is written to your `~/.ui/nav.json` as the entry's id and where it goes, for example:
+
+```json
+{
+  "sidebar": [{ "id": "ui.stats", "place": "topbar", "parent": null, "order": 15 }],
+  "topbar": [{ "id": "ui.trash", "place": "sidebar", "section": "explore", "parent": null, "order": 15 }]
+}
+```
+
+This moved **Statistics** from the sidebar to the top bar, between the chat button (10) and
+**Create** (20), and **Trash** from the menu under your picture to the **Explore** section. `null`
+takes away a field a module gave, here a `parent`; see
+[Move an entry between the sidebar, the top bar and a menu](#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu).
+
+When the right of the top bar has more buttons than there is room for, eight or three on a phone,
+the rest are under a **More** button at its end.
+
 ## Rename, move and hide entries
 
 The examples on this page change entries the Archive and the assistant add, and lead to their
@@ -216,6 +255,28 @@ Browse
 
 One id can name both a sidebar entry and a top-bar button: `assistant.chat` is the sidebar's
 **Chat** and the top bar's chat button, so hiding it removes both.
+
+### Move an entry between the sidebar, the top bar and a menu
+
+Every entry is written in the list it was given in, `sidebar` or `topbar`, and is shown where its
+`place` and `parent` say:
+
+- **`"place": "topbar"`** on a sidebar entry makes it a button in the top bar that opens its page,
+  with its `label` as the tooltip; **`"place": "search"`** stands it beside the search box.
+- **`"place": "sidebar"`** on a top-bar button, with a `section`, makes it an entry in that section.
+  It keeps what it does: the chat button moved there still opens the chat beside the page. Only a
+  button that opens an address can move there, not a dropdown or one that runs a command.
+- **`"parent"`** on either makes it a row of that dropdown, wherever `place` says.
+- **`null`** takes away a field an earlier layer gave, such as a row's `parent`.
+
+```json
+{
+  "sidebar": [{ "id": "archive.albums", "parent": "ui.account" }],
+  "topbar": [{ "id": "ui.trash", "parent": null, "place": "sidebar", "section": "system", "order": 5 }]
+}
+```
+
+This puts **Albums** in the menu under your picture and **Trash** at the top of **System**.
 
 Sections can be changed the same way. This gives the first section the heading **Start** and
 renames **Browse**:
@@ -352,9 +413,11 @@ Rows can go into the menus EiN has as well:
 - **`"parent": "ui.create"`** adds a row to the **Create New** menu under the plus. The archive's
   rows are **Import media** (5), **Album** (10), **Person** (20), **Location** (30) and **Device**
   (40).
-- **`"parent": "ui.account"`** adds a row to the menu under your picture, after **Me** and before
-  **Profile**, where the archive puts **Favourites**. The menu's other rows are EiN's own and cannot
-  be changed.
+- **`"parent": "ui.account"`** adds a row to the menu under your picture, after **Me**. The archive
+  puts **Favourites** there (10), and EiN its **Profile** (900, `ui.profile`) and **Trash** (910,
+  `ui.trash`), which can be moved, renamed and hidden like any entry. The menu's other rows, **Me**,
+  **Arrange navigation**, **Shortcuts**, **About EiN** and **Logout**, are EiN's own and cannot be
+  changed.
 
 ```json
 {
@@ -558,7 +621,7 @@ A file is one JSON object with any of these keys:
 | `hide`     | A list of ids to leave out, of any kind. Hidden in one layer means hidden in all after it. |
 
 Every entry in the four lists needs an `id`. To change an entry, give its id and the fields to
-change. An entry of your own needs every field marked required below.
+change; `null` takes a field away. An entry of your own needs every field marked required below.
 
 ### `sections`
 
@@ -568,7 +631,8 @@ change. An entry of your own needs every field marked required below.
 | `label` | no       | The heading, shown in capitals; choosing it folds the section. Without one the section has no heading and cannot fold, as `main`. |
 | `order` | no       | The section's place, lowest first: `main` 10, `explore` 20, `browse` 30, `system` 40. Without it, 1000.                           |
 
-A section with no entries left to show is not drawn.
+A section with no entries left to show is not drawn, except while you arrange the navigation, so
+entries can be dropped in it.
 
 ### `sidebar`
 
@@ -583,6 +647,9 @@ A section with no entries left to show is not drawn.
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                   |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                       |
 | `shortcut` | no       | A key that opens the page, such as `alt+U`; see [Give an entry a key](#give-an-entry-a-key). `null` takes a key away.                   |
+| `action`   | no       | What choosing it does away from its page, instead of opening `to`; see [`action`](#action). A button moved here keeps its own.          |
+| `place`    | no       | `"topbar"` or `"search"`: shown as a button in the top bar, at the right or beside the search box, that opens the page.                 |
+| `parent`   | no       | The id of a top-bar dropdown it is a row of, such as `ui.account`.                                                                      |
 
 ### `topbar`
 
@@ -596,7 +663,8 @@ A section with no entries left to show is not drawn.
 | `label`    | no       | A dropdown's heading in the open menu, such as **Create New**.                                                                                        |
 | `color`    | no       | The icon's colour: `blue`, `cyan`, `grape`, `green`, `indigo`, `lime`, `orange`, `pink`, `red`, `teal`, `violet` or `yellow`.                         |
 | `order`    | no       | Its place, lowest first: among the buttons (**Chat** 10, **Create** 20, **Random album** 30), or in its menu for a row. Without it, 1000.             |
-| `place`    | no       | `"search"`: the button stands beside the search box instead of at the right.                                                                          |
+| `place`    | no       | `"search"`: the button stands beside the search box instead of at the right. `"sidebar"`: it is an entry in `section`, if it opens an address.        |
+| `section`  | no       | With `"place": "sidebar"`, the id of the section it is in.                                                                                            |
 | `phone`    | no       | `false`: the button is left out on a phone; its key still works.                                                                                      |
 | `shortcut` | no       | A key, such as `alt+R` or `mod+shift+K`; see [Give an entry a key](#give-an-entry-a-key). `null` takes a key away. Not on a dropdown.                 |
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                                 |
@@ -645,6 +713,7 @@ file still applies, except when the file is not valid JSON.
 | `<file>: hide is not a list`                                                                                 | `hide` holds a single id.                                                                 | Write `"hide": ["archive.map"]`.                                                                             |
 | `me.cornwall: no icon, to`                                                                                   | An entry of your own lacks the required fields named.                                     | Add them. If you meant to change a module's entry, check the id: a misspelled id makes an entry of your own. |
 | `me.peggy: no section family`                                                                                | The section does not exist.                                                               | Check the spelling, or add the section under `"sections"`.                                                   |
+| `me.random: only an entry that opens a route goes in the sidebar`                                            | A dropdown, or a button that runs a command, was given `"place": "sidebar"`.              | It stays in the top bar. Move one of its rows instead, or a button that opens an address.                    |
 | `me.family-peggy: no top-bar entry me.family-menu`                                                           | The `parent` names no top-bar entry.                                                      | Check the spelling, or add the dropdown.                                                                     |
 | `me.map: action is none of navigate, dialog, drawer, fullscreen or run`                                      | The `action` has none of those keys with text after it.                                   | Check the spelling and the quotes.                                                                           |
 | `me.map: shortcut "alt+" is not modifiers and one key joined by +`                                           | The key is not written as modifiers and one key.                                          | Write it like `alt+P`.                                                                                       |

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Your sidebar and top bar – EiN documentation</title>
-    <meta name="description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN or for one group.">
+    <meta name="description" content="You can move the entries of the sidebar, the buttons of the top bar and the rows of the menu under your picture between the three, and put them in another order, by dragging them: see Arrange by dragging. That writes a short JSON file for you.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/guide/customizing.html">
     <meta property="og:title" content="Your sidebar and top bar – EiN documentation">
-    <meta property="og:description" content="You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it for yourself and, if you are an administrator, for everyone on your EiN or for one group.">
+    <meta property="og:description" content="You can move the entries of the sidebar, the buttons of the top bar and the rows of the menu under your picture between the three, and put them in another order, by dragging them: see Arrange by dragging. That writes a short JSON file for you.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -90,11 +90,13 @@
           <h1>Your sidebar and top bar</h1>
         </header>
         <article class="prose">
-<p>You can rename, reorder and hide the entries in the sidebar and the buttons in the top bar, and add
-pages, buttons and menus of your own, by writing a short JSON file. This page shows how to do it
-for yourself and, if you are an administrator, for everyone on your EiN or for one group.</p>
-<p>There is no page in <strong>Settings</strong> for this: the files on this page are the only way. You need to be
-signed in and able to edit a few lines of JSON, usually in the <a href="../shell/terminal.html">terminal</a>.</p>
+<p>You can move the entries of the sidebar, the buttons of the top bar and the rows of the menu under
+your picture between the three, and put them in another order, by dragging them: see
+<a href="#arrange-by-dragging">Arrange by dragging</a>. That writes a short JSON file for you.</p>
+<p>Everything else — renaming and hiding entries, adding pages, buttons and menus of your own — is
+done by writing that file yourself. This page shows how, for yourself and, if you are an
+administrator, for everyone on your EiN or for one group. You need to be signed in and able to edit
+a few lines of JSON, usually in the <a href="../shell/terminal.html">terminal</a>.</p>
 <h2 id="how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together<a class="anchor" href="#how-the-sidebar-and-top-bar-are-put-together" aria-label="Link to this section"></a></h2>
 <p>The sidebar and the top bar are laid together from four layers, read in this order:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -343,6 +345,34 @@ is not saved, the editor shows <strong>unsaved</strong>, and <strong>Close</stro
 <strong>Keep editing</strong> and <strong>Discard</strong>.</li>
 </ol>
 <p>This editor does not check the JSON. Run <code>ui-nav</code> afterwards, or reload the page and look.</p>
+<h2 id="arrange-by-dragging">Arrange by dragging<a class="anchor" href="#arrange-by-dragging" aria-label="Link to this section"></a></h2>
+<ol>
+<li>Open the menu under your picture and choose <strong>Arrange navigation</strong>. The menu stays open, and
+every place an entry can go is outlined with a dashed line: each section of the sidebar, the
+top bar beside the search box and at the right, and the menu itself.</li>
+<li>Drag an entry to where you want it. A line shows where it lands. Drop a sidebar page in the top
+bar and it becomes a button that opens the page; drop a button in a section and it becomes an
+entry there; drop either in the menu and it becomes a row of it.</li>
+<li>Choose <strong>Done</strong>.</li>
+</ol>
+<p>On a phone, or with the keyboard, tap or choose an entry instead: a menu moves it <strong>Earlier</strong> or
+<strong>Later</strong>, or to another place under <strong>Move to</strong>.</p>
+<p>Some entries cannot go everywhere. A dropdown, such as <strong>Create</strong>, and a button that runs a command,
+such as <strong>Random album</strong>, stay in the top bar; a dropdown does not go into the menu under your
+picture. Those places are not outlined while you drag them, and are greyed out under <strong>Move to</strong>.</p>
+<p><strong>Reset</strong> puts every entry back where the modules and your administrator have it. It takes away only
+what arranging wrote, the places and the order, and keeps your own renames, hidden entries and pages.</p>
+<p>Each move is written to your <code>~/.ui/nav.json</code> as the entry&#39;s id and where it goes, for example:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.stats&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;topbar&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.trash&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sidebar&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;explore&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>This moved <strong>Statistics</strong> from the sidebar to the top bar, between the chat button (10) and
+<strong>Create</strong> (20), and <strong>Trash</strong> from the menu under your picture to the <strong>Explore</strong> section. <code>null</code>
+takes away a field a module gave, here a <code>parent</code>; see
+<a href="#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu">Move an entry between the sidebar, the top bar and a menu</a>.</p>
+<p>When the right of the top bar has more buttons than there is room for, eight or three on a phone,
+the rest are under a <strong>More</strong> button at its end.</p>
 <h2 id="rename-move-and-hide-entries">Rename, move and hide entries<a class="anchor" href="#rename-move-and-hide-entries" aria-label="Link to this section"></a></h2>
 <p>The examples on this page change entries the Archive and the assistant add, and lead to their
 pages, such as <code>/albums</code> and <code>/people/peggy-wrenfield</code>. The same works for any entry, EiN&#39;s own
@@ -380,6 +410,23 @@ hidden section takes its entries with it.</li>
 </ul>
 <p>One id can name both a sidebar entry and a top-bar button: <code>assistant.chat</code> is the sidebar&#39;s
 <strong>Chat</strong> and the top bar&#39;s chat button, so hiding it removes both.</p>
+<h3 id="move-an-entry-between-the-sidebar-the-top-bar-and-a-menu">Move an entry between the sidebar, the top bar and a menu<a class="anchor" href="#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu" aria-label="Link to this section"></a></h3>
+<p>Every entry is written in the list it was given in, <code>sidebar</code> or <code>topbar</code>, and is shown where its
+<code>place</code> and <code>parent</code> say:</p>
+<ul>
+<li><strong><code>&quot;place&quot;: &quot;topbar&quot;</code></strong> on a sidebar entry makes it a button in the top bar that opens its page,
+with its <code>label</code> as the tooltip; <strong><code>&quot;place&quot;: &quot;search&quot;</code></strong> stands it beside the search box.</li>
+<li><strong><code>&quot;place&quot;: &quot;sidebar&quot;</code></strong> on a top-bar button, with a <code>section</code>, makes it an entry in that section.
+It keeps what it does: the chat button moved there still opens the chat beside the page. Only a
+button that opens an address can move there, not a dropdown or one that runs a command.</li>
+<li><strong><code>&quot;parent&quot;</code></strong> on either makes it a row of that dropdown, wherever <code>place</code> says.</li>
+<li><strong><code>null</code></strong> takes away a field an earlier layer gave, such as a row&#39;s <code>parent</code>.</li>
+</ul>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.albums&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.account&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.trash&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sidebar&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;section&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;system&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>This puts <strong>Albums</strong> in the menu under your picture and <strong>Trash</strong> at the top of <strong>System</strong>.</p>
 <p>Sections can be changed the same way. This gives the first section the heading <strong>Start</strong> and
 renames <strong>Browse</strong>:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
@@ -512,9 +559,11 @@ open menu. With <code>&quot;order&quot;: 15</code> the button stands between <st
 <li><strong><code>&quot;parent&quot;: &quot;ui.create&quot;</code></strong> adds a row to the <strong>Create New</strong> menu under the plus. The archive&#39;s
 rows are <strong>Import media</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Device</strong>
 (40).</li>
-<li><strong><code>&quot;parent&quot;: &quot;ui.account&quot;</code></strong> adds a row to the menu under your picture, after <strong>Me</strong> and before
-<strong>Profile</strong>, where the archive puts <strong>Favourites</strong>. The menu&#39;s other rows are EiN&#39;s own and cannot
-be changed.</li>
+<li><strong><code>&quot;parent&quot;: &quot;ui.account&quot;</code></strong> adds a row to the menu under your picture, after <strong>Me</strong>. The archive
+puts <strong>Favourites</strong> there (10), and EiN its <strong>Profile</strong> (900, <code>ui.profile</code>) and <strong>Trash</strong> (910,
+<code>ui.trash</code>), which can be moved, renamed and hidden like any entry. The menu&#39;s other rows, <strong>Me</strong>,
+<strong>Arrange navigation</strong>, <strong>Shortcuts</strong>, <strong>About EiN</strong> and <strong>Logout</strong>, are EiN&#39;s own and cannot be
+changed.</li>
 </ul>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -751,7 +800,7 @@ that leads to it. To keep people away from something, set its permissions; see
 </tbody></table>
 </div>
 <p>Every entry in the four lists needs an <code>id</code>. To change an entry, give its id and the fields to
-change. An entry of your own needs every field marked required below.</p>
+change; <code>null</code> takes a field away. An entry of your own needs every field marked required below.</p>
 <h3 id="sections"><code>sections</code><a class="anchor" href="#sections" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -778,7 +827,8 @@ change. An entry of your own needs every field marked required below.</p>
 </tr>
 </tbody></table>
 </div>
-<p>A section with no entries left to show is not drawn.</p>
+<p>A section with no entries left to show is not drawn, except while you arrange the navigation, so
+entries can be dropped in it.</p>
 <h3 id="sidebar"><code>sidebar</code><a class="anchor" href="#sidebar" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -832,6 +882,21 @@ change. An entry of your own needs every field marked required below.</p>
 <td><code>shortcut</code></td>
 <td>no</td>
 <td>A key that opens the page, such as <code>alt+U</code>; see <a href="#give-an-entry-a-key">Give an entry a key</a>. <code>null</code> takes a key away.</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>no</td>
+<td>What choosing it does away from its page, instead of opening <code>to</code>; see <a href="#action"><code>action</code></a>. A button moved here keeps its own.</td>
+</tr>
+<tr>
+<td><code>place</code></td>
+<td>no</td>
+<td><code>&quot;topbar&quot;</code> or <code>&quot;search&quot;</code>: shown as a button in the top bar, at the right or beside the search box, that opens the page.</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>no</td>
+<td>The id of a top-bar dropdown it is a row of, such as <code>ui.account</code>.</td>
 </tr>
 </tbody></table>
 </div>
@@ -887,7 +952,12 @@ change. An entry of your own needs every field marked required below.</p>
 <tr>
 <td><code>place</code></td>
 <td>no</td>
-<td><code>&quot;search&quot;</code>: the button stands beside the search box instead of at the right.</td>
+<td><code>&quot;search&quot;</code>: the button stands beside the search box instead of at the right. <code>&quot;sidebar&quot;</code>: it is an entry in <code>section</code>, if it opens an address.</td>
+</tr>
+<tr>
+<td><code>section</code></td>
+<td>no</td>
+<td>With <code>&quot;place&quot;: &quot;sidebar&quot;</code>, the id of the section it is in.</td>
 </tr>
 <tr>
 <td><code>phone</code></td>
@@ -1046,6 +1116,11 @@ file still applies, except when the file is not valid JSON.</p>
 <td>Check the spelling, or add the section under <code>&quot;sections&quot;</code>.</td>
 </tr>
 <tr>
+<td><code>me.random: only an entry that opens a route goes in the sidebar</code></td>
+<td>A dropdown, or a button that runs a command, was given <code>&quot;place&quot;: &quot;sidebar&quot;</code>.</td>
+<td>It stays in the top bar. Move one of its rows instead, or a button that opens an address.</td>
+</tr>
+<tr>
 <td><code>me.family-peggy: no top-bar entry me.family-menu</code></td>
 <td>The <code>parent</code> names no top-bar entry.</td>
 <td>Check the spelling, or add the dropdown.</td>
@@ -1123,7 +1198,7 @@ the other files you can edit.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/customizing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#change-the-navigation-for-a-group">Change the navigation for a group</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#arrange-by-dragging">Arrange by dragging</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li class="nested"><a href="#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu">Move an entry between the sidebar, the top bar and a menu</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#change-the-navigation-for-a-group">Change the navigation for a group</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
     </div>
   </body>
 </html>
