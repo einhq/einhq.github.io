@@ -655,7 +655,9 @@ midnight counts, and the days add up to the trip&#39;s length. Days follow the d
 device was set to be, and the times are on that clock; a device without one has its days and times
 in UTC.</p>
 <p>The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended, and puts the new stays at locations. Changing how the device travels, its time zone or
+again from where the last finished trip ended, puts the new stays at locations, and, when weather
+lookups are on, gives each trip and day the weather along the track, which an album made of the
+trip shows (<a href="albums.html#the-trip-tab">The Trip tab</a>). Changing how the device travels, its time zone or
 its home bases finds them again from the start. <strong>Find trips again</strong> does it at once.</p>
 <h3 id="join-and-part-trips">Join and part trips<a class="anchor" href="#join-and-part-trips" aria-label="Link to this section"></a></h3>
 <p>EiN may end a trip where you do not: a weekend at home in the middle of a holiday, or a long wait
@@ -885,6 +887,10 @@ route is the child <code>track</code>, and the GPX files the route was read from
 <tr>
 <td>Put a device&#39;s stays at locations, and name the new ones</td>
 <td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;device&gt;</code>; see <a href="places.html#places-a-device-stayed-at">Places a device stayed at</a></td>
+</tr>
+<tr>
+<td>Give a device&#39;s trips and days their weather</td>
+<td><a href="commands.html#track-weather"><code>track-weather</code></a> <code>&lt;device&gt;</code>, <code>--full</code> to look every trip up again, <code>--dry-run</code> to see what it would look up</td>
 </tr>
 <tr>
 <td>Join a trip to the one before, or part one</td>

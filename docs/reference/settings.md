@@ -494,7 +494,7 @@ Every setting of an EiN with all its modules: 87 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | empty |
 | Kind | string |
-| From the module | Archive |
+| From the module | Media |
 
 ### `CFG_CPU_SLOTS`
 

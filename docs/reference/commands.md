@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 406 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 407 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 139 in full](../archive/commands.md).
+[All 140 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -387,6 +387,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
 | [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
 | [track-trips](../archive/commands.md#track-trips) | Derive a device's trips and stays from its track, into <device>/.trips. |
+| [track-weather](../archive/commands.md#track-weather) | Give a device's trips and their days the weather along the track: wind, temperature and cloud cover. |
 | [tracker-setup](../archive/commands.md#tracker-setup) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to. |
 | [trip-album](../archive/commands.md#trip-album) | Make a trip of a device's track an album, a new one or one that is there, or take it from its album. |
 | [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
