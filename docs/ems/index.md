@@ -58,7 +58,7 @@ retries, and runs once the media service answers again.
 
 ## Models, tools and their licences
 
-EiN's own code, the media service's included, is under the Elastic License 2.0, as [The licence](../develop/source.md#the-licence) explains. The media service's image
+The media service's own code is under the MIT licence, as [The licence](../develop/source.md#the-licence) explains. The media service's image
 also downloads and carries models and tools made by others, each under its own licence. None of
 them forbids commercial use, and two state no licence for their weights
 ([Using EiN commercially](#using-ein-commercially)). This is what the image carries, all of it used
@@ -131,8 +131,10 @@ and where the source of it and of Debian's packages is.
 
 ### Using EiN commercially
 
-EiN itself may be used commercially, but offering it to others as a hosted service needs a
-licence from its author: [The licence](../develop/source.md#the-licence) says what is allowed.
+The media service's own code is under the MIT licence, which allows any use, commercial use
+included. EiN may be used commercially too, but offering it to others as a hosted service needs a
+licence from its author, since its core is under the Elastic License:
+[The licence](../develop/source.md#the-licence) says what is allowed.
 
 No model or tool in the table is under terms that forbid commercial use. Two models' weights
 state no licence of their own: Microsoft's TrOCR large handwritten, which reads English

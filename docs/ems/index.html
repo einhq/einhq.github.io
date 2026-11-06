@@ -172,7 +172,7 @@ on its <strong>Overview</strong> tab. A warning does not stop <strong>Healthy</s
 <p>None of this work is lost. Each step that needs the media service waits without using up its
 retries, and runs once the media service answers again.</p>
 <h2 id="models-tools-and-their-licences">Models, tools and their licences<a class="anchor" href="#models-tools-and-their-licences" aria-label="Link to this section"></a></h2>
-<p>EiN&#39;s own code, the media service&#39;s included, is under the Elastic License 2.0, as <a href="../develop/source.html#the-licence">The licence</a> explains. The media service&#39;s image
+<p>The media service&#39;s own code is under the MIT licence, as <a href="../develop/source.html#the-licence">The licence</a> explains. The media service&#39;s image
 also downloads and carries models and tools made by others, each under its own licence. None of
 them forbids commercial use, and two state no licence for their weights
 (<a href="#using-ein-commercially">Using EiN commercially</a>). This is what the image carries, all of it used
@@ -349,8 +349,10 @@ PyAV, since the media service hands it audio FFmpeg has already decoded. The ima
 Debian&#39;s, programs such as bash and coreutils among its packages. <code>NOTICE.md</code> names FFmpeg&#39;s build
 and where the source of it and of Debian&#39;s packages is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
-<p>EiN itself may be used commercially, but offering it to others as a hosted service needs a
-licence from its author: <a href="../develop/source.html#the-licence">The licence</a> says what is allowed.</p>
+<p>The media service&#39;s own code is under the MIT licence, which allows any use, commercial use
+included. EiN may be used commercially too, but offering it to others as a hosted service needs a
+licence from its author, since its core is under the Elastic License:
+<a href="../develop/source.html#the-licence">The licence</a> says what is allowed.</p>
 <p>No model or tool in the table is under terms that forbid commercial use. Two models&#39; weights
 state no licence of their own: Microsoft&#39;s TrOCR large handwritten, which reads English
 handwriting, and Meta&#39;s SSCD, which finds copies of pictures and videos, whose code is under MIT.
