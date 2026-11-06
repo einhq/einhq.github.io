@@ -90,7 +90,7 @@ scrolls sideways.
 On a phone a list reads as a plain list: one row per item, the columns one after the other with no
 headings, Todo first and Done last.
 
-- The round box at a row's left ticks the item off, moving it to **Done**; unticking it in Done
+- The box at a row's left ticks the item off, moving it to **Done**; unticking it in Done
   moves it back to **Todo**.
 - A slowly turning spinner after the title says the item is under way: it is in a column of your
   own, neither Todo nor Done.
