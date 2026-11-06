@@ -153,7 +153,7 @@ note dated on that day, as **Add event** does; the pen on a note changes it. Und
 **Stays** lists the places the trip stayed at, when it arrived and when it left. A place that is a
 location links to it.
 
-The weather is there when an administrator has turned on **Look up the weather** (see
+The weather is there unless an administrator has turned off **Look up the weather** (see
 [The weather at a place and time](places.md#the-weather-at-a-place-and-time)). It is the weather
 where the device was at each whole hour of the day: the mean wind in metres per second, the
 strongest hour's when it was stronger, and where the wind mostly blew from; the coldest and the

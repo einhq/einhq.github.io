@@ -586,8 +586,8 @@ device was set to be, and the times are on that clock; a device without one has 
 in UTC.
 
 The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
-again from where the last finished trip ended, puts the new stays at locations, and, when weather
-lookups are on, gives each trip and day the weather along the track, which an album made of the
+again from where the last finished trip ended, puts the new stays at locations, and, unless weather
+lookups are turned off, gives each trip and day the weather along the track, which an album made of the
 trip shows ([The Trip tab](albums.md#the-trip-tab)). Changing how the device travels, its time zone or
 its home bases finds them again from the start. **Find trips again** does it at once.
 

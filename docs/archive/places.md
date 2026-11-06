@@ -172,9 +172,9 @@ place where nothing had a name, and a location you deleted that a stay needs aga
 ## The weather at a place and time
 
 EiN can look up what the weather was at a place and an hour: the air temperature, the wind's speed
-and the direction it blew from, and how much of the sky was covered by cloud. It is off until an
-administrator turns on **Look up the weather** (`CFG_WEATHER`) in **Settings → System**, under
-**Places**, because every lookup sends the place and the date to a weather service.
+and the direction it blew from, and how much of the sky was covered by cloud. Every lookup sends the
+place and the date to a weather service; an administrator who does not want that turns off **Look
+up the weather** (`CFG_WEATHER`) in **Settings → System**, under **Places**.
 
 Each value comes from the first of these that has it:
 
@@ -523,15 +523,15 @@ around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is l
 The map pictures, the address lookups and the weather come from outside services. Your photos, videos and
 recordings are never sent to them.
 
-| What                                            | From                                                                                                  | What is sent                                                                                                                                                               |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **Map** style, and the small maps on cards  | OpenStreetMap's tile servers, `tile.openstreetmap.org`                                                | Your browser asks for the map squares of the area you look at                                                                                                              |
-| The sea marks on the **Map** style and cards    | OpenSeaMap, `tiles.openseamap.org`                                                                    | The same                                                                                                                                                                   |
-| The **Dark map** and **Satellite** styles       | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
-| A location's position from its address          | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
-| Pictures' street addresses                      | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
-| The names of places a device stayed at          | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
-| The weather at a place and time, when turned on | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
+| What                                               | From                                                                                                  | What is sent                                                                                                                                                               |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Map** style, and the small maps on cards     | OpenStreetMap's tile servers, `tile.openstreetmap.org`                                                | Your browser asks for the map squares of the area you look at                                                                                                              |
+| The sea marks on the **Map** style and cards       | OpenSeaMap, `tiles.openseamap.org`                                                                    | The same                                                                                                                                                                   |
+| The **Dark map** and **Satellite** styles          | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
+| A location's position from its address             | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
+| Pictures' street addresses                         | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
+| The names of places a device stayed at             | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
+| The weather at a place and time, unless turned off | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.
@@ -614,8 +614,8 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   narrowed.
 - **A device's pin stays where it was.** Its last point is older than you expected: the device has
   stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.
-- **`weather` answers "weather lookups are off".** An administrator has to turn on **Look up the
-  weather** first.
+- **`weather` answers "weather lookups are turned off".** An administrator has turned off **Look up
+  the weather**; turning it on again lets EiN ask.
 - **The weather of a place in Sweden comes from Open-Meteo.** No SMHI station within 30 km measured
   that value at that hour: the stations near it opened later, closed earlier, or did not measure it.
   Older stations often measured wind only three times a day.

@@ -319,9 +319,9 @@ place where nothing had a name, and a location you deleted that a stay needs aga
 <code>track-places --rename</code> asks again.</p>
 <h2 id="the-weather-at-a-place-and-time">The weather at a place and time<a class="anchor" href="#the-weather-at-a-place-and-time" aria-label="Link to this section"></a></h2>
 <p>EiN can look up what the weather was at a place and an hour: the air temperature, the wind&#39;s speed
-and the direction it blew from, and how much of the sky was covered by cloud. It is off until an
-administrator turns on <strong>Look up the weather</strong> (<code>CFG_WEATHER</code>) in <strong>Settings → System</strong>, under
-<strong>Places</strong>, because every lookup sends the place and the date to a weather service.</p>
+and the direction it blew from, and how much of the sky was covered by cloud. Every lookup sends the
+place and the date to a weather service; an administrator who does not want that turns off <strong>Look
+up the weather</strong> (<code>CFG_WEATHER</code>) in <strong>Settings → System</strong>, under <strong>Places</strong>.</p>
 <p>Each value comes from the first of these that has it:</p>
 <ol>
 <li><strong>The nearest SMHI weather station</strong> that measured it then, if one is within 30 km. SMHI is the
@@ -748,7 +748,7 @@ recordings are never sent to them.</p>
 <td>The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it</td>
 </tr>
 <tr>
-<td>The weather at a place and time, when turned on</td>
+<td>The weather at a place and time, unless turned off</td>
 <td>SMHI&#39;s observations, <code>opendata-download-metobs.smhi.se</code>, and Open-Meteo, <code>archive-api.open-meteo.com</code></td>
 <td>The machine EiN runs on asks SMHI for its list of stations and a station&#39;s values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month</td>
 </tr>
@@ -870,8 +870,8 @@ empty.</li>
 narrowed.</li>
 <li><strong>A device&#39;s pin stays where it was.</strong> Its last point is older than you expected: the device has
 stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.</li>
-<li><strong><code>weather</code> answers &quot;weather lookups are off&quot;.</strong> An administrator has to turn on <strong>Look up the
-weather</strong> first.</li>
+<li><strong><code>weather</code> answers &quot;weather lookups are turned off&quot;.</strong> An administrator has turned off <strong>Look up
+the weather</strong>; turning it on again lets EiN ask.</li>
 <li><strong>The weather of a place in Sweden comes from Open-Meteo.</strong> No SMHI station within 30 km measured
 that value at that hour: the stations near it opened later, closed earlier, or did not measure it.
 Older stations often measured wind only three times a day.</li>
