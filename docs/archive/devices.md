@@ -580,7 +580,8 @@ the trip. A trip that is an album names it under **Album**; see
 [Make a trip an album](#make-a-trip-an-album).
 
 Click **N legs** to see the trip day by day: each day's date, its first and last time, its length,
-and where the day ended. Days follow the device's **Timezone**, so a day ends at midnight where the
+and where the day ended. A day's length runs from where the day before ended, so a drive across
+midnight counts, and the days add up to the trip's length. Days follow the device's **Timezone**, so a day ends at midnight where the
 device was set to be, and the times are on that clock; a device without one has its days and times
 in UTC.
 
