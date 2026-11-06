@@ -5752,9 +5752,9 @@ trip-edit the-sailboat 2025-06-10 --<span class="hljs-built_in">split</span></co
 <p>With <code>JSON_OUTPUT=1</code>: nothing; one speaker node per voice is written under the file.</p>
 <h2 id="w">W<a class="anchor" href="#w" aria-label="Link to this section"></a></h2>
 <h3 id="weather"><code>weather</code><a class="anchor" href="#weather" aria-label="Link to this section"></a></h3>
-<p>The weather at a place and time: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo.</p>
+<p>The weather at a place and time, or every hour of a span with --to: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>weather [--lat=&lt;string&gt;] [--lng=&lt;string&gt;] &lt;lat&gt; &lt;lng&gt; &lt;time&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>weather [--lat=&lt;string&gt;] [--lng=&lt;string&gt;] [--place=&lt;string&gt;] [--from=&lt;string&gt;] [--days=&lt;string&gt;] [--to=&lt;string&gt;] &lt;lat&gt; &lt;lng&gt; &lt;time&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -5791,11 +5791,29 @@ trip-edit the-sailboat 2025-06-10 --<span class="hljs-built_in">split</span></co
 <td><code>--lng=&lt;string&gt;</code></td>
 <td>longitude, as --lng=<n>, the form a negative one needs.</td>
 </tr>
+<tr>
+<td><code>--place=&lt;string&gt;</code></td>
+<td>the place by name instead of coordinates, as --place=Göteborg: the first hit of a Nominatim search.</td>
+</tr>
+<tr>
+<td><code>--from=&lt;string&gt;</code></td>
+<td><time> as a flag: the first hour of a span with --to.</td>
+</tr>
+<tr>
+<td><code>--days=&lt;string&gt;</code></td>
+<td>every hour of the last <n> days, up to now, instead of <time> and --to.</td>
+</tr>
+<tr>
+<td><code>--to=&lt;string&gt;</code></td>
+<td>every hour from <time> to this one, at most 744: a line each, <hour> TAB {&quot;temperature&quot;:…}, as cat -t prints a log.</td>
+</tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>weather 59.33 18.07 2024-07-14T15:00
+weather 57.71 11.97 2024-07-08T00:00 --to=2024-07-14T23:00
+weather --place=Göteborg --days=7
 weather --lat=48.85 --lng=-3.01 2023-08-02T09:30+02:00</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: WeatherReading: each parameter with its value, the hour it holds for and where it came from; one neither source has is left out.</p>
+<p>With <code>JSON_OUTPUT=1</code>: WeatherReading: each parameter with its value, the hour it holds for and where it came from; one neither source has is left out. With --to, a WeatherReading an hour.</p>
 <h3 id="weather-photo"><code>weather-photo</code><a class="anchor" href="#weather-photo" aria-label="Link to this section"></a></h3>
 <p>Look up the weather a photo was taken in, at its point and capture time, and write it on its position node.</p>
 <p><small>changes things</small></p>

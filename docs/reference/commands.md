@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 408 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 409 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -393,7 +393,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
 | [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
-| [weather](../archive/commands.md#weather) | The weather at a place and time: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo. |
+| [weather](../archive/commands.md#weather) | The weather at a place and time, or every hour of a span with --to: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo. |
 | [weather-photo](../archive/commands.md#weather-photo) | Look up the weather a photo was taken in, at its point and capture time, and write it on its position node. |
 
 ## Assistant
@@ -411,10 +411,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media service
 
-[All 4 in full](../ems/commands.md).
+[All 5 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
+| [ems-files](../ems/commands.md#ems-files) | Serve the files of the media service's requests in flight over SFTP, for an EMS that does not mount EiN's files (the ems-files service) |
 | [ems-gpu](../ems/commands.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |

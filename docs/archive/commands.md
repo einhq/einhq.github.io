@@ -3609,12 +3609,12 @@ With `JSON_OUTPUT=1`: nothing; one speaker node per voice is written under the f
 
 ### `weather`
 
-The weather at a place and time: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo.
+The weather at a place and time, or every hour of a span with --to: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo.
 
 <small>reads only</small>
 
 ```text
-weather [--lat=<string>] [--lng=<string>] <lat> <lng> <time>
+weather [--lat=<string>] [--lng=<string>] [--place=<string>] [--from=<string>] [--days=<string>] [--to=<string>] <lat> <lng> <time>
 ```
 
 | Argument | What it is                                     |
@@ -3623,17 +3623,23 @@ weather [--lat=<string>] [--lng=<string>] <lat> <lng> <time>
 | `<lng>`  | longitude (positional; use --lng= if negative) |
 | `<time>` | when, ISO 8601; UTC unless it gives an offset. |
 
-| Option           | What it does                                            |
-| ---------------- | ------------------------------------------------------- |
-| `--lat=<string>` | latitude, as --lat=<n>, the form a negative one needs.  |
-| `--lng=<string>` | longitude, as --lng=<n>, the form a negative one needs. |
+| Option             | What it does                                                                                                        |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `--lat=<string>`   | latitude, as --lat=<n>, the form a negative one needs.                                                              |
+| `--lng=<string>`   | longitude, as --lng=<n>, the form a negative one needs.                                                             |
+| `--place=<string>` | the place by name instead of coordinates, as --place=Göteborg: the first hit of a Nominatim search.                 |
+| `--from=<string>`  | <time> as a flag: the first hour of a span with --to.                                                               |
+| `--days=<string>`  | every hour of the last <n> days, up to now, instead of <time> and --to.                                             |
+| `--to=<string>`    | every hour from <time> to this one, at most 744: a line each, <hour> TAB {"temperature":…}, as cat -t prints a log. |
 
 ```bash
 weather 59.33 18.07 2024-07-14T15:00
+weather 57.71 11.97 2024-07-08T00:00 --to=2024-07-14T23:00
+weather --place=Göteborg --days=7
 weather --lat=48.85 --lng=-3.01 2023-08-02T09:30+02:00
 ```
 
-With `JSON_OUTPUT=1`: WeatherReading: each parameter with its value, the hour it holds for and where it came from; one neither source has is left out.
+With `JSON_OUTPUT=1`: WeatherReading: each parameter with its value, the hour it holds for and where it came from; one neither source has is left out. With --to, a WeatherReading an hour.
 
 ### `weather-photo`
 

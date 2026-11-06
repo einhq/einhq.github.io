@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 87 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 89 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -351,7 +351,7 @@ Every setting of an EiN with all its modules: 87 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `http://127.0.0.1:8181` |
 | Kind | string |
-| Restarts | `models`, `models-second`, `media-worker`, `ems-link`, `metrics-sampler` |
+| Restarts | `models`, `models-second`, `media-worker`, `ems-link`, `metrics-sampler`, `ems-files` |
 | From the module | Media service |
 
 ### `CFG_EMS_LINK_INTERVAL_SECONDS`
@@ -364,6 +364,30 @@ Every setting of an EiN with all its modules: 87 of them, in the groups the Sett
 | Default | `60` |
 | Kind | number |
 | Restarts | `ems-link` |
+| From the module | Media service |
+
+### `CFG_EMS_FILES_ADDRESS`
+
+**Media service file address**. Where the media service reaches EiN's files when it does not mount them, as host:port: the ems-files service's port as EMS sees it. While set, each request to EMS names it, and EMS reads that request's inputs and writes its outputs there, nothing else and only while the request runs. Empty: EMS opens the paths it is sent on its own mounts.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means EMS uses its own mounts |
+| Kind | string |
+| Restarts | `ems-files` |
+| From the module | Media service |
+
+### `CFG_EMS_FILES_PORT`
+
+**Media service file port**. The port the ems-files service listens on while the media service file address is set.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `2224` |
+| Kind | number |
+| Restarts | `ems-files` |
 | From the module | Media service |
 
 ### `CFG_EMS_KEY`

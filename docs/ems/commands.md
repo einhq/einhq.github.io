@@ -2,11 +2,21 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 4 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 5 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
+
+### `ems-files`
+
+Serve the files of the media service's requests in flight over SFTP, for an EMS that does not mount EiN's files (the ems-files service)
+
+<small>administrators only · changes things</small>
+
+```text
+ems-files
+```
 
 ### `ems-gpu`
 

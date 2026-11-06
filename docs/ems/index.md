@@ -203,6 +203,27 @@ The media service accepts a request only with that key. Leave `CFG_EMS_URL`, `EM
 and `EMS_ROOTS` as `setup.sh` and the compose files set them; [Configuration](../admin/configuration.md)
 explains how a value set in the deployment relates to the settings page.
 
+### A media service without EiN's folders
+
+A media service that does not mount the four folders, such as one on another machine, can reach the
+files of its requests through EiN instead. Set `CFG_EMS_FILES_ADDRESS` to the `host:port` the media
+service reaches EiN's machine at, with the port `CFG_EMS_FILES_PORT` (2224): EiN's `ems-files`
+service then listens there, and every request EiN sends the media service names it. The media
+service copies the request's files in from it before it starts, and writes what it made back
+before it answers:
+
+- Only the files of requests in flight are reachable, each only while its request runs: the files
+  it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
+  renamed, and a file written is replaced whole once it is complete.
+- The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
+  `ems-files` starts and reach the media service in each request, so there is nothing to configure
+  on the media service's side.
+- The media service keeps the files it read for a while (`EMS_FILES_CACHE_MB`, 8192, for
+  `EMS_FILES_CACHE_SECONDS`, 1800), so the many steps on one video copy it once.
+
+Each file is copied over the network, so the shared folders stay the faster way on one machine.
+Set the two in `~/ein/.env` and run `./setup.sh`, which then publishes the port on `EIN_BIND`.
+
 ## Check that it is running
 
 ### On the dashboard
@@ -383,6 +404,8 @@ with `config set`:
 | [`CFG_EMS_KEY`](../reference/settings.md#cfg_ems_key)                                       | none; the install sets it                                   | The key the media service expects                                                       |
 | [`CFG_EMS_CONNECT_RETRY`](../reference/settings.md#cfg_ems_connect_retry)                   | `90`                                                        | Seconds a background request keeps retrying while the media service refuses connections |
 | [`CFG_EMS_LINK_INTERVAL_SECONDS`](../reference/settings.md#cfg_ems_link_interval_seconds)   | `60`                                                        | How often `ems-link` asks whether the media service answers                             |
+| [`CFG_EMS_FILES_ADDRESS`](../reference/settings.md#cfg_ems_files_address)                   | empty                                                       | Where a media service without EiN's folders reaches their files; empty: it mounts them  |
+| [`CFG_EMS_FILES_PORT`](../reference/settings.md#cfg_ems_files_port)                         | `2224`                                                      | The port `ems-files` listens on while that address is set                               |
 | [`CFG_WHISPER_LANGUAGE`](../reference/settings.md#cfg_whisper_language)                     | empty                                                       | A language sent with every transcription; empty lets the media service decide           |
 | [`CFG_WHISPER_VAD_MIN_SILENCE_MS`](../reference/settings.md#cfg_whisper_vad_min_silence_ms) | empty                                                       | The pause that ends a stretch of speech                                                 |
 | [`CFG_WHISPER_WORD_TIMESTAMPS`](../reference/settings.md#cfg_whisper_word_timestamps)       | empty                                                       | `1` for the time of every word, `0` for timings per segment                             |
