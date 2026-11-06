@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 404 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 406 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 140 in full](../archive/commands.md).
+[All 139 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -271,7 +271,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [auto-album-cluster](../archive/commands.md#auto-album-cluster) | Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing. |
 | [cluster-faces](../archive/commands.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
-| [compute-fingerprint](../archive/commands.md#compute-fingerprint) | Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound. |
 | [dayinhistory](../archive/commands.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |
 | [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
 | [device](../archive/commands.md#device) | Camera and recording device management. |
@@ -320,7 +319,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [location-timeline](../archive/commands.md#location-timeline) | What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it. |
 | [location-update](../archive/commands.md#location-update) | Change a location's name, address, description, city or country. |
 | [media-details](../archive/commands.md#media-details) | Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file. |
-| [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the archive when one is due: none is running or failed, the last found something or rested, and not all its media work waits. |
+| [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the albums or a staging area when one is due, and none while a pass runs. |
 | [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
 | [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
 | [media-sidecars](../archive/commands.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites. |
@@ -421,10 +420,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 18 in full](../media/commands.md).
+[All 21 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
+| [compute-fingerprint](../media/commands.md#compute-fingerprint) | Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound. |
 | [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
 | [embed-picture](../media/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
@@ -432,9 +432,10 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
+| [fingerprints-scan](../media/commands.md#fingerprints-scan) | Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt. |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [index-document](../media/commands.md#index-document) | Extract text content and generate embedding for a document file. |
-| [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running) |
+| [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made, its text and transcript, and the unread files a moved directory carried (long-running) |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
 | [media-reembed](../media/commands.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
 | [pictures-scan](../media/commands.md#pictures-scan) | Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model. |
@@ -442,6 +443,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [read-text](../media/commands.md#read-text) | Read the text written in a picture and keep it for search. |
 | [regenerate](../media/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
 | [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
+| [text-scan](../media/commands.md#text-scan) | Announce every file whose text, transcript or text vectors are missing or not what EMS makes now, found by their markers. |
 | [transcribe-file](../media/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
 
 ## Recipes

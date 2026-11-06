@@ -220,6 +220,40 @@ scan announces nothing.</p>
 </tr>
 </tbody></table>
 </div>
+<h2 id="fingerprints">Fingerprints<a class="anchor" href="#fingerprints" aria-label="Link to this section"></a></h2>
+<p>A picture, each keyframe of a video, and a recording get a fingerprint: a description made to find
+copies whatever their bytes, a picture saved smaller or in another format, mildly cropped or
+turned, a video or recording encoded again. The <a href="../archive/duplicates.html">Archive</a> compares them
+to find duplicates, look-alikes and the photos of a burst. <code>media-fingerprint</code> makes them once a
+file is read, in a folder that wants <code>fingerprints</code>
+(<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>), and
+marks the file once they are all there. A recording shorter than about two and a half seconds has
+too little sound for one, and is marked all the same.</p>
+<p>Every hour the <code>fingerprints-heal</code> service runs <code>fingerprints-scan</code>, which asks for the pictures,
+videos and recordings without the mark, in every folder that wants them, and announces them to
+<code>media-fingerprint</code>: a file whose fingerprints are all there is only marked, the others get theirs.
+While fingerprint work waits, the scan announces nothing.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want to</th>
+<th>Run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>See which files were never fingerprinted to the end</td>
+<td><code>fingerprints-scan -n -v</code></td>
+</tr>
+<tr>
+<td>Announce them now, rather than at the next hour</td>
+<td><code>fingerprints-scan</code></td>
+</tr>
+<tr>
+<td>Fingerprint a file again</td>
+<td><code>compute-fingerprint -f /archive/albums/christmas-2019/IMG_0042.jpg</code></td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="text-and-transcripts">Text and transcripts<a class="anchor" href="#text-and-transcripts" aria-label="Link to this section"></a></h2>
 <p>In a folder that wants <code>text</code>, the text written in a picture is read once the picture is
 (<code>media-ocr</code>, <code>read-text</code>), and a PDF, plain text, Word or OpenDocument text file&#39;s text once its
@@ -388,7 +422,7 @@ of the folder, end it without anyone taking it off, and a forced reading reads t
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#text-and-transcripts">Text and transcripts</a></li><li><a href="#text-and-transcripts-kept-current">Text and transcripts kept current</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#fingerprints">Fingerprints</a></li><li><a href="#text-and-transcripts">Text and transcripts</a></li><li><a href="#text-and-transcripts-kept-current">Text and transcripts kept current</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
     </div>
   </body>
 </html>

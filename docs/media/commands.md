@@ -2,9 +2,36 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 18 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+
+## C
+
+### `compute-fingerprint`
+
+Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound.
+
+<small>changes things</small>
+
+```text
+compute-fingerprint [-v] [-f] <input>
+```
+
+| Argument  | What it is              |
+| --------- | ----------------------- |
+| `<input>` | VFS path to media file. |
+
+| Option | What it does                                   |
+| ------ | ---------------------------------------------- |
+| `-v`   | Verbose output.                                |
+| `-f`   | Force recompute even if already fingerprinted. |
+
+```bash
+compute-fingerprint /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: nothing; the fingerprints are written under the file, and `fingerprintedAt` on it.
 
 ## D
 
@@ -182,6 +209,35 @@ cat /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_20
 
 With `JSON_OUTPUT=1`: nothing; the transcript is written, searchable, and not transcribed again.
 
+### `fingerprints-scan`
+
+Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt.
+
+<small>changes things</small>
+
+```text
+fingerprints-scan [--limit=<number>] [--if-idle] [-n] [-v] [<path>]
+```
+
+| Argument   | What it is                      |
+| ---------- | ------------------------------- |
+| `[<path>]` | The tree to look in (default /) |
+
+| Option             | What it does                                                   |
+| ------------------ | -------------------------------------------------------------- |
+| `--limit=<number>` | Facts one run announces at most (default 1000; 0 for no cap)   |
+| `--if-idle`        | Announce nothing while media-fingerprint has work waiting.     |
+| `-n`               | Dry run — count what would be announced without announcing it. |
+| `-v`               | Name each file announced.                                      |
+
+```bash
+fingerprints-scan -n
+fingerprints-scan /archive/albums/christmas-2019
+fingerprints-scan --if-idle --limit 0
+```
+
+With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as media.fingerprints.stale.
+
 ## G
 
 ### `generate-derivatives`
@@ -238,7 +294,7 @@ index-document [-v] [-f] <input>
 
 ### `media-bridge`
 
-Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running)
+Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made, its text and transcript, and the unread files a moved directory carried (long-running)
 
 <small>changes things</small>
 
@@ -445,6 +501,35 @@ With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as m
 
 ## T
 
+### `text-scan`
+
+Announce every file whose text, transcript or text vectors are missing or not what EMS makes now, found by their markers.
+
+<small>changes things</small>
+
+```text
+text-scan [--limit=<number>] [--if-idle] [-n] [-v] [<path>]
+```
+
+| Argument   | What it is                      |
+| ---------- | ------------------------------- |
+| `[<path>]` | The tree to look in (default /) |
+
+| Option             | What it does                                                   |
+| ------------------ | -------------------------------------------------------------- |
+| `--limit=<number>` | Facts one run announces at most (default 1000; 0 for no cap)   |
+| `--if-idle`        | Hold back each fact whose pipeline has work waiting.           |
+| `-n`               | Dry run — count what would be announced without announcing it. |
+| `-v`               | Name each file announced.                                      |
+
+```bash
+text-scan -n
+text-scan /archive/albums/christmas-2019
+text-scan --if-idle --limit 0
+```
+
+With `JSON_OUTPUT=1`: how many files it looked at and how many it announced, by fact, and the facts it held back or could not check.
+
 ### `transcribe-file`
 
 Transcribe audio or video into a timed WebVTT node with chunk embeddings.
@@ -459,13 +544,13 @@ transcribe-file [-v] [-f] <input>
 | --------- | ----------------------------------- |
 | `<input>` | VFS path to an audio or video file. |
 
-| Option | What it does                                                                       |
-| ------ | ---------------------------------------------------------------------------------- |
-| `-v`   | Verbose output.                                                                    |
-| `-f`   | Force re-transcription even if a transcript exists, unless it was written by hand. |
+| Option | What it does                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------------------ |
+| `-v`   | Verbose output.                                                                                        |
+| `-f`   | Transcribe again even a transcript made with the settings EMS runs now, unless it was written by hand. |
 
 ```bash
 transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
 ```
 
-With `JSON_OUTPUT=1`: nothing; a timed WebVTT transcript with chunk embeddings is written under the file.
+With `JSON_OUTPUT=1`: the transcript written, or the one kept; a timed WebVTT transcript with chunk embeddings is written under the file.

@@ -100,8 +100,9 @@ is run again, the bulk lane, and the engine&#39;s own settings.</p>
 <h2 id="what-runs-after-an-upload">What runs after an upload<a class="anchor" href="#what-runs-after-an-upload" aria-label="Link to this section"></a></h2>
 <p>When a file arrives, the <a href="../media/index.html">Media</a> module reads its metadata first
 (<a href="../media/index.html#reading-a-file">Reading a file</a>). Then the Archive&#39;s <code>media-interpret</code> works out
-from it when the file was taken and where, side by side with the thumbnails, picture vectors, text
-and transcripts; faces, fingerprints and the device that made the file wait for the date and place.
+from it when the file was taken and where, side by side with the thumbnails, picture vectors,
+fingerprints, text and transcripts; faces and the device that made the file wait for the date and
+place.
 <a href="../concepts/pipelines.html#one-upload-start-to-finish">Changes and pipelines</a> follows one upload from
 start to finish.</p>
 <p>The Archive runs these services for its processing:</p>
@@ -124,7 +125,7 @@ start to finish.</p>
 </div>
 <p>The steps themselves are run by the <a href="../media/index.html">Media</a> module&#39;s workers, which take the
 kinds of work the Archive names for them: <code>media-worker</code> the rest, such as dating and placing
-files, matching faces, fingerprints and staging; <code>models</code> the work
+files, matching faces, duplicates and staging; <code>models</code> the work
 done by a model in the <a href="../ems/index.html">media service</a>, such as finding faces or transcribing
 speech, and <code>models-second</code> the same beside it when it is on. <a href="#the-workers">The workers</a> lists the
 kinds.</p>
@@ -145,11 +146,6 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td><code>media-interpret</code></td>
 <td>When a photo, video or recording was taken and where, from its metadata, a sidecar and its name</td>
 <td><code>interpret</code></td>
-</tr>
-<tr>
-<td><code>media-fingerprint</code></td>
-<td>The fingerprints that find duplicates and photo stacks</td>
-<td><code>fingerprint</code></td>
 </tr>
 <tr>
 <td><code>media-faces</code></td>
@@ -203,7 +199,7 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 </tr>
 <tr>
 <td><code>media-duplicates</code></td>
-<td>Decides again the duplicate findings of a staged file</td>
+<td>Decides the duplicate findings of a staged file again, or once its fingerprints are in</td>
 <td><code>dedupe</code></td>
 </tr>
 <tr>
@@ -295,9 +291,14 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 <td>the Media module&#39;s <code>media-transcribe</code> and <code>media-embed-text</code></td>
 </tr>
 <tr>
+<td><code>fingerprints</code></td>
+<td>The fingerprints that find copies, look-alikes and photo stacks</td>
+<td>the Media module&#39;s <code>media-fingerprint</code></td>
+</tr>
+<tr>
 <td><code>archive</code></td>
-<td>The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera</td>
-<td><code>media-interpret</code>, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above</td>
+<td>The date and the place, faces and voices and who they are, duplicates, the camera</td>
+<td><code>media-interpret</code>, and the face, voice, device, geocoding and duplicate pipelines above</td>
 </tr>
 </tbody></table>
 </div>
@@ -317,8 +318,8 @@ turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
 its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-assign</code>,
-<code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media
-module&#39;s own <code>ingest</code>, <code>stills</code> and <code>transcode</code>; <code>models</code> takes the Archive&#39;s <code>faces</code> and
+<code>speaker-assign</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media module&#39;s own
+<code>ingest</code>, <code>stills</code>, <code>transcode</code> and <code>fingerprint</code>; <code>models</code> takes the Archive&#39;s <code>faces</code> and
 <code>diarize</code>, beside the Media module&#39;s <code>shots</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code> and <code>transcribe</code>,
 and <code>models-second</code> the same kinds in the reverse order. How much of it runs at once is set there,
 in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>.</p>
@@ -366,13 +367,13 @@ something a pipeline should have given it: its date and place, faces or voices. 
 pipeline then skips what is already done.</p>
 <p>What describes a file is the Media module&#39;s to keep current, in every folder:
 <a href="../media/index.html#renditions-kept-current">renditions</a>, <a href="../media/index.html#picture-vectors">picture vectors</a>,
-and <a href="../media/index.html#text-and-transcripts-kept-current">text, transcripts and their vectors</a>.</p>
+<a href="../media/index.html#fingerprints">fingerprints</a> and <a href="../media/index.html#text-and-transcripts-kept-current">text, transcripts and their vectors</a>.</p>
 <p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code> and over each user&#39;s
 staged files, <code>/home/&lt;user&gt;/staging/files</code>, whose faces staging uses to suggest groups. Each pass is one instance, which
 shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through its folder it has come; it is
 housekeeping, not work waiting, so <code>health</code> does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
-the rest: a long queue of one kind of work, such as faces, does not keep voices or fingerprints
+the rest: a long queue of one kind of work, such as faces, does not keep voices or transcripts
 from being found. It announces every gap as it finds it, so the work it starts shows on the
 dashboard and in <code>health</code> until it is done. It remembers where it is every thousand files, so a
 restart of EiN does not send it back to the beginning. When a pass ends, the <strong>Output</strong> of its step

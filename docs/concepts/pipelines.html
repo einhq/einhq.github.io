@@ -239,32 +239,34 @@ the only events are the raw ones.</p>
 <h2 id="a-pipeline-says-what-to-do-with-a-change">A pipeline says what to do with a change<a class="anchor" href="#a-pipeline-says-what-to-do-with-a-change" aria-label="Link to this section"></a></h2>
 <p>A <strong>pipeline</strong> is a YAML definition with three parts: the trigger it waits for, the steps it then
 runs on the subject, each step a shell command, and options for how it is scheduled. This is the
-Archive&#39;s <code>media-fingerprint</code>, which computes the fingerprints that duplicate detection compares:</p>
-<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">name:</span> <span class="hljs-string">media-fingerprint</span>
-<span class="hljs-attr">description:</span> <span class="hljs-string">Compute</span> <span class="hljs-string">the</span> <span class="hljs-string">fingerprints</span> <span class="hljs-string">duplicate</span> <span class="hljs-string">detection</span> <span class="hljs-string">and</span> <span class="hljs-string">photo</span> <span class="hljs-string">stacks</span> <span class="hljs-string">compare</span>
+Archive&#39;s <code>media-faces</code>, which finds the faces in a picture:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">name:</span> <span class="hljs-string">media-faces</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Detect</span> <span class="hljs-string">faces</span> <span class="hljs-string">in</span> <span class="hljs-string">an</span> <span class="hljs-string">image</span> <span class="hljs-string">and</span> <span class="hljs-string">crop</span> <span class="hljs-string">each</span> <span class="hljs-string">one</span>
 
 <span class="hljs-attr">trigger:</span>
   <span class="hljs-attr">on:</span> <span class="hljs-string">media.metadata.interpreted</span>
   <span class="hljs-attr">wants:</span> <span class="hljs-string">archive</span>
-  <span class="hljs-attr">skipIfAttr:</span> <span class="hljs-string">undecodable</span>
+  <span class="hljs-attr">match:</span>
+    <span class="hljs-attr">mimetype:</span> <span class="hljs-string">image/*</span>
+  <span class="hljs-attr">skipIfAttr:</span> <span class="hljs-string">facesAt</span>
 
 <span class="hljs-attr">steps:</span>
-  <span class="hljs-attr">fingerprint:</span>
-    <span class="hljs-attr">command:</span> <span class="hljs-string">compute-fingerprint</span> <span class="hljs-string">$NODE_PATH</span>
-    <span class="hljs-attr">description:</span> <span class="hljs-string">SSCD</span> <span class="hljs-string">for</span> <span class="hljs-string">image</span> <span class="hljs-string">/</span> <span class="hljs-string">video</span> <span class="hljs-string">keyframes,</span> <span class="hljs-string">chromaprint</span> <span class="hljs-string">for</span> <span class="hljs-string">audio</span>
+  <span class="hljs-attr">detect-faces:</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">detect-faces</span> <span class="hljs-string">$NODE_PATH</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">Face</span> <span class="hljs-string">detection</span> <span class="hljs-string">plus</span> <span class="hljs-string">a</span> <span class="hljs-string">cropped</span> <span class="hljs-string">image</span> <span class="hljs-string">per</span> <span class="hljs-string">face</span>
     <span class="hljs-attr">pool:</span> <span class="hljs-string">media</span>
-    <span class="hljs-attr">kind:</span> <span class="hljs-string">fingerprint</span>
-    <span class="hljs-attr">priority:</span> <span class="hljs-number">30</span>
+    <span class="hljs-attr">kind:</span> <span class="hljs-string">faces</span>
+    <span class="hljs-attr">priority:</span> <span class="hljs-number">100</span>
     <span class="hljs-attr">requires:</span>
-      <span class="hljs-attr">cpu:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">models:</span> <span class="hljs-number">1</span>
 
 <span class="hljs-attr">options:</span>
   <span class="hljs-attr">maxAttempts:</span> <span class="hljs-number">3</span>
   <span class="hljs-attr">priority:</span> <span class="hljs-number">10</span></code></pre></div>
 <p>It reads: when the Archive has worked out from a file&#39;s metadata when and where it was taken, the
-folder the file lies in wants the Archive&#39;s work, and the file is not marked as one nothing can
-decode, run <code>compute-fingerprint</code> on it, in the <code>media</code> pool, as a job of kind <code>fingerprint</code> that
-needs one CPU slot.</p>
+file is a picture, the folder it lies in wants the Archive&#39;s work, and its faces have not been
+looked for yet, run <code>detect-faces</code> on it, in the <code>media</code> pool, as a job of kind <code>faces</code> that needs
+one model slot.</p>
 <p>A module ships its pipelines in its <code>pipelines/</code> folder, and <code>mod setup</code> registers each one when
 the module is set up, at every start of EiN. A registered pipeline is a link in
 <code>/var/pipelines/definitions/&lt;name&gt;</code> to its YAML file. The engine reloads the definitions whenever
@@ -595,17 +597,16 @@ checksum and type, an <code>updated</code> event.</li>
 <li><code>media-bridge</code> sees a photo with bytes and no metadata and announces <code>media.file.discovered</code>.</li>
 <li><code>media-ingest</code> runs <code>exif-extract</code>, which reads the camera, its clocks and its GPS fix and
 writes them under the photo as <code>metadata/exif</code>.</li>
-<li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes)
-and the Archive&#39;s <code>media-interpret</code> (when the photo was taken, and where); for a picture also
-the Media module&#39;s <code>media-embed-picture</code> (search by what is in the picture) and <code>media-ocr</code>
-(text in the picture);
+<li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes),
+the Media module&#39;s <code>media-fingerprint</code> (the fingerprints that find copies), and the Archive&#39;s
+<code>media-interpret</code> (when the photo was taken, and where); for a picture also the Media module&#39;s
+<code>media-embed-picture</code> (search by what is in the picture) and <code>media-ocr</code> (text in the picture);
 for a video <code>media-embed-picture</code>, <code>media-transcode</code> and <code>media-transcribe</code>; for a recording
 <code>media-transcode</code> and <code>media-transcribe</code>. They run side by side. Once a file has every rendition
 the rendition table names for it, it is marked so, which becomes <code>media.renditions.made</code>.</li>
 <li><code>media-interpret</code> writes the photo&#39;s date and its position, and its last write becomes
-<code>media.metadata.interpreted</code>, which starts <code>media-fingerprint</code>; for a picture <code>media-faces</code>, for
-a video <code>media-video-faces</code>; and <code>media-device</code> when the metadata names the device that made the
-file.</li>
+<code>media.metadata.interpreted</code>, which starts <code>media-faces</code> for a picture, <code>media-video-faces</code> for
+a video, and <code>media-device</code> when the metadata names the device that made the file.</li>
 <li><code>media-faces</code> writes each face it finds under the photo, which becomes <code>media.face.detected</code>
 and starts <code>media-face-assign</code>, matching the face to a person.</li>
 <li>A GPS position becomes <code>media.position.available</code>, which starts <code>media-geocode</code> for the
@@ -761,8 +762,8 @@ describes what you see in the interface while this happens.</p>
 </tr>
 <tr>
 <td><code>media-fingerprint</code></td>
-<td><code>media.metadata.interpreted</code></td>
-<td>The fingerprints duplicate detection and photo stacks compare</td>
+<td><code>media.metadata.extracted</code>, <code>media.fingerprints.stale</code></td>
+<td>The fingerprints that find copies, look-alikes and photo stacks</td>
 </tr>
 <tr>
 <td><code>media-faces</code></td>

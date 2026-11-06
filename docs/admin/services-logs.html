@@ -208,6 +208,11 @@
 <td>Every hour, announces the photos and videos whose picture vectors are missing or were made by another model than the media service runs now, unless picture work is waiting</td>
 </tr>
 <tr>
+<td><code>fingerprints-heal</code></td>
+<td>media</td>
+<td>Every hour, announces the pictures, videos and recordings that were never fingerprinted to the end, unless fingerprint work is waiting</td>
+</tr>
+<tr>
 <td><code>text-heal</code></td>
 <td>media</td>
 <td>Every hour, announces the files whose text was never read, or whose reading, transcript or text vectors are not what the media service makes now, unless that work is waiting</td>
@@ -215,7 +220,7 @@
 <tr>
 <td><code>media-worker</code></td>
 <td>media</td>
-<td>Worker for the processor work the modules hand the media pool: the Media module&#39;s reading and renditions, and for the Archive, dates and places, fingerprints, face matching, duplicates, staging</td>
+<td>Worker for the processor work the modules hand the media pool: the Media module&#39;s reading, renditions and fingerprints, and for the Archive, dates and places, face matching, duplicates, staging</td>
 </tr>
 <tr>
 <td><code>models</code></td>
