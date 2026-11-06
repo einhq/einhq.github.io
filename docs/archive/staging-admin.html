@@ -160,7 +160,8 @@ staging;</li>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 staging init --user ruby</code></pre></div>
 <div class="code"><pre tabindex="0"><code>ruby: 7 created, 0 repaired, 0 adopted, 0 moved, 0 groups, 0 routes, 0 relinked</code></pre></div>
-<p><code>staging init</code> makes the directories with their modes and owner, marks <code>staging/</code> unlisted and
+<p><code>staging init</code> makes the directories with their modes and owner, marks <code>staging/</code> unlisted, sets its
+<code>processing</code> to every family but <code>text</code> (so a staged file&#39;s text is read once it is filed), and
 makes the Inbox. It also puts right what is out of place, moving each thing with every link to it
 following, so albums and suggestions keep pointing at it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -562,6 +563,10 @@ staging check --user helen</code></pre></div>
 <tr>
 <td><code>not-unlisted</code></td>
 <td><code>staging/</code> is not marked unlisted, so the library&#39;s views would show it.</td>
+</tr>
+<tr>
+<td><code>processing</code></td>
+<td><code>staging/</code> wants other processing than staging&#39;s, such as text.</td>
 </tr>
 <tr>
 <td><code>loose-entry</code></td>

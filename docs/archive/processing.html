@@ -304,7 +304,9 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 <p>The Media module&#39;s <code>media-ingest</code> and <code>media-reindex</code> name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive&#39;s own folders: albums, staging, tracks
 and places. A folder with <code>processing</code> set to <code>[&quot;renditions&quot;]</code> gets its pictures read and their
-sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints.</p>
+sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints. A staging
+area wants every family but <code>text</code>: its files get everything else while they wait, and their text
+is read once they are filed into a folder that wants it.</p>
 <h2 id="the-renditions">The renditions<a class="anchor" href="#the-renditions" aria-label="Link to this section"></a></h2>
 <p>The thumbnails, display sizes and playable copies of the Archive&#39;s pictures, videos and recordings,
 and the pipelines that make them, <code>media-stills</code> and <code>media-transcode</code>, are the Media module&#39;s:
