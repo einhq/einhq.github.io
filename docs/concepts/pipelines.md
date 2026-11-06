@@ -316,7 +316,8 @@ starts its own pipelines:
    writes them under the photo as `metadata/exif`.
 4. That write becomes `media.metadata.extracted`, which starts `media-stills` (the display sizes)
    and the Archive's `media-interpret` (when the photo was taken, and where); for a picture also
-   `media-embed-picture` (search by what is in the picture) and `media-ocr` (text in the picture);
+   the Media module's `media-embed-picture` (search by what is in the picture) and `media-ocr`
+   (text in the picture);
    for a video `media-embed-picture`, `media-transcode` and `media-transcribe`; for a recording
    `media-transcode` and `media-transcribe`. They run side by side. Once a file has every rendition
    the rendition table names for it, it is marked so, which becomes `media.renditions.made`.

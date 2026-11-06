@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[detect-chapters](#detect-chapters) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [generate-derivatives](#generate-derivatives) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [promote-exif-attrs](#promote-exif-attrs) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan)
+[detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [generate-derivatives](#generate-derivatives) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan)
 
 ## D
 
@@ -34,6 +34,31 @@ detect-chapters /archive/albums/Exempelalbum_1978/files/sommarfilm.avi
 With `JSON_OUTPUT=1`: nothing; the chapters are written as WebVTT under the file, with the cuts on the node.
 
 ## E
+
+### `embed-picture`
+
+Embed a photo or a video's keyframes for search by what is in the picture.
+
+<small>changes things</small>
+
+```text
+embed-picture [-v] [-f] <input>
+```
+
+| Argument  | What it is                         |
+| --------- | ---------------------------------- |
+| `<input>` | VFS path to a photo or video file. |
+
+| Option | What it does                                                 |
+| ------ | ------------------------------------------------------------ |
+| `-v`   | Verbose output.                                              |
+| `-f`   | Embed again even if the model EMS runs now made the vectors. |
+
+```bash
+embed-picture /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
+```
+
+With `JSON_OUTPUT=1`: the vectors written under the file's metadata/picture and the model that made them; nothing when the file's vectors are kept.
 
 ### `exif-extract`
 
@@ -160,6 +185,35 @@ JSON_OUTPUT=1 media-pool-kinds models
 With `JSON_OUTPUT=1`: the flags (--kind for each kind, --reserve-kind for each reserved one); in JSON the kinds in order and the reserved ones.
 
 ## P
+
+### `pictures-scan`
+
+Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model.
+
+<small>changes things</small>
+
+```text
+pictures-scan [--limit=<number>] [--if-idle] [-n] [-v] [<path>]
+```
+
+| Argument   | What it is                      |
+| ---------- | ------------------------------- |
+| `[<path>]` | The tree to look in (default /) |
+
+| Option             | What it does                                                   |
+| ------------------ | -------------------------------------------------------------- |
+| `--limit=<number>` | Facts one run announces at most (default 1000; 0 for no cap)   |
+| `--if-idle`        | Announce nothing while media-embed-picture has work waiting.   |
+| `-n`               | Dry run — count what would be announced without announcing it. |
+| `-v`               | Name each file announced.                                      |
+
+```bash
+pictures-scan -n
+pictures-scan /archive/albums/christmas-2019
+pictures-scan --if-idle --limit 0
+```
+
+With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as media.picture.stale, and the model EMS embeds with.
 
 ### `promote-exif-attrs`
 

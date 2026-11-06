@@ -46,7 +46,6 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-faces`          | Finds the faces in a photo and crops each one                                                            | `faces`                     |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                                    | `faces`                     |
 | `media-face-assign`    | Matches a found face to a person                                                                         | `face-assign`               |
-| `media-embed-picture`  | A picture vector, for searching by what is in the picture                                                | `embed-picture`             |
 | `media-ocr`            | Reads the text written in a picture                                                                      | `ocr`                       |
 | `media-embed-text`     | Text vectors of a file's stored texts                                                                    | `embed-text`                |
 | `media-transcribe`     | A transcript of what is said in a video or recording                                                     | `transcribe`                |
@@ -78,7 +77,7 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 | Family            | What it covers                                                                                                                           | Pipelines                                                                                            |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                              |
-| `picture-vectors` | Searching by what is in a picture                                                                                                        | `media-embed-picture`                                                                                |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                             |
 | `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                                                    |
 | `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                                               |
 | `archive`         | The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera                                       | `media-interpret`, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
@@ -103,7 +102,7 @@ Every kind of work above that is not run by the engine goes as a job into the po
 its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
 `speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media
 module's own `ingest`, `stills` and `transcode`; `models` takes the Archive's `faces`,
-`embed-picture`, `ocr`, `embed-text`, `transcribe` and `diarize`, beside the Media module's `shots`,
+`ocr`, `embed-text`, `transcribe` and `diarize`, beside the Media module's `shots` and `embed-picture`,
 and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
 in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
@@ -149,8 +148,9 @@ have nothing waiting. After a pass that finds nothing and holds nothing back it 
 `CFG_MEDIA_HEAL_REST` seconds (21600, six hours). `media-heal -n` says whether a pass is due now,
 and `media-heal --rest 0` starts one without waiting out the rest.
 
-Faces, picture and text vectors, text in pictures and transcripts are compared with the models the
-media service runs now, so a scan needs the service to answer. While it does not, a pass ends
+Faces, text vectors, text in pictures and transcripts are compared with the models the media
+service runs now (picture vectors are the [Media](../media/index.md#picture-vectors) module's to
+keep current), so a scan needs the service to answer. While it does not, a pass ends
 without going through the archive, and the service starts it again at its next look, rather than
 going on without those checks. Run by hand, `media-scan`
 goes on and names the kinds of gap it could not check; scan for those again with `--only` and

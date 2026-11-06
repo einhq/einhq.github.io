@@ -167,11 +167,6 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td><code>face-assign</code></td>
 </tr>
 <tr>
-<td><code>media-embed-picture</code></td>
-<td>A picture vector, for searching by what is in the picture</td>
-<td><code>embed-picture</code></td>
-</tr>
-<tr>
 <td><code>media-ocr</code></td>
 <td>Reads the text written in a picture</td>
 <td><code>ocr</code></td>
@@ -302,7 +297,7 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 <tr>
 <td><code>picture-vectors</code></td>
 <td>Searching by what is in a picture</td>
-<td><code>media-embed-picture</code></td>
+<td>the Media module&#39;s <code>media-embed-picture</code></td>
 </tr>
 <tr>
 <td><code>text</code></td>
@@ -337,7 +332,7 @@ turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left
 its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-assign</code>,
 <code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media
 module&#39;s own <code>ingest</code>, <code>stills</code> and <code>transcode</code>; <code>models</code> takes the Archive&#39;s <code>faces</code>,
-<code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code> and <code>diarize</code>, beside the Media module&#39;s <code>shots</code>,
+<code>ocr</code>, <code>embed-text</code>, <code>transcribe</code> and <code>diarize</code>, beside the Media module&#39;s <code>shots</code> and <code>embed-picture</code>,
 and <code>models-second</code> the same kinds in the reverse order. How much of it runs at once is set there,
 in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>.</p>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
@@ -399,8 +394,9 @@ for has work waiting. The kinds the last pass held back get a pass of their own 
 have nothing waiting. After a pass that finds nothing and holds nothing back it rests for
 <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six hours). <code>media-heal -n</code> says whether a pass is due now,
 and <code>media-heal --rest 0</code> starts one without waiting out the rest.</p>
-<p>Faces, picture and text vectors, text in pictures and transcripts are compared with the models the
-media service runs now, so a scan needs the service to answer. While it does not, a pass ends
+<p>Faces, text vectors, text in pictures and transcripts are compared with the models the media
+service runs now (picture vectors are the <a href="../media/index.html#picture-vectors">Media</a> module&#39;s to
+keep current), so a scan needs the service to answer. While it does not, a pass ends
 without going through the archive, and the service starts it again at its next look, rather than
 going on without those checks. Run by hand, <code>media-scan</code>
 goes on and names the kinds of gap it could not check; scan for those again with <code>--only</code> and

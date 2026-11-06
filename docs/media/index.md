@@ -1,10 +1,11 @@
 # Media
 
 The Media module reads every picture, video and recording as it arrives, and makes the thumbnails,
-display sizes and playable copies of each in a folder that wants them, and keeps them current. It
-also runs the media work the other modules hand it, so that a large import never starts it all at
-once: with the [Archive](../archive/index.md), dating and placing each file, finding and matching
-faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that
+display sizes and playable copies of each in a folder that wants them, and the picture vectors that
+search finds a picture by what it shows, and keeps both current. It also runs the media work the
+other modules hand it, so that a large import never starts it all at once: with the
+[Archive](../archive/index.md), dating and placing each file, finding and matching faces, text in
+pictures and transcripts. It holds the workers of the pool that
 work waits in, and their settings. The Archive and Recipes need it, so it comes with either.
 
 ## Install it
@@ -81,6 +82,28 @@ rendition work waits, the scan announces nothing, so it never repeats what is al
 | Remove the renditions no role names any more                               | `regenerate --prune /archive`                       |
 
 [Media commands](commands.md) lists their options.
+
+## Picture vectors
+
+A photo, and each keyframe of a video, gets a picture vector: what the media service's picture model
+sees in it, which [search](../archive/search.md) compares with the words you type, so a picture is
+found by what it shows without a caption. `media-embed-picture` makes them once a file is read, in a
+folder that wants `picture-vectors`
+([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)), and
+marks the file with the model that made them.
+
+Every hour the `pictures-heal` service runs `pictures-scan`, which asks for the photos and videos
+whose mark is missing or names another model than the media service runs now, in every folder that
+wants them, and announces them to `media-embed-picture`. Vectors the model in use made are kept and
+the file marked; another model's are made again, so when the media service changes its picture
+model the whole archive is embedded again, behind all other work. While picture work waits, the
+scan announces nothing.
+
+| You want to                                                   | Run                                                            |
+| ------------------------------------------------------------- | -------------------------------------------------------------- |
+| See which files lack picture vectors from the model in use    | `pictures-scan -n -v`                                          |
+| Announce them now, rather than at the next hour               | `pictures-scan`                                                |
+| Make a file's picture vectors again, whatever model made them | `embed-picture -f /archive/albums/christmas-2019/IMG_0042.jpg` |
 
 ## The workers
 

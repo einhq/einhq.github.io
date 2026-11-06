@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media commands – EiN documentation</title>
-    <meta name="description" content="The commands the media module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="description" content="The commands the media module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/media/commands.html">
     <meta property="og:title" content="Media commands – EiN documentation">
-    <meta property="og:description" content="The commands the media module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:description" content="The commands the media module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -92,8 +92,8 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>The commands the media module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
-<p><a href="#detect-chapters">detect-chapters</a> · <a href="#exif-extract">exif-extract</a> · <a href="#exiftool">exiftool</a> · <a href="#generate-derivatives">generate-derivatives</a> · <a href="#media-bridge">media-bridge</a> · <a href="#media-pool-kinds">media-pool-kinds</a> · <a href="#promote-exif-attrs">promote-exif-attrs</a> · <a href="#regenerate">regenerate</a> · <a href="#renditions-scan">renditions-scan</a></p>
+<p>The commands the media module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#detect-chapters">detect-chapters</a> · <a href="#embed-picture">embed-picture</a> · <a href="#exif-extract">exif-extract</a> · <a href="#exiftool">exiftool</a> · <a href="#generate-derivatives">generate-derivatives</a> · <a href="#media-bridge">media-bridge</a> · <a href="#media-pool-kinds">media-pool-kinds</a> · <a href="#pictures-scan">pictures-scan</a> · <a href="#promote-exif-attrs">promote-exif-attrs</a> · <a href="#regenerate">regenerate</a> · <a href="#renditions-scan">renditions-scan</a></p>
 <h2 id="d">D<a class="anchor" href="#d" aria-label="Link to this section"></a></h2>
 <h3 id="detect-chapters"><code>detect-chapters</code><a class="anchor" href="#detect-chapters" aria-label="Link to this section"></a></h3>
 <p>Find a video&#39;s cuts and write them as its chapters (metadata/chapters)</p>
@@ -132,6 +132,42 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code>detect-chapters /archive/albums/Exempelalbum_1978/files/sommarfilm.avi</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the chapters are written as WebVTT under the file, with the cuts on the node.</p>
 <h2 id="e">E<a class="anchor" href="#e" aria-label="Link to this section"></a></h2>
+<h3 id="embed-picture"><code>embed-picture</code><a class="anchor" href="#embed-picture" aria-label="Link to this section"></a></h3>
+<p>Embed a photo or a video&#39;s keyframes for search by what is in the picture.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>embed-picture [-v] [-f] &lt;input&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;input&gt;</code></td>
+<td>VFS path to a photo or video file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-v</code></td>
+<td>Verbose output.</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>Embed again even if the model EMS runs now made the vectors.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>embed-picture /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: the vectors written under the file&#39;s metadata/picture and the model that made them; nothing when the file&#39;s vectors are kept.</p>
 <h3 id="exif-extract"><code>exif-extract</code><a class="anchor" href="#exif-extract" aria-label="Link to this section"></a></h3>
 <p>Read a media file&#39;s metadata: the probe&#39;s dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module&#39;s hold command runs first, and a file it holds is not read unless forced.</p>
 <p><small>changes things</small></p>
@@ -292,6 +328,52 @@ media-pool-kinds models --reverse
 JSON_OUTPUT=1 media-pool-kinds models</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the flags (--kind for each kind, --reserve-kind for each reserved one); in JSON the kinds in order and the reserved ones.</p>
 <h2 id="p">P<a class="anchor" href="#p" aria-label="Link to this section"></a></h2>
+<h3 id="pictures-scan"><code>pictures-scan</code><a class="anchor" href="#pictures-scan" aria-label="Link to this section"></a></h3>
+<p>Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>pictures-scan [--limit=&lt;number&gt;] [--if-idle] [-n] [-v] [&lt;path&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[&lt;path&gt;]</code></td>
+<td>The tree to look in (default /)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--limit=&lt;number&gt;</code></td>
+<td>Facts one run announces at most (default 1000; 0 for no cap)</td>
+</tr>
+<tr>
+<td><code>--if-idle</code></td>
+<td>Announce nothing while media-embed-picture has work waiting.</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>Dry run — count what would be announced without announcing it.</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Name each file announced.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>pictures-scan -n
+pictures-scan /archive/albums/christmas-2019
+pictures-scan --if-idle --<span class="hljs-built_in">limit</span> 0</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: how many files it looked at and how many it announced as media.picture.stale, and the model EMS embeds with.</p>
 <h3 id="promote-exif-attrs"><code>promote-exif-attrs</code><a class="anchor" href="#promote-exif-attrs" aria-label="Link to this section"></a></h3>
 <p>Copy width/height/duration from a file&#39;s exif node onto the file node.</p>
 <p><small>changes things</small></p>
@@ -439,7 +521,7 @@ renditions-scan --if-idle --<span class="hljs-built_in">limit</span> 0</code></p
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#d">D</a></li><li class="nested"><a href="#detect-chapters">detect-chapters</a></li><li><a href="#e">E</a></li><li class="nested"><a href="#exif-extract">exif-extract</a></li><li class="nested"><a href="#exiftool">exiftool</a></li><li><a href="#g">G</a></li><li class="nested"><a href="#generate-derivatives">generate-derivatives</a></li><li><a href="#m">M</a></li><li class="nested"><a href="#media-bridge">media-bridge</a></li><li class="nested"><a href="#media-pool-kinds">media-pool-kinds</a></li><li><a href="#p">P</a></li><li class="nested"><a href="#promote-exif-attrs">promote-exif-attrs</a></li><li><a href="#r">R</a></li><li class="nested"><a href="#regenerate">regenerate</a></li><li class="nested"><a href="#renditions-scan">renditions-scan</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#d">D</a></li><li class="nested"><a href="#detect-chapters">detect-chapters</a></li><li><a href="#e">E</a></li><li class="nested"><a href="#embed-picture">embed-picture</a></li><li class="nested"><a href="#exif-extract">exif-extract</a></li><li class="nested"><a href="#exiftool">exiftool</a></li><li><a href="#g">G</a></li><li class="nested"><a href="#generate-derivatives">generate-derivatives</a></li><li><a href="#m">M</a></li><li class="nested"><a href="#media-bridge">media-bridge</a></li><li class="nested"><a href="#media-pool-kinds">media-pool-kinds</a></li><li><a href="#p">P</a></li><li class="nested"><a href="#pictures-scan">pictures-scan</a></li><li class="nested"><a href="#promote-exif-attrs">promote-exif-attrs</a></li><li><a href="#r">R</a></li><li class="nested"><a href="#regenerate">regenerate</a></li><li class="nested"><a href="#renditions-scan">renditions-scan</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -597,7 +597,8 @@ checksum and type, an <code>updated</code> event.</li>
 writes them under the photo as <code>metadata/exif</code>.</li>
 <li>That write becomes <code>media.metadata.extracted</code>, which starts <code>media-stills</code> (the display sizes)
 and the Archive&#39;s <code>media-interpret</code> (when the photo was taken, and where); for a picture also
-<code>media-embed-picture</code> (search by what is in the picture) and <code>media-ocr</code> (text in the picture);
+the Media module&#39;s <code>media-embed-picture</code> (search by what is in the picture) and <code>media-ocr</code>
+(text in the picture);
 for a video <code>media-embed-picture</code>, <code>media-transcode</code> and <code>media-transcribe</code>; for a recording
 <code>media-transcode</code> and <code>media-transcribe</code>. They run side by side. Once a file has every rendition
 the rendition table names for it, it is marked so, which becomes <code>media.renditions.made</code>.</li>

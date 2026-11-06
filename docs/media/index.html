@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media – EiN documentation</title>
-    <meta name="description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and keeps them current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
+    <meta name="description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and the picture vectors that search finds a picture by what it shows, and keeps both current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/media/">
     <meta property="og:title" content="Media – EiN documentation">
-    <meta property="og:description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and keeps them current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
+    <meta property="og:description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and the picture vectors that search finds a picture by what it shows, and keeps both current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -91,10 +91,11 @@
         </header>
         <article class="prose">
 <p>The Media module reads every picture, video and recording as it arrives, and makes the thumbnails,
-display sizes and playable copies of each in a folder that wants them, and keeps them current. It
-also runs the media work the other modules hand it, so that a large import never starts it all at
-once: with the <a href="../archive/index.html">Archive</a>, dating and placing each file, finding and matching
-faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that
+display sizes and playable copies of each in a folder that wants them, and the picture vectors that
+search finds a picture by what it shows, and keeps both current. It also runs the media work the
+other modules hand it, so that a large import never starts it all at once: with the
+<a href="../archive/index.html">Archive</a>, dating and placing each file, finding and matching faces, text in
+pictures and transcripts. It holds the workers of the pool that
 work waits in, and their settings. The Archive and Recipes need it, so it comes with either.</p>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>Installing the Archive or Recipes installs it too. On its own:</p>
@@ -184,6 +185,40 @@ rendition work waits, the scan announces nothing, so it never repeats what is al
 </tbody></table>
 </div>
 <p><a href="commands.html">Media commands</a> lists their options.</p>
+<h2 id="picture-vectors">Picture vectors<a class="anchor" href="#picture-vectors" aria-label="Link to this section"></a></h2>
+<p>A photo, and each keyframe of a video, gets a picture vector: what the media service&#39;s picture model
+sees in it, which <a href="../archive/search.html">search</a> compares with the words you type, so a picture is
+found by what it shows without a caption. <code>media-embed-picture</code> makes them once a file is read, in a
+folder that wants <code>picture-vectors</code>
+(<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>), and
+marks the file with the model that made them.</p>
+<p>Every hour the <code>pictures-heal</code> service runs <code>pictures-scan</code>, which asks for the photos and videos
+whose mark is missing or names another model than the media service runs now, in every folder that
+wants them, and announces them to <code>media-embed-picture</code>. Vectors the model in use made are kept and
+the file marked; another model&#39;s are made again, so when the media service changes its picture
+model the whole archive is embedded again, behind all other work. While picture work waits, the
+scan announces nothing.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want to</th>
+<th>Run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>See which files lack picture vectors from the model in use</td>
+<td><code>pictures-scan -n -v</code></td>
+</tr>
+<tr>
+<td>Announce them now, rather than at the next hour</td>
+<td><code>pictures-scan</code></td>
+</tr>
+<tr>
+<td>Make a file&#39;s picture vectors again, whatever model made them</td>
+<td><code>embed-picture -f /archive/albums/christmas-2019/IMG_0042.jpg</code></td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Each module puts the work a crawl must not start all at once as jobs into the pool
 <code>/var/pools/media</code>, and names the kinds of its jobs for the workers here:</p>
@@ -288,7 +323,7 @@ of the folder, end it without anyone taking it off, and a forced reading reads t
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
     </div>
   </body>
 </html>

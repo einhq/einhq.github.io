@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 403 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 404 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 148 in full](../archive/commands.md).
+[All 147 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -289,7 +289,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [device-timeline](../archive/commands.md#device-timeline) | One device's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
 | [device-update](../archive/commands.md#device-update) | Change a device's settings. |
 | [duplicates](../archive/commands.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
-| [embed-picture](../archive/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
 | [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar. |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
@@ -429,16 +428,18 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 9 in full](../media/commands.md).
+[All 11 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
+| [embed-picture](../media/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
 | [exiftool](../media/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running) |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
+| [pictures-scan](../media/commands.md#pictures-scan) | Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model. |
 | [promote-exif-attrs](../media/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
 | [regenerate](../media/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
 | [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
