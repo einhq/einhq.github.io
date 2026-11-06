@@ -46,9 +46,6 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-faces`          | Finds the faces in a photo and crops each one                                                            | `faces`                     |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                                    | `faces`                     |
 | `media-face-assign`    | Matches a found face to a person                                                                         | `face-assign`               |
-| `media-ocr`            | Reads the text written in a picture                                                                      | `ocr`                       |
-| `media-embed-text`     | Text vectors of a file's stored texts                                                                    | `embed-text`                |
-| `media-transcribe`     | A transcript of what is said in a video or recording                                                     | `transcribe`                |
 | `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                              | `diarize`                   |
 | `media-speaker-assign` | Decides which person each voice is                                                                       | `speaker-assign`            |
 | `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                          | `diarize`, `speaker-assign` |
@@ -78,8 +75,8 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                              |
 | `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                             |
-| `text`            | The text written in a picture, and a document's text                                                                                     | `media-ocr`, `document-index`, `media-embed-text`                                                    |
-| `transcripts`     | What is said in a video or recording                                                                                                     | `media-transcribe`, `media-embed-text`                                                               |
+| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                              |
+| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                         |
 | `archive`         | The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera                                       | `media-interpret`, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
@@ -101,8 +98,8 @@ Every kind of work above that is not run by the engine goes as a job into the po
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
 its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
 `speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media
-module's own `ingest`, `stills` and `transcode`; `models` takes the Archive's `faces`,
-`ocr`, `embed-text`, `transcribe` and `diarize`, beside the Media module's `shots` and `embed-picture`,
+module's own `ingest`, `stills` and `transcode`; `models` takes the Archive's `faces` and
+`diarize`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text` and `transcribe`,
 and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
 in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
@@ -119,8 +116,8 @@ in [How much runs at once](../media/index.md#how-much-runs-at-once).
 
 `media-transcode`, `media-transcribe`, `media-embed-picture` and `media-ocr` declare `FORCE`, which
 `-f` makes them redo work already done. [`pipeline-start`](../admin/processing.md#run-work-again-on-purpose)
-is core's; the other commands are the Archive's, and [Archive commands](commands.md) lists their
-options.
+is core's, `media-reembed` the [Media](../media/commands.md#media-reembed) module's, and the others
+the Archive's, which [Archive commands](commands.md) lists with their options.
 
 ### Close gaps the pipelines missed
 

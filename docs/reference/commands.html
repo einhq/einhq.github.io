@@ -986,7 +986,7 @@
 </tbody></table>
 </div>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
-<p><a href="../archive/commands.html">All 147 in full</a>.</p>
+<p><a href="../archive/commands.html">All 140 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1183,20 +1183,8 @@
 <td>Set a manual location override (positionManual + child position node) on a file, or clear its location.</td>
 </tr>
 <tr>
-<td><a href="../archive/commands.html#file-set-text">file-set-text</a></td>
-<td>Write the text in a picture by hand, in place of what was read from it.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#file-set-text-language">file-set-text-language</a></td>
-<td>Set the language the text in a picture is written in (or auto), and read the picture again in it.</td>
-</tr>
-<tr>
 <td><a href="../archive/commands.html#file-set-time">file-set-time</a></td>
 <td>Set, annotate or clear a hand-typed capture time (whenManual) on one or more files.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#file-set-transcript">file-set-transcript</a></td>
-<td>Write what is said in a video or a recording by hand, in place of the transcript.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#find-within">find-within</a></td>
@@ -1233,10 +1221,6 @@
 <tr>
 <td><a href="../archive/commands.html#hello">hello</a></td>
 <td>Say hello (example TypeScript module command)</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#index-document">index-document</a></td>
-<td>Extract text content and generate embedding for a document file.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#label-model">label-model</a></td>
@@ -1277,10 +1261,6 @@
 <tr>
 <td><a href="../archive/commands.html#media-heal">media-heal</a></td>
 <td>Start a pass of media-scan over the archive when one is due: none is running or failed, the last found something or rested, and not all its media work waits.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#media-reembed">media-reembed</a></td>
-<td>Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#media-resolve-time">media-resolve-time</a></td>
@@ -1431,10 +1411,6 @@
 <td>Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to.</td>
 </tr>
 <tr>
-<td><a href="../archive/commands.html#read-text">read-text</a></td>
-<td>Read the text written in a picture and keep it for search.</td>
-</tr>
-<tr>
 <td><a href="../archive/commands.html#regenerate-face-crops">regenerate-face-crops</a></td>
 <td>Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes.</td>
 </tr>
@@ -1559,10 +1535,6 @@
 <td>Show, turn on, replace or turn off the link a phone or GPS tracker posts a device&#39;s position to.</td>
 </tr>
 <tr>
-<td><a href="../archive/commands.html#transcribe-file">transcribe-file</a></td>
-<td>Transcribe audio or video into a timed WebVTT node with chunk embeddings.</td>
-</tr>
-<tr>
 <td><a href="../archive/commands.html#trip-album">trip-album</a></td>
 <td>Make a trip of a device&#39;s track an album, a new one or one that is there, or take it from its album.</td>
 </tr>
@@ -1647,7 +1619,7 @@
 </tbody></table>
 </div>
 <h2 id="media">Media<a class="anchor" href="#media" aria-label="Link to this section"></a></h2>
-<p><a href="../media/commands.html">All 11 in full</a>.</p>
+<p><a href="../media/commands.html">All 18 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1672,8 +1644,24 @@
 <td>Extract metadata from a file, as exiftool reads it (through the media service)</td>
 </tr>
 <tr>
+<td><a href="../media/commands.html#file-set-text">file-set-text</a></td>
+<td>Write the text in a picture by hand, in place of what was read from it.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#file-set-text-language">file-set-text-language</a></td>
+<td>Set the language the text in a picture is written in (or auto), and read the picture again in it.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#file-set-transcript">file-set-transcript</a></td>
+<td>Write what is said in a video or a recording by hand, in place of the transcript.</td>
+</tr>
+<tr>
 <td><a href="../media/commands.html#generate-derivatives">generate-derivatives</a></td>
 <td>Generate web derivatives (still pictures, transcoded renditions) for a media file.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#index-document">index-document</a></td>
+<td>Extract text content and generate embedding for a document file.</td>
 </tr>
 <tr>
 <td><a href="../media/commands.html#media-bridge">media-bridge</a></td>
@@ -1684,6 +1672,10 @@
 <td>The kinds of work a worker of the media pool takes, from the modules&#39; drop-ins, as pipeline-worker&#39;s flags.</td>
 </tr>
 <tr>
+<td><a href="../media/commands.html#media-reembed">media-reembed</a></td>
+<td>Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.</td>
+</tr>
+<tr>
 <td><a href="../media/commands.html#pictures-scan">pictures-scan</a></td>
 <td>Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model.</td>
 </tr>
@@ -1692,12 +1684,20 @@
 <td>Copy width/height/duration from a file&#39;s exif node onto the file node.</td>
 </tr>
 <tr>
+<td><a href="../media/commands.html#read-text">read-text</a></td>
+<td>Read the text written in a picture and keep it for search.</td>
+</tr>
+<tr>
 <td><a href="../media/commands.html#regenerate">regenerate</a></td>
 <td>Regenerate web derivatives for media files under a path.</td>
 </tr>
 <tr>
 <td><a href="../media/commands.html#renditions-scan">renditions-scan</a></td>
 <td>Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs.</td>
+</tr>
+<tr>
+<td><a href="../media/commands.html#transcribe-file">transcribe-file</a></td>
+<td>Transcribe audio or video into a timed WebVTT node with chunk embeddings.</td>
 </tr>
 </tbody></table>
 </div>

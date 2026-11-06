@@ -250,7 +250,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 147 in full](../archive/commands.md).
+[All 140 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -301,10 +301,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-orientation](../archive/commands.md#file-set-orientation) | Rotate or mirror a file for good: writes angle/angleManual/mirror, remaps face boxes and regenerates renditions (a video re-encodes on the media pool) |
 | [file-set-photographer](../archive/commands.md#file-set-photographer) | Link the person who took a file (photographer softlink) |
 | [file-set-position](../archive/commands.md#file-set-position) | Set a manual location override (positionManual + child position node) on a file, or clear its location. |
-| [file-set-text](../archive/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
-| [file-set-text-language](../archive/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-time](../archive/commands.md#file-set-time) | Set, annotate or clear a hand-typed capture time (whenManual) on one or more files. |
-| [file-set-transcript](../archive/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [find-within](../archive/commands.md#find-within) | Find positions inside a geographic bounding box: media points and locations. |
 | [gedcom-import](../archive/commands.md#gedcom-import) | Import a GEDCOM file's people and relations: match each individual to a person of the archive or make one, add missing parents, partners, events, homes and descriptions, and keep the file in /archive/sources/genealogy, linked from every person it describes. |
 | [gedcom-read](../archive/commands.md#gedcom-read) | Read a GEDCOM file and say who each of its individuals would be if it were imported now: matched to a person, made one or left out, with the people who could be them. |
@@ -314,7 +311,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
 | [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the registered devices each names. |
 | [hello](../archive/commands.md#hello) | Say hello (example TypeScript module command) |
-| [index-document](../archive/commands.md#index-document) | Extract text content and generate embedding for a document file. |
 | [label-model](../archive/commands.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |
 | [latest](../archive/commands.md#latest) | List the most recently captured media, newest first. |
 | [location-link-media](../archive/commands.md#location-link-media) | Link geotagged media files to the location whose shape contains them (<file>/location softlink) |
@@ -325,7 +321,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [location-update](../archive/commands.md#location-update) | Change a location's name, address, description, city or country. |
 | [media-details](../archive/commands.md#media-details) | Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file. |
 | [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the archive when one is due: none is running or failed, the last found something or rested, and not all its media work waits. |
-| [media-reembed](../archive/commands.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
 | [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
 | [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
 | [media-sidecars](../archive/commands.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites. |
@@ -363,7 +358,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [person-update](../archive/commands.md#person-update) | Change a person's profile: names, birth and death dates, gender, allergies, description, contact details. An empty value clears the field. |
 | [person-voices](../archive/commands.md#person-voices) | Every recording a person is heard in, with how long they speak and a moment to hear them. |
 | [raw](../archive/commands.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
-| [read-text](../archive/commands.md#read-text) | Read the text written in a picture and keep it for search. |
 | [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes. |
 | [search-album](../archive/commands.md#search-album) | Search albums by name, description and what their pictures show. |
 | [search-device](../archive/commands.md#search-device) | Search devices by name, make, model or serial number. |
@@ -395,7 +389,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
 | [track-trips](../archive/commands.md#track-trips) | Derive a device's trips and stays from its track, into <device>/.trips. |
 | [tracker-setup](../archive/commands.md#tracker-setup) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to. |
-| [transcribe-file](../archive/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
 | [trip-album](../archive/commands.md#trip-album) | Make a trip of a device's track an album, a new one or one that is there, or take it from its album. |
 | [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
 | [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
@@ -428,7 +421,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 11 in full](../media/commands.md).
+[All 18 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -436,13 +429,20 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [embed-picture](../media/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
 | [exiftool](../media/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
+| [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
+| [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
+| [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
+| [index-document](../media/commands.md#index-document) | Extract text content and generate embedding for a document file. |
 | [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made (long-running) |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |
+| [media-reembed](../media/commands.md#media-reembed) | Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone. |
 | [pictures-scan](../media/commands.md#pictures-scan) | Announce every photo and video whose picture vectors are not the model EMS embeds with now: its marker is missing or names another model. |
 | [promote-exif-attrs](../media/commands.md#promote-exif-attrs) | Copy width/height/duration from a file's exif node onto the file node. |
+| [read-text](../media/commands.md#read-text) | Read the text written in a picture and keep it for search. |
 | [regenerate](../media/commands.md#regenerate) | Regenerate web derivatives for media files under a path. |
 | [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
+| [transcribe-file](../media/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
 
 ## Recipes
 

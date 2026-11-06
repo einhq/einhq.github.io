@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 18 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [generate-derivatives](#generate-derivatives) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan)
+[detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [transcribe-file](#transcribe-file)
 
 ## D
 
@@ -109,6 +109,79 @@ exiftool /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 
 With `JSON_OUTPUT=1`: the file's metadata exactly as exiftool reads it.
 
+## F
+
+### `file-set-text`
+
+Write the text in a picture by hand, in place of what was read from it.
+
+<small>changes things</small>
+
+```text
+file-set-text [--text=<string>] [--text-base64=<string>] <file>
+```
+
+| Argument | What it is             |
+| -------- | ---------------------- |
+| `<file>` | VFS path to a picture. |
+
+| Option                   | What it does                                   |
+| ------------------------ | ---------------------------------------------- |
+| `--text=<string>`        | the text; empty removes it.                    |
+| `--text-base64=<string>` | the text, base64-encoded (for multi-line text) |
+
+```bash
+file-set-text /archive/albums/Exempelalbum_2019/files/brev.jpg --text 'Kära Anna'
+```
+
+With `JSON_OUTPUT=1`: nothing; the text is written and the picture is not read again.
+
+### `file-set-text-language`
+
+Set the language the text in a picture is written in (or auto), and read the picture again in it.
+
+<small>changes things</small>
+
+```text
+file-set-text-language <file> <language>
+```
+
+| Argument     | What it is                                                        |
+| ------------ | ----------------------------------------------------------------- |
+| `<file>`     | VFS path to a picture.                                            |
+| `<language>` | ISO 639-1 code (sv, en, de, …), or auto to tell it from the text. |
+
+```bash
+file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg en
+file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto
+```
+
+With `JSON_OUTPUT=1`: nothing; the language is set and the picture read again on the media pool.
+
+### `file-set-transcript`
+
+Write what is said in a video or a recording by hand, in place of the transcript.
+
+<small>changes things</small>
+
+```text
+file-set-transcript [--vtt-base64=<string>] <file>
+```
+
+| Argument | What it is                          |
+| -------- | ----------------------------------- |
+| `<file>` | VFS path to a video or a recording. |
+
+| Option                  | What it does                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `--vtt-base64=<string>` | the transcript as WebVTT, base64-encoded; without it, WebVTT is read from stdin. |
+
+```bash
+cat /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
+```
+
+With `JSON_OUTPUT=1`: nothing; the transcript is written, searchable, and not transcribed again.
+
 ## G
 
 ### `generate-derivatives`
@@ -139,6 +212,27 @@ generate-derivatives --only still /archive/albums/Exempelalbum_2019/files/IMG_00
 ```
 
 With `JSON_OUTPUT=1`: nothing; the thumbnail, display and transcode renditions are written, and the file is marked (renditionsFor, renditionsAt) once it has every one the table owes it.
+
+## I
+
+### `index-document`
+
+Extract text content and generate embedding for a document file.
+
+<small>changes things</small>
+
+```text
+index-document [-v] [-f] <input>
+```
+
+| Argument  | What it is                 |
+| --------- | -------------------------- |
+| `<input>` | VFS path to document file. |
+
+| Option | What it does                           |
+| ------ | -------------------------------------- |
+| `-v`   | Verbose output.                        |
+| `-f`   | Force reindex even if already indexed. |
 
 ## M
 
@@ -183,6 +277,34 @@ JSON_OUTPUT=1 media-pool-kinds models
 ```
 
 With `JSON_OUTPUT=1`: the flags (--kind for each kind, --reserve-kind for each reserved one); in JSON the kinds in order and the reserved ones.
+
+### `media-reembed`
+
+Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.
+
+<small>changes things</small>
+
+```text
+media-reembed [-l <number>] [-f] [-v] [<path>...]
+```
+
+| Argument      | What it is                                                          |
+| ------------- | ------------------------------------------------------------------- |
+| `[<path>...]` | files to embed the texts of (default: every text the archive holds) |
+
+| Option        | What it does                                                                                    |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| `-l <number>` | stop after this many texts or transcripts (default: all); a run resumes where the last stopped. |
+| `-f`          | embed again even what the current embedder already made.                                        |
+| `-v`          | name each transcript as it is done.                                                             |
+
+```bash
+media-reembed
+media-reembed -l 5000
+media-reembed /archive/albums/Exempelalbum_2019/files/IMG_0001.jpg
+```
+
+With `JSON_OUTPUT=1`: how many texts, transcripts and descriptions were embedded, skipped and failed; `pass complete` once nothing is left.
 
 ## P
 
@@ -244,6 +366,25 @@ With `JSON_OUTPUT=1`: nothing; width, height and duration are copied from the ex
 
 ## R
 
+### `read-text`
+
+Read the text written in a picture and keep it for search.
+
+<small>changes things</small>
+
+```text
+read-text [-v] [-f] <input>
+```
+
+| Argument  | What it is             |
+| --------- | ---------------------- |
+| `<input>` | VFS path to a picture. |
+
+| Option | What it does                     |
+| ------ | -------------------------------- |
+| `-v`   | Verbose output.                  |
+| `-f`   | Read again even if already read. |
+
 ### `regenerate`
 
 Regenerate web derivatives for media files under a path.
@@ -301,3 +442,30 @@ renditions-scan --if-idle --limit 0
 ```
 
 With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as media.renditions.stale.
+
+## T
+
+### `transcribe-file`
+
+Transcribe audio or video into a timed WebVTT node with chunk embeddings.
+
+<small>changes things</small>
+
+```text
+transcribe-file [-v] [-f] <input>
+```
+
+| Argument  | What it is                          |
+| --------- | ----------------------------------- |
+| `<input>` | VFS path to an audio or video file. |
+
+| Option | What it does                                                                       |
+| ------ | ---------------------------------------------------------------------------------- |
+| `-v`   | Verbose output.                                                                    |
+| `-f`   | Force re-transcription even if a transcript exists, unless it was written by hand. |
+
+```bash
+transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
+```
+
+With `JSON_OUTPUT=1`: nothing; a timed WebVTT transcript with chunk embeddings is written under the file.

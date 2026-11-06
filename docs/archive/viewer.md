@@ -628,15 +628,15 @@ See [Dates and places of pictures](dates-places.md).
 
 What the viewer shows and changes can also be done in [EiN's terminal](../shell/terminal.md):
 
-| Command                                                                              | What it does                                                       |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| [`media-details`](commands.md#media-details) `<file>`                                | Everything the details panel shows about a file.                   |
-| [`file-set-description`](commands.md#file-set-description) `--text '…' <file>`       | Sets or clears the description.                                    |
-| [`file-set-text`](commands.md#file-set-text) `--text '…' <file>`                     | Writes the text in a picture by hand.                              |
-| [`file-set-text-language`](commands.md#file-set-text-language) `<file> <code\|auto>` | Reads the text again in a language.                                |
-| [`file-set-transcript`](commands.md#file-set-transcript) `<file> < subtitles.vtt`    | Writes what is said in a video or recording, as WebVTT, by hand.   |
-| [`file-set-orientation`](commands.md#file-set-orientation) `--rotate cw <file>`      | Turns a file; `ccw` and `180` too, and `--toggle-mirror` flips it. |
-| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`              | Marks a favourite, or takes it away.                               |
+| Command                                                                                       | What it does                                                       |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`media-details`](commands.md#media-details) `<file>`                                         | Everything the details panel shows about a file.                   |
+| [`file-set-description`](commands.md#file-set-description) `--text '…' <file>`                | Sets or clears the description.                                    |
+| [`file-set-text`](../media/commands.md#file-set-text) `--text '…' <file>`                     | Writes the text in a picture by hand.                              |
+| [`file-set-text-language`](../media/commands.md#file-set-text-language) `<file> <code\|auto>` | Reads the text again in a language.                                |
+| [`file-set-transcript`](../media/commands.md#file-set-transcript) `<file> < subtitles.vtt`    | Writes what is said in a video or recording, as WebVTT, by hand.   |
+| [`file-set-orientation`](commands.md#file-set-orientation) `--rotate cw <file>`               | Turns a file; `ccw` and `180` too, and `--toggle-mirror` flips it. |
+| [`star`](../reference/commands-core.md#star) `<path>`, `star -d <path>`                       | Marks a favourite, or takes it away.                               |
 
 ```bash
 # in EiN's terminal

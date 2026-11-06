@@ -277,8 +277,7 @@ Two commands do a file's reading again, for a file you may change:
 | `index-document -f <file>` | Reads a document's text again.                                                                                                                       |
 
 Every command and its options are in the
-[Media module's command reference](../media/commands.md#exif-extract), the
-[archive's command reference](commands.md#index-document) and the
+[Media module's command reference](../media/commands.md#exif-extract) and the
 [core command reference](../reference/commands-core.md#mime).
 
 ## Related pages

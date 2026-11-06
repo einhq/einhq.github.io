@@ -2,9 +2,9 @@
 
 # Archive commands
 
-The commands the archive module adds. They are there once the module is installed. 147 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the archive module adds. They are there once the module is installed. 140 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-time](#file-set-time) · [file-set-transcript](#file-set-transcript) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [index-document](#index-document) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-reembed](#media-reembed) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [read-text](#read-text) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [transcribe-file](#transcribe-file) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [compute-fingerprint](#compute-fingerprint) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-time](#file-set-time) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [tracker-setup](#tracker-setup) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather)
 
 ## A
 
@@ -1165,53 +1165,6 @@ file-set-position /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg 59.0000 1
 
 With `JSON_OUTPUT=1`: nothing; a manual location is written onto the file, or its location is taken away.
 
-### `file-set-text`
-
-Write the text in a picture by hand, in place of what was read from it.
-
-<small>changes things</small>
-
-```text
-file-set-text [--text=<string>] [--text-base64=<string>] <file>
-```
-
-| Argument | What it is             |
-| -------- | ---------------------- |
-| `<file>` | VFS path to a picture. |
-
-| Option                   | What it does                                   |
-| ------------------------ | ---------------------------------------------- |
-| `--text=<string>`        | the text; empty removes it.                    |
-| `--text-base64=<string>` | the text, base64-encoded (for multi-line text) |
-
-```bash
-file-set-text /archive/albums/Exempelalbum_2019/files/brev.jpg --text 'Kära Anna'
-```
-
-With `JSON_OUTPUT=1`: nothing; the text is written and the picture is not read again.
-
-### `file-set-text-language`
-
-Set the language the text in a picture is written in (or auto), and read the picture again in it.
-
-<small>changes things</small>
-
-```text
-file-set-text-language <file> <language>
-```
-
-| Argument     | What it is                                                        |
-| ------------ | ----------------------------------------------------------------- |
-| `<file>`     | VFS path to a picture.                                            |
-| `<language>` | ISO 639-1 code (sv, en, de, …), or auto to tell it from the text. |
-
-```bash
-file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg en
-file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto
-```
-
-With `JSON_OUTPUT=1`: nothing; the language is set and the picture read again on the media pool.
-
 ### `file-set-time`
 
 Set, annotate or clear a hand-typed capture time (whenManual) on one or more files.
@@ -1238,30 +1191,6 @@ file-set-time --clear /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
 With `JSON_OUTPUT=1`: FileSetTimeAnswer: each file with the capture time it now resolves to and its source.
-
-### `file-set-transcript`
-
-Write what is said in a video or a recording by hand, in place of the transcript.
-
-<small>changes things</small>
-
-```text
-file-set-transcript [--vtt-base64=<string>] <file>
-```
-
-| Argument | What it is                          |
-| -------- | ----------------------------------- |
-| `<file>` | VFS path to a video or a recording. |
-
-| Option                  | What it does                                                                     |
-| ----------------------- | -------------------------------------------------------------------------------- |
-| `--vtt-base64=<string>` | the transcript as WebVTT, base64-encoded; without it, WebVTT is read from stdin. |
-
-```bash
-cat /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
-```
-
-With `JSON_OUTPUT=1`: nothing; the transcript is written, searchable, and not transcribed again.
 
 ### `find-within`
 
@@ -1491,27 +1420,6 @@ hello <name>
 | Argument | What it is     |
 | -------- | -------------- |
 | `<name>` | name to greet. |
-
-## I
-
-### `index-document`
-
-Extract text content and generate embedding for a document file.
-
-<small>changes things</small>
-
-```text
-index-document [-v] [-f] <input>
-```
-
-| Argument  | What it is                 |
-| --------- | -------------------------- |
-| `<input>` | VFS path to document file. |
-
-| Option | What it does                           |
-| ------ | -------------------------------------- |
-| `-v`   | Verbose output.                        |
-| `-f`   | Force reindex even if already indexed. |
 
 ## L
 
@@ -1767,34 +1675,6 @@ media-heal --rest 0
 ```
 
 With `JSON_OUTPUT=1`: whether a pass was announced, and why or why not.
-
-### `media-reembed`
-
-Embed the extracted texts, transcripts and hand-written descriptions already stored into the current text space, from the stored text alone.
-
-<small>changes things</small>
-
-```text
-media-reembed [-l <number>] [-f] [-v] [<path>...]
-```
-
-| Argument      | What it is                                                          |
-| ------------- | ------------------------------------------------------------------- |
-| `[<path>...]` | files to embed the texts of (default: every text the archive holds) |
-
-| Option        | What it does                                                                                    |
-| ------------- | ----------------------------------------------------------------------------------------------- |
-| `-l <number>` | stop after this many texts or transcripts (default: all); a run resumes where the last stopped. |
-| `-f`          | embed again even what the current embedder already made.                                        |
-| `-v`          | name each transcript as it is done.                                                             |
-
-```bash
-media-reembed
-media-reembed -l 5000
-media-reembed /archive/albums/Exempelalbum_2019/files/IMG_0001.jpg
-```
-
-With `JSON_OUTPUT=1`: how many texts, transcripts and descriptions were embedded, skipped and failed; `pass complete` once nothing is left.
 
 ### `media-resolve-time`
 
@@ -2755,25 +2635,6 @@ raw /archive/albums/Exempelalbum_2019/files/DSC_0001.NEF
 
 With `JSON_OUTPUT=1`: the non-RAW files the RAW is related to.
 
-### `read-text`
-
-Read the text written in a picture and keep it for search.
-
-<small>changes things</small>
-
-```text
-read-text [-v] [-f] <input>
-```
-
-| Argument  | What it is             |
-| --------- | ---------------------- |
-| `<input>` | VFS path to a picture. |
-
-| Option | What it does                     |
-| ------ | -------------------------------- |
-| `-v`   | Verbose output.                  |
-| `-f`   | Read again even if already read. |
-
 ### `regenerate-face-crops`
 
 Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes.
@@ -3641,31 +3502,6 @@ tracker-setup sailboat --new --origin https://ein.example
 ```
 
 With `JSON_OUTPUT=1`: TrackerSetup: whether live tracking is on, the link, and the QR code.
-
-### `transcribe-file`
-
-Transcribe audio or video into a timed WebVTT node with chunk embeddings.
-
-<small>changes things</small>
-
-```text
-transcribe-file [-v] [-f] <input>
-```
-
-| Argument  | What it is                          |
-| --------- | ----------------------------------- |
-| `<input>` | VFS path to an audio or video file. |
-
-| Option | What it does                                                                       |
-| ------ | ---------------------------------------------------------------------------------- |
-| `-v`   | Verbose output.                                                                    |
-| `-f`   | Force re-transcription even if a transcript exists, unless it was written by hand. |
-
-```bash
-transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
-```
-
-With `JSON_OUTPUT=1`: nothing; a timed WebVTT transcript with chunk embeddings is written under the file.
 
 ### `trip-album`
 

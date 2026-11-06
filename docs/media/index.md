@@ -1,11 +1,12 @@
 # Media
 
 The Media module reads every picture, video and recording as it arrives, and makes the thumbnails,
-display sizes and playable copies of each in a folder that wants them, and the picture vectors that
-search finds a picture by what it shows, and keeps both current. It also runs the media work the
-other modules hand it, so that a large import never starts it all at once: with the
-[Archive](../archive/index.md), dating and placing each file, finding and matching faces, text in
-pictures and transcripts. It holds the workers of the pool that
+display sizes and playable copies of each in a folder that wants them, the picture vectors that
+search finds a picture by what it shows, the text in pictures and documents, and what is said in
+videos and recordings, and keeps the renditions and picture vectors current. It also runs the media
+work the other modules hand it, so that a large import never starts it all at once: with the
+[Archive](../archive/index.md), dating and placing each file, and finding and matching faces and
+voices. It holds the workers of the pool that
 work waits in, and their settings. The Archive and Recipes need it, so it comes with either.
 
 ## Install it
@@ -104,6 +105,28 @@ scan announces nothing.
 | See which files lack picture vectors from the model in use    | `pictures-scan -n -v`                                          |
 | Announce them now, rather than at the next hour               | `pictures-scan`                                                |
 | Make a file's picture vectors again, whatever model made them | `embed-picture -f /archive/albums/christmas-2019/IMG_0042.jpg` |
+
+## Text and transcripts
+
+In a folder that wants `text`, the text written in a picture is read once the picture is
+(`media-ocr`, `read-text`), and a PDF, plain text, Word or OpenDocument text file's text once its
+last byte is written (`document-index`, `index-document`); nothing is read while it is in a staging
+area. In a folder that wants `transcripts`, what is said in a video or recording is written as its
+transcript (`media-transcribe`, `transcribe-file`). Each text gets a vector, which search finds it by.
+A person corrects them in the [viewer](../archive/viewer.md), with `file-set-text`,
+`file-set-text-language` and `file-set-transcript` underneath; the voices in a transcript, and who
+speaks, are the Archive's.
+
+The [Archive](../archive/processing.md#close-gaps-the-pipelines-missed) finds what was missed in its
+albums: a file never read, text read by an older engine, a transcript made with other settings, a
+text whose vector is another model's.
+
+| You want to                                               | Run                                                              |
+| --------------------------------------------------------- | ---------------------------------------------------------------- |
+| Read the text in a picture again                          | `read-text -f /archive/albums/christmas-2019/IMG_0042.jpg`       |
+| Read a document's text again                              | `index-document -f /home/helen/letters/1962.pdf`                 |
+| Transcribe a video or recording again                     | `transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4` |
+| Embed every stored text and transcript again, as they are | `media-reembed`                                                  |
 
 ## The workers
 

@@ -44,31 +44,31 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 
 ## Pictures, videos and recordings
 
-| Task                                          | Command                                                            | Reference                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------ |
-| Everything about one file                     | `media-details /archive/albums/christmas-2019/20191224_141841.jpg` | [media-details](commands.md#media-details)                   |
-| Its metadata as exiftool reads it             | `exiftool <file>`                                                  | [exiftool](../media/commands.md#exiftool)                    |
-| Set when it was taken, as vaguely as you know | `file-set-time <file> 1968-07 --note 'Postmark on the back'`       | [file-set-time](commands.md#file-set-time)                   |
-| Undo a date set by hand                       | `file-set-time --clear <file>`                                     | [file-set-time](commands.md#file-set-time)                   |
-| Set where it was taken                        | `file-set-position <file> --lat=50.2632 --lng=-5.0510`             | [file-set-position](commands.md#file-set-position)           |
-| Rotate or mirror it for good                  | `file-set-orientation --rotate cw <file>`                          | [file-set-orientation](commands.md#file-set-orientation)     |
-| Write its description                         | `file-set-description --text 'Christmas morning' <file>`           | [file-set-description](commands.md#file-set-description)     |
-| Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                         | [file-set-text](commands.md#file-set-text)                   |
-| Read its text again in another language       | `file-set-text-language <file> en`                                 | [file-set-text-language](commands.md#file-set-text-language) |
-| Correct what is said in a video or recording  | `cat corrected.vtt \| file-set-transcript <file>`                  | [file-set-transcript](commands.md#file-set-transcript)       |
-| Say who took it                               | `file-set-photographer <file> /archive/people/helen-okafor`        | [file-set-photographer](commands.md#file-set-photographer)   |
-| The latest pictures taken                     | `latest 20`                                                        | [latest](commands.md#latest)                                 |
+| Task                                          | Command                                                            | Reference                                                             |
+| --------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Everything about one file                     | `media-details /archive/albums/christmas-2019/20191224_141841.jpg` | [media-details](commands.md#media-details)                            |
+| Its metadata as exiftool reads it             | `exiftool <file>`                                                  | [exiftool](../media/commands.md#exiftool)                             |
+| Set when it was taken, as vaguely as you know | `file-set-time <file> 1968-07 --note 'Postmark on the back'`       | [file-set-time](commands.md#file-set-time)                            |
+| Undo a date set by hand                       | `file-set-time --clear <file>`                                     | [file-set-time](commands.md#file-set-time)                            |
+| Set where it was taken                        | `file-set-position <file> --lat=50.2632 --lng=-5.0510`             | [file-set-position](commands.md#file-set-position)                    |
+| Rotate or mirror it for good                  | `file-set-orientation --rotate cw <file>`                          | [file-set-orientation](commands.md#file-set-orientation)              |
+| Write its description                         | `file-set-description --text 'Christmas morning' <file>`           | [file-set-description](commands.md#file-set-description)              |
+| Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                         | [file-set-text](../media/commands.md#file-set-text)                   |
+| Read its text again in another language       | `file-set-text-language <file> en`                                 | [file-set-text-language](../media/commands.md#file-set-text-language) |
+| Correct what is said in a video or recording  | `cat corrected.vtt \| file-set-transcript <file>`                  | [file-set-transcript](../media/commands.md#file-set-transcript)       |
+| Say who took it                               | `file-set-photographer <file> /archive/people/helen-okafor`        | [file-set-photographer](commands.md#file-set-photographer)            |
+| The latest pictures taken                     | `latest 20`                                                        | [latest](commands.md#latest)                                          |
 
 A value that starts with a minus goes after an equals sign, as in `--lng=-5.0510`; on its own it would be read as another option. Only `file-set-time` can give a picture a vague date such as `1968` or `1968-07`; the Web UI's dialog sets full dates. [Dates and places of pictures](dates-places.md) explains which date a picture gets.
 
 To have EiN look at one file again, run the step with `-f`:
 
-| Task                                       | Command                               | Reference                                      |
-| ------------------------------------------ | ------------------------------------- | ---------------------------------------------- |
-| Read the text in a picture again           | `read-text -f <file>`                 | [read-text](commands.md#read-text)             |
-| Find the faces again, keeping who they are | `detect-faces -f <file>`              | [detect-faces](commands.md#detect-faces)       |
-| Transcribe a recording or video again      | `transcribe-file -f <file>`           | [transcribe-file](commands.md#transcribe-file) |
-| Make thumbnails and renditions again       | `regenerate --force <file or folder>` | [regenerate](../media/commands.md#regenerate)  |
+| Task                                       | Command                               | Reference                                               |
+| ------------------------------------------ | ------------------------------------- | ------------------------------------------------------- |
+| Read the text in a picture again           | `read-text -f <file>`                 | [read-text](../media/commands.md#read-text)             |
+| Find the faces again, keeping who they are | `detect-faces -f <file>`              | [detect-faces](commands.md#detect-faces)                |
+| Transcribe a recording or video again      | `transcribe-file -f <file>`           | [transcribe-file](../media/commands.md#transcribe-file) |
+| Make thumbnails and renditions again       | `regenerate --force <file or folder>` | [regenerate](../media/commands.md#regenerate)           |
 
 All four ask the [media service](../ems/index.md), so they need it running. For many files at once, an administrator starts the pipelines instead: see [Processing and pipelines](../admin/processing.md).
 

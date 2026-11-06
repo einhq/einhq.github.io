@@ -167,21 +167,6 @@ show <strong>waiting for EMS</strong> on the <strong>Dashboard</strong>.</p>
 <td><code>face-assign</code></td>
 </tr>
 <tr>
-<td><code>media-ocr</code></td>
-<td>Reads the text written in a picture</td>
-<td><code>ocr</code></td>
-</tr>
-<tr>
-<td><code>media-embed-text</code></td>
-<td>Text vectors of a file&#39;s stored texts</td>
-<td><code>embed-text</code></td>
-</tr>
-<tr>
-<td><code>media-transcribe</code></td>
-<td>A transcript of what is said in a video or recording</td>
-<td><code>transcribe</code></td>
-</tr>
-<tr>
 <td><code>media-voiceprint</code></td>
 <td>Who speaks when in a recording, with a voiceprint per voice</td>
 <td><code>diarize</code></td>
@@ -302,12 +287,12 @@ for only some of it (<a href="../concepts/pipelines.html#which-processing-a-fold
 <tr>
 <td><code>text</code></td>
 <td>The text written in a picture, and a document&#39;s text</td>
-<td><code>media-ocr</code>, <code>document-index</code>, <code>media-embed-text</code></td>
+<td>the Media module&#39;s <code>media-ocr</code>, <code>document-index</code> and <code>media-embed-text</code></td>
 </tr>
 <tr>
 <td><code>transcripts</code></td>
 <td>What is said in a video or recording</td>
-<td><code>media-transcribe</code>, <code>media-embed-text</code></td>
+<td>the Media module&#39;s <code>media-transcribe</code> and <code>media-embed-text</code></td>
 </tr>
 <tr>
 <td><code>archive</code></td>
@@ -331,8 +316,8 @@ turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
 its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-assign</code>,
 <code>speaker-assign</code>, <code>fingerprint</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media
-module&#39;s own <code>ingest</code>, <code>stills</code> and <code>transcode</code>; <code>models</code> takes the Archive&#39;s <code>faces</code>,
-<code>ocr</code>, <code>embed-text</code>, <code>transcribe</code> and <code>diarize</code>, beside the Media module&#39;s <code>shots</code> and <code>embed-picture</code>,
+module&#39;s own <code>ingest</code>, <code>stills</code> and <code>transcode</code>; <code>models</code> takes the Archive&#39;s <code>faces</code> and
+<code>diarize</code>, beside the Media module&#39;s <code>shots</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code> and <code>transcribe</code>,
 and <code>models-second</code> the same kinds in the reverse order. How much of it runs at once is set there,
 in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>.</p>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
@@ -371,8 +356,8 @@ in <a href="../media/index.html#how-much-runs-at-once">How much runs at once</a>
 </div>
 <p><code>media-transcode</code>, <code>media-transcribe</code>, <code>media-embed-picture</code> and <code>media-ocr</code> declare <code>FORCE</code>, which
 <code>-f</code> makes them redo work already done. <a href="../admin/processing.html#run-work-again-on-purpose"><code>pipeline-start</code></a>
-is core&#39;s; the other commands are the Archive&#39;s, and <a href="commands.html">Archive commands</a> lists their
-options.</p>
+is core&#39;s, <code>media-reembed</code> the <a href="../media/commands.html#media-reembed">Media</a> module&#39;s, and the others
+the Archive&#39;s, which <a href="commands.html">Archive commands</a> lists with their options.</p>
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
 something a pipeline should have given it: its date and place, a fingerprint, faces, or a

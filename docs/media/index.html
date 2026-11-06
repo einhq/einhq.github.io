@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media – EiN documentation</title>
-    <meta name="description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and the picture vectors that search finds a picture by what it shows, and keeps both current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
+    <meta name="description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, the picture vectors that search finds a picture by what it shows, the text in pictures and documents, and what is said in videos and recordings, and keeps the renditions and picture vectors current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, and finding and matching faces and voices. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/media/">
     <meta property="og:title" content="Media – EiN documentation">
-    <meta property="og:description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, and the picture vectors that search finds a picture by what it shows, and keeps both current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, finding and matching faces, text in pictures and transcripts. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
+    <meta property="og:description" content="The Media module reads every picture, video and recording as it arrives, and makes the thumbnails, display sizes and playable copies of each in a folder that wants them, the picture vectors that search finds a picture by what it shows, the text in pictures and documents, and what is said in videos and recordings, and keeps the renditions and picture vectors current. It also runs the media work the other modules hand it, so that a large import never starts it all at once: with the Archive, dating and placing each file, and finding and matching faces and voices. It holds the workers of the pool that work waits in, and their settings. The Archive and Recipes need it, so it comes with either.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -91,11 +91,12 @@
         </header>
         <article class="prose">
 <p>The Media module reads every picture, video and recording as it arrives, and makes the thumbnails,
-display sizes and playable copies of each in a folder that wants them, and the picture vectors that
-search finds a picture by what it shows, and keeps both current. It also runs the media work the
-other modules hand it, so that a large import never starts it all at once: with the
-<a href="../archive/index.html">Archive</a>, dating and placing each file, finding and matching faces, text in
-pictures and transcripts. It holds the workers of the pool that
+display sizes and playable copies of each in a folder that wants them, the picture vectors that
+search finds a picture by what it shows, the text in pictures and documents, and what is said in
+videos and recordings, and keeps the renditions and picture vectors current. It also runs the media
+work the other modules hand it, so that a large import never starts it all at once: with the
+<a href="../archive/index.html">Archive</a>, dating and placing each file, and finding and matching faces and
+voices. It holds the workers of the pool that
 work waits in, and their settings. The Archive and Recipes need it, so it comes with either.</p>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>Installing the Archive or Recipes installs it too. On its own:</p>
@@ -219,6 +220,43 @@ scan announces nothing.</p>
 </tr>
 </tbody></table>
 </div>
+<h2 id="text-and-transcripts">Text and transcripts<a class="anchor" href="#text-and-transcripts" aria-label="Link to this section"></a></h2>
+<p>In a folder that wants <code>text</code>, the text written in a picture is read once the picture is
+(<code>media-ocr</code>, <code>read-text</code>), and a PDF, plain text, Word or OpenDocument text file&#39;s text once its
+last byte is written (<code>document-index</code>, <code>index-document</code>); nothing is read while it is in a staging
+area. In a folder that wants <code>transcripts</code>, what is said in a video or recording is written as its
+transcript (<code>media-transcribe</code>, <code>transcribe-file</code>). Each text gets a vector, which search finds it by.
+A person corrects them in the <a href="../archive/viewer.html">viewer</a>, with <code>file-set-text</code>,
+<code>file-set-text-language</code> and <code>file-set-transcript</code> underneath; the voices in a transcript, and who
+speaks, are the Archive&#39;s.</p>
+<p>The <a href="../archive/processing.html#close-gaps-the-pipelines-missed">Archive</a> finds what was missed in its
+albums: a file never read, text read by an older engine, a transcript made with other settings, a
+text whose vector is another model&#39;s.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>You want to</th>
+<th>Run</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read the text in a picture again</td>
+<td><code>read-text -f /archive/albums/christmas-2019/IMG_0042.jpg</code></td>
+</tr>
+<tr>
+<td>Read a document&#39;s text again</td>
+<td><code>index-document -f /home/helen/letters/1962.pdf</code></td>
+</tr>
+<tr>
+<td>Transcribe a video or recording again</td>
+<td><code>transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
+</tr>
+<tr>
+<td>Embed every stored text and transcript again, as they are</td>
+<td><code>media-reembed</code></td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Each module puts the work a crawl must not start all at once as jobs into the pool
 <code>/var/pools/media</code>, and names the kinds of its jobs for the workers here:</p>
@@ -323,7 +361,7 @@ of the folder, end it without anyone taking it off, and a forced reading reads t
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#text-and-transcripts">Text and transcripts</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
     </div>
   </body>
 </html>
