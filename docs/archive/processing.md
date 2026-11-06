@@ -124,14 +124,15 @@ the Archive's, which [Archive commands](commands.md) lists with their options.
 ### Close gaps the pipelines missed
 
 `media-scan` walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: its date and place, a fingerprint, faces, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips what is already done.
+something a pipeline should have given it: its date and place, faces or voices. Each
+pipeline then skips what is already done.
 
-Renditions are the Media module's to keep current: [Renditions kept current](../media/index.md#renditions-kept-current).
+What describes a file is the Media module's to keep current, in every folder:
+[renditions](../media/index.md#renditions-kept-current), [picture vectors](../media/index.md#picture-vectors),
+and [text, transcripts and their vectors](../media/index.md#text-and-transcripts-kept-current).
 
 The `media-heal` pipeline runs `media-scan` for you over `/archive/albums` and over each user's
-staged files, `/home/<user>/staging/files`, whose faces staging uses to suggest groups. Text in a
-staged file is not a gap: it is read when the file is filed. Each pass is one instance, which
+staged files, `/home/<user>/staging/files`, whose faces staging uses to suggest groups. Each pass is one instance, which
 shows under **Ongoing** on the **Dashboard** with how far through its folder it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
@@ -150,9 +151,8 @@ get a pass of their own once their pipelines have nothing waiting. After a pass 
 and holds nothing back, that folder rests for `CFG_MEDIA_HEAL_REST` seconds (21600, six hours). `media-heal -n` says whether a pass is due now,
 and `media-heal --rest 0` starts one without waiting out the rest.
 
-Faces, text vectors, text in pictures and transcripts are compared with the models the media
-service runs now (picture vectors are the [Media](../media/index.md#picture-vectors) module's to
-keep current), so a scan needs the service to answer. While it does not, a pass ends
+Faces are compared with the models the media service runs now, so a scan needs the service to
+answer. While it does not, a pass ends
 without going through the archive, and the service starts it again at its next look, rather than
 going on without those checks. Run by hand, `media-scan`
 goes on and names the kinds of gap it could not check; scan for those again with `--only` and
@@ -171,10 +171,6 @@ A run examines up to 20000 files (`--scan-limit`) and announces up to 1000 (`--l
 remembers where it stopped, so the next run goes on from there; `--restart` starts from the top. It
 announces fewer as running `media-ingest` instances and waiting triggers add up, and nothing once they reach 500
 (`--max-active`).
-
-`CFG_MEDIA_TRANSCRIPTS_CURRENT` set to `off` stops transcripts from being made again when the
-media service's speech settings change. On a large archive such a change otherwise means hours of
-background work.
 
 ## Large imports and the bulk lane
 

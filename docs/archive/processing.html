@@ -362,12 +362,13 @@ is core&#39;s, <code>media-reembed</code> the <a href="../media/commands.html#me
 the Archive&#39;s, which <a href="commands.html">Archive commands</a> lists with their options.</p>
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
-something a pipeline should have given it: its date and place, a fingerprint, faces, or a
-transcript made with other settings than the media service runs now. Each pipeline then skips what is already done.</p>
-<p>Renditions are the Media module&#39;s to keep current: <a href="../media/index.html#renditions-kept-current">Renditions kept current</a>.</p>
+something a pipeline should have given it: its date and place, faces or voices. Each
+pipeline then skips what is already done.</p>
+<p>What describes a file is the Media module&#39;s to keep current, in every folder:
+<a href="../media/index.html#renditions-kept-current">renditions</a>, <a href="../media/index.html#picture-vectors">picture vectors</a>,
+and <a href="../media/index.html#text-and-transcripts-kept-current">text, transcripts and their vectors</a>.</p>
 <p>The <code>media-heal</code> pipeline runs <code>media-scan</code> for you over <code>/archive/albums</code> and over each user&#39;s
-staged files, <code>/home/&lt;user&gt;/staging/files</code>, whose faces staging uses to suggest groups. Text in a
-staged file is not a gap: it is read when the file is filed. Each pass is one instance, which
+staged files, <code>/home/&lt;user&gt;/staging/files</code>, whose faces staging uses to suggest groups. Each pass is one instance, which
 shows under <strong>Ongoing</strong> on the <strong>Dashboard</strong> with how far through its folder it has come; it is
 housekeeping, not work waiting, so <code>health</code> does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
@@ -384,9 +385,8 @@ when every kind of gap it would look for has work waiting. The kinds a folder&#3
 get a pass of their own once their pipelines have nothing waiting. After a pass that finds nothing
 and holds nothing back, that folder rests for <code>CFG_MEDIA_HEAL_REST</code> seconds (21600, six hours). <code>media-heal -n</code> says whether a pass is due now,
 and <code>media-heal --rest 0</code> starts one without waiting out the rest.</p>
-<p>Faces, text vectors, text in pictures and transcripts are compared with the models the media
-service runs now (picture vectors are the <a href="../media/index.html#picture-vectors">Media</a> module&#39;s to
-keep current), so a scan needs the service to answer. While it does not, a pass ends
+<p>Faces are compared with the models the media service runs now, so a scan needs the service to
+answer. While it does not, a pass ends
 without going through the archive, and the service starts it again at its next look, rather than
 going on without those checks. Run by hand, <code>media-scan</code>
 goes on and names the kinds of gap it could not check; scan for those again with <code>--only</code> and
@@ -400,9 +400,6 @@ media-scan /archive/albums/christmas-2019</code></pre></div>
 remembers where it stopped, so the next run goes on from there; <code>--restart</code> starts from the top. It
 announces fewer as running <code>media-ingest</code> instances and waiting triggers add up, and nothing once they reach 500
 (<code>--max-active</code>).</p>
-<p><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code> set to <code>off</code> stops transcripts from being made again when the
-media service&#39;s speech settings change. On a large archive such a change otherwise means hours of
-background work.</p>
 <h2 id="large-imports-and-the-bulk-lane">Large imports and the bulk lane<a class="anchor" href="#large-imports-and-the-bulk-lane" aria-label="Link to this section"></a></h2>
 <p>Work on a staging category of the <strong>Google Photos export</strong> or <strong>Scans</strong> kind runs in core&#39;s
 <a href="../admin/processing.html#the-bulk-lane">bulk lane</a>, below all other work, so what people upload in

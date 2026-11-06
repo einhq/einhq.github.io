@@ -117,16 +117,38 @@ A person corrects them in the [viewer](../archive/viewer.md), with `file-set-tex
 `file-set-text-language` and `file-set-transcript` underneath; the voices in a transcript, and who
 speaks, are the Archive's.
 
-The [Archive](../archive/processing.md#close-gaps-the-pipelines-missed) finds what was missed in its
-albums: a file never read, text read by an older engine, a transcript made with other settings, a
-text whose vector is another model's.
+## Text and transcripts kept current
 
-| You want to                                               | Run                                                              |
-| --------------------------------------------------------- | ---------------------------------------------------------------- |
-| Read the text in a picture again                          | `read-text -f /archive/albums/christmas-2019/IMG_0042.jpg`       |
-| Read a document's text again                              | `index-document -f /home/helen/letters/1962.pdf`                 |
-| Transcribe a video or recording again                     | `transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4` |
-| Embed every stored text and transcript again, as they are | `media-reembed`                                                  |
+A file is marked with what made its transcript and its text vectors (`transcriptWith` and
+`textVectorsBy` in its attributes), as it is with the engine that read its text (`ocrBy`). Every
+hour the `text-heal` service runs `text-scan`, which asks, in every folder that wants them, for:
+
+- a video or recording whose transcript is missing or was made with other speech settings than the
+  media service runs now, announced to `media-transcribe`. A transcript made with the settings in
+  use is kept and the file marked; one made with others is made again, so a change of the media
+  service's speech settings transcribes the whole archive again, behind all other work. One a person
+  wrote, and one of a file with no sound, is kept whatever the settings.
+- a picture whose text another engine read, announced to `media-ocr`, unless a person wrote it.
+- a picture or document whose text was never read, announced to `media-ocr` or `document-index`.
+  A folder moved in whole has its files' text read the same way, as soon as it arrives.
+- a file whose texts lack vectors from the text model the media service runs now, announced to
+  `media-embed-text`. A description changed by hand is embedded again as soon as it is saved.
+
+Each kind of gap waits while its work waits, so the scan never repeats what is already on its way,
+and a check that needs the media service is left out while it does not answer. Nothing in a
+staging area is asked about its text: it is read when the file is filed. **Keep transcripts current**
+([`CFG_MEDIA_TRANSCRIPTS_CURRENT`](../reference/settings.md#cfg_media_transcripts_current)) set to
+`off` leaves the transcripts there are alone, when a change of speech settings should not mean
+hours of background work: only a file with no mark is asked about, and what it has is kept.
+
+| You want to                                                    | Run                                                              |
+| -------------------------------------------------------------- | ---------------------------------------------------------------- |
+| See which files have text, transcripts or vectors to catch up  | `text-scan -n -v`                                                |
+| Announce them now, rather than at the next hour                | `text-scan`                                                      |
+| Read the text in a picture again                               | `read-text -f /archive/albums/christmas-2019/IMG_0042.jpg`       |
+| Read a document's text again                                   | `index-document -f /home/helen/letters/1962.pdf`                 |
+| Transcribe a video or recording again, whatever made its words | `transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4` |
+| Embed every stored text and transcript again, as they are      | `media-reembed`                                                  |
 
 ## The workers
 

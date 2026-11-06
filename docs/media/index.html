@@ -229,9 +229,28 @@ transcript (<code>media-transcribe</code>, <code>transcribe-file</code>). Each t
 A person corrects them in the <a href="../archive/viewer.html">viewer</a>, with <code>file-set-text</code>,
 <code>file-set-text-language</code> and <code>file-set-transcript</code> underneath; the voices in a transcript, and who
 speaks, are the Archive&#39;s.</p>
-<p>The <a href="../archive/processing.html#close-gaps-the-pipelines-missed">Archive</a> finds what was missed in its
-albums: a file never read, text read by an older engine, a transcript made with other settings, a
-text whose vector is another model&#39;s.</p>
+<h2 id="text-and-transcripts-kept-current">Text and transcripts kept current<a class="anchor" href="#text-and-transcripts-kept-current" aria-label="Link to this section"></a></h2>
+<p>A file is marked with what made its transcript and its text vectors (<code>transcriptWith</code> and
+<code>textVectorsBy</code> in its attributes), as it is with the engine that read its text (<code>ocrBy</code>). Every
+hour the <code>text-heal</code> service runs <code>text-scan</code>, which asks, in every folder that wants them, for:</p>
+<ul>
+<li>a video or recording whose transcript is missing or was made with other speech settings than the
+media service runs now, announced to <code>media-transcribe</code>. A transcript made with the settings in
+use is kept and the file marked; one made with others is made again, so a change of the media
+service&#39;s speech settings transcribes the whole archive again, behind all other work. One a person
+wrote, and one of a file with no sound, is kept whatever the settings.</li>
+<li>a picture whose text another engine read, announced to <code>media-ocr</code>, unless a person wrote it.</li>
+<li>a picture or document whose text was never read, announced to <code>media-ocr</code> or <code>document-index</code>.
+A folder moved in whole has its files&#39; text read the same way, as soon as it arrives.</li>
+<li>a file whose texts lack vectors from the text model the media service runs now, announced to
+<code>media-embed-text</code>. A description changed by hand is embedded again as soon as it is saved.</li>
+</ul>
+<p>Each kind of gap waits while its work waits, so the scan never repeats what is already on its way,
+and a check that needs the media service is left out while it does not answer. Nothing in a
+staging area is asked about its text: it is read when the file is filed. <strong>Keep transcripts current</strong>
+(<a href="../reference/settings.html#cfg_media_transcripts_current"><code>CFG_MEDIA_TRANSCRIPTS_CURRENT</code></a>) set to
+<code>off</code> leaves the transcripts there are alone, when a change of speech settings should not mean
+hours of background work: only a file with no mark is asked about, and what it has is kept.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -240,6 +259,14 @@ text whose vector is another model&#39;s.</p>
 </tr>
 </thead>
 <tbody><tr>
+<td>See which files have text, transcripts or vectors to catch up</td>
+<td><code>text-scan -n -v</code></td>
+</tr>
+<tr>
+<td>Announce them now, rather than at the next hour</td>
+<td><code>text-scan</code></td>
+</tr>
+<tr>
 <td>Read the text in a picture again</td>
 <td><code>read-text -f /archive/albums/christmas-2019/IMG_0042.jpg</code></td>
 </tr>
@@ -248,7 +275,7 @@ text whose vector is another model&#39;s.</p>
 <td><code>index-document -f /home/helen/letters/1962.pdf</code></td>
 </tr>
 <tr>
-<td>Transcribe a video or recording again</td>
+<td>Transcribe a video or recording again, whatever made its words</td>
 <td><code>transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4</code></td>
 </tr>
 <tr>
@@ -361,7 +388,7 @@ of the folder, end it without anyone taking it off, and a forced reading reads t
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#text-and-transcripts">Text and transcripts</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#reading-a-file">Reading a file</a></li><li><a href="#the-renditions-it-makes">The renditions it makes</a></li><li><a href="#renditions-kept-current">Renditions kept current</a></li><li><a href="#picture-vectors">Picture vectors</a></li><li><a href="#text-and-transcripts">Text and transcripts</a></li><li><a href="#text-and-transcripts-kept-current">Text and transcripts kept current</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#how-much-runs-at-once">How much runs at once</a></li><li class="nested"><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#for-a-modules-author-naming-your-kinds">For a module's author: naming your kinds</a></li><li><a href="#for-a-modules-author-holding-a-file">For a module's author: holding a file</a></li></ul></aside>
     </div>
   </body>
 </html>

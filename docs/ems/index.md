@@ -368,8 +368,8 @@ These are the settings an administrator is most likely to need:
 
 A change to the transcription settings changes what EMS reports as its transcript settings. With
 **Keep transcripts current** ([`CFG_MEDIA_TRANSCRIPTS_CURRENT`](../reference/settings.md#cfg_media_transcripts_current))
-left on, the Archive then transcribes every video and recording again in the background, behind new
-media. On a large archive that is hours of work.
+left on, the Media module then transcribes every video and recording again in the background,
+behind new media ([Text and transcripts kept current](../media/index.md#text-and-transcripts-kept-current)). On a large archive that is hours of work.
 
 ### Settings on EiN's side
 
