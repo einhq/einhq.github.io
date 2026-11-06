@@ -113,12 +113,12 @@ headings, Todo first and Done last.
   frame shows where it will land. Dropped on **Done** it is done, and dragged out of Done it is not.
   On a phone, lifting a row brings up the names of the columns at the foot of the screen: let go
   over one and the card goes to the end of that column.
-- **Assign it**: the round button at the right of a card's foot is the face of whoever is to do it,
-  their person's picture or their initials. An item that is nobody's has an empty circle instead,
-  at the card's top right while the pointer is over it (on a phone, at the row's right). Choose it
-  and, under **Assign to**, a member of the list's group, or **Nobody in particular**.
-- **Give it a due day**: the calendar at a card's top right picks one; once set, the day stands at
-  the card's foot instead and opens the picker again, where **No due day** takes it away.
+- **Assign it**: the round button at a card's top right (on a phone, at the row's right) is the face
+  of whoever is to do it, their person's picture or their initials, or an empty circle when it is
+  nobody's. Choose it and, under **Assign to**, a member of the list's group, or **Nobody in
+  particular**.
+- **Give it a due day**: the calendar at a card's top right picks one; once set, the day stands
+  there instead, before the face, and opens the picker again, where **No due day** takes it away.
 - **Read the description**: a card shows the first line of its description, with **…** when there
   is more. Choose it to read the whole of it, as formatted Markdown, and again to fold it.
 - **Change an item**: the pencil at a card's top right, or on a phone a long press on its row, opens
@@ -143,9 +143,9 @@ headings, Todo first and Done last.
 - **Archive done items**: tick the cards in **Done** you want put away, or the box in its heading
   for all of them, and choose **Archive**. They move to the list's `archived/` folder.
 
-On a computer a card shows its pencil at its top right while the pointer is over it, with the
-calendar when it has no due day and the empty circle when it is nobody's. A due day that has passed
-is red.
+On a computer the due day and the face stand at the right of a card's title, which runs on under
+them when it is long; while the pointer is over the card its pencil, and its calendar when it has no
+due day, show beside them. A due day that has passed is red.
 
 On a computer a stripe down a card's left edge is coloured by how long it has been on the list:
 green on the day it is added, then yellow, and red once it is four weeks old; a done card's is grey.
