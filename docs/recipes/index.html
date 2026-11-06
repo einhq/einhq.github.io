@@ -97,7 +97,9 @@ of servings you want.</p>
 <p>Install it from <strong>Settings → Modules</strong>, or in EiN&#39;s terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod install recipes</code></pre></div>
-<p><strong>Recipes</strong> is then in the sidebar, and <strong>Recipe</strong> in the top bar&#39;s <strong>Create</strong> menu.
+<p><strong>Recipes</strong> is then in the sidebar, and <strong>Recipe</strong> in the top bar&#39;s <strong>Create</strong> menu. It brings the
+<a href="../media/index.html">Media</a> module, which reads the recipes&#39; pictures and makes their thumbnails
+through the <a href="../ems/index.html">media service</a>; the Archive is not needed.
 <a href="../admin/modules.html">Modules</a> covers installing and removing modules.</p>
 <h2 id="where-recipes-are">Where recipes are<a class="anchor" href="#where-recipes-are" aria-label="Link to this section"></a></h2>
 <p>Every recipe is in <code>/archive/recipes</code>, one node of type <code>recipe</code> each, named after its title:
@@ -106,9 +108,9 @@ recipes, and everyone with an account can add and change them.</p>
 <p>A recipe&#39;s pictures are files in its <code>pictures/</code> folder, and one of them is its cover. They are not
 part of the library: <code>/archive/recipes</code> is marked unlisted, so the library&#39;s own views (the Media
 page, the map, On this day, search&#39;s pictures) leave them out, and it
-<a href="../archive/processing.html#which-processing-a-folder-gets">wants only renditions</a>, so with the Archive
-module installed the pictures get their thumbnails and nothing else: no faces, text or picture
-search. The recipes themselves are found by search, by their title and description.</p>
+<a href="../concepts/pipelines.html#which-processing-a-folder-wants">wants only renditions</a>, so the pictures
+get their thumbnails and nothing else, also when the Archive is installed: no dates, faces, text or
+picture search. The recipes themselves are found by search, by their title and description.</p>
 <h2 id="write-a-recipe">Write a recipe<a class="anchor" href="#write-a-recipe" aria-label="Link to this section"></a></h2>
 <p>Choose <strong>Create → Recipe</strong> in the top bar, or <strong>New recipe</strong> on the Recipes page. Only <strong>Title</strong> is
 needed; fill in what you know:</p>

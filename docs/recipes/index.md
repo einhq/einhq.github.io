@@ -13,7 +13,9 @@ Install it from **Settings → Modules**, or in EiN's terminal:
 mod install recipes
 ```
 
-**Recipes** is then in the sidebar, and **Recipe** in the top bar's **Create** menu.
+**Recipes** is then in the sidebar, and **Recipe** in the top bar's **Create** menu. It brings the
+[Media](../media/index.md) module, which reads the recipes' pictures and makes their thumbnails
+through the [media service](../ems/index.md); the Archive is not needed.
 [Modules](../admin/modules.md) covers installing and removing modules.
 
 ## Where recipes are
@@ -25,9 +27,9 @@ recipes, and everyone with an account can add and change them.
 A recipe's pictures are files in its `pictures/` folder, and one of them is its cover. They are not
 part of the library: `/archive/recipes` is marked unlisted, so the library's own views (the Media
 page, the map, On this day, search's pictures) leave them out, and it
-[wants only renditions](../archive/processing.md#which-processing-a-folder-gets), so with the Archive
-module installed the pictures get their thumbnails and nothing else: no faces, text or picture
-search. The recipes themselves are found by search, by their title and description.
+[wants only renditions](../concepts/pipelines.md#which-processing-a-folder-wants), so the pictures
+get their thumbnails and nothing else, also when the Archive is installed: no dates, faces, text or
+picture search. The recipes themselves are found by search, by their title and description.
 
 ## Write a recipe
 

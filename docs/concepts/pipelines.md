@@ -468,8 +468,8 @@ steps:
 ```
 
 It waits for the Media module's fact `media.metadata.extracted`, so it needs the Media module,
-which comes with the Archive; on an EiN without modules, a trigger waits for a raw change instead,
-such as `event: updated` with `nodeType: file`.
+which comes with the Archive and with Recipes; on an EiN without modules, a trigger waits for a raw
+change instead, such as `event: updated` with `nodeType: file`.
 
 1. Save it, for example as `/home/helen/pipelines/mark-unreviewed.yaml`, with the
    [editor](../shell/editor.md) or over [SFTP](../shell/ssh-sftp.md).

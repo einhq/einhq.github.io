@@ -974,8 +974,8 @@ one marks every photo that arrives in the Wrenfield albums as not yet reviewed:<
   <span class="hljs-attr">mark:</span>
     <span class="hljs-attr">command:</span> <span class="hljs-string">attrs</span> <span class="hljs-string">-s</span> <span class="hljs-string">reviewed=no</span> <span class="hljs-string">$NODE_PATH</span></code></pre></div>
 <p>It waits for the Media module&#39;s fact <code>media.metadata.extracted</code>, so it needs the Media module,
-which comes with the Archive; on an EiN without modules, a trigger waits for a raw change instead,
-such as <code>event: updated</code> with <code>nodeType: file</code>.</p>
+which comes with the Archive and with Recipes; on an EiN without modules, a trigger waits for a raw
+change instead, such as <code>event: updated</code> with <code>nodeType: file</code>.</p>
 <ol>
 <li><p>Save it, for example as <code>/home/helen/pipelines/mark-unreviewed.yaml</code>, with the
 <a href="../shell/editor.html">editor</a> or over <a href="../shell/ssh-sftp.html">SFTP</a>.</p>

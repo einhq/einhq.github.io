@@ -5,11 +5,11 @@ display sizes and playable copies of each in a folder that wants them, and keeps
 also runs the media work the other modules hand it, so that a large import never starts it all at
 once: with the [Archive](../archive/index.md), dating and placing each file, finding and matching
 faces, picture vectors, text in pictures and transcripts. It holds the workers of the pool that
-work waits in, and their settings. The Archive needs it, so it comes with the Archive.
+work waits in, and their settings. The Archive and Recipes need it, so it comes with either.
 
 ## Install it
 
-Installing the Archive installs it too. On its own:
+Installing the Archive or Recipes installs it too. On its own:
 
 ```bash
 # in EiN's terminal, as the administrator
