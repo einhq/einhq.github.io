@@ -209,23 +209,40 @@ A media service that does not mount the four folders, such as one on another mac
 files of its requests through EiN instead. Set `CFG_EMS_FILES_ADDRESS` to the `host:port` the media
 service reaches EiN's machine at, with the port `CFG_EMS_FILES_PORT` (2224): EiN's `ems-files`
 service then listens there, and every request EiN sends the media service names it. The media
-service reads the request's files through an sshfs mount of it, and writes what it made back
-before it answers:
+service mounts it with sshfs, reads the request's files through the mount, and writes what it made
+back through it before it answers:
 
 - Only the files of requests in flight are reachable, each only while its request runs: the files
   it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
-  renamed, and a file written is replaced whole once it is complete.
+  renamed.
 - A tool reads only the part of a file it needs, as it would on a shared folder, and what was read
-  stays cached for the next step on the same file until the file changes. The media service's
-  container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount. Without them, or with
-  `EMS_FILES_MOUNT=0`, it copies each file in whole before it starts instead, and keeps the copies
-  for a while (`EMS_FILES_CACHE_MB`, 8192, for `EMS_FILES_CACHE_SECONDS`, 1800).
+  stays cached for the next step on the same file until the file changes.
 - The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
   `ems-files` starts and reach the media service in each request, so there is nothing to configure
   on the media service's side.
+- The media service's container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount, which
+  `setup.sh` gives it. Without a mount it refuses the request, and the step that sent it waits and
+  tries again, as when the media service is away.
 
-Every file crosses the network, so the shared folders stay the faster way on one machine.
-Set the two in `~/ein/.env` and run `./setup.sh`, which then publishes the port on `EIN_BIND`.
+Set the two settings in `~/ein/.env` and run `./setup.sh`, which then publishes the port on
+`EIN_BIND`. Every file crosses the network, so the shared folders stay the faster way on one
+machine.
+
+#### Faster reading through the mount
+
+The kernel reads ahead only 128 KiB on an sshfs mount, so a big video comes through at a fraction of
+what the network carries. On the machine the media service runs on, a rule for udev raises it to 4
+MiB for every new mount, a moment after the mount, which is when the setting holds:
+
+```bash
+# on the machine the media service runs on
+echo 'ACTION=="add", SUBSYSTEM=="bdi", KERNEL=="0:*", RUN+="/bin/sh -c '\''sleep 1; echo 4096 > /sys/class/bdi/%k/read_ahead_kb'\''"' | sudo tee /etc/udev/rules.d/90-fuse-readahead.rules
+sudo udevadm control --reload
+```
+
+The rule takes effect at the media service's next mount, which it makes again whenever EiN
+restarts. `cat /sys/class/bdi/0:*/read_ahead_kb` shows `4096` for a mount made after it. On the test
+machine one video read at 145 MB/s with it, against 20 MB/s without.
 
 ## Check that it is running
 

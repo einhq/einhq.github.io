@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 5 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
 
@@ -17,6 +17,29 @@ Serve the files of the media service's requests in flight over SFTP, for an EMS 
 ```text
 ems-files
 ```
+
+### `ems-files-grant`
+
+Grant paths through ems-files for a while and print the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand.
+
+<small>administrators only · changes things</small>
+
+```text
+ems-files-grant [--read=<string>] [--write=<string>] [--dir=<string>] [--seconds=<string>]
+```
+
+| Option               | What it does                                                     |
+| -------------------- | ---------------------------------------------------------------- |
+| `--read=<string>`    | A file to read, as a physical path; may be given more than once. |
+| `--write=<string>`   | A file to write; may be given more than once.                    |
+| `--dir=<string>`     | A directory to write files into; may be given more than once.    |
+| `--seconds=<string>` | How long the grant lasts (default 300)                           |
+
+```bash
+ems-files-grant --read /files/ab/01EXAMPLE --seconds 120
+```
+
+With `JSON_OUTPUT=1`: the EMS-Files header value: address, user, secret and host key.
 
 ### `ems-gpu`
 
