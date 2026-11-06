@@ -106,6 +106,28 @@ scan announces nothing.
 | Announce them now, rather than at the next hour               | `pictures-scan`                                                |
 | Make a file's picture vectors again, whatever model made them | `embed-picture -f /archive/albums/christmas-2019/IMG_0042.jpg` |
 
+## Fingerprints
+
+A picture, each keyframe of a video, and a recording get a fingerprint: a description made to find
+copies whatever their bytes, a picture saved smaller or in another format, mildly cropped or
+turned, a video or recording encoded again. The [Archive](../archive/duplicates.md) compares them
+to find duplicates, look-alikes and the photos of a burst. `media-fingerprint` makes them once a
+file is read, in a folder that wants `fingerprints`
+([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)), and
+marks the file once they are all there. A recording shorter than about two and a half seconds has
+too little sound for one, and is marked all the same.
+
+Every hour the `fingerprints-heal` service runs `fingerprints-scan`, which asks for the pictures,
+videos and recordings without the mark, in every folder that wants them, and announces them to
+`media-fingerprint`: a file whose fingerprints are all there is only marked, the others get theirs.
+While fingerprint work waits, the scan announces nothing.
+
+| You want to                                         | Run                                                                  |
+| --------------------------------------------------- | -------------------------------------------------------------------- |
+| See which files were never fingerprinted to the end | `fingerprints-scan -n -v`                                            |
+| Announce them now, rather than at the next hour     | `fingerprints-scan`                                                  |
+| Fingerprint a file again                            | `compute-fingerprint -f /archive/albums/christmas-2019/IMG_0042.jpg` |
+
 ## Text and transcripts
 
 In a folder that wants `text`, the text written in a picture is read once the picture is

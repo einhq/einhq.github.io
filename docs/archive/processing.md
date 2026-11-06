@@ -13,8 +13,9 @@ is run again, the bulk lane, and the engine's own settings.
 
 When a file arrives, the [Media](../media/index.md) module reads its metadata first
 ([Reading a file](../media/index.md#reading-a-file)). Then the Archive's `media-interpret` works out
-from it when the file was taken and where, side by side with the thumbnails, picture vectors, text
-and transcripts; faces, fingerprints and the device that made the file wait for the date and place.
+from it when the file was taken and where, side by side with the thumbnails, picture vectors,
+fingerprints, text and transcripts; faces and the device that made the file wait for the date and
+place.
 [Changes and pipelines](../concepts/pipelines.md#one-upload-start-to-finish) follows one upload from
 start to finish.
 
@@ -27,7 +28,7 @@ The Archive runs these services for its processing:
 
 The steps themselves are run by the [Media](../media/index.md) module's workers, which take the
 kinds of work the Archive names for them: `media-worker` the rest, such as dating and placing
-files, matching faces, fingerprints and staging; `models` the work
+files, matching faces, duplicates and staging; `models` the work
 done by a model in the [media service](../ems/index.md), such as finding faces or transcribing
 speech, and `models-second` the same beside it when it is on. [The workers](#the-workers) lists the
 kinds.
@@ -42,7 +43,6 @@ show **waiting for EMS** on the **Dashboard**.
 | Pipeline               | What it does                                                                                                        | Kind of work                |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name                     | `interpret`                 |
-| `media-fingerprint`    | The fingerprints that find duplicates and photo stacks                                                              | `fingerprint`               |
 | `media-faces`          | Finds the faces in a photo and crops each one                                                                       | `faces`                     |
 | `media-video-faces`    | Finds the faces in a video and when each is on screen                                                               | `faces`                     |
 | `media-face-assign`    | Matches a found face to a person                                                                                    | `face-assign`               |
@@ -53,7 +53,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
 | `media-geocode`        | Looks up the address of a file's GPS position                                                                       | run by the engine           |
 | `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
-| `media-duplicates`     | Decides again the duplicate findings of a staged file                                                               | `dedupe`                    |
+| `media-duplicates`     | Decides the duplicate findings of a staged file again, or once its fingerprints are in                              | `dedupe`                    |
 | `location-link-point`  | Links a photo to the location that contains its GPS point                                                           | run by the engine           |
 | `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                                    | run by the engine           |
 | `document-index`       | Extracts the text of a document and makes it searchable                                                             | run by the engine           |
@@ -71,13 +71,14 @@ show **waiting for EMS** on the **Dashboard**.
 Each media pipeline belongs to a family of work, which it names with `wants`, so a folder can ask
 for only some of it ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)):
 
-| Family            | What it covers                                                                                                                           | Pipelines                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                              |
-| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                             |
-| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                              |
-| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                         |
-| `archive`         | The date and the place, faces and voices and who they are, fingerprints and duplicates, the camera                                       | `media-interpret`, and the face, voice, fingerprint, device, geocoding and duplicate pipelines above |
+| Family            | What it covers                                                                                                                           | Pipelines                                                                               |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                 |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                |
+| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                 |
+| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                            |
+| `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                  |
+| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera                                                        | `media-interpret`, and the face, voice, device, geocoding and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks
@@ -99,8 +100,8 @@ turned, and `regenerate-face-crops --missing` cuts where a crash left one empty.
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
 its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
-`speaker-assign`, `fingerprint`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media
-module's own `ingest`, `stills` and `transcode`; `models` takes the Archive's `faces` and
+`speaker-assign`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media module's own
+`ingest`, `stills`, `transcode` and `fingerprint`; `models` takes the Archive's `faces` and
 `diarize`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text` and `transcribe`,
 and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
 in [How much runs at once](../media/index.md#how-much-runs-at-once).
@@ -129,14 +130,14 @@ pipeline then skips what is already done.
 
 What describes a file is the Media module's to keep current, in every folder:
 [renditions](../media/index.md#renditions-kept-current), [picture vectors](../media/index.md#picture-vectors),
-and [text, transcripts and their vectors](../media/index.md#text-and-transcripts-kept-current).
+[fingerprints](../media/index.md#fingerprints) and [text, transcripts and their vectors](../media/index.md#text-and-transcripts-kept-current).
 
 The `media-heal` pipeline runs `media-scan` for you over `/archive/albums` and over each user's
 staged files, `/home/<user>/staging/files`, whose faces staging uses to suggest groups. Each pass is one instance, which
 shows under **Ongoing** on the **Dashboard** with how far through its folder it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
-the rest: a long queue of one kind of work, such as faces, does not keep voices or fingerprints
+the rest: a long queue of one kind of work, such as faces, does not keep voices or transcripts
 from being found. It announces every gap as it finds it, so the work it starts shows on the
 dashboard and in `health` until it is done. It remembers where it is every thousand files, so a
 restart of EiN does not send it back to the beginning. When a pass ends, the **Output** of its step

@@ -87,26 +87,28 @@ the only events are the raw ones.
 
 A **pipeline** is a YAML definition with three parts: the trigger it waits for, the steps it then
 runs on the subject, each step a shell command, and options for how it is scheduled. This is the
-Archive's `media-fingerprint`, which computes the fingerprints that duplicate detection compares:
+Archive's `media-faces`, which finds the faces in a picture:
 
 ```yaml
-name: media-fingerprint
-description: Compute the fingerprints duplicate detection and photo stacks compare
+name: media-faces
+description: Detect faces in an image and crop each one
 
 trigger:
   on: media.metadata.interpreted
   wants: archive
-  skipIfAttr: undecodable
+  match:
+    mimetype: image/*
+  skipIfAttr: facesAt
 
 steps:
-  fingerprint:
-    command: compute-fingerprint $NODE_PATH
-    description: SSCD for image / video keyframes, chromaprint for audio
+  detect-faces:
+    command: detect-faces $NODE_PATH
+    description: Face detection plus a cropped image per face
     pool: media
-    kind: fingerprint
-    priority: 30
+    kind: faces
+    priority: 100
     requires:
-      cpu: 1
+      models: 1
 
 options:
   maxAttempts: 3
@@ -114,9 +116,9 @@ options:
 ```
 
 It reads: when the Archive has worked out from a file's metadata when and where it was taken, the
-folder the file lies in wants the Archive's work, and the file is not marked as one nothing can
-decode, run `compute-fingerprint` on it, in the `media` pool, as a job of kind `fingerprint` that
-needs one CPU slot.
+file is a picture, the folder it lies in wants the Archive's work, and its faces have not been
+looked for yet, run `detect-faces` on it, in the `media` pool, as a job of kind `faces` that needs
+one model slot.
 
 A module ships its pipelines in its `pipelines/` folder, and `mod setup` registers each one when
 the module is set up, at every start of EiN. A registered pipeline is a link in
@@ -314,17 +316,16 @@ starts its own pipelines:
 2. `media-bridge` sees a photo with bytes and no metadata and announces `media.file.discovered`.
 3. `media-ingest` runs `exif-extract`, which reads the camera, its clocks and its GPS fix and
    writes them under the photo as `metadata/exif`.
-4. That write becomes `media.metadata.extracted`, which starts `media-stills` (the display sizes)
-   and the Archive's `media-interpret` (when the photo was taken, and where); for a picture also
-   the Media module's `media-embed-picture` (search by what is in the picture) and `media-ocr`
-   (text in the picture);
+4. That write becomes `media.metadata.extracted`, which starts `media-stills` (the display sizes),
+   the Media module's `media-fingerprint` (the fingerprints that find copies), and the Archive's
+   `media-interpret` (when the photo was taken, and where); for a picture also the Media module's
+   `media-embed-picture` (search by what is in the picture) and `media-ocr` (text in the picture);
    for a video `media-embed-picture`, `media-transcode` and `media-transcribe`; for a recording
    `media-transcode` and `media-transcribe`. They run side by side. Once a file has every rendition
    the rendition table names for it, it is marked so, which becomes `media.renditions.made`.
 5. `media-interpret` writes the photo's date and its position, and its last write becomes
-   `media.metadata.interpreted`, which starts `media-fingerprint`; for a picture `media-faces`, for
-   a video `media-video-faces`; and `media-device` when the metadata names the device that made the
-   file.
+   `media.metadata.interpreted`, which starts `media-faces` for a picture, `media-video-faces` for
+   a video, and `media-device` when the metadata names the device that made the file.
 6. `media-faces` writes each face it finds under the photo, which becomes `media.face.detected`
    and starts `media-face-assign`, matching the face to a person.
 7. A GPS position becomes `media.position.available`, which starts `media-geocode` for the
@@ -345,7 +346,7 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `media-stills`         | `media.metadata.extracted`, `media.renditions.stale`                      | A photo's sizes, a video's poster frames and hover clip, a recording's waveform |
 | `media-transcode`      | `media.metadata.extracted`, `media.file.turned`, `media.renditions.stale` | Video and audio the browser can play, a video's storyboard and chapters         |
 | `media-interpret`      | `media.metadata.extracted`                                                | When a file was taken and where, from its metadata, a sidecar and its name      |
-| `media-fingerprint`    | `media.metadata.interpreted`                                              | The fingerprints duplicate detection and photo stacks compare                   |
+| `media-fingerprint`    | `media.metadata.extracted`, `media.fingerprints.stale`                    | The fingerprints that find copies, look-alikes and photo stacks                 |
 | `media-faces`          | `media.metadata.interpreted`, for a picture                               | Finds the faces in a picture and crops each one                                 |
 | `media-video-faces`    | `media.metadata.interpreted`, for a video                                 | Finds the faces a video shows, and when                                         |
 | `media-face-assign`    | `media.face.detected`                                                     | Attaches a found face to a person                                               |
