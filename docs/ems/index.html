@@ -457,19 +457,22 @@ explains how a value set in the deployment relates to the settings page.</p>
 files of its requests through EiN instead. Set <code>CFG_EMS_FILES_ADDRESS</code> to the <code>host:port</code> the media
 service reaches EiN&#39;s machine at, with the port <code>CFG_EMS_FILES_PORT</code> (2224): EiN&#39;s <code>ems-files</code>
 service then listens there, and every request EiN sends the media service names it. The media
-service copies the request&#39;s files in from it before it starts, and writes what it made back
+service reads the request&#39;s files through an sshfs mount of it, and writes what it made back
 before it answers:</p>
 <ul>
 <li>Only the files of requests in flight are reachable, each only while its request runs: the files
 it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
 renamed, and a file written is replaced whole once it is complete.</li>
+<li>A tool reads only the part of a file it needs, as it would on a shared folder, and what was read
+stays cached for the next step on the same file until the file changes. The media service&#39;s
+container has <code>/dev/fuse</code> and the <code>SYS_ADMIN</code> capability for the mount. Without them, or with
+<code>EMS_FILES_MOUNT=0</code>, it copies each file in whole before it starts instead, and keeps the copies
+for a while (<code>EMS_FILES_CACHE_MB</code>, 8192, for <code>EMS_FILES_CACHE_SECONDS</code>, 1800).</li>
 <li>The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
 <code>ems-files</code> starts and reach the media service in each request, so there is nothing to configure
 on the media service&#39;s side.</li>
-<li>The media service keeps the files it read for a while (<code>EMS_FILES_CACHE_MB</code>, 8192, for
-<code>EMS_FILES_CACHE_SECONDS</code>, 1800), so the many steps on one video copy it once.</li>
 </ul>
-<p>Each file is copied over the network, so the shared folders stay the faster way on one machine.
+<p>Every file crosses the network, so the shared folders stay the faster way on one machine.
 Set the two in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes the port on <code>EIN_BIND</code>.</p>
 <h2 id="check-that-it-is-running">Check that it is running<a class="anchor" href="#check-that-it-is-running" aria-label="Link to this section"></a></h2>
 <h3 id="on-the-dashboard">On the dashboard<a class="anchor" href="#on-the-dashboard" aria-label="Link to this section"></a></h3>

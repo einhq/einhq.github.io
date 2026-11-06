@@ -209,19 +209,22 @@ A media service that does not mount the four folders, such as one on another mac
 files of its requests through EiN instead. Set `CFG_EMS_FILES_ADDRESS` to the `host:port` the media
 service reaches EiN's machine at, with the port `CFG_EMS_FILES_PORT` (2224): EiN's `ems-files`
 service then listens there, and every request EiN sends the media service names it. The media
-service copies the request's files in from it before it starts, and writes what it made back
+service reads the request's files through an sshfs mount of it, and writes what it made back
 before it answers:
 
 - Only the files of requests in flight are reachable, each only while its request runs: the files
   it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
   renamed, and a file written is replaced whole once it is complete.
+- A tool reads only the part of a file it needs, as it would on a shared folder, and what was read
+  stays cached for the next step on the same file until the file changes. The media service's
+  container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount. Without them, or with
+  `EMS_FILES_MOUNT=0`, it copies each file in whole before it starts instead, and keeps the copies
+  for a while (`EMS_FILES_CACHE_MB`, 8192, for `EMS_FILES_CACHE_SECONDS`, 1800).
 - The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
   `ems-files` starts and reach the media service in each request, so there is nothing to configure
   on the media service's side.
-- The media service keeps the files it read for a while (`EMS_FILES_CACHE_MB`, 8192, for
-  `EMS_FILES_CACHE_SECONDS`, 1800), so the many steps on one video copy it once.
 
-Each file is copied over the network, so the shared folders stay the faster way on one machine.
+Every file crosses the network, so the shared folders stay the faster way on one machine.
 Set the two in `~/ein/.env` and run `./setup.sh`, which then publishes the port on `EIN_BIND`.
 
 ## Check that it is running
