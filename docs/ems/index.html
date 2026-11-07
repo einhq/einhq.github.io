@@ -436,9 +436,13 @@ reads, read-only, and the files it writes, write-only. Nothing can be listed, re
 and your originals can never be changed.</li>
 <li>A tool reads only the part of a file it needs, as it would on a folder of its own, and what was
 read stays cached for the next step on the same file until the file changes.</li>
-<li>The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
-<code>ems-files</code> starts and reach the media service in each request, so there is nothing to configure
-on the media service&#39;s side.</li>
+<li>The connection carries the files and nothing else. Before it does, the media service proves it is
+the one EiN is sending requests to: <code>ems-files</code> sends a random challenge, which it answers with a
+secret made when <code>ems-files</code> starts and sent along with each request. Nothing is configured on
+the media service&#39;s side, and a restart leaves no secret behind that still works.</li>
+<li>By default the connection is not encrypted, which costs half the processor time and suits the
+standard install, where both run on the same machine and nothing else is on the compose network.
+The requests to the media service are not encrypted there either.</li>
 <li>The media service&#39;s container has <code>/dev/fuse</code> and the <code>SYS_ADMIN</code> capability for the mount, which
 <code>setup.sh</code> gives it. Without a mount it refuses the request, and the step that sent it waits and
 tries again, as when the media service is away. While <code>CFG_EMS_FILES_ADDRESS</code> is empty, EiN sends
@@ -447,6 +451,13 @@ no request that names a file, and those steps wait the same way.</li>
 <p>A media service on another machine reaches EiN&#39;s machine at the address you set: put
 <code>CFG_EMS_FILES_ADDRESS</code>, as <code>host:port</code>, in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes
 the port on <code>EIN_BIND</code>.</p>
+<h4 id="encrypting-the-files-way">Encrypting the files&#39; way<a class="anchor" href="#encrypting-the-files-way" aria-label="Link to this section"></a></h4>
+<p>When the media service reaches EiN over a network you do not trust, turn on
+<code>CFG_EMS_FILES_TLS</code>. Each connection is then TLS: <code>ems-files</code> and the media service each have a
+certificate made when <code>ems-files</code> starts, each accepts only the other&#39;s, and both reach the media
+service with each request, so there is still nothing to set up on its side. It costs about twice
+the processor time of the default. Set it on the settings page or in the deployment as any other
+setting; <code>ems-files</code> restarts with it.</p>
 <h4 id="faster-reading-through-the-mount">Faster reading through the mount<a class="anchor" href="#faster-reading-through-the-mount" aria-label="Link to this section"></a></h4>
 <p>The kernel reads ahead only 128 KiB on an sshfs mount, so a big video comes through at a fraction of
 what the network carries. On the machine the media service runs on, a rule for udev raises it to 4
@@ -739,13 +750,18 @@ with <code>config set</code>:</p>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_ems_files_address"><code>CFG_EMS_FILES_ADDRESS</code></a></td>
-<td>empty</td>
-<td>Where a media service without EiN&#39;s folders reaches their files; empty: it mounts them</td>
+<td>empty; the install sets it</td>
+<td>Where the media service reaches EiN&#39;s files; empty: steps that name a file wait</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_ems_files_port"><code>CFG_EMS_FILES_PORT</code></a></td>
 <td><code>2224</code></td>
 <td>The port <code>ems-files</code> listens on while that address is set</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_ems_files_tls"><code>CFG_EMS_FILES_TLS</code></a></td>
+<td><code>false</code></td>
+<td>Encrypt the media service&#39;s file connections with TLS</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_whisper_language"><code>CFG_WHISPER_LANGUAGE</code></a></td>

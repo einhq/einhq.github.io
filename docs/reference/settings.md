@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 89 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 90 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -387,6 +387,18 @@ Every setting of an EiN with all its modules: 89 of them, in the groups the Sett
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `2224` |
 | Kind | number |
+| Restarts | `ems-files` |
+| From the module | Media service |
+
+### `CFG_EMS_FILES_TLS`
+
+**Media service files over TLS**. Encrypt the media service's file connections with TLS, each side pinning the other's certificate. Off, a connection proves it is the media service's with a secret and is not encrypted, which costs half the CPU and suits EMS on the same machine or network. Turn it on when EMS reaches EiN over a network you do not trust.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `false` |
+| Kind | boolean |
 | Restarts | `ems-files` |
 | From the module | Media service |
 

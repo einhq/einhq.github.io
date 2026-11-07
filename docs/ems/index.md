@@ -210,9 +210,13 @@ through the mount, and writes what it made back through it before it answers:
   and your originals can never be changed.
 - A tool reads only the part of a file it needs, as it would on a folder of its own, and what was
   read stays cached for the next step on the same file until the file changes.
-- The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
-  `ems-files` starts and reach the media service in each request, so there is nothing to configure
-  on the media service's side.
+- The connection carries the files and nothing else. Before it does, the media service proves it is
+  the one EiN is sending requests to: `ems-files` sends a random challenge, which it answers with a
+  secret made when `ems-files` starts and sent along with each request. Nothing is configured on
+  the media service's side, and a restart leaves no secret behind that still works.
+- By default the connection is not encrypted, which costs half the processor time and suits the
+  standard install, where both run on the same machine and nothing else is on the compose network.
+  The requests to the media service are not encrypted there either.
 - The media service's container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount, which
   `setup.sh` gives it. Without a mount it refuses the request, and the step that sent it waits and
   tries again, as when the media service is away. While `CFG_EMS_FILES_ADDRESS` is empty, EiN sends
@@ -221,6 +225,15 @@ through the mount, and writes what it made back through it before it answers:
 A media service on another machine reaches EiN's machine at the address you set: put
 `CFG_EMS_FILES_ADDRESS`, as `host:port`, in `~/ein/.env` and run `./setup.sh`, which then publishes
 the port on `EIN_BIND`.
+
+#### Encrypting the files' way
+
+When the media service reaches EiN over a network you do not trust, turn on
+`CFG_EMS_FILES_TLS`. Each connection is then TLS: `ems-files` and the media service each have a
+certificate made when `ems-files` starts, each accepts only the other's, and both reach the media
+service with each request, so there is still nothing to set up on its side. It costs about twice
+the processor time of the default. Set it on the settings page or in the deployment as any other
+setting; `ems-files` restarts with it.
 
 #### Faster reading through the mount
 
@@ -418,8 +431,9 @@ with `config set`:
 | [`CFG_EMS_KEY`](../reference/settings.md#cfg_ems_key)                                       | none; the install sets it                                   | The key the media service expects                                                       |
 | [`CFG_EMS_CONNECT_RETRY`](../reference/settings.md#cfg_ems_connect_retry)                   | `90`                                                        | Seconds a background request keeps retrying while the media service refuses connections |
 | [`CFG_EMS_LINK_INTERVAL_SECONDS`](../reference/settings.md#cfg_ems_link_interval_seconds)   | `60`                                                        | How often `ems-link` asks whether the media service answers                             |
-| [`CFG_EMS_FILES_ADDRESS`](../reference/settings.md#cfg_ems_files_address)                   | empty                                                       | Where a media service without EiN's folders reaches their files; empty: it mounts them  |
+| [`CFG_EMS_FILES_ADDRESS`](../reference/settings.md#cfg_ems_files_address)                   | empty; the install sets it                                  | Where the media service reaches EiN's files; empty: steps that name a file wait         |
 | [`CFG_EMS_FILES_PORT`](../reference/settings.md#cfg_ems_files_port)                         | `2224`                                                      | The port `ems-files` listens on while that address is set                               |
+| [`CFG_EMS_FILES_TLS`](../reference/settings.md#cfg_ems_files_tls)                           | `false`                                                     | Encrypt the media service's file connections with TLS                                   |
 | [`CFG_WHISPER_LANGUAGE`](../reference/settings.md#cfg_whisper_language)                     | empty                                                       | A language sent with every transcription; empty lets the media service decide           |
 | [`CFG_WHISPER_VAD_MIN_SILENCE_MS`](../reference/settings.md#cfg_whisper_vad_min_silence_ms) | empty                                                       | The pause that ends a stretch of speech                                                 |
 | [`CFG_WHISPER_WORD_TIMESTAMPS`](../reference/settings.md#cfg_whisper_word_timestamps)       | empty                                                       | `1` for the time of every word, `0` for timings per segment                             |
