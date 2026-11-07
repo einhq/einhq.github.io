@@ -132,7 +132,7 @@ services and the log, and with the `ems` module the media service. See [Health a
 
 The folder on the machine's disk that holds your files: the originals in `files`, the renditions
 EiN makes from them in `files-volatile`. It is `~/ein/data` unless you chose another at install.
-The database is kept apart, in the container engine's volume `ein_db`. See
+The database is in it too, in `db`. See
 [Files and storage](../concepts/files.md).
 
 ### Details panel

@@ -186,7 +186,7 @@ Two places fill up, and they may be on different disks:
 | Where                                                                                    | How to see it                                                                                                        |
 | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | The data folder, `EIN_DATA`: originals, renditions and, with `--llm`, the language model | `df` in EiN's terminal: free space per storage tier, its growth per day, when it fills, and the size of the database |
-| The container engine's storage: images, the database volume                              | `podman system df` on the machine                                                                                    |
+| The container engine's storage: the images                                               | `podman system df` on the machine                                                                                    |
 
 To make room:
 

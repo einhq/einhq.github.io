@@ -187,7 +187,7 @@ With the media service and the model, two parts are still getting ready when the
 | `~/ein`                          | `setup.sh`, the compose files, the sources under `src/`, and `.env`                                              |
 | `~/ein/.env`                     | your options and the passwords made at the install, kept nowhere else                                            |
 | `~/ein/data`, or your `EIN_DATA` | your originals, the thumbnails and other renditions, scratch space, the language model and the installed modules |
-| the `ein_db` volume              | the database: every name, folder, album, person, setting and account, in the container engine's storage          |
+| `~/ein/data/db`                  | the database: every name, folder, album, person, setting and account                                             |
 
 Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) explains what to copy and why the database and the data folder belong together.
 

@@ -121,7 +121,7 @@ has ended.
 | Changes                                                                                                        | Stays as it is                                                            |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                              |
-| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, the `ein_db` volume or the folder `EIN_DB_DIR` names        |
+| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, in the folder `EIN_DB_DIR` names                            |
 | The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file            |
 | Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder              |
 | `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the Web UI or the terminal, which are in the database |

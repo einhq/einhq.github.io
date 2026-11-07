@@ -214,7 +214,7 @@ compose makes for them.
 
 Your files are on the machine's disk, in the data folder (`~/ein/data` unless you chose another):
 the originals in `files`, the thumbnails and renditions EiN makes from them in `files-volatile`. The
-database is the container engine's volume `ein_db`. The two belong together, as
+database is in it too, in `db`. The two belong together, as
 [Files and storage](../concepts/files.md) and [Your data](../admin/data.md) explain.
 
 Without the media service, EiN still takes in, keeps and shares what you upload, but the files you add get

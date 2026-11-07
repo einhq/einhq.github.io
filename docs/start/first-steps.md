@@ -328,8 +328,7 @@ needs three things, taken together:
   keeps them;
 - the data folder, `~/ein/data` unless you chose another at the install, and above all its
   `files` folder, which holds your originals;
-- the database, which is the container engine's volume `ein_db` (or the folder you gave
-  `--db-dir`), not part of the data folder.
+- the database, in the data folder's `db` (or the folder you gave `--db-dir`).
 
 > [!NOTE]
 > The database holds every name, album, person and setting, and the `files` folder holds the

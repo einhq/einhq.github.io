@@ -145,12 +145,12 @@
 <tr>
 <td><code>data/</code></td>
 <td><code>setup.sh</code></td>
-<td>Your files, unless <code>EIN_DATA</code> named another folder at the install. See <a href="#the-data-folder">The data folder</a>.</td>
+<td>Your files and the database, unless <code>EIN_DATA</code> named another folder at the install. See <a href="#the-data-folder">The data folder</a>.</td>
 </tr>
 </tbody></table>
 </div>
 <p>The files from the deployment are replaced when <code>setup.sh</code> brings the folder up to date at the start of every run, so changes belong in <code>.env</code>, not in <code>compose.yaml</code>. <code>setup.sh --help</code> lists its options, and <a href="../admin/install.html">Installing in detail</a> explains each.</p>
-<p>The database is not in the folder: it is the container engine&#39;s volume <code>ein_db</code>, or the folder <code>setup.sh --db-dir</code> named. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how to keep it.</p>
+<p>The database is in <code>data/db</code>, or in the folder <code>setup.sh --db-dir</code> named. <a href="../admin/data.html">Your data: backup, moving and removing</a> says how to keep it.</p>
 <h3 id="env">.env<a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
 <p><code>.env</code> is read in two ways. Compose reads it to fill in <code>compose.yaml</code>, and EiN&#39;s and the media service&#39;s containers get every line of it as their environment. <code>setup.sh</code> writes it once, with mode <code>0600</code>, and from then on changes only the lines its options set: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MODULES</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>, and adds <code>EIN_ENGINE</code> to a <code>.env</code> written before it had that line. It also moves <code>EIN_HTTP_PORT</code> or <code>EIN_SSH_PORT</code> to the next free port when another program holds it, and with a Forgejo or Gitea source keeps <code>CFG_MODULE_SOURCES</code> and <code>CFG_MODULE_SOURCES_KEY</code> in step with <code>EIN_SOURCE</code>.</p>
 <p>The file the installer writes looks like this, with your own values:</p>
@@ -183,7 +183,7 @@
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
 
-EIN_DB_DIR=</code></pre></div>
+<span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -279,7 +279,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>EIN_DB_DIR</code></td>
-<td>The database&#39;s folder; empty keeps it in the engine&#39;s volume <code>ein_db</code>. <code>--db-dir</code> sets it.</td>
+<td>The database&#39;s folder, <code>db</code> in the data folder; <code>--db-dir</code> sets another. Empty keeps it in the engine&#39;s volume <code>ein_db</code>.</td>
 <td><a href="../admin/install.html">Installing in detail</a></td>
 </tr>
 </tbody></table>

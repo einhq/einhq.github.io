@@ -73,11 +73,11 @@ Over SFTP these children are in a hidden folder named after the file with `_` ad
 
 EiN keeps the bytes of files in three places, called tiers. Each file's bytes are on exactly one:
 
-| Tier       | What goes there                                                                                                                                                                                                                                                                                                  | Where it is in a standard install                   |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                                                                                | `files` in the data folder                          |
-| `volatile` | What EiN makes from another file and can make again: with the Archive, thumbnails, playable videos and recordings, face crops                                                                                                                                                                                    | `files-volatile` in the data folder                 |
-| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, and with the Archive the events in a person's story, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the volume `ein_db` |
+| Tier       | What goes there                                                                                                                                                                                                                                                                                                  | Where it is in a standard install                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `disk`     | Your originals: every file you upload or write, unless it belongs to another tier                                                                                                                                                                                                                                | `files` in the data folder                             |
+| `volatile` | What EiN makes from another file and can make again: with the Archive, thumbnails, playable videos and recordings, face crops                                                                                                                                                                                    | `files-volatile` in the data folder                    |
+| `db`       | Small content that belongs with the database: the settings file, comments, SSH keys and `known_hosts`, the host keys of EiN's SSH server, password hashes, `/etc/fstab`, and with the Archive the events in a person's story, the text read from pictures and documents, and staging's record of what you sorted | Large objects in PostgreSQL, in the data folder's `db` |
 
 EiN decides the tier when the file is made:
 
@@ -373,7 +373,7 @@ of the whole installation.
 - [Nodes and node types](nodes.md): what a node is, part by part.
 - [Links](links.md): hard links, softlinks, and what deleting and the trash do.
 - [Supported files](../archive/file-types.md): which files EiN works with and what it makes from them.
-- [Installing in detail](../admin/install.md#the-data-folder): the data folder and the database volume.
+- [Installing in detail](../admin/install.md#the-data-folder): the data folder and the database's folder.
 - [Your data: backup, moving and removing](../admin/data.md): what to back up, and why the files and the database go together.
 - [Reaching other machines](../shell/remote.md): mounting a folder of another machine.
 - [Environment variables](../reference/environment.md): `FILE_ROOT_PATH`, `VOLATILE_FILE_ROOT_PATH` and `FILE_TMP_PATH`.

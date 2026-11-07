@@ -22,11 +22,11 @@ The installer fetches the deployment into `~/ein` and runs `setup.sh` there. Aft
 | `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                                                        |
 | `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, pulls the images or builds them from your own source, and starts them. |
 | `src/`                  | `setup.sh`                | The sources it fetches: `ems` and `llm` when those options are on, and `core` and `db` from any source but GitHub's `einhq`, which it builds with `ems`.              |
-| `data/`                 | `setup.sh`                | Your files, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                                                           |
+| `data/`                 | `setup.sh`                | Your files and the database, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                                          |
 
 The files from the deployment are replaced when `setup.sh` brings the folder up to date at the start of every run, so changes belong in `.env`, not in `compose.yaml`. `setup.sh --help` lists its options, and [Installing in detail](../admin/install.md) explains each.
 
-The database is not in the folder: it is the container engine's volume `ein_db`, or the folder `setup.sh --db-dir` named. [Your data: backup, moving and removing](../admin/data.md) says how to keep it.
+The database is in `data/db`, or in the folder `setup.sh --db-dir` named. [Your data: backup, moving and removing](../admin/data.md) says how to keep it.
 
 ### .env
 
@@ -64,7 +64,7 @@ EIN_SSH_PORT=2222
 EIN_SOURCE=https://github.com/einhq
 EIN_SOURCE_KEY=
 
-EIN_DB_DIR=
+EIN_DB_DIR=/home/anna/ein/data/db
 ```
 
 | Line                     | What it does                                                                                                                                                                                                 | Explained on                                                               |
@@ -86,7 +86,7 @@ EIN_DB_DIR=
 | `CFG_LLM_…`              | The Assistant's settings for a hosted language model in place of `--llm`, commented out until you use it.                                                                                                    | [The language model](../assistant/language-model.md)                       |
 | `EIN_SOURCE`             | The organisation the sources are cloned from. `--source` sets it.                                                                                                                                            | [Installing in detail](../admin/install.md)                                |
 | `EIN_SOURCE_KEY`         | The token that reads the source's repositories when they are private. A `--source` on another host empties it, unless `EIN_SOURCE_KEY` in the environment gives a new one.                                   | [Installing in detail](../admin/install.md)                                |
-| `EIN_DB_DIR`             | The database's folder; empty keeps it in the engine's volume `ein_db`. `--db-dir` sets it.                                                                                                                   | [Installing in detail](../admin/install.md)                                |
+| `EIN_DB_DIR`             | The database's folder, `db` in the data folder; `--db-dir` sets another. Empty keeps it in the engine's volume `ein_db`.                                                                                     | [Installing in detail](../admin/install.md)                                |
 
 Lines you can add:
 

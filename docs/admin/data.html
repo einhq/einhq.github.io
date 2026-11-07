@@ -94,7 +94,7 @@
 <p>EiN has no backup or export command of its own. Everything below uses the container engine, PostgreSQL&#39;s own tools and ordinary copying, run on the machine EiN runs on.</p>
 <p>The commands are written for podman, run in <code>~/ein</code>. With Docker, write <code>docker</code> for <code>podman</code> and <code>docker compose</code> for <code>podman compose</code>, and see <a href="#under-docker">Under Docker</a> for the one difference that matters.</p>
 <h2 id="what-makes-up-your-data">What makes up your data<a class="anchor" href="#what-makes-up-your-data" aria-label="Link to this section"></a></h2>
-<p>An installation keeps its data in three places: the database, the data folder and <code>~/ein/.env</code>.</p>
+<p>An installation keeps its data in two places: the data folder, which holds the database too, and <code>~/ein/.env</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -105,8 +105,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>The database</td>
-<td>the volume <code>ein_db</code> in the container engine&#39;s storage, or the folder <code>EIN_DB_DIR</code> names</td>
+<td><code>db</code>, the database</td>
+<td>the data folder, or the folder <code>EIN_DB_DIR</code> names</td>
 <td>every node of the tree: names, folders, links, permissions, accounts and settings, the albums, people and faces of the Archive, and small content such as comments and keys</td>
 <td>Yes, as a dump</td>
 </tr>
@@ -164,7 +164,7 @@
 <h3 id="why-the-database-and-the-files-belong-together">Why the database and the files belong together<a class="anchor" href="#why-the-database-and-the-files-belong-together" aria-label="Link to this section"></a></h3>
 <p>The <code>files</code> folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as <code>files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K</code>. What a file is called, who may see it and, with the Archive, which album it is in and whose face is in it are all in the database.</p>
 <p>Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. Take both while EiN is stopped, and restore both together.</p>
-<p>The database password in <code>.env</code>, <code>POSTGRES_PASSWORD</code>, is kept nowhere else. The restore below does not need it, as it loads the dump into a fresh database, but containers made again from the existing <code>ein_db</code> volume cannot reach the database without it. Keep a copy of <code>.env</code> with every backup.</p>
+<p>The database password in <code>.env</code>, <code>POSTGRES_PASSWORD</code>, is kept nowhere else. The restore below does not need it, as it loads the dump into a fresh database, but containers made again on the existing database folder cannot reach the database without it. Keep a copy of <code>.env</code> with every backup.</p>
 <h2 id="back-up-ein">Back up EiN<a class="anchor" href="#back-up-ein" aria-label="Link to this section"></a></h2>
 <p>Do this before every <a href="updating.html">update</a> and on a schedule of your own. The example writes the backup to <code>/mnt/backup/ein</code>, a disk other than the one EiN runs on.</p>
 <ol>
@@ -187,7 +187,8 @@ podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<
 </li>
 <li><p>Copy the data folder, leaving out what is not worth keeping:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /files-tmp --exclude /llm ~/ein/data/ /mnt/backup/ein/data/</code></pre></div>
+rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/</code></pre></div>
+<p><code>--exclude /db</code> leaves out the database&#39;s own folder: the dump of step 2 is its backup, and the folder belongs to the database&#39;s user, which your own cannot read.</p>
 <p>With the <a href="../album-folders/index.html">Album folders</a> module, add <code>--exclude /files/albums</code> too: its folders are second names for the originals in <code>files</code>, which <code>rsync -a</code> would copy once more, and EiN makes them again. Add <code>--exclude /files-volatile</code> to leave out the renditions as well; see <a href="#make-the-renditions-again">Make the renditions again</a> for what that costs at a restore. If you chose another data folder at the install, give its path instead of <code>~/ein/data/</code>.</p>
 </li>
 <li><p>Start EiN again:</p>
@@ -195,6 +196,7 @@ rsync -a --delete --exclude /files-tmp --exclude /llm ~/ein/data/ /mnt/backup/ei
 podman compose start ein</code></pre></div>
 </li>
 </ol>
+<p>A backup tool that copies the whole data folder as root, such as one that backs up the whole machine, takes <code>db</code> too. That copy is a database only when the database was stopped while it was taken (<code>podman compose stop db</code>, then <code>podman compose start db</code>); the dump is one either way.</p>
 <p><code>rsync --delete</code> makes the copy the same as the data folder, so something deleted by mistake is gone from the copy at the next run. To keep older backups, write each run to a folder of its own, such as <code>/mnt/backup/ein/2026-10-25</code>, or use a backup tool that keeps versions, such as restic or Borg, on the dump, <code>.env</code> and the data folder.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>Never start a dump just before an update or a restart. EiN changes its database tables when it starts, and a dump in progress holds them, so EiN waits for the dump and the update looks as if EiN does not come up. Take the dump while EiN is stopped, as above, or while it is already running.</p>
@@ -225,8 +227,8 @@ podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<
 </li>
 <li><p>Put the files back, so that the data folder holds exactly what the backup holds:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /files-tmp --exclude /llm /mnt/backup/ein/data/ ~/ein/data/</code></pre></div>
-<p>This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.</p>
+rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/</code></pre></div>
+<p><code>--exclude /db</code> keeps the database you restored in step 4. This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.</p>
 </li>
 <li><p>Start EiN with the restored data and any lines you changed in <code>.env</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
@@ -257,15 +259,18 @@ podman compose up -d</code></pre></div>
 <li><p>Stop EiN and remove its containers:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose down</code></pre></div>
-<p><code>down</code> keeps the database volume and the data folder; it removes the containers, which the last step makes again.</p>
+<p><code>down</code> keeps the database and the data folder; it removes the containers, which the last step makes again.</p>
 </li>
 <li><p>Copy the data folder to the new place, keeping its owners and times:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
-rsync -a ~/ein/data/ /srv/ein-data/</code></pre></div>
+podman unshare rsync -a ~/ein/data/ /srv/ein-data/</code></pre></div>
+<p><code>podman unshare</code> lets the copy read the database&#39;s folder, which belongs to one of your subordinate ids. Under Docker, use <code>sudo rsync -a</code>.</p>
 </li>
-<li><p>Change the line <code>EIN_DATA</code> in <code>~/ein/.env</code> to the new path:</p>
+<li><p>Change the lines <code>EIN_DATA</code> and <code>EIN_DB_DIR</code> in <code>~/ein/.env</code> to the new path:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env</span>
-<span class="hljs-attr">EIN_DATA</span>=/srv/ein-data</code></pre></div>
+<span class="hljs-attr">EIN_DATA</span>=/srv/ein-data
+<span class="hljs-attr">EIN_DB_DIR</span>=/srv/ein-data/db</code></pre></div>
+<p>Leave <code>EIN_DB_DIR</code> as it is if it names a folder outside the data folder, or is empty.</p>
 </li>
 <li><p>Make the containers again with the new folder:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
@@ -273,7 +278,7 @@ podman compose up -d</code></pre></div>
 </li>
 </ol>
 <p>Check that your files, and with the Archive their pictures and thumbnails, show before you delete the old folder. EiN stores no path of the machine in its database, only paths inside its containers, so nothing else needs changing.</p>
-<p>The database is not in the data folder and does not move with it. It lives in the container engine&#39;s storage, under <code>~/.local/share/containers/storage</code> for rootless podman and <code>/var/lib/docker</code> for Docker, unless <code>EIN_DB_DIR</code> in <code>.env</code> names a folder for it. To put it on another disk, run <code>./setup.sh --db-dir /srv/ein-db</code> with an empty folder: while the database is still in the volume, <code>setup.sh</code> stops and prints the commands that copy it there first.</p>
+<p>To put the database on a disk of its own, such as an SSD, stop it, copy its folder as in step 2 to an empty folder, and run <code>./setup.sh --db-dir /srv/ein-db</code>. An installation whose <code>EIN_DB_DIR</code> is empty keeps the database in the volume <code>ein_db</code>, in the container engine&#39;s storage: <code>./setup.sh --db-dir ~/ein/data/db</code> moves it into the data folder, and while the database is still in the volume, <code>setup.sh</code> stops and prints the commands that copy it there first.</p>
 <h2 id="get-your-files-out-without-ein">Get your files out without EiN<a class="anchor" href="#get-your-files-out-without-ein" aria-label="Link to this section"></a></h2>
 <p>The data folder holds your files under ids, not names, so copying it gives you nothing you can browse. To get files out with their names and folders, take them out through EiN:</p>
 <ul>
@@ -337,9 +342,8 @@ trash empty --all</code></pre></div>
 <ol>
 <li><p>Stop EiN and remove its containers and its database:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose down
-podman volume <span class="hljs-built_in">rm</span> ein_db</code></pre></div>
-<p><code>podman volume rm ein_db</code> deletes the database for good: every name, album, person, account and setting. If <code>EIN_DB_DIR</code> in <code>.env</code> names a folder, the database is there instead: remove that folder with <code>podman unshare rm -rf</code> and its path (under Docker, <code>sudo rm -rf</code>).</p>
+podman compose down</code></pre></div>
+<p>The database stays in <code>db</code> in the data folder until step 4. If <code>EIN_DB_DIR</code> in <code>.env</code> names a folder outside it, remove that folder with <code>podman unshare rm -rf</code> and its path (under Docker, <code>sudo rm -rf</code>); if it is empty, the database is the volume <code>ein_db</code>: <code>podman volume rm ein_db</code>. Either deletes the database for good: every name, album, person, account and setting.</p>
 </li>
 <li><p>Remove the images:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
@@ -356,12 +360,12 @@ loginctl disable-linger</code></pre></div>
 </li>
 <li><p>Remove the installation and the data folder, which holds your originals:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
-<span class="hljs-built_in">rm</span> -rf ~/ein</code></pre></div>
-<p>If you chose another data folder at the install, remove it as well; <code>EIN_DATA</code> in <code>.env</code> names it, so read that line before you remove <code>~/ein</code>. Under Docker the files belong to root, so use <code>sudo rm -rf</code>.</p>
+podman unshare <span class="hljs-built_in">rm</span> -rf ~/ein</code></pre></div>
+<p><code>podman unshare</code> lets it remove the database&#39;s folder, which belongs to one of your subordinate ids. If you chose another data folder at the install, remove it as well; <code>EIN_DATA</code> in <code>.env</code> names it, so read that line before you remove <code>~/ein</code>. Under Docker the files belong to root, so use <code>sudo rm -rf</code>.</p>
 </li>
 </ol>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p><code>podman compose down -v</code> removes the database volume in the same step as the containers. Use it only when you mean to delete the database.</p>
+<p>With an empty <code>EIN_DB_DIR</code>, <code>podman compose down -v</code> removes the database volume in the same step as the containers. Use it only when you mean to delete the database.</p>
 </aside>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>

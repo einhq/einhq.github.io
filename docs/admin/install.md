@@ -33,7 +33,7 @@ These are `setup.sh`'s options, and so the installer's too. `~/ein/setup.sh --he
 | `--module <name>`    | Adds a module's name to `EIN_MODULES` in `.env`, such as `archive` or `assistant`. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.                       |
 | `--only <service>`   | Updates one service, `ein`, `ems`, `db` or `llm`: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (`db` restarts EiN with it). It updates an installation, so it needs `.env`, and takes no other option. |
 | `--source <address>` | Fetches the sources from this organisation instead of `https://github.com/einhq`, such as `http://forge.example:3000/ein` on a Forgejo or a Gitea. Sets `EIN_SOURCE`. See [Where the sources come from](#where-the-sources-come-from).                                    |
-| `--db-dir <folder>`  | Keeps the database in this folder, an absolute path, instead of the volume `ein_db` in the container engine's storage, such as on a faster disk. Sets `EIN_DB_DIR`. The folder must be empty or hold a database.                                                          |
+| `--db-dir <folder>`  | Keeps the database in this folder, an absolute path, instead of `db` in the data folder, such as on a faster disk. Sets `EIN_DB_DIR`. The folder must be empty or hold a database.                                                                                        |
 | `-h`, `--help`       | Prints the help and stops.                                                                                                                                                                                                                                                |
 
 An option other than `--only` is kept in `.env` once given, so a run without it keeps it: `~/ein/setup.sh` alone runs with the options you chose before. Anything else stops `setup.sh` with `setup.sh: unknown option <option> (--help lists them)`.
@@ -93,7 +93,7 @@ A few details of how the checks count:
 - **Disk** is measured where your files go: on a later run the data folder `.env` names, which `setup.sh` keeps to, else `EIN_DATA`. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: `(not made yet; measured on /home/anna)`.
 - **The container engine** is checked podman first. With both installed, the report shows podman's lines even when you set `EIN_ENGINE=docker` or `.env` keeps Docker: only `setup.sh` reads `EIN_ENGINE`.
 
-The images, a download's or build's scratch files and the database (unless you gave `--db-dir`) live in the container engine's own storage, not in `EIN_DATA`. For rootless podman that is usually `~/.local/share/containers`, for Docker `/var/lib/docker`. When that is another disk than your data folder, it needs room too: the disk check does not measure it.
+The images and a download's or build's scratch files live in the container engine's own storage, not in `EIN_DATA`. For rootless podman that is usually `~/.local/share/containers`, for Docker `/var/lib/docker`. When that is another disk than your data folder, it needs room too: the disk check does not measure it.
 
 To run only the checks:
 
@@ -141,7 +141,7 @@ All data folders are mounted with `z`, which labels them for sharing between con
 
 ### Keep to one engine
 
-Each engine has its own images, containers and volumes, and so its own database. Install with one and keep to it.
+Each engine has its own images and containers. Install with one and keep to it: the database's folder is made for the engine that runs it.
 
 `setup.sh` keeps the engine it installed with in `.env` as `EIN_ENGINE`, and every later run uses it, whichever else is installed. Run with an `EIN_ENGINE` that names the other one, it stops before building anything:
 
@@ -151,7 +151,7 @@ setup.sh: EiN here runs under docker (EIN_ENGINE in .env); under podman it would
 
 An installation whose `.env` has no `EIN_ENGINE` line yet gets one at its next run, for the engine that run picks: podman when it is installed, unless `EIN_ENGINE=docker` is given. On a machine with both, run that first update of an installation made under Docker as `EIN_ENGINE=docker ./setup.sh`.
 
-Otherwise it is built again under podman, with podman's own empty database volume, and `.env` then keeps podman. While Docker's containers hold ports 8080 and 2222, `setup.sh` moves podman's EiN to the next free ports and writes them into `.env`; with Docker's stopped, it takes 8080 and 2222. Either way an empty EiN starts on your data folder, with no account but `admin` and its first password.
+Otherwise it is built again under podman, and `.env` then keeps podman. While Docker's containers hold ports 8080 and 2222, `setup.sh` moves podman's EiN to the next free ports and writes them into `.env`; with Docker's stopped, it takes 8080 and 2222. The database's folder in the data folder belongs to Docker's postgres user, which podman cannot use, so EiN does not come up under podman.
 
 If that has happened, remove podman's containers, put `EIN_ENGINE=docker` in `.env`, put `EIN_HTTP_PORT` and `EIN_SSH_PORT` back if `setup.sh` moved them, and run `setup.sh` again:
 
@@ -161,7 +161,7 @@ podman compose down
 ./setup.sh
 ```
 
-`podman compose down` keeps podman's volumes. The empty database volume it made is `ein_db` in podman's storage; remove it with `podman volume rm ein_db` once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.
+If `EIN_DB_DIR` in `.env` is empty, the database is a volume of the engine instead, and podman made an empty one of its own: `podman compose down` keeps it. Remove it with `podman volume rm ein_db` once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.
 
 ## What runs where
 
@@ -197,16 +197,17 @@ Leave the files from ein/deploy as they are: the installer and every run of `set
 
 `setup.sh` makes these folders in `EIN_DATA` on every run. EiN mounts the first four; the media service mounts none of them, and reaches the files of each request through EiN ([The media service](../ems/index.md#how-the-media-service-reaches-your-files)).
 
-| Folder           | Mounted at                                | What it holds                                                                       |
-| ---------------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
-| `files`          | `/files`; read-only for the media service | your originals                                                                      |
-| `old`            | `/old`; read-only for the media service   | older originals                                                                     |
-| `files-volatile` | `/files-volatile`                         | thumbnails and other renditions, which EiN can make again                           |
-| `files-tmp`      | `/files-tmp`                              | scratch space                                                                       |
-| `llm`            | `/models` in the language model           | the model, downloaded at its first start, with `--llm`                              |
-| `modules`        | `/modules-installed` in EiN               | the installed modules, so they stay when EiN is updated or its container made again |
+| Folder           | Mounted at                                   | What it holds                                                                       |
+| ---------------- | -------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `files`          | `/files`; read-only for the media service    | your originals                                                                      |
+| `old`            | `/old`; read-only for the media service      | older originals                                                                     |
+| `files-volatile` | `/files-volatile`                            | thumbnails and other renditions, which EiN can make again                           |
+| `files-tmp`      | `/files-tmp`                                 | scratch space                                                                       |
+| `llm`            | `/models` in the language model              | the model, downloaded at its first start, with `--llm`                              |
+| `modules`        | `/modules-installed` in EiN                  | the installed modules, so they stay when EiN is updated or its container made again |
+| `db`             | `/home/postgres/pgdata/data` in the database | the database, unless `--db-dir` put it in another folder                            |
 
-The database is not in the data folder. It is the volume `ein_db` in the container engine's storage, or the folder you gave `--db-dir`, which `setup.sh` gives to the database's own user before the database starts. [Your data](data.md) explains what to back up and why the database and the data folder belong together.
+The database's folder is `EIN_DB_DIR` in `.env`: `db` in the data folder, or the folder you gave `--db-dir`. `setup.sh` gives it to the database's own user before the database starts, so under rootless podman it belongs to one of your subordinate ids, and `ls` shows it only through `podman unshare`; under Docker it belongs to the image's postgres user. An installation whose `EIN_DB_DIR` is empty, from before the database moved into the data folder, keeps it in the volume `ein_db` in the container engine's storage. [Your data](data.md) explains what to back up and why the database and the data folder belong together.
 
 ### `.env`
 
@@ -234,7 +235,7 @@ EIN_SSH_PORT=2222
 # CFG_LLM_MODEL=
 EIN_SOURCE=https://github.com/einhq
 EIN_SOURCE_KEY=
-EIN_DB_DIR=
+EIN_DB_DIR=/home/anna/ein/data/db
 ```
 
 `setup.sh` then sets the options you gave in their own lines: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`. With a Forgejo or a Gitea as the source it adds `CFG_MODULE_SOURCES`, and `CFG_MODULE_SOURCES_KEY` with a token. When a port is taken, it changes `EIN_HTTP_PORT` or `EIN_SSH_PORT`.
@@ -255,7 +256,7 @@ EIN_DB_DIR=
 | `EIN_HTTP_PORT`, `EIN_SSH_PORT` | the ports on the machine for the Web UI and for SSH and SFTP; `setup.sh` moves one to the next free port when something else uses it while EiN is stopped                                                                                             |
 | `CFG_LLM_…`                     | the Assistant's settings for a hosted language model instead of `--llm`; see [The language model](../assistant/language-model.md)                                                                                                                     |
 | `EIN_SOURCE`, `EIN_SOURCE_KEY`  | where the sources are cloned from, and the token that reads them when they are private; `--source` sets them, and one on another host empties the token unless `EIN_SOURCE_KEY` gives a new one                                                       |
-| `EIN_DB_DIR`                    | the database's folder; empty keeps it in the volume `ein_db`. `--db-dir` sets it                                                                                                                                                                      |
+| `EIN_DB_DIR`                    | the database's folder, `db` in the data folder; `--db-dir` sets another. Empty keeps it in the volume `ein_db`                                                                                                                                        |
 
 The database's password and the media service's key are kept nowhere else. Without them the database cannot be reached, so copy `.env` with every backup. [Configuration files](../reference/config-files.md) has every file EiN reads.
 
@@ -324,7 +325,7 @@ podman compose up -d             # make the containers and start them
 With Docker, write `docker compose` instead. `down` keeps the database and the data folder; the containers are made again by the next `up -d`. It does remove the log, and with it a random admin password a new EiN printed there; the first password `setup.sh` made stays in `.env` as `INITIAL_ADMIN_PASSWORD`.
 
 > [!WARNING]
-> `podman compose down -v` also deletes the volumes, and the volume `ein_db` is your database: every name, album, person, setting and account. Never add `-v` unless you mean to start from nothing.
+> `podman compose down -v` also deletes the volumes. With an empty `EIN_DB_DIR`, the volume `ein_db` is your database: every name, album, person, setting and account. Never add `-v` unless you mean to start from nothing.
 
 EiN is down while it restarts, and a restart takes longer when there is a module to install. [Services and logs](services-logs.md) covers EiN's own logs and services, the ones inside the container, and [Health and the dashboard](monitoring.md) what to watch.
 
@@ -373,6 +374,7 @@ The commands are written for podman; with Docker, write `docker compose`. [Insta
 | `podman compose up` says a port is already in use                                                                                                                              | Something else listens on the port `.env` names, perhaps an EiN under the other engine (see [Keep to one engine](#keep-to-one-engine)). Stop it, or choose other ports in `.env`. `setup.sh` moves EiN to the next free port by itself, but only while EiN is stopped. |
 | `setup.sh: 'podman compose' runs docker-compose here, which needs podman's socket: …`                                                                                          | Turn on podman's socket for your user with `systemctl --user enable --now podman.socket`, or install `podman-compose`, and run `setup.sh` again.                                                                                                                       |
 | `setup.sh: podman's networks here give no names, which EiN needs to find its database: …`                                                                                      | podman uses its older network backend, CNI, without the `dnsname` plugin. Install the package the message names and run `setup.sh` again.                                                                                                                              |
+| `setup.sh: the database of an earlier install is here, in /home/anna/ein/data/db, and its password was in the .env that is gone. …`                                            | `.env` is missing but the database is not. Put the old `.env` back, or, to start from nothing, remove the database with `podman unshare rm -rf ~/ein/data/db` (under Docker, `sudo rm -rf`).                                                                           |
 | `setup.sh: the database of an earlier install is here, the volume ein_db, and its password was in the .env that is gone. …`                                                    | `.env` is missing but the database is not. Put the old `.env` back, or, to start from nothing, remove the database with `podman volume rm ein_db`.                                                                                                                     |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                                                                                | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it.                                                                                                                                                            |
 | EiN is up, but a new `CFG_` line in `.env` has no effect                                                                                                                       | Run `podman compose up -d --force-recreate` to make EiN's container again with it, and check that `compose.yaml` does not set the same variable itself (see [Change the installation afterwards](#change-the-installation-afterwards)).                                |

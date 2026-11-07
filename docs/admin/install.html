@@ -156,7 +156,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 </tr>
 <tr>
 <td><code>--db-dir &lt;folder&gt;</code></td>
-<td>Keeps the database in this folder, an absolute path, instead of the volume <code>ein_db</code> in the container engine&#39;s storage, such as on a faster disk. Sets <code>EIN_DB_DIR</code>. The folder must be empty or hold a database.</td>
+<td>Keeps the database in this folder, an absolute path, instead of <code>db</code> in the data folder, such as on a faster disk. Sets <code>EIN_DB_DIR</code>. The folder must be empty or hold a database.</td>
 </tr>
 <tr>
 <td><code>-h</code>, <code>--help</code></td>
@@ -319,7 +319,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <li><strong>Disk</strong> is measured where your files go: on a later run the data folder <code>.env</code> names, which <code>setup.sh</code> keeps to, else <code>EIN_DATA</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
 <li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you set <code>EIN_ENGINE=docker</code> or <code>.env</code> keeps Docker: only <code>setup.sh</code> reads <code>EIN_ENGINE</code>.</li>
 </ul>
-<p>The images, a download&#39;s or build&#39;s scratch files and the database (unless you gave <code>--db-dir</code>) live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
+<p>The images and a download&#39;s or build&#39;s scratch files live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
 <p>To run only the checks:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
 curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
@@ -381,16 +381,16 @@ EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assi
 </div>
 <p>All data folders are mounted with <code>z</code>, which labels them for sharing between containers under SELinux and is ignored where SELinux is not on.</p>
 <h3 id="keep-to-one-engine">Keep to one engine<a class="anchor" href="#keep-to-one-engine" aria-label="Link to this section"></a></h3>
-<p>Each engine has its own images, containers and volumes, and so its own database. Install with one and keep to it.</p>
+<p>Each engine has its own images and containers. Install with one and keep to it: the database&#39;s folder is made for the engine that runs it.</p>
 <p><code>setup.sh</code> keeps the engine it installed with in <code>.env</code> as <code>EIN_ENGINE</code>, and every later run uses it, whichever else is installed. Run with an <code>EIN_ENGINE</code> that names the other one, it stops before building anything:</p>
 <div class="code"><pre tabindex="0"><code>setup.sh: EiN here runs under docker (EIN_ENGINE in .env); under podman it would be a second, empty EiN beside it. Run ./setup.sh without EIN_ENGINE=podman</code></pre></div>
 <p>An installation whose <code>.env</code> has no <code>EIN_ENGINE</code> line yet gets one at its next run, for the engine that run picks: podman when it is installed, unless <code>EIN_ENGINE=docker</code> is given. On a machine with both, run that first update of an installation made under Docker as <code>EIN_ENGINE=docker ./setup.sh</code>.</p>
-<p>Otherwise it is built again under podman, with podman&#39;s own empty database volume, and <code>.env</code> then keeps podman. While Docker&#39;s containers hold ports 8080 and 2222, <code>setup.sh</code> moves podman&#39;s EiN to the next free ports and writes them into <code>.env</code>; with Docker&#39;s stopped, it takes 8080 and 2222. Either way an empty EiN starts on your data folder, with no account but <code>admin</code> and its first password.</p>
+<p>Otherwise it is built again under podman, and <code>.env</code> then keeps podman. While Docker&#39;s containers hold ports 8080 and 2222, <code>setup.sh</code> moves podman&#39;s EiN to the next free ports and writes them into <code>.env</code>; with Docker&#39;s stopped, it takes 8080 and 2222. The database&#39;s folder in the data folder belongs to Docker&#39;s postgres user, which podman cannot use, so EiN does not come up under podman.</p>
 <p>If that has happened, remove podman&#39;s containers, put <code>EIN_ENGINE=docker</code> in <code>.env</code>, put <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> back if <code>setup.sh</code> moved them, and run <code>setup.sh</code> again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose down
 ./setup.sh</code></pre></div>
-<p><code>podman compose down</code> keeps podman&#39;s volumes. The empty database volume it made is <code>ein_db</code> in podman&#39;s storage; remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
+<p>If <code>EIN_DB_DIR</code> in <code>.env</code> is empty, the database is a volume of the engine instead, and podman made an empty one of its own: <code>podman compose down</code> keeps it. Remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
 <h2 id="what-runs-where">What runs where<a class="anchor" href="#what-runs-where" aria-label="Link to this section"></a></h2>
 <p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>ein</code> is reached from other machines.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
@@ -614,9 +614,14 @@ podman compose down
 <td><code>/modules-installed</code> in EiN</td>
 <td>the installed modules, so they stay when EiN is updated or its container made again</td>
 </tr>
+<tr>
+<td><code>db</code></td>
+<td><code>/home/postgres/pgdata/data</code> in the database</td>
+<td>the database, unless <code>--db-dir</code> put it in another folder</td>
+</tr>
 </tbody></table>
 </div>
-<p>The database is not in the data folder. It is the volume <code>ein_db</code> in the container engine&#39;s storage, or the folder you gave <code>--db-dir</code>, which <code>setup.sh</code> gives to the database&#39;s own user before the database starts. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
+<p>The database&#39;s folder is <code>EIN_DB_DIR</code> in <code>.env</code>: <code>db</code> in the data folder, or the folder you gave <code>--db-dir</code>. <code>setup.sh</code> gives it to the database&#39;s own user before the database starts, so under rootless podman it belongs to one of your subordinate ids, and <code>ls</code> shows it only through <code>podman unshare</code>; under Docker it belongs to the image&#39;s postgres user. An installation whose <code>EIN_DB_DIR</code> is empty, from before the database moved into the data folder, keeps it in the volume <code>ein_db</code> in the container engine&#39;s storage. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
 <h3 id="env"><code>.env</code><a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
 <p><code>setup.sh</code> writes <code>~/ein/.env</code> the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN and the media service get every line of it as their environment, and <code>setup.sh</code> keeps your options in it. A fresh one looks like this:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, as setup.sh writes it (without the comments it writes)</span>
@@ -640,7 +645,7 @@ podman compose down
 <span class="hljs-comment"># CFG_LLM_MODEL=</span>
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
-EIN_DB_DIR=</code></pre></div>
+<span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
 <p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MODULES</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code> or <code>EIN_SSH_PORT</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -707,7 +712,7 @@ EIN_DB_DIR=</code></pre></div>
 </tr>
 <tr>
 <td><code>EIN_DB_DIR</code></td>
-<td>the database&#39;s folder; empty keeps it in the volume <code>ein_db</code>. <code>--db-dir</code> sets it</td>
+<td>the database&#39;s folder, <code>db</code> in the data folder; <code>--db-dir</code> sets another. Empty keeps it in the volume <code>ein_db</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -787,7 +792,7 @@ podman compose down              <span class="hljs-comment"># stop everything an
 podman compose up -d             <span class="hljs-comment"># make the containers and start them</span></code></pre></div>
 <p>With Docker, write <code>docker compose</code> instead. <code>down</code> keeps the database and the data folder; the containers are made again by the next <code>up -d</code>. It does remove the log, and with it a random admin password a new EiN printed there; the first password <code>setup.sh</code> made stays in <code>.env</code> as <code>INITIAL_ADMIN_PASSWORD</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p><code>podman compose down -v</code> also deletes the volumes, and the volume <code>ein_db</code> is your database: every name, album, person, setting and account. Never add <code>-v</code> unless you mean to start from nothing.</p>
+<p><code>podman compose down -v</code> also deletes the volumes. With an empty <code>EIN_DB_DIR</code>, the volume <code>ein_db</code> is your database: every name, album, person, setting and account. Never add <code>-v</code> unless you mean to start from nothing.</p>
 </aside>
 <p>EiN is down while it restarts, and a restart takes longer when there is a module to install. <a href="services-logs.html">Services and logs</a> covers EiN&#39;s own logs and services, the ones inside the container, and <a href="monitoring.html">Health and the dashboard</a> what to watch.</p>
 <h3 id="start-ein-when-the-machine-boots">Start EiN when the machine boots<a class="anchor" href="#start-ein-when-the-machine-boots" aria-label="Link to this section"></a></h3>
@@ -856,6 +861,10 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
 <tr>
 <td><code>setup.sh: podman&#39;s networks here give no names, which EiN needs to find its database: …</code></td>
 <td>podman uses its older network backend, CNI, without the <code>dnsname</code> plugin. Install the package the message names and run <code>setup.sh</code> again.</td>
+</tr>
+<tr>
+<td><code>setup.sh: the database of an earlier install is here, in /home/anna/ein/data/db, and its password was in the .env that is gone. …</code></td>
+<td><code>.env</code> is missing but the database is not. Put the old <code>.env</code> back, or, to start from nothing, remove the database with <code>podman unshare rm -rf ~/ein/data/db</code> (under Docker, <code>sudo rm -rf</code>).</td>
 </tr>
 <tr>
 <td><code>setup.sh: the database of an earlier install is here, the volume ein_db, and its password was in the .env that is gone. …</code></td>
