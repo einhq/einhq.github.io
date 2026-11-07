@@ -77,8 +77,8 @@ When a check names a hosted language model, its reason says so plainly, for exam
 
 Under the checks, **Overview** shows the machine and the work in five parts.
 
-- **CPU** and **Memory** tiles: the share of all the machine's processor cores in use, with the number of cores, the load and EiN's own share, and EiN's container's memory against its limit, each with a small chart of the last six hours. A tile turns amber at 75% and red at 90%.
-- **GPU** and **VRAM** tiles, beside them, with the `ems` module installed and a media service that has a graphics card: how busy the card is, its temperature and its power draw, and its memory in use. They come from the `ems` module and are not there without it, without a card or without the media service; see [The graphics card](../ems/gpu.md).
+- **CPU** and **Memory** tiles: the share of all the machine's processor cores in use, with the number of cores, the load and EiN's own share, and the share of the machine's memory in use, with how much of how much and EiN's own share; hover the tile for what EiN holds against its limit. Each has a small chart of the last six hours. A tile turns amber at 75% and red at 90%.
+- **EMS GPU**, **EMS VRAM** and **EMS RAM** tiles, beside them, with the `ems` module installed: how busy the media service's card is, its temperature and its power draw; the card's memory in use; and the memory of the machine the media service runs on, with the media service's own share. That machine may be another than EiN's. The GPU tiles are not there without a card, and none of them without the media service; see [The graphics card](../ems/gpu.md).
 - **Work**: **Done per hour**, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and **Instances by state**, a bar of **In line**, **Running**, **Failed**, **Done** and **Cancelled**.
 - **Storage**: each storage tier, its path, a bar of used and free space, `% used`, how much it grows per day and, when it grows, `full in ~N days`, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database's size is in the corner. [Files and storage](../concepts/files.md) explains the tiers.
 - A line at the bottom naming the instance: **host**, **uptime**, **deno** and **database**. It tells you which EiN you are looking at when you run more than one.
@@ -258,7 +258,7 @@ The `metrics-sampler` service records the machine's and the work's figures, one 
 | `disk`      | Free and total space per storage tier                     | 15 minutes | 90 days  |
 | `nodes`     | How many nodes of each type                               | 15 minutes | 365 days |
 
-With the `ems` module installed, it adds a `gpu` series, sampled every 15 seconds by its `gpu-sampler` service, for the **GPU** and **VRAM** tiles. Memory is EiN's container's own, read from its cgroup. CPU is read both ways: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's share of it.
+With the `ems` module installed, its `gpu-sampler` service adds a `gpu` series, every 15 seconds, for the **EMS GPU** and **EMS VRAM** tiles, and an `ems-models` series, every minute, which holds the media service machine's memory for **EMS RAM**. Memory is read both ways: the whole machine's, and EiN's container's own, from its cgroup. CPU is read both ways too: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's share of it.
 
 How the tree has grown over the years is not on the dashboard: **Statistics**, under **System**, shows it, and anyone can open it ([Home and statistics](../guide/home.md)).
 

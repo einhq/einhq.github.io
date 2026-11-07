@@ -275,7 +275,7 @@ how it is, again and again, while the tab is open.
   own. A search model drawn hatched, as **standby**, is in RAM as well as on the card while the card
   is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
   card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
-  times it has. How busy the card is, its temperature and its power are the **GPU** tile on the
+  times it has. How busy the card is, its temperature and its power are the **EMS GPU** tile on the
   **Overview** tab.
 - **Models**: every model the media service can load, in four columns by what it is doing,
   **Working**, **Loaded, idle**, **Loading or unloading** and **Not loaded**, each with where it is and
@@ -301,8 +301,10 @@ The **Work** tab's **Where the work is** ends with the media service's part: **A
 service**, its three lanes with their slots and the requests in them, and **On a model**, the models
 it holds, the working ones first and the search models apart.
 
-The **Overview** tab shows **GPU** and **VRAM** tiles beside the computer's own CPU and memory when
-the media service has a card. With no card, or no media service, they are not there.
+The **Overview** tab shows **EMS GPU** and **EMS VRAM** tiles beside the computer's own CPU and
+memory when the media service has a card, and **EMS RAM**, the memory of the machine the media
+service runs on, which need not be EiN's, with the media service's own share. With no card the GPU
+tiles are not there, and with no media service none of them.
 
 ![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles are the media service's card; they show only when it has one")
 

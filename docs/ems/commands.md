@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
 
@@ -76,6 +76,22 @@ ems-gpu-sample
 ```
 
 With `JSON_OUTPUT=1`: utilPct, memUsedMb, memTotalMb and tempC, or null when there is no reading.
+
+### `ems-memory`
+
+The memory of the media service's machine now, with the last six hours, and what EMS holds of it.
+
+<small>reads only</small>
+
+```text
+ems-memory
+```
+
+```bash
+ems-memory
+```
+
+With `JSON_OUTPUT=1`: usedMb, totalMb, percent, emsMb, emsLimitMb and the series of percent, or null when there is no reading.
 
 ### `ems-models`
 

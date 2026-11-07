@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 412 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 413 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -95,7 +95,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [group-update](commands-core.md#group-update) | Update a group's title or description; its gid is fixed when it is created. |
 | [head](commands-core.md#head) | Output the first part of files, logs, or stdin; on a queue, the next entries without consuming them. |
 | [health](commands-core.md#health) | Say whether the system is healthy, catching up, stuck or needs a person, and the checks that decide it. |
-| [host-metrics](commands-core.md#host-metrics) | The machine's CPU, this container's memory and event-loop lag now, with their recent history from metrics-sampler. |
+| [host-metrics](commands-core.md#host-metrics) | The machine's CPU and memory, this container's share of each, and event-loop lag now, with their recent history from metrics-sampler. |
 | [http-server](commands-core.md#http-server) | Start an HTTP server. |
 | [info](commands-core.md#info) | Display node ID and type. |
 | [jq](commands-core.md#jq) | Lightweight JSON processor. |
@@ -411,7 +411,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media service
 
-[All 8 in full](../ems/commands.md).
+[All 9 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -419,6 +419,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-files-grant](../ems/commands.md#ems-files-grant) | Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
 | [ems-gpu](../ems/commands.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
+| [ems-memory](../ems/commands.md#ems-memory) | The memory of the media service's machine now, with the last six hours, and what EMS holds of it. |
 | [ems-models](../ems/commands.md#ems-models) | What the media service held over the last hours, a sample a minute, with the work EiN had waiting beside it. |
 | [ems-models-sample](../ems/commands.md#ems-models-sample) | What the media service holds now: the card mode, each model copy and where it is, the models working. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |

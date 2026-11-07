@@ -1299,7 +1299,7 @@ health
 
 ### `host-metrics`
 
-The machine's CPU, this container's memory and event-loop lag now, with their recent history from metrics-sampler.
+The machine's CPU and memory, this container's share of each, and event-loop lag now, with their recent history from metrics-sampler.
 
 <small>reads only</small>
 
