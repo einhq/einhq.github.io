@@ -489,7 +489,12 @@ everything <strong>outside EMS</strong>, and what is free; <strong>GPU load</str
 <strong>GPU loaded</strong> or <strong>CPU loading</strong>), <strong>Loaded</strong>, <strong>Last used</strong>, <strong>Size</strong> and <strong>Activity</strong>. Hover a
 model&#39;s name for what it does. The heading counts them: for example <code>3 of 15 loaded · 2 on the GPU</code>.</li>
 <li><strong>Executing</strong>: the requests running or waiting now, and the three lanes they go through, <strong>models</strong>,
-<strong>tools</strong> and <strong>encodes</strong>, each with how many run at once.</li>
+<strong>tools</strong> and <strong>encodes</strong>, each with how many run at once. When requests wait, a request a person
+is waiting on goes first. Then, when more than one system sends the media service work, the
+system that has used it the least; the tab then shows <strong>Callers</strong> too, each system with how much
+it has used and what it runs and waits for now. Of that system&#39;s requests, one for a model that is
+already working goes first, so the media service does not load one model after another, unless
+another has waited five minutes.</li>
 </ul>
 <p>When the media service does not answer, the tab shows only <strong>The media service is not answering</strong>,
 with the address it tried.</p>
@@ -688,7 +693,12 @@ the containers again with the limit.</p>
 <tr>
 <td><code>EMS_QUEUE_DEPTH</code></td>
 <td><code>64</code></td>
-<td>Requests that may wait before a new one is answered <code>busy</code>.</td>
+<td>Requests of one system that may wait before a new one of its own is answered <code>busy</code>.</td>
+</tr>
+<tr>
+<td><code>EMS_AFFINITY_WAIT</code></td>
+<td><code>300</code></td>
+<td>Seconds a model request may wait while requests for a model already working go before it.</td>
 </tr>
 <tr>
 <td><code>EMS_INTERACTIVE_RESERVE</code></td>

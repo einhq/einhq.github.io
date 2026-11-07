@@ -275,7 +275,12 @@ how it is, again and again, while the tab is open.
   **GPU loaded** or **CPU loading**), **Loaded**, **Last used**, **Size** and **Activity**. Hover a
   model's name for what it does. The heading counts them: for example `3 of 15 loaded · 2 on the GPU`.
 - **Executing**: the requests running or waiting now, and the three lanes they go through, **models**,
-  **tools** and **encodes**, each with how many run at once.
+  **tools** and **encodes**, each with how many run at once. When requests wait, a request a person
+  is waiting on goes first. Then, when more than one system sends the media service work, the
+  system that has used it the least; the tab then shows **Callers** too, each system with how much
+  it has used and what it runs and waits for now. Of that system's requests, one for a model that is
+  already working goes first, so the media service does not load one model after another, unless
+  another has waited five minutes.
 
 When the media service does not answer, the tab shows only **The media service is not answering**,
 with the address it tried.
@@ -409,7 +414,8 @@ These are the settings an administrator is most likely to need:
 | `EMS_LIMIT_MODELS`        | `8`                           | Model requests admitted at once.                                                                                                                                                                                                               |
 | `EMS_LIMIT_TOOLS`         | `4`                           | Tool requests at once: metadata, thumbnails, fingerprints, document text. Each tool uses one core, so this is a number of cores.                                                                                                               |
 | `EMS_LIMIT_ENCODES`       | `2`                           | Transcodes and other whole-file decodes at once.                                                                                                                                                                                               |
-| `EMS_QUEUE_DEPTH`         | `64`                          | Requests that may wait before a new one is answered `busy`.                                                                                                                                                                                    |
+| `EMS_QUEUE_DEPTH`         | `64`                          | Requests of one system that may wait before a new one of its own is answered `busy`.                                                                                                                                                           |
+| `EMS_AFFINITY_WAIT`       | `300`                         | Seconds a model request may wait while requests for a model already working go before it.                                                                                                                                                      |
 | `EMS_INTERACTIVE_RESERVE` | `1`                           | Slots more for a request a person is waiting on, so a person never waits behind indexing.                                                                                                                                                      |
 | `EMS_VIDEO_ENCODER`       | empty                         | The video encoder: empty picks `av1_nvenc` on a card that offers it and `libsvtav1` otherwise.                                                                                                                                                 |
 | `EMS_CPU_ENCODE_MAX_MB`   | `4000`                        | Memory one video decode on the CPU may grow to. A long video is encoded in pieces within it; one that cannot be is refused. `0` turns the CPU encode off.                                                                                      |
