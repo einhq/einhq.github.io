@@ -17,7 +17,6 @@ An installation keeps its data in two places: the data folder, which holds the d
 | `old`                           | the data folder                                               | files kept from an older installation; empty unless you put files there                                                                                                     | When it holds anything                                                                                                     |
 | `modules`                       | the data folder                                               | the installed modules                                                                                                                                                       | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                       |
 | `files-volatile`                | the data folder                                               | with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals                                                         | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](../ems/index.md) |
-| `files-tmp`                     | the data folder                                               | scratch space while files are written                                                                                                                                       | No                                                                                                                         |
 | `llm`                           | the data folder                                               | with `--llm`, the language model, downloaded at its first start                                                                                                             | No; it is downloaded again                                                                                                 |
 | `~/ein/.env`                    | `~/ein`                                                       | your options, the lines you added, and the passwords made at the install                                                                                                    | Yes                                                                                                                        |
 | `src/`, `compose.override.yaml` | `~/ein`                                                       | the sources and the options as services                                                                                                                                     | No; `setup.sh` makes them again                                                                                            |
@@ -68,7 +67,7 @@ Do this before every [update](updating.md) and on a schedule of your own. The ex
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/
+   rsync -a --delete --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/
    ```
 
    `--exclude /db` leaves out the database's own folder: the dump of step 2 is its backup, and the folder belongs to the database's user, which your own cannot read.
@@ -127,7 +126,7 @@ A restore loads the dump into an empty database and puts the files back beside i
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/
+   rsync -a --delete --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/
    ```
 
    `--exclude /db` keeps the database you restored in step 4. This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.
@@ -241,11 +240,10 @@ df
 ```text
 tier    disk       41% used  1.1 TB free  full in ~212d
 tier    volatile   41% used  1.1 TB free  full in ~212d
-tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB
 ```
 
-`disk` is `files`, `volatile` is `files-volatile` and `tmp` is `files-tmp`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive`.
+`disk` is `files` and `volatile` is `files-volatile`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive`.
 
 On the machine itself, `du -sh ~/ein/data/*` shows each folder of the data folder, and `podman system df` what the images and the database volume take in the container engine's storage. Each update downloads new images and removes the ones they replaced; `podman image prune` removes other images without a name that nothing uses any more.
 

@@ -374,11 +374,6 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <td>Renditions EiN can make again: thumbnails, crops, transcodes.</td>
 </tr>
 <tr>
-<td><code>files-tmp</code></td>
-<td><code>/files-tmp</code></td>
-<td>Scratch space while content is written.</td>
-</tr>
-<tr>
 <td><code>modules</code></td>
 <td><code>/modules-installed</code></td>
 <td>The modules EiN installed, which it sees in its tree at <code>/var/lib/modules</code>.</td>
@@ -618,7 +613,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 <li>Boot adds the line that sources <code>/etc/layout</code>, once.</li>
 <li>At every start, boot moves the four lines that source the settings files to the end, so they come after anything you add.</li>
 </ul>
-<p><code>/etc/layout</code> exports where each folder of the tree is, such as <code>ETC_PATH</code> and <code>LOGS_PATH</code>, and where the data folders are on the machine (<code>EIN_FILE_ROOT_PATH</code>, <code>EIN_VOLATILE_FILE_ROOT_PATH</code>, <code>EIN_FILE_TMP_PATH</code>). Boot writes it whole at every start; leave it alone. <a href="environment.html#folders-in-the-tree">Folders in the tree</a> lists the variables.</p>
+<p><code>/etc/layout</code> exports where each folder of the tree is, such as <code>ETC_PATH</code> and <code>LOGS_PATH</code>, and where the data folders are on the machine (<code>EIN_FILE_ROOT_PATH</code>, <code>EIN_VOLATILE_FILE_ROOT_PATH</code>). Boot writes it whole at every start; leave it alone. <a href="environment.html#folders-in-the-tree">Folders in the tree</a> lists the variables.</p>
 <p>A change to <code>/etc/bashrc</code> reaches every shell before its next command, an open terminal tab included; a command already running keeps what it started with. Put aliases and settings of your own in <code>~/.bashrc</code> instead, which is yours alone.</p>
 <h3 id="your-shell-files">Your shell files<a class="anchor" href="#your-shell-files" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>

@@ -127,7 +127,6 @@ A bare `deno task dev` keeps its files beside the checkout, and reads every othe
 | `POSTGRES_URL`            | `postgres://ein:ein@127.0.0.1:5432/ein` | The database.                                                                       |
 | `FILE_ROOT_PATH`          | `./files`                               | Where file content is kept.                                                         |
 | `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH`                        | Where thumbnails, crops and transcodes are kept.                                    |
-| `FILE_TMP_PATH`           | `/tmp`                                  | Scratch space while content is written.                                             |
 | `DEV_MODULES_PATH`        | `./modules`                             | The module checkouts EiN runs, read-only.                                           |
 | `MODULE_INSTALL_PATH`     | `./modules-installed`                   | Where `mod install` puts the modules it fetches.                                    |
 | `DOCS_PATH`               | `./guide`                               | The guide at `/usr/docs/guide`: the image's copy of this site, or a checkout of it. |
@@ -179,7 +178,7 @@ git clone https://github.com/einhq/ems.git ein-ems
 cd ein-ems
 make build
 make run FILES_PATH=$HOME/ein-core/files OLD_PATH=$HOME/ein-core/old \
-  VOLATILE_PATH=$HOME/ein-core/files-volatile TMP_PATH=$HOME/ein-core/files-tmp
+  VOLATILE_PATH=$HOME/ein-core/files-volatile
 make health
 ```
 
@@ -233,19 +232,19 @@ make container-logs
 
 `make container-run` mounts the Web UI from the checkout's `src/builtin/ui/ui/`, so bundle it first, and the checkout's `old/` at `/old`, so that folder must exist. It runs the container on the host's network, with these variables:
 
-| Variable                                                     | Default                                      | What it sets                                                                     |
-| ------------------------------------------------------------ | -------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ENV_FILE`                                                   | none                                         | A file of `KEY=value` lines: every `CFG_…` setting beyond the ports.             |
-| `HTTP_PORT`, `SSH_PORT`                                      | `8080`, `2222`                               | The ports, passed in as `CFG_HTTP_PORT` and `CFG_SSH_PORT`.                      |
-| `POSTGRES_URL`                                               | `postgres://ein:ein@localhost:5432/ein`      | The database.                                                                    |
-| `FILE_ROOT_PATH`, `VOLATILE_FILE_ROOT_PATH`, `FILE_TMP_PATH` | `./files`, `./files-volatile`, `./files-tmp` | The host folders mounted at `/files`, `/files-volatile` and `/files-tmp`.        |
-| `MODULES_PATH`                                               | `./modules`                                  | The module checkouts, mounted read-only.                                         |
-| `MODULE_INSTALL_PATH`                                        | `./modules-installed`                        | Where `mod install` puts modules, kept when the container is replaced.           |
-| `INSTALL_MODULES`                                            | none                                         | Modules to install at boot when they are missing, such as `'archive assistant'`. |
-| `CONTAINER_MEMORY`                                           | `6g`                                         | The container's memory, with no swap.                                            |
-| `IMAGE_NAME`, `CONTAINER_NAME`                               | `ein`, `ein`                                 | The image and the container.                                                     |
-| `LOG_LEVEL`, `LOG_MODULES`                                   | none                                         | The log level, and levels per component such as `ssh-server:DEBUG`.              |
-| `DENO_ARGS`                                                  | none                                         | Extra flags for `deno run`, such as `--inspect=127.0.0.1:9229`.                  |
+| Variable                                    | Default                                 | What it sets                                                                     |
+| ------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------- |
+| `ENV_FILE`                                  | none                                    | A file of `KEY=value` lines: every `CFG_…` setting beyond the ports.             |
+| `HTTP_PORT`, `SSH_PORT`                     | `8080`, `2222`                          | The ports, passed in as `CFG_HTTP_PORT` and `CFG_SSH_PORT`.                      |
+| `POSTGRES_URL`                              | `postgres://ein:ein@localhost:5432/ein` | The database.                                                                    |
+| `FILE_ROOT_PATH`, `VOLATILE_FILE_ROOT_PATH` | `./files`, `./files-volatile`           | The host folders mounted at `/files` and `/files-volatile`.                      |
+| `MODULES_PATH`                              | `./modules`                             | The module checkouts, mounted read-only.                                         |
+| `MODULE_INSTALL_PATH`                       | `./modules-installed`                   | Where `mod install` puts modules, kept when the container is replaced.           |
+| `INSTALL_MODULES`                           | none                                    | Modules to install at boot when they are missing, such as `'archive assistant'`. |
+| `CONTAINER_MEMORY`                          | `6g`                                    | The container's memory, with no swap.                                            |
+| `IMAGE_NAME`, `CONTAINER_NAME`              | `ein`, `ein`                            | The image and the container.                                                     |
+| `LOG_LEVEL`, `LOG_MODULES`                  | none                                    | The log level, and levels per component such as `ssh-server:DEBUG`.              |
+| `DENO_ARGS`                                 | none                                    | Extra flags for `deno run`, such as `--inspect=127.0.0.1:9229`.                  |
 
 The administrator's password is in `make container-logs` on the first start. `make container-stop` stops the container and `make container-shell` opens bash inside it.
 

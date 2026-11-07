@@ -110,7 +110,6 @@ install. EiN sees its folders at fixed paths inside its container:
 | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
 | `files`                   | `/files`          | the `disk` tier: your originals                                                                           |
 | `files-volatile`          | `/files-volatile` | the `volatile` tier: thumbnails and other renditions                                                      |
-| `files-tmp`               | `/files-tmp`      | scratch space for temporary files                                                                         |
 | `old`                     | `/old`            | files kept from an older installation, which EiN reads but never writes; empty unless you put files there |
 
 The media service, which the Archive needs, mounts none of these folders: it reaches the files of each request through EiN,
@@ -326,12 +325,10 @@ df
 ```text
 tier    disk       12% used  801 GB free  full in ~912d
 tier    volatile   12% used  801 GB free  full in ~912d
-tier    tmp        12% used  801 GB free  full in ~912d
 database  3.4 GB
 ```
 
-`tmp` is the scratch folder, measured because a full one stops EiN too. In a standard install the
-three folders are on one disk, so they show the same figures, and `full in` appears once EiN has measured the disk long enough to see it fill. The **Storage** card on the **Dashboard** shows the same;
+In a standard install the two folders are on one disk, so they show the same figures, and `full in` appears once EiN has measured the disk long enough to see it fill. The **Storage** card on the **Dashboard** shows the same;
 see [Health and the dashboard](../admin/monitoring.md).
 
 `du` adds up the sizes of the files under a path, including what each file keeps beneath it, such
@@ -376,4 +373,4 @@ of the whole installation.
 - [Installing in detail](../admin/install.md#the-data-folder): the data folder and the database's folder.
 - [Your data: backup, moving and removing](../admin/data.md): what to back up, and why the files and the database go together.
 - [Reaching other machines](../shell/remote.md): mounting a folder of another machine.
-- [Environment variables](../reference/environment.md): `FILE_ROOT_PATH`, `VOLATILE_FILE_ROOT_PATH` and `FILE_TMP_PATH`.
+- [Environment variables](../reference/environment.md): `FILE_ROOT_PATH` and `VOLATILE_FILE_ROOT_PATH`.

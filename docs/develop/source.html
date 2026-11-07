@@ -247,11 +247,6 @@ ssh -p 2222 admin@localhost</code></pre></div>
 <td>Where thumbnails, crops and transcodes are kept.</td>
 </tr>
 <tr>
-<td><code>FILE_TMP_PATH</code></td>
-<td><code>/tmp</code></td>
-<td>Scratch space while content is written.</td>
-</tr>
-<tr>
 <td><code>DEV_MODULES_PATH</code></td>
 <td><code>./modules</code></td>
 <td>The module checkouts EiN runs, read-only.</td>
@@ -319,7 +314,7 @@ git <span class="hljs-built_in">clone</span> https://github.com/einhq/ems.git ei
 <span class="hljs-built_in">cd</span> ein-ems
 make build
 make run FILES_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files OLD_PATH=<span class="hljs-variable">$HOME</span>/ein-core/old \
-  VOLATILE_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files-volatile TMP_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files-tmp
+  VOLATILE_PATH=<span class="hljs-variable">$HOME</span>/ein-core/files-volatile
 make health</code></pre></div>
 <p><code>make build</code> makes an image of tens of gigabytes, since the models are baked in. Add <code>GPU=1</code> to <code>make run</code> to give it an NVIDIA card; <a href="../ems/gpu.html">The graphics card</a> has what the machine needs first. The service listens on port 8181 with the key <code>let-me-in</code> unless you set <code>EMS_PORT</code> and <code>EMS_KEY</code>.</p>
 <p>EiN looks for it at <code>http://127.0.0.1:8181</code>, the default of <a href="../reference/settings.html#cfg_ems_url"><code>CFG_EMS_URL</code></a>. Give EiN the key with <a href="../reference/settings.html#cfg_ems_key"><code>CFG_EMS_KEY</code></a>, in the settings file you pass to <code>make container-run</code> as <code>ENV_FILE</code>:</p>
@@ -402,9 +397,9 @@ make container-logs</code></pre></div>
 <td>The database.</td>
 </tr>
 <tr>
-<td><code>FILE_ROOT_PATH</code>, <code>VOLATILE_FILE_ROOT_PATH</code>, <code>FILE_TMP_PATH</code></td>
-<td><code>./files</code>, <code>./files-volatile</code>, <code>./files-tmp</code></td>
-<td>The host folders mounted at <code>/files</code>, <code>/files-volatile</code> and <code>/files-tmp</code>.</td>
+<td><code>FILE_ROOT_PATH</code>, <code>VOLATILE_FILE_ROOT_PATH</code></td>
+<td><code>./files</code>, <code>./files-volatile</code></td>
+<td>The host folders mounted at <code>/files</code> and <code>/files-volatile</code>.</td>
 </tr>
 <tr>
 <td><code>MODULES_PATH</code></td>

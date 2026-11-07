@@ -258,11 +258,6 @@ install. EiN sees its folders at fixed paths inside its container:</p>
 <td>the <code>volatile</code> tier: thumbnails and other renditions</td>
 </tr>
 <tr>
-<td><code>files-tmp</code></td>
-<td><code>/files-tmp</code></td>
-<td>scratch space for temporary files</td>
-</tr>
-<tr>
 <td><code>old</code></td>
 <td><code>/old</code></td>
 <td>files kept from an older installation, which EiN reads but never writes; empty unless you put files there</td>
@@ -549,10 +544,8 @@ and the size of the database:</p>
 <span class="hljs-built_in">df</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>tier    disk       12% used  801 GB free  full in ~912d
 tier    volatile   12% used  801 GB free  full in ~912d
-tier    tmp        12% used  801 GB free  full in ~912d
 database  3.4 GB</code></pre></div>
-<p><code>tmp</code> is the scratch folder, measured because a full one stops EiN too. In a standard install the
-three folders are on one disk, so they show the same figures, and <code>full in</code> appears once EiN has measured the disk long enough to see it fill. The <strong>Storage</strong> card on the <strong>Dashboard</strong> shows the same;
+<p>In a standard install the two folders are on one disk, so they show the same figures, and <code>full in</code> appears once EiN has measured the disk long enough to see it fill. The <strong>Storage</strong> card on the <strong>Dashboard</strong> shows the same;
 see <a href="../admin/monitoring.html">Health and the dashboard</a>.</p>
 <p><code>du</code> adds up the sizes of the files under a path, including what each file keeps beneath it, such
 as its thumbnails. It counts a file reached by two names once and does not follow softlinks, so a
@@ -625,7 +618,7 @@ of the whole installation.</p>
 <li><a href="../admin/install.html#the-data-folder">Installing in detail</a>: the data folder and the database&#39;s folder.</li>
 <li><a href="../admin/data.html">Your data: backup, moving and removing</a>: what to back up, and why the files and the database go together.</li>
 <li><a href="../shell/remote.html">Reaching other machines</a>: mounting a folder of another machine.</li>
-<li><a href="../reference/environment.html">Environment variables</a>: <code>FILE_ROOT_PATH</code>, <code>VOLATILE_FILE_ROOT_PATH</code> and <code>FILE_TMP_PATH</code>.</li>
+<li><a href="../reference/environment.html">Environment variables</a>: <code>FILE_ROOT_PATH</code> and <code>VOLATILE_FILE_ROOT_PATH</code>.</li>
 </ul>
 
         </article>

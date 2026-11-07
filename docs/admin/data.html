@@ -135,12 +135,6 @@
 <td>Optional: EiN can make them again, but over a large archive that takes days and needs the <a href="../ems/index.html">media service</a></td>
 </tr>
 <tr>
-<td><code>files-tmp</code></td>
-<td>the data folder</td>
-<td>scratch space while files are written</td>
-<td>No</td>
-</tr>
-<tr>
 <td><code>llm</code></td>
 <td>the data folder</td>
 <td>with <code>--llm</code>, the language model, downloaded at its first start</td>
@@ -187,7 +181,7 @@ podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<
 </li>
 <li><p>Copy the data folder, leaving out what is not worth keeping:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/</code></pre></div>
+rsync -a --delete --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/</code></pre></div>
 <p><code>--exclude /db</code> leaves out the database&#39;s own folder: the dump of step 2 is its backup, and the folder belongs to the database&#39;s user, which your own cannot read.</p>
 <p>With the <a href="../album-folders/index.html">Album folders</a> module, add <code>--exclude /files/albums</code> too: its folders are second names for the originals in <code>files</code>, which <code>rsync -a</code> would copy once more, and EiN makes them again. Add <code>--exclude /files-volatile</code> to leave out the renditions as well; see <a href="#make-the-renditions-again">Make the renditions again</a> for what that costs at a restore. If you chose another data folder at the install, give its path instead of <code>~/ein/data/</code>.</p>
 </li>
@@ -227,7 +221,7 @@ podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<
 </li>
 <li><p>Put the files back, so that the data folder holds exactly what the backup holds:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /files-tmp --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/</code></pre></div>
+rsync -a --delete --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/</code></pre></div>
 <p><code>--exclude /db</code> keeps the database you restored in step 4. This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.</p>
 </li>
 <li><p>Start EiN with the restored data and any lines you changed in <code>.env</code>:</p>
@@ -297,9 +291,8 @@ scp -P 2222 -r <span class="hljs-string">&quot;helen@ein.local:/archive/albums/S
 <span class="hljs-built_in">df</span></code></pre></div>
 <div class="code"><pre tabindex="0"><code>tier    disk       41% used  1.1 TB free  full in ~212d
 tier    volatile   41% used  1.1 TB free  full in ~212d
-tier    tmp        41% used  1.1 TB free  full in ~212d
 database  6.2 GB</code></pre></div>
-<p><code>disk</code> is <code>files</code>, <code>volatile</code> is <code>files-volatile</code> and <code>tmp</code> is <code>files-tmp</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive</code>.</p>
+<p><code>disk</code> is <code>files</code> and <code>volatile</code> is <code>files-volatile</code>. When they are folders on one disk, as in a default install, they show the same free space. <a href="../reference/commands-core.html#du"><code>du</code></a> measures part of the tree, such as <code>du -sh /archive</code>.</p>
 <p>On the machine itself, <code>du -sh ~/ein/data/*</code> shows each folder of the data folder, and <code>podman system df</code> what the images and the database volume take in the container engine&#39;s storage. Each update downloads new images and removes the ones they replaced; <code>podman image prune</code> removes other images without a name that nothing uses any more.</p>
 <h2 id="delete-things-and-free-space">Delete things and free space<a class="anchor" href="#delete-things-and-free-space" aria-label="Link to this section"></a></h2>
 <p>What you delete in the Web UI goes to the deleter&#39;s trash first and keeps its room on the disk until it leaves the trash: after 30 days, or the number of days set in <a href="../reference/settings.html#cfg_trash_retention_days"><code>CFG_TRASH_RETENTION_DAYS</code></a> (<strong>Days in the trash</strong>, under <strong>Settings → System</strong>). Only then does EiN remove the files from the data folder. <a href="../guide/profile.html#the-trash">Your profile, favourites and trash</a> explains the trash, and which ways of deleting skip it.</p>

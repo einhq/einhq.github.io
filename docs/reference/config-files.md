@@ -147,7 +147,6 @@ Under podman every service gets `restart: always`, the policy podman starts agai
 | `files`          | `/files`                                   | The originals.                                                              |
 | `old`            | `/old`                                     | Older originals.                                                            |
 | `files-volatile` | `/files-volatile`                          | Renditions EiN can make again: thumbnails, crops, transcodes.               |
-| `files-tmp`      | `/files-tmp`                               | Scratch space while content is written.                                     |
 | `modules`        | `/modules-installed`                       | The modules EiN installed, which it sees in its tree at `/var/lib/modules`. |
 | `llm`            | not in EiN; the language model's `/models` | The downloaded model.                                                       |
 
@@ -242,7 +241,7 @@ Boot and `mod setup` keep some lines in it, whatever else you change:
 - Boot adds the line that sources `/etc/layout`, once.
 - At every start, boot moves the four lines that source the settings files to the end, so they come after anything you add.
 
-`/etc/layout` exports where each folder of the tree is, such as `ETC_PATH` and `LOGS_PATH`, and where the data folders are on the machine (`EIN_FILE_ROOT_PATH`, `EIN_VOLATILE_FILE_ROOT_PATH`, `EIN_FILE_TMP_PATH`). Boot writes it whole at every start; leave it alone. [Folders in the tree](environment.md#folders-in-the-tree) lists the variables.
+`/etc/layout` exports where each folder of the tree is, such as `ETC_PATH` and `LOGS_PATH`, and where the data folders are on the machine (`EIN_FILE_ROOT_PATH`, `EIN_VOLATILE_FILE_ROOT_PATH`). Boot writes it whole at every start; leave it alone. [Folders in the tree](environment.md#folders-in-the-tree) lists the variables.
 
 A change to `/etc/bashrc` reaches every shell before its next command, an open terminal tab included; a command already running keeps what it started with. Put aliases and settings of your own in `~/.bashrc` instead, which is yours alone.
 

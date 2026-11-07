@@ -17,7 +17,6 @@ Read once, from EiN's own environment, when it starts: `.env` in an installation
 | `TRUSTED_PROXIES` |  | Addresses, separated by commas, of proxies whose X-Forwarded-For and Forwarded headers name the client, besides this host's loopback, which is always believed. setup.sh sets 10.0.2.2 under rootless podman's slirp4netns, where a proxy on the machine reaches EiN from there. |
 | `FILE_ROOT_PATH` | `./files` | Host directory where file content is stored. |
 | `VOLATILE_FILE_ROOT_PATH` | `FILE_ROOT_PATH` | Host directory for content that can be made again — thumbnails, crops, transcodes — so it can live on a faster or cheaper disk. |
-| `FILE_TMP_PATH` | `/tmp` | Host directory for temporary files while content is written. |
 | `DOCS_PATH` | `./guide` | Host directory mounted as the guide at /usr/docs/guide: the documentation at einhq.eu, as the image bundles it or a checkout of the site. Without one the Docs page links to einhq.eu. In a shell the same name is the tree path /usr/docs. |
 | `DEV_MODULES_PATH` | `./modules` | The deployment's modules: a folder of module checkouts mounted read-only at /tmp/dev-modules and linked into /usr/modules. A name here wins over an installed module of the same name. In a shell the same name is that tree path. |
 | `MODULE_INSTALL_PATH` | `./modules-installed` | Host directory `mod install` puts modules in, mounted read-write at /var/lib/modules. A folder of the host mounted into the container keeps the installed modules when the container is replaced. |
@@ -86,10 +85,8 @@ What EiN exports for every shell at its start besides the folders: the built-in 
 | `EIN_PATH_EXPORTS` |  | The layout variables as export lines, written into /etc/layout at boot. |
 | `EIN_FILE_ROOT_PATH` |  | Where file content is stored on the host, as FILE_ROOT_PATH gave it: what the dashboard reports disk use for. |
 | `EIN_VOLATILE_FILE_ROOT_PATH` |  | The same for content that can be made again. |
-| `EIN_FILE_TMP_PATH` |  | The same for temporary files. |
 | `EXTERNAL_FILE_ROOT_PATH` |  | FILE_ROOT_PATH as boot received it, for the init scripts. |
 | `EXTERNAL_VOLATILE_FILE_ROOT_PATH` |  | VOLATILE_FILE_ROOT_PATH as boot received it. |
-| `EXTERNAL_FILE_TMP_PATH` |  | FILE_TMP_PATH as boot received it. |
 | `EXTERNAL_DOCS_PATH` |  | DOCS_PATH as boot received it: what is mounted at /usr/docs/guide. |
 | `EXTERNAL_DEV_MODULES_PATH` |  | DEV_MODULES_PATH as boot received it. |
 | `EXTERNAL_MODULE_INSTALL_PATH` |  | MODULE_INSTALL_PATH as boot received it. |

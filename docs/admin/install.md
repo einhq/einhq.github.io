@@ -202,7 +202,6 @@ Leave the files from ein/deploy as they are: the installer and every run of `set
 | `files`          | `/files`; read-only for the media service    | your originals                                                                      |
 | `old`            | `/old`; read-only for the media service      | older originals                                                                     |
 | `files-volatile` | `/files-volatile`                            | thumbnails and other renditions, which EiN can make again                           |
-| `files-tmp`      | `/files-tmp`                                 | scratch space                                                                       |
 | `llm`            | `/models` in the language model              | the model, downloaded at its first start, with `--llm`                              |
 | `modules`        | `/modules-installed` in EiN                  | the installed modules, so they stay when EiN is updated or its container made again |
 | `db`             | `/home/postgres/pgdata/data` in the database | the database, unless `--db-dir` put it in another folder                            |
