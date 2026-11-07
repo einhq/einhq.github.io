@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
 
@@ -76,6 +76,43 @@ ems-gpu-sample
 ```
 
 With `JSON_OUTPUT=1`: utilPct, memUsedMb, memTotalMb and tempC, or null when there is no reading.
+
+### `ems-models`
+
+What the media service held over the last hours, a sample a minute, with the work EiN had waiting beside it.
+
+<small>reads only</small>
+
+```text
+ems-models [--hours=<string>]
+```
+
+| Option             | What it does                          |
+| ------------------ | ------------------------------------- |
+| `--hours=<string>` | Hours of history, 1 to 24 (default 6) |
+
+```bash
+ems-models
+ems-models --hours 24
+```
+
+With `JSON_OUTPUT=1`: windowMs and samples: at, and mode, copies, working, notStarted and inLine.
+
+### `ems-models-sample`
+
+What the media service holds now: the card mode, each model copy and where it is, the models working.
+
+<small>reads only</small>
+
+```text
+ems-models-sample
+```
+
+```bash
+ems-models-sample
+```
+
+With `JSON_OUTPUT=1`: mode, copies (family, place, worker, state), working, notStarted and inLine, or null when the media service is not answering.
 
 ### `ems-status`
 

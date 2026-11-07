@@ -3452,7 +3452,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <h3 id="pipeline-worker"><code>pipeline-worker</code><a class="anchor" href="#pipeline-worker" aria-label="Link to this section"></a></h3>
 <p>Run a pool worker (long-running)</p>
 <p><small>administrators only · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>pipeline-worker [--pool=&lt;path&gt;] [--capacity=&lt;string&gt;] [--kind=&lt;string&gt;] [--reserve-kind=&lt;string&gt;] [--reserve-capacity=&lt;string&gt;] [--kind-quantum=&lt;number&gt;] [--lease=&lt;number&gt;] [--concurrency=&lt;number&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>pipeline-worker [--pool=&lt;path&gt;] [--capacity=&lt;string&gt;] [--kind=&lt;string&gt;] [--reserve-kind=&lt;string&gt;] [--reserve-capacity=&lt;string&gt;] [--kind-quantum=&lt;number&gt;] [--lease=&lt;number&gt;] [--name=&lt;string&gt;] [--concurrency=&lt;number&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3487,6 +3487,10 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <tr>
 <td><code>--lease=&lt;number&gt;</code></td>
 <td>Lease duration in ms (default 60000)</td>
+</tr>
+<tr>
+<td><code>--name=&lt;string&gt;</code></td>
+<td>What pool-stat and the dashboard call this worker (default: the service it runs as)</td>
 </tr>
 <tr>
 <td><code>--concurrency=&lt;number&gt;</code></td>

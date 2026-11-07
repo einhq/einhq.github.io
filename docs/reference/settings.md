@@ -404,7 +404,7 @@ Every setting of an EiN with all its modules: 90 of them, in the groups the Sett
 
 ### `CFG_EMS_KEY`
 
-**Media service key**. The bearer key EMS expects (one of the lines in its keys file), sent only to the media service address above. Unset when EMS runs without keys. No shell sees it, and nothing shows it once it is set.
+**Media service key**. The bearer key EMS expects (the first word of a line in its keys file, which names this system as a caller), sent only to the media service address above. Unset when EMS runs without keys. No shell sees it, and nothing shows it once it is set.
 
 | | |
 | --- | --- |

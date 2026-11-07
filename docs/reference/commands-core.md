@@ -2305,7 +2305,7 @@ Run a pool worker (long-running)
 <small>administrators only · changes things</small>
 
 ```text
-pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reserve-kind=<string>] [--reserve-capacity=<string>] [--kind-quantum=<number>] [--lease=<number>] [--concurrency=<number>]
+pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reserve-kind=<string>] [--reserve-capacity=<string>] [--kind-quantum=<number>] [--lease=<number>] [--name=<string>] [--concurrency=<number>]
 ```
 
 | Option | What it does |
@@ -2317,6 +2317,7 @@ pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reser
 | `--reserve-capacity=<string>` | Soft capacity reservation, key=number (repeatable) |
 | `--kind-quantum=<number>` | Batch by kind: drain one kind for this many ms before rotating (default 0, off) |
 | `--lease=<number>` | Lease duration in ms (default 60000) |
+| `--name=<string>` | What pool-stat and the dashboard call this worker (default: the service it runs as) |
 | `--concurrency=<number>` | Upper bound on concurrent jobs (default 1) |
 
 ### `pool`
