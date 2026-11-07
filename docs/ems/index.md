@@ -265,8 +265,8 @@ how it is, again and again, while the tab is open.
 
 - **Media service**: a badge, **healthy**, **degraded** or **model worker down**, and the facts:
   **version**, **commit**, **api**, **uptime**, **batch worker** and **query worker** (`up`, or `down`,
-  with `×` and the number of restarts), **card**, **driver** and **url**.
-- **Graphics card mode**, when there is a card: who has the card now (see
+  with `×` and the number of restarts), **card**, **driver** and **url**. Under them, when there is a
+  card, **Graphics card** says who has it now, since when, and when that changes (see
   [The graphics card](#the-graphics-card) below).
 - An orange box for each degradation, such as `gpu degraded`, and a yellow one for each warning.
 - **Where the models are**: two bars. **Graphics card** splits the card's memory into each model on
@@ -274,7 +274,9 @@ how it is, again and again, while the tab is open.
   what is free. **RAM** splits the media service's memory into each model held there and its workers'
   own. A search model drawn hatched, as **standby**, is in RAM as well as on the card while the card
   is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
-  card, so search never stops. Under the bars, **GPU load**, **Batch worker RAM** and **Query worker RAM**.
+  card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
+  times it has. How busy the card is, its temperature and its power are the **GPU** tile on the
+  **Overview** tab.
 - **Models**: every model the media service can load, in four columns by what it is doing,
   **Working**, **Loaded, idle**, **Loading or unloading** and **Not loaded**, each with where it is and
   its size. Hover a model's name for what it does. **Every model in detail** opens the full table:
@@ -377,7 +379,7 @@ mode** on the **Media service** tab shows which has it:
 | **switching** | Handing the graphics card over between indexing and search.                                             |
 | **off**       | No graphics card to share: every model runs where its setting says.                                     |
 
-When the mode is off, which `EMS_CARD_QUIET_AFTER=0` makes it too, the tab leaves **Graphics card mode** out.
+When the mode is off, which `EMS_CARD_QUIET_AFTER=0` makes it too, the tab leaves **Graphics card** out.
 
 It turns **quiet** after 600 seconds without indexing work (`EMS_CARD_QUIET_AFTER`). A search never
 waits for the card: a separate model process answers searches on the CPU throughout.

@@ -168,14 +168,13 @@ Under Docker the `restart: always` lines are left out.
 
 ## Check that EiN uses the card
 
-Open **Dashboard** under **System** in the sidebar. The **Overview** tab has a **GPU** tile, with the card's use and temperature, and a **VRAM** tile, with the memory in use on it, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one.
+Open **Dashboard** under **System** in the sidebar. The **Overview** tab has a **GPU** tile, with the card's use, its temperature and its power draw against its limit, and a **VRAM** tile, with the memory in use on it, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one.
 
 ![The System dashboard's Overview tab: tiles for CPU, memory, GPU and VRAM, above the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles appear only when the media service sees a card")
 
 The **Media service** tab shows more:
 
-- **Media service**, at the top, names the **card** and its **driver**.
-- **Graphics card mode** says who has the card now: **busy** while indexing has it and search runs on the processor, **quiet** when there is no indexing work and search runs on the card as far as it fits, **switching** while it is handed over. With no card to share, or with `EMS_CARD_QUIET_AFTER=0`, the mode is off and the tab leaves this out.
+- **Media service**, at the top, names the **card** and its **driver**, and under them **Graphics card** says who has the card now: **busy** while indexing has it and search runs on the processor, **quiet** when there is no indexing work and search runs on the card as far as it fits, **switching** while it is handed over. With no card to share, or with `EMS_CARD_QUIET_AFTER=0`, the mode is off and the tab leaves this out.
 - **Where the models are** splits the card's memory into each model on it, the media service's own runtime, and the **chat model and others**, which is the language model when it shares the card; and the media service's RAM into each model there. A search model in RAM while it is also on the card is its **standby** copy.
 - **Models** puts every model under what it is doing, **Working**, **Loaded, idle**, **Loading or unloading** or **Not loaded**, with its place, **GPU** or **RAM**, and size.
 - **The last 6 hours** shows which models were on the card and in RAM, and when.

@@ -479,8 +479,8 @@ how it is, again and again, while the tab is open.</p>
 <ul>
 <li><strong>Media service</strong>: a badge, <strong>healthy</strong>, <strong>degraded</strong> or <strong>model worker down</strong>, and the facts:
 <strong>version</strong>, <strong>commit</strong>, <strong>api</strong>, <strong>uptime</strong>, <strong>batch worker</strong> and <strong>query worker</strong> (<code>up</code>, or <code>down</code>,
-with <code>×</code> and the number of restarts), <strong>card</strong>, <strong>driver</strong> and <strong>url</strong>.</li>
-<li><strong>Graphics card mode</strong>, when there is a card: who has the card now (see
+with <code>×</code> and the number of restarts), <strong>card</strong>, <strong>driver</strong> and <strong>url</strong>. Under them, when there is a
+card, <strong>Graphics card</strong> says who has it now, since when, and when that changes (see
 <a href="#the-graphics-card">The graphics card</a> below).</li>
 <li>An orange box for each degradation, such as <code>gpu degraded</code>, and a yellow one for each warning.</li>
 <li><strong>Where the models are</strong>: two bars. <strong>Graphics card</strong> splits the card&#39;s memory into each model on
@@ -488,7 +488,9 @@ it, the media service&#39;s own runtime there, the <strong>chat model and others
 what is free. <strong>RAM</strong> splits the media service&#39;s memory into each model held there and its workers&#39;
 own. A search model drawn hatched, as <strong>standby</strong>, is in RAM as well as on the card while the card
 is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
-card, so search never stops. Under the bars, <strong>GPU load</strong>, <strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
+card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
+times it has. How busy the card is, its temperature and its power are the <strong>GPU</strong> tile on the
+<strong>Overview</strong> tab.</li>
 <li><strong>Models</strong>: every model the media service can load, in four columns by what it is doing,
 <strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> and <strong>Not loaded</strong>, each with where it is and
 its size. Hover a model&#39;s name for what it does. <strong>Every model in detail</strong> opens the full table:
@@ -610,7 +612,7 @@ mode</strong> on the <strong>Media service</strong> tab shows which has it:</p>
 </tr>
 </tbody></table>
 </div>
-<p>When the mode is off, which <code>EMS_CARD_QUIET_AFTER=0</code> makes it too, the tab leaves <strong>Graphics card mode</strong> out.</p>
+<p>When the mode is off, which <code>EMS_CARD_QUIET_AFTER=0</code> makes it too, the tab leaves <strong>Graphics card</strong> out.</p>
 <p>It turns <strong>quiet</strong> after 600 seconds without indexing work (<code>EMS_CARD_QUIET_AFTER</code>). A search never
 waits for the card: a separate model process answers searches on the CPU throughout.</p>
 <p><a href="gpu.html">The graphics card</a> covers preparing the machine, checking that every model really runs on
