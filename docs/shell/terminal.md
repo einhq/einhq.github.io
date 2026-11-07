@@ -212,6 +212,10 @@ Some keys mean something else in the browser:
   <kbd>Ctrl</kbd>+<kbd>W</kbd> closes the browser tab rather than cutting a word; use
   <kbd>Alt</kbd>+<kbd>W</kbd> to close a terminal tab.
 
+While a command runs, what you type goes to it, and <kbd>Enter</kbd> ends a line as in any Linux
+terminal. A command that reads the terminal takes your line when you press it: `head -n1` returns
+the one line you type, and `xargs -o` gives each command it runs the terminal to read from.
+
 <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a running command. Start a long one in the background
 with `&` instead; [The shell language](bash.md) covers jobs.
 

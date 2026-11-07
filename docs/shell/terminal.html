@@ -340,6 +340,9 @@ press <kbd>F5</kbd>.</li>
 <kbd>Ctrl</kbd>+<kbd>W</kbd> closes the browser tab rather than cutting a word; use
 <kbd>Alt</kbd>+<kbd>W</kbd> to close a terminal tab.</li>
 </ul>
+<p>While a command runs, what you type goes to it, and <kbd>Enter</kbd> ends a line as in any Linux
+terminal. A command that reads the terminal takes your line when you press it: <code>head -n1</code> returns
+the one line you type, and <code>xargs -o</code> gives each command it runs the terminal to read from.</p>
 <p><kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a running command. Start a long one in the background
 with <code>&amp;</code> instead; <a href="bash.html">The shell language</a> covers jobs.</p>
 <h2 id="find-an-earlier-command">Find an earlier command<a class="anchor" href="#find-an-earlier-command" aria-label="Link to this section"></a></h2>
