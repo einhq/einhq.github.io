@@ -108,7 +108,7 @@ The media service has its own limits on how much it runs at once, set in `~/ein/
 | `EMS_LIMIT_MODELS`        | `8`     | Model requests running at once                                                                                                     |
 | `EMS_LIMIT_TOOLS`         | `4`     | Tool work at once: reading metadata, thumbnails, fingerprints                                                                      |
 | `EMS_LIMIT_ENCODES`       | `2`     | Whole-file work at once: video encoding, storyboards, finding shots                                                                |
-| `EMS_QUEUE_DEPTH`         | `64`    | Requests that may wait for a place; past it the media service answers that it is busy, and EiN tries again later                   |
+| `EMS_QUEUE_DEPTH`         | `64`    | Requests of one system that may wait for a place; past it the media service answers that it is busy, and EiN tries again later     |
 | `EMS_INTERACTIVE_RESERVE` | `1`     | Extra places for models and tools, kept for a person waiting, such as a search, so that processing never makes them wait behind it |
 
 EiN's settings decide how much it asks for; the media service's decide how much it does. Asking for more than the media service runs at once only moves the wait into its queue.
