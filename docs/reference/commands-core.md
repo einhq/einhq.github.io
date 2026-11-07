@@ -3972,12 +3972,12 @@ www <command> [<name>]
 
 ### `xargs`
 
-Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.
+Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin, or the terminal with -o; with no command it is echo. -P runs several at once, -p asks before each run. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.
 
 <small>reads only</small>
 
 ```text
-xargs [--null] [-0] [--delimiter=<string>] [-d <string>] [--max-args=<string>] [-n <string>] [--max-lines=<string>] [-L <string>] [--max-chars=<string>] [-s <string>] [--replace=<string>] [-I <string>] [--eof=<string>] [-E <string>] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=<path>] [-a <path>] [<command>...]
+xargs [--null] [-0] [--delimiter=<string>] [-d <string>] [--max-args=<string>] [-n <string>] [--max-lines=<string>] [-L <string>] [--max-chars=<string>] [-s <string>] [--replace=<string>] [-I <string>] [--eof=<string>] [-E <string>] [--no-run-if-empty] [-r] [--verbose] [-t] [--interactive] [-p] [--open-tty] [-o] [--exit] [-x] [--max-procs=<string>] [-P <string>] [--arg-file=<path>] [-a <path>] [<command>...]
 ```
 
 | Argument | What it is |
@@ -4004,6 +4004,14 @@ xargs [--null] [-0] [--delimiter=<string>] [-d <string>] [--max-args=<string>] [
 | `-r` | run nothing when stdin is empty. |
 | `--verbose` | write each command line to stderr before running it. |
 | `-t` | write each command line to stderr before running it. |
+| `--interactive` | ask on the terminal before each run, and run it only on an answer starting with y. |
+| `-p` | ask on the terminal before each run, and run it only on an answer starting with y. |
+| `--open-tty` | each command reads the terminal as its stdin, for an interactive one such as edit. |
+| `-o` | each command reads the terminal as its stdin, for an interactive one such as edit. |
+| `--exit` | with -n, stop when the items a run is given do not fit in -s, rather than giving it fewer; -L always does. |
+| `-x` | with -n, stop when the items a run is given do not fit in -s, rather than giving it fewer; -L always does. |
+| `--max-procs=<string>` | run up to this many commands at once (default 1); 0 runs as many as there are. |
+| `-P <string>` | run up to this many commands at once (default 1); 0 runs as many as there are. |
 | `--arg-file=<path>` | read the items from this file; the command then reads stdin. |
 | `-a <path>` | read the items from this file; the command then reads stdin. |
 

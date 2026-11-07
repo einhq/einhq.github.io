@@ -6066,9 +6066,9 @@ unzip --as-upload -d /home/anna/staging/files/inbox /home/anna/staging/files/inb
 </div>
 <h2 id="x">X<a class="anchor" href="#x" aria-label="Link to this section"></a></h2>
 <h3 id="xargs"><code>xargs</code><a class="anchor" href="#xargs" aria-label="Link to this section"></a></h3>
-<p>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</p>
+<p>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin, or the terminal with -o; with no command it is echo. -P runs several at once, -p asks before each run. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>xargs [--null] [-0] [--delimiter=&lt;string&gt;] [-d &lt;string&gt;] [--max-args=&lt;string&gt;] [-n &lt;string&gt;] [--max-lines=&lt;string&gt;] [-L &lt;string&gt;] [--max-chars=&lt;string&gt;] [-s &lt;string&gt;] [--replace=&lt;string&gt;] [-I &lt;string&gt;] [--eof=&lt;string&gt;] [-E &lt;string&gt;] [--no-run-if-empty] [-r] [--verbose] [-t] [--arg-file=&lt;path&gt;] [-a &lt;path&gt;] [&lt;command&gt;...]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>xargs [--null] [-0] [--delimiter=&lt;string&gt;] [-d &lt;string&gt;] [--max-args=&lt;string&gt;] [-n &lt;string&gt;] [--max-lines=&lt;string&gt;] [-L &lt;string&gt;] [--max-chars=&lt;string&gt;] [-s &lt;string&gt;] [--replace=&lt;string&gt;] [-I &lt;string&gt;] [--eof=&lt;string&gt;] [-E &lt;string&gt;] [--no-run-if-empty] [-r] [--verbose] [-t] [--interactive] [-p] [--open-tty] [-o] [--exit] [-x] [--max-procs=&lt;string&gt;] [-P &lt;string&gt;] [--arg-file=&lt;path&gt;] [-a &lt;path&gt;] [&lt;command&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -6160,6 +6160,38 @@ unzip --as-upload -d /home/anna/staging/files/inbox /home/anna/staging/files/inb
 <tr>
 <td><code>-t</code></td>
 <td>write each command line to stderr before running it.</td>
+</tr>
+<tr>
+<td><code>--interactive</code></td>
+<td>ask on the terminal before each run, and run it only on an answer starting with y.</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>ask on the terminal before each run, and run it only on an answer starting with y.</td>
+</tr>
+<tr>
+<td><code>--open-tty</code></td>
+<td>each command reads the terminal as its stdin, for an interactive one such as edit.</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>each command reads the terminal as its stdin, for an interactive one such as edit.</td>
+</tr>
+<tr>
+<td><code>--exit</code></td>
+<td>with -n, stop when the items a run is given do not fit in -s, rather than giving it fewer; -L always does.</td>
+</tr>
+<tr>
+<td><code>-x</code></td>
+<td>with -n, stop when the items a run is given do not fit in -s, rather than giving it fewer; -L always does.</td>
+</tr>
+<tr>
+<td><code>--max-procs=&lt;string&gt;</code></td>
+<td>run up to this many commands at once (default 1); 0 runs as many as there are.</td>
+</tr>
+<tr>
+<td><code>-P &lt;string&gt;</code></td>
+<td>run up to this many commands at once (default 1); 0 runs as many as there are.</td>
 </tr>
 <tr>
 <td><code>--arg-file=&lt;path&gt;</code></td>

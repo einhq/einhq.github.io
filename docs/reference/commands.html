@@ -966,7 +966,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#xargs">xargs</a></td>
-<td>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin; with no command it is echo. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</td>
+<td>Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin, or the terminal with -o; with no command it is echo. -P runs several at once, -p asks before each run. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run.</td>
 </tr>
 </tbody></table>
 </div>
