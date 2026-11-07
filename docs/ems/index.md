@@ -235,6 +235,11 @@ service with each request, so there is still nothing to set up on its side. It c
 the processor time of the default. Set it on the settings page or in the deployment as any other
 setting; `ems-files` restarts with it.
 
+The certificates, and the key the media service proves itself with, travel in the requests EiN
+sends it, so they are only as private as those requests are. Over a network you do not trust, put
+the media service behind an HTTPS proxy too and give its `https://` address as `CFG_EMS_URL`;
+otherwise anyone who can read the requests can read the key with them.
+
 #### Faster reading through the mount
 
 The kernel reads ahead only 128 KiB on an sshfs mount, so a big video comes through at a fraction of

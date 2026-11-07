@@ -458,6 +458,10 @@ certificate made when <code>ems-files</code> starts, each accepts only the other
 service with each request, so there is still nothing to set up on its side. It costs about twice
 the processor time of the default. Set it on the settings page or in the deployment as any other
 setting; <code>ems-files</code> restarts with it.</p>
+<p>The certificates, and the key the media service proves itself with, travel in the requests EiN
+sends it, so they are only as private as those requests are. Over a network you do not trust, put
+the media service behind an HTTPS proxy too and give its <code>https://</code> address as <code>CFG_EMS_URL</code>;
+otherwise anyone who can read the requests can read the key with them.</p>
 <h4 id="faster-reading-through-the-mount">Faster reading through the mount<a class="anchor" href="#faster-reading-through-the-mount" aria-label="Link to this section"></a></h4>
 <p>The kernel reads ahead only 128 KiB on an sshfs mount, so a big video comes through at a fraction of
 what the network carries. On the machine the media service runs on, a rule for udev raises it to 4
