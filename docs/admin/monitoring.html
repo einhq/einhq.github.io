@@ -173,7 +173,7 @@
 <tr>
 <td><strong>Stuck</strong></td>
 <td>Work is waiting, and none of it was done and no instance finished in the last hour.</td>
-<td>Look at the checks on <strong>Overview</strong> and the <strong>Kinds of work</strong> table on <strong>Work</strong>; see below.</td>
+<td>Look at the checks on <strong>Overview</strong> and at <strong>Where the work is</strong> on <strong>Work</strong>; see below.</td>
 </tr>
 <tr>
 <td><strong>Needs a person</strong></td>
@@ -301,7 +301,7 @@
 <td><code>kind &lt;name&gt;</code></td>
 <td>ok</td>
 <td><code>340 left, 120/h  eta 2.8h</code>, or <code>340 waiting, the oldest for 4m10s</code></td>
-<td>Nothing: a kind of job that is being done, or has just arrived.</td>
+<td>Nothing: a line of work that is being done, or has just arrived.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
@@ -313,7 +313,7 @@
 <td><code>kind &lt;name&gt;</code></td>
 <td>warn</td>
 <td><code>340 waiting, the oldest for 2h05m, none done in the last hour</code></td>
-<td>The worker for this kind is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab.</td>
+<td>The worker for this line is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
@@ -386,7 +386,7 @@
 <ul>
 <li><strong>CPU</strong> and <strong>Memory</strong> tiles: the share of all the machine&#39;s processor cores in use, with the number of cores, the load and EiN&#39;s own share, and EiN&#39;s container&#39;s memory against its limit, each with a small chart of the last six hours. A tile turns amber at 75% and red at 90%.</li>
 <li><strong>GPU</strong> and <strong>VRAM</strong> tiles, beside them, with the <code>ems</code> module installed and a media service that has a graphics card: how busy the card is and its temperature, and its memory in use. They come from the <code>ems</code> module and are not there without it, without a card or without the media service; see <a href="../ems/gpu.html">The graphics card</a>.</li>
-<li><strong>Work</strong>: <strong>Completed per hour</strong>, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and <strong>Instances by state</strong>, a bar of <strong>Queued</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Completed</strong> and <strong>Cancelled</strong>.</li>
+<li><strong>Work</strong>: <strong>Done per hour</strong>, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and <strong>Instances by state</strong>, a bar of <strong>In line</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Done</strong> and <strong>Cancelled</strong>.</li>
 <li><strong>Storage</strong>: each storage tier, its path, a bar of used and free space, <code>% used</code>, how much it grows per day and, when it grows, <code>full in ~N days</code>, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database&#39;s size is in the corner. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</li>
 <li>A line at the bottom naming the instance: <strong>host</strong>, <strong>uptime</strong>, <strong>deno</strong> and <strong>database</strong>. It tells you which EiN you are looking at when you run more than one.</li>
 </ul>
@@ -395,16 +395,17 @@
 <p><strong>Work</strong> shows what the pipelines are doing; <a href="processing.html">Processing and pipelines</a> explains pipelines, how to rerun, cancel and retry work, and what each one does.</p>
 <figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone</figcaption></figure>
 <ul>
-<li>The pipeline table has one row per defined pipeline, even one that has never run, with <strong>Workload</strong>, <strong>Waiting</strong>, <strong>Queued</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Completed</strong> and <strong>Cancelled</strong>. <strong>In</strong> is the work arriving for it per hour, <strong>Out</strong> what it finished in the last hour, and <strong>ETA</strong> the waiting work divided by <strong>Out</strong>; <strong>no rate</strong> when nothing finished recently, <code>—</code> when nothing waits. When queue entries were dropped after their delivery attempts, a red <strong>N dropped</strong> stands above the table. Choose a row to see that pipeline&#39;s instances.</li>
-<li><strong>Kinds of work</strong> lists each kind of job in the work pools that has something left or was done lately: <strong>Left</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. A red <strong>no worker</strong> badge marks a kind nothing runs; with the Archive, a yellow <strong>waiting for EMS</strong> badge marks a kind resting because the media service refused several of its jobs in a row, with the next try in its tooltip.</li>
+<li><strong>Where the work is</strong> draws the work left to right as it moves: <strong>Not started</strong> (changes noticed, work not made yet, by pipeline), <strong>In line</strong> (made, waiting for a worker; each line of work under the workers that serve it, the one a worker is on now outlined), and <strong>Running in EiN</strong> (each worker, its slots and the line it is on, with how much of its turn is left). With the <code>ems</code> module installed, the media service&#39;s lanes and the models it holds follow. Under it, each line that is not moving says why. <a href="processing.html#watch-the-work-on-the-dashboard">Processing and pipelines</a> explains it.</li>
+<li>The pipeline table has a row for each pipeline doing something, with <strong>Workload</strong>, <strong>Not started</strong>, <strong>In line</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Done</strong> and <strong>Cancelled</strong>; the idle ones fold into one row that <strong>show</strong> opens. <strong>In</strong> is the work arriving for it per hour, <strong>Out</strong> what it finished in the last hour, and <strong>Finishes in</strong> the work not started divided by <strong>Out</strong>; <strong>no rate</strong> when nothing finished recently, <code>—</code> when nothing waits. When queue entries were dropped after their delivery attempts, a red <strong>N dropped</strong> stands above the table. Choose a row to see that pipeline&#39;s instances.</li>
+<li><strong>Lines</strong> lists each line of work in the work pools that has something in it or was done lately: <strong>In line</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>Finishes in</strong> and <strong>Oldest in line</strong>. A red <strong>no worker</strong> badge marks a line nothing serves; with the Archive, a yellow <strong>waiting for EMS</strong> badge marks a line resting because the media service refused several of its jobs in a row, with the next try in its tooltip.</li>
 <li><strong>Ongoing</strong> lists the instances running now, with how far the running step has come, for a step that says, and how long each has run. Steps that have written nothing and moved no progress for the quiet time are listed above it in a yellow box.</li>
 </ul>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
-<p>When jobs of some kind are ready and no running worker offers that kind for more than five minutes, a red box, <strong>Work that nothing will run</strong>, stands above the tabs on every tab, and the <code>kind &lt;name&gt;</code> check fails. The box names the pool, how many jobs are ready and for how long, and the pipelines that queue that kind.</p>
+<p>When a line has jobs ready and no running worker serves it for more than five minutes, a red box, <strong>Work that nothing will run</strong>, stands above the tabs on every tab, and the <code>kind &lt;name&gt;</code> check fails. The box names the pool, how many jobs are ready and for how long, and the pipelines that queue that line.</p>
 <ul>
-<li><p>When it names pipelines, the worker that should run the kind is not running. Open <strong>Services</strong> and start the stopped one, or read the <strong>Log</strong> tab for why it stopped.</p>
+<li><p>When it names pipelines, the worker that should serve the line is not running. Open <strong>Services</strong> and start the stopped one, or read the <strong>Log</strong> tab for why it stopped.</p>
 </li>
-<li><p>When it says that no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline changed or is gone. If the pipeline now queues that step under another kind, cancel the jobs with the command the box gives, and the engine queues them again under the new kind:</p>
+<li><p>When it says that no defined pipeline queues the line any more, the jobs belong to instances whose pipeline changed or is gone. If the pipeline now queues that step in another line, cancel the jobs with the command the box gives, and the engine queues them again in the new line:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 pool cancel /var/pools/media --kind gpu-describe</code></pre></div>
 <p>If the pipeline is no longer defined, cancelling does not last, since the engine queues the jobs again while their instances are open; <code>pipeline prune</code> removes the instances and their jobs once it has been gone for ten minutes. <a href="processing.html#work-that-nothing-will-run">Work that nothing will run</a> has both.</p>

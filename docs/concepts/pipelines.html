@@ -560,8 +560,8 @@ it, is skipped too, not failed or retried.</p>
 go to a pool rather than running in the engine. A pool is a node holding jobs, each with a kind, a
 priority and what it requires. Workers, each a service, offer the pool their free capacity and take
 the best job that fits: the highest priority first, the oldest among equals.</p>
-<p>The <a href="../media/index.html">Media</a> module runs two workers on <code>/var/pools/media</code>, for the kinds of work
-the modules name for them. With the Archive:</p>
+<p>The <a href="../media/index.html">Media</a> module runs two workers on <code>/var/pools/media</code>, for the lines of work
+(kinds of job) the modules name for them. With the Archive:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -937,9 +937,10 @@ a model the media service no longer runs. The Archive&#39;s <code>media-heal</co
 announces each as a fact for the pipeline that fills it, once that pipeline has nothing waiting.</p>
 <h2 id="watch-and-steer-the-work">Watch and steer the work<a class="anchor" href="#watch-and-steer-the-work" aria-label="Link to this section"></a></h2>
 <p>The <strong>Dashboard</strong> in an administrator&#39;s sidebar shows the state of all this in one word at the top:
-<strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Its <strong>Work</strong> tab lists every pipeline
-with how many of its instances are queued, running, failed, completed and cancelled, how much work
-arrives and finishes per hour, and what is executing now. <a href="../admin/monitoring.html">Health and the dashboard</a>
+<strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Its <strong>Work</strong> tab draws where the work
+is, from not started through in line to running, and lists every pipeline with how much of its work
+is not started, in line, running, failed, done and cancelled, how much arrives and finishes per hour,
+and what is executing now. <a href="../admin/monitoring.html">Health and the dashboard</a>
 explains the words and the figures.</p>
 <p>Choose a pipeline in the list to open its page. It shows the pipeline&#39;s trigger, its steps and its
 priority, and its instances, with tabs <strong>All</strong>, <strong>Running</strong>, <strong>Completed</strong>, <strong>Failed</strong> and

@@ -290,8 +290,8 @@ go to a pool rather than running in the engine. A pool is a node holding jobs, e
 priority and what it requires. Workers, each a service, offer the pool their free capacity and take
 the best job that fits: the highest priority first, the oldest among equals.
 
-The [Media](../media/index.md) module runs two workers on `/var/pools/media`, for the kinds of work
-the modules name for them. With the Archive:
+The [Media](../media/index.md) module runs two workers on `/var/pools/media`, for the lines of work
+(kinds of job) the modules name for them. With the Archive:
 
 | Service        | What it runs                                                                                                       | Paced by                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
@@ -411,9 +411,10 @@ announces each as a fact for the pipeline that fills it, once that pipeline has 
 ## Watch and steer the work
 
 The **Dashboard** in an administrator's sidebar shows the state of all this in one word at the top:
-**Healthy**, **Catching up**, **Stuck** or **Needs a person**. Its **Work** tab lists every pipeline
-with how many of its instances are queued, running, failed, completed and cancelled, how much work
-arrives and finishes per hour, and what is executing now. [Health and the dashboard](../admin/monitoring.md)
+**Healthy**, **Catching up**, **Stuck** or **Needs a person**. Its **Work** tab draws where the work
+is, from not started through in line to running, and lists every pipeline with how much of its work
+is not started, in line, running, failed, done and cancelled, how much arrives and finishes per hour,
+and what is executing now. [Health and the dashboard](../admin/monitoring.md)
 explains the words and the figures.
 
 Choose a pipeline in the list to open its page. It shows the pipeline's trigger, its steps and its

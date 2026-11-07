@@ -269,11 +269,21 @@ how it is, again and again, while the tab is open.
 - **Graphics card mode**, when there is a card: who has the card now (see
   [The graphics card](#the-graphics-card) below).
 - An orange box for each degradation, such as `gpu degraded`, and a yellow one for each warning.
-- **Graphics card memory**: the card's memory split by process, the media service's workers and
-  everything **outside EMS**, and what is free; **GPU load**, **Batch worker RAM** and **Query worker RAM**.
-- **Models**: every model the media service can load, loaded or not, with **Status** (for example
-  **GPU loaded** or **CPU loading**), **Loaded**, **Last used**, **Size** and **Activity**. Hover a
-  model's name for what it does. The heading counts them: for example `3 of 15 loaded · 2 on the GPU`.
+- **Where the models are**: two bars. **Graphics card** splits the card's memory into each model on
+  it, the media service's own runtime there, the **chat model and others** that share the card, and
+  what is free. **RAM** splits the media service's memory into each model held there and its workers'
+  own. A search model drawn hatched, as **standby**, is in RAM as well as on the card while the card
+  is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
+  card, so search never stops. Under the bars, **GPU load**, **Batch worker RAM** and **Query worker RAM**.
+- **Models**: every model the media service can load, in four columns by what it is doing,
+  **Working**, **Loaded, idle**, **Loading or unloading** and **Not loaded**, each with where it is and
+  its size. Hover a model's name for what it does. **Every model in detail** opens the full table:
+  where each runs when indexing has the card and when it is quiet, its size, and when it was loaded
+  and last used.
+- **The last 6 hours**: a row for each model that was loaded, solid where it was on the card,
+  outlined where it was in RAM and underlined while it worked, under the card's mode and the work EiN
+  had waiting. A model loaded again and again shows as a row that flickers. The `gpu-sampler`
+  service records what the media service holds once a minute, for a week.
 - **Executing**: the requests running or waiting now, and the three lanes they go through, **models**,
   **tools** and **encodes**, each with how many run at once. When requests wait, a request a person
   is waiting on goes first. Then, when more than one system sends the media service work, the
@@ -284,6 +294,10 @@ how it is, again and again, while the tab is open.
 
 When the media service does not answer, the tab shows only **The media service is not answering**,
 with the address it tried.
+
+The **Work** tab's **Where the work is** ends with the media service's part: **At the media
+service**, its three lanes with their slots and the requests in them, and **On a model**, the models
+it holds, the working ones first and the search models apart.
 
 The **Overview** tab shows **GPU** and **VRAM** tiles beside the computer's own CPU and memory when
 the media service has a card. With no card, or no media service, they are not there.

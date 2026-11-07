@@ -226,7 +226,7 @@ podman compose up -d</code></pre></div>
 </div>
 <p>The media worker&#39;s budget is shared by cost: most jobs take 1 of it, and a video&#39;s encoding takes 2. With the default budget of 2, an encoding runs alone, while two smaller jobs can run together. Matching faces to people has a higher priority than encoding, so a queue of videos does not hold up people appearing in the interface.</p>
 <p><a href="../media/index.html#how-much-runs-at-once">Media</a> lists every setting of the two workers.</p>
-<p>The <code>models</code> worker takes turns between its kinds of work. It stays on one kind for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that faces, which keep coming during an import, do not hold back the transcripts. A kind it left because the media service refused several of its jobs in a row (<strong>waiting for EMS</strong>) is taken up again as soon as that rest ends, rather than an hour later.</p>
+<p>The <code>models</code> worker takes turns between its lines of work. It stays on one line for up to <strong>Model backlog rotation (ms)</strong> (<code>CFG_MODEL_KIND_QUANTUM_MS</code>, an hour) while others are waiting, so that a model stays loaded while it works, and faces, which keep coming during an import, do not hold back the transcripts. A line it left because the media service refused several of its jobs in a row (<strong>waiting for EMS</strong>) is taken up again as soon as that rest ends, rather than an hour later. The <strong>Work</strong> tab&#39;s <strong>Where the work is</strong> shows which line each worker is on and how much of its turn is left.</p>
 <p>The media service has its own limits on how much it runs at once, set in <code>~/ein/.env</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -320,7 +320,7 @@ podman image prune</code></pre></div>
 </tr>
 <tr>
 <td>The <strong>Dashboard</strong>&#39;s <strong>Work</strong> tab</td>
-<td>Each kind of work, what is left of it, how fast it goes, and when it will be done</td>
+<td>Where the work is, each line of work, what is left of it, how fast it goes, and when it will be done</td>
 </tr>
 <tr>
 <td><code>top</code></td>
@@ -332,7 +332,7 @@ podman image prune</code></pre></div>
 </tr>
 <tr>
 <td><code>pool-stat</code></td>
-<td>The backlog, rates and policy of each kind of work in the queues</td>
+<td>The backlog, rates and policy of each line of work in the queues, and each worker&#39;s slots and line</td>
 </tr>
 <tr>
 <td><code>gauges</code></td>

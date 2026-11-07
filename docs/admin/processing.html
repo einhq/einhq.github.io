@@ -107,9 +107,9 @@ running it.</p>
 <li><strong>The pipeline engine</strong> (the <code>pipeline-engine</code> service) matches changes to pipelines, creates an
 <strong>instance</strong> for each pipeline and node, and runs the short steps itself.</li>
 <li><strong>Pool workers</strong> run the long steps. A step that names a pool and a kind of job goes as a job into
-that pool, under <code>/var/pools/</code>, and a worker takes it when it has room. A worker is a service that
-runs <code>pipeline-worker</code>, which takes the kinds it names from one pool, as many at once as its
-capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
+that pool, under <code>/var/pools/</code>, in the <strong>line</strong> for its kind, and a worker takes it when it has
+room. A worker is a service that runs <code>pipeline-worker</code>, which takes from the lines it names in one
+pool, as many at once as its capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
 workers.</li>
 <li><strong>Background services</strong> of the modules turn changes into the events their pipelines wait for,
 and may announce work again on their own.</li>
@@ -126,8 +126,54 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <li>Choose the <strong>Work</strong> tab.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive&#39;s.</figcaption></figure>
-<p>The table has a row for every defined pipeline, also one that has never run, and a total row
-<strong>All pipelines</strong> at the foot. The bar draws the same counts as the columns.</p>
+<p>At the top, <strong>Where the work is</strong> draws the work as it moves, left to right, in the same five words
+the table below uses:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Place</th>
+<th>What it counts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Not started</strong></td>
+<td>Changes EiN has noticed and not made into work yet, by pipeline: a new photo that still needs its faces found</td>
+</tr>
+<tr>
+<td><strong>In line</strong></td>
+<td>Work that is made, with its next step waiting for a worker, or for an earlier step of its own</td>
+</tr>
+<tr>
+<td><strong>Running</strong></td>
+<td>Steps a worker is running this moment</td>
+</tr>
+<tr>
+<td><strong>Failed</strong></td>
+<td>Work that failed</td>
+</tr>
+<tr>
+<td><strong>Done</strong></td>
+<td>Work that finished</td>
+</tr>
+</tbody></table>
+</div>
+<ul>
+<li><strong>Not started</strong> names the pipelines with the most waiting.</li>
+<li><strong>In line</strong> shows the <strong>lines</strong>: a step that takes time, such as finding faces or reading the text
+in a picture, stands in the line for what it does, and a worker takes from the lines it serves.
+Each line sits under the workers that serve it. The line a worker is on now is outlined, and a line
+that is not moving says why, for example that the <code>models</code> worker is on <code>faces</code> for 41 more
+minutes. The <code>models</code> worker takes one line at a time, for up to an hour, so a model stays loaded
+while it works.</li>
+<li><strong>Running in EiN</strong> shows each worker with its slots, a square each, filled while in use, and the
+line it is on with how much of its turn is left.</li>
+<li>With the <a href="../ems/index.html">media service</a> installed, two more columns follow: its lanes, with
+their slots and the requests in them, and the models it holds, the working ones first.</li>
+</ul>
+<p>Under the board, each line that is not moving says why.</p>
+<p>The table below has a row for every pipeline that is doing something; the idle ones fold into one
+row, <strong>N pipelines idle</strong>, which <strong>show</strong> opens. A total row, <strong>All pipelines</strong>, is at the foot. The
+bar draws the same counts as the columns.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -136,11 +182,11 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Waiting</strong></td>
+<td><strong>Not started</strong></td>
 <td>Nodes the pipeline has matched but not yet started on: no instance yet</td>
 </tr>
 <tr>
-<td><strong>Queued</strong></td>
+<td><strong>In line</strong></td>
 <td>Instances that are started and waiting for a worker or for an earlier step</td>
 </tr>
 <tr>
@@ -152,7 +198,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <td>Instances that failed</td>
 </tr>
 <tr>
-<td><strong>Completed</strong></td>
+<td><strong>Done</strong></td>
 <td>Instances that finished, counting those pruned since. Taken once a minute, so it can be a minute old</td>
 </tr>
 <tr>
@@ -165,27 +211,26 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 </tr>
 <tr>
 <td><strong>Out</strong></td>
-<td>Instances completed in the last hour, the rate the ETA divides by</td>
+<td>Instances done in the last hour, the rate <strong>Finishes in</strong> divides by</td>
 </tr>
 <tr>
-<td><strong>ETA</strong></td>
-<td>When what is waiting will be done at that rate; <strong>no rate</strong> when nothing completed recently</td>
+<td><strong>Finishes in</strong></td>
+<td>When what is not started will be done at that rate; <strong>no rate</strong> when nothing finished recently</td>
 </tr>
 </tbody></table>
 </div>
 <p>Hover over the lightning sign beside a pipeline&#39;s name to see what starts it. Choose a row to open
 the pipeline&#39;s page.</p>
-<p>Below the table, <strong>Kinds of work</strong> lists what the pools hold, a row per kind of job: <strong>Left</strong>,
-<strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>ETA</strong> and <strong>Oldest waiting</strong>. This is where the slow steps are. A
-kind may carry a badge:</p>
+<p>Below the table, <strong>Lines</strong> lists each line with work: <strong>In line</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>,
+<strong>Finishes in</strong> and <strong>Oldest in line</strong>. This is where the slow steps are. A line may carry a badge:</p>
 <ul>
-<li><strong>waiting for EMS</strong>: five jobs of this kind in a row could not run yet, each for the first time,
+<li><strong>waiting for EMS</strong>: five jobs of this line in a row could not run yet, each for the first time,
 because a service they need was busy, loading a model, restarting or unreachable; for the
-Archive&#39;s steps that service is the media service. The jobs are not failed. The kind rests for
+Archive&#39;s steps that service is the media service. The jobs are not failed. The line rests for
 30 seconds, then twice as long each time it rests again, up to 10 minutes; hover over the badge
-for the next try. A worker that turned to other work for the rest comes back to this kind when
+for the next try. A worker that turned to other work for the rest comes back to this line when
 the rest ends.</li>
-<li><strong>no worker</strong>: no running worker takes this kind, so the jobs will never run.</li>
+<li><strong>no worker</strong>: no running worker serves this line, so its jobs will never run.</li>
 </ul>
 <p><strong>Ongoing</strong> lists the instances with a step running, with the target file, how far the step has
 come and how long it has run. <strong>Progress</strong> is filled in for a step that says how much of its work is
@@ -196,7 +241,7 @@ nothing stops a step for taking long.&quot; No step is stopped for taking long; 
 to look at, not a fault in itself.</p>
 <p>Two warnings can appear above the tabs or the table:</p>
 <ul>
-<li><strong>Work that nothing will run</strong> names each kind that has jobs and no worker, and the pipelines
+<li><strong>Work that nothing will run</strong> names each line that has jobs and no worker, and the pipelines
 that queue it. See <a href="#work-that-nothing-will-run">Work that nothing will run</a>.</li>
 <li><strong>N dropped</strong>, above the table, counts events that failed every delivery attempt. See
 <a href="#dropped-events">Dropped events</a>.</li>
@@ -207,7 +252,7 @@ that queue it. See <a href="#work-that-nothing-will-run">Work that nothing will 
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 health                          <span class="hljs-comment"># the verdict in one line, and each check that decides it</span>
 pipeline-overview               <span class="hljs-comment"># instances by pipeline, unfinished steps, queues, completions in the last hour</span>
-pool-stat                       <span class="hljs-comment"># each pool and kind: what is left, how fast, workers and what they take</span>
+pool-stat                       <span class="hljs-comment"># each pool and line: what is left, how fast, each worker, its slots and line</span>
 pipeline-instances -s failed    <span class="hljs-comment"># the failed instances, newest first</span>
 top                             <span class="hljs-comment"># all of it live, with CPU, memory and services; q quits</span></code></pre></div>
 <p><code>pipeline-instances</code> lists 100 at a time and prints <code>(more: --after …)</code> when there are more; pass
@@ -238,7 +283,7 @@ status and the steps: <strong>Step</strong>, <strong>Status</strong>, <strong>De
 </tr>
 <tr>
 <td><code>waiting</code></td>
-<td>Waits in a pool for a worker; the pool and kind are shown beside it, and &quot;retrying&quot; if it ran before</td>
+<td>Waits in a pool for a worker; the pool and line are shown beside it, and &quot;retrying&quot; if it ran before</td>
 </tr>
 <tr>
 <td><code>running</code></td>
@@ -273,8 +318,8 @@ otherwise, before the instance fails. Two kinds of failure are treated different
 <ul>
 <li><strong>A service the step needs could not do it yet.</strong> The step goes back to wait with its attempt
 given back, and is tried again after 30 seconds, then twice as long each time up to 10 minutes;
-the other jobs of its kind run meanwhile. When five in a row are refused, each for the first
-time, the whole kind rests, as <strong>waiting for EMS</strong> shows; a job refused again does not count. Nothing fails however long the service is away. The Archive&#39;s
+the other jobs of its line run meanwhile. When five in a row are refused, each for the first
+time, the whole line rests, as <strong>waiting for EMS</strong> shows; a job refused again does not count. Nothing fails however long the service is away. The Archive&#39;s
 steps fail this way while the media service is busy or away, or when the graphics card has no
 room for the model a file needs.</li>
 <li><strong>The file itself cannot be processed</strong>, such as bytes no decoder can open. The step fails at
@@ -357,7 +402,7 @@ pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code><
 <p>Only an administrator sees these buttons, and only an administrator can run these commands. On an
 instance&#39;s page, <strong>Remove</strong> is under ⋮ in the header&#39;s corner.</p>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
-<p>A kind with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Dashboard</strong>
+<p>A line with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Dashboard</strong>
 and <code>health</code> (as a failed check <code>kind &lt;name&gt;</code>) both say so. The usual cause is that the worker
 service is stopped:</p>
 <ol>
@@ -366,11 +411,11 @@ with the Archive installed, they are <code>media-worker</code> and <code>models<
 <li>Start the one that is stopped, or read its log if it keeps stopping.
 <a href="services-logs.html">Services and logs</a> shows how.</li>
 </ol>
-<p>When no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline
+<p>When no defined pipeline queues the line any more, the jobs belong to instances whose pipeline
 changed or is gone, and the warning says what to do in each case:</p>
 <ul>
-<li><p>The pipeline now queues that step under another kind. Cancel the jobs, with the pool&#39;s path, such
-as the Archive&#39;s <code>/var/pools/media</code>, and the engine queues them again under the new kind within a
+<li><p>The pipeline now queues that step in another line. Cancel the jobs, with the pool&#39;s path, such
+as the Archive&#39;s <code>/var/pools/media</code>, and the engine queues them again in the new line within a
 minute:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 pool-cancel /var/pools/media --kind &lt;kind&gt;</code></pre></div>
@@ -393,13 +438,13 @@ queue-dead --retry /var/queues/pipeline-engine   <span class="hljs-comment"># pu
 queue-dead --drop /var/queues/pipeline-engine    <span class="hljs-comment"># delete them</span></code></pre></div>
 <p><code>--id</code> limits <code>--retry</code> or <code>--drop</code> to one entry.</p>
 <h3 id="steps-waiting-for-a-service">Steps waiting for a service<a class="anchor" href="#steps-waiting-for-a-service" aria-label="Link to this section"></a></h3>
-<p>When <strong>waiting for EMS</strong> stays on a kind, the service its steps need is the place to look; for the
+<p>When <strong>waiting for EMS</strong> stays on a line, the service its steps need is the place to look; for the
 Archive&#39;s steps it is the media service, and <a href="../ems/index.html">The media service</a> shows how to
-check it. Once it answers again, the kind tries on its own at its next try. To try at once (the
+check it. Once it answers again, the line tries on its own at its next try. To try at once (the
 steps that were refused still wait out their own pause):</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-pool-wake               <span class="hljs-comment"># every resting kind</span>
-pool-wake transcribe    <span class="hljs-comment"># one kind</span></code></pre></div>
+pool-wake               <span class="hljs-comment"># every resting line</span>
+pool-wake transcribe    <span class="hljs-comment"># one line</span></code></pre></div>
 <h2 id="run-work-again-on-purpose">Run work again on purpose<a class="anchor" href="#run-work-again-on-purpose" aria-label="Link to this section"></a></h2>
 <p><code>pipeline-start</code> runs one pipeline on one node:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>

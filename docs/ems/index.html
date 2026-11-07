@@ -483,11 +483,21 @@ with <code>×</code> and the number of restarts), <strong>card</strong>, <strong
 <li><strong>Graphics card mode</strong>, when there is a card: who has the card now (see
 <a href="#the-graphics-card">The graphics card</a> below).</li>
 <li>An orange box for each degradation, such as <code>gpu degraded</code>, and a yellow one for each warning.</li>
-<li><strong>Graphics card memory</strong>: the card&#39;s memory split by process, the media service&#39;s workers and
-everything <strong>outside EMS</strong>, and what is free; <strong>GPU load</strong>, <strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
-<li><strong>Models</strong>: every model the media service can load, loaded or not, with <strong>Status</strong> (for example
-<strong>GPU loaded</strong> or <strong>CPU loading</strong>), <strong>Loaded</strong>, <strong>Last used</strong>, <strong>Size</strong> and <strong>Activity</strong>. Hover a
-model&#39;s name for what it does. The heading counts them: for example <code>3 of 15 loaded · 2 on the GPU</code>.</li>
+<li><strong>Where the models are</strong>: two bars. <strong>Graphics card</strong> splits the card&#39;s memory into each model on
+it, the media service&#39;s own runtime there, the <strong>chat model and others</strong> that share the card, and
+what is free. <strong>RAM</strong> splits the media service&#39;s memory into each model held there and its workers&#39;
+own. A search model drawn hatched, as <strong>standby</strong>, is in RAM as well as on the card while the card
+is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
+card, so search never stops. Under the bars, <strong>GPU load</strong>, <strong>Batch worker RAM</strong> and <strong>Query worker RAM</strong>.</li>
+<li><strong>Models</strong>: every model the media service can load, in four columns by what it is doing,
+<strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> and <strong>Not loaded</strong>, each with where it is and
+its size. Hover a model&#39;s name for what it does. <strong>Every model in detail</strong> opens the full table:
+where each runs when indexing has the card and when it is quiet, its size, and when it was loaded
+and last used.</li>
+<li><strong>The last 6 hours</strong>: a row for each model that was loaded, solid where it was on the card,
+outlined where it was in RAM and underlined while it worked, under the card&#39;s mode and the work EiN
+had waiting. A model loaded again and again shows as a row that flickers. The <code>gpu-sampler</code>
+service records what the media service holds once a minute, for a week.</li>
 <li><strong>Executing</strong>: the requests running or waiting now, and the three lanes they go through, <strong>models</strong>,
 <strong>tools</strong> and <strong>encodes</strong>, each with how many run at once. When requests wait, a request a person
 is waiting on goes first. Then, when more than one system sends the media service work, the
@@ -498,6 +508,9 @@ another has waited five minutes.</li>
 </ul>
 <p>When the media service does not answer, the tab shows only <strong>The media service is not answering</strong>,
 with the address it tried.</p>
+<p>The <strong>Work</strong> tab&#39;s <strong>Where the work is</strong> ends with the media service&#39;s part: <strong>At the media
+service</strong>, its three lanes with their slots and the requests in them, and <strong>On a model</strong>, the models
+it holds, the working ones first and the search models apart.</p>
 <p>The <strong>Overview</strong> tab shows <strong>GPU</strong> and <strong>VRAM</strong> tiles beside the computer&#39;s own CPU and memory when
 the media service has a card. With no card, or no media service, they are not there.</p>
 <figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The GPU and VRAM tiles are the media service&#39;s card; they show only when it has one</figcaption></figure>

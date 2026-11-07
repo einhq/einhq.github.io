@@ -21,9 +21,9 @@ Work is done in three places:
 - **The pipeline engine** (the `pipeline-engine` service) matches changes to pipelines, creates an
   **instance** for each pipeline and node, and runs the short steps itself.
 - **Pool workers** run the long steps. A step that names a pool and a kind of job goes as a job into
-  that pool, under `/var/pools/`, and a worker takes it when it has room. A worker is a service that
-  runs `pipeline-worker`, which takes the kinds it names from one pool, as many at once as its
-  capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
+  that pool, under `/var/pools/`, in the **line** for its kind, and a worker takes it when it has
+  room. A worker is a service that runs `pipeline-worker`, which takes from the lines it names in one
+  pool, as many at once as its capacity allows. Core runs no workers of its own; a module that brings pipelines brings their
   workers.
 - **Background services** of the modules turn changes into the events their pipelines wait for,
   and may announce work again on their own.
@@ -42,35 +42,60 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 
 ![The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive's.")
 
-The table has a row for every defined pipeline, also one that has never run, and a total row
-**All pipelines** at the foot. The bar draws the same counts as the columns.
+At the top, **Where the work is** draws the work as it moves, left to right, in the same five words
+the table below uses:
 
-| Column        | What it counts                                                                                       |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| **Waiting**   | Nodes the pipeline has matched but not yet started on: no instance yet                               |
-| **Queued**    | Instances that are started and waiting for a worker or for an earlier step                           |
-| **Running**   | Instances with a step running this moment                                                            |
-| **Failed**    | Instances that failed                                                                                |
-| **Completed** | Instances that finished, counting those pruned since. Taken once a minute, so it can be a minute old |
-| **Cancelled** | Instances stopped on purpose                                                                         |
-| **In**        | Jobs that arrived per hour, over the last hour                                                       |
-| **Out**       | Instances completed in the last hour, the rate the ETA divides by                                    |
-| **ETA**       | When what is waiting will be done at that rate; **no rate** when nothing completed recently          |
+| Place           | What it counts                                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Not started** | Changes EiN has noticed and not made into work yet, by pipeline: a new photo that still needs its faces found |
+| **In line**     | Work that is made, with its next step waiting for a worker, or for an earlier step of its own                 |
+| **Running**     | Steps a worker is running this moment                                                                         |
+| **Failed**      | Work that failed                                                                                              |
+| **Done**        | Work that finished                                                                                            |
+
+- **Not started** names the pipelines with the most waiting.
+- **In line** shows the **lines**: a step that takes time, such as finding faces or reading the text
+  in a picture, stands in the line for what it does, and a worker takes from the lines it serves.
+  Each line sits under the workers that serve it. The line a worker is on now is outlined, and a line
+  that is not moving says why, for example that the `models` worker is on `faces` for 41 more
+  minutes. The `models` worker takes one line at a time, for up to an hour, so a model stays loaded
+  while it works.
+- **Running in EiN** shows each worker with its slots, a square each, filled while in use, and the
+  line it is on with how much of its turn is left.
+- With the [media service](../ems/index.md) installed, two more columns follow: its lanes, with
+  their slots and the requests in them, and the models it holds, the working ones first.
+
+Under the board, each line that is not moving says why.
+
+The table below has a row for every pipeline that is doing something; the idle ones fold into one
+row, **N pipelines idle**, which **show** opens. A total row, **All pipelines**, is at the foot. The
+bar draws the same counts as the columns.
+
+| Column          | What it counts                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| **Not started** | Nodes the pipeline has matched but not yet started on: no instance yet                               |
+| **In line**     | Instances that are started and waiting for a worker or for an earlier step                           |
+| **Running**     | Instances with a step running this moment                                                            |
+| **Failed**      | Instances that failed                                                                                |
+| **Done**        | Instances that finished, counting those pruned since. Taken once a minute, so it can be a minute old |
+| **Cancelled**   | Instances stopped on purpose                                                                         |
+| **In**          | Jobs that arrived per hour, over the last hour                                                       |
+| **Out**         | Instances done in the last hour, the rate **Finishes in** divides by                                 |
+| **Finishes in** | When what is not started will be done at that rate; **no rate** when nothing finished recently       |
 
 Hover over the lightning sign beside a pipeline's name to see what starts it. Choose a row to open
 the pipeline's page.
 
-Below the table, **Kinds of work** lists what the pools hold, a row per kind of job: **Left**,
-**Running**, **In**, **Out**, **ETA** and **Oldest waiting**. This is where the slow steps are. A
-kind may carry a badge:
+Below the table, **Lines** lists each line with work: **In line**, **Running**, **In**, **Out**,
+**Finishes in** and **Oldest in line**. This is where the slow steps are. A line may carry a badge:
 
-- **waiting for EMS**: five jobs of this kind in a row could not run yet, each for the first time,
+- **waiting for EMS**: five jobs of this line in a row could not run yet, each for the first time,
   because a service they need was busy, loading a model, restarting or unreachable; for the
-  Archive's steps that service is the media service. The jobs are not failed. The kind rests for
+  Archive's steps that service is the media service. The jobs are not failed. The line rests for
   30 seconds, then twice as long each time it rests again, up to 10 minutes; hover over the badge
-  for the next try. A worker that turned to other work for the rest comes back to this kind when
+  for the next try. A worker that turned to other work for the rest comes back to this line when
   the rest ends.
-- **no worker**: no running worker takes this kind, so the jobs will never run.
+- **no worker**: no running worker serves this line, so its jobs will never run.
 
 **Ongoing** lists the instances with a step running, with the target file, how far the step has
 come and how long it has run. **Progress** is filled in for a step that says how much of its work is
@@ -82,7 +107,7 @@ to look at, not a fault in itself.
 
 Two warnings can appear above the tabs or the table:
 
-- **Work that nothing will run** names each kind that has jobs and no worker, and the pipelines
+- **Work that nothing will run** names each line that has jobs and no worker, and the pipelines
   that queue it. See [Work that nothing will run](#work-that-nothing-will-run).
 - **N dropped**, above the table, counts events that failed every delivery attempt. See
   [Dropped events](#dropped-events).
@@ -96,7 +121,7 @@ Everything on the **Work** tab comes from ordinary commands, which you can run i
 # in EiN's terminal
 health                          # the verdict in one line, and each check that decides it
 pipeline-overview               # instances by pipeline, unfinished steps, queues, completions in the last hour
-pool-stat                       # each pool and kind: what is left, how fast, workers and what they take
+pool-stat                       # each pool and line: what is left, how fast, each worker, its slots and line
 pipeline-instances -s failed    # the failed instances, newest first
 top                             # all of it live, with CPU, memory and services; q quits
 ```
@@ -120,7 +145,7 @@ status and the steps: **Step**, **Status**, **Depends on**, **Command** and **Du
 | ----------- | ---------------------------------------------------------------------------------------------------- |
 | `pending`   | Waits for the steps it depends on                                                                    |
 | `queued`    | Waits for a free place in the engine                                                                 |
-| `waiting`   | Waits in a pool for a worker; the pool and kind are shown beside it, and "retrying" if it ran before |
+| `waiting`   | Waits in a pool for a worker; the pool and line are shown beside it, and "retrying" if it ran before |
 | `running`   | Runs now; "last output … ago" says when it last wrote anything                                       |
 | `completed` | Finished                                                                                             |
 | `failed`    | Failed on its last attempt                                                                           |
@@ -147,8 +172,8 @@ otherwise, before the instance fails. Two kinds of failure are treated different
 
 - **A service the step needs could not do it yet.** The step goes back to wait with its attempt
   given back, and is tried again after 30 seconds, then twice as long each time up to 10 minutes;
-  the other jobs of its kind run meanwhile. When five in a row are refused, each for the first
-  time, the whole kind rests, as **waiting for EMS** shows; a job refused again does not count. Nothing fails however long the service is away. The Archive's
+  the other jobs of its line run meanwhile. When five in a row are refused, each for the first
+  time, the whole line rests, as **waiting for EMS** shows; a job refused again does not count. Nothing fails however long the service is away. The Archive's
   steps fail this way while the media service is busy or away, or when the graphics card has no
   room for the model a file needs.
 - **The file itself cannot be processed**, such as bytes no decoder can open. The step fails at
@@ -217,7 +242,7 @@ instance's page, **Remove** is under ⋮ in the header's corner.
 
 ### Work that nothing will run
 
-A kind with jobs and no worker never moves. **Work that nothing will run** on the **Dashboard**
+A line with jobs and no worker never moves. **Work that nothing will run** on the **Dashboard**
 and `health` (as a failed check `kind <name>`) both say so. The usual cause is that the worker
 service is stopped:
 
@@ -226,11 +251,11 @@ service is stopped:
 2. Start the one that is stopped, or read its log if it keeps stopping.
    [Services and logs](services-logs.md) shows how.
 
-When no defined pipeline queues the kind any more, the jobs belong to instances whose pipeline
+When no defined pipeline queues the line any more, the jobs belong to instances whose pipeline
 changed or is gone, and the warning says what to do in each case:
 
-- The pipeline now queues that step under another kind. Cancel the jobs, with the pool's path, such
-  as the Archive's `/var/pools/media`, and the engine queues them again under the new kind within a
+- The pipeline now queues that step in another line. Cancel the jobs, with the pool's path, such
+  as the Archive's `/var/pools/media`, and the engine queues them again in the new line within a
   minute:
 
   ```bash
@@ -262,15 +287,15 @@ queue-dead --drop /var/queues/pipeline-engine    # delete them
 
 ### Steps waiting for a service
 
-When **waiting for EMS** stays on a kind, the service its steps need is the place to look; for the
+When **waiting for EMS** stays on a line, the service its steps need is the place to look; for the
 Archive's steps it is the media service, and [The media service](../ems/index.md) shows how to
-check it. Once it answers again, the kind tries on its own at its next try. To try at once (the
+check it. Once it answers again, the line tries on its own at its next try. To try at once (the
 steps that were refused still wait out their own pause):
 
 ```bash
 # in EiN's terminal
-pool-wake               # every resting kind
-pool-wake transcribe    # one kind
+pool-wake               # every resting line
+pool-wake transcribe    # one line
 ```
 
 ## Run work again on purpose

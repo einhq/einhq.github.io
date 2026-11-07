@@ -263,8 +263,9 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <ul>
 <li><strong>Media service</strong>, at the top, names the <strong>card</strong> and its <strong>driver</strong>.</li>
 <li><strong>Graphics card mode</strong> says who has the card now: <strong>busy</strong> while indexing has it and search runs on the processor, <strong>quiet</strong> when there is no indexing work and search runs on the card as far as it fits, <strong>switching</strong> while it is handed over. With no card to share, or with <code>EMS_CARD_QUIET_AFTER=0</code>, the mode is off and the tab leaves this out.</li>
-<li><strong>Graphics card memory</strong> splits the card&#39;s memory by process: the media service&#39;s batch, query and card workers, its other processes such as transcodes, and <strong>outside EMS</strong>, which is the language model when it shares the card.</li>
-<li>The list of models gives each copy its place, <strong>GPU</strong> or <strong>CPU</strong>, and whether it is loaded.</li>
+<li><strong>Where the models are</strong> splits the card&#39;s memory into each model on it, the media service&#39;s own runtime, and the <strong>chat model and others</strong>, which is the language model when it shares the card; and the media service&#39;s RAM into each model there. A search model in RAM while it is also on the card is its <strong>standby</strong> copy.</li>
+<li><strong>Models</strong> puts every model under what it is doing, <strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> or <strong>Not loaded</strong>, with its place, <strong>GPU</strong> or <strong>RAM</strong>, and size.</li>
+<li><strong>The last 6 hours</strong> shows which models were on the card and in RAM, and when.</li>
 </ul>
 <p>The same is in EiN&#39;s terminal. <a href="commands.html#ems-status"><code>ems-status</code></a> shows every model and the device it is on, <code>ems-status --checks</code> the checks health reads, and <a href="commands.html#ems-gpu"><code>ems-gpu</code></a> the card&#39;s use and memory now:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -373,7 +374,7 @@ podman compose up -d</code></pre></div>
 </tr>
 <tr>
 <td>Models show <strong>CPU</strong> on the <strong>Media service</strong> tab while the card has room</td>
-<td>The card may be full at that moment, or held by the language model. Look at <strong>Graphics card memory</strong>, and set the <a href="#share-one-card-with-the-language-model">share</a> when the two use one card.</td>
+<td>The card may be full at that moment, or held by the language model. Look at <strong>Where the models are</strong>, and set the <a href="#share-one-card-with-the-language-model">share</a> when the two use one card.</td>
 </tr>
 <tr>
 <td>The chat answers slowly on a machine with a card</td>
