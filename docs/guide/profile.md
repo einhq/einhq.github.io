@@ -59,7 +59,7 @@ linked to her page among the **People**, and then:
 - your picture in the top bar and on your profile is her cover photo;
 - the account menu has **Me** above **Favourites**, which opens her page;
 - **News** on **Home** shows her picture beside the albums you add;
-- a comment you write on a picture is signed with her full name and picture;
+- her picture is beside your name on the comments you write on a picture;
 - an event or note you add to an album starts with her under **Written by**;
 - staging uses her homes to tell a trip from days at home when it suggests albums; see
   [Sorting in staging](../archive/staging.md).
