@@ -410,71 +410,43 @@ them, all set up by <code>setup.sh</code>:</p>
 <td>48 random hexadecimal characters</td>
 </tr>
 <tr>
-<td>The folders</td>
-<td>The same four folders under the data folder, mounted at the same paths in both containers</td>
-<td>see below</td>
+<td>The files&#39; way</td>
+<td><code>CFG_EMS_FILES_ADDRESS</code> for EiN, which <code>setup.sh</code> writes</td>
+<td><code>ein:2224</code>, or <code>host.containers.internal:2224</code>; see below</td>
 </tr>
 </tbody></table>
 </div>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Path in both containers</th>
-<th>What it holds</th>
-<th>The media service may</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/files</code></td>
-<td>your originals</td>
-<td>read</td>
-</tr>
-<tr>
-<td><code>/old</code></td>
-<td>older originals</td>
-<td>read</td>
-</tr>
-<tr>
-<td><code>/files-volatile</code></td>
-<td>the renditions</td>
-<td>read and write</td>
-</tr>
-<tr>
-<td><code>/files-tmp</code></td>
-<td>scratch space</td>
-<td>read and write</td>
-</tr>
-</tbody></table>
-</div>
-<p>Because a path means the same file on both sides, nothing is ever copied between them, and the
-media service can never change an original. It refuses any path outside these four.</p>
 <p>The key is a secret: no shell in EiN sees it, and the settings page never shows it once it is set.
-The media service accepts a request only with that key. Leave <code>CFG_EMS_URL</code>, <code>EMS_KEY</code>, <code>EMS_PORT</code>
-and <code>EMS_ROOTS</code> as <code>setup.sh</code> and the compose files set them; <a href="../admin/configuration.html">Configuration</a>
+The media service accepts a request only with that key. Leave <code>CFG_EMS_URL</code>, <code>EMS_KEY</code> and
+<code>EMS_PORT</code> as <code>setup.sh</code> and the compose files set them; <a href="../admin/configuration.html">Configuration</a>
 explains how a value set in the deployment relates to the settings page.</p>
-<h3 id="a-media-service-without-eins-folders">A media service without EiN&#39;s folders<a class="anchor" href="#a-media-service-without-eins-folders" aria-label="Link to this section"></a></h3>
-<p>A media service that does not mount the four folders, such as one on another machine, can reach the
-files of its requests through EiN instead. Set <code>CFG_EMS_FILES_ADDRESS</code> to the <code>host:port</code> the media
-service reaches EiN&#39;s machine at, with the port <code>CFG_EMS_FILES_PORT</code> (2224): EiN&#39;s <code>ems-files</code>
-service then listens there, and every request EiN sends the media service names it. The media
-service mounts it with sshfs, reads the request&#39;s files through the mount, and writes what it made
-back through it before it answers:</p>
+<h3 id="how-the-media-service-reaches-your-files">How the media service reaches your files<a class="anchor" href="#how-the-media-service-reaches-your-files" aria-label="Link to this section"></a></h3>
+<p>The media service mounts none of EiN&#39;s folders. It reaches the files of each request through EiN&#39;s
+<code>ems-files</code> service, on the port <code>CFG_EMS_FILES_PORT</code> (2224), at the address
+<code>CFG_EMS_FILES_ADDRESS</code> names: EiN&#39;s name on the compose network, or, when EiN has a network of its
+own under rootless podman, the machine&#39;s own address, where <code>setup.sh</code> publishes the port. Every
+request EiN sends names it, and the media service mounts it with sshfs, reads the request&#39;s files
+through the mount, and writes what it made back through it before it answers:</p>
 <ul>
-<li>Only the files of requests in flight are reachable, each only while its request runs: the files
-it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
-renamed.</li>
-<li>A tool reads only the part of a file it needs, as it would on a shared folder, and what was read
-stays cached for the next step on the same file until the file changes.</li>
+<li>Each request has a folder of its own there, and each file in it a name of its own: a number and
+the file&#39;s name in EiN, such as <code>0-IMG_0001.JPG</code>. The media service never sees where a file is in
+EiN or on the disk.</li>
+<li>Only the files of requests in flight are there, each only while its request runs: the files it
+reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or renamed,
+and your originals can never be changed.</li>
+<li>A tool reads only the part of a file it needs, as it would on a folder of its own, and what was
+read stays cached for the next step on the same file until the file changes.</li>
 <li>The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
 <code>ems-files</code> starts and reach the media service in each request, so there is nothing to configure
 on the media service&#39;s side.</li>
 <li>The media service&#39;s container has <code>/dev/fuse</code> and the <code>SYS_ADMIN</code> capability for the mount, which
 <code>setup.sh</code> gives it. Without a mount it refuses the request, and the step that sent it waits and
-tries again, as when the media service is away.</li>
+tries again, as when the media service is away. While <code>CFG_EMS_FILES_ADDRESS</code> is empty, EiN sends
+no request that names a file, and those steps wait the same way.</li>
 </ul>
-<p>Set the two settings in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes the port on
-<code>EIN_BIND</code>. Every file crosses the network, so the shared folders stay the faster way on one
-machine.</p>
+<p>A media service on another machine reaches EiN&#39;s machine at the address you set: put
+<code>CFG_EMS_FILES_ADDRESS</code>, as <code>host:port</code>, in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes
+the port on <code>EIN_BIND</code>.</p>
 <h4 id="faster-reading-through-the-mount">Faster reading through the mount<a class="anchor" href="#faster-reading-through-the-mount" aria-label="Link to this section"></a></h4>
 <p>The kernel reads ahead only 128 KiB on an sshfs mount, so a big video comes through at a fraction of
 what the network carries. On the machine the media service runs on, a rule for udev raises it to 4
@@ -864,7 +836,7 @@ and podman downloads or builds it in a folder beside its own storage, not in <co
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#models-tools-and-their-licences">Models, tools and their licences</a></li><li class="nested"><a href="#using-ein-commercially">Using EiN commercially</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li class="nested"><a href="#a-media-service-without-eins-folders">A media service without EiN's folders</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#models-tools-and-their-licences">Models, tools and their licences</a></li><li class="nested"><a href="#using-ein-commercially">Using EiN commercially</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li class="nested"><a href="#how-the-media-service-reaches-your-files">How the media service reaches your files</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-dashboard">On the dashboard</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -106,15 +106,16 @@ than your originals. The deployment sets the two places with `FILE_ROOT_PATH` an
 In a standard install, the data folder is `~/ein/data` unless you chose another place at the
 install. EiN sees its folders at fixed paths inside its container:
 
-| Folder in the data folder | Path inside EiN   | What it holds                                                                                                           |
-| ------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `files`                   | `/files`          | the `disk` tier: your originals                                                                                         |
-| `files-volatile`          | `/files-volatile` | the `volatile` tier: thumbnails and other renditions                                                                    |
-| `files-tmp`               | `/files-tmp`      | scratch space, such as copies of `db`-tier content handed to the media service                                          |
-| `old`                     | `/old`            | files kept from an older installation, which the media service reads but never writes; empty unless you put files there |
+| Folder in the data folder | Path inside EiN   | What it holds                                                                                             |
+| ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `files`                   | `/files`          | the `disk` tier: your originals                                                                           |
+| `files-volatile`          | `/files-volatile` | the `volatile` tier: thumbnails and other renditions                                                      |
+| `files-tmp`               | `/files-tmp`      | scratch space for temporary files                                                                         |
+| `old`                     | `/old`            | files kept from an older installation, which EiN reads but never writes; empty unless you put files there |
 
-The media service, which the Archive needs, mounts the same folders at the same paths, so a path EiN hands it is the file it
-opens, and the files on the `disk` and `volatile` tiers are never copied between them. It may read your originals but never write them.
+The media service, which the Archive needs, mounts none of these folders: it reaches the files of each request through EiN,
+which serves it those files alone, by names of their own, while the request runs. A tool there reads only the part of a file it
+needs, so the files on the `disk` and `volatile` tiers are not copied before it starts. It may read your originals but never write them.
 [Installing in detail](../admin/install.md#the-data-folder) has the whole layout, and
 [The media service](../ems/index.md) how the two share it.
 

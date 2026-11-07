@@ -575,7 +575,7 @@ podman compose down
 </div>
 <p>Leave the files from ein/deploy as they are: the installer and every run of <code>setup.sh</code> update the folder with <code>git pull --ff-only</code>, which stops when a file you changed is in its way. What you want to change goes in <code>.env</code>, which git ignores.</p>
 <h3 id="the-data-folder">The data folder<a class="anchor" href="#the-data-folder" aria-label="Link to this section"></a></h3>
-<p><code>setup.sh</code> makes these folders in <code>EIN_DATA</code> on every run. Both EiN and the media service mount the first four at the same paths, so a path EiN hands the media service is the path it opens.</p>
+<p><code>setup.sh</code> makes these folders in <code>EIN_DATA</code> on every run. EiN mounts the first four; the media service mounts none of them, and reaches the files of each request through EiN (<a href="../ems/index.html#how-the-media-service-reaches-your-files">The media service</a>).</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -774,7 +774,7 @@ EIN_DB_DIR=</code></pre></div>
 </div>
 <p>When a change does not take, <code>podman compose up -d --force-recreate</code> makes every container again. With Docker, write <code>docker compose</code> for <code>podman compose</code>.</p>
 <p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, which <code>setup.sh</code> gives each one: the media service&#39;s idle models then go to swap, and a search waits for them. <code>~/ein/setup.sh</code> makes the containers again with it.</p>
-<p>Some of EiN&#39;s environment is set by <code>compose.yaml</code> and wins over a line in <code>.env</code>: <code>POSTGRES_URL</code>, <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code> (always 8080 and 2222 inside the container), the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code> (from <code>EMS_KEY</code>), and the folder paths. For the media service, <code>EMS_PORT</code>, <code>EMS_KEY</code> and <code>EMS_ROOTS</code> are set the same way.</p>
+<p>Some of EiN&#39;s environment is set by <code>compose.yaml</code> and wins over a line in <code>.env</code>: <code>POSTGRES_URL</code>, <code>CFG_HTTP_PORT</code> and <code>CFG_SSH_PORT</code> (always 8080 and 2222 inside the container), the <code>ems</code> module&#39;s <code>CFG_EMS_URL</code> and <code>CFG_EMS_KEY</code> (from <code>EMS_KEY</code>), and the folder paths. For the media service, <code>EMS_PORT</code> and <code>EMS_KEY</code> are set the same way. <code>setup.sh</code> writes the <code>ems</code> module&#39;s <code>CFG_EMS_FILES_ADDRESS</code> into <code>compose.override.yaml</code> unless <code>.env</code> names one.</p>
 <h2 id="run-ein-day-to-day">Run EiN day to day<a class="anchor" href="#run-ein-day-to-day" aria-label="Link to this section"></a></h2>
 <p>Run compose from <code>~/ein</code>, where it finds the project and its <code>.env</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>

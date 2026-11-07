@@ -96,13 +96,13 @@
 <p><a href="#ems-files">ems-files</a> · <a href="#ems-files-grant">ems-files-grant</a> · <a href="#ems-gpu">ems-gpu</a> · <a href="#ems-gpu-sample">ems-gpu-sample</a> · <a href="#ems-status">ems-status</a> · <a href="#ems-text-embed">ems-text-embed</a></p>
 <h2 id="e">E<a class="anchor" href="#e" aria-label="Link to this section"></a></h2>
 <h3 id="ems-files"><code>ems-files</code><a class="anchor" href="#ems-files" aria-label="Link to this section"></a></h3>
-<p>Serve the files of the media service&#39;s requests in flight over SFTP, for an EMS that does not mount EiN&#39;s files (the ems-files service)</p>
+<p>Serve the media service the files of its requests in flight over SFTP, the only way it reaches EiN&#39;s files (the ems-files service)</p>
 <p><small>administrators only · changes things</small></p>
 <div class="code"><pre tabindex="0"><code>ems-files</code></pre></div>
 <h3 id="ems-files-grant"><code>ems-files-grant</code><a class="anchor" href="#ems-files-grant" aria-label="Link to this section"></a></h3>
-<p>Grant paths through ems-files for a while and print the EMS-Files header that reaches them, to try a media service&#39;s way to EiN&#39;s files by hand.</p>
+<p>Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service&#39;s way to EiN&#39;s files by hand.</p>
 <p><small>administrators only · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>ems-files-grant [--read=&lt;string&gt;] [--write=&lt;string&gt;] [--dir=&lt;string&gt;] [--seconds=&lt;string&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>ems-files-grant [--read=&lt;string&gt;] [--write=&lt;string&gt;] [--seconds=&lt;string&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -112,24 +112,20 @@
 </thead>
 <tbody><tr>
 <td><code>--read=&lt;string&gt;</code></td>
-<td>A file to read, as a physical path; may be given more than once.</td>
+<td>A file to read, as a VFS path or a path on disk; may be given more than once.</td>
 </tr>
 <tr>
 <td><code>--write=&lt;string&gt;</code></td>
 <td>A file to write; may be given more than once.</td>
 </tr>
 <tr>
-<td><code>--dir=&lt;string&gt;</code></td>
-<td>A directory to write files into; may be given more than once.</td>
-</tr>
-<tr>
 <td><code>--seconds=&lt;string&gt;</code></td>
-<td>How long the grant lasts (default 300)</td>
+<td>How long the names last (default 300)</td>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>ems-files-grant --<span class="hljs-built_in">read</span> /files/ab/01EXAMPLE --seconds 120</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the EMS-Files header value: address, user, secret and host key.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>ems-files-grant --<span class="hljs-built_in">read</span> /archive/albums/Exempelalbum_2019/IMG_0001.JPG --seconds 120</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: the EMS-Files header value, then a line per path: read or write, its name, the path.</p>
 <h3 id="ems-gpu"><code>ems-gpu</code><a class="anchor" href="#ems-gpu" aria-label="Link to this section"></a></h3>
 <p>The media service&#39;s GPU now, with the last six hours of utilization and VRAM.</p>
 <p><small>reads only</small></p>

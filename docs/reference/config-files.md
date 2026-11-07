@@ -151,7 +151,7 @@ Under podman every service gets `restart: always`, the policy podman starts agai
 | `modules`        | `/modules-installed`                       | The modules EiN installed, which it sees in its tree at `/var/lib/modules`. |
 | `llm`            | not in EiN; the language model's `/models` | The downloaded model.                                                       |
 
-The media service, when installed, mounts the same four file folders at the same paths, the originals read-only. [Files and storage](../concepts/files.md) explains how the tree's files map to these folders.
+The media service, when installed, mounts none of these folders: it reaches the files of each request through EiN's `ems-files` service. [Files and storage](../concepts/files.md) explains how the tree's files map to these folders.
 
 ## Files in EiN's tree
 

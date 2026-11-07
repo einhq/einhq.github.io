@@ -965,7 +965,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_ems_files_address"><code>CFG_EMS_FILES_ADDRESS</code><a class="anchor" href="#cfg_ems_files_address" aria-label="Link to this section"></a></h3>
-<p><strong>Media service file address</strong>. Where the media service reaches EiN&#39;s files when it does not mount them, as host:port: the ems-files service&#39;s port as EMS sees it. While set, each request to EMS names it, and EMS reads that request&#39;s inputs and writes its outputs there, nothing else and only while the request runs. Empty: EMS opens the paths it is sent on its own mounts.</p>
+<p><strong>Media service file address</strong>. Where the media service reaches EiN&#39;s files, as host:port: the ems-files service&#39;s port as EMS sees it. Each request to EMS that names a file names it, and EMS reads that request&#39;s inputs and writes its outputs there, nothing else and only while the request runs.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -979,7 +979,7 @@
 </tr>
 <tr>
 <td>Default</td>
-<td>empty, which means EMS uses its own mounts</td>
+<td>empty, which means EMS reaches no files: every request that names one waits</td>
 </tr>
 <tr>
 <td>Kind</td>
@@ -996,7 +996,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_ems_files_port"><code>CFG_EMS_FILES_PORT</code><a class="anchor" href="#cfg_ems_files_port" aria-label="Link to this section"></a></h3>
-<p><strong>Media service file port</strong>. The port the ems-files service listens on while the media service file address is set.</p>
+<p><strong>Media service file port</strong>. The port the ems-files service listens on.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

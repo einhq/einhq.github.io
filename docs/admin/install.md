@@ -195,7 +195,7 @@ Leave the files from ein/deploy as they are: the installer and every run of `set
 
 ### The data folder
 
-`setup.sh` makes these folders in `EIN_DATA` on every run. Both EiN and the media service mount the first four at the same paths, so a path EiN hands the media service is the path it opens.
+`setup.sh` makes these folders in `EIN_DATA` on every run. EiN mounts the first four; the media service mounts none of them, and reaches the files of each request through EiN ([The media service](../ems/index.md#how-the-media-service-reaches-your-files)).
 
 | Folder           | Mounted at                                | What it holds                                                                       |
 | ---------------- | ----------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -304,7 +304,7 @@ When a change does not take, `podman compose up -d --force-recreate` makes every
 
 Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, which `setup.sh` gives each one: the media service's idle models then go to swap, and a search waits for them. `~/ein/setup.sh` makes the containers again with it.
 
-Some of EiN's environment is set by `compose.yaml` and wins over a line in `.env`: `POSTGRES_URL`, `CFG_HTTP_PORT` and `CFG_SSH_PORT` (always 8080 and 2222 inside the container), the `ems` module's `CFG_EMS_URL` and `CFG_EMS_KEY` (from `EMS_KEY`), and the folder paths. For the media service, `EMS_PORT`, `EMS_KEY` and `EMS_ROOTS` are set the same way.
+Some of EiN's environment is set by `compose.yaml` and wins over a line in `.env`: `POSTGRES_URL`, `CFG_HTTP_PORT` and `CFG_SSH_PORT` (always 8080 and 2222 inside the container), the `ems` module's `CFG_EMS_URL` and `CFG_EMS_KEY` (from `EMS_KEY`), and the folder paths. For the media service, `EMS_PORT` and `EMS_KEY` are set the same way. `setup.sh` writes the `ems` module's `CFG_EMS_FILES_ADDRESS` into `compose.override.yaml` unless `.env` names one.
 
 ## Run EiN day to day
 

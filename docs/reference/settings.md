@@ -368,19 +368,19 @@ Every setting of an EiN with all its modules: 89 of them, in the groups the Sett
 
 ### `CFG_EMS_FILES_ADDRESS`
 
-**Media service file address**. Where the media service reaches EiN's files when it does not mount them, as host:port: the ems-files service's port as EMS sees it. While set, each request to EMS names it, and EMS reads that request's inputs and writes its outputs there, nothing else and only while the request runs. Empty: EMS opens the paths it is sent on its own mounts.
+**Media service file address**. Where the media service reaches EiN's files, as host:port: the ems-files service's port as EMS sees it. Each request to EMS that names a file names it, and EMS reads that request's inputs and writes its outputs there, nothing else and only while the request runs.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means EMS uses its own mounts |
+| Default | empty, which means EMS reaches no files: every request that names one waits |
 | Kind | string |
 | Restarts | `ems-files` |
 | From the module | Media service |
 
 ### `CFG_EMS_FILES_PORT`
 
-**Media service file port**. The port the ems-files service listens on while the media service file address is set.
+**Media service file port**. The port the ems-files service listens on.
 
 | | |
 | --- | --- |

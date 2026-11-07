@@ -390,7 +390,7 @@ podman compose up -d    <span class="hljs-comment"># or: docker compose up -d</s
 </tr>
 </tbody></table>
 </div>
-<p>The media service, when installed, mounts the same four file folders at the same paths, the originals read-only. <a href="../concepts/files.html">Files and storage</a> explains how the tree&#39;s files map to these folders.</p>
+<p>The media service, when installed, mounts none of these folders: it reaches the files of each request through EiN&#39;s <code>ems-files</code> service. <a href="../concepts/files.html">Files and storage</a> explains how the tree&#39;s files map to these folders.</p>
 <h2 id="files-in-eins-tree">Files in EiN&#39;s tree<a class="anchor" href="#files-in-eins-tree" aria-label="Link to this section"></a></h2>
 <p>These files are nodes in the tree, so they live in the database and survive a restart, an update and a new container. Read them in EiN&#39;s terminal with <code>cat</code>, and change them with <a href="../shell/editor.html"><code>edit</code></a> or the code editor on the <strong>Nodes</strong> page, as far as your rights allow.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>

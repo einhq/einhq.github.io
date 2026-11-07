@@ -260,17 +260,18 @@ install. EiN sees its folders at fixed paths inside its container:</p>
 <tr>
 <td><code>files-tmp</code></td>
 <td><code>/files-tmp</code></td>
-<td>scratch space, such as copies of <code>db</code>-tier content handed to the media service</td>
+<td>scratch space for temporary files</td>
 </tr>
 <tr>
 <td><code>old</code></td>
 <td><code>/old</code></td>
-<td>files kept from an older installation, which the media service reads but never writes; empty unless you put files there</td>
+<td>files kept from an older installation, which EiN reads but never writes; empty unless you put files there</td>
 </tr>
 </tbody></table>
 </div>
-<p>The media service, which the Archive needs, mounts the same folders at the same paths, so a path EiN hands it is the file it
-opens, and the files on the <code>disk</code> and <code>volatile</code> tiers are never copied between them. It may read your originals but never write them.
+<p>The media service, which the Archive needs, mounts none of these folders: it reaches the files of each request through EiN,
+which serves it those files alone, by names of their own, while the request runs. A tool there reads only the part of a file it
+needs, so the files on the <code>disk</code> and <code>volatile</code> tiers are not copied before it starts. It may read your originals but never write them.
 <a href="../admin/install.html#the-data-folder">Installing in detail</a> has the whole layout, and
 <a href="../ems/index.html">The media service</a> how the two share it.</p>
 <p>Inside <code>files</code> and <code>files-volatile</code>, each file&#39;s bytes are stored under its node id, in a folder named

@@ -182,51 +182,45 @@ In the standard install, both containers run on the same machine and only EiN ta
 service, on the compose network. Nothing outside the machine reaches it. Three things connect
 them, all set up by `setup.sh`:
 
-| What        | Where it is set                                                                           | Value                            |
-| ----------- | ----------------------------------------------------------------------------------------- | -------------------------------- |
-| The address | `CFG_EMS_URL` for EiN, in `compose.yaml`                                                  | `http://ems:8181`                |
-| The key     | `EMS_KEY` in `.env`, made at the install; EiN gets it as `CFG_EMS_KEY`                    | 48 random hexadecimal characters |
-| The folders | The same four folders under the data folder, mounted at the same paths in both containers | see below                        |
-
-| Path in both containers | What it holds   | The media service may |
-| ----------------------- | --------------- | --------------------- |
-| `/files`                | your originals  | read                  |
-| `/old`                  | older originals | read                  |
-| `/files-volatile`       | the renditions  | read and write        |
-| `/files-tmp`            | scratch space   | read and write        |
-
-Because a path means the same file on both sides, nothing is ever copied between them, and the
-media service can never change an original. It refuses any path outside these four.
+| What           | Where it is set                                                        | Value                                                     |
+| -------------- | ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| The address    | `CFG_EMS_URL` for EiN, in `compose.yaml`                               | `http://ems:8181`                                         |
+| The key        | `EMS_KEY` in `.env`, made at the install; EiN gets it as `CFG_EMS_KEY` | 48 random hexadecimal characters                          |
+| The files' way | `CFG_EMS_FILES_ADDRESS` for EiN, which `setup.sh` writes               | `ein:2224`, or `host.containers.internal:2224`; see below |
 
 The key is a secret: no shell in EiN sees it, and the settings page never shows it once it is set.
-The media service accepts a request only with that key. Leave `CFG_EMS_URL`, `EMS_KEY`, `EMS_PORT`
-and `EMS_ROOTS` as `setup.sh` and the compose files set them; [Configuration](../admin/configuration.md)
+The media service accepts a request only with that key. Leave `CFG_EMS_URL`, `EMS_KEY` and
+`EMS_PORT` as `setup.sh` and the compose files set them; [Configuration](../admin/configuration.md)
 explains how a value set in the deployment relates to the settings page.
 
-### A media service without EiN's folders
+### How the media service reaches your files
 
-A media service that does not mount the four folders, such as one on another machine, can reach the
-files of its requests through EiN instead. Set `CFG_EMS_FILES_ADDRESS` to the `host:port` the media
-service reaches EiN's machine at, with the port `CFG_EMS_FILES_PORT` (2224): EiN's `ems-files`
-service then listens there, and every request EiN sends the media service names it. The media
-service mounts it with sshfs, reads the request's files through the mount, and writes what it made
-back through it before it answers:
+The media service mounts none of EiN's folders. It reaches the files of each request through EiN's
+`ems-files` service, on the port `CFG_EMS_FILES_PORT` (2224), at the address
+`CFG_EMS_FILES_ADDRESS` names: EiN's name on the compose network, or, when EiN has a network of its
+own under rootless podman, the machine's own address, where `setup.sh` publishes the port. Every
+request EiN sends names it, and the media service mounts it with sshfs, reads the request's files
+through the mount, and writes what it made back through it before it answers:
 
-- Only the files of requests in flight are reachable, each only while its request runs: the files
-  it reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or
-  renamed.
-- A tool reads only the part of a file it needs, as it would on a shared folder, and what was read
-  stays cached for the next step on the same file until the file changes.
+- Each request has a folder of its own there, and each file in it a name of its own: a number and
+  the file's name in EiN, such as `0-IMG_0001.JPG`. The media service never sees where a file is in
+  EiN or on the disk.
+- Only the files of requests in flight are there, each only while its request runs: the files it
+  reads, read-only, and the files it writes, write-only. Nothing can be listed, removed or renamed,
+  and your originals can never be changed.
+- A tool reads only the part of a file it needs, as it would on a folder of its own, and what was
+  read stays cached for the next step on the same file until the file changes.
 - The connection is SSH with one cipher, chacha20-poly1305. Its host key and password are made when
   `ems-files` starts and reach the media service in each request, so there is nothing to configure
   on the media service's side.
 - The media service's container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount, which
   `setup.sh` gives it. Without a mount it refuses the request, and the step that sent it waits and
-  tries again, as when the media service is away.
+  tries again, as when the media service is away. While `CFG_EMS_FILES_ADDRESS` is empty, EiN sends
+  no request that names a file, and those steps wait the same way.
 
-Set the two settings in `~/ein/.env` and run `./setup.sh`, which then publishes the port on
-`EIN_BIND`. Every file crosses the network, so the shared folders stay the faster way on one
-machine.
+A media service on another machine reaches EiN's machine at the address you set: put
+`CFG_EMS_FILES_ADDRESS`, as `host:port`, in `~/ein/.env` and run `./setup.sh`, which then publishes
+the port on `EIN_BIND`.
 
 #### Faster reading through the mount
 

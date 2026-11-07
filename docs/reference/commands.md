@@ -415,8 +415,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 | Command | What it does |
 | --- | --- |
-| [ems-files](../ems/commands.md#ems-files) | Serve the files of the media service's requests in flight over SFTP, for an EMS that does not mount EiN's files (the ems-files service) |
-| [ems-files-grant](../ems/commands.md#ems-files-grant) | Grant paths through ems-files for a while and print the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
+| [ems-files](../ems/commands.md#ems-files) | Serve the media service the files of its requests in flight over SFTP, the only way it reaches EiN's files (the ems-files service) |
+| [ems-files-grant](../ems/commands.md#ems-files-grant) | Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
 | [ems-gpu](../ems/commands.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
