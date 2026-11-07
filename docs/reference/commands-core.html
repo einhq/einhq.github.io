@@ -2314,7 +2314,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <h3 id="ls"><code>ls</code><a class="anchor" href="#ls" aria-label="Link to this section"></a></h3>
 <p>List directory contents.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] [&lt;path&gt;...]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>ls [-l] [-a] [-A] [-r] [-L] [-C] [-d] [-1] [-h] [--limit=&lt;string&gt;] [--after=&lt;string&gt;] [&lt;path&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -2360,6 +2360,10 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <td>include each entry&#39;s own child names (extra lookup, JSON output only)</td>
 </tr>
 <tr>
+<td><code>-d</code></td>
+<td>list each path itself, not what a directory holds.</td>
+</tr>
+<tr>
 <td><code>-1</code></td>
 <td>list one entry per line, also on a terminal.</td>
 </tr>
@@ -2379,8 +2383,9 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">ls</span> -l /archive/albums/Exempelalbum_2019/files
 <span class="hljs-built_in">ls</span> /archive/people
+<span class="hljs-built_in">ls</span> -d /archive/albums/Exempelalbum_2019 /archive/people
 <span class="hljs-built_in">ls</span> -l --<span class="hljs-built_in">limit</span> 200 --after IMG_0412.jpg /home/anna/staging/files/inbox</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the directory&#39;s entries; for several paths, an object of each path&#39;s entries.</p>
+<p>With <code>JSON_OUTPUT=1</code>: the directory&#39;s entries; for several paths, an object of each path&#39;s entries; with -d, the paths themselves.</p>
 <h2 id="m">M<a class="anchor" href="#m" aria-label="Link to this section"></a></h2>
 <h3 id="members"><code>members</code><a class="anchor" href="#members" aria-label="Link to this section"></a></h3>
 <p>Who is in a container: an album&#39;s members by its rules, or a directory&#39;s media.</p>

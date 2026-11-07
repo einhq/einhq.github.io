@@ -1507,7 +1507,7 @@ List directory contents.
 <small>reads only</small>
 
 ```text
-ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=<string>] [--after=<string>] [<path>...]
+ls [-l] [-a] [-A] [-r] [-L] [-C] [-d] [-1] [-h] [--limit=<string>] [--after=<string>] [<path>...]
 ```
 
 | Argument | What it is |
@@ -1522,6 +1522,7 @@ ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=<string>] [--after=<string>]
 | `-r` | reverse order while sorting. |
 | `-L` | do not follow symbolic links. |
 | `-C` | include each entry's own child names (extra lookup, JSON output only) |
+| `-d` | list each path itself, not what a directory holds. |
 | `-1` | list one entry per line, also on a terminal. |
 | `-h` | with -l, print file sizes in units of 1024 (e.g. 1.5 KB) |
 | `--limit=<string>` | list one page of this many entries, in the store's name order. |
@@ -1530,10 +1531,11 @@ ls [-l] [-a] [-A] [-r] [-L] [-C] [-1] [-h] [--limit=<string>] [--after=<string>]
 ```bash
 ls -l /archive/albums/Exempelalbum_2019/files
 ls /archive/people
+ls -d /archive/albums/Exempelalbum_2019 /archive/people
 ls -l --limit 200 --after IMG_0412.jpg /home/anna/staging/files/inbox
 ```
 
-With `JSON_OUTPUT=1`: the directory's entries; for several paths, an object of each path's entries.
+With `JSON_OUTPUT=1`: the directory's entries; for several paths, an object of each path's entries; with -d, the paths themselves.
 
 ## M
 
