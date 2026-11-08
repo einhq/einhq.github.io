@@ -82,7 +82,9 @@ What you will see:
    container engine prints its own download, build and start output, and while it waits,
    `setup.sh` shows EiN's newest log line every 10 seconds.
 
-The download happens while the old EiN keeps running. EiN is down from the moment its container is made
+The download happens while the old EiN keeps running. A build from another source that fails is
+tried once more, since a download it needs, such as the documentation from GitHub, fails now and
+then; when it fails again, `setup.sh` stops there and EiN goes on running as it was. EiN is down from the moment its container is made
 again until the new one answers, which is usually a minute or two, and longer when modules have to
 be set up or their pages built again. `setup.sh` waits up to 10 minutes for EiN to answer on its
 port.
@@ -209,6 +211,7 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `git pull` stops with a message about local changes, or `setup.sh` says `~/ein` could not be brought up to date | A file from the deploy repository in `~/ein` was changed. `git -C ~/ein status` shows which; put back the original with `git -C ~/ein checkout -- <file>` and move your change into `.env`.                                |
 | `fatal: Not possible to fast-forward, aborting.`, or a message about local changes, after a source line         | A repository under `~/ein/src` was changed or moved to another commit by hand. `git -C ~/ein/src/<name> status` shows what; `git -C ~/ein/src/<name> checkout -- .` and `git -C ~/ein/src/<name> switch main` put it back. |
 | The download or the build stops with no space left on the device                                                | The container engine's storage is full. Free the space old images take (above), or see `podman system df`.                                                                                                                 |
+| `setup.sh: the images did not build, so EiN runs on as it was; the build's output is above`                     | Nothing was changed. When the build's output shows a download that failed, run `setup.sh` again later; otherwise the output names what stopped the build.                                                                  |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                 | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
 | A module is still the old version                                                                               | `setup.sh` does not update modules. Use **Update** on **Settings → Modules**.                                                                                                                                              |
