@@ -2,8 +2,8 @@
 
 A camera is what took pictures for your archive: a camera, a phone, a scanner or a camcorder. This
 page is for family members and administrators who register cameras, say who owned them and set
-their clocks right. The routes a phone or a GPS tracker recorded are tracks, on
-[Tracks and trips](tracks.md).
+their clocks right. Where a phone or a GPS tracker went is its device's track, on
+[Devices](../guide/devices.md) and [Trips](tracks.md).
 
 ## What registering a camera gives you
 
@@ -13,10 +13,10 @@ registered, the pictures it took are linked to it, and:
 
 - the viewer's camera line names the camera, links to its page and says who owned it (see
   [The details panel](viewer.md#the-details-panel));
-- the camera's page gathers everything it took, who owned it and when, and the track it records
-  into, if it has one;
+- the camera's page gathers everything it took, who owned it and when, and the device it is part
+  of, such as a phone, if it has one;
 - an album's **Info** tab lists the cameras that took its pictures, and its **Map** tab draws the
-  tracks they record into (see [Albums](albums.md#the-info-tab));
+  tracks of the devices they are part of (see [Albums](albums.md#the-info-tab));
 - the Search page finds cameras and narrows albums by them, and `@` in a search box picks one to
   keep the pictures it took (see [Search and the finder](search.md#find-albums-people-locations-and-cameras));
 - the camera's **Timezone**, **Scanner or digitizer** and **Video times in UTC** settings correct
@@ -166,7 +166,7 @@ phone they are all under ⋮.
 
 | Tab       | What it shows                                                                                                                                                                                         |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Info**  | The page opens here: the camera's timeline, and beside it its settings, owners, track and description (see below).                                                                                    |
+| **Info**  | The page opens here: the camera's timeline, and beside it its settings, owners, device and description (see below).                                                                                   |
 | **Media** | Every file linked to the camera, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)). |
 
 On the **Info** tab, the **timeline** on the left is the camera's history: when each owner started
@@ -180,9 +180,9 @@ took, appear on its timeline." On the right, and above the timeline on a phone:
   [Link the files a camera missed](#link-the-files-a-camera-missed)).
 - **Owners** lists everyone who has owned it, with the dates (see
   [Say who owned a camera](#say-who-owned-a-camera)).
-- **Track** links to the track the camera records into, or says "It records into no track." (see
-  [A phone that records where it was](#a-phone-that-records-where-it-was)). It is left out for
-  those who may not change the camera when there is no track.
+- **Device** links to the device the camera is part of, such as the phone, or says "It is part of
+  no device." (see [A phone that records where it was](#a-phone-that-records-where-it-was)). It is
+  left out for those who may not change the camera when there is no device.
 - **About** shows the description, when there is one.
 
 The **Media** tab is the place to correct a camera whose clock was wrong: select its pictures and
@@ -257,8 +257,8 @@ camera, and changing it re-dates them.
 and time zone, and [Date scans of old prints and slides](dates-places.md#date-scans-of-old-prints-and-slides)
 how scans are dated.
 
-A camera's **Timezone** is about its clock alone. The days of a track's trips are cut in the track's
-own time zone, set on the track (see [How a track travels](tracks.md#how-a-track-travels)).
+A camera's **Timezone** is about its clock alone. The days of a device's trips are cut in its track's
+own time zone, set on the device's **Trips** tab (see [How a device travels](tracks.md#how-a-device-travels)).
 
 ## Say who owned a camera
 
@@ -285,32 +285,36 @@ An owner without a **To** date counts as a current owner, in the page's header a
 date that is not a year, month or day is refused with a message ending in "is not a date
 (YYYY[-MM[-DD]])".
 
-The owners' homes also count as the home bases of the camera's track while the track has none of
-its own (see [Home bases](tracks.md#home-bases)).
+The owners' homes also count as the home bases of the track of the camera's device while the track
+has none of its own (see [Home bases](tracks.md#home-bases)).
 
 ## A phone that records where it was
 
-A phone can keep where it was as well as take pictures: it posts its position as it moves, or
-leaves a GPX file of its route. That route is a track of its own (see
-[Where tracks come from](tracks.md#where-tracks-come-from)). Link the phone's camera to it, and:
+A phone can keep where it was as well as take pictures: it posts its position as it moves, or leaves
+a GPX file of its route. That route is the track of the phone as a device (see
+[Where tracks come from](tracks.md#where-tracks-come-from)), and the phone's camera is part of that
+device. Link the camera to the device, and:
 
-- the camera's page links to the track, under **Track** on the **Info** tab;
-- an album with pictures the camera took draws the track on its **Map** tab (see
-  [Choose which tracks the map shows](albums.md#choose-which-tracks-the-map-shows));
-- a GPX file that names the camera, by its name, its make and model, or its serial number, joins
-  the track when it is dropped in staging (see [GPX files in staging](tracks.md#gpx-files-in-staging));
-- while the track has no home bases of its own, the homes of the camera's owners count (see
+- the camera's page links to the device, under **Device** on the **Info** tab;
+- an album with pictures the camera took draws the device's track on its **Map** tab (see
+  [Choose which devices the map shows](albums.md#choose-which-devices-the-map-shows));
+- a GPX file that names the camera, by its name, its make and model, or its serial number, goes to
+  the device when it is dropped in staging (see [GPX files in staging](tracks.md#gpx-files-in-staging));
+- while the device's track has no home bases of its own, the homes of the camera's owners count (see
   [Home bases](tracks.md#home-bases)).
 
 To link it:
 
-1. Open the camera's page. **Track** is on the right of the **Info** tab, with the line "A phone or
-   camera that also records where it was keeps that in a track."
-2. Click **Set track**, choose the track in the list (**Pick a track**), and click **Set**.
+1. Open the camera's page. **Device** is on the right of the **Info** tab, with the line "A phone's
+   camera is part of the phone, whose track says where its pictures were taken."
+2. Click **Set device**, choose the device in the list (**Pick a device**), and click **Set**. The
+   list holds the devices that keep a track.
 
-**Change track** picks another, and the cross beside the track (**Take the track away**) takes the
-link away; the track and its positions stay as they are. Both are offered to those who may change
-the camera. A camera that records nowhere, such as Helen's Coolpix or a scanner, needs no track.
+**Change device** picks another, and the cross beside the device (**Take the device away**) takes the
+link away; the device and its track stay as they are. Both are offered to those who may change the
+camera. A camera that records nowhere, such as Helen's Coolpix or a scanner, needs no device. A phone
+that is not a device yet is made by a member of the `devices` group (see
+[A phone or a GPS tracker](../guide/devices.md#a-phone-or-a-gps-tracker)).
 
 ## Write something on a camera's timeline
 
@@ -357,34 +361,34 @@ and run `camera-cover /archive/cameras/ruby-iphone`.
 | A phone's videos are off by exactly its time zone.                                                                                                                                                          | The phone keeps video times in UTC.                                                                                                              | Turn on **Video times in UTC** for it.                                                                                                                                                                      |
 | Scans are dated to the day they were scanned.                                                                                                                                                               | The scanner is not registered with **Scanner or digitizer**.                                                                                     | Register it with the setting on, or turn it on in **Edit camera**.                                                                                                                                          |
 | Registering says `camera-create: /archive/cameras/…: already exists`.                                                                                                                                       | A camera with that name exists already. Punctuation such as an apostrophe is left out of the folder name, so `Davids 7D` and `David's 7D` clash. | Choose another name, or open the existing camera.                                                                                                                                                           |
-| An album's map does not draw the route a phone recorded.                                                                                                                                                    | The phone's camera is not linked to its track.                                                                                                   | **Set track** on the camera's **Info** tab; see [A phone that records where it was](#a-phone-that-records-where-it-was).                                                                                    |
-| **Edit**, **Link existing media**, **Add owner** or **Set track** is missing.                                                                                                                               | You may not change this camera.                                                                                                                  | Ask the person who registered it, or an administrator.                                                                                                                                                      |
+| An album's map does not draw the route a phone recorded.                                                                                                                                                    | The phone's camera is not linked to its device.                                                                                                  | **Set device** on the camera's **Info** tab; see [A phone that records where it was](#a-phone-that-records-where-it-was).                                                                                   |
+| **Edit**, **Link existing media**, **Add owner** or **Set device** is missing.                                                                                                                              | You may not change this camera.                                                                                                                  | Ask the person who registered it, or an administrator.                                                                                                                                                      |
 
 ## From the terminal
 
 Each camera is a folder under `/archive/cameras`; `ls /archive/cameras` lists their names, and the
-link to the track a camera records into is its child `track`. The commands below are in the
+link to the device a camera is part of is its child `device`. The commands below are in the
 [archive command reference](commands.md), and every one takes `--help`. Those that start with
 `camera-` can also be typed as two words: `camera info` is `camera-info`.
 
-| Task                                                              | Command                                                                                                                                                               |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the cameras                                                  | [`camera-list`](commands.md#camera-list)                                                                                                                              |
-| List the cameras seen but not registered                          | [`camera-scan`](commands.md#camera-scan)                                                                                                                              |
-| Find cameras by name, make, model or serial number                | [`search-camera`](commands.md#search-camera) `<words>`                                                                                                                |
-| Which camera a make and model, or a serial number, is matched to  | [`camera-match`](commands.md#camera-match) `--make <make> --model <model>`, or `--serial <serial>`                                                                    |
-| Register a camera                                                 | [`camera-create`](commands.md#camera-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc`         |
-| Change a camera's settings                                        | [`camera-update`](commands.md#camera-update) `<camera> --timezone <zone>`, or `--clear <field>`                                                                       |
-| Show a camera and its owners                                      | [`camera-info`](commands.md#camera-info) `<camera>`                                                                                                                   |
-| A camera's history                                                | [`camera-timeline`](commands.md#camera-timeline) `<camera>`                                                                                                           |
-| Link the files a camera's fingerprint matches                     | [`camera-relink`](commands.md#camera-relink) `<camera>`; `--dry-run` reports first, `--force` takes files from another camera, `--all` does every camera              |
-| Date a camera's files again by its settings, linking nothing      | `camera-relink <camera> --reapply`                                                                                                                                    |
-| Link files to a camera by hand                                    | [`camera-link`](commands.md#camera-link) `--camera <camera> <file or folder>…`                                                                                        |
-| Add an owner, or change the dates                                 | [`camera-set-owner`](commands.md#camera-set-owner) `<camera> <person> --from <date> --to <date>`, with `--update` to change                                           |
-| Remove an owner                                                   | [`camera-remove-owner`](commands.md#camera-remove-owner) `<camera> <person>`                                                                                          |
-| Link a camera to the track it records into, or take the link away | [`camera-track`](commands.md#camera-track) `<camera> <track>`, or `<camera> --none`; a track is its path, or a device or camera that has one, by its path or its name |
-| Bring a camera's automatic cover up to date                       | [`camera-cover`](commands.md#camera-cover) `<camera>`, or `--all`                                                                                                     |
-| The pictures a camera took                                        | [`search`](../reference/commands-core.md#search) `--subject camera:<camera> --kind photo`                                                                             |
+| Task                                                             | Command                                                                                                                                                       |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List the cameras                                                 | [`camera-list`](commands.md#camera-list)                                                                                                                      |
+| List the cameras seen but not registered                         | [`camera-scan`](commands.md#camera-scan)                                                                                                                      |
+| Find cameras by name, make, model or serial number               | [`search-camera`](commands.md#search-camera) `<words>`                                                                                                        |
+| Which camera a make and model, or a serial number, is matched to | [`camera-match`](commands.md#camera-match) `--make <make> --model <model>`, or `--serial <serial>`                                                            |
+| Register a camera                                                | [`camera-create`](commands.md#camera-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc` |
+| Change a camera's settings                                       | [`camera-update`](commands.md#camera-update) `<camera> --timezone <zone>`, or `--clear <field>`                                                               |
+| Show a camera and its owners                                     | [`camera-info`](commands.md#camera-info) `<camera>`                                                                                                           |
+| A camera's history                                               | [`camera-timeline`](commands.md#camera-timeline) `<camera>`                                                                                                   |
+| Link the files a camera's fingerprint matches                    | [`camera-relink`](commands.md#camera-relink) `<camera>`; `--dry-run` reports first, `--force` takes files from another camera, `--all` does every camera      |
+| Date a camera's files again by its settings, linking nothing     | `camera-relink <camera> --reapply`                                                                                                                            |
+| Link files to a camera by hand                                   | [`camera-link`](commands.md#camera-link) `--camera <camera> <file or folder>…`                                                                                |
+| Add an owner, or change the dates                                | [`camera-set-owner`](commands.md#camera-set-owner) `<camera> <person> --from <date> --to <date>`, with `--update` to change                                   |
+| Remove an owner                                                  | [`camera-remove-owner`](commands.md#camera-remove-owner) `<camera> <person>`                                                                                  |
+| Link a camera to the device it is part of, or take the link away | [`camera-device`](commands.md) `<camera> <device>`, or `<camera> --off`; a device is its name, its path under `/dev`, or a track of it                        |
+| Bring a camera's automatic cover up to date                      | [`camera-cover`](commands.md#camera-cover) `<camera>`, or `--all`                                                                                             |
+| The pictures a camera took                                       | [`search`](../reference/commands-core.md#search) `--subject camera:<camera> --kind photo`                                                                     |
 
 Registering Jon's camera and making him its owner:
 
@@ -399,7 +403,7 @@ linked. See [Commands by task](tasks.md) for the rest of the archive's commands.
 
 ## Related pages
 
-- [Tracks and trips](tracks.md): the routes phones and GPS trackers recorded.
+- [Trips](tracks.md): where phones and GPS trackers went, and their trips.
 - [Dates and places of pictures](dates-places.md): how a picture's date, time zone and place are
   chosen.
 - [Viewing photos, videos and recordings](viewer.md): the camera line in the details panel.

@@ -115,7 +115,7 @@
   <line x1="52" y1="468" x2="88" y2="468" stroke="#a2abbb" stroke-opacity="0.6" stroke-width="1.5" />
   <rect x="88" y="448" width="200" height="40" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="104" y="473" font-family="Fragment Mono, ui-monospace, monospace" font-size="15" font-weight="600" fill="#eceff4">/dev</text>
-  <text x="272" y="473" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">channels</text>
+  <text x="272" y="473" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">devices, channels</text>
   <line x1="288" y1="468" x2="312" y2="468" stroke="#a2abbb" stroke-opacity="0.6" stroke-width="1.5" />
   <rect x="312" y="454" width="67" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="345.5" y="473" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">events</text>
@@ -123,6 +123,8 @@
   <text x="455.5" y="473" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">pipeline-events</text>
   <rect x="532" y="454" width="51" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="557.5" y="473" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">null</text>
+  <rect x="591" y="454" width="98" height="28" rx="8" fill="#ffa94d" fill-opacity="0.12" stroke="#ffa94d" stroke-width="1.25" />
+  <text x="640" y="473" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">hall-plug/</text>
 
   <!-- /tmp -->
   <line x1="52" y1="520" x2="88" y2="520" stroke="#a2abbb" stroke-opacity="0.6" stroke-width="1.5" />

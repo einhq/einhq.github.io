@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Writing a driver – EiN documentation</title>
+    <meta name="description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has one driver of its own, tracker, for phones and GPS loggers; the Automation module brings three for MQTT devices. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/develop/drivers.html">
+    <meta property="og:title" content="Writing a driver – EiN documentation">
+    <meta property="og:description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has one driver of its own, tracker, for phones and GPS loggers; the Automation module brings three for MQTT devices. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/develop/drivers.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section class="here"><h2>Developing</h2><ul><li><a href="modules.html">Writing a module</a></li><li><a href="manifest.html">The module manifest</a></li><li><a href="drivers.html" aria-current="page">Writing a driver</a></li><li><a href="source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Writing a driver</span></button>
+        <header class="docs-head">
+          <p class="crumb">Developing</p>
+          <h1>Writing a driver</h1>
+        </header>
+        <article class="prose">
+<p>A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under
+<code>/dev/&lt;device&gt;</code>, and sends the device what is written to its controls. Core has one driver of its
+own, <code>tracker</code>, for phones and GPS loggers; the <a href="../automation/index.html">Automation</a> module brings
+three for MQTT devices. This page is for developers who write one in a module. It assumes
+<a href="modules.html">Writing a module</a>, and <a href="../concepts/devices.html">Devices, endpoints and drivers</a> for what
+a device, an endpoint and a control are.</p>
+<h2 id="what-a-driver-does">What a driver does<a class="anchor" href="#what-a-driver-does" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>What happens</th>
+<th>Through</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Device to EiN</td>
+<td>The driver hears the device, makes the device and its endpoints when they are new, and appends each reading</td>
+<td><code>ensureDevice</code>, <code>ensureEndpoint</code>, <code>append</code>, <code>online</code></td>
+</tr>
+<tr>
+<td>Written to EiN</td>
+<td>What a person, a script or the device itself writes to <code>/dev/&lt;device&gt;</code> reaches the driver as raw input</td>
+<td>the driver&#39;s <code>input</code></td>
+</tr>
+<tr>
+<td>EiN to device</td>
+<td>A value written to one of the device&#39;s controls, checked against its schema, reaches the driver to send on</td>
+<td>the driver&#39;s <code>write</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A driver that finds its devices, such as one listening on a broker, makes them itself. One whose
+devices announce nothing, such as core&#39;s <code>tracker</code>, waits for a person to make one with
+<code>device-create &lt;name&gt; --driver &lt;driver&gt;</code>, and gets its <code>setup</code> called to give it its first endpoints.</p>
+<h2 id="where-a-driver-runs">Where a driver runs<a class="anchor" href="#where-a-driver-runs" aria-label="Link to this section"></a></h2>
+<p>A driver is registered by a service of its module, in EiN&#39;s own process, and lives as long as the
+service runs. The service&#39;s <code>start.sh</code> runs a <code>#!ts</code> command that registers the driver and waits
+until the service is stopped:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code>#!ts
+<span class="hljs-comment">/**
+ * weather-bridge — the weather-bridge service: registers the weather-json driver until stopped.
+ */</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">CmdReturn</span>, <span class="hljs-title class_">Command</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/client&#x27;</span>;
+<span class="hljs-keyword">import</span> { weatherDriver } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@weather/driver&#x27;</span>;
+
+<span class="hljs-keyword">const</span> weatherBridge = <span class="hljs-title function_">async</span> (<span class="hljs-attr">cmd</span>: <span class="hljs-title class_">Command</span>): <span class="hljs-function"><span class="hljs-params">CmdReturn</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> devices = cmd.<span class="hljs-property">sys</span>.<span class="hljs-property">devices</span>;
+  <span class="hljs-keyword">if</span> (!devices) {
+    <span class="hljs-keyword">await</span> cmd.<span class="hljs-title function_">writeError</span>(<span class="hljs-string">&#x27;weather-bridge: this EiN keeps no devices\n&#x27;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">const</span> stopped = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt;(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> cmd.<span class="hljs-title function_">onInterrupt</span>(resolve));
+  <span class="hljs-keyword">const</span> unregister = devices.<span class="hljs-title function_">registerDriver</span>(<span class="hljs-string">&#x27;weather-json&#x27;</span>, <span class="hljs-title function_">weatherDriver</span>(cmd, devices));
+  <span class="hljs-keyword">await</span> cmd.<span class="hljs-title function_">writeLn</span>(<span class="hljs-string">&#x27;weather-bridge: driving weather-json&#x27;</span>);
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> stopped;
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">unregister</span>();
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+};
+
+weatherBridge.<span class="hljs-property">spec</span> = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;weather-bridge&#x27;</span>,
+  <span class="hljs-attr">admin</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">daemon</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">effect</span>: <span class="hljs-string">&#x27;write&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>,
+  <span class="hljs-attr">json</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Drive weather stations that post their readings as JSON (the weather-bridge service)&#x27;</span>,
+  <span class="hljs-attr">examples</span>: [<span class="hljs-string">&#x27;service restart weather-bridge&#x27;</span>],
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> weatherBridge;</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># services/weather-bridge/start.sh</span>
+weather-bridge</code></pre></div>
+<p><code>cmd.sys.devices</code> is core&#39;s device API, <code>ModuleDevices</code> in <code>@ein/client</code>. A service runs as the
+administrator, so <code>cmd.access</code> writes any device; pass it to every call. <code>registerDriver</code> answers a
+function that unregisters the driver; while it is unregistered, a write to one of its devices is
+refused with <code>&lt;device&gt;&#39;s driver weather-json is not running</code>, and the device&#39;s page says
+<strong>(not running)</strong>. A driver&#39;s name is lower-case letters, digits, <code>-</code> and <code>_</code>, and a second
+registration under the same name replaces the first.</p>
+<h2 id="the-driver">The driver<a class="anchor" href="#the-driver" aria-label="Link to this section"></a></h2>
+<p><code>registerDriver(name, driver)</code> takes an object with these members:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Needed</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>description</code></td>
+<td>yes</td>
+<td>One line for <code>devices --drivers</code></td>
+</tr>
+<tr>
+<td><code>module</code></td>
+<td>no</td>
+<td>The module that brings it, for <code>devices --drivers</code></td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>no</td>
+<td>What a person gives when making a device with it: <code>{ name, label, type, required? }</code>, <code>type</code> being <code>string</code>, <code>number</code> or <code>url</code></td>
+</tr>
+<tr>
+<td><code>input(raw)</code></td>
+<td>no</td>
+<td>Raw input written to one of its devices; without it, its devices take none</td>
+</tr>
+<tr>
+<td><code>write(cmd)</code></td>
+<td>no</td>
+<td>A value written to one of its devices&#39; controls, to send to the device</td>
+</tr>
+<tr>
+<td><code>setup(name)</code></td>
+<td>no</td>
+<td>A person made one of its devices with <code>device-create --driver</code>: give it the endpoints it has from the start</td>
+</tr>
+<tr>
+<td><code>forget(name)</code></td>
+<td>no</td>
+<td>One of its devices is being forgotten: let go of whatever would make it again, such as a retained announcement on a broker. Called before it is removed</td>
+</tr>
+</tbody></table>
+</div>
+<p>Core awaits each hook while the write that caused it waits, so whoever wrote hears at once whether
+it was taken. A hook refuses by throwing: the message reaches the writer, as <code>echo</code>&#39;s error in the
+terminal or as the body of a <code>400</code> over HTTP, after the device&#39;s name (and the control&#39;s, for a
+<code>write</code>).</p>
+<h3 id="input"><code>input</code><a class="anchor" href="#input" aria-label="Link to this section"></a></h3>
+<p>What is written to <code>/dev/&lt;device&gt;</code>, from the terminal (<code>cat ride.gpx &gt; /dev/old-logger</code>), over SFTP,
+or over HTTP to <code>/file/dev/&lt;device&gt;</code>, arrives whole, once the writer closes, as a <code>DriverInput</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>device</code></td>
+<td>The device&#39;s name</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td><code>/dev/&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td><code>attrs</code></td>
+<td>The device&#39;s attributes: its <code>label</code>, <code>class</code>, <code>config</code> and the rest</td>
+</tr>
+<tr>
+<td><code>bytes</code></td>
+<td>What was written</td>
+</tr>
+<tr>
+<td><code>contentType</code></td>
+<td>The type it came with over HTTP; unset from the terminal or SFTP</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td>The query it came with over HTTP, without <code>?</code> or the device&#39;s key; a <code>GET</code> with the key brings only this</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>Who wrote it: an account&#39;s name, or <code>device:&lt;name&gt;</code> for a write made with the device&#39;s key</td>
+</tr>
+</tbody></table>
+</div>
+<p>It answers an optional <code>{ taken, message }</code>, which an HTTP writer gets back as JSON: how many values
+were new, and a word for whoever sent them.</p>
+<h3 id="write"><code>write</code><a class="anchor" href="#write" aria-label="Link to this section"></a></h3>
+<p>A value written to a control arrives as a <code>DriverWrite</code> once core has checked it against the
+control&#39;s <code>schema</code>, so <code>value</code> is already what the control takes: <code>true</code> or <code>false</code> for <code>bool</code>, a
+number within its limits for <code>number</code>, one of its options for <code>enum</code>, a line for <code>text</code>, <code>press</code> for
+<code>momentary</code>, with <code>toggle</code> turned into the opposite of the state the device last reported. Its
+fields are <code>device</code>, <code>endpoint</code>, <code>path</code>, the device&#39;s <code>attrs</code>, the control&#39;s <code>endpointAttrs</code>,
+<code>value</code> and <code>by</code>.</p>
+<p>Send it, and return once the device or its broker has taken it. Do not append the new state here:
+append what the device reports back, which is what reading the control gives. Until then the
+control&#39;s <code>requested</code> attribute holds what was asked, by whom and when, and its page shows it as
+waiting for the device. A <code>write</code> that has not returned after 10 seconds is answered
+<code>&lt;device&gt; did not answer within 10 s</code>.</p>
+<h2 id="writing-devices-and-endpoints">Writing devices and endpoints<a class="anchor" href="#writing-devices-and-endpoints" aria-label="Link to this section"></a></h2>
+<p>What a driver hears it writes through the same <code>ModuleDevices</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Call</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ensureDevice(access, name, attrs)</code></td>
+<td>Makes <code>/dev/&lt;name&gt;</code> when it is missing, else sets the attributes given where they differ. A label is set only when the device is made, so a person&#39;s <code>device-label</code> is kept. Answers the path</td>
+</tr>
+<tr>
+<td><code>ensureEndpoint(access, device, name, type, attrs, mode?)</code></td>
+<td>Makes the endpoint <code>log</code>, <code>track</code> or <code>control</code> when it is missing, else sets the attributes given where they differ; refuses one of another type. Answers the path</td>
+</tr>
+<tr>
+<td><code>removeEndpoint(access, device, endpoint)</code></td>
+<td>Removes an endpoint and its history: one the device no longer has, or one that changed type</td>
+</tr>
+<tr>
+<td><code>append(access, device, endpoint, value, { at?, retained? })</code></td>
+<td>A reading for a log or a control, or a position <code>{ lat, lng, alt?, speed?, course?, accuracy? }</code> for a track: kept, and published on <code>dev.&lt;device&gt;.&lt;endpoint&gt;</code>. Answers whether it was kept now</td>
+</tr>
+<tr>
+<td><code>appendFixes(access, device, endpoint, fixes)</code></td>
+<td>Many positions for a track at once, each with its <code>ts</code>, such as a file&#39;s. Answers how many were new; publishes the newest</td>
+</tr>
+<tr>
+<td><code>online(access, device, up)</code></td>
+<td>The device came or went: sets its <code>online</code> attribute when it changed, and publishes <code>{ device, online }</code> on <code>dev.&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td><code>forget(access, device)</code></td>
+<td>Removes the device and everything under it, after calling the driver&#39;s own <code>forget</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A device&#39;s name, and an endpoint&#39;s, is lower-case letters, digits, <code>-</code> and <code>_</code>, at most 63 long;
+<code>deviceName(text)</code> from <code>@ein/api</code> makes one from what a device calls itself. EiN&#39;s own names in <code>/dev</code>
+are refused.</p>
+<p><code>append</code> does the throttling, so a driver hands it every reading: a value the same as the endpoint&#39;s
+last is dropped, a number that comes sooner than the endpoint&#39;s <code>minInterval</code> waits for the end of
+it and is replaced by any later one, and an event endpoint keeps every press. Pass <code>retained: true</code>
+for a value the device or its broker replayed rather than read now; it is kept the same way and
+published marked as such.</p>
+<p>The attributes a driver gives an endpoint:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>label</code></td>
+<td>What the pages call it; set only when it is made</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td><code>°C</code>, <code>W</code>, <code>%</code>: shown beside its values and published with them</td>
+</tr>
+<tr>
+<td><code>deviceClass</code></td>
+<td>What is measured, as Home Assistant names it: <code>temperature</code>, <code>power</code>, <code>humidity</code>, <code>illuminance</code>, <code>energy</code>, <code>door</code></td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td><code>diagnostic</code> or <code>config</code> for what tells of the device itself; the pages put it apart</td>
+</tr>
+<tr>
+<td><code>events</code></td>
+<td><code>true</code> for a log whose entries are events, a button&#39;s presses, rather than states</td>
+</tr>
+<tr>
+<td><code>minInterval</code></td>
+<td>The fewest seconds between two kept numbers</td>
+</tr>
+<tr>
+<td><code>retention</code></td>
+<td>How long its entries are kept: <code>30 day</code>, <code>365 day</code>, <code>forever</code>; give it when the endpoint is made</td>
+</tr>
+<tr>
+<td><code>schema</code></td>
+<td>A control&#39;s: <code>{ type: &#39;bool&#39; }</code>, <code>{ type: &#39;number&#39;, min?, max?, step? }</code>, <code>{ type: &#39;enum&#39;, options }</code>, <code>{ type: &#39;text&#39; }</code> or <code>{ type: &#39;momentary&#39; }</code></td>
+</tr>
+<tr>
+<td><code>supported</code></td>
+<td><code>false</code> for one the driver cannot read; it keeps nothing</td>
+</tr>
+<tr>
+<td><code>retired</code></td>
+<td><code>true</code> for one the device no longer announces; its history stays</td>
+</tr>
+</tbody></table>
+</div>
+<p>The device&#39;s card and page take its main value from the first of <code>temperature</code>, <code>power</code>, <code>humidity</code>,
+<code>illuminance</code> and <code>energy</code> among its readings, so give <code>deviceClass</code> where you know it. An endpoint
+is made with its device&#39;s owner and group, a reading <code>0644</code> and a control <code>0664</code> for the <code>users</code>
+group, unless <code>mode</code> says otherwise (<a href="../admin/devices.html#who-may-do-what">Devices and their keys</a>).
+Give an endpoint that tells of the people in the house, such as motion or a door, <code>0640</code> if not
+everyone with an account should read it.</p>
+<h2 id="an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON<a class="anchor" href="#an-example-a-weather-station-that-posts-json" aria-label="Link to this section"></a></h2>
+<p>A weather station posts <code>{&quot;temperature&quot;: 4.2, &quot;humidity&quot;: 81, &quot;wind&quot;: 5.5}</code> to EiN every minute. A
+member of <code>devices</code> makes the station and gives it its key; the station posts to
+<code>/file/dev/&lt;device&gt;</code> with it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create <span class="hljs-string">&#x27;Garden station&#x27;</span> --driver weather-json --class sensor
+device-key garden-station --new --origin https://ein.wrenfield.example</code></pre></div>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-comment">// lib/driver.ts, imported as @weather/driver</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">Command</span>, <span class="hljs-title class_">Driver</span>, <span class="hljs-title class_">ModuleDevices</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/client&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">EndpointAttrs</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/api&#x27;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-attr">READINGS</span>: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-title class_">EndpointAttrs</span>&gt; = {
+  <span class="hljs-attr">temperature</span>: { <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Temperature&#x27;</span>, <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;°C&#x27;</span>, <span class="hljs-attr">deviceClass</span>: <span class="hljs-string">&#x27;temperature&#x27;</span> },
+  <span class="hljs-attr">humidity</span>: { <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Humidity&#x27;</span>, <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;%&#x27;</span>, <span class="hljs-attr">deviceClass</span>: <span class="hljs-string">&#x27;humidity&#x27;</span> },
+  <span class="hljs-attr">wind</span>: { <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Wind&#x27;</span>, <span class="hljs-attr">unit</span>: <span class="hljs-string">&#x27;m/s&#x27;</span>, <span class="hljs-attr">deviceClass</span>: <span class="hljs-string">&#x27;wind_speed&#x27;</span> },
+};
+
+<span class="hljs-comment">/** A station that posts its readings as one JSON object: each known field becomes a log. */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> weatherDriver = (<span class="hljs-attr">cmd</span>: <span class="hljs-title class_">Command</span>, <span class="hljs-attr">devices</span>: <span class="hljs-title class_">ModuleDevices</span>): <span class="hljs-function"><span class="hljs-params">Driver</span> =&gt;</span> ({
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;A weather station that posts its readings as JSON&#x27;</span>,
+  <span class="hljs-attr">module</span>: <span class="hljs-string">&#x27;weather&#x27;</span>,
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">setup</span>(<span class="hljs-params">device</span>) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> [name, attrs] <span class="hljs-keyword">of</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(<span class="hljs-variable constant_">READINGS</span>)) {
+      <span class="hljs-keyword">await</span> devices.<span class="hljs-title function_">ensureEndpoint</span>(cmd.<span class="hljs-property">access</span>, device, name, <span class="hljs-string">&#x27;log&#x27;</span>, { ...attrs, <span class="hljs-attr">minInterval</span>: <span class="hljs-number">60</span>, <span class="hljs-attr">retention</span>: <span class="hljs-string">&#x27;365 day&#x27;</span> });
+    }
+  },
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">input</span>(<span class="hljs-params">raw</span>) {
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">body</span>: <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">unknown</span>&gt;;
+    <span class="hljs-keyword">try</span> {
+      body = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TextDecoder</span>().<span class="hljs-title function_">decode</span>(raw.<span class="hljs-property">bytes</span>));
+    } <span class="hljs-keyword">catch</span> {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;takes a JSON object of readings&#x27;</span>);
+    }
+    <span class="hljs-keyword">let</span> taken = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> name <span class="hljs-keyword">of</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(<span class="hljs-variable constant_">READINGS</span>)) {
+      <span class="hljs-keyword">const</span> value = body[name];
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">&#x27;number&#x27;</span> &amp;&amp; <span class="hljs-keyword">await</span> devices.<span class="hljs-title function_">append</span>(cmd.<span class="hljs-property">access</span>, raw.<span class="hljs-property">device</span>, name, value)) taken++;
+    }
+    <span class="hljs-keyword">await</span> devices.<span class="hljs-title function_">online</span>(cmd.<span class="hljs-property">access</span>, raw.<span class="hljs-property">device</span>, <span class="hljs-literal">true</span>);
+    <span class="hljs-keyword">return</span> { taken, <span class="hljs-attr">message</span>: <span class="hljs-string">`<span class="hljs-subst">${taken}</span> new readings`</span> };
+  },
+});</code></pre></div>
+<p><code>setup</code> gives the station its three logs as soon as it is made, so its page shows them before the
+first post. A body that is not JSON is refused with <code>garden-station: takes a JSON object of readings</code>.
+A test of the driver can call its hooks directly, with a stub in place of <code>ModuleDevices</code>.</p>
+<h2 id="a-tab-on-the-device-page">A tab on the device page<a class="anchor" href="#a-tab-on-the-device-page" aria-label="Link to this section"></a></h2>
+<p>A module that knows more about some devices adds a tab to their page with a panel in its
+<code>ui/nav.json</code>, in the slot <code>device.tabs</code>. The tab draws one of the module&#39;s routes, with
+<code>{path}</code> replaced by the device&#39;s path, <code>/dev/&lt;device&gt;</code>, URI-encoded. <code>when</code> keeps it to the devices
+that have an endpoint of a type; without it, every device gets the tab. This is the Archive&#39;s
+<strong>Trips</strong> tab:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;panels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.trips&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;slot&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;device.tabs&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Trips&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;map-route&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;route&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/trips?device={path}&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;has&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;track&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>The route is one the module declares in <code>mod.json</code>&#39;s <code>ui.routes</code>, like any page; it reads the device
+from its query. The tab comes after the page&#39;s own <strong>Overview</strong>, <strong>History</strong> and <strong>Info</strong>, its id is
+the page&#39;s <code>?tab=</code> (<code>/devices/sailboat?tab=archive.trips</code>), and an administrator or a person can
+rename, reorder or hide it like any panel
+(<a href="../guide/customizing.html#change-the-panels-inside-pages">Change the panels inside pages</a>).</p>
+<h2 id="the-contract">The contract<a class="anchor" href="#the-contract" aria-label="Link to this section"></a></h2>
+<p>Drivers came with core&#39;s module contract 0.14.0: give the module <code>&quot;coreApi&quot;: &quot;^0.14.0&quot;</code>
+(<a href="manifest.html#coreapi">The module manifest</a>). What a driver uses is in it:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Import</th>
+<th>What it gives</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@ein/client</code></td>
+<td><code>ModuleDevices</code>, <code>Driver</code>, <code>DriverInput</code>, <code>DriverWrite</code>, <code>DriverAnswer</code>, <code>AppendOptions</code></td>
+</tr>
+<tr>
+<td><code>@ein/api</code></td>
+<td><code>DeviceAttrs</code>, <code>EndpointAttrs</code>, <code>EndpointType</code>, <code>ControlSchema</code>, <code>DeviceValue</code>, <code>DeviceFix</code>, <code>DeviceMessage</code>, <code>deviceName</code>, <code>deviceRoutingKey</code>, <code>DEVICES_GROUPNAME</code></td>
+</tr>
+<tr>
+<td><code>@ein/paths</code></td>
+<td><code>DEV_PATH</code> and <code>devicePath(name)</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;device&gt;&#39;s driver &lt;name&gt; is not running</code></td>
+<td>The service that registers it is stopped, or registered it under another name</td>
+<td><code>service status &lt;service&gt;</code>; check the name the device&#39;s <code>driver</code> attribute holds</td>
+</tr>
+<tr>
+<td><code>&lt;device&gt;&#39;s driver &lt;name&gt; takes nothing written to the device</code></td>
+<td>The driver has no <code>input</code></td>
+<td>Write to the device&#39;s endpoints, or give the driver an <code>input</code></td>
+</tr>
+<tr>
+<td><code>&lt;device&gt; has no driver to read what is written to it: write to its endpoints</code></td>
+<td>The device was made without <code>--driver</code></td>
+<td>Make it again with <code>--driver</code>, or set it with <code>attrs -s driver=&lt;name&gt; /dev/&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;path&gt; is a log, not a control: remove it first</code></td>
+<td><code>ensureEndpoint</code> was asked for another type than the endpoint has</td>
+<td><code>removeEndpoint</code> it first; its history goes with it</td>
+</tr>
+<tr>
+<td><code>&lt;device&gt; did not answer within 10 s</code></td>
+<td>The driver&#39;s <code>write</code> did not return in time</td>
+<td>Return once the message is sent, not once the device has switched</td>
+</tr>
+<tr>
+<td>A reading never shows, though <code>append</code> is called</td>
+<td>It repeats the last one, or waits for its <code>minInterval</code>; <code>append</code> answers <code>false</code></td>
+<td>Nothing, for a repeat; a lower <code>minInterval</code> for a faster endpoint</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../concepts/devices.html">Devices, endpoints and drivers</a>: endpoints, controls and the routing keys.</li>
+<li><a href="modules.html">Writing a module</a>: services, <code>#!ts</code> commands and pages.</li>
+<li><a href="manifest.html">The module manifest</a>: <code>coreApi</code>, <code>ui.routes</code>.</li>
+<li><a href="../guide/customizing.html#change-the-panels-inside-pages">Your sidebar and top bar</a>: panels and their slots.</li>
+<li><a href="../automation/index.html">Automation</a>: three drivers at full size, in the <code>module-automation</code> repository.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="manifest.html" rel="prev"><span>Previous</span>The module manifest</a><a class="next" href="source.html" rel="next"><span>Next</span>Building from source</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/drivers.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-driver-does">What a driver does</a></li><li><a href="#where-a-driver-runs">Where a driver runs</a></li><li><a href="#the-driver">The driver</a></li><li class="nested"><a href="#input">input</a></li><li class="nested"><a href="#write">write</a></li><li><a href="#writing-devices-and-endpoints">Writing devices and endpoints</a></li><li><a href="#an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON</a></li><li><a href="#a-tab-on-the-device-page">A tab on the device page</a></li><li><a href="#the-contract">The contract</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

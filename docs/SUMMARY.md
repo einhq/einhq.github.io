@@ -15,6 +15,7 @@
 - [Finding your way around](guide/interface.md)
 - [Search and the finder](guide/search.md)
 - [Home and statistics](guide/home.md)
+- [Devices](guide/devices.md)
 - [Sharing](guide/sharing.md)
 - [Your profile, favourites and trash](guide/profile.md)
 - [Your sidebar and top bar](guide/customizing.md)
@@ -37,6 +38,7 @@
 - [Modules](admin/modules.md)
 - [Accounts and groups](admin/accounts.md)
 - [Permissions in depth](admin/permissions.md)
+- [Devices and their keys](admin/devices.md)
 - [Health and the dashboard](admin/monitoring.md)
 - [Processing and pipelines](admin/processing.md)
 - [Services and logs](admin/services-logs.md)
@@ -52,6 +54,7 @@
 - [Links](concepts/links.md)
 - [Files and storage](concepts/files.md)
 - [Changes and pipelines](concepts/pipelines.md)
+- [Devices, endpoints and drivers](concepts/devices.md)
 
 ## Reference
 
@@ -69,6 +72,7 @@
 
 - [Writing a module](develop/modules.md)
 - [The module manifest](develop/manifest.md)
+- [Writing a driver](develop/drivers.md)
 - [Building from source](develop/source.md)
 
 # Modules
@@ -88,7 +92,7 @@
 - [Family tree, events and homes](archive/family.md)
 - [Locations and the map](archive/places.md)
 - [Cameras](archive/cameras.md)
-- [Tracks and trips](archive/tracks.md)
+- [Trips](archive/tracks.md)
 - [Memories, news and events on Home](archive/home.md)
 - [Supported files](archive/file-types.md)
 - [Processing pictures](archive/processing.md)

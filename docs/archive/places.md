@@ -406,7 +406,7 @@ The map draws three things:
 - **Pictures** with a position that you may see, gathered into piles. Pictures in staging are left
   out until they are filed.
 - **Locations** that have a place, as pins.
-- **GPS tracks**, the routes of the [tracks](tracks.md).
+- **GPS tracks**, the routes of the devices' [tracks](tracks.md).
 
 Opened from the sidebar, the map starts over Gothenburg in Sweden, whatever your pictures show.
 Zoom out to find them, or keep a bookmark of the view you use; see
@@ -447,7 +447,7 @@ Where a track lay still, it ends on that spot and leaves from it later, without 
 GPS recorded meanwhile; see [The route on the map](tracks.md#the-route-on-the-map).
 
 Tracks are always drawn in full: the years and the search box narrow the pictures only. Where tracks
-come from, GPX files among them, is on [Tracks and trips](tracks.md#where-tracks-come-from).
+come from, GPX files among them, is on [Trips](tracks.md#where-tracks-come-from).
 
 ### Follow a track live
 
@@ -457,7 +457,7 @@ points arrive, without a reload. Pointing at the pin shows the track's name, its
 how long ago the point was taken ("12 km/h · 40 s ago").
 
 The live tracks are also listed in the top-left corner, each with its colour, name, speed and age.
-Click a name to open that track's page.
+Click a name to open its device's page.
 Click **Follow** (the crosshair beside a track), or the track's pin, and the map moves along with
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click **Follow**
 again, to stop. A track drops out of the list four hours after its last point.
@@ -647,7 +647,7 @@ link one picture to a location by hand is in [Dates and places of pictures](date
 - [Dates and places of pictures](dates-places.md): a picture's position, street address, and
   **Set location**
 - [Family tree, events and homes](family.md): homes, residents and events
-- [Tracks and trips](tracks.md): the tracks the map draws, and their trips
+- [Trips](tracks.md): the tracks the map draws, and their trips
 - [Search and the finder](search.md): finding pictures by location with `@`
 - [Albums](albums.md): an album's **Map** and **Info** tabs
 - [Viewing photos, videos and recordings](viewer.md): the place section of the details panel

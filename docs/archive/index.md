@@ -2,7 +2,7 @@
 
 The Archive is the module that makes EiN a family archive: albums of photos, videos, recordings and
 documents, the people in them and the family tree, the places they were taken, the cameras that took
-them and the routes travelled. This page is for anyone deciding whether to install it and for anyone starting to use
+them and the trips travelled. This page is for anyone deciding whether to install it and for anyone starting to use
 it: what it needs, how to install it, what it adds to EiN, and where to begin. The pages in this
 section apply once the Archive is installed.
 
@@ -15,7 +15,7 @@ section apply once the Archive is installed.
 | People and the family | People, the faces found in pictures, the family tree, events in their lives and the homes they lived in                             | [People and faces](people.md), [Family tree, events and homes](family.md)                                   |
 | Locations and the map | Named places with outlines on the map, and pictures placed by their GPS position                                                    | [Locations and the map](places.md)                                                                          |
 | Cameras               | The cameras, phones and scanners that took the pictures, their owners and clocks                                                    | [Cameras](cameras.md)                                                                                       |
-| Tracks and trips      | The routes trackers, phones and GPS loggers recorded, cut into trips that can become albums                                         | [Tracks and trips](tracks.md)                                                                               |
+| Trips                 | The trips a phone, a tracker or a GPS logger made, cut from its track on its device's page, that can become albums                  | [Trips](tracks.md)                                                                                          |
 | Search                | Finding pictures by what they show, say and contain, and the albums, people, locations and cameras they belong to                   | [Searching your pictures](search.md)                                                                        |
 | Home                  | On this day, News and Events on the Home page, and the life-event charts on the Statistics page                                     | [Memories, news and events on Home](home.md)                                                                |
 
@@ -67,11 +67,11 @@ options.
 
 In the sidebar:
 
-| Section     | Entries                                                           |
-| ----------- | ----------------------------------------------------------------- |
-| (top)       | **Media**, and **Staging** when you are signed in                 |
-| **Explore** | **Year** and **Map**, beside EiN's own **Search**                 |
-| **Browse**  | **Albums**, **People**, **Locations**, **Cameras** and **Tracks** |
+| Section     | Entries                                                                             |
+| ----------- | ----------------------------------------------------------------------------------- |
+| (top)       | **Media**, and **Staging** when you are signed in                                   |
+| **Explore** | **Year** and **Map**, beside EiN's own **Search**                                   |
+| **Browse**  | **Albums**, **People**, **Locations** and **Cameras**, beside EiN's own **Devices** |
 
 In the top bar:
 
@@ -90,6 +90,8 @@ In EiN's own pages:
   when you are signed in, the pictures that look like a label in a search for that one label; see
   [Searching your pictures](search.md).
 - **Nodes**: a **Duplicates** tab among the page's tools, for the folder that is open.
+- **Devices**: a **Trips** tab on the page of a device that has a track, such as a phone or a GPS
+  logger; see [Trips](tracks.md).
 - **The finder** in the top bar finds albums, people, locations and cameras by name, and offers
   **Pictures of "…"** to search the Media page.
 
@@ -105,11 +107,11 @@ up, and in a staging folder in each person's home:
 | `/archive/albums`    | Albums, and the photos, videos, recordings and documents in them                                        |
 | `/archive/people`    | People, with their family, homes, events and cameras                                                    |
 | `/archive/locations` | Locations, each with its outline on the map                                                             |
-| `/archive/cameras`   | Cameras, phones and scanners, each linked to the track it records into when it has one                  |
+| `/archive/cameras`   | Cameras, phones and scanners, each linked to the device it is part of when it has one                   |
 | `~/staging`          | In each person's home, such as `/home/helen/staging`: uploads waiting to be sorted, seen by nobody else |
 
-A track has no folder of its own: it is wherever it was made, such as under a device of the
-[Automation](../automation/index.md) module in `/archive/devices` (see
+A track has no folder of its own: it is a device's, under `/dev`, such as `/dev/sailboat/position`,
+and the Archive keeps the trips, home bases and GPX files of each under it (see
 [Where tracks come from](tracks.md#where-tracks-come-from)).
 
 Removing the module never removes the folders under `/archive`, since they hold the content.
@@ -153,7 +155,7 @@ whole order of steps on [First steps](../start/first-steps.md).
 - [Family tree, events and homes](family.md): how people are related, and their lives.
 - [Locations and the map](places.md): places, their outlines and the map.
 - [Cameras](cameras.md): the cameras, phones and scanners that took the pictures.
-- [Tracks and trips](tracks.md): the routes travelled, and their trips.
+- [Trips](tracks.md): the trips a device's track is cut into.
 - [Memories, news and events on Home](home.md): what the Archive shows on Home and Statistics.
 - [Supported files](file-types.md): the files the Archive reads.
 - [Processing pictures](processing.md): the work done on every file, for administrators.

@@ -14,7 +14,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 | [Recordings](#recordings)       | M4A, MP3, WAV, FLAC, Ogg and Opus, AMR                     | date, a playable version, a picture of the sound, what is said and who says it, the same recording twice            |
 | [Documents](#documents)         | PDF, Word, OpenDocument and plain text                     | the text, for search; the text of scanned pages too                                                                 |
 | [Sidecar files](#sidecar-files) | Google Takeout JSON, XMP                                   | nothing of their own: they give their picture its date, place and caption                                           |
-| [GPS tracks](#gps-tracks)       | GPX                                                        | the route, added to the track it belongs to                                                                         |
+| [GPS tracks](#gps-tracks)       | GPX                                                        | the route, added to the track of the device it was recorded on                                                      |
 | [Family trees](#family-trees)   | GEDCOM                                                     | the people, their relations, events and homes, found among the archive's people or added                            |
 | [Zip files](#zip-files)         | ZIP                                                        | in staging, expanded into the files it holds                                                                        |
 | [Everything else](#other-files) | any file                                                   | kept as it is, and nothing more                                                                                     |
@@ -183,10 +183,10 @@ category's **Other files**.
 ## GPS tracks
 
 A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
-picture: EiN adds its points to the track the file names, and the file moves to the track's
-`routes` folder, where the track links it. On a track's page you can upload GPX files to it
-directly. See [GPX files in staging](tracks.md#gpx-files-in-staging) and
-[Upload a GPX file to a track](tracks.md#upload-a-gpx-file-to-a-track).
+picture: EiN gives it to the device the file names, whose track takes its points, and the file moves
+to the track's `routes` folder, where the track links it. On a device's **Trips** tab you can upload
+GPX files to it directly. See [GPX files in staging](tracks.md#gpx-files-in-staging) and
+[Upload a GPX file to a device](tracks.md#upload-a-gpx-file-to-a-device).
 
 ## Family trees
 

@@ -38,7 +38,7 @@ about it beneath itself: its EXIF in `metadata/exif`, its thumbnails in `thumbna
 
 ![The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
 
-The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
+The type decides what a node is and how EiN treats it. Core has 20 types of its own, and modules add
 theirs, such as the archive's `album`, `person` and `location`. [Nodes and node types](../concepts/nodes.md)
 describes a node part by part, and [Node types](../reference/node-types.md) lists every type.
 
@@ -52,7 +52,7 @@ standard path.
 | `/etc`         | Accounts and groups, settings, and the services EiN runs                                                                          |
 | `/var`         | What the system writes as it runs: logs, sessions, queues, pools and pipeline runs                                                |
 | `/usr`         | Commands, modules and the built-in guide                                                                                          |
-| `/dev`, `/tmp` | Event channels and scratch space                                                                                                  |
+| `/dev`, `/tmp` | The devices EiN hears and switches, such as sensors, plugs and phones; event channels; and scratch space                          |
 
 ## Owners and permissions, as with files
 
@@ -164,9 +164,10 @@ side, and [Health and the dashboard](../admin/monitoring.md) explains the four w
 
 ## Modules decide what EiN is for
 
-Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, and the
-frame of the Web UI. On its own, its sidebar holds **Home**, **Search**, **Settings**,
-**Statistics** and **Documentation**, and for an administrator **Nodes** and **Dashboard**.
+Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, devices,
+and the frame of the Web UI. On its own, its sidebar holds **Home**, **Search**, **Devices**,
+**Settings**, **Statistics** and **Documentation**, and for an administrator **Nodes** and
+**Dashboard**.
 Everything else comes from modules.
 
 A module is a folder with a manifest, `mod.json`, kept in a repository of its own. What it adds is
@@ -178,7 +179,7 @@ The published modules are in the einhq organisation on GitHub, each named `modul
 
 | Module                               | What it is for                                                                                                                                                                                         | What it needs                                                    |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, tracks and their trips, and staging, where uploads wait to be sorted                | The `ems` module, installed along with it, and the media service |
+| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, the trips of the devices that travel, and staging, where uploads wait to be sorted  | The `ems` module, installed along with it, and the media service |
 | [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
 | [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
 

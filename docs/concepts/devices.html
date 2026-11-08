@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devices, endpoints and drivers – EiN documentation</title>
+    <meta name="description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/concepts/devices.html">
+    <meta property="og:title" content="Devices, endpoints and drivers – EiN documentation">
+    <meta property="og:description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/concepts/devices.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li><li><a href="devices.html" aria-current="page">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Devices, endpoints and drivers</span></button>
+        <header class="docs-head">
+          <p class="crumb">Concepts</p>
+          <h1>Devices, endpoints and drivers</h1>
+        </header>
+        <article class="prose">
+<p>A device is something outside EiN that reports or can be told what to do: a temperature sensor, a
+plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each
+one in the tree at <code>/dev/&lt;device&gt;</code>, with what it reports and what it can be told as files under it.
+This page explains how that is laid out, how a device&#39;s readings get in and go out, and what moves
+them. Read it before writing to devices from the terminal or a script, or before binding a queue to
+them. <a href="../guide/devices.html">Devices</a> covers the pages, and
+<a href="../admin/devices.html">Devices and their keys</a> who may do what.</p>
+<h2 id="a-device-is-a-folder">A device is a folder<a class="anchor" href="#a-device-is-a-folder" aria-label="Link to this section"></a></h2>
+<p>Devices sit directly under <code>/dev</code>, beside EiN&#39;s own <code>null</code> and event routers. A device is a node of
+the type <code>device</code>, a folder, and its endpoints are the nodes in it, much as Linux shows a device&#39;s
+values as files in a folder under <code>/sys</code>:</p>
+<div class="code"><pre tabindex="0"><code>/dev/
+├── events                  EiN's own: where changes are announced
+├── null                    EiN's own: reads nothing, swallows what is written
+├── hall-plug/              a device, found by a driver
+│   ├── switch-0            a control: on or off
+│   ├── switch-0-power      a log of readings, in W
+│   └── switch-0-energy     a log of readings, in Wh
+├── porch-button/
+│   └── input-0             a log of events: single, double, long
+└── ruby-phone/             a device made by hand, driven by core's tracker
+    ├── .key                its device key
+    └── position            a track of positions</code></pre></div>
+<p>A device&#39;s name is lower-case letters, digits and hyphens, made from what the device or a person
+calls it: <code>Ruby phone</code> becomes <code>ruby-phone</code>. The names <code>null</code>, <code>events</code>, <code>pipeline-events</code>, <code>tty</code>,
+<code>stdin</code>, <code>stdout</code> and <code>stderr</code> are EiN&#39;s own and are refused. The name is what commands, rules and
+routing keys use; the device&#39;s label is what the pages show, and can be changed without touching
+the name.</p>
+<p>What a device says about itself is in its attributes:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>label</code></td>
+<td>What the pages call it</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>What it is: <code>phone</code>, <code>tracker</code>, <code>plug</code>, <code>switch</code>, <code>light</code>, <code>button</code>, <code>sensor</code>, <code>boat</code>, …</td>
+</tr>
+<tr>
+<td><code>driver</code></td>
+<td>The driver that reads and writes it; none for a device whose endpoints are written to</td>
+</tr>
+<tr>
+<td><code>manufacturer</code></td>
+<td>Who made it</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>Its model</td>
+</tr>
+<tr>
+<td><code>firmware</code></td>
+<td>The firmware it runs, when it says</td>
+</tr>
+<tr>
+<td><code>serial</code></td>
+<td>Its serial number</td>
+</tr>
+<tr>
+<td><code>mac</code></td>
+<td>Its network address</td>
+</tr>
+<tr>
+<td><code>online</code></td>
+<td>Whether it answers now, when its driver can tell</td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>What a person gave its driver when making it (<code>device-create --config</code>)</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>attrs /dev/hall-plug</code> prints them, and <a href="../reference/commands-core.html"><code>device-show</code></a> prints the
+device with each of its endpoints.</p>
+<h2 id="endpoints">Endpoints<a class="anchor" href="#endpoints" aria-label="Link to this section"></a></h2>
+<p>An endpoint is one thing a device reports or is told. There are three types:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+<th>Reading it gives</th>
+<th>Writing it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>log</code></td>
+<td>A series of values, or of events</td>
+<td>Each value with its time</td>
+<td>A value, kept as the next entry</td>
+</tr>
+<tr>
+<td><code>track</code></td>
+<td>A series of positions</td>
+<td>Each position with its time</td>
+<td>A position, kept as the next one</td>
+</tr>
+<tr>
+<td><code>control</code></td>
+<td>A value written to change the device, a switch</td>
+<td>The states the device reported, in order</td>
+<td>A value, checked and sent to the device through its driver</td>
+</tr>
+</tbody></table>
+</div>
+<p>A log of events is a button&#39;s: each entry is a press, such as <code>single</code>, <code>double</code> or <code>long</code>, rather
+than a state, and the same press twice is two entries. Into any other log a driver puts a value only
+when it differs from the one before (see <a href="#how-often-a-reading-is-kept">How often a reading is kept</a>).</p>
+<p>A control is not a store of what you wrote. Writing <code>on</code> to <code>/dev/hall-plug/switch-0</code> sends it to the
+plug; what reading the control gives is what the plug then reported it was. Until it reports, the
+control remembers what was asked, who asked and when (its <code>requested</code> attribute), and the device&#39;s
+page shows the switch as asked, waiting for the device.</p>
+<p>What a control takes is its schema:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Schema</th>
+<th>It takes</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool</code></td>
+<td><code>on</code> or <code>off</code> (<code>true</code>, <code>false</code>, <code>1</code>, <code>0</code>, <code>yes</code>, <code>no</code>), or <code>toggle</code>, the opposite of now</td>
+<td>a relay, a lamp</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>A number, within the control&#39;s least and greatest and in its steps</td>
+<td>a thermostat&#39;s 21.5</td>
+</tr>
+<tr>
+<td><code>enum</code></td>
+<td>One of the control&#39;s options</td>
+<td>a heat pump&#39;s <code>eco</code></td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>Any line</td>
+<td>a display&#39;s message</td>
+</tr>
+<tr>
+<td><code>momentary</code></td>
+<td><code>press</code>: something the device does once, with no state</td>
+<td>a restart, a chime</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>toggle</code> needs a state the device has reported; before the first, it is refused. A value the schema
+does not take is refused with what it would take, such as <code>hall-plug/switch-0 takes on, off or toggle, not &#39;7&#39;</code>, and nothing is sent.</p>
+<p>An endpoint carries attributes of its own: its <code>label</code>, <code>unit</code> (<code>°C</code>, <code>W</code>), <code>deviceClass</code> (what is
+measured: <code>temperature</code>, <code>power</code>, <code>door</code>, <code>motion</code>), <code>retention</code> (how long its entries are kept,
+such as <code>365 day</code> or <code>forever</code>), <code>minInterval</code>, and for a control its <code>schema</code>. An endpoint whose
+<code>category</code> is <code>diagnostic</code> or <code>config</code> tells of the device itself, such as its own temperature or
+its Wi-Fi signal, and the pages put it apart. One the device announced in a way its driver cannot
+read is marked <code>supported: false</code> and keeps nothing; one the device no longer announces is marked
+<code>retired</code>, and keeps its history.</p>
+<h2 id="drivers">Drivers<a class="anchor" href="#drivers" aria-label="Link to this section"></a></h2>
+<p>A driver is what turns a device&#39;s own language into endpoints and back: it reads what the device
+sends and appends it to the endpoints, and it sends the device what is written to its controls. A
+device names its driver in its <code>driver</code> attribute.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>Comes with</th>
+<th>What it drives</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tracker</code></td>
+<td>EiN itself</td>
+<td>A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its <code>position</code> track</td>
+</tr>
+<tr>
+<td><code>ha-discovery</code></td>
+<td>the <a href="../automation/index.html">Automation</a> module</td>
+<td>Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others</td>
+</tr>
+<tr>
+<td><code>shelly</code></td>
+<td>the Automation module</td>
+<td>Shelly&#39;s second generation and later, over MQTT</td>
+</tr>
+<tr>
+<td><code>shelly-gen1</code></td>
+<td>the Automation module</td>
+<td>Shelly&#39;s first generation (Plug S, 1, 1PM, 2.5, i3), over MQTT</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>devices --drivers</code> lists the drivers running now, with the module each comes from and how many
+devices it drives. A module&#39;s drivers run while its service does: when the service is stopped, a
+write to one of their devices is refused with <code>&lt;device&gt;&#39;s driver &lt;driver&gt; is not running</code>, and the
+device&#39;s <strong>Info</strong> tab says <strong>(not running)</strong> beside the driver.</p>
+<p>Most drivers find their devices: a sensor announces itself on the MQTT broker, and its driver makes
+the device and its endpoints within seconds. A phone or a GPS logger announces nothing, so a
+member of the <code>devices</code> group makes it by hand with
+<a href="../reference/commands-core.html"><code>device-create</code></a>, naming its driver:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone</code></pre></div>
+<p>The driver gives the new device what it has from the start, here an empty <code>position</code> track. A device
+made without a driver has no endpoints of its own and takes nothing written to the device itself.</p>
+<h3 id="cores-tracker-driver">Core&#39;s tracker driver<a class="anchor" href="#cores-tracker-driver" aria-label="Link to this section"></a></h3>
+<p><code>tracker</code> reads everything a phone or a GPS tracker sends, and adds each position that has a time to
+the device&#39;s <code>position</code> track:</p>
+<ul>
+<li>what <a href="https://www.traccar.org/client/">Traccar Client</a> posts, as JSON;</li>
+<li>the OsmAnd protocol, a query such as <code>?lat=59.32&amp;lon=18.07&amp;timestamp=1794132000</code>, sent by OsmAnd,
+older Traccar Client versions and many hardware trackers;</li>
+<li>a GPRMC sentence, <code>?gprmc=$GPRMC,…</code>;</li>
+<li>a GPX file, as a logger or a tracking app saves it;</li>
+<li>EiN&#39;s own positions, a line of JSON each: <code>{&quot;lat&quot;: 59.32, &quot;lng&quot;: 18.07, &quot;ts&quot;: &quot;2026-11-08T09:00:00Z&quot;}</code>.</li>
+</ul>
+<p>A position at a time the track already has is not added twice, so sending the same file again adds
+nothing.</p>
+<h2 id="writing-to-a-device">Writing to a device<a class="anchor" href="#writing-to-a-device" aria-label="Link to this section"></a></h2>
+<p>What is written to the device itself, <code>/dev/&lt;device&gt;</code>, is raw input for its driver: a GPX file, a
+tracker&#39;s post, whatever the driver reads. What is written to an endpoint is a value in EiN&#39;s own
+form. Both work the same from the terminal, over SFTP, and over HTTP:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> ~/summer-walk.gpx &gt; /dev/old-logger                      <span class="hljs-comment"># raw input: the tracker driver reads the GPX</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0                            <span class="hljs-comment"># a value for a control, sent to the plug</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;{&quot;value&quot;: 4.2}&#x27;</span> &gt;&gt; /dev/garden-sensor/soil-moisture    <span class="hljs-comment"># a value appended to a log</span>
+<span class="hljs-built_in">cat</span> /dev/hall-plug/switch-0                                  <span class="hljs-comment"># the states the plug reported</span>
+<span class="hljs-built_in">tail</span> -f /dev/hall-plug/switch-0-power                        <span class="hljs-comment"># each new reading, until Ctrl+C</span></code></pre></div>
+<p>A write to a device or a control is answered when its driver has taken it: <code>echo</code> fails at once when
+the value is refused or the driver is not running, and a control&#39;s write that the device has not
+taken within 10 seconds fails with <code>&lt;device&gt; did not answer within 10 s</code>.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>Write a control with <code>&gt;</code>, and append to a log or a track with <code>&gt;&gt;</code>. <code>&gt;</code> on a log or a track empties
+it first, as it would a file, and its history is gone. <code>&gt;&gt;</code> on a control would append a state as
+if the device had reported it, which only the administrator may do.</p>
+</aside>
+<p>A value appended to a log by hand is a line of JSON with the value in <code>value</code>; it is kept as it is,
+and not published on the bus as a driver&#39;s readings are.</p>
+<p>Over HTTP the device&#39;s file in the tree takes the same writes at <code>/file/dev/&lt;device&gt;</code> and
+<code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code>, where a body of a bare value, such as <code>21.4</code>, is kept as
+<code>{&quot;value&quot;: 21.4}</code>. A device cannot sign in, so it sends its <strong>device key</strong> with them, which opens its
+own folder for these writes and nothing else; see
+<a href="../admin/devices.html#device-keys">Devices and their keys</a>.</p>
+<h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
+<p>Every reading a driver keeps is also published on a routing key, a name a message goes out under,
+which any queue or log bound to it gets a copy of:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Routing key</th>
+<th>What comes on it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>dev.&lt;device&gt;.&lt;endpoint&gt;</code></td>
+<td>Each new value of the endpoint: a reading, a press, a state the device reported, a position</td>
+</tr>
+<tr>
+<td><code>dev.&lt;device&gt;</code></td>
+<td>The device coming online or going offline</td>
+</tr>
+</tbody></table>
+</div>
+<p>A message is a line of JSON that says whose it is, so it can be read without its key:</p>
+<div class="code"><pre tabindex="0"><code>{&quot;device&quot;:&quot;hall-sensor&quot;,&quot;endpoint&quot;:&quot;temperature&quot;,&quot;value&quot;:21.4,&quot;unit&quot;:&quot;°C&quot;,&quot;at&quot;:&quot;2026-11-08T07:42:10.512Z&quot;}
+{&quot;device&quot;:&quot;porch-button&quot;,&quot;endpoint&quot;:&quot;input-0&quot;,&quot;value&quot;:&quot;single&quot;,&quot;event&quot;:true,&quot;at&quot;:&quot;2026-11-08T18:03:55.120Z&quot;}
+{&quot;device&quot;:&quot;ruby-phone&quot;,&quot;endpoint&quot;:&quot;position&quot;,&quot;fix&quot;:{&quot;lat&quot;:59.3251,&quot;lng&quot;:18.0711,&quot;speed&quot;:1.2},&quot;at&quot;:&quot;2026-11-08T12:10:04.000Z&quot;}
+{&quot;device&quot;:&quot;hall-plug&quot;,&quot;online&quot;:false,&quot;at&quot;:&quot;2026-11-08T22:15:02.004Z&quot;}</code></pre></div>
+<p><code>value</code> is a number, a word, or <code>true</code> and <code>false</code> for on and off; <code>event</code> marks a press; <code>fix</code> is a
+position, its speed in metres per second; <code>at</code> is when it was read. A reading the device replayed,
+as an MQTT broker does with the last one after EiN reconnects, also has <code>&quot;retained&quot;: true</code>. A GPX
+file with thousands of positions publishes only its newest.</p>
+<p>In a key, <code>*</code> stands for one part and <code>#</code> for any number of them, none included:
+<code>dev.*.temperature</code> is every endpoint called <code>temperature</code>, and <code>dev.hall-plug.#</code> everything the hall
+plug says, its coming and going included.</p>
+<h3 id="a-queue-of-your-own">A queue of your own<a class="anchor" href="#a-queue-of-your-own" aria-label="Link to this section"></a></h3>
+<p>A queue bound to keys keeps every message that comes on them until it is taken, whether or not
+anyone is reading. Make one in your home for what you want, such as every press of the porch button:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mkqueue -k <span class="hljs-string">&#x27;dev.porch-button.#&#x27;</span> ~/presses
+queue-peek ~/presses     <span class="hljs-comment"># the next ones, left in the queue</span>
+<span class="hljs-built_in">cat</span> ~/presses            <span class="hljs-comment"># takes them out as it prints them</span></code></pre></div>
+<p>Remove it with <code>rm ~/presses</code> when you no longer want it, or it keeps filling.</p>
+<h3 id="a-log-of-your-own">A log of your own<a class="anchor" href="#a-log-of-your-own" aria-label="Link to this section"></a></h3>
+<p>A log keeps what comes on its keys as entries with their times, for as long as you say:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mklog -k <span class="hljs-string">&#x27;dev.*.temperature&#x27;</span> -r <span class="hljs-string">&#x27;90 day&#x27;</span> ~/temperatures
+log-read ~/temperatures --since 1d
+log-read ~/temperatures --since 30d --bucket 1d --field value --agg max</code></pre></div>
+<h2 id="how-often-a-reading-is-kept">How often a reading is kept<a class="anchor" href="#how-often-a-reading-is-kept" aria-label="Link to this section"></a></h2>
+<p>A driver hands EiN every reading it hears, and EiN keeps and publishes it only when it is news:</p>
+<ul>
+<li>A value the same as the endpoint&#39;s last is not kept again.</li>
+<li>A number is kept at most once every <code>minInterval</code> seconds, the endpoint&#39;s own attribute. One that
+comes sooner waits for the end of the interval, and only the newest of those is kept, so the last
+of a burst is never lost.</li>
+<li>On and off, words, positions and every press are kept as they come.</li>
+</ul>
+<p>A sensor that reports its power every second therefore costs a row every ten seconds or so while it
+changes, and none while it holds still. The <a href="../automation/index.html#settings">Automation</a> module
+gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds between readings</strong> setting.</p>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../guide/devices.html">Devices</a>: the Devices pages, switching, history, and a phone as a tracker.</li>
+<li><a href="../admin/devices.html">Devices and their keys</a>: who may do what, and what a device key opens.</li>
+<li><a href="../develop/drivers.html">Writing a driver</a>: the driver API, for module authors.</li>
+<li><a href="tree.html">The tree</a>: <code>/dev</code> among the other folders.</li>
+<li><a href="pipelines.html">Changes and pipelines</a>: routing keys, queues and logs in general.</li>
+<li><a href="../automation/index.html">Automation</a>: the MQTT drivers and rules.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="pipelines.html" rel="prev"><span>Previous</span>Changes and pipelines</a><a class="next" href="../reference/commands.html" rel="next"><span>Next</span>Commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-of-your-own">A queue of your own</a></li><li class="nested"><a href="#a-log-of-your-own">A log of your own</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -145,6 +145,27 @@ The recursive flag of `chmod`, `chown` and `acl` is a lower-case `-r`. A share l
 
 `config set` restarts the services a setting names as reading it, if it names any, and says which. Every setting and its default is in [Settings](../reference/settings.md), for example [`CFG_TRASH_RETENTION_DAYS`](../reference/settings.md#cfg_trash_retention_days).
 
+## Devices
+
+The sensors, plugs, phones and loggers under `/dev`; [Devices](../guide/devices.md) shows the pages that do the same, and [Devices, endpoints and drivers](../concepts/devices.md) what writing to a device or an endpoint does.
+
+| Task                                                      | Command                                                                      | Reference                                                |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Every device, with its main value                         | `devices`, `devices --online`                                                | [devices](../reference/commands-core.md)                 |
+| The drivers running, and how many devices each drives     | `devices --drivers`                                                          | [devices](../reference/commands-core.md)                 |
+| A device's endpoints and their values now                 | `device-show hall-plug`                                                      | [device-show](../reference/commands-core.md)             |
+| How an endpoint went, an average an hour                  | `device-history hall-sensor/temperature --since 7d --bucket 1h`              | [device-history](../reference/commands-core.md)          |
+| Switch or set a control                                   | `echo on > /dev/hall-plug/switch-0`, `echo toggle > /dev/hall-plug/switch-0` | [Switch something](../guide/devices.md#switch-something) |
+| Follow an endpoint as its values come                     | `tail -f /dev/hall-sensor/temperature`                                       | [tail](../reference/commands-core.md#tail)               |
+| Every press of a button, kept for you to read             | `mkqueue -k 'dev.porch-button.#' ~/presses`                                  | [mkqueue](../reference/commands-core.md#mkqueue)         |
+| Make a phone, tracker or logger, as a member of `devices` | `device-create 'Ruby phone' --driver tracker --class phone`                  | [device-create](../reference/commands-core.md)           |
+| Give a GPX file to a tracker                              | `cat ~/walk.gpx > /dev/jon-s-etrex`                                          | [cat](../reference/commands-core.md#cat)                 |
+| The address a phone posts to, with a new key              | `device-key ruby-phone --new --origin https://ein.wrenfield.example`         | [device-key](../reference/commands-core.md)              |
+| Rename a device or an endpoint, as a member of `devices`  | `device-label hall-plug 'Hall lamp'`                                         | [device-label](../reference/commands-core.md)            |
+| Forget a device and its history, as a member of `devices` | `device-forget old-sensor`                                                   | [device-forget](../reference/commands-core.md)           |
+
+Write a control with `>` and append to a log with `>>`: `>` on a log empties it first.
+
 ## The system
 
 [Health and the dashboard](../admin/monitoring.md), [Processing and pipelines](../admin/processing.md) and [Services and logs](../admin/services-logs.md) explain what these commands report and what to do about it.

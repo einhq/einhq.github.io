@@ -196,15 +196,16 @@ EiN's own SSH server does not forward ports, so the tunnel goes through the mach
 
 Only the public proxy makes [share links](../guide/sharing.md#share-an-album-with-a-link) work for people outside the family: a share link begins with the address the person who made it had open, so it reaches whoever can reach that address. Make links while EiN is open at its public address, not at `http://ein.local:8080`.
 
-### Phones posting their position
+### Phones and trackers posting
 
-A phone that reports its position to a track (see
-[Live tracking from a phone](../automation/index.md#live-tracking-from-a-phone)) posts to EiN from
-wherever it is, without signing in, so it needs the public HTTPS proxy: over a VPN it reports only
-while the VPN is up, and an SSH tunnel does not reach it at all. Its address is
-`/tracker/<id>.<token>`, which the proxy passes on like any other; the token in it is all that lets
-the phone in. A request with a wrong token is refused with `Forbidden` and logged as
-"tracker post refused", with the client's address.
+A phone or a GPS tracker that reports its position to its device (see
+[Report from a phone](../guide/devices.md#report-from-a-phone)) posts to EiN from wherever it is,
+without signing in, so it needs the public HTTPS proxy: over a VPN it reports only while the VPN is
+up, and an SSH tunnel does not reach it at all. It posts to `/file/dev/<device>` with the device's
+key, in the address or as `Authorization: Bearer`, which the proxy passes on like any other request;
+the key is all that lets it in, and it opens that device for writing and nothing else. A request
+with a wrong key is refused with `Forbidden` and logged as "device write refused", with the client's
+address. [Devices and their keys](devices.md#device-keys) says more.
 
 ### Before you open EiN to the internet
 

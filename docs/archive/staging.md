@@ -87,8 +87,8 @@ same box shows on the Inbox's **Files** tab.
 
 Nothing moves by itself.
 
-Below the cards, a yellow box titled **Needs you** appears when a GPX file waits for the track it
-belongs to; **Choose track** opens the page where you say which track it is (see
+Below the cards, a yellow box titled **Needs you** appears when a GPX file waits for the device it
+belongs to; **Choose device** opens the page where you say which device it is (see
 [GPX files in staging](tracks.md#gpx-files-in-staging)). Another appears when a family tree (a GEDCOM file)
 waits; **Review and import** opens it (see
 [Look over a family tree before it is imported](family.md#look-over-a-family-tree-before-it-is-imported)).

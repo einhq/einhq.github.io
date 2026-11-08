@@ -3,7 +3,8 @@
 A rule switches things when something happens in the house: a button is pressed, a reading crosses a
 line and stays there, a device goes away, or the clock comes round to a time. Rules are short YAML
 files, written by members of the `automation` group, and each runs with the rights of the person who
-wrote it. This page is for those members. [Automation](index.md) covers the devices themselves.
+wrote it. This page is for those members. [Automation](index.md) covers connecting the devices, and
+[Devices](../guide/devices.md) the devices themselves.
 
 ## A first rule
 
@@ -19,7 +20,7 @@ if:
   - state: hall-sensor/illuminance
     below: 30
 then:
-  - device-set hall-plug/switch-0 toggle
+  - echo toggle > /dev/hall-plug/switch-0
 cooldown: 2s
 ```
 
@@ -46,7 +47,7 @@ cooldown: 2s
      The porch button toggles the hall lamp when it is dark
      when porch-button/input-0 is pressed (single)
      if hall-sensor/illuminance below 30: does not hold now
-     then device-set hall-plug/switch-0 toggle
+     then echo toggle > /dev/hall-plug/switch-0
    ```
 
 The rules service reads the folder again within a second of a change, so the rule works from the
@@ -87,23 +88,25 @@ run lines as its owner. `chmod 644` is the way out. Until then `automation-rule-
 | `then`        | Command lines: one, or a list of them, run in order as the file's owner until one fails      | Yes    |
 | `cooldown`    | The least time between two runs, such as `2s` or `5m`. A trigger that fires sooner is let go | No     |
 
-A device's entity is written `<device>/<entity>`, as the device's **Info** tab and `device-show` name
-it: `hall-sensor/temperature`, `hall-plug/switch-0`. A time is a number and `s`, `m`, `h` or `d`:
+A device's endpoint is written `<device>/<endpoint>`, as the device's **Info** tab and `device-show`
+name it: `hall-sensor/temperature`, `hall-plug/switch-0`. Rules read the endpoints under `/dev`, and
+hear what the devices publish on `dev.#`
+([Readings on the bus](../concepts/devices.md#readings-on-the-bus)). A time is a number and `s`, `m`, `h` or `d`:
 `30s`, `10m`, `1.5h`, `1d`.
 
 ### What makes it run: `when`
 
-| Trigger                    | It fires                                                                                                                                                        |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `state: <device>/<entity>` | When the entity's value changes                                                                                                                                 |
-| … with `to`                | When the value comes to that: a number, a word, or `on` and `off` for a switch or a light                                                                       |
-| … with `above`, `below`    | When the value comes above or below that number                                                                                                                 |
-| … with `from`              | Only when the value it changed from was that                                                                                                                    |
-| … with `for: 10m`          | Once the value has stayed what the trigger waits for that long. When it leaves before, the wait is let go, and starts again the next time the value comes to it |
-| `event: <device>/<entity>` | At each press of a button; with `is: single`, only at that kind of press (a Shelly's are `single`, `double`, `triple` and `long`)                               |
-| `online: <device>`         | When the device comes online or goes offline; with `is: true` only when it comes, with `is: false` only when it goes                                            |
-| `at: "07:30"`              | Once a day at that time, in the system's time zone. Write the time in quotes                                                                                    |
-| `every: 15m`               | Each time that much has passed on the clock: `every: 15m` at :00, :15, :30 and :45. A minute or more                                                            |
+| Trigger                      | It fires                                                                                                                                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `state: <device>/<endpoint>` | When the endpoint's value changes                                                                                                                                                                       |
+| … with `to`                  | When the value comes to that: a number, a word, or `on` and `off` for a switch or a light                                                                                                               |
+| … with `above`, `below`      | When the value comes above or below that number                                                                                                                                                         |
+| … with `from`                | Only when the value it changed from was that                                                                                                                                                            |
+| … with `for: 10m`            | Once the value has stayed what the trigger waits for that long. When it leaves before, the wait is let go, and starts again the next time the value comes to it                                         |
+| `event: <device>/<endpoint>` | At each press of a button; with `is: single`, only at that kind of press (a Shelly's are `single`, `double`, `triple` and `long`, and a first-generation Shelly's also `single-long` and `long-single`) |
+| `online: <device>`           | When the device comes online or goes offline; with `is: true` only when it comes, with `is: false` only when it goes                                                                                    |
+| `at: "07:30"`                | Once a day at that time, in the system's time zone. Write the time in quotes                                                                                                                            |
+| `every: 15m`                 | Each time that much has passed on the clock: `every: 15m` at :00, :15, :30 and :45. A minute or more                                                                                                    |
 
 `to`, `above` and `below` can go together, and the value must then meet all of them. A state
 trigger fires when the value comes to what it waits for, not again while it stays there: `above: 23`
@@ -111,18 +114,19 @@ fires when the temperature goes from 22.8 to 23.1, and again only after it has b
 
 ### What must hold: `if`
 
-| Condition                  | It holds when                                                                                                       |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `state: <device>/<entity>` | The entity's latest value `is` a value, is `not` one, is `above` or `below` a number; with none of them, it has one |
-| `online: <device>`         | The device is online; with `is: false`, when it is offline                                                          |
+| Condition                    | It holds when                                                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `state: <device>/<endpoint>` | The endpoint's latest value `is` a value, is `not` one, is `above` or `below` a number; with none of them, it has one |
+| `online: <device>`           | The device is online; with `is: false`, when it is offline                                                            |
 
-An entity that has never reported holds no condition, and a device that never said whether it is
+An endpoint that has never reported holds no condition, and a device that never said whether it is
 on counts as offline.
 
 ### What it does: `then`
 
-Any command line you could type in EiN's terminal, run as the file's owner: `device-set` mostly, but
-as well `todo-add` to put something on a list, or a script of your own. The lines run one after the
+Any command line you could type in EiN's terminal, run as the file's owner: mostly a value written
+to a control, `echo on > /dev/hall-plug/switch-0` ([Switch something](../guide/devices.md#switch-something)),
+but as well `todo-add` to put something on a list, or a script of your own. The lines run one after the
 other, each when the one before has ended. When one fails, the rest are left, and the
 [rules log](#see-what-rules-did) says which line failed and why.
 
@@ -144,7 +148,7 @@ when:
 if:
   - state: heater-plug/switch-0
     is: on
-then: device-set heater-plug/switch-0 off
+then: echo off > /dev/heater-plug/switch-0
 ```
 
 The rule fires when the temperature comes above 23 and has stayed there ten minutes. A dip to 23 or
@@ -163,8 +167,8 @@ if:
   - state: hall-sensor/temperature
     below: 19
 then:
-  - device-set heater-plug/switch-0 on
-  - device-set hall-plug/switch-0 on
+  - echo on > /dev/heater-plug/switch-0
+  - echo on > /dev/hall-plug/switch-0
 ```
 
 At half past six in the system's time zone (`TZ` in `~/ein/.env`,
@@ -183,7 +187,7 @@ log-read /var/logs/automation/rules --since 1d
 ```
 
 ```text
-2026-11-08T18:03:55.412Z	{"rule":"porch-light","why":"porch-button/input-0 \"single\"","lines":[{"line":"device-set hall-plug/switch-0 toggle","code":0}],"at":"2026-11-08T18:03:55.410Z"}
+2026-11-08T18:03:55.412Z	{"rule":"porch-light","why":"porch-button/input-0 \"single\"","lines":[{"line":"echo toggle > /dev/hall-plug/switch-0","code":0}],"at":"2026-11-08T18:03:55.410Z"}
 ```
 
 Each entry names the rule, `why` it ran, each line it ran with its exit `code` (0 when it went well)
@@ -198,10 +202,10 @@ and the `automation-rules` service's line on the dashboard's **Services** tab sa
 | `not run: others than its owner may change it, so it is not run (chmod 644)`    | The file can be changed by the group or by anyone                                                                           | `chmod 644` the file                                                                                                |
 | `not run: a rule needs when: what makes it run`                                 | The file has no `when`                                                                                                      | Add one                                                                                                             |
 | `not run: the rule has …, which a rule does not read`                           | A key is misspelt, or is none a rule takes                                                                                  | Use the keys in [What a rule says](#what-a-rule-says); a trigger's or a condition's own keys are named the same way |
-| `not run: state takes <device>/<entity>, not "hall-sensor"`                     | A trigger or a condition names a device where it needs an entity                                                            | Write `hall-sensor/temperature`                                                                                     |
+| `not run: state takes <device>/<endpoint>, not "hall-sensor"`                   | A trigger or a condition names a device where it needs an endpoint                                                          | Write `hall-sensor/temperature`                                                                                     |
 | `not run: at takes a time of day such as "07:30", not …`                        | The time is not in quotes, or not a time                                                                                    | Write `at: "06:30"`                                                                                                 |
 | `not run: every takes a minute or more`                                         | `every` is shorter than a minute                                                                                            | Use a minute or more, or a `state` trigger                                                                          |
 | `automation-rule-check` says the condition `does not hold now`                  | The rule fires, but its conditions keep it from running                                                                     | Nothing, when that is what you meant                                                                                |
 | The rule is fine, but nothing happens when the value changes                    | A state trigger fires when the value comes to what it waits for; it was there already, or the rule is within its `cooldown` | Wait for the value to leave and come back, or try the lines with `automation-rule-check <rule> --run`               |
-| The log has a line with a code other than 0 and `Access denied for operation …` | The rule's owner may not do what the line does, such as switch an entity whose `set` node is narrowed                       | Have someone who may write the rule, or ask the administrator                                                       |
+| The log has a line with a code other than 0 and `Access denied for operation …` | The rule's owner may not do what the line does, such as switch a control narrowed to others                                 | Have someone who may write the rule, or ask the administrator                                                       |
 | `automation-rule-check` cannot read `/etc/automation/rules`                     | You are not in the `automation` group, or were added since you signed in                                                    | Ask the administrator to add you, then sign in again                                                                |

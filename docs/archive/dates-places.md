@@ -331,7 +331,7 @@ it on the location's **Media** tab. A link someone made by hand, or one brought 
 archive, is never replaced. [Locations and the map](places.md) shows how to draw a location's shape.
 
 A track's route is drawn beside the pictures on the map and on an album's **Map** tab (see
-[Tracks and trips](tracks.md)). EiN does not use it to give pictures a position.
+[Trips](tracks.md)). EiN does not use it to give pictures a position.
 
 ## Set the place of pictures
 

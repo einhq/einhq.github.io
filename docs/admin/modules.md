@@ -16,11 +16,11 @@ skip the sections of modules you have not installed.
 The published modules are the repositories named `module-<name>` in the einhq organisation on
 GitHub:
 
-| Module                               | What it gives you                                                                                                                            | What it needs                                                                                      |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`archive`](../archive/index.md)     | The Archive: albums, media, people and the family tree, locations, cameras and tracks, staging, and the search that finds things among them  | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
-| [`assistant`](../assistant/index.md) | **Chat**: the assistant that answers questions by running EiN's commands for you                                                             | A [language model](../assistant/language-model.md), either the installer's `--llm` or a hosted one |
-| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard** | The [media service](../ems/index.md)                                                               |
+| Module                               | What it gives you                                                                                                                                         | What it needs                                                                                      |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`archive`](../archive/index.md)     | The Archive: albums, media, people and the family tree, locations, cameras and the trips of devices, staging, and the search that finds things among them | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
+| [`assistant`](../assistant/index.md) | **Chat**: the assistant that answers questions by running EiN's commands for you                                                                          | A [language model](../assistant/language-model.md), either the installer's `--llm` or a hosted one |
+| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard**              | The [media service](../ems/index.md)                                                               |
 
 A module needs only what its manifest names as dependencies; EiN installs those with it. A service
 that runs beside EiN, such as the media service or the language model, is no module: the installer

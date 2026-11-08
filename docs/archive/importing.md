@@ -30,8 +30,8 @@ in the sidebar below **Media**.
 
 EiN takes photos (camera RAW files too), videos, recordings, documents such as PDFs, GPX tracks
 and GEDCOM family trees. [Supported files](file-types.md) lists the formats and what EiN works out
-from each. A GPX track you upload into staging is not a picture: it joins the track it names, or
-waits for you to say which track it belongs to (see
+from each. A GPX track you upload into staging is not a picture: it goes to the device it names,
+such as a phone or a GPS logger, or waits for you to say which device it belongs to (see
 [GPX files in staging](tracks.md#gpx-files-in-staging)). A GEDCOM file waits for you to say who its people are, then brings
 them and their relations into the archive (see [Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file)).
 

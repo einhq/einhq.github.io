@@ -55,7 +55,7 @@ span and its stacks. Albums are under `/archive/albums`. See [Albums](../archive
 ### Archive
 
 The first module, `archive`, and what it adds: albums, people and their family tree, locations,
-cameras, tracks and their trips, labels, staging, and the pipelines that process media. Its parts of the
+cameras, the trips of the devices that travel, labels, staging, and the pipelines that process media. Its parts of the
 tree are `/archive/albums`, `/archive/people`, `/archive/locations` and `/archive/cameras`. Without it, EiN keeps what you give it and works nothing out. See
 [The Archive](../archive/index.md) and [Modules](../admin/modules.md).
 
@@ -98,7 +98,7 @@ removes nothing. See [Duplicates](../archive/duplicates.md#copies-look-alikes-an
 
 _Archive._ What took a picture: a camera, phone, scanner or camcorder, matched by its make, model and
 serial number. A registered camera dates the pictures it took in its own time zone, and a phone's
-camera can link to the track it records into. Cameras are under `/archive/cameras`. See
+camera can link to the phone as a device, whose track says where it was. Cameras are under `/archive/cameras`. See
 [Cameras](../archive/cameras.md).
 
 ### Category
@@ -114,6 +114,12 @@ One part of an installation, run by podman or Docker with compose: `ein` (EiN it
 (PostgreSQL), and if you chose them `ems` (the media service) and `llm` (the language model). Only
 `ein` has ports open to other machines. A container is not a service. See
 [How EiN works](../start/how-ein-works.md#what-runs-beside-ein).
+
+### Control
+
+An endpoint of a device that is written to change it: a switch, a dimmer, a thermostat's target.
+`echo on > /dev/hall-plug/switch-0` sends `on` to the plug, and reading the control gives the states
+the device reported. See [Devices, endpoints and drivers](../concepts/devices.md#endpoints).
 
 ### Core
 
@@ -150,14 +156,28 @@ camera and the text read from it. <kbd>i</kbd> opens and closes it. See
 
 ### Device
 
-_Automation._ Something in the house that reports or can be switched, such as a sensor, a plug or a
-button, or one made by hand, such as a boat whose position a phone posts. Devices are under
-`/archive/devices`. See [Automation](../automation/index.md).
+Something outside EiN that reports to it or can be switched from it: a sensor, a plug, a button, a
+phone that says where it is, a GPS logger. Each is a folder under `/dev`, such as `/dev/hall-plug`,
+holding its endpoints, and has a page under **Devices**. A driver finds it, or a member of the
+`devices` group makes it. See [Devices](../guide/devices.md).
+
+### Device key
+
+The key a device carries to write to EiN without signing in, as a phone posting its position does:
+it opens `/file/dev/<device>` of that one device for writing, and nothing else. `device-key` and the
+device's **Info** tab make, show and take it away. See
+[Devices and their keys](../admin/devices.md#device-keys).
 
 ### Discard
 
 _Archive._ The staging decision that sends a group's files to your trash instead of filing them. It can be
 undone. See [Sorting in staging](../archive/staging.md).
+
+### Driver
+
+What turns a device's own messages into its endpoints and sends it what is written to its controls.
+EiN's own `tracker` drives phones and GPS loggers; the Automation module brings drivers for MQTT
+devices. See [Devices, endpoints and drivers](../concepts/devices.md#drivers).
 
 ### Duplicate
 
@@ -177,6 +197,12 @@ all compare embeddings. The media service makes them. Also called a vector. See
 ### EMS
 
 _Media service._ The media service. The name is short for EiN Media Service.
+
+### Endpoint
+
+One thing a device reports or is told, a node under the device: a `log` of readings or presses, a
+`track` of positions, or a `control`. It is written `<device>/<endpoint>`, such as
+`hall-sensor/temperature`. See [Devices, endpoints and drivers](../concepts/devices.md#endpoints).
 
 ### Event, a change
 
@@ -497,8 +523,8 @@ links are kept under `/var/links`. See
 
 ### Sharing
 
-Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location,
-a camera or a track, set in words with **Share**:
+Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location
+or a camera, set in words with **Share**:
 **Can view** or **Can edit** for people and groups, and links for people without an account. It
 sets the same mode and access list as `chmod` and `acl`. See [Sharing](../guide/sharing.md).
 
@@ -514,8 +540,8 @@ The panel at the right of the screen, where the chat opens. See
 
 ### Sidebar
 
-The column of entries down the left of every page. Core gives **Home**, **Search**, **Settings**,
-**Statistics** and **Documentation**, and for administrators **Nodes** and **Dashboard**, and
+The column of entries down the left of every page. Core gives **Home**, **Search**, **Devices**,
+**Settings**, **Statistics** and **Documentation**, and for administrators **Nodes** and **Dashboard**, and
 modules add theirs. See
 [Your sidebar and top bar](../guide/customizing.md).
 
@@ -557,10 +583,10 @@ account menu. See [Finding your way around](../guide/interface.md#the-top-bar).
 
 ### Track
 
-The route something travelled: GPS points with times, from GPX files or sent live, in a node of the
-type `track`. With the Automation module, a device with a position keeps one as its position's
-history. The Archive draws tracks on its maps and cuts them into trips. See
-[Tracks and trips](../archive/tracks.md).
+Where a device has been: positions with their times, sent live or read from GPX files, kept as one
+of the device's endpoints, such as `/dev/sailboat/position`. A device's **History** tab draws it on a
+map, and with the Archive its **Trips** tab cuts it into trips. See
+[Devices](../guide/devices.md#a-phone-or-a-gps-tracker).
 
 ### Trash
 
@@ -576,9 +602,9 @@ The one hierarchy of nodes that holds everything in EiN, from `/`: `/archive`, `
 
 ### Trip
 
-_Archive._ A stretch of a track from where it lay still to where it lay still again, found by EiN
-and kept up to date as the track grows. A trip can be made an album. See
-[Tracks and trips](../archive/tracks.md#trips).
+_Archive._ A stretch of a device's track from where it lay still to where it lay still again, found
+by EiN and kept up to date as the track grows, on the device's **Trips** tab. A trip can be made an
+album. See [Trips](../archive/tracks.md#trips).
 
 ## U
 

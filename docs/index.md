@@ -15,11 +15,11 @@ These pages come in two parts, as EiN does:
 - **Core** holds for every EiN, whatever modules it has: installing it, the Web UI, the shell and SSH, looking after it, the ideas it is built on, and the reference. Where a core page shows something a module adds, such as an entry the Archive puts in the sidebar, it says so and links to that module's pages.
 - **Modules** has a section for each module. Read a module's section once that module is installed on your EiN, and leave it aside otherwise. Each section opens with an overview of what the module adds and what it needs.
 
-| Module                              | What it adds                                                                                                                                                  |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [The Archive](archive/index.md)     | Albums of photos, videos, recordings and documents, people and their family tree, locations, cameras and tracks, and staging, where uploads wait to be sorted |
-| [The Assistant](assistant/index.md) | The chat that answers your questions by running EiN's commands for you, with a language model                                                                 |
-| [The media service](ems/index.md)   | EiN's side of the media service, the container that does the work on pictures, video and sound which the Archive needs                                        |
+| Module                              | What it adds                                                                                                                                                                |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [The Archive](archive/index.md)     | Albums of photos, videos, recordings and documents, people and their family tree, locations, cameras and the trips of devices, and staging, where uploads wait to be sorted |
+| [The Assistant](assistant/index.md) | The chat that answers your questions by running EiN's commands for you, with a language model                                                                               |
+| [The media service](ems/index.md)   | EiN's side of the media service, the container that does the work on pictures, video and sound which the Archive needs                                                      |
 
 ## Where to start
 

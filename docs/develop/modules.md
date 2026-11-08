@@ -372,11 +372,11 @@ Anything else stops the build with a message naming the file and the import.
 A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:
 
-| Entry     | Where it appears                                                                                               |
-| --------- | -------------------------------------------------------------------------------------------------------------- |
-| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to` |
-| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu |
-| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Dashboard**) or `nodes.tools` |
+| Entry     | Where it appears                                                                                                                                         |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to`                                           |
+| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu                                           |
+| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Dashboard**), `device.tabs` (a tab of a device's page) or `nodes.tools` |
 
 A top-bar entry's `action` is `{ "navigate": "/recipes" }` for the page, `{ "dialog": "/recipes/new" }`
 for the dialog over it, `{ "drawer": … }` for the side drawer and `{ "fullscreen": … }` for over
@@ -519,7 +519,8 @@ for a language model or text vectors. The settings are in
 [the settings reference](../reference/settings.md).
 
 With the Assistant installed, what the assistant knows about your module's commands, and how to
-give it more, is in [Teaching the assistant](../assistant/teaching.md).
+give it more, is in [Teaching the assistant](../assistant/teaching.md). A module that brings a kind
+of device registers a driver from one of its services; see [Writing a driver](drivers.md).
 
 ## Write documentation for it
 
@@ -644,6 +645,7 @@ show them afterwards.
 ## Related pages
 
 - [The module manifest](manifest.md): every field of `mod.json`
+- [Writing a driver](drivers.md): bringing a kind of device to EiN
 - [Teaching the assistant](../assistant/teaching.md): making the assistant use your module's commands
 - [Building from source](source.md): a checkout of core to type-check and test modules in
 - [Modules](../admin/modules.md): installing, updating and removing modules as an administrator

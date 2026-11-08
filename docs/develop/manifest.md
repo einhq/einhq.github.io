@@ -342,7 +342,7 @@ Which route opens a node of a type, so the Web UI can link nodes it finds but do
 "open": {
   "person": "/people/{name}",
   "album": "/albums/{path}",
-  "track": "/tracks/{path}"
+  "camera": "/cameras/{name}"
 }
 ```
 
@@ -352,7 +352,7 @@ Which route opens a node of a type, so the Web UI can link nodes it finds but do
 | `{parent}`  | the segment before it        |
 | `{path}`    | the node's whole path        |
 
-Each is URI-encoded. A route must start with `/` and use no other placeholder. A type that no installed module names is shown without a link.
+Each is URI-encoded. A route must start with `/` and use no other placeholder. A type that no installed module names is shown without a link. Core opens a `device` at its page itself, and a `log`, `track` or `control` directly under a device at its device's page, so a module names no route for those; a module adds a tab to the device page with a `device.tabs` panel instead ([A tab on the device page](drivers.md#a-tab-on-the-device-page)).
 
 ## What `mod setup` finds without a field
 

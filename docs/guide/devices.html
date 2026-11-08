@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devices – EiN documentation</title>
+    <meta name="description" content="The Devices page holds the things outside EiN that report to it or can be switched from it: the sensors, plugs, switches, lights and buttons in the house, a phone that says where it is, a GPS logger, a boat. Each has a page with what it reports now, how that went over time, and the switches to turn. This page is for everyone who uses them, and for the members of the devices group who add phones and loggers. Devices, endpoints and drivers explains how they are kept, and Devices and their keys who may do what.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/devices.html">
+    <meta property="og:title" content="Devices – EiN documentation">
+    <meta property="og:description" content="The Devices page holds the things outside EiN that report to it or can be switched from it: the sensors, plugs, switches, lights and buttons in the house, a phone that says where it is, a GPS logger, a boat. Each has a page with what it reports now, how that went over time, and the switches to turn. This page is for everyone who uses them, and for the members of the devices group who add phones and loggers. Devices, endpoints and drivers explains how they are kept, and Devices and their keys who may do what.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/devices.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html" aria-current="page">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Devices</span></button>
+        <header class="docs-head">
+          <p class="crumb">Using EiN</p>
+          <h1>Devices</h1>
+        </header>
+        <article class="prose">
+<p>The <strong>Devices</strong> page holds the things outside EiN that report to it or can be switched from it: the
+sensors, plugs, switches, lights and buttons in the house, a phone that says where it is, a GPS
+logger, a boat. Each has a page with what it reports now, how that went over time, and the switches
+to turn. This page is for everyone who uses them, and for the members of the <code>devices</code> group who
+add phones and loggers. <a href="../concepts/devices.html">Devices, endpoints and drivers</a> explains how they
+are kept, and <a href="../admin/devices.html">Devices and their keys</a> who may do what.</p>
+<h2 id="where-devices-come-from">Where devices come from<a class="anchor" href="#where-devices-come-from" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>A driver finds them.</strong> With the <a href="../automation/index.html">Automation</a> module, a sensor or a plug
+that announces itself on the house&#39;s MQTT broker, such as one running ESPHome or a Shelly, is on
+the Devices page within seconds of connecting, with everything it reads and does. Nothing is
+entered in EiN.</li>
+<li><strong>Someone makes them.</strong> A phone or a GPS logger announces nothing, so a member of the <code>devices</code>
+group makes it by hand (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). EiN&#39;s own
+<code>tracker</code> driver then reads what it sends.</li>
+</ul>
+<p>A device has a name, such as <code>hall-plug</code>, that commands and rules use, and a label, such as <strong>Hall
+lamp</strong>, that the pages show. Each thing it reports or takes is an <strong>endpoint</strong> with a name of its
+own within it: <code>hall-plug/switch-0</code> is the plug&#39;s relay, <code>hall-plug/switch-0-power</code> the power it
+draws, <code>ruby-phone/position</code> where the phone has been.</p>
+<h2 id="the-devices-page">The Devices page<a class="anchor" href="#the-devices-page" aria-label="Link to this section"></a></h2>
+<p>Open <strong>Devices</strong> in the sidebar, under <strong>Browse</strong>. It has a card for every device you may see: its
+label, its main value, and badges for <strong>online</strong> or <strong>offline</strong>, what it is (such as <strong>plug</strong> or
+<strong>phone</strong>) and how many endpoints it has. The main value is a temperature when the device has one,
+then power, humidity, light or energy, else any other reading, else a switch; a device with none
+shows its manufacturer and model instead. A device that says nothing of whether it is on has neither
+<strong>online</strong> nor <strong>offline</strong>. Choose a card to open the device.</p>
+<ul>
+<li>Type in the filter box to narrow the cards by label, name, what it is, manufacturer or model.</li>
+<li><strong>Show</strong> <strong>All</strong> devices or only those <strong>Online</strong>.</li>
+<li><strong>Sort</strong> by <strong>Name (A-Z)</strong> or by <strong>Latest value</strong>, the device that reported most lately first.</li>
+</ul>
+<p>The header counts the devices and how many are online. With none yet, the page says <strong>No devices
+yet</strong>: &quot;Devices appear here when a driver finds them, or when someone makes one with device-create.&quot;</p>
+<h2 id="a-devices-page">A device&#39;s page<a class="anchor" href="#a-devices-page" aria-label="Link to this section"></a></h2>
+<p>The header names the device, its manufacturer and model, whether it is online, what it is, and how
+long ago its last value came. Under it are three tabs, and any that modules add:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Overview</strong></td>
+<td>The page opens here: a tile for each endpoint as it is now, with the switches</td>
+</tr>
+<tr>
+<td><strong>History</strong></td>
+<td>How one endpoint went over a day, a week, a month or a year</td>
+</tr>
+<tr>
+<td><strong>Info</strong></td>
+<td>What the device is, its driver, each endpoint, its key, and renaming and forgetting it</td>
+</tr>
+<tr>
+<td><strong>Trips</strong></td>
+<td>With the <a href="../archive/index.html">Archive</a>, on a device that has a track: <a href="../archive/tracks.html">its trips</a></td>
+</tr>
+</tbody></table>
+</div>
+<p>The address is <code>/devices/</code> and the device&#39;s name, such as <code>/devices/hall-plug</code>, and the tab is in
+<code>?tab=</code> (<a href="../reference/routes.html#eins-own-pages">Addresses in the Web UI</a>). A device opened from the
+<strong>Nodes</strong> page opens here, and so does any of its endpoints.</p>
+<h3 id="overview">Overview<a class="anchor" href="#overview" aria-label="Link to this section"></a></h3>
+<p>A tile for each endpoint:</p>
+<ul>
+<li><strong>A reading</strong>, such as a temperature: its value with its unit, how long ago it came, and a line of
+the last six hours.</li>
+<li><strong>A button</strong>: its last press, such as <code>single</code>, and how long ago it was (&quot;pressed 4 min ago&quot;), or
+&quot;not pressed yet&quot;.</li>
+<li><strong>A position</strong>: a small map of the day up to its last position, how many positions the track holds
+and when the last came. <strong>Over time</strong> opens it on the <strong>History</strong> tab.</li>
+<li><strong>A switch or a light</strong>: a toggle that switches it.</li>
+<li><strong>A setting that takes a number</strong>, such as a thermostat&#39;s target: a slider, set when you let go, or
+a box with <strong>Set</strong> when it has no range.</li>
+<li><strong>A setting that takes one of some choices</strong>: a list to pick from.</li>
+<li><strong>An action</strong>, such as a restart or a chime: <strong>Press</strong>, with when it was last pressed and by whom.</li>
+</ul>
+<p>A switch or a setting you change shows what you asked for at once, with &quot;asked on, waiting for the
+device&quot; under its label, until the device says it has done it; then it shows what the device reports.
+A switch you may not change is greyed out. What tells of the device itself rather than of the house,
+such as its own temperature or its Wi-Fi signal, is under <strong>About the device itself</strong>. An endpoint the
+device no longer announces is left out; its history stays.</p>
+<h3 id="history">History<a class="anchor" href="#history" aria-label="Link to this section"></a></h3>
+<p>Pick an endpoint and a span: <strong>Day</strong>, <strong>Week</strong>, <strong>Month</strong> or <strong>Year</strong>. The tab opens on the device&#39;s
+main value, the one its card shows.</p>
+<ul>
+<li><strong>A reading</strong> is charted as the average of every 15 minutes over a day, of every 2 hours over a
+week, of every 6 hours over a month and of every day over a year, to five significant digits.</li>
+<li><strong>Anything on or off</strong>, a switch, a door or a motion sensor, is charted as the share of the time it
+was on.</li>
+<li><strong>A button</strong> is charted as how many presses there were.</li>
+<li><strong>A track</strong> is drawn on a map, each position of the span, up to the latest 20,000, with how many
+there are and how long ago the last was.</li>
+</ul>
+<p>A span with nothing in it says <strong>No values in this span.</strong> or <strong>No fixes in this span.</strong></p>
+<h3 id="info">Info<a class="anchor" href="#info" aria-label="Link to this section"></a></h3>
+<ul>
+<li>What the device is: its <strong>Name</strong> in commands and rules, <strong>Class</strong>, <strong>Driver</strong>, <strong>Manufacturer</strong>,
+<strong>Model</strong>, <strong>Firmware</strong>, <strong>Serial</strong> and <strong>MAC</strong>. A driver whose module&#39;s service is stopped reads
+<strong>(not running)</strong>, in red: the device&#39;s switches do nothing until it runs again.</li>
+<li>Each endpoint, with its label and name, its type (<code>log</code>, <code>track</code> or <code>control</code>), its unit, its latest
+value, and whether you may write it. <strong>events</strong> marks a button&#39;s presses, <strong>diagnostic</strong> or
+<strong>config</strong> what tells of the device itself, <strong>not read</strong> an endpoint whose values its driver cannot
+read, and <strong>retired</strong> one the device no longer announces.</li>
+<li><strong>Device key</strong>, for a device whose driver reads what is posted to it, such as a phone: the address
+it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). Only those who may change
+the device see it.</li>
+<li>For members of the <code>devices</code> group: <strong>Called</strong> and <strong>Rename</strong>, the label the pages show (the name
+stays), and <strong>Forget</strong>, which removes the device and everything it kept after asking &quot;Forget
+&lt;device&gt; and all it has kept? A driver that finds it again makes it again.&quot; A sensor that is
+still on comes back when it next announces itself, without its old history.</li>
+</ul>
+<h2 id="switch-something">Switch something<a class="anchor" href="#switch-something" aria-label="Link to this section"></a></h2>
+<p>The toggles, sliders and <strong>Press</strong> buttons on a device&#39;s <strong>Overview</strong> switch it. In the terminal, write
+the value to the control:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0
+<span class="hljs-built_in">echo</span> toggle &gt; /dev/hall-plug/switch-0
+<span class="hljs-built_in">echo</span> 21.5 &gt; /dev/heater/target-temperature
+<span class="hljs-built_in">echo</span> eco &gt; /dev/heat-pump/mode
+<span class="hljs-built_in">echo</span> press &gt; /dev/hall-sensor/restart</code></pre></div>
+<p>A switch takes <code>on</code>, <code>off</code> or <code>toggle</code>; a number setting a number within its limits; a choice one of
+its options; an action <code>press</code>. The device&#39;s <strong>Info</strong> tab and <code>device-show</code> say which endpoints are
+controls and whether you may write them. The value goes to the device at once, and the command ends
+when the device&#39;s driver has taken it, or fails, saying why:</p>
+<ul>
+<li><code>hall-plug/switch-0 takes on, off or toggle, not &#39;7&#39;</code>: the value is not one the control takes.</li>
+<li><code>hall-plug&#39;s driver shelly is not running</code>: the module that drives it has its service stopped.</li>
+<li><code>hall-plug/switch-0: not connected to the broker, so nothing was sent</code>: with Automation, EiN does
+not hear the MQTT broker just now.</li>
+<li><code>Access denied for operation &#39;w&#39; on node: …</code>: the control is narrowed to others
+(<a href="../admin/devices.html#keep-a-switch-to-some-people">Devices and their keys</a>).</li>
+</ul>
+<p>Nothing is kept to be sent later: a lamp switched on an hour after it was asked would surprise. Use
+<code>&gt;</code> to switch, never <code>&gt;&gt;</code> (see <a href="../concepts/devices.html#writing-to-a-device">Writing to a device</a>).</p>
+<p>With the <a href="../assistant/index.html">Assistant</a> and the Automation module, asking the chat to &quot;turn on the
+hall lamp&quot; gives a <a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a>
+with the <code>echo</code> line, which you run or decline. With Automation, <a href="../automation/rules.html">rules</a>
+switch things by themselves when a reading, a press or the clock says so.</p>
+<h2 id="read-what-a-device-reported">Read what a device reported<a class="anchor" href="#read-what-a-device-reported" aria-label="Link to this section"></a></h2>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+devices                                                       <span class="hljs-comment"># every device, with its main value</span>
+devices --online
+device-show hall-sensor                                       <span class="hljs-comment"># its endpoints and their values now</span>
+device-history hall-sensor/temperature -n 10                  <span class="hljs-comment"># the latest 10 values</span>
+device-history hall-sensor/temperature --since 7d --bucket 1h            <span class="hljs-comment"># an average an hour</span>
+device-history heater-plug/switch-0-power --since 30d --bucket 1d --agg max   <span class="hljs-comment"># the highest each day</span>
+device-history ruby-phone/position --since 1d                 <span class="hljs-comment"># the day&#x27;s positions</span>
+<span class="hljs-built_in">cat</span> /dev/hall-plug/switch-0                                   <span class="hljs-comment"># every state the plug reported</span>
+<span class="hljs-built_in">tail</span> -f /dev/hall-sensor/temperature                          <span class="hljs-comment"># each new reading, until Ctrl+C</span></code></pre></div>
+<p><code>device-history</code> prints a line per value, its time, a tab and the value: <code>--since</code> and <code>--until</code>
+take a time or a duration such as <code>24h</code> or <code>7d</code>, and <code>--bucket</code> sums the values up per interval, with
+<code>--agg</code> as <code>avg</code> (the default), <code>min</code>, <code>max</code>, <code>sum</code>, <code>count</code>, <code>first</code> or <code>last</code>; on and off count as
+1 and 0. Without <code>--since</code> it gives the latest 100, <code>-n</code> for another number. A track gives its
+positions.</p>
+<h2 id="a-phone-or-a-gps-tracker">A phone or a GPS tracker<a class="anchor" href="#a-phone-or-a-gps-tracker" aria-label="Link to this section"></a></h2>
+<p>A phone that reports where it is as it moves, a GPS tracker on a boat or in a car, and a logger whose
+files you copy in are all devices driven by EiN&#39;s <code>tracker</code> driver, each keeping where it was in its
+<code>position</code> track. Members of the <code>devices</code> group make one:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone
+device-create <span class="hljs-string">&#x27;Sailboat&#x27;</span> --driver tracker --class boat
+device-create <span class="hljs-string">&quot;Jon&#x27;s eTrex&quot;</span> --driver tracker --class foot --manufacturer Garmin --model <span class="hljs-string">&#x27;eTrex 30x&#x27;</span></code></pre></div>
+<p><code>device-create</code> prints the device&#39;s path, such as <code>/dev/ruby-phone</code>. <code>--class</code> says what it is:
+<code>phone</code>, <code>tracker</code>, or, for something that always travels the same way, <code>boat</code>, <code>car</code>, <code>bike</code> or
+<code>foot</code>, which the Archive takes as <a href="../archive/tracks.html#how-a-device-travels">how its trips travel</a>.
+<code>--manufacturer</code> and <code>--model</code> say more about it, and let a GPX file that names them find it.</p>
+<h3 id="report-from-a-phone">Report from a phone<a class="anchor" href="#report-from-a-phone" aria-label="Link to this section"></a></h3>
+<p>A phone with the free <a href="https://www.traccar.org/client/">Traccar Client</a> app adds its position to the
+device&#39;s track as it moves:</p>
+<ol>
+<li>Open the device&#39;s page at the address the phone will reach EiN at, such as
+<code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
+<li>Under <strong>Device key</strong>, choose <strong>Make a key</strong>. A QR code and the address appear.</li>
+<li>On the phone, install Traccar Client and scan the QR code in its settings. It fills in the server
+URL and, as the device identifier, the device&#39;s name. <strong>Or type the server URL in by hand</strong> shows
+the address to type instead.</li>
+<li>Set how often it reports, for example every 30 seconds, and switch tracking on.</li>
+</ol>
+<p><a href="https://osmand.net/">OsmAnd</a> reports the same way: give its online tracking the device&#39;s address
+with <code>&amp;lat={0}&amp;lon={1}&amp;timestamp={2}</code> added. So does a hardware tracker that posts the OsmAnd
+protocol, or GPRMC sentences, over HTTP.</p>
+<p>The phone posts to EiN from wherever it is, so EiN must be reachable from the internet over HTTPS
+(<a href="../admin/network.html#phones-and-trackers-posting">Phones and trackers posting</a>). The address holds
+the device&#39;s key, and anyone who has it can add positions to the device: <strong>New key</strong> makes another
+(the phone stops reaching EiN until it is given the new address), and <strong>Take the key away</strong> stops it
+and keeps the track. In the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-key ruby-phone --new --origin https://ein.wrenfield.example   <span class="hljs-comment"># a new key, and the address</span>
+device-key ruby-phone --origin https://ein.wrenfield.example         <span class="hljs-comment"># the address, while it has one</span>
+device-key ruby-phone --off</code></pre></div>
+<h3 id="gpx-files">GPX files<a class="anchor" href="#gpx-files" aria-label="Link to this section"></a></h3>
+<p>A GPS logger, a watch or a tracking app saves its routes as GPX files. Write one to the device and
+its positions join the track; a position with a time the track already has is not added twice, and
+one without a time is left out:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> ~/tararua-walk.gpx &gt; /dev/jon-s-etrex</code></pre></div>
+<p>Over SFTP, copy the file onto the device&#39;s path, <code>/dev/jon-s-etrex</code>. With the Archive, a GPX file
+uploaded into staging finds its device by itself, and the device&#39;s <strong>Trips</strong> tab has <strong>Upload GPX</strong>;
+see <a href="../archive/tracks.html#gpx-files">GPX files</a>.</p>
+<h3 id="values-a-script-writes">Values a script writes<a class="anchor" href="#values-a-script-writes" aria-label="Link to this section"></a></h3>
+<p>Something without a driver of its own, such as a script reading a sensor, can write values to a
+device&#39;s logs over HTTP. A member of <code>devices</code> makes the device and a log for each value, and gives
+the script the device&#39;s key:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create <span class="hljs-string">&#x27;Garden sensor&#x27;</span> --class sensor
+mklog /dev/garden-sensor/soil-moisture
+device-key garden-sensor --new --origin https://ein.wrenfield.example</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that runs the script</span>
+curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x27;</span> --data 41.5 https://ein.wrenfield.example/file/dev/garden-sensor/soil-moisture</code></pre></div>
+<p>The key is the part of the address after <code>key=</code>. Each value is kept with the time it arrived, and
+shows on the device&#39;s page like any reading.</p>
+<h2 id="rename-or-forget-a-device">Rename or forget a device<a class="anchor" href="#rename-or-forget-a-device" aria-label="Link to this section"></a></h2>
+<p>Members of the <code>devices</code> group rename and forget devices on the <strong>Info</strong> tab, or in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-label hall-plug <span class="hljs-string">&#x27;Hall lamp&#x27;</span>                     <span class="hljs-comment"># the label its page shows</span>
+device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temperature&#x27;</span>
+device-forget old-sensor                               <span class="hljs-comment"># the device and everything it kept</span></code></pre></div>
+<p>The name in commands and rules stays as it is. Forgetting removes the device&#39;s history with it; a
+device a driver still hears comes back new.</p>
+<h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List the devices, with their main value</td>
+<td><a href="../reference/commands-core.html"><code>devices</code></a>, <code>--online</code> for those that answer</td>
+</tr>
+<tr>
+<td>List the drivers running, and their devices</td>
+<td><code>devices --drivers</code></td>
+</tr>
+<tr>
+<td>A device&#39;s endpoints and their values now</td>
+<td><a href="../reference/commands-core.html"><code>device-show</code></a> <code>&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td>An endpoint&#39;s history</td>
+<td><a href="../reference/commands-core.html"><code>device-history</code></a> <code>&lt;device&gt;/&lt;endpoint&gt;</code>, <code>--since</code>, <code>--bucket</code>, <code>--agg</code></td>
+</tr>
+<tr>
+<td>Switch or set a control</td>
+<td><code>echo &lt;value&gt; &gt; /dev/&lt;device&gt;/&lt;endpoint&gt;</code></td>
+</tr>
+<tr>
+<td>Follow an endpoint as values come</td>
+<td><code>tail -f /dev/&lt;device&gt;/&lt;endpoint&gt;</code></td>
+</tr>
+<tr>
+<td>Make a phone, tracker or logger</td>
+<td><a href="../reference/commands-core.html"><code>device-create</code></a> <code>&lt;name&gt; --driver tracker --class &lt;class&gt;</code></td>
+</tr>
+<tr>
+<td>Give a GPX file to a tracker</td>
+<td><code>cat &lt;file&gt;.gpx &gt; /dev/&lt;device&gt;</code></td>
+</tr>
+<tr>
+<td>Show, renew or take away a device&#39;s key</td>
+<td><a href="../reference/commands-core.html"><code>device-key</code></a> <code>&lt;device&gt;</code>, <code>--new</code>, <code>--off</code>, <code>--origin &lt;address&gt;</code></td>
+</tr>
+<tr>
+<td>Rename a device or an endpoint</td>
+<td><a href="../reference/commands-core.html"><code>device-label</code></a> <code>&lt;device&gt;[/&lt;endpoint&gt;] &lt;label&gt;</code></td>
+</tr>
+<tr>
+<td>Forget a device</td>
+<td><a href="../reference/commands-core.html"><code>device-forget</code></a> <code>&lt;device&gt;</code></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Devices</strong> is not in the sidebar</td>
+<td>You are not signed in</td>
+<td>Sign in</td>
+</tr>
+<tr>
+<td><strong>No devices yet</strong></td>
+<td>No driver has found one, and nobody has made one</td>
+<td>With Automation, see <a href="../automation/index.html#check-that-ein-hears-them">Check that EiN hears them</a></td>
+</tr>
+<tr>
+<td>A switch stays &quot;waiting for the device&quot;</td>
+<td>The device took the command but has not said it switched: it is off, or out of reach</td>
+<td>Check its power and its network; the switch shows what it reports once it does</td>
+</tr>
+<tr>
+<td>The driver reads <strong>(not running)</strong></td>
+<td>The service of the module that brings the driver is stopped</td>
+<td>An administrator starts it on the dashboard&#39;s <strong>Services</strong> tab, or with <code>service start</code></td>
+</tr>
+<tr>
+<td><code>toggle needs the state the device last reported, and it has reported none</code></td>
+<td>The control has never reported a state</td>
+<td>Write <code>on</code> or <code>off</code> instead</td>
+</tr>
+<tr>
+<td><code>device-create</code> says <code>only the devices group&#39;s members make, name and forget devices</code></td>
+<td>You are not in the <code>devices</code> group, or were added since you signed in</td>
+<td>Ask the administrator to add you, then sign in again</td>
+</tr>
+<tr>
+<td><strong>Rename</strong> and <strong>Forget</strong> are missing</td>
+<td>The same</td>
+<td>The same</td>
+</tr>
+<tr>
+<td><code>device-create</code> says <code>&#39;null&#39; is core&#39;s own in /dev, not a device&#39;s name</code></td>
+<td>The name is one of EiN&#39;s own in <code>/dev</code></td>
+<td>Choose another name</td>
+</tr>
+<tr>
+<td><code>cat ride.gpx &gt; /dev/thermometer</code> says the device has no driver</td>
+<td>Only a device with a driver that reads raw input takes a file</td>
+<td>Write it to the tracker it was recorded on</td>
+</tr>
+<tr>
+<td>The phone reports nothing</td>
+<td>It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client</td>
+<td>See <a href="#report-from-a-phone">Report from a phone</a> and <a href="../admin/network.html#phones-and-trackers-posting">Ports, HTTPS and remote access</a></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../concepts/devices.html">Devices, endpoints and drivers</a>: how devices are kept, written to and
+published.</li>
+<li><a href="../admin/devices.html">Devices and their keys</a>: who may do what, and what a device key opens.</li>
+<li><a href="../automation/index.html">Automation</a>: sensors, plugs and buttons over MQTT, and rules.</li>
+<li><a href="../archive/tracks.html">Trips</a>: with the Archive, the trips a device&#39;s track is cut into.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="home.html" rel="prev"><span>Previous</span>Home and statistics</a><a class="next" href="sharing.html" rel="next"><span>Next</span>Sharing</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-devices-come-from">Where devices come from</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-something">Switch something</a></li><li><a href="#read-what-a-device-reported">Read what a device reported</a></li><li><a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a></li><li class="nested"><a href="#report-from-a-phone">Report from a phone</a></li><li class="nested"><a href="#gpx-files">GPX files</a></li><li class="nested"><a href="#values-a-script-writes">Values a script writes</a></li><li><a href="#rename-or-forget-a-device">Rename or forget a device</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

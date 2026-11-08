@@ -62,7 +62,7 @@ show **waiting for EMS** on the **Dashboard**.
 | `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
 | `staging-organize`     | Plans a staging category's suggested groups again                                                                   | `organize`                  |
 | `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
-| `track-stage`          | Makes a GPX file dropped in staging into its track's route                                                          | run by the engine           |
+| `track-stage`          | Gives a GPX file dropped in staging to the device it was recorded on                                                | run by the engine           |
 | `track-trips`          | Finds a track's trips again after points arrive, names the places it stayed, and looks up their weather             | run by the engine           |
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
 | `media-heal`           | Goes through the albums or a staging area and announces the files missing work the other pipelines should have done | run by the engine           |
@@ -82,8 +82,8 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 | `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather                                           | `media-interpret`, and the face, voice, camera, geocoding, weather and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
-they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks
-and places. A folder with `processing` set to `["renditions"]` gets its pictures read and their
+they read, and nor do the pipelines that work on the Archive's own folders and on the devices'
+tracks: albums, staging, tracks and places. A folder with `processing` set to `["renditions"]` gets its pictures read and their
 sizes made, and no dates worked out, no faces, text, picture vectors or fingerprints. A staging
 area wants every family but `text`: its files get everything else while they wait, and their text
 is read once they are filed into a folder that wants it.

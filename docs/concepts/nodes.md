@@ -209,9 +209,12 @@ A node's type decides whether it holds content, and of what kind. `cat` prints i
 | `router`    | Nothing kept: what is written reaches whoever reads now. |
 | `position`  | A point, a circle or an outline on the map.              |
 | `track`     | Timestamped GPS points.                                  |
+| `control`   | The states its device reported, a line with a time each. |
 | `embedding` | A numeric fingerprint, for similarity search.            |
 
-A `directory`, `album` or `person` holds no content, only attributes and children.
+A `directory`, `album` or `person` holds no content, only attributes and children, and so does a
+`device`: what is written to a device or a control goes to the device's driver, which sends it on
+or reads it into the device's endpoints ([Devices, endpoints and drivers](devices.md)).
 
 Children work the same for every type. With the Archive, a photo keeps what EiN works out about it beneath itself:
 
@@ -261,11 +264,11 @@ simply undescribed.
 
 The types fall into three groups:
 
-| Group         | What is in it                                                                                                                |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Content**   | What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, cameras and faces. |
-| **Structure** | How the tree is arranged: directories, links, accounts and groups.                                                           |
-| **System**    | How EiN runs: commands, logs, queues, pools, routers, sessions, terminals, embeddings, share links.                          |
+| Group         | What is in it                                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Content**   | What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, cameras and faces.    |
+| **Structure** | How the tree is arranged: directories, links, accounts and groups.                                                              |
+| **System**    | How EiN runs: commands, logs, queues, pools, routers, sessions, terminals, embeddings, share links, devices and their controls. |
 
 ### List every type
 

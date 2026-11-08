@@ -71,8 +71,8 @@ Browse
   Albums           /albums          archive.albums
   People           /people          archive.people
   Locations        /locations       archive.locations
+  Devices          /devices         ui.devices
   Cameras          /cameras         archive.cameras
-  Tracks           /tracks          archive.tracks
 System
   Settings         /settings        ui.settings
   Statistics       /stats           ui.stats
@@ -93,6 +93,7 @@ panels
   search.explore   Locations        /explore/locations       archive.explore-locations
   search.explore   Years            /explore/years           archive.explore-years
   search.explore   Labels           /explore/labels          archive.explore-labels
+  device.tabs      Trips            /trips?device={path}     archive.trips
   nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
   stats.sections   Events           /stats/life-events       archive.life-events
   home.start       Import media     /start/upload            archive.start-upload
@@ -121,8 +122,8 @@ The first part of an id says where the entry comes from: `ui.` is EiN's own, and
 `assistant.` and `ems.` are the [Archive](../archive/index.md)'s, the
 [assistant](../assistant/index.md)'s and the [media service module](../ems/index.md)'s, there once
 that module is installed. On an EiN with no modules, the sidebar holds only **Home**, **Search**,
-**Settings**, **Statistics** and **Documentation**, with **Nodes** and **Dashboard** for an
-administrator, and there are no panels.
+**Devices** for someone signed in, **Settings**, **Statistics** and **Documentation**, with **Nodes**
+and **Dashboard** for an administrator, and there are no panels.
 
 When something in a file cannot be used, `ui-nav` says so after the list, on lines that start with
 `ui-nav:`; [When something goes differently](#when-something-goes-differently) explains each one.
@@ -515,6 +516,7 @@ Each panel has a slot, the place in a page where it is drawn:
 | `stats.sections`  | A section of **Statistics**                                        | `archive.life-events` (**Events**)                                      |
 | `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                       | `archive.duplicates` (**Duplicates**)                                   |
 | `system.tabs`     | A tab of the **Dashboard**                                         | `ems.media-service` (**Media service**)                                 |
+| `device.tabs`     | A tab of a device's page, after **Info**                           | `archive.trips` (**Trips**, on a device with a track)                   |
 | `system.overview` | Gauges beside the computer's own on the **Dashboard**'s overview   | `ems.gpu` (**GPU**)                                                     |
 | `about.services`  | A tile in **About EiN**                                            | `assistant.about` (**Language model**), `ems.about` (**Media service**) |
 | `shell.float`     | Floating over every page and the lightbox, under dialogs           | `todo.widget` (**Todo widget**, signed in only)                         |
@@ -544,8 +546,8 @@ where they matter:
 EiN uses them itself: **Nodes** and **Dashboard** are `admin`; **Staging**, **Settings**, **Create**
 and the account menu are `signedIn`.
 
-This file, for a family with no cameras to register and no tracks, hides **Cameras** and
-**Tracks** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
+This file, for a family with no cameras to register and no devices, hides **Cameras** and
+**Devices** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
 button that reruns failed work with
 [`pipeline-heal`](../reference/commands-core.md#pipeline-heal):
 
@@ -557,7 +559,7 @@ button that reruns failed work with
   "topbar": [
     { "id": "site.retry", "title": "Retry failed work", "icon": "refresh", "admin": true, "action": { "run": "pipeline-heal --apply" } }
   ],
-  "hide": ["archive.cameras", "archive.tracks", "archive.create-camera"]
+  "hide": ["archive.cameras", "ui.devices", "archive.create-camera"]
 }
 ```
 
@@ -689,16 +691,17 @@ Give one of these:
 
 ### `panels`
 
-| Field      | Required | Value                                                                                                     |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `id`       | yes      | The panel's id, such as `archive.explore-years`.                                                          |
-| `slot`     | yes      | Where it is drawn; see the slots in [Change the panels inside pages](#change-the-panels-inside-pages).    |
-| `label`    | yes      | The tab's or tool's label, or the section's heading.                                                      |
-| `route`    | yes      | The address drawn there. In `nodes.tools` and `search.label`, `{path}` is replaced by a path in the tree. |
-| `icon`     | no       | An icon, as for the sidebar, for the slots that show one.                                                 |
-| `order`    | no       | Its place among the panels of its slot. Without it, 1000.                                                 |
-| `admin`    | no       | `true`: shown to administrators only.                                                                     |
-| `signedIn` | no       | `true`: never shown to a visitor.                                                                         |
+| Field      | Required | Value                                                                                                                    |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `id`       | yes      | The panel's id, such as `archive.explore-years`.                                                                         |
+| `slot`     | yes      | Where it is drawn; see the slots in [Change the panels inside pages](#change-the-panels-inside-pages).                   |
+| `label`    | yes      | The tab's or tool's label, or the section's heading.                                                                     |
+| `route`    | yes      | The address drawn there. In `nodes.tools`, `search.label` and `device.tabs`, `{path}` is replaced by a path in the tree. |
+| `icon`     | no       | An icon, as for the sidebar, for the slots that show one.                                                                |
+| `order`    | no       | Its place among the panels of its slot. Without it, 1000.                                                                |
+| `when`     | no       | In `device.tabs`, `{ "has": "<node type>" }`: shown only on a device with an endpoint of that type, such as `track`.     |
+| `admin`    | no       | `true`: shown to administrators only.                                                                                    |
+| `signedIn` | no       | `true`: never shown to a visitor.                                                                                        |
 
 ## When something goes differently
 

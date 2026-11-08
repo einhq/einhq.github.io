@@ -41,6 +41,10 @@ EiN makes these at its first start, and none can be deleted. The two accounts ar
 | `sudo`  | Administrators on request | Its members may act as the administrator for one sign-in, after entering their own password again. See [Let a second person administer](#let-a-second-person-administer). |
 | `guest` | Guests                    | The `guest` account's own group. What this group may see, visitors may see.                                                                                               |
 
+EiN also makes the group `devices` (**Devices**) at every start when it is missing: its members make,
+rename and forget the devices under `/dev` ([Devices and their keys](devices.md)). It is not built
+in, and starts empty.
+
 Besides these, every account made on the Users tab or with `user-create` gets a group of its own,
 named like the account: Helen Okafor's account `helen` has the group `helen`. These are its
 personal group.

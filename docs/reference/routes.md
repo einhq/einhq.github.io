@@ -59,22 +59,24 @@ with the picture over it. Opened by its own address, `/media/<path>`, the pictur
 
 ## EiN's own pages
 
-| Address                             | What it shows                                                                        | Who can open it                   |
-| ----------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------- |
-| `/`                                 | **Home**                                                                             | Everyone who can browse           |
-| `/login`                            | The sign-in page                                                                     | Everyone                          |
-| `/s/<token>`                        | Where a share link lands, see [Share links](#share-links)                            | Everyone                          |
-| `/search`                           | **Search**, see [Search and the finder](../guide/search.md)                          | Everyone who can browse           |
-| `/stats`                            | **Statistics**                                                                       | Everyone who can browse           |
-| `/docs`                             | **Documentation**, see [Links into the documentation](#links-into-the-documentation) | Everyone who can browse           |
-| `/profile`                          | **Profile**: your account, preferences and security                                  | Signed in                         |
-| `/settings`                         | **Settings**                                                                         | Signed in                         |
-| `/trash`                            | Your **Trash**                                                                       | Signed in                         |
-| `/about`                            | **About EiN**; from the account menu it opens in a dialog                            | Signed in                         |
-| `/system`                           | **Dashboard**, see [Health and the dashboard](../admin/monitoring.md)                | In the sidebar for administrators |
-| `/system/nodes`                     | **Nodes**, the node explorer                                                         | In the sidebar for administrators |
-| `/system/pipelines/<pipeline>`      | One pipeline and its recent runs, for example `/system/pipelines/media-faces`        | Reached from the **Dashboard**    |
-| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline                                                                | Reached from the pipeline's page  |
+| Address                             | What it shows                                                                        | Who can open it                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| `/`                                 | **Home**                                                                             | Everyone who can browse                                |
+| `/login`                            | The sign-in page                                                                     | Everyone                                               |
+| `/s/<token>`                        | Where a share link lands, see [Share links](#share-links)                            | Everyone                                               |
+| `/search`                           | **Search**, see [Search and the finder](../guide/search.md)                          | Everyone who can browse                                |
+| `/stats`                            | **Statistics**                                                                       | Everyone who can browse                                |
+| `/docs`                             | **Documentation**, see [Links into the documentation](#links-into-the-documentation) | Everyone who can browse                                |
+| `/profile`                          | **Profile**: your account, preferences and security                                  | Signed in                                              |
+| `/settings`                         | **Settings**                                                                         | Signed in                                              |
+| `/trash`                            | Your **Trash**                                                                       | Signed in                                              |
+| `/about`                            | **About EiN**; from the account menu it opens in a dialog                            | Signed in                                              |
+| `/devices`                          | **Devices**, see [Devices](../guide/devices.md)                                      | Everyone who can browse; in the sidebar when signed in |
+| `/devices/<name>`                   | One device, for example `/devices/hall-plug`                                         | Everyone who can browse                                |
+| `/system`                           | **Dashboard**, see [Health and the dashboard](../admin/monitoring.md)                | In the sidebar for administrators                      |
+| `/system/nodes`                     | **Nodes**, the node explorer                                                         | In the sidebar for administrators                      |
+| `/system/pipelines/<pipeline>`      | One pipeline and its recent runs, for example `/system/pipelines/media-faces`        | Reached from the **Dashboard**                         |
+| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline                                                                | Reached from the pipeline's page                       |
 
 "Everyone who can browse" means signed-in users, and also visitors who have not signed in when the
 administrator turns on [`CFG_GUEST_BROWSING`](settings.md#cfg_guest_browsing). A page marked "Signed
@@ -90,11 +92,12 @@ it would without it. You never get an error for a mistyped parameter.
 
 Pages with tabs keep the open tab in `tab`. An address without `tab` opens the first one.
 
-| Page        | Values of `tab` (default first)                                                                                                                          |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/profile`  | `account` (**Account**), `preferences` (**Preferences**), `security` (**Security**)                                                                      |
-| `/settings` | `system` (**System**), `users` (**Users**), `groups` (**Groups**), `permissions` (**Permissions**), `modules` (**Modules**)                              |
-| `/system`   | `overview` (**Overview**), `work` (**Work**), `ems.media-service` (**Media service**, with the `ems` module), `services` (**Services**), `log` (**Log**) |
+| Page              | Values of `tab` (default first)                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/profile`        | `account` (**Account**), `preferences` (**Preferences**), `security` (**Security**)                                                                        |
+| `/settings`       | `system` (**System**), `users` (**Users**), `groups` (**Groups**), `permissions` (**Permissions**), `modules` (**Modules**)                                |
+| `/system`         | `overview` (**Overview**), `work` (**Work**), `ems.media-service` (**Media service**, with the `ems` module), `services` (**Services**), `log` (**Log**)   |
+| `/devices/<name>` | `overview` (**Overview**), `history` (**History**), `info` (**Info**), and the tabs modules add by their id: `archive.trips` (**Trips**, with the Archive) |
 
 A module's pages keep their tabs the same way; their values are under the module below.
 
@@ -144,6 +147,8 @@ page rather than searching for everything.
 | `/settings?tab=groups`               | `group`       | The group open, by name                                                                                    |
 | `/settings?tab=users`, `?tab=groups` | `new=1`       | The form for a new account or group                                                                        |
 | `/system/nodes`                      | `path`        | The path open in the explorer, for example `path=/archive`                                                 |
+| `/devices`                           | `q`           | The filter typed into the page's own search box                                                            |
+| `/devices/<name>`                    | `endpoint`    | On **History**, the endpoint charted, by its name, for example `endpoint=switch-0-power`                   |
 | `/docs`                              | `find`        | The words in the documentation's search box                                                                |
 | `/login`                             | `next`        | Where to go after signing in                                                                               |
 
@@ -204,17 +209,17 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address                          | Method        | What it does                                                                                                                                            |
-| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                              |
-| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                    |
-| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                           |
-| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                 |
-| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                      |
-| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                                                                         |
-| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Tracks and trips](../archive/tracks.md)                                                                           |
-| `/tracker/<id>.<token>`          | `GET`, `POST` | Where a phone or GPS tracker posts its position without signing in, see [Live tracking from a phone](../automation/index.md#live-tracking-from-a-phone) |
-| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                     |
+| Address                          | Method        | What it does                                                                                                                                                                     |
+| -------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                                                       |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                                             |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                                                    |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                                          |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                                               |
+| `/file/dev/<device>`             | `PUT`, `POST` | Raw input for the device's driver, such as a tracker's position or a GPX file, signed in or with the device's key; see [Devices and their keys](../admin/devices.md#device-keys) |
+| `/file/dev/<device>?key=<key>&…` | `GET`         | The same from a tracker that sends only `GET`s, such as OsmAnd: its query is the input                                                                                           |
+| `/file/dev/<device>/<endpoint>`  | `POST`        | A value: appended to a log or a track, or written to a control                                                                                                                   |
+| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                                              |
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
@@ -248,8 +253,6 @@ has `_` for spaces, such as `/cameras/Canon_EOS_5D_Mark_III`. Addresses with
 | `/locations/<name>`       | One location                                                                                               |
 | `/cameras`                | **Cameras**, see [Cameras](../archive/cameras.md)                                                          |
 | `/cameras/<name>`         | One camera                                                                                                 |
-| `/tracks`                 | **Tracks**, see [Tracks and trips](../archive/tracks.md)                                                   |
-| `/tracks/<path>`          | One track, for example `/tracks/%2Farchive%2Fdevices%2Fsailboat%2Fposition%2Fhistory`                      |
 | `/favourites`             | Your **Favourites**; signed in only, see [Your profile, favourites and trash](../guide/profile.md)         |
 | `/duplicates?path=<path>` | The copies of a node, see [Duplicates](../archive/duplicates.md)                                           |
 
@@ -269,13 +272,13 @@ a page by their address. All of them need you to be signed in.
 
 All of these need you to be signed in. [Sorting in staging](../archive/staging.md) and [Getting your photos in](../archive/importing.md) explain the work itself.
 
-| Address                      | What it shows                                                                                         |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `/staging`                   | **Staging**: your categories, or the one category when you have only one                              |
-| `/staging/import`            | **Import media**, also from **Create New**                                                            |
-| `/staging/categories/new`    | **New category**                                                                                      |
-| `/staging/categories/<name>` | **Category settings** for one category                                                                |
-| `/staging/routes`            | **Routes waiting for a track**, see [GPX files in staging](../archive/tracks.md#gpx-files-in-staging) |
+| Address                      | What it shows                                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `/staging`                   | **Staging**: your categories, or the one category when you have only one                               |
+| `/staging/import`            | **Import media**, also from **Create New**                                                             |
+| `/staging/categories/new`    | **New category**                                                                                       |
+| `/staging/categories/<name>` | **Category settings** for one category                                                                 |
+| `/staging/routes`            | **Routes waiting for a device**, see [GPX files in staging](../archive/tracks.md#gpx-files-in-staging) |
 
 ### Parts of other pages
 
@@ -283,15 +286,16 @@ Some addresses are pieces that other pages draw inside themselves: a section of 
 entry in the home page's news, a group on the **Search** page's landing. Each opens as a page of
 its own too, which is mostly useful for linking to it.
 
-| Address                                                                      | Drawn in                                                                              |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `/stats/life-events`                                                         | **Statistics**, the **Events** section                                                |
-| `/explore/people`, `/explore/locations`, `/explore/years`, `/explore/labels` | The **Search** page before you search                                                 |
-| `/looks-like?path=<path>`                                                    | The **Search** page, when you search for one label                                    |
-| `/memories/<MM-DD>?year=<year>`                                              | Full screen from the home page: one calendar day across the years, starting at `year` |
-| `/start/upload`                                                              | **Home**, while there is no news yet                                                  |
-| `/news/album`, `/onthisday/media`, `/events/anniversary`                     | Entries of the home page; the home page writes their parameters                       |
-| `/map/pins`                                                                  | Pins on a small map, under an answer in the chat                                      |
+| Address                                                                      | Drawn in                                                                                           |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `/stats/life-events`                                                         | **Statistics**, the **Events** section                                                             |
+| `/explore/people`, `/explore/locations`, `/explore/years`, `/explore/labels` | The **Search** page before you search                                                              |
+| `/looks-like?path=<path>`                                                    | The **Search** page, when you search for one label                                                 |
+| `/memories/<MM-DD>?year=<year>`                                              | Full screen from the home page: one calendar day across the years, starting at `year`              |
+| `/start/upload`                                                              | **Home**, while there is no news yet                                                               |
+| `/news/album`, `/onthisday/media`, `/events/anniversary`                     | Entries of the home page; the home page writes their parameters                                    |
+| `/map/pins`                                                                  | Pins on a small map, under an answer in the chat                                                   |
+| `/trips?device=<path>`                                                       | The **Trips** tab of a device's page, for a device with a track, see [Trips](../archive/tracks.md) |
 
 ### Parameters of the Archive's pages
 
@@ -305,7 +309,6 @@ The **Media** page takes the parameters of [Search](#search).
 | `/albums/<path>`    | `media` (**Media**), `map` (**Map**), `info` (**Info**)                                                                                                     |
 | `/locations/<name>` | `info` (**Info**), `timeline` (**Timeline**), `media` (**Media**), `residents` (**Residents**)                                                              |
 | `/cameras/<name>`   | `info` (**Info**), `media` (**Media**)                                                                                                                      |
-| `/tracks/<path>`    | `track` (**Track**), `trips` (**Trips**), `info` (**Info**)                                                                                                 |
 | `/staging`          | `sort` (**Sort**), `duplicates` (**Duplicates**), `files` (**Files**), `done` (**Done**)                                                                    |
 
 #### Map
@@ -329,20 +332,20 @@ left out, so a plain `/map` stays plain.
 
 #### Other parameters
 
-| Page                                                      | Parameter            | What it does                                                                                                                             |
-| --------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `/year`                                                   | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
-| `/people`, `/albums`, `/locations`, `/cameras`, `/tracks` | `q`                  | The filter typed into the page's own search box                                                                                          |
-| `/people/<name>`                                          | `faces=doubtful`     | On **Faces**, only the faces somebody marked as doubtful                                                                                 |
-| `/people/unknown`                                         | `sort`               | `faces` (the default) or `created`                                                                                                       |
-| `/people/unknown`                                         | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
-| `/people/unknown`                                         | `person`             | The unknown person open for review                                                                                                       |
-| `/staging`                                                | `c`                  | The category, by name, for example `c=inbox`                                                                                             |
-| `/staging`                                                | `lane`               | On **Sort**: `sort` (**To sort**), `everyday` (**Everyday**), `undated` (**Needs a date**), `clutter` (**Clutter**), `later` (**Later**) |
-| `/staging`                                                | `order=new`          | On **Sort**: newest first                                                                                                                |
-| `/staging`                                                | `g`                  | On **Sort**: the group open, for example `g=auto-2019-06-14`                                                                             |
-| `/staging`                                                | `dir`, `view=folder` | On **Files**: the folder open, and the folder view                                                                                       |
-| `/staging/categories/new`                                 | `kind`, `move`       | The kind of the new category, and a staged folder to move into it                                                                        |
+| Page                                           | Parameter            | What it does                                                                                                                             |
+| ---------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `/year`                                        | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
+| `/people`, `/albums`, `/locations`, `/cameras` | `q`                  | The filter typed into the page's own search box                                                                                          |
+| `/people/<name>`                               | `faces=doubtful`     | On **Faces**, only the faces somebody marked as doubtful                                                                                 |
+| `/people/unknown`                              | `sort`               | `faces` (the default) or `created`                                                                                                       |
+| `/people/unknown`                              | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
+| `/people/unknown`                              | `person`             | The unknown person open for review                                                                                                       |
+| `/staging`                                     | `c`                  | The category, by name, for example `c=inbox`                                                                                             |
+| `/staging`                                     | `lane`               | On **Sort**: `sort` (**To sort**), `everyday` (**Everyday**), `undated` (**Needs a date**), `clutter` (**Clutter**), `later` (**Later**) |
+| `/staging`                                     | `order=new`          | On **Sort**: newest first                                                                                                                |
+| `/staging`                                     | `g`                  | On **Sort**: the group open, for example `g=auto-2019-06-14`                                                                             |
+| `/staging`                                     | `dir`, `view=folder` | On **Files**: the folder open, and the folder view                                                                                       |
+| `/staging/categories/new`                      | `kind`, `move`       | The kind of the new category, and a staged folder to move into it                                                                        |
 
 ## The Assistant's pages
 
