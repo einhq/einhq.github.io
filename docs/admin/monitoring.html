@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -372,6 +373,11 @@
 <td><code>llm</code> and <code>llm model</code></td>
 <td>the Assistant&#39;s <code>llm-link</code> service (<code>llm-status --checks</code>)</td>
 <td>Whether the language model answers, whose it is and where it runs, and whether its model has been tried with the assistant. See <a href="../assistant/language-model.html">The language model</a>.</td>
+</tr>
+<tr>
+<td><code>automation bridge</code></td>
+<td>the <a href="../automation/index.html">Automation</a> module&#39;s <code>automation-bridge</code> service (<code>automation-status --checks</code>)</td>
+<td>Whether the bridge hears the MQTT broker: fine with the devices and entities it found, a warning while it cannot reach the broker, failed while its service is stopped; none while no broker is set. See <a href="../automation/index.html#check-that-ein-hears-them">Check that EiN hears them</a>.</td>
 </tr>
 <tr>
 <td>the service&#39;s name</td>

@@ -4,24 +4,26 @@ This page is for whoever runs EiN: which ports it listens on and how to change t
 
 ## What EiN listens on
 
-EiN publishes two ports, on every address of the machine it runs on:
+EiN publishes two ports, and three with the MQTT broker, on every address of the machine it runs on:
 
-| Port   | What answers                            | Protocol   |
-| ------ | --------------------------------------- | ---------- |
-| `8080` | the Web UI, its files and its WebSocket | plain HTTP |
-| `2222` | the SSH and SFTP server                 | SSH        |
+| Port   | What answers                                                                                          | Protocol   |
+| ------ | ----------------------------------------------------------------------------------------------------- | ---------- |
+| `8080` | the Web UI, its files and its WebSocket                                                               | plain HTTP |
+| `2222` | the SSH and SFTP server                                                                               | SSH        |
+| `1883` | with `--mqtt`, the MQTT broker that the [Automation](../automation/index.md) module's devices talk to | plain MQTT |
 
-These are the ports `setup.sh` picks. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
+These are the ports `setup.sh` picks, and `MQTT_PORT` in `.env` is the broker's. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
 Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine's network.
 
-Under rootless podman, EiN does not sit on that network: there a published port would reach EiN from the network's own address, and EiN would see every visitor as that one address. EiN gets a network of its own, which keeps each visitor's address, and reaches the other three on the machine's loopback address, where they are published for it alone:
+Under rootless podman, EiN does not sit on that network: there a published port would reach EiN from the network's own address, and EiN would see every visitor as that one address. EiN gets a network of its own, which keeps each visitor's address, and reaches the others on the machine's loopback address, where they are published for it alone:
 
-| Line           | Default | What answers on `127.0.0.1` |
-| -------------- | ------- | --------------------------- |
-| `EIN_DB_PORT`  | `15432` | the database                |
-| `EIN_EMS_PORT` | `18181` | the media service           |
-| `EIN_LLM_PORT` | `18190` | the language model          |
+| Line            | Default | What answers on `127.0.0.1`    |
+| --------------- | ------- | ------------------------------ |
+| `EIN_DB_PORT`   | `15432` | the database                   |
+| `EIN_EMS_PORT`  | `18181` | the media service              |
+| `EIN_LLM_PORT`  | `18190` | the language model             |
+| `EIN_MQTT_PORT` | `11883` | the MQTT broker, with `--mqtt` |
 
 `setup.sh` moves one to the next free port when another program has it, and writes it to `.env`, as with EiN's own ports. Under Docker and rootful podman these lines do nothing.
 
@@ -81,7 +83,7 @@ sudo firewall-cmd --permanent --add-port=8080/tcp --add-port=2222/tcp
 sudo firewall-cmd --reload
 ```
 
-Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy's port (443) instead, and not 8080.
+With the [Automation](../automation/index.md) module's broker, open 1883 too, to your home network only, such as `sudo ufw allow from 192.168.1.0/24 to any port 1883 proto tcp`. Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy's port (443) instead, and not 8080.
 
 > [!NOTE]
 > Docker opens the ports it publishes in the machine's packet filter itself, past rules set with ufw. A closed port in ufw does not keep EiN's ports off the network under Docker; `EIN_BIND=127.0.0.1` does.
@@ -176,7 +178,7 @@ With the proxy on the same machine, nothing else needs to reach port 8080. Close
 2. Apply it with `podman compose up -d` (or `docker compose up -d`) in `~/ein`.
 3. Open `https://ein.wrenfield.example/` and sign in.
 
-This closes port 2222 to the network as well, since `EIN_BIND` applies to both. To keep SSH and SFTP reachable from other machines, leave `EIN_BIND=0.0.0.0` and close 8080 in the firewall instead (under Docker, see the note in [Open the ports in the firewall](#open-the-ports-in-the-firewall)).
+This closes port 2222 to the network as well, since `EIN_BIND` applies to both, and the MQTT broker's 1883, which the devices then cannot reach. To keep SSH and SFTP reachable from other machines, leave `EIN_BIND=0.0.0.0` and close 8080 in the firewall instead (under Docker, see the note in [Open the ports in the firewall](#open-the-ports-in-the-firewall)).
 
 To check that the proxy passes everything, sign in, open a few pages, upload a file, and open the terminal with <kbd>Alt</kbd>+<kbd>T</kbd> (see [The terminal](../shell/terminal.md)): each of these uses a different part of the table above.
 
@@ -209,6 +211,7 @@ the phone in. A request with a wrong token is refused with `Forbidden` and logge
 - **Change the admin password** if you have not: [Install EiN](../start/install.md#change-the-admin-password-straight-away) shows how. Give every account a password of its own; [Accounts and groups](accounts.md) covers them.
 - **Leave visitors out.** The setting **Visitors may browse** (`CFG_GUEST_BROWSING`, under **Settings → System**) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.
 - **Publish HTTPS only.** Forward only the proxy's ports, never 8080, which is plain HTTP.
+- **Keep the MQTT broker in.** Never forward port 1883. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house's devices; a phone away from home needs only the HTTPS proxy.
 - **Decide about SSH.** Port 2222 is not needed for the Web UI. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
 
 ### How EiN slows down password guessing
@@ -257,6 +260,7 @@ The server's host key is made at EiN's first start and kept in the tree as `/etc
 | Behind the proxy, the page frame loads but stays empty, and the terminal does not connect | The proxy does not pass WebSocket connections. Add the `Upgrade` and `Connection` headers (nginx) or check the proxy's WebSocket support.                                                                                                                   |
 | Uploads of large files fail behind the proxy, often with 413                              | The proxy limits the size of a request. In nginx, set `client_max_body_size 0;`.                                                                                                                                                                            |
 | The terminal or the interface reconnects every minute behind the proxy                    | The proxy closes idle connections. Raise its read timeout, such as `proxy_read_timeout 1h;` in nginx.                                                                                                                                                       |
+| A device on the network cannot reach the MQTT broker                                      | Open port 1883 in the machine's firewall, to your home network, and check that `EIN_BIND` is not `127.0.0.1`. `podman compose ps` in `~/ein` shows whether `mqtt` runs; [Automation](../automation/index.md#check-that-ein-hears-them) has more.            |
 | Signing in works, but the next page asks you to sign in again                             | The browser uses plain `http://` while something in front of EiN sends `X-Forwarded-Proto: https`, so the cookie is marked `Secure` and the browser does not send it back. Open the `https://` address, or have the proxy send the scheme the browser used. |
 | Signing in says "too many failed sign-ins"                                                | Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see [How EiN slows down password guessing](#how-ein-slows-down-password-guessing).                                                   |
 | A share link does not open for the person you sent it to                                  | It begins with the address you had open. Open EiN at its public address and make the link again; see [Sharing](../guide/sharing.md).                                                                                                                        |

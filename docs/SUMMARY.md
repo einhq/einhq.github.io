@@ -119,6 +119,12 @@
 - [Recipes](recipes/index.md)
 - [Recipes commands](recipes/commands.md)
 
+## Automation
+
+- [Automation](automation/index.md)
+- [Rules](automation/rules.md)
+- [Automation commands](automation/commands.md)
+
 ## Media
 
 - [Media](media/index.md)

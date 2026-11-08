@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -550,10 +551,15 @@ service and the language model.</p>
 <td>The language model the assistant asks: Qwen3.5-4B in llama.cpp, on the graphics card or the CPU. A hosted provider with an OpenAI-compatible API can take its place.</td>
 <td>With the assistant: the installer&#39;s <code>--llm</code>, unless you use a provider</td>
 </tr>
+<tr>
+<td><code>mqtt</code></td>
+<td>Mosquitto, the MQTT broker the house&#39;s sensors, plugs and buttons talk to, and EiN through them.</td>
+<td>With <a href="../automation/index.html">Automation</a>: the installer&#39;s <code>--mqtt</code>, unless you have a broker</td>
+</tr>
 </tbody></table>
 </div>
 <p>Only EiN is reachable from other machines: port 8080 for the Web UI and 2222 for SSH and
-SFTP. The database, the media service and the language model answer only EiN, on the network
+SFTP, and with <code>--mqtt</code> the broker&#39;s 1883, for the devices on your network. The database, the media service and the language model answer only EiN, on the network
 compose makes for them.</p>
 <p>Your files are on the machine&#39;s disk, in the data folder (<code>~/ein/data</code> unless you chose another):
 the originals in <code>files</code>, the thumbnails and renditions EiN makes from them in <code>files-volatile</code>. The

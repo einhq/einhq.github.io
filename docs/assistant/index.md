@@ -32,6 +32,10 @@ then reads a sentence typed into it with the assistant's language model too
 With [Todo](../todo/index.md) installed, it reads your todo lists and what is left for you to do, and
 proposes adding, ticking off and moving their items.
 
+With [Automation](../automation/index.md) installed, it reads the house's devices, such as how warm
+it is in the hall and which devices are offline, charts how a reading went, and proposes switching
+them.
+
 ## What it needs
 
 A language model that speaks the OpenAI chat API. The module brings none of its own:

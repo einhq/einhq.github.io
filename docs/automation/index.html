@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automation – EiN documentation</title>
+    <meta name="description" content="The Automation module brings the devices in the house into EiN: sensors, plugs, switches, lights and buttons that talk MQTT, such as those running ESPHome and Shelly's. Each device has a page with its readings as they are now and as they went, and the switches to turn. Every reading is kept, and published on EiN's routing keys, where a queue or a log of your own can take it, and rules switch things when a reading, a press or the clock says so.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/automation/">
+    <meta property="og:title" content="Automation – EiN documentation">
+    <meta property="og:description" content="The Automation module brings the devices in the house into EiN: sensors, plugs, switches, lights and buttons that talk MQTT, such as those running ESPHome and Shelly's. Each device has a page with its readings as they are now and as they went, and the switches to turn. Every reading is kept, and published on EiN's routing keys, where a queue or a log of your own can take it, and rules switch things when a reading, a press or the clock says so.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/automation/">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section class="here"><h2>Automation</h2><ul><li><a href="index.html" aria-current="page">Automation</a></li><li><a href="rules.html">Rules</a></li><li><a href="commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Automation</span></button>
+        <header class="docs-head">
+          <p class="crumb">Automation</p>
+          <h1>Automation</h1>
+        </header>
+        <article class="prose">
+<p>The Automation module brings the devices in the house into EiN: sensors, plugs, switches, lights
+and buttons that talk MQTT, such as those running ESPHome and Shelly&#39;s. Each device has a page with
+its readings as they are now and as they went, and the switches to turn. Every reading is kept, and
+published on EiN&#39;s routing keys, where a queue or a log of your own can take it, and
+<a href="rules.html">rules</a> switch things when a reading, a press or the clock says so.</p>
+<p>This page is for the household that uses the devices and for the administrator who installs the
+module and connects them. <a href="rules.html">Rules</a> covers writing rules.</p>
+<h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through. The
+installer runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
+<li><strong>Devices that speak MQTT</strong>: those running ESPHome, and Shelly&#39;s of the second generation and
+later.</li>
+<li>Nothing else: neither the Archive nor the media service. With the <a href="../archive/index.html">Archive</a>
+installed, a device&#39;s position is drawn on its maps and cut into trips; with the
+<a href="../assistant/index.html">Assistant</a>, the chat reads the devices and switches them.</li>
+</ul>
+<h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
+<p>With the installer&#39;s broker, add the broker and the module in one run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+./setup.sh --mqtt --module automation</code></pre></div>
+<p>On a new machine the installer takes the same options:
+<code>curl -fsSL https://einhq.eu/install.sh | bash -s -- --mqtt --module automation</code>. With a broker of
+your own, install the module alone, from <strong>Settings → Modules</strong> or in EiN&#39;s terminal, and then give
+it the broker (<a href="#a-broker-you-already-run">A broker you already run</a>):</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod install automation</code></pre></div>
+<p><strong>Devices</strong> is then in the sidebar. The module runs two services: <code>automation-bridge</code>, which hears
+the broker, and <code>automation-rules</code>, which runs the rules. When they first start they make the group
+<code>automation</code>, whose members look after the devices and write the rules
+(<a href="#who-may-do-what">Who may do what</a>). <a href="../admin/modules.html">Modules</a> covers installing and removing
+modules.</p>
+<h3 id="the-installers-broker">The installer&#39;s broker<a class="anchor" href="#the-installers-broker" aria-label="Link to this section"></a></h3>
+<p><code>--mqtt</code> runs Mosquitto in a container of its own, <code>mqtt</code>, beside EiN:</p>
+<ul>
+<li>It takes no anonymous clients. EiN signs in as <code>ein</code> and the devices as <code>device</code>, with passwords
+<code>setup.sh</code> made at the install and keeps in <code>~/ein/.env</code>: <code>MQTT_EIN_PASSWORD</code> and
+<code>MQTT_DEVICE_PASSWORD</code>. A password changed there takes effect at the next <code>./setup.sh</code>.</li>
+<li>The devices reach it on port 1883 of the machine (<code>MQTT_PORT</code> in <code>.env</code>), on the address
+<code>EIN_BIND</code> names.</li>
+<li><code>setup.sh</code> gives EiN the broker&#39;s address, user and password itself: the three settings say
+<strong>From deployment</strong> on the Settings page and need nothing from you.</li>
+<li>It keeps what the devices announce in the data folder&#39;s <code>mqtt</code> folder, so it is all there again
+after a restart.</li>
+<li><code>./setup.sh --no-mqtt</code> takes it out again, and <code>./setup.sh --only mqtt</code> updates it alone.</li>
+</ul>
+<p>The devices need the device password. Read it on the machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+grep MQTT_DEVICE_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>The broker speaks plain MQTT, without TLS. Whoever reaches port 1883 with the device password can
+switch the house&#39;s devices and read what they say. Keep the port on your home network and never
+forward it on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, HTTPS and remote access</a>
+lists it with EiN&#39;s other ports.</p>
+</aside>
+<h3 id="a-broker-you-already-run">A broker you already run<a class="anchor" href="#a-broker-you-already-run" aria-label="Link to this section"></a></h3>
+<p>Give EiN the broker&#39;s address and an account on it, under <strong>Settings → System</strong> in the
+<strong>Automation</strong> group, or with <code>config set</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_URL mqtt://192.0.2.20:1883
+config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_USER ein
+ config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_KEY <span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
+<p><strong>MQTT broker</strong> takes <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS.
+<strong>MQTT password</strong> is a key: nobody can read it back, and EiN sends it only to that broker
+(<a href="../admin/configuration.html#give-a-key-to-another-service">Give a key to another service</a>). Saving
+any of the three restarts <code>automation-bridge</code>. While <strong>MQTT broker</strong> is empty, automation is off: no
+device is heard.</p>
+<h2 id="connect-a-device">Connect a device<a class="anchor" href="#connect-a-device" aria-label="Link to this section"></a></h2>
+<p>A device announces itself on the broker, and EiN makes it a device as soon as it hears it: within
+seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does. Nothing is
+entered in EiN.</p>
+<p>A device is named in EiN as it names itself, in lower case with hyphens, such as <code>hall-sensor</code>, and
+each of its entities by its own name within it, such as <code>hall-sensor/temperature</code>. Commands, routing
+keys and rules use these names. <strong>Rename</strong> on a device&#39;s page gives it a friendlier name on the pages
+and leaves these as they are.</p>
+<h3 id="esphome">ESPHome<a class="anchor" href="#esphome" aria-label="Link to this section"></a></h3>
+<p>Add an <code>mqtt:</code> block to the device&#39;s configuration, with the machine EiN runs on as the broker, and
+install the configuration on the device as usual:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># hall-sensor.yaml, the device&#x27;s ESPHome configuration</span>
+<span class="hljs-attr">esphome:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">hall-sensor</span>
+
+<span class="hljs-attr">mqtt:</span>
+  <span class="hljs-attr">broker:</span> <span class="hljs-number">192.0</span><span class="hljs-number">.2</span><span class="hljs-number">.10</span> <span class="hljs-comment"># the machine EiN runs on</span>
+  <span class="hljs-attr">username:</span> <span class="hljs-string">device</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-type">!secret</span> <span class="hljs-string">mqtt_password</span> <span class="hljs-comment"># in secrets.yaml: MQTT_DEVICE_PASSWORD from ~/ein/.env</span></code></pre></div>
+<p>With an <code>mqtt:</code> block ESPHome announces each of its entities the way Home Assistant&#39;s MQTT discovery
+reads them, which is on unless you turn it off. Leave its prefix as it is, <code>homeassistant</code>. The
+device is named by its <code>name:</code>, and an entity by its own name: a sensor called Temperature on the
+device above is <code>hall-sensor/temperature</code>.</p>
+<p>Other software that announces devices the same way, such as Zigbee2MQTT, is read as far as it keeps
+to what ESPHome sends; <code>automation-status</code> names what it could not read.</p>
+<h3 id="shelly">Shelly<a class="anchor" href="#shelly" aria-label="Link to this section"></a></h3>
+<p>Shelly&#39;s devices of the second generation and later are read: Plus, Pro, Gen3 and Gen4. The first
+generation is not.</p>
+<ol>
+<li>Open the Shelly&#39;s own web page, at its address on your network, and go to <strong>Settings → MQTT</strong>.</li>
+<li>Turn MQTT on. Set the server to the machine EiN runs on with the port, such as
+<code>192.0.2.10:1883</code>, the user to <code>device</code>, and the password to the device password.</li>
+<li>Turn on <strong>Generic status update over MQTT</strong> and <strong>RPC status notifications over MQTT</strong>.</li>
+<li>Save. The Shelly restarts and connects.</li>
+</ol>
+<p>The topic prefix may stay as it is, the Shelly&#39;s id, such as <code>shellyplus1pm-a8032ab12345</code>. It is the
+device&#39;s name in EiN, so a short one of your own, such as <code>hall-plug</code>, makes commands and rules
+easier to read. Choose it before the Shelly is first heard: a new prefix is a new device.</p>
+<p>A Shelly&#39;s entities are named after its parts: <code>switch-0</code> is its first relay, <code>switch-0-power</code>,
+<code>switch-0-energy</code>, <code>switch-0-voltage</code> and <code>switch-0-current</code> what the relay measures, and <code>input-0</code>
+its first input. An input set to button mode gives presses, <code>single</code>, <code>double</code>, <code>triple</code> or <code>long</code>,
+rather than on and off.</p>
+<h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automation-status</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What it says</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>5 devices, 31 entities, 18420 messages</code></td>
+<td>The bridge is connected: what it found, and the messages it has had since it started.</td>
+</tr>
+<tr>
+<td><code>not read: &lt;device&gt;/&lt;entity&gt;: &lt;why&gt;</code></td>
+<td>An entity whose values the bridge cannot read, such as one announced with a template it does not understand. Nothing of it is kept.</td>
+</tr>
+<tr>
+<td><code>rules: 3, 41 runs</code></td>
+<td>The rules service runs, with its rules and how often they ran; see <a href="rules.html">Rules</a>.</td>
+</tr>
+<tr>
+<td><code>off: no broker set</code></td>
+<td><strong>MQTT broker</strong> is empty: <a href="#install-it">install the broker</a> or <a href="#a-broker-you-already-run">give EiN yours</a>.</td>
+</tr>
+<tr>
+<td><code>cannot reach mqtt://…: &lt;why&gt;</code></td>
+<td>The broker does not answer, or refuses EiN&#39;s account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute.</td>
+</tr>
+<tr>
+<td><code>not running</code></td>
+<td>The <code>automation-bridge</code> service is stopped: <code>service start automation-bridge</code>, as the administrator.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The dashboard says the same: its <code>automation bridge</code> check is fine while the bridge is connected,
+a warning while it cannot reach the broker, and failed while its service is stopped
+(<a href="../admin/monitoring.html#read-the-checks">Health and the dashboard</a>).</p>
+<h2 id="the-devices-page">The Devices page<a class="anchor" href="#the-devices-page" aria-label="Link to this section"></a></h2>
+<p><strong>Devices</strong> in the sidebar has a card for every device: what it is called, its main reading and
+badges for <strong>online</strong> or <strong>offline</strong> and for its number of entities. The main reading is a
+temperature when the device has one, then power, humidity, light or energy, else any other reading,
+else a switch. A device that says nothing of whether it is on has neither badge. Choose a card to
+open the device.</p>
+<ul>
+<li>Type in the filter box to narrow the cards by name, manufacturer or model.</li>
+<li><strong>Show</strong> <strong>All</strong> devices or only those <strong>Online</strong>.</li>
+<li><strong>Sort</strong> by <strong>Name (A-Z)</strong> or by <strong>Latest reading</strong>, the newest first.</li>
+</ul>
+<h2 id="a-devices-page">A device&#39;s page<a class="anchor" href="#a-devices-page" aria-label="Link to this section"></a></h2>
+<p>The header names the device, its manufacturer and model, whether it is online, and how long ago its
+last reading came. Under it are three tabs.</p>
+<h3 id="overview">Overview<a class="anchor" href="#overview" aria-label="Link to this section"></a></h3>
+<p>A tile for each of the device&#39;s entities:</p>
+<ul>
+<li><strong>A reading</strong>, such as a temperature: its value with its unit, how long ago it came, and a line of
+the last six hours.</li>
+<li><strong>A switch or a light</strong>: a toggle that switches it. The tile shows the new state once the device
+says it has switched.</li>
+<li><strong>A button</strong>: its last press, such as <code>single</code>, and how long ago it was.</li>
+<li><strong>An action</strong>, such as a restart: <strong>Press</strong>.</li>
+<li><strong>A position</strong>: how many positions its track holds, when the last came, and <strong>Track and trips</strong>,
+which opens the track with the Archive installed.</li>
+</ul>
+<p>What tells of the device itself rather than of the house, such as its own temperature or its Wi-Fi
+signal, is under <strong>About the device itself</strong>. An entity the device no longer announces is left out;
+its history stays.</p>
+<h3 id="history">History<a class="anchor" href="#history" aria-label="Link to this section"></a></h3>
+<p>Pick an entity and a span: <strong>Day</strong>, <strong>Week</strong>, <strong>Month</strong> or <strong>Year</strong>. The chart shows the average of
+every 15 minutes over a day, of every 2 hours over a week, of every 6 hours over a month and of every
+day over a year. Anything on or off, a switch, a door or a motion sensor, is charted as the share of
+the time it was on.</p>
+<h3 id="info">Info<a class="anchor" href="#info" aria-label="Link to this section"></a></h3>
+<ul>
+<li>What the device is: its <strong>Name</strong> in commands, <strong>Found by</strong> (<code>ha-discovery</code>, <code>shelly</code>, or <code>manual</code>
+for one made by hand), its manufacturer, model, firmware and MAC address.</li>
+<li>Each entity, with its label, its name, its kind and its value now. <strong>settable</strong> marks an entity
+that can be switched or set, <strong>not read</strong> one whose values the bridge cannot read, and <strong>retired</strong>
+one the device no longer announces.</li>
+<li><strong>Live tracking</strong>, for a device made by hand or one with a position
+(<a href="#devices-made-by-hand">Devices made by hand</a>).</li>
+<li><strong>Called</strong> and <strong>Rename</strong>: the name the pages show. The device&#39;s name in commands stays.</li>
+<li><strong>Forget</strong>: removes the device and everything kept of it, after asking. A device that is still on
+comes back when it next announces itself, without its old history.</li>
+</ul>
+<p>The kinds an entity can be:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What it is</th>
+<th>What <code>device-set</code> takes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sensor</code></td>
+<td>A reading: a number with its unit, or a word</td>
+<td></td>
+</tr>
+<tr>
+<td><code>binary</code></td>
+<td>On or off, read only: a door, motion, an input</td>
+<td></td>
+</tr>
+<tr>
+<td><code>switch</code></td>
+<td>On or off, and can be switched: a relay, a plug</td>
+<td><code>on</code>, <code>off</code> or <code>toggle</code></td>
+</tr>
+<tr>
+<td><code>light</code></td>
+<td>A switch that is a light</td>
+<td><code>on</code>, <code>off</code> or <code>toggle</code></td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>A number the device takes, such as a thermostat&#39;s target</td>
+<td>a number within its limits</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>A word the device takes, such as a mode</td>
+<td>one of its options</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>A physical button: its presses, which are events, not a state</td>
+<td></td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>Something the device does when asked, such as a restart</td>
+<td><code>press</code></td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>Where it is, kept as a track of positions</td>
+<td></td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="switch-things">Switch things<a class="anchor" href="#switch-things" aria-label="Link to this section"></a></h2>
+<p>The toggles on a device&#39;s <strong>Overview</strong> switch it, and so does <code>device-set</code> in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-set hall-plug/switch-0 on
+device-set hall-plug/switch-0 toggle
+device-set heater/target 21</code></pre></div>
+<p>The command goes to the device through the broker at once. When the bridge is not connected,
+<code>device-set</code> refuses, saying that nothing would be sent: a command is never kept for later, since a
+lamp switched on an hour after it was asked would surprise.</p>
+<h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
+<p>Every entity keeps its readings in its history, and publishes each one as it comes on a routing key:
+a name a message is published under, which any queue or log bound to it gets a copy of.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Routing key</th>
+<th>What comes on it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>automation.state.&lt;device&gt;.&lt;entity&gt;</code></td>
+<td>Each new reading or state: a temperature, on, off</td>
+</tr>
+<tr>
+<td><code>automation.event.&lt;device&gt;.&lt;entity&gt;</code></td>
+<td>Each press of a button</td>
+</tr>
+<tr>
+<td><code>automation.online.&lt;device&gt;</code></td>
+<td>The device coming online or going offline</td>
+</tr>
+</tbody></table>
+</div>
+<p>A message is a line of JSON that says whose it is, so it can be read without its key:</p>
+<div class="code"><pre tabindex="0"><code>{&quot;device&quot;:&quot;hall-sensor&quot;,&quot;entity&quot;:&quot;temperature&quot;,&quot;kind&quot;:&quot;state&quot;,&quot;value&quot;:21.4,&quot;unit&quot;:&quot;°C&quot;,&quot;at&quot;:&quot;2026-11-08T07:42:10.512Z&quot;}
+{&quot;device&quot;:&quot;porch-button&quot;,&quot;entity&quot;:&quot;input-0&quot;,&quot;kind&quot;:&quot;event&quot;,&quot;value&quot;:&quot;single&quot;,&quot;at&quot;:&quot;2026-11-08T18:03:55.120Z&quot;}
+{&quot;device&quot;:&quot;hall-plug&quot;,&quot;online&quot;:false,&quot;at&quot;:&quot;2026-11-08T22:15:02.004Z&quot;}</code></pre></div>
+<p><code>kind</code> is <code>state</code> or <code>event</code>, <code>value</code> a number, a word, or <code>true</code> and <code>false</code> for on and off, and
+<code>at</code> the time EiN received it. A reading the broker passed on again after EiN reconnected, the
+device&#39;s last, also has <code>&quot;retained&quot;: true</code>.</p>
+<p>A number is published at most once every 10 seconds for each entity (<strong>Seconds between readings</strong>).
+One that comes sooner waits for the end of the 10 seconds, and only the newest of those is
+published, so the last of a burst is never lost. A reading the same as the last one is not
+published at all. On and off, words and presses go out as they come.</p>
+<p>The devices are nodes under <code>/archive/devices</code>:</p>
+<div class="code"><pre tabindex="0"><code>/archive/devices/
+└── hall-sensor/                 the device
+    ├── .online                  where its coming and going is published
+    └── temperature/             an entity
+        ├── history              its readings, a log
+        ├── live                 where each reading is published
+        └── set                  what it is asked to be, for an entity that can be set</code></pre></div>
+<h3 id="a-queue-of-your-own">A queue of your own<a class="anchor" href="#a-queue-of-your-own" aria-label="Link to this section"></a></h3>
+<p>A queue bound to keys keeps every message that comes on them until it is taken, whether or not
+anyone is reading. Make one in your home for what you want, such as every press of every button:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mkqueue -k <span class="hljs-string">&#x27;automation.event.#&#x27;</span> ~/presses
+queue-peek ~/presses     <span class="hljs-comment"># the next ones, left in the queue</span>
+<span class="hljs-built_in">cat</span> ~/presses            <span class="hljs-comment"># takes them out as it prints them</span></code></pre></div>
+<p>In a key, <code>*</code> stands for one part and <code>#</code> for any number of them: <code>automation.state.*.temperature</code> is
+every temperature in the house, and <code>automation.state.hall-sensor.*</code> everything the hall sensor
+reads. Remove the queue with <code>rm ~/presses</code> when you no longer want it, or it keeps filling.</p>
+<h3 id="a-log-of-your-own">A log of your own<a class="anchor" href="#a-log-of-your-own" aria-label="Link to this section"></a></h3>
+<p>A log keeps what comes on its keys as entries with their times, for as long as you say:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+mklog -k <span class="hljs-string">&#x27;automation.state.*.temperature&#x27;</span> -r <span class="hljs-string">&#x27;90 day&#x27;</span> ~/temperatures
+log-read ~/temperatures --since 1d
+log-read ~/temperatures --since 30d --bucket 1d --field value --agg max</code></pre></div>
+<h3 id="watch-one-live">Watch one live<a class="anchor" href="#watch-one-live" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> /archive/devices/hall-sensor/temperature/live</code></pre></div>
+<p>prints each reading as it is published, until <kbd>Ctrl</kbd>+<kbd>C</kbd>. Nothing is kept: what
+comes while you are not watching is not shown.</p>
+<h2 id="who-may-do-what">Who may do what<a class="anchor" href="#who-may-do-what" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Who</th>
+<th>What they may do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Everyone signed in</td>
+<td>See every device, its readings and its history; switch and set devices; bind queues and logs of their own to any automation key</td>
+</tr>
+<tr>
+<td>Members of the <code>automation</code> group</td>
+<td>Also rename and forget devices, make devices by hand, turn live tracking on and off, and write <a href="rules.html">rules</a></td>
+</tr>
+<tr>
+<td>The administrator</td>
+<td>Also add people to the <code>automation</code> group, and narrow who may switch a device</td>
+</tr>
+</tbody></table>
+</div>
+<p>The administrator adds someone to the group in <strong>Settings → Groups</strong>, or in the terminal; the
+change applies from their next sign-in:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+group-add-member automation helen</code></pre></div>
+<p>Each entity that can be set has a <code>set</code> node, and whoever may write it may set the entity. It is the
+<code>users</code> group&#39;s from the start, so everyone with an account may. To keep the heater to a group of its
+own, such as <code>parents</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<span class="hljs-built_in">chown</span> :parents /archive/devices/heater-plug/switch-0/set</code></pre></div>
+<p>Anyone else is then refused with <code>device-set: Access denied for operation &#39;w&#39; on node: …</code>, and so
+are their rules. <a href="../admin/permissions.html">Permissions in depth</a> explains groups and modes.</p>
+<aside class="callout callout-important"><p class="callout-title">Important</p>
+<p>Readings are not narrowed device by device. Everyone signed in may bind a queue or a log to any
+automation key and read any device&#39;s history, door and motion sensors included: whoever has an
+account can tell when the front door opened or someone moved in a room.</p>
+</aside>
+<h2 id="devices-made-by-hand">Devices made by hand<a class="anchor" href="#devices-made-by-hand" aria-label="Link to this section"></a></h2>
+<p>Some things worth following have no MQTT: a boat, a car, a GPS logger. A member of <code>automation</code>
+makes such a device by hand:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-create Sailboat --position</code></pre></div>
+<p>It answers with the path of its track, <code>/archive/devices/sailboat/position/history</code>: <code>--position</code>
+gives the device a <code>position</code> entity whose history is a track of GPS positions rather than a log.
+<code>--label</code>, <code>--manufacturer</code> and <code>--model</code> say more about it.</p>
+<h3 id="live-tracking-from-a-phone">Live tracking from a phone<a class="anchor" href="#live-tracking-from-a-phone" aria-label="Link to this section"></a></h3>
+<p>A phone with the free <a href="https://www.traccar.org/client/">Traccar Client</a> app can add its position to
+the device&#39;s track as it moves:</p>
+<ol>
+<li>Open the device&#39;s page at the address the phone will reach EiN at, such as
+<code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
+<li>Under <strong>Live tracking</strong>, choose <strong>Turn on</strong>. A QR code and the server URL appear.</li>
+<li>On the phone, install Traccar Client and scan the QR code in its settings. It fills in the server
+URL and, as the device identifier, the device&#39;s name.</li>
+<li>Set how often it reports, for example every 30 seconds, and switch tracking on.</li>
+</ol>
+<p>The phone posts to EiN from wherever it is, so EiN must be reachable from the internet over HTTPS
+(<a href="../admin/network.html#phones-posting-their-position">Phones posting their position</a>). The address is
+the whole key: anyone who has it can add positions to the track. <strong>New link</strong> makes another, and the
+old one stops working at once; <strong>Turn off</strong> stops it and keeps the track. In the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-tracker sailboat --new --origin https://ein.wrenfield.example   <span class="hljs-comment"># turn it on, or a new link</span>
+device-tracker sailboat --origin https://ein.wrenfield.example         <span class="hljs-comment"># the link, while it is on</span>
+device-tracker sailboat --off</code></pre></div>
+<h3 id="tracks-and-trips">Tracks and trips<a class="anchor" href="#tracks-and-trips" aria-label="Link to this section"></a></h3>
+<p>With the Archive installed, the track is one like any other: GPX files go into it with the Archive&#39;s
+<a href="../archive/commands.html#track-import"><code>track-import</code></a>, its points are drawn on the maps, and the
+Archive cuts it into trips. <strong>Track and trips</strong> on the device&#39;s <strong>Overview</strong> opens them.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+track-import /archive/devices/sailboat/position/history ~/summer-sail.gpx</code></pre></div>
+<p>The Archive&#39;s pages describe <a href="../archive/devices.html#a-devices-track">a track</a> and
+<a href="../archive/devices.html#a-devices-trips">its trips</a>.</p>
+<h2 id="ask-the-assistant">Ask the assistant<a class="anchor" href="#ask-the-assistant" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../assistant/index.html">Assistant</a> installed, the chat reads the devices: ask &quot;how warm is
+it in the hall?&quot;, &quot;which devices are offline?&quot; or &quot;how much did the heater draw yesterday?&quot;, and it
+answers at once, with a chart of a reading&#39;s history when you ask how it went. Asking it to switch
+something, &quot;turn on the hall lamp&quot;, gives a
+<a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a> with the
+<code>device-set</code> line, which you run or decline.</p>
+<h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
+<p>Every part of the pages is a command:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+devices                                                     <span class="hljs-comment"># every device, with its main reading</span>
+devices --online
+device-show hall-sensor                                     <span class="hljs-comment"># its entities and their values now</span>
+device-history hall-sensor/temperature                      <span class="hljs-comment"># the latest 100 readings</span>
+device-history hall-sensor/temperature --since 7d --bucket 1h            <span class="hljs-comment"># an average an hour</span>
+device-history heater-plug/switch-0-power --since 30d --bucket 1d --agg max   <span class="hljs-comment"># the highest each day</span>
+device-set hall-plug/switch-0 toggle
+device-label hall-plug <span class="hljs-string">&#x27;Hall lamp&#x27;</span>                          <span class="hljs-comment"># the name its page shows</span>
+device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temperature&#x27;</span>
+device-forget old-sensor
+device-create Sailboat --position
+device-tracker sailboat --new --origin https://ein.wrenfield.example
+automation-status
+automation-rule-check porch-light</code></pre></div>
+<p><code>device-history</code> prints a line per reading, its time, a tab and its value: <code>--since</code> and <code>--until</code>
+take a time or a duration such as <code>24h</code> or <code>7d</code>, and <code>--bucket</code> sums the readings up per interval,
+with <code>--agg</code> as <code>avg</code> (the default), <code>min</code>, <code>max</code>, <code>sum</code>, <code>count</code>, <code>first</code> or <code>last</code>; on and off
+count as 1 and 0. <code>device-label</code>, <code>device-forget</code>, <code>device-create</code> and <code>device-tracker</code> are for
+members of <code>automation</code>. <a href="commands.html">Automation commands</a> lists every option.</p>
+<h2 id="settings">Settings<a class="anchor" href="#settings" aria-label="Link to this section"></a></h2>
+<p>The module&#39;s settings are in the <strong>Automation</strong> group of <strong>Settings → System</strong>, and each restarts
+<code>automation-bridge</code> when saved:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>On the Settings page</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CFG_AUTOMATION_MQTT_URL</code></td>
+<td><strong>MQTT broker</strong></td>
+<td>empty; <code>--mqtt</code> sets it</td>
+<td>The broker, as <code>mqtt://host:1883</code> or <code>mqtts://host:8883</code>. Empty, automation is off</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_MQTT_USER</code></td>
+<td><strong>MQTT user</strong></td>
+<td>empty; <code>--mqtt</code> sets <code>ein</code></td>
+<td>The account EiN signs in to the broker with. Empty, it signs in without one</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_MQTT_KEY</code></td>
+<td><strong>MQTT password</strong></td>
+<td>none; <code>--mqtt</code> sets it</td>
+<td>That account&#39;s password, a key nobody can read back</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_SOURCES</code></td>
+<td><strong>Device sources</strong></td>
+<td><code>ha-discovery shelly</code></td>
+<td>Which kinds of device the bridge listens for, separated by spaces: <code>ha-discovery</code> for ESPHome and whatever announces itself as it does, and <code>shelly</code></td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_DISCOVERY_PREFIX</code></td>
+<td><strong>Discovery prefix</strong></td>
+<td><code>homeassistant</code></td>
+<td>The topic <code>ha-discovery</code> devices announce themselves under</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_HISTORY</code></td>
+<td><strong>Reading history</strong></td>
+<td><code>365 day</code></td>
+<td>How long an entity&#39;s readings are kept: <code>30 day</code>, <code>90 day</code>, <code>365 day</code> or <code>forever</code>. It applies to entities found from then on; one found before keeps its own, which <code>attrs</code> on its history changes (below)</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_MIN_INTERVAL</code></td>
+<td><strong>Seconds between readings</strong></td>
+<td><code>10</code></td>
+<td>The shortest time between two published readings of one number. An entity&#39;s own <code>minInterval</code> attribute overrides it</td>
+</tr>
+</tbody></table>
+</div>
+<p>An entity found before keeps its history&#39;s retention, and an entity can take its own interval, read
+when the bridge next starts:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of automation</span>
+attrs -s <span class="hljs-string">&#x27;retention=90 day&#x27;</span> /archive/devices/hall-sensor/temperature/history
+attrs -J minInterval=60 /archive/devices/heater-plug/switch-0-power
+service restart automation-bridge   <span class="hljs-comment"># as the administrator</span></code></pre></div>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>No devices yet</strong> on the Devices page</td>
+<td>No device has announced itself, or EiN does not hear the broker</td>
+<td>Run <code>automation-status</code>, and check the device&#39;s own broker settings</td>
+</tr>
+<tr>
+<td>A device never shows up, while others do</td>
+<td>It cannot reach the broker, or the broker refuses its account</td>
+<td>Check its server, user and password. ESPHome&#39;s log says whether MQTT connected. Open port 1883 in the machine&#39;s firewall (<a href="../admin/network.html#open-the-ports-in-the-firewall">network</a>)</td>
+</tr>
+<tr>
+<td>A Shelly shows up without readings</td>
+<td>Its status updates are off</td>
+<td>Turn on <strong>Generic status update over MQTT</strong> and <strong>RPC status notifications over MQTT</strong></td>
+</tr>
+<tr>
+<td>A Shelly is there twice, under two names</td>
+<td>Its topic prefix changed, and a new prefix is a new device</td>
+<td><strong>Forget</strong> the old one</td>
+</tr>
+<tr>
+<td>An entity is marked <strong>not read</strong></td>
+<td>The device announced it in a way the bridge does not understand</td>
+<td><code>automation-status</code> says why. Its readings are not kept</td>
+</tr>
+<tr>
+<td><code>device-set: … cannot be set</code></td>
+<td>The entity is a reading, or the device announced no way to set it</td>
+<td>Only an entity marked <strong>settable</strong> takes a value</td>
+</tr>
+<tr>
+<td><code>device-set: … takes on, off or toggle, not …</code></td>
+<td>The value is not one the entity takes</td>
+<td>See the kinds in <a href="#info">Info</a></td>
+</tr>
+<tr>
+<td><code>device-set: the automation bridge is not connected to the broker, …</code></td>
+<td>EiN does not hear the broker just now</td>
+<td>Run <code>automation-status</code></td>
+</tr>
+<tr>
+<td><code>device-set: Access denied for operation &#39;w&#39; on node: …</code></td>
+<td>The entity&#39;s <code>set</code> node is narrowed to others</td>
+<td>Ask the administrator</td>
+</tr>
+<tr>
+<td><strong>Rename</strong>, <strong>Forget</strong> or <code>device-create</code> is refused</td>
+<td>You are not in the <code>automation</code> group, or were added since you signed in</td>
+<td>Ask the administrator to add you, then sign in again</td>
+</tr>
+<tr>
+<td>A device stays <strong>offline</strong></td>
+<td>It said it was going, or the broker said so for it when it disappeared</td>
+<td>Check its power and its Wi-Fi</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../recipes/commands.html" rel="prev"><span>Previous</span>Recipes commands</a><a class="next" href="rules.html" rel="next"><span>Next</span>Rules</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly">Shelly</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-of-your-own">A queue of your own</a></li><li class="nested"><a href="#a-log-of-your-own">A log of your own</a></li><li class="nested"><a href="#watch-one-live">Watch one live</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#devices-made-by-hand">Devices made by hand</a></li><li class="nested"><a href="#live-tracking-from-a-phone">Live tracking from a phone</a></li><li class="nested"><a href="#tracks-and-trips">Tracks and trips</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+    </div>
+  </body>
+</html>

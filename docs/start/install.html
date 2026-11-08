@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -181,6 +182,10 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive
 <tr>
 <td><code>--module &lt;name&gt;</code></td>
 <td>A module, such as <code>archive</code> or <code>assistant</code>, which EiN installs at its start with the modules it needs. Give it once for each module.</td>
+</tr>
+<tr>
+<td><code>--mqtt</code></td>
+<td>An MQTT broker for the <a href="../automation/index.html">Automation</a> module&#39;s devices, on port 1883 of the machine.</td>
 </tr>
 <tr>
 <td><code>--no-ems</code>, <code>--no-llm</code></td>
@@ -460,12 +465,13 @@ user passwd admin</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh --ems              <span class="hljs-comment"># the media service</span>
 ~/ein/setup.sh --llm              <span class="hljs-comment"># the assistant&#x27;s language model</span>
+~/ein/setup.sh --mqtt             <span class="hljs-comment"># an MQTT broker, for the Automation module&#x27;s devices</span>
 ~/ein/setup.sh --module archive   <span class="hljs-comment"># a module, with the modules it needs</span></code></pre></div>
 <ul>
 <li>An option is kept in <code>.env</code> once given, so a later run without it keeps it. Give each option only when you add it.</li>
 <li>Every run of <code>setup.sh</code> is also an update: it brings <code>~/ein</code> itself up to date, fetches the newest sources of what is installed, builds again and restarts EiN, which is down while it starts. <a href="../admin/updating.html">Updating</a> has the details.</li>
 <li>A module given with <code>--module</code> is installed by EiN at its next start, which that same run brings about.</li>
-<li><code>--no-ems</code> and <code>--no-llm</code> take the media service or the model out again. Their data stays.</li>
+<li><code>--no-ems</code>, <code>--no-llm</code> and <code>--no-mqtt</code> take the media service, the model or the broker out again. Their data stays.</li>
 </ul>
 <p>Modules can also be installed without a restart. In the Web UI, open <strong>Settings → Modules</strong>, click the <strong>Published modules</strong> button beside the filter, and click <strong>Install</strong> on the module. In the terminal, <code>mod install archive</code> does the same (<a href="../reference/commands-core.html#mod-install">reference</a>). <a href="../admin/modules.html">Modules</a> covers updating and removing them, and why a module you remove in <strong>Settings → Modules</strong> comes back at the next start while <code>EIN_MODULES</code> in <code>.env</code> still names it.</p>
 <p>Instead of <code>--llm</code>, the assistant can use a hosted model, set in <code>~/ein/.env</code>: see <a href="../assistant/language-model.html">The language model</a>.</p>

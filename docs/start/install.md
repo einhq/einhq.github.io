@@ -63,6 +63,7 @@ Everything after `bash -s --` is passed on to `~/ein/setup.sh`, EiN's own setup 
 | `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers. |
 | `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                     |
 | `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs. Give it once for each module.                        |
+| `--mqtt`               | An MQTT broker for the [Automation](../automation/index.md) module's devices, on port 1883 of the machine.                                                  |
 | `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                              |
 
 > [!NOTE]
@@ -242,13 +243,14 @@ Everything the Archive command installs can be added to EiN Core afterwards. Run
 # on the machine EiN runs on
 ~/ein/setup.sh --ems              # the media service
 ~/ein/setup.sh --llm              # the assistant's language model
+~/ein/setup.sh --mqtt             # an MQTT broker, for the Automation module's devices
 ~/ein/setup.sh --module archive   # a module, with the modules it needs
 ```
 
 - An option is kept in `.env` once given, so a later run without it keeps it. Give each option only when you add it.
 - Every run of `setup.sh` is also an update: it brings `~/ein` itself up to date, fetches the newest sources of what is installed, builds again and restarts EiN, which is down while it starts. [Updating](../admin/updating.md) has the details.
 - A module given with `--module` is installed by EiN at its next start, which that same run brings about.
-- `--no-ems` and `--no-llm` take the media service or the model out again. Their data stays.
+- `--no-ems`, `--no-llm` and `--no-mqtt` take the media service, the model or the broker out again. Their data stays.
 
 Modules can also be installed without a restart. In the Web UI, open **Settings → Modules**, click the **Published modules** button beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
 
