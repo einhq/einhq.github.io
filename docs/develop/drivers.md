@@ -168,10 +168,12 @@ The attributes a driver gives an endpoint:
 
 The device's card and page take its main value from the first of `temperature`, `power`, `humidity`,
 `illuminance` and `energy` among its readings, so give `deviceClass` where you know it. An endpoint
-is made with its device's owner and group, a reading `0644` and a control `0664` for the `users`
-group, unless `mode` says otherwise ([Devices and their keys](../admin/devices.md#who-may-do-what)).
-Give an endpoint that tells of the people in the house, such as motion or a door, `0640` if not
-everyone with an account should read it.
+is made with its device's owner and the group `users`, a reading `0640`, a track `0750` and a
+control `0660`, unless `mode` says otherwise
+([Devices and their keys](../admin/devices.md#who-may-do-what)): everyone signed in reads it and
+switches a control, and no visitor does. A device `ensureDevice` makes is `0750`, the `users`
+group's, and its maker's: the administrator's, for a driver's service. A log endpoint keeps a bare
+value written to it by hand as `{ value }` (its `valueField`), as `append` keeps a driver's.
 
 ## An example: a weather station that posts JSON
 

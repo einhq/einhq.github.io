@@ -8,12 +8,13 @@ without signing in. [Devices](../guide/devices.md) describes the pages, and
 
 ## Who may do what
 
-| Who                            | What they may do                                                                                                                                    |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Everyone signed in             | See every device, its readings and its history; switch and set every control; bind queues and logs of their own to any device's routing keys        |
-| Members of the `devices` group | Also make devices (`device-create`), rename them (`device-label`) and forget them (`device-forget`); make and renew the key of any device           |
-| A device's owner               | Whoever made it by hand: also write values to its endpoints, edit its track (its trips, with the Archive), make its key, and narrow it with `chmod` |
-| The administrator              | Everything: also add people to `devices`, own the devices drivers find, and narrow who may switch a control                                         |
+| Who                            | What they may do                                                                                                                             |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Everyone signed in             | See every device, its readings and its history; switch and set every control; bind queues and logs of their own to any device's routing keys |
+| Members of the `devices` group | Also make devices (`device-create`), rename them (`device-label`) and forget them (`device-forget`), any device, whoever made it             |
+| A device's owner               | Whoever made it: also write values to its endpoints, edit its track (its trips, with the Archive), make its key, and narrow it with `chmod`  |
+| The administrator              | Everything: also add people to `devices`, own the devices drivers find, and narrow who may switch a control                                  |
+| A visitor who is not signed in | Nothing: no device, reading or switch, whether or not visitors may browse                                                                    |
 
 EiN makes the group `devices` (**Devices**, "May make, name and forget the devices under /dev") at
 every start when it is missing. Add someone to it in **Settings → Groups**, or in the terminal; the
@@ -24,18 +25,27 @@ change applies from their next sign-in:
 group-add-member devices helen
 ```
 
-`/dev` is the administrator's, with the group `devices` and the mode `1775`, so members of the group
-add devices to it; EiN sets this owner and mode again at every start. The device commands check the
-group themselves: `device-label` and `device-forget` act on any device for a member, whoever made it.
-Remove a device with `device-forget` rather than `rm`: it also tells the device's driver to let it go,
-so a broker's last announcement does not make it again.
+`/dev` stays the administrator's, with the mode `0755`, and EiN sets this again at every start:
+nobody else adds to it or removes from it, so EiN's own `null` and event routers, and each person's
+devices, stay where they are. The members of `devices` make, name and forget devices through the
+three commands, which do it for them as the administrator: `device-create` makes the device and gives
+it to whoever asked, its owner from then on. `device-forget` also tells the device's driver to let it
+go, so a broker's last announcement does not make it again.
 
 A device a driver finds belongs to the administrator, since drivers run as EiN's services; a device
-made with `device-create` belongs to whoever made it. Either way its group is `devices`, with the
-mode `0775`. Its endpoints take the device's owner and group: readings and tracks `0644`, so only the
-owner adds to them, and controls `0664` with the group `users`, so everyone with an account may
-switch them. A rule of the [Automation](../automation/rules.md) module switches as the person whose
-rule it is, with that person's rights.
+made with `device-create` belongs to whoever made it. Either way its group is `users`, the group
+everyone signed in is in, and its endpoints take its owner:
+
+| Node                        | Mode   | So                                                                                    |
+| --------------------------- | ------ | ------------------------------------------------------------------------------------- |
+| The device, `/dev/<device>` | `0750` | Everyone signed in reads it; its owner changes it                                     |
+| A reading, a log            | `0640` | Everyone signed in reads it; its owner adds to it                                     |
+| A track                     | `0750` | Everyone signed in reads it and what the Archive keeps under it; its owner changes it |
+| A control                   | `0660` | Everyone signed in reads its states and switches it                                   |
+
+Visitors, who act as the guest, are in none of these groups and read none of it, whatever
+**Visitors may browse** says. A rule of the [Automation](../automation/rules.md) module switches as
+the person whose rule it is, with that person's rights.
 
 > [!IMPORTANT]
 > Readings are not narrowed device by device. Everyone signed in may read any device's history and
@@ -56,24 +66,22 @@ chown :parents /dev/heater-plug/switch-0
 ```
 
 Anyone else is then refused with `Access denied for operation 'w' on node: …`, on the page, in the
-terminal and in their rules. `chmod 644 /dev/heater-plug/switch-0` keeps it to its owner instead, the
-administrator for a device a driver found. A driver leaves the owner, group and mode of an endpoint
-it already has as they are, so the change holds.
+terminal and in their rules. `chmod 640 /dev/heater-plug/switch-0` keeps it to its owner instead, the
+administrator for a device a driver found, while everyone signed in still sees its state. A driver
+leaves the owner, group and mode of an endpoint it already has as they are, so the change holds.
 
 ### Keep a device to some people
 
-To keep a whole device's history, such as a phone's track, to its owner, the `devices` group and one
-group more:
+To keep a whole device's history, such as a phone's track, to its owner and one group, give the
+device that group:
 
 ```bash
 # in EiN's terminal, as its owner or the administrator
-chmod o-rx /dev/ruby-phone
-acl -m g:parents:rx /dev/ruby-phone
+chown :parents /dev/ruby-phone
 ```
 
 Reaching an endpoint takes passing through its device, so this closes every endpoint of it to
-everyone else, visitors included. [Permissions in depth](permissions.md) explains modes and access
-lists.
+everyone outside `parents`. [Permissions in depth](permissions.md) explains owners, groups and modes.
 
 ## Device keys
 
@@ -96,8 +104,8 @@ https://ein.wrenfield.example/file/dev/ruby-phone?key=Zt2v…
   it came from the device (`device:ruby-phone`).
 - **How it is sent.** As `Authorization: Bearer <key>`, or as `key=` in the address for a client that
   takes only an address, such as Traccar Client.
-- **Who sees it.** Whoever may change the device: its owner, the members of `devices` and the
-  administrator. It is kept in the device's `.key`, mode `0600`, so the address can be shown again.
+- **Who sees it.** Whoever may change the device: its owner and the administrator. It is kept in the
+  device's `.key`, mode `0600` and the administrator's, so the address can be shown again.
 - **Renewing it.** `--new`, or **New key** on the **Info** tab, makes another; the old address stops
   working at once. `--off`, or **Take the key away**, removes it, and nothing writes to the device
   without signing in.
@@ -117,12 +125,10 @@ A write without a key is a signed-in person's, as every `/file` write is, and ne
 
 - **A device with its key**, writing to `/file/dev/<device>` as above. Any other write there needs a
   signed-in session.
-- **Visitors, while Visitors may browse is on.** A visitor reads what everyone else may
-  ([Visitors and share links](permissions.md#visitors-and-share-links)), and a device and its
-  readings are readable by everyone else unless narrowed: the device's page opens for a visitor who
-  has its address. Keep a device from visitors with the two lines in
-  [Keep a device to some people](#keep-a-device-to-some-people), granting `users` instead of a group.
-  Visitors never switch a control.
+- **Nothing else of the devices.** A visitor reads no device, reading or track and switches nothing,
+  even with **Visitors may browse** on
+  ([Visitors and share links](permissions.md#visitors-and-share-links)): the devices are the `users`
+  group's.
 - **The MQTT broker**, with the [Automation](../automation/index.md) module's, is not EiN: the devices
   sign in to it with their own password, and whoever reaches it with that password switches them.
   Keep its port in your home network
@@ -136,7 +142,7 @@ A phone away from home reaches EiN only when EiN is reachable from the internet 
 | What you see                                                              | What it means                                                          | What to do                                                            |
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | `only the devices group's members make, name and forget devices`          | The person is not in `devices`, or was added since they signed in      | Add them, and have them sign in again                                 |
-| `device-key: only whoever may change <device> sees or changes its key`    | The person may not change the device                                   | Its owner, a member of `devices` or the administrator makes the key   |
+| `device-key: only whoever may change <device> sees or changes its key`    | The person may not change the device                                   | Its owner or the administrator makes the key                          |
 | A phone's posts are refused with `403 Forbidden`                          | Its key was renewed or taken away, or its owner's account was disabled | Give the phone the address `device-key` shows now, or a new one       |
 | `device write refused` in the system log, from an address you do not know | Something tries keys, or holds an old address                          | Renew the key with `device-key <device> --new` if it may have got out |
 | `Access denied for operation 'w' on node: /dev/…` when switching          | The control is narrowed to others                                      | Widen it, or leave it                                                 |

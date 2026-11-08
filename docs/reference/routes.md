@@ -59,24 +59,24 @@ with the picture over it. Opened by its own address, `/media/<path>`, the pictur
 
 ## EiN's own pages
 
-| Address                             | What it shows                                                                        | Who can open it                                        |
-| ----------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| `/`                                 | **Home**                                                                             | Everyone who can browse                                |
-| `/login`                            | The sign-in page                                                                     | Everyone                                               |
-| `/s/<token>`                        | Where a share link lands, see [Share links](#share-links)                            | Everyone                                               |
-| `/search`                           | **Search**, see [Search and the finder](../guide/search.md)                          | Everyone who can browse                                |
-| `/stats`                            | **Statistics**                                                                       | Everyone who can browse                                |
-| `/docs`                             | **Documentation**, see [Links into the documentation](#links-into-the-documentation) | Everyone who can browse                                |
-| `/profile`                          | **Profile**: your account, preferences and security                                  | Signed in                                              |
-| `/settings`                         | **Settings**                                                                         | Signed in                                              |
-| `/trash`                            | Your **Trash**                                                                       | Signed in                                              |
-| `/about`                            | **About EiN**; from the account menu it opens in a dialog                            | Signed in                                              |
-| `/devices`                          | **Devices**, see [Devices](../guide/devices.md)                                      | Everyone who can browse; in the sidebar when signed in |
-| `/devices/<name>`                   | One device, for example `/devices/hall-plug`                                         | Everyone who can browse                                |
-| `/system`                           | **Dashboard**, see [Health and the dashboard](../admin/monitoring.md)                | In the sidebar for administrators                      |
-| `/system/nodes`                     | **Nodes**, the node explorer                                                         | In the sidebar for administrators                      |
-| `/system/pipelines/<pipeline>`      | One pipeline and its recent runs, for example `/system/pipelines/media-faces`        | Reached from the **Dashboard**                         |
-| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline                                                                | Reached from the pipeline's page                       |
+| Address                             | What it shows                                                                        | Who can open it                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------- |
+| `/`                                 | **Home**                                                                             | Everyone who can browse             |
+| `/login`                            | The sign-in page                                                                     | Everyone                            |
+| `/s/<token>`                        | Where a share link lands, see [Share links](#share-links)                            | Everyone                            |
+| `/search`                           | **Search**, see [Search and the finder](../guide/search.md)                          | Everyone who can browse             |
+| `/stats`                            | **Statistics**                                                                       | Everyone who can browse             |
+| `/docs`                             | **Documentation**, see [Links into the documentation](#links-into-the-documentation) | Everyone who can browse             |
+| `/profile`                          | **Profile**: your account, preferences and security                                  | Signed in                           |
+| `/settings`                         | **Settings**                                                                         | Signed in                           |
+| `/trash`                            | Your **Trash**                                                                       | Signed in                           |
+| `/about`                            | **About EiN**; from the account menu it opens in a dialog                            | Signed in                           |
+| `/devices`                          | **Devices**, see [Devices](../guide/devices.md)                                      | Signed in; a visitor sees no device |
+| `/devices/<name>`                   | One device, for example `/devices/hall-plug`                                         | Signed in                           |
+| `/system`                           | **Dashboard**, see [Health and the dashboard](../admin/monitoring.md)                | In the sidebar for administrators   |
+| `/system/nodes`                     | **Nodes**, the node explorer                                                         | In the sidebar for administrators   |
+| `/system/pipelines/<pipeline>`      | One pipeline and its recent runs, for example `/system/pipelines/media-faces`        | Reached from the **Dashboard**      |
+| `/system/pipelines/<pipeline>/<id>` | One run of a pipeline                                                                | Reached from the pipeline's page    |
 
 "Everyone who can browse" means signed-in users, and also visitors who have not signed in when the
 administrator turns on [`CFG_GUEST_BROWSING`](settings.md#cfg_guest_browsing). A page marked "Signed

@@ -24,16 +24,16 @@ archive  dev  etc  groups  home  tmp  usr  var
 
 Each holds one kind of thing, and the kind is the reason a path sits where it does:
 
-| Folder     | What it holds                                                                                                              | Who writes there                                          |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and cameras                                        | Everyone with an account, as each folder's sharing allows |
-| `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging                  | Each account in its own folder                            |
-| `/groups`  | One folder per group given a shared home: what its members have in common                                                  | The group's members, each in their own group's folder     |
-| `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the Web UI                         | The administrator, and commands such as `config set`      |
-| `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs                            | EiN itself                                                |
-| `/usr`     | Code and read-only files: the commands, the modules and the built-in guide                                                 | Nobody by hand; an update or `mod install` replaces it    |
-| `/dev`     | The devices that report to EiN or are switched from it, the channels facts about changes are announced on, and `/dev/null` | EiN itself, its drivers, and the `devices` group          |
-| `/tmp`     | Scratch space that does not outlast a restart                                                                              | Everyone                                                  |
+| Folder     | What it holds                                                                                                              | Who writes there                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and cameras                                        | Everyone with an account, as each folder's sharing allows                           |
+| `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging                  | Each account in its own folder                                                      |
+| `/groups`  | One folder per group given a shared home: what its members have in common                                                  | The group's members, each in their own group's folder                               |
+| `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the Web UI                         | The administrator, and commands such as `config set`                                |
+| `/var`     | What the system writes as it runs: logs, sessions, share links, queues, pools and pipeline runs                            | EiN itself                                                                          |
+| `/usr`     | Code and read-only files: the commands, the modules and the built-in guide                                                 | Nobody by hand; an update or `mod install` replaces it                              |
+| `/dev`     | The devices that report to EiN or are switched from it, the channels facts about changes are announced on, and `/dev/null` | EiN itself: its drivers, and `device-create` for the members of the `devices` group |
+| `/tmp`     | Scratch space that does not outlast a restart                                                                              | Everyone                                                                            |
 
 ![The tree from /: /archive with the Archive module's albums, people, locations and cameras and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /groups with the users and family groups' homes, each seen only by its members; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events, null and the device hall-plug; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
 
@@ -194,8 +194,10 @@ installed modules are kept.
 
 `/dev` holds the devices: each sensor, plug, button, phone or GPS logger EiN knows is a folder
 `/dev/<device>`, its readings, positions and switches the nodes in it. A driver makes the devices it
-finds, and members of the `devices` group make the others; `/dev` is the administrator's with the
-group `devices` and the mode `1775`. [Devices, endpoints and drivers](devices.md) describes them.
+finds, and members of the `devices` group make the others with `device-create`, which gives each to
+whoever made it. `/dev` itself stays the administrator's, with the mode `0755`; a device is `0750`
+with the group `users`, read by everyone signed in and no visitor.
+[Devices, endpoints and drivers](devices.md) describes them.
 
 Beside the devices are EiN's own nodes. `/dev/events` and `/dev/pipeline-events` are `router` nodes:
 modules announce the facts they derive from changes to the tree on `/dev/events`, and the pipeline

@@ -164,7 +164,7 @@ The sensors, plugs, phones and loggers under `/dev`; [Devices](../guide/devices.
 | Rename a device or an endpoint, as a member of `devices`  | `device-label hall-plug 'Hall lamp'`                                         | [device-label](../reference/commands-core.md)            |
 | Forget a device and its history, as a member of `devices` | `device-forget old-sensor`                                                   | [device-forget](../reference/commands-core.md)           |
 
-Write a control with `>` and append to a log with `>>`: `>` on a log empties it first.
+A write to a device's log or track appends to it, with `>` as with `>>`, and a bare value such as `21.4` is kept as `{"value": 21.4}`; a control takes `>`.
 
 ## The system
 

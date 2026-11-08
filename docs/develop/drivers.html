@@ -377,10 +377,12 @@ published marked as such.</p>
 </div>
 <p>The device&#39;s card and page take its main value from the first of <code>temperature</code>, <code>power</code>, <code>humidity</code>,
 <code>illuminance</code> and <code>energy</code> among its readings, so give <code>deviceClass</code> where you know it. An endpoint
-is made with its device&#39;s owner and group, a reading <code>0644</code> and a control <code>0664</code> for the <code>users</code>
-group, unless <code>mode</code> says otherwise (<a href="../admin/devices.html#who-may-do-what">Devices and their keys</a>).
-Give an endpoint that tells of the people in the house, such as motion or a door, <code>0640</code> if not
-everyone with an account should read it.</p>
+is made with its device&#39;s owner and the group <code>users</code>, a reading <code>0640</code>, a track <code>0750</code> and a
+control <code>0660</code>, unless <code>mode</code> says otherwise
+(<a href="../admin/devices.html#who-may-do-what">Devices and their keys</a>): everyone signed in reads it and
+switches a control, and no visitor does. A device <code>ensureDevice</code> makes is <code>0750</code>, the <code>users</code>
+group&#39;s, and its maker&#39;s: the administrator&#39;s, for a driver&#39;s service. A log endpoint keeps a bare
+value written to it by hand as <code>{ value }</code> (its <code>valueField</code>), as <code>append</code> keeps a driver&#39;s.</p>
 <h2 id="an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON<a class="anchor" href="#an-example-a-weather-station-that-posts-json" aria-label="Link to this section"></a></h2>
 <p>A weather station posts <code>{&quot;temperature&quot;: 4.2, &quot;humidity&quot;: 81, &quot;wind&quot;: 5.5}</code> to EiN every minute. A
 member of <code>devices</code> makes the station and gives it its key; the station posts to

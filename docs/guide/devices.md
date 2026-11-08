@@ -236,6 +236,7 @@ the script the device's key:
 # in EiN's terminal, as a member of devices
 device-create 'Garden sensor' --class sensor
 mklog /dev/garden-sensor/soil-moisture
+attrs -s valueField=value /dev/garden-sensor/soil-moisture
 device-key garden-sensor --new --origin https://ein.wrenfield.example
 ```
 
@@ -244,8 +245,10 @@ device-key garden-sensor --new --origin https://ein.wrenfield.example
 curl -H 'Authorization: Bearer <the key>' --data 41.5 https://ein.wrenfield.example/file/dev/garden-sensor/soil-moisture
 ```
 
-The key is the part of the address after `key=`. Each value is kept with the time it arrived, and
-shows on the device's page like any reading.
+The key is the part of the address after `key=`. Each value is kept with the time it arrived, as
+`{"value": 41.5}`, and shows on the device's page like any reading; `valueField` makes the log keep a
+value written in the terminal the same way, `echo 41.5 > /dev/garden-sensor/soil-moisture`. Values
+written this way are not published on the bus, as a driver's readings are.
 
 ## Rename or forget a device
 

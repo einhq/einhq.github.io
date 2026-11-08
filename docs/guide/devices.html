@@ -301,11 +301,14 @@ the script the device&#39;s key:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-create <span class="hljs-string">&#x27;Garden sensor&#x27;</span> --class sensor
 mklog /dev/garden-sensor/soil-moisture
+attrs -s valueField=value /dev/garden-sensor/soil-moisture
 device-key garden-sensor --new --origin https://ein.wrenfield.example</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that runs the script</span>
 curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x27;</span> --data 41.5 https://ein.wrenfield.example/file/dev/garden-sensor/soil-moisture</code></pre></div>
-<p>The key is the part of the address after <code>key=</code>. Each value is kept with the time it arrived, and
-shows on the device&#39;s page like any reading.</p>
+<p>The key is the part of the address after <code>key=</code>. Each value is kept with the time it arrived, as
+<code>{&quot;value&quot;: 41.5}</code>, and shows on the device&#39;s page like any reading; <code>valueField</code> makes the log keep a
+value written in the terminal the same way, <code>echo 41.5 &gt; /dev/garden-sensor/soil-moisture</code>. Values
+written this way are not published on the bus, as a driver&#39;s readings are.</p>
 <h2 id="rename-or-forget-a-device">Rename or forget a device<a class="anchor" href="#rename-or-forget-a-device" aria-label="Link to this section"></a></h2>
 <p>Members of the <code>devices</code> group rename and forget devices on the <strong>Info</strong> tab, or in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>

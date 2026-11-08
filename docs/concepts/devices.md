@@ -148,24 +148,26 @@ form. Both work the same from the terminal, over SFTP, and over HTTP:
 
 ```bash
 # in EiN's terminal
-cat ~/summer-walk.gpx > /dev/old-logger                      # raw input: the tracker driver reads the GPX
-echo on > /dev/hall-plug/switch-0                            # a value for a control, sent to the plug
-echo '{"value": 4.2}' >> /dev/garden-sensor/soil-moisture    # a value appended to a log
-cat /dev/hall-plug/switch-0                                  # the states the plug reported
-tail -f /dev/hall-plug/switch-0-power                        # each new reading, until Ctrl+C
+cat ~/summer-walk.gpx > /dev/old-logger                  # raw input: the tracker driver reads the GPX
+echo on > /dev/hall-plug/switch-0                        # a value for a control, sent to the plug
+echo 41.5 > /dev/garden-sensor/soil-moisture             # a value appended to a log
+cat /dev/hall-plug/switch-0                              # the states the plug reported
+tail -f /dev/hall-plug/switch-0-power                    # each new reading, until Ctrl+C
 ```
 
 A write to a device or a control is answered when its driver has taken it: `echo` fails at once when
 the value is refused or the driver is not running, and a control's write that the device has not
 taken within 10 seconds fails with `<device> did not answer within 10 s`.
 
-> [!WARNING]
-> Write a control with `>`, and append to a log or a track with `>>`. `>` on a log or a track empties
-> it first, as it would a file, and its history is gone. `>>` on a control would append a state as
-> if the device had reported it, which only the administrator may do.
-
-A value appended to a log by hand is a line of JSON with the value in `value`; it is kept as it is,
-and not published on the bus as a driver's readings are.
+A write to a log or a track endpoint appends to it, with `>` as with `>>`: an endpoint keeps its
+history, unlike a file or a log elsewhere in the tree, which `>` empties first. A value written to a
+log endpoint by hand, a number, `true` or `false`, or a word, is kept as `{"value": …}`, as a
+driver's readings are, so the device's page and `device-history` read it; a line that is a JSON
+object is kept as it is. Every log a driver makes has this from its `valueField` attribute, and a log
+made by hand under a device gets it with `attrs -s valueField=value <log>`. A value written by hand is
+neither throttled nor published on the bus: only what a driver appends is. A control takes `>`;
+`>>` on a control would append a state as if the device had reported it, which only the
+administrator may do.
 
 Over HTTP the device's file in the tree takes the same writes at `/file/dev/<device>` and
 `/file/dev/<device>/<endpoint>`, where a body of a bare value, such as `21.4`, is kept as

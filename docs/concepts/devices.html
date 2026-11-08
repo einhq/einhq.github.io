@@ -318,21 +318,23 @@ nothing.</p>
 tracker&#39;s post, whatever the driver reads. What is written to an endpoint is a value in EiN&#39;s own
 form. Both work the same from the terminal, over SFTP, and over HTTP:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">cat</span> ~/summer-walk.gpx &gt; /dev/old-logger                      <span class="hljs-comment"># raw input: the tracker driver reads the GPX</span>
-<span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0                            <span class="hljs-comment"># a value for a control, sent to the plug</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;{&quot;value&quot;: 4.2}&#x27;</span> &gt;&gt; /dev/garden-sensor/soil-moisture    <span class="hljs-comment"># a value appended to a log</span>
-<span class="hljs-built_in">cat</span> /dev/hall-plug/switch-0                                  <span class="hljs-comment"># the states the plug reported</span>
-<span class="hljs-built_in">tail</span> -f /dev/hall-plug/switch-0-power                        <span class="hljs-comment"># each new reading, until Ctrl+C</span></code></pre></div>
+<span class="hljs-built_in">cat</span> ~/summer-walk.gpx &gt; /dev/old-logger                  <span class="hljs-comment"># raw input: the tracker driver reads the GPX</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0                        <span class="hljs-comment"># a value for a control, sent to the plug</span>
+<span class="hljs-built_in">echo</span> 41.5 &gt; /dev/garden-sensor/soil-moisture             <span class="hljs-comment"># a value appended to a log</span>
+<span class="hljs-built_in">cat</span> /dev/hall-plug/switch-0                              <span class="hljs-comment"># the states the plug reported</span>
+<span class="hljs-built_in">tail</span> -f /dev/hall-plug/switch-0-power                    <span class="hljs-comment"># each new reading, until Ctrl+C</span></code></pre></div>
 <p>A write to a device or a control is answered when its driver has taken it: <code>echo</code> fails at once when
 the value is refused or the driver is not running, and a control&#39;s write that the device has not
 taken within 10 seconds fails with <code>&lt;device&gt; did not answer within 10 s</code>.</p>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Write a control with <code>&gt;</code>, and append to a log or a track with <code>&gt;&gt;</code>. <code>&gt;</code> on a log or a track empties
-it first, as it would a file, and its history is gone. <code>&gt;&gt;</code> on a control would append a state as
-if the device had reported it, which only the administrator may do.</p>
-</aside>
-<p>A value appended to a log by hand is a line of JSON with the value in <code>value</code>; it is kept as it is,
-and not published on the bus as a driver&#39;s readings are.</p>
+<p>A write to a log or a track endpoint appends to it, with <code>&gt;</code> as with <code>&gt;&gt;</code>: an endpoint keeps its
+history, unlike a file or a log elsewhere in the tree, which <code>&gt;</code> empties first. A value written to a
+log endpoint by hand, a number, <code>true</code> or <code>false</code>, or a word, is kept as <code>{&quot;value&quot;: …}</code>, as a
+driver&#39;s readings are, so the device&#39;s page and <code>device-history</code> read it; a line that is a JSON
+object is kept as it is. Every log a driver makes has this from its <code>valueField</code> attribute, and a log
+made by hand under a device gets it with <code>attrs -s valueField=value &lt;log&gt;</code>. A value written by hand is
+neither throttled nor published on the bus: only what a driver appends is. A control takes <code>&gt;</code>;
+<code>&gt;&gt;</code> on a control would append a state as if the device had reported it, which only the
+administrator may do.</p>
 <p>Over HTTP the device&#39;s file in the tree takes the same writes at <code>/file/dev/&lt;device&gt;</code> and
 <code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code>, where a body of a bare value, such as <code>21.4</code>, is kept as
 <code>{&quot;value&quot;: 21.4}</code>. A device cannot sign in, so it sends its <strong>device key</strong> with them, which opens its

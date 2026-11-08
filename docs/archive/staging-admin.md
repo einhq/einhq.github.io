@@ -134,7 +134,7 @@ staging status --user helen
 ```text
 inbox: 1204 media, 37 other, 212 indexing, 18 undated
 google-photos: 48210 media, 1391 other, 30544 indexing, 66 undated
-1 route(s) waiting for a track
+1 route(s) waiting for a device
 1 family tree(s) waiting to be imported
 ```
 

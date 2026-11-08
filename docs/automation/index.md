@@ -161,8 +161,8 @@ rather than on and off.
 The first generation, such as the Plug S, the 1, the 1PM, the 2.5 and the i3, is read by the
 `shelly-gen1` driver.
 
-1. Open the Shelly's own web page, at its address on your network, and go to **Settings → Advanced →
-   Developer settings**.
+1. Open the Shelly's own web page, at its address on your network, and go to **Internet & Security →
+   Advanced – Developer Settings**.
 2. Turn MQTT on. Set the server to the machine EiN runs on with the port, such as `192.0.2.10:1883`,
    the user to `device`, and the password to the device password. Leave its custom MQTT prefix off:
    the driver listens under `shellies/`.
@@ -212,8 +212,11 @@ Each thing a device announces becomes an endpoint of the device under `/dev`:
 | A choice it takes, such as a mode                        | a control, one of its options | one of its options                   |
 | Something it does when asked, such as a restart          | a control, pressed            | `press`                              |
 
-The device's class comes from the first of its endpoints that says what it is: `plug` for an outlet,
-`switch`, `light`, `button` or `sensor`. What tells of the device itself, such as its own temperature
+The device's class comes from the endpoint that says the most of what it is, whichever is heard
+first: what it switches says the most (`plug` for an outlet, `light`), then what it senses or a
+button (`sensor`, `button`), and a bare relay least (`switch`); its power, energy, voltage or current
+says nothing. A class the device has is replaced only by one that says more, and one that is none of
+these, such as `heater` set by a person, stays. What tells of the device itself, such as its own temperature
 or its Wi-Fi signal, is marked `diagnostic` and kept apart on its page. An endpoint the device no
 longer announces is marked retired, and its history stays. [Devices](../guide/devices.md#a-devices-page)
 shows how the page draws each.

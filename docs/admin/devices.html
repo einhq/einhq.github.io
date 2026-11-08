@@ -110,15 +110,19 @@ without signing in. <a href="../guide/devices.html">Devices</a> describes the pa
 </tr>
 <tr>
 <td>Members of the <code>devices</code> group</td>
-<td>Also make devices (<code>device-create</code>), rename them (<code>device-label</code>) and forget them (<code>device-forget</code>); make and renew the key of any device</td>
+<td>Also make devices (<code>device-create</code>), rename them (<code>device-label</code>) and forget them (<code>device-forget</code>), any device, whoever made it</td>
 </tr>
 <tr>
 <td>A device&#39;s owner</td>
-<td>Whoever made it by hand: also write values to its endpoints, edit its track (its trips, with the Archive), make its key, and narrow it with <code>chmod</code></td>
+<td>Whoever made it: also write values to its endpoints, edit its track (its trips, with the Archive), make its key, and narrow it with <code>chmod</code></td>
 </tr>
 <tr>
 <td>The administrator</td>
 <td>Everything: also add people to <code>devices</code>, own the devices drivers find, and narrow who may switch a control</td>
+</tr>
+<tr>
+<td>A visitor who is not signed in</td>
+<td>Nothing: no device, reading or switch, whether or not visitors may browse</td>
 </tr>
 </tbody></table>
 </div>
@@ -127,17 +131,48 @@ every start when it is missing. Add someone to it in <strong>Settings → Groups
 change applies from their next sign-in:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 group-add-member devices helen</code></pre></div>
-<p><code>/dev</code> is the administrator&#39;s, with the group <code>devices</code> and the mode <code>1775</code>, so members of the group
-add devices to it; EiN sets this owner and mode again at every start. The device commands check the
-group themselves: <code>device-label</code> and <code>device-forget</code> act on any device for a member, whoever made it.
-Remove a device with <code>device-forget</code> rather than <code>rm</code>: it also tells the device&#39;s driver to let it go,
-so a broker&#39;s last announcement does not make it again.</p>
+<p><code>/dev</code> stays the administrator&#39;s, with the mode <code>0755</code>, and EiN sets this again at every start:
+nobody else adds to it or removes from it, so EiN&#39;s own <code>null</code> and event routers, and each person&#39;s
+devices, stay where they are. The members of <code>devices</code> make, name and forget devices through the
+three commands, which do it for them as the administrator: <code>device-create</code> makes the device and gives
+it to whoever asked, its owner from then on. <code>device-forget</code> also tells the device&#39;s driver to let it
+go, so a broker&#39;s last announcement does not make it again.</p>
 <p>A device a driver finds belongs to the administrator, since drivers run as EiN&#39;s services; a device
-made with <code>device-create</code> belongs to whoever made it. Either way its group is <code>devices</code>, with the
-mode <code>0775</code>. Its endpoints take the device&#39;s owner and group: readings and tracks <code>0644</code>, so only the
-owner adds to them, and controls <code>0664</code> with the group <code>users</code>, so everyone with an account may
-switch them. A rule of the <a href="../automation/rules.html">Automation</a> module switches as the person whose
-rule it is, with that person&#39;s rights.</p>
+made with <code>device-create</code> belongs to whoever made it. Either way its group is <code>users</code>, the group
+everyone signed in is in, and its endpoints take its owner:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Mode</th>
+<th>So</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The device, <code>/dev/&lt;device&gt;</code></td>
+<td><code>0750</code></td>
+<td>Everyone signed in reads it; its owner changes it</td>
+</tr>
+<tr>
+<td>A reading, a log</td>
+<td><code>0640</code></td>
+<td>Everyone signed in reads it; its owner adds to it</td>
+</tr>
+<tr>
+<td>A track</td>
+<td><code>0750</code></td>
+<td>Everyone signed in reads it and what the Archive keeps under it; its owner changes it</td>
+</tr>
+<tr>
+<td>A control</td>
+<td><code>0660</code></td>
+<td>Everyone signed in reads its states and switches it</td>
+</tr>
+</tbody></table>
+</div>
+<p>Visitors, who act as the guest, are in none of these groups and read none of it, whatever
+<strong>Visitors may browse</strong> says. A rule of the <a href="../automation/rules.html">Automation</a> module switches as
+the person whose rule it is, with that person&#39;s rights.</p>
 <aside class="callout callout-important"><p class="callout-title">Important</p>
 <p>Readings are not narrowed device by device. Everyone signed in may read any device&#39;s history and
 bind a queue or a log of their own to its routing keys, door and motion sensors included: whoever
@@ -152,18 +187,16 @@ group, such as <code>parents</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 <span class="hljs-built_in">chown</span> :parents /dev/heater-plug/switch-0</code></pre></div>
 <p>Anyone else is then refused with <code>Access denied for operation &#39;w&#39; on node: …</code>, on the page, in the
-terminal and in their rules. <code>chmod 644 /dev/heater-plug/switch-0</code> keeps it to its owner instead, the
-administrator for a device a driver found. A driver leaves the owner, group and mode of an endpoint
-it already has as they are, so the change holds.</p>
+terminal and in their rules. <code>chmod 640 /dev/heater-plug/switch-0</code> keeps it to its owner instead, the
+administrator for a device a driver found, while everyone signed in still sees its state. A driver
+leaves the owner, group and mode of an endpoint it already has as they are, so the change holds.</p>
 <h3 id="keep-a-device-to-some-people">Keep a device to some people<a class="anchor" href="#keep-a-device-to-some-people" aria-label="Link to this section"></a></h3>
-<p>To keep a whole device&#39;s history, such as a phone&#39;s track, to its owner, the <code>devices</code> group and one
-group more:</p>
+<p>To keep a whole device&#39;s history, such as a phone&#39;s track, to its owner and one group, give the
+device that group:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as its owner or the administrator</span>
-<span class="hljs-built_in">chmod</span> o-rx /dev/ruby-phone
-acl -m g:parents:rx /dev/ruby-phone</code></pre></div>
+<span class="hljs-built_in">chown</span> :parents /dev/ruby-phone</code></pre></div>
 <p>Reaching an endpoint takes passing through its device, so this closes every endpoint of it to
-everyone else, visitors included. <a href="permissions.html">Permissions in depth</a> explains modes and access
-lists.</p>
+everyone outside <code>parents</code>. <a href="permissions.html">Permissions in depth</a> explains owners, groups and modes.</p>
 <h2 id="device-keys">Device keys<a class="anchor" href="#device-keys" aria-label="Link to this section"></a></h2>
 <p>A device cannot sign in. A phone, a tracker or a script that posts to EiN carries the device&#39;s key
 instead, made with the device&#39;s <strong>Info</strong> tab or <code>device-key</code>:</p>
@@ -178,8 +211,8 @@ key is made as the device&#39;s owner, limited to the device&#39;s folder, and t
 it came from the device (<code>device:ruby-phone</code>).</li>
 <li><strong>How it is sent.</strong> As <code>Authorization: Bearer &lt;key&gt;</code>, or as <code>key=</code> in the address for a client that
 takes only an address, such as Traccar Client.</li>
-<li><strong>Who sees it.</strong> Whoever may change the device: its owner, the members of <code>devices</code> and the
-administrator. It is kept in the device&#39;s <code>.key</code>, mode <code>0600</code>, so the address can be shown again.</li>
+<li><strong>Who sees it.</strong> Whoever may change the device: its owner and the administrator. It is kept in the
+device&#39;s <code>.key</code>, mode <code>0600</code> and the administrator&#39;s, so the address can be shown again.</li>
 <li><strong>Renewing it.</strong> <code>--new</code>, or <strong>New key</strong> on the <strong>Info</strong> tab, makes another; the old address stops
 working at once. <code>--off</code>, or <strong>Take the key away</strong>, removes it, and nothing writes to the device
 without signing in.</li>
@@ -194,12 +227,10 @@ dmesg | grep <span class="hljs-string">&#x27;device write refused&#x27;</span></
 <ul>
 <li><strong>A device with its key</strong>, writing to <code>/file/dev/&lt;device&gt;</code> as above. Any other write there needs a
 signed-in session.</li>
-<li><strong>Visitors, while Visitors may browse is on.</strong> A visitor reads what everyone else may
-(<a href="permissions.html#visitors-and-share-links">Visitors and share links</a>), and a device and its
-readings are readable by everyone else unless narrowed: the device&#39;s page opens for a visitor who
-has its address. Keep a device from visitors with the two lines in
-<a href="#keep-a-device-to-some-people">Keep a device to some people</a>, granting <code>users</code> instead of a group.
-Visitors never switch a control.</li>
+<li><strong>Nothing else of the devices.</strong> A visitor reads no device, reading or track and switches nothing,
+even with <strong>Visitors may browse</strong> on
+(<a href="permissions.html#visitors-and-share-links">Visitors and share links</a>): the devices are the <code>users</code>
+group&#39;s.</li>
 <li><strong>The MQTT broker</strong>, with the <a href="../automation/index.html">Automation</a> module&#39;s, is not EiN: the devices
 sign in to it with their own password, and whoever reaches it with that password switches them.
 Keep its port in your home network
@@ -224,7 +255,7 @@ Keep its port in your home network
 <tr>
 <td><code>device-key: only whoever may change &lt;device&gt; sees or changes its key</code></td>
 <td>The person may not change the device</td>
-<td>Its owner, a member of <code>devices</code> or the administrator makes the key</td>
+<td>Its owner or the administrator makes the key</td>
 </tr>
 <tr>
 <td>A phone&#39;s posts are refused with <code>403 Forbidden</code></td>
