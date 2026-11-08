@@ -60,7 +60,7 @@ to find copies; those are described in [Duplicates](duplicates.md).
 
 Open **Cameras** in the sidebar, under **Browse**.
 
-![The Cameras page: the header "13 cameras" with a filter box, Registered (13) and Unregistered, and the Name (A-Z) sort, above cards for David's 7D, David's camcorder, Erik's iPhone, Freya's Pentax, Helen's scanner and others, each with a picture, the make and model, and badges for the serial number, the time zone and "scanner"](../../assets/shots/devices.webp "Every registered camera with the picture that stands for it; the badges show at a glance which ones carry a serial number, a time zone or the scanner setting.")
+![The Cameras page: the header "13 cameras" with a filter box, Registered (13) and Unregistered, and the Name (A-Z) sort, above cards for David's 7D, David's camcorder, Erik's iPhone, Freya's Pentax, Helen's scanner and others, each with a picture, the make and model, and badges for the serial number, the time zone and "scanner"](../../assets/shots/cameras.webp "Every registered camera with the picture that stands for it; the badges show at a glance which ones carry a serial number, a time zone or the scanner setting.")
 
 - The header counts the registered cameras (**13 cameras**). The filter box (**Filter cameras…**)
   matches the name, make, model and serial number as you type.

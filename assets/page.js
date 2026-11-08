@@ -9,7 +9,7 @@ import { COVERED, HAT_WIDTH, hats } from './hat-tiling.js';
  * EiN's `mixed` pattern, as its Web UI tints the home page's header: node types' colours
  * (site.css) as stops across a field's width.
  */
-export const MIXED = [[0.05, 'album'], [0.25, 'person'], [0.45, 'place'], [0.62, 'track'], [0.8, 'device'], [0.98, 'label']];
+export const MIXED = [[0.05, 'album'], [0.25, 'person'], [0.45, 'place'], [0.62, 'track'], [0.8, 'camera'], [0.98, 'label']];
 
 /** The patch, decoded once: every layout only scales and cuts it. */
 export const HATS = hats();

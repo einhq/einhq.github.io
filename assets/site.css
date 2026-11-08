@@ -2,8 +2,8 @@
  * EiN's presentation page. The ground is the Web UI's own (#101217 under the mark's facets),
  * so the screenshots sit in it as windows; colour is reserved for node types and pages, as in the
  * interface, where each kind of page wears its accent: people violet, albums blue, places teal,
- * devices orange, tracks cyan, labels pink, media indigo, the system lime, the documentation lilac,
- * and the home page all of them in turn (`--mixed`). Each chapter of the page wears the accent of
+ * tracks cyan, cameras green, devices orange, labels pink, media indigo, the system lime, the
+ * documentation lilac, and the home page all of them in turn (`--mixed`). Each chapter of the page wears the accent of
  * the interface's pages it is about; the first opens on the hero, the others on a band of hats in
  * their accent, as those pages do.
  */
@@ -68,11 +68,12 @@
   --muted: #a2abbb;
   --faint: #7d8697;
 
-  /* Node types, the interface's own accents (src/builtin/ui HatField.tsx ACCENTS). */
+  /* Node types, in the accents EiN's Web UI gives them. */
   --person: #da77f2;
   --album: #339af0;
   --place: #38d9a9;
   --track: #22b8cf;
+  --camera: #51cf66;
   --device: #ffa94d;
   --label: #f06595;
   --media: #748ffc;
@@ -81,7 +82,7 @@
   /* The grey of the hats under a dialog's buttons. */
   --neutral: #9ba3b0;
   /* The interface's `mixed` pattern, as a paint for the hats drawn in CSS. */
-  --mixed: linear-gradient(90deg, var(--album) 5%, var(--person) 25%, var(--place) 45%, var(--track) 62%, var(--device) 80%, var(--label) 98%);
+  --mixed: linear-gradient(90deg, var(--album) 5%, var(--person) 25%, var(--place) 45%, var(--track) 62%, var(--camera) 80%, var(--label) 98%);
 
   --sans: 'Familjen Grotesk', ui-sans-serif, system-ui, sans-serif;
   /* The wordmark's face, at the weight the interface draws it in, for the wordmark and every heading. */
@@ -248,8 +249,8 @@ kbd {
 .c-place {
   --accent: var(--place);
 }
-.c-device {
-  --accent: var(--device);
+.c-camera {
+  --accent: var(--camera);
 }
 .k-label {
   --accent: var(--label);

@@ -186,44 +186,44 @@
     "detail": "22 Mar 2015 – 17 Feb 2017"
   },
   {
-    "file": "device-01.avif",
-    "kind": "device",
+    "file": "camera-01.avif",
+    "kind": "camera",
     "name": "Erik's iPhone",
     "detail": "Apple iPhone 14 Plus"
   },
   {
-    "file": "device-02.avif",
-    "kind": "device",
+    "file": "camera-02.avif",
+    "kind": "camera",
     "name": "Peggy's Lumix",
     "detail": "Panasonic DMC-TZ1"
   },
   {
-    "file": "device-03.avif",
-    "kind": "device",
+    "file": "camera-03.avif",
+    "kind": "camera",
     "name": "David's 7D",
     "detail": "Canon EOS 7D"
   },
   {
-    "file": "device-04.avif",
-    "kind": "device",
+    "file": "camera-04.avif",
+    "kind": "camera",
     "name": "Grace's N95",
     "detail": "Nokia N95"
   },
   {
-    "file": "device-05.avif",
-    "kind": "device",
+    "file": "camera-05.avif",
+    "kind": "camera",
     "name": "Helen's Coolpix",
     "detail": "NIKON COOLPIX S570"
   },
   {
-    "file": "device-06.avif",
-    "kind": "device",
+    "file": "camera-06.avif",
+    "kind": "camera",
     "name": "Jon's X-Pro1",
     "detail": "FUJIFILM X-Pro1"
   },
   {
-    "file": "device-07.avif",
-    "kind": "device",
+    "file": "camera-07.avif",
+    "kind": "camera",
     "name": "Ruby's iPhone",
     "detail": "Apple iPhone 15"
   }

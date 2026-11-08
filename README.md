@@ -28,7 +28,7 @@ docs/               the documentation: Markdown, and the HTML and search.json ma
 docs/diagrams/      the documentation's diagrams, SVG
 docs/SUMMARY.md     the documentation's pages, in the order of its sidebar
 assets/shots/       screenshots of the demo instance, 1x and 2x WebP, and thumbs/ for the gallery
-assets/nodes/       the faces and the album and device covers the hero's tiles show, and their names (manifest.json)
+assets/nodes/       the faces and the album and camera covers the hero's tiles show, and their names (manifest.json)
 assets/fonts/       Familjen Grotesk, Fragment Mono and Mochiy Pop One (the wordmark's and the headings'), served from here
 assets/og.jpg       the link preview: the page's own hero at 1200 × 630, screenshotted from `make serve`
 assets/icon-180.png the home-screen icon, the mark rendered from assets/favicon.svg
@@ -62,8 +62,8 @@ their 2x file used where there is one. Examples use invented people and places, 
 A diagram is drawn for the dark page: the ground `#1a1e27` with a `#12151c` frame, text in
 `Familjen Grotesk` (`#eceff4`, `#a2abbb` for the quieter), lines in `rgb(255 255 255 / .16)`, and
 colour only for node types and pages, as `site.css` names them (person `#da77f2`, album `#339af0`,
-place `#38d9a9`, track `#22b8cf`, device `#ffa94d`, label `#f06595`, media `#748ffc`, system
-`#a9e34b`, documentation `#b197fc`).
+place `#38d9a9`, track `#22b8cf`, camera `#51cf66`, device `#ffa94d`, label `#f06595`, media
+`#748ffc`, system `#a9e34b`, documentation `#b197fc`).
 
 EiN shows the same Markdown on its own **Documentation** page, offline: its image bundles `docs/**/*.md`,
 `docs/diagrams/`, the screenshots the pages name and the diagrams' fonts from this repository's `main`,

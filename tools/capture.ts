@@ -111,7 +111,7 @@ async function ask(page: Page, question: string) {
 }
 
 const SHOTS: Shot[] = [
-  // One picture and everything known about it: the device, the album, who is in it at what age, and where.
+  // One picture and everything known about it: the camera, the album, who is in it at what age, and where.
   {
     id: 'lightbox',
     run: async (page) => {
@@ -130,7 +130,7 @@ const SHOTS: Shot[] = [
   { id: 'place', run: (page) => open(page, '/locations/The_cottage_at_Malpas', 5000) },
   { id: 'map', run: (page) => open(page, '/map?c=59.2898%2C18.7502&z=11', 6000) },
   { id: 'year', run: (page) => open(page, '/year?year=2025', 5000) },
-  { id: 'devices', run: (page) => open(page, '/devices', 5000) },
+  { id: 'cameras', run: (page) => open(page, '/cameras', 5000) },
   // Says "Healthy" only while nothing waits: take it on an instance that has caught up.
   { id: 'dashboard', clip: { x: 240, y: 48, width: 1200, height: 650 }, run: (page) => open(page, '/system', 6000) },
   {
@@ -213,7 +213,7 @@ const SHOTS: Shot[] = [
   { id: 'people', run: (page) => open(page, '/people', 5000) },
   { id: 'people-unknown', run: (page) => open(page, '/people/unknown', 5000) },
   { id: 'locations', run: (page) => open(page, '/locations', 5000) },
-  { id: 'device', run: (page) => open(page, '/devices/ruby-iphone', 5000) },
+  { id: 'camera', run: (page) => open(page, '/cameras/ruby-iphone', 5000) },
   { id: 'import', run: (page) => open(page, '/staging/import', 4000) },
   { id: 'chat-page', run: (page) => open(page, '/chat', 4000) },
   { id: 'phone-home', phone: true, run: (page) => open(page, '/', 5000) },
@@ -351,7 +351,7 @@ async function newPage(browser: Browser, shot: Pick<Shot, 'phone' | 'signedOut'>
 
 /**
  * The pictures the hero is laid with, by the name each has on its page: faces of every age, and
- * album and device covers from seven decades that show the family doing something rather than one
+ * album and camera covers from seven decades that show the family doing something rather than one
  * face close up, so the field is not a wall of faces. "Isla turns seven" is the still of the hero's
  * video tile. No cover in it is a sourced photo of a real place with a sign in it.
  */
@@ -391,7 +391,7 @@ const HERO: Record<string, string[]> = {
     "Jon's Wellington",
     "David's London",
   ],
-  device: ["Erik's iPhone", "Peggy's Lumix", "David's 7D", "Grace's N95", "Helen's Coolpix", "Jon's X-Pro1", "Ruby's iPhone"],
+  camera: ["Erik's iPhone", "Peggy's Lumix", "David's 7D", "Grace's N95", "Helen's Coolpix", "Jon's X-Pro1", "Ruby's iPhone"],
 };
 
 /**
@@ -444,7 +444,7 @@ async function nodePictures(browser: Browser) {
   };
   await grab('/people', 'person');
   await grab('/albums', 'album');
-  await grab('/devices', 'device');
+  await grab('/cameras', 'camera');
   await Deno.writeTextFile(`${dir}/manifest.json`, JSON.stringify(manifest, null, 2) + '\n');
   await page.context().close();
 }
