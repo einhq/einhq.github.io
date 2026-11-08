@@ -116,7 +116,8 @@ model (<code>Model</code>) and, when the camera writes one, its serial number (<
 <strong>fingerprint</strong>, and EiN looks for the registered device that has the same one:</p>
 <ol>
 <li>a device with the same serial number;</li>
-<li>otherwise, a device with the same make and the same model.</li>
+<li>otherwise, a device with the same make and the same model, also when the file carries a serial
+number that no device has.</li>
 </ol>
 <p>The device&#39;s name plays no part. The make and model are compared exactly as the camera writes
 them, so a device registered with the make <code>Nikon</code> does not match files that say
@@ -321,8 +322,8 @@ link or update — every matching file already has this device policy.&quot;</li
 <p>Linking also dates the files again by the device&#39;s settings, which is what &quot;updated dates&quot; counts.
 Files that are already linked to another device are left with it.</p>
 <p>The button is shown only to those who may change the device, and only when the device has a serial
-number or both a make and a model. A device with a serial number is linked quickly; one known only
-by its make and model can take minutes in a large archive.</p>
+number or both a make and a model. Looking for its serial number is quick; looking for its make and
+model can take minutes in a large archive, and a device that has both is looked for both ways.</p>
 <h2 id="change-a-devices-settings">Change a device&#39;s settings<a class="anchor" href="#change-a-devices-settings" aria-label="Link to this section"></a></h2>
 <ol>
 <li>On the device&#39;s page, click <strong>Edit</strong>. The <strong>Edit device</strong> dialog opens.</li>
@@ -352,7 +353,8 @@ trip: Helen&#39;s Coolpix stayed on London time when she took it to Wellington, 
 <strong>Timezone</strong> set to <code>Europe/London</code>, EiN reads its clock as London time and gets the moment of
 each picture right.</li>
 <li><strong>Scanner or digitizer</strong>: the device&#39;s clock records when a file was scanned, not when the
-photograph was taken, so EiN does not date pictures by it. Pictures with no other date stay
+photograph was taken, so EiN dates pictures neither by it nor by a date in the file names it
+gives them. Pictures with no other date stay
 undated until someone gives them one. Files brought in through a staging category of the kind
 <strong>Scans</strong> are treated as scans whatever device made them; this setting matters for scans uploaded
 straight into an album, copied in over SFTP, or already in the library.</li>
@@ -555,11 +557,13 @@ in <strong>Edit</strong>; on a phone it is under ⋮.</li>
 <li>Click <strong>Upload GPX</strong> and choose one or more <code>.gpx</code> files. The file picker offers GPX files
 only.</li>
 <li>Wait for the message: &quot;N new points added to the track&quot;, or &quot;The track already had every point
-in it&quot;.</li>
+in it&quot;, followed by &quot;; N without a time left out&quot; when some were. A file that cannot be added
+gets a message of its own, starting with its name; the others are added all the same.</li>
 </ol>
 <p>The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The file is kept with the device under its own name,
+uploading the same file again changes nothing. A point without a time is left out, since EiN cannot
+tell when the device was there. The file is kept with the device under its own name,
 in its <code>routes</code> folder.</p>
 <h3 id="gpx-files-in-staging">GPX files in staging<a class="anchor" href="#gpx-files-in-staging" aria-label="Link to this section"></a></h3>
 <p>A GPX file that arrives in your staging area, by <strong>Import media</strong>, the Media page&#39;s <strong>Upload</strong> or
@@ -793,6 +797,11 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <td><strong>Upload GPX</strong> gives a message ending in &quot;no track points found&quot;.</td>
 <td>The file holds no recorded track points, only a planned route or waypoints.</td>
 <td>Use the file the device recorded while it moved.</td>
+</tr>
+<tr>
+<td><strong>Upload GPX</strong> gives a message ending in &quot;none of its N track points has a time&quot;.</td>
+<td>The file&#39;s points carry no times: a route drawn on a map, or a file the program saved without them.</td>
+<td>Use the file the device recorded while it moved, or export it again with times.</td>
 </tr>
 <tr>
 <td>The phone reports nothing to the track.</td>

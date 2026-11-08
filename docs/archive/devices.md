@@ -29,7 +29,8 @@ model (`Model`) and, when the camera writes one, its serial number (`SerialNumbe
 **fingerprint**, and EiN looks for the registered device that has the same one:
 
 1. a device with the same serial number;
-2. otherwise, a device with the same make and the same model.
+2. otherwise, a device with the same make and the same model, also when the file carries a serial
+   number that no device has.
 
 The device's name plays no part. The make and model are compared exactly as the camera writes
 them, so a device registered with the make `Nikon` does not match files that say
@@ -213,8 +214,8 @@ Linking also dates the files again by the device's settings, which is what "upda
 Files that are already linked to another device are left with it.
 
 The button is shown only to those who may change the device, and only when the device has a serial
-number or both a make and a model. A device with a serial number is linked quickly; one known only
-by its make and model can take minutes in a large archive.
+number or both a make and a model. Looking for its serial number is quick; looking for its make and
+model can take minutes in a large archive, and a device that has both is looked for both ways.
 
 ## Change a device's settings
 
@@ -248,7 +249,8 @@ device, and changing it re-dates them.
   **Timezone** set to `Europe/London`, EiN reads its clock as London time and gets the moment of
   each picture right.
 - **Scanner or digitizer**: the device's clock records when a file was scanned, not when the
-  photograph was taken, so EiN does not date pictures by it. Pictures with no other date stay
+  photograph was taken, so EiN dates pictures neither by it nor by a date in the file names it
+  gives them. Pictures with no other date stay
   undated until someone gives them one. Files brought in through a staging category of the kind
   **Scans** are treated as scans whatever device made them; this setting matters for scans uploaded
   straight into an album, copied in over SFTP, or already in the library.
@@ -468,11 +470,13 @@ recorded a file, upload it on that device's page:
 2. Click **Upload GPX** and choose one or more `.gpx` files. The file picker offers GPX files
    only.
 3. Wait for the message: "N new points added to the track", or "The track already had every point
-   in it".
+   in it", followed by "; N without a time left out" when some were. A file that cannot be added
+   gets a message of its own, starting with its name; the others are added all the same.
 
 The button is offered to those who may change the device. EiN reads the recorded track points of
 the file, each with its time; points with a time the track already has are not added twice, so
-uploading the same file again changes nothing. The file is kept with the device under its own name,
+uploading the same file again changes nothing. A point without a time is left out, since EiN cannot
+tell when the device was there. The file is kept with the device under its own name,
 in its `routes` folder.
 
 ### GPX files in staging
@@ -673,6 +677,7 @@ see the albums the trip may belong to under **Maybe in**.
 | A trip is listed under the wrong device.                                                                                                                                                                    | The device that recorded it sent its positions to another device's track, or its GPX file was uploaded to the wrong device.                              | Click **Move to device…** on the trip's card; see [Move a trip to another device](#move-a-trip-to-another-device).                                                                                                           |
 | **Edit**, **Link existing media**, **Add owner**, **Upload GPX** or **Live tracking** is missing.                                                                                                           | You may not change this device, or, for **Upload GPX** and **Live tracking**, its **Travels as** is not set.                                             | Ask the person who registered it, or an administrator; or **Edit** it and choose **Travels as**.                                                                                                                             |
 | **Upload GPX** gives a message ending in "no track points found".                                                                                                                                           | The file holds no recorded track points, only a planned route or waypoints.                                                                              | Use the file the device recorded while it moved.                                                                                                                                                                             |
+| **Upload GPX** gives a message ending in "none of its N track points has a time".                                                                                                                           | The file's points carry no times: a route drawn on a map, or a file the program saved without them.                                                      | Use the file the device recorded while it moved, or export it again with times.                                                                                                                                              |
 | The phone reports nothing to the track.                                                                                                                                                                     | It cannot reach EiN at the address it was given, over HTTPS from where it is; the link was replaced or turned off; or tracking is off in Traccar Client. | Open the address in the phone's browser: a page saying `Forbidden` means the link is no longer the device's, so scan the new QR code. If it does not load at all, see [Ports, HTTPS and remote access](../admin/network.md). |
 | A GPX file sits in an album as an ordinary file.                                                                                                                                                            | It was uploaded straight into the album, where GPX files are not read as routes.                                                                         | Upload it on the device's **Track** tab, then delete the file from the album.                                                                                                                                                |
 
