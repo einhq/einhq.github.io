@@ -626,7 +626,7 @@ detach [--list] <job>
 
 ### `df`
 
-Free space per storage tier, its growth per day and when it fills, and the database size.
+Free space per storage tier, its growth per day and when it fills, and the database size and its largest tables.
 
 <small>reads only</small>
 

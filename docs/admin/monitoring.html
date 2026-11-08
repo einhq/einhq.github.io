@@ -94,7 +94,7 @@
 <h2 id="open-the-dashboard">Open the dashboard<a class="anchor" href="#open-the-dashboard" aria-label="Link to this section"></a></h2>
 <p>Choose <strong>Dashboard</strong> under <strong>System</strong> in the sidebar. The sidebar shows it only to administrators; the page is at <code>/system</code>, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.</p>
 <figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The badge above the title answers the first question: is anything wrong</figcaption></figure>
-<p>The page, <strong>System dashboard</strong>, has up to three badges above its title and five tabs below it, six with the <code>ems</code> module installed:</p>
+<p>The page, <strong>System dashboard</strong>, has up to three badges above its title, with how long EiN has been running beside them (<code>up 3d 4h</code>), and five tabs below it, six with the <code>ems</code> module installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -125,7 +125,7 @@
 </thead>
 <tbody><tr>
 <td><strong>Overview</strong></td>
-<td>The checks that are not fine, the machine&#39;s CPU and memory, the work done, storage and the instance</td>
+<td>The checks that are not fine, the machine&#39;s CPU and memory, the work done, storage and the database</td>
 </tr>
 <tr>
 <td><strong>Work</strong></td>
@@ -382,13 +382,12 @@
 </div>
 <p>When a check names a hosted language model, its reason says so plainly, for example <code>…: questions, and what the assistant reads to answer them, leave this host</code>.</p>
 <h2 id="the-overview-tab">The Overview tab<a class="anchor" href="#the-overview-tab" aria-label="Link to this section"></a></h2>
-<p>Under the checks, <strong>Overview</strong> shows the machine and the work in five parts.</p>
+<p>Under the checks, <strong>Overview</strong> shows the machine and the work in four parts.</p>
 <ul>
 <li><strong>CPU</strong> and <strong>Memory</strong> tiles: the share of all the machine&#39;s processor cores in use, with the number of cores, the load and EiN&#39;s own share, and the share of the machine&#39;s memory in use, with how much of how much and EiN&#39;s own share; hover the tile for what EiN holds against its limit. Each has a small chart of the last six hours. A tile turns amber at 75% and red at 90%.</li>
 <li><strong>EMS GPU</strong>, <strong>EMS VRAM</strong> and <strong>EMS RAM</strong> tiles, beside them, with the <code>ems</code> module installed: how busy the media service&#39;s card is, its temperature and its power draw; the card&#39;s memory in use; and the memory of the machine the media service runs on, with the media service&#39;s own share. That machine may be another than EiN&#39;s. The GPU tiles are not there without a card, and none of them without the media service; see <a href="../ems/gpu.html">The graphics card</a>.</li>
 <li><strong>Work</strong>: <strong>Done per hour</strong>, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and <strong>Instances by state</strong>, a bar of <strong>In line</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Done</strong> and <strong>Cancelled</strong>.</li>
-<li><strong>Storage</strong>: each storage tier, its path, a bar of used and free space, <code>% used</code>, how much it grows per day and, when it grows, <code>full in ~N days</code>, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database&#39;s size is in the corner. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</li>
-<li>A line at the bottom naming the instance: <strong>host</strong>, <strong>uptime</strong>, <strong>deno</strong> and <strong>database</strong>. It tells you which EiN you are looking at when you run more than one.</li>
+<li><strong>Storage</strong>: a card for each storage tier, with its path, a pie of used and free space, the free space, <code>% of … used</code>, how much it grows per day and, when it grows, <code>full in ~N days</code>, in red when that is under 14 days. Tiers that share one disk say <code>shares</code> and the device: their free space is the same space, counted once. Beside them, <strong>Database</strong>: its size and a pie of what takes it, its five largest tables and the rest as <strong>other</strong>. The free space on the database&#39;s own disk is not shown, since the database may run on another disk or machine; see <a href="performance.html">Performance and sizing</a> for how much it needs. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</li>
 </ul>
 <p>The storage projection is measured over the last seven days. A tier that is not growing has no &quot;full in&quot; figure, and a tier filling up fast is the one thing on this tab that needs action before it becomes a problem: <a href="data.html">Your data</a> covers moving the archive to a bigger disk.</p>
 <h2 id="the-work-tab">The Work tab<a class="anchor" href="#the-work-tab" aria-label="Link to this section"></a></h2>

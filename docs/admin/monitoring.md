@@ -8,7 +8,7 @@ Choose **Dashboard** under **System** in the sidebar. The sidebar shows it only 
 
 ![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, the Work card and the start of the Storage card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
 
-The page, **System dashboard**, has up to three badges above its title and five tabs below it, six with the `ems` module installed:
+The page, **System dashboard**, has up to three badges above its title, with how long EiN has been running beside them (`up 3d 4h`), and five tabs below it, six with the `ems` module installed:
 
 | Badge                                                         | What it says                                                                                                               |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -18,7 +18,7 @@ The page, **System dashboard**, has up to three badges above its title and five 
 
 | Tab               | What it holds                                                                                       |
 | ----------------- | --------------------------------------------------------------------------------------------------- |
-| **Overview**      | The checks that are not fine, the machine's CPU and memory, the work done, storage and the instance |
+| **Overview**      | The checks that are not fine, the machine's CPU and memory, the work done, storage and the database |
 | **Work**          | Every pipeline and every kind of job: what is waiting, how fast it goes, when it will be done       |
 | **Media service** | With the `ems` module: the media service's own state; see [The media service](../ems/index.md)      |
 | **Services**      | Which services run, with start, stop and restart for the administrator                              |
@@ -75,13 +75,12 @@ When a check names a hosted language model, its reason says so plainly, for exam
 
 ## The Overview tab
 
-Under the checks, **Overview** shows the machine and the work in five parts.
+Under the checks, **Overview** shows the machine and the work in four parts.
 
 - **CPU** and **Memory** tiles: the share of all the machine's processor cores in use, with the number of cores, the load and EiN's own share, and the share of the machine's memory in use, with how much of how much and EiN's own share; hover the tile for what EiN holds against its limit. Each has a small chart of the last six hours. A tile turns amber at 75% and red at 90%.
 - **EMS GPU**, **EMS VRAM** and **EMS RAM** tiles, beside them, with the `ems` module installed: how busy the media service's card is, its temperature and its power draw; the card's memory in use; and the memory of the machine the media service runs on, with the media service's own share. That machine may be another than EiN's. The GPU tiles are not there without a card, and none of them without the media service; see [The graphics card](../ems/gpu.md).
 - **Work**: **Done per hour**, the pipeline instances finished in the last hour, with the count for the last 24 hours and a chart of them; the total number of instances; and **Instances by state**, a bar of **In line**, **Running**, **Failed**, **Done** and **Cancelled**.
-- **Storage**: each storage tier, its path, a bar of used and free space, `% used`, how much it grows per day and, when it grows, `full in ~N days`, in red when that is under 14 days. Tiers that share one disk say so, with the device in brackets: their free space is the same space, counted once. The database's size is in the corner. [Files and storage](../concepts/files.md) explains the tiers.
-- A line at the bottom naming the instance: **host**, **uptime**, **deno** and **database**. It tells you which EiN you are looking at when you run more than one.
+- **Storage**: a card for each storage tier, with its path, a pie of used and free space, the free space, `% of … used`, how much it grows per day and, when it grows, `full in ~N days`, in red when that is under 14 days. Tiers that share one disk say `shares` and the device: their free space is the same space, counted once. Beside them, **Database**: its size and a pie of what takes it, its five largest tables and the rest as **other**. The free space on the database's own disk is not shown, since the database may run on another disk or machine; see [Performance and sizing](performance.md) for how much it needs. [Files and storage](../concepts/files.md) explains the tiers.
 
 The storage projection is measured over the last seven days. A tier that is not growing has no "full in" figure, and a tier filling up fast is the one thing on this tab that needs action before it becomes a problem: [Your data](data.md) covers moving the archive to a bigger disk.
 

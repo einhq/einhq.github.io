@@ -230,7 +230,7 @@ Such a copy holds the original files, as they were added. What EiN worked out or
 
 ## See what takes room
 
-In EiN's terminal, [`df`](../reference/commands-core.md#df) shows each part of the data folder, how full its disk is, how fast it grows and when it fills, and the database's size; the **Storage** card on the dashboard shows the same.
+In EiN's terminal, [`df`](../reference/commands-core.md#df) shows each part of the data folder, how full its disk is, how fast it grows and when it fills, and the database's size and its largest tables; the storage cards on the dashboard's **Overview** show the same.
 
 ```bash
 # in EiN's terminal
@@ -241,6 +241,11 @@ df
 tier    disk       41% used  1.1 TB free  full in ~212d
 tier    volatile   41% used  1.1 TB free  full in ~212d
 database  6.2 GB
+  root_nodes_attr                      2.1 GB
+  root_nodes_audit                     1.6 GB
+  root_nodes_lnk                       812 MB
+  root_nodes                           540 MB
+  root_pools_job                       230 MB
 ```
 
 `disk` is `files` and `volatile` is `files-volatile`. When they are folders on one disk, as in a default install, they show the same free space. [`du`](../reference/commands-core.md#du) measures part of the tree, such as `du -sh /archive`.
