@@ -107,15 +107,15 @@ The family relations, events and homes are explained in [Family tree, events and
 | List the locations                          | `location-list`                                                                                 | [location-list](commands.md#location-list)         |
 | Change a location's name or description     | `location-update /archive/locations/Highbury --description '<text>'`                            | [location-update](commands.md#location-update)     |
 | What happened at a location                 | `location-timeline /archive/locations/Highbury`                                                 | [location-timeline](commands.md#location-timeline) |
-| List the cameras                            | `camera-list`                                                                                   | [camera-list](commands.md)                         |
-| A camera's details and owners               | `camera-info /archive/cameras/peggy-lumix`                                                      | [camera-info](commands.md)                         |
-| Cameras seen in pictures but not registered | `camera-scan`                                                                                   | [camera-scan](commands.md)                         |
-| Register a camera                           | `camera-create /archive/cameras/ada-camera --name "Ada's camera" --make <make> --model <model>` | [camera-create](commands.md)                       |
-| Say who owned a camera, and when            | `camera-set-owner --from 2019 /archive/cameras/ruby-iphone /archive/people/ruby-wrenfield`      | [camera-set-owner](commands.md)                    |
-| A camera's history                          | `camera-timeline /archive/cameras/ruby-iphone`                                                  | [camera-timeline](commands.md)                     |
+| List the cameras                            | `camera-list`                                                                                   | [camera-list](commands.md#camera-list)             |
+| A camera's details and owners               | `camera-info /archive/cameras/peggy-lumix`                                                      | [camera-info](commands.md#camera-info)             |
+| Cameras seen in pictures but not registered | `camera-scan`                                                                                   | [camera-scan](commands.md#camera-scan)             |
+| Register a camera                           | `camera-create /archive/cameras/ada-camera --name "Ada's camera" --make <make> --model <model>` | [camera-create](commands.md#camera-create)         |
+| Say who owned a camera, and when            | `camera-set-owner --from 2019 /archive/cameras/ruby-iphone /archive/people/ruby-wrenfield`      | [camera-set-owner](commands.md#camera-set-owner)   |
+| A camera's history                          | `camera-timeline /archive/cameras/ruby-iphone`                                                  | [camera-timeline](commands.md#camera-timeline)     |
 | List the tracks                             | `track-list`                                                                                    | [track-list](commands.md#track-list)               |
-| Change how a track travels                  | `track-update sailboat --kind boat --timezone Europe/Stockholm`                                 | [track-update](commands.md)                        |
-| Link a phone's camera to its track          | `camera-track ruby-iphone /archive/devices/ruby-phone/position/history`                         | [camera-track](commands.md)                        |
+| Change how a track travels                  | `track-update sailboat --kind boat --timezone Europe/Stockholm`                                 | [track-update](commands.md#track-update)           |
+| Link a phone's camera to its track          | `camera-track ruby-iphone /archive/devices/ruby-phone/position/history`                         | [camera-track](commands.md#camera-track)           |
 | Add a GPX file to a track                   | `track-import sailboat <file>.gpx`                                                              | [track-import](commands.md#track-import)           |
 | A track's trips                             | `trip-list sailboat`                                                                            | [trip-list](commands.md#trip-list)                 |
 

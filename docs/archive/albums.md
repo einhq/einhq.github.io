@@ -567,7 +567,7 @@ album-random
 An album's path is its folder, `/archive/albums/` and the name it was created with; renaming it
 does not change the path. A track is its path, or a device or camera that has one, by its path or
 its name. [`album`](commands.md#album), [`album-stack`](commands.md#album-stack),
-[`album-track-list`](commands.md), [`album-track-add`](commands.md), [`album-track-rm`](commands.md)
+[`album-track-list`](commands.md#album-track-list), [`album-track-add`](commands.md#album-track-add), [`album-track-rm`](commands.md#album-track-rm)
 and [`album-random`](commands.md#album-random) have every option in the
 [archive's commands](commands.md).
 

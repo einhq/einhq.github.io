@@ -201,10 +201,11 @@ its history stays.
 
 ### History
 
-Pick an entity and a span: **Day**, **Week**, **Month** or **Year**. The chart shows the average of
-every 15 minutes over a day, of every 2 hours over a week, of every 6 hours over a month and of every
-day over a year. Anything on or off, a switch, a door or a motion sensor, is charted as the share of
-the time it was on.
+Pick an entity and a span: **Day**, **Week**, **Month** or **Year**; the tab opens on the device's
+main reading, the one its card shows. The chart shows the average of every 15 minutes over a day, of
+every 2 hours over a week, of every 6 hours over a month and of every day over a year, to five
+significant digits. Anything on or off, a switch, a door or a motion sensor, is charted as the share
+of the time it was on.
 
 ### Info
 
