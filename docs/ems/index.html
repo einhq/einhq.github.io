@@ -78,7 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
-<section class="here"><h2>Media service</h2><ul><li><a href="index.html" aria-current="page">The media service</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="commands.html">Media service commands</a></li></ul></section>
+<section class="here"><h2>Media service</h2><ul><li><a href="index.html" aria-current="page">The media service</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="instances.html">More than one media service</a></li><li><a href="commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -450,7 +450,8 @@ no request that names a file, and those steps wait the same way.</li>
 </ul>
 <p>A media service on another machine reaches EiN&#39;s machine at the address you set: put
 <code>CFG_EMS_FILES_ADDRESS</code>, as <code>host:port</code>, in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes
-the port on <code>EIN_BIND</code>.</p>
+the port on <code>EIN_BIND</code>. A second media service beside the first reaches it at an address of its own
+(<a href="instances.html">More than one media service</a>).</p>
 <h4 id="encrypting-the-files-way">Encrypting the files&#39; way<a class="anchor" href="#encrypting-the-files-way" aria-label="Link to this section"></a></h4>
 <p>When the media service reaches EiN over a network you do not trust, turn on
 <code>CFG_EMS_FILES_TLS</code>. Each connection is then TLS: <code>ems-files</code> and the media service each have a
@@ -512,7 +513,7 @@ another has waited five minutes.</li>
 with the address it tried.</p>
 <p>The <strong>Work</strong> tab&#39;s <strong>Where the work is</strong> ends with the media service&#39;s part: <strong>At the media
 service</strong>, its three lanes with their slots and the requests in them, and <strong>On a model</strong>, the models
-it holds, the working ones first and the search models apart.</p>
+it holds, the working ones first and the search models apart. With <a href="instances.html">more than one media service</a>, the tab lists them beside it, and the Work tab has the same columns for each.</p>
 <p>The <strong>Overview</strong> tab shows <strong>EMS GPU</strong> and <strong>EMS VRAM</strong> tiles beside the computer&#39;s own CPU and
 memory when the media service has a card, and <strong>EMS RAM</strong>, the memory of the machine the media
 service runs on, which need not be EiN&#39;s, with the media service&#39;s own share. With no card the GPU
@@ -559,7 +560,8 @@ checks about the media service:</p>
 </tbody></table>
 </div>
 <p>Only <code>ems gpu</code> fails, and a failed check turns the verdict to <strong>Needs a person</strong>. The others are
-warnings: while the media service restarts or loads its models, the work that needs it waits.</p>
+warnings: while the media service restarts or loads its models, the work that needs it waits. Each
+<a href="instances.html">other instance</a> has the same checks under its name, <code>ems laptop</code> and so on.</p>
 <h3 id="in-the-terminal">In the terminal<a class="anchor" href="#in-the-terminal" aria-label="Link to this section"></a></h3>
 <p><a href="commands.html#ems-status"><code>ems-status</code></a> prints the whole answer the dashboard
 draws, and its options shorten it:</p>
@@ -868,6 +870,7 @@ and podman downloads or builds it in a folder beside its own storage, not in <co
 <ul>
 <li><a href="../archive/index.html">The Archive</a></li>
 <li><a href="gpu.html">The graphics card</a></li>
+<li><a href="instances.html">More than one media service</a></li>
 <li><a href="../admin/install.html">Installing in detail</a></li>
 <li><a href="../admin/configuration.html">Configuration</a></li>
 <li><a href="../admin/monitoring.html">Health and the dashboard</a></li>

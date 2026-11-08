@@ -128,4 +128,5 @@
 
 - [The media service](ems/index.md)
 - [The graphics card](ems/gpu.md)
+- [More than one media service](ems/instances.md)
 - [Media service commands](ems/commands.md)

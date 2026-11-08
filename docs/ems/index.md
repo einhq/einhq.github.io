@@ -224,7 +224,8 @@ through the mount, and writes what it made back through it before it answers:
 
 A media service on another machine reaches EiN's machine at the address you set: put
 `CFG_EMS_FILES_ADDRESS`, as `host:port`, in `~/ein/.env` and run `./setup.sh`, which then publishes
-the port on `EIN_BIND`.
+the port on `EIN_BIND`. A second media service beside the first reaches it at an address of its own
+([More than one media service](instances.md)).
 
 #### Encrypting the files' way
 
@@ -299,7 +300,7 @@ with the address it tried.
 
 The **Work** tab's **Where the work is** ends with the media service's part: **At the media
 service**, its three lanes with their slots and the requests in them, and **On a model**, the models
-it holds, the working ones first and the search models apart.
+it holds, the working ones first and the search models apart. With [more than one media service](instances.md), the tab lists them beside it, and the Work tab has the same columns for each.
 
 The **Overview** tab shows **EMS GPU** and **EMS VRAM** tiles beside the computer's own CPU and
 memory when the media service has a card, and **EMS RAM**, the memory of the machine the media
@@ -325,7 +326,8 @@ checks about the media service:
 | `ems card`   | ok    | Who has the card, `busy` or `quiet`, and which search models are on it     |
 
 Only `ems gpu` fails, and a failed check turns the verdict to **Needs a person**. The others are
-warnings: while the media service restarts or loads its models, the work that needs it waits.
+warnings: while the media service restarts or loads its models, the work that needs it waits. Each
+[other instance](instances.md) has the same checks under its name, `ems laptop` and so on.
 
 ### In the terminal
 
@@ -535,6 +537,7 @@ and podman downloads or builds it in a folder beside its own storage, not in `/t
 
 - [The Archive](../archive/index.md)
 - [The graphics card](gpu.md)
+- [More than one media service](instances.md)
 - [Installing in detail](../admin/install.md)
 - [Configuration](../admin/configuration.md)
 - [Health and the dashboard](../admin/monitoring.md)

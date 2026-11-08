@@ -78,7 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section class="here"><h2>Media</h2><ul><li><a href="index.html" aria-current="page">Media</a></li><li><a href="commands.html">Media commands</a></li></ul></section>
-<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
         </nav>
       </aside>
@@ -328,6 +328,9 @@ rotates between their kinds, so that faces do not starve the rest.</li>
 <li><code>models-second</code>, off unless <code>CFG_MODEL_SECOND_SLOTS</code> is above 0, takes the same kinds in the
 reverse order, so the media service runs a second family of models beside the first.</li>
 </ul>
+<p>With <a href="../ems/instances.html">more than one media service</a>, <code>models</code> and <code>media-worker</code> run a worker
+for each other instance beside their own, named <code>models@laptop</code> and <code>media-worker@laptop</code>, with the
+kinds that instance serves; <code>media-pool-kinds models --instance laptop</code> says which.</p>
 <p><code>media-pool-kinds cpu</code> and <code>media-pool-kinds models</code> say which kinds each takes now. When a worker is
 stopped and no other takes its kinds, they show <strong>no worker</strong> on the <strong>Dashboard</strong>, and the work waits
 until it starts again; <a href="../admin/processing.html#work-that-nothing-will-run">Work that nothing will run</a>

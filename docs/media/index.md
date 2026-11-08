@@ -183,6 +183,10 @@ Each module puts the work a crawl must not start all at once as jobs into the po
 - `models-second`, off unless `CFG_MODEL_SECOND_SLOTS` is above 0, takes the same kinds in the
   reverse order, so the media service runs a second family of models beside the first.
 
+With [more than one media service](../ems/instances.md), `models` and `media-worker` run a worker
+for each other instance beside their own, named `models@laptop` and `media-worker@laptop`, with the
+kinds that instance serves; `media-pool-kinds models --instance laptop` says which.
+
 `media-pool-kinds cpu` and `media-pool-kinds models` say which kinds each takes now. When a worker is
 stopped and no other takes its kinds, they show **no worker** on the **Dashboard**, and the work waits
 until it starts again; [Work that nothing will run](../admin/processing.md#work-that-nothing-will-run)
