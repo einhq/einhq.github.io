@@ -369,6 +369,11 @@
 <td><code>admin</code> (this terminal), <code>user-elevate --session</code>, <code>admin --off</code></td>
 <td><a href="../reference/commands-core.html#admin">admin</a>, <a href="../reference/commands-core.html#user-elevate">user-elevate</a></td>
 </tr>
+<tr>
+<td>Run a line as someone else, with only their rights, <em>administrators only</em></td>
+<td><code>runas anna &#39;ls ~&#39;</code></td>
+<td><a href="../reference/commands-core.html#runas">runas</a></td>
+</tr>
 </tbody></table>
 </div>
 <p>A new account has no password and cannot sign in until one is set. <code>whoami</code> and <code>id</code> are aliases for <code>user whoami</code> and <code>user id</code>, set in <code>/etc/bashrc</code>.</p>
@@ -780,7 +785,7 @@
 <p><code>cat</code> on a queue takes the entries it prints out of the queue. Use <code>queue-peek</code> to look.</p>
 </aside>
 <h3 id="logs-and-the-audit-trail">Logs and the audit trail<a class="anchor" href="#logs-and-the-audit-trail" aria-label="Link to this section"></a></h3>
-<p>There is no <code>logs</code> command. The system log and each service&#39;s output are log nodes, read with <code>dmesg</code>, <code>tail</code> and <code>cat</code>.</p>
+<p>There is no <code>logs</code> command. The system log, each service&#39;s output and the metrics series under <code>/var/logs/metrics</code> are log nodes, read with <code>dmesg</code>, <code>tail</code>, <code>cat</code> and <code>log-read</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -808,6 +813,16 @@
 <td>A service&#39;s own output</td>
 <td><code>tail -f /var/logs/services/metrics-sampler/stdout.log</code>, and <code>stderr.log</code> beside it</td>
 <td><a href="../reference/commands-core.html#tail">tail</a></td>
+</tr>
+<tr>
+<td>A log&#39;s entries over a time range</td>
+<td><code>log-read /var/logs/metrics/memory --since 24h</code></td>
+<td><a href="../reference/commands-core.html#log-read">log-read</a></td>
+</tr>
+<tr>
+<td>A log summed up per hour, as a chart wants it</td>
+<td><code>log-read /var/logs/metrics/memory --since 7d --bucket 1h --field usedBytes --agg max</code></td>
+<td><a href="../reference/commands-core.html#log-read">log-read</a></td>
 </tr>
 <tr>
 <td>Who changed, moved or removed what, <em>administrators only</em></td>
@@ -966,7 +981,7 @@
 </tr>
 <tr>
 <td><code>sudo</code>, <code>su</code></td>
-<td><code>admin</code> or <code>user-elevate</code>, for members of <code>sudo</code></td>
+<td><code>admin</code> or <code>user-elevate</code>, for members of <code>sudo</code>; <code>runas</code> for an administrator to act as someone else</td>
 </tr>
 <tr>
 <td><code>getfacl</code>, <code>setfacl</code></td>

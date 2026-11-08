@@ -70,20 +70,21 @@ The node types `find -type` takes are listed in [Node types](../reference/node-t
 
 ### Accounts
 
-| Task                                                    | Command                                                                     | Reference                                                                                                            |
-| ------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| Who you are                                             | `whoami`, `id`                                                              | [user-whoami](../reference/commands-core.md#user-whoami), [user-id](../reference/commands-core.md#user-id)           |
-| List the accounts                                       | `user-list`, `user-list --inactive`                                         | [user-list](../reference/commands-core.md#user-list)                                                                 |
-| One account's details                                   | `user-info helen`                                                           | [user-info](../reference/commands-core.md#user-info)                                                                 |
-| The groups an account is in                             | `user-groups helen`                                                         | [user-groups](../reference/commands-core.md#user-groups)                                                             |
-| Change your own password                                | `user-passwd helen --old-password=<current>` (asks for the new one)         | [user-passwd](../reference/commands-core.md#user-passwd)                                                             |
-| Change your display name or description                 | `user-update helen --name 'Helen Okafor'`                                   | [user-update](../reference/commands-core.md#user-update)                                                             |
-| Create an account, _administrators only_                | `user-create anna --title 'Anna Andersson' --email anna@example.com`        | [user-create](../reference/commands-core.md#user-create)                                                             |
-| Set someone's password                                  | `user-passwd anna` (asks `Password:`; others than your own: administrators) | [user-passwd](../reference/commands-core.md#user-passwd)                                                             |
-| Stop or allow someone signing in, _administrators only_ | `user-disable anna`, `user-enable anna`                                     | [user-disable](../reference/commands-core.md#user-disable), [user-enable](../reference/commands-core.md#user-enable) |
-| Delete an account, _administrators only_                | `user-delete anna --to helen`                                               | [user-delete](../reference/commands-core.md#user-delete)                                                             |
-| Change someone's primary group, _administrators only_   | `user-set-primary-group anna family`                                        | [user-set-primary-group](../reference/commands-core.md#user-set-primary-group)                                       |
-| Act as the administrator, as a member of `sudo`         | `admin` (this terminal), `user-elevate --session`, `admin --off`            | [admin](../reference/commands-core.md#admin), [user-elevate](../reference/commands-core.md#user-elevate)             |
+| Task                                                                      | Command                                                                     | Reference                                                                                                            |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Who you are                                                               | `whoami`, `id`                                                              | [user-whoami](../reference/commands-core.md#user-whoami), [user-id](../reference/commands-core.md#user-id)           |
+| List the accounts                                                         | `user-list`, `user-list --inactive`                                         | [user-list](../reference/commands-core.md#user-list)                                                                 |
+| One account's details                                                     | `user-info helen`                                                           | [user-info](../reference/commands-core.md#user-info)                                                                 |
+| The groups an account is in                                               | `user-groups helen`                                                         | [user-groups](../reference/commands-core.md#user-groups)                                                             |
+| Change your own password                                                  | `user-passwd helen --old-password=<current>` (asks for the new one)         | [user-passwd](../reference/commands-core.md#user-passwd)                                                             |
+| Change your display name or description                                   | `user-update helen --name 'Helen Okafor'`                                   | [user-update](../reference/commands-core.md#user-update)                                                             |
+| Create an account, _administrators only_                                  | `user-create anna --title 'Anna Andersson' --email anna@example.com`        | [user-create](../reference/commands-core.md#user-create)                                                             |
+| Set someone's password                                                    | `user-passwd anna` (asks `Password:`; others than your own: administrators) | [user-passwd](../reference/commands-core.md#user-passwd)                                                             |
+| Stop or allow someone signing in, _administrators only_                   | `user-disable anna`, `user-enable anna`                                     | [user-disable](../reference/commands-core.md#user-disable), [user-enable](../reference/commands-core.md#user-enable) |
+| Delete an account, _administrators only_                                  | `user-delete anna --to helen`                                               | [user-delete](../reference/commands-core.md#user-delete)                                                             |
+| Change someone's primary group, _administrators only_                     | `user-set-primary-group anna family`                                        | [user-set-primary-group](../reference/commands-core.md#user-set-primary-group)                                       |
+| Act as the administrator, as a member of `sudo`                           | `admin` (this terminal), `user-elevate --session`, `admin --off`            | [admin](../reference/commands-core.md#admin), [user-elevate](../reference/commands-core.md#user-elevate)             |
+| Run a line as someone else, with only their rights, _administrators only_ | `runas anna 'ls ~'`                                                         | [runas](../reference/commands-core.md#runas)                                                                         |
 
 A new account has no password and cannot sign in until one is set. `whoami` and `id` are aliases for `user whoami` and `user id`, set in `/etc/bashrc`.
 
@@ -204,16 +205,18 @@ A detached job writes its output to `/var/logs/jobs/<pid>/stdout.log` and `stder
 
 ### Logs and the audit trail
 
-There is no `logs` command. The system log and each service's output are log nodes, read with `dmesg`, `tail` and `cat`.
+There is no `logs` command. The system log, each service's output and the metrics series under `/var/logs/metrics` are log nodes, read with `dmesg`, `tail`, `cat` and `log-read`.
 
-| Task                                                      | Command                                                                             | Reference                                                |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| The system log                                            | `dmesg -n 50`                                                                       | [dmesg](../reference/commands-core.md#dmesg)             |
-| The last ten problems                                     | `dmesg --level warn -n 10`                                                          | [dmesg](../reference/commands-core.md#dmesg)             |
-| Follow the system log as it grows                         | `tail -f /var/logs/system`                                                          | [tail](../reference/commands-core.md#tail)               |
-| A service's own output                                    | `tail -f /var/logs/services/metrics-sampler/stdout.log`, and `stderr.log` beside it | [tail](../reference/commands-core.md#tail)               |
-| Who changed, moved or removed what, _administrators only_ | `audit --user anna --since 2026-10-01 /archive/albums`                              | [audit](../reference/commands-core.md#audit)             |
-| Remove pipelines' audit records older than a week         | `audit-purge --older-than 7d --pipeline`                                            | [audit-purge](../reference/commands-core.md#audit-purge) |
+| Task                                                      | Command                                                                                | Reference                                                |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| The system log                                            | `dmesg -n 50`                                                                          | [dmesg](../reference/commands-core.md#dmesg)             |
+| The last ten problems                                     | `dmesg --level warn -n 10`                                                             | [dmesg](../reference/commands-core.md#dmesg)             |
+| Follow the system log as it grows                         | `tail -f /var/logs/system`                                                             | [tail](../reference/commands-core.md#tail)               |
+| A service's own output                                    | `tail -f /var/logs/services/metrics-sampler/stdout.log`, and `stderr.log` beside it    | [tail](../reference/commands-core.md#tail)               |
+| A log's entries over a time range                         | `log-read /var/logs/metrics/memory --since 24h`                                        | [log-read](../reference/commands-core.md#log-read)       |
+| A log summed up per hour, as a chart wants it             | `log-read /var/logs/metrics/memory --since 7d --bucket 1h --field usedBytes --agg max` | [log-read](../reference/commands-core.md#log-read)       |
+| Who changed, moved or removed what, _administrators only_ | `audit --user anna --since 2026-10-01 /archive/albums`                                 | [audit](../reference/commands-core.md#audit)             |
+| Remove pipelines' audit records older than a week         | `audit-purge --older-than 7d --pipeline`                                               | [audit-purge](../reference/commands-core.md#audit-purge) |
 
 The system log starts empty at every start of EiN, and a service's two log files start empty at every start of that service.
 
@@ -253,18 +256,18 @@ These work on text files, logs and the output of other commands, as their GNU na
 
 EiN's commands are its own, so some familiar names are missing. Use these instead.
 
-| You may type                                  | Use instead                                                                                  |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `touch`                                       | `mkfile`                                                                                     |
-| `vi`, `nano`                                  | `edit`                                                                                       |
-| `less`, `more`, `man`                         | the terminal's scrollback, `<command> --help`, and the [reference](../reference/commands.md) |
-| `realpath`                                    | `abspath`                                                                                    |
-| `which`                                       | `type <name>` or `command -v <name>`                                                         |
-| `passwd`, `useradd`, `usermod`                | `user-passwd`, `user-create`, `user-update`; for groups, `group-add-member`                  |
-| `chgrp`                                       | `chown :<group> <path>`                                                                      |
-| `sudo`, `su`                                  | `admin` or `user-elevate`, for members of `sudo`                                             |
-| `getfacl`, `setfacl`                          | `acl`                                                                                        |
-| `tar`, `rsync`, `curl`, `wget`, `diff`, `tee` | none in EiN; `unzip` unpacks zip files, and `scp` copies over SSH                            |
+| You may type                                  | Use instead                                                                                           |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `touch`                                       | `mkfile`                                                                                              |
+| `vi`, `nano`                                  | `edit`                                                                                                |
+| `less`, `more`, `man`                         | the terminal's scrollback, `<command> --help`, and the [reference](../reference/commands.md)          |
+| `realpath`                                    | `abspath`                                                                                             |
+| `which`                                       | `type <name>` or `command -v <name>`                                                                  |
+| `passwd`, `useradd`, `usermod`                | `user-passwd`, `user-create`, `user-update`; for groups, `group-add-member`                           |
+| `chgrp`                                       | `chown :<group> <path>`                                                                               |
+| `sudo`, `su`                                  | `admin` or `user-elevate`, for members of `sudo`; `runas` for an administrator to act as someone else |
+| `getfacl`, `setfacl`                          | `acl`                                                                                                 |
+| `tar`, `rsync`, `curl`, `wget`, `diff`, `tee` | none in EiN; `unzip` unpacks zip files, and `scp` copies over SSH                                     |
 
 There is also no `sh` or `bash` command: a script is run by its path, or with `source`. [The shell language](bash.md) explains scripts.
 

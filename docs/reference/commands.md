@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 414 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 416 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 214 in full](commands-core.md).
+[All 216 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -103,6 +103,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [labels](commands-core.md#labels) | List labels (all, or of a node); search --tag <label> finds what carries one. |
 | [ln](commands-core.md#ln) | Create links between files. |
 | [log-append](commands-core.md#log-append) | Append a JSON entry to a log, optionally at an explicit (backdated) timestamp. |
+| [log-read](commands-core.md#log-read) | Read a log by time: the entries written in a range, or with --bucket the range summed up per interval (an average an hour, a maximum a day), as a chart wants it. |
 | [login](commands-core.md#login) | Authenticate as a user. |
 | [logout](commands-core.md#logout) | Log out of the current session. |
 | [ls](commands-core.md#ls) | List directory contents. |
@@ -174,6 +175,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [rev](commands-core.md#rev) | Reverse lines character-wise. |
 | [rm](commands-core.md#rm) | Remove (delete) files or directories. |
 | [rmdir](commands-core.md#rmdir) | Remove empty directories. |
+| [runas](commands-core.md#runas) | Run a command line as another account, with only that account's rights and settings: for a service doing work on someone's behalf. |
 | [scp](commands-core.md#scp) | Copy files between EiN and another machine over SSH (members of group ssh) |
 | [search](commands-core.md#search) | Faceted search over content: text, time, region, kind, tags, subjects (people, locations, devices) and containers. |
 | [sed](commands-core.md#sed) | Stream editor for filtering and transforming text. |
