@@ -223,6 +223,10 @@ Test with <code>[ -e &quot;$path&quot; ]</code> whether a node is there, and <co
 shell&#39;s variables, not only the exported ones. <code>JSON_OUTPUT=1</code> on a line of its own therefore
 changes every command after it until you <code>unset JSON_OUTPUT</code>. Put it in front of one command to
 change only that one.</p>
+<p><strong>Three options start on.</strong> <code>**</code> matches any depth of folders, <code>ls /archive/**/*.jpg</code>, as under
+<code>shopt -s globstar</code>. Aliases work in scripts too, not only where you type (<code>expand_aliases</code>). Job
+control is on in scripts as well, so <code>fg</code> works there (<code>set -m</code>). <code>shopt -u globstar</code>,
+<code>shopt -u expand_aliases</code> and <code>set +m</code> turn them off.</p>
 <p><strong><code>ls</code> in the terminal writes columns into a pipe too.</strong> In the terminal panel and an SSH login,
 <code>ls</code> lays names out in columns even when its output goes to another command. Give <code>-1</code> when you
 count or loop over names: <code>ls -1 /archive/albums | wc -l</code>. <code>find</code> always writes one path per line.</p>

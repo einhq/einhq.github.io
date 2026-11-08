@@ -119,16 +119,12 @@ Extract metadata from a file, as exiftool reads it (through the media service)
 <small>reads only</small>
 
 ```text
-exiftool [-n] <filename>
+exiftool <filename>
 ```
 
 | Argument     | What it is        |
 | ------------ | ----------------- |
 | `<filename>` | VFS path to file. |
-
-| Option | What it does                                                     |
-| ------ | ---------------------------------------------------------------- |
-| `-n`   | Numeric values (always the case now; accepted for compatibility) |
 
 ```bash
 exiftool /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg

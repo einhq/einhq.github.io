@@ -101,8 +101,11 @@ it. Some boxes are ticked and greyed, with the reason beside them:
 
 Other people's personal groups are listed only while this account is in one.
 
-**Primary group** is the group that files the person creates belong to, unless they are created as
-shared. It starts as the personal group. You can pick any shared group instead.
+**Primary group** is a group the person is always in. It does not decide the group of what they
+create: a new file or folder takes the group of the folder it is created in, whoever creates it. It
+is used where nothing else names a group, such as what they create as shared when
+[`CFG_DEFAULT_SHARE_GROUP`](../reference/settings.md#cfg_default_share_group) is empty. It starts as
+the personal group. You can pick any shared group instead.
 
 > [!NOTE]
 > Group changes apply the next time the person signs in. Until then they keep the groups they

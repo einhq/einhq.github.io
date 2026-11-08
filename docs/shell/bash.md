@@ -107,6 +107,11 @@ shell's variables, not only the exported ones. `JSON_OUTPUT=1` on a line of its 
 changes every command after it until you `unset JSON_OUTPUT`. Put it in front of one command to
 change only that one.
 
+**Three options start on.** `**` matches any depth of folders, `ls /archive/**/*.jpg`, as under
+`shopt -s globstar`. Aliases work in scripts too, not only where you type (`expand_aliases`). Job
+control is on in scripts as well, so `fg` works there (`set -m`). `shopt -u globstar`,
+`shopt -u expand_aliases` and `set +m` turn them off.
+
 **`ls` in the terminal writes columns into a pipe too.** In the terminal panel and an SSH login,
 `ls` lays names out in columns even when its output goes to another command. Give `-1` when you
 count or loop over names: `ls -1 /archive/albums | wc -l`. `find` always writes one path per line.

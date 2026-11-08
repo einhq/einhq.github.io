@@ -113,8 +113,8 @@ Start `mod.json` with who the module is and the core it is written for:
 | `nodeTypes`   | The node types it defines, for the documentation; one with a `root` is what an `@` in the search box completes to       |
 | `ui.routes`   | Its pages, each route with the file that draws it                                                                       |
 
-`mod info` on any installed module shows the range it asks for under **Core API**, and `system-info`
-shows the core API this EiN provides on its `api` line. A module without `coreApi` still installs,
+`mod info` on any installed module shows the range it asks for under **Core API**, followed by the
+core API this EiN provides, which `system-info` also shows on its `api` line. A module without `coreApi` still installs,
 with a warning.
 
 ## Add a command in bash

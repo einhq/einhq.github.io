@@ -214,8 +214,11 @@ it. Some boxes are ticked and greyed, with the reason beside them:</p>
 leaves only when its primary group is changed.</li>
 </ul>
 <p>Other people&#39;s personal groups are listed only while this account is in one.</p>
-<p><strong>Primary group</strong> is the group that files the person creates belong to, unless they are created as
-shared. It starts as the personal group. You can pick any shared group instead.</p>
+<p><strong>Primary group</strong> is a group the person is always in. It does not decide the group of what they
+create: a new file or folder takes the group of the folder it is created in, whoever creates it. It
+is used where nothing else names a group, such as what they create as shared when
+<a href="../reference/settings.html#cfg_default_share_group"><code>CFG_DEFAULT_SHARE_GROUP</code></a> is empty. It starts as
+the personal group. You can pick any shared group instead.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>Group changes apply the next time the person signs in. Until then they keep the groups they
 signed in with, and the section says so when they are signed in now. To make a change apply at
