@@ -300,7 +300,7 @@ with the address it tried.
 
 The **Work** tab's **Where the work is** ends with the media service's part: **At the media
 service**, its three lanes with their slots and the requests in them, and **On a model**, the models
-it holds, the working ones first and the search models apart. With [more than one media service](instances.md), the tab lists them beside it, and the Work tab has the same columns for each.
+it holds, the working ones first and the search models apart. With [more than one media service](instances.md), the tab lists them beside it, and the Work tab's two columns have a group for each.
 
 The **Overview** tab shows **EMS GPU** and **EMS VRAM** tiles beside the computer's own CPU and
 memory when the media service has a card, and **EMS RAM**, the memory of the machine the media

@@ -110,8 +110,8 @@ the instance with the slots in force.
   each **up** or **down**, its card or **CPU only**, and the operations another serves. On a phone the
   list is a menu above it.
 - The **Overview** tab has **GPU** and **VRAM** tiles for each instance with a card, under its name.
-- The **Work** tab's **Where the work is** has columns for each instance, **At laptop** and **On a
-  model at laptop**.
+- The **Work** tab's **Where the work is** has a group for each instance, under its name, in **At the
+  media service** and **On a model**.
 - The health checks of an instance carry its name: `ems laptop`, `ems laptop worker`,
   `ems laptop gpu` and `ems laptop card`. An instance that does not answer is a warning: its work
   goes to the others.
