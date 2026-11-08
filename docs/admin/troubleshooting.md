@@ -183,10 +183,10 @@ A service shown as `disabled` has no buttons on the dashboard; enable it first w
 
 Two places fill up, and they may be on different disks:
 
-| Where                                                                                    | How to see it                                                                                                        |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| The data folder, `EIN_DATA`: originals, renditions and, with `--llm`, the language model | `df` in EiN's terminal: free space per storage tier, its growth per day, when it fills, and the size of the database |
-| The container engine's storage: the images                                               | `podman system df` on the machine                                                                                    |
+| Where                                                                                    | How to see it                                                                                                                               |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| The data folder, `EIN_DATA`: originals, renditions and, with `--llm`, the language model | `df` in EiN's terminal: free space per storage tier, the size of its files, its growth per day, when it fills, and the size of the database |
+| The container engine's storage: the images                                               | `podman system df` on the machine                                                                                                           |
 
 To make room:
 

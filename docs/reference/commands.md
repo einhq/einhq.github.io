@@ -58,7 +58,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
 | [detach](commands-core.md#detach) | detach a job so it keeps running after the shell closes. |
-| [df](commands-core.md#df) | Free space per storage tier, its growth per day and when it fills, and the database size and its largest tables. |
+| [df](commands-core.md#df) | Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables. |
 | [dirname](commands-core.md#dirname) | Strip last component from file name. |
 | [dmesg](commands-core.md#dmesg) | Print system log. |
 | [docs](commands-core.md#docs) | Describe what this installation is made of: its commands, node types and environment variables. |

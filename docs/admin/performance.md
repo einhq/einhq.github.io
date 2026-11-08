@@ -153,7 +153,7 @@ If the interface still feels slow on a small machine during an import, lower **M
 
 ## Watch disk space
 
-Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder's `files-volatile`, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN's terminal, `df` shows each storage tier's free space, how fast it grows a day, and when it will be full at that rate, with the size of the database and its largest tables:
+Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder's `files-volatile`, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN's terminal, `df` shows each storage tier's free space, how much of the disk its own files take, how fast it grows a day, and when it will be full at that rate, with the size of the database and its largest tables:
 
 ```bash
 # in EiN's terminal

@@ -626,7 +626,7 @@ detach [--list] <job>
 
 ### `df`
 
-Free space per storage tier, its growth per day and when it fills, and the database size and its largest tables.
+Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables.
 
 <small>reads only</small>
 
@@ -2305,7 +2305,7 @@ Run a pool worker (long-running)
 <small>administrators only · changes things</small>
 
 ```text
-pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reserve-kind=<string>] [--reserve-capacity=<string>] [--kind-quantum=<number>] [--lease=<number>] [--name=<string>] [--concurrency=<number>]
+pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reserve-kind=<string>] [--reserve-capacity=<string>] [--kind-quantum=<number>] [--lease=<number>] [--name=<string>] [--concurrency=<number>] [--env=<string>] [--pass-on] [--while=<string>] [--while-every=<number>]
 ```
 
 | Option | What it does |
@@ -2319,6 +2319,10 @@ pipeline-worker [--pool=<path>] [--capacity=<string>] [--kind=<string>] [--reser
 | `--lease=<number>` | Lease duration in ms (default 60000) |
 | `--name=<string>` | What pool-stat and the dashboard call this worker (default: the service it runs as) |
 | `--concurrency=<number>` | Upper bound on concurrent jobs (default 1) |
+| `--env=<string>` | A variable every step runs with, NAME=value (repeatable) |
+| `--pass-on` | A step that could not run yet (exit 75) goes straight back to the pool for another worker, and its kind rests in this one. |
+| `--while=<string>` | A command asked every --while-every seconds; the worker stops, handing its jobs back, once it fails. |
+| `--while-every=<number>` | How often --while is asked, in seconds (default 60) |
 
 ### `pool`
 

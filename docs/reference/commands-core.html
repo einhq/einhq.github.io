@@ -1066,7 +1066,7 @@ audit-purge --older-than 365d</code></pre></div>
 </tbody></table>
 </div>
 <h3 id="df"><code>df</code><a class="anchor" href="#df" aria-label="Link to this section"></a></h3>
-<p>Free space per storage tier, its growth per day and when it fills, and the database size and its largest tables.</p>
+<p>Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>df</code></pre></div>
 <h3 id="dirname"><code>dirname</code><a class="anchor" href="#dirname" aria-label="Link to this section"></a></h3>
@@ -3452,7 +3452,7 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <h3 id="pipeline-worker"><code>pipeline-worker</code><a class="anchor" href="#pipeline-worker" aria-label="Link to this section"></a></h3>
 <p>Run a pool worker (long-running)</p>
 <p><small>administrators only · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>pipeline-worker [--pool=&lt;path&gt;] [--capacity=&lt;string&gt;] [--kind=&lt;string&gt;] [--reserve-kind=&lt;string&gt;] [--reserve-capacity=&lt;string&gt;] [--kind-quantum=&lt;number&gt;] [--lease=&lt;number&gt;] [--name=&lt;string&gt;] [--concurrency=&lt;number&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>pipeline-worker [--pool=&lt;path&gt;] [--capacity=&lt;string&gt;] [--kind=&lt;string&gt;] [--reserve-kind=&lt;string&gt;] [--reserve-capacity=&lt;string&gt;] [--kind-quantum=&lt;number&gt;] [--lease=&lt;number&gt;] [--name=&lt;string&gt;] [--concurrency=&lt;number&gt;] [--env=&lt;string&gt;] [--pass-on] [--while=&lt;string&gt;] [--while-every=&lt;number&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3495,6 +3495,22 @@ onthisday 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
 <tr>
 <td><code>--concurrency=&lt;number&gt;</code></td>
 <td>Upper bound on concurrent jobs (default 1)</td>
+</tr>
+<tr>
+<td><code>--env=&lt;string&gt;</code></td>
+<td>A variable every step runs with, NAME=value (repeatable)</td>
+</tr>
+<tr>
+<td><code>--pass-on</code></td>
+<td>A step that could not run yet (exit 75) goes straight back to the pool for another worker, and its kind rests in this one.</td>
+</tr>
+<tr>
+<td><code>--while=&lt;string&gt;</code></td>
+<td>A command asked every --while-every seconds; the worker stops, handing its jobs back, once it fails.</td>
+</tr>
+<tr>
+<td><code>--while-every=&lt;number&gt;</code></td>
+<td>How often --while is asked, in seconds (default 60)</td>
 </tr>
 </tbody></table>
 </div>
