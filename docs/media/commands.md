@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 20 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [exiftool](#exiftool) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
 
 ## C
 
@@ -111,26 +111,6 @@ exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
 With `JSON_OUTPUT=1`: nothing; the exif node is written under the file and its facts on it, or nothing for a file a module holds.
-
-### `exiftool`
-
-Extract metadata from a file, as exiftool reads it (through the media service)
-
-<small>reads only</small>
-
-```text
-exiftool <filename>
-```
-
-| Argument     | What it is        |
-| ------------ | ----------------- |
-| `<filename>` | VFS path to file. |
-
-```bash
-exiftool /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
-```
-
-With `JSON_OUTPUT=1`: the file's metadata exactly as exiftool reads it.
 
 ## F
 
@@ -311,20 +291,23 @@ The kinds of work a worker of the media pool takes, from the modules' drop-ins, 
 <small>reads only</small>
 
 ```text
-media-pool-kinds [--reverse] <worker>
+media-pool-kinds [--reverse] [--instance=<string>] [--expect=<string>] <worker>
 ```
 
 | Argument   | What it is                                                          |
 | ---------- | ------------------------------------------------------------------- |
 | `<worker>` | cpu (the media-worker service) or models (models and models-second) |
 
-| Option      | What it does                                                            |
-| ----------- | ----------------------------------------------------------------------- |
-| `--reverse` | The kinds in the reverse order, as the second models worker takes them. |
+| Option                | What it does                                                                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--reverse`           | The kinds in the reverse order, as the second models worker takes them.                                                                       |
+| `--instance=<string>` | The kinds for a worker of this EMS instance: those it serves every op of and stamps as the primary does (main, the primary, takes every kind) |
+| `--expect=<string>`   | Print nothing, and exit 1 unless the flags would be these.                                                                                    |
 
 ```bash
 media-pool-kinds cpu
 media-pool-kinds models --reverse
+media-pool-kinds models --instance laptop
 JSON_OUTPUT=1 media-pool-kinds models
 ```
 

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 413 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 414 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -411,14 +411,16 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media service
 
-[All 9 in full](../ems/commands.md).
+[All 11 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [ems-files](../ems/commands.md#ems-files) | Serve the media service the files of its requests in flight over SFTP, the only way it reaches EiN's files (the ems-files service) |
 | [ems-files-grant](../ems/commands.md#ems-files-grant) | Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
-| [ems-gpu](../ems/commands.md#ems-gpu) | The media service's GPU now, with the last six hours of utilization and VRAM. |
+| [ems-gpu](../ems/commands.md#ems-gpu) | The GPU of an instance of the media service now, with the last six hours of utilization and VRAM. |
 | [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
+| [ems-instance](../ems/commands.md#ems-instance) | The media service's instances: list them and what each serves, or add, change or remove one beside the primary. |
+| [ems-link](../ems/commands.md#ems-link) | Watch every instance of the media service: log when one comes or goes, and run failed work again when one's build changes (the ems-link service) |
 | [ems-memory](../ems/commands.md#ems-memory) | The memory of the media service's machine now, with the last six hours, and what EMS holds of it. |
 | [ems-models](../ems/commands.md#ems-models) | What the media service held over the last hours, a sample a minute, with the work EiN had waiting beside it. |
 | [ems-models-sample](../ems/commands.md#ems-models-sample) | What the media service holds now: the card mode, each model copy and where it is, the models working. |
@@ -427,7 +429,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 21 in full](../media/commands.md).
+[All 20 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -435,7 +437,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
 | [embed-picture](../media/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
-| [exiftool](../media/commands.md#exiftool) | Extract metadata from a file, as exiftool reads it (through the media service) |
 | [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |

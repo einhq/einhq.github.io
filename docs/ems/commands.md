@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 9 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
 
@@ -42,20 +42,22 @@ With `JSON_OUTPUT=1`: the EMS-Files header value, then a line per path: read or 
 
 ### `ems-gpu`
 
-The media service's GPU now, with the last six hours of utilization and VRAM.
+The GPU of an instance of the media service now, with the last six hours of utilization and VRAM.
 
 <small>reads only</small>
 
 ```text
-ems-gpu [--gauge]
+ems-gpu [--gauge] [--instance=<string>]
 ```
 
-| Option    | What it does                                                                            |
-| --------- | --------------------------------------------------------------------------------------- |
-| `--gauge` | The GPU and VRAM gauges top draws beside the host (the gpu-sampler service declares it) |
+| Option                | What it does                                                                                                         |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `--gauge`             | The GPU and VRAM gauges top draws beside the host, each instance's with a card (the gpu-sampler service declares it) |
+| `--instance=<string>` | The instance whose card (ems-instance list); main, the primary, by default.                                          |
 
 ```bash
 ems-gpu
+ems-gpu --instance laptop
 ems-gpu --gauge
 ```
 
@@ -68,14 +70,65 @@ One reading of the media service's GPU: utilization, VRAM and temperature.
 <small>reads only</small>
 
 ```text
-ems-gpu-sample
+ems-gpu-sample [--instance=<string>]
 ```
+
+| Option                | What it does                                                            |
+| --------------------- | ----------------------------------------------------------------------- |
+| `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default. |
 
 ```bash
 ems-gpu-sample
+ems-gpu-sample --instance laptop
 ```
 
 With `JSON_OUTPUT=1`: utilPct, memUsedMb, memTotalMb and tempC, or null when there is no reading.
+
+### `ems-instance`
+
+The media service's instances: list them and what each serves, or add, change or remove one beside the primary.
+
+<small>administrators only · reads only</small>
+
+```text
+ems-instance [--url=<string>] [--key=<string>] [--files-address=<string>] [--model-slots=<string>] [--cpu-slots=<string>] [--names] [--others] <action> <name> <field>
+```
+
+| Argument   | What it is                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| `<action>` | list (the default), show, add, set or remove. One of `list`, `show`, `add`, `set`, `remove`.  |
+| `<name>`   | show, add, set, remove: the instance; main is the primary.                                    |
+| `<field>`  | show: print this field alone (url, filesAddress, modelSlots, cpuSlots, answering, calls, ops) |
+
+| Option                     | What it does                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------- |
+| `--url=<string>`           | add, set: where the instance answers, http://host:port.                               |
+| `--key=<string>`           | add, set: the bearer key the instance expects; empty for none.                        |
+| `--files-address=<string>` | add, set: host:port of ems-files as the instance reaches it; empty for the primary's. |
+| `--model-slots=<string>`   | add, set: model requests kept in flight against it; empty for its own limit.          |
+| `--cpu-slots=<string>`     | add, set: tool requests kept in flight against it; empty for its own limit.           |
+| `--names`                  | list: the names alone, without asking any instance.                                   |
+| `--others`                 | list: leave out the primary.                                                          |
+
+```bash
+ems-instance list
+ems-instance add laptop --url http://192.168.1.20:8181 --key let-me-in --files-address 192.168.1.10:2224
+ems-instance show laptop modelSlots
+ems-instance set laptop --cpu-slots 2
+ems-instance remove laptop
+```
+
+With `JSON_OUTPUT=1`: list: each instance with its address, files address, slots and whether a key is set, and while it answers its own name, ops, card and build. show: one, or one field of it.
+
+### `ems-link`
+
+Watch every instance of the media service: log when one comes or goes, and run failed work again when one's build changes (the ems-link service)
+
+<small>administrators only · changes things</small>
+
+```text
+ems-link
+```
 
 ### `ems-memory`
 
@@ -100,16 +153,18 @@ What the media service held over the last hours, a sample a minute, with the wor
 <small>reads only</small>
 
 ```text
-ems-models [--hours=<string>]
+ems-models [--hours=<string>] [--instance=<string>]
 ```
 
-| Option             | What it does                          |
-| ------------------ | ------------------------------------- |
-| `--hours=<string>` | Hours of history, 1 to 24 (default 6) |
+| Option                | What it does                                                     |
+| --------------------- | ---------------------------------------------------------------- |
+| `--hours=<string>`    | Hours of history, 1 to 24 (default 6)                            |
+| `--instance=<string>` | The instance (ems-instance list); main, the primary, by default. |
 
 ```bash
 ems-models
 ems-models --hours 24
+ems-models --instance laptop
 ```
 
 With `JSON_OUTPUT=1`: windowMs and samples: at, and mode, copies, working, notStarted and inLine.
@@ -121,11 +176,16 @@ What the media service holds now: the card mode, each model copy and where it is
 <small>reads only</small>
 
 ```text
-ems-models-sample
+ems-models-sample [--instance=<string>]
 ```
+
+| Option                | What it does                                                            |
+| --------------------- | ----------------------------------------------------------------------- |
+| `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default. |
 
 ```bash
 ems-models-sample
+ems-models-sample --instance laptop
 ```
 
 With `JSON_OUTPUT=1`: mode, copies (family, place, worker, state), working, notStarted and inLine, or null when the media service is not answering.
@@ -137,14 +197,15 @@ Show media service health: version, every model and its state, what is executing
 <small>reads only</small>
 
 ```text
-ems-status [--brief] [--checks] [--card]
+ems-status [--brief] [--checks] [--card] [--instance=<string>]
 ```
 
-| Option     | What it does                                                                     |
-| ---------- | -------------------------------------------------------------------------------- |
-| `--brief`  | One line, degradation first (used by service-list --detail)                      |
-| `--checks` | The checks health reads: answering, model worker, degradations, card.            |
-| `--card`   | The card's mode alone: quiet, busy, switching or off; fails when EMS cannot say. |
+| Option                | What it does                                                                                        |
+| --------------------- | --------------------------------------------------------------------------------------------------- |
+| `--brief`             | One line, degradation first (used by service-list --detail)                                         |
+| `--checks`            | The checks health reads: answering, model worker, degradations, card.                               |
+| `--card`              | The card's mode alone: quiet, busy, switching or off; fails when EMS cannot say.                    |
+| `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default, and for --checks every one. |
 
 ### `ems-text-embed`
 

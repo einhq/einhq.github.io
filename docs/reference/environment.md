@@ -141,3 +141,4 @@ Set for each step of a pipeline by the change that started it.
 | `EVENT_ID` |  | The event's id. |
 | `EVENT_SOURCE` |  | What raised the event, such as archive-bridge. |
 | `EVENT_DATA` |  | The event's details as JSON. Each field is also its own variable: mimetype becomes EVENT_MIMETYPE, deviceSerial EVENT_DEVICE_SERIAL. |
+| `CFG_EMS_INSTANCE` |  | Which instance of the media service a step calls (ems-instance list): set by the pool worker for another instance on each step it runs; unset, the primary. From the media service module. |
