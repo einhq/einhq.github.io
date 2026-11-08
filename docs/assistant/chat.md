@@ -21,8 +21,8 @@ You can make the drawer wider or narrower by dragging its left edge; [Finding yo
 ## Ask a question
 
 1. Click in the box at the bottom, which reads "Ask about what is kept here — or EiN itself…" ("Ask anything…" on a phone). A click on any empty part of the chat puts the cursor there too.
-2. Type your question. <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line; the box grows to eight lines.
-3. Press <kbd>Enter</kbd>, or click the send button (a paper plane).
+2. Type your question. <kbd>Enter</kbd> starts a new line; the box grows to eight lines.
+3. Press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>Cmd</kbd>+<kbd>Enter</kbd> on a Mac), or click the send button (a paper plane).
 
 The answer grows in front of you. It says "Waiting…" at first, "Thinking…" while the language model works out its next step, and "Running commands… 2 done" with the command it is running underneath. The answer's words appear as they are written. An answer takes from a few seconds to a few minutes, depending on how many commands the question needs and how fast your machine runs the language model.
 
