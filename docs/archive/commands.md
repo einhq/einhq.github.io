@@ -1606,7 +1606,7 @@ With `JSON_OUTPUT=1`: which fields changed.
 
 ### `media-details`
 
-Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file.
+Read description, time, location, device with owners, albums, tagged people (with age), comments and versions for a media file.
 
 <small>reads only</small>
 
@@ -1627,7 +1627,7 @@ media-details [--album=<path>] [--fields=<string>] <file>
 media-details /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
-With `JSON_OUTPUT=1`: the file's description, when and where it was taken, its albums, and the people in it with their ages.
+With `JSON_OUTPUT=1`: the file's description, when and where it was taken, its albums, the people in it with their ages, and its versions.
 
 ### `media-heal`
 

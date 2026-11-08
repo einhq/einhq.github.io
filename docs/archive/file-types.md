@@ -94,7 +94,9 @@ A RAW file gets everything a JPEG gets. EiN develops it for the thumbnails; a RA
 data cannot be read is shown from the JPEG preview the camera put inside it. Faces and text are read
 from that preview too. A RAW file and the JPEG the camera saved beside it stay two pictures; when
 EiN finds them to be duplicates, it suggests keeping the RAW, as the better format
-([Which copy is kept](duplicates.md#which-copy-is-kept)).
+([Which copy is kept](duplicates.md#which-copy-is-kept)). A RAW file kept under its JPEG instead, as
+[`raw --sort`](commands.md#raw) files it, is a version of that JPEG: the viewer lists it under **Versions** in the
+[details panel](viewer.md#the-details-panel), where its name downloads it.
 
 ## Videos
 

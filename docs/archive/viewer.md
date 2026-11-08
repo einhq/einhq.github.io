@@ -167,7 +167,9 @@ details button (ⓘ) or <kbd>i</kbd> to close it while you look; it stays closed
 viewer. On a phone you pull it up, as described above.
 
 Each part of the panel is a row with an icon at its left. A row appears only when it has something
-to show. From the top:
+to show. Click a row's icon to fold the row to a single line with its name, and how many it holds
+when it is a list, such as **People · 3**; click the icon or the line to unfold it. Which rows are
+folded is remembered in this browser, for the next picture and the next visit. From the top:
 
 | Row               | What it shows                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,9 +183,11 @@ to show. From the top:
 | Place             | The location the file is linked to, as a link, the street address, and a small map. **Enlarge map** opens a large map of the spot.                                                                                                                                                                                                                                                                                                                                                                      |
 | Weather           | For a file with a place and a date: the weather that hour, such as **14.5 °C · Wind 4 m/s, from SW · 40 % cloud**, and under it where that came from, an SMHI station or Open-Meteo. See [The weather at a place and time](places.md#the-weather-at-a-place-and-time).                                                                                                                                                                                                                                  |
 | Stack             | For a photo stacked with others in this album: **N stacked photos**, or **Kept separate**, with a thumbnail of each and **Front** on the one the album shows. Click a thumbnail to see it in the viewer. **Make front**, **Keep separate** and **Allow stacking** are there when you may change the album and every photo in the stack. See [Albums](albums.md).                                                                                                                                        |
+| Versions          | For a file with other versions, such as the camera RAW of a JPEG: each one's name, which downloads it, with its kind of file and size. See [Camera RAW](file-types.md#camera-raw).                                                                                                                                                                                                                                                                                                                      |
 | Similar           | Up to 12 pictures that look most like this one, nearest first, leaving out the picture itself and the rest of its stack. Click one to walk these pictures in the viewer. **Show all** opens the **Media** page with every picture like it. Not shown for recordings.                                                                                                                                                                                                                                    |
 | Comments          | Comments on the file, with who wrote them and when: the full name set on their account (its username when it has none), beside the picture of the person the account is linked to ([Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)). Everyone who can see the file reads them. If you may change the file, write one in **Add a comment…** and press **Comment**. The bin beside a comment of your own (**Delete comment**) removes it.                  |
-| Details           | A folded section for the machine-written facts. See [The Details section](#the-details-section).                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Details           | The machine-written facts, folded until you open it. See [The Details section](#the-details-section).                                                                                                                                                                                                                                                                                                                                                                                                   |
+| EXIF              | Every tag the file carries, one per row, or **No EXIF recorded**. Folded until you open it.                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### People in the picture
 
@@ -234,8 +238,8 @@ describes the review and how recognition works.
 
 ### The Details section
 
-**Details**, at the bottom of the panel, unfolds the facts a reader seldom needs. Whether it is open
-is remembered in this browser, for the next picture and the next visit.
+**Details**, near the bottom of the panel, holds the facts a reader seldom needs. It is folded until
+you click its icon, and then stays open for the next picture and the next visit, like any row.
 
 | Row                       | What it shows                                                                                                                                                                                                                                |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -248,7 +252,6 @@ is remembered in this browser, for the next picture and the next visit.
 | **Time source**           | Where the date came from, in words, and any note left with it.                                                                                                                                                                               |
 | **Created**, **Modified** | The file's created and modified times.                                                                                                                                                                                                       |
 | Hashes                    | Fingerprints of the file's bytes, such as `sha256`.                                                                                                                                                                                          |
-| EXIF tags                 | Every tag the file carries, one per row, or **No EXIF recorded**.                                                                                                                                                                            |
 
 ## Change a file from the cog menu
 
@@ -384,7 +387,7 @@ service is back.
 When the reading came out wrong because EiN took the text for another language, choose the language
 yourself:
 
-1. Open **Details** at the bottom of the details panel.
+1. Unfold **Details** near the bottom of the details panel: click its icon.
 2. In **Text language**, choose the language. The menu starts at **Automatic**, which shows what was
    detected, such as **Automatic: English (93%)**, and offers Swedish, Finnish, English, Danish,
    Norwegian, German and French.

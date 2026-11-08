@@ -2635,7 +2635,7 @@ location-update /archive/locations/ekbacksvagen --clear description</code></pre>
 <p>With <code>JSON_OUTPUT=1</code>: which fields changed.</p>
 <h2 id="m">M<a class="anchor" href="#m" aria-label="Link to this section"></a></h2>
 <h3 id="media-details"><code>media-details</code><a class="anchor" href="#media-details" aria-label="Link to this section"></a></h3>
-<p>Read description, time, location, location, device with owners, albums, tagged people (with age) and comments for a media file.</p>
+<p>Read description, time, location, device with owners, albums, tagged people (with age), comments and versions for a media file.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>media-details [--album=&lt;path&gt;] [--fields=&lt;string&gt;] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2669,7 +2669,7 @@ location-update /archive/locations/ekbacksvagen --clear description</code></pre>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>media-details /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the file&#39;s description, when and where it was taken, its albums, and the people in it with their ages.</p>
+<p>With <code>JSON_OUTPUT=1</code>: the file&#39;s description, when and where it was taken, its albums, the people in it with their ages, and its versions.</p>
 <h3 id="media-heal"><code>media-heal</code><a class="anchor" href="#media-heal" aria-label="Link to this section"></a></h3>
 <p>Start a pass of media-scan over the albums or a staging area when one is due, and none while a pass runs.</p>
 <p><small>changes things</small></p>

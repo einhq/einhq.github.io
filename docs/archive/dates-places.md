@@ -21,7 +21,7 @@ on a phone the date is centred over the top of the picture and the bar at the fo
 
 The details panel (**Details (i)**, or <kbd>i</kbd>; on a phone, swipe up) shows more. Its place
 section has the location's name as a link, the street address and a small map with **Enlarge map**.
-The **Details** fold at its foot holds **Taken at** (the date exactly as stored, with its time zone),
+The **Details** row near its foot, folded until you click its icon, holds **Taken at** (the date exactly as stored, with its time zone),
 **Taken at (UTC)** and **Time source**. [Viewing photos, videos and recordings](viewer.md) covers the
 rest of the panel.
 
@@ -228,7 +228,7 @@ it that way and never adds a day or an hour nobody knew. The **Set time** dialog
 only, so a vague date is given in the [terminal](../shell/terminal.md) with `file-set-time`.
 
 1. Open the picture in the viewer and open the details panel.
-2. Open the **Details** fold at its foot and click the path under **Path**. A terminal tab opens,
+2. Unfold the **Details** row near its foot by clicking its icon, and click the path under **Path**. A terminal tab opens,
    standing in the picture itself, so `.` names the picture.
 3. Type `file-set-time`, the picture and the date:
 
