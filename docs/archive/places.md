@@ -127,7 +127,7 @@ A location gets its place on the map from the first of these that gives one:
 | ------------ | ----------------- | ------------------------------------------------- |
 | Set by hand  | set by hand       | "Set by hand"                                     |
 | Its pictures | from N photos     | "Derived from N geotagged photos spread over N m" |
-| A stay       | from a track      | "Where a camera stayed, from its track"           |
+| A stay       | from a track      | "A stay on a track"                               |
 | Its address  | from address      | "Geocoded from the address"                       |
 
 An address is looked up in Sweden first, and in the rest of the world when Sweden has no match. A
