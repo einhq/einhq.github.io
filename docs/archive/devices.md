@@ -94,8 +94,8 @@ The quickest way to register a camera is from the pictures it took.
    **Scanner or digitizer** or **Video times in UTC** if they apply (see
    [Clocks, time zones and scanners](#clocks-time-zones-and-scanners)).
 6. Click **Register**. The files the camera took are linked to it and dated by its settings, and
-   the device's page opens. For a camera known only by its make and model this can take minutes in
-   a large archive.
+   the device's page opens. The more files carry its fingerprint, the longer this takes: some
+   minutes for a camera with tens of thousands of pictures.
 
 **Rescan** at the top of the unregistered list looks again, for instance after a large import.
 When every camera is registered, the list says "Every camera the media names is registered (N files
@@ -214,8 +214,9 @@ Linking also dates the files again by the device's settings, which is what "upda
 Files that are already linked to another device are left with it.
 
 The button is shown only to those who may change the device, and only when the device has a serial
-number or both a make and a model. Looking for its serial number is quick; looking for its make and
-model can take minutes in a large archive, and a device that has both is looked for both ways.
+number or both a make and a model. A device that has both is looked for both ways. The more files
+carry its fingerprint, the longer it takes: some minutes for a camera with tens of thousands of
+pictures.
 
 ## Change a device's settings
 
