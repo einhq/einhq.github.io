@@ -170,8 +170,8 @@ explains them.
 
 The command line is edited with bash's keys: <kbd>Tab</kbd> completes, <kbd>↑</kbd> and
 <kbd>↓</kbd> walk your history, <kbd>Ctrl</kbd>+<kbd>R</kbd> searches it (and does not reload the
-page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command and <kbd>Ctrl</kbd>+<kbd>D</kbd>
-on an empty line ends the shell. [Edit the command line](../shell/terminal.md#edit-the-command-line)
+page; <kbd>F5</kbd> does), <kbd>Ctrl</kbd>+<kbd>C</kbd> stops a command, and <kbd>Ctrl</kbd>+<kbd>D</kbd>
+ends the input of the command reading the terminal, or on an empty line the shell. [Edit the command line](../shell/terminal.md#edit-the-command-line)
 has the full list. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.
 
 In an `ssh` session to another machine, <kbd>~</kbd> then <kbd>.</kbd> at the start of a line cuts

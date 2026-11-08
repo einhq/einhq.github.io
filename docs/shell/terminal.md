@@ -187,19 +187,19 @@ Only the terminal in the browser draws pictures. Over SSH, `cat` prints marker l
 The line you type is edited with the keys of bash on Linux, in its default (emacs) mode. The ones
 used most:
 
-| Keys                                                                                         | What they do                                                                  |
-| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| <kbd>Tab</kbd>                                                                               | Complete what you are typing (see [Let Tab complete](#let-tab-complete))      |
-| <kbd>↑</kbd> <kbd>↓</kbd>                                                                    | The previous and the next command from your history                           |
-| <kbd>Ctrl</kbd>+<kbd>R</kbd>                                                                 | Search your history as you type                                               |
-| <kbd>Home</kbd> <kbd>End</kbd>, or <kbd>Ctrl</kbd>+<kbd>A</kbd> <kbd>Ctrl</kbd>+<kbd>E</kbd> | Start and end of the line                                                     |
-| <kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>                                    | A word left or right                                                          |
-| <kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd>                                  | Cut from the cursor to the end / to the start of the line                     |
-| <kbd>Ctrl</kbd>+<kbd>Y</kbd>                                                                 | Paste what you cut last                                                       |
-| <kbd>Alt</kbd>+<kbd>.</kbd>                                                                  | Insert the last word of the previous command (not with ⌥ on a Mac)            |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                                                                 | At the prompt: drop the line (`^C` is printed). While a command runs: stop it |
-| <kbd>Ctrl</kbd>+<kbd>D</kbd>                                                                 | On an empty line: end the shell and its tab                                   |
-| <kbd>Ctrl</kbd>+<kbd>L</kbd>                                                                 | Clear the screen, as the command `clear` does                                 |
+| Keys                                                                                         | What they do                                                                     |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <kbd>Tab</kbd>                                                                               | Complete what you are typing (see [Let Tab complete](#let-tab-complete))         |
+| <kbd>↑</kbd> <kbd>↓</kbd>                                                                    | The previous and the next command from your history                              |
+| <kbd>Ctrl</kbd>+<kbd>R</kbd>                                                                 | Search your history as you type                                                  |
+| <kbd>Home</kbd> <kbd>End</kbd>, or <kbd>Ctrl</kbd>+<kbd>A</kbd> <kbd>Ctrl</kbd>+<kbd>E</kbd> | Start and end of the line                                                        |
+| <kbd>Ctrl</kbd>+<kbd>←</kbd> <kbd>Ctrl</kbd>+<kbd>→</kbd>                                    | A word left or right                                                             |
+| <kbd>Ctrl</kbd>+<kbd>K</kbd> / <kbd>Ctrl</kbd>+<kbd>U</kbd>                                  | Cut from the cursor to the end / to the start of the line                        |
+| <kbd>Ctrl</kbd>+<kbd>Y</kbd>                                                                 | Paste what you cut last                                                          |
+| <kbd>Alt</kbd>+<kbd>.</kbd>                                                                  | Insert the last word of the previous command (not with ⌥ on a Mac)               |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                                                                 | At the prompt: drop the line (`^C` is printed). While a command runs: stop it    |
+| <kbd>Ctrl</kbd>+<kbd>D</kbd>                                                                 | On an empty line: end the shell and its tab. While a command runs: end its input |
+| <kbd>Ctrl</kbd>+<kbd>L</kbd>                                                                 | Clear the screen, as the command `clear` does                                    |
 
 Some keys mean something else in the browser:
 
@@ -215,6 +215,10 @@ Some keys mean something else in the browser:
 While a command runs, what you type goes to it, and <kbd>Enter</kbd> ends a line as in any Linux
 terminal. A command that reads the terminal takes your line when you press it: `head -n1` returns
 the one line you type, and `xargs -o` gives each command it runs the terminal to read from.
+<kbd>Ctrl</kbd>+<kbd>D</kbd> ends the input of the command reading the terminal, so it finishes
+with what you typed: `cat > notes.txt` saves your lines, `sort` and `wc -l` print their answer, and
+`read` takes a line you did not end with <kbd>Enter</kbd>. The next command reads the terminal
+again. <kbd>Ctrl</kbd>+<kbd>C</kbd> stops the command instead.
 
 <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a running command. Start a long one in the background
 with `&` instead; [The shell language](bash.md) covers jobs.
