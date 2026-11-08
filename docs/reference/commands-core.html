@@ -4415,7 +4415,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 </tr>
 <tr>
 <td><code>--subject=&lt;string&gt;</code></td>
-<td>media a subject has, as <kind>:<slug or path> (person:anna-exempel, location:…, device:…) or a path; any kind a subject-<kind> command answers for (repeatable, intersected). For a town or country use --bbox from location-region.</td>
+<td>media a subject has, as <kind>:<slug or path> (person:anna-exempel, location:…, camera:…) or a path; any kind a subject-<kind> command answers for (repeatable, intersected). For a town or country use --bbox from location-region.</td>
 </tr>
 <tr>
 <td><code>--subject-name=&lt;string&gt;</code></td>
@@ -5440,8 +5440,8 @@ top -d 5</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>track-token /archive/devices/sailboat/track
-track-token /archive/devices/sailboat/track --new</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>track-token /archive/devices/sailboat/position/history
+track-token /archive/devices/sailboat/position/history --new</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: TrackToken: whether the track takes tracker posts, and the path of its link.</p>
 <h3 id="trash"><code>trash</code><a class="anchor" href="#trash" aria-label="Link to this section"></a></h3>
 <p>Move nodes into the reader&#39;s trash, alone or as one batch, list it, restore entries, or empty it.</p>

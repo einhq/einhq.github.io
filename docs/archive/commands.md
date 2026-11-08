@@ -4,7 +4,7 @@
 
 The commands the archive module adds. They are there once the module is installed. 141 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [device](#device) · [device-cover](#device-cover) · [device-create](#device-create) · [device-home](#device-home) · [device-info](#device-info) · [device-link](#device-link) · [device-list](#device-list) · [device-match](#device-match) · [device-relink](#device-relink) · [device-remove-owner](#device-remove-owner) · [device-scan](#device-scan) · [device-set-owner](#device-set-owner) · [device-timeline](#device-timeline) · [device-update](#device-update) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-time](#file-set-time) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-device](#search-device) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-device](#subject-device) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-create](#track-create) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [track-weather](#track-weather) · [tracker-setup](#tracker-setup) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather) · [weather-photo](#weather-photo)
+[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [album-track-add](#album-track-add) · [album-track-list](#album-track-list) · [album-track-rm](#album-track-rm) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [camera](#camera) · [camera-cover](#camera-cover) · [camera-create](#camera-create) · [camera-info](#camera-info) · [camera-link](#camera-link) · [camera-list](#camera-list) · [camera-match](#camera-match) · [camera-relink](#camera-relink) · [camera-remove-owner](#camera-remove-owner) · [camera-scan](#camera-scan) · [camera-set-owner](#camera-set-owner) · [camera-timeline](#camera-timeline) · [camera-track](#camera-track) · [camera-update](#camera-update) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-time](#file-set-time) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-camera](#search-camera) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-camera](#subject-camera) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-home](#track-home) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [track-update](#track-update) · [track-weather](#track-weather) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather) · [weather-photo](#weather-photo)
 
 ## A
 
@@ -73,67 +73,6 @@ album-cover --all --stale --limit 50
 ```
 
 With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink is written for each album that had none.
-
-### `album-device-add`
-
-Put devices on an album's list, whose tracks its map draws.
-
-<small>changes things</small>
-
-```text
-album-device-add <album> <device>...
-```
-
-| Argument      | What it is                            |
-| ------------- | ------------------------------------- |
-| `<album>`     | the album.                            |
-| `<device>...` | devices, by their path or their slug. |
-
-```bash
-album-device-add /archive/albums/Exempelalbum_2019 gps-tracker
-album-device-add /archive/albums/Exempelalbum_2019 /archive/devices/exempelkamera
-```
-
-### `album-device-list`
-
-The devices whose tracks an album's map draws: those that took its media and those added by hand, and the devices of its media removed from the list.
-
-<small>reads only</small>
-
-```text
-album-device-list <album>
-```
-
-| Argument  | What it is                     |
-| --------- | ------------------------------ |
-| `<album>` | the album, or a folder in one. |
-
-```bash
-album-device-list /archive/albums/Exempelalbum_2019
-JSON_OUTPUT=1 album-device-list /archive/albums/Exempelalbum_2019
-```
-
-With `JSON_OUTPUT=1`: each listed device's path and name, whether it took some of the album's media (and how many) or was added by hand; and the devices that took some of its media but were removed from the list.
-
-### `album-device-rm`
-
-Take devices off an album's list, whose tracks its map draws.
-
-<small>changes things</small>
-
-```text
-album-device-rm <album> <device>...
-```
-
-| Argument      | What it is                            |
-| ------------- | ------------------------------------- |
-| `<album>`     | the album.                            |
-| `<device>...` | devices, by their path or their slug. |
-
-```bash
-album-device-rm /archive/albums/Exempelalbum_2019 gps-tracker
-album-device-rm /archive/albums/Exempelalbum_2019 /archive/devices/exempelkamera
-```
 
 ### `album-profile`
 
@@ -234,6 +173,67 @@ album-stack front /archive/albums/Exempelalbum_2019 /archive/albums/Exempelalbum
 ```
 
 With `JSON_OUTPUT=1`: refresh: how many albums were scanned and changed, stacks and stacked photos, and per album its manifest; the others: the album and member acted on.
+
+### `album-track-add`
+
+Put tracks on an album's list, which its map draws.
+
+<small>changes things</small>
+
+```text
+album-track-add <album> <track>...
+```
+
+| Argument     | What it is                                                                             |
+| ------------ | -------------------------------------------------------------------------------------- |
+| `<album>`    | the album.                                                                             |
+| `<track>...` | tracks: the track's path, or a device or camera that has one, by its path or its name. |
+
+```bash
+album-track-add /archive/albums/Exempelalbum_2019 sailboat
+album-track-add /archive/albums/Exempelalbum_2019 /archive/devices/sailboat/position/history
+```
+
+### `album-track-list`
+
+The tracks an album's map draws: those the cameras of its media record into and those added by hand, and the tracks of its media removed from the list.
+
+<small>reads only</small>
+
+```text
+album-track-list <album>
+```
+
+| Argument  | What it is                     |
+| --------- | ------------------------------ |
+| `<album>` | the album, or a folder in one. |
+
+```bash
+album-track-list /archive/albums/Exempelalbum_2019
+JSON_OUTPUT=1 album-track-list /archive/albums/Exempelalbum_2019
+```
+
+With `JSON_OUTPUT=1`: each listed track's path and name, whether cameras of the album's media record into it (and how many of the media they took) or it was added by hand; and the tracks of its media removed from the list.
+
+### `album-track-rm`
+
+Take tracks off an album's list, which its map draws.
+
+<small>changes things</small>
+
+```text
+album-track-rm <album> <track>...
+```
+
+| Argument     | What it is                                                                             |
+| ------------ | -------------------------------------------------------------------------------------- |
+| `<album>`    | the album.                                                                             |
+| `<track>...` | tracks: the track's path, or a device or camera that has one, by its path or its name. |
+
+```bash
+album-track-rm /archive/albums/Exempelalbum_2019 sailboat
+album-track-rm /archive/albums/Exempelalbum_2019 /archive/devices/sailboat/position/history
+```
 
 ### `archive-bridge`
 
@@ -409,6 +409,281 @@ With `JSON_OUTPUT=1`: AutoAlbumClusterReport: the media read, the home each year
 
 ## C
 
+### `camera`
+
+Camera and recording camera management.
+
+```text
+camera <subcommand>
+```
+
+| Argument       | What it is                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `<subcommand>` | Subcommand: create, info, update, list, match, scan, link, relink, set-owner, remove-owner, cover, timeline, track. |
+
+### `camera-cover`
+
+Give a camera without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink)
+
+<small>changes things</small>
+
+```text
+camera-cover [--all] [--media] [--verbose] <camera>
+```
+
+| Argument   | What it is                                             |
+| ---------- | ------------------------------------------------------ |
+| `<camera>` | camera path, or with --media a media file (repeatable) |
+
+| Option      | What it does                                                   |
+| ----------- | -------------------------------------------------------------- |
+| `--all`     | every camera.                                                  |
+| `--media`   | the paths are media files: cover the camera each is linked to. |
+| `--verbose` | print each camera as its cover is written.                     |
+
+```bash
+camera-cover /archive/cameras/Canon_EOS_5D
+camera-cover --all
+camera-cover --media /archive/albums/Exempelalbum_2019/files/clip.mp4
+```
+
+With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink to its newest picture (or video) is written for each camera without a cover somebody chose.
+
+### `camera-create`
+
+Create a camera node and link the media already carrying its fingerprint.
+
+<small>changes things</small>
+
+```text
+camera-create [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] <target>
+```
+
+| Argument   | What it is                                                      |
+| ---------- | --------------------------------------------------------------- |
+| `<target>` | VFS path for the camera node (default: /archive/cameras/<name>) |
+
+| Option                   | What it does                                                            |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `--name=<string>`        | display name (required)                                                 |
+| `--make=<string>`        | manufacturer, as exif writes it.                                        |
+| `--model=<string>`       | model, as exif writes it.                                               |
+| `--serial=<string>`      | serial number (the strong match key)                                    |
+| `--timezone=<string>`    | IANA timezone, e.g. Europe/Stockholm.                                   |
+| `--digitizer`            | scanner whose camera dates are digitisation times, not capture times.   |
+| `--quicktime-utc`        | keeps its videos' QuickTime CreateDate in UTC (phones), not local time. |
+| `--description=<string>` | free-text note.                                                         |
+
+### `camera-info`
+
+Show camera details and owners.
+
+<small>reads only</small>
+
+```text
+camera-info <target>
+```
+
+| Argument   | What it is               |
+| ---------- | ------------------------ |
+| `<target>` | VFS path to camera node. |
+
+### `camera-link`
+
+Link a file to its capture camera using extracted exif, or to a camera named by hand.
+
+<small>changes things</small>
+
+```text
+camera-link [--camera=<path>] [-v] <input>
+```
+
+| Argument  | What it is                                                               |
+| --------- | ------------------------------------------------------------------------ |
+| `<input>` | VFS path to media file; with --camera, files or directories (repeatable) |
+
+| Option            | What it does                                                                                   |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| `--camera=<path>` | link to this camera instead of matching the exif (directories link the files directly in them) |
+| `-v`              | Verbose output.                                                                                |
+
+### `camera-list`
+
+List all cameras.
+
+<small>reads only</small>
+
+```text
+camera-list <root>
+```
+
+| Argument | What it is                                   |
+| -------- | -------------------------------------------- |
+| `<root>` | Camera directory (default: /archive/cameras) |
+
+### `camera-match`
+
+Match a camera by serial number or make/model.
+
+<small>reads only</small>
+
+```text
+camera-match [--serial=<string>] [--make=<string>] [--model=<string>] [--root=<string>]
+```
+
+| Option              | What it does                                 |
+| ------------------- | -------------------------------------------- |
+| `--serial=<string>` | Camera serial number.                        |
+| `--make=<string>`   | Camera manufacturer.                         |
+| `--model=<string>`  | Camera model.                                |
+| `--root=<string>`   | Camera directory (default: /archive/cameras) |
+
+### `camera-relink`
+
+Link existing media to a registered camera by its fingerprint.
+
+<small>changes things</small>
+
+```text
+camera-relink [--all] [--force] [--dry-run] [--reapply] <camera>
+```
+
+| Argument   | What it is                                |
+| ---------- | ----------------------------------------- |
+| `<camera>` | VFS path to camera node (omit with --all) |
+
+| Option      | What it does                                                                        |
+| ----------- | ----------------------------------------------------------------------------------- |
+| `--all`     | sweep every registered camera that has a fingerprint.                               |
+| `--force`   | relink files already claimed by another camera.                                     |
+| `--dry-run` | report what would change without writing.                                           |
+| `--reapply` | link nothing; only re-date the files already linked (after a clock setting changed) |
+
+### `camera-remove-owner`
+
+Unlink a person from a camera (removes both halves)
+
+<small>changes things</small>
+
+```text
+camera-remove-owner <camera> <person>
+```
+
+| Argument   | What it is                                       |
+| ---------- | ------------------------------------------------ |
+| `<camera>` | VFS path to camera node.                         |
+| `<person>` | VFS path to person node, or the owner link name. |
+
+### `camera-scan`
+
+Propose cameras seen in media but not registered.
+
+<small>reads only</small>
+
+```text
+camera-scan [--limit=<string>]
+```
+
+| Option             | What it does                          |
+| ------------------ | ------------------------------------- |
+| `--limit=<string>` | max proposals to report (default 100) |
+
+### `camera-set-owner`
+
+Link a person as owner of a camera (dated relation pair)
+
+<small>changes things</small>
+
+```text
+camera-set-owner [--from=<string>] [--to=<string>] [--update] <camera> <person>
+```
+
+| Argument   | What it is               |
+| ---------- | ------------------------ |
+| `<camera>` | VFS path to camera node. |
+| `<person>` | VFS path to person node. |
+
+| Option            | What it does                                                        |
+| ----------------- | ------------------------------------------------------------------- |
+| `--from=<string>` | ownership start date (YYYY[-MM[-DD]])                               |
+| `--to=<string>`   | ownership end date (YYYY[-MM[-DD]])                                 |
+| `--update`        | rewrite the dates of an existing owner; an omitted date is cleared. |
+
+### `camera-timeline`
+
+One camera's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took.
+
+<small>reads only</small>
+
+```text
+camera-timeline [--no-albums] <target>
+```
+
+| Argument   | What it is               |
+| ---------- | ------------------------ |
+| `<target>` | VFS path to camera node. |
+
+| Option        | What it does                                 |
+| ------------- | -------------------------------------------- |
+| `--no-albums` | skip the albums, which are most of the cost. |
+
+```bash
+camera-timeline /archive/cameras/canon-eos
+```
+
+With `JSON_OUTPUT=1`: the camera's history in order: owners getting and giving it up, its events and the albums with photos it took.
+
+### `camera-track`
+
+Link a camera to the track it records into, such as a phone that also records where it was, or take the link away.
+
+<small>changes things</small>
+
+```text
+camera-track [--none] <camera> <track>
+```
+
+| Argument   | What it is                                                                     |
+| ---------- | ------------------------------------------------------------------------------ |
+| `<camera>` | the camera, by its path or its slug.                                           |
+| `<track>`  | the track's path, or a device or camera that has one, by its path or its name. |
+
+| Option   | What it does        |
+| -------- | ------------------- |
+| `--none` | take the link away. |
+
+```bash
+camera-track anna-phone anna-phone-tracker
+camera-track /archive/cameras/anna-phone /archive/devices/anna-phone-tracker/position/history
+camera-track anna-phone --none
+```
+
+### `camera-update`
+
+Change a camera's settings.
+
+<small>changes things</small>
+
+```text
+camera-update [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] [--clear=<string>] <camera>
+```
+
+| Argument   | What it is               |
+| ---------- | ------------------------ |
+| `<camera>` | VFS path to camera node. |
+
+| Option                   | What it does                                                           |
+| ------------------------ | ---------------------------------------------------------------------- |
+| `--name=<string>`        | display name.                                                          |
+| `--make=<string>`        | manufacturer, as exif writes it.                                       |
+| `--model=<string>`       | model, as exif writes it.                                              |
+| `--serial=<string>`      | serial number (the strong match key)                                   |
+| `--timezone=<string>`    | IANA timezone its clock was set to, e.g. Europe/Stockholm.             |
+| `--digitizer`            | mark as a scanner and suppress its camera dates on linked media.       |
+| `--quicktime-utc`        | read its videos' QuickTime CreateDate as UTC (phones), not local time. |
+| `--description=<string>` | free-text note.                                                        |
+| `--clear=<string>`       | remove a field (repeatable)                                            |
+
 ### `cluster-faces`
 
 Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters.
@@ -528,281 +803,6 @@ detect-faces /archive/albums/Exempelalbum_2019/files/MVI_0012.MP4
 
 With `JSON_OUTPUT=1`: each face found, with its box and the crop written under the file; on a video, one per person told apart, with when it is on screen.
 
-### `device`
-
-Camera and recording device management.
-
-```text
-device <subcommand>
-```
-
-| Argument       | What it is                                                                                                |
-| -------------- | --------------------------------------------------------------------------------------------------------- |
-| `<subcommand>` | Subcommand: create, info, update, list, match, scan, relink, set-owner, remove-owner, home, correct-time. |
-
-### `device-cover`
-
-Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink)
-
-<small>changes things</small>
-
-```text
-device-cover [--all] [--media] [--verbose] <device>
-```
-
-| Argument   | What it is                                             |
-| ---------- | ------------------------------------------------------ |
-| `<device>` | device path, or with --media a media file (repeatable) |
-
-| Option      | What it does                                                   |
-| ----------- | -------------------------------------------------------------- |
-| `--all`     | every device.                                                  |
-| `--media`   | the paths are media files: cover the device each is linked to. |
-| `--verbose` | print each device as its cover is written.                     |
-
-```bash
-device-cover /archive/devices/Canon_EOS_5D
-device-cover --all
-device-cover --media /archive/albums/Exempelalbum_2019/files/clip.mp4
-```
-
-With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink to its newest picture (or video) is written for each device without a cover somebody chose.
-
-### `device-create`
-
-Create a device node and link the media already carrying its fingerprint.
-
-<small>changes things</small>
-
-```text
-device-create [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] <target>
-```
-
-| Argument   | What it is                                                      |
-| ---------- | --------------------------------------------------------------- |
-| `<target>` | VFS path for the device node (default: /archive/devices/<name>) |
-
-| Option                   | What it does                                                            |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `--name=<string>`        | display name (required)                                                 |
-| `--make=<string>`        | manufacturer, as exif writes it.                                        |
-| `--model=<string>`       | model, as exif writes it.                                               |
-| `--serial=<string>`      | serial number (the strong match key)                                    |
-| `--timezone=<string>`    | IANA timezone, e.g. Europe/Stockholm.                                   |
-| `--digitizer`            | scanner whose device dates are digitisation times, not capture times.   |
-| `--quicktime-utc`        | keeps its videos' QuickTime CreateDate in UTC (phones), not local time. |
-| `--description=<string>` | free-text note.                                                         |
-
-### `device-home`
-
-List or change a device's home bases, where arriving ends a trip.
-
-<small>reads only</small>
-
-```text
-device-home <device> <action> <location>...
-```
-
-| Argument        | What it is                                                |
-| --------------- | --------------------------------------------------------- |
-| `<device>`      | the device, by its path or its slug.                      |
-| `<action>`      | add, rm or list (the default) One of `add`, `rm`, `list`. |
-| `<location>...` | add, rm: locations, by their path or their slug.          |
-
-```bash
-device-home exempelbaten add Exempelhamnen
-device-home exempelbaten list
-device-home /archive/devices/exempelbaten rm /archive/locations/Exempelhamnen
-```
-
-With `JSON_OUTPUT=1`: list: the home bases, each with its location, name, source (device, or owner with the span) and point when it has one.
-
-### `device-info`
-
-Show device details and owners.
-
-<small>reads only</small>
-
-```text
-device-info <target>
-```
-
-| Argument   | What it is               |
-| ---------- | ------------------------ |
-| `<target>` | VFS path to device node. |
-
-### `device-link`
-
-Link a file to its capture device using extracted exif, or to a device named by hand.
-
-<small>changes things</small>
-
-```text
-device-link [--device=<path>] [-v] <input>
-```
-
-| Argument  | What it is                                                               |
-| --------- | ------------------------------------------------------------------------ |
-| `<input>` | VFS path to media file; with --device, files or directories (repeatable) |
-
-| Option            | What it does                                                                                   |
-| ----------------- | ---------------------------------------------------------------------------------------------- |
-| `--device=<path>` | link to this device instead of matching the exif (directories link the files directly in them) |
-| `-v`              | Verbose output.                                                                                |
-
-### `device-list`
-
-List all devices.
-
-<small>reads only</small>
-
-```text
-device-list <root>
-```
-
-| Argument | What it is                                   |
-| -------- | -------------------------------------------- |
-| `<root>` | Device directory (default: /archive/devices) |
-
-### `device-match`
-
-Match a device by serial number or make/model.
-
-<small>reads only</small>
-
-```text
-device-match [--serial=<string>] [--make=<string>] [--model=<string>] [--root=<string>]
-```
-
-| Option              | What it does                                 |
-| ------------------- | -------------------------------------------- |
-| `--serial=<string>` | Device serial number.                        |
-| `--make=<string>`   | Camera manufacturer.                         |
-| `--model=<string>`  | Camera model.                                |
-| `--root=<string>`   | Device directory (default: /archive/devices) |
-
-### `device-relink`
-
-Link existing media to a registered device by its fingerprint.
-
-<small>changes things</small>
-
-```text
-device-relink [--all] [--force] [--dry-run] [--reapply] <device>
-```
-
-| Argument   | What it is                                |
-| ---------- | ----------------------------------------- |
-| `<device>` | VFS path to device node (omit with --all) |
-
-| Option      | What it does                                                                        |
-| ----------- | ----------------------------------------------------------------------------------- |
-| `--all`     | sweep every registered device that has a fingerprint.                               |
-| `--force`   | relink files already claimed by another device.                                     |
-| `--dry-run` | report what would change without writing.                                           |
-| `--reapply` | link nothing; only re-date the files already linked (after a clock setting changed) |
-
-### `device-remove-owner`
-
-Unlink a person from a device (removes both halves)
-
-<small>changes things</small>
-
-```text
-device-remove-owner <device> <person>
-```
-
-| Argument   | What it is                                       |
-| ---------- | ------------------------------------------------ |
-| `<device>` | VFS path to device node.                         |
-| `<person>` | VFS path to person node, or the owner link name. |
-
-### `device-scan`
-
-Propose devices seen in media but not registered.
-
-<small>reads only</small>
-
-```text
-device-scan [--limit=<string>]
-```
-
-| Option             | What it does                          |
-| ------------------ | ------------------------------------- |
-| `--limit=<string>` | max proposals to report (default 100) |
-
-### `device-set-owner`
-
-Link a person as owner of a device (dated relation pair)
-
-<small>changes things</small>
-
-```text
-device-set-owner [--from=<string>] [--to=<string>] [--update] <device> <person>
-```
-
-| Argument   | What it is               |
-| ---------- | ------------------------ |
-| `<device>` | VFS path to device node. |
-| `<person>` | VFS path to person node. |
-
-| Option            | What it does                                                        |
-| ----------------- | ------------------------------------------------------------------- |
-| `--from=<string>` | ownership start date (YYYY[-MM[-DD]])                               |
-| `--to=<string>`   | ownership end date (YYYY[-MM[-DD]])                                 |
-| `--update`        | rewrite the dates of an existing owner; an omitted date is cleared. |
-
-### `device-timeline`
-
-One device's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took.
-
-<small>reads only</small>
-
-```text
-device-timeline [--no-albums] <target>
-```
-
-| Argument   | What it is               |
-| ---------- | ------------------------ |
-| `<target>` | VFS path to device node. |
-
-| Option        | What it does                                 |
-| ------------- | -------------------------------------------- |
-| `--no-albums` | skip the albums, which are most of the cost. |
-
-```bash
-device-timeline /archive/devices/canon-eos
-```
-
-With `JSON_OUTPUT=1`: the device's history in order: owners getting and giving it up, its events and the albums with photos it took.
-
-### `device-update`
-
-Change a device's settings.
-
-<small>changes things</small>
-
-```text
-device-update [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--kind=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] [--clear=<string>] <device>
-```
-
-| Argument   | What it is               |
-| ---------- | ------------------------ |
-| `<device>` | VFS path to device node. |
-
-| Option                   | What it does                                                             |
-| ------------------------ | ------------------------------------------------------------------------ |
-| `--name=<string>`        | display name.                                                            |
-| `--make=<string>`        | manufacturer, as exif writes it.                                         |
-| `--model=<string>`       | model, as exif writes it.                                                |
-| `--serial=<string>`      | serial number (the strong match key)                                     |
-| `--timezone=<string>`    | IANA timezone, e.g. Europe/Stockholm.                                    |
-| `--kind=<string>`        | how it travels, which sets how its track is read: boat, car, bike, foot. |
-| `--digitizer`            | mark as a scanner and suppress its device dates on linked media.         |
-| `--quicktime-utc`        | read its videos' QuickTime CreateDate as UTC (phones), not local time.   |
-| `--description=<string>` | free-text note.                                                          |
-| `--clear=<string>`       | remove a field (repeatable)                                              |
-
 ### `duplicates`
 
 Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum)
@@ -868,7 +868,7 @@ With `JSON_OUTPUT=1`: each birthday, milestone memorial and wedding anniversary 
 
 ### `exif-interpret`
 
-Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar.
+Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar.
 
 <small>changes things</small>
 
@@ -1361,7 +1361,7 @@ With `JSON_OUTPUT=1`: the address the coordinates resolved to.
 
 ### `gpx-info`
 
-Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the registered devices each names.
+Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the archive's tracks each names.
 
 <small>reads only</small>
 
@@ -1606,7 +1606,7 @@ With `JSON_OUTPUT=1`: which fields changed.
 
 ### `media-details`
 
-Read description, time, location, device with owners, albums, tagged people (with age), comments and versions for a media file.
+Read description, time, location, camera with owners, albums, tagged people (with age), comments and versions for a media file.
 
 <small>reads only</small>
 
@@ -1658,20 +1658,20 @@ Re-resolve media originals' capture times from their stored exif and manual sour
 <small>changes things</small>
 
 ```text
-media-resolve-time [--dry-run] [--under=<path>] [--device=<path>] [-v]
+media-resolve-time [--dry-run] [--under=<path>] [--camera=<path>] [-v]
 ```
 
 | Option            | What it does                                                                |
 | ----------------- | --------------------------------------------------------------------------- |
 | `--dry-run`       | report what would change, write nothing.                                    |
 | `--under=<path>`  | only the files in the tree under this directory or album, or this one file. |
-| `--device=<path>` | only files linked to this device (its devicePath)                           |
+| `--camera=<path>` | only files linked to this camera (its cameraPath)                           |
 | `-v`              | print every file that changes.                                              |
 
 ```bash
 media-resolve-time --dry-run
 media-resolve-time --under /archive/albums/Exempelalbum_2019
-media-resolve-time --device /archive/devices/Exempelkamera --dry-run
+media-resolve-time --camera /archive/cameras/Exempelkamera --dry-run
 ```
 
 With `JSON_OUTPUT=1`: how many files had their capture time re-resolved, and from which source.
@@ -1885,7 +1885,7 @@ With `JSON_OUTPUT=1`: whatever the subcommand answers with; 'person' alone lists
 
 ### `person-add-event`
 
-Add an event (blob) to a person, album, location or device.
+Add an event (blob) to a person, album, location or camera.
 
 <small>changes things</small>
 
@@ -1895,7 +1895,7 @@ person-add-event [--type=<string>] [--date=<string>] [--qualifier=<string>] [--b
 
 | Argument   | What it is                                                                                 |
 | ---------- | ------------------------------------------------------------------------------------------ |
-| `<target>` | VFS path to the person, album, location or device.                                         |
+| `<target>` | VFS path to the person, album, location or camera.                                         |
 | `[<name>]` | optional event name (e.g. birth, wedding); without one, it is made from the type and date. |
 
 | Option                 | What it does                                                                                                           |
@@ -2667,14 +2667,14 @@ search-album --like /archive/tags/exempeletikett -l 10
 
 With `JSON_OUTPUT=1`: matching albums, one row per channel that found it (name, description, members), best first within each channel.
 
-### `search-device`
+### `search-camera`
 
-Search devices by name, make, model or serial number.
+Search cameras by name, make, model or serial number.
 
 <small>reads only</small>
 
 ```text
-search-device [--kinds] [-l <number>] [--root=<string>] <query>
+search-camera [--kinds] [-l <number>] [--root=<string>] <query>
 ```
 
 | Argument  | What it is         |
@@ -2685,13 +2685,13 @@ search-device [--kinds] [-l <number>] [--root=<string>] <query>
 | ----------------- | ----------------------------------------------------------- |
 | `--kinds`         | print the content kinds this provider can return, and exit. |
 | `-l <number>`     | Max results per channel (default 10)                        |
-| `--root=<string>` | Devices root (default: /archive/devices)                    |
+| `--root=<string>` | Cameras root (default: /archive/cameras)                    |
 
 ```bash
-search-device 'exempelkamera' -l 10
+search-camera 'exempelkamera' -l 10
 ```
 
-With `JSON_OUTPUT=1`: matching devices, one row per channel that found it (name, description), best first within each.
+With `JSON_OUTPUT=1`: matching cameras, one row per channel that found it (name, description), best first within each.
 
 ### `search-document`
 
@@ -2805,7 +2805,7 @@ With `JSON_OUTPUT=1`: matching people, best first, each with a name, a slug and 
 
 ### `search-track`
 
-Search tracks by the name of the device that recorded them, or their description.
+Search tracks by their name, or the device or camera they belong to, or their description.
 
 <small>reads only</small>
 
@@ -2821,7 +2821,7 @@ search-track [--kinds] [-l <number>] [--root=<string>] <query>
 | ----------------- | ----------------------------------------------------------- |
 | `--kinds`         | print the content kinds this provider can return, and exit. |
 | `-l <number>`     | Max results per channel (default 10)                        |
-| `--root=<string>` | Devices root (default: /archive/devices)                    |
+| `--root=<string>` | where to look for tracks (default: /archive)                |
 
 ```bash
 search-track 'exempeltur' -l 10
@@ -2865,10 +2865,10 @@ source-list <node>
 
 | Argument | What it is                                                                 |
 | -------- | -------------------------------------------------------------------------- |
-| `<node>` | the node, such as /archive/devices/<slug>/track or /archive/people/<slug>. |
+| `<node>` | the node, such as /archive/cameras/<slug>/track or /archive/people/<slug>. |
 
 ```bash
-source-list /archive/devices/ruby-iphone/track
+source-list /archive/cameras/ruby-iphone/track
 source-list /archive/people/ruby-wrenfield
 ```
 
@@ -2932,7 +2932,7 @@ staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue
 | `--no-destination`          | category: no default album.                                                                                                                                                                                             |
 | `--strategy=<string>`       | category: how its files are grouped (events, folders, none): by time and place, by folder and file-name run, or into monthly lanes.                                                                                     |
 | `--significance=<string>`   | category: how readily a day becomes a group of its own rather than part of an Everyday lane (fewer, normal, more)                                                                                                       |
-| `--digitized=<string>`      | category: on, its files are digitized copies (scans), and no clock recorded while digitizing them (device, GPS, file name) dates them; off, they do. Its files are dated again.                                         |
+| `--digitized=<string>`      | category: on, its files are digitized copies (scans), and no clock recorded while digitizing them (camera, GPS, file name) dates them; off, they do. Its files are dated again.                                         |
 | `--filename-dates=<string>` | category: on, a date its files' names spell (IMG_20190601_123456.jpg) dates them when nothing better does; off, names are not dates. Its files are dated again.                                                         |
 | `--lane=<string>`           | category: the lane the work on its files runs in (normal, bulk); bulk runs below all other work, for an import of thousands, and applies to work announced from then on.                                                |
 | `--sidecars=<string>`       | category: whether the Google Photos Takeout JSON and XMP sidecars arriving there are paired with their files (pair, ignore), from then on.                                                                              |
@@ -3068,30 +3068,30 @@ subcluster-voices /archive/people/anna-exempel
 
 With `JSON_OUTPUT=1`: the sub-clusters the person's voices fall into, which is how two speakers fused into one show up.
 
-### `subject-device`
+### `subject-camera`
 
-What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers.
+What `search --subject camera:<ref>` asks: the media a camera produced, as the attr equality the store answers.
 
 <small>reads only</small>
 
 ```text
-subject-device [--of=<path>] <ref>...
+subject-camera [--of=<path>] <ref>...
 ```
 
 | Argument   | What it is                       |
 | ---------- | -------------------------------- |
-| `<ref>...` | device slug or path (repeatable) |
+| `<ref>...` | camera slug or path (repeatable) |
 
 | Option        | What it does                                                                                      |
 | ------------- | ------------------------------------------------------------------------------------------------- |
-| `--of=<path>` | a JSON array of media ids: answer with the device that took each, for `search --group-by device`. |
+| `--of=<path>` | a JSON array of media ids: answer with the camera that took each, for `search --group-by camera`. |
 
 ```bash
-JSON_OUTPUT=1 subject-device Exempelkamera_X100
-JSON_OUTPUT=1 subject-device --of /tmp/ids.json
+JSON_OUTPUT=1 subject-camera Exempelkamera_X100
+JSON_OUTPUT=1 subject-camera --of /tmp/ids.json
 ```
 
-With `JSON_OUTPUT=1`: per ref, the path of the device and its media as an attr match, or why the ref names no device; with --of, the devices that took them once each and per media id the ones it has.
+With `JSON_OUTPUT=1`: per ref, the path of the camera and its media as an attr match, or why the ref names no camera; with --of, the cameras that took them once each and per media id the ones it has.
 
 ### `subject-location`
 
@@ -3145,7 +3145,7 @@ With `JSON_OUTPUT=1`: per ref, the path of the person and its media as node ids,
 
 ### `subjects-in`
 
-Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted.
+Who and what the media in an album or folder have: the people in them, their locations, the cameras that took them and the photographers, counted.
 
 <small>reads only</small>
 
@@ -3162,7 +3162,7 @@ subjects-in /archive/albums/Exempelalbum_2019
 JSON_OUTPUT=1 subjects-in /archive/albums/Exempelalbum_2019
 ```
 
-With `JSON_OUTPUT=1`: how many media the container shows and how many carry a position; its people, locations, devices and photographers, each with its path, name and how many of the media have it, the most first.
+With `JSON_OUTPUT=1`: how many media the container shows and how many carry a position; its people, locations, cameras and photographers, each with its path, name and how many of the media have it, the most first.
 
 ## T
 
@@ -3216,19 +3216,19 @@ timeline-facets [--kind=<string>] [--birthdays=<string>] [--anniversaries=<strin
 
 ### `track-append`
 
-Append coordinate points to a device's track.
+Append coordinate points to a track.
 
 <small>changes things</small>
 
 ```text
-track-append [--lat=<string>] [--lng=<string>] [--ts=<string>] [--alt=<string>] [--speed=<string>] [--course=<string>] [--json=<string>] <device> <lat> <lng>
+track-append [--lat=<string>] [--lng=<string>] [--ts=<string>] [--alt=<string>] [--speed=<string>] [--course=<string>] [--json=<string>] <track> <lat> <lng>
 ```
 
-| Argument   | What it is                                                                 |
-| ---------- | -------------------------------------------------------------------------- |
-| `<device>` | the device (slug or path) whose track takes the points, or a track's path. |
-| `<lat>`    | latitude (positional; use --lat= if negative)                              |
-| `<lng>`    | longitude (positional; use --lng= if negative)                             |
+| Argument  | What it is                                                                                                      |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
+| `<track>` | the track that takes the points: the track's path, or a device or camera that has one, by its path or its name. |
+| `<lat>`   | latitude (positional; use --lat= if negative)                                                                   |
+| `<lng>`   | longitude (positional; use --lng= if negative)                                                                  |
 
 | Option              | What it does                                                       |
 | ------------------- | ------------------------------------------------------------------ |
@@ -3240,75 +3240,82 @@ track-append [--lat=<string>] [--lng=<string>] [--ts=<string>] [--alt=<string>] 
 | `--course=<string>` | course over ground in degrees.                                     |
 | `--json=<string>`   | JSON point or array of points (batch mode)                         |
 
-### `track-create`
+### `track-home`
 
-Give a device a track for the coordinate points it recorded (the device's child track)
-
-<small>changes things</small>
-
-```text
-track-create [--description=<string>] [--routing-key=<string>] <device>
-```
-
-| Argument   | What it is                                                |
-| ---------- | --------------------------------------------------------- |
-| `<device>` | the device: its slug under the devices root, or its path. |
-
-| Option                   | What it does                                 |
-| ------------------------ | -------------------------------------------- |
-| `--description=<string>` | track description.                           |
-| `--routing-key=<string>` | relay routing key to append live fixes from. |
-
-```bash
-track-create garmin-etrex --description "Hiking GPS"
-```
-
-With `JSON_OUTPUT=1`: the track's path.
-
-### `track-import`
-
-Import GPX track points into a device's track, keeping a copy of the file in the device's routes/.
-
-<small>changes things</small>
-
-```text
-track-import <device> <gpx>
-```
-
-| Argument   | What it is                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| `<device>` | the device (slug or path) whose track takes the points (made if missing), or a track's path. |
-| `<gpx>`    | VFS path to uploaded GPX file.                                                               |
-
-### `track-list`
-
-List the devices that have a track, with its point count, span and extent.
+List or change a track's home bases, where arriving ends a trip.
 
 <small>reads only</small>
 
 ```text
-track-list <root>
+track-home [--add=<string>] [--remove=<string>] <track>
 ```
 
-| Argument | What it is                                   |
-| -------- | -------------------------------------------- |
-| `<root>` | Device directory (default: /archive/devices) |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
 
-With `JSON_OUTPUT=1`: one row per device with a track.
+| Option              | What it does                                                             |
+| ------------------- | ------------------------------------------------------------------------ |
+| `--add=<string>`    | make a location a home base, by its path or its slug (repeatable)        |
+| `--remove=<string>` | take a location off the home bases, by its path or its slug (repeatable) |
 
-### `track-mark`
+```bash
+track-home sailboat
+track-home sailboat --add exempelhamnen
+track-home /archive/devices/sailboat/position/history --remove /archive/locations/exempelhamnen
+```
 
-Reject or accept the fixes of a time range of a device's track by hand, overruling its rules, or clear that.
+With `JSON_OUTPUT=1`: without a change: the home bases, each with its location, name, source (track, or owner with the span) and point when it has one.
+
+### `track-import`
+
+Import GPX track points into a track, keeping a copy of the file in the track's routes/.
 
 <small>changes things</small>
 
 ```text
-track-mark [--from=<string>] [--to=<string>] [--near=<string>] [--within=<string>] [--marked=<string>] [--reject] [--accept] [--clear] <device>
+track-import <track> <gpx>
 ```
 
-| Argument   | What it is                                                        |
-| ---------- | ----------------------------------------------------------------- |
-| `<device>` | the device (slug or path) whose track to mark, or a track's path. |
+| Argument  | What it is                                                                                                      |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
+| `<track>` | the track that takes the points: the track's path, or a device or camera that has one, by its path or its name. |
+| `<gpx>`   | VFS path to uploaded GPX file.                                                                                  |
+
+### `track-list`
+
+List the tracks, with their name, kind, point count, span and extent.
+
+<small>reads only</small>
+
+```text
+track-list <within>
+```
+
+| Argument   | What it is                                   |
+| ---------- | -------------------------------------------- |
+| `<within>` | where to look for tracks (default: /archive) |
+
+```bash
+track-list
+track-list /archive/devices
+```
+
+With `JSON_OUTPUT=1`: one row per track.
+
+### `track-mark`
+
+Reject or accept the fixes of a time range of a track by hand, overruling its rules, or clear that.
+
+<small>changes things</small>
+
+```text
+track-mark [--from=<string>] [--to=<string>] [--near=<string>] [--within=<string>] [--marked=<string>] [--reject] [--accept] [--clear] <track>
+```
+
+| Argument  | What it is                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------- |
+| `<track>` | the track to mark: the track's path, or a device or camera that has one, by its path or its name. |
 
 | Option              | What it does                                                               |
 | ------------------- | -------------------------------------------------------------------------- |
@@ -3322,24 +3329,24 @@ track-mark [--from=<string>] [--to=<string>] [--near=<string>] [--within=<string
 | `--clear`           | hand the fixes back to the rules.                                          |
 
 ```bash
-track-mark the-sailboat --from=2025-07-01T00:00:00Z --to=2025-07-02T00:00:00Z --near=57.70,11.97 --reject
-track-mark the-sailboat --from=2025-07-01T00:00:00Z --to=2025-07-02T00:00:00Z --marked=reject --clear
+track-mark sailboat --from=2025-07-01T00:00:00Z --to=2025-07-02T00:00:00Z --near=57.70,11.97 --reject
+track-mark sailboat --from=2025-07-01T00:00:00Z --to=2025-07-02T00:00:00Z --marked=reject --clear
 ```
 
 ### `track-move`
 
-Move the fixes of a time range from one device's track to another's, for a trip recorded on the wrong device.
+Move the fixes of a time range from one track to another, for a trip recorded into the wrong track.
 
 <small>changes things</small>
 
 ```text
-track-move [--from=<string>] [--to=<string>] <device> <to-device>
+track-move [--from=<string>] [--to=<string>] <track> <to-track>
 ```
 
-| Argument      | What it is                                                     |
-| ------------- | -------------------------------------------------------------- |
-| `<device>`    | the device (slug or path) the fixes are on, or a track's path. |
-| `<to-device>` | the device (slug or path) to move them to, or a track's path.  |
+| Argument     | What it is                                                                                                 |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `<track>`    | the track the fixes are on: the track's path, or a device or camera that has one, by its path or its name. |
+| `<to-track>` | the track to move them to: the track's path, or a device or camera that has one, by its path or its name.  |
 
 | Option            | What it does                               |
 | ----------------- | ------------------------------------------ |
@@ -3347,22 +3354,22 @@ track-move [--from=<string>] [--to=<string>] <device> <to-device>
 | `--to=<string>`   | only fixes before this ISO timestamp.      |
 
 ```bash
-track-move ruby-iphone the-sailboat --from=2025-07-01T06:00:00Z --to=2025-07-03T18:00:00Z
+track-move anna-phone sailboat --from=2025-07-01T06:00:00Z --to=2025-07-03T18:00:00Z
 ```
 
 ### `track-places`
 
-Put each of a device's stays at a location, naming the ones it makes after the harbour, island, bay or town there.
+Put each of a track's stays at a location, naming the ones it makes after the harbour, island, bay or town there.
 
 <small>changes things</small>
 
 ```text
-track-places [--rename] [--dry-run] <device>
+track-places [--rename] [--dry-run] <track>
 ```
 
-| Argument   | What it is                                      |
-| ---------- | ----------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
 
 | Option      | What it does                                                                                          |
 | ----------- | ----------------------------------------------------------------------------------------------------- |
@@ -3370,76 +3377,76 @@ track-places [--rename] [--dry-run] <device>
 | `--dry-run` | look the places up and show them without making locations or writing .trips.                          |
 
 ```bash
-track-places the-sailboat
-track-places /archive/devices/the-sailboat --dry-run
+track-places sailboat
+track-places /archive/devices/sailboat/position/history --dry-run
 ```
 
 ### `track-read`
 
-Read a device's track as drawable segments ({segments, points, truncated})
+Read a track as drawable segments ({segments, points, truncated})
 
 <small>reads only</small>
 
 ```text
-track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] [--rejected] [--only-rejected] <device>
+track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] [--rejected] [--only-rejected] <track>
 ```
 
-| Argument   | What it is                                                        |
-| ---------- | ----------------------------------------------------------------- |
-| `<device>` | the device (slug or path) whose track to read, or a track's path. |
+| Argument  | What it is                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------- |
+| `<track>` | the track to read: the track's path, or a device or camera that has one, by its path or its name. |
 
-| Option                 | What it does                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------- |
-| `--from=<string>`      | only fixes at or after this ISO timestamp.                                            |
-| `--to=<string>`        | only fixes before this ISO timestamp.                                                 |
-| `--bbox=<string>`      | only points near north,south,east,west.                                               |
-| `--margin=<string>`    | how far outside --bbox to read, as a fraction of it (default 0.25)                    |
-| `--tolerance=<string>` | simplification tolerance in degrees (level of detail)                                 |
-| `--limit=<string>`     | max points to return.                                                                 |
-| `--still`              | drop GPS spikes and draw each stay as two points, by the device's kind.               |
-| `--max-speed=<string>` | with --still, a jump faster than this (m/s) is a spike (default by the device's kind) |
-| `--rejected`           | read the fixes the track's rules or a person rejected too, each marked 'rejected'.    |
-| `--only-rejected`      | read the rejected fixes alone, each run of them a segment.                            |
+| Option                 | What it does                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| `--from=<string>`      | only fixes at or after this ISO timestamp.                                           |
+| `--to=<string>`        | only fixes before this ISO timestamp.                                                |
+| `--bbox=<string>`      | only points near north,south,east,west.                                              |
+| `--margin=<string>`    | how far outside --bbox to read, as a fraction of it (default 0.25)                   |
+| `--tolerance=<string>` | simplification tolerance in degrees (level of detail)                                |
+| `--limit=<string>`     | max points to return.                                                                |
+| `--still`              | drop GPS spikes and draw each stay as two points, by the track's kind.               |
+| `--max-speed=<string>` | with --still, a jump faster than this (m/s) is a spike (default by the track's kind) |
+| `--rejected`           | read the fixes the track's rules or a person rejected too, each marked 'rejected'.   |
+| `--only-rejected`      | read the rejected fixes alone, each run of them a segment.                           |
 
 ### `track-stage`
 
-Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/.
+Import a staged GPX file into the track it names, and move the file to the track's routes/; mark it pending when no single track matches, and keep it in its staging area's routes/.
 
 <small>changes things</small>
 
 ```text
-track-stage [--device=<path>] [--name=<string>] <gpx>
+track-stage [--track=<path>] [--name=<string>] <gpx>
 ```
 
 | Argument | What it is                |
 | -------- | ------------------------- |
 | `<gpx>`  | VFS path to the GPX file. |
 
-| Option            | What it does                                                                 |
-| ----------------- | ---------------------------------------------------------------------------- |
-| `--device=<path>` | the device (slug or path) it came from, instead of the one it names.         |
-| `--name=<string>` | the name to keep the file under in the device's routes/, instead of its own. |
+| Option            | What it does                                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `--track=<path>`  | the track it belongs to, instead of the one it names: the track's path, or a device or camera that has one, by its path or its name. |
+| `--name=<string>` | the name to keep the file under in the track's routes/, instead of its own.                                                          |
 
 ```bash
 track-stage /home/anna/staging/files/inbox/upload-2026-10-16/hike.gpx
-track-stage /home/anna/staging/routes/hike.gpx --device garmin-etrex
+track-stage /home/anna/staging/routes/hike.gpx --track hiking-gps
 ```
 
 With `JSON_OUTPUT=1`: imported, with the track, the number of new fixes and where the file is kept; or pending, with why.
 
 ### `track-trips`
 
-Derive a device's trips and stays from its track, into <device>/.trips.
+Derive a track's trips and stays, into <track>/.trips.
 
 <small>changes things</small>
 
 ```text
-track-trips [--full] [--dry-run] <device>
+track-trips [--full] [--dry-run] <track>
 ```
 
-| Argument   | What it is                                      |
-| ---------- | ----------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
 
 | Option      | What it does                                                     |
 | ----------- | ---------------------------------------------------------------- |
@@ -3447,23 +3454,49 @@ track-trips [--full] [--dry-run] <device>
 | `--dry-run` | derive and show them without writing .trips.                     |
 
 ```bash
-track-trips the-sailboat
-track-trips /archive/devices/the-sailboat --full --dry-run
+track-trips sailboat
+track-trips /archive/devices/sailboat/position/history --full --dry-run
 ```
 
-### `track-weather`
+### `track-update`
 
-Give a device's trips and their days the weather along the track: wind, temperature and cloud cover.
+Change how a track travels: its kind, the timezone its trips are cut in, its description.
 
 <small>changes things</small>
 
 ```text
-track-weather [--full] [--dry-run] <device>
+track-update [--kind=<string>] [--timezone=<string>] [--description=<string>] [--clear=<string>] <track>
 ```
 
-| Argument   | What it is                                      |
-| ---------- | ----------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+
+| Option                   | What it does                                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------------- |
+| `--kind=<string>`        | how it travels, which sets how it is read and the units it is shown in: boat, car, bike, foot. |
+| `--timezone=<string>`    | IANA timezone its trips are cut into days in, e.g. Europe/Stockholm.                           |
+| `--description=<string>` | free-text note.                                                                                |
+| `--clear=<string>`       | remove a field: kind, timezone or description (repeatable)                                     |
+
+```bash
+track-update sailboat --kind boat --timezone Europe/Stockholm
+track-update /archive/devices/sailboat/position/history --clear timezone
+```
+
+### `track-weather`
+
+Give a track's trips and their days the weather along it: wind, temperature and cloud cover.
+
+<small>changes things</small>
+
+```text
+track-weather [--full] [--dry-run] <track>
+```
+
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
 
 | Option      | What it does                                                                            |
 | ----------- | --------------------------------------------------------------------------------------- |
@@ -3471,83 +3504,56 @@ track-weather [--full] [--dry-run] <device>
 | `--dry-run` | look the weather up and count it without writing .trips.                                |
 
 ```bash
-track-weather the-sailboat
-track-weather /archive/devices/the-sailboat --full
+track-weather sailboat
+track-weather /archive/devices/sailboat/position/history --full
 ```
 
 With `JSON_OUTPUT=1`: TrackWeather: how many days and hours it sampled, how many it left for the next run and why, and how many requests it sent.
 
-### `tracker-setup`
-
-Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to.
-
-<small>reads only</small>
-
-```text
-tracker-setup [--new] [--off] [--origin=<string>] <device>
-```
-
-| Argument   | What it is                                                |
-| ---------- | --------------------------------------------------------- |
-| `<device>` | the device: its slug under the devices root, or its path. |
-
-| Option              | What it does                                                                                          |
-| ------------------- | ----------------------------------------------------------------------------------------------------- |
-| `--new`             | turn live tracking on, or replace the link; the one before it stops working.                          |
-| `--off`             | turn live tracking off.                                                                               |
-| `--origin=<string>` | the address the phone reaches EiN at, such as https://ein.example; adds the full URL and the QR code. |
-
-```bash
-tracker-setup sailboat
-tracker-setup sailboat --new --origin https://ein.example
-```
-
-With `JSON_OUTPUT=1`: TrackerSetup: whether live tracking is on, the link, and the QR code.
-
 ### `trip-album`
 
-Make a trip of a device's track an album, a new one or one that is there, or take it from its album.
+Make a trip of a track an album, a new one or one that is there, or take it from its album.
 
 <small>changes things</small>
 
 ```text
-trip-album [--new] [--name=<string>] [--album=<path>] [--detach] <device> <trip>
+trip-album [--new] [--name=<string>] [--album=<path>] [--detach] <track> <trip>
 ```
 
-| Argument   | What it is                                         |
-| ---------- | -------------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path.    |
-| `<trip>`   | the trip: its id from trip-list, or its first day. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| `<trip>`  | the trip: its id from trip-list, or its first day.                             |
 
-| Option            | What it does                                                                 |
-| ----------------- | ---------------------------------------------------------------------------- |
-| `--new`           | make a new album of the trip.                                                |
-| `--name=<string>` | the new album's name; by default where the trip got farthest, or the device. |
-| `--album=<path>`  | make this album the album of the trip.                                       |
-| `--detach`        | take the trip off its album.                                                 |
+| Option            | What it does                                                                       |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `--new`           | make a new album of the trip.                                                      |
+| `--name=<string>` | the new album's name; by default where the trip got farthest, or the track's name. |
+| `--album=<path>`  | make this album the album of the trip.                                             |
+| `--detach`        | take the trip off its album.                                                       |
 
 ```bash
-trip-album the-sailboat 2025-06-10 --new
-trip-album the-sailboat 2025-06-10 --album=/archive/albums/Exempelalbum_2019
-trip-album the-sailboat 2025-06-10 --detach
+trip-album sailboat 2025-06-10 --new
+trip-album sailboat 2025-06-10 --album=/archive/albums/Exempelalbum_2019
+trip-album sailboat 2025-06-10 --detach
 ```
 
 With `JSON_OUTPUT=1`: the album the trip was made, or the one it was taken from.
 
 ### `trip-edit`
 
-Join a device's trip to the one before it, or part its track on a day, and derive its trips again.
+Join a track's trip to the one before it, or part the track on a day, and derive its trips again.
 
 <small>changes things</small>
 
 ```text
-trip-edit [--merge] [--split] <device> <trip>
+trip-edit [--merge] [--split] <track> <trip>
 ```
 
-| Argument   | What it is                                                          |
-| ---------- | ------------------------------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path.                     |
-| `<trip>`   | the trip (its id, or its first day) to join, or the day to part on. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| `<trip>`  | the trip (its id, or its first day) to join, or the day to part on.            |
 
 | Option    | What it does                                                 |
 | --------- | ------------------------------------------------------------ |
@@ -3555,26 +3561,26 @@ trip-edit [--merge] [--split] <device> <trip>
 | `--split` | part a trip joined on this day again, or start a trip on it. |
 
 ```bash
-trip-edit the-sailboat 2025-06-10 --merge
-trip-edit the-sailboat 2025-06-10 --split
+trip-edit sailboat 2025-06-10 --merge
+trip-edit sailboat 2025-06-10 --split
 ```
 
 ### `trip-list`
 
-A device's trips and stays, as track-trips last derived them.
+A track's trips and stays, as track-trips last derived them.
 
 <small>reads only</small>
 
 ```text
-trip-list <device>
+trip-list <track>
 ```
 
-| Argument   | What it is                                      |
-| ---------- | ----------------------------------------------- |
-| `<device>` | the device (slug or path), or its track's path. |
+| Argument  | What it is                                                                     |
+| --------- | ------------------------------------------------------------------------------ |
+| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
 
 ```bash
-trip-list the-sailboat
+trip-list sailboat
 ```
 
 ## V

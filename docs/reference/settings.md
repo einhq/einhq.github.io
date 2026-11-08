@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 90 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 97 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -225,6 +225,93 @@ Every setting of an EiN with all its modules: 90 of them, in the groups the Sett
 | Default | `14` |
 | Kind | number |
 | Restarts | `audit-purger` |
+
+## Automation
+
+### `CFG_AUTOMATION_SOURCES`
+
+**Device sources**. Which kinds of device the bridge listens for, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome) and shelly (Shelly's second generation and later).
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `ha-discovery shelly` |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_DISCOVERY_PREFIX`
+
+**Discovery prefix**. The topic devices announce themselves under, for ha-discovery.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `homeassistant` |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_MQTT_URL`
+
+**MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --mqtt runs one beside EiN and sets this.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means automation is off: no device is heard |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_MQTT_KEY`
+
+**MQTT password**. The password of the MQTT user, sent only to the broker above. No shell sees it, and nothing shows it once it is set.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_MQTT_USER`
+
+**MQTT user**. The account EiN signs in to the broker with.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means EiN signs in without an account |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_HISTORY`
+
+**Reading history**. How long an entity's readings are kept. Applies to entities found from now on; an entity found before keeps its own (change it with attrs on its history).
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `365 day` |
+| Choices | `30 day`, `90 day`, `365 day`, `forever` |
+| Kind | select |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_MIN_INTERVAL`
+
+**Seconds between readings**. The shortest time between two readings of one entity that are kept and published. A reading that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. An entity's own minInterval attr overrides it.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `10` |
+| Kind | number |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
 
 ## Faces
 
@@ -452,7 +539,7 @@ Every setting of an EiN with all its modules: 90 of them, in the groups the Sett
 
 ### `CFG_WEATHER`
 
-**Look up the weather**. Let EiN ask SMHI and Open-Meteo what the weather was at a place and time, for photos and for the days of a device's trips. Each lookup sends the coordinates and the date to them; turn it off to keep them from being sent.
+**Look up the weather**. Let EiN ask SMHI and Open-Meteo what the weather was at a place and time, for photos and for the days of a track's trips. Each lookup sends the coordinates and the date to them; turn it off to keep them from being sent.
 
 | | |
 | --- | --- |

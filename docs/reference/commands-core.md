@@ -2886,7 +2886,7 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 | `--after=<string>` | alias for --from. |
 | `--before=<string>` | alias for --to. |
 | `--creator=<string>` | media created (uploaded or imported) by a user, by name or uid. |
-| `--subject=<string>` | media a subject has, as <kind>:<slug or path> (person:anna-exempel, location:…, device:…) or a path; any kind a subject-<kind> command answers for (repeatable, intersected). For a town or country use --bbox from location-region. |
+| `--subject=<string>` | media a subject has, as <kind>:<slug or path> (person:anna-exempel, location:…, camera:…) or a path; any kind a subject-<kind> command answers for (repeatable, intersected). For a town or country use --bbox from location-region. |
 | `--subject-name=<string>` | media of any subject of a kind whose name matches, as <kind>:<words> (person:anna); repeatable groups intersect. |
 | `--under=<path>` | media held by one album or directory (its own level; softlink members followed) |
 | `--include-stacked` | with --under, include hidden stack members (internal aggregate mode) |
@@ -3522,8 +3522,8 @@ track-token [--new] [--off] <track>
 | `--off` | turn the link off. |
 
 ```bash
-track-token /archive/devices/sailboat/track
-track-token /archive/devices/sailboat/track --new
+track-token /archive/devices/sailboat/position/history
+track-token /archive/devices/sailboat/position/history --new
 ```
 
 With `JSON_OUTPUT=1`: TrackToken: whether the track takes tracker posts, and the path of its link.

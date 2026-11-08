@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Node types – EiN documentation</title>
-    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 31 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/node-types.html">
     <meta property="og:title" content="Node types – EiN documentation">
-    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 31 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -93,7 +93,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs node-types` on a running EiN: make reference, never by hand. -->
 
-<p>Every node has a type, which decides what it holds and how it behaves. These are the 28 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
+<p>Every node has a type, which decides what it holds and how it behaves. These are the 31 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
 <h2 id="content">Content<a class="anchor" href="#content" aria-label="Link to this section"></a></h2>
 <p>What the archive is made of: what people add, and what EiN works out about it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -118,10 +118,16 @@
 <td>Archive</td>
 </tr>
 <tr>
-<td><code>device</code> Device</td>
-<td>A camera, phone or tracker, matched by make, model and serial number. Knows its time zone, so photos without one get their capture time right.</td>
-<td><code>/archive/devices</code></td>
+<td><code>camera</code> Camera</td>
+<td>A camera or phone, matched by make, model and serial number. Knows its time zone, so photos without one get their capture time right. One that also records where it was links to its track as its child track.</td>
+<td><code>/archive/cameras</code></td>
 <td>Archive</td>
+</tr>
+<tr>
+<td><code>device</code> Device</td>
+<td>Something in the house that reports or can be switched: a sensor, a plug, a button. Holds one entity per reading or control, and comes and goes with its source (MQTT discovery, Shelly).</td>
+<td><code>/archive/devices</code></td>
+<td>Automation</td>
 </tr>
 <tr>
 <td><code>exif</code> EXIF</td>
@@ -167,7 +173,7 @@
 </tr>
 <tr>
 <td><code>track</code> Track</td>
-<td>The route a device recorded, kept as the device&#39;s child named track: timestamped GPS points, live or from imported GPX files, summarised by their extent and time span.</td>
+<td>The route something travelled: timestamped GPS points, live or from imported GPX files, summarised by their extent and time span. A device keeps it as the history of its position.</td>
 <td></td>
 <td>Core</td>
 </tr>
@@ -189,6 +195,12 @@
 <td>A folder that holds other nodes. The archive roots — albums, people, locations, devices and labels — are directories.</td>
 <td></td>
 <td>Core</td>
+</tr>
+<tr>
+<td><code>entity</code> Entity</td>
+<td>One reading or control of a device: a temperature, a relay, a button. Holds its history (a log), its live readings (a router publishing on automation.state|event.<device>.<entity>) and, when it can be set, its set node.</td>
+<td></td>
+<td>Automation</td>
 </tr>
 <tr>
 <td><code>group</code> Group</td>
@@ -222,6 +234,12 @@
 </tr>
 </thead>
 <tbody><tr>
+<td><code>automation-set</code> Device command</td>
+<td>Where device-set writes what an entity is asked to be; its mode says who may switch the entity.</td>
+<td></td>
+<td>Automation</td>
+</tr>
+<tr>
 <td><code>command</code> Command</td>
 <td>A built-in shell command, carrying its own description, arguments and flags. Commands a module adds are files in the module&#39;s bin directory instead.</td>
 <td></td>

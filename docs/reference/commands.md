@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 416 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 428 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -258,40 +258,40 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | --- | --- |
 | [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add files) |
 | [album-cover](../archive/commands.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
-| [album-device-add](../archive/commands.md#album-device-add) | Put devices on an album's list, whose tracks its map draws. |
-| [album-device-list](../archive/commands.md#album-device-list) | The devices whose tracks an album's map draws: those that took its media and those added by hand, and the devices of its media removed from the list. |
-| [album-device-rm](../archive/commands.md#album-device-rm) | Take devices off an album's list, whose tracks its map draws. |
 | [album-profile](../archive/commands.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
 | [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip. |
 | [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
+| [album-track-add](../archive/commands.md#album-track-add) | Put tracks on an album's list, which its map draws. |
+| [album-track-list](../archive/commands.md#album-track-list) | The tracks an album's map draws: those the cameras of its media record into and those added by hand, and the tracks of its media removed from the list. |
+| [album-track-rm](../archive/commands.md#album-track-rm) | Take tracks off an album's list, which its map draws. |
 | [archive-bridge](../archive/commands.md#archive-bridge) | Derive the archive's domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running) |
 | [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
 | [assign-faces](../archive/commands.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
 | [assign-speakers](../archive/commands.md#assign-speakers) | Match a recording's voices to existing people, creating unnamed people for the rest. |
 | [auto-album-assign](../archive/commands.md#auto-album-assign) | Weigh media against the library albums they may belong in, as staging weighs its suggested groups, and write nothing. |
 | [auto-album-cluster](../archive/commands.md#auto-album-cluster) | Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing. |
+| [camera](../archive/commands.md#camera) | Camera and recording camera management. |
+| [camera-cover](../archive/commands.md#camera-cover) | Give a camera without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
+| [camera-create](../archive/commands.md#camera-create) | Create a camera node and link the media already carrying its fingerprint. |
+| [camera-info](../archive/commands.md#camera-info) | Show camera details and owners. |
+| [camera-link](../archive/commands.md#camera-link) | Link a file to its capture camera using extracted exif, or to a camera named by hand. |
+| [camera-list](../archive/commands.md#camera-list) | List all cameras. |
+| [camera-match](../archive/commands.md#camera-match) | Match a camera by serial number or make/model. |
+| [camera-relink](../archive/commands.md#camera-relink) | Link existing media to a registered camera by its fingerprint. |
+| [camera-remove-owner](../archive/commands.md#camera-remove-owner) | Unlink a person from a camera (removes both halves) |
+| [camera-scan](../archive/commands.md#camera-scan) | Propose cameras seen in media but not registered. |
+| [camera-set-owner](../archive/commands.md#camera-set-owner) | Link a person as owner of a camera (dated relation pair) |
+| [camera-timeline](../archive/commands.md#camera-timeline) | One camera's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
+| [camera-track](../archive/commands.md#camera-track) | Link a camera to the track it records into, such as a phone that also records where it was, or take the link away. |
+| [camera-update](../archive/commands.md#camera-update) | Change a camera's settings. |
 | [cluster-faces](../archive/commands.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [dayinhistory](../archive/commands.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |
 | [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
-| [device](../archive/commands.md#device) | Camera and recording device management. |
-| [device-cover](../archive/commands.md#device-cover) | Give a device without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
-| [device-create](../archive/commands.md#device-create) | Create a device node and link the media already carrying its fingerprint. |
-| [device-home](../archive/commands.md#device-home) | List or change a device's home bases, where arriving ends a trip. |
-| [device-info](../archive/commands.md#device-info) | Show device details and owners. |
-| [device-link](../archive/commands.md#device-link) | Link a file to its capture device using extracted exif, or to a device named by hand. |
-| [device-list](../archive/commands.md#device-list) | List all devices. |
-| [device-match](../archive/commands.md#device-match) | Match a device by serial number or make/model. |
-| [device-relink](../archive/commands.md#device-relink) | Link existing media to a registered device by its fingerprint. |
-| [device-remove-owner](../archive/commands.md#device-remove-owner) | Unlink a person from a device (removes both halves) |
-| [device-scan](../archive/commands.md#device-scan) | Propose devices seen in media but not registered. |
-| [device-set-owner](../archive/commands.md#device-set-owner) | Link a person as owner of a device (dated relation pair) |
-| [device-timeline](../archive/commands.md#device-timeline) | One device's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
-| [device-update](../archive/commands.md#device-update) | Change a device's settings. |
 | [duplicates](../archive/commands.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
 | [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
-| [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its device, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar. |
+| [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar. |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
 | [face-doubt](../archive/commands.md#face-doubt) | Question whether regions show the person they are assigned to. |
@@ -310,7 +310,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
 | [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
-| [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the registered devices each names. |
+| [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the archive's tracks each names. |
 | [hello](../archive/commands.md#hello) | Say hello (example TypeScript module command) |
 | [label-model](../archive/commands.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |
 | [latest](../archive/commands.md#latest) | List the most recently captured media, newest first. |
@@ -320,7 +320,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [location-region](../archive/commands.md#location-region) | Turn a location name (a city, a country, an area) into the region search --bbox filters on. |
 | [location-timeline](../archive/commands.md#location-timeline) | What happened at one location as a chronological feed: residents moving in and out, its events and the albums with photos from it. |
 | [location-update](../archive/commands.md#location-update) | Change a location's name, address, description, city or country. |
-| [media-details](../archive/commands.md#media-details) | Read description, time, location, device with owners, albums, tagged people (with age), comments and versions for a media file. |
+| [media-details](../archive/commands.md#media-details) | Read description, time, location, camera with owners, albums, tagged people (with age), comments and versions for a media file. |
 | [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the albums or a staging area when one is due, and none while a pass runs. |
 | [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
 | [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
@@ -331,7 +331,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [onthisday-media](../archive/commands.md#onthisday-media) | The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them) |
 | [parse-eval](../archive/commands.md#parse-eval) | Score the search parse (archive-parse) against the filters each question means. |
 | [person](../archive/commands.md#person) | People and family tree management. |
-| [person-add-event](../archive/commands.md#person-add-event) | Add an event (blob) to a person, album, location or device. |
+| [person-add-event](../archive/commands.md#person-add-event) | Add an event (blob) to a person, album, location or camera. |
 | [person-check](../archive/commands.md#person-check) | Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died) |
 | [person-children](../archive/commands.md#person-children) | List a person's children (children/ dir) |
 | [person-cover](../archive/commands.md#person-cover) | Give a named person without a cover the crop of one of their own faces (coverPhoto softlink) |
@@ -361,39 +361,39 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [raw](../archive/commands.md#raw) | Detect RAW image files and report (or --sort) the non-RAW file(s) they are related to. |
 | [regenerate-face-crops](../archive/commands.md#regenerate-face-crops) | Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes. |
 | [search-album](../archive/commands.md#search-album) | Search albums by name, description and what their pictures show. |
-| [search-device](../archive/commands.md#search-device) | Search devices by name, make, model or serial number. |
+| [search-camera](../archive/commands.md#search-camera) | Search cameras by name, make, model or serial number. |
 | [search-document](../archive/commands.md#search-document) | Search documents (PDF, Word, text) by what their text is about, using semantic similarity. |
 | [search-location](../archive/commands.md#search-location) | Search locations by name. |
 | [search-media](../archive/commands.md#search-media) | Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label. |
 | [search-people](../archive/commands.md#search-people) | Search people by partial name; every query word must match the same person. |
-| [search-track](../archive/commands.md#search-track) | Search tracks by the name of the device that recorded them, or their description. |
+| [search-track](../archive/commands.md#search-track) | Search tracks by their name, or the device or camera they belong to, or their description. |
 | [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
 | [source-list](../archive/commands.md#source-list) | List the files a node was read from: the links in its sources/, such as a track's GPX files or a person's GEDCOM files. |
 | [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
 | [staging-hold](../archive/commands.md#staging-hold) | Decide a file's duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file's finding is recorded, and one left on a file no longer staged is taken off. |
 | [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
 | [subcluster-voices](../archive/commands.md#subcluster-voices) | Re-cluster one person's voices with average linkage, to find two people fused into one. |
-| [subject-device](../archive/commands.md#subject-device) | What `search --subject device:<ref>` asks: the media a device produced, as the attr equality the store answers. |
+| [subject-camera](../archive/commands.md#subject-camera) | What `search --subject camera:<ref>` asks: the media a camera produced, as the attr equality the store answers. |
 | [subject-location](../archive/commands.md#subject-location) | What `search --subject location:<ref>` asks: the media linked to a location node. |
 | [subject-person](../archive/commands.md#subject-person) | What `search --subject person:<ref>` asks: the media a person is in: tagged with a box (a face or a drawn region) or without one. |
-| [subjects-in](../archive/commands.md#subjects-in) | Who and what the media in an album or folder have: the people in them, their locations, the devices that took them and the photographers, counted. |
+| [subjects-in](../archive/commands.md#subjects-in) | Who and what the media in an album or folder have: the people in them, their locations, the cameras that took them and the photographers, counted. |
 | [timeline](../archive/commands.md#timeline) | Chronological feed of albums, life events, birthdays and tracks, newest first. |
 | [timeline-facets](../archive/commands.md#timeline-facets) | Per-day, per-month and per-year counts for the timeline scrubber. |
-| [track-append](../archive/commands.md#track-append) | Append coordinate points to a device's track. |
-| [track-create](../archive/commands.md#track-create) | Give a device a track for the coordinate points it recorded (the device's child track) |
-| [track-import](../archive/commands.md#track-import) | Import GPX track points into a device's track, keeping a copy of the file in the device's routes/. |
-| [track-list](../archive/commands.md#track-list) | List the devices that have a track, with its point count, span and extent. |
-| [track-mark](../archive/commands.md#track-mark) | Reject or accept the fixes of a time range of a device's track by hand, overruling its rules, or clear that. |
-| [track-move](../archive/commands.md#track-move) | Move the fixes of a time range from one device's track to another's, for a trip recorded on the wrong device. |
-| [track-places](../archive/commands.md#track-places) | Put each of a device's stays at a location, naming the ones it makes after the harbour, island, bay or town there. |
-| [track-read](../archive/commands.md#track-read) | Read a device's track as drawable segments ({segments, points, truncated}) |
-| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track of the device it names, and move the file to the device's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
-| [track-trips](../archive/commands.md#track-trips) | Derive a device's trips and stays from its track, into <device>/.trips. |
-| [track-weather](../archive/commands.md#track-weather) | Give a device's trips and their days the weather along the track: wind, temperature and cloud cover. |
-| [tracker-setup](../archive/commands.md#tracker-setup) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to. |
-| [trip-album](../archive/commands.md#trip-album) | Make a trip of a device's track an album, a new one or one that is there, or take it from its album. |
-| [trip-edit](../archive/commands.md#trip-edit) | Join a device's trip to the one before it, or part its track on a day, and derive its trips again. |
-| [trip-list](../archive/commands.md#trip-list) | A device's trips and stays, as track-trips last derived them. |
+| [track-append](../archive/commands.md#track-append) | Append coordinate points to a track. |
+| [track-home](../archive/commands.md#track-home) | List or change a track's home bases, where arriving ends a trip. |
+| [track-import](../archive/commands.md#track-import) | Import GPX track points into a track, keeping a copy of the file in the track's routes/. |
+| [track-list](../archive/commands.md#track-list) | List the tracks, with their name, kind, point count, span and extent. |
+| [track-mark](../archive/commands.md#track-mark) | Reject or accept the fixes of a time range of a track by hand, overruling its rules, or clear that. |
+| [track-move](../archive/commands.md#track-move) | Move the fixes of a time range from one track to another, for a trip recorded into the wrong track. |
+| [track-places](../archive/commands.md#track-places) | Put each of a track's stays at a location, naming the ones it makes after the harbour, island, bay or town there. |
+| [track-read](../archive/commands.md#track-read) | Read a track as drawable segments ({segments, points, truncated}) |
+| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track it names, and move the file to the track's routes/; mark it pending when no single track matches, and keep it in its staging area's routes/. |
+| [track-trips](../archive/commands.md#track-trips) | Derive a track's trips and stays, into <track>/.trips. |
+| [track-update](../archive/commands.md#track-update) | Change how a track travels: its kind, the timezone its trips are cut in, its description. |
+| [track-weather](../archive/commands.md#track-weather) | Give a track's trips and their days the weather along it: wind, temperature and cloud cover. |
+| [trip-album](../archive/commands.md#trip-album) | Make a trip of a track an album, a new one or one that is there, or take it from its album. |
+| [trip-edit](../archive/commands.md#trip-edit) | Join a track's trip to the one before it, or part the track on a day, and derive its trips again. |
+| [trip-list](../archive/commands.md#trip-list) | A track's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
 | [weather](../archive/commands.md#weather) | The weather at a place and time, or every hour of a span with --to: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo. |
 | [weather-photo](../archive/commands.md#weather-photo) | Look up the weather a photo was taken in, at its point and capture time, and write it on its position node. |
@@ -410,6 +410,25 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [assistant-commands](../assistant/commands.md#assistant-commands) | Find a command by what it is for, judge whether a line changes anything, or rebuild the assistant's command index. |
 | [llm-chat](../assistant/commands.md#llm-chat) | Ask the assistant's language model one thing, and print what it answers. |
 | [llm-status](../assistant/commands.md#llm-status) | Whose the assistant's language model is, where it runs, and (with --checks) whether it answers. |
+
+## Automation
+
+[All 12 in full](../automation/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker, keep them under /archive/devices, publish their readings and send what device-set asks (the automation-bridge service) |
+| [automation-rule-check](../automation/commands.md#automation-rule-check) | Check an automation rule: what makes it run, whether its conditions hold now and whose rights its lines run with, or why it is not run; with --run, run its lines now. |
+| [automation-rules](../automation/commands.md#automation-rules) | Run the rules under /etc/automation/rules when a reading, a press, a device coming or going or the clock says so, each as its file's owner (the automation-rules service) |
+| [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, how many devices and entities it found, and which it cannot read. |
+| [device-create](../automation/commands.md#device-create) | Make a device by hand, which no source announces: a GPS logger whose files are imported, or something a phone will post the position of (--position) |
+| [device-forget](../automation/commands.md#device-forget) | Remove a device and its history, and stop the broker replaying its announcements; one that is still on comes back when it announces itself. |
+| [device-history](../automation/commands.md#device-history) | Show an entity's readings, oldest first: the latest, those since a time, or a time range summed up per interval (an average an hour, a maximum a day) — a temperature over a week, a plug's power, a button's presses. |
+| [device-label](../automation/commands.md#device-label) | Name a device or one of its entities, as its page shows it; its node name and routing keys stay. |
+| [device-set](../automation/commands.md#device-set) | Switch a device on or off, or set one of its entities to a value: on, off or toggle for a switch or a light, a number, one of the options of a choice, press for an action. |
+| [device-show](../automation/commands.md#device-show) | Show a device and each of its entities (readings, switches, buttons) with its latest value and whether it can be set. |
+| [device-tracker](../automation/commands.md#device-tracker) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to, with the QR code that sets Traccar Client up. |
+| [devices](../automation/commands.md#devices) | List the devices the automation bridge found (sensors, plugs, buttons), each with whether it is online and its main reading. |
 
 ## Media service
 
