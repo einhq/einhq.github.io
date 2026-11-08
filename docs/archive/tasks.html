@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html" aria-current="page">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="cameras.html">Cameras</a></li><li><a href="tracks.html">Tracks and trips</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html" aria-current="page">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -467,7 +467,7 @@
 </tbody></table>
 </div>
 <p>The family relations, events and homes are explained in <a href="family.html">Family tree, events and homes</a>.</p>
-<h2 id="locations-devices-and-tracks">Locations, devices and tracks<a class="anchor" href="#locations-devices-and-tracks" aria-label="Link to this section"></a></h2>
+<h2 id="locations-cameras-and-tracks">Locations, cameras and tracks<a class="anchor" href="#locations-cameras-and-tracks" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -492,44 +492,59 @@
 <td><a href="commands.html#location-timeline">location-timeline</a></td>
 </tr>
 <tr>
-<td>List the devices</td>
-<td><code>device-list</code></td>
-<td><a href="commands.html#device-list">device-list</a></td>
+<td>List the cameras</td>
+<td><code>camera-list</code></td>
+<td><a href="commands.html">camera-list</a></td>
 </tr>
 <tr>
-<td>A device&#39;s details and owners</td>
-<td><code>device-info /archive/devices/peggy-lumix</code></td>
-<td><a href="commands.html#device-info">device-info</a></td>
+<td>A camera&#39;s details and owners</td>
+<td><code>camera-info /archive/cameras/peggy-lumix</code></td>
+<td><a href="commands.html">camera-info</a></td>
 </tr>
 <tr>
-<td>Devices seen in pictures but not registered</td>
-<td><code>device-scan</code></td>
-<td><a href="commands.html#device-scan">device-scan</a></td>
+<td>Cameras seen in pictures but not registered</td>
+<td><code>camera-scan</code></td>
+<td><a href="commands.html">camera-scan</a></td>
 </tr>
 <tr>
-<td>Register a device</td>
-<td><code>device-create /archive/devices/ada-camera --name &quot;Ada&#39;s camera&quot; --make &lt;make&gt; --model &lt;model&gt;</code></td>
-<td><a href="commands.html#device-create">device-create</a></td>
+<td>Register a camera</td>
+<td><code>camera-create /archive/cameras/ada-camera --name &quot;Ada&#39;s camera&quot; --make &lt;make&gt; --model &lt;model&gt;</code></td>
+<td><a href="commands.html">camera-create</a></td>
 </tr>
 <tr>
-<td>Say who owned a device, and when</td>
-<td><code>device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/ruby-wrenfield</code></td>
-<td><a href="commands.html#device-set-owner">device-set-owner</a></td>
+<td>Say who owned a camera, and when</td>
+<td><code>camera-set-owner --from 2019 /archive/cameras/ruby-iphone /archive/people/ruby-wrenfield</code></td>
+<td><a href="commands.html">camera-set-owner</a></td>
 </tr>
 <tr>
-<td>A device&#39;s history</td>
-<td><code>device-timeline /archive/devices/ruby-iphone</code></td>
-<td><a href="commands.html#device-timeline">device-timeline</a></td>
+<td>A camera&#39;s history</td>
+<td><code>camera-timeline /archive/cameras/ruby-iphone</code></td>
+<td><a href="commands.html">camera-timeline</a></td>
 </tr>
 <tr>
-<td>Devices with a GPS track</td>
+<td>List the tracks</td>
 <td><code>track-list</code></td>
 <td><a href="commands.html#track-list">track-list</a></td>
 </tr>
 <tr>
-<td>Add a GPX file to a device&#39;s track</td>
-<td><code>track-import /archive/devices/ruby-iphone &lt;file&gt;.gpx</code></td>
+<td>Change how a track travels</td>
+<td><code>track-update sailboat --kind boat --timezone Europe/Stockholm</code></td>
+<td><a href="commands.html">track-update</a></td>
+</tr>
+<tr>
+<td>Link a phone&#39;s camera to its track</td>
+<td><code>camera-track ruby-iphone /archive/devices/ruby-phone/position/history</code></td>
+<td><a href="commands.html">camera-track</a></td>
+</tr>
+<tr>
+<td>Add a GPX file to a track</td>
+<td><code>track-import sailboat &lt;file&gt;.gpx</code></td>
 <td><a href="commands.html#track-import">track-import</a></td>
+</tr>
+<tr>
+<td>A track&#39;s trips</td>
+<td><code>trip-list sailboat</code></td>
+<td><a href="commands.html#trip-list">trip-list</a></td>
 </tr>
 </tbody></table>
 </div>
@@ -619,7 +634,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/tasks.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#search-your-pictures">Search your pictures</a></li><li><a href="#albums">Albums</a></li><li><a href="#pictures-videos-and-recordings">Pictures, videos and recordings</a></li><li><a href="#people">People</a></li><li><a href="#locations-devices-and-tracks">Locations, devices and tracks</a></li><li><a href="#feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day</a></li><li><a href="#duplicates-and-staging">Duplicates and staging</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#search-your-pictures">Search your pictures</a></li><li><a href="#albums">Albums</a></li><li><a href="#pictures-videos-and-recordings">Pictures, videos and recordings</a></li><li><a href="#people">People</a></li><li><a href="#locations-cameras-and-tracks">Locations, cameras and tracks</a></li><li><a href="#feeds-timeline-news-events-and-on-this-day">Feeds: timeline, news, events and on this day</a></li><li><a href="#duplicates-and-staging">Duplicates and staging</a></li></ul></aside>
     </div>
   </body>
 </html>

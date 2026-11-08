@@ -315,7 +315,7 @@ Every row but the last is on the Archive's pages; `trash put` works in any EiN.
 | What you do                                                       | What goes                                                                                                    |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **Delete** in the selection bar                                   | The selected pictures that live where you are; see [Albums](../archive/albums.md#delete-or-remove-pictures). |
-| **Move to trash** under ⋮ on an album, person, location or device | That album, person, location or device, with everything that lives in it.                                    |
+| **Move to trash** under ⋮ on an album, person, location or camera | That album, person, location or camera, with everything that lives in it.                                    |
 | **Delete** in **Edit event**                                      | That event or note.                                                                                          |
 | **Discard** in staging                                            | The files, kept together as one entry; see [Sorting in staging](../archive/staging.md).                      |
 | Removing copies in staging's **Duplicates**                       | The copies, kept together as one entry; see [Duplicates](../archive/duplicates.md).                          |

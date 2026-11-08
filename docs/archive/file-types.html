@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html" aria-current="page">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="cameras.html">Cameras</a></li><li><a href="tracks.html">Tracks and trips</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html" aria-current="page">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -132,7 +132,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 <tr>
 <td><a href="#gps-tracks">GPS tracks</a></td>
 <td>GPX</td>
-<td>the route, added to the track of the device that recorded it</td>
+<td>the route, added to the track it belongs to</td>
 </tr>
 <tr>
 <td><a href="#family-trees">Family trees</a></td>
@@ -181,7 +181,7 @@ camera RAW formats below.</p>
 <p>For each photo, EiN:</p>
 <ul>
 <li>reads its date, its GPS position and the camera or phone that took it; see
-<a href="dates-places.html">Dates and places of pictures</a> and <a href="devices.html">Devices and GPS tracks</a>;</li>
+<a href="dates-places.html">Dates and places of pictures</a> and <a href="cameras.html">Cameras</a>;</li>
 <li>makes thumbnails and screen-sized copies in the AVIF format: a square of 320 pixels, and copies
 that fit inside 512, 800, 1,600 and 2,560 pixels. These copies are never larger than the photo,
 so a small one gets only the sizes up to its own;</li>
@@ -347,10 +347,10 @@ part of a Takeout becomes. A sidecar that matches no picture stays where it is, 
 category&#39;s <strong>Other files</strong>.</p>
 <h2 id="gps-tracks">GPS tracks<a class="anchor" href="#gps-tracks" aria-label="Link to this section"></a></h2>
 <p>A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
-picture: EiN adds its points to the track of the device that recorded it, and the file moves to the
-device&#39;s <code>routes</code> folder, where its track links it. On a device&#39;s page you can upload GPX files to
-its track directly. See <a href="devices.html#gpx-files-in-staging">GPX files in staging</a> and
-<a href="devices.html#upload-a-gpx-file-to-a-devices-track">Upload a GPX file to a device&#39;s track</a>.</p>
+picture: EiN adds its points to the track the file names, and the file moves to the track&#39;s
+<code>routes</code> folder, where the track links it. On a track&#39;s page you can upload GPX files to it
+directly. See <a href="tracks.html#gpx-files-in-staging">GPX files in staging</a> and
+<a href="tracks.html#upload-a-gpx-file-to-a-track">Upload a GPX file to a track</a>.</p>
 <h2 id="family-trees">Family trees<a class="anchor" href="#family-trees" aria-label="Link to this section"></a></h2>
 <p>A GEDCOM file (<code>.ged</code>) is a family tree as genealogy programs export it, in any of the character
 sets they write: UTF-8, UTF-16, ANSEL or ANSI. In staging it is not a document: it waits for you to

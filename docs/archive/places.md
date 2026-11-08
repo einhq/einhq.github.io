@@ -113,9 +113,9 @@ A location gets its place on the map from the first of these that gives one:
    wide as they spread. A picture far from the rest is left out, and pictures spread wider than
    25 km give no circle. Pictures that joined the location because they lie inside its shape do not
    count.
-3. **Where a device stayed.** A location EiN made for a stay in a device's track (see
-   [Places a device stayed at](#places-a-device-stayed-at)) has a circle with a radius of 150 m
-   around where the device lay. Its pictures replace it once they give a circle.
+3. **Where a track stayed.** A location EiN made for a stay in a track (see
+   [Places a track stayed at](#places-a-track-stayed-at)) has a circle with a radius of 150 m
+   around where the track lay. Its pictures replace it once they give a circle.
 4. **Its address.** EiN asks OpenStreetMap's Nominatim service where the address is, or where the
    name is when there is no address. EiN uses the answer by itself only when the answer is a
    building, the house number or postcode you wrote agrees with it, and no answer that ranks almost
@@ -127,7 +127,7 @@ A location gets its place on the map from the first of these that gives one:
 | ------------ | ----------------- | ------------------------------------------------- |
 | Set by hand  | set by hand       | "Set by hand"                                     |
 | Its pictures | from N photos     | "Derived from N geotagged photos spread over N m" |
-| A stay       | from a track      | "Where a device stayed, from its track"           |
+| A stay       | from a track      | "Where a camera stayed, from its track"           |
 | Its address  | from address      | "Geocoded from the address"                       |
 
 An address is looked up in Sweden first, and in the rest of the world when Sweden has no match. A
@@ -140,12 +140,12 @@ shows suggestions instead, or "No location set yet." when nothing matched. A loc
 its pictures stays where its pictures are, and a location set by hand keeps its shape whatever the
 address says.
 
-## Places a device stayed at
+## Places a track stayed at
 
-Where a device with a track lay still, EiN puts the stay at a location, so that its trips say where
-they went (see [A device's trips](devices.md#a-devices-trips)). Each stay goes to the first of these:
+Where a track lay still, EiN puts the stay at a location, so that its trips say where they went
+(see [Trips](tracks.md#trips)). Each stay goes to the first of these:
 
-1. **A home base.** A stay at one of the device's [home bases](devices.md#home-bases) is at that
+1. **A home base.** A stay at one of the track's [home bases](tracks.md#home-bases) is at that
    home's location.
 2. **A location near it.** A stay within 150 m of a location's position is at that location: a
    harbour you have stayed at before, or a location you made yourself.
@@ -158,14 +158,14 @@ they went (see [A device's trips](devices.md#a-devices-trips)). Each stay goes t
 A new location gets a circle with a radius of 150 m, so the pictures taken inside it join it as
 pictures join any location (see [How pictures join a location](#how-pictures-join-a-location)).
 
-When you rename such a location in **Edit location**, your name stays, wherever the device stays
+When you rename such a location in **Edit location**, your name stays, whatever track stays
 there later. Out at sea, where nothing has a name, a stay gets no location. When a lookup fails,
 because OpenStreetMap's services are busy or out of reach, the stay is looked up again the next time
-the device's trips are found again.
+the track's trips are found again.
 
 EiN keeps what the services answered, in `/archive/sources/places`, so each place is asked about
 once. It asks OpenStreetMap for the harbours, islands and bays of an area about 5 km across at a
-time, and every later stay in that area, by any device, is named without going online. So is a
+time, and every later stay in that area, in any track, is named without going online. So is a
 place where nothing had a name, and a location you deleted that a stay needs again. Only
 `track-places --rename` asks again.
 
@@ -213,8 +213,8 @@ closes the gaps the pipelines missed
 ([Close gaps the pipelines missed](processing.md#close-gaps-the-pipelines-missed)).
 In the terminal, `weather-photo '<file>/position'` looks one up, and `-f` looks it up again.
 
-A device's trips get their weather this way too: each whole hour of a trip, the weather where the
-device was then, summed up for each day and for the whole trip on the album made of it
+A track's trips get their weather this way too: each whole hour of a trip, the weather where the
+track was then, summed up for each day and for the whole trip on the album made of it
 ([The Trip tab](albums.md#the-trip-tab)). A trip is looked up once it has been found in the track,
 and again for a week after each day, since the last hours are sometimes observed later.
 
@@ -386,7 +386,7 @@ and appears in the header. The same records are a person's homes, seen from the 
 
 Under ⋮, **Add event** writes a dated note on the location, which appears on its timeline on the **Info** tab.
 A location's event needs both a **Date** and a **Description**; see
-[Events of albums, locations and devices](family.md#events-of-albums-locations-and-devices).
+[Events of albums, locations and cameras](family.md#events-of-albums-locations-and-cameras).
 
 ## Move a location to the trash
 
@@ -399,14 +399,14 @@ from **Trash** in the account menu, for as many days as an administrator keeps t
 
 Open **Map** in the sidebar, under **Explore**. The map fills the page, with no header.
 
-![The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot](../../assets/shots/map.webp "Pictures, locations and the routes that devices recorded share one map, narrowed by the search box and the years under it.")
+![The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot](../../assets/shots/map.webp "Pictures, locations and the routes of the tracks share one map, narrowed by the search box and the years under it.")
 
 The map draws three things:
 
 - **Pictures** with a position that you may see, gathered into piles. Pictures in staging are left
   out until they are filed.
 - **Locations** that have a place, as pins.
-- **GPS tracks** that devices recorded.
+- **GPS tracks**, the routes of the [tracks](tracks.md).
 
 Opened from the sidebar, the map starts over Gothenburg in Sweden, whatever your pictures show.
 Zoom out to find them, or keep a bookmark of the view you use; see
@@ -417,7 +417,7 @@ Zoom out to find them, or keep a bookmark of the view you use; see
 Drag the map to move it, and zoom with the mouse wheel or by pinching. The map has no zoom buttons,
 and clicking a pile never zooms: it opens the pile. A small spinner under the buttons in the
 top-right corner shows while the map reads what is in view after you move it. It does not show while
-the map follows a live device.
+the map follows a live track.
 
 ### Open pictures and piles
 
@@ -439,30 +439,30 @@ Piles depend on the zoom: zoom in, and a pile splits into smaller piles and sing
 
 - **Location pins** stand at each location's centre. Click a pin to open the location's page. The
   pins are hidden while the search box narrows the map; the years do not hide them.
-- **Tracks** are the routes devices recorded, as coloured lines, one colour per day. Each track has
-  three colours of its own that its days take in turn, so two days in a row differ, and other
-  tracks use other colours. Pointing at a line shows the device's name and the day.
+- **Tracks** are routes recorded by trackers, phones and GPS loggers, as coloured lines, one colour
+  per day. Each track has three colours of its own that its days take in turn, so two days in a row
+  differ, and other tracks use other colours. Pointing at a line shows the track's name and the day.
 
-Where a device lay still, its track ends on that spot and leaves from it later, without the
-wandering its GPS recorded meanwhile; see [A device's track](devices.md#a-devices-track).
+Where a track lay still, it ends on that spot and leaves from it later, without the wandering its
+GPS recorded meanwhile; see [The route on the map](tracks.md#the-route-on-the-map).
 
-Tracks are always drawn in full: the years and the search box narrow the pictures only. How tracks
-get into EiN from GPX files is on [A device's track](devices.md#a-devices-track).
+Tracks are always drawn in full: the years and the search box narrow the pictures only. Where tracks
+come from, GPX files among them, is on [Tracks and trips](tracks.md#where-tracks-come-from).
 
-### Follow a device live
+### Follow a track live
 
-A device that is sending its position as it moves is **live** while its last point is under four
-hours old. The map then draws a pin where it is now and extends its line as new points arrive,
-without a reload. Pointing at the pin shows the device's name, its speed in km/h and how long ago
-the point was taken ("12 km/h · 40 s ago").
+A track that a tracker or a phone is adding its position to as it moves is **live** while its last
+point is under four hours old. The map then draws a pin where it is now and extends its line as new
+points arrive, without a reload. Pointing at the pin shows the track's name, its speed in km/h and
+how long ago the point was taken ("12 km/h · 40 s ago").
 
-The live devices are also listed in the top-left corner, each with its colour, name, speed and age.
-Click a name to open that device's **Track** tab.
-Click **Follow** (the crosshair beside a device), or the device's pin, and the map moves along with
+The live tracks are also listed in the top-left corner, each with its colour, name, speed and age.
+Click a name to open that track's page.
+Click **Follow** (the crosshair beside a track), or the track's pin, and the map moves along with
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click **Follow**
-again, to stop. A device drops out of the list four hours after its last point.
+again, to stop. A track drops out of the list four hours after its last point.
 
-Live devices belong to the tracks: they show while **Show** is on **All** or **Tracks**.
+Live tracks are drawn with the other tracks: they show while **Show** is on **All** or **Tracks**.
 
 ### Choose what the map shows
 
@@ -547,7 +547,7 @@ recordings are never sent to them.
 | The **Dark map** and **Satellite** styles          | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
 | A location's position from its address             | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
 | Pictures' street addresses                         | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
-| The names of places a device stayed at             | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
+| The names of places a track stayed at              | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
 | The weather at a place and time, unless turned off | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
@@ -577,8 +577,8 @@ Locations are ordinary nodes, and these commands work on them in the
 | Place a location again from its pictures or its address         | [`location-locate`](commands.md#location-locate) `--force <location>`                                           |
 | Change the name, address, city, country or description          | [`location-update`](commands.md#location-update)                                                                |
 | Link the pictures inside a location's shape at once             | [`location-link-media`](commands.md#location-link-media) `--location <location>`                                |
-| Put a device's stays at locations, and name the new ones        | [`track-places`](commands.md#track-places) `<device>`, `--dry-run` to see them first                            |
-| Look the names of a device's stay locations up again            | `track-places <device> --rename`, which asks the services again; names changed by hand are kept                 |
+| Put a track's stays at locations, and name the new ones         | [`track-places`](commands.md#track-places) `<track>`, `--dry-run` to see them first                             |
+| Look the names of a track's stay locations up again             | `track-places <track> --rename`, which asks the services again; names changed by hand are kept                  |
 | The weather at a place and time                                 | [`weather`](commands.md#weather) `<lat> <lng> <time>`, such as `weather 59.33 18.07 2024-07-14T15:00`           |
 
 To turn the point "Islington Town Hall" into a circle with a radius of 150 m, the way the dialog
@@ -629,8 +629,9 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   **Media** or **Tracks**.
 - **A track ignores the year slider.** Tracks are always drawn in full; only the pictures are
   narrowed.
-- **A device's pin stays where it was.** Its last point is older than you expected: the device has
-  stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.
+- **A live track's pin stays where it was.** Its last point is older than you expected: the
+  tracker or phone has stopped sending, or cannot reach EiN. The age beside its name says when the
+  point was taken.
 - **`weather` answers "weather lookups are turned off".** An administrator has turned off **Look up
   the weather**; turning it on again lets EiN ask.
 - **The weather of a place in Sweden comes from Open-Meteo.** No SMHI station within 30 km measured
@@ -638,7 +639,7 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   Older stations often measured wind only three times a day.
 - **The first weather lookup near a station takes a minute.** It fetches the station's whole history;
   later lookups there are immediate.
-- **The map jumps back after you zoom.** You are following a device; drag the map or click
+- **The map jumps back after you zoom.** You are following a track; drag the map or click
   **Follow** to stop.
 
 ## Related pages
@@ -646,7 +647,7 @@ link one picture to a location by hand is in [Dates and places of pictures](date
 - [Dates and places of pictures](dates-places.md): a picture's position, street address, and
   **Set location**
 - [Family tree, events and homes](family.md): homes, residents and events
-- [Devices and GPS tracks](devices.md): the devices whose tracks the map draws
+- [Tracks and trips](tracks.md): the tracks the map draws, and their trips
 - [Search and the finder](search.md): finding pictures by location with `@`
 - [Albums](albums.md): an album's **Map** and **Info** tabs
 - [Viewing photos, videos and recordings](viewer.md): the place section of the details panel

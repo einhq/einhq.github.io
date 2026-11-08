@@ -125,7 +125,7 @@ Choose the plus to make something. Each row opens a form in a dialog over the pa
 EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
 plus in the top bar. With the Archive installed, the menu has these rows:
 
-![The Create New menu open under the plus: Import media, Album, Person, Location and Device](../../assets/shots/create-menu.webp "The Create menu's rows come from the modules; these are the archive's.")
+![The Create New menu open under the plus: Import media, Album, Person, Location and Camera](../../assets/shots/create-menu.webp "The Create menu's rows come from the modules; these are the archive's.")
 
 | Row              | Opens                                                                                | More                                              |
 | ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
@@ -133,7 +133,7 @@ plus in the top bar. With the Archive installed, the menu has these rows:
 | **Album**        | **Create Album**                                                                     | [Albums](../archive/albums.md)                    |
 | **Person**       | **Create Person**                                                                    | [People and faces](../archive/people.md)          |
 | **Location**     | **Create Location**                                                                  | [Locations and the map](../archive/places.md)     |
-| **Device**       | **Register Device**                                                                  | [Devices and GPS tracks](../archive/devices.md)   |
+| **Camera**       | **Register Camera**                                                                  | [Cameras](../archive/cameras.md)                  |
 
 ### The account menu
 
@@ -183,24 +183,26 @@ command that does the same in the terminal.
 
 The sidebar lists the pages, in four sections. The first has no heading.
 
-| Section | Entry             | Opens                                                                                                                                                               | Shown to       | Added by  |
-| ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | --------- |
-|         | **Home**          | What the modules put there: [Home and statistics](home.md); with the Archive, On this day, News and Events: [Memories, news and events on Home](../archive/home.md) | everyone       | EiN       |
-|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](../assistant/chat.md)                                                                               | everyone       | assistant |
-|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](../archive/media.md)                                                                           | everyone       | archive   |
-|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](../archive/staging.md)                                                                                      | signed in      | archive   |
-| Explore | **Search**        | What the modules make searchable; with the Archive, photos, videos, albums, people and places, by name, date or @mention: [Search and the finder](search.md)        | everyone       | EiN       |
-| Explore | **Year**          | One year's pictures: [Media, Year and labels](../archive/media.md)                                                                                                  | everyone       | archive   |
-| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](../archive/places.md)                                                                                         | everyone       | archive   |
-| Browse  | **Albums**        | [Albums](../archive/albums.md)                                                                                                                                      | everyone       | archive   |
-| Browse  | **People**        | [People and faces](../archive/people.md)                                                                                                                            | everyone       | archive   |
-| Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                                                                       | everyone       | archive   |
-| Browse  | **Devices**       | Cameras, phones, scanners and trackers: [Devices and GPS tracks](../archive/devices.md)                                                                             | everyone       | archive   |
-| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                                                                           | administrators | EiN       |
-| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                                                                                | administrators | EiN       |
-| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                                                                         | signed in      | EiN       |
-| System  | **Statistics**    | How the archive has grown: [Home and statistics](home.md)                                                                                                           | everyone       | EiN       |
-| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                                                                       | everyone       | EiN       |
+| Section | Entry             | Opens                                                                                                                                                               | Shown to       | Added by   |
+| ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------- |
+|         | **Home**          | What the modules put there: [Home and statistics](home.md); with the Archive, On this day, News and Events: [Memories, news and events on Home](../archive/home.md) | everyone       | EiN        |
+|         | **Chat**          | Conversations with the assistant: [Chatting with the assistant](../assistant/chat.md)                                                                               | everyone       | assistant  |
+|         | **Media**         | Every photo, video, recording and document: [Media, Year and labels](../archive/media.md)                                                                           | everyone       | archive    |
+|         | **Staging**       | Your uploads waiting to be sorted: [Sorting in staging](../archive/staging.md)                                                                                      | signed in      | archive    |
+| Explore | **Search**        | What the modules make searchable; with the Archive, photos, videos, albums, people and places, by name, date or @mention: [Search and the finder](search.md)        | everyone       | EiN        |
+| Explore | **Year**          | One year's pictures: [Media, Year and labels](../archive/media.md)                                                                                                  | everyone       | archive    |
+| Explore | **Map**           | Pictures and tracks on a map: [Locations and the map](../archive/places.md)                                                                                         | everyone       | archive    |
+| Browse  | **Albums**        | [Albums](../archive/albums.md)                                                                                                                                      | everyone       | archive    |
+| Browse  | **People**        | [People and faces](../archive/people.md)                                                                                                                            | everyone       | archive    |
+| Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                                                                       | everyone       | archive    |
+| Browse  | **Devices**       | The house's sensors, plugs and switches: [Automation](../automation/index.md)                                                                                       | signed in      | automation |
+| Browse  | **Cameras**       | The cameras, phones and scanners that took the pictures: [Cameras](../archive/cameras.md)                                                                           | everyone       | archive    |
+| Browse  | **Tracks**        | Routes travelled, and their trips: [Tracks and trips](../archive/tracks.md)                                                                                         | everyone       | archive    |
+| System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                                                                           | administrators | EiN        |
+| System  | **Dashboard**     | How EiN is doing: [Health and the dashboard](../admin/monitoring.md)                                                                                                | administrators | EiN        |
+| System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                                                                         | signed in      | EiN        |
+| System  | **Statistics**    | How the archive has grown: [Home and statistics](home.md)                                                                                                           | everyone       | EiN        |
+| System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                                                                       | everyone       | EiN        |
 
 An entry added by a module is there once that module is installed; [The Archive](../archive/index.md)
 and [The Assistant](../assistant/index.md) describe what each brings. "Administrators" means the

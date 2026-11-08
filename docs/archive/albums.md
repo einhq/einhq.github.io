@@ -139,14 +139,14 @@ and after the last picture it goes on to the first. [Viewing photos, videos and 
 
 ### The Trip tab
 
-An album made of a trip a device's track recorded has a **Trip** tab (see
-[Make a trip an album](devices.md#make-a-trip-an-album)). At the top are the trip's dates, an
-**Ongoing** badge while it lasts, the device, which links to its trips, how many days it took and its
+An album made of a trip of a track has a **Trip** tab (see
+[Make a trip an album](tracks.md#make-a-trip-an-album)). At the top are the trip's dates, an
+**Ongoing** badge while it lasts, the track, which links to its trips, how many days it took and its
 length, in nautical miles for a boat and kilometres for anything else. Under them is where it
 started and ended, and the farthest place it stayed at, and the weather over the whole trip.
 
-Each day of the trip has a card of its own: the date, the first and last time on the device's clock
-(UTC for a device without a **Timezone**), the day's length, where it started and where it ended,
+Each day of the trip has a card of its own: the date, the first and last time in the track's time
+zone (UTC for a track without a **Timezone**), the day's length, where it started and where it ended,
 and the day's weather. The album's notes from that day stand
 under it, as on the Media tab: this is the trip's logbook. **Add note** on a day's card writes a
 note dated on that day, as **Add event** does; the pen on a note changes it. Under the days,
@@ -155,25 +155,25 @@ location links to it.
 
 The weather is there unless an administrator has turned off **Look up the weather** (see
 [The weather at a place and time](places.md#the-weather-at-a-place-and-time)). It is the weather
-where the device was at each whole hour of the day: the mean wind in metres per second, the
+where the track was at each whole hour of the day: the mean wind in metres per second, the
 strongest hour's when it was stronger, and where the wind mostly blew from; the coldest and the
 warmest hour; and the mean cloud cover. For example _Wind 5.5 m/s, at most 9, from SW · 14 to 19 °C ·
 40 % cloud_.
 
-While the trip is ongoing, the tab follows it as the device's points come in.
+While the trip is ongoing, the tab follows it as the track's points come in.
 
 ### The Map tab
 
 ![The album's Map tab: two piles of photos on a map of the archipelago, joined by coloured GPS routes](../../assets/shots/album-map.webp "The Map tab puts the album's pictures where they were taken, with the routes recorded while it lasted.")
 
 The **Map** tab shows the album's pictures that have a position, and the routes the album's
-devices recorded during its dates. The map opens fitted to both, and fills the window below the
+tracks recorded during its dates. The map opens fitted to both, and fills the window below the
 tabs: opening the tab shrinks the album's header down to its row of tabs, and the map grows upward
 into the room without moving, so the mouse wheel over the map zooms it rather than scrolling the
-page. Scroll up over the tabs to bring the header back. The album's devices are the
-cameras and phones that took its pictures and any device added to it, such as a GPS tracker carried
-on the trip; a route someone else recorded on the same days stays off the map (see
-[Choose which devices' routes the map shows](#choose-which-devices-routes-the-map-shows)).
+page. Scroll up over the tabs to bring the header back. The album's tracks are those the cameras
+that took its pictures record into, such as a phone's, and any track added to it, such as a GPS
+tracker's carried on the trip; a route someone else recorded on the same days stays off the map (see
+[Choose which tracks the map shows](#choose-which-tracks-the-map-shows)).
 
 - A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.
 - Pictures close together form a pile with a count. Choose it to list them in **N photos here**.
@@ -181,16 +181,16 @@ on the trip; a route someone else recorded on the same days stays off the map (s
 - The layers button in the corner switches between **Map**, **Dark map** and **Satellite**.
 
 The routes come from the album's whole span, so widening its dates in **Edit album** brings in the
-journey there and back. When nothing has a position and none of its devices recorded a route, the
-tab says so and names the devices, for example **Nothing in this album has a position, and Ruby's
-iPhone recorded no route while it was taken.** An album with no devices at all says **Nothing in
-this album has a position, and it has no devices whose routes to show.**
+journey there and back. When nothing has a position and none of its tracks recorded a route, the
+tab says so and names the tracks, for example **Nothing in this album has a position, and Ruby's
+iPhone recorded no route while it was taken.** An album with no tracks at all says **Nothing in
+this album has a position, and it has no tracks whose routes to show.**
 [Dates and places of pictures](dates-places.md) shows how to give pictures a place, and
-[Devices and GPS tracks](devices.md) how a route gets in.
+[Tracks and trips](tracks.md) how a route gets in.
 
 ### The Info tab
 
-![The album's Info tab: the Album section with Name, When, Holds and On the map, and the People, Places and Devices sections with counts](../../assets/shots/album-info.webp "The Info tab sums up who and what is in the album, each with a link.")
+![The album's Info tab: the Album section with Name, When, Holds and On the map, and the People, Places and Cameras sections with counts](../../assets/shots/album-info.webp "The Info tab sums up who and what is in the album, each with a link.")
 
 | Section           | What it shows                                                                                                                               |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -198,34 +198,38 @@ this album has a position, and it has no devices whose routes to show.**
 | **About**         | The description                                                                                                                             |
 | **People**        | The people in its pictures, most often first                                                                                                |
 | **Places**        | The locations its pictures are linked to                                                                                                    |
-| **Devices**       | The devices whose routes the Map tab shows: those that took its pictures, then those added to the album                                     |
+| **Cameras**       | The cameras that took its pictures, most pictures first                                                                                     |
+| **Tracks**        | The tracks the Map tab draws: those the cameras of its pictures record into, then those added to the album                                  |
 | **Photographers** | The people who took them                                                                                                                    |
 | **Labels**        | The labels its pictures carry, with how many carry each                                                                                     |
 
-Each name opens its page. In **People**, **Places** and **Devices**, the number beside a name
-searches the album for the pictures that have it; a device added to the album says **added**
-instead. In **Labels**, a label searches the album for that label. **People**, **Places** and
-**Photographers** show their first 10, then **Show all N** and **Show fewer**; **Devices** and
-**Labels** show them all. When nobody is tagged and nothing is linked to a place or a device, the
-tab says so.
+Each name opens its page. In **People**, **Places** and **Cameras**, the number beside a name
+searches the album for the pictures that have it. In **Tracks**, the number is how many of the
+pictures the cameras recording into the track took, and a track added to the album says **added**
+instead. In **Labels**, a label searches the album for that label. **People**, **Places**,
+**Cameras** and **Photographers** show their first 10, then **Show all N** and **Show fewer**;
+**Tracks** and **Labels** show them all. When nobody is tagged and nothing is linked to a location
+or a camera, the tab says so.
 
-## Choose which devices' routes the map shows
+## Choose which tracks the map shows
 
-An album's devices start as the cameras and phones that took its pictures. A device that took
-pictures joining later, say from an import, is on the list as soon as they are in the album, and a
-route one of them records later shows on the map. You can add a device that took none of the
-pictures, such as a GPS tracker, and take off one whose route does not belong. You can do this if
-you may change the album.
+An album's tracks start as those the cameras that took its pictures record into, such as a phone's
+(see [A phone that records where it was](cameras.md#a-phone-that-records-where-it-was)). A camera
+whose pictures join later, say from an import, brings its track onto the list as soon as they are in
+the album, and a route it records later shows on the map. You can add a track no camera of the
+album records into, such as a GPS tracker's, and take off one whose route does not belong. You can
+do this if you may change the album.
 
 1. Open the album and choose the **Info** tab.
-2. In **Devices**:
-   - to add one, choose it in **Add a device to the map**;
+2. In **Tracks**:
+   - to add one, choose it in **Add a track to the map**;
    - to take one off, choose **×** beside it (**Take off the map**).
 
-A device that took some of the album's pictures and was taken off is listed under **Taken off the
-map**, and stays off when more of its pictures join the album. Choose **+** beside it (**Put back
-on the map**) to put it back. Only the map is changed: the pictures stay in the album, linked to
-their device.
+With no track, the section says "No tracks: the map shows no routes." A track that a camera of the
+album's pictures records into and that was taken off is listed under **Taken off the map**, and stays
+off when more of that camera's pictures join the album. Choose **+** beside it (**Put back on the
+map**) to put it back. Only the map is changed: the pictures stay in the album, linked to their
+camera.
 
 ## Add pictures to an album
 
@@ -526,21 +530,21 @@ covers all of it.
 
 ## If something looks different
 
-| What you see                                                                                         | Why                                                                                                        | What to do                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No **Upload**, **Share** or **Edit** on an album                                                     | You may look at the album but not change it.                                                               | Ask its owner, or an administrator, to share it with you so that you can edit it. See [Sharing](../guide/sharing.md).                                                                                                                                         |
-| A placeholder where a picture should be, after an upload                                             | Its thumbnail is not made yet. The media service makes it, after the pictures uploaded before it.          | Wait. [Getting your photos in](importing.md) explains why it takes time.                                                                                                                                                                                      |
-| Uploaded pictures are not on their day yet                                                           | Their dates have not been read yet.                                                                        | Reload the page a little later.                                                                                                                                                                                                                               |
-| An album has no dates on its card                                                                    | None of its pictures has a date, no span is set, and it is not a trip's.                                   | Set **Starts** and **Ends** in **Edit album**, or give the pictures a time with **Set time**.                                                                                                                                                                 |
-| **Share** in the selection bar is greyed out                                                         | The selection holds a picture that was only added to this album; it has the sharing of the place it lives. | Select only pictures that live here. Share the others where they live.                                                                                                                                                                                        |
-| **Set as cover** is greyed out                                                                       | It needs exactly one picture selected.                                                                     | Select one.                                                                                                                                                                                                                                                   |
-| **Stack** is greyed out                                                                              | It needs two or more.                                                                                      | Select more.                                                                                                                                                                                                                                                  |
-| The last button reads **Remove**, not **Delete**                                                     | Every selected picture was only added to this album.                                                       | **Remove** takes them out of this album only. To delete a picture, go to the album where it lives.                                                                                                                                                            |
-| A picture is gone from an album nobody changed                                                       | Someone deleted it where it lives, or moved that album to the trash.                                       | It comes back to every album when it is restored from the trash of whoever deleted it.                                                                                                                                                                        |
-| **Nothing in this album has a position, and … recorded no route while it was taken.** on the Map tab | No picture has a place, and none of the album's devices recorded a route within its dates.                 | Give pictures a place with **Set location** ([Dates and places of pictures](dates-places.md)), widen the album's dates, or add the device that recorded the route ([Choose which devices' routes the map shows](#choose-which-devices-routes-the-map-shows)). |
-| A route recorded on the trip is not on the Map tab                                                   | The device that recorded it took none of the album's pictures, or was taken off the map.                   | Add it in the **Info** tab's **Devices** ([Choose which devices' routes the map shows](#choose-which-devices-routes-the-map-shows)).                                                                                                                          |
-| **This album holds more than 20,000 entries; 20,000 of them are shown.**                             | An album page shows at most 20,000 pictures.                                                               | Split it into folders or several albums, or search inside it.                                                                                                                                                                                                 |
-| `album: Node already exists in parent … with name: …` when you create an album                       | An album or folder of that name is already in `/archive/albums`.                                           | Choose another name.                                                                                                                                                                                                                                          |
+| What you see                                                                                         | Why                                                                                                        | What to do                                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No **Upload**, **Share** or **Edit** on an album                                                     | You may look at the album but not change it.                                                               | Ask its owner, or an administrator, to share it with you so that you can edit it. See [Sharing](../guide/sharing.md).                                                                                                                           |
+| A placeholder where a picture should be, after an upload                                             | Its thumbnail is not made yet. The media service makes it, after the pictures uploaded before it.          | Wait. [Getting your photos in](importing.md) explains why it takes time.                                                                                                                                                                        |
+| Uploaded pictures are not on their day yet                                                           | Their dates have not been read yet.                                                                        | Reload the page a little later.                                                                                                                                                                                                                 |
+| An album has no dates on its card                                                                    | None of its pictures has a date, no span is set, and it is not a trip's.                                   | Set **Starts** and **Ends** in **Edit album**, or give the pictures a time with **Set time**.                                                                                                                                                   |
+| **Share** in the selection bar is greyed out                                                         | The selection holds a picture that was only added to this album; it has the sharing of the place it lives. | Select only pictures that live here. Share the others where they live.                                                                                                                                                                          |
+| **Set as cover** is greyed out                                                                       | It needs exactly one picture selected.                                                                     | Select one.                                                                                                                                                                                                                                     |
+| **Stack** is greyed out                                                                              | It needs two or more.                                                                                      | Select more.                                                                                                                                                                                                                                    |
+| The last button reads **Remove**, not **Delete**                                                     | Every selected picture was only added to this album.                                                       | **Remove** takes them out of this album only. To delete a picture, go to the album where it lives.                                                                                                                                              |
+| A picture is gone from an album nobody changed                                                       | Someone deleted it where it lives, or moved that album to the trash.                                       | It comes back to every album when it is restored from the trash of whoever deleted it.                                                                                                                                                          |
+| **Nothing in this album has a position, and … recorded no route while it was taken.** on the Map tab | No picture has a place, and none of the album's tracks recorded a route within its dates.                  | Give pictures a place with **Set location** ([Dates and places of pictures](dates-places.md)), widen the album's dates, or add the track that holds the route ([Choose which tracks the map shows](#choose-which-tracks-the-map-shows)).        |
+| A route recorded on the trip is not on the Map tab                                                   | No camera of the album's pictures records into its track, or the track was taken off the map.              | Add it in the **Info** tab's **Tracks** ([Choose which tracks the map shows](#choose-which-tracks-the-map-shows)), or link the phone's camera to its track ([A phone that records where it was](cameras.md#a-phone-that-records-where-it-was)). |
+| **This album holds more than 20,000 entries; 20,000 of them are shown.**                             | An album page shows at most 20,000 pictures.                                                               | Split it into folders or several albums, or search inside it.                                                                                                                                                                                   |
+| `album: Node already exists in parent … with name: …` when you create an album                       | An album or folder of that name is already in `/archive/albums`.                                           | Choose another name.                                                                                                                                                                                                                            |
 
 ## In the terminal
 
@@ -554,16 +558,16 @@ album add "/archive/albums/Christmas in Wellington" "/archive/albums/Ruby's Well
 album set "/archive/albums/Christmas in Wellington" spanStart 2025-12-18
 album set "/archive/albums/Christmas in Wellington" next "/archive/albums/Ruby's Wellington"
 album-stack refresh "/archive/albums/Christmas in Wellington" --dry-run -v
-album-device-list "/archive/albums/Christmas in Wellington"
-album-device-add "/archive/albums/Christmas in Wellington" gps-tracker
-album-device-rm "/archive/albums/Christmas in Wellington" ruby-iphone
+album-track-list "/archive/albums/Christmas in Wellington"
+album-track-add "/archive/albums/Christmas in Wellington" gps-tracker
+album-track-rm "/archive/albums/Christmas in Wellington" ruby-iphone
 album-random
 ```
 
 An album's path is its folder, `/archive/albums/` and the name it was created with; renaming it
-does not change the path. A device is its path or its slug, the last part of the path. [`album`](commands.md#album),
-[`album-stack`](commands.md#album-stack), [`album-device-list`](commands.md#album-device-list),
-[`album-device-add`](commands.md#album-device-add), [`album-device-rm`](commands.md#album-device-rm)
+does not change the path. A track is its path, or a device or camera that has one, by its path or
+its name. [`album`](commands.md#album), [`album-stack`](commands.md#album-stack),
+[`album-track-list`](commands.md), [`album-track-add`](commands.md), [`album-track-rm`](commands.md)
 and [`album-random`](commands.md#album-random) have every option in the
 [archive's commands](commands.md).
 

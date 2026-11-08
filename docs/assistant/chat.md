@@ -89,7 +89,7 @@ Names in the answer are links: a picture opens in the viewer, a person, album or
 
 ### Show in search
 
-When the assistant searched, **Show in search** opens that search with its filters filled in: on the Media page for photos, videos and recordings, and on the Search page when it looked for albums, people, places, devices or tracks. Use it to see how the assistant understood your question, and to change the filters yourself. [Search and the finder](../archive/search.md) explains the filters.
+When the assistant searched, **Show in search** opens that search with its filters filled in: on the Media page for photos, videos and recordings, and on the Search page when it looked for albums, people, places, cameras or tracks. Use it to see how the assistant understood your question, and to change the filters yourself. [Search and the finder](../archive/search.md) explains the filters.
 
 ### Tables
 
@@ -121,7 +121,7 @@ Asked "Add to Ruby Wrenfield's timeline that she graduated in December 2021", th
 ```bash
 set -e
 
-# Add an event (blob) to a person, album, location or device
+# Add an event (blob) to a person, album, location or camera
 person-add-event --date=2021-12 --body='Graduated' /archive/people/ruby-wrenfield
 ```
 

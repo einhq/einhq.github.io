@@ -58,7 +58,7 @@ With the [Archive](../archive/index.md) installed, its pages and commands make t
 | What you do                                                                                                    | The link it makes                                                                           |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Add a picture to an album from elsewhere ([Albums](../archive/albums.md#add-pictures-that-are-already-in-ein)) | A link in the album, named after the picture, to where the picture lives                    |
-| Choose an album's, person's, location's or device's cover                                                      | `coverPhoto` in it, to the picture                                                          |
+| Choose an album's, person's, location's or camera's cover                                                      | `coverPhoto` in it, to the picture                                                          |
 | Set an album's **Previous album** or **Next album**                                                            | `previous` and `next` in the album, and the matching one back in the other album            |
 | Add a parent, partner or child ([Family tree](../archive/family.md))                                           | A pair: one in `parents/`, `children/` or `partners/` of each person, pointing at the other |
 | Add a home or a resident                                                                                       | A pair: one in the person's `homes/`, one in the location's `residents/`                    |
@@ -145,7 +145,7 @@ EiN has no `readlink` command, and nothing lists the links that point at a node.
 Select it and choose **Properties** (<kbd>Alt</kbd>+<kbd>Enter</kbd>) to see **Link to** with the
 target and **Links** with the count of names.
 
-![The Nodes explorer open at /archive/people/peggy-wrenfield: the folders children, devices, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums](../../assets/shots/nodes.webp "A person's folder holds folders of relation links and a cover link; the arrow shows where the link points.")
+![The Nodes explorer open at /archive/people/peggy-wrenfield: the folders cameras, children, events, homes and partners, and a softlink of type softlink with an arrow to a path under /archive/albums](../../assets/shots/nodes.webp "A person's folder holds folders of relation links and a cover link; the arrow shows where the link points.")
 
 **Over SFTP.** Softlinks are symbolic links: `ls -l` in `sftp` shows them as links, following one
 takes you to the target, and `ln -s` makes one. How a recursive copy treats a link depends on your

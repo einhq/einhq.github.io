@@ -18,7 +18,7 @@ GitHub:
 
 | Module                               | What it gives you                                                                                                                            | What it needs                                                                                      |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`archive`](../archive/index.md)     | The Archive: albums, media, people and the family tree, locations, devices and tracks, staging, and the search that finds things among them  | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
+| [`archive`](../archive/index.md)     | The Archive: albums, media, people and the family tree, locations, cameras and tracks, staging, and the search that finds things among them  | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
 | [`assistant`](../assistant/index.md) | **Chat**: the assistant that answers questions by running EiN's commands for you                                                             | A [language model](../assistant/language-model.md), either the installer's `--llm` or a hosted one |
 | [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard** | The [media service](../ems/index.md)                                                               |
 

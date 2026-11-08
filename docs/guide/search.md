@@ -21,7 +21,7 @@ search key does what <kbd>Enter</kbd> does. [EiN on a phone](phone.md) covers th
 
 With no module installed, the finder finds the pages in your sidebar, the actions in the top bar
 and EiN's commands. Each module adds its pages and actions, and the Archive adds its albums,
-people, locations and devices by name.
+people, locations and cameras by name.
 
 ### Go somewhere with nothing typed
 
@@ -43,7 +43,7 @@ As you type, the list changes to these groups, in this order:
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | **Search**                      | `Search for "<your words>"`, and with the Archive installed `Pictures of "<your words>"`                                                        | The Search page, or the Archive's Media page, searching for the words |
 | **Go to** and **Do**            | The pages and actions whose names hold your words                                                                                               | That page or action                                                   |
-| The kinds the Search page finds | Their things whose names match, with the kind of each beside it. With the Archive installed the group is **Albums, people, locations, devices** | Its page                                                              |
+| The kinds the Search page finds | Their things whose names match, with the kind of each beside it. With the Archive installed the group is **Albums, people, locations, cameras** | Its page                                                              |
 
 The first row is lit, so <kbd>Enter</kbd> opens the Search page for your words, and so does the
 arrow button at the end of the box. To go straight to a page or a thing, light its row with the
@@ -85,8 +85,8 @@ command.
 **Search**, under Explore in the sidebar, searches the kinds of things the installed modules make
 searchable. With no module installed it has nothing to search: before you type it says **Search
 for anything**, and a search answers **No results found**. With the Archive installed it finds
-albums, people, locations and devices; see
-[Find albums, people, locations and devices](../archive/search.md#find-albums-people-locations-and-devices).
+albums, people, locations and cameras; see
+[Find albums, people, locations and cameras](../archive/search.md#find-albums-people-locations-and-cameras).
 
 1. Open **Search** in the sidebar, or choose **Search for "…"** in the finder. The header reads
    **Search** and **Search by name, date or @mention**.
@@ -137,14 +137,14 @@ by the names of its commands and by its manifest:
 | What a module gives                                | What it adds to search                                                                             |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `search-<x>` commands                              | Hits for the words of a search; `search` asks every one on the path and puts the hits together     |
-| `subject-<kind>` commands                          | What a person, location or device picked with `@` has                                              |
+| `subject-<kind>` commands                          | What a person, location or camera picked with `@` has                                              |
 | Node types marked `searchable` in its manifest     | The kinds the Search page finds and offers under **Show**, and the things the finder finds by name |
 | Panels for the Search page                         | The sections shown before you search, and what a search for one label adds                         |
 | A reader for the box, named by `CFG_SEARCH_PARSER` | How a sentence is read into chips                                                                  |
 | A command finder, named by `CFG_COMMAND_FINDER`    | Commands found by what they are for, in the finder                                                 |
 
 With no module, `search` has no provider to ask and the Search page no kind to find. The Archive
-brings the providers for albums, people, locations, devices, tracks, media and documents, and the
+brings the providers for albums, people, locations, cameras, tracks, media and documents, and the
 reader for the box; the assistant brings the command finder. [Writing a module](../develop/modules.md#plug-into-search-the-home-page-and-other-places)
 shows how a module plugs in, and the settings are in the
 [settings reference](../reference/settings.md#cfg_search_parser).

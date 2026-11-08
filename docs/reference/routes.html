@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core commands</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html" aria-current="page">Addresses in the Web UI</a></li><li><a href="glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -289,7 +289,7 @@ reload; the Archive&#39;s <strong>Media</strong> page takes the same parameters.
 </tr>
 <tr>
 <td><code>kind</code></td>
-<td>Kinds, separated by commas: <code>photo</code>, <code>video</code>, <code>audio</code>, <code>document</code>, <code>person</code>, <code>location</code>, <code>album</code>, <code>device</code>, <code>track</code></td>
+<td>Kinds, separated by commas: <code>photo</code>, <code>video</code>, <code>audio</code>, <code>document</code>, <code>person</code>, <code>location</code>, <code>album</code>, <code>camera</code>, <code>track</code></td>
 <td><code>kind=photo,video</code></td>
 </tr>
 <tr>
@@ -299,7 +299,7 @@ reload; the Archive&#39;s <strong>Media</strong> page takes the same parameters.
 </tr>
 <tr>
 <td><code>subject</code></td>
-<td>A person, location or device that must be in it, as <code>&lt;kind&gt;:&lt;name&gt;</code> or a path; repeat it for several, all of which must be there</td>
+<td>A person, location or camera that must be in it, as <code>&lt;kind&gt;:&lt;name&gt;</code> or a path; repeat it for several, all of which must be there</td>
 <td><code>subject=person:helen-okafor</code></td>
 </tr>
 <tr>
@@ -344,8 +344,8 @@ reload; the Archive&#39;s <strong>Media</strong> page takes the same parameters.
 </tr>
 </tbody></table>
 </div>
-<p>The kinds <code>person</code>, <code>location</code>, <code>album</code> and <code>device</code>, and a <code>subject</code>, find something only with the
-Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
+<p>The kinds <code>person</code>, <code>location</code>, <code>album</code>, <code>camera</code> and <code>track</code>, and a <code>subject</code>, find something only
+with the Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
 newest first:</p>
 <div class="code"><pre tabindex="0"><code>/media?kind=photo,video&amp;subject=person:helen-okafor&amp;from=1980&amp;to=1989&amp;sort=-time</code></pre></div>
 <p>Only one of <code>bbox</code>, <code>circle</code> and <code>poly</code> applies. <strong>Search</strong> with no parameters shows its landing
@@ -534,12 +534,12 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 <tr>
 <td><code>/track/&lt;path&gt;</code></td>
 <td><code>POST</code></td>
-<td>Adds GPS points to a track node, see <a href="../archive/devices.html">Devices and GPS tracks</a></td>
+<td>Adds GPS points to a track node, see <a href="../archive/tracks.html">Tracks and trips</a></td>
 </tr>
 <tr>
 <td><code>/tracker/&lt;id&gt;.&lt;token&gt;</code></td>
 <td><code>GET</code>, <code>POST</code></td>
-<td>Where a phone or GPS tracker posts its position without signing in, see <a href="../archive/devices.html#live-tracking-from-a-phone">Live tracking from a phone</a></td>
+<td>Where a phone or GPS tracker posts its position without signing in, see <a href="../automation/index.html#live-tracking-from-a-phone">Live tracking from a phone</a></td>
 </tr>
 <tr>
 <td><code>/__shell</code></td>
@@ -554,8 +554,8 @@ gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</co
 <h2 id="the-archives-pages">The Archive&#39;s pages<a class="anchor" href="#the-archives-pages" aria-label="Link to this section"></a></h2>
 <p>These addresses exist with the <a href="../archive/index.html">Archive</a> installed.</p>
 <p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree. A person&#39;s or a place&#39;s is its name
-in lower case with hyphens: Helen Okafor is <code>/people/helen-okafor</code>. A device&#39;s keeps its capitals and
-has <code>_</code> for spaces, such as <code>/devices/Canon_EOS_5D_Mark_III</code>. Addresses with
+in lower case with hyphens: Helen Okafor is <code>/people/helen-okafor</code>. A camera&#39;s keeps its capitals and
+has <code>_</code> for spaces, such as <code>/cameras/Canon_EOS_5D_Mark_III</code>. Addresses with
 <code>&lt;path&gt;</code> take the node&#39;s whole path, URL-encoded.</p>
 <h3 id="browsing">Browsing<a class="anchor" href="#browsing" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -618,12 +618,20 @@ has <code>_</code> for spaces, such as <code>/devices/Canon_EOS_5D_Mark_III</cod
 <td>One location</td>
 </tr>
 <tr>
-<td><code>/devices</code></td>
-<td><strong>Devices</strong>, see <a href="../archive/devices.html">Devices and GPS tracks</a></td>
+<td><code>/cameras</code></td>
+<td><strong>Cameras</strong>, see <a href="../archive/cameras.html">Cameras</a></td>
 </tr>
 <tr>
-<td><code>/devices/&lt;name&gt;</code></td>
-<td>One device</td>
+<td><code>/cameras/&lt;name&gt;</code></td>
+<td>One camera</td>
+</tr>
+<tr>
+<td><code>/tracks</code></td>
+<td><strong>Tracks</strong>, see <a href="../archive/tracks.html">Tracks and trips</a></td>
+</tr>
+<tr>
+<td><code>/tracks/&lt;path&gt;</code></td>
+<td>One track, for example <code>/tracks/%2Farchive%2Fdevices%2Fsailboat%2Fposition%2Fhistory</code></td>
 </tr>
 <tr>
 <td><code>/favourites</code></td>
@@ -658,8 +666,8 @@ a page by their address. All of them need you to be signed in.</p>
 <td><strong>Create Location</strong></td>
 </tr>
 <tr>
-<td><code>/devices/new</code></td>
-<td><strong>Register Device</strong>; <code>?name=</code>, <code>?make=</code>, <code>?model=</code> and <code>?serial=</code> fill in its fields</td>
+<td><code>/cameras/new</code></td>
+<td><strong>Register Camera</strong>; <code>?name=</code>, <code>?make=</code>, <code>?model=</code> and <code>?serial=</code> fill in its fields</td>
 </tr>
 </tbody></table>
 </div>
@@ -687,6 +695,10 @@ a page by their address. All of them need you to be signed in.</p>
 <tr>
 <td><code>/staging/categories/&lt;name&gt;</code></td>
 <td><strong>Category settings</strong> for one category</td>
+</tr>
+<tr>
+<td><code>/staging/routes</code></td>
+<td><strong>Routes waiting for a track</strong>, see <a href="../archive/tracks.html#gpx-files-in-staging">GPX files in staging</a></td>
 </tr>
 </tbody></table>
 </div>
@@ -754,8 +766,12 @@ its own too, which is mostly useful for linking to it.</p>
 <td><code>info</code> (<strong>Info</strong>), <code>timeline</code> (<strong>Timeline</strong>), <code>media</code> (<strong>Media</strong>), <code>residents</code> (<strong>Residents</strong>)</td>
 </tr>
 <tr>
-<td><code>/devices/&lt;name&gt;</code></td>
-<td><code>info</code> (<strong>Info</strong>), <code>timeline</code> (<strong>Timeline</strong>), <code>media</code> (<strong>Media</strong>), <code>track</code> (<strong>Track</strong>), <code>owners</code> (<strong>Owners</strong>)</td>
+<td><code>/cameras/&lt;name&gt;</code></td>
+<td><code>info</code> (<strong>Info</strong>), <code>media</code> (<strong>Media</strong>)</td>
+</tr>
+<tr>
+<td><code>/tracks/&lt;path&gt;</code></td>
+<td><code>track</code> (<strong>Track</strong>), <code>trips</code> (<strong>Trips</strong>), <code>info</code> (<strong>Info</strong>)</td>
 </tr>
 <tr>
 <td><code>/staging</code></td>
@@ -827,7 +843,7 @@ left out, so a plain <code>/map</code> stays plain.</p>
 <td>The year shown, for example <code>year=1979</code>; this year when left out</td>
 </tr>
 <tr>
-<td><code>/people</code>, <code>/albums</code>, <code>/locations</code>, <code>/devices</code></td>
+<td><code>/people</code>, <code>/albums</code>, <code>/locations</code>, <code>/cameras</code>, <code>/tracks</code></td>
 <td><code>q</code></td>
 <td>The filter typed into the page&#39;s own search box</td>
 </tr>

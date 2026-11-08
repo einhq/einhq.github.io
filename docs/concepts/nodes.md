@@ -57,7 +57,7 @@ administrators.
 2. Go to the node, by its folders or by typing its path in the address bar.
 3. Choose **Properties** in the node's context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.
 
-![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside](../../assets/shots/nodes.webp "A person is a node like any other, with folders of her own beneath her.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside](../../assets/shots/nodes.webp "A person is a node like any other, with folders of her own beneath her.")
 
 The properties dialog has three tabs:
 
@@ -240,8 +240,8 @@ The type is a plain word stored on the node, and it decides three things:
 - **How EiN treats it.** A `softlink` is followed to its target; a `queue` hands out its messages
   in order; a `session` disappears when its connection ends; a `file` is shown as a picture, a video
   or a text by its mimetype.
-- **Where it shows.** The Archive's pages list `album`, `person`, `location` and `device` nodes;
-  the search box's `@` completes their names, and labels'. `find -type person` finds a type
+- **Where it shows.** The Archive's pages list `album`, `person`, `location`, `camera` and `track`
+  nodes; the search box's `@` completes the names of all but tracks, and labels'. `find -type person` finds a type
   anywhere in the tree.
 
 A node's type does not change after it is made. To turn a folder into an album, for example, make
@@ -251,7 +251,7 @@ a new album and move the files into it.
 
 Core has its own types: the ones every installation needs, such as `file`, `directory`,
 `softlink`, `user`, `group`, `log` and `queue`. Modules add theirs: the Archive brings `album`,
-`person`, `location`, `device`, `media-region`, `exif` and `album-profile`. A module describes its
+`person`, `location`, `camera`, `media-region`, `exif` and `album-profile`. A module describes its
 types in its manifest, with a label, a description and a category; [The module manifest](../develop/manifest.md) shows how.
 
 A type is not registered anywhere before it is used. `mknode -t <type>` makes a node of any type,
@@ -263,7 +263,7 @@ The types fall into three groups:
 
 | Group         | What is in it                                                                                                                |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Content**   | What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, devices and faces. |
+| **Content**   | What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, cameras and faces. |
 | **Structure** | How the tree is arranged: directories, links, accounts and groups.                                                           |
 | **System**    | How EiN runs: commands, logs, queues, pools, routers, sessions, terminals, embeddings, share links.                          |
 

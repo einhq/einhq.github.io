@@ -20,7 +20,7 @@ ls /archive
 ```
 
 ```text
-albums  devices  locations  people  tags  tracks
+albums  cameras  locations  people  tags  tracks
 ```
 
 That is an EiN with the [Archive](../archive/index.md) installed, which makes every folder there but
@@ -39,7 +39,7 @@ with a keyboard attached. From your own computer you can also reach the same she
 Administrators have one more way in: in the **Nodes** explorer, right-click a folder and choose
 **Open terminal here**. EiN opens a new tab and types `cd` to that folder for you.
 
-![The terminal filling the window: ls /archive lists albums, devices, locations, people, tags and tracks; a find counts 19 people; person-info prints Peggy Wrenfield's names, dates, relations, homes and events; and cat draws a photo from the christmas-2019 album](../../assets/shots/terminal.webp "The terminal works on the same tree the pages show: people, albums and photos are paths you can list, read and open.")
+![The terminal filling the window: ls /archive lists albums, cameras, locations, people, tags and tracks; a find counts 19 people; person-info prints Peggy Wrenfield's names, dates, relations, homes and events; and cat draws a photo from the christmas-2019 album](../../assets/shots/terminal.webp "The terminal works on the same tree the pages show: people, albums and photos are paths you can list, read and open.")
 
 ### Read the prompt
 

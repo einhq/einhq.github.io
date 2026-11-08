@@ -167,7 +167,7 @@ choose **Add**. Opened while a picture, an album or another page about one thing
 offers **About** that thing, ticked, and the new item links to it.
 
 A card's links are listed under its description, each with its picture: a picture's own, an
-album's cover, a person's, place's or device's picture. A picture or a video shows as its picture
+album's cover, a person's, place's or camera's picture. A picture or a video shows as its picture
 alone, its name said on hovering it; any other link is named too, called what it points at is
 called, such as an album's title. Choosing one opens it: a picture in the lightbox, an album or a person on their page.
 A link to something that is gone, or that you may not see, is greyed out.
@@ -183,7 +183,7 @@ While it is on, a round button floats over every page and over the lightbox; dia
 Drag it wherever it is out of your way; it stays there on that device.
 
 - Its **badge** counts the open todos, on any list you can see, that link to what is on screen: the
-  picture open in the lightbox, or the album, person, place or device whose page is open. Stepping
+  picture open in the lightbox, or the album, person, place or camera whose page is open. Stepping
   from picture to picture in the lightbox, the count follows.
 - With **none**, choosing the button opens **New todo item** at once, with **About** what is on
   screen ticked, so the new item links to it. Adding it leaves you where you were.

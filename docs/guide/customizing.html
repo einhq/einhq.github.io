@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -253,7 +253,8 @@ Browse
   Albums           /albums          archive.albums
   People           /people          archive.people
   Locations        /locations       archive.locations
-  Devices          /devices         archive.devices
+  Cameras          /cameras         archive.cameras
+  Tracks           /tracks          archive.tracks
 System
   Settings         /settings        ui.settings
   Statistics       /stats           ui.stats
@@ -265,7 +266,7 @@ top bar
     Album          archive.create-album
     Person         archive.create-person
     Location       archive.create-location
-    Device         archive.create-device
+    Camera         archive.create-camera
   Random album     archive.random-album (alt+R)
   Account          ui.account
     Favourites     archive.favourites
@@ -558,7 +559,7 @@ open menu. With <code>&quot;order&quot;: 15</code> the button stands between <st
 <p>Rows can go into the menus EiN has as well:</p>
 <ul>
 <li><strong><code>&quot;parent&quot;: &quot;ui.create&quot;</code></strong> adds a row to the <strong>Create New</strong> menu under the plus. The archive&#39;s
-rows are <strong>Import media</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Device</strong>
+rows are <strong>Import media</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Camera</strong>
 (40).</li>
 <li><strong><code>&quot;parent&quot;: &quot;ui.account&quot;</code></strong> adds a row to the menu under your picture, after <strong>Me</strong>. The archive
 puts <strong>Favourites</strong> there (10), and EiN its <strong>Profile</strong> (900, <code>ui.profile</code>) and <strong>Trash</strong> (910,
@@ -593,12 +594,12 @@ from anywhere outside a text field, and an <kbd>Alt</kbd> key from a text field 
     <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.random-album&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span> <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;sidebar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+U&quot;</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;archive.cameras&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;shortcut&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt+U&quot;</span> <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
 <p>This gives <strong>Create</strong> › <strong>Album</strong> the key <kbd>Alt</kbd>+<kbd>B</kbd>, gives your <strong>Map</strong> button
 <kbd>Alt</kbd>+<kbd>K</kbd>, takes <kbd>Alt</kbd>+<kbd>R</kbd> away from <strong>Random album</strong>, and opens
-<strong>Devices</strong> with <kbd>Alt</kbd>+<kbd>U</kbd>.</p>
+<strong>Cameras</strong> with <kbd>Alt</kbd>+<kbd>U</kbd>.</p>
 <ul>
 <li>A key is modifiers and one key, joined by <code>+</code>. The modifiers are <code>alt</code>, <code>ctrl</code>, <code>shift</code>, <code>meta</code>,
 and <code>mod</code>, which is <kbd>Ctrl</kbd>, or <kbd>⌘</kbd> on a Mac. Letter case does not matter:
@@ -721,8 +722,8 @@ where they matter:</p>
 </div>
 <p>EiN uses them itself: <strong>Nodes</strong> and <strong>Dashboard</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
 and the account menu are <code>signedIn</code>.</p>
-<p>This file, for a family with no cameras or GPS trackers to register, hides <strong>Devices</strong> in the
-sidebar and in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
+<p>This file, for a family with no cameras to register and no tracks, hides <strong>Cameras</strong> and
+<strong>Tracks</strong> in the sidebar and <strong>Camera</strong> in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
 button that reruns failed work with
 <a href="../reference/commands-core.html#pipeline-heal"><code>pipeline-heal</code></a>:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
@@ -732,7 +733,7 @@ button that reruns failed work with
   <span class="hljs-attr">&quot;topbar&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;site.retry&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Retry failed work&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;refresh&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;admin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;action&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;run&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pipeline-heal --apply&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.devices&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;archive.create-device&quot;</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;archive.cameras&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;archive.tracks&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;archive.create-camera&quot;</span><span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre></div>
 <p>Everyone gets the change the next time they load a page. People can still rename and move, in their
 own files, what you changed, but they cannot bring back what you hid. To change the navigation for

@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section class="here"><h2>Reference</h2><ul><li><a href="commands.html">Commands</a></li><li class="nested"><a href="commands-core.html">Core commands</a></li><li><a href="settings.html">Settings</a></li><li><a href="environment.html">Environment variables</a></li><li><a href="node-types.html">Node types</a></li><li><a href="config-files.html">Configuration files</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="routes.html">Addresses in the Web UI</a></li><li><a href="glossary.html" aria-current="page">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -130,8 +130,8 @@ files uploaded into it and links to pictures added from elsewhere, and keeps its
 span and its stacks. Albums are under <code>/archive/albums</code>. See <a href="../archive/albums.html">Albums</a>.</p>
 <h3 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h3>
 <p>The first module, <code>archive</code>, and what it adds: albums, people and their family tree, locations,
-devices and their tracks, labels, staging, and the pipelines that process media. Its parts of the
-tree are <code>/archive/albums</code>, <code>/archive/people</code>, <code>/archive/locations</code> and <code>/archive/devices</code>. Without it, EiN keeps what you give it and works nothing out. See
+cameras, tracks and their trips, labels, staging, and the pipelines that process media. Its parts of the
+tree are <code>/archive/albums</code>, <code>/archive/people</code>, <code>/archive/locations</code> and <code>/archive/cameras</code>. Without it, EiN keeps what you give it and works nothing out. See
 <a href="../archive/index.html">The Archive</a> and <a href="../admin/modules.html">Modules</a>.</p>
 <h3 id="assistant">Assistant<a class="anchor" href="#assistant" aria-label="Link to this section"></a></h3>
 <p>The chat that answers questions about what the archive holds and about EiN, by running EiN&#39;s
@@ -156,6 +156,11 @@ people upload in the meantime is processed first. See
 <p><em>Archive.</em> Several shots taken a moment apart. A burst is not a duplicate: EiN folds it into a stack and
 removes nothing. See <a href="../archive/duplicates.html#copies-look-alikes-and-bursts">Duplicates</a>.</p>
 <h2 id="c">C<a class="anchor" href="#c" aria-label="Link to this section"></a></h2>
+<h3 id="camera">Camera<a class="anchor" href="#camera" aria-label="Link to this section"></a></h3>
+<p><em>Archive.</em> What took a picture: a camera, phone, scanner or camcorder, matched by its make, model and
+serial number. A registered camera dates the pictures it took in its own time zone, and a phone&#39;s
+camera can link to the track it records into. Cameras are under <code>/archive/cameras</code>. See
+<a href="../archive/cameras.html">Cameras</a>.</p>
 <h3 id="category">Category<a class="anchor" href="#category" aria-label="Link to this section"></a></h3>
 <p><em>Archive.</em> A folder of your staging area that keeps one source together, such as a Google Photos export, a box
 of scanned prints or a phone. Its kind (<strong>Inbox</strong>, <strong>Google Photos export</strong>, <strong>Scans</strong>, <strong>Phone</strong>,
@@ -171,7 +176,7 @@ and ordered for processing. See <a href="../archive/staging.html#categories">Sor
 sharing, and the frame of the Web UI. Core brings no pipelines of its own. See
 <a href="../start/how-ein-works.html#modules-decide-what-ein-is-for">How EiN works</a>.</p>
 <h3 id="cover">Cover<a class="anchor" href="#cover" aria-label="Link to this section"></a></h3>
-<p><em>Archive.</em> The picture that stands for an album, a person, a location or a device on its card and in its
+<p><em>Archive.</em> The picture that stands for an album, a person, a location or a camera on its card and in its
 header. A cover is a softlink to one of the pictures, for a person to one of their face crops. See <a href="../archive/albums.html">Albums</a> and
 <a href="../archive/people.html#cover-pictures">People and faces</a>.</p>
 <h2 id="d">D<a class="anchor" href="#d" aria-label="Link to this section"></a></h2>
@@ -189,9 +194,9 @@ The database is in it too, in <code>db</code>. See
 camera and the text read from it. <kbd>i</kbd> opens and closes it. See
 <a href="../archive/viewer.html#the-details-panel">Viewing photos, videos and recordings</a>.</p>
 <h3 id="device">Device<a class="anchor" href="#device" aria-label="Link to this section"></a></h3>
-<p><em>Archive.</em> A camera, phone or tracker, matched by its make, model and serial number. A registered device dates
-the pictures it took in its own time zone and can keep a GPS track. Devices are under
-<code>/archive/devices</code>. See <a href="../archive/devices.html">Devices and GPS tracks</a>.</p>
+<p><em>Automation.</em> Something in the house that reports or can be switched, such as a sensor, a plug or a
+button, or one made by hand, such as a boat whose position a phone posts. Devices are under
+<code>/archive/devices</code>. See <a href="../automation/index.html">Automation</a>.</p>
 <h3 id="discard">Discard<a class="anchor" href="#discard" aria-label="Link to this section"></a></h3>
 <p><em>Archive.</em> The staging decision that sends a group&#39;s files to your trash instead of filing them. It can be
 undone. See <a href="../archive/staging.html">Sorting in staging</a>.</p>
@@ -211,7 +216,7 @@ all compare embeddings. The media service makes them. Also called a vector. See
 <p>The announcement that a node was created, changed, moved or deleted, made once the change is saved.
 Pipelines start from events. See <a href="../concepts/pipelines.html">Changes and pipelines</a>.</p>
 <h3 id="event-on-a-timeline">Event, on a timeline<a class="anchor" href="#event-on-a-timeline" aria-label="Link to this section"></a></h3>
-<p><em>Archive.</em> A dated note on a person, an album, a location or a device: a wedding, a move, a birth. A person&#39;s
+<p><em>Archive.</em> A dated note on a person, an album, a location or a camera: a wedding, a move, a birth. A person&#39;s
 event has the type <strong>Generic</strong>, <strong>Birth</strong>, <strong>Death</strong>, <strong>Marriage</strong> or <strong>Engagement</strong>. See
 <a href="../archive/family.html#record-an-event">Family tree, events and homes</a>.</p>
 <h3 id="exif">EXIF<a class="anchor" href="#exif" aria-label="Link to this section"></a></h3>
@@ -282,7 +287,7 @@ that undoes it. The <strong>Done</strong> tab and <code>staging undo</code> undo
 <a href="../archive/staging-admin.html#what-a-staging-area-is">Staging and importing for administrators</a>.</p>
 <h2 id="l">L<a class="anchor" href="#l" aria-label="Link to this section"></a></h2>
 <h3 id="label">Label<a class="anchor" href="#label" aria-label="Link to this section"></a></h3>
-<p>One word, such as <code>sailing</code>, put on a picture, an album, a person, a location or a device. The same
+<p>One word, such as <code>sailing</code>, put on a picture, an album, a person, a location or a camera. The same
 word is the same label across the archive. A label is a folder under <code>/archive/tags</code> holding a link
 to everything that carries it. See <a href="../archive/media.html#labels">Media, Year and labels</a>.</p>
 <h3 id="lane">Lane<a class="anchor" href="#lane" aria-label="Link to this section"></a></h3>
@@ -414,8 +419,8 @@ expires after 30 days unless you choose another time, and <strong>Delete link</s
 links are kept under <code>/var/links</code>. See
 <a href="../guide/sharing.html#share-an-album-with-a-link">Sharing</a>.</p>
 <h3 id="sharing">Sharing<a class="anchor" href="#sharing" aria-label="Link to this section"></a></h3>
-<p>Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location
-or a device, set in words with <strong>Share</strong>:
+<p>Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location,
+a camera or a track, set in words with <strong>Share</strong>:
 <strong>Can view</strong> or <strong>Can edit</strong> for people and groups, and links for people without an account. It
 sets the same mode and access list as <code>chmod</code> and <code>acl</code>. See <a href="../guide/sharing.html">Sharing</a>.</p>
 <h3 id="shell">Shell<a class="anchor" href="#shell" aria-label="Link to this section"></a></h3>
@@ -453,8 +458,10 @@ button or <kbd>Alt</kbd>+<kbd>T</kbd> opens it. See <a href="../shell/terminal.h
 <p>The bar across the top of every page, with the finder, <strong>Create</strong>, the terminal button and the
 account menu. See <a href="../guide/interface.html#the-top-bar">Finding your way around</a>.</p>
 <h3 id="track">Track<a class="anchor" href="#track" aria-label="Link to this section"></a></h3>
-<p><em>Archive.</em> The route a device recorded: GPS points with times, kept as the device&#39;s child named <code>track</code>, from
-GPX files or sent live. See <a href="../archive/devices.html#a-devices-track">Devices and GPS tracks</a>.</p>
+<p>The route something travelled: GPS points with times, from GPX files or sent live, in a node of the
+type <code>track</code>. With the Automation module, a device with a position keeps one as its position&#39;s
+history. The Archive draws tracks on its maps and cuts them into trips. See
+<a href="../archive/tracks.html">Tracks and trips</a>.</p>
 <h3 id="trash">Trash<a class="anchor" href="#trash" aria-label="Link to this section"></a></h3>
 <p>Where what you delete in the Web UI waits, in <code>.trash</code> in your home folder, for 30 days
 unless the administrator set another number in
@@ -463,6 +470,10 @@ Nodes page do not use it. See <a href="../guide/profile.html#the-trash">Your pro
 <h3 id="tree">Tree<a class="anchor" href="#tree" aria-label="Link to this section"></a></h3>
 <p>The one hierarchy of nodes that holds everything in EiN, from <code>/</code>: <code>/archive</code>, <code>/home</code>, <code>/etc</code>,
 <code>/var</code>, <code>/usr</code>, <code>/dev</code> and <code>/tmp</code>. See <a href="../concepts/tree.html">The tree</a>.</p>
+<h3 id="trip">Trip<a class="anchor" href="#trip" aria-label="Link to this section"></a></h3>
+<p><em>Archive.</em> A stretch of a track from where it lay still to where it lay still again, found by EiN
+and kept up to date as the track grows. A trip can be made an album. See
+<a href="../archive/tracks.html#trips">Tracks and trips</a>.</p>
 <h2 id="u">U<a class="anchor" href="#u" aria-label="Link to this section"></a></h2>
 <h3 id="unidentified-person">Unidentified person<a class="anchor" href="#unidentified-person" aria-label="Link to this section"></a></h3>
 <p><em>Archive.</em> A person recognition started for a face or a voice that matches nobody, with a placeholder name such as

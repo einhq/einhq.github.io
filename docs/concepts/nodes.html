@@ -72,7 +72,7 @@
 <section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html" aria-current="page">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -245,7 +245,7 @@ administrators.</p>
 <li>Go to the node, by its folders or by typing its path in the address bar.</li>
 <li>Choose <strong>Properties</strong> in the node&#39;s context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other, with folders of her own beneath her.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders, each with its mode, owner and group, and her picture in the pane beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other, with folders of her own beneath her.</figcaption></figure>
 <p>The properties dialog has three tabs:</p>
 <ul>
 <li><strong>General</strong> shows the node&#39;s <strong>Id</strong>, <strong>Type</strong>, <strong>Links</strong>, <strong>Created</strong>, <strong>Changed</strong> and
@@ -517,8 +517,8 @@ hold two children of the same name. How the tree is laid out, folder by folder, 
 <li><strong>How EiN treats it.</strong> A <code>softlink</code> is followed to its target; a <code>queue</code> hands out its messages
 in order; a <code>session</code> disappears when its connection ends; a <code>file</code> is shown as a picture, a video
 or a text by its mimetype.</li>
-<li><strong>Where it shows.</strong> The Archive&#39;s pages list <code>album</code>, <code>person</code>, <code>location</code> and <code>device</code> nodes;
-the search box&#39;s <code>@</code> completes their names, and labels&#39;. <code>find -type person</code> finds a type
+<li><strong>Where it shows.</strong> The Archive&#39;s pages list <code>album</code>, <code>person</code>, <code>location</code>, <code>camera</code> and <code>track</code>
+nodes; the search box&#39;s <code>@</code> completes the names of all but tracks, and labels&#39;. <code>find -type person</code> finds a type
 anywhere in the tree.</li>
 </ul>
 <p>A node&#39;s type does not change after it is made. To turn a folder into an album, for example, make
@@ -526,7 +526,7 @@ a new album and move the files into it.</p>
 <h3 id="where-types-come-from">Where types come from<a class="anchor" href="#where-types-come-from" aria-label="Link to this section"></a></h3>
 <p>Core has its own types: the ones every installation needs, such as <code>file</code>, <code>directory</code>,
 <code>softlink</code>, <code>user</code>, <code>group</code>, <code>log</code> and <code>queue</code>. Modules add theirs: the Archive brings <code>album</code>,
-<code>person</code>, <code>location</code>, <code>device</code>, <code>media-region</code>, <code>exif</code> and <code>album-profile</code>. A module describes its
+<code>person</code>, <code>location</code>, <code>camera</code>, <code>media-region</code>, <code>exif</code> and <code>album-profile</code>. A module describes its
 types in its manifest, with a label, a description and a category; <a href="../develop/manifest.html">The module manifest</a> shows how.</p>
 <p>A type is not registered anywhere before it is used. <code>mknode -t &lt;type&gt;</code> makes a node of any type,
 and a module&#39;s commands are often built on it: <code>person-create</code> makes a <code>person</code> node with
@@ -542,7 +542,7 @@ simply undescribed.</p>
 </thead>
 <tbody><tr>
 <td><strong>Content</strong></td>
-<td>What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, devices and faces.</td>
+<td>What the archive is made of: files, positions and tracks, and with the Archive albums, people, locations, cameras and faces.</td>
 </tr>
 <tr>
 <td><strong>Structure</strong></td>

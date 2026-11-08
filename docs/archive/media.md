@@ -69,7 +69,7 @@ Type in the box, where it says "Filter the media — “Anna sailing 2011”, or
 
 - Words find pictures by what they show, by the text written in them and by what is said in recordings and videos. "Christmas tree" finds Christmas pictures from every decade, whether or not anyone labelled them.
 - A year in what you type becomes a chip, such as "1998" or "from 2010", and a kind of file, such as "videos", sets **Show**. With a language model set up, the names of people and places become chips too.
-- `@` opens a list of people, locations, labels, devices and albums. Pick one to keep only the pictures that have it: `@Peggy Wrenfield`, `@The cottage at Malpas`, `#sailing`.
+- `@` opens a list of people, locations, labels, cameras and albums. Pick one to keep only the pictures that have it: `@Peggy Wrenfield`, `@The cottage at Malpas`, `#sailing`.
 - The picture button beside the box, **Search with a picture**, finds what looks like a picture from your device, such as a photo of an old print.
 
 The results are one grid, best matches first. Each tile shows its score as a percentage, measured against the best match, which is 100%. The search is kept in the page's address, so you can send someone the link and it opens the same search. Remove the chips and empty the box to return to the feed.
@@ -158,22 +158,22 @@ The box narrows what you see without changing the address: a reload, or a link y
 
 ## Labels
 
-A label is one word, such as `sailing` or `christmas`, that you put on a picture, an album, a person, a location or a device. A label stays one word: spaces and commas in what you type start the next label, and a slash becomes a hyphen. Labels are shared across the archive, so the labels anyone has used are offered as you type, and the same word is the same label wherever it is.
+A label is one word, such as `sailing` or `christmas`, that you put on a picture, an album, a person, a location or a camera. A label stays one word: spaces and commas in what you type start the next label, and a slash becomes a hyphen. Labels are shared across the archive, so the labels anyone has used are offered as you type, and the same word is the same label wherever it is.
 
-Labels show under the name of what carries them: in an album's, a person's, a location's or a device's header, and in the viewer's details panel.
+Labels show under the name of what carries them: in an album's, a person's, a location's or a camera's header, and in the viewer's details panel.
 
 ### Put labels on pictures
 
-1. Select the pictures, on the Media page, in an album, or on a person's, a location's or a device's **Media** tab.
+1. Select the pictures, on the Media page, in an album, or on a person's, a location's or a camera's **Media** tab.
 2. Press **Label** in the bar at the bottom.
 3. In **Add labels**, type the labels. "Pick a label in use or type a new one. A space starts the next label."
 4. Press **Add labels**.
 
 **Label** is offered only when you may change every selected file. To put labels on a single picture you have open, use its cog menu in the viewer: **Edit** opens **Edit file**, which has a **Labels** field.
 
-### Put labels on an album, a person, a location or a device
+### Put labels on an album, a person, a location or a camera
 
-Each of these has a **Labels** field in its edit dialog, opened with **Edit** in its header: **Edit album**, **Edit person**, **Edit location** and **Edit device**. Add a label by typing it, take one off with the × on it, and save the dialog. You see **Edit** only where you may change the thing.
+Each of these has a **Labels** field in its edit dialog, opened with **Edit** in its header: **Edit album**, **Edit person**, **Edit location** and **Edit camera**. Add a label by typing it, take one off with the × on it, and save the dialog. You see **Edit** only where you may change the thing.
 
 The edit dialogs are also the only place in the Web UI where you take labels off. There is no button that takes a label off many pictures at once; in the terminal, `label remove` does it for one node at a time.
 
@@ -183,7 +183,7 @@ Where you look decides what you find:
 
 | Where                                                            | What it finds                                                                                                                                            |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Click a label wherever it is shown                               | The [Search](search.md) page for that label: albums holding a picture that carries it, and any album, person, location or device that carries it itself. |
+| Click a label wherever it is shown                               | The [Search](search.md) page for that label: albums holding a picture that carries it, and any album, person, location or camera that carries it itself. |
 | The Media page: pick the label with `@`, or click its label pill | The pictures that carry the label.                                                                                                                       |
 | The Year page: pick the label with `@`                           | The albums of that year holding pictures that carry it.                                                                                                  |
 | An album's **Info** tab, under **Labels**                        | The album's pictures that carry each label, with their count. See [Albums](albums.md).                                                                   |
@@ -195,7 +195,7 @@ The Search page's **Labels** section also lists suggested labels, drawn outlined
 
 ### The labels folder
 
-Every label is also a folder: `/archive/tags/<label>` holds a link to each picture, album, person, location or device that carries the label. You can look through it in the terminal, for example with `ls /archive/tags/sailing`. [Links](../concepts/links.md) explains links in the tree.
+Every label is also a folder: `/archive/tags/<label>` holds a link to each picture, album, person, location or camera that carries the label. You can look through it in the terminal, for example with `ls /archive/tags/sailing`. [Links](../concepts/links.md) explains links in the tree.
 
 A label is kept on the node that carries it: the label pills count it there, and a search for the label finds it there. The link in the folder is for looking through, so a link added or deleted by hand labels nothing and unlabels nothing. The dialogs, `label add` and `label remove` keep the folder in step, so put labels on and take them off with those. When something labelled is deleted, its link in the folder goes with it, and `label prune` clears any link left pointing at nothing. A label is listed while at least one thing carries it.
 
@@ -219,7 +219,7 @@ Under the bar, one line says how far to trust the suggestions:
 | "Learned from N pictures in N labeled files and albums. Of the labeled pictures held back, it finds N% again."                                                        | EiN hid some of the labelled pictures while learning and checked how many it found again. The higher, the better.         |
 | "… Label a few more for it to measure how well it finds them."                                                                                                        | Too few pictures carry the label to check the model. It still suggests.                                                   |
 | "Suggested from what "a photo of a christmas tree" looks like. Label pictures of it and it learns from them instead."                                                 | A suggested label: nothing carries it yet, so EiN goes by what the words describe.                                        |
-| "Nothing with this label has a picture to learn from."                                                                                                                | The label is only on people, places or devices, or on pictures the media service has not looked at yet.                   |
+| "Nothing with this label has a picture to learn from."                                                                                                                | The label is only on people, places or cameras, or on pictures the media service has not looked at yet.                   |
 | "The pictures held back were not found again, so what this label names does not seem to show in the pictures: a person, a trip or a time rather than something seen." | The label names something you cannot see, so EiN offers no suggestions. **Show what it would suggest** shows them anyway. |
 
 "Nothing else looks like sailing" means that no picture outside the label is alike enough, apart from those marked as not it.

@@ -198,8 +198,8 @@ Only the public proxy makes [share links](../guide/sharing.md#share-an-album-wit
 
 ### Phones posting their position
 
-A phone that reports its position to a device's track (see
-[Live tracking from a phone](../archive/devices.md#live-tracking-from-a-phone)) posts to EiN from
+A phone that reports its position to a track (see
+[Live tracking from a phone](../automation/index.md#live-tracking-from-a-phone)) posts to EiN from
 wherever it is, without signing in, so it needs the public HTTPS proxy: over a VPN it reports only
 while the VPN is up, and an SSH tunnel does not reach it at all. Its address is
 `/tracker/<id>.<token>`, which the proxy passes on like any other; the token in it is all that lets

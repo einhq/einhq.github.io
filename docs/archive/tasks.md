@@ -100,21 +100,24 @@ All four ask the [media service](../ems/index.md), so they need it running. For 
 
 The family relations, events and homes are explained in [Family tree, events and homes](family.md).
 
-## Locations, devices and tracks
+## Locations, cameras and tracks
 
 | Task                                        | Command                                                                                         | Reference                                          |
 | ------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | List the locations                          | `location-list`                                                                                 | [location-list](commands.md#location-list)         |
 | Change a location's name or description     | `location-update /archive/locations/Highbury --description '<text>'`                            | [location-update](commands.md#location-update)     |
 | What happened at a location                 | `location-timeline /archive/locations/Highbury`                                                 | [location-timeline](commands.md#location-timeline) |
-| List the devices                            | `device-list`                                                                                   | [device-list](commands.md#device-list)             |
-| A device's details and owners               | `device-info /archive/devices/peggy-lumix`                                                      | [device-info](commands.md#device-info)             |
-| Devices seen in pictures but not registered | `device-scan`                                                                                   | [device-scan](commands.md#device-scan)             |
-| Register a device                           | `device-create /archive/devices/ada-camera --name "Ada's camera" --make <make> --model <model>` | [device-create](commands.md#device-create)         |
-| Say who owned a device, and when            | `device-set-owner --from 2019 /archive/devices/ruby-iphone /archive/people/ruby-wrenfield`      | [device-set-owner](commands.md#device-set-owner)   |
-| A device's history                          | `device-timeline /archive/devices/ruby-iphone`                                                  | [device-timeline](commands.md#device-timeline)     |
-| Devices with a GPS track                    | `track-list`                                                                                    | [track-list](commands.md#track-list)               |
-| Add a GPX file to a device's track          | `track-import /archive/devices/ruby-iphone <file>.gpx`                                          | [track-import](commands.md#track-import)           |
+| List the cameras                            | `camera-list`                                                                                   | [camera-list](commands.md)                         |
+| A camera's details and owners               | `camera-info /archive/cameras/peggy-lumix`                                                      | [camera-info](commands.md)                         |
+| Cameras seen in pictures but not registered | `camera-scan`                                                                                   | [camera-scan](commands.md)                         |
+| Register a camera                           | `camera-create /archive/cameras/ada-camera --name "Ada's camera" --make <make> --model <model>` | [camera-create](commands.md)                       |
+| Say who owned a camera, and when            | `camera-set-owner --from 2019 /archive/cameras/ruby-iphone /archive/people/ruby-wrenfield`      | [camera-set-owner](commands.md)                    |
+| A camera's history                          | `camera-timeline /archive/cameras/ruby-iphone`                                                  | [camera-timeline](commands.md)                     |
+| List the tracks                             | `track-list`                                                                                    | [track-list](commands.md#track-list)               |
+| Change how a track travels                  | `track-update sailboat --kind boat --timezone Europe/Stockholm`                                 | [track-update](commands.md)                        |
+| Link a phone's camera to its track          | `camera-track ruby-iphone /archive/devices/ruby-phone/position/history`                         | [camera-track](commands.md)                        |
+| Add a GPX file to a track                   | `track-import sailboat <file>.gpx`                                                              | [track-import](commands.md#track-import)           |
+| A track's trips                             | `trip-list sailboat`                                                                            | [trip-list](commands.md#trip-list)                 |
 
 ## Feeds: timeline, news, events and on this day
 

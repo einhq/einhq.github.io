@@ -110,9 +110,9 @@ reload; the Archive's **Media** page takes the same parameters. The parameters a
 | Parameter      | What it holds                                                                                                                    | Example                              |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
 | `q`            | The words searched for                                                                                                           | `q=sailing`                          |
-| `kind`         | Kinds, separated by commas: `photo`, `video`, `audio`, `document`, `person`, `location`, `album`, `device`, `track`              | `kind=photo,video`                   |
+| `kind`         | Kinds, separated by commas: `photo`, `video`, `audio`, `document`, `person`, `location`, `album`, `camera`, `track`              | `kind=photo,video`                   |
 | `tag`          | Labels, separated by commas                                                                                                      | `tag=beach`                          |
-| `subject`      | A person, location or device that must be in it, as `<kind>:<name>` or a path; repeat it for several, all of which must be there | `subject=person:helen-okafor`        |
+| `subject`      | A person, location or camera that must be in it, as `<kind>:<name>` or a path; repeat it for several, all of which must be there | `subject=person:helen-okafor`        |
 | `subject-name` | Every subject of a kind whose name matches the words, as `<kind>:<words>`; repeatable                                            | `subject-name=person:Wrenfield`      |
 | `from`, `to`   | The first and last year, both included                                                                                           | `from=1975&to=1985`                  |
 | `bbox`         | A rectangle on the map: north, south, east, west                                                                                 | `bbox=50.3,50.2,-5.0,-5.1`           |
@@ -122,8 +122,8 @@ reload; the Archive's **Media** page takes the same parameters. The parameters a
 | `like`         | Pictures that look like this one, by path                                                                                        | `like=/archive/…/IMG_0412.jpg`       |
 | `sort`         | `score`, `time` (oldest first), `-time` (newest first) or `name`                                                                 | `sort=-time`                         |
 
-The kinds `person`, `location`, `album` and `device`, and a `subject`, find something only with the
-Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
+The kinds `person`, `location`, `album`, `camera` and `track`, and a `subject`, find something only
+with the Archive installed. With it, for example, every picture and video of Helen Okafor from the 1980s,
 newest first:
 
 ```text
@@ -204,17 +204,17 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address                          | Method        | What it does                                                                                                                                           |
-| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                             |
-| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                   |
-| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                          |
-| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                |
-| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                     |
-| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                                                                        |
-| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Devices and GPS tracks](../archive/devices.md)                                                                   |
-| `/tracker/<id>.<token>`          | `GET`, `POST` | Where a phone or GPS tracker posts its position without signing in, see [Live tracking from a phone](../archive/devices.md#live-tracking-from-a-phone) |
-| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                    |
+| Address                          | Method        | What it does                                                                                                                                            |
+| -------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                              |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                    |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                           |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                 |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                      |
+| `/log/<path>`                    | `POST`        | Adds JSON entries to a log node                                                                                                                         |
+| `/track/<path>`                  | `POST`        | Adds GPS points to a track node, see [Tracks and trips](../archive/tracks.md)                                                                           |
+| `/tracker/<id>.<token>`          | `GET`, `POST` | Where a phone or GPS tracker posts its position without signing in, see [Live tracking from a phone](../automation/index.md#live-tracking-from-a-phone) |
+| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                     |
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
@@ -225,8 +225,8 @@ gets `sign in first` from `/file/` and `/archive/`.
 These addresses exist with the [Archive](../archive/index.md) installed.
 
 Addresses with `<name>` take the name of the node in the tree. A person's or a place's is its name
-in lower case with hyphens: Helen Okafor is `/people/helen-okafor`. A device's keeps its capitals and
-has `_` for spaces, such as `/devices/Canon_EOS_5D_Mark_III`. Addresses with
+in lower case with hyphens: Helen Okafor is `/people/helen-okafor`. A camera's keeps its capitals and
+has `_` for spaces, such as `/cameras/Canon_EOS_5D_Mark_III`. Addresses with
 `<path>` take the node's whole path, URL-encoded.
 
 ### Browsing
@@ -246,8 +246,10 @@ has `_` for spaces, such as `/devices/Canon_EOS_5D_Mark_III`. Addresses with
 | `/family`                 | A family tree of chosen people, see [Family tree, events and homes](../archive/family.md)                  |
 | `/locations`              | **Locations**                                                                                              |
 | `/locations/<name>`       | One location                                                                                               |
-| `/devices`                | **Devices**, see [Devices and GPS tracks](../archive/devices.md)                                           |
-| `/devices/<name>`         | One device                                                                                                 |
+| `/cameras`                | **Cameras**, see [Cameras](../archive/cameras.md)                                                          |
+| `/cameras/<name>`         | One camera                                                                                                 |
+| `/tracks`                 | **Tracks**, see [Tracks and trips](../archive/tracks.md)                                                   |
+| `/tracks/<path>`          | One track, for example `/tracks/%2Farchive%2Fdevices%2Fsailboat%2Fposition%2Fhistory`                      |
 | `/favourites`             | Your **Favourites**; signed in only, see [Your profile, favourites and trash](../guide/profile.md)         |
 | `/duplicates?path=<path>` | The copies of a node, see [Duplicates](../archive/duplicates.md)                                           |
 
@@ -261,18 +263,19 @@ a page by their address. All of them need you to be signed in.
 | `/albums/new`    | **Create Album**                                                                     |
 | `/people/new`    | **Create Person**                                                                    |
 | `/locations/new` | **Create Location**                                                                  |
-| `/devices/new`   | **Register Device**; `?name=`, `?make=`, `?model=` and `?serial=` fill in its fields |
+| `/cameras/new`   | **Register Camera**; `?name=`, `?make=`, `?model=` and `?serial=` fill in its fields |
 
 ### Staging and importing
 
 All of these need you to be signed in. [Sorting in staging](../archive/staging.md) and [Getting your photos in](../archive/importing.md) explain the work itself.
 
-| Address                      | What it shows                                                            |
-| ---------------------------- | ------------------------------------------------------------------------ |
-| `/staging`                   | **Staging**: your categories, or the one category when you have only one |
-| `/staging/import`            | **Import media**, also from **Create New**                               |
-| `/staging/categories/new`    | **New category**                                                         |
-| `/staging/categories/<name>` | **Category settings** for one category                                   |
+| Address                      | What it shows                                                                                         |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `/staging`                   | **Staging**: your categories, or the one category when you have only one                              |
+| `/staging/import`            | **Import media**, also from **Create New**                                                            |
+| `/staging/categories/new`    | **New category**                                                                                      |
+| `/staging/categories/<name>` | **Category settings** for one category                                                                |
+| `/staging/routes`            | **Routes waiting for a track**, see [GPX files in staging](../archive/tracks.md#gpx-files-in-staging) |
 
 ### Parts of other pages
 
@@ -301,7 +304,8 @@ The **Media** page takes the parameters of [Search](#search).
 | `/people/<name>`    | `timeline` (**Timeline**), `info` (**Info**), `media` (**Media**), `faces` (**Faces**), `voices` (**Heard in**), `family` (**Family**), `homes` (**Homes**) |
 | `/albums/<path>`    | `media` (**Media**), `map` (**Map**), `info` (**Info**)                                                                                                     |
 | `/locations/<name>` | `info` (**Info**), `timeline` (**Timeline**), `media` (**Media**), `residents` (**Residents**)                                                              |
-| `/devices/<name>`   | `info` (**Info**), `timeline` (**Timeline**), `media` (**Media**), `track` (**Track**), `owners` (**Owners**)                                               |
+| `/cameras/<name>`   | `info` (**Info**), `media` (**Media**)                                                                                                                      |
+| `/tracks/<path>`    | `track` (**Track**), `trips` (**Trips**), `info` (**Info**)                                                                                                 |
 | `/staging`          | `sort` (**Sort**), `duplicates` (**Duplicates**), `files` (**Files**), `done` (**Done**)                                                                    |
 
 #### Map
@@ -325,20 +329,20 @@ left out, so a plain `/map` stays plain.
 
 #### Other parameters
 
-| Page                                           | Parameter            | What it does                                                                                                                             |
-| ---------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `/year`                                        | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
-| `/people`, `/albums`, `/locations`, `/devices` | `q`                  | The filter typed into the page's own search box                                                                                          |
-| `/people/<name>`                               | `faces=doubtful`     | On **Faces**, only the faces somebody marked as doubtful                                                                                 |
-| `/people/unknown`                              | `sort`               | `faces` (the default) or `created`                                                                                                       |
-| `/people/unknown`                              | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
-| `/people/unknown`                              | `person`             | The unknown person open for review                                                                                                       |
-| `/staging`                                     | `c`                  | The category, by name, for example `c=inbox`                                                                                             |
-| `/staging`                                     | `lane`               | On **Sort**: `sort` (**To sort**), `everyday` (**Everyday**), `undated` (**Needs a date**), `clutter` (**Clutter**), `later` (**Later**) |
-| `/staging`                                     | `order=new`          | On **Sort**: newest first                                                                                                                |
-| `/staging`                                     | `g`                  | On **Sort**: the group open, for example `g=auto-2019-06-14`                                                                             |
-| `/staging`                                     | `dir`, `view=folder` | On **Files**: the folder open, and the folder view                                                                                       |
-| `/staging/categories/new`                      | `kind`, `move`       | The kind of the new category, and a staged folder to move into it                                                                        |
+| Page                                                      | Parameter            | What it does                                                                                                                             |
+| --------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `/year`                                                   | `year`               | The year shown, for example `year=1979`; this year when left out                                                                         |
+| `/people`, `/albums`, `/locations`, `/cameras`, `/tracks` | `q`                  | The filter typed into the page's own search box                                                                                          |
+| `/people/<name>`                                          | `faces=doubtful`     | On **Faces**, only the faces somebody marked as doubtful                                                                                 |
+| `/people/unknown`                                         | `sort`               | `faces` (the default) or `created`                                                                                                       |
+| `/people/unknown`                                         | `min`                | Seen at least this many times: `0`, `2`, `5`, `10` or `50`                                                                               |
+| `/people/unknown`                                         | `person`             | The unknown person open for review                                                                                                       |
+| `/staging`                                                | `c`                  | The category, by name, for example `c=inbox`                                                                                             |
+| `/staging`                                                | `lane`               | On **Sort**: `sort` (**To sort**), `everyday` (**Everyday**), `undated` (**Needs a date**), `clutter` (**Clutter**), `later` (**Later**) |
+| `/staging`                                                | `order=new`          | On **Sort**: newest first                                                                                                                |
+| `/staging`                                                | `g`                  | On **Sort**: the group open, for example `g=auto-2019-06-14`                                                                             |
+| `/staging`                                                | `dir`, `view=folder` | On **Files**: the folder open, and the folder view                                                                                       |
+| `/staging/categories/new`                                 | `kind`, `move`       | The kind of the new category, and a staged folder to move into it                                                                        |
 
 ## The Assistant's pages
 

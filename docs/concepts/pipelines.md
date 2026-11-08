@@ -325,7 +325,7 @@ starts its own pipelines:
    the rendition table names for it, it is marked so, which becomes `media.renditions.made`.
 5. `media-interpret` writes the photo's date and its position, and its last write becomes
    `media.metadata.interpreted`, which starts `media-faces` for a picture, `media-video-faces` for
-   a video, and `media-device` when the metadata names the device that made the file.
+   a video, and `media-camera` when the metadata names the camera that made the file.
 6. `media-faces` writes each face it finds under the photo, which becomes `media.face.detected`
    and starts `media-face-assign`, matching the face to a person.
 7. A GPS position becomes `media.position.available`, which starts `media-geocode` for the
@@ -358,8 +358,8 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `media-voiceprint`     | `media.transcript.generated`, `media.speakers.missing`                    | Finds who speaks when, with a voiceprint per voice                              |
 | `media-speaker-faces`  | `media.faces.completed`, for a video with voices                          | Ties a video's voices to the faces seen speaking them                           |
 | `media-speaker-assign` | `media.speakers.detected`, `media.speakers.face-changed`                  | Decides which person each voice is                                              |
-| `media-device`         | `media.metadata.interpreted`, with a device in it                         | Links a file to the device that made it                                         |
-| `media-device-cover`   | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its device as a cover                        |
+| `media-camera`         | `media.metadata.interpreted`, with a camera in it                         | Links a file to the camera that made it                                         |
+| `media-camera-cover`   | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its camera as a cover                        |
 | `media-geocode`        | `media.position.available`                                                | The address of a file's GPS position                                            |
 | `media-weather`        | `location.point.changed`, `media.weather.owed`                            | The weather at a photo's position and date                                      |
 | `location-link-point`  | `location.point.changed`                                                  | Links a photo to the location containing its position                           |
@@ -371,7 +371,7 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `staging-sidecars`     | `staging.sidecars.arrived`                                                | Pairs sidecar files with their files                                            |
 | `staging-organize`     | `staging.category.changed`                                                | Suggests groups for a staging category again                                    |
 | `staging-retime`       | `staging.retime.requested`                                                | Dates staged files by their category's time rules                               |
-| `track-stage`          | a file `updated` in staging                                               | Turns a GPX file into its device's route                                        |
+| `track-stage`          | a file `updated` in staging                                               | Turns a GPX file into its track's route                                         |
 
 [Staging and importing for administrators](../archive/staging-admin.md) explains the staging pipelines in
 detail.

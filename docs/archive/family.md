@@ -17,7 +17,7 @@ of the controls are shown only to an administrator:
 | A location's residents                     | **Residents** on the location's **Info** tab                  | anyone who may change the location |
 | Events of a person                         | ⋮ → **Add event** on the person                               | anyone who may change the person   |
 | Born and died                              | **Edit** on the person                                        | anyone who may change the person   |
-| Events of an album, a location or a device | ⋮ → **Add event** on its page                                 | anyone who may change it           |
+| Events of an album, a location or a camera | ⋮ → **Add event** on its page                                 | anyone who may change it           |
 | People, relations, events from a GEDCOM    | a `.ged` file uploaded to staging, then **Review and import** | anyone who may change those people |
 
 An administrator is someone signed in as `admin`, or a member of the `sudo` group who has chosen
@@ -261,9 +261,9 @@ A wedding is best recorded in two parts, because each part feeds a different pla
 When the event and the partnership fall on the same day, the timeline of the person who has the event
 shows the two as one entry; the partner's timeline shows the partnership.
 
-### Events of albums, locations and devices
+### Events of albums, locations and cameras
 
-Albums, locations and devices have **Add event** under ⋮ too, for someone who may change them. Their
+Albums, locations and cameras have **Add event** under ⋮ too, for someone who may change them. Their
 events are always generic, and need both a **Date** and a **Description**.
 
 - **On an album**, the date starts as the first day with pictures and no event yet. The event
@@ -271,7 +271,7 @@ events are always generic, and need both a **Date** and a **Description**.
   account that added it when it has no writer. If you may change it, a pencil on the note opens **Edit event**, where you change the date, the text or
   the writer and press **Save**, or press **Delete**. A deleted event goes to your trash, and the
   message "Event moved to the trash" has **Undo**.
-- **On a location or a device**, the event appears on its timeline, on its **Info** tab. It cannot
+- **On a location or a camera**, the event appears on its timeline, on its **Info** tab. It cannot
   be changed in the Web UI afterwards.
 
 ## What appears on a timeline
@@ -560,7 +560,7 @@ flags after them: placed before the people, a flag's value is taken for a person
 | [`person-remove`](commands.md#person-remove)           | Removes the tie between two people, from both sides.                                           |
 | [`person-set-home`](commands.md#person-set-home)       | Records a home with `--from` and `--to`; `--update` rewrites the dates of one already there.   |
 | [`person-remove-home`](commands.md#person-remove-home) | Removes a home, from both the person and the location.                                         |
-| [`person-add-event`](commands.md#person-add-event)     | Adds an event to a person, album, location or device.                                          |
+| [`person-add-event`](commands.md#person-add-event)     | Adds an event to a person, album, location or camera.                                          |
 | [`person-info`](commands.md#person-info)               | Shows a person's dates, relatives, homes and events, the undated ones too.                     |
 | [`person-family-tree`](commands.md#person-family-tree) | Prints ancestors and descendants as text.                                                      |
 | [`person-how-related`](commands.md#person-how-related) | Names how two people are related.                                                              |

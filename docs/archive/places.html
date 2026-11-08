@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html" aria-current="page">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html" aria-current="page">Locations and the map</a></li><li><a href="cameras.html">Cameras</a></li><li><a href="tracks.html">Tracks and trips</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -245,9 +245,9 @@ hand in the terminal, EiN puts a circle around them, as
 wide as they spread. A picture far from the rest is left out, and pictures spread wider than
 25 km give no circle. Pictures that joined the location because they lie inside its shape do not
 count.</li>
-<li><strong>Where a device stayed.</strong> A location EiN made for a stay in a device&#39;s track (see
-<a href="#places-a-device-stayed-at">Places a device stayed at</a>) has a circle with a radius of 150 m
-around where the device lay. Its pictures replace it once they give a circle.</li>
+<li><strong>Where a track stayed.</strong> A location EiN made for a stay in a track (see
+<a href="#places-a-track-stayed-at">Places a track stayed at</a>) has a circle with a radius of 150 m
+around where the track lay. Its pictures replace it once they give a circle.</li>
 <li><strong>Its address.</strong> EiN asks OpenStreetMap&#39;s Nominatim service where the address is, or where the
 name is when there is no address. EiN uses the answer by itself only when the answer is a
 building, the house number or postcode you wrote agrees with it, and no answer that ranks almost
@@ -276,7 +276,7 @@ for you to choose from.</li>
 <tr>
 <td>A stay</td>
 <td>from a track</td>
-<td>&quot;Where a device stayed, from its track&quot;</td>
+<td>&quot;Where a camera stayed, from its track&quot;</td>
 </tr>
 <tr>
 <td>Its address</td>
@@ -293,11 +293,11 @@ changed address. If it cannot be placed with certainty, the location loses its o
 shows suggestions instead, or &quot;No location set yet.&quot; when nothing matched. A location placed from
 its pictures stays where its pictures are, and a location set by hand keeps its shape whatever the
 address says.</p>
-<h2 id="places-a-device-stayed-at">Places a device stayed at<a class="anchor" href="#places-a-device-stayed-at" aria-label="Link to this section"></a></h2>
-<p>Where a device with a track lay still, EiN puts the stay at a location, so that its trips say where
-they went (see <a href="devices.html#a-devices-trips">A device&#39;s trips</a>). Each stay goes to the first of these:</p>
+<h2 id="places-a-track-stayed-at">Places a track stayed at<a class="anchor" href="#places-a-track-stayed-at" aria-label="Link to this section"></a></h2>
+<p>Where a track lay still, EiN puts the stay at a location, so that its trips say where they went
+(see <a href="tracks.html#trips">Trips</a>). Each stay goes to the first of these:</p>
 <ol>
-<li><strong>A home base.</strong> A stay at one of the device&#39;s <a href="devices.html#home-bases">home bases</a> is at that
+<li><strong>A home base.</strong> A stay at one of the track&#39;s <a href="tracks.html#home-bases">home bases</a> is at that
 home&#39;s location.</li>
 <li><strong>A location near it.</strong> A stay within 150 m of a location&#39;s position is at that location: a
 harbour you have stayed at before, or a location you made yourself.</li>
@@ -309,13 +309,13 @@ is named after the town or village around it. The next stay within 150 m of it i
 </ol>
 <p>A new location gets a circle with a radius of 150 m, so the pictures taken inside it join it as
 pictures join any location (see <a href="#how-pictures-join-a-location">How pictures join a location</a>).</p>
-<p>When you rename such a location in <strong>Edit location</strong>, your name stays, wherever the device stays
+<p>When you rename such a location in <strong>Edit location</strong>, your name stays, whatever track stays
 there later. Out at sea, where nothing has a name, a stay gets no location. When a lookup fails,
 because OpenStreetMap&#39;s services are busy or out of reach, the stay is looked up again the next time
-the device&#39;s trips are found again.</p>
+the track&#39;s trips are found again.</p>
 <p>EiN keeps what the services answered, in <code>/archive/sources/places</code>, so each place is asked about
 once. It asks OpenStreetMap for the harbours, islands and bays of an area about 5 km across at a
-time, and every later stay in that area, by any device, is named without going online. So is a
+time, and every later stay in that area, in any track, is named without going online. So is a
 place where nothing had a name, and a location you deleted that a stay needs again. Only
 <code>track-places --rename</code> asks again.</p>
 <h2 id="the-weather-at-a-place-and-time">The weather at a place and time<a class="anchor" href="#the-weather-at-a-place-and-time" aria-label="Link to this section"></a></h2>
@@ -354,8 +354,8 @@ date changed, and the pictures already in the archive, get theirs from the backg
 closes the gaps the pipelines missed
 (<a href="processing.html#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>).
 In the terminal, <code>weather-photo &#39;&lt;file&gt;/position&#39;</code> looks one up, and <code>-f</code> looks it up again.</p>
-<p>A device&#39;s trips get their weather this way too: each whole hour of a trip, the weather where the
-device was then, summed up for each day and for the whole trip on the album made of it
+<p>A track&#39;s trips get their weather this way too: each whole hour of a trip, the weather where the
+track was then, summed up for each day and for the whole trip on the album made of it
 (<a href="albums.html#the-trip-tab">The Trip tab</a>). A trip is looked up once it has been found in the track,
 and again for a week after each day, since the last hours are sometimes observed later.</p>
 <p>The header shows the location&#39;s name and address, the people who live there, and its labels. If
@@ -544,7 +544,7 @@ and appears in the header. The same records are a person&#39;s homes, seen from 
 <a href="family.html#add-a-resident-to-a-location">Add a resident to a location</a>.</p>
 <p>Under ⋮, <strong>Add event</strong> writes a dated note on the location, which appears on its timeline on the <strong>Info</strong> tab.
 A location&#39;s event needs both a <strong>Date</strong> and a <strong>Description</strong>; see
-<a href="family.html#events-of-albums-locations-and-devices">Events of albums, locations and devices</a>.</p>
+<a href="family.html#events-of-albums-locations-and-cameras">Events of albums, locations and cameras</a>.</p>
 <h2 id="move-a-location-to-the-trash">Move a location to the trash<a class="anchor" href="#move-a-location-to-the-trash" aria-label="Link to this section"></a></h2>
 <p>If you may change the location, open ⋮ and choose <strong>Move to trash</strong>. EiN returns you to the
 Locations page and says &quot;&lt;name&gt; moved to the trash&quot;, with <strong>Undo</strong>. You can also restore it
@@ -552,13 +552,13 @@ from <strong>Trash</strong> in the account menu, for as many days as an administ
 <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
 <h2 id="the-map-page">The Map page<a class="anchor" href="#the-map-page" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Map</strong> in the sidebar, under <strong>Explore</strong>. The map fills the page, with no header.</p>
-<figure class="shot"><a href="../../assets/shots/map@2x.webp"><img src="../../assets/shots/map.webp" srcset="../../assets/shots/map.webp 1x, ../../assets/shots/map@2x.webp 2x" alt="The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Pictures, locations and the routes that devices recorded share one map, narrowed by the search box and the years under it.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/map@2x.webp"><img src="../../assets/shots/map.webp" srcset="../../assets/shots/map.webp 1x, ../../assets/shots/map@2x.webp 2x" alt="The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Pictures, locations and the routes of the tracks share one map, narrowed by the search box and the years under it.</figcaption></figure>
 <p>The map draws three things:</p>
 <ul>
 <li><strong>Pictures</strong> with a position that you may see, gathered into piles. Pictures in staging are left
 out until they are filed.</li>
 <li><strong>Locations</strong> that have a place, as pins.</li>
-<li><strong>GPS tracks</strong> that devices recorded.</li>
+<li><strong>GPS tracks</strong>, the routes of the <a href="tracks.html">tracks</a>.</li>
 </ul>
 <p>Opened from the sidebar, the map starts over Gothenburg in Sweden, whatever your pictures show.
 Zoom out to find them, or keep a bookmark of the view you use; see
@@ -567,7 +567,7 @@ Zoom out to find them, or keep a bookmark of the view you use; see
 <p>Drag the map to move it, and zoom with the mouse wheel or by pinching. The map has no zoom buttons,
 and clicking a pile never zooms: it opens the pile. A small spinner under the buttons in the
 top-right corner shows while the map reads what is in view after you move it. It does not show while
-the map follows a live device.</p>
+the map follows a live track.</p>
 <h3 id="open-pictures-and-piles">Open pictures and piles<a class="anchor" href="#open-pictures-and-piles" aria-label="Link to this section"></a></h3>
 <ul>
 <li><strong>A single picture</strong> is drawn as its thumbnail, and pointing at it shows its file name. Click it
@@ -587,25 +587,25 @@ drawn and the view holds some.</li>
 <ul>
 <li><strong>Location pins</strong> stand at each location&#39;s centre. Click a pin to open the location&#39;s page. The
 pins are hidden while the search box narrows the map; the years do not hide them.</li>
-<li><strong>Tracks</strong> are the routes devices recorded, as coloured lines, one colour per day. Each track has
-three colours of its own that its days take in turn, so two days in a row differ, and other
-tracks use other colours. Pointing at a line shows the device&#39;s name and the day.</li>
+<li><strong>Tracks</strong> are routes recorded by trackers, phones and GPS loggers, as coloured lines, one colour
+per day. Each track has three colours of its own that its days take in turn, so two days in a row
+differ, and other tracks use other colours. Pointing at a line shows the track&#39;s name and the day.</li>
 </ul>
-<p>Where a device lay still, its track ends on that spot and leaves from it later, without the
-wandering its GPS recorded meanwhile; see <a href="devices.html#a-devices-track">A device&#39;s track</a>.</p>
-<p>Tracks are always drawn in full: the years and the search box narrow the pictures only. How tracks
-get into EiN from GPX files is on <a href="devices.html#a-devices-track">A device&#39;s track</a>.</p>
-<h3 id="follow-a-device-live">Follow a device live<a class="anchor" href="#follow-a-device-live" aria-label="Link to this section"></a></h3>
-<p>A device that is sending its position as it moves is <strong>live</strong> while its last point is under four
-hours old. The map then draws a pin where it is now and extends its line as new points arrive,
-without a reload. Pointing at the pin shows the device&#39;s name, its speed in km/h and how long ago
-the point was taken (&quot;12 km/h · 40 s ago&quot;).</p>
-<p>The live devices are also listed in the top-left corner, each with its colour, name, speed and age.
-Click a name to open that device&#39;s <strong>Track</strong> tab.
-Click <strong>Follow</strong> (the crosshair beside a device), or the device&#39;s pin, and the map moves along with
+<p>Where a track lay still, it ends on that spot and leaves from it later, without the wandering its
+GPS recorded meanwhile; see <a href="tracks.html#the-route-on-the-map">The route on the map</a>.</p>
+<p>Tracks are always drawn in full: the years and the search box narrow the pictures only. Where tracks
+come from, GPX files among them, is on <a href="tracks.html#where-tracks-come-from">Tracks and trips</a>.</p>
+<h3 id="follow-a-track-live">Follow a track live<a class="anchor" href="#follow-a-track-live" aria-label="Link to this section"></a></h3>
+<p>A track that a tracker or a phone is adding its position to as it moves is <strong>live</strong> while its last
+point is under four hours old. The map then draws a pin where it is now and extends its line as new
+points arrive, without a reload. Pointing at the pin shows the track&#39;s name, its speed in km/h and
+how long ago the point was taken (&quot;12 km/h · 40 s ago&quot;).</p>
+<p>The live tracks are also listed in the top-left corner, each with its colour, name, speed and age.
+Click a name to open that track&#39;s page.
+Click <strong>Follow</strong> (the crosshair beside a track), or the track&#39;s pin, and the map moves along with
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click <strong>Follow</strong>
-again, to stop. A device drops out of the list four hours after its last point.</p>
-<p>Live devices belong to the tracks: they show while <strong>Show</strong> is on <strong>All</strong> or <strong>Tracks</strong>.</p>
+again, to stop. A track drops out of the list four hours after its last point.</p>
+<p>Live tracks are drawn with the other tracks: they show while <strong>Show</strong> is on <strong>All</strong> or <strong>Tracks</strong>.</p>
 <h3 id="choose-what-the-map-shows">Choose what the map shows<a class="anchor" href="#choose-what-the-map-shows" aria-label="Link to this section"></a></h3>
 <p>The funnel button at the top of the right-hand corner is the <strong>Show</strong> menu:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -757,7 +757,7 @@ recordings are never sent to them.</p>
 <td>The machine EiN runs on sends each picture&#39;s coordinates</td>
 </tr>
 <tr>
-<td>The names of places a device stayed at</td>
+<td>The names of places a track stayed at</td>
 <td>OpenStreetMap&#39;s Overpass API, <code>overpass-api.de</code>, and Nominatim</td>
 <td>The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it</td>
 </tr>
@@ -824,12 +824,12 @@ lookups at other servers. See <a href="../reference/environment.html#options-you
 <td><a href="commands.html#location-link-media"><code>location-link-media</code></a> <code>--location &lt;location&gt;</code></td>
 </tr>
 <tr>
-<td>Put a device&#39;s stays at locations, and name the new ones</td>
-<td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;device&gt;</code>, <code>--dry-run</code> to see them first</td>
+<td>Put a track&#39;s stays at locations, and name the new ones</td>
+<td><a href="commands.html#track-places"><code>track-places</code></a> <code>&lt;track&gt;</code>, <code>--dry-run</code> to see them first</td>
 </tr>
 <tr>
-<td>Look the names of a device&#39;s stay locations up again</td>
-<td><code>track-places &lt;device&gt; --rename</code>, which asks the services again; names changed by hand are kept</td>
+<td>Look the names of a track&#39;s stay locations up again</td>
+<td><code>track-places &lt;track&gt; --rename</code>, which asks the services again; names changed by hand are kept</td>
 </tr>
 <tr>
 <td>The weather at a place and time</td>
@@ -882,8 +882,9 @@ empty.</li>
 <strong>Media</strong> or <strong>Tracks</strong>.</li>
 <li><strong>A track ignores the year slider.</strong> Tracks are always drawn in full; only the pictures are
 narrowed.</li>
-<li><strong>A device&#39;s pin stays where it was.</strong> Its last point is older than you expected: the device has
-stopped sending, or cannot reach EiN. The age beside its name says when the point was taken.</li>
+<li><strong>A live track&#39;s pin stays where it was.</strong> Its last point is older than you expected: the
+tracker or phone has stopped sending, or cannot reach EiN. The age beside its name says when the
+point was taken.</li>
 <li><strong><code>weather</code> answers &quot;weather lookups are turned off&quot;.</strong> An administrator has turned off <strong>Look up
 the weather</strong>; turning it on again lets EiN ask.</li>
 <li><strong>The weather of a place in Sweden comes from Open-Meteo.</strong> No SMHI station within 30 km measured
@@ -891,7 +892,7 @@ that value at that hour: the stations near it opened later, closed earlier, or d
 Older stations often measured wind only three times a day.</li>
 <li><strong>The first weather lookup near a station takes a minute.</strong> It fetches the station&#39;s whole history;
 later lookups there are immediate.</li>
-<li><strong>The map jumps back after you zoom.</strong> You are following a device; drag the map or click
+<li><strong>The map jumps back after you zoom.</strong> You are following a track; drag the map or click
 <strong>Follow</strong> to stop.</li>
 </ul>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
@@ -899,7 +900,7 @@ later lookups there are immediate.</li>
 <li><a href="dates-places.html">Dates and places of pictures</a>: a picture&#39;s position, street address, and
 <strong>Set location</strong></li>
 <li><a href="family.html">Family tree, events and homes</a>: homes, residents and events</li>
-<li><a href="devices.html">Devices and GPS tracks</a>: the devices whose tracks the map draws</li>
+<li><a href="tracks.html">Tracks and trips</a>: the tracks the map draws, and their trips</li>
 <li><a href="search.html">Search and the finder</a>: finding pictures by location with <code>@</code></li>
 <li><a href="albums.html">Albums</a>: an album&#39;s <strong>Map</strong> and <strong>Info</strong> tabs</li>
 <li><a href="viewer.html">Viewing photos, videos and recordings</a>: the place section of the details panel</li>
@@ -907,11 +908,11 @@ later lookups there are immediate.</li>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="family.html" rel="prev"><span>Previous</span>Family tree, events and homes</a><a class="next" href="devices.html" rel="next"><span>Next</span>Devices and GPS tracks</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="family.html" rel="prev"><span>Previous</span>Family tree, events and homes</a><a class="next" href="cameras.html" rel="next"><span>Next</span>Cameras</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-device-stayed-at">Places a device stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-device-live">Follow a device live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-track-stayed-at">Places a track stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-track-live">Follow a track live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

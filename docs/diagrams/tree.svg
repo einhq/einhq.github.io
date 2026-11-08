@@ -21,7 +21,7 @@
   <rect x="478" y="94" width="98" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
   <text x="527" y="113" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">locations/</text>
   <rect x="584" y="94" width="82" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="625" y="113" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">devices/</text>
+  <text x="625" y="113" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">cameras/</text>
   <rect x="674" y="94" width="59" height="28" rx="8" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="703.5" y="113" text-anchor="middle" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#eceff4">tags/</text>
   <path d="M330,122 L330,154 L346,154" fill="none" stroke="#a2abbb" stroke-opacity="0.6" stroke-width="1.5" />

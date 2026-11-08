@@ -407,8 +407,8 @@ Archive cuts it into trips. **Track and trips** on the device's **Overview** ope
 track-import /archive/devices/sailboat/position/history ~/summer-sail.gpx
 ```
 
-The Archive's pages describe [a track](../archive/devices.md#a-devices-track) and
-[its trips](../archive/devices.md#a-devices-trips).
+The Archive's pages describe [a track](../archive/tracks.md#the-route-on-the-map) and
+[its trips](../archive/tracks.md#trips).
 
 ## Ask the assistant
 

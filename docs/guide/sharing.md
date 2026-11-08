@@ -41,7 +41,7 @@ You do not need to know how this is stored. The **Share** dialog says it in word
 With the Archive installed, its pages offer **Share** as well:
 
 - **An album**: **Share** in the album's header. On a phone the header's buttons are under **⋮**.
-- **A person, a location or a device**: **Share** in its header. Sharing a person shares their page,
+- **A person, a location, a camera or a track**: **Share** in its header. Sharing a person shares their page,
   not the photos they are in.
 - **One photo, video or recording**: open it in the viewer and choose **Share** in the cog menu
   of the details panel (see [Viewing photos, videos and recordings](../archive/viewer.md#change-a-file-from-the-cog-menu)).
@@ -373,7 +373,7 @@ that is not shared with them.
 another album. Select only pictures that live in this album, or change the other album's sharing.
 
 **There is no Share with a link part.** Links are made for albums only, not for a person, a
-location, a device or a single photo.
+location, a camera, a track or a single photo.
 
 **The person you sent a link to sees "This link no longer works".** The link expired or was
 deleted, or the address was cut short when it was pasted. Look in the album's Share dialog: create

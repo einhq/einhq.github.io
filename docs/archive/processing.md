@@ -14,7 +14,7 @@ is run again, the bulk lane, and the engine's own settings.
 When a file arrives, the [Media](../media/index.md) module reads its metadata first
 ([Reading a file](../media/index.md#reading-a-file)). Then the Archive's `media-interpret` works out
 from it when the file was taken and where, side by side with the thumbnails, picture vectors,
-fingerprints, text and transcripts; faces and the device that made the file wait for the date and
+fingerprints, text and transcripts; faces and the camera that made the file wait for the date and
 place.
 [Changes and pipelines](../concepts/pipelines.md#one-upload-start-to-finish) follows one upload from
 start to finish.
@@ -49,8 +49,8 @@ show **waiting for EMS** on the **Dashboard**.
 | `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                         | `diarize`                   |
 | `media-speaker-assign` | Decides which person each voice is                                                                                  | `speaker-assign`            |
 | `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                     | `diarize`, `speaker-assign` |
-| `media-device`         | Links a file to the camera or phone that took it                                                                    | run by the engine           |
-| `media-device-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
+| `media-camera`         | Links a file to the camera or phone that took it                                                                    | run by the engine           |
+| `media-camera-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
 | `media-geocode`        | Looks up the address of a file's GPS position                                                                       | run by the engine           |
 | `media-weather`        | Looks up the weather a photo was taken in, at its GPS position and its date                                         | run by the engine           |
 | `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
@@ -62,8 +62,8 @@ show **waiting for EMS** on the **Dashboard**.
 | `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
 | `staging-organize`     | Plans a staging category's suggested groups again                                                                   | `organize`                  |
 | `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
-| `track-stage`          | Makes a GPX file dropped in staging into its device's route                                                         | run by the engine           |
-| `track-trips`          | Finds a device's trips again after points arrive, names the places it stayed, and looks up their weather            | run by the engine           |
+| `track-stage`          | Makes a GPX file dropped in staging into its track's route                                                          | run by the engine           |
+| `track-trips`          | Finds a track's trips again after points arrive, names the places it stayed, and looks up their weather             | run by the engine           |
 | `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
 | `media-heal`           | Goes through the albums or a staging area and announces the files missing work the other pipelines should have done | run by the engine           |
 
@@ -79,7 +79,7 @@ for only some of it ([Which processing a folder wants](../concepts/pipelines.md#
 | `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                          |
 | `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                     |
 | `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                           |
-| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather                                           | `media-interpret`, and the face, voice, device, geocoding, weather and duplicate pipelines above |
+| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather                                           | `media-interpret`, and the face, voice, camera, geocoding, weather and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive's own folders: albums, staging, tracks

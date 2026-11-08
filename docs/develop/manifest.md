@@ -284,7 +284,7 @@ A type whose nodes live directly under one folder names that folder as `root`, a
 The folders directly under `/archive` that the module's content lives in. The Archive's are:
 
 ```json
-"roots": ["/archive/people", "/archive/locations", "/archive/devices", "/archive/albums"]
+"roots": ["/archive/people", "/archive/locations", "/archive/cameras", "/archive/albums", "/archive/sources"]
 ```
 
 Each must be `/archive/` followed by one name of lower case letters, digits, `_` and `-`, starting with a letter. `mod setup` creates a missing one, owned by the administrator and the users group, with mode 775. Nothing removes one, so removing a module does not delete its content. Name the roots in your module's own code too, so its dependents can use them: the Archive exports them as `@archive/paths`.
@@ -295,7 +295,7 @@ Database indexes on node attributes, for the queries the module's data is asked.
 
 ```json
 "indexes": [
-  { "name": "device_taken_utc", "on": ["devicePath", "takenAtUtc"], "partial": "devicePath" },
+  { "name": "camera_taken_utc", "on": ["cameraPath", "takenAtUtc"], "partial": "cameraPath" },
   { "name": "spoken_text", "on": ["text"], "partial": "text", "using": "trigram" },
   { "name": "duplicate_deferred", "on": ["duplicate.deferred"], "using": "statistics" }
 ]
@@ -322,15 +322,15 @@ The module's pages: each route with the file that draws it, relative to the modu
 ```json
 "ui": {
   "routes": {
-    "/devices": "ui/device/pages/devices.tsx",
-    "/devices/:id": "ui/device/pages/device.tsx"
+    "/cameras": "ui/camera/pages/cameras.tsx",
+    "/cameras/:id": "ui/camera/pages/camera.tsx"
   }
 }
 ```
 
 A route is a path below `/` made of literal and `:param` segments; `/` itself is the home page, which belongs to the Web UI. The page is a `.tsx` file inside the module, and its default export is the page's component. If `ui.routes` is present it must hold at least one route.
 
-`ui-build` bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module's bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and `ui-build` reports `/devices is archive's route already`. A route at the exact path of one of the Web UI's own pages is never reached, since the interface's own is matched first.
+`ui-build` bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module's bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and `ui-build` reports `/cameras is archive's route already`. A route at the exact path of one of the Web UI's own pages is never reached, since the interface's own is matched first.
 
 How a route is shown, as a page, in a dialog, in the side drawer or full screen, is decided by the entry that opens it in the module's `ui/nav.json`, not by the route. [Writing a module](modules.md) covers navigation entries.
 
@@ -342,7 +342,7 @@ Which route opens a node of a type, so the Web UI can link nodes it finds but do
 "open": {
   "person": "/people/{name}",
   "album": "/albums/{path}",
-  "track": "/devices/{parent}?tab=track"
+  "track": "/tracks/{path}"
 }
 ```
 

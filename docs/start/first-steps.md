@@ -104,11 +104,11 @@ themselves. Step 3 says how to add either part.
 What EiN is for comes from its modules. Without any, the sidebar holds only **Home**, **Search**
 and the pages under **System**. These modules are published:
 
-| Module      | What it adds                                                                                                                                                                                                     | What it needs                                              |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `archive`   | **Media**, **Staging**, **Year**, **Map**, **Albums**, **People**, **Locations** and **Devices** in the sidebar, and **Import media**, **Album**, **Person**, **Location** and **Device** in the **Create** menu | the `ems` module, installed with it, and the media service |
-| `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                 | a language model, your own or a hosted one                 |
-| `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                 | the media service                                          |
+| Module      | What it adds                                                                                                                                                                                                                 | What it needs                                              |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `archive`   | **Media**, **Staging**, **Year**, **Map**, **Albums**, **People**, **Locations**, **Cameras** and **Tracks** in the sidebar, and **Import media**, **Album**, **Person**, **Location** and **Camera** in the **Create** menu | the `ems` module, installed with it, and the media service |
+| `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                             | a language model, your own or a hosted one                 |
+| `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                             | the media service                                          |
 
 If you installed with the **EiN Archive** command from einhq.eu, the three are installed already. Open
 **Settings → Modules**, choose each module, and check that its panel says **Active**, not

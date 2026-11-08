@@ -2,7 +2,7 @@
 
 With the [Archive](index.md) installed, EiN searches your photos, videos, recordings and documents,
 down to what is in a picture and what is said in a recording, and finds the albums, people,
-locations and devices they belong to. This page is for everyone who searches the archive in a
+locations and cameras they belong to. This page is for everyone who searches the archive in a
 browser. The finder in the top bar and the Search page itself are EiN's own, and
 [Search and the finder](../guide/search.md) covers them.
 
@@ -10,7 +10,7 @@ browser. The finder in the top bar and the Search page itself are EiN's own, and
 
 | Page       | Where you find it                                                            | What it finds                                                        |
 | ---------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **Search** | **Search** under Explore in the sidebar, or **Search for "…"** in the finder | Albums, people, locations and devices: the things pictures belong to |
+| **Search** | **Search** under Explore in the sidebar, or **Search for "…"** in the finder | Albums, people, locations and cameras: the things pictures belong to |
 | **Media**  | **Media** in the sidebar, or **Pictures of "…"** in the finder               | The photos, videos, audio recordings and documents themselves        |
 
 Both pages have the same kind of search box. You can write a sentence, pick something exactly with
@@ -139,7 +139,7 @@ remove a chip; to start again, remove them all.
 
 | Chip                                           | What it means                                                                 |
 | ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| `@Peggy Wrenfield`                             | One person, location or device, picked with `@` or understood from your words |
+| `@Peggy Wrenfield`                             | One person, location or camera, picked with `@` or understood from your words |
 | `@Okafor…`                                     | Every person whose name contains these words                                  |
 | `Area`                                         | An area on the map, such as a country or a city                               |
 | `1968`, `1990–1999`, `from 2010`, `up to 1980` | A year, a span of years, or a limit                                           |
@@ -158,13 +158,13 @@ searched. It appears once there is something to explain, and not on a phone.
 | **Description (q)**                 | The words searched for by meaning, or `none`     |
 | **Looks like (like)**               | The picture searched with, in place of words     |
 | **Names (subject-name, AND words)** | Partial names, and the people each one matched   |
-| **Exact (subject)**                 | The people, locations and devices picked exactly |
+| **Exact (subject)**                 | The people, locations and cameras picked exactly |
 | **Area**                            | An area on the map                               |
 | **Date (from/to)**                  | The year or years                                |
 | **Labels (tag)**                    | The labels                                       |
 | **Album/directory**                 | The album searched in                            |
 
-On the Search page it adds a line saying that people, locations, dates and devices are what a
+On the Search page it adds a line saying that people, locations, dates and cameras are what a
 picture has, so an album matches when it holds a picture that does.
 
 Open it when a search brings back something unexpected. A word you meant as a description may have
@@ -173,7 +173,7 @@ been taken as a place, or the other way round; remove that chip and search again
 ### Pick something exactly with `@`
 
 1. Type `@` and the start of a name. A list opens with the matching people, locations, labels and
-   devices (on the Media page, albums too), each with its kind beside it. The list matches the
+   cameras (on the Media page, albums too), each with its kind beside it. The list matches the
    start of each word of a name, in order, and lets you skip words: `@peg wren` finds Peggy
    Wrenfield.
 2. Pick one with the arrow keys and <kbd>Enter</kbd> or <kbd>Tab</kbd>, or click it. The box
@@ -220,11 +220,11 @@ that look like that label but do not carry it yet;
 [Media, Year and labels](media.md#let-ein-suggest-where-a-label-belongs) explains how to label them
 and teach EiN what the label means.
 
-## Find albums, people, locations and devices
+## Find albums, people, locations and cameras
 
 The Search page finds the things pictures belong to. [The Search page](../guide/search.md#the-search-page)
 explains its box, **Show** and **Sort**; with the Archive, **Show** offers **All**, **Albums**,
-**People**, **Locations** and **Devices**, and an album's card also shows its dates and how many
+**People**, **Locations** and **Cameras**, and an album's card also shows its dates and how many
 files it holds.
 
 What each kind is found by:
@@ -234,20 +234,20 @@ What each kind is found by:
 | Albums    | Name, description, and what their pictures show                                                                                                  | `album christmas` sets **Show** to **Albums** and finds the Christmas albums, such as Christmas 1975 and Christmas in Wellington |
 | People    | Name; every word must match the same person. A first name and surname find them without their middle names, or with one half of a double surname | `helen okafor`                                                                                                                   |
 | Locations | Name                                                                                                                                             | `falmouth`                                                                                                                       |
-| Devices   | Name, make, model or serial number                                                                                                               | `lumix` finds Peggy's Lumix                                                                                                      |
+| Cameras   | Name, make, model or serial number                                                                                                               | `lumix` finds Peggy's Lumix                                                                                                      |
 
 A person's name typed in whole words, even without the middle names, finds the person ahead of the
 albums named after them and of the pictures with their name written in them: `helen okafor` puts
 Helen before an album called Helen Okafor in Falmouth and before a letter she signed.
 
-A person, location, year, device or label in the search narrows albums by their pictures:
+A person, location, year, camera or label in the search narrows albums by their pictures:
 `@Peggy Wrenfield 1968` finds the albums holding a picture of Peggy taken in 1968. A label matches
 an album that carries it or holds a picture that does. A year alone also matches an album whose
 name carries it: `album christmas 1975` finds Christmas 1975 even when its scans have no date.
 
 ### Start from people, places, years and labels
 
-![The Search page before a search: the box with the Show choices All, Albums, People, Locations and Devices and the Sort menu, and below it rows of People, Locations, Years and Labels](../../assets/shots/search-page.webp "Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.")
+![The Search page before a search: the box with the Show choices All, Albums, People, Locations and Cameras and the Sort menu, and below it rows of People, Locations, Years and Labels](../../assets/shots/search-page.webp "Before you type, the Search page offers places to start: the people and locations with the most pictures, every year, and the labels.")
 
 Before you type, the Search page shows your **Recent searches**
 ([Before you search](../guide/search.md#before-you-search)), and under them the Archive's rows:
@@ -277,8 +277,8 @@ sentence. Your administrator installs both; see [The media service](../ems/index
 
 | What you do                                                                                                               | Needs                                                         |
 | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Finding albums, people, locations and devices in the finder                                                               | The Archive alone                                             |
-| Finding files, albums, people, locations and devices by name; `@` picks; labels; years and kinds read from a sentence     | The Archive alone                                             |
+| Finding albums, people, locations and cameras in the finder                                                               | The Archive alone                                             |
+| Finding files, albums, people, locations and cameras by name; `@` picks; labels; years and kinds read from a sentence     | The Archive alone                                             |
 | Finding pictures by what they show; text in pictures and speech by meaning; documents; albums by what their pictures show | The media service, answering when you search                  |
 | Searching with a picture you choose                                                                                       | The media service, answering when you search                  |
 | Finding text in pictures and speech by their exact words                                                                  | The media service to have read them once; not when you search |
@@ -313,7 +313,7 @@ picture finds nothing, and its line in the note says why.
    [The media service](../ems/index.md) covers what to do.
 
 Elsewhere you see no note, only less: the Search page still finds albums, people, locations and
-devices by name, but not albums by what their pictures show.
+cameras by name, but not albums by what their pictures show.
 
 When the language model is slow or away, you see no error either: the search keeps the years and
 kinds it read and searches the rest of your sentence as words.

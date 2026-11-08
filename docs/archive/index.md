@@ -1,22 +1,23 @@
 # The Archive
 
 The Archive is the module that makes EiN a family archive: albums of photos, videos, recordings and
-documents, the people in them and the family tree, the places they were taken, and the devices that
-took them. This page is for anyone deciding whether to install it and for anyone starting to use
+documents, the people in them and the family tree, the places they were taken, the cameras that took
+them and the routes travelled. This page is for anyone deciding whether to install it and for anyone starting to use
 it: what it needs, how to install it, what it adds to EiN, and where to begin. The pages in this
 section apply once the Archive is installed.
 
 ## What it is for
 
-| Part                   | What it gives you                                                                                                                   | Covered on                                                                                                  |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Albums and media       | Albums that hold photos, videos, audio recordings and documents, the Media feed and the Year page, labels, and the viewer           | [Albums](albums.md), [Media, Year and labels](media.md), [Viewing photos, videos and recordings](viewer.md) |
-| Staging                | A private place for each person, where uploads wait, get their dates and places read, and are grouped into suggested albums to file | [Getting your photos in](importing.md), [Sorting in staging](staging.md)                                    |
-| People and the family  | People, the faces found in pictures, the family tree, events in their lives and the homes they lived in                             | [People and faces](people.md), [Family tree, events and homes](family.md)                                   |
-| Locations and the map  | Named places with outlines on the map, and pictures placed by their GPS position                                                    | [Locations and the map](places.md)                                                                          |
-| Devices and GPS tracks | The cameras, phones and trackers that took pictures or recorded routes, their owners and clocks                                     | [Devices and GPS tracks](devices.md)                                                                        |
-| Search                 | Finding pictures by what they show, say and contain, and the albums, people, locations and devices they belong to                   | [Searching your pictures](search.md)                                                                        |
-| Home                   | On this day, News and Events on the Home page, and the life-event charts on the Statistics page                                     | [Memories, news and events on Home](home.md)                                                                |
+| Part                  | What it gives you                                                                                                                   | Covered on                                                                                                  |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Albums and media      | Albums that hold photos, videos, audio recordings and documents, the Media feed and the Year page, labels, and the viewer           | [Albums](albums.md), [Media, Year and labels](media.md), [Viewing photos, videos and recordings](viewer.md) |
+| Staging               | A private place for each person, where uploads wait, get their dates and places read, and are grouped into suggested albums to file | [Getting your photos in](importing.md), [Sorting in staging](staging.md)                                    |
+| People and the family | People, the faces found in pictures, the family tree, events in their lives and the homes they lived in                             | [People and faces](people.md), [Family tree, events and homes](family.md)                                   |
+| Locations and the map | Named places with outlines on the map, and pictures placed by their GPS position                                                    | [Locations and the map](places.md)                                                                          |
+| Cameras               | The cameras, phones and scanners that took the pictures, their owners and clocks                                                    | [Cameras](cameras.md)                                                                                       |
+| Tracks and trips      | The routes trackers, phones and GPS loggers recorded, cut into trips that can become albums                                         | [Tracks and trips](tracks.md)                                                                               |
+| Search                | Finding pictures by what they show, say and contain, and the albums, people, locations and cameras they belong to                   | [Searching your pictures](search.md)                                                                        |
+| Home                  | On this day, News and Events on the Home page, and the life-event charts on the Statistics page                                     | [Memories, news and events on Home](home.md)                                                                |
 
 ## What it needs
 
@@ -66,16 +67,16 @@ options.
 
 In the sidebar:
 
-| Section     | Entries                                               |
-| ----------- | ----------------------------------------------------- |
-| (top)       | **Media**, and **Staging** when you are signed in     |
-| **Explore** | **Year** and **Map**, beside EiN's own **Search**     |
-| **Browse**  | **Albums**, **People**, **Locations** and **Devices** |
+| Section     | Entries                                                           |
+| ----------- | ----------------------------------------------------------------- |
+| (top)       | **Media**, and **Staging** when you are signed in                 |
+| **Explore** | **Year** and **Map**, beside EiN's own **Search**                 |
+| **Browse**  | **Albums**, **People**, **Locations**, **Cameras** and **Tracks** |
 
 In the top bar:
 
 - The **Create** menu gets **Import media** (when you are signed in), **Album**, **Person**,
-  **Location** and **Device**.
+  **Location** and **Camera**.
 - The account menu gets **Favourites**.
 - **Random album**, the button with two crossing arrows beside the search box, opens an album at
   random; <kbd>Alt</kbd>+<kbd>R</kbd> does the same.
@@ -89,7 +90,7 @@ In EiN's own pages:
   when you are signed in, the pictures that look like a label in a search for that one label; see
   [Searching your pictures](search.md).
 - **Nodes**: a **Duplicates** tab among the page's tools, for the folder that is open.
-- **The finder** in the top bar finds albums, people, locations and devices by name, and offers
+- **The finder** in the top bar finds albums, people, locations and cameras by name, and offers
   **Pictures of "…"** to search the Media page.
 
 [Finding your way around](../guide/interface.md) shows where each of these sits.
@@ -102,10 +103,14 @@ up, and in a staging folder in each person's home:
 | Path                 | What is there                                                                                           |
 | -------------------- | ------------------------------------------------------------------------------------------------------- |
 | `/archive/albums`    | Albums, and the photos, videos, recordings and documents in them                                        |
-| `/archive/people`    | People, with their family, homes, events and devices                                                    |
+| `/archive/people`    | People, with their family, homes, events and cameras                                                    |
 | `/archive/locations` | Locations, each with its outline on the map                                                             |
-| `/archive/devices`   | Cameras, phones and GPS trackers, each with the route it recorded                                       |
+| `/archive/cameras`   | Cameras, phones and scanners, each linked to the track it records into when it has one                  |
 | `~/staging`          | In each person's home, such as `/home/helen/staging`: uploads waiting to be sorted, seen by nobody else |
+
+A track has no folder of its own: it is wherever it was made, such as under a device of the
+[Automation](../automation/index.md) module in `/archive/devices` (see
+[Where tracks come from](tracks.md#where-tracks-come-from)).
 
 Removing the module never removes the folders under `/archive`, since they hold the content.
 [The tree](../concepts/tree.md#archive-the-content) describes them, and the labels in
@@ -147,7 +152,8 @@ whole order of steps on [First steps](../start/first-steps.md).
 - [People and faces](people.md): people, and naming the faces found in pictures.
 - [Family tree, events and homes](family.md): how people are related, and their lives.
 - [Locations and the map](places.md): places, their outlines and the map.
-- [Devices and GPS tracks](devices.md): cameras, phones and trackers, and their routes.
+- [Cameras](cameras.md): the cameras, phones and scanners that took the pictures.
+- [Tracks and trips](tracks.md): the routes travelled, and their trips.
 - [Memories, news and events on Home](home.md): what the Archive shows on Home and Statistics.
 - [Supported files](file-types.md): the files the Archive reads.
 - [Processing pictures](processing.md): the work done on every file, for administrators.

@@ -27,7 +27,7 @@ rest of the panel.
 
 In an album the pictures are laid out in sections by day. One known only to a year sits under a
 heading with only the year; one with no date comes after the dated ones, under **Undated**. A
-person's, location's or device's **Media** tab lists undated pictures after the rest too. The Media
+person's, location's or camera's **Media** tab lists undated pictures after the rest too. The Media
 feed lists pictures by date, so it leaves out a picture that has none.
 
 ## Which date a picture gets
@@ -68,8 +68,8 @@ A few rules decide the close cases:
 - **File names count only where a staging category says so**, and only the names a phone, a
   messenger, a screenshot tool or a desktop uploader writes. A name that dates a picture before 1995
   is not believed, and a scanner's running number such as `IMG_20190601_0001.jpg` is no date.
-- **A scanner's clock never dates a picture** once the scanner is registered as a device with
-  **Scanner or digitizer** turned on (see [Devices and GPS tracks](devices.md)). A GPS time in the
+- **A scanner's clock never dates a picture** once the scanner is registered as a camera with
+  **Scanner or digitizer** turned on (see [Cameras](cameras.md#clocks-time-zones-and-scanners)). A GPS time in the
   file still counts.
 
 ## Date scans of old prints and slides
@@ -99,7 +99,7 @@ explains categories and the Files tab.
 
 > [!NOTE]
 > A scan uploaded straight into an album, or copied into one over SFTP, is not marked: no staging
-> category's rules apply there. For those, register the scanner as a device with **Scanner or
+> category's rules apply there. For those, register the scanner as a camera with **Scanner or
 > digitizer** turned on. Saving that setting re-dates the files already linked to it and says
 > "Removed scanner dates from N linked files."
 
@@ -173,7 +173,7 @@ Pictures already in the library have no lane. An album lists its undated picture
 ## Set the time of several pictures at once
 
 **Set time** is in the selection bar that appears when you select pictures: on an album page, the
-Media page, a person's, location's or device's **Media** tab, and the **Files** tab in staging. On a
+Media page, a person's, location's or camera's **Media** tab, and the **Files** tab in staging. On a
 narrow screen it is under **Actions**. It is offered only when you may change every selected
 picture. In staging's **Sort** tab, <kbd>T</kbd> opens the same dialog.
 
@@ -274,7 +274,7 @@ EiN works out the time zone of a picture from:
 - the time zone the camera recorded in the file, as many phones do;
 - the difference between the GPS time and the camera's clock, rounded to whole hours;
 - the difference between Google Photos' time and the camera's clock, for a picture from a Takeout;
-- the **Timezone** of the registered device that took it, which knows the summer time of the year
+- the **Timezone** of the registered camera that took it, which knows the summer time of the year
   the picture was taken in.
 
 A picture none of these places carries no time zone. It is shown at the camera's time without a
@@ -285,10 +285,10 @@ machine EiN runs on (`TZ`, under
 When a camera's pictures come out hours off:
 
 - **The camera's clock was set to another zone**, for one bought abroad or kept on home time during
-  a trip: give the camera's device the **Timezone** its clock was set to. For a registered camera,
+  a trip: give the camera the **Timezone** its clock was set to. For a registered camera,
   open its page, press **Edit** and set **Timezone**; saving re-dates the pictures linked to it and
-  says "Re-dated N linked files." Register an unregistered one from the **Devices** page with its
-  **Timezone**, which links its pictures and dates them by it. [Devices and GPS tracks](devices.md) has the details.
+  says "Re-dated N linked files." Register an unregistered one from the **Cameras** page with its
+  **Timezone**, which links its pictures and dates them by it. [Cameras](cameras.md) has the details.
 - **A phone's videos are off by exactly its time zone**: turn on **Video times in UTC** for that
   phone. Phones keep their videos' recording time in UTC.
 - **The clock was wrong by some amount**: use **Set time** as described above.
@@ -330,13 +330,13 @@ those left outside are let go. The link gives the picture the location's name in
 it on the location's **Media** tab. A link someone made by hand, or one brought in from an older
 archive, is never replaced. [Locations and the map](places.md) shows how to draw a location's shape.
 
-A device's GPS track is drawn beside the pictures on the map and on an album's **Map** tab. EiN does
-not use it to give pictures a position.
+A track's route is drawn beside the pictures on the map and on an album's **Map** tab (see
+[Tracks and trips](tracks.md)). EiN does not use it to give pictures a position.
 
 ## Set the place of pictures
 
 1. Select the pictures in a grid: an album, the Media page, your favourites, a person's,
-   location's or device's **Media** tab, the pictures behind a pile on the map, or the **Files** tab
+   location's or camera's **Media** tab, the pictures behind a pile on the map, or the **Files** tab
    in staging.
 2. Press **Set location** in the selection bar. It is offered only when you may change every
    selected picture.
@@ -409,7 +409,7 @@ Set location 50.153,-5.066 on /archive/albums/Peggy's Falmouth/P1000413.JPG
 - **A picture has a date you did not expect.** Look at **Time source** under **Details**. "from the
   file name" means its category reads dates from names; "from the camera clock" with a wrong year
   means the camera's clock was wrong.
-- **All pictures from one camera are some hours off.** Set the device's **Timezone**, or for a
+- **All pictures from one camera are some hours off.** Set the camera's **Timezone**, or for a
   phone's videos turn on **Video times in UTC**, as described under
   [Time zones](#time-zones).
 - **Set time is not in the selection bar.** You may not change every selected picture: select only

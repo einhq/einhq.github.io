@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html" aria-current="page">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html" aria-current="page">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="cameras.html">Cameras</a></li><li><a href="tracks.html">Tracks and trips</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -115,7 +115,7 @@ The <strong>Details</strong> row near its foot, folded until you click its icon,
 rest of the panel.</p>
 <p>In an album the pictures are laid out in sections by day. One known only to a year sits under a
 heading with only the year; one with no date comes after the dated ones, under <strong>Undated</strong>. A
-person&#39;s, location&#39;s or device&#39;s <strong>Media</strong> tab lists undated pictures after the rest too. The Media
+person&#39;s, location&#39;s or camera&#39;s <strong>Media</strong> tab lists undated pictures after the rest too. The Media
 feed lists pictures by date, so it leaves out a picture that has none.</p>
 <h2 id="which-date-a-picture-gets">Which date a picture gets<a class="anchor" href="#which-date-a-picture-gets" aria-label="Link to this section"></a></h2>
 <p>EiN looks at up to five sources for a picture&#39;s date and takes the first one that has it. The
@@ -269,8 +269,8 @@ clock&quot;.</li>
 <li><strong>File names count only where a staging category says so</strong>, and only the names a phone, a
 messenger, a screenshot tool or a desktop uploader writes. A name that dates a picture before 1995
 is not believed, and a scanner&#39;s running number such as <code>IMG_20190601_0001.jpg</code> is no date.</li>
-<li><strong>A scanner&#39;s clock never dates a picture</strong> once the scanner is registered as a device with
-<strong>Scanner or digitizer</strong> turned on (see <a href="devices.html">Devices and GPS tracks</a>). A GPS time in the
+<li><strong>A scanner&#39;s clock never dates a picture</strong> once the scanner is registered as a camera with
+<strong>Scanner or digitizer</strong> turned on (see <a href="cameras.html#clocks-time-zones-and-scanners">Cameras</a>). A GPS time in the
 file still counts.</li>
 </ul>
 <h2 id="date-scans-of-old-prints-and-slides">Date scans of old prints and slides<a class="anchor" href="#date-scans-of-old-prints-and-slides" aria-label="Link to this section"></a></h2>
@@ -296,7 +296,7 @@ dates the moved files again by the scans&#39; rules, in the background. <a href=
 explains categories and the Files tab.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>A scan uploaded straight into an album, or copied into one over SFTP, is not marked: no staging
-category&#39;s rules apply there. For those, register the scanner as a device with <strong>Scanner or
+category&#39;s rules apply there. For those, register the scanner as a camera with <strong>Scanner or
 digitizer</strong> turned on. Saving that setting re-dates the files already linked to it and says
 &quot;Removed scanner dates from N linked files.&quot;</p>
 </aside>
@@ -401,7 +401,7 @@ one; otherwise there is none.</p>
 <code>search --undated</code> lists everything undated in the library that you may see.</p>
 <h2 id="set-the-time-of-several-pictures-at-once">Set the time of several pictures at once<a class="anchor" href="#set-the-time-of-several-pictures-at-once" aria-label="Link to this section"></a></h2>
 <p><strong>Set time</strong> is in the selection bar that appears when you select pictures: on an album page, the
-Media page, a person&#39;s, location&#39;s or device&#39;s <strong>Media</strong> tab, and the <strong>Files</strong> tab in staging. On a
+Media page, a person&#39;s, location&#39;s or camera&#39;s <strong>Media</strong> tab, and the <strong>Files</strong> tab in staging. On a
 narrow screen it is under <strong>Actions</strong>. It is offered only when you may change every selected
 picture. In staging&#39;s <strong>Sort</strong> tab, <kbd>T</kbd> opens the same dialog.</p>
 <p>The dialog is titled <strong>Set time</strong>, with the number of files under it.</p>
@@ -489,7 +489,7 @@ adds the same moment in yours (&quot;… your time&quot;).</p>
 <li>the time zone the camera recorded in the file, as many phones do;</li>
 <li>the difference between the GPS time and the camera&#39;s clock, rounded to whole hours;</li>
 <li>the difference between Google Photos&#39; time and the camera&#39;s clock, for a picture from a Takeout;</li>
-<li>the <strong>Timezone</strong> of the registered device that took it, which knows the summer time of the year
+<li>the <strong>Timezone</strong> of the registered camera that took it, which knows the summer time of the year
 the picture was taken in.</li>
 </ul>
 <p>A picture none of these places carries no time zone. It is shown at the camera&#39;s time without a
@@ -499,10 +499,10 @@ machine EiN runs on (<code>TZ</code>, under
 <p>When a camera&#39;s pictures come out hours off:</p>
 <ul>
 <li><strong>The camera&#39;s clock was set to another zone</strong>, for one bought abroad or kept on home time during
-a trip: give the camera&#39;s device the <strong>Timezone</strong> its clock was set to. For a registered camera,
+a trip: give the camera the <strong>Timezone</strong> its clock was set to. For a registered camera,
 open its page, press <strong>Edit</strong> and set <strong>Timezone</strong>; saving re-dates the pictures linked to it and
-says &quot;Re-dated N linked files.&quot; Register an unregistered one from the <strong>Devices</strong> page with its
-<strong>Timezone</strong>, which links its pictures and dates them by it. <a href="devices.html">Devices and GPS tracks</a> has the details.</li>
+says &quot;Re-dated N linked files.&quot; Register an unregistered one from the <strong>Cameras</strong> page with its
+<strong>Timezone</strong>, which links its pictures and dates them by it. <a href="cameras.html">Cameras</a> has the details.</li>
 <li><strong>A phone&#39;s videos are off by exactly its time zone</strong>: turn on <strong>Video times in UTC</strong> for that
 phone. Phones keep their videos&#39; recording time in UTC.</li>
 <li><strong>The clock was wrong by some amount</strong>: use <strong>Set time</strong> as described above.</li>
@@ -536,12 +536,12 @@ it by itself. When a location&#39;s shape changes, the library&#39;s pictures in
 those left outside are let go. The link gives the picture the location&#39;s name in the viewer and puts
 it on the location&#39;s <strong>Media</strong> tab. A link someone made by hand, or one brought in from an older
 archive, is never replaced. <a href="places.html">Locations and the map</a> shows how to draw a location&#39;s shape.</p>
-<p>A device&#39;s GPS track is drawn beside the pictures on the map and on an album&#39;s <strong>Map</strong> tab. EiN does
-not use it to give pictures a position.</p>
+<p>A track&#39;s route is drawn beside the pictures on the map and on an album&#39;s <strong>Map</strong> tab (see
+<a href="tracks.html">Tracks and trips</a>). EiN does not use it to give pictures a position.</p>
 <h2 id="set-the-place-of-pictures">Set the place of pictures<a class="anchor" href="#set-the-place-of-pictures" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Select the pictures in a grid: an album, the Media page, your favourites, a person&#39;s,
-location&#39;s or device&#39;s <strong>Media</strong> tab, the pictures behind a pile on the map, or the <strong>Files</strong> tab
+location&#39;s or camera&#39;s <strong>Media</strong> tab, the pictures behind a pile on the map, or the <strong>Files</strong> tab
 in staging.</li>
 <li>Press <strong>Set location</strong> in the selection bar. It is offered only when you may change every
 selected picture.</li>
@@ -638,7 +638,7 @@ its folder into a Scans category while it is still in staging; or register the s
 <li><strong>A picture has a date you did not expect.</strong> Look at <strong>Time source</strong> under <strong>Details</strong>. &quot;from the
 file name&quot; means its category reads dates from names; &quot;from the camera clock&quot; with a wrong year
 means the camera&#39;s clock was wrong.</li>
-<li><strong>All pictures from one camera are some hours off.</strong> Set the device&#39;s <strong>Timezone</strong>, or for a
+<li><strong>All pictures from one camera are some hours off.</strong> Set the camera&#39;s <strong>Timezone</strong>, or for a
 phone&#39;s videos turn on <strong>Video times in UTC</strong>, as described under
 <a href="#time-zones">Time zones</a>.</li>
 <li><strong>Set time is not in the selection bar.</strong> You may not change every selected picture: select only

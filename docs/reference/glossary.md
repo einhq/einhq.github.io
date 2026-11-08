@@ -55,8 +55,8 @@ span and its stacks. Albums are under `/archive/albums`. See [Albums](../archive
 ### Archive
 
 The first module, `archive`, and what it adds: albums, people and their family tree, locations,
-devices and their tracks, labels, staging, and the pipelines that process media. Its parts of the
-tree are `/archive/albums`, `/archive/people`, `/archive/locations` and `/archive/devices`. Without it, EiN keeps what you give it and works nothing out. See
+cameras, tracks and their trips, labels, staging, and the pipelines that process media. Its parts of the
+tree are `/archive/albums`, `/archive/people`, `/archive/locations` and `/archive/cameras`. Without it, EiN keeps what you give it and works nothing out. See
 [The Archive](../archive/index.md) and [Modules](../admin/modules.md).
 
 ### Assistant
@@ -94,6 +94,13 @@ removes nothing. See [Duplicates](../archive/duplicates.md#copies-look-alikes-an
 
 ## C
 
+### Camera
+
+_Archive._ What took a picture: a camera, phone, scanner or camcorder, matched by its make, model and
+serial number. A registered camera dates the pictures it took in its own time zone, and a phone's
+camera can link to the track it records into. Cameras are under `/archive/cameras`. See
+[Cameras](../archive/cameras.md).
+
 ### Category
 
 _Archive._ A folder of your staging area that keeps one source together, such as a Google Photos export, a box
@@ -116,7 +123,7 @@ sharing, and the frame of the Web UI. Core brings no pipelines of its own. See
 
 ### Cover
 
-_Archive._ The picture that stands for an album, a person, a location or a device on its card and in its
+_Archive._ The picture that stands for an album, a person, a location or a camera on its card and in its
 header. A cover is a softlink to one of the pictures, for a person to one of their face crops. See [Albums](../archive/albums.md) and
 [People and faces](../archive/people.md#cover-pictures).
 
@@ -143,9 +150,9 @@ camera and the text read from it. <kbd>i</kbd> opens and closes it. See
 
 ### Device
 
-_Archive._ A camera, phone or tracker, matched by its make, model and serial number. A registered device dates
-the pictures it took in its own time zone and can keep a GPS track. Devices are under
-`/archive/devices`. See [Devices and GPS tracks](../archive/devices.md).
+_Automation._ Something in the house that reports or can be switched, such as a sensor, a plug or a
+button, or one made by hand, such as a boat whose position a phone posts. Devices are under
+`/archive/devices`. See [Automation](../automation/index.md).
 
 ### Discard
 
@@ -178,7 +185,7 @@ Pipelines start from events. See [Changes and pipelines](../concepts/pipelines.m
 
 ### Event, on a timeline
 
-_Archive._ A dated note on a person, an album, a location or a device: a wedding, a move, a birth. A person's
+_Archive._ A dated note on a person, an album, a location or a camera: a wedding, a move, a birth. A person's
 event has the type **Generic**, **Birth**, **Death**, **Marriage** or **Engagement**. See
 [Family tree, events and homes](../archive/family.md#record-an-event).
 
@@ -289,7 +296,7 @@ that undoes it. The **Done** tab and `staging undo` undo an entry. See
 
 ### Label
 
-One word, such as `sailing`, put on a picture, an album, a person, a location or a device. The same
+One word, such as `sailing`, put on a picture, an album, a person, a location or a camera. The same
 word is the same label across the archive. A label is a folder under `/archive/tags` holding a link
 to everything that carries it. See [Media, Year and labels](../archive/media.md#labels).
 
@@ -490,8 +497,8 @@ links are kept under `/var/links`. See
 
 ### Sharing
 
-Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location
-or a device, set in words with **Share**:
+Who can see and change a node, such as a folder or, with the Archive, an album, a person, a location,
+a camera or a track, set in words with **Share**:
 **Can view** or **Can edit** for people and groups, and links for people without an account. It
 sets the same mode and access list as `chmod` and `acl`. See [Sharing](../guide/sharing.md).
 
@@ -550,8 +557,10 @@ account menu. See [Finding your way around](../guide/interface.md#the-top-bar).
 
 ### Track
 
-_Archive._ The route a device recorded: GPS points with times, kept as the device's child named `track`, from
-GPX files or sent live. See [Devices and GPS tracks](../archive/devices.md#a-devices-track).
+The route something travelled: GPS points with times, from GPX files or sent live, in a node of the
+type `track`. With the Automation module, a device with a position keeps one as its position's
+history. The Archive draws tracks on its maps and cuts them into trips. See
+[Tracks and trips](../archive/tracks.md).
 
 ### Trash
 
@@ -564,6 +573,12 @@ Nodes page do not use it. See [Your profile, favourites and trash](../guide/prof
 
 The one hierarchy of nodes that holds everything in EiN, from `/`: `/archive`, `/home`, `/etc`,
 `/var`, `/usr`, `/dev` and `/tmp`. See [The tree](../concepts/tree.md).
+
+### Trip
+
+_Archive._ A stretch of a track from where it lay still to where it lay still again, found by EiN
+and kept up to date as the track grows. A trip can be made an album. See
+[Tracks and trips](../archive/tracks.md#trips).
 
 ## U
 

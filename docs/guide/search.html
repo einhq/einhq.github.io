@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -107,7 +107,7 @@ open the finder as a dialog of its own, with the prompt <strong>Search, or go to
 search key does what <kbd>Enter</kbd> does. <a href="phone.html">EiN on a phone</a> covers the rest.</p>
 <p>With no module installed, the finder finds the pages in your sidebar, the actions in the top bar
 and EiN&#39;s commands. Each module adds its pages and actions, and the Archive adds its albums,
-people, locations and devices by name.</p>
+people, locations and cameras by name.</p>
 <h3 id="go-somewhere-with-nothing-typed">Go somewhere with nothing typed<a class="anchor" href="#go-somewhere-with-nothing-typed" aria-label="Link to this section"></a></h3>
 <p>With the box empty, the list shows two groups:</p>
 <ul>
@@ -140,7 +140,7 @@ typed, <kbd>Enter</kbd> does nothing until an arrow key has lit a row.</p>
 </tr>
 <tr>
 <td>The kinds the Search page finds</td>
-<td>Their things whose names match, with the kind of each beside it. With the Archive installed the group is <strong>Albums, people, locations, devices</strong></td>
+<td>Their things whose names match, with the kind of each beside it. With the Archive installed the group is <strong>Albums, people, locations, cameras</strong></td>
 <td>Its page</td>
 </tr>
 </tbody></table>
@@ -179,8 +179,8 @@ command.</p>
 <p><strong>Search</strong>, under Explore in the sidebar, searches the kinds of things the installed modules make
 searchable. With no module installed it has nothing to search: before you type it says <strong>Search
 for anything</strong>, and a search answers <strong>No results found</strong>. With the Archive installed it finds
-albums, people, locations and devices; see
-<a href="../archive/search.html#find-albums-people-locations-and-devices">Find albums, people, locations and devices</a>.</p>
+albums, people, locations and cameras; see
+<a href="../archive/search.html#find-albums-people-locations-and-cameras">Find albums, people, locations and cameras</a>.</p>
 <ol>
 <li>Open <strong>Search</strong> in the sidebar, or choose <strong>Search for &quot;…&quot;</strong> in the finder. The header reads
 <strong>Search</strong> and <strong>Search by name, date or @mention</strong>.</li>
@@ -231,7 +231,7 @@ by the names of its commands and by its manifest:</p>
 </tr>
 <tr>
 <td><code>subject-&lt;kind&gt;</code> commands</td>
-<td>What a person, location or device picked with <code>@</code> has</td>
+<td>What a person, location or camera picked with <code>@</code> has</td>
 </tr>
 <tr>
 <td>Node types marked <code>searchable</code> in its manifest</td>
@@ -252,7 +252,7 @@ by the names of its commands and by its manifest:</p>
 </tbody></table>
 </div>
 <p>With no module, <code>search</code> has no provider to ask and the Search page no kind to find. The Archive
-brings the providers for albums, people, locations, devices, tracks, media and documents, and the
+brings the providers for albums, people, locations, cameras, tracks, media and documents, and the
 reader for the box; the assistant brings the command finder. <a href="../develop/modules.html#plug-into-search-the-home-page-and-other-places">Writing a module</a>
 shows how a module plugs in, and the settings are in the
 <a href="../reference/settings.html#cfg_search_parser">settings reference</a>.</p>

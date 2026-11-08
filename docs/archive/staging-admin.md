@@ -17,7 +17,7 @@ module provides staging; without the `archive` module there is none (see [Module
   files/<category>/…        the staged files, in any folders below a category
   albums/<category>/<slug>  the suggested albums (groups) for that category's files
   journal/<id>              one entry per decision, with the plan that undoes it
-  routes/                   GPX files waiting for the device that recorded them
+  routes/                   GPX files waiting for the track they belong to
   genealogy/                GEDCOM files waiting to be looked over and imported
 ```
 
@@ -27,7 +27,7 @@ module provides staging; without the `archive` module there is none (see [Module
 | `files/<category>`   | Any other category, one folder each. Its name is its key and never changes. Its settings are kept on the folder.                                                                       |
 | `albums/<category>/` | The groups the organizer suggests, as albums whose members are links to the staged files. It also holds the organizer's checkpoint, `.organizer`.                                      |
 | `journal/`           | Every decision: filing, discarding, removing copies, changing the groups and "not this album". Entries are never deleted; each is undone from the **Done** tab or with `staging undo`. |
-| `routes/`            | GPX tracks that name no device EiN knows, until their owner says which device recorded them.                                                                                           |
+| `routes/`            | GPX files that name no track EiN knows, or more than one, until their owner says which track they belong to.                                                                           |
 | `genealogy/`         | GEDCOM family trees, until their owner has said who the people in them are and imported them.                                                                                          |
 
 Every directory of a staging area is mode `0700` and owned by the account, and `staging/` is marked
@@ -72,7 +72,7 @@ following, so albums and suggestions keep pointing at it:
 | A folder directly under `files/` | Adopts it as a category of the `generic` kind (**Other** in the Web UI), named after it. |
 | A file directly in `files/`      | Moves it into `files/inbox/unsorted/`, or the folder `--loose-batch` names.              |
 | A group directly in `albums/`    | Moves it into `albums/inbox/`.                                                           |
-| A GPX file waiting for a device  | Moves it into `routes/`.                                                                 |
+| A GPX file waiting for a track   | Moves it into `routes/`.                                                                 |
 
 A name already taken where something moves gets `-2`, `-3`. Run again, it finds nothing to do.
 
@@ -98,7 +98,7 @@ engine, which [Processing and pipelines](../admin/processing.md) covers.
 | `media-ingest`, `media-interpret` and the media work | A file lands                                                                                                      | Checks whether it is an exact copy, which then waits unread; reads its metadata, then dates and places it by the category's time rules; then the thumbnails, faces, fingerprints and the rest, through the [media service](../ems/index.md).                                                                    |
 | `staging-retime`                                     | Files move into a category with other time rules, about 10 seconds after the last one                             | Dates them again by the rules of the category they are in now (`staging retime`).                                                                                                                                                                                                                               |
 | `staging-organize`                                   | A category's files arrive, leave, move or are read, or someone asks for a run; held two minutes                   | Plans the category's groups again where its files changed, and writes what differs (`staging organize`).                                                                                                                                                                                                        |
-| `track-stage`                                        | A `.gpx` file lands anywhere in staging                                                                           | Adds its points to the track of the device it names and moves the file to the device's `routes/`; one that names no known device waits for its owner.                                                                                                                                                           |
+| `track-stage`                                        | A `.gpx` file lands anywhere in staging                                                                           | Adds its points to the track it names and moves the file to the track's `routes/`; one that names no track, or several, waits for its owner.                                                                                                                                                                    |
 | `gedcom-stage`                                       | A `.ged` file lands under `files/`                                                                                | Moves it to `genealogy/`, where it waits for its owner to look it over and import it (`gedcom-import`, which moves it to `/archive/sources/genealogy/` and imports as the staging area's owner).                                                                                                                |
 | `staging-organizer` (service)                        | Every 15 minutes                                                                                                  | Asks for an organizer run of each category that something waits for, and matches the groups due a match against the library's albums.                                                                                                                                                                           |
 | `staging-organizer` (service)                        | Every hour                                                                                                        | Sets up every account's staging area and moves a file copied loose into `files/`, once nothing has changed on it for six hours, into `files/inbox/unsorted/` (`staging init --all --idle-minutes 360`); and checks every duplicate finding against where its file is now (`staging duplicates --repair --all`). |
@@ -134,7 +134,7 @@ staging status --user helen
 ```text
 inbox: 1204 media, 37 other, 212 indexing, 18 undated
 google-photos: 48210 media, 1391 other, 30544 indexing, 66 undated
-1 route(s) waiting for a device
+1 route(s) waiting for a track
 1 family tree(s) waiting to be imported
 ```
 
@@ -277,7 +277,7 @@ Each problem is a line `<code>: <path>: <detail>`:
 | `orphan-albums`  | A folder of groups has no category.                                      |
 | `cross-category` | A group links to a file outside its own category.                        |
 | `dangling-link`  | A group links to nothing.                                                |
-| `waiting-route`  | A GPX file waits for its device outside `routes/`.                       |
+| `waiting-route`  | A GPX file waits for its track outside `routes/`.                        |
 
 `staging init --user <name>` puts right all but the two kinds of link. A group's broken links are
 put right by the next full organizer run, which you can start at once:

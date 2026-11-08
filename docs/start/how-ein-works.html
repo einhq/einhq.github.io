@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/devices.html">Devices and GPS tracks</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Tracks and trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -168,7 +168,7 @@ dates. Some types hold content as well: a file its bytes, a log its lines, a que
 <p>Any node can have children, a file included. With the Archive, a photo keeps what EiN works out
 about it beneath itself: its EXIF in <code>metadata/exif</code>, its thumbnails in <code>thumbnails/</code>, the faces found on it in
 <code>regions/</code>. Delete the photo and they go with it.</p>
-<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other. The Nodes page, in an administrator&#39;s sidebar, browses the whole tree.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/nodes@2x.webp"><img src="../../assets/shots/nodes.webp" srcset="../../assets/shots/nodes.webp 1x, ../../assets/shots/nodes@2x.webp 2x" alt="The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A person is a node like any other. The Nodes page, in an administrator&#39;s sidebar, browses the whole tree.</figcaption></figure>
 <p>The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
 theirs, such as the archive&#39;s <code>album</code>, <code>person</code> and <code>location</code>. <a href="../concepts/nodes.html">Nodes and node types</a>
 describes a node part by part, and <a href="../reference/node-types.html">Node types</a> lists every type.</p>
@@ -183,7 +183,7 @@ standard path.</p>
 </thead>
 <tbody><tr>
 <td><code>/archive</code></td>
-<td>The content EiN is for: the labels folder <code>tags</code>, and with the Archive its albums, people, locations and devices</td>
+<td>The content EiN is for: the labels folder <code>tags</code>, and with the Archive its albums, people, locations and cameras</td>
 </tr>
 <tr>
 <td><code>/home/&lt;you&gt;</code></td>
@@ -218,7 +218,7 @@ takes its group from the folder it is made in. The administrator bypasses every 
 can look emptier to you than to its owner.</li>
 <li><strong>You can share anonymous links</strong>: A link can be created that opens it without an account. It works
 on any node from the <strong>Nodes</strong> explorer, and with the Archive installed its pages offer it on an
-album, a picture, a person, a location or a device.</li>
+album, a picture, a person, a location or a camera.</li>
 </ul>
 <p>Someone who has not signed in is the guest. The guest can sign in or open a share link and nothing
 more, unless an administrator turns on <strong>Visitors may browse</strong>, and the guest never changes
@@ -407,7 +407,7 @@ of its commands: every command whose name starts with <code>search-</code> is as
 </thead>
 <tbody><tr>
 <td><a href="../archive/index.html"><code>archive</code></a></td>
-<td>The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted</td>
+<td>The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, tracks and their trips, and staging, where uploads wait to be sorted</td>
 <td>The <code>ems</code> module, installed along with it, and the media service</td>
 </tr>
 <tr>

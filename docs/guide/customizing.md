@@ -71,7 +71,8 @@ Browse
   Albums           /albums          archive.albums
   People           /people          archive.people
   Locations        /locations       archive.locations
-  Devices          /devices         archive.devices
+  Cameras          /cameras         archive.cameras
+  Tracks           /tracks          archive.tracks
 System
   Settings         /settings        ui.settings
   Statistics       /stats           ui.stats
@@ -83,7 +84,7 @@ top bar
     Album          archive.create-album
     Person         archive.create-person
     Location       archive.create-location
-    Device         archive.create-device
+    Camera         archive.create-camera
   Random album     archive.random-album (alt+R)
   Account          ui.account
     Favourites     archive.favourites
@@ -411,7 +412,7 @@ open menu. With `"order": 15` the button stands between **Chat** (10) and **Crea
 Rows can go into the menus EiN has as well:
 
 - **`"parent": "ui.create"`** adds a row to the **Create New** menu under the plus. The archive's
-  rows are **Import media** (5), **Album** (10), **Person** (20), **Location** (30) and **Device**
+  rows are **Import media** (5), **Album** (10), **Person** (20), **Location** (30) and **Camera**
   (40).
 - **`"parent": "ui.account"`** adds a row to the menu under your picture, after **Me**. The archive
   puts **Favourites** there (10), and EiN its **Profile** (900, `ui.profile`) and **Trash** (910,
@@ -453,14 +454,14 @@ from anywhere outside a text field, and an <kbd>Alt</kbd> key from a text field 
     { "id": "archive.random-album", "shortcut": null }
   ],
   "sidebar": [
-    { "id": "archive.devices", "shortcut": "alt+U" }
+    { "id": "archive.cameras", "shortcut": "alt+U" }
   ]
 }
 ```
 
 This gives **Create** › **Album** the key <kbd>Alt</kbd>+<kbd>B</kbd>, gives your **Map** button
 <kbd>Alt</kbd>+<kbd>K</kbd>, takes <kbd>Alt</kbd>+<kbd>R</kbd> away from **Random album**, and opens
-**Devices** with <kbd>Alt</kbd>+<kbd>U</kbd>.
+**Cameras** with <kbd>Alt</kbd>+<kbd>U</kbd>.
 
 - A key is modifiers and one key, joined by `+`. The modifiers are `alt`, `ctrl`, `shift`, `meta`,
   and `mod`, which is <kbd>Ctrl</kbd>, or <kbd>⌘</kbd> on a Mac. Letter case does not matter:
@@ -543,8 +544,8 @@ where they matter:
 EiN uses them itself: **Nodes** and **Dashboard** are `admin`; **Staging**, **Settings**, **Create**
 and the account menu are `signedIn`.
 
-This file, for a family with no cameras or GPS trackers to register, hides **Devices** in the
-sidebar and in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
+This file, for a family with no cameras to register and no tracks, hides **Cameras** and
+**Tracks** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
 button that reruns failed work with
 [`pipeline-heal`](../reference/commands-core.md#pipeline-heal):
 
@@ -556,7 +557,7 @@ button that reruns failed work with
   "topbar": [
     { "id": "site.retry", "title": "Retry failed work", "icon": "refresh", "admin": true, "action": { "run": "pipeline-heal --apply" } }
   ],
-  "hide": ["archive.devices", "archive.create-device"]
+  "hide": ["archive.cameras", "archive.tracks", "archive.create-camera"]
 }
 ```
 

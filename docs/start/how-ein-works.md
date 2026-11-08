@@ -36,7 +36,7 @@ Any node can have children, a file included. With the Archive, a photo keeps wha
 about it beneath itself: its EXIF in `metadata/exif`, its thumbnails in `thumbnails/`, the faces found on it in
 `regions/`. Delete the photo and they go with it.
 
-![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "A person is a node like any other. The Nodes page, in an administrator's sidebar, browses the whole tree.")
 
 The type decides what a node is and how EiN treats it. Core has 17 types of its own, and modules add
 theirs, such as the archive's `album`, `person` and `location`. [Nodes and node types](../concepts/nodes.md)
@@ -47,7 +47,7 @@ standard path.
 
 | Folder         | What it holds                                                                                                                     |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `/archive`     | The content EiN is for: the labels folder `tags`, and with the Archive its albums, people, locations and devices                  |
+| `/archive`     | The content EiN is for: the labels folder `tags`, and with the Archive its albums, people, locations and cameras                  |
 | `/home/<you>`  | Your own space: your settings, shell history, favourites and trash, and with the Archive the uploads waiting for you to sort them |
 | `/etc`         | Accounts and groups, settings, and the services EiN runs                                                                          |
 | `/var`         | What the system writes as it runs: logs, sessions, queues, pools and pipeline runs                                                |
@@ -67,7 +67,7 @@ Two things work differently from a computer's files:
   can look emptier to you than to its owner.
 - **You can share anonymous links**: A link can be created that opens it without an account. It works
   on any node from the **Nodes** explorer, and with the Archive installed its pages offer it on an
-  album, a picture, a person, a location or a device.
+  album, a picture, a person, a location or a camera.
 
 Someone who has not signed in is the guest. The guest can sign in or open a share link and nothing
 more, unless an administrator turns on **Visitors may browse**, and the guest never changes
@@ -178,7 +178,7 @@ The published modules are in the einhq organisation on GitHub, each named `modul
 
 | Module                               | What it is for                                                                                                                                                                                         | What it needs                                                    |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, devices and the tracks they recorded, and staging, where uploads wait to be sorted           | The `ems` module, installed along with it, and the media service |
+| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, tracks and their trips, and staging, where uploads wait to be sorted                | The `ems` module, installed along with it, and the media service |
 | [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
 | [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
 

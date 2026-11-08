@@ -26,7 +26,7 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 
 | Folder     | What it holds                                                                                             | Who writes there                                          |
 | ---------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and devices                       | Everyone with an account, as each folder's sharing allows |
+| `/archive` | What EiN is for: labels, and with the Archive albums, people, locations and cameras                       | Everyone with an account, as each folder's sharing allows |
 | `/home`    | One folder per account: its settings, shell history, favourites, trash and, with the Archive, its staging | Each account in its own folder                            |
 | `/groups`  | One folder per group given a shared home: what its members have in common                                 | The group's members, each in their own group's folder     |
 | `/etc`     | Accounts and groups, the system's settings, the services EiN runs and the navigation of the Web UI        | The administrator, and commands such as `config set`      |
@@ -35,7 +35,7 @@ Each holds one kind of thing, and the kind is the reason a path sits where it do
 | `/dev`     | The channels facts about changes are announced on, and `/dev/null`                                        | EiN itself                                                |
 | `/tmp`     | Scratch space that does not outlast a restart                                                             | Everyone                                                  |
 
-![The tree from /: /archive with the Archive module's albums, people, locations and devices and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /groups with the users and family groups' homes, each seen only by its members; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
+![The tree from /: /archive with the Archive module's albums, people, locations and cameras and core's tags, and in albums the album Summer 2020 holding beach.jpg; /home with helen's folder holding stars, .trash, the Archive's staging and the assistant's .chats; /groups with the users and family groups' homes, each seen only by its members; /etc with users, groups, config, services and ui; /var with logs, sessions, links, queues and pipelines; /usr with bin, lib, modules and docs; /dev with events, pipeline-events and null; and /tmp, scratch space in memory](../diagrams/tree.svg "Each folder at the top holds one kind of thing, and modules add their folders beside core's.")
 
 The administrator owns `/` and the system folders, most of them with the mode `0755`: every account
 may read and pass through them, and only the administrator changes them. Your own data lives in `/archive` and
@@ -49,14 +49,15 @@ every other folder in it comes from a module. Each module names the folders its 
 and setting the module up creates the ones that are missing. Removing a module never removes them,
 since they hold the content.
 
-| Path                      | What is there                                                                                         | From    |
-| ------------------------- | ----------------------------------------------------------------------------------------------------- | ------- |
-| `/archive/albums`         | Albums, and the photos, videos, recordings and documents in them                                      | Archive |
-| `/archive/people`         | People, each with folders such as children, partners, homes, events and devices                       | Archive |
-| `/archive/people/unknown` | People face recognition found but nobody has named yet; naming one moves it up into `/archive/people` | Archive |
-| `/archive/locations`      | Locations, each with its outline on the map as a child `position` node                                | Archive |
-| `/archive/devices`        | Cameras, phones and GPS trackers, each with the route it recorded as a child `track` node             | Archive |
-| `/archive/tags`           | Labels: one folder per label, holding a link to everything that carries it                            | Core    |
+| Path                      | What is there                                                                                         | From       |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- | ---------- |
+| `/archive/albums`         | Albums, and the photos, videos, recordings and documents in them                                      | Archive    |
+| `/archive/people`         | People, each with folders such as children, partners, homes, events and cameras                       | Archive    |
+| `/archive/people/unknown` | People face recognition found but nobody has named yet; naming one moves it up into `/archive/people` | Archive    |
+| `/archive/locations`      | Locations, each with its outline on the map as a child `position` node                                | Archive    |
+| `/archive/cameras`        | Cameras, phones and scanners, each linked to the track it records into as a child `track` link        | Archive    |
+| `/archive/devices`        | The house's devices; one with a position keeps it as a `track` node                                   | Automation |
+| `/archive/tags`           | Labels: one folder per label, holding a link to everything that carries it                            | Core       |
 
 So an instance without the Archive has `/archive/tags` and nothing else under `/archive`. A folder
 that already exists is left as it is, whoever owns it.
@@ -103,7 +104,7 @@ included. It has four folders of its own:
 | `files/<category>/`  | The files to sort, by category; uploads go to `files/inbox/` |
 | `albums/<category>/` | The groups staging suggests for each category                |
 | `journal/`           | What you decided in staging                                  |
-| `routes/`            | GPX files waiting for the device that recorded them          |
+| `routes/`            | GPX files waiting for the track they belong to               |
 
 Neither your trash nor, with the Archive, your staging is part of the library: search, and the
 Archive's Media and Year pages, map and **On this day**, leave out everything in them.
@@ -215,7 +216,7 @@ echo $HOME
 ```
 
 ```text
-albums  devices  locations  people  tags
+albums  cameras  locations  people  tags
 /home/helen
 ```
 
@@ -305,7 +306,7 @@ how paths with spaces and wildcards work.
 **System** in the sidebar; its address is `/system/nodes`, and `/system/nodes?path=/archive/albums`
 opens it at a given folder.
 
-![The Nodes page open on /archive/people/peggy-wrenfield: her children, devices, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "The Nodes page shows the tree as it is, with each node's type, mode, owner and group.")
+![The Nodes page open on /archive/people/peggy-wrenfield: her cameras, children, events, homes and partners folders and a link to her cover picture, with her type, mode, owner, group and id in the panel beside](../../assets/shots/nodes.webp "The Nodes page shows the tree as it is, with each node's type, mode, owner and group.")
 
 1. Click a segment of the path above the list to go up to it, or click beside the segments to type a
    path and press <kbd>Enter</kbd>. **Up** and **Home** beside it go to the folder above and to your home.

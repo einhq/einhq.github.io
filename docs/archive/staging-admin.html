@@ -72,7 +72,7 @@
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
-<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="devices.html">Devices and GPS tracks</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html" aria-current="page">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
+<p class="docs-part">Modules</p><section class="here"><h2>Archive</h2><ul><li><a href="index.html">The Archive</a></li><li><a href="importing.html">Getting your photos in</a></li><li><a href="staging.html">Sorting in staging</a></li><li><a href="duplicates.html">Duplicates</a></li><li><a href="dates-places.html">Dates and places of pictures</a></li><li><a href="albums.html">Albums</a></li><li><a href="viewer.html">Viewing photos, videos and recordings</a></li><li><a href="media.html">Media, Year and labels</a></li><li><a href="search.html">Searching your pictures</a></li><li><a href="people.html">People and faces</a></li><li><a href="family.html">Family tree, events and homes</a></li><li><a href="places.html">Locations and the map</a></li><li><a href="cameras.html">Cameras</a></li><li><a href="tracks.html">Tracks and trips</a></li><li><a href="home.html">Memories, news and events on Home</a></li><li><a href="file-types.html">Supported files</a></li><li><a href="processing.html">Processing pictures</a></li><li><a href="staging-admin.html" aria-current="page">Staging for administrators</a></li><li><a href="tasks.html">Archive commands by task</a></li><li><a href="commands.html">Archive commands</a></li></ul></section>
 <section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
@@ -104,7 +104,7 @@ module provides staging; without the <code>archive</code> module there is none (
   files/&lt;category&gt;/…        the staged files, in any folders below a category
   albums/&lt;category&gt;/&lt;slug&gt;  the suggested albums (groups) for that category's files
   journal/&lt;id&gt;              one entry per decision, with the plan that undoes it
-  routes/                   GPX files waiting for the device that recorded them
+  routes/                   GPX files waiting for the track they belong to
   genealogy/                GEDCOM files waiting to be looked over and imported</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -131,7 +131,7 @@ module provides staging; without the <code>archive</code> module there is none (
 </tr>
 <tr>
 <td><code>routes/</code></td>
-<td>GPX tracks that name no device EiN knows, until their owner says which device recorded them.</td>
+<td>GPX files that name no track EiN knows, or more than one, until their owner says which track they belong to.</td>
 </tr>
 <tr>
 <td><code>genealogy/</code></td>
@@ -185,7 +185,7 @@ following, so albums and suggestions keep pointing at it:</p>
 <td>Moves it into <code>albums/inbox/</code>.</td>
 </tr>
 <tr>
-<td>A GPX file waiting for a device</td>
+<td>A GPX file waiting for a track</td>
 <td>Moves it into <code>routes/</code>.</td>
 </tr>
 </tbody></table>
@@ -264,7 +264,7 @@ engine, which <a href="../admin/processing.html">Processing and pipelines</a> co
 <tr>
 <td><code>track-stage</code></td>
 <td>A <code>.gpx</code> file lands anywhere in staging</td>
-<td>Adds its points to the track of the device it names and moves the file to the device&#39;s <code>routes/</code>; one that names no known device waits for its owner.</td>
+<td>Adds its points to the track it names and moves the file to the track&#39;s <code>routes/</code>; one that names no track, or several, waits for its owner.</td>
 </tr>
 <tr>
 <td><code>gedcom-stage</code></td>
@@ -302,7 +302,7 @@ without a date.</p>
 staging status --user helen</code></pre></div>
 <div class="code"><pre tabindex="0"><code>inbox: 1204 media, 37 other, 212 indexing, 18 undated
 google-photos: 48210 media, 1391 other, 30544 indexing, 66 undated
-1 route(s) waiting for a device
+1 route(s) waiting for a track
 1 family tree(s) waiting to be imported</code></pre></div>
 <p>A staging area that was never set up answers <code>helen: not initialized; run staging init</code>. With
 <code>JSON_OUTPUT=1</code> the answer also holds the bytes, each category&#39;s organizer summary, the exact
@@ -591,7 +591,7 @@ staging check --user helen</code></pre></div>
 </tr>
 <tr>
 <td><code>waiting-route</code></td>
-<td>A GPX file waits for its device outside <code>routes/</code>.</td>
+<td>A GPX file waits for its track outside <code>routes/</code>.</td>
 </tr>
 </tbody></table>
 </div>
