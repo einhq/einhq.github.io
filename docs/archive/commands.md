@@ -4,7 +4,7 @@
 
 The commands the archive module adds. They are there once the module is installed. 141 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[album](#album) · [album-cover](#album-cover) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [album-track-add](#album-track-add) · [album-track-list](#album-track-list) · [album-track-rm](#album-track-rm) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [camera](#camera) · [camera-cover](#camera-cover) · [camera-create](#camera-create) · [camera-info](#camera-info) · [camera-link](#camera-link) · [camera-list](#camera-list) · [camera-match](#camera-match) · [camera-relink](#camera-relink) · [camera-remove-owner](#camera-remove-owner) · [camera-scan](#camera-scan) · [camera-set-owner](#camera-set-owner) · [camera-timeline](#camera-timeline) · [camera-track](#camera-track) · [camera-update](#camera-update) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-time](#file-set-time) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-camera](#search-camera) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-camera](#subject-camera) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-home](#track-home) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [track-update](#track-update) · [track-weather](#track-weather) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather) · [weather-photo](#weather-photo)
+[album](#album) · [album-cover](#album-cover) · [album-device-add](#album-device-add) · [album-device-list](#album-device-list) · [album-device-rm](#album-device-rm) · [album-profile](#album-profile) · [album-random](#album-random) · [album-span](#album-span) · [album-stack](#album-stack) · [archive-bridge](#archive-bridge) · [archive-parse](#archive-parse) · [assign-faces](#assign-faces) · [assign-speakers](#assign-speakers) · [auto-album-assign](#auto-album-assign) · [auto-album-cluster](#auto-album-cluster) · [camera](#camera) · [camera-cover](#camera-cover) · [camera-create](#camera-create) · [camera-device](#camera-device) · [camera-info](#camera-info) · [camera-link](#camera-link) · [camera-list](#camera-list) · [camera-match](#camera-match) · [camera-relink](#camera-relink) · [camera-remove-owner](#camera-remove-owner) · [camera-scan](#camera-scan) · [camera-set-owner](#camera-set-owner) · [camera-timeline](#camera-timeline) · [camera-update](#camera-update) · [cluster-faces](#cluster-faces) · [cluster-voices](#cluster-voices) · [dayinhistory](#dayinhistory) · [detect-faces](#detect-faces) · [duplicates](#duplicates) · [events-anniversaries](#events-anniversaries) · [exif-interpret](#exif-interpret) · [face-add](#face-add) · [face-confirm](#face-confirm) · [face-doubt](#face-doubt) · [face-remove](#face-remove) · [face-reset](#face-reset) · [face-set-box](#face-set-box) · [file-set-description](#file-set-description) · [file-set-orientation](#file-set-orientation) · [file-set-photographer](#file-set-photographer) · [file-set-position](#file-set-position) · [file-set-time](#file-set-time) · [find-within](#find-within) · [gedcom-import](#gedcom-import) · [gedcom-read](#gedcom-read) · [gedcom-stage](#gedcom-stage) · [geocode-files](#geocode-files) · [geocode-location](#geocode-location) · [geocode-position](#geocode-position) · [gpx-info](#gpx-info) · [hello](#hello) · [label-model](#label-model) · [latest](#latest) · [location-link-media](#location-link-media) · [location-list](#location-list) · [location-locate](#location-locate) · [location-region](#location-region) · [location-timeline](#location-timeline) · [location-update](#location-update) · [media-details](#media-details) · [media-heal](#media-heal) · [media-resolve-time](#media-resolve-time) · [media-scan](#media-scan) · [media-sidecars](#media-sidecars) · [members-album](#members-album) · [merge-duplicates](#merge-duplicates) · [news-albums](#news-albums) · [onthisday-media](#onthisday-media) · [parse-eval](#parse-eval) · [person](#person) · [person-add-event](#person-add-event) · [person-check](#person-check) · [person-children](#person-children) · [person-cover](#person-cover) · [person-create](#person-create) · [person-detach](#person-detach) · [person-discard](#person-discard) · [person-faces](#person-faces) · [person-family-tree](#person-family-tree) · [person-fixup](#person-fixup) · [person-graph](#person-graph) · [person-how-related](#person-how-related) · [person-info](#person-info) · [person-list](#person-list) · [person-merge](#person-merge) · [person-name](#person-name) · [person-relatives](#person-relatives) · [person-remove](#person-remove) · [person-remove-home](#person-remove-home) · [person-set-home](#person-set-home) · [person-set-parent](#person-set-parent) · [person-set-partner](#person-set-partner) · [person-stats](#person-stats) · [person-timeline](#person-timeline) · [person-unknown](#person-unknown) · [person-update](#person-update) · [person-voices](#person-voices) · [raw](#raw) · [regenerate-face-crops](#regenerate-face-crops) · [search-album](#search-album) · [search-camera](#search-camera) · [search-document](#search-document) · [search-location](#search-location) · [search-media](#search-media) · [search-people](#search-people) · [search-track](#search-track) · [see-speakers](#see-speakers) · [source-list](#source-list) · [staging](#staging) · [staging-hold](#staging-hold) · [subcluster-faces](#subcluster-faces) · [subcluster-voices](#subcluster-voices) · [subject-camera](#subject-camera) · [subject-location](#subject-location) · [subject-person](#subject-person) · [subjects-in](#subjects-in) · [timeline](#timeline) · [timeline-facets](#timeline-facets) · [track-append](#track-append) · [track-home](#track-home) · [track-import](#track-import) · [track-list](#track-list) · [track-mark](#track-mark) · [track-move](#track-move) · [track-places](#track-places) · [track-read](#track-read) · [track-stage](#track-stage) · [track-trips](#track-trips) · [track-update](#track-update) · [track-weather](#track-weather) · [trip-album](#trip-album) · [trip-edit](#trip-edit) · [trip-list](#trip-list) · [voiceprint-file](#voiceprint-file) · [weather](#weather) · [weather-photo](#weather-photo)
 
 ## A
 
@@ -73,6 +73,67 @@ album-cover --all --stale --limit 50
 ```
 
 With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink is written for each album that had none.
+
+### `album-device-add`
+
+Put devices on an album's list, whose tracks its map draws.
+
+<small>changes things</small>
+
+```text
+album-device-add <album> <device>...
+```
+
+| Argument      | What it is                                             |
+| ------------- | ------------------------------------------------------ |
+| `<album>`     | the album.                                             |
+| `<device>...` | devices: a name, a path under /dev, or a track of one. |
+
+```bash
+album-device-add /archive/albums/Exempelalbum_2019 sailboat
+album-device-add /archive/albums/Exempelalbum_2019 /dev/sailboat
+```
+
+### `album-device-list`
+
+The devices whose tracks an album's map draws: those the cameras of its media are linked to and those added by hand, and the devices of its media taken off the list.
+
+<small>reads only</small>
+
+```text
+album-device-list <album>
+```
+
+| Argument  | What it is                     |
+| --------- | ------------------------------ |
+| `<album>` | the album, or a folder in one. |
+
+```bash
+album-device-list /archive/albums/Exempelalbum_2019
+JSON_OUTPUT=1 album-device-list /archive/albums/Exempelalbum_2019
+```
+
+With `JSON_OUTPUT=1`: each listed device's path, name and tracks, whether cameras of the album's media are linked to it (and how many of the media they took) or it was added by hand; and the devices of its media taken off the list.
+
+### `album-device-rm`
+
+Take devices off an album's list, whose tracks its map draws.
+
+<small>changes things</small>
+
+```text
+album-device-rm <album> <device>...
+```
+
+| Argument      | What it is                                             |
+| ------------- | ------------------------------------------------------ |
+| `<album>`     | the album.                                             |
+| `<device>...` | devices: a name, a path under /dev, or a track of one. |
+
+```bash
+album-device-rm /archive/albums/Exempelalbum_2019 sailboat
+album-device-rm /archive/albums/Exempelalbum_2019 /dev/sailboat
+```
 
 ### `album-profile`
 
@@ -173,67 +234,6 @@ album-stack front /archive/albums/Exempelalbum_2019 /archive/albums/Exempelalbum
 ```
 
 With `JSON_OUTPUT=1`: refresh: how many albums were scanned and changed, stacks and stacked photos, and per album its manifest; the others: the album and member acted on.
-
-### `album-track-add`
-
-Put tracks on an album's list, which its map draws.
-
-<small>changes things</small>
-
-```text
-album-track-add <album> <track>...
-```
-
-| Argument     | What it is                                                                             |
-| ------------ | -------------------------------------------------------------------------------------- |
-| `<album>`    | the album.                                                                             |
-| `<track>...` | tracks: the track's path, or a device or camera that has one, by its path or its name. |
-
-```bash
-album-track-add /archive/albums/Exempelalbum_2019 sailboat
-album-track-add /archive/albums/Exempelalbum_2019 /archive/devices/sailboat/position/history
-```
-
-### `album-track-list`
-
-The tracks an album's map draws: those the cameras of its media record into and those added by hand, and the tracks of its media removed from the list.
-
-<small>reads only</small>
-
-```text
-album-track-list <album>
-```
-
-| Argument  | What it is                     |
-| --------- | ------------------------------ |
-| `<album>` | the album, or a folder in one. |
-
-```bash
-album-track-list /archive/albums/Exempelalbum_2019
-JSON_OUTPUT=1 album-track-list /archive/albums/Exempelalbum_2019
-```
-
-With `JSON_OUTPUT=1`: each listed track's path and name, whether cameras of the album's media record into it (and how many of the media they took) or it was added by hand; and the tracks of its media removed from the list.
-
-### `album-track-rm`
-
-Take tracks off an album's list, which its map draws.
-
-<small>changes things</small>
-
-```text
-album-track-rm <album> <track>...
-```
-
-| Argument     | What it is                                                                             |
-| ------------ | -------------------------------------------------------------------------------------- |
-| `<album>`    | the album.                                                                             |
-| `<track>...` | tracks: the track's path, or a device or camera that has one, by its path or its name. |
-
-```bash
-album-track-rm /archive/albums/Exempelalbum_2019 sailboat
-album-track-rm /archive/albums/Exempelalbum_2019 /archive/devices/sailboat/position/history
-```
 
 ### `archive-bridge`
 
@@ -417,9 +417,9 @@ Camera and recording camera management.
 camera <subcommand>
 ```
 
-| Argument       | What it is                                                                                                          |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `<subcommand>` | Subcommand: create, info, update, list, match, scan, link, relink, set-owner, remove-owner, cover, timeline, track. |
+| Argument       | What it is                                                                                                           |
+| -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `<subcommand>` | Subcommand: create, info, update, list, match, scan, link, relink, set-owner, remove-owner, cover, timeline, device. |
 
 ### `camera-cover`
 
@@ -473,6 +473,31 @@ camera-create [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<
 | `--digitizer`            | scanner whose camera dates are digitisation times, not capture times.   |
 | `--quicktime-utc`        | keeps its videos' QuickTime CreateDate in UTC (phones), not local time. |
 | `--description=<string>` | free-text note.                                                         |
+
+### `camera-device`
+
+Link a camera to the device it is part of, such as a phone's camera to the phone whose track says where it was, or take the link away.
+
+<small>changes things</small>
+
+```text
+camera-device [--off] <camera> <device>
+```
+
+| Argument   | What it is                                           |
+| ---------- | ---------------------------------------------------- |
+| `<camera>` | the camera, by its path or its slug.                 |
+| `<device>` | the device, by its name, its path, or a track of it. |
+
+| Option  | What it does        |
+| ------- | ------------------- |
+| `--off` | take the link away. |
+
+```bash
+camera-device anna-phone anna-phone
+camera-device /archive/cameras/anna-phone /dev/anna-phone
+camera-device anna-phone --off
+```
 
 ### `camera-info`
 
@@ -632,31 +657,6 @@ camera-timeline /archive/cameras/canon-eos
 ```
 
 With `JSON_OUTPUT=1`: the camera's history in order: owners getting and giving it up, its events and the albums with photos it took.
-
-### `camera-track`
-
-Link a camera to the track it records into, such as a phone that also records where it was, or take the link away.
-
-<small>changes things</small>
-
-```text
-camera-track [--none] <camera> <track>
-```
-
-| Argument   | What it is                                                                     |
-| ---------- | ------------------------------------------------------------------------------ |
-| `<camera>` | the camera, by its path or its slug.                                           |
-| `<track>`  | the track's path, or a device or camera that has one, by its path or its name. |
-
-| Option   | What it does        |
-| -------- | ------------------- |
-| `--none` | take the link away. |
-
-```bash
-camera-track anna-phone anna-phone-tracker
-camera-track /archive/cameras/anna-phone /archive/devices/anna-phone-tracker/position/history
-camera-track anna-phone --none
-```
 
 ### `camera-update`
 
@@ -1361,7 +1361,7 @@ With `JSON_OUTPUT=1`: the address the coordinates resolved to.
 
 ### `gpx-info`
 
-Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the archive's tracks each names.
+Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the tracks of the devices each names.
 
 <small>reads only</small>
 
@@ -2805,7 +2805,7 @@ With `JSON_OUTPUT=1`: matching people, best first, each with a name, a slug and 
 
 ### `search-track`
 
-Search tracks by their name, or the device or camera they belong to, or their description.
+Search tracks by the device they belong to, or their description.
 
 <small>reads only</small>
 
@@ -2821,7 +2821,7 @@ search-track [--kinds] [-l <number>] [--root=<string>] <query>
 | ----------------- | ----------------------------------------------------------- |
 | `--kinds`         | print the content kinds this provider can return, and exit. |
 | `-l <number>`     | Max results per channel (default 10)                        |
-| `--root=<string>` | where to look for tracks (default: /archive)                |
+| `--root=<string>` | where to look for tracks (default: /dev)                    |
 
 ```bash
 search-track 'exempeltur' -l 10
@@ -3224,11 +3224,11 @@ Append coordinate points to a track.
 track-append [--lat=<string>] [--lng=<string>] [--ts=<string>] [--alt=<string>] [--speed=<string>] [--course=<string>] [--json=<string>] <track> <lat> <lng>
 ```
 
-| Argument  | What it is                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------- |
-| `<track>` | the track that takes the points: the track's path, or a device or camera that has one, by its path or its name. |
-| `<lat>`   | latitude (positional; use --lat= if negative)                                                                   |
-| `<lng>`   | longitude (positional; use --lng= if negative)                                                                  |
+| Argument  | What it is                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `<track>` | the track that takes the points: the track's path, or a device or a camera linked to one, by its path or its name. |
+| `<lat>`   | latitude (positional; use --lat= if negative)                                                                      |
+| `<lng>`   | longitude (positional; use --lng= if negative)                                                                     |
 
 | Option              | What it does                                                       |
 | ------------------- | ------------------------------------------------------------------ |
@@ -3250,9 +3250,9 @@ List or change a track's home bases, where arriving ends a trip.
 track-home [--add=<string>] [--remove=<string>] <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option              | What it does                                                             |
 | ------------------- | ------------------------------------------------------------------------ |
@@ -3262,7 +3262,7 @@ track-home [--add=<string>] [--remove=<string>] <track>
 ```bash
 track-home sailboat
 track-home sailboat --add exempelhamnen
-track-home /archive/devices/sailboat/position/history --remove /archive/locations/exempelhamnen
+track-home /dev/sailboat/position --remove /archive/locations/exempelhamnen
 ```
 
 With `JSON_OUTPUT=1`: without a change: the home bases, each with its location, name, source (track, or owner with the span) and point when it has one.
@@ -3277,14 +3277,14 @@ Import GPX track points into a track, keeping a copy of the file in the track's 
 track-import <track> <gpx>
 ```
 
-| Argument  | What it is                                                                                                      |
-| --------- | --------------------------------------------------------------------------------------------------------------- |
-| `<track>` | the track that takes the points: the track's path, or a device or camera that has one, by its path or its name. |
-| `<gpx>`   | VFS path to uploaded GPX file.                                                                                  |
+| Argument  | What it is                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `<track>` | the track that takes the points: the track's path, or a device or a camera linked to one, by its path or its name. |
+| `<gpx>`   | VFS path to uploaded GPX file.                                                                                     |
 
 ### `track-list`
 
-List the tracks, with their name, kind, point count, span and extent.
+List the devices' tracks, with their name, device, kind, point count, span and extent.
 
 <small>reads only</small>
 
@@ -3292,13 +3292,13 @@ List the tracks, with their name, kind, point count, span and extent.
 track-list <within>
 ```
 
-| Argument   | What it is                                   |
-| ---------- | -------------------------------------------- |
-| `<within>` | where to look for tracks (default: /archive) |
+| Argument   | What it is                               |
+| ---------- | ---------------------------------------- |
+| `<within>` | where to look for tracks (default: /dev) |
 
 ```bash
 track-list
-track-list /archive/devices
+track-list /dev/sailboat
 ```
 
 With `JSON_OUTPUT=1`: one row per track.
@@ -3313,9 +3313,9 @@ Reject or accept the fixes of a time range of a track by hand, overruling its ru
 track-mark [--from=<string>] [--to=<string>] [--near=<string>] [--within=<string>] [--marked=<string>] [--reject] [--accept] [--clear] <track>
 ```
 
-| Argument  | What it is                                                                                        |
-| --------- | ------------------------------------------------------------------------------------------------- |
-| `<track>` | the track to mark: the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| `<track>` | the track to mark: the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option              | What it does                                                               |
 | ------------------- | -------------------------------------------------------------------------- |
@@ -3343,10 +3343,10 @@ Move the fixes of a time range from one track to another, for a trip recorded in
 track-move [--from=<string>] [--to=<string>] <track> <to-track>
 ```
 
-| Argument     | What it is                                                                                                 |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
-| `<track>`    | the track the fixes are on: the track's path, or a device or camera that has one, by its path or its name. |
-| `<to-track>` | the track to move them to: the track's path, or a device or camera that has one, by its path or its name.  |
+| Argument     | What it is                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| `<track>`    | the track the fixes are on: the track's path, or a device or a camera linked to one, by its path or its name. |
+| `<to-track>` | the track to move them to: the track's path, or a device or a camera linked to one, by its path or its name.  |
 
 | Option            | What it does                               |
 | ----------------- | ------------------------------------------ |
@@ -3367,9 +3367,9 @@ Put each of a track's stays at a location, naming the ones it makes after the ha
 track-places [--rename] [--dry-run] <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option      | What it does                                                                                          |
 | ----------- | ----------------------------------------------------------------------------------------------------- |
@@ -3378,7 +3378,7 @@ track-places [--rename] [--dry-run] <track>
 
 ```bash
 track-places sailboat
-track-places /archive/devices/sailboat/position/history --dry-run
+track-places /dev/sailboat/position --dry-run
 ```
 
 ### `track-read`
@@ -3391,9 +3391,9 @@ Read a track as drawable segments ({segments, points, truncated})
 track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string>] [--tolerance=<string>] [--limit=<string>] [--still] [--max-speed=<string>] [--rejected] [--only-rejected] <track>
 ```
 
-| Argument  | What it is                                                                                        |
-| --------- | ------------------------------------------------------------------------------------------------- |
-| `<track>` | the track to read: the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| `<track>` | the track to read: the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option                 | What it does                                                                         |
 | ---------------------- | ------------------------------------------------------------------------------------ |
@@ -3410,7 +3410,7 @@ track-read [--from=<string>] [--to=<string>] [--bbox=<string>] [--margin=<string
 
 ### `track-stage`
 
-Import a staged GPX file into the track it names, and move the file to the track's routes/; mark it pending when no single track matches, and keep it in its staging area's routes/.
+Import a staged GPX file into the device it names, and move the file to its track's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/.
 
 <small>changes things</small>
 
@@ -3422,10 +3422,10 @@ track-stage [--track=<path>] [--name=<string>] <gpx>
 | -------- | ------------------------- |
 | `<gpx>`  | VFS path to the GPX file. |
 
-| Option            | What it does                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--track=<path>`  | the track it belongs to, instead of the one it names: the track's path, or a device or camera that has one, by its path or its name. |
-| `--name=<string>` | the name to keep the file under in the track's routes/, instead of its own.                                                          |
+| Option            | What it does                                                                                                                                          |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--track=<path>`  | the track it belongs to, instead of the one of the device it names: the track's path, or a device or a camera linked to one, by its path or its name. |
+| `--name=<string>` | the name to keep the file under in the track's routes/, instead of its own.                                                                           |
 
 ```bash
 track-stage /home/anna/staging/files/inbox/upload-2026-10-16/hike.gpx
@@ -3444,9 +3444,9 @@ Derive a track's trips and stays, into <track>/.trips.
 track-trips [--full] [--dry-run] <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option      | What it does                                                     |
 | ----------- | ---------------------------------------------------------------- |
@@ -3455,7 +3455,7 @@ track-trips [--full] [--dry-run] <track>
 
 ```bash
 track-trips sailboat
-track-trips /archive/devices/sailboat/position/history --full --dry-run
+track-trips /dev/sailboat/position --full --dry-run
 ```
 
 ### `track-update`
@@ -3468,9 +3468,9 @@ Change how a track travels: its kind, the timezone its trips are cut in, its des
 track-update [--kind=<string>] [--timezone=<string>] [--description=<string>] [--clear=<string>] <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option                   | What it does                                                                                   |
 | ------------------------ | ---------------------------------------------------------------------------------------------- |
@@ -3481,7 +3481,7 @@ track-update [--kind=<string>] [--timezone=<string>] [--description=<string>] [-
 
 ```bash
 track-update sailboat --kind boat --timezone Europe/Stockholm
-track-update /archive/devices/sailboat/position/history --clear timezone
+track-update /dev/sailboat/position --clear timezone
 ```
 
 ### `track-weather`
@@ -3494,9 +3494,9 @@ Give a track's trips and their days the weather along it: wind, temperature and 
 track-weather [--full] [--dry-run] <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 | Option      | What it does                                                                            |
 | ----------- | --------------------------------------------------------------------------------------- |
@@ -3505,7 +3505,7 @@ track-weather [--full] [--dry-run] <track>
 
 ```bash
 track-weather sailboat
-track-weather /archive/devices/sailboat/position/history --full
+track-weather /dev/sailboat/position --full
 ```
 
 With `JSON_OUTPUT=1`: TrackWeather: how many days and hours it sampled, how many it left for the next run and why, and how many requests it sent.
@@ -3520,10 +3520,10 @@ Make a trip of a track an album, a new one or one that is there, or take it from
 trip-album [--new] [--name=<string>] [--album=<path>] [--detach] <track> <trip>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
-| `<trip>`  | the trip: its id from trip-list, or its first day.                             |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
+| `<trip>`  | the trip: its id from trip-list, or its first day.                                |
 
 | Option            | What it does                                                                       |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -3550,10 +3550,10 @@ Join a track's trip to the one before it, or part the track on a day, and derive
 trip-edit [--merge] [--split] <track> <trip>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
-| `<trip>`  | the trip (its id, or its first day) to join, or the day to part on.            |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
+| `<trip>`  | the trip (its id, or its first day) to join, or the day to part on.               |
 
 | Option    | What it does                                                 |
 | --------- | ------------------------------------------------------------ |
@@ -3575,9 +3575,9 @@ A track's trips and stays, as track-trips last derived them.
 trip-list <track>
 ```
 
-| Argument  | What it is                                                                     |
-| --------- | ------------------------------------------------------------------------------ |
-| `<track>` | the track's path, or a device or camera that has one, by its path or its name. |
+| Argument  | What it is                                                                        |
+| --------- | --------------------------------------------------------------------------------- |
+| `<track>` | the track's path, or a device or a camera linked to one, by its path or its name. |
 
 ```bash
 trip-list sailboat

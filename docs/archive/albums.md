@@ -568,7 +568,7 @@ album-random
 An album's path is its folder, `/archive/albums/` and the name it was created with; renaming it
 does not change the path. A device is its name, its path under `/dev`, or a track of it.
 [`album`](commands.md#album), [`album-stack`](commands.md#album-stack),
-[`album-device-list`](commands.md), [`album-device-add`](commands.md), [`album-device-rm`](commands.md)
+[`album-device-list`](commands.md#album-device-list), [`album-device-add`](commands.md#album-device-add), [`album-device-rm`](commands.md#album-device-rm)
 and [`album-random`](commands.md#album-random) have every option in the
 [archive's commands](commands.md).
 

@@ -386,7 +386,7 @@ link to the device a camera is part of is its child `device`. The commands below
 | Link files to a camera by hand                                   | [`camera-link`](commands.md#camera-link) `--camera <camera> <file or folder>…`                                                                                |
 | Add an owner, or change the dates                                | [`camera-set-owner`](commands.md#camera-set-owner) `<camera> <person> --from <date> --to <date>`, with `--update` to change                                   |
 | Remove an owner                                                  | [`camera-remove-owner`](commands.md#camera-remove-owner) `<camera> <person>`                                                                                  |
-| Link a camera to the device it is part of, or take the link away | [`camera-device`](commands.md) `<camera> <device>`, or `<camera> --off`; a device is its name, its path under `/dev`, or a track of it                        |
+| Link a camera to the device it is part of, or take the link away | [`camera-device`](commands.md#camera-device) `<camera> <device>`, or `<camera> --off`; a device is its name, its path under `/dev`, or a track of it          |
 | Bring a camera's automatic cover up to date                      | [`camera-cover`](commands.md#camera-cover) `<camera>`, or `--all`                                                                                             |
 | The pictures a camera took                                       | [`search`](../reference/commands-core.md#search) `--subject camera:<camera> --kind photo`                                                                     |
 

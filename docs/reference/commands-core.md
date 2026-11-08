@@ -2,9 +2,9 @@
 
 # Core commands
 
-The commands every EiN has, whatever modules it runs. 216 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
+The commands every EiN has, whatever modules it runs. 222 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
 
-[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [audit-purge](#audit-purge) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [cut](#cut) · [date](#date) · [detach](#detach) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [track-token](#track-token) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
+[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [audit-purge](#audit-purge) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
 
 ## A
 
@@ -623,6 +623,180 @@ detach [--list] <job>
 | Option | What it does |
 | --- | --- |
 | `--list` | list detached jobs system-wide instead, from their records under /var/logs/jobs. |
+
+### `device-create`
+
+Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to.
+
+<small>changes things</small>
+
+```text
+device-create [--label=<string>] [--class=<string>] [--driver=<string>] [--manufacturer=<string>] [--model=<string>] [--config=<string>] <name>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<name>` | what to call it; its name under /dev is made from it. |
+
+| Option | What it does |
+| --- | --- |
+| `--label=<string>` | what its page calls it, when not the name. |
+| `--class=<string>` | what it is: phone, tracker, boat, car, sensor, …. |
+| `--driver=<string>` | the driver that reads what is written to it: tracker, or a module's (devices --drivers) |
+| `--manufacturer=<string>` | who made it. |
+| `--model=<string>` | its model. |
+| `--config=<string>` | name=value for its driver; again for each. |
+
+```bash
+device-create 'Ruby phone' --driver tracker --class phone
+device-create 'Old logger' --driver tracker --class tracker --model 'eTrex 30'
+```
+
+With `JSON_OUTPUT=1`: DeviceCreated: device, path.
+
+### `device-forget`
+
+Remove a device and everything under it, its history included; for members of the devices group.
+
+<small>changes things</small>
+
+```text
+device-forget <device>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<device>` | the device's name. |
+
+```bash
+device-forget old-sensor
+```
+
+With `JSON_OUTPUT=1`: { device, forgotten }.
+
+### `device-history`
+
+An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes.
+
+<small>reads only</small>
+
+```text
+device-history [-n <string>] [--since=<string>] [--until=<string>] [--bucket=<string>] [--agg=<string>] <endpoint>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<endpoint>` | <device>/<endpoint>, or its path under /dev. |
+
+| Option | What it does |
+| --- | --- |
+| `-n <string>` | at most this many values or intervals, the latest (100 when not given) |
+| `--since=<string>` | from this time on: ISO 8601, or a duration such as 24h or 7d meaning that long ago. |
+| `--until=<string>` | before this time, as --since takes it. |
+| `--bucket=<string>` | sum the values up per interval of this length: 10m, 1h, 1d; a day is a calendar day. |
+| `--agg=<string>` | with --bucket, how: avg, min, max, sum, count, first, last (avg when not given); on and off count as 1 and 0. |
+
+```bash
+device-history hall-sensor/temperature -n 10
+device-history hall-plug/power --since 7d --bucket 1h
+device-history ruby-phone/position --since 1d
+```
+
+With `JSON_OUTPUT=1`: DeviceHistory.
+
+### `device-key`
+
+The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off)
+
+<small>changes things</small>
+
+```text
+device-key [--new] [--off] [--origin=<string>] <device>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<device>` | the device's name. |
+
+| Option | What it does |
+| --- | --- |
+| `--new` | make a new key; a URL given out before stops working. |
+| `--off` | take the key away: nothing writes to the device without signing in. |
+| `--origin=<string>` | this EiN's address as the device reaches it (https://ein.example), for the whole URL and a QR code. |
+
+```bash
+device-key ruby-phone
+device-key ruby-phone --new --origin https://ein.example
+device-key old-sensor --off
+```
+
+With `JSON_OUTPUT=1`: DeviceKeyAnswer.
+
+### `device-label`
+
+Name a device or one of its endpoints, as its page and cards show it; for members of the devices group.
+
+<small>changes things</small>
+
+```text
+device-label <target> <label>...
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<target>` | <device> or <device>/<endpoint>. |
+| `<label>...` | the name to show. |
+
+```bash
+device-label hall-plug 'Hall lamp'
+device-label hall-sensor/temperature 'Hall temperature'
+```
+
+With `JSON_OUTPUT=1`: { path, label }.
+
+### `device-show`
+
+A device and each of its endpoints: a log's or control's latest value, a track's fixes, and whether you may write a control.
+
+<small>reads only</small>
+
+```text
+device-show <device>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<device>` | the device's name, or its path under /dev. |
+
+```bash
+device-show hall-plug
+device-show /dev/ruby-phone
+```
+
+With `JSON_OUTPUT=1`: DeviceInfo.
+
+### `devices`
+
+Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers.
+
+<small>reads only</small>
+
+```text
+devices [--online] [--drivers]
+```
+
+| Option | What it does |
+| --- | --- |
+| `--online` | only the devices that answer now. |
+| `--drivers` | the drivers running now instead: core's, and those modules' services registered. |
+
+```bash
+devices
+devices --online
+devices --drivers
+```
+
+With `JSON_OUTPUT=1`: DeviceSummary[], or with --drivers DriverSummary[].
 
 ### `df`
 
@@ -3501,32 +3675,6 @@ tr [-d] [-s] [-c] <SET1> <SET2>
 | `-d` | delete characters in SET1. |
 | `-s` | squeeze repeated characters in last operand. |
 | `-c` | use complement of SET1. |
-
-### `track-token`
-
-Show, make or turn off the link a phone or GPS tracker posts a track's fixes to without signing in.
-
-<small>reads only</small>
-
-```text
-track-token [--new] [--off] <track>
-```
-
-| Argument | What it is |
-| --- | --- |
-| `<track>` | the track node. |
-
-| Option | What it does |
-| --- | --- |
-| `--new` | make a new link; the one before it stops working. |
-| `--off` | turn the link off. |
-
-```bash
-track-token /archive/devices/sailboat/position/history
-track-token /archive/devices/sailboat/position/history --new
-```
-
-With `JSON_OUTPUT=1`: TrackToken: whether the track takes tracker posts, and the path of its link.
 
 ### `trash`
 

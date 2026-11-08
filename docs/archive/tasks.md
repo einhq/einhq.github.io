@@ -115,7 +115,7 @@ The family relations, events and homes are explained in [Family tree, events and
 | A camera's history                          | `camera-timeline /archive/cameras/ruby-iphone`                                                  | [camera-timeline](commands.md#camera-timeline)     |
 | List the devices' tracks                    | `track-list`                                                                                    | [track-list](commands.md#track-list)               |
 | Change how a device travels                 | `track-update sailboat --kind boat --timezone Europe/Stockholm`                                 | [track-update](commands.md#track-update)           |
-| Link a phone's camera to its device         | `camera-device ruby-iphone ruby-phone`                                                          | [camera-device](commands.md)                       |
+| Link a phone's camera to its device         | `camera-device ruby-iphone ruby-phone`                                                          | [camera-device](commands.md#camera-device)         |
 | Give a GPX file to a device                 | `track-import sailboat <file>.gpx`                                                              | [track-import](commands.md#track-import)           |
 | A device's trips                            | `trip-list sailboat`                                                                            | [trip-list](commands.md#trip-list)                 |
 

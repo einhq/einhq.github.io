@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 428 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 426 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 428 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 426 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -93,7 +93,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 428 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 426 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -105,7 +105,7 @@
 </ul>
 <p>A command of a family, such as <code>mod-install</code> or <code>user-passwd</code>, can be typed as two words where the family has a command of its own: <code>mod install archive</code>. In the shell, <code>&lt;command&gt; --help</code> says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.</p>
 <h2 id="core">Core<a class="anchor" href="#core" aria-label="Link to this section"></a></h2>
-<p><a href="commands-core.html">All 216 in full</a>.</p>
+<p><a href="commands-core.html">All 222 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -244,6 +244,34 @@
 <tr>
 <td><a href="commands-core.html#detach">detach</a></td>
 <td>detach a job so it keeps running after the shell closes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-create">device-create</a></td>
+<td>Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-forget">device-forget</a></td>
+<td>Remove a device and everything under it, its history included; for members of the devices group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-history">device-history</a></td>
+<td>An endpoint&#39;s history, oldest first: a log&#39;s or control&#39;s values, or with --bucket summed up per interval; a track&#39;s fixes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-key">device-key</a></td>
+<td>The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-label">device-label</a></td>
+<td>Name a device or one of its endpoints, as its page and cards show it; for members of the devices group.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#device-show">device-show</a></td>
+<td>A device and each of its endpoints: a log&#39;s or control&#39;s latest value, a track&#39;s fixes, and whether you may write a control.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#devices">devices</a></td>
+<td>Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#df">df</a></td>
@@ -854,10 +882,6 @@
 <td>Translate or delete characters.</td>
 </tr>
 <tr>
-<td><a href="commands-core.html#track-token">track-token</a></td>
-<td>Show, make or turn off the link a phone or GPS tracker posts a track&#39;s fixes to without signing in.</td>
-</tr>
-<tr>
 <td><a href="commands-core.html#trash">trash</a></td>
 <td>Move nodes into the reader&#39;s trash, alone or as one batch, list it, restore entries, or empty it.</td>
 </tr>
@@ -1012,6 +1036,18 @@
 <td>Give an album without a cover a random one of its own pictures (coverPhoto softlink)</td>
 </tr>
 <tr>
+<td><a href="../archive/commands.html#album-device-add">album-device-add</a></td>
+<td>Put devices on an album&#39;s list, whose tracks its map draws.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#album-device-list">album-device-list</a></td>
+<td>The devices whose tracks an album&#39;s map draws: those the cameras of its media are linked to and those added by hand, and the devices of its media taken off the list.</td>
+</tr>
+<tr>
+<td><a href="../archive/commands.html#album-device-rm">album-device-rm</a></td>
+<td>Take devices off an album&#39;s list, whose tracks its map draws.</td>
+</tr>
+<tr>
 <td><a href="../archive/commands.html#album-profile">album-profile</a></td>
 <td>Build the profile staging matches suggested groups against, beside each library album as its .profile: its members&#39; times, days, places and people, and the pictures that stand for it.</td>
 </tr>
@@ -1026,18 +1062,6 @@
 <tr>
 <td><a href="../archive/commands.html#album-stack">album-stack</a></td>
 <td>Reconcile album-local stacks of consecutive, perceptually similar photos.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#album-track-add">album-track-add</a></td>
-<td>Put tracks on an album&#39;s list, which its map draws.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#album-track-list">album-track-list</a></td>
-<td>The tracks an album&#39;s map draws: those the cameras of its media record into and those added by hand, and the tracks of its media removed from the list.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#album-track-rm">album-track-rm</a></td>
-<td>Take tracks off an album&#39;s list, which its map draws.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#archive-bridge">archive-bridge</a></td>
@@ -1076,6 +1100,10 @@
 <td>Create a camera node and link the media already carrying its fingerprint.</td>
 </tr>
 <tr>
+<td><a href="../archive/commands.html#camera-device">camera-device</a></td>
+<td>Link a camera to the device it is part of, such as a phone&#39;s camera to the phone whose track says where it was, or take the link away.</td>
+</tr>
+<tr>
 <td><a href="../archive/commands.html#camera-info">camera-info</a></td>
 <td>Show camera details and owners.</td>
 </tr>
@@ -1110,10 +1138,6 @@
 <tr>
 <td><a href="../archive/commands.html#camera-timeline">camera-timeline</a></td>
 <td>One camera&#39;s history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took.</td>
-</tr>
-<tr>
-<td><a href="../archive/commands.html#camera-track">camera-track</a></td>
-<td>Link a camera to the track it records into, such as a phone that also records where it was, or take the link away.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#camera-update">camera-update</a></td>
@@ -1221,7 +1245,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#gpx-info">gpx-info</a></td>
-<td>Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the archive&#39;s tracks each names.</td>
+<td>Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the tracks of the devices each names.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#hello">hello</a></td>
@@ -1445,7 +1469,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#search-track">search-track</a></td>
-<td>Search tracks by their name, or the device or camera they belong to, or their description.</td>
+<td>Search tracks by the device they belong to, or their description.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#see-speakers">see-speakers</a></td>
@@ -1509,7 +1533,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#track-list">track-list</a></td>
-<td>List the tracks, with their name, kind, point count, span and extent.</td>
+<td>List the devices&#39; tracks, with their name, device, kind, point count, span and extent.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#track-mark">track-mark</a></td>
@@ -1529,7 +1553,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#track-stage">track-stage</a></td>
-<td>Import a staged GPX file into the track it names, and move the file to the track&#39;s routes/; mark it pending when no single track matches, and keep it in its staging area&#39;s routes/.</td>
+<td>Import a staged GPX file into the device it names, and move the file to its track&#39;s routes/; mark it pending when no single device matches, and keep it in its staging area&#39;s routes/.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#track-trips">track-trips</a></td>
@@ -1605,7 +1629,7 @@
 </tbody></table>
 </div>
 <h2 id="automation">Automation<a class="anchor" href="#automation" aria-label="Link to this section"></a></h2>
-<p><a href="../automation/commands.html">All 12 in full</a>.</p>
+<p><a href="../automation/commands.html">All 4 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1615,7 +1639,7 @@
 </thead>
 <tbody><tr>
 <td><a href="../automation/commands.html#automation-bridge">automation-bridge</a></td>
-<td>Hear devices on the MQTT broker, keep them under /archive/devices, publish their readings and send what device-set asks (the automation-bridge service)</td>
+<td>Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service)</td>
 </tr>
 <tr>
 <td><a href="../automation/commands.html#automation-rule-check">automation-rule-check</a></td>
@@ -1627,39 +1651,7 @@
 </tr>
 <tr>
 <td><a href="../automation/commands.html#automation-status">automation-status</a></td>
-<td>Whether the automation bridge hears the MQTT broker, how many devices and entities it found, and which it cannot read.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-create">device-create</a></td>
-<td>Make a device by hand, which no source announces: a GPS logger whose files are imported, or something a phone will post the position of (--position)</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-forget">device-forget</a></td>
-<td>Remove a device and its history, and stop the broker replaying its announcements; one that is still on comes back when it announces itself.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-history">device-history</a></td>
-<td>Show an entity&#39;s readings, oldest first: the latest, those since a time, or a time range summed up per interval (an average an hour, a maximum a day) — a temperature over a week, a plug&#39;s power, a button&#39;s presses.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-label">device-label</a></td>
-<td>Name a device or one of its entities, as its page shows it; its node name and routing keys stay.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-set">device-set</a></td>
-<td>Switch a device on or off, or set one of its entities to a value: on, off or toggle for a switch or a light, a number, one of the options of a choice, press for an action.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-show">device-show</a></td>
-<td>Show a device and each of its entities (readings, switches, buttons) with its latest value and whether it can be set.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#device-tracker">device-tracker</a></td>
-<td>Show, turn on, replace or turn off the link a phone or GPS tracker posts a device&#39;s position to, with the QR code that sets Traccar Client up.</td>
-</tr>
-<tr>
-<td><a href="../automation/commands.html#devices">devices</a></td>
-<td>List the devices the automation bridge found (sensors, plugs, buttons), each with whether it is online and its main reading.</td>
+<td>Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the rules.</td>
 </tr>
 </tbody></table>
 </div>

@@ -266,19 +266,19 @@ device a driver still hears comes back new.
 
 ## From the terminal
 
-| Task                                        | Command                                                                                                 |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| List the devices, with their main value     | [`devices`](../reference/commands-core.md), `--online` for those that answer                            |
-| List the drivers running, and their devices | `devices --drivers`                                                                                     |
-| A device's endpoints and their values now   | [`device-show`](../reference/commands-core.md) `<device>`                                               |
-| An endpoint's history                       | [`device-history`](../reference/commands-core.md) `<device>/<endpoint>`, `--since`, `--bucket`, `--agg` |
-| Switch or set a control                     | `echo <value> > /dev/<device>/<endpoint>`                                                               |
-| Follow an endpoint as values come           | `tail -f /dev/<device>/<endpoint>`                                                                      |
-| Make a phone, tracker or logger             | [`device-create`](../reference/commands-core.md) `<name> --driver tracker --class <class>`              |
-| Give a GPX file to a tracker                | `cat <file>.gpx > /dev/<device>`                                                                        |
-| Show, renew or take away a device's key     | [`device-key`](../reference/commands-core.md) `<device>`, `--new`, `--off`, `--origin <address>`        |
-| Rename a device or an endpoint              | [`device-label`](../reference/commands-core.md) `<device>[/<endpoint>] <label>`                         |
-| Forget a device                             | [`device-forget`](../reference/commands-core.md) `<device>`                                             |
+| Task                                        | Command                                                                                                                |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| List the devices, with their main value     | [`devices`](../reference/commands-core.md#devices), `--online` for those that answer                                   |
+| List the drivers running, and their devices | `devices --drivers`                                                                                                    |
+| A device's endpoints and their values now   | [`device-show`](../reference/commands-core.md#device-show) `<device>`                                                  |
+| An endpoint's history                       | [`device-history`](../reference/commands-core.md#device-history) `<device>/<endpoint>`, `--since`, `--bucket`, `--agg` |
+| Switch or set a control                     | `echo <value> > /dev/<device>/<endpoint>`                                                                              |
+| Follow an endpoint as values come           | `tail -f /dev/<device>/<endpoint>`                                                                                     |
+| Make a phone, tracker or logger             | [`device-create`](../reference/commands-core.md#device-create) `<name> --driver tracker --class <class>`               |
+| Give a GPX file to a tracker                | `cat <file>.gpx > /dev/<device>`                                                                                       |
+| Show, renew or take away a device's key     | [`device-key`](../reference/commands-core.md#device-key) `<device>`, `--new`, `--off`, `--origin <address>`            |
+| Rename a device or an endpoint              | [`device-label`](../reference/commands-core.md#device-label) `<device>[/<endpoint>] <label>`                           |
+| Forget a device                             | [`device-forget`](../reference/commands-core.md#device-forget) `<device>`                                              |
 
 ## When something goes differently
 

@@ -169,7 +169,7 @@ the name.</p>
 </tr>
 </tbody></table>
 </div>
-<p><code>attrs /dev/hall-plug</code> prints them, and <a href="../reference/commands-core.html"><code>device-show</code></a> prints the
+<p><code>attrs /dev/hall-plug</code> prints them, and <a href="../reference/commands-core.html#device-show"><code>device-show</code></a> prints the
 device with each of its endpoints.</p>
 <h2 id="endpoints">Endpoints<a class="anchor" href="#endpoints" aria-label="Link to this section"></a></h2>
 <p>An endpoint is one thing a device reports or is told. There are three types:</p>
@@ -295,7 +295,7 @@ device&#39;s <strong>Info</strong> tab says <strong>(not running)</strong> besid
 <p>Most drivers find their devices: a sensor announces itself on the MQTT broker, and its driver makes
 the device and its endpoints within seconds. A phone or a GPS logger announces nothing, so a
 member of the <code>devices</code> group makes it by hand with
-<a href="../reference/commands-core.html"><code>device-create</code></a>, naming its driver:</p>
+<a href="../reference/commands-core.html#device-create"><code>device-create</code></a>, naming its driver:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone</code></pre></div>
 <p>The driver gives the new device what it has from the start, here an empty <code>position</code> track. A device

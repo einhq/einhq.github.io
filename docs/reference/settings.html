@@ -632,7 +632,7 @@
 </div>
 <h2 id="automation">Automation<a class="anchor" href="#automation" aria-label="Link to this section"></a></h2>
 <h3 id="cfg_automation_sources"><code>CFG_AUTOMATION_SOURCES</code><a class="anchor" href="#cfg_automation_sources" aria-label="Link to this section"></a></h3>
-<p><strong>Device sources</strong>. Which kinds of device the bridge listens for, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome) and shelly (Shelly&#39;s second generation and later).</p>
+<p><strong>Device sources</strong>. Which kinds of device the bridge listens for, and drives, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome), shelly (Shelly&#39;s second generation and later) and shelly-gen1 (Shelly&#39;s first generation: Plug S, 1, 1PM, 2.5, i3).</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -646,7 +646,7 @@
 </tr>
 <tr>
 <td>Default</td>
-<td><code>ha-discovery shelly</code></td>
+<td><code>ha-discovery shelly shelly-gen1</code></td>
 </tr>
 <tr>
 <td>Kind</td>
@@ -787,7 +787,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_automation_history"><code>CFG_AUTOMATION_HISTORY</code><a class="anchor" href="#cfg_automation_history" aria-label="Link to this section"></a></h3>
-<p><strong>Reading history</strong>. How long an entity&#39;s readings are kept. Applies to entities found from now on; an entity found before keeps its own (change it with attrs on its history).</p>
+<p><strong>Reading history</strong>. How long an endpoint&#39;s values are kept. Applies to endpoints found from now on; one found before keeps its own (change it with attrs on the endpoint).</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -822,7 +822,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_automation_min_interval"><code>CFG_AUTOMATION_MIN_INTERVAL</code><a class="anchor" href="#cfg_automation_min_interval" aria-label="Link to this section"></a></h3>
-<p><strong>Seconds between readings</strong>. The shortest time between two readings of one entity that are kept and published. A reading that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. An entity&#39;s own minInterval attr overrides it.</p>
+<p><strong>Seconds between readings</strong>. The shortest time between two numbers of one endpoint that are kept and published: a number that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. Given to endpoints found from now on, as their minInterval attr, which may be changed on each.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

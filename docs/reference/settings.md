@@ -230,12 +230,12 @@ Every setting of an EiN with all its modules: 97 of them, in the groups the Sett
 
 ### `CFG_AUTOMATION_SOURCES`
 
-**Device sources**. Which kinds of device the bridge listens for, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome) and shelly (Shelly's second generation and later).
+**Device sources**. Which kinds of device the bridge listens for, and drives, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome), shelly (Shelly's second generation and later) and shelly-gen1 (Shelly's first generation: Plug S, 1, 1PM, 2.5, i3).
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | `ha-discovery shelly` |
+| Default | `ha-discovery shelly shelly-gen1` |
 | Kind | string |
 | Restarts | `automation-bridge` |
 | From the module | Automation |
@@ -290,7 +290,7 @@ Every setting of an EiN with all its modules: 97 of them, in the groups the Sett
 
 ### `CFG_AUTOMATION_HISTORY`
 
-**Reading history**. How long an entity's readings are kept. Applies to entities found from now on; an entity found before keeps its own (change it with attrs on its history).
+**Reading history**. How long an endpoint's values are kept. Applies to endpoints found from now on; one found before keeps its own (change it with attrs on the endpoint).
 
 | | |
 | --- | --- |
@@ -303,7 +303,7 @@ Every setting of an EiN with all its modules: 97 of them, in the groups the Sett
 
 ### `CFG_AUTOMATION_MIN_INTERVAL`
 
-**Seconds between readings**. The shortest time between two readings of one entity that are kept and published. A reading that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. An entity's own minInterval attr overrides it.
+**Seconds between readings**. The shortest time between two numbers of one endpoint that are kept and published: a number that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. Given to endpoints found from now on, as their minInterval attr, which may be changed on each.
 
 | | |
 | --- | --- |

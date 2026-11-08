@@ -50,7 +50,7 @@ What a device says about itself is in its attributes:
 | `online`       | Whether it answers now, when its driver can tell                                         |
 | `config`       | What a person gave its driver when making it (`device-create --config`)                  |
 
-`attrs /dev/hall-plug` prints them, and [`device-show`](../reference/commands-core.md) prints the
+`attrs /dev/hall-plug` prints them, and [`device-show`](../reference/commands-core.md#device-show) prints the
 device with each of its endpoints.
 
 ## Endpoints
@@ -115,7 +115,7 @@ device's **Info** tab says **(not running)** beside the driver.
 Most drivers find their devices: a sensor announces itself on the MQTT broker, and its driver makes
 the device and its endpoints within seconds. A phone or a GPS logger announces nothing, so a
 member of the `devices` group makes it by hand with
-[`device-create`](../reference/commands-core.md), naming its driver:
+[`device-create`](../reference/commands-core.md#device-create), naming its driver:
 
 ```bash
 # in EiN's terminal

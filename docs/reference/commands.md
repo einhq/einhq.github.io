@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 428 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 426 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 216 in full](commands-core.md).
+[All 222 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -58,6 +58,13 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
 | [detach](commands-core.md#detach) | detach a job so it keeps running after the shell closes. |
+| [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to. |
+| [device-forget](commands-core.md#device-forget) | Remove a device and everything under it, its history included; for members of the devices group. |
+| [device-history](commands-core.md#device-history) | An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes. |
+| [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off) |
+| [device-label](commands-core.md#device-label) | Name a device or one of its endpoints, as its page and cards show it; for members of the devices group. |
+| [device-show](commands-core.md#device-show) | A device and each of its endpoints: a log's or control's latest value, a track's fixes, and whether you may write a control. |
+| [devices](commands-core.md#devices) | Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers. |
 | [df](commands-core.md#df) | Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables. |
 | [dirname](commands-core.md#dirname) | Strip last component from file name. |
 | [dmesg](commands-core.md#dmesg) | Print system log. |
@@ -210,7 +217,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
 | [tr](commands-core.md#tr) | Translate or delete characters. |
-| [track-token](commands-core.md#track-token) | Show, make or turn off the link a phone or GPS tracker posts a track's fixes to without signing in. |
 | [trash](commands-core.md#trash) | Move nodes into the reader's trash, alone or as one batch, list it, restore entries, or empty it. |
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
 | [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build, and write the installation's third-party notices there. |
@@ -258,13 +264,13 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | --- | --- |
 | [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add files) |
 | [album-cover](../archive/commands.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
+| [album-device-add](../archive/commands.md#album-device-add) | Put devices on an album's list, whose tracks its map draws. |
+| [album-device-list](../archive/commands.md#album-device-list) | The devices whose tracks an album's map draws: those the cameras of its media are linked to and those added by hand, and the devices of its media taken off the list. |
+| [album-device-rm](../archive/commands.md#album-device-rm) | Take devices off an album's list, whose tracks its map draws. |
 | [album-profile](../archive/commands.md#album-profile) | Build the profile staging matches suggested groups against, beside each library album as its .profile: its members' times, days, places and people, and the pictures that stand for it. |
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
 | [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip. |
 | [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
-| [album-track-add](../archive/commands.md#album-track-add) | Put tracks on an album's list, which its map draws. |
-| [album-track-list](../archive/commands.md#album-track-list) | The tracks an album's map draws: those the cameras of its media record into and those added by hand, and the tracks of its media removed from the list. |
-| [album-track-rm](../archive/commands.md#album-track-rm) | Take tracks off an album's list, which its map draws. |
 | [archive-bridge](../archive/commands.md#archive-bridge) | Derive the archive's domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running) |
 | [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
 | [assign-faces](../archive/commands.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
@@ -274,6 +280,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [camera](../archive/commands.md#camera) | Camera and recording camera management. |
 | [camera-cover](../archive/commands.md#camera-cover) | Give a camera without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
 | [camera-create](../archive/commands.md#camera-create) | Create a camera node and link the media already carrying its fingerprint. |
+| [camera-device](../archive/commands.md#camera-device) | Link a camera to the device it is part of, such as a phone's camera to the phone whose track says where it was, or take the link away. |
 | [camera-info](../archive/commands.md#camera-info) | Show camera details and owners. |
 | [camera-link](../archive/commands.md#camera-link) | Link a file to its capture camera using extracted exif, or to a camera named by hand. |
 | [camera-list](../archive/commands.md#camera-list) | List all cameras. |
@@ -283,7 +290,6 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [camera-scan](../archive/commands.md#camera-scan) | Propose cameras seen in media but not registered. |
 | [camera-set-owner](../archive/commands.md#camera-set-owner) | Link a person as owner of a camera (dated relation pair) |
 | [camera-timeline](../archive/commands.md#camera-timeline) | One camera's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
-| [camera-track](../archive/commands.md#camera-track) | Link a camera to the track it records into, such as a phone that also records where it was, or take the link away. |
 | [camera-update](../archive/commands.md#camera-update) | Change a camera's settings. |
 | [cluster-faces](../archive/commands.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
@@ -310,7 +316,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [geocode-files](../archive/commands.md#geocode-files) | Batch reverse geocode the position nodes of the files under a directory. |
 | [geocode-location](../archive/commands.md#geocode-location) | Resolve a location's written address to coordinates (Nominatim forward geocoding) |
 | [geocode-position](../archive/commands.md#geocode-position) | Reverse geocode a file's position node using Nominatim (OSM) |
-| [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the archive's tracks each names. |
+| [gpx-info](../archive/commands.md#gpx-info) | Say what GPX files hold without importing them: size, name, description, time, creator, tracks, points and their time span, and the tracks of the devices each names. |
 | [hello](../archive/commands.md#hello) | Say hello (example TypeScript module command) |
 | [label-model](../archive/commands.md#label-model) | Learn labels from their pictures, so search --like /archive/tags/<label> can suggest where else they belong. |
 | [latest](../archive/commands.md#latest) | List the most recently captured media, newest first. |
@@ -366,7 +372,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [search-location](../archive/commands.md#search-location) | Search locations by name. |
 | [search-media](../archive/commands.md#search-media) | Search media files by what they show, the text in them, what is said in them, their written descriptions and their names, or by likeness to a picture or a label. |
 | [search-people](../archive/commands.md#search-people) | Search people by partial name; every query word must match the same person. |
-| [search-track](../archive/commands.md#search-track) | Search tracks by their name, or the device or camera they belong to, or their description. |
+| [search-track](../archive/commands.md#search-track) | Search tracks by the device they belong to, or their description. |
 | [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
 | [source-list](../archive/commands.md#source-list) | List the files a node was read from: the links in its sources/, such as a track's GPX files or a person's GEDCOM files. |
 | [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
@@ -382,12 +388,12 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [track-append](../archive/commands.md#track-append) | Append coordinate points to a track. |
 | [track-home](../archive/commands.md#track-home) | List or change a track's home bases, where arriving ends a trip. |
 | [track-import](../archive/commands.md#track-import) | Import GPX track points into a track, keeping a copy of the file in the track's routes/. |
-| [track-list](../archive/commands.md#track-list) | List the tracks, with their name, kind, point count, span and extent. |
+| [track-list](../archive/commands.md#track-list) | List the devices' tracks, with their name, device, kind, point count, span and extent. |
 | [track-mark](../archive/commands.md#track-mark) | Reject or accept the fixes of a time range of a track by hand, overruling its rules, or clear that. |
 | [track-move](../archive/commands.md#track-move) | Move the fixes of a time range from one track to another, for a trip recorded into the wrong track. |
 | [track-places](../archive/commands.md#track-places) | Put each of a track's stays at a location, naming the ones it makes after the harbour, island, bay or town there. |
 | [track-read](../archive/commands.md#track-read) | Read a track as drawable segments ({segments, points, truncated}) |
-| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the track it names, and move the file to the track's routes/; mark it pending when no single track matches, and keep it in its staging area's routes/. |
+| [track-stage](../archive/commands.md#track-stage) | Import a staged GPX file into the device it names, and move the file to its track's routes/; mark it pending when no single device matches, and keep it in its staging area's routes/. |
 | [track-trips](../archive/commands.md#track-trips) | Derive a track's trips and stays, into <track>/.trips. |
 | [track-update](../archive/commands.md#track-update) | Change how a track travels: its kind, the timezone its trips are cut in, its description. |
 | [track-weather](../archive/commands.md#track-weather) | Give a track's trips and their days the weather along it: wind, temperature and cloud cover. |
@@ -413,22 +419,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Automation
 
-[All 12 in full](../automation/commands.md).
+[All 4 in full](../automation/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker, keep them under /archive/devices, publish their readings and send what device-set asks (the automation-bridge service) |
+| [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service) |
 | [automation-rule-check](../automation/commands.md#automation-rule-check) | Check an automation rule: what makes it run, whether its conditions hold now and whose rights its lines run with, or why it is not run; with --run, run its lines now. |
 | [automation-rules](../automation/commands.md#automation-rules) | Run the rules under /etc/automation/rules when a reading, a press, a device coming or going or the clock says so, each as its file's owner (the automation-rules service) |
-| [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, how many devices and entities it found, and which it cannot read. |
-| [device-create](../automation/commands.md#device-create) | Make a device by hand, which no source announces: a GPS logger whose files are imported, or something a phone will post the position of (--position) |
-| [device-forget](../automation/commands.md#device-forget) | Remove a device and its history, and stop the broker replaying its announcements; one that is still on comes back when it announces itself. |
-| [device-history](../automation/commands.md#device-history) | Show an entity's readings, oldest first: the latest, those since a time, or a time range summed up per interval (an average an hour, a maximum a day) — a temperature over a week, a plug's power, a button's presses. |
-| [device-label](../automation/commands.md#device-label) | Name a device or one of its entities, as its page shows it; its node name and routing keys stay. |
-| [device-set](../automation/commands.md#device-set) | Switch a device on or off, or set one of its entities to a value: on, off or toggle for a switch or a light, a number, one of the options of a choice, press for an action. |
-| [device-show](../automation/commands.md#device-show) | Show a device and each of its entities (readings, switches, buttons) with its latest value and whether it can be set. |
-| [device-tracker](../automation/commands.md#device-tracker) | Show, turn on, replace or turn off the link a phone or GPS tracker posts a device's position to, with the QR code that sets Traccar Client up. |
-| [devices](../automation/commands.md#devices) | List the devices the automation bridge found (sensors, plugs, buttons), each with whether it is online and its main reading. |
+| [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the rules. |
 
 ## Media service
 
