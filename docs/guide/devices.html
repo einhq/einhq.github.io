@@ -143,11 +143,11 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 </tr>
 <tr>
 <td><strong>History</strong></td>
-<td>How one endpoint went over a day, a week, a month or a year</td>
+<td>How each endpoint went over a day, a week, a month or a year</td>
 </tr>
 <tr>
 <td><strong>Info</strong></td>
-<td>What the device is, its driver, each endpoint, its key, and renaming and forgetting it</td>
+<td>What the device is, its driver, each endpoint and its key</td>
 </tr>
 <tr>
 <td><strong>Trips</strong></td>
@@ -155,6 +155,8 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 </tr>
 </tbody></table>
 </div>
+<p>Members of the <code>devices</code> group also have <strong>Edit</strong> in the header&#39;s corner, and <strong>Forget</strong> under ⋮
+(see <a href="#rename-or-forget-a-device">Rename or forget a device</a>); on a phone both are under ⋮.</p>
 <p>The address is <code>/devices/</code> and the device&#39;s name, such as <code>/devices/hall-plug</code>, and the tab is in
 <code>?tab=</code> (<a href="../reference/routes.html#eins-own-pages">Addresses in the Web UI</a>). A device opened from the
 <strong>Nodes</strong> page opens here, and so does any of its endpoints.</p>
@@ -179,8 +181,11 @@ A switch you may not change is greyed out. What tells of the device itself rathe
 such as its own temperature or its Wi-Fi signal, is under <strong>About the device itself</strong>. An endpoint the
 device no longer announces is left out; its history stays.</p>
 <h3 id="history">History<a class="anchor" href="#history" aria-label="Link to this section"></a></h3>
-<p>Pick an endpoint and a span: <strong>Day</strong>, <strong>Week</strong>, <strong>Month</strong> or <strong>Year</strong>. The tab opens on the device&#39;s
-main value, the one its card shows.</p>
+<p>Every endpoint kept over time is drawn at once, over the span picked at the right of the header&#39;s
+tabs: <strong>Day</strong>, <strong>Week</strong>, <strong>Month</strong> or <strong>Year</strong> (on a phone, the span&#39;s icon button). A track&#39;s map
+comes first, then a chart for each reading, the device&#39;s main value, the one its card shows, first
+among them. <strong>Over time</strong> on a position&#39;s tile puts its track at the top. An endpoint the device no
+longer announces is marked <strong>(retired)</strong>.</p>
 <ul>
 <li><strong>A reading</strong> is charted as the average of every 15 minutes over a day, of every 2 hours over a
 week, of every 6 hours over a month and of every day over a year, to five significant digits.</li>
@@ -207,10 +212,6 @@ read, and <strong>retired</strong> one the device no longer announces.</li>
 <li><strong>Device key</strong>, for a device whose driver reads what is posted to it, such as a phone: the address
 it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). Only those who may change
 the device see it.</li>
-<li>For members of the <code>devices</code> group: <strong>Called</strong> and <strong>Rename</strong>, the label the pages show (the name
-stays), and <strong>Forget</strong>, which removes the device and everything it kept after asking &quot;Forget
-&lt;device&gt; and all it has kept? A driver that finds it again makes it again.&quot; A sensor that is
-still on comes back when it next announces itself, without its old history.</li>
 </ul>
 <h2 id="switch-something">Switch something<a class="anchor" href="#switch-something" aria-label="Link to this section"></a></h2>
 <p>The toggles, sliders and <strong>Press</strong> buttons on a device&#39;s <strong>Overview</strong> switch it. In the terminal, write
@@ -316,7 +317,13 @@ curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x
 value written in the terminal the same way, <code>echo 41.5 &gt; /dev/garden-sensor/soil-moisture</code>. Values
 written this way are not published on the bus, as a driver&#39;s readings are.</p>
 <h2 id="rename-or-forget-a-device">Rename or forget a device<a class="anchor" href="#rename-or-forget-a-device" aria-label="Link to this section"></a></h2>
-<p>Members of the <code>devices</code> group rename and forget devices on the <strong>Info</strong> tab, or in the terminal:</p>
+<p>Members of the <code>devices</code> group rename a device on its page with <strong>Edit</strong>: <strong>Name</strong>, what its pages
+and cards call it, and under <strong>Endpoints</strong> a name for each endpoint it announces, each field headed
+by the endpoint&#39;s name in <code>/dev</code>. <strong>Save</strong> writes what changed. <strong>Forget</strong>, under ⋮, removes the
+device and everything it kept after asking &quot;Forget &lt;device&gt; and all it has kept? A driver that
+finds it again makes it again.&quot; A sensor that is still on comes back when it next announces itself,
+without its old history.</p>
+<p>In the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-label hall-plug <span class="hljs-string">&#x27;Hall lamp&#x27;</span>                     <span class="hljs-comment"># the label its page shows</span>
 device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temperature&#x27;</span>
@@ -417,7 +424,7 @@ device a driver still hears comes back new.</p>
 <td>Ask the administrator to add you, then sign in again</td>
 </tr>
 <tr>
-<td><strong>Rename</strong> and <strong>Forget</strong> are missing</td>
+<td><strong>Edit</strong> and <strong>Forget</strong> are missing</td>
 <td>The same</td>
 <td>The same</td>
 </tr>

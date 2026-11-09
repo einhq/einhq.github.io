@@ -48,9 +48,12 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 | Tab          | What it shows                                                                                            |
 | ------------ | -------------------------------------------------------------------------------------------------------- |
 | **Overview** | The page opens here: a tile for each endpoint as it is now, with the switches                            |
-| **History**  | How one endpoint went over a day, a week, a month or a year                                              |
-| **Info**     | What the device is, its driver, each endpoint, its key, and renaming and forgetting it                   |
+| **History**  | How each endpoint went over a day, a week, a month or a year                                             |
+| **Info**     | What the device is, its driver, each endpoint and its key                                                |
 | **Trips**    | With the [Archive](../archive/index.md), on a device that has a track: [its trips](../archive/tracks.md) |
+
+Members of the `devices` group also have **Edit** in the header's corner, and **Forget** under ⋮
+(see [Rename or forget a device](#rename-or-forget-a-device)); on a phone both are under ⋮.
 
 The address is `/devices/` and the device's name, such as `/devices/hall-plug`, and the tab is in
 `?tab=` ([Addresses in the Web UI](../reference/routes.md#eins-own-pages)). A device opened from the
@@ -80,8 +83,11 @@ device no longer announces is left out; its history stays.
 
 ### History
 
-Pick an endpoint and a span: **Day**, **Week**, **Month** or **Year**. The tab opens on the device's
-main value, the one its card shows.
+Every endpoint kept over time is drawn at once, over the span picked at the right of the header's
+tabs: **Day**, **Week**, **Month** or **Year** (on a phone, the span's icon button). A track's map
+comes first, then a chart for each reading, the device's main value, the one its card shows, first
+among them. **Over time** on a position's tile puts its track at the top. An endpoint the device no
+longer announces is marked **(retired)**.
 
 - **A reading** is charted as the average of every 15 minutes over a day, of every 2 hours over a
   week, of every 6 hours over a month and of every day over a year, to five significant digits.
@@ -109,10 +115,6 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 - **Device key**, for a device whose driver reads what is posted to it, such as a phone: the address
   it posts to (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). Only those who may change
   the device see it.
-- For members of the `devices` group: **Called** and **Rename**, the label the pages show (the name
-  stays), and **Forget**, which removes the device and everything it kept after asking "Forget
-  &lt;device&gt; and all it has kept? A driver that finds it again makes it again." A sensor that is
-  still on comes back when it next announces itself, without its old history.
 
 ## Switch something
 
@@ -258,7 +260,14 @@ written this way are not published on the bus, as a driver's readings are.
 
 ## Rename or forget a device
 
-Members of the `devices` group rename and forget devices on the **Info** tab, or in the terminal:
+Members of the `devices` group rename a device on its page with **Edit**: **Name**, what its pages
+and cards call it, and under **Endpoints** a name for each endpoint it announces, each field headed
+by the endpoint's name in `/dev`. **Save** writes what changed. **Forget**, under ⋮, removes the
+device and everything it kept after asking "Forget &lt;device&gt; and all it has kept? A driver that
+finds it again makes it again." A sensor that is still on comes back when it next announces itself,
+without its old history.
+
+In the terminal:
 
 ```bash
 # in EiN's terminal, as a member of devices
@@ -296,7 +305,7 @@ device a driver still hears comes back new.
 | The driver reads **(not running)**                                                    | The service of the module that brings the driver is stopped                                                              | An administrator starts it on the dashboard's **Services** tab, or with `service start`                                               |
 | `toggle needs the state the device last reported, and it has reported none`           | The control has never reported a state                                                                                   | Write `on` or `off` instead                                                                                                           |
 | `device-create` says `only the devices group's members make, name and forget devices` | You are not in the `devices` group, or were added since you signed in                                                    | Ask the administrator to add you, then sign in again                                                                                  |
-| **Rename** and **Forget** are missing                                                 | The same                                                                                                                 | The same                                                                                                                              |
+| **Edit** and **Forget** are missing                                                   | The same                                                                                                                 | The same                                                                                                                              |
 | `device-create` says `'null' is core's own in /dev, not a device's name`              | The name is one of EiN's own in `/dev`                                                                                   | Choose another name                                                                                                                   |
 | `cat ride.gpx > /dev/thermometer` says the device has no driver                       | Only a device with a driver that reads raw input takes a file                                                            | Write it to the tracker it was recorded on                                                                                            |
 | The phone reports nothing                                                             | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client | See [Report from a phone](#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting) |

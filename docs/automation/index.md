@@ -198,8 +198,8 @@ so, and devices are connected by hand.
 
 A device is named in EiN as it names itself, in lower case with hyphens, such as `hall-sensor`, and
 each of its endpoints by its own name within it, such as `hall-sensor/temperature`. Commands,
-routing keys and rules use these names. **Rename** on a device's **Info** tab gives it a friendlier
-label on the pages and leaves the names as they are.
+routing keys and rules use these names. **Edit** on a device's page gives it and its endpoints
+friendlier labels on the pages and leaves the names as they are.
 
 ### ESPHome
 
