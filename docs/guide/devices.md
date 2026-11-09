@@ -197,8 +197,9 @@ device's track as it moves:
 1. Open the device's page at the address the phone will reach EiN at, such as
    `https://ein.wrenfield.example`, and its **Info** tab.
 2. Under **Device key**, choose **Make a key**. A QR code and the address appear.
-3. On the phone, install Traccar Client and scan the QR code in its settings. It fills in the server
-   URL and, as the device identifier, the device's name. **Or type the server URL in by hand** shows
+3. On the phone, install Traccar Client and scan the QR code in its settings, or with the phone's
+   camera, which opens the app. It fills in the server URL with the key in it and, as the device
+   identifier, the device's name. **Or type the server URL in by hand** shows
    the address to type instead.
 4. Set how often it reports, for example every 30 seconds, and switch tracking on.
 
