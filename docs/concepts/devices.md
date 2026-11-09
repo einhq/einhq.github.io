@@ -70,7 +70,9 @@ when it differs from the one before (see [How often a reading is kept](#how-ofte
 A control is not a store of what you wrote. Writing `on` to `/dev/hall-plug/switch-0` sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
 control remembers what was asked, who asked and when (its `requested` attribute), and the device's
-page shows the switch as asked, waiting for the device.
+page shows the switch as asked, waiting for the device. A press is remembered only once the driver
+took it: one it refuses, such as pausing a speaker that plays nothing, is answered with the driver's
+error and leaves the page's "pressed … by …" as it was.
 
 What a control takes is its schema:
 
