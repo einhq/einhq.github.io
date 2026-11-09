@@ -398,7 +398,14 @@ The administrator and each person can move, rename and hide a module's entries;
 To make nodes of your type into links wherever EiN shows them, in search results, completions and
 the node explorer, name the route that opens one in `mod.json`:
 `"ui": { "open": { "recipe": "/recipes/{name}" } }`. `{name}` is the node's last path segment,
-`{parent}` the one before it and `{path}` its whole path.
+`{parent}` the one before it and `{path}` its whole path. Files of your own under a folder open the
+same way by the folder: `"/etc/things/": "/things/{rest}"`
+([`ui.open`](manifest.md#uiopen)).
+
+A page that draws something to drag and zoom, as a map or a diagram, takes the gestures from
+`usePanZoom` in `@ein/ui/hooks`: dragging, pinching, the wheel about the cursor and a double tap,
+with `ignore` for what on the drawing keeps a press to itself, such as a card dragged on it. The
+family tree draws with it, and so does the Automation module's graph.
 
 ## Add a setting
 

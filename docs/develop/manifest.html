@@ -540,7 +540,11 @@
 </tr>
 </tbody></table>
 </div>
-<p>Each is URI-encoded. A route must start with <code>/</code> and use no other placeholder. A type that no installed module names is shown without a link. Core opens a <code>device</code> at its page itself, and a <code>log</code>, <code>track</code> or <code>control</code> directly under a device at its device&#39;s page, so a module names no route for those; a module adds a tab to the device page with a <code>device.tabs</code> panel instead (<a href="drivers.html#a-tab-on-the-device-page">A tab on the device page</a>).</p>
+<p>Each is URI-encoded. A route must start with <code>/</code> and use no other placeholder. A type that no installed module names is shown without a link.</p>
+<p>A key that is a folder, starting and ending with <code>/</code>, opens whatever is under it, whatever its type: a module&#39;s own files that are plain files to EiN, such as YAML it keeps under <code>/etc</code>. It may also use <code>{rest}</code>, the path below the folder without its extension, and the longest folder a node is under wins over its type:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/etc/automations/&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/automations/{rest}&quot;</span> <span class="hljs-punctuation">}</span></code></pre></div>
+<p><code>/etc/automations/hall-light.yaml</code> then opens at <code>/automations/hall-light</code>, and a deeper
+<code>/etc/automations/upstairs/hall.yaml</code> at <code>/automations/upstairs%2Fhall</code>. Core opens a <code>device</code> at its page itself, and a <code>log</code>, <code>track</code> or <code>control</code> directly under a device at its device&#39;s page, so a module names no route for those; a module adds a tab to the device page with a <code>device.tabs</code> panel instead (<a href="drivers.html#a-tab-on-the-device-page">A tab on the device page</a>).</p>
 <h2 id="what-mod-setup-finds-without-a-field">What <code>mod setup</code> finds without a field<a class="anchor" href="#what-mod-setup-finds-without-a-field" aria-label="Link to this section"></a></h2>
 <p>Some of what a module brings is found by where it is in the module, not by a field in <code>mod.json</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>

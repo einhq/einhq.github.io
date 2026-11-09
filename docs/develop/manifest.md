@@ -352,7 +352,16 @@ Which route opens a node of a type, so the Web UI can link nodes it finds but do
 | `{parent}`  | the segment before it        |
 | `{path}`    | the node's whole path        |
 
-Each is URI-encoded. A route must start with `/` and use no other placeholder. A type that no installed module names is shown without a link. Core opens a `device` at its page itself, and a `log`, `track` or `control` directly under a device at its device's page, so a module names no route for those; a module adds a tab to the device page with a `device.tabs` panel instead ([A tab on the device page](drivers.md#a-tab-on-the-device-page)).
+Each is URI-encoded. A route must start with `/` and use no other placeholder. A type that no installed module names is shown without a link.
+
+A key that is a folder, starting and ending with `/`, opens whatever is under it, whatever its type: a module's own files that are plain files to EiN, such as YAML it keeps under `/etc`. It may also use `{rest}`, the path below the folder without its extension, and the longest folder a node is under wins over its type:
+
+```json
+"open": { "/etc/automations/": "/automations/{rest}" }
+```
+
+`/etc/automations/hall-light.yaml` then opens at `/automations/hall-light`, and a deeper
+`/etc/automations/upstairs/hall.yaml` at `/automations/upstairs%2Fhall`. Core opens a `device` at its page itself, and a `log`, `track` or `control` directly under a device at its device's page, so a module names no route for those; a module adds a tab to the device page with a `device.tabs` panel instead ([A tab on the device page](drivers.md#a-tab-on-the-device-page)).
 
 ## What `mod setup` finds without a field
 

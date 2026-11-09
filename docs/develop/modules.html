@@ -701,7 +701,13 @@ navigation as the reader gets it, with a warning for each entry it left out and 
 <p>To make nodes of your type into links wherever EiN shows them, in search results, completions and
 the node explorer, name the route that opens one in <code>mod.json</code>:
 <code>&quot;ui&quot;: { &quot;open&quot;: { &quot;recipe&quot;: &quot;/recipes/{name}&quot; } }</code>. <code>{name}</code> is the node&#39;s last path segment,
-<code>{parent}</code> the one before it and <code>{path}</code> its whole path.</p>
+<code>{parent}</code> the one before it and <code>{path}</code> its whole path. Files of your own under a folder open the
+same way by the folder: <code>&quot;/etc/things/&quot;: &quot;/things/{rest}&quot;</code>
+(<a href="manifest.html#uiopen"><code>ui.open</code></a>).</p>
+<p>A page that draws something to drag and zoom, as a map or a diagram, takes the gestures from
+<code>usePanZoom</code> in <code>@ein/ui/hooks</code>: dragging, pinching, the wheel about the cursor and a double tap,
+with <code>ignore</code> for what on the drawing keeps a press to itself, such as a card dragged on it. The
+family tree draws with it, and so does the Automation module&#39;s graph.</p>
 <h2 id="add-a-setting">Add a setting<a class="anchor" href="#add-a-setting" aria-label="Link to this section"></a></h2>
 <p>A module owns settings by listing them in <code>mod.json</code> under <code>config.options</code>. Setup adds them to
 <strong>Settings</strong> and <code>config</code>; the values live in <code>/etc/config</code> and each person&#39;s <code>~/.config</code>, and every
