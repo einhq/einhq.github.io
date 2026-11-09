@@ -137,7 +137,7 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 </tr>
 <tr>
 <td>The <code>http</code> driver</td>
-<td>A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a Shelly or Tasmota over HTTP; see <a href="#a-web-api">A web API</a></td>
+<td>A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see <a href="#a-web-api">A web API</a></td>
 </tr>
 <tr>
 <td>The <code>automation-bridge</code> service</td>
@@ -377,9 +377,9 @@ with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its fir
 bridge started, is asked to.</p>
 <h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
 <p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
-name in its answer: today&#39;s weather, the price of electricity this hour, or a Shelly or Tasmota that
-you would rather ask over HTTP than connect to the broker. Nothing announces such a device; a member
-of <code>devices</code> makes it in the terminal:</p>
+name in its answer: today&#39;s weather, the price of electricity this hour, or a device on your network
+that answers on a web API of its own, and can be switched there. Nothing announces such a device; a
+member of <code>devices</code> makes it in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-create Weather --driver http \
   --config <span class="hljs-string">&#x27;url=https://api.open-meteo.com/v1/forecast?latitude=57.7&amp;longitude=11.97&amp;current=temperature_2m,wind_speed_10m&#x27;</span> \
@@ -423,11 +423,11 @@ device-create Weather --driver http \
 <td>a field of a field</td>
 </tr>
 <tr>
-<td><code>switch:0.apower</code></td>
-<td>a field whose name has a colon in it, such as a Shelly&#39;s</td>
+<td><code>relay:0.power</code></td>
+<td>a field whose name has a colon in it</td>
 </tr>
 <tr>
-<td><code>StatusSNS.ENERGY[&#39;Total Today&#39;]</code></td>
+<td><code>energy[&#39;total today&#39;]</code></td>
 <td>a field whose name has a space in it</td>
 </tr>
 <tr>
@@ -452,62 +452,30 @@ device-create Weather --driver http \
 whose answer has none of its readings, or that does not answer, is offline until it does, and the
 bridge&#39;s log says why once. A reading&#39;s unit says what it is: <code>°C</code> is a temperature, <code>W</code> power and
 <code>kWh</code> energy, so the device&#39;s card shows it first.</p>
-<p>Some more:</p>
+<p>Another:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># the price of electricity this hour, in Swedish price area SE3, from elprisetjustnu.se</span>
 device-create Electricity price --driver http \
   --config <span class="hljs-string">&#x27;url=https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json&#x27;</span> \
-  --config <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span> --config interval=5m
-
-<span class="hljs-comment"># a Shelly of the second generation, over HTTP</span>
-device-create Garage plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.31/rpc/Shelly.GetStatus&#x27;</span> \
-  --config <span class="hljs-string">&#x27;read=power=switch:0.apower W; on=switch:0.output; temperature=switch:0.temperature.tC °C&#x27;</span> --config interval=30s
-
-<span class="hljs-comment"># a Tasmota plug</span>
-device-create Desk plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.32/cm?cmnd=Status%2010&#x27;</span> \
-  --config <span class="hljs-string">&#x27;read=power=StatusSNS.ENERGY.Power W; today=StatusSNS.ENERGY.Today kWh&#x27;</span> --config interval=30s</code></pre></div>
+  --config <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span> --config interval=5m</code></pre></div>
 <p>A config <code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, or forget it
 and make it again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>attrs -J <span class="hljs-string">&#x27;config={&quot;url&quot;:&quot;https://…&quot;,&quot;read&quot;:&quot;price=[time_start..time_end].SEK_per_kWh SEK/kWh&quot;}&#x27;</span> /dev/electricity-price</code></pre></div>
 <h4 id="switching-it">Switching it<a class="anchor" href="#switching-it" aria-label="Link to this section"></a></h4>
-<p>A Shelly or Tasmota asked over HTTP is switched at an address of its own, which <code>set</code> names for each
-control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the device
-spells on and off, which is what <code>on/off</code> says. An address without <code>http://</code> is taken from <code>url</code>&#39;s,
-sign-in included. A control whose name is also a reading&#39;s is a switch that shows that reading as its
-state; EiN asks the device again a second after it is switched. A control with no <code>{value}</code> and no
-<code>on/off</code> is a button that asks its address when pressed, such as a restart.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Device</th>
-<th><code>url</code> asks</th>
-<th><code>read</code></th>
-<th><code>set</code></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Tasmota</td>
-<td><code>cm?cmnd=Status%200</code></td>
-<td><code>power=StatusSTS.POWER</code></td>
-<td><code>power=cm?cmnd=Power%20{value} ON/OFF</code></td>
-</tr>
-<tr>
-<td>Shelly, first generation</td>
-<td><code>status</code></td>
-<td><code>on=relays[0].ison</code></td>
-<td><code>on=relay/0?turn={value} on/off</code></td>
-</tr>
-<tr>
-<td>Shelly, second generation</td>
-<td><code>rpc/Shelly.GetStatus</code></td>
-<td><code>on=switch:0.output</code></td>
-<td><code>on=rpc/Switch.Set?id=0&amp;on={value} true/false</code></td>
-</tr>
-</tbody></table>
-</div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># a Tasmota plug, switched from EiN</span>
-device-create Lamp plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.33/cm?cmnd=Status%200&#x27;</span> \
-  --config <span class="hljs-string">&#x27;read=power=StatusSTS.POWER; watts=StatusSNS.ENERGY.Power W&#x27;</span> \
-  --config <span class="hljs-string">&#x27;set=power=cm?cmnd=Power%20{value} ON/OFF; restart=cm?cmnd=Restart%201&#x27;</span> --config interval=30s</code></pre></div>
+<p>A device whose web API also takes commands is switched at an address of its own, which <code>set</code> names
+for each control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the
+device spells on and off, which is what <code>on/off</code> says: <code>ON/OFF</code>, <code>on/off</code>, <code>1/0</code> or <code>true/false</code>. An
+address without <code>http://</code> is taken from <code>url</code>&#39;s, sign-in included. A control whose name is also a
+reading&#39;s is a switch that shows that reading as its state, read as on or off however the device
+spells them; EiN asks the device again a second after it is switched. A control with no <code>{value}</code> and
+no <code>on/off</code> is a button that asks its address when pressed, such as a restart.</p>
+<p>Say a garden pump&#39;s controller on your network answers <code>{&quot;pump&quot;: {&quot;running&quot;: true, &quot;power&quot;: 420}}</code> at
+<code>/api/status</code>, runs or stops the pump at <code>/api/pump?run=1</code> and <code>/api/pump?run=0</code>, and restarts at
+<code>/api/restart</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-create Garden pump --driver http --config <span class="hljs-string">&#x27;url=http://admin:secret@192.0.2.40/api/status&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=pump=pump.running; power=pump.power W&#x27;</span> \
+  --config <span class="hljs-string">&#x27;set=pump=api/pump?run={value} 1/0; restart=api/restart&#x27;</span> --config interval=30s</code></pre></div>
+<p><code>pump</code> is then a switch, on while the answer says <code>running</code> is true, and <code>restart</code> a button; both
+are asked with the sign-in in <code>url</code>.</p>
 <p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
 EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
 <h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
