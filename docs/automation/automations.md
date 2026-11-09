@@ -9,9 +9,40 @@ is a YAML file, written by members of the `automation` group, and runs with the 
 whose file it is. This page is for those members. [Automation](index.md) covers connecting the
 devices, and [Devices](../guide/devices.md) the devices themselves.
 
+## The Automations page
+
+**Browse → Automations** in the sidebar, for members of the `automation` group, lists the
+automations beside the one open, each with a dot that says whether it runs (green), is off (grey) or
+is held back (red, with why under its name). **+** in the bar makes one, empty or from a starting
+point. On a phone the list is in the bar's menu.
+
+An automation opens on three tabs:
+
+- **Graph**: its nodes as cards wired together, which you drag and zoom as a map (the wheel or
+  two fingers, a double tap to zoom in). Add a node from the list of kinds on the left (**Add** on a
+  phone); it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
+  card's outputs on its right edge to another card to wire them: `true` is the green output, `false`
+  the red one, and a switch has one per case. Tap a card to set it up in the panel beside the graph
+  (a drawer on a phone), with a device and endpoint picker for what it reads or switches; tap a wire
+  and **Remove the wire**, or press Delete, to take it out. While the automation runs, each card says
+  what its node last sent and when, or when its timer runs out.
+- **YAML**: the file itself, to read or change as typed.
+- **Runs**: what it did, as its [run log](#see-what-automations-did) has it, as it happens.
+
+**Save** writes the changes; one with problems can only be saved as a draft (**Save as draft**),
+which does not run until they are gone, and each card with a problem has a red border and says
+what it is. **On** turns the automation on and off. A save from the graph writes the YAML anew, so
+comments in the file are lost; a save from the YAML tab keeps it as typed. Opening an automation's
+file in **System → Nodes** ([Nodes](../concepts/nodes.md)) opens it here too.
+
+A module's automation is shown but not changed here, and only the administrator turns it on and
+off.
+
 ## A first automation
 
-The hall lamp goes on at motion when it is dark, and off five minutes after the motion ends:
+The hall lamp goes on at motion when it is dark, and off five minutes after the motion ends. On the
+Automations page, that is **+**, **Motion light**, then the devices set to yours on the cards. In
+the terminal:
 
 ```bash
 # in EiN's terminal
