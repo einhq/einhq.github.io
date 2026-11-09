@@ -17,12 +17,15 @@ household that uses them. [Rules](rules.md) covers writing rules.
 | The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                           |
 | The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                                                          |
 | The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                      |
-| The `automation-bridge` service                             | Hears the broker and runs the three drivers                                                                                                                             |
+| The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                    |
+| The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                               |
+| The `network` driver                                        | Anything else on the network: whether it answers, and how fast                                                                                                          |
+| The `automation-bridge` service                             | Hears the broker and runs the drivers                                                                                                                                   |
 | The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                |
 | The group `automation`                                      | Its members write the rules                                                                                                                                             |
 | `automation-status`, `automation-rule-check`                | Whether the broker is heard, and what a rule does                                                                                                                       |
 | **Found on the network**                                    | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network) |
-| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network, adding a Shelly from there, and leaving something out                                                                                           |
+| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network and all it said, adding it as a device, and leaving something out                                                                                |
 
 With the [Assistant](../assistant/index.md), it also teaches the chat to read the devices and to
 propose switching them.
@@ -31,7 +34,8 @@ propose switching them.
 
 - **An MQTT broker**, the server the devices and EiN exchange their messages through. The
   installer runs one beside EiN with `--mqtt`; a broker you already run works as well.
-- **Devices that speak MQTT**: those running ESPHome, and Shelly's of every generation.
+- **Devices that speak MQTT**: those running ESPHome, and Shelly's of every generation. Printers,
+  Google Cast speakers and anything else on the network are asked directly, once added.
 - Nothing else: neither the Archive nor the media service.
 
 ## Install it
@@ -128,17 +132,28 @@ bridge, a speaker, a TV or a printer, and is matched to the devices EiN has alre
 its hardware address.
 
 When something found can become a device and is none yet, the **Devices** page's header has a
-button that says how many, such as **2 found**. It opens **Found on the network**, a card for each:
+button that says how many, such as **2 found**. It opens **Found on the network**, a card for each,
+and **Add** on a card makes it a device:
 
-| On a card     | What it does                                                                                                                                                           |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**       | For a Shelly of any generation: EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute. |
-| What it takes | For one EiN cannot set itself, such as ESPHome or Tasmota: the line under it says what to do, and the sections below say how.                                          |
-| **Ignore**    | Leaves it out of the count and the list; **Show** **Everything** finds it again, with **Take back**.                                                                   |
-| **Open**      | For one that is a device already: its page.                                                                                                                            |
+| What was found                         | What **Add** does                                                                                                                                                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A Shelly, of any generation            | EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute, with all it reads and switches.                                            |
+| A printer                              | A device of the `ipp` driver at once: its `state` (idle, printing, stopped), its `warnings` (such as `marker-supply-low-warning`) and a level in % for each ink or toner it reports.                              |
+| A Google Cast speaker or screen        | A device of the `cast` driver: `player` says whether it plays (`idle`, `playing`, `paused`) and `playing` what, as title – artist (app); `volume` and `muted` can be set, and `play`, `pause` and `stop` pressed. |
+| Anything else: a NAS, a router, a TV … | A device of the `network` driver, online while it answers, with its `response-time`. EiN does not speak its own protocol yet.                                                                                     |
+| ESPHome or Tasmota                     | No **Add**: the line under it says how to point it at the broker, and the sections below say more.                                                                                                                |
+
+A device added from the network follows it to a new address: EiN knows it by its hardware address.
+A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.
+
+Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
+records, each SSDP answer with what the device's own description says, and the message as it came.
+For something EiN does not support, it is what there is to go on. **Ignore** leaves one out of the
+count and the list; **Show** **Everything** finds it again, with **Take back**. **Open** opens one
+that is a device already.
 
 **Show** chooses **Can be added** (the default), **Not a device yet**, or **Everything** the
-listener heard, devices and printers included. The page and the button are for members of the
+listener heard, devices included. The page and the button are for members of the
 `devices` group, who make devices; the button stays away for everyone else.
 
 > [!NOTE]
@@ -151,7 +166,11 @@ The same from the terminal:
 # in EiN's terminal, as a member of the devices group
 automation-found                # what can become a device, and is none yet
 automation-found --all          # everything the listener heard
+automation-found 7c2ebd614055   # one, with all the listener heard of it
 automation-adopt a8032ab12345   # add the Shelly with this id, as automation-found says it
+automation-adopt 7c2ebd614055   # add the Cast speaker
+echo 30 > /dev/kitchen-speaker/volume
+echo press > /dev/kitchen-speaker/pause
 automation-ignore d0ad08c5e709  # leave the printer out
 ```
 

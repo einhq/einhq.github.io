@@ -10,7 +10,7 @@ The commands the automation module adds. They are there once the module is insta
 
 ### `automation-adopt`
 
-Make a Shelly found on the network a device: point its MQTT at the broker and restart it (for members of the devices group)
+Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)
 
 <small>changes things</small>
 
@@ -24,9 +24,10 @@ automation-adopt <id>
 
 ```bash
 automation-adopt a8032ab12345
+automation-adopt 7c2ebd614055
 ```
 
-With `JSON_OUTPUT=1`: AdoptAnswer: id, label, driver, broker, restarted.
+With `JSON_OUTPUT=1`: AdoptAnswer: id, label, driver, broker, restarted, device.
 
 ### `automation-bridge`
 
@@ -49,8 +50,12 @@ The devices on the network the network listener heard over mDNS and SSDP: what e
 <small>reads only</small>
 
 ```text
-automation-found [--addable] [--all]
+automation-found [--addable] [--all] [<id>]
 ```
+
+| Argument | What it is                                                             |
+| -------- | ---------------------------------------------------------------------- |
+| `[<id>]` | one host, by its id or address: it, with all the listener heard of it. |
 
 | Option      | What it does                                                        |
 | ----------- | ------------------------------------------------------------------- |
@@ -61,9 +66,10 @@ automation-found [--addable] [--all]
 automation-found
 automation-found --addable
 automation-found --all
+automation-found 7c2ebd614055
 ```
 
-With `JSON_OUTPUT=1`: FoundAnswer: round, broker, devices [{id, ip, mac, names, seen, services, kind, vendor, label, model, firmware, class, addable, adopt, connect, device, ignored}].
+With `JSON_OUTPUT=1`: FoundAnswer: round, broker, devices [{id, ip, mac, names, seen, services, kind, vendor, label, model, firmware, class, addable, adopt, connect, device, ignored}]; with an id, FoundDetail: one of those and host {ip, mac, names, seen, mdns, ssdp}.
 
 ### `automation-ignore`
 

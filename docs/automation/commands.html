@@ -97,7 +97,7 @@
 <p><a href="#automation-adopt">automation-adopt</a> · <a href="#automation-bridge">automation-bridge</a> · <a href="#automation-found">automation-found</a> · <a href="#automation-ignore">automation-ignore</a> · <a href="#automation-rule-check">automation-rule-check</a> · <a href="#automation-rules">automation-rules</a> · <a href="#automation-status">automation-status</a></p>
 <h2 id="a">A<a class="anchor" href="#a" aria-label="Link to this section"></a></h2>
 <h3 id="automation-adopt"><code>automation-adopt</code><a class="anchor" href="#automation-adopt" aria-label="Link to this section"></a></h3>
-<p>Make a Shelly found on the network a device: point its MQTT at the broker and restart it (for members of the devices group)</p>
+<p>Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>automation-adopt &lt;id&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -113,8 +113,9 @@
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-adopt a8032ab12345</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: AdoptAnswer: id, label, driver, broker, restarted.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-adopt a8032ab12345
+automation-adopt 7c2ebd614055</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AdoptAnswer: id, label, driver, broker, restarted, device.</p>
 <h3 id="automation-bridge"><code>automation-bridge</code><a class="anchor" href="#automation-bridge" aria-label="Link to this section"></a></h3>
 <p>Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service)</p>
 <p><small>administrators only · changes things</small></p>
@@ -123,7 +124,20 @@
 <h3 id="automation-found"><code>automation-found</code><a class="anchor" href="#automation-found" aria-label="Link to this section"></a></h3>
 <p>The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>automation-found [--addable] [--all]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-found [--addable] [--all] [&lt;id&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[&lt;id&gt;]</code></td>
+<td>one host, by its id or address: it, with all the listener heard of it.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -143,8 +157,9 @@
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-found
 automation-found --addable
-automation-found --all</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: FoundAnswer: round, broker, devices [{id, ip, mac, names, seen, services, kind, vendor, label, model, firmware, class, addable, adopt, connect, device, ignored}].</p>
+automation-found --all
+automation-found 7c2ebd614055</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: FoundAnswer: round, broker, devices [{id, ip, mac, names, seen, services, kind, vendor, label, model, firmware, class, addable, adopt, connect, device, ignored}]; with an id, FoundDetail: one of those and host {ip, mac, names, seen, mdns, ssdp}.</p>
 <h3 id="automation-ignore"><code>automation-ignore</code><a class="anchor" href="#automation-ignore" aria-label="Link to this section"></a></h3>
 <p>Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group)</p>
 <p><small>changes things</small></p>

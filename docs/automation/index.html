@@ -120,8 +120,20 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 <td>Shelly&#39;s first generation: Plug S, 1, 1PM, 2.5, i3</td>
 </tr>
 <tr>
+<td>The <code>ipp</code> driver</td>
+<td>A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left</td>
+</tr>
+<tr>
+<td>The <code>cast</code> driver</td>
+<td>A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop</td>
+</tr>
+<tr>
+<td>The <code>network</code> driver</td>
+<td>Anything else on the network: whether it answers, and how fast</td>
+</tr>
+<tr>
 <td>The <code>automation-bridge</code> service</td>
-<td>Hears the broker and runs the three drivers</td>
+<td>Hears the broker and runs the drivers</td>
 </tr>
 <tr>
 <td>The <code>automation-rules</code> service</td>
@@ -141,7 +153,7 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 </tr>
 <tr>
 <td><code>automation-found</code>, <code>automation-adopt</code>, <code>automation-ignore</code></td>
-<td>What is on the network, adding a Shelly from there, and leaving something out</td>
+<td>What is on the network and all it said, adding it as a device, and leaving something out</td>
 </tr>
 </tbody></table>
 </div>
@@ -151,7 +163,8 @@ propose switching them.</p>
 <ul>
 <li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through. The
 installer runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
-<li><strong>Devices that speak MQTT</strong>: those running ESPHome, and Shelly&#39;s of every generation.</li>
+<li><strong>Devices that speak MQTT</strong>: those running ESPHome, and Shelly&#39;s of every generation. Printers,
+Google Cast speakers and anything else on the network are asked directly, once added.</li>
 <li>Nothing else: neither the Archive nor the media service.</li>
 </ul>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
@@ -222,34 +235,46 @@ by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matte
 bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
 its hardware address.</p>
 <p>When something found can become a device and is none yet, the <strong>Devices</strong> page&#39;s header has a
-button that says how many, such as <strong>2 found</strong>. It opens <strong>Found on the network</strong>, a card for each:</p>
+button that says how many, such as <strong>2 found</strong>. It opens <strong>Found on the network</strong>, a card for each,
+and <strong>Add</strong> on a card makes it a device:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
-<th>On a card</th>
-<th>What it does</th>
+<th>What was found</th>
+<th>What <strong>Add</strong> does</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Add</strong></td>
-<td>For a Shelly of any generation: EiN sets its MQTT to the broker, with the <code>device</code> account, and restarts it. It is under <strong>Devices</strong> when it is back, within a minute.</td>
+<td>A Shelly, of any generation</td>
+<td>EiN sets its MQTT to the broker, with the <code>device</code> account, and restarts it. It is under <strong>Devices</strong> when it is back, within a minute, with all it reads and switches.</td>
 </tr>
 <tr>
-<td>What it takes</td>
-<td>For one EiN cannot set itself, such as ESPHome or Tasmota: the line under it says what to do, and the sections below say how.</td>
+<td>A printer</td>
+<td>A device of the <code>ipp</code> driver at once: its <code>state</code> (idle, printing, stopped), its <code>warnings</code> (such as <code>marker-supply-low-warning</code>) and a level in % for each ink or toner it reports.</td>
 </tr>
 <tr>
-<td><strong>Ignore</strong></td>
-<td>Leaves it out of the count and the list; <strong>Show</strong> <strong>Everything</strong> finds it again, with <strong>Take back</strong>.</td>
+<td>A Google Cast speaker or screen</td>
+<td>A device of the <code>cast</code> driver: <code>player</code> says whether it plays (<code>idle</code>, <code>playing</code>, <code>paused</code>) and <code>playing</code> what, as title – artist (app); <code>volume</code> and <code>muted</code> can be set, and <code>play</code>, <code>pause</code> and <code>stop</code> pressed.</td>
 </tr>
 <tr>
-<td><strong>Open</strong></td>
-<td>For one that is a device already: its page.</td>
+<td>Anything else: a NAS, a router, a TV …</td>
+<td>A device of the <code>network</code> driver, online while it answers, with its <code>response-time</code>. EiN does not speak its own protocol yet.</td>
+</tr>
+<tr>
+<td>ESPHome or Tasmota</td>
+<td>No <strong>Add</strong>: the line under it says how to point it at the broker, and the sections below say more.</td>
 </tr>
 </tbody></table>
 </div>
+<p>A device added from the network follows it to a new address: EiN knows it by its hardware address.
+A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.</p>
+<p>Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
+records, each SSDP answer with what the device&#39;s own description says, and the message as it came.
+For something EiN does not support, it is what there is to go on. <strong>Ignore</strong> leaves one out of the
+count and the list; <strong>Show</strong> <strong>Everything</strong> finds it again, with <strong>Take back</strong>. <strong>Open</strong> opens one
+that is a device already.</p>
 <p><strong>Show</strong> chooses <strong>Can be added</strong> (the default), <strong>Not a device yet</strong>, or <strong>Everything</strong> the
-listener heard, devices and printers included. The page and the button are for members of the
+listener heard, devices included. The page and the button are for members of the
 <code>devices</code> group, who make devices; the button stays away for everyone else.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>A Shelly with a password of its own refuses EiN; turn the password off on its web page, or set
@@ -259,7 +284,11 @@ its MQTT there as below. A first-generation Shelly does not use Shelly&#39;s clo
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
 automation-found                <span class="hljs-comment"># what can become a device, and is none yet</span>
 automation-found --all          <span class="hljs-comment"># everything the listener heard</span>
+automation-found 7c2ebd614055   <span class="hljs-comment"># one, with all the listener heard of it</span>
 automation-adopt a8032ab12345   <span class="hljs-comment"># add the Shelly with this id, as automation-found says it</span>
+automation-adopt 7c2ebd614055   <span class="hljs-comment"># add the Cast speaker</span>
+<span class="hljs-built_in">echo</span> 30 &gt; /dev/kitchen-speaker/volume
+<span class="hljs-built_in">echo</span> press &gt; /dev/kitchen-speaker/pause
 automation-ignore d0ad08c5e709  <span class="hljs-comment"># leave the printer out</span></code></pre></div>
 <p>The listener needs the machine EiN runs on to be on the same network as the devices: mDNS and SSDP
 stay on the network they are sent on. A device on another network, or another VLAN, is not found,

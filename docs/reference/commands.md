@@ -422,7 +422,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 | Command | What it does |
 | --- | --- |
-| [automation-adopt](../automation/commands.md#automation-adopt) | Make a Shelly found on the network a device: point its MQTT at the broker and restart it (for members of the devices group) |
+| [automation-adopt](../automation/commands.md#automation-adopt) | Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group) |
 | [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service) |
 | [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
 | [automation-ignore](../automation/commands.md#automation-ignore) | Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group) |
