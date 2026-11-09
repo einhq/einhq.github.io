@@ -120,8 +120,10 @@ draws, <code>ruby-phone/position</code> where the phone has been.</p>
 label, its main value, and badges for <strong>online</strong> or <strong>offline</strong>, what it is (such as <strong>plug</strong> or
 <strong>phone</strong>) and how many endpoints it has. The main value is a temperature when the device has one,
 then power, humidity, light or energy, else any other reading, else a switch; a device with none
-shows its manufacturer and model instead. A device that says nothing of whether it is on has neither
-<strong>online</strong> nor <strong>offline</strong>. Choose a card to open the device.</p>
+shows its manufacturer and model instead. A device that only posts what it has, such as a phone or
+tracker sending its position or one posting to a webhook, is <strong>online</strong> while it has been heard
+from in the last 15 minutes; a device that says nothing of whether it is on has neither <strong>online</strong>
+nor <strong>offline</strong>. Choose a card to open the device.</p>
 <ul>
 <li>Type in the filter box to narrow the cards by label, name, what it is, manufacturer or model.</li>
 <li><strong>Show</strong> <strong>All</strong> devices or only those <strong>Online</strong>.</li>

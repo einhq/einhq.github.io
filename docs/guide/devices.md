@@ -32,8 +32,10 @@ Open **Devices** in the sidebar, under **Browse**. It has a card for every devic
 label, its main value, and badges for **online** or **offline**, what it is (such as **plug** or
 **phone**) and how many endpoints it has. The main value is a temperature when the device has one,
 then power, humidity, light or energy, else any other reading, else a switch; a device with none
-shows its manufacturer and model instead. A device that says nothing of whether it is on has neither
-**online** nor **offline**. Choose a card to open the device.
+shows its manufacturer and model instead. A device that only posts what it has, such as a phone or
+tracker sending its position or one posting to a webhook, is **online** while it has been heard
+from in the last 15 minutes; a device that says nothing of whether it is on has neither **online**
+nor **offline**. Choose a card to open the device.
 
 - Type in the filter box to narrow the cards by label, name, what it is, manufacturer or model.
 - **Show** **All** devices or only those **Online**.
