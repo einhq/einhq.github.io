@@ -69,8 +69,9 @@ A tile for each endpoint:
   the last six hours.
 - **A button**: its last press, such as `single`, and how long ago it was ("pressed 4 min ago"), or
   "not pressed yet".
-- **A position**: a small map of the day up to its last position, how many positions the track holds
-  and when the last came. **Over time** opens it on the **History** tab.
+- **A position**: a small map of the day up to its last position, and that position: its
+  coordinates, its altitude, speed (in knots on a boat, km/h otherwise) and course when the device
+  sent them, and when it came. **Over time** opens it on the **History** tab.
 - **A switch or a light**: a toggle that switches it.
 - **A setting that takes a number**, such as a thermostat's target: a slider, set when you let go, or
   a box with **Set** when it has no range.

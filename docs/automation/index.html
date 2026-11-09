@@ -136,6 +136,10 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 <td>Anything else on the network: whether it answers, and how fast</td>
 </tr>
 <tr>
+<td>The <code>http</code> driver</td>
+<td>A web API that answers JSON, asked at its address for the readings you name: the weather, the price of electricity, a Shelly or Tasmota over HTTP; see <a href="#a-web-api">A web API</a></td>
+</tr>
+<tr>
 <td>The <code>automation-bridge</code> service</td>
 <td>Hears the broker and runs the drivers</td>
 </tr>
@@ -168,7 +172,8 @@ propose switching them.</p>
 <li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through. The
 installer runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
 <li><strong>Devices that speak MQTT</strong>: those running ESPHome, and Shelly&#39;s of every generation. Printers,
-Google Cast speakers and anything else on the network are asked directly, once added.</li>
+Google Cast speakers, web APIs and anything else on the network are asked directly, once added;
+the bridge that asks them runs while a broker is set.</li>
 <li>Nothing else: neither the Archive nor the media service.</li>
 </ul>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
@@ -368,6 +373,99 @@ with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its fir
 <code>input-0</code> for a button&#39;s presses: <code>single</code>, <code>double</code>, <code>triple</code>, <code>long</code>, <code>single-long</code> or
 <code>long-single</code>. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.</p>
+<h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
+<p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
+name in its answer: today&#39;s weather, the price of electricity this hour, or a Shelly or Tasmota that
+you would rather ask over HTTP than connect to the broker. Nothing announces such a device; a member
+of <code>devices</code> makes it in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create Weather --driver http \
+  --config <span class="hljs-string">&#x27;url=https://api.open-meteo.com/v1/forecast?latitude=57.7&amp;longitude=11.97&amp;current=temperature_2m,wind_speed_10m&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=temperature=current.temperature_2m °C; wind=current.wind_speed_10m m/s&#x27;</span> \
+  --config interval=15m</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>The address to ask. <code>{date}</code> (2026-11-09), <code>{year}</code>, <code>{month}</code>, <code>{day}</code> and <code>{hour}</code> in it become the day and hour it is asked at, in EiN&#39;s time zone. A user and password in it, <code>http://admin:secret@192.0.2.20/status</code>, are sent as the device&#39;s sign-in.</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td>The readings, <code>name=path unit</code>, separated by <code>;</code>. Each becomes an endpoint of that name; the unit may be left out.</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>How often it is asked: seconds, or <code>30s</code>, <code>15m</code>, <code>1h</code>. Five minutes unless given, and ten seconds at the least.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A path walks the answer from the top:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>current.temperature_2m</code></td>
+<td>a field of a field</td>
+</tr>
+<tr>
+<td><code>switch:0.apower</code></td>
+<td>a field whose name has a colon in it, such as a Shelly&#39;s</td>
+</tr>
+<tr>
+<td><code>StatusSNS.ENERGY[&#39;Total Today&#39;]</code></td>
+<td>a field whose name has a space in it</td>
+</tr>
+<tr>
+<td><code>meters[0].power</code>, <code>items[-1].value</code></td>
+<td>the first item of a list, the last</td>
+</tr>
+<tr>
+<td><code>[time_start..time_end].SEK_per_kWh</code></td>
+<td>the item of a list whose <code>time_start</code> has come and whose <code>time_end</code> has not: this hour&#39;s price</td>
+</tr>
+<tr>
+<td><code>[from..].price</code></td>
+<td>the last item whose <code>from</code> has come, for a list that gives only when each starts</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>the whole answer, for an address that answers a number or a word as plain text</td>
+</tr>
+</tbody></table>
+</div>
+<p>A number written as text, <code>&quot;0.42&quot;</code>, is kept as a number; a list or an object is not kept. A device
+whose answer has none of its readings, or that does not answer, is offline until it does, and the
+bridge&#39;s log says why once. A reading&#39;s unit says what it is: <code>°C</code> is a temperature, <code>W</code> power and
+<code>kWh</code> energy, so the device&#39;s card shows it first.</p>
+<p>Some more:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># the price of electricity this hour, in Swedish price area SE3, from elprisetjustnu.se</span>
+device-create Electricity price --driver http \
+  --config <span class="hljs-string">&#x27;url=https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span> --config interval=5m
+
+<span class="hljs-comment"># a Shelly of the second generation, over HTTP</span>
+device-create Garage plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.31/rpc/Shelly.GetStatus&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=power=switch:0.apower W; on=switch:0.output; temperature=switch:0.temperature.tC °C&#x27;</span> --config interval=30s
+
+<span class="hljs-comment"># a Tasmota plug</span>
+device-create Desk plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.32/cm?cmnd=Status%2010&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=power=StatusSNS.ENERGY.Power W; today=StatusSNS.ENERGY.Today kWh&#x27;</span> --config interval=30s</code></pre></div>
+<p>A device of the <code>http</code> driver only reads: its endpoints are readings, and a Shelly or Tasmota asked
+this way is switched from its own page. Connect it to the broker to switch it from EiN. A config
+<code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, or forget it
+and make it again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>attrs -J <span class="hljs-string">&#x27;config={&quot;url&quot;:&quot;https://…&quot;,&quot;read&quot;:&quot;price=[time_start..time_end].SEK_per_kWh SEK/kWh&quot;}&#x27;</span> /dev/electricity-price</code></pre></div>
+<p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
+EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
 <h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automation-status</code></pre></div>
@@ -411,7 +509,7 @@ automation-status</code></pre></div>
 <p>The dashboard says the same: its <code>automation bridge</code> check is fine while the bridge is connected,
 a warning while it cannot reach the broker, and failed while its service is stopped
 (<a href="../admin/monitoring.html#read-the-checks">Health and the dashboard</a>). <code>devices --drivers</code> lists the
-three drivers with their devices while the bridge runs.</p>
+drivers with their devices while the bridge runs.</p>
 <h2 id="what-a-device-becomes">What a device becomes<a class="anchor" href="#what-a-device-becomes" aria-label="Link to this section"></a></h2>
 <p>Each thing a device announces becomes an endpoint of the device under <code>/dev</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -676,7 +774,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
