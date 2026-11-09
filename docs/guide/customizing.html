@@ -707,7 +707,7 @@ same kind of file to <code>/etc/ui/nav.json</code>. It applies to every account 
 person&#39;s own file is laid over it.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 edit /etc/ui/nav.json</code></pre></div>
-<p>Two fields show an entry to some people only. They work in any file, but the file for everyone is
+<p>Three fields show an entry to some people only. They work in any file, but the file for everyone is
 where they matter:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -724,10 +724,14 @@ where they matter:</p>
 <td><code>&quot;signedIn&quot;: true</code></td>
 <td>Only to someone signed in, never to a visitor browsing without signing in, where <a href="../reference/settings.html#cfg_guest_browsing"><strong>Visitors may browse</strong></a> is on.</td>
 </tr>
+<tr>
+<td><code>&quot;group&quot;: &quot;devices&quot;</code></td>
+<td>Only to the members of that group, and to administrators.</td>
+</tr>
 </tbody></table>
 </div>
 <p>EiN uses them itself: <strong>Nodes</strong> and <strong>Dashboard</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
-and the account menu are <code>signedIn</code>.</p>
+and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s.</p>
 <p>This file, for a family with no cameras to register and no devices, hides <strong>Cameras</strong> and
 <strong>Devices</strong> in the sidebar and <strong>Camera</strong> in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
 button that reruns failed work with

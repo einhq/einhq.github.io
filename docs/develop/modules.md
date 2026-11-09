@@ -382,7 +382,8 @@ A top-bar entry's `action` is `{ "navigate": "/recipes" }` for the page, `{ "dia
 for the dialog over it, `{ "drawer": … }` for the side drawer and `{ "fullscreen": … }` for over
 everything; `{ "run": … }` runs a command line instead, and with `navigate` beside it goes where the
 command's answer says. Each entry's `id` is `<module>.<name>`. `icon` is a Tabler icon name. `admin: true` shows
-an entry to administrators only, `signedIn: true` to people who are signed in. `ui-nav` prints the
+an entry to administrators only, `signedIn: true` to people who are signed in, `group: "<group>"` to that group's
+members and administrators. `ui-nav` prints the
 navigation as the reader gets it, with a warning for each entry it left out and why.
 
 The administrator and each person can move, rename and hide a module's entries;

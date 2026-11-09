@@ -181,7 +181,9 @@ positions.
 
 A phone that reports where it is as it moves, a GPS tracker on a boat or in a car, and a logger whose
 files you copy in are all devices driven by EiN's `tracker` driver, each keeping where it was in its
-`position` track. Members of the `devices` group make one:
+`position` track. Members of the `devices` group make one with **Create** › **Device** in the top
+bar: a name, **Reports by** (its position, for these), and **What it is**. **Create** opens the new
+device. Or in the terminal:
 
 ```bash
 # in EiN's terminal, as a member of devices

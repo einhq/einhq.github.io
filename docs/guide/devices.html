@@ -265,7 +265,9 @@ positions.</p>
 <h2 id="a-phone-or-a-gps-tracker">A phone or a GPS tracker<a class="anchor" href="#a-phone-or-a-gps-tracker" aria-label="Link to this section"></a></h2>
 <p>A phone that reports where it is as it moves, a GPS tracker on a boat or in a car, and a logger whose
 files you copy in are all devices driven by EiN&#39;s <code>tracker</code> driver, each keeping where it was in its
-<code>position</code> track. Members of the <code>devices</code> group make one:</p>
+<code>position</code> track. Members of the <code>devices</code> group make one with <strong>Create</strong> › <strong>Device</strong> in the top
+bar: a name, <strong>Reports by</strong> (its position, for these), and <strong>What it is</strong>. <strong>Create</strong> opens the new
+device. Or in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone
 device-create <span class="hljs-string">&#x27;Sailboat&#x27;</span> --driver tracker --class boat

@@ -535,16 +535,17 @@ person's own file is laid over it.
 edit /etc/ui/nav.json
 ```
 
-Two fields show an entry to some people only. They work in any file, but the file for everyone is
+Three fields show an entry to some people only. They work in any file, but the file for everyone is
 where they matter:
 
-| Field              | The entry is shown                                                                                                                                             |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `"admin": true`    | Only to administrators: the `admin` account and anyone in admin mode. In your own file, it shows the entry only while you are in admin mode.                   |
-| `"signedIn": true` | Only to someone signed in, never to a visitor browsing without signing in, where [**Visitors may browse**](../reference/settings.md#cfg_guest_browsing) is on. |
+| Field                | The entry is shown                                                                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"admin": true`      | Only to administrators: the `admin` account and anyone in admin mode. In your own file, it shows the entry only while you are in admin mode.                   |
+| `"signedIn": true`   | Only to someone signed in, never to a visitor browsing without signing in, where [**Visitors may browse**](../reference/settings.md#cfg_guest_browsing) is on. |
+| `"group": "devices"` | Only to the members of that group, and to administrators.                                                                                                      |
 
 EiN uses them itself: **Nodes** and **Dashboard** are `admin`; **Staging**, **Settings**, **Create**
-and the account menu are `signedIn`.
+and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's.
 
 This file, for a family with no cameras to register and no devices, hides **Cameras** and
 **Devices** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
