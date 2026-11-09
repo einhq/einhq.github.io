@@ -174,9 +174,9 @@ With Docker, write `docker` for `podman`. `podman image prune` removes only imag
 
 ### The database
 
-With the Archive, the database grows by about 120 KB for each photo or video it indexes: the file's node, its renditions, its metadata, faces and the vectors search uses. The audit trail adds up to 80 KB more while it keeps the records of the pipelines that worked on the file, 14 days by default ([Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause)), so plan on 200 KB a file while an import runs; two weeks after it, the database is back near 120 KB a file. An exact copy of a file that is already there costs about 5 KB.
+With the Archive, the database grows by about 120 KB for each photo or video it indexes: the file's node, its renditions, its metadata, faces and the vectors search uses. The audit trail adds about 45 KB more for the records of the pipelines that worked on the file. It keeps them for good, and after 14 days it compresses them to about 6 KB ([Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause)). So plan on 170 KB a file while an import runs; two weeks after it, the database is near 130 KB a file. An exact copy of a file that is already there costs about 5 KB.
 
-PostgreSQL also needs room of its own to clean up and rebuild indexes, so keep at least 10 GB free on the disk the database is on. Before a large import, multiply its number of photos and videos by 200 KB: 100,000 files need about 20 GB, plus those 10 GB. When the data folder's disk is too small for it, put the database on another disk with the installer's `--db-dir`, as [Move the data folder to another disk](data.md#move-the-data-folder-to-another-disk) describes; `df` in EiN's terminal shows the database's size.
+PostgreSQL also needs room of its own to clean up and rebuild indexes, so keep at least 10 GB free on the disk the database is on. Before a large import, multiply its number of photos and videos by 170 KB: 100,000 files need about 17 GB, plus those 10 GB. When the data folder's disk is too small for it, put the database on another disk with the installer's `--db-dir`, as [Move the data folder to another disk](data.md#move-the-data-folder-to-another-disk) describes; `df` in EiN's terminal shows the database's size.
 
 ## Watch it keep up
 

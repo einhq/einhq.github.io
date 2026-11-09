@@ -228,16 +228,16 @@ A detached job writes its output to `/var/logs/jobs/<pid>/stdout.log` and `stder
 
 There is no `logs` command. The system log, each service's output and the metrics series under `/var/logs/metrics` are log nodes, read with `dmesg`, `tail`, `cat` and `log-read`.
 
-| Task                                                      | Command                                                                                | Reference                                                |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| The system log                                            | `dmesg -n 50`                                                                          | [dmesg](../reference/commands-core.md#dmesg)             |
-| The last ten problems                                     | `dmesg --level warn -n 10`                                                             | [dmesg](../reference/commands-core.md#dmesg)             |
-| Follow the system log as it grows                         | `tail -f /var/logs/system`                                                             | [tail](../reference/commands-core.md#tail)               |
-| A service's own output                                    | `tail -f /var/logs/services/metrics-sampler/stdout.log`, and `stderr.log` beside it    | [tail](../reference/commands-core.md#tail)               |
-| A log's entries over a time range                         | `log-read /var/logs/metrics/memory --since 24h`                                        | [log-read](../reference/commands-core.md#log-read)       |
-| A log summed up per hour, as a chart wants it             | `log-read /var/logs/metrics/memory --since 7d --bucket 1h --field usedBytes --agg max` | [log-read](../reference/commands-core.md#log-read)       |
-| Who changed, moved or removed what, _administrators only_ | `audit --user anna --since 2026-10-01 /archive/albums`                                 | [audit](../reference/commands-core.md#audit)             |
-| Remove pipelines' audit records older than a week         | `audit-purge --older-than 7d --pipeline`                                               | [audit-purge](../reference/commands-core.md#audit-purge) |
+| Task                                                               | Command                                                                                | Reference                                          |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| The system log                                                     | `dmesg -n 50`                                                                          | [dmesg](../reference/commands-core.md#dmesg)       |
+| The last ten problems                                              | `dmesg --level warn -n 10`                                                             | [dmesg](../reference/commands-core.md#dmesg)       |
+| Follow the system log as it grows                                  | `tail -f /var/logs/system`                                                             | [tail](../reference/commands-core.md#tail)         |
+| A service's own output                                             | `tail -f /var/logs/services/metrics-sampler/stdout.log`, and `stderr.log` beside it    | [tail](../reference/commands-core.md#tail)         |
+| A log's entries over a time range                                  | `log-read /var/logs/metrics/memory --since 24h`                                        | [log-read](../reference/commands-core.md#log-read) |
+| A log summed up per hour, as a chart wants it                      | `log-read /var/logs/metrics/memory --since 7d --bucket 1h --field usedBytes --agg max` | [log-read](../reference/commands-core.md#log-read) |
+| Who changed, moved or removed what, _administrators only_          | `audit --user anna --since 2026-10-01 /archive/albums`                                 | [audit](../reference/commands-core.md#audit)       |
+| Every change under a folder, older ones too, _administrators only_ | `audit --all /archive/albums`                                                          | [audit](../reference/commands-core.md#audit)       |
 
 The system log starts empty at every start of EiN, and a service's two log files start empty at every start of that service.
 

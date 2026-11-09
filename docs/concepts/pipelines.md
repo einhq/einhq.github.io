@@ -519,12 +519,18 @@ instances, queues and pools live, are not recorded, nor are session and terminal
 What a run makes belongs to whoever made the subject, so a thumbnail of Helen Okafor's photo is
 hers. The [audit command](../reference/commands-core.md#audit) lists every filter.
 
-The writes of runs are most of the trail, about ninety records for each photo an import indexes, so
-the `audit-purger` service removes them after 14 days, the setting **Days the audit trail keeps
-pipelines' writes** (`CFG_AUDIT_PIPELINE_RETENTION_DAYS`). Every other write, by people, imports
-and services, is kept until **Days the audit trail keeps every other write**
-(`CFG_AUDIT_RETENTION_DAYS`), which is 0, for good, unless you set it. `audit-purge` removes records
-by hand: `audit-purge --older-than 7d --pipeline`.
+The trail is kept for good, so every node keeps its whole history, whoever or whatever wrote it.
+The writes of runs are most of it, about ninety records for each photo an import indexes, so
+records older than 14 days are compressed, to about a seventh of their size. `audit` reads the last
+14 days unless you give it `--all` or a time range with `--since` and `--until`. A node's history
+(`--id`), one record (`--record`), what a write set off (`--cause`) and a session's writes
+(`--sid`) are found in the whole trail, and as quickly. Reading older records only by path or user
+takes longer: the trail has to be read through for them.
+
+```bash
+# in EiN's terminal, as an administrator: every change under an album, however old
+audit --all /archive/albums/wrenfield-summer-1987
+```
 
 ## What pipelines do not do
 

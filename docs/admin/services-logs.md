@@ -19,7 +19,7 @@ Core brings ten services, the first ten below, and they are all an EiN without m
 | `session-reaper`    | core      | Removes expired sessions, and turns off expired share links; hourly                                                                                                                                                                         |
 | `tmp-sweeper`       | core      | Removes files left in `/tmp` once they are older than `CFG_TMP_RETENTION_HOURS`; hourly                                                                                                                                                     |
 | `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                                                                                                                             |
-| `audit-purger`      | core      | Removes audit records once they are older than `CFG_AUDIT_PIPELINE_RETENTION_DAYS` or `CFG_AUDIT_RETENTION_DAYS`, and access-log records older than `CFG_ACCESS_LOG_RETENTION_DAYS`; twice a day                                            |
+| `access-log-purger` | core      | Removes access-log records once they are older than `CFG_ACCESS_LOG_RETENTION_DAYS`; twice a day                                                                                                                                            |
 | `archive-bridge`    | archive   | Turns changes in the tree into the Archive's facts that pipelines trigger on: a file dated and placed, a face found, staging, albums and locations changed                                                                                  |
 | `media-heal`        | archive   | Starts a pass of the `media-heal` pipeline when one is due, which closes media gaps nothing announced, such as a pipeline never run on a file or work a crash lost                                                                          |
 | `album-metadata`    | archive   | Keeps each album's photo stacks, time span and cover current                                                                                                                                                                                |
@@ -117,9 +117,9 @@ On an EiN with the Archive and the `ems` module, it starts:
 ```text
 NAME                 MODULE         STATUS      ENABLED  RESTARTS DESCRIPTION
 -------------------- -------------- ----------- -------- -------- -----------
+access-log-purger    core           running     yes      0        Removes access-log records once they are older than their retention
 album-metadata       archive        running     yes      0        Keeps each album's photo stacks, denormalized time span and cover current
 archive-bridge       archive        running     yes      0        Turns VFS mutations into the archive's facts — a file dated and placed, a face found, staging, albums and locations changed — that pipelines trigger on
-audit-purger         core           running     yes      0        Removes audit and access-log records once they are older than their retention
 ems-link             ems            running     yes      0        Watches the media service and reports what it holds
                                     not answering
 …

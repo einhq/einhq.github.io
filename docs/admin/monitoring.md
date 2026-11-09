@@ -144,7 +144,7 @@ With the Archive, a warning such as `pooled step could not run yet, job waiting`
 | **downloaded zip**                                 | Several files were downloaded as one zip; the row names the folder that holds them and how many there were.                                                                                                                                |
 | **created**, **changed**, **moved**, **deleted** … | A change to the archive, from the audit trail: the row names the kind of node and, for a change, what changed.                                                                                                                             |
 
-Each row has the time, the account, where the event happened (a path), how it came (`web`, `terminal`, `ssh`, `sftp` or `http`) and from which address, and the session. Choose a name, path, address or session in a row to show only that; the session shows a sign-in together with everything that sign-in changed. Above the list you can show only **Sign-ins**, **Failures**, **Downloads**, **Share links** or **Changes**, and narrow by user, path, address, session and days. **Show more** reads further back.
+Each row has the time, the account, where the event happened (a path), how it came (`web`, `terminal`, `ssh`, `sftp` or `http`) and from which address, and the session. Choose a name, path, address or session in a row to show only that; the session shows a sign-in together with everything that sign-in changed. Above the list you can show only **Sign-ins**, **Failures**, **Downloads**, **Share links** or **Changes**, and narrow by user, path, address, session and days. **Show more** reads further back. Changes are read from the last 14 days; at the end of the list, **Show older changes** reads the rest, which takes longer. Choosing days or a session reads those days or that session, however old.
 
 What pipelines derive from each file (thumbnails, faces, text) is left out of the changes unless you turn on **Include what pipelines derived**: there are about ninety such records for every photo.
 
@@ -157,7 +157,7 @@ access-log /archive/albums/wrenfield-summer-1987 --event download --event downlo
 audit --sid session-01JC4ZK3E2 --no-pipeline
 ```
 
-EiN keeps sign-ins and downloads for a year: the `audit-purger` service removes older ones, after **Days the access log keeps sign-ins and downloads** ([`CFG_ACCESS_LOG_RETENTION_DAYS`](../reference/settings.md#cfg_access_log_retention_days), 0 keeps them for good). Changes are kept as [Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause) describes.
+EiN keeps sign-ins and downloads for a year: the `access-log-purger` service removes older ones, after **Days the access log keeps sign-ins and downloads** ([`CFG_ACCESS_LOG_RETENTION_DAYS`](../reference/settings.md#cfg_access_log_retention_days), 0 keeps them for good). Changes are kept for good, as [Trace a result back to its cause](../concepts/pipelines.md#trace-a-result-back-to-its-cause) describes.
 
 ## Ask in the terminal
 

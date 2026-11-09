@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 426 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 425 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 222 in full](commands-core.md).
+[All 221 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -31,8 +31,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [acl](commands-core.md#acl) | Display or modify a node access control list. |
 | [admin](commands-core.md#admin) | Become the administrator in this terminal, for a member of the sudo group (user-elevate) |
 | [attrs](commands-core.md#attrs) | Display or set node attributes. |
-| [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only) |
-| [audit-purge](commands-core.md#audit-purge) | Remove audit records older than a given age, so the audit trail does not grow without bound (administrators only) |
+| [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only). Reads the last 14 days unless given --all, a time range, or a record, node, session or cause to find. |
 | [awk](commands-core.md#awk) | Pattern scanning and text processing language (fields, patterns, arrays, printf) |
 | [basename](commands-core.md#basename) | Strip directory and suffix from filenames. |
 | [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON) |
