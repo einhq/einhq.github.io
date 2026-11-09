@@ -253,8 +253,8 @@ nodes:
 ```
 
 The heater goes on once the hall has been below 19 °C for ten minutes and nobody is away, and off
-once it has been above 21 °C for five. `indoors/away` is any device's endpoint that says whether
-the house is empty.
+once it has been above 21 °C for five. `indoors/away` is a switch of a
+[virtual device](virtual-devices.md), which whoever leaves last turns on.
 
 ### A button toggles a lamp
 

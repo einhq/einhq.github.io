@@ -128,6 +128,7 @@
 
 - [Automation](automation/index.md)
 - [Automations](automation/automations.md)
+- [Virtual devices](automation/virtual-devices.md)
 - [Automation commands](automation/commands.md)
 
 ## Media

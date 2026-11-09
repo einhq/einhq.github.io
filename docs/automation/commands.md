@@ -2,9 +2,9 @@
 
 # Automation commands
 
-The commands the automation module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the automation module adds. They are there once the module is installed. 15 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[automation-adopt](#automation-adopt) · [automation-bridge](#automation-bridge) · [automation-found](#automation-found) · [automation-ignore](#automation-ignore) · [automation-rule-check](#automation-rule-check) · [automation-rules](#automation-rules) · [automation-snmp](#automation-snmp) · [automation-status](#automation-status)
+[automation-adopt](#automation-adopt) · [automation-bridge](#automation-bridge) · [automation-check](#automation-check) · [automation-disable](#automation-disable) · [automation-enable](#automation-enable) · [automation-engine](#automation-engine) · [automation-found](#automation-found) · [automation-ignore](#automation-ignore) · [automation-new](#automation-new) · [automation-set](#automation-set) · [automation-show](#automation-show) · [automation-snmp](#automation-snmp) · [automation-status](#automation-status) · [automation-trigger](#automation-trigger) · [automations](#automations)
 
 ## A
 
@@ -41,6 +41,80 @@ automation-bridge
 
 ```bash
 service restart automation-bridge
+```
+
+### `automation-check`
+
+What is wrong with an automation, and what each of its nodes would say now, from the latest readings the caller may read; no action is run.
+
+<small>reads only</small>
+
+```text
+automation-check [--yaml=<string>] <automation>
+```
+
+| Argument       | What it is                            |
+| -------------- | ------------------------------------- |
+| `<automation>` | <name>, <module>/<name>, or its file. |
+
+| Option            | What it does                                      |
+| ----------------- | ------------------------------------------------- |
+| `--yaml=<string>` | check this YAML instead, a draft not yet written. |
+
+```bash
+automation-check hall-light
+```
+
+With `JSON_OUTPUT=1`: AutomationCheck: name, problems, nodes (each node: value, at, due, problem, messages), endpoints (endpoint, readable, value, at)
+
+### `automation-disable`
+
+Turn an automation off: a person's by whoever may change its file, a module's by the administrator.
+
+<small>changes things</small>
+
+```text
+automation-disable <automation>
+```
+
+| Argument       | What it is                            |
+| -------------- | ------------------------------------- |
+| `<automation>` | <name>, <module>/<name>, or its file. |
+
+```bash
+automation-disable hall-light
+```
+
+### `automation-enable`
+
+Turn an automation on: a person's by whoever may change its file, a module's by the administrator.
+
+<small>changes things</small>
+
+```text
+automation-enable <automation>
+```
+
+| Argument       | What it is                            |
+| -------------- | ------------------------------------- |
+| `<automation>` | <name>, <module>/<name>, or its file. |
+
+```bash
+automation-enable hall-light
+```
+
+### `automation-engine`
+
+Run the automations under /etc/automations and /etc/automations.d when a reading, a press, a device coming or going or the clock says so, each as its owner (the automation-engine service)
+
+<small>administrators only · changes things</small>
+
+```text
+automation-engine
+```
+
+```bash
+service restart automation-engine
 ```
 
 ### `automation-found`
@@ -94,45 +168,78 @@ automation-ignore d0ad08c5e709
 automation-ignore d0ad08c5e709 --undo
 ```
 
-### `automation-rule-check`
+### `automation-new`
 
-Check an automation rule: what makes it run, whether its conditions hold now and whose rights its lines run with, or why it is not run; with --run, run its lines now.
+Make an automation under /etc/automations, empty or from a starting point (members of the automation group)
+
+<small>changes things</small>
+
+```text
+automation-new [--from=<string>] [--examples] <name>
+```
+
+| Argument | What it is                             |
+| -------- | -------------------------------------- |
+| `<name>` | its name: letters, digits, ., - and _. |
+
+| Option            | What it does                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| `--from=<string>` | a starting point: motion-light, button-toggle, heater, morning. |
+| `--examples`      | list the starting points.                                       |
+
+```bash
+automation-new hall-light --from motion-light
+automation-new --examples
+```
+
+With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems.
+
+### `automation-set`
+
+Write an automation's YAML, made when it is new; one with problems is refused unless --draft.
+
+<small>changes things</small>
+
+```text
+automation-set [--yaml=<string>] [--json=<string>] [--draft] <automation>
+```
+
+| Argument       | What it is          |
+| -------------- | ------------------- |
+| `<automation>` | <name> or its file. |
+
+| Option            | What it does                                                    |
+| ----------------- | --------------------------------------------------------------- |
+| `--yaml=<string>` | the YAML, written as given.                                     |
+| `--json=<string>` | its graph as JSON, written as YAML.                             |
+| `--draft`         | write it even with problems; it is not run until they are gone. |
+
+```bash
+automation-set hall-light < hall-light.yaml
+automation-set hall-light --yaml "$text" --draft
+```
+
+With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems.
+
+### `automation-show`
+
+An automation's YAML, whose it is, whether it runs and what is wrong with it; in JSON mode also its graph with every node placed.
 
 <small>reads only</small>
 
 ```text
-automation-rule-check [--run] <rule>
+automation-show <automation>
 ```
 
-| Argument | What it is                                                                    |
-| -------- | ----------------------------------------------------------------------------- |
-| `<rule>` | the rule by name (a file in /etc/automation/rules), or a path to a rule file. |
-
-| Option  | What it does                                |
-| ------- | ------------------------------------------- |
-| `--run` | run its lines now, as you, until one fails. |
+| Argument       | What it is                            |
+| -------------- | ------------------------------------- |
+| `<automation>` | <name>, <module>/<name>, or its file. |
 
 ```bash
-automation-rule-check hall-light
-automation-rule-check ~/draft.yaml
-automation-rule-check hall-light --run
+automation-show hall-light
 ```
 
-With `JSON_OUTPUT=1`: RuleCheck: name, path, owner, problem, description, when, if [{condition, holds}], then, ran [{line, code}].
-
-### `automation-rules`
-
-Run the rules under /etc/automation/rules when a reading, a press, a device coming or going or the clock says so, each as its file's owner (the automation-rules service)
-
-<small>administrators only · changes things</small>
-
-```text
-automation-rules
-```
-
-```bash
-service restart automation-rules
-```
+With `JSON_OUTPUT=1`: AutomationDetail: name, path, module, owner, description, enabled, running, nodes, problems, writable, text, spec.
 
 ### `automation-snmp`
 
@@ -165,23 +272,63 @@ With `JSON_OUTPUT=1`: SnmpObject[]: oid, type, value.
 
 ### `automation-status`
 
-Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the rules.
+Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the automations; or, given one, what each of its nodes last did.
 
 <small>reads only</small>
 
 ```text
-automation-status [--brief] [--checks] [--rules]
+automation-status [--brief] [--checks] [--automations] [<automation>]
 ```
 
-| Option     | What it does                                                  |
-| ---------- | ------------------------------------------------------------- |
-| `--brief`  | one line, as the services list shows it.                      |
-| `--checks` | the checks health reads, as JSON.                             |
-| `--rules`  | one line on the rules service, as the services list shows it. |
+| Argument         | What it is                           |
+| ---------------- | ------------------------------------ |
+| `[<automation>]` | one automation, whose nodes to show. |
+
+| Option          | What it does                                                      |
+| --------------- | ----------------------------------------------------------------- |
+| `--brief`       | one line, as the services list shows it.                          |
+| `--checks`      | the checks health reads, as JSON.                                 |
+| `--automations` | one line on the automation engine, as the services list shows it. |
 
 ```bash
 automation-status
 automation-status --brief
+automation-status hall-light
 ```
 
-With `JSON_OUTPUT=1`: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, rules {count, runs, problems}.
+With `JSON_OUTPUT=1`: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes.
+
+### `automation-trigger`
+
+Press a button node of a running automation: what it is wired to runs now, as its owner.
+
+<small>changes things</small>
+
+```text
+automation-trigger <automation> <node>
+```
+
+| Argument       | What it is                            |
+| -------------- | ------------------------------------- |
+| `<automation>` | <name>, <module>/<name>, or its file. |
+| `<node>`       | the button node.                      |
+
+```bash
+automation-trigger hall-light try-it
+```
+
+### `automations`
+
+The automations, whose each is, whether it runs, and what is wrong with those that do not.
+
+<small>reads only</small>
+
+```text
+automations
+```
+
+```bash
+automations
+```
+
+With `JSON_OUTPUT=1`: AutomationSummary[]: name, path, module, owner, description, enabled, running, nodes, problems, writable.

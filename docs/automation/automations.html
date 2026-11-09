@@ -77,7 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
-<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html" aria-current="page">Automations</a></li><li><a href="commands.html">Automation commands</a></li></ul></section>
+<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html" aria-current="page">Automations</a></li><li><a href="virtual-devices.html">Virtual devices</a></li><li><a href="commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -457,8 +457,8 @@ hour ago does not toggle a lamp now. A time of day that passed meanwhile is not 
   <span class="hljs-attr">heater-on:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">heater-plug/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">on</span> }
   <span class="hljs-attr">heater-off:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">heater-plug/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">off</span> }</code></pre></div>
 <p>The heater goes on once the hall has been below 19 °C for ten minutes and nobody is away, and off
-once it has been above 21 °C for five. <code>indoors/away</code> is any device&#39;s endpoint that says whether
-the house is empty.</p>
+once it has been above 21 °C for five. <code>indoors/away</code> is a switch of a
+<a href="virtual-devices.html">virtual device</a>, which whoever leaves last turns on.</p>
 <h3 id="a-button-toggles-a-lamp">A button toggles a lamp<a class="anchor" href="#a-button-toggles-a-lamp" aria-label="Link to this section"></a></h3>
 <div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new porch --from button-toggle</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">press</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">porch</span> <span class="hljs-string">button</span> <span class="hljs-string">switches</span> <span class="hljs-string">the</span> <span class="hljs-string">hall</span> <span class="hljs-string">lamp</span> <span class="hljs-string">on</span> <span class="hljs-string">or</span> <span class="hljs-string">off</span>
@@ -569,7 +569,7 @@ same.</p>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="index.html" rel="prev"><span>Previous</span>Automation</a><a class="next" href="commands.html" rel="next"><span>Next</span>Automation commands</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="index.html" rel="prev"><span>Previous</span>Automation</a><a class="next" href="virtual-devices.html" rel="next"><span>Next</span>Virtual devices</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

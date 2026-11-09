@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Automation commands – EiN documentation</title>
-    <meta name="description" content="The commands the automation module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="description" content="The commands the automation module adds. They are there once the module is installed. 15 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/automation/commands.html">
     <meta property="og:title" content="Automation commands – EiN documentation">
-    <meta property="og:description" content="The commands the automation module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:description" content="The commands the automation module adds. They are there once the module is installed. 15 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -77,7 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
-<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html">Automations</a></li><li><a href="commands.html" aria-current="page">Automation commands</a></li></ul></section>
+<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html">Automations</a></li><li><a href="virtual-devices.html">Virtual devices</a></li><li><a href="commands.html" aria-current="page">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -93,8 +93,8 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>The commands the automation module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
-<p><a href="#automation-adopt">automation-adopt</a> · <a href="#automation-bridge">automation-bridge</a> · <a href="#automation-found">automation-found</a> · <a href="#automation-ignore">automation-ignore</a> · <a href="#automation-rule-check">automation-rule-check</a> · <a href="#automation-rules">automation-rules</a> · <a href="#automation-snmp">automation-snmp</a> · <a href="#automation-status">automation-status</a></p>
+<p>The commands the automation module adds. They are there once the module is installed. 15 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#automation-adopt">automation-adopt</a> · <a href="#automation-bridge">automation-bridge</a> · <a href="#automation-check">automation-check</a> · <a href="#automation-disable">automation-disable</a> · <a href="#automation-enable">automation-enable</a> · <a href="#automation-engine">automation-engine</a> · <a href="#automation-found">automation-found</a> · <a href="#automation-ignore">automation-ignore</a> · <a href="#automation-new">automation-new</a> · <a href="#automation-set">automation-set</a> · <a href="#automation-show">automation-show</a> · <a href="#automation-snmp">automation-snmp</a> · <a href="#automation-status">automation-status</a> · <a href="#automation-trigger">automation-trigger</a> · <a href="#automations">automations</a></p>
 <h2 id="a">A<a class="anchor" href="#a" aria-label="Link to this section"></a></h2>
 <h3 id="automation-adopt"><code>automation-adopt</code><a class="anchor" href="#automation-adopt" aria-label="Link to this section"></a></h3>
 <p>Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)</p>
@@ -121,6 +121,79 @@ automation-adopt 7c2ebd614055</code></pre></div>
 <p><small>administrators only · changes things</small></p>
 <div class="code"><pre tabindex="0"><code>automation-bridge</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>service restart automation-bridge</code></pre></div>
+<h3 id="automation-check"><code>automation-check</code><a class="anchor" href="#automation-check" aria-label="Link to this section"></a></h3>
+<p>What is wrong with an automation, and what each of its nodes would say now, from the latest readings the caller may read; no action is run.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>automation-check [--yaml=&lt;string&gt;] &lt;automation&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name>, <module>/<name>, or its file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--yaml=&lt;string&gt;</code></td>
+<td>check this YAML instead, a draft not yet written.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-check hall-light</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationCheck: name, problems, nodes (each node: value, at, due, problem, messages), endpoints (endpoint, readable, value, at)</p>
+<h3 id="automation-disable"><code>automation-disable</code><a class="anchor" href="#automation-disable" aria-label="Link to this section"></a></h3>
+<p>Turn an automation off: a person&#39;s by whoever may change its file, a module&#39;s by the administrator.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-disable &lt;automation&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name>, <module>/<name>, or its file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-disable hall-light</code></pre></div>
+<h3 id="automation-enable"><code>automation-enable</code><a class="anchor" href="#automation-enable" aria-label="Link to this section"></a></h3>
+<p>Turn an automation on: a person&#39;s by whoever may change its file, a module&#39;s by the administrator.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-enable &lt;automation&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name>, <module>/<name>, or its file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-enable hall-light</code></pre></div>
+<h3 id="automation-engine"><code>automation-engine</code><a class="anchor" href="#automation-engine" aria-label="Link to this section"></a></h3>
+<p>Run the automations under /etc/automations and /etc/automations.d when a reading, a press, a device coming or going or the clock says so, each as its owner (the automation-engine service)</p>
+<p><small>administrators only · changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-engine</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>service restart automation-engine</code></pre></div>
 <h3 id="automation-found"><code>automation-found</code><a class="anchor" href="#automation-found" aria-label="Link to this section"></a></h3>
 <p>The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group)</p>
 <p><small>reads only</small></p>
@@ -192,10 +265,10 @@ automation-found 7c2ebd614055</code></pre></div>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-ignore d0ad08c5e709
 automation-ignore d0ad08c5e709 --undo</code></pre></div>
-<h3 id="automation-rule-check"><code>automation-rule-check</code><a class="anchor" href="#automation-rule-check" aria-label="Link to this section"></a></h3>
-<p>Check an automation rule: what makes it run, whether its conditions hold now and whose rights its lines run with, or why it is not run; with --run, run its lines now.</p>
-<p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>automation-rule-check [--run] &lt;rule&gt;</code></pre></div>
+<h3 id="automation-new"><code>automation-new</code><a class="anchor" href="#automation-new" aria-label="Link to this section"></a></h3>
+<p>Make an automation under /etc/automations, empty or from a starting point (members of the automation group)</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-new [--from=&lt;string&gt;] [--examples] &lt;name&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -204,8 +277,8 @@ automation-ignore d0ad08c5e709 --undo</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;rule&gt;</code></td>
-<td>the rule by name (a file in /etc/automation/rules), or a path to a rule file.</td>
+<td><code>&lt;name&gt;</code></td>
+<td>its name: letters, digits, ., - and _.</td>
 </tr>
 </tbody></table>
 </div>
@@ -217,20 +290,78 @@ automation-ignore d0ad08c5e709 --undo</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--run</code></td>
-<td>run its lines now, as you, until one fails.</td>
+<td><code>--from=&lt;string&gt;</code></td>
+<td>a starting point: motion-light, button-toggle, heater, morning.</td>
+</tr>
+<tr>
+<td><code>--examples</code></td>
+<td>list the starting points.</td>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-rule-check hall-light
-automation-rule-check ~/draft.yaml
-automation-rule-check hall-light --run</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: RuleCheck: name, path, owner, problem, description, when, if [{condition, holds}], then, ran [{line, code}].</p>
-<h3 id="automation-rules"><code>automation-rules</code><a class="anchor" href="#automation-rules" aria-label="Link to this section"></a></h3>
-<p>Run the rules under /etc/automation/rules when a reading, a press, a device coming or going or the clock says so, each as its file&#39;s owner (the automation-rules service)</p>
-<p><small>administrators only · changes things</small></p>
-<div class="code"><pre tabindex="0"><code>automation-rules</code></pre></div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>service restart automation-rules</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-new hall-light --from motion-light
+automation-new --examples</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems.</p>
+<h3 id="automation-set"><code>automation-set</code><a class="anchor" href="#automation-set" aria-label="Link to this section"></a></h3>
+<p>Write an automation&#39;s YAML, made when it is new; one with problems is refused unless --draft.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-set [--yaml=&lt;string&gt;] [--json=&lt;string&gt;] [--draft] &lt;automation&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name> or its file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--yaml=&lt;string&gt;</code></td>
+<td>the YAML, written as given.</td>
+</tr>
+<tr>
+<td><code>--json=&lt;string&gt;</code></td>
+<td>its graph as JSON, written as YAML.</td>
+</tr>
+<tr>
+<td><code>--draft</code></td>
+<td>write it even with problems; it is not run until they are gone.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-set hall-light &lt; hall-light.yaml
+automation-set hall-light --yaml <span class="hljs-string">&quot;<span class="hljs-variable">$text</span>&quot;</span> --draft</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems.</p>
+<h3 id="automation-show"><code>automation-show</code><a class="anchor" href="#automation-show" aria-label="Link to this section"></a></h3>
+<p>An automation&#39;s YAML, whose it is, whether it runs and what is wrong with it; in JSON mode also its graph with every node placed.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>automation-show &lt;automation&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name>, <module>/<name>, or its file.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-show hall-light</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationDetail: name, path, module, owner, description, enabled, running, nodes, problems, writable, text, spec.</p>
 <h3 id="automation-snmp"><code>automation-snmp</code><a class="anchor" href="#automation-snmp" aria-label="Link to this section"></a></h3>
 <p>Walk a device&#39;s SNMP objects under an OID (the system group unless one is given), for members of the devices group.</p>
 <p><small>reads only</small></p>
@@ -278,9 +409,22 @@ automation-snmp 192.0.2.40 1.3.6.1.2.1.25.2.3
 automation-snmp 192.0.2.40 1.3.6.1.4.1.4526 --community home</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: SnmpObject[]: oid, type, value.</p>
 <h3 id="automation-status"><code>automation-status</code><a class="anchor" href="#automation-status" aria-label="Link to this section"></a></h3>
-<p>Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the rules.</p>
+<p>Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the automations; or, given one, what each of its nodes last did.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>automation-status [--brief] [--checks] [--rules]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-status [--brief] [--checks] [--automations] [&lt;automation&gt;]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[&lt;automation&gt;]</code></td>
+<td>one automation, whose nodes to show.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -297,22 +441,51 @@ automation-snmp 192.0.2.40 1.3.6.1.4.1.4526 --community home</code></pre></div>
 <td>the checks health reads, as JSON.</td>
 </tr>
 <tr>
-<td><code>--rules</code></td>
-<td>one line on the rules service, as the services list shows it.</td>
+<td><code>--automations</code></td>
+<td>one line on the automation engine, as the services list shows it.</td>
 </tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-status
-automation-status --brief</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, rules {count, runs, problems}.</p>
+automation-status --brief
+automation-status hall-light</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes.</p>
+<h3 id="automation-trigger"><code>automation-trigger</code><a class="anchor" href="#automation-trigger" aria-label="Link to this section"></a></h3>
+<p>Press a button node of a running automation: what it is wired to runs now, as its owner.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>automation-trigger &lt;automation&gt; &lt;node&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;automation&gt;</code></td>
+<td><name>, <module>/<name>, or its file.</td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;</code></td>
+<td>the button node.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automation-trigger hall-light try-it</code></pre></div>
+<h3 id="automations"><code>automations</code><a class="anchor" href="#automations" aria-label="Link to this section"></a></h3>
+<p>The automations, whose each is, whether it runs, and what is wrong with those that do not.</p>
+<p><small>reads only</small></p>
+<div class="code"><pre tabindex="0"><code>automations</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>automations</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationSummary[]: name, path, module, owner, description, enabled, running, nodes, problems, writable.</p>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="automations.html" rel="prev"><span>Previous</span>Automations</a><a class="next" href="../media/index.html" rel="next"><span>Next</span>Media</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="virtual-devices.html" rel="prev"><span>Previous</span>Virtual devices</a><a class="next" href="../media/index.html" rel="next"><span>Next</span>Media</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a">A</a></li><li class="nested"><a href="#automation-adopt">automation-adopt</a></li><li class="nested"><a href="#automation-bridge">automation-bridge</a></li><li class="nested"><a href="#automation-found">automation-found</a></li><li class="nested"><a href="#automation-ignore">automation-ignore</a></li><li class="nested"><a href="#automation-rule-check">automation-rule-check</a></li><li class="nested"><a href="#automation-rules">automation-rules</a></li><li class="nested"><a href="#automation-snmp">automation-snmp</a></li><li class="nested"><a href="#automation-status">automation-status</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a">A</a></li><li class="nested"><a href="#automation-adopt">automation-adopt</a></li><li class="nested"><a href="#automation-bridge">automation-bridge</a></li><li class="nested"><a href="#automation-check">automation-check</a></li><li class="nested"><a href="#automation-disable">automation-disable</a></li><li class="nested"><a href="#automation-enable">automation-enable</a></li><li class="nested"><a href="#automation-engine">automation-engine</a></li><li class="nested"><a href="#automation-found">automation-found</a></li><li class="nested"><a href="#automation-ignore">automation-ignore</a></li><li class="nested"><a href="#automation-new">automation-new</a></li><li class="nested"><a href="#automation-set">automation-set</a></li><li class="nested"><a href="#automation-show">automation-show</a></li><li class="nested"><a href="#automation-snmp">automation-snmp</a></li><li class="nested"><a href="#automation-status">automation-status</a></li><li class="nested"><a href="#automation-trigger">automation-trigger</a></li><li class="nested"><a href="#automations">automations</a></li></ul></aside>
     </div>
   </body>
 </html>

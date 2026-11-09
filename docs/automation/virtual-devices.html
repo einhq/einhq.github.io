@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Virtual devices – EiN documentation</title>
+    <meta name="description" content="A virtual device is a device of the Automation module's virtual driver: its readings are worked out from other devices' readings, and its switches and settings hold whatever people and automations set them to. It is a device like any other under /dev, with its page, its history and its readings on the bus, and it is shared the same way. This page is for members of the devices group, who make devices.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/automation/virtual-devices.html">
+    <meta property="og:title" content="Virtual devices – EiN documentation">
+    <meta property="og:description" content="A virtual device is a device of the Automation module's virtual driver: its readings are worked out from other devices' readings, and its switches and settings hold whatever people and automations set them to. It is a device like any other under /dev, with its page, its history and its readings on the bus, and it is shared the same way. This page is for members of the devices group, who make devices.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/automation/virtual-devices.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html">Automations</a></li><li><a href="virtual-devices.html" aria-current="page">Virtual devices</a></li><li><a href="commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Virtual devices</span></button>
+        <header class="docs-head">
+          <p class="crumb">Automation</p>
+          <h1>Virtual devices</h1>
+        </header>
+        <article class="prose">
+<p>A virtual device is a device of the Automation module&#39;s <code>virtual</code> driver: its readings are worked
+out from other devices&#39; readings, and its switches and settings hold whatever people and
+automations set them to. It is a device like any other under <code>/dev</code>, with its page, its history and
+its readings on the bus, and it is shared the same way. This page is for members of the <code>devices</code>
+group, who make devices.</p>
+<p>Use one for:</p>
+<ul>
+<li><strong>A reading of the house, not of one sensor:</strong> the average temperature indoors, the warmest room,
+whether any window is open, how many lamps are on.</li>
+<li><strong>A switch or a setting with no hardware behind it:</strong> <em>away</em>, a <em>guest mode</em>, the temperature the
+heating aims for, which <a href="automations.html">automations</a> read and set.</li>
+<li><strong>Something to share in place of what it is made of:</strong> the house&#39;s average temperature shared
+with a guest, who sees no single room&#39;s sensor.</li>
+</ul>
+<h2 id="make-one">Make one<a class="anchor" href="#make-one" aria-label="Link to this section"></a></h2>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create indoors --label Indoors --class sensor --driver virtual \
+  --config <span class="hljs-string">&#x27;read=temperature=avg hall-sensor/temperature kitchen-sensor/temperature; open=any front-door/contact back-door/contact&#x27;</span> \
+  --config <span class="hljs-string">&#x27;set=away=bool; setpoint=number 5..30 0.5 °C&#x27;</span></code></pre></div>
+<p>This makes <code>/dev/indoors</code> with two readings, <code>temperature</code> (the average of the hall&#39;s and the
+kitchen&#39;s) and <code>open</code> (true while either door is), and two controls, <code>away</code> (on or off) and
+<code>setpoint</code> (5 to 30 in steps of 0.5 °C). <strong>New device</strong> on the <strong>Devices</strong> page makes one too: pick
+the <code>virtual</code> driver and fill in its readings and controls as above.</p>
+<h3 id="readings-read">Readings: <code>read</code><a class="anchor" href="#readings-read" aria-label="Link to this section"></a></h3>
+<p>Each reading is <code>name=&lt;what&gt; &lt;device&gt;/&lt;endpoint&gt; &lt;device&gt;/&lt;endpoint&gt; …</code>, separated by <code>;</code> or new
+lines. <code>&lt;what&gt;</code> is one of:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>The reading is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>avg</code></td>
+<td>The average of the sources&#39; numbers</td>
+</tr>
+<tr>
+<td><code>min</code></td>
+<td>The lowest</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>The highest</td>
+</tr>
+<tr>
+<td><code>sum</code></td>
+<td>Their sum: the power a whole floor draws</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>How many sources are on (true, open, a number other than 0)</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td>True while any source is on</td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td>True while every source is on</td>
+</tr>
+<tr>
+<td><code>last</code></td>
+<td>The newest source&#39;s reading: whichever of two thermometers spoke latest</td>
+</tr>
+</tbody></table>
+</div>
+<p>A reading is worked out again whenever one of its sources changes, from the latest reading of each,
+and kept when it changes. A source that has not reported yet is left out until it does. An average,
+a lowest, a highest and a sum take the unit of their sources when they share one.</p>
+<h3 id="controls-set">Controls: <code>set</code><a class="anchor" href="#controls-set" aria-label="Link to this section"></a></h3>
+<p>Each control is <code>name=&lt;kind&gt;</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>It holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool</code></td>
+<td>On or off; <code>toggle</code> turns it over</td>
+</tr>
+<tr>
+<td><code>number [min..max] [step] [unit]</code></td>
+<td>A number, such as <code>number 5..30 0.5 °C</code></td>
+</tr>
+<tr>
+<td><code>enum &lt;option&gt; &lt;option&gt; …</code></td>
+<td>One of the options, such as <code>enum eco comfort off</code></td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>Any text</td>
+</tr>
+<tr>
+<td><code>momentary</code></td>
+<td>Nothing: a press, which automations hear, as a button&#39;s</td>
+</tr>
+</tbody></table>
+</div>
+<p>Switch one as any control, on the device&#39;s page or with <code>echo on &gt; /dev/indoors/away</code>; it holds the
+value until it is set again. An automation reads it with a <code>device</code> node and sets it with a
+<code>control</code> node.</p>
+<h3 id="change-one">Change one<a class="anchor" href="#change-one" aria-label="Link to this section"></a></h3>
+<p>The config is the device&#39;s own, so changing it is changing its <code>config</code> attr; the driver sets the
+device up again, adding the readings and controls that are new and removing those that are gone,
+with their history:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+attrs -J <span class="hljs-string">&#x27;config={&quot;read&quot;: &quot;temperature=avg hall-sensor/temperature kitchen-sensor/temperature bedroom-sensor/temperature&quot;, &quot;set&quot;: &quot;away=bool&quot;}&#x27;</span> /dev/indoors</code></pre></div>
+<h2 id="who-sees-what">Who sees what<a class="anchor" href="#who-sees-what" aria-label="Link to this section"></a></h2>
+<p>A virtual device is the devices group&#39;s, as every device is, and is shared on its page or with
+<code>share-set</code> (<a href="../admin/devices.html#share-a-device">Share a device</a>).</p>
+<p>Its readings are worked out with the rights of the devices group and nobody&#39;s more. A source the
+group may not read, such as a motion sensor someone has narrowed to the parents, is refused, so a
+virtual device never shows anyone what its sources would not. A reading it works out is the group&#39;s
+to read, not to write: nobody adds a reading of their own to it.</p>
+<h2 id="when-one-does-not-work">When one does not work<a class="anchor" href="#when-one-does-not-work" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>device-create</code> says <code>the devices group may not read hall-sensor/motion, or there is no such endpoint</code></td>
+<td>The source is misspelt, gone, or narrowed to some people</td>
+<td>Correct it with <code>device-show</code>, or leave it out</td>
+</tr>
+<tr>
+<td><code>its readings go round in a circle: indoors → upstairs → indoors</code></td>
+<td>A virtual device reads itself, or two read each other</td>
+<td>Read the sources themselves</td>
+</tr>
+<tr>
+<td><code>the reading temperature takes one of avg, min, …</code></td>
+<td><code>&lt;what&gt;</code> is misspelt or missing</td>
+<td>Use one from <a href="#readings-read">Readings</a></td>
+</tr>
+<tr>
+<td>The device is <strong>offline</strong></td>
+<td>The <code>automation-engine</code> service, which runs the driver, is stopped, or its config stopped working</td>
+<td><code>service start automation-engine</code>, as the administrator; <code>service logs automation-engine</code> says why</td>
+</tr>
+<tr>
+<td>A reading stays empty</td>
+<td>None of its sources has reported since the device was made</td>
+<td>It fills in at their next reading</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="automations.html" rel="prev"><span>Previous</span>Automations</a><a class="next" href="commands.html" rel="next"><span>Next</span>Automation commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/virtual-devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#make-one">Make one</a></li><li class="nested"><a href="#readings-read">Readings: read</a></li><li class="nested"><a href="#controls-set">Controls: set</a></li><li class="nested"><a href="#change-one">Change one</a></li><li><a href="#who-sees-what">Who sees what</a></li><li><a href="#when-one-does-not-work">When one does not work</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -102,13 +102,14 @@ A driver is what turns a device's own language into endpoints and back: it reads
 sends and appends it to the endpoints, and it sends the device what is written to its controls. A
 device names its driver in its `driver` attribute.
 
-| Driver         | Comes with                                      | What it drives                                                                                               |
-| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track |
-| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading               |
-| `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others       |
-| `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                              |
-| `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                          |
+| Driver         | Comes with                                      | What it drives                                                                                                                                   |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track                                     |
+| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading                                                   |
+| `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others                                           |
+| `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                                                                  |
+| `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                              |
+| `virtual`      | the Automation module                           | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md) |
 
 `devices --drivers` lists the drivers running now, with the module each comes from and how many
 devices it drives. A module's drivers run while its service does: when the service is stopped, a
