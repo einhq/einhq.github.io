@@ -246,19 +246,19 @@ verdict=$(ssh -p 2222 helen@ein.local 'JSON_OUTPUT=1 health' | jq -r .verdict)
 
 ## Where the figures come from
 
-The `metrics-sampler` service records the machine's and the work's figures, one log per series under `/var/logs/metrics`, and the dashboard, `top` and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.
+The `metrics-sampler` service records EiN's own and the work's figures, one log per series under `/var/logs/metrics`, and the machine's as the readings of its device, `/dev/<machine>`; the dashboard, `top` and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.
 
-| Series      | What it holds                                             | How often  | Kept     |
-| ----------- | --------------------------------------------------------- | ---------- | -------- |
-| `cpu`       | Processor time used by the machine and by EiN's container | 15 seconds | 7 days   |
-| `memory`    | Memory in use against the container's limit               | 15 seconds | 7 days   |
-| `runtime`   | Event-loop lag                                            | 15 seconds | 7 days   |
-| `pools`     | Jobs per pool, by state                                   | 15 seconds | 7 days   |
-| `pipelines` | Instances completed per pipeline                          | 1 minute   | 30 days  |
-| `disk`      | Free and total space per storage tier                     | 15 minutes | 90 days  |
-| `nodes`     | How many nodes of each type                               | 15 minutes | 365 days |
+| Series      | What it holds                                     | How often  | Kept     |
+| ----------- | ------------------------------------------------- | ---------- | -------- |
+| `cpu`       | Processor time used by EiN's container            | 15 seconds | 7 days   |
+| `memory`    | EiN's container's memory in use against its limit | 15 seconds | 7 days   |
+| `runtime`   | Event-loop lag                                    | 15 seconds | 7 days   |
+| `pools`     | Jobs per pool, by state                           | 15 seconds | 7 days   |
+| `pipelines` | Instances completed per pipeline                  | 1 minute   | 30 days  |
+| `disk`      | Free and total space per storage tier             | 15 minutes | 90 days  |
+| `nodes`     | How many nodes of each type                       | 15 minutes | 365 days |
 
-With the `ems` module installed, its `gpu-sampler` service adds a `gpu` series, every 15 seconds, for the **EMS GPU** and **EMS VRAM** tiles, and an `ems-models` series, every minute, which holds the media service machine's memory for **EMS RAM**. Memory is read both ways: the whole machine's, and EiN's container's own, from its cgroup. CPU is read both ways too: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's share of it.
+With the `ems` module installed, its `gpu-sampler` service adds a `gpu` series, every 15 seconds, for the **EMS GPU** and **EMS VRAM** tiles, and an `ems-models` series, every minute, which holds the media service machine's memory for **EMS RAM**. Memory and CPU are read both ways: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's own, from its cgroup. The machine's are its device's readings, `cpu`, `load`, `memory-used` and `memory-total`, with its disks and temperatures beside them, kept for 30 days and a year; [Core's host driver](../concepts/devices.md#cores-host-driver) lists them, and the device's page under **Devices** charts them.
 
 How the tree has grown over the years is not on the dashboard: **Statistics**, under **System**, shows it, and anyone can open it ([Home and statistics](../guide/home.md)).
 

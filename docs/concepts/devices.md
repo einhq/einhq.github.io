@@ -172,6 +172,32 @@ again, and a number comes at most once every `minInterval` of its endpoint.
 
 The answer says how many readings were new, such as `{"taken": 2, "message": "2 of 2 readings new"}`.
 
+### Core's host driver
+
+The machine EiN runs on is a device too, `/dev/<machine>`, named after the machine without its
+domain, of class `host`. Nobody makes it: the `metrics-sampler` service writes its readings through
+the `host` driver, and makes the device and each endpoint the first time it has a reading for it.
+After `device-forget` it is made again at the next reading. Only the administrators see it
+([Devices for administrators](../admin/devices.md)).
+
+| Endpoint             | Reading                                                         | How often  | Kept     |
+| -------------------- | --------------------------------------------------------------- | ---------- | -------- |
+| `cpu`                | The share of all the machine's processor cores in use, in %     | 15 seconds | 30 days  |
+| `load`               | The 1-minute load average                                       | 15 seconds | 30 days  |
+| `memory-used`        | The share of the machine's memory in use, in %                  | 15 seconds | 30 days  |
+| `<zone>-temperature` | Each thermal zone the kernel has, such as `x86_pkg_temp`, in °C | 15 seconds | 30 days  |
+| `<disk>-used`        | The share of each disk in use, such as `sda1-used`, in %        | 15 minutes | 365 days |
+| `memory-total`       | The machine's memory, in GB                                     | 15 minutes | 365 days |
+| `uptime`             | Days since the machine started                                  | 15 minutes | 365 days |
+
+These are the whole machine's, whatever runs on it: the media service and the database load it from
+containers of their own. EiN's own share is on the System dashboard. A disk is each filesystem on a
+block device that EiN's container sees, once, wherever it is mounted. The load, the temperatures,
+the total and the uptime are about the machine itself (`diagnostic`), so the card shows the CPU.
+
+In an installation made with `setup.sh`, the machine's name is `EIN_HOSTNAME` in `.env`, which
+`setup.sh` writes ([Installing in detail](../admin/install.md#env)).
+
 ## Writing to a device
 
 What is written to the device itself, `/dev/<device>`, is raw input for its driver: a GPX file, a

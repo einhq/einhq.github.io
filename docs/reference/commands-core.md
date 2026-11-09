@@ -1749,7 +1749,7 @@ With `JSON_OUTPUT=1`: every member's path, node id and, for a member held by a l
 
 ### `metrics-sampler`
 
-Sample host, storage and workload metrics into /var/logs/metrics (long-running)
+Sample EiN's own resources, storage and workload into /var/logs/metrics, and the machine's readings into its device /dev/<hostname> (long-running)
 
 <small>administrators only · changes things</small>
 

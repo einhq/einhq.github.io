@@ -647,6 +647,7 @@ podman compose down
 <p><code>setup.sh</code> writes <code>~/ein/.env</code> the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN and the media service get every line of it as their environment, and <code>setup.sh</code> keeps your options in it. A fresh one looks like this:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/ein/.env, as setup.sh writes it (without the comments it writes)</span>
 <span class="hljs-attr">COMPOSE_PROJECT_NAME</span>=ein
+<span class="hljs-attr">EIN_HOSTNAME</span>=ripley
 <span class="hljs-attr">EIN_ENGINE</span>=podman
 <span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
@@ -682,6 +683,10 @@ podman compose down
 <tbody><tr>
 <td><code>COMPOSE_PROJECT_NAME</code></td>
 <td><code>ein</code>, the compose project&#39;s name, which names its containers, network and volumes</td>
+</tr>
+<tr>
+<td><code>EIN_HOSTNAME</code></td>
+<td>this machine&#39;s name, without its domain, which EiN&#39;s container takes: EiN shows the machine as the device of that name (<a href="../concepts/devices.html#cores-host-driver">The machine as a device</a>). Written at the next run of an installation that lacks it</td>
 </tr>
 <tr>
 <td><code>EIN_ENGINE</code></td>

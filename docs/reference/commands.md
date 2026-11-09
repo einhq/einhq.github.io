@@ -114,7 +114,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [logout](commands-core.md#logout) | Log out of the current session. |
 | [ls](commands-core.md#ls) | List directory contents. |
 | [members](commands-core.md#members) | Who is in a container: an album's members by its rules, or a directory's media. |
-| [metrics-sampler](commands-core.md#metrics-sampler) | Sample host, storage and workload metrics into /var/logs/metrics (long-running) |
+| [metrics-sampler](commands-core.md#metrics-sampler) | Sample EiN's own resources, storage and workload into /var/logs/metrics, and the machine's readings into its device /dev/<hostname> (long-running) |
 | [mime](commands-core.md#mime) | Show stored, extension-based and content-sniffed mimetype of a node. |
 | [mkbuf](commands-core.md#mkbuf) | Create a buffer node. |
 | [mkdir](commands-core.md#mkdir) | Create a directory node (-p to create parents) |

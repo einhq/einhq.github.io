@@ -138,7 +138,9 @@ stay where they are. The members of <code>devices</code> make, name and forget d
 commands, which do it for them as the administrator. <code>device-forget</code> also tells the device&#39;s driver to
 let it go, so a broker&#39;s last announcement does not make it again.</p>
 <p>Every device belongs to the administrator and the group <code>devices</code>, whether a driver found it or a
-member made it with <code>device-create</code>, and its endpoints take its owner and group:</p>
+member made it with <code>device-create</code>, and its endpoints take its owner and group. The machine EiN runs
+on is the one exception: its device belongs to the administrators&#39; group, so only they see it
+(<a href="../concepts/devices.html#cores-host-driver">Core&#39;s host driver</a>).</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

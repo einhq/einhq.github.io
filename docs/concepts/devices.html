@@ -371,6 +371,71 @@ the device&#39;s <code>events</code> setting are kept that way, given when the d
 <code>device-create &#39;Porch&#39; --driver webhook --config events=button</code>.</li>
 </ul>
 <p>The answer says how many readings were new, such as <code>{&quot;taken&quot;: 2, &quot;message&quot;: &quot;2 of 2 readings new&quot;}</code>.</p>
+<h3 id="cores-host-driver">Core&#39;s host driver<a class="anchor" href="#cores-host-driver" aria-label="Link to this section"></a></h3>
+<p>The machine EiN runs on is a device too, <code>/dev/&lt;machine&gt;</code>, named after the machine without its
+domain, of class <code>host</code>. Nobody makes it: the <code>metrics-sampler</code> service writes its readings through
+the <code>host</code> driver, and makes the device and each endpoint the first time it has a reading for it.
+After <code>device-forget</code> it is made again at the next reading. Only the administrators see it
+(<a href="../admin/devices.html">Devices for administrators</a>).</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Reading</th>
+<th>How often</th>
+<th>Kept</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cpu</code></td>
+<td>The share of all the machine&#39;s processor cores in use, in %</td>
+<td>15 seconds</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>load</code></td>
+<td>The 1-minute load average</td>
+<td>15 seconds</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>memory-used</code></td>
+<td>The share of the machine&#39;s memory in use, in %</td>
+<td>15 seconds</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;zone&gt;-temperature</code></td>
+<td>Each thermal zone the kernel has, such as <code>x86_pkg_temp</code>, in °C</td>
+<td>15 seconds</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;disk&gt;-used</code></td>
+<td>The share of each disk in use, such as <code>sda1-used</code>, in %</td>
+<td>15 minutes</td>
+<td>365 days</td>
+</tr>
+<tr>
+<td><code>memory-total</code></td>
+<td>The machine&#39;s memory, in GB</td>
+<td>15 minutes</td>
+<td>365 days</td>
+</tr>
+<tr>
+<td><code>uptime</code></td>
+<td>Days since the machine started</td>
+<td>15 minutes</td>
+<td>365 days</td>
+</tr>
+</tbody></table>
+</div>
+<p>These are the whole machine&#39;s, whatever runs on it: the media service and the database load it from
+containers of their own. EiN&#39;s own share is on the System dashboard. A disk is each filesystem on a
+block device that EiN&#39;s container sees, once, wherever it is mounted. The load, the temperatures,
+the total and the uptime are about the machine itself (<code>diagnostic</code>), so the card shows the CPU.</p>
+<p>In an installation made with <code>setup.sh</code>, the machine&#39;s name is <code>EIN_HOSTNAME</code> in <code>.env</code>, which
+<code>setup.sh</code> writes (<a href="../admin/install.html#env">Installing in detail</a>).</p>
 <h2 id="writing-to-a-device">Writing to a device<a class="anchor" href="#writing-to-a-device" aria-label="Link to this section"></a></h2>
 <p>What is written to the device itself, <code>/dev/&lt;device&gt;</code>, is raw input for its driver: a GPX file, a
 tracker&#39;s post, whatever the driver reads. What is written to an endpoint is a value in EiN&#39;s own
@@ -476,7 +541,7 @@ gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li class="nested"><a href="#cores-webhook-driver">Core's webhook driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-bound-to-keys">A queue bound to keys</a></li><li class="nested"><a href="#a-log-bound-to-keys">A log bound to keys</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li class="nested"><a href="#cores-webhook-driver">Core's webhook driver</a></li><li class="nested"><a href="#cores-host-driver">Core's host driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-bound-to-keys">A queue bound to keys</a></li><li class="nested"><a href="#a-log-bound-to-keys">A log bound to keys</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

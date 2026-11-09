@@ -33,7 +33,9 @@ commands, which do it for them as the administrator. `device-forget` also tells 
 let it go, so a broker's last announcement does not make it again.
 
 Every device belongs to the administrator and the group `devices`, whether a driver found it or a
-member made it with `device-create`, and its endpoints take its owner and group:
+member made it with `device-create`, and its endpoints take its owner and group. The machine EiN runs
+on is the one exception: its device belongs to the administrators' group, so only they see it
+([Core's host driver](../concepts/devices.md#cores-host-driver)).
 
 | Node                        | Mode   | So                                                                                            |
 | --------------------------- | ------ | --------------------------------------------------------------------------------------------- |

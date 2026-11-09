@@ -590,7 +590,7 @@ verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPU
 [ <span class="hljs-string">&quot;<span class="hljs-variable">$verdict</span>&quot;</span> = needs-person ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;EiN needs a person&quot;</span> | mail -s <span class="hljs-string">&quot;EiN&quot;</span> helen@example.com</code></pre></div>
 <p><a href="../shell/ssh-sftp.html">SSH and SFTP</a> explains signing in with a key so a script needs no password.</p>
 <h2 id="where-the-figures-come-from">Where the figures come from<a class="anchor" href="#where-the-figures-come-from" aria-label="Link to this section"></a></h2>
-<p>The <code>metrics-sampler</code> service records the machine&#39;s and the work&#39;s figures, one log per series under <code>/var/logs/metrics</code>, and the dashboard, <code>top</code> and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.</p>
+<p>The <code>metrics-sampler</code> service records EiN&#39;s own and the work&#39;s figures, one log per series under <code>/var/logs/metrics</code>, and the machine&#39;s as the readings of its device, <code>/dev/&lt;machine&gt;</code>; the dashboard, <code>top</code> and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -602,13 +602,13 @@ verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPU
 </thead>
 <tbody><tr>
 <td><code>cpu</code></td>
-<td>Processor time used by the machine and by EiN&#39;s container</td>
+<td>Processor time used by EiN&#39;s container</td>
 <td>15 seconds</td>
 <td>7 days</td>
 </tr>
 <tr>
 <td><code>memory</code></td>
-<td>Memory in use against the container&#39;s limit</td>
+<td>EiN&#39;s container&#39;s memory in use against its limit</td>
 <td>15 seconds</td>
 <td>7 days</td>
 </tr>
@@ -644,7 +644,7 @@ verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPU
 </tr>
 </tbody></table>
 </div>
-<p>With the <code>ems</code> module installed, its <code>gpu-sampler</code> service adds a <code>gpu</code> series, every 15 seconds, for the <strong>EMS GPU</strong> and <strong>EMS VRAM</strong> tiles, and an <code>ems-models</code> series, every minute, which holds the media service machine&#39;s memory for <strong>EMS RAM</strong>. Memory is read both ways: the whole machine&#39;s, and EiN&#39;s container&#39;s own, from its cgroup. CPU is read both ways too: the whole machine&#39;s, since the media service and the language model, when installed, load it from containers of their own, and EiN&#39;s container&#39;s share of it.</p>
+<p>With the <code>ems</code> module installed, its <code>gpu-sampler</code> service adds a <code>gpu</code> series, every 15 seconds, for the <strong>EMS GPU</strong> and <strong>EMS VRAM</strong> tiles, and an <code>ems-models</code> series, every minute, which holds the media service machine&#39;s memory for <strong>EMS RAM</strong>. Memory and CPU are read both ways: the whole machine&#39;s, since the media service and the language model, when installed, load it from containers of their own, and EiN&#39;s container&#39;s own, from its cgroup. The machine&#39;s are its device&#39;s readings, <code>cpu</code>, <code>load</code>, <code>memory-used</code> and <code>memory-total</code>, with its disks and temperatures beside them, kept for 30 days and a year; <a href="../concepts/devices.html#cores-host-driver">Core&#39;s host driver</a> lists them, and the device&#39;s page under <strong>Devices</strong> charts them.</p>
 <p>How the tree has grown over the years is not on the dashboard: <strong>Statistics</strong>, under <strong>System</strong>, shows it, and anyone can open it (<a href="../guide/home.html">Home and statistics</a>).</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
