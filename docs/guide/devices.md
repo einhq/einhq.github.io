@@ -98,6 +98,10 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 - What the device is: its **Name** in commands and rules, **Class**, **Driver**, **Manufacturer**,
   **Model**, **Firmware**, **Serial** and **MAC**. A driver whose module's service is stopped reads
   **(not running)**, in red: the device's switches do nothing until it runs again.
+- **Web page**, the device's own page, opened in a new tab, when its driver knows it: a Shelly's and
+  an ESPHome node's from what they say of themselves, a printer's admin page and the HTTP page of
+  anything added from the network at its address now. It is on your home network, so it opens only
+  where that network is reached.
 - Each endpoint, with its label and name, its type (`log`, `track` or `control`), its unit, its latest
   value, and whether you may write it. **events** marks a button's presses, **diagnostic** or
   **config** what tells of the device itself, **not read** an endpoint whose values its driver cannot
