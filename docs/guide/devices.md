@@ -79,6 +79,7 @@ A tile for each endpoint:
 - **A setting that takes a number**, such as a thermostat's target: a slider, set when you let go, or
   a box with **Set** when it has no range.
 - **A setting that takes one of some choices**: a list to pick from.
+- **A setting that takes a word**, such as a light's colour (`#ff8000`): a box with **Set**.
 - **An action**, such as a restart or a chime: **Press**, with when it was last pressed and by whom.
 
 A switch or a setting you change shows what you asked for at once, with "asked on, waiting for the
@@ -137,7 +138,7 @@ echo press > /dev/hall-sensor/restart
 ```
 
 A switch takes `on`, `off` or `toggle`; a number setting a number within its limits; a choice one of
-its options; an action `press`. The device's **Info** tab and `device-show` say which endpoints are
+its options; a word setting any line; an action `press`. The device's **Info** tab and `device-show` say which endpoints are
 controls and whether you may write them. The value goes to the device at once, and the command ends
 when the device's driver has taken it, or fails, saying why:
 

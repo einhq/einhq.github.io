@@ -179,6 +179,7 @@ choice of map; <strong>Over time</strong> opens it on the <strong>History</stron
 <li><strong>A setting that takes a number</strong>, such as a thermostat&#39;s target: a slider, set when you let go, or
 a box with <strong>Set</strong> when it has no range.</li>
 <li><strong>A setting that takes one of some choices</strong>: a list to pick from.</li>
+<li><strong>A setting that takes a word</strong>, such as a light&#39;s colour (<code>#ff8000</code>): a box with <strong>Set</strong>.</li>
 <li><strong>An action</strong>, such as a restart or a chime: <strong>Press</strong>, with when it was last pressed and by whom.</li>
 </ul>
 <p>A switch or a setting you change shows what you asked for at once, with &quot;asked on, waiting for the
@@ -229,7 +230,7 @@ the value to the control:</p>
 <span class="hljs-built_in">echo</span> eco &gt; /dev/heat-pump/mode
 <span class="hljs-built_in">echo</span> press &gt; /dev/hall-sensor/restart</code></pre></div>
 <p>A switch takes <code>on</code>, <code>off</code> or <code>toggle</code>; a number setting a number within its limits; a choice one of
-its options; an action <code>press</code>. The device&#39;s <strong>Info</strong> tab and <code>device-show</code> say which endpoints are
+its options; a word setting any line; an action <code>press</code>. The device&#39;s <strong>Info</strong> tab and <code>device-show</code> say which endpoints are
 controls and whether you may write them. The value goes to the device at once, and the command ends
 when the device&#39;s driver has taken it, or fails, saying why:</p>
 <ul>

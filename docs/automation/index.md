@@ -15,8 +15,8 @@ household that uses them. [Rules](rules.md) covers writing rules.
 | Part                                                        | What it is                                                                                                                                                                                                                             |
 | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                                                                                          |
-| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                                                                                                                         |
-| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                                                                                     |
+| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers                                                                                                            |
+| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2                                                                                                                                                           |
 | The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                                                                                   |
 | The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                                                                                              |
 | The `snmp` driver                                           | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                                                                                   |
@@ -248,10 +248,33 @@ Its endpoints are named after its parts: `switch-0` is its first relay, `switch-
 its first input. An input set to button mode gives presses, `single`, `double`, `triple` or `long`,
 rather than on and off.
 
+A light is `light-0`, or `rgb-0`, `rgbw-0` or `cct-0` for a colour or white-tone one such as the
+Plus RGBW PM, and each can be set:
+
+| Endpoint                  | What it is                                                            |
+| ------------------------- | --------------------------------------------------------------------- |
+| `light-0`                 | On or off                                                             |
+| `light-0-brightness`      | Its brightness, 0–100 %                                               |
+| `rgb-0-color`             | Its colour, as `#rrggbb`, such as `#ff8000`; `255,128,0` is taken too |
+| `rgbw-0-white`            | Its white channel, 0–255                                              |
+| `cct-0-color-temperature` | Its white's colour temperature, in K                                  |
+
+A cover, such as a Plus 2PM in cover mode, has `cover-0-position` (0–100 %, set to move it there),
+`cover-0-state` (`open`, `closed`, `opening`, `closing` or `stopped`), and `cover-0-open`,
+`cover-0-close` and `cover-0-stop` to press:
+
+```bash
+# in EiN's terminal
+echo 40 > /dev/desk-lamp/rgbw-0-brightness
+echo '#ff8000' > /dev/desk-lamp/rgbw-0-color
+echo 30 > /dev/kitchen-blind/cover-0-position
+echo press > /dev/kitchen-blind/cover-0-stop
+```
+
 ### Shelly, first generation
 
-The first generation, such as the Plug S, the 1, the 1PM, the 2.5 and the i3, is read by the
-`shelly-gen1` driver.
+The first generation, such as the Plug S, the 1, the 1PM, the 2.5, the i3, the Dimmer, the Bulb,
+the Duo and the RGBW2, is read by the `shelly-gen1` driver.
 
 1. Open the Shelly's own web page, at its address on your network, and go to **Internet & Security →
    Advanced – Developer Settings**.
@@ -267,6 +290,14 @@ with **Rename**. Its endpoints are `relay-0` for its first relay, `relay-0-power
 `input-0` for a button's presses: `single`, `double`, `triple`, `long`, `single-long` or
 `long-single`. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.
+
+A light is `light-0` (a Dimmer, a Duo, a Duo RGBW), or `color-0` and `white-0` for a Bulb or an
+RGBW2 in colour or white mode, and has as many of these as it reports, each of which can be set:
+`light-0-brightness` (0–100 %; in colour mode, its gain), `light-0-color` (`#rrggbb`), `color-0-white`
+(the white channel, 0–255) and `light-0-color-temperature` (in K). A light of a Duo RGBW set to a
+colour turns to colour mode. A 2.5 in roller mode has `roller-0-state` (`open`, `close` or `stop`, the
+way it last moved), `roller-0-position` (0–100 %, empty until the roller is calibrated), and
+`roller-0-open`, `roller-0-close` and `roller-0-stop` to press.
 
 ### A web API
 

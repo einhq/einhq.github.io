@@ -113,11 +113,11 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 </tr>
 <tr>
 <td>The <code>shelly</code> driver</td>
-<td>Shelly&#39;s second generation and later: Plus, Pro, Gen3 and Gen4</td>
+<td>Shelly&#39;s second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers</td>
 </tr>
 <tr>
 <td>The <code>shelly-gen1</code> driver</td>
-<td>Shelly&#39;s first generation: Plug S, 1, 1PM, 2.5, i3</td>
+<td>Shelly&#39;s first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2</td>
 </tr>
 <tr>
 <td>The <code>ipp</code> driver</td>
@@ -357,9 +357,48 @@ easier to read. Choose it before the Shelly is first heard: a new prefix is a ne
 <code>switch-0-energy</code>, <code>switch-0-voltage</code> and <code>switch-0-current</code> what the relay measures, and <code>input-0</code>
 its first input. An input set to button mode gives presses, <code>single</code>, <code>double</code>, <code>triple</code> or <code>long</code>,
 rather than on and off.</p>
+<p>A light is <code>light-0</code>, or <code>rgb-0</code>, <code>rgbw-0</code> or <code>cct-0</code> for a colour or white-tone one such as the
+Plus RGBW PM, and each can be set:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>light-0</code></td>
+<td>On or off</td>
+</tr>
+<tr>
+<td><code>light-0-brightness</code></td>
+<td>Its brightness, 0–100 %</td>
+</tr>
+<tr>
+<td><code>rgb-0-color</code></td>
+<td>Its colour, as <code>#rrggbb</code>, such as <code>#ff8000</code>; <code>255,128,0</code> is taken too</td>
+</tr>
+<tr>
+<td><code>rgbw-0-white</code></td>
+<td>Its white channel, 0–255</td>
+</tr>
+<tr>
+<td><code>cct-0-color-temperature</code></td>
+<td>Its white&#39;s colour temperature, in K</td>
+</tr>
+</tbody></table>
+</div>
+<p>A cover, such as a Plus 2PM in cover mode, has <code>cover-0-position</code> (0–100 %, set to move it there),
+<code>cover-0-state</code> (<code>open</code>, <code>closed</code>, <code>opening</code>, <code>closing</code> or <code>stopped</code>), and <code>cover-0-open</code>,
+<code>cover-0-close</code> and <code>cover-0-stop</code> to press:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> 40 &gt; /dev/desk-lamp/rgbw-0-brightness
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;#ff8000&#x27;</span> &gt; /dev/desk-lamp/rgbw-0-color
+<span class="hljs-built_in">echo</span> 30 &gt; /dev/kitchen-blind/cover-0-position
+<span class="hljs-built_in">echo</span> press &gt; /dev/kitchen-blind/cover-0-stop</code></pre></div>
 <h3 id="shelly-first-generation">Shelly, first generation<a class="anchor" href="#shelly-first-generation" aria-label="Link to this section"></a></h3>
-<p>The first generation, such as the Plug S, the 1, the 1PM, the 2.5 and the i3, is read by the
-<code>shelly-gen1</code> driver.</p>
+<p>The first generation, such as the Plug S, the 1, the 1PM, the 2.5, the i3, the Dimmer, the Bulb,
+the Duo and the RGBW2, is read by the <code>shelly-gen1</code> driver.</p>
 <ol>
 <li>Open the Shelly&#39;s own web page, at its address on your network, and go to <strong>Internet &amp; Security →
 Advanced – Developer Settings</strong>.</li>
@@ -375,6 +414,13 @@ with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its fir
 <code>input-0</code> for a button&#39;s presses: <code>single</code>, <code>double</code>, <code>triple</code>, <code>long</code>, <code>single-long</code> or
 <code>long-single</code>. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.</p>
+<p>A light is <code>light-0</code> (a Dimmer, a Duo, a Duo RGBW), or <code>color-0</code> and <code>white-0</code> for a Bulb or an
+RGBW2 in colour or white mode, and has as many of these as it reports, each of which can be set:
+<code>light-0-brightness</code> (0–100 %; in colour mode, its gain), <code>light-0-color</code> (<code>#rrggbb</code>), <code>color-0-white</code>
+(the white channel, 0–255) and <code>light-0-color-temperature</code> (in K). A light of a Duo RGBW set to a
+colour turns to colour mode. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the
+way it last moved), <code>roller-0-position</code> (0–100 %, empty until the roller is calibrated), and
+<code>roller-0-open</code>, <code>roller-0-close</code> and <code>roller-0-stop</code> to press.</p>
 <h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
 <p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
 name in its answer: today&#39;s weather, the price of electricity this hour, or a device on your network
