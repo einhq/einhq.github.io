@@ -179,7 +179,9 @@ choice of map; <strong>Over time</strong> opens it on the <strong>History</stron
 <li><strong>A setting that takes a number</strong>, such as a thermostat&#39;s target: a slider, set when you let go, or
 a box with <strong>Set</strong> when it has no range.</li>
 <li><strong>A setting that takes one of some choices</strong>: a list to pick from.</li>
-<li><strong>A setting that takes a word</strong>, such as a light&#39;s colour (<code>#ff8000</code>): a box with <strong>Set</strong>.</li>
+<li><strong>A setting that takes a word</strong>: a box with <strong>Set</strong>.</li>
+<li><strong>A colour</strong>, such as a light&#39;s: a colour box whose picker sets it when you let go, or a colour typed
+as <code>#ff8000</code> and set with <strong>Set</strong>.</li>
 <li><strong>An action</strong>, such as a restart or a chime: <strong>Press</strong>, with when it was last pressed and by whom.</li>
 </ul>
 <p>A switch or a setting you change shows what you asked for at once, with &quot;asked on, waiting for the
@@ -221,16 +223,17 @@ it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a
 the device see it.</li>
 </ul>
 <h2 id="switch-something">Switch something<a class="anchor" href="#switch-something" aria-label="Link to this section"></a></h2>
-<p>The toggles, sliders and <strong>Press</strong> buttons on a device&#39;s <strong>Overview</strong> switch it. In the terminal, write
+<p>The toggles, sliders, colour pickers and <strong>Press</strong> buttons on a device&#39;s <strong>Overview</strong> switch it. In the terminal, write
 the value to the control:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0
 <span class="hljs-built_in">echo</span> toggle &gt; /dev/hall-plug/switch-0
 <span class="hljs-built_in">echo</span> 21.5 &gt; /dev/heater/target-temperature
 <span class="hljs-built_in">echo</span> eco &gt; /dev/heat-pump/mode
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;#ff8000&#x27;</span> &gt; /dev/desk-lamp/rgbw-0-color
 <span class="hljs-built_in">echo</span> press &gt; /dev/hall-sensor/restart</code></pre></div>
 <p>A switch takes <code>on</code>, <code>off</code> or <code>toggle</code>; a number setting a number within its limits; a choice one of
-its options; a word setting any line; an action <code>press</code>. The device&#39;s <strong>Info</strong> tab and <code>device-show</code> say which endpoints are
+its options; a word setting any line; a colour <code>#rrggbb</code> or <code>r,g,b</code>; an action <code>press</code>. The device&#39;s <strong>Info</strong> tab and <code>device-show</code> say which endpoints are
 controls and whether you may write them. The value goes to the device at once, and the command ends
 when the device&#39;s driver has taken it, or fails, saying why:</p>
 <ul>

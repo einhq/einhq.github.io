@@ -79,7 +79,9 @@ A tile for each endpoint:
 - **A setting that takes a number**, such as a thermostat's target: a slider, set when you let go, or
   a box with **Set** when it has no range.
 - **A setting that takes one of some choices**: a list to pick from.
-- **A setting that takes a word**, such as a light's colour (`#ff8000`): a box with **Set**.
+- **A setting that takes a word**: a box with **Set**.
+- **A colour**, such as a light's: a colour box whose picker sets it when you let go, or a colour typed
+  as `#ff8000` and set with **Set**.
 - **An action**, such as a restart or a chime: **Press**, with when it was last pressed and by whom.
 
 A switch or a setting you change shows what you asked for at once, with "asked on, waiting for the
@@ -125,7 +127,7 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 
 ## Switch something
 
-The toggles, sliders and **Press** buttons on a device's **Overview** switch it. In the terminal, write
+The toggles, sliders, colour pickers and **Press** buttons on a device's **Overview** switch it. In the terminal, write
 the value to the control:
 
 ```bash
@@ -134,11 +136,12 @@ echo on > /dev/hall-plug/switch-0
 echo toggle > /dev/hall-plug/switch-0
 echo 21.5 > /dev/heater/target-temperature
 echo eco > /dev/heat-pump/mode
+echo '#ff8000' > /dev/desk-lamp/rgbw-0-color
 echo press > /dev/hall-sensor/restart
 ```
 
 A switch takes `on`, `off` or `toggle`; a number setting a number within its limits; a choice one of
-its options; a word setting any line; an action `press`. The device's **Info** tab and `device-show` say which endpoints are
+its options; a word setting any line; a colour `#rrggbb` or `r,g,b`; an action `press`. The device's **Info** tab and `device-show` say which endpoints are
 controls and whether you may write them. The value goes to the device at once, and the command ends
 when the device's driver has taken it, or fails, saying why:
 
