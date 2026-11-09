@@ -12,15 +12,17 @@ household that uses them. [Rules](rules.md) covers writing rules.
 
 ## What it adds
 
-| Part                                         | What it is                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| The `ha-discovery` driver                    | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that |
-| The `shelly` driver                          | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                |
-| The `shelly-gen1` driver                     | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                            |
-| The `automation-bridge` service              | Hears the broker and runs the three drivers                                                                                   |
-| The `automation-rules` service               | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                      |
-| The group `automation`                       | Its members write the rules                                                                                                   |
-| `automation-status`, `automation-rule-check` | Whether the broker is heard, and what a rule does                                                                             |
+| Part                                                        | What it is                                                                                                                                                              |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                           |
+| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                                                          |
+| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                      |
+| The `automation-bridge` service                             | Hears the broker and runs the three drivers                                                                                                                             |
+| The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                |
+| The group `automation`                                      | Its members write the rules                                                                                                                                             |
+| `automation-status`, `automation-rule-check`                | Whether the broker is heard, and what a rule does                                                                                                                       |
+| **Found on the network**                                    | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network) |
+| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network, adding a Shelly from there, and leaving something out                                                                                           |
 
 With the [Assistant](../assistant/index.md), it also teaches the chat to read the devices and to
 propose switching them.
@@ -65,10 +67,14 @@ removing modules.
   `MQTT_DEVICE_PASSWORD`. A password changed there takes effect at the next `./setup.sh`.
 - The devices reach it on port 1883 of the machine (`MQTT_PORT` in `.env`), on the address
   `EIN_BIND` names.
-- `setup.sh` gives EiN the broker's address, user and password itself: the three settings say
-  **From deployment** on the Settings page and need nothing from you.
+- `setup.sh` gives EiN the broker's address, user and password itself, and the `device` account a
+  device added from the network is given: those settings say **From deployment** on the Settings
+  page and need nothing from you.
 - It keeps what the devices announce in the data folder's `mqtt` folder, so it is all there again
   after a restart.
+- Beside it runs `discovery`, a small listener on the machine's own network, which finds the
+  devices that are not on the broker yet:
+  [Add a device found on the network](#add-a-device-found-on-the-network).
 - `./setup.sh --no-mqtt` takes it out again, and `./setup.sh --only mqtt` updates it alone.
 
 The devices need the device password. Read it on the machine:
@@ -107,6 +113,54 @@ device is heard.
 A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
 within seconds of the device connecting it is on the **Devices** page with all it reads and does.
 Nothing is entered in EiN.
+
+A device that is on the network but not yet on the broker is found too, and a Shelly is added from
+EiN without opening its own web page: [Add a device found on the network](#add-a-device-found-on-the-network).
+The sections after it say how to point each kind at the broker by hand.
+
+### Add a device found on the network
+
+With the installer's broker, its listener `discovery` asks the network every two minutes what is
+there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers.
+It does not scan addresses: it hears only what announces itself. Each thing that answered is named
+by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
+bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
+its hardware address.
+
+When something found can become a device and is none yet, the **Devices** page's header has a
+button that says how many, such as **2 found**. It opens **Found on the network**, a card for each:
+
+| On a card     | What it does                                                                                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**       | For a Shelly of any generation: EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute. |
+| What it takes | For one EiN cannot set itself, such as ESPHome or Tasmota: the line under it says what to do, and the sections below say how.                                          |
+| **Ignore**    | Leaves it out of the count and the list; **Show** **Everything** finds it again, with **Take back**.                                                                   |
+| **Open**      | For one that is a device already: its page.                                                                                                                            |
+
+**Show** chooses **Can be added** (the default), **Not a device yet**, or **Everything** the
+listener heard, devices and printers included. The page and the button are for members of the
+`devices` group, who make devices; the button stays away for everyone else.
+
+> [!NOTE]
+> A Shelly with a password of its own refuses EiN; turn the password off on its web page, or set
+> its MQTT there as below. A first-generation Shelly does not use Shelly's cloud while MQTT is on.
+
+The same from the terminal:
+
+```bash
+# in EiN's terminal, as a member of the devices group
+automation-found                # what can become a device, and is none yet
+automation-found --all          # everything the listener heard
+automation-adopt a8032ab12345   # add the Shelly with this id, as automation-found says it
+automation-ignore d0ad08c5e709  # leave the printer out
+```
+
+The listener needs the machine EiN runs on to be on the same network as the devices: mDNS and SSDP
+stay on the network they are sent on. A device on another network, or another VLAN, is not found,
+and is connected by hand as below. **Broker for devices** in the **Automation** settings is the
+address a device added from the network is given; empty, it is the address the listener says the
+machine has on the devices' network. With a broker of your own there is no listener: the page says
+so, and devices are connected by hand.
 
 A device is named in EiN as it names itself, in lower case with hyphens, such as `hall-sensor`, and
 each of its endpoints by its own name within it, such as `hall-sensor/temperature`. Commands,

@@ -102,7 +102,9 @@ are kept, and <a href="../admin/devices.html">Devices and their keys</a> who may
 <li><strong>A driver finds them.</strong> With the <a href="../automation/index.html">Automation</a> module, a sensor or a plug
 that announces itself on the house&#39;s MQTT broker, such as one running ESPHome or a Shelly, is on
 the Devices page within seconds of connecting, with everything it reads and does. Nothing is
-entered in EiN.</li>
+entered in EiN. One that is on the network but not yet on the broker is counted in the header,
+such as <strong>2 found</strong>, and a Shelly is added from there
+(<a href="../automation/index.html#add-a-device-found-on-the-network">Add a device found on the network</a>).</li>
 <li><strong>Someone makes them.</strong> A phone or a GPS logger announces nothing, so a member of the <code>devices</code>
 group makes it by hand (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). EiN&#39;s own
 <code>tracker</code> driver then reads what it sends.</li>

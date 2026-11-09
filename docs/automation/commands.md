@@ -2,11 +2,31 @@
 
 # Automation commands
 
-The commands the automation module adds. They are there once the module is installed. 4 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the automation module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[automation-bridge](#automation-bridge) · [automation-rule-check](#automation-rule-check) · [automation-rules](#automation-rules) · [automation-status](#automation-status)
+[automation-adopt](#automation-adopt) · [automation-bridge](#automation-bridge) · [automation-found](#automation-found) · [automation-ignore](#automation-ignore) · [automation-rule-check](#automation-rule-check) · [automation-rules](#automation-rules) · [automation-status](#automation-status)
 
 ## A
+
+### `automation-adopt`
+
+Make a Shelly found on the network a device: point its MQTT at the broker and restart it (for members of the devices group)
+
+<small>changes things</small>
+
+```text
+automation-adopt <id>
+```
+
+| Argument | What it is                                                                      |
+| -------- | ------------------------------------------------------------------------------- |
+| `<id>`   | what automation-found calls it: its hardware address without colons, or its IP. |
+
+```bash
+automation-adopt a8032ab12345
+```
+
+With `JSON_OUTPUT=1`: AdoptAnswer: id, label, driver, broker, restarted.
 
 ### `automation-bridge`
 
@@ -20,6 +40,52 @@ automation-bridge
 
 ```bash
 service restart automation-bridge
+```
+
+### `automation-found`
+
+The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group)
+
+<small>reads only</small>
+
+```text
+automation-found [--addable] [--all]
+```
+
+| Option      | What it does                                                        |
+| ----------- | ------------------------------------------------------------------- |
+| `--addable` | only the ones that can become a device of automation’s.             |
+| `--all`     | every one, the devices already under /dev and the ignored ones too. |
+
+```bash
+automation-found
+automation-found --addable
+automation-found --all
+```
+
+With `JSON_OUTPUT=1`: FoundAnswer: round, broker, devices [{id, ip, mac, names, seen, services, kind, vendor, label, model, firmware, class, addable, adopt, connect, device, ignored}].
+
+### `automation-ignore`
+
+Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group)
+
+<small>changes things</small>
+
+```text
+automation-ignore [--undo] <id>
+```
+
+| Argument | What it is                                                  |
+| -------- | ----------------------------------------------------------- |
+| `<id>`   | what automation-found calls it; more than one may be given. |
+
+| Option   | What it does    |
+| -------- | --------------- |
+| `--undo` | take them back. |
+
+```bash
+automation-ignore d0ad08c5e709
+automation-ignore d0ad08c5e709 --undo
 ```
 
 ### `automation-rule-check`

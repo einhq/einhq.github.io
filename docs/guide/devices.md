@@ -12,7 +12,9 @@ are kept, and [Devices and their keys](../admin/devices.md) who may do what.
 - **A driver finds them.** With the [Automation](../automation/index.md) module, a sensor or a plug
   that announces itself on the house's MQTT broker, such as one running ESPHome or a Shelly, is on
   the Devices page within seconds of connecting, with everything it reads and does. Nothing is
-  entered in EiN.
+  entered in EiN. One that is on the network but not yet on the broker is counted in the header,
+  such as **2 found**, and a Shelly is added from there
+  ([Add a device found on the network](../automation/index.md#add-a-device-found-on-the-network)).
 - **Someone makes them.** A phone or a GPS logger announces nothing, so a member of the `devices`
   group makes it by hand (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). EiN's own
   `tracker` driver then reads what it sends.

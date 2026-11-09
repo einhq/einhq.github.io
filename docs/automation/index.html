@@ -135,6 +135,14 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 <td><code>automation-status</code>, <code>automation-rule-check</code></td>
 <td>Whether the broker is heard, and what a rule does</td>
 </tr>
+<tr>
+<td><strong>Found on the network</strong></td>
+<td>The devices on the network that are not devices yet, with a button on the <strong>Devices</strong> page; see <a href="#add-a-device-found-on-the-network">Add a device found on the network</a></td>
+</tr>
+<tr>
+<td><code>automation-found</code>, <code>automation-adopt</code>, <code>automation-ignore</code></td>
+<td>What is on the network, adding a Shelly from there, and leaving something out</td>
+</tr>
 </tbody></table>
 </div>
 <p>With the <a href="../assistant/index.html">Assistant</a>, it also teaches the chat to read the devices and to
@@ -168,10 +176,14 @@ removing modules.</p>
 <code>MQTT_DEVICE_PASSWORD</code>. A password changed there takes effect at the next <code>./setup.sh</code>.</li>
 <li>The devices reach it on port 1883 of the machine (<code>MQTT_PORT</code> in <code>.env</code>), on the address
 <code>EIN_BIND</code> names.</li>
-<li><code>setup.sh</code> gives EiN the broker&#39;s address, user and password itself: the three settings say
-<strong>From deployment</strong> on the Settings page and need nothing from you.</li>
+<li><code>setup.sh</code> gives EiN the broker&#39;s address, user and password itself, and the <code>device</code> account a
+device added from the network is given: those settings say <strong>From deployment</strong> on the Settings
+page and need nothing from you.</li>
 <li>It keeps what the devices announce in the data folder&#39;s <code>mqtt</code> folder, so it is all there again
 after a restart.</li>
+<li>Beside it runs <code>discovery</code>, a small listener on the machine&#39;s own network, which finds the
+devices that are not on the broker yet:
+<a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
 <li><code>./setup.sh --no-mqtt</code> takes it out again, and <code>./setup.sh --only mqtt</code> updates it alone.</li>
 </ul>
 <p>The devices need the device password. Read it on the machine:</p>
@@ -199,6 +211,62 @@ device is heard.</p>
 <p>A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
 within seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does.
 Nothing is entered in EiN.</p>
+<p>A device that is on the network but not yet on the broker is found too, and a Shelly is added from
+EiN without opening its own web page: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.
+The sections after it say how to point each kind at the broker by hand.</p>
+<h3 id="add-a-device-found-on-the-network">Add a device found on the network<a class="anchor" href="#add-a-device-found-on-the-network" aria-label="Link to this section"></a></h3>
+<p>With the installer&#39;s broker, its listener <code>discovery</code> asks the network every two minutes what is
+there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers.
+It does not scan addresses: it hears only what announces itself. Each thing that answered is named
+by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
+bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
+its hardware address.</p>
+<p>When something found can become a device and is none yet, the <strong>Devices</strong> page&#39;s header has a
+button that says how many, such as <strong>2 found</strong>. It opens <strong>Found on the network</strong>, a card for each:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>On a card</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Add</strong></td>
+<td>For a Shelly of any generation: EiN sets its MQTT to the broker, with the <code>device</code> account, and restarts it. It is under <strong>Devices</strong> when it is back, within a minute.</td>
+</tr>
+<tr>
+<td>What it takes</td>
+<td>For one EiN cannot set itself, such as ESPHome or Tasmota: the line under it says what to do, and the sections below say how.</td>
+</tr>
+<tr>
+<td><strong>Ignore</strong></td>
+<td>Leaves it out of the count and the list; <strong>Show</strong> <strong>Everything</strong> finds it again, with <strong>Take back</strong>.</td>
+</tr>
+<tr>
+<td><strong>Open</strong></td>
+<td>For one that is a device already: its page.</td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Show</strong> chooses <strong>Can be added</strong> (the default), <strong>Not a device yet</strong>, or <strong>Everything</strong> the
+listener heard, devices and printers included. The page and the button are for members of the
+<code>devices</code> group, who make devices; the button stays away for everyone else.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>A Shelly with a password of its own refuses EiN; turn the password off on its web page, or set
+its MQTT there as below. A first-generation Shelly does not use Shelly&#39;s cloud while MQTT is on.</p>
+</aside>
+<p>The same from the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+automation-found                <span class="hljs-comment"># what can become a device, and is none yet</span>
+automation-found --all          <span class="hljs-comment"># everything the listener heard</span>
+automation-adopt a8032ab12345   <span class="hljs-comment"># add the Shelly with this id, as automation-found says it</span>
+automation-ignore d0ad08c5e709  <span class="hljs-comment"># leave the printer out</span></code></pre></div>
+<p>The listener needs the machine EiN runs on to be on the same network as the devices: mDNS and SSDP
+stay on the network they are sent on. A device on another network, or another VLAN, is not found,
+and is connected by hand as below. <strong>Broker for devices</strong> in the <strong>Automation</strong> settings is the
+address a device added from the network is given; empty, it is the address the listener says the
+machine has on the devices&#39; network. With a broker of your own there is no listener: the page says
+so, and devices are connected by hand.</p>
 <p>A device is named in EiN as it names itself, in lower case with hyphens, such as <code>hall-sensor</code>, and
 each of its endpoints by its own name within it, such as <code>hall-sensor/temperature</code>. Commands,
 routing keys and rules use these names. <strong>Rename</strong> on a device&#39;s <strong>Info</strong> tab gives it a friendlier
@@ -562,7 +630,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 425 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 428 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -418,11 +418,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Automation
 
-[All 4 in full](../automation/commands.md).
+[All 7 in full](../automation/commands.md).
 
 | Command | What it does |
 | --- | --- |
+| [automation-adopt](../automation/commands.md#automation-adopt) | Make a Shelly found on the network a device: point its MQTT at the broker and restart it (for members of the devices group) |
 | [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service) |
+| [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
+| [automation-ignore](../automation/commands.md#automation-ignore) | Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group) |
 | [automation-rule-check](../automation/commands.md#automation-rule-check) | Check an automation rule: what makes it run, whether its conditions hold now and whose rights its lines run with, or why it is not run; with --run, run its lines now. |
 | [automation-rules](../automation/commands.md#automation-rules) | Run the rules under /etc/automation/rules when a reading, a press, a device coming or going or the clock says so, each as its file's owner (the automation-rules service) |
 | [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the rules. |
