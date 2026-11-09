@@ -276,8 +276,8 @@ how it is, again and again, while the tab is open.
   own. A search model drawn hatched, as **standby**, is in RAM as well as on the card while the card
   is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
   card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
-  times it has. How busy the card is, its temperature and its power are the **EMS GPU** tile on the
-  **Overview** tab.
+  times it has. How busy the card is, its temperature and its power are the **GPU** tile of the
+  **Media service** card on the **Overview** tab.
 - **Models**: every model the media service can load, in four columns by what it is doing,
   **Working**, **Loaded, idle**, **Loading or unloading** and **Not loaded**, each with where it is and
   its size. Hover a model's name for what it does. **Every model in detail** opens the full table:
@@ -302,10 +302,10 @@ The **Work** tab's **Where the work is** ends with the media service's part: **A
 service**, its three lanes with their slots and the requests in them, and **On a model**, the models
 it holds, the working ones first and the search models apart. With [more than one media service](instances.md), the tab lists them beside it, and the Work tab's two columns have a group for each.
 
-The **Overview** tab shows **EMS GPU** and **EMS VRAM** tiles beside the computer's own CPU and
-memory when the media service has a card, and **EMS RAM**, the memory of the machine the media
-service runs on, which need not be EiN's, with the media service's own share. With no card the GPU
-tiles are not there, and with no media service none of them.
+The **Overview** tab shows the machine the media service runs on as the **Media service** card,
+beside the card of the machine EiN runs on, even when they are the same machine: its CPU, its memory
+and, when it has a graphics card, the card's use and memory. With no card the GPU tiles are not
+there, and with no media service the card is not there until it first answers.
 
 #### The media service's machine as a device
 
@@ -329,11 +329,12 @@ can act when it goes away. Only the administrators see it.
 | `gpu-power-limit`            | The most the card may draw, in W                                               | 365 days |
 
 The card's readings are there only when the media service sees a card, and `cpu` and `load` only
-from a media service of API 0.3.4 or later. The **EMS GPU**, **EMS VRAM** and **EMS RAM** tiles
-read them back. What the media service holds and does, its models, lanes and requests, is not the
+from a media service of API 0.3.4 or later. The **Media service** card on the System dashboard's
+**Overview** draws them, and `ems-gpu` and `ems-memory` read them back in the terminal, `ems-memory`
+with the media service's own share of the memory. What the media service holds and does, its models, lanes and requests, is not the
 machine's and stays on the **Media service** tab.
 
-![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles are the media service's card; they show only when it has one")
+![The System dashboard's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The Media service card is the media service's machine; its GPU and VRAM tiles show only when it has a card")
 
 **About EiN** in the account menu also has a **Media service** tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or **Not answering**.

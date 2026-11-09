@@ -491,8 +491,8 @@ what is free. <strong>RAM</strong> splits the media service&#39;s memory into ea
 own. A search model drawn hatched, as <strong>standby</strong>, is in RAM as well as on the card while the card
 is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
 card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
-times it has. How busy the card is, its temperature and its power are the <strong>EMS GPU</strong> tile on the
-<strong>Overview</strong> tab.</li>
+times it has. How busy the card is, its temperature and its power are the <strong>GPU</strong> tile of the
+<strong>Media service</strong> card on the <strong>Overview</strong> tab.</li>
 <li><strong>Models</strong>: every model the media service can load, in four columns by what it is doing,
 <strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> and <strong>Not loaded</strong>, each with where it is and
 its size. Hover a model&#39;s name for what it does. <strong>Every model in detail</strong> opens the full table:
@@ -515,10 +515,10 @@ with the address it tried.</p>
 <p>The <strong>Work</strong> tab&#39;s <strong>Where the work is</strong> ends with the media service&#39;s part: <strong>At the media
 service</strong>, its three lanes with their slots and the requests in them, and <strong>On a model</strong>, the models
 it holds, the working ones first and the search models apart. With <a href="instances.html">more than one media service</a>, the tab lists them beside it, and the Work tab&#39;s two columns have a group for each.</p>
-<p>The <strong>Overview</strong> tab shows <strong>EMS GPU</strong> and <strong>EMS VRAM</strong> tiles beside the computer&#39;s own CPU and
-memory when the media service has a card, and <strong>EMS RAM</strong>, the memory of the machine the media
-service runs on, which need not be EiN&#39;s, with the media service&#39;s own share. With no card the GPU
-tiles are not there, and with no media service none of them.</p>
+<p>The <strong>Overview</strong> tab shows the machine the media service runs on as the <strong>Media service</strong> card,
+beside the card of the machine EiN runs on, even when they are the same machine: its CPU, its memory
+and, when it has a graphics card, the card&#39;s use and memory. With no card the GPU tiles are not
+there, and with no media service the card is not there until it first answers.</p>
 <h4 id="the-media-services-machine-as-a-device">The media service&#39;s machine as a device<a class="anchor" href="#the-media-services-machine-as-a-device" aria-label="Link to this section"></a></h4>
 <p>The machine the media service runs on is a device too, <code>/dev/ems</code>, of class <code>host</code>, under
 <strong>Devices</strong>, beside the one for the machine EiN runs on (<a href="../concepts/devices.html#cores-host-driver">Core&#39;s host driver</a>). It is a device of its own even when both run on
@@ -582,10 +582,11 @@ can act when it goes away. Only the administrators see it.</p>
 </tbody></table>
 </div>
 <p>The card&#39;s readings are there only when the media service sees a card, and <code>cpu</code> and <code>load</code> only
-from a media service of API 0.3.4 or later. The <strong>EMS GPU</strong>, <strong>EMS VRAM</strong> and <strong>EMS RAM</strong> tiles
-read them back. What the media service holds and does, its models, lanes and requests, is not the
+from a media service of API 0.3.4 or later. The <strong>Media service</strong> card on the System dashboard&#39;s
+<strong>Overview</strong> draws them, and <code>ems-gpu</code> and <code>ems-memory</code> read them back in the terminal, <code>ems-memory</code>
+with the media service&#39;s own share of the memory. What the media service holds and does, its models, lanes and requests, is not the
 machine&#39;s and stays on the <strong>Media service</strong> tab.</p>
-<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The GPU and VRAM tiles are the media service&#39;s card; they show only when it has one</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The Media service card is the media service&#39;s machine; its GPU and VRAM tiles show only when it has a card</figcaption></figure>
 <p><strong>About EiN</strong> in the account menu also has a <strong>Media service</strong> tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or <strong>Not answering</strong>.</p>
 <h3 id="the-health-checks">The health checks<a class="anchor" href="#the-health-checks" aria-label="Link to this section"></a></h3>

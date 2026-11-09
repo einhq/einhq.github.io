@@ -764,17 +764,19 @@ Every device under /dev you may see: its name, label, whether it answers and its
 <small>reads only</small>
 
 ```text
-devices [--online] [--drivers]
+devices [--online] [--class=<string>] [--drivers]
 ```
 
 | Option | What it does |
 | --- | --- |
 | `--online` | only the devices that answer now. |
+| `--class=<string>` | only the devices of these classes, separated by commas: host,storage. |
 | `--drivers` | the drivers running now instead: core's, and those modules' services registered. |
 
 ```bash
 devices
 devices --online
+devices --class host,storage
 devices --drivers
 ```
 
