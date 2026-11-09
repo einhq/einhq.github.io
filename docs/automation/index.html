@@ -137,7 +137,7 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 </tr>
 <tr>
 <td>The <code>http</code> driver</td>
-<td>A web API that answers JSON, asked at its address for the readings you name: the weather, the price of electricity, a Shelly or Tasmota over HTTP; see <a href="#a-web-api">A web API</a></td>
+<td>A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a Shelly or Tasmota over HTTP; see <a href="#a-web-api">A web API</a></td>
 </tr>
 <tr>
 <td>The <code>automation-bridge</code> service</td>
@@ -404,6 +404,10 @@ device-create Weather --driver http \
 <td><code>interval</code></td>
 <td>How often it is asked: seconds, or <code>30s</code>, <code>15m</code>, <code>1h</code>. Five minutes unless given, and ten seconds at the least.</td>
 </tr>
+<tr>
+<td><code>set</code></td>
+<td>The controls, <code>name=address on/off</code>, separated by <code>;</code>; see <a href="#switching-it">Switching it</a>. May be left out.</td>
+</tr>
 </tbody></table>
 </div>
 <p>A path walks the answer from the top:</p>
@@ -461,11 +465,49 @@ device-create Garage plug --driver http --config <span class="hljs-string">&#x27
 <span class="hljs-comment"># a Tasmota plug</span>
 device-create Desk plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.32/cm?cmnd=Status%2010&#x27;</span> \
   --config <span class="hljs-string">&#x27;read=power=StatusSNS.ENERGY.Power W; today=StatusSNS.ENERGY.Today kWh&#x27;</span> --config interval=30s</code></pre></div>
-<p>A device of the <code>http</code> driver only reads: its endpoints are readings, and a Shelly or Tasmota asked
-this way is switched from its own page. Connect it to the broker to switch it from EiN. A config
-<code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, or forget it
+<p>A config <code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, or forget it
 and make it again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>attrs -J <span class="hljs-string">&#x27;config={&quot;url&quot;:&quot;https://…&quot;,&quot;read&quot;:&quot;price=[time_start..time_end].SEK_per_kWh SEK/kWh&quot;}&#x27;</span> /dev/electricity-price</code></pre></div>
+<h4 id="switching-it">Switching it<a class="anchor" href="#switching-it" aria-label="Link to this section"></a></h4>
+<p>A Shelly or Tasmota asked over HTTP is switched at an address of its own, which <code>set</code> names for each
+control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the device
+spells on and off, which is what <code>on/off</code> says. An address without <code>http://</code> is taken from <code>url</code>&#39;s,
+sign-in included. A control whose name is also a reading&#39;s is a switch that shows that reading as its
+state; EiN asks the device again a second after it is switched. A control with no <code>{value}</code> and no
+<code>on/off</code> is a button that asks its address when pressed, such as a restart.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Device</th>
+<th><code>url</code> asks</th>
+<th><code>read</code></th>
+<th><code>set</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tasmota</td>
+<td><code>cm?cmnd=Status%200</code></td>
+<td><code>power=StatusSTS.POWER</code></td>
+<td><code>power=cm?cmnd=Power%20{value} ON/OFF</code></td>
+</tr>
+<tr>
+<td>Shelly, first generation</td>
+<td><code>status</code></td>
+<td><code>on=relays[0].ison</code></td>
+<td><code>on=relay/0?turn={value} on/off</code></td>
+</tr>
+<tr>
+<td>Shelly, second generation</td>
+<td><code>rpc/Shelly.GetStatus</code></td>
+<td><code>on=switch:0.output</code></td>
+<td><code>on=rpc/Switch.Set?id=0&amp;on={value} true/false</code></td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># a Tasmota plug, switched from EiN</span>
+device-create Lamp plug --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.33/cm?cmnd=Status%200&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=power=StatusSTS.POWER; watts=StatusSNS.ENERGY.Power W&#x27;</span> \
+  --config <span class="hljs-string">&#x27;set=power=cm?cmnd=Power%20{value} ON/OFF; restart=cm?cmnd=Restart%201&#x27;</span> --config interval=30s</code></pre></div>
 <p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
 EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
 <h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
