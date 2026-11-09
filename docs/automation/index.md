@@ -12,21 +12,22 @@ household that uses them. [Rules](rules.md) covers writing rules.
 
 ## What it adds
 
-| Part                                                        | What it is                                                                                                                                                              |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                           |
-| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                                                          |
-| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                      |
-| The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                    |
-| The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                               |
-| The `snmp` driver                                           | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                    |
-| The `network` driver                                        | Anything else on the network: whether it answers, and how fast                                                                                                          |
-| The `automation-bridge` service                             | Hears the broker and runs the drivers                                                                                                                                   |
-| The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                |
-| The group `automation`                                      | Its members write the rules                                                                                                                                             |
-| `automation-status`, `automation-rule-check`                | Whether the broker is heard, and what a rule does                                                                                                                       |
-| **Found on the network**                                    | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network) |
-| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network and all it said, adding it as a device, and leaving something out                                                                                |
+| Part                                                        | What it is                                                                                                                                                                     |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                                  |
+| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4                                                                                                                 |
+| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                             |
+| The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                           |
+| The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                                      |
+| The `snmp` driver                                           | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                           |
+| The `network` driver                                        | Anything else on the network: whether it answers, and how fast                                                                                                                 |
+| The `http` driver                                           | A web API that answers JSON, asked at its address for the readings you name: the weather, the price of electricity, a Shelly or Tasmota over HTTP; see [A web API](#a-web-api) |
+| The `automation-bridge` service                             | Hears the broker and runs the drivers                                                                                                                                          |
+| The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                       |
+| The group `automation`                                      | Its members write the rules                                                                                                                                                    |
+| `automation-status`, `automation-rule-check`                | Whether the broker is heard, and what a rule does                                                                                                                              |
+| **Found on the network**                                    | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network)        |
+| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network and all it said, adding it as a device, and leaving something out                                                                                       |
 
 With the [Assistant](../assistant/index.md), it also teaches the chat to read the devices and to
 propose switching them.
@@ -36,7 +37,8 @@ propose switching them.
 - **An MQTT broker**, the server the devices and EiN exchange their messages through. The
   installer runs one beside EiN with `--mqtt`; a broker you already run works as well.
 - **Devices that speak MQTT**: those running ESPHome, and Shelly's of every generation. Printers,
-  Google Cast speakers and anything else on the network are asked directly, once added.
+  Google Cast speakers, web APIs and anything else on the network are asked directly, once added;
+  the bridge that asks them runs while a broker is set.
 - Nothing else: neither the Archive nor the media service.
 
 ## Install it
@@ -264,6 +266,74 @@ with **Rename**. Its endpoints are `relay-0` for its first relay, `relay-0-power
 `long-single`. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.
 
+### A web API
+
+The `http` driver asks an address that answers JSON, as often as you say, and keeps the readings you
+name in its answer: today's weather, the price of electricity this hour, or a Shelly or Tasmota that
+you would rather ask over HTTP than connect to the broker. Nothing announces such a device; a member
+of `devices` makes it in the terminal:
+
+```bash
+# in EiN's terminal, as a member of devices
+device-create Weather --driver http \
+  --config 'url=https://api.open-meteo.com/v1/forecast?latitude=57.7&longitude=11.97&current=temperature_2m,wind_speed_10m' \
+  --config 'read=temperature=current.temperature_2m °C; wind=current.wind_speed_10m m/s' \
+  --config interval=15m
+```
+
+| Config     | What it is                                                                                                                                                                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`      | The address to ask. `{date}` (2026-11-09), `{year}`, `{month}`, `{day}` and `{hour}` in it become the day and hour it is asked at, in EiN's time zone. A user and password in it, `http://admin:secret@192.0.2.20/status`, are sent as the device's sign-in. |
+| `read`     | The readings, `name=path unit`, separated by `;`. Each becomes an endpoint of that name; the unit may be left out.                                                                                                                                           |
+| `interval` | How often it is asked: seconds, or `30s`, `15m`, `1h`. Five minutes unless given, and ten seconds at the least.                                                                                                                                              |
+
+A path walks the answer from the top:
+
+| Path                                 | Reads                                                                                          |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `current.temperature_2m`             | a field of a field                                                                             |
+| `switch:0.apower`                    | a field whose name has a colon in it, such as a Shelly's                                       |
+| `StatusSNS.ENERGY['Total Today']`    | a field whose name has a space in it                                                           |
+| `meters[0].power`, `items[-1].value` | the first item of a list, the last                                                             |
+| `[time_start..time_end].SEK_per_kWh` | the item of a list whose `time_start` has come and whose `time_end` has not: this hour's price |
+| `[from..].price`                     | the last item whose `from` has come, for a list that gives only when each starts               |
+| `.`                                  | the whole answer, for an address that answers a number or a word as plain text                 |
+
+A number written as text, `"0.42"`, is kept as a number; a list or an object is not kept. A device
+whose answer has none of its readings, or that does not answer, is offline until it does, and the
+bridge's log says why once. A reading's unit says what it is: `°C` is a temperature, `W` power and
+`kWh` energy, so the device's card shows it first.
+
+Some more:
+
+```bash
+# the price of electricity this hour, in Swedish price area SE3, from elprisetjustnu.se
+device-create Electricity price --driver http \
+  --config 'url=https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json' \
+  --config 'read=price=[time_start..time_end].SEK_per_kWh SEK/kWh' --config interval=5m
+
+# a Shelly of the second generation, over HTTP
+device-create Garage plug --driver http --config 'url=http://192.0.2.31/rpc/Shelly.GetStatus' \
+  --config 'read=power=switch:0.apower W; on=switch:0.output; temperature=switch:0.temperature.tC °C' --config interval=30s
+
+# a Tasmota plug
+device-create Desk plug --driver http --config 'url=http://192.0.2.32/cm?cmnd=Status%2010' \
+  --config 'read=power=StatusSNS.ENERGY.Power W; today=StatusSNS.ENERGY.Today kWh' --config interval=30s
+```
+
+A device of the `http` driver only reads: its endpoints are readings, and a Shelly or Tasmota asked
+this way is switched from its own page. Connect it to the broker to switch it from EiN. A config
+`device-create` does not understand is refused with what is wrong, such as `a reading is
+name=path [unit], not 'price'`; the device is made all the same, so change its config, or forget it
+and make it again:
+
+```bash
+attrs -J 'config={"url":"https://…","read":"price=[time_start..time_end].SEK_per_kWh SEK/kWh"}' /dev/electricity-price
+```
+
+The address, with a password in it, is the device's config, which every member of `devices` sees.
+EiN asks it from the machine it runs on, so an address on your home network is asked from there.
+
 ### Check that EiN hears them
 
 ```bash
@@ -284,7 +354,7 @@ automation-status
 The dashboard says the same: its `automation bridge` check is fine while the bridge is connected,
 a warning while it cannot reach the broker, and failed while its service is stopped
 ([Health and the dashboard](../admin/monitoring.md#read-the-checks)). `devices --drivers` lists the
-three drivers with their devices while the bridge runs.
+drivers with their devices while the bridge runs.
 
 ## What a device becomes
 
