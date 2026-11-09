@@ -125,8 +125,9 @@ The sections after it say how to point each kind at the broker by hand.
 ### Add a device found on the network
 
 With the installer's broker, its listener `discovery` asks the network every two minutes what is
-there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers.
-It does not scan addresses: it hears only what announces itself. Each thing that answered is named
+there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers,
+and hears what announces itself over mDNS in between. It does not scan addresses: it hears only what
+announces itself. Each thing that answered is named
 by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
 bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
 its hardware address.
