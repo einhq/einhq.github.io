@@ -34,11 +34,13 @@ propose switching them.
 
 ## What it needs
 
-- **An MQTT broker**, the server the devices and EiN exchange their messages through. The
-  installer runs one beside EiN with `--mqtt`; a broker you already run works as well.
-- **Devices that speak MQTT**: those running ESPHome, and Shelly's of every generation. Printers,
-  Google Cast speakers, web APIs and anything else on the network are asked directly, once added;
-  the bridge that asks them runs while a broker is set.
+- **An MQTT broker**, the server the devices and EiN exchange their messages through, for the
+  devices that speak MQTT: those running ESPHome, and Shelly's of every generation. The installer
+  runs one beside EiN with `--mqtt`; a broker you already run works as well.
+- No broker for the rest: printers, Google Cast speakers, NAS boxes, [web APIs](#a-web-api) and
+  anything else on the network are asked by EiN directly, once added, with or without one. Without
+  the installer's broker nothing is found on the network, though, so add them by hand with
+  `device-create`.
 - Nothing else: neither the Archive nor the media service.
 
 ## Install it
@@ -112,8 +114,8 @@ config set CFG_AUTOMATION_MQTT_USER ein
 **MQTT broker** takes `mqtt://host:1883`, or `mqtts://host:8883` for a broker that takes TLS.
 **MQTT password** is a key: nobody can read it back, and EiN sends it only to that broker
 ([Give a key to another service](../admin/configuration.md#give-a-key-to-another-service)). Saving
-any of the three restarts `automation-bridge`. While **MQTT broker** is empty, automation is off: no
-device is heard.
+any of the three restarts `automation-bridge`. While **MQTT broker** is empty no device is heard
+on a broker, and only the devices EiN asks over the network itself are read.
 
 ## Connect a device
 
@@ -341,17 +343,17 @@ EiN asks it from the machine it runs on, so an address on your home network is a
 automation-status
 ```
 
-| What it says                                 | What it means                                                                                                                                           |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `5 devices, 31 endpoints, 18420 messages`    | The bridge is connected: the devices its drivers drive, their endpoints, and the messages it has had since it started.                                  |
-| `drivers: ha-discovery, shelly, shelly-gen1` | The drivers it runs, as **Device sources** names them.                                                                                                  |
-| `not read: <device>/<endpoint>: <why>`       | An endpoint whose values the bridge cannot read, such as one announced with a template it does not understand. Nothing of it is kept.                   |
-| `rules: 3, 41 runs`                          | The rules service runs, with its rules and how often they ran; see [Rules](rules.md).                                                                   |
-| `off: no broker set`                         | **MQTT broker** is empty: [install the broker](#install-it) or [give EiN yours](#a-broker-you-already-run).                                             |
-| `cannot reach mqtt://…: <why>`               | The broker does not answer, or refuses EiN's account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute. |
-| `not running`                                | The `automation-bridge` service is stopped: `service start automation-bridge`, as the administrator.                                                    |
+| What it says                                 | What it means                                                                                                                                                                               |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `5 devices, 31 endpoints, 18420 messages`    | The bridge is connected: the devices its drivers drive, their endpoints, and the messages it has had since it started.                                                                      |
+| `drivers: ha-discovery, shelly, shelly-gen1` | The drivers it runs, as **Device sources** names them.                                                                                                                                      |
+| `not read: <device>/<endpoint>: <why>`       | An endpoint whose values the bridge cannot read, such as one announced with a template it does not understand. Nothing of it is kept.                                                       |
+| `rules: 3, 41 runs`                          | The rules service runs, with its rules and how often they ran; see [Rules](rules.md).                                                                                                       |
+| `…; no broker set, so only …`                | **MQTT broker** is empty: the devices EiN asks over the network are read, and none on a broker. [Install the broker](#install-it) or [give EiN yours](#a-broker-you-already-run) for those. |
+| `cannot reach mqtt://…: <why>`               | The broker does not answer, or refuses EiN's account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute.                                     |
+| `not running`                                | The `automation-bridge` service is stopped: `service start automation-bridge`, as the administrator.                                                                                        |
 
-The dashboard says the same: its `automation bridge` check is fine while the bridge is connected,
+The dashboard says the same: its `automation bridge` check is fine while the bridge is connected, or runs without a broker,
 a warning while it cannot reach the broker, and failed while its service is stopped
 ([Health and the dashboard](../admin/monitoring.md#read-the-checks)). `devices --drivers` lists the
 drivers with their devices while the bridge runs.
@@ -458,7 +460,7 @@ The module's settings are in the **Automation** group of **Settings → System**
 
 | Setting                           | On the Settings page         | Default                           | What it does                                                                                                                                                                                                  |
 | --------------------------------- | ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**              | empty; `--mqtt` sets it           | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, automation is off                                                                                                                            |
+| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**              | empty; `--mqtt` sets it           | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, only the devices EiN asks over the network are read                                                                                          |
 | `CFG_AUTOMATION_MQTT_USER`        | **MQTT user**                | empty; `--mqtt` sets `ein`        | The account EiN signs in to the broker with. Empty, it signs in without one                                                                                                                                   |
 | `CFG_AUTOMATION_MQTT_KEY`         | **MQTT password**            | none; `--mqtt` sets it            | That account's password, a key nobody can read back                                                                                                                                                           |
 | `CFG_AUTOMATION_SOURCES`          | **Device sources**           | `ha-discovery shelly shelly-gen1` | Which drivers the bridge runs, separated by spaces: `ha-discovery` for ESPHome and whatever announces itself as it does, `shelly` for Shelly's second generation and later, and `shelly-gen1` for the first   |
