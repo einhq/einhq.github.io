@@ -194,9 +194,9 @@ installed modules are kept.
 
 `/dev` holds the devices: each sensor, plug, button, phone or GPS logger EiN knows is a folder
 `/dev/<device>`, its readings, positions and switches the nodes in it. A driver makes the devices it
-finds, and members of the `devices` group make the others with `device-create`, which gives each to
-whoever made it. `/dev` itself stays the administrator's, with the mode `0755`; a device is `0750`
-with the group `users`, read by everyone signed in and no visitor.
+finds, and members of the `devices` group make the others with `device-create`. `/dev` itself stays
+the administrator's, with the mode `0755`; a device is the administrator's and the group `devices`',
+`0770`, read by its members and by whoever a member shares it with.
 [Devices, endpoints and drivers](devices.md) describes them.
 
 Beside the devices are EiN's own nodes. `/dev/events` and `/dev/pipeline-events` are `router` nodes:

@@ -578,7 +578,7 @@ share:</p>
 <td><code>/dev</code></td>
 <td><code>admin</code></td>
 <td><code>0755</code></td>
-<td>Everyone passes through; only the administrator adds to it, and members of <code>devices</code> make devices with <code>device-create</code> (<a href="devices.html">Devices and their keys</a>). A device is <code>0750</code> with the group <code>users</code>, so no visitor reads it.</td>
+<td>Everyone passes through; only the administrator adds to it, and members of <code>devices</code> make devices with <code>device-create</code> (<a href="devices.html">Devices and their keys</a>). A device is <code>0770</code> with the group <code>devices</code>, so only its members and whoever they share it with read it.</td>
 </tr>
 <tr>
 <td><code>/home/&lt;user&gt;</code></td>

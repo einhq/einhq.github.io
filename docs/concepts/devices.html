@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Devices, endpoints and drivers – EiN documentation</title>
-    <meta name="description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
+    <meta name="description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or, as the administrator, before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/concepts/devices.html">
     <meta property="og:title" content="Devices, endpoints and drivers – EiN documentation">
-    <meta property="og:description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
+    <meta property="og:description" content="A device is something outside EiN that reports or can be told what to do: a temperature sensor, a plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each one in the tree at /dev/&lt;device&gt;, with what it reports and what it can be told as files under it. This page explains how that is laid out, how a device's readings get in and go out, and what moves them. Read it before writing to devices from the terminal or a script, or, as the administrator, before binding a queue to them. Devices covers the pages, and Devices and their keys who may do what.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -95,8 +95,8 @@
 plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each
 one in the tree at <code>/dev/&lt;device&gt;</code>, with what it reports and what it can be told as files under it.
 This page explains how that is laid out, how a device&#39;s readings get in and go out, and what moves
-them. Read it before writing to devices from the terminal or a script, or before binding a queue to
-them. <a href="../guide/devices.html">Devices</a> covers the pages, and
+them. Read it before writing to devices from the terminal or a script, or, as the administrator,
+before binding a queue to them. <a href="../guide/devices.html">Devices</a> covers the pages, and
 <a href="../admin/devices.html">Devices and their keys</a> who may do what.</p>
 <h2 id="a-device-is-a-folder">A device is a folder<a class="anchor" href="#a-device-is-a-folder" aria-label="Link to this section"></a></h2>
 <p>Devices sit directly under <code>/dev</code>, beside EiN&#39;s own <code>null</code> and event routers. A device is a node of
@@ -342,7 +342,9 @@ own folder for these writes and nothing else; see
 <a href="../admin/devices.html#device-keys">Devices and their keys</a>.</p>
 <h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
 <p>Every reading a driver keeps is also published on a routing key, a name a message goes out under,
-which any queue or log bound to it gets a copy of:</p>
+which any queue or log bound to it gets a copy of. Only the administrator binds one, since a queue
+bound to <code>dev.#</code> hears every device whoever may read it; the rules of the
+<a href="../automation/rules.html">Automation</a> module read them for everyone else:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -372,17 +374,18 @@ file with thousands of positions publishes only its newest.</p>
 <p>In a key, <code>*</code> stands for one part and <code>#</code> for any number of them, none included:
 <code>dev.*.temperature</code> is every endpoint called <code>temperature</code>, and <code>dev.hall-plug.#</code> everything the hall
 plug says, its coming and going included.</p>
-<h3 id="a-queue-of-your-own">A queue of your own<a class="anchor" href="#a-queue-of-your-own" aria-label="Link to this section"></a></h3>
+<h3 id="a-queue-bound-to-keys">A queue bound to keys<a class="anchor" href="#a-queue-bound-to-keys" aria-label="Link to this section"></a></h3>
 <p>A queue bound to keys keeps every message that comes on them until it is taken, whether or not
-anyone is reading. Make one in your home for what you want, such as every press of the porch button:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+anyone is reading. The administrator makes one for what they want, such as every press of the porch
+button:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mkqueue -k <span class="hljs-string">&#x27;dev.porch-button.#&#x27;</span> ~/presses
 queue-peek ~/presses     <span class="hljs-comment"># the next ones, left in the queue</span>
 <span class="hljs-built_in">cat</span> ~/presses            <span class="hljs-comment"># takes them out as it prints them</span></code></pre></div>
 <p>Remove it with <code>rm ~/presses</code> when you no longer want it, or it keeps filling.</p>
-<h3 id="a-log-of-your-own">A log of your own<a class="anchor" href="#a-log-of-your-own" aria-label="Link to this section"></a></h3>
+<h3 id="a-log-bound-to-keys">A log bound to keys<a class="anchor" href="#a-log-bound-to-keys" aria-label="Link to this section"></a></h3>
 <p>A log keeps what comes on its keys as entries with their times, for as long as you say:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mklog -k <span class="hljs-string">&#x27;dev.*.temperature&#x27;</span> -r <span class="hljs-string">&#x27;90 day&#x27;</span> ~/temperatures
 log-read ~/temperatures --since 1d
 log-read ~/temperatures --since 30d --bucket 1d --field value --agg max</code></pre></div>
@@ -414,7 +417,7 @@ gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-of-your-own">A queue of your own</a></li><li class="nested"><a href="#a-log-of-your-own">A log of your own</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-bound-to-keys">A queue bound to keys</a></li><li class="nested"><a href="#a-log-bound-to-keys">A log bound to keys</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

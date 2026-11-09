@@ -27,8 +27,11 @@ Each event goes out under a key made of the node's type and the event,
 `system.vfs.<nodeType>.<eventType>`: a photo's new size is `system.vfs.file.updated`, a photo added
 to an album `system.vfs.album.child-attached`. Whoever listens binds only the keys it cares about,
 so a listener for files never hears about the thousands of small writes a busy system makes
-elsewhere. The event is sent only after the change is saved: nothing reacts to a change that did
-not happen.
+elsewhere. Only the administrator binds a queue, a log or a track to keys (their `routingKeys`
+attribute), as EiN's services and pipelines do: a message goes to whoever is bound, whether or not
+they may read the node it is about, so anyone else is refused with
+`Access denied for operation 'change routingKeys'`. The event is sent only after the change is
+saved: nothing reacts to a change that did not happen.
 
 The same write also leaves a record in the audit trail, in the same transaction, so a record
 exists exactly when the change does. [Trace a result back to its cause](#trace-a-result-back-to-its-cause)

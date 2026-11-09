@@ -368,9 +368,9 @@ lamp switched on an hour after it was asked would surprise.
 <a href="../guide/devices.html#switch-something">Switch something</a> has the rest.</p>
 <h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
 <p>Every reading, press and change of state is kept in its endpoint and published on the routing key
-<code>dev.&lt;device&gt;.&lt;endpoint&gt;</code>, and a device coming or going on <code>dev.&lt;device&gt;</code>, where a queue or a log of
-your own can take it, and where the rules service reads them:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<code>dev.&lt;device&gt;.&lt;endpoint&gt;</code>, and a device coming or going on <code>dev.&lt;device&gt;</code>, where the rules service
+reads them and a queue or a log the administrator binds can take them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mkqueue -k <span class="hljs-string">&#x27;dev.porch-button.#&#x27;</span> ~/presses
 mklog -k <span class="hljs-string">&#x27;dev.*.temperature&#x27;</span> -r <span class="hljs-string">&#x27;90 day&#x27;</span> ~/temperatures</code></pre></div>
 <p>A number is kept and published at most once every 10 seconds for each endpoint (<strong>Seconds between
@@ -385,26 +385,27 @@ and <a href="../concepts/devices.html#how-often-a-reading-is-kept">How often a r
 </tr>
 </thead>
 <tbody><tr>
-<td>Everyone signed in</td>
-<td>See every device, its readings and its history; switch and set devices; bind queues and logs of their own to their keys</td>
+<td>Members of the <code>devices</code> group</td>
+<td>See every device, its readings and its history; switch and set devices; share, rename and forget them</td>
+</tr>
+<tr>
+<td>Someone a device is shared with</td>
+<td>See that device, and switch it when it is shared to edit</td>
 </tr>
 <tr>
 <td>Members of the <code>automation</code> group</td>
-<td>Also write <a href="rules.html">rules</a></td>
-</tr>
-<tr>
-<td>Members of the <code>devices</code> group</td>
-<td>Also rename and forget devices</td>
+<td>Also write <a href="rules.html">rules</a>, which switch with their own rights</td>
 </tr>
 <tr>
 <td>The administrator</td>
-<td>Also add people to either group, and narrow who may switch a device</td>
+<td>Everything: add people to either group, and bind queues and logs to the devices&#39; keys</td>
 </tr>
 </tbody></table>
 </div>
-<p>The devices the drivers find belong to the administrator. <a href="../admin/devices.html">Devices and their keys</a>
-shows how to keep a switch to some people, and why a door or motion sensor&#39;s readings are everyone&#39;s
-unless narrowed.</p>
+<p>The devices the drivers find belong to the administrator and the <code>devices</code> group, and nobody else
+reads them, a door or motion sensor included, until a member shares one.
+<a href="../admin/devices.html">Devices and their keys</a> shows how to share a device and keep a switch to some
+people.</p>
 <h2 id="ask-the-assistant">Ask the assistant<a class="anchor" href="#ask-the-assistant" aria-label="Link to this section"></a></h2>
 <p>With the <a href="../assistant/index.html">Assistant</a> installed, the chat reads the devices: ask &quot;how warm is
 it in the hall?&quot;, &quot;which devices are offline?&quot; or &quot;how much did the heater draw yesterday?&quot;, and it

@@ -4,8 +4,8 @@ A device is something outside EiN that reports or can be told what to do: a temp
 plug, a button, a phone that says where it is, a GPS logger whose files you copy in. EiN keeps each
 one in the tree at `/dev/<device>`, with what it reports and what it can be told as files under it.
 This page explains how that is laid out, how a device's readings get in and go out, and what moves
-them. Read it before writing to devices from the terminal or a script, or before binding a queue to
-them. [Devices](../guide/devices.md) covers the pages, and
+them. Read it before writing to devices from the terminal or a script, or, as the administrator,
+before binding a queue to them. [Devices](../guide/devices.md) covers the pages, and
 [Devices and their keys](../admin/devices.md) who may do what.
 
 ## A device is a folder
@@ -178,7 +178,9 @@ own folder for these writes and nothing else; see
 ## Readings on the bus
 
 Every reading a driver keeps is also published on a routing key, a name a message goes out under,
-which any queue or log bound to it gets a copy of:
+which any queue or log bound to it gets a copy of. Only the administrator binds one, since a queue
+bound to `dev.#` hears every device whoever may read it; the rules of the
+[Automation](../automation/rules.md) module read them for everyone else:
 
 | Routing key               | What comes on it                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------- |
@@ -203,13 +205,14 @@ In a key, `*` stands for one part and `#` for any number of them, none included:
 `dev.*.temperature` is every endpoint called `temperature`, and `dev.hall-plug.#` everything the hall
 plug says, its coming and going included.
 
-### A queue of your own
+### A queue bound to keys
 
 A queue bound to keys keeps every message that comes on them until it is taken, whether or not
-anyone is reading. Make one in your home for what you want, such as every press of the porch button:
+anyone is reading. The administrator makes one for what they want, such as every press of the porch
+button:
 
 ```bash
-# in EiN's terminal
+# in EiN's terminal, as the administrator
 mkqueue -k 'dev.porch-button.#' ~/presses
 queue-peek ~/presses     # the next ones, left in the queue
 cat ~/presses            # takes them out as it prints them
@@ -217,12 +220,12 @@ cat ~/presses            # takes them out as it prints them
 
 Remove it with `rm ~/presses` when you no longer want it, or it keeps filling.
 
-### A log of your own
+### A log bound to keys
 
 A log keeps what comes on its keys as entries with their times, for as long as you say:
 
 ```bash
-# in EiN's terminal
+# in EiN's terminal, as the administrator
 mklog -k 'dev.*.temperature' -r '90 day' ~/temperatures
 log-read ~/temperatures --since 1d
 log-read ~/temperatures --since 30d --bucket 1d --field value --agg max

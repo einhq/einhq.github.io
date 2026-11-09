@@ -627,9 +627,9 @@ installed modules are kept.</p>
 <h2 id="dev-and-tmp">/dev and /tmp<a class="anchor" href="#dev-and-tmp" aria-label="Link to this section"></a></h2>
 <p><code>/dev</code> holds the devices: each sensor, plug, button, phone or GPS logger EiN knows is a folder
 <code>/dev/&lt;device&gt;</code>, its readings, positions and switches the nodes in it. A driver makes the devices it
-finds, and members of the <code>devices</code> group make the others with <code>device-create</code>, which gives each to
-whoever made it. <code>/dev</code> itself stays the administrator&#39;s, with the mode <code>0755</code>; a device is <code>0750</code>
-with the group <code>users</code>, read by everyone signed in and no visitor.
+finds, and members of the <code>devices</code> group make the others with <code>device-create</code>. <code>/dev</code> itself stays
+the administrator&#39;s, with the mode <code>0755</code>; a device is the administrator&#39;s and the group <code>devices</code>&#39;,
+<code>0770</code>, read by its members and by whoever a member shares it with.
 <a href="devices.html">Devices, endpoints and drivers</a> describes them.</p>
 <p>Beside the devices are EiN&#39;s own nodes. <code>/dev/events</code> and <code>/dev/pipeline-events</code> are <code>router</code> nodes:
 modules announce the facts they derive from changes to the tree on <code>/dev/events</code>, and the pipeline

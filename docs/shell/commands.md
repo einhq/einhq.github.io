@@ -157,7 +157,8 @@ The sensors, plugs, phones and loggers under `/dev`; [Devices](../guide/devices.
 | How an endpoint went, an average an hour                  | `device-history hall-sensor/temperature --since 7d --bucket 1h`              | [device-history](../reference/commands-core.md)          |
 | Switch or set a control                                   | `echo on > /dev/hall-plug/switch-0`, `echo toggle > /dev/hall-plug/switch-0` | [Switch something](../guide/devices.md#switch-something) |
 | Follow an endpoint as its values come                     | `tail -f /dev/hall-sensor/temperature`                                       | [tail](../reference/commands-core.md#tail)               |
-| Every press of a button, kept for you to read             | `mkqueue -k 'dev.porch-button.#' ~/presses`                                  | [mkqueue](../reference/commands-core.md#mkqueue)         |
+| Every press of a button kept, as the administrator        | `mkqueue -k 'dev.porch-button.#' ~/presses`                                  | [mkqueue](../reference/commands-core.md#mkqueue)         |
+| Share a device, as a member of `devices`                  | `share-set -m g:parents:rx /dev/front-door`                                  | [Share a device](../admin/devices.md#share-a-device)     |
 | Make a phone, tracker or logger, as a member of `devices` | `device-create 'Ruby phone' --driver tracker --class phone`                  | [device-create](../reference/commands-core.md)           |
 | Give a GPX file to a tracker                              | `cat ~/walk.gpx > /dev/jon-s-etrex`                                          | [cat](../reference/commands-core.md#cat)                 |
 | The address a phone posts to, with a new key              | `device-key ruby-phone --new --origin https://ein.wrenfield.example`         | [device-key](../reference/commands-core.md)              |

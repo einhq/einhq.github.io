@@ -3,8 +3,8 @@
 The **Devices** page holds the things outside EiN that report to it or can be switched from it: the
 sensors, plugs, switches, lights and buttons in the house, a phone that says where it is, a GPS
 logger, a boat. Each has a page with what it reports now, how that went over time, and the switches
-to turn. This page is for everyone who uses them, and for the members of the `devices` group who
-add phones and loggers. [Devices, endpoints and drivers](../concepts/devices.md) explains how they
+to turn. The members of the `devices` group see them all and add phones and loggers; anyone else
+sees the devices a member has shared with them. This page is for everyone who uses them. [Devices, endpoints and drivers](../concepts/devices.md) explains how they
 are kept, and [Devices and their keys](../admin/devices.md) who may do what.
 
 ## Where devices come from

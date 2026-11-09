@@ -243,11 +243,11 @@ lamp switched on an hour after it was asked would surprise.
 ## Readings on the bus
 
 Every reading, press and change of state is kept in its endpoint and published on the routing key
-`dev.<device>.<endpoint>`, and a device coming or going on `dev.<device>`, where a queue or a log of
-your own can take it, and where the rules service reads them:
+`dev.<device>.<endpoint>`, and a device coming or going on `dev.<device>`, where the rules service
+reads them and a queue or a log the administrator binds can take them:
 
 ```bash
-# in EiN's terminal
+# in EiN's terminal, as the administrator
 mkqueue -k 'dev.porch-button.#' ~/presses
 mklog -k 'dev.*.temperature' -r '90 day' ~/temperatures
 ```
@@ -258,16 +258,17 @@ and [How often a reading is kept](../concepts/devices.md#how-often-a-reading-is-
 
 ## Who may do what
 
-| Who                               | What they may do                                                                                                        |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Everyone signed in                | See every device, its readings and its history; switch and set devices; bind queues and logs of their own to their keys |
-| Members of the `automation` group | Also write [rules](rules.md)                                                                                            |
-| Members of the `devices` group    | Also rename and forget devices                                                                                          |
-| The administrator                 | Also add people to either group, and narrow who may switch a device                                                     |
+| Who                               | What they may do                                                                                      |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Members of the `devices` group    | See every device, its readings and its history; switch and set devices; share, rename and forget them |
+| Someone a device is shared with   | See that device, and switch it when it is shared to edit                                              |
+| Members of the `automation` group | Also write [rules](rules.md), which switch with their own rights                                      |
+| The administrator                 | Everything: add people to either group, and bind queues and logs to the devices' keys                 |
 
-The devices the drivers find belong to the administrator. [Devices and their keys](../admin/devices.md)
-shows how to keep a switch to some people, and why a door or motion sensor's readings are everyone's
-unless narrowed.
+The devices the drivers find belong to the administrator and the `devices` group, and nobody else
+reads them, a door or motion sensor included, until a member shares one.
+[Devices and their keys](../admin/devices.md) shows how to share a device and keep a switch to some
+people.
 
 ## Ask the assistant
 

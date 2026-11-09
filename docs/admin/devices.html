@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Devices and their keys – EiN documentation</title>
-    <meta name="description" content="Devices are everyone's to look at and to switch, a few people's to add and remove, and a device's own to write to when it has a key. This page is for administrators: who may do what with the devices under /dev, how to narrow a switch to some people, what a device key opens, and what reaches EiN without signing in. Devices describes the pages, and Devices, endpoints and drivers how devices are kept.">
+    <meta name="description" content="Devices are the devices group's to look at, switch and look after, and anyone else's once a member shares one with them, and a device's own to write to when it has a key. This page is for administrators: who may do what with the devices under /dev, how to share a device or keep a switch to some people, what a device key opens, and what reaches EiN without signing in. Devices describes the pages, and Devices, endpoints and drivers how devices are kept.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/devices.html">
     <meta property="og:title" content="Devices and their keys – EiN documentation">
-    <meta property="og:description" content="Devices are everyone's to look at and to switch, a few people's to add and remove, and a device's own to write to when it has a key. This page is for administrators: who may do what with the devices under /dev, how to narrow a switch to some people, what a device key opens, and what reaches EiN without signing in. Devices describes the pages, and Devices, endpoints and drivers how devices are kept.">
+    <meta property="og:description" content="Devices are the devices group's to look at, switch and look after, and anyone else's once a member shares one with them, and a device's own to write to when it has a key. This page is for administrators: who may do what with the devices under /dev, how to share a device or keep a switch to some people, what a device key opens, and what reaches EiN without signing in. Devices describes the pages, and Devices, endpoints and drivers how devices are kept.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -91,10 +91,11 @@
           <h1>Devices and their keys</h1>
         </header>
         <article class="prose">
-<p>Devices are everyone&#39;s to look at and to switch, a few people&#39;s to add and remove, and a device&#39;s own
-to write to when it has a key. This page is for administrators: who may do what with the devices
-under <code>/dev</code>, how to narrow a switch to some people, what a device key opens, and what reaches EiN
-without signing in. <a href="../guide/devices.html">Devices</a> describes the pages, and
+<p>Devices are the <code>devices</code> group&#39;s to look at, switch and look after, and anyone else&#39;s once a
+member shares one with them, and a device&#39;s own to write to when it has a key. This page is for
+administrators: who may do what with the devices under <code>/dev</code>, how to share a device or keep a
+switch to some people, what a device key opens, and what reaches EiN without signing in.
+<a href="../guide/devices.html">Devices</a> describes the pages, and
 <a href="../concepts/devices.html">Devices, endpoints and drivers</a> how devices are kept.</p>
 <h2 id="who-may-do-what">Who may do what<a class="anchor" href="#who-may-do-what" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -105,41 +106,39 @@ without signing in. <a href="../guide/devices.html">Devices</a> describes the pa
 </tr>
 </thead>
 <tbody><tr>
-<td>Everyone signed in</td>
-<td>See every device, its readings and its history; switch and set every control; bind queues and logs of their own to any device&#39;s routing keys</td>
-</tr>
-<tr>
 <td>Members of the <code>devices</code> group</td>
-<td>Also make devices (<code>device-create</code>), rename them (<code>device-label</code>) and forget them (<code>device-forget</code>), any device, whoever made it</td>
+<td>See every device, its readings and its history; switch and set every control; share a device; make (<code>device-create</code>), rename (<code>device-label</code>) and forget (<code>device-forget</code>) devices</td>
 </tr>
 <tr>
-<td>A device&#39;s owner</td>
-<td>Whoever made it: also write values to its endpoints, edit its track (its trips, with the Archive), make its key, and narrow it with <code>chmod</code></td>
+<td>Someone a device is shared with</td>
+<td>See that device and its readings, and switch it when it is shared to edit</td>
 </tr>
 <tr>
 <td>The administrator</td>
-<td>Everything: also add people to <code>devices</code>, own the devices drivers find, and narrow who may switch a control</td>
+<td>Everything: own every device, add people to <code>devices</code>, and bind queues and logs to the devices&#39; routing keys</td>
+</tr>
+<tr>
+<td>Everyone else signed in</td>
+<td>Nothing of the devices: no device, reading or switch, nor what they publish</td>
 </tr>
 <tr>
 <td>A visitor who is not signed in</td>
-<td>Nothing: no device, reading or switch, whether or not visitors may browse</td>
+<td>Nothing either, whether or not visitors may browse</td>
 </tr>
 </tbody></table>
 </div>
-<p>EiN makes the group <code>devices</code> (<strong>Devices</strong>, &quot;May make, name and forget the devices under /dev&quot;) at
-every start when it is missing. Add someone to it in <strong>Settings → Groups</strong>, or in the terminal; the
-change applies from their next sign-in:</p>
+<p>EiN makes the group <code>devices</code> (<strong>Devices</strong>, &quot;May see, switch, share, make, name and forget every
+device under /dev&quot;) at every start when it is missing. Add someone to it in <strong>Settings → Groups</strong>, or
+in the terminal; the change applies from their next sign-in:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 group-add-member devices helen</code></pre></div>
 <p><code>/dev</code> stays the administrator&#39;s, with the mode <code>0755</code>, and EiN sets this again at every start:
-nobody else adds to it or removes from it, so EiN&#39;s own <code>null</code> and event routers, and each person&#39;s
-devices, stay where they are. The members of <code>devices</code> make, name and forget devices through the
-three commands, which do it for them as the administrator: <code>device-create</code> makes the device and gives
-it to whoever asked, its owner from then on. <code>device-forget</code> also tells the device&#39;s driver to let it
-go, so a broker&#39;s last announcement does not make it again.</p>
-<p>A device a driver finds belongs to the administrator, since drivers run as EiN&#39;s services; a device
-made with <code>device-create</code> belongs to whoever made it. Either way its group is <code>users</code>, the group
-everyone signed in is in, and its endpoints take its owner:</p>
+nobody else adds to it or removes from it, so EiN&#39;s own <code>null</code> and event routers, and the devices,
+stay where they are. The members of <code>devices</code> make, name and forget devices through the three
+commands, which do it for them as the administrator. <code>device-forget</code> also tells the device&#39;s driver to
+let it go, so a broker&#39;s last announcement does not make it again.</p>
+<p>Every device belongs to the administrator and the group <code>devices</code>, whether a driver found it or a
+member made it with <code>device-create</code>, and its endpoints take its owner and group:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -150,53 +149,55 @@ everyone signed in is in, and its endpoints take its owner:</p>
 </thead>
 <tbody><tr>
 <td>The device, <code>/dev/&lt;device&gt;</code></td>
-<td><code>0750</code></td>
-<td>Everyone signed in reads it; its owner changes it</td>
+<td><code>0770</code></td>
+<td>The members read it, change it and share it</td>
 </tr>
 <tr>
 <td>A reading, a log</td>
-<td><code>0640</code></td>
-<td>Everyone signed in reads it; its owner adds to it</td>
+<td><code>0660</code></td>
+<td>The members read it and add to it</td>
 </tr>
 <tr>
 <td>A track</td>
-<td><code>0750</code></td>
-<td>Everyone signed in reads it and what the Archive keeps under it; its owner changes it</td>
+<td><code>0770</code></td>
+<td>The members read it and change it, and what the Archive keeps under it (its homes, its trips)</td>
 </tr>
 <tr>
 <td>A control</td>
 <td><code>0660</code></td>
-<td>Everyone signed in reads its states and switches it</td>
+<td>The members read its states and switch it</td>
 </tr>
 </tbody></table>
 </div>
-<p>Visitors, who act as the guest, are in none of these groups and read none of it, whatever
-<strong>Visitors may browse</strong> says. A rule of the <a href="../automation/rules.html">Automation</a> module switches as
-the person whose rule it is, with that person&#39;s rights.</p>
-<aside class="callout callout-important"><p class="callout-title">Important</p>
-<p>Readings are not narrowed device by device. Everyone signed in may read any device&#39;s history and
-bind a queue or a log of their own to its routing keys, door and motion sensors included: whoever
-has an account can tell when the front door opened or someone moved in a room, and a phone&#39;s track
-says where its owner has been. Narrowing a device&#39;s nodes, as below, keeps its history from others,
-but not what it publishes from then on: anyone signed in may still bind a queue to
-<code>dev.&lt;device&gt;.#</code>.</p>
-</aside>
+<p>Nobody outside <code>devices</code> reads any of it until it is shared with them. That is what keeps a door or
+motion sensor, which says when someone came home or moved in a room, and a phone&#39;s track, which says
+where its owner has been, to the people who should know. Only the administrator binds a queue or a
+log to routing keys, so nobody else hears what a device publishes either
+(<a href="../concepts/pipelines.html">Changes and pipelines</a>). A rule of the
+<a href="../automation/rules.html">Automation</a> module switches as the person whose rule it is, with that
+person&#39;s rights.</p>
+<h3 id="share-a-device">Share a device<a class="anchor" href="#share-a-device" aria-label="Link to this section"></a></h3>
+<p>A member shares a device on its page with <strong>Share</strong>, as anything else is shared
+(<a href="../guide/sharing.html">Sharing</a>): a person or a group to <strong>view</strong> sees the device, its readings and
+its history; to <strong>edit</strong> they also switch its controls, write to it and share it on. Sharing a device
+shares every endpoint in it, and an endpoint its driver adds later is shared the same way. In the
+terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+share-set -m u:ruby:rwx /dev/ruby-phone      <span class="hljs-comment"># Ruby&#x27;s own phone: hers to see and change</span>
+share-set -m g:parents:rx /dev/front-door    <span class="hljs-comment"># the parents see when the door opens</span>
+share-set -x g:parents /dev/front-door       <span class="hljs-comment"># and no longer</span></code></pre></div>
 <h3 id="keep-a-switch-to-some-people">Keep a switch to some people<a class="anchor" href="#keep-a-switch-to-some-people" aria-label="Link to this section"></a></h3>
 <p>Each control is a node of its own, and whoever may write it may switch it. To keep the heater to a
-group, such as <code>parents</code>:</p>
+group, such as <code>parents</code>, take the switch from the members and share it with the group:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-<span class="hljs-built_in">chown</span> :parents /dev/heater-plug/switch-0</code></pre></div>
+<span class="hljs-built_in">chmod</span> 640 /dev/heater-plug/switch-0
+share-set -m g:parents:rwx /dev/heater-plug/switch-0</code></pre></div>
 <p>Anyone else is then refused with <code>Access denied for operation &#39;w&#39; on node: …</code>, on the page, in the
-terminal and in their rules. <code>chmod 640 /dev/heater-plug/switch-0</code> keeps it to its owner instead, the
-administrator for a device a driver found, while everyone signed in still sees its state. A driver
-leaves the owner, group and mode of an endpoint it already has as they are, so the change holds.</p>
-<h3 id="keep-a-device-to-some-people">Keep a device to some people<a class="anchor" href="#keep-a-device-to-some-people" aria-label="Link to this section"></a></h3>
-<p>To keep a whole device&#39;s history, such as a phone&#39;s track, to its owner and one group, give the
-device that group:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as its owner or the administrator</span>
-<span class="hljs-built_in">chown</span> :parents /dev/ruby-phone</code></pre></div>
-<p>Reaching an endpoint takes passing through its device, so this closes every endpoint of it to
-everyone outside <code>parents</code>. <a href="permissions.html">Permissions in depth</a> explains owners, groups and modes.</p>
+terminal and in their rules, while the members still see its state. A driver leaves the owner, group,
+mode and access list of an endpoint it already has as they are, so the change holds. One endpoint can
+be kept from someone a device is shared with the same way, with <code>share-set -x</code> on the endpoint: it is
+left out of the device for them. <a href="permissions.html">Permissions in depth</a> explains owners, groups and
+modes.</p>
 <h2 id="device-keys">Device keys<a class="anchor" href="#device-keys" aria-label="Link to this section"></a></h2>
 <p>A device cannot sign in. A phone, a tracker or a script that posts to EiN carries the device&#39;s key
 instead, made with the device&#39;s <strong>Info</strong> tab or <code>device-key</code>:</p>
@@ -207,11 +208,12 @@ device-key ruby-phone --new --origin https://ein.wrenfield.example</code></pre><
 <li><strong>What it opens.</strong> Writes to <code>/file/dev/&lt;device&gt;</code> and <code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code> of that one
 device, and nothing else: no other device, no reading, no other address. A <code>GET</code> with the key on the
 device is the device talking, for a tracker that sends only <code>GET</code>s, such as OsmAnd. A write with the
-key is made as the device&#39;s owner, limited to the device&#39;s folder, and the device&#39;s driver is told
-it came from the device (<code>device:ruby-phone</code>).</li>
+key is made as the device&#39;s owner, the administrator, limited to the device&#39;s folder, and the
+device&#39;s driver is told it came from the device (<code>device:ruby-phone</code>).</li>
 <li><strong>How it is sent.</strong> As <code>Authorization: Bearer &lt;key&gt;</code>, or as <code>key=</code> in the address for a client that
 takes only an address, such as Traccar Client.</li>
-<li><strong>Who sees it.</strong> Whoever may change the device: its owner and the administrator. It is kept in the
+<li><strong>Who sees it.</strong> Whoever may change the device: the members of <code>devices</code>, someone it is shared with
+to edit, and the administrator. It is kept in the
 device&#39;s <code>.key</code>, mode <code>0600</code> and the administrator&#39;s, so the address can be shown again.</li>
 <li><strong>Renewing it.</strong> <code>--new</code>, or <strong>New key</strong> on the <strong>Info</strong> tab, makes another; the old address stops
 working at once. <code>--off</code>, or <strong>Take the key away</strong>, removes it, and nothing writes to the device
@@ -229,7 +231,7 @@ dmesg | grep <span class="hljs-string">&#x27;device write refused&#x27;</span></
 signed-in session.</li>
 <li><strong>Nothing else of the devices.</strong> A visitor reads no device, reading or track and switches nothing,
 even with <strong>Visitors may browse</strong> on
-(<a href="permissions.html#visitors-and-share-links">Visitors and share links</a>): the devices are the <code>users</code>
+(<a href="permissions.html#visitors-and-share-links">Visitors and share links</a>): the devices are the <code>devices</code>
 group&#39;s.</li>
 <li><strong>The MQTT broker</strong>, with the <a href="../automation/index.html">Automation</a> module&#39;s, is not EiN: the devices
 sign in to it with their own password, and whoever reaches it with that password switches them.
@@ -255,7 +257,12 @@ Keep its port in your home network
 <tr>
 <td><code>device-key: only whoever may change &lt;device&gt; sees or changes its key</code></td>
 <td>The person may not change the device</td>
-<td>Its owner or the administrator makes the key</td>
+<td>A member of <code>devices</code> makes the key, or shares the device to edit</td>
+</tr>
+<tr>
+<td><code>devices</code> lists nothing, or <code>Access denied</code> on a device</td>
+<td>The person is not in <code>devices</code> and the device is not shared with them</td>
+<td>Share the device with them, or add them to <code>devices</code></td>
 </tr>
 <tr>
 <td>A phone&#39;s posts are refused with <code>403 Forbidden</code></td>
@@ -289,7 +296,7 @@ Keep its port in your home network
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-do-what">Who may do what</a></li><li class="nested"><a href="#keep-a-switch-to-some-people">Keep a switch to some people</a></li><li class="nested"><a href="#keep-a-device-to-some-people">Keep a device to some people</a></li><li><a href="#device-keys">Device keys</a></li><li><a href="#what-reaches-ein-without-signing-in">What reaches EiN without signing in</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#who-may-do-what">Who may do what</a></li><li class="nested"><a href="#share-a-device">Share a device</a></li><li class="nested"><a href="#keep-a-switch-to-some-people">Keep a switch to some people</a></li><li><a href="#device-keys">Device keys</a></li><li><a href="#what-reaches-ein-without-signing-in">What reaches EiN without signing in</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
