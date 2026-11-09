@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 98 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 99 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -322,6 +322,17 @@ Every setting of an EiN with all its modules: 98 of them, in the groups the Sett
 | Default | `10` |
 | Kind | number |
 | Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_SNMP_COMMUNITY`
+
+**SNMP community**. The read-only community EiN asks a device found on the network with when it adds it, and its snmp driver goes on asking it with: public unless the device was set to another.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `public` |
+| Kind | string |
 | From the module | Automation |
 
 ## Faces

@@ -19,6 +19,7 @@ household that uses them. [Rules](rules.md) covers writing rules.
 | The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3                                                                                                                      |
 | The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                    |
 | The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                               |
+| The `snmp` driver                                           | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                    |
 | The `network` driver                                        | Anything else on the network: whether it answers, and how fast                                                                                                          |
 | The `automation-bridge` service                             | Hears the broker and runs the drivers                                                                                                                                   |
 | The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                |
@@ -136,16 +137,29 @@ When something found can become a device and is none yet, the **Devices** page's
 button that says how many, such as **2 found**. It opens **Found on the network**, a card for each,
 and **Add** on a card makes it a device:
 
-| What was found                         | What **Add** does                                                                                                                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A Shelly, of any generation            | EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute, with all it reads and switches.                                            |
-| A printer                              | A device of the `ipp` driver at once: its `state` (idle, printing, stopped), its `warnings` (such as `marker-supply-low-warning`) and a level in % for each ink or toner it reports.                              |
-| A Google Cast speaker or screen        | A device of the `cast` driver: `player` says whether it plays (`idle`, `playing`, `paused`) and `playing` what, as title – artist (app); `volume` and `muted` can be set, and `play`, `pause` and `stop` pressed. |
-| Anything else: a NAS, a router, a TV … | A device of the `network` driver, online while it answers, with its `response-time`. EiN does not speak its own protocol yet.                                                                                     |
-| ESPHome or Tasmota                     | No **Add**: the line under it says how to point it at the broker, and the sections below say more.                                                                                                                |
+| What was found                                | What **Add** does                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A Shelly, of any generation                   | EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute, with all it reads and switches.                                                                                                                                           |
+| A printer                                     | A device of the `ipp` driver at once: its `state` (idle, printing, stopped), its `warnings` (such as `marker-supply-low-warning`) and a level in % for each ink or toner it reports.                                                                                                                             |
+| A Google Cast speaker or screen               | A device of the `cast` driver: `player` says whether it plays (`idle`, `playing`, `paused`) and `playing` what, as title – artist (app); `volume` and `muted` can be set, and `play`, `pause` and `stop` pressed.                                                                                                |
+| Anything that answers SNMP: a NAS, a router … | A device of the `snmp` driver: `uptime`, `load`, `memory-used`, for each volume `<volume>-used` (%) and `<volume>-free` (GB), and a `<sensor>-temperature` for each temperature its agent reports. EiN asks with the community **SNMP community** in the **Automation** settings, `public` unless you change it. |
+| Anything else: a NAS without SNMP, a TV …     | A device of the `network` driver, online while it answers, with its `response-time`. EiN does not speak its own protocol yet.                                                                                                                                                                                    |
+| ESPHome or Tasmota                            | No **Add**: the line under it says how to point it at the broker, and the sections below say more.                                                                                                                                                                                                               |
 
 A device added from the network follows it to a new address: EiN knows it by its hardware address.
 A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.
+
+SNMP is often off on a NAS or a router until it is turned on in its own settings, usually read-only
+with the community `public`; a NETGEAR ReadyNAS has it under **System → SNMP**. One added before
+SNMP was on is a `network` device: forget it and add it again. To see what a device's agent answers
+beyond what the driver reads, walk it:
+
+```bash
+# in EiN's terminal, as a member of the devices group
+automation-snmp 192.0.2.40                      # its name, description and uptime
+automation-snmp 192.0.2.40 1.3.6.1.2.1.25.2.3   # its volumes
+automation-snmp 192.0.2.40 1.3.6.1.4.1          # what its maker adds
+```
 
 Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
 records, each SSDP answer with what the device's own description says, and the raw message, as it came.

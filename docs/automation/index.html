@@ -128,6 +128,10 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 <td>A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop</td>
 </tr>
 <tr>
+<td>The <code>snmp</code> driver</td>
+<td>A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume&#39;s use and its temperatures</td>
+</tr>
+<tr>
 <td>The <code>network</code> driver</td>
 <td>Anything else on the network: whether it answers, and how fast</td>
 </tr>
@@ -258,7 +262,11 @@ and <strong>Add</strong> on a card makes it a device:</p>
 <td>A device of the <code>cast</code> driver: <code>player</code> says whether it plays (<code>idle</code>, <code>playing</code>, <code>paused</code>) and <code>playing</code> what, as title – artist (app); <code>volume</code> and <code>muted</code> can be set, and <code>play</code>, <code>pause</code> and <code>stop</code> pressed.</td>
 </tr>
 <tr>
-<td>Anything else: a NAS, a router, a TV …</td>
+<td>Anything that answers SNMP: a NAS, a router …</td>
+<td>A device of the <code>snmp</code> driver: <code>uptime</code>, <code>load</code>, <code>memory-used</code>, for each volume <code>&lt;volume&gt;-used</code> (%) and <code>&lt;volume&gt;-free</code> (GB), and a <code>&lt;sensor&gt;-temperature</code> for each temperature its agent reports. EiN asks with the community <strong>SNMP community</strong> in the <strong>Automation</strong> settings, <code>public</code> unless you change it.</td>
+</tr>
+<tr>
+<td>Anything else: a NAS without SNMP, a TV …</td>
 <td>A device of the <code>network</code> driver, online while it answers, with its <code>response-time</code>. EiN does not speak its own protocol yet.</td>
 </tr>
 <tr>
@@ -269,6 +277,14 @@ and <strong>Add</strong> on a card makes it a device:</p>
 </div>
 <p>A device added from the network follows it to a new address: EiN knows it by its hardware address.
 A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.</p>
+<p>SNMP is often off on a NAS or a router until it is turned on in its own settings, usually read-only
+with the community <code>public</code>; a NETGEAR ReadyNAS has it under <strong>System → SNMP</strong>. One added before
+SNMP was on is a <code>network</code> device: forget it and add it again. To see what a device&#39;s agent answers
+beyond what the driver reads, walk it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+automation-snmp 192.0.2.40                      <span class="hljs-comment"># its name, description and uptime</span>
+automation-snmp 192.0.2.40 1.3.6.1.2.1.25.2.3   <span class="hljs-comment"># its volumes</span>
+automation-snmp 192.0.2.40 1.3.6.1.4.1          <span class="hljs-comment"># what its maker adds</span></code></pre></div>
 <p>Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
 records, each SSDP answer with what the device&#39;s own description says, and the raw message, as it came.
 For something EiN does not support, it is what there is to go on. <strong>Ignore</strong> leaves one out of the

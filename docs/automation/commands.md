@@ -2,9 +2,9 @@
 
 # Automation commands
 
-The commands the automation module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the automation module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[automation-adopt](#automation-adopt) · [automation-bridge](#automation-bridge) · [automation-found](#automation-found) · [automation-ignore](#automation-ignore) · [automation-rule-check](#automation-rule-check) · [automation-rules](#automation-rules) · [automation-status](#automation-status)
+[automation-adopt](#automation-adopt) · [automation-bridge](#automation-bridge) · [automation-found](#automation-found) · [automation-ignore](#automation-ignore) · [automation-rule-check](#automation-rule-check) · [automation-rules](#automation-rules) · [automation-snmp](#automation-snmp) · [automation-status](#automation-status)
 
 ## A
 
@@ -133,6 +133,35 @@ automation-rules
 ```bash
 service restart automation-rules
 ```
+
+### `automation-snmp`
+
+Walk a device's SNMP objects under an OID (the system group unless one is given), for members of the devices group.
+
+<small>reads only</small>
+
+```text
+automation-snmp [--community=<string>] [--port=<string>] [--limit=<string>] <host> [<oid>]
+```
+
+| Argument  | What it is                                      |
+| --------- | ----------------------------------------------- |
+| `<host>`  | its address.                                    |
+| `[<oid>]` | where to walk from: 1.3.6.1.2.1.1 unless given. |
+
+| Option                 | What it does                                                       |
+| ---------------------- | ------------------------------------------------------------------ |
+| `--community=<string>` | the community to ask with, when not CFG_AUTOMATION_SNMP_COMMUNITY. |
+| `--port=<string>`      | its agent’s port, when not 161.                                    |
+| `--limit=<string>`     | the most objects to answer (5000)                                  |
+
+```bash
+automation-snmp 192.0.2.40
+automation-snmp 192.0.2.40 1.3.6.1.2.1.25.2.3
+automation-snmp 192.0.2.40 1.3.6.1.4.1.4526 --community home
+```
+
+With `JSON_OUTPUT=1`: SnmpObject[]: oid, type, value.
 
 ### `automation-status`
 
