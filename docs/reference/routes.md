@@ -209,17 +209,17 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address                          | Method        | What it does                                                                                                                                                                     |
-| -------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                                                       |
-| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                                             |
-| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                                                    |
-| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                                          |
-| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                                               |
-| `/file/dev/<device>`             | `PUT`, `POST` | Raw input for the device's driver, such as a tracker's position or a GPX file, signed in or with the device's key; see [Devices and their keys](../admin/devices.md#device-keys) |
-| `/file/dev/<device>?key=<key>&…` | `GET`         | The same from a tracker that sends only `GET`s, such as OsmAnd: its query is the input                                                                                           |
-| `/file/dev/<device>/<endpoint>`  | `POST`        | A value: appended to a log or a track, or written to a control                                                                                                                   |
-| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                                              |
+| Address                          | Method        | What it does                                                                                                                                                                                       |
+| -------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                   | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                                                                         |
+| `/file/<path>`                   | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                                                               |
+| `/file/<directory>/?name=<name>` | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                                                                      |
+| `/archive`                       | `POST`        | Collects a selection of files for a download as one zip                                                                                                                                            |
+| `/archive/<token>`               | `GET`         | Downloads that zip                                                                                                                                                                                 |
+| `/file/dev/<device>`             | `PUT`, `POST` | Raw input for the device's driver, such as a tracker's position, a GPX file or a webhook's post, signed in or with the device's key; see [Devices and their keys](../admin/devices.md#device-keys) |
+| `/file/dev/<device>?key=<key>&…` | `GET`         | The same from a device that sends only `GET`s, such as OsmAnd or a button calling an address: its query is the input                                                                               |
+| `/file/dev/<device>/<endpoint>`  | `POST`        | A value: appended to a log or a track, or written to a control                                                                                                                                     |
+| `/__shell`                       |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                                                                |
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse

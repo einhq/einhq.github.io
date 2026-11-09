@@ -208,7 +208,9 @@ when it differs from the one before (see <a href="#how-often-a-reading-is-kept">
 <p>A control is not a store of what you wrote. Writing <code>on</code> to <code>/dev/hall-plug/switch-0</code> sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
 control remembers what was asked, who asked and when (its <code>requested</code> attribute), and the device&#39;s
-page shows the switch as asked, waiting for the device.</p>
+page shows the switch as asked, waiting for the device. A press is remembered only once the driver
+took it: one it refuses, such as pausing a speaker that plays nothing, is answered with the driver&#39;s
+error and leaves the page&#39;s &quot;pressed … by …&quot; as it was.</p>
 <p>What a control takes is its schema:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -272,6 +274,11 @@ device names its driver in its <code>driver</code> attribute.</p>
 <td>A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its <code>position</code> track</td>
 </tr>
 <tr>
+<td><code>webhook</code></td>
+<td>EiN itself</td>
+<td>A button, a sensor or a script that posts to an address: each field it sends becomes a reading</td>
+</tr>
+<tr>
 <td><code>ha-discovery</code></td>
 <td>the <a href="../automation/index.html">Automation</a> module</td>
 <td>Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others</td>
@@ -313,6 +320,57 @@ older Traccar Client versions and many hardware trackers;</li>
 </ul>
 <p>A position at a time the track already has is not added twice, so sending the same file again adds
 nothing.</p>
+<h3 id="cores-webhook-driver">Core&#39;s webhook driver<a class="anchor" href="#cores-webhook-driver" aria-label="Link to this section"></a></h3>
+<p><code>webhook</code> reads what a device or a script posts in the shapes webhooks take, and keeps each field as
+a reading on the endpoint of that name, a log made the first time the field comes. Each reading is
+kept and published on the bus as a driver&#39;s are: a value that repeats the last one is not kept
+again, and a number comes at most once every <code>minInterval</code> of its endpoint.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Posted</th>
+<th>Readings</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a JSON object, <code>{&quot;temperature&quot;: 21.4, &quot;door&quot;: &quot;open&quot;}</code></td>
+<td><code>temperature</code> 21.4, <code>door</code> <code>open</code></td>
+</tr>
+<tr>
+<td>a JSON object within one, <code>{&quot;bme280&quot;: {&quot;humidity&quot;: 40}}</code></td>
+<td><code>bme280-humidity</code> 40</td>
+</tr>
+<tr>
+<td>a JSON list of objects</td>
+<td>each object&#39;s fields, in turn</td>
+</tr>
+<tr>
+<td>a form, or the address&#39;s query, <code>?battery=81&amp;event=single</code></td>
+<td><code>battery</code> 81, <code>event</code> <code>single</code></td>
+</tr>
+<tr>
+<td>a bare value or a line of text, <code>21.4</code></td>
+<td><code>value</code> 21.4</td>
+</tr>
+<tr>
+<td>nothing at all, as a button calling its address</td>
+<td><code>call</code> <code>true</code>, an event</td>
+</tr>
+</tbody></table>
+</div>
+<ul>
+<li><strong>Names.</strong> A field&#39;s name is made an endpoint&#39;s: lower case, anything but letters, digits, <code>-</code> and
+<code>_</code> a <code>-</code>. A field with no name left, or holding a list, is not read; the answer says which.</li>
+<li><strong>Values.</strong> JSON&#39;s numbers, <code>true</code>, <code>false</code> and text are kept as they are. A form&#39;s or a query&#39;s
+text that is a number, <code>true</code> or <code>false</code> is taken as one; <code>0042</code> stays text.</li>
+<li><strong>Time.</strong> A field <code>ts</code>, <code>time</code> or <code>timestamp</code> that reads as a time, a date or epoch seconds or
+milliseconds, is when the post&#39;s readings were made, not a reading. Without one, they are kept
+with the time they arrived.</li>
+<li><strong>Events.</strong> A button&#39;s press is news each time, the same one twice included. The fields named in
+the device&#39;s <code>events</code> setting are kept that way, given when the device is made:
+<code>device-create &#39;Porch&#39; --driver webhook --config events=button</code>.</li>
+</ul>
+<p>The answer says how many readings were new, such as <code>{&quot;taken&quot;: 2, &quot;message&quot;: &quot;2 of 2 readings new&quot;}</code>.</p>
 <h2 id="writing-to-a-device">Writing to a device<a class="anchor" href="#writing-to-a-device" aria-label="Link to this section"></a></h2>
 <p>What is written to the device itself, <code>/dev/&lt;device&gt;</code>, is raw input for its driver: a GPX file, a
 tracker&#39;s post, whatever the driver reads. What is written to an endpoint is a value in EiN&#39;s own
@@ -417,7 +475,7 @@ gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/concepts/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-bound-to-keys">A queue bound to keys</a></li><li class="nested"><a href="#a-log-bound-to-keys">A log bound to keys</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-device-is-a-folder">A device is a folder</a></li><li><a href="#endpoints">Endpoints</a></li><li><a href="#drivers">Drivers</a></li><li class="nested"><a href="#cores-tracker-driver">Core's tracker driver</a></li><li class="nested"><a href="#cores-webhook-driver">Core's webhook driver</a></li><li><a href="#writing-to-a-device">Writing to a device</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li class="nested"><a href="#a-queue-bound-to-keys">A queue bound to keys</a></li><li class="nested"><a href="#a-log-bound-to-keys">A log bound to keys</a></li><li><a href="#how-often-a-reading-is-kept">How often a reading is kept</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

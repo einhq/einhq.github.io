@@ -105,6 +105,7 @@ device names its driver in its `driver` attribute.
 | Driver         | Comes with                                      | What it drives                                                                                               |
 | -------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track |
+| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading               |
 | `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others       |
 | `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                              |
 | `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3), over MQTT                                               |
@@ -141,6 +142,35 @@ the device's `position` track:
 
 A position at a time the track already has is not added twice, so sending the same file again adds
 nothing.
+
+### Core's webhook driver
+
+`webhook` reads what a device or a script posts in the shapes webhooks take, and keeps each field as
+a reading on the endpoint of that name, a log made the first time the field comes. Each reading is
+kept and published on the bus as a driver's are: a value that repeats the last one is not kept
+again, and a number comes at most once every `minInterval` of its endpoint.
+
+| Posted                                                     | Readings                          |
+| ---------------------------------------------------------- | --------------------------------- |
+| a JSON object, `{"temperature": 21.4, "door": "open"}`     | `temperature` 21.4, `door` `open` |
+| a JSON object within one, `{"bme280": {"humidity": 40}}`   | `bme280-humidity` 40              |
+| a JSON list of objects                                     | each object's fields, in turn     |
+| a form, or the address's query, `?battery=81&event=single` | `battery` 81, `event` `single`    |
+| a bare value or a line of text, `21.4`                     | `value` 21.4                      |
+| nothing at all, as a button calling its address            | `call` `true`, an event           |
+
+- **Names.** A field's name is made an endpoint's: lower case, anything but letters, digits, `-` and
+  `_` a `-`. A field with no name left, or holding a list, is not read; the answer says which.
+- **Values.** JSON's numbers, `true`, `false` and text are kept as they are. A form's or a query's
+  text that is a number, `true` or `false` is taken as one; `0042` stays text.
+- **Time.** A field `ts`, `time` or `timestamp` that reads as a time, a date or epoch seconds or
+  milliseconds, is when the post's readings were made, not a reading. Without one, they are kept
+  with the time they arrived.
+- **Events.** A button's press is news each time, the same one twice included. The fields named in
+  the device's `events` setting are kept that way, given when the device is made:
+  `device-create 'Porch' --driver webhook --config events=button`.
+
+The answer says how many readings were new, such as `{"taken": 2, "message": "2 of 2 readings new"}`.
 
 ## Writing to a device
 

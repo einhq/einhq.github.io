@@ -17,7 +17,9 @@ are kept, and [Devices and their keys](../admin/devices.md) who may do what.
   ([Add a device found on the network](../automation/index.md#add-a-device-found-on-the-network)).
 - **Someone makes them.** A phone or a GPS logger announces nothing, so a member of the `devices`
   group makes it by hand (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). EiN's own
-  `tracker` driver then reads what it sends.
+  `tracker` driver then reads what it sends. So is a button, a sensor or a script that posts to an
+  address, read by EiN's `webhook` driver (see
+  [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)).
 
 A device has a name, such as `hall-plug`, that commands and rules use, and a label, such as **Hall
 lamp**, that the pages show. Each thing it reports or takes is an **endpoint** with a name of its
@@ -235,11 +237,36 @@ Over SFTP, copy the file onto the device's path, `/dev/jon-s-etrex`. With the Ar
 uploaded into staging finds its device by itself, and the device's **Trips** tab has **Upload GPX**;
 see [GPX files](../archive/tracks.md#gpx-files).
 
-### Values a script writes
+## A device that posts to a webhook
 
-Something without a driver of its own, such as a script reading a sensor, can write values to a
-device's logs over HTTP. A member of `devices` makes the device and a log for each value, and gives
-the script the device's key:
+Something without a driver of its own, such as a button that calls an address, a sensor that posts
+JSON, or a script reading a meter, posts what it reads to a device driven by EiN's `webhook` driver.
+A member of `devices` makes the device and gives it the device's key:
+
+```bash
+# in EiN's terminal, as a member of devices
+device-create 'Garden sensor' --driver webhook --class sensor
+device-key garden-sensor --new --origin https://ein.wrenfield.example
+```
+
+```bash
+# on the machine that posts
+curl -H 'Authorization: Bearer <the key>' -H 'Content-Type: application/json' \
+  --data '{"soil-moisture": 41.5, "battery": 87}' https://ein.wrenfield.example/file/dev/garden-sensor
+```
+
+The key is the part of the address after `key=`. Each field becomes a reading on the endpoint of that
+name, made the first time it comes, here `soil-moisture` and `battery`: it shows on the device's page
+and is published on the bus as `dev.garden-sensor.soil-moisture`, where the
+[Automation](../automation/rules.md) module's rules hear it, like any driver's reading. A device that
+only takes an address sends its values in it instead,
+`https://ein.wrenfield.example/file/dev/garden-sensor?key=<the key>&soil-moisture=41.5`. What the
+driver reads, and how a button's presses are kept, is in
+[Core's webhook driver](../concepts/devices.md#cores-webhook-driver).
+
+### Values written to an endpoint
+
+A script can also write a value straight to a log it made under a device, with no driver in between:
 
 ```bash
 # in EiN's terminal, as a member of devices
@@ -254,10 +281,10 @@ device-key garden-sensor --new --origin https://ein.wrenfield.example
 curl -H 'Authorization: Bearer <the key>' --data 41.5 https://ein.wrenfield.example/file/dev/garden-sensor/soil-moisture
 ```
 
-The key is the part of the address after `key=`. Each value is kept with the time it arrived, as
-`{"value": 41.5}`, and shows on the device's page like any reading; `valueField` makes the log keep a
-value written in the terminal the same way, `echo 41.5 > /dev/garden-sensor/soil-moisture`. Values
-written this way are not published on the bus, as a driver's readings are.
+Each value is kept with the time it arrived, as `{"value": 41.5}`, and shows on the device's page
+like any reading; `valueField` makes the log keep a value written in the terminal the same way,
+`echo 41.5 > /dev/garden-sensor/soil-moisture`. Values written this way are not published on the bus;
+post them to a `webhook` device for that.
 
 ## Rename or forget a device
 
@@ -291,6 +318,7 @@ device a driver still hears comes back new.
 | Switch or set a control                     | `echo <value> > /dev/<device>/<endpoint>`                                                                              |
 | Follow an endpoint as values come           | `tail -f /dev/<device>/<endpoint>`                                                                                     |
 | Make a phone, tracker or logger             | [`device-create`](../reference/commands-core.md#device-create) `<name> --driver tracker --class <class>`               |
+| Make a device that posts to a webhook       | `device-create <name> --driver webhook`, `--config events=<field>,…` for a button's presses                            |
 | Give a GPX file to a tracker                | `cat <file>.gpx > /dev/<device>`                                                                                       |
 | Show, renew or take away a device's key     | [`device-key`](../reference/commands-core.md#device-key) `<device>`, `--new`, `--off`, `--origin <address>`            |
 | Rename a device or an endpoint              | [`device-label`](../reference/commands-core.md#device-label) `<device>[/<endpoint>] <label>`                           |

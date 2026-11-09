@@ -107,7 +107,9 @@ such as <strong>2 found</strong>, and a Shelly is added from there
 (<a href="../automation/index.html#add-a-device-found-on-the-network">Add a device found on the network</a>).</li>
 <li><strong>Someone makes them.</strong> A phone or a GPS logger announces nothing, so a member of the <code>devices</code>
 group makes it by hand (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). EiN&#39;s own
-<code>tracker</code> driver then reads what it sends.</li>
+<code>tracker</code> driver then reads what it sends. So is a button, a sensor or a script that posts to an
+address, read by EiN&#39;s <code>webhook</code> driver (see
+<a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a>).</li>
 </ul>
 <p>A device has a name, such as <code>hall-plug</code>, that commands and rules use, and a label, such as <strong>Hall
 lamp</strong>, that the pages show. Each thing it reports or takes is an <strong>endpoint</strong> with a name of its
@@ -275,8 +277,9 @@ device&#39;s track as it moves:</p>
 <li>Open the device&#39;s page at the address the phone will reach EiN at, such as
 <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
 <li>Under <strong>Device key</strong>, choose <strong>Make a key</strong>. A QR code and the address appear.</li>
-<li>On the phone, install Traccar Client and scan the QR code in its settings. It fills in the server
-URL and, as the device identifier, the device&#39;s name. <strong>Or type the server URL in by hand</strong> shows
+<li>On the phone, install Traccar Client and scan the QR code in its settings, or with the phone&#39;s
+camera, which opens the app. It fills in the server URL with the key in it and, as the device
+identifier, the device&#39;s name. <strong>Or type the server URL in by hand</strong> shows
 the address to type instead.</li>
 <li>Set how often it reports, for example every 30 seconds, and switch tracking on.</li>
 </ol>
@@ -301,10 +304,26 @@ one without a time is left out:</p>
 <p>Over SFTP, copy the file onto the device&#39;s path, <code>/dev/jon-s-etrex</code>. With the Archive, a GPX file
 uploaded into staging finds its device by itself, and the device&#39;s <strong>Trips</strong> tab has <strong>Upload GPX</strong>;
 see <a href="../archive/tracks.html#gpx-files">GPX files</a>.</p>
-<h3 id="values-a-script-writes">Values a script writes<a class="anchor" href="#values-a-script-writes" aria-label="Link to this section"></a></h3>
-<p>Something without a driver of its own, such as a script reading a sensor, can write values to a
-device&#39;s logs over HTTP. A member of <code>devices</code> makes the device and a log for each value, and gives
-the script the device&#39;s key:</p>
+<h2 id="a-device-that-posts-to-a-webhook">A device that posts to a webhook<a class="anchor" href="#a-device-that-posts-to-a-webhook" aria-label="Link to this section"></a></h2>
+<p>Something without a driver of its own, such as a button that calls an address, a sensor that posts
+JSON, or a script reading a meter, posts what it reads to a device driven by EiN&#39;s <code>webhook</code> driver.
+A member of <code>devices</code> makes the device and gives it the device&#39;s key:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create <span class="hljs-string">&#x27;Garden sensor&#x27;</span> --driver webhook --class sensor
+device-key garden-sensor --new --origin https://ein.wrenfield.example</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that posts</span>
+curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x27;</span> -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  --data <span class="hljs-string">&#x27;{&quot;soil-moisture&quot;: 41.5, &quot;battery&quot;: 87}&#x27;</span> https://ein.wrenfield.example/file/dev/garden-sensor</code></pre></div>
+<p>The key is the part of the address after <code>key=</code>. Each field becomes a reading on the endpoint of that
+name, made the first time it comes, here <code>soil-moisture</code> and <code>battery</code>: it shows on the device&#39;s page
+and is published on the bus as <code>dev.garden-sensor.soil-moisture</code>, where the
+<a href="../automation/rules.html">Automation</a> module&#39;s rules hear it, like any driver&#39;s reading. A device that
+only takes an address sends its values in it instead,
+<code>https://ein.wrenfield.example/file/dev/garden-sensor?key=&lt;the key&gt;&amp;soil-moisture=41.5</code>. What the
+driver reads, and how a button&#39;s presses are kept, is in
+<a href="../concepts/devices.html#cores-webhook-driver">Core&#39;s webhook driver</a>.</p>
+<h3 id="values-written-to-an-endpoint">Values written to an endpoint<a class="anchor" href="#values-written-to-an-endpoint" aria-label="Link to this section"></a></h3>
+<p>A script can also write a value straight to a log it made under a device, with no driver in between:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-create <span class="hljs-string">&#x27;Garden sensor&#x27;</span> --class sensor
 mklog /dev/garden-sensor/soil-moisture
@@ -312,10 +331,10 @@ attrs -s valueField=value /dev/garden-sensor/soil-moisture
 device-key garden-sensor --new --origin https://ein.wrenfield.example</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that runs the script</span>
 curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x27;</span> --data 41.5 https://ein.wrenfield.example/file/dev/garden-sensor/soil-moisture</code></pre></div>
-<p>The key is the part of the address after <code>key=</code>. Each value is kept with the time it arrived, as
-<code>{&quot;value&quot;: 41.5}</code>, and shows on the device&#39;s page like any reading; <code>valueField</code> makes the log keep a
-value written in the terminal the same way, <code>echo 41.5 &gt; /dev/garden-sensor/soil-moisture</code>. Values
-written this way are not published on the bus, as a driver&#39;s readings are.</p>
+<p>Each value is kept with the time it arrived, as <code>{&quot;value&quot;: 41.5}</code>, and shows on the device&#39;s page
+like any reading; <code>valueField</code> makes the log keep a value written in the terminal the same way,
+<code>echo 41.5 &gt; /dev/garden-sensor/soil-moisture</code>. Values written this way are not published on the bus;
+post them to a <code>webhook</code> device for that.</p>
 <h2 id="rename-or-forget-a-device">Rename or forget a device<a class="anchor" href="#rename-or-forget-a-device" aria-label="Link to this section"></a></h2>
 <p>Members of the <code>devices</code> group rename a device on its page with <strong>Edit</strong>: <strong>Name</strong>, what its pages
 and cards call it, and under <strong>Endpoints</strong> a name for each endpoint it announces, each field headed
@@ -365,6 +384,10 @@ device a driver still hears comes back new.</p>
 <tr>
 <td>Make a phone, tracker or logger</td>
 <td><a href="../reference/commands-core.html#device-create"><code>device-create</code></a> <code>&lt;name&gt; --driver tracker --class &lt;class&gt;</code></td>
+</tr>
+<tr>
+<td>Make a device that posts to a webhook</td>
+<td><code>device-create &lt;name&gt; --driver webhook</code>, <code>--config events=&lt;field&gt;,…</code> for a button&#39;s presses</td>
 </tr>
 <tr>
 <td>Give a GPX file to a tracker</td>
@@ -460,7 +483,7 @@ published.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-devices-come-from">Where devices come from</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-something">Switch something</a></li><li><a href="#read-what-a-device-reported">Read what a device reported</a></li><li><a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a></li><li class="nested"><a href="#report-from-a-phone">Report from a phone</a></li><li class="nested"><a href="#gpx-files">GPX files</a></li><li class="nested"><a href="#values-a-script-writes">Values a script writes</a></li><li><a href="#rename-or-forget-a-device">Rename or forget a device</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-devices-come-from">Where devices come from</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-something">Switch something</a></li><li><a href="#read-what-a-device-reported">Read what a device reported</a></li><li><a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a></li><li class="nested"><a href="#report-from-a-phone">Report from a phone</a></li><li class="nested"><a href="#gpx-files">GPX files</a></li><li><a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a></li><li class="nested"><a href="#values-written-to-an-endpoint">Values written to an endpoint</a></li><li><a href="#rename-or-forget-a-device">Rename or forget a device</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

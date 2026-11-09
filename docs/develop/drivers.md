@@ -1,8 +1,8 @@
 # Writing a driver
 
 A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under
-`/dev/<device>`, and sends the device what is written to its controls. Core has one driver of its
-own, `tracker`, for phones and GPS loggers; the [Automation](../automation/index.md) module brings
+`/dev/<device>`, and sends the device what is written to its controls. Core has two drivers of its
+own, `tracker`, for phones and GPS loggers, and `webhook`, for anything that posts its readings; the [Automation](../automation/index.md) module brings
 three for MQTT devices. This page is for developers who write one in a module. It assumes
 [Writing a module](modules.md), and [Devices, endpoints and drivers](../concepts/devices.md) for what
 a device, an endpoint and a control are.

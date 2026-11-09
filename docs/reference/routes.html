@@ -553,12 +553,12 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 <tr>
 <td><code>/file/dev/&lt;device&gt;</code></td>
 <td><code>PUT</code>, <code>POST</code></td>
-<td>Raw input for the device&#39;s driver, such as a tracker&#39;s position or a GPX file, signed in or with the device&#39;s key; see <a href="../admin/devices.html#device-keys">Devices and their keys</a></td>
+<td>Raw input for the device&#39;s driver, such as a tracker&#39;s position, a GPX file or a webhook&#39;s post, signed in or with the device&#39;s key; see <a href="../admin/devices.html#device-keys">Devices and their keys</a></td>
 </tr>
 <tr>
 <td><code>/file/dev/&lt;device&gt;?key=&lt;key&gt;&amp;…</code></td>
 <td><code>GET</code></td>
-<td>The same from a tracker that sends only <code>GET</code>s, such as OsmAnd: its query is the input</td>
+<td>The same from a device that sends only <code>GET</code>s, such as OsmAnd or a button calling an address: its query is the input</td>
 </tr>
 <tr>
 <td><code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code></td>
