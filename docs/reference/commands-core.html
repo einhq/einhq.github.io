@@ -1048,7 +1048,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tbody></table>
 </div>
 <h3 id="device-create"><code>device-create</code><a class="anchor" href="#device-create" aria-label="Link to this section"></a></h3>
-<p>Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to.</p>
+<p>Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook)</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>device-create [--label=&lt;string&gt;] [--class=&lt;string&gt;] [--driver=&lt;string&gt;] [--manufacturer=&lt;string&gt;] [--model=&lt;string&gt;] [--config=&lt;string&gt;] &lt;name&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1081,7 +1081,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tr>
 <tr>
 <td><code>--driver=&lt;string&gt;</code></td>
-<td>the driver that reads what is written to it: tracker, or a module&#39;s (devices --drivers)</td>
+<td>the driver that reads what is written to it: tracker, webhook, or a module&#39;s (devices --drivers)</td>
 </tr>
 <tr>
 <td><code>--manufacturer=&lt;string&gt;</code></td>
@@ -1098,7 +1098,8 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone
-device-create <span class="hljs-string">&#x27;Old logger&#x27;</span> --driver tracker --class tracker --model <span class="hljs-string">&#x27;eTrex 30&#x27;</span></code></pre></div>
+device-create <span class="hljs-string">&#x27;Old logger&#x27;</span> --driver tracker --class tracker --model <span class="hljs-string">&#x27;eTrex 30&#x27;</span>
+device-create <span class="hljs-string">&#x27;Porch&#x27;</span> --driver webhook --class button --config events=button</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: DeviceCreated: device, path.</p>
 <h3 id="device-forget"><code>device-forget</code><a class="anchor" href="#device-forget" aria-label="Link to this section"></a></h3>
 <p>Remove a device and everything under it, its history included; for members of the devices group.</p>

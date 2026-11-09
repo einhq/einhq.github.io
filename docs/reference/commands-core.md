@@ -607,7 +607,7 @@ detach [--list] <job>
 
 ### `device-create`
 
-Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to.
+Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook)
 
 <small>changes things</small>
 
@@ -623,7 +623,7 @@ device-create [--label=<string>] [--class=<string>] [--driver=<string>] [--manuf
 | --- | --- |
 | `--label=<string>` | what its page calls it, when not the name. |
 | `--class=<string>` | what it is: phone, tracker, boat, car, sensor, …. |
-| `--driver=<string>` | the driver that reads what is written to it: tracker, or a module's (devices --drivers) |
+| `--driver=<string>` | the driver that reads what is written to it: tracker, webhook, or a module's (devices --drivers) |
 | `--manufacturer=<string>` | who made it. |
 | `--model=<string>` | its model. |
 | `--config=<string>` | name=value for its driver; again for each. |
@@ -631,6 +631,7 @@ device-create [--label=<string>] [--class=<string>] [--driver=<string>] [--manuf
 ```bash
 device-create 'Ruby phone' --driver tracker --class phone
 device-create 'Old logger' --driver tracker --class tracker --model 'eTrex 30'
+device-create 'Porch' --driver webhook --class button --config events=button
 ```
 
 With `JSON_OUTPUT=1`: DeviceCreated: device, path.

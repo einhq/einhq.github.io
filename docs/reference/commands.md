@@ -57,7 +57,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
 | [detach](commands-core.md#detach) | detach a job so it keeps running after the shell closes. |
-| [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something a script writes values to. |
+| [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook) |
 | [device-forget](commands-core.md#device-forget) | Remove a device and everything under it, its history included; for members of the devices group. |
 | [device-history](commands-core.md#device-history) | An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes. |
 | [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off) |
