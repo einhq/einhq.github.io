@@ -148,7 +148,7 @@ A device added from the network follows it to a new address: EiN knows it by its
 A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.
 
 Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
-records, each SSDP answer with what the device's own description says, and the message as it came.
+records, each SSDP answer with what the device's own description says, and the raw message, as it came.
 For something EiN does not support, it is what there is to go on. **Ignore** leaves one out of the
 count and the list; **Show** **Everything** finds it again, with **Take back**. **Open** opens one
 that is a device already.

@@ -229,8 +229,9 @@ EiN without opening its own web page: <a href="#add-a-device-found-on-the-networ
 The sections after it say how to point each kind at the broker by hand.</p>
 <h3 id="add-a-device-found-on-the-network">Add a device found on the network<a class="anchor" href="#add-a-device-found-on-the-network" aria-label="Link to this section"></a></h3>
 <p>With the installer&#39;s broker, its listener <code>discovery</code> asks the network every two minutes what is
-there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers.
-It does not scan addresses: it hears only what announces itself. Each thing that answered is named
+there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers,
+and hears what announces itself over mDNS in between. It does not scan addresses: it hears only what
+announces itself. Each thing that answered is named
 by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
 bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
 its hardware address.</p>
@@ -269,7 +270,7 @@ and <strong>Add</strong> on a card makes it a device:</p>
 <p>A device added from the network follows it to a new address: EiN knows it by its hardware address.
 A printer is asked every two minutes, a Cast device every 15 seconds and the rest every minute.</p>
 <p>Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
-records, each SSDP answer with what the device&#39;s own description says, and the message as it came.
+records, each SSDP answer with what the device&#39;s own description says, and the raw message, as it came.
 For something EiN does not support, it is what there is to go on. <strong>Ignore</strong> leaves one out of the
 count and the list; <strong>Show</strong> <strong>Everything</strong> finds it again, with <strong>Take back</strong>. <strong>Open</strong> opens one
 that is a device already.</p>
