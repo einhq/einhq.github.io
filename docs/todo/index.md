@@ -14,7 +14,7 @@ Install it from **Settings → Modules**, or in EiN's terminal:
 mod install todo
 ```
 
-**Todo** is then in the sidebar, and **Todo item** in the top bar's **Create** menu.
+**Todo** is then in the sidebar.
 [Modules](../admin/modules.md) covers installing and removing modules.
 
 ## Lists are folders, items are files
@@ -161,10 +161,6 @@ card names its list with a label at its foot, with the icon of the list's tab, a
 row's title starts with it, _Shopping › Milk_; choose the list's name to open its tab. Drag
 a card to another column to move it there on its own list; a column its list does not have takes
 no drop.
-
-To add an item from anywhere, choose **Create → Todo item** in the top bar, pick the list and
-choose **Add**. Opened while a picture, an album or another page about one thing is showing, it
-offers **About** that thing, ticked, and the new item links to it.
 
 A card's links are listed under its description, each with its picture: a picture's own, an
 album's cover, a person's, place's or camera's picture. A picture or a video shows as its picture
