@@ -77,7 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
-<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -116,7 +116,7 @@ values as files in a folder under <code>/sys</code>:</p>
     └── position            a track of positions</code></pre></div>
 <p>A device&#39;s name is lower-case letters, digits and hyphens, made from what the device or a person
 calls it: <code>Ruby phone</code> becomes <code>ruby-phone</code>. The names <code>null</code>, <code>events</code>, <code>pipeline-events</code>, <code>tty</code>,
-<code>stdin</code>, <code>stdout</code> and <code>stderr</code> are EiN&#39;s own and are refused. The name is what commands, rules and
+<code>stdin</code>, <code>stdout</code> and <code>stderr</code> are EiN&#39;s own and are refused. The name is what commands, automations and
 routing keys use; the device&#39;s label is what the pages show, and can be changed without touching
 the name.</p>
 <p>What a device says about itself is in its attributes:</p>
@@ -401,8 +401,9 @@ own folder for these writes and nothing else; see
 <h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
 <p>Every reading a driver keeps is also published on a routing key, a name a message goes out under,
 which any queue or log bound to it gets a copy of. Only the administrator binds one, since a queue
-bound to <code>dev.#</code> hears every device whoever may read it; the rules of the
-<a href="../automation/rules.html">Automation</a> module read them for everyone else:</p>
+bound to <code>dev.#</code> hears every device whoever may read it; the automations of the
+<a href="../automation/automations.html">Automation</a> module read them for everyone else, each only what its
+owner may read:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -466,7 +467,7 @@ gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds
 <li><a href="../develop/drivers.html">Writing a driver</a>: the driver API, for module authors.</li>
 <li><a href="tree.html">The tree</a>: <code>/dev</code> among the other folders.</li>
 <li><a href="pipelines.html">Changes and pipelines</a>: routing keys, queues and logs in general.</li>
-<li><a href="../automation/index.html">Automation</a>: the MQTT drivers and rules.</li>
+<li><a href="../automation/index.html">Automation</a>: the MQTT drivers and automations.</li>
 </ul>
 
         </article>

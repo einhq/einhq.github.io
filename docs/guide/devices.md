@@ -21,7 +21,7 @@ are kept, and [Devices and their keys](../admin/devices.md) who may do what.
   address, read by EiN's `webhook` driver (see
   [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)).
 
-A device has a name, such as `hall-plug`, that commands and rules use, and a label, such as **Hall
+A device has a name, such as `hall-plug`, that commands and automations use, and a label, such as **Hall
 lamp**, that the pages show. Each thing it reports or takes is an **endpoint** with a name of its
 own within it: `hall-plug/switch-0` is the plug's relay, `hall-plug/switch-0-power` the power it
 draws, `ruby-phone/position` where the phone has been.
@@ -110,7 +110,7 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 
 ### Info
 
-- What the device is: its **Name** in commands and rules, **Class**, **Driver**, **Manufacturer**,
+- What the device is: its **Name** in commands and automations, **Class**, **Driver**, **Manufacturer**,
   **Model**, **Firmware**, **Serial** and **MAC**. A driver whose module's service is stopped reads
   **(not running)**, in red: the device's switches do nothing until it runs again.
 - **Web page**, the device's own page, opened in a new tab, when its driver knows it: a Shelly's and
@@ -157,7 +157,7 @@ Nothing is kept to be sent later: a lamp switched on an hour after it was asked 
 
 With the [Assistant](../assistant/index.md) and the Automation module, asking the chat to "turn on the
 hall lamp" gives a [proposal card](../assistant/chat.md#when-the-assistant-offers-to-make-a-change)
-with the `echo` line, which you run or decline. With Automation, [rules](../automation/rules.md)
+with the `echo` line, which you run or decline. With Automation, [automations](../automation/automations.md)
 switch things by themselves when a reading, a press or the clock says so.
 
 ## Read what a device reported
@@ -268,7 +268,7 @@ curl -H 'Authorization: Bearer <the key>' -H 'Content-Type: application/json' \
 The key is the part of the address after `key=`. Each field becomes a reading on the endpoint of that
 name, made the first time it comes, here `soil-moisture` and `battery`: it shows on the device's page
 and is published on the bus as `dev.garden-sensor.soil-moisture`, where the
-[Automation](../automation/rules.md) module's rules hear it, like any driver's reading. A device that
+[Automation](../automation/automations.md) module's automations hear it, like any driver's reading. A device that
 only takes an address sends its values in it instead,
 `https://ein.wrenfield.example/file/dev/garden-sensor?key=<the key>&soil-moisture=41.5`. What the
 driver reads, and how a button's presses are kept, is in
@@ -314,7 +314,7 @@ device-label hall-sensor/temperature 'Hall temperature'
 device-forget old-sensor                               # the device and everything it kept
 ```
 
-The name in commands and rules stays as it is. Forgetting removes the device's history with it; a
+The name in commands and automations stays as it is. Forgetting removes the device's history with it; a
 device a driver still hears comes back new.
 
 ## From the terminal
@@ -354,5 +354,5 @@ device a driver still hears comes back new.
 - [Devices, endpoints and drivers](../concepts/devices.md): how devices are kept, written to and
   published.
 - [Devices and their keys](../admin/devices.md): who may do what, and what a device key opens.
-- [Automation](../automation/index.md): sensors, plugs and buttons over MQTT, and rules.
+- [Automation](../automation/index.md): sensors, plugs and buttons over MQTT, and automations.
 - [Trips](../archive/tracks.md): with the Archive, the trips a device's track is cut into.

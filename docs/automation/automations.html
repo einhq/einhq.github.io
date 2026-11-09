@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automations – EiN documentation</title>
+    <meta name="description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays. It is made of nodes wired together: inputs that hear devices and the clock, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/automation/automations.html">
+    <meta property="og:title" content="Automations – EiN documentation">
+    <meta property="og:description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays. It is made of nodes wired together: inputs that hear devices and the clock, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/automation/automations.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section class="here"><h2>Automation</h2><ul><li><a href="index.html">Automation</a></li><li><a href="automations.html" aria-current="page">Automations</a></li><li><a href="commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Automations</span></button>
+        <header class="docs-head">
+          <p class="crumb">Automation</p>
+          <h1>Automations</h1>
+        </header>
+        <article class="prose">
+<p>An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark
+and off a while after, a heater keeps a room between two temperatures while someone is home, a
+button toggles a lamp, a line runs at half past six on weekdays. It is made of <strong>nodes wired
+together</strong>: inputs that hear devices and the clock, logic that compares and combines, values worked
+out from readings, timers, and actions that switch controls and run command lines. Each automation
+is a YAML file, written by members of the <code>automation</code> group, and runs with the rights of the person
+whose file it is. This page is for those members. <a href="index.html">Automation</a> covers connecting the
+devices, and <a href="../guide/devices.html">Devices</a> the devices themselves.</p>
+<h2 id="a-first-automation">A first automation<a class="anchor" href="#a-first-automation" aria-label="Link to this section"></a></h2>
+<p>The hall lamp goes on at motion when it is dark, and off five minutes after the motion ends:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automation-new hall-light --from motion-light</code></pre></div>
+<div class="code"><pre tabindex="0"><code>made /etc/automations/hall-light.yaml from motion-light: change its devices to yours</code></pre></div>
+<p>The file it makes:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">hall</span> <span class="hljs-string">lamp</span> <span class="hljs-string">on</span> <span class="hljs-string">at</span> <span class="hljs-string">motion</span> <span class="hljs-string">when</span> <span class="hljs-string">it</span> <span class="hljs-string">is</span> <span class="hljs-string">dark,</span> <span class="hljs-string">off</span> <span class="hljs-string">five</span> <span class="hljs-string">minutes</span> <span class="hljs-string">after</span> <span class="hljs-string">the</span> <span class="hljs-string">motion</span> <span class="hljs-string">ends</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">motion:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-sensor/motion</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], <span class="hljs-attr">to:</span> [<span class="hljs-string">linger</span>] }
+  <span class="hljs-attr">linger:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">timer</span>
+    <span class="hljs-attr">off-after:</span> <span class="hljs-string">5m</span>
+    <span class="hljs-attr">pos:</span> [<span class="hljs-number">240</span>, <span class="hljs-number">0</span>]
+    <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">dark-and-moving</span>], <span class="hljs-attr">false:</span> [<span class="hljs-string">lamp-off</span>] }
+  <span class="hljs-attr">lux:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-sensor/illuminance</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">0</span>, <span class="hljs-number">140</span>], <span class="hljs-attr">to:</span> [<span class="hljs-string">dark</span>] }
+  <span class="hljs-attr">dark:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">compare</span>, <span class="hljs-attr">below:</span> <span class="hljs-number">30</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">240</span>, <span class="hljs-number">140</span>], <span class="hljs-attr">to:</span> [<span class="hljs-string">dark-and-moving</span>] }
+  <span class="hljs-attr">dark-and-moving:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">and</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">480</span>, <span class="hljs-number">60</span>], <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">lamp-on</span>] } }
+  <span class="hljs-attr">lamp-on:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">on</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">720</span>, <span class="hljs-number">0</span>] }
+  <span class="hljs-attr">lamp-off:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">off</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">720</span>, <span class="hljs-number">140</span>] }</code></pre></div>
+<p>Read it along its wires (<code>to</code>): the motion sensor&#39;s readings go to a timer, which says true at once
+and false five minutes after the motion went false. The light sensor&#39;s readings go to a compare,
+which says true while it is below 30. The <code>and</code> is true while both are, and when it becomes true the
+lamp is switched on; when the timer says false, it is switched off.</p>
+<ol>
+<li><p>Change the devices to yours: <code>edit /etc/automations/hall-light.yaml</code>
+(<a href="../shell/editor.html">The editor</a>), then save it with <code>automation-set</code>, which checks it first:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automation-set hall-light &lt; /etc/automations/hall-light.yaml</code></pre></div>
+<p>An automation that is wrong somewhere is not written, and <code>automation-set</code> says which node and
+what is wrong with it. <code>--draft</code> writes it anyway, to finish later; it is not run until it is
+right.</p>
+</li>
+<li><p>Check it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automation-check hall-light</code></pre></div>
+<div class="code"><pre tabindex="0"><code>hall-light has no problems
+  hall-sensor/motion: false
+  hall-sensor/illuminance: 12
+  hall-lamp/switch-0: &quot;off&quot;
+  motion says false
+  lux says 12
+  dark says true
+  dark-and-moving says false</code></pre></div>
+<p>It runs the latest readings you may read through the automation and says what each node would
+say now, without switching anything.</p>
+</li>
+</ol>
+<p>The automation engine reads the folder again within a second of a change, so the automation works
+from the moment it is saved. <code>automations</code> lists them all, and <code>automation-status hall-light</code> says
+what each of its nodes last sent while it runs.</p>
+<h2 id="where-automations-are">Where automations are<a class="anchor" href="#where-automations-are" aria-label="Link to this section"></a></h2>
+<ul>
+<li>Each automation is a file <code>/etc/automations/&lt;name&gt;.yaml</code>, called by its name: <code>hall-light</code>.
+<code>automation-new</code> makes one, empty or from a starting point (<code>automation-new --examples</code> lists
+them), on the database, so it is backed up with everything else.</li>
+<li>Only members of the <code>automation</code> group see the folder and write in it. The administrator adds
+someone with <code>group-add-member automation helen</code>, or in <strong>Settings → Groups</strong>.</li>
+<li><code>automation-disable hall-light</code> turns one off without removing it, and <code>automation-enable hall-light</code> on again. To remove one, remove its file.</li>
+<li>A module can bring automations of its own. They are under <code>/etc/automations.d/&lt;module&gt;/</code>, called
+<code>&lt;module&gt;/&lt;name&gt;</code>, run as the administrator, and change only with the module. The administrator
+turns one off with <code>automation-disable &lt;module&gt;/&lt;name&gt;</code>.</li>
+</ul>
+<h3 id="whose-automation-it-is">Whose automation it is<a class="anchor" href="#whose-automation-it-is" aria-label="Link to this section"></a></h3>
+<p>An automation runs as the owner of its file, with that person&#39;s rights and nothing more: Helen&#39;s
+automation hears only the endpoints Helen may read, switches only what Helen may switch, and runs
+its lines as Helen. One whose owner may not read an endpoint it listens to, or write a control it
+switches, is not run, and says which: rights are checked when the file is read and every minute
+after, so taking a device from someone stops their automations that use it. Copying someone&#39;s
+automation into a file of your own makes it yours.</p>
+<p>A file that others than its owner may change, by its mode or by an entry on its access list, is not
+run, since whoever could change it could act as its owner. <code>automation-new</code> makes the file yours
+alone; after a <code>chmod</code> or a <code>share-set</code> that let others write it, <code>chmod 644</code> and removing the entry
+are the way out.</p>
+<p>What an automation&#39;s nodes say, in <code>automation-status &lt;name&gt;</code> and its run log, is for its owner (and
+whoever may change its file) to see: it holds the readings the owner may read.</p>
+<h2 id="what-an-automation-says">What an automation says<a class="anchor" href="#what-an-automation-says" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it is</th>
+<th>Needed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>description</code></td>
+<td>A sentence for people, which <code>automations</code> shows</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td><code>false</code> to keep it from running; <code>automation-disable</code> does the same</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>nodes</code></td>
+<td>The nodes, each under an id of its own</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each node has:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>type</code></td>
+<td>Its kind, below</td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td>The nodes it sends to: a list, such as <code>to: [lamp-on]</code>. A node that says true or false also sends on <code>true</code> and <code>false</code> alone: <code>to: {true: [lamp-on], false: [lamp-off]}</code>; a list sends both. A switch sends on each of its cases and <code>else</code>, by name</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>A name for people, beside its id</td>
+</tr>
+<tr>
+<td><code>pos</code></td>
+<td>Where it is drawn, <code>[x, y]</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>and the settings of its kind. An id is letters, digits, <code>-</code> and <code>_</code>. A node has one input, and any
+number of nodes may be wired into it. The wires may not go round in a circle.</p>
+<p>A device&#39;s endpoint is written <code>&lt;device&gt;/&lt;endpoint&gt;</code>, as the device&#39;s <strong>Info</strong> tab and <code>device-show</code>
+name it: <code>hall-sensor/temperature</code>, <code>hall-plug/switch-0</code>. A time is a number and <code>s</code>, <code>m</code>, <code>h</code> or
+<code>d</code>: <code>30s</code>, <code>10m</code>, <code>1.5h</code>, <code>1d</code>.</p>
+<h3 id="messages-and-true-and-false">Messages, and true and false<a class="anchor" href="#messages-and-true-and-false" aria-label="Link to this section"></a></h3>
+<p>What goes along a wire is a value: a reading, a word such as <code>single</code> for a press, <code>on</code> or <code>off</code>, a
+number. A node that asks whether something is true reads <code>on</code>, <code>true</code>, <code>yes</code>, <code>open</code>, a number other
+than 0 and any other word as true, and <code>off</code>, <code>false</code>, <code>no</code>, <code>closed</code>, <code>0</code> and nothing as false.</p>
+<p>A node that says true or false (<code>online</code>, <code>compare</code>, <code>and</code>, <code>or</code>, <code>not</code>, <code>timer</code>, <code>held</code>,
+<code>between</code>) sends only when what it says changes, so a stream of readings that keep it true does not
+switch the lamp again and again. <code>every: true</code> on such a node sends each time. <code>and</code> and <code>or</code> read
+the latest value of each node wired into them; one that has sent nothing yet counts as false.</p>
+<h3 id="the-nodes">The nodes<a class="anchor" href="#the-nodes" aria-label="Link to this section"></a></h3>
+<p><strong>Inputs</strong>, which nothing is wired into:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Settings</th>
+<th>It sends</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>device</code></td>
+<td><code>endpoint</code>; <code>is</code></td>
+<td>Each reading of the endpoint, or each press of a button. With <code>is: single</code>, only that value or kind of press (a Shelly&#39;s are <code>single</code>, <code>double</code>, <code>triple</code> and <code>long</code>)</td>
+</tr>
+<tr>
+<td><code>online</code></td>
+<td><code>device</code></td>
+<td>True when the device comes online, false when it goes</td>
+</tr>
+<tr>
+<td><code>clock</code></td>
+<td><code>at: &#39;07:30&#39;</code> and <code>days</code>, or <code>every</code></td>
+<td>The time, once a day at <code>at</code> in the system&#39;s time zone (on <code>days</code>: <code>weekdays</code>, <code>weekends</code> or <code>[mon, wed, fri]</code>), or each time <code>every</code> (a minute or more) has passed on the clock</td>
+</tr>
+<tr>
+<td><code>between</code></td>
+<td><code>from</code>, <code>until</code>, <code>days</code></td>
+<td>True from <code>from</code> until <code>until</code>, false outside it: <code>from: &#39;22:00&#39;</code>, <code>until: &#39;06:30&#39;</code> goes over midnight</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td><code>value</code></td>
+<td><code>true</code>, or its <code>value</code>, when it is pressed with <code>automation-trigger &lt;name&gt; &lt;node&gt;</code></td>
+</tr>
+<tr>
+<td><code>link-in</code></td>
+<td><code>name</code></td>
+<td>What a <code>link-out</code> of the same name sends, from any automation of the same owner</td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Logic</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Settings</th>
+<th>It sends</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>compare</code></td>
+<td><code>is</code>, <code>not</code>, <code>above</code>, <code>below</code></td>
+<td>Whether the value meets all that are given: <code>below: 30</code>, <code>is: on</code>, <code>above: 18</code> with <code>below: 23</code></td>
+</tr>
+<tr>
+<td><code>and</code></td>
+<td></td>
+<td>True while everything wired into it is true</td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td></td>
+<td>True while anything wired into it is true</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td></td>
+<td>True when the value is false</td>
+</tr>
+<tr>
+<td><code>switch</code></td>
+<td><code>cases</code></td>
+<td>The value, on the first case it meets, else on <code>else</code>: <code>cases: {cold: {below: 18}, warm: {above: 23}}</code> sends on <code>cold</code>, <code>warm</code> or <code>else</code></td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Values</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Settings</th>
+<th>It sends</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>math</code></td>
+<td><code>expression</code></td>
+<td>A value worked out from the value and the nodes wired in (<a href="#expressions">Expressions</a>)</td>
+</tr>
+<tr>
+<td><code>aggregate</code></td>
+<td><code>fn</code>: <code>avg</code>, <code>min</code>, <code>max</code>, <code>sum</code>, <code>count</code>, <code>any</code>, <code>all</code>, <code>last</code></td>
+<td>The average, least, most or sum of the latest values of the nodes wired in, how many are true, whether any or all are, or the newest</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td><code>value</code></td>
+<td>Its own value instead of the one that came: a word, a number, or text with <code>${value}</code> in it, as <code>&#39;the hall is ${value} °C&#39;</code></td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Time</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Settings</th>
+<th>It sends</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>delay</code></td>
+<td><code>for</code></td>
+<td>Each value on, <code>for</code> later</td>
+</tr>
+<tr>
+<td><code>timer</code></td>
+<td><code>off-after</code></td>
+<td>True at once when a true value comes, false <code>off-after</code> after the value went false, or after the last press. Another true value meanwhile holds it on</td>
+</tr>
+<tr>
+<td><code>held</code></td>
+<td><code>for</code></td>
+<td>True once the value has been true for <code>for</code>, false as soon as it is not</td>
+</tr>
+<tr>
+<td><code>debounce</code></td>
+<td><code>for</code></td>
+<td>The last value, once none has come for <code>for</code></td>
+</tr>
+<tr>
+<td><code>throttle</code></td>
+<td><code>for</code></td>
+<td>At most one value in <code>for</code>, and the newest at its end</td>
+</tr>
+</tbody></table>
+</div>
+<p><strong>Actions</strong>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Settings</th>
+<th>It does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>control</code></td>
+<td><code>endpoint</code>; <code>value</code></td>
+<td>Writes the control, as <code>echo on &gt; /dev/hall-lamp/switch-0</code> does: its <code>value</code> (<code>on</code>, <code>off</code>, <code>toggle</code>, a number), or else the value that came, true as <code>on</code> and false as <code>off</code>. A control that already has the value is not written again; <code>toggle</code> always is. Then sends the value on</td>
+</tr>
+<tr>
+<td><code>shell</code></td>
+<td><code>run</code>; <code>timeout</code></td>
+<td>Runs the command line as the automation&#39;s owner (<a href="#lines">Lines</a>) and sends what it printed on</td>
+</tr>
+<tr>
+<td><code>link-out</code></td>
+<td><code>name</code></td>
+<td>Sends the value to every <code>link-in</code> of that name in the owner&#39;s automations</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td></td>
+<td>Writes the value to the run log</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="expressions">Expressions<a class="anchor" href="#expressions" aria-label="Link to this section"></a></h3>
+<p>A <code>math</code> node works out a value: <code>value * 1.8 + 32</code>, <code>round(value, 1)</code>, <code>outdoor - indoor</code>,
+<code>value &gt; 25 ? &#39;warm&#39; : &#39;cool&#39;</code>.</p>
+<ul>
+<li><code>value</code> is the value that came, <code>topic</code> where it came from (<code>hall-sensor/temperature</code>), and each
+node wired in is its latest value under its id, with <code>-</code> written <code>_</code>: a node <code>outdoor-temp</code> is
+<code>outdoor_temp</code>. The node waits until every one it reads has sent something.</li>
+<li>Numbers, <code>&#39;text&#39;</code>, <code>true</code>, <code>false</code>, <code>on</code>, <code>off</code>; <code>+ - * / %</code> (<code>+</code> also joins text); `== != &lt; &lt;= &gt;<blockquote>
+<p>=<code>(</code>==<code>reads</code>on<code>as true, as a compare&#39;s</code>is<code>does);</code>and<code>,</code>or<code>,</code>not<code>(or</code>&amp;&amp; || !<code>);</code>a ? b : c`.</p>
+</blockquote>
+</li>
+<li><code>round(x)</code> or <code>round(x, digits)</code>, <code>floor</code>, <code>ceil</code>, <code>abs</code>, <code>min</code>, <code>max</code>, <code>avg</code>, <code>sum</code>, and
+<code>clamp(x, low, high)</code>.</li>
+</ul>
+<h3 id="lines">Lines<a class="anchor" href="#lines" aria-label="Link to this section"></a></h3>
+<p>A <code>shell</code> node runs any command line you could type in EiN&#39;s terminal, as the automation&#39;s owner:
+<code>todo-add</code> to put something on a list, a script of your own, <code>echo on &gt; /dev/heater-plug/switch-0</code>.
+The value that came is <code>$VALUE</code> and where it came from <code>$TOPIC</code>; it never becomes part of the line
+itself, so a device can say anything without running anything. What the line prints is the value
+the node sends on, a number when it prints one. A line that fails or runs longer than its <code>timeout</code>
+(30 s unless set) sends nothing, and its node and the run log say why.</p>
+<p>An automation&#39;s actions run one after another, each when the one before has ended; another
+automation&#39;s do not wait for them.</p>
+<h3 id="over-a-restart">Over a restart<a class="anchor" href="#over-a-restart" aria-label="Link to this section"></a></h3>
+<p>Timers count from when a reading came, not from when the engine heard it, and what an automation
+waits for is kept when the engine stops. So a lamp whose motion ended four minutes before EiN
+restarted still goes off a minute after it starts again, and a lamp someone switched on by hand an
+hour after the motion ended is left on.</p>
+<p>Readings and presses that come while the engine is stopped wait in its queue. Those said more than a
+minute before it starts again bring the automations up to date but switch nothing: a press from an
+hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up.</p>
+<h2 id="more-examples">More examples<a class="anchor" href="#more-examples" aria-label="Link to this section"></a></h2>
+<h3 id="the-heater-between-two-temperatures">The heater between two temperatures<a class="anchor" href="#the-heater-between-two-temperatures" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new heater --from heater</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">heater</span> <span class="hljs-string">keeps</span> <span class="hljs-string">the</span> <span class="hljs-string">hall</span> <span class="hljs-string">between</span> <span class="hljs-number">19</span> <span class="hljs-string">and</span> <span class="hljs-number">21</span> <span class="hljs-string">°C</span> <span class="hljs-string">while</span> <span class="hljs-string">someone</span> <span class="hljs-string">is</span> <span class="hljs-string">home</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">temperature:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-sensor/temperature</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">cold</span>, <span class="hljs-string">warm</span>] }
+  <span class="hljs-attr">cold:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">compare</span>, <span class="hljs-attr">below:</span> <span class="hljs-number">19</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">cold-a-while</span>] }
+  <span class="hljs-attr">cold-a-while:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">held</span>, <span class="hljs-attr">for:</span> <span class="hljs-string">10m</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">heat</span>] }
+  <span class="hljs-attr">away:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">indoors/away</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">home</span>] }
+  <span class="hljs-attr">home:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">not</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">heat</span>] }
+  <span class="hljs-attr">heat:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">and</span>, <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">heater-on</span>] } }
+  <span class="hljs-attr">warm:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">compare</span>, <span class="hljs-attr">above:</span> <span class="hljs-number">21</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">warm-a-while</span>] }
+  <span class="hljs-attr">warm-a-while:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">held</span>, <span class="hljs-attr">for:</span> <span class="hljs-string">5m</span>, <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">heater-off</span>] } }
+  <span class="hljs-attr">heater-on:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">heater-plug/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">on</span> }
+  <span class="hljs-attr">heater-off:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">heater-plug/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">off</span> }</code></pre></div>
+<p>The heater goes on once the hall has been below 19 °C for ten minutes and nobody is away, and off
+once it has been above 21 °C for five. <code>indoors/away</code> is any device&#39;s endpoint that says whether
+the house is empty.</p>
+<h3 id="a-button-toggles-a-lamp">A button toggles a lamp<a class="anchor" href="#a-button-toggles-a-lamp" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new porch --from button-toggle</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">press</span> <span class="hljs-string">of</span> <span class="hljs-string">the</span> <span class="hljs-string">porch</span> <span class="hljs-string">button</span> <span class="hljs-string">switches</span> <span class="hljs-string">the</span> <span class="hljs-string">hall</span> <span class="hljs-string">lamp</span> <span class="hljs-string">on</span> <span class="hljs-string">or</span> <span class="hljs-string">off</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">press:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">porch-button/input-0</span>, <span class="hljs-attr">is:</span> <span class="hljs-string">single</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">toggle</span>] }
+  <span class="hljs-attr">try-it:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">button</span>, <span class="hljs-attr">label:</span> <span class="hljs-string">Try</span> <span class="hljs-string">it</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">toggle</span>] }
+  <span class="hljs-attr">toggle:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">toggle</span> }</code></pre></div>
+<p><code>automation-trigger porch try-it</code> presses the <code>button</code> node, to try the automation without the
+real button.</p>
+<h3 id="half-past-six-on-weekdays">Half past six on weekdays<a class="anchor" href="#half-past-six-on-weekdays" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new morning --from morning</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">hall</span> <span class="hljs-string">lamp</span> <span class="hljs-string">on</span> <span class="hljs-string">at</span> <span class="hljs-string">half</span> <span class="hljs-string">past</span> <span class="hljs-string">six</span> <span class="hljs-string">on</span> <span class="hljs-string">weekdays</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">morning:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">clock</span>, <span class="hljs-attr">at:</span> <span class="hljs-string">&#x27;06:30&#x27;</span>, <span class="hljs-attr">days:</span> <span class="hljs-string">weekdays</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">lamp-on</span>, <span class="hljs-string">note</span>] }
+  <span class="hljs-attr">lamp-on:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">on</span> }
+  <span class="hljs-attr">note:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">shell</span>, <span class="hljs-attr">run:</span> <span class="hljs-string">&#x27;echo &quot;morning at $VALUE&quot;&#x27;</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">shown</span>] }
+  <span class="hljs-attr">shown:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">debug</span> }</code></pre></div>
+<p>Half past six is in the system&#39;s time zone (<code>TZ</code> in <code>~/ein/.env</code>,
+<a href="../admin/install.html#env">Installing in detail</a>). Write a time in quotes.</p>
+<h2 id="see-what-automations-did">See what automations did<a class="anchor" href="#see-what-automations-did" aria-label="Link to this section"></a></h2>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automations                       <span class="hljs-comment"># each, whose it is, whether it runs, and why not</span>
+automation-status hall-light      <span class="hljs-comment"># what each node last sent, and what it waits for</span>
+log-read /var/logs/automations/hall-light --since 1d</code></pre></div>
+<p>An automation&#39;s run log, <code>/var/logs/automations/&lt;name&gt;</code>, keeps 30 days of its actions, the errors
+of those that failed, what its <code>debug</code> nodes were sent, and its clock firings, one JSON line each:</p>
+<div class="code"><pre tabindex="0"><code>2026-11-09T06:30:00.512Z	{&quot;node&quot;:&quot;lamp-on&quot;,&quot;kind&quot;:&quot;action&quot;,&quot;text&quot;:&quot;on &gt; hall-lamp/switch-0&quot;,&quot;at&quot;:&quot;2026-11-09T06:30:00.510Z&quot;}</code></pre></div>
+<p>Only its owner and the administrator read it. <code>automation-status</code> sums the engine up in a line,
+<code>automations: 4 running, 41 actions</code>, with a <code>not run:</code> line under it for each automation the engine
+holds back, and the <code>automation-engine</code> service&#39;s line on the dashboard&#39;s <strong>Services</strong> tab says the
+same.</p>
+<h2 id="when-an-automation-does-not-run">When an automation does not run<a class="anchor" href="#when-an-automation-does-not-run" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>others than its owner may change it, so it is not run</code></td>
+<td>The file can be changed by the group, by anyone, or by someone on its access list</td>
+<td><code>chmod 644</code> the file, and take the others off its access list</td>
+</tr>
+<tr>
+<td><code>its owner may not read hall-sensor/motion, or there is no such endpoint</code></td>
+<td>The endpoint is misspelt, gone, or not the owner&#39;s to read</td>
+<td>Correct it with <code>device-show</code>, or ask whoever shares the device</td>
+</tr>
+<tr>
+<td><code>its owner may not write hall-lamp/switch-0, or there is no such control</code></td>
+<td>The control is misspelt, or narrowed to others (<a href="../admin/devices.html#keep-a-switch-to-some-people">Keep a switch to some people</a>)</td>
+<td>Correct it, or have someone who may switch it own the automation</td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;: endpoint is needed: endpoint</code></td>
+<td>A setting the node&#39;s kind needs is missing</td>
+<td>Add it; <a href="#the-nodes">The nodes</a> lists each kind&#39;s</td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;: above: a device node does not read this</code></td>
+<td>A setting is misspelt, or one another kind takes</td>
+<td>Use the settings in <a href="#the-nodes">The nodes</a></td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;: to names lamp, which is no node</code></td>
+<td>A wire goes to an id that is not there</td>
+<td>Correct the id</td>
+</tr>
+<tr>
+<td><code>its wires go round in a circle: a → b → a</code></td>
+<td>A node&#39;s messages would come back to it</td>
+<td>Take a wire out</td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;: at takes a time of day such as &quot;07:30&quot;</code></td>
+<td>The time is not in quotes, or not a time</td>
+<td>Write <code>at: &#39;06:30&#39;</code></td>
+</tr>
+<tr>
+<td><code>it is not YAML: …</code></td>
+<td>The file does not read as YAML, often a missing space after a <code>:</code> or an unclosed <code>{</code></td>
+<td>Correct it where the message says</td>
+</tr>
+<tr>
+<td>A node&#39;s status says <code>waits for outdoor</code></td>
+<td>A <code>math</code> node reads a node that has sent nothing yet</td>
+<td>Nothing: it works out its value once that node sends</td>
+</tr>
+<tr>
+<td>It runs, but nothing happens when the value changes</td>
+<td>A node that says true or false sends only when that changes; the lamp may already be what it would be</td>
+<td><code>automation-check</code> and <code>automation-status</code> show what each node says</td>
+</tr>
+<tr>
+<td>A line&#39;s error says <code>Access denied for operation …</code></td>
+<td>The owner may not do what the line does</td>
+<td>Have someone who may write the automation, or ask the administrator</td>
+</tr>
+<tr>
+<td><code>automations</code> cannot read <code>/etc/automations</code></td>
+<td>You are not in the <code>automation</code> group, or were added since you signed in</td>
+<td>Ask the administrator to add you, then sign in again</td>
+</tr>
+</tbody></table>
+</div>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="index.html" rel="prev"><span>Previous</span>Automation</a><a class="next" href="commands.html" rel="next"><span>Next</span>Automation commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+    </div>
+  </body>
+</html>

@@ -127,7 +127,7 @@
 ## Automation
 
 - [Automation](automation/index.md)
-- [Rules](automation/rules.md)
+- [Automations](automation/automations.md)
 - [Automation commands](automation/commands.md)
 
 ## Media

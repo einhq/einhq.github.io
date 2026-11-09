@@ -31,7 +31,7 @@ values as files in a folder under `/sys`:
 
 A device's name is lower-case letters, digits and hyphens, made from what the device or a person
 calls it: `Ruby phone` becomes `ruby-phone`. The names `null`, `events`, `pipeline-events`, `tty`,
-`stdin`, `stdout` and `stderr` are EiN's own and are refused. The name is what commands, rules and
+`stdin`, `stdout` and `stderr` are EiN's own and are refused. The name is what commands, automations and
 routing keys use; the device's label is what the pages show, and can be changed without touching
 the name.
 
@@ -211,8 +211,9 @@ own folder for these writes and nothing else; see
 
 Every reading a driver keeps is also published on a routing key, a name a message goes out under,
 which any queue or log bound to it gets a copy of. Only the administrator binds one, since a queue
-bound to `dev.#` hears every device whoever may read it; the rules of the
-[Automation](../automation/rules.md) module read them for everyone else:
+bound to `dev.#` hears every device whoever may read it; the automations of the
+[Automation](../automation/automations.md) module read them for everyone else, each only what its
+owner may read:
 
 | Routing key               | What comes on it                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------- |
@@ -284,4 +285,4 @@ gives the endpoints it makes a `minInterval` from its **Seconds between readings
 - [Writing a driver](../develop/drivers.md): the driver API, for module authors.
 - [The tree](tree.md): `/dev` among the other folders.
 - [Changes and pipelines](pipelines.md): routing keys, queues and logs in general.
-- [Automation](../automation/index.md): the MQTT drivers and rules.
+- [Automation](../automation/index.md): the MQTT drivers and automations.

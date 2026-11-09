@@ -77,7 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
-<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -173,9 +173,9 @@ member made it with <code>device-create</code>, and its endpoints take its owner
 motion sensor, which says when someone came home or moved in a room, and a phone&#39;s track, which says
 where its owner has been, to the people who should know. Only the administrator binds a queue or a
 log to routing keys, so nobody else hears what a device publishes either
-(<a href="../concepts/pipelines.html">Changes and pipelines</a>). A rule of the
-<a href="../automation/rules.html">Automation</a> module switches as the person whose rule it is, with that
-person&#39;s rights.</p>
+(<a href="../concepts/pipelines.html">Changes and pipelines</a>). An automation of the
+<a href="../automation/automations.html">Automation</a> module hears and switches as the person whose
+automation it is, with that person&#39;s rights.</p>
 <h3 id="share-a-device">Share a device<a class="anchor" href="#share-a-device" aria-label="Link to this section"></a></h3>
 <p>A member shares a device on its page with <strong>Share</strong>, as anything else is shared
 (<a href="../guide/sharing.html">Sharing</a>): a person or a group to <strong>view</strong> sees the device, its readings and
@@ -193,7 +193,7 @@ group, such as <code>parents</code>, take the switch from the members and share 
 <span class="hljs-built_in">chmod</span> 640 /dev/heater-plug/switch-0
 share-set -m g:parents:rwx /dev/heater-plug/switch-0</code></pre></div>
 <p>Anyone else is then refused with <code>Access denied for operation &#39;w&#39; on node: …</code>, on the page, in the
-terminal and in their rules, while the members still see its state. A driver leaves the owner, group,
+terminal and in their automations, while the members still see its state. A driver leaves the owner, group,
 mode and access list of an endpoint it already has as they are, so the change holds. One endpoint can
 be kept from someone a device is shared with the same way, with <code>share-set -x</code> on the endpoint: it is
 left out of the device for them. <a href="permissions.html">Permissions in depth</a> explains owners, groups and

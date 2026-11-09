@@ -3,31 +3,32 @@
 The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs,
 switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear
 them on an MQTT broker and make each one a device under `/dev`, with its readings, presses and
-switches, and [rules](rules.md) that switch things when a reading, a press or the clock says so.
+switches, and [automations](automations.md): nodes wired together, which switch things and run
+command lines when a reading, a press or the clock says so.
 The devices, their pages and their commands are EiN's own, the same for a plug as for a phone:
 [Devices](../guide/devices.md).
 
 This page is for the administrator who installs the module and connects the devices, and for the
-household that uses them. [Rules](rules.md) covers writing rules.
+household that uses them. [Automations](automations.md) covers making automations.
 
 ## What it adds
 
-| Part                                                        | What it is                                                                                                                                                                                                                             |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The `ha-discovery` driver                                   | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                                                                                          |
-| The `shelly` driver                                         | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers                                                                                                            |
-| The `shelly-gen1` driver                                    | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2                                                                                                                                                           |
-| The `ipp` driver                                            | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                                                                                   |
-| The `cast` driver                                           | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                                                                                              |
-| The `snmp` driver                                           | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                                                                                   |
-| The `network` driver                                        | Anything else on the network: whether it answers, and how fast                                                                                                                                                                         |
-| The `http` driver                                           | A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see [A web API](#a-web-api) |
-| The `automation-bridge` service                             | Hears the broker and runs the drivers                                                                                                                                                                                                  |
-| The `automation-rules` service                              | Runs the [rules](rules.md) under `/etc/automation/rules`                                                                                                                                                                               |
-| The group `automation`                                      | Its members write the rules                                                                                                                                                                                                            |
-| `automation-status`, `automation-rule-check`                | Whether the broker is heard, and what a rule does                                                                                                                                                                                      |
-| **Found on the network**                                    | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network)                                                                |
-| `automation-found`, `automation-adopt`, `automation-ignore` | What is on the network and all it said, adding it as a device, and leaving something out                                                                                                                                               |
+| Part                                                                                       | What it is                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The `ha-discovery` driver                                                                  | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                                                                                          |
+| The `shelly` driver                                                                        | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers                                                                                                            |
+| The `shelly-gen1` driver                                                                   | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2                                                                                                                                                           |
+| The `ipp` driver                                                                           | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                                                                                   |
+| The `cast` driver                                                                          | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause and stop                                                                                                                                              |
+| The `snmp` driver                                                                          | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                                                                                   |
+| The `network` driver                                                                       | Anything else on the network: whether it answers, and how fast                                                                                                                                                                         |
+| The `http` driver                                                                          | A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see [A web API](#a-web-api) |
+| The `automation-bridge` service                                                            | Hears the broker and runs the drivers                                                                                                                                                                                                  |
+| The `automation-engine` service                                                            | Runs the [automations](automations.md) under `/etc/automations`, each as its owner                                                                                                                                                     |
+| The group `automation`                                                                     | Its members make automations                                                                                                                                                                                                           |
+| `automation-status`, `automations`, `automation-new`, `automation-set`, `automation-check` | Whether the broker is heard; the automations, making and changing them, and what one would do now                                                                                                                                      |
+| **Found on the network**                                                                   | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network)                                                                |
+| `automation-found`, `automation-adopt`, `automation-ignore`                                | What is on the network and all it said, adding it as a device, and leaving something out                                                                                                                                               |
 
 With the [Assistant](../assistant/index.md), it also teaches the chat to read the devices and to
 propose switching them.
@@ -63,8 +64,8 @@ mod install automation
 ```
 
 The module runs two services: `automation-bridge`, which hears the broker and drives the devices,
-and `automation-rules`, which runs the rules. When `automation-rules` first starts it makes the group
-`automation`, whose members write the rules. [Modules](../admin/modules.md) covers installing and
+and `automation-engine`, which runs the automations. When `automation-engine` first starts it makes
+the group `automation`, whose members make automations. [Modules](../admin/modules.md) covers installing and
 removing modules.
 
 ### The installer's broker
@@ -394,7 +395,7 @@ automation-status
 | `5 devices, 31 endpoints, 18420 messages`    | The bridge is connected: the devices its drivers drive, their endpoints, and the messages it has had since it started.                                                                      |
 | `drivers: ha-discovery, shelly, shelly-gen1` | The drivers it runs, as **Device sources** names them.                                                                                                                                      |
 | `not read: <device>/<endpoint>: <why>`       | An endpoint whose values the bridge cannot read, such as one announced with a template it does not understand. Nothing of it is kept.                                                       |
-| `rules: 3, 41 runs`                          | The rules service runs, with its rules and how often they ran; see [Rules](rules.md).                                                                                                       |
+| `automations: 4 running, 41 actions`         | The automation engine runs, with how many automations and the actions they took; see [Automations](automations.md).                                                                         |
 | `…; no broker set, so only …`                | **MQTT broker** is empty: the devices EiN asks over the network are read, and none on a broker. [Install the broker](#install-it) or [give EiN yours](#a-broker-you-already-run) for those. |
 | `cannot reach mqtt://…: <why>`               | The broker does not answer, or refuses EiN's account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute.                                     |
 | `not running`                                | The `automation-bridge` service is stopped: `service start automation-bridge`, as the administrator.                                                                                        |
@@ -449,8 +450,8 @@ lamp switched on an hour after it was asked would surprise.
 ## Readings on the bus
 
 Every reading, press and change of state is kept in its endpoint and published on the routing key
-`dev.<device>.<endpoint>`, and a device coming or going on `dev.<device>`, where the rules service
-reads them and a queue or a log the administrator binds can take them:
+`dev.<device>.<endpoint>`, and a device coming or going on `dev.<device>`, where the automation
+engine reads them and a queue or a log the administrator binds can take them:
 
 ```bash
 # in EiN's terminal, as the administrator
@@ -468,7 +469,7 @@ and [How often a reading is kept](../concepts/devices.md#how-often-a-reading-is-
 | --------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | Members of the `devices` group    | See every device, its readings and its history; switch and set devices; share, rename and forget them |
 | Someone a device is shared with   | See that device, and switch it when it is shared to edit                                              |
-| Members of the `automation` group | Also write [rules](rules.md), which switch with their own rights                                      |
+| Members of the `automation` group | Also make [automations](automations.md), which act with their own rights                              |
 | The administrator                 | Everything: add people to either group, and bind queues and logs to the devices' keys                 |
 
 The devices the drivers find belong to the administrator and the `devices` group, and nobody else
@@ -493,8 +494,9 @@ adds:
 
 ```bash
 # in EiN's terminal
-automation-status                     # the broker, the drivers, the devices they drive, and the rules
-automation-rule-check porch-light     # what a rule does, and whether it would run now
+automation-status                     # the broker, the drivers, the devices they drive, and the automations
+automations                           # the automations, and why one does not run
+automation-check hall-light           # what an automation's nodes would say now
 ```
 
 [Automation commands](commands.md) lists every option.
@@ -543,5 +545,5 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 
 - [Devices](../guide/devices.md): the device pages, switching and history.
 - [Devices, endpoints and drivers](../concepts/devices.md): endpoints, controls and the routing keys.
-- [Rules](rules.md): switching things when something happens.
+- [Automations](automations.md): nodes wired together that act when something happens.
 - [Devices and their keys](../admin/devices.md): who may do what with the devices.

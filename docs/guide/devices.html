@@ -77,7 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
-<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/rules.html">Rules</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
 <p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
@@ -111,7 +111,7 @@ group makes it by hand (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS
 address, read by EiN&#39;s <code>webhook</code> driver (see
 <a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a>).</li>
 </ul>
-<p>A device has a name, such as <code>hall-plug</code>, that commands and rules use, and a label, such as <strong>Hall
+<p>A device has a name, such as <code>hall-plug</code>, that commands and automations use, and a label, such as <strong>Hall
 lamp</strong>, that the pages show. Each thing it reports or takes is an <strong>endpoint</strong> with a name of its
 own within it: <code>hall-plug/switch-0</code> is the plug&#39;s relay, <code>hall-plug/switch-0-power</code> the power it
 draws, <code>ruby-phone/position</code> where the phone has been.</p>
@@ -207,7 +207,7 @@ there are and how long ago the last was.</li>
 <p>A span with nothing in it says <strong>No values in this span.</strong> or <strong>No fixes in this span.</strong></p>
 <h3 id="info">Info<a class="anchor" href="#info" aria-label="Link to this section"></a></h3>
 <ul>
-<li>What the device is: its <strong>Name</strong> in commands and rules, <strong>Class</strong>, <strong>Driver</strong>, <strong>Manufacturer</strong>,
+<li>What the device is: its <strong>Name</strong> in commands and automations, <strong>Class</strong>, <strong>Driver</strong>, <strong>Manufacturer</strong>,
 <strong>Model</strong>, <strong>Firmware</strong>, <strong>Serial</strong> and <strong>MAC</strong>. A driver whose module&#39;s service is stopped reads
 <strong>(not running)</strong>, in red: the device&#39;s switches do nothing until it runs again.</li>
 <li><strong>Web page</strong>, the device&#39;s own page, opened in a new tab, when its driver knows it: a Shelly&#39;s and
@@ -248,7 +248,7 @@ not hear the MQTT broker just now.</li>
 <code>&gt;</code> to switch, never <code>&gt;&gt;</code> (see <a href="../concepts/devices.html#writing-to-a-device">Writing to a device</a>).</p>
 <p>With the <a href="../assistant/index.html">Assistant</a> and the Automation module, asking the chat to &quot;turn on the
 hall lamp&quot; gives a <a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a>
-with the <code>echo</code> line, which you run or decline. With Automation, <a href="../automation/rules.html">rules</a>
+with the <code>echo</code> line, which you run or decline. With Automation, <a href="../automation/automations.html">automations</a>
 switch things by themselves when a reading, a press or the clock says so.</p>
 <h2 id="read-what-a-device-reported">Read what a device reported<a class="anchor" href="#read-what-a-device-reported" aria-label="Link to this section"></a></h2>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -327,7 +327,7 @@ curl -H <span class="hljs-string">&#x27;Authorization: Bearer &lt;the key&gt;&#x
 <p>The key is the part of the address after <code>key=</code>. Each field becomes a reading on the endpoint of that
 name, made the first time it comes, here <code>soil-moisture</code> and <code>battery</code>: it shows on the device&#39;s page
 and is published on the bus as <code>dev.garden-sensor.soil-moisture</code>, where the
-<a href="../automation/rules.html">Automation</a> module&#39;s rules hear it, like any driver&#39;s reading. A device that
+<a href="../automation/automations.html">Automation</a> module&#39;s automations hear it, like any driver&#39;s reading. A device that
 only takes an address sends its values in it instead,
 <code>https://ein.wrenfield.example/file/dev/garden-sensor?key=&lt;the key&gt;&amp;soil-moisture=41.5</code>. What the
 driver reads, and how a button&#39;s presses are kept, is in
@@ -357,7 +357,7 @@ without its old history.</p>
 device-label hall-plug <span class="hljs-string">&#x27;Hall lamp&#x27;</span>                     <span class="hljs-comment"># the label its page shows</span>
 device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temperature&#x27;</span>
 device-forget old-sensor                               <span class="hljs-comment"># the device and everything it kept</span></code></pre></div>
-<p>The name in commands and rules stays as it is. Forgetting removes the device&#39;s history with it; a
+<p>The name in commands and automations stays as it is. Forgetting removes the device&#39;s history with it; a
 device a driver still hears comes back new.</p>
 <h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -483,7 +483,7 @@ device a driver still hears comes back new.</p>
 <li><a href="../concepts/devices.html">Devices, endpoints and drivers</a>: how devices are kept, written to and
 published.</li>
 <li><a href="../admin/devices.html">Devices and their keys</a>: who may do what, and what a device key opens.</li>
-<li><a href="../automation/index.html">Automation</a>: sensors, plugs and buttons over MQTT, and rules.</li>
+<li><a href="../automation/index.html">Automation</a>: sensors, plugs and buttons over MQTT, and automations.</li>
 <li><a href="../archive/tracks.html">Trips</a>: with the Archive, the trips a device&#39;s track is cut into.</li>
 </ul>
 

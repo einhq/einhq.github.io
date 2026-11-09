@@ -46,9 +46,9 @@ Nobody outside `devices` reads any of it until it is shared with them. That is w
 motion sensor, which says when someone came home or moved in a room, and a phone's track, which says
 where its owner has been, to the people who should know. Only the administrator binds a queue or a
 log to routing keys, so nobody else hears what a device publishes either
-([Changes and pipelines](../concepts/pipelines.md)). A rule of the
-[Automation](../automation/rules.md) module switches as the person whose rule it is, with that
-person's rights.
+([Changes and pipelines](../concepts/pipelines.md)). An automation of the
+[Automation](../automation/automations.md) module hears and switches as the person whose
+automation it is, with that person's rights.
 
 ### Share a device
 
@@ -77,7 +77,7 @@ share-set -m g:parents:rwx /dev/heater-plug/switch-0
 ```
 
 Anyone else is then refused with `Access denied for operation 'w' on node: …`, on the page, in the
-terminal and in their rules, while the members still see its state. A driver leaves the owner, group,
+terminal and in their automations, while the members still see its state. A driver leaves the owner, group,
 mode and access list of an endpoint it already has as they are, so the change holds. One endpoint can
 be kept from someone a device is shared with the same way, with `share-set -x` on the endpoint: it is
 left out of the device for them. [Permissions in depth](permissions.md) explains owners, groups and
