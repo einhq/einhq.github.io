@@ -213,6 +213,12 @@ the default. If a save fails, the reason shows in a red box under the setting.</
 <td>How the tiles meet a page&#39;s cover photo, such as an album&#39;s or a person&#39;s: <code>split</code> gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; <code>lines</code> lays only their outlines over the photo.</td>
 </tr>
 <tr>
+<td>Language</td>
+<td><strong>Date and time format</strong></td>
+<td>empty</td>
+<td>How dates and times are written for you; see below. Empty follows the administrator&#39;s <strong>Date and time format</strong>.</td>
+</tr>
+<tr>
 <td>Playback</td>
 <td><strong>Seconds per slide</strong></td>
 <td><code>3</code></td>
@@ -244,7 +250,7 @@ the default. If a save fails, the reason shows in a red box under the setting.</
 </tr>
 </tbody></table>
 </div>
-<p>EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
+<p>EiN itself gives the settings under Appearance, Language, Sharing and Shell. The two under Playback come with
 the archive module, and only an EiN with the archive has them; the one under Todo comes with the
 todo module. <a href="../archive/viewer.html">Viewing photos, videos and recordings</a> shows a slideshow, and <a href="../reference/settings.html">the settings reference</a>
 lists each with its key, such as
@@ -291,6 +297,45 @@ lists each with its key, such as
 </tr>
 </tbody></table>
 </div>
+<h3 id="date-and-time-format">Date and time format<a class="anchor" href="#date-and-time-format" aria-label="Link to this section"></a></h3>
+<p>Every date and time in the Web UI is written as this preference says, whatever language your
+browser is set to. Its value is a locale: a language and a country, such as <code>en-SE</code>, and the
+country decides the order of the date and whether the clock has 24 hours.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>A time is written</th>
+<th>A date is written</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>en-SE</code></td>
+<td>2026-11-09, 13:26:05</td>
+<td>9 Nov 2026</td>
+</tr>
+<tr>
+<td><code>en-GB</code></td>
+<td>09/11/2026, 13:26:05</td>
+<td>9 Nov 2026</td>
+</tr>
+<tr>
+<td><code>en-US</code></td>
+<td>11/9/2026, 1:26:05 PM</td>
+<td>Nov 9, 2026</td>
+</tr>
+<tr>
+<td><code>sv-SE</code></td>
+<td>2026-11-09 13:26:05</td>
+<td>9 nov. 2026</td>
+</tr>
+</tbody></table>
+</div>
+<p>Left empty, it follows <strong>Date and time format</strong> under <strong>Settings → System</strong>, which an administrator
+sets for everyone and which is <code>en-SE</code> unless changed. A value that is not a locale is refused, for
+example <code>config set: CFG_USER_TIME_LOCALE: expected a locale such as en-SE or sv-SE, got &#39;english&#39;</code>.
+Its key is <code>CFG_USER_TIME_LOCALE</code>, so a line in your <code>~/.config</code> sets it too, as below:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">export</span> CFG_USER_TIME_LOCALE=<span class="hljs-string">&#x27;en-GB&#x27;</span></code></pre></div>
 <h3 id="how-widely-what-you-create-is-shared">How widely what you create is shared<a class="anchor" href="#how-widely-what-you-create-is-shared" aria-label="Link to this section"></a></h3>
 <p>This preference decides how an album you create starts out: one made with <strong>Create → Album</strong>, with
 <strong>New album “…”</strong> in <strong>Add to an album</strong>, or with <strong>New album</strong> in staging. It does not change albums
@@ -338,6 +383,10 @@ administrator&#39;s default sharing lets everyone else view; otherwise you grant
 <td>At once, in the browser tab where you saved it. Other open tabs, and your other devices, when their page loads again.</td>
 </tr>
 <tr>
+<td><strong>Date and time format</strong></td>
+<td>In the browser tab where you saved it, on the next page you open. Other open tabs, and your other devices, when their page loads again.</td>
+</tr>
+<tr>
 <td><strong>How widely what you create is shared</strong></td>
 <td>At once, for the next album you create.</td>
 </tr>
@@ -367,6 +416,7 @@ value or <code>(environment)</code> for the deployment&#39;s; a default has no m
 <div class="code"><pre tabindex="0"><code>CFG_USER_HEADER_ENTRANCE	drawn
 CFG_USER_HEADER_ENTRANCE_TIME	450
 CFG_USER_HEADER_COVER	split
+CFG_USER_TIME_LOCALE	
 CFG_USER_KEN_BURNS	true
 CFG_USER_SLIDESHOW_SECONDS	5 (user)
 CFG_USER_DEFAULT_SHARE	default
@@ -677,7 +727,7 @@ administrators.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/profile.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-your-profile">Open your profile</a></li><li><a href="#change-your-name-and-description">Change your name and description</a></li><li class="nested"><a href="#your-picture-and-the-person-you-are">Your picture and the person you are</a></li><li><a href="#set-your-preferences">Set your preferences</a></li><li class="nested"><a href="#the-settings">The settings</a></li><li class="nested"><a href="#how-widely-what-you-create-is-shared">How widely what you create is shared</a></li><li class="nested"><a href="#when-a-change-takes-effect">When a change takes effect</a></li><li class="nested"><a href="#your-preferences-in-the-terminal">Your preferences in the terminal</a></li><li><a href="#change-your-password">Change your password</a></li><li class="nested"><a href="#if-you-have-forgotten-your-password">If you have forgotten your password</a></li><li><a href="#favourites">Favourites</a></li><li class="nested"><a href="#heart-a-picture">Heart a picture</a></li><li class="nested"><a href="#open-your-favourites">Open your favourites</a></li><li class="nested"><a href="#take-a-picture-out-of-your-favourites">Take a picture out of your favourites</a></li><li><a href="#the-trash">The trash</a></li><li class="nested"><a href="#what-goes-to-the-trash">What goes to the trash</a></li><li class="nested"><a href="#what-is-deleted-for-good-at-once">What is deleted for good at once</a></li><li class="nested"><a href="#restore-something-from-the-trash">Restore something from the trash</a></li><li class="nested"><a href="#delete-something-for-good">Delete something for good</a></li><li class="nested"><a href="#how-long-things-stay-in-the-trash">How long things stay in the trash</a></li><li class="nested"><a href="#the-trash-in-the-terminal">The trash in the terminal</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-your-profile">Open your profile</a></li><li><a href="#change-your-name-and-description">Change your name and description</a></li><li class="nested"><a href="#your-picture-and-the-person-you-are">Your picture and the person you are</a></li><li><a href="#set-your-preferences">Set your preferences</a></li><li class="nested"><a href="#the-settings">The settings</a></li><li class="nested"><a href="#date-and-time-format">Date and time format</a></li><li class="nested"><a href="#how-widely-what-you-create-is-shared">How widely what you create is shared</a></li><li class="nested"><a href="#when-a-change-takes-effect">When a change takes effect</a></li><li class="nested"><a href="#your-preferences-in-the-terminal">Your preferences in the terminal</a></li><li><a href="#change-your-password">Change your password</a></li><li class="nested"><a href="#if-you-have-forgotten-your-password">If you have forgotten your password</a></li><li><a href="#favourites">Favourites</a></li><li class="nested"><a href="#heart-a-picture">Heart a picture</a></li><li class="nested"><a href="#open-your-favourites">Open your favourites</a></li><li class="nested"><a href="#take-a-picture-out-of-your-favourites">Take a picture out of your favourites</a></li><li><a href="#the-trash">The trash</a></li><li class="nested"><a href="#what-goes-to-the-trash">What goes to the trash</a></li><li class="nested"><a href="#what-is-deleted-for-good-at-once">What is deleted for good at once</a></li><li class="nested"><a href="#restore-something-from-the-trash">Restore something from the trash</a></li><li class="nested"><a href="#delete-something-for-good">Delete something for good</a></li><li class="nested"><a href="#how-long-things-stay-in-the-trash">How long things stay in the trash</a></li><li class="nested"><a href="#the-trash-in-the-terminal">The trash in the terminal</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

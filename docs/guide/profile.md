@@ -119,13 +119,14 @@ the default. If a save fails, the reason shows in a red box under the setting.
 | Appearance | **Header entrance**                      | `drawn`   | How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.                                                                        |
 | Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                              |
 | Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; `lines` lays only their outlines over the photo. |
+| Language   | **Date and time format**                 | empty     | How dates and times are written for you; see below. Empty follows the administrator's **Date and time format**.                                                                                                                    |
 | Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                       |
 | Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
 | Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
 | Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
 | Todo       | **Todo widget**                          | **Off**   | A button floating over every page, which you can drag anywhere, counting and listing the todos about what is on screen; see [The todo widget](../todo/index.md#the-todo-widget).                                                   |
 
-EiN itself gives the settings under Appearance, Sharing and Shell. The two under Playback come with
+EiN itself gives the settings under Appearance, Language, Sharing and Shell. The two under Playback come with
 the archive module, and only an EiN with the archive has them; the one under Todo comes with the
 todo module. [Viewing photos, videos and recordings](../archive/viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
 lists each with its key, such as
@@ -143,6 +144,28 @@ The choices for **Header entrance**:
 | `ripple`  | rippling out from the title                       |
 | `puzzle`  | snapping in like puzzle pieces                    |
 | `wave`    | crossed by a wave of light                        |
+
+### Date and time format
+
+Every date and time in the Web UI is written as this preference says, whatever language your
+browser is set to. Its value is a locale: a language and a country, such as `en-SE`, and the
+country decides the order of the date and whether the clock has 24 hours.
+
+| Value   | A time is written     | A date is written |
+| ------- | --------------------- | ----------------- |
+| `en-SE` | 2026-11-09, 13:26:05  | 9 Nov 2026        |
+| `en-GB` | 09/11/2026, 13:26:05  | 9 Nov 2026        |
+| `en-US` | 11/9/2026, 1:26:05 PM | Nov 9, 2026       |
+| `sv-SE` | 2026-11-09 13:26:05   | 9 nov. 2026       |
+
+Left empty, it follows **Date and time format** under **Settings → System**, which an administrator
+sets for everyone and which is `en-SE` unless changed. A value that is not a locale is refused, for
+example `config set: CFG_USER_TIME_LOCALE: expected a locale such as en-SE or sv-SE, got 'english'`.
+Its key is `CFG_USER_TIME_LOCALE`, so a line in your `~/.config` sets it too, as below:
+
+```bash
+export CFG_USER_TIME_LOCALE='en-GB'
+```
 
 ### How widely what you create is shared
 
@@ -165,11 +188,12 @@ administrator's default sharing lets everyone else view; otherwise you grant tha
 
 ### When a change takes effect
 
-| Setting                                  | Takes effect                                                                                                          |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Appearance and Playback                  | At once, in the browser tab where you saved it. Other open tabs, and your other devices, when their page loads again. |
-| **How widely what you create is shared** | At once, for the next album you create.                                                                               |
-| **Shell history length**                 | In the next terminal you open.                                                                                        |
+| Setting                                  | Takes effect                                                                                                                            |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Appearance and Playback                  | At once, in the browser tab where you saved it. Other open tabs, and your other devices, when their page loads again.                   |
+| **Date and time format**                 | In the browser tab where you saved it, on the next page you open. Other open tabs, and your other devices, when their page loads again. |
+| **How widely what you create is shared** | At once, for the next album you create.                                                                                                 |
+| **Shell history length**                 | In the next terminal you open.                                                                                                          |
 
 ### Your preferences in the terminal
 
@@ -206,6 +230,7 @@ value or `(environment)` for the deployment's; a default has no mark:
 CFG_USER_HEADER_ENTRANCE	drawn
 CFG_USER_HEADER_ENTRANCE_TIME	450
 CFG_USER_HEADER_COVER	split
+CFG_USER_TIME_LOCALE	
 CFG_USER_KEN_BURNS	true
 CFG_USER_SLIDESHOW_SECONDS	5 (user)
 CFG_USER_DEFAULT_SHARE	default

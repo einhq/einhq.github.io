@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 99 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 101 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -270,7 +270,7 @@ Every setting of an EiN with all its modules: 99 of them, in the groups the Sett
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means automation is off: no device is heard |
+| Default | empty, which means no device is heard on a broker; those EiN asks over the network are still read |
 | Kind | string |
 | Restarts | `automation-bridge` |
 | From the module | Automation |
@@ -448,6 +448,26 @@ Every setting of an EiN with all its modules: 99 of them, in the groups the Sett
 | Default | `en` |
 | Choices | `en`, `sv` |
 | Kind | select |
+
+### `CFG_TIME_LOCALE`
+
+**Date and time format**. How dates and times are written in the browser, as a locale: en-SE writes 2026-11-09, 13:26 and 9 Nov 2026, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM, sv-SE 9 nov. 2026. Each person may choose their own.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `en-SE` |
+| Kind | locale |
+
+### `CFG_USER_TIME_LOCALE`
+
+**Date and time format**. How dates and times are written for you, as a locale: en-SE writes 2026-11-09, 13:26, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM, sv-SE 9 nov. 2026. Empty follows the system setting.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | empty, which means the system's date and time format |
+| Kind | locale |
 
 ## Media service
 

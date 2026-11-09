@@ -180,19 +180,19 @@ The values are never in the manifest. They live in `/etc/config` for system sett
 }
 ```
 
-| Key           | What it is                                                                                                               |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `key`         | the environment variable: `CFG_…` for a system setting, `CFG_USER_…` for a personal one                                  |
-| `scope`       | `system` (one value, set by an administrator) or `user` (each person their own)                                          |
-| `type`        | `string`, `number`, `boolean`, `select`, `mode`, `user`, `group` or `secret`: the control, and what `config set` accepts |
-| `choices`     | the allowed values, required for `select`                                                                                |
-| `default`     | what applies when nothing is set; always a string, never written to a file                                               |
-| `label`       | the setting's name on the Settings page                                                                                  |
-| `description` | what the setting does, for the person reading the Settings page; say what changes, not how it is implemented             |
-| `group`       | the category it is listed under on the Settings page                                                                     |
-| `restarts`    | the services that read it when they start, restarted when it changes                                                     |
-| `restartNote` | shown instead of restarting, for a service that cannot be restarted from a page                                          |
-| `emptyMeans`  | what an empty value means, when empty is a choice rather than "not set"                                                  |
+| Key           | What it is                                                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`         | the environment variable: `CFG_…` for a system setting, `CFG_USER_…` for a personal one                                                                             |
+| `scope`       | `system` (one value, set by an administrator) or `user` (each person their own)                                                                                     |
+| `type`        | `string`, `number`, `boolean`, `select`, `mode`, `user`, `group`, `secret` or `locale` (a language tag such as `en-SE`): the control, and what `config set` accepts |
+| `choices`     | the allowed values, required for `select`                                                                                                                           |
+| `default`     | what applies when nothing is set; always a string, never written to a file                                                                                          |
+| `label`       | the setting's name on the Settings page                                                                                                                             |
+| `description` | what the setting does, for the person reading the Settings page; say what changes, not how it is implemented                                                        |
+| `group`       | the category it is listed under on the Settings page                                                                                                                |
+| `restarts`    | the services that read it when they start, restarted when it changes                                                                                                |
+| `restartNote` | shown instead of restarting, for a service that cannot be restarted from a page                                                                                     |
+| `emptyMeans`  | what an empty value means, when empty is a choice rather than "not set"                                                                                             |
 
 The example is the Media module's [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots). [Settings](../reference/settings.md) lists every setting the installed modules declare, with its default.
 

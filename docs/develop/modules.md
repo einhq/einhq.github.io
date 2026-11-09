@@ -367,6 +367,12 @@ A page imports only what the Web UI lends it, its own files, and anything at all
 
 Anything else stops the build with a message naming the file and the import.
 
+A page writes a date or a time with `formatDateTime`, `formatDate` or `formatTime` from `@ein/ui/lib`,
+which take the options `toLocaleString` takes, or with `dateTimeFormat` where it needs an
+`Intl.DateTimeFormat`. They follow the reader's **Date and time format**; `toLocaleString` and a
+bare `Intl.DateTimeFormat` follow the browser's language instead, which gives an English browser a
+12-hour clock.
+
 ### Where an entry opens a route
 
 A module gives the Web UI entries and routes, nothing more. Each entry says where its route

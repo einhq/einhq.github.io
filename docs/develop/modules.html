@@ -660,6 +660,11 @@ section.</p>
 </tbody></table>
 </div>
 <p>Anything else stops the build with a message naming the file and the import.</p>
+<p>A page writes a date or a time with <code>formatDateTime</code>, <code>formatDate</code> or <code>formatTime</code> from <code>@ein/ui/lib</code>,
+which take the options <code>toLocaleString</code> takes, or with <code>dateTimeFormat</code> where it needs an
+<code>Intl.DateTimeFormat</code>. They follow the reader&#39;s <strong>Date and time format</strong>; <code>toLocaleString</code> and a
+bare <code>Intl.DateTimeFormat</code> follow the browser&#39;s language instead, which gives an English browser a
+12-hour clock.</p>
 <h3 id="where-an-entry-opens-a-route">Where an entry opens a route<a class="anchor" href="#where-an-entry-opens-a-route" aria-label="Link to this section"></a></h3>
 <p>A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:</p>
