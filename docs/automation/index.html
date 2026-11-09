@@ -414,12 +414,13 @@ with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its fir
 <code>input-0</code> for a button&#39;s presses: <code>single</code>, <code>double</code>, <code>triple</code>, <code>long</code>, <code>single-long</code> or
 <code>long-single</code>. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.</p>
-<p>A light is <code>light-0</code> (a Dimmer, a Duo, a Duo RGBW), or <code>color-0</code> and <code>white-0</code> for a Bulb or an
-RGBW2 in colour or white mode, and has as many of these as it reports, each of which can be set:
-<code>light-0-brightness</code> (0–100 %; in colour mode, its gain), <code>light-0-color</code> (<code>#rrggbb</code>), <code>color-0-white</code>
-(the white channel, 0–255) and <code>light-0-color-temperature</code> (in K). A light of a Duo RGBW set to a
-colour turns to colour mode. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the
-way it last moved), <code>roller-0-position</code> (0–100 %, empty until the roller is calibrated), and
+<p>A light is <code>light-0</code> (a Dimmer, a Duo, a Vintage), <code>color-0</code> (a Bulb, a Duo RGBW, an RGBW2 in colour
+mode) or <code>white-0</code> (an RGBW2 in white mode), and has as many of these as it reports, each of which
+can be set: <code>color-0-brightness</code> (0–100 %), <code>color-0-color</code> (<code>#rrggbb</code>), <code>color-0-white</code> (the white
+channel, 0–255) and <code>color-0-color-temperature</code> (in K). A light that has both modes turns to colour
+mode when set to a colour, and to white when set to a colour temperature; its brightness is that of
+the mode it is in. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the way it
+last moved), <code>roller-0-position</code> (0–100 %, empty until the roller is calibrated), and
 <code>roller-0-open</code>, <code>roller-0-close</code> and <code>roller-0-stop</code> to press.</p>
 <h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
 <p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
