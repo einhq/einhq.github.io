@@ -87,7 +87,8 @@ To change them:
    can type in, such as `Europe/Stockholm`. Clear it for UTC.
 4. Write a **Description** if you like, and click **Save**.
 
-A changed **Travels as** or **Timezone** finds the track's trips again from the start.
+A changed **Travels as** or **Timezone** finds the track's trips again from the start, and so does a
+changed class of its device while **Travels as** is not set.
 
 ## Home bases
 
@@ -340,8 +341,8 @@ times in UTC.
 The trips are kept up to date as the track grows: ten minutes after points arrive, EiN finds them
 again from where the last finished trip ended, puts the new stays at locations, and, unless weather
 lookups are turned off, gives each trip and day the weather along the track, which an album made of
-the trip shows ([The Trip tab](albums.md#the-trip-tab)). Changing how the device travels, its time
-zone or its home bases finds them again from the start. **Find trips again** does it at once.
+the trip shows ([The Trip tab](albums.md#the-trip-tab)). Changing how the device travels (its
+**Travels as** or its class), its time zone or its home bases finds them again from the start. **Find trips again** does it at once.
 
 When the track has no trips, the view says **No trips**: "Nothing in the track went 500 m or more
 from where it started.", or, before they were ever looked for, "Trips are found in the track once it
