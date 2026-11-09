@@ -73,7 +73,8 @@ A tile for each endpoint:
   "not pressed yet".
 - **A position**: a small map of the day up to its last position, and that position: its
   coordinates, its altitude, speed (in knots on a boat, km/h otherwise) and course when the device
-  sent them, and when it came. **Over time** opens it on the **History** tab.
+  sent them, and when it came. The button on the map, **Enlarge map**, opens it large, with the
+  choice of map; **Over time** opens it on the **History** tab.
 - **A switch or a light**: a toggle that switches it.
 - **A setting that takes a number**, such as a thermostat's target: a slider, set when you let go, or
   a box with **Set** when it has no range.

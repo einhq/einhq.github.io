@@ -169,11 +169,13 @@ household that uses them. <a href="rules.html">Rules</a> covers writing rules.</
 propose switching them.</p>
 <h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
 <ul>
-<li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through. The
-installer runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
-<li><strong>Devices that speak MQTT</strong>: those running ESPHome, and Shelly&#39;s of every generation. Printers,
-Google Cast speakers, web APIs and anything else on the network are asked directly, once added;
-the bridge that asks them runs while a broker is set.</li>
+<li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through, for the
+devices that speak MQTT: those running ESPHome, and Shelly&#39;s of every generation. The installer
+runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
+<li>No broker for the rest: printers, Google Cast speakers, NAS boxes, <a href="#a-web-api">web APIs</a> and
+anything else on the network are asked by EiN directly, once added, with or without one. Without
+the installer&#39;s broker nothing is found on the network, though, so add them by hand with
+<code>device-create</code>.</li>
 <li>Nothing else: neither the Archive nor the media service.</li>
 </ul>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
@@ -227,8 +229,8 @@ config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_USER ein
 <p><strong>MQTT broker</strong> takes <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS.
 <strong>MQTT password</strong> is a key: nobody can read it back, and EiN sends it only to that broker
 (<a href="../admin/configuration.html#give-a-key-to-another-service">Give a key to another service</a>). Saving
-any of the three restarts <code>automation-bridge</code>. While <strong>MQTT broker</strong> is empty, automation is off: no
-device is heard.</p>
+any of the three restarts <code>automation-bridge</code>. While <strong>MQTT broker</strong> is empty no device is heard
+on a broker, and only the devices EiN asks over the network itself are read.</p>
 <h2 id="connect-a-device">Connect a device<a class="anchor" href="#connect-a-device" aria-label="Link to this section"></a></h2>
 <p>A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
 within seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does.
@@ -493,8 +495,8 @@ automation-status</code></pre></div>
 <td>The rules service runs, with its rules and how often they ran; see <a href="rules.html">Rules</a>.</td>
 </tr>
 <tr>
-<td><code>off: no broker set</code></td>
-<td><strong>MQTT broker</strong> is empty: <a href="#install-it">install the broker</a> or <a href="#a-broker-you-already-run">give EiN yours</a>.</td>
+<td><code>…; no broker set, so only …</code></td>
+<td><strong>MQTT broker</strong> is empty: the devices EiN asks over the network are read, and none on a broker. <a href="#install-it">Install the broker</a> or <a href="#a-broker-you-already-run">give EiN yours</a> for those.</td>
 </tr>
 <tr>
 <td><code>cannot reach mqtt://…: &lt;why&gt;</code></td>
@@ -506,7 +508,7 @@ automation-status</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>The dashboard says the same: its <code>automation bridge</code> check is fine while the bridge is connected,
+<p>The dashboard says the same: its <code>automation bridge</code> check is fine while the bridge is connected, or runs without a broker,
 a warning while it cannot reach the broker, and failed while its service is stopped
 (<a href="../admin/monitoring.html#read-the-checks">Health and the dashboard</a>). <code>devices --drivers</code> lists the
 drivers with their devices while the bridge runs.</p>
@@ -649,7 +651,7 @@ automation-rule-check porch-light     <span class="hljs-comment"># what a rule d
 <td><code>CFG_AUTOMATION_MQTT_URL</code></td>
 <td><strong>MQTT broker</strong></td>
 <td>empty; <code>--mqtt</code> sets it</td>
-<td>The broker, as <code>mqtt://host:1883</code> or <code>mqtts://host:8883</code>. Empty, automation is off</td>
+<td>The broker, as <code>mqtt://host:1883</code> or <code>mqtts://host:8883</code>. Empty, only the devices EiN asks over the network are read</td>
 </tr>
 <tr>
 <td><code>CFG_AUTOMATION_MQTT_USER</code></td>
