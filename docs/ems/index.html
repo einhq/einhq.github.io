@@ -500,7 +500,7 @@ where each runs when indexing has the card and when it is quiet, its size, and w
 and last used.</li>
 <li><strong>The last 6 hours</strong>: a row for each model that was loaded, solid where it was on the card,
 outlined where it was in RAM and underlined while it worked, under the card&#39;s mode and the work EiN
-had waiting. A model loaded again and again shows as a row that flickers. The <code>gpu-sampler</code>
+had waiting. A model loaded again and again shows as a row that flickers. The <code>ems-sampler</code>
 service records what the media service holds once a minute, for a week.</li>
 <li><strong>Executing</strong>: the requests running or waiting now, and the three lanes they go through, <strong>models</strong>,
 <strong>tools</strong> and <strong>encodes</strong>, each with how many run at once. When requests wait, a request a person
@@ -519,6 +519,72 @@ it holds, the working ones first and the search models apart. With <a href="inst
 memory when the media service has a card, and <strong>EMS RAM</strong>, the memory of the machine the media
 service runs on, which need not be EiN&#39;s, with the media service&#39;s own share. With no card the GPU
 tiles are not there, and with no media service none of them.</p>
+<h4 id="the-media-services-machine-as-a-device">The media service&#39;s machine as a device<a class="anchor" href="#the-media-services-machine-as-a-device" aria-label="Link to this section"></a></h4>
+<p>The machine the media service runs on is a device too, <code>/dev/ems</code>, of class <code>host</code>, under
+<strong>Devices</strong>, beside the one for the machine EiN runs on (<a href="../concepts/devices.html#cores-host-driver">Core&#39;s host driver</a>). It is a device of its own even when both run on
+one machine. Another instance is <code>/dev/ems-&lt;name&gt;</code> (<a href="instances.html">More than one media service</a>).
+The <code>ems-sampler</code> service makes it on the media service&#39;s first answer and writes its readings every
+15 seconds through the <code>ems</code> driver; the device is online while the media service answers, so a rule
+can act when it goes away. Only the administrators see it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Reading</th>
+<th>Kept</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gpu</code></td>
+<td>How busy the card is, in %</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>decoder</code>, <code>encoder</code></td>
+<td>How busy the card&#39;s video decoder and encoder are, in %</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>vram-used</code></td>
+<td>The share of the card&#39;s memory in use, in %</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>gpu-temperature</code></td>
+<td>The card&#39;s temperature, in °C</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>gpu-power</code></td>
+<td>What the card draws, in W</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>memory-used</code></td>
+<td>The share of the machine&#39;s memory in use, in %</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>cpu</code>, <code>load</code></td>
+<td>The share of the machine&#39;s processor cores in use, in %, and its 1-minute load</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>vram-total</code>, <code>memory-total</code></td>
+<td>The card&#39;s and the machine&#39;s memory, in GB</td>
+<td>365 days</td>
+</tr>
+<tr>
+<td><code>gpu-power-limit</code></td>
+<td>The most the card may draw, in W</td>
+<td>365 days</td>
+</tr>
+</tbody></table>
+</div>
+<p>The card&#39;s readings are there only when the media service sees a card, and <code>cpu</code> and <code>load</code> only
+from a media service of API 0.3.4 or later. The <strong>EMS GPU</strong>, <strong>EMS VRAM</strong> and <strong>EMS RAM</strong> tiles
+read them back. What the media service holds and does, its models, lanes and requests, is not the
+machine&#39;s and stays on the <strong>Media service</strong> tab.</p>
 <figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card" width="1200" height="650" loading="lazy" decoding="async"></a><figcaption>The GPU and VRAM tiles are the media service&#39;s card; they show only when it has one</figcaption></figure>
 <p><strong>About EiN</strong> in the account menu also has a <strong>Media service</strong> tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or <strong>Not answering</strong>.</p>

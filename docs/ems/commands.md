@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 10 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-gpu-sample](#ems-gpu-sample) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-models-sample](#ems-models-sample) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-sampler](#ems-sampler) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
 
 ## E
 
@@ -42,7 +42,7 @@ With `JSON_OUTPUT=1`: the EMS-Files header value, then a line per path: read or 
 
 ### `ems-gpu`
 
-The GPU of an instance of the media service now, with the last six hours of utilization and VRAM.
+The GPU of an instance of the media service now, with the last six hours of utilization and VRAM, from its machine device.
 
 <small>reads only</small>
 
@@ -52,7 +52,7 @@ ems-gpu [--gauge] [--instance=<string>]
 
 | Option                | What it does                                                                                                         |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `--gauge`             | The GPU and VRAM gauges top draws beside the host, each instance's with a card (the gpu-sampler service declares it) |
+| `--gauge`             | The GPU and VRAM gauges top draws beside the host, each instance's with a card (the ems-sampler service declares it) |
 | `--instance=<string>` | The instance whose card (ems-instance list); main, the primary, by default.                                          |
 
 ```bash
@@ -62,27 +62,6 @@ ems-gpu --gauge
 ```
 
 With `JSON_OUTPUT=1`: utilPct, memUsedMb, memTotalMb, tempC, vramPercent and the utilization and VRAM series, or null when there is no reading.
-
-### `ems-gpu-sample`
-
-One reading of the media service's GPU: utilization, VRAM and temperature.
-
-<small>reads only</small>
-
-```text
-ems-gpu-sample [--instance=<string>]
-```
-
-| Option                | What it does                                                            |
-| --------------------- | ----------------------------------------------------------------------- |
-| `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default. |
-
-```bash
-ems-gpu-sample
-ems-gpu-sample --instance laptop
-```
-
-With `JSON_OUTPUT=1`: utilPct, memUsedMb, memTotalMb and tempC, or null when there is no reading.
 
 ### `ems-instance`
 
@@ -169,26 +148,19 @@ ems-models --instance laptop
 
 With `JSON_OUTPUT=1`: windowMs and samples: at, and mode, copies, working, notStarted and inLine.
 
-### `ems-models-sample`
+### `ems-sampler`
 
-What the media service holds now: the card mode, each model copy and where it is, the models working.
+Drive the machine each instance of the media service runs on as a device, and sample what it holds (the ems-sampler service)
 
-<small>reads only</small>
+<small>administrators only · changes things</small>
 
 ```text
-ems-models-sample [--instance=<string>]
+ems-sampler
 ```
-
-| Option                | What it does                                                            |
-| --------------------- | ----------------------------------------------------------------------- |
-| `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default. |
 
 ```bash
-ems-models-sample
-ems-models-sample --instance laptop
+service restart ems-sampler
 ```
-
-With `JSON_OUTPUT=1`: mode, copies (family, place, worker, state), working, notStarted and inLine, or null when the media service is not answering.
 
 ### `ems-status`
 

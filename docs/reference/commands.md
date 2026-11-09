@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 436 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 435 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -440,19 +440,18 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media service
 
-[All 11 in full](../ems/commands.md).
+[All 10 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
 | [ems-files](../ems/commands.md#ems-files) | Serve the media service the files of its requests in flight over SFTP, the only way it reaches EiN's files (the ems-files service) |
 | [ems-files-grant](../ems/commands.md#ems-files-grant) | Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
-| [ems-gpu](../ems/commands.md#ems-gpu) | The GPU of an instance of the media service now, with the last six hours of utilization and VRAM. |
-| [ems-gpu-sample](../ems/commands.md#ems-gpu-sample) | One reading of the media service's GPU: utilization, VRAM and temperature. |
+| [ems-gpu](../ems/commands.md#ems-gpu) | The GPU of an instance of the media service now, with the last six hours of utilization and VRAM, from its machine device. |
 | [ems-instance](../ems/commands.md#ems-instance) | The media service's instances: list them and what each serves, or add, change or remove one beside the primary. |
 | [ems-link](../ems/commands.md#ems-link) | Watch every instance of the media service: log when one comes or goes, and run failed work again when one's build changes (the ems-link service) |
 | [ems-memory](../ems/commands.md#ems-memory) | The memory of the media service's machine now, with the last six hours, and what EMS holds of it. |
 | [ems-models](../ems/commands.md#ems-models) | What the media service held over the last hours, a sample a minute, with the work EiN had waiting beside it. |
-| [ems-models-sample](../ems/commands.md#ems-models-sample) | What the media service holds now: the card mode, each model copy and where it is, the models working. |
+| [ems-sampler](../ems/commands.md#ems-sampler) | Drive the machine each instance of the media service runs on as a device, and sample what it holds (the ems-sampler service) |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
 

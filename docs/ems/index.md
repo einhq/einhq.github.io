@@ -285,7 +285,7 @@ how it is, again and again, while the tab is open.
   and last used.
 - **The last 6 hours**: a row for each model that was loaded, solid where it was on the card,
   outlined where it was in RAM and underlined while it worked, under the card's mode and the work EiN
-  had waiting. A model loaded again and again shows as a row that flickers. The `gpu-sampler`
+  had waiting. A model loaded again and again shows as a row that flickers. The `ems-sampler`
   service records what the media service holds once a minute, for a week.
 - **Executing**: the requests running or waiting now, and the three lanes they go through, **models**,
   **tools** and **encodes**, each with how many run at once. When requests wait, a request a person
@@ -306,6 +306,32 @@ The **Overview** tab shows **EMS GPU** and **EMS VRAM** tiles beside the compute
 memory when the media service has a card, and **EMS RAM**, the memory of the machine the media
 service runs on, which need not be EiN's, with the media service's own share. With no card the GPU
 tiles are not there, and with no media service none of them.
+
+#### The media service's machine as a device
+
+The machine the media service runs on is a device too, `/dev/ems`, of class `host`, under
+**Devices**, beside the one for the machine EiN runs on ([Core's host driver](../concepts/devices.md#cores-host-driver)). It is a device of its own even when both run on
+one machine. Another instance is `/dev/ems-<name>` ([More than one media service](instances.md)).
+The `ems-sampler` service makes it on the media service's first answer and writes its readings every
+15 seconds through the `ems` driver; the device is online while the media service answers, so a rule
+can act when it goes away. Only the administrators see it.
+
+| Endpoint                     | Reading                                                                        | Kept     |
+| ---------------------------- | ------------------------------------------------------------------------------ | -------- |
+| `gpu`                        | How busy the card is, in %                                                     | 30 days  |
+| `decoder`, `encoder`         | How busy the card's video decoder and encoder are, in %                        | 30 days  |
+| `vram-used`                  | The share of the card's memory in use, in %                                    | 30 days  |
+| `gpu-temperature`            | The card's temperature, in °C                                                  | 30 days  |
+| `gpu-power`                  | What the card draws, in W                                                      | 30 days  |
+| `memory-used`                | The share of the machine's memory in use, in %                                 | 30 days  |
+| `cpu`, `load`                | The share of the machine's processor cores in use, in %, and its 1-minute load | 30 days  |
+| `vram-total`, `memory-total` | The card's and the machine's memory, in GB                                     | 365 days |
+| `gpu-power-limit`            | The most the card may draw, in W                                               | 365 days |
+
+The card's readings are there only when the media service sees a card, and `cpu` and `load` only
+from a media service of API 0.3.4 or later. The **EMS GPU**, **EMS VRAM** and **EMS RAM** tiles
+read them back. What the media service holds and does, its models, lanes and requests, is not the
+machine's and stays on the **Media service** tab.
 
 ![The System dashboard's Overview tab with the Catching up badge above the title, a warning that OCR work is waiting, tiles for CPU, memory, GPU and VRAM, and the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles are the media service's card; they show only when it has one")
 

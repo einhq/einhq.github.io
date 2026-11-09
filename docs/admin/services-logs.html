@@ -131,7 +131,7 @@
 <tr>
 <td><code>metrics-sampler</code></td>
 <td>core</td>
-<td>Samples host, storage and workload counters into <code>/var/logs/metrics</code>, which the dashboard draws</td>
+<td>Samples EiN&#39;s own resources, storage and workload into <code>/var/logs/metrics</code>, which the dashboard draws, and the machine&#39;s readings into its device <code>/dev/&lt;machine&gt;</code></td>
 </tr>
 <tr>
 <td><code>session-reaper</code></td>
@@ -189,9 +189,9 @@
 <td>Watches the media service and reports what it holds</td>
 </tr>
 <tr>
-<td><code>gpu-sampler</code></td>
+<td><code>ems-sampler</code></td>
 <td>ems</td>
-<td>Samples the media service&#39;s graphics card for the dashboard</td>
+<td>Drives the machine the media service runs on as a device, <code>/dev/ems</code>, and samples what models it holds</td>
 </tr>
 <tr>
 <td><code>ems-files</code></td>

@@ -168,7 +168,7 @@ Under Docker the `restart: always` lines are left out.
 
 ## Check that EiN uses the card
 
-Open **Dashboard** under **System** in the sidebar. The **Overview** tab has an **EMS GPU** tile, with the card's use, its temperature and its power draw against its limit, and an **EMS VRAM** tile, with the memory in use on it, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one. **EMS RAM** beside them is the memory of the machine the media service runs on.
+Open **Dashboard** under **System** in the sidebar. The **Overview** tab has an **EMS GPU** tile, with the card's use, its temperature and its power draw against its limit, and an **EMS VRAM** tile, with the memory in use on it, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one. **EMS RAM** beside them is the memory of the machine the media service runs on. The device `/dev/ems` under **Devices** keeps the same readings for a month, with the card's temperature and power draw ([The media service's machine as a device](index.md#the-media-services-machine-as-a-device)).
 
 ![The System dashboard's Overview tab: tiles for CPU, memory, GPU and VRAM, above the Work card](../../assets/shots/dashboard.webp "The GPU and VRAM tiles appear only when the media service sees a card")
 
