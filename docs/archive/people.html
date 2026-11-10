@@ -249,8 +249,8 @@ the page.</li>
 <p>Click a card, anywhere but its name box and its tick box, to open the review. Its title is the placeholder name, with the <strong>N faces</strong> and <strong>heard in N</strong> badges beside it.</p>
 <ul>
 <li>At the top, the <strong>Who is this?</strong> box (&quot;A new name, or someone you already have&quot;) works like the card&#39;s. Its button reads <strong>Name</strong>, or <strong>Add to &lt;name&gt;</strong> when the name is someone who already exists. <strong>Not a person</strong> beside it is described in <a href="#say-what-is-not-a-person">Say what is not a person</a>.</li>
-<li><strong>Faces</strong> shows every face of this person. Click a face to open the photo it came from in the viewer; the arrows then step through the photos of the faces shown. <strong>Load more (N of M)</strong> fetches more when there are many.</li>
-<li><strong>Voice</strong> (&quot;heard in N recordings&quot;) shows a tile for each recording the voice is heard in. The round button plays the voice&#39;s longest turn there, with the video&#39;s frames in it for a video, and <strong>Open in the lightbox</strong> opens the recording at that moment. <strong>Pick all</strong> picks every recording.</li>
+<li><strong>Faces</strong> shows every face of this person. Click a face to see the photo it came from, large, over the review; its arrows, or <kbd>←</kbd> and <kbd>→</kbd>, step through the photos of the faces shown. <strong>Load more (N of M)</strong> fetches more when there are many.</li>
+<li><strong>Voice</strong> (&quot;heard in N recordings&quot;) shows a tile for each recording the voice is heard in. The round button plays the voice&#39;s longest turn there, with the video&#39;s frames in it for a video, and <strong>Open in the lightbox</strong> opens the recording at that moment; the review steps aside while the viewer is open and is back as you left it when you close it. <strong>Pick all</strong> picks every recording.</li>
 </ul>
 <p>To pick faces or recordings, tick the box in their corner. Once something is picked, a click on a face picks it too instead of opening its photo; <kbd>Shift</kbd>+click picks a range, and <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) picks everything shown. <kbd>Esc</kbd> closes an open photo first, then clears what is picked, then closes the review.</p>
 <p>The review has its own address, <code>/people/unknown?person=&lt;id&gt;</code>, so you can send it to a relative who may know who it is.</p>
@@ -450,7 +450,7 @@ person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code>
 <ol>
 <li>Drag the <strong>Similarity</strong> slider until the people come apart; the badge says how many groups there are. <strong>One group</strong>, <strong>Split in two</strong>, <strong>Suggested</strong> and <strong>Split off all but the largest</strong> are shortcuts.</li>
 <li>For each group, choose <strong>Keep</strong>, <strong>Split off</strong> (a new unidentified person; not offered for a group of one face), <strong>Merge into…</strong> (pick a named person) or <strong>Not a person</strong>. Every group starts on <strong>Keep</strong>.</li>
-<li>Click a face to see the photo it came from; the arrows then step through that group, which is the way to check that the same person keeps turning up.</li>
+<li>Click a face to see the photo it came from, over the dialog; its arrows then step through that group, which is the way to check that the same person keeps turning up.</li>
 <li>Read the summary at the foot, for example &quot;40 faces stay · 1 new unidentified person&quot;, and press <strong>Apply to N groups</strong>.</li>
 </ol>
 <p>At least one group has to stay: moving all of them is a rename, not a split. Only the 30 largest groups get a card; the smaller ones stay as they are. A box drawn by hand has nothing to compare and stays where it is.</p>

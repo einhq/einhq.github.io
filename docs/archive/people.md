@@ -91,8 +91,8 @@ When nobody is waiting, the page says "Nobody unidentified. Everyone recognized 
 Click a card, anywhere but its name box and its tick box, to open the review. Its title is the placeholder name, with the **N faces** and **heard in N** badges beside it.
 
 - At the top, the **Who is this?** box ("A new name, or someone you already have") works like the card's. Its button reads **Name**, or **Add to &lt;name&gt;** when the name is someone who already exists. **Not a person** beside it is described in [Say what is not a person](#say-what-is-not-a-person).
-- **Faces** shows every face of this person. Click a face to open the photo it came from in the viewer; the arrows then step through the photos of the faces shown. **Load more (N of M)** fetches more when there are many.
-- **Voice** ("heard in N recordings") shows a tile for each recording the voice is heard in. The round button plays the voice's longest turn there, with the video's frames in it for a video, and **Open in the lightbox** opens the recording at that moment. **Pick all** picks every recording.
+- **Faces** shows every face of this person. Click a face to see the photo it came from, large, over the review; its arrows, or <kbd>←</kbd> and <kbd>→</kbd>, step through the photos of the faces shown. **Load more (N of M)** fetches more when there are many.
+- **Voice** ("heard in N recordings") shows a tile for each recording the voice is heard in. The round button plays the voice's longest turn there, with the video's frames in it for a video, and **Open in the lightbox** opens the recording at that moment; the review steps aside while the viewer is open and is back as you left it when you close it. **Pick all** picks every recording.
 
 To pick faces or recordings, tick the box in their corner. Once something is picked, a click on a face picks it too instead of opening its photo; <kbd>Shift</kbd>+click picks a range, and <kbd>Ctrl</kbd>+<kbd>A</kbd> (<kbd>⌘</kbd>+<kbd>A</kbd> on a Mac) picks everything shown. <kbd>Esc</kbd> closes an open photo first, then clears what is picked, then closes the review.
 
@@ -267,7 +267,7 @@ Naming an unidentified person approves every face in it. If it turns out to have
 
 1. Drag the **Similarity** slider until the people come apart; the badge says how many groups there are. **One group**, **Split in two**, **Suggested** and **Split off all but the largest** are shortcuts.
 2. For each group, choose **Keep**, **Split off** (a new unidentified person; not offered for a group of one face), **Merge into…** (pick a named person) or **Not a person**. Every group starts on **Keep**.
-3. Click a face to see the photo it came from; the arrows then step through that group, which is the way to check that the same person keeps turning up.
+3. Click a face to see the photo it came from, over the dialog; its arrows then step through that group, which is the way to check that the same person keeps turning up.
 4. Read the summary at the foot, for example "40 faces stay · 1 new unidentified person", and press **Apply to N groups**.
 
 At least one group has to stay: moving all of them is a rename, not a split. Only the 30 largest groups get a card; the smaller ones stay as they are. A box drawn by hand has nothing to compare and stays where it is.
