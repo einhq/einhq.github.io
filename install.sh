@@ -27,7 +27,7 @@
 #                       alone, behind an HTTPS proxy of your own
 #
 # Every other option is setup.sh's, passed on as it is (`--help` there lists them): --ems, --llm,
-# --mqtt, --module NAME, --db-dir DIR, --engine, --source URL. The checks follow them: the media
+# --automation, --module NAME, --db-dir DIR, --engine, --source URL. The checks follow them: the media
 # service needs the most of the machine, the card only matters with it or the model. The secrets
 # come in the environment, kept off the command line:
 #
@@ -46,7 +46,7 @@ set -uo pipefail
 MODULES=(
   'archive|--ems|photos, videos and documents, people and places; with the media service, ~30 GB'
   'assistant|--llm|a chat that answers questions; with a language model here, about 6 GB'
-  'automation|--mqtt|sensors, plugs and lights, and automations; with an MQTT broker'
+  'automation|--automation|sensors, plugs, lights and cameras, and automations; with an MQTT broker and a restreamer'
   'album-folders|--ems|the Archive'"'"'s albums as folders on disk; brings the Archive'
   'recipes|--ems|recipes with ingredients, steps and pictures; with the media service'
   'todo||todo lists, personal or shared within a group'
@@ -321,7 +321,7 @@ services() {
   read -ra names <<<"$modules"
   [ "$ems" = 0 ] || with+=("the media service")
   [ "$llm" = 0 ] || with+=("the language model")
-  [[ " ${pass[*]} " != *" --mqtt "* ]] || with+=("an MQTT broker")
+  [[ " ${pass[*]} " != *" --automation "* ]] || with+=("the automation sidecar")
   list=${names[*]:-none}
   if [ ${#with[@]} != 0 ]; then
     printf -v list '%s, with %s' "$list" "$(printf '%s, ' "${with[@]}")"
