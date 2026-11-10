@@ -138,6 +138,30 @@ Opening an automation&#39;s file in <strong>System → Nodes</strong> (<a href="
 too.</p>
 <p>A module&#39;s automation is shown but not changed here, with the module&#39;s name in the bar, and only
 the administrator turns it on and off.</p>
+<h2 id="try-one-out-without-switching-anything">Try one out without switching anything<a class="anchor" href="#try-one-out-without-switching-anything" aria-label="Link to this section"></a></h2>
+<p>The flask among the buttons in the graph&#39;s corner simulates the automation: it runs the graph as it
+is in your browser, on the same engine EiN runs, with nothing real behind it. The bar says
+<strong>Simulating</strong>, the graph cannot be changed meanwhile, and the panel on the right (at the foot on a
+phone) has:</p>
+<ul>
+<li><strong>A clock</strong> of the simulation&#39;s own, which keeps pace with the real one, holds still with the
+pause button, and moves on with <strong>+1 min</strong>, <strong>+10 min</strong>, <strong>+1 h</strong> or <strong>Next timer</strong>, so a timer of
+five minutes need not take five minutes. Clocks and between nodes go off as it passes their times.
+Times are in your browser&#39;s time zone.</li>
+<li><strong>Inputs</strong>, one for each node that starts things: a device node takes <strong>on</strong>, <strong>off</strong> or any value
+you type, sent as a reading, or as a <strong>Press</strong> (a button&#39;s single or long); an online node is set
+online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
+sent a value.</li>
+<li><strong>Controls</strong>, what each control the automation writes holds in the simulation.</li>
+<li><strong>What it would do</strong>, newest first: each control it would set, each command line it would run,
+each link out it would send to, and what its debug nodes say.</li>
+</ul>
+<p>It starts from the devices&#39; latest readings, which it reads but never writes. A control it sets is
+not switched: the simulated device takes the value, as a real one would report it back, and a toggle
+flips what it holds. A command line is not run, and sends on an empty value. A link out reaches the
+automation&#39;s own links in, and no other automation. The cards say what each node sent, as while it
+runs. The flask again, or the cross at the top of the panel, ends the simulation; nothing of it is
+kept.</p>
 <h2 id="a-first-automation">A first automation<a class="anchor" href="#a-first-automation" aria-label="Link to this section"></a></h2>
 <p>The hall lamp goes on at motion when it is dark, and off five minutes after the motion ends. On the
 Automations page, that is <strong>+</strong>, <strong>Motion light</strong>, then the devices set to yours on the cards. In
@@ -614,7 +638,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>
