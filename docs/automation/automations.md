@@ -63,13 +63,16 @@ phone) has:
   pause button, and moves on with **+1 min**, **+10 min**, **+1 h** or **Next timer**, so a timer of
   five minutes need not take five minutes. Clocks and between nodes go off as it passes their times.
   Times are in your browser's time zone.
-- **Inputs**, one for each node that starts things: a device node takes **on**, **off** or any value
+- **Inputs**, one for each node that starts things: a device node takes a reading of **on** or **off**, or any value
   you type, sent as a reading, or as a **Press** (a button's single or long); an online node is set
   online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
   sent a value.
 - **Controls**, what each control the automation writes holds in the simulation.
-- **What it would do**, newest first: each control it would set, each command line it would run,
-  each link out it would send to, and what its debug nodes say.
+- **What happened**, newest first: each input you fed, each node that sent something and on which
+  output, each value a node held back and why (a compare or an and that would send what it sent
+  last, a reading a device node does not pass on), and each control it would set, command line it
+  would run and link out it would send to, with what its debug nodes say. **What it would do** shows
+  only those last.
 
 It starts from the devices' latest readings, which it reads but never writes. A control it sets is
 not switched: the simulated device takes the value, as a real one would report it back, and a toggle
