@@ -333,12 +333,12 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 </tr>
 <tr>
 <td><code>clock</code></td>
-<td><code>at: &#39;07:30&#39;</code> and <code>days</code>, or <code>every</code></td>
+<td><code>at: &#39;07:30&#39;</code> and <code>days</code>, or <code>every</code>; <code>location</code></td>
 <td>The time, once a day at <code>at</code> in the system&#39;s time zone (on <code>days</code>: <code>weekdays</code>, <code>weekends</code> or <code>[mon, wed, fri]</code>), or each time <code>every</code> (a minute or more) has passed on the clock</td>
 </tr>
 <tr>
 <td><code>between</code></td>
-<td><code>from</code>, <code>until</code>, <code>days</code></td>
+<td><code>from</code>, <code>until</code>, <code>days</code>; <code>location</code></td>
 <td>True from <code>from</code> until <code>until</code>, false outside it: <code>from: &#39;22:00&#39;</code>, <code>until: &#39;06:30&#39;</code> goes over midnight</td>
 </tr>
 <tr>
@@ -358,6 +358,15 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 </tr>
 </tbody></table>
 </div>
+<p>A <code>clock</code>&#39;s <code>at</code> and a <code>between</code>&#39;s <code>from</code> and <code>until</code> may follow the sun: <code>sunrise</code>, <code>sunset</code>,
+<code>dawn</code> or <code>dusk</code>, with an offset such as <code>sunset-30m</code> or <code>sunrise+1h</code>. Dawn and dusk are when the sun
+is 6° below the horizon (civil twilight), the light a lamp is first or last needed by. The node then
+takes <code>location</code>, its latitude and longitude, <code>location: &#39;59.33, 18.07&#39;</code>: each node says where its
+sun is, so an automation for the summer house reckons with the summer house&#39;s. In the node&#39;s panel,
+the button beside Location takes the position of the device you edit on, where the browser gives it
+(over HTTPS). Where the sun does not set that day, as at midsummer far north, a clock at sunset does
+not go off and a <code>between</code> from sunset until sunrise stays false; where it does not rise, the other
+way round.</p>
 <p><strong>Logic</strong>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -597,6 +606,14 @@ upper and lower case are alike, so <code>*.pdf</code> takes <code>Scan.PDF</code
 </ul>
 <p>The automation&#39;s owner must be allowed to read the folder, and hears only of the files in it they
 may read: one the administrator puts there that only the administrator may read is not sent.</p>
+<h3 id="from-sunset-to-sunrise">From sunset to sunrise<a class="anchor" href="#from-sunset-to-sunrise" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new porch-light --from dusk-to-dawn</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">porch</span> <span class="hljs-string">lamp</span> <span class="hljs-string">on</span> <span class="hljs-string">from</span> <span class="hljs-string">sunset</span> <span class="hljs-string">until</span> <span class="hljs-string">sunrise</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">dark:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">between</span>, <span class="hljs-attr">from:</span> <span class="hljs-string">sunset</span>, <span class="hljs-attr">until:</span> <span class="hljs-string">sunrise</span>, <span class="hljs-attr">location:</span> <span class="hljs-string">&#x27;59.33, 18.07&#x27;</span>, <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">lamp-on</span>], <span class="hljs-attr">false:</span> [<span class="hljs-string">lamp-off</span>] } }
+  <span class="hljs-attr">lamp-on:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">porch-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">on</span> }
+  <span class="hljs-attr">lamp-off:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">porch-lamp/switch-0</span>, <span class="hljs-attr">value:</span> <span class="hljs-string">off</span> }</code></pre></div>
+<p>Set <code>location</code> to where the lamp is. <code>from: dusk</code>, <code>until: dawn</code> keeps it off through the twilight.</p>
 <h2 id="see-what-automations-did">See what automations did<a class="anchor" href="#see-what-automations-did" aria-label="Link to this section"></a></h2>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automations                       <span class="hljs-comment"># each, whose it is, whether it runs, and why not</span>
@@ -664,6 +681,11 @@ same.</p>
 <td>Write <code>at: &#39;06:30&#39;</code></td>
 </tr>
 <tr>
+<td><code>&lt;node&gt;: at follows the sun, so it needs a location</code></td>
+<td>A time is <code>sunrise</code>, <code>sunset</code>, <code>dawn</code> or <code>dusk</code>, and the node does not say where</td>
+<td>Add <code>location: &#39;&lt;latitude&gt;, &lt;longitude&gt;&#39;</code> to the node</td>
+</tr>
+<tr>
 <td><code>it is not YAML: …</code></td>
 <td>The file does not read as YAML, often a missing space after a <code>:</code> or an unclosed <code>{</code></td>
 <td>Correct it where the message says</td>
@@ -697,7 +719,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>

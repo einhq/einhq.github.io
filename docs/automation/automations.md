@@ -228,15 +228,25 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 
 **Inputs**, which nothing is wired into:
 
-| Type      | Settings                             | It sends                                                                                                                                                                         |
-| --------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `device`  | `endpoint`; `is`                     | Each reading of the endpoint, or each press of a button. With `is: single`, only that value or kind of press (a Shelly's are `single`, `double`, `triple` and `long`)            |
-| `online`  | `device`                             | True when the device comes online, false when it goes                                                                                                                            |
-| `clock`   | `at: '07:30'` and `days`, or `every` | The time, once a day at `at` in the system's time zone (on `days`: `weekdays`, `weekends` or `[mon, wed, fri]`), or each time `every` (a minute or more) has passed on the clock |
-| `between` | `from`, `until`, `days`              | True from `from` until `until`, false outside it: `from: '22:00'`, `until: '06:30'` goes over midnight                                                                           |
-| `button`  | `value`                              | `true`, or its `value`, when it is pressed with `automation-trigger <name> <node>`                                                                                               |
-| `link-in` | `name`                               | What a `link-out` of the same name sends, from any automation of the same owner                                                                                                  |
-| `file`    | `folder`; `match`, `changes`         | The path of each file that comes into `folder` ([A file in a folder](#a-file-in-a-folder))                                                                                       |
+| Type      | Settings                                         | It sends                                                                                                                                                                         |
+| --------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `device`  | `endpoint`; `is`                                 | Each reading of the endpoint, or each press of a button. With `is: single`, only that value or kind of press (a Shelly's are `single`, `double`, `triple` and `long`)            |
+| `online`  | `device`                                         | True when the device comes online, false when it goes                                                                                                                            |
+| `clock`   | `at: '07:30'` and `days`, or `every`; `location` | The time, once a day at `at` in the system's time zone (on `days`: `weekdays`, `weekends` or `[mon, wed, fri]`), or each time `every` (a minute or more) has passed on the clock |
+| `between` | `from`, `until`, `days`; `location`              | True from `from` until `until`, false outside it: `from: '22:00'`, `until: '06:30'` goes over midnight                                                                           |
+| `button`  | `value`                                          | `true`, or its `value`, when it is pressed with `automation-trigger <name> <node>`                                                                                               |
+| `link-in` | `name`                                           | What a `link-out` of the same name sends, from any automation of the same owner                                                                                                  |
+| `file`    | `folder`; `match`, `changes`                     | The path of each file that comes into `folder` ([A file in a folder](#a-file-in-a-folder))                                                                                       |
+
+A `clock`'s `at` and a `between`'s `from` and `until` may follow the sun: `sunrise`, `sunset`,
+`dawn` or `dusk`, with an offset such as `sunset-30m` or `sunrise+1h`. Dawn and dusk are when the sun
+is 6° below the horizon (civil twilight), the light a lamp is first or last needed by. The node then
+takes `location`, its latitude and longitude, `location: '59.33, 18.07'`: each node says where its
+sun is, so an automation for the summer house reckons with the summer house's. In the node's panel,
+the button beside Location takes the position of the device you edit on, where the browser gives it
+(over HTTPS). Where the sun does not set that day, as at midsummer far north, a clock at sunset does
+not go off and a `between` from sunset until sunrise stays false; where it does not rise, the other
+way round.
 
 **Logic**:
 
@@ -413,6 +423,19 @@ its `folder`, made there or moved in, as `$VALUE` to a line, and the folder as `
 The automation's owner must be allowed to read the folder, and hears only of the files in it they
 may read: one the administrator puts there that only the administrator may read is not sent.
 
+### From sunset to sunrise
+
+```yaml
+# automation-new porch-light --from dusk-to-dawn
+description: The porch lamp on from sunset until sunrise
+nodes:
+  dark: { type: between, from: sunset, until: sunrise, location: '59.33, 18.07', to: { true: [lamp-on], false: [lamp-off] } }
+  lamp-on: { type: control, endpoint: porch-lamp/switch-0, value: on }
+  lamp-off: { type: control, endpoint: porch-lamp/switch-0, value: off }
+```
+
+Set `location` to where the lamp is. `from: dusk`, `until: dawn` keeps it off through the twilight.
+
 ## See what automations did
 
 ```bash
@@ -447,6 +470,7 @@ same.
 | `<node>: to names lamp, which is no node`                                 | A wire goes to an id that is not there                                                                                            | Correct the id                                                      |
 | `its wires go round in a circle: a → b → a`                               | A node's messages would come back to it                                                                                           | Take a wire out                                                     |
 | `<node>: at takes a time of day such as "07:30"`                          | The time is not in quotes, or not a time                                                                                          | Write `at: '06:30'`                                                 |
+| `<node>: at follows the sun, so it needs a location`                      | A time is `sunrise`, `sunset`, `dawn` or `dusk`, and the node does not say where                                                  | Add `location: '<latitude>, <longitude>'` to the node               |
 | `it is not YAML: …`                                                       | The file does not read as YAML, often a missing space after a `:` or an unclosed `{`                                              | Correct it where the message says                                   |
 | A node's status says `waits for outdoor`                                  | A `math` node reads a node that has sent nothing yet                                                                              | Nothing: it works out its value once that node sends                |
 | It runs, but nothing happens when the value changes                       | A node that says true or false sends only when that changes; the lamp may already be what it would be                             | `automation-check` and `automation-status` show what each node says |
