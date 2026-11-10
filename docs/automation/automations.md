@@ -33,7 +33,9 @@ An automation opens on three tabs, under its name in the bar:
   means; fold it away and it stays folded. A card that reads or switches a device has the device to
   pick, and under it the device's endpoints (its controls, on a card that switches) with their
   latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out; the bin at the top right of a node's panel, or Delete on a selected node, asks before the node and its wires go. While the
-  automation runs, each card says what its node last sent and when, or when its timer runs out.
+  automation runs, each wire is labelled at its middle with the last value that went along it and
+  how long ago, lit for a moment when one just did; a true wire keeps its last true after its node has
+  sent false since. A card says when its timer runs out, and its problems.
 - **YAML**: the file itself, to read or change as typed.
 - **Runs**: what it did, as its [run log](#see-what-automations-did) has it, as it happens.
 
@@ -77,7 +79,7 @@ phone) has:
 It starts from the devices' latest readings, which it reads but never writes. A control it sets is
 not switched: the simulated device takes the value, as a real one would report it back, and a toggle
 flips what it holds. A command line is not run, and sends on an empty value. A link out reaches the
-automation's own links in, and no other automation. The cards say what each node sent, as while it
+automation's own links in, and no other automation. The wires say what went along them, as while it
 runs. The flask again, or the cross at the top of the panel, ends the simulation; nothing of it is
 kept.
 
