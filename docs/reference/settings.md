@@ -451,17 +451,17 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 
 ### `CFG_TIME_LOCALE`
 
-**Date and time format**. How dates and times are written in the browser, as a locale: en-SE writes 2026-11-09, 13:26 and 9 Nov 2026, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM, sv-SE 9 nov. 2026. Each person may choose their own.
+**Date and time format**. How dates and times are written in the browser, as a locale: sv-SE writes 2026-11-09 13:26 and 9 nov. 2026, en-SE 2026-11-09, 13:26 and 9 Nov 2026, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM. Each person may choose their own.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | `en-SE` |
+| Default | `sv-SE` |
 | Kind | locale |
 
 ### `CFG_USER_TIME_LOCALE`
 
-**Date and time format**. How dates and times are written for you, as a locale: en-SE writes 2026-11-09, 13:26, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM, sv-SE 9 nov. 2026. Empty follows the system setting.
+**Date and time format**. How dates and times are written for you, as a locale: sv-SE writes 2026-11-09 13:26 and 9 nov. 2026, en-SE 2026-11-09, 13:26 and 9 Nov 2026, en-GB 09/11/2026, 13:26, en-US 11/9/2026, 1:26 PM. Empty follows the system setting.
 
 | | |
 | --- | --- |

@@ -299,7 +299,7 @@ lists each with its key, such as
 </div>
 <h3 id="date-and-time-format">Date and time format<a class="anchor" href="#date-and-time-format" aria-label="Link to this section"></a></h3>
 <p>Every date and time in the Web UI is written as this preference says, whatever language your
-browser is set to. Its value is a locale: a language and a country, such as <code>en-SE</code>, and the
+browser is set to. Its value is a locale: a language and a country, such as <code>sv-SE</code>, and the
 country decides the order of the date and whether the clock has 24 hours.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -310,6 +310,11 @@ country decides the order of the date and whether the clock has 24 hours.</p>
 </tr>
 </thead>
 <tbody><tr>
+<td><code>sv-SE</code></td>
+<td>2026-11-09 13:26:05</td>
+<td>9 nov. 2026</td>
+</tr>
+<tr>
 <td><code>en-SE</code></td>
 <td>2026-11-09, 13:26:05</td>
 <td>9 Nov 2026</td>
@@ -324,15 +329,11 @@ country decides the order of the date and whether the clock has 24 hours.</p>
 <td>11/9/2026, 1:26:05 PM</td>
 <td>Nov 9, 2026</td>
 </tr>
-<tr>
-<td><code>sv-SE</code></td>
-<td>2026-11-09 13:26:05</td>
-<td>9 nov. 2026</td>
-</tr>
 </tbody></table>
 </div>
 <p>Left empty, it follows <strong>Date and time format</strong> under <strong>Settings → System</strong>, which an administrator
-sets for everyone and which is <code>en-SE</code> unless changed. A value that is not a locale is refused, for
+sets for everyone and which is <code>sv-SE</code> unless changed: Swedish month and weekday names, a 24-hour
+clock and the date year first. <code>en-SE</code> keeps the Swedish order and clock with English names. A value that is not a locale is refused, for
 example <code>config set: CFG_USER_TIME_LOCALE: expected a locale such as en-SE or sv-SE, got &#39;english&#39;</code>.
 Its key is <code>CFG_USER_TIME_LOCALE</code>, so a line in your <code>~/.config</code> sets it too, as below:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">export</span> CFG_USER_TIME_LOCALE=<span class="hljs-string">&#x27;en-GB&#x27;</span></code></pre></div>

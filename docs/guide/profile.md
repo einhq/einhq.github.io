@@ -148,18 +148,19 @@ The choices for **Header entrance**:
 ### Date and time format
 
 Every date and time in the Web UI is written as this preference says, whatever language your
-browser is set to. Its value is a locale: a language and a country, such as `en-SE`, and the
+browser is set to. Its value is a locale: a language and a country, such as `sv-SE`, and the
 country decides the order of the date and whether the clock has 24 hours.
 
 | Value   | A time is written     | A date is written |
 | ------- | --------------------- | ----------------- |
+| `sv-SE` | 2026-11-09 13:26:05   | 9 nov. 2026       |
 | `en-SE` | 2026-11-09, 13:26:05  | 9 Nov 2026        |
 | `en-GB` | 09/11/2026, 13:26:05  | 9 Nov 2026        |
 | `en-US` | 11/9/2026, 1:26:05 PM | Nov 9, 2026       |
-| `sv-SE` | 2026-11-09 13:26:05   | 9 nov. 2026       |
 
 Left empty, it follows **Date and time format** under **Settings → System**, which an administrator
-sets for everyone and which is `en-SE` unless changed. A value that is not a locale is refused, for
+sets for everyone and which is `sv-SE` unless changed: Swedish month and weekday names, a 24-hour
+clock and the date year first. `en-SE` keeps the Swedish order and clock with English names. A value that is not a locale is refused, for
 example `config set: CFG_USER_TIME_LOCALE: expected a locale such as en-SE or sv-SE, got 'english'`.
 Its key is `CFG_USER_TIME_LOCALE`, so a line in your `~/.config` sets it too, as below:
 
