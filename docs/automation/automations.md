@@ -23,7 +23,8 @@ An automation opens on three tabs, under its name in the bar:
 - **Graph**: its nodes as cards wired together, which you drag and zoom as a map (the wheel or
   two fingers, a double tap to zoom in). Add a node with **+** in the canvas's corner, which lists
   the kinds; it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
-  card's outputs on its right edge to another card to wire them: `true` is the green output, `false`
+  card's outputs on its right edge to another card to wire them (while you drag, the inputs it may go
+  to light up, and the others dim): `true` is the green output, `false`
   the red one, and a switch has one per case. Each kind of node has a colour of its own, on the band
   behind its card's title. Tap a card to set it up in the panel over the right
   of the graph (a drawer on a phone): its **Name**, which is what wires and math name it by and its
