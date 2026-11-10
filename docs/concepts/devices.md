@@ -55,17 +55,23 @@ device with each of its endpoints.
 
 ## Endpoints
 
-An endpoint is one thing a device reports or is told. There are three types:
+An endpoint is one thing a device reports or is told. There are four types:
 
 | Type      | What it is                                     | Reading it gives                         | Writing it                                                 |
 | --------- | ---------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
 | `log`     | A series of values, or of events               | Each value with its time                 | A value, kept as the next entry                            |
 | `track`   | A series of positions                          | Each position with its time              | A position, kept as the next one                           |
 | `control` | A value written to change the device, a switch | The states the device reported, in order | A value, checked and sent to the device through its driver |
+| `stream`  | A live picture, a camera's                     | A JPEG of it now, from its driver        | Refused: nothing of a stream is kept                       |
 
 A log of events is a button's: each entry is a press, such as `single`, `double` or `long`, rather
 than a state, and the same press twice is two entries. Into any other log a driver puts a value only
 when it differs from the one before (see [How often a reading is kept](#how-often-a-reading-is-kept)).
+
+A stream keeps nothing. Each read is a new picture, which the device's driver takes from the camera
+then: `cat /dev/front-door/main > door.jpg` saves one, and `/file/dev/front-door/main` is one in a
+browser. The device's page plays it live. Its attributes say what it is: `codec`, `width`, `height`,
+`fps` and `audio`, as far as the driver knows them.
 
 A control is not a store of what you wrote. Writing `on` to `/dev/hall-plug/switch-0` sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
@@ -110,6 +116,7 @@ device names its driver in its `driver` attribute.
 | `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                                                                  |
 | `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                              |
 | `virtual`      | the Automation module                           | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md) |
+| `rtsp`         | the Automation module                           | A camera that sends its picture over RTSP: its streams; see [A camera](../automation/index.md#a-camera)                                          |
 
 `devices --drivers` lists the drivers running now, with the module each comes from and how many
 devices it drives. A module's drivers run while its service does: when the service is stopped, a
@@ -128,6 +135,12 @@ device-create 'Ruby phone' --driver tracker --class phone
 
 The driver gives the new device what it has from the start, here an empty `position` track. A device
 made without a driver has no endpoints of its own and takes nothing written to the device itself.
+
+A driver that reaches its device at an address asks for it with `--config`, one `name=value` each,
+which `devices --drivers` lists for every driver. What the driver declares secret, a password, is
+kept apart from the device's attributes, in its `.secret`, which the administrator alone reads; the
+rest is in its `config` attribute, which everyone who may read the device sees. The driver must be
+running when the device is made, so that EiN knows which is which.
 
 ### Core's tracker driver
 

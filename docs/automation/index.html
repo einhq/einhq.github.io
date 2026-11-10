@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Automation – EiN documentation</title>
-    <meta name="description" content="The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs, switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear them on an MQTT broker and make each one a device under /dev, with its readings, presses and switches, and automations: nodes wired together, which switch things and run command lines when a reading, a press, a file coming into a folder or the clock says so. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices.">
+    <meta name="description" content="The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs, switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear them on an MQTT broker and make each one a device under /dev, with its readings, presses and switches, a driver for cameras whose picture you watch live, and automations: nodes wired together, which switch things and run command lines when a reading, a press, a file coming into a folder or the clock says so. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/automation/">
     <meta property="og:title" content="Automation – EiN documentation">
-    <meta property="og:description" content="The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs, switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear them on an MQTT broker and make each one a device under /dev, with its readings, presses and switches, and automations: nodes wired together, which switch things and run command lines when a reading, a press, a file coming into a folder or the clock says so. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices.">
+    <meta property="og:description" content="The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs, switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear them on an MQTT broker and make each one a device under /dev, with its readings, presses and switches, a driver for cameras whose picture you watch live, and automations: nodes wired together, which switch things and run command lines when a reading, a press, a file coming into a folder or the clock says so. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,8 @@
 <p>The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs,
 switches, lights and buttons, such as those running ESPHome and Shelly&#39;s. It adds drivers that hear
 them on an MQTT broker and make each one a device under <code>/dev</code>, with its readings, presses and
-switches, and <a href="automations.html">automations</a>: nodes wired together, which switch things and run
+switches, a driver for <a href="#a-camera">cameras</a> whose picture you watch live, and
+<a href="automations.html">automations</a>: nodes wired together, which switch things and run
 command lines when a reading, a press, a file coming into a folder or the clock says so.
 The devices, their pages and their commands are EiN&#39;s own, the same for a plug as for a phone:
 <a href="../guide/devices.html">Devices</a>.</p>
@@ -145,6 +146,14 @@ household that uses them. <a href="automations.html">Automations</a> covers maki
 <td>Devices whose readings are worked out from other devices&#39; (an average, the most, whether any is on) and whose controls hold what is set; see <a href="virtual-devices.html">Virtual devices</a></td>
 </tr>
 <tr>
+<td>The <code>rtsp</code> driver</td>
+<td>A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see <a href="#a-camera">A camera</a></td>
+</tr>
+<tr>
+<td>The <strong>Live</strong> tab</td>
+<td>A camera&#39;s picture as it comes, on its device page</td>
+</tr>
+<tr>
 <td>The <code>automation-bridge</code> service</td>
 <td>Hears the broker and runs the drivers</td>
 </tr>
@@ -176,7 +185,11 @@ propose switching them.</p>
 <ul>
 <li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through, for the
 devices that speak MQTT: those running ESPHome, and Shelly&#39;s of every generation. The installer
-runs one beside EiN with <code>--mqtt</code>; a broker you already run works as well.</li>
+runs one beside EiN with <code>--automation</code>, in the <a href="#the-installers-sidecar">automation sidecar</a>; a
+broker you already run works as well.</li>
+<li><strong>A restreamer</strong> for cameras, which the sidecar has too: it keeps one connection to each camera,
+and EiN&#39;s pages and commands watch the camera through it. Without it a camera gives only its
+still picture, when it has one.</li>
 <li>No broker for the rest: printers, Google Cast speakers, NAS boxes, <a href="#a-web-api">web APIs</a> and
 anything else on the network are asked by EiN directly, once added, with or without one. Without
 the installer&#39;s broker nothing is found on the network, though, so add them by hand with
@@ -186,7 +199,7 @@ the installer&#39;s broker nothing is found on the network, though, so add them 
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>With the installer&#39;s broker, add the broker and the module in one run:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-./setup.sh --mqtt --module automation</code></pre></div>
+./setup.sh --automation --module automation</code></pre></div>
 <p>On a new machine, name the module to the installer, which makes it the same options:
 <code>curl -fsSL https://einhq.eu/install.sh | bash -s -- automation</code>. With a broker of
 your own, install the module alone, from <strong>Settings → Modules</strong> or in EiN&#39;s terminal, and then give
@@ -197,31 +210,38 @@ mod install automation</code></pre></div>
 and <code>automation-engine</code>, which runs the automations. When <code>automation-engine</code> first starts it makes
 the group <code>automation</code>, whose members make automations. <a href="../admin/modules.html">Modules</a> covers installing and
 removing modules.</p>
-<h3 id="the-installers-broker">The installer&#39;s broker<a class="anchor" href="#the-installers-broker" aria-label="Link to this section"></a></h3>
-<p><code>--mqtt</code> runs Mosquitto in a container of its own, <code>mqtt</code>, beside EiN:</p>
+<h3 id="the-installers-sidecar">The installer&#39;s sidecar<a class="anchor" href="#the-installers-sidecar" aria-label="Link to this section"></a></h3>
+<p><code>--automation</code> runs the automation sidecar, one container beside EiN on the machine&#39;s own network,
+<code>automation</code>, with three services in it:</p>
 <ul>
-<li>It takes no anonymous clients. EiN signs in as <code>ein</code> and the devices as <code>device</code>, with passwords
-<code>setup.sh</code> made at the install and keeps in <code>~/ein/.env</code>: <code>MQTT_EIN_PASSWORD</code> and
-<code>MQTT_DEVICE_PASSWORD</code>. A password changed there takes effect at the next <code>./setup.sh</code>.</li>
-<li>The devices reach it on port 1883 of the machine (<code>MQTT_PORT</code> in <code>.env</code>), on the address
-<code>EIN_BIND</code> names.</li>
-<li><code>setup.sh</code> gives EiN the broker&#39;s address, user and password itself, and the <code>device</code> account a
-device added from the network is given: those settings say <strong>From deployment</strong> on the Settings
-page and need nothing from you.</li>
-<li>It keeps what the devices announce in the data folder&#39;s <code>mqtt</code> folder, so it is all there again
-after a restart.</li>
-<li>Beside it runs <code>discovery</code>, a small listener on the machine&#39;s own network, which finds the
-devices that are not on the broker yet:
-<a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
-<li><code>./setup.sh --no-mqtt</code> takes it out again, and <code>./setup.sh --only mqtt</code> updates it alone.</li>
+<li><strong>The MQTT broker</strong>, Mosquitto. It takes no anonymous clients. EiN signs in as <code>ein</code> and the
+devices as <code>device</code>, with passwords <code>setup.sh</code> made at the install and keeps in <code>~/ein/.env</code>:
+<code>MQTT_EIN_PASSWORD</code> and <code>MQTT_DEVICE_PASSWORD</code>. A password changed there takes effect at the next
+<code>./setup.sh</code>. The devices reach it on port 1883 of the machine (<code>MQTT_PORT</code> in <code>.env</code>), on the
+address <code>EIN_BIND</code> names. It keeps what the devices announce in the data folder&#39;s <code>mqtt</code> folder,
+so it is all there again after a restart.</li>
+<li><strong>A listener</strong> on the machine&#39;s own network, which finds the devices that are not on the broker
+yet: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
+<li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
+serves it again, to EiN on port 1984 (<code>STREAMS_PORT</code>), over RTSP on 8554 (<code>RTSP_PORT</code>) and over
+WebRTC on 8555 (<code>WEBRTC_PORT</code>), behind the account <code>ein</code> and <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN
+gives it the cameras itself.</li>
 </ul>
+<p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
+<code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
+on the Settings page and need nothing from you. <code>./setup.sh --no-automation</code> takes the sidecar out
+again, and <code>./setup.sh --only automation</code> updates it alone.</p>
+<p>Under Docker, and podman run as root, EiN reaches the sidecar at the machine&#39;s address on its
+container network, so the sidecar needs <code>EIN_BIND</code> to be <code>0.0.0.0</code>: <code>setup.sh</code> says so when it is
+not.</p>
 <p>The devices need the device password. Read it on the machine:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 grep MQTT_DEVICE_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>The broker speaks plain MQTT, without TLS. Whoever reaches port 1883 with the device password can
-switch the house&#39;s devices and read what they say. Keep the port on your home network and never
-forward it on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, HTTPS and remote access</a>
+switch the house&#39;s devices and read what they say, and whoever reaches 1984 or 8554 with the
+restreamer&#39;s password watches the cameras. Keep the ports on your home network and never forward
+them on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, HTTPS and remote access</a>
 lists it with EiN&#39;s other ports.</p>
 </aside>
 <h3 id="a-broker-you-already-run">A broker you already run<a class="anchor" href="#a-broker-you-already-run" aria-label="Link to this section"></a></h3>
@@ -427,12 +447,14 @@ with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its fir
 <code>input-0</code> for a button&#39;s presses: <code>single</code>, <code>double</code>, <code>triple</code>, <code>long</code>, <code>single-long</code> or
 <code>long-single</code>. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.</p>
-<p>A light is <code>light-0</code> (a Dimmer, a Duo, a Vintage), <code>color-0</code> (a Bulb, a Duo RGBW, an RGBW2 in colour
-mode) or <code>white-0</code> (an RGBW2 in white mode), and has as many of these as it reports, each of which
-can be set: <code>color-0-brightness</code> (0–100 %), <code>color-0-color</code> (<code>#rrggbb</code>), <code>color-0-white</code> (the white
-channel, 0–255) and <code>color-0-color-temperature</code> (in K). A light that has both modes turns to colour
-mode when set to a colour, and to white when set to a colour temperature; its brightness is that of
-the mode it is in. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the way it
+<p>A light is <code>light-0</code>, and an RGBW2 in white mode has <code>light-0</code> to <code>light-3</code>, one for each channel. A
+light has as many of these as it reports, each of which can be set: <code>light-0-brightness</code> (0–100 %),
+<code>light-0-color</code> (<code>#rrggbb</code>), <code>light-0-white</code> (an RGBW2&#39;s white channel, 0–255) and
+<code>light-0-color-temperature</code> (in K). A light that has both modes, such as a Color Bulb, turns to
+colour mode when set to a colour, and to white when set to a colour temperature; its brightness is
+that of the mode it is in. For white light from a Color Bulb, set its colour temperature: it has no
+white channel to mix with a colour. <code>light-0-power</code> and <code>light-0-energy</code> are what a light that
+measures it draws, as for a relay. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the way it
 last moved), <code>roller-0-position</code> (0–100 %, empty until the roller is calibrated), and
 <code>roller-0-open</code>, <code>roller-0-close</code> and <code>roller-0-stop</code> to press.</p>
 <h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
@@ -538,6 +560,60 @@ no <code>on/off</code> is a button that asks its address when pressed, such as a
 are asked with the sign-in in <code>url</code>.</p>
 <p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
 EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
+<h3 id="a-camera">A camera<a class="anchor" href="#a-camera" aria-label="Link to this section"></a></h3>
+<p>The <code>rtsp</code> driver takes a camera on your network that sends its picture over RTSP, as most cameras
+that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera&#39;s
+manual, or its own web page, names its stream&#39;s address; many send a second, smaller stream beside
+the main one, which costs less to watch and to take a picture of. A member of <code>devices</code> makes the
+camera in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+ device-create <span class="hljs-string">&#x27;Front door&#x27;</span> --driver rtsp \
+  --config url=rtsp://192.0.2.30:554/h264Preview_01_main \
+  --config sub=rtsp://192.0.2.30:554/h264Preview_01_sub \
+  --config user=viewer --config password=<span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>The main stream&#39;s address, <code>rtsp://…</code></td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>A second, smaller stream&#39;s address. May be left out</td>
+</tr>
+<tr>
+<td><code>snapshot</code></td>
+<td>The address of the camera&#39;s still picture, <code>http://…</code>, which a picture is taken from when there is no restreamer. May be left out</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The camera&#39;s account</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>That account&#39;s password. It is kept in the device&#39;s <code>.secret</code>, which the administrator alone reads, and goes only to the sidecar</td>
+</tr>
+</tbody></table>
+</div>
+<p>The camera becomes a device of class <code>camera</code>, with a <code>stream</code> endpoint for each stream: <code>main</code>, and
+<code>sub</code> with a second one. EiN gives the streams to the <a href="#the-installers-sidecar">sidecar&#39;s restreamer</a>,
+which keeps one connection to the camera however many watch it, and says within a minute how large
+each picture is and which codec it is sent in. Its page shows a picture of each stream now, taken
+again every ten seconds while the page is open, and the <strong>Live</strong> tab plays the picture as it comes:
+the main stream, or the smaller one, a button away. The <strong>Devices</strong> page shows a picture of the
+smaller stream on the camera&#39;s card.</p>
+<p>A picture is a file too, a JPEG of the stream now, taken each time it is read:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> /dev/front-door/main &gt; ~/front-door.jpg</code></pre></div>
+<p>The camera is <strong>online</strong> while it gives a picture, asked every other minute. Who may see the
+pictures is who may read the stream: the household, as for every device
+(<a href="#who-may-do-what">Who may do what</a>). EiN&#39;s pages reach the camera only through EiN, signed in, so
+neither its address nor its password reaches a browser.</p>
 <h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automation-status</code></pre></div>
@@ -721,20 +797,32 @@ automation-check hall-light           <span class="hljs-comment"># what an autom
 <tbody><tr>
 <td><code>CFG_AUTOMATION_MQTT_URL</code></td>
 <td><strong>MQTT broker</strong></td>
-<td>empty; <code>--mqtt</code> sets it</td>
+<td>empty; <code>--automation</code> sets it</td>
 <td>The broker, as <code>mqtt://host:1883</code> or <code>mqtts://host:8883</code>. Empty, only the devices EiN asks over the network are read</td>
 </tr>
 <tr>
 <td><code>CFG_AUTOMATION_MQTT_USER</code></td>
 <td><strong>MQTT user</strong></td>
-<td>empty; <code>--mqtt</code> sets <code>ein</code></td>
+<td>empty; <code>--automation</code> sets <code>ein</code></td>
 <td>The account EiN signs in to the broker with. Empty, it signs in without one</td>
 </tr>
 <tr>
 <td><code>CFG_AUTOMATION_MQTT_KEY</code></td>
 <td><strong>MQTT password</strong></td>
-<td>none; <code>--mqtt</code> sets it</td>
+<td>none; <code>--automation</code> sets it</td>
 <td>That account&#39;s password, a key nobody can read back</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_STREAMS_URL</code></td>
+<td><strong>Restreamer</strong></td>
+<td>empty; <code>--automation</code> sets it</td>
+<td>The restreamer cameras are given to, go2rtc&#39;s API as <code>http://host:1984</code>. Empty, a camera has no live view, and its picture is asked of the camera itself</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_STREAMS_KEY</code></td>
+<td><strong>Restreamer password</strong></td>
+<td>none; <code>--automation</code> sets it</td>
+<td>The password of the restreamer&#39;s account <code>ein</code>, a key nobody can read back</td>
 </tr>
 <tr>
 <td><code>CFG_AUTOMATION_SOURCES</code></td>
@@ -831,6 +919,21 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>It said it was going, or the broker said so for it when it disappeared</td>
 <td>Check its power and its Wi-Fi</td>
 </tr>
+<tr>
+<td>A camera shows <strong>No picture</strong>, and stays offline</td>
+<td>The restreamer cannot reach the camera, or the camera refuses it</td>
+<td>Check <code>url</code>, <code>user</code> and the password: <code>device-forget</code> the camera and make it again. <code>service logs automation-bridge</code> says what the camera answered</td>
+</tr>
+<tr>
+<td>The <strong>Live</strong> tab says the stream could not be reached</td>
+<td>As above, or the sidecar is not running</td>
+<td><code>podman compose ps</code> on the machine; <code>./setup.sh --only automation</code> starts it again</td>
+</tr>
+<tr>
+<td><strong>Live</strong> plays nothing in a browser on a phone</td>
+<td>The browser does not play the camera&#39;s codec, often H.265</td>
+<td>Watch the smaller stream, which is often H.264, or set the camera to send H.264</td>
+</tr>
 </tbody></table>
 </div>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
@@ -848,7 +951,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-broker">The installer's broker</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

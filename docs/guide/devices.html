@@ -109,7 +109,8 @@ such as <strong>2 found</strong>, and a Shelly is added from there
 group makes it by hand (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). EiN&#39;s own
 <code>tracker</code> driver then reads what it sends. So is a button, a sensor or a script that posts to an
 address, read by EiN&#39;s <code>webhook</code> driver (see
-<a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a>).</li>
+<a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a>), and, with the Automation
+module, a camera (<a href="../automation/index.html#a-camera">A camera</a>).</li>
 </ul>
 <p>A device has a name, such as <code>hall-plug</code>, that commands and automations use, and a label, such as <strong>Hall
 lamp</strong>, that the pages show. Each thing it reports or takes is an <strong>endpoint</strong> with a name of its
@@ -118,7 +119,8 @@ draws, <code>ruby-phone/position</code> where the phone has been.</p>
 <h2 id="the-devices-page">The Devices page<a class="anchor" href="#the-devices-page" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Devices</strong> in the sidebar, under <strong>Browse</strong>. It has a card for every device you may see: its
 label, its main value, and badges for <strong>online</strong> or <strong>offline</strong>, what it is (such as <strong>plug</strong> or
-<strong>phone</strong>) and how many endpoints it has. The main value is a temperature when the device has one,
+<strong>phone</strong>) and how many endpoints it has. A camera&#39;s card shows its picture as it was when the page
+last read the devices. The main value is a temperature when the device has one,
 then power, humidity, light or energy, else any other reading, else a switch; a device with none
 shows its manufacturer and model instead. A device that only posts what it has, such as a phone or
 tracker sending its position or one posting to a webhook, is <strong>online</strong> while it has been heard
@@ -157,6 +159,10 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 <td><strong>Trips</strong></td>
 <td>With the <a href="../archive/index.html">Archive</a>, on a device that has a track: <a href="../archive/tracks.html">its trips</a></td>
 </tr>
+<tr>
+<td><strong>Live</strong></td>
+<td>With the <a href="../automation/index.html">Automation</a> module, on a camera: its picture as it comes</td>
+</tr>
 </tbody></table>
 </div>
 <p>Members of the <code>devices</code> group also have <strong>Edit</strong> in the header&#39;s corner, and <strong>Forget</strong> under ⋮
@@ -183,6 +189,9 @@ a box with <strong>Set</strong> when it has no range.</li>
 <li><strong>A colour</strong>, such as a light&#39;s: a colour box whose picker sets it when you let go, or a colour typed
 as <code>#ff8000</code> and set with <strong>Set</strong>.</li>
 <li><strong>An action</strong>, such as a restart or a chime: <strong>Press</strong>, with when it was last pressed and by whom.</li>
+<li><strong>A camera&#39;s stream</strong>: its picture now, taken again every ten seconds while the page is open, with
+its size and codec under it, or <strong>No picture</strong> while the camera gives none. <strong>Live</strong> plays it as it
+comes.</li>
 </ul>
 <p>A switch or a setting you change shows what you asked for at once, with &quot;asked on, waiting for the
 device&quot; under its label, until the device says it has done it; then it shows what the device reports.

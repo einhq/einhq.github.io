@@ -172,7 +172,7 @@ the name.</p>
 <p><code>attrs /dev/hall-plug</code> prints them, and <a href="../reference/commands-core.html#device-show"><code>device-show</code></a> prints the
 device with each of its endpoints.</p>
 <h2 id="endpoints">Endpoints<a class="anchor" href="#endpoints" aria-label="Link to this section"></a></h2>
-<p>An endpoint is one thing a device reports or is told. There are three types:</p>
+<p>An endpoint is one thing a device reports or is told. There are four types:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -200,11 +200,21 @@ device with each of its endpoints.</p>
 <td>The states the device reported, in order</td>
 <td>A value, checked and sent to the device through its driver</td>
 </tr>
+<tr>
+<td><code>stream</code></td>
+<td>A live picture, a camera&#39;s</td>
+<td>A JPEG of it now, from its driver</td>
+<td>Refused: nothing of a stream is kept</td>
+</tr>
 </tbody></table>
 </div>
 <p>A log of events is a button&#39;s: each entry is a press, such as <code>single</code>, <code>double</code> or <code>long</code>, rather
 than a state, and the same press twice is two entries. Into any other log a driver puts a value only
 when it differs from the one before (see <a href="#how-often-a-reading-is-kept">How often a reading is kept</a>).</p>
+<p>A stream keeps nothing. Each read is a new picture, which the device&#39;s driver takes from the camera
+then: <code>cat /dev/front-door/main &gt; door.jpg</code> saves one, and <code>/file/dev/front-door/main</code> is one in a
+browser. The device&#39;s page plays it live. Its attributes say what it is: <code>codec</code>, <code>width</code>, <code>height</code>,
+<code>fps</code> and <code>audio</code>, as far as the driver knows them.</p>
 <p>A control is not a store of what you wrote. Writing <code>on</code> to <code>/dev/hall-plug/switch-0</code> sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
 control remembers what was asked, who asked and when (its <code>requested</code> attribute), and the device&#39;s
@@ -298,6 +308,11 @@ device names its driver in its <code>driver</code> attribute.</p>
 <td>the Automation module</td>
 <td>No hardware: readings worked out from other devices&#39; and controls that hold what is set; see <a href="../automation/virtual-devices.html">Virtual devices</a></td>
 </tr>
+<tr>
+<td><code>rtsp</code></td>
+<td>the Automation module</td>
+<td>A camera that sends its picture over RTSP: its streams; see <a href="../automation/index.html#a-camera">A camera</a></td>
+</tr>
 </tbody></table>
 </div>
 <p><code>devices --drivers</code> lists the drivers running now, with the module each comes from and how many
@@ -312,6 +327,11 @@ member of the <code>devices</code> group makes it by hand with
 device-create <span class="hljs-string">&#x27;Ruby phone&#x27;</span> --driver tracker --class phone</code></pre></div>
 <p>The driver gives the new device what it has from the start, here an empty <code>position</code> track. A device
 made without a driver has no endpoints of its own and takes nothing written to the device itself.</p>
+<p>A driver that reaches its device at an address asks for it with <code>--config</code>, one <code>name=value</code> each,
+which <code>devices --drivers</code> lists for every driver. What the driver declares secret, a password, is
+kept apart from the device&#39;s attributes, in its <code>.secret</code>, which the administrator alone reads; the
+rest is in its <code>config</code> attribute, which everyone who may read the device sees. The driver must be
+running when the device is made, so that EiN knows which is which.</p>
 <h3 id="cores-tracker-driver">Core&#39;s tracker driver<a class="anchor" href="#cores-tracker-driver" aria-label="Link to this section"></a></h3>
 <p><code>tracker</code> reads everything a phone or a GPS tracker sends, and adds each position that has a time to
 the device&#39;s <code>position</code> track:</p>

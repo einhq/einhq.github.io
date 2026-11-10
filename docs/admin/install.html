@@ -132,7 +132,7 @@
 </tr>
 <tr>
 <td><code>automation</code></td>
-<td><code>--mqtt --module automation</code></td>
+<td><code>--automation --module automation</code></td>
 </tr>
 <tr>
 <td><code>album-folders</code></td>
@@ -271,12 +271,12 @@ Install? [Y/n]</code></pre></div>
 <td>Takes the language model out again. Sets <code>EIN_LLM=0</code>. The downloaded model stays in the data folder.</td>
 </tr>
 <tr>
-<td><code>--mqtt</code></td>
-<td>Adds an MQTT broker, Mosquitto, which the <a href="../automation/index.html">Automation</a> module&#39;s devices talk to, on port 1883 (<code>MQTT_PORT</code>). Sets <code>EIN_MQTT=1</code>, and gives EiN the broker&#39;s address and account. See <a href="../automation/index.html#the-installers-broker">The installer&#39;s broker</a>.</td>
+<td><code>--automation</code></td>
+<td>Adds the Automation module&#39;s sidecar: an MQTT broker, Mosquitto, which the <a href="../automation/index.html">Automation</a> module&#39;s devices talk to, on port 1883 (<code>MQTT_PORT</code>); a listener for devices on the network; and a restreamer for cameras, go2rtc. Sets <code>EIN_AUTOMATION=1</code>, and gives EiN the broker&#39;s and the restreamer&#39;s addresses and accounts. See <a href="../automation/index.html#the-installers-sidecar">The installer&#39;s sidecar</a>.</td>
 </tr>
 <tr>
-<td><code>--no-mqtt</code></td>
-<td>Takes the broker out again. Sets <code>EIN_MQTT=0</code>. What it kept stays in the data folder.</td>
+<td><code>--no-automation</code></td>
+<td>Takes the sidecar out again. Sets <code>EIN_AUTOMATION=0</code>. What it kept stays in the data folder.</td>
 </tr>
 <tr>
 <td><code>--module &lt;name&gt;</code></td>
@@ -304,7 +304,7 @@ Install? [Y/n]</code></pre></div>
 </tr>
 <tr>
 <td><code>--only &lt;service&gt;</code></td>
-<td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code>, <code>llm</code> or <code>mqtt</code>: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
+<td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code>, <code>llm</code> or <code>automation</code>: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
 </tr>
 <tr>
 <td><code>--source &lt;address&gt;</code></td>
@@ -523,7 +523,7 @@ podman compose down
 ./setup.sh</code></pre></div>
 <p>If <code>EIN_DB_DIR</code> in <code>.env</code> is empty, the database is a volume of the engine instead, and podman made an empty one of its own: <code>podman compose down</code> keeps it. Remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
 <h2 id="what-runs-where">What runs where<a class="anchor" href="#what-runs-where" aria-label="Link to this section"></a></h2>
-<p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>ein</code> is reached from other machines, and with <code>--mqtt</code> the broker, which the devices on your network talk to.</p>
+<p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>ein</code> is reached from other machines, and with <code>--automation</code> the sidecar, which the devices on your network talk to and the cameras are watched through.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
   <title>What runs where</title>
   <defs>
@@ -651,11 +651,11 @@ podman compose down
 <td>with <code>--llm</code></td>
 </tr>
 <tr>
-<td><code>mqtt</code></td>
-<td>Mosquitto, <code>docker.io/library/eclipse-mosquitto:2</code> (<code>MQTT_IMAGE</code>)</td>
-<td>port 1883 (<code>MQTT_PORT</code>) on the machine, for the devices</td>
-<td><code>256m</code></td>
-<td>with <code>--mqtt</code></td>
+<td><code>automation</code></td>
+<td><code>ghcr.io/einhq/automation</code>, the broker, the network listener and the restreamer, ready-made; built from module-automation&#39;s <code>sidecar/</code> as <code>localhost/ein-automation</code> from any other source</td>
+<td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>), 8554 (<code>RTSP_PORT</code>) and 8555 (<code>WEBRTC_PORT</code>) for the cameras&#39; streams</td>
+<td><code>512m</code></td>
+<td>with <code>--automation</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -690,8 +690,8 @@ podman compose down
 <td>ein/deploy</td>
 </tr>
 <tr>
-<td><code>compose.mqtt.yaml</code></td>
-<td>the MQTT broker, with its configuration in <code>mqtt/</code></td>
+<td><code>compose.automation.yaml</code></td>
+<td>the Automation module&#39;s sidecar</td>
 <td>ein/deploy</td>
 </tr>
 <tr>
@@ -706,7 +706,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>src/</code></td>
-<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code> and <code>ems</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
+<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code>, <code>ems</code> and <code>module-automation</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 <tr>
@@ -749,8 +749,8 @@ podman compose down
 </tr>
 <tr>
 <td><code>mqtt</code></td>
-<td><code>/mosquitto/data</code> in the broker</td>
-<td>with <code>--mqtt</code>, its two accounts, hashed, and what the devices announced</td>
+<td><code>/data/mqtt</code> in the sidecar</td>
+<td>with <code>--automation</code>, the broker&#39;s two accounts, hashed, and what the devices announced</td>
 </tr>
 <tr>
 <td><code>modules</code></td>
@@ -774,10 +774,14 @@ podman compose down
 <span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">1</span>
-<span class="hljs-attr">EIN_MQTT</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_AUTOMATION</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">MQTT_PORT</span>=<span class="hljs-number">1883</span>
 <span class="hljs-attr">MQTT_EIN_PASSWORD</span>=<span class="hljs-number">9</span>d41c7e2a05b38f61e8d2c74b09a5f3e6c18d27b4a9e05c3
 <span class="hljs-attr">MQTT_DEVICE_PASSWORD</span>=<span class="hljs-number">4</span>e7a1c9d02b5f83e6a1d7c40
+<span class="hljs-attr">STREAMS_PORT</span>=<span class="hljs-number">1984</span>
+<span class="hljs-attr">RTSP_PORT</span>=<span class="hljs-number">8554</span>
+<span class="hljs-attr">WEBRTC_PORT</span>=<span class="hljs-number">8555</span>
+<span class="hljs-attr">STREAMS_PASSWORD</span>=<span class="hljs-number">0</span>b7e3d91c46a28f5e1d09c7b3a6f2e84d5c1a9073b6e2f48
 <span class="hljs-attr">EIN_MODULES</span>=<span class="hljs-string">&quot;&quot;</span>
 <span class="hljs-attr">EIN_DATA</span>=/home/anna/ein/data
 <span class="hljs-attr">POSTGRES_PASSWORD</span>=<span class="hljs-number">5</span>c0d2e7a91f84b36a0e9c4d17b2f6385e1a9c07d4b2e8f13
@@ -794,7 +798,7 @@ podman compose down
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
 <span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
-<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MQTT</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>MQTT_PORT</code>.</p>
+<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_AUTOMATION</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or one of the sidecar&#39;s.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -819,12 +823,12 @@ podman compose down
 <td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
 </tr>
 <tr>
-<td><code>EIN_MQTT</code>, <code>MQTT_PORT</code></td>
-<td><code>1</code> when the MQTT broker is installed, which <code>--mqtt</code> and <code>--no-mqtt</code> set, and the port the devices reach it on, 1883; <code>setup.sh</code> moves it to the next free port when something else uses it</td>
+<td><code>EIN_AUTOMATION</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code>, <code>WEBRTC_PORT</code></td>
+<td><code>1</code> when the Automation module&#39;s sidecar is installed, which <code>--automation</code> and <code>--no-automation</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984), RTSP (8554) and WebRTC (8555); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
 </tr>
 <tr>
-<td><code>MQTT_EIN_PASSWORD</code>, <code>MQTT_DEVICE_PASSWORD</code></td>
-<td>the passwords EiN (<code>ein</code>) and the devices (<code>device</code>) sign in to the broker with, random, made here. A change takes effect at the next <code>./setup.sh</code>; see <a href="../automation/index.html#the-installers-broker">The installer&#39;s broker</a></td>
+<td><code>MQTT_EIN_PASSWORD</code>, <code>MQTT_DEVICE_PASSWORD</code>, <code>STREAMS_PASSWORD</code></td>
+<td>the passwords EiN (<code>ein</code>) and the devices (<code>device</code>) sign in to the broker with, and EiN&#39;s to the restreamer, random, made here. A change takes effect at the next <code>./setup.sh</code>; see <a href="../automation/index.html#the-installers-sidecar">The installer&#39;s sidecar</a></td>
 </tr>
 <tr>
 <td><code>EIN_GPU</code></td>
@@ -912,8 +916,8 @@ podman compose down
 <td><code>~/ein/setup.sh --ems</code>, <code>--no-ems</code>, <code>--llm</code> or <code>--no-llm</code>. This is also an update: see <a href="updating.html">Updating</a>.</td>
 </tr>
 <tr>
-<td>Add or remove the MQTT broker</td>
-<td><code>~/ein/setup.sh --mqtt</code> or <code>--no-mqtt</code>; see <a href="../automation/index.html#install-it">Automation</a>.</td>
+<td>Add or remove the Automation module&#39;s sidecar</td>
+<td><code>~/ein/setup.sh --automation</code> or <code>--no-automation</code>; see <a href="../automation/index.html#install-it">Automation</a>.</td>
 </tr>
 <tr>
 <td>Add a module EiN installs at its start</td>
@@ -971,7 +975,7 @@ EiN starts again when the machine does.</code></pre></div>
 Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman compose up -d</code></pre></div>
 <p>Run what it lists once. After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
 <h2 id="update-and-remove">Update and remove<a class="anchor" href="#update-and-remove" aria-label="Link to this section"></a></h2>
-<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest images of everything installed, downloaded and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only ein</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>, <code>mqtt</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
+<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest images of everything installed, downloaded and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only ein</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>, <code>automation</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
 <p>There is no uninstall script. <a href="data.html">Your data</a> says how to move EiN to another machine and how to remove it with its data.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p>The commands are written for podman; with Docker, write <code>docker compose</code>. <a href="../start/install.html#when-something-goes-differently">Install EiN</a> covers the messages of a first install, and <a href="troubleshooting.html">Troubleshooting</a> everything after.</p>

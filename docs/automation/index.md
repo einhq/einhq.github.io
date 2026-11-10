@@ -3,7 +3,8 @@
 The Automation module brings the devices in the house that talk MQTT into EiN: sensors, plugs,
 switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear
 them on an MQTT broker and make each one a device under `/dev`, with its readings, presses and
-switches, and [automations](automations.md): nodes wired together, which switch things and run
+switches, a driver for [cameras](#a-camera) whose picture you watch live, and
+[automations](automations.md): nodes wired together, which switch things and run
 command lines when a reading, a press, a file coming into a folder or the clock says so.
 The devices, their pages and their commands are EiN's own, the same for a plug as for a phone:
 [Devices](../guide/devices.md).
@@ -24,6 +25,8 @@ household that uses them. [Automations](automations.md) covers making automation
 | The `network` driver                                                                       | Anything else on the network: whether it answers, and how fast                                                                                                                                                                         |
 | The `http` driver                                                                          | A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see [A web API](#a-web-api) |
 | The `virtual` driver                                                                       | Devices whose readings are worked out from other devices' (an average, the most, whether any is on) and whose controls hold what is set; see [Virtual devices](virtual-devices.md)                                                     |
+| The `rtsp` driver                                                                          | A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see [A camera](#a-camera)                                                                                                         |
+| The **Live** tab                                                                           | A camera's picture as it comes, on its device page                                                                                                                                                                                     |
 | The `automation-bridge` service                                                            | Hears the broker and runs the drivers                                                                                                                                                                                                  |
 | The `automation-engine` service                                                            | Runs the [automations](automations.md) under `/etc/automations`, each as its owner                                                                                                                                                     |
 | The group `automation`                                                                     | Its members make automations                                                                                                                                                                                                           |
@@ -38,7 +41,11 @@ propose switching them.
 
 - **An MQTT broker**, the server the devices and EiN exchange their messages through, for the
   devices that speak MQTT: those running ESPHome, and Shelly's of every generation. The installer
-  runs one beside EiN with `--mqtt`; a broker you already run works as well.
+  runs one beside EiN with `--automation`, in the [automation sidecar](#the-installers-sidecar); a
+  broker you already run works as well.
+- **A restreamer** for cameras, which the sidecar has too: it keeps one connection to each camera,
+  and EiN's pages and commands watch the camera through it. Without it a camera gives only its
+  still picture, when it has one.
 - No broker for the rest: printers, Google Cast speakers, NAS boxes, [web APIs](#a-web-api) and
   anything else on the network are asked by EiN directly, once added, with or without one. Without
   the installer's broker nothing is found on the network, though, so add them by hand with
@@ -51,7 +58,7 @@ With the installer's broker, add the broker and the module in one run:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
-./setup.sh --mqtt --module automation
+./setup.sh --automation --module automation
 ```
 
 On a new machine, name the module to the installer, which makes it the same options:
@@ -69,24 +76,32 @@ and `automation-engine`, which runs the automations. When `automation-engine` fi
 the group `automation`, whose members make automations. [Modules](../admin/modules.md) covers installing and
 removing modules.
 
-### The installer's broker
+### The installer's sidecar
 
-`--mqtt` runs Mosquitto in a container of its own, `mqtt`, beside EiN:
+`--automation` runs the automation sidecar, one container beside EiN on the machine's own network,
+`automation`, with three services in it:
 
-- It takes no anonymous clients. EiN signs in as `ein` and the devices as `device`, with passwords
-  `setup.sh` made at the install and keeps in `~/ein/.env`: `MQTT_EIN_PASSWORD` and
-  `MQTT_DEVICE_PASSWORD`. A password changed there takes effect at the next `./setup.sh`.
-- The devices reach it on port 1883 of the machine (`MQTT_PORT` in `.env`), on the address
-  `EIN_BIND` names.
-- `setup.sh` gives EiN the broker's address, user and password itself, and the `device` account a
-  device added from the network is given: those settings say **From deployment** on the Settings
-  page and need nothing from you.
-- It keeps what the devices announce in the data folder's `mqtt` folder, so it is all there again
-  after a restart.
-- Beside it runs `discovery`, a small listener on the machine's own network, which finds the
-  devices that are not on the broker yet:
-  [Add a device found on the network](#add-a-device-found-on-the-network).
-- `./setup.sh --no-mqtt` takes it out again, and `./setup.sh --only mqtt` updates it alone.
+- **The MQTT broker**, Mosquitto. It takes no anonymous clients. EiN signs in as `ein` and the
+  devices as `device`, with passwords `setup.sh` made at the install and keeps in `~/ein/.env`:
+  `MQTT_EIN_PASSWORD` and `MQTT_DEVICE_PASSWORD`. A password changed there takes effect at the next
+  `./setup.sh`. The devices reach it on port 1883 of the machine (`MQTT_PORT` in `.env`), on the
+  address `EIN_BIND` names. It keeps what the devices announce in the data folder's `mqtt` folder,
+  so it is all there again after a restart.
+- **A listener** on the machine's own network, which finds the devices that are not on the broker
+  yet: [Add a device found on the network](#add-a-device-found-on-the-network).
+- **A restreamer**, go2rtc, which keeps one connection to each [camera](#a-camera) EiN has and
+  serves it again, to EiN on port 1984 (`STREAMS_PORT`), over RTSP on 8554 (`RTSP_PORT`) and over
+  WebRTC on 8555 (`WEBRTC_PORT`), behind the account `ein` and `STREAMS_PASSWORD` from `.env`. EiN
+  gives it the cameras itself.
+
+`setup.sh` gives EiN the broker's and the restreamer's addresses and passwords itself, and the
+`device` account a device added from the network is given: those settings say **From deployment**
+on the Settings page and need nothing from you. `./setup.sh --no-automation` takes the sidecar out
+again, and `./setup.sh --only automation` updates it alone.
+
+Under Docker, and podman run as root, EiN reaches the sidecar at the machine's address on its
+container network, so the sidecar needs `EIN_BIND` to be `0.0.0.0`: `setup.sh` says so when it is
+not.
 
 The devices need the device password. Read it on the machine:
 
@@ -97,8 +112,9 @@ grep MQTT_DEVICE_PASSWORD .env
 
 > [!WARNING]
 > The broker speaks plain MQTT, without TLS. Whoever reaches port 1883 with the device password can
-> switch the house's devices and read what they say. Keep the port on your home network and never
-> forward it on your router; [Ports, HTTPS and remote access](../admin/network.md#what-ein-listens-on)
+> switch the house's devices and read what they say, and whoever reaches 1984 or 8554 with the
+> restreamer's password watches the cameras. Keep the ports on your home network and never forward
+> them on your router; [Ports, HTTPS and remote access](../admin/network.md#what-ein-listens-on)
 > lists it with EiN's other ports.
 
 ### A broker you already run
@@ -398,6 +414,50 @@ are asked with the sign-in in `url`.
 The address, with a password in it, is the device's config, which every member of `devices` sees.
 EiN asks it from the machine it runs on, so an address on your home network is asked from there.
 
+### A camera
+
+The `rtsp` driver takes a camera on your network that sends its picture over RTSP, as most cameras
+that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera's
+manual, or its own web page, names its stream's address; many send a second, smaller stream beside
+the main one, which costs less to watch and to take a picture of. A member of `devices` makes the
+camera in the terminal:
+
+```bash
+# in EiN's terminal, as a member of devices
+ device-create 'Front door' --driver rtsp \
+  --config url=rtsp://192.0.2.30:554/h264Preview_01_main \
+  --config sub=rtsp://192.0.2.30:554/h264Preview_01_sub \
+  --config user=viewer --config password='the password'   # the leading space keeps it out of your history
+```
+
+| Config     | What it is                                                                                                                        |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `url`      | The main stream's address, `rtsp://…`                                                                                             |
+| `sub`      | A second, smaller stream's address. May be left out                                                                               |
+| `snapshot` | The address of the camera's still picture, `http://…`, which a picture is taken from when there is no restreamer. May be left out |
+| `user`     | The camera's account                                                                                                              |
+| `password` | That account's password. It is kept in the device's `.secret`, which the administrator alone reads, and goes only to the sidecar  |
+
+The camera becomes a device of class `camera`, with a `stream` endpoint for each stream: `main`, and
+`sub` with a second one. EiN gives the streams to the [sidecar's restreamer](#the-installers-sidecar),
+which keeps one connection to the camera however many watch it, and says within a minute how large
+each picture is and which codec it is sent in. Its page shows a picture of each stream now, taken
+again every ten seconds while the page is open, and the **Live** tab plays the picture as it comes:
+the main stream, or the smaller one, a button away. The **Devices** page shows a picture of the
+smaller stream on the camera's card.
+
+A picture is a file too, a JPEG of the stream now, taken each time it is read:
+
+```bash
+# in EiN's terminal
+cat /dev/front-door/main > ~/front-door.jpg
+```
+
+The camera is **online** while it gives a picture, asked every other minute. Who may see the
+pictures is who may read the stream: the household, as for every device
+([Who may do what](#who-may-do-what)). EiN's pages reach the camera only through EiN, signed in, so
+neither its address nor its password reaches a browser.
+
 ### Check that EiN hears them
 
 ```bash
@@ -523,9 +583,11 @@ The module's settings are in the **Automation** group of **Settings → System**
 
 | Setting                           | On the Settings page         | Default                           | What it does                                                                                                                                                                                                  |
 | --------------------------------- | ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**              | empty; `--mqtt` sets it           | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, only the devices EiN asks over the network are read                                                                                          |
-| `CFG_AUTOMATION_MQTT_USER`        | **MQTT user**                | empty; `--mqtt` sets `ein`        | The account EiN signs in to the broker with. Empty, it signs in without one                                                                                                                                   |
-| `CFG_AUTOMATION_MQTT_KEY`         | **MQTT password**            | none; `--mqtt` sets it            | That account's password, a key nobody can read back                                                                                                                                                           |
+| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**              | empty; `--automation` sets it     | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, only the devices EiN asks over the network are read                                                                                          |
+| `CFG_AUTOMATION_MQTT_USER`        | **MQTT user**                | empty; `--automation` sets `ein`  | The account EiN signs in to the broker with. Empty, it signs in without one                                                                                                                                   |
+| `CFG_AUTOMATION_MQTT_KEY`         | **MQTT password**            | none; `--automation` sets it      | That account's password, a key nobody can read back                                                                                                                                                           |
+| `CFG_AUTOMATION_STREAMS_URL`      | **Restreamer**               | empty; `--automation` sets it     | The restreamer cameras are given to, go2rtc's API as `http://host:1984`. Empty, a camera has no live view, and its picture is asked of the camera itself                                                      |
+| `CFG_AUTOMATION_STREAMS_KEY`      | **Restreamer password**      | none; `--automation` sets it      | The password of the restreamer's account `ein`, a key nobody can read back                                                                                                                                    |
 | `CFG_AUTOMATION_SOURCES`          | **Device sources**           | `ha-discovery shelly shelly-gen1` | Which drivers the bridge runs, separated by spaces: `ha-discovery` for ESPHome and whatever announces itself as it does, `shelly` for Shelly's second generation and later, and `shelly-gen1` for the first   |
 | `CFG_AUTOMATION_DISCOVERY_PREFIX` | **Discovery prefix**         | `homeassistant`                   | The topic `ha-discovery` devices announce themselves under                                                                                                                                                    |
 | `CFG_AUTOMATION_HISTORY`          | **Reading history**          | `365 day`                         | How long an endpoint's values are kept: `30 day`, `90 day`, `365 day` or `forever`. It applies to endpoints found from then on; one found before keeps its own, which `attrs` on the endpoint changes (below) |
@@ -555,6 +617,9 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 | `<device>'s driver shelly is not running`                   | The `automation-bridge` service is stopped                             | `service start automation-bridge`, as the administrator                                                                                                                                  |
 | `Access denied for operation 'w' on node: …` when switching | The control is narrowed to others                                      | Ask the administrator                                                                                                                                                                    |
 | A device stays **offline**                                  | It said it was going, or the broker said so for it when it disappeared | Check its power and its Wi-Fi                                                                                                                                                            |
+| A camera shows **No picture**, and stays offline            | The restreamer cannot reach the camera, or the camera refuses it       | Check `url`, `user` and the password: `device-forget` the camera and make it again. `service logs automation-bridge` says what the camera answered                                       |
+| The **Live** tab says the stream could not be reached       | As above, or the sidecar is not running                                | `podman compose ps` on the machine; `./setup.sh --only automation` starts it again                                                                                                       |
+| **Live** plays nothing in a browser on a phone              | The browser does not play the camera's codec, often H.265              | Watch the smaller stream, which is often H.264, or set the camera to send H.264                                                                                                          |
 
 ## Related pages
 

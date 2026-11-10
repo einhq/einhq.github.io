@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Automations – EiN documentation</title>
-    <meta name="description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock and files coming into a folder, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta name="description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock, files coming into a folder and EiN's own events, logic that compares and combines, values worked out from readings, timers, and actions that switch controls, run command lines and raise events for pipelines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/automation/automations.html">
     <meta property="og:title" content="Automations – EiN documentation">
-    <meta property="og:description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock and files coming into a folder, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta property="og:description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock, files coming into a folder and EiN's own events, logic that compares and combines, values worked out from readings, timers, and actions that switch controls, run command lines and raise events for pipelines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,9 +94,10 @@
 <p>An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark
 and off a while after, a heater keeps a room between two temperatures while someone is home, a
 button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a
-folder. It is made of <strong>nodes wired together</strong>: inputs that hear devices, the clock and files coming
-into a folder, logic that compares and combines, values worked
-out from readings, timers, and actions that switch controls and run command lines. Each automation
+folder. It is made of <strong>nodes wired together</strong>: inputs that hear devices, the clock, files coming
+into a folder and EiN&#39;s own events, logic that compares and combines, values worked out from
+readings, timers, and actions that switch controls, run command lines and raise events for
+pipelines. Each automation
 is a YAML file, written by members of the <code>automation</code> group, and runs with the rights of the person
 whose file it is. This page is for those members. <a href="index.html">Automation</a> covers connecting the
 devices, and <a href="../guide/devices.html">Devices</a> the devices themselves.</p>
@@ -155,7 +156,8 @@ Times are in your browser&#39;s time zone, written in your date and time format 
 <li><strong>Inputs</strong>, one for each node that starts things: a device node takes a reading of <strong>on</strong> or <strong>off</strong>, or any value
 you type, sent as a reading, or as a <strong>Press</strong> (a button&#39;s single or long); an online node is set
 online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
-sent a value; a file node is given a file&#39;s name, as if it came into its folder.</li>
+sent a value; a file node is given a file&#39;s name, as if it came into its folder; an event in is
+sent the path of a node, as if its event had come about it.</li>
 <li><strong>Controls</strong>, what each control the automation writes holds in the simulation.</li>
 <li><strong>Log</strong>, newest first: each input you fed, each node that sent something and on which
 output, each value a node held back and why (a compare or an and that would send what it sent
@@ -356,6 +358,11 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 <td><code>folder</code>; <code>match</code>, <code>changes</code></td>
 <td>The path of each file that comes into <code>folder</code> (<a href="#a-file-in-a-folder">A file in a folder</a>)</td>
 </tr>
+<tr>
+<td><code>event-in</code></td>
+<td><code>event</code>; <code>under</code>, <code>with</code></td>
+<td>The path of the node each event of that type is about (<a href="#eins-events">EiN&#39;s events</a>)</td>
+</tr>
 </tbody></table>
 </div>
 <p>A <code>clock</code>&#39;s <code>at</code> and a <code>between</code>&#39;s <code>from</code> and <code>until</code> may follow the sun: <code>sunrise</code>, <code>sunset</code>,
@@ -490,6 +497,11 @@ way round.</p>
 <td>Sends the value to every <code>link-in</code> of that name in the owner&#39;s automations</td>
 </tr>
 <tr>
+<td><code>event-out</code></td>
+<td><code>event</code>; <code>subject</code></td>
+<td>Raises an event for pipelines, about the node at <code>subject</code>, or at the value that came (<a href="#eins-events">EiN&#39;s events</a>); the administrator&#39;s automations only. Then sends the path on</td>
+</tr>
+<tr>
 <td><code>debug</code></td>
 <td></td>
 <td>Writes the value to the run log</td>
@@ -519,6 +531,45 @@ the node sends on, a number when it prints one. A line that fails or runs longer
 (30 s unless set) sends nothing, and its node and the run log say why.</p>
 <p>An automation&#39;s actions run one after another, each when the one before has ended; another
 automation&#39;s do not wait for them.</p>
+<h3 id="eins-events">EiN&#39;s events<a class="anchor" href="#eins-events" aria-label="Link to this section"></a></h3>
+<p>Besides its devices, EiN says what happens to the things in it as <strong>events</strong>
+(<a href="../concepts/pipelines.html">Changes and pipelines</a>): a photo&#39;s metadata was read
+(<code>media.metadata.extracted</code>), its faces were found (<code>media.faces.completed</code>), and a pipeline&#39;s run
+on a file started, ended or failed (<code>pipeline.instance.started</code>, <code>pipeline.instance.completed</code>,
+<code>pipeline.instance.failed</code>). An <code>event-in</code> node hears them; an <code>event-out</code> node raises one of its
+own, for a pipeline that waits for it.</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">description:</span> <span class="hljs-string">Note</span> <span class="hljs-string">each</span> <span class="hljs-string">photo</span> <span class="hljs-string">in</span> <span class="hljs-string">the</span> <span class="hljs-string">Wrenfield</span> <span class="hljs-string">album</span> <span class="hljs-string">whose</span> <span class="hljs-string">places</span> <span class="hljs-string">pipeline</span> <span class="hljs-string">failed</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">failed:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">event-in</span>
+    <span class="hljs-attr">event:</span> <span class="hljs-string">pipeline.instance.failed</span>
+    <span class="hljs-attr">under:</span> <span class="hljs-string">/archive/albums/wrenfield-summer-1987</span>
+    <span class="hljs-attr">with:</span> <span class="hljs-string">pipeline=place-upkeep</span>
+    <span class="hljs-attr">to:</span> [<span class="hljs-string">note</span>]
+  <span class="hljs-attr">note:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">shell</span>, <span class="hljs-attr">run:</span> <span class="hljs-string">&#x27;echo &quot;$VALUE&quot; &gt;&gt; ~/failed-places.txt&#x27;</span> }</code></pre></div>
+<ul>
+<li><strong><code>event</code></strong> names the event. A word may be <code>*</code>, any one word, or <code>#</code>, any number of words:
+<code>pipeline.instance.*</code> is a run starting, ending or failing, and <code>media.#</code> every fact about
+media. <strong><code>under</code></strong> keeps only events about a node in that folder, and <strong><code>with</code></strong> only those
+whose data says so (<code>pipeline=place-upkeep</code>; several pairs separated by spaces); a pipeline&#39;s
+events carry its name as <code>pipeline</code>.</li>
+<li>It sends the path of the node the event is about, with the event&#39;s type as where it came from
+(<code>$TOPIC</code> to a line, <code>topic</code> to math).</li>
+<li>It hears only events about a node the automation&#39;s owner may read: someone else&#39;s photo is not
+yours to hear of.</li>
+<li>Events are many while a large import runs. They wait in a queue of their own, so readings and
+presses are not held up behind them, and only while an automation listens for them. As with
+readings, those said more than a minute before the engine starts again move its state and do
+nothing.</li>
+</ul>
+<p>An <code>event-out</code> node raises its <code>event</code> (dotted words, such as <code>automation.porch.arrived</code>) about
+the node at <code>subject</code>, a path, which may hold <code>${value}</code> and <code>${topic}</code>; without one it is the
+value that came, which must be a path. A pipeline that waits for it (<code>on: automation.porch.arrived</code>)
+runs on that node, and finds the value that came in <code>$EVENT_VALUE</code>, where it came from in
+<code>$EVENT_TOPIC</code> and the automation&#39;s name in <code>$EVENT_AUTOMATION</code>. Since pipelines run as the
+administrator, only the administrator raises events: another&#39;s automation with an <code>event-out</code> is
+not run, and says so. An event an automation raises reaches pipelines, never another automation,
+so two cannot set each other off for ever.</p>
 <h3 id="over-a-restart">Over a restart<a class="anchor" href="#over-a-restart" aria-label="Link to this section"></a></h3>
 <p>Timers count from when a reading came, not from when the engine heard it, and what an automation
 waits for is kept when the engine stops. So a lamp whose motion ended four minutes before EiN
@@ -530,7 +581,7 @@ hour ago does not toggle a lamp now. A time of day that passed meanwhile is not 
 that came into a folder meanwhile is not sent.</p>
 <h2 id="more-examples">More examples<a class="anchor" href="#more-examples" aria-label="Link to this section"></a></h2>
 <h3 id="a-tour-of-every-kind-of-node">A tour of every kind of node<a class="anchor" href="#a-tour-of-every-kind-of-node" aria-label="Link to this section"></a></h3>
-<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: seven small flows
+<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: eight small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (<code>example-…</code>), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: <strong>+</strong> beside the list, starting
@@ -544,6 +595,8 @@ that came.</li>
 <li>What the link brings: link in, held, or, shell.</li>
 <li>The clock: clock, delay, between, online.</li>
 <li>A file: file.</li>
+<li>EiN&#39;s events: event in, event out. Only the administrator raises events, so take the event out
+from a copy of your own.</li>
 </ol>
 <p>An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
 timer&#39;s or a compare&#39;s <strong>out</strong> into it (true and false both), as the motion light does, not its
@@ -719,7 +772,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#eins-events">EiN's events</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -19,7 +19,8 @@ are kept, and [Devices and their keys](../admin/devices.md) who may do what.
   group makes it by hand (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). EiN's own
   `tracker` driver then reads what it sends. So is a button, a sensor or a script that posts to an
   address, read by EiN's `webhook` driver (see
-  [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)).
+  [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)), and, with the Automation
+  module, a camera ([A camera](../automation/index.md#a-camera)).
 
 A device has a name, such as `hall-plug`, that commands and automations use, and a label, such as **Hall
 lamp**, that the pages show. Each thing it reports or takes is an **endpoint** with a name of its
@@ -30,7 +31,8 @@ draws, `ruby-phone/position` where the phone has been.
 
 Open **Devices** in the sidebar, under **Browse**. It has a card for every device you may see: its
 label, its main value, and badges for **online** or **offline**, what it is (such as **plug** or
-**phone**) and how many endpoints it has. The main value is a temperature when the device has one,
+**phone**) and how many endpoints it has. A camera's card shows its picture as it was when the page
+last read the devices. The main value is a temperature when the device has one,
 then power, humidity, light or energy, else any other reading, else a switch; a device with none
 shows its manufacturer and model instead. A device that only posts what it has, such as a phone or
 tracker sending its position or one posting to a webhook, is **online** while it has been heard
@@ -55,6 +57,7 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 | **History**  | How each endpoint went over a day, a week, a month or a year                                             |
 | **Info**     | What the device is, its driver, each endpoint and its key                                                |
 | **Trips**    | With the [Archive](../archive/index.md), on a device that has a track: [its trips](../archive/tracks.md) |
+| **Live**     | With the [Automation](../automation/index.md) module, on a camera: its picture as it comes               |
 
 Members of the `devices` group also have **Edit** in the header's corner, and **Forget** under ⋮
 (see [Rename or forget a device](#rename-or-forget-a-device)); on a phone both are under ⋮.
@@ -83,6 +86,9 @@ A tile for each endpoint:
 - **A colour**, such as a light's: a colour box whose picker sets it when you let go, or a colour typed
   as `#ff8000` and set with **Set**.
 - **An action**, such as a restart or a chime: **Press**, with when it was last pressed and by whom.
+- **A camera's stream**: its picture now, taken again every ten seconds while the page is open, with
+  its size and codec under it, or **No picture** while the camera gives none. **Live** plays it as it
+  comes.
 
 A switch or a setting you change shows what you asked for at once, with "asked on, waiting for the
 device" under its label, until the device says it has done it; then it shows what the device reports.

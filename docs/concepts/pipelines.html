@@ -146,9 +146,9 @@ its facts, pipelines, workers and paths such as <code>/archive/albums</code> exi
 to an album <code>system.vfs.album.child-attached</code>. Whoever listens binds only the keys it cares about,
 so a listener for files never hears about the thousands of small writes a busy system makes
 elsewhere. Only the administrator binds a queue, a log or a track to keys (their <code>routingKeys</code>
-attribute), as EiN&#39;s services and pipelines do: a message goes to whoever is bound, whether or not
-they may read the node it is about, so anyone else is refused with
-<code>Access denied for operation &#39;change routingKeys&#39;</code>. The event is sent only after the change is
+attribute), or sets the key of a router (its <code>routingKey</code>), as EiN&#39;s services and pipelines do: a
+message goes to whoever is bound, whether or not they may read the node it is about, so anyone else
+is refused with <code>Access denied for operation &#39;change routingKeys&#39;</code> (or <code>&#39;change routingKey&#39;</code>). The event is sent only after the change is
 saved: nothing reacts to a change that did not happen.</p>
 <p>The same write also leaves a record in the audit trail, in the same transaction, so a record
 exists exactly when the change does. <a href="#trace-a-result-back-to-its-cause">Trace a result back to its cause</a>
@@ -234,7 +234,11 @@ facts cannot disagree with what is stored.</p>
 </tbody></table>
 </div>
 <p>A fact is a line of JSON. Announcing one is writing that line to <code>/dev/events</code>; there is no
-separate command for it:</p>
+separate command for it. <code>/dev/events</code> is the administrator&#39;s alone, to write and to read, as is
+<code>/dev/pipeline-events</code>: a fact starts pipelines, and it may be about anyone&#39;s files. An automation
+of the administrator&#39;s raises one with an
+<a href="../automation/automations.html#eins-events">event out node</a>, and anyone&#39;s automation hears those
+about the nodes its owner may read:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;{&quot;id&quot;:&quot;e1&quot;,&quot;type&quot;:&quot;media.file.discovered&quot;,&quot;subject&quot;:&quot;/archive/albums/wrenfield-summer-1987/IMG_0042.jpg&quot;,&quot;time&quot;:1790000000000,&quot;data&quot;:{&quot;mimetype&quot;:&quot;image/jpeg&quot;}}&#x27;</span> &gt; /dev/events</code></pre></div>
 <p><code>subject</code> is the node the fact is about, and <code>data</code> carries whatever a pipeline needs to decide
