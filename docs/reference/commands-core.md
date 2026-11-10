@@ -219,7 +219,7 @@ basename [-s <string>] [-a] [-z] <NAME> [<SUFFIX>]
 
 ### `cat`
 
-Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON)
+Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera's stream (a JPEG of it now)
 
 <small>reads only</small>
 
@@ -738,7 +738,7 @@ With `JSON_OUTPUT=1`: { path, label }.
 
 ### `device-show`
 
-A device and each of its endpoints: a log's or control's latest value, a track's fixes, and whether you may write a control.
+A device and each of its endpoints: a log's or control's latest value, a track's fixes, a stream's size and codec, and whether you may write a control.
 
 <small>reads only</small>
 
@@ -2018,7 +2018,7 @@ mod-install [--force] [--missing] [--groups=<string>] [--no-setup] [--background
 | Option | What it does |
 | --- | --- |
 | `--force` | Fetch again what is installed at the same commit, and update even when an installed module does not accept the new version. |
-| `--missing` | Install only modules not installed at all, leaving an installed one as it is without asking its forge. |
+| `--missing` | Install only modules not installed, or installed at a release this core cannot run, leaving any other installed one as it is without asking its forge. |
 | `--groups=<string>` | Keep the modules named to these groups, comma-separated, as mod groups does; the dependencies it installs with them are everyone's. |
 | `--no-setup` | Put the modules in place without setting them up or starting their services, as boot does before its own mod setup --all. |
 | `--background` | Start the install and return at once; mod status says how far it has got. |

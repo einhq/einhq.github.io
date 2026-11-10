@@ -467,7 +467,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </div>
 <h2 id="c">C<a class="anchor" href="#c" aria-label="Link to this section"></a></h2>
 <h3 id="cat"><code>cat</code><a class="anchor" href="#cat" aria-label="Link to this section"></a></h3>
-<p>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON)</p>
+<p>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera&#39;s stream (a JPEG of it now)</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>cat [-s] [-l] [-t] [--timestamps] [&lt;path&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1237,7 +1237,7 @@ device-key old-sensor --off</code></pre></div>
 device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temperature&#x27;</span></code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: { path, label }.</p>
 <h3 id="device-show"><code>device-show</code><a class="anchor" href="#device-show" aria-label="Link to this section"></a></h3>
-<p>A device and each of its endpoints: a log&#39;s or control&#39;s latest value, a track&#39;s fixes, and whether you may write a control.</p>
+<p>A device and each of its endpoints: a log&#39;s or control&#39;s latest value, a track&#39;s fixes, a stream&#39;s size and codec, and whether you may write a control.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>device-show &lt;device&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -3078,7 +3078,7 @@ mod <span class="hljs-built_in">groups</span> archive --everyone</code></pre></d
 </tr>
 <tr>
 <td><code>--missing</code></td>
-<td>Install only modules not installed at all, leaving an installed one as it is without asking its forge.</td>
+<td>Install only modules not installed, or installed at a release this core cannot run, leaving any other installed one as it is without asking its forge.</td>
 </tr>
 <tr>
 <td><code>--groups=&lt;string&gt;</code></td>

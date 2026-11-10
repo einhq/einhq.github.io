@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 435 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 436 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -34,7 +34,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only). Reads the last 14 days unless given --all, a time range, or a record, node, session or cause to find. |
 | [awk](commands-core.md#awk) | Pattern scanning and text processing language (fields, patterns, arrays, printf) |
 | [basename](commands-core.md#basename) | Strip directory and suffix from filenames. |
-| [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON) |
+| [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera's stream (a JPEG of it now) |
 | [chmod](commands-core.md#chmod) | Change file mode bits. |
 | [chown](commands-core.md#chown) | Change file owner and group. |
 | [clear](commands-core.md#clear) | Clear the terminal screen. |
@@ -62,7 +62,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [device-history](commands-core.md#device-history) | An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes. |
 | [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off) |
 | [device-label](commands-core.md#device-label) | Name a device or one of its endpoints, as its page and cards show it; for members of the devices group. |
-| [device-show](commands-core.md#device-show) | A device and each of its endpoints: a log's or control's latest value, a track's fixes, and whether you may write a control. |
+| [device-show](commands-core.md#device-show) | A device and each of its endpoints: a log's or control's latest value, a track's fixes, a stream's size and codec, and whether you may write a control. |
 | [devices](commands-core.md#devices) | Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers. |
 | [df](commands-core.md#df) | Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables. |
 | [dirname](commands-core.md#dirname) | Strip last component from file name. |
@@ -257,7 +257,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 141 in full](../archive/commands.md).
+[All 142 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -280,6 +280,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [camera-cover](../archive/commands.md#camera-cover) | Give a camera without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
 | [camera-create](../archive/commands.md#camera-create) | Create a camera node and link the media already carrying its fingerprint. |
 | [camera-device](../archive/commands.md#camera-device) | Link a camera to the device it is part of, such as a phone's camera to the phone whose track says where it was, or take the link away. |
+| [camera-faces](../archive/commands.md#camera-faces) | Have the media service watch every camera for faces, and file what it sees: the person on the camera's faces log, the face's picture under the camera (the camera-faces service) |
 | [camera-info](../archive/commands.md#camera-info) | Show camera details and owners. |
 | [camera-link](../archive/commands.md#camera-link) | Link a file to its capture camera using extracted exif, or to a camera named by hand. |
 | [camera-list](../archive/commands.md#camera-list) | List all cameras. |

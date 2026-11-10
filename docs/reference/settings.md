@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 101 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 105 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -208,7 +208,7 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 
 ### `CFG_AUTOMATION_DEVICE_BROKER`
 
-**Broker for devices**. The broker's address as the devices on the network reach it, host:port, which a device added from the network is given. setup.sh --mqtt runs a listener beside the broker that says it.
+**Broker for devices**. The broker's address as the devices on the network reach it, host:port, which a device added from the network is given. setup.sh --automation runs a listener beside the broker that says it.
 
 | | |
 | --- | --- |
@@ -230,7 +230,7 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 
 ### `CFG_AUTOMATION_DEVICE_USER`
 
-**Device MQTT user**. The account a device added from the network signs in to the broker with. setup.sh --mqtt sets it to device.
+**Device MQTT user**. The account a device added from the network signs in to the broker with. setup.sh --automation sets it to device.
 
 | | |
 | --- | --- |
@@ -265,7 +265,7 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 
 ### `CFG_AUTOMATION_MQTT_URL`
 
-**MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --mqtt runs one beside EiN and sets this.
+**MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --automation runs one beside EiN, in the automation sidecar, and sets this.
 
 | | |
 | --- | --- |
@@ -299,6 +299,17 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 | Restarts | `automation-bridge` |
 | From the module | Automation |
 
+### `CFG_USER_AUTOMATION_NODE_DOCS`
+
+**Node docs in the editor**. Whether the panel of a node in the automation editor shows, at its foot, what the node does and what each of its settings means. Folding or opening them there sets this.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | `true` |
+| Kind | boolean |
+| From the module | Automation |
+
 ### `CFG_AUTOMATION_HISTORY`
 
 **Reading history**. How long an endpoint's values are kept. Applies to endpoints found from now on; one found before keeps its own (change it with attrs on the endpoint).
@@ -309,6 +320,42 @@ Every setting of an EiN with all its modules: 101 of them, in the groups the Set
 | Default | `365 day` |
 | Choices | `30 day`, `90 day`, `365 day`, `forever` |
 | Kind | select |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_STREAMS_URL`
+
+**Restreamer**. The restreamer cameras are given to and their streams read from, go2rtc's API as http://host:1984. setup.sh --automation runs one beside EiN, in the automation sidecar, and sets this.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means a camera has no live view, and its picture is asked of the camera itself |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_STREAMS_RTSP`
+
+**Restreamer for the media service**. The restreamer's RTSP as the media service reaches it, rtsp://host:8554, where it reads a camera's stream to watch it for faces. setup.sh --automation sets it.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means no other service is told where a camera's stream is, so none is watched for faces |
+| Kind | string |
+| Restarts | `automation-bridge` |
+| From the module | Automation |
+
+### `CFG_AUTOMATION_STREAMS_KEY`
+
+**Restreamer password**. The password of the restreamer's account ein, sent only to the restreamer above.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
 | Restarts | `automation-bridge` |
 | From the module | Automation |
 
