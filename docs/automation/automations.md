@@ -65,13 +65,13 @@ phone) has:
 - **A clock** of the simulation's own, which keeps pace with the real one, holds still with the
   pause button, and moves on with **+1 min**, **+10 min**, **+1 h** or **Next timer**, so a timer of
   five minutes need not take five minutes. Clocks and between nodes go off as it passes their times.
-  Times are in your browser's time zone.
+  Times are in your browser's time zone, written in your date and time format (Settings → Language).
 - **Inputs**, one for each node that starts things: a device node takes a reading of **on** or **off**, or any value
   you type, sent as a reading, or as a **Press** (a button's single or long); an online node is set
   online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
   sent a value.
 - **Controls**, what each control the automation writes holds in the simulation.
-- **What happened**, newest first: each input you fed, each node that sent something and on which
+- **Log**, newest first: each input you fed, each node that sent something and on which
   output, each value a node held back and why (a compare or an and that would send what it sent
   last, a reading a device node does not pass on), and each control it would set, command line it
   would run and link out it would send to, with what its debug nodes say. **What it would do** shows
