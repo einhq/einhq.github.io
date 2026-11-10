@@ -24,8 +24,13 @@ An automation opens on three tabs, under its name in the bar:
   two fingers, a double tap to zoom in). Add a node with **+** in the canvas's corner, which lists
   the kinds; it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
   card's outputs on its right edge to another card to wire them: `true` is the green output, `false`
-  the red one, and a switch has one per case. Tap a card to set it up in the panel over the right
-  of the graph (a drawer on a phone). A card that reads or switches a device has the device to
+  the red one, and a switch has one per case. Each kind of node has a colour of its own, on the band
+  behind its card's title. Tap a card to set it up in the panel over the right
+  of the graph (a drawer on a phone): its **Name**, which is what wires and math name it by and its
+  key in the YAML (renaming it renames it there too), a **Label** shown on its card instead, and its
+  settings, the required ones starred. A button node has **Press**, while the automation runs. At
+  the panel's foot, **About … nodes** says what the kind does, what it sends and what each setting
+  means; fold it away and it stays folded. A card that reads or switches a device has the device to
   pick, and under it the device's endpoints (its controls, on a card that switches) with their
   latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out. While the
   automation runs, each card says what its node last sent and when, or when its timer runs out.
