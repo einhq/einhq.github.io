@@ -536,6 +536,16 @@ starts it again by itself. If it keeps stopping, the count after `×` beside **b
 `podman compose logs ems` says why. When it ran out of memory, give the container more with
 `EMS_MEMORY` in `.env`.
 
+**Work waits for the media service although it answers and runs nothing.** `health` says `… waiting
+for EMS, which could not run it yet` again and again, while the **Media service** tab shows no
+request executing. The refusal is on each waiting step: open one from the dashboard, or run
+`JSON_OUTPUT=1 pipeline-status <id>` and read the step's `error`. When it ends
+`sshfs: fuse: mount failed: Permission denied (files_unavailable)`, the media service cannot mount
+the files of its requests. Under Docker on Ubuntu and Debian, the container's AppArmor profile
+denies the mount. `compose.ems.yaml` turns it off for the media service; `./setup.sh` brings the
+install's copy of that file up to date. Then `pool-wake` in EiN's terminal starts
+the waiting work at once.
+
 **`gpu degraded` and the verdict is Needs a person.** The card the machine should have is not
 visible to the media service, or its context was lost. A reboot that renumbers the cards is the
 usual cause; [The graphics card](gpu.md) has the fix.

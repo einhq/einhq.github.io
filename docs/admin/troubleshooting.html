@@ -489,6 +489,10 @@ llm-status --checks</code></pre></div>
 <td>The media service is busy or could not load what the work needs. EiN tries again at the time it names. When it keeps saying so, see <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
 </tr>
 <tr>
+<td>A waiting step&#39;s error ends <code>fuse: mount failed: Permission denied (files_unavailable)</code></td>
+<td>The media service cannot mount the files of its requests: under Docker, AppArmor denies it. Run <code>./setup.sh</code> again. See <a href="../ems/index.html#when-something-goes-differently">The media service</a>.</td>
+</tr>
+<tr>
 <td><code>health</code> says <code>http://ems:8181 is not answering; work that needs it waits</code></td>
 <td>The media service was never installed, is starting or has stopped. See <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
 </tr>

@@ -921,6 +921,14 @@ whole procedure.</p>
 starts it again by itself. If it keeps stopping, the count after <code>×</code> beside <strong>batch worker</strong> climbs:
 <code>podman compose logs ems</code> says why. When it ran out of memory, give the container more with
 <code>EMS_MEMORY</code> in <code>.env</code>.</p>
+<p><strong>Work waits for the media service although it answers and runs nothing.</strong> <code>health</code> says <code>… waiting for EMS, which could not run it yet</code> again and again, while the <strong>Media service</strong> tab shows no
+request executing. The refusal is on each waiting step: open one from the dashboard, or run
+<code>JSON_OUTPUT=1 pipeline-status &lt;id&gt;</code> and read the step&#39;s <code>error</code>. When it ends
+<code>sshfs: fuse: mount failed: Permission denied (files_unavailable)</code>, the media service cannot mount
+the files of its requests. Under Docker on Ubuntu and Debian, the container&#39;s AppArmor profile
+denies the mount. <code>compose.ems.yaml</code> turns it off for the media service; <code>./setup.sh</code> brings the
+install&#39;s copy of that file up to date. Then <code>pool-wake</code> in EiN&#39;s terminal starts
+the waiting work at once.</p>
 <p><strong><code>gpu degraded</code> and the verdict is Needs a person.</strong> The card the machine should have is not
 visible to the media service, or its context was lost. A reboot that renumbers the cards is the
 usual cause; <a href="gpu.html">The graphics card</a> has the fix.</p>
