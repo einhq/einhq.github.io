@@ -58,7 +58,7 @@ the administrator turns it on and off.
 
 The flask among the buttons in the graph's corner simulates the automation: it runs the graph as it
 is in your browser, on the same engine EiN runs, with nothing real behind it. The bar says
-**Simulating**, the graph cannot be changed meanwhile, and the panel on the right (at the foot on a
+**Simulating**, cards can be moved meanwhile but not wired, set or removed, and the panel on the right (at the foot on a
 phone) has:
 
 - **A clock** of the simulation's own, which keeps pace with the real one, holds still with the
