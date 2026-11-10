@@ -166,7 +166,7 @@ Open **Dashboard** under **System** and choose the **Log** tab.
 
 ![The System dashboard's Log tab: a Recent problems card listing ten WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong; the live log shows what EiN is doing now")
 
-- **Recent problems** lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message. It is read again every 10 seconds. With none, it says "Nothing logged at WARN or above".
+- **Recent problems** lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message, and under it what was logged beside the message as `key=value`, as `dmesg` shows it. It is read again every 10 seconds. With none, it says "Nothing logged at WARN or above".
 - **Live log** shows `/var/logs/system` as it is written: the last 200 lines when you open it, then every new line as it arrives, up to 500 kept. It follows the newest line while you are at the bottom, and stays put when you scroll up to read.
 
 The controls at the right of **Live log**:

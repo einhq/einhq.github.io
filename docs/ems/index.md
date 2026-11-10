@@ -538,8 +538,10 @@ starts it again by itself. If it keeps stopping, the count after `×` beside **b
 
 **Work waits for the media service although it answers and runs nothing.** `health` says `… waiting
 for EMS, which could not run it yet` again and again, while the **Media service** tab shows no
-request executing. The refusal is on each waiting step: open one from the dashboard, or run
-`JSON_OUTPUT=1 pipeline-status <id>` and read the step's `error`. When it ends
+request executing. What the media service answered the last step that could not run ends the
+kind's line in `health`, after `it said:` or `the last could not run … ago:`, and on the dashboard
+it follows the line that is not moving; the whole error is on each waiting step
+(`JSON_OUTPUT=1 pipeline-status <id>`, its `error`). When it ends
 `sshfs: fuse: mount failed: Permission denied (files_unavailable)`, the media service cannot mount
 the files of its requests. Under Docker on Ubuntu and Debian, the container's AppArmor profile
 denies the mount. `compose.ems.yaml` turns it off for the media service; `./setup.sh` brings the

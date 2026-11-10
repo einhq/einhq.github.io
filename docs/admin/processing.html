@@ -171,7 +171,9 @@ line it is on with how much of its turn is left.</li>
 <li>With the <a href="../ems/index.html">media service</a> installed, two more columns follow: its lanes, with
 their slots and the requests in them, and the models it holds, the working ones first.</li>
 </ul>
-<p>Under the board, each line that is not moving says why.</p>
+<p>Under the board, each line that is not moving says why. When the media service could not run its
+work, that line ends with what the media service answered, such as
+<code>ems: media.probe: … mount failed: Permission denied (files_unavailable)</code>.</p>
 <p>The table below has a row for every pipeline that is doing something; the idle ones fold into one
 row, <strong>N pipelines idle</strong>, which <strong>show</strong> opens. A total row, <strong>All pipelines</strong>, is at the foot. The
 bar draws the same counts as the columns.</p>

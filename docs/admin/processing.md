@@ -65,7 +65,9 @@ the table below uses:
 - With the [media service](../ems/index.md) installed, two more columns follow: its lanes, with
   their slots and the requests in them, and the models it holds, the working ones first.
 
-Under the board, each line that is not moving says why.
+Under the board, each line that is not moving says why. When the media service could not run its
+work, that line ends with what the media service answered, such as
+`ems: media.probe: … mount failed: Permission denied (files_unavailable)`.
 
 The table below has a row for every pipeline that is doing something; the idle ones fold into one
 row, **N pipelines idle**, which **show** opens. A total row, **All pipelines**, is at the foot. The

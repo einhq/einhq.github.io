@@ -307,14 +307,14 @@
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
 <td>warn</td>
-<td><code>340 waiting for EMS, which could not run it yet; next try in 1m30s</code></td>
-<td>With the Archive: the media service could not take the jobs; they are tried again on their own. See <a href="../ems/index.html">The media service</a> if it lasts.</td>
+<td><code>340 waiting for EMS, which could not run it yet; next try in 1m30s; it said: …</code></td>
+<td>With the Archive: the media service could not take the jobs; they are tried again on their own. What it answered follows <code>it said:</code>. See <a href="../ems/index.html">The media service</a> if it lasts.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
 <td>warn</td>
 <td><code>340 waiting, the oldest for 2h05m, none done in the last hour</code></td>
-<td>The worker for this line is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab.</td>
+<td>The worker for this line is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab. When its steps could not run yet, the line ends with <code>the last could not run … ago:</code> and why.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
@@ -411,7 +411,7 @@
 <ul>
 <li><strong>Where the work is</strong> draws the work left to right as it moves: <strong>Not started</strong> (changes noticed, work not made yet, by pipeline), <strong>In line</strong> (made, waiting for a worker; each line of work under the workers that serve it, the one a worker is on now outlined), and <strong>Running in EiN</strong> (each worker, its slots and the line it is on, with how much of its turn is left). With the <code>ems</code> module installed, the media service&#39;s lanes and the models it holds follow. Under it, each line that is not moving says why. <a href="processing.html#watch-the-work-on-the-dashboard">Processing and pipelines</a> explains it.</li>
 <li>The pipeline table has a row for each pipeline doing something, with <strong>Workload</strong>, <strong>Not started</strong>, <strong>In line</strong>, <strong>Running</strong>, <strong>Failed</strong>, <strong>Done</strong> and <strong>Cancelled</strong>; the idle ones fold into one row that <strong>show</strong> opens. <strong>In</strong> is the work arriving for it per hour, <strong>Out</strong> what it finished in the last hour, and <strong>Finishes in</strong> the work not started divided by <strong>Out</strong>; <strong>no rate</strong> when nothing finished recently, <code>—</code> when nothing waits. When queue entries were dropped after their delivery attempts, a red <strong>N dropped</strong> stands above the table. Choose a row to see that pipeline&#39;s instances.</li>
-<li><strong>Lines</strong> lists each line of work in the work pools that has something in it or was done lately: <strong>In line</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>Finishes in</strong> and <strong>Oldest in line</strong>. A red <strong>no worker</strong> badge marks a line nothing serves; with the Archive, a yellow <strong>waiting for EMS</strong> badge marks a line resting because the media service refused several of its jobs in a row, with the next try in its tooltip.</li>
+<li><strong>Lines</strong> lists each line of work in the work pools that has something in it or was done lately: <strong>In line</strong>, <strong>Running</strong>, <strong>In</strong>, <strong>Out</strong>, <strong>Finishes in</strong> and <strong>Oldest in line</strong>. A red <strong>no worker</strong> badge marks a line nothing serves; with the Archive, a yellow <strong>waiting for EMS</strong> badge marks a line resting because the media service refused several of its jobs in a row, with the next try and what the media service answered in its tooltip. <strong>EMS could not run one</strong> marks a line whose last job the media service refused, with its answer in the tooltip, until one of the line&#39;s jobs is done.</li>
 <li><strong>Ongoing</strong> lists the instances running now, with how far the running step has come, for a step that says, and how long each has run. Steps that have written nothing and moved no progress for the quiet time are listed above it in a yellow box.</li>
 </ul>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
@@ -432,7 +432,7 @@ pool cancel /var/pools/media --kind gpu-describe</code></pre></div>
 <figure class="shot"><a href="../../assets/shots/system-services@2x.webp"><img src="../../assets/shots/system-services.webp" srcset="../../assets/shots/system-services.webp 1x, ../../assets/shots/system-services@2x.webp 2x" alt="The Services tab: a list of services such as album-metadata, ems-link and http-server, each with the module it comes from, up a few minutes and running, with restart and stop buttons" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>A service that has restarted many times, or is down while enabled, is the row to look at</figcaption></figure>
 <p>An administrator has <strong>Restart</strong> and <strong>Stop</strong> on a running service and <strong>Start</strong> on a stopped one. A disabled service has no buttons; enable it from the terminal first. <a href="services-logs.html">Services and logs</a> explains each service and the commands behind these buttons.</p>
 <h2 id="the-log-tab">The Log tab<a class="anchor" href="#the-log-tab" aria-label="Link to this section"></a></h2>
-<p><strong>Log</strong> has two cards. <strong>Recent problems</strong> shows the last 10 lines logged at WARN or ERROR, newest first, or <strong>Nothing logged at WARN or above</strong>. <strong>Live log</strong> follows the system log, <code>/var/logs/system</code>, as it is written: choose <strong>DEBUG</strong>, <strong>INFO</strong>, <strong>WARN</strong> or <strong>ERROR</strong> to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.</p>
+<p><strong>Log</strong> has two cards. <strong>Recent problems</strong> shows the last 10 lines logged at WARN or ERROR, newest first, each with what was logged beside its message (the step, the pool, what a service answered) under it, or <strong>Nothing logged at WARN or above</strong>. <strong>Live log</strong> follows the system log, <code>/var/logs/system</code>, as it is written: choose <strong>DEBUG</strong>, <strong>INFO</strong>, <strong>WARN</strong> or <strong>ERROR</strong> to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.</p>
 <figure class="shot"><a href="../../assets/shots/system-log@2x.webp"><img src="../../assets/shots/system-log.webp" srcset="../../assets/shots/system-log.webp 1x, ../../assets/shots/system-log@2x.webp 2x" alt="The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Recent problems answers whether anything went wrong while you were not watching</figcaption></figure>
 <p>With the Archive, a warning such as <code>pooled step could not run yet, job waiting</code> means the media service was not ready for a job; the job is tried again on its own, and the kind&#39;s other jobs run meanwhile. <code>pooled step could not run yet, kind resting</code> means it refused several in a row, so the whole kind waits. <a href="services-logs.html">Services and logs</a> covers the logs and <code>dmesg</code>.</p>
 <h2 id="the-activity-tab">The Activity tab<a class="anchor" href="#the-activity-tab" aria-label="Link to this section"></a></h2>
@@ -488,7 +488,7 @@ audit --sid session-01JC4ZK3E2 --no-pipeline</code></pre></div>
 health</code></pre></div>
 <p>On an EiN with the Archive and the <code>ems</code> module, it reads like this:</p>
 <div class="code"><pre tabindex="0"><code>catching up: 1,240 jobs waiting, the slowest kind done in 2h48m
-warn  kind transcribe  40 waiting for EMS, which could not run it yet; next try in 1m30s
+warn  kind transcribe  40 waiting for EMS, which could not run it yet; next try in 1m30s; it said: transcribe-file: ems: speech.transcribe loading whisper (busy)
 ok    ems              EMS 3f2a91c answering, up 2.1h
 ok    intake           12 matched triggers waiting to start pipeline work
 ok    kind faces       1,188 left, 420/h  eta 2.8h</code></pre></div>

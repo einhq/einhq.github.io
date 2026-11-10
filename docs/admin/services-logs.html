@@ -374,7 +374,7 @@ Errors: /var/logs/services/ems-link/stderr.log</code></pre></div>
 <p>Open <strong>Dashboard</strong> under <strong>System</strong> and choose the <strong>Log</strong> tab.</p>
 <figure class="shot"><a href="../../assets/shots/system-log@2x.webp"><img src="../../assets/shots/system-log.webp" srcset="../../assets/shots/system-log.webp 1x, ../../assets/shots/system-log@2x.webp 2x" alt="The System dashboard's Log tab: a Recent problems card listing ten WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Recent problems answers whether anything went wrong; the live log shows what EiN is doing now</figcaption></figure>
 <ul>
-<li><strong>Recent problems</strong> lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message. It is read again every 10 seconds. With none, it says &quot;Nothing logged at WARN or above&quot;.</li>
+<li><strong>Recent problems</strong> lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message, and under it what was logged beside the message as <code>key=value</code>, as <code>dmesg</code> shows it. It is read again every 10 seconds. With none, it says &quot;Nothing logged at WARN or above&quot;.</li>
 <li><strong>Live log</strong> shows <code>/var/logs/system</code> as it is written: the last 200 lines when you open it, then every new line as it arrives, up to 500 kept. It follows the newest line while you are at the bottom, and stays put when you scroll up to read.</li>
 </ul>
 <p>The controls at the right of <strong>Live log</strong>:</p>
