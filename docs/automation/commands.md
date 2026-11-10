@@ -208,11 +208,11 @@ automation-set [--yaml=<string>] [--json=<string>] [--draft] <automation>
 | -------------- | ------------------- |
 | `<automation>` | <name> or its file. |
 
-| Option            | What it does                                                    |
-| ----------------- | --------------------------------------------------------------- |
-| `--yaml=<string>` | the YAML, written as given.                                     |
-| `--json=<string>` | its graph as JSON, written as YAML.                             |
-| `--draft`         | write it even with problems; it is not run until they are gone. |
+| Option            | What it does                                                                           |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| `--yaml=<string>` | the YAML, written as given.                                                            |
+| `--json=<string>` | its graph as JSON, written as YAML.                                                    |
+| `--draft`         | write it even with problems, unless it is not YAML; it is not run until they are gone. |
 
 ```bash
 automation-set hall-light < hall-light.yaml

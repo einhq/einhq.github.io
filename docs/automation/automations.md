@@ -25,18 +25,22 @@ An automation opens on three tabs, under its name in the bar:
   the kinds; it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
   card's outputs on its right edge to another card to wire them: `true` is the green output, `false`
   the red one, and a switch has one per case. Tap a card to set it up in the panel over the right
-  of the graph (a drawer on a phone), with a device and endpoint picker for what it reads or
-  switches; tap a wire and the red bin in the corner, or press Delete, to take it out. While the
+  of the graph (a drawer on a phone). A card that reads or switches a device has the device to
+  pick, and under it the device's endpoints (its controls, on a card that switches) with their
+  latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out. While the
   automation runs, each card says what its node last sent and when, or when its timer runs out.
 - **YAML**: the file itself, to read or change as typed.
 - **Runs**: what it did, as its [run log](#see-what-automations-did) has it, as it happens.
 
 The bar also says whether it runs, or how many problems it has: tap **3 problems** to read them,
 and one of them to pick the card it is about. Each card with a problem has a red border and says
-what it is. **Save** writes the changes; one with problems can only be saved as a draft
-(**Save as draft**), which does not run until they are gone, and the round arrow beside it reads
-the file again, dropping them. **On** turns the automation on and off. A save from the graph
-writes the YAML anew, so comments in the file are lost; a save from the YAML tab keeps it as typed.
+what it is. There is no Save: every change saves itself a moment after you make it, also when it
+leaves problems, and an automation with problems is not run until they are gone. The bar says
+**Saving…** and then **Saved**; YAML typed in the YAML tab is saved once it is YAML again, and
+until then the bar says **Not saved** and why: tap it to try again, or the round arrow beside it to
+read the file again, dropping what was not saved. **On** turns the automation on and off. A change
+in the graph writes the YAML anew, so comments in the file are lost; one in the YAML tab keeps it
+as typed.
 Opening an automation's file in **System → Nodes** ([Nodes](../concepts/nodes.md)) opens it here
 too.
 
@@ -91,7 +95,7 @@ lamp is switched on; when the timer says false, it is switched off.
 
    An automation that is wrong somewhere is not written, and `automation-set` says which node and
    what is wrong with it. `--draft` writes it anyway, to finish later; it is not run until it is
-   right.
+   right. Text that is not YAML at all is never written.
 2. Check it:
 
    ```bash

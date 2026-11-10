@@ -113,18 +113,22 @@ two fingers, a double tap to zoom in). Add a node with <strong>+</strong> in the
 the kinds; it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
 card&#39;s outputs on its right edge to another card to wire them: <code>true</code> is the green output, <code>false</code>
 the red one, and a switch has one per case. Tap a card to set it up in the panel over the right
-of the graph (a drawer on a phone), with a device and endpoint picker for what it reads or
-switches; tap a wire and the red bin in the corner, or press Delete, to take it out. While the
+of the graph (a drawer on a phone). A card that reads or switches a device has the device to
+pick, and under it the device&#39;s endpoints (its controls, on a card that switches) with their
+latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out. While the
 automation runs, each card says what its node last sent and when, or when its timer runs out.</li>
 <li><strong>YAML</strong>: the file itself, to read or change as typed.</li>
 <li><strong>Runs</strong>: what it did, as its <a href="#see-what-automations-did">run log</a> has it, as it happens.</li>
 </ul>
 <p>The bar also says whether it runs, or how many problems it has: tap <strong>3 problems</strong> to read them,
 and one of them to pick the card it is about. Each card with a problem has a red border and says
-what it is. <strong>Save</strong> writes the changes; one with problems can only be saved as a draft
-(<strong>Save as draft</strong>), which does not run until they are gone, and the round arrow beside it reads
-the file again, dropping them. <strong>On</strong> turns the automation on and off. A save from the graph
-writes the YAML anew, so comments in the file are lost; a save from the YAML tab keeps it as typed.
+what it is. There is no Save: every change saves itself a moment after you make it, also when it
+leaves problems, and an automation with problems is not run until they are gone. The bar says
+<strong>Saving…</strong> and then <strong>Saved</strong>; YAML typed in the YAML tab is saved once it is YAML again, and
+until then the bar says <strong>Not saved</strong> and why: tap it to try again, or the round arrow beside it to
+read the file again, dropping what was not saved. <strong>On</strong> turns the automation on and off. A change
+in the graph writes the YAML anew, so comments in the file are lost; one in the YAML tab keeps it
+as typed.
 Opening an automation&#39;s file in <strong>System → Nodes</strong> (<a href="../concepts/nodes.html">Nodes</a>) opens it here
 too.</p>
 <p>A module&#39;s automation is shown but not changed here, with the module&#39;s name in the bar, and only
@@ -161,7 +165,7 @@ lamp is switched on; when the timer says false, it is switched off.</p>
 automation-set hall-light &lt; /etc/automations/hall-light.yaml</code></pre></div>
 <p>An automation that is wrong somewhere is not written, and <code>automation-set</code> says which node and
 what is wrong with it. <code>--draft</code> writes it anyway, to finish later; it is not run until it is
-right.</p>
+right. Text that is not YAML at all is never written.</p>
 </li>
 <li><p>Check it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
