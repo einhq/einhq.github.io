@@ -163,7 +163,7 @@ card memory      low      12282 MB: works; 16 GB is recommended, room for the me
 container GPU    ok       nvidia-container-toolkit 1.18.1, CDI spec in /var/run/cdi</code></pre></div>
 <p>To run only the checks, without installing anything:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --check --ems --llm</code></pre></div>
 <h2 id="prepare-the-machine">Prepare the machine<a class="anchor" href="#prepare-the-machine" aria-label="Link to this section"></a></h2>
 <p>The containers reach the card through CDI, the Container Device Interface: a file that describes the card&#39;s devices and libraries, which the container engine reads when a container asks for <code>nvidia.com/gpu=all</code>. These steps need root, once per machine and again after reinstalling its operating system.</p>
 <ol>

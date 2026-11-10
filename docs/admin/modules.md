@@ -223,11 +223,41 @@ modules it needs:
 ```
 
 `setup.sh` adds the name to `EIN_MODULES` in `~/ein/.env` and, as on every run, fetches the newest
-sources, builds and starts EiN again, which installs every module named there that is missing. One installed already is left as it is, at whatever version,
-without asking GitHub, so a restart never updates a module. If EiN cannot download one at its
-start, its log says `some of INSTALL_MODULES could not be installed; continuing boot` and EiN
-starts without it; install it from **Settings → Modules** once EiN is up.
+sources, builds and starts EiN again, which installs every module named there that is missing.
+At the end `setup.sh` lists the modules installed, each with its version and the release it was
+installed at, and below them the lines EiN's start logged about a module it could not install or
+run:
+
+```text
+The modules installed:
+  archive 0.3.1 (v0.3.1)
+  assistant 0.2.0 (v0.2.0)
+  ems 0.1.2 (v0.1.2)
+```
+
+If EiN cannot download a module at its start, its log says `some modules could not be installed or
+replaced; continuing boot`, and the `mod install:` line below the list says why. EiN starts without
+it; install it from **Settings → Modules** once EiN is up.
 [Installing in detail](install.md) has the other options.
+
+### What EiN's start does with installed modules
+
+At every start EiN goes through the modules installed from a repository. One it can run is left as
+it is, at whatever version, without asking GitHub, so a restart never updates it. One installed at
+a release written for a module API this EiN does not provide, as after an update of EiN that
+changed the API, is replaced from its repository by the newest release this EiN can run, as
+`mod install` without a ref would take it, and a module it needs that this EiN cannot run either is
+replaced the same way. The log says so:
+
+```text
+archive 0.3.1 is installed and needs core API ^0.7.0, and this core provides 0.8.0
+Fetching https://github.com/einhq/module-archive at v0.4.0 (8c2e41d07)...
+```
+
+The release it takes can be older than the newest published: when the newest needs a newer EiN
+than this one, it takes the newest that runs here. When no release runs here, the module stays as
+it was, does not set up, and `setup.sh`'s list ends with the reason, such as
+`mod install: archive: needs @ein/client ^0.7.0, this core provides 0.8.0`.
 
 ## Update a module
 
@@ -401,7 +431,7 @@ Forgejo and Gitea do. [Writing a module](../develop/modules.md) is for making on
 
 A module installed from its repository is kept in a folder of its own outside EiN's container, so
 it stays when EiN is updated or its container is made again. With the standard installation that
-folder is `modules/` in the data folder, `~/ein/data/modules` unless you chose another `EIN_DATA`.
+folder is `modules/` in the data folder, `~/ein/data/modules` unless you chose another data folder.
 Inside EiN it is `/var/lib/modules`, and each module is linked as `/usr/modules/<name>`. Each
 module's `.install.json` records the repository, the branch or tag, the commit and when it was
 installed.
@@ -426,11 +456,11 @@ Open **Settings → Modules**: a module that does not work is at the top of the 
 **Setup failed.** Its panel shows "Its setup failed" with each problem, as `mod list --long`
 does. The usual ones:
 
-| Problem                                                           | What to do                                                                                                                                            |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                               |
-| `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                           |
-| `archive: needs @ein/client ^0.7.0, this core provides 0.6.0`     | The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one. |
+| Problem                                                           | What to do                                                                                                                                                                                     |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                                                                        |
+| `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                                                                    |
+| `archive: needs @ein/client ^0.7.0, this core provides 0.6.0`     | The module is written for another version of EiN, often after EiN was updated, and EiN's start found no release of it that fits. Update the module once one is published; until then it waits. |
 
 After fixing the cause, set the module up again with `mod setup archive`, or every module with
 `mod setup --all`, which is what EiN runs at each start. Restarting EiN does the same.

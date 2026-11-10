@@ -36,24 +36,70 @@ sudo apt install podman podman-compose git curl
 ```
 
 > [!NOTE]
-> When both podman and Docker are installed, EiN uses podman. To use Docker, put `EIN_ENGINE=docker` in front of `bash` in the install command. `setup.sh` keeps the engine in `.env`, and every later run uses it. The installer's own checks still look at podman when it is there. [Installing in detail](../admin/install.md) explains what happens when the two are mixed.
+> When both podman and Docker are installed, EiN uses podman. To use Docker, add `--engine docker` after `bash -s --` in the install command, as in `curl -fsSL https://einhq.eu/install.sh | bash -s -- --engine docker`. `setup.sh` keeps the engine in `.env`, and every later run uses it. The installer's own checks still look at podman when it is there. [Installing in detail](../admin/install.md) explains what happens when the two are mixed.
 
 ## Choose what to install
 
-Both ways check the machine first and install nothing when it falls short.
+The installer asks how to install EiN, checks the machine against what you chose, and installs nothing when it falls short.
 
-**Answer its questions.** Run on its own, the installer asks about each of EiN's official modules, one line each: type `y` and Enter for one you want, Enter alone to leave it out. Leave them all out for **EiN Core**: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP.
+**Answer its questions.** Run at a terminal, the installer asks one thing at a time, each with its default in brackets: <kbd>Enter</kbd> keeps the default.
 
 ```bash
 # on the machine that will run EiN, as your own user
 curl -fsSL https://einhq.eu/install.sh | bash
 ```
 
-**Name the modules.** The modules you want, named after `bash -s --`, install the same without a question. For **EiN Archive**, the full Archive installation, that is the [Archive](../archive/index.md) and the [assistant](../assistant/index.md):
+```text
+Installing EiN. Enter takes the default in brackets; any of these can be changed later.
+
+Where EiN goes [/home/anna/ein]:
+The folder for your files, the database among them [/home/anna/ein/data]: /mnt/photos/ein
+The admin account's password, 8 characters or more [Enter: one is made for you]:
+EiN's official modules: y installs one, Enter leaves it out. Any can be added later.
+  archive        photos, videos and documents, people and places; with the media service, ~30 GB [y/N] y
+  assistant      a chat that answers questions; with a language model here, about 6 GB [y/N] y
+  automation     sensors, plugs and lights, and automations; with an MQTT broker [y/N]
+  album-folders  the Archive's albums as folders on disk; brings the Archive [y/N]
+  recipes        recipes with ingredients, steps and pictures; with the media service [y/N]
+  todo           todo lists, personal or shared within a group [y/N]
+The web interface's port [8080]:
+SSH and SFTP's port [2222]:
+Can other machines reach EiN? n keeps it to this machine, behind an HTTPS proxy of your own [Y/n]
+
+EiN is to be installed with:
+  folder          /home/anna/ein
+  your files      /mnt/photos/ein
+  admin password  one made for you, shown at the end
+  modules         archive assistant, with the media service, the language model
+  web interface   port 8080, every address of this machine
+  SSH and SFTP    port 2222
+Install? [Y/n]
+```
+
+| Question                     | Default                    | What it decides                                                                                                                                                                                                         |
+| ---------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Where EiN goes               | `~/ein`                    | The folder for `setup.sh`, the compose files and `.env`.                                                                                                                                                                |
+| The folder for your files    | `~/ein/data`               | Your originals, their thumbnails, the installed modules and the database. Put it on a disk with room for your originals, in a folder your user can write to. It is chosen once: later runs keep it.                     |
+| The admin account's password | one made for you           | The `admin` account's first password: 8 characters or more, without `'` or `\`. It is not shown as you type, and asked twice. <kbd>Enter</kbd> alone makes one, which is shown at the end.                              |
+| The official modules         | none                       | Each module on a line of its own: `y` and <kbd>Enter</kbd> installs it, <kbd>Enter</kbd> alone leaves it out. Leave them all out for **EiN Core**: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP. |
+| The web interface's port     | 8080, or the next free one | The port of the machine the Web UI is reached on. When something else has 8080, the question offers the next free port and says `(8080 is taken)`.                                                                      |
+| SSH and SFTP's port          | 2222, or the next free one | The port of the machine SSH and SFTP are reached on.                                                                                                                                                                    |
+| Can other machines reach EiN | yes                        | `n` keeps EiN to the machine itself, for an HTTPS proxy of your own on the same machine; see [Ports, HTTPS and remote access](../admin/network.md).                                                                     |
+
+Then it shows what the answers add up to and asks `Install? [Y/n]`. <kbd>Enter</kbd> installs; `n` stops with `Nothing was installed.`
+
+**Name the modules.** The modules you name after `bash -s --` are installed without the question about modules; the installer still asks the others. For **EiN Archive**, the full Archive installation, that is the [Archive](../archive/index.md) and the [assistant](../assistant/index.md):
 
 ```bash
 # on the machine that will run EiN, as your own user
 curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant
+```
+
+**Take the defaults.** `--yes`, or `-y`, asks nothing: EiN goes in `~/ein`, your files in `~/ein/data`, a password is made for the admin, the ports are 8080 and 2222, or the next free ones, on every address of the machine, and the modules are those you name. Run without a terminal, such as from a script, the installer does the same and says `No terminal to ask on: installing with the defaults and the options given, as --yes does.`
+
+```bash
+# on the machine that will run EiN, as your own user
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --yes archive assistant
 ```
 
 A module's name brings the services it needs:
@@ -67,7 +113,21 @@ A module's name brings the services it needs:
 | `recipes`       | [Recipes](../recipes/index.md), with the media service, which makes the pictures' thumbnails.                                 |
 | `todo`          | [Todo](../todo/index.md) lists.                                                                                               |
 
-The installer asks nothing when EiN is installed already, or when it is not run at a terminal. Everything after `bash -s --` other than a module's name is passed on to `~/ein/setup.sh`, EiN's own setup script, and the names become its options: `archive` is `--ems --module archive`. Its options can be given the same way:
+Run again where EiN is installed, the installer asks nothing: it updates EiN with the settings it has ([Updating](../admin/updating.md)).
+
+An option answers its question, which the installer then does not ask:
+
+| Option                                    | Answers                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `--home <folder>`                         | Where EiN goes.                                                                                         |
+| `--data <folder>`                         | The folder for your files.                                                                              |
+| A module's name, or `--module <name>`     | Which modules to install.                                                                               |
+| `--http-port <port>`, `--ssh-port <port>` | The ports.                                                                                              |
+| `--bind <address>`                        | Whether other machines reach EiN: `0.0.0.0` for every address of the machine, `127.0.0.1` for it alone. |
+
+The admin password is not an option, so that it stays off the command line: the installer takes it from `INITIAL_ADMIN_PASSWORD` in its environment instead of asking. [Installing in detail](../admin/install.md#the-variables) shows how.
+
+Everything after `bash -s --` other than a module's name and `--home`, `--yes` and `--check` is passed on to `~/ein/setup.sh`, EiN's own setup script, and the names become its options: `archive` is `--ems --module archive`. Its options can be given the same way:
 
 | Option                 | What it adds                                                                                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -82,25 +142,25 @@ The installer asks nothing when EiN is installed already, or when it is not run 
 
 ### Check the machine without installing
 
-`EIN_CHECK=1` runs the checks for the options you give and stops. A variable for the installer goes in front of `bash`, not in front of `curl`:
+`--check` runs the checks for the options you give and stops, asking nothing:
 
 ```bash
 # on the machine that will run EiN
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- archive assistant
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --check archive assistant
 ```
 
 You can read the installer before you run it: it is at [einhq.eu/install.sh](https://einhq.eu/install.sh), and its source is on [GitHub](https://github.com/einhq/einhq.github.io/blob/main/install.sh).
 
 ### Choose where your files go
 
-EiN goes in `~/ein`, and your files in `~/ein/data` unless you name another folder with `EIN_DATA`. The folder holds your originals, so put it on a disk with room for them, in a folder your user can write to:
+EiN goes in `~/ein`, and your files in `~/ein/data`, unless you answer the questions with other folders or name them with `--home` and `--data`. The folder for your files holds your originals, so put it on a disk with room for them, in a folder your user can write to:
 
 ```bash
 # on the machine that will run EiN, as your own user
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- archive assistant
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --data /mnt/photos/ein archive assistant
 ```
 
-`EIN_DATA` is read only by the first install, when `~/ein/.env` is written. Later runs keep the folder named there.
+The folder for your files is chosen at the first install, when `~/ein/.env` is written. Later runs keep the folder named there, and `setup.sh` refuses another `--data`.
 
 ## Run the installer
 
@@ -146,18 +206,19 @@ The disk check measures the free space where your files go. The images and the d
 
 ## What the installer does
 
-![Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, downloads the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password](../diagrams/install-flow.svg "One command does all of it: the installer downloads and starts EiN, and EiN sets itself up at its first start")
+![Two lanes: the installer on your machine asks how to install EiN, checks the machine, fetches ein/deploy into ~/ein, writes .env, downloads the images and starts them with compose; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address, and the admin password when it made it](../diagrams/install-flow.svg "One command does all of it: the installer downloads and starts EiN, and EiN sets itself up at its first start")
 
-Once the checks pass, the installer:
+The installer asks its questions first, at a first install, and then checks the machine against what you chose. Once the checks pass, it:
 
 1. Fetches [ein/deploy](https://github.com/einhq/deploy) into `~/ein`, or updates it when it is there already, and runs `~/ein/setup.sh` with your options.
-2. `setup.sh` writes `~/ein/.env` the first time: your options, the folder for your files, and the passwords it makes for the database, the media service and the `admin` account.
+2. `setup.sh` writes `~/ein/.env` the first time: your options, the folder for your files, the ports, the passwords it makes for the database and the media service, and the `admin` account's first password, the one you chose or one it makes.
 3. It downloads the images of EiN and its database, and of the media service and the model when you chose them. Their sources, for the media service and the model, it fetches into `~/ein/src`.
 4. From an organisation of your own (`--source`), it fetches the sources into `~/ein/src` instead and builds the images on your machine; [Where the sources come from](../admin/install.md#where-the-sources-come-from) explains it.
 5. It starts everything with `podman compose` or `docker compose`, and waits for EiN to answer.
 6. At its first start, EiN sets up its database, makes the `admin` account, downloads the modules you named and the modules they need, sets them up, starts its services, and gives `admin` the password `INITIAL_ADMIN_PASSWORD` in `.env`.
-7. `setup.sh` prints the address of EiN and the admin password, which it prints again at the end of every run until you delete its line from `.env`.
+7. `setup.sh` prints the address of EiN. A password it made for the admin it prints too, and again at the end of every run until you delete its line from `.env`. A password you chose it removes from `.env` once EiN has taken it, and says `Sign in as admin with the password you chose.`
 8. It makes EiN start again when the machine does, where your user may: under podman it turns on `podman-restart.service` for your user and lets your user's services run without a login. What it may not do, it prints as commands for you to run, such as `sudo loginctl enable-linger anna`.
+9. It lists the modules installed, each with its version and the release it was installed at, and below them any line EiN's start logged about a module it could not install or run.
 
 The end of a run looks like this:
 
@@ -182,7 +243,13 @@ Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete t
 Enabled podman-restart.service, which starts EiN's containers at boot
 Enabled lingering for anna, so podman-restart.service runs at boot without a login
 EiN starts again when the machine does.
+The modules installed:
+  archive 0.3.1 (v0.3.1)
+  assistant 0.2.0 (v0.2.0)
+  ems 0.1.2 (v0.1.2)
 ```
+
+The `ems` module comes with the Archive, which needs it.
 
 ### How long it takes
 
@@ -194,12 +261,12 @@ With the media service and the model, two parts are still getting ready when the
 
 ### What is where
 
-| Where                            | What it holds                                                                                                    |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `~/ein`                          | `setup.sh`, the compose files, the sources under `src/`, and `.env`                                              |
-| `~/ein/.env`                     | your options and the passwords made at the install, kept nowhere else                                            |
-| `~/ein/data`, or your `EIN_DATA` | your originals, the thumbnails and other renditions, scratch space, the language model and the installed modules |
-| `~/ein/data/db`                  | the database: every name, folder, album, person, setting and account                                             |
+| Where                                 | What it holds                                                                                                    |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `~/ein`                               | `setup.sh`, the compose files, the sources under `src/`, and `.env`                                              |
+| `~/ein/.env`                          | your options and the passwords made at the install, kept nowhere else                                            |
+| `~/ein/data`, or the folder you chose | your originals, the thumbnails and other renditions, scratch space, the language model and the installed modules |
+| `~/ein/data/db`                       | the database: every name, folder, album, person, setting and account                                             |
 
 Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) explains what to copy and why the database and the data folder belong together.
 
@@ -207,27 +274,28 @@ Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) expla
 
 1. Open the address `setup.sh` printed, such as `http://ein:8080/`, in a browser. On the machine itself, `http://localhost:8080/` works too. If another computer cannot find the machine by that name, use its address instead, such as `http://ein.local:8080/` or `http://192.168.1.20:8080/`.
 2. In **Username or e-mail**, type `admin`.
-3. In **Password**, type or paste the password `setup.sh` printed, and click **Sign in**.
+3. In **Password**, type the password you chose at the install, or paste the one `setup.sh` printed, and click **Sign in**.
 
 ![The EiN sign-in page: the fields Username or e-mail and Password, the Sign in button, and Browse without signing in below it](../../assets/shots/login.webp "The sign-in page. Browse without signing in appears only when visitors may browse, which is off after an install")
 
 You land on the home page, **Welcome**. What it shows comes from the modules: with the Archive it fills as pictures come in, and on EiN Core alone it stays empty. There is no setup wizard: [First steps](first-steps.md) walks you from here to a family using it.
 
-EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read [Ports, HTTPS and remote access](../admin/network.md). When something else on the machine already uses 8080 or 2222, `setup.sh` gives EiN the next free port instead, says so (`Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)`), keeps it in `.env`, and prints the address with it.
+EiN listens on the ports you chose, 8080 for the web and 2222 for SSH and SFTP unless you chose others, on every address of the machine unless you kept it to the machine itself, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read [Ports, HTTPS and remote access](../admin/network.md). When something else on the machine already uses 8080 or 2222, `setup.sh` gives EiN the next free port instead, says so (`Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)`), keeps it in `.env`, and prints the address with it.
 
 ## Change the admin password straight away
 
-Do this before anything else:
+Do this before anything else when `setup.sh` made the password:
 
 - The password is in `~/ein/.env`, as `INITIAL_ADMIN_PASSWORD`, readable by anyone who can read that file, and `setup.sh` prints it at the end of every run while the line is there.
 - Once you have changed it, delete that line from `.env`. Changing the line does not change the password: EiN reads it only at its first start.
+- A password you chose at the install is not kept there: `setup.sh` removes it from `.env` once EiN has taken it, so there is nothing to delete, and you need not change it.
 - EiN has no way to recover a lost administrator password. Only another administrator can set a new one, and a fresh install has no other.
 
 ### In the Web UI
 
 1. Click your picture at the top right to open the account menu, and choose **Profile**.
 2. Open the **Security** tab.
-3. In **Current password**, enter the password `setup.sh` printed.
+3. In **Current password**, enter the admin's password, the one `setup.sh` printed.
 4. Enter your own password in **New password**, and again in **Confirm new password**.
 5. Click **Update password**. **Password updated** appears beside the button.
 
@@ -271,20 +339,20 @@ Instead of `--llm`, the assistant can use a hosted model, set in `~/ein/.env`: s
 
 The commands here are written for podman. With Docker, write `docker compose` where they say `podman compose`.
 
-| What you see                                                                                      | What to do                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<n> requirement(s) not met, so nothing was installed.`                                           | Nothing was changed. Install or free what the `missing` lines name, and run the command again.                                                                                                                                                                                                                                                                                                                        |
-| The `podman` line says `low` and `run as root here: run the installer, and EiN, as your own user` | You ran the installer as root. Run it again as your own user, without `sudo`.                                                                                                                                                                                                                                                                                                                                         |
-| The `compose` line says `missing` and `install podman-compose, which 'podman compose' runs`       | Install `podman-compose`, or for Docker its compose plugin, and run the command again.                                                                                                                                                                                                                                                                                                                                |
-| A line about an external compose provider each time `podman compose` runs                         | podman's own notice that `podman compose` runs `podman-compose`. It is not an error.                                                                                                                                                                                                                                                                                                                                  |
-| `setup.sh: EiN stopped before it answered; its log is above: podman compose logs ein`             | EiN's container stopped, or restarted three times. The last lines of its log are printed above the message; they name what went wrong. See [Troubleshooting](../admin/troubleshooting.md).                                                                                                                                                                                                                            |
-| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`   | Look at what EiN is doing with `cd ~/ein && podman compose logs ein`. A first start that downloads modules over a slow connection can take this long; `podman compose ps` shows whether it still runs.                                                                                                                                                                                                                |
-| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                 | The container engine cannot hand the graphics card to the containers. podman before 5, such as 4.9.3 on Ubuntu 24.04, needs a fix once per machine, which the installer's `container GPU` line names: see [The graphics card](../ems/gpu.md).                                                                                                                                                                         |
-| No `Sign in as admin` line at the end                                                             | `.env` has no `INITIAL_ADMIN_PASSWORD` line: you deleted it, or `.env` was written before `setup.sh` kept the password there. In the second case a new EiN printed a random password to its log, below. When nothing is there, the database was there from an earlier install, so the admin already had a password, or the containers have been made again since. See [Troubleshooting](../admin/troubleshooting.md). |
-| `some of INSTALL_MODULES could not be installed; continuing boot` in the log                      | EiN could not download a module, often for want of a connection to GitHub. Install it from **Settings → Modules** once EiN is up.                                                                                                                                                                                                                                                                                     |
-| The address does not open on another computer                                                     | Use the machine's IP address instead of its name, and open ports 8080 and 2222 in the machine's firewall if it has one. See [Ports, HTTPS and remote access](../admin/network.md).                                                                                                                                                                                                                                    |
-| `EiN does not start again when the machine does until this has run:` at the end                   | `setup.sh` could not turn on what starts EiN at boot, such as lingering for your user. Run the commands listed below the line; until then, start EiN after a reboot with `cd ~/ein && podman compose up -d`. [Installing in detail](../admin/install.md#start-ein-when-the-machine-boots) explains.                                                                                                                   |
-| Uploads in the Archive get no thumbnails                                                          | The media service is not installed, or is not answering yet. Without it, the installer's `archive` line says `low` and `setup.sh` ends with `The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.` Add it with `~/ein/setup.sh --ems`, or see [The media service](../ems/index.md).                                                                                     |
+| What you see                                                                                      | What to do                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<n> requirement(s) not met, so nothing was installed.`                                           | Nothing was changed. Install or free what the `missing` lines name, and run the command again.                                                                                                                                                                                                                                                                                                                                                                                                              |
+| The `podman` line says `low` and `run as root here: run the installer, and EiN, as your own user` | You ran the installer as root. Run it again as your own user, without `sudo`.                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| The `compose` line says `missing` and `install podman-compose, which 'podman compose' runs`       | Install `podman-compose`, or for Docker its compose plugin, and run the command again.                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| A line about an external compose provider each time `podman compose` runs                         | podman's own notice that `podman compose` runs `podman-compose`. It is not an error.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `setup.sh: EiN stopped before it answered; its log is above: podman compose logs ein`             | EiN's container stopped, or restarted three times. The last lines of its log are printed above the message; they name what went wrong. See [Troubleshooting](../admin/troubleshooting.md).                                                                                                                                                                                                                                                                                                                  |
+| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`   | Look at what EiN is doing with `cd ~/ein && podman compose logs ein`. A first start that downloads modules over a slow connection can take this long; `podman compose ps` shows whether it still runs.                                                                                                                                                                                                                                                                                                      |
+| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                 | The container engine cannot hand the graphics card to the containers. podman before 5, such as 4.9.3 on Ubuntu 24.04, needs a fix once per machine, which the installer's `container GPU` line names: see [The graphics card](../ems/gpu.md).                                                                                                                                                                                                                                                               |
+| No `Sign in as admin` line at the end                                                             | `.env` has no `INITIAL_ADMIN_PASSWORD` line: you chose the password at the install, and `setup.sh` removed it once EiN had taken it; you deleted it; or `.env` was written before `setup.sh` kept the password there. In the last case a new EiN printed a random password to its log, below. When nothing is there, the database was there from an earlier install, so the admin already had a password, or the containers have been made again since. See [Troubleshooting](../admin/troubleshooting.md). |
+| `some modules could not be installed or replaced; continuing boot` in the log                     | EiN could not download a module, often for want of a connection to GitHub, or found no release of an installed one that it can run. The `mod install:` lines at the end of `setup.sh`'s output say which and why. Install or update it from **Settings → Modules** once EiN is up.                                                                                                                                                                                                                          |
+| The address does not open on another computer                                                     | Use the machine's IP address instead of its name, and open ports 8080 and 2222 in the machine's firewall if it has one. See [Ports, HTTPS and remote access](../admin/network.md).                                                                                                                                                                                                                                                                                                                          |
+| `EiN does not start again when the machine does until this has run:` at the end                   | `setup.sh` could not turn on what starts EiN at boot, such as lingering for your user. Run the commands listed below the line; until then, start EiN after a reboot with `cd ~/ein && podman compose up -d`. [Installing in detail](../admin/install.md#start-ein-when-the-machine-boots) explains.                                                                                                                                                                                                         |
+| Uploads in the Archive get no thumbnails                                                          | The media service is not installed, or is not answering yet. Without it, the installer's `archive` line says `low` and `setup.sh` ends with `The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.` Add it with `~/ein/setup.sh --ems`, or see [The media service](../ems/index.md).                                                                                                                                                                           |
 
 To find a random admin password in the log, as long as the containers have not been made again since:
 

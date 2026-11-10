@@ -170,8 +170,8 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 <td>EiN is downloading modules. Wait, and follow it with <code>podman compose logs -f ein</code>.</td>
 </tr>
 <tr>
-<td><code>some of INSTALL_MODULES could not be installed; continuing boot</code> in the log</td>
-<td>EiN could not download a module, often for want of a connection to GitHub. EiN starts without it; install it from <strong>Settings → Modules</strong> once EiN is up.</td>
+<td><code>some modules could not be installed or replaced; continuing boot</code> in the log</td>
+<td>EiN could not download a module, often for want of a connection to GitHub, or found no release of an installed one that it can run. EiN starts without it; the <code>mod install:</code> lines at the end of <code>setup.sh</code>&#39;s output say which and why. Install or update it from <strong>Settings → Modules</strong> once EiN is up.</td>
 </tr>
 <tr>
 <td><code>module setup completed with failures; continuing boot</code> in the log</td>
@@ -210,11 +210,11 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </thead>
 <tbody><tr>
 <td><code>setup.sh</code> showed no admin password at the end</td>
-<td><code>setup.sh</code> shows <code>INITIAL_ADMIN_PASSWORD</code> from <code>~/ein/.env</code>, and the line is gone: you deleted it, or <code>.env</code> was written before <code>setup.sh</code> kept the password there. Then a new EiN made a random one and wrote it to its log once, as <code>Admin password set to:</code>; find it with <code>podman compose logs ein | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
+<td><code>setup.sh</code> shows a password it made, from <code>INITIAL_ADMIN_PASSWORD</code> in <code>~/ein/.env</code>. A password you chose at the install it never shows: it says <code>Sign in as admin with the password you chose.</code> and removes the line once EiN has taken it. Otherwise the line is gone because you deleted it, or because <code>.env</code> was written before <code>setup.sh</code> kept the password there. Then a new EiN made a random one and wrote it to its log once, as <code>Admin password set to:</code>; find it with <code>podman compose logs ein | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
 </tr>
 <tr>
 <td>The <code>admin</code> password is lost</td>
-<td>Once changed, nothing keeps it; the <code>INITIAL_ADMIN_PASSWORD</code> line in <code>.env</code> holds only the first one, which works only until it is changed. A member of the group <code>sudo</code> signs in, chooses <strong>Administer…</strong> in the account menu, and sets a new one on the <strong>Users</strong> tab of <strong>Settings</strong>, under <strong>Password</strong>, or types <code>admin</code> and then <code>user-passwd admin</code> in the terminal. EiN has no way to reset it from the machine, so <a href="accounts.html#let-a-second-person-administer">let a second person administer</a> before you need it.</td>
+<td>Once changed, nothing keeps it; the <code>INITIAL_ADMIN_PASSWORD</code> line in <code>.env</code> holds only a first one <code>setup.sh</code> made, which works only until it is changed, and a password you chose at the install is not kept at all. A member of the group <code>sudo</code> signs in, chooses <strong>Administer…</strong> in the account menu, and sets a new one on the <strong>Users</strong> tab of <strong>Settings</strong>, under <strong>Password</strong>, or types <code>admin</code> and then <code>user-passwd admin</code> in the terminal. EiN has no way to reset it from the machine, so <a href="accounts.html#let-a-second-person-administer">let a second person administer</a> before you need it.</td>
 </tr>
 <tr>
 <td>Someone&#39;s sign-in fails with the right password</td>

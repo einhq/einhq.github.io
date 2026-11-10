@@ -45,7 +45,7 @@ To run only the checks, without installing anything:
 
 ```bash
 # on the machine that will run EiN
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --check --ems --llm
 ```
 
 ## Prepare the machine

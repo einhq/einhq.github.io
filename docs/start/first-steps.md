@@ -24,16 +24,20 @@ says `podman compose`.
 
 ## Sign in and change the admin password
 
-At its end the install printed the address and the administrator's password:
+At its end the install printed the address and, unless you chose the administrator's password at
+the install, the one it made:
 
 ```text
 EiN is up at http://ein.local:8080/
 Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.
 ```
 
+With a password you chose, the second line is `Sign in as admin with the password you chose.`, and
+you can skip changing it below.
+
 1. Open the address in a browser. If your computer cannot find that name, use the machine's IP
    address instead, such as `http://192.168.1.20:8080/`.
-2. Enter `admin` under **Username or e-mail**, the printed password under **Password**, and choose
+2. Enter `admin` under **Username or e-mail**, the password under **Password**, and choose
    **Sign in**. EiN opens on Home, titled **Welcome**.
 3. Open the account menu under your picture at the top right, choose **Profile**, then the
    **Security** tab.
@@ -53,7 +57,7 @@ user passwd admin
 It asks for the new password after `Password:`. The [reference](../reference/commands-core.md#user-passwd)
 lists its options.
 
-If the install's output is gone, the password is still in `~/ein/.env`, as
+If the install's output is gone, a password `setup.sh` made is still in `~/ein/.env`, as
 `INITIAL_ADMIN_PASSWORD`, and every later run of `./setup.sh` prints it again at its end:
 
 ```bash

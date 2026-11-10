@@ -228,7 +228,7 @@ another module's exports (see [Use another module](#use-another-module)).
 ## Try the module on your EiN
 
 With the standard installation, EiN keeps the modules it installs in `modules/` in its data folder,
-`~/ein/data/modules` unless you chose another `EIN_DATA`, which EiN sees as `/var/lib/modules`.
+`~/ein/data/modules` unless you chose another data folder, which EiN sees as `/var/lib/modules`.
 
 1. Put the module's folder there under the module's name, and make its commands executable:
 

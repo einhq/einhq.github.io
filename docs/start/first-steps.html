@@ -112,13 +112,16 @@ things.</p>
 <p>Commands on this page are written for podman. With Docker, write <code>docker compose</code> where the page
 says <code>podman compose</code>.</p>
 <h2 id="sign-in-and-change-the-admin-password">Sign in and change the admin password<a class="anchor" href="#sign-in-and-change-the-admin-password" aria-label="Link to this section"></a></h2>
-<p>At its end the install printed the address and the administrator&#39;s password:</p>
+<p>At its end the install printed the address and, unless you chose the administrator&#39;s password at
+the install, the one it made:</p>
 <div class="code"><pre tabindex="0"><code>EiN is up at http://ein.local:8080/
 Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.</code></pre></div>
+<p>With a password you chose, the second line is <code>Sign in as admin with the password you chose.</code>, and
+you can skip changing it below.</p>
 <ol>
 <li>Open the address in a browser. If your computer cannot find that name, use the machine&#39;s IP
 address instead, such as <code>http://192.168.1.20:8080/</code>.</li>
-<li>Enter <code>admin</code> under <strong>Username or e-mail</strong>, the printed password under <strong>Password</strong>, and choose
+<li>Enter <code>admin</code> under <strong>Username or e-mail</strong>, the password under <strong>Password</strong>, and choose
 <strong>Sign in</strong>. EiN opens on Home, titled <strong>Welcome</strong>.</li>
 <li>Open the account menu under your picture at the top right, choose <strong>Profile</strong>, then the
 <strong>Security</strong> tab.</li>
@@ -132,7 +135,7 @@ or <kbd>Alt</kbd>+<kbd>T</kbd>, and run:</p>
 user passwd admin</code></pre></div>
 <p>It asks for the new password after <code>Password:</code>. The <a href="../reference/commands-core.html#user-passwd">reference</a>
 lists its options.</p>
-<p>If the install&#39;s output is gone, the password is still in <code>~/ein/.env</code>, as
+<p>If the install&#39;s output is gone, a password <code>setup.sh</code> made is still in <code>~/ein/.env</code>, as
 <code>INITIAL_ADMIN_PASSWORD</code>, and every later run of <code>./setup.sh</code> prints it again at its end:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 grep INITIAL_ADMIN_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>

@@ -355,11 +355,30 @@ modules it needs:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh --module assistant</code></pre></div>
 <p><code>setup.sh</code> adds the name to <code>EIN_MODULES</code> in <code>~/ein/.env</code> and, as on every run, fetches the newest
-sources, builds and starts EiN again, which installs every module named there that is missing. One installed already is left as it is, at whatever version,
-without asking GitHub, so a restart never updates a module. If EiN cannot download one at its
-start, its log says <code>some of INSTALL_MODULES could not be installed; continuing boot</code> and EiN
-starts without it; install it from <strong>Settings → Modules</strong> once EiN is up.
+sources, builds and starts EiN again, which installs every module named there that is missing.
+At the end <code>setup.sh</code> lists the modules installed, each with its version and the release it was
+installed at, and below them the lines EiN&#39;s start logged about a module it could not install or
+run:</p>
+<div class="code"><pre tabindex="0"><code>The modules installed:
+  archive 0.3.1 (v0.3.1)
+  assistant 0.2.0 (v0.2.0)
+  ems 0.1.2 (v0.1.2)</code></pre></div>
+<p>If EiN cannot download a module at its start, its log says <code>some modules could not be installed or replaced; continuing boot</code>, and the <code>mod install:</code> line below the list says why. EiN starts without
+it; install it from <strong>Settings → Modules</strong> once EiN is up.
 <a href="install.html">Installing in detail</a> has the other options.</p>
+<h3 id="what-eins-start-does-with-installed-modules">What EiN&#39;s start does with installed modules<a class="anchor" href="#what-eins-start-does-with-installed-modules" aria-label="Link to this section"></a></h3>
+<p>At every start EiN goes through the modules installed from a repository. One it can run is left as
+it is, at whatever version, without asking GitHub, so a restart never updates it. One installed at
+a release written for a module API this EiN does not provide, as after an update of EiN that
+changed the API, is replaced from its repository by the newest release this EiN can run, as
+<code>mod install</code> without a ref would take it, and a module it needs that this EiN cannot run either is
+replaced the same way. The log says so:</p>
+<div class="code"><pre tabindex="0"><code>archive 0.3.1 is installed and needs core API ^0.7.0, and this core provides 0.8.0
+Fetching https://github.com/einhq/module-archive at v0.4.0 (8c2e41d07)...</code></pre></div>
+<p>The release it takes can be older than the newest published: when the newest needs a newer EiN
+than this one, it takes the newest that runs here. When no release runs here, the module stays as
+it was, does not set up, and <code>setup.sh</code>&#39;s list ends with the reason, such as
+<code>mod install: archive: needs @ein/client ^0.7.0, this core provides 0.8.0</code>.</p>
 <h2 id="update-a-module">Update a module<a class="anchor" href="#update-a-module" aria-label="Link to this section"></a></h2>
 <p>Updating EiN with <code>setup.sh</code> does not update its modules. Update them here instead.</p>
 <ul>
@@ -492,7 +511,7 @@ Forgejo and Gitea do. <a href="../develop/modules.html">Writing a module</a> is 
 <h2 id="where-modules-are-kept">Where modules are kept<a class="anchor" href="#where-modules-are-kept" aria-label="Link to this section"></a></h2>
 <p>A module installed from its repository is kept in a folder of its own outside EiN&#39;s container, so
 it stays when EiN is updated or its container is made again. With the standard installation that
-folder is <code>modules/</code> in the data folder, <code>~/ein/data/modules</code> unless you chose another <code>EIN_DATA</code>.
+folder is <code>modules/</code> in the data folder, <code>~/ein/data/modules</code> unless you chose another data folder.
 Inside EiN it is <code>/var/lib/modules</code>, and each module is linked as <code>/usr/modules/&lt;name&gt;</code>. Each
 module&#39;s <code>.install.json</code> records the repository, the branch or tag, the commit and when it was
 installed.</p>
@@ -527,7 +546,7 @@ does. The usual ones:</p>
 </tr>
 <tr>
 <td><code>archive: needs @ein/client ^0.7.0, this core provides 0.6.0</code></td>
-<td>The module is written for another version of EiN, often after EiN was updated. Update the module; if no published version fits yet, it waits for one.</td>
+<td>The module is written for another version of EiN, often after EiN was updated, and EiN&#39;s start found no release of it that fits. Update the module once one is published; until then it waits.</td>
 </tr>
 </tbody></table>
 </div>
@@ -619,7 +638,7 @@ something are for administrators only.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li class="nested"><a href="#what-eins-start-does-with-installed-modules">What EiN's start does with installed modules</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -101,7 +101,7 @@
           <div class="installs">
             <div class="install-choice install-core">
               <h3><span class="mark" aria-hidden="true"></span>EiN Core</h3>
-              <p>EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. It asks about each official module; answer no for Core alone, and add the rest when you want it.</p>
+              <p>EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. It asks where EiN and your files go, the admin password, which official modules and the ports, each with a default that Enter keeps; answer no to every module for Core alone, and add the rest when you want it.</p>
               <div class="install">
                 <pre class="term term-command"
                   tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span></span></code></pre>
@@ -111,7 +111,7 @@
             </div>
             <div class="install-choice install-archive">
               <h3><span class="mark" aria-hidden="true"></span>EiN Archive</h3>
-              <p>EiN with the media service and the assistant's language model, and the Archive and Assistant modules.</p>
+              <p>EiN with the media service and the assistant's language model, and the Archive and Assistant modules. It asks the rest; <code>--yes</code> after them takes the defaults.</p>
               <div class="install">
                 <pre class="term term-command"
                   tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span> <span class="t-flag">-s --</span></span> <span class="w t-arg">archive</span> <span class="w t-arg">assistant</span></code></pre>
@@ -122,7 +122,7 @@
           </div>
           <p class="install-note">
             Both check the machine first and install nothing when it falls short. Then the installer fetches <a href="https://github.com/einhq/deploy">deploy</a> into
-            <code>~/ein</code>, builds EiN on your machine, starts it, and prints the address and the admin password to sign in with. It needs no root.
+            <code>~/ein</code>, builds EiN on your machine, starts it, and prints the address to sign in at, with the admin password when it made one. It needs no root.
             <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">Read it first</a>.
           </p>
 

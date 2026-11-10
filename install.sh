@@ -1,28 +1,45 @@
 #!/usr/bin/env bash
-# EiN's installer. It checks this machine against EiN's system requirements, then fetches ein/deploy
-# into ~/ein and runs its setup.sh, which downloads EiN's images (or builds them from another
-# source) and starts it with podman compose or docker compose. It needs no root.
+# EiN's installer. It asks how EiN is to be installed, checks this machine against EiN's system
+# requirements, then fetches ein/deploy into ~/ein and runs its setup.sh, which downloads EiN's images
+# (or builds them from another source) and starts it with podman compose or docker compose. It needs
+# no root.
 #
-#   curl -fsSL https://einhq.eu/install.sh | bash                    EiN and its database, and the official modules you pick
-#   curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant
-#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm  with the media service and the assistant's model
+#   curl -fsSL https://einhq.eu/install.sh | bash                          asks, each default shown
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --yes              the defaults, asking nothing
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant  these modules, asking the rest
+#
+# A first install asks, at a terminal: where EiN goes, the folder for your files, the admin's
+# password, which official modules to install, the web interface's and SSH's ports, and whether
+# other machines reach it. Enter takes the default in brackets, and an option given answers its
+# question. Without a terminal, or with --yes, it takes the defaults. Run again where EiN is, it
+# updates it with the settings it has, and asks nothing.
 #
 # An official module's name alone (MODULES below) is that module with the services it needs:
-# archive is --ems --module archive, assistant --llm --module assistant. Run with nothing after it on
-# a machine without EiN, at a terminal, the installer asks yes or no for each official module. The
-# options are setup.sh's, passed on as they are (`--help` lists them). The checks follow them: the
-# media service needs the most of the machine, the card only matters with it or the model.
+# archive is --ems --module archive, assistant --llm --module assistant.
+#
+#   --home DIR          where EiN goes (default: ~/ein); its ./setup.sh updates it or adds an option later
+#   --yes, -y           ask nothing: the defaults, and what the options say
+#   --check             check the machine against what the options ask for, and stop
+#   --data DIR          the folder for your files (default: DIR/data under --home)
+#   --http-port N       the web interface's port (default: 8080, or the next free one)
+#   --ssh-port N        SSH and SFTP's port (default: 2222, or the next free one)
+#   --bind ADDRESS      0.0.0.0, every address of this machine (default), or 127.0.0.1, this machine
+#                       alone, behind an HTTPS proxy of your own
+#
+# Every other option is setup.sh's, passed on as it is (`--help` there lists them): --ems, --llm,
+# --mqtt, --module NAME, --db-dir DIR, --engine, --source URL. The checks follow them: the media
+# service needs the most of the machine, the card only matters with it or the model. The secrets
+# come in the environment, kept off the command line:
+#
+#   INITIAL_ADMIN_PASSWORD  the admin's first password, instead of asking or making one
+#   EIN_SOURCE_KEY          the token for --source's repositories, when they are private
+#
 # --source names the organisation the sources come from instead of GitHub's einhq, such as a Forgejo
-# or a Gitea with EiN's repositories under the same names, deploy among them; with private ones, the
-# token that reads them is EIN_SOURCE_KEY, and this script is fetched from there with it too:
+# or a Gitea with EiN's repositories under the same names, deploy among them; with private ones, this
+# script is fetched from there with the token too:
 #
 #   curl -fsSL -H "Authorization: token $K" 'http://forge.example:3000/api/v1/repos/ein/einhq.github.io/raw/install.sh?ref=main' \
-#     | EIN_SOURCE_KEY=$K bash -s -- --source http://forge.example:3000/ein --ems --module archive
-#
-#   EIN_HOME        where EiN goes (default: ~/ein); run its ./setup.sh to update or add an option later
-#   EIN_DATA        the folder for your files, the first time (default: $EIN_HOME/data)
-#   EIN_SOURCE_KEY  the token for --source's repositories, when they are private
-#   EIN_CHECK       1: check the machine and stop
+#     | EIN_SOURCE_KEY=$K bash -s -- --source http://forge.example:3000/ein archive
 set -uo pipefail
 
 # The official modules: each a name, the setup.sh options for the services it needs, and what it is.
@@ -37,21 +54,49 @@ MODULES=(
 
 # Everything runs from main, called on the last line, so a download cut short runs nothing.
 main() {
-  local home=${EIN_HOME:-$HOME/ein} source= installed= installed_key= data= modules= arg next=
+  local home= yes=0 check=0 interactive=0 pass=() installed= installed_key=
   key=${EIN_SOURCE_KEY:-}
-  # Nothing after it, the first time, with someone at the terminal: they pick the modules.
-  if [ $# = 0 ] && [ ! -f "$home/.env" ]; then
-    picked=()
-    pick
-    set -- "${picked[@]}"
-  fi
-  expanded=()
-  expand "$@"
-  set -- "${expanded[@]}"
-  ems=0 llm=0
+  source= data= data_given=0 http_port= ssh_port= bind= modules= named=0 ems=0 llm=0
   container= container_version=
+  # install.sh's own options taken out; the rest are setup.sh's, passed on.
+  while [ $# -gt 0 ]; do
+    case $1 in
+      --home)
+        [ $# -ge 2 ] || { echo "install.sh: --home needs a folder" >&2; return 1; }
+        home=$(absolute "$2")
+        shift
+        ;;
+      --yes | -y) yes=1 ;;
+      --check) check=1 ;;
+      -h | --help)
+        echo "How it is used is the head of the script: curl -fsSL https://einhq.eu/install.sh | head -45"
+        return
+        ;;
+      *) pass+=("$1") ;;
+    esac
+    shift
+  done
+
+  local os arch
+  os=$(uname -s) arch=$(uname -m)
+  if [ "$os" != Linux ] || [ "$arch" != x86_64 ]; then
+    echo "EiN runs on Linux on x86-64; this is $os on $arch, so nothing was installed."
+    return 1
+  fi
+
+  # Asked at a terminal: stdin is this script, piped from curl, so the answers are read from /dev/tty.
+  if [ "$yes" = 0 ] && [ "$check" = 0 ] && { : </dev/tty; } 2>/dev/null; then interactive=1; fi
+  if [ -z "$home" ]; then
+    home=$HOME/ein
+    if [ "$interactive" = 1 ] && [ ! -f "$home/.env" ]; then
+      echo "Installing EiN. Enter takes the default in brackets; any of these can be changed later."
+      echo
+      home=$(absolute "$(ask "Where EiN goes" "$home")")
+    fi
+  fi
+
   # A machine installed before keeps its options, its modules, its data folder, its source and the
-  # source's token: they are in its .env, and setup.sh reads EIN_DATA only the first time. The token
+  # source's token: they are in its .env, and setup.sh takes --data only the first time. The token
   # is kept only while the source stays on the same host: another one would refuse it.
   if [ -f "$home/.env" ]; then
     grep -qx 'EIN_EMS=1' "$home/.env" && ems=1
@@ -60,44 +105,32 @@ main() {
     data=$(sed -n 's/^EIN_DATA=//p' "$home/.env")
     installed=$(sed -n 's/^EIN_SOURCE=//p' "$home/.env")
     installed_key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
+    [ "$interactive" = 0 ] || echo "EiN is installed in $home: updating it, with the settings it has."
   fi
-  for arg in "$@"; do
-    case $next in
-      source) source=${arg%/} ;;
-      module) modules="$modules $arg" ;;
-    esac
-    if [ -n "$next" ]; then
-      next=
-      continue
+  expanded=()
+  expand "${pass[@]}"
+  pass=("${expanded[@]}")
+  options "${pass[@]}" || return 1
+
+  if [ ! -f "$home/.env" ]; then
+    if [ "$interactive" = 1 ]; then
+      questions || return 1
+    elif [ "$yes" = 0 ] && [ "$check" = 0 ]; then
+      echo "No terminal to ask on: installing with the defaults and the options given, as --yes does."
     fi
-    case $arg in
-      --ems) ems=1 ;;
-      --no-ems) ems=0 ;;
-      --llm) llm=1 ;;
-      --no-llm) llm=0 ;;
-      --module) next=module ;;
-      --source) next=source ;;
-    esac
-  done
+    data=${data:-$home/data}
+    [ "$data_given" = 1 ] || pass+=(--data "$data")
+  fi
   source=${source:-${installed:-https://github.com/einhq}}
   [ -n "$key" ] || [ "$(host_of "$source")" != "$(host_of "$installed")" ] || key=$installed_key
-  data=${data:-${EIN_DATA:-$home/data}}
   failed=0
   warned=0
 
   echo "EiN: checking this machine against the system requirements"
   echo
 
-  # --- system ---
-  local os arch
-  os=$(uname -s) arch=$(uname -m)
-  if [ "$os" = Linux ] && [ "$arch" = x86_64 ]; then
-    say system ok "Linux on x86-64"
-  else
-    need system "EiN runs on Linux on x86-64; this is $os on $arch"
-    summary
-    return
-  fi
+  # --- system: anything else was refused before the questions ---
+  say system ok "Linux on x86-64"
 
   # --- tools ---
   engine
@@ -148,10 +181,10 @@ main() {
     need memory "$memory_gb GB: EiN needs at least 4 GB"
   fi
 
-  # --- disk: measured on the nearest folder that exists, as EIN_DATA may not be made yet ---
+  # --- disk: measured on the nearest folder that exists, as the data folder may not be made yet ---
   local dir=$data free_gb where want_gb=10 what="the images and the database"
   [ "$ems" = 1 ] && want_gb=100
-  # The language model's file, about 5.6 GB, is kept under EIN_DATA.
+  # The language model's file, about 5.6 GB, is kept in the data folder.
   [ "$llm" = 1 ] && want_gb=$((want_gb + 6)) && what="the images, the database and the language model"
   while [ ! -d "$dir" ] && [ "$dir" != / ]; do dir=$(dirname "$dir"); done
   free_gb=$(df -Pk "$dir" 2>/dev/null | awk 'NR == 2 {printf "%d", $4 / 1024 / 1024}')
@@ -172,7 +205,7 @@ main() {
   fi
 
   summary || return 1
-  [ "${EIN_CHECK:-0}" = 1 ] && return
+  [ "$check" = 1 ] && return
 
   echo
   if [ -d "$home/.git" ]; then
@@ -183,15 +216,171 @@ main() {
     echo "Fetching $source/deploy into $home"
     git_source clone --quiet "$source/deploy.git" "$home" || return 1
   fi
-  EIN_DATA=$data EIN_SOURCE_KEY=$key exec "$home/setup.sh" "$@"
+  EIN_SOURCE_KEY=$key exec "$home/setup.sh" "${pass[@]}"
 }
 
-# Which official modules to install, asked one by one at the terminal: stdin is this script, piped
-# from curl, so the answers are read from /dev/tty. Without a terminal nothing is asked, and EiN is
-# installed alone.
+# setup.sh's options as far as the questions and the checks need them: the services, the modules,
+# the source, the folder and the ports. A module named, by itself or with --module, is not asked for.
+options() {
+  local arg next=
+  for arg in "$@"; do
+    case $next in
+      source) source=${arg%/} ;;
+      module) modules="$modules $arg" named=1 ;;
+      data) data=$(absolute "$arg") data_given=1 ;;
+      http-port) http_port=$arg ;;
+      ssh-port) ssh_port=$arg ;;
+      bind) bind=$arg ;;
+    esac
+    if [ -n "$next" ]; then
+      next=
+      continue
+    fi
+    case $arg in
+      --ems) ems=1 ;;
+      --no-ems) ems=0 ;;
+      --llm) llm=1 ;;
+      --no-llm) llm=0 ;;
+      --module | --source | --data | --http-port | --ssh-port | --bind) next=${arg#--} ;;
+      --db-dir | --only | --engine) next=value ;;
+    esac
+  done
+  # setup.sh would take the folder as given, relative to ~/ein: it gets it whole.
+  local i
+  for i in "${!pass[@]}"; do
+    [ "${pass[i]}" != --data ] || [ $((i + 1)) -ge ${#pass[@]} ] || pass[i + 1]=$(absolute "${pass[i + 1]}")
+  done
+}
+
+# The questions of a first install, each unless an option answered it, then what they add up to, to
+# say yes to. The answers go into setup.sh's options, the password into its environment.
+questions() {
+  local answer port again
+  [ -n "$data" ] || { data=$(absolute "$(ask "The folder for your files, the database among them" "$home/data")"); }
+
+  if [ -z "${INITIAL_ADMIN_PASSWORD:-}" ]; then
+    while true; do
+      read -rsp "The admin account's password, 8 characters or more [Enter: one is made for you]: " answer </dev/tty
+      echo
+      [ -n "$answer" ] || break
+      if [ ${#answer} -lt 8 ]; then
+        echo "  That is shorter than 8 characters."
+      elif [[ $answer == *[\'\\]* ]]; then
+        echo "  A password without ' and \\, please: EiN's settings file cannot keep them as they are."
+      else
+        read -rsp "The same password again: " again </dev/tty
+        echo
+        [ "$again" = "$answer" ] && { export INITIAL_ADMIN_PASSWORD=$answer; break; }
+        echo "  The two differ."
+      fi
+    done
+  fi
+
+  if [ "$named" = 0 ]; then
+    picked=()
+    pick
+    expanded=()
+    expand "${picked[@]}"
+    pass+=("${expanded[@]}")
+    options "${expanded[@]}"
+  fi
+
+  if [ -z "$http_port" ]; then
+    port=$(free_port 8080)
+    http_port=$(ask_port "The web interface's port" "$port" "$([ "$port" = 8080 ] || echo '8080 is taken')")
+    pass+=(--http-port "$http_port")
+  fi
+  if [ -z "$ssh_port" ]; then
+    port=$(free_port 2222)
+    ssh_port=$(ask_port "SSH and SFTP's port" "$port" "$([ "$port" = 2222 ] || echo '2222 is taken')")
+    pass+=(--ssh-port "$ssh_port")
+  fi
+  if [ -z "$bind" ]; then
+    if yes_no "Can other machines reach EiN? n keeps it to this machine, behind an HTTPS proxy of your own" y; then
+      bind=0.0.0.0
+    else
+      bind=127.0.0.1
+    fi
+    pass+=(--bind "$bind")
+  fi
+
+  echo
+  echo "EiN is to be installed with:"
+  printf '  %-15s %s\n' folder "$home" "your files" "$data" \
+    "admin password" "$([ -n "${INITIAL_ADMIN_PASSWORD:-}" ] && echo 'the one you chose' || echo 'one made for you, shown at the end')" \
+    modules "$(services)" \
+    "web interface" "port $http_port$([ "$bind" = 127.0.0.1 ] && echo ', this machine alone' || echo ', every address of this machine')" \
+    "SSH and SFTP" "port $ssh_port"
+  yes_no "Install?" y || { echo "Nothing was installed."; return 1; }
+  echo
+}
+
+# The modules chosen and the services they bring, in words.
+services() {
+  local names=() with=() list
+  read -ra names <<<"$modules"
+  [ "$ems" = 0 ] || with+=("the media service")
+  [ "$llm" = 0 ] || with+=("the language model")
+  [[ " ${pass[*]} " != *" --mqtt "* ]] || with+=("an MQTT broker")
+  list=${names[*]:-none}
+  if [ ${#with[@]} != 0 ]; then
+    printf -v list '%s, with %s' "$list" "$(printf '%s, ' "${with[@]}")"
+    list=${list%, }
+  fi
+  echo "$list"
+}
+
+# A question at the terminal, its default in brackets; the answer, or the default for Enter.
+ask() {
+  local answer
+  read -rp "$1 [$2]: " answer </dev/tty
+  echo "${answer:-$2}"
+}
+
+# y or n; Enter takes the default, $2.
+yes_no() {
+  local answer hint='[Y/n]'
+  [ "$2" = y ] || hint='[y/N]'
+  read -rp "$1 $hint " answer </dev/tty
+  case ${answer:-$2} in [yY]*) return 0 ;; *) return 1 ;; esac
+}
+
+# A port, asked until one is given: the default, and why it is not the usual one.
+ask_port() {
+  local answer
+  while true; do
+    read -rp "$1 [$2]${3:+ ($3)}: " answer </dev/tty
+    answer=${answer:-$2}
+    [[ $answer =~ ^[0-9]+$ ]] && [ "$answer" -ge 1 ] && [ "$answer" -le 65535 ] && { echo "$answer"; return; }
+    echo "  A port is a number, 1 to 65535." >/dev/tty
+  done
+}
+
+# The first port from $1 on that nothing on this machine listens on, as setup.sh would take.
+free_port() {
+  local port=$1
+  while port_taken "$port"; do port=$((port + 1)); done
+  echo "$port"
+}
+port_taken() {
+  if command -v ss >/dev/null; then
+    [ -n "$(ss -ltnH "sport = :$1")" ]
+  else
+    (exec 3<>"/dev/tcp/127.0.0.1/$1") 2>/dev/null
+  fi
+}
+
+# A folder as a whole path: ~ at its start is the home folder, and one relative to here is made whole.
+absolute() {
+  local path=${1/#\~/$HOME}
+  [[ $path == /* ]] || path=$PWD/$path
+  [ "$path" = / ] || path=${path%/}
+  echo "$path"
+}
+
+# Which official modules to install, into `picked`, asked one by one at the terminal.
 pick() {
   local entry name needs about answer
-  { : </dev/tty; } 2>/dev/null || return 0
   echo "EiN's official modules: y installs one, Enter leaves it out. Any can be added later."
   for entry in "${MODULES[@]}"; do
     IFS='|' read -r name needs about <<<"$entry"
@@ -199,7 +388,6 @@ pick() {
     read -r answer </dev/tty || answer=
     case $answer in [yY]*) picked+=("$name") ;; esac
   done
-  echo
 }
 
 # The command line with each official module named alone made the options it stands for, into
@@ -209,7 +397,7 @@ expand() {
   for arg in "$@"; do
     found=
     case $prev in
-      --module | --source | --only | --db-dir) ;;
+      --module | --source | --only | --db-dir | --data | --http-port | --ssh-port | --bind | --engine) ;;
       *)
         for entry in "${MODULES[@]}"; do
           IFS='|' read -r name needs about <<<"$entry"

@@ -153,16 +153,89 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
 <span class="hljs-built_in">sudo</span> apt install podman podman-compose git curl</code></pre></div>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>When both podman and Docker are installed, EiN uses podman. To use Docker, put <code>EIN_ENGINE=docker</code> in front of <code>bash</code> in the install command. <code>setup.sh</code> keeps the engine in <code>.env</code>, and every later run uses it. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
+<p>When both podman and Docker are installed, EiN uses podman. To use Docker, add <code>--engine docker</code> after <code>bash -s --</code> in the install command, as in <code>curl -fsSL https://einhq.eu/install.sh | bash -s -- --engine docker</code>. <code>setup.sh</code> keeps the engine in <code>.env</code>, and every later run uses it. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
 </aside>
 <h2 id="choose-what-to-install">Choose what to install<a class="anchor" href="#choose-what-to-install" aria-label="Link to this section"></a></h2>
-<p>Both ways check the machine first and install nothing when it falls short.</p>
-<p><strong>Answer its questions.</strong> Run on its own, the installer asks about each of EiN&#39;s official modules, one line each: type <code>y</code> and Enter for one you want, Enter alone to leave it out. Leave them all out for <strong>EiN Core</strong>: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP.</p>
+<p>The installer asks how to install EiN, checks the machine against what you chose, and installs nothing when it falls short.</p>
+<p><strong>Answer its questions.</strong> Run at a terminal, the installer asks one thing at a time, each with its default in brackets: <kbd>Enter</kbd> keeps the default.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
-<p><strong>Name the modules.</strong> The modules you want, named after <code>bash -s --</code>, install the same without a question. For <strong>EiN Archive</strong>, the full Archive installation, that is the <a href="../archive/index.html">Archive</a> and the <a href="../assistant/index.html">assistant</a>:</p>
+<div class="code"><pre tabindex="0"><code>Installing EiN. Enter takes the default in brackets; any of these can be changed later.
+
+Where EiN goes [/home/anna/ein]:
+The folder for your files, the database among them [/home/anna/ein/data]: /mnt/photos/ein
+The admin account's password, 8 characters or more [Enter: one is made for you]:
+EiN's official modules: y installs one, Enter leaves it out. Any can be added later.
+  archive        photos, videos and documents, people and places; with the media service, ~30 GB [y/N] y
+  assistant      a chat that answers questions; with a language model here, about 6 GB [y/N] y
+  automation     sensors, plugs and lights, and automations; with an MQTT broker [y/N]
+  album-folders  the Archive's albums as folders on disk; brings the Archive [y/N]
+  recipes        recipes with ingredients, steps and pictures; with the media service [y/N]
+  todo           todo lists, personal or shared within a group [y/N]
+The web interface's port [8080]:
+SSH and SFTP's port [2222]:
+Can other machines reach EiN? n keeps it to this machine, behind an HTTPS proxy of your own [Y/n]
+
+EiN is to be installed with:
+  folder          /home/anna/ein
+  your files      /mnt/photos/ein
+  admin password  one made for you, shown at the end
+  modules         archive assistant, with the media service, the language model
+  web interface   port 8080, every address of this machine
+  SSH and SFTP    port 2222
+Install? [Y/n]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Default</th>
+<th>What it decides</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Where EiN goes</td>
+<td><code>~/ein</code></td>
+<td>The folder for <code>setup.sh</code>, the compose files and <code>.env</code>.</td>
+</tr>
+<tr>
+<td>The folder for your files</td>
+<td><code>~/ein/data</code></td>
+<td>Your originals, their thumbnails, the installed modules and the database. Put it on a disk with room for your originals, in a folder your user can write to. It is chosen once: later runs keep it.</td>
+</tr>
+<tr>
+<td>The admin account&#39;s password</td>
+<td>one made for you</td>
+<td>The <code>admin</code> account&#39;s first password: 8 characters or more, without <code>&#39;</code> or <code>\</code>. It is not shown as you type, and asked twice. <kbd>Enter</kbd> alone makes one, which is shown at the end.</td>
+</tr>
+<tr>
+<td>The official modules</td>
+<td>none</td>
+<td>Each module on a line of its own: <code>y</code> and <kbd>Enter</kbd> installs it, <kbd>Enter</kbd> alone leaves it out. Leave them all out for <strong>EiN Core</strong>: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP.</td>
+</tr>
+<tr>
+<td>The web interface&#39;s port</td>
+<td>8080, or the next free one</td>
+<td>The port of the machine the Web UI is reached on. When something else has 8080, the question offers the next free port and says <code>(8080 is taken)</code>.</td>
+</tr>
+<tr>
+<td>SSH and SFTP&#39;s port</td>
+<td>2222, or the next free one</td>
+<td>The port of the machine SSH and SFTP are reached on.</td>
+</tr>
+<tr>
+<td>Can other machines reach EiN</td>
+<td>yes</td>
+<td><code>n</code> keeps EiN to the machine itself, for an HTTPS proxy of your own on the same machine; see <a href="../admin/network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>Then it shows what the answers add up to and asks <code>Install? [Y/n]</code>. <kbd>Enter</kbd> installs; <code>n</code> stops with <code>Nothing was installed.</code></p>
+<p><strong>Name the modules.</strong> The modules you name after <code>bash -s --</code> are installed without the question about modules; the installer still asks the others. For <strong>EiN Archive</strong>, the full Archive installation, that is the <a href="../archive/index.html">Archive</a> and the <a href="../assistant/index.html">assistant</a>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant</code></pre></div>
+<p><strong>Take the defaults.</strong> <code>--yes</code>, or <code>-y</code>, asks nothing: EiN goes in <code>~/ein</code>, your files in <code>~/ein/data</code>, a password is made for the admin, the ports are 8080 and 2222, or the next free ones, on every address of the machine, and the modules are those you name. Run without a terminal, such as from a script, the installer does the same and says <code>No terminal to ask on: installing with the defaults and the options given, as --yes does.</code></p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --<span class="hljs-built_in">yes</span> archive assistant</code></pre></div>
 <p>A module&#39;s name brings the services it needs:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -197,7 +270,39 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant</code></pr
 </tr>
 </tbody></table>
 </div>
-<p>The installer asks nothing when EiN is installed already, or when it is not run at a terminal. Everything after <code>bash -s --</code> other than a module&#39;s name is passed on to <code>~/ein/setup.sh</code>, EiN&#39;s own setup script, and the names become its options: <code>archive</code> is <code>--ems --module archive</code>. Its options can be given the same way:</p>
+<p>Run again where EiN is installed, the installer asks nothing: it updates EiN with the settings it has (<a href="../admin/updating.html">Updating</a>).</p>
+<p>An option answers its question, which the installer then does not ask:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Answers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--home &lt;folder&gt;</code></td>
+<td>Where EiN goes.</td>
+</tr>
+<tr>
+<td><code>--data &lt;folder&gt;</code></td>
+<td>The folder for your files.</td>
+</tr>
+<tr>
+<td>A module&#39;s name, or <code>--module &lt;name&gt;</code></td>
+<td>Which modules to install.</td>
+</tr>
+<tr>
+<td><code>--http-port &lt;port&gt;</code>, <code>--ssh-port &lt;port&gt;</code></td>
+<td>The ports.</td>
+</tr>
+<tr>
+<td><code>--bind &lt;address&gt;</code></td>
+<td>Whether other machines reach EiN: <code>0.0.0.0</code> for every address of the machine, <code>127.0.0.1</code> for it alone.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The admin password is not an option, so that it stays off the command line: the installer takes it from <code>INITIAL_ADMIN_PASSWORD</code> in its environment instead of asking. <a href="../admin/install.html#the-variables">Installing in detail</a> shows how.</p>
+<p>Everything after <code>bash -s --</code> other than a module&#39;s name and <code>--home</code>, <code>--yes</code> and <code>--check</code> is passed on to <code>~/ein/setup.sh</code>, EiN&#39;s own setup script, and the names become its options: <code>archive</code> is <code>--ems --module archive</code>. Its options can be given the same way:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -231,15 +336,15 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant</code></pr
 <p>The Archive module needs the media service. Installed with <code>--module archive</code> but without <code>--ems</code>, it still installs: the installer&#39;s <code>archive</code> line says <code>low</code>, and <code>setup.sh</code> ends with <code>The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.</code> Nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. <a href="../admin/modules.html">Modules</a> lists what each module needs.</p>
 </aside>
 <h3 id="check-the-machine-without-installing">Check the machine without installing<a class="anchor" href="#check-the-machine-without-installing" aria-label="Link to this section"></a></h3>
-<p><code>EIN_CHECK=1</code> runs the checks for the options you give and stops. A variable for the installer goes in front of <code>bash</code>, not in front of <code>curl</code>:</p>
+<p><code>--check</code> runs the checks for the options you give and stops, asking nothing:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- archive assistant</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --check archive assistant</code></pre></div>
 <p>You can read the installer before you run it: it is at <a href="https://einhq.eu/install.sh">einhq.eu/install.sh</a>, and its source is on <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">GitHub</a>.</p>
 <h3 id="choose-where-your-files-go">Choose where your files go<a class="anchor" href="#choose-where-your-files-go" aria-label="Link to this section"></a></h3>
-<p>EiN goes in <code>~/ein</code>, and your files in <code>~/ein/data</code> unless you name another folder with <code>EIN_DATA</code>. The folder holds your originals, so put it on a disk with room for them, in a folder your user can write to:</p>
+<p>EiN goes in <code>~/ein</code>, and your files in <code>~/ein/data</code>, unless you answer the questions with other folders or name them with <code>--home</code> and <code>--data</code>. The folder for your files holds your originals, so put it on a disk with room for them, in a folder your user can write to:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- archive assistant</code></pre></div>
-<p><code>EIN_DATA</code> is read only by the first install, when <code>~/ein/.env</code> is written. Later runs keep the folder named there.</p>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --data /mnt/photos/ein archive assistant</code></pre></div>
+<p>The folder for your files is chosen at the first install, when <code>~/ein/.env</code> is written. Later runs keep the folder named there, and <code>setup.sh</code> refuses another <code>--data</code>.</p>
 <h2 id="run-the-installer">Run the installer<a class="anchor" href="#run-the-installer" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Open a terminal on the machine as your own user. Do not use <code>sudo</code> or a root shell: the installer and EiN are meant to run as your own user.</li>
@@ -311,7 +416,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
 </div>
 <p>The disk check measures the free space where your files go. The images and the database are kept in the container engine&#39;s own storage (for rootless podman, usually under <code>~/.local/share/containers</code>), which is often the same disk but need not be: that disk needs the room too.</p>
 <h2 id="what-the-installer-does">What the installer does<a class="anchor" href="#what-the-installer-does" aria-label="Link to this section"></a></h2>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine checks it, fetches ein/deploy into ~/ein, writes .env, downloads the images, starts them with compose and prints the address and the admin password; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address and that password">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 564" role="img" aria-label="Two lanes: the installer on your machine asks how to install EiN, checks the machine, fetches ein/deploy into ~/ein, writes .env, downloads the images and starts them with compose; beside it, EiN's first start in its container updates the database, makes the admin account, fetches and sets up the modules, takes the CFG_ lines of .env as settings, starts its services and gives the admin its first password from .env, and once EiN answers the installer prints the address, and the admin password when it made it">
   <title>What the installer does</title>
   <defs>
     <marker id="start-install-md-1-install-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -325,7 +430,7 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <text x="376" y="52" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">install.sh, then setup.sh</text>
 
   <rect x="24" y="72" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="42" y="92" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Check the machine</text>
+  <text x="42" y="92" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Ask, then check the machine</text>
   <text x="42" y="110" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">stops here when a requirement is missing</text>
   <line x1="200" y1="120" x2="200" y2="140" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
 
@@ -360,7 +465,8 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <rect x="24" y="492" width="352" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="42" y="512" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Print the address and password</text>
-  <text x="42" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">once EiN answers; it waits up to 10 minutes</text>
+  <text x="42" y="530" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+    fill="#a2abbb">once EiN answers; a password only if it made it</text>
 
   
   <line x1="376" y1="446" x2="438" y2="446" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#start-install-md-1-install-flow-arrow)" />
@@ -400,16 +506,17 @@ This machine can run EiN; 1 item(s) are below what is recommended.</code></pre><
   <text x="474" y="496" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The services</text>
   <text x="474" y="514" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">started last, with those settings</text>
 </svg><figcaption>One command does all of it: the installer downloads and starts EiN, and EiN sets itself up at its first start</figcaption></figure>
-<p>Once the checks pass, the installer:</p>
+<p>The installer asks its questions first, at a first install, and then checks the machine against what you chose. Once the checks pass, it:</p>
 <ol>
 <li>Fetches <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it when it is there already, and runs <code>~/ein/setup.sh</code> with your options.</li>
-<li><code>setup.sh</code> writes <code>~/ein/.env</code> the first time: your options, the folder for your files, and the passwords it makes for the database, the media service and the <code>admin</code> account.</li>
+<li><code>setup.sh</code> writes <code>~/ein/.env</code> the first time: your options, the folder for your files, the ports, the passwords it makes for the database and the media service, and the <code>admin</code> account&#39;s first password, the one you chose or one it makes.</li>
 <li>It downloads the images of EiN and its database, and of the media service and the model when you chose them. Their sources, for the media service and the model, it fetches into <code>~/ein/src</code>.</li>
 <li>From an organisation of your own (<code>--source</code>), it fetches the sources into <code>~/ein/src</code> instead and builds the images on your machine; <a href="../admin/install.html#where-the-sources-come-from">Where the sources come from</a> explains it.</li>
 <li>It starts everything with <code>podman compose</code> or <code>docker compose</code>, and waits for EiN to answer.</li>
 <li>At its first start, EiN sets up its database, makes the <code>admin</code> account, downloads the modules you named and the modules they need, sets them up, starts its services, and gives <code>admin</code> the password <code>INITIAL_ADMIN_PASSWORD</code> in <code>.env</code>.</li>
-<li><code>setup.sh</code> prints the address of EiN and the admin password, which it prints again at the end of every run until you delete its line from <code>.env</code>.</li>
+<li><code>setup.sh</code> prints the address of EiN. A password it made for the admin it prints too, and again at the end of every run until you delete its line from <code>.env</code>. A password you chose it removes from <code>.env</code> once EiN has taken it, and says <code>Sign in as admin with the password you chose.</code></li>
 <li>It makes EiN start again when the machine does, where your user may: under podman it turns on <code>podman-restart.service</code> for your user and lets your user&#39;s services run without a login. What it may not do, it prints as commands for you to run, such as <code>sudo loginctl enable-linger anna</code>.</li>
+<li>It lists the modules installed, each with its version and the release it was installed at, and below them any line EiN&#39;s start logged about a module it could not install or run.</li>
 </ol>
 <p>The end of a run looks like this:</p>
 <div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/deploy into /home/anna/ein
@@ -431,7 +538,12 @@ EiN is up at http://ein:8080/
 Sign in as admin with the password 5e0c9a2f71b3d846 and change it, then delete the line INITIAL_ADMIN_PASSWORD from /home/anna/ein/.env.
 Enabled podman-restart.service, which starts EiN's containers at boot
 Enabled lingering for anna, so podman-restart.service runs at boot without a login
-EiN starts again when the machine does.</code></pre></div>
+EiN starts again when the machine does.
+The modules installed:
+  archive 0.3.1 (v0.3.1)
+  assistant 0.2.0 (v0.2.0)
+  ems 0.1.2 (v0.1.2)</code></pre></div>
+<p>The <code>ems</code> module comes with the Archive, which needs it.</p>
 <h3 id="how-long-it-takes">How long it takes<a class="anchor" href="#how-long-it-takes" aria-label="Link to this section"></a></h3>
 <p>Most of the time goes into downloading the images, and how long that takes depends on your connection. EiN Core is a few hundred MB. With the media service, its image of about 30 GB takes by far the longest. The container engine prints its own progress as it goes. Built from your own source instead, the media service&#39;s image takes about an hour more.</p>
 <p>After <code>== Starting EiN</code>, <code>setup.sh</code> prints <code>Waiting for EiN to answer at …</code> and then, every 10 seconds, EiN&#39;s newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN&#39;s container stops or keeps restarting.</p>
@@ -453,7 +565,7 @@ EiN starts again when the machine does.</code></pre></div>
 <td>your options and the passwords made at the install, kept nowhere else</td>
 </tr>
 <tr>
-<td><code>~/ein/data</code>, or your <code>EIN_DATA</code></td>
+<td><code>~/ein/data</code>, or the folder you chose</td>
 <td>your originals, the thumbnails and other renditions, scratch space, the language model and the installed modules</td>
 </tr>
 <tr>
@@ -467,23 +579,24 @@ EiN starts again when the machine does.</code></pre></div>
 <ol>
 <li>Open the address <code>setup.sh</code> printed, such as <code>http://ein:8080/</code>, in a browser. On the machine itself, <code>http://localhost:8080/</code> works too. If another computer cannot find the machine by that name, use its address instead, such as <code>http://ein.local:8080/</code> or <code>http://192.168.1.20:8080/</code>.</li>
 <li>In <strong>Username or e-mail</strong>, type <code>admin</code>.</li>
-<li>In <strong>Password</strong>, type or paste the password <code>setup.sh</code> printed, and click <strong>Sign in</strong>.</li>
+<li>In <strong>Password</strong>, type the password you chose at the install, or paste the one <code>setup.sh</code> printed, and click <strong>Sign in</strong>.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/login@2x.webp"><img src="../../assets/shots/login.webp" srcset="../../assets/shots/login.webp 1x, ../../assets/shots/login@2x.webp 2x" alt="The EiN sign-in page: the fields Username or e-mail and Password, the Sign in button, and Browse without signing in below it" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The sign-in page. Browse without signing in appears only when visitors may browse, which is off after an install</figcaption></figure>
 <p>You land on the home page, <strong>Welcome</strong>. What it shows comes from the modules: with the Archive it fills as pictures come in, and on EiN Core alone it stays empty. There is no setup wizard: <a href="first-steps.html">First steps</a> walks you from here to a family using it.</p>
-<p>EiN listens on port 8080 for the web and 2222 for SSH and SFTP, on every address of the machine, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read <a href="../admin/network.html">Ports, HTTPS and remote access</a>. When something else on the machine already uses 8080 or 2222, <code>setup.sh</code> gives EiN the next free port instead, says so (<code>Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)</code>), keeps it in <code>.env</code>, and prints the address with it.</p>
+<p>EiN listens on the ports you chose, 8080 for the web and 2222 for SSH and SFTP unless you chose others, on every address of the machine unless you kept it to the machine itself, over plain HTTP. That is fine at home. Before you make EiN reachable from outside your home, read <a href="../admin/network.html">Ports, HTTPS and remote access</a>. When something else on the machine already uses 8080 or 2222, <code>setup.sh</code> gives EiN the next free port instead, says so (<code>Port 8080 is taken on this machine: EiN uses 8081 instead (EIN_HTTP_PORT in .env)</code>), keeps it in <code>.env</code>, and prints the address with it.</p>
 <h2 id="change-the-admin-password-straight-away">Change the admin password straight away<a class="anchor" href="#change-the-admin-password-straight-away" aria-label="Link to this section"></a></h2>
-<p>Do this before anything else:</p>
+<p>Do this before anything else when <code>setup.sh</code> made the password:</p>
 <ul>
 <li>The password is in <code>~/ein/.env</code>, as <code>INITIAL_ADMIN_PASSWORD</code>, readable by anyone who can read that file, and <code>setup.sh</code> prints it at the end of every run while the line is there.</li>
 <li>Once you have changed it, delete that line from <code>.env</code>. Changing the line does not change the password: EiN reads it only at its first start.</li>
+<li>A password you chose at the install is not kept there: <code>setup.sh</code> removes it from <code>.env</code> once EiN has taken it, so there is nothing to delete, and you need not change it.</li>
 <li>EiN has no way to recover a lost administrator password. Only another administrator can set a new one, and a fresh install has no other.</li>
 </ul>
 <h3 id="in-the-web-ui">In the Web UI<a class="anchor" href="#in-the-web-ui" aria-label="Link to this section"></a></h3>
 <ol>
 <li>Click your picture at the top right to open the account menu, and choose <strong>Profile</strong>.</li>
 <li>Open the <strong>Security</strong> tab.</li>
-<li>In <strong>Current password</strong>, enter the password <code>setup.sh</code> printed.</li>
+<li>In <strong>Current password</strong>, enter the admin&#39;s password, the one <code>setup.sh</code> printed.</li>
 <li>Enter your own password in <strong>New password</strong>, and again in <strong>Confirm new password</strong>.</li>
 <li>Click <strong>Update password</strong>. <strong>Password updated</strong> appears beside the button.</li>
 </ol>
@@ -548,11 +661,11 @@ user passwd admin</code></pre></div>
 </tr>
 <tr>
 <td>No <code>Sign in as admin</code> line at the end</td>
-<td><code>.env</code> has no <code>INITIAL_ADMIN_PASSWORD</code> line: you deleted it, or <code>.env</code> was written before <code>setup.sh</code> kept the password there. In the second case a new EiN printed a random password to its log, below. When nothing is there, the database was there from an earlier install, so the admin already had a password, or the containers have been made again since. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
+<td><code>.env</code> has no <code>INITIAL_ADMIN_PASSWORD</code> line: you chose the password at the install, and <code>setup.sh</code> removed it once EiN had taken it; you deleted it; or <code>.env</code> was written before <code>setup.sh</code> kept the password there. In the last case a new EiN printed a random password to its log, below. When nothing is there, the database was there from an earlier install, so the admin already had a password, or the containers have been made again since. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
 </tr>
 <tr>
-<td><code>some of INSTALL_MODULES could not be installed; continuing boot</code> in the log</td>
-<td>EiN could not download a module, often for want of a connection to GitHub. Install it from <strong>Settings → Modules</strong> once EiN is up.</td>
+<td><code>some modules could not be installed or replaced; continuing boot</code> in the log</td>
+<td>EiN could not download a module, often for want of a connection to GitHub, or found no release of an installed one that it can run. The <code>mod install:</code> lines at the end of <code>setup.sh</code>&#39;s output say which and why. Install or update it from <strong>Settings → Modules</strong> once EiN is up.</td>
 </tr>
 <tr>
 <td>The address does not open on another computer</td>

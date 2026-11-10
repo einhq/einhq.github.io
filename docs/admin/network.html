@@ -155,7 +155,7 @@
 <p><code>setup.sh</code> moves one to the next free port when another program has it, and writes it to <code>.env</code>, as with EiN&#39;s own ports. Under Docker and rootful podman these lines do nothing.</p>
 <p>EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of its own. On your home network that is fine; for anything else, an HTTPS proxy goes in front of it, as described in <a href="#put-ein-behind-https">Put EiN behind HTTPS</a>.</p>
 <h2 id="change-the-ports-or-the-address">Change the ports or the address<a class="anchor" href="#change-the-ports-or-the-address" aria-label="Link to this section"></a></h2>
-<p>Which ports the machine publishes, and on which address, are three lines in <code>~/ein/.env</code>, written at the install:</p>
+<p>Which ports the machine publishes, and on which address, are three lines in <code>~/ein/.env</code>, written at the install from your answers to the installer&#39;s questions, or from its options <code>--http-port</code>, <code>--ssh-port</code> and <code>--bind</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
 <span class="hljs-attr">EIN_BIND</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
 <span class="hljs-attr">EIN_HTTP_PORT</span>=<span class="hljs-number">8080</span>
@@ -188,7 +188,7 @@
 <li><p>Apply it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</span></code></pre></div>
-<p>Running <code>./setup.sh</code> applies it too, and also updates EiN.</p>
+<p>Running <code>./setup.sh</code> applies it too, and also updates EiN. <code>./setup.sh --http-port 8443</code>, <code>--ssh-port</code> or <code>--bind</code> changes the line and applies it in one go, with an update.</p>
 </li>
 <li><p>Open EiN at the new address, such as <code>http://ein.local:8443/</code> after <code>EIN_HTTP_PORT=8443</code>.</p>
 </li>
@@ -298,9 +298,13 @@ server {
 <h3 id="keep-eins-own-port-to-the-machine">Keep EiN&#39;s own port to the machine<a class="anchor" href="#keep-eins-own-port-to-the-machine" aria-label="Link to this section"></a></h3>
 <p>With the proxy on the same machine, nothing else needs to reach port 8080. Close it to the network:</p>
 <ol>
-<li>In <code>~/ein/.env</code>, set <code>EIN_BIND=127.0.0.1</code>.</li>
-<li>Apply it with <code>podman compose up -d</code> (or <code>docker compose up -d</code>) in <code>~/ein</code>.</li>
-<li>Open <code>https://ein.wrenfield.example/</code> and sign in.</li>
+<li><p>In <code>~/ein/.env</code>, set <code>EIN_BIND=127.0.0.1</code>.</p>
+</li>
+<li><p>Apply it with <code>podman compose up -d</code> (or <code>docker compose up -d</code>) in <code>~/ein</code>.</p>
+<p><code>./setup.sh --bind 127.0.0.1</code> does both, with an update. At the install, <code>n</code> to the installer&#39;s question <code>Can other machines reach EiN?</code> does the same from the start.</p>
+</li>
+<li><p>Open <code>https://ein.wrenfield.example/</code> and sign in.</p>
+</li>
 </ol>
 <p>This closes port 2222 to the network as well, since <code>EIN_BIND</code> applies to both, and the MQTT broker&#39;s 1883, which the devices then cannot reach. To keep SSH and SFTP reachable from other machines, leave <code>EIN_BIND=0.0.0.0</code> and close 8080 in the firewall instead (under Docker, see the note in <a href="#open-the-ports-in-the-firewall">Open the ports in the firewall</a>).</p>
 <p>To check that the proxy passes everything, sign in, open a few pages, upload a file, and open the terminal with <kbd>Alt</kbd>+<kbd>T</kbd> (see <a href="../shell/terminal.html">The terminal</a>): each of these uses a different part of the table above.</p>

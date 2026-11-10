@@ -30,16 +30,18 @@ digest in `compose.llm.yaml`. It changes only when that file does, which is when
 repository is updated.
 
 Modules are not part of this. They live in the data folder and are updated separately, on
-**Settings → Modules**; see [Update a module](modules.md#update-a-module).
+**Settings → Modules**; see [Update a module](modules.md#update-a-module). Only a module the new
+EiN cannot run is replaced, at its start ([below](#what-happens-when-the-new-ein-starts)).
 
 ## Before you update
 
 1. Back up. An update cannot be undone: there is no command to go back to the previous version,
    and the database is changed in place when the new EiN starts. [Your data](data.md) says what to
    copy and why the database and the data folder go together.
-2. Make sure the admin password is one you know. Its first one is `INITIAL_ADMIN_PASSWORD` in
-   `~/ein/.env` until you delete that line; an older `.env` has no such line, and the random
-   password a new EiN printed to its log goes when an update makes the containers again.
+2. Make sure the admin password is one you know. A first one `setup.sh` made is
+   `INITIAL_ADMIN_PASSWORD` in `~/ein/.env` until you delete that line; one you chose at the
+   install is not kept there. An older `.env` has no such line, and the random password a new EiN
+   printed to its log goes when an update makes the containers again.
 3. Check that the container engine has room. An update downloads the new images while the old ones
    are still there, and removes the old ones only once EiN is up again; the media service's image
    is about 30 GB. `podman system df` shows the space images take.
@@ -53,8 +55,9 @@ Run the installer again, as your own user, on the machine EiN runs on:
 curl -fsSL https://einhq.eu/install.sh | bash
 ```
 
-You need no options: those you chose before are kept in `~/ein/.env`. If EiN lives somewhere other
-than `~/ein`, set `EIN_HOME` to that folder in front of `bash`, as at the install.
+It asks nothing, and you need no options: those you chose before are kept in `~/ein/.env`. If EiN
+lives somewhere other than `~/ein`, name that folder with `--home`, as in
+`curl -fsSL https://einhq.eu/install.sh | bash -s -- --home /srv/ein`.
 
 What you will see:
 
@@ -75,7 +78,15 @@ What you will see:
    EiN is up at http://ein:8080/
    Removed the images this update replaced, which freed 31GB
    EiN starts again when the machine does.
+   The modules installed:
+     archive 0.4.0 (v0.4.0)
+     ems 0.1.2 (v0.1.2)
+     archive 0.3.1 is installed and needs core API ^0.7.0, and this core provides 0.8.0
    ```
+
+   The list at the end is each module installed, with its version and the release it was
+   installed at, followed by what EiN's start logged about a module it could not install or run,
+   here the Archive it moved to a release it runs.
 
    With the language model, or from another source, `== Fetching the sources` comes first, with a
    line for each repository fetched: its name, the commit it is now at and that commit's date. Between the steps the
@@ -115,19 +126,20 @@ has ended.
 
 > [!NOTE]
 > `setup.sh` keeps to the container engine EiN was installed under, which `.env` names in
-> `EIN_ENGINE`. Run with another `EIN_ENGINE`, it stops instead of building a second, empty EiN. See
+> `EIN_ENGINE`. Run with `--engine` naming the other one, it stops instead of building a second,
+> empty EiN. See
 > [Keep to one engine](install.md#keep-to-one-engine).
 
 ## What an update changes and what it keeps
 
-| Changes                                                                                                        | Stays as it is                                                            |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                              |
-| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, in the folder `EIN_DB_DIR` names                            |
-| The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file            |
-| Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder              |
-| `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the Web UI or the terminal, which are in the database |
-| The container logs, which go with the old containers                                                           | The SSH host key, kept in the tree                                        |
+| Changes                                                                                                        | Stays as it is                                                                               |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| The files from the deploy repository in `~/ein`                                                                | `.env`: your options, settings and passwords                                                 |
+| The sources in `~/ein/src`, each moved to its newest commit                                                    | The database, in the folder `EIN_DB_DIR` names                                               |
+| The images, downloaded or built again, and the ones they replaced removed; the layers that did not change stay | The data folder: your originals, renditions and the model file                               |
+| Every container, made again from the new images                                                                | The installed modules, in the data folder's `modules` folder, but one the new EiN cannot run |
+| `compose.override.yaml`, written again from `.env`                                                             | Settings changed in the Web UI or the terminal, which are in the database                    |
+| The container logs, which go with the old containers                                                           | The SSH host key, kept in the tree                                                           |
 
 `setup.sh` makes every container again from the new image even where compose sees no change, with
 `--force-recreate` (under podman-compose, it takes them all down and starts them one by one), and
@@ -139,12 +151,18 @@ EiN does the rest of an update itself, at its start:
 
 - It brings its database tables up to date. There is no separate migration step to run.
 - It installs a module that `EIN_MODULES` names and that is missing. It does not update modules that
-  are installed already.
+  are installed already and that it can run.
+- It replaces a module installed at a release written for a module API it does not provide, as
+  after an update that changed that API, with the newest release of the module's repository that it
+  can run, and the modules that one needs the same way. That release can be older than the newest
+  published, when the module has moved on to a newer EiN.
 - It sets up every module again, in dependency order, and builds a module's pages again when what
   they are built from has changed.
 
-A module written for another version of the module API than the new EiN provides does not set up,
-and its pages and commands are missing until it is updated. [When a module does not work](modules.md#when-a-module-does-not-work) lists the messages.
+A module with no release the new EiN can run stays as it was and does not set up, and its pages and
+commands are missing until a release that fits is published and installed. `setup.sh` ends with the
+lines EiN logged about it; [When a module does not work](modules.md#when-a-module-does-not-work)
+lists the messages.
 
 ## See which version runs
 
@@ -214,8 +232,8 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `setup.sh: the images did not build, so EiN runs on as it was; the build's output is above`                     | Nothing was changed. When the build's output shows a download that failed, run `setup.sh` again later; otherwise the output names what stopped the build.                                                                  |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                 | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
-| A module is still the old version                                                                               | `setup.sh` does not update modules. Use **Update** on **Settings → Modules**.                                                                                                                                              |
-| A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN. Update it; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.                                                                                       |
+| A module is still the old version                                                                               | `setup.sh` does not update modules, and EiN's start replaces only one it cannot run. Use **Update** on **Settings → Modules**.                                                                                             |
+| A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN, and EiN found no release of it that does. The lines at the end of `setup.sh`'s output say why; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.   |
 | With the `ems` module, the media service's tile in **About EiN** says **Not answering**                         | The media service is still starting or failed to. `podman compose logs ems`; [The media service](../ems/index.md) helps further.                                                                                           |
 
 If an update leaves EiN in a state you cannot fix, the way back is the backup you made before it:

@@ -31,7 +31,7 @@ EiN itself serves plain HTTP only. It has no certificate and no HTTPS port of it
 
 ## Change the ports or the address
 
-Which ports the machine publishes, and on which address, are three lines in `~/ein/.env`, written at the install:
+Which ports the machine publishes, and on which address, are three lines in `~/ein/.env`, written at the install from your answers to the installer's questions, or from its options `--http-port`, `--ssh-port` and `--bind`:
 
 ```ini
 # in ~/ein/.env
@@ -56,7 +56,7 @@ To change one:
    podman compose up -d   # or: docker compose up -d
    ```
 
-   Running `./setup.sh` applies it too, and also updates EiN.
+   Running `./setup.sh` applies it too, and also updates EiN. `./setup.sh --http-port 8443`, `--ssh-port` or `--bind` changes the line and applies it in one go, with an update.
 3. Open EiN at the new address, such as `http://ein.local:8443/` after `EIN_HTTP_PORT=8443`.
 
 Inside its container EiN always listens on 8080 and 2222; these lines only change what the machine maps to them. The ports are not settings, so nothing on the Settings page can move EiN off them.
@@ -176,6 +176,8 @@ With the proxy on the same machine, nothing else needs to reach port 8080. Close
 
 1. In `~/ein/.env`, set `EIN_BIND=127.0.0.1`.
 2. Apply it with `podman compose up -d` (or `docker compose up -d`) in `~/ein`.
+
+   `./setup.sh --bind 127.0.0.1` does both, with an update. At the install, `n` to the installer's question `Can other machines reach EiN?` does the same from the start.
 3. Open `https://ein.wrenfield.example/` and sign in.
 
 This closes port 2222 to the network as well, since `EIN_BIND` applies to both, and the MQTT broker's 1883, which the devices then cannot reach. To keep SSH and SFTP reachable from other machines, leave `EIN_BIND=0.0.0.0` and close 8080 in the firewall instead (under Docker, see the note in [Open the ports in the firewall](#open-the-ports-in-the-firewall)).

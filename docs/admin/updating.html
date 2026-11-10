@@ -149,15 +149,17 @@ machine, the media service&#39;s in about an hour (<a href="install.html#where-t
 digest in <code>compose.llm.yaml</code>. It changes only when that file does, which is when the deploy
 repository is updated.</p>
 <p>Modules are not part of this. They live in the data folder and are updated separately, on
-<strong>Settings → Modules</strong>; see <a href="modules.html#update-a-module">Update a module</a>.</p>
+<strong>Settings → Modules</strong>; see <a href="modules.html#update-a-module">Update a module</a>. Only a module the new
+EiN cannot run is replaced, at its start (<a href="#what-happens-when-the-new-ein-starts">below</a>).</p>
 <h2 id="before-you-update">Before you update<a class="anchor" href="#before-you-update" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Back up. An update cannot be undone: there is no command to go back to the previous version,
 and the database is changed in place when the new EiN starts. <a href="data.html">Your data</a> says what to
 copy and why the database and the data folder go together.</li>
-<li>Make sure the admin password is one you know. Its first one is <code>INITIAL_ADMIN_PASSWORD</code> in
-<code>~/ein/.env</code> until you delete that line; an older <code>.env</code> has no such line, and the random
-password a new EiN printed to its log goes when an update makes the containers again.</li>
+<li>Make sure the admin password is one you know. A first one <code>setup.sh</code> made is
+<code>INITIAL_ADMIN_PASSWORD</code> in <code>~/ein/.env</code> until you delete that line; one you chose at the
+install is not kept there. An older <code>.env</code> has no such line, and the random password a new EiN
+printed to its log goes when an update makes the containers again.</li>
 <li>Check that the container engine has room. An update downloads the new images while the old ones
 are still there, and removes the old ones only once EiN is up again; the media service&#39;s image
 is about 30 GB. <code>podman system df</code> shows the space images take.</li>
@@ -166,8 +168,9 @@ is about 30 GB. <code>podman system df</code> shows the space images take.</li>
 <p>Run the installer again, as your own user, on the machine EiN runs on:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
-<p>You need no options: those you chose before are kept in <code>~/ein/.env</code>. If EiN lives somewhere other
-than <code>~/ein</code>, set <code>EIN_HOME</code> to that folder in front of <code>bash</code>, as at the install.</p>
+<p>It asks nothing, and you need no options: those you chose before are kept in <code>~/ein/.env</code>. If EiN
+lives somewhere other than <code>~/ein</code>, name that folder with <code>--home</code>, as in
+<code>curl -fsSL https://einhq.eu/install.sh | bash -s -- --home /srv/ein</code>.</p>
 <p>What you will see:</p>
 <ol>
 <li><p>The installer checks the machine against the system requirements again, with the media service
@@ -186,7 +189,14 @@ Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a min
 
 EiN is up at http://ein:8080/
 Removed the images this update replaced, which freed 31GB
-EiN starts again when the machine does.</code></pre></div>
+EiN starts again when the machine does.
+The modules installed:
+  archive 0.4.0 (v0.4.0)
+  ems 0.1.2 (v0.1.2)
+  archive 0.3.1 is installed and needs core API ^0.7.0, and this core provides 0.8.0</code></pre></div>
+<p>The list at the end is each module installed, with its version and the release it was
+installed at, followed by what EiN&#39;s start logged about a module it could not install or run,
+here the Archive it moved to a release it runs.</p>
 <p>With the language model, or from another source, <code>== Fetching the sources</code> comes first, with a
 line for each repository fetched: its name, the commit it is now at and that commit&#39;s date. Between the steps the
 container engine prints its own download, build and start output, and while it waits,
@@ -217,7 +227,8 @@ drops, so one started again meanwhile says
 has ended.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p><code>setup.sh</code> keeps to the container engine EiN was installed under, which <code>.env</code> names in
-<code>EIN_ENGINE</code>. Run with another <code>EIN_ENGINE</code>, it stops instead of building a second, empty EiN. See
+<code>EIN_ENGINE</code>. Run with <code>--engine</code> naming the other one, it stops instead of building a second,
+empty EiN. See
 <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</p>
 </aside>
 <h2 id="what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps<a class="anchor" href="#what-an-update-changes-and-what-it-keeps" aria-label="Link to this section"></a></h2>
@@ -242,7 +253,7 @@ has ended.</p>
 </tr>
 <tr>
 <td>Every container, made again from the new images</td>
-<td>The installed modules, in the data folder&#39;s <code>modules</code> folder</td>
+<td>The installed modules, in the data folder&#39;s <code>modules</code> folder, but one the new EiN cannot run</td>
 </tr>
 <tr>
 <td><code>compose.override.yaml</code>, written again from <code>.env</code></td>
@@ -262,12 +273,18 @@ with <code>--remove-orphans</code>, so a service whose option you turned off sto
 <ul>
 <li>It brings its database tables up to date. There is no separate migration step to run.</li>
 <li>It installs a module that <code>EIN_MODULES</code> names and that is missing. It does not update modules that
-are installed already.</li>
+are installed already and that it can run.</li>
+<li>It replaces a module installed at a release written for a module API it does not provide, as
+after an update that changed that API, with the newest release of the module&#39;s repository that it
+can run, and the modules that one needs the same way. That release can be older than the newest
+published, when the module has moved on to a newer EiN.</li>
 <li>It sets up every module again, in dependency order, and builds a module&#39;s pages again when what
 they are built from has changed.</li>
 </ul>
-<p>A module written for another version of the module API than the new EiN provides does not set up,
-and its pages and commands are missing until it is updated. <a href="modules.html#when-a-module-does-not-work">When a module does not work</a> lists the messages.</p>
+<p>A module with no release the new EiN can run stays as it was and does not set up, and its pages and
+commands are missing until a release that fits is published and installed. <code>setup.sh</code> ends with the
+lines EiN logged about it; <a href="modules.html#when-a-module-does-not-work">When a module does not work</a>
+lists the messages.</p>
 <h2 id="see-which-version-runs">See which version runs<a class="anchor" href="#see-which-version-runs" aria-label="Link to this section"></a></h2>
 <p>In the Web UI, open the profile menu at the top right and choose <strong>About EiN</strong>. The <strong>Core</strong>
 tile shows core&#39;s version, and below it the commit EiN was built from and that commit&#39;s date; hold
@@ -345,11 +362,11 @@ so your running EiN, the database and the data folder are not touched.</p>
 </tr>
 <tr>
 <td>A module is still the old version</td>
-<td><code>setup.sh</code> does not update modules. Use <strong>Update</strong> on <strong>Settings → Modules</strong>.</td>
+<td><code>setup.sh</code> does not update modules, and EiN&#39;s start replaces only one it cannot run. Use <strong>Update</strong> on <strong>Settings → Modules</strong>.</td>
 </tr>
 <tr>
 <td>A module&#39;s pages or commands are gone, and <strong>Settings → Modules</strong> shows a badge on it</td>
-<td>It does not fit the new EiN. Update it; <a href="modules.html#when-a-module-does-not-work">When a module does not work</a> explains each message.</td>
+<td>It does not fit the new EiN, and EiN found no release of it that does. The lines at the end of <code>setup.sh</code>&#39;s output say why; <a href="modules.html#when-a-module-does-not-work">When a module does not work</a> explains each message.</td>
 </tr>
 <tr>
 <td>With the <code>ems</code> module, the media service&#39;s tile in <strong>About EiN</strong> says <strong>Not answering</strong></td>

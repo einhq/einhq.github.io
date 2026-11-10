@@ -97,7 +97,7 @@ Docker runs the containers as root, so the files in the data folder belong to ro
 
 A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.
 
-1. Install EiN with the same options as before, such as `--ems --module archive`, as [Install EiN](../start/install.md) describes. The installer starts an empty EiN and prints a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. Delete its `INITIAL_ADMIN_PASSWORD` line from the new `.env` then, or `setup.sh` keeps showing a password that no longer signs in.
+1. Install EiN with the same options as before, such as `--ems --module archive`, as [Install EiN](../start/install.md) describes. The installer starts an empty EiN with a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. When `setup.sh` made it, delete its `INITIAL_ADMIN_PASSWORD` line from the new `.env` then, or `setup.sh` keeps showing a password that no longer signs in.
 
 2. Compare the new `~/ein/.env` with the copy in your backup, and copy over the lines you added yourself, such as `CFG_` settings, ports or memory limits. Keep the new `POSTGRES_PASSWORD` and `EMS_KEY`: the new database was made with them. Check `EIN_GPU` too, which says whether this machine has a graphics card for EiN; see [The graphics card](../ems/gpu.md).
 

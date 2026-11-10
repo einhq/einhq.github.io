@@ -105,16 +105,16 @@
 <tbody><tr>
 <td><code>install.sh</code></td>
 <td><a href="https://einhq.eu/install.sh">einhq.eu/install.sh</a>, from the <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">einhq.github.io</a> repository</td>
-<td>Checks the machine. When nothing is missing, clones <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it there with <code>git pull --ff-only</code>, and runs <code>~/ein/setup.sh</code> with your options.</td>
+<td>At a first install, asks how EiN is to be installed. Checks the machine. When nothing is missing, clones <a href="https://github.com/einhq/deploy">ein/deploy</a> into <code>~/ein</code>, or updates it there with <code>git pull --ff-only</code>, and runs <code>~/ein/setup.sh</code> with your options.</td>
 </tr>
 <tr>
 <td><code>setup.sh</code></td>
 <td><code>~/ein/setup.sh</code>, from ein/deploy</td>
-<td>Brings <code>~/ein</code> up to date from ein/deploy, writes <code>~/ein/.env</code> the first time, downloads the images (or, from another source, fetches the sources into <code>~/ein/src</code> and builds them), starts them with compose and waits for EiN to answer. Run again, it updates.</td>
+<td>Asks nothing. Brings <code>~/ein</code> up to date from ein/deploy, writes <code>~/ein/.env</code> the first time, downloads the images (or, from another source, fetches the sources into <code>~/ein/src</code> and builds them), starts them with compose, waits for EiN to answer and lists its modules. Run again, it updates.</td>
 </tr>
 </tbody></table>
 </div>
-<p>Both run as your own user and need no root. The installer takes the names of EiN&#39;s official modules besides <code>setup.sh</code>&#39;s options, and makes each name the options it stands for:</p>
+<p>Both run as your own user and need no root. The installer takes the names of EiN&#39;s official modules besides the options, and makes each name the options it stands for:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -148,12 +148,105 @@
 </tr>
 </tbody></table>
 </div>
-<p>A name given to an option, as in <code>--module archive</code>, stays a name. Run with nothing after it on a machine without <code>~/ein/.env</code>, and at a terminal, the installer asks yes or no for each of these modules first, reading the answers from the terminal, since its input is the script <code>curl</code> pipes to it; without a terminal it asks nothing and installs EiN alone. Every option is then passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code>, <code>--no-llm</code> and <code>--module</code> itself, to choose which checks to run, and <code>--source</code>, to fetch ein/deploy from there. <code>setup.sh</code> takes options only, not the names.</p>
+<p>A name given to an option, as in <code>--module archive</code>, stays a name. The installer keeps <code>--home</code>, <code>--yes</code> and <code>--check</code> to itself and passes every other option on to <code>setup.sh</code>, the names made options; <code>setup.sh</code> takes options only, not the names. It reads some of them on the way: <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code>, <code>--no-llm</code> and <code>--module</code> to choose which checks to run, <code>--source</code> to fetch ein/deploy from there, and <code>--data</code>, <code>--http-port</code>, <code>--ssh-port</code> and <code>--bind</code> to answer their questions.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code></pre></div>
-<p>The installer&#39;s code runs from a function called on its last line, so a download cut short runs nothing.</p>
+<p>The installer&#39;s code runs from a function called on its last line, so a download cut short runs nothing. <code>curl -fsSL https://einhq.eu/install.sh | bash -s -- --help</code> says where its help is: the head of the script.</p>
+<h2 id="the-questions">The questions<a class="anchor" href="#the-questions" aria-label="Link to this section"></a></h2>
+<p>The installer asks at a first install, which is a run where the folder EiN goes in has no <code>.env</code>, and only at a terminal. Its input is the script <code>curl</code> pipes to it, so it reads the answers from the terminal itself. It asks nothing:</p>
+<ul>
+<li>with <code>--yes</code> or <code>-y</code>, or with <code>--check</code>;</li>
+<li>without a terminal, such as from a script, over <code>ssh</code> without <code>-t</code>, or in a container. It then says <code>No terminal to ask on: installing with the defaults and the options given, as --yes does.</code>;</li>
+<li>where EiN is installed. At a terminal it says <code>EiN is installed in /home/anna/ein: updating it, with the settings it has.</code> and updates it.</li>
+</ul>
+<p>Before any question, it stops on anything but Linux on x86-64: <code>EiN runs on Linux on x86-64; this is Darwin on arm64, so nothing was installed.</code></p>
+<p>Each question shows its default in brackets, and <kbd>Enter</kbd> takes it. An option answers its question, and the installer leaves that question out:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Default</th>
+<th>Answered by</th>
+<th>What else</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Where EiN goes</code></td>
+<td><code>~/ein</code></td>
+<td><code>--home</code></td>
+<td>Asked only while <code>~/ein</code> has no <code>.env</code>. A folder you name that has EiN in it is updated, with no more questions.</td>
+</tr>
+<tr>
+<td><code>The folder for your files, the database among them</code></td>
+<td><code>data</code> in the folder EiN goes in</td>
+<td><code>--data</code></td>
+<td><code>~</code> and a relative folder are made whole paths, from the folder you run the installer in.</td>
+</tr>
+<tr>
+<td><code>The admin account&#39;s password, 8 characters or more</code></td>
+<td>one made for you</td>
+<td><code>INITIAL_ADMIN_PASSWORD</code>, in the environment</td>
+<td>Not shown as you type, and asked again: <code>The same password again</code>. A shorter one, one with <code>&#39;</code> or <code>\</code>, or two that differ are refused with a line saying why, and it asks again. <kbd>Enter</kbd> alone leaves <code>setup.sh</code> to make one.</td>
+</tr>
+<tr>
+<td><code>EiN&#39;s official modules</code></td>
+<td>none</td>
+<td>a module&#39;s name, or <code>--module</code></td>
+<td>A line for each, its name and what it brings, ending <code>[y/N]</code>: <code>y</code> installs it. A name given on the command line leaves out the whole question, so the modules you name are the modules you get.</td>
+</tr>
+<tr>
+<td><code>The web interface&#39;s port</code></td>
+<td><code>8080</code>, or the next free port</td>
+<td><code>--http-port</code></td>
+<td>When something on the machine listens on 8080, the default is the next free port, and the question says so: <code>The web interface&#39;s port [8081] (8080 is taken):</code>. Anything but a number from 1 to 65535 is asked again.</td>
+</tr>
+<tr>
+<td><code>SSH and SFTP&#39;s port</code></td>
+<td><code>2222</code>, or the next free port</td>
+<td><code>--ssh-port</code></td>
+<td>As for the web interface&#39;s port.</td>
+</tr>
+<tr>
+<td><code>Can other machines reach EiN? n keeps it to this machine, behind an HTTPS proxy of your own</code></td>
+<td>yes</td>
+<td><code>--bind</code></td>
+<td>Yes is <code>--bind 0.0.0.0</code>, every address of the machine; <code>n</code> is <code>--bind 127.0.0.1</code>, the machine alone. See <a href="network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The answers become options for <code>setup.sh</code>, and a password you typed goes to it as <code>INITIAL_ADMIN_PASSWORD</code>, never on its command line. Then the installer shows what they add up to, and asks before it does anything:</p>
+<div class="code"><pre tabindex="0"><code>EiN is to be installed with:
+  folder          /home/anna/ein
+  your files      /home/anna/ein/data
+  admin password  the one you chose
+  modules         archive assistant, with the media service, the language model
+  web interface   port 8080, every address of this machine
+  SSH and SFTP    port 2222
+Install? [Y/n]</code></pre></div>
+<p><kbd>Enter</kbd> or <code>y</code> goes on to the checks; <code>n</code> stops with <code>Nothing was installed.</code>, and nothing has been written. Without questions, the defaults hold: <code>~/ein</code>, <code>~/ein/data</code>, a password made for the admin, ports 8080 and 2222 on every address, and the modules the options name.</p>
 <h2 id="the-options">The options<a class="anchor" href="#the-options" aria-label="Link to this section"></a></h2>
-<p>These are <code>setup.sh</code>&#39;s options, and so the installer&#39;s too. <code>~/ein/setup.sh --help</code> lists them.</p>
+<p>These are <code>setup.sh</code>&#39;s options, and so the installer&#39;s too. <code>~/ein/setup.sh --help</code> lists them. The installer has three of its own besides, which it does not pass on:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--home &lt;folder&gt;</code></td>
+<td>Installs EiN in this folder instead of <code>~/ein</code>, or updates the EiN there. Later, run <code>setup.sh</code> from there, or the installer with the same <code>--home</code>.</td>
+</tr>
+<tr>
+<td><code>--yes</code>, <code>-y</code></td>
+<td>Asks nothing: the defaults, and what the other options say.</td>
+</tr>
+<tr>
+<td><code>--check</code></td>
+<td>Checks the machine against what the options ask for, and stops, installing nothing and asking nothing.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -190,6 +283,26 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code></pre></div>
 <td>Adds a module&#39;s name to <code>EIN_MODULES</code> in <code>.env</code>, such as <code>archive</code> or <code>assistant</code>. EiN installs it at its start, with the modules it needs. Give it once for each module. A name is lower case letters, digits and hyphens, starting with a letter.</td>
 </tr>
 <tr>
+<td><code>--http-port &lt;port&gt;</code></td>
+<td>The port of the machine the Web UI is reached on, 1 to 65535, instead of 8080. Sets <code>EIN_HTTP_PORT</code>.</td>
+</tr>
+<tr>
+<td><code>--ssh-port &lt;port&gt;</code></td>
+<td>The port of the machine SSH and SFTP are reached on, instead of 2222. Sets <code>EIN_SSH_PORT</code>.</td>
+</tr>
+<tr>
+<td><code>--bind &lt;address&gt;</code></td>
+<td>The address of the machine the two ports listen on: <code>0.0.0.0</code>, every address (the default), or <code>127.0.0.1</code>, the machine alone, behind an HTTPS proxy of your own. Sets <code>EIN_BIND</code>; see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
+</tr>
+<tr>
+<td><code>--data &lt;folder&gt;</code></td>
+<td>The first run only: the folder for your files, instead of <code>data</code> in <code>~/ein</code>. A relative folder is taken from <code>~/ein</code>. Sets <code>EIN_DATA</code>. A later run with another folder stops <code>setup.sh</code>; <a href="data.html#move-the-data-folder-to-another-disk">Your data</a> says how to move it.</td>
+</tr>
+<tr>
+<td><code>--engine podman|docker</code></td>
+<td>The first run only: the container engine, instead of podman when it is installed, else Docker. Sets <code>EIN_ENGINE</code>, and later runs use that engine; given later with the other one, it stops <code>setup.sh</code>. See <a href="#podman-or-docker">Podman or Docker</a>.</td>
+</tr>
+<tr>
 <td><code>--only &lt;service&gt;</code></td>
 <td>Updates one service, <code>ein</code>, <code>ems</code>, <code>db</code>, <code>llm</code> or <code>mqtt</code>: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
 </tr>
@@ -210,61 +323,35 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code></pre></div>
 <p>An option other than <code>--only</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
 <p>With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the Web UI. <code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
-<p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- archive</code></pre></div>
+<p>Every setting is an option. Only the secrets come in the environment, so they stay off the command line, which others on the machine can see:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
 <th>Variable</th>
 <th>Read by</th>
-<th>Default</th>
 <th>What it does</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>EIN_HOME</code></td>
-<td><code>install.sh</code></td>
-<td><code>~/ein</code></td>
-<td>The folder EiN is installed in. Later, run <code>setup.sh</code> from there.</td>
-</tr>
-<tr>
-<td><code>EIN_DATA</code></td>
+<td><code>INITIAL_ADMIN_PASSWORD</code></td>
 <td>both, the first time</td>
-<td><code>~/ein/data</code></td>
-<td>The folder for your files: originals, renditions, scratch space, the language model and the installed modules. Read only when <code>.env</code> is written; later runs keep the folder <code>.env</code> names.</td>
-</tr>
-<tr>
-<td><code>EIN_CHECK</code></td>
-<td><code>install.sh</code></td>
-<td>unset</td>
-<td><code>1</code> runs the checks for the options given and stops, installing nothing.</td>
-</tr>
-<tr>
-<td><code>EIN_ENGINE</code></td>
-<td><code>setup.sh</code>, the first time</td>
-<td>podman when installed, else Docker</td>
-<td><code>docker</code> uses Docker even when podman is installed. Kept in <code>.env</code>, and later runs use that engine; given with the other engine later, it stops <code>setup.sh</code>.</td>
+<td>The <code>admin</code> account&#39;s first password, instead of the question or one made for you: 8 characters or more, without <code>&#39;</code> or <code>\</code>. <code>setup.sh</code> writes it into <code>.env</code> for EiN&#39;s first start, and removes it from there once EiN has answered.</td>
 </tr>
 <tr>
 <td><code>EIN_SOURCE_KEY</code></td>
 <td>both</td>
-<td>unset</td>
 <td>The token that reads <code>--source</code>&#39;s repositories when they are private. Kept in <code>.env</code> with the source; a <code>--source</code> on another host without one drops it.</td>
-</tr>
-<tr>
-<td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
-<td><code>setup.sh</code>, the first time</td>
-<td><code>8080</code>, <code>2222</code></td>
-<td>The ports on the machine for the Web UI and for SSH and SFTP. Read only when <code>.env</code> is written.</td>
 </tr>
 </tbody></table>
 </div>
-<p><code>EIN_DATA</code> is made into an absolute path when <code>.env</code> is written, so a relative folder is taken from where <code>setup.sh</code> runs, which is <code>~/ein</code>.</p>
+<p>A variable goes in front of the command it is for, for the installer in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it. To keep a password out of your shell&#39;s history too, read it into the variable first:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
+<span class="hljs-built_in">read</span> -rsp <span class="hljs-string">&#x27;Password: &#x27;</span> INITIAL_ADMIN_PASSWORD &amp;&amp; <span class="hljs-built_in">export</span> INITIAL_ADMIN_PASSWORD
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --<span class="hljs-built_in">yes</span> archive</code></pre></div>
 <h3 id="where-the-sources-come-from">Where the sources come from<a class="anchor" href="#where-the-sources-come-from" aria-label="Link to this section"></a></h3>
 <p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when you use those options, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. EiN&#39;s, the database&#39;s and the media service&#39;s images are downloaded ready-made only from <code>https://github.com/einhq</code>, which publishes them; from any other organisation <code>setup.sh</code> builds them on the machine from its <code>core</code>, <code>db</code> and <code>ems</code>, since the published images have none of its own commits, and the media service&#39;s build takes about an hour. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
 <h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
-<p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install and <code>--no-ems</code> is not given; the same goes for <code>--llm</code>.</p>
+<p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or a module that brings it, named or chosen at the questions, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install and <code>--no-ems</code> is not given; the same goes for <code>--llm</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -278,7 +365,7 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <td><code>system</code></td>
 <td>Linux on x86-64</td>
 <td></td>
-<td>anything else; the installer stops at once</td>
+<td>anything else; the installer stops at once, before its questions</td>
 </tr>
 <tr>
 <td><code>podman</code></td>
@@ -359,13 +446,13 @@ curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docke
 <ul>
 <li><strong>Cores</strong> are physical cores, counted with <code>lscpu</code> across every socket, not threads. When <code>lscpu</code> gives nothing, the thread count stands in.</li>
 <li><strong>Memory</strong> is the machine&#39;s total, rounded to whole GB. That is why the full threshold is 30 GB: a machine sold with 32 GB reports a little less.</li>
-<li><strong>Disk</strong> is measured where your files go: on a later run the data folder <code>.env</code> names, which <code>setup.sh</code> keeps to, else <code>EIN_DATA</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
-<li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you set <code>EIN_ENGINE=docker</code> or <code>.env</code> keeps Docker: only <code>setup.sh</code> reads <code>EIN_ENGINE</code>.</li>
+<li><strong>Disk</strong> is measured where your files go: on a later run the data folder <code>.env</code> names, which <code>setup.sh</code> keeps to, else the folder you chose or gave with <code>--data</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
+<li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you give <code>--engine docker</code> or <code>.env</code> keeps Docker: only <code>setup.sh</code> reads them.</li>
 </ul>
-<p>The images and a download&#39;s or build&#39;s scratch files live in the container engine&#39;s own storage, not in <code>EIN_DATA</code>. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
+<p>The images and a download&#39;s or build&#39;s scratch files live in the container engine&#39;s own storage, not in the data folder. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
 <p>To run only the checks:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --check --ems --llm</code></pre></div>
 <h2 id="install-without-the-installer">Install without the installer<a class="anchor" href="#install-without-the-installer" aria-label="Link to this section"></a></h2>
 <p>You can do what the installer does yourself, for example to read <code>setup.sh</code> before it runs or to put EiN in another folder. This skips the machine checks.</p>
 <ol>
@@ -373,14 +460,15 @@ curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</cod
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 git <span class="hljs-built_in">clone</span> https://github.com/einhq/deploy.git ~/ein</code></pre></div>
 </li>
-<li><p>Run <code>setup.sh</code> from it with your options, and any variables in front:</p>
+<li><p>Run <code>setup.sh</code> from it with your options:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
-EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assistant</code></pre></div>
+~/ein/setup.sh --data /srv/ein-data --ems --llm --module archive --module assistant</code></pre></div>
 </li>
 </ol>
-<p><code>setup.sh</code> changes to its own folder first, so you can run it from anywhere. Each later run brings the folder up to date itself, with <code>git pull --ff-only</code> from the source, and runs the new <code>setup.sh</code> when that changed it; the installer with <code>EIN_HOME</code> set to the folder does the same.</p>
+<p><code>setup.sh</code> asks nothing: what the installer would ask are its options, and it makes the admin&#39;s password unless <code>INITIAL_ADMIN_PASSWORD</code> in its environment gives one.</p>
+<p><code>setup.sh</code> changes to its own folder first, so you can run it from anywhere. Each later run brings the folder up to date itself, with <code>git pull --ff-only</code> from the source, and runs the new <code>setup.sh</code> when that changed it; the installer with <code>--home</code> naming the folder does the same.</p>
 <h2 id="podman-or-docker">Podman or Docker<a class="anchor" href="#podman-or-docker" aria-label="Link to this section"></a></h2>
-<p>EiN runs under either. At the install, <code>setup.sh</code> takes podman when the <code>podman</code> command exists, Docker when only <code>docker</code> does, and Docker when <code>EIN_ENGINE=docker</code> is set. It keeps the engine in <code>.env</code> as <code>EIN_ENGINE</code>, and every later run uses it, whichever else is installed. It then needs <code>podman compose</code> or <code>docker compose</code> to run, or stops with <code>setup.sh: &#39;podman compose&#39; does not run: install podman-compose (or docker-compose) for podman, or the compose plugin for Docker</code>.</p>
+<p>EiN runs under either. At the install, <code>setup.sh</code> takes podman when the <code>podman</code> command exists, Docker when only <code>docker</code> does, and Docker when it is given <code>--engine docker</code>. It keeps the engine in <code>.env</code> as <code>EIN_ENGINE</code>, and every later run uses it, whichever else is installed. It then needs <code>podman compose</code> or <code>docker compose</code> to run, or stops with <code>setup.sh: &#39;podman compose&#39; does not run: install podman-compose (or docker-compose) for podman, or the compose plugin for Docker</code>.</p>
 <p>The compose files are plain Compose Spec, so both read them alike. What differs:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -425,9 +513,9 @@ EIN_DATA=/srv/ein-data ~/ein/setup.sh --ems --llm --module archive --module assi
 <p>All data folders are mounted with <code>z</code>, which labels them for sharing between containers under SELinux and is ignored where SELinux is not on.</p>
 <h3 id="keep-to-one-engine">Keep to one engine<a class="anchor" href="#keep-to-one-engine" aria-label="Link to this section"></a></h3>
 <p>Each engine has its own images and containers. Install with one and keep to it: the database&#39;s folder is made for the engine that runs it.</p>
-<p><code>setup.sh</code> keeps the engine it installed with in <code>.env</code> as <code>EIN_ENGINE</code>, and every later run uses it, whichever else is installed. Run with an <code>EIN_ENGINE</code> that names the other one, it stops before building anything:</p>
-<div class="code"><pre tabindex="0"><code>setup.sh: EiN here runs under docker (EIN_ENGINE in .env); under podman it would be a second, empty EiN beside it. Run ./setup.sh without EIN_ENGINE=podman</code></pre></div>
-<p>An installation whose <code>.env</code> has no <code>EIN_ENGINE</code> line yet gets one at its next run, for the engine that run picks: podman when it is installed, unless <code>EIN_ENGINE=docker</code> is given. On a machine with both, run that first update of an installation made under Docker as <code>EIN_ENGINE=docker ./setup.sh</code>.</p>
+<p><code>setup.sh</code> keeps the engine it installed with in <code>.env</code> as <code>EIN_ENGINE</code>, and every later run uses it, whichever else is installed. Run with an <code>--engine</code> that names the other one, it stops before building anything:</p>
+<div class="code"><pre tabindex="0"><code>setup.sh: EiN here runs under docker (EIN_ENGINE in .env); under podman it would be a second, empty EiN beside it. Run ./setup.sh without --engine podman</code></pre></div>
+<p>An installation whose <code>.env</code> has no <code>EIN_ENGINE</code> line yet gets one at its next run, for the engine that run picks: podman when it is installed, unless <code>--engine docker</code> is given. On a machine with both, run that first update of an installation made under Docker as <code>./setup.sh --engine docker</code>.</p>
 <p>Otherwise it is built again under podman, and <code>.env</code> then keeps podman. While Docker&#39;s containers hold ports 8080 and 2222, <code>setup.sh</code> moves podman&#39;s EiN to the next free ports and writes them into <code>.env</code>; with Docker&#39;s stopped, it takes 8080 and 2222. The database&#39;s folder in the data folder belongs to Docker&#39;s postgres user, which podman cannot use, so EiN does not come up under podman.</p>
 <p>If that has happened, remove podman&#39;s containers, put <code>EIN_ENGINE=docker</code> in <code>.env</code>, put <code>EIN_HTTP_PORT</code> and <code>EIN_SSH_PORT</code> back if <code>setup.sh</code> moved them, and run <code>setup.sh</code> again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
@@ -623,7 +711,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>data/</code></td>
-<td>the data folder, when <code>EIN_DATA</code> was left at its default</td>
+<td>the data folder, when you kept the default</td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 </tbody></table>
@@ -706,7 +794,7 @@ podman compose down
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
 <span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
-<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MQTT</code>, <code>EIN_MODULES</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>MQTT_PORT</code>.</p>
+<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_MQTT</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>MQTT_PORT</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -724,7 +812,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>EIN_ENGINE</code></td>
-<td><code>podman</code> or <code>docker</code>, the engine <code>setup.sh</code> picked at the install and keeps to; see <a href="#keep-to-one-engine">Keep to one engine</a></td>
+<td><code>podman</code> or <code>docker</code>, the engine <code>setup.sh</code> picked at the install, or <code>--engine</code> named, and keeps to; see <a href="#keep-to-one-engine">Keep to one engine</a></td>
 </tr>
 <tr>
 <td><code>EIN_EMS</code>, <code>EIN_LLM</code></td>
@@ -748,7 +836,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>EIN_DATA</code></td>
-<td>the data folder</td>
+<td>the data folder, chosen at the install with <code>--data</code> or at the question</td>
 </tr>
 <tr>
 <td><code>POSTGRES_PASSWORD</code></td>
@@ -764,15 +852,15 @@ podman compose down
 </tr>
 <tr>
 <td><code>INITIAL_ADMIN_PASSWORD</code></td>
-<td>the <code>admin</code> account&#39;s first password, random, made here. EiN takes it at its first start, and changing it later does nothing; <code>setup.sh</code> prints it at the end of every run until you delete the line, which you do once you have changed the password</td>
+<td>the <code>admin</code> account&#39;s first password, which EiN takes at its first start; changing it later does nothing. One made here, random, <code>setup.sh</code> prints at the end of every run until you delete the line, which you do once you have changed the password. One you chose at the install <code>setup.sh</code> removes, with the comment above it, once EiN has answered</td>
 </tr>
 <tr>
 <td><code>EIN_BIND</code></td>
-<td>the address the ports listen on: <code>0.0.0.0</code> for every address of the machine, <code>127.0.0.1</code> for the machine alone</td>
+<td>the address the ports listen on: <code>0.0.0.0</code> for every address of the machine, <code>127.0.0.1</code> for the machine alone; <code>--bind</code> sets it</td>
 </tr>
 <tr>
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
-<td>the ports on the machine for the Web UI and for SSH and SFTP; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
+<td>the ports on the machine for the Web UI and for SSH and SFTP, which <code>--http-port</code> and <code>--ssh-port</code> set; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>
@@ -837,7 +925,7 @@ podman compose down
 </tr>
 <tr>
 <td>The ports, or keep EiN to the machine</td>
-<td>Change <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>EIN_BIND</code> in <code>.env</code>, then <code>podman compose up -d</code>; see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
+<td><code>~/ein/setup.sh --http-port &lt;port&gt;</code>, <code>--ssh-port &lt;port&gt;</code> or <code>--bind &lt;address&gt;</code>, which also updates EiN; or change <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or <code>EIN_BIND</code> in <code>.env</code>, then <code>podman compose up -d</code>. See <a href="network.html">Ports, HTTPS and remote access</a>.</td>
 </tr>
 <tr>
 <td>A container&#39;s memory limit</td>
@@ -896,7 +984,7 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
 </thead>
 <tbody><tr>
 <td><code>fatal: destination path &#39;/home/anna/ein&#39; already exists and is not an empty directory.</code></td>
-<td><code>~/ein</code> exists but is not a clone of ein/deploy. Move it away, or install elsewhere with <code>EIN_HOME</code>.</td>
+<td><code>~/ein</code> exists but is not a clone of ein/deploy. Move it away, or install elsewhere with <code>--home</code>, or by answering the first question with another folder.</td>
 </tr>
 <tr>
 <td><code>git pull</code> stops with a message about local changes, and nothing is installed, or <code>setup.sh: /home/anna/ein could not be brought up to date from …: git status there says why</code></td>
@@ -904,7 +992,19 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
 </tr>
 <tr>
 <td><code>setup.sh: EiN here runs under docker (EIN_ENGINE in .env); under podman it would be a second, empty EiN beside it. …</code></td>
-<td><code>EIN_ENGINE</code> was given for the other engine. Run <code>./setup.sh</code> without it; see <a href="#keep-to-one-engine">Keep to one engine</a>.</td>
+<td><code>--engine</code> was given for the other engine. Run <code>./setup.sh</code> without it; see <a href="#keep-to-one-engine">Keep to one engine</a>.</td>
+</tr>
+<tr>
+<td><code>setup.sh: --data is chosen at the install, and the data folder here is /home/anna/ein/data</code></td>
+<td>The data folder is chosen once. Leave <code>--data</code> out; to put your files on another disk, see <a href="data.html#move-the-data-folder-to-another-disk">Move the data folder to another disk</a>.</td>
+</tr>
+<tr>
+<td><code>setup.sh: INITIAL_ADMIN_PASSWORD is shorter than 8 characters</code>, or <code>… holds a &#39; or a \, which .env cannot keep as they are: choose one without</code></td>
+<td>The password given in the environment does not do. Run again with another, or without <code>INITIAL_ADMIN_PASSWORD</code> to have one made. Nothing was started.</td>
+</tr>
+<tr>
+<td><code>No terminal to ask on: installing with the defaults and the options given, as --yes does.</code></td>
+<td>Not an error: the installer ran without a terminal, so it asked nothing. To answer its questions, run it at a terminal, or with <code>ssh -t</code> over SSH; or give what you want as options.</td>
 </tr>
 <tr>
 <td><code>setup.sh: EiN here runs under docker, which is not installed</code></td>
@@ -960,7 +1060,7 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
 </tr>
 <tr>
 <td>After an update, a module is still the old version</td>
-<td><code>setup.sh</code> does not update modules. Use <strong>Update</strong> in <strong>Settings → Modules</strong>; see <a href="modules.html">Modules</a>.</td>
+<td><code>setup.sh</code> does not update modules, and EiN&#39;s start replaces only one it cannot run. Use <strong>Update</strong> in <strong>Settings → Modules</strong>; see <a href="modules.html">Modules</a>.</td>
 </tr>
 </tbody></table>
 </div>
@@ -980,7 +1080,7 @@ Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman co
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/install.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-scripts-do-the-install">Two scripts do the install</a></li><li><a href="#the-options">The options</a></li><li><a href="#the-variables">The variables</a></li><li class="nested"><a href="#where-the-sources-come-from">Where the sources come from</a></li><li><a href="#what-the-checks-measure">What the checks measure</a></li><li><a href="#install-without-the-installer">Install without the installer</a></li><li><a href="#podman-or-docker">Podman or Docker</a></li><li class="nested"><a href="#keep-to-one-engine">Keep to one engine</a></li><li><a href="#what-runs-where">What runs where</a></li><li class="nested"><a href="#the-files-in-ein">The files in ~/ein</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li><a href="#change-the-installation-afterwards">Change the installation afterwards</a></li><li><a href="#run-ein-day-to-day">Run EiN day to day</a></li><li class="nested"><a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></li><li><a href="#update-and-remove">Update and remove</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-scripts-do-the-install">Two scripts do the install</a></li><li><a href="#the-questions">The questions</a></li><li><a href="#the-options">The options</a></li><li><a href="#the-variables">The variables</a></li><li class="nested"><a href="#where-the-sources-come-from">Where the sources come from</a></li><li><a href="#what-the-checks-measure">What the checks measure</a></li><li><a href="#install-without-the-installer">Install without the installer</a></li><li><a href="#podman-or-docker">Podman or Docker</a></li><li class="nested"><a href="#keep-to-one-engine">Keep to one engine</a></li><li><a href="#what-runs-where">What runs where</a></li><li class="nested"><a href="#the-files-in-ein">The files in ~/ein</a></li><li class="nested"><a href="#the-data-folder">The data folder</a></li><li class="nested"><a href="#env">.env</a></li><li class="nested"><a href="#composeoverrideyaml">compose.override.yaml</a></li><li><a href="#change-the-installation-afterwards">Change the installation afterwards</a></li><li><a href="#run-ein-day-to-day">Run EiN day to day</a></li><li class="nested"><a href="#start-ein-when-the-machine-boots">Start EiN when the machine boots</a></li><li><a href="#update-and-remove">Update and remove</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
