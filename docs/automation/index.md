@@ -15,7 +15,7 @@ household that uses them. [Automations](automations.md) covers making automation
 
 | Part                                                                                       | What it is                                                                                                                                                                                                                             |
 | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The `ha-discovery` driver                                                                  | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that                                                                                                          |
+| The `ha-discovery` driver                                                                  | Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that; lights with their brightness and colour                                                                 |
 | The `shelly` driver                                                                        | Shelly's second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers                                                                                                            |
 | The `shelly-gen1` driver                                                                   | Shelly's first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2                                                                                                                                                           |
 | The `ipp` driver                                                                           | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                                                                                   |
@@ -227,6 +227,18 @@ With an `mqtt:` block ESPHome announces each of its entities the way Home Assist
 reads them, which is on unless you turn it off. Leave its prefix as it is, `homeassistant`
 (**Discovery prefix** in the settings). The device is named by its `name:`, and an endpoint by its
 entity's own name: a sensor called Temperature on the device above is `hall-sensor/temperature`.
+
+A light is on or off, and has its brightness and its colour beside it when it has them, each to
+be set: `<light>-brightness`, 0–100 % whatever scale the light counts in, and `<light>-color`, as
+`#rrggbb`, such as `#ff8000`; `255,128,0` is taken too. A light that takes its colour as hue and
+saturation, or as x and y, as many Zigbee lights do, is read and set in them.
+
+```bash
+# in EiN's terminal, as a member of the devices group
+echo on > /dev/living-room/ceiling
+echo 40 > /dev/living-room/ceiling-brightness
+echo '#ff8000' > /dev/living-room/ceiling-color
+```
 
 Other software that announces devices the same way, such as Zigbee2MQTT, is read as far as it keeps
 to what ESPHome sends; `automation-status` names what it could not read.

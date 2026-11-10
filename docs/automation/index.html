@@ -110,7 +110,7 @@ household that uses them. <a href="automations.html">Automations</a> covers maki
 </thead>
 <tbody><tr>
 <td>The <code>ha-discovery</code> driver</td>
-<td>Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that</td>
+<td>Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that; lights with their brightness and colour</td>
 </tr>
 <tr>
 <td>The <code>shelly</code> driver</td>
@@ -344,6 +344,14 @@ install the configuration on the device as usual:</p>
 reads them, which is on unless you turn it off. Leave its prefix as it is, <code>homeassistant</code>
 (<strong>Discovery prefix</strong> in the settings). The device is named by its <code>name:</code>, and an endpoint by its
 entity&#39;s own name: a sensor called Temperature on the device above is <code>hall-sensor/temperature</code>.</p>
+<p>A light is on or off, and has its brightness and its colour beside it when it has them, each to
+be set: <code>&lt;light&gt;-brightness</code>, 0–100 % whatever scale the light counts in, and <code>&lt;light&gt;-color</code>, as
+<code>#rrggbb</code>, such as <code>#ff8000</code>; <code>255,128,0</code> is taken too. A light that takes its colour as hue and
+saturation, or as x and y, as many Zigbee lights do, is read and set in them.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/living-room/ceiling
+<span class="hljs-built_in">echo</span> 40 &gt; /dev/living-room/ceiling-brightness
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;#ff8000&#x27;</span> &gt; /dev/living-room/ceiling-color</code></pre></div>
 <p>Other software that announces devices the same way, such as Zigbee2MQTT, is read as far as it keeps
 to what ESPHome sends; <code>automation-status</code> names what it could not read.</p>
 <h3 id="shelly-second-generation-and-later">Shelly, second generation and later<a class="anchor" href="#shelly-second-generation-and-later" aria-label="Link to this section"></a></h3>
