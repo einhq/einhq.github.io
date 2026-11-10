@@ -100,30 +100,35 @@ is a YAML file, written by members of the <code>automation</code> group, and run
 whose file it is. This page is for those members. <a href="index.html">Automation</a> covers connecting the
 devices, and <a href="../guide/devices.html">Devices</a> the devices themselves.</p>
 <h2 id="the-automations-page">The Automations page<a class="anchor" href="#the-automations-page" aria-label="Link to this section"></a></h2>
-<p><strong>Browse → Automations</strong> in the sidebar, for members of the <code>automation</code> group, lists the
-automations beside the one open, each with a dot that says whether it runs (green), is off (grey) or
-is held back (red, with why under its name). <strong>+</strong> in the bar makes one, empty or from a starting
-point. On a phone the list is in the bar&#39;s menu.</p>
-<p>An automation opens on three tabs:</p>
+<p><strong>System → Automations</strong> in the sidebar, for members of the <code>automation</code> group, opens the
+automation in the whole of the page below its bar. The list of automations is a drawer over its left
+edge, each with a dot that says whether it runs (green), is off (grey) or is held back (red, with
+why under its name); tap or drag the handle on the drawer&#39;s edge to slide it away to the left and
+back. <strong>+</strong> beside the list&#39;s filter makes one, empty or from a starting point. On a phone the
+drawer covers the page, and closes when you pick one.</p>
+<p>An automation opens on three tabs, under its name in the bar:</p>
 <ul>
 <li><strong>Graph</strong>: its nodes as cards wired together, which you drag and zoom as a map (the wheel or
-two fingers, a double tap to zoom in). Add a node from the list of kinds on the left (<strong>Add</strong> on a
-phone); it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
+two fingers, a double tap to zoom in). Add a node with <strong>+</strong> in the canvas&#39;s corner, which lists
+the kinds; it lands in the middle of what is in view. Drag a card to move it. Drag from one of a
 card&#39;s outputs on its right edge to another card to wire them: <code>true</code> is the green output, <code>false</code>
-the red one, and a switch has one per case. Tap a card to set it up in the panel beside the graph
-(a drawer on a phone), with a device and endpoint picker for what it reads or switches; tap a wire
-and <strong>Remove the wire</strong>, or press Delete, to take it out. While the automation runs, each card says
-what its node last sent and when, or when its timer runs out.</li>
+the red one, and a switch has one per case. Tap a card to set it up in the panel over the right
+of the graph (a drawer on a phone), with a device and endpoint picker for what it reads or
+switches; tap a wire and the red bin in the corner, or press Delete, to take it out. While the
+automation runs, each card says what its node last sent and when, or when its timer runs out.</li>
 <li><strong>YAML</strong>: the file itself, to read or change as typed.</li>
 <li><strong>Runs</strong>: what it did, as its <a href="#see-what-automations-did">run log</a> has it, as it happens.</li>
 </ul>
-<p><strong>Save</strong> writes the changes; one with problems can only be saved as a draft (<strong>Save as draft</strong>),
-which does not run until they are gone, and each card with a problem has a red border and says
-what it is. <strong>On</strong> turns the automation on and off. A save from the graph writes the YAML anew, so
-comments in the file are lost; a save from the YAML tab keeps it as typed. Opening an automation&#39;s
-file in <strong>System → Nodes</strong> (<a href="../concepts/nodes.html">Nodes</a>) opens it here too.</p>
-<p>A module&#39;s automation is shown but not changed here, and only the administrator turns it on and
-off.</p>
+<p>The bar also says whether it runs, or how many problems it has: tap <strong>3 problems</strong> to read them,
+and one of them to pick the card it is about. Each card with a problem has a red border and says
+what it is. <strong>Save</strong> writes the changes; one with problems can only be saved as a draft
+(<strong>Save as draft</strong>), which does not run until they are gone, and the round arrow beside it reads
+the file again, dropping them. <strong>On</strong> turns the automation on and off. A save from the graph
+writes the YAML anew, so comments in the file are lost; a save from the YAML tab keeps it as typed.
+Opening an automation&#39;s file in <strong>System → Nodes</strong> (<a href="../concepts/nodes.html">Nodes</a>) opens it here
+too.</p>
+<p>A module&#39;s automation is shown but not changed here, with the module&#39;s name in the bar, and only
+the administrator turns it on and off.</p>
 <h2 id="a-first-automation">A first automation<a class="anchor" href="#a-first-automation" aria-label="Link to this section"></a></h2>
 <p>The hall lamp goes on at motion when it is dark, and off five minutes after the motion ends. On the
 Automations page, that is <strong>+</strong>, <strong>Motion light</strong>, then the devices set to yours on the cards. In
