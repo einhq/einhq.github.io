@@ -2,8 +2,9 @@
 
 An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark
 and off a while after, a heater keeps a room between two temperatures while someone is home, a
-button toggles a lamp, a line runs at half past six on weekdays. It is made of **nodes wired
-together**: inputs that hear devices and the clock, logic that compares and combines, values worked
+button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a
+folder. It is made of **nodes wired together**: inputs that hear devices, the clock and files coming
+into a folder, logic that compares and combines, values worked
 out from readings, timers, and actions that switch controls and run command lines. Each automation
 is a YAML file, written by members of the `automation` group, and runs with the rights of the person
 whose file it is. This page is for those members. [Automation](index.md) covers connecting the
@@ -69,7 +70,7 @@ phone) has:
 - **Inputs**, one for each node that starts things: a device node takes a reading of **on** or **off**, or any value
   you type, sent as a reading, or as a **Press** (a button's single or long); an online node is set
   online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
-  sent a value.
+  sent a value; a file node is given a file's name, as if it came into its folder.
 - **Controls**, what each control the automation writes holds in the simulation.
 - **Log**, newest first: each input you fed, each node that sent something and on which
   output, each value a node held back and why (a compare or an and that would send what it sent
@@ -174,9 +175,9 @@ what each of its nodes last sent while it runs.
 ### Whose automation it is
 
 An automation runs as the owner of its file, with that person's rights and nothing more: Helen's
-automation hears only the endpoints Helen may read, switches only what Helen may switch, and runs
-its lines as Helen. One whose owner may not read an endpoint it listens to, or write a control it
-switches, is not run, and says which: rights are checked when the file is read and every minute
+automation hears only the endpoints Helen may read, switches only what Helen may switch, hears only
+of the files Helen may read, and runs its lines as Helen. One whose owner may not read an endpoint it
+listens to, write a control it switches, or read a folder it watches, is not run, and says which: rights are checked when the file is read and every minute
 after, so taking a device from someone stops their automations that use it. Copying someone's
 automation into a file of your own makes it yours.
 
@@ -235,6 +236,7 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 | `between` | `from`, `until`, `days`              | True from `from` until `until`, false outside it: `from: '22:00'`, `until: '06:30'` goes over midnight                                                                           |
 | `button`  | `value`                              | `true`, or its `value`, when it is pressed with `automation-trigger <name> <node>`                                                                                               |
 | `link-in` | `name`                               | What a `link-out` of the same name sends, from any automation of the same owner                                                                                                  |
+| `file`    | `folder`; `match`, `changes`         | The path of each file that comes into `folder` ([A file in a folder](#a-file-in-a-folder))                                                                                       |
 
 **Logic**:
 
@@ -307,13 +309,14 @@ hour after the motion ended is left on.
 
 Readings and presses that come while the engine is stopped wait in its queue. Those said more than a
 minute before it starts again bring the automations up to date but switch nothing: a press from an
-hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up.
+hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up, and a file
+that came into a folder meanwhile is not sent.
 
 ## More examples
 
 ### A tour of every kind of node
 
-**automation/tour**, under System → Automations, is the Automation module's own: six small flows
+**automation/tour**, under System → Automations, is the Automation module's own: seven small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (`example-…`), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: **+** beside the list, starting
@@ -326,6 +329,7 @@ point **Tour of every node**, or `automation-new <name> --from tour`, then set y
 4. An average indoors, shared: aggregate, throttle, link out.
 5. What the link brings: link in, held, or, shell.
 6. The clock: clock, delay, between, online.
+7. A file: file.
 
 An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
 timer's or a compare's **out** into it (true and false both), as the motion light does, not its
@@ -382,6 +386,33 @@ nodes:
 Half past six is in the system's time zone (`TZ` in `~/ein/.env`,
 [Installing in detail](../admin/install.md#env)). Write a time in quotes.
 
+### A file in a folder
+
+```yaml
+# automation-new inbox --from inbox
+description: Each PDF scanned into the inbox is moved to the documents folder
+nodes:
+  scan: { type: file, folder: /home/anna/inbox, match: '*.pdf', to: [file-it] }
+  file-it: { type: shell, run: 'mv "$VALUE" /home/anna/documents/ && echo "filed $VALUE"', to: [shown] }
+  shown: { type: debug }
+```
+
+Set your own folders: a scanner that saves to `/home/helen/inbox` over [SFTP](../shell/ssh-sftp.md),
+say, and `/home/helen/documents`. A `file` node sends the whole path of each file that comes into
+its `folder`, made there or moved in, as `$VALUE` to a line, and the folder as `$TOPIC`:
+
+- once the file is written in full, two seconds after the last write to it, so a file written in
+  pieces is sent once. A file that stays empty is not sent, nor one removed or renamed before then;
+  a file written under a name of its own and then renamed, as some scanners do, is sent by its new
+  name.
+- only the files directly in the folder, not those in folders under it.
+- only those whose names match `match` when it is set: `*` is any text and `?` one character, and
+  upper and lower case are alike, so `*.pdf` takes `Scan.PDF` too.
+- with `changes: true`, also each time a file already there is written again.
+
+The automation's owner must be allowed to read the folder, and hears only of the files in it they
+may read: one the administrator puts there that only the administrator may read is not sent.
+
 ## See what automations did
 
 ```bash
@@ -409,6 +440,7 @@ same.
 | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `others than its owner may change it, so it is not run`                   | The file can be changed by the group, by anyone, or by someone on its access list                                                 | `chmod 644` the file, and take the others off its access list       |
 | `its owner may not read hall-sensor/motion, or there is no such endpoint` | The endpoint is misspelt, gone, or not the owner's to read                                                                        | Correct it with `device-show`, or ask whoever shares the device     |
+| `its owner may not read the folder /home/helen/inbox, or there is none`   | The folder is misspelt, gone, or not the owner's to read                                                                          | Correct the path, or have its owner share it (`share-set`)          |
 | `its owner may not write hall-lamp/switch-0, or there is no such control` | The control is misspelt, or narrowed to others ([Keep a switch to some people](../admin/devices.md#keep-a-switch-to-some-people)) | Correct it, or have someone who may switch it own the automation    |
 | `<node>: endpoint is needed: endpoint`                                    | A setting the node's kind needs is missing                                                                                        | Add it; [The nodes](#the-nodes) lists each kind's                   |
 | `<node>: above: a device node does not read this`                         | A setting is misspelt, or one another kind takes                                                                                  | Use the settings in [The nodes](#the-nodes)                         |

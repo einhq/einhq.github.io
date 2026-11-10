@@ -4,7 +4,7 @@ The Automation module brings the devices in the house that talk MQTT into EiN: s
 switches, lights and buttons, such as those running ESPHome and Shelly's. It adds drivers that hear
 them on an MQTT broker and make each one a device under `/dev`, with its readings, presses and
 switches, and [automations](automations.md): nodes wired together, which switch things and run
-command lines when a reading, a press or the clock says so.
+command lines when a reading, a press, a file coming into a folder or the clock says so.
 The devices, their pages and their commands are EiN's own, the same for a plug as for a phone:
 [Devices](../guide/devices.md).
 

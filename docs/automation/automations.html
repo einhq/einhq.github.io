@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Automations – EiN documentation</title>
-    <meta name="description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays. It is made of nodes wired together: inputs that hear devices and the clock, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta name="description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock and files coming into a folder, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/automation/automations.html">
     <meta property="og:title" content="Automations – EiN documentation">
-    <meta property="og:description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays. It is made of nodes wired together: inputs that hear devices and the clock, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
+    <meta property="og:description" content="An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark and off a while after, a heater keeps a room between two temperatures while someone is home, a button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a folder. It is made of nodes wired together: inputs that hear devices, the clock and files coming into a folder, logic that compares and combines, values worked out from readings, timers, and actions that switch controls and run command lines. Each automation is a YAML file, written by members of the automation group, and runs with the rights of the person whose file it is. This page is for those members. Automation covers connecting the devices, and Devices the devices themselves.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -93,8 +93,9 @@
         <article class="prose">
 <p>An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark
 and off a while after, a heater keeps a room between two temperatures while someone is home, a
-button toggles a lamp, a line runs at half past six on weekdays. It is made of <strong>nodes wired
-together</strong>: inputs that hear devices and the clock, logic that compares and combines, values worked
+button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a
+folder. It is made of <strong>nodes wired together</strong>: inputs that hear devices, the clock and files coming
+into a folder, logic that compares and combines, values worked
 out from readings, timers, and actions that switch controls and run command lines. Each automation
 is a YAML file, written by members of the <code>automation</code> group, and runs with the rights of the person
 whose file it is. This page is for those members. <a href="index.html">Automation</a> covers connecting the
@@ -154,7 +155,7 @@ Times are in your browser&#39;s time zone, written in your date and time format 
 <li><strong>Inputs</strong>, one for each node that starts things: a device node takes a reading of <strong>on</strong> or <strong>off</strong>, or any value
 you type, sent as a reading, or as a <strong>Press</strong> (a button&#39;s single or long); an online node is set
 online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
-sent a value.</li>
+sent a value; a file node is given a file&#39;s name, as if it came into its folder.</li>
 <li><strong>Controls</strong>, what each control the automation writes holds in the simulation.</li>
 <li><strong>Log</strong>, newest first: each input you fed, each node that sent something and on which
 output, each value a node held back and why (a compare or an and that would send what it sent
@@ -234,9 +235,9 @@ turns one off with <code>automation-disable &lt;module&gt;/&lt;name&gt;</code>.<
 </ul>
 <h3 id="whose-automation-it-is">Whose automation it is<a class="anchor" href="#whose-automation-it-is" aria-label="Link to this section"></a></h3>
 <p>An automation runs as the owner of its file, with that person&#39;s rights and nothing more: Helen&#39;s
-automation hears only the endpoints Helen may read, switches only what Helen may switch, and runs
-its lines as Helen. One whose owner may not read an endpoint it listens to, or write a control it
-switches, is not run, and says which: rights are checked when the file is read and every minute
+automation hears only the endpoints Helen may read, switches only what Helen may switch, hears only
+of the files Helen may read, and runs its lines as Helen. One whose owner may not read an endpoint it
+listens to, write a control it switches, or read a folder it watches, is not run, and says which: rights are checked when the file is read and every minute
 after, so taking a device from someone stops their automations that use it. Copying someone&#39;s
 automation into a file of your own makes it yours.</p>
 <p>A file that others than its owner may change, by its mode or by an entry on its access list, is not
@@ -349,6 +350,11 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 <td><code>link-in</code></td>
 <td><code>name</code></td>
 <td>What a <code>link-out</code> of the same name sends, from any automation of the same owner</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td><code>folder</code>; <code>match</code>, <code>changes</code></td>
+<td>The path of each file that comes into <code>folder</code> (<a href="#a-file-in-a-folder">A file in a folder</a>)</td>
 </tr>
 </tbody></table>
 </div>
@@ -511,10 +517,11 @@ restarted still goes off a minute after it starts again, and a lamp someone swit
 hour after the motion ended is left on.</p>
 <p>Readings and presses that come while the engine is stopped wait in its queue. Those said more than a
 minute before it starts again bring the automations up to date but switch nothing: a press from an
-hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up.</p>
+hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up, and a file
+that came into a folder meanwhile is not sent.</p>
 <h2 id="more-examples">More examples<a class="anchor" href="#more-examples" aria-label="Link to this section"></a></h2>
 <h3 id="a-tour-of-every-kind-of-node">A tour of every kind of node<a class="anchor" href="#a-tour-of-every-kind-of-node" aria-label="Link to this section"></a></h3>
-<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: six small flows
+<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: seven small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (<code>example-…</code>), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: <strong>+</strong> beside the list, starting
@@ -527,6 +534,7 @@ that came.</li>
 <li>An average indoors, shared: aggregate, throttle, link out.</li>
 <li>What the link brings: link in, held, or, shell.</li>
 <li>The clock: clock, delay, between, online.</li>
+<li>A file: file.</li>
 </ol>
 <p>An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
 timer&#39;s or a compare&#39;s <strong>out</strong> into it (true and false both), as the motion light does, not its
@@ -567,6 +575,28 @@ real button.</p>
   <span class="hljs-attr">shown:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">debug</span> }</code></pre></div>
 <p>Half past six is in the system&#39;s time zone (<code>TZ</code> in <code>~/ein/.env</code>,
 <a href="../admin/install.html#env">Installing in detail</a>). Write a time in quotes.</p>
+<h3 id="a-file-in-a-folder">A file in a folder<a class="anchor" href="#a-file-in-a-folder" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new inbox --from inbox</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">Each</span> <span class="hljs-string">PDF</span> <span class="hljs-string">scanned</span> <span class="hljs-string">into</span> <span class="hljs-string">the</span> <span class="hljs-string">inbox</span> <span class="hljs-string">is</span> <span class="hljs-string">moved</span> <span class="hljs-string">to</span> <span class="hljs-string">the</span> <span class="hljs-string">documents</span> <span class="hljs-string">folder</span>
+<span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">scan:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">file</span>, <span class="hljs-attr">folder:</span> <span class="hljs-string">/home/anna/inbox</span>, <span class="hljs-attr">match:</span> <span class="hljs-string">&#x27;*.pdf&#x27;</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">file-it</span>] }
+  <span class="hljs-attr">file-it:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">shell</span>, <span class="hljs-attr">run:</span> <span class="hljs-string">&#x27;mv &quot;$VALUE&quot; /home/anna/documents/ &amp;&amp; echo &quot;filed $VALUE&quot;&#x27;</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">shown</span>] }
+  <span class="hljs-attr">shown:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">debug</span> }</code></pre></div>
+<p>Set your own folders: a scanner that saves to <code>/home/helen/inbox</code> over <a href="../shell/ssh-sftp.html">SFTP</a>,
+say, and <code>/home/helen/documents</code>. A <code>file</code> node sends the whole path of each file that comes into
+its <code>folder</code>, made there or moved in, as <code>$VALUE</code> to a line, and the folder as <code>$TOPIC</code>:</p>
+<ul>
+<li>once the file is written in full, two seconds after the last write to it, so a file written in
+pieces is sent once. A file that stays empty is not sent, nor one removed or renamed before then;
+a file written under a name of its own and then renamed, as some scanners do, is sent by its new
+name.</li>
+<li>only the files directly in the folder, not those in folders under it.</li>
+<li>only those whose names match <code>match</code> when it is set: <code>*</code> is any text and <code>?</code> one character, and
+upper and lower case are alike, so <code>*.pdf</code> takes <code>Scan.PDF</code> too.</li>
+<li>with <code>changes: true</code>, also each time a file already there is written again.</li>
+</ul>
+<p>The automation&#39;s owner must be allowed to read the folder, and hears only of the files in it they
+may read: one the administrator puts there that only the administrator may read is not sent.</p>
 <h2 id="see-what-automations-did">See what automations did<a class="anchor" href="#see-what-automations-did" aria-label="Link to this section"></a></h2>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automations                       <span class="hljs-comment"># each, whose it is, whether it runs, and why not</span>
@@ -597,6 +627,11 @@ same.</p>
 <td><code>its owner may not read hall-sensor/motion, or there is no such endpoint</code></td>
 <td>The endpoint is misspelt, gone, or not the owner&#39;s to read</td>
 <td>Correct it with <code>device-show</code>, or ask whoever shares the device</td>
+</tr>
+<tr>
+<td><code>its owner may not read the folder /home/helen/inbox, or there is none</code></td>
+<td>The folder is misspelt, gone, or not the owner&#39;s to read</td>
+<td>Correct the path, or have its owner share it (<code>share-set</code>)</td>
 </tr>
 <tr>
 <td><code>its owner may not write hall-lamp/switch-0, or there is no such control</code></td>
@@ -662,7 +697,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>
