@@ -32,7 +32,7 @@ An automation opens on three tabs, under its name in the bar:
   the panel's foot, **About … nodes** says what the kind does, what it sends and what each setting
   means; fold it away and it stays folded. A card that reads or switches a device has the device to
   pick, and under it the device's endpoints (its controls, on a card that switches) with their
-  latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out. While the
+  latest values; picking a device picks its first endpoint, and tapping another picks that. Tap a wire and the red bin in the corner, or press Delete, to take it out; the bin at the top right of a node's panel, or Delete on a selected node, asks before the node and its wires go. While the
   automation runs, each card says what its node last sent and when, or when its timer runs out.
 - **YAML**: the file itself, to read or change as typed.
 - **Runs**: what it did, as its [run log](#see-what-automations-did) has it, as it happens.
