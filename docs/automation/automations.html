@@ -182,7 +182,7 @@ automation-new hall-light --from motion-light</code></pre></div>
     <span class="hljs-attr">type:</span> <span class="hljs-string">timer</span>
     <span class="hljs-attr">off-after:</span> <span class="hljs-string">5m</span>
     <span class="hljs-attr">pos:</span> [<span class="hljs-number">240</span>, <span class="hljs-number">0</span>]
-    <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">dark-and-moving</span>], <span class="hljs-attr">false:</span> [<span class="hljs-string">lamp-off</span>] }
+    <span class="hljs-attr">to:</span> { <span class="hljs-attr">out:</span> [<span class="hljs-string">dark-and-moving</span>], <span class="hljs-attr">false:</span> [<span class="hljs-string">lamp-off</span>] }
   <span class="hljs-attr">lux:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-sensor/illuminance</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">0</span>, <span class="hljs-number">140</span>], <span class="hljs-attr">to:</span> [<span class="hljs-string">dark</span>] }
   <span class="hljs-attr">dark:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">compare</span>, <span class="hljs-attr">below:</span> <span class="hljs-number">30</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">240</span>, <span class="hljs-number">140</span>], <span class="hljs-attr">to:</span> [<span class="hljs-string">dark-and-moving</span>] }
   <span class="hljs-attr">dark-and-moving:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">and</span>, <span class="hljs-attr">pos:</span> [<span class="hljs-number">480</span>, <span class="hljs-number">60</span>], <span class="hljs-attr">to:</span> { <span class="hljs-attr">true:</span> [<span class="hljs-string">lamp-on</span>] } }
@@ -512,6 +512,24 @@ hour after the motion ended is left on.</p>
 minute before it starts again bring the automations up to date but switch nothing: a press from an
 hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up.</p>
 <h2 id="more-examples">More examples<a class="anchor" href="#more-examples" aria-label="Link to this section"></a></h2>
+<h3 id="a-tour-of-every-kind-of-node">A tour of every kind of node<a class="anchor" href="#a-tour-of-every-kind-of-node" aria-label="Link to this section"></a></h3>
+<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: six small flows
+with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
+devices are invented (<code>example-…</code>), so it switches nothing real, and it comes off. Simulate it with
+the flask to see each flow work, or start one of your own from it: <strong>+</strong> beside the list, starting
+point <strong>Tour of every node</strong>, or <code>automation-new &lt;name&gt; --from tour</code>, then set your own devices.</p>
+<ol>
+<li>A motion light: device, compare, not, and, timer, control.</li>
+<li>A button: a device&#39;s <strong>Only when it is</strong>, a button node, set, and a control that writes the value
+that came.</li>
+<li>Temperature bands: debounce, math, debug, switch.</li>
+<li>An average indoors, shared: aggregate, throttle, link out.</li>
+<li>What the link brings: link in, held, or, shell.</li>
+<li>The clock: clock, delay, between, online.</li>
+</ol>
+<p>An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
+timer&#39;s or a compare&#39;s <strong>out</strong> into it (true and false both), as the motion light does, not its
+true alone: otherwise it holds the last true for ever.</p>
 <h3 id="the-heater-between-two-temperatures">The heater between two temperatures<a class="anchor" href="#the-heater-between-two-temperatures" aria-label="Link to this section"></a></h3>
 <div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># automation-new heater --from heater</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">The</span> <span class="hljs-string">heater</span> <span class="hljs-string">keeps</span> <span class="hljs-string">the</span> <span class="hljs-string">hall</span> <span class="hljs-string">between</span> <span class="hljs-number">19</span> <span class="hljs-string">and</span> <span class="hljs-number">21</span> <span class="hljs-string">°C</span> <span class="hljs-string">while</span> <span class="hljs-string">someone</span> <span class="hljs-string">is</span> <span class="hljs-string">home</span>
@@ -643,7 +661,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>

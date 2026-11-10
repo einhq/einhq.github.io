@@ -108,7 +108,7 @@ nodes:
     type: timer
     off-after: 5m
     pos: [240, 0]
-    to: { true: [dark-and-moving], false: [lamp-off] }
+    to: { out: [dark-and-moving], false: [lamp-off] }
   lux: { type: device, endpoint: hall-sensor/illuminance, pos: [0, 140], to: [dark] }
   dark: { type: compare, below: 30, pos: [240, 140], to: [dark-and-moving] }
   dark-and-moving: { type: and, pos: [480, 60], to: { true: [lamp-on] } }
@@ -309,6 +309,26 @@ minute before it starts again bring the automations up to date but switch nothin
 hour ago does not toggle a lamp now. A time of day that passed meanwhile is not caught up.
 
 ## More examples
+
+### A tour of every kind of node
+
+**automation/tour**, under System → Automations, is the Automation module's own: six small flows
+with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
+devices are invented (`example-…`), so it switches nothing real, and it comes off. Simulate it with
+the flask to see each flow work, or start one of your own from it: **+** beside the list, starting
+point **Tour of every node**, or `automation-new <name> --from tour`, then set your own devices.
+
+1. A motion light: device, compare, not, and, timer, control.
+2. A button: a device's **Only when it is**, a button node, set, and a control that writes the value
+   that came.
+3. Temperature bands: debounce, math, debug, switch.
+4. An average indoors, shared: aggregate, throttle, link out.
+5. What the link brings: link in, held, or, shell.
+6. The clock: clock, delay, between, online.
+
+An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
+timer's or a compare's **out** into it (true and false both), as the motion light does, not its
+true alone: otherwise it holds the last true for ever.
 
 ### The heater between two temperatures
 
