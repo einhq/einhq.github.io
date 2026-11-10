@@ -610,6 +610,11 @@ smaller stream on the camera&#39;s card.</p>
 <p>A picture is a file too, a JPEG of the stream now, taken each time it is read:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">cat</span> /dev/front-door/main &gt; ~/front-door.jpg</code></pre></div>
+<p>With the <a href="../archive/index.html">Archive</a>, the media service also watches each camera&#39;s smaller
+stream for faces: the camera gets a <strong>Faces</strong> log, which says who each face that came into view
+was, or <code>unknown</code>, within a second or so, as <code>dev.&lt;camera&gt;.faces</code> for automations, and the faces&#39;
+pictures are filed under the camera in the archive, where they are named as photos&#39; faces are
+(<a href="../archive/people.html#faces-a-camera-sees">Faces a camera sees</a>).</p>
 <p>The camera is <strong>online</strong> while it gives a picture, asked every other minute. Who may see the
 pictures is who may read the stream: the household, as for every device
 (<a href="#who-may-do-what">Who may do what</a>). EiN&#39;s pages reach the camera only through EiN, signed in, so
@@ -823,6 +828,12 @@ automation-check hall-light           <span class="hljs-comment"># what an autom
 <td><strong>Restreamer password</strong></td>
 <td>none; <code>--automation</code> sets it</td>
 <td>The password of the restreamer&#39;s account <code>ein</code>, a key nobody can read back</td>
+</tr>
+<tr>
+<td><code>CFG_AUTOMATION_STREAMS_RTSP</code></td>
+<td><strong>Restreamer for the media service</strong></td>
+<td>empty; <code>--automation</code> sets it</td>
+<td>The restreamer&#39;s RTSP as the media service reaches it, <code>rtsp://host:8554</code>. Empty, no camera is watched for faces</td>
 </tr>
 <tr>
 <td><code>CFG_AUTOMATION_SOURCES</code></td>

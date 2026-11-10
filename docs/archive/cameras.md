@@ -56,6 +56,16 @@ Two things a fingerprint cannot do:
 A camera's fingerprint has nothing to do with the fingerprints EiN takes of the pictures themselves
 to find copies; those are described in [Duplicates](duplicates.md).
 
+## A security camera
+
+A camera on the network that the [Automation](../automation/index.md) module drives
+([A camera](../automation/index.md#a-camera)) is a device under **Devices**, and the archive makes it
+a camera here too, linked to the device, the first time it sees a face. Under it, in `faces/` with a
+folder a day, is the picture of each face the camera saw, as the face was clearest, named for the
+time it was seen. Those pictures are the archive's like any other: their faces join people or start
+unidentified ones ([Faces a camera sees](people.md#faces-a-camera-sees)), and they turn up in
+search.
+
 ## The Cameras page
 
 Open **Cameras** in the sidebar, under **Browse**.

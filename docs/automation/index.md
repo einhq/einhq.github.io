@@ -453,6 +453,12 @@ A picture is a file too, a JPEG of the stream now, taken each time it is read:
 cat /dev/front-door/main > ~/front-door.jpg
 ```
 
+With the [Archive](../archive/index.md), the media service also watches each camera's smaller
+stream for faces: the camera gets a **Faces** log, which says who each face that came into view
+was, or `unknown`, within a second or so, as `dev.<camera>.faces` for automations, and the faces'
+pictures are filed under the camera in the archive, where they are named as photos' faces are
+([Faces a camera sees](../archive/people.md#faces-a-camera-sees)).
+
 The camera is **online** while it gives a picture, asked every other minute. Who may see the
 pictures is who may read the stream: the household, as for every device
 ([Who may do what](#who-may-do-what)). EiN's pages reach the camera only through EiN, signed in, so
@@ -581,17 +587,18 @@ automation-check hall-light           # what an automation's nodes would say now
 The module's settings are in the **Automation** group of **Settings → System**, and each restarts
 `automation-bridge` when saved:
 
-| Setting                           | On the Settings page         | Default                           | What it does                                                                                                                                                                                                  |
-| --------------------------------- | ---------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**              | empty; `--automation` sets it     | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, only the devices EiN asks over the network are read                                                                                          |
-| `CFG_AUTOMATION_MQTT_USER`        | **MQTT user**                | empty; `--automation` sets `ein`  | The account EiN signs in to the broker with. Empty, it signs in without one                                                                                                                                   |
-| `CFG_AUTOMATION_MQTT_KEY`         | **MQTT password**            | none; `--automation` sets it      | That account's password, a key nobody can read back                                                                                                                                                           |
-| `CFG_AUTOMATION_STREAMS_URL`      | **Restreamer**               | empty; `--automation` sets it     | The restreamer cameras are given to, go2rtc's API as `http://host:1984`. Empty, a camera has no live view, and its picture is asked of the camera itself                                                      |
-| `CFG_AUTOMATION_STREAMS_KEY`      | **Restreamer password**      | none; `--automation` sets it      | The password of the restreamer's account `ein`, a key nobody can read back                                                                                                                                    |
-| `CFG_AUTOMATION_SOURCES`          | **Device sources**           | `ha-discovery shelly shelly-gen1` | Which drivers the bridge runs, separated by spaces: `ha-discovery` for ESPHome and whatever announces itself as it does, `shelly` for Shelly's second generation and later, and `shelly-gen1` for the first   |
-| `CFG_AUTOMATION_DISCOVERY_PREFIX` | **Discovery prefix**         | `homeassistant`                   | The topic `ha-discovery` devices announce themselves under                                                                                                                                                    |
-| `CFG_AUTOMATION_HISTORY`          | **Reading history**          | `365 day`                         | How long an endpoint's values are kept: `30 day`, `90 day`, `365 day` or `forever`. It applies to endpoints found from then on; one found before keeps its own, which `attrs` on the endpoint changes (below) |
-| `CFG_AUTOMATION_MIN_INTERVAL`     | **Seconds between readings** | `10`                              | The shortest time between two kept readings of one number, given to endpoints found from then on as their `minInterval`, which may be changed on each                                                         |
+| Setting                           | On the Settings page                 | Default                           | What it does                                                                                                                                                                                                  |
+| --------------------------------- | ------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CFG_AUTOMATION_MQTT_URL`         | **MQTT broker**                      | empty; `--automation` sets it     | The broker, as `mqtt://host:1883` or `mqtts://host:8883`. Empty, only the devices EiN asks over the network are read                                                                                          |
+| `CFG_AUTOMATION_MQTT_USER`        | **MQTT user**                        | empty; `--automation` sets `ein`  | The account EiN signs in to the broker with. Empty, it signs in without one                                                                                                                                   |
+| `CFG_AUTOMATION_MQTT_KEY`         | **MQTT password**                    | none; `--automation` sets it      | That account's password, a key nobody can read back                                                                                                                                                           |
+| `CFG_AUTOMATION_STREAMS_URL`      | **Restreamer**                       | empty; `--automation` sets it     | The restreamer cameras are given to, go2rtc's API as `http://host:1984`. Empty, a camera has no live view, and its picture is asked of the camera itself                                                      |
+| `CFG_AUTOMATION_STREAMS_KEY`      | **Restreamer password**              | none; `--automation` sets it      | The password of the restreamer's account `ein`, a key nobody can read back                                                                                                                                    |
+| `CFG_AUTOMATION_STREAMS_RTSP`     | **Restreamer for the media service** | empty; `--automation` sets it     | The restreamer's RTSP as the media service reaches it, `rtsp://host:8554`. Empty, no camera is watched for faces                                                                                              |
+| `CFG_AUTOMATION_SOURCES`          | **Device sources**                   | `ha-discovery shelly shelly-gen1` | Which drivers the bridge runs, separated by spaces: `ha-discovery` for ESPHome and whatever announces itself as it does, `shelly` for Shelly's second generation and later, and `shelly-gen1` for the first   |
+| `CFG_AUTOMATION_DISCOVERY_PREFIX` | **Discovery prefix**                 | `homeassistant`                   | The topic `ha-discovery` devices announce themselves under                                                                                                                                                    |
+| `CFG_AUTOMATION_HISTORY`          | **Reading history**                  | `365 day`                         | How long an endpoint's values are kept: `30 day`, `90 day`, `365 day` or `forever`. It applies to endpoints found from then on; one found before keeps its own, which `attrs` on the endpoint changes (below) |
+| `CFG_AUTOMATION_MIN_INTERVAL`     | **Seconds between readings**         | `10`                              | The shortest time between two kept readings of one number, given to endpoints found from then on as their `minInterval`, which may be changed on each                                                         |
 
 An endpoint found before keeps its retention, and each endpoint can take its own interval, which
 counts within a minute:
