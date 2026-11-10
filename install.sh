@@ -3,12 +3,15 @@
 # into ~/ein and runs its setup.sh, which downloads EiN's images (or builds them from another
 # source) and starts it with podman compose or docker compose. It needs no root.
 #
-#   curl -fsSL https://einhq.eu/install.sh | bash                    EiN and its database
+#   curl -fsSL https://einhq.eu/install.sh | bash                    EiN and its database, and the official modules you pick
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant
 #   curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm  with the media service and the assistant's model
-#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --module archive
 #
-# The options are setup.sh's, passed on as they are (`--help` lists them). The checks follow them:
-# the media service needs the most of the machine, the card only matters with it or the model.
+# An official module's name alone (MODULES below) is that module with the services it needs:
+# archive is --ems --module archive, assistant --llm --module assistant. Run with nothing after it on
+# a machine without EiN, at a terminal, the installer asks yes or no for each official module. The
+# options are setup.sh's, passed on as they are (`--help` lists them). The checks follow them: the
+# media service needs the most of the machine, the card only matters with it or the model.
 # --source names the organisation the sources come from instead of GitHub's einhq, such as a Forgejo
 # or a Gitea with EiN's repositories under the same names, deploy among them; with private ones, the
 # token that reads them is EIN_SOURCE_KEY, and this script is fetched from there with it too:
@@ -22,10 +25,29 @@
 #   EIN_CHECK       1: check the machine and stop
 set -uo pipefail
 
+# The official modules: each a name, the setup.sh options for the services it needs, and what it is.
+MODULES=(
+  'archive|--ems|photos, videos and documents, people and places; with the media service, ~30 GB'
+  'assistant|--llm|a chat that answers questions; with a language model here, about 6 GB'
+  'automation|--mqtt|sensors, plugs and lights, and automations; with an MQTT broker'
+  'album-folders|--ems|the Archive'"'"'s albums as folders on disk; brings the Archive'
+  'recipes|--ems|recipes with ingredients, steps and pictures; with the media service'
+  'todo||todo lists, personal or shared within a group'
+)
+
 # Everything runs from main, called on the last line, so a download cut short runs nothing.
 main() {
   local home=${EIN_HOME:-$HOME/ein} source= installed= installed_key= data= modules= arg next=
   key=${EIN_SOURCE_KEY:-}
+  # Nothing after it, the first time, with someone at the terminal: they pick the modules.
+  if [ $# = 0 ] && [ ! -f "$home/.env" ]; then
+    picked=()
+    pick
+    set -- "${picked[@]}"
+  fi
+  expanded=()
+  expand "$@"
+  set -- "${expanded[@]}"
   ems=0 llm=0
   container= container_version=
   # A machine installed before keeps its options, its modules, its data folder, its source and the
@@ -162,6 +184,47 @@ main() {
     git_source clone --quiet "$source/deploy.git" "$home" || return 1
   fi
   EIN_DATA=$data EIN_SOURCE_KEY=$key exec "$home/setup.sh" "$@"
+}
+
+# Which official modules to install, asked one by one at the terminal: stdin is this script, piped
+# from curl, so the answers are read from /dev/tty. Without a terminal nothing is asked, and EiN is
+# installed alone.
+pick() {
+  local entry name needs about answer
+  { : </dev/tty; } 2>/dev/null || return 0
+  echo "EiN's official modules: y installs one, Enter leaves it out. Any can be added later."
+  for entry in "${MODULES[@]}"; do
+    IFS='|' read -r name needs about <<<"$entry"
+    printf '  %-14s %s [y/N] ' "$name" "$about"
+    read -r answer </dev/tty || answer=
+    case $answer in [yY]*) picked+=("$name") ;; esac
+  done
+  echo
+}
+
+# The command line with each official module named alone made the options it stands for, into
+# `expanded`; a name given to an option (--module archive) stays as it is.
+expand() {
+  local arg prev= entry name needs about found
+  for arg in "$@"; do
+    found=
+    case $prev in
+      --module | --source | --only | --db-dir) ;;
+      *)
+        for entry in "${MODULES[@]}"; do
+          IFS='|' read -r name needs about <<<"$entry"
+          [ "$arg" = "$name" ] && found=1 && break
+        done
+        ;;
+    esac
+    if [ -n "$found" ]; then
+      # shellcheck disable=SC2206 # needs is a list of options, split on purpose
+      expanded+=($needs --module "$name")
+    else
+      expanded+=("$arg")
+    fi
+    prev=$arg
+  done
 }
 
 host_of() {

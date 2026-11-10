@@ -101,7 +101,7 @@
           <div class="installs">
             <div class="install-choice install-core">
               <h3><span class="mark" aria-hidden="true"></span>EiN Core</h3>
-              <p>EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. Add the rest when you want it.</p>
+              <p>EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. It asks about each official module; answer no for Core alone, and add the rest when you want it.</p>
               <div class="install">
                 <pre class="term term-command"
                   tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span></span></code></pre>
@@ -114,7 +114,7 @@
               <p>EiN with the media service and the assistant's language model, and the Archive and Assistant modules.</p>
               <div class="install">
                 <pre class="term term-command"
-                  tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span> <span class="t-flag">-s --</span></span> <span class="w t-flag">--ems</span> <span class="w t-flag">--llm</span> <span class="w"><span class="t-flag">--module</span> <span class="t-arg">archive</span></span> <span class="w"><span class="t-flag">--module</span> <span class="t-arg">assistant</span></span></code></pre>
+                  tabindex="0"><code><span class="p">$</span> <span class="w"><span class="t-cmd">curl</span> <span class="t-flag">-fsSL</span></span> <span class="w t-url">https://einhq.eu/install.sh</span> <span class="w"><span class="t-op">|</span> <span class="t-cmd">bash</span> <span class="t-flag">-s --</span></span> <span class="w t-arg">archive</span> <span class="w t-arg">assistant</span></code></pre>
                 <button class="copy" type="button" data-copy hidden>Copy</button>
                 <span class="sr-only" role="status"></span>
               </div>

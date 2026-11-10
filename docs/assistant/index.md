@@ -60,7 +60,7 @@ Install it like any module, in any of three ways:
 
   ```bash
   # on the machine that will run EiN
-  curl -fsSL https://einhq.eu/install.sh | bash -s -- --module assistant --llm
+  curl -fsSL https://einhq.eu/install.sh | bash -s -- assistant
   ```
 
   On a machine where EiN runs already, `~/ein/setup.sh --module assistant` does the same; add

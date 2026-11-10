@@ -40,31 +40,42 @@ sudo apt install podman podman-compose git curl
 
 ## Choose what to install
 
-There are two install commands. Both check the machine first and install nothing when it falls short.
+Both ways check the machine first and install nothing when it falls short.
 
-**EiN Core** is EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. You add the rest when you want it.
+**Answer its questions.** Run on its own, the installer asks about each of EiN's official modules, one line each: type `y` and Enter for one you want, Enter alone to leave it out. Leave them all out for **EiN Core**: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP.
 
 ```bash
 # on the machine that will run EiN, as your own user
 curl -fsSL https://einhq.eu/install.sh | bash
 ```
 
-**EiN Archive** is the full Archive installation: EiN with the media service, the assistant's language model, and the [Archive](../archive/index.md) and [assistant](../assistant/index.md) modules.
+**Name the modules.** The modules you want, named after `bash -s --`, install the same without a question. For **EiN Archive**, the full Archive installation, that is the [Archive](../archive/index.md) and the [assistant](../assistant/index.md):
 
 ```bash
 # on the machine that will run EiN, as your own user
-curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive --module assistant
+curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant
 ```
 
-Everything after `bash -s --` is passed on to `~/ein/setup.sh`, EiN's own setup script:
+A module's name brings the services it needs:
 
-| Option                 | What it adds                                                                                                                                                |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers. |
-| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                     |
-| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs. Give it once for each module.                        |
-| `--mqtt`               | An MQTT broker for the [Automation](../automation/index.md) module's devices, on port 1883 of the machine.                                                  |
-| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                              |
+| Name            | What it installs                                                                                                              |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `archive`       | The [Archive](../archive/index.md), with the media service (`--ems`): every media tool and model, in an image of about 30 GB. |
+| `assistant`     | The [assistant](../assistant/index.md), with the language model it answers with (`--llm`), Qwen3.5-4B in llama.cpp.           |
+| `automation`    | [Automation](../automation/index.md), with an MQTT broker for its devices (`--mqtt`), on port 1883 of the machine.            |
+| `album-folders` | [Album folders](../album-folders/index.md), with the Archive it needs and the media service.                                  |
+| `recipes`       | [Recipes](../recipes/index.md), with the media service, which makes the pictures' thumbnails.                                 |
+| `todo`          | [Todo](../todo/index.md) lists.                                                                                               |
+
+The installer asks nothing when EiN is installed already, or when it is not run at a terminal. Everything after `bash -s --` other than a module's name is passed on to `~/ein/setup.sh`, EiN's own setup script, and the names become its options: `archive` is `--ems --module archive`. Its options can be given the same way:
+
+| Option                 | What it adds                                                                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers.         |
+| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                             |
+| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs, without the services it needs. Give it once for each module. |
+| `--mqtt`               | An MQTT broker for the [Automation](../automation/index.md) module's devices, on port 1883 of the machine.                                                          |
+| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                                      |
 
 > [!NOTE]
 > The Archive module needs the media service. Installed with `--module archive` but without `--ems`, it still installs: the installer's `archive` line says `low`, and `setup.sh` ends with `The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.` Nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. [Modules](../admin/modules.md) lists what each module needs.
@@ -75,7 +86,7 @@ Everything after `bash -s --` is passed on to `~/ein/setup.sh`, EiN's own setup 
 
 ```bash
 # on the machine that will run EiN
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm
+curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- archive assistant
 ```
 
 You can read the installer before you run it: it is at [einhq.eu/install.sh](https://einhq.eu/install.sh), and its source is on [GitHub](https://github.com/einhq/einhq.github.io/blob/main/install.sh).
@@ -86,7 +97,7 @@ EiN goes in `~/ein`, and your files in `~/ein/data` unless you name another fold
 
 ```bash
 # on the machine that will run EiN, as your own user
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- --ems --llm --module archive --module assistant
+curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- archive assistant
 ```
 
 `EIN_DATA` is read only by the first install, when `~/ein/.env` is written. Later runs keep the folder named there.
@@ -237,7 +248,7 @@ It asks `Password:`, sets what you type, and answers `Password updated successfu
 
 ## Add parts later
 
-Everything the Archive command installs can be added to EiN Core afterwards. Run `setup.sh` in `~/ein` with the option:
+Everything the Archive command installs can be added to EiN Core afterwards. Run the installer again with a module's name, such as `curl -fsSL https://einhq.eu/install.sh | bash -s -- archive`, or `setup.sh` in `~/ein` with the option:
 
 ```bash
 # on the machine EiN runs on

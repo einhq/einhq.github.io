@@ -156,14 +156,48 @@
 <p>When both podman and Docker are installed, EiN uses podman. To use Docker, put <code>EIN_ENGINE=docker</code> in front of <code>bash</code> in the install command. <code>setup.sh</code> keeps the engine in <code>.env</code>, and every later run uses it. The installer&#39;s own checks still look at podman when it is there. <a href="../admin/install.html">Installing in detail</a> explains what happens when the two are mixed.</p>
 </aside>
 <h2 id="choose-what-to-install">Choose what to install<a class="anchor" href="#choose-what-to-install" aria-label="Link to this section"></a></h2>
-<p>There are two install commands. Both check the machine first and install nothing when it falls short.</p>
-<p><strong>EiN Core</strong> is EiN and its database: the tree, the Web UI, the shell, SSH and SFTP. You add the rest when you want it.</p>
+<p>Both ways check the machine first and install nothing when it falls short.</p>
+<p><strong>Answer its questions.</strong> Run on its own, the installer asks about each of EiN&#39;s official modules, one line each: type <code>y</code> and Enter for one you want, Enter alone to leave it out. Leave them all out for <strong>EiN Core</strong>: EiN and its database, the tree, the Web UI, the shell, SSH and SFTP.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
 curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
-<p><strong>EiN Archive</strong> is the full Archive installation: EiN with the media service, the assistant&#39;s language model, and the <a href="../archive/index.html">Archive</a> and <a href="../assistant/index.html">assistant</a> modules.</p>
+<p><strong>Name the modules.</strong> The modules you want, named after <code>bash -s --</code>, install the same without a question. For <strong>EiN Archive</strong>, the full Archive installation, that is the <a href="../archive/index.html">Archive</a> and the <a href="../assistant/index.html">assistant</a>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
-curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive --module assistant</code></pre></div>
-<p>Everything after <code>bash -s --</code> is passed on to <code>~/ein/setup.sh</code>, EiN&#39;s own setup script:</p>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- archive assistant</code></pre></div>
+<p>A module&#39;s name brings the services it needs:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>What it installs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td>The <a href="../archive/index.html">Archive</a>, with the media service (<code>--ems</code>): every media tool and model, in an image of about 30 GB.</td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td>The <a href="../assistant/index.html">assistant</a>, with the language model it answers with (<code>--llm</code>), Qwen3.5-4B in llama.cpp.</td>
+</tr>
+<tr>
+<td><code>automation</code></td>
+<td><a href="../automation/index.html">Automation</a>, with an MQTT broker for its devices (<code>--mqtt</code>), on port 1883 of the machine.</td>
+</tr>
+<tr>
+<td><code>album-folders</code></td>
+<td><a href="../album-folders/index.html">Album folders</a>, with the Archive it needs and the media service.</td>
+</tr>
+<tr>
+<td><code>recipes</code></td>
+<td><a href="../recipes/index.html">Recipes</a>, with the media service, which makes the pictures&#39; thumbnails.</td>
+</tr>
+<tr>
+<td><code>todo</code></td>
+<td><a href="../todo/index.html">Todo</a> lists.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The installer asks nothing when EiN is installed already, or when it is not run at a terminal. Everything after <code>bash -s --</code> other than a module&#39;s name is passed on to <code>~/ein/setup.sh</code>, EiN&#39;s own setup script, and the names become its options: <code>archive</code> is <code>--ems --module archive</code>. Its options can be given the same way:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -181,7 +215,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive
 </tr>
 <tr>
 <td><code>--module &lt;name&gt;</code></td>
-<td>A module, such as <code>archive</code> or <code>assistant</code>, which EiN installs at its start with the modules it needs. Give it once for each module.</td>
+<td>A module, such as <code>archive</code> or <code>assistant</code>, which EiN installs at its start with the modules it needs, without the services it needs. Give it once for each module.</td>
 </tr>
 <tr>
 <td><code>--mqtt</code></td>
@@ -199,12 +233,12 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --llm --module archive
 <h3 id="check-the-machine-without-installing">Check the machine without installing<a class="anchor" href="#check-the-machine-without-installing" aria-label="Link to this section"></a></h3>
 <p><code>EIN_CHECK=1</code> runs the checks for the options you give and stops. A variable for the installer goes in front of <code>bash</code>, not in front of <code>curl</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- --ems --llm</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | EIN_CHECK=1 bash -s -- archive assistant</code></pre></div>
 <p>You can read the installer before you run it: it is at <a href="https://einhq.eu/install.sh">einhq.eu/install.sh</a>, and its source is on <a href="https://github.com/einhq/einhq.github.io/blob/main/install.sh">GitHub</a>.</p>
 <h3 id="choose-where-your-files-go">Choose where your files go<a class="anchor" href="#choose-where-your-files-go" aria-label="Link to this section"></a></h3>
 <p>EiN goes in <code>~/ein</code>, and your files in <code>~/ein/data</code> unless you name another folder with <code>EIN_DATA</code>. The folder holds your originals, so put it on a disk with room for them, in a folder your user can write to:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- --ems --llm --module archive --module assistant</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/mnt/photos/ein bash -s -- archive assistant</code></pre></div>
 <p><code>EIN_DATA</code> is read only by the first install, when <code>~/ein/.env</code> is written. Later runs keep the folder named there.</p>
 <h2 id="run-the-installer">Run the installer<a class="anchor" href="#run-the-installer" aria-label="Link to this section"></a></h2>
 <ol>
@@ -461,7 +495,7 @@ user passwd admin</code></pre></div>
 <p>It asks <code>Password:</code>, sets what you type, and answers <code>Password updated successfully</code>. It asks only once, so type carefully. The name is required: <code>user passwd</code> on its own answers <code>user passwd: missing username</code>. The <a href="../reference/commands-core.html#user-passwd">reference</a> lists its options.</p>
 <p><a href="../guide/profile.html">Your profile, favourites and trash</a> has more on the profile, and <a href="../admin/accounts.html">Accounts and groups</a> on making accounts for your family.</p>
 <h2 id="add-parts-later">Add parts later<a class="anchor" href="#add-parts-later" aria-label="Link to this section"></a></h2>
-<p>Everything the Archive command installs can be added to EiN Core afterwards. Run <code>setup.sh</code> in <code>~/ein</code> with the option:</p>
+<p>Everything the Archive command installs can be added to EiN Core afterwards. Run the installer again with a module&#39;s name, such as <code>curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code>, or <code>setup.sh</code> in <code>~/ein</code> with the option:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 ~/ein/setup.sh --ems              <span class="hljs-comment"># the media service</span>
 ~/ein/setup.sh --llm              <span class="hljs-comment"># the assistant&#x27;s language model</span>

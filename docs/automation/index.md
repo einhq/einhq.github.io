@@ -54,8 +54,8 @@ With the installer's broker, add the broker and the module in one run:
 ./setup.sh --mqtt --module automation
 ```
 
-On a new machine the installer takes the same options:
-`curl -fsSL https://einhq.eu/install.sh | bash -s -- --mqtt --module automation`. With a broker of
+On a new machine, name the module to the installer, which makes it the same options:
+`curl -fsSL https://einhq.eu/install.sh | bash -s -- automation`. With a broker of
 your own, install the module alone, from **Settings → Modules** or in EiN's terminal, and then give
 it the broker ([A broker you already run](#a-broker-you-already-run)):
 

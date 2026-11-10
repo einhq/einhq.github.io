@@ -164,10 +164,10 @@ and places out of a sentence; see <a href="search.html#write-what-you-are-lookin
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
 <p>Installing takes an administrator. Any of these installs the Archive with the <code>ems</code> module:</p>
 <ul>
-<li><p><strong>At the install</strong>, with the installer&#39;s <code>--module archive</code>, together with <code>--ems</code> for the media
-service:</p>
+<li><p><strong>At the install</strong>, by answering <code>y</code> to <code>archive</code> when the installer asks, or by naming it, which
+brings the media service (<code>--ems</code>) with it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code></pre></div>
 <p>On an EiN that is already installed, <code>~/ein/setup.sh --ems --module archive</code> does the same.
 Without <code>--ems</code>, the installer&#39;s <code>archive</code> line says <code>low</code> and reminds you that the Archive needs
 the media service.</p>

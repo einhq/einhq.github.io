@@ -11,11 +11,22 @@ The install is two scripts, run one after the other:
 | `install.sh` | [einhq.eu/install.sh](https://einhq.eu/install.sh), from the [einhq.github.io](https://github.com/einhq/einhq.github.io/blob/main/install.sh) repository | Checks the machine. When nothing is missing, clones [ein/deploy](https://github.com/einhq/deploy) into `~/ein`, or updates it there with `git pull --ff-only`, and runs `~/ein/setup.sh` with your options.                                                       |
 | `setup.sh`   | `~/ein/setup.sh`, from ein/deploy                                                                                                                        | Brings `~/ein` up to date from ein/deploy, writes `~/ein/.env` the first time, downloads the images (or, from another source, fetches the sources into `~/ein/src` and builds them), starts them with compose and waits for EiN to answer. Run again, it updates. |
 
-Both run as your own user and need no root. Every option you give the installer after `bash -s --` is passed on to `setup.sh` unchanged; the installer reads only `--ems`, `--no-ems`, `--llm`, `--no-llm` and `--module` itself, to choose which checks to run, and `--source`, to fetch ein/deploy from there.
+Both run as your own user and need no root. The installer takes the names of EiN's official modules besides `setup.sh`'s options, and makes each name the options it stands for:
+
+| Name            | Options                        |
+| --------------- | ------------------------------ |
+| `archive`       | `--ems --module archive`       |
+| `assistant`     | `--llm --module assistant`     |
+| `automation`    | `--mqtt --module automation`   |
+| `album-folders` | `--ems --module album-folders` |
+| `recipes`       | `--ems --module recipes`       |
+| `todo`          | `--module todo`                |
+
+A name given to an option, as in `--module archive`, stays a name. Run with nothing after it on a machine without `~/ein/.env`, and at a terminal, the installer asks yes or no for each of these modules first, reading the answers from the terminal, since its input is the script `curl` pipes to it; without a terminal it asks nothing and installs EiN alone. Every option is then passed on to `setup.sh` unchanged; the installer reads only `--ems`, `--no-ems`, `--llm`, `--no-llm` and `--module` itself, to choose which checks to run, and `--source`, to fetch ein/deploy from there. `setup.sh` takes options only, not the names.
 
 ```bash
 # on the machine that will run EiN, as your own user
-curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive
+curl -fsSL https://einhq.eu/install.sh | bash -s -- archive
 ```
 
 The installer's code runs from a function called on its last line, so a download cut short runs nothing.
@@ -48,7 +59,7 @@ Variables go in front of the command they are for. For the installer that is in 
 
 ```bash
 # on the machine that will run EiN
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- --ems
+curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- archive
 ```
 
 | Variable                        | Read by                    | Default                            | What it does                                                                                                                                                                              |

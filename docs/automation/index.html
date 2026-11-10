@@ -187,8 +187,8 @@ the installer&#39;s broker nothing is found on the network, though, so add them 
 <p>With the installer&#39;s broker, add the broker and the module in one run:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 ./setup.sh --mqtt --module automation</code></pre></div>
-<p>On a new machine the installer takes the same options:
-<code>curl -fsSL https://einhq.eu/install.sh | bash -s -- --mqtt --module automation</code>. With a broker of
+<p>On a new machine, name the module to the installer, which makes it the same options:
+<code>curl -fsSL https://einhq.eu/install.sh | bash -s -- automation</code>. With a broker of
 your own, install the module alone, from <strong>Settings → Modules</strong> or in EiN&#39;s terminal, and then give
 it the broker (<a href="#a-broker-you-already-run">A broker you already run</a>):</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>

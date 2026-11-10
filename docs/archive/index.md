@@ -38,12 +38,12 @@ and places out of a sentence; see [Searching your pictures](search.md#write-what
 
 Installing takes an administrator. Any of these installs the Archive with the `ems` module:
 
-- **At the install**, with the installer's `--module archive`, together with `--ems` for the media
-  service:
+- **At the install**, by answering `y` to `archive` when the installer asks, or by naming it, which
+  brings the media service (`--ems`) with it:
 
   ```bash
   # on the machine that will run EiN
-  curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive
+  curl -fsSL https://einhq.eu/install.sh | bash -s -- archive
   ```
 
   On an EiN that is already installed, `~/ein/setup.sh --ems --module archive` does the same.

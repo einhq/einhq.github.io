@@ -114,9 +114,43 @@
 </tr>
 </tbody></table>
 </div>
-<p>Both run as your own user and need no root. Every option you give the installer after <code>bash -s --</code> is passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code>, <code>--no-llm</code> and <code>--module</code> itself, to choose which checks to run, and <code>--source</code>, to fetch ein/deploy from there.</p>
+<p>Both run as your own user and need no root. The installer takes the names of EiN&#39;s official modules besides <code>setup.sh</code>&#39;s options, and makes each name the options it stands for:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>archive</code></td>
+<td><code>--ems --module archive</code></td>
+</tr>
+<tr>
+<td><code>assistant</code></td>
+<td><code>--llm --module assistant</code></td>
+</tr>
+<tr>
+<td><code>automation</code></td>
+<td><code>--mqtt --module automation</code></td>
+</tr>
+<tr>
+<td><code>album-folders</code></td>
+<td><code>--ems --module album-folders</code></td>
+</tr>
+<tr>
+<td><code>recipes</code></td>
+<td><code>--ems --module recipes</code></td>
+</tr>
+<tr>
+<td><code>todo</code></td>
+<td><code>--module todo</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>A name given to an option, as in <code>--module archive</code>, stays a name. Run with nothing after it on a machine without <code>~/ein/.env</code>, and at a terminal, the installer asks yes or no for each of these modules first, reading the answers from the terminal, since its input is the script <code>curl</code> pipes to it; without a terminal it asks nothing and installs EiN alone. Every option is then passed on to <code>setup.sh</code> unchanged; the installer reads only <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code>, <code>--no-llm</code> and <code>--module</code> itself, to choose which checks to run, and <code>--source</code>, to fetch ein/deploy from there. <code>setup.sh</code> takes options only, not the names.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN, as your own user</span>
-curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- archive</code></pre></div>
 <p>The installer&#39;s code runs from a function called on its last line, so a download cut short runs nothing.</p>
 <h2 id="the-options">The options<a class="anchor" href="#the-options" aria-label="Link to this section"></a></h2>
 <p>These are <code>setup.sh</code>&#39;s options, and so the installer&#39;s too. <code>~/ein/setup.sh --help</code> lists them.</p>
@@ -178,7 +212,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --ems --module archive</code
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
 <p>Variables go in front of the command they are for. For the installer that is in front of <code>bash</code>, not in front of <code>curl</code>, which only downloads it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine that will run EiN</span>
-curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- --ems</code></pre></div>
+curl -fsSL https://einhq.eu/install.sh | EIN_DATA=/srv/ein-data EIN_ENGINE=docker bash -s -- archive</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
