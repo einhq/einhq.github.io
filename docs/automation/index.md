@@ -305,12 +305,14 @@ with **Rename**. Its endpoints are `relay-0` for its first relay, `relay-0-power
 `long-single`. A Shelly the bridge has not heard announce itself, because it connected before the
 bridge started, is asked to.
 
-A light is `light-0` (a Dimmer, a Duo, a Vintage), `color-0` (a Bulb, a Duo RGBW, an RGBW2 in colour
-mode) or `white-0` (an RGBW2 in white mode), and has as many of these as it reports, each of which
-can be set: `color-0-brightness` (0–100 %), `color-0-color` (`#rrggbb`), `color-0-white` (the white
-channel, 0–255) and `color-0-color-temperature` (in K). A light that has both modes turns to colour
-mode when set to a colour, and to white when set to a colour temperature; its brightness is that of
-the mode it is in. A 2.5 in roller mode has `roller-0-state` (`open`, `close` or `stop`, the way it
+A light is `light-0`, and an RGBW2 in white mode has `light-0` to `light-3`, one for each channel. A
+light has as many of these as it reports, each of which can be set: `light-0-brightness` (0–100 %),
+`light-0-color` (`#rrggbb`), `light-0-white` (an RGBW2's white channel, 0–255) and
+`light-0-color-temperature` (in K). A light that has both modes, such as a Color Bulb, turns to
+colour mode when set to a colour, and to white when set to a colour temperature; its brightness is
+that of the mode it is in. For white light from a Color Bulb, set its colour temperature: it has no
+white channel to mix with a colour. `light-0-power` and `light-0-energy` are what a light that
+measures it draws, as for a relay. A 2.5 in roller mode has `roller-0-state` (`open`, `close` or `stop`, the way it
 last moved), `roller-0-position` (0–100 %, empty until the roller is calibrated), and
 `roller-0-open`, `roller-0-close` and `roller-0-stop` to press.
 
