@@ -202,6 +202,7 @@ the administrator's, with the mode `0755`; a device is the administrator's and t
 Beside the devices are EiN's own nodes. `/dev/events` and `/dev/pipeline-events` are `router` nodes:
 modules announce the facts they derive from changes to the tree on `/dev/events`, and the pipeline
 engine announces its own progress on `/dev/pipeline-events`; see [Changes and pipelines](pipelines.md).
+Both are the administrator's alone, with the mode `0700`.
 `/dev/null` works as on Linux: reading it gives nothing, and what is written to it is thrown away.
 
 `/tmp` is open to everyone, with the mode `0777`, and is kept in memory: what you put there is gone

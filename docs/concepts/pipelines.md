@@ -28,9 +28,9 @@ Each event goes out under a key made of the node's type and the event,
 to an album `system.vfs.album.child-attached`. Whoever listens binds only the keys it cares about,
 so a listener for files never hears about the thousands of small writes a busy system makes
 elsewhere. Only the administrator binds a queue, a log or a track to keys (their `routingKeys`
-attribute), as EiN's services and pipelines do: a message goes to whoever is bound, whether or not
-they may read the node it is about, so anyone else is refused with
-`Access denied for operation 'change routingKeys'`. The event is sent only after the change is
+attribute), or sets the key of a router (its `routingKey`), as EiN's services and pipelines do: a
+message goes to whoever is bound, whether or not they may read the node it is about, so anyone else
+is refused with `Access denied for operation 'change routingKeys'` (or `'change routingKey'`). The event is sent only after the change is
 saved: nothing reacts to a change that did not happen.
 
 The same write also leaves a record in the audit trail, in the same transaction, so a record
@@ -75,7 +75,11 @@ And some of the Archive's:
 | `staging.category.changed`    | The files in a staging category changed                               |
 
 A fact is a line of JSON. Announcing one is writing that line to `/dev/events`; there is no
-separate command for it:
+separate command for it. `/dev/events` is the administrator's alone, to write and to read, as is
+`/dev/pipeline-events`: a fact starts pipelines, and it may be about anyone's files. An automation
+of the administrator's raises one with an
+[event out node](../automation/automations.md#eins-events), and anyone's automation hears those
+about the nodes its owner may read:
 
 ```bash
 # in EiN's terminal, as an administrator

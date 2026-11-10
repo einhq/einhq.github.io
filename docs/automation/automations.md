@@ -3,9 +3,10 @@
 An automation makes things happen in the house by itself: a lamp goes on at motion when it is dark
 and off a while after, a heater keeps a room between two temperatures while someone is home, a
 button toggles a lamp, a line runs at half past six on weekdays, a scan is filed as it lands in a
-folder. It is made of **nodes wired together**: inputs that hear devices, the clock and files coming
-into a folder, logic that compares and combines, values worked
-out from readings, timers, and actions that switch controls and run command lines. Each automation
+folder. It is made of **nodes wired together**: inputs that hear devices, the clock, files coming
+into a folder and EiN's own events, logic that compares and combines, values worked out from
+readings, timers, and actions that switch controls, run command lines and raise events for
+pipelines. Each automation
 is a YAML file, written by members of the `automation` group, and runs with the rights of the person
 whose file it is. This page is for those members. [Automation](index.md) covers connecting the
 devices, and [Devices](../guide/devices.md) the devices themselves.
@@ -70,7 +71,8 @@ phone) has:
 - **Inputs**, one for each node that starts things: a device node takes a reading of **on** or **off**, or any value
   you type, sent as a reading, or as a **Press** (a button's single or long); an online node is set
   online or offline; a button node is pressed; a clock node is run on to its next time; a link in is
-  sent a value; a file node is given a file's name, as if it came into its folder.
+  sent a value; a file node is given a file's name, as if it came into its folder; an event in is
+  sent the path of a node, as if its event had come about it.
 - **Controls**, what each control the automation writes holds in the simulation.
 - **Log**, newest first: each input you fed, each node that sent something and on which
   output, each value a node held back and why (a compare or an and that would send what it sent
@@ -228,15 +230,16 @@ the latest value of each node wired into them; one that has sent nothing yet cou
 
 **Inputs**, which nothing is wired into:
 
-| Type      | Settings                                         | It sends                                                                                                                                                                         |
-| --------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `device`  | `endpoint`; `is`                                 | Each reading of the endpoint, or each press of a button. With `is: single`, only that value or kind of press (a Shelly's are `single`, `double`, `triple` and `long`)            |
-| `online`  | `device`                                         | True when the device comes online, false when it goes                                                                                                                            |
-| `clock`   | `at: '07:30'` and `days`, or `every`; `location` | The time, once a day at `at` in the system's time zone (on `days`: `weekdays`, `weekends` or `[mon, wed, fri]`), or each time `every` (a minute or more) has passed on the clock |
-| `between` | `from`, `until`, `days`; `location`              | True from `from` until `until`, false outside it: `from: '22:00'`, `until: '06:30'` goes over midnight                                                                           |
-| `button`  | `value`                                          | `true`, or its `value`, when it is pressed with `automation-trigger <name> <node>`                                                                                               |
-| `link-in` | `name`                                           | What a `link-out` of the same name sends, from any automation of the same owner                                                                                                  |
-| `file`    | `folder`; `match`, `changes`                     | The path of each file that comes into `folder` ([A file in a folder](#a-file-in-a-folder))                                                                                       |
+| Type       | Settings                                         | It sends                                                                                                                                                                         |
+| ---------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `device`   | `endpoint`; `is`                                 | Each reading of the endpoint, or each press of a button. With `is: single`, only that value or kind of press (a Shelly's are `single`, `double`, `triple` and `long`)            |
+| `online`   | `device`                                         | True when the device comes online, false when it goes                                                                                                                            |
+| `clock`    | `at: '07:30'` and `days`, or `every`; `location` | The time, once a day at `at` in the system's time zone (on `days`: `weekdays`, `weekends` or `[mon, wed, fri]`), or each time `every` (a minute or more) has passed on the clock |
+| `between`  | `from`, `until`, `days`; `location`              | True from `from` until `until`, false outside it: `from: '22:00'`, `until: '06:30'` goes over midnight                                                                           |
+| `button`   | `value`                                          | `true`, or its `value`, when it is pressed with `automation-trigger <name> <node>`                                                                                               |
+| `link-in`  | `name`                                           | What a `link-out` of the same name sends, from any automation of the same owner                                                                                                  |
+| `file`     | `folder`; `match`, `changes`                     | The path of each file that comes into `folder` ([A file in a folder](#a-file-in-a-folder))                                                                                       |
+| `event-in` | `event`; `under`, `with`                         | The path of the node each event of that type is about ([EiN's events](#eins-events))                                                                                             |
 
 A `clock`'s `at` and a `between`'s `from` and `until` may follow the sun: `sunrise`, `sunset`,
 `dawn` or `dusk`, with an offset such as `sunset-30m` or `sunrise+1h`. Dawn and dusk are when the sun
@@ -278,12 +281,13 @@ way round.
 
 **Actions**:
 
-| Type       | Settings            | It does                                                                                                                                                                                                                                                                              |
-| ---------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `control`  | `endpoint`; `value` | Writes the control, as `echo on > /dev/hall-lamp/switch-0` does: its `value` (`on`, `off`, `toggle`, a number), or else the value that came, true as `on` and false as `off`. A control that already has the value is not written again; `toggle` always is. Then sends the value on |
-| `shell`    | `run`; `timeout`    | Runs the command line as the automation's owner ([Lines](#lines)) and sends what it printed on                                                                                                                                                                                       |
-| `link-out` | `name`              | Sends the value to every `link-in` of that name in the owner's automations                                                                                                                                                                                                           |
-| `debug`    |                     | Writes the value to the run log                                                                                                                                                                                                                                                      |
+| Type        | Settings            | It does                                                                                                                                                                                                                                                                              |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `control`   | `endpoint`; `value` | Writes the control, as `echo on > /dev/hall-lamp/switch-0` does: its `value` (`on`, `off`, `toggle`, a number), or else the value that came, true as `on` and false as `off`. A control that already has the value is not written again; `toggle` always is. Then sends the value on |
+| `shell`     | `run`; `timeout`    | Runs the command line as the automation's owner ([Lines](#lines)) and sends what it printed on                                                                                                                                                                                       |
+| `link-out`  | `name`              | Sends the value to every `link-in` of that name in the owner's automations                                                                                                                                                                                                           |
+| `event-out` | `event`; `subject`  | Raises an event for pipelines, about the node at `subject`, or at the value that came ([EiN's events](#eins-events)); the administrator's automations only. Then sends the path on                                                                                                   |
+| `debug`     |                     | Writes the value to the run log                                                                                                                                                                                                                                                      |
 
 ### Expressions
 
@@ -310,6 +314,50 @@ the node sends on, a number when it prints one. A line that fails or runs longer
 An automation's actions run one after another, each when the one before has ended; another
 automation's do not wait for them.
 
+### EiN's events
+
+Besides its devices, EiN says what happens to the things in it as **events**
+([Changes and pipelines](../concepts/pipelines.md)): a photo's metadata was read
+(`media.metadata.extracted`), its faces were found (`media.faces.completed`), and a pipeline's run
+on a file started, ended or failed (`pipeline.instance.started`, `pipeline.instance.completed`,
+`pipeline.instance.failed`). An `event-in` node hears them; an `event-out` node raises one of its
+own, for a pipeline that waits for it.
+
+```yaml
+description: Note each photo in the Wrenfield album whose places pipeline failed
+nodes:
+  failed:
+    type: event-in
+    event: pipeline.instance.failed
+    under: /archive/albums/wrenfield-summer-1987
+    with: pipeline=place-upkeep
+    to: [note]
+  note: { type: shell, run: 'echo "$VALUE" >> ~/failed-places.txt' }
+```
+
+- **`event`** names the event. A word may be `*`, any one word, or `#`, any number of words:
+  `pipeline.instance.*` is a run starting, ending or failing, and `media.#` every fact about
+  media. **`under`** keeps only events about a node in that folder, and **`with`** only those
+  whose data says so (`pipeline=place-upkeep`; several pairs separated by spaces); a pipeline's
+  events carry its name as `pipeline`.
+- It sends the path of the node the event is about, with the event's type as where it came from
+  (`$TOPIC` to a line, `topic` to math).
+- It hears only events about a node the automation's owner may read: someone else's photo is not
+  yours to hear of.
+- Events are many while a large import runs. They wait in a queue of their own, so readings and
+  presses are not held up behind them, and only while an automation listens for them. As with
+  readings, those said more than a minute before the engine starts again move its state and do
+  nothing.
+
+An `event-out` node raises its `event` (dotted words, such as `automation.porch.arrived`) about
+the node at `subject`, a path, which may hold `${value}` and `${topic}`; without one it is the
+value that came, which must be a path. A pipeline that waits for it (`on: automation.porch.arrived`)
+runs on that node, and finds the value that came in `$EVENT_VALUE`, where it came from in
+`$EVENT_TOPIC` and the automation's name in `$EVENT_AUTOMATION`. Since pipelines run as the
+administrator, only the administrator raises events: another's automation with an `event-out` is
+not run, and says so. An event an automation raises reaches pipelines, never another automation,
+so two cannot set each other off for ever.
+
 ### Over a restart
 
 Timers count from when a reading came, not from when the engine heard it, and what an automation
@@ -326,7 +374,7 @@ that came into a folder meanwhile is not sent.
 
 ### A tour of every kind of node
 
-**automation/tour**, under System → Automations, is the Automation module's own: seven small flows
+**automation/tour**, under System → Automations, is the Automation module's own: eight small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (`example-…`), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: **+** beside the list, starting
@@ -340,6 +388,8 @@ point **Tour of every node**, or `automation-new <name> --from tour`, then set y
 5. What the link brings: link in, held, or, shell.
 6. The clock: clock, delay, between, online.
 7. A file: file.
+8. EiN's events: event in, event out. Only the administrator raises events, so take the event out
+   from a copy of your own.
 
 An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
 timer's or a compare's **out** into it (true and false both), as the motion light does, not its
