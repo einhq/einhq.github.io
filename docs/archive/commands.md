@@ -2607,22 +2607,23 @@ Detect RAW image files and report (or --sort) the non-RAW file(s) they are relat
 raw [--sort] [-n <string>] [--unmatched] [-v] <path>
 ```
 
-| Argument | What it is                                    |
-| -------- | --------------------------------------------- |
-| `<path>` | file, subtree, or omit for the whole library. |
+| Argument | What it is                                           |
+| -------- | ---------------------------------------------------- |
+| `<path>` | file, album, subtree, or omit for the whole library. |
 
-| Option        | What it does                                                                                         |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| `--sort`      | move each RAW under its partner’s versions/ dir (frozen version); RAW with no partner is left as is. |
-| `-n <string>` | max partner candidates per file (default 5)                                                          |
-| `--unmatched` | scan: list only RAW files with no partner found.                                                     |
-| `-v`          | verbose output.                                                                                      |
+| Option        | What it does                                                                                                                                                                        |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--sort`      | move each RAW under the versions/ dir of its partner of the same name, and delete its regions; a RAW with no such partner is left as is. On a non-RAW file, sort its RAWs under it. |
+| `-n <string>` | max partner candidates per file (default 5)                                                                                                                                         |
+| `--unmatched` | scan: list only RAW files with no partner found.                                                                                                                                    |
+| `-v`          | verbose output.                                                                                                                                                                     |
 
 ```bash
 raw /archive/albums/Exempelalbum_2019/files/DSC_0001.NEF
+raw --sort /archive/albums/Exempelalbum_2019
 ```
 
-With `JSON_OUTPUT=1`: the non-RAW files the RAW is related to.
+With `JSON_OUTPUT=1`: the non-RAW files the RAW is related to; with --sort, what became of each RAW.
 
 ### `regenerate-face-crops`
 

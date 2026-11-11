@@ -269,11 +269,23 @@ so a small one gets only the sizes up to its own;</li>
 </div>
 <p>A RAW file gets everything a JPEG gets. EiN develops it for the thumbnails; a RAW file whose sensor
 data cannot be read is shown from the JPEG preview the camera put inside it. Faces and text are read
-from that preview too. A RAW file and the JPEG the camera saved beside it stay two pictures; when
-EiN finds them to be duplicates, it suggests keeping the RAW, as the better format
-(<a href="duplicates.html#which-copy-is-kept">Which copy is kept</a>). A RAW file kept under its JPEG instead, as
-<a href="commands.html#raw"><code>raw --sort</code></a> files it, is a version of that JPEG: the viewer lists it under <strong>Versions</strong> in the
-<a href="viewer.html#the-details-panel">details panel</a>, where its name downloads it.</p>
+from that preview too.</p>
+<p>When the camera saved a JPEG beside the RAW, under the same name (<code>IMG_1234.CR2</code> and
+<code>IMG_1234.JPG</code>), EiN files the RAW under the JPEG two minutes after it arrives, which leaves the
+JPEG time to arrive too. The RAW is then a version of that JPEG:</p>
+<ul>
+<li>the album, search and the timeline show the JPEG alone;</li>
+<li>the viewer lists the RAW under <strong>Versions</strong> in the <a href="viewer.html#the-details-panel">details panel</a>,
+where its name downloads it;</li>
+<li>the faces found on the RAW are deleted, since the JPEG has the same ones. A person who was only
+in those faces, and has no name, goes with them.</li>
+</ul>
+<p>A RAW whose JPEG came later, or that was uploaded before EiN did this, is filed with
+<a href="albums.html#hide-raw-files"><strong>Hide RAW files</strong></a> in its album&#39;s menu, or with
+<a href="commands.html#raw"><code>raw --sort</code></a>. A RAW with no JPEG of its name stays a picture of its own, and so
+does one with two pictures of its name in the folder (a JPEG and a HEIC, say), since EiN cannot
+tell which it belongs to. When EiN finds a RAW of its own to be a duplicate of another picture, it
+suggests keeping the RAW, as the better format (<a href="duplicates.html#which-copy-is-kept">Which copy is kept</a>).</p>
 <h2 id="videos">Videos<a class="anchor" href="#videos" aria-label="Link to this section"></a></h2>
 <p>EiN recognises MP4, MOV (what iPhones and many cameras record), M4V, MTS and M2TS (AVCHD
 camcorders), MPG, AVI, MKV, WebM, 3GP and FLV.</p>

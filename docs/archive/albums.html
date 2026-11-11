@@ -187,7 +187,8 @@ the colours);</li>
 <li>its labels. Choosing one searches for everything that carries it.</li>
 </ul>
 <p>If you may change the album, the header also has <strong>Upload</strong>, <strong>Share</strong> and <strong>Edit</strong>, and under
-<strong>⋮</strong> the items <strong>Add event</strong> and <strong>Move to trash</strong>. On a phone they are all under <strong>⋮</strong>. If you may
+<strong>⋮</strong> the items <strong>Add event</strong> and <strong>Move to trash</strong>, and <strong>Hide RAW files</strong> while the album has
+camera RAW files that a picture of the same name can take (<a href="#hide-raw-files">Hide RAW files</a>). On a phone they are all under <strong>⋮</strong>. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else&#39;s album you usually have none of
 these buttons.</p>
@@ -755,8 +756,30 @@ it there, choose <strong>Share</strong>, then <strong>Like the album</strong> an
 <td><strong>Stack</strong></td>
 <td><strong>Keep separate</strong> on each photo, in the viewer&#39;s details</td>
 </tr>
+<tr>
+<td><strong>Hide RAW files</strong></td>
+<td>No undo; each RAW file can still be downloaded from <strong>Versions</strong> in the viewer&#39;s details</td>
+</tr>
 </tbody></table>
 </div>
+<h2 id="hide-raw-files">Hide RAW files<a class="anchor" href="#hide-raw-files" aria-label="Link to this section"></a></h2>
+<p>A camera that saves each shot twice, as a RAW file and a JPEG of the same name (<code>IMG_1234.CR2</code> and
+<code>IMG_1234.JPG</code>), puts two pictures in the album for each shot. EiN files such a RAW under its JPEG
+by itself two minutes after it is uploaded (<a href="file-types.html#camera-raw">Camera RAW</a>). One it did not
+file, because its JPEG came later or it was there before EiN did this, is filed from the album&#39;s
+menu.</p>
+<p>In the album&#39;s header, choose <strong>⋮</strong>, then <strong>Hide RAW files</strong>. The number after it says how many RAW
+files have a picture of the same name. The item is there only while there are some, and only if you
+may change the album. EiN says, for example, <strong>12 RAW files filed under their pictures</strong>. If some
+stay, because no picture has their name, or two do, it adds how many.</p>
+<p>A RAW file filed under its picture:</p>
+<ul>
+<li>leaves the album, search and the timeline; the picture stands for the shot;</li>
+<li>is listed under <strong>Versions</strong> in the viewer&#39;s <a href="viewer.html#the-details-panel">details panel</a>, where
+its name downloads it;</li>
+<li>loses the faces found on it, since the picture has the same ones. A person who was only in those
+faces, and has no name, goes with them.</li>
+</ul>
 <h2 id="move-an-album-to-the-trash">Move an album to the trash<a class="anchor" href="#move-an-album-to-the-trash" aria-label="Link to this section"></a></h2>
 <p>In the album&#39;s header, choose <strong>⋮</strong>, then <strong>Move to trash</strong>. Nothing asks first. EiN takes you back
 to the Albums page and says, for example, <strong>Sailing in the archipelago moved to the trash</strong>, with
@@ -885,7 +908,7 @@ and <a href="commands.html#album-random"><code>album-random</code></a> have ever
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/albums.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-trip-tab">The Trip tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-the-map-shows">Choose which devices the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-trip-tab">The Trip tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-the-map-shows">Choose which devices the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#hide-raw-files">Hide RAW files</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

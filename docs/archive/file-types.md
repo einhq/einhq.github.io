@@ -92,11 +92,24 @@ EiN takes the RAW files of these cameras:
 
 A RAW file gets everything a JPEG gets. EiN develops it for the thumbnails; a RAW file whose sensor
 data cannot be read is shown from the JPEG preview the camera put inside it. Faces and text are read
-from that preview too. A RAW file and the JPEG the camera saved beside it stay two pictures; when
-EiN finds them to be duplicates, it suggests keeping the RAW, as the better format
-([Which copy is kept](duplicates.md#which-copy-is-kept)). A RAW file kept under its JPEG instead, as
-[`raw --sort`](commands.md#raw) files it, is a version of that JPEG: the viewer lists it under **Versions** in the
-[details panel](viewer.md#the-details-panel), where its name downloads it.
+from that preview too.
+
+When the camera saved a JPEG beside the RAW, under the same name (`IMG_1234.CR2` and
+`IMG_1234.JPG`), EiN files the RAW under the JPEG two minutes after it arrives, which leaves the
+JPEG time to arrive too. The RAW is then a version of that JPEG:
+
+- the album, search and the timeline show the JPEG alone;
+- the viewer lists the RAW under **Versions** in the [details panel](viewer.md#the-details-panel),
+  where its name downloads it;
+- the faces found on the RAW are deleted, since the JPEG has the same ones. A person who was only
+  in those faces, and has no name, goes with them.
+
+A RAW whose JPEG came later, or that was uploaded before EiN did this, is filed with
+[**Hide RAW files**](albums.md#hide-raw-files) in its album's menu, or with
+[`raw --sort`](commands.md#raw). A RAW with no JPEG of its name stays a picture of its own, and so
+does one with two pictures of its name in the folder (a JPEG and a HEIC, say), since EiN cannot
+tell which it belongs to. When EiN finds a RAW of its own to be a duplicate of another picture, it
+suggests keeping the RAW, as the better format ([Which copy is kept](duplicates.md#which-copy-is-kept)).
 
 ## Videos
 

@@ -98,7 +98,8 @@ The header holds, from the top:
 - its labels. Choosing one searches for everything that carries it.
 
 If you may change the album, the header also has **Upload**, **Share** and **Edit**, and under
-**⋮** the items **Add event** and **Move to trash**. On a phone they are all under **⋮**. If you may
+**⋮** the items **Add event** and **Move to trash**, and **Hide RAW files** while the album has
+camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
 these buttons.
@@ -507,6 +508,28 @@ it there, choose **Share**, then **Like the album** and **Save**.
 | **Edit album**                   | No undo: open **Edit** and change it back                                                                                                                                                        |
 | **Set as cover**                 | Choose another picture as the cover                                                                                                                                                              |
 | **Stack**                        | **Keep separate** on each photo, in the viewer's details                                                                                                                                         |
+| **Hide RAW files**               | No undo; each RAW file can still be downloaded from **Versions** in the viewer's details                                                                                                         |
+
+## Hide RAW files
+
+A camera that saves each shot twice, as a RAW file and a JPEG of the same name (`IMG_1234.CR2` and
+`IMG_1234.JPG`), puts two pictures in the album for each shot. EiN files such a RAW under its JPEG
+by itself two minutes after it is uploaded ([Camera RAW](file-types.md#camera-raw)). One it did not
+file, because its JPEG came later or it was there before EiN did this, is filed from the album's
+menu.
+
+In the album's header, choose **⋮**, then **Hide RAW files**. The number after it says how many RAW
+files have a picture of the same name. The item is there only while there are some, and only if you
+may change the album. EiN says, for example, **12 RAW files filed under their pictures**. If some
+stay, because no picture has their name, or two do, it adds how many.
+
+A RAW file filed under its picture:
+
+- leaves the album, search and the timeline; the picture stands for the shot;
+- is listed under **Versions** in the viewer's [details panel](viewer.md#the-details-panel), where
+  its name downloads it;
+- loses the faces found on it, since the picture has the same ones. A person who was only in those
+  faces, and has no name, goes with them.
 
 ## Move an album to the trash
 

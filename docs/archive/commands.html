@@ -4087,7 +4087,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </thead>
 <tbody><tr>
 <td><code>&lt;path&gt;</code></td>
-<td>file, subtree, or omit for the whole library.</td>
+<td>file, album, subtree, or omit for the whole library.</td>
 </tr>
 </tbody></table>
 </div>
@@ -4100,7 +4100,7 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </thead>
 <tbody><tr>
 <td><code>--sort</code></td>
-<td>move each RAW under its partner’s versions/ dir (frozen version); RAW with no partner is left as is.</td>
+<td>move each RAW under the versions/ dir of its partner of the same name, and delete its regions; a RAW with no such partner is left as is. On a non-RAW file, sort its RAWs under it.</td>
 </tr>
 <tr>
 <td><code>-n &lt;string&gt;</code></td>
@@ -4116,8 +4116,9 @@ person-update /archive/people/Anna_Andersson --contact <span class="hljs-string"
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>raw /archive/albums/Exempelalbum_2019/files/DSC_0001.NEF</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the non-RAW files the RAW is related to.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>raw /archive/albums/Exempelalbum_2019/files/DSC_0001.NEF
+raw --<span class="hljs-built_in">sort</span> /archive/albums/Exempelalbum_2019</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: the non-RAW files the RAW is related to; with --sort, what became of each RAW.</p>
 <h3 id="regenerate-face-crops"><code>regenerate-face-crops</code><a class="anchor" href="#regenerate-face-crops" aria-label="Link to this section"></a></h3>
 <p>Re-encode a bounded, resumable batch of existing face crops without re-detecting faces, or with --missing cut the ones that have no bytes.</p>
 <p><small>changes things</small></p>
