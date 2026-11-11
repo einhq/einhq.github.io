@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 437 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 438 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -258,7 +258,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 142 in full](../archive/commands.md).
+[All 143 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -278,10 +278,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [auto-album-assign](../archive/commands.md#auto-album-assign) | Weigh media against the library albums they may belong in, as staging weighs its suggested groups, and write nothing. |
 | [auto-album-cluster](../archive/commands.md#auto-album-cluster) | Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing. |
 | [camera](../archive/commands.md#camera) | Camera and recording camera management. |
+| [camera-clip](../archive/commands.md#camera-clip) | Record a clip of a camera's stream now, filed under the camera like a clip around a face. |
 | [camera-cover](../archive/commands.md#camera-cover) | Give a camera without a cover of its own its newest picture, or its newest video with thumbnails (coverPhoto softlink) |
 | [camera-create](../archive/commands.md#camera-create) | Create a camera node and link the media already carrying its fingerprint. |
 | [camera-device](../archive/commands.md#camera-device) | Link a camera to the device it is part of, such as a phone's camera to the phone whose track says where it was, or take the link away. |
-| [camera-faces](../archive/commands.md#camera-faces) | Have the media service watch every camera for faces, and file what it sees: the person on the camera's faces log, the face's picture under the camera (the camera-faces service) |
+| [camera-faces](../archive/commands.md#camera-faces) | Have the media service watch every camera for faces, and file what it sees: the person on the camera's faces log, the face's picture and a clip around it under the camera (the camera-faces service) |
 | [camera-info](../archive/commands.md#camera-info) | Show camera details and owners. |
 | [camera-link](../archive/commands.md#camera-link) | Link a file to its capture camera using extracted exif, or to a camera named by hand. |
 | [camera-list](../archive/commands.md#camera-list) | List all cameras. |

@@ -149,6 +149,24 @@ folder a day, is the picture of each face the camera saw, as the face was cleare
 time it was seen. Those pictures are the archive&#39;s like any other: their faces join people or start
 unidentified ones (<a href="people.html#faces-a-camera-sees">Faces a camera sees</a>), and they turn up in
 search.</p>
+<p>Beside them, in <code>clips/</code> with a folder a day, is a video of each visit: the camera&#39;s sharpest
+stream from five seconds before a face came into view until ten seconds after the last face was
+gone, named for the time it starts. Someone who stays is one clip, up to two minutes. The video is
+the camera&#39;s own picture and sound, not made again, and it is the archive&#39;s like any other: it gets
+its stills, a version the browser plays, the faces in it and a place on the timeline at the time it
+was recorded. Nothing is recorded between visits.</p>
+<p>Two settings on the camera, in <strong>Edit camera</strong> (see <a href="#change-a-cameras-settings">Change a camera&#39;s settings</a>),
+decide the clips; its page shows them under <strong>Clips</strong>:</p>
+<ul>
+<li><strong>Clips</strong>: <strong>Around a face</strong> (the default), <strong>Around a face or motion</strong>, where anything that moves
+in the picture makes a clip too, or <strong>Off</strong>.</li>
+<li><strong>Keep clips (days)</strong>: how many days of clips are kept, 30 unless you change it. Every hour, the
+days older than that are removed; 0 keeps every clip. The faces&#39; pictures are kept whatever it
+says.</li>
+</ul>
+<p><code>camera-clip front-door</code> in the terminal records a clip now, from five seconds ago until ten seconds
+on (<code>--post 30</code> for thirty), filed with the others; an <a href="../automation/automations.html">automation</a>
+can run it, such as when the doorbell is pressed.</p>
 <h2 id="the-cameras-page">The Cameras page<a class="anchor" href="#the-cameras-page" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Cameras</strong> in the sidebar, under <strong>Browse</strong>.</p>
 <figure class="shot"><a href="../../assets/shots/cameras@2x.webp"><img src="../../assets/shots/cameras.webp" srcset="../../assets/shots/cameras.webp 1x, ../../assets/shots/cameras@2x.webp 2x" alt="The Cameras page: the header &quot;13 cameras&quot; with a filter box, Registered (13) and Unregistered, and the Name (A-Z) sort, above cards for David's 7D, David's camcorder, Erik's iPhone, Freya's Pentax, Helen's scanner and others, each with a picture, the make and model, and badges for the serial number, the time zone and &quot;scanner&quot;" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Every registered camera with the picture that stands for it; the badges show at a glance which ones carry a serial number, a time zone or the scanner setting.</figcaption></figure>
@@ -330,7 +348,8 @@ pictures.</p>
 <li>On the camera&#39;s page, click <strong>Edit</strong>. The <strong>Edit camera</strong> dialog opens.</li>
 <li>Change what you need: <strong>Name</strong>, <strong>Make</strong>, <strong>Model</strong>, <strong>Serial number</strong>, <strong>Timezone</strong> (a list of
 time zones you can type in, such as <code>Pacific/Auckland</code>), <strong>Scanner or digitizer</strong>,
-<strong>Video times in UTC</strong>, <strong>Description</strong> and <strong>Labels</strong>.</li>
+<strong>Video times in UTC</strong>, <strong>Description</strong> and <strong>Labels</strong>; and, for a camera that is a device with
+a stream, <strong>Clips</strong> and <strong>Keep clips (days)</strong> (see <a href="#a-security-camera">A security camera</a>).</li>
 <li>Click <strong>Save</strong>.</li>
 </ol>
 <p>A changed <strong>Timezone</strong>, <strong>Scanner or digitizer</strong> or <strong>Video times in UTC</strong> re-dates every file
@@ -540,6 +559,14 @@ link to the device a camera is part of is its child <code>device</code>. The com
 <tr>
 <td>Change a camera&#39;s settings</td>
 <td><a href="commands.html#camera-update"><code>camera-update</code></a> <code>&lt;camera&gt; --timezone &lt;zone&gt;</code>, or <code>--clear &lt;field&gt;</code></td>
+</tr>
+<tr>
+<td>Say what a security camera&#39;s clips are around, and keep them</td>
+<td><code>camera-update &lt;camera&gt; --clips face</code>, <code>motion</code> or <code>off</code>, and <code>--clip-days &lt;days&gt;</code> (0 keeps them)</td>
+</tr>
+<tr>
+<td>Record a clip of a security camera now</td>
+<td><a href="commands.html#camera-clip"><code>camera-clip</code></a> <code>&lt;device&gt;</code>, with <code>--post &lt;seconds&gt;</code></td>
 </tr>
 <tr>
 <td>Show a camera and its owners</td>

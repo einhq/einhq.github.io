@@ -29,7 +29,7 @@ belongs to someone, and the camera's **Faces** log says who it is, or `unknown`;
 [automation](../automation/automations.md) can take that, such as an unknown face at the front door
 at night. Once the person has gone, the clearest picture of their face is filed under the camera,
 on its page in [Cameras](cameras.md#a-security-camera), where it joins a person, starts an
-unidentified one, or stays unknown, as any photo's face does. So someone the camera keeps seeing is
+unidentified one, or stays unknown, as any photo's face does, beside a video clip of the visit. So someone the camera keeps seeing is
 named once, on the Unidentified people page, and known from then on.
 
 Every face every camera sees is looked at; there is no camera left out and nobody who is not

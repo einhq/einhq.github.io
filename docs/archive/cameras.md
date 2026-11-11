@@ -66,6 +66,26 @@ time it was seen. Those pictures are the archive's like any other: their faces j
 unidentified ones ([Faces a camera sees](people.md#faces-a-camera-sees)), and they turn up in
 search.
 
+Beside them, in `clips/` with a folder a day, is a video of each visit: the camera's sharpest
+stream from five seconds before a face came into view until ten seconds after the last face was
+gone, named for the time it starts. Someone who stays is one clip, up to two minutes. The video is
+the camera's own picture and sound, not made again, and it is the archive's like any other: it gets
+its stills, a version the browser plays, the faces in it and a place on the timeline at the time it
+was recorded. Nothing is recorded between visits.
+
+Two settings on the camera, in **Edit camera** (see [Change a camera's settings](#change-a-cameras-settings)),
+decide the clips; its page shows them under **Clips**:
+
+- **Clips**: **Around a face** (the default), **Around a face or motion**, where anything that moves
+  in the picture makes a clip too, or **Off**.
+- **Keep clips (days)**: how many days of clips are kept, 30 unless you change it. Every hour, the
+  days older than that are removed; 0 keeps every clip. The faces' pictures are kept whatever it
+  says.
+
+`camera-clip front-door` in the terminal records a clip now, from five seconds ago until ten seconds
+on (`--post 30` for thirty), filed with the others; an [automation](../automation/automations.md)
+can run it, such as when the doorbell is pressed.
+
 ## The Cameras page
 
 Open **Cameras** in the sidebar, under **Browse**.
@@ -229,7 +249,8 @@ pictures.
 1. On the camera's page, click **Edit**. The **Edit camera** dialog opens.
 2. Change what you need: **Name**, **Make**, **Model**, **Serial number**, **Timezone** (a list of
    time zones you can type in, such as `Pacific/Auckland`), **Scanner or digitizer**,
-   **Video times in UTC**, **Description** and **Labels**.
+   **Video times in UTC**, **Description** and **Labels**; and, for a camera that is a device with
+   a stream, **Clips** and **Keep clips (days)** (see [A security camera](#a-security-camera)).
 3. Click **Save**.
 
 A changed **Timezone**, **Scanner or digitizer** or **Video times in UTC** re-dates every file
@@ -389,6 +410,8 @@ link to the device a camera is part of is its child `device`. The commands below
 | Which camera a make and model, or a serial number, is matched to | [`camera-match`](commands.md#camera-match) `--make <make> --model <model>`, or `--serial <serial>`                                                            |
 | Register a camera                                                | [`camera-create`](commands.md#camera-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc` |
 | Change a camera's settings                                       | [`camera-update`](commands.md#camera-update) `<camera> --timezone <zone>`, or `--clear <field>`                                                               |
+| Say what a security camera's clips are around, and keep them     | `camera-update <camera> --clips face`, `motion` or `off`, and `--clip-days <days>` (0 keeps them)                                                             |
+| Record a clip of a security camera now                           | [`camera-clip`](commands.md#camera-clip) `<device>`, with `--post <seconds>`                                                                                  |
 | Show a camera and its owners                                     | [`camera-info`](commands.md#camera-info) `<camera>`                                                                                                           |
 | A camera's history                                               | [`camera-timeline`](commands.md#camera-timeline) `<camera>`                                                                                                   |
 | Link the files a camera's fingerprint matches                    | [`camera-relink`](commands.md#camera-relink) `<camera>`; `--dry-run` reports first, `--force` takes files from another camera, `--all` does every camera      |

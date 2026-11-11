@@ -467,7 +467,9 @@ With the [Archive](../archive/index.md), the media service also watches each cam
 stream for faces: the camera gets a **Faces** log, which says who each face that came into view
 was, or `unknown`, within a second or so, as `dev.<camera>.faces` for automations, and the faces'
 pictures are filed under the camera in the archive, where they are named as photos' faces are
-([Faces a camera sees](../archive/people.md#faces-a-camera-sees)).
+([Faces a camera sees](../archive/people.md#faces-a-camera-sees)). The media service records the
+camera's largest stream as well, and a clip of each visit, from a little before the face until a
+little after, is filed beside them as a video ([A security camera](../archive/cameras.md#a-security-camera)).
 
 The camera is **online** while it gives a picture, asked every other minute. Who may see the
 pictures is who may read the stream: the household, as for every device
