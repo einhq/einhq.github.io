@@ -10,21 +10,27 @@ The commands the automation module adds. They are there once the module is insta
 
 ### `automation-adopt`
 
-Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)
+Make something found on the network a device: a Shelly is pointed at the broker and restarted, a camera, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)
 
 <small>changes things</small>
 
 ```text
-automation-adopt <id>
+automation-adopt [--user=<string>] [--password=<string>] <id>
 ```
 
 | Argument | What it is                                                                      |
 | -------- | ------------------------------------------------------------------------------- |
 | `<id>`   | what automation-found calls it: its hardware address without colons, or its IP. |
 
+| Option                | What it does                                             |
+| --------------------- | -------------------------------------------------------- |
+| `--user=<string>`     | an ONVIF camera's user.                                  |
+| `--password=<string>` | an ONVIF camera's password, kept in the device's secret. |
+
 ```bash
 automation-adopt a8032ab12345
 automation-adopt 7c2ebd614055
+automation-adopt ec71db0a1b2c --user admin --password s3cret
 ```
 
 With `JSON_OUTPUT=1`: AdoptAnswer: id, label, driver, broker, restarted, device.
@@ -119,7 +125,7 @@ service restart automation-engine
 
 ### `automation-found`
 
-The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group)
+The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group)
 
 <small>reads only</small>
 

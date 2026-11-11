@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 436 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 437 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 221 in full](commands-core.md).
+[All 222 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -57,6 +57,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
 | [detach](commands-core.md#detach) | detach a job so it keeps running after the shell closes. |
+| [device-config](commands-core.md#device-config) | Show what a device's driver was given, or change it (name=value, name= to take one away) and have the driver take it up; changing is for members of the devices group. |
 | [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook) |
 | [device-forget](commands-core.md#device-forget) | Remove a device and everything under it, its history included; for members of the devices group. |
 | [device-history](commands-core.md#device-history) | An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes. |
@@ -423,13 +424,13 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 | Command | What it does |
 | --- | --- |
-| [automation-adopt](../automation/commands.md#automation-adopt) | Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group) |
+| [automation-adopt](../automation/commands.md#automation-adopt) | Make something found on the network a device: a Shelly is pointed at the broker and restarted, a camera, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group) |
 | [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service) |
 | [automation-check](../automation/commands.md#automation-check) | What is wrong with an automation, and what each of its nodes would say now, from the latest readings the caller may read; no action is run. |
 | [automation-disable](../automation/commands.md#automation-disable) | Turn an automation off: a person's by whoever may change its file, a module's by the administrator. |
 | [automation-enable](../automation/commands.md#automation-enable) | Turn an automation on: a person's by whoever may change its file, a module's by the administrator. |
 | [automation-engine](../automation/commands.md#automation-engine) | Run the automations under /etc/automations and /etc/automations.d when a reading, a press, a device coming or going or the clock says so, each as its owner (the automation-engine service) |
-| [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
+| [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
 | [automation-ignore](../automation/commands.md#automation-ignore) | Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group) |
 | [automation-new](../automation/commands.md#automation-new) | Make an automation under /etc/automations, empty or from a starting point (members of the automation group) |
 | [automation-set](../automation/commands.md#automation-set) | Write an automation's YAML, made when it is new; one with problems is refused unless --draft. |

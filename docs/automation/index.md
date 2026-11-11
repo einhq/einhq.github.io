@@ -26,6 +26,7 @@ household that uses them. [Automations](automations.md) covers making automation
 | The `http` driver                                                                          | A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see [A web API](#a-web-api) |
 | The `virtual` driver                                                                       | Devices whose readings are worked out from other devices' (an average, the most, whether any is on) and whose controls hold what is set; see [Virtual devices](virtual-devices.md)                                                     |
 | The `rtsp` driver                                                                          | A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see [A camera](#a-camera)                                                                                                         |
+| The `onvif` driver                                                                         | A camera that speaks ONVIF, found on the network: its streams as `rtsp`'s, its motion and the people it sees, and its presets and moves where it turns; see [An ONVIF camera](#an-onvif-camera)                                        |
 | The **Live** tab                                                                           | A camera's picture as it comes, on its device page                                                                                                                                                                                     |
 | The `automation-bridge` service                                                            | Hears the broker and runs the drivers                                                                                                                                                                                                  |
 | The `automation-engine` service                                                            | Runs the [automations](automations.md) under `/etc/automations`, each as its owner                                                                                                                                                     |
@@ -148,10 +149,11 @@ The sections after it say how to point each kind at the broker by hand.
 
 With the installer's broker, its listener `discovery` asks the network every two minutes what is
 there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers,
-and hears what announces itself over mDNS in between. It does not scan addresses: it hears only what
+and over WS-Discovery, the way cameras that speak ONVIF are found, and hears what announces itself
+over mDNS in between. It does not scan addresses: it hears only what
 announces itself. Each thing that answered is named
 by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
-bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
+bridge, a camera, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
 its hardware address.
 
 When something found can become a device and is none yet, the **Devices** page's header has a
@@ -161,6 +163,7 @@ and **Add** on a card makes it a device:
 | What was found                                | What **Add** does                                                                                                                                                                                                                                                                                                |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A Shelly, of any generation                   | EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute, with all it reads and switches.                                                                                                                                           |
+| A camera that speaks ONVIF                    | **Add** asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the `onvif` driver at once, with its streams, its motion and the people it sees, and its presets and moves where it turns ([An ONVIF camera](#an-onvif-camera)).                                        |
 | A printer                                     | A device of the `ipp` driver at once: its `state` (idle, printing, stopped), its `warnings` (such as `marker-supply-low-warning`) and a level in % for each ink or toner it reports.                                                                                                                             |
 | A Google Cast speaker or screen               | A device of the `cast` driver: `player` says whether it plays (`idle`, `playing`, `paused`) and `playing` what, as title – artist (app); `volume` and `muted` can be set, and `play`, `pause` and `stop` pressed.                                                                                                |
 | Anything that answers SNMP: a NAS, a router … | A device of the `snmp` driver: `uptime`, `load`, `memory-used`, for each volume `<volume>-used` (%) and `<volume>-free` (GB), and a `<sensor>-temperature` for each temperature its agent reports. EiN asks with the community **SNMP community** in the **Automation** settings, `public` unless you change it. |
@@ -205,13 +208,14 @@ automation-found --all          # everything the listener heard
 automation-found 7c2ebd614055   # one, with all the listener heard of it
 automation-adopt a8032ab12345   # add the Shelly with this id, as automation-found says it
 automation-adopt 7c2ebd614055   # add the Cast speaker
+ automation-adopt ec71db0a1b2c --user admin --password 'the password'   # add the camera; the leading space keeps it out of your history
 echo 30 > /dev/kitchen-speaker/volume
 echo press > /dev/kitchen-speaker/pause
 automation-ignore d0ad08c5e709  # leave the printer out
 ```
 
-The listener needs the machine EiN runs on to be on the same network as the devices: mDNS and SSDP
-stay on the network they are sent on. A device on another network, or another VLAN, is not found,
+The listener needs the machine EiN runs on to be on the same network as the devices: mDNS, SSDP and
+WS-Discovery stay on the network they are sent on. A device on another network, or another VLAN, is not found,
 and is connected by hand as below. **Broker for devices** in the **Automation** settings is the
 address a device added from the network is given; empty, it is the address the listener says the
 machine has on the devices' network. With a broker of your own there is no listener: the page says
@@ -463,6 +467,53 @@ pictures is who may read the stream: the household, as for every device
 ([Who may do what](#who-may-do-what)). EiN's pages reach the camera only through EiN, signed in, so
 neither its address nor its password reaches a browser.
 
+### An ONVIF camera
+
+Most cameras that work without a cloud also speak ONVIF, a standard for asking a camera what it
+sends, what it sees and how it turns. Such a camera needs no stream address: EiN asks the camera
+for it. It is found on the network, where **Add** on its card asks for the account EiN signs in to
+it with ([Add a device found on the network](#add-a-device-found-on-the-network)). Many cameras
+have ONVIF off, or want an account of its own for it, until it is set on their web page, among the
+advanced network settings: on a Hikvision under **Network → Advanced Settings → Integration
+Protocol**. A camera on another network is made in the terminal:
+
+```bash
+# in EiN's terminal, as a member of devices
+ device-create 'Back yard' --driver onvif \
+  --config address=192.0.2.31 \
+  --config user=admin --config password='the password'   # the leading space keeps it out of your history
+```
+
+| Config     | What it is                                                                                                                              |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `address`  | The camera's address, `192.0.2.31` or `192.0.2.31:8000`, or its ONVIF service's whole address, `http://192.0.2.31/onvif/device_service` |
+| `user`     | The camera's account                                                                                                                    |
+| `password` | That account's password, kept in the device's `.secret` as `rtsp`'s is. The camera is sent a digest of it, never the password itself    |
+
+The camera's largest picture becomes its `main` stream and its smallest its `sub`, with the codec,
+size and frame rate the camera says, and everything else about them is as for [A camera](#a-camera).
+EiN asks the camera again every hour, and whenever it is not reached, so a stream the camera moved
+is followed. One added from the network is asked at the address the listener last heard it at, so
+it is followed to a new address too.
+
+Beside its streams, a camera has what it tells and what it turns:
+
+| Endpoint                                                                     | What it is                                                                                                                   |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `motion`                                                                     | On while the camera sees motion, off when it stops, as the camera itself detects it                                          |
+| `person`                                                                     | On while the camera sees a person, for a camera that tells people from the rest                                              |
+| `ptz-preset`                                                                 | One of the positions saved on the camera: setting it turns the camera there. For a camera that turns and has positions saved |
+| `ptz-left`, `ptz-right`, `ptz-up`, `ptz-down`, `ptz-zoom-in`, `ptz-zoom-out` | A button each: a press turns or zooms the camera a short step. For a camera that turns, and zooms                            |
+
+`motion` and `person` are readings like any other, so an [automation](automations.md) takes them:
+a person in the back yard at night can turn on its light, or turn the camera to the gate.
+
+```bash
+# in EiN's terminal
+echo Gate > /dev/back-yard/ptz-preset    # turn to the position saved as Gate
+echo press > /dev/back-yard/ptz-left     # a step to the left
+```
+
 ### Check that EiN hears them
 
 ```bash
@@ -610,22 +661,24 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 
 ## When something goes differently
 
-| What you see                                                | What it means                                                          | What to do                                                                                                                                                                               |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **No devices yet** on the Devices page                      | No device has announced itself, or EiN does not hear the broker        | Run `automation-status`, and check the device's own broker settings                                                                                                                      |
-| A device never shows up, while others do                    | It cannot reach the broker, or the broker refuses its account          | Check its server, user and password. ESPHome's log says whether MQTT connected. Open port 1883 in the machine's firewall ([network](../admin/network.md#open-the-ports-in-the-firewall)) |
-| A Shelly shows up without readings                          | Its status updates are off                                             | On a second-generation Shelly, turn on **Generic status update over MQTT** and **RPC status notifications over MQTT**                                                                    |
-| A first-generation Shelly never shows up                    | It has not restarted since MQTT was turned on, or uses a custom prefix | Restart it, and turn its custom MQTT prefix off                                                                                                                                          |
-| A Shelly is there twice, under two names                    | Its topic prefix changed, and a new prefix is a new device             | **Forget** the old one                                                                                                                                                                   |
-| An endpoint is marked **not read**                          | The device announced it in a way the bridge does not understand        | `automation-status` says why. Its readings are not kept                                                                                                                                  |
-| `… takes on, off or toggle, not …` when switching           | The value is not one the control takes                                 | See [What a device becomes](#what-a-device-becomes)                                                                                                                                      |
-| `… not connected to the broker, so nothing was sent`        | EiN does not hear the broker just now                                  | Run `automation-status`                                                                                                                                                                  |
-| `<device>'s driver shelly is not running`                   | The `automation-bridge` service is stopped                             | `service start automation-bridge`, as the administrator                                                                                                                                  |
-| `Access denied for operation 'w' on node: …` when switching | The control is narrowed to others                                      | Ask the administrator                                                                                                                                                                    |
-| A device stays **offline**                                  | It said it was going, or the broker said so for it when it disappeared | Check its power and its Wi-Fi                                                                                                                                                            |
-| A camera shows **No picture**, and stays offline            | The restreamer cannot reach the camera, or the camera refuses it       | Check `url`, `user` and the password: `device-forget` the camera and make it again. `service logs automation-bridge` says what the camera answered                                       |
-| The **Live** tab says the stream could not be reached       | As above, or the sidecar is not running                                | `podman compose ps` on the machine; `./setup.sh --only automation` starts it again                                                                                                       |
-| **Live** plays nothing in a browser on a phone              | The browser does not play the camera's codec, often H.265              | Watch the smaller stream, which is often H.264, or set the camera to send H.264                                                                                                          |
+| What you see                                                | What it means                                                                | What to do                                                                                                                                                                               |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No devices yet** on the Devices page                      | No device has announced itself, or EiN does not hear the broker              | Run `automation-status`, and check the device's own broker settings                                                                                                                      |
+| A device never shows up, while others do                    | It cannot reach the broker, or the broker refuses its account                | Check its server, user and password. ESPHome's log says whether MQTT connected. Open port 1883 in the machine's firewall ([network](../admin/network.md#open-the-ports-in-the-firewall)) |
+| A Shelly shows up without readings                          | Its status updates are off                                                   | On a second-generation Shelly, turn on **Generic status update over MQTT** and **RPC status notifications over MQTT**                                                                    |
+| A first-generation Shelly never shows up                    | It has not restarted since MQTT was turned on, or uses a custom prefix       | Restart it, and turn its custom MQTT prefix off                                                                                                                                          |
+| A Shelly is there twice, under two names                    | Its topic prefix changed, and a new prefix is a new device                   | **Forget** the old one                                                                                                                                                                   |
+| An endpoint is marked **not read**                          | The device announced it in a way the bridge does not understand              | `automation-status` says why. Its readings are not kept                                                                                                                                  |
+| `… takes on, off or toggle, not …` when switching           | The value is not one the control takes                                       | See [What a device becomes](#what-a-device-becomes)                                                                                                                                      |
+| `… not connected to the broker, so nothing was sent`        | EiN does not hear the broker just now                                        | Run `automation-status`                                                                                                                                                                  |
+| `<device>'s driver shelly is not running`                   | The `automation-bridge` service is stopped                                   | `service start automation-bridge`, as the administrator                                                                                                                                  |
+| `Access denied for operation 'w' on node: …` when switching | The control is narrowed to others                                            | Ask the administrator                                                                                                                                                                    |
+| A device stays **offline**                                  | It said it was going, or the broker said so for it when it disappeared       | Check its power and its Wi-Fi                                                                                                                                                            |
+| A camera shows **No picture**, and stays offline            | The restreamer cannot reach the camera, or the camera refuses it             | Check `url`, `user` and the password: `device-forget` the camera and make it again. `service logs automation-bridge` says what the camera answered                                       |
+| Adding a camera says `the camera refused admin's password`  | The account is not the camera's ONVIF account, or ONVIF is off on the camera | Turn ONVIF on in the camera's web page and give it an account there; some cameras keep ONVIF's accounts apart from the web page's                                                        |
+| A camera is not found on the network                        | ONVIF is off on the camera, or it is on another network                      | Turn ONVIF on in its web page, or make it in the terminal ([An ONVIF camera](#an-onvif-camera))                                                                                          |
+| The **Live** tab says the stream could not be reached       | As above, or the sidecar is not running                                      | `podman compose ps` on the machine; `./setup.sh --only automation` starts it again                                                                                                       |
+| **Live** plays nothing in a browser on a phone              | The browser does not play the camera's codec, often H.265                    | Watch the smaller stream, which is often H.264, or set the camera to send H.264                                                                                                          |
 
 ## Related pages
 

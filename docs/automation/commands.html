@@ -97,9 +97,9 @@
 <p><a href="#automation-adopt">automation-adopt</a> · <a href="#automation-bridge">automation-bridge</a> · <a href="#automation-check">automation-check</a> · <a href="#automation-disable">automation-disable</a> · <a href="#automation-enable">automation-enable</a> · <a href="#automation-engine">automation-engine</a> · <a href="#automation-found">automation-found</a> · <a href="#automation-ignore">automation-ignore</a> · <a href="#automation-new">automation-new</a> · <a href="#automation-set">automation-set</a> · <a href="#automation-show">automation-show</a> · <a href="#automation-snmp">automation-snmp</a> · <a href="#automation-status">automation-status</a> · <a href="#automation-trigger">automation-trigger</a> · <a href="#automations">automations</a></p>
 <h2 id="a">A<a class="anchor" href="#a" aria-label="Link to this section"></a></h2>
 <h3 id="automation-adopt"><code>automation-adopt</code><a class="anchor" href="#automation-adopt" aria-label="Link to this section"></a></h3>
-<p>Make something found on the network a device: a Shelly is pointed at the broker and restarted, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)</p>
+<p>Make something found on the network a device: a Shelly is pointed at the broker and restarted, a camera, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group)</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>automation-adopt &lt;id&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-adopt [--user=&lt;string&gt;] [--password=&lt;string&gt;] &lt;id&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -113,8 +113,26 @@
 </tr>
 </tbody></table>
 </div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--user=&lt;string&gt;</code></td>
+<td>an ONVIF camera&#39;s user.</td>
+</tr>
+<tr>
+<td><code>--password=&lt;string&gt;</code></td>
+<td>an ONVIF camera&#39;s password, kept in the device&#39;s secret.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-adopt a8032ab12345
-automation-adopt 7c2ebd614055</code></pre></div>
+automation-adopt 7c2ebd614055
+automation-adopt ec71db0a1b2c --user admin --password s3cret</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: AdoptAnswer: id, label, driver, broker, restarted, device.</p>
 <h3 id="automation-bridge"><code>automation-bridge</code><a class="anchor" href="#automation-bridge" aria-label="Link to this section"></a></h3>
 <p>Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service)</p>
@@ -195,7 +213,7 @@ automation-adopt 7c2ebd614055</code></pre></div>
 <div class="code"><pre tabindex="0"><code>automation-engine</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>service restart automation-engine</code></pre></div>
 <h3 id="automation-found"><code>automation-found</code><a class="anchor" href="#automation-found" aria-label="Link to this section"></a></h3>
-<p>The devices on the network the network listener heard over mDNS and SSDP: what each is, whether it can become a device and whether it is one already (for members of the devices group)</p>
+<p>The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group)</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>automation-found [--addable] [--all] [&lt;id&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>

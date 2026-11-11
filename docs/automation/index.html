@@ -150,6 +150,10 @@ household that uses them. <a href="automations.html">Automations</a> covers maki
 <td>A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see <a href="#a-camera">A camera</a></td>
 </tr>
 <tr>
+<td>The <code>onvif</code> driver</td>
+<td>A camera that speaks ONVIF, found on the network: its streams as <code>rtsp</code>&#39;s, its motion and the people it sees, and its presets and moves where it turns; see <a href="#an-onvif-camera">An ONVIF camera</a></td>
+</tr>
+<tr>
 <td>The <strong>Live</strong> tab</td>
 <td>A camera&#39;s picture as it comes, on its device page</td>
 </tr>
@@ -265,10 +269,11 @@ The sections after it say how to point each kind at the broker by hand.</p>
 <h3 id="add-a-device-found-on-the-network">Add a device found on the network<a class="anchor" href="#add-a-device-found-on-the-network" aria-label="Link to this section"></a></h3>
 <p>With the installer&#39;s broker, its listener <code>discovery</code> asks the network every two minutes what is
 there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers,
-and hears what announces itself over mDNS in between. It does not scan addresses: it hears only what
+and over WS-Discovery, the way cameras that speak ONVIF are found, and hears what announces itself
+over mDNS in between. It does not scan addresses: it hears only what
 announces itself. Each thing that answered is named
 by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
-bridge, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
+bridge, a camera, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
 its hardware address.</p>
 <p>When something found can become a device and is none yet, the <strong>Devices</strong> page&#39;s header has a
 button that says how many, such as <strong>2 found</strong>. It opens <strong>Found on the network</strong>, a card for each,
@@ -283,6 +288,10 @@ and <strong>Add</strong> on a card makes it a device:</p>
 <tbody><tr>
 <td>A Shelly, of any generation</td>
 <td>EiN sets its MQTT to the broker, with the <code>device</code> account, and restarts it. It is under <strong>Devices</strong> when it is back, within a minute, with all it reads and switches.</td>
+</tr>
+<tr>
+<td>A camera that speaks ONVIF</td>
+<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, with its streams, its motion and the people it sees, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
 </tr>
 <tr>
 <td>A printer</td>
@@ -335,11 +344,12 @@ automation-found --all          <span class="hljs-comment"># everything the list
 automation-found 7c2ebd614055   <span class="hljs-comment"># one, with all the listener heard of it</span>
 automation-adopt a8032ab12345   <span class="hljs-comment"># add the Shelly with this id, as automation-found says it</span>
 automation-adopt 7c2ebd614055   <span class="hljs-comment"># add the Cast speaker</span>
+ automation-adopt ec71db0a1b2c --user admin --password <span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># add the camera; the leading space keeps it out of your history</span>
 <span class="hljs-built_in">echo</span> 30 &gt; /dev/kitchen-speaker/volume
 <span class="hljs-built_in">echo</span> press &gt; /dev/kitchen-speaker/pause
 automation-ignore d0ad08c5e709  <span class="hljs-comment"># leave the printer out</span></code></pre></div>
-<p>The listener needs the machine EiN runs on to be on the same network as the devices: mDNS and SSDP
-stay on the network they are sent on. A device on another network, or another VLAN, is not found,
+<p>The listener needs the machine EiN runs on to be on the same network as the devices: mDNS, SSDP and
+WS-Discovery stay on the network they are sent on. A device on another network, or another VLAN, is not found,
 and is connected by hand as below. <strong>Broker for devices</strong> in the <strong>Automation</strong> settings is the
 address a device added from the network is given; empty, it is the address the listener says the
 machine has on the devices&#39; network. With a broker of your own there is no listener: the page says
@@ -618,6 +628,75 @@ pictures are filed under the camera in the archive, where they are named as phot
 pictures is who may read the stream: the household, as for every device
 (<a href="#who-may-do-what">Who may do what</a>). EiN&#39;s pages reach the camera only through EiN, signed in, so
 neither its address nor its password reaches a browser.</p>
+<h3 id="an-onvif-camera">An ONVIF camera<a class="anchor" href="#an-onvif-camera" aria-label="Link to this section"></a></h3>
+<p>Most cameras that work without a cloud also speak ONVIF, a standard for asking a camera what it
+sends, what it sees and how it turns. Such a camera needs no stream address: EiN asks the camera
+for it. It is found on the network, where <strong>Add</strong> on its card asks for the account EiN signs in to
+it with (<a href="#add-a-device-found-on-the-network">Add a device found on the network</a>). Many cameras
+have ONVIF off, or want an account of its own for it, until it is set on their web page, among the
+advanced network settings: on a Hikvision under <strong>Network → Advanced Settings → Integration
+Protocol</strong>. A camera on another network is made in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+ device-create <span class="hljs-string">&#x27;Back yard&#x27;</span> --driver onvif \
+  --config address=192.0.2.31 \
+  --config user=admin --config password=<span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>address</code></td>
+<td>The camera&#39;s address, <code>192.0.2.31</code> or <code>192.0.2.31:8000</code>, or its ONVIF service&#39;s whole address, <code>http://192.0.2.31/onvif/device_service</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The camera&#39;s account</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>That account&#39;s password, kept in the device&#39;s <code>.secret</code> as <code>rtsp</code>&#39;s is. The camera is sent a digest of it, never the password itself</td>
+</tr>
+</tbody></table>
+</div>
+<p>The camera&#39;s largest picture becomes its <code>main</code> stream and its smallest its <code>sub</code>, with the codec,
+size and frame rate the camera says, and everything else about them is as for <a href="#a-camera">A camera</a>.
+EiN asks the camera again every hour, and whenever it is not reached, so a stream the camera moved
+is followed. One added from the network is asked at the address the listener last heard it at, so
+it is followed to a new address too.</p>
+<p>Beside its streams, a camera has what it tells and what it turns:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>motion</code></td>
+<td>On while the camera sees motion, off when it stops, as the camera itself detects it</td>
+</tr>
+<tr>
+<td><code>person</code></td>
+<td>On while the camera sees a person, for a camera that tells people from the rest</td>
+</tr>
+<tr>
+<td><code>ptz-preset</code></td>
+<td>One of the positions saved on the camera: setting it turns the camera there. For a camera that turns and has positions saved</td>
+</tr>
+<tr>
+<td><code>ptz-left</code>, <code>ptz-right</code>, <code>ptz-up</code>, <code>ptz-down</code>, <code>ptz-zoom-in</code>, <code>ptz-zoom-out</code></td>
+<td>A button each: a press turns or zooms the camera a short step. For a camera that turns, and zooms</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>motion</code> and <code>person</code> are readings like any other, so an <a href="automations.html">automation</a> takes them:
+a person in the back yard at night can turn on its light, or turn the camera to the gate.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> Gate &gt; /dev/back-yard/ptz-preset    <span class="hljs-comment"># turn to the position saved as Gate</span>
+<span class="hljs-built_in">echo</span> press &gt; /dev/back-yard/ptz-left     <span class="hljs-comment"># a step to the left</span></code></pre></div>
 <h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automation-status</code></pre></div>
@@ -935,6 +1014,16 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>Check <code>url</code>, <code>user</code> and the password: <code>device-forget</code> the camera and make it again. <code>service logs automation-bridge</code> says what the camera answered</td>
 </tr>
 <tr>
+<td>Adding a camera says <code>the camera refused admin&#39;s password</code></td>
+<td>The account is not the camera&#39;s ONVIF account, or ONVIF is off on the camera</td>
+<td>Turn ONVIF on in the camera&#39;s web page and give it an account there; some cameras keep ONVIF&#39;s accounts apart from the web page&#39;s</td>
+</tr>
+<tr>
+<td>A camera is not found on the network</td>
+<td>ONVIF is off on the camera, or it is on another network</td>
+<td>Turn ONVIF on in its web page, or make it in the terminal (<a href="#an-onvif-camera">An ONVIF camera</a>)</td>
+</tr>
+<tr>
 <td>The <strong>Live</strong> tab says the stream could not be reached</td>
 <td>As above, or the sidecar is not running</td>
 <td><code>podman compose ps</code> on the machine; <code>./setup.sh --only automation</code> starts it again</td>
@@ -961,7 +1050,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
