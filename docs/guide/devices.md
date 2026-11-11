@@ -127,6 +127,10 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
   value, and whether you may write it. **events** marks a button's presses, **diagnostic** or
   **config** what tells of the device itself, **not read** an endpoint whose values its driver cannot
   read, and **retired** one the device no longer announces.
+- **Config**, what its driver was given when the device was made: a camera's stream addresses, a web
+  API's address and what to read of it. A secret field, such as a password, reads **set** and never
+  shows its value. A member of the `devices` group changes it with **Change** while the driver runs;
+  a secret field left empty keeps what it had. The driver takes the change at once.
 - **Device key**, for a device whose driver reads what is posted to it, such as a phone: the address
   it posts to (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). Only those who may change
   the device see it.
@@ -337,6 +341,7 @@ device a driver still hears comes back new.
 | Make a device that posts to a webhook       | `device-create <name> --driver webhook`, `--config events=<field>,…` for a button's presses                            |
 | Give a GPX file to a tracker                | `cat <file>.gpx > /dev/<device>`                                                                                       |
 | Show, renew or take away a device's key     | [`device-key`](../reference/commands-core.md#device-key) `<device>`, `--new`, `--off`, `--origin <address>`            |
+| Show or change what its driver was given    | [`device-config`](../reference/commands-core.md#device-config) `<device> [name=value …]`, `name=` takes one away       |
 | Rename a device or an endpoint              | [`device-label`](../reference/commands-core.md#device-label) `<device>[/<endpoint>] <label>`                           |
 | Forget a device                             | [`device-forget`](../reference/commands-core.md#device-forget) `<device>`                                              |
 

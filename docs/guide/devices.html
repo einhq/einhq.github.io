@@ -227,6 +227,10 @@ where that network is reached.</li>
 value, and whether you may write it. <strong>events</strong> marks a button&#39;s presses, <strong>diagnostic</strong> or
 <strong>config</strong> what tells of the device itself, <strong>not read</strong> an endpoint whose values its driver cannot
 read, and <strong>retired</strong> one the device no longer announces.</li>
+<li><strong>Config</strong>, what its driver was given when the device was made: a camera&#39;s stream addresses, a web
+API&#39;s address and what to read of it. A secret field, such as a password, reads <strong>set</strong> and never
+shows its value. A member of the <code>devices</code> group changes it with <strong>Change</strong> while the driver runs;
+a secret field left empty keeps what it had. The driver takes the change at once.</li>
 <li><strong>Device key</strong>, for a device whose driver reads what is posted to it, such as a phone: the address
 it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). Only those who may change
 the device see it.</li>
@@ -415,6 +419,10 @@ device a driver still hears comes back new.</p>
 <tr>
 <td>Show, renew or take away a device&#39;s key</td>
 <td><a href="../reference/commands-core.html#device-key"><code>device-key</code></a> <code>&lt;device&gt;</code>, <code>--new</code>, <code>--off</code>, <code>--origin &lt;address&gt;</code></td>
+</tr>
+<tr>
+<td>Show or change what its driver was given</td>
+<td><a href="../reference/commands-core.html#device-config"><code>device-config</code></a> <code>&lt;device&gt; [name=value …]</code>, <code>name=</code> takes one away</td>
 </tr>
 <tr>
 <td>Rename a device or an endpoint</td>

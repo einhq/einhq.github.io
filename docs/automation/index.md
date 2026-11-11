@@ -384,11 +384,11 @@ device-create Electricity price --driver http \
 ```
 
 A config `device-create` does not understand is refused with what is wrong, such as `a reading is
-name=path [unit], not 'price'`; the device is made all the same, so change its config, or forget it
-and make it again:
+name=path [unit], not 'price'`; the device is made all the same, so change its config, on its
+**Info** tab or with `device-config`, or forget it and make it again:
 
 ```bash
-attrs -J 'config={"url":"https://…","read":"price=[time_start..time_end].SEK_per_kWh SEK/kWh"}' /dev/electricity-price
+device-config electricity-price 'read=price=[time_start..time_end].SEK_per_kWh SEK/kWh'
 ```
 
 #### Switching it
@@ -440,6 +440,13 @@ camera in the terminal:
 | `snapshot` | The address of the camera's still picture, `http://…`, which a picture is taken from when there is no restreamer. May be left out |
 | `user`     | The camera's account                                                                                                              |
 | `password` | That account's password. It is kept in the device's `.secret`, which the administrator alone reads, and goes only to the sidecar  |
+
+A password or an address that changed is given again on the camera's **Info** tab, with **Change**,
+or in the terminal, and the camera is reached with it at once:
+
+```bash
+device-config front-door password='the new password'
+```
 
 The camera becomes a device of class `camera`, with a `stream` endpoint for each stream: `main`, and
 `sub` with a second one. EiN gives the streams to the [sidecar's restreamer](#the-installers-sidecar),
@@ -674,7 +681,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 | `<device>'s driver shelly is not running`                   | The `automation-bridge` service is stopped                                   | `service start automation-bridge`, as the administrator                                                                                                                                  |
 | `Access denied for operation 'w' on node: …` when switching | The control is narrowed to others                                            | Ask the administrator                                                                                                                                                                    |
 | A device stays **offline**                                  | It said it was going, or the broker said so for it when it disappeared       | Check its power and its Wi-Fi                                                                                                                                                            |
-| A camera shows **No picture**, and stays offline            | The restreamer cannot reach the camera, or the camera refuses it             | Check `url`, `user` and the password: `device-forget` the camera and make it again. `service logs automation-bridge` says what the camera answered                                       |
+| A camera shows **No picture**, and stays offline            | The restreamer cannot reach the camera, or the camera refuses it             | Check `url`, `user` and the password, and change them on its **Info** tab or with `device-config`. `service logs automation-bridge` says what the camera answered                        |
 | Adding a camera says `the camera refused admin's password`  | The account is not the camera's ONVIF account, or ONVIF is off on the camera | Turn ONVIF on in the camera's web page and give it an account there; some cameras keep ONVIF's accounts apart from the web page's                                                        |
 | A camera is not found on the network                        | ONVIF is off on the camera, or it is on another network                      | Turn ONVIF on in its web page, or make it in the terminal ([An ONVIF camera](#an-onvif-camera))                                                                                          |
 | The **Live** tab says the stream could not be reached       | As above, or the sidecar is not running                                      | `podman compose ps` on the machine; `./setup.sh --only automation` starts it again                                                                                                       |

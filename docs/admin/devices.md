@@ -9,13 +9,13 @@ switch to some people, what a device key opens, and what reaches EiN without sig
 
 ## Who may do what
 
-| Who                             | What they may do                                                                                                                                                                   |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Members of the `devices` group  | See every device, its readings and its history; switch and set every control; share a device; make (`device-create`), rename (`device-label`) and forget (`device-forget`) devices |
-| Someone a device is shared with | See that device and its readings, and switch it when it is shared to edit                                                                                                          |
-| The administrator               | Everything: own every device, add people to `devices`, and bind queues and logs to the devices' routing keys                                                                       |
-| Everyone else signed in         | Nothing of the devices: no device, reading or switch, nor what they publish                                                                                                        |
-| A visitor who is not signed in  | Nothing either, whether or not visitors may browse                                                                                                                                 |
+| Who                             | What they may do                                                                                                                                                                                                                         |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Members of the `devices` group  | See every device, its readings and its history; switch and set every control; share a device; make (`device-create`), rename (`device-label`), change what their driver was given (`device-config`) and forget (`device-forget`) devices |
+| Someone a device is shared with | See that device and its readings, and switch it when it is shared to edit                                                                                                                                                                |
+| The administrator               | Everything: own every device, add people to `devices`, and bind queues and logs to the devices' routing keys                                                                                                                             |
+| Everyone else signed in         | Nothing of the devices: no device, reading or switch, nor what they publish                                                                                                                                                              |
+| A visitor who is not signed in  | Nothing either, whether or not visitors may browse                                                                                                                                                                                       |
 
 EiN makes the group `devices` (**Devices**, "May see, switch, share, make, name and forget every
 device under /dev") at every start when it is missing. Add someone to it in **Settings → Groups**, or

@@ -612,13 +612,13 @@ Show what a device's driver was given, or change it (name=value, name= to take o
 <small>reads only</small>
 
 ```text
-device-config <device> <field>...
+device-config <device> [<field>...]
 ```
 
 | Argument | What it is |
 | --- | --- |
 | `<device>` | the device's name. |
-| `<field>...` | name=value for its driver; name= takes it away; none shows the config. |
+| `[<field>...]` | name=value for its driver; name= takes it away; none shows the config. |
 
 ```bash
 device-config front-door

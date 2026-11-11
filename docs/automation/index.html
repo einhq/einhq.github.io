@@ -548,9 +548,9 @@ bridge&#39;s log says why once. A reading&#39;s unit says what it is: <code>°C<
 device-create Electricity price --driver http \
   --config <span class="hljs-string">&#x27;url=https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json&#x27;</span> \
   --config <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span> --config interval=5m</code></pre></div>
-<p>A config <code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, or forget it
-and make it again:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>attrs -J <span class="hljs-string">&#x27;config={&quot;url&quot;:&quot;https://…&quot;,&quot;read&quot;:&quot;price=[time_start..time_end].SEK_per_kWh SEK/kWh&quot;}&#x27;</span> /dev/electricity-price</code></pre></div>
+<p>A config <code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, on its
+<strong>Info</strong> tab or with <code>device-config</code>, or forget it and make it again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-config electricity-price <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span></code></pre></div>
 <h4 id="switching-it">Switching it<a class="anchor" href="#switching-it" aria-label="Link to this section"></a></h4>
 <p>A device whose web API also takes commands is switched at an address of its own, which <code>set</code> names
 for each control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the
@@ -609,6 +609,9 @@ camera in the terminal:</p>
 </tr>
 </tbody></table>
 </div>
+<p>A password or an address that changed is given again on the camera&#39;s <strong>Info</strong> tab, with <strong>Change</strong>,
+or in the terminal, and the camera is reached with it at once:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-config front-door password=<span class="hljs-string">&#x27;the new password&#x27;</span></code></pre></div>
 <p>The camera becomes a device of class <code>camera</code>, with a <code>stream</code> endpoint for each stream: <code>main</code>, and
 <code>sub</code> with a second one. EiN gives the streams to the <a href="#the-installers-sidecar">sidecar&#39;s restreamer</a>,
 which keeps one connection to the camera however many watch it, and says within a minute how large
@@ -1011,7 +1014,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <tr>
 <td>A camera shows <strong>No picture</strong>, and stays offline</td>
 <td>The restreamer cannot reach the camera, or the camera refuses it</td>
-<td>Check <code>url</code>, <code>user</code> and the password: <code>device-forget</code> the camera and make it again. <code>service logs automation-bridge</code> says what the camera answered</td>
+<td>Check <code>url</code>, <code>user</code> and the password, and change them on its <strong>Info</strong> tab or with <code>device-config</code>. <code>service logs automation-bridge</code> says what the camera answered</td>
 </tr>
 <tr>
 <td>Adding a camera says <code>the camera refused admin&#39;s password</code></td>

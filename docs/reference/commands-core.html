@@ -1050,7 +1050,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <h3 id="device-config"><code>device-config</code><a class="anchor" href="#device-config" aria-label="Link to this section"></a></h3>
 <p>Show what a device&#39;s driver was given, or change it (name=value, name= to take one away) and have the driver take it up; changing is for members of the devices group.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>device-config &lt;device&gt; &lt;field&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>device-config &lt;device&gt; [&lt;field&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1063,7 +1063,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <td>the device&#39;s name.</td>
 </tr>
 <tr>
-<td><code>&lt;field&gt;...</code></td>
+<td><code>[&lt;field&gt;...]</code></td>
 <td>name=value for its driver; name= takes it away; none shows the config.</td>
 </tr>
 </tbody></table>
