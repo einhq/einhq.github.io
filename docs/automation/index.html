@@ -223,8 +223,7 @@ so it is all there again after a restart.</li>
 <li><strong>A listener</strong> on the machine&#39;s own network, which finds the devices that are not on the broker
 yet: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
 <li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
-serves it again, to EiN on port 1984 (<code>STREAMS_PORT</code>), over RTSP on 8554 (<code>RTSP_PORT</code>) and over
-WebRTC on 8555 (<code>WEBRTC_PORT</code>), behind the account <code>ein</code> and <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN
+serves it again, to EiN on port 1984 (<code>STREAMS_PORT</code>) and over RTSP on 8554 (<code>RTSP_PORT</code>), behind the account <code>ein</code> and <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN
 gives it the cameras itself.</li>
 </ul>
 <p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
@@ -605,12 +604,7 @@ camera in the terminal:</p>
 which keeps one connection to the camera however many watch it, and says within a minute how large
 each picture is and which codec it is sent in. Its page shows a picture of each stream now, taken
 again every ten seconds while the page is open, and the <strong>Live</strong> tab plays the picture as it comes:
-the main stream, or the smaller one, a button away. On the home network the picture comes over
-WebRTC straight from the restreamer, on port 8555 (<code>WEBRTC_PORT</code>), well under a second behind, and
-the tab says <strong>Live, direct</strong>. Where the browser cannot reach that port, such as on a phone away
-from home through your HTTPS proxy, or in a browser that does not play the camera&#39;s codec over
-WebRTC, it plays through EiN instead after five seconds, a second or two behind, and says <strong>Live,
-through EiN</strong>. The <strong>Devices</strong> page shows a picture of the
+the main stream, or the smaller one, a button away. The <strong>Devices</strong> page shows a picture of the
 smaller stream on the camera&#39;s card.</p>
 <p>A picture is a file too, a JPEG of the stream now, taken each time it is read:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -944,11 +938,6 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>The <strong>Live</strong> tab says the stream could not be reached</td>
 <td>As above, or the sidecar is not running</td>
 <td><code>podman compose ps</code> on the machine; <code>./setup.sh --only automation</code> starts it again</td>
-</tr>
-<tr>
-<td><strong>Live</strong> says <strong>through EiN</strong> on the home network</td>
-<td>The browser cannot reach port 8555 on EiN&#39;s machine: a firewall there, or a network between them that keeps it out</td>
-<td>Let TCP and UDP 8555 (<code>WEBRTC_PORT</code>) in from the home network on EiN&#39;s machine</td>
 </tr>
 <tr>
 <td><strong>Live</strong> plays nothing in a browser on a phone</td>

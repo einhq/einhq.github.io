@@ -127,14 +127,9 @@
 <td>with <code>--automation</code>, the cameras&#39; streams served again over RTSP, behind <code>STREAMS_PASSWORD</code>, and to this machine without one</td>
 <td>RTSP</td>
 </tr>
-<tr>
-<td><code>8555</code></td>
-<td>with <code>--automation</code>, the restreamer&#39;s WebRTC, TCP and UDP: a camera&#39;s <strong>Live</strong> tab on the home network</td>
-<td>WebRTC</td>
-</tr>
 </tbody></table>
 </div>
-<p>These are the ports <code>setup.sh</code> picks; <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code> and <code>WEBRTC_PORT</code> in <code>.env</code> are the sidecar&#39;s, which it listens on itself, on the machine&#39;s own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to <code>.env</code> and says so (&quot;Port 8080 is taken on this machine: EiN uses 8081 instead&quot;).</p>
+<p>These are the ports <code>setup.sh</code> picks; <code>MQTT_PORT</code>, <code>STREAMS_PORT</code> and <code>RTSP_PORT</code> in <code>.env</code> are the sidecar&#39;s, which it listens on itself, on the machine&#39;s own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to <code>.env</code> and says so (&quot;Port 8080 is taken on this machine: EiN uses 8081 instead&quot;).</p>
 <p>Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers&#39; own network: no port of theirs is published on the machine&#39;s network.</p>
 <p>Under rootless podman, EiN does not sit on that network: there a published port would reach EiN from the network&#39;s own address, and EiN would see every visitor as that one address. EiN gets a network of its own, which keeps each visitor&#39;s address, and reaches the others on the machine&#39;s loopback address, where they are published for it alone:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -361,7 +356,7 @@ address. <a href="devices.html#device-keys">Devices and their keys</a> says more
 <li><strong>Change the admin password</strong> if you have not: <a href="../start/install.html#change-the-admin-password-straight-away">Install EiN</a> shows how. Give every account a password of its own; <a href="accounts.html">Accounts and groups</a> covers them.</li>
 <li><strong>Leave visitors out.</strong> The setting <strong>Visitors may browse</strong> (<code>CFG_GUEST_BROWSING</code>, under <strong>Settings → System</strong>) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.</li>
 <li><strong>Publish HTTPS only.</strong> Forward only the proxy&#39;s ports, never 8080, which is plain HTTP.</li>
-<li><strong>Keep the sidecar in.</strong> Never forward ports 1883, 1984, 8554 or 8555. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house&#39;s devices; whoever reaches the restreamer with its password watches the cameras. A phone away from home needs only the HTTPS proxy, which shows the cameras too.</li>
+<li><strong>Keep the sidecar in.</strong> Never forward ports 1883, 1984 or 8554. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house&#39;s devices; whoever reaches the restreamer with its password watches the cameras. A phone away from home needs only the HTTPS proxy, which shows the cameras too.</li>
 <li><strong>Decide about SSH.</strong> Port 2222 is not needed for the Web UI. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</li>
 </ul>
 <h3 id="how-ein-slows-down-password-guessing">How EiN slows down password guessing<a class="anchor" href="#how-ein-slows-down-password-guessing" aria-label="Link to this section"></a></h3>

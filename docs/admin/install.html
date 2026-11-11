@@ -653,7 +653,7 @@ podman compose down
 <tr>
 <td><code>automation</code></td>
 <td><code>ghcr.io/einhq/automation</code>, the broker, the network listener and the restreamer, ready-made; built from module-automation&#39;s <code>sidecar/</code> as <code>localhost/ein-automation</code> from any other source</td>
-<td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>), 8554 (<code>RTSP_PORT</code>) and 8555 (<code>WEBRTC_PORT</code>) for the cameras&#39; streams</td>
+<td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>) and 8554 (<code>RTSP_PORT</code>) for the cameras&#39; streams</td>
 <td><code>512m</code></td>
 <td>with <code>--automation</code></td>
 </tr>
@@ -780,7 +780,6 @@ podman compose down
 <span class="hljs-attr">MQTT_DEVICE_PASSWORD</span>=<span class="hljs-number">4</span>e7a1c9d02b5f83e6a1d7c40
 <span class="hljs-attr">STREAMS_PORT</span>=<span class="hljs-number">1984</span>
 <span class="hljs-attr">RTSP_PORT</span>=<span class="hljs-number">8554</span>
-<span class="hljs-attr">WEBRTC_PORT</span>=<span class="hljs-number">8555</span>
 <span class="hljs-attr">STREAMS_PASSWORD</span>=<span class="hljs-number">0</span>b7e3d91c46a28f5e1d09c7b3a6f2e84d5c1a9073b6e2f48
 <span class="hljs-attr">EIN_MODULES</span>=<span class="hljs-string">&quot;&quot;</span>
 <span class="hljs-attr">EIN_DATA</span>=/home/anna/ein/data
@@ -823,8 +822,8 @@ podman compose down
 <td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
 </tr>
 <tr>
-<td><code>EIN_AUTOMATION</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code>, <code>WEBRTC_PORT</code></td>
-<td><code>1</code> when the Automation module&#39;s sidecar is installed, which <code>--automation</code> and <code>--no-automation</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984), RTSP (8554) and WebRTC (8555); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
+<td><code>EIN_AUTOMATION</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code></td>
+<td><code>1</code> when the Automation module&#39;s sidecar is installed, which <code>--automation</code> and <code>--no-automation</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984) and RTSP (8554); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
 </tr>
 <tr>
 <td><code>MQTT_EIN_PASSWORD</code>, <code>MQTT_DEVICE_PASSWORD</code>, <code>STREAMS_PASSWORD</code></td>
