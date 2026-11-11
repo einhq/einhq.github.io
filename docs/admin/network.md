@@ -13,7 +13,7 @@ EiN publishes two ports, and more with the Automation module's sidecar, on every
 | `1883` | with `--automation`, the MQTT broker that the [Automation](../automation/index.md) module's devices talk to                   | plain MQTT |
 | `1984` | with `--automation`, the restreamer's API, which EiN gives the cameras to and watches them through, behind `STREAMS_PASSWORD` | plain HTTP |
 | `8554` | with `--automation`, the cameras' streams served again over RTSP, behind `STREAMS_PASSWORD`, and to this machine without one  | RTSP       |
-| `8555` | with `--automation`, the restreamer's WebRTC, TCP and UDP                                                                     | WebRTC     |
+| `8555` | with `--automation`, the restreamer's WebRTC, TCP and UDP: a camera's **Live** tab on the home network                        | WebRTC     |
 
 These are the ports `setup.sh` picks; `MQTT_PORT`, `STREAMS_PORT`, `RTSP_PORT` and `WEBRTC_PORT` in `.env` are the sidecar's, which it listens on itself, on the machine's own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
