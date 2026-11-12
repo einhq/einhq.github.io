@@ -384,7 +384,9 @@ When it took the wrong things, or missed some, correct its marks and fill again:
 
 1. Choose **Correct the marks**. The original opens with the marks over it in red.
 2. With **Erase**, brush the marks off what is not damage; with **Paint**, brush over damage that
-   was missed. **Size** sets the brush, and the arrow takes back the last stroke.
+   was missed. **Size** sets the brush, and the arrow takes back the last stroke. To reach dust a
+   pixel or two across, zoom in: the wheel, two fingers or the buttons in the corner zoom, and a
+   drag with the right mouse button or two fingers moves the picture.
 3. Choose **Fill again**. A new copy is made with the same colours, fill and grain, filling exactly
    what is marked now, and it takes the place of the copy you corrected. **Back** returns to the
    comparison without filling.
@@ -407,7 +409,8 @@ the careful fill **Restore…** uses for creases and tears.
 
 1. In the cog menu, choose **Remove a blemish…**.
 2. With **Paint**, brush over the blemish; **Erase** takes paint away again, **Size** sets the
-   brush and the arrow takes back the last stroke.
+   brush and the arrow takes back the last stroke. The picture zooms and moves as it does while
+   correcting the marks.
 3. Choose **Fill**. The copy then opens beside the original, as a restored copy does, to keep or
    discard, and its marks can be corrected and filled again the same way.
 
