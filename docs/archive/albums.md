@@ -246,8 +246,9 @@ You can do this if you may change the album.
 2. Choose **Upload** and pick the files. Or drag files from your computer and drop them anywhere on
    the page: while you drag, the page says **Drop files to upload** and, under it, **Into** and the
    album's name.
-3. Follow the upload under the **Uploads** button, which appears in the top bar once files are
-   going up. It shows each upload's progress, with **Cancel** while files are going up,
+3. Follow the upload under the **Uploads** button, which appears in the top bar as soon as you
+   drop or pick the files; while a large drop is still being read, it says "Reading the dropped
+   files…". It shows each upload's progress, with **Cancel** while files are going up,
    **Retry failed** when some failed, and **Clear**.
 
 The files go straight into the album; they skip [staging](staging.md). They are shared as the

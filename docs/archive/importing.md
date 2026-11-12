@@ -84,6 +84,10 @@ files go (a category or an album), the files being sent, and the last failures w
 - **Retry failed** sends the failed files again.
 - **Clear** forgets the finished files; the button goes away until the next upload.
 
+Dropped files are read before the first of them is sent, and a dropped folder with thousands of
+files can take a while. Until then the page says "Reading the dropped files…" where it said "Drop
+files to upload", and the **Uploads** button spins with the same words in its panel.
+
 Four files are sent at a time. The upload goes on while you move around EiN, but it runs in this
 browser tab: closing or reloading the tab stops the files not sent yet. The files already sent
 stay.
