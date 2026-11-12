@@ -36,7 +36,7 @@ EiN makes these at its first start, and none can be deleted. The two accounts ar
 | Group   | Title                     | What it is for                                                                                                                                                            |
 | ------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `admin` | Administrators            | The `admin` account's own group, as `root`'s is on Linux. Being in it does not make anyone an administrator and gives no write to the system's own folders and settings.  |
-| `users` | Users                     | Every account that signs in belongs to it, without being added. Sharing with `users` shares with everyone who has an account.                                             |
+| `users` | Users                     | Every account that signs in belongs to it, without being added, unless you take it out. Sharing with `users` shares with everyone who has an account.                     |
 | `ssh`   | SSH users                 | Its members may use `ssh`, `scp` and `ssh-copy-id` to reach other machines from EiN. See [Reaching other machines](../shell/remote.md).                                   |
 | `sudo`  | Administrators on request | Its members may act as the administrator for one sign-in, after entering their own password again. See [Let a second person administer](#let-a-second-person-administer). |
 | `guest` | Guests                    | The `guest` account's own group. What this group may see, visitors may see.                                                                                               |
@@ -97,9 +97,11 @@ shows how to make that link in the terminal.
 ### Groups
 
 A box per group: tick to put the person in, untick to take them out. Each box saves as you click
-it. Some boxes are ticked and greyed, with the reason beside them:
+it. **Users** is ticked for everyone who signs in; unticking it takes the account out of what is
+shared with everyone with an account, which is what an account for a screen wants (see
+[Show a dashboard on a screen](../dashboard/screens.md)). Some boxes are ticked and greyed, with the
+reason beside them:
 
-- **everyone who signs in**: the `users` group.
 - **primary group**, or **their own group, primary**: the account's primary group, which it
   leaves only when its primary group is changed.
 
@@ -189,7 +191,8 @@ In a group's panel:
 - **Members** has a box per account: tick to add, untick to remove. Someone whose primary group it
   is stays ticked and greyed; the panel links to their page, where their primary group is changed.
   An account that no longer exists but is still linked shows as **no longer an account**, ready to
-  untick. `users` has no list, since everyone who signs in is in it.
+  untick. In `users` every account is ticked without being added; unticking one takes it out of
+  what is shared with everyone with an account.
 - Built-in groups say what they are for at the top, and "Built-in groups can't be deleted."
 - **Shared home** gives the group a folder of its own; see below. Built-in groups other than
   `users` and personal groups have no such section.
@@ -309,6 +312,7 @@ group-home family                    # give an existing group its shared home
 group-home family --off              # move it to your trash
 group-add-member family helen
 group-remove-member family helen
+group-remove-member users kitchen    # out of what is shared with every account; add-member puts it back
 group-update family --description='The Wrenfield household'
 group-delete family --to=users       # --force when it is someone's primary group,
                                      # --remove-home when it has a shared home

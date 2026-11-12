@@ -15,8 +15,10 @@ own, use an account made for screens, so a screen sees only what it should:
    [Accounts and groups](../admin/accounts.md). It needs no password anyone knows.
 2. Put it in the groups whose things the screen shows, such as your household's group for its todo
    lists, and **devices** for the devices.
-3. Like every account it sees what is shared with everyone signed in, such as most albums and
-   people. Keep that in mind when you choose what it may see.
+3. Take it out of the **Users** group: on the account, untick **Users** under **Groups**. Every
+   account is in it, and it sees what is shared with everyone with an account, such as most albums
+   and people. Left in, so does the screen. The share dialog says so when the account you choose
+   is still in it.
 
 A card showing something the account may not read, such as a device outside its groups, says so on
 the screen instead.
@@ -33,7 +35,9 @@ administrator makes one as another account.
 3. Choose how long it **Works for**. A screen wants **No end date**, which the dialog offers first.
 4. Choose **Create link**, and copy the address.
 
-The link's row then says "Shows it as Kitchen display sees it". If the account is later disabled,
+The link's row then says "Shows it as Kitchen display sees it". A screen reads with the account's
+groups as they were when it opened the link: after changing them, open the link on the screen again.
+If the account is later disabled,
 deleted or put in one of the groups above, the row says "Opens nothing" and why, and the screen
 shows **This link no longer works**.
 

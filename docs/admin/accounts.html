@@ -148,7 +148,7 @@ bookmark an account or send the link to another administrator.</p>
 <tr>
 <td><code>users</code></td>
 <td>Users</td>
-<td>Every account that signs in belongs to it, without being added. Sharing with <code>users</code> shares with everyone who has an account.</td>
+<td>Every account that signs in belongs to it, without being added, unless you take it out. Sharing with <code>users</code> shares with everyone who has an account.</td>
 </tr>
 <tr>
 <td><code>ssh</code></td>
@@ -212,9 +212,11 @@ cover photo of the person in the archive that the account is linked to. <a href=
 shows how to make that link in the terminal.</p>
 <h3 id="groups">Groups<a class="anchor" href="#groups" aria-label="Link to this section"></a></h3>
 <p>A box per group: tick to put the person in, untick to take them out. Each box saves as you click
-it. Some boxes are ticked and greyed, with the reason beside them:</p>
+it. <strong>Users</strong> is ticked for everyone who signs in; unticking it takes the account out of what is
+shared with everyone with an account, which is what an account for a screen wants (see
+<a href="../dashboard/screens.html">Show a dashboard on a screen</a>). Some boxes are ticked and greyed, with the
+reason beside them:</p>
 <ul>
-<li><strong>everyone who signs in</strong>: the <code>users</code> group.</li>
 <li><strong>primary group</strong>, or <strong>their own group, primary</strong>: the account&#39;s primary group, which it
 leaves only when its primary group is changed.</li>
 </ul>
@@ -291,7 +293,8 @@ count of the rest. <code>users</code> reads <strong>Everyone</strong>. Personal 
 <li><strong>Members</strong> has a box per account: tick to add, untick to remove. Someone whose primary group it
 is stays ticked and greyed; the panel links to their page, where their primary group is changed.
 An account that no longer exists but is still linked shows as <strong>no longer an account</strong>, ready to
-untick. <code>users</code> has no list, since everyone who signs in is in it.</li>
+untick. In <code>users</code> every account is ticked without being added; unticking one takes it out of
+what is shared with everyone with an account.</li>
 <li>Built-in groups say what they are for at the top, and &quot;Built-in groups can&#39;t be deleted.&quot;</li>
 <li><strong>Shared home</strong> gives the group a folder of its own; see below. Built-in groups other than
 <code>users</code> and personal groups have no such section.</li>
@@ -421,6 +424,7 @@ group-home family                    <span class="hljs-comment"># give an existi
 group-home family --off              <span class="hljs-comment"># move it to your trash</span>
 group-add-member family helen
 group-remove-member family helen
+group-remove-member <span class="hljs-built_in">users</span> kitchen    <span class="hljs-comment"># out of what is shared with every account; add-member puts it back</span>
 group-update family --description=<span class="hljs-string">&#x27;The Wrenfield household&#x27;</span>
 group-delete family --to=<span class="hljs-built_in">users</span>       <span class="hljs-comment"># --force when it is someone&#x27;s primary group,</span>
                                      <span class="hljs-comment"># --remove-home when it has a shared home</span></code></pre></div>
