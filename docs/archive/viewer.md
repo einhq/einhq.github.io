@@ -183,7 +183,7 @@ folded is remembered in this browser, for the next picture and the next visit. F
 | Place             | The location the file is linked to, as a link, the street address, and a small map. **Enlarge map** opens a large map of the spot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Weather           | For a file with a place and a date: the weather that hour, such as **14.5 °C · Wind 4 m/s, from SW · 40 % cloud**, and under it where that came from, an SMHI station or Open-Meteo. See [The weather at a place and time](places.md#the-weather-at-a-place-and-time).                                                                                                                                                                                                                                                                                                                                                                       |
 | Stack             | For a photo stacked with others in this album: **N stacked photos**, or **Kept separate**, with a thumbnail of each and **Front** on the one the album shows. Click a thumbnail to see it in the viewer. **Make front**, **Keep separate** and **Allow stacking** are there when you may change the album and every photo in the stack. See [Albums](albums.md).                                                                                                                                                                                                                                                                             |
-| Versions          | For a file with other versions, such as the camera RAW of a JPEG or a restored copy: each one's name, which downloads it, with its kind of file and size; a restored copy also what was done to it and **Compare**. See [Camera RAW](file-types.md#camera-raw) and [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                                                                                                                                                                                                    |
+| Versions          | For a file with other versions, such as the camera RAW of a JPEG or a restored copy: each one's name, which downloads it, with its kind of file and size; a restored copy also what was done to it, **Compare**, and **Show this copy** or, for the one shown, **Show the original**. See [Camera RAW](file-types.md#camera-raw) and [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                                                                                                                                  |
 | Similar           | Up to 12 pictures that look most like this one, nearest first, leaving out the picture itself and the rest of its stack. Click one to walk these pictures in the viewer. **Show all** opens the **Media** page with every picture like it. Not shown for recordings.                                                                                                                                                                                                                                                                                                                                                                         |
 | Comments          | Comments on the file, with who wrote them and when: the full name set on their account (its username when it has none), beside the picture of the person the account is linked to ([Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)). Everyone who can see the file reads them. If you may change the file, write one in **Add a comment…**, which grows as you add lines, and press the send button inside it (**Comment**) or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. The bin beside a comment of your own (**Delete comment**) asks **Delete comment?** and removes it when you press **Delete**. |
 | Details           | The machine-written facts, folded until you open it. See [The Details section](#the-details-section).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -393,7 +393,9 @@ When it took the wrong things, or missed some, correct its marks and fill again:
 
 - **Keep** closes the comparison and leaves the copy among the photo's versions, named
   `restored-1.png` (`.tif` for a TIFF), then `restored-2.png`, and so on.
-- **Discard** deletes the copy.
+- **Show this copy** makes the copy the picture EiN shows; see below. **Show the original** turns it
+  back.
+- **Discard** deletes the copy, and shows the original again if the copy was shown.
 - **Download** saves the copy.
 
 A copy carries the photo's metadata: when and where it was taken, the camera, its description and
@@ -403,8 +405,23 @@ _composite with trained algorithmic media_ when the careful fill painted it, and
 enhanced_ otherwise.
 
 In the details panel, **Versions** lists each restored copy with what was done to it, and
-**Compare** opens the comparison again. A copy is not shown in albums, search or **Media**: the photo
-is. Restoring needs the media service with its restoration models, and someone who may change the
+**Compare** opens the comparison again.
+
+### Show the restored copy
+
+A kept copy stays among the photo's versions, and the photo goes on showing the original. To see the
+copy instead, choose **Show this copy** under it in **Versions**, or in the comparison. The copy is
+then the picture in **Media**, in albums, search results and the viewer, and as an album's cover.
+Under the photo's name the details panel says "Shown as its restored copy", with **Show the
+original** one click away. Only one copy is shown at a time, and only someone who may change the
+photo can choose it.
+
+Everything else still comes from the original: the faces found in it, the text read from it, what
+it looks like for **Similar** and search, its duplicates, and the file you download by its name.
+Correcting the marks of a shown copy shows the new copy in its place. Other people's browsers may
+show the original for up to an hour after the switch, until their copy of the picture expires.
+
+Restoring needs the media service with its restoration models, and someone who may change the
 photo. Running out of time or a picture the media service cannot read ends with a message, and no
 copy is kept.
 
