@@ -386,7 +386,9 @@ When it took the wrong things, or missed some, correct its marks and fill again:
 2. With **Erase**, brush the marks off what is not damage; with **Paint**, brush over damage that
    was missed. **Size** sets the brush, and the arrow takes back the last stroke. To reach dust a
    pixel or two across, zoom in: the wheel, two fingers or the buttons in the corner zoom, and a
-   drag with the right mouse button or two fingers moves the picture.
+   drag with the right mouse button or two fingers moves the picture. Zoomed in, the part in view
+   sharpens to the photo's own resolution a moment after it holds still, and the marks are shown
+   exactly as they are kept.
 3. Choose **Fill again**. A new copy is made with the same colours, fill and grain, filling exactly
    what is marked now, and it takes the place of the copy you corrected. **Back** returns to the
    comparison without filling.
