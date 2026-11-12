@@ -99,14 +99,23 @@ List the cards the installed modules offer for dashboards.
 <small>reads only</small>
 
 ```text
-dashboard-cards
+dashboard-cards [--brief] [<card>...]
 ```
+
+| Argument    | What it is                                               |
+| ----------- | -------------------------------------------------------- |
+| `<card>...` | only these cards, as <module>.<name> (default every one) |
+
+| Option    | What it does                                                                        |
+| --------- | ----------------------------------------------------------------------------------- |
+| `--brief` | each card's id, label, description and the names of its settings, without the rest. |
 
 ```bash
-dashboard-cards
+dashboard-cards --brief
+dashboard-cards dashboard.coming-up
 ```
 
-With `JSON_OUTPUT=1`: One entry per card: id (<module>.<name>), module, name, label, description, icon, color, route, frame, size, min, and params, a JSON Schema of what it takes.
+With `JSON_OUTPUT=1`: One entry per card: id (<module>.<name>), module, name, label, description, icon, color, route, frame, size, min, and params, a JSON Schema of what it takes. With --brief: id, label, description, settings (the names in params) and required.
 
 ### `dashboard-copy`
 

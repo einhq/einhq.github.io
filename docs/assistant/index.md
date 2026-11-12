@@ -32,6 +32,9 @@ then reads a sentence typed into it with the assistant's language model too
 With [Todo](../todo/index.md) installed, it reads your todo lists and what is left for you to do, and
 proposes adding, ticking off and moving their items.
 
+With [Dashboards](../dashboard/index.md) installed, it reads your dashboards and proposes making
+them, putting cards on them and changing them.
+
 With [Automation](../automation/index.md) installed, it reads the house's devices, such as how warm
 it is in the hall and which devices are offline, charts how a reading went, and proposes switching
 them.

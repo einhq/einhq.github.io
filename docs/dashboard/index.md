@@ -98,6 +98,16 @@ address in the browser now opens it full screen, so you can bookmark it.
 
 To show a dashboard on a screen nobody signs in at, see [Show a dashboard on a screen](screens.md).
 
+## Ask the assistant
+
+With the [Assistant](../assistant/index.md) installed, the chat reads and arranges your dashboards
+too: ask "which dashboards are there?", "make a kitchen dashboard with a clock and the birthdays
+coming up", "show the hall temperature on this dashboard" or "dim the kitchen wall at night". With a
+dashboard open, "this dashboard" means that one. It looks up what a card can show, such as a device
+and its readings, before it sets it. Reading happens at once; making a dashboard, adding, changing
+or taking off a card, and a [display link](screens.md) for a screen are each a
+[proposal card](../assistant/chat.md#when-the-assistant-offers-to-make-a-change) you run or decline.
+
 ## From the terminal
 
 A dashboard is a YAML file in `/archive/dashboards`, named by its title: the dashboard Kitchen is
@@ -131,7 +141,7 @@ page while you arrange it.
 ```bash
 # in EiN's terminal
 dashboards                                            # the dashboards you can see
-dashboard-cards                                       # the cards the modules offer
+dashboard-cards --brief                               # the cards the modules offer
 dashboard-create Kitchen --color device
 dashboard-card-add Kitchen dashboard.clock --size 4x3
 dashboard-card-add Kitchen dashboard.coming-up --with days=14 --with only=anniversaries
