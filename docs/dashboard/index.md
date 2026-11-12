@@ -72,16 +72,21 @@ tile scrolls; make it larger.
 
 ## Arrange it
 
-Choose **Arrange** on the dashboard's page. Each card gets a row of buttons in its corner:
+Choose **Arrange** on the dashboard's page. Each card gets a row of buttons in its top corner and
+a bracket in its bottom one:
 
 - **⠿**: hold it and drag the card to another place; the others make room as it passes.
 - **Size**: Small, Medium, Wide, Tall, Large, Hero or Banner.
+- The bracket in the bottom right corner: drag it to make the card larger or smaller, a cell at a
+  time. The others move aside as it grows, its size in cells shows beside the corner, and it stays
+  as it is when you let go. A card is never made smaller than it can be drawn in.
 - **Settings**: what the card shows, its title and size, beside a preview, and **Take off**.
 - **×**: take the card off. **Undo** in the message at the foot of the screen puts it back.
 
-On a phone, arrows move a card up and down instead of dragging. Choose **Done** when it is as you
-want it. Cards are laid out in their order from the top left, each in the first place it fits, so a
-small card fills the gap a large one leaves. On a phone the cards stand in two columns.
+On a phone, arrows move a card up and down instead of dragging, and **Size** is how a card is
+sized. Choose **Done** when it is as you want it. Cards are laid out in their order from the top
+left, each in the first place it fits, so a small card fills the gap a large one leaves. On a phone
+the cards stand in two columns.
 
 **⋮ → Settings** changes its title, description, colour, how many **Columns** wide it is (6, 8 or
 12; more columns size the cards more finely) and how its wall looks. **⋮ → Make a copy** makes
