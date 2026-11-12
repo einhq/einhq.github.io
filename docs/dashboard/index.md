@@ -49,15 +49,15 @@ module offers it.
 
 The cards that come with Dashboards:
 
-| Card            | What it shows                                                                                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Clock**       | The time, large, with the day and date under it; another place's time zone, the seconds, and a label if you like                                                                     |
-| **Coming up**   | What falls on the days ahead from every module that tells of it: birthdays and anniversaries from the [Archive](../archive/home.md), todos falling due from [Todo](../todo/index.md) |
-| **On this day** | Pictures taken on this day in earlier years, a ring for each year, as on Home                                                                                                        |
-| **News**        | What was added lately, such as albums, as on Home                                                                                                                                    |
-| **Device**      | A [device](../concepts/devices.md)'s readings and switches, each as on its page                                                                                                      |
-| **Reading**     | One reading of a device, large, with how it went over the last hours                                                                                                                 |
-| **Note**        | A few words of your own, in Markdown                                                                                                                                                 |
+| Card            | What it shows                                                                                                                                                                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Clock**       | The time, large, with the day and date under it; another place's time zone, the seconds, and a label if you like                                                                                                             |
+| **Coming up**   | What falls on the days ahead from every module that tells of it: birthdays and anniversaries from the [Archive](../archive/home.md), todos falling due from [Todo](../todo/index.md); **Only from** keeps it to some of them |
+| **On this day** | Pictures taken on this day in earlier years, a ring for each year, as on Home                                                                                                                                                |
+| **News**        | What was added lately, such as albums, as on Home                                                                                                                                                                            |
+| **Device**      | A [device](../concepts/devices.md)'s readings and switches, each as on its page                                                                                                                                              |
+| **Reading**     | One reading of a device, large, with how it went over the last hours                                                                                                                                                         |
+| **Note**        | A few words of your own, in Markdown                                                                                                                                                                                         |
 
 Other modules add their own: the Archive the **Picture of the day** and **Birthdays**, Todo a
 **Todo list**. A card whose module is removed later says so on the dashboard until you take it off.

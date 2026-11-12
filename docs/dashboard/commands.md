@@ -99,7 +99,7 @@ List the cards the installed modules offer for dashboards.
 <small>reads only</small>
 
 ```text
-dashboard-cards [--brief] [<card>...]
+dashboard-cards [--brief] <card>...
 ```
 
 | Argument    | What it is                                               |

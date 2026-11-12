@@ -101,6 +101,7 @@ news --limit 20
 events                                     # what Events shows: 7 days back, 30 days ahead
 events --today 2026-01-20                  # around another date
 events --days-ahead 0 --days-past 0        # today only
+events --source anniversaries              # only what the Archive's events-anniversaries gives
 ```
 
 Each of the three gathers what every installed module offers, from the commands named

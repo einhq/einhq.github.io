@@ -989,7 +989,7 @@ What falls on the days around a date, from every events-* command on PATH.
 <small>reads only</small>
 
 ```text
-events [--today=<string>] [--days-ahead=<number>] [--days-past=<number>] [--limit=<number>]
+events [--today=<string>] [--days-ahead=<number>] [--days-past=<number>] [--limit=<number>] [--source=<string>]
 ```
 
 | Option | What it does |
@@ -998,14 +998,16 @@ events [--today=<string>] [--days-ahead=<number>] [--days-past=<number>] [--limi
 | `--days-ahead=<number>` | how far forward to look (default 30) |
 | `--days-past=<number>` | how far back to look (default 7) |
 | `--limit=<number>` | entries returned across all providers; milestones, then the nearest, survive the cut (default 16) |
+| `--source=<string>` | ask only this provider, the name after events- such as anniversaries (repeatable) |
 
 ```bash
 events
 events --days-ahead 0 --days-past 0
 events --today 2026-12-24 --days-ahead 7
+events --source anniversaries --source todo
 ```
 
-With `JSON_OUTPUT=1`: the entries of every events-* provider in the window, in date order: the day, what, whether it is a milestone, the node it is about, which provider, and the route that draws it.
+With `JSON_OUTPUT=1`: the entries of every events-* provider, or of those --source names, in the window, in date order: the day, what, whether it is a milestone, the node it is about, which provider, and the route that draws it.
 
 ## F
 

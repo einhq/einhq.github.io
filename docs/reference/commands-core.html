@@ -1506,7 +1506,7 @@ docs <span class="hljs-built_in">env</span> | grep PATH</code></pre></div>
 <h3 id="events"><code>events</code><a class="anchor" href="#events" aria-label="Link to this section"></a></h3>
 <p>What falls on the days around a date, from every events-* command on PATH.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>events [--today=&lt;string&gt;] [--days-ahead=&lt;number&gt;] [--days-past=&lt;number&gt;] [--limit=&lt;number&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>events [--today=&lt;string&gt;] [--days-ahead=&lt;number&gt;] [--days-past=&lt;number&gt;] [--limit=&lt;number&gt;] [--source=&lt;string&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1530,12 +1530,17 @@ docs <span class="hljs-built_in">env</span> | grep PATH</code></pre></div>
 <td><code>--limit=&lt;number&gt;</code></td>
 <td>entries returned across all providers; milestones, then the nearest, survive the cut (default 16)</td>
 </tr>
+<tr>
+<td><code>--source=&lt;string&gt;</code></td>
+<td>ask only this provider, the name after events- such as anniversaries (repeatable)</td>
+</tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>events
 events --days-ahead 0 --days-past 0
-events --today 2026-12-24 --days-ahead 7</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: the entries of every events-* provider in the window, in date order: the day, what, whether it is a milestone, the node it is about, which provider, and the route that draws it.</p>
+events --today 2026-12-24 --days-ahead 7
+events --<span class="hljs-built_in">source</span> anniversaries --<span class="hljs-built_in">source</span> todo</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: the entries of every events-* provider, or of those --source names, in the window, in date order: the day, what, whether it is a milestone, the node it is about, which provider, and the route that draws it.</p>
 <h2 id="f">F<a class="anchor" href="#f" aria-label="Link to this section"></a></h2>
 <h3 id="facets"><code>facets</code><a class="anchor" href="#facets" aria-label="Link to this section"></a></h3>
 <p>Bucket counts (per year, per kind) for sizing search filters.</p>
