@@ -60,9 +60,10 @@ retries, and runs once the media service answers again.
 
 The media service's own code is under the MIT licence, as [The licence](../develop/source.md#the-licence) explains. The media service's image
 also downloads and carries models and tools made by others, each under its own licence. None of
-them forbids commercial use, and two state no licence for their weights
-([Using EiN commercially](#using-ein-commercially)). This is what the image carries, all of it used
-by the Archive but LaMa, the scratch detector and SCUNet, which the Archive does not call:
+their own licences forbids commercial use; two state no licence for their weights, and GFPGAN's
+names parts under non-commercial terms ([Using EiN commercially](#using-ein-commercially)). This is
+what the image carries, all of it used by the Archive but LaMa, the scratch detector, SCUNet and
+GFPGAN, which the Archive does not call:
 
 | What it does in EiN                                 | Model or tool                                                                                                                                                                                                                      | Licence: code / weights                                                         | Note                                                  |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------- |
@@ -84,6 +85,7 @@ by the Archive but LaMa, the scratch detector and SCUNet, which the Archive does
 | Painting over damage in scanned photos              | Samsung AI Center's [LaMa](https://github.com/advimman/lama) `big-lama`, as [IOPaint exports it](https://github.com/Sanster/models/releases/tag/add_big_lama)                                                                      | [Apache-2.0][apache] / [Apache-2.0][apache]                                     |                                                       |
 | Dust and scratches in scanned photos                | The scratch detector of Microsoft's [Bringing Old Photos Back to Life](https://github.com/microsoft/Bringing-Old-Photos-Back-to-Life), its v1.0 release                                                                            | [MIT][mit] / [MIT][mit]                                                         |                                                       |
 | Less noise in scanned photos                        | [SCUNet](https://github.com/cszn/SCUNet), its weights `scunet_color_15`, `_25` and `_real_psnr` from [KAIR's v1.0 release](https://github.com/cszn/KAIR/releases/tag/v1.0)                                                         | [Apache-2.0][apache] / [Apache-2.0][apache]                                     |                                                       |
+| Faces in scanned photos redrawn, on request         | Tencent ARC's [GFPGAN](https://github.com/TencentARC/GFPGAN) v1.4, its clean network                                                                                                                                               | [Apache-2.0][apache] / not stated                                               | Names non-commercial parts; trained on FFHQ           |
 | Shot boundaries: chapters in a video                | [TransNetV2](https://github.com/soCzech/TransNetV2), its weights [converted to PyTorch](https://huggingface.co/Sn4kehead/TransNetV2)                                                                                               | [MIT][mit] / [Apache-2.0][apache]                                               | The authors' own weights are in their MIT repository  |
 | Video and audio: renditions, stills, waveforms      | [FFmpeg](https://github.com/BtbN/FFmpeg-Builds#package-list) 9.0, BtbN's `lgpl` build                                                                                                                                              | [LGPL-3.0][lgpl-3.0], as built                                                  |                                                       |
 | Pictures: turning, sizes, AVIF                      | [ImageMagick](https://imagemagick.org/) with [libheif](https://github.com/strukturag/libheif) and [aom](https://aomedia.googlesource.com/aom)                                                                                      | [ImageMagick License][imagemagick]; [LGPL-3.0][lgpl-3.0]; [BSD-2-Clause][bsd-2] |                                                       |
@@ -143,6 +145,13 @@ No model or tool in the table is under terms that forbid commercial use. Two mod
 state no licence of their own: Microsoft's TrOCR large handwritten, which reads English
 handwriting, and Meta's SSCD, which finds copies of pictures and videos, whose code is under MIT.
 An installation used commercially checks those two with their makers.
+
+GFPGAN, which redraws faces in scanned photos when someone asks for it, is under Apache-2.0, but
+its LICENSE also lists StyleGAN2 (NVIDIA's Source Code License, for non-commercial use) and DFDNet
+(CC BY-NC-SA 4.0) among its third-party parts, without saying which files they are; the media
+service runs its clean network, which uses none of StyleGAN2's CUDA code. Its weights state no
+licence of their own and were trained on FFHQ, a dataset NVIDIA releases under CC BY-NC-SA 4.0. An
+installation used commercially checks GFPGAN with its makers too, or leaves face restoration out.
 
 The licences in the table set conditions on passing a model or tool on: CC BY 4.0 a credit to its
 maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its

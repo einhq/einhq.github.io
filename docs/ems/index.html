@@ -175,9 +175,10 @@ retries, and runs once the media service answers again.</p>
 <h2 id="models-tools-and-their-licences">Models, tools and their licences<a class="anchor" href="#models-tools-and-their-licences" aria-label="Link to this section"></a></h2>
 <p>The media service&#39;s own code is under the MIT licence, as <a href="../develop/source.html#the-licence">The licence</a> explains. The media service&#39;s image
 also downloads and carries models and tools made by others, each under its own licence. None of
-them forbids commercial use, and two state no licence for their weights
-(<a href="#using-ein-commercially">Using EiN commercially</a>). This is what the image carries, all of it used
-by the Archive but LaMa, the scratch detector and SCUNet, which the Archive does not call:</p>
+their own licences forbids commercial use; two state no licence for their weights, and GFPGAN&#39;s
+names parts under non-commercial terms (<a href="#using-ein-commercially">Using EiN commercially</a>). This is
+what the image carries, all of it used by the Archive but LaMa, the scratch detector, SCUNet and
+GFPGAN, which the Archive does not call:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -296,6 +297,12 @@ by the Archive but LaMa, the scratch detector and SCUNet, which the Archive does
 <td></td>
 </tr>
 <tr>
+<td>Faces in scanned photos redrawn, on request</td>
+<td>Tencent ARC&#39;s <a href="https://github.com/TencentARC/GFPGAN">GFPGAN</a> v1.4, its clean network</td>
+<td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a> / not stated</td>
+<td>Names non-commercial parts; trained on FFHQ</td>
+</tr>
+<tr>
 <td>Shot boundaries: chapters in a video</td>
 <td><a href="https://github.com/soCzech/TransNetV2">TransNetV2</a>, its weights <a href="https://huggingface.co/Sn4kehead/TransNetV2">converted to PyTorch</a></td>
 <td><a href="https://opensource.org/license/mit">MIT</a> / <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a></td>
@@ -376,6 +383,12 @@ licence from its author, since its core is under the Elastic License:
 state no licence of their own: Microsoft&#39;s TrOCR large handwritten, which reads English
 handwriting, and Meta&#39;s SSCD, which finds copies of pictures and videos, whose code is under MIT.
 An installation used commercially checks those two with their makers.</p>
+<p>GFPGAN, which redraws faces in scanned photos when someone asks for it, is under Apache-2.0, but
+its LICENSE also lists StyleGAN2 (NVIDIA&#39;s Source Code License, for non-commercial use) and DFDNet
+(CC BY-NC-SA 4.0) among its third-party parts, without saying which files they are; the media
+service runs its clean network, which uses none of StyleGAN2&#39;s CUDA code. Its weights state no
+licence of their own and were trained on FFHQ, a dataset NVIDIA releases under CC BY-NC-SA 4.0. An
+installation used commercially checks GFPGAN with its makers too, or leaves face restoration out.</p>
 <p>The licences in the table set conditions on passing a model or tool on: CC BY 4.0 a credit to its
 maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its
 copyright notice, which this page and the image&#39;s notice give; GPL and LGPL conditions on passing the software and its
