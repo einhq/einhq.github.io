@@ -62,6 +62,14 @@ The cards that come with Dashboards:
 Other modules add their own: the Archive the **Picture of the day** and **Birthdays**, Todo a
 **Todo list**. A card whose module is removed later says so on the dashboard until you take it off.
 
+A card holding more than its tile has room for, such as a long **Coming up** list or a device with
+many readings, shows it all in turn rather than scrolling: after a few seconds the next row glides
+in at the bottom while the top one fades out, and after the last the first comes round again,
+below a thin line. **On this day** moves sideways in the same way. Rows that fit stand still. Moving
+the pointer over a card holds it still for a few seconds, and where the computer or phone asks for
+reduced motion, the rows fade from one to the next instead of gliding. A **Note** too long for its
+tile scrolls; make it larger.
+
 ## Arrange it
 
 Choose **Arrange** on the dashboard's page. Each card gets a row of buttons in its corner:

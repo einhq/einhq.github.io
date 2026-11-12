@@ -53,6 +53,7 @@ What the screen does by itself:
 - It stays on the dashboard: there is no sidebar, and the cards lead nowhere.
 - It follows the dashboard: a card added or moved shows on it at once, and what the cards show is
   read again as it changes or every few minutes.
+- Nobody has to scroll it: a card with more than fits shows its rows in turn, gliding by slowly.
 - It loads itself again each night at about half past three, to take what an update of EiN brought.
 - It stays signed in through its link for 30 days after it was last used; while it is on, that is
   for good. If it loses its session, it opens the link again by itself rather than asking to sign in.
