@@ -18,6 +18,9 @@ own, use an account made for screens, so a screen sees only what it should:
 3. Like every account it sees what is shared with everyone signed in, such as most albums and
    people. Keep that in mind when you choose what it may see.
 
+A card showing something the account may not read, such as a device outside its groups, says so on
+the screen instead.
+
 A link never shows things as an administrator, nor as an account in the **admin**, **sudo** or
 **ssh** groups, nor as a disabled one. Anyone may make a display link as their own account; only an
 administrator makes one as another account.
