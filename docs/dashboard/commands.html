@@ -238,9 +238,36 @@ dashboard-card-set Kitchen k7q2 --with days=7</code></pre></div>
 <h3 id="dashboard-cards"><code>dashboard-cards</code><a class="anchor" href="#dashboard-cards" aria-label="Link to this section"></a></h3>
 <p>List the cards the installed modules offer for dashboards.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>dashboard-cards</code></pre></div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>dashboard-cards</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: One entry per card: id (<module>.<name>), module, name, label, description, icon, color, route, frame, size, min, and params, a JSON Schema of what it takes.</p>
+<div class="code"><pre tabindex="0"><code>dashboard-cards [--brief] [&lt;card&gt;...]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;card&gt;...</code></td>
+<td>only these cards, as <module>.<name> (default every one)</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--brief</code></td>
+<td>each card&#39;s id, label, description and the names of its settings, without the rest.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>dashboard-cards --brief
+dashboard-cards dashboard.coming-up</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per card: id (<module>.<name>), module, name, label, description, icon, color, route, frame, size, min, and params, a JSON Schema of what it takes. With --brief: id, label, description, settings (the names in params) and required.</p>
 <h3 id="dashboard-copy"><code>dashboard-copy</code><a class="anchor" href="#dashboard-copy" aria-label="Link to this section"></a></h3>
 <p>Make a new dashboard laid out as another one.</p>
 <p><small>changes things</small></p>

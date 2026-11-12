@@ -396,6 +396,12 @@ When it took the wrong things, or missed some, correct its marks and fill again:
 - **Discard** deletes the copy.
 - **Download** saves the copy.
 
+A copy carries the photo's metadata: when and where it was taken, the camera, its description and
+colour profile, and which way up it is shown. It also says it was restored: its XMP history names
+each step, with the program that made it and when, and its IPTC digital source type says
+_composite with trained algorithmic media_ when the careful fill painted it, and _algorithmically
+enhanced_ otherwise.
+
 In the details panel, **Versions** lists each restored copy with what was done to it, and
 **Compare** opens the comparison again. A copy is not shown in albums, search or **Media**: the photo
 is. Restoring needs the media service with its restoration models, and someone who may change the

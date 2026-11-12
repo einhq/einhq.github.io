@@ -200,6 +200,14 @@ tiles. <strong>Dim from</strong> and <strong>until</strong> dim the wall between
 <strong>Brightness while dimmed</strong>.</li>
 </ul>
 <p>To show a dashboard on a screen nobody signs in at, see <a href="screens.html">Show a dashboard on a screen</a>.</p>
+<h2 id="ask-the-assistant">Ask the assistant<a class="anchor" href="#ask-the-assistant" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../assistant/index.html">Assistant</a> installed, the chat reads and arranges your dashboards
+too: ask &quot;which dashboards are there?&quot;, &quot;make a kitchen dashboard with a clock and the birthdays
+coming up&quot;, &quot;show the hall temperature on this dashboard&quot; or &quot;dim the kitchen wall at night&quot;. With a
+dashboard open, &quot;this dashboard&quot; means that one. It looks up what a card can show, such as a device
+and its readings, before it sets it. Reading happens at once; making a dashboard, adding, changing
+or taking off a card, and a <a href="screens.html">display link</a> for a screen are each a
+<a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a> you run or decline.</p>
 <h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
 <p>A dashboard is a YAML file in <code>/archive/dashboards</code>, named by its title: the dashboard Kitchen is
 <code>/archive/dashboards/Kitchen.yaml</code>. Its file holds its layout, which you can read and change in any
@@ -226,7 +234,7 @@ it, without your comments. What cannot be read, such as a card no module offers,
 page while you arrange it.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 dashboards                                            <span class="hljs-comment"># the dashboards you can see</span>
-dashboard-cards                                       <span class="hljs-comment"># the cards the modules offer</span>
+dashboard-cards --brief                               <span class="hljs-comment"># the cards the modules offer</span>
 dashboard-create Kitchen --color device
 dashboard-card-add Kitchen dashboard.clock --size 4x3
 dashboard-card-add Kitchen dashboard.coming-up --with days=14 --with only=anniversaries
@@ -244,7 +252,7 @@ dashboard-set Kitchen --dim 22:30-06:30@0.3</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/dashboard/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#make-a-dashboard">Make a dashboard</a></li><li><a href="#add-cards">Add cards</a></li><li><a href="#arrange-it">Arrange it</a></li><li><a href="#show-it-full-screen">Show it full screen</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#offer-a-card-from-a-module">Offer a card from a module</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#make-a-dashboard">Make a dashboard</a></li><li><a href="#add-cards">Add cards</a></li><li><a href="#arrange-it">Arrange it</a></li><li><a href="#show-it-full-screen">Show it full screen</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#offer-a-card-from-a-module">Offer a card from a module</a></li></ul></aside>
     </div>
   </body>
 </html>
