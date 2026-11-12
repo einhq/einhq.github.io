@@ -205,6 +205,30 @@ The media service accepts a request only with that key. Leave `CFG_EMS_URL`, `EM
 `EMS_PORT` as `setup.sh` and the compose files set them; [Configuration](../admin/configuration.md)
 explains how a value set in the deployment relates to the settings page.
 
+### Callers on other machines
+
+A program on another machine of your network can use the media service too, such as a scanning
+station that sends it photos to restore. Two lines make that possible:
+
+```ini
+# in ~/ein/.env
+EIN_EMS_BIND=192.168.1.20
+```
+
+```text
+# in ~/ein/ems.keys, a line a caller: its key, its name and its weight
+4f6c…e1 scanner 1
+```
+
+`EIN_EMS_BIND` publishes the media service on that address of this machine, or on every address
+with `0.0.0.0`, at `EIN_EMS_PORT` (18181). It answers plain HTTP with no certificate, so publish it
+only on a network you trust. `ems.keys` gives each caller a key of its own; the weight is its share
+of the media service when requests wait, so a caller with a long queue does not hold EiN up, which
+keeps `EMS_KEY` as the caller `default`. `setup.sh` mounts the file into the media service when it
+is there. Run `./setup.sh` after changing either. The caller names the media service
+`http://<this machine>:18181` and serves its own files the way EiN does
+([How the media service reaches your files](#how-the-media-service-reaches-your-files)).
+
 ### How the media service reaches your files
 
 The media service mounts none of EiN's folders. It reaches the files of each request through EiN's

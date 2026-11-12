@@ -16,7 +16,7 @@ EiN publishes two ports, and more with the Automation module's sidecar, on every
 
 These are the ports `setup.sh` picks; `MQTT_PORT`, `STREAMS_PORT` and `RTSP_PORT` in `.env` are the sidecar's, which it listens on itself, on the machine's own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
-Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine's network.
+Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine's network, unless `.env` sets `EIN_EMS_BIND` for callers of the media service on other machines ([Callers on other machines](../ems/index.md#callers-on-other-machines)).
 
 Under rootless podman, EiN does not sit on that network: there a published port would reach EiN from the network's own address, and EiN would see every visitor as that one address. EiN gets a network of its own, which keeps each visitor's address, and reaches the others on the machine's loopback address, where they are published for it alone:
 
