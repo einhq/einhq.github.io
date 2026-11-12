@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Media commands – EiN documentation</title>
-    <meta name="description" content="The commands the media module adds. They are there once the module is installed. 20 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="description" content="The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/media/commands.html">
     <meta property="og:title" content="Media commands – EiN documentation">
-    <meta property="og:description" content="The commands the media module adds. They are there once the module is installed. 20 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:description" content="The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,8 +94,8 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>The commands the media module adds. They are there once the module is installed. 20 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
-<p><a href="#compute-fingerprint">compute-fingerprint</a> · <a href="#detect-chapters">detect-chapters</a> · <a href="#embed-picture">embed-picture</a> · <a href="#exif-extract">exif-extract</a> · <a href="#file-set-text">file-set-text</a> · <a href="#file-set-text-language">file-set-text-language</a> · <a href="#file-set-transcript">file-set-transcript</a> · <a href="#fingerprints-scan">fingerprints-scan</a> · <a href="#generate-derivatives">generate-derivatives</a> · <a href="#index-document">index-document</a> · <a href="#media-bridge">media-bridge</a> · <a href="#media-pool-kinds">media-pool-kinds</a> · <a href="#media-reembed">media-reembed</a> · <a href="#pictures-scan">pictures-scan</a> · <a href="#promote-exif-attrs">promote-exif-attrs</a> · <a href="#read-text">read-text</a> · <a href="#regenerate">regenerate</a> · <a href="#renditions-scan">renditions-scan</a> · <a href="#text-scan">text-scan</a> · <a href="#transcribe-file">transcribe-file</a></p>
+<p>The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#compute-fingerprint">compute-fingerprint</a> · <a href="#detect-chapters">detect-chapters</a> · <a href="#embed-picture">embed-picture</a> · <a href="#exif-extract">exif-extract</a> · <a href="#file-restore">file-restore</a> · <a href="#file-set-text">file-set-text</a> · <a href="#file-set-text-language">file-set-text-language</a> · <a href="#file-set-transcript">file-set-transcript</a> · <a href="#fingerprints-scan">fingerprints-scan</a> · <a href="#generate-derivatives">generate-derivatives</a> · <a href="#index-document">index-document</a> · <a href="#media-bridge">media-bridge</a> · <a href="#media-pool-kinds">media-pool-kinds</a> · <a href="#media-reembed">media-reembed</a> · <a href="#pictures-scan">pictures-scan</a> · <a href="#promote-exif-attrs">promote-exif-attrs</a> · <a href="#read-text">read-text</a> · <a href="#regenerate">regenerate</a> · <a href="#renditions-scan">renditions-scan</a> · <a href="#text-scan">text-scan</a> · <a href="#transcribe-file">transcribe-file</a></p>
 <h2 id="c">C<a class="anchor" href="#c" aria-label="Link to this section"></a></h2>
 <h3 id="compute-fingerprint"><code>compute-fingerprint</code><a class="anchor" href="#compute-fingerprint" aria-label="Link to this section"></a></h3>
 <p>Compute the fingerprints that find copies of a media file: SSCD for pictures and video keyframes, chromaprint for sound.</p>
@@ -244,6 +244,64 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code>exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the exif node is written under the file and its facts on it, or nothing for a file a module holds.</p>
 <h2 id="f">F<a class="anchor" href="#f" aria-label="Link to this section"></a></h2>
+<h3 id="file-restore"><code>file-restore</code><a class="anchor" href="#file-restore" aria-label="Link to this section"></a></h3>
+<p>Restore a photo into a new version beside it: faded colours back, dust and scratches filled, grain lessened.</p>
+<p><small>changes things</small></p>
+<div class="code"><pre tabindex="0"><code>file-restore [--unfade] [--dust] [--dark] [--fill=&lt;string&gt;] [--mask=&lt;path&gt;] [--grain=&lt;string&gt;] [-v] &lt;file&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;file&gt;</code></td>
+<td>The picture to restore (JPEG, PNG, TIFF, WebP or BMP); it is never written.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--unfade</code></td>
+<td>Give a faded colour print its colours back: each channel stretched, the neutral tones made grey.</td>
+</tr>
+<tr>
+<td><code>--dust</code></td>
+<td>Find dust, scratches and cracks and fill them from what surrounds them.</td>
+</tr>
+<tr>
+<td><code>--dark</code></td>
+<td>With --dust, look for damage darker than the picture too.</td>
+</tr>
+<tr>
+<td><code>--fill=&lt;string&gt;</code></td>
+<td>With --dust or --mask, how the damage is filled: ns (the default) or telea for dust and thin scratches, lama for creases and tears.</td>
+</tr>
+<tr>
+<td><code>--mask=&lt;path&gt;</code></td>
+<td>Fill what this mask marks instead of finding the damage: a one-channel PNG the size of the picture as stored, nonzero where marked. It is copied beside the version.</td>
+</tr>
+<tr>
+<td><code>--grain=&lt;string&gt;</code></td>
+<td>Lessen grain and noise, at this strength (above 0, at most 1; 0.5 keeps about half the grain)</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Say each step as it runs.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>file-restore /archive/scans/1974/print-07.jpg --unfade --dust
+file-restore /archive/scans/1952/portrait.tif --dust --dark --fill lama --grain 0.5
+file-restore /archive/scans/1974/print-07.jpg --unfade --mask /archive/scans/1974/print-07-mask.png</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: The version written, with the steps that made it and, with --dust or --mask, its mask and marks.</p>
 <h3 id="file-set-text"><code>file-set-text</code><a class="anchor" href="#file-set-text" aria-label="Link to this section"></a></h3>
 <p>Write the text in a picture by hand, in place of what was read from it.</p>
 <p><small>changes things</small></p>
@@ -853,7 +911,7 @@ text-scan --if-idle --<span class="hljs-built_in">limit</span> 0</code></pre></d
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/media/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#c">C</a></li><li class="nested"><a href="#compute-fingerprint">compute-fingerprint</a></li><li><a href="#d">D</a></li><li class="nested"><a href="#detect-chapters">detect-chapters</a></li><li><a href="#e">E</a></li><li class="nested"><a href="#embed-picture">embed-picture</a></li><li class="nested"><a href="#exif-extract">exif-extract</a></li><li><a href="#f">F</a></li><li class="nested"><a href="#file-set-text">file-set-text</a></li><li class="nested"><a href="#file-set-text-language">file-set-text-language</a></li><li class="nested"><a href="#file-set-transcript">file-set-transcript</a></li><li class="nested"><a href="#fingerprints-scan">fingerprints-scan</a></li><li><a href="#g">G</a></li><li class="nested"><a href="#generate-derivatives">generate-derivatives</a></li><li><a href="#i">I</a></li><li class="nested"><a href="#index-document">index-document</a></li><li><a href="#m">M</a></li><li class="nested"><a href="#media-bridge">media-bridge</a></li><li class="nested"><a href="#media-pool-kinds">media-pool-kinds</a></li><li class="nested"><a href="#media-reembed">media-reembed</a></li><li><a href="#p">P</a></li><li class="nested"><a href="#pictures-scan">pictures-scan</a></li><li class="nested"><a href="#promote-exif-attrs">promote-exif-attrs</a></li><li><a href="#r">R</a></li><li class="nested"><a href="#read-text">read-text</a></li><li class="nested"><a href="#regenerate">regenerate</a></li><li class="nested"><a href="#renditions-scan">renditions-scan</a></li><li><a href="#t">T</a></li><li class="nested"><a href="#text-scan">text-scan</a></li><li class="nested"><a href="#transcribe-file">transcribe-file</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#c">C</a></li><li class="nested"><a href="#compute-fingerprint">compute-fingerprint</a></li><li><a href="#d">D</a></li><li class="nested"><a href="#detect-chapters">detect-chapters</a></li><li><a href="#e">E</a></li><li class="nested"><a href="#embed-picture">embed-picture</a></li><li class="nested"><a href="#exif-extract">exif-extract</a></li><li><a href="#f">F</a></li><li class="nested"><a href="#file-restore">file-restore</a></li><li class="nested"><a href="#file-set-text">file-set-text</a></li><li class="nested"><a href="#file-set-text-language">file-set-text-language</a></li><li class="nested"><a href="#file-set-transcript">file-set-transcript</a></li><li class="nested"><a href="#fingerprints-scan">fingerprints-scan</a></li><li><a href="#g">G</a></li><li class="nested"><a href="#generate-derivatives">generate-derivatives</a></li><li><a href="#i">I</a></li><li class="nested"><a href="#index-document">index-document</a></li><li><a href="#m">M</a></li><li class="nested"><a href="#media-bridge">media-bridge</a></li><li class="nested"><a href="#media-pool-kinds">media-pool-kinds</a></li><li class="nested"><a href="#media-reembed">media-reembed</a></li><li><a href="#p">P</a></li><li class="nested"><a href="#pictures-scan">pictures-scan</a></li><li class="nested"><a href="#promote-exif-attrs">promote-exif-attrs</a></li><li><a href="#r">R</a></li><li class="nested"><a href="#read-text">read-text</a></li><li class="nested"><a href="#regenerate">regenerate</a></li><li class="nested"><a href="#renditions-scan">renditions-scan</a></li><li><a href="#t">T</a></li><li class="nested"><a href="#text-scan">text-scan</a></li><li class="nested"><a href="#transcribe-file">transcribe-file</a></li></ul></aside>
     </div>
   </body>
 </html>

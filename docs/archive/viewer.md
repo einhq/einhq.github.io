@@ -266,6 +266,7 @@ may change the file, and for any signed-in reader for **Add to album**.
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
 | **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                            |
+| **Remove a blemish…**                 | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Paint over a spot, a stain or a tear to have it filled, in a copy beside the photo. See [Remove a blemish](#remove-a-blemish).                                                                                                                                                                               |
 | **Rotate left**, **Rotate right**     | Readers who may change the file, on photos and videos                              | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
 | **Mirror horizontally**               | Readers who may change the file, on photos and videos                              | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
 
@@ -379,6 +380,15 @@ sometimes takes a detail of the picture for damage: a button, a highlight in an 
 Turn on **Show what was taken for damage** to see, in red over the original, everything that was
 painted over, and compare the two before you keep the copy.
 
+When it took the wrong things, or missed some, correct its marks and fill again:
+
+1. Choose **Correct the marks**. The original opens with the marks over it in red.
+2. With **Erase**, brush the marks off what is not damage; with **Paint**, brush over damage that
+   was missed. **Size** sets the brush, and the arrow takes back the last stroke.
+3. Choose **Fill again**. A new copy is made with the same colours, fill and grain, filling exactly
+   what is marked now, and it takes the place of the copy you corrected. **Back** returns to the
+   comparison without filling.
+
 - **Keep** closes the comparison and leaves the copy among the photo's versions, named
   `restored-1.png` (`.tif` for a TIFF), then `restored-2.png`, and so on.
 - **Discard** deletes the copy.
@@ -389,6 +399,17 @@ In the details panel, **Versions** lists each restored copy with what was done t
 is. Restoring needs the media service with its restoration models, and someone who may change the
 photo. Running out of time or a picture the media service cannot read ends with a message, and no
 copy is kept.
+
+## Remove a blemish
+
+A spot, a stain or a tear on any photo can be painted over and filled from what is around it, with
+the careful fill **Restore…** uses for creases and tears.
+
+1. In the cog menu, choose **Remove a blemish…**.
+2. With **Paint**, brush over the blemish; **Erase** takes paint away again, **Size** sets the
+   brush and the arrow takes back the last stroke.
+3. Choose **Fill**. The copy then opens beside the original, as a restored copy does, to keep or
+   discard, and its marks can be corrected and filled again the same way.
 
 ## Read the text in a picture
 

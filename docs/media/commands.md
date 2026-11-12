@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 20 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
 
 ## C
 
@@ -113,6 +113,38 @@ exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 With `JSON_OUTPUT=1`: nothing; the exif node is written under the file and its facts on it, or nothing for a file a module holds.
 
 ## F
+
+### `file-restore`
+
+Restore a photo into a new version beside it: faded colours back, dust and scratches filled, grain lessened.
+
+<small>changes things</small>
+
+```text
+file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--grain=<string>] [-v] <file>
+```
+
+| Argument | What it is                                                                  |
+| -------- | --------------------------------------------------------------------------- |
+| `<file>` | The picture to restore (JPEG, PNG, TIFF, WebP or BMP); it is never written. |
+
+| Option             | What it does                                                                                                                                                         |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--unfade`         | Give a faded colour print its colours back: each channel stretched, the neutral tones made grey.                                                                     |
+| `--dust`           | Find dust, scratches and cracks and fill them from what surrounds them.                                                                                              |
+| `--dark`           | With --dust, look for damage darker than the picture too.                                                                                                            |
+| `--fill=<string>`  | With --dust or --mask, how the damage is filled: ns (the default) or telea for dust and thin scratches, lama for creases and tears.                                  |
+| `--mask=<path>`    | Fill what this mask marks instead of finding the damage: a one-channel PNG the size of the picture as stored, nonzero where marked. It is copied beside the version. |
+| `--grain=<string>` | Lessen grain and noise, at this strength (above 0, at most 1; 0.5 keeps about half the grain)                                                                        |
+| `-v`               | Say each step as it runs.                                                                                                                                            |
+
+```bash
+file-restore /archive/scans/1974/print-07.jpg --unfade --dust
+file-restore /archive/scans/1952/portrait.tif --dust --dark --fill lama --grain 0.5
+file-restore /archive/scans/1974/print-07.jpg --unfade --mask /archive/scans/1974/print-07-mask.png
+```
+
+With `JSON_OUTPUT=1`: The version written, with the steps that made it and, with --dust or --mask, its mask and marks.
 
 ### `file-set-text`
 
